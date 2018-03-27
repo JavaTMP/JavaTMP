@@ -4,8 +4,4 @@
 
 # Folders to ignore
 node_modules
-projects
-/build
-/temp
 /nbproject/private/
-/JavaTMP-Static-Ajax-Starter/nbproject/private/

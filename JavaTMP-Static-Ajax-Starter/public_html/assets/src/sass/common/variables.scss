@@ -1,0 +1,71 @@
+
+// --- override default bootstrap variables here
+$font-family-base: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+// Include Required parts of Bootstrap
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+
+// JavaTMP Global Variables
+$javatmp-primary-bg: $primary!default;
+$javatmp-secondary-bg: $gray-200!default;
+$javatmp-transition: $transition-base!default;
+
+$javatmp-main-content-z-index: 1!default;
+$javatmp-breadcrumb-bar-z-index: 998!default;
+$javatmp-navbar-z-index: 999!default;
+$javatmp-sidebar-z-index: 1000!default;
+$javatmp-footer-bar-z-index: 100!default;
+//--------------------------------------------------
+
+// JavaTMP Navbar variables
+$javatmp-navbar-height: 50px!default;
+$javatmp-navbar-menu-enable-border: true!default;
+/*$javatmp-navbar-border-color: $border-color;*/
+$javatmp-navbar-bg: $javatmp-primary-bg!default;
+$javatmp-navbar-brand-color: $white!default;
+$javatmp-navbar-toggler-color: $white!default;
+$javatmp-navbar-toggler-border-color: $navbar-dark-toggler-border-color!default;
+$javatmp-navbar-toggler-icon-bg-image: $navbar-dark-toggler-icon-bg!default;
+$javatmp-navbar-border-color: $javatmp-secondary-bg!default;
+$javatmp-navbar-border-width: $border-width!default;
+$javatmp-navbar-brand-align-self: flex-end!default;
+$javatmp-navbar-menu-align-self: flex-end!default;
+$javatmp-navbar-menu-link-color: $navbar-dark-active-color!default;
+$javatmp-navbar-menu-link-hover-color: $navbar-dark-active-color!default;
+$javatmp-navbar-menu-link-hover-bg: darken($primary, 7.5%)!default;
+$javatmp-navbar-menu-link-active-color: $navbar-dark-active-color!default;
+$javatmp-navbar-menu-link-active-bg: darken($primary, 12%)!default;
+//--------------------------------------------------
+
+// JavaTMP Sidebar:
+$javatmp-sidebar-width: 325px!default;
+$javatmp-sidebar-bg: $javatmp-secondary-bg!default;
+$javatmp-sidebar-link-color: $link-color!default;
+
+$javatmp-sidebar-border-width: $border-width!default;
+$javatmp-sidebar-border-color: $border-color!default;
+//--------------------------------------------------
+
+// JavaTMP BreadcrumbBar variables
+$javatmp-breadcrumb-bar-height: 40px!default;
+$javatmp-breadcrumb-bar-bg: $javatmp-secondary-bg!default;
+//--------------------------------------------------
+
+// JavaTMP Main Content variables
+$javatmp-main-content-page-header-border-bottom-color: $border-color!default;
+$javatmp-main-content-page-header-h1-font-size: $font-size-lg!default;
+$javatmp-main-content-page-header-h1-color: $primary!default;
+//--------------------------------------------------
+
+// JavaTMP Footer variables
+$javatmp-footer-bar-bg: $gray-100!default;
+$javatmp-footer-bar-height: 34px!default;
+$javatmp-footer-bar-border-width: $border-width!default;
+$javatmp-footer-bar-border-color: $border-color!default;
+//--------------------------------------------------
+
+//*********************************
+// JavaTMP Plugins Customization
+//*********************************

@@ -1,0 +1,15 @@
+@import "../common/variables.scss";
+@import "../common/colors-variables";
+
+@mixin createTextColorClass($selector, $colorValue) {
+    .cl-#{$selector} {
+        color: $colorValue;
+    }
+    .bg-#{$selector} {
+        background-color: $colorValue;
+    }
+}
+
+@each $colorKey, $colorValue in $colorsMap {
+    @include createTextColorClass($colorKey, map-get($colorValue, base));
+}
