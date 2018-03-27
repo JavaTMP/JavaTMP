@@ -1,0 +1,104 @@
+<div class="dynamic-ajax-content">
+    <div class="page-header">
+        <h1>Dropzone.js File Upload</h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="alert alert-info">
+                <p>
+                    DropzoneJS is an open source library that provides drag’n’drop file uploads with image previews
+                    and shows nice progress bars. It’s lightweight, doesn’t depend on any other library (like jQuery)
+                    and is highly customizable.
+                </p>
+                <p>
+                    <a class="btn btn-info" target="_blank" href="http://www.dropzonejs.com/">Plugin Home</a>
+                    <a class="btn btn-info" target="_blank" href="https://github.com/enyo/dropzone">Github Plugin Page</a>
+                    <a class="btn btn-info" target="_blank" href="http://www.dropzonejs.com/bootstrap.html">bootstrap theme of Dropzone.js Demo Example</a>
+                    <br/>
+                    <br/>
+                    <a class="btn btn-info" target="_blank" href="https://www.sitepoint.com/file-upload-form-express-dropzone-js/">https://www.sitepoint.com/file-upload-form-express-dropzone-js/</a>
+                </p>
+            </div>
+            <div class="card my-3">
+                <div class="card-header">
+                    Example with message set using javascript
+                    <div class="options float-right">
+                        <a class="settings"><i class="fa fa-cog"></i></a>
+                        <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
+                        <a href="#" class="reload"><i class="fa fa-sync"></i></a>
+                        <a href="#" class="fullscreen"><i class=" fa fa-expand"></i></a>
+                        <a href="#" class="remove"><i class="fa fa-times"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form id="dz-demo-form" action="/fake-upload-target" class="dropzone" enctype="multipart/form-data">
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card my-3">
+                <div class="card-header">
+                    Example with message set from inside form tag
+                    <div class="options float-right">
+                        <a class="settings"><i class="fa fa-cog"></i></a>
+                        <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
+                        <a href="#" class="reload"><i class="fa fa-sync"></i></a>
+                        <a href="#" class="fullscreen"><i class=" fa fa-expand"></i></a>
+                        <a href="#" class="remove"><i class="fa fa-times"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form id="dz-demo-form-1" action="/fake-upload-target" class="dropzone" enctype="multipart/form-data">
+                                <div class="dz-message">Drop files here or click to upload.
+                                    <br>
+                                    <span class="note">
+                                        (This is just a demo dropzone. Selected files are <strong>not</strong> actually uploaded.)
+                                    </span>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <link href="components/dropzone/dist/min/dropzone.min.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/plugins/custom-dropzone.js.min.css" rel="stylesheet" type="text/css"/>
+    <script src="components/dropzone/dist/min/dropzone.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            (function ($) {
+                Dropzone.autoDiscover = false;
+                var myDropzone = new Dropzone('#dz-demo-form', {
+//                    previewTemplate: $('#preview-template').html(),
+                    url: "fake-upload-url",
+                    thumbnailHeight: 120,
+                    thumbnailWidth: 120,
+                    maxFilesize: 0.5,
+                    addRemoveLinks: false,
+                    dictRemoveFile: 'fake-remove-url',
+
+                    dictDefaultMessage:
+                            '<span class="text-primary">\
+                                <i class="fa fa-caret-right"></i>\
+                                Drop files to upload (or click)\
+                            </span>\
+                            <br /> \
+                            <i class="fa fa-cloud-upload fa-3x cl-primary"></i>',
+
+//                    thumbnail: function (file, dataUrl) {
+//                    }
+
+                });
+
+                var myDropzone1 = new Dropzone('#dz-demo-form-1');
+            }(jQuery));
+        });
+    </script>
+</div>

@@ -1,0 +1,320 @@
+<div class="dynamic-ajax-content">
+    <div class="page-header">
+        <h1>jQuery Multi-Select Plugin</h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="alert alert-info">
+                <p>A user-friendlier drop-in replacement for the standard select with multiple attribute activated.</p>
+                <p>
+                    <a class="btn btn-info" target="_blank" href="http://loudev.com/">Demo Page</a>
+                    <a class="btn btn-info" target="_blank" href="https://github.com/lou/multi-select/">github.com Project Link</a>
+                </p>
+            </div>
+            <div class="card my-3">
+                <div class="card-header">
+                    Examples
+                    <div class="options float-right">
+                        <a class="settings"><i class="fa fa-cog"></i></a>
+                        <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
+                        <a href="#" class="reload"><i class="fa fa-sync"></i></a>
+                        <a href="#" class="fullscreen"><i class=" fa fa-expand"></i></a>
+                        <a href="#" class="remove"><i class="fa fa-times"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form action="#" class="">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="control-label">Pre-selected options</label>
+                                    <select class="form-control" id='pre-selected-options' multiple='multiple'>
+                                        <option value='elem_1' selected="selected">elem 1</option>
+                                        <option value='elem_2'>elem 2</option>
+                                        <option value='elem_3'>elem 3</option>
+                                        <option value='elem_4'>elem 4</option>
+                                        <option value='elem_5'>elem 5</option>
+                                        <option value='elem_6'>elem 6</option>
+                                        <option value='elem_7'>elem 7</option>
+                                        <option value='elem_8'>elem 8</option>
+                                        <option value='elem_9'>elem 9</option>
+                                        <option value='elem_10'>elem 10</option>
+                                    </select>
+                                    <span class="help-block"> Select elements </span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Callbacks</label>
+                                    <select class="form-control" id='callbacks' multiple='multiple'>
+                                        <option value='elem_1' selected="selected">elem 1</option>
+                                        <option value='elem_2'>elem 2</option>
+                                        <option value='elem_3'>elem 3</option>
+                                        <option value='elem_4'>elem 4</option>
+                                        <option value='elem_5'>elem 5</option>
+                                        <option value='elem_6'>elem 6</option>
+                                        <option value='elem_7'>elem 7</option>
+                                        <option value='elem_8'>elem 8</option>
+                                        <option value='elem_9'>elem 9</option>
+                                        <option value='elem_10'>elem 10</option>
+                                    </select>
+                                    <span class="help-block"> Select elements </span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Keep Order&nbsp;<span class="text-warning">Note: This feature won't work if there are optgroups in the original select.</span></label>
+                                    <select class="form-control" id='keep-order' multiple='multiple'>
+                                        <option value='elem_1' selected="selected">elem 1</option>
+                                        <option value='elem_2'>elem 2</option>
+                                        <option value='elem_3'>elem 3</option>
+                                        <option value='elem_4'>elem 4</option>
+                                        <option value='elem_5'>elem 5</option>
+                                        <option value='elem_6'>elem 6</option>
+                                        <option value='elem_7'>elem 7</option>
+                                        <option value='elem_8'>elem 8</option>
+                                        <option value='elem_9'>elem 9</option>
+                                        <option value='elem_10'>elem 10</option>
+                                    </select>
+                                    <span class="help-block"> Select elements </span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        Public methods:&nbsp;
+                                        <a href='#' id='select-all'>select all</a>&nbsp;|
+                                        <a href='#' id='deselect-all'>deselect all</a>&nbsp;|
+                                        <a href='#' id='select-100'>select elems 1</a>&nbsp;|
+                                        <a href='#' id='deselect-100'>deselect elems 1</a>&nbsp;|
+                                        <a id="add-option" href="#">Add option</a>
+                                    </label>
+                                    <select class="form-control" id='public-methods' multiple='multiple'>
+                                        <option value='elem_1'>elem 1</option>
+                                        <option value='elem_2'>elem 2</option>
+                                        <option value='elem_3'>elem 3</option>
+                                        <option value='elem_4'>elem 4</option>
+                                        <option value='elem_5'>elem 5</option>
+                                        <option value='elem_6'>elem 6</option>
+                                        <option value='elem_7'>elem 7</option>
+                                        <option value='elem_8'>elem 8</option>
+                                        <option value='elem_9'>elem 9</option>
+                                        <option value='elem_10'>elem 10</option>
+                                    </select>
+                                    <span class="help-block"> Select elements </span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Optgroup</label>
+                                    <select class="form-control" id='optgroup' multiple='multiple'>
+                                        <optgroup label='Friends'>
+                                            <option value='1'>Yoda</option>
+                                            <option value='2' selected>Obiwan</option>
+                                        </optgroup>
+                                        <optgroup label='Enemies'>
+                                            <option value='3'>Palpatine</option>
+                                            <option value='4' disabled>Darth Vader</option>
+                                        </optgroup>
+                                    </select>
+                                    <span class="help-block"> Select elements </span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        Disabled attribute
+                                    </label>
+                                    <select class="form-control" id='disabled-attribute' disabled='disabled' multiple='multiple'>
+                                        <option value='elem_1'>elem 1</option>
+                                        <option value='elem_2'>elem 2</option>
+                                        <option value='elem_3'>elem 3</option>
+                                        <option value='elem_4'>elem 4</option>
+                                        <option value='elem_5'>elem 5</option>
+                                        <option value='elem_6'>elem 6</option>
+                                        <option value='elem_7'>elem 7</option>
+                                        <option value='elem_8'>elem 8</option>
+                                        <option value='elem_9'>elem 9</option>
+                                        <option value='elem_10'>elem 10</option>
+                                    </select>
+                                    <span class="help-block"> Select elements </span>
+                                    <div class="alert alert-info">
+                                        <strong>Note:</strong>
+                                        You can also deactivate option one by one by adding disabled attribute to each option you want to disable
+                                        <br>
+                                        <code>&lt;option value='fuu' disabled='disabled'&gt;bar&lt;/option&gt;</code>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        Custom headers and footers
+                                    </label>
+                                    <select class="form-control" id='custom-headers' multiple='multiple'>
+                                        <option value='elem_1'>elem 1</option>
+                                        <option value='elem_2'>elem 2</option>
+                                        <option value='elem_3'>elem 3</option>
+                                        <option value='elem_4'>elem 4</option>
+                                        <option value='elem_5'>elem 5</option>
+                                        <option value='elem_6'>elem 6</option>
+                                        <option value='elem_7'>elem 7</option>
+                                        <option value='elem_8'>elem 8</option>
+                                        <option value='elem_9'>elem 9</option>
+                                        <option value='elem_10'>elem 10</option>
+                                    </select>
+                                    <span class="help-block">Select elements</span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">
+                                        Searchable
+                                    </label>
+                                    <div class="alert alert-info">
+                                        <strong>Note:</strong>
+                                        This feature is not built-in but depends on an other plugin.
+                                        I personnally use the excellent
+                                        <a target="_blank" href="https://github.com/riklomas/quicksearch">quicksearch</a>
+                                        library, but you can use whatever library you like.
+                                    </div>
+                                    <select class="form-control" id='searchable' multiple='multiple'>
+                                        <option value='elem_1'>elem 1</option>
+                                        <option value='elem_2'>elem 2</option>
+                                        <option value='elem_3'>elem 3</option>
+                                        <option value='elem_4'>elem 4</option>
+                                        <option value='elem_5'>elem 5</option>
+                                        <option value='elem_6'>elem 6</option>
+                                        <option value='elem_7'>elem 7</option>
+                                        <option value='elem_8'>elem 8</option>
+                                        <option value='elem_9'>elem 9</option>
+                                        <option value='elem_10'>elem 10</option>
+                                        <option value='elem_11'>elem 11</option>
+                                        <option value='elem_12'>elem 12</option>
+                                        <option value='elem_13'>elem 13</option>
+                                        <option value='elem_14'>elem 14</option>
+                                        <option value='elem_15'>elem 15</option>
+                                        <option value='elem_16'>elem 16</option>
+                                        <option value='elem_17'>elem 17</option>
+                                        <option value='elem_18'>elem 18</option>
+                                        <option value='elem_19'>elem 19</option>
+                                        <option value='elem_20'>elem 20</option>
+                                    </select>
+                                    <span class="help-block">Select elements</span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <link href="components/multiselect/css/multi-select.css" rel="stylesheet" type="text/css"/>
+    <link href="assets/css/plugins/custom-multi-select.min.css" rel="stylesheet" type="text/css"/>
+    <style type="text/css">
+        .custom-header {
+            text-align: center;
+            padding: 3px;
+            background: #000;
+            color: #fff;
+        }
+        .search-input {
+            margin-bottom: 2px;
+        }
+    </style>
+    <script src="components/quicksearch/jquery.quicksearch.js" type="text/javascript"></script>
+    <script src="components/multiselect/js/jquery.multi-select.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        jQuery(function ($) {
+
+            $('#pre-selected-options').multiSelect();
+            $('#callbacks').multiSelect({
+                afterSelect: function (values) {
+                    alert("Select value: " + values);
+                },
+                afterDeselect: function (values) {
+                    alert("Deselect value: " + values);
+                }
+            });
+            $('#keep-order').multiSelect({keepOrder: true});
+            $('#public-methods').multiSelect();
+            $('#select-all').click(function () {
+                $('#public-methods').multiSelect('select_all');
+                return false;
+            });
+            $('#deselect-all').click(function () {
+                $('#public-methods').multiSelect('deselect_all');
+                return false;
+            });
+            $('#select-100').click(function () {
+                $('#public-methods').multiSelect('select', ['elem_1']);
+                return false;
+            });
+            $('#deselect-100').click(function () {
+                $('#public-methods').multiSelect('deselect', ['elem_1']);
+                return false;
+            });
+            $('#refresh').on('click', function () {
+                $('#public-methods').multiSelect('refresh');
+                return false;
+            });
+            $('#add-option').on('click', function () {
+                $('#public-methods').multiSelect('addOption', {value: 'elem_' + 42, text: 'elem_42', index: 0});
+                return false;
+            });
+            $('#optgroup').multiSelect({selectableOptgroup: true});
+
+            $('#disabled-attribute').multiSelect();
+
+            $('#custom-headers').multiSelect({
+                selectableHeader: "<div class='custom-header'>Selectable items</div>",
+                selectionHeader: "<div class='custom-header'>Selection items</div>",
+                selectableFooter: "<div class='custom-header'>Selectable footer</div>",
+                selectionFooter: "<div class='custom-header'>Selection footer</div>"
+            });
+
+            $('#searchable').multiSelect({
+                selectableHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='try \"12\"'>",
+                selectionHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='try \"4\"'>",
+                afterInit: function (ms) {
+                    var that = this,
+                            $selectableSearch = that.$selectableUl.prev(),
+                            $selectionSearch = that.$selectionUl.prev(),
+                            selectableSearchString = '#' + that.$container.attr('id') + ' .ms-elem-selectable:not(.ms-selected)',
+                            selectionSearchString = '#' + that.$container.attr('id') + ' .ms-elem-selection.ms-selected';
+
+                    that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
+                            .on('keydown', function (e) {
+                                if (e.which === 40) {
+                                    that.$selectableUl.focus();
+                                    return false;
+                                }
+                            });
+
+                    that.qs2 = $selectionSearch.quicksearch(selectionSearchString)
+                            .on('keydown', function (e) {
+                                if (e.which == 40) {
+                                    that.$selectionUl.focus();
+                                    return false;
+                                }
+                            });
+                },
+                afterSelect: function () {
+                    this.qs1.cache();
+                    this.qs2.cache();
+                },
+                afterDeselect: function () {
+                    this.qs1.cache();
+                    this.qs2.cache();
+                }
+            });
+
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
+
+            });
+
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
+
+            });
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenCompress, function (event, card) {
+                // when card compress by pressing the top right tool button
+
+            });
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenExpand, function (event, card) {
+                // when card Expand by pressing the top right tool button
+            });
+            // before container replaced with new ajax content.
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {
+                $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenCompress);
+                $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenExpand);
+                return true;
+            });
+        });
+    </script>
+</div>

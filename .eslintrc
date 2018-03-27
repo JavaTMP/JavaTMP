@@ -1,0 +1,15 @@
+{
+        "env": {"browser": true, "node": true, "jquery": true},
+                "rules": {
+                "semi": 2,
+                        "eqeqeq": 1,
+                        "quotes": 0,
+                        "no-trailing-spaces": 1,
+                        "eol-last": 1,
+                        "no-unused-vars": 0,
+                        "no-underscore-dangle": 1,
+                        "no-alert": 1,
+                        "no-lone-blocks": 1
+                },
+                "globals": {"jQuery", "$"}
+}

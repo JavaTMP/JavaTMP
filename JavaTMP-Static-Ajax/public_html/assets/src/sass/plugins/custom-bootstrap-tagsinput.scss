@@ -1,0 +1,121 @@
+@import "../common/variables.scss";
+
+$bootstrap-tagsinput-bg: $input-bg!default;
+$bootstrap-tagsinput-color: $input-color!default;
+$bootstrap-tagsinput-border-width: $input-border-width!default;
+$bootstrap-tagsinput-border-color: $input-border-color!default;
+$bootstrap-tagsinput-border-radius: $input-border-radius!default;
+
+$bootstrap-tagsinput-line-height: $input-line-height!default;
+$bootstrap-tagsinput-box-shadow: $input-box-shadow!default;
+
+$bootstrap-tagsinput-padding-x: $input-padding-x!default;
+$bootstrap-tagsinput-padding-y: 0!default;
+
+$bootstrap-tagsinput-tag-padding-x: $input-padding-x!default;
+$bootstrap-tagsinput-tag-padding-y: $input-padding-y!default;
+$bootstrap-tagsinput-tag-font-size: $font-size-base!default;
+$bootstrap-tagsinput-tag-remove-hover-box-shadow: $input-box-shadow, $input-focus-box-shadow!default;
+$bootstrap-tagsinput-tag-remove-hover-active-box-shadow: $input-focus-box-shadow!default;
+
+$bootstrap-tagsinput-transition: $input-transition!default;
+$bootstrap-tagsinput-focus-color: $input-focus-color!default;
+$bootstrap-tagsinput-focus-bg: $input-focus-bg!default;
+$bootstrap-tagsinput-focus-border-color: $input-focus-border-color!default;
+
+$bootstrap-tagsinput-enable-shadows: $enable-shadows!default;
+$bootstrap-tagsinput-input-focus-enabled-box-shadow: $input-box-shadow, $input-focus-box-shadow!default;
+$bootstrap-tagsinput-input-focus-disabled-box-shadow: $input-focus-box-shadow!default;
+
+.bootstrap-tagsinput {
+    background-color: $bootstrap-tagsinput-bg;
+    border: $bootstrap-tagsinput-border-width solid $bootstrap-tagsinput-border-color;
+    display: inline-block;
+    padding: $bootstrap-tagsinput-padding-y $bootstrap-tagsinput-padding-x;
+    margin-bottom: 10px;
+    color: $bootstrap-tagsinput-color;
+    vertical-align: middle;
+    width: 100%;
+    line-height: $bootstrap-tagsinput-line-height;
+    cursor: text;
+    @include border-radius($bootstrap-tagsinput-border-radius);
+    @include box-shadow($bootstrap-tagsinput-box-shadow);
+    @include transition($bootstrap-tagsinput-transition);
+    &.focus {
+        // copy from \node_modules\bootstrap\scss\mixins\_forms.scss@mixin form-control-focus()
+
+        color: $bootstrap-tagsinput-focus-color;
+        background-color: $bootstrap-tagsinput-focus-bg;
+        border-color: $bootstrap-tagsinput-focus-border-color;
+        outline: 0;
+        // Avoid using mixin so we can pass custom focus shadow properly
+        @if $bootstrap-tagsinput-enable-shadows {
+            box-shadow: $bootstrap-tagsinput-input-focus-enabled-box-shadow;
+        } @else {
+            box-shadow: $bootstrap-tagsinput-input-focus-disabled-box-shadow;
+        }
+    }
+
+    input {
+        border: none;
+        box-shadow: none;
+        outline: none;
+        background-color: transparent;
+        padding: $bootstrap-tagsinput-tag-padding-y 0;
+        margin: 0;
+        width: auto !important;
+        max-width: inherit;
+
+        &:focus {
+            border: none;
+            box-shadow: none;
+        }
+    }
+
+    .tag {
+        margin: $bootstrap-tagsinput-tag-padding-y 0;
+        color: $bootstrap-tagsinput-bg;
+        font-size: $bootstrap-tagsinput-tag-font-size;
+        font-weight: normal;
+
+        [data-role="remove"] {
+            margin-left:8px;
+            cursor:pointer;
+            &:after{
+                content: "x";
+                padding: 0px 2px;
+            }
+            &:hover {
+                box-shadow: $bootstrap-tagsinput-tag-remove-hover-box-shadow;
+                &:active {
+                    box-shadow: $bootstrap-tagsinput-tag-remove-hover-active-box-shadow;
+                }
+            }
+        }
+    }
+    .twitter-typeahead {
+        line-height: $bootstrap-tagsinput-line-height;
+        padding: $bootstrap-tagsinput-tag-padding-y 0;
+    }
+}
+
+// overriding rtl styling:
+[dir="rtl"] .bootstrap-tagsinput {
+    direction: rtl;
+    text-align: right;
+    input {
+        direction: rtl;
+        text-align: right;
+    }
+
+    .tag {
+        [data-role="remove"] {
+            margin-left:0px;
+            margin-right:8px;
+        }
+    }
+    .twitter-typeahead {
+        line-height: $bootstrap-tagsinput-line-height;
+        padding: $bootstrap-tagsinput-tag-padding-y 0;
+    }
+}

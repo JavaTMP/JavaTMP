@@ -1,0 +1,204 @@
+<div class="dynamic-ajax-content">
+    <div class="page-header">
+        <h1>Bootstrap Tags Input</h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="alert alert-info">
+                <p>jQuery tags input plugin based on Twitter Bootstrap.</p>
+                <br/>
+                <p>
+                    <a class="btn btn-info" target="_blank" href="http://bootstrap-tagsinput.github.io/bootstrap-tagsinput/examples/">Demo Page</a>
+                    <a class="btn btn-info" target="_blank" href="https://github.com/bootstrap-tagsinput/bootstrap-tagsinput">github.com Page</a>
+                </p>
+            </div>
+            <div class="card my-3">
+                <div class="card-header">
+                    Examples
+                    <div class="options float-right">
+                        <a class="settings"><i class="fa fa-cog"></i></a>
+                        <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
+                        <a href="#" class="reload"><i class="fa fa-sync"></i></a>
+                        <a href="#" class="fullscreen"><i class=" fa fa-expand"></i></a>
+                        <a href="#" class="remove"><i class="fa fa-times"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form action="#" method="post" role="form" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Countries</label>
+                            <div class="col-md-9">
+                                <input dir="rtl" class="form-control example_typeahead" placeholder="Write Country ..."
+                                       type="text" value="Amsterdam,Washington,Sydney,Beijing,Cairo" />
+                                <p class="help-block">Just add <code>data-role="tagsinput"</code> to your input field to automatically change it to a tags input field.</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Countries</label>
+                            <div class="col-md-9">
+                                <select multiple class="form-control example_typeahead">
+                                    <option value="Amsterdam">Amsterdam</option>
+                                    <option value="Washington">Washington</option>
+                                    <option value="Sydney">Sydney</option>
+                                    <option value="Beijing">Beijing</option>
+                                    <option value="Cairo">Cairo</option>
+                                </select>
+                                <p class="help-block">Use a <code>&lt;select multiple /&gt;</code> as your input element for a tags input, to gain true multivalue support. Instead of a comma separated string, the values will be set in an array. Existing <code>&lt;option /&gt;</code> elements will automatically be set as tags. This makes it also possible to create tags containing a comma.</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Countries</label>
+                            <div class="col-md-9">
+                                <input class="form-control example_typeahead" placeholder="Write Country ..."
+                                       type="text" value="Amsterdam,Washington,Sydney,Beijing,Cairo" />
+                                <p class="help-block">Example using <a href="http://twitter.github.io/typeahead.js/">typeahead.js</a> plugin as a suggestions for tags.</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Countries</label>
+                            <div class="col-md-9">
+                                <input class="form-control example_objects_as_tags" placeholder="Write Country ..."
+                                       type="text" value="Amsterdam,Washington,Sydney,Beijing,Cairo" />
+                                <p class="help-block">Instead of just adding strings as tags, bind objects to your tags. This makes it possible to set id values in your input field's value, instead of just the tag's text.</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Countries</label>
+                            <div class="col-md-9">
+                                <input class="form-control example_tagclass" placeholder="Write Country ..."
+                                       type="text" value="Amsterdam,Washington,Sydney,Beijing,Cairo" />
+                                <p class="help-block">You can set a fixed css class for your tags, or determine dynamically by providing a custom function.</p>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet" href="components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
+    <link href="assets/css/plugins/custom-bootstrap-tagsinput.min.css" rel="stylesheet" type="text/css"/>
+    <script src="components/typeahead.js/dist/typeahead.bundle.min.js"></script>
+    <link href="assets/css/plugins/custom-typeahead.js.min.css" rel="stylesheet" type="text/css"/>
+    <script src="components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
+    <style type="text/css">
+        .twitter-typeahead .tt-query,
+        .twitter-typeahead .tt-hint {
+            margin-bottom: 0;
+        }
+
+        .twitter-typeahead .tt-hint
+        {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript">
+        jQuery(document).ready(function () {
+            (function ($) {
+                var citynames = new Bloodhound({
+                    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+                    queryTokenizer: Bloodhound.tokenizers.whitespace,
+                    prefetch: {
+                        url: 'assets/data/citynames.json',
+                        filter: function (list) {
+                            return $.map(list, function (cityname) {
+                                return {name: cityname};
+                            });
+                        }
+                    }
+                });
+                citynames.initialize();
+
+                var cities = new Bloodhound({
+                    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('text'),
+                    queryTokenizer: Bloodhound.tokenizers.whitespace,
+                    prefetch: 'assets/data/cities.json'
+                });
+                cities.initialize();
+
+                /**
+                 * Typeahead
+                 */
+                var elt = $('.example_typeahead');
+                elt.tagsinput({
+                    tagClass: "badge badge-primary",
+                    typeaheadjs: {
+                        name: 'citynames',
+                        displayKey: 'name',
+                        valueKey: 'name',
+                        source: citynames.ttAdapter()
+                    }
+                });
+
+                /**
+                 * Objects as tags
+                 */
+                elt = $('.example_objects_as_tags');
+                elt.tagsinput({
+                    tagClass: "badge badge-primary",
+                    itemValue: 'value',
+                    itemText: 'text',
+                    typeaheadjs: {
+                        name: 'cities',
+                        displayKey: 'text',
+                        source: cities.ttAdapter()
+                    }
+                });
+
+                elt.tagsinput('add', {"value": 1, "text": "Amsterdam", "continent": "Europe"});
+                elt.tagsinput('add', {"value": 4, "text": "Washington", "continent": "America"});
+                elt.tagsinput('add', {"value": 7, "text": "Sydney", "continent": "Australia"});
+                elt.tagsinput('add', {"value": 10, "text": "Beijing", "continent": "Asia"});
+                elt.tagsinput('add', {"value": 13, "text": "Cairo", "continent": "Africa"});
+
+                /**
+                 * Categorizing tags
+                 */
+                elt = $('.example_tagclass');
+                elt.tagsinput({
+                    tagClass: function (item) {
+                        switch (item.continent) {
+                            case 'Europe'   :
+                                return 'badge badge-info';
+                            case 'America'  :
+                                return 'badge badge-danger label-important';
+                            case 'Australia':
+                                return 'badge badge-success';
+                            case 'Africa'   :
+                                return 'badge badge-secondary';
+                            case 'Asia'     :
+                                return 'badge badge-warning';
+                        }
+                    },
+                    itemValue: 'value',
+                    itemText: 'text',
+                    // typeaheadjs: {
+                    //   name: 'cities',
+                    //   displayKey: 'text',
+                    //   source: cities.ttAdapter()
+                    // }
+                    typeaheadjs: [
+                        {
+                            hint: true,
+                            highlight: true,
+                            minLength: 2
+                        },
+                        {
+                            name: 'cities',
+                            displayKey: 'text',
+                            source: cities.ttAdapter()
+                        }
+                    ]
+                });
+                elt.tagsinput('add', {"value": 1, "text": "Amsterdam", "continent": "Europe"});
+                elt.tagsinput('add', {"value": 4, "text": "Washington", "continent": "America"});
+                elt.tagsinput('add', {"value": 7, "text": "Sydney", "continent": "Australia"});
+                elt.tagsinput('add', {"value": 10, "text": "Beijing", "continent": "Asia"});
+                elt.tagsinput('add', {"value": 13, "text": "Cairo", "continent": "Africa"});
+
+// HACK: overrule hardcoded display inline-block of typeahead.js
+                $(".twitter-typeahead").css('display', 'inline');
+
+            }(jQuery));
+        });
+    </script>
+</div>

@@ -1,0 +1,27 @@
+@import "common/variables.scss";
+
+.sidebar {
+    z-index: $javatmp-sidebar-z-index;
+    position: fixed;
+    width: $javatmp-sidebar-width;
+    top: $javatmp-navbar-height;
+    bottom: 0px;
+    padding-right: 0;
+    padding-left: 0;
+    border-right: $javatmp-sidebar-border-width solid $javatmp-sidebar-border-color;
+    background-color: $javatmp-sidebar-bg;
+    margin-left: -$javatmp-sidebar-width;
+    transition: $javatmp-transition;
+
+    body.longer-sidebar & {
+        top: 0;
+    }
+
+    body.sidebar-active & {
+        margin-left: 0;
+    }
+
+    @media (min-width: 768px) {
+        bottom: $javatmp-footer-bar-height;
+    }
+}

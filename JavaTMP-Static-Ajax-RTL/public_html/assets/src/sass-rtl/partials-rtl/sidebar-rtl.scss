@@ -1,0 +1,14 @@
+@import "common/variables.scss";
+
+.sidebar {
+    border-right: none;
+    border-left: $javatmp-sidebar-border-width solid $javatmp-sidebar-border-color;
+    margin-left: auto;
+    margin-right:  -$javatmp-sidebar-width;
+    transition: $javatmp-transition;
+
+    body.sidebar-active & {
+        margin-left: auto;
+        margin-right: 0;
+    }
+}

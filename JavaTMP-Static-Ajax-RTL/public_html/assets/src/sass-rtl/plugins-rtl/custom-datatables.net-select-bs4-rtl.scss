@@ -1,0 +1,36 @@
+@import "../common/variables.scss";
+
+table.dataTable tbody td.select-checkbox:before,
+table.dataTable tbody td.select-checkbox:after,
+table.dataTable tbody th.select-checkbox:before,
+table.dataTable tbody th.select-checkbox:after {
+    left: auto;
+    right: 50%;
+}
+table.dataTable tbody td.select-checkbox:before,
+table.dataTable tbody th.select-checkbox:before {
+    margin-left: auto;
+    margin-right: 0;
+    left: auto;
+    right: $table-cell-padding;
+}
+table.dataTable tr.selected td.select-checkbox:after,
+table.dataTable tr.selected th.select-checkbox:after {
+    margin-left: auto;
+    margin-right: 0;
+    left: auto;
+    right: $table-cell-padding;
+}
+div.dataTables_wrapper span.select-info,
+div.dataTables_wrapper span.select-item {
+    margin-left: auto;
+    margin-right: 0.5em;
+}
+
+@media screen and (max-width: 640px) {
+    div.dataTables_wrapper span.select-info,
+    div.dataTables_wrapper span.select-item {
+        margin-left: auto;
+        margin-right: 0;
+    }
+}

@@ -1,0 +1,325 @@
+<div class="dynamic-ajax-content">
+    <div class="page-header">
+        <h1>Nano Tree</h1>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="card my-3">
+                <div class="card-header">
+                    Blank Card Title
+                    <div class="options float-right">
+                        <a href="#" class="settings"><i class="fa fa-cog"></i></a>
+                        <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
+                        <a href="#" class="reload"><i class="fa fa-sync"></i></a>
+                        <a href="#" class="fullscreen"><i class=" fa fa-expand"></i></a>
+                        <a href="#" class="remove"><i class="fa fa-times"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <ul id="tree1">
+                                <li><a href="#">TECH</a>
+
+                                    <ul>
+                                        <li>Company Maintenance</li>
+                                        <li>Employees
+                                            <ul>
+                                                <li>Reports
+                                                    <ul>
+                                                        <li>Report1</li>
+                                                        <li>Report2</li>
+                                                        <li>Report3</li>
+                                                    </ul>
+                                                </li>
+                                                <li>Employee Maint.</li>
+                                            </ul>
+                                        </li>
+                                        <li>Human Resources</li>
+                                    </ul>
+                                </li>
+                                <li>XRP
+                                    <ul>
+                                        <li>Company Maintenance</li>
+                                        <li>Employees
+                                            <ul>
+                                                <li>Reports
+                                                    <ul>
+                                                        <li>Report1</li>
+                                                        <li>Report2</li>
+                                                        <li>Report3</li>
+                                                    </ul>
+                                                </li>
+                                                <li>Employee Maint.</li>
+                                            </ul>
+                                        </li>
+                                        <li>Human Resources</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <ul id="tree2">
+                                <li><a href="#">TECH</a>
+
+                                    <ul>
+                                        <li>Company Maintenance</li>
+                                        <li>Employees
+                                            <ul>
+                                                <li>Reports
+                                                    <ul>
+                                                        <li>Report1</li>
+                                                        <li>Report2</li>
+                                                        <li>Report3</li>
+                                                    </ul>
+                                                </li>
+                                                <li>Employee Maint.</li>
+                                            </ul>
+                                        </li>
+                                        <li>Human Resources</li>
+                                    </ul>
+                                </li>
+                                <li>XRP
+                                    <ul>
+                                        <li>Company Maintenance</li>
+                                        <li>Employees
+                                            <ul>
+                                                <li>Reports
+                                                    <ul>
+                                                        <li>Report1</li>
+                                                        <li>Report2</li>
+                                                        <li>Report3</li>
+                                                    </ul>
+                                                </li>
+                                                <li>Employee Maint.</li>
+                                            </ul>
+                                        </li>
+                                        <li>Human Resources</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                            <ul id="tree3">
+                                <li><a href="#">TECH</a>
+                                    <ul>
+                                        <li>Company Maintenance</li>
+                                        <li>Employees
+                                            <ul>
+                                                <li>Reports
+                                                    <ul>
+                                                        <li>Report1</li>
+                                                        <li>Report2</li>
+                                                        <li>Report3</li>
+                                                    </ul>
+                                                </li>
+                                                <li>Employee Maint.</li>
+                                            </ul>
+                                        </li>
+                                        <li>Human Resources</li>
+                                    </ul>
+                                </li>
+                                <li>XRP
+                                    <ul>
+                                        <li>Company Maintenance</li>
+                                        <li>Employees
+                                            <ul>
+                                                <li>Reports
+                                                    <ul>
+                                                        <li>Report1</li>
+                                                        <li>Report2</li>
+                                                        <li>Report3</li>
+                                                    </ul>
+                                                </li>
+                                                <li>Employee Maint.</li>
+                                            </ul>
+                                        </li>
+                                        <li>Human Resources</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--
+    Reference Your external Stylesheet file here
+    if your feature or plugins could not support to run globally.
+    <link href="components/" rel="stylesheet">
+    -->
+    <style type="text/css">
+        /*
+        Embed CSS styling for current page.
+        */
+        .tree, .tree ul {
+            font-size: 1rem;
+            margin:0;
+            padding:0;
+            list-style:none
+        }
+        .tree ul {
+            margin-left:.5em;
+            position:relative
+        }
+        .tree ul ul {
+            /*margin-left:.5em*/
+        }
+        .tree ul:before {
+            content:"";
+            display:block;
+            width:0;
+            position:absolute;
+            top:0;
+            bottom:0;
+            left:0;
+            border-left:1px solid
+        }
+        .tree li {
+            margin:0;
+            padding:0 1.2em;
+            line-height:2em;
+            color:#369;
+            font-weight:700;
+            position:relative
+        }
+        .tree ul li:before {
+            content:"";
+            display:block;
+            width: 0.7em;
+            height:0;
+            border-top:1px solid;
+            margin-top:-1px;
+            position:absolute;
+            top:1em;
+            left:0
+        }
+        .tree ul li:last-child:before {
+            background:#fff;
+            height:auto;
+            top:1em;
+            bottom:0
+        }
+        .indicator {
+            margin-right:5px;
+        }
+        .tree li a {
+            text-decoration: none;
+            color:#369;
+        }
+        .tree li button, .tree li button:active, .tree li button:focus {
+            text-decoration: none;
+            color:#369;
+            border:none;
+            background:transparent;
+            margin:0px 0px 0px 0px;
+            padding:0px 0px 0px 0px;
+            outline: 0;
+        }
+    </style>
+
+    <!--
+    Reference Your external Javascript file here
+    if your feature or plugins could not support to run globally.
+    <script src="components/"></script>
+    -->
+    <script type="text/javascript">
+        // You could write safely Javascript code here too as our template
+        // should load mandatory libraries and plugins before.
+        // <--- HERE --->
+        //
+        $.fn.extend({
+            treed: function (o) {
+
+                var openedClass = o.openedClass;
+                var closedClass = o.closedClass;
+                var leafClass = o.leafClass;
+                //initialize each of the top levels
+                var tree = $(this);
+                tree.addClass("tree");
+                tree.find('li').each(function () {
+                    if ($(this).has("ul").length === 0) {
+                        // leafNode found
+                        $(this).prepend("<i class='indicator " + leafClass + "'></i>");
+                    }
+                });
+                tree.find('li').has("ul").each(function () {
+                    var branch = $(this); //li with children ul
+                    branch.prepend("<i class='indicator " + closedClass + "'></i>");
+                    branch.addClass('branch');
+                    branch.on('click', function (e) {
+                        if (this == e.target) {
+                            var icon = $(this).children('i:first');
+                            icon.toggleClass(openedClass + " " + closedClass);
+                            $(this).children().children().toggle(200);
+                        }
+                    });
+                    branch.children().children().toggle(200);
+                });
+                //fire event from the dynamically added icon
+                tree.find('.branch .indicator').each(function () {
+                    $(this).on('click', function () {
+                        $(this).closest('li').click();
+                    });
+                });
+                //fire event to open branch if the li contains an anchor instead of text
+                tree.find('.branch>a').each(function () {
+                    $(this).on('click', function (e) {
+                        $(this).closest('li').click();
+                        e.preventDefault();
+                    });
+                });
+                //fire event to open branch if the li contains a button instead of text
+                tree.find('.branch>button').each(function () {
+                    $(this).on('click', function (e) {
+                        $(this).closest('li').click();
+                        e.preventDefault();
+                    });
+                });
+            }
+        });
+
+//Initialization of treeviews
+
+        $('#tree1').treed({openedClass: 'fa fa-chevron-down', closedClass: 'fa fa-chevron-right', leafClass: "fa fa-file-alt"});
+
+        $('#tree2').treed({openedClass: 'fa fa-file', closedClass: 'fa fa-file-alt', leafClass: "fa fa-file-alt"});
+
+        $('#tree3').treed({openedClass: 'fa fa-minus', closedClass: 'fa fa-plus', leafClass: "fa fa-file-o"});
+
+        jQuery(function ($) {
+            // any code put here will be run after content attach to ajax output container and before
+            // controll return to main javascript file.
+            // <--- HERE --->
+            //
+
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
+                // fire AFTER all transition done and your ajax content is shown to user.
+            });
+
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
+                // fire when user resize browser window or sidebar hide / show
+            });
+
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenCompress, function (event, card) {
+                // when card compress by pressing the top right tool button
+            });
+
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenExpand, function (event, card) {
+                // when card Expand by pressing the top right tool button
+            });
+
+            /**
+             * When another sidebar menu item pressed and before container issues new ajax request.
+             * You can cancel, destroy, or remove any thing here before replace main output ajax container.
+             * return false or event.preventDefault() will cancel ajax and stay you in the current page and do nothing.
+             **/
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {
+                $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenCompress);
+                $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenExpand);
+                return true;
+            });
+        });
+    </script>
+</div>

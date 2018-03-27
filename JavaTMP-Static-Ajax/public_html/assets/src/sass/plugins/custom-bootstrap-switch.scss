@@ -1,0 +1,246 @@
+@import "../common/variables.scss";
+
+// Copy and convert https://github.com/Bttstrp/bootstrap-switch/blob/master/src/less/bootstrap3/bootstrap-switch.less:
+
+$bootstrap-switch-base: bootstrap-switch!default;
+$bootstrap-switch-border-radius: $border-radius!default;
+$bootstrap-switch-border-color: $input-border-color!default;
+$bootstrap-switch-span-padding-x: $input-padding-x!default;
+$bootstrap-switch-span-padding-y: $input-padding-y!default;
+$bootstrap-switch-span-font-size: $font-size-base!default;
+$bootstrap-switch-span-line-height: $input-line-height!default;
+
+$bootstrap-switch-mini-span-padding-x: $input-padding-x-sm * .85!default;
+$bootstrap-switch-mini-span-padding-y: $input-padding-y-sm * .85!default;
+$bootstrap-switch-mini-span-font-size: $font-size-sm * .85!default;
+$bootstrap-switch-mini-span-line-height: $input-line-height-sm * .85!default;
+
+$bootstrap-switch-small-span-padding-x: $input-padding-x-sm!default;
+$bootstrap-switch-small-span-padding-y: $input-padding-y-sm!default;
+$bootstrap-switch-small-span-font-size: $font-size-sm!default;
+$bootstrap-switch-small-span-line-height: $input-line-height-sm!default;
+
+$bootstrap-switch-large-span-padding-x: $input-padding-x-lg!default;
+$bootstrap-switch-large-span-padding-y: $input-padding-y-lg!default;
+$bootstrap-switch-large-span-font-size: $font-size-lg!default;
+$bootstrap-switch-large-span-line-height: $input-line-height-lg!default;
+
+$bootstrap-switch-label-bg: $light!default;
+$bootstrap-switch-label-color: color-yiq($bootstrap-switch-label-bg)!default;
+
+$bootstrap-switch-primary-bg: $primary!default;
+$bootstrap-switch-primary-color: color-yiq($bootstrap-switch-primary-bg)!default;
+$bootstrap-switch-info-bg: $info!default;
+$bootstrap-switch-info-color: color-yiq($bootstrap-switch-info-bg)!default;
+
+$bootstrap-switch-success-bg: $success!default;
+$bootstrap-switch-success-color: color-yiq($bootstrap-switch-success-bg)!default;
+$bootstrap-switch-warning-bg: $warning!default;
+$bootstrap-switch-warning-color: color-yiq($bootstrap-switch-warning-bg)!default;
+$bootstrap-switch-danger-bg: $danger!default;
+$bootstrap-switch-danger-color: color-yiq($bootstrap-switch-danger-bg)!default;
+$bootstrap-switch-secondary-bg: $secondary!default;
+$bootstrap-switch-secondary-color: color-yiq($bootstrap-switch-secondary-bg)!default;
+
+$bootstrap-switch-focused-border-color: $input-focus-border-color!default;
+$bootstrap-switch-focused-shadows: $enable-shadows!default;
+$bootstrap-switch-focused-shadows-enable: $input-box-shadow, $input-focus-box-shadow!default;
+$bootstrap-switch-focused-shadows-disable: $input-focus-box-shadow!default;
+
+.#{$bootstrap-switch-base} {
+    display: inline-block;
+    direction: ltr;
+    cursor: pointer;
+    border-radius: $bootstrap-switch-border-radius;
+    border: 1px solid;
+    border-color: $bootstrap-switch-border-color;
+    position: relative;
+    text-align: left;
+    overflow: hidden;
+    line-height: .5rem;
+    z-index: 0;
+    user-select: none;
+    vertical-align: middle;
+    @include transition(border-color ease-in-out .15s, box-shadow ease-in-out .15s);
+
+    .#{$bootstrap-switch-base}-container {
+        display: inline-block;
+        top: 0;
+        border-radius: $bootstrap-switch-border-radius;
+        transform: translate3d(0, 0, 0);
+    }
+
+    .#{$bootstrap-switch-base}-handle-on,
+    .#{$bootstrap-switch-base}-handle-off,
+    .#{$bootstrap-switch-base}-label {
+        /*        .box-sizing(border-box);*/
+        cursor: pointer;
+        display: table-cell;
+        vertical-align: middle;
+        padding: $bootstrap-switch-span-padding-y $bootstrap-switch-span-padding-x;
+        font-size: $bootstrap-switch-span-font-size;
+        line-height: $bootstrap-switch-span-line-height;
+    }
+
+    .#{$bootstrap-switch-base}-handle-on,
+    .#{$bootstrap-switch-base}-handle-off {
+        text-align: center;
+        z-index: 1;
+
+        &.#{$bootstrap-switch-base}-primary {
+            color: $bootstrap-switch-primary-color;
+            background: $bootstrap-switch-primary-bg;
+        }
+
+        &.#{$bootstrap-switch-base}-info {
+            color: $bootstrap-switch-info-color;
+            background: $bootstrap-switch-info-bg;
+        }
+
+        &.#{$bootstrap-switch-base}-success {
+            color: $bootstrap-switch-success-color;
+            background: $bootstrap-switch-success-bg;
+        }
+
+        &.#{$bootstrap-switch-base}-warning {
+            background: $bootstrap-switch-warning-bg;
+            color: $bootstrap-switch-warning-color;
+        }
+
+        &.#{$bootstrap-switch-base}-danger {
+            color: $bootstrap-switch-danger-color;
+            background: $bootstrap-switch-danger-bg;
+        }
+
+        &.#{$bootstrap-switch-base}-default {
+            color: $bootstrap-switch-secondary-color;
+            background: $bootstrap-switch-secondary-bg;
+        }
+    }
+
+    .#{$bootstrap-switch-base}-label {
+        text-align: center;
+        margin-top: -1px;
+        margin-bottom: -1px;
+        z-index: 100;
+        color: $bootstrap-switch-label-bg;
+        background: $bootstrap-switch-label-bg;
+    }
+
+    span::before {
+        content: "\200b";
+    }
+
+    .#{$bootstrap-switch-base}-handle-on {
+        @include border-left-radius($bootstrap-switch-border-radius - 1);
+    }
+
+    .#{$bootstrap-switch-base}-handle-off {
+        @include border-right-radius($bootstrap-switch-border-radius - 1);
+    }
+
+    input[type='radio'],
+    input[type='checkbox'] {
+        position: absolute !important;
+        top: 0;
+        left: 0;
+        margin: 0;
+        z-index: -1;
+        /*.opacity(0);*/
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    &.#{$bootstrap-switch-base}-mini {
+
+        .#{$bootstrap-switch-base}-handle-on,
+        .#{$bootstrap-switch-base}-handle-off,
+        .#{$bootstrap-switch-base}-label {
+            padding: $bootstrap-switch-mini-span-padding-y $bootstrap-switch-mini-span-padding-x;
+            font-size: $bootstrap-switch-mini-span-font-size;
+            line-height: $bootstrap-switch-mini-span-line-height;
+        }
+    }
+
+    &.#{$bootstrap-switch-base}-small {
+
+        .#{$bootstrap-switch-base}-handle-on,
+        .#{$bootstrap-switch-base}-handle-off,
+        .#{$bootstrap-switch-base}-label {
+            padding: $bootstrap-switch-small-span-padding-y $bootstrap-switch-small-span-padding-x;
+            font-size: $bootstrap-switch-small-span-font-size;
+            line-height: $bootstrap-switch-small-span-line-height;
+        }
+    }
+
+    &.#{$bootstrap-switch-base}-large {
+
+        .#{$bootstrap-switch-base}-handle-on,
+        .#{$bootstrap-switch-base}-handle-off,
+        .#{$bootstrap-switch-base}-label {
+            padding: $bootstrap-switch-large-span-padding-y $bootstrap-switch-large-span-padding-x;
+            font-size: $bootstrap-switch-large-span-font-size;
+            line-height: $bootstrap-switch-large-span-line-height;
+        }
+    }
+
+    &.#{$bootstrap-switch-base}-disabled,
+    &.#{$bootstrap-switch-base}-readonly,
+    &.#{$bootstrap-switch-base}-indeterminate {
+        cursor: default !important;
+
+        .#{$bootstrap-switch-base}-handle-on,
+        .#{$bootstrap-switch-base}-handle-off,
+        .#{$bootstrap-switch-base}-label {
+            opacity: .5;
+            cursor: default !important;
+        }
+    }
+
+    &.#{$bootstrap-switch-base}-animate {
+
+        .#{$bootstrap-switch-base}-container {
+            @include transition(margin-left .3s);
+        }
+    }
+
+    &.#{$bootstrap-switch-base}-inverse {
+
+        .#{$bootstrap-switch-base}-handle-on {
+            @include border-left-radius(0);
+            @include border-right-radius($bootstrap-switch-border-radius - 1);
+        }
+
+        .#{$bootstrap-switch-base}-handle-off {
+            @include border-right-radius(0);
+            @include border-left-radius($bootstrap-switch-border-radius - 1);
+        }
+    }
+
+    &.#{$bootstrap-switch-base}-focused {
+        border-color: $bootstrap-switch-focused-border-color;
+        outline: 0;
+        @if $bootstrap-switch-focused-shadows {
+            box-shadow: $bootstrap-switch-focused-shadows-enable;
+        } @else {
+            box-shadow: $bootstrap-switch-focused-shadows-disable;
+        }
+    }
+
+    &.#{$bootstrap-switch-base}-on,
+    &.#{$bootstrap-switch-base}-inverse.#{$bootstrap-switch-base}-off {
+
+        .#{$bootstrap-switch-base}-label {
+            @include border-right-radius($bootstrap-switch-border-radius - 1);
+        }
+    }
+
+    &.#{$bootstrap-switch-base}-off,
+    &.#{$bootstrap-switch-base}-inverse.#{$bootstrap-switch-base}-on {
+
+
+        .#{$bootstrap-switch-base}-label {
+            @include border-left-radius($bootstrap-switch-border-radius - 1);
+        }
+    }
+}
