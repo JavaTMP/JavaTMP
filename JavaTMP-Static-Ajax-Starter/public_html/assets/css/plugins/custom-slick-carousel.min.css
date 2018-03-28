@@ -1,0 +1,1 @@
+.slick-prev{left:10px;z-index:1;opacity:.1}.slick-next{right:10px;z-index:1;opacity:.1}[dir=rtl] .slick-next{right:auto;left:10px}[dir=rtl] .slick-prev{right:10px;left:auto}.slick-next:hover,.slick-prev:hover{opacity:1}.slick-dots li button:before{opacity:.3;color:#428bca}.slick-dots li.slick-active button:before{opacity:1;color:#428bca}
