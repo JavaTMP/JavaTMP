@@ -75,10 +75,6 @@ var config = {
         "jquery-idletimer": [
             {"from": "${sourceNodeLib}/jquery-idletimer/dist/idle-timer.min.js", "to": "${destComponentsLib}/jquery-idletimer/dist"}
         ],
-        "bootstrap-datepickerr": [
-            {"from": "${sourceNodeLib}/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css", "to": "${destComponentsLib}/bootstrap-datepicker/dist/css"},
-            {"from": "${sourceNodeLib}/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js", "to": "${destComponentsLib}/bootstrap-datepicker/dist/js"}
-        ],
         "moment": [
             {"from": "${sourceNodeLib}/moment/min/moment.min.js", "to": "${destComponentsLib}/moment/min"},
             {"from": "${sourceNodeLib}/moment/min/locales.min.js", "to": "${destComponentsLib}/moment/min"}
@@ -97,18 +93,6 @@ var config = {
         ],
         "select2-bootstrap-theme": [
             {"from": "${sourceNodeLib}/select2-bootstrap-theme/dist/select2-bootstrap.min.css", "to": "${destComponentsLib}/select2-bootstrap-theme/dist"}
-        ],
-        "typeahead.js": [
-            {"from": "${sourceNodeLib}/typeahead.js/dist/typeahead.bundle.min.js", "to": "${destComponentsLib}/typeahead.js/dist"}
-        ],
-        "bootstrap-tagsinput": [
-            {"from": "${sourceNodeLib}/bootstrap-tagsinput/dist/bootstrap-tagsinput.css", "to": "${destComponentsLib}/bootstrap-tagsinput/dist", processCSS: true},
-            {"from": "${sourceNodeLib}/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js", "to": "${destComponentsLib}/bootstrap-tagsinput/dist"}
-        ],
-        "bootstrap-switch": [
-            {"from": "${sourceNodeLib}/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css", "to": "${destComponentsLib}/bootstrap-switch/dist/css/bootstrap3"},
-            {"from": "${sourceNodeLib}/bootstrap-switch/dist/js/bootstrap-switch.min.js", "to": "${destComponentsLib}/bootstrap-switch/dist/js"}
-
         ],
         "bootstrap-maxlength": [
             {"from": "${sourceNodeLib}/bootstrap-maxlength/bootstrap-maxlength.min.js", "to": "${destComponentsLib}/bootstrap-maxlength"}
@@ -132,9 +116,6 @@ var config = {
             {"from": "${sourceNodeLib}/bootstrap-slider/dist/css/bootstrap-slider.min.css", "to": "${destComponentsLib}/bootstrap-slider/dist/css"},
             {"from": "${sourceNodeLib}/bootstrap-slider/dist/bootstrap-slider.min.js", "to": "${destComponentsLib}/bootstrap-slider/dist"}
         ],
-        "jquery-knob": [
-            {"from": "${sourceNodeLib}/jquery-knob/dist/jquery.knob.min.js", "to": "${destComponentsLib}/jquery-knob/dist"}
-        ],
         "fullcalendar": [
             {"from": "${sourceNodeLib}/fullcalendar/dist/fullcalendar.min.css", "to": "${destComponentsLib}/fullcalendar/dist"},
             {"from": "${sourceNodeLib}/fullcalendar/dist/fullcalendar.print.min.css", "to": "${destComponentsLib}/fullcalendar/dist"},
@@ -150,16 +131,8 @@ var config = {
         "jquery.counterup": [
             {"from": "${sourceNodeLib}/jquery.counterup/jquery.counterup.min.js", "to": "${destComponentsLib}/jquery.counterup"}
         ],
-        "multiselect": [
-            {"from": "${sourceNodeLib}/multiselect/css/multi-select.css", "to": "${destComponentsLib}/multiselect/css", processCSS: true},
-            {"from": "${sourceNodeLib}/multiselect/img/switch.png", "to": "${destComponentsLib}/multiselect/img"},
-            {"from": "${sourceNodeLib}/multiselect/js/jquery.multi-select.js", "to": "${destComponentsLib}/multiselect/js", processJS: true}
-        ],
         "timeago": [
             {"from": "${sourceNodeLib}/timeago/jquery.timeago.js", "to": "${destComponentsLib}/timeago", processJS: true}
-        ],
-        "quicksearch": [
-            {"from": "${sourceNodeLib}/quicksearch/jquery.quicksearch.js", "to": "${destComponentsLib}/quicksearch", processJS: true}
         ],
         "jquery-validation": [
             {"from": "${sourceNodeLib}/jquery-validation/dist/jquery.validate.min.js", "to": "${destComponentsLib}/jquery-validation/dist"},
@@ -172,10 +145,6 @@ var config = {
         ],
         "jquery-form": [
             {"from": "${sourceNodeLib}/jquery-form/dist/jquery.form.min.js", "to": "${destComponentsLib}/jquery-form/dist"}
-        ],
-        "dropzone": [
-            {"from": "${sourceNodeLib}/dropzone/dist/min/dropzone.min.css", "to": "${destComponentsLib}/dropzone/dist/min"},
-            {"from": "${sourceNodeLib}/dropzone/dist/min/dropzone.min.js", "to": "${destComponentsLib}/dropzone/dist/min"}
         ],
         "datatables.net": [
             {"from": "${sourceNodeLib}/datatables.net/js/jquery.dataTables.js", "to": "${destComponentsLib}/datatables.net/js", processJS: true}
@@ -203,15 +172,8 @@ var config = {
         "datatables.net-select-bs4": [
             {"from": "${sourceNodeLib}/datatables.net-select-bs4/css/select.bootstrap4.min.css", "to": "${destComponentsLib}/datatables.net-select-bs4/css"}
         ],
-        "chart.js": [
-            {"from": "${sourceNodeLib}/chart.js/dist/Chart.min.js", "to": "${destComponentsLib}/chart.js/dist"}
-        ],
         "echarts": [
             {"from": "${sourceNodeLib}/echarts/dist/echarts.min.js", "to": "${destComponentsLib}/echarts/dist"}
-        ],
-        "ekko-lightbox": [
-            {"from": "${sourceNodeLib}/ekko-lightbox/dist/ekko-lightbox.css", "to": "${destComponentsLib}/ekko-lightbox/dist"},
-            {"from": "${sourceNodeLib}/ekko-lightbox/dist/ekko-lightbox.min.js", "to": "${destComponentsLib}/ekko-lightbox/dist"}
         ],
         "magnific-popup": [
             {"from": "${sourceNodeLib}/magnific-popup/dist/magnific-popup.css", "to": "${destComponentsLib}/magnific-popup/dist", processCSS: true},
