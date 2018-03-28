@@ -26,116 +26,6 @@
         <link href="assets/css/plugins/custom-jquery.mCustomScrollbar.min.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/plugins/custom-jQuery-ScrollUp.min.css" rel="stylesheet" type="text/css"/>
         <link href="components/bootstrap-card-extender/dist/bootstrap-card-extender.min.css" rel="stylesheet" type="text/css"/>
-
-        <!-- JavaScript Libraries -->
-        <script src="components/jquery/dist/jquery.min.js" type="text/javascript"></script>
-        <script src="components/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
-        <script src="components/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js" type="text/javascript"></script>
-        <script src="components/popper.js/dist/umd/popper.min.js" type="text/javascript"></script>
-        <script src="components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js" type="text/javascript"></script>
-        <script src="components/metismenu/dist/metisMenu.min.js" type="text/javascript"></script>
-        <script src="components/blockui/jquery.blockUI.js"></script>
-        <script src="components/nprogress/nprogress.js" type="text/javascript"></script>
-        <script src="components/scrollup/dist/jquery.scrollUp.min.js" type="text/javascript"></script>
-        <script src="components/bootstrap-modal-wrapper/dist/bootstrap-modal-wrapper-factory.min.js" type="text/javascript"></script>
-        <script src="components/bootstrap-actionable/dist/bootstrap-actionable.min.js" type="text/javascript"></script>
-        <script src="components/bootstrap-card-extender/dist/bootstrap-card-extender.min.js" type="text/javascript"></script>
-        <script src="components/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js" type="text/javascript"></script>
-        <script src="assets/js/javatmp.min.js"></script>
-        <!-- custom style for sidebar menu search text field -->
-        <style type="text/css">
-            .has-feedback-icon {
-                position: relative;
-            }
-            .search-menu-form .fa.form-control-clear {
-                pointer-events: initial;  /* or - auto // or -  unset  */
-                line-height: 1.5;
-                padding: .375rem .75rem;
-                font-size: 1rem;
-                z-index: 10;
-                pointer-events: auto;
-                cursor: pointer;
-                position: absolute;
-                right: 0;
-                top: 0;
-            }
-            ::-ms-clear {
-                display: none;
-            }
-
-            /* Extra large devices (large desktops, 1200px and up) */
-            @media (min-width: 1200px){
-                .modal-lg {
-                    max-width: 1024px;
-                }
-            }
-            @media (min-width: 1400px){
-                .modal-lg {
-                    max-width: 1200px;
-                }
-            }
-        </style>
-        <script type="text/javascript">
-            jQuery(function ($) {
-                $("body").on("click", '.disabled', function (event) {
-                    event.stopPropagation();
-                    event.preventDefault();
-                    return false;
-                });
-
-                $("body").on("click", ".dropdown-menu-header,.dropdown-menu-footer", function (event) {
-                    event.stopPropagation();
-                });
-
-                // tooltip demo
-                $('.sidebar').tooltip({
-                    selector: "[data-toggle=tooltip]",
-                    container: ".sidebar"
-                });
-
-                $.scrollUp({zIndex: 1000, scrollText: '<i class="fa fa-arrow-up"></i>'});
-
-                $('#filter-menu-id').on('input propertychange', function () {
-                    var $this = $(this);
-                    var visible = Boolean($this.val());
-                    $this.siblings('.form-control-clear').toggleClass('d-none', !visible);
-                }).trigger('propertychange').trigger('keyup');
-                $('.form-control-clear').click(function () {
-                    $(this).siblings('input[type="text"]').val('')
-                            .trigger('propertychange').trigger('keyup').focus();
-                });
-
-                $('#filter-menu-id').keyup(function () {
-                    var text = $(this).val().toLowerCase();
-                    $('.metismenu li').each(function () {
-                        if ($(this).text().toLowerCase().indexOf(text) === -1) {
-                            $(this).hide();
-                            $(this).children().removeClass("active");
-                            $(this).children().removeClass("in");
-                        } else {
-                            $(this).show();
-                            $(this).children("ul").css({height: "auto"});
-                            $(this).parentsUntil(".metismenu", "li").addClass("active");
-                            $(this).parentsUntil(".metismenu", "ul").addClass("in");
-                        }
-                    });
-                });
-            });
-        </script>
-        <script type="text/javascript">
-            jQuery(function ($) {
-                var defaults = {
-                    httpMethod: "GET",
-                    dataType: "html",
-                    updateURLHash: true,
-                    defaultPassData: {_ajax: "ajax", _ajaxGlobalBlockUI: true},
-                    defaultOutputSelector: '.main-body-content-container',
-                    defaultUrl: 'pages/home.html'
-                };
-                javatmp.init(defaults);
-            });
-        </script>
     </head>
     <body class="sidebar-active">
         <nav class="main-javatmp-navbar navbar fixed-top my-0 py-0">
@@ -763,11 +653,6 @@
                                             Tree
                                         </a>
                                         <ul aria-expanded="true">
-                                            <li>
-                                                <a class="" href="pages/plugins/tree/nano-tree.html">
-                                                    <i class="far fa-lg fa-fw fa-gem"></i>Nano Tree
-                                                </a>
-                                            </li>
                                             <li>
                                                 <a class="has-arrow" href="#">
                                                     <i class="far fa-lg fa-fw fa-gem"></i>Fancytree
@@ -1428,6 +1313,289 @@
                 <a href="http://www.javatmp.com" target="_blank"><span>&copy; 2018 javatmp.com</span></a>
             </div>
         </div>
+
+        <!-- JavaScript Libraries -->
+        <script src="components/jquery/dist/jquery.min.js" type="text/javascript"></script>
+        <script src="components/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="components/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js" type="text/javascript"></script>
+        <script src="components/popper.js/dist/umd/popper.min.js" type="text/javascript"></script>
+        <script src="components/bootstrap/dist/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js" type="text/javascript"></script>
+        <script src="components/metismenu/dist/metisMenu.min.js" type="text/javascript"></script>
+        <script src="components/blockui/jquery.blockUI.js"></script>
+        <script src="components/nprogress/nprogress.js" type="text/javascript"></script>
+        <script src="components/scrollup/dist/jquery.scrollUp.min.js" type="text/javascript"></script>
+        <script src="components/bootstrap-modal-wrapper/dist/bootstrap-modal-wrapper-factory.min.js" type="text/javascript"></script>
+        <script src="components/bootstrap-actionable/dist/bootstrap-actionable.min.js" type="text/javascript"></script>
+        <script src="components/bootstrap-card-extender/dist/bootstrap-card-extender.min.js" type="text/javascript"></script>
+        <script src="components/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js" type="text/javascript"></script>
+        <script src="assets/js/javatmp.min.js"></script>
+
+        <!-- pages/custom-components/color/color-palette-combinations.html  -->
+        <!-- pages/custom-components/color/100-color-combinations.html -->
+        <link href="assets/css/pages/color-classes-utils.min.css" rel="stylesheet" type="text/css"/>
+        <!-- pages/custom-components/color/color-palette-combinations.html  -->
+        <!-- pages/custom-components/color/100-color-combinations.html -->
+        <!-- pages/custom-components/color/8-color-combinations.html -->
+        <link href="assets/css/pages/color_display.min.css" rel="stylesheet" type="text/css"/>
+
+        <!-- pages/custom-components/icon/font_awesome_icons.html -->
+        <!-- pages/custom-components/icon/material-icons.html -->
+        <link href="assets/css/pages/icon-preview-block.min.css" rel="stylesheet">
+
+        <!-- pages/custom-components/icon/material-icons.html -->
+        <link href="components/material-design-icons/iconfont/material-icons.css" rel="stylesheet" type="text/css"/>
+
+        <!-- pages/plugins/bootstrap-slider.html -->
+        <!-- pages/custom-components/icon/font_awesome_icons.html -->
+        <!-- pages/custom-components/icon/font_awesome_animation_icon.html -->
+        <!-- pages/custom-components/icon/material-icons.html -->
+        <link href="components/bootstrap-slider/dist/css/bootstrap-slider.min.css" rel="stylesheet">
+        <link href="assets/css/plugins/custom-bootstrap-slider.min.css" rel="stylesheet" type="text/css"/>
+        <script src="components/bootstrap-slider/dist/bootstrap-slider.min.js"></script>
+
+        <!-- pages/custom-components/bootstrap-steps.html -->
+        <link href="assets/css/pages/custom-steps.min.css" rel="stylesheet" type="text/css"/>
+
+        <!-- pages/custom-components/custom-bootstrap-nav-item.html -->
+        <link href="assets/css/pages/custom-bootstrap-nav-item.min.css" rel="stylesheet" type="text/css"/>
+
+        <!-- pages/custom-components/extended-color-button.html -->
+        <!-- pages/custom-components/extended-color-outline-button.html -->
+        <link href="assets/css/pages/extended-buttons-color.min.css" rel="stylesheet" type="text/css"/>
+
+        <!-- pages/plugins/tree/fancytree/plain_fancytree.html -->
+        <!-- pages/plugins/tree/fancytree/table_fancytree.html -->
+        <!-- pages/plugins/tree/fancytree/checkboxes_fancytree.html -->
+        <!-- pages/plugins/tree/fancytree/radio_buttons_fancytree.html -->
+        <!-- pages/plugins/tree/fancytree/drag-and-drop-fancytree.html -->
+        <!-- pages/plugins/tree/fancytree/filter-ext-fancytree.html -->
+        <link href="components/jquery.fancytree/dist/skin-bootstrap/ui.fancytree.min.css" rel="stylesheet">
+        <link href="assets/css/plugins/custom-fancytree-skin-bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <script src="components/jquery.fancytree/dist/jquery.fancytree-all.min.js"></script>
+
+        <!-- pages/plugins/tree/fancytree/contextMenu_fancytree.html -->
+        <!-- pages/plugins/jQuery-contextMenu.html -->
+        <link rel="stylesheet" href="components/jquery-contextmenu/dist/jquery.contextMenu.min.css" />
+        <link href="assets/css/plugins/custom-jquery.contextMenu.min.css" rel="stylesheet" type="text/css"/>
+        <script src="components/jquery-contextmenu/dist/jquery.contextMenu.min.js"></script>
+
+        <!-- pages/plugins/alert-notification/jQuery-toastr-notification.html -->
+        <link href="components/toastr/build/toastr.min.css" rel="stylesheet">
+        <link href="assets/css/plugins/custom-toastr.min.css" rel="stylesheet" type="text/css"/>
+        <script src="components/toastr/build/toastr.min.js"></script>
+
+        <!-- pages/plugins/alert-notification/block-ui-plugin.html -->
+
+        <!-- pages/plugins/alert-notification/dynamic-bootstrap-alerts.html -->
+
+        <!-- pages/plugins/alert-notification/idle-timer.html -->
+        <script src="components/jquery-idletimer/dist/idle-timer.min.js"></script>
+
+        <!-- pages/plugins/calendar/jQuery-fullcalendar.html -->
+        <!-- pages/plugins/bootstrap-date-range-picker.html -->
+        <script src="components/moment/min/moment.min.js"></script>
+
+        <!-- pages/plugins/calendar/jQuery-fullcalendar.html -->
+        <!-- pages/plugins/calendar/jQuery-fullcalendar-event-popup.html -->
+        <!-- pages/plugins/calendar/jQuery-fullcalendar-constraint.html -->
+        <!-- pages/plugins/calendar/jQuery-fullcalendar-year.html -->
+        <link href='components/fullcalendar/dist/fullcalendar.min.css' rel='stylesheet' />
+        <link href='components/fullcalendar/dist/fullcalendar.print.min.css' rel='stylesheet' media='print' />
+        <link href="assets/css/plugins/custom-fullcalendar.min.css" rel="stylesheet" type="text/css"/>
+        <script src='components/fullcalendar/dist/fullcalendar.min.js'></script>
+
+        <!-- pages/plugins/bootstrap-date-range-picker.html -->
+        <link href="components/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+        <link href="assets/css/plugins/custom-bootstrap-daterangepicker.min.css" rel="stylesheet" type="text/css"/>
+        <script src="components/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+        <!-- pages/plugins/bootstrap-colorselector.html -->
+        <link href="components/bootstrap-colorselector/dist/bootstrap-colorselector.min.css" rel="stylesheet">
+        <link href="assets/css/plugins/custom-bootstrap-colorselector.min.css" rel="stylesheet" type="text/css"/>
+        <script src="components/bootstrap-colorselector/dist/bootstrap-colorselector.min.js"></script>
+
+        <!-- pages/plugins/jQuery-select2-bootstrap.html -->
+        <link href="components/select2/dist/css/select2.min.css" rel="stylesheet">
+        <!--<link href="components/select2-bootstrap-theme/dist/select2-bootstrap.min.css" rel="stylesheet">-->
+        <link href="assets/css/plugins/custom-bootstrap-select2-bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
+        <script src="components/select2/dist/js/select2.full.min.js"></script>
+
+        <!-- pages/plugins/bootstrap-maxlength.html -->
+        <script src="components/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+        <!-- pages/plugins/form-textarea-autosize.html -->
+        <script src='components/autosize/dist/autosize.min.js'></script>
+
+        <!-- pages/plugins/bootstrap-summernote-editor.html  -->
+        <link href="components/summernote/dist/summernote-bs4.css" rel="stylesheet">
+        <link href="assets/css/plugins/custom-bootstrap-summernote.min.css" rel="stylesheet" type="text/css"/>
+        <script src="components/summernote/dist/summernote-bs4.min.js"></script>
+
+        <!-- pages/plugins/ion-rangeSlider.html  -->
+        <link rel="stylesheet" href="components/ion-rangeslider/css/ion.rangeSlider.css" />
+        <link href="components/ion-rangeslider/css/ion.rangeSlider.skinHTML5.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/plugins/custom-ion.rangeSlider.skinHTML5.min.css" rel="stylesheet" type="text/css"/>
+        <script src="components/ion-rangeslider/js/ion.rangeSlider.min.js"></script>
+
+        <!-- pages/plugins/cropper-image-cropping.html -->
+        <link href="components/cropper/dist/cropper.min.css" rel="stylesheet">
+        <script src="components/cropper/dist/cropper.min.js"></script>
+
+        <!-- pages/plugins/jquery.counterup.html -->
+        <script src="components/waypoints/lib/jquery.waypoints.min.js" type="text/javascript"></script>
+        <script src="components/jquery.counterup/jquery.counterup.min.js" type="text/javascript"></script>
+
+        <!-- pages/plugins/jQuery-timeago.html -->
+        <script src="components/timeago/jquery.timeago.js" type="text/javascript"></script>
+
+        <!-- pages/form/jQuery-form-validation.html -->
+        <link href="assets/css/plugins/custom-jQuery.validation.min.css" rel="stylesheet" type="text/css"/>
+        <script src="components/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="components/jquery-validation/dist/additional-methods.js"></script>
+
+        <!-- pages/form/form-input-mask.html -->
+        <script src="components/inputmask/dist/min/jquery.inputmask.bundle.min.js"></script>
+        <script src="components/inputmask/dist/min/inputmask/phone-codes/phone.min.js"></script>
+        <script src="components/inputmask/dist/min/inputmask/bindings/inputmask.binding.min.js"></script>
+
+        <!-- pages/form/jQuery-form-plugin.html -->
+        <script src="components/jquery-form/dist/jquery.form.min.js" type="text/javascript"></script>
+
+        <!-- pages/table/datatable/defalut-datatables-bootstrap-4.html -->
+        <!-- pages/table/datatable/responsive-datatables-bootstrap-4.html -->
+        <!-- pages/table/datatable/fixedHeader-datatables-bootstrap-4.html -->
+        <!-- pages/table/datatable/scrollable-datatables.html -->
+        <!-- pages/table/datatable/selectable-datatables-bootstrap-4.html -->
+        <!-- pages/table/datatable/checkbox-selection-datatables-bootstrap-4.html -->
+        <!-- pages/table/datatable/row-selection-using-checkboxes.html -->
+        <!-- pages/table/datatable/individual-column-searching.html -->
+        <!-- pages/table/datatable/datatables-footer-summary.html -->
+        <link href="components/datatables.net-bs4/css/dataTables.bootstrap4.css" rel="stylesheet" type="text/css"/>
+        <script src="components/datatables.net/js/jquery.dataTables.js" type="text/javascript"></script>
+        <script src="components/datatables.net-bs4/js/dataTables.bootstrap4.js" type="text/javascript"></script>
+
+        <!-- pages/table/datatable/responsive-datatables-bootstrap-4.html -->
+        <script src="components/datatables.net-responsive/js/dataTables.responsive.min.js" type="text/javascript"></script>
+        <link href="components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/plugins/custom-datatables.net-responsive-bs4.min.css" rel="stylesheet" type="text/css"/>
+        <script src="components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js" type="text/javascript"></script>
+
+        <!-- pages/table/datatable/fixedHeader-datatables-bootstrap-4.html -->
+        <link href="components/datatables.net-fixedheader-bs4/css/fixedHeader.bootstrap4.min.css" rel="stylesheet" type="text/css"/>
+        <script src="components/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js" type="text/javascript"></script>
+
+        <!-- pages/table/datatable/selectable-datatables-bootstrap-4.html -->
+        <link href="components/datatables.net-select-bs4/css/select.bootstrap4.min.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/plugins/custom-datatables.net-select-bs4.min.css" rel="stylesheet" type="text/css"/>
+        <script src="components/datatables.net-select/js/dataTables.select.min.js" type="text/javascript"></script>
+
+        <!-- pages/chart/echarts.html -->
+        <script src="components/echarts/dist/echarts.min.js"></script>
+
+        <!-- pages/gallery/gallery-plugins/jQuery-magnific-popup-plugin.html -->
+        <link href="components/magnific-popup/dist/magnific-popup.css" rel="stylesheet" type="text/css"/>
+        <script src="components/magnific-popup/dist/jquery.magnific-popup.min.js" type="text/javascript"></script>
+
+        <!-- pages/gallery/carousel/slick-carousel.html -->
+        <link href="components/slick-carousel/slick/slick.css" rel="stylesheet" type="text/css"/>
+        <link href="components/slick-carousel/slick/slick-theme.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/plugins/custom-slick-carousel.min.css" rel="stylesheet" type="text/css"/>
+        <script src="components/slick-carousel/slick/slick.min.js" type="text/javascript"></script>
+
+        <!--  -->
+
+        <!--  -->
+        <!-- custom style for sidebar menu search text field -->
+        <style type="text/css">
+            .has-feedback-icon {
+                position: relative;
+            }
+            .search-menu-form .fa.form-control-clear {
+                pointer-events: initial;  /* or - auto // or -  unset  */
+                line-height: 1.5;
+                padding: .375rem .75rem;
+                font-size: 1rem;
+                z-index: 10;
+                pointer-events: auto;
+                cursor: pointer;
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+            ::-ms-clear {
+                display: none;
+            }
+
+            /* Extra large devices (large desktops, 1200px and up) */
+            @media (min-width: 1200px){
+                .modal-lg {
+                    max-width: 1024px;
+                }
+            }
+            @media (min-width: 1400px){
+                .modal-lg {
+                    max-width: 1200px;
+                }
+            }
+        </style>
+        <script type="text/javascript">
+            jQuery(function ($) {
+                $("body").on("click", '.disabled', function (event) {
+                    event.stopPropagation();
+                    event.preventDefault();
+                    return false;
+                });
+
+                $("body").on("click", ".dropdown-menu-header,.dropdown-menu-footer", function (event) {
+                    event.stopPropagation();
+                });
+
+                // tooltip demo
+                $('.sidebar').tooltip({
+                    selector: "[data-toggle=tooltip]",
+                    container: ".sidebar"
+                });
+
+                $.scrollUp({zIndex: 1000, scrollText: '<i class="fa fa-arrow-up"></i>'});
+
+                $('#filter-menu-id').on('input propertychange', function () {
+                    var $this = $(this);
+                    var visible = Boolean($this.val());
+                    $this.siblings('.form-control-clear').toggleClass('d-none', !visible);
+                }).trigger('propertychange').trigger('keyup');
+                $('.form-control-clear').click(function () {
+                    $(this).siblings('input[type="text"]').val('')
+                            .trigger('propertychange').trigger('keyup').focus();
+                });
+
+                $('#filter-menu-id').keyup(function () {
+                    var text = $(this).val().toLowerCase();
+                    $('.metismenu li').each(function () {
+                        if ($(this).text().toLowerCase().indexOf(text) === -1) {
+                            $(this).hide();
+                            $(this).children().removeClass("active");
+                            $(this).children().removeClass("in");
+                        } else {
+                            $(this).show();
+                            $(this).children("ul").css({height: "auto"});
+                            $(this).parentsUntil(".metismenu", "li").addClass("active");
+                            $(this).parentsUntil(".metismenu", "ul").addClass("in");
+                        }
+                    });
+                });
+            });</script>
+        <script type="text/javascript">
+            jQuery(function ($) {
+                var defaults = {
+                    httpMethod: "GET",
+                    dataType: "html",
+                    updateURLHash: true,
+                    defaultPassData: {_ajax: "ajax", _ajaxGlobalBlockUI: true},
+                    defaultOutputSelector: '.main-body-content-container',
+                    defaultUrl: 'pages/home.html'
+                };
+                javatmp.init(defaults);
+            });</script>
         <!-- build:remove -->
         <script>
             (function (i, s, o, g, r, a, m) {
@@ -1442,8 +1610,7 @@
                 m.parentNode.insertBefore(a, m);
             })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-            ga('create', 'UA-104738122-1', 'auto');
-        </script>
+            ga('create', 'UA-104738122-1', 'auto');</script>
         <!-- /build -->
     </body>
 </html>
