@@ -1,6 +1,3 @@
-@import "../common/variables.scss";
-@import "../common/colors-variables";
-
 @each $colorKey, $colorValue in $colorsMap {
     .btn-#{$colorKey} {
         @include button-variant(map-get($colorValue, base), map-get($colorValue, base));

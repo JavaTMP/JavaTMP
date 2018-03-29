@@ -1,43 +1,10 @@
+
 @import "common/variables.scss";
+@import "common/colors-variables.scss";
 
-// Include Optional parts of Bootstrap
-// un-comment if you provide a customization for main bootstrap variables
-// in common/variables.scss file
-/*@import "../../../../node_modules/bootstrap/scss/root";
-@import "../../../../node_modules/bootstrap/scss/reboot";
-@import "../../../../node_modules/bootstrap/scss/type";
-@import "../../../../node_modules/bootstrap/scss/images";
-@import "../../../../node_modules/bootstrap/scss/code";
-@import "../../../../node_modules/bootstrap/scss/grid";
-@import "../../../../node_modules/bootstrap/scss/tables";
-@import "../../../../node_modules/bootstrap/scss/forms";
-@import "../../../../node_modules/bootstrap/scss/buttons";
-@import "../../../../node_modules/bootstrap/scss/transitions";
-@import "../../../../node_modules/bootstrap/scss/dropdown";
-@import "../../../../node_modules/bootstrap/scss/button-group";
-@import "../../../../node_modules/bootstrap/scss/input-group";
-@import "../../../../node_modules/bootstrap/scss/custom-forms";
-@import "../../../../node_modules/bootstrap/scss/nav";
-@import "../../../../node_modules/bootstrap/scss/navbar";
-@import "../../../../node_modules/bootstrap/scss/card";
-@import "../../../../node_modules/bootstrap/scss/breadcrumb";
-@import "../../../../node_modules/bootstrap/scss/pagination";
-@import "../../../../node_modules/bootstrap/scss/badge";
-@import "../../../../node_modules/bootstrap/scss/jumbotron";
-@import "../../../../node_modules/bootstrap/scss/alert";
-@import "../../../../node_modules/bootstrap/scss/progress";
-@import "../../../../node_modules/bootstrap/scss/media";
-@import "../../../../node_modules/bootstrap/scss/list-group";
-@import "../../../../node_modules/bootstrap/scss/close";
-@import "../../../../node_modules/bootstrap/scss/modal";
-@import "../../../../node_modules/bootstrap/scss/tooltip";
-@import "../../../../node_modules/bootstrap/scss/popover";
-@import "../../../../node_modules/bootstrap/scss/carousel";
-@import "../../../../node_modules/bootstrap/scss/utilities";
-@import "../../../../node_modules/bootstrap/scss/print";*/
-
-// -- add HERE your overriding CSS styling for adjusting components.
-
+/*!********************************************
+JavaTMP Base Tempalte Imports
+*********************************************/
 @import "partials/fonts.scss";
 @import "partials/base.scss";
 @import "partials/navbar.scss";
@@ -46,3 +13,34 @@
 @import "partials/footer.scss";
 @import "pages/dropdown-menu-extender.scss";
 
+/*!********************************************
+Plugins Imports
+*********************************************/
+@import "plugins/custom-bootstrap-colorselector.scss";
+@import "plugins/custom-bootstrap-daterangepicker.scss";
+@import "plugins/custom-bootstrap-select2-bootstrap-theme.scss";
+@import "plugins/custom-bootstrap-slider.scss";
+@import "plugins/custom-bootstrap-summernote.scss";
+@import "plugins/custom-datatables.net-responsive-bs4.scss";
+@import "plugins/custom-datatables.net-select-bs4.scss";
+@import "plugins/custom-fancytree-skin-bootstrap.scss";
+@import "plugins/custom-fullcalendar.scss";
+@import "plugins/custom-ion.rangeSlider.skinHTML5.scss";
+@import "plugins/custom-jQuery-ScrollUp.scss";
+@import "plugins/custom-jQuery.validation.scss";
+@import "plugins/custom-jquery.contextMenu.scss";
+@import "plugins/custom-jquery.mCustomScrollbar.scss";
+@import "plugins/custom-metisMenu.scss";
+@import "plugins/custom-nprogress.scss";
+@import "plugins/custom-slick-carousel.scss";
+@import "plugins/custom-toastr.scss";
+
+/*!********************************************
+Pages Imports for demo purposes
+*********************************************/
+@import "pages/color-classes-utils.scss";
+@import "pages/color_display.scss";
+@import "pages/custom-bootstrap-nav-item.scss";
+@import "pages/custom-steps.scss";
+@import "pages/extended-buttons-color.scss";
+@import "pages/icon-preview-block.scss";
