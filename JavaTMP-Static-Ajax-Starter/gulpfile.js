@@ -211,8 +211,7 @@ var config = {
         ]
     }
 };
-
-var frontEndResources = {
+var dist = {
     "css": ["./public_html/components/material-design-icons/iconfont/material-icons.css",
         "./public_html/components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css",
         "./public_html/components/font-awesome-animation/dist/font-awesome-animation.min.css",
@@ -244,13 +243,14 @@ var frontEndResources = {
         "./public_html/components/bootstrap-reverse/dist/**/*",
         "./public_html/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.css"
     ],
-    "data": ["./public_html/components/material-design-icons/iconfont/MaterialIcons-Regular.*",
-        "./public_html/components/font-awesome/web-fonts-with-css/webfonts/*",
-        "./public_html/components/jquery-contextmenu/dist/font/**/*",
-        "./public_html/components/summernote/dist/font/**/*",
-        "./public_html/components/slick-carousel/slick/ajax-loader.gif",
-        "./public_html/components/slick-carousel/slick/fonts/**/*",
-        "./public_html/components/malihu-custom-scrollbar-plugin/mCSB_buttons.png"
+    "data": [
+        {"from": "./public_html/components/material-design-icons/iconfont/MaterialIcons-Regular.*", "to": "./public_html/assets/dist/fonts"},
+        {"from": "./public_html/components/font-awesome/web-fonts-with-css/webfonts/**/*", "to": "./public_html/assets/dist/webfonts"},
+        {"from": "./public_html/components/jquery-contextmenu/dist/font/**/*", "to": "./public_html/assets/dist/fonts"},
+        {"from": "./public_html/components/summernote/dist/font/**/*", "to": "./public_html/assets/dist/fonts"},
+        {"from": "./public_html/components/slick-carousel/slick/ajax-loader.gif", "to": "./public_html/assets/dist/img"},
+        {"from": "./public_html/components/slick-carousel/slick/fonts/**/*", "to": "./public_html/assets/dist/fonts"},
+        {"from": "./public_html/components/malihu-custom-scrollbar-plugin/mCSB_buttons.png", "to": "./public_html/assets/dist/img"}
     ],
     "js": ["./public_html/components/jquery/dist/jquery.min.js",
         "./public_html/components/jquery-ui-dist/jquery-ui.min.js",
@@ -304,7 +304,6 @@ var frontEndResources = {
         "./public_html/components/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js"
     ]
 };
-
 function getClass(object) {
     return Object.prototype.toString.call(object).slice(8, -1);
 }
@@ -358,21 +357,19 @@ gulp.task('copy-components', ["delete-components"], function () {
     }
 });
 gulp.task('generate-dist', ["delete-dist"], function () {
-    for (var key in config.plugins) {
-        if (config.plugins.hasOwnProperty(key)) {
-            var componentConfig = config.plugins[key];
-            for (var i = 0; i < componentConfig.length; i++) {
-                var componentResource = componentConfig[i];
-                var to = solveParameters(componentResource.to);
-                var from = solveParameters(componentResource.from);
-                console.log("copy resource from [" + from + "] to [" + to + "] processCSS [" + componentResource.processCSS + "], processJS [" + componentResource.processJS + "]");
-                gulp.src(from)
-                        .pipe(gulpif(componentResource.processJS === true, uglify({output: {comments: /^!/}})))
-                        .pipe(gulpif(componentResource.processCSS === true, cleanCSS()))
-                        .pipe(gulpif(componentResource.processCSS === true, concat("css.min.css")))
-                        .pipe(gulp.dest(config.destDist));
-            }
-        }
+    gulp.src(dist.css)
+            .pipe(concat("javatmp-plugins.min.css"))
+            .pipe(gulp.dest("./public_html/assets/dist/css"));
+    gulp.src(dist.js)
+            .pipe(concat("javatmp-plugins.min.js"))
+            .pipe(gulp.dest("./public_html/assets/dist/js"));
+
+    for (var i = 0; i < dist.data.length; i++) {
+        var componentResource = dist.data[i];
+        var to = componentResource.to;
+        var from = componentResource.from;
+        console.log("copy resource from [" + from + "] to [" + to + "] processCSS [" + componentResource.processCSS + "], processJS [" + componentResource.processJS + "]");
+        gulp.src(from).pipe(gulp.dest(to));
     }
 });
 gulp.task('run-local-web-server', function () {
