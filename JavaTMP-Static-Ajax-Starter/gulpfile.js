@@ -245,27 +245,28 @@ var src = {
 //        "./public_html/components/bootstrap-reverse/dist/**/*",
         "./public_html/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.css"
     ],
-//    "fonts": [
-//        "./public_html/components/material-design-icons/iconfont/MaterialIcons-Regular.*",
-//        "./public_html/components/font-awesome/web-fonts-with-css/webfonts/**/*",
-//        "./public_html/components/jquery-contextmenu/dist/font/**/*",
-//        "./public_html/components/summernote/dist/font/**/*",
-//        "./public_html/components/slick-carousel/slick/fonts/**/*"
-//    ],
-//    "img": [
-//        "./public_html/components/slick-carousel/slick/ajax-loader.gif",
-//        "./public_html/components/malihu-custom-scrollbar-plugin/mCSB_buttons.png"
-//    ],
-    "data": [
-        {"from": "./public_html/components/material-design-icons/iconfont/MaterialIcons-Regular.*", "to": "./public_html/assets/dist/fonts"},
-        {"from": "./public_html/components/font-awesome/web-fonts-with-css/webfonts/**/*", "to": "./public_html/assets/dist/fonts"},
-        {"from": "./public_html/components/jquery-contextmenu/dist/font/**/*", "to": "./public_html/assets/dist/fonts"},
-        {"from": "./public_html/components/summernote/dist/font/**/*", "to": "./public_html/assets/dist/fonts"},
-        {"from": "./public_html/components/slick-carousel/slick/ajax-loader.gif", "to": "./public_html/assets/dist/img"},
-        {"from": "./public_html/components/slick-carousel/slick/fonts/**/*", "to": "./public_html/assets/dist/fonts"},
-        {"from": "./public_html/components/malihu-custom-scrollbar-plugin/mCSB_buttons.png", "to": "./public_html/assets/dist/img"},
-        {"from": "./public_html/assets/fonts/**/*", "to": "./public_html/assets/dist/fonts"}
+    "fonts": [
+        "./public_html/components/material-design-icons/iconfont/MaterialIcons-Regular.*",
+        "./public_html/components/font-awesome/web-fonts-with-css/webfonts/**/*",
+        "./public_html/components/jquery-contextmenu/dist/font/**/*",
+        "./public_html/components/summernote/dist/font/**/*",
+        "./public_html/components/slick-carousel/slick/fonts/**/*",
+        "./public_html/assets/fonts/**/*"
     ],
+    "img": [
+        "./public_html/components/slick-carousel/slick/ajax-loader.gif",
+        "./public_html/components/malihu-custom-scrollbar-plugin/mCSB_buttons.png"
+    ],
+//    "data": [
+//        {"from": "./public_html/components/material-design-icons/iconfont/MaterialIcons-Regular.*", "to": "./public_html/assets/dist/fonts"},
+//        {"from": "./public_html/components/font-awesome/web-fonts-with-css/webfonts/**/*", "to": "./public_html/assets/dist/fonts"},
+//        {"from": "./public_html/components/jquery-contextmenu/dist/font/**/*", "to": "./public_html/assets/dist/fonts"},
+//        {"from": "./public_html/components/summernote/dist/font/**/*", "to": "./public_html/assets/dist/fonts"},
+//        {"from": "./public_html/components/slick-carousel/slick/ajax-loader.gif", "to": "./public_html/assets/dist/img"},
+//        {"from": "./public_html/components/slick-carousel/slick/fonts/**/*", "to": "./public_html/assets/dist/fonts"},
+//        {"from": "./public_html/components/malihu-custom-scrollbar-plugin/mCSB_buttons.png", "to": "./public_html/assets/dist/img"},
+//        {"from": "./public_html/assets/fonts/**/*", "to": "./public_html/assets/dist/fonts"}
+//    ],
     "js": ["./public_html/components/jquery/dist/jquery.min.js",
         "./public_html/components/jquery-ui-dist/jquery-ui.min.js",
         "./public_html/components/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js",
@@ -413,27 +414,27 @@ gulp.task('generate-dist', ["delete-dist", "delete-css", "delete-js", "main-sass
                     .pipe(gulp.dest("./public_html/assets/dist/js"))
                     .on('end', next);
         },
-        function (next) {
-            for (var i = 0; i < src.data.length; i++) {
-                var componentResource = src.data[i];
-                var to = componentResource.to;
-                var from = componentResource.from;
-                console.log("copy resource from [" + from + "] to [" + to + "] processCSS [" + componentResource.processCSS + "], processJS [" + componentResource.processJS + "]");
-                gulp.src(from).pipe(gulp.dest(to));
-            }
-            next();
-        }
-//        ,
 //        function (next) {
-//            gulp.src(src.img)
-//                    .pipe(gulp.dest("./public_html/assets/dist/img"))
-//                    .on('end', next);
-//        },
-//        function (next) {
-//            gulp.src(src.fonts)
-//                    .pipe(gulp.dest("./public_html/assets/dist/fonts"))
-//                    .on('end', next);
+//            for (var i = 0; i < src.data.length; i++) {
+//                var componentResource = src.data[i];
+//                var to = componentResource.to;
+//                var from = componentResource.from;
+//                console.log("copy resource from [" + from + "] to [" + to + "] processCSS [" + componentResource.processCSS + "], processJS [" + componentResource.processJS + "]");
+//                gulp.src(from).pipe(gulp.dest(to));
+//            }
+//            next();
 //        }
+////        ,
+        function (next) {
+            gulp.src(src.img)
+                    .pipe(gulp.dest("./public_html/assets/dist/img"))
+                    .on('end', next);
+        },
+        function (next) {
+            gulp.src(src.fonts)
+                    .pipe(gulp.dest("./public_html/assets/dist/fonts"))
+                    .on('end', next);
+        }
     ], cb);
 });
 gulp.task('run-local-web-server', function () {
