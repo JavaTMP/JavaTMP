@@ -32,8 +32,8 @@ var config = {
             {"from": "${sourceNodeLib}/jquery/dist/jquery.min.js", "to": "${destComponentsLib}/jquery/dist"}
         ],
         "jquery-ui": [
-            {"from": "${sourceNodeLib}/jquery-ui-dist/jquery-ui.min.css", "to": "${destComponentsLib}/jquery-ui"},
-            {"from": "${sourceNodeLib}/jquery-ui-dist/jquery-ui.min.js", "to": "${destComponentsLib}/jquery-ui"}
+            {"from": "${sourceNodeLib}/jquery-ui-dist/jquery-ui.min.css", "to": "${destComponentsLib}/jquery-ui-dist"},
+            {"from": "${sourceNodeLib}/jquery-ui-dist/jquery-ui.min.js", "to": "${destComponentsLib}/jquery-ui-dist"}
 
         ],
         "jquery-ui-touch-punch": [
@@ -217,7 +217,7 @@ var src = {
         "./public_html/components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css",
         "./public_html/components/font-awesome-animation/dist/font-awesome-animation.min.css",
         "./public_html/components/jquery-ui-dist/jquery-ui.min.css",
-        "./public_html/components/bootstrap/dist/css/bootstrap.min.css",
+//        "./public_html/components/bootstrap/dist/css/bootstrap.min.css",
         "./public_html/components/metismenu/dist/metisMenu.min.css",
         "./public_html/components/nprogress/nprogress.css",
         "./public_html/components/jquery.fancytree/dist/skin-bootstrap/ui.fancytree.min.css",
@@ -233,6 +233,7 @@ var src = {
         "./public_html/components/bootstrap-slider/dist/css/bootstrap-slider.min.css",
         "./public_html/components/fullcalendar/dist/fullcalendar.min.css",
         "./public_html/components/fullcalendar/dist/fullcalendar.print.min.css",
+        "./public_html/components/cropper/dist/cropper.min.css",
         "./public_html/components/datatables.net-bs4/css/dataTables.bootstrap4.css",
         "./public_html/components/datatables.net-fixedheader-bs4/css/fixedHeader.bootstrap4.min.css",
         "./public_html/components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css",
@@ -241,7 +242,7 @@ var src = {
         "./public_html/components/slick-carousel/slick/slick.css",
         "./public_html/components/slick-carousel/slick/slick-theme.css",
         "./public_html/components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css",
-        "./public_html/components/bootstrap-reverse/dist/**/*",
+//        "./public_html/components/bootstrap-reverse/dist/**/*",
         "./public_html/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.css"
     ],
     "fonts": [
@@ -280,7 +281,6 @@ var src = {
         "./public_html/components/ion-rangeslider/js/ion.rangeSlider.min.js",
         "./public_html/components/bootstrap-slider/dist/bootstrap-slider.min.js",
         "./public_html/components/fullcalendar/dist/fullcalendar.min.js",
-        "./public_html/components/cropper/dist/cropper.min.css",
         "./public_html/components/cropper/dist/cropper.min.js",
         "./public_html/components/waypoints/lib/jquery.waypoints.min.js",
         "./public_html/components/jquery.counterup/jquery.counterup.min.js",
@@ -379,7 +379,7 @@ gulp.task('generate-dist', ["delete-dist", "delete-css", "delete-js"], function 
         },
         function (next) {
             gulp.src(src.css)
-                    .pipe(concat("plugins.min.css", {newLine: '\n'}))
+                    .pipe(concat("plugins.min.css"))
                     .pipe(gulp.dest("./public_html/assets/dist/css"))
                     .on('end', next);
         },
@@ -398,7 +398,7 @@ gulp.task('generate-dist', ["delete-dist", "delete-css", "delete-js"], function 
         },
         function (next) {
             gulp.src(src.js)
-                    .pipe(concat("plugins.min.js", {newLine: '\n;'}))
+                    .pipe(concat("plugins.min.js"))
                     .pipe(gulp.dest("./public_html/assets/dist/js"))
                     .on('end', next);
         },
