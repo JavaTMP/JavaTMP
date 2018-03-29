@@ -11,6 +11,7 @@ var del = require('del');
 var eslint = require('gulp-eslint');
 var autoprefixer = require('gulp-autoprefixer');
 var gulpif = require('gulp-if');
+var async = require('async');
 var config = {
     "sourceNodeLib": "./node_modules",
     "destComponentsLib": "./public_html/components",
@@ -211,7 +212,7 @@ var config = {
         ]
     }
 };
-var dist = {
+var src = {
     "css": ["./public_html/components/material-design-icons/iconfont/material-icons.css",
         "./public_html/components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css",
         "./public_html/components/font-awesome-animation/dist/font-awesome-animation.min.css",
@@ -243,14 +244,16 @@ var dist = {
         "./public_html/components/bootstrap-reverse/dist/**/*",
         "./public_html/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.css"
     ],
-    "data": [
-        {"from": "./public_html/components/material-design-icons/iconfont/MaterialIcons-Regular.*", "to": "./public_html/assets/dist/fonts"},
-        {"from": "./public_html/components/font-awesome/web-fonts-with-css/webfonts/**/*", "to": "./public_html/assets/dist/webfonts"},
-        {"from": "./public_html/components/jquery-contextmenu/dist/font/**/*", "to": "./public_html/assets/dist/fonts"},
-        {"from": "./public_html/components/summernote/dist/font/**/*", "to": "./public_html/assets/dist/fonts"},
-        {"from": "./public_html/components/slick-carousel/slick/ajax-loader.gif", "to": "./public_html/assets/dist/img"},
-        {"from": "./public_html/components/slick-carousel/slick/fonts/**/*", "to": "./public_html/assets/dist/fonts"},
-        {"from": "./public_html/components/malihu-custom-scrollbar-plugin/mCSB_buttons.png", "to": "./public_html/assets/dist/img"}
+    "fonts": [
+        "./public_html/components/material-design-icons/iconfont/MaterialIcons-Regular.*",
+        "./public_html/components/font-awesome/web-fonts-with-css/webfonts/**/*",
+        "./public_html/components/jquery-contextmenu/dist/font/**/*",
+        "./public_html/components/summernote/dist/font/**/*",
+        "./public_html/components/slick-carousel/slick/fonts/**/*"
+    ],
+    "img": [
+        "./public_html/components/slick-carousel/slick/ajax-loader.gif",
+        "./public_html/components/malihu-custom-scrollbar-plugin/mCSB_buttons.png"
     ],
     "js": ["./public_html/components/jquery/dist/jquery.min.js",
         "./public_html/components/jquery-ui-dist/jquery-ui.min.js",
@@ -356,21 +359,60 @@ gulp.task('copy-components', ["delete-components"], function () {
         }
     }
 });
-gulp.task('generate-dist', ["delete-dist"], function () {
-    gulp.src(dist.css)
-            .pipe(concat("javatmp-plugins.min.css"))
-            .pipe(gulp.dest("./public_html/assets/dist/css"));
-    gulp.src(dist.js)
-            .pipe(concat("javatmp-plugins.min.js"))
-            .pipe(gulp.dest("./public_html/assets/dist/js"));
-
-    for (var i = 0; i < dist.data.length; i++) {
-        var componentResource = dist.data[i];
-        var to = componentResource.to;
-        var from = componentResource.from;
-        console.log("copy resource from [" + from + "] to [" + to + "] processCSS [" + componentResource.processCSS + "], processJS [" + componentResource.processJS + "]");
-        gulp.src(from).pipe(gulp.dest(to));
-    }
+gulp.task('generate-dist', ["delete-dist", "delete-css", "delete-js"], function (cb) {
+    async.series([
+        function (next) {
+            gulp.src(['./public_html/assets/src/sass/main.scss'])
+                    .pipe(sass().on('error', sass.logError))
+                    .pipe(autoprefixer({
+                        browsers: ['last 2 versions'],
+                        cascade: false
+                    }))
+                    .pipe(cleanCSS())
+                    .pipe(rename({suffix: '.min'}))
+                    .pipe(gulp.dest('./public_html/assets/css/'))
+                    .on('end', next);
+        },
+        function (next) {
+            src.css.push("./public_html/assets/css/main.min.css");
+            next();
+        },
+        function (next) {
+            gulp.src(src.css)
+                    .pipe(concat("plugins.min.css", {newLine: '\n'}))
+                    .pipe(gulp.dest("./public_html/assets/dist/css"))
+                    .on('end', next);
+        },
+        function (next) {
+            gulp.src('./public_html/assets/src/js-src/**/*')
+                    .pipe(eslint())
+                    .pipe(eslint.format())
+                    .pipe(uglify({output: {comments: /^!/}}))
+                    .pipe(rename({suffix: '.min'}))
+                    .pipe(gulp.dest('./public_html/assets/js/'))
+                    .on('end', next);
+        },
+        function (next) {
+            src.js.push("./public_html/assets/js/javatmp.min.js");
+            next();
+        },
+        function (next) {
+            gulp.src(src.js)
+                    .pipe(concat("plugins.min.js", {newLine: '\n;'}))
+                    .pipe(gulp.dest("./public_html/assets/dist/js"))
+                    .on('end', next);
+        },
+        function (next) {
+            gulp.src(src.img)
+                    .pipe(gulp.dest("./public_html/assets/dist/img"))
+                    .on('end', next);
+        },
+        function (next) {
+            gulp.src(src.fonts)
+                    .pipe(gulp.dest("./public_html/assets/dist/fonts"))
+                    .on('end', next);
+        }
+    ], cb);
 });
 gulp.task('run-local-web-server', function () {
 
@@ -397,29 +439,29 @@ gulp.task('main-sass', ["delete-css"], function () {
             .pipe(rename({suffix: '.min'}))
             .pipe(gulp.dest('./public_html/assets/css/'));
 });
-gulp.task('plugins-sass', ["main-sass"], function () {
-    return gulp.src(['./public_html/assets/src/sass/plugins/**/*.scss'])
-            .pipe(sass().on('error', sass.logError))
-            .pipe(autoprefixer({
-                browsers: ['last 2 versions'],
-                cascade: false
-            }))
-            .pipe(cleanCSS())
-            .pipe(rename({suffix: '.min'}))
-            .pipe(gulp.dest('./public_html/assets/css/plugins/'));
-});
-gulp.task('pages-sass', ["plugins-sass"], function () {
-    return gulp.src(['./public_html/assets/src/sass/pages/**/*.scss'])
-            .pipe(sass().on('error', sass.logError))
-            .pipe(autoprefixer({
-                browsers: ['last 2 versions'],
-                cascade: false
-            }))
-            .pipe(cleanCSS())
-            .pipe(rename({suffix: '.min'}))
-            .pipe(gulp.dest('./public_html/assets/css/pages/'));
-});
-gulp.task('sass', ["pages-sass"], function () {
+//gulp.task('plugins-sass', ["main-sass"], function () {
+//    return gulp.src(['./public_html/assets/src/sass/plugins/**/*.scss'])
+//            .pipe(sass().on('error', sass.logError))
+//            .pipe(autoprefixer({
+//                browsers: ['last 2 versions'],
+//                cascade: false
+//            }))
+//            .pipe(cleanCSS())
+//            .pipe(rename({suffix: '.min'}))
+//            .pipe(gulp.dest('./public_html/assets/css/plugins/'));
+//});
+//gulp.task('pages-sass', ["plugins-sass"], function () {
+//    return gulp.src(['./public_html/assets/src/sass/pages/**/*.scss'])
+//            .pipe(sass().on('error', sass.logError))
+//            .pipe(autoprefixer({
+//                browsers: ['last 2 versions'],
+//                cascade: false
+//            }))
+//            .pipe(cleanCSS())
+//            .pipe(rename({suffix: '.min'}))
+//            .pipe(gulp.dest('./public_html/assets/css/pages/'));
+//});
+gulp.task('sass', ["main-sass"], function () {
     console.log("sass generate css files successfully");
 });
 gulp.task('compress-js', ["delete-js"], function (cb) {
