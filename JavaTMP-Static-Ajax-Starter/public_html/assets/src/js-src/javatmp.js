@@ -1,4 +1,6 @@
-
+/*!
+ * JavaTMP Main JS File.
+ */
 (function ($) {
 
     window.javatmp = {};
