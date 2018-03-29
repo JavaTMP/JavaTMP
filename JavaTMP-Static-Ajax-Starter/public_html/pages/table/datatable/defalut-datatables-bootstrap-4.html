@@ -522,22 +522,26 @@
         jQuery(function ($) {
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
-            var table = $('#defalut-dataTables-example').DataTable();
+            var table = null;
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
+                table = $('#defalut-dataTables-example').DataTable();
             });
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
                 // fire when user resize browser window or sidebar hide / show
+                console.log("javaTmpContainerResizeEventName");
                 table.columns.adjust().draw();
             });
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenCompress, function (event, card) {
                 // when card compress by pressing the top right tool button
+                console.log("cardFullscreenCompress");
                 table.columns.adjust().draw();
             });
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenExpand, function (event, card) {
                 // when card Expand by pressing the top right tool button
+                console.log("cardFullscreenExpand");
                 table.columns.adjust().draw();
             });
 

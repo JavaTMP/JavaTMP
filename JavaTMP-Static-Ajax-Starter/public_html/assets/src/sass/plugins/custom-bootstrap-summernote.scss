@@ -38,6 +38,19 @@ $summernote-text-muted: $text-muted!default;
 $img-margin-left: 10px!default;
 $img-margin-right: 10px!default;
 
+$summernote-font-path: $javatmp-font-path !default;
+
+@font-face {
+    font-family:"summernote";
+    src:url("#{$summernote-font-path}/summernote.eot?dbafe969167589eda84514394d126413");
+    src:url("#{$summernote-font-path}/summernote.eot?#iefix") format("embedded-opentype"),
+        url("#{$summernote-font-path}/summernote.woff?dbafe969167589eda84514394d126413") format("woff"),
+        url("#{$summernote-font-path}/summernote.ttf?dbafe969167589eda84514394d126413") format("truetype");
+    font-weight:normal;
+    font-style:normal;
+}
+
+
 /* Layout
  ------------------------------------------*/
 .note-editor {

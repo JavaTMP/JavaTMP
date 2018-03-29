@@ -232,7 +232,7 @@ var src = {
         "./public_html/components/ion-rangeslider/css/ion.rangeSlider.skinHTML5.css",
         "./public_html/components/bootstrap-slider/dist/css/bootstrap-slider.min.css",
         "./public_html/components/fullcalendar/dist/fullcalendar.min.css",
-        "./public_html/components/fullcalendar/dist/fullcalendar.print.min.css",
+//        "./public_html/components/fullcalendar/dist/fullcalendar.print.min.css",
         "./public_html/components/cropper/dist/cropper.min.css",
         "./public_html/components/datatables.net-bs4/css/dataTables.bootstrap4.css",
         "./public_html/components/datatables.net-fixedheader-bs4/css/fixedHeader.bootstrap4.min.css",
@@ -258,12 +258,12 @@ var src = {
 //    ],
     "data": [
         {"from": "./public_html/components/material-design-icons/iconfont/MaterialIcons-Regular.*", "to": "./public_html/assets/dist/fonts"},
-        {"from": "./public_html/components/font-awesome/web-fonts-with-css/webfonts/**/*", "to": "./public_html/assets/dist/webfonts"},
-        {"from": "./public_html/components/jquery-contextmenu/dist/font/**/*", "to": "./public_html/assets/dist/css/font"},
-        {"from": "./public_html/components/summernote/dist/font/**/*", "to": "./public_html/assets/dist/css/font"},
-        {"from": "./public_html/components/slick-carousel/slick/ajax-loader.gif", "to": "./public_html/assets/dist/css"},
-        {"from": "./public_html/components/slick-carousel/slick/fonts/**/*", "to": "./public_html/assets/dist/css/fonts"},
-        {"from": "./public_html/components/malihu-custom-scrollbar-plugin/mCSB_buttons.png", "to": "./public_html/assets/dist/css"},
+        {"from": "./public_html/components/font-awesome/web-fonts-with-css/webfonts/**/*", "to": "./public_html/assets/dist/fonts"},
+        {"from": "./public_html/components/jquery-contextmenu/dist/font/**/*", "to": "./public_html/assets/dist/fonts"},
+        {"from": "./public_html/components/summernote/dist/font/**/*", "to": "./public_html/assets/dist/fonts"},
+        {"from": "./public_html/components/slick-carousel/slick/ajax-loader.gif", "to": "./public_html/assets/dist/img"},
+        {"from": "./public_html/components/slick-carousel/slick/fonts/**/*", "to": "./public_html/assets/dist/fonts"},
+        {"from": "./public_html/components/malihu-custom-scrollbar-plugin/mCSB_buttons.png", "to": "./public_html/assets/dist/img"},
         {"from": "./public_html/assets/fonts/**/*", "to": "./public_html/assets/dist/fonts"}
     ],
     "js": ["./public_html/components/jquery/dist/jquery.min.js",
@@ -390,7 +390,7 @@ gulp.task('generate-dist', ["delete-dist", "delete-css", "delete-js", "main-sass
         },
         function (next) {
             gulp.src(src.css)
-                    .pipe(concat("javatmp-all.min.css"))
+                    .pipe(concat("javatmp-all.min.css", {newLine: '\n'}))
                     .pipe(gulp.dest("./public_html/assets/dist/css"))
                     .on('end', next);
         },
@@ -409,7 +409,7 @@ gulp.task('generate-dist', ["delete-dist", "delete-css", "delete-js", "main-sass
         },
         function (next) {
             gulp.src(src.js)
-                    .pipe(concat("javatmp-all.min.js"))
+                    .pipe(concat("javatmp-all.min.js", {newLine: '\n;'}))
                     .pipe(gulp.dest("./public_html/assets/dist/js"))
                     .on('end', next);
         },

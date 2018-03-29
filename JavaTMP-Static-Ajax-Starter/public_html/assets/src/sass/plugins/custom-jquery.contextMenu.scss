@@ -44,12 +44,23 @@ $context-menu-separator-color: $dropdown-divider-bg !default;
 $context-menu-separator-margin: ($spacer / 2) 0 !default;
 
 // Icons
-$context-menu-icon-font-path: 'font/' !default;
+$context-menu-icons-cachebust: "1f6p1";
+$context-menu-icon-font-path: $javatmp-font-path !default;
 $context-menu-icon-font-name: 'context-menu-icons' !default;
 $context-menu-icon-size: 1em !default;
 $context-menu-icon-color: $context-menu-text-color;
 $context-menu-icon-color-hover: $context-menu-text-color-hover;
 
+@font-face {
+    font-family: '#{$context-menu-icon-font-name}';
+    src: url('#{$context-menu-icon-font-path}/#{$context-menu-icon-font-name}.eot?#{$context-menu-icons-cachebust}');
+    src: url('#{$context-menu-icon-font-path}/#{$context-menu-icon-font-name}.eot?#{$context-menu-icons-cachebust}#iefix') format('embedded-opentype'),
+        url('#{$context-menu-icon-font-path}/#{$context-menu-icon-font-name}.woff2?#{$context-menu-icons-cachebust}') format('woff2'),
+        url('#{$context-menu-icon-font-path}/#{$context-menu-icon-font-name}.woff?#{$context-menu-icons-cachebust}') format('woff'),
+        url('#{$context-menu-icon-font-path}/#{$context-menu-icon-font-name}.ttf?#{$context-menu-icons-cachebust}') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 
 @mixin base-context-menu-icon($icon-font: "context-menu-icons") {
     &::before {

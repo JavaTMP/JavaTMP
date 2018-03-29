@@ -1,7 +1,18 @@
+/*!
+Custom Malihu Custom Scrollbar Plugin
+*/
 $mCustomScrollbar-width: 7px!default;
 $mCustomScrollbar-height: $mCustomScrollbar-width!default;
 $mCustomScrollbar-color: $primary!default;
 $mCustomScrollbar-border-radius: $border-radius!default;
+$mCustomScrollbar-img-path: $javatmp-img-path!default;
+
+.mCSB_scrollTools .mCSB_buttonUp,
+.mCSB_scrollTools .mCSB_buttonDown,
+.mCSB_scrollTools .mCSB_buttonLeft,
+.mCSB_scrollTools .mCSB_buttonRight{
+    background-image: url("#{$mCustomScrollbar-img-path}/mCSB_buttons.png");
+}
 
 .mCSB_outside + .mCS-javatmp.mCSB_scrollTools_vertical{
     right: 0;

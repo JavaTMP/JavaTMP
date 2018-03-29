@@ -5,6 +5,10 @@ $font-family-base: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 // Include original Bootstrap SCSS file
 @import "../../../../../node_modules/bootstrap/scss/bootstrap";
 
+// Global Path Variables:
+$javatmp-font-path: "../fonts" !default;
+$javatmp-img-path: "../img" !default;
+
 // JavaTMP Global Variables
 $javatmp-primary-bg: $primary!default;
 $javatmp-secondary-bg: $gray-200!default;
