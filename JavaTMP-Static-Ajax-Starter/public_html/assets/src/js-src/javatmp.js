@@ -166,6 +166,16 @@
                 if ((javatmp.isWidthSmall() === false)) {
                     $(javatmp.settings.defaultOutputSelector).trigger(javatmp.settings.javaTmpContainerResizeEventName);
                 }
+            } else {
+                // re cheek if auto-show is activiated or not bug in ie11 & edge:
+                if ((javatmp.isWidthSmall() === false)
+                        && $("body").hasClass("mouse-auto-show")
+                        && ($('body').hasClass("sidebar-active") === false)) {
+                    setTimeout(function () {
+                        $(window).off('mousemove', handlingMouseMove);
+                        $(window).on('mousemove', handlingMouseMove);
+                    }, 1000);
+                }
             }
         });
 
@@ -251,7 +261,8 @@
                                     $this.parents("ul").css({"height": "auto"});
                                     $this.parents("ul").addClass("in");
 
-                                    if (javatmp.isWidthSmall() || $("body").hasClass("mouse-auto-show")) {
+                                    if (javatmp.isWidthSmall() || ($("body").hasClass("mouse-auto-show") && $('body').hasClass("sidebar-active"))) {
+                                        $(window).off('mousemove', handlingMouseMove);
                                         $('body').removeClass("sidebar-active");
                                     }
 
