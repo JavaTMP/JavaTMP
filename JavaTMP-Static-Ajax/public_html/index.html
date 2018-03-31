@@ -1470,19 +1470,6 @@
                 });
             });
         </script>
-        <script type="text/javascript">
-            jQuery(function ($) {
-                var defaults = {
-                    httpMethod: "GET",
-                    dataType: "html",
-                    updateURLHash: true,
-                    defaultPassData: {_ajax: "ajax", _ajaxGlobalBlockUI: true},
-                    defaultOutputSelector: '.main-body-content-container',
-                    defaultUrl: 'pages/home.html'
-                };
-                javatmp.init(defaults);
-            });
-        </script>
         <!-- build:remove -->
         <script>
             (function (i, s, o, g, r, a, m) {
@@ -1499,6 +1486,29 @@
 
             ga('create', 'UA-104738122-1', 'auto');
         </script>
+        <script type="text/javascript">
+            jQuery(function ($) {
+                $(document).ajaxComplete(function (event, xhr, ajaxOptions) {
+                    if (ajaxOptions.url.indexOf("assets/data") === -1) {
+                        var ajaxurl = window.location.pathname + "#" + ajaxOptions.url;
+                        ga('send', 'pageview', ajaxurl);
+                    }
+                });
+            });
+        </script>
         <!-- /build -->
+        <script type="text/javascript">
+            jQuery(function ($) {
+                var defaults = {
+                    httpMethod: "GET",
+                    dataType: "html",
+                    updateURLHash: true,
+                    defaultPassData: {_ajax: "ajax", _ajaxGlobalBlockUI: true},
+                    defaultOutputSelector: '.main-body-content-container',
+                    defaultUrl: 'pages/home.html'
+                };
+                javatmp.init(defaults);
+            });
+        </script>
     </body>
 </html>

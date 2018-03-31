@@ -123,12 +123,6 @@
                     fadeOut: 0 // supporting fadeOut value may hang the windows an issue in the plugin itself.
                 });
             }
-            // <!-- build:remove -->
-            if (ajaxOptions.url.indexOf("assets/data") === -1) {
-                var ajaxurl = window.location.pathname + "#" + ajaxOptions.url;
-                ga('send', 'pageview', ajaxurl);
-            }
-            // <!-- /build -->
         }).ajaxStop(function (event, xhr, ajaxOptions) {
             NProgress.done();
             $(".breadcrumb-submenu > a > i.fa.faa-spin").removeClass("animated text-danger");
