@@ -1,6 +1,7 @@
 
 $slick-font-path: $javatmp-font-path!default;
 $slick-img-path: $javatmp-img-path!default;
+$slick-btn-color: $primary;
 
 .slick-loading .slick-list
 {
@@ -44,9 +45,9 @@ $slick-img-path: $javatmp-img-path!default;
 }
 .slick-dots li button:before {
     opacity: 0.3;
-    color: #428bca;
+    color: $slick-btn-color;
 }
 .slick-dots li.slick-active button:before {
     opacity: 1;
-    color: #428bca;
+    color: $slick-btn-color;
 }
