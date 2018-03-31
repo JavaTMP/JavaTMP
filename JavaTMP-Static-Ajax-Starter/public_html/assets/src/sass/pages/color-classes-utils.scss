@@ -1,6 +1,6 @@
 
 @mixin createTextColorClass($selector, $colorValue) {
-    .cl-#{$selector} {
+    .text-#{$selector} {
         color: $colorValue;
     }
     .bg-#{$selector} {
