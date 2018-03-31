@@ -17,10 +17,6 @@ var config = {
     "destComponentsLib": "./public_html/components",
     "destDist": "./public_html/assets/dist",
     "plugins": {
-        "material-design-icons": [
-            {"from": "${sourceNodeLib}/material-design-icons/iconfont/MaterialIcons-Regular.*", "to": "${destComponentsLib}/material-design-icons/iconfont"},
-            {"from": "${sourceNodeLib}/material-design-icons/iconfont/material-icons.css", "to": "${destComponentsLib}/material-design-icons/iconfont", processCSS: true}
-        ],
         "font-awesome": [
             {"from": "${sourceNodeLib}/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css", "to": "${destComponentsLib}/font-awesome/web-fonts-with-css/css"},
             {"from": "${sourceNodeLib}/font-awesome/web-fonts-with-css/webfonts/*", "to": "${destComponentsLib}/font-awesome/web-fonts-with-css/webfonts"}
@@ -213,7 +209,7 @@ var config = {
     }
 };
 var src = {
-    "css": ["./public_html/components/material-design-icons/iconfont/material-icons.css",
+    "css": [
         "./public_html/components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css",
         "./public_html/components/font-awesome-animation/dist/font-awesome-animation.min.css",
         "./public_html/components/jquery-ui-dist/jquery-ui.min.css",
@@ -246,7 +242,6 @@ var src = {
         "./public_html/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.css"
     ],
     "fonts": [
-        "./public_html/components/material-design-icons/iconfont/MaterialIcons-Regular.*",
         "./public_html/components/font-awesome/web-fonts-with-css/webfonts/**/*",
         "./public_html/components/jquery-contextmenu/dist/font/**/*",
         "./public_html/components/summernote/dist/font/**/*",
