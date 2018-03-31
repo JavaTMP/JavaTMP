@@ -246,22 +246,12 @@ var src = {
         "./public_html/components/jquery-contextmenu/dist/font/**/*",
         "./public_html/components/summernote/dist/font/**/*",
         "./public_html/components/slick-carousel/slick/fonts/**/*",
-        "./public_html/assets/fonts/**/*"
+        "./public_html/assets/src/fonts/**/*"
     ],
     "img": [
         "./public_html/components/slick-carousel/slick/ajax-loader.gif",
         "./public_html/components/malihu-custom-scrollbar-plugin/mCSB_buttons.png"
     ],
-//    "data": [
-//        {"from": "./public_html/components/material-design-icons/iconfont/MaterialIcons-Regular.*", "to": "./public_html/assets/dist/fonts"},
-//        {"from": "./public_html/components/font-awesome/web-fonts-with-css/webfonts/**/*", "to": "./public_html/assets/dist/fonts"},
-//        {"from": "./public_html/components/jquery-contextmenu/dist/font/**/*", "to": "./public_html/assets/dist/fonts"},
-//        {"from": "./public_html/components/summernote/dist/font/**/*", "to": "./public_html/assets/dist/fonts"},
-//        {"from": "./public_html/components/slick-carousel/slick/ajax-loader.gif", "to": "./public_html/assets/dist/img"},
-//        {"from": "./public_html/components/slick-carousel/slick/fonts/**/*", "to": "./public_html/assets/dist/fonts"},
-//        {"from": "./public_html/components/malihu-custom-scrollbar-plugin/mCSB_buttons.png", "to": "./public_html/assets/dist/img"},
-//        {"from": "./public_html/assets/fonts/**/*", "to": "./public_html/assets/dist/fonts"}
-//    ],
     "js": ["./public_html/components/jquery/dist/jquery.min.js",
         "./public_html/components/jquery-ui-dist/jquery-ui.min.js",
         "./public_html/components/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js",
@@ -366,7 +356,7 @@ gulp.task('copy-components', ["delete-components"], function () {
         }
     }
 });
-gulp.task('generate-dist', ["delete-dist", "delete-css", "delete-js", "main-sass", "compress-js"], function (cb) {
+gulp.task('generate-dist', ['copy-components', "delete-dist", "delete-css", "delete-js", "main-sass", "compress-js"], function (cb) {
     async.series([
         function (next) {
             gulp.src(['./public_html/assets/src/sass/main.scss'])
@@ -377,16 +367,12 @@ gulp.task('generate-dist', ["delete-dist", "delete-css", "delete-js", "main-sass
                     }))
                     .pipe(cleanCSS())
                     .pipe(rename({suffix: '.min'}))
-                    .pipe(gulp.dest('./public_html/assets/css/'))
+                    .pipe(gulp.dest('./public_html/assets/dist/css'))
                     .on('end', next);
         },
         function (next) {
-            src.css.push("./public_html/assets/css/main.min.css");
-            next();
-        },
-        function (next) {
             gulp.src(src.css)
-                    .pipe(concat("javatmp-all.min.css", {newLine: '\n'}))
+                    .pipe(concat("javatmp-plugins-all.min.css", {newLine: '\n'}))
                     .pipe(gulp.dest("./public_html/assets/dist/css"))
                     .on('end', next);
         },
@@ -396,30 +382,15 @@ gulp.task('generate-dist', ["delete-dist", "delete-css", "delete-js", "main-sass
                     .pipe(eslint.format())
                     .pipe(uglify({output: {comments: /^!/}}))
                     .pipe(rename({suffix: '.min'}))
-                    .pipe(gulp.dest('./public_html/assets/js/'))
+                    .pipe(gulp.dest('./public_html/assets/dist/js/'))
                     .on('end', next);
-        },
-        function (next) {
-            src.js.push("./public_html/assets/js/javatmp.min.js");
-            next();
         },
         function (next) {
             gulp.src(src.js)
-                    .pipe(concat("javatmp-all.min.js", {newLine: '\n;'}))
+                    .pipe(concat("javatmp-plugins-all.min.js", {newLine: '\n;'}))
                     .pipe(gulp.dest("./public_html/assets/dist/js"))
                     .on('end', next);
         },
-//        function (next) {
-//            for (var i = 0; i < src.data.length; i++) {
-//                var componentResource = src.data[i];
-//                var to = componentResource.to;
-//                var from = componentResource.from;
-//                console.log("copy resource from [" + from + "] to [" + to + "] processCSS [" + componentResource.processCSS + "], processJS [" + componentResource.processJS + "]");
-//                gulp.src(from).pipe(gulp.dest(to));
-//            }
-//            next();
-//        }
-////        ,
         function (next) {
             gulp.src(src.img)
                     .pipe(gulp.dest("./public_html/assets/dist/img"))
@@ -429,6 +400,9 @@ gulp.task('generate-dist', ["delete-dist", "delete-css", "delete-js", "main-sass
             gulp.src(src.fonts)
                     .pipe(gulp.dest("./public_html/assets/dist/fonts"))
                     .on('end', next);
+        },
+        function (next) {
+            del.sync([config.destComponentsLib, "./public_html/assets/css", "./public_html/assets/js"], next);
         }
     ], cb);
 });
