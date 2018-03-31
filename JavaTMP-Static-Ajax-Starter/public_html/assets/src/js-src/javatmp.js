@@ -159,8 +159,9 @@
 
         // listen to transition on sidebar instead of fixed wait to trigger event
         $('.sidebar').on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', function (event) {
-            var propertyName = event.originalEvent.propertyName;
-            if ($(".sidebar-toggler-button").prop('disabled') && (propertyName.indexOf("margin-" + javatmp.settings.floatDefault) !== -1)) {
+            if ($(".sidebar-toggler-button").prop('disabled')
+                    && (event.originalEvent.propertyName)
+                    && (event.originalEvent.propertyName.indexOf("margin-" + javatmp.settings.floatDefault) !== -1)) {
                 $(".sidebar-toggler-button").prop('disabled', false);
                 if ((javatmp.isWidthSmall() === false)) {
                     $(javatmp.settings.defaultOutputSelector).trigger(javatmp.settings.javaTmpContainerResizeEventName);
