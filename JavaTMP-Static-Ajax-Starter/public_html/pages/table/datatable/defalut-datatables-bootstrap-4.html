@@ -531,17 +531,14 @@
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
                 // fire when user resize browser window or sidebar hide / show
-                console.log("javaTmpContainerResizeEventName");
                 table.columns.adjust().draw();
             });
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenCompress, function (event, card) {
                 // when card compress by pressing the top right tool button
-                console.log("cardFullscreenCompress");
                 table.columns.adjust().draw();
             });
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenExpand, function (event, card) {
                 // when card Expand by pressing the top right tool button
-                console.log("cardFullscreenExpand");
                 table.columns.adjust().draw();
             });
 
