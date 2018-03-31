@@ -228,7 +228,6 @@ var src = {
         "./public_html/components/ion-rangeslider/css/ion.rangeSlider.skinHTML5.css",
         "./public_html/components/bootstrap-slider/dist/css/bootstrap-slider.min.css",
         "./public_html/components/fullcalendar/dist/fullcalendar.min.css",
-//        "./public_html/components/fullcalendar/dist/fullcalendar.print.min.css",
         "./public_html/components/cropper/dist/cropper.min.css",
         "./public_html/components/datatables.net-bs4/css/dataTables.bootstrap4.css",
         "./public_html/components/datatables.net-fixedheader-bs4/css/fixedHeader.bootstrap4.min.css",
@@ -240,6 +239,9 @@ var src = {
         "./public_html/components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css",
 //        "./public_html/components/bootstrap-reverse/dist/**/*",
         "./public_html/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.css"
+    ],
+    "cssForPrint": [
+        "./public_html/components/fullcalendar/dist/fullcalendar.print.min.css"
     ],
     "fonts": [
         "./public_html/components/font-awesome/web-fonts-with-css/webfonts/**/*",
@@ -373,6 +375,12 @@ gulp.task('generate-dist', ['copy-components', "delete-dist", "delete-css", "del
         function (next) {
             gulp.src(src.css)
                     .pipe(concat("javatmp-plugins-all.min.css", {newLine: '\n'}))
+                    .pipe(gulp.dest("./public_html/assets/dist/css"))
+                    .on('end', next);
+        },
+        function (next) {
+            gulp.src(src.cssForPrint)
+                    .pipe(concat("javatmp-plugins-print-all.min.css", {newLine: '\n'}))
                     .pipe(gulp.dest("./public_html/assets/dist/css"))
                     .on('end', next);
         },
