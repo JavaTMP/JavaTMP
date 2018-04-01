@@ -358,7 +358,7 @@ gulp.task('copy-components', ["delete-components"], function () {
         }
     }
 });
-gulp.task('generate-dist', ['copy-components', "delete-dist", "delete-css", "delete-js", "compress-js"], function (cb) {
+gulp.task('generate-dist', ['copy-components', "delete-dist", "delete-css", "delete-js"], function (cb) {
     async.series([
         function (next) {
             gulp.src([
@@ -465,16 +465,16 @@ gulp.task('delete-js', function () {
 gulp.task('sass', ["main-sass"], function () {
     console.log("sass generate css files successfully");
 });
-gulp.task('compress-js', ["delete-js"], function (cb) {
-    pump([
-        gulp.src('./public_html/assets/src/js-src/**/*'),
-        eslint(),
-        eslint.format(),
-        uglify({output: {comments: /^!/}}),
-        rename({suffix: '.min'}),
-        gulp.dest('./public_html/assets/js/')
-    ], cb);
-});
+//gulp.task('compress-js', ["delete-js"], function (cb) {
+//    pump([
+//        gulp.src('./public_html/assets/src/js-src/**/*'),
+//        eslint(),
+//        eslint.format(),
+//        uglify({output: {comments: /^!/}}),
+//        rename({suffix: '.min'}),
+//        gulp.dest('./public_html/assets/js/')
+//    ], cb);
+//});
 gulp.task('watch-sass-and-js', ["delete-css", "delete-js", "sass", "compress-js"], function () {
     console.log("watching scss & js files changing");
     gulp.watch('./public_html/assets/src/sass/**/*.scss', ['sass']);
