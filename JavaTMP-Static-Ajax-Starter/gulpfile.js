@@ -358,10 +358,10 @@ gulp.task('copy-components', ["delete-components"], function () {
         }
     }
 });
-gulp.task('generate-dist', ['copy-components', "delete-dist", "delete-css", "delete-js", "main-sass", "compress-js"], function (cb) {
+gulp.task('generate-dist', ['copy-components', "delete-dist", "delete-css", "delete-js", "compress-js"], function (cb) {
     async.series([
         function (next) {
-            gulp.src(['./public_html/assets/src/sass/main.scss'])
+            gulp.src(['./public_html/assets/src/sass/javatmp-default.scss'])
                     .pipe(sass().on('error', sass.logError))
                     .pipe(autoprefixer({
                         browsers: ['last 2 versions'],
@@ -428,17 +428,17 @@ gulp.task('delete-css', function () {
 gulp.task('delete-js', function () {
     return del(['./public_html/assets/js/**/*']);
 });
-gulp.task('main-sass', ["delete-css"], function () {
-    return gulp.src(['./public_html/assets/src/sass/main.scss'])
-            .pipe(sass().on('error', sass.logError))
-            .pipe(autoprefixer({
-                browsers: ['last 2 versions'],
-                cascade: false
-            }))
-            .pipe(cleanCSS())
-            .pipe(rename({suffix: '.min'}))
-            .pipe(gulp.dest('./public_html/assets/css/'));
-});
+//gulp.task('main-sass', ["delete-css"], function () {
+//    return gulp.src(['./public_html/assets/src/sass/main.scss'])
+//            .pipe(sass().on('error', sass.logError))
+//            .pipe(autoprefixer({
+//                browsers: ['last 2 versions'],
+//                cascade: false
+//            }))
+//            .pipe(cleanCSS())
+//            .pipe(rename({suffix: '.min'}))
+//            .pipe(gulp.dest('./public_html/assets/css/'));
+//});
 //gulp.task('plugins-sass', ["main-sass"], function () {
 //    return gulp.src(['./public_html/assets/src/sass/plugins/**/*.scss'])
 //            .pipe(sass().on('error', sass.logError))
