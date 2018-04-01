@@ -361,7 +361,8 @@ gulp.task('copy-components', ["delete-components"], function () {
 gulp.task('generate-dist', ['copy-components', "delete-dist", "delete-css", "delete-js", "compress-js"], function (cb) {
     async.series([
         function (next) {
-            gulp.src(['./public_html/assets/src/sass/javatmp-default.scss'])
+            gulp.src([
+                './public_html/assets/src/sass/javatmp-*.scss'])
                     .pipe(sass().on('error', sass.logError))
                     .pipe(autoprefixer({
                         browsers: ['last 2 versions'],
