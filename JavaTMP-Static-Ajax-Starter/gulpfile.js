@@ -493,7 +493,7 @@ gulp.task('watch-sass-and-js', ["delete-css", "delete-js", "sass", "compress-js"
     gulp.watch('./public_html/assets/src/sass/**/*.scss', ['sass']);
     gulp.watch('./public_html/assets/src/js-src/**/*', ['compress-js']);
 });
-gulp.task('default', ['watch-sass-and-js'], function () {
+gulp.task('default', ['generate-dist'], function () {
     process.stdout.write("*** Finished @ [" + new Date() + "] ***");
 });
 

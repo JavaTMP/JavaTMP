@@ -53,6 +53,8 @@ $javatmp-sidebar-border-color: $border-color!default;
 // JavaTMP BreadcrumbBar variables
 $javatmp-breadcrumb-bar-height: 40px!default;
 $javatmp-breadcrumb-bar-bg: $javatmp-secondary-bg!default;
+$javatmp-breadcrumb-link-color: $primary;
+$javatmp-breadcrumb-link-active-color: darken($primary, 10%);
 //--------------------------------------------------
 
 // JavaTMP Main Content variables
