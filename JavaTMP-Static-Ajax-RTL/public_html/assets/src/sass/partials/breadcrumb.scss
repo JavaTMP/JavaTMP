@@ -37,8 +37,14 @@
             overflow: hidden;
             text-overflow: ellipsis;
         }
+        a {
+            color: $javatmp-breadcrumb-link-color;
+        }
+        a.active {
+            color: $javatmp-breadcrumb-link-active-color;
+        }
         .breadcrumb-item.active {
-            color: $primary;
+            color: $javatmp-breadcrumb-link-active-color;
         }
     }
     .breadcrumb-submenu {
