@@ -442,52 +442,6 @@ gulp.task('delete-css', function () {
 gulp.task('delete-js', function () {
     return del(['./public_html/assets/js/**/*']);
 });
-//gulp.task('main-sass', ["delete-css"], function () {
-//    return gulp.src(['./public_html/assets/src/sass/main.scss'])
-//            .pipe(sass().on('error', sass.logError))
-//            .pipe(autoprefixer({
-//                browsers: ['last 2 versions'],
-//                cascade: false
-//            }))
-//            .pipe(cleanCSS())
-//            .pipe(rename({suffix: '.min'}))
-//            .pipe(gulp.dest('./public_html/assets/css/'));
-//});
-//gulp.task('plugins-sass', ["main-sass"], function () {
-//    return gulp.src(['./public_html/assets/src/sass/plugins/**/*.scss'])
-//            .pipe(sass().on('error', sass.logError))
-//            .pipe(autoprefixer({
-//                browsers: ['last 2 versions'],
-//                cascade: false
-//            }))
-//            .pipe(cleanCSS())
-//            .pipe(rename({suffix: '.min'}))
-//            .pipe(gulp.dest('./public_html/assets/css/plugins/'));
-//});
-//gulp.task('pages-sass', ["plugins-sass"], function () {
-//    return gulp.src(['./public_html/assets/src/sass/pages/**/*.scss'])
-//            .pipe(sass().on('error', sass.logError))
-//            .pipe(autoprefixer({
-//                browsers: ['last 2 versions'],
-//                cascade: false
-//            }))
-//            .pipe(cleanCSS())
-//            .pipe(rename({suffix: '.min'}))
-//            .pipe(gulp.dest('./public_html/assets/css/pages/'));
-//});
-gulp.task('sass', ["main-sass"], function () {
-    console.log("sass generate css files successfully");
-});
-//gulp.task('compress-js', ["delete-js"], function (cb) {
-//    pump([
-//        gulp.src('./public_html/assets/src/js-src/**/*'),
-//        eslint(),
-//        eslint.format(),
-//        uglify({output: {comments: /^!/}}),
-//        rename({suffix: '.min'}),
-//        gulp.dest('./public_html/assets/js/')
-//    ], cb);
-//});
 gulp.task('watch-sass-and-js', ["delete-css", "delete-js", "sass", "compress-js"], function () {
     console.log("watching scss & js files changing");
     gulp.watch('./public_html/assets/src/sass/**/*.scss', ['sass']);
