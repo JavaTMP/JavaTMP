@@ -55,7 +55,7 @@ $javatmp-custom-nav-link-reset-border-radius: $nav-pills-border-radius!default;
             }
         }
         &:not(:last-child) .nav-link {
-            margin-right: $javatmp-custom-nav-arrow-sep;
+            /*margin-right: $javatmp-custom-nav-arrow-sep;*/
             border-top-right-radius: 0rem;
             border-bottom-right-radius: 0rem;
             &:after {
@@ -169,7 +169,7 @@ $javatmp-custom-nav-link-reset-border-radius: $nav-pills-border-radius!default;
             }
         }
         &:not(:last-child) .nav-link {
-            margin-left: $javatmp-custom-nav-arrow-sep;
+            /*margin-left: $javatmp-custom-nav-arrow-sep;*/
             border-top-left-radius: 0rem;
             border-bottom-left-radius: 0rem;
             &:after {
