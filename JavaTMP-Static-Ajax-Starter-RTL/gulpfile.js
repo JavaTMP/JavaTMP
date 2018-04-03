@@ -205,6 +205,10 @@ var config = {
         ],
         "bootstrap-alert-wrapper": [
             {"from": "${sourceNodeLib}/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js", "to": "${destComponentsLib}/bootstrap-alert-wrapper/dist"}
+        ],
+        "jquery-contextmenurtl": [
+            {"from": "${sourceNodeLib}/jquery-contextmenurtl/dist/css/jquery.contextMenuRtl.min.css", "to": "${destComponentsLib}/jquery-contextmenurtl/dist/css"},
+            {"from": "${sourceNodeLib}/jquery-contextmenurtl/dist/js/jquery.contextMenuRtl.min.js", "to": "${destComponentsLib}/jquery-contextmenurtl/dist/js"}
         ]
     }
 };
@@ -238,7 +242,9 @@ var src = {
         "./public_html/components/slick-carousel/slick/slick-theme.css",
         "./public_html/components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css",
 //        "./public_html/components/bootstrap-reverse/dist/**/*",
-        "./public_html/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.css"
+        "./public_html/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.css",
+        "./public_html/components/jquery-contextmenurtl/dist/css/jquery.contextMenuRtl.min.css"
+
     ],
     "cssForPrint": [
         "./public_html/components/fullcalendar/dist/fullcalendar.print.min.css"
@@ -302,7 +308,8 @@ var src = {
         "./public_html/components/bootstrap-modal-wrapper/dist/bootstrap-modal-wrapper-factory.min.js",
         "./public_html/components/bootstrap-actionable/dist/bootstrap-actionable.min.js",
         "./public_html/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.js",
-        "./public_html/components/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js"
+        "./public_html/components/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js",
+        "./public_html/components/jquery-contextmenurtl/dist/js/jquery.contextMenuRtl.min.js"
     ]
 }
 ;
@@ -376,6 +383,19 @@ gulp.task('generate-dist', ['copy-components', "delete-dist", "delete-css", "del
         function (next) {
             gulp.src([
                 './public_html/assets/src/sass/javatmp-*.scss'])
+                    .pipe(sass().on('error', sass.logError))
+                    .pipe(autoprefixer({
+                        browsers: ['last 2 versions'],
+                        cascade: false
+                    }))
+                    .pipe(cleanCSS())
+                    .pipe(rename({suffix: '.min'}))
+                    .pipe(gulp.dest('./public_html/assets/dist/css'))
+                    .on('end', next);
+        },
+        function (next) {
+            gulp.src([
+                './public_html/assets/src/sass-rtl/javatmp-*.scss'])
                     .pipe(sass().on('error', sass.logError))
                     .pipe(autoprefixer({
                         browsers: ['last 2 versions'],

@@ -1,0 +1,13 @@
+$dataTables-cell-padding: $table-cell-padding!default;
+
+table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > td:first-child,
+table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > th:first-child {
+    padding-left: $dataTables-cell-padding;
+    padding-right: 30px;
+
+}
+table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>td:first-child:before,
+table.dataTable.dtr-inline.collapsed>tbody>tr[role="row"]>th:first-child:before {
+    left: auto;
+    right: 4px;
+}

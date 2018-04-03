@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" dir="rtl">
     <head>
         <title>JavaTMP - Java Bootstrap Admin and Dashboard Template</title>
         <!-- Required meta tags -->
@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="assets/dist/css/javatmp-plugins-all.min.css" rel="stylesheet" type="text/css"/>
         <link href='assets/dist/css/javatmp-plugins-print-all.min.css' rel='stylesheet' media='print' />
-        <link id="themeStyleSheet" href="assets/dist/css/javatmp-default.min.css" rel="stylesheet" type="text/css"/>
+        <link id="themeStyleSheet" href="assets/dist/css/javatmp-default-rtl.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <body class="sidebar-active">
         <nav class="main-javatmp-navbar navbar fixed-top my-0 py-0">
@@ -1318,6 +1318,12 @@
             ::-ms-clear {
                 display: none;
             }
+            /* For RTL: */
+            .search-menu-form .fa.form-control-clear {
+                right: auto;
+                left: 0;
+
+            }
 
             /* Extra large devices (large desktops, 1200px and up) */
             @media (min-width: 1200px){
@@ -1376,6 +1382,32 @@
                         }
                     });
                 });
+                $("body").on('shown.bs.dropdown', '.main-body-content-container .dropdown, .main-body-content-container .btn-group, .main-body-content-container .input-group-prepend, .main-body-content-container .input-group-append', function () {
+//            $('.dropdown, .btn-group, .input-group-prepend, .input-group-append').on('shown.bs.dropdown', function () {
+                    console.log("firing recalculate popper sub len [" + $(this).parents(".dropdown-submenu").lenght + "]");
+                    if ($(this).parents(".navbar").length !== 0 || (!!$(this).parents(".dropdown-submenu").lenght && $(this).parents(".dropdown-submenu").lenght !== 0)) {
+                        console.log("Cancel and return navbar len [" + $(this).parents(".navbar").length + "] .dropdown-submenu len [" + $(this).parents(".dropdown-submenu").lenght + "]");
+                        return;
+                    }
+
+                    var dropDown = $(this).children(".dropdown-menu");
+                    setTimeout(function () {
+                        var previous =
+                                dropDown.css("-webkit-transform") ||
+                                dropDown.css("-moz-transform") ||
+                                dropDown.css("-ms-transform") ||
+                                dropDown.css("-o-transform") ||
+                                dropDown.css("transform") ||
+                                "Either no transform set, or browser doesn't do getComputedStyle";
+                        var values = previous.split("(")[1];
+                        values = values.split(")")[0];
+                        values = values.split(", ");
+                        var x = 0;
+                        var y = parseInt(values[5]);
+                        var z = 0;
+                        dropDown.css({transform: "translate3d(" + x + "px," + y + "px," + z + "px)", left: "auto", right: "auto"});
+                    }, 0);
+                });
             });
         </script>
         <!-- build:remove -->
@@ -1413,7 +1445,11 @@
                     updateURLHash: true,
                     defaultPassData: {_ajax: "ajax", _ajaxGlobalBlockUI: true},
                     defaultOutputSelector: '.main-body-content-container',
-                    defaultUrl: 'pages/home.html'
+                    defaultUrl: 'pages/home.html',
+                    floatDefault: 'right',
+                    floatReverse: 'left',
+                    direction: "rtl",
+                    isRTL: true
                 });
             });
         </script>

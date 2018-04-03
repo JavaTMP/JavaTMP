@@ -1,0 +1,24 @@
+
+@import "../sass/javatmp-default.scss";
+
+/*!********************************************
+Bootstrap RTL resetter import
+*********************************************/
+@import "../../../../node_modules/bootstrap-reverse/src/sass/bootstrap-reverse.scss";
+/*!********************************************
+JavaTMP Base RTL Tempalte Imports
+*********************************************/
+
+@import "partials-rtl/base-rtl.scss";
+@import "partials-rtl/navbar-rtl.scss";
+@import "partials-rtl/sidebar-rtl.scss";
+@import "partials-rtl/breadcrumb-rtl.scss";
+@import "partials-rtl/footer-rtl.scss";
+
+/*!********************************************
+Custom RTL Plugins Imports
+*********************************************/
+@import "plugins-rtl/custom-dataTables.bootstrap4-rtl.scss";
+@import "plugins-rtl/custom-datatables.net-responsive-bs4-rtl.scss";
+@import "plugins-rtl/custom-datatables.net-select-bs4-rtl.scss";
+
