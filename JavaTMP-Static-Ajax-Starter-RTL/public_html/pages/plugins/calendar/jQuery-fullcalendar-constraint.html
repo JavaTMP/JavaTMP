@@ -42,10 +42,11 @@
         // <--- HERE --->
         //
         $('#calendar').fullCalendar({
+            isRTL: true,
             header: {
-                left: 'prev,next today',
+                right: 'today next,prev',
                 center: 'title',
-                right: 'month,agendaWeek,agendaDay,listMonth'
+                left: 'listMonth,agendaDay,agendaWeek,month'
             },
             defaultDate: '2018-02-12',
             navLinks: true, // can click day/week names to navigate views

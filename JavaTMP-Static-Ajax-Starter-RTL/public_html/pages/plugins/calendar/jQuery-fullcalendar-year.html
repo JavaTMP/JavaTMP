@@ -92,10 +92,11 @@
             for (var i = 1; i <= 12; i++) {
                 var id = '#calendar' + i;
                 $(id).fullCalendar({
+                    isRTL: true,
                     header: {
-                        left: '',
-                        center: 'title',
-                        right: ''
+//                        left: '',
+                        right: 'title',
+                        left: 'month,agendaDay'
                     },
                     defaultDate: '2018-02-12',
                     navLinks: true, // can click day/week names to navigate views

@@ -58,7 +58,7 @@
             padding: 0 10px;
             border: 1px solid #ccc;
             background: #eee;
-            text-align: left;
+            text-align: right;
         }
 
         #external-events h4 {
@@ -118,10 +118,11 @@
 
                 $('#calendar').fullCalendar({
 //                    theme: "bootstrap4",
+                    isRTL: true,
                     header: {
-                        left: 'prev,next today',
+                        right: 'today next,prev ',
                         center: 'title',
-                        right: 'month,agendaWeek,agendaDay'
+                        left: 'month,agendaWeek,agendaDay'
                     },
                     editable: true,
                     droppable: true, // this allows things to be dropped onto the calendar
