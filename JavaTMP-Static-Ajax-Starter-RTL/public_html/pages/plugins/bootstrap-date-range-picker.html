@@ -148,10 +148,10 @@
                                             </div>
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" id="locale"> locale (with example settings)
+                                                    <input checked="" type="checkbox" id="locale"> locale (with example settings)
                                                 </label>
                                                 <label id="rtl-wrap">
-                                                    <input type="checkbox" id="rtl"> RTL (right-to-left)
+                                                    <input checked="" type="checkbox" id="rtl"> RTL (right-to-left)
                                                 </label>
                                             </div>
                                             <div class="checkbox">
@@ -179,8 +179,8 @@
                                             <div class="form-group">
                                                 <label for="opens">opens</label>
                                                 <select id="opens" class="form-control">
-                                                    <option value="right" selected>right</option>
-                                                    <option value="left">left</option>
+                                                    <option value="left" selected="">left</option>
+                                                    <option value="right">right</option>
                                                     <option value="center">center</option>
                                                 </select>
                                             </div>
@@ -234,7 +234,7 @@
         .demo i {
             position: absolute;
             bottom: 10px;
-            right: 10px;
+            left: 10px;
             top: auto;
             cursor: pointer;
             z-index: 3;
@@ -247,10 +247,15 @@
 
             // fire AFTER all transition done and your ajax content is shown to user.
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
-                $('#default-drp').daterangepicker({"opens": "left"});
-                $('#default-drp-with-options').daterangepicker({
-                    "opens": "left",
+                $('#default-drp').daterangepicker({"opens": "right",
                     locale: {
+                        "direction": "rtl",
+                        format: 'YYYY-MM-DD'
+                    }});
+                $('#default-drp-with-options').daterangepicker({
+                    "opens": "right",
+                    locale: {
+                        "direction": "rtl",
                         format: 'YYYY-MM-DD'
                     },
                     startDate: '2017-01-01',
@@ -261,14 +266,21 @@
                 $('#Date-and-Time').daterangepicker({
                     timePicker: true,
                     timePickerIncrement: 30,
+                    "opens": "right",
                     locale: {
+                        "direction": "rtl",
                         format: 'MM/DD/YYYY h:mm A'
                     }
+
                 });
                 $('#single_date_picker').daterangepicker({
                     "opens": "right",
                     singleDatePicker: true,
-                    showDropdowns: true
+                    showDropdowns: true,
+                    locale: {
+                        "direction": "rtl",
+                        format: 'MM/DD/YYYY h:mm A'
+                    }
                 });
 
                 var start = moment().subtract(29, 'days');
@@ -279,9 +291,13 @@
                 }
 
                 $('#reportrange').daterangepicker({
-                    "opens": "right",
+                    "opens": "left",
                     startDate: start,
                     endDate: end,
+                    locale: {
+                        "direction": "rtl",
+                        format: 'MM/DD/YYYY h:mm A'
+                    },
                     ranges: {
                         'Today': [moment(), moment()],
                         'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
@@ -361,7 +377,7 @@
                     if ($('#timePicker24Hour').is(':checked'))
                         options.timePicker24Hour = true;
 
-                    if ($('#timePickerIncrement').val().length && $('#timePickerIncrement').val() != 1)
+                    if ($('#timePickerIncrement').val().length && $('#timePickerIncrement').val() !== 1)
                         options.timePickerIncrement = parseInt($('#timePickerIncrement').val(), 10);
 
                     if ($('#timePickerSeconds').is(':checked'))
