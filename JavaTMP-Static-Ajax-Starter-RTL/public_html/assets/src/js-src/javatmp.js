@@ -169,11 +169,15 @@
             } else {
                 // re cheek if auto-show is activiated or not bug in ie11 & edge:
                 if ((javatmp.isWidthSmall() === false)
-                        && $("body").hasClass("mouse-auto-show")
+                        && ($("body").hasClass("mouse-auto-show") === false)
                         && ($('body').hasClass("sidebar-active") === false)) {
                     setTimeout(function () {
-                        $(window).off('mousemove', handlingMouseMove);
-                        $(window).on('mousemove', handlingMouseMove);
+                        if ((javatmp.isWidthSmall() === false)
+                                && ($("body").hasClass("mouse-auto-show") === false)
+                                && ($('body').hasClass("sidebar-active") === false)) {
+                            $("body").addClass("mouse-auto-show");
+                            $(window).on('mousemove', handlingMouseMove);
+                        }
                     }, 1000);
                 }
             }
@@ -204,7 +208,7 @@
                 if (!javatmp.isWidthSmall()) {
                     $("body").addClass("mouse-auto-show");
                     // just in case:
-                    $(window).off('mousemove', handlingMouseMove);
+//                    $(window).off('mousemove', handlingMouseMove);
                     $(window).on('mousemove', handlingMouseMove);
                 }
             } else {
@@ -263,6 +267,7 @@
 
                                     if (javatmp.isWidthSmall() || ($("body").hasClass("mouse-auto-show") && $('body').hasClass("sidebar-active"))) {
                                         $(window).off('mousemove', handlingMouseMove);
+                                        $("body").removeClass("mouse-auto-show");
                                         $('body').removeClass("sidebar-active");
                                     }
 
