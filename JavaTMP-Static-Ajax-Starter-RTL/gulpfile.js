@@ -369,7 +369,7 @@ gulp.task('generate-dist', ['copy-components', "delete-dist", "delete-css", "del
     async.series([
         function (next) {
             gulp.src([
-                './public_html/assets/src/sass/themes/javatmp-*.scss'])
+                './public_html/assets/src/sass-rtl/themes-rtl/javatmp-*.scss'])
                     .pipe(sass().on('error', sass.logError))
                     .pipe(autoprefixer({
                         browsers: ['last 2 versions'],
@@ -380,32 +380,32 @@ gulp.task('generate-dist', ['copy-components', "delete-dist", "delete-css", "del
                     .pipe(gulp.dest('./public_html/assets/dist/css'))
                     .on('end', next);
         },
-        function (next) {
-            gulp.src([
-                './public_html/assets/src/sass/javatmp-*.scss'])
-                    .pipe(sass().on('error', sass.logError))
-                    .pipe(autoprefixer({
-                        browsers: ['last 2 versions'],
-                        cascade: false
-                    }))
-                    .pipe(cleanCSS())
-                    .pipe(rename({suffix: '.min'}))
-                    .pipe(gulp.dest('./public_html/assets/dist/css'))
-                    .on('end', next);
-        },
-        function (next) {
-            gulp.src([
-                './public_html/assets/src/sass-rtl/javatmp-*.scss'])
-                    .pipe(sass().on('error', sass.logError))
-                    .pipe(autoprefixer({
-                        browsers: ['last 2 versions'],
-                        cascade: false
-                    }))
-                    .pipe(cleanCSS())
-                    .pipe(rename({suffix: '.min'}))
-                    .pipe(gulp.dest('./public_html/assets/dist/css'))
-                    .on('end', next);
-        },
+//        function (next) {
+//            gulp.src([
+//                './public_html/assets/src/sass/javatmp-*.scss'])
+//                    .pipe(sass().on('error', sass.logError))
+//                    .pipe(autoprefixer({
+//                        browsers: ['last 2 versions'],
+//                        cascade: false
+//                    }))
+//                    .pipe(cleanCSS())
+//                    .pipe(rename({suffix: '.min'}))
+//                    .pipe(gulp.dest('./public_html/assets/dist/css'))
+//                    .on('end', next);
+//        },
+//        function (next) {
+//            gulp.src([
+//                './public_html/assets/src/sass-rtl/javatmp-*.scss'])
+//                    .pipe(sass().on('error', sass.logError))
+//                    .pipe(autoprefixer({
+//                        browsers: ['last 2 versions'],
+//                        cascade: false
+//                    }))
+//                    .pipe(cleanCSS())
+//                    .pipe(rename({suffix: '.min'}))
+//                    .pipe(gulp.dest('./public_html/assets/dist/css'))
+//                    .on('end', next);
+//        },
         function (next) {
             gulp.src(src.css)
                     .pipe(concat("javatmp-plugins-all.min.css", {newLine: '\n'}))
