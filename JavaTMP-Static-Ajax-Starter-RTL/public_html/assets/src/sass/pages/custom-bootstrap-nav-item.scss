@@ -1,0 +1,250 @@
+// JavaTMP Custom Nav Customization Variables
+$javatmp-custom-nav-arrow-size: 20px!default;
+$javatmp-custom-nav-arrow-sep: 8px!default;
+
+$javatmp-custom-nav-link-bg: $gray-100!default;
+$javatmp-custom-nav-link-color: $primary!default;
+$javatmp-custom-nav-link-hover-bg: darken($primary, 7.5%)!default;
+$javatmp-custom-nav-link-hover-color: $white!default;
+
+$javatmp-custom-nav-link-active-bg: darken($primary, 10%)!default;
+$javatmp-custom-nav-link-active-color: $white!default;
+$javatmp-custom-nav-link-active-hover-bg: darken($primary, 12.5%)!default;
+$javatmp-custom-nav-link-active-hover-color: $white!default;
+
+$javatmp-custom-nav-link-done-bg: $success!default;
+$javatmp-custom-nav-link-done-color: $white!default;
+$javatmp-custom-nav-link-done-hover-bg: darken($success, 7.5%)!default;
+$javatmp-custom-nav-link-done-hover-color: $white!default;
+
+$javatmp-custom-nav-link-reset-border-radius: $nav-pills-border-radius!default;
+//--------------------------------------------------
+
+@mixin arrow($color) {
+    width: 0px;
+    height: 0px;
+    border-top: $javatmp-custom-nav-arrow-size inset transparent;
+    border-bottom: $javatmp-custom-nav-arrow-size inset transparent;
+    border-left: $javatmp-custom-nav-arrow-size solid $color;
+    position: absolute;
+    content: "";
+    top: 0;
+}
+.nav-wizard {
+    .nav-item {
+        .nav-link {
+            position: relative;
+            background-color: $javatmp-custom-nav-link-bg;
+            color: $javatmp-custom-nav-link-color;
+            .badge {
+                margin-left: 3px;
+            }
+            &:hover {
+                background-color: $javatmp-custom-nav-link-hover-bg;
+                color: $javatmp-custom-nav-link-hover-color;
+            }
+        }
+        &:not(:first-child) .nav-link {
+            padding-left: 2 * $javatmp-custom-nav-arrow-size - $javatmp-custom-nav-arrow-sep;
+            &:before {
+                @include arrow(#fff);
+                left: 0;
+            }
+            &:hover:before {
+                border-right-color: $javatmp-custom-nav-link-hover-bg;
+            }
+        }
+        &:not(:last-child) .nav-link {
+            /*margin-right: $javatmp-custom-nav-arrow-sep;*/
+            border-top-right-radius: 0rem;
+            border-bottom-right-radius: 0rem;
+            &:after {
+                @include arrow($javatmp-custom-nav-link-bg);
+                right: -$javatmp-custom-nav-arrow-size;
+                z-index: 2;
+            }
+            &:hover:after {
+                border-left-color: $javatmp-custom-nav-link-hover-bg;
+            }
+        }
+        .active {
+            background-color: $javatmp-custom-nav-link-active-bg;
+            color: $javatmp-custom-nav-link-active-color;
+            &:hover {
+                background-color: $javatmp-custom-nav-link-active-hover-bg;
+                color: $javatmp-custom-nav-link-active-hover-color;
+            }
+        }
+        &:not(:first-child) .active {
+            &:before {
+                border-right-color: $javatmp-custom-nav-link-active-bg;
+            }
+            &:hover:before {
+                border-right-color: $javatmp-custom-nav-link-active-hover-bg;
+            }
+        }
+        &:not(:last-child) .active {
+            &:after {
+                border-left-color: $javatmp-custom-nav-link-active-bg;
+            }
+            &:hover:after {
+                border-left-color: $javatmp-custom-nav-link-active-hover-bg;
+            }
+        }
+        .done {
+            background-color: $javatmp-custom-nav-link-done-bg;
+            color: $javatmp-custom-nav-link-done-color;
+            &:hover {
+                background-color: $javatmp-custom-nav-link-done-hover-bg;
+                color: $javatmp-custom-nav-link-done-hover-color;
+            }
+        }
+        &:not(:first-child) .done {
+            &:before {
+                border-right-color: $javatmp-custom-nav-link-done-bg;
+            }
+            &:hover:before {
+                border-right-color: $javatmp-custom-nav-link-done-hover-bg;
+            }
+        }
+        &:not(:last-child) .done {
+            &:after {
+                border-left-color: $javatmp-custom-nav-link-done-bg;
+            }
+            &:hover:after {
+                border-left-color: $javatmp-custom-nav-link-done-hover-bg;
+            }
+        }
+    }
+    > .nav-item {
+        > .nav-link {
+            @media (max-width: 768px) {
+                margin-right: 0px!important;
+                &:before,&:after {
+                    border: none !important;
+                }
+            }
+        }
+    }
+    &.nav-pills > .nav-item:not(:last-child) .nav-link {
+        @media (max-width: 768px) {
+            border-top-right-radius: $javatmp-custom-nav-link-reset-border-radius;
+            border-bottom-right-radius: $javatmp-custom-nav-link-reset-border-radius;
+        }
+    }
+}
+
+@mixin arrow-rtl($color) {
+    width: 0px;
+    height: 0px;
+    border-top: $javatmp-custom-nav-arrow-size inset transparent;
+    border-bottom: $javatmp-custom-nav-arrow-size inset transparent;
+    border-right: $javatmp-custom-nav-arrow-size solid $color;
+    position: absolute;
+    content: "";
+    top: 0;
+}
+.nav-wizard-rtl {
+    .nav-item {
+        .nav-link {
+            position: relative;
+            background-color: $javatmp-custom-nav-link-bg;
+            color: $javatmp-custom-nav-link-color;
+            .badge {
+                margin-right: 3px;
+            }
+            &:hover {
+                background-color: $javatmp-custom-nav-link-hover-bg;
+                color: $javatmp-custom-nav-link-hover-color;
+            }
+        }
+        &:not(:first-child) .nav-link {
+            padding-right: 2 * $javatmp-custom-nav-arrow-size - $javatmp-custom-nav-arrow-sep;
+            &:before {
+                @include arrow-rtl(#fff);
+                right: 0;
+            }
+            &:hover:before {
+                border-left-color: $javatmp-custom-nav-link-hover-bg;
+            }
+        }
+        &:not(:last-child) .nav-link {
+            /*margin-left: $javatmp-custom-nav-arrow-sep;*/
+            border-top-left-radius: 0rem;
+            border-bottom-left-radius: 0rem;
+            &:after {
+                @include arrow-rtl($javatmp-custom-nav-link-bg);
+                left: -$javatmp-custom-nav-arrow-size;
+                z-index: 2;
+            }
+            &:hover:after {
+                border-right-color: $javatmp-custom-nav-link-hover-bg;
+            }
+        }
+        .active {
+            background-color: $javatmp-custom-nav-link-active-bg;
+            color: $javatmp-custom-nav-link-active-color;
+            &:hover {
+                background-color: $javatmp-custom-nav-link-active-hover-bg;
+                color: $javatmp-custom-nav-link-active-hover-color;
+            }
+        }
+        &:not(:first-child) .active {
+            &:before {
+                border-left-color: $javatmp-custom-nav-link-active-bg;
+            }
+
+            &:hover:before {
+                border-left-color: $javatmp-custom-nav-link-active-hover-bg;
+            }
+        }
+        &:not(:last-child) .active {
+            &:after {
+                border-right-color: $javatmp-custom-nav-link-active-bg;
+            }
+            &:hover:after {
+                border-right-color: $javatmp-custom-nav-link-active-hover-bg;
+            }
+        }
+        .done {
+            background-color: $javatmp-custom-nav-link-done-bg;
+            color: $javatmp-custom-nav-link-done-color;
+            &:hover {
+                background-color: $javatmp-custom-nav-link-done-hover-bg;
+                color: $javatmp-custom-nav-link-done-hover-color;
+            }
+        }
+        &:not(:first-child) .done {
+            &:before {
+                border-left-color: $javatmp-custom-nav-link-done-bg;
+            }
+            &:hover:before {
+                border-left-color: $javatmp-custom-nav-link-done-hover-bg;
+            }
+        }
+        &:not(:last-child) .done {
+            &:after {
+                border-right-color: $javatmp-custom-nav-link-done-bg;
+            }
+            &:hover:after {
+                border-right-color: $javatmp-custom-nav-link-done-hover-bg;
+            }
+        }
+    }
+    > .nav-item {
+        > .nav-link {
+            @media (max-width: 768px) {
+                margin-left: 0px!important;
+                &:before,&:after {
+                    border: none !important;
+                }
+            }
+        }
+    }
+    &.nav-pills > .nav-item:not(:last-child) .nav-link {
+        @media (max-width: 768px) {
+            border-top-left-radius: $javatmp-custom-nav-link-reset-border-radius;
+            border-bottom-left-radius: $javatmp-custom-nav-link-reset-border-radius;
+        }
+    }
+}
