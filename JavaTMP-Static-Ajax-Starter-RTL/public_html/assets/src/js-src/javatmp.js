@@ -181,7 +181,7 @@
 
         var menuTimeout = null;
         var handlingMouseMove = function (e) {
-            if (e.pageX < 10 || $('.sidebar').is(':hover')) {
+            if (e.pageX > ($(window).innerWidth() - 10) || $('.sidebar').is(':hover')) {
                 // Show the menu if mouse is within 10 pixels from the left or we are hovering over it
                 clearTimeout(menuTimeout);
                 menuTimeout = null;
