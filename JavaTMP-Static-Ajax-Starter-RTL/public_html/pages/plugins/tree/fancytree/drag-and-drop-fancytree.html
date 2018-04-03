@@ -40,10 +40,10 @@
                         checkboxSelected: "far fa-check-square",
                         checkboxUnknown: "far fa-minus-square",
                         dragHelper: "fa fa-arrows",
-                        dropMarker: "fa fa-arrow-right",
+                        dropMarker: "fa fa-arrow-left",
                         error: "fa fa-exclamation-triangle",
-                        expanderClosed: "fa fa-chevron-right",
-                        expanderLazy: "fa fa-chevron-right",
+                        expanderClosed: "fa fa-chevron-left",
+                        expanderLazy: "fa fa-chevron-left",
                         expanderOpen: "fa fa-chevron-down",
                         folder: "fa fa-folder",
                         folderOpen: "fa fa-folder-open",
@@ -160,6 +160,22 @@
                     },
                     activate: function (event, data) {
 //                        alert("activate " + data.node);
+                    },
+                    rtl: javatmp.settings.isRTL,
+                    keydown: function (event, data) {
+                        var KC = $.ui.keyCode,
+                                oe = event.originalEvent;
+                        // Swap LEFT/RIGHT keys
+                        switch (event.which) {
+                            case KC.LEFT:
+                                oe.keyCode = KC.RIGHT;
+                                oe.which = KC.RIGHT;
+                                break;
+                            case KC.RIGHT:
+                                oe.keyCode = KC.LEFT;
+                                oe.which = KC.LEFT;
+                                break;
+                        }
                     }
                 });
             }(jQuery));
