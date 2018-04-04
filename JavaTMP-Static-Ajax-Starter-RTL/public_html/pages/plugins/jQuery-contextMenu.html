@@ -79,11 +79,15 @@
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
             $.contextMenu({
-                selector: '.context-menu-one',
-                callback: function (key, options) {
-                    var m = "clicked: " + key;
-                    window.console && console.log(m) || alert(m);
+                rtl: true,
+                position: function (opt, x, y) {
+                    var menuWidth = $(opt.$menu).outerWidth();
+                    opt.$menu.css({top: y, left: x - menuWidth});
                 },
+                callback: function (key, options) {
+                    BootstrapModalWrapperFactory.showMessage('Selected action "' + key + '"');
+                },
+                selector: '.context-menu-one',
                 items: {
                     "edit": {name: "Edit", icon: "edit"},
                     "cut": {name: "Cut", icon: "cut"},
@@ -95,11 +99,15 @@
                 }
             });
             $.contextMenu({
+                rtl: true,
                 selector: '.left-context-menu-one',
                 trigger: 'left',
+                position: function (opt, x, y) {
+                    var menuWidth = $(opt.$menu).outerWidth();
+                    opt.$menu.css({top: y, left: x - menuWidth});
+                },
                 callback: function (key, options) {
-                    var m = "clicked: " + key;
-                    window.console && console.log(m) || alert(m);
+                    BootstrapModalWrapperFactory.showMessage('Selected action "' + key + '"');
                 },
                 items: {
                     "edit": {name: "Edit", icon: "edit"},
@@ -114,10 +122,14 @@
                 }
             });
             $.contextMenu({
+                rtl: true,
                 selector: '.left-context-submenus-one',
+                position: function (opt, x, y) {
+                    var menuWidth = $(opt.$menu).outerWidth();
+                    opt.$menu.css({top: y, left: x - menuWidth});
+                },
                 callback: function (key, options) {
-                    var m = "clicked: " + key;
-                    window.console && console.log(m) || alert(m);
+                    BootstrapModalWrapperFactory.showMessage('Selected action "' + key + '"');
                 },
                 items: {
                     "edit": {"name": "Edit", "icon": "edit"},
