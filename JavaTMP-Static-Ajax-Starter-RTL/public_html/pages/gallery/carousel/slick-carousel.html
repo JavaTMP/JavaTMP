@@ -176,12 +176,13 @@
         jQuery(function ($) {
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
-            $("#slickSimple1").slick();
+            $("#slickSimple1").slick({rtl: true});
 
             $("#slickSimple2").slick({
                 "slidesToShow": 3,
                 "slidesToScroll": 3,
-                dots: true
+                dots: true,
+                rtl: true
             });
             $("#slickSimple3").slick({
                 "slidesToShow": 3,
@@ -193,13 +194,15 @@
                 slidesToShow: 3,
                 slidesToScroll: 1,
                 autoplay: true,
-                autoplaySpeed: 2000
+                autoplaySpeed: 2000,
+                rtl: true
             });
             $('#slickSimple5').slick({
                 slidesToShow: 3,
                 slidesToScroll: 3,
                 autoplay: true,
-                autoplaySpeed: 2000
+                autoplaySpeed: 2000,
+                rtl: true
             });
 
 
