@@ -78,30 +78,11 @@
         jQuery(function ($) {
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
-            var currentMousePos = {x: -1, y: -1};
-            $(document).mousemove(function (event) {
-                currentMousePos.x = event.pageX;
-                currentMousePos.y = event.pageY;
-                currentMousePos.clientY = event.clientY;
-                currentMousePos.clientX = event.clientX;
-                currentMousePos.windowheight = window.innerHeight;
-                console.log(JSON.stringify(currentMousePos));
-            });
             $.contextMenu({
                 rtl: true,
                 position: function (opt, x, y) {
                     var menuWidth = $(opt.$menu).outerWidth();
-                    var menuHeight = $(opt.$menu).outerHeight();
-                    console.log(currentMousePos.clientY + " , " + menuHeight + " , " + (currentMousePos.clientY + menuHeight) + " more than " + currentMousePos.windowheight);
-                    var actualLocation = currentMousePos.clientY;
-                    if ((currentMousePos.clientY + menuHeight) > currentMousePos.windowheight) {
-                        console.log("it is more than so we show context on top");
-                        actualLocation = currentMousePos.y - menuHeight;
-                    } else {
-                        console.log("We can show the context down");
-                        actualLocation = currentMousePos.y;
-                    }
-                    opt.$menu.css({top: actualLocation, left: x - menuWidth});
+                    opt.$menu.css({top: y, left: x - menuWidth});
                 },
                 callback: function (key, options) {
                     BootstrapModalWrapperFactory.showMessage('Selected action "' + key + '"');
