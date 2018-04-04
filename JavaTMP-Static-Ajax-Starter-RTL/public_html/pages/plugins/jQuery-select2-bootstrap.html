@@ -1902,28 +1902,18 @@
         </div>
     </div>
     <style type="text/css">
-
-        a:hover, a:focus {
-            text-decoration: none;
-        }
-
         h1[id] {
             padding-top: 20px;
             margin-top: 0;
         }
-
-        /*        .row {
-                    padding-bottom: 20px;
-                }*/
-
         .select2-result-repository {
             padding-top: 4px;
             padding-bottom: 3px;
         }
         .select2-result-repository__avatar {
-            float: left;
+            float: right;
             width: 60px;
-            margin-right: 10px;
+            margin-left: 10px;
         }
         .select2-result-repository__avatar img {
             width: 100%;
@@ -1931,7 +1921,7 @@
             border-radius: 2px;
         }
         .select2-result-repository__meta {
-            margin-left: 70px;
+            margin-right: 70px;
         }
         .select2-result-repository__title {
             color: black;
@@ -1941,7 +1931,7 @@
             margin-bottom: 4px;
         }
         .select2-result-repository__forks, .select2-result-repository__stargazers {
-            margin-right: 1em;
+            margin-left: 1em;
         }
         .select2-result-repository__forks, .select2-result-repository__stargazers,
         .select2-result-repository__watchers {
@@ -1970,21 +1960,24 @@
         //
         // @see https://github.com/select2/select2/issues/2927
         $.fn.select2.defaults.set("theme", "bootstrap");
-
+        $.fn.select2.defaults.set("dir", "rtl");
         var placeholder = "Select a State";
 
         $(".select2-single, .select2-multiple").select2({
+            dir: "rtl",
             placeholder: placeholder,
 //            width: null,
             containerCssClass: ':all:'
         });
         $(".form-inline-select2-single").select2({
+            dir: "rtl",
             placeholder: placeholder,
             width: 500,
             containerCssClass: ':all:'
         });
 
         $(".select2-allow-clear").select2({
+            dir: "rtl",
             allowClear: true,
             placeholder: placeholder,
 //            width: "null",
@@ -2020,6 +2013,7 @@
         }
 
         $(".js-data-example-ajax").select2({
+            dir: "rtl",
 //            width: null,
             containerCssClass: ':all:',
             ajax: {
