@@ -154,10 +154,10 @@
             display: block;
         }
         .table-fixed tbody td {
-            float: left;
+            float: right;
         }
         .table-fixed thead tr th {
-            float: left;
+            float: right;
         }
 
     </style>
@@ -208,7 +208,7 @@
             // <--- HERE --->
             //
 
-            $("#demo-scroll-table > thead ").css({"margin-right": getScrollBarWidth});
+            $("#demo-scroll-table > thead ").css({"margin-left": getScrollBarWidth});
 //            alert(getScrollBarWidth());
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
