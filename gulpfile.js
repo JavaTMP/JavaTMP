@@ -63,7 +63,7 @@ gulp.task('copy-JavaTMP-Static-Ajax', function (cb) {
                 'JavaTMP-Static-Ajax/**/*',
                 '!**/node_modules{,/**}',
                 '!**/nbproject/private{,/**}'
-            ], {dot: true, read: false})
+            ], {dot: true})
             .pipe(gulp.dest("temp/JavaTMP-Static-Ajax"))
             .on('end', function () {
                 cb();
@@ -75,7 +75,7 @@ gulp.task('copy-JavaTMP-Static-Ajax-RTL', function (cb) {
                 './JavaTMP-Static-Ajax-RTL/**/*',
                 '!**/node_modules{,/**}',
                 '!**/nbproject/private{,/**}'
-            ], {dot: true, read: false})
+            ], {dot: true})
             .pipe(gulp.dest("temp/JavaTMP-Static-Ajax-RTL"))
             .on('end', function () {
                 cb();
@@ -87,7 +87,7 @@ gulp.task('copy-JavaTMP-Static-Ajax-Starter', function (cb) {
                 './JavaTMP-Static-Ajax-Starter/**/*',
                 '!**/node_modules{,/**}',
                 '!**/nbproject/private{,/**}'
-            ], {dot: true, read: false})
+            ], {dot: true})
             .pipe(gulp.dest("temp/JavaTMP-Static-Ajax-Starter"))
             .on('end', function () {
                 cb();
@@ -99,7 +99,7 @@ gulp.task('copy-JavaTMP-Static-Ajax-Starter-RTL', function (cb) {
                 './JavaTMP-Static-Ajax-Starter-RTL/**/*',
                 '!**/node_modules{,/**}',
                 '!**/nbproject/private{,/**}'
-            ], {dot: true, read: false})
+            ], {dot: true})
             .pipe(gulp.dest("temp/JavaTMP-Static-Ajax-Starter-RTL"))
             .on('end', function () {
                 cb();
@@ -134,7 +134,7 @@ gulp.task('copy-JavaTMP-Static-Ajax-Starter-RTL', function (cb) {
 
 gulp.task('save-project-online-static-demo', function (cb) {
     return gulp
-            .src(['temp/JavaTMP-Static-Ajax/public_html/**/*'], {dot: true, read: false})
+            .src(['temp/JavaTMP-Static-Ajax/public_html/**/*'], {dot: true})
             .pipe(gulp.dest("temp/online-static-demo"))
             .on('end', function () {
                 cb();
@@ -142,7 +142,7 @@ gulp.task('save-project-online-static-demo', function (cb) {
 });
 gulp.task('save-project-online-static-demo-rtl', function (cb) {
     return gulp
-            .src(['temp/JavaTMP-Static-Ajax-RTL/public_html/**/*'], {dot: true, read: false})
+            .src(['temp/JavaTMP-Static-Ajax-RTL/public_html/**/*'], {dot: true})
             .pipe(gulp.dest("temp/online-static-demo-rtl"))
             .on('end', function () {
                 cb();
@@ -150,7 +150,7 @@ gulp.task('save-project-online-static-demo-rtl', function (cb) {
 });
 gulp.task('save-project-online-static-demo-starter', function (cb) {
     return gulp
-            .src(['temp/JavaTMP-Static-Ajax-Starter/public_html/**/*'], {dot: true, read: false})
+            .src(['temp/JavaTMP-Static-Ajax-Starter/public_html/**/*'], {dot: true})
             .pipe(gulp.dest("temp/online-static-demo-starter"))
             .on('end', function () {
                 cb();
@@ -158,7 +158,7 @@ gulp.task('save-project-online-static-demo-starter', function (cb) {
 });
 gulp.task('save-project-online-static-demo-starter-rtl', function (cb) {
     return gulp
-            .src(['temp/JavaTMP-Static-Ajax-Starter-RTL/public_html/**/*'], {dot: true, read: false})
+            .src(['temp/JavaTMP-Static-Ajax-Starter-RTL/public_html/**/*'], {dot: true})
             .pipe(gulp.dest("temp/online-static-demo-starter-rtl"))
             .on('end', function () {
                 cb();
