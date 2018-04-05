@@ -160,11 +160,8 @@
             list-style:none
         }
         .tree ul {
-            margin-left:.5em;
+            margin-left:.45em;
             position:relative
-        }
-        .tree ul ul {
-            /*margin-left:.5em*/
         }
         .tree ul:before {
             content:"";
@@ -216,6 +213,27 @@
             margin:0px 0px 0px 0px;
             padding:0px 0px 0px 0px;
             outline: 0;
+        }
+
+        /* RTL */
+        [dir=rtl] .tree ul {
+            margin-left:0;
+            margin-right:.45em;
+        }
+        [dir=rtl] .tree ul:before {
+            right:0;
+            left: auto;
+            border-left: none;
+            border-right: 1px solid;
+        }
+        [dir=rtl] .tree ul li:before {
+            left: auto;
+            right: 0;
+
+        }
+        [dir=rtl] .indicator {
+            margin-right: 0;
+            margin-left: 5px;
         }
     </style>
 

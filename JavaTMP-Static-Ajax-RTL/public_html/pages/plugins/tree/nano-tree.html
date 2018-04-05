@@ -160,7 +160,7 @@
             list-style:none
         }
         .tree ul {
-            margin-left:.5em;
+            margin-left:.45em;
             position:relative
         }
         .tree ul:before {
@@ -216,22 +216,22 @@
         }
 
         /* RTL */
-        .tree ul {
+        [dir=rtl] .tree ul {
             margin-left:0;
-            margin-right:.5em;
+            margin-right:.45em;
         }
-        .tree ul:before {
+        [dir=rtl] .tree ul:before {
             right:0;
             left: auto;
             border-left: none;
             border-right: 1px solid;
         }
-        .tree ul li:before {
+        [dir=rtl] .tree ul li:before {
             left: auto;
             right: 0;
 
         }
-        .indicator {
+        [dir=rtl] .indicator {
             margin-right: 0;
             margin-left: 5px;
         }
