@@ -275,7 +275,7 @@ gulp.task('generate-online-static-demo-starter-zip', function (cb) {
             });
 });
 gulp.task('generate-online-static-demo-starter-rtl-zip', function (cb) {
-    return gulp.src(['temp/online-static-demo-starter/**/*'], {dot: true})
+    return gulp.src(['temp/online-static-demo-starter-rtl/**/*'], {dot: true})
             .pipe(chmod(0o644, true))
             .pipe(zip('javatmp-static-ajax-starter-rtl.zip'))
             .pipe(gulp.dest('temp'))
