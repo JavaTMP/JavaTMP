@@ -272,7 +272,7 @@ gulp.task('remove-online-static-demos (LTR & RTL)', function (cb) {
 
 gulp.task('copy-readme', function (cb) {
     return gulp
-            .src('readme.md')
+            .src(['readme.md', 'LICENSE'])
             .pipe(gulp.dest('temp/'))
             .on('end', function () {
                 cb();
