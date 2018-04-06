@@ -1,0 +1,106 @@
+$metismenu-bg: $javatmp-sidebar-bg!default;
+$metismenu-link-bg: $metismenu-bg!default;
+$metismenu-link-color: $javatmp-sidebar-link-color!default;
+
+$metismenu-transition: $transition-base!default;
+
+$metismenu-link-font-size: $font-size-base!default;
+$metismenu-link-padding-y: $nav-link-padding-y!default;
+$metismenu-link-padding-x: $nav-link-padding-x!default;
+$metismenu-link-border-width: 3px!default;
+$metismenu-link-border-bottom-color: darken($metismenu-bg, 10%)!default;
+
+$metismenu-link-hover-bg: lighten($metismenu-link-bg, 10%)!default;
+$metismenu-link-hover-color: darken($metismenu-link-color, 10%)!default;
+$metismenu-link-hover-border-color: $metismenu-link-hover-color!default;
+
+$metismenu-link-active-bg: lighten($metismenu-link-bg, 15%)!default;
+$metismenu-link-active-color: darken($metismenu-link-color, 15%)!default;
+$metismenu-link-active-border-color: $metismenu-link-active-color!default;
+
+$metismenu-submenu-indent-width: 1.8em!default;
+$metismenu-submenu-vertical-border-color: darken($metismenu-bg, 10%)!default;
+
+.metismenu {
+    padding: 0;
+    margin: 0;
+    background: $metismenu-bg;
+    display: flex;
+    -webkit-box-orient: vertical;
+    flex-direction: column;
+    > li {
+        display: flex;
+        -webkit-box-orient: vertical;
+        flex-direction: column;
+        position: relative;
+    }
+    a {
+        position: relative;
+        display: block;
+        padding: $metismenu-link-padding-y $metismenu-link-padding-x;
+        color: $metismenu-link-color;
+        background: $metismenu-link-bg;
+        outline-width: 0;
+        @include transition($metismenu-transition);
+
+        font-size: $metismenu-link-font-size;
+        border-left: $metismenu-link-border-width solid transparent;
+        &:hover, &:focus, &:active {
+            text-decoration: none;
+            background: $metismenu-link-hover-bg;
+            color: $metismenu-link-hover-color;
+            border-left: $metismenu-link-border-width solid $metismenu-link-hover-border-color;
+            border-right: none;
+        }
+        &.active {
+            color: $metismenu-link-active-color;
+            background: $metismenu-link-active-bg;
+            border-left: $metismenu-link-border-width solid $metismenu-link-active-border-color;
+        }
+    }
+    ul {
+        margin-left: $metismenu-submenu-indent-width;
+        padding-left: 0px;
+        list-style: none;
+        border-left: 1px solid $metismenu-submenu-vertical-border-color;
+    }
+    li {
+        border-bottom: 1px solid $metismenu-link-border-bottom-color;
+        &:last-child {
+            border-bottom: 1px solid transparent;
+        }
+    }
+    .has-arrow {
+        &:after {
+            transform: rotate(-45deg) translateY(-50%);
+            border-width: 0px 1px 1px 0px;
+            right: 1em;
+        }
+    }
+    .active > .has-arrow:after {
+        transform: rotate(45deg) translateY(-50%);
+    }
+}
+
+[dir="rtl"] .metismenu {
+    a {
+        border-left: none;
+        border-right: $metismenu-link-border-width solid transparent;
+        &:hover, &:focus, &:active {
+            border-right: $metismenu-link-border-width solid $metismenu-link-hover-border-color;
+            border-left: none;
+        }
+        &.active {
+            border-left: none;
+            border-right: $metismenu-link-border-width solid $metismenu-link-active-border-color;
+        }
+    }
+    ul {
+        margin-left: 0;
+        margin-right: $metismenu-submenu-indent-width;
+        padding-left: auto;
+        padding-right: 0px;
+        border-left: none;
+        border-right: 1px solid $metismenu-submenu-vertical-border-color;
+    }
+}

@@ -1,0 +1,59 @@
+.main-breadcrumb-bar {
+    position: fixed;
+    right: 0;
+    left: 0;
+    height: $javatmp-breadcrumb-bar-height;
+    z-index: $javatmp-breadcrumb-bar-z-index;
+    border-bottom: $border-width solid $border-color;
+    background-color: $javatmp-breadcrumb-bar-bg;
+    transition: $javatmp-transition;
+    @media (min-width: 768px) {
+        body.sidebar-active .main-content > & {
+            left: $javatmp-sidebar-width;
+        }
+    }
+
+    body.mouse-auto-show.sidebar-active .main-content > & {
+        left: 0px;
+    }
+
+    .breadcrumb {
+        background-color: $javatmp-breadcrumb-bar-bg;
+        padding: 8px 1px 8px 15px;
+        /*padding: .25rem 1rem;*/
+        width: calc(100% - 50px);
+        flex-wrap: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin: 0 0 1px 0;
+        li {
+            display: inline;
+        }
+        li:last-child {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        a {
+            color: $javatmp-breadcrumb-link-color;
+        }
+        a.active {
+            color: $javatmp-breadcrumb-link-active-color;
+        }
+        .breadcrumb-item.active {
+            color: $javatmp-breadcrumb-link-active-color;
+        }
+    }
+    .breadcrumb-submenu {
+        width: 49px;
+        min-height: 36px;
+        .min-tools-button {
+            font-size: 28px;
+            line-height: 36px;
+            padding: 0 5px;
+            margin-top:1px;
+        }
+    }
+}
+
