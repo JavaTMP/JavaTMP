@@ -19,7 +19,7 @@
                 <div class="card-body">
                     <h4 class="card-title text-primary">Default Example</h4>
                     <div class="media">
-                        <img class="mr-3" src="assets/img/64x64.gif" alt="Generic placeholder image">
+                        <img class="mr-3" src="${pageContext.request.contextPath}/assets/img/64x64.gif" alt="Generic placeholder image">
                         <div class="media-body">
                             <h5 class="mt-0">Media heading</h5>
                             Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
@@ -27,14 +27,14 @@
                     </div>
                     <h4 class="card-title text-primary mt-4">Nesting</h4>
                     <div class="media">
-                        <img class="mr-3" src="assets/img/64x64.gif" alt="Generic placeholder image">
+                        <img class="mr-3" src="${pageContext.request.contextPath}/assets/img/64x64.gif" alt="Generic placeholder image">
                         <div class="media-body">
                             <h5 class="mt-0">Media heading</h5>
                             Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
 
                             <div class="media mt-3">
                                 <a class="pr-3" href="#">
-                                    <img src="assets/img/64x64.gif" alt="Generic placeholder image">
+                                    <img src="${pageContext.request.contextPath}/assets/img/64x64.gif" alt="Generic placeholder image">
                                 </a>
                                 <div class="media-body">
                                     <h5 class="mt-0">Media heading</h5>
@@ -45,7 +45,7 @@
                     </div>
                     <h4 class="card-title text-primary mt-4">Alignment</h4>
                     <div class="media">
-                        <img class="align-self-start mr-3" src="assets/img/64x64.gif" alt="Generic placeholder image">
+                        <img class="align-self-start mr-3" src="${pageContext.request.contextPath}/assets/img/64x64.gif" alt="Generic placeholder image">
                         <div class="media-body">
                             <h5 class="mt-0">Top-aligned media</h5>
                             <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
@@ -53,7 +53,7 @@
                         </div>
                     </div>
                     <div class="media">
-                        <img class="align-self-center mr-3" src="assets/img/64x64.gif" alt="Generic placeholder image">
+                        <img class="align-self-center mr-3" src="${pageContext.request.contextPath}/assets/img/64x64.gif" alt="Generic placeholder image">
                         <div class="media-body">
                             <h5 class="mt-0">Center-aligned media</h5>
                             <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
@@ -61,7 +61,7 @@
                         </div>
                     </div>
                     <div class="media">
-                        <img class="align-self-end mr-3" src="assets/img/64x64.gif" alt="Generic placeholder image">
+                        <img class="align-self-end mr-3" src="${pageContext.request.contextPath}/assets/img/64x64.gif" alt="Generic placeholder image">
                         <div class="media-body">
                             <h5 class="mt-0">Bottom-aligned media</h5>
                             <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
@@ -74,26 +74,26 @@
                             <h5 class="mt-0 mb-1">Media object</h5>
                             Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
                         </div>
-                        <img class="ml-3" src="assets/img/64x64.gif" alt="Generic placeholder image">
+                        <img class="ml-3" src="${pageContext.request.contextPath}/assets/img/64x64.gif" alt="Generic placeholder image">
                     </div>
                     <h4 class="card-title text-primary mt-4">Media list</h4>
                     <ul class="list-unstyled">
                         <li class="media">
-                            <img class="mr-3" src="assets/img/64x64.gif" alt="Generic placeholder image">
+                            <img class="mr-3" src="${pageContext.request.contextPath}/assets/img/64x64.gif" alt="Generic placeholder image">
                             <div class="media-body">
                                 <h5 class="mt-0 mb-1">List-based media object</h5>
                                 Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
                             </div>
                         </li>
                         <li class="media my-4">
-                            <img class="mr-3" src="assets/img/64x64.gif" alt="Generic placeholder image">
+                            <img class="mr-3" src="${pageContext.request.contextPath}/assets/img/64x64.gif" alt="Generic placeholder image">
                             <div class="media-body">
                                 <h5 class="mt-0 mb-1">List-based media object</h5>
                                 Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
                             </div>
                         </li>
                         <li class="media">
-                            <img class="mr-3" src="assets/img/64x64.gif" alt="Generic placeholder image">
+                            <img class="mr-3" src="${pageContext.request.contextPath}/assets/img/64x64.gif" alt="Generic placeholder image">
                             <div class="media-body">
                                 <h5 class="mt-0 mb-1">List-based media object</h5>
                                 Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
@@ -104,7 +104,7 @@
                     <div class="list-group">
                         <div class="list-group-item list-group-item-action">
                             <div class="media">
-                                <img class="mr-3" src="assets/img/64x64.gif" alt="Generic placeholder image">
+                                <img class="mr-3" src="${pageContext.request.contextPath}/assets/img/64x64.gif" alt="Generic placeholder image">
                                 <div class="media-body">
                                     <h5 class="mt-0 d-flex justify-content-between"><span>Media heading</span><small>3min</small></h5>
                                     Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
@@ -113,7 +113,7 @@
                         </div>
                         <div class="list-group-item list-group-item-action">
                             <div class="media">
-                                <img class="mr-3" src="assets/img/64x64.gif" alt="Generic placeholder image">
+                                <img class="mr-3" src="${pageContext.request.contextPath}/assets/img/64x64.gif" alt="Generic placeholder image">
                                 <div class="media-body">
                                     <h5 class="mt-0">Media heading</h5>
                                     Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
@@ -122,7 +122,7 @@
                         </div>
                         <div class="list-group-item list-group-item-action">
                             <div class="media">
-                                <img class="mr-3" src="assets/img/64x64.gif" alt="Generic placeholder image">
+                                <img class="mr-3" src="${pageContext.request.contextPath}/assets/img/64x64.gif" alt="Generic placeholder image">
                                 <div class="media-body">
                                     <h5 class="mt-0">Media heading</h5>
                                     Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
@@ -131,7 +131,7 @@
                         </div>
                         <div class="list-group-item list-group-item-action">
                             <div class="media">
-                                <img class="mr-3" src="assets/img/64x64.gif" alt="Generic placeholder image">
+                                <img class="mr-3" src="${pageContext.request.contextPath}/assets/img/64x64.gif" alt="Generic placeholder image">
                                 <div class="media-body">
                                     <h5 class="mt-0">Media heading</h5>
                                     Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.

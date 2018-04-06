@@ -167,32 +167,32 @@
                                                         <div class="row">
                                                             <div class="col-xs-6 col-sm-2">
                                                                 <a href="#" class="">
-                                                                    <img class="img-thumbnail" alt="150x190" src="assets/img/190.jpg"/>
+                                                                    <img class="img-thumbnail" alt="150x190" src="${pageContext.request.contextPath}/assets/img/190.jpg"/>
                                                                 </a>
                                                             </div>
                                                             <div class="col-xs-6 col-sm-2">
                                                                 <a href="#" class="">
-                                                                    <img class="img-thumbnail" alt="150x190" src="assets/img/190.jpg"/>
+                                                                    <img class="img-thumbnail" alt="150x190" src="${pageContext.request.contextPath}/assets/img/190.jpg"/>
                                                                 </a>
                                                             </div>
                                                             <div class="col-xs-6 col-sm-2">
                                                                 <a href="#" class="">
-                                                                    <img class="img-thumbnail" alt="150x190" src="assets/img/190.jpg"/>
+                                                                    <img class="img-thumbnail" alt="150x190" src="${pageContext.request.contextPath}/assets/img/190.jpg"/>
                                                                 </a>
                                                             </div>
                                                             <div class="col-xs-6 col-sm-2">
                                                                 <a href="#" class="">
-                                                                    <img class="img-thumbnail" alt="150x190" src="assets/img/190.jpg"/>
+                                                                    <img class="img-thumbnail" alt="150x190" src="${pageContext.request.contextPath}/assets/img/190.jpg"/>
                                                                 </a>
                                                             </div>
                                                             <div class="col-xs-6 col-sm-2">
                                                                 <a href="#" class="">
-                                                                    <img class="img-thumbnail" alt="150x190" src="assets/img/190.jpg"/>
+                                                                    <img class="img-thumbnail" alt="150x190" src="${pageContext.request.contextPath}/assets/img/190.jpg"/>
                                                                 </a>
                                                             </div>
                                                             <div class="col-xs-6 col-sm-2">
                                                                 <a href="#" class="thumbnail">
-                                                                    <img class="img-thumbnail" alt="150x190" src="assets/img/190.jpg"/>
+                                                                    <img class="img-thumbnail" alt="150x190" src="${pageContext.request.contextPath}/assets/img/190.jpg"/>
                                                                 </a>
                                                             </div>
                                                         </div>

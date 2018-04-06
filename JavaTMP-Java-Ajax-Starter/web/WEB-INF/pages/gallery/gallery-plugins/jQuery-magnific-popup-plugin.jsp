@@ -27,63 +27,63 @@
                 <div class="card-body">
                     <div class="row magnific-popup-parent-container">
                         <div class="col-lg-3 col-md-4">
-                            <a href="assets/img/gallery/1.jpg" data-gallery="data-gallery" title="An old greenhouse">
-                                <img class="img-thumbnail img-fluid my-1" src="assets/img/gallery/1.jpg" alt="An old greenhouse">
+                            <a href="${pageContext.request.contextPath}/assets/img/gallery/1.jpg" data-gallery="data-gallery" title="An old greenhouse">
+                                <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/assets/img/gallery/1.jpg" alt="An old greenhouse">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4">
-                            <a href="assets/img/gallery/2.jpg" data-gallery="data-gallery" title="Purple wildflowers">
-                                <img class="img-thumbnail img-fluid my-1" src="assets/img/gallery/2.jpg" alt="Purple wildflowers">
+                            <a href="${pageContext.request.contextPath}/assets/img/gallery/2.jpg" data-gallery="data-gallery" title="Purple wildflowers">
+                                <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/assets/img/gallery/2.jpg" alt="Purple wildflowers">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4">
-                            <a href="assets/img/gallery/3.jpg" data-gallery="data-gallery" title="A birdfeeder">
-                                <img class="img-thumbnail img-fluid my-1" src="assets/img/gallery/3.jpg" alt="A birdfeeder">
+                            <a href="${pageContext.request.contextPath}/assets/img/gallery/3.jpg" data-gallery="data-gallery" title="A birdfeeder">
+                                <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/assets/img/gallery/3.jpg" alt="A birdfeeder">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4">
-                            <a href="assets/img/gallery/4.jpg" data-gallery="data-gallery" title="The garden shop">
-                                <img class="img-thumbnail img-fluid my-1" src="assets/img/gallery/4.jpg" alt="The garden shop">
+                            <a href="${pageContext.request.contextPath}/assets/img/gallery/4.jpg" data-gallery="data-gallery" title="The garden shop">
+                                <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/assets/img/gallery/4.jpg" alt="The garden shop">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4">
-                            <a href="assets/img/gallery/5.jpg" data-gallery="data-gallery" title="Spring daffodils">
-                                <img class="img-thumbnail img-fluid my-1" src="assets/img/gallery/5.jpg" alt="Spring daffodils">
+                            <a href="${pageContext.request.contextPath}/assets/img/gallery/5.jpg" data-gallery="data-gallery" title="Spring daffodils">
+                                <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/assets/img/gallery/5.jpg" alt="Spring daffodils">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4">
-                            <a href="assets/img/gallery/6.jpg" data-gallery="data-gallery" title="Iris along the path">
-                                <img class="img-thumbnail img-fluid my-1" src="assets/img/gallery/6.jpg" alt="Iris along the path">
+                            <a href="${pageContext.request.contextPath}/assets/img/gallery/6.jpg" data-gallery="data-gallery" title="Iris along the path">
+                                <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/assets/img/gallery/6.jpg" alt="Iris along the path">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4">
-                            <a href="assets/img/gallery/7.jpg" data-gallery="data-gallery" title="Butterfly">
-                                <img class="img-thumbnail img-fluid my-1" src="assets/img/gallery/7.jpg" alt="Butterfly">
+                            <a href="${pageContext.request.contextPath}/assets/img/gallery/7.jpg" data-gallery="data-gallery" title="Butterfly">
+                                <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/assets/img/gallery/7.jpg" alt="Butterfly">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4">
-                            <a href="assets/img/gallery/8.jpg" data-gallery="data-gallery" title="The garden blueprint">
-                                <img class="img-thumbnail img-fluid my-1" src="assets/img/gallery/8.jpg" alt="The garden blueprint">
+                            <a href="${pageContext.request.contextPath}/assets/img/gallery/8.jpg" data-gallery="data-gallery" title="The garden blueprint">
+                                <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/assets/img/gallery/8.jpg" alt="The garden blueprint">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4">
-                            <a href="assets/img/gallery/9.jpg" data-gallery="data-gallery" title="The patio">
-                                <img class="img-thumbnail img-fluid my-1" src="assets/img/gallery/9.jpg" alt="The patio">
+                            <a href="${pageContext.request.contextPath}/assets/img/gallery/9.jpg" data-gallery="data-gallery" title="The patio">
+                                <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/assets/img/gallery/9.jpg" alt="The patio">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4">
-                            <a href="assets/img/gallery/10.jpg" data-gallery="data-gallery" title="Crocus close-up">
-                                <img class="img-thumbnail img-fluid my-1" src="assets/img/gallery/10.jpg" alt="Crocus close-up">
+                            <a href="${pageContext.request.contextPath}/assets/img/gallery/10.jpg" data-gallery="data-gallery" title="Crocus close-up">
+                                <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/assets/img/gallery/10.jpg" alt="Crocus close-up">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4">
-                            <a href="assets/img/gallery/11.jpg" data-gallery="data-gallery" title="Bumble bee collecting nectar">
-                                <img class="img-thumbnail img-fluid my-1" src="assets/img/gallery/11.jpg" alt="Bumble bee collecting nectar">
+                            <a href="${pageContext.request.contextPath}/assets/img/gallery/11.jpg" data-gallery="data-gallery" title="Bumble bee collecting nectar">
+                                <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/assets/img/gallery/11.jpg" alt="Bumble bee collecting nectar">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4">
-                            <a href="assets/img/gallery/12.jpg" data-gallery="data-gallery" title="Winding garden path">
-                                <img class="img-thumbnail img-fluid my-1" src="assets/img/gallery/12.jpg" alt="Winding garden path">
+                            <a href="${pageContext.request.contextPath}/assets/img/gallery/12.jpg" data-gallery="data-gallery" title="Winding garden path">
+                                <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/assets/img/gallery/12.jpg" alt="Winding garden path">
                             </a>
                         </div>
                     </div>

@@ -66,7 +66,7 @@
                     extensions: ["glyph", "table"],
                     checkbox: false,
                     glyph: glyph_opts,
-                    source: {url: "assets/data/fancytreeTaxonomy.json", debugDelay: 500},
+                    source: {url: "${pageContext.request.contextPath}/assets/data/fancytreeTaxonomy.json", debugDelay: 500},
                     table: {
                         indentation: 25,
                         nodeColumnIdx: 1
@@ -74,7 +74,7 @@
                     activate: function (event, data) {
                     },
                     lazyLoad: function (event, data) {
-                        data.result = {url: "assets/data/fancytreeSub.json", debugDelay: 500};
+                        data.result = {url: "${pageContext.request.contextPath}/assets/data/fancytreeSub.json", debugDelay: 500};
                     },
                     renderColumns: function (event, data) {
                         var node = data.node,

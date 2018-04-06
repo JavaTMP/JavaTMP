@@ -109,7 +109,7 @@
                     glyph: glyph_opts,
                     quicksearch: true,
                     source: {
-                        url: "assets/data/ajax-tree-local.json"
+                        url: "${pageContext.request.contextPath}/assets/data/ajax-tree-local.json"
                     },
                     filter: {
                         autoApply: true, // Re-apply last filter if lazy data is loaded
@@ -126,7 +126,7 @@
                     activate: function (event, data) {
                     },
                     lazyLoad: function (event, data) {
-                        data.result = {url: "assets/data/fancytreeSub.json"};
+                        data.result = {url: "${pageContext.request.contextPath}/assets/data/fancytreeSub.json"};
                     }
                 });
 

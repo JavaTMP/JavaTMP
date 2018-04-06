@@ -63,18 +63,18 @@
                 <div class="card-body">
                     <section id="examples" class="snap-scrolling-example">
                         <div id="content-2" class="content horizontal-images">
-                            <img class="item" src="assets/img/gallery/1.jpg" alt=""/>
-                            <img class="item" src="assets/img/gallery/2.jpg" alt=""/>
-                            <img class="item" src="assets/img/gallery/3.jpg" alt=""/>
-                            <img class="item" src="assets/img/gallery/4.jpg" alt=""/>
-                            <img class="item" src="assets/img/gallery/5.jpg" alt=""/>
-                            <img class="item" src="assets/img/gallery/6.jpg" alt=""/>
-                            <img class="item" src="assets/img/gallery/7.jpg" alt=""/>
-                            <img class="item" src="assets/img/gallery/8.jpg" alt=""/>
-                            <img class="item" src="assets/img/gallery/9.jpg" alt=""/>
-                            <img class="item" src="assets/img/gallery/10.jpg" alt=""/>
-                            <img class="item" src="assets/img/gallery/11.jpg" alt=""/>
-                            <img class="item" src="assets/img/gallery/12.jpg" alt=""/>
+                            <img class="item" src="${pageContext.request.contextPath}/assets/img/gallery/1.jpg" alt=""/>
+                            <img class="item" src="${pageContext.request.contextPath}/assets/img/gallery/2.jpg" alt=""/>
+                            <img class="item" src="${pageContext.request.contextPath}/assets/img/gallery/3.jpg" alt=""/>
+                            <img class="item" src="${pageContext.request.contextPath}/assets/img/gallery/4.jpg" alt=""/>
+                            <img class="item" src="${pageContext.request.contextPath}/assets/img/gallery/5.jpg" alt=""/>
+                            <img class="item" src="${pageContext.request.contextPath}/assets/img/gallery/6.jpg" alt=""/>
+                            <img class="item" src="${pageContext.request.contextPath}/assets/img/gallery/7.jpg" alt=""/>
+                            <img class="item" src="${pageContext.request.contextPath}/assets/img/gallery/8.jpg" alt=""/>
+                            <img class="item" src="${pageContext.request.contextPath}/assets/img/gallery/9.jpg" alt=""/>
+                            <img class="item" src="${pageContext.request.contextPath}/assets/img/gallery/10.jpg" alt=""/>
+                            <img class="item" src="${pageContext.request.contextPath}/assets/img/gallery/11.jpg" alt=""/>
+                            <img class="item" src="${pageContext.request.contextPath}/assets/img/gallery/12.jpg" alt=""/>
                         </div>
                     </section>
                 </div>

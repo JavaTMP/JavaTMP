@@ -33,7 +33,7 @@
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <div class="card">
-                                            <img class="card-img-top" alt="100%x180" src="assets/img/400x230.png" data-holder-rendered="true">
+                                            <img class="card-img-top" alt="100%x180" src="${pageContext.request.contextPath}/assets/img/400x230.png" data-holder-rendered="true">
                                             <div class="card-body">
                                                 <h4 class="card-title">Product 1</h4>
                                                 <h6 class="card-subtitle mb-2 text-muted">$149.99</h6>
@@ -52,7 +52,7 @@
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="card">
-                                            <img class="card-img-top" alt="100%x180" src="assets/img/400x230.png" data-holder-rendered="true">
+                                            <img class="card-img-top" alt="100%x180" src="${pageContext.request.contextPath}/assets/img/400x230.png" data-holder-rendered="true">
                                             <div class="card-body">
                                                 <h4 class="card-title">Product 1</h4>
                                                 <h6 class="card-subtitle mb-2 text-muted">$149.99</h6>
@@ -71,7 +71,7 @@
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="card">
-                                            <img class="card-img-top" alt="100%x180" src="assets/img/400x230.png" data-holder-rendered="true">
+                                            <img class="card-img-top" alt="100%x180" src="${pageContext.request.contextPath}/assets/img/400x230.png" data-holder-rendered="true">
                                             <div class="card-body">
                                                 <h4 class="card-title">Product 1</h4>
                                                 <h6 class="card-subtitle mb-2 text-muted">$149.99</h6>
@@ -90,7 +90,7 @@
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="card">
-                                            <img class="card-img-top" alt="100%x180" src="assets/img/400x230.png" data-holder-rendered="true">
+                                            <img class="card-img-top" alt="100%x180" src="${pageContext.request.contextPath}/assets/img/400x230.png" data-holder-rendered="true">
                                             <div class="card-body">
                                                 <h4 class="card-title">Product 1</h4>
                                                 <h6 class="card-subtitle mb-2 text-muted">$149.99</h6>
@@ -113,7 +113,7 @@
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <div class="card">
-                                            <img class="card-img-top" alt="100%x180" src="assets/img/400x230.png" data-holder-rendered="true">
+                                            <img class="card-img-top" alt="100%x180" src="${pageContext.request.contextPath}/assets/img/400x230.png" data-holder-rendered="true">
                                             <div class="card-body">
                                                 <h4 class="card-title">Product 1</h4>
                                                 <h6 class="card-subtitle mb-2 text-muted">$149.99</h6>
@@ -132,7 +132,7 @@
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="card">
-                                            <img class="card-img-top" alt="100%x180" src="assets/img/400x230.png" data-holder-rendered="true">
+                                            <img class="card-img-top" alt="100%x180" src="${pageContext.request.contextPath}/assets/img/400x230.png" data-holder-rendered="true">
                                             <div class="card-body">
                                                 <h4 class="card-title">Product 1</h4>
                                                 <h6 class="card-subtitle mb-2 text-muted">$149.99</h6>
@@ -151,7 +151,7 @@
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="card">
-                                            <img class="card-img-top" alt="100%x180" src="assets/img/400x230.png" data-holder-rendered="true">
+                                            <img class="card-img-top" alt="100%x180" src="${pageContext.request.contextPath}/assets/img/400x230.png" data-holder-rendered="true">
                                             <div class="card-body">
                                                 <h4 class="card-title">Product 1</h4>
                                                 <h6 class="card-subtitle mb-2 text-muted">$149.99</h6>
@@ -170,7 +170,7 @@
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="card">
-                                            <img class="card-img-top" alt="100%x180" src="assets/img/400x230.png" data-holder-rendered="true">
+                                            <img class="card-img-top" alt="100%x180" src="${pageContext.request.contextPath}/assets/img/400x230.png" data-holder-rendered="true">
                                             <div class="card-body">
                                                 <h4 class="card-title">Product 1</h4>
                                                 <h6 class="card-subtitle mb-2 text-muted">$149.99</h6>
@@ -226,7 +226,7 @@
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <div class="card">
-                                            <img class="card-img-top" alt="100%x180" src="assets/img/400x230.png" data-holder-rendered="true">
+                                            <img class="card-img-top" alt="100%x180" src="${pageContext.request.contextPath}/assets/img/400x230.png" data-holder-rendered="true">
                                             <div class="card-body">
                                                 <h4 class="card-title">Product 1</h4>
                                                 <h6 class="card-subtitle mb-2 text-muted">$149.99</h6>
@@ -245,7 +245,7 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="card">
-                                            <img class="card-img-top" alt="100%x180" src="assets/img/400x230.png" data-holder-rendered="true">
+                                            <img class="card-img-top" alt="100%x180" src="${pageContext.request.contextPath}/assets/img/400x230.png" data-holder-rendered="true">
                                             <div class="card-body">
                                                 <h4 class="card-title">Product 1</h4>
                                                 <h6 class="card-subtitle mb-2 text-muted">$149.99</h6>
@@ -264,7 +264,7 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="card">
-                                            <img class="card-img-top" alt="100%x180" src="assets/img/400x230.png" data-holder-rendered="true">
+                                            <img class="card-img-top" alt="100%x180" src="${pageContext.request.contextPath}/assets/img/400x230.png" data-holder-rendered="true">
                                             <div class="card-body">
                                                 <h4 class="card-title">Product 1</h4>
                                                 <h6 class="card-subtitle mb-2 text-muted">$149.99</h6>
@@ -287,7 +287,7 @@
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <div class="card">
-                                            <img class="card-img-top" alt="100%x180" src="assets/img/400x230.png" data-holder-rendered="true">
+                                            <img class="card-img-top" alt="100%x180" src="${pageContext.request.contextPath}/assets/img/400x230.png" data-holder-rendered="true">
                                             <div class="card-body">
                                                 <h4 class="card-title">Product 1</h4>
                                                 <h6 class="card-subtitle mb-2 text-muted">$149.99</h6>
@@ -306,7 +306,7 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="card">
-                                            <img class="card-img-top" alt="100%x180" src="assets/img/400x230.png" data-holder-rendered="true">
+                                            <img class="card-img-top" alt="100%x180" src="${pageContext.request.contextPath}/assets/img/400x230.png" data-holder-rendered="true">
                                             <div class="card-body">
                                                 <h4 class="card-title">Product 1</h4>
                                                 <h6 class="card-subtitle mb-2 text-muted">$149.99</h6>
@@ -325,7 +325,7 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <div class="card">
-                                            <img class="card-img-top" alt="100%x180" src="assets/img/400x230.png" data-holder-rendered="true">
+                                            <img class="card-img-top" alt="100%x180" src="${pageContext.request.contextPath}/assets/img/400x230.png" data-holder-rendered="true">
                                             <div class="card-body">
                                                 <h4 class="card-title">Product 1</h4>
                                                 <h6 class="card-subtitle mb-2 text-muted">$149.99</h6>

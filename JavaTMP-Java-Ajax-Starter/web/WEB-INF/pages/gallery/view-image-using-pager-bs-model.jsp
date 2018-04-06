@@ -25,9 +25,9 @@
                                data-toggle="modal"
                                data-title="Title of image 1"
                                data-caption="Some Text as caption for the image 1"
-                               data-image="assets/img/gallery/1.jpg"
+                               data-image="${pageContext.request.contextPath}/assets/img/gallery/1.jpg"
                                data-target="#image-gallery">
-                                <img class="img-thumbnail img-fluid my-1" src="assets/img/gallery/1.jpg" alt="" alt="Short alt text">
+                                <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/assets/img/gallery/1.jpg" alt="" alt="Short alt text">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6">
@@ -37,9 +37,9 @@
                                data-toggle="modal"
                                data-title="Title of image 2"
                                data-caption="Some Text as caption for the image 2"
-                               data-image="assets/img/gallery/2.jpg"
+                               data-image="${pageContext.request.contextPath}/assets/img/gallery/2.jpg"
                                data-target="#image-gallery">
-                                <img class="img-thumbnail img-fluid my-1" src="assets/img/gallery/2.jpg" alt="">
+                                <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/assets/img/gallery/2.jpg" alt="">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6">
@@ -49,9 +49,9 @@
                                data-toggle="modal"
                                data-title="Title of image 3"
                                data-caption="Some Text as caption for the image 3"
-                               data-image="assets/img/gallery/3.jpg"
+                               data-image="${pageContext.request.contextPath}/assets/img/gallery/3.jpg"
                                data-target="#image-gallery">
-                                <img class="img-thumbnail img-fluid my-1" src="assets/img/gallery/3.jpg" alt="">
+                                <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/assets/img/gallery/3.jpg" alt="">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6">
@@ -61,9 +61,9 @@
                                data-toggle="modal"
                                data-title="Title of image 4"
                                data-caption="Some Text as caption for the image 4"
-                               data-image="assets/img/gallery/4.jpg"
+                               data-image="${pageContext.request.contextPath}/assets/img/gallery/4.jpg"
                                data-target="#image-gallery">
-                                <img class="img-thumbnail img-fluid my-1" src="assets/img/gallery/4.jpg" alt="">
+                                <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/assets/img/gallery/4.jpg" alt="">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6">
@@ -73,9 +73,9 @@
                                data-toggle="modal"
                                data-title="Title of image 5"
                                data-caption="Some Text as caption for the image 5"
-                               data-image="assets/img/gallery/5.jpg"
+                               data-image="${pageContext.request.contextPath}/assets/img/gallery/5.jpg"
                                data-target="#image-gallery">
-                                <img class="img-thumbnail img-fluid my-1" src="assets/img/gallery/5.jpg" alt="">
+                                <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/assets/img/gallery/5.jpg" alt="">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6">
@@ -85,9 +85,9 @@
                                data-toggle="modal"
                                data-title="Title of image 6"
                                data-caption="Some Text as caption for the image 6"
-                               data-image="assets/img/gallery/6.jpg"
+                               data-image="${pageContext.request.contextPath}/assets/img/gallery/6.jpg"
                                data-target="#image-gallery">
-                                <img class="img-thumbnail img-fluid my-1" src="assets/img/gallery/6.jpg" alt="">
+                                <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/assets/img/gallery/6.jpg" alt="">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6">
@@ -97,9 +97,9 @@
                                data-toggle="modal"
                                data-title="Title of image 7"
                                data-caption="Some Text as caption for the image 7"
-                               data-image="assets/img/gallery/7.jpg"
+                               data-image="${pageContext.request.contextPath}/assets/img/gallery/7.jpg"
                                data-target="#image-gallery">
-                                <img class="img-thumbnail img-fluid my-1" src="assets/img/gallery/7.jpg" alt="">
+                                <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/assets/img/gallery/7.jpg" alt="">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6">
@@ -109,9 +109,9 @@
                                data-toggle="modal"
                                data-title="Title of image 8"
                                data-caption="Some Text as caption for the image 8"
-                               data-image="assets/img/gallery/8.jpg"
+                               data-image="${pageContext.request.contextPath}/assets/img/gallery/8.jpg"
                                data-target="#image-gallery">
-                                <img class="img-thumbnail img-fluid my-1" src="assets/img/gallery/8.jpg" alt="">
+                                <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/assets/img/gallery/8.jpg" alt="">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6">
@@ -121,9 +121,9 @@
                                data-toggle="modal"
                                data-title="Title of image 9"
                                data-caption="Some Text as caption for the image 9"
-                               data-image="assets/img/gallery/9.jpg"
+                               data-image="${pageContext.request.contextPath}/assets/img/gallery/9.jpg"
                                data-target="#image-gallery">
-                                <img class="img-thumbnail img-fluid my-1" src="assets/img/gallery/9.jpg" alt="">
+                                <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/assets/img/gallery/9.jpg" alt="">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6">
@@ -133,9 +133,9 @@
                                data-toggle="modal"
                                data-title="Title of image 10"
                                data-caption="Some Text as caption for the image 10"
-                               data-image="assets/img/gallery/10.jpg"
+                               data-image="${pageContext.request.contextPath}/assets/img/gallery/10.jpg"
                                data-target="#image-gallery">
-                                <img class="img-thumbnail img-fluid my-1" src="assets/img/gallery/10.jpg" alt="">
+                                <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/assets/img/gallery/10.jpg" alt="">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6">
@@ -145,9 +145,9 @@
                                data-toggle="modal"
                                data-title="Title of image 11"
                                data-caption="Some Text as caption for the image 11"
-                               data-image="assets/img/gallery/11.jpg"
+                               data-image="${pageContext.request.contextPath}/assets/img/gallery/11.jpg"
                                data-target="#image-gallery">
-                                <img class="img-thumbnail img-fluid my-1" src="assets/img/gallery/11.jpg" alt="">
+                                <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/assets/img/gallery/11.jpg" alt="">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6">
@@ -157,9 +157,9 @@
                                data-toggle="modal"
                                data-title="Title of image 12"
                                data-caption="Some Text as caption for the image 12"
-                               data-image="assets/img/gallery/12.jpg"
+                               data-image="${pageContext.request.contextPath}/assets/img/gallery/12.jpg"
                                data-target="#image-gallery">
-                                <img class="img-thumbnail img-fluid my-1" src="assets/img/gallery/12.jpg" alt="">
+                                <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/assets/img/gallery/12.jpg" alt="">
                             </a>
                         </div>
                     </div>

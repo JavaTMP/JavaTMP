@@ -20,56 +20,56 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-4 mb-3">
                             <a href="javascript:void(0);" class="thumbnail overlay-container" title="An old greenhouse">
-                                <img class="img-fluid" src="assets/img/gallery/1.jpg" alt="An old greenhouse">
+                                <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/gallery/1.jpg" alt="An old greenhouse">
                                 <div class="overlay overlay-bottom-up">An old greenhouse</div>
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 mb-3">
                             <a href="javascript:void(0);" class="thumbnail overlay-container" title="Purple wildflowers">
-                                <img class="img-fluid" src="assets/img/gallery/2.jpg" alt="Purple wildflowers">
+                                <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/gallery/2.jpg" alt="Purple wildflowers">
                                 <div class="overlay overlay-left-right">Purple wildflowers</div>
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 mb-3">
                             <a href="javascript:void(0);" class="thumbnail overlay-container" title="A birdfeeder">
-                                <img class="img-fluid" src="assets/img/gallery/3.jpg" alt="A birdfeeder">
+                                <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/gallery/3.jpg" alt="A birdfeeder">
                                 <div class="overlay overlay-top-bottom">A birdfeeder</div>
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 mb-3">
                             <a href="javascript:void(0);" class="thumbnail overlay-container" title="The garden shop">
-                                <img class="img-fluid" src="assets/img/gallery/4.jpg" alt="The garden shop">
+                                <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/gallery/4.jpg" alt="The garden shop">
                                 <div class="overlay overlay-right-left">The garden shop</div>
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 mb-3">
                             <a href="javascript:void(0);" class="thumbnail overlay-container" title="An old greenhouse">
-                                <img class="img-fluid" src="assets/img/gallery/1.jpg" alt="An old greenhouse">
+                                <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/gallery/1.jpg" alt="An old greenhouse">
                                 <div class="overlay overlay-bottom-up touchFocus">An old greenhouse</div>
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 mb-3">
                             <a href="javascript:void(0);" class="thumbnail overlay-container" title="Purple wildflowers">
-                                <img class="img-fluid" src="assets/img/gallery/2.jpg" alt="Purple wildflowers">
+                                <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/gallery/2.jpg" alt="Purple wildflowers">
                                 <div class="overlay overlay-left-right touchFocus">Purple wildflowers</div>
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 mb-3">
                             <a href="javascript:void(0);" class="thumbnail overlay-container" title="A birdfeeder">
-                                <img class="img-fluid" src="assets/img/gallery/3.jpg" alt="A birdfeeder">
+                                <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/gallery/3.jpg" alt="A birdfeeder">
                                 <div class="overlay overlay-top-bottom touchFocus">A birdfeeder</div>
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 mb-3">
                             <a href="javascript:void(0);" class="thumbnail overlay-container" title="The garden shop">
-                                <img class="img-fluid" src="assets/img/gallery/4.jpg" alt="The garden shop">
+                                <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/gallery/4.jpg" alt="The garden shop">
                                 <div class="overlay overlay-right-left touchFocus">The garden shop</div>
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 mb-3">
                             <div class="overlay-container">
                                 <a href="javascript:void(0);" class="" title="Spring daffodils">
-                                    <img class="img-fluid" src="assets/img/gallery/5.jpg" alt="Spring daffodils">
+                                    <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/gallery/5.jpg" alt="Spring daffodils">
                                 </a>
                                 <div class="overlay overlay-bottom-up">
                                     <a href="#">
@@ -90,7 +90,7 @@
                         <div class="col-lg-3 col-md-4 mb-3">
                             <div class="overlay-container">
                                 <a href="javascript:void(0);" class=""  title="Iris along the path">
-                                    <img class="img-fluid" src="assets/img/gallery/6.jpg" alt="Iris along the path">
+                                    <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/gallery/6.jpg" alt="Iris along the path">
                                 </a>
                                 <div class="overlay overlay-left-right">
                                     <a href="#">
@@ -111,7 +111,7 @@
                         <div class="col-lg-3 col-md-4 mb-3">
                             <div class="overlay-container">
                                 <a href="javascript:void(0);" class="thumbnail" title="Butterfly">
-                                    <img class="img-fluid" src="assets/img/gallery/7.jpg" alt="Butterfly">
+                                    <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/gallery/7.jpg" alt="Butterfly">
                                 </a>
                                 <div class="overlay overlay-top-bottom">
                                     <a href="#">
@@ -132,7 +132,7 @@
                         <div class="col-lg-3 col-md-4 mb-3">
                             <div class="overlay-container">
                                 <a href="javascript:void(0);" class="" title="The garden blueprint">
-                                    <img class="img-fluid" src="assets/img/gallery/8.jpg" alt="The garden blueprint">
+                                    <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/gallery/8.jpg" alt="The garden blueprint">
                                 </a>
                                 <div class="overlay overlay-right-left">
                                     <a href="#">
@@ -153,7 +153,7 @@
                         <div class="col-lg-3 col-md-4 mb-3">
                             <div class="overlay-container">
                                 <a href="javascript:void(0);" class="" title="Spring daffodils">
-                                    <img class="img-fluid" src="assets/img/gallery/5.jpg" alt="Spring daffodils">
+                                    <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/gallery/5.jpg" alt="Spring daffodils">
                                 </a>
                                 <div class="overlay overlay-bottom-up touchFocus">
                                     <a href="#">
@@ -174,7 +174,7 @@
                         <div class="col-lg-3 col-md-4 mb-3">
                             <div class="overlay-container">
                                 <a href="javascript:void(0);" class=""  title="Iris along the path">
-                                    <img class="img-fluid" src="assets/img/gallery/6.jpg" alt="Iris along the path">
+                                    <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/gallery/6.jpg" alt="Iris along the path">
                                 </a>
                                 <div class="overlay overlay-left-right touchFocus">
                                     <a href="#">
@@ -195,7 +195,7 @@
                         <div class="col-lg-3 col-md-4 mb-3">
                             <div class="overlay-container">
                                 <a href="javascript:void(0);" class="thumbnail" title="Butterfly">
-                                    <img class="img-fluid" src="assets/img/gallery/7.jpg" alt="Butterfly">
+                                    <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/gallery/7.jpg" alt="Butterfly">
                                 </a>
                                 <div class="overlay overlay-top-bottom touchFocus">
                                     <a href="#">
@@ -216,7 +216,7 @@
                         <div class="col-lg-3 col-md-4 mb-3">
                             <div class="overlay-container">
                                 <a href="javascript:void(0);" class="" title="The garden blueprint">
-                                    <img class="img-fluid" src="assets/img/gallery/8.jpg" alt="The garden blueprint">
+                                    <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/gallery/8.jpg" alt="The garden blueprint">
                                 </a>
                                 <div class="overlay overlay-right-left touchFocus">
                                     <a href="#">
@@ -236,25 +236,25 @@
                         </div>
                         <div class="col-lg-3 col-md-4 mb-3">
                             <a href="javascript:void(0);" class="thumbnail overlay-container" title="The patio">
-                                <img class="img-fluid" src="assets/img/gallery/9.jpg" alt="The patio">
+                                <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/gallery/9.jpg" alt="The patio">
                                 <div class="overlay overlay-top-bottom overlay-fluid">Fluid Overlay</div>
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 mb-3">
                             <a href="javascript:void(0);" class="thumbnail overlay-container" title="Crocus close-up">
-                                <img class="img-fluid" src="assets/img/gallery/10.jpg" alt="Crocus close-up">
+                                <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/gallery/10.jpg" alt="Crocus close-up">
                                 <div class="overlay overlay-left-right overlay-fluid">Fluid Overlay</div>
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 mb-3">
                             <a href="javascript:void(0);" class="thumbnail overlay-container" title="Bumble bee collecting nectar">
-                                <img class="img-fluid" src="assets/img/gallery/11.jpg" alt="Bumble bee collecting nectar">
+                                <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/gallery/11.jpg" alt="Bumble bee collecting nectar">
                                 <div class="overlay overlay-top-bottom overlay-fluid">Fluid Overlay</div>
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 mb-3">
                             <a href="javascript:void(0);" class="thumbnail overlay-container" title="Winding garden path">
-                                <img class="img-fluid" src="assets/img/gallery/12.jpg" alt="Winding garden path">
+                                <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/gallery/12.jpg" alt="Winding garden path">
                                 <div class="overlay overlay-right-left overlay-fluid">Fluid Overlay</div>
                             </a>
                         </div>

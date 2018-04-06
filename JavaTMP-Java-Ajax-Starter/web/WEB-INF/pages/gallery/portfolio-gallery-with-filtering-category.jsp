@@ -14,50 +14,50 @@
         </div>
         <br/>
         <div class="gallery_product col-lg-3 col-md-3 col-sm-3 filter Category1">
-            <img src="assets/img/gallery/1.jpg" class="img-fluid"/>
+            <img src="${pageContext.request.contextPath}/assets/img/gallery/1.jpg" class="img-fluid"/>
         </div>
 
         <div class="gallery_product col-lg-3 col-md-3 col-sm-3 filter Category2">
-            <img src="assets/img/gallery/2.jpg" class="img-fluid"/>
+            <img src="${pageContext.request.contextPath}/assets/img/gallery/2.jpg" class="img-fluid"/>
         </div>
 
         <div class="gallery_product col-lg-3 col-md-3 col-sm-3 filter Category1">
-            <img src="assets/img/gallery/3.jpg" class="img-fluid"/>
+            <img src="${pageContext.request.contextPath}/assets/img/gallery/3.jpg" class="img-fluid"/>
         </div>
         <div class="gallery_product col-lg-3 col-md-3 col-sm-3 filter Category4">
-            <img src="assets/img/gallery/4.jpg" class="img-fluid"/>
+            <img src="${pageContext.request.contextPath}/assets/img/gallery/4.jpg" class="img-fluid"/>
         </div>
 
         <div class="gallery_product col-lg-3 col-md-3 col-sm-3 filter Category3">
-            <img src="assets/img/gallery/5.jpg" class="img-fluid"/>
+            <img src="${pageContext.request.contextPath}/assets/img/gallery/5.jpg" class="img-fluid"/>
         </div>
 
         <div class="gallery_product col-lg-3 col-md-3 col-sm-3 filter Category4">
-            <img src="assets/img/gallery/6.jpg" class="img-fluid"/>
+            <img src="${pageContext.request.contextPath}/assets/img/gallery/6.jpg" class="img-fluid"/>
         </div>
 
         <div class="gallery_product col-lg-3 col-md-3 col-sm-3 filter Category3">
-            <img src="assets/img/gallery/7.jpg" class="img-fluid"/>
+            <img src="${pageContext.request.contextPath}/assets/img/gallery/7.jpg" class="img-fluid"/>
         </div>
 
         <div class="gallery_product col-lg-3 col-md-3 col-sm-3 filter Category4">
-            <img src="assets/img/gallery/8.jpg" class="img-fluid"/>
+            <img src="${pageContext.request.contextPath}/assets/img/gallery/8.jpg" class="img-fluid"/>
         </div>
 
         <div class="gallery_product col-lg-3 col-md-3 col-sm-3 filter Category4">
-            <img src="assets/img/gallery/9.jpg" class="img-fluid"/>
+            <img src="${pageContext.request.contextPath}/assets/img/gallery/9.jpg" class="img-fluid"/>
         </div>
 
         <div class="gallery_product col-lg-3 col-md-3 col-sm-3 filter Category1">
-            <img src="assets/img/gallery/10.jpg" class="img-fluid"/>
+            <img src="${pageContext.request.contextPath}/assets/img/gallery/10.jpg" class="img-fluid"/>
         </div>
 
         <div class="gallery_product col-lg-3 col-md-3 col-sm-3 filter Category3">
-            <img src="assets/img/gallery/11.jpg" class="img-fluid"/>
+            <img src="${pageContext.request.contextPath}/assets/img/gallery/11.jpg" class="img-fluid"/>
         </div>
 
         <div class="gallery_product col-lg-3 col-md-3 col-sm-3 filter Category2">
-            <img src="assets/img/gallery/12.jpg" class="img-fluid"/>
+            <img src="${pageContext.request.contextPath}/assets/img/gallery/12.jpg" class="img-fluid"/>
         </div>
     </div>
 

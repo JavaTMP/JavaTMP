@@ -12,7 +12,7 @@ package com.javatmp.util;
 public class Constants {
 
     public static final String LANG_PARAM_NAME = "lang";
-    public static final String LANGUAGE_ATTR_KEY = "lable";
+    public static final String LANGUAGE_ATTR_KEY = "labels";
     public static final String DEFAULT_LOCALE_KEY = "en_US";
     public static final String RESOURCE_BUNDLE_BASE_NAME = "com.javatmp.i18n.messages";
 

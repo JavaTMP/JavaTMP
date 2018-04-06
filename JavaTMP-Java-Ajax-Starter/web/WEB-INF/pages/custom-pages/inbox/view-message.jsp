@@ -19,7 +19,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <img src="assets/img/avatar/profile_pic_min.png" class="" style="">
+                            <img src="${pageContext.request.contextPath}/assets/img/avatar/profile_pic_min.png" class="" style="">
                             <span class="">Customer Support</span>
                             <span>&lt;support@javatmp.com&gt; </span> on 12:00 PM 1 JAN 2018
                             <div class="float-right">
@@ -66,7 +66,7 @@
                             <div class="row">
                                 <div class="col-lg-4">
                                     <div class="card mb-3">
-                                        <img class="card-img-top img-fluid" alt="100%x180" src="assets/img/gallery/1.jpg">
+                                        <img class="card-img-top img-fluid" alt="100%x180" src="${pageContext.request.contextPath}/assets/img/gallery/1.jpg">
                                         <div class="card-footer d-flex align-items-center">
                                             <small class="text-muted">1.jpg</small>
                                             <a href="#" class="btn btn-primary ml-auto">Download</a>
@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="card mb-3">
-                                        <img class="card-img-top img-fluid" alt="100%x180" src="assets/img/gallery/2.jpg">
+                                        <img class="card-img-top img-fluid" alt="100%x180" src="${pageContext.request.contextPath}/assets/img/gallery/2.jpg">
                                         <div class="card-footer d-flex align-items-center">
                                             <small class="text-muted">2.jpg</small>
                                             <a href="#" class="btn btn-primary ml-auto">Download</a>
@@ -84,7 +84,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="card mb-3">
-                                        <img class="card-img-top img-fluid" alt="100%x180" src="assets/img/gallery/3.jpg">
+                                        <img class="card-img-top img-fluid" alt="100%x180" src="${pageContext.request.contextPath}/assets/img/gallery/3.jpg">
                                         <div class="card-footer d-flex align-items-center">
                                             <small class="text-muted">3.jpg</small>
                                             <a href="#" class="btn btn-primary ml-auto">Download</a>
@@ -95,7 +95,7 @@
                             <div class="row mb-3">
                                 <div class="col-lg-4">
                                     <div class="card mb-3">
-                                        <img class="card-img-top img-fluid" alt="100%x180" src="assets/img/gallery/4.jpg">
+                                        <img class="card-img-top img-fluid" alt="100%x180" src="${pageContext.request.contextPath}/assets/img/gallery/4.jpg">
                                         <div class="card-footer d-flex align-items-center">
                                             <small class="text-muted">4.jpg</small>
                                             <a href="#" class="btn btn-primary ml-auto">Download</a>
@@ -104,7 +104,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="card mb-3">
-                                        <img class="card-img-top img-fluid" alt="100%x180" src="assets/img/gallery/5.jpg">
+                                        <img class="card-img-top img-fluid" alt="100%x180" src="${pageContext.request.contextPath}/assets/img/gallery/5.jpg">
                                         <div class="card-footer d-flex align-items-center">
                                             <small class="text-muted">5.jpg</small>
                                             <a href="#" class="btn btn-primary ml-auto">Download</a>
@@ -113,7 +113,7 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="card mb-3">
-                                        <img class="card-img-top img-fluid" alt="100%x180" src="assets/img/gallery/6.jpg">
+                                        <img class="card-img-top img-fluid" alt="100%x180" src="${pageContext.request.contextPath}/assets/img/gallery/6.jpg">
                                         <div class="card-footer d-flex align-items-center">
                                             <small class="text-muted">6.jpg</small>
                                             <a href="#" class="btn btn-primary ml-auto">Download</a>

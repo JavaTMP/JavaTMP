@@ -32,7 +32,7 @@
                         <div class="col-md-8">
                             <!-- <h3>Demo:</h3> -->
                             <div class="img-container">
-                                <img id="image" src="assets/img/gallery/large-image.jpg" alt="Picture"
+                                <img id="image" src="${pageContext.request.contextPath}/assets/img/gallery/large-image.jpg" alt="Picture"
                                      class="img-responsive" />
                             </div>
                         </div>

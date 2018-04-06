@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
-<html lang="en">
+<html lang="${labels["global.language"]}" dir="${labels["global.direction"]}">
     <head>
         <title>JavaTMP - Java Bootstrap Admin and Dashboard Template</title>
         <!-- Required meta tags -->

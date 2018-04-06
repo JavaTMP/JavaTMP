@@ -26,28 +26,28 @@
                         </nav>
                         <div class="carousel-inner">
                             <div class="carousel-item active">
-                                <img src="assets/img/1200x400.png" class="img-fluid">
+                                <img src="${pageContext.request.contextPath}/assets/img/1200x400.png" class="img-fluid">
                                 <div class="carousel-caption">
                                     <h3>Headline</h3>
                                     <p>Lorem ipsum dolor sit amet</p>
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="assets/img/1200x400.png" class="img-fluid">
+                                <img src="${pageContext.request.contextPath}/assets/img/1200x400.png" class="img-fluid">
                                 <div class="carousel-caption">
                                     <h3>Headline</h3>
                                     <p>Lorem ipsum dolor sit amet</p>
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="assets/img/1200x400.png" class="img-fluid">
+                                <img src="${pageContext.request.contextPath}/assets/img/1200x400.png" class="img-fluid">
                                 <div class="carousel-caption">
                                     <h3>Headline</h3>
                                     <p>Lorem ipsum dolor sit amet</p>
                                 </div>
                             </div>
                             <div class="carousel-item">
-                                <img src="assets/img/1200x400.png" class="img-fluid">
+                                <img src="${pageContext.request.contextPath}/assets/img/1200x400.png" class="img-fluid">
                                 <div class="carousel-caption">
                                     <h3>Headline</h3>
                                     <p>Lorem ipsum dolor sit amet</p>

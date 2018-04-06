@@ -19,26 +19,26 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-3 col-md-4 col-xs-6">
-                            <a href="assets/img/gallery/1.jpg" title="Nature Portfolio" class="zoom card-img-top">
-                                <img class="img-fluid" src="assets/img/gallery/1.jpg" alt="Nature Portfolio" />
+                            <a href="${pageContext.request.contextPath}/assets/img/gallery/1.jpg" title="Nature Portfolio" class="zoom card-img-top">
+                                <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/gallery/1.jpg" alt="Nature Portfolio" />
                                 <span class="overlay"><i class="fa fa-arrows-alt"></i></span>
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6">
-                            <a href="assets/img/gallery/2.jpg" title="Food Portfolio" class="zoom">
-                                <img class="img-fluid" src="assets/img/gallery/2.jpg" alt="Food Portfolio" />
+                            <a href="${pageContext.request.contextPath}/assets/img/gallery/2.jpg" title="Food Portfolio" class="zoom">
+                                <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/gallery/2.jpg" alt="Food Portfolio" />
                                 <span class="overlay"><i class="fa fa-arrows-alt"></i></span>
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6">
-                            <a href="assets/img/gallery/3.jpg" title="Sports Portfolio" class="zoom">
-                                <img class="img-fluid" src="assets/img/gallery/3.jpg" alt="Sports Portfolio" />
+                            <a href="${pageContext.request.contextPath}/assets/img/gallery/3.jpg" title="Sports Portfolio" class="zoom">
+                                <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/gallery/3.jpg" alt="Sports Portfolio" />
                                 <span class="overlay"><i class="fa fa-arrows-alt"></i></span>
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6">
-                            <a href="assets/img/gallery/4.jpg" title="People Portfolio" class="zoom">
-                                <img class="img-fluid" src="assets/img/gallery/4.jpg" alt="People Portfolio" />
+                            <a href="${pageContext.request.contextPath}/assets/img/gallery/4.jpg" title="People Portfolio" class="zoom">
+                                <img class="img-fluid" src="${pageContext.request.contextPath}/assets/img/gallery/4.jpg" alt="People Portfolio" />
                                 <span class="overlay"><i class="fa fa-arrows-alt"></i></span>
                             </a>
                         </div>
