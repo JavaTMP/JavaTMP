@@ -15,7 +15,7 @@ public class PagesController extends HttpServlet {
             throws ServletException, IOException {
 
         String requestPath = request.getPathInfo();
-        String requestPage = "/WEB-INF/jsp/pages" + requestPath + ".jsp";
+        String requestPage = "/WEB-INF/pages" + requestPath + ".jsp";
         System.out.println("Request Page [" + requestPage + "]");
 
         request.getRequestDispatcher(requestPage).forward(request, response);
