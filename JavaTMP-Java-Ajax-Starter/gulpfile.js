@@ -14,8 +14,8 @@ var gulpif = require('gulp-if');
 var async = require('async');
 var config = {
     "sourceNodeLib": "./node_modules",
-    "destComponentsLib": "./public_html/components",
-    "destDist": "./public_html/assets/dist",
+    "destComponentsLib": "./web/components",
+    "destDist": "./web/assets/dist",
     "plugins": {
         "font-awesome": [
             {"from": "${sourceNodeLib}/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css", "to": "${destComponentsLib}/font-awesome/web-fonts-with-css/css"},
@@ -210,99 +210,99 @@ var config = {
 };
 var src = {
     "css": [
-        "./public_html/components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css",
-        "./public_html/components/font-awesome-animation/dist/font-awesome-animation.min.css",
-        "./public_html/components/jquery-ui-dist/jquery-ui.min.css",
-//        "./public_html/components/bootstrap/dist/css/bootstrap.min.css",
-        "./public_html/components/metismenu/dist/metisMenu.min.css",
-        "./public_html/components/nprogress/nprogress.css",
-        "./public_html/components/jquery.fancytree/dist/skin-bootstrap/ui.fancytree.min.css",
-        "./public_html/components/jquery-contextmenu/dist/jquery.contextMenu.min.css",
-        "./public_html/components/toastr/build/toastr.min.css",
-        "./public_html/components/bootstrap-daterangepicker/daterangepicker.css",
-        "./public_html/components/bootstrap-colorselector/dist/bootstrap-colorselector.min.css",
-        "./public_html/components/select2/dist/css/select2.min.css",
-        "./public_html/components/select2-bootstrap-theme/dist/select2-bootstrap.min.css",
-        "./public_html/components/summernote/dist/summernote-bs4.css",
-        "./public_html/components/ion-rangeslider/css/ion.rangeSlider.css",
-        "./public_html/components/ion-rangeslider/css/ion.rangeSlider.skinHTML5.css",
-        "./public_html/components/bootstrap-slider/dist/css/bootstrap-slider.min.css",
-        "./public_html/components/fullcalendar/dist/fullcalendar.min.css",
-        "./public_html/components/cropper/dist/cropper.min.css",
-        "./public_html/components/datatables.net-bs4/css/dataTables.bootstrap4.css",
-        "./public_html/components/datatables.net-fixedheader-bs4/css/fixedHeader.bootstrap4.min.css",
-        "./public_html/components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css",
-        "./public_html/components/datatables.net-select-bs4/css/select.bootstrap4.min.css",
-        "./public_html/components/magnific-popup/dist/magnific-popup.css",
-        "./public_html/components/slick-carousel/slick/slick.css",
-        "./public_html/components/slick-carousel/slick/slick-theme.css",
-        "./public_html/components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css",
-//        "./public_html/components/bootstrap-reverse/dist/**/*",
-        "./public_html/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.css"
+        "./web/components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css",
+        "./web/components/font-awesome-animation/dist/font-awesome-animation.min.css",
+        "./web/components/jquery-ui-dist/jquery-ui.min.css",
+//        "./web/components/bootstrap/dist/css/bootstrap.min.css",
+        "./web/components/metismenu/dist/metisMenu.min.css",
+        "./web/components/nprogress/nprogress.css",
+        "./web/components/jquery.fancytree/dist/skin-bootstrap/ui.fancytree.min.css",
+        "./web/components/jquery-contextmenu/dist/jquery.contextMenu.min.css",
+        "./web/components/toastr/build/toastr.min.css",
+        "./web/components/bootstrap-daterangepicker/daterangepicker.css",
+        "./web/components/bootstrap-colorselector/dist/bootstrap-colorselector.min.css",
+        "./web/components/select2/dist/css/select2.min.css",
+        "./web/components/select2-bootstrap-theme/dist/select2-bootstrap.min.css",
+        "./web/components/summernote/dist/summernote-bs4.css",
+        "./web/components/ion-rangeslider/css/ion.rangeSlider.css",
+        "./web/components/ion-rangeslider/css/ion.rangeSlider.skinHTML5.css",
+        "./web/components/bootstrap-slider/dist/css/bootstrap-slider.min.css",
+        "./web/components/fullcalendar/dist/fullcalendar.min.css",
+        "./web/components/cropper/dist/cropper.min.css",
+        "./web/components/datatables.net-bs4/css/dataTables.bootstrap4.css",
+        "./web/components/datatables.net-fixedheader-bs4/css/fixedHeader.bootstrap4.min.css",
+        "./web/components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css",
+        "./web/components/datatables.net-select-bs4/css/select.bootstrap4.min.css",
+        "./web/components/magnific-popup/dist/magnific-popup.css",
+        "./web/components/slick-carousel/slick/slick.css",
+        "./web/components/slick-carousel/slick/slick-theme.css",
+        "./web/components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css",
+//        "./web/components/bootstrap-reverse/dist/**/*",
+        "./web/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.css"
     ],
     "cssForPrint": [
-        "./public_html/components/fullcalendar/dist/fullcalendar.print.min.css"
+        "./web/components/fullcalendar/dist/fullcalendar.print.min.css"
     ],
     "fonts": [
-        "./public_html/components/font-awesome/web-fonts-with-css/webfonts/**/*",
-        "./public_html/components/jquery-contextmenu/dist/font/**/*",
-        "./public_html/components/summernote/dist/font/**/*",
-        "./public_html/components/slick-carousel/slick/fonts/**/*",
-        "./public_html/assets/src/fonts/**/*"
+        "./web/components/font-awesome/web-fonts-with-css/webfonts/**/*",
+        "./web/components/jquery-contextmenu/dist/font/**/*",
+        "./web/components/summernote/dist/font/**/*",
+        "./web/components/slick-carousel/slick/fonts/**/*",
+        "./web/assets/src/fonts/**/*"
     ],
     "img": [
-        "./public_html/components/slick-carousel/slick/ajax-loader.gif",
-        "./public_html/components/malihu-custom-scrollbar-plugin/mCSB_buttons.png"
+        "./web/components/slick-carousel/slick/ajax-loader.gif",
+        "./web/components/malihu-custom-scrollbar-plugin/mCSB_buttons.png"
     ],
-    "js": ["./public_html/components/jquery/dist/jquery.min.js",
-        "./public_html/components/jquery-ui-dist/jquery-ui.min.js",
-        "./public_html/components/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js",
-        "./public_html/components/popper.js/dist/umd/popper.min.js",
-        "./public_html/components/bootstrap/dist/js/bootstrap.min.js",
-        "./public_html/components/metismenu/dist/metisMenu.min.js",
-        "./public_html/components/blockui/jquery.blockUI.js",
-        "./public_html/components/nprogress/nprogress.js",
-        "./public_html/components/scrollup/dist/jquery.scrollUp.min.js",
-        "./public_html/components/jquery.fancytree/dist/jquery.fancytree-all.min.js",
-        "./public_html/components/jquery-contextmenu/dist/jquery.contextMenu.min.js",
-        "./public_html/components/toastr/build/toastr.min.js",
-        "./public_html/components/jquery-idletimer/dist/idle-timer.min.js",
-        "./public_html/components/moment/min/moment.min.js",
-        "./public_html/components/moment/min/locales.min.js",
-        "./public_html/components/bootstrap-daterangepicker/daterangepicker.js",
-        "./public_html/components/bootstrap-colorselector/dist/bootstrap-colorselector.min.js",
-        "./public_html/components/select2/dist/js/select2.full.min.js",
-        "./public_html/components/bootstrap-maxlength/bootstrap-maxlength.min.js",
-        "./public_html/components/autosize/dist/autosize.min.js",
-        "./public_html/components/summernote/dist/lang/**/*",
-        "./public_html/components/summernote/dist/summernote-bs4.min.js",
-        "./public_html/components/ion-rangeslider/js/ion.rangeSlider.min.js",
-        "./public_html/components/bootstrap-slider/dist/bootstrap-slider.min.js",
-        "./public_html/components/fullcalendar/dist/fullcalendar.min.js",
-        "./public_html/components/cropper/dist/cropper.min.js",
-        "./public_html/components/waypoints/lib/jquery.waypoints.min.js",
-        "./public_html/components/jquery.counterup/jquery.counterup.min.js",
-        "./public_html/components/timeago/jquery.timeago.js",
-        "./public_html/components/jquery-validation/dist/jquery.validate.min.js",
-        "./public_html/components/jquery-validation/dist/additional-methods.js",
-        "./public_html/components/inputmask/dist/min/jquery.inputmask.bundle.min.js",
-        "./public_html/components/inputmask/dist/min/inputmask/phone-codes/phone.min.js",
-        "./public_html/components/inputmask/dist/min/inputmask/bindings/inputmask.binding.min.js",
-        "./public_html/components/jquery-form/dist/jquery.form.min.js",
-        "./public_html/components/datatables.net/js/jquery.dataTables.js",
-        "./public_html/components/datatables.net-bs4/js/dataTables.bootstrap4.js",
-        "./public_html/components/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js",
-        "./public_html/components/datatables.net-responsive/js/dataTables.responsive.min.js",
-        "./public_html/components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js",
-        "./public_html/components/datatables.net-select/js/dataTables.select.min.js",
-        "./public_html/components/echarts/dist/echarts.min.js",
-        "./public_html/components/magnific-popup/dist/jquery.magnific-popup.min.js",
-        "./public_html/components/slick-carousel/slick/slick.min.js",
-        "./public_html/components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js",
-        "./public_html/components/bootstrap-modal-wrapper/dist/bootstrap-modal-wrapper-factory.min.js",
-        "./public_html/components/bootstrap-actionable/dist/bootstrap-actionable.min.js",
-        "./public_html/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.js",
-        "./public_html/components/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js"
+    "js": ["./web/components/jquery/dist/jquery.min.js",
+        "./web/components/jquery-ui-dist/jquery-ui.min.js",
+        "./web/components/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js",
+        "./web/components/popper.js/dist/umd/popper.min.js",
+        "./web/components/bootstrap/dist/js/bootstrap.min.js",
+        "./web/components/metismenu/dist/metisMenu.min.js",
+        "./web/components/blockui/jquery.blockUI.js",
+        "./web/components/nprogress/nprogress.js",
+        "./web/components/scrollup/dist/jquery.scrollUp.min.js",
+        "./web/components/jquery.fancytree/dist/jquery.fancytree-all.min.js",
+        "./web/components/jquery-contextmenu/dist/jquery.contextMenu.min.js",
+        "./web/components/toastr/build/toastr.min.js",
+        "./web/components/jquery-idletimer/dist/idle-timer.min.js",
+        "./web/components/moment/min/moment.min.js",
+        "./web/components/moment/min/locales.min.js",
+        "./web/components/bootstrap-daterangepicker/daterangepicker.js",
+        "./web/components/bootstrap-colorselector/dist/bootstrap-colorselector.min.js",
+        "./web/components/select2/dist/js/select2.full.min.js",
+        "./web/components/bootstrap-maxlength/bootstrap-maxlength.min.js",
+        "./web/components/autosize/dist/autosize.min.js",
+        "./web/components/summernote/dist/lang/**/*",
+        "./web/components/summernote/dist/summernote-bs4.min.js",
+        "./web/components/ion-rangeslider/js/ion.rangeSlider.min.js",
+        "./web/components/bootstrap-slider/dist/bootstrap-slider.min.js",
+        "./web/components/fullcalendar/dist/fullcalendar.min.js",
+        "./web/components/cropper/dist/cropper.min.js",
+        "./web/components/waypoints/lib/jquery.waypoints.min.js",
+        "./web/components/jquery.counterup/jquery.counterup.min.js",
+        "./web/components/timeago/jquery.timeago.js",
+        "./web/components/jquery-validation/dist/jquery.validate.min.js",
+        "./web/components/jquery-validation/dist/additional-methods.js",
+        "./web/components/inputmask/dist/min/jquery.inputmask.bundle.min.js",
+        "./web/components/inputmask/dist/min/inputmask/phone-codes/phone.min.js",
+        "./web/components/inputmask/dist/min/inputmask/bindings/inputmask.binding.min.js",
+        "./web/components/jquery-form/dist/jquery.form.min.js",
+        "./web/components/datatables.net/js/jquery.dataTables.js",
+        "./web/components/datatables.net-bs4/js/dataTables.bootstrap4.js",
+        "./web/components/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js",
+        "./web/components/datatables.net-responsive/js/dataTables.responsive.min.js",
+        "./web/components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js",
+        "./web/components/datatables.net-select/js/dataTables.select.min.js",
+        "./web/components/echarts/dist/echarts.min.js",
+        "./web/components/magnific-popup/dist/jquery.magnific-popup.min.js",
+        "./web/components/slick-carousel/slick/slick.min.js",
+        "./web/components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js",
+        "./web/components/bootstrap-modal-wrapper/dist/bootstrap-modal-wrapper-factory.min.js",
+        "./web/components/bootstrap-actionable/dist/bootstrap-actionable.min.js",
+        "./web/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.js",
+        "./web/components/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js"
     ]
 }
 ;
@@ -362,7 +362,7 @@ gulp.task('generate-dist', ['copy-components', "delete-dist", "delete-css", "del
     async.series([
         function (next) {
             gulp.src([
-                './public_html/assets/src/sass/themes/javatmp-*.scss'])
+                './web/assets/src/sass/themes/javatmp-*.scss'])
                     .pipe(sass().on('error', sass.logError))
                     .pipe(autoprefixer({
                         browsers: ['last 2 versions'],
@@ -370,12 +370,12 @@ gulp.task('generate-dist', ['copy-components', "delete-dist", "delete-css", "del
                     }))
                     .pipe(cleanCSS())
                     .pipe(rename({suffix: '.min'}))
-                    .pipe(gulp.dest('./public_html/assets/dist/css'))
+                    .pipe(gulp.dest('./web/assets/dist/css'))
                     .on('end', next);
         },
 //        function (next) {
 //            gulp.src([
-//                './public_html/assets/src/sass/javatmp-*.scss'])
+//                './web/assets/src/sass/javatmp-*.scss'])
 //                    .pipe(sass().on('error', sass.logError))
 //                    .pipe(autoprefixer({
 //                        browsers: ['last 2 versions'],
@@ -383,70 +383,66 @@ gulp.task('generate-dist', ['copy-components', "delete-dist", "delete-css", "del
 //                    }))
 //                    .pipe(cleanCSS())
 //                    .pipe(rename({suffix: '.min'}))
-//                    .pipe(gulp.dest('./public_html/assets/dist/css'))
+//                    .pipe(gulp.dest('./web/assets/dist/css'))
 //                    .on('end', next);
 //        },
         function (next) {
             gulp.src(src.css)
                     .pipe(concat("javatmp-plugins-all.min.css", {newLine: '\n'}))
-                    .pipe(gulp.dest("./public_html/assets/dist/css"))
+                    .pipe(gulp.dest("./web/assets/dist/css"))
                     .on('end', next);
         },
         function (next) {
             gulp.src(src.cssForPrint)
                     .pipe(concat("javatmp-plugins-print-all.min.css", {newLine: '\n'}))
-                    .pipe(gulp.dest("./public_html/assets/dist/css"))
+                    .pipe(gulp.dest("./web/assets/dist/css"))
                     .on('end', next);
         },
         function (next) {
-            gulp.src('./public_html/assets/src/js-src/**/*')
+            gulp.src('./web/assets/src/js-src/**/*')
                     .pipe(eslint())
                     .pipe(eslint.format())
                     .pipe(uglify({output: {comments: /^!/}}))
                     .pipe(rename({suffix: '.min'}))
-                    .pipe(gulp.dest('./public_html/assets/dist/js/'))
+                    .pipe(gulp.dest('./web/assets/dist/js/'))
                     .on('end', next);
         },
         function (next) {
             gulp.src(src.js)
                     .pipe(concat("javatmp-plugins-all.min.js", {newLine: '\n;'}))
-                    .pipe(gulp.dest("./public_html/assets/dist/js"))
+                    .pipe(gulp.dest("./web/assets/dist/js"))
                     .on('end', next);
         },
         function (next) {
             gulp.src(src.img)
-                    .pipe(gulp.dest("./public_html/assets/dist/img"))
+                    .pipe(gulp.dest("./web/assets/dist/img"))
                     .on('end', next);
         },
         function (next) {
             gulp.src(src.fonts)
-                    .pipe(gulp.dest("./public_html/assets/dist/fonts"))
+                    .pipe(gulp.dest("./web/assets/dist/fonts"))
                     .on('end', next);
         },
         function (next) {
-            del.sync([config.destComponentsLib, "./public_html/assets/css", "./public_html/assets/js"], next);
+            del.sync([config.destComponentsLib, "./web/assets/css", "./web/assets/js"], next);
         }
     ], cb);
 });
 gulp.task('run-local-web-server', function () {
 
     connect.server({
-        root: 'public_html',
+        root: 'web',
         port: 8888,
         livereload: true
     });
 });
 gulp.task('delete-css', function () {
-    return del(['./public_html/assets/css/**/*']);
+    return del(['./web/assets/css/**/*']);
 });
 gulp.task('delete-js', function () {
-    return del(['./public_html/assets/js/**/*']);
+    return del(['./web/assets/js/**/*']);
 });
-gulp.task('watch-sass-and-js', ["delete-css", "delete-js", "sass", "compress-js"], function () {
-    console.log("watching scss & js files changing");
-    gulp.watch('./public_html/assets/src/sass/**/*.scss', ['sass']);
-    gulp.watch('./public_html/assets/src/js-src/**/*', ['compress-js']);
-});
+
 gulp.task('default', ['generate-dist'], function () {
     process.stdout.write("*** Finished @ [" + new Date() + "] ***");
 });
