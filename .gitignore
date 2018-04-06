@@ -6,6 +6,7 @@
 node_modules
 projects
 /build
+/dist
 /temp
 /nbproject/private/
 /JavaTMP-Static-Ajax/nbproject/private/
@@ -13,3 +14,5 @@ projects
 /JavaTMP-Static-Ajax-Starter/nbproject/private/
 /JavaTMP-Static-Ajax-Starter-RTL/nbproject/private/
 /JavaTMP-Java-Ajax-Starter/nbproject/private/
+/JavaTMP-Java-Ajax-Starter/build/
+/JavaTMP-Java-Ajax-Starter/dist/
