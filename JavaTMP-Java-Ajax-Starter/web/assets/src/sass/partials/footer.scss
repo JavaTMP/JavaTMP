@@ -1,0 +1,17 @@
+.main-footer-bar {
+    bottom: 0;
+    text-align: center;
+    z-index: $javatmp-footer-bar-z-index;
+    left: 0;
+    right: 0;
+    height: $javatmp-footer-bar-height;
+    border-top: $javatmp-footer-bar-border-width solid $javatmp-footer-bar-border-color;
+    background-color: $javatmp-footer-bar-bg;
+    @media (min-width: 768px) {
+        position: fixed;
+    }
+    .footer-content {
+        padding: 5px;
+    }
+}
+

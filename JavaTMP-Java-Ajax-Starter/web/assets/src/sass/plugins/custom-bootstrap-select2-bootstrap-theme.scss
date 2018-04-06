@@ -1,0 +1,93 @@
+$s2bs-dropdown-box-shadow: $dropdown-box-shadow!default;
+$s2bs-dropdown-box-shadow-above: $s2bs-dropdown-box-shadow!default;
+$s2bs-form-control-default-box-shadow: $input-box-shadow!default;
+$s2bs-form-control-focus-box-shadow: none!default;
+$s2bs-form-control-transition: $input-transition!default;
+
+@import "../../../../../node_modules/select2-bootstrap-theme/src/select2-bootstrap.scss";
+
+.input-group > .select2-container--bootstrap {
+    width: auto;
+    > .selection > .select2-selection.form-control {
+        width: 100%;
+    }
+}
+
+/**
+ * Reset rounded corners
+ */
+$s2bs-border-radius-base: $border-radius !default;
+$s2bs-border-radius-large: $border-radius-lg !default;
+$s2bs-border-radius-small: $border-radius-sm !default;
+
+.input-group > .select2-hidden-accessible {
+    &:first-child + .select2-container--bootstrap[dir="rtl"] > .selection > .select2-selection,
+        &:first-child + .select2-container--bootstrap[dir="rtl"] > .selection > .select2-selection.form-control {
+        @include border-radius(0);
+        @include border-right-radius($s2bs-border-radius-base);
+    }
+    &:first-child + .select2-container--open.select2-container--below.select2-container--bootstrap[dir="rtl"] > .selection > .select2-selection,
+        &:first-child + .select2-container--open.select2-container--below.select2-container--bootstrap[dir="rtl"] > .selection > .select2-selection.form-control {
+        @include border-bottom-radius(0);
+    }
+    &:first-child + .select2-container--open.select2-container--above.select2-container--bootstrap[dir="rtl"] > .selection > .select2-selection,
+        &:first-child + .select2-container--open.select2-container--above.select2-container--bootstrap[dir="rtl"] > .selection > .select2-selection.form-control {
+        @include border-top-radius(0);
+    }
+
+    &:not(:first-child) + .select2-container--bootstrap[dir="rtl"]:not(:last-child) > .selection > .select2-selection,
+        &:not(:first-child) + .select2-container--bootstrap[dir="rtl"]:not(:last-child) > .selection > .select2-selection.form-control {
+        @include border-radius(0);
+    }
+
+    &:not(:first-child):not(:last-child) + .select2-container--bootstrap[dir="rtl"]:last-child > .selection > .select2-selection,
+        &:not(:first-child):not(:last-child) + .select2-container--bootstrap[dir="rtl"]:last-child > .selection > .select2-selection.form-control {
+        @include border-radius(0);
+        @include border-left-radius($s2bs-border-radius-base);
+    }
+    &:not(:first-child):not(:last-child) + .select2-container--open.select2-container--above.select2-container--bootstrap[dir="rtl"]:last-child > .selection > .select2-selection,
+        &:not(:first-child):not(:last-child) + .select2-container--open.select2-container--above.select2-container--bootstrap[dir="rtl"]:last-child > .selection > .select2-selection.form-control {
+        @include border-top-radius(0);
+    }
+    &:not(:first-child):not(:last-child) + .select2-container--open.select2-container--below.select2-container--bootstrap[dir="rtl"]:last-child > .selection > .select2-selection,
+        &:not(:first-child):not(:last-child) + .select2-container--open.select2-container--below.select2-container--bootstrap[dir="rtl"]:last-child > .selection > .select2-selection.form-control {
+        @include border-bottom-radius(0);
+    }
+}
+
+.input-group-sm > .select2-hidden-accessible {
+    &:first-child + .select2-container--bootstrap[dir="rtl"] > .selection > .select2-selection,
+        &:first-child + .select2-container--bootstrap[dir="rtl"] > .selection > .select2-selection.form-control {
+        @include border-radius(0);
+        @include border-right-radius($s2bs-border-radius-small);
+    }
+
+    &:not(:first-child) + .select2-container--bootstrap[dir="rtl"]:not(:last-child) > .selection > .select2-selection,
+        &:not(:first-child) + .select2-container--bootstrap[dir="rtl"]:not(:last-child) > .selection > .select2-selection.form-control {
+        @include border-radius(0);
+    }
+
+    &:not(:first-child):not(:last-child) + .select2-container--bootstrap[dir="rtl"]:last-child > .selection > .select2-selection,
+        &:not(:first-child):not(:last-child) + .select2-container--bootstrap[dir="rtl"]:last-child > .selection > .select2-selection.form-control {
+        @include border-radius(0);
+        @include border-left-radius($s2bs-border-radius-small);
+    }
+}
+.input-group-lg > .select2-hidden-accessible {
+    &:first-child + .select2-container--bootstrap[dir="rtl"] > .selection > .select2-selection,
+        &:first-child + .select2-container--bootstrap[dir="rtl"] > .selection > .select2-selection.form-control {
+        @include border-radius(0);
+        @include border-right-radius($s2bs-border-radius-large);
+    }
+
+    &:not(:first-child) + .select2-container--bootstrap[dir="rtl"]:not(:last-child) > .selection > .select2-selection,
+        &:not(:first-child) + .select2-container--bootstrap[dir="rtl"]:not(:last-child) > .selection > .select2-selection.form-control {
+        @include border-radius(0);
+    }
+
+    &:not(:first-child):not(:last-child) + .select2-container--bootstrap[dir="rtl"]:last-child > .selection > .select2-selection,
+        &:not(:first-child):not(:last-child) + .select2-container--bootstrap[dir="rtl"]:last-child > .selection > .select2-selection.form-control {
+        @include border-radius(0);
+        @include border-left-radius($s2bs-border-radius-large);
+    }
+}

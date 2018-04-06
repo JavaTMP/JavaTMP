@@ -5,3 +5,5 @@
 # Folders to ignore
 node_modules
 /nbproject/private/
+/build
+/dist

@@ -1,0 +1,44 @@
+
+$card-extender-fullscreen-z-index: 1029 !default;
+$card-extender-options-color: $primary !default;
+$card-extender-options-hover-color: darken($primary, 10%) !default;
+$card-extender-options-transition: $transition-base !default;
+
+.has-card-extender-fullscreen {
+    overflow: hidden;
+}
+
+.card {
+    &.card-extender-fullscreen {
+        z-index: $card-extender-fullscreen-z-index;
+        margin: 0!important;
+        position: fixed;
+        top: 0!important;
+        left: 0!important;
+        bottom: 0px!important;
+        right: 0!important;
+        width: 100%!important;
+        height: 100%!important;
+        > .card-body {
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+    }
+    > .card-header {
+        > .options {
+            display: inline-block;
+            position: relative;
+            > a {
+                display: inline-block;
+                margin-left: 6px;
+                color: $card-extender-options-color;
+                @include transition($card-extender-options-transition);
+                &:hover {
+                    color: $card-extender-options-hover-color;
+                    text-decoration: underline;
+                    transform: scale(1.3);
+                }
+            }
+        }
+    }
+}
