@@ -18,9 +18,18 @@
                         <a href="#" class="fullscreen"><i class=" fa fa-expand"></i></a>
                     </div>
                 </div>
-                <div class="card-body">
-                    <h4 class="card-title text-primary">Special title treatment</h4>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <div class="card-body p-0">
+                    <table id="chartOfAccountMainTable" class="table table-sm table-condensed table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th width="150" class=""></th>
+                                <th width="*">Classification</th>
+                                <th  width="100">Folder</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -55,6 +64,49 @@
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
+
+                glyph_opts = {
+                    preset: "awesome5",
+                    map: {
+                        doc: "far fa-file-alt",
+                        docOpen: "far fa-file",
+                        checkbox: "far fa-square",
+                        checkboxSelected: "far fa-check-square",
+                        checkboxUnknown: "far fa-minus-square",
+                        dragHelper: "fa fa-arrows",
+                        dropMarker: "fa fa-arrow-right",
+                        error: "fa fa-exclamation-triangle",
+                        expanderClosed: "fa fa-chevron-right",
+                        expanderLazy: "fa fa-chevron-right",
+                        expanderOpen: "fa fa-chevron-down",
+                        folder: "fa fa-folder",
+                        folderOpen: "fa fa-folder-open",
+                        loading: "fa fa-sync fa-spin"
+                    }
+                };
+
+                $("#chartOfAccountMainTable").fancytree({
+                    extensions: ["glyph", "table"],
+                    checkbox: false,
+                    glyph: glyph_opts,
+                    source: {url: "${pageContext.request.contextPath}/accounting/chartOfAccounts", debugDelay: 500},
+                    table: {
+                        indentation: 25,
+                        nodeColumnIdx: 1
+                    },
+                    activate: function (event, data) {
+                    },
+                    lazyLoad: function (event, data) {
+                        data.result = {url: "${pageContext.request.contextPath}/assets/data/fancytreeSub.json", debugDelay: 500};
+                    },
+                    renderColumns: function (event, data) {
+                        var node = data.node,
+                                $tdList = $(node.tr).find(">td");
+                        $tdList.eq(0).text(node.getIndexHier());
+                        $tdList.eq(2).text(!!node.folder);
+                    }
+                });
+
             });
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
