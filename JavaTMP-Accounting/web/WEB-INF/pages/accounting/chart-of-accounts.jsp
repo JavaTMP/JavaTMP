@@ -100,6 +100,8 @@
                         // Rename 'key' to 'id'
                         c.key = c.accountId;
                         c.title = c.accountName;
+                        c.tooltip = c.accountDescription;
+//                        c.icon = "far fa-heart";
                         // Check if c is a child node
                         if (c.parentAccountId) {
                             // add c to `children` array of parent node
@@ -124,10 +126,18 @@
                     extensions: ["glyph", "table"],
                     checkbox: false,
                     glyph: glyph_opts,
+                    autoScroll: true,
                     source: {
                         url: "${pageContext.request.contextPath}/accounting/chartOfAccounts",
-                        debugDelay: 100,
+                        debugDelay: 200,
                         cache: false
+                    },
+                    init: function (event, data) {
+//                        data.tree.getRootNode().sortChildren(function (a, b) {
+//                            var x = a.key,
+//                                    y = b.key;
+//                            return x === y ? 0 : x > y ? -1 : +1;
+//                        }, true);
                     },
                     postProcess: function (event, data) {
                         data.result = convertData(data.response);
