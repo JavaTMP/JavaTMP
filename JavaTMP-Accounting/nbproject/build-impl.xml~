@@ -41,8 +41,8 @@
         <property file="${user.properties.file}"/>
         <!-- The two properties below are usually overridden -->
         <!-- by the active platform. Just a fallback. -->
-        <property name="default.javac.source" value="1.4"/>
-        <property name="default.javac.target" value="1.4"/>
+        <property name="default.javac.source" value="1.8"/>
+        <property name="default.javac.target" value="1.8"/>
     </target>
     <target depends="-pre-init,-init-private,-init-user" name="-init-project">
         <property file="nbproject/project.properties"/>
@@ -783,9 +783,9 @@ or ant -Dj2ee.platform.classpath=&lt;server_classpath&gt; (where no properties f
     <target name="-init-taskdefs">
         <fail unless="libs.CopyLibs.classpath">
 The libs.CopyLibs.classpath property is not set up.
-This property must point to 
+This property must point to
 org-netbeans-modules-java-j2seproject-copylibstask.jar file which is part
-of NetBeans IDE installation and is usually located at 
+of NetBeans IDE installation and is usually located at
 &lt;netbeans_installation&gt;/java&lt;version&gt;/ant/extra folder.
 Either open the project in the IDE and make sure CopyLibs library
 exists or setup the property manually. For example like this:
@@ -1306,7 +1306,7 @@ exists or setup the property manually. For example like this:
     </target>
     <target depends="init,javadoc-build,javadoc-browse" description="Build Javadoc." name="javadoc"/>
     <!--
-                
+
                 TEST COMPILATION SECTION
             -->
     <target depends="init,compile" if="have.tests" name="-pre-pre-compile-test">
@@ -1341,7 +1341,7 @@ exists or setup the property manually. For example like this:
     </target>
     <target depends="init,compile,-pre-pre-compile-test,-pre-compile-test-single,-do-compile-test-single,-post-compile-test-single" name="compile-test-single"/>
     <!--
-                
+
                 TEST EXECUTION SECTION
             -->
     <target depends="init" if="have.tests" name="-pre-test-run">
@@ -1377,7 +1377,7 @@ exists or setup the property manually. For example like this:
     </target>
     <target depends="init,compile-test-single,-pre-test-run-single,-do-test-run-single-method,-post-test-run-single-method" description="Run single unit test." name="test-single-method"/>
     <!--
-                
+
                 TEST DEBUGGING SECTION
             -->
     <target depends="init,compile-test-single,-pre-test-run-single" if="have.tests" name="-debug-start-debuggee-test">
@@ -1399,9 +1399,9 @@ exists or setup the property manually. For example like this:
     </target>
     <target depends="init,-pre-debug-fix,-do-debug-fix-test" if="netbeans.home" name="debug-fix-test"/>
     <!--
-                
-                CLEANUP SECTION
-            -->
+
+        CLEANUP SECTION
+    -->
     <target depends="init" name="deps-clean" unless="no.deps"/>
     <target depends="init" name="do-clean">
         <condition property="build.dir.to.clean" value="${build.web.dir}">

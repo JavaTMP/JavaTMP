@@ -19,17 +19,12 @@
                             Please Sign In
                         </div>
                         <div class="card-body">
-                            <form role="form" action="/JavaTMP-Static-Ajax-Starter/#pages/home.html">
+                            <form id="main-login-form" method="POST" role="form" action="login">
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Username" name="username" type="text" autofocus>
+                                    <input class="form-control required" placeholder="Username" name="username" type="text" autofocus>
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Password" name="password" type="password" value="">
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input name="remember" type="checkbox" value="Remember Me">Remember Me
-                                    </label>
+                                    <input class="form-control required" placeholder="Password" name="password" type="password" value="">
                                 </div>
                                 <button type="submit" href="javascript:;" class="btn btn-lg btn-primary btn-block">Login</button>
                             </form>
@@ -43,11 +38,78 @@
         </style>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
         <script type="text/javascript">
-            jQuery(document).ready(function () {
-                (function ($) {
+            (function ($) {
+                // https://www.sanwebe.com/2016/07/ajax-form-submit-examples-using-jquery
+                // https://stackoverflow.com/questions/1960240/jquery-ajax-submit-form
 
-                }(jQuery));
-            });
+                var loginForm = $('#main-login-form');
+                var validator = null;
+                var alertError = null;
+                loginForm.on("submit", function (event) {
+                    event.preventDefault();
+                    if (!$(this).valid()) {
+                        return;
+                    }
+                    $('#' + alertError).remove();
+                    var httpType = $(this).attr("method");
+                    var post_url = $(this).attr("action"); //get form action url
+//                    var form_data = new FormData(loginForm); //Creates new FormData object
+                    var form_data = $(this).serializeArray();
+                    $.ajax({
+                        type: httpType,
+                        url: post_url,
+//                        processData: false,
+//                        contentType: false,
+                        data: form_data,
+                        success: function (data) {
+                            if (data.overAllStatus) {
+                                window.location.replace("/");
+                            } else {
+                                // show error to user
+                                var alertError = BootstrapAlertWrapper.createAlert({
+                                    container: loginForm, // alerts parent container(by default placed after the page breadcrumbs)
+                                    place: "prepent", // append or prepent in container
+                                    type: "danger", // alert's type
+                                    message: data.message, // alert's message
+                                    icon: "fa-lg fas fa-exclamation-triangle"
+                                });
+                            }
+                        },
+                        error: function (data) {
+                            alert("error" + JSON.stringify(data));
+                        }
+                    });
+                });
+
+                validator = loginForm.validate({
+                    rules: {
+                        username: {
+                            required: true
+                        },
+                        password: {
+                            required: true
+                        }
+                    },
+                    highlight: function (element) {
+                        $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                    },
+                    unhighlight: function (element) {
+                        $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+                    },
+                    errorElement: 'small',
+                    errorClass: 'form-text text-danger',
+                    errorPlacement: function (error, element) {
+                        if (element.length) {
+                            var targetParent = $(element).parent();
+                            if (targetParent.hasClass("form-check") || targetParent.hasClass("custom-control")) {
+                                targetParent = targetParent.parent();
+                            }
+                            targetParent.append(error);
+                        }
+                    }
+                });
+
+            }(jQuery));
         </script>
     </body>
 </html>

@@ -174,12 +174,6 @@
                                             Activities And Notifications
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="${pageContext.request.contextPath}/logout">
-                                            <i class="fa fa-sign-out-alt"></i>
-                                            Logout
-                                        </a>
-                                    </li>
                                 </ul>
                             </li>
                         </ul>

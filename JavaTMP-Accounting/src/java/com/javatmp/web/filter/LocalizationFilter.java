@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.javatmp.web.filter;
 
 import com.javatmp.util.Constants;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -18,7 +14,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 
-@WebFilter(filterName = "LocalizationFilter", urlPatterns = {"/*"})
+@WebFilter(filterName = "LocalizationFilter", urlPatterns = {"/*"}, dispatcherTypes = DispatcherType.REQUEST)
 public class LocalizationFilter implements Filter {
 
     private FilterConfig filterConfig = null;

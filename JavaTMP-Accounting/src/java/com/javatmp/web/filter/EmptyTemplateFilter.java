@@ -10,12 +10,17 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
-@WebFilter(filterName = "LoggingFilter", urlPatterns = {"/*"}, dispatcherTypes = DispatcherType.REQUEST)
-public class LoggingFilter implements Filter {
+@WebFilter(filterName = "EmptyTemplateFilter", urlPatterns = {"/*"}, dispatcherTypes = DispatcherType.REQUEST)
+public class EmptyTemplateFilter implements Filter {
 
     private FilterConfig filterConfig = null;
 
-    public LoggingFilter() {
+    public EmptyTemplateFilter() {
+    }
+
+    @Override
+    public void init(FilterConfig filterConfig) {
+        this.filterConfig = filterConfig;
     }
 
     @Override
@@ -23,20 +28,16 @@ public class LoggingFilter implements Filter {
             FilterChain chain)
             throws IOException, ServletException {
 
-        Throwable problem = null;
         try {
             chain.doFilter(request, response);
         } catch (Throwable t) {
-            // If an exception is thrown somewhere down the filter chain,
-            // we still want to execute our after processing, and then
-            // rethrow the problem after that.
-            problem = t;
-            t.printStackTrace();
         }
     }
 
     /**
      * Return the filter configuration object for this filter.
+     *
+     * @return
      */
     public FilterConfig getFilterConfig() {
         return (this.filterConfig);
@@ -51,17 +52,6 @@ public class LoggingFilter implements Filter {
         this.filterConfig = filterConfig;
     }
 
-    /**
-     * Destroy method for this filter
-     */
     public void destroy() {
     }
-
-    /**
-     * Init method for this filter
-     */
-    public void init(FilterConfig filterConfig) {
-        this.filterConfig = filterConfig;
-    }
-
 }

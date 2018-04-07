@@ -10,35 +10,37 @@ package com.javatmp.mvc;
  * @author user
  */
 public class ResponseMessage {
-    
-    
-    private String overAllStatus;
-    private String message;    
+
+    private boolean overAllStatus;
+    private String message;
     private Integer statusCode;
-    
-    public ResponseMessage(String overAllStatus, String message, Integer statusCode) {
+
+    public ResponseMessage() {
+    }
+
+    public ResponseMessage(boolean overAllStatus, String message, Integer statusCode) {
         this.overAllStatus = overAllStatus;
         this.message = message;
         this.statusCode = statusCode;
     }
-    
-    public ResponseMessage(String overAllStatus, Integer statusCode) {
+
+    public ResponseMessage(boolean overAllStatus, Integer statusCode) {
         this.overAllStatus = overAllStatus;
         this.message = null;
         this.statusCode = statusCode;
     }
-    
+
     /**
      * @return the overAllStatus
      */
-    public String getOverAllStatus() {
+    public boolean getOverAllStatus() {
         return overAllStatus;
     }
 
     /**
      * @param overAllStatus the overAllStatus to set
      */
-    public void setOverAllStatus(String overAllStatus) {
+    public void setOverAllStatus(boolean overAllStatus) {
         this.overAllStatus = overAllStatus;
     }
 
@@ -69,5 +71,5 @@ public class ResponseMessage {
     public void setStatusCode(Integer statusCode) {
         this.statusCode = statusCode;
     }
-    
+
 }
