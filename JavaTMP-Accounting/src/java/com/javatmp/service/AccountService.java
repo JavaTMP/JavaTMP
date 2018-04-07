@@ -5,10 +5,18 @@
  */
 package com.javatmp.service;
 
+import com.javatmp.domain.Account;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  *
  * @author m_dar
  */
 public class AccountService {
 
+    public List<Account> getChartOfAccounts() {
+        List<Account> chartOfAccounts = new LinkedList<>();
+        return chartOfAccounts;
+    }
 }

@@ -22,9 +22,11 @@
                     <table id="chartOfAccountMainTable" class="table table-sm table-condensed table-hover table-bordered">
                         <thead>
                             <tr>
-                                <th width="150" class=""></th>
-                                <th width="*">Classification</th>
-                                <th  width="100">Folder</th>
+                                <th width="150" class="">Account Code</th>
+                                <th width="*">Account Name</th>
+                                <th  width="100">Debit</th>
+                                <th  width="100">Credit</th>
+                                <th  width="100">Balance</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -89,21 +91,43 @@
                     extensions: ["glyph", "table"],
                     checkbox: false,
                     glyph: glyph_opts,
-                    source: {url: "${pageContext.request.contextPath}/accounting/chartOfAccounts", debugDelay: 500},
+                    source: {
+                        url: "${pageContext.request.contextPath}/accounting/chartOfAccounts",
+                        debugDelay: 500,
+                        cache: false
+                    },
+                    postProcess: function (event, data) {
+                        data.result = [
+                            {
+                                "title": "No Accounts",
+                                "accountCode": "ERROR",
+                                "debit": 0.0,
+                                "credit": 0.0,
+                                "balance": 0.0
+                            },
+                            {
+                                "title": "No Accounts",
+                                "accountCode": "ERROR",
+                                "debit": 0.0,
+                                "credit": 0.0,
+                                "balance": 0.0
+                            }
+
+                        ];
+                    },
                     table: {
                         indentation: 25,
                         nodeColumnIdx: 1
                     },
                     activate: function (event, data) {
                     },
-                    lazyLoad: function (event, data) {
-                        data.result = {url: "${pageContext.request.contextPath}/assets/data/fancytreeSub.json", debugDelay: 500};
-                    },
                     renderColumns: function (event, data) {
-                        var node = data.node,
-                                $tdList = $(node.tr).find(">td");
-                        $tdList.eq(0).text(node.getIndexHier());
-                        $tdList.eq(2).text(!!node.folder);
+                        var node = data.node;
+                        var $tdList = $(node.tr).find(">td");
+                        $tdList.eq(0).text(node.data.accountCode);
+                        $tdList.eq(2).text(node.data.debit);
+                        $tdList.eq(3).text(node.data.credit);
+                        $tdList.eq(4).text(node.data.balance);
                     }
                 });
 
