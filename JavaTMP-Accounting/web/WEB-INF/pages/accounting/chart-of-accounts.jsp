@@ -22,7 +22,7 @@
                     <table id="chartOfAccountMainTable" class="table table-sm table-condensed table-hover table-bordered">
                         <thead>
                             <tr>
-                                <th width="150" class="">Account Code</th>
+                                <th width="120" class="">Account Code</th>
                                 <th width="*">Account Name</th>
                                 <th  width="100">Debit</th>
                                 <th  width="100">Credit</th>
@@ -87,36 +87,73 @@
                     }
                 };
 
+                function convertData(childList) {
+                    var parent,
+                            nodeMap = {};
+
+                    // Pass 1: store all tasks in reference map
+                    $.each(childList, function (i, c) {
+                        nodeMap[c.accountId] = c;
+                    });
+                    // Pass 2: adjust fields and fix child structure
+                    childList = $.map(childList, function (c) {
+                        // Rename 'key' to 'id'
+                        c.key = c.accountId;
+                        c.title = c.accountName;
+                        // Check if c is a child node
+                        if (c.parentAccountId) {
+                            // add c to `children` array of parent node
+                            parent = nodeMap[c.parentAccountId];
+                            parent.folder = true;
+                            parent.expanded = true;
+                            if (parent.children) {
+                                parent.children.push(c);
+                            } else {
+                                parent.children = [c];
+                            }
+                            return null;  // Remove c from childList
+                        }
+                        return c;  // Keep top-level nodes
+                    });
+
+//                    alert(JSON.stringify(childList));
+                    return childList;
+                }
+
                 $("#chartOfAccountMainTable").fancytree({
                     extensions: ["glyph", "table"],
                     checkbox: false,
                     glyph: glyph_opts,
                     source: {
                         url: "${pageContext.request.contextPath}/accounting/chartOfAccounts",
-                        debugDelay: 500,
+                        debugDelay: 100,
                         cache: false
                     },
                     postProcess: function (event, data) {
-                        data.result = [
-                            {
-                                "title": "No Accounts",
-                                "accountCode": "ERROR",
-                                "debit": 0.0,
-                                "credit": 0.0,
-                                "balance": 0.0
-                            },
-                            {
-                                "title": "No Accounts",
-                                "accountCode": "ERROR",
-                                "debit": 0.0,
-                                "credit": 0.0,
-                                "balance": 0.0
-                            }
-
-                        ];
+                        data.result = convertData(data.response);
+//                        data.result = {
+//                            error: "ERROR #" + orgResponse.faultCode + ": " + orgResponse.faultMsg
+//                        };
+//                        data.result = [
+//                            {
+//                                "title": "No Accounts",
+//                                "accountCode": "ERROR",
+//                                "debit": 0.0,
+//                                "credit": 0.0,
+//                                "balance": 0.0
+//                            },
+//                            {
+//                                "title": "No Accounts",
+//                                "accountCode": "ERROR",
+//                                "debit": 0.0,
+//                                "credit": 0.0,
+//                                "balance": 0.0
+//                            }
+//
+//                        ];
                     },
                     table: {
-                        indentation: 25,
+                        indentation: 20,
                         nodeColumnIdx: 1
                     },
                     activate: function (event, data) {

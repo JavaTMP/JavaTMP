@@ -17,6 +17,7 @@ public class AccountService {
 
     public List<Account> getChartOfAccounts() {
         List<Account> chartOfAccounts = new LinkedList<>();
+        chartOfAccounts = DBFaker.getStaticAccounts();
         return chartOfAccounts;
     }
 }

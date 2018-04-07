@@ -6,6 +6,7 @@
 package com.javatmp.domain;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  *
@@ -21,147 +22,129 @@ public class Account {
     private BigDecimal credit;
     private BigDecimal balance;
     private Integer accountType;
-    private Long parentAccount;
+    private Long parentAccountId;
+    private Account parentAccount;
     private Integer accountStatus;
+    private List<Account> children;
 
-    /**
-     * @return the accountId
-     */
+    public Account(Long accountId, String accountCode, String accountName,
+            String accountDescription, BigDecimal debit, BigDecimal credit,
+            BigDecimal balance, Integer accountType, Long parentAccountId,
+            Account parentAccount, Integer accountStatus, List<Account> children) {
+        this.accountId = accountId;
+        this.accountCode = accountCode;
+        this.accountName = accountName;
+        this.accountDescription = accountDescription;
+        this.debit = debit;
+        this.credit = credit;
+        this.balance = balance;
+        this.accountType = accountType;
+        this.parentAccountId = parentAccountId;
+        this.parentAccount = parentAccount;
+        this.accountStatus = accountStatus;
+        this.children = children;
+    }
+
     public Long getAccountId() {
         return accountId;
     }
 
-    /**
-     * @param accountId the accountId to set
-     */
     public void setAccountId(Long accountId) {
         this.accountId = accountId;
     }
 
-    /**
-     * @return the accountCode
-     */
     public String getAccountCode() {
         return accountCode;
     }
 
-    /**
-     * @param accountCode the accountCode to set
-     */
     public void setAccountCode(String accountCode) {
         this.accountCode = accountCode;
     }
 
-    /**
-     * @return the accountName
-     */
     public String getAccountName() {
         return accountName;
     }
 
-    /**
-     * @param accountName the accountName to set
-     */
     public void setAccountName(String accountName) {
         this.accountName = accountName;
     }
 
-    /**
-     * @return the debit
-     */
     public BigDecimal getDebit() {
         return debit;
     }
 
-    /**
-     * @param debit the debit to set
-     */
     public void setDebit(BigDecimal debit) {
         this.debit = debit;
     }
 
-    /**
-     * @return the credit
-     */
     public BigDecimal getCredit() {
         return credit;
     }
 
-    /**
-     * @param credit the credit to set
-     */
     public void setCredit(BigDecimal credit) {
         this.credit = credit;
     }
 
-    /**
-     * @return the balance
-     */
     public BigDecimal getBalance() {
         return balance;
     }
 
-    /**
-     * @param balance the balance to set
-     */
     public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 
-    /**
-     * @return the accountType
-     */
     public Integer getAccountType() {
         return accountType;
     }
 
-    /**
-     * @param accountType the accountType to set
-     */
     public void setAccountType(Integer accountType) {
         this.accountType = accountType;
     }
 
-    /**
-     * @return the parentAccount
-     */
-    public Long getParentAccount() {
-        return parentAccount;
+    public Long getParentAccountId() {
+        return parentAccountId;
     }
 
-    /**
-     * @param parentAccount the parentAccount to set
-     */
-    public void setParentAccount(Long parentAccount) {
-        this.parentAccount = parentAccount;
+    public void setParentAccountId(Long parentAccountId) {
+        this.parentAccountId = parentAccountId;
     }
 
-    /**
-     * @return the accountStatus
-     */
     public Integer getAccountStatus() {
         return accountStatus;
     }
 
-    /**
-     * @param accountStatus the accountStatus to set
-     */
     public void setAccountStatus(Integer accountStatus) {
         this.accountStatus = accountStatus;
     }
 
-    /**
-     * @return the accountDescription
-     */
     public String getAccountDescription() {
         return accountDescription;
     }
 
-    /**
-     * @param accountDescription the accountDescription to set
-     */
     public void setAccountDescription(String accountDescription) {
         this.accountDescription = accountDescription;
+    }
+
+    public Account getParentAccount() {
+        return parentAccount;
+    }
+
+    public void setParentAccount(Account parentAccount) {
+        this.parentAccount = parentAccount;
+    }
+
+    /**
+     * @return the children
+     */
+    public List<Account> getChildren() {
+        return children;
+    }
+
+    /**
+     * @param children the children to set
+     */
+    public void setChildren(List<Account> children) {
+        this.children = children;
     }
 
 }
