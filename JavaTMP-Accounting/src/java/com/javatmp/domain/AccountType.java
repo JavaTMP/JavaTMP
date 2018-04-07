@@ -6,10 +6,12 @@
 package com.javatmp.domain;
 
 public enum AccountType {
-    ASSET(-1, +1),
-    LIABILITY(+1, -1),
-    INCOME(+1, -1),
-    EXPENSE(-1, +1),
+    // https://en.wikipedia.org/wiki/Debits_and_credits
+    ASSET(+1, -1),
+    LIABILITY(-1, +1),
+    INCOME(-1, +1),
+    EXPENSE(+1, -1),
+    Equity(-1, +1),
     OPEN(+1, +1);
 
     private int debitSign;
