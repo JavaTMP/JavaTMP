@@ -7,13 +7,15 @@
         <div class="col">
             <div class="card my-3">
                 <div class="card-header">
-                    Blank Card Title
+                    <nav class="nav d-inline">
+                        <a class="d-inline nav-link active" href="#">Active</a>
+                        <a class="d-inline nav-link" href="#">Link</a>
+                        <a class="d-inline nav-link" href="#">Link</a>
+                        <a class="d-inline nav-link disabled" href="#">Disabled</a>
+                    </nav>
                     <div class="options float-right">
-                        <a href="#" class="settings"><i class="fa fa-cog"></i></a>
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
-                        <a href="#" class="reload"><i class="fa fa-sync"></i></a>
                         <a href="#" class="fullscreen"><i class=" fa fa-expand"></i></a>
-                        <a href="#" class="remove"><i class="fa fa-times"></i></a>
                     </div>
                 </div>
                 <div class="card-body">

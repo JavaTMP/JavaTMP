@@ -41,7 +41,6 @@
             (function ($) {
                 // https://www.sanwebe.com/2016/07/ajax-form-submit-examples-using-jquery
                 // https://stackoverflow.com/questions/1960240/jquery-ajax-submit-form
-
                 var loginForm = $('#main-login-form');
                 var validator = null;
                 var alertError = null;
