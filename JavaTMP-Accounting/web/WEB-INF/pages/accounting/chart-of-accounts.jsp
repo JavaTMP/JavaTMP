@@ -129,7 +129,7 @@
                     autoScroll: true,
                     source: {
                         url: "${pageContext.request.contextPath}/accounting/chartOfAccounts",
-                        debugDelay: 200,
+                        debugDelay: 500,
                         cache: false
                     },
                     init: function (event, data) {

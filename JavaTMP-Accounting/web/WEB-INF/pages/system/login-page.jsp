@@ -69,8 +69,8 @@
                                     container: loginForm, // alerts parent container(by default placed after the page breadcrumbs)
                                     place: "prepent", // append or prepent in container
                                     type: "danger", // alert's type
-                                    message: data.message, // alert's message
-                                    icon: "fa-lg fas fa-exclamation-triangle"
+                                    message: data.message,
+                                    close: false
                                 });
                             }
                         },
