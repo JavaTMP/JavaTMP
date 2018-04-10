@@ -19,10 +19,10 @@
                     <div class="row bootstrap-pill-wizard">
                         <div class="col-3">
                             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                                <a data-url="pages/wizard/ajax/ajax-step-content.html"  class="disabled nav-item nav-link" id="step1-" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Step 1</a>
-                                <a data-url="pages/wizard/ajax/ajax-step-content-1.html" class="disabled nav-item nav-link" id="step2-" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-profile" aria-selected="false">Step 2</a>
-                                <a data-url="pages/wizard/ajax/ajax-step-content-2.html" class="disabled nav-item nav-link" id="step3-" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-messages" aria-selected="false">Step 3</a>
-                                <a data-url="pages/wizard/ajax/ajax-step-content.html" class="disabled nav-item nav-link" id="step4-" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-settings" aria-selected="false">Step 4</a>
+                                <a data-url="${pageContext.request.contextPath}/pages/wizard/ajax/ajax-step-content"  class="disabled nav-item nav-link" id="step1-" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Step 1</a>
+                                <a data-url="${pageContext.request.contextPath}/pages/wizard/ajax/ajax-step-content-1" class="disabled nav-item nav-link" id="step2-" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-profile" aria-selected="false">Step 2</a>
+                                <a data-url="${pageContext.request.contextPath}/pages/wizard/ajax/ajax-step-content-2" class="disabled nav-item nav-link" id="step3-" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-messages" aria-selected="false">Step 3</a>
+                                <a data-url="${pageContext.request.contextPath}/pages/wizard/ajax/ajax-step-content" class="disabled nav-item nav-link" id="step4-" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-settings" aria-selected="false">Step 4</a>
                             </div>
                         </div>
                         <div class="col-9">
@@ -39,10 +39,10 @@
                     <div class="mt-3 row bootstrap-pill-wizard">
                         <div class="col-12">
                             <div class="nav nav-pills nav-justified" id="v-pills-tab1" role="tablist" aria-orientation="vertical">
-                                <a data-url="pages/wizard/ajax/ajax-step-content.html" class="disabled nav-item nav-link" id="step1-1" data-toggle="pill" href="#v-pills-home1" role="tab" aria-controls="v-pills-home" aria-selected="true">Step 1</a>
-                                <a data-url="pages/wizard/ajax/ajax-step-content-1.html" class="disabled nav-item nav-link" id="step2-1" data-toggle="pill" href="#v-pills-home1" role="tab" aria-controls="v-pills-profile" aria-selected="false">Step 2</a>
-                                <a data-url="pages/wizard/ajax/ajax-step-content-2.html" class="disabled nav-item nav-link" id="step3-1" data-toggle="pill" href="#v-pills-home1" role="tab" aria-controls="v-pills-messages" aria-selected="false">Step 3</a>
-                                <a data-url="pages/wizard/ajax/ajax-step-content.html" class="disabled nav-item nav-link" id="step4-1" data-toggle="pill" href="#v-pills-home1" role="tab" aria-controls="v-pills-settings" aria-selected="false">Step 4</a>
+                                <a data-url="${pageContext.request.contextPath}/pages/wizard/ajax/ajax-step-content" class="disabled nav-item nav-link" id="step1-1" data-toggle="pill" href="#v-pills-home1" role="tab" aria-controls="v-pills-home" aria-selected="true">Step 1</a>
+                                <a data-url="${pageContext.request.contextPath}/pages/wizard/ajax/ajax-step-content-1" class="disabled nav-item nav-link" id="step2-1" data-toggle="pill" href="#v-pills-home1" role="tab" aria-controls="v-pills-profile" aria-selected="false">Step 2</a>
+                                <a data-url="${pageContext.request.contextPath}/pages/wizard/ajax/ajax-step-content-2" class="disabled nav-item nav-link" id="step3-1" data-toggle="pill" href="#v-pills-home1" role="tab" aria-controls="v-pills-messages" aria-selected="false">Step 3</a>
+                                <a data-url="${pageContext.request.contextPath}/pages/wizard/ajax/ajax-step-content" class="disabled nav-item nav-link" id="step4-1" data-toggle="pill" href="#v-pills-home1" role="tab" aria-controls="v-pills-settings" aria-selected="false">Step 4</a>
                             </div>
                         </div>
                         <div class="col-12">
