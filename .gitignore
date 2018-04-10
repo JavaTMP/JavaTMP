@@ -6,7 +6,7 @@
 node_modules
 projects
 /build
-/dist
+
 /temp
 /nbproject/private/
 /JavaTMP-Static-Ajax/nbproject/private/
