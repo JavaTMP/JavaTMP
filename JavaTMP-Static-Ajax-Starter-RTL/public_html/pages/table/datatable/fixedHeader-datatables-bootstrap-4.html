@@ -563,6 +563,7 @@
 
                 // it is important to destroy table before leaving current ajax page
                 // so the fixedHeader will not be kept on site pages.
+                table.clear().draw();
                 table.destroy(true);
                 return true;
             });

@@ -523,11 +523,15 @@
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
             var table = $('#fixedHeader-dataTables-example').DataTable({
-                "pageLength": 50
+                "pageLength": 50,
+                fixedHeader: {
+                    headerOffset: javatmp.getFixedOffset()
+                }
             });
-            var fixedHeader = new $.fn.dataTable.FixedHeader(table, {
-                headerOffset: javatmp.getFixedOffset()
-            });
+
+//            var fixedHeader = new $.fn.dataTable.FixedHeader(table, {
+//                headerOffset: javatmp.getFixedOffset()
+//            });
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
@@ -560,7 +564,8 @@
 
                 // it is important to destroy table before leaving current ajax page
                 // so the fixedHeader will not be kept on site pages.
-                table.destroy();
+                table.clear().draw();
+                table.destroy(true);
                 return true;
             });
         });
