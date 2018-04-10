@@ -319,7 +319,7 @@
                         closable: false,
 //                        title: "AJAX Content",
                         closeByBackdrop: false,
-                        url: javatmp.settings.contextPath + "/pages/custom-pages/inbox/ajax/ajax-compose-message.html",
+                        url: javatmp.settings.contextPath + "/pages/custom-pages/inbox/ajax/ajax-compose-message",
                         ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                     });
                 });
