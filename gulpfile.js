@@ -62,7 +62,8 @@ gulp.task('copy-JavaTMP-Static-Ajax', function (cb) {
             .src([
                 'JavaTMP-Static-Ajax/**/*',
                 '!**/node_modules{,/**}',
-                '!**/nbproject/private{,/**}'
+                '!**/nbproject/private{,/**}',
+                '!**/package-lock.json'
             ], {dot: true})
             .pipe(gulp.dest("temp/JavaTMP-Static-Ajax"))
             .on('end', function () {
@@ -74,7 +75,8 @@ gulp.task('copy-JavaTMP-Static-Ajax-RTL', function (cb) {
             .src([
                 './JavaTMP-Static-Ajax-RTL/**/*',
                 '!**/node_modules{,/**}',
-                '!**/nbproject/private{,/**}'
+                '!**/nbproject/private{,/**}',
+                '!**/package-lock.json'
             ], {dot: true})
             .pipe(gulp.dest("temp/JavaTMP-Static-Ajax-RTL"))
             .on('end', function () {
@@ -86,7 +88,8 @@ gulp.task('copy-JavaTMP-Static-Ajax-Starter', function (cb) {
             .src([
                 './JavaTMP-Static-Ajax-Starter/**/*',
                 '!**/node_modules{,/**}',
-                '!**/nbproject/private{,/**}'
+                '!**/nbproject/private{,/**}',
+                '!**/package-lock.json'
             ], {dot: true})
             .pipe(gulp.dest("temp/JavaTMP-Static-Ajax-Starter"))
             .on('end', function () {
@@ -98,7 +101,8 @@ gulp.task('copy-JavaTMP-Static-Ajax-Starter-RTL', function (cb) {
             .src([
                 './JavaTMP-Static-Ajax-Starter-RTL/**/*',
                 '!**/node_modules{,/**}',
-                '!**/nbproject/private{,/**}'
+                '!**/nbproject/private{,/**}',
+                '!**/package-lock.json'
             ], {dot: true})
             .pipe(gulp.dest("temp/JavaTMP-Static-Ajax-Starter-RTL"))
             .on('end', function () {
