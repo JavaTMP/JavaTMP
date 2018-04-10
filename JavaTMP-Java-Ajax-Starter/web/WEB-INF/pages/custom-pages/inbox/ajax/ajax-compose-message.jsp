@@ -87,7 +87,7 @@
                             message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
                             closable: false,
                             closeByBackdrop: false,
-                            url: "pages/custom-pages/inbox/ajax/ajax-compose-message.html",
+                            url: javatmp.settings.contextPath + "/pages/custom-pages/inbox/ajax/ajax-compose-message",
                             ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                         });
                     }
@@ -103,7 +103,7 @@
                             message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
                             closable: false,
                             closeByBackdrop: false,
-                            url: "pages/custom-pages/inbox/ajax/ajax-inbox-messages.html",
+                            url: javatmp.settings.contextPath + "/pages/custom-pages/inbox/ajax/ajax-inbox-messages",
                             ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                         });
                     }

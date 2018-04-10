@@ -71,7 +71,10 @@
         direction: "ltr",
 
         // attribute for some of plugins that support RTL through initialization parameter.
-        isRTL: false
+        isRTL: false,
+
+        // additional string work as a URL contextPath of your web application:
+        contextPath: ""
     };
 
     window.javatmp.settings = {};

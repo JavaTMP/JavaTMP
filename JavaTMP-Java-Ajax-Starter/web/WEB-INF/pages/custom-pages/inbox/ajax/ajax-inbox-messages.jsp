@@ -13,7 +13,7 @@
                             <button
                                 type="button"
                                 actionType="ajax-model"
-                                href="pages/custom-pages/inbox/ajax/ajax-compose-message.html"
+                                href="${pageContext.request.contextPath}/pages/custom-pages/inbox/ajax/ajax-compose-message"
                                 class="btn btn-danger btn-block actionable">Compose</button>
                         </div>
                     </form>
@@ -95,7 +95,7 @@
                                 </td>
                                 <td class="">
                                     <a actionType="ajax-model"
-                                       href="pages/custom-pages/inbox/ajax/ajax-view-message.html"
+                                       href="${pageContext.request.contextPath}/pages/custom-pages/inbox/ajax/ajax-view-message"
                                        alt="" href="">
                                         Customer Support
                                     </a>
@@ -118,7 +118,7 @@
                                 </td>
                                 <td class="">
                                     <a actionType="ajax-model"
-                                       href="pages/custom-pages/inbox/ajax/ajax-view-message.html"
+                                       href="${pageContext.request.contextPath}/pages/custom-pages/inbox/ajax/ajax-view-message"
                                        alt="" href="">
                                         Customer Support
                                     </a>
@@ -141,7 +141,7 @@
                                 </td>
                                 <td class="">
                                     <a actionType="ajax-model"
-                                       href="pages/custom-pages/inbox/ajax/ajax-view-message.html"
+                                       href="${pageContext.request.contextPath}/pages/custom-pages/inbox/ajax/ajax-view-message"
                                        alt="" href="">
                                         Customer Support
                                     </a>
@@ -164,7 +164,7 @@
                                 </td>
                                 <td class="">
                                     <a actionType="ajax-model"
-                                       href="pages/custom-pages/inbox/ajax/ajax-view-message.html"
+                                       href="${pageContext.request.contextPath}/pages/custom-pages/inbox/ajax/ajax-view-message"
                                        alt="" href="">
                                         Customer Support
                                     </a>
@@ -187,7 +187,7 @@
                                 </td>
                                 <td class="">
                                     <a actionType="ajax-model"
-                                       href="pages/custom-pages/inbox/ajax/ajax-view-message.html"
+                                       href="${pageContext.request.contextPath}/pages/custom-pages/inbox/ajax/ajax-view-message"
                                        alt="" href="">
                                         Customer Support
                                     </a>

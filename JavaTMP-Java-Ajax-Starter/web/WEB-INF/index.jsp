@@ -1375,7 +1375,8 @@
                     updateURLHash: true,
                     defaultPassData: {_ajax: "ajax", _ajaxGlobalBlockUI: true},
                     defaultOutputSelector: '.main-body-content-container',
-                    defaultUrl: '${pageContext.request.contextPath}/pages/home'
+                    defaultUrl: '${pageContext.request.contextPath}/pages/home',
+                    contextPath: '${pageContext.request.contextPath}'
                 });
             });
         </script>
