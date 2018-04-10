@@ -182,13 +182,13 @@
                 </div>
                 <div class="modal-footer d-flex justify-content-between align-items-start">
 
-                    <button type="button" id="show-previous-image" class="btn btn-primary pull-left">Previous</button>
+                    <button type="button" id="show-previous-image" class="btn btn-primary float-left">Previous</button>
 
-                    <div class="text-justify pull-left" id="image-gallery-caption" style="margin: 0 10px;">
+                    <div class="text-justify float-left" id="image-gallery-caption" style="margin: 0 10px;">
                         This text will be overwritten by jQuery
                     </div>
 
-                    <button type="button" id="show-next-image" class="btn btn-primary pull-right">Next</button>
+                    <button type="button" id="show-next-image" class="btn btn-primary float-right">Next</button>
 
                 </div>
             </div>
