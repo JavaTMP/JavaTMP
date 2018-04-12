@@ -116,7 +116,7 @@
             var rows_selected = [];
             var table = $('#example').DataTable({
 
-                'ajax': 'assets/data/datatables-checkboxes-data.json',
+                'ajax': javatmp.settings.contextPath + '/assets/data/datatables-checkboxes-data.json',
                 'columnDefs': [{
                         'targets': 0,
                         'searchable': false,
