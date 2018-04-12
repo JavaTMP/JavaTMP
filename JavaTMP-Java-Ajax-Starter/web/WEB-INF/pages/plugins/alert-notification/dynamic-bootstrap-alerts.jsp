@@ -6,6 +6,12 @@
 
     <div class="row">
         <div class="col-lg-12">
+            <div class="alert alert-info">
+                <p>Bootstrap alert wrapper factory for creating dynamic alert instances</p>
+                <p>
+                    <a class="btn btn-info" target="_blank" href="https://github.com/JavaTMP/bootstrap-alert-wrapper"><i class="fa fa-external-link-alt fa-fw"></i>github.com Page</a>
+                </p>
+            </div>
             <div class="card my-3">
                 <div class="card-header">
                     Dynamic Bootstrap Alerts
