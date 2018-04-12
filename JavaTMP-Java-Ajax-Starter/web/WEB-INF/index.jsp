@@ -22,7 +22,7 @@
                         <i class="fa fa-globe fa-lg faa-spin"></i>
                         <span class="d-none d-lg-inline">Starter (LTR)</span>&nbsp;
                     </a>
-                    <ul class="dropdown-menu languages-dropdown">
+                    <ul class="dropdown-menu">
                         <li class="">
                             <a target="_blank" class="dropdown-item" href="/JavaTMP-Static-Ajax/">
                                 <div><img src="${pageContext.request.contextPath}/assets/img/flags/us.png" class="" alt="">&nbsp;English (LTR)</div>
@@ -50,7 +50,7 @@
                         <i class="fa fa-envelope fa-lg faa-shake animated"></i>
                         <span class="badge badge-danger d-none d-md-inline">99+</span>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-extender messages-dropdown">
+                    <div class="dropdown-menu dropdown-menu-extender">
                         <div class="dropdown-menu-header clearfix">
                             <i class="fa fa-lg fa-fw fa-envelope"></i>5 Messages
                             <a actionType="ajax-model"
@@ -132,7 +132,7 @@
                         <i class="fa fa-lg fa-bars faa-float animated"></i>
                         <span class="badge badge-danger d-none d-md-inline">99+</span>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-extender tasks-dropdown">
+                    <div class="dropdown-menu dropdown-menu-extender">
                         <div class="dropdown-menu-header">
                             <i class="fa fa-lg fa-tasks"></i>
                             6 Tasks
@@ -239,7 +239,7 @@
                         <i class="fa fa-lg fa-bell faa-ring animated"></i>
                         <span class="badge badge-danger d-none d-md-inline">99+</span>
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-extender alerts-dropdown">
+                    <ul class="dropdown-menu dropdown-menu-extender">
                         <li>
                             <a class="dropdown-item clearfix" href="#">
                                 <!--<span class="float-left">-->
@@ -300,7 +300,7 @@
                             Admin John smith
                         </span>
                     </a>
-                    <ul class="dropdown-menu user-profile-dropdown dropdown-menu-right">
+                    <ul class="dropdown-menu dropdown-menu-right">
                         <li>
                             <a class="dropdown-item" href="#"><i class="fa fa-lg fa-fw fa-user"></i>User Profile</a>
                         </li>

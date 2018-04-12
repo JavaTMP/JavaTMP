@@ -26,7 +26,7 @@
                             Admin John smith
                         </span>
                     </a>
-                    <ul class="dropdown-menu user-profile-dropdown dropdown-menu-right">
+                    <ul class="dropdown-menu dropdown-menu-right">
                         <li>
                             <a class="dropdown-item" href="#"><i class="far fa-lg fa-fw fa-user"></i>User Profile</a>
                         </li>

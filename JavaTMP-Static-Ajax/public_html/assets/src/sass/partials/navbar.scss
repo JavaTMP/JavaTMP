@@ -74,8 +74,6 @@
         }
         > .dropdown {
             > .user-profile-menu-item {
-                /*                padding: 0px 8px;
-                                line-height: 50px;*/
                 > .user-profile-pic {
                     border: 1px solid #FFF;
                     vertical-align: middle;
@@ -111,14 +109,7 @@
                 }
             }
             > .dropdown-menu {
-                &.messages-dropdown {
-                }
-                &.tasks-dropdown {
-                }
-                &.alerts-dropdown {
-                }
-                &.user-profile-dropdown{
-                    width: inherit;
+                &.dropdown-menu-right{
                     right: 0;
                     left: auto;
                 }

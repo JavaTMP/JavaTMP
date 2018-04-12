@@ -39,8 +39,7 @@
                 }
             }
             > .dropdown-menu {
-                &.user-profile-dropdown{
-                    width: inherit;
+                &.dropdown-menu-right{
                     right: auto;
                     left: 0;
                 }
