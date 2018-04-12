@@ -387,7 +387,9 @@ $daterangepicker-arrow-suffix-size: ($daterangepicker-arrow-size - $daterangepic
 
             // NOTE: These appear to be eyeballed to me...
             left: 8px;
-            top: 8px;
+            top: 0px;
+            height: $daterangepicker-control-line-height;
+            line-height: $daterangepicker-control-height;
         }
     }
 
