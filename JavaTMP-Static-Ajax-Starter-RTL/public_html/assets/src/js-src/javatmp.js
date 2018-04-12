@@ -73,7 +73,7 @@
         // attribute for some of plugins that support RTL through initialization parameter.
         isRTL: false,
 
-        // additional string work as a URL contextPath of your web application:
+        // additional string work as a URL contextPath of your web application
         contextPath: ""
     };
 
