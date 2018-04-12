@@ -123,7 +123,7 @@
                 // Initialize Fancytree
                 $("#tree").fancytree({
                     extensions: ["glyph", "dnd", "edit"],
-                    rtl: true,
+                    rtl: javatmp.settings.isRTL,
                     glyph: glyph_opts,
                     source: sourceData,
                     keydown: function (event, data) {
