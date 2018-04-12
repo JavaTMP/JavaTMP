@@ -853,6 +853,12 @@
                                             Bootstrap Modal Wrapper Plugin
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/plugins/bootstrap-contextMenu">
+                                            <i class="far fa-lg fa-fw fa-gem"></i>
+                                            Bootstrap ContextMenu Plugin
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li>
