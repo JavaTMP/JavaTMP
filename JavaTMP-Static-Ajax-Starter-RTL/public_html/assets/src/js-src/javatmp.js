@@ -188,7 +188,9 @@
 
         var menuTimeout = null;
         var handlingMouseMove = function (e) {
-            if (e.pageX > ($(window).innerWidth() - 10) || $('.sidebar').is(':hover')) {
+            // check if mouse is near the left edge of the browser in LTR or right edige for RTL.
+            var insideEdge = javatmp.settings.isRTL ? (e.pageX > ($(window).innerWidth() - 10)) : e.pageX < 10;
+            if (insideEdge || $('.sidebar').is(':hover')) {
                 // Show the menu if mouse is within 10 pixels from the left or we are hovering over it
                 clearTimeout(menuTimeout);
                 menuTimeout = null;
