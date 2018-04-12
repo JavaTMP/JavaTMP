@@ -2,6 +2,11 @@
 Bootswatch cosmo theme
 https://bootswatch.com/cosmo/
 */
+/*
+We should override progress-height as the original standard bootstra 4 is rem and custom bootswatch is px!
+see javatmp-cosmo.scss, javatmp-darkly.scss, javatmp-flatly.scss, javatmp-materia.scss
+*/
+$progress-height: .5rem !default;
 @import "../../../../../node_modules/bootswatch/dist/cosmo/_variables.scss";
 @import "javatmp-default.scss";
 @import "../../../../../node_modules/bootswatch/dist/cosmo/_bootswatch.scss";

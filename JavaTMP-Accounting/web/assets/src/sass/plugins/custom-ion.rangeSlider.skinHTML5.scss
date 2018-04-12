@@ -63,7 +63,7 @@ $ion-range-slider-shadow-bar-bg: $body-color!default;
 
 .irs-shadow {
     height: 2px;
-    top: 38px;
+    top: $ion-range-slider-top + ($ion-range-slider-height/2rem);
     background: $ion-range-slider-shadow-bar-bg;
     opacity: 0.3;
     @include border-left-radius($ion-range-slider-border-radius);
