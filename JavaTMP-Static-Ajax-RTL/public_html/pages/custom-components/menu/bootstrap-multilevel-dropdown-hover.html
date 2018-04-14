@@ -68,23 +68,23 @@
                 font-family: 'Font Awesome 5 Free';
                 font-style: normal;
                 font-weight: 900;
-                content: "\f053";
+                content: "\f054";
                 float: right;
             }
 
             .dropdown-submenu:hover > .dropdown-menu {
                 display: block;
             }
-
             /* rtl */
-            .dropdown-submenu > .dropdown-menu {
+            [dir=rtl] .dropdown-submenu > .dropdown-menu {
                 left: auto;
                 right: 100%;
                 margin-left: auto;
                 margin-right: 0px;
             }
 
-            .dropdown-submenu > a.dropdown-item:after {
+            [dir=rtl] .dropdown-submenu > a.dropdown-item:after {
+                content: "\f053";
                 float: left;
             }
 
@@ -159,3 +159,4 @@
             });
         </script>
     </div>
+</div>

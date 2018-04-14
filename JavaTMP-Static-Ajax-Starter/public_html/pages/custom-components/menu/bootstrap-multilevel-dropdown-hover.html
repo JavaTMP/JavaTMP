@@ -75,18 +75,54 @@
             .dropdown-submenu:hover > .dropdown-menu {
                 display: block;
             }
+            /* rtl */
+            [dir=rtl] .dropdown-submenu > .dropdown-menu {
+                left: auto;
+                right: 100%;
+                margin-left: auto;
+                margin-right: 0px;
+            }
+
+            [dir=rtl] .dropdown-submenu > a.dropdown-item:after {
+                content: "\f053";
+                float: left;
+            }
 
         </style>
         <script type="text/javascript">
             jQuery(function ($) {
                 // any code put here will be run after content attach to ajax output container and before
                 // controll return to main javascript file.
+//                $(javatmp.settings.defaultOutputSelector).find(".dropdown-toggle").on("mouseenter", function () {
+//                    // make sure it is not show:
+//                    if (!$(this).parent().hasClass("show")) {
+//                        $(this).click();
+//                    }
+//                });
+                var timers = [];
                 $(javatmp.settings.defaultOutputSelector).find(".dropdown-toggle").on("mouseenter", function () {
+                    // we could here clear all timers in array.
+                    var timer;
+                    $(this).parent(".btn-group, .dropdown").off("mouseleave");
                     // make sure it is not show:
                     if (!$(this).parent().hasClass("show")) {
                         $(this).click();
                     }
+                    $(this).parent(".btn-group, .dropdown").on("mouseleave", function () {
+                        for (var i = 0; i < timers.length; i++) {
+                            clearTimeout(timers[i]);
+                        }
+                        var that = $(this);
+                        timer = setTimeout(function () {
+                            // make sure it is not show:
+                            if (that.hasClass("show") && !that.is(":hover")) {
+                                that.children('.dropdown-toggle').first().click();
+                            }
+                        }, 300);
+                        timers.push(timer);
+                    });
                 });
+
 //                $(javatmp.settings.defaultOutputSelector).find(".btn-group, .dropdown").on("mouseleave", function () {
 //                    // make sure it is not show:
 //                    if ($(this).hasClass("show"))
@@ -123,3 +159,4 @@
             });
         </script>
     </div>
+</div>
