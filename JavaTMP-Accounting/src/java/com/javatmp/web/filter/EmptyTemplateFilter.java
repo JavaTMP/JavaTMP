@@ -52,6 +52,7 @@ public class EmptyTemplateFilter implements Filter {
         this.filterConfig = filterConfig;
     }
 
+    @Override
     public void destroy() {
     }
 }
