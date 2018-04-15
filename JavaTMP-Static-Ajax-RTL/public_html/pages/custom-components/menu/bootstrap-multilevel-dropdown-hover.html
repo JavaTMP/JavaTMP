@@ -63,17 +63,29 @@
                 margin-top: 0px;
                 margin-left: 0px;
             }
-
-            .dropdown-submenu > a.dropdown-item:after {
-                font-family: 'Font Awesome 5 Free';
-                font-style: normal;
-                font-weight: 900;
-                content: "\f054";
-                float: right;
-            }
-
             .dropdown-submenu:hover > .dropdown-menu {
                 display: block;
+            }
+
+            .dropdown-submenu:after {
+                position: absolute;
+                top: 50%;
+                right: .5em;
+                z-index: 1;
+                width: 0;
+                height: 0;
+                content: '';
+                border-color: transparent transparent transparent #2f2f2f;
+                border-style: solid;
+                border-width: .25em 0 .25em .25em;
+                -webkit-transform: translateY(-50%);
+                -ms-transform: translateY(-50%);
+                -o-transform: translateY(-50%);
+                transform: translateY(-50%);
+            }
+            .dropdown-submenu > .dropdown-item:focus {
+                background: transparent;
+                cursor: pointer;
             }
             /* rtl */
             [dir=rtl] .dropdown-submenu > .dropdown-menu {
@@ -82,24 +94,25 @@
                 margin-left: auto;
                 margin-right: 0px;
             }
-
-            [dir=rtl] .dropdown-submenu > a.dropdown-item:after {
-                content: "\f053";
-                float: left;
+            [dir=rtl] .dropdown-submenu:after {
+                right: auto;
+                left: .5em;
+                border-color: transparent #2f2f2f transparent transparent;
+                border-width: .25em .25em .25em 0;
             }
-
         </style>
         <script type="text/javascript">
             jQuery(function ($) {
                 // any code put here will be run after content attach to ajax output container and before
                 // controll return to main javascript file.
-//                $(javatmp.settings.defaultOutputSelector).find(".dropdown-toggle").on("mouseenter", function () {
-//                    // make sure it is not show:
-//                    if (!$(this).parent().hasClass("show")) {
-//                        $(this).click();
-//                    }
-//                });
+
                 var timers = [];
+
+                $(javatmp.settings.defaultOutputSelector).find(".dropdown-submenu > .dropdown-item").on('click', function (event) {
+                    event.stopPropagation();
+                    event.preventDefault();
+                    return false;
+                });
                 $(javatmp.settings.defaultOutputSelector).find(".dropdown-toggle").on("mouseenter", function () {
                     // we could here clear all timers in array.
                     var timer;
@@ -122,14 +135,6 @@
                         timers.push(timer);
                     });
                 });
-
-//                $(javatmp.settings.defaultOutputSelector).find(".btn-group, .dropdown").on("mouseleave", function () {
-//                    // make sure it is not show:
-//                    if ($(this).hasClass("show"))
-//                        $(this).children('.dropdown-toggle').first().click();
-////                        $('>.dropdown-menu', this).stop(true, true).fadeIn("fast");
-////                        $(this).addClass('open');
-//                });
 
                 $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                     // fire AFTER all transition done and your ajax content is shown to user.
@@ -154,6 +159,7 @@
                     $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenCompress);
                     $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenExpand);
                     $(javatmp.settings.defaultOutputSelector).find(".btn-group, .dropdown").unbind('mouseenter mouseleave');
+                    $(javatmp.settings.defaultOutputSelector).find(".dropdown-submenu > .dropdown-item").off('click');
                     return true;
                 });
             });
