@@ -5,8 +5,6 @@
  */
 package com.javatmp.service;
 
-import sun.security.jca.GetInstance;
-
 /**
  *
  * @author m_dar
