@@ -205,6 +205,10 @@ var config = {
         ],
         "bootstrap-alert-wrapper": [
             {"from": "${sourceNodeLib}/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js", "to": "${destComponentsLib}/bootstrap-alert-wrapper/dist"}
+        ],
+        "jquery-contextmenurtl": [
+            {"from": "${sourceNodeLib}/jquery-contextmenurtl/dist/css/jquery.contextMenuRtl.min.css", "to": "${destComponentsLib}/jquery-contextmenurtl/dist/css"},
+            {"from": "${sourceNodeLib}/jquery-contextmenurtl/dist/js/jquery.contextMenuRtl.min.js", "to": "${destComponentsLib}/jquery-contextmenurtl/dist/js"}
         ]
     }
 };
@@ -238,7 +242,8 @@ var src = {
         "./web/components/slick-carousel/slick/slick-theme.css",
         "./web/components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css",
 //        "./web/components/bootstrap-reverse/dist/**/*",
-        "./web/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.css"
+        "./web/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.css",
+        "./public_html/components/jquery-contextmenurtl/dist/css/jquery.contextMenuRtl.min.css"
     ],
     "cssForPrint": [
         "./web/components/fullcalendar/dist/fullcalendar.print.min.css"
@@ -302,7 +307,8 @@ var src = {
         "./web/components/bootstrap-modal-wrapper/dist/bootstrap-modal-wrapper-factory.min.js",
         "./web/components/bootstrap-actionable/dist/bootstrap-actionable.min.js",
         "./web/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.js",
-        "./web/components/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js"
+        "./web/components/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js",
+        "./public_html/components/jquery-contextmenurtl/dist/js/jquery.contextMenuRtl.min.js"
     ]
 }
 ;
@@ -361,6 +367,7 @@ gulp.task('copy-components', ["delete-components"], function () {
 gulp.task('generate-dist', ['copy-components', "delete-dist", "delete-css", "delete-js"], function (cb) {
     async.series([
         function (next) {
+            console.log("Compile and generate sass/themes");
             gulp.src([
                 './web/assets/src/sass/themes/javatmp-*.scss'])
                     .pipe(sass().on('error', sass.logError))
@@ -373,32 +380,36 @@ gulp.task('generate-dist', ['copy-components', "delete-dist", "delete-css", "del
                     .pipe(gulp.dest('./web/assets/dist/css'))
                     .on('end', next);
         },
-//        function (next) {
-//            gulp.src([
-//                './web/assets/src/sass/javatmp-*.scss'])
-//                    .pipe(sass().on('error', sass.logError))
-//                    .pipe(autoprefixer({
-//                        browsers: ['last 2 versions'],
-//                        cascade: false
-//                    }))
-//                    .pipe(cleanCSS())
-//                    .pipe(rename({suffix: '.min'}))
-//                    .pipe(gulp.dest('./web/assets/dist/css'))
-//                    .on('end', next);
-//        },
         function (next) {
+            console.log("Compile and generate sass-rtl/themes");
+            gulp.src([
+                './web/assets/src/sass-rtl/themes-rtl/javatmp-*.scss'])
+                    .pipe(sass().on('error', sass.logError))
+                    .pipe(autoprefixer({
+                        browsers: ['last 2 versions'],
+                        cascade: false
+                    }))
+                    .pipe(cleanCSS())
+                    .pipe(rename({suffix: '.min'}))
+                    .pipe(gulp.dest('./web/assets/dist/css'))
+                    .on('end', next);
+        },
+        function (next) {
+            console.log("Compile and generate javatmp-plugins-all.min.css");
             gulp.src(src.css)
                     .pipe(concat("javatmp-plugins-all.min.css", {newLine: '\n'}))
                     .pipe(gulp.dest("./web/assets/dist/css"))
                     .on('end', next);
         },
         function (next) {
+            console.log("Compile and generate javatmp-plugins-print-all.min.css");
             gulp.src(src.cssForPrint)
                     .pipe(concat("javatmp-plugins-print-all.min.css", {newLine: '\n'}))
                     .pipe(gulp.dest("./web/assets/dist/css"))
                     .on('end', next);
         },
         function (next) {
+            console.log("Compile and generate js-src");
             gulp.src('./web/assets/src/js-src/**/*')
                     .pipe(eslint())
                     .pipe(eslint.format())
@@ -408,17 +419,20 @@ gulp.task('generate-dist', ['copy-components', "delete-dist", "delete-css", "del
                     .on('end', next);
         },
         function (next) {
+            console.log("Compile and generate javatmp-plugins-all.min.js");
             gulp.src(src.js)
                     .pipe(concat("javatmp-plugins-all.min.js", {newLine: '\n;'}))
                     .pipe(gulp.dest("./web/assets/dist/js"))
                     .on('end', next);
         },
         function (next) {
+            console.log("Copy plugins img to dist/img");
             gulp.src(src.img)
                     .pipe(gulp.dest("./web/assets/dist/img"))
                     .on('end', next);
         },
         function (next) {
+            console.log("Copy plugins fonts to dist/fonts");
             gulp.src(src.fonts)
                     .pipe(gulp.dest("./web/assets/dist/fonts"))
                     .on('end', next);

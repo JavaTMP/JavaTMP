@@ -1,0 +1,23 @@
+.main-content {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+// mobile and small devices
+body.sidebar-active .main-content {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+@media (min-width: 768px) {
+    /* Shift main-content on larger devices  */
+    body.sidebar-active .main-content {
+        margin-left: 0px;
+        margin-right: $javatmp-sidebar-width;
+    }
+}
+
+body.mouse-auto-show.sidebar-active .main-content {
+    margin-left: 0px;
+    margin-right: 0px;
+}

@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 @WebFilter(filterName = "LocalizationFilter", urlPatterns = {"/*"})
@@ -26,22 +27,39 @@ public class LocalizationFilter implements Filter {
     public LocalizationFilter() {
     }
 
+    public void init(FilterConfig filterConfig) {
+        this.filterConfig = filterConfig;
+        System.out.println("LocalizationFilter:Initializing filter");
+    }
+
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
-        this.filterConfig.getServletContext().log("*** Start LocalizationFilter ****");
+        System.out.println("*** Start LocalizationFilter ****");
         Locale locale = null;
         HttpServletRequest httpRequest = null;
         try {
             httpRequest = (HttpServletRequest) request;
+            if (httpRequest.getSession(false) == null) {
+                Cookie[] cookies = httpRequest.getCookies();
+                if (cookies != null) {
+                    for (Cookie cookie : cookies) {
+                        if (cookie.getName().equals("")) {
 
-            this.filterConfig.getServletContext().log("sesseion key ["
+                        }
+                    }
+                }
+            }
+            System.out.println("Is Session New [" + httpRequest.getSession().isNew() + "]");
+            System.out.println("Session ID [" + httpRequest.getSession().getId() + "]");
+            System.out.println("cookies [" + httpRequest.getHeader("cookie") + "]");
+            System.out.println("sesseion key ["
                     + Constants.LANGUAGE_ATTR_KEY + "]=>["
                     + httpRequest.getSession().getAttribute(Constants.LANGUAGE_ATTR_KEY) + "]");
             if (httpRequest.getSession().getAttribute(Constants.LANGUAGE_ATTR_KEY) == null) {
                 if (httpRequest.getParameter(Constants.LANG_PARAM_NAME) == null) {
                     if (httpRequest.getLocale() != null) {
-                        this.filterConfig.getServletContext().log("locale [" + httpRequest.getLocale() + "]");
+                        System.out.println("locale [" + httpRequest.getLocale() + "]");
                         locale = httpRequest.getLocale();
                     } else {
                         locale = Locale.forLanguageTag(Constants.DEFAULT_LOCALE_KEY);
@@ -51,24 +69,23 @@ public class LocalizationFilter implements Filter {
                     locale = Locale.forLanguageTag(localeRequested);
                 }
 
-                this.filterConfig.getServletContext().log("we will create a bundle now for [" + locale + "]");
+                System.out.println("we will create a bundle now for [" + locale + "]");
                 ResourceBundle bundle = ResourceBundle.getBundle(Constants.RESOURCE_BUNDLE_BASE_NAME, locale);
                 httpRequest.getSession().setAttribute(Constants.LANGUAGE_ATTR_KEY, bundle);
-
             } else {
                 if (httpRequest.getParameter(Constants.LANG_PARAM_NAME) != null) {
                     String localeRequested = httpRequest.getParameter(Constants.LANG_PARAM_NAME);
                     locale = Locale.forLanguageTag(localeRequested);
-
-                    this.filterConfig.getServletContext().log("we will create a bundle now for [" + locale + "]");
+                    // if provided parameter value is invalid locale key
+                    if (locale != null) {
+                        locale = Locale.forLanguageTag(Constants.DEFAULT_LOCALE_KEY);
+                    }
+                    System.out.println("we will create a bundle now for [" + locale + "]");
                     ResourceBundle bundle = ResourceBundle.getBundle(Constants.RESOURCE_BUNDLE_BASE_NAME, locale);
                     httpRequest.getSession().setAttribute(Constants.LANGUAGE_ATTR_KEY, bundle);
-
                 }
             }
-            this.filterConfig.getServletContext()
-                    .log(httpRequest.getSession()
-                            .getAttribute(Constants.LANGUAGE_ATTR_KEY).toString());
+            System.out.println(httpRequest.getSession().getAttribute(Constants.LANGUAGE_ATTR_KEY).toString());
             chain.doFilter(request, response);
         } catch (Throwable t) {
             t.printStackTrace();
@@ -76,16 +93,8 @@ public class LocalizationFilter implements Filter {
 
     }
 
-    public void init(FilterConfig filterConfig) {
-        this.filterConfig = filterConfig;
-        if (filterConfig != null) {
-            this.filterConfig.getServletContext().log("LocalizationFilter:Initializing filter");
-
-        }
-    }
-
     public void destroy() {
-        this.filterConfig.getServletContext().log("Destroy LocalizationFilter filter");
+        System.out.println("Destroy LocalizationFilter filter");
     }
 
 }

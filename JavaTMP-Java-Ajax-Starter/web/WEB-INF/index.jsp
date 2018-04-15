@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="${labels["global.language"]}" dir="${labels["global.direction"]}">
     <head>
@@ -8,7 +9,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="${pageContext.request.contextPath}/assets/dist/css/javatmp-plugins-all.min.css" rel="stylesheet" type="text/css"/>
         <link href='${pageContext.request.contextPath}/assets/dist/css/javatmp-plugins-print-all.min.css' rel='stylesheet' media='print' />
-        <link id="themeStyleSheet" href="${pageContext.request.contextPath}/assets/dist/css/javatmp-default.min.css" rel="stylesheet" type="text/css"/>
+
+        <c:if test="${labels['global.direction'] == 'ltr'}">
+            <link id="themeStyleSheet" href="${pageContext.request.contextPath}/assets/dist/css/javatmp-default.min.css" rel="stylesheet" type="text/css"/>
+        </c:if>
+        <c:if test="${labels['global.direction'] == 'rtl'}">
+            <link id="themeStyleSheet" href="${pageContext.request.contextPath}/assets/dist/css/javatmp-default-rtl.min.css" rel="stylesheet" type="text/css"/>
+        </c:if>
     </head>
     <body class="sidebar-active">
         <nav class="main-javatmp-navbar navbar fixed-top my-0 py-0">
@@ -1376,6 +1383,10 @@
                     defaultPassData: {_ajax: "ajax", _ajaxGlobalBlockUI: true},
                     defaultOutputSelector: '.main-body-content-container',
                     defaultUrl: '${pageContext.request.contextPath}/pages/home',
+                    floatDefault: "${labels['global.floatDefault']}",
+                    floatReverse: "${labels['global.floatReverse']}",
+                    direction: "${labels['global.direction']}",
+                    isRTL: ${labels['global.direction'] == 'ltr' ? 'false' : 'true'},
                     contextPath: '${pageContext.request.contextPath}'
                 });
             });

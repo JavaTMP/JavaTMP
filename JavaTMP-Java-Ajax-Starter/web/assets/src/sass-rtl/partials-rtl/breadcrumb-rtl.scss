@@ -1,0 +1,16 @@
+.main-breadcrumb-bar {
+    @media (min-width: 768px) {
+        body.sidebar-active .main-content > & {
+            left: 0;
+            right: $javatmp-sidebar-width;
+        }
+    }
+    body.mouse-auto-show.sidebar-active .main-content > & {
+        left: 0px;
+        right: 0px;
+    }
+    .breadcrumb {
+        padding: 8px 15px 8px 1px;
+    }
+}
+
