@@ -617,12 +617,6 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/custom-components/custom-bootstrap-nav-item">
-                                            <i class="far fa-lg fa-fw fa-lightbulb"></i>
-                                            Custom Bootstrap Nav Item
-                                        </a>
-                                    </li>
-                                    <li>
                                         <a href="${pageContext.request.contextPath}/pages/custom-components/sortable-cards">
                                             <i class="far fa-lg fa-fw fa-lightbulb"></i>
                                             Sortable Cards

@@ -75,9 +75,9 @@
         </div>
         <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
             <button type="button" class="javatmp-btn btn btn-primary btn-block my-2"
-                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/custom-components/custom-bootstrap-nav-item" >
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/wizard/native-bootstrap-tab/vertical-modal-bootstrap-pill-wizard" >
                 <i class="fa fa-cog"></i>
-                Custom Bootstrap Nav Item
+                Modal Bootstrap Wizard
             </button>
         </div>
         <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
