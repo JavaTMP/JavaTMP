@@ -13,12 +13,14 @@ public class JavaTMPHttpSessionListener implements HttpSessionListener {
     @Override
     public void sessionCreated(HttpSessionEvent se) {
         System.out.println("*** Session Creation @ [" + new Date() + "]");
+        System.out.println("created id [" + se.getSession().getId() + "]");
         se.getSession().setAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME, new ServicesFactory());
     }
 
     @Override
     public void sessionDestroyed(HttpSessionEvent se) {
         System.out.println("*** Session Destroyed @ [" + new Date() + "]");
+        System.out.println("created id [" + se.getSession().getId() + "]");
         ServicesFactory sf = (ServicesFactory) se.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         sf.destroy();
         se.getSession().setAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME, null);
