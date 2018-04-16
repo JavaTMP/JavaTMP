@@ -5,9 +5,10 @@ import com.javatmp.util.Constants;
 import java.util.Date;
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionEvent;
+import javax.servlet.http.HttpSessionListener;
 
 @WebListener
-public class HttpSessionListener implements javax.servlet.http.HttpSessionListener {
+public class JavaTMPHttpSessionListener implements HttpSessionListener {
 
     @Override
     public void sessionCreated(HttpSessionEvent se) {

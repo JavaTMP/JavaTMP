@@ -85,7 +85,7 @@ public class LoginController extends HttpServlet {
             } else {
                 // un authenticated user
                 responseMessage.setOverAllStatus(false);
-                responseMessage.setMessage("kindly Check your username and password");
+                responseMessage.setMessage("kindly Check your username and password or Refresh current page");
             }
 
             Gson gson = new GsonBuilder().serializeNulls()

@@ -74,7 +74,9 @@ public class AuthenticatorFilter implements Filter {
                     // we send an error ajax message response consisting
                     ResponseMessage responseMessage = new ResponseMessage();
                     responseMessage.setOverAllStatus(false);
-                    responseMessage.setMessage(req.getContextPath() + "/login");
+                    responseMessage.setRedirect(true);
+                    responseMessage.setRedirectURL(req.getContextPath());
+                    responseMessage.setMessage("Un-Authorized Access or your session has been deactivated");
                     Gson gson = new GsonBuilder().serializeNulls()
                             .registerTypeAdapter(Class.class, new ClassTypeAdapter())
                             .create();

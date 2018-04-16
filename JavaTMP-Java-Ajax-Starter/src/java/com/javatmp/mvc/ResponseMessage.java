@@ -14,6 +14,8 @@ public class ResponseMessage {
     private boolean overAllStatus;
     private String message;
     private Integer statusCode;
+    private Boolean redirect;
+    private String redirectURL;
 
     public ResponseMessage() {
     }
@@ -70,6 +72,34 @@ public class ResponseMessage {
      */
     public void setStatusCode(Integer statusCode) {
         this.statusCode = statusCode;
+    }
+
+    /**
+     * @return the redirectURL
+     */
+    public String getRedirectURL() {
+        return redirectURL;
+    }
+
+    /**
+     * @param redirectURL the redirectURL to set
+     */
+    public void setRedirectURL(String redirectURL) {
+        this.redirectURL = redirectURL;
+    }
+
+    /**
+     * @return the redirect
+     */
+    public Boolean getRedirect() {
+        return redirect;
+    }
+
+    /**
+     * @param redirect the redirect to set
+     */
+    public void setRedirect(Boolean redirect) {
+        this.redirect = redirect;
     }
 
 }

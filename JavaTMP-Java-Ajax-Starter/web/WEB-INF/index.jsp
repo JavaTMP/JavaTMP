@@ -1397,11 +1397,14 @@
                     statusCode: {
                         401: function (jqXHR, textStatus, errorThrown) {
                             var modalMessage = null;
+                            var redirectURL = null;
                             try {
                                 var ResponseMessage = JSON.parse(jqXHR.responseText);
                                 modalMessage = ResponseMessage.message;
+                                redirectURL = ResponseMessage.redirectURL;
                             } catch (ex) {
                                 modalMessage = jqXHR.responseText;
+                                redirectURL = javatmp.settings.contextPath + "/";
                             }
 
                             var modalWrapper = BootstrapModalWrapperFactory.createModal({
@@ -1411,10 +1414,20 @@
                                 closeByBackdrop: false,
                                 buttons: [
                                     {
+                                        label: "Return",
+                                        cssClass: "btn btn-secondary",
+                                        action: function (modalWrapper, button, buttonData, originalEvent) {
+                                            modalWrapper.hide();
+                                        }
+                                    },
+                                    {
                                         label: "Redirect",
                                         cssClass: "btn btn-danger",
                                         action: function (modalWrapper, button, buttonData, originalEvent) {
-                                            return modalWrapper.hide();
+                                            modalWrapper.hide();
+                                            setTimeout(function () {
+                                                window.location.replace(redirectURL);
+                                            }, 100);
                                         }
                                     }
                                 ]
