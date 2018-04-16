@@ -1,6 +1,10 @@
 package com.javatmp.web.filter;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.javatmp.domain.User;
+import com.javatmp.mvc.ClassTypeAdapter;
+import com.javatmp.mvc.ResponseMessage;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -66,6 +70,21 @@ public class AuthenticatorFilter implements Filter {
                 User user = (User) session.getAttribute("user");
                 if (user != null) {
                     chain.doFilter(request, response);
+                } else if ("ajax".equals(req.getParameter("_ajax"))) {
+                    // we send an error ajax message response consisting
+                    ResponseMessage responseMessage = new ResponseMessage();
+                    responseMessage.setOverAllStatus(false);
+                    responseMessage.setMessage(req.getContextPath() + "/login");
+                    Gson gson = new GsonBuilder().serializeNulls()
+                            .registerTypeAdapter(Class.class, new ClassTypeAdapter())
+                            .create();
+                    String json = gson.toJson(responseMessage);
+                    System.out.println("response [" + json + "]");
+                    res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                    res.setContentType("application/json");
+                    res.setCharacterEncoding("UTF-8");
+                    res.getWriter().write(json);
+
                 } else {
                     res.sendRedirect(req.getContextPath() + "/login");
                 }

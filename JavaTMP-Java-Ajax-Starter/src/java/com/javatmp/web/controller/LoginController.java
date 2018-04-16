@@ -81,7 +81,7 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("user", dbUser);
 
                 responseMessage.setOverAllStatus(true);
-                responseMessage.setMessage(request.getContextPath());
+                responseMessage.setMessage(request.getContextPath() + "/");
             } else {
                 // un authenticated user
                 responseMessage.setOverAllStatus(false);

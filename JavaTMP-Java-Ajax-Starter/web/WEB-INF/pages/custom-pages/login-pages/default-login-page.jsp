@@ -68,7 +68,7 @@
                         data: form_data,
                         success: function (data) {
                             if (data.overAllStatus) {
-                                window.location.replace("${pageContext.request.contextPath}/");
+                                window.location.replace(data.message);
                             } else {
                                 // show error to user
                                 var alertError = BootstrapAlertWrapper.createAlert({

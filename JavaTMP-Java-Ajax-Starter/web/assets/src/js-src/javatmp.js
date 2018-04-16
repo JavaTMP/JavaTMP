@@ -90,7 +90,6 @@
             cache: true,
             data: javatmp.settings.defaultPassData,
             error: function (xhr) {
-                alert("An error occured: status[" + xhr.status + "], text[" + xhr.statusText + "]");
             },
             statusCode: {
                 200: function (event, request, settings) {

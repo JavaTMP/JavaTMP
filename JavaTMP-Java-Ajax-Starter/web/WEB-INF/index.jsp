@@ -1391,5 +1391,38 @@
                 });
             });
         </script>
+        <script type="text/javascript">
+            jQuery(function ($) {
+                $.ajaxSetup({
+                    statusCode: {
+                        401: function (jqXHR, textStatus, errorThrown) {
+                            var modalMessage = null;
+                            try {
+                                var ResponseMessage = JSON.parse(jqXHR.responseText);
+                                modalMessage = ResponseMessage.message;
+                            } catch (ex) {
+                                modalMessage = jqXHR.responseText;
+                            }
+
+                            var modalWrapper = BootstrapModalWrapperFactory.createModal({
+                                message: modalMessage,
+                                title: jqXHR.status + " : " + jqXHR.statusText,
+                                closable: false,
+                                closeByBackdrop: false,
+                                buttons: [
+                                    {
+                                        label: "Redirect",
+                                        cssClass: "btn btn-danger",
+                                        action: function (modalWrapper, button, buttonData, originalEvent) {
+                                            return modalWrapper.hide();
+                                        }
+                                    }
+                                ]
+                            });
+                            modalWrapper.show();
+                        }
+                    }
+                });
+            });</script>
     </body>
 </html>

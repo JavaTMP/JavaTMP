@@ -54,7 +54,14 @@ public class CacheFilter implements Filter {
 
                 String path = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length());
 
-                this.filterConfig.getServletContext().log("path [" + path + "] is [" + isReqInWhiteList(path) + "]");
+                String finalUrl = null;
+                if (httpRequest.getQueryString() != null) {
+                    finalUrl = httpRequest.getRequestURL() + "?" + httpRequest.getQueryString();
+                } else {
+                    finalUrl = httpRequest.getRequestURL().toString();
+                }
+
+                this.filterConfig.getServletContext().log("path [" + finalUrl + "] is [" + isReqInWhiteList(path) + "]");
                 if (isReqInWhiteList(path)) {
 
                     int cacheAge = 60 * 60; // in seconds
@@ -64,13 +71,6 @@ public class CacheFilter implements Filter {
                     httpResponse.setDateHeader("Date", currentDate.getTime());
                     httpResponse.setDateHeader("Expires", expiry);
                     httpResponse.addHeader("Cache-Control", "max-age=" + cacheAge);
-
-                    String finalUrl = null;
-                    if (httpRequest.getQueryString() != null) {
-                        finalUrl = httpRequest.getRequestURL() + "?" + httpRequest.getQueryString();
-                    } else {
-                        finalUrl = httpRequest.getRequestURL().toString();
-                    }
                     System.out.println("Added Cache header to url [" + finalUrl + "]");
                 } else {
                     System.out.println("NOT Added Cache header to url [" + path + "]");
