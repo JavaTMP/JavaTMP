@@ -328,7 +328,7 @@
                             <a class="dropdown-item" href="#"><i class="fa fa-lg fa-fw fa-square"></i>Lock Screen</a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="${pageContext.request.contextPath}/pages/custom-pages/login-pages/default-login-page">
+                            <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">
                                 <i class="fa fa-lg fa-fw fa-sign-out-alt"></i>
                                 Logout
                             </a>

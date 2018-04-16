@@ -12,6 +12,8 @@ public class User {
     private Date creationDate;
     private String email;
     private String mobile;
+    private String lang;
+    private String theme;
 
     /**
      * @return the id
@@ -123,6 +125,34 @@ public class User {
      */
     public void setMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+    /**
+     * @return the lang
+     */
+    public String getLang() {
+        return lang;
+    }
+
+    /**
+     * @param lang the lang to set
+     */
+    public void setLang(String lang) {
+        this.lang = lang;
+    }
+
+    /**
+     * @return the theme
+     */
+    public String getTheme() {
+        return theme;
+    }
+
+    /**
+     * @param theme the theme to set
+     */
+    public void setTheme(String theme) {
+        this.theme = theme;
     }
 
 }
