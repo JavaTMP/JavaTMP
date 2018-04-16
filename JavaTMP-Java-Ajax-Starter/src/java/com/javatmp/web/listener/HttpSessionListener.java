@@ -2,8 +2,10 @@ package com.javatmp.web.listener;
 
 import com.javatmp.service.ServicesFactory;
 import com.javatmp.util.Constants;
+import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionEvent;
 
+@WebListener
 public class HttpSessionListener implements javax.servlet.http.HttpSessionListener {
 
     @Override
