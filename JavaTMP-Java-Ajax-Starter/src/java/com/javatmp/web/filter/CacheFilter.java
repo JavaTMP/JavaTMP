@@ -2,6 +2,8 @@ package com.javatmp.web.filter;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -21,9 +23,23 @@ public class CacheFilter implements Filter {
     public CacheFilter() {
     }
 
+    private Set<String> excludeControllers = new HashSet<>();
+
+    private boolean isReqInWhiteList(String requestPath) {
+        boolean isWhiteListed = false;
+        for (String path : excludeControllers) {
+            if (requestPath.startsWith(path)) {
+                isWhiteListed = true;
+                break;
+            }
+        }
+        return isWhiteListed;
+    }
+
     @Override
     public void init(FilterConfig filterConfig) {
         this.filterConfig = filterConfig;
+        excludeControllers.add("/assets");
     }
 
     @Override
@@ -32,23 +48,33 @@ public class CacheFilter implements Filter {
             throws IOException, ServletException {
 
         try {
-            int cacheAge = 60 * 60; // in seconds
-            Date currentDate = new Date();
-            long expiry = currentDate.getTime() + (cacheAge * 1000);
             if (response instanceof HttpServletResponse && request instanceof HttpServletRequest) {
                 HttpServletRequest httpRequest = (HttpServletRequest) request;
                 HttpServletResponse httpResponse = (HttpServletResponse) response;
-                httpResponse.setDateHeader("Date", currentDate.getTime());
-                httpResponse.setDateHeader("Expires", expiry);
-                httpResponse.addHeader("Cache-Control", "max-age=" + cacheAge);
 
-                String finalUrl = null;
-                if (httpRequest.getQueryString() != null) {
-                    finalUrl = httpRequest.getRequestURL() + "?" + httpRequest.getQueryString();
+                String path = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length());
+
+                this.filterConfig.getServletContext().log("path [" + path + "] is [" + isReqInWhiteList(path) + "]");
+                if (isReqInWhiteList(path)) {
+
+                    int cacheAge = 60 * 60; // in seconds
+                    Date currentDate = new Date();
+                    long expiry = currentDate.getTime() + (cacheAge * 1000);
+
+                    httpResponse.setDateHeader("Date", currentDate.getTime());
+                    httpResponse.setDateHeader("Expires", expiry);
+                    httpResponse.addHeader("Cache-Control", "max-age=" + cacheAge);
+
+                    String finalUrl = null;
+                    if (httpRequest.getQueryString() != null) {
+                        finalUrl = httpRequest.getRequestURL() + "?" + httpRequest.getQueryString();
+                    } else {
+                        finalUrl = httpRequest.getRequestURL().toString();
+                    }
+                    System.out.println("Added Cache header to url [" + finalUrl + "]");
                 } else {
-                    finalUrl = httpRequest.getRequestURL().toString();
+                    System.out.println("NOT Added Cache header to url [" + path + "]");
                 }
-                System.out.println("Added Cache header to url [" + finalUrl + "]");
             }
             chain.doFilter(request, response);
         } catch (Throwable t) {

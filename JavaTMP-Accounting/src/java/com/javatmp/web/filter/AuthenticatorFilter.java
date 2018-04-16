@@ -48,7 +48,7 @@ public class AuthenticatorFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
-
+        System.out.println("*** Start AuthenticatorFilter ****");
         try {
             // https://stackoverflow.com/questions/46592664/request-getservletpath-returned-null-from-spring-mvc
             HttpServletRequest req = (HttpServletRequest) request;
@@ -61,6 +61,7 @@ public class AuthenticatorFilter implements Filter {
             } else {
                 // check if requester is authenticated or not
                 HttpSession session = req.getSession();
+                System.out.println("Session Attribute [" + session.getAttribute("authenticated") + "]");
                 if (session.getAttribute("authenticated") != null) {
                     chain.doFilter(request, response);
                 } else {

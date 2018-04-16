@@ -12,7 +12,7 @@
     </head>
     <body class="sidebar-active">
         <nav class="main-javatmp-navbar navbar fixed-top my-0 py-0">
-            <a class="navbar-brand mr-auto py-0 d-none d-md-inline" href="${pageContext.request.contextPath}">
+            <a class="navbar-brand mr-auto py-0 d-none d-md-inline" href="${pageContext.request.contextPath}/">
                 JavaTMP
                 <span class="d-none d-xl-inline"> Accounting System</span>
             </a>
@@ -314,7 +314,8 @@
                     updateURLHash: true,
                     defaultPassData: {_ajax: "ajax", _ajaxGlobalBlockUI: true},
                     defaultOutputSelector: '.main-body-content-container',
-                    defaultUrl: '${pageContext.request.contextPath}/pages/home'
+                    defaultUrl: '${pageContext.request.contextPath}/pages/home',
+                    contextPath: '${pageContext.request.contextPath}'
                 });
             });
         </script>

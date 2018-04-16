@@ -32,7 +32,7 @@
     <script type="text/javascript">
         jQuery(document).ready(function () {
             (function ($) {
-                glyph_opts = {
+                var glyph_opts = {
                     preset: "awesome5",
                     map: {
                         doc: "far fa-file-alt",
@@ -51,6 +51,16 @@
                         loading: "fa fa-sync fa-spin"
                     }
                 };
+
+                if (javatmp.settings.isRTL === true) {
+                    $.extend(true, glyph_opts, {
+                        map: {
+                            dropMarker: "fa fa-arrow-left",
+                            expanderClosed: "fa fa-chevron-left",
+                            expanderLazy: "fa fa-chevron-left"
+                        }
+                    });
+                }
 
                 var sourceData = [
                     {
@@ -122,7 +132,25 @@
                 $("#tree").fancytree({
                     extensions: ["glyph"],
                     glyph: glyph_opts,
-                    source: sourceData
+                    source: sourceData,
+                    rtl: javatmp.settings.isRTL,
+                    keydown: function (event, data) {
+                        if (javatmp.settings.isRTL === true) {
+                            var KC = $.ui.keyCode;
+                            var oe = event.originalEvent;
+                            // Swap LEFT/RIGHT keys
+                            switch (event.which) {
+                                case KC.LEFT:
+                                    oe.keyCode = KC.RIGHT;
+                                    oe.which = KC.RIGHT;
+                                    break;
+                                case KC.RIGHT:
+                                    oe.keyCode = KC.LEFT;
+                                    oe.which = KC.LEFT;
+                                    break;
+                            }
+                        }
+                    }
                 });
             }(jQuery));
         });

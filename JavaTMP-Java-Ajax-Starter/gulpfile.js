@@ -243,7 +243,7 @@ var src = {
         "./web/components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css",
 //        "./web/components/bootstrap-reverse/dist/**/*",
         "./web/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.css",
-        "./public_html/components/jquery-contextmenurtl/dist/css/jquery.contextMenuRtl.min.css"
+        "./web/components/jquery-contextmenurtl/dist/css/jquery.contextMenuRtl.min.css"
     ],
     "cssForPrint": [
         "./web/components/fullcalendar/dist/fullcalendar.print.min.css"
@@ -308,7 +308,7 @@ var src = {
         "./web/components/bootstrap-actionable/dist/bootstrap-actionable.min.js",
         "./web/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.js",
         "./web/components/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js",
-        "./public_html/components/jquery-contextmenurtl/dist/js/jquery.contextMenuRtl.min.js"
+        "./web/components/jquery-contextmenurtl/dist/js/jquery.contextMenuRtl.min.js"
     ]
 }
 ;

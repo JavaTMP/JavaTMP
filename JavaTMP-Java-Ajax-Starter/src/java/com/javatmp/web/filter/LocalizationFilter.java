@@ -40,22 +40,10 @@ public class LocalizationFilter implements Filter {
         HttpServletRequest httpRequest = null;
         try {
             httpRequest = (HttpServletRequest) request;
-            if (httpRequest.getSession(false) == null) {
-                Cookie[] cookies = httpRequest.getCookies();
-                if (cookies != null) {
-                    for (Cookie cookie : cookies) {
-                        if (cookie.getName().equals("")) {
-
-                        }
-                    }
-                }
-            }
             System.out.println("Is Session New [" + httpRequest.getSession().isNew() + "]");
             System.out.println("Session ID [" + httpRequest.getSession().getId() + "]");
             System.out.println("cookies [" + httpRequest.getHeader("cookie") + "]");
-            System.out.println("sesseion key ["
-                    + Constants.LANGUAGE_ATTR_KEY + "]=>["
-                    + httpRequest.getSession().getAttribute(Constants.LANGUAGE_ATTR_KEY) + "]");
+            System.out.println("sesseion key [" + Constants.LANGUAGE_ATTR_KEY + "]=>[" + httpRequest.getSession().getAttribute(Constants.LANGUAGE_ATTR_KEY) + "]");
             if (httpRequest.getSession().getAttribute(Constants.LANGUAGE_ATTR_KEY) == null) {
                 if (httpRequest.getParameter(Constants.LANG_PARAM_NAME) == null) {
                     if (httpRequest.getLocale() != null) {
@@ -73,11 +61,17 @@ public class LocalizationFilter implements Filter {
                 ResourceBundle bundle = ResourceBundle.getBundle(Constants.RESOURCE_BUNDLE_BASE_NAME, locale);
                 httpRequest.getSession().setAttribute(Constants.LANGUAGE_ATTR_KEY, bundle);
             } else {
+                System.out.println("Session already contain labels object we check for update");
+                System.out.println("Does request contains parameter ["
+                        + Constants.LANG_PARAM_NAME + "]=["
+                        + httpRequest.getParameter(Constants.LANG_PARAM_NAME) + "]");
                 if (httpRequest.getParameter(Constants.LANG_PARAM_NAME) != null) {
                     String localeRequested = httpRequest.getParameter(Constants.LANG_PARAM_NAME);
+                    System.out.println("localeRequested is [" + localeRequested + "]");
                     locale = Locale.forLanguageTag(localeRequested);
                     // if provided parameter value is invalid locale key
-                    if (locale != null) {
+                    System.out.println("Locale is [" + locale + "]");
+                    if (locale == null) {
                         locale = Locale.forLanguageTag(Constants.DEFAULT_LOCALE_KEY);
                     }
                     System.out.println("we will create a bundle now for [" + locale + "]");
