@@ -16,14 +16,18 @@ import java.util.List;
  */
 public class DBFaker {
 
-    private List<User> users = new LinkedList<>();
+    private static List<User> users = new LinkedList<>();
+    private static Long counter = 0L;
 
-    public List<User> getUsersList() {
+    public static synchronized Long getNextCounter() {
+        return ++counter;
+    }
+
+    public static List<User> getUsersList() {
         return users;
     }
 
-    public synchronized void addUser(User user) {
+    public static synchronized void addUser(User user) {
         users.add(user);
-        user.setId(Long.valueOf(users.size()));
     }
 }

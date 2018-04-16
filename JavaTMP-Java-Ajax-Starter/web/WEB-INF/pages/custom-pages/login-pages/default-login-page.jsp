@@ -19,12 +19,18 @@
                             Please Sign In
                         </div>
                         <div class="card-body">
+                            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                <p>A fake user has been created with username [${requestScope.fakeUser.userName}] and password [${requestScope.fakeUser.password}].</p>
+                            </div>
                             <form id="main-login-form" method="POST" role="form" action="${pageContext.request.contextPath}/login">
                                 <div class="form-group">
-                                    <input class="form-control required" placeholder="Username" name="username" type="text" autofocus>
+                                    <input class="form-control required" placeholder="Username" name="username" type="text" autofocus value="${requestScope.fakeUser.userName}">
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control required" placeholder="Password" name="password" type="password" value="">
+                                    <input class="form-control required" placeholder="Password" name="password" type="password" value="${requestScope.fakeUser.password}">
                                 </div>
                                 <button type="submit" href="javascript:;" class="btn btn-lg btn-primary btn-block">Login</button>
                             </form>
