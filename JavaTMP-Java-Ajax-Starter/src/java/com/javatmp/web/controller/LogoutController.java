@@ -16,8 +16,9 @@ public class LogoutController extends HttpServlet {
             throws ServletException, IOException {
         System.out.println("*** we should logout current user and redirect him to login page");
         HttpSession session = request.getSession();
-        session.setAttribute("authenticated", null);
-        session.removeAttribute("authenticated");
+        session.setAttribute("user", null);
+        session.removeAttribute("user");
+        session.invalidate();
 
         response.sendRedirect(request.getContextPath() + "/login");
     }

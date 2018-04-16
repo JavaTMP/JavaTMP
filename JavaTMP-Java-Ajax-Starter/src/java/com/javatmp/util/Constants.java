@@ -20,4 +20,6 @@ public class Constants {
     public static final Integer RESPONSES_SUCCESS_STATUS_CODE = 1;
 
     public static final String RESPONSES_CHANGE_LANG_SUCCESS_MSG = "";
+
+    public static final String SERVICES_FACTORY_ATTRIBUTE_NAME = "servicesFactory";
 }

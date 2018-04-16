@@ -1,5 +1,6 @@
 package com.javatmp.web.filter;
 
+import com.javatmp.domain.User;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -61,8 +62,9 @@ public class AuthenticatorFilter implements Filter {
             } else {
                 // check if requester is authenticated or not
                 HttpSession session = req.getSession();
-                System.out.println("Session Attribute [" + session.getAttribute("authenticated") + "]");
-                if (session.getAttribute("authenticated") != null) {
+                System.out.println("Session Attribute [" + session.getAttribute("user") + "]");
+                User user = (User) session.getAttribute("user");
+                if (user != null) {
                     chain.doFilter(request, response);
                 } else {
                     res.sendRedirect(req.getContextPath() + "/login");

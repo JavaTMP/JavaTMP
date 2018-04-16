@@ -7,9 +7,16 @@ import com.javatmp.mvc.ClassTypeAdapter;
 import com.javatmp.mvc.ResponseMessage;
 import com.javatmp.service.DBFaker;
 import com.javatmp.mvc.MvcHelper;
+import com.javatmp.service.ServicesFactory;
+import com.javatmp.util.Constants;
+import com.javatmp.util.MD5Util;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,23 +30,35 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Create a fake user
-        User user = new User();
-        user.setId(DBFaker.getNextCounter());
-        user.setUserName("user" + user.getId());
-        user.setPassword(user.getUserName());
-        user.setFullName(user.getUserName() + " with password " + user.getPassword());
-        user.setStatus((short) 1);
-        user.setCreationDate(new Date());
-        user.setEmail(user.getUserName() + "@javatmp.com");
-        user.setMobile("00987654321000");
-        user.setLang("en");
-        user.setTheme("default");
-        DBFaker.addUser(user);
 
-        System.out.println("User created [" + MvcHelper.deepToString(user) + "]");
-        request.setAttribute("fakeUser", user);
-        request.getRequestDispatcher("/WEB-INF/pages/custom-pages/login-pages/default-login-page.jsp").forward(request, response);
+        try {
+            ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
+
+            // Create a fake user
+            User user = new User();
+            user.setId(DBFaker.getNextCounter());
+            user.setUserName("user" + user.getId());
+            user.setPassword(MD5Util.convertToMD5(user.getUserName()));
+            user.setFullName(user.getUserName());
+            user.setStatus((short) 1);
+            user.setCreationDate(new Date());
+            user.setEmail(user.getUserName() + "@javatmp.com");
+            user.setMobile("00987654321000");
+            user.setLang("en");
+            user.setTheme("default");
+
+            sf.getUserService().createNewUser(user);
+
+            System.out.println("User created [" + MvcHelper.deepToString(user) + "]");
+            request.setAttribute("fakeUser", user);
+            request.getRequestDispatcher("/WEB-INF/pages/custom-pages/login-pages/default-login-page.jsp").forward(request, response);
+        } catch (NoSuchAlgorithmException ex) {
+            ex.printStackTrace();
+            throw new ServletException(ex);
+        } catch (UnsupportedEncodingException ex) {
+            ex.printStackTrace();
+            throw new ServletException(ex);
+        }
 
     }
 
@@ -47,16 +66,19 @@ public class LoginController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        HttpSession session = request.getSession();
+        ServicesFactory sf = (ServicesFactory) session.getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
+
         User user = new User();
         ResponseMessage responseMessage = new ResponseMessage();
         try {
             MvcHelper.populateBeanByRequestParameter(request, user);
             System.out.println("Check User [" + MvcHelper.deepToString(user) + "]");
+            User dbUser = sf.getUserService().readUserByUsername(user);
 
-            if ("admin".equals(user.getUserName()) && "admin".equals(user.getPassword())) {
+            if (dbUser != null && dbUser.getPassword().equals(MD5Util.convertToMD5(user.getPassword()))) {
                 // Authenticated user
-                HttpSession session = request.getSession();
-                session.setAttribute("authenticated", new Boolean(true));
+                session.setAttribute("user", dbUser);
 
                 responseMessage.setOverAllStatus(true);
                 responseMessage.setMessage(request.getContextPath());
@@ -78,6 +100,12 @@ public class LoginController extends HttpServlet {
             ex.printStackTrace();
             throw new ServletException(ex);
         } catch (InvocationTargetException ex) {
+            ex.printStackTrace();
+            throw new ServletException(ex);
+        } catch (NoSuchAlgorithmException ex) {
+            ex.printStackTrace();
+            throw new ServletException(ex);
+        } catch (UnsupportedEncodingException ex) {
             ex.printStackTrace();
             throw new ServletException(ex);
         }

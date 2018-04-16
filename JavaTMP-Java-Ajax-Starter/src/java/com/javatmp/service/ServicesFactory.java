@@ -11,29 +11,24 @@ package com.javatmp.service;
  */
 public class ServicesFactory {
 
-    private final static ServicesFactory servicesFactory = new ServicesFactory();
+    private DBFaker dbFaker;
     private UserService userService;
 
-    public static ServicesFactory getInstance() {
-        return servicesFactory;
+    public ServicesFactory() {
+        this.dbFaker = new DBFaker();
+        this.userService = new UserService(this.dbFaker);
     }
 
-    private ServicesFactory() {
-        this.userService = new UserService();
+    public void destroy() {
+        this.userService = null;
+        this.dbFaker = null;
     }
 
     /**
-     * @return the accountService
+     * @return the userService
      */
-    public UserService getAccountService() {
+    public UserService getUserService() {
         return userService;
-    }
-
-    /**
-     * @param accountService the accountService to set
-     */
-    public void setAccountService(UserService userService) {
-        this.userService = userService;
     }
 
 }
