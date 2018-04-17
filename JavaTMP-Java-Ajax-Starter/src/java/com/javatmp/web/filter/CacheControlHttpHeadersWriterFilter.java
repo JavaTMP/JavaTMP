@@ -16,11 +16,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebFilter(filterName = "CacheFilter", urlPatterns = {"/*"}, dispatcherTypes = DispatcherType.REQUEST)
-public class CacheFilter implements Filter {
+public class CacheControlHttpHeadersWriterFilter implements Filter {
 
     private FilterConfig filterConfig = null;
 
-    public CacheFilter() {
+    public CacheControlHttpHeadersWriterFilter() {
     }
 
     private Set<String> excludeControllers = new HashSet<>();
