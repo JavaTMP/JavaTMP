@@ -31,7 +31,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                                    <p>${labels['global.paragraph.fake']}</p>
                                 </div>
                             </div>
                             <div class="card my-3">
@@ -46,39 +46,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 card-container-col">
-                            <div class="card my-3">
-                                <div class="card-header">
-                                    Card
-                                    <div class="options float-right">
-                                        <a class="settings"><i class="fa fa-cog"></i></a>
-                                        <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
-                                        <a href="#" class="reload"><i class="fa fa-sync"></i></a>
-                                        <a href="#" class="fullscreen"><i class=" fa fa-expand"></i></a>
-                                        <a href="#" class="remove"><i class="fa fa-times"></i></a>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
-                                </div>
-                            </div>
-                            <div class="card my-3">
-                                <div class="card-header">
-                                    Card
-                                    <div class="options float-right">
-                                        <a class="settings"><i class="fa fa-cog"></i></a>
-                                        <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
-                                        <a href="#" class="reload"><i class="fa fa-sync"></i></a>
-                                        <a href="#" class="fullscreen"><i class=" fa fa-expand"></i></a>
-                                        <a href="#" class="remove"><i class="fa fa-times"></i></a>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                                    <p>${labels['global.paragraph.fake']}</p>
                                 </div>
                             </div>
                         </div>
@@ -95,7 +63,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                                    <p>${labels['global.paragraph.fake']}</p>
                                 </div>
                             </div>
                             <div class="card my-3">
@@ -110,7 +78,39 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum tincidunt est vitae ultrices accumsan. Aliquam ornare lacus adipiscing, posuere lectus et, fringilla augue.</p>
+                                    <p>${labels['global.paragraph.fake']}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 card-container-col">
+                            <div class="card my-3">
+                                <div class="card-header">
+                                    Card
+                                    <div class="options float-right">
+                                        <a class="settings"><i class="fa fa-cog"></i></a>
+                                        <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
+                                        <a href="#" class="reload"><i class="fa fa-sync"></i></a>
+                                        <a href="#" class="fullscreen"><i class=" fa fa-expand"></i></a>
+                                        <a href="#" class="remove"><i class="fa fa-times"></i></a>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <p>${labels['global.paragraph.fake']}</p>
+                                </div>
+                            </div>
+                            <div class="card my-3">
+                                <div class="card-header">
+                                    Card
+                                    <div class="options float-right">
+                                        <a class="settings"><i class="fa fa-cog"></i></a>
+                                        <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
+                                        <a href="#" class="reload"><i class="fa fa-sync"></i></a>
+                                        <a href="#" class="fullscreen"><i class=" fa fa-expand"></i></a>
+                                        <a href="#" class="remove"><i class="fa fa-times"></i></a>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <p>${labels['global.paragraph.fake']}</p>
                                 </div>
                             </div>
                         </div>

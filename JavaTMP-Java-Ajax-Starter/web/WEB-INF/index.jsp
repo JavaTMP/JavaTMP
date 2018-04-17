@@ -402,13 +402,13 @@
                             <li>
                                 <a class="has-arrow" href="#">
                                     <i class="far fa-lg fa-fw fa-object-group"></i>
-                                    Themes
+                                    ${labels['global.sidebar.themes']}
                                 </a>
                                 <ul>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/themes/bootswatch">
                                             <i class="far fa-lg fa-fw fa-object-group"></i>
-                                            Bootswatch Free Themes
+                                            ${labels['global.sidebar.themes.bootswatch']}
                                         </a>
                                     </li>
                                 </ul>
@@ -1423,7 +1423,7 @@
                                             modalWrapper.hide();
                                             setTimeout(function () {
                                                 window.location.replace(redirectURL);
-                                            }, 150);
+                                            }, 200);
                                         }
                                     }
                                 ]
