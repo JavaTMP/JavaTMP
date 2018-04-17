@@ -173,10 +173,6 @@ var config = {
         "echarts": [
             {"from": "${sourceNodeLib}/echarts/dist/echarts.min.js", "to": "${destComponentsLib}/echarts/dist"}
         ],
-        "magnific-popup": [
-            {"from": "${sourceNodeLib}/magnific-popup/dist/magnific-popup.css", "to": "${destComponentsLib}/magnific-popup/dist", processCSS: true},
-            {"from": "${sourceNodeLib}/magnific-popup/dist/jquery.magnific-popup.min.js", "to": "${destComponentsLib}/magnific-popup/dist"}
-        ],
         "slick-carousel": [
             {"from": "${sourceNodeLib}/slick-carousel/slick/ajax-loader.gif", "to": "${destComponentsLib}/slick-carousel/slick"},
             {"from": "${sourceNodeLib}/slick-carousel/slick/fonts/**/*", "to": "${destComponentsLib}/slick-carousel/slick/fonts"},
@@ -237,7 +233,6 @@ var src = {
         "./web/components/datatables.net-fixedheader-bs4/css/fixedHeader.bootstrap4.min.css",
         "./web/components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css",
         "./web/components/datatables.net-select-bs4/css/select.bootstrap4.min.css",
-        "./web/components/magnific-popup/dist/magnific-popup.css",
         "./web/components/slick-carousel/slick/slick.css",
         "./web/components/slick-carousel/slick/slick-theme.css",
         "./web/components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css",
@@ -301,7 +296,6 @@ var src = {
         "./web/components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js",
         "./web/components/datatables.net-select/js/dataTables.select.min.js",
         "./web/components/echarts/dist/echarts.min.js",
-        "./web/components/magnific-popup/dist/jquery.magnific-popup.min.js",
         "./web/components/slick-carousel/slick/slick.min.js",
         "./web/components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js",
         "./web/components/bootstrap-modal-wrapper/dist/bootstrap-modal-wrapper-factory.min.js",

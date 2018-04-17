@@ -1054,20 +1054,6 @@
                                     <li>
                                         <a class="has-arrow" href="#">
                                             <i class="far fa-lg fa-fw fa-image"></i>
-                                            Gallery Plugins
-                                        </a>
-                                        <ul aria-expanded="true">
-                                            <li>
-                                                <a href="${pageContext.request.contextPath}/pages/gallery/gallery-plugins/jQuery-magnific-popup-plugin">
-                                                    <i class="far fa-lg fa-fw fa-image"></i>
-                                                    jQuery Magnific Popup Plugin
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a class="has-arrow" href="#">
-                                            <i class="far fa-lg fa-fw fa-image"></i>
                                             Carousel
                                         </a>
                                         <ul aria-expanded="true">

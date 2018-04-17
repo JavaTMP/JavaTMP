@@ -290,9 +290,9 @@
         </div>
         <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
             <button type="button" class="javatmp-btn btn btn-primary btn-block my-2"
-                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/gallery/gallery-plugins/jQuery-magnific-popup-plugin" >
-                <i class="far fa-image"></i>
-                jQuery Magnific Plugin
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/wizard/native-bootstrap-tab/modal-bootstrap-pill-wizard" >
+                <i class="fa fa-cog"></i>
+                Horizontal Modal Wizard
             </button>
         </div>
         <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
