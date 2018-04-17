@@ -15,7 +15,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter(filterName = "CacheFilter", urlPatterns = {"/*"}, dispatcherTypes = DispatcherType.REQUEST)
+@WebFilter(filterName = "CacheControlHttpHeadersWriterFilter", urlPatterns = {"/*"}, dispatcherTypes = DispatcherType.REQUEST)
 public class CacheControlHttpHeadersWriterFilter implements Filter {
 
     private FilterConfig filterConfig = null;
