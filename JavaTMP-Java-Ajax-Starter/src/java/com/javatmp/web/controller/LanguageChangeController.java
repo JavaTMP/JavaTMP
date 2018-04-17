@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder;
 import com.javatmp.domain.User;
 import com.javatmp.mvc.ClassTypeAdapter;
 import com.javatmp.mvc.ResponseMessage;
-import com.javatmp.service.DBFaker;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.service.ServicesFactory;
 import com.javatmp.util.Constants;
@@ -14,10 +13,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.security.NoSuchAlgorithmException;
-import java.util.Date;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,8 +21,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/login")
-public class LoginController extends HttpServlet {
+@WebServlet("/updateLanguage")
+public class LanguageChangeController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,26 +37,19 @@ public class LoginController extends HttpServlet {
             System.out.println("user locale country [" + bundle.getLocale().getCountry() + "]");
             // Create a fake user
             User user = new User();
-            user.setId(DBFaker.getNextCounter());
-            user.setUserName("user" + user.getId());
-            user.setPassword(MD5Util.convertToMD5(user.getUserName()));
-            user.setFullName(user.getUserName());
-            user.setStatus((short) 1);
-            user.setCreationDate(new Date());
-            user.setEmail(user.getUserName() + "@javatmp.com");
-            user.setMobile("00987654321000");
-            user.setLang(bundle.getLocale().getLanguage());
-            user.setTheme("default");
-
-            sf.getUserService().createNewUser(user);
-
+            MvcHelper.populateBeanByRequestParameters(request, user);
             System.out.println("User created [" + MvcHelper.deepToString(user) + "]");
-            request.setAttribute("fakeUser", user);
-            request.getRequestDispatcher("/WEB-INF/pages/custom-pages/login-pages/default-login-page.jsp").forward(request, response);
-        } catch (NoSuchAlgorithmException ex) {
+
+            // get current login user in session
+            User loginUser = (User) request.getSession().getAttribute("user");
+            loginUser.setLang(user.getLang());
+
+            response.sendRedirect(request.getContextPath() + "/");
+
+        } catch (IllegalAccessException ex) {
             ex.printStackTrace();
             throw new ServletException(ex);
-        } catch (UnsupportedEncodingException ex) {
+        } catch (InvocationTargetException ex) {
             ex.printStackTrace();
             throw new ServletException(ex);
         }

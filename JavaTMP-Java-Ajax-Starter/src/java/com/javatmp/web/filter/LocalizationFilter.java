@@ -51,10 +51,16 @@ public class LocalizationFilter implements Filter {
                         locale = httpRequest.getLocale();
                     } else {
                         locale = Locale.forLanguageTag(Constants.DEFAULT_LOCALE_KEY);
+                        if (locale == null) {
+                            locale = Locale.getDefault();
+                        }
                     }
                 } else {
                     String localeRequested = httpRequest.getParameter(Constants.LANG_PARAM_NAME);
                     locale = Locale.forLanguageTag(localeRequested);
+                    if (locale == null) {
+                        locale = Locale.getDefault();
+                    }
                 }
 
                 System.out.println("we will create a bundle now for [" + locale + "]");
@@ -73,6 +79,9 @@ public class LocalizationFilter implements Filter {
                     System.out.println("Locale is [" + locale + "]");
                     if (locale == null) {
                         locale = Locale.forLanguageTag(Constants.DEFAULT_LOCALE_KEY);
+                        if (locale == null) {
+                            locale = Locale.getDefault();
+                        }
                     }
                     System.out.println("we will create a bundle now for [" + locale + "]");
                     ResourceBundle bundle = ResourceBundle.getBundle(Constants.RESOURCE_BUNDLE_BASE_NAME, locale);
