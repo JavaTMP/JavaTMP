@@ -11,43 +11,39 @@
         <link href='${pageContext.request.contextPath}/assets/dist/css/javatmp-plugins-print-all.min.css' rel='stylesheet' media='print' />
 
         <c:if test="${labels['global.direction'] == 'ltr'}">
-            <link id="themeStyleSheet" href="${pageContext.request.contextPath}/assets/dist/css/javatmp-default.min.css" rel="stylesheet" type="text/css"/>
+            <link id="themeStyleSheet" href="${pageContext.request.contextPath}/assets/dist/css/javatmp-${sessionScope.user.theme}.min.css" rel="stylesheet" type="text/css"/>
         </c:if>
         <c:if test="${labels['global.direction'] == 'rtl'}">
-            <link id="themeStyleSheet" href="${pageContext.request.contextPath}/assets/dist/css/javatmp-default-rtl.min.css" rel="stylesheet" type="text/css"/>
+            <link id="themeStyleSheet" href="${pageContext.request.contextPath}/assets/dist/css/javatmp-${sessionScope.user.theme}-rtl.min.css" rel="stylesheet" type="text/css"/>
         </c:if>
     </head>
     <body class="sidebar-active">
         <nav class="main-javatmp-navbar navbar fixed-top my-0 py-0">
             <a class="navbar-brand mr-auto py-0 d-none d-md-inline" href="${pageContext.request.contextPath}/">
-                JavaTMP
-                <span class="d-none d-xl-inline"> - Java Bootstrap Template</span>
+                <span class="d-xl-none d-lg-none d-sm-inline">${labels['global.system.name.short']}</span>
+                <span class="d-none d-lg-inline">${labels['global.system.name.long']}</span>
             </a>
             <ul class="main-navbar-menu nav ml-auto">
                 <li class="nav-item py-0 dropdown d-none d-sm-inline">
                     <a class="nav-link dropdown-toggle faa-parent animated-hover" data-toggle="dropdown" href="">
                         <i class="fa fa-globe fa-lg faa-spin"></i>
-                        <span class="d-none d-lg-inline">Starter (LTR)</span>&nbsp;
+                        <span class="d-none d-lg-inline">${labels['global.navbar.lang.current']}</span>
                     </a>
                     <ul class="dropdown-menu">
-                        <li class="">
-                            <a target="_blank" class="dropdown-item" href="/JavaTMP-Static-Ajax/">
-                                <div><img src="${pageContext.request.contextPath}/assets/img/flags/us.png" class="" alt="">&nbsp;English (LTR)</div>
+                        <li class="${sessionScope.user.lang == 'en' ? 'disabled' : ''}">
+                            <a class="dropdown-item ${sessionScope.user.lang == 'en' ? 'disabled' : ''}" href="${pageContext.request.contextPath}/updateLanguage?lang=en">
+                                <div>
+                                    <img src="${pageContext.request.contextPath}/assets/img/flags/us.png" class="" alt="">
+                                    ${labels['global.navbar.lang.en']}
+                                </div>
                             </a>
                         </li>
-                        <li class="">
-                            <a target="_blank" class="dropdown-item" href="/JavaTMP-Static-Ajax-RTL/">
-                                <div><img src="${pageContext.request.contextPath}/assets/img/flags/us.png" class="" alt="">&nbsp;English (RTL)</div>
-                            </a>
-                        </li>
-                        <li class="disabled">
-                            <a target="_blank" class="dropdown-item disabled" href="/JavaTMP-Static-Ajax-Starter/">
-                                <div><img src="${pageContext.request.contextPath}/assets/img/flags/us.png" class="" alt="">&nbsp;Starter (LTR)</div>
-                            </a>
-                        </li>
-                        <li class="">
-                            <a target="_blank" class="dropdown-item" href="/JavaTMP-Static-Ajax-Starter-RTL/">
-                                <div><img src="${pageContext.request.contextPath}/assets/img/flags/us.png" class="" alt="">&nbsp;Starter (RTL)</div>
+                        <li class="${sessionScope.user.lang == 'ar' ? 'disabled' : ''}">
+                            <a class="dropdown-item ${sessionScope.user.lang == 'ar' ? 'disabled' : ''}" href="${pageContext.request.contextPath}/updateLanguage?lang=ar">
+                                <div>
+                                    <img src="${pageContext.request.contextPath}/assets/img/flags/sa.png" class="" alt="">
+                                    ${labels['global.navbar.lang.ar']}
+                                </div>
                             </a>
                         </li>
                     </ul>
@@ -349,42 +345,42 @@
                                     actionType="action-ref-href"
                                     action-ref-by-href="${pageContext.request.contextPath}/pages/home"
                                     data-toggle="tooltip" data-placement="auto"
-                                    title="JavaTMP Home Page">
+                                    title="${labels['global.sidebar.home']}">
                                 <i class="fa fa-home fa-fw"></i>
                             </button>
                             <button class="btn btn-primary"
                                     actionType="action-ref-href"
                                     action-ref-by-href="${pageContext.request.contextPath}/pages/home"
                                     data-toggle="tooltip" data-placement="auto"
-                                    title="JavaTMP Home Page">
+                                    title="${labels['global.sidebar.home']}">
                                 <i class="fa fa-home fa-fw"></i>
                             </button>
                             <button class="btn btn-primary"
                                     actionType="action-ref-href"
                                     action-ref-by-href="${pageContext.request.contextPath}/pages/home"
                                     data-toggle="tooltip" data-placement="auto"
-                                    title="JavaTMP Home Page">
+                                    title="${labels['global.sidebar.home']}">
                                 <i class="fa fa-home fa-fw"></i>
                             </button>
                             <button class="btn btn-primary"
                                     actionType="action-ref-href"
                                     action-ref-by-href="${pageContext.request.contextPath}/pages/home"
                                     data-toggle="tooltip" data-placement="auto"
-                                    title="JavaTMP Home Page">
+                                    title="${labels['global.sidebar.home']}">
                                 <i class="fa fa-home fa-fw"></i>
                             </button>
                             <button class="btn btn-primary"
                                     actionType="action-ref-href"
                                     action-ref-by-href="${pageContext.request.contextPath}/pages/home"
                                     data-toggle="tooltip" data-placement="auto"
-                                    title="JavaTMP Home Page">
+                                    title="${labels['global.sidebar.home']}">
                                 <i class="fa fa-home fa-fw"></i>
                             </button>
                             <button class="btn btn-primary"
                                     actionType="action-ref-href"
                                     action-ref-by-href="${pageContext.request.contextPath}/pages/home"
                                     data-toggle="tooltip" data-placement="auto"
-                                    title="JavaTMP Home Page">
+                                    title="${labels['global.sidebar.home']}">
                                 <i class="fa fa-home fa-fw"></i>
                             </button>
                         </div>
@@ -400,7 +396,7 @@
                             <li>
                                 <a href="${pageContext.request.contextPath}/pages/home">
                                     <i class="fa fa-lg fa-fw fa-home"></i>
-                                    Home
+                                    ${labels['global.sidebar.home']}
                                 </a>
                             </li>
                             <li>
@@ -1427,7 +1423,7 @@
                                             modalWrapper.hide();
                                             setTimeout(function () {
                                                 window.location.replace(redirectURL);
-                                            }, 100);
+                                            }, 150);
                                         }
                                     }
                                 ]
