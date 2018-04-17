@@ -58,7 +58,7 @@ public class MvcHelper {
      * @throws IllegalAccessException
      * @throws InvocationTargetException
      */
-    public static void populateBeanByRequestParameter(HttpServletRequest request, Object bean)
+    public static void populateBeanByRequestParameters(HttpServletRequest request, Object bean)
             throws IllegalAccessException, InvocationTargetException {
         HashMap<String, String[]> map = new HashMap();
         Enumeration names = request.getParameterNames();
