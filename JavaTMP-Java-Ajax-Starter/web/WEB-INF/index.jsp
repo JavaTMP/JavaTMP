@@ -1432,6 +1432,38 @@
                         }
                     }
                 });
-            });</script>
+            });
+        </script>
+        <script type="text/javascript">
+            jQuery(function ($) {
+                if (javatmp.settings.isRTL === true) {
+                    $("body").on('shown.bs.dropdown', '.main-body-content-container .dropdown, .main-body-content-container .btn-group, .main-body-content-container .input-group-prepend, .main-body-content-container .input-group-append', function () {
+                        console.log("firing recalculate popper sub len [" + $(this).parents(".dropdown-submenu").lenght + "]");
+                        if ($(this).parents(".navbar").length !== 0 || (!!$(this).parents(".dropdown-submenu").lenght && $(this).parents(".dropdown-submenu").lenght !== 0)) {
+                            console.log("Cancel and return navbar len [" + $(this).parents(".navbar").length + "] .dropdown-submenu len [" + $(this).parents(".dropdown-submenu").lenght + "]");
+                            return;
+                        }
+
+                        var dropDown = $(this).children(".dropdown-menu");
+                        setTimeout(function () {
+                            var previous =
+                                    dropDown.css("-webkit-transform") ||
+                                    dropDown.css("-moz-transform") ||
+                                    dropDown.css("-ms-transform") ||
+                                    dropDown.css("-o-transform") ||
+                                    dropDown.css("transform") ||
+                                    "Either no transform set, or browser doesn't do getComputedStyle";
+                            var values = previous.split("(")[1];
+                            values = values.split(")")[0];
+                            values = values.split(", ");
+                            var x = 0;
+                            var y = parseInt(values[5]);
+                            var z = 0;
+                            dropDown.css({transform: "translate3d(" + x + "px," + y + "px," + z + "px)", left: "auto", right: "auto"});
+                        }, 0);
+                    });
+                }
+            });
+        </script>
     </body>
 </html>
