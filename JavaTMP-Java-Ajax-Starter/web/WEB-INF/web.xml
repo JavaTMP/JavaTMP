@@ -20,6 +20,10 @@
         <filter-name>GZIPCompressingFilter</filter-name>
         <filter-class>com.javatmp.web.filter.GZIPCompressingFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>ContentCacheFilter</filter-name>
+        <filter-class>com.javatmp.web.filter.ContentCacheFilter</filter-class>
+    </filter>
     <filter-mapping>
         <filter-name>LoggingFilter</filter-name>
         <url-pattern>/*</url-pattern>
@@ -42,6 +46,11 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>GZIPCompressingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>ContentCacheFilter</filter-name>
         <url-pattern>/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
