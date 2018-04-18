@@ -625,6 +625,12 @@
                                             Sortable Cards
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/custom-components/dynamic-cards-content">
+                                            <i class="far fa-lg fa-fw fa-lightbulb"></i>
+                                            Dynamic Cards Content
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li>
