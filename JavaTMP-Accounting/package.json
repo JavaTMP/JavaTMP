@@ -11,7 +11,7 @@
     "dashboard"
   ],
   "author": "javatmp",
-  "licenses": "Commercial License",
+  "licenses": "JavaTMP License",
   "contributors": [],
   "dependencies": {
     "autosize": "^4.0.0",

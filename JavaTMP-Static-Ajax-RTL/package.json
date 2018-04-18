@@ -2,7 +2,7 @@
   "name": "JavaTMP-Static-Ajax-RTL",
   "version": "0.0.1",
   "private": true,
-  "description": "Java Bootstrap Admin And Dashboard RTL Template",
+  "description": "JavaTMP Bootstrap Admin And Dashboard RTL Template",
   "keywords": [
     "jquery",
     "bootstrap",
@@ -11,7 +11,7 @@
     "dashboard"
   ],
   "author": "javatmp",
-  "licenses": "Commercial License",
+  "licenses": "JavaTMP License",
   "contributors": [],
   "dependencies": {
     "autosize": "^4.0.0",
