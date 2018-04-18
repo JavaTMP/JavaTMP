@@ -1,5 +1,5 @@
-# Java Bootstrap Template
-Java Bootstrap admin and dashboard template built using HTML 5 , CSS 3 , jQuery , Bootstrap 4 and Java.
+# JavaTMP Bootstrap Template
+JavaTMP Bootstrap admin and dashboard template built using HTML 5 , CSS 3 , jQuery , Bootstrap 4 and Java.
 
 First of all I'd like to thank You For Purchasing JavaTMP - Java Bootstrap Template,
 I hope you like it and find it easy to work with.
