@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.zip.GZIPOutputStream;
 import javax.servlet.*;
 import javax.servlet.http.*;
+// http://www.onjava.com/pub/a/onjava/2003/11/19/filters.html
 
 public class GZIPResponseStream extends ServletOutputStream {
 
@@ -72,7 +73,6 @@ public class GZIPResponseStream extends ServletOutputStream {
 
     @Override
     public void write(byte b[], int off, int len) throws IOException {
-        System.out.println("writing...");
         if (closed) {
             throw new IOException("Cannot write to a closed output stream");
         }

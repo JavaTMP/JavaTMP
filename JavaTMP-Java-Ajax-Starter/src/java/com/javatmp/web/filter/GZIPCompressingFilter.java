@@ -10,6 +10,7 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+// http://www.onjava.com/pub/a/onjava/2003/11/19/filters.html
 
 public class GZIPCompressingFilter implements Filter {
 
