@@ -15,7 +15,6 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter(filterName = "CacheControlHeadersFilter", urlPatterns = {"/*"}, dispatcherTypes = DispatcherType.REQUEST)
 public class CacheControlHeadersFilter implements Filter {
 
     private FilterConfig filterConfig = null;
@@ -23,23 +22,9 @@ public class CacheControlHeadersFilter implements Filter {
     public CacheControlHeadersFilter() {
     }
 
-    private Set<String> excludeControllers = new HashSet<>();
-
-    private boolean isReqInWhiteList(String requestPath) {
-        boolean isWhiteListed = false;
-        for (String path : excludeControllers) {
-            if (requestPath.startsWith(path)) {
-                isWhiteListed = true;
-                break;
-            }
-        }
-        return isWhiteListed;
-    }
-
     @Override
     public void init(FilterConfig filterConfig) {
         this.filterConfig = filterConfig;
-        excludeControllers.add("/assets");
     }
 
     @Override
@@ -56,23 +41,18 @@ public class CacheControlHeadersFilter implements Filter {
                 if (httpRequest.getQueryString() != null) {
                     url = httpRequest.getRequestURI() + "?" + httpRequest.getQueryString();
                 } else {
-                    url = httpRequest.getRequestURI().toString();
+                    url = httpRequest.getRequestURI();
                 }
                 String path = url.substring(httpRequest.getContextPath().length());
-                System.out.println("URL [" + url + "] with path [" + path + "] is [" + isReqInWhiteList(path) + "]");
-                if (isReqInWhiteList(path)) {
 
-                    int cacheAge = 60 * 60; // in seconds
-                    Date currentDate = new Date();
-                    long expiry = currentDate.getTime() + (cacheAge * 1000);
+                int cacheAge = 60 * 60; // in seconds
+                Date currentDate = new Date();
+                long expiry = currentDate.getTime() + (cacheAge * 1000);
 
-                    httpResponse.setDateHeader("Date", currentDate.getTime());
-                    httpResponse.setDateHeader("Expires", expiry);
-                    httpResponse.addHeader("Cache-Control", "max-age=" + cacheAge);
-                    System.out.println("Added Cache header to url [" + url + "]");
-                } else {
-                    System.out.println("NOT Added Cache header to url [" + url + "]");
-                }
+                httpResponse.setDateHeader("Date", currentDate.getTime());
+                httpResponse.setDateHeader("Expires", expiry);
+                httpResponse.addHeader("Cache-Control", "max-age=" + cacheAge);
+                System.out.println("Added Cache header to url [" + url + "]");
             }
             chain.doFilter(request, response);
         } catch (Throwable t) {

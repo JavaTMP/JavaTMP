@@ -41,16 +41,16 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>CacheControlHeadersFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-        <dispatcher>REQUEST</dispatcher>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>GZIPCompressingFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/assets/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
     <filter-mapping>
         <filter-name>ContentCacheFilter</filter-name>
+        <url-pattern>/assets/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>GZIPCompressingFilter</filter-name>
         <url-pattern>/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>

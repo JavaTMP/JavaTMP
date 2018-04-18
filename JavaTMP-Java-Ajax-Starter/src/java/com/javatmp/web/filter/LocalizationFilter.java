@@ -19,7 +19,6 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
-@WebFilter(filterName = "LocalizationFilter", urlPatterns = {"/*"})
 public class LocalizationFilter implements Filter {
 
     private FilterConfig filterConfig = null;

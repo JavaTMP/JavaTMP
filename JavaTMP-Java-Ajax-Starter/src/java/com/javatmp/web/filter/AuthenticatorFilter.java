@@ -20,7 +20,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebFilter(filterName = "AuthenticatorFilter", urlPatterns = {"/*"}, dispatcherTypes = DispatcherType.REQUEST)
 public class AuthenticatorFilter implements Filter {
 
     private FilterConfig filterConfig = null;

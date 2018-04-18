@@ -8,7 +8,9 @@
  */
 package com.javatmp.util;
 
-public class CacheEntry {
+import java.io.Serializable;
+
+public class CacheEntry implements Serializable {
 
     public String contentType;
     public String characterEncoding;

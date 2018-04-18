@@ -17,9 +17,7 @@ public class JavaTMPHttpSessionListener implements HttpSessionListener {
     public void sessionCreated(HttpSessionEvent se) {
         System.out.println("*** Session Creation @ [" + new Date() + "]");
         System.out.println("created id [" + se.getSession().getId() + "]");
-        Map<String, CacheEntry> cache = new ConcurrentHashMap<>();
         se.getSession().setAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME, new ServicesFactory());
-        se.getSession().setAttribute("cache", cache);
     }
 
     @Override
@@ -28,11 +26,7 @@ public class JavaTMPHttpSessionListener implements HttpSessionListener {
         System.out.println("Destroyed id [" + se.getSession().getId() + "]");
         ServicesFactory sf = (ServicesFactory) se.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         sf.destroy();
-        Map<String, CacheEntry> cache = (Map<String, CacheEntry>) se.getSession().getAttribute("cache");
-        cache.clear();
         se.getSession().setAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME, null);
         se.getSession().removeAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
-        se.getSession().setAttribute("cache", null);
-        se.getSession().removeAttribute("cache");
     }
 }
