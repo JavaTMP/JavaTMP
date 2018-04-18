@@ -657,6 +657,12 @@
                                                         </a>
                                                     </li>
                                                     <li>
+                                                        <a href="${pageContext.request.contextPath}/pages/plugins/tree/fancytree/chart-of-accounts">
+                                                            <i class="far fa-lg fa-fw fa-gem"></i>
+                                                            Chart Of Accounts
+                                                        </a>
+                                                    </li>
+                                                    <li>
                                                         <a href="${pageContext.request.contextPath}/pages/plugins/tree/fancytree/checkboxes_fancytree">
                                                             <i class="far fa-lg fa-fw fa-gem"></i>
                                                             Checkboxes fancytree
