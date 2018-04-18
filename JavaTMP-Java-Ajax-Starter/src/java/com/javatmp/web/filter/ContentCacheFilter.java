@@ -8,6 +8,7 @@ package com.javatmp.web.filter;
  * the book and help support the authors, development of more free code,
  * and the JSP/Servlet/J2EE community.
  */
+import com.javatmp.util.CacheEntry;
 import com.javatmp.util.CacheResponseWrapper;
 import java.io.*;
 import javax.servlet.*;
@@ -26,82 +27,51 @@ public class ContentCacheFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
 
-        // check if was a resource that shouldn't be cached.
-        String r = sc.getRealPath("");
-        System.out.println("R[" + r + "]");
-        String path = fc.getInitParameter(request.getRequestURI());
-        if (path != null && path.equals("nocache")) {
-            chain.doFilter(request, response);
+        String baseFolderStr = sc.getRealPath("/");
+        String id = request.getRequestURI() + (request.getQueryString() != null ? "?" + request.getQueryString() : "");
+        System.out.println("id[" + id + "] request.methd [" + request.getMethod() + "]");
+        if (request.getMethod().equals("POST")) {
+            chain.doFilter(req, res);
             return;
         }
-        path = r + path;
+        File baseFolder = new File(baseFolderStr);
+        System.out.println("baseFolder [" + baseFolder.getAbsolutePath() + "]");
 
-        // customize to match parameters
-        String id = request.getRequestURI() + request.getQueryString();
-        System.out.println("id[" + id + "]");
-        // optionally append i18n sensitivity
-        String localeSensitive = fc.getInitParameter("locale-sensitive");
-        if (localeSensitive != null) {
-            StringWriter ldata = new StringWriter();
-            Enumeration locales = request.getLocales();
-            while (locales.hasMoreElements()) {
-                Locale locale = (Locale) locales.nextElement();
-                ldata.write(locale.getISO3Language());
-            }
-            id = id + ldata.toString();
-        }
-        File tempDir = (File) sc.getAttribute(
-                "javax.servlet.context.tempdir");
-        System.out.println("tempDir [" + tempDir + "]");
-        // get possible cache
-        String temp = tempDir.getAbsolutePath();
-        System.out.println("temp [" + temp + "]");
-        File file = new File(temp + id);
-
-        // get current resource
-        if (path == null) {
-            path = sc.getRealPath(request.getRequestURI());
-        }
-        File current = new File(path);
+        Map<String, CacheEntry> cache = (Map<String, CacheEntry>) request.getSession().getAttribute("cache");
 
         try {
-            long now = Calendar.getInstance().getTimeInMillis();
             //set timestamp check
-            if (!file.exists() || (file.exists()
-                    && current.lastModified() > file.lastModified())
-                    || cacheTimeout < now - file.lastModified()) {
-                String name = file.getAbsolutePath();
-                System.out.println("file abs path [" + name + "]");
-                name = name.substring(0, name.lastIndexOf("/") == -1 ? 0 : name.lastIndexOf("/"));
-                System.out.println("make dir for [" + name + "]");
-                new File(name).mkdirs();
+            if (!cache.containsKey(id)) {
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 CacheResponseWrapper wrappedResponse
                         = new CacheResponseWrapper(response, baos);
                 chain.doFilter(req, wrappedResponse);
+                System.out.println("getContentType [" + response.getContentType());
+                System.out.println("getCharacterEncoding [" + response.getCharacterEncoding());
+                System.out.println("Content-Length [" + response.getHeader("Content-Length"));
+                System.out.println("Content-Encoding [" + response.getHeader("Content-Encoding"));
+                // print here all header of the response.
 
-                FileOutputStream fos = new FileOutputStream(file);
-                fos.write(baos.toByteArray());
-                fos.flush();
-                fos.close();
+                CacheEntry entry = new CacheEntry();
+                entry.contentType = response.getContentType();
+                entry.characterEncoding = response.getCharacterEncoding();
+                entry.content = baos.toByteArray();
+                entry.contentEncoding = response.getHeader("Content-Encoding");
+                cache.put(id, entry);
             }
         } catch (ServletException e) {
-            if (!file.exists()) {
-                throw new ServletException(e);
-            }
+            throw new ServletException(e);
         } catch (IOException e) {
-            if (!file.exists()) {
-                throw e;
-            }
+            throw e;
         }
-
-        FileInputStream fis = new FileInputStream(file);
-        String mt = sc.getMimeType(request.getRequestURI());
-        response.setContentType(mt);
+        CacheEntry entry = cache.get(id);
+        response.setContentType(entry.contentType);
+        response.setCharacterEncoding(entry.characterEncoding);
+        response.setContentLength(entry.content.length);
+        response.setHeader("Content-Encoding", entry.contentEncoding);
         ServletOutputStream sos = res.getOutputStream();
-        for (int i = fis.read(); i != -1; i = fis.read()) {
-            sos.write((byte) i);
-        }
+        sos.write(entry.content);
+
     }
 
     public void init(FilterConfig filterConfig) {
