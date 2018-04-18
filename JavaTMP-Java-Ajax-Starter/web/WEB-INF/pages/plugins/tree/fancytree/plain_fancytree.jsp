@@ -132,7 +132,20 @@
                 $("#tree").fancytree({
                     extensions: ["glyph"],
                     glyph: glyph_opts,
-                    source: sourceData,
+                    source: {
+                        url: javatmp.settings.contextPath + "/tree/files",
+                        data: {parent: "/"},
+                        debugDelay: 200,
+                        cache: true
+                    },
+                    lazyLoad: function (event, data) {
+                        data.result = {
+                            url: javatmp.settings.contextPath + "/tree/files",
+                            data: {parent: data.node.data.logicalPath},
+                            debugDelay: 200,
+                            cache: true
+                        };
+                    },
                     rtl: javatmp.settings.isRTL,
                     keydown: function (event, data) {
                         if (javatmp.settings.isRTL === true) {

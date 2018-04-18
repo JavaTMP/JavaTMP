@@ -27,8 +27,8 @@
                     <table id="treetable" class="table table-sm table-condensed table-hover table-bordered">
                         <thead>
                             <tr>
-                                <th width="150" class=""></th>
-                                <th width="*">Classification</th>
+                                <th width="150" class="">key</th>
+                                <th width="*">Web App Content</th>
                                 <th  width="100">Folder</th>
                             </tr>
                         </thead>
@@ -61,12 +61,26 @@
                         loading: "fa fa-sync fa-spin"
                     }
                 };
-
+                if (javatmp.settings.isRTL === true) {
+                    $.extend(true, glyph_opts, {
+                        map: {
+                            dropMarker: "fa fa-arrow-left",
+                            expanderClosed: "fa fa-chevron-left",
+                            expanderLazy: "fa fa-chevron-left"
+                        }
+                    });
+                }
                 $("#treetable").fancytree({
                     extensions: ["glyph", "table"],
                     checkbox: false,
                     glyph: glyph_opts,
-                    source: {url: "${pageContext.request.contextPath}/assets/data/fancytreeTaxonomy.json", debugDelay: 500},
+                    autoScroll: true,
+                    source: {
+                        url: javatmp.settings.contextPath + "/tree/files",
+                        data: {parent: "/"},
+                        debugDelay: 200,
+                        cache: true
+                    },
                     table: {
                         indentation: 25,
                         nodeColumnIdx: 1
@@ -74,13 +88,39 @@
                     activate: function (event, data) {
                     },
                     lazyLoad: function (event, data) {
-                        data.result = {url: "${pageContext.request.contextPath}/assets/data/fancytreeSub.json", debugDelay: 500};
+                        data.result = {
+                            url: javatmp.settings.contextPath + "/tree/files",
+                            data: {parent: data.node.data.logicalPath},
+                            debugDelay: 200,
+                            cache: true
+                        };
                     },
                     renderColumns: function (event, data) {
                         var node = data.node,
                                 $tdList = $(node.tr).find(">td");
-                        $tdList.eq(0).text(node.getIndexHier());
+                        $tdList.eq(0).text(node.key);
+                        $tdList.eq(0).css({
+                            "word-break": "break-all"
+                        });
                         $tdList.eq(2).text(!!node.folder);
+                    },
+                    rtl: javatmp.settings.isRTL,
+                    keydown: function (event, data) {
+                        if (javatmp.settings.isRTL === true) {
+                            var KC = $.ui.keyCode;
+                            var oe = event.originalEvent;
+                            // Swap LEFT/RIGHT keys
+                            switch (event.which) {
+                                case KC.LEFT:
+                                    oe.keyCode = KC.RIGHT;
+                                    oe.which = KC.RIGHT;
+                                    break;
+                                case KC.RIGHT:
+                                    oe.keyCode = KC.LEFT;
+                                    oe.which = KC.LEFT;
+                                    break;
+                            }
+                        }
                     }
                 });
             }(jQuery));
