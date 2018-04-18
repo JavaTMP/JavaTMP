@@ -1,5 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>LoggingFilter</filter-name>
+        <filter-class>com.javatmp.web.filter.LoggingFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>LocalizationFilter</filter-name>
+        <filter-class>com.javatmp.web.filter.LocalizationFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>AuthenticatorFilter</filter-name>
+        <filter-class>com.javatmp.web.filter.AuthenticatorFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>CacheControlHeadersFilter</filter-name>
+        <filter-class>com.javatmp.web.filter.CacheControlHeadersFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>GZIPCompressingFilter</filter-name>
+        <filter-class>com.javatmp.web.filter.GZIPCompressingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoggingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>LocalizationFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenticatorFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>CacheControlHeadersFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>GZIPCompressingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
     <session-config>
         <session-timeout>
             1

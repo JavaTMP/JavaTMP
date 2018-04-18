@@ -15,12 +15,12 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter(filterName = "CacheControlHttpHeadersWriterFilter", urlPatterns = {"/*"}, dispatcherTypes = DispatcherType.REQUEST)
-public class CacheControlHttpHeadersWriterFilter implements Filter {
+@WebFilter(filterName = "CacheControlHeadersFilter", urlPatterns = {"/*"}, dispatcherTypes = DispatcherType.REQUEST)
+public class CacheControlHeadersFilter implements Filter {
 
     private FilterConfig filterConfig = null;
 
-    public CacheControlHttpHeadersWriterFilter() {
+    public CacheControlHeadersFilter() {
     }
 
     private Set<String> excludeControllers = new HashSet<>();
@@ -52,16 +52,14 @@ public class CacheControlHttpHeadersWriterFilter implements Filter {
                 HttpServletRequest httpRequest = (HttpServletRequest) request;
                 HttpServletResponse httpResponse = (HttpServletResponse) response;
 
-                String path = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length());
-
-                String finalUrl = null;
+                String url = null;
                 if (httpRequest.getQueryString() != null) {
-                    finalUrl = httpRequest.getRequestURL() + "?" + httpRequest.getQueryString();
+                    url = httpRequest.getRequestURI() + "?" + httpRequest.getQueryString();
                 } else {
-                    finalUrl = httpRequest.getRequestURL().toString();
+                    url = httpRequest.getRequestURI().toString();
                 }
-
-                this.filterConfig.getServletContext().log("path [" + finalUrl + "] is [" + isReqInWhiteList(path) + "]");
+                String path = url.substring(httpRequest.getContextPath().length());
+                System.out.println("URL [" + url + "] with path [" + path + "] is [" + isReqInWhiteList(path) + "]");
                 if (isReqInWhiteList(path)) {
 
                     int cacheAge = 60 * 60; // in seconds
@@ -71,15 +69,15 @@ public class CacheControlHttpHeadersWriterFilter implements Filter {
                     httpResponse.setDateHeader("Date", currentDate.getTime());
                     httpResponse.setDateHeader("Expires", expiry);
                     httpResponse.addHeader("Cache-Control", "max-age=" + cacheAge);
-                    System.out.println("Added Cache header to url [" + finalUrl + "]");
+                    System.out.println("Added Cache header to url [" + url + "]");
                 } else {
-                    System.out.println("NOT Added Cache header to url [" + path + "]");
+                    System.out.println("NOT Added Cache header to url [" + url + "]");
                 }
             }
             chain.doFilter(request, response);
         } catch (Throwable t) {
             t.printStackTrace();
-            throw t;
+            throw new ServletException(t);
         }
     }
 
