@@ -764,6 +764,12 @@
                                                     jQuery FullCalendar Year
                                                 </a>
                                             </li>
+                                            <li>
+                                                <a href="${pageContext.request.contextPath}/pages/plugins/calendar/jQuery-fullcalendar-diary-system">
+                                                    <i class="far fa-lg fa-fw fa-gem"></i>
+                                                    Web Diary System
+                                                </a>
+                                            </li>
                                         </ul>
                                     </li>
                                     <li>

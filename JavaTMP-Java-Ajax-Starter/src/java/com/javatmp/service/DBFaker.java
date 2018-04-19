@@ -6,6 +6,7 @@
 package com.javatmp.service;
 
 import com.javatmp.domain.Account;
+import com.javatmp.domain.DiaryEvent;
 import com.javatmp.domain.User;
 import java.math.BigDecimal;
 import java.util.LinkedList;
@@ -18,6 +19,8 @@ import java.util.List;
 public class DBFaker {
 
     private List<User> users = new LinkedList<>();
+    private List<DiaryEvent> diaryEvents = new LinkedList<>();
+
     private static Long counter = 0L;
 
     public static synchronized Long getNextCounter() {
@@ -25,11 +28,15 @@ public class DBFaker {
     }
 
     public List<User> getUsersList() {
-        return users;
+        return getUsers();
+    }
+
+    public synchronized void addDiaryEvent(DiaryEvent event) {
+        this.getDiaryEvents().add(event);
     }
 
     public synchronized void addUser(User user) {
-        users.add(user);
+        getUsers().add(user);
     }
 
     public List<Account> getStaticAccounts() {
@@ -48,5 +55,19 @@ public class DBFaker {
         retAccounts.add(equity);
 
         return retAccounts;
+    }
+
+    /**
+     * @return the users
+     */
+    public List<User> getUsers() {
+        return users;
+    }
+
+    /**
+     * @return the diaryEvents
+     */
+    public List<DiaryEvent> getDiaryEvents() {
+        return diaryEvents;
     }
 }
