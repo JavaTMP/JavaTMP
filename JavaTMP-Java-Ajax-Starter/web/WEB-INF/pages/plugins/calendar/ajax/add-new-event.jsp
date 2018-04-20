@@ -13,13 +13,13 @@
                     <div class="form-group row">
                         <label class="col-lg-2 col-form-label" for="textinput2">Event Start Date</label>
                         <div class="col-lg-10">
-                            <input id="new-event-form-start-date" name="start" type="text" placeholder="Event Start Date" class="form-control required">
+                            <input id="new-event-form-start-date" name="start" type="text" placeholder="Event Start Date" class="form-control required Date-and-Time">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-lg-2 col-form-label" for="textinput3">Event End Date</label>
                         <div class="col-lg-10">
-                            <input id="new-event-form-end-date" name="end" type="text" placeholder="Event End Date" class="form-control required">
+                            <input id="new-event-form-end-date" name="end" type="text" placeholder="Event End Date" class="form-control required Date-and-Time">
                         </div>
                     </div>
                 </form>
@@ -41,7 +41,7 @@
 //            console.log(currentParentModal.options.id);
             $("#" + currentParentModal.options.id).on(javatmp.settings.javaTmpAjaxContainerReady, function (event, modal) {
                 // fire AFTER all transition done and your ajax content is shown to user.
-                var loginForm = $('#new-event-form');
+                var newEventForm = $('#new-event-form');
                 var validator = null;
                 var alertError = null;
                 modal.updateTitle("Add New Diary Event");
@@ -58,7 +58,7 @@
                     label: "Add New Event",
                     cssClass: "btn btn-primary",
                     action: function (modalWrapper, button, buttonData, originalEvent) {
-                        loginForm.trigger("submit");
+                        newEventForm.trigger("submit");
                     }
                 });
 
@@ -81,7 +81,7 @@
                     return false;
                 });
 
-                loginForm.on("submit", function (event) {
+                newEventForm.on("submit", function (event) {
                     event.preventDefault();
                     if (!$(this).valid()) {
                         return;
@@ -89,7 +89,7 @@
                     $('#' + alertError).remove();
                     var httpType = $(this).attr("method");
                     var post_url = $(this).attr("action"); //get form action url
-//                    var form_data = new FormData(loginForm); //Creates new FormData object
+//                    var form_data = new FormData(newEventForm); //Creates new FormData object
                     var form_data = $(this).serializeArray();
                     function objectifyForm(formArray) {//serialize data function
 
@@ -108,7 +108,7 @@
                         data: form_data,
                         success: function (data) {
                             alertError = BootstrapAlertWrapper.createAlert({
-                                container: loginForm,
+                                container: newEventForm,
                                 place: "prepent",
                                 type: "info",
                                 message: data.message,
@@ -125,7 +125,7 @@
                     return this.optional(element) || moment(value, "DD/MM/YYYY HH:mm").isValid();
                 }, "Please enter a valid date in the format DD/MM/YYYY HH:mm");
 
-                validator = loginForm.validate({
+                validator = newEventForm.validate({
                     rules: {
                         title: {
                             required: true
@@ -158,6 +158,29 @@
                             targetParent.append(error);
                         }
                     }
+                });
+                $('.Date-and-Time').daterangepicker({
+                    "opens": "right",
+                    singleDatePicker: true,
+                    showDropdowns: true,
+                    timePicker: true,
+                    timePickerIncrement: 1,
+                    timePicker24Hour: false,
+                    autoApply: true,
+                    autoUpdateInput: true,
+                    locale: {
+                        format: 'DD/MM/YYYY HH:mm'
+                    }
+                });
+                var modalZIndex = modal.originalModal.css('zIndex');
+                $(".daterangepicker").css('z-index', modalZIndex + 1);
+
+                $('.Date-and-Time').inputmask({
+                    alias: "datetime",
+                    inputformat: "dd/mm/yyyy HH:MM",
+                    displayFormat: true,
+                    hourFormat: "24",
+                    clearmaskonlostfocus: false
                 });
             });
         });
