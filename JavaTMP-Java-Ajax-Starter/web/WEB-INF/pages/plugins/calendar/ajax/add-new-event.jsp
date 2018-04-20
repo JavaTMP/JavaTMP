@@ -173,8 +173,8 @@
                     }
                 });
                 var modalZIndex = modal.originalModal.css('zIndex');
-                $(".daterangepicker").css('z-index', modalZIndex + 1);
-
+                $(".daterangepicker.dropdown-menu").css('z-index', modalZIndex + 1);
+                $(".daterangepicker.dropdown-menu > .ranges").hide();
                 $('.Date-and-Time').inputmask({
                     alias: "datetime",
                     inputformat: "dd/mm/yyyy HH:MM",
