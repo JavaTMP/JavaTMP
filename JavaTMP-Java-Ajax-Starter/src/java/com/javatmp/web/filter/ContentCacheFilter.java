@@ -53,7 +53,7 @@ public class ContentCacheFilter implements Filter {
             }
             CacheEntry entry = cache.get(id);
             response.setContentType(entry.contentType);
-            response.setCharacterEncoding(entry.characterEncoding);
+//            response.setCharacterEncoding(entry.characterEncoding);
             response.setContentLength(entry.content.length);
             response.setHeader("Content-Encoding", entry.contentEncoding);
             ServletOutputStream sos = res.getOutputStream();

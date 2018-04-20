@@ -19,6 +19,9 @@ import java.util.HashSet;
 import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.commons.beanutils.converters.DateConverter;
+import org.apache.commons.beanutils.converters.DateTimeConverter;
 import org.apache.commons.lang3.builder.RecursiveToStringStyle;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
@@ -62,6 +65,11 @@ public class MvcHelper {
             throws IllegalAccessException, InvocationTargetException {
         HashMap<String, String[]> map = new HashMap();
         Enumeration names = request.getParameterNames();
+
+        DateTimeConverter dtConverter = new DateConverter();
+        dtConverter.setPattern("yyyy-MM-dd'T'HH:mm:ss");
+        ConvertUtils.register(dtConverter, Date.class);
+
         while (names.hasMoreElements()) {
             String name = (String) names.nextElement();
             map.put(name, request.getParameterValues(name));

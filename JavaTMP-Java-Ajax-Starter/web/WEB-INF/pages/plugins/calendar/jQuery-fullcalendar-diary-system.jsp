@@ -8,7 +8,8 @@
             <div class="card">
                 <div class="card-header">
                     <nav class="nav d-inline">
-                        <a id="populateFakeDatabase" class="d-inline nav-link" href="javascript:void(0);">Populate Fake Database</a>
+                        <a id="populateFakeDatabase" class="d-inline nav-link" href="javascript:void(0);"><i class="fas fa-history fa-fw fa-lg"></i>Populate Fake Database</a>
+                        <a id="addNewEvent" class="d-inline nav-link" href="javascript:void(0);"><i class="far fa-edit fa-fw fa-lg"></i>Add New Event</a>
                     </nav>
                     <div class="options float-right">
                         <a href="#" class="settings"><i class="fa fa-cog"></i></a>
@@ -78,8 +79,8 @@
                     events: javatmp.settings.contextPath + '/calendar/getDiaryEvents',
                     eventClick: function (calEvent, jsEvent, view) {
                         alert('You clicked on event id: ' + calEvent.id
-                                + "\nStart Date: " + moment.utc(calEvent.start).format("DD-MM-YYYY HH:mm")
-                                + "\nEnd Date: " + moment.utc(calEvent.end).format("DD-MM-YYYY HH:mm")
+                                + "\nStart Date: " + moment(calEvent.start).format("DD-MM-YYYY HH:mm")
+                                + "\nEnd Date: " + moment(calEvent.end).format("DD-MM-YYYY HH:mm")
                                 + "\nAnd the title is: " + calEvent.title);
                     },
                     eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {
@@ -97,18 +98,24 @@
                         }
                     },
                     dayClick: function (date, allDay, jsEvent, view) {
-                        alert(date);
-                        BootstrapModalWrapperFactory.createAjaxModal({
-                            message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
-                            closable: false,
-//                        title: "AJAX Content",
-                            closeByBackdrop: false,
-                            passData: {date: moment.utc(date).format()},
-                            url: javatmp.settings.contextPath + "/pages/plugins/calendar/ajax/ajax-compose-message",
-                            ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
-                        });
+                        addNewEvent(date);
                     }
                 });
+                function addNewEvent(date) {
+                    var passData = {};
+                    if (date) {
+                        passData.date = moment(date).format();
+                    }
+                    BootstrapModalWrapperFactory.createAjaxModal({
+                        message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
+                        closable: false,
+//                        title: "AJAX Content",
+                        closeByBackdrop: false,
+                        passData: passData,
+                        url: javatmp.settings.contextPath + "/pages/plugins/calendar/ajax/add-new-event",
+                        ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
+                    });
+                }
                 function updateEvent(event) {
                     var dataRow = {
                         'id': event.id,
@@ -145,6 +152,10 @@
                         }
                     });
                 }
+
+                $('#addNewEvent').click(function () {
+                    addNewEvent();
+                });
                 $('#populateFakeDatabase').click(function () {
                     $.ajax({
                         type: 'POST',

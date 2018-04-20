@@ -1,21 +1,15 @@
 package com.javatmp.web.controller.calendar;
 
-import com.javatmp.web.controller.tree.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.javatmp.domain.Account;
 import com.javatmp.domain.DiaryEvent;
 import com.javatmp.mvc.ClassTypeAdapter;
-import com.javatmp.mvc.DateTypeAdapter;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.ResponseMessage;
 import com.javatmp.service.ServicesFactory;
 import com.javatmp.util.Constants;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
-import java.util.function.Consumer;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -34,7 +28,7 @@ public class UpdateEventController extends HttpServlet {
         responseMessage.setOverAllStatus(true);
         responseMessage.setMessage("Your Fake DB has been successfully populated with Random diary events");
 
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").serializeNulls()
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").serializeNulls()
                 .registerTypeAdapter(Class.class, new ClassTypeAdapter())
                 //                .registerTypeAdapter(Date.class, new DateTypeAdapter())
                 .create();
