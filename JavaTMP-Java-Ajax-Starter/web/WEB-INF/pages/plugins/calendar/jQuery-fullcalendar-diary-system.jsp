@@ -58,16 +58,93 @@
                     header: {
                         left: 'prev,next today',
                         center: 'title',
-                        right: 'month,agendaWeek,agendaDay'
+                        right: 'month,agendaWeek,agendaDay, listDay,listWeek,listMonth,listYear'
+                    },
+                    buttonText: {
+                        listDay: 'Day List',
+                        listWeek: 'Week List',
+                        listMonth: 'Month List',
+                        listYear: 'Year List'
                     },
                     defaultView: 'month',
+                    navLinks: true,
                     editable: true,
                     allDaySlot: false,
                     selectable: true,
+                    eventLimit: true,
                     slotDuration: '00:15:00',
                     slotLabelInterval: "01:00",
-                    events: javatmp.settings.contextPath + '/calendar/getDiaryEvents'
+                    timezone: 'UTC',
+                    events: javatmp.settings.contextPath + '/calendar/getDiaryEvents',
+                    eventClick: function (calEvent, jsEvent, view) {
+                        alert('You clicked on event id: ' + calEvent.id
+                                + "\nStart Date: " + moment.utc(calEvent.start).format("DD-MM-YYYY HH:mm")
+                                + "\nEnd Date: " + moment.utc(calEvent.end).format("DD-MM-YYYY HH:mm")
+                                + "\nAnd the title is: " + calEvent.title);
+                    },
+                    eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {
+                        if (confirm("Confirm move?")) {
+                            updateEvent(event);
+                        } else {
+                            revertFunc();
+                        }
+                    },
+                    eventResize: function (event, dayDelta, minuteDelta, revertFunc) {
+                        if (confirm("Confirm change appointment length?")) {
+                            updateEvent(event);
+                        } else {
+                            revertFunc();
+                        }
+                    },
+                    dayClick: function (date, allDay, jsEvent, view) {
+                        alert(date);
+                        BootstrapModalWrapperFactory.createAjaxModal({
+                            message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
+                            closable: false,
+//                        title: "AJAX Content",
+                            closeByBackdrop: false,
+                            passData: {date: moment.utc(date).format()},
+                            url: javatmp.settings.contextPath + "/pages/plugins/calendar/ajax/ajax-compose-message",
+                            ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
+                        });
+                    }
                 });
+                function updateEvent(event) {
+                    var dataRow = {
+                        'id': event.id,
+                        'start': event.start,
+                        'end': event.end
+                    };
+                    $.ajax({
+                        type: 'POST',
+                        url: javatmp.settings.contextPath + "/calendar/updateEvent",
+                        dataType: "json",
+                        contentType: "application/json; charset=UTF-8",
+                        data: JSON.stringify(dataRow),
+                        success: function (response) {
+                            var modalWrapper = BootstrapModalWrapperFactory.createModal({
+                                message: response.message,
+                                title: "Remote Response",
+                                closable: false,
+                                closeByBackdrop: false,
+                                buttons: [
+                                    {
+                                        label: "Return And Refresh",
+                                        cssClass: "btn btn-success",
+                                        action: function (modalWrapper, button, buttonData, originalEvent) {
+                                            javatmp.waitForFinalEvent(function () {
+                                                $('#web-diary-calendar').fullCalendar('refetchEvents');
+                                            }, 100, "fullCalendar-update-event");
+                                            modalWrapper.hide();
+
+                                        }
+                                    }
+                                ]
+                            });
+                            modalWrapper.show();
+                        }
+                    });
+                }
                 $('#populateFakeDatabase').click(function () {
                     $.ajax({
                         type: 'POST',
@@ -85,7 +162,7 @@
                                         action: function (modalWrapper, button, buttonData, originalEvent) {
                                             javatmp.waitForFinalEvent(function () {
                                                 $('#web-diary-calendar').fullCalendar('refetchEvents');
-                                            }, 100, "");
+                                            }, 100, "fullCalendar-populateFakeDatabase");
                                             modalWrapper.hide();
 
                                         }
@@ -116,6 +193,7 @@
                 $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenExpand);
                 return true;
             });
-        });
+        }
+        );
     </script>
 </div>

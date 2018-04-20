@@ -33,6 +33,7 @@ public class DBFaker {
 
     public synchronized void addDiaryEvent(DiaryEvent event) {
         this.getDiaryEvents().add(event);
+        event.setId(Long.valueOf(this.diaryEvents.size()));
     }
 
     public synchronized void addUser(User user) {

@@ -5,7 +5,7 @@ import java.util.Date;
 public class DiaryEvent {
 
     private Long id;
-    private String Title;
+    private String title;
     private Date start;
     private Date end;
     private Integer status;
@@ -28,14 +28,14 @@ public class DiaryEvent {
      * @return the Title
      */
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     /**
      * @param Title the Title to set
      */
     public void setTitle(String Title) {
-        this.Title = Title;
+        this.title = Title;
     }
 
     /**
