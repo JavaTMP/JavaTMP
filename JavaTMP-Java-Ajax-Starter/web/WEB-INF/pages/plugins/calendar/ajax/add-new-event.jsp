@@ -112,6 +112,7 @@
                                 place: "prepent",
                                 type: "info",
                                 message: data.message,
+                                focus: false,
                                 close: true
                             });
                         },
@@ -168,6 +169,7 @@
                     timePicker24Hour: false,
                     autoApply: true,
                     autoUpdateInput: true,
+                    minDate: '20/04/2018 00:00:00',
                     locale: {
                         format: 'DD/MM/YYYY HH:mm'
                     }
