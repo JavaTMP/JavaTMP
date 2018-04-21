@@ -34,12 +34,13 @@ public class ContentCacheFilter implements Filter {
         try {
             //set timestamp check
             if (!cache.containsKey(id)) {
+                System.out.println("Not cached yet id[" + id + "]");
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
                 CacheResponseWrapper wrappedResponse
                         = new CacheResponseWrapper(response, baos);
                 chain.doFilter(req, wrappedResponse);
                 System.out.println("getContentType [" + response.getContentType() + "]");
-                System.out.println("getCharacterEncoding [" + response.getCharacterEncoding() + "]");
+//                System.out.println("getCharacterEncoding [" + response.getCharacterEncoding() + "]");
                 System.out.println("Content-Length [" + response.getHeader("Content-Length") + "]");
                 System.out.println("Content-Encoding [" + response.getHeader("Content-Encoding") + "]");
                 // print here all header of the response.
@@ -50,6 +51,8 @@ public class ContentCacheFilter implements Filter {
                 entry.content = baos.toByteArray();
                 entry.contentEncoding = response.getHeader("Content-Encoding");
                 cache.put(id, entry);
+            } else {
+                System.out.println("Fetch from cache [" + id + "]");
             }
             CacheEntry entry = cache.get(id);
             response.setContentType(entry.contentType);

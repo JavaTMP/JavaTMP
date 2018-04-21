@@ -131,8 +131,23 @@
 
                 jQuery.validator.addMethod("validDate", function (value, element) {
                     return this.optional(element) || moment(value, "DD/MM/YYYY HH:mm").isValid();
-                }, "Please enter a valid date in the format DD/MM/YYYY HH:mm");
-
+                }, "Please enter a valid date in the format DD/MM/YYYY HH:MI");
+                jQuery.validator.addMethod("dateGreaterThan",
+                        function (value, element, params) {
+                            if (this.optional(element) || $(params).val() === "")
+                                return true;
+                            if (moment(value, "DD/MM/YYYY HH:mm").isAfter(moment($(params).val(), "DD/MM/YYYY HH:mm")))
+                                return true;
+                            return false;
+                        }, 'Must be greater than other value.');
+                jQuery.validator.addMethod("dateLessThan",
+                        function (value, element, params) {
+                            if (this.optional(element) || $(params).val() === "")
+                                return true;
+                            if (moment(value, "DD/MM/YYYY HH:mm").isBefore(moment($(params).val(), "DD/MM/YYYY HH:mm")))
+                                return true;
+                            return false;
+                        }, 'Must be less than other value.');
                 validator = newEventForm.validate({
                     rules: {
                         title: {
@@ -140,13 +155,28 @@
                         },
                         start: {
                             required: true,
-                            validDate: true
-//                            dateLessThan: '#new-event-form-end-date'
+                            validDate: true,
+                            dateLessThan: '#new-event-form-end-date'
                         },
                         end: {
                             required: true,
-                            validDate: true
-//                            dateGreaterThan: "#new-event-form-start-date"
+                            validDate: true,
+                            dateGreaterThan: "#new-event-form-start-date"
+                        }
+                    },
+                    messages: {
+                        title: {
+                            required: "Kindly enter the title of this event"
+                        },
+                        start: {
+                            required: "Kindly enter the start date of this event",
+                            validDate: "Kindly enter a valid date format 'DD/MM/YYYY HH:MI'",
+                            dateLessThan: "Kindly enter a date less than the end date of this event"
+                        },
+                        end: {
+                            required: "Kindly enter the end date of this event",
+                            validDate: "Kindly enter a valid date format 'DD/MM/YYYY HH:MI'",
+                            dateGreaterThan: "Kindly enter a date greater than the start date of this event"
                         }
                     },
                     highlight: function (element) {
@@ -167,30 +197,30 @@
                         }
                     }
                 });
-                $('.Date-and-Time').daterangepicker({
-                    "opens": "right",
-                    startDate: moment(),
-                    singleDatePicker: true,
-                    showDropdowns: true,
-                    timePicker: true,
-                    timePickerIncrement: 1,
-                    timePicker24Hour: true,
-                    autoApply: true,
-                    autoUpdateInput: true,
-//                    minDate: '20/04/2018 00:00:00',
-//                    minDate: moment(),
-                    locale: {
-                        format: 'DD/MM/YYYY HH:mm'
-                    }
-                });
-                $("#new-event-form-start-date").on("hide.daterangepicker", function () {
-                    $("#new-event-form-end-date").data('daterangepicker').minDate = $("#new-event-form-start-date").data('daterangepicker').startDate;
-                });
-                $("#new-event-form-end-date").on("hide.daterangepicker", function () {
-                    $("#new-event-form-start-date").data('daterangepicker').maxDate = $("#new-event-form-end-date").data('daterangepicker').startDate;
-                });
-                $("#new-event-form-start-date").data('daterangepicker').minDate = moment();
-                $("#new-event-form-end-date").data('daterangepicker').minDate = $("#new-event-form-start-date").data('daterangepicker').minDate;
+//                $('.Date-and-Time').daterangepicker({
+//                    "opens": "right",
+//                    startDate: moment(),
+//                    singleDatePicker: true,
+//                    showDropdowns: true,
+//                    timePicker: true,
+//                    timePickerIncrement: 1,
+//                    timePicker24Hour: true,
+//                    autoApply: true,
+//                    autoUpdateInput: true,
+////                    minDate: '20/04/2018 00:00:00',
+////                    minDate: moment(),
+//                    locale: {
+//                        format: 'DD/MM/YYYY HH:mm'
+//                    }
+//                });
+//                $("#new-event-form-start-date").on("hide.daterangepicker", function () {
+//                    $("#new-event-form-end-date").data('daterangepicker').minDate = $("#new-event-form-start-date").data('daterangepicker').startDate;
+//                });
+//                $("#new-event-form-end-date").on("hide.daterangepicker", function () {
+//                    $("#new-event-form-start-date").data('daterangepicker').maxDate = $("#new-event-form-end-date").data('daterangepicker').startDate;
+//                });
+//                $("#new-event-form-start-date").data('daterangepicker').minDate = moment();
+//                $("#new-event-form-end-date").data('daterangepicker').minDate = $("#new-event-form-start-date").data('daterangepicker').minDate;
                 var modalZIndex = modal.originalModal.css('zIndex');
                 $(".daterangepicker.dropdown-menu").css('z-index', modalZIndex + 1);
                 $(".daterangepicker.dropdown-menu > .ranges").hide();

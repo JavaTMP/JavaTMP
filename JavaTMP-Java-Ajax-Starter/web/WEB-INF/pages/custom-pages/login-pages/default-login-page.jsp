@@ -33,7 +33,7 @@
                                 <div class="form-group">
                                     <input class="form-control required" placeholder="Password" name="password" type="password" value="${requestScope.fakeUser.userName}">
                                 </div>
-                                <button type="submit" href="javascript:;" class="btn btn-lg btn-primary btn-block">Login</button>
+                                <button disabled="" type="submit" href="javascript:;" class="btn btn-lg btn-primary btn-block">Login</button>
                             </form>
                         </div>
                     </div>
@@ -118,6 +118,7 @@
         </script>
         <script type="text/javascript">
             jQuery(function ($) {
+                $("form [type=submit]").prop("disabled", false);
                 $("#oneTimeOverlay").remove();
             });
         </script>
