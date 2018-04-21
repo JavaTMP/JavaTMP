@@ -100,9 +100,7 @@
                 });
                 function manageEvent(eventId) {
                     var passData = {};
-                    passData.callback = function () {
-                        $('#web-diary-calendar').fullCalendar('refetchEvents');
-                    };
+                    passData.callback = "fullcalendarCallback";
                     passData.id = eventId;
                     BootstrapModalWrapperFactory.createAjaxModal({
                         message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
@@ -116,9 +114,7 @@
                 }
                 function addNewEvent(date) {
                     var passData = {};
-                    passData.callback = function () {
-                        $('#web-diary-calendar').fullCalendar('refetchEvents');
-                    };
+                    passData.callback = "fullcalendarCallback";
 //                    passData.callback = "testing.refreshFullcalendarEventsWindow";
 
                     if (date) {
@@ -134,6 +130,9 @@
                         ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                     });
                 }
+                window.fullcalendarCallback = function () {
+                    $('#web-diary-calendar').fullCalendar('refetchEvents');
+                };
                 function updateEvent(event) {
                     var dataRow = {
                         'id': event.id,

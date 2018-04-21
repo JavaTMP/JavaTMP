@@ -33,6 +33,7 @@ public class ManageEventController extends HttpServlet {
             System.out.println("Event read from request [" + MvcHelper.toString(event) + "]");
             event = sf.getDiaryEventService().getEventById(event);
             System.out.println("Event read from Database [" + MvcHelper.toString(event) + "]");
+            request.setAttribute("event", event);
             request.getRequestDispatcher("/WEB-INF/pages/plugins/calendar/ajax/manage-event.jsp").forward(request, response);
         } catch (InvocationTargetException ex) {
             Logger.getLogger(ManageEventController.class.getName()).log(Level.SEVERE, null, ex);

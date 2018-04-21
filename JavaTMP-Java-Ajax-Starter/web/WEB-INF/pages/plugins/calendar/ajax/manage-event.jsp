@@ -1,25 +1,32 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="dynamic-ajax-content">
     <div class="row">
         <div class="col-lg-12">
             <div class="col-lg-12">
                 <form class="form-horizontal" id="manage-event-form" action="${pageContext.request.contextPath}/calendar/addNewEvent" method="POST">
                     <div class="form-group row">
+                        <label class="col-lg-2 col-form-label" for="textinput1">Event Id</label>
+                        <div class="col-lg-10">
+                            <input name="id" type="text" placeholder="Event ID" class="form-control required" disabled="" autofocus="" value="${requestScope.event.id}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label class="col-lg-2 col-form-label" for="textinput1">Event Title</label>
                         <div class="col-lg-10">
-                            <input name="title" type="text" placeholder="Event Title" class="form-control required" autofocus="">
+                            <input name="title" type="text" placeholder="Event Title" class="form-control required" autofocus="" value="${requestScope.event.title}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-lg-2 col-form-label" for="textinput2">Event Start Date</label>
                         <div class="col-lg-10">
-                            <input id="new-event-form-start-date" name="start" type="text" placeholder="Event Start Date" class="form-control required Date-and-Time">
+                            <input id="new-event-form-start-date" name="start" type="text" placeholder="Event Start Date" class="form-control required Date-and-Time" value="<fmt:formatDate pattern='dd/MM/yyyy HH:mm' value='${requestScope.event.start}'/>">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-lg-2 col-form-label" for="textinput3">Event End Date</label>
                         <div class="col-lg-10">
-                            <input id="new-event-form-end-date" name="end" type="text" placeholder="Event End Date" class="form-control required Date-and-Time">
+                            <input id="new-event-form-end-date" name="end" type="text" placeholder="Event End Date" class="form-control required Date-and-Time" value="<fmt:formatDate pattern='dd/MM/yyyy HH:mm' value='${requestScope.event.end}'/>">
                         </div>
                     </div>
                 </form>
@@ -41,7 +48,7 @@
 //            console.log(currentParentModal.options.id);
             $("#" + currentParentModal.options.id).on(javatmp.settings.javaTmpAjaxContainerReady, function (event, modal) {
                 // fire AFTER all transition done and your ajax content is shown to user.
-                var newEventForm = $('#new-event-form');
+                var newEventForm = $('#manage-event-form');
                 var validator = null;
                 var alertError = null;
                 modal.updateTitle("Add New Diary Event");
@@ -205,7 +212,7 @@
                 });
                 $('.Date-and-Time').daterangepicker({
                     "opens": "right",
-                    startDate: moment(),
+//                    startDate: moment(),
                     singleDatePicker: true,
                     showDropdowns: true,
                     timePicker: true,
@@ -225,8 +232,8 @@
                 $("#new-event-form-end-date").on("hide.daterangepicker", function () {
                     $("#new-event-form-start-date").data('daterangepicker').maxDate = $("#new-event-form-end-date").data('daterangepicker').startDate;
                 });
-                $("#new-event-form-start-date").data('daterangepicker').minDate = moment();
-                $("#new-event-form-end-date").data('daterangepicker').minDate = $("#new-event-form-start-date").data('daterangepicker').minDate;
+                $("#new-event-form-start-date").data('daterangepicker').maxDate = $("#new-event-form-end-date").data('daterangepicker').startDate;
+                $("#new-event-form-end-date").data('daterangepicker').minDate = $("#new-event-form-start-date").data('daterangepicker').startDate;
                 var modalZIndex = modal.originalModal.css('zIndex');
                 $(".daterangepicker.dropdown-menu").css('z-index', modalZIndex + 1);
                 $(".daterangepicker.dropdown-menu > .ranges").hide();
