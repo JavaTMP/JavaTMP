@@ -86,7 +86,7 @@
                     if (!$(this).valid()) {
                         return;
                     }
-                    $('#' + alertError).remove();
+//                    $('#' + alertError).remove();
                     var httpType = $(this).attr("method");
                     var post_url = $(this).attr("action"); //get form action url
 //                    var form_data = new FormData(newEventForm); //Creates new FormData object
@@ -107,13 +107,20 @@
                         url: post_url,
                         data: form_data,
                         success: function (data) {
+                            toastr.success(data.message, 'SUCCESS', {
+                                timeOut: 5000,
+                                progressBar: true,
+                                rtl: javatmp.settings.isRTL,
+                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                            });
                             alertError = BootstrapAlertWrapper.createAlert({
                                 container: newEventForm,
                                 place: "prepent",
                                 type: "info",
                                 message: data.message,
                                 focus: false,
-                                close: true
+                                close: true,
+                                reset: false
                             });
                         },
                         error: function (data) {
@@ -162,18 +169,28 @@
                 });
                 $('.Date-and-Time').daterangepicker({
                     "opens": "right",
+                    startDate: moment(),
                     singleDatePicker: true,
                     showDropdowns: true,
                     timePicker: true,
                     timePickerIncrement: 1,
-                    timePicker24Hour: false,
+                    timePicker24Hour: true,
                     autoApply: true,
                     autoUpdateInput: true,
-                    minDate: '20/04/2018 00:00:00',
+//                    minDate: '20/04/2018 00:00:00',
+//                    minDate: moment(),
                     locale: {
                         format: 'DD/MM/YYYY HH:mm'
                     }
                 });
+                $("#new-event-form-start-date").on("hide.daterangepicker", function () {
+                    $("#new-event-form-end-date").data('daterangepicker').minDate = $("#new-event-form-start-date").data('daterangepicker').startDate;
+                });
+                $("#new-event-form-end-date").on("hide.daterangepicker", function () {
+                    $("#new-event-form-start-date").data('daterangepicker').maxDate = $("#new-event-form-end-date").data('daterangepicker').startDate;
+                });
+                $("#new-event-form-start-date").data('daterangepicker').minDate = moment();
+                $("#new-event-form-end-date").data('daterangepicker').minDate = $("#new-event-form-start-date").data('daterangepicker').minDate;
                 var modalZIndex = modal.originalModal.css('zIndex');
                 $(".daterangepicker.dropdown-menu").css('z-index', modalZIndex + 1);
                 $(".daterangepicker.dropdown-menu > .ranges").hide();
