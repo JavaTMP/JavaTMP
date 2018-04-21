@@ -26,7 +26,6 @@ public class UpdateEventController extends HttpServlet {
 
         ResponseMessage responseMessage = new ResponseMessage();
         responseMessage.setOverAllStatus(true);
-        responseMessage.setMessage("Your Fake DB has been successfully populated with Random diary events");
 
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").serializeNulls()
                 .registerTypeAdapter(Class.class, new ClassTypeAdapter())

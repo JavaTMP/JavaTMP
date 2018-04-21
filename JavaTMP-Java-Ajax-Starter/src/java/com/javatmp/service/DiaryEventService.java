@@ -61,6 +61,16 @@ public class DiaryEventService {
         }
     }
 
+    public DiaryEvent getEventById(DiaryEvent event) {
+        List<DiaryEvent> events = dBFaker.getDiaryEvents();
+        for (DiaryEvent t : events) {
+            if (t.getId().equals(event.getId())) {
+                return t;
+            }
+        }
+        return null;
+    }
+
     public static Date GetRandomAppointmentTime(boolean goBackwards, boolean today) {
         Calendar baseDate = Calendar.getInstance();
         if (today) {

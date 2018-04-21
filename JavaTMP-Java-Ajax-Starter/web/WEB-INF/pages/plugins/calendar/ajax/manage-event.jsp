@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="col-lg-12">
-                <form class="form-horizontal" id="new-event-form" action="${pageContext.request.contextPath}/calendar/addNewEvent" method="POST">
+                <form class="form-horizontal" id="manage-event-form" action="${pageContext.request.contextPath}/calendar/addNewEvent" method="POST">
                     <div class="form-group row">
                         <label class="col-lg-2 col-form-label" for="textinput1">Event Title</label>
                         <div class="col-lg-10">

@@ -78,10 +78,7 @@
                     timezone: 'UTC',
                     events: javatmp.settings.contextPath + '/calendar/getDiaryEvents',
                     eventClick: function (calEvent, jsEvent, view) {
-                        alert('You clicked on event id: ' + calEvent.id
-                                + "\nStart Date: " + moment(calEvent.start).format("DD-MM-YYYY HH:mm")
-                                + "\nEnd Date: " + moment(calEvent.end).format("DD-MM-YYYY HH:mm")
-                                + "\nAnd the title is: " + calEvent.title);
+                        manageEvent(calEvent.id);
                     },
                     eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {
                         if (confirm("Confirm move?")) {
@@ -101,6 +98,22 @@
                         addNewEvent(date);
                     }
                 });
+                function manageEvent(eventId) {
+                    var passData = {};
+                    passData.callback = function () {
+                        $('#web-diary-calendar').fullCalendar('refetchEvents');
+                    };
+                    passData.id = eventId;
+                    BootstrapModalWrapperFactory.createAjaxModal({
+                        message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
+                        closable: false,
+//                        title: "AJAX Content",
+                        closeByBackdrop: false,
+                        passData: passData,
+                        url: javatmp.settings.contextPath + "/calendar/ManageEventController",
+                        ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
+                    });
+                }
                 function addNewEvent(date) {
                     var passData = {};
                     passData.callback = function () {
