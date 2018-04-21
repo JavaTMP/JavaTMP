@@ -103,6 +103,11 @@
                 });
                 function addNewEvent(date) {
                     var passData = {};
+                    passData.callback = function () {
+                        $('#web-diary-calendar').fullCalendar('refetchEvents');
+                    };
+//                    passData.callback = "testing.refreshFullcalendarEventsWindow";
+
                     if (date) {
                         passData.date = moment(date).format();
                     }

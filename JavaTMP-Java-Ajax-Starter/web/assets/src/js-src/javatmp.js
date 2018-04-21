@@ -406,4 +406,20 @@
             timers[uniqueId] = setTimeout(callback, ms);
         };
     })();
+
+    // https://stackoverflow.com/a/4351575/1461221
+    window.javatmp.executeFunctionByName = function (functionName, context /*, args */) {
+        var originalFunctionName = functionName;
+        var originalContext = context;
+        var args = Array.prototype.slice.call(arguments, 2);
+        var namespaces = functionName.split(".");
+        var func = namespaces.pop();
+        for (var i = 0; i < namespaces.length; i++) {
+            context = context[namespaces[i]];
+        }
+        if (typeof context[func] !== 'function') {
+            throw "[" + originalFunctionName + "] is not a function of [" + originalContext + "]";
+        }
+        return context[func].apply(context, args);
+    };
 }(jQuery));
