@@ -250,8 +250,8 @@
                     eventForm.valid();
                     $("#new-event-form-start-date").data('daterangepicker').maxDate = $("#new-event-form-end-date").data('daterangepicker').startDate;
                 });
-                $("#new-event-form-start-date").data('daterangepicker').minDate = moment();
-                $("#new-event-form-end-date").data('daterangepicker').minDate = $("#new-event-form-start-date").data('daterangepicker').minDate;
+//                $("#new-event-form-start-date").data('daterangepicker').minDate = moment();
+//                $("#new-event-form-end-date").data('daterangepicker').minDate = $("#new-event-form-start-date").data('daterangepicker').minDate;
                 var modalZIndex = modal.originalModal.css('zIndex');
                 $(".daterangepicker.dropdown-menu").css('z-index', modalZIndex + 1);
                 $(".daterangepicker.dropdown-menu > .ranges").hide();

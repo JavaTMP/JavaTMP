@@ -39,6 +39,17 @@
 //        console.log("currentParentModal.options.id");
 //        var currentParentModal = BootstrapModalWrapperFactory.globalModals[BootstrapModalWrapperFactory.globalModals.length - 1];
 //        console.log(currentParentModal.options.id);
+        function convertFormToJson(formObject) {
+            var formData = {};
+            var $disabledFields = formObject.find('[disabled]');
+            $disabledFields.prop('disabled', false); // enable fields so they are included
+            var formArray = formObject.serializeArray();
+            $disabledFields.prop('disabled', true); // back to disabled
+            for (var i = 0; i < formArray.length; i++) {
+                formData[formArray[i]['name']] = formArray[i]['value'];
+            }
+            return formData;
+        }
         jQuery(function ($) {
             // here we can reference the container bootstrap modal by its id
             // passed as parameter to request by name "ajaxModalId"
@@ -65,7 +76,86 @@
                     label: "Delete Event",
                     cssClass: "btn btn-danger",
                     action: function (modalWrapper, button, buttonData, originalEvent) {
-
+                        var formData = convertFormToJson(eventForm);
+                        BootstrapModalWrapperFactory.createModal({
+                            message: "Are You sure you want to DELETE Event ?",
+                            title: "Alert",
+                            closable: false,
+                            closeByBackdrop: false,
+                            buttons: [
+                                {
+                                    label: "Cancel",
+                                    cssClass: "btn btn-secondary",
+                                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                                        return modalWrapper.hide();
+                                    }
+                                },
+                                {
+                                    label: "Delete Event ID '" + formData.id + "'",
+                                    cssClass: "btn btn-danger",
+                                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                                        modalWrapper.hide();
+                                        var m = BootstrapModalWrapperFactory.createModal({
+                                            message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
+                                            closable: false,
+                                            closeByBackdrop: false,
+                                            closeByKeyboard: false
+                                        });
+                                        m.originalModal.find(".modal-dialog").css({transition: 'all 0.5s'});
+                                        m.show();
+                                        formData.start = moment(formData.start, 'DD/MM/YYYY HH:mm').format("YYYY-MM-DDTHH:mm:ss");
+                                        formData.end = moment(formData.end, 'DD/MM/YYYY HH:mm').format("YYYY-MM-DDTHH:mm:ss");
+                                        $.ajax({
+                                            type: "POST",
+                                            url: javatmp.settings.contextPath + "/calendar/deleteEvent",
+                                            data: JSON.stringify(formData),
+                                            dataType: "json",
+                                            contentType: "application/json; charset=UTF-8",
+                                            success: function (data) {
+                                                m.updateMessage(data.message);
+                                                m.updateClosable(true);
+                                                m.updateTitle("Deleted Action Response");
+                                                callbackData.cancel = false;
+                                                callbackData.success = true;
+                                                callbackData.event = formData;
+                                                toastr.success(data.message, 'SUCCESS', {
+                                                    timeOut: 3000,
+                                                    progressBar: true,
+                                                    rtl: javatmp.settings.isRTL,
+                                                    positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                                                });
+                                            },
+                                            error: function (data) {
+                                                callbackData.success = false;
+                                                alert("error" + JSON.stringify(data));
+                                            }
+                                        });
+                                    }
+                                }
+                            ]
+                        }).show();
+                    }
+                });
+                modal.addButton({
+                    label: "Open New Event Dialog",
+                    cssClass: "btn btn-info",
+                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                        var passData = {};
+//                        passData.callback = function (newEventData) {
+//                            alert(JSON.stringify(newEventData));
+//                            callbackData = newEventData;
+//                            alert(JSON.stringify(callbackData));
+//                        };
+                        passData.date = moment().format();
+                        BootstrapModalWrapperFactory.createAjaxModal({
+                            message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
+                            closable: false,
+//                        title: "AJAX Content",
+                            closeByBackdrop: false,
+                            passData: passData,
+                            url: javatmp.settings.contextPath + "/pages/plugins/calendar/ajax/add-new-event",
+                            ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
+                        });
                     }
                 });
                 modal.addButton({
@@ -122,20 +212,9 @@
 //                    var form_data = $(this).serializeArray();
 //                    // re-disabled the set of inputs that you previously enabled
 //                    disabled.attr('disabled', 'disabled');
+                    var form_data = null;
 
-                    var $disabledFields = $(this).find('[disabled]');
-                    $disabledFields.prop('disabled', false); // enable fields so they are included
-                    var form_data = $(this).serializeArray();
-                    $disabledFields.prop('disabled', true); // back to disabled
-
-                    function objectifyForm(formArray) {//serialize data function
-                        var returnArray = {};
-                        for (var i = 0; i < formArray.length; i++) {
-                            returnArray[formArray[i]['name']] = formArray[i]['value'];
-                        }
-                        return returnArray;
-                    }
-                    form_data = objectifyForm(form_data);
+                    form_data = convertFormToJson($(this));
                     form_data.start = moment(form_data.start, 'DD/MM/YYYY HH:mm').format("YYYY-MM-DDTHH:mm:ss");
                     form_data.end = moment(form_data.end, 'DD/MM/YYYY HH:mm').format("YYYY-MM-DDTHH:mm:ss");
                     $.ajax({
