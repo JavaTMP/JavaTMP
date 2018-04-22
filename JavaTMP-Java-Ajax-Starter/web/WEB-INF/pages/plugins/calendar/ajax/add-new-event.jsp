@@ -41,7 +41,7 @@
 //            console.log(currentParentModal.options.id);
             $("#" + currentParentModal.options.id).on(javatmp.settings.javaTmpAjaxContainerReady, function (event, modal) {
                 // fire AFTER all transition done and your ajax content is shown to user.
-                var newEventForm = $('#new-event-form');
+                var eventForm = $('#new-event-form');
                 var validator = null;
                 var alertError = null;
                 modal.updateTitle("Add New Diary Event");
@@ -58,20 +58,23 @@
                     label: "Add New Event",
                     cssClass: "btn btn-primary",
                     action: function (modalWrapper, button, buttonData, originalEvent) {
-                        newEventForm.trigger("submit");
+                        eventForm.trigger("submit");
                     }
                 });
 
                 var closeAnyWay = false;
+                var callbackData = {success: false, cancel: true};
                 modal.setOnDestroy(function (modalWrapper) {
                     if (closeAnyWay) {
                         modalWrapper.setOnDestroy(null);
                         // here we run passing function name as a remote callback
-                        if ($.isFunction(modal.options.passData.callback)) {
-                            modal.options.passData.callback.apply();
-                        } else if ($.type(modal.options.passData.callback) === "string") {
-                            javatmp.executeFunctionByName(modal.options.passData.callback, window);
-                        }
+                        javatmp.waitForFinalEvent(function () {
+                            if ($.isFunction(modal.options.passData.callback)) {
+                                modal.options.passData.callback.apply();
+                            } else if ($.type(modal.options.passData.callback) === "string") {
+                                javatmp.executeFunctionByName(modal.options.passData.callback, window, callbackData);
+                            }
+                        }, 200, "add-new-event-callback");
                         return true;
                     }
                     BootstrapModalWrapperFactory.confirm({
@@ -87,7 +90,7 @@
                     return false;
                 });
 
-                newEventForm.on("submit", function (event) {
+                eventForm.on("submit", function (event) {
                     event.preventDefault();
                     if (!$(this).valid()) {
                         return;
@@ -95,7 +98,7 @@
 //                    $('#' + alertError).remove();
                     var httpType = $(this).attr("method");
                     var post_url = $(this).attr("action"); //get form action url
-//                    var form_data = new FormData(newEventForm); //Creates new FormData object
+//                    var form_data = new FormData(eventForm); //Creates new FormData object
                     var form_data = $(this).serializeArray();
                     function objectifyForm(formArray) {//serialize data function
 
@@ -113,14 +116,17 @@
                         url: post_url,
                         data: form_data,
                         success: function (data) {
+                            callbackData.cancel = false;
+                            callbackData.success = true;
+                            callbackData.event = form_data;
                             toastr.success(data.message, 'SUCCESS', {
-                                timeOut: 5000,
+                                timeOut: 2500,
                                 progressBar: true,
                                 rtl: javatmp.settings.isRTL,
                                 positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
                             });
                             alertError = BootstrapAlertWrapper.createAlert({
-                                container: newEventForm,
+                                container: eventForm,
                                 place: "prepent",
                                 type: "info",
                                 message: data.message,
@@ -130,6 +136,7 @@
                             });
                         },
                         error: function (data) {
+                            callbackData.success = false;
                             alert("error" + JSON.stringify(data));
                         }
                     });
@@ -154,7 +161,23 @@
                                 return true;
                             return false;
                         }, 'Must be less than other value.');
-                validator = newEventForm.validate({
+                jQuery.validator.addMethod("dateEqualOrGreaterThan",
+                        function (value, element, params) {
+                            if (this.optional(element) || $(params).val() === "")
+                                return true;
+                            if (moment(value, "DD/MM/YYYY HH:mm").isSameOrAfter(moment($(params).val(), "DD/MM/YYYY HH:mm")))
+                                return true;
+                            return false;
+                        }, 'Must be equal or greater than other value.');
+                jQuery.validator.addMethod("dateEqualOrLessThan",
+                        function (value, element, params) {
+                            if (this.optional(element) || $(params).val() === "")
+                                return true;
+                            if (moment(value, "DD/MM/YYYY HH:mm").isSameOrBefore(moment($(params).val(), "DD/MM/YYYY HH:mm")))
+                                return true;
+                            return false;
+                        }, 'Must be equal or less than other value.');
+                validator = eventForm.validate({
                     rules: {
                         title: {
                             required: true
@@ -162,12 +185,12 @@
                         start: {
                             required: true,
                             validDate: true,
-                            dateLessThan: '#new-event-form-end-date'
+                            dateEqualOrLessThan: '#new-event-form-end-date'
                         },
                         end: {
                             required: true,
                             validDate: true,
-                            dateGreaterThan: "#new-event-form-start-date"
+                            dateEqualOrGreaterThan: "#new-event-form-start-date"
                         }
                     },
                     messages: {
@@ -220,9 +243,11 @@
                     }
                 });
                 $("#new-event-form-start-date").on("hide.daterangepicker", function () {
+                    eventForm.valid();
                     $("#new-event-form-end-date").data('daterangepicker').minDate = $("#new-event-form-start-date").data('daterangepicker').startDate;
                 });
                 $("#new-event-form-end-date").on("hide.daterangepicker", function () {
+                    eventForm.valid();
                     $("#new-event-form-start-date").data('daterangepicker').maxDate = $("#new-event-form-end-date").data('daterangepicker').startDate;
                 });
                 $("#new-event-form-start-date").data('daterangepicker').minDate = moment();

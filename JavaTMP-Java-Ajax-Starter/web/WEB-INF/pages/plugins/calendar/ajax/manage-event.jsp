@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="col-lg-12">
-                <form class="form-horizontal" id="manage-event-form" action="${pageContext.request.contextPath}/calendar/addNewEvent" method="POST">
+                <form class="form-horizontal" id="manage-event-form" action="${pageContext.request.contextPath}/calendar/updateEvent" method="POST">
                     <div class="form-group row">
                         <label class="col-lg-2 col-form-label" for="textinput1">Event Id</label>
                         <div class="col-lg-10">
@@ -48,37 +48,49 @@
 //            console.log(currentParentModal.options.id);
             $("#" + currentParentModal.options.id).on(javatmp.settings.javaTmpAjaxContainerReady, function (event, modal) {
                 // fire AFTER all transition done and your ajax content is shown to user.
-                var newEventForm = $('#manage-event-form');
+                var eventForm = $('#manage-event-form');
                 var validator = null;
                 var alertError = null;
-                modal.updateTitle("Add New Diary Event");
+                modal.updateTitle("Update Diary Event \"" + eventForm.find("input[name='title']").val() + "\"");
                 modal.updateClosable(true);
                 modal.updateSize("modal-lg");
                 modal.addButton({
-                    label: "Close",
-                    cssClass: "btn btn-danger",
+                    label: "Close Dialog",
+                    cssClass: "btn btn-secondary mr-auto",
                     action: function (modalWrapper, button, buttonData, originalEvent) {
                         return modalWrapper.hide();
                     }
                 });
                 modal.addButton({
-                    label: "Add New Event",
+                    label: "Delete Event",
+                    cssClass: "btn btn-danger",
+                    action: function (modalWrapper, button, buttonData, originalEvent) {
+
+                    }
+                });
+                modal.addButton({
+                    label: "Update Event",
                     cssClass: "btn btn-primary",
                     action: function (modalWrapper, button, buttonData, originalEvent) {
-                        newEventForm.trigger("submit");
+                        eventForm.trigger("submit");
                     }
                 });
 
+                modal.originalModal.find(".modal-footer").addClass("justify-content-start");
+
                 var closeAnyWay = false;
+                var callbackData = {success: false, cancel: true};
                 modal.setOnDestroy(function (modalWrapper) {
                     if (closeAnyWay) {
                         modalWrapper.setOnDestroy(null);
                         // here we run passing function name as a remote callback
-                        if ($.isFunction(modal.options.passData.callback)) {
-                            modal.options.passData.callback.apply();
-                        } else if ($.type(modal.options.passData.callback) === "string") {
-                            javatmp.executeFunctionByName(modal.options.passData.callback, window);
-                        }
+                        javatmp.waitForFinalEvent(function () {
+                            if ($.isFunction(modal.options.passData.callback)) {
+                                modal.options.passData.callback.apply();
+                            } else if ($.type(modal.options.passData.callback) === "string") {
+                                javatmp.executeFunctionByName(modal.options.passData.callback, window, callbackData);
+                            }
+                        }, 200, "manage-event-callback");
                         return true;
                     }
                     BootstrapModalWrapperFactory.confirm({
@@ -94,7 +106,7 @@
                     return false;
                 });
 
-                newEventForm.on("submit", function (event) {
+                eventForm.on("submit", function (event) {
                     event.preventDefault();
                     if (!$(this).valid()) {
                         return;
@@ -102,10 +114,21 @@
 //                    $('#' + alertError).remove();
                     var httpType = $(this).attr("method");
                     var post_url = $(this).attr("action"); //get form action url
-//                    var form_data = new FormData(newEventForm); //Creates new FormData object
-                    var form_data = $(this).serializeArray();
-                    function objectifyForm(formArray) {//serialize data function
 
+                    // https://stackoverflow.com/a/4748748/1461221
+                    // Find disabled inputs, and remove the "disabled" attribute
+//                    var disabled = $(this).find(':input:disabled').removeAttr('disabled');
+//                    // serialize the form
+//                    var form_data = $(this).serializeArray();
+//                    // re-disabled the set of inputs that you previously enabled
+//                    disabled.attr('disabled', 'disabled');
+
+                    var $disabledFields = $(this).find('[disabled]');
+                    $disabledFields.prop('disabled', false); // enable fields so they are included
+                    var form_data = $(this).serializeArray();
+                    $disabledFields.prop('disabled', true); // back to disabled
+
+                    function objectifyForm(formArray) {//serialize data function
                         var returnArray = {};
                         for (var i = 0; i < formArray.length; i++) {
                             returnArray[formArray[i]['name']] = formArray[i]['value'];
@@ -118,16 +141,21 @@
                     $.ajax({
                         type: httpType,
                         url: post_url,
-                        data: form_data,
+                        data: JSON.stringify(form_data),
+                        dataType: "json",
+                        contentType: "application/json; charset=UTF-8",
                         success: function (data) {
+                            callbackData.cancel = false;
+                            callbackData.success = true;
+                            callbackData.event = form_data;
                             toastr.success(data.message, 'SUCCESS', {
-                                timeOut: 5000,
+                                timeOut: 2500,
                                 progressBar: true,
                                 rtl: javatmp.settings.isRTL,
                                 positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
                             });
                             alertError = BootstrapAlertWrapper.createAlert({
-                                container: newEventForm,
+                                container: eventForm,
                                 place: "prepent",
                                 type: "info",
                                 message: data.message,
@@ -137,15 +165,16 @@
                             });
                         },
                         error: function (data) {
+                            callbackData.success = false;
                             alert("error" + JSON.stringify(data));
                         }
                     });
                 });
 
-                jQuery.validator.addMethod("validDate", function (value, element) {
+                $.validator.addMethod("validDate", function (value, element) {
                     return this.optional(element) || moment(value, "DD/MM/YYYY HH:mm").isValid();
                 }, "Please enter a valid date in the format DD/MM/YYYY HH:MI");
-                jQuery.validator.addMethod("dateGreaterThan",
+                $.validator.addMethod("dateGreaterThan",
                         function (value, element, params) {
                             if (this.optional(element) || $(params).val() === "")
                                 return true;
@@ -153,7 +182,7 @@
                                 return true;
                             return false;
                         }, 'Must be greater than other value.');
-                jQuery.validator.addMethod("dateLessThan",
+                $.validator.addMethod("dateLessThan",
                         function (value, element, params) {
                             if (this.optional(element) || $(params).val() === "")
                                 return true;
@@ -161,7 +190,23 @@
                                 return true;
                             return false;
                         }, 'Must be less than other value.');
-                validator = newEventForm.validate({
+                jQuery.validator.addMethod("dateEqualOrGreaterThan",
+                        function (value, element, params) {
+                            if (this.optional(element) || $(params).val() === "")
+                                return true;
+                            if (moment(value, "DD/MM/YYYY HH:mm").isSameOrAfter(moment($(params).val(), "DD/MM/YYYY HH:mm")))
+                                return true;
+                            return false;
+                        }, 'Must be equal or greater than other value.');
+                jQuery.validator.addMethod("dateEqualOrLessThan",
+                        function (value, element, params) {
+                            if (this.optional(element) || $(params).val() === "")
+                                return true;
+                            if (moment(value, "DD/MM/YYYY HH:mm").isSameOrBefore(moment($(params).val(), "DD/MM/YYYY HH:mm")))
+                                return true;
+                            return false;
+                        }, 'Must be equal or less than other value.');
+                validator = eventForm.validate({
                     rules: {
                         title: {
                             required: true
@@ -169,12 +214,12 @@
                         start: {
                             required: true,
                             validDate: true,
-                            dateLessThan: '#new-event-form-end-date'
+                            dateEqualOrLessThan: '#new-event-form-end-date'
                         },
                         end: {
                             required: true,
                             validDate: true,
-                            dateGreaterThan: "#new-event-form-start-date"
+                            dateEqualOrGreaterThan: "#new-event-form-start-date"
                         }
                     },
                     messages: {
@@ -227,9 +272,11 @@
                     }
                 });
                 $("#new-event-form-start-date").on("hide.daterangepicker", function () {
+                    eventForm.valid();
                     $("#new-event-form-end-date").data('daterangepicker').minDate = $("#new-event-form-start-date").data('daterangepicker').startDate;
                 });
                 $("#new-event-form-end-date").on("hide.daterangepicker", function () {
+                    eventForm.valid();
                     $("#new-event-form-start-date").data('daterangepicker').maxDate = $("#new-event-form-end-date").data('daterangepicker').startDate;
                 });
                 $("#new-event-form-start-date").data('daterangepicker').maxDate = $("#new-event-form-end-date").data('daterangepicker').startDate;

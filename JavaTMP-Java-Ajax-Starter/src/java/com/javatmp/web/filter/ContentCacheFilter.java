@@ -8,6 +8,7 @@ package com.javatmp.web.filter;
  * the book and help support the authors, development of more free code,
  * and the JSP/Servlet/J2EE community.
  */
+import com.javatmp.mvc.MvcHelper;
 import com.javatmp.util.CacheEntry;
 import com.javatmp.util.CacheResponseWrapper;
 import java.io.*;
@@ -55,6 +56,9 @@ public class ContentCacheFilter implements Filter {
                 System.out.println("Fetch from cache [" + id + "]");
             }
             CacheEntry entry = cache.get(id);
+            System.out.println("cache entry[size[" + entry.content.length
+                    + "]contentType[" + entry.contentType
+                    + "]contentEncoding[" + entry.contentEncoding + "]");
             response.setContentType(entry.contentType);
 //            response.setCharacterEncoding(entry.characterEncoding);
             response.setContentLength(entry.content.length);

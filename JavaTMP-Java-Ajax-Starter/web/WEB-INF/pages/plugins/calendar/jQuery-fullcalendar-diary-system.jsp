@@ -130,12 +130,39 @@
                         ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                     });
                 }
-                window.fullcalendarCallback = function () {
-                    $('#web-diary-calendar').fullCalendar('refetchEvents');
+                window.fullcalendarCallback = function (callbackData) {
+//                    alert(JSON.stringify(callbackData));
+                    if (callbackData.cancel === true) {
+                    } else {
+                        BootstrapModalWrapperFactory.createModal({
+                            message: "You have updated the event. Press Refresh to Refetch Events for FullCalendar OR Cancel to keep old events",
+                            title: "Alert",
+                            closable: false,
+                            closeByBackdrop: false,
+                            buttons: [
+                                {
+                                    label: "Cancel",
+                                    cssClass: "btn btn-secondary",
+                                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                                        return modalWrapper.hide();
+                                    }
+                                },
+                                {
+                                    label: "Refresh",
+                                    cssClass: "btn btn-primary",
+                                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                                        $('#web-diary-calendar').fullCalendar('refetchEvents');
+                                        return modalWrapper.hide();
+                                    }
+                                }
+                            ]
+                        }).show();
+                    }
                 };
                 function updateEvent(event) {
                     var dataRow = {
                         'id': event.id,
+                        'title': event.title,
                         'start': event.start,
                         'end': event.end
                     };

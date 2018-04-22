@@ -14,7 +14,7 @@
         <div id="oneTimeOverlay" style="position: fixed;width: 100%;height: 100%;top: 0px;left: 0;right: 0;bottom: 0;background-color: rgba(255,255,255,0);z-index: 1000000;cursor: wait;"></div>
         <div class="container-fluid">
             <div class="row justify-content-center">
-                <div class="col-md-3">
+                <div class="col-xl-3 col-lg-3 col-md-6">
                     <div class="card my-3">
                         <div class="card-header">
                             Please Sign In

@@ -42,6 +42,7 @@ public class UpdateEventController extends HttpServlet {
                 found = true;
                 msg = "Event Id [" + event.getId() + "] Updated Successfully";
                 System.out.println("Object event found [" + event.getId() + "]");
+                t.setTitle(event.getTitle());
                 t.setStart(event.getStart());
                 t.setEnd(event.getEnd());
             }
