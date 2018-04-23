@@ -42,11 +42,15 @@
         // should load mandatory libraries and plugins before.
         // <--- HERE --->
         //
+
         $('#calendar').fullCalendar({
             header: {
                 left: 'prev,next today',
                 center: 'title',
                 right: 'month,agendaWeek,agendaDay,listMonth'
+            },
+            buttonText: {
+                listMonth: 'Month List'
             },
             defaultDate: '2018-02-12',
             navLinks: true, // can click day/week names to navigate views

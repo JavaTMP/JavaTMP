@@ -70,13 +70,20 @@
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
+                var targetHeader = {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                };
+                if (javatmp.settings.isRTL) {
+                    targetHeader = $.extend(targetHeader, {
+                        right: targetHeader.left,
+                        left: targetHeader.right
+                    });
+                }
                 $('#web-diary-calendar').fullCalendar({
                     isRTL: javatmp.settings.isRTL,
-                    header: {
-                        left: 'prev,next today',
-                        center: 'title',
-                        right: 'month,agendaWeek,agendaDay'
-                    },
+                    header: targetHeader,
                     defaultView: 'month',
                     navLinks: true,
                     editable: true,
@@ -106,6 +113,9 @@
                     },
                     dayClick: function (date, allDay, jsEvent, view) {
                         addNewEvent(date);
+                    },
+                    eventRender: function (event, element, view) {
+                        $(element).addClass("bg-danger text-white");
                     }
                 });
 
