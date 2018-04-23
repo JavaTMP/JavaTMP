@@ -137,28 +137,6 @@
                     }
                 });
                 modal.addButton({
-                    label: "Open New Event Dialog",
-                    cssClass: "btn btn-info",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
-                        var passData = {};
-//                        passData.callback = function (newEventData) {
-//                            alert(JSON.stringify(newEventData));
-//                            callbackData = newEventData;
-//                            alert(JSON.stringify(callbackData));
-//                        };
-                        passData.date = moment().format();
-                        BootstrapModalWrapperFactory.createAjaxModal({
-                            message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
-                            closable: false,
-//                        title: "AJAX Content",
-                            closeByBackdrop: false,
-                            passData: passData,
-                            url: javatmp.settings.contextPath + "/pages/plugins/calendar/ajax/add-new-event",
-                            ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
-                        });
-                    }
-                });
-                modal.addButton({
                     label: "Update Event",
                     cssClass: "btn btn-primary",
                     action: function (modalWrapper, button, buttonData, originalEvent) {

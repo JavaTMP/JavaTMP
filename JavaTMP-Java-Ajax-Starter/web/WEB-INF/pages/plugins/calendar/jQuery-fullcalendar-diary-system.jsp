@@ -7,9 +7,20 @@
         <div class="col">
             <div class="card">
                 <div class="card-header">
-                    <nav class="nav d-inline">
+                    <nav class="nav d-inline float-left">
                         <a id="populateFakeDatabase" class="d-inline nav-link" href="javascript:void(0);"><i class="fas fa-history fa-fw fa-lg"></i>Populate Fake Database</a>
                         <a id="addNewEvent" class="d-inline nav-link" href="javascript:void(0);"><i class="far fa-edit fa-fw fa-lg"></i>Add New Event</a>
+                        <div class="dropdown d-inline nav-link">
+                            <a class="dropdown-toggle d-inline nav-link" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="far fa-list-alt fa-fw fa-lg"></i>Change View
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a newCalendarView="listDay" class="dropdown-item changeCalendarViewMenuItem" href="javascript:void(0);">Day List View</a>
+                                <a newCalendarView="listWeek" class="dropdown-item changeCalendarViewMenuItem" href="javascript:void(0);">Week List View</a>
+                                <a newCalendarView="listMonth" class="dropdown-item changeCalendarViewMenuItem" href="javascript:void(0);">Month List View</a>
+                                <a newCalendarView="listYear" class="dropdown-item changeCalendarViewMenuItem" href="javascript:void(0);">Year List View</a>
+                            </div>
+                        </div>
                     </nav>
                     <div class="options float-right">
                         <a href="#" class="settings"><i class="fa fa-cog"></i></a>
@@ -59,13 +70,7 @@
                     header: {
                         left: 'prev,next today',
                         center: 'title',
-                        right: 'month,agendaWeek,agendaDay, listDay,listWeek,listMonth,listYear'
-                    },
-                    buttonText: {
-                        listDay: 'Day List',
-                        listWeek: 'Week List',
-                        listMonth: 'Month List',
-                        listYear: 'Year List'
+                        right: 'month,agendaWeek,agendaDay'
                     },
                     defaultView: 'month',
                     navLinks: true,
@@ -98,6 +103,12 @@
                         addNewEvent(date);
                     }
                 });
+
+                $(".changeCalendarViewMenuItem").on("click", function () {
+                    var targetView = $(this).attr("newCalendarView");
+                    $('#web-diary-calendar').fullCalendar('changeView', targetView);
+                });
+
                 function manageEvent(eventId) {
                     var passData = {};
                     passData.callback = "fullcalendarCallback";
