@@ -45,7 +45,10 @@ public class ContentCacheFilter implements Filter {
                 System.out.println("Content-Length [" + response.getHeader("Content-Length") + "]");
                 System.out.println("Content-Encoding [" + response.getHeader("Content-Encoding") + "]");
                 // print here all header of the response.
-
+                Collection<String> headers = response.getHeaderNames();
+                for (String header : headers) {
+                    System.out.println("header[" + header + "][" + response.getHeader(header) + "]");
+                }
                 CacheEntry entry = new CacheEntry();
                 entry.contentType = response.getContentType();
                 entry.characterEncoding = response.getCharacterEncoding();
@@ -66,8 +69,10 @@ public class ContentCacheFilter implements Filter {
             ServletOutputStream sos = res.getOutputStream();
             sos.write(entry.content);
         } catch (ServletException e) {
+            e.printStackTrace();
             throw new ServletException(e);
         } catch (IOException e) {
+            e.printStackTrace();
             throw e;
         }
 
