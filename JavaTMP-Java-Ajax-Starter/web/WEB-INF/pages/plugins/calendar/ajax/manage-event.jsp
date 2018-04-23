@@ -312,8 +312,12 @@
                         }
                     }
                 });
+                $('.Date-and-Time').css({
+                    direction: "ltr",
+                    "text-align": javatmp.settings.floatDefault
+                });
                 $('.Date-and-Time').daterangepicker({
-                    "opens": "right",
+                    "opens": javatmp.settings.floatReverse,
 //                    startDate: moment(),
                     singleDatePicker: true,
                     showDropdowns: true,
@@ -325,6 +329,7 @@
 //                    minDate: '20/04/2018 00:00:00',
 //                    minDate: moment(),
                     locale: {
+                        "direction": javatmp.settings.direction,
                         format: 'DD/MM/YYYY HH:mm'
                     }
                 });

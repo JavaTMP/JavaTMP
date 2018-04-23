@@ -6,12 +6,16 @@
     <div class="row">
         <div class="col">
             <div class="card">
-                <div class="card-header">
-                    <nav class="nav d-inline float-left">
-                        <a id="populateFakeDatabase" class="d-inline nav-link" href="javascript:void(0);"><i class="fas fa-history fa-fw fa-lg"></i>Populate Fake Database</a>
-                        <a id="addNewEvent" class="d-inline nav-link" href="javascript:void(0);"><i class="far fa-edit fa-fw fa-lg"></i>Add New Event</a>
-                        <div class="dropdown d-inline nav-link">
-                            <a class="dropdown-toggle d-inline nav-link" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="card-header d-flex align-items-center justify-content-between py-1 px-3">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a id="populateFakeDatabase" class="nav-link" href="javascript:void(0);"><i class="fas fa-history fa-fw fa-lg"></i>Populate Fake Database</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="addNewEvent" class="nav-link" href="javascript:void(0);"><i class="far fa-edit fa-fw fa-lg"></i>Add New Event</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="dropdown-toggle nav-link" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="far fa-list-alt fa-fw fa-lg"></i>Change View
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -20,9 +24,9 @@
                                 <a newCalendarView="listMonth" class="dropdown-item changeCalendarViewMenuItem" href="javascript:void(0);">Month List View</a>
                                 <a newCalendarView="listYear" class="dropdown-item changeCalendarViewMenuItem" href="javascript:void(0);">Year List View</a>
                             </div>
-                        </div>
-                    </nav>
-                    <div class="options float-right">
+                        </li>
+                    </ul>
+                    <div class="options">
                         <a href="#" class="settings"><i class="fa fa-cog"></i></a>
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
                         <a href="#" class="reload"><i class="fa fa-sync"></i></a>
@@ -67,6 +71,7 @@
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
                 $('#web-diary-calendar').fullCalendar({
+                    isRTL: javatmp.settings.isRTL,
                     header: {
                         left: 'prev,next today',
                         center: 'title',
@@ -116,7 +121,7 @@
                     BootstrapModalWrapperFactory.createAjaxModal({
                         message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
                         closable: false,
-//                        title: "AJAX Content",
+                        //                        title: "AJAX Content",
                         closeByBackdrop: false,
                         passData: passData,
                         url: javatmp.settings.contextPath + "/calendar/ManageEventController",
@@ -126,7 +131,7 @@
                 function addNewEvent(date) {
                     var passData = {};
                     passData.callback = "fullcalendarCallback";
-//                    passData.callback = "testing.refreshFullcalendarEventsWindow";
+                    //                    passData.callback = "testing.refreshFullcalendarEventsWindow";
 
                     if (date) {
                         passData.date = moment(date).format();
@@ -134,7 +139,7 @@
                     BootstrapModalWrapperFactory.createAjaxModal({
                         message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
                         closable: false,
-//                        title: "AJAX Content",
+                        //                        title: "AJAX Content",
                         closeByBackdrop: false,
                         passData: passData,
                         url: javatmp.settings.contextPath + "/pages/plugins/calendar/ajax/add-new-event",
@@ -142,7 +147,7 @@
                     });
                 }
                 window.fullcalendarCallback = function (callbackData) {
-//                    alert(JSON.stringify(callbackData));
+                    //                    alert(JSON.stringify(callbackData));
                     if (callbackData.cancel === true) {
                     } else {
                         BootstrapModalWrapperFactory.createModal({
