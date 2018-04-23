@@ -33,7 +33,6 @@ public class CacheControlHeadersFilter implements Filter {
             throws IOException, ServletException {
 
         try {
-            chain.doFilter(request, response);
             if (response instanceof HttpServletResponse && request instanceof HttpServletRequest) {
                 HttpServletRequest httpRequest = (HttpServletRequest) request;
                 HttpServletResponse httpResponse = (HttpServletResponse) response;
@@ -50,12 +49,12 @@ public class CacheControlHeadersFilter implements Filter {
                 int cacheAge = 60 * 60; // in seconds
                 Date currentDate = new Date();
                 long expiry = currentDate.getTime() + (cacheAge * 1000);
-
                 httpResponse.setDateHeader("Date", currentDate.getTime());
                 httpResponse.setDateHeader("Expires", expiry);
                 httpResponse.addHeader("Cache-Control", "max-age=" + cacheAge);
                 System.out.println("Added Cache header to url [" + url + "]");
             }
+            chain.doFilter(request, response);
         } catch (Throwable t) {
             t.printStackTrace();
             throw new ServletException(t);

@@ -1,6 +1,7 @@
 package com.javatmp.web.filter;
 
 import java.io.IOException;
+import java.util.Collection;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -36,6 +37,12 @@ public class LoggingFilter implements Filter {
         System.out.println("URL [" + url + "] with path [" + path + "]");
 
         chain.doFilter(request, response);
+
+        Collection<String> headers = httpResponse.getHeaderNames();
+        for (String header : headers) {
+            System.out.println("Log-header[" + header + "][" + httpResponse.getHeader(header) + "]");
+        }
+
         long endTime = System.currentTimeMillis();
         System.out.println("URI [" + httpRequest.getRequestURI() + "]=[" + (endTime - startTime) + "] milliseconds");
     }
