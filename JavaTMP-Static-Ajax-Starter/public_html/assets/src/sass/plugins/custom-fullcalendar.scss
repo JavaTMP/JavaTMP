@@ -968,3 +968,38 @@ be a descendant of the grid when it is being dragged.
     background-color: #eee;
 }
 /////////////////////////////////////////////////
+.fc-rtl {
+    .fc-toolbar > * > * { /* extra precedence to override button border margins */
+        float: right;
+        margin-left: 0;
+        margin-right: .75em;
+    }
+
+    /* the first thing within each left/center/right section */
+    .fc-toolbar > * > :first-child { /* extra precedence to override button border margins */
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    .fc-button-group > * {
+        float: right;
+        margin: 0 -1 0 0px;
+    }
+
+    .fc-button-group > :first-child {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .fc-state-default.fc-corner-left { /* non-theme */
+        @include border-left-radius(0);
+        @include border-right-radius($fullcalendar-border-radius);
+    }
+
+    .fc-state-default.fc-corner-right { /* non-theme */
+        @include border-right-radius(0);
+        @include border-left-radius($fullcalendar-border-radius);
+    }
+    .fc-state-default.fc-corner-left.fc-corner-right { /* non-theme */
+        @include border-radius($fullcalendar-border-radius);
+    }
+}
