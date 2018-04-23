@@ -113,10 +113,11 @@
                     },
                     dayClick: function (date, allDay, jsEvent, view) {
                         addNewEvent(date);
-                    },
-                    eventRender: function (event, element, view) {
-                        $(element).addClass("bg-danger text-white");
                     }
+//                    ,
+//                    eventRender: function (event, element, view) {
+//                        $(element).addClass("bg-danger text-white");
+//                    }
                 });
 
                 $(".changeCalendarViewMenuItem").on("click", function () {

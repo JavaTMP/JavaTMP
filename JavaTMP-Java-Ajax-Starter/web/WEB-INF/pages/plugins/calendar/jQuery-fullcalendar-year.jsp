@@ -89,15 +89,21 @@
 
             var date = new Date();
             var y = date.getFullYear();
-
+            var targetHeader = {
+                left: 'title',
+                right: 'month,agendaDay'
+            };
+            if (javatmp.settings.isRTL) {
+                targetHeader = $.extend(targetHeader, {
+                    right: targetHeader.left,
+                    left: targetHeader.right
+                });
+            }
             for (var i = 1; i <= 12; i++) {
                 var id = '#calendar' + i;
                 $(id).fullCalendar({
-                    header: {
-                        left: '',
-                        center: 'title',
-                        right: ''
-                    },
+                    isRTL: javatmp.settings.isRTL,
+                    header: targetHeader,
                     defaultDate: '2018-02-12',
                     navLinks: true, // can click day/week names to navigate views
                     editable: true,

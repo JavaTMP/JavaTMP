@@ -42,13 +42,20 @@
         // should load mandatory libraries and plugins before.
         // <--- HERE --->
         //
-
+        var targetHeader = {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay,listMonth'
+        };
+        if (javatmp.settings.isRTL) {
+            targetHeader = $.extend(targetHeader, {
+                right: targetHeader.left,
+                left: targetHeader.right
+            });
+        }
         $('#calendar').fullCalendar({
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'month,agendaWeek,agendaDay,listMonth'
-            },
+            isRTL: javatmp.settings.isRTL,
+            header: targetHeader,
             buttonText: {
                 listMonth: 'Month List'
             },

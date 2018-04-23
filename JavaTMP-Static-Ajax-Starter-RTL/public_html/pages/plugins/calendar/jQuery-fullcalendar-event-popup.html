@@ -54,13 +54,20 @@
             var m = date.getMonth();
             var y = date.getFullYear();
 
+            var targetHeader = {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            };
+            if (javatmp.settings.isRTL) {
+                targetHeader = $.extend(targetHeader, {
+                    right: targetHeader.left,
+                    left: targetHeader.right
+                });
+            }
             var calendar = $('#calendar').fullCalendar({
-                isRTL: true,
-                header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'month,agendaDay,agendaWeek,listWeek,listDay,'
-                },
+                isRTL: javatmp.settings.isRTL,
+                header: targetHeader,
                 selectable: true,
                 eventLimit: true, // allow "more" link when too many events
                 selectHelper: true,

@@ -41,13 +41,20 @@
         // should load mandatory libraries and plugins before.
         // <--- HERE --->
         //
+        var targetHeader = {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'month,agendaWeek,agendaDay'
+        };
+        if (javatmp.settings.isRTL) {
+            targetHeader = $.extend(targetHeader, {
+                right: targetHeader.left,
+                left: targetHeader.right
+            });
+        }
         $('#calendar').fullCalendar({
-            isRTL: true,
-            header: {
-                left: 'prev,next today',
-                center: 'title',
-                right: 'listMonth,agendaDay,agendaWeek,month'
-            },
+            isRTL: javatmp.settings.isRTL,
+            header: targetHeader,
             defaultDate: '2018-02-12',
             navLinks: true, // can click day/week names to navigate views
             businessHours: true, // display business hours

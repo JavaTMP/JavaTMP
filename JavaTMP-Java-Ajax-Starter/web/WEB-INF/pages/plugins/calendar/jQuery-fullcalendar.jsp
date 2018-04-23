@@ -116,14 +116,20 @@
 
                 /* initialize the calendar
                  -----------------------------------------------------------------*/
-
+                var targetHeader = {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                };
+                if (javatmp.settings.isRTL) {
+                    targetHeader = $.extend(targetHeader, {
+                        right: targetHeader.left,
+                        left: targetHeader.right
+                    });
+                }
                 $('#calendar').fullCalendar({
-//                    theme: "bootstrap4",
-                    header: {
-                        left: 'prev,next today',
-                        center: 'title',
-                        right: 'month,agendaWeek,agendaDay'
-                    },
+                    isRTL: javatmp.settings.isRTL,
+                    header: targetHeader,
                     editable: true,
                     droppable: true, // this allows things to be dropped onto the calendar
                     drop: function () {
