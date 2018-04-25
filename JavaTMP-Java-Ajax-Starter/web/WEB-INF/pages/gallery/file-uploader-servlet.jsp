@@ -85,6 +85,15 @@
         jQuery(document).ready(function () {
             (function ($) {
 // We can attach the `fileselect` event to all file inputs on the page
+                $("#updateFormId input[type=file]").attr("accept", "image/*").on("change", function () {
+                    var max = 10 * 1024 * 1024; // 10MB
+                    for (var i = 0; i < this.files.length; i++) {
+                        if (this.files && this.files[i].size > max) {
+                            alert("[" + this.files[i].name + " ] File too large."); // Do your thing to handle the error.
+                            this.value = null; // Clears the field.
+                        }
+                    }
+                });
                 $(document).on('change', ':file', function () {
                     var input = $(this),
                             numFiles = input.get(0).files ? input.get(0).files.length : 1,
