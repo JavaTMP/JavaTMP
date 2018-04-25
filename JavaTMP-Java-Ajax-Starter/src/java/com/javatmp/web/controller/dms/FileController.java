@@ -1,4 +1,4 @@
-package com.javatmp.web.controller.util;
+package com.javatmp.web.controller.dms;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -44,6 +44,7 @@ public class FileController extends HttpServlet {
         String headerKey = "Content-Disposition";
         String headerValue = String.format("attachment; filename=\"%s\"", downloadFile.getName());
         response.setHeader(headerKey, headerValue);
+//        response.setHeader("Content-Disposition", "inline; filename=\"" + file.getName() + "\"");
         // obtains response's output stream
         OutputStream outStream = response.getOutputStream();
         byte[] buffer = new byte[4096];

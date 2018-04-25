@@ -1109,6 +1109,12 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a href="${pageContext.request.contextPath}/pages/gallery/file-uploader-servlet">
+                                            <i class="far fa-lg fa-fw fa-image"></i>
+                                            File Uploader Servlet
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="${pageContext.request.contextPath}/pages/gallery/simple-thumbnail-gallery">
                                             <i class="far fa-lg fa-fw fa-image"></i>
                                             Simple Thumbnail Gallery
