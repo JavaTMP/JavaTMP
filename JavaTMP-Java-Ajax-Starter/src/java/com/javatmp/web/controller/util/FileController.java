@@ -18,20 +18,19 @@ public class FileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String filePath = "E:/Test/Download/MYPIC.JPG";
+        // if you want to use a relative path to context root:
+        String folderBase = getServletContext().getRealPath("");
+        System.out.println("relativePath = " + folderBase);
 
         // Get requested file by path info.
         String requestedFile = request.getPathInfo();
         System.out.println("Requested File [" + requestedFile + "]");
-        File downloadFile = new File(filePath);
+        File downloadFile = new File(folderBase, requestedFile);
         FileInputStream inStream = new FileInputStream(downloadFile);
-        // if you want to use a relative path to context root:
-        String relativePath = getServletContext().getRealPath("");
-        System.out.println("relativePath = " + relativePath);
         // obtains ServletContext
         ServletContext context = getServletContext();
         // gets MIME type of the file
-        String mimeType = context.getMimeType(filePath);
+        String mimeType = context.getMimeType(requestedFile);
         if (mimeType == null) {
             // set to binary type if MIME mapping not found
             mimeType = "application/octet-stream";

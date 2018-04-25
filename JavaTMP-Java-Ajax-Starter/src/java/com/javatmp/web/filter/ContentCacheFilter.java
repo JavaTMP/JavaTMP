@@ -54,6 +54,7 @@ public class ContentCacheFilter implements Filter {
                 entry.characterEncoding = response.getCharacterEncoding();
                 entry.content = baos.toByteArray();
                 entry.contentEncoding = response.getHeader("Content-Encoding");
+                entry.contentDisposition = response.getHeader("Content-Disposition");
                 cache.put(id, entry);
             } else {
                 System.out.println("Fetch from cache [" + id + "]");
@@ -66,6 +67,7 @@ public class ContentCacheFilter implements Filter {
 //            response.setCharacterEncoding(entry.characterEncoding);
             response.setContentLength(entry.content.length);
             response.setHeader("Content-Encoding", entry.contentEncoding);
+            response.setHeader("Content-Disposition", entry.contentDisposition);
             ServletOutputStream sos = res.getOutputStream();
             sos.write(entry.content);
         } catch (ServletException e) {

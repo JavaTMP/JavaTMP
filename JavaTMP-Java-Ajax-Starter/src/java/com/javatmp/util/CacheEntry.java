@@ -15,5 +15,6 @@ public class CacheEntry implements Serializable {
     public String contentType;
     public String characterEncoding;
     public String contentEncoding;
+    public String contentDisposition;
     public byte[] content;
 }

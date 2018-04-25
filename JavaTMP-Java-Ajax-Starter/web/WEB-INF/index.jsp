@@ -1103,6 +1103,12 @@
                                         </ul>
                                     </li>
                                     <li>
+                                        <a href="${pageContext.request.contextPath}/pages/gallery/file-controller-serve">
+                                            <i class="far fa-lg fa-fw fa-image"></i>
+                                            Simple Servlet for Files
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="${pageContext.request.contextPath}/pages/gallery/simple-thumbnail-gallery">
                                             <i class="far fa-lg fa-fw fa-image"></i>
                                             Simple Thumbnail Gallery
