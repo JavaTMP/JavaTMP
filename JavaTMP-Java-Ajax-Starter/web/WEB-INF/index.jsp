@@ -18,7 +18,7 @@
         </c:if>
     </head>
     <body class="sidebar-active">
-        <div id="oneTimeOverlay" style="position: fixed;width: 100%;height: 100%;top: 0px;left: 0;right: 0;bottom: 0;background-color: rgba(255,255,255,1);z-index: 1000000;cursor: wait;"></div>
+        <div id="oneTimeOverlay" style="position: fixed;width: 100%;height: 100%;top: 0px;left: 0;right: 0;bottom: 0;background-color: rgba(255,255,255,1);z-index: 1000000;cursor: wait;">Loading ...</div>
         <nav class="main-javatmp-navbar navbar fixed-top my-0 py-0">
             <a class="navbar-brand mr-auto py-0 d-none d-md-inline" href="${pageContext.request.contextPath}/">
                 <span class="d-xl-none d-lg-none d-sm-inline">${labels['global.system.name.short']}</span>
