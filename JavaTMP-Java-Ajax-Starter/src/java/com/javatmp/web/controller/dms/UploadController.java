@@ -32,10 +32,13 @@ public class UploadController extends HttpServlet {
 //        System.out.println("FileName requested to Upload [" + fileName + "] type[" + contentType + "]");
 //        response.getWriter().print("UPLOAD DONE");
 //
+        String tmpDir = System.getProperty("java.io.tmpdir");
+        System.out.println("tmpDir [" + tmpDir + "]");
         String text = "";
         for (Part filePart : request.getParts()) {
             String name = filePart.getName();
             long partSize = filePart.getSize();
+            System.out.println("partSize [" + partSize + "]");
             String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
             String contentType = filePart.getContentType();
             InputStream fileContent = filePart.getInputStream();
