@@ -19,62 +19,62 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-3 col-md-4 col-xs-6">
-                            <a href="javascript:void(0);" class="thumbnail" title="An old greenhouse">
+                            <a href="javascript:;" class="thumbnail" title="An old greenhouse">
                                 <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/FileController/assets/img/gallery/1.jpg" alt="An old greenhouse">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6">
-                            <a href="javascript:void(0);" class="thumbnail" title="Purple wildflowers">
+                            <a href="javascript:;" class="thumbnail" title="Purple wildflowers">
                                 <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/FileController/assets/img/gallery/2.jpg" alt="Purple wildflowers">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6">
-                            <a href="javascript:void(0);" class="thumbnail" title="A birdfeeder">
+                            <a href="javascript:;" class="thumbnail" title="A birdfeeder">
                                 <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/FileController/assets/img/gallery/3.jpg" alt="A birdfeeder">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6">
-                            <a href="javascript:void(0);" class="thumbnail" title="The garden shop">
+                            <a href="javascript:;" class="thumbnail" title="The garden shop">
                                 <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/FileController/assets/img/gallery/4.jpg" alt="The garden shop">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6">
-                            <a href="javascript:void(0);" class="thumbnail" title="Spring daffodils">
+                            <a href="javascript:;" class="thumbnail" title="Spring daffodils">
                                 <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/FileController/assets/img/gallery/5.jpg" alt="Spring daffodils">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6">
-                            <a href="javascript:void(0);" class="thumbnail" title="Iris along the path">
+                            <a href="javascript:;" class="thumbnail" title="Iris along the path">
                                 <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/FileController/assets/img/gallery/6.jpg" alt="Iris along the path">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6">
-                            <a href="javascript:void(0);" class="thumbnail" title="Butterfly">
+                            <a href="javascript:;" class="thumbnail" title="Butterfly">
                                 <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/FileController/assets/img/gallery/7.jpg" alt="Butterfly">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6">
-                            <a href="javascript:void(0);" class="thumbnail" title="The garden blueprint">
+                            <a href="javascript:;" class="thumbnail" title="The garden blueprint">
                                 <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/FileController/assets/img/gallery/8.jpg" alt="The garden blueprint">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6">
-                            <a href="javascript:void(0);" class="thumbnail" title="The patio">
+                            <a href="javascript:;" class="thumbnail" title="The patio">
                                 <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/FileController/assets/img/gallery/9.jpg" alt="The patio">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6">
-                            <a href="javascript:void(0);" class="thumbnail" title="Crocus close-up">
+                            <a href="javascript:;" class="thumbnail" title="Crocus close-up">
                                 <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/FileController/assets/img/gallery/10.jpg" alt="Crocus close-up">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6">
-                            <a href="javascript:void(0);" class="thumbnail" title="Bumble bee collecting nectar">
+                            <a href="javascript:;" class="thumbnail" title="Bumble bee collecting nectar">
                                 <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/FileController/assets/img/gallery/11.jpg" alt="Bumble bee collecting nectar">
                             </a>
                         </div>
                         <div class="col-lg-3 col-md-4 col-xs-6">
-                            <a href="javascript:void(0);" class="thumbnail" title="Winding garden path">
+                            <a href="javascript:;" class="thumbnail" title="Winding garden path">
                                 <img class="img-thumbnail img-fluid my-1" src="${pageContext.request.contextPath}/FileController/assets/img/gallery/12.jpg" alt="Winding garden path">
                             </a>
                         </div>
