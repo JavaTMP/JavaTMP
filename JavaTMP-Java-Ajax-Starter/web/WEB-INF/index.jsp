@@ -1115,6 +1115,12 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a href="${pageContext.request.contextPath}/pages/gallery/edit-image-locally">
+                                            <i class="far fa-lg fa-fw fa-image"></i>
+                                            Edit Image Locally
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="${pageContext.request.contextPath}/pages/gallery/simple-thumbnail-gallery">
                                             <i class="far fa-lg fa-fw fa-image"></i>
                                             Simple Thumbnail Gallery
