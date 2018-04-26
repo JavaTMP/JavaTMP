@@ -85,29 +85,31 @@
         jQuery(document).ready(function () {
             (function ($) {
 // We can attach the `fileselect` event to all file inputs on the page
-                $("#updateFormId input[type=file]").attr("accept", "image/*").on("change", function () {
-                    var max = 500 * 1024 * 1024; // 10MB
+                $("#updateFormId input[type=file]").attr("accept", "*/*").on("change", function () {
+
+
+                });
+                $(document).on('change', ':file', function () {
+                    var max = 1000 * 1024 * 1024; // 1024MB
                     for (var i = 0; i < this.files.length; i++) {
                         if (this.files && this.files[i].size > max) {
                             alert("[" + this.files[i].name + " ] File too large."); // Do your thing to handle the error.
                             this.value = null; // Clears the field.
                         }
                     }
-                });
-                $(document).on('change', ':file', function () {
                     var input = $(this),
                             numFiles = input.get(0).files ? input.get(0).files.length : 1,
                             label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
                     input.trigger('fileselect', [numFiles, label]);
-                    var fileMsg = "Number of File Selected is " + numFiles + "\n\n";
+                    var fileMsg = "Number of File Selected is " + numFiles + "<br/><br/>";
                     if (input.get(0).files && input.get(0).files.length > 0) {
                         for (var i = 0; i < input.get(0).files.length; i++) {
                             var file = input.get(0).files[i];
-                            fileMsg += "# [" + (i + 1) + "][" + file.name + "]\n";
+                            fileMsg += "# [" + (i + 1) + "][" + file.name + "]<br/>";
                         }
                         BootstrapModalWrapperFactory.confirm({
                             title: "Confirm",
-                            message: "Are You Sure You want to Upload the following Files\n" + fileMsg,
+                            message: "Are You Sure You want to Upload the following Files<br/>" + fileMsg,
                             onConfirmAccept: function () {
                                 uploadSelectedFiles();
                             },

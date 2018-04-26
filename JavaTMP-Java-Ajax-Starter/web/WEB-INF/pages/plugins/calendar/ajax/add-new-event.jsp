@@ -240,7 +240,9 @@
                     timePicker24Hour: true,
                     autoApply: true,
                     autoUpdateInput: true,
-//                    minDate: '20/04/2018 00:00:00',
+                    minDate: '01/01/1900 00:00:00',
+                    maxDate: '31/12/2099 23:59:59',
+//                    maxDate: '',
 //                    minDate: moment(),
                     locale: {
                         "direction": javatmp.settings.direction,

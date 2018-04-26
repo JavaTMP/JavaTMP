@@ -6,15 +6,18 @@ public class ServicesFactory {
     private UserService userService;
     private AccountService accountService;
     private DiaryEventService diaryEventService;
+    private DocumentService documentService;
 
     public ServicesFactory() {
         this.dbFaker = new DBFaker();
         this.userService = new UserService(this.dbFaker);
         this.accountService = new AccountService(dbFaker);
         this.diaryEventService = new DiaryEventService(dbFaker);
+        this.documentService = new DocumentService(dbFaker);
     }
 
     public void destroy() {
+        this.documentService = null;
         this.diaryEventService = null;
         this.accountService = null;
         this.userService = null;
@@ -40,5 +43,12 @@ public class ServicesFactory {
      */
     public DiaryEventService getDiaryEventService() {
         return diaryEventService;
+    }
+
+    /**
+     * @return the documentService
+     */
+    public DocumentService getDocumentService() {
+        return documentService;
     }
 }
