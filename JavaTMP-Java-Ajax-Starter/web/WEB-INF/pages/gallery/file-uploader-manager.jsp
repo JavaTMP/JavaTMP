@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <div class="dynamic-ajax-content">
     <div class="page-header">
         <h1>File Uploader Manager</h1>
@@ -24,7 +24,6 @@
             </div>
             <div class="card my-3">
                 <div class="card-header">
-                    Examples
                     <div class="options float-right">
                         <a class="settings"><i class="fa fa-cog"></i></a>
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
@@ -51,7 +50,6 @@
                                     <div class="progress-bar bg-success" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
                                     </div>
                                 </div>
-                                <div id="status"></div>
                             </form>
                         </div>
                     </div>
@@ -83,8 +81,8 @@
                                             </c:forEach>
                                         </c:if>
                                         <c:if test="${fn:length(requestScope.documents) == 0}">
-                                            <tr>
-                                                <td colspan="6">Size is Zero</th>
+                                            <tr id="emptyUploadedFilesSizeRowId">
+                                                <td colspan="6" align="center">Empty Uploaded Files Size</th>
                                             </tr>
                                         </c:if>
                                     </tbody>
@@ -152,6 +150,10 @@
                                 '<td><a class="" target="" href="{{contextPath}}/ViewUploadedFileController?documentId={{link}}&amp;randomHash={{randomHash}}&amp;viewType=attachment">View As Attachment</a></td>' +
                                 '</tr>';
 
+                        // remove emptyUploadedFilesSizeRowId if response data length more than one:
+                        if (response.data.length) {
+                            $("#emptyUploadedFilesSizeRowId").remove();
+                        }
                         //Add row
                         for (var i = 0; i < response.data.length; i++) {
                             table.append(row.composeTemplate({
@@ -167,6 +169,9 @@
 
                     },
                     complete: function (xhr) {
+                        $("#updateFormId")[0].reset();
+                        $('#updateFormId').trigger("reset");
+                        $("#updateFormId input[type=file]").val(null).next("label").text("Choose file...");
 
                     },
                     error: function (xhr, status, error, $form) {
