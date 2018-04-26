@@ -68,23 +68,25 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:if test="${fn:length(requestScope.documents) > 0}">
-                                            <c:forEach items="${requestScope.documents}" var="document">
-                                                <tr>
-                                                    <td>${document.documentId}</th>
-                                                    <td>${document.documentName}</th>
-                                                    <td>${document.contentType}</th>
-                                                    <td dir="ltr"><fmt:formatDate pattern='dd/MM/yyyy HH:mm' value='${document.creationDate}'/></th>
-                                                    <td><a class="" target="" href="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${document.documentId}&amp;randomHash=${document.randomHash}&amp;viewType=inline">View Inline</a></td>
-                                                    <td><a class="" target="" href="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${document.documentId}&amp;randomHash=${document.randomHash}&amp;viewType=attachment">View As Attachment</a></td>
+                                        <c:choose>
+                                            <c:when test = "${fn:length(requestScope.documents) > 0}">
+                                                <c:forEach items="${requestScope.documents}" var="document">
+                                                    <tr>
+                                                        <td>${document.documentId}</th>
+                                                        <td>${document.documentName}</th>
+                                                        <td>${document.contentType}</th>
+                                                        <td dir="ltr"><fmt:formatDate pattern='dd/MM/yyyy HH:mm' value='${document.creationDate}'/></th>
+                                                        <td><a class="" target="" href="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${document.documentId}&amp;randomHash=${document.randomHash}&amp;viewType=inline">View Inline</a></td>
+                                                        <td><a class="" target="" href="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${document.documentId}&amp;randomHash=${document.randomHash}&amp;viewType=attachment">View As Attachment</a></td>
+                                                    </tr>
+                                                </c:forEach>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <tr id="emptyUploadedFilesSizeRowId">
+                                                    <td colspan="6" align="center">Empty Uploaded Files Size</th>
                                                 </tr>
-                                            </c:forEach>
-                                        </c:if>
-                                        <c:if test="${fn:length(requestScope.documents) == 0}">
-                                            <tr id="emptyUploadedFilesSizeRowId">
-                                                <td colspan="6" align="center">Empty Uploaded Files Size</th>
-                                            </tr>
-                                        </c:if>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </tbody>
                                 </table>
                             </div>
