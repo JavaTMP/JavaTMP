@@ -1109,9 +1109,9 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/gallery/file-uploader-servlet">
+                                        <a href="${pageContext.request.contextPath}/FileManagerPageController">
                                             <i class="far fa-lg fa-fw fa-image"></i>
-                                            File Uploader Servlet
+                                            File Uploader Manager
                                         </a>
                                     </li>
                                     <li>

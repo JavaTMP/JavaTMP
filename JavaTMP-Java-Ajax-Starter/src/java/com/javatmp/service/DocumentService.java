@@ -5,12 +5,8 @@
  */
 package com.javatmp.service;
 
-import com.javatmp.domain.DiaryEvent;
 import com.javatmp.domain.Document;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  *
@@ -24,10 +20,23 @@ public class DocumentService {
         this.dBFaker = dBFaker;
     }
 
+    public List<Document> getAllDocuments() {
+        return dBFaker.getDocuments();
+    }
+
     public Document createNewDocument(Document document) {
-        document.documentId = DBFaker.getNextCounter();
+        document.setDocumentId(DBFaker.getNextCounter());
         this.dBFaker.getDocuments().add(document);
         return document;
+    }
+
+    public Document readDocumentById(Document document) {
+        for (Document doc : this.dBFaker.getDocuments()) {
+            if (doc.getDocumentId().equals(document.getDocumentId())) {
+                return doc;
+            }
+        }
+        throw new IllegalArgumentException("document id [" + document.getDocumentId() + "] not found");
     }
 
 }

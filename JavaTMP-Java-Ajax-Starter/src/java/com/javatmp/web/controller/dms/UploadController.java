@@ -9,17 +9,13 @@ import com.javatmp.service.DocumentService;
 import com.javatmp.service.ServicesFactory;
 import com.javatmp.util.Constants;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.file.Paths;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -60,12 +56,12 @@ public class UploadController extends HttpServlet {
                 String contentType = filePart.getContentType();
                 InputStream fileContentStream = filePart.getInputStream();
                 Document fileUploading = new Document();
-                fileUploading.contentType = contentType;
-                fileUploading.documentName = fileName;
-                fileUploading.documentSize = partSize;
-                fileUploading.creationDate = new Date();
+                fileUploading.setContentType(contentType);
+                fileUploading.setDocumentName(fileName);
+                fileUploading.setDocumentSize(partSize);
+                fileUploading.setCreationDate(new Date());
                 long randomLongValue = Double.valueOf((Math.random() + 1) * 1000L).longValue();
-                fileUploading.randomHash = fileUploading.documentName.hashCode() + randomLongValue;
+                fileUploading.setRandomHash((Long) Math.abs(fileUploading.getDocumentName().hashCode() + randomLongValue));
                 // the following block is intended for simple cases
                 // where it is convenient to read all bytes into a byte array.
                 // It is not intended for reading input streams with large amounts of data.
@@ -76,26 +72,26 @@ public class UploadController extends HttpServlet {
                     buffer.write(data, 0, nRead);
                 }
 
-                fileUploading.documentContent = buffer.toByteArray();
-                System.out.println("original size [" + fileUploading.documentSize
-                        + "] stream size [" + fileUploading.documentContent.length + "]");
+                fileUploading.setDocumentContent(buffer.toByteArray());
+                System.out.println("original size [" + fileUploading.getDocumentSize()
+                        + "] stream size [" + fileUploading.getDocumentContent().length + "]");
                 ds.createNewDocument(fileUploading);
-                System.out.println("db fake id [" + fileUploading.documentId + "]");
+                System.out.println("db fake id [" + fileUploading.getDocumentId() + "]");
                 String t = "FileName 'requested' \"to\" Upload [" + fileName + "] type[" + contentType + "] name [" + fieldName + "]size[" + partSize + "]<br/>";
                 System.out.println(t);
                 text += t;
 
                 Document uploaded = new Document();
-                uploaded.documentId = fileUploading.documentId;
-                uploaded.documentName = fileUploading.documentName;
-                uploaded.randomHash = fileUploading.randomHash;
-                uploaded.contentType = fileUploading.contentType;
-                uploaded.documentSize = fileUploading.documentSize;
-                uploaded.creationDate = fileUploading.creationDate;
+                uploaded.setDocumentId(fileUploading.getDocumentId());
+                uploaded.setDocumentName(fileUploading.getDocumentName());
+                uploaded.setRandomHash(fileUploading.getRandomHash());
+                uploaded.setContentType(fileUploading.getContentType());
+                uploaded.setDocumentSize(fileUploading.getDocumentSize());
+                uploaded.setCreationDate(fileUploading.getCreationDate());
                 documentsUploaded.add(uploaded);
             }
             responseMessage.setOverAllStatus(true);
-            responseMessage.setMessage(text);
+            responseMessage.setMessage("Files Uploaded successfully");
             responseMessage.setData(documentsUploaded);
 
         } catch (IllegalStateException e) {
