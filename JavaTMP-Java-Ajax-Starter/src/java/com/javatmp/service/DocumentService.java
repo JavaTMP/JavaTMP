@@ -6,6 +6,7 @@
 package com.javatmp.service;
 
 import com.javatmp.domain.DiaryEvent;
+import com.javatmp.domain.Document;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -22,4 +23,11 @@ public class DocumentService {
     public DocumentService(DBFaker dBFaker) {
         this.dBFaker = dBFaker;
     }
+
+    public Document createNewDocument(Document document) {
+        document.documentId = DBFaker.getNextCounter();
+        this.dBFaker.getDocuments().add(document);
+        return document;
+    }
+
 }

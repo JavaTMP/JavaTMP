@@ -5,6 +5,8 @@
  */
 package com.javatmp.domain;
 
+import java.util.Date;
+
 /**
  *
  * @author Mohamed
@@ -16,5 +18,7 @@ public class Document {
     public long documentSize;
     public String contentType;
     public byte[] documentContent;
+    public Date creationDate;
+    public Long randomHash;
 
 }

@@ -16,6 +16,7 @@ public class ResponseMessage {
     private Integer statusCode;
     private Boolean redirect;
     private String redirectURL;
+    private Object data;
 
     public ResponseMessage() {
     }
@@ -100,6 +101,20 @@ public class ResponseMessage {
      */
     public void setRedirect(Boolean redirect) {
         this.redirect = redirect;
+    }
+
+    /**
+     * @return the data
+     */
+    public Object getData() {
+        return data;
+    }
+
+    /**
+     * @param data the data to set
+     */
+    public void setData(Object data) {
+        this.data = data;
     }
 
 }

@@ -141,10 +141,10 @@
                                     $('.progress-bar').text(percentComplete + '%');
                                     console.log(percentComplete, position, total);
                                 },
-                                success: function () {
+                                success: function (responseText, statusText, xhr, $form) {
                                     $('.progress-bar').css({width: '100%'});
                                     $('.progress-bar').text("100%");
-
+                                    alert(unescape(JSON.stringify(responseText)));
                                     var tbody = $('#formPluginAjaxUpload').children('tbody');
                                     var table = tbody.length ? tbody : $('#formPluginAjaxUpload');
                                     var row = '<tr>' +

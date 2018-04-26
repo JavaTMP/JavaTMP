@@ -1,6 +1,13 @@
 package com.javatmp.web.controller.dms;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.javatmp.domain.Document;
+import com.javatmp.mvc.ClassTypeAdapter;
+import com.javatmp.mvc.ResponseMessage;
+import com.javatmp.service.DocumentService;
+import com.javatmp.service.ServicesFactory;
+import com.javatmp.util.Constants;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,6 +15,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.file.Paths;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -34,6 +44,10 @@ public class UploadController extends HttpServlet {
 //        System.out.println("FileName requested to Upload [" + fileName + "] type[" + contentType + "]");
 //        response.getWriter().print("UPLOAD DONE");
 //
+        ResponseMessage responseMessage = new ResponseMessage();
+        List<Document> documentsUploaded = new LinkedList<>();
+        ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
+        DocumentService ds = sf.getDocumentService();
         String tmpDir = System.getProperty("java.io.tmpdir");
         System.out.println("tmpDir [" + tmpDir + "]");
         String text = "";
@@ -49,7 +63,9 @@ public class UploadController extends HttpServlet {
                 fileUploading.contentType = contentType;
                 fileUploading.documentName = fileName;
                 fileUploading.documentSize = partSize;
-
+                fileUploading.creationDate = new Date();
+                long randomLongValue = Double.valueOf((Math.random() + 1) * 1000L).longValue();
+                fileUploading.randomHash = fileUploading.documentName.hashCode() + randomLongValue;
                 // the following block is intended for simple cases
                 // where it is convenient to read all bytes into a byte array.
                 // It is not intended for reading input streams with large amounts of data.
@@ -63,17 +79,40 @@ public class UploadController extends HttpServlet {
                 fileUploading.documentContent = buffer.toByteArray();
                 System.out.println("original size [" + fileUploading.documentSize
                         + "] stream size [" + fileUploading.documentContent.length + "]");
-
-                String t = "FileName requested to Upload [" + fileName + "] type[" + contentType + "] name [" + fieldName + "]size[" + partSize + "]<br/>";
+                ds.createNewDocument(fileUploading);
+                System.out.println("db fake id [" + fileUploading.documentId + "]");
+                String t = "FileName 'requested' \"to\" Upload [" + fileName + "] type[" + contentType + "] name [" + fieldName + "]size[" + partSize + "]<br/>";
                 System.out.println(t);
                 text += t;
+
+                Document uploaded = new Document();
+                uploaded.documentId = fileUploading.documentId;
+                uploaded.documentName = fileUploading.documentName;
+                uploaded.randomHash = fileUploading.randomHash;
+                uploaded.contentType = fileUploading.contentType;
+                uploaded.documentSize = fileUploading.documentSize;
+                uploaded.creationDate = fileUploading.creationDate;
+                documentsUploaded.add(uploaded);
             }
-            response.getWriter().print(text);
+            responseMessage.setOverAllStatus(true);
+            responseMessage.setMessage(text);
+            responseMessage.setData(documentsUploaded);
 
         } catch (IllegalStateException e) {
             System.out.println("ERROR : " + e.getMessage());
             e.printStackTrace();
-            throw e;
+            responseMessage.setOverAllStatus(true);
+            responseMessage.setMessage(e.getMessage());
         }
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").serializeNulls()
+                .registerTypeAdapter(Class.class, new ClassTypeAdapter())
+                //                .registerTypeAdapter(Date.class, new DateTypeAdapter())
+                .create();
+        String json = gson.toJson(responseMessage);
+        System.out.println("response [" + json + "]");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
+
     }
 }

@@ -7,6 +7,7 @@ package com.javatmp.service;
 
 import com.javatmp.domain.Account;
 import com.javatmp.domain.DiaryEvent;
+import com.javatmp.domain.Document;
 import com.javatmp.domain.User;
 import java.math.BigDecimal;
 import java.util.LinkedList;
@@ -20,6 +21,7 @@ public class DBFaker {
 
     private List<User> users = new LinkedList<>();
     private List<DiaryEvent> diaryEvents = new LinkedList<>();
+    private List<Document> documents = new LinkedList<>();
 
     private static Long counter = 0L;
 
@@ -70,5 +72,12 @@ public class DBFaker {
      */
     public List<DiaryEvent> getDiaryEvents() {
         return diaryEvents;
+    }
+
+    /**
+     * @return the documents
+     */
+    public List<Document> getDocuments() {
+        return documents;
     }
 }
