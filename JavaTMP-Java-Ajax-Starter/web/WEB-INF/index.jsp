@@ -1121,6 +1121,12 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a href="${pageContext.request.contextPath}/pages/gallery/crop-avatar">
+                                            <i class="far fa-lg fa-fw fa-image"></i>
+                                            Crop Avatar
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="${pageContext.request.contextPath}/pages/gallery/simple-thumbnail-gallery">
                                             <i class="far fa-lg fa-fw fa-image"></i>
                                             Simple Thumbnail Gallery
