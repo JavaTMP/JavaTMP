@@ -792,6 +792,12 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a href="${pageContext.request.contextPath}/pages/plugins/dynamic-jQuery-select2-bootstrap">
+                                            <i class="far fa-lg fa-fw fa-gem"></i>
+                                            Dynamic jQuery Bootstrap Select2 complete demo
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="${pageContext.request.contextPath}/pages/plugins/bootstrap-maxlength">
                                             <i class="far fa-lg fa-fw fa-gem"></i>
                                             Bootstrap Maxlength
