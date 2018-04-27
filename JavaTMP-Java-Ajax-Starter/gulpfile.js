@@ -205,6 +205,12 @@ var config = {
         "jquery-contextmenurtl": [
             {"from": "${sourceNodeLib}/jquery-contextmenurtl/dist/css/jquery.contextMenuRtl.min.css", "to": "${destComponentsLib}/jquery-contextmenurtl/dist/css"},
             {"from": "${sourceNodeLib}/jquery-contextmenurtl/dist/js/jquery.contextMenuRtl.min.js", "to": "${destComponentsLib}/jquery-contextmenurtl/dist/js"}
+        ],
+        "canvas-toBlob": [
+            {"from": "${sourceNodeLib}/canvas-toBlob/canvas-toBlob.js", "to": "${destComponentsLib}/canvas-toBlob", processJS: true}
+        ],
+        "file-saver": [
+            {"from": "${sourceNodeLib}/file-saver/FileSaver.min.js", "to": "${destComponentsLib}/file-saver"}
         ]
     }
 };
@@ -279,6 +285,8 @@ var src = {
         "./web/components/ion-rangeslider/js/ion.rangeSlider.min.js",
         "./web/components/bootstrap-slider/dist/bootstrap-slider.min.js",
         "./web/components/fullcalendar/dist/fullcalendar.min.js",
+        "./web/components/canvas-toBlob/canvas-toBlob.js",
+        "./web/components/file-saver/FileSaver.min.js",
         "./web/components/cropper/dist/cropper.min.js",
         "./web/components/waypoints/lib/jquery.waypoints.min.js",
         "./web/components/jquery.counterup/jquery.counterup.min.js",
