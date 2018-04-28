@@ -7,6 +7,7 @@ public class ServicesFactory {
     private AccountService accountService;
     private DiaryEventService diaryEventService;
     private DocumentService documentService;
+    private CountryService countryService;
 
     public ServicesFactory() {
         this.dbFaker = new DBFaker();
@@ -14,6 +15,7 @@ public class ServicesFactory {
         this.accountService = new AccountService(dbFaker);
         this.diaryEventService = new DiaryEventService(dbFaker);
         this.documentService = new DocumentService(dbFaker);
+        this.countryService = new CountryService(dbFaker);
     }
 
     public void destroy() {
@@ -50,5 +52,12 @@ public class ServicesFactory {
      */
     public DocumentService getDocumentService() {
         return documentService;
+    }
+
+    /**
+     * @return the countryService
+     */
+    public CountryService getCountryService() {
+        return countryService;
     }
 }

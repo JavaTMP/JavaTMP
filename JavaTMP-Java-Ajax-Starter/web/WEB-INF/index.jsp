@@ -792,7 +792,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/plugins/dynamic-jQuery-select2-bootstrap">
+                                        <a href="${pageContext.request.contextPath}/DynamicSelect2PageController">
                                             <i class="far fa-lg fa-fw fa-gem"></i>
                                             Dynamic jQuery Bootstrap Select2 complete demo
                                         </a>

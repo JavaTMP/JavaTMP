@@ -22,8 +22,6 @@ public class AccountService {
     }
 
     public List<Account> getChartOfAccounts() {
-        List<Account> chartOfAccounts = new LinkedList<>();
-        chartOfAccounts = this.dBFaker.getStaticAccounts();
-        return chartOfAccounts;
+        return this.dBFaker.getAccounts();
     }
 }

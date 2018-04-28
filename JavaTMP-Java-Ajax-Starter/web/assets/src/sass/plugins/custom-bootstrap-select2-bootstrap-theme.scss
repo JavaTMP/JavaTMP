@@ -6,10 +6,12 @@ $s2bs-form-control-transition: $input-transition!default;
 
 @import "../../../../../node_modules/select2-bootstrap-theme/src/select2-bootstrap.scss";
 
-.input-group > .select2-container--bootstrap {
-    width: auto;
-    > .selection > .select2-selection.form-control {
-        width: 100%;
+.input-group, .form-group {
+    .select2-container--bootstrap {
+        width: auto;
+        > .selection > .select2-selection.form-control {
+            width: 100%;
+        }
     }
 }
 
