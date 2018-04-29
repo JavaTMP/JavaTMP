@@ -47,23 +47,6 @@
         jQuery(function ($) {
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
-
-            var HelloButton = function (context) {
-                var ui = $.summernote.ui;
-
-                // create button
-                var button = ui.button({
-                    contents: 'Alert',
-//                    tooltip: 'hello',
-                    click: function () {
-                        // invoke insertText method with 'hello' on editor module.
-                        context.invoke('editor.pasteHTML', '<div class="alert alert-danger"><p>here this is an alert<p></div>');
-                    }
-                });
-
-                return button.render();   // return button as jquery object
-            };
-
             $('#summernote').summernote({
                 height: 350,
                 tabsize: 2,
@@ -74,10 +57,7 @@
                     ['Insert', ['picture', 'link', 'video', 'table', 'hr']],
                     ['Misc', ['fullscreen', 'codeview', 'undo', 'redo', 'help']],
                     ['mybutton', ['hello']]
-                ],
-                buttons: {
-                    hello: HelloButton
-                }
+                ]
             });
 
             $("#show-written-content-id").on("click", function (event) {
