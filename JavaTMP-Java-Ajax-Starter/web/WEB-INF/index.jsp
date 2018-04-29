@@ -822,6 +822,12 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a href="${pageContext.request.contextPath}/cms/ContentPageController">
+                                            <i class="far fa-lg fa-fw fa-gem"></i>
+                                            Dynamic Bootstrap Summernote Editor
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="${pageContext.request.contextPath}/pages/plugins/ion-rangeSlider">
                                             <i class="far fa-lg fa-fw fa-gem"></i>
                                             Ion Range Slider
