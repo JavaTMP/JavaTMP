@@ -19,6 +19,9 @@
                         <li class="nav-item">
                             <a id="show-written-content-id" class="nav-link" href="javascript:void(0);"><i class="far fa-eye-slash fa-fw fa-lg"></i>Show written text</a>
                         </li>
+                        <li class="nav-item">
+                            <a id="Update-Upload-Content-id" class="nav-link" href="javascript:void(0);"><i class="far fa-edit fa-fw fa-lg"></i>Update & Upload Content</a>
+                        </li>
                     </ul>
                     <div class="options float-right">
                         <a class="settings"><i class="fa fa-cog"></i></a>
@@ -69,6 +72,16 @@
                 });
                 modal.show();
             });
+            $("#Update-Upload-Content-id").on("click", function (event) {
+                event.preventDefault();
+                var makrup = $('#summernote').summernote('code');
+                var modal = BootstrapModalWrapperFactory.createModal({
+                    message: makrup,
+                    size: "modal-lg"
+                });
+                modal.show();
+            });
+
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
