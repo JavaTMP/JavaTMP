@@ -110,17 +110,17 @@
             $(".breadcrumb-submenu > a > i.fa.faa-spin").removeClass("text-primary");
             $(".breadcrumb-submenu > a > i.fa.faa-spin").addClass("animated text-danger");
         }).ajaxSend(function (event, xhr, ajaxOptions) {
-            if (ajaxOptions.url.indexOf("_ajaxGlobalBlockUI=true") !== -1) {
+            if (ajaxOptions.url.indexOf("_ajaxGlobalBlockUI=false") === -1) {
                 $.blockUI({message: null,
                     overlayCSS: {
                         backgroundColor: 'transparent',
                         opacity: 1
                     },
                     ignoreIfBlocked: true,
-                    baseZ: 1999});
+                    baseZ: 2147483647});
             }
         }).ajaxComplete(function (event, xhr, ajaxOptions) {
-            if (ajaxOptions.url.indexOf("_ajaxGlobalBlockUI=true") !== -1) {
+            if (ajaxOptions.url.indexOf("_ajaxGlobalBlockUI=false") === -1) {
                 $.unblockUI({
                     fadeOut: 0 // supporting fadeOut value may hang the windows an issue in the plugin itself.
                 });
