@@ -19,4 +19,17 @@ public class ContentService {
     public List<Content> getContents() {
         return this.dBFaker.getContents();
     }
+
+    public Boolean updateContentText(Content content) {
+        Boolean updatedStatus = false;
+        List<Content> db = this.dBFaker.getContents();
+        for (Content row : db) {
+            if (row.getContentId().equals(content.getContentId())) {
+                row.setContentText(content.getContentText());
+                updatedStatus = true;
+            }
+        }
+        return updatedStatus;
+    }
+
 }

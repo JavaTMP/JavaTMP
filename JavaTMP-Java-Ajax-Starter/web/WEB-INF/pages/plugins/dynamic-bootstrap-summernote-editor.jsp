@@ -32,9 +32,14 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form>
+                    <form id="Update-Content-Form-Id" method="POST" action="${pageContext.request.contextPath}/cms/UpdateContentController">
                         <div class="form-group">
-                            <textarea id="summernote" class="form-control">${fn:escapeXml(requestScope.content.contentText)}</textarea>
+                            <label for="contentId">Content Id</label>
+                            <input readonly="" name="contentId" type="text" class="form-control" id="contentId" value="${requestScope.content.contentId}">
+                        </div>
+                        <div class="form-group">
+                            <label for="contentId">Content Body Text</label>
+                            <textarea name="contentText" id="summernote" class="form-control">${fn:escapeXml(requestScope.content.contentText)}</textarea>
                         </div>
                     </form>
                 </div>
@@ -62,9 +67,7 @@
                     ['mybutton', ['hello']]
                 ]
             });
-
             $("#show-written-content-id").on("click", function (event) {
-                event.preventDefault();
                 var makrup = $('#summernote').summernote('code');
                 var modal = BootstrapModalWrapperFactory.createModal({
                     message: makrup,
@@ -73,20 +76,51 @@
                 modal.show();
             });
             $("#Update-Upload-Content-id").on("click", function (event) {
-                event.preventDefault();
-                var makrup = $('#summernote').summernote('code');
-                var modal = BootstrapModalWrapperFactory.createModal({
-                    message: makrup,
-                    size: "modal-lg"
+                var modalWrapper = BootstrapModalWrapperFactory.createModal({
+                    message: "Are You Sure You Want To Update Content ?",
+                    title: "Alert",
+                    closable: false,
+                    closeByBackdrop: false,
+                    buttons: [
+                        {
+                            label: "Cancel",
+                            cssClass: "btn btn-secondary",
+                            action: function (modalWrapper, button, buttonData, originalEvent) {
+                                return modalWrapper.hide();
+                            }
+                        },
+                        {
+                            label: "Yes",
+                            cssClass: "btn btn-primary",
+                            action: function (modalWrapper, button, buttonData, originalEvent) {
+                                $('#Update-Content-Form-Id').ajaxSubmit({
+//                                    contentType: "application/json; charset=utf-8",
+                                    url: javatmp.settings.contextPath + '/cms/UpdateContentController',
+                                    beforeSerialize: function ($form, options) {
+                                        $("#summernote").summernote('triggerEvent', 'change');
+                                    },
+                                    beforeSubmit: function (arr, $form, options) {},
+                                    beforeSend: function () {},
+                                    uploadProgress: function (event, position, total, percentComplete) {},
+                                    success: function (response, statusText, xhr, $form) {},
+                                    complete: function (xhr) {
+                                        BootstrapModalWrapperFactory.createModal({
+                                            title: "Response",
+                                            message: xhr.responseText
+                                        }).show();
+                                        modalWrapper.hide();
+                                    },
+                                    error: function (xhr, status, error, $form) {}
+                                });
+                            }
+                        }
+                    ]
                 });
-                modal.show();
+                modalWrapper.show();
             });
-
-
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
             });
-
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
                 // fire when user resize browser window or sidebar hide / show
             });
@@ -96,7 +130,6 @@
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenExpand, function (event, card) {
                 // when card Expand by pressing the top right tool button
             });
-
             /**
              * When another sidebar menu item pressed and before container replaced with new ajax content.
              * You can cancel, destroy, or remove any thing here before replace main output ajax container.
