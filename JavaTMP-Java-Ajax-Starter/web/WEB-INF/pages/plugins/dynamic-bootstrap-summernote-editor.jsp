@@ -75,7 +75,9 @@
                 });
                 modal.show();
             });
+            var send;
             $("#Update-Upload-Content-id").on("click", function (event) {
+                send = false;
                 var modalWrapper = BootstrapModalWrapperFactory.createModal({
                     message: "Are You Sure You Want To Update Content ?",
                     title: "Alert",
@@ -83,6 +85,7 @@
                     closeByBackdrop: false,
                     buttons: [
                         {
+                            id: "update-content-dialog-cancel-id",
                             label: "Cancel",
                             cssClass: "btn btn-secondary",
                             action: function (modalWrapper, button, buttonData, originalEvent) {
@@ -93,22 +96,32 @@
                             label: "Yes",
                             cssClass: "btn btn-primary",
                             action: function (modalWrapper, button, buttonData, originalEvent) {
+                                if (send === true) {
+                                    return modalWrapper.hide();
+                                }
                                 $('#Update-Content-Form-Id').ajaxSubmit({
 //                                    contentType: "application/json; charset=utf-8",
                                     url: javatmp.settings.contextPath + '/cms/UpdateContentController',
                                     beforeSerialize: function ($form, options) {
                                         $("#summernote").summernote('triggerEvent', 'change');
                                     },
-                                    beforeSubmit: function (arr, $form, options) {},
+                                    beforeSubmit: function (arr, $form, options) {
+                                        modalWrapper.updateTitle("Updating ...");
+                                        modalWrapper.updateMessage("Updating And Uploading Content ...");
+                                        button.prop("disabled", true);
+                                        $(button).html("Sending ...");
+                                        send = true;
+                                        modalWrapper.removeButton("update-content-dialog-cancel-id");
+                                    },
                                     beforeSend: function () {},
                                     uploadProgress: function (event, position, total, percentComplete) {},
-                                    success: function (response, statusText, xhr, $form) {},
+                                    success: function (response, statusText, xhr, $form) {
+                                        modalWrapper.updateTitle("Response Successfully");
+                                        modalWrapper.updateMessage(response.message);
+                                        button.prop("disabled", false);
+                                        $(button).html("OK");
+                                    },
                                     complete: function (xhr) {
-                                        BootstrapModalWrapperFactory.createModal({
-                                            title: "Response",
-                                            message: xhr.responseText
-                                        }).show();
-                                        modalWrapper.hide();
                                     },
                                     error: function (xhr, status, error, $form) {}
                                 });
