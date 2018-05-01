@@ -22,6 +22,9 @@
                         <li class="nav-item">
                             <a id="Update-Upload-Content-id" class="nav-link" href="javascript:void(0);"><i class="far fa-edit fa-fw fa-lg"></i>Update & Upload Content</a>
                         </li>
+                        <li class="nav-item">
+                            <a id="Read-Content-id" class="nav-link" href="javascript:void(0);"><i class="far fa-edit fa-fw fa-lg"></i>Ajax Read Content</a>
+                        </li>
                     </ul>
                     <div class="options float-right">
                         <a class="settings"><i class="fa fa-cog"></i></a>
@@ -131,6 +134,49 @@
                 });
                 modalWrapper.show();
             });
+
+            $("#Read-Content-id").on("click", function (event) {
+                send = false;
+                var ajaxModalContainer = BootstrapModalWrapperFactory.createModal({
+                    message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
+                    closable: false,
+                    closeByBackdrop: false
+                });
+                ajaxModalContainer.originalModal.removeClass("fade");
+                ajaxModalContainer.originalModal.find(".modal-dialog").css({transition: 'all .3s'});
+                ajaxModalContainer.show();
+
+                var passData = {
+                    contentId: $("#Update-Content-Form-Id").find("input[name='contentId']").val()
+                };
+
+                $.ajax({
+                    url: javatmp.settings.contextPath + "/cms/ReadContentController",
+                    data: passData,
+                    success: function (response, textStatus, jqXHR) {
+                        var timeOut = 500;
+                        var timer = null;
+                        function runWhenDialogOpen() {
+//                    console.log("time out [" + Math.round(timeOut / 2) + "], isOpen [" + ajaxModalContainer.isOpen + "], is show [" + ajaxModalContainer.originalModal.hasClass("show") + "]");
+                            if (ajaxModalContainer.isOpen) {
+                                ajaxModalContainer.updateTitle("Remote Content Read")
+                                ajaxModalContainer.updateMessage(response.message);
+                                ajaxModalContainer.updateClosable(true);
+                                $('#summernote').summernote('code', response.data.contentText);
+
+                            } else {
+                                timeOut = timeOut <= 50 ? 50 : Math.round(timeOut / 2);
+                                clearTimeout(timer);
+                                timer = setTimeout(runWhenDialogOpen, timeOut);
+
+                            }
+                        }
+                        runWhenDialogOpen();
+                    }
+                });
+
+            });
+
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
             });

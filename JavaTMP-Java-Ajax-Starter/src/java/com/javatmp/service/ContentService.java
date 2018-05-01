@@ -32,4 +32,14 @@ public class ContentService {
         return updatedStatus;
     }
 
+    public Content readContentById(Content content) {
+        List<Content> db = this.dBFaker.getContents();
+        for (Content row : db) {
+            if (row.getContentId().equals(content.getContentId())) {
+                return row;
+            }
+        }
+        throw new IllegalArgumentException("Record id [" + content.getContentId() + "] Not found");
+    }
+
 }

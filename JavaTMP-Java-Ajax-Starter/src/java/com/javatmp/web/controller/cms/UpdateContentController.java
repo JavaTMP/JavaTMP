@@ -32,11 +32,6 @@ public class UpdateContentController extends HttpServlet {
         Content contentToBeUpdated = new Content();
 
         try {
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(UpdateContentController.class.getName()).log(Level.SEVERE, null, ex);
-            }
             MvcHelper.populateBeanByRequestParameters(request, contentToBeUpdated);
             if (cs.updateContentText(contentToBeUpdated)) {
                 // content updated successfully:
