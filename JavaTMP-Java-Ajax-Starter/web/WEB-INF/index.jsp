@@ -876,6 +876,12 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a href="${pageContext.request.contextPath}/pages/plugins/dynamic-malihu-custom-scrollbar-plugin">
+                                            <i class="far fa-lg fa-fw fa-gem"></i>
+                                            Dynamic Malihu Custom Scrollbar Plugin
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="${pageContext.request.contextPath}/pages/plugins/bootstrap-modal-wrapper">
                                             <i class="far fa-lg fa-fw fa-gem"></i>
                                             Bootstrap Modal Wrapper Plugin
