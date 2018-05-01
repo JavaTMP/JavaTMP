@@ -26,42 +26,6 @@
                 </div>
                 <div class="card-body">
                     <div id="infinite-scroll" class="list-group-flush list-group content">
-                        <div class="list-group-item list-group-item-action">
-                            <div class="media">
-                                <img class="mr-3" src="${pageContext.request.contextPath}/assets/img/64x64.gif" alt="Generic placeholder image">
-                                <div class="media-body">
-                                    <h5 class="mt-0 d-flex justify-content-between"><span>Media heading</span><small>3min</small></h5>
-                                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="list-group-item list-group-item-action">
-                            <div class="media">
-                                <img class="mr-3" src="${pageContext.request.contextPath}/assets/img/64x64.gif" alt="Generic placeholder image">
-                                <div class="media-body">
-                                    <h5 class="mt-0">Media heading</h5>
-                                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="list-group-item list-group-item-action">
-                            <div class="media">
-                                <img class="mr-3" src="${pageContext.request.contextPath}/assets/img/64x64.gif" alt="Generic placeholder image">
-                                <div class="media-body">
-                                    <h5 class="mt-0">Media heading</h5>
-                                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="list-group-item list-group-item-action">
-                            <div class="media">
-                                <img class="mr-3" src="${pageContext.request.contextPath}/assets/img/64x64.gif" alt="Generic placeholder image">
-                                <div class="media-body">
-                                    <h5 class="mt-0">Media heading</h5>
-                                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -111,25 +75,7 @@
         // should load mandatory libraries and plugins before.
         // <--- HERE --->
         //
-        var data = [{
-                contentId: 5358741,
-                title: "Lorem ipsum dolor sit amet consectetur adipiscing elit 1",
-                contentText: "Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.",
-                creationDate: "2018-05-01T14:05:14.572Z",
-                contextPath: javatmp.settings.contextPath
-            }, {
-                contentId: 588871,
-                title: "Lorem ipsum dolor sit amet consectetur adipiscing elit 2",
-                contentText: "Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.",
-                creationDate: "2018-05-01T14:05:14.572Z",
-                contextPath: javatmp.settings.contextPath
-            }, {
-                contentId: 1358741,
-                title: "Lorem ipsum dolor sit amet consectetur adipiscing elit 3",
-                contentText: "Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.",
-                creationDate: "2018-05-01T14:05:14.572Z",
-                contextPath: javatmp.settings.contextPath
-            }];
+
         var template =
                 '<div class="list-group-item list-group-item-action">' +
                 '    <div class="media">' +
@@ -158,41 +104,64 @@
             var indicatorTemplate = '<div class="fetch-indicator text-center m-2 p-2"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>';
             var workingDown = false;
             var workingTop = false;
-            var pageRequestedDown = 1;
-            var recordPerPage = 3;
+            var pageRequested = 1;
+            var recordPerPage = 20;
             var allCount = Number.MAX_SAFE_INTEGER;
             var currentFetchedCount = 0;
             $("#infinite-scroll").mCustomScrollbar({
                 theme: "javatmp",
+                alwaysShowScrollbar: 2,
+                scrollButtons: {
+                    enable: false
+                },
                 mouseWheel: {
                     preventDefault: true
                 },
                 callbacks: {
+                    onInit: function () {
+                    },
                     onScroll: function () {
                         console.log("top = " + this.mcs.top + " , direction = " + this.mcs.direction);
                     },
                     onTotalScrollBack: function () {
                         if (!workingTop) {
-                            workingTop = true;
-                            console.log("** onTotalScrollBack **");
-                            $("#infinite-scroll").mCustomScrollbar('scrollTo', 'top', {scrollInertia: 20});
-                            this.mcs.content.prepend(indicatorTemplate);
-                            var that = this;
-                            setTimeout(function () {
-                                that.mcs.content.find(".fetch-indicator").remove();
-                                $.each(data, function (index, row) {
-                                    var readyData = template.composeTemplate({
-                                        'contentId': row.contentId,
-                                        'title': row.title,
-                                        'contentText': row.contentText,
-                                        'creationDate': row.creationDate,
-                                        'contextPath': row.contextPath
-                                    });
-                                    that.mcs.content.prepend(readyData);
+                            console.log("** onTotalScrollBack currentFetch [" + currentFetchedCount + "], allCount [" + allCount + "]");
+                            if (currentFetchedCount < allCount) {
+                                workingTop = true;
+                                $("#infinite-scroll").mCustomScrollbar('scrollTo', 'top', {scrollInertia: 20});
+                                this.mcs.content.prepend(indicatorTemplate);
+                                var that = this;
+                                var passData = {
+                                    "_ajaxGlobalBlockUI": false,
+                                    numOfRowsPerPage: recordPerPage,
+                                    requestedPageNum: pageRequested
+                                };
+                                pageRequested++;
+                                $.ajax({
+                                    url: javatmp.settings.contextPath + "/cms/ListContentController",
+                                    data: passData,
+                                    success: function (response, textStatus, jqXHR) {
+                                        that.mcs.content.find(".fetch-indicator").remove();
+                                        var data = response.data.records;
+                                        allCount = response.data.allCount;
+                                        $.each(data, function (index, row) {
+                                            currentFetchedCount++;
+                                            var readyData = template.composeTemplate({
+                                                'contentId': row.contentId,
+                                                'title': row.title,
+                                                'contentText': row.summaryText,
+                                                'creationDate': row.creationDate,
+                                                'formatedDate': moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss"),
+                                                'contextPath': javatmp.settings.contextPath
+                                            });
+                                            that.mcs.content.prepend(readyData);
+                                            that.mcs.content.find("time.timeago").timeago();
+                                        });
+                                        $(that).mCustomScrollbar("scrollTo", 1);
+                                        workingTop = false;
+                                    }
                                 });
-                                $(that).mCustomScrollbar("scrollTo", 1);
-                                workingTop = false;
-                            }, 1000);
+                            }
                         }
                     },
                     onTotalScroll: function () {
@@ -203,10 +172,11 @@
                                 this.mcs.content.append(indicatorTemplate);
                                 var that = this;
                                 var passData = {
+                                    "_ajaxGlobalBlockUI": false,
                                     numOfRowsPerPage: recordPerPage,
-                                    requestedPageNum: pageRequestedDown
+                                    requestedPageNum: pageRequested
                                 };
-                                pageRequestedDown++;
+                                pageRequested++;
                                 $.ajax({
                                     url: javatmp.settings.contextPath + "/cms/ListContentController",
                                     data: passData,
@@ -239,8 +209,48 @@
                 }
             });
 
+
+
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
+                console.log("** Start Populate content dynamically ***");
+                $("#infinite-scroll").mCustomScrollbar("update");
+                if (!workingDown) {
+                    if (currentFetchedCount < allCount) {
+                        workingDown = true;
+                        $("#infinite-scroll .mCSB_container").append(indicatorTemplate);
+                        var passData = {
+                            "_ajaxGlobalBlockUI": false,
+                            numOfRowsPerPage: recordPerPage,
+                            requestedPageNum: pageRequested
+                        };
+                        pageRequested++;
+                        $.ajax({
+                            url: javatmp.settings.contextPath + "/cms/ListContentController",
+                            data: passData,
+                            success: function (response, textStatus, jqXHR) {
+                                $("#infinite-scroll .mCSB_container").find(".fetch-indicator").remove();
+                                var data = response.data.records;
+                                allCount = response.data.allCount;
+                                $.each(data, function (index, row) {
+                                    currentFetchedCount++;
+                                    var readyData = template.composeTemplate({
+                                        'contentId': row.contentId,
+                                        'title': row.title,
+                                        'contentText': row.summaryText,
+                                        'creationDate': row.creationDate,
+                                        'formatedDate': moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss"),
+                                        'contextPath': javatmp.settings.contextPath
+                                    });
+                                    $("#infinite-scroll .mCSB_container").append(readyData);
+                                    $("#infinite-scroll .mCSB_container").find("time.timeago").timeago();
+                                });
+                                workingDown = false;
+                                $("#infinite-scroll").mCustomScrollbar("scrollTo", 1);
+                            }
+                        });
+                    }
+                }
             });
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {

@@ -332,7 +332,7 @@ public class DBFaker {
                 + "");
         this.contents.add(content);
 
-        for (int i = 1; i <= 1000; i++) {
+        for (int i = 1; i < 1000; i++) {
             content = new Content();
             content.setContentId(DBFaker.getNextCounter());
             calendar = Calendar.getInstance();
