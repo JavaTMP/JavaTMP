@@ -6,36 +6,33 @@ package com.javatmp.mvc;
 
 import java.util.List;
 
-/**
- *
- * @author mohamed
- */
 public class Page<T> {
 
     private Class<T> type;
     private T exampleObject;
-    
+
     private List<T> records;
     private Integer numOfRowsPerPage;
     private Integer requestedPageNum;
     private Long allCount;
-    
+
     private String sortColumn;
     private String sortOrder;
-    
+
     private String[] selects;
-    public Page(Class<T> type){
+
+    public Page(Class<T> type) {
         this.type = type;
     }
-    
+
     public Page(Integer requestedInteger, Integer numberOfRowsPerPage, String sortColumn, String sortOrder) {
         this.requestedPageNum = requestedInteger;
         this.numOfRowsPerPage = numberOfRowsPerPage;
         this.sortColumn = sortColumn;
         this.sortOrder = sortOrder;
     }
-    
-    public Page(Integer requestedInteger, Integer numberOfRowsPerPage, 
+
+    public Page(Integer requestedInteger, Integer numberOfRowsPerPage,
             String sortColumn, String sortOrder, Class<T> type) {
         this.requestedPageNum = requestedInteger;
         this.numOfRowsPerPage = numberOfRowsPerPage;
@@ -44,16 +41,15 @@ public class Page<T> {
         this.type = type;
     }
 //    private Integer from;// = (this.getRows() * this.getPage()) - this.getRows();
-   
+
     /**
      * @return the from
      */
     public Integer getFrom() {
-        return (this.getNumOfRowsPerPage() * this.getRequestedPageNum()) 
+        return (this.getNumOfRowsPerPage() * this.getRequestedPageNum())
                 - this.getNumOfRowsPerPage();
     }
 
-  
     /**
      * @return the type
      */
@@ -165,8 +161,7 @@ public class Page<T> {
     public void setNumOfRowsPerPage(Integer numOfRowsPerPage) {
         this.numOfRowsPerPage = numOfRowsPerPage;
     }
-    
-    
+
     /**
      * @return the selects
      */

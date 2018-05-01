@@ -17,6 +17,7 @@ public class Content implements Serializable {
     private static final long serialVersionUID = 1L;
     private Long contentId;
     private String title;
+    private String summaryText;
     private String contentText;
     private Date creationDate;
     private Short status;
@@ -92,6 +93,20 @@ public class Content implements Serializable {
      */
     public void setStatus(Short status) {
         this.status = status;
+    }
+
+    /**
+     * @return the summaryText
+     */
+    public String getSummaryText() {
+        return summaryText;
+    }
+
+    /**
+     * @param summaryText the summaryText to set
+     */
+    public void setSummaryText(String summaryText) {
+        this.summaryText = summaryText;
     }
 
 }

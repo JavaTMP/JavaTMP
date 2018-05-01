@@ -135,7 +135,7 @@
                 '    <div class="media">' +
                 '        <img class="mr-3" src="{{contextPath}}/assets/img/64x64.gif" alt="Generic placeholder image"/>' +
                 '        <div class="media-body">' +
-                '            <h5 class="mt-0 d-flex justify-content-between"><span>{{title}}</span><small>{{creationDate}}</small></h5>' +
+                '            <h5 class="mt-0 d-flex justify-content-between"><span>{{title}}</span><time class="timeago" datetime="{{creationDate}}">{{formatedDate}}</time></h5>' +
                 '            {{contentText}}' +
                 '        </div>' +
                 '    </div>' +
@@ -158,6 +158,10 @@
             var indicatorTemplate = '<div class="fetch-indicator text-center m-2 p-2"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>';
             var workingDown = false;
             var workingTop = false;
+            var pageRequestedDown = 1;
+            var recordPerPage = 3;
+            var allCount = Number.MAX_SAFE_INTEGER;
+            var currentFetchedCount = 0;
             $("#infinite-scroll").mCustomScrollbar({
                 theme: "javatmp",
                 mouseWheel: {
@@ -193,24 +197,40 @@
                     },
                     onTotalScroll: function () {
                         if (!workingDown) {
-                            console.log("** onTotalScroll **");
-                            workingDown = true;
-                            this.mcs.content.append(indicatorTemplate);
-                            var that = this;
-                            setTimeout(function () {
-                                that.mcs.content.find(".fetch-indicator").remove();
-                                $.each(data, function (index, row) {
-                                    var readyData = template.composeTemplate({
-                                        'contentId': row.contentId,
-                                        'title': row.title,
-                                        'contentText': row.contentText,
-                                        'creationDate': row.creationDate,
-                                        'contextPath': row.contextPath
-                                    });
-                                    that.mcs.content.append(readyData);
+                            console.log("** onTotalScroll currentFetch [" + currentFetchedCount + "], allCount [" + allCount + "]");
+                            if (currentFetchedCount < allCount) {
+                                workingDown = true;
+                                this.mcs.content.append(indicatorTemplate);
+                                var that = this;
+                                var passData = {
+                                    numOfRowsPerPage: recordPerPage,
+                                    requestedPageNum: pageRequestedDown
+                                };
+                                pageRequestedDown++;
+                                $.ajax({
+                                    url: javatmp.settings.contextPath + "/cms/ListContentController",
+                                    data: passData,
+                                    success: function (response, textStatus, jqXHR) {
+                                        that.mcs.content.find(".fetch-indicator").remove();
+                                        var data = response.data.records;
+                                        allCount = response.data.allCount;
+                                        $.each(data, function (index, row) {
+                                            currentFetchedCount++;
+                                            var readyData = template.composeTemplate({
+                                                'contentId': row.contentId,
+                                                'title': row.title,
+                                                'contentText': row.summaryText,
+                                                'creationDate': row.creationDate,
+                                                'formatedDate': moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss"),
+                                                'contextPath': javatmp.settings.contextPath
+                                            });
+                                            that.mcs.content.append(readyData);
+                                            that.mcs.content.find("time.timeago").timeago();
+                                        });
+                                        workingDown = false;
+                                    }
                                 });
-                                workingDown = false;
-                            }, 1000);
+                            }
                         }
                     },
                     onTotalScrollBackOffset: 0,
