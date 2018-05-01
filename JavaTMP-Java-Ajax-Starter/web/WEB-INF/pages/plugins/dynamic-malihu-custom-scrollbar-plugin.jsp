@@ -25,17 +25,43 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div id="infinite-scroll" class="content">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-                        <p>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
-                        <p>Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?</p>
-                        <p>Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
-                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
-                        <p>Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p>
-                        <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <div id="infinite-scroll" class="list-group-flush list-group content">
+                        <div class="list-group-item list-group-item-action">
+                            <div class="media">
+                                <img class="mr-3" src="${pageContext.request.contextPath}/assets/img/64x64.gif" alt="Generic placeholder image">
+                                <div class="media-body">
+                                    <h5 class="mt-0 d-flex justify-content-between"><span>Media heading</span><small>3min</small></h5>
+                                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item list-group-item-action">
+                            <div class="media">
+                                <img class="mr-3" src="${pageContext.request.contextPath}/assets/img/64x64.gif" alt="Generic placeholder image">
+                                <div class="media-body">
+                                    <h5 class="mt-0">Media heading</h5>
+                                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item list-group-item-action">
+                            <div class="media">
+                                <img class="mr-3" src="${pageContext.request.contextPath}/assets/img/64x64.gif" alt="Generic placeholder image">
+                                <div class="media-body">
+                                    <h5 class="mt-0">Media heading</h5>
+                                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list-group-item list-group-item-action">
+                            <div class="media">
+                                <img class="mr-3" src="${pageContext.request.contextPath}/assets/img/64x64.gif" alt="Generic placeholder image">
+                                <div class="media-body">
+                                    <h5 class="mt-0">Media heading</h5>
+                                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -58,7 +84,7 @@
         .content {
             overflow: auto;
             position: relative;
-            width: 740px;
+            /*width: 740px;*/
             border: 1px solid #DDD;
             height: 400px;
         }
@@ -85,7 +111,44 @@
         // should load mandatory libraries and plugins before.
         // <--- HERE --->
         //
-
+        var data = [{
+                contentId: 5358741,
+                title: "Lorem ipsum dolor sit amet consectetur adipiscing elit 1",
+                contentText: "Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.",
+                creationDate: "2018-05-01T14:05:14.572Z",
+                contextPath: javatmp.settings.contextPath
+            }, {
+                contentId: 588871,
+                title: "Lorem ipsum dolor sit amet consectetur adipiscing elit 2",
+                contentText: "Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.",
+                creationDate: "2018-05-01T14:05:14.572Z",
+                contextPath: javatmp.settings.contextPath
+            }, {
+                contentId: 1358741,
+                title: "Lorem ipsum dolor sit amet consectetur adipiscing elit 3",
+                contentText: "Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.",
+                creationDate: "2018-05-01T14:05:14.572Z",
+                contextPath: javatmp.settings.contextPath
+            }];
+        var template =
+                '<div class="list-group-item list-group-item-action">' +
+                '    <div class="media">' +
+                '        <img class="mr-3" src="{{contextPath}}/assets/img/64x64.gif" alt="Generic placeholder image"/>' +
+                '        <div class="media-body">' +
+                '            <h5 class="mt-0 d-flex justify-content-between"><span>{{title}}</span><small>{{creationDate}}</small></h5>' +
+                '            {{contentText}}' +
+                '        </div>' +
+                '    </div>' +
+                '</div>';
+        //Compose template string
+        String.prototype.composeTemplate = (function () {
+            var re = /\{{(.+?)\}}/g;
+            return function (o) {
+                return this.replace(re, function (_, k) {
+                    return typeof o[k] !== 'undefined' ? o[k] : '';
+                });
+            };
+        }());
         jQuery(function ($) {
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
@@ -113,11 +176,16 @@
                             var that = this;
                             setTimeout(function () {
                                 that.mcs.content.find(".fetch-indicator").remove();
-                                var c = "<p>Added  content at the beginning</p>";
-                                for (var i = 0; i < 3; i++) {
-                                    c += c;
-                                }
-                                that.mcs.content.prepend(c);
+                                $.each(data, function (index, row) {
+                                    var readyData = template.composeTemplate({
+                                        'contentId': row.contentId,
+                                        'title': row.title,
+                                        'contentText': row.contentText,
+                                        'creationDate': row.creationDate,
+                                        'contextPath': row.contextPath
+                                    });
+                                    that.mcs.content.prepend(readyData);
+                                });
                                 $(that).mCustomScrollbar("scrollTo", 1);
                                 workingTop = false;
                             }, 1000);
@@ -128,15 +196,19 @@
                             console.log("** onTotalScroll **");
                             workingDown = true;
                             this.mcs.content.append(indicatorTemplate);
-//                            $("#infinite-scroll").mCustomScrollbar('scrollTo', 'bottom', {scrollInertia: 20});
                             var that = this;
                             setTimeout(function () {
                                 that.mcs.content.find(".fetch-indicator").remove();
-                                var c = "<p>Added  content at the end</p>";
-                                for (var i = 0; i < 3; i++) {
-                                    c += c;
-                                }
-                                that.mcs.content.append(c);
+                                $.each(data, function (index, row) {
+                                    var readyData = template.composeTemplate({
+                                        'contentId': row.contentId,
+                                        'title': row.title,
+                                        'contentText': row.contentText,
+                                        'creationDate': row.creationDate,
+                                        'contextPath': row.contextPath
+                                    });
+                                    that.mcs.content.append(readyData);
+                                });
                                 workingDown = false;
                             }, 1000);
                         }
