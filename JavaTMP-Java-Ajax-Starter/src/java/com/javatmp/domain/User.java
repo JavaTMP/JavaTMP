@@ -9,11 +9,13 @@ public class User {
     private String password;
     private String fullName;
     private Short status;
+    private Date birthOfDate;
     private Date creationDate;
     private String email;
     private String mobile;
     private String lang;
     private String theme;
+    private String countryId;
 
     /**
      * @return the id
@@ -153,6 +155,34 @@ public class User {
      */
     public void setTheme(String theme) {
         this.theme = theme;
+    }
+
+    /**
+     * @return the birthOfDate
+     */
+    public Date getBirthOfDate() {
+        return birthOfDate;
+    }
+
+    /**
+     * @param birthOfDate the birthOfDate to set
+     */
+    public void setBirthOfDate(Date birthOfDate) {
+        this.birthOfDate = birthOfDate;
+    }
+
+    /**
+     * @return the countryId
+     */
+    public String getCountryId() {
+        return countryId;
+    }
+
+    /**
+     * @param countryId the countryId to set
+     */
+    public void setCountryId(String countryId) {
+        this.countryId = countryId;
     }
 
 }

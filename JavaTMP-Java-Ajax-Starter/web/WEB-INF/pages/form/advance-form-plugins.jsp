@@ -23,7 +23,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <form autocomplete="off" id="jquery-form-plugin-test-id" class="form" action="index.html" method="post" novalidate="novalidate">
-                                <div class="row">
+                                <div class="form-row">
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label class="control-label">Full Name</label>
@@ -34,8 +34,12 @@
                                             <input class="form-control" type="text" placeholder="Email" name="email">
                                         </div>
                                         <div class="form-group">
+                                            <label class="control-label">Birth Of Date</label>
+                                            <input class="form-control" type="text" placeholder="Birth Of Date" name="birthOfDate">
+                                        </div>
+                                        <div class="form-group">
                                             <label class="control-label">Country</label>
-                                            <select name="country" class="form-control">
+                                            <select name="countryId" class="form-control">
                                                 <option value="">Country</option>
                                                 <option value="AF">Afghanistan</option>
                                                 <option value="AL">Albania</option>
@@ -292,28 +296,26 @@
                                             <input class="form-control" type="password" autocomplete="off" placeholder="Re-type Your Password"
                                                    name="rpassword">
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12">
                                         <div class="form-group">
-                                            <label class="">
-                                                <input type="checkbox" name="tnc" class=""> I agree to the
+                                            <label for="exampleFormControlFile1">Add New File</label>
+                                            <div class="custom-file">
+                                                <input name="profilePicture" type="file" class="custom-file-input" id="validatedCustomFile" required="">
+                                                <label class="custom-file-label" for="validatedCustomFile">Choose Profile Picture file...</label>
+                                            </div>
+                                        </div>
+                                        <div class="custom-control custom-checkbox">
+                                            <input name="tnc" type="checkbox" class="custom-control-input" id="customCheck1">
+                                            <label class="custom-control-label" for="customCheck1">
+                                                I agree to the
                                                 <a href="javascript:;">Terms of Service </a> &amp;
                                                 <a href="javascript:;">Privacy Policy </a>
-                                                <span></span>
                                             </label>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="form-actions">
-                                            <button type="submit" id="register-submit-btn" class="btn btn-success">Submit</button>
+                                        <div class="form-group mt-3">
+                                            <button type="submit" id="register-submit-btn" class="btn btn-primary">Submit</button>
                                         </div>
                                     </div>
                                 </div>
-
                             </form>
                         </div>
                     </div>
@@ -323,40 +325,29 @@
     </div>
     <!--<link href="components/" rel="stylesheet">-->
     <style type="text/css">
-        .form-actions {
-            display: block;
-            background-color: #F5F5F5;
-            border-top: 1px solid #E5E5E5;
-            margin-bottom: 20px;
-            margin-top: 20px;
-            padding: 19px 20px 20px;
-        }
+
     </style>
     <script type="text/javascript">
         jQuery(document).ready(function () {
             (function ($) {
+                var form = $('#jquery-form-plugin-test-id');
+                form.ajaxForm({
+                    clearForm: true, // clear all form fields after successful submit
+                    resetForm: true, // reset the form after successful submit
+                    beforeSerialize: function ($form, options) {
+                        alert("beforeSerialize");
+                        var data = "";
+                        $.each(form.elements, function (i, el) {
+                            data += "name[" + el.name + "], value [" + el.value + "]";
+                        });
+                        alert(data);
+                    },
+                    beforeSubmit: function (formData, jqForm, options) {
+                        alert("beforeSubmit [" + JSON.stringify(formData) + "]");
+                    },
+                    success: function (formData, jqForm, options) {
 
-                //                $('#jquery-form-plugin-test-id').submit(function () {
-                //                    // inside event callbacks 'this' is the DOM element so we first
-                //                    // wrap it in a jQuery object and then invoke ajaxSubmit
-                //                    $(this).ajaxSubmit();
-                //
-                //                    // !!! Important !!!
-                //                    // always return false to prevent standard browser submit and page navigation
-                //                    return false;
-                //                });
-                $('#jquery-form-plugin-test-id').ajaxForm({
-                    beforeSubmit: showRequest, // pre-submit callback
-                    success: showResponse  // post-submit callback
-                            // other available options:
-                            //url:       url         // override for form's 'action' attribute
-                            //type:      type        // 'get' or 'post', override for form's 'method' attribute
-                            //dataType:  null        // 'xml', 'script', or 'json' (expected server response type)
-                            //clearForm: true        // clear all form fields after successful submit
-                            //resetForm: true        // reset the form after successful submit
-
-                            // $.ajax options can be used here too, for example:
-                            //timeout:   3000
+                    }
                 });
                 // pre-submit callback
                 function showRequest(formData, jqForm, options) {
