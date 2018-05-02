@@ -369,10 +369,9 @@
                 }, "Please enter a valid date in the format DD/MM/YYYY");
 
                 jQuery.validator.addMethod("dateBeforeNow", function (value, element, params) {
-                    console.log(value);
                     if (this.optional(element) || value === "")
                         return true;
-                    if (moment(value, "DD/MM/YYYY").isBefore(moment()))
+                    if (moment(value, "DD/MM/YYYY").isBefore(moment().set({hour: 0, minute: 0, second: 0, millisecond: 0})))
                         return true;
                     return false;
                 }, 'Must be less than Now.');
