@@ -925,6 +925,12 @@
                                             jQuery Form Plugin
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/form/advance-form-plugins">
+                                            <i class="far fa-lg fa-fw fa-edit"></i>
+                                            Advanced Form Plugins
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li>
