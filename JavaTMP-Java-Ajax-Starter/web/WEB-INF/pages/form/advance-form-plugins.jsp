@@ -22,7 +22,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <form autocomplete="off" id="jquery-form-plugin-test-id" class="form" action="index.html" method="post" novalidate="novalidate">
+                            <form enctype="multipart/form-data" autocomplete="off" id="jquery-form-plugin-test-id" class="form" action="${pageContext.request.contextPath}/user/CreateUserController" method="post" novalidate="novalidate">
                                 <div class="form-row">
                                     <div class="col-lg-12">
                                         <div class="form-group">
@@ -35,7 +35,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">Birth Of Date</label>
-                                            <input class="form-control" type="text" placeholder="Birth Of Date" name="birthOfDate">
+                                            <input class="form-control" type="text" name="birthOfDate">
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">Country</label>
@@ -299,17 +299,19 @@
                                         <div class="form-group">
                                             <label for="exampleFormControlFile1">Add New File</label>
                                             <div class="custom-file">
-                                                <input name="profilePicture" type="file" class="custom-file-input" id="validatedCustomFile" required="">
+                                                <input name="profilePicture" type="file" class="custom-file-input" id="validatedCustomFile">
                                                 <label class="custom-file-label" for="validatedCustomFile">Choose Profile Picture file...</label>
                                             </div>
                                         </div>
-                                        <div class="custom-control custom-checkbox">
-                                            <input name="tnc" type="checkbox" class="custom-control-input" id="customCheck1">
-                                            <label class="custom-control-label" for="customCheck1">
-                                                I agree to the
-                                                <a href="javascript:;">Terms of Service </a> &amp;
-                                                <a href="javascript:;">Privacy Policy </a>
-                                            </label>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox">
+                                                <input name="tnc" type="checkbox" class="custom-control-input" id="customCheck1">
+                                                <label class="custom-control-label" for="customCheck1">
+                                                    I agree to the
+                                                    <a href="javascript:;">Terms of Service </a> &amp;
+                                                    <a href="javascript:;">Privacy Policy </a>
+                                                </label>
+                                            </div>
                                         </div>
                                         <div class="form-group mt-3">
                                             <button type="submit" id="register-submit-btn" class="btn btn-primary">Submit</button>
@@ -331,57 +333,113 @@
         jQuery(document).ready(function () {
             (function ($) {
                 var form = $('#jquery-form-plugin-test-id');
+                var validator = null;
                 form.ajaxForm({
                     clearForm: true, // clear all form fields after successful submit
                     resetForm: true, // reset the form after successful submit
                     beforeSerialize: function ($form, options) {
-                        alert("beforeSerialize");
-                        var data = "";
-                        $.each(form.elements, function (i, el) {
-                            data += "name[" + el.name + "], value [" + el.value + "]";
-                        });
-                        alert(data);
+                        if (!$form.valid()) {
+                            return false;
+                        }
                     },
                     beforeSubmit: function (formData, jqForm, options) {
-                        alert("beforeSubmit [" + JSON.stringify(formData) + "]");
+
                     },
                     success: function (formData, jqForm, options) {
 
                     }
                 });
                 // pre-submit callback
-                function showRequest(formData, jqForm, options) {
-                    // formData is an array; here we use $.param to convert it to a string to display it
-                    // but the form plugin does this for you automatically when it submits the data
-                    var queryString = $.param(formData);
 
-                    // jqForm is a jQuery object encapsulating the form element.  To access the
-                    // DOM element for the form do this:
-                    // var formElement = jqForm[0];
+                jQuery.validator.addMethod("validDateTime", function (value, element) {
+                    return this.optional(element) || moment(value, "DD/MM/YYYY HH:mm", true).isValid();
+                }, "Please enter a valid date in the format DD/MM/YYYY HH:MI");
 
-                    alert('About to submit: \n\n' + queryString);
+                jQuery.validator.addMethod("dateTimeBeforeNow",
+                        function (value, element, params) {
+                            if (this.optional(element) || $(params).val() === "")
+                                return true;
+                            if (moment(value, "DD/MM/YYYY HH:mm").isBefore(moment()))
+                                return true;
+                            return false;
+                        }, 'Must be less than Now.');
 
-                    // here we could return false to prevent the form from being submitted;
-                    // returning anything other than false will allow the form submit to continue
-                    return true;
+                jQuery.validator.addMethod("validDate", function (value, element) {
+                    return this.optional(element) || moment(value, "DD/MM/YYYY", true).isValid();
+                }, "Please enter a valid date in the format DD/MM/YYYY");
+
+                jQuery.validator.addMethod("dateBeforeNow", function (value, element, params) {
+                    console.log(value);
+                    if (this.optional(element) || value === "")
+                        return true;
+                    if (moment(value, "DD/MM/YYYY").isBefore(moment()))
+                        return true;
+                    return false;
+                }, 'Must be less than Now.');
+
+                validator = form.validate($.extend(true, {}, window.jqueryValidationDefaultOptions, {
+                    rules: {
+                        fullName: {
+                            required: true
+                        },
+                        email: {
+                            required: true,
+                            email: true
+                        },
+                        birthOfDate: {
+                            required: true,
+                            validDate: true,
+                            dateBeforeNow: true
+                        }
+                    },
+                    messages: {
+                        fullName: {
+                            required: "Kindly provide us with your full name"
+                        },
+                        email: {
+                            required: "Kindly provide your email address",
+                            email: "Kindly provide a valid email address"
+                        },
+                        birthOfDate: {
+                            required: "Kindly provide your Birth Of Date",
+                            validDate: "Kindly Provide a valid date value in format DD/MM/YYYY HH:MI",
+                            dateBeforeNow: "Kindly Provide a date in the past before today at least"
+                        }
+                    }
                 }
+                ));
 
-                // post-submit callback
-                function showResponse(responseText, statusText, xhr, $form) {
-                    // for normal html responses, the first argument to the success callback
-                    // is the XMLHttpRequest object's responseText property
+                form.find("input[name='birthOfDate']").inputmask({
+                    alias: "date",
+                    placeholder: "dd/mm/yyyy",
+                    inputFormat: "dd/mm/yyyy",
+                    displayFormat: true,
+                    hourFormat: "24",
+                    clearMaskOnLostFocus: false
+                });
+                form.find("input[name='birthOfDate']").daterangepicker({
+                    "opens": javatmp.settings.floatReverse,
+//                    startDate: false,
+                    singleDatePicker: true,
+                    showDropdowns: true,
+                    timePicker: false,
+                    timePickerIncrement: 1,
+                    timePicker24Hour: true,
+                    autoApply: true,
+                    autoUpdateInput: false,
+                    minDate: '01/01/1900',
+                    maxDate: '31/12/2099',
+//                    maxDate: '',
+//                    minDate: moment(),
+                    locale: {
+                        "direction": javatmp.settings.direction,
+                        format: 'DD/MM/YYYY'
+                    }
+                }, function (start, end, label) {
+                    var formatedDateSelected = moment(start).format("DD/MM/YYYY");
+                    form.find("input[name='birthOfDate']").val(formatedDateSelected);
+                });
 
-                    // if the ajaxForm method was passed an Options Object with the dataType
-                    // property set to 'xml' then the first argument to the success callback
-                    // is the XMLHttpRequest object's responseXML property
-
-                    // if the ajaxForm method was passed an Options Object with the dataType
-                    // property set to 'json' then the first argument to the success callback
-                    // is the json data object returned by the server
-
-                    alert('status: ' + statusText + '\n\nresponseText: \n' + responseText +
-                            '\n\nThe output div should have already been updated with the responseText.');
-                }
             }(jQuery));
         });
     </script>

@@ -1520,6 +1520,35 @@
         </script>
         <script type="text/javascript">
             jQuery(function ($) {
+                window.jqueryValidationDefaultOptions = {
+                    rules: {
+
+                    },
+                    messages: {
+
+                    },
+                    highlight: function (element) {
+                        $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                    },
+                    unhighlight: function (element) {
+                        $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+                    },
+                    errorElement: 'small',
+                    errorClass: 'form-text text-danger',
+                    errorPlacement: function (error, element) {
+                        if (element.length) {
+                            var targetParent = $(element).parent();
+                            if (targetParent.hasClass("form-check") || targetParent.hasClass("custom-control")) {
+                                targetParent = targetParent.parent();
+                            }
+                            targetParent.append(error);
+                        }
+                    }
+                };
+            });
+        </script>
+        <script type="text/javascript">
+            jQuery(function ($) {
                 $("#oneTimeOverlay").remove();
             });
         </script>
