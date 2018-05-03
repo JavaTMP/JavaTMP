@@ -931,6 +931,12 @@
                                             Advanced Form Plugins
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/form/dynamic-wizard-with-advanced-form-page">
+                                            <i class="far fa-lg fa-fw fa-edit"></i>
+                                            Dynamic Wizard with Advanced Form Plugins
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li>
