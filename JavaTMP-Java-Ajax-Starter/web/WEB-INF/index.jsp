@@ -301,7 +301,7 @@
                              src="${pageContext.request.contextPath}/assets/img/avatar/profile_pic_min.png" alt=""/>
                         <span class="user-profile-menu-item-info d-none d-md-inline-block">
                             <small>Welcome,</small>
-                            Admin John smith
+                            ${sessionScope.user.fullName}
                         </span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right">
