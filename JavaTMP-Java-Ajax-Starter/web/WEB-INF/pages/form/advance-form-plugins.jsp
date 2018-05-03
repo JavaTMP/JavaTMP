@@ -40,6 +40,7 @@
                                         <div class="form-group">
                                             <label class="control-label">Country</label>
                                             <select name="countryId" class="form-control">
+                                                <option value="">Choose ...</option>
                                                 <option value="">Country</option>
                                                 <option value="AF">Afghanistan</option>
                                                 <option value="AL">Albania</option>
@@ -284,11 +285,11 @@
                                         <div class="form-group">
                                             <label class="control-label">Username</label>
                                             <input class="form-control" type="text" autocomplete="off" placeholder="Username"
-                                                   name="username">
+                                                   name="userName">
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">Password</label>
-                                            <input class="form-control" type="password" autocomplete="off" id="register_password"
+                                            <input class="form-control" type="password" autocomplete="off" id="password"
                                                    placeholder="Password" name="password">
                                         </div>
                                         <div class="form-group">
@@ -379,16 +380,44 @@
                 validator = form.validate($.extend(true, {}, window.jqueryValidationDefaultOptions, {
                     rules: {
                         fullName: {
-                            required: true
+                            required: true,
+                            lettersonly: true
                         },
                         email: {
                             required: true,
-                            email: true
+                            email: true,
+                            minlength: 5,
+                            maxlength: 50
                         },
                         birthOfDate: {
                             required: true,
                             validDate: true,
                             dateBeforeNow: true
+                        },
+                        countryId: {
+                            required: true
+                        },
+                        address: {
+                            required: true,
+                            maxlength: 100
+                        },
+                        userName: {
+                            required: true
+                        },
+                        password: {
+                            required: true,
+                            minlength: 6,
+                            maxlength: 20
+                        },
+                        rpassword: {
+                            required: true,
+                            equalTo: "#password"
+                        },
+                        profilePicture: {
+                            required: true
+                        },
+                        tnc: {
+                            required: true
                         }
                     },
                     messages: {
@@ -403,7 +432,14 @@
                             required: "Kindly provide your Birth Of Date",
                             validDate: "Kindly Provide a valid date value in format DD/MM/YYYY HH:MI",
                             dateBeforeNow: "Kindly Provide a date in the past before today at least"
+                        },
+                        countryId: {
+                            required: "Kindly select your nationality"
+                        },
+                        address: {
+                            required: "Kindly provide your address"
                         }
+
                     }
                 }
                 ));
