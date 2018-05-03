@@ -16,6 +16,7 @@ public class User {
     private String lang;
     private String theme;
     private String countryId;
+    private String address;
 
     /**
      * @return the id
@@ -183,6 +184,20 @@ public class User {
      */
     public void setCountryId(String countryId) {
         this.countryId = countryId;
+    }
+
+    /**
+     * @return the address
+     */
+    public String getAddress() {
+        return address;
+    }
+
+    /**
+     * @param address the address to set
+     */
+    public void setAddress(String address) {
+        this.address = address;
     }
 
 }

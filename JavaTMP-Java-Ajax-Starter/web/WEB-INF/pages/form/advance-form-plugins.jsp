@@ -288,8 +288,8 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label">Address</label>
-                                            <textarea maxlength="400" rows="5" class="form-control" placeholder="Your Address" name="address"></textarea>
+                                            <label class="control-label">address</label>
+                                            <textarea rows="5" class="form-control forceValidate" placeholder="" name="address"></textarea>
                                         </div>
                                         <div class="form-row">
                                             <div class="col-lg-6">
@@ -324,10 +324,6 @@
                                                            name="rpassword">
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Note</label>
-                                            <textarea rows="5" class="form-control forceValidate" placeholder="" name="note"></textarea>
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox">
@@ -371,7 +367,7 @@
             width: 100%;
             height: auto;
             border-radius: 2px;
-            vertical-align: middle;
+            vertical-align: sub;
         }
         .select2-result-repository__title {
             color: black;
@@ -402,7 +398,9 @@
 
                     },
                     success: function (formData, jqForm, options) {
-
+                        form.find("textarea[name='address']").summernote('code', '');
+                        form.resetForm();
+                        form.find(".form-group.has-success").removeClass(".has-success");
                     }
                 });
                 // pre-submit callback
@@ -497,7 +495,7 @@
                         },
                         birthOfDate: {
                             required: "Kindly provide your Birth Of Date",
-                            validDate: "Kindly Provide a valid date value in format DD/MM/YYYY HH:MI",
+                            validDate: "Kindly Provide a valid date value in format DD/MM/YYYY",
                             dateBeforeNow: "Kindly Provide a date in the past before today at least"
                         },
                         countryId: {
@@ -542,17 +540,10 @@
                     var formatedDateSelected = moment(start).format("DD/MM/YYYY");
                     form.find("input[name='birthOfDate']").val(formatedDateSelected);
                 });
-                form.find("textarea[name='address']").maxlength({
-                    alwaysShow: true,
-                    threshold: 10,
-                    warningClass: "badge badge-success",
-                    limitReachedClass: "badge badge-danger",
-                    separator: ' of ',
-                    preText: 'You have ',
-                    postText: ' chars remaining.',
-                    validate: false
-                });
-                form.find("textarea[name='note']").summernote({height: 250});
+                $(".daterangepicker.dropdown-menu").css('z-index', 600 + 1);
+
+
+                form.find("textarea[name='address']").summernote({height: 250});
 
                 $.fn.select2.defaults.set("theme", "bootstrap");
                 $.fn.select2.defaults.set("dir", javatmp.settings.direction);
@@ -567,7 +558,7 @@
                     templateResult: formatCountry,
                     escapeMarkup: function (markup) {
                         return markup;
-                    },
+                    }
                 });
                 function formatCountry(repo) {
                     if (repo.loading)
