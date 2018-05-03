@@ -25,18 +25,27 @@
                             <form enctype="multipart/form-data" autocomplete="off" id="jquery-form-plugin-test-id" class="form" action="${pageContext.request.contextPath}/user/CreateUserController" method="post" novalidate="novalidate">
                                 <div class="form-row">
                                     <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label class="control-label">Full Name</label>
-                                            <input class="form-control" type="text" placeholder="Full Name" name="fullName">
+                                        <div class="form-row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="control-label">Full Name</label>
+                                                    <input class="form-control" type="text" placeholder="Full Name" name="fullName">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="control-label">Email</label>
+                                                    <input class="form-control" type="text" placeholder="Email" name="email">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="control-label">Birth Of Date</label>
+                                                    <input class="form-control" type="text" name="birthOfDate">
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Email</label>
-                                            <input class="form-control" type="text" placeholder="Email" name="email">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Birth Of Date</label>
-                                            <input class="form-control" type="text" name="birthOfDate">
-                                        </div>
+
                                         <div class="form-group">
                                             <label class="control-label">Country</label>
                                             <select name="countryId" class="form-control">
@@ -280,7 +289,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">Address</label>
-                                            <textarea rows="5" class="form-control" placeholder="Your Address" name="address"></textarea>
+                                            <textarea maxlength="400" rows="5" class="form-control" placeholder="Your Address" name="address"></textarea>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">Username</label>
@@ -303,6 +312,10 @@
                                                 <input name="profilePicture" type="file" class="custom-file-input" id="validatedCustomFile">
                                                 <label class="custom-file-label" for="validatedCustomFile">Choose Profile Picture file...</label>
                                             </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">Note</label>
+                                            <textarea rows="5" class="form-control forceValidate" placeholder="" name="note"></textarea>
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox">
@@ -339,6 +352,7 @@
                     clearForm: true, // clear all form fields after successful submit
                     resetForm: true, // reset the form after successful submit
                     beforeSerialize: function ($form, options) {
+                        $("#summernote").summernote('triggerEvent', 'change');
                         if (!$form.valid()) {
                             return false;
                         }
@@ -377,12 +391,20 @@
                     return false;
                 }, 'Must be less than Now.');
 
+                jQuery.validator.addMethod("summernoteRequired", function (value, element, params) {
+                    if (this.optional(element))
+                        return true;
+                    if (value !== "" && value !== "<p><br></p>")
+                        return true;
+                    return false;
+                }, 'Kindly Provide a value');
+
                 validator = form.validate($.extend(true, {}, window.jqueryValidationDefaultOptions, {
+                    ignore1: ":hidden:not(.forceValidate)",
+                    ignore: ":hidden:not(.forceValidate), [contenteditable='true']:not([name])",
                     rules: {
                         fullName: {
-                            required: true,
-                            lettersonly: true
-                        },
+                            required: true},
                         email: {
                             required: true,
                             email: true,
@@ -399,7 +421,7 @@
                         },
                         address: {
                             required: true,
-                            maxlength: 100
+                            maxlength: 400
                         },
                         userName: {
                             required: true
@@ -418,6 +440,10 @@
                         },
                         tnc: {
                             required: true
+                        },
+                        note: {
+                            required: true,
+                            summernoteRequired: true
                         }
                     },
                     messages: {
@@ -438,11 +464,12 @@
                         },
                         address: {
                             required: "Kindly provide your address"
+                        },
+                        note: {
+                            summernoteRequired: "Kindly Provide a note"
                         }
-
                     }
-                }
-                ));
+                }));
 
                 form.find("input[name='birthOfDate']").inputmask({
                     alias: "date",
@@ -474,6 +501,17 @@
                     var formatedDateSelected = moment(start).format("DD/MM/YYYY");
                     form.find("input[name='birthOfDate']").val(formatedDateSelected);
                 });
+                form.find("textarea[name='note']").maxlength({
+                    alwaysShow: true,
+                    threshold: 10,
+                    warningClass: "badge badge-success",
+                    limitReachedClass: "badge badge-danger",
+                    separator: ' of ',
+                    preText: 'You have ',
+                    postText: ' chars remaining.',
+                    validate: false
+                });
+                form.find("textarea[name='note']").summernote({height: 400});
 
             }(jQuery));
         });
