@@ -38,14 +38,6 @@ public class CreateUserController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-//        String description = request.getParameter("description"); // Retrieves <input type="text" name="description">
-//        Part filePart = request.getPart("file"); // Retrieves <input type="file" name="file">
-//        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
-//        String contentType = filePart.getContentType();
-//        InputStream fileContent = filePart.getInputStream();
-//        System.out.println("FileName requested to Upload [" + fileName + "] type[" + contentType + "]");
-//        response.getWriter().print("UPLOAD DONE");
-//
         ResponseMessage responseMessage = new ResponseMessage();
         List<Document> documentsUploaded = new LinkedList<>();
         ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
