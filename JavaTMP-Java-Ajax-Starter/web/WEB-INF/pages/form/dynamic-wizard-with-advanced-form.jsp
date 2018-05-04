@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
     <div class="row bootstrap-pill-wizard">
-        <div class="col-3">
+        <div class="col-lg-3">
             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <a class="disabled nav-item nav-link" id="step1-" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">1. Personal Informaiton</a>
                 <a class="disabled nav-item nav-link" id="step2-" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">2. Address Information</a>
@@ -9,7 +9,7 @@
                 <a class="disabled nav-item nav-link" id="step4-" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Step 4</a>
             </div>
         </div>
-        <div class="col-9">
+        <div class="col-lg-9">
             <form id="test-form-validation-with-colors-icons" enctype="multipart/form-data" autocomplete="off" class="form" action="${pageContext.request.contextPath}/user/CreateUserController" method="post" novalidate="novalidate">
                 <div class="tab-content" id="v-pills-tabContent">
                     <div class="tab-pane fade" id="v-pills-home" role="tabpanel" aria-labelledby="step1-">
