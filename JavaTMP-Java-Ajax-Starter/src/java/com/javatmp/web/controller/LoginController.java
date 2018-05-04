@@ -42,7 +42,8 @@ public class LoginController extends HttpServlet {
             user.setId(DBFaker.getNextCounter());
             user.setUserName("user" + user.getId());
             user.setPassword(MD5Util.convertToMD5(user.getUserName()));
-            user.setFullName(user.getUserName());
+            user.setFirstName("firstName");
+            user.setLastName("lastName");
             user.setStatus((short) 1);
             user.setCreationDate(new Date());
             user.setEmail(user.getUserName() + "@javatmp.com");

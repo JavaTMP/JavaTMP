@@ -6,6 +6,7 @@
 package com.javatmp.service;
 
 import com.javatmp.domain.User;
+import com.javatmp.mvc.Page;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -33,7 +34,18 @@ public class UserService {
     public User createNewUser(User user) {
         this.dBFaker.addUser(user);
         return user;
+    }
 
+    public Page<User> listUsers(Page<User> page) {
+        List<User> retList = new LinkedList<>();
+        List<User> db = this.dBFaker.getUsers();
+        for (int i = (page.getRequestedPageNum() - 1) * page.getNumOfRowsPerPage();
+                i < db.size() && i < (page.getRequestedPageNum()) * page.getNumOfRowsPerPage(); i++) {
+            retList.add(db.get(i));
+        }
+        page.setRecords(retList);
+        page.setAllCount(Long.valueOf(db.size()));
+        return page;
     }
 
 }

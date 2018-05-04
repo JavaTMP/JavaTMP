@@ -1,30 +1,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
     <div class="page-header">
-        <h1>Defalut Datatables Bootstrap 4 theme</h1>
+        <h1>Dynamic Datatables</h1>
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <div class="alert alert-info">
-                <p>DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible tool, based upon the foundations of progressive enhancement, and will add advanced interaction controls to any HTML table. Such as Pagination,FixedColumns, RowGroup, Responsive, FixedHeader and many more.</p>
-                <p>The DataTables / Bootstrap integration ensures that you can use all features of both as well as the enhancements that DataTables makes to a plain HTML table.</p>
-                <br/>
-                <p>
-                    <a class="btn btn-info" target="_blank" href="https://datatables.net/examples/index">
-                        <i class="fa fa-external-link-alt fa-fw"></i>
-                        Datatables examples
-                    </a>
-                    <a class="btn btn-info" target="_blank" href="https://datatables.net/">
-                        <i class="fa fa-external-link-alt fa-fw"></i>Datatables Home Page
-                    </a>
-                    <a class="btn btn-info" target="_blank" href="https://datatables.net/extensions/index">
-                        <i class="fa fa-external-link-alt fa-fw"></i>Datatables Extensions Page
-                    </a>
-                </p>
-            </div>
             <div id="table-panel" class="card my-3">
                 <div class="card-header">
-                    Defalut Datatables example
+                    Users Table
                     <div class="options float-right">
                         <a class="settings"><i class="fa fa-cog"></i></a>
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
@@ -34,7 +17,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table width="100%" cellspacing="0" class="table table-bordered table-hover dt-responsive nowrap" id="defalut-dataTables-example">
+                    <table width="100%" cellspacing="0" class="table table-bordered table-hover dt-responsive" id="defalut-dataTables-example">
                         <thead>
                             <tr>
                                 <th>First name</th>
@@ -688,11 +671,11 @@
         jQuery(function ($) {
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
-            var table = null;
+            var table = $('#defalut-dataTables-example').DataTable();
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
-                table = $('#defalut-dataTables-example').DataTable();
+
             });
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
@@ -718,6 +701,7 @@
                 $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenExpand);
                 // it is important to destroy table before leaving current ajax page
                 // so the fixedHeader will not be kept on site pages.
+                table.clear().draw();
                 table.destroy(true);
                 return true;
             });

@@ -301,7 +301,7 @@
                              src="${pageContext.request.contextPath}/assets/img/avatar/profile_pic_min.png" alt=""/>
                         <span class="user-profile-menu-item-info d-none d-md-inline-block">
                             <small>Welcome,</small>
-                            ${sessionScope.user.fullName}
+                            ${sessionScope.user.firstName}&nbsp;${sessionScope.user.lastName}
                         </span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right">
@@ -1074,6 +1074,12 @@
                                                 <a href="${pageContext.request.contextPath}/pages/table/datatable/datatables-footer-summary">
                                                     <i class="far fa-lg fa-fw fa-list-alt"></i>
                                                     Datatables with Footer Summary
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="${pageContext.request.contextPath}/pages/table/datatable/dynamic-datatables">
+                                                    <i class="far fa-lg fa-fw fa-list-alt"></i>
+                                                    Dynamic Datatables Demo
                                                 </a>
                                             </li>
                                         </ul>
