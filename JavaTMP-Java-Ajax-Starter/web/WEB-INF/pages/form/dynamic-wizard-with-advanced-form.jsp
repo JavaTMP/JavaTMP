@@ -1,23 +1,24 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="row bootstrap-pill-wizard">
-        <div class="col-lg-3">
-            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <a class="disabled nav-item nav-link" id="step1-" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">1. Personal Informaiton</a>
-                <a class="disabled nav-item nav-link" id="step2-" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">2. Address Information</a>
-                <a class="disabled nav-item nav-link" id="step3-" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Step 3</a>
-                <a class="disabled nav-item nav-link" id="step4-" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Step 4</a>
+    <form id="dynamic-advanced-form-plugins-id" enctype="multipart/form-data" autocomplete="off" class="form" action="${pageContext.request.contextPath}/user/CreateUserController" method="post" novalidate="novalidate">
+        <div class="row dynamic-form-wizard">
+            <div class="col-lg-3">
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a class="disabled nav-item nav-link" id="step1-" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">1. Personal Informaiton</a>
+                    <a class="disabled nav-item nav-link" id="step2-" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">2. Address Information</a>
+                    <a class="disabled nav-item nav-link" id="step3-" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">3. Profile Informaiton</a>
+                    <a class="disabled nav-item nav-link" id="step4-" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Step 4</a>
+                </div>
             </div>
-        </div>
-        <div class="col-lg-9">
-            <form id="test-form-validation-with-colors-icons" enctype="multipart/form-data" autocomplete="off" class="form" action="${pageContext.request.contextPath}/user/CreateUserController" method="post" novalidate="novalidate">
+            <div class="col-lg-9">
+
                 <div class="tab-content" id="v-pills-tabContent">
                     <div class="tab-pane fade" id="v-pills-home" role="tabpanel" aria-labelledby="step1-">
                         <div class="form-group form-row">
                             <label for="fname" class="col-form-label col-md-2">
                                 Full Name
                             </label>
-                            <div class="col-md-9">
+                            <div class="col-md-10">
                                 <input class="form-control" type="text" placeholder="Full Name" name="fullName">
                             </div>
                         </div>
@@ -25,7 +26,7 @@
                             <label for="lname" class="col-form-label col-md-2">
                                 Email
                             </label>
-                            <div class="col-md-9">
+                            <div class="col-md-10">
                                 <input class="form-control" type="text" placeholder="Email" name="email">
                             </div>
                         </div>
@@ -33,15 +34,17 @@
                             <label for="lname" class="col-form-label col-md-2">
                                 Birth Of Date
                             </label>
-                            <div class="col-md-9">
+                            <div class="col-md-10">
                                 <input class="form-control" type="text" name="birthOfDate">
                             </div>
                         </div>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="step2-">
                         <div class="form-group form-row">
                             <label for="lname" class="col-form-label col-md-2">
                                 Country
                             </label>
-                            <div class="col-md-9">
+                            <div class="col-md-10">
                                 <select name="countryId" class="form-control">
                                     <option value="">Choose ...</option>
                                     <option value="AF">Afghanistan</option>
@@ -281,47 +284,81 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="step2-">
                         <div class="form-group form-row">
-                            <label for="username" class="col-form-label col-md-3">
-                                address
+                            <label for="username" class="col-form-label col-md-2">
+                                Address
                             </label>
-                            <div class="col-md-9">
-                                <textarea rows="5" class="form-control forceValidate" placeholder="" name="address"></textarea>
+                            <div class="col-md-10">
+                                <textarea rows="5" class="form-control" placeholder="" name="address"></textarea>
                             </div>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="step3-">
-                        <div class="form-group form-row">
-                            <label for="password" class="col-form-label col-md-2">
-                                New Password
-                            </label>
+                        <div class="form-row">
                             <div class="col-md-6">
-                                <input type="password" name="password" id="password" class="form-control" placeholder="Enter Password" />
+                                <div class="form-group form-row">
+                                    <label for="password" class="col-form-label col-md-4">
+                                        Username
+                                    </label>
+                                    <div class="col-md-8">
+                                        <input class="form-control" type="text" autocomplete="off" placeholder="Username" name="userName">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-row">
+                                    <label for="repeatPassword" class="col-form-label col-md-4">
+                                        Profile Picture
+                                    </label>
+                                    <div class="col-md-8">
+                                        <div class="custom-file">
+                                            <input name="profilePicture" type="file" class="custom-file-input" id="validatedCustomFile">
+                                            <label class="custom-file-label" for="validatedCustomFile">Choose ...</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-group form-row">
+                                    <label class="control-label col-md-4">Password</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control" type="password" autocomplete="off" id="password"
+                                               placeholder="Password" name="password"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-row">
+                                    <label class="control-label col-md-4">Re-type Your Password</label>
+                                    <div class="col-md-8">
+                                        <input class="form-control" type="password" autocomplete="off" placeholder="Re-type Your Password"
+                                               name="rpassword"/>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group form-row">
-                            <label for="repeatPassword" class="col-form-label col-md-2">
-                                Repeat Password
-                            </label>
-                            <div class="col-md-6">
-                                <input type="password" name="repeatPassword" id="repeatPassword" class="form-control" placeholder="Enter friend last name" />
+                            <div class="custom-control custom-checkbox">
+                                <input name="tnc" type="checkbox" class="custom-control-input" id="customCheck1">
+                                <label class="custom-control-label" for="customCheck1">
+                                    I agree to the
+                                    <a href="javascript:;">Terms of Service </a> &amp;
+                                    <a href="javascript:;">Privacy Policy </a>
+                                </label>
                             </div>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="step4-">
-                        <p>Eu dolore ea ullamco dolore Lorem id cupidatat excepteur reprehenderit consectetur elit id dolor proident in cupidatat officia. Voluptate excepteur commodo labore nisi cillum duis aliqua do. Aliqua amet qui mollit consectetur nulla mollit velit aliqua veniam nisi id do Lorem deserunt amet. Culpa ullamco sit adipisicing labore officia magna elit nisi in aute tempor commodo eiusmod.</p>
+                        <div class="alert alert-success text-center">
+                            <span>Thank you, All information have been filled correctly, You can Submit the form Remotely now</span>
+                        </div>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
-        <div class="col-12 justify-content-start d-flex mt-1">
-            <button class="btn btn-danger mr-auto" data-dismiss="modal" aria-hidden="true">Close</button>
-            <button type="button" class="mr-1 btn btn-primary previous-button disabled" disabled="">Previous</button>
-            <button type="button" class="btn btn-primary next-button disabled" disabled="">Next</button>
-        </div>
-    </div>
+    </form>
     <!--
     Reference Your external Stylesheet file here
     if your feature or plugins could not support to run globally.
@@ -331,6 +368,35 @@
         /*
         Embed CSS styling for current page.
         */
+        .select2-container--bootstrap{
+            z-index: 999999;
+        }
+        .select2-result-repository {
+            padding: 3px;
+        }
+        .select2-result-repository__avatar {
+            float: left;
+            width: 25px;
+            margin-right: 10px;
+            line-height: 20px;
+
+        }
+        .select2-result-repository__avatar img {
+            width: 100%;
+            height: auto;
+            border-radius: 2px;
+            vertical-align: sub;
+        }
+        .select2-result-repository__title {
+            color: black;
+            word-wrap: break-word;
+            line-height: 1.1;
+            margin-bottom: 4px;
+            line-height: 20px;
+        }
+        .select2-results__option--highlighted .select2-result-repository__title {
+            color: white;
+        }
     </style>
 
     <!--
@@ -353,70 +419,100 @@
             $("#" + currentParentModal.options.id).on(javatmp.settings.javaTmpAjaxContainerReady, function (event, modal) {
                 // fire AFTER all transition done and your ajax content is shown to user.
 
+                modal.originalModal.removeAttr("tabindex");
                 modal.updateTitle("Dynamic Wizard With Advanced Form");
                 modal.updateClosable(true);
                 modal.updateSize("modal-lg");
 
-                $(".bootstrap-pill-wizard").each(function () {
-                    console.log("show first tab");
-                    var firstTab = $(".nav .nav-link:first", $(this));
-                    var targetPanelId = $(firstTab).attr("href");
-                    $(firstTab).removeClass("disabled");
-                    $(targetPanelId).addClass("active show");
-                    console.log("id of target = " + $(targetPanelId).attr("id"));
-                    $(firstTab).tab('show');
-                });
-                $(".previous-button").on("click", function () {
-                    var wizardElement = $(this).parents(".bootstrap-pill-wizard").first();
-                    var currentActiveElement = $(".nav .nav-link.active.show", wizardElement);
-                    var previousElement = $(currentActiveElement).prev();
-                    console.log("prev-button current[" + $(currentActiveElement).attr("id") + "], next [" + $(previousElement).attr("id") + "]");
-                    if ($(previousElement).length > 0) {
-                        $(previousElement).tab('show');
-                    } else {
-                        $(".nav .nav-link:last", wizardElement).tab('show');
+                var form = $("#dynamic-advanced-form-plugins-id");
+                var wizardDiv = modal.originalModal.find(".dynamic-form-wizard");
+
+                // activiate first tab
+                var firstTab = $(".nav .nav-link:first", wizardDiv);
+                var targetPanelId = $(firstTab).attr("href");
+                $(firstTab).removeClass("disabled");
+                $(targetPanelId).addClass("active show");
+                console.log("id of target = " + $(targetPanelId).attr("id"));
+                $(firstTab).tab('show');
+
+                var closeButton = modal.addButton({
+                    label: "Close",
+                    cssClass: "btn btn-danger mr-auto",
+                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                        return modalWrapper.hide();
                     }
                 });
-                $(".next-button").on("click", function () {
-                    var wizardElement = $(this).parents(".bootstrap-pill-wizard").first();
-                    var currentActiveElement = $(".nav .nav-link.active.show", wizardElement);
-                    var nextActiveElement = $(currentActiveElement).next();
-                    console.log("next-button current[" + $(currentActiveElement).attr("id") + "], next [" + $(nextActiveElement).attr("id") + "]");
-                    if (!$("#test-form-validation-with-colors-icons").valid()) {
-                        return false;
-                    }
-                    if ($(nextActiveElement).length > 0) {
-                        $(nextActiveElement).removeClass("disabled");
-                        $(nextActiveElement).tab('show');
-                    } else {
-                        $(".nav .nav-link:first", wizardElement).tab('show');
+                var previousButton = modal.addButton({
+                    label: "Previous",
+                    cssClass: "btn btn-primary",
+                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                        var currentActiveElement = $(".nav .nav-link.active.show", wizardDiv);
+                        var previousElement = $(currentActiveElement).prev();
+                        console.log("prev-button current[" + $(currentActiveElement).attr("id") + "], next [" + $(previousElement).attr("id") + "]");
+                        if ($(previousElement).length > 0) {
+                            $(previousElement).tab('show');
+                        }
                     }
                 });
+                var nextButton = modal.addButton({
+                    label: "Next",
+                    cssClass: "btn btn-primary",
+                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                        var currentActiveElement = $(".nav .nav-link.active.show", wizardDiv);
+                        var nextActiveElement = $(currentActiveElement).next();
+                        console.log("next-button current[" + $(currentActiveElement).attr("id") + "], next [" + $(nextActiveElement).attr("id") + "]");
+                        if (!form.valid()) {
+                            return false;
+                        }
+                        if ($(nextActiveElement).length > 0) {
+                            $(nextActiveElement).removeClass("disabled");
+                            $(nextActiveElement).tab('show');
+                        }
+                    }
+                });
+                var sendButton = modal.addButton({
+                    label: "Send",
+                    cssClass: "btn btn-success",
+                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                        form.trigger("submit");
+                    }
+                });
+
+                $(sendButton).hide();
+
+                modal.originalModal.find(".modal-footer").addClass("justify-content-start");
+
                 $('[data-toggle="pill"]').on('show.bs.tab', function (e) {
                     console.log("show.bs.tab = " + $(e.target).attr("id")); // newly activated tab
                     console.log("show.bs.tab = " + $(e.relatedTarget).attr("id")); // previous active tab
 //                    e.preventDefault();
                 });
                 $('[data-toggle="pill"]').on('shown.bs.tab', function (e) {
-                    var wizardElement = $(this).parents(".bootstrap-pill-wizard").first();
                     console.log("shown.bs.tab = " + $(e.target).attr("id")); // newly activated tab
                     console.log("shown.bs.tab = " + $(e.relatedTarget).attr("id")); // previous active tab
                     var currentShownElement = $(e.target);
                     if ($(currentShownElement).prev().length > 0) {
-                        $(".previous-button", wizardElement).prop("disabled", false);
-                        $(".previous-button", wizardElement).removeClass("disabled");
+                        $(previousButton).prop("disabled", false);
+                        $(previousButton).removeClass("disabled");
                     } else {
-                        $(".previous-button", wizardElement).prop("disabled", true);
-                        $(".previous-button", wizardElement).addClass("disabled");
+                        $(previousButton).prop("disabled", true);
+                        $(previousButton).addClass("disabled");
                     }
                     if ($(currentShownElement).next().length > 0) {
-                        $(".next-button", wizardElement).prop("disabled", false);
-                        $(".next-button", wizardElement).removeClass("disabled");
+                        $(nextButton).prop("disabled", false);
+                        $(nextButton).removeClass("disabled");
+                        $(sendButton).prop("disabled", true);
+                        $(sendButton).addClass("disabled");
+                        $(nextButton).show(200);
+                        $(sendButton).hide(200);
                     } else {
-                        $(".next-button", wizardElement).prop("disabled", true);
-                        $(".next-button", wizardElement).addClass("disabled");
+                        $(nextButton).prop("disabled", true);
+                        $(nextButton).addClass("disabled");
+                        $(sendButton).prop("disabled", false);
+                        $(sendButton).removeClass("disabled");
+                        $(nextButton).hide(200);
+                        $(sendButton).show(200);
                     }
-                    //                    e.preventDefault();
                 });
                 $('[data-toggle="pill"]').on('hidden.bs.tab', function (e) {
                     console.log("hidden.bs.tab = " + $(e.target).attr("id")); // newly activated tab
@@ -440,17 +536,221 @@
                     if (newTabIsSmaller) {
                         return true;
                     }
-                    if (!$("#test-form-validation-with-colors-icons").valid()) {
+                    if (!form.valid()) {
                         return false;
                     }
                 });
 
-                $("#test-form-validation-with-colors-icons").on('submit', function (event) {
-                    if (!$(this).valid()) {
-                        return;
+                form.ajaxForm({
+                    clearForm: true, // clear all form fields after successful submit
+                    resetForm: true, // reset the form after successful submit
+                    beforeSerialize: function ($form, options) {
+                        $("#summernote").summernote('triggerEvent', 'change');
+                        if (!$form.valid()) {
+                            return false;
+                        }
+                    },
+                    beforeSubmit: function (formData, jqForm, options) {
+
+                    },
+                    success: function (formData, jqForm, options) {
+                        form.find("textarea[name='address']").summernote('code', '');
+                        form.resetForm();
+                        form.find(".form-group.has-success").removeClass(".has-success");
                     }
                 });
-                validator = null;
+                // pre-submit callback
+
+                jQuery.validator.addMethod("validDateTime", function (value, element) {
+                    return this.optional(element) || moment(value, "DD/MM/YYYY HH:mm", true).isValid();
+                }, "Please enter a valid date in the format DD/MM/YYYY HH:MI");
+
+                jQuery.validator.addMethod("dateTimeBeforeNow",
+                        function (value, element, params) {
+                            if (this.optional(element) || $(params).val() === "")
+                                return true;
+                            if (moment(value, "DD/MM/YYYY HH:mm").isBefore(moment()))
+                                return true;
+                            return false;
+                        }, 'Must be less than Now.');
+
+                jQuery.validator.addMethod("validDate", function (value, element) {
+                    return this.optional(element) || moment(value, "DD/MM/YYYY", true).isValid();
+                }, "Please enter a valid date in the format DD/MM/YYYY");
+
+                jQuery.validator.addMethod("dateBeforeNow", function (value, element, params) {
+                    if (this.optional(element) || value === "")
+                        return true;
+                    if (moment(value, "DD/MM/YYYY").isBefore(moment().set({hour: 0, minute: 0, second: 0, millisecond: 0})))
+                        return true;
+                    return false;
+                }, 'Must be less than Now.');
+
+                jQuery.validator.addMethod("summernoteRequired", function (value, element, params) {
+                    if (this.optional(element))
+                        return true;
+                    if (value !== "" && value !== "<p><br></p>")
+                        return true;
+                    return false;
+                }, 'Kindly Provide a value');
+
+                validator = form.validate($.extend(true, {}, window.jqueryValidationDefaultOptions, {
+//                    ignore: ":hidden",
+                    ignore: ":hidden:not(.forceValidate), [contenteditable='true']:not([name])",
+                    rules: {
+                        fullName: {
+                            required: true},
+                        email: {
+                            required: true,
+                            email: true,
+                            minlength: 5,
+                            maxlength: 50
+                        },
+                        birthOfDate: {
+                            required: true,
+                            validDate: true,
+                            dateBeforeNow: true
+                        },
+                        countryId: {
+                            required: true
+                        },
+                        address: {
+                            required: true,
+                            maxlength: 400
+                        },
+                        userName: {
+                            required: true
+                        },
+                        password: {
+                            required: true,
+                            minlength: 6,
+                            maxlength: 20
+                        },
+                        rpassword: {
+                            required: true,
+                            equalTo: "#password"
+                        },
+                        profilePicture: {
+                            required: true
+                        },
+                        tnc: {
+                            required: true
+                        },
+                        note: {
+                            required: true,
+                            summernoteRequired: true
+                        }
+                    },
+                    messages: {
+                        fullName: {
+                            required: "Kindly provide us with your full name"
+                        },
+                        email: {
+                            required: "Kindly provide your email address",
+                            email: "Kindly provide a valid email address"
+                        },
+                        birthOfDate: {
+                            required: "Kindly provide your Birth Of Date",
+                            validDate: "Kindly Provide a valid date value in format DD/MM/YYYY",
+                            dateBeforeNow: "Kindly Provide a date in the past before today at least"
+                        },
+                        countryId: {
+                            required: "Kindly select your nationality"
+                        },
+                        address: {
+                            required: "Kindly provide your address"
+                        },
+                        note: {
+                            summernoteRequired: "Kindly Provide a note"
+                        }
+                    }
+                }));
+
+                form.find("input[name='birthOfDate']").inputmask({
+                    alias: "date",
+                    placeholder: "dd/mm/yyyy",
+                    inputFormat: "dd/mm/yyyy",
+                    displayFormat: true,
+                    hourFormat: "24",
+                    clearMaskOnLostFocus: false
+                });
+                form.find("input[name='birthOfDate']").daterangepicker({
+                    "opens": javatmp.settings.floatReverse,
+                    //                    startDate: false,
+                    singleDatePicker: true,
+                    showDropdowns: true,
+                    timePicker: false,
+                    timePickerIncrement: 1,
+                    timePicker24Hour: true,
+                    autoApply: true,
+                    autoUpdateInput: false,
+                    minDate: '01/01/1900',
+                    maxDate: '31/12/2099',
+                    //                    maxDate: '',
+                    //                    minDate: moment(),
+                    locale: {
+                        "direction": javatmp.settings.direction,
+                        format: 'DD/MM/YYYY'
+                    }
+                }, function (start, end, label) {
+                    var formatedDateSelected = moment(start).format("DD/MM/YYYY");
+                    form.find("input[name='birthOfDate']").val(formatedDateSelected);
+                });
+                var modalZIndex = modal.originalModal.css('zIndex');
+                modalZIndex = modalZIndex + 1;
+
+                form.find("textarea[name='address']").summernote({height: 250});
+
+                $.fn.select2.defaults.set("theme", "bootstrap");
+                $.fn.select2.defaults.set("dir", javatmp.settings.direction);
+                form.find("select[name='countryId']").select2({
+                    theme: "bootstrap",
+                    dir: javatmp.settings.direction,
+                    allowClear: true,
+                    placeholder: "Select a country",
+                    containerCssClass: ':all:',
+                    width: '',
+                    templateSelection: formatCountrySelection,
+                    templateResult: formatCountry,
+                    escapeMarkup: function (markup) {
+                        return markup;
+                    }
+                });
+
+                $(".daterangepicker.dropdown-menu").css('z-index', modalZIndex);
+                $(".select2-container--bootstrap").css('z-index', modalZIndex);
+
+
+                function formatCountry(repo) {
+                    if (repo.loading)
+                        return repo.text;
+                    var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
+
+                    var markup =
+                            "<div class='select2-result-repository clearfix'>" +
+                            "    <div class='select2-result-repository__avatar'><img src='" + imagePath + "' /></div>" +
+                            "    <div class='select2-result-repository__title'>" + repo.text + " (" + repo.id + ")</div>" +
+                            "</div>";
+
+                    return markup;
+                }
+                function formatCountrySelection(repo) {
+                    if (!repo.id) {
+                        return repo.text;
+                    }
+
+                    var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
+
+                    var markup =
+                            "<div class='select2-result-repository clearfix'>" +
+                            "    <div class='select2-result-repository__avatar'><img src='" + imagePath + "' /></div>" +
+                            "    <div class='select2-result-repository__title'>" + repo.text + " (" + repo.id + ")</div>" +
+                            "</div>";
+
+                    return markup;
+                }
+
+
             });
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
