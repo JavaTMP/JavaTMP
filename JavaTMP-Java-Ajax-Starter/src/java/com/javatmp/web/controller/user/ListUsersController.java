@@ -33,14 +33,22 @@ public class ListUsersController extends HttpServlet {
 
         Page<User> requestedPage = new Page<>(User.class);
         try {
+
             MvcHelper.populateBeanByRequestParameters(request, requestedPage);
+            System.out.println("requestedPage [" + MvcHelper.deepToString(requestedPage) + "]");
+            // check default values:
+            if (requestedPage.getRequestedPageNum() == null || requestedPage.getRequestedPageNum() == 0) {
+                requestedPage.setRequestedPageNum(1);
+            }
+            if (requestedPage.getNumOfRowsPerPage() == null || requestedPage.getNumOfRowsPerPage() == 0) {
+                requestedPage.setNumOfRowsPerPage(10);
+            }
             requestedPage = cs.listUsers(requestedPage);
 
             responseMessage.setOverAllStatus(true);
             responseMessage.setData(requestedPage);
             Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
                     .registerTypeAdapter(Class.class, new ClassTypeAdapter())
-                    //                .registerTypeAdapter(Date.class, new DateTypeAdapter())
                     .create();
             String json = gson.toJson(responseMessage);
             System.out.println("response [" + json + "]");
