@@ -32,35 +32,29 @@ public class ListUsersController extends HttpServlet {
         UserService cs = sf.getUserService();
 
         Page<User> requestedPage = new Page<>(User.class);
-        try {
+//        try {
 
-            MvcHelper.populateBeanByRequestParameters(request, requestedPage);
-            System.out.println("requestedPage [" + MvcHelper.deepToString(requestedPage) + "]");
-            // check default values:
-            if (requestedPage.getRequestedPageNum() == null || requestedPage.getRequestedPageNum() == 0) {
-                requestedPage.setRequestedPageNum(1);
-            }
-            if (requestedPage.getNumOfRowsPerPage() == null || requestedPage.getNumOfRowsPerPage() == 0) {
-                requestedPage.setNumOfRowsPerPage(10);
-            }
-            requestedPage = cs.listUsers(requestedPage);
-
-            responseMessage.setOverAllStatus(true);
-            responseMessage.setData(requestedPage);
-            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-                    .registerTypeAdapter(Class.class, new ClassTypeAdapter())
-                    .create();
-            String json = gson.toJson(responseMessage);
-            System.out.println("response [" + json + "]");
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(json);
-
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(ListUsersController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvocationTargetException ex) {
-            Logger.getLogger(ListUsersController.class.getName()).log(Level.SEVERE, null, ex);
+//            MvcHelper.populateBeanByRequestParameters(request, requestedPage);
+        System.out.println("requestedPage [" + MvcHelper.deepToString(requestedPage) + "]");
+        // check default values:
+        if (requestedPage.getRequestedPageNum() == null || requestedPage.getRequestedPageNum() == 0) {
+            requestedPage.setRequestedPageNum(1);
         }
+        if (requestedPage.getNumOfRowsPerPage() == null || requestedPage.getNumOfRowsPerPage() == 0) {
+            requestedPage.setNumOfRowsPerPage(10);
+        }
+        requestedPage = cs.listUsers(requestedPage);
+
+        responseMessage.setOverAllStatus(true);
+        responseMessage.setData(requestedPage);
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+                .registerTypeAdapter(Class.class, new ClassTypeAdapter())
+                .create();
+        String json = gson.toJson(responseMessage);
+        System.out.println("response [" + json + "]");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
 
     }
 }
