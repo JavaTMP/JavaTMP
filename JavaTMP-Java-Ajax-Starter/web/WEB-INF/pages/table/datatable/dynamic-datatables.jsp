@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <table width="100%" cellspacing="0" class="table table-bordered table-hover display nowrap" id="defalut-dataTables-example">
+                    <table width="100%" cellspacing="0" class="table table-bordered table-hover display nowrap table-striped" id="defalut-dataTables-example">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -43,6 +43,7 @@
         jQuery(function ($) {
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
+            $.fn.dataTable.ext.errMode = 'none';
             var table = $('#defalut-dataTables-example').DataTable({
 //                responsive: true,
                 scrollY: 400,
@@ -64,9 +65,18 @@
                     {data: 'lastName'},
                     {data: 'position'},
                     {data: 'office'},
-                    {data: 'birthOfDate'},
-                    {data: 'joiningDate'},
-                    {data: 'salary'},
+                    {
+                        data: 'birthOfDate', "type": "date",
+                        "render": function (data, type, row) {
+                            return Math.ceil(moment().diff(moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ"), 'years', true));
+                        }
+                    },
+                    {
+                        data: 'joiningDate', "type": "date",
+                        "render": function (data, type, row) {
+                            return moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("DD/MM/YYYY HH:mm");
+                        }},
+                    {data: 'salary', "type": "num", render: $.fn.dataTable.render.number(',', '.', 2, '$')},
                     {data: 'mobile'},
                     {data: 'email'}
                 ]
