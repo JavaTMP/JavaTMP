@@ -48,15 +48,15 @@
 //                responsive: true,
                 scrollY: 400,
                 scrollX: true,
-                scrollCollapse: true,
-                "searching": false,
-                searchDelay: 400,
+                scrollCollapse: false,
+                "searching": true,
+                searchDelay: 500,
                 "processing": true,
                 "serverSide": true,
                 "ajax": {
                     "url": javatmp.settings.contextPath + "/user/ListUsersController",
                     "data": function (currentDate) {
-                        currentDate._ajaxGlobalBlockUI = true; // window blocked until data return
+                        currentDate._ajaxGlobalBlockUI = false; // window blocked until data return
                     },
                     "dataSrc": function (json) {
                         json["recordsTotal"] = json.data.recordsTotal;

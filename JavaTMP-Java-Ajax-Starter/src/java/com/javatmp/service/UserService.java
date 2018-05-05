@@ -9,6 +9,7 @@ import com.javatmp.domain.User;
 import com.javatmp.domain.table.DataTableColumnSpecs;
 import com.javatmp.domain.table.DataTableRequest;
 import com.javatmp.domain.table.DataTableResults;
+import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.Page;
 import java.util.Collections;
 import java.util.Comparator;
@@ -43,7 +44,8 @@ public class UserService {
 
     public DataTableResults<User> listUsers(DataTableRequest<User> tableRequest) {
         List<User> retList = new LinkedList<>();
-        List<User> db = new LinkedList<>(this.dBFaker.getUsers());
+        List<User> database = this.dBFaker.getUsers();
+        List<User> db = null;
         DataTableColumnSpecs orderOrder = tableRequest.getOrder();
 //        (o1, o2) -> {
 //            String orderColumn = orderOrder.getIndex();
@@ -53,6 +55,20 @@ public class UserService {
 //            }
 //        }
 //        );
+
+        if (tableRequest.isGlobalSearch()) {
+            System.out.println("*** isGlobalSearch starting ***");
+            String query = tableRequest.getSearch().trim().toLowerCase();
+            db = new LinkedList<>();
+            for (User user : database) {
+                String userStr = MvcHelper.deepToString(user);
+                if (userStr.toLowerCase().contains(query)) {
+                    db.add(user);
+                }
+            }
+        } else {
+            db = new LinkedList<>(this.dBFaker.getUsers());
+        }
 
         Collections.sort(db, new Comparator<User>() {
             @Override
