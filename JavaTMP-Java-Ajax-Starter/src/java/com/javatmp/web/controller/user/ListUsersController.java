@@ -35,14 +35,21 @@ public class ListUsersController extends HttpServlet {
 //        try {
 
 //            MvcHelper.populateBeanByRequestParameters(request, requestedPage);
-        System.out.println("requestedPage [" + MvcHelper.deepToString(requestedPage) + "]");
-        // check default values:
-        if (requestedPage.getRequestedPageNum() == null || requestedPage.getRequestedPageNum() == 0) {
-            requestedPage.setRequestedPageNum(1);
-        }
-        if (requestedPage.getNumOfRowsPerPage() == null || requestedPage.getNumOfRowsPerPage() == 0) {
+        String startStr = request.getParameter("start");
+        String lengthStr = request.getParameter("length");
+        System.out.println("startStr [" + startStr + "], lengthStr [" + lengthStr + "]");
+        if (lengthStr != null) {
+            requestedPage.setNumOfRowsPerPage(Integer.parseInt(lengthStr));
+        } else {
             requestedPage.setNumOfRowsPerPage(10);
         }
+        if (startStr != null) {
+            Integer start = Integer.parseInt(startStr);
+            requestedPage.setRequestedPageNum((start * requestedPage.getNumOfRowsPerPage()) / requestedPage.getNumOfRowsPerPage() + 1);
+        } else {
+            requestedPage.setRequestedPageNum(1);
+        }
+        System.out.println("numOfRow [" + requestedPage.getNumOfRowsPerPage() + "], requestedPageNum[" + requestedPage.getRequestedPageNum() + "]");
         requestedPage = cs.listUsers(requestedPage);
 
         responseMessage.setOverAllStatus(true);

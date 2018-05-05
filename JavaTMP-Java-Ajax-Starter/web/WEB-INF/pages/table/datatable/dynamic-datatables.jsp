@@ -20,6 +20,7 @@
                     <table width="100%" cellspacing="0" class="table table-bordered table-hover display nowrap" id="defalut-dataTables-example">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>First name</th>
                                 <th>Last name</th>
                                 <th>Position</th>
@@ -51,7 +52,6 @@
                 "serverSide": true,
                 "ajax": {
                     "url": javatmp.settings.contextPath + "/user/ListUsersController",
-                    "dataSrc1": "data.records",
                     "dataSrc": function (json) {
                         json["recordsTotal"] = json.data.allCount;
                         json["recordsFiltered"] = json.data.allCount;
@@ -59,6 +59,7 @@
                     }
                 },
                 columns: [
+                    {data: 'id'},
                     {data: 'firstName'},
                     {data: 'lastName'},
                     {data: 'position'},
@@ -70,6 +71,7 @@
                     {data: 'email'}
                 ]
             });
+
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
 
@@ -96,7 +98,7 @@
                 $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenExpand);
                 // it is important to destroy table before leaving current ajax page
                 // so the fixedHeader will not be kept on site pages.
-                table.clear().draw();
+//                table.clear().draw();
                 table.destroy(true);
                 return true;
             });

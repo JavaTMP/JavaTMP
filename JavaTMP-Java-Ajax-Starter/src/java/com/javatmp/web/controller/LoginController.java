@@ -13,6 +13,7 @@ import com.javatmp.util.MD5Util;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
+import java.math.BigDecimal;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -50,7 +51,12 @@ public class LoginController extends HttpServlet {
             user.setMobile("00987654321000");
             user.setLang(bundle.getLocale().getLanguage());
             user.setTheme("default");
-
+            user.setPosition("Super Administrator");
+            user.setOffice("New York");
+            user.setBirthOfDate(new Date(-399571200000L));
+            user.setJoiningDate(new Date(1293307200000L));
+            user.setSalary(new BigDecimal("100000"));
+            user.setMobile("123456789");
             sf.getUserService().createNewUser(user);
 
             System.out.println("User created [" + MvcHelper.deepToString(user) + "]");
