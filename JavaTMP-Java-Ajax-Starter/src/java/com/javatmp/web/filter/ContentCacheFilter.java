@@ -34,7 +34,7 @@ public class ContentCacheFilter implements Filter {
 
         try {
             //set timestamp check
-            if (!cache.containsKey(id)) {
+            if (!cache.containsKey(id) || cache.get(id).content == null || cache.get(id).content.length == 0) {
 //                if (!cache.containsKey(id)) {
                 System.out.println("Not cached yet id[" + id + "]");
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();

@@ -1082,6 +1082,12 @@
                                                     Dynamic Datatables Demo
                                                 </a>
                                             </li>
+                                            <li>
+                                                <a href="${pageContext.request.contextPath}/pages/table/datatable/dynamic-individual-column-searching-datatables">
+                                                    <i class="far fa-lg fa-fw fa-list-alt"></i>
+                                                    Dynamic Individual Column Searching Datatables
+                                                </a>
+                                            </li>
                                         </ul>
                                     </li>
                                 </ul>
