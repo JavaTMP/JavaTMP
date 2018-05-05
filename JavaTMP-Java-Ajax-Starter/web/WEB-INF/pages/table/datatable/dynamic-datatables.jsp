@@ -5,7 +5,7 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <div id="table-panel" class="card my-3">
+            <div id="table-panel" class="card">
                 <div class="card-header">
                     Users Table
                     <div class="options float-right">
@@ -53,9 +53,9 @@
                 "ajax": {
                     "url": javatmp.settings.contextPath + "/user/ListUsersController",
                     "dataSrc": function (json) {
-                        json["recordsTotal"] = json.data.allCount;
-                        json["recordsFiltered"] = json.data.allCount;
-                        return json.data.records;
+                        json["recordsTotal"] = json.data.recordsTotal;
+                        json["recordsFiltered"] = json.data.recordsFiltered;
+                        return json.data.data;
                     }
                 },
                 columns: [

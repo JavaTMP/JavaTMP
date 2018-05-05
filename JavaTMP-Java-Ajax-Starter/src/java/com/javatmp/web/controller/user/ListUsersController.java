@@ -3,6 +3,9 @@ package com.javatmp.web.controller.user;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.javatmp.domain.User;
+import com.javatmp.domain.table.DataTableRequest;
+import com.javatmp.domain.table.DataTableResults;
+import com.javatmp.domain.table.PaginationCriteria;
 import com.javatmp.mvc.ClassTypeAdapter;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.Page;
@@ -31,29 +34,15 @@ public class ListUsersController extends HttpServlet {
         ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         UserService cs = sf.getUserService();
 
-        Page<User> requestedPage = new Page<>(User.class);
+        DataTableRequest<User> tableRequest = new DataTableRequest<User>(request);
+
+        System.out.println("datatableRequest [" + MvcHelper.deepToString(tableRequest) + "]");
 //        try {
 
-//            MvcHelper.populateBeanByRequestParameters(request, requestedPage);
-        String startStr = request.getParameter("start");
-        String lengthStr = request.getParameter("length");
-        System.out.println("startStr [" + startStr + "], lengthStr [" + lengthStr + "]");
-        if (lengthStr != null) {
-            requestedPage.setNumOfRowsPerPage(Integer.parseInt(lengthStr));
-        } else {
-            requestedPage.setNumOfRowsPerPage(10);
-        }
-        if (startStr != null) {
-            Integer start = Integer.parseInt(startStr);
-            requestedPage.setRequestedPageNum((start * requestedPage.getNumOfRowsPerPage()) / requestedPage.getNumOfRowsPerPage() + 1);
-        } else {
-            requestedPage.setRequestedPageNum(1);
-        }
-        System.out.println("numOfRow [" + requestedPage.getNumOfRowsPerPage() + "], requestedPageNum[" + requestedPage.getRequestedPageNum() + "]");
-        requestedPage = cs.listUsers(requestedPage);
+        DataTableResults<User> dataTableResult = cs.listUsers(tableRequest);
 
         responseMessage.setOverAllStatus(true);
-        responseMessage.setData(requestedPage);
+        responseMessage.setData(dataTableResult);
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
                 .registerTypeAdapter(Class.class, new ClassTypeAdapter())
                 .create();

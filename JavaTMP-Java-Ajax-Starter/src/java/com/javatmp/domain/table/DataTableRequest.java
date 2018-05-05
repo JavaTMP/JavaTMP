@@ -17,7 +17,7 @@ public class DataTableRequest<T> {
     /**
      * The draw.
      */
-    private String draw;
+    private Integer draw;
 
     /**
      * The start.
@@ -194,7 +194,7 @@ public class DataTableRequest<T> {
      *
      * @return the draw
      */
-    public String getDraw() {
+    public Integer getDraw() {
         return draw;
     }
 
@@ -203,7 +203,7 @@ public class DataTableRequest<T> {
      *
      * @param draw the draw to set
      */
-    public void setDraw(String draw) {
+    public void setDraw(Integer draw) {
         this.draw = draw;
     }
 
@@ -239,7 +239,7 @@ public class DataTableRequest<T> {
             this.setStart(Integer.parseInt(request.getParameter(PaginationCriteria.PAGE_NO)));
             this.setLength(Integer.parseInt(request.getParameter(PaginationCriteria.PAGE_SIZE)));
             this.setUniqueId(request.getParameter("_"));
-            this.setDraw(request.getParameter(PaginationCriteria.DRAW));
+            this.setDraw(Integer.parseInt(request.getParameter(PaginationCriteria.DRAW)));
 
             this.setSearch(request.getParameter("search[value]"));
             this.setRegex(Boolean.valueOf(request.getParameter("search[regex]")));

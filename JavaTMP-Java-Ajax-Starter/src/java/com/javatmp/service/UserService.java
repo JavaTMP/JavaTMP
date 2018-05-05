@@ -6,6 +6,8 @@
 package com.javatmp.service;
 
 import com.javatmp.domain.User;
+import com.javatmp.domain.table.DataTableRequest;
+import com.javatmp.domain.table.DataTableResults;
 import com.javatmp.mvc.Page;
 import java.util.LinkedList;
 import java.util.List;
@@ -36,16 +38,21 @@ public class UserService {
         return user;
     }
 
-    public Page<User> listUsers(Page<User> page) {
+    public DataTableResults<User> listUsers(DataTableRequest<User> tableRequest) {
         List<User> retList = new LinkedList<>();
         List<User> db = this.dBFaker.getUsers();
-        for (int i = (page.getRequestedPageNum() - 1) * page.getNumOfRowsPerPage();
-                i < db.size() && i < (page.getRequestedPageNum()) * page.getNumOfRowsPerPage(); i++) {
+        for (int i = tableRequest.getStart();
+                i < db.size() && i < (tableRequest.getStart() + tableRequest.getLength()); i++) {
             retList.add(db.get(i));
         }
-        page.setRecords(retList);
-        page.setAllCount(Long.valueOf(db.size()));
-        return page;
+
+        DataTableResults<User> dataTableResult = new DataTableResults<>();
+        dataTableResult.setListOfDataObjects(retList);
+        dataTableResult.setRecordsTotal(Long.valueOf(db.size()));
+        dataTableResult.setRecordsFiltered(Long.valueOf(db.size()));
+        dataTableResult.setDraw(tableRequest.getDraw());
+
+        return dataTableResult;
     }
 
 }

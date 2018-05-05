@@ -9,17 +9,17 @@ public class DataTableResults<T> {
     /**
      * The draw.
      */
-    private String draw;
+    private Integer draw;
 
     /**
      * The records filtered.
      */
-    private String recordsFiltered;
+    private Long recordsFiltered;
 
     /**
      * The records total.
      */
-    private String recordsTotal;
+    private Long recordsTotal;
 
     /**
      * The list of data objects.
@@ -36,7 +36,7 @@ public class DataTableResults<T> {
      *
      * @return the draw
      */
-    public String getDraw() {
+    public Integer getDraw() {
         return draw;
     }
 
@@ -45,7 +45,7 @@ public class DataTableResults<T> {
      *
      * @param draw the draw to set
      */
-    public void setDraw(String draw) {
+    public void setDraw(Integer draw) {
         this.draw = draw;
     }
 
@@ -54,7 +54,7 @@ public class DataTableResults<T> {
      *
      * @return the recordsFiltered
      */
-    public String getRecordsFiltered() {
+    public Long getRecordsFiltered() {
         return recordsFiltered;
     }
 
@@ -63,7 +63,7 @@ public class DataTableResults<T> {
      *
      * @param recordsFiltered the recordsFiltered to set
      */
-    public void setRecordsFiltered(String recordsFiltered) {
+    public void setRecordsFiltered(Long recordsFiltered) {
         this.recordsFiltered = recordsFiltered;
     }
 
@@ -72,7 +72,7 @@ public class DataTableResults<T> {
      *
      * @return the recordsTotal
      */
-    public String getRecordsTotal() {
+    public Long getRecordsTotal() {
         return recordsTotal;
     }
 
@@ -81,7 +81,7 @@ public class DataTableResults<T> {
      *
      * @param recordsTotal the recordsTotal to set
      */
-    public void setRecordsTotal(String recordsTotal) {
+    public void setRecordsTotal(Long recordsTotal) {
         this.recordsTotal = recordsTotal;
     }
 
