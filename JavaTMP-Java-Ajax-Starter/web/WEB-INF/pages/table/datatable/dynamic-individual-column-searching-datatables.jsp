@@ -88,18 +88,23 @@
                 },
                 initComplete: function () {
                     this.api().columns().every(function (index) {
-
                         var column = this;
-                        var input = $('<input class="form-control" style="width:100%;" />')
-                                .appendTo($("#filterHeader").find('th').eq(index).empty())
-                                .on('change', function () {
-                                    var val = $.fn.dataTable.util.escapeRegex($(this).val());
-                                    column.search(val ? val : '', true, false).draw();
-                                });
+                        if (index === 0) {
+                            var input = $('<input id="id-search-input-id" class="form-control"/>')
+                                    .appendTo($("#filterHeader").find('th').eq(0).empty())
+                                    .on('keyup change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                                        column.search(val ? val : '', true, false).draw();
+                                    });
+                        } else {
+                            var input = $('<input class="form-control" style="width:100%;" />')
+                                    .appendTo($("#filterHeader").find('th').eq(index).empty())
+                                    .on('keyup change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                                        column.search(val ? val : '', true, false).draw();
+                                    });
+                        }
 
-//                        column.data().unique().sort().each(function (d, j) {
-//                            select.append('<option value="' + d + '">' + d + '</option>');
-//                        });
                     });
                 },
                 "ajax": {

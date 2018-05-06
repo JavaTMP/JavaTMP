@@ -11,10 +11,22 @@ import com.javatmp.domain.table.DataTableRequest;
 import com.javatmp.domain.table.DataTableResults;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.Page;
+import java.beans.BeanInfo;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.apache.commons.beanutils.BeanUtils;
 
 /**
  *
@@ -22,7 +34,7 @@ import java.util.List;
  */
 public class UserService {
 
-    private DBFaker dBFaker;
+    private final DBFaker dBFaker;
 
     public UserService(DBFaker dBFaker) {
         this.dBFaker = dBFaker;
@@ -47,14 +59,6 @@ public class UserService {
         List<User> database = this.dBFaker.getUsers();
         List<User> db = null;
         DataTableColumnSpecs orderOrder = tableRequest.getOrder();
-//        (o1, o2) -> {
-//            String orderColumn = orderOrder.getIndex();
-//
-//            if (orderColumn == 3) { // position
-//
-//            }
-//        }
-//        );
 
         if (tableRequest.isGlobalSearch()) {
             System.out.println("*** isGlobalSearch starting ***");
@@ -70,6 +74,120 @@ public class UserService {
             db = new LinkedList<>(this.dBFaker.getUsers());
         }
 
+        Map<String, Object> searchParameters = new HashMap<>();
+        int index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(0, "id"));
+        DataTableColumnSpecs column = tableRequest.getColumns().get(index);
+        searchParameters.put("id", column.getSearch());
+
+        index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(1, "firstName"));
+        column = tableRequest.getColumns().get(index);
+        searchParameters.put("firstName", column.getSearch());
+
+        index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(2, "lastName"));
+        column = tableRequest.getColumns().get(index);
+        searchParameters.put("lastName", column.getSearch());
+
+        index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(3, "position"));
+        column = tableRequest.getColumns().get(index);
+        searchParameters.put("position", column.getSearch());
+
+        index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(4, "office"));
+        column = tableRequest.getColumns().get(index);
+        searchParameters.put("office", column.getSearch());
+
+        index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(5, "birthOfDate"));
+        column = tableRequest.getColumns().get(index);
+        searchParameters.put("birthOfDate", column.getSearch());
+
+        index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(6, "joiningDate"));
+        column = tableRequest.getColumns().get(index);
+        searchParameters.put("joiningDate", column.getSearch());
+
+        index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(7, "salary"));
+        column = tableRequest.getColumns().get(index);
+        searchParameters.put("salary", column.getSearch());
+
+        index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(8, "mobile"));
+        column = tableRequest.getColumns().get(index);
+        searchParameters.put("mobile", column.getSearch());
+
+        index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(9, "email"));
+        column = tableRequest.getColumns().get(index);
+        searchParameters.put("email", column.getSearch());
+
+// apply individual column search:
+        List<User> newDB = new LinkedList<>();
+        for (User user : db) {
+            try {
+                System.out.println("search [" + searchParameters + "]");
+                if (searchParameters.get("id") != null && !searchParameters.get("id").equals("")) {
+                    Object searchValueObject = searchParameters.get("id");
+                    Long searchValue = new Long(searchValueObject.toString());
+                    Long dbValue = user.getId();
+                    if (!dbValue.equals(searchValue)) {
+                        continue;
+                    }
+                }
+                if (searchParameters.get("firstName") != null && !searchParameters.get("firstName").equals("")) {
+                    Object searchValueObject = searchParameters.get("firstName");
+                    String searchValue = searchValueObject.toString().trim().toLowerCase();
+                    String dbValue = user.getFirstName();
+                    if (!dbValue.toLowerCase().contains(searchValue)) {
+                        continue;
+                    }
+                }
+                if (searchParameters.get("lastName") != null && !searchParameters.get("lastName").equals("")) {
+                    Object searchValueObject = searchParameters.get("lastName");
+                    String searchValue = searchValueObject.toString().trim().toLowerCase();
+                    String dbValue = user.getLastName();
+                    if (!dbValue.toLowerCase().contains(searchValue)) {
+                        continue;
+                    }
+                }
+                if (searchParameters.get("position") != null && !searchParameters.get("position").equals("")) {
+                    Object searchValueObject = searchParameters.get("position");
+                    String searchValue = searchValueObject.toString().trim().toLowerCase();
+                    String dbValue = user.getPosition();
+                    if (!dbValue.toLowerCase().contains(searchValue)) {
+                        continue;
+                    }
+                }
+                if (searchParameters.get("office") != null && !searchParameters.get("office").equals("")) {
+                    Object searchValueObject = searchParameters.get("office");
+                    String searchValue = searchValueObject.toString().trim().toLowerCase();
+                    String dbValue = user.getOffice();
+                    if (!dbValue.toLowerCase().contains(searchValue)) {
+                        continue;
+                    }
+                }
+                if (searchParameters.get("birthOfDate") != null && !searchParameters.get("birthOfDate").equals("")) {
+                    Object searchValueObject = searchParameters.get("birthOfDate");
+                    String searchValue = searchValueObject.toString().trim().toLowerCase();
+                    Date dbValue = user.getBirthOfDate();
+                    Calendar cal = Calendar.getInstance();
+                    cal.add(Calendar.YEAR, Integer.parseInt(searchValue) * -1);
+                    Long search = cal.getTimeInMillis();
+                    if (dbValue.getTime() > search) {
+                        continue;
+                    }
+                }
+                if (searchParameters.get("joiningDate") != null && !searchParameters.get("joiningDate").equals("")) {
+                    Object searchValueObject = searchParameters.get("joiningDate");
+                    String searchValue = searchValueObject.toString().trim().toLowerCase();
+                    Date dbValue = user.getJoiningDate();
+                    Calendar cal = Calendar.getInstance();
+                    cal.add(Calendar.YEAR, Integer.parseInt(searchValue) * -1);
+                    Long search = cal.getTimeInMillis();
+                    if (dbValue.getTime() > search) {
+                        continue;
+                    }
+                }
+                newDB.add(user);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        db = newDB;
         Collections.sort(db, new Comparator<User>() {
             @Override
             public int compare(User o1, User o2) {

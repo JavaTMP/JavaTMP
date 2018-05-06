@@ -44,6 +44,11 @@ public class DataTableColumnSpecs {
      */
     private String sortDir;
 
+    public DataTableColumnSpecs(int index, String data) {
+        this.setIndex(index);
+        this.setData(data);
+    }
+
     /**
      * Instantiates a new data table column specs.
      *
@@ -220,6 +225,23 @@ public class DataTableColumnSpecs {
         if (i == sortableCol) {
             this.setSortDir(sortDir);
         }
+    }
+
+    @Override
+    public boolean equals(Object aThat) {
+        if (this == aThat) {
+            return true;
+        }
+        if (!(aThat instanceof DataTableColumnSpecs)) {
+            return false;
+        }
+        //Alternative to the above line :
+        //if ( aThat == null || aThat.getClass() != this.getClass() ) return false;
+
+        //cast to native object is now safe
+        DataTableColumnSpecs that = (DataTableColumnSpecs) aThat;
+        //now a proper field-by-field evaluation can be made
+        return this.index == that.index && this.data.equals(that.data);
     }
 
 }
