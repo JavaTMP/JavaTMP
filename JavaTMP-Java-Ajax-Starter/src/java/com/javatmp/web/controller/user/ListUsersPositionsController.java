@@ -2,24 +2,21 @@ package com.javatmp.web.controller.user;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.javatmp.domain.User;
-import com.javatmp.domain.table.DataTableRequest;
-import com.javatmp.domain.table.DataTableResults;
 import com.javatmp.mvc.ClassTypeAdapter;
-import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.ResponseMessage;
 import com.javatmp.service.ServicesFactory;
 import com.javatmp.service.UserService;
 import com.javatmp.util.Constants;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/user/ListUsersController")
-public class ListUsersController extends HttpServlet {
+@WebServlet("/user/ListUsersPositionsController")
+public class ListUsersPositionsController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -29,15 +26,10 @@ public class ListUsersController extends HttpServlet {
         ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         UserService cs = sf.getUserService();
 
-        DataTableRequest<User> tableRequest = new DataTableRequest<User>(request);
-
-        System.out.println("datatableRequest [" + MvcHelper.deepToString(tableRequest) + "]");
-//        try {
-
-        DataTableResults<User> dataTableResult = cs.listUsers(tableRequest);
+        List<String> positions = cs.listUsersPositions();
 
         responseMessage.setOverAllStatus(true);
-        responseMessage.setData(dataTableResult);
+        responseMessage.setData(positions);
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
                 .registerTypeAdapter(Class.class, new ClassTypeAdapter())
                 .create();

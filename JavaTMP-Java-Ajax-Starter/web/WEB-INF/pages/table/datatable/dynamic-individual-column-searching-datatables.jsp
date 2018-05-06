@@ -67,6 +67,10 @@
         jQuery(function ($) {
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
+
+            $.fn.select2.defaults.set("theme", "bootstrap");
+            $.fn.select2.defaults.set("dir", javatmp.settings.direction);
+
             $.fn.dataTable.ext.errMode = 'none';
             var table = $('#defalut-dataTables-example').DataTable({
 //                responsive: true,
@@ -96,6 +100,36 @@
                                         var val = $.fn.dataTable.util.escapeRegex($(this).val());
                                         column.search(val ? val : '', true, false).draw();
                                     });
+                        } else if (index === 3) {
+                            var input = $(
+                                    '<div class="form-group m-0">' +
+                                    '    <select id="remoteCountriesSelectId" class="form-control">' +
+                                    '    </select>' +
+                                    '</div>').appendTo($("#filterHeader").find('th').eq(index).empty())
+                                    .select2({
+                                        theme: "bootstrap",
+                                        dir: javatmp.settings.direction,
+                                        allowClear: true,
+                                        placeholder: "Filter Positions",
+                                        containerCssClass: ':all:',
+                                        width: ''
+                                    });
+                            $.ajax({
+                                type: 'GET',
+                                url: javatmp.settings.contextPath + '/user/ListUsersPositionsController'
+                            }).then(function (data) {
+                                // create the option and append to Select2
+                                var option = new Option(data.full_name, data.id, true, true);
+                                studentSelect.append(option).trigger('change');
+
+                                // manually trigger the `select2:select` event
+                                studentSelect.trigger({
+                                    type: 'select2:select',
+                                    params: {
+                                        data: data
+                                    }
+                                });
+                            });
                         } else {
                             var input = $('<input class="form-control" style="width:100%;" />')
                                     .appendTo($("#filterHeader").find('th').eq(index).empty())

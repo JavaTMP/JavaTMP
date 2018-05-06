@@ -16,9 +16,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -44,6 +46,18 @@ public class UserService {
     public User createNewUser(User user) {
         this.dBFaker.addUser(user);
         return user;
+    }
+
+    public List<String> listUsersPositions() {
+        Set<String> retList = new LinkedHashSet<>();
+        List<User> database = this.dBFaker.getUsers();
+        for (int i = 0; i < database.size(); i++) {
+            retList.add(database.get(i).getPosition().trim());
+        }
+        List<String> ret = new LinkedList(retList);
+        Collections.sort(ret);
+
+        return ret;
     }
 
     public DataTableResults<User> listUsers(DataTableRequest<User> tableRequest) {
