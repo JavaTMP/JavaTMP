@@ -10,12 +10,7 @@ import com.javatmp.domain.table.DataTableColumnSpecs;
 import com.javatmp.domain.table.DataTableRequest;
 import com.javatmp.domain.table.DataTableResults;
 import com.javatmp.mvc.MvcHelper;
-import com.javatmp.mvc.Page;
-import java.beans.BeanInfo;
-import java.beans.Introspector;
-import java.beans.PropertyDescriptor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
@@ -24,9 +19,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.apache.commons.beanutils.BeanUtils;
 
 /**
  *
@@ -179,6 +171,30 @@ public class UserService {
                     cal.add(Calendar.YEAR, Integer.parseInt(searchValue) * -1);
                     Long search = cal.getTimeInMillis();
                     if (dbValue.getTime() > search) {
+                        continue;
+                    }
+                }
+                if (searchParameters.get("salary") != null && !searchParameters.get("salary").equals("")) {
+                    Object searchValueObject = searchParameters.get("salary");
+                    BigDecimal searchValue = new BigDecimal(searchValueObject.toString());
+                    BigDecimal dbValue = user.getSalary();
+                    if (dbValue.compareTo(searchValue) < 0) {
+                        continue;
+                    }
+                }
+                if (searchParameters.get("mobile") != null && !searchParameters.get("mobile").equals("")) {
+                    Object searchValueObject = searchParameters.get("mobile");
+                    String searchValue = searchValueObject.toString().trim().toLowerCase();
+                    String dbValue = user.getMobile();
+                    if (!dbValue.toLowerCase().contains(searchValue)) {
+                        continue;
+                    }
+                }
+                if (searchParameters.get("email") != null && !searchParameters.get("email").equals("")) {
+                    Object searchValueObject = searchParameters.get("email");
+                    String searchValue = searchValueObject.toString().trim().toLowerCase();
+                    String dbValue = user.getEmail();
+                    if (!dbValue.toLowerCase().contains(searchValue)) {
                         continue;
                     }
                 }

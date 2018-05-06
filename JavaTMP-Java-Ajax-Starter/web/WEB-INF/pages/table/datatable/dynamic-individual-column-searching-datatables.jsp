@@ -72,7 +72,7 @@
 //                responsive: true,
                 dom: "<'row'<'col-sm-6'i>>" +
                         "<'row'<'col-sm-12 px-0'tr>>" +
-                        "<'row'<'col-sm-5'l><'col-sm-7'p>>",
+                        "<'row'<'col-sm-5 py-1'l><'col-sm-7 py-1'p>>",
                 scrollY: 400,
                 scrollX: true,
                 "autoWidth": false,
