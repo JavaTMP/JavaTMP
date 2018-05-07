@@ -58,9 +58,6 @@
         #table-panel table.dataTable {
             margin: 0!important;
         }
-        #table-panel table.dataTable .dataTables_paginate {
-            text-align: center!important;
-        }
         table#defalut-dataTables-example {
             table-layout: fixed;
             word-wrap:break-word;
@@ -154,7 +151,7 @@
                                     }
                                 });
                             });
-                        } else if (index == 6) {
+                        } else if (index === 6) {
                             var input = $('<input class="form-control" />')
                                     .appendTo($("#filterHeader").find('th').eq(index).empty())
                                     .on('change', function () {
