@@ -16,7 +16,6 @@
                         <a href="#" class="remove"><i class="fa fa-times"></i></a>
                     </div>
                 </div>
-
                 <table cellspacing="0" class="table table-condensed table-bordered table-hover table-striped" id="defalut-dataTables-example">
                     <thead>
                         <tr>
@@ -35,7 +34,13 @@
                             <th></th>
                             <th></th>
                             <th></th>
-                            <th></th>
+                            <th>
+                                <div class="form-group m-0">
+                                    <select id="remotePositionsSelectId" class="form-control">
+                                        <!--<option value=""></option>-->
+                                    </select>
+                                </div>
+                            </th>
                             <th></th>
                             <th></th>
                             <th></th>
@@ -50,11 +55,13 @@
         </div>
     </div>
     <style type="text/css">
-        table{
-            /*margin: 0 auto;*/
-            /*width: 100%;*/
-            /*clear: both;*/
-            /*border-collapse: collapse;*/
+        #table-panel table.dataTable {
+            margin: 0!important;
+        }
+        #table-panel table.dataTable .dataTables_paginate {
+            text-align: center!important;
+        }
+        table#defalut-dataTables-example {
             table-layout: fixed;
             word-wrap:break-word;
         }
@@ -74,9 +81,9 @@
             $.fn.dataTable.ext.errMode = 'none';
             var table = $('#defalut-dataTables-example').DataTable({
 //                responsive: true,
-                dom: "<'row'<'col-sm-6'i>>" +
-                        "<'row'<'col-sm-12 px-0'tr>>" +
-                        "<'row'<'col-sm-5 py-1'l><'col-sm-7 py-1'p>>",
+                dom: "<'row'<'col-sm-12 px-0'tr>>" +
+                        "<'row'<'col-sm-6'i><'col-sm-6 pt-2 text-right'l>>" +
+                        "<'row'<'col-sm-12'p>>",
                 scrollY: 400,
                 scrollX: true,
                 "autoWidth": false,
@@ -101,37 +108,92 @@
                                         column.search(val ? val : '', true, false).draw();
                                     });
                         } else if (index === 3) {
-                            var input = $(
-                                    '<div class="form-group m-0">' +
-                                    '    <select id="remoteCountriesSelectId" class="form-control">' +
-                                    '    </select>' +
-                                    '</div>').appendTo($("#filterHeader").find('th').eq(index).empty())
-                                    .select2({
-                                        theme: "bootstrap",
-                                        dir: javatmp.settings.direction,
-                                        allowClear: true,
-                                        placeholder: "Filter Positions",
-                                        containerCssClass: ':all:',
-                                        width: ''
-                                    });
+                            var input = $("#remotePositionsSelectId");
+                            input.select2({
+                                theme: "bootstrap",
+                                dir: javatmp.settings.direction,
+                                allowClear: true,
+                                placeholder: "-- Filter --",
+                                containerCssClass: ':all:',
+                                multiple: false,
+                                minimumResultsForSearch: 0,
+//                                width: '242',
+//                                dropdownAutoWidth: true
+                            });
                             $.ajax({
                                 type: 'GET',
                                 url: javatmp.settings.contextPath + '/user/ListUsersPositionsController'
                             }).then(function (data) {
                                 // create the option and append to Select2
-                                var option = new Option(data.full_name, data.id, true, true);
-                                studentSelect.append(option).trigger('change');
-
-                                // manually trigger the `select2:select` event
-                                studentSelect.trigger({
-                                    type: 'select2:select',
-                                    params: {
-                                        data: data
+                                var select2Data = [];
+                                for (var i = 0; i < data.data.length; i++) {
+                                    var row = data.data[i];
+                                    var option = new Option(row, row, false, false);
+                                    input.append(option);
+                                    select2Data.push({
+                                        id: row,
+                                        text: row
+                                    });
+                                }
+                                input.val(null).trigger('change');
+                                input.on('select2:select', function (e) {
+                                    var selectedId = "";
+                                    var selectedRows = $(this).select2('data');
+                                    if (selectedRows.length > 0) {
+                                        var selectedRow = selectedRows[0];
+                                        selectedId = selectedRow.id;
+                                    }
+                                    column.search(selectedId ? selectedId : '', true, false).draw();
+                                });
+                                input.on('select2:close', function (e) {
+                                    var selectedId = "";
+                                    var selectedRows = $(this).select2('data');
+//                                    alert(JSON.stringify(selectedRows));
+                                    if (selectedRows.length === 0) {
+                                        column.search(selectedId, true, false).draw();
                                     }
                                 });
                             });
+                        } else if (index == 6) {
+                            var input = $('<input class="form-control" />')
+                                    .appendTo($("#filterHeader").find('th').eq(index).empty())
+                                    .on('change', function () {
+                                        var val = $(this).val();
+                                        column.search(val ? val : '', true, false).draw();
+                                    });
+                            input.inputmask({
+                                alias: "date",
+                                placeholder: "dd/mm/yyyy",
+                                inputFormat: "dd/mm/yyyy",
+                                displayFormat: true,
+                                hourFormat: "24",
+                                clearMaskOnLostFocus: false
+                            });
+                            input.daterangepicker({
+                                "opens": javatmp.settings.floatDefault,
+                                //                    startDate: false,
+                                singleDatePicker: true,
+                                showDropdowns: true,
+                                timePicker: false,
+                                timePickerIncrement: 1,
+                                timePicker24Hour: true,
+                                autoApply: true,
+                                autoUpdateInput: false,
+                                minDate: '01/01/1900',
+                                maxDate: '31/12/2099',
+                                //                    maxDate: '',
+                                //                    minDate: moment(),
+                                locale: {
+                                    "direction": javatmp.settings.direction,
+                                    format: 'DD/MM/YYYY'
+                                }
+                            }, function (start, end, label) {
+                                var formatedDateSelected = moment(start).format("DD/MM/YYYY");
+                                $(input).val(formatedDateSelected).trigger("change");
+                            });
+
                         } else {
-                            var input = $('<input class="form-control" style="width:100%;" />')
+                            var input = $('<input class="form-control" />')
                                     .appendTo($("#filterHeader").find('th').eq(index).empty())
                                     .on('keyup change', function () {
                                         var val = $.fn.dataTable.util.escapeRegex($(this).val());
@@ -156,7 +218,7 @@
                     {data: 'id', "width": 50},
                     {data: 'firstName', "width": 100},
                     {data: 'lastName', "width": 100},
-                    {data: 'position', "width": 225},
+                    {data: 'position', "width": 200},
                     {data: 'office', "width": 100},
                     {
                         data: 'birthOfDate', "type": "date", "width": 35,
@@ -171,7 +233,7 @@
                         }},
                     {data: 'salary', "width": 100, "type": "num", render: $.fn.dataTable.render.number(',', '.', 2, '$')},
                     {data: 'mobile', "width": 100},
-                    {data: 'email', "width": 300}
+                    {data: 'email', "width": 200}
                 ]
             });
 

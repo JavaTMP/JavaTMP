@@ -58,6 +58,13 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="remotePositionsSelectId" class="col-sm-2 col-form-label">Remote Positions</label>
+                                <div class="col-sm-10">
+                                    <select id="remotePositionsSelectId" class="form-control">
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -176,5 +183,38 @@
         function formatCountrySelection(repo) {
             return repo.text || repo.countryName + " (" + repo.countryId + ")";
         }
+
+        var input = $("#remotePositionsSelectId");
+        input.select2({
+            theme: "bootstrap",
+            dir: javatmp.settings.direction,
+            allowClear: true,
+            placeholder: "Filter Position",
+            containerCssClass: ':all:',
+            width: ''
+        });
+//        var option = new Option("", "", true, true);
+//        input.append(option);
+        $.ajax({
+            type: 'GET',
+            url: javatmp.settings.contextPath + '/user/ListUsersPositionsController'
+        }).then(function (data) {
+            // create the option and append to Select2
+            for (var i = 0; i < data.data.length; i++) {
+                var row = data.data[i];
+                var option = new Option(row, row, false, false);
+                input.append(option);
+            }
+            input.trigger('change');
+
+//            // manually trigger the `select2:select` event
+//            input.trigger({
+//                type: 'select2:select',
+//                params: {
+//                    data: data.data
+//                }
+//            });
+        });
+
     </script>
 </div>

@@ -11,6 +11,7 @@ import com.javatmp.domain.table.DataTableRequest;
 import com.javatmp.domain.table.DataTableResults;
 import com.javatmp.mvc.MvcHelper;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
@@ -177,13 +178,14 @@ public class UserService {
                         continue;
                     }
                 }
+
                 if (searchParameters.get("joiningDate") != null && !searchParameters.get("joiningDate").equals("")) {
                     Object searchValueObject = searchParameters.get("joiningDate");
                     String searchValue = searchValueObject.toString().trim().toLowerCase();
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                     Date dbValue = user.getJoiningDate();
-                    Calendar cal = Calendar.getInstance();
-                    cal.add(Calendar.YEAR, Integer.parseInt(searchValue) * -1);
-                    Long search = cal.getTimeInMillis();
+                    Date searchDate = sdf.parse(searchValue);
+                    Long search = searchDate.getTime();
                     if (dbValue.getTime() > search) {
                         continue;
                     }
