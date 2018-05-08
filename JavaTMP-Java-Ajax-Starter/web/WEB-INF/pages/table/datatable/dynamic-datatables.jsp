@@ -73,6 +73,7 @@
                     {
                         data: 'birthOfDate', "type": "date",
                         "render": function (data, type, row) {
+                            console.log("current [" + moment().toString() + "], data[" + data + "]");
                             return Math.ceil(moment().diff(moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ"), 'years', true));
                         }
                     },

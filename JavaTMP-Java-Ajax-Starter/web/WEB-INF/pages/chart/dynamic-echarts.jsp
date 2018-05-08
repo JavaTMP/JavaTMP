@@ -217,7 +217,7 @@
             };
             var lineChartOption = {
                 title: {
-                    text: 'Echarts Line Chart',
+                    text: "Users Birthday Frequencies",
                     x: 'center',
                     y: 0
                 },
@@ -225,7 +225,7 @@
                     trigger: 'axis'
                 },
                 legend: {
-                    data: ['Dataset 1', 'Dataset 2'],
+                    data: ['Birthday'],
                     x: 'center',
                     y: '30px'
                 },
@@ -240,23 +240,70 @@
                         type: 'value'
                     }
                 ],
-                color: ['#007bff', '#dc3545'],
+                color: ['#007bff'],
+                series: [
+                    {
+                        name: 'Birthday',
+                        type: 'line',
+                        data: [24, 44.6, 81, 11, 32, 41, 27, 5.9, 4.2, 71.8, 51.6, 22.8]
+                    }
+                ]
+            };
+
+            var doughnutChartOption = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{a} <br/>{b}: {c} ({d}%)"
+                },
+                legend: {
+                    orient: 'vertical',
+                    x: 'left',
+                    data: []
+                },
+                hover: true,
+                color: ['#007bff',
+                    '#ffc107',
+                    '#dc3545',
+                    '#28a745',
+                    '#6c757d', '#e38533', '#7d5642'],
                 series: [
                     {
                         name: 'Dataset 1',
-                        type: 'line',
-                        data: [24, 44.6, 81, 11, 32, 41, 27, 5.9, 4.2, 71.8, 51.6, 22.8]
-                    },
-                    {
-                        name: 'Dataset 2',
-                        type: 'line',
-                        data: [26.8, 41.5, 10, 25, 37, 35, 22, 12, 7, 81, 30.8, 62]
+                        type: 'pie',
+                        radius: ['50%', '70%'],
+                        avoidLabelOverlap: false,
+                        label: {
+                            normal: {
+                                show: false,
+                                position: 'center'
+                            },
+                            emphasis: {
+                                show: true,
+                                textStyle: {
+                                    fontSize: '30',
+                                    fontWeight: 'normal'
+                                }
+                            }
+                        },
+                        labelLine: {
+                            normal: {
+                                show: true
+                            }
+                        },
+                        data: [
+                            {value: 18, name: 'value 1'},
+                            {value: 32, name: 'value 2'},
+                            {value: 17, name: 'value 3'},
+                            {value: 23, name: 'value 4'},
+                            {value: 10, name: 'value 5'}
+                        ]
                     }
                 ]
             };
 
             var barChart = echarts.init(document.getElementById('bar-1-canvas'));
             var lineChart = echarts.init(document.getElementById('line-1-canvas'));
+            var doughnutChart = echarts.init(document.getElementById('doughnut-1-canvas'));
             // bar chart:
             $(javatmp.settings.defaultOutputSelector).on("click", "#BarChart a.reload", function (e) {
                 e.preventDefault();
@@ -302,7 +349,7 @@
                 $(cardBody).block({message: null,
                     overlayCSS: {
                         backgroundColor: '#000',
-                        opacity: 0.4
+                        opacity: 0.3
                     }});
 
 
@@ -319,7 +366,7 @@
                     },
                     success: function (remoteContent) {
                         $(cardBody).unblock();
-                        toastr.success('Data successfully fetched from Server', 'SUCCESS', {
+                        toastr.success('Bar Chart Data successfully fetched from Server', 'SUCCESS', {
                             timeOut: 4000,
                             progressBar: true,
                             rtl: javatmp.settings.isRTL,
@@ -329,7 +376,6 @@
                         var months = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
                         for (var i = 0; i < remoteContent.data.data.length; i++) {
                             var user = remoteContent.data.data[i];
-                            console.log(JSON.stringify(user));
                             var birthdayDate = moment(user.birthOfDate, "YYYY-MM-DDTHH:mm:ss.SSSZ");
                             var month = birthdayDate.month();
                             months[month]++;
@@ -355,19 +401,6 @@
                         // clean the bar graph
                     }
                 });
-
-                // use configuration item and data specified to show chart
-
-
-//                setTimeout(function () {
-//                    var newOption = $.extend(true, {}, option, {
-//                        title: {
-//                            text: 'updated updated updated'
-//                        }
-//                    });
-//                    barChart.setOption(newOption);
-//                }, 2000);
-
             });
 
             $(javatmp.settings.defaultOutputSelector).on("click", "#LineChart a.reload", function (e) {
@@ -378,7 +411,7 @@
                 $(cardBody).block({message: null,
                     overlayCSS: {
                         backgroundColor: '#000',
-                        opacity: 0.4
+                        opacity: 0.3
                     }});
                 $.ajax({
                     type: "GET",
@@ -393,7 +426,7 @@
                     },
                     success: function (remoteContent) {
                         $(cardBody).unblock();
-                        toastr.success('Data successfully fetched from Server', 'SUCCESS', {
+                        toastr.success('Line Chart Data successfully fetched from Server', 'SUCCESS', {
                             timeOut: 4000,
                             progressBar: true,
                             rtl: javatmp.settings.isRTL,
@@ -403,7 +436,6 @@
                         var months = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
                         for (var i = 0; i < remoteContent.data.data.length; i++) {
                             var user = remoteContent.data.data[i];
-                            console.log(JSON.stringify(user));
                             var birthdayDate = moment(user.birthOfDate, "YYYY-MM-DDTHH:mm:ss.SSSZ");
                             var month = birthdayDate.month();
                             months[month]++;
@@ -429,77 +461,89 @@
                 });
             });
 
+            $(javatmp.settings.defaultOutputSelector).on("click", "#DoughnutChart a.reload", function (e) {
+                e.preventDefault();
+                var cardBody = $(this).closest(".card").children(".card-body");
+                var href = javatmp.settings.contextPath + "/user/ListAllUsersController";
+
+                $(cardBody).block({message: null,
+                    overlayCSS: {
+                        backgroundColor: '#000',
+                        opacity: 0.3
+                    }});
+                $.ajax({
+                    type: "GET",
+                    cache: false,
+                    url: href,
+                    data: {
+                        _ajaxGlobalBlockUI: false,
+                        "start": 0,
+                        "length": 100,
+                        "draw": 1,
+                        "order[0][column]": 0
+                    },
+                    success: function (remoteContent) {
+                        $(cardBody).unblock();
+                        toastr.success('Doughnut Chart Data successfully fetched from Server', 'SUCCESS', {
+                            timeOut: 4000,
+                            progressBar: true,
+                            rtl: javatmp.settings.isRTL,
+                            positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                        });
+                        var offices = {};
+                        for (var i = 0; i < remoteContent.data.data.length; i++) {
+                            var user = remoteContent.data.data[i];
+                            if (user.office in offices) {
+                                offices[user.office] = offices[user.office] + 1;
+                            } else {
+                                offices[user.office] = 0;
+                            }
+                        }
+//                        var officesArray = Object.keys(offices);
+//                        var officesCount = Object.values(offices);
+//                        var seriesData = [];
+                        var officesArray = [];
+                        var officesCount = [];
+                        var seriesData = [];
+                        $.map(offices, function (value, key) {
+                            officesArray.push(key);
+                            officesCount.push(value);
+                            seriesData.push({
+                                value: value, name: key
+                            });
+                        });
+                        doughnutChartOption = $.extend(true, doughnutChartOption, {
+                            legend: {
+                                data: officesArray
+                            },
+                            series: [
+                                {
+                                    name: 'Users Location',
+                                    data: seriesData
+                                }
+                            ]
+                        });
+                        doughnutChart.setOption(doughnutChartOption);
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        $(cardBody).unblock();
+                        var msg = 'Error on reloading the card. Please check your remote server url';
+                        toastr.error(msg, 'ERROR', {
+                            timeOut: 4000,
+                            progressBar: true,
+                            rtl: javatmp.settings.isRTL,
+                            positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                        });
+                        // clean the bar graph
+                    }
+                });
+            });
+
             $(javatmp.settings.defaultOutputSelector).find("[load-on-starup=true]").each(function () {
                 $(this).trigger("click");
             });
 
-            // based on prepared DOM, initialize echarts instance
-
-
-
-
-
-
-
             // use configuration item and data specified to show chart
-            lineChart.setOption(option);
-
-            var doughnutChart = echarts.init(document.getElementById('doughnut-1-canvas'));
-
-            var option = {
-                tooltip: {
-                    trigger: 'item',
-                    formatter: "{a} <br/>{b}: {c} ({d}%)"
-                },
-                legend: {
-                    orient: 'vertical',
-                    x: 'left',
-                    data: ['value 1', 'value 2', 'value 3', 'value 4', 'value 5']
-                },
-                hover: true,
-                color: ['#007bff',
-                    '#ffc107',
-                    '#dc3545',
-                    '#28a745',
-                    '#6c757d'],
-                series: [
-                    {
-                        name: 'Dataset 1',
-                        type: 'pie',
-                        radius: ['50%', '70%'],
-                        avoidLabelOverlap: false,
-                        label: {
-                            normal: {
-                                show: false,
-                                position: 'center'
-                            },
-                            emphasis: {
-                                show: true,
-                                textStyle: {
-                                    fontSize: '30',
-                                    fontWeight: 'bold'
-                                }
-                            }
-                        },
-                        labelLine: {
-                            normal: {
-                                show: true
-                            }
-                        },
-                        data: [
-                            {value: 18, name: 'value 1'},
-                            {value: 32, name: 'value 2'},
-                            {value: 17, name: 'value 3'},
-                            {value: 23, name: 'value 4'},
-                            {value: 10, name: 'value 5'}
-                        ]
-                    }
-                ]
-            };
-
-
-            // use configuration item and data specified to show chart
-            doughnutChart.setOption(option);
 
 
             var pieChart = echarts.init(document.getElementById('pie-1-canvas'));
