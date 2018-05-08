@@ -588,16 +588,37 @@
                     pieChart.resize();
                 }, 200, "At-echarts-page-content-resize");
             });
-            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenCompress + " " + javatmp.settings.cardFullscreenExpand, function (event, card) {
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenCompress, function (event, card) {
                 // when card compress by pressing the top right tool button
                 var cardId = card.attr("id");
                 if (cardId === "BarChart") {
+                    $('#bar-1-canvas').css({"minHeight": 300});
                     barChart.resize();
                 } else if (cardId === "LineChart") {
+                    $('#line-1-canvas').css({"minHeight": 300});
                     lineChart.resize();
                 } else if (cardId === "DoughnutChart") {
+                    $('#doughnut-1-canvas').css({"minHeight": 300});
                     doughnutChart.resize();
                 } else if (cardId === "PieChart") {
+                    $('#pie-1-canvas').css({"minHeight": 300});
+                    pieChart.resize();
+                }
+            });
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenExpand, function (event, card) {
+                // when card compress by pressing the top right tool button
+                var cardId = card.attr("id");
+                if (cardId === "BarChart") {
+                    $('#bar-1-canvas').css({"minHeight": 500});
+                    barChart.resize();
+                } else if (cardId === "LineChart") {
+                    $('#line-1-canvas').css({"minHeight": 500});
+                    lineChart.resize();
+                } else if (cardId === "DoughnutChart") {
+                    $('#doughnut-1-canvas').css({"minHeight": 500});
+                    doughnutChart.resize();
+                } else if (cardId === "PieChart") {
+                    $('#pie-1-canvas').css({"minHeight": 500});
                     pieChart.resize();
                 }
             });
