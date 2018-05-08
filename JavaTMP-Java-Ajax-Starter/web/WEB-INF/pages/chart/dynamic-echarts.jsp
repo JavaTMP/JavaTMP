@@ -46,7 +46,7 @@
                     <div class="options float-right">
                         <a href="javascript:;" class="settings"><i class="fa fa-cog"></i></a>
                         <a href="javascript:;" class="collapse"><i class="fa fa-chevron-up"></i></a>
-                        <a href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
+                        <a load-on-starup="true"  href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
                         <a href="javascript:;" class="fullscreen"><i class=" fa fa-expand"></i></a>
                         <a href="javascript:;" class="remove"><i class="fa fa-times"></i></a>
                     </div>
@@ -54,7 +54,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <div id="line-1-canvas" style="width: 100%;min-height: 400px"></div>
+                            <div id="line-1-canvas" style="width: 100%;min-height: 300px"></div>
                         </div>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
                     <div class="options float-right">
                         <a href="javascript:;" class="settings"><i class="fa fa-cog"></i></a>
                         <a href="javascript:;" class="collapse"><i class="fa fa-chevron-up"></i></a>
-                        <a href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
+                        <a load-on-starup="true"  href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
                         <a href="javascript:;" class="fullscreen"><i class=" fa fa-expand"></i></a>
                         <a href="javascript:;" class="remove"><i class="fa fa-times"></i></a>
                     </div>
@@ -90,7 +90,7 @@
                     <div class="options float-right">
                         <a href="javascript:;" class="settings"><i class="fa fa-cog"></i></a>
                         <a href="javascript:;" class="collapse"><i class="fa fa-chevron-up"></i></a>
-                        <a href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
+                        <a load-on-starup="true"  href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
                         <a href="javascript:;" class="fullscreen"><i class=" fa fa-expand"></i></a>
                         <a href="javascript:;" class="remove"><i class="fa fa-times"></i></a>
                     </div>
@@ -113,7 +113,7 @@
                     <div class="options float-right">
                         <a href="javascript:;" class="settings"><i class="fa fa-cog"></i></a>
                         <a href="javascript:;" class="collapse"><i class="fa fa-chevron-up"></i></a>
-                        <a href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
+                        <a load-on-starup="true"  href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
                         <a href="javascript:;" class="fullscreen"><i class=" fa fa-expand"></i></a>
                         <a href="javascript:;" class="remove"><i class="fa fa-times"></i></a>
                     </div>
@@ -134,7 +134,7 @@
                     <div class="options float-right">
                         <a href="javascript:;" class="settings"><i class="fa fa-cog"></i></a>
                         <a href="javascript:;" class="collapse"><i class="fa fa-chevron-up"></i></a>
-                        <a href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
+                        <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
                         <a href="javascript:;" class="fullscreen"><i class=" fa fa-expand"></i></a>
                         <a href="javascript:;" class="remove"><i class="fa fa-times"></i></a>
                     </div>
@@ -157,7 +157,7 @@
                     <div class="options float-right">
                         <a href="javascript:;" class="settings"><i class="fa fa-cog"></i></a>
                         <a href="javascript:;" class="collapse"><i class="fa fa-chevron-up"></i></a>
-                        <a href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
+                        <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
                         <a href="javascript:;" class="fullscreen"><i class=" fa fa-expand"></i></a>
                         <a href="javascript:;" class="remove"><i class="fa fa-times"></i></a>
                     </div>
@@ -181,8 +181,82 @@
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
 
-            var barChart = null;
-            barChart = echarts.init(document.getElementById('bar-1-canvas'));
+            var barChartOption = {
+                title: {
+                    text: "Users Birthday Frequencies",
+                    x: 'center',
+                    y: 0
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data: ['Birthday'],
+                    x: 'center',
+                    y: '30px'
+                },
+                calculable: true,
+                xAxis: [
+                    {
+                        data: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value'
+                    }
+                ],
+                color: ['#007bff', '#dc3545'],
+                series: [
+                    {
+                        name: 'Birthday',
+                        type: 'bar',
+                        data: [24, 44.6, 81, 11, 32, 41, 27, 5.9, 4.2, 71.8, 51.6, 22.8]
+                    }
+                ]
+            };
+            var lineChartOption = {
+                title: {
+                    text: 'Echarts Line Chart',
+                    x: 'center',
+                    y: 0
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data: ['Dataset 1', 'Dataset 2'],
+                    x: 'center',
+                    y: '30px'
+                },
+                calculable: true,
+                xAxis: [
+                    {
+                        data: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+                    }
+                ],
+                yAxis: [
+                    {
+                        type: 'value'
+                    }
+                ],
+                color: ['#007bff', '#dc3545'],
+                series: [
+                    {
+                        name: 'Dataset 1',
+                        type: 'line',
+                        data: [24, 44.6, 81, 11, 32, 41, 27, 5.9, 4.2, 71.8, 51.6, 22.8]
+                    },
+                    {
+                        name: 'Dataset 2',
+                        type: 'line',
+                        data: [26.8, 41.5, 10, 25, 37, 35, 22, 12, 7, 81, 30.8, 62]
+                    }
+                ]
+            };
+
+            var barChart = echarts.init(document.getElementById('bar-1-canvas'));
+            var lineChart = echarts.init(document.getElementById('line-1-canvas'));
             // bar chart:
             $(javatmp.settings.defaultOutputSelector).on("click", "#BarChart a.reload", function (e) {
                 e.preventDefault();
@@ -296,6 +370,65 @@
 
             });
 
+            $(javatmp.settings.defaultOutputSelector).on("click", "#LineChart a.reload", function (e) {
+                e.preventDefault();
+                var cardBody = $(this).closest(".card").children(".card-body");
+                var href = javatmp.settings.contextPath + "/user/ListAllUsersController";
+
+                $(cardBody).block({message: null,
+                    overlayCSS: {
+                        backgroundColor: '#000',
+                        opacity: 0.4
+                    }});
+                $.ajax({
+                    type: "GET",
+                    cache: false,
+                    url: href,
+                    data: {
+                        _ajaxGlobalBlockUI: false,
+                        "start": 0,
+                        "length": 100,
+                        "draw": 1,
+                        "order[0][column]": 0
+                    },
+                    success: function (remoteContent) {
+                        $(cardBody).unblock();
+                        toastr.success('Data successfully fetched from Server', 'SUCCESS', {
+                            timeOut: 4000,
+                            progressBar: true,
+                            rtl: javatmp.settings.isRTL,
+                            positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                        });
+
+                        var months = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                        for (var i = 0; i < remoteContent.data.data.length; i++) {
+                            var user = remoteContent.data.data[i];
+                            console.log(JSON.stringify(user));
+                            var birthdayDate = moment(user.birthOfDate, "YYYY-MM-DDTHH:mm:ss.SSSZ");
+                            var month = birthdayDate.month();
+                            months[month]++;
+                        }
+                        lineChartOption = $.extend(true, lineChartOption, {
+                            series: [{
+                                    data: months
+                                }]
+                        });
+                        lineChart.setOption(lineChartOption);
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        $(cardBody).unblock();
+                        var msg = 'Error on reloading the card. Please check your remote server url';
+                        toastr.error(msg, 'ERROR', {
+                            timeOut: 4000,
+                            progressBar: true,
+                            rtl: javatmp.settings.isRTL,
+                            positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                        });
+                        // clean the bar graph
+                    }
+                });
+            });
+
             $(javatmp.settings.defaultOutputSelector).find("[load-on-starup=true]").each(function () {
                 $(this).trigger("click");
             });
@@ -303,47 +436,9 @@
             // based on prepared DOM, initialize echarts instance
 
 
-            var lineChart = echarts.init(document.getElementById('line-1-canvas'));
 
-            var option = {
-                title: {
-                    text: 'Echarts Line Chart',
-                    x: 'center',
-                    y: 0
-                },
-                tooltip: {
-                    trigger: 'axis'
-                },
-                legend: {
-                    data: ['Dataset 1', 'Dataset 2'],
-                    x: 'center',
-                    y: '30px'
-                },
-                calculable: true,
-                xAxis: [
-                    {
-                        data: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-                    }
-                ],
-                yAxis: [
-                    {
-                        type: 'value'
-                    }
-                ],
-                color: ['#007bff', '#dc3545'],
-                series: [
-                    {
-                        name: 'Dataset 1',
-                        type: 'line',
-                        data: [24, 44.6, 81, 11, 32, 41, 27, 5.9, 4.2, 71.8, 51.6, 22.8]
-                    },
-                    {
-                        name: 'Dataset 2',
-                        type: 'line',
-                        data: [26.8, 41.5, 10, 25, 37, 35, 22, 12, 7, 81, 30.8, 62]
-                    }
-                ]
-            };
+
+
 
 
             // use configuration item and data specified to show chart
