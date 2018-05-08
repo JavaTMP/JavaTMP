@@ -1104,6 +1104,12 @@
                                             ECharts
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/chart/dynamic-echarts">
+                                            <i class="far fa-lg fa-fw fa-chart-bar"></i>
+                                            Dynamic ECharts
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li>

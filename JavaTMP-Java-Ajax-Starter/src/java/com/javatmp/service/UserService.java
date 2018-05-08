@@ -265,4 +265,22 @@ public class UserService {
         return dataTableResult;
     }
 
+    public DataTableResults<User> listAllUsers(DataTableRequest<User> tableRequest) {
+        List<User> retList = new LinkedList<>();
+        List<User> db = this.dBFaker.getUsers();
+
+        for (int i = tableRequest.getStart();
+                i < db.size() && i < (tableRequest.getStart() + tableRequest.getLength()); i++) {
+            retList.add(db.get(i));
+        }
+
+        DataTableResults<User> dataTableResult = new DataTableResults<>();
+        dataTableResult.setListOfDataObjects(retList);
+        dataTableResult.setRecordsTotal(Long.valueOf(db.size()));
+        dataTableResult.setRecordsFiltered(Long.valueOf(db.size()));
+        dataTableResult.setDraw(tableRequest.getDraw());
+
+        return dataTableResult;
+    }
+
 }

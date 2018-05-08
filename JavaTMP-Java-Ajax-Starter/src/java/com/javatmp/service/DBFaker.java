@@ -16,6 +16,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -115,6 +116,15 @@ public class DBFaker {
         this.users.add(new User(DBFaker.getNextCounter(), null, null, "Shad", "Decker", (short) 1, new Date(-84038400000L), new Date(), "s.decker@datatables.net", "6373", "en", "default", "US", "address not specified yet", "Regional Director", "Edinburgh", new Date(1198958400000L), new BigDecimal("183000")));
         this.users.add(new User(DBFaker.getNextCounter(), null, null, "Michael", "Bruce", (short) 1, new Date(610272000000L), new Date(), "m.bruce@datatables.net", "5384", "en", "default", "US", "address not specified yet", "Javascript Developer", "Singapore", new Date(1293307200000L), new BigDecimal("183000")));
         this.users.add(new User(DBFaker.getNextCounter(), null, null, "Donna", "Snider", (short) 1, new Date(673344000000L), new Date(), "d.snider@datatables.net", "4226", "en", "default", "US", "address not specified yet", "Customer Support", "New York", new Date(1293307200000L), new BigDecimal("112000")));
+
+        // update birthdays randomly:
+        Random rand = new Random(12);
+        for (User user : this.users) {
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(user.getBirthOfDate());
+            cal.set(Calendar.MONTH, rand.nextInt());
+            user.setBirthOfDate(cal.getTime());
+        }
 
     }
 
