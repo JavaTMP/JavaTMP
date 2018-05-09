@@ -261,41 +261,6 @@
             $(javatmp.settings.defaultOutputSelector).on("click", "#BarChart a.reload", function (e) {
                 e.preventDefault();
 
-                var option = {
-                    title: {
-                        text: "Users Birthday Frequencies",
-                        x: 'center',
-                        y: 0
-                    },
-                    tooltip: {
-                        trigger: 'axis'
-                    },
-                    legend: {
-                        data: ['Birthday'],
-                        x: 'center',
-                        y: '30px'
-                    },
-                    calculable: true,
-                    xAxis: [
-                        {
-                            data: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-                        }
-                    ],
-                    yAxis: [
-                        {
-                            type: 'value'
-                        }
-                    ],
-                    color: ['#007bff', '#dc3545'],
-                    series: [
-                        {
-                            name: 'Birthday',
-                            type: 'bar',
-                            data: [24, 44.6, 81, 11, 32, 41, 27, 5.9, 4.2, 71.8, 51.6, 22.8]
-                        }
-                    ]
-                };
-
                 var cardBody = $(this).closest(".card").children(".card-body");
                 var href = javatmp.settings.contextPath + "/user/ListAllUsersController";
 
@@ -304,7 +269,6 @@
                         backgroundColor: '#000',
                         opacity: 0.3
                     }});
-
 
                 $.ajax({
                     type: "GET",
@@ -333,14 +297,21 @@
                             var month = birthdayDate.month();
                             months[month]++;
                         }
-                        option = $.extend(true, option, {
+                        barChartOption = $.extend(true, barChartOption, {
                             series: [
                                 {
                                     data: months
                                 }
                             ]
                         });
-                        barChart.setOption(option);
+                        barChart.setOption(barChartOption);
+                        barChart.on('click', function (params) {
+                            console.log(params);
+                        });
+
+                        barChart.on('legendselectchanged', function (params) {
+                            console.log(params);
+                        });
                     },
                     error: function (xhr, ajaxOptions, thrownError) {
                         $(cardBody).unblock();
