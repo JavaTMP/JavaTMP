@@ -1088,6 +1088,12 @@
                                                     Dynamic Individual Column Searching Datatables
                                                 </a>
                                             </li>
+                                            <li>
+                                                <a href="${pageContext.request.contextPath}/pages/table/datatable/dynamic-messages">
+                                                    <i class="far fa-lg fa-fw fa-list-alt"></i>
+                                                    Dynamic Messages
+                                                </a>
+                                            </li>
                                         </ul>
                                     </li>
                                 </ul>

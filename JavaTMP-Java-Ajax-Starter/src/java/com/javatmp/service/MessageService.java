@@ -62,7 +62,7 @@ public class MessageService {
         List<Message> database = this.dBFaker.getMessages();
         List<Message> db = null;
         DataTableColumnSpecs orderOrder = tableRequest.getOrder();
-
+        System.out.println("is global search provide");
         if (tableRequest.isGlobalSearch()) {
             System.out.println("*** isGlobalSearch starting ***");
             String query = tableRequest.getSearch().trim().toLowerCase();
@@ -76,7 +76,7 @@ public class MessageService {
         } else {
             db = new LinkedList<>(this.dBFaker.getMessages());
         }
-
+        System.out.println("Start mapping search parameteres");
         Map<String, Object> searchParameters = new HashMap<>();
         int index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(0, "messageId"));
         DataTableColumnSpecs column = tableRequest.getColumns().get(index);
@@ -98,11 +98,11 @@ public class MessageService {
         column = tableRequest.getColumns().get(index);
         searchParameters.put("toUser", column.getSearch());
 
+        System.out.println("search [" + searchParameters + "]");
 // apply individual column search:
         List<Message> newDB = new LinkedList<>();
         for (Message msg : db) {
             try {
-                System.out.println("search [" + searchParameters + "]");
                 if (searchParameters.get("id") != null && !searchParameters.get("id").equals("")) {
                     Object searchValueObject = searchParameters.get("id");
                     Long searchValue = new Long(searchValueObject.toString());
@@ -132,7 +132,8 @@ public class MessageService {
                 }
                 if (searchParameters.get("fromUser") != null && !searchParameters.get("fromUser").equals("")) {
                     Object searchValueObject = searchParameters.get("fromUser");
-                    String searchValue = searchValueObject.toString().trim().toLowerCase();
+                    String searchValueStr = searchValueObject.toString().trim().toLowerCase();
+                    Long searchValue = new Long(searchValueStr);
                     Long dbValue = msg.getFromUser();
                     if (!dbValue.equals(searchValue)) {
                         continue;
@@ -140,12 +141,14 @@ public class MessageService {
                 }
                 if (searchParameters.get("toUser") != null && !searchParameters.get("toUser").equals("")) {
                     Object searchValueObject = searchParameters.get("toUser");
-                    String searchValue = searchValueObject.toString().trim().toLowerCase();
+                    String searchValueStr = searchValueObject.toString().trim().toLowerCase();
+                    Long searchValue = new Long(searchValueStr);
                     Long dbValue = msg.getToUser();
                     if (!dbValue.equals(searchValue)) {
                         continue;
                     }
                 }
+//                System.out.println("add msg [" + msg.getMessageId() + "] from [" + msg.getFromUser() + "], to [" + msg.getToUser() + "]");
                 newDB.add(msg);
             } catch (Exception e) {
                 e.printStackTrace();

@@ -12,6 +12,7 @@ import com.javatmp.domain.DiaryEvent;
 import com.javatmp.domain.Document;
 import com.javatmp.domain.Message;
 import com.javatmp.domain.User;
+import com.javatmp.mvc.MvcHelper;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
@@ -434,19 +435,6 @@ public class DBFaker {
 
     private void generateMessages() {
 
-        Message message = new Message();
-        message.setMessageId(DBFaker.getNextCounter());
-        message.setMessageStatus((short) 1);
-        message.setMessageTitle("Fake Message number " + message.getMessageId());
-
-        message.setMessageContentText("<p>A fake data summary text to show you number " + message.getMessageId() + " geneated from fake database, Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>\n"
-                + "<p>A fake data summary text to show you number " + message.getMessageId() + " geneated from fake database, Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>\n"
-                + "<p>A fake data summary text to show you number " + message.getMessageId() + " geneated from fake database, Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>\n"
-                + "<p>A fake data summary text to show you number " + message.getMessageId() + " geneated from fake database, Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>\n"
-                + "<p>A fake data summary text to show you number " + message.getMessageId() + " geneated from fake database, Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>\n"
-                + "<p>A fake data summary text to show you number " + message.getMessageId() + " geneated from fake database, Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>\n"
-                + "");
-
         Random rand = new Random();
         for (int i = 0; i < this.users.size(); i++) {
             Long from = this.users.get(i).getId();
@@ -454,10 +442,22 @@ public class DBFaker {
             for (int j = 0; j < 250; j++) {
                 int randomTo = 0;
                 while ((randomTo = rand.nextInt(this.users.size())) == i);
-                System.out.println("i[" + i + "] => random to is [" + randomTo + "]");
+//                System.out.println("i[" + i + "] => random to is [" + randomTo + "]");
                 Long to = this.users.get(randomTo).getId();
+                Message message = new Message();
+                message.setMessageId(DBFaker.getNextCounter());
                 message.setFromUser(from);
                 message.setToUser(to);
+                message.setMessageStatus((short) 1);
+                message.setMessageTitle("Fake Message number " + message.getMessageId());
+
+                message.setMessageContentText("<p>A fake data summary text to show you number " + message.getMessageId() + " geneated from fake database, Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>\n"
+                        + "<p>A fake data summary text to show you number " + message.getMessageId() + " geneated from fake database, Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>\n"
+                        + "<p>A fake data summary text to show you number " + message.getMessageId() + " geneated from fake database, Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>\n"
+                        + "<p>A fake data summary text to show you number " + message.getMessageId() + " geneated from fake database, Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>\n"
+                        + "<p>A fake data summary text to show you number " + message.getMessageId() + " geneated from fake database, Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>\n"
+                        + "<p>A fake data summary text to show you number " + message.getMessageId() + " geneated from fake database, Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>\n"
+                        + "");
 
                 Calendar calendar = Calendar.getInstance();
                 calendar.add(Calendar.DAY_OF_MONTH, ThreadLocalRandom.current().nextInt(30) * -1);
@@ -465,11 +465,9 @@ public class DBFaker {
                 calendar.set(Calendar.MINUTE, ThreadLocalRandom.current().nextInt(60));
                 calendar.set(Calendar.SECOND, ThreadLocalRandom.current().nextInt(60));
                 calendar.set(Calendar.MILLISECOND, ThreadLocalRandom.current().nextInt(1000));
-                System.out.println("date of message [" + calendar.getTime() + "]");
+
                 message.setCreationDate(calendar.getTime());
-
                 this.messages.add(message);
-
             }
         }
     }
