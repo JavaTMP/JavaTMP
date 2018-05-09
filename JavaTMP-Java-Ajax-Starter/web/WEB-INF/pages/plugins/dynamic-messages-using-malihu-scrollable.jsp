@@ -138,7 +138,7 @@
                                     data: passData,
                                     success: function (response, textStatus, jqXHR) {
                                         that.mcs.content.find(".fetch-indicator").remove();
-                                        var data = response.data.records;
+                                        var data = response.data.data;
                                         allCount = response.data.allCount;
                                         $.each(data, function (index, row) {
                                             currentFetchedCount++;
@@ -241,9 +241,9 @@
                                 $.each(data, function (index, row) {
                                     currentFetchedCount++;
                                     var readyData = template.composeTemplate({
-                                        'contentId': row.contentId,
-                                        'title': row.title,
-                                        'contentText': row.summaryText,
+                                        'contentId': row.messageId,
+                                        'title': row.messageTitle,
+                                        'contentText': row.messageContentText,
                                         'creationDate': row.creationDate,
                                         'formatedDate': moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss"),
                                         'contextPath': javatmp.settings.contextPath
