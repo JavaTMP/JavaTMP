@@ -69,15 +69,21 @@
         //
 
         var template =
-                '<div class="list-group-item list-group-item-action">' +
+                '<a class="p-3 list-group-item list-group-item-action" actionType="ajax-model" href="${pageContext.request.contextPath}/pages/custom-pages/inbox/ajax/ajax-view-message">' +
                 '    <div class="media">' +
-                '        <img class="mr-3" src="{{contextPath}}/assets/img/64x64.gif" alt="Generic placeholder image"/>' +
+                '        <img class="mr-1" src="{{contextPath}}/assets/img/64x64.gif" alt="Generic placeholder image"/>' +
                 '        <div class="media-body">' +
-                '            <h5 class="mt-0 d-flex justify-content-between"><span>{{title}}</span><time class="timeago" datetime="{{creationDate}}">{{formatedDate}}</time></h5>' +
-                '            {{contentText}}' +
+                '            <div class="mt-0 d-flex justify-content-between">' +
+                '                <strong>{{messageTitle}}</strong>' +
+                '                <span class="text-muted">' +
+                '                    <small><em><time class="timeago" datetime="{{creationDate}}">{{formatedDate}}</time></em></small>' +
+                '                </span>' +
+                '            </div>' +
+                '            {{messageContentText}}' +
                 '        </div>' +
                 '    </div>' +
-                '</div>';
+                '</a>';
+
         //Compose template string
         String.prototype.composeTemplate = (function () {
             var re = /\{{(.+?)\}}/g;
@@ -97,9 +103,10 @@
             var workingDown = false;
             var workingTop = false;
             var startFrom = 0;
-            var recordPerPage = 20;
+            var recordPerPage = 10;
             var allCount = Number.MAX_SAFE_INTEGER;
             var currentFetchedCount = 0;
+            var toUserId = javatmp.user.id;
             $("#infinite-scroll").mCustomScrollbar({
                 theme: "javatmp",
                 alwaysShowScrollbar: 2,
@@ -114,52 +121,6 @@
                     },
                     onScroll: function () {
                         console.log("top = " + this.mcs.top + " , direction = " + this.mcs.direction);
-                    },
-                    onTotalScrollBack: function () {
-                        if (!workingTop) {
-                            console.log("** onTotalScrollBack currentFetch [" + currentFetchedCount + "], allCount [" + allCount + "]");
-                            if (currentFetchedCount < allCount) {
-                                workingTop = true;
-                                $("#infinite-scroll").mCustomScrollbar('scrollTo', 'top', {scrollInertia: 20});
-                                this.mcs.content.prepend(indicatorTemplate);
-                                var that = this;
-                                var passData = {
-                                    "_ajaxGlobalBlockUI": false,
-                                    "start": startFrom,
-                                    "length": recordPerPage,
-                                    "order[0][column]": 0,
-                                    "order[0][dir]": "ASC",
-                                    "columns[0][data]": "creationDate",
-                                    "columns[1][data]": "toUser",
-                                    "columns[1][search][value]": 30660
-                                };
-                                $.ajax({
-                                    url: javatmp.settings.contextPath + "/user/ListMessagesController",
-                                    data: passData,
-                                    success: function (response, textStatus, jqXHR) {
-                                        that.mcs.content.find(".fetch-indicator").remove();
-                                        var data = response.data.data;
-                                        allCount = response.data.allCount;
-                                        $.each(data, function (index, row) {
-                                            currentFetchedCount++;
-                                            var readyData = template.composeTemplate({
-                                                'contentId': row.contentId,
-                                                'title': row.title,
-                                                'contentText': row.summaryText,
-                                                'creationDate': row.creationDate,
-                                                'formatedDate': moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss"),
-                                                'contextPath': javatmp.settings.contextPath
-                                            });
-                                            that.mcs.content.prepend(readyData);
-                                            that.mcs.content.find("time.timeago").timeago();
-                                        });
-                                        $(that).mCustomScrollbar("scrollTo", 1);
-                                        workingTop = false;
-                                        startFrom += data.length;
-                                    }
-                                });
-                            }
-                        }
                     },
                     onTotalScroll: function () {
                         if (!workingDown) {
@@ -176,7 +137,7 @@
                                     "order[0][dir]": "ASC",
                                     "columns[0][data]": "creationDate",
                                     "columns[1][data]": "toUser",
-                                    "columns[1][search][value]": 30660
+                                    "columns[1][search][value]": toUserId
                                 };
                                 $.ajax({
                                     url: javatmp.settings.contextPath + "/user/ListMessagesController",
@@ -188,9 +149,9 @@
                                         $.each(data, function (index, row) {
                                             currentFetchedCount++;
                                             var readyData = template.composeTemplate({
-                                                'contentId': row.contentId,
-                                                'title': row.title,
-                                                'contentText': row.summaryText,
+                                                'messageId': row.messageId,
+                                                'messageTitle': row.messageTitle,
+                                                'messageContentText': row.messageContentText,
                                                 'creationDate': row.creationDate,
                                                 'formatedDate': moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss"),
                                                 'contextPath': javatmp.settings.contextPath
@@ -229,7 +190,8 @@
                             "order[0][dir]": "ASC",
                             "columns[0][data]": "creationDate",
                             "columns[1][data]": "toUser",
-                            "columns[1][search][value]": 30660
+                            "columns[1][search][value]": toUserId
+
                         };
                         $.ajax({
                             url: javatmp.settings.contextPath + "/user/ListMessagesController",
@@ -241,9 +203,9 @@
                                 $.each(data, function (index, row) {
                                     currentFetchedCount++;
                                     var readyData = template.composeTemplate({
-                                        'contentId': row.messageId,
-                                        'title': row.messageTitle,
-                                        'contentText': row.messageContentText,
+                                        'messageId': row.messageId,
+                                        'messageTitle': row.messageTitle,
+                                        'messageContentText': row.messageContentText,
                                         'creationDate': row.creationDate,
                                         'formatedDate': moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss"),
                                         'contextPath': javatmp.settings.contextPath
@@ -253,7 +215,6 @@
                                 });
                                 workingDown = false;
                                 startFrom += data.length;
-                                $("#infinite-scroll").mCustomScrollbar("scrollTo", 1);
                             }
                         });
                     }

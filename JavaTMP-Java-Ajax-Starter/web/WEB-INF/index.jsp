@@ -1474,6 +1474,8 @@
                     isRTL: ${labels['global.direction'] == 'ltr' ? 'false' : 'true'},
                     contextPath: '${pageContext.request.contextPath}'
                 });
+                javatmp.user = {};
+                javatmp.user.id = ${sessionScope.user.id};
             });
         </script>
         <script type="text/javascript">

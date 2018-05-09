@@ -8,6 +8,7 @@ import com.javatmp.domain.User;
 import com.javatmp.domain.table.DataTableRequest;
 import com.javatmp.domain.table.DataTableResults;
 import com.javatmp.mvc.ClassTypeAdapter;
+import com.javatmp.mvc.DateTypeAdapter;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.ResponseMessage;
 import com.javatmp.service.MessageService;
@@ -15,6 +16,8 @@ import com.javatmp.service.ServicesFactory;
 import com.javatmp.service.UserService;
 import com.javatmp.util.Constants;
 import java.io.IOException;
+import java.util.Date;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,18 +34,23 @@ public class ListMessagesController extends HttpServlet {
         ResponseMessage responseMessage = new ResponseMessage();
         ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         MessageService cs = sf.getMessageService();
+        UserService us = sf.getUserService();
+
         System.out.println("Try to convert request to datatable request");
-        DataTableRequest<Message> tableRequest = new DataTableRequest<Message>(request);
+        DataTableRequest<Message> tableRequest = new DataTableRequest<>(request);
 
         System.out.println("datatableRequest [" + MvcHelper.deepToString(tableRequest) + "]");
 //        try {
 
         DataTableResults<Message> dataTableResult = cs.listMessages(tableRequest);
 
+        List<Message> messages = dataTableResult.getListOfDataObjects();
+
         responseMessage.setOverAllStatus(true);
         responseMessage.setData(dataTableResult);
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+        Gson gson = new GsonBuilder()
                 .registerTypeAdapter(Class.class, new ClassTypeAdapter())
+                .registerTypeAdapter(Date.class, new DateTypeAdapter())
                 .create();
         String json = gson.toJson(responseMessage);
 //        System.out.println("response [" + json + "]");

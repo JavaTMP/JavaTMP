@@ -44,6 +44,15 @@ public class UserService {
         return null;
     }
 
+    public User readUserByUserId(User user) {
+        for (User u : dBFaker.getUsersList()) {
+            if (user.getId().equals(u.getId())) {
+                return u;
+            }
+        }
+        return null;
+    }
+
     public User createNewUser(User user) {
         this.dBFaker.addUser(user);
         return user;

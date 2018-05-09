@@ -13,6 +13,7 @@ import com.javatmp.domain.Document;
 import com.javatmp.domain.Message;
 import com.javatmp.domain.User;
 import com.javatmp.mvc.MvcHelper;
+import com.javatmp.util.MD5Util;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
@@ -64,6 +65,27 @@ public class DBFaker {
 
     private void generateFakeUsers() {
 
+        // just to make sure id 1 is not taken out
+        DBFaker.getNextCounter();
+        User logingUser = new User();
+        logingUser.setId(1L);
+        logingUser.setUserName("user" + logingUser.getId());
+        logingUser.setPassword(MD5Util.convertToMD5(logingUser.getUserName()));
+        logingUser.setFirstName("firstName");
+        logingUser.setLastName("lastName");
+        logingUser.setStatus((short) 1);
+        logingUser.setCreationDate(new Date());
+        logingUser.setEmail(logingUser.getUserName() + "@javatmp.com");
+        logingUser.setMobile("00987654321000");
+        logingUser.setLang("en");
+        logingUser.setTheme("default");
+        logingUser.setPosition("Super Administrator");
+        logingUser.setOffice("New York");
+        logingUser.setBirthOfDate(new Date(-399571200000L));
+        logingUser.setJoiningDate(new Date(1293307200000L));
+        logingUser.setSalary(new BigDecimal("100000"));
+        logingUser.setMobile("123456789");
+        this.users.add(logingUser);
         this.users.add(new User(DBFaker.getNextCounter(), null, null, "Tiger", "Nixon", (short) 1, new Date(-399571200000L), new Date(), "t.nixon@datatables.net", "5421", "en", "default", "US", "address not specified yet", "System Architect", "Edinburgh", new Date(1293307200000L), new BigDecimal("320800")));
         this.users.add(new User(DBFaker.getNextCounter(), null, null, "Garrett", "Winters", (short) 1, new Date(-462729600000L), new Date(), "g.winters@datatables.net", "8422", "en", "default", "US", "address not specified yet", "Accountant", "Tokyo", new Date(1293307200000L), new BigDecimal("170750")));
         this.users.add(new User(DBFaker.getNextCounter(), null, null, "Ashton", "Cox", (short) 1, new Date(-557337600000L), new Date(), "a.cox@datatables.net", "1562", "en", "default", "US", "address not specified yet", "Junior Technical Author", "San Francisco", new Date(1230408000000L), new BigDecimal("86000")));
@@ -454,11 +476,19 @@ public class DBFaker {
                 message.setMessageContentText("<p>A fake data summary text to show you number " + message.getMessageId() + " geneated from fake database, Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>");
 
                 Calendar calendar = Calendar.getInstance();
-                calendar.add(Calendar.DAY_OF_MONTH, ThreadLocalRandom.current().nextInt(30) * -1);
-                calendar.set(Calendar.HOUR_OF_DAY, ThreadLocalRandom.current().nextInt(24));
-                calendar.set(Calendar.MINUTE, ThreadLocalRandom.current().nextInt(60));
-                calendar.set(Calendar.SECOND, ThreadLocalRandom.current().nextInt(60));
-                calendar.set(Calendar.MILLISECOND, ThreadLocalRandom.current().nextInt(1000));
+                int randomDayOfMonth = ThreadLocalRandom.current().nextInt(31);
+                calendar.add(Calendar.DAY_OF_MONTH, randomDayOfMonth * -1);
+                if (randomDayOfMonth != 0) {
+                    calendar.set(Calendar.HOUR_OF_DAY, ThreadLocalRandom.current().nextInt(24));
+                    calendar.set(Calendar.MINUTE, ThreadLocalRandom.current().nextInt(60));
+                    calendar.set(Calendar.SECOND, ThreadLocalRandom.current().nextInt(60));
+                    calendar.set(Calendar.MILLISECOND, ThreadLocalRandom.current().nextInt(1000));
+                } else {
+                    calendar.set(Calendar.HOUR_OF_DAY, ThreadLocalRandom.current().nextInt(calendar.get(Calendar.HOUR_OF_DAY)));
+                    calendar.set(Calendar.MINUTE, ThreadLocalRandom.current().nextInt(calendar.get(Calendar.MINUTE)));
+                    calendar.set(Calendar.SECOND, ThreadLocalRandom.current().nextInt(calendar.get(Calendar.SECOND)));
+                    calendar.set(Calendar.MILLISECOND, ThreadLocalRandom.current().nextInt(calendar.get(Calendar.MILLISECOND)));
+                }
 
                 message.setCreationDate(calendar.getTime());
                 this.messages.add(message);

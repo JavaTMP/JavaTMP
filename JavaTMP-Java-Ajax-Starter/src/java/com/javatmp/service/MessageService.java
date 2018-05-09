@@ -171,15 +171,15 @@ public class MessageService {
             public int compare(Message o1, Message o2) {
                 int factor = orderOrder.getSortDir().equals("DESC") ? -1 : +1;
                 int retCompare = 0;
-                if (orderOrder.getIndex() == 0) { // messageId
+                if (orderOrder.getData().equals("messageId")) { // messageId
                     retCompare = o1.getMessageId().compareTo(o2.getMessageId()) * factor;
-                } else if (orderOrder.getIndex() == 1) { // messageTitle
+                } else if (orderOrder.getData().equals("messageTitle")) { // messageTitle
                     retCompare = o1.getMessageTitle().compareTo(o2.getMessageTitle()) * factor;
-                } else if (orderOrder.getIndex() == 2) { // creationDate
+                } else if (orderOrder.getData().equals("creationDate")) { // creationDate
                     retCompare = o1.getCreationDate().compareTo(o2.getCreationDate()) * factor * -1;
-                } else if (orderOrder.getIndex() == 3) { // fromUser
+                } else if (orderOrder.getData().equals("fromUser")) { // fromUser
                     retCompare = o1.getFromUser().compareTo(o2.getFromUser()) * factor;
-                } else if (orderOrder.getIndex() == 4) { // toUser
+                } else if (orderOrder.getData().equals("toUser")) { // toUser
                     retCompare = o1.getToUser().compareTo(o2.getToUser()) * factor;
                 }
                 return retCompare;

@@ -31,44 +31,14 @@ public class LoginController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        try {
-            ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
-            ResourceBundle bundle = (ResourceBundle) request.getSession().getAttribute(Constants.LANGUAGE_ATTR_KEY);
-            System.out.println("user bundle [" + bundle + "]");
-            System.out.println("user locale [" + bundle.getLocale() + "]");
-            System.out.println("user locale lang [" + bundle.getLocale().getLanguage() + "]");
-            System.out.println("user locale country [" + bundle.getLocale().getCountry() + "]");
-            // Create a fake user
-            User user = new User();
-            user.setId(DBFaker.getNextCounter());
-            user.setUserName("user" + user.getId());
-            user.setPassword(MD5Util.convertToMD5(user.getUserName()));
-            user.setFirstName("firstName");
-            user.setLastName("lastName");
-            user.setStatus((short) 1);
-            user.setCreationDate(new Date());
-            user.setEmail(user.getUserName() + "@javatmp.com");
-            user.setMobile("00987654321000");
-            user.setLang(bundle.getLocale().getLanguage());
-            user.setTheme("default");
-            user.setPosition("Super Administrator");
-            user.setOffice("New York");
-            user.setBirthOfDate(new Date(-399571200000L));
-            user.setJoiningDate(new Date(1293307200000L));
-            user.setSalary(new BigDecimal("100000"));
-            user.setMobile("123456789");
-            sf.getUserService().createNewUser(user);
-
-            System.out.println("User created [" + MvcHelper.deepToString(user) + "]");
-            request.setAttribute("fakeUser", user);
-            request.getRequestDispatcher("/WEB-INF/pages/custom-pages/login-pages/default-login-page.jsp").forward(request, response);
-        } catch (NoSuchAlgorithmException ex) {
-            ex.printStackTrace();
-            throw new ServletException(ex);
-        } catch (UnsupportedEncodingException ex) {
-            ex.printStackTrace();
-            throw new ServletException(ex);
-        }
+        ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
+        ResourceBundle bundle = (ResourceBundle) request.getSession().getAttribute(Constants.LANGUAGE_ATTR_KEY);
+        System.out.println("user bundle [" + bundle + "]");
+        System.out.println("user locale [" + bundle.getLocale() + "]");
+        System.out.println("user locale lang [" + bundle.getLocale().getLanguage() + "]");
+        System.out.println("user locale country [" + bundle.getLocale().getCountry() + "]");
+        // Create a fake user
+        request.getRequestDispatcher("/WEB-INF/pages/custom-pages/login-pages/default-login-page.jsp").forward(request, response);
 
     }
 
@@ -110,9 +80,6 @@ public class LoginController extends HttpServlet {
             ex.printStackTrace();
             throw new ServletException(ex);
         } catch (InvocationTargetException ex) {
-            ex.printStackTrace();
-            throw new ServletException(ex);
-        } catch (NoSuchAlgorithmException ex) {
             ex.printStackTrace();
             throw new ServletException(ex);
         } catch (UnsupportedEncodingException ex) {

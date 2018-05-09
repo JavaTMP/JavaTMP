@@ -5,7 +5,9 @@
  */
 package com.javatmp.web.listener;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import javax.servlet.ServletContextEvent;
@@ -20,7 +22,9 @@ public class JavaTMPServletListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         sce.getServletContext().log("*** Start App @ [" + new Date() + "] ***");
-        sce.getServletContext().log("****** End *********");
+        // just for demo:
+        TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
+        sce.getServletContext().log("****** End @ [" + new Date() + "] *********");
 
     }
 

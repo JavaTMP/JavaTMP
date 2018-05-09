@@ -130,9 +130,6 @@ public class FilesBrowserController extends HttpServlet {
         } catch (InvocationTargetException ex) {
             ex.printStackTrace();
             throw new ServletException(ex);
-        } catch (NoSuchAlgorithmException ex) {
-            ex.printStackTrace();
-            throw new ServletException(ex);
         } catch (UnsupportedEncodingException ex) {
             ex.printStackTrace();
             throw new ServletException(ex);
