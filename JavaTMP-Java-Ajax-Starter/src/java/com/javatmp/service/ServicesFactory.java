@@ -9,6 +9,7 @@ public class ServicesFactory {
     private DocumentService documentService;
     private CountryService countryService;
     private ContentService contentService;
+    private MessageService messageService;
 
     public ServicesFactory() {
         this.dbFaker = new DBFaker();
@@ -18,6 +19,7 @@ public class ServicesFactory {
         this.documentService = new DocumentService(dbFaker);
         this.countryService = new CountryService(dbFaker);
         this.contentService = new ContentService(dbFaker);
+        this.messageService = new MessageService(dbFaker);
     }
 
     public void destroy() {
@@ -70,5 +72,19 @@ public class ServicesFactory {
      */
     public ContentService getContentService() {
         return contentService;
+    }
+
+    /**
+     * @return the messageService
+     */
+    public MessageService getMessageService() {
+        return messageService;
+    }
+
+    /**
+     * @param messageService the messageService to set
+     */
+    public void setMessageService(MessageService messageService) {
+        this.messageService = messageService;
     }
 }
