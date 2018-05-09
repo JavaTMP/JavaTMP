@@ -697,7 +697,6 @@
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
                 // fire when user resize browser window or sidebar hide / show
-                console.log("event received");
                 javatmp.waitForFinalEvent(function () {
                     table.columns.adjust().draw();
                 }, 0, "@scrollable-datatables-resize");

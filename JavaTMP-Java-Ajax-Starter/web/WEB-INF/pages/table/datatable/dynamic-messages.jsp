@@ -16,7 +16,7 @@
                         <a href="#" class="remove"><i class="fa fa-times"></i></a>
                     </div>
                 </div>
-                <table cellspacing="0" class="table table-condensed table-bordered table-hover table-striped" id="defalut-dataTables-example">
+                <table cellspacing="0" class="table table-condensed table-bordered table-hover table-striped display nowrap" id="defalut-dataTables-example">
                     <thead>
                         <tr>
                             <th>Id</th>
@@ -111,17 +111,18 @@
                     }
                 },
                 columns: [
-                    {data: 'messageId'},
+                    {data: 'messageId', width: 75},
                     {data: 'messageTitle'},
                     {
                         data: 'creationDate',
                         "type": "date",
+                        width: 125,
                         "render": function (data, type, row) {
                             return moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("DD/MM/YYYY HH:mm");
                         }
                     },
-                    {data: 'fromUser'},
-                    {data: 'toUser'}
+                    {data: 'fromUser', width: 100},
+                    {data: 'toUser', width: 100}
                 ]
             });
 
@@ -131,7 +132,9 @@
             });
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
                 // fire when user resize browser window or sidebar hide / show
-                table.columns.adjust().draw();
+                javatmp.waitForFinalEvent(function () {
+                    table.columns.adjust().draw();
+                }, 200, "@dynamic-messages-datatables-resize");
             });
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenCompress, function (event, card) {
                 // when card compress by pressing the top right tool button

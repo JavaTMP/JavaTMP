@@ -103,8 +103,8 @@ public class MessageService {
         List<Message> newDB = new LinkedList<>();
         for (Message msg : db) {
             try {
-                if (searchParameters.get("id") != null && !searchParameters.get("id").equals("")) {
-                    Object searchValueObject = searchParameters.get("id");
+                if (searchParameters.get("messageId") != null && !searchParameters.get("messageId").equals("")) {
+                    Object searchValueObject = searchParameters.get("messageId");
                     Long searchValue = new Long(searchValueObject.toString());
                     Long dbValue = msg.getMessageId();
                     if (!dbValue.equals(searchValue)) {
