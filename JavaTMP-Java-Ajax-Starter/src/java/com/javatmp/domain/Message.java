@@ -19,20 +19,20 @@ public class Message implements Serializable {
     private String messageTitle;
     private String messageContentText;
     private Date creationDate;
-    private String messageFrom;
-    private String messageTo;
+    private Long fromUser;
+    private Long toUser;
     private Short messageStatus;
 
     public Message() {
     }
 
-    public Message(Long messageId, String messageTitle, String messageContentText, Date creationDate, String messageFrom, String messageTo, Short messageStatus) {
+    public Message(Long messageId, String messageTitle, String messageContentText, Date creationDate, Long fromUser, Long toUser, Short messageStatus) {
         this.messageId = messageId;
         this.messageTitle = messageTitle;
         this.messageContentText = messageContentText;
         this.creationDate = creationDate;
-        this.messageFrom = messageFrom;
-        this.messageTo = messageTo;
+        this.fromUser = fromUser;
+        this.toUser = toUser;
         this.messageStatus = messageStatus;
     }
 
@@ -93,34 +93,6 @@ public class Message implements Serializable {
     }
 
     /**
-     * @return the messageFrom
-     */
-    public String getMessageFrom() {
-        return messageFrom;
-    }
-
-    /**
-     * @param messageFrom the messageFrom to set
-     */
-    public void setMessageFrom(String messageFrom) {
-        this.messageFrom = messageFrom;
-    }
-
-    /**
-     * @return the messageTo
-     */
-    public String getMessageTo() {
-        return messageTo;
-    }
-
-    /**
-     * @param messageTo the messageTo to set
-     */
-    public void setMessageTo(String messageTo) {
-        this.messageTo = messageTo;
-    }
-
-    /**
      * @return the messageStatus
      */
     public Short getMessageStatus() {
@@ -132,6 +104,34 @@ public class Message implements Serializable {
      */
     public void setMessageStatus(Short messageStatus) {
         this.messageStatus = messageStatus;
+    }
+
+    /**
+     * @return the fromUser
+     */
+    public Long getFromUser() {
+        return fromUser;
+    }
+
+    /**
+     * @param fromUser the fromUser to set
+     */
+    public void setFromUser(Long fromUser) {
+        this.fromUser = fromUser;
+    }
+
+    /**
+     * @return the toUser
+     */
+    public Long getToUser() {
+        return toUser;
+    }
+
+    /**
+     * @param toUser the toUser to set
+     */
+    public void setToUser(Long toUser) {
+        this.toUser = toUser;
     }
 
 }

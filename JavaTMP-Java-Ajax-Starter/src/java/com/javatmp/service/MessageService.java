@@ -1,6 +1,7 @@
 package com.javatmp.service;
 
 import com.javatmp.domain.Content;
+import com.javatmp.domain.Message;
 import com.javatmp.mvc.Page;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,38 +15,26 @@ public class MessageService {
     }
 
     public Long getAllCount() {
-        return Long.valueOf(this.dBFaker.getContents().size());
+        return Long.valueOf(this.dBFaker.getMessages().size());
     }
 
-    public List<Content> getContents() {
-        return this.dBFaker.getContents();
+    public List<Message> getContents() {
+        return this.dBFaker.getMessages();
     }
 
-    public Boolean updateContentText(Content content) {
-        Boolean updatedStatus = false;
-        List<Content> db = this.dBFaker.getContents();
-        for (Content row : db) {
-            if (row.getContentId().equals(content.getContentId())) {
-                row.setContentText(content.getContentText());
-                updatedStatus = true;
-            }
-        }
-        return updatedStatus;
-    }
-
-    public Content readContentById(Content content) {
-        List<Content> db = this.dBFaker.getContents();
-        for (Content row : db) {
-            if (row.getContentId().equals(content.getContentId())) {
+    public Message readMessageById(Message message) {
+        List<Message> db = this.dBFaker.getMessages();
+        for (Message row : db) {
+            if (row.getMessageId().equals(message.getMessageId())) {
                 return row;
             }
         }
-        throw new IllegalArgumentException("Record id [" + content.getContentId() + "] Not found");
+        throw new IllegalArgumentException("Record id [" + message.getMessageId() + "] Not found");
     }
 
-    public Page<Content> listContent(Page<Content> page) {
-        List<Content> retList = new LinkedList<>();
-        List<Content> db = this.dBFaker.getContents();
+    public Page<Message> listContent(Page<Message> page) {
+        List<Message> retList = new LinkedList<>();
+        List<Message> db = this.dBFaker.getMessages();
         for (int i = (page.getRequestedPageNum() - 1) * page.getNumOfRowsPerPage();
                 i < db.size() && i < (page.getRequestedPageNum()) * page.getNumOfRowsPerPage(); i++) {
             retList.add(db.get(i));
