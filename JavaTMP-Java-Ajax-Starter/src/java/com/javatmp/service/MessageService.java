@@ -79,24 +79,35 @@ public class MessageService {
         System.out.println("Start mapping search parameteres");
         Map<String, Object> searchParameters = new HashMap<>();
         int index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(0, "messageId"));
-        DataTableColumnSpecs column = tableRequest.getColumns().get(index);
-        searchParameters.put("messageId", column.getSearch());
+        DataTableColumnSpecs column;
+        if (index != -1) {
+            column = tableRequest.getColumns().get(index);
+            searchParameters.put("messageId", column.getSearch());
+        }
 
         index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(1, "messageTitle"));
-        column = tableRequest.getColumns().get(index);
-        searchParameters.put("messageTitle", column.getSearch());
+        if (index != -1) {
+            column = tableRequest.getColumns().get(index);
+            searchParameters.put("messageTitle", column.getSearch());
+        }
 
         index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(2, "creationDate"));
-        column = tableRequest.getColumns().get(index);
-        searchParameters.put("creationDate", column.getSearch());
+        if (index != -1) {
+            column = tableRequest.getColumns().get(index);
+            searchParameters.put("creationDate", column.getSearch());
+        }
 
         index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(3, "fromUser"));
-        column = tableRequest.getColumns().get(index);
-        searchParameters.put("fromUser", column.getSearch());
+        if (index != -1) {
+            column = tableRequest.getColumns().get(index);
+            searchParameters.put("fromUser", column.getSearch());
+        }
 
         index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(4, "toUser"));
-        column = tableRequest.getColumns().get(index);
-        searchParameters.put("toUser", column.getSearch());
+        if (index != -1) {
+            column = tableRequest.getColumns().get(index);
+            searchParameters.put("toUser", column.getSearch());
+        }
 
         System.out.println("search [" + searchParameters + "]");
 // apply individual column search:

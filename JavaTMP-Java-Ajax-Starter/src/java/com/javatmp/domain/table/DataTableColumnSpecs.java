@@ -241,7 +241,8 @@ public class DataTableColumnSpecs {
         //cast to native object is now safe
         DataTableColumnSpecs that = (DataTableColumnSpecs) aThat;
         //now a proper field-by-field evaluation can be made
-        return this.index == that.index && this.data.equals(that.data);
+//        return this.index == that.index && this.data.equals(that.data);
+        return this.data.equals(that.data);
     }
 
 }

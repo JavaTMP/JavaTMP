@@ -45,7 +45,7 @@ public class ListMessagesController extends HttpServlet {
                 .registerTypeAdapter(Class.class, new ClassTypeAdapter())
                 .create();
         String json = gson.toJson(responseMessage);
-        System.out.println("response [" + json + "]");
+//        System.out.println("response [" + json + "]");
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);

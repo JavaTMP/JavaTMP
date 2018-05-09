@@ -239,14 +239,22 @@ public class DataTableRequest<T> {
             this.setStart(Integer.parseInt(request.getParameter(PaginationCriteria.PAGE_NO)));
             this.setLength(Integer.parseInt(request.getParameter(PaginationCriteria.PAGE_SIZE)));
             this.setUniqueId(request.getParameter("_"));
-            this.setDraw(Integer.parseInt(request.getParameter(PaginationCriteria.DRAW)));
+            String drawValue;
+            if ((drawValue = request.getParameter(PaginationCriteria.DRAW)) != null) {
+                this.setDraw(Integer.parseInt(request.getParameter(PaginationCriteria.DRAW)));
+            }
 
             this.setSearch(request.getParameter("search[value]"));
             this.setRegex(Boolean.valueOf(request.getParameter("search[regex]")));
 
-            int sortableCol = Integer.parseInt(request.getParameter("order[0][column]"));
+            String sortableColValue;
+            int sortableCol = -1;
+            if ((sortableColValue = request.getParameter("order[0][column]")) != null) {
+                sortableCol = Integer.parseInt(request.getParameter("order[0][column]"));
+            }
+            System.out.println("sortableCol index [" + sortableCol + "]");
 
-            List<DataTableColumnSpecs> columns = new ArrayList<DataTableColumnSpecs>();
+            this.columns = new ArrayList<DataTableColumnSpecs>();
 
             if (!AppUtil.isObjectEmpty(this.getSearch())) {
                 this.setGlobalSearch(true);
@@ -268,10 +276,6 @@ public class DataTableRequest<T> {
                         this.setGlobalSearch(false);
                     }
                 }
-            }
-
-            if (!AppUtil.isObjectEmpty(columns)) {
-                this.setColumns(columns);
             }
         }
     }

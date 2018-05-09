@@ -882,6 +882,12 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a href="${pageContext.request.contextPath}/pages/plugins/dynamic-messages-using-malihu-scrollable">
+                                            <i class="far fa-lg fa-fw fa-gem"></i>
+                                            Dynamic Messages Using Malihu Scrollable
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="${pageContext.request.contextPath}/pages/plugins/bootstrap-modal-wrapper">
                                             <i class="far fa-lg fa-fw fa-gem"></i>
                                             Bootstrap Modal Wrapper Plugin
