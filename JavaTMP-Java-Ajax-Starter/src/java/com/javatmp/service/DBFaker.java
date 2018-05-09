@@ -10,6 +10,7 @@ import com.javatmp.domain.Content;
 import com.javatmp.domain.Country;
 import com.javatmp.domain.DiaryEvent;
 import com.javatmp.domain.Document;
+import com.javatmp.domain.Message;
 import com.javatmp.domain.User;
 import java.math.BigDecimal;
 import java.util.Calendar;
@@ -31,6 +32,8 @@ public class DBFaker {
     private List<Country> countries = new LinkedList<>();
     private List<Content> contents = new LinkedList<>();
     private List<Account> accounts = new LinkedList<>();
+    private List<Message> messages = new LinkedList<>();
+
     private static Long counter = 0L;
 
     public static synchronized Long getNextCounter() {
@@ -468,5 +471,12 @@ public class DBFaker {
      */
     public List<Content> getContents() {
         return contents;
+    }
+
+    /**
+     * @return the contents
+     */
+    public List<Message> getMessages() {
+        return messages;
     }
 }
