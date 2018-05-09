@@ -121,8 +121,8 @@
                             return moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("DD/MM/YYYY HH:mm");
                         }
                     },
-                    {data: 'fromUser', width: 100},
-                    {data: 'toUser', width: 100}
+                    {data: 'fromUserId', width: 100},
+                    {data: 'toUserId', width: 100}
                 ]
             });
 

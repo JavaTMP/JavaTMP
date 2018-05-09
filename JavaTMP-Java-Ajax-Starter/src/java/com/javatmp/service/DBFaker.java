@@ -468,8 +468,8 @@ public class DBFaker {
                 Long to = this.users.get(randomTo).getId();
                 Message message = new Message();
                 message.setMessageId(DBFaker.getNextCounter());
-                message.setFromUser(from);
-                message.setToUser(to);
+                message.setFromUserId(from);
+                message.setToUserId(to);
                 message.setMessageStatus((short) 1);
                 message.setMessageTitle("Fake Message number " + message.getMessageId());
 

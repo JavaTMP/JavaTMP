@@ -19,8 +19,10 @@ public class Message implements Serializable {
     private String messageTitle;
     private String messageContentText;
     private Date creationDate;
-    private Long fromUser;
-    private Long toUser;
+    private Long fromUserId;
+    private Long toUserId;
+    private User fromUser;
+    private User toUser;
     private Short messageStatus;
 
     public Message() {
@@ -31,8 +33,8 @@ public class Message implements Serializable {
         this.messageTitle = messageTitle;
         this.messageContentText = messageContentText;
         this.creationDate = creationDate;
-        this.fromUser = fromUser;
-        this.toUser = toUser;
+        this.fromUserId = fromUser;
+        this.toUserId = toUser;
         this.messageStatus = messageStatus;
     }
 
@@ -107,30 +109,58 @@ public class Message implements Serializable {
     }
 
     /**
+     * @return the fromUserId
+     */
+    public Long getFromUserId() {
+        return fromUserId;
+    }
+
+    /**
+     * @param fromUserId the fromUserId to set
+     */
+    public void setFromUserId(Long fromUserId) {
+        this.fromUserId = fromUserId;
+    }
+
+    /**
+     * @return the toUserId
+     */
+    public Long getToUserId() {
+        return toUserId;
+    }
+
+    /**
+     * @param toUserId the toUserId to set
+     */
+    public void setToUserId(Long toUserId) {
+        this.toUserId = toUserId;
+    }
+
+    /**
      * @return the fromUser
      */
-    public Long getFromUser() {
+    public User getFromUser() {
         return fromUser;
     }
 
     /**
      * @param fromUser the fromUser to set
      */
-    public void setFromUser(Long fromUser) {
+    public void setFromUser(User fromUser) {
         this.fromUser = fromUser;
     }
 
     /**
      * @return the toUser
      */
-    public Long getToUser() {
+    public User getToUser() {
         return toUser;
     }
 
     /**
      * @param toUser the toUser to set
      */
-    public void setToUser(Long toUser) {
+    public void setToUser(User toUser) {
         this.toUser = toUser;
     }
 

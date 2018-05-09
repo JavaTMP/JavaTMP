@@ -2,6 +2,7 @@ package com.javatmp.service;
 
 import com.javatmp.domain.Content;
 import com.javatmp.domain.Message;
+import com.javatmp.domain.User;
 import com.javatmp.domain.table.DataTableColumnSpecs;
 import com.javatmp.domain.table.DataTableRequest;
 import com.javatmp.domain.table.DataTableResults;
@@ -20,9 +21,11 @@ import java.util.Map;
 public class MessageService {
 
     private final DBFaker dBFaker;
+    private UserService userService;
 
-    public MessageService(DBFaker dBFaker) {
+    public MessageService(DBFaker dBFaker, UserService userService) {
         this.dBFaker = dBFaker;
+        this.userService = userService;
     }
 
     public Long getAllCount() {
@@ -97,16 +100,16 @@ public class MessageService {
             searchParameters.put("creationDate", column.getSearch());
         }
 
-        index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(3, "fromUser"));
+        index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(3, "fromUserId"));
         if (index != -1) {
             column = tableRequest.getColumns().get(index);
-            searchParameters.put("fromUser", column.getSearch());
+            searchParameters.put("fromUserId", column.getSearch());
         }
 
-        index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(4, "toUser"));
+        index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(4, "toUserId"));
         if (index != -1) {
             column = tableRequest.getColumns().get(index);
-            searchParameters.put("toUser", column.getSearch());
+            searchParameters.put("toUserId", column.getSearch());
         }
 
         System.out.println("search [" + searchParameters + "]");
@@ -141,25 +144,24 @@ public class MessageService {
                         continue;
                     }
                 }
-                if (searchParameters.get("fromUser") != null && !searchParameters.get("fromUser").equals("")) {
-                    Object searchValueObject = searchParameters.get("fromUser");
+                if (searchParameters.get("fromUserId") != null && !searchParameters.get("fromUserId").equals("")) {
+                    Object searchValueObject = searchParameters.get("fromUserId");
                     String searchValueStr = searchValueObject.toString().trim().toLowerCase();
                     Long searchValue = new Long(searchValueStr);
-                    Long dbValue = msg.getFromUser();
+                    Long dbValue = msg.getFromUserId();
                     if (!dbValue.equals(searchValue)) {
                         continue;
                     }
                 }
-                if (searchParameters.get("toUser") != null && !searchParameters.get("toUser").equals("")) {
-                    Object searchValueObject = searchParameters.get("toUser");
+                if (searchParameters.get("toUserId") != null && !searchParameters.get("toUserId").equals("")) {
+                    Object searchValueObject = searchParameters.get("toUserId");
                     String searchValueStr = searchValueObject.toString().trim().toLowerCase();
                     Long searchValue = new Long(searchValueStr);
-                    Long dbValue = msg.getToUser();
+                    Long dbValue = msg.getToUserId();
                     if (!dbValue.equals(searchValue)) {
                         continue;
                     }
                 }
-//                System.out.println("add msg [" + msg.getMessageId() + "] from [" + msg.getFromUser() + "], to [" + msg.getToUser() + "]");
                 newDB.add(msg);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -177,17 +179,40 @@ public class MessageService {
                     retCompare = o1.getMessageTitle().compareTo(o2.getMessageTitle()) * factor;
                 } else if (orderOrder.getData().equals("creationDate")) { // creationDate
                     retCompare = o1.getCreationDate().compareTo(o2.getCreationDate()) * factor * -1;
-                } else if (orderOrder.getData().equals("fromUser")) { // fromUser
-                    retCompare = o1.getFromUser().compareTo(o2.getFromUser()) * factor;
-                } else if (orderOrder.getData().equals("toUser")) { // toUser
-                    retCompare = o1.getToUser().compareTo(o2.getToUser()) * factor;
+                } else if (orderOrder.getData().equals("fromUserId")) { // fromUser
+                    retCompare = o1.getFromUserId().compareTo(o2.getFromUserId()) * factor;
+                } else if (orderOrder.getData().equals("toUserId")) { // toUser
+                    retCompare = o1.getToUserId().compareTo(o2.getToUserId()) * factor;
                 }
                 return retCompare;
             }
         });
         for (int i = tableRequest.getStart();
                 i < db.size() && i < (tableRequest.getStart() + tableRequest.getLength()); i++) {
-            retList.add(db.get(i));
+            Message msg = db.get(i);
+            Long fromUserId = msg.getFromUserId();
+            Long toUserId = msg.getToUserId();
+            User fromUser = new User();
+            fromUser.setId(fromUserId);
+
+            User dbUser = this.userService.readUserByUserId(fromUser);
+            if (dbUser != null) {
+                fromUser.setFirstName(dbUser.getFirstName());
+                fromUser.setLastName(dbUser.getLastName());
+                msg.setFromUser(fromUser);
+            }
+
+            User toUser = new User();
+            toUser.setId(toUserId);
+
+            dbUser = this.userService.readUserByUserId(toUser);
+            if (dbUser != null) {
+                toUser.setFirstName(dbUser.getFirstName());
+                toUser.setLastName(dbUser.getLastName());
+                msg.setToUser(toUser);
+            }
+
+            retList.add(msg);
         }
 
         DataTableResults<Message> dataTableResult = new DataTableResults<>();

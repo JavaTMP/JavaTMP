@@ -19,7 +19,7 @@ public class ServicesFactory {
         this.documentService = new DocumentService(dbFaker);
         this.countryService = new CountryService(dbFaker);
         this.contentService = new ContentService(dbFaker);
-        this.messageService = new MessageService(dbFaker);
+        this.messageService = new MessageService(dbFaker, this.userService);
     }
 
     public void destroy() {

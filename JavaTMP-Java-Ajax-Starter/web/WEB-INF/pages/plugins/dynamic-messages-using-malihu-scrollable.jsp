@@ -45,17 +45,6 @@
             height: 400px;
         }
     </style>
-    <style type="text/css">
-        #infinite-scroll .offset{
-            display: block;
-            width: 100%;
-            height: auto;
-            color: #ffed0d;
-            -webkit-border-radius: 3px;
-            -moz-border-radius: 3px;
-            border-radius: 3px;
-        }
-    </style>
 
     <!--
     Reference Your external Javascript file here
@@ -69,17 +58,17 @@
         //
 
         var template =
-                '<a class="p-3 list-group-item list-group-item-action" actionType="ajax-model" href="${pageContext.request.contextPath}/pages/custom-pages/inbox/ajax/ajax-view-message">' +
+                '<a class="p-1 list-group-item list-group-item-action" actionType="ajax-model" href="${pageContext.request.contextPath}/pages/custom-pages/inbox/ajax/ajax-view-message">' +
                 '    <div class="media">' +
                 '        <img class="mr-1" src="{{contextPath}}/assets/img/64x64.gif" alt="Generic placeholder image"/>' +
                 '        <div class="media-body">' +
                 '            <div class="mt-0 d-flex justify-content-between">' +
-                '                <strong>{{messageTitle}}</strong>' +
+                '                <strong>{{senderFirstName}} {{senderLastName}}</strong>' +
                 '                <span class="text-muted">' +
                 '                    <small><em><time class="timeago" datetime="{{creationDate}}">{{formatedDate}}</time></em></small>' +
                 '                </span>' +
                 '            </div>' +
-                '            {{messageContentText}}' +
+                '            {{messageTitle}}' +
                 '        </div>' +
                 '    </div>' +
                 '</a>';
@@ -101,7 +90,6 @@
 
             var indicatorTemplate = '<div class="fetch-indicator text-center m-2 p-2"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>';
             var workingDown = false;
-            var workingTop = false;
             var startFrom = 0;
             var recordPerPage = 10;
             var allCount = Number.MAX_SAFE_INTEGER;
@@ -136,7 +124,7 @@
                                     "order[0][column]": 0,
                                     "order[0][dir]": "ASC",
                                     "columns[0][data]": "creationDate",
-                                    "columns[1][data]": "toUser",
+                                    "columns[1][data]": "toUserId",
                                     "columns[1][search][value]": toUserId
                                 };
                                 $.ajax({
@@ -152,6 +140,8 @@
                                                 'messageId': row.messageId,
                                                 'messageTitle': row.messageTitle,
                                                 'messageContentText': row.messageContentText,
+                                                'senderFirstName': row.fromUser.firstName,
+                                                'senderLastName': row.fromUser.lastName,
                                                 'creationDate': row.creationDate,
                                                 'formatedDate': moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss"),
                                                 'contextPath': javatmp.settings.contextPath
@@ -189,7 +179,7 @@
                             "order[0][column]": 0,
                             "order[0][dir]": "ASC",
                             "columns[0][data]": "creationDate",
-                            "columns[1][data]": "toUser",
+                            "columns[1][data]": "toUserId",
                             "columns[1][search][value]": toUserId
 
                         };
@@ -206,6 +196,8 @@
                                         'messageId': row.messageId,
                                         'messageTitle': row.messageTitle,
                                         'messageContentText': row.messageContentText,
+                                        'senderFirstName': row.fromUser.firstName,
+                                        'senderLastName': row.fromUser.lastName,
                                         'creationDate': row.creationDate,
                                         'formatedDate': moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss"),
                                         'contextPath': javatmp.settings.contextPath

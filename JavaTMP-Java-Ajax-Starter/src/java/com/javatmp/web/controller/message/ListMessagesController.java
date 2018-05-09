@@ -34,13 +34,12 @@ public class ListMessagesController extends HttpServlet {
         ResponseMessage responseMessage = new ResponseMessage();
         ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         MessageService cs = sf.getMessageService();
-        UserService us = sf.getUserService();
 
         System.out.println("Try to convert request to datatable request");
+
         DataTableRequest<Message> tableRequest = new DataTableRequest<>(request);
 
         System.out.println("datatableRequest [" + MvcHelper.deepToString(tableRequest) + "]");
-//        try {
 
         DataTableResults<Message> dataTableResult = cs.listMessages(tableRequest);
 

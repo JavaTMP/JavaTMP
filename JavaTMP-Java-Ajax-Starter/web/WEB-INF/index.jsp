@@ -49,7 +49,7 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item py-0 dropdown mega-on-sm">
+                <li class="nav-item py-0 dropdown mega-on-sm" id="myMessagesDropdownId">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
                         <i class="fa fa-envelope fa-lg faa-shake animated"></i>
                         <span class="badge badge-danger d-none d-md-inline">99+</span>
@@ -63,64 +63,7 @@
                                 Create New Message
                             </a>
                         </div>
-                        <div class="dropdown-menu-content scroll-content">
-                            <div class="list-group list-group-flush">
-                                <a actionType="ajax-model"
-                                   href="${pageContext.request.contextPath}/pages/custom-pages/inbox/ajax/ajax-view-message"
-                                   class="list-group-item list-group-item-action">
-                                    <div>
-                                        <strong>John Smith</strong>
-                                        <span class="float-right text-muted">
-                                            <em>Yesterday</em>
-                                        </span>
-                                    </div>
-                                    <div>Lorem ipsum dolor sit amet adipis dolor sit elit ipsum dolor sit elit ...</div>
-                                </a>
-                                <a actionType="ajax-model"
-                                   href="${pageContext.request.contextPath}/pages/custom-pages/inbox/ajax/ajax-view-message"
-                                   class="list-group-item list-group-item-action">
-                                    <div>
-                                        <strong>John Smith</strong>
-                                        <span class="float-right text-muted">
-                                            <em>Yesterday</em>
-                                        </span>
-                                    </div>
-                                    <div>Lorem ipsum dolor sit amet adipis dolor sit elit ipsum dolor sit elit ...</div>
-                                </a>
-                                <a actionType="ajax-model"
-                                   href="${pageContext.request.contextPath}/pages/custom-pages/inbox/ajax/ajax-view-message"
-                                   class="list-group-item list-group-item-action">
-                                    <div>
-                                        <strong>John Smith</strong>
-                                        <span class="float-right text-muted">
-                                            <em>Yesterday</em>
-                                        </span>
-                                    </div>
-                                    <div>Lorem ipsum dolor sit amet adipis dolor sit elit ipsum dolor sit elit ...</div>
-                                </a>
-                                <a actionType="ajax-model"
-                                   href="${pageContext.request.contextPath}/pages/custom-pages/inbox/ajax/ajax-view-message"
-                                   class="list-group-item list-group-item-action">
-                                    <div>
-                                        <strong>John Smith</strong>
-                                        <span class="float-right text-muted">
-                                            <em>Yesterday</em>
-                                        </span>
-                                    </div>
-                                    <div>Lorem ipsum dolor sit amet adipis dolor sit elit ipsum dolor sit elit ...</div>
-                                </a>
-                                <a actionType="ajax-model"
-                                   href="${pageContext.request.contextPath}/pages/custom-pages/inbox/ajax/ajax-view-message"
-                                   class="list-group-item list-group-item-action">
-                                    <div>
-                                        <strong>John Smith</strong>
-                                        <span class="float-right text-muted">
-                                            <em>Yesterday</em>
-                                        </span>
-                                    </div>
-                                    <div>Lorem ipsum dolor sit amet adipis dolor sit elit ipsum dolor sit elit ...</div>
-                                </a>
-                            </div>
+                        <div class="list-group-flush list-group dropdown-menu-content dynamic-messages-scroll-content">
                         </div>
                         <div class="dropdown-menu-footer">
                             <a actionType="ajax-model"
@@ -1583,6 +1526,180 @@
                         }
                     }
                 };
+            });
+        </script>
+        <style type="text/css">
+            #myMessagesDropdownId .offset{
+                display: block;
+                width: 100%;
+                height: auto;
+                color: #ffed0d;
+                -webkit-border-radius: 3px;
+                -moz-border-radius: 3px;
+                border-radius: 3px;
+            }
+        </style>
+        <script type="text/javascript">
+            jQuery(function ($) {
+                //Compose template string
+                String.prototype.composeTemplate = (function () {
+                    var re = /\{{(.+?)\}}/g;
+                    return function (o) {
+                        return this.replace(re, function (_, k) {
+                            return typeof o[k] !== 'undefined' ? o[k] : '';
+                        });
+                    };
+                }());
+                var template =
+                        '<a class="p-1 list-group-item list-group-item-action" actionType="ajax-model" href="${pageContext.request.contextPath}/pages/custom-pages/inbox/ajax/ajax-view-message">' +
+                        '    <div class="media">' +
+                        '        <img class="mr-1" src="{{contextPath}}/assets/img/64x64.gif" alt="Generic placeholder image"/>' +
+                        '        <div class="media-body">' +
+                        '            <div class="mt-0 d-flex justify-content-between">' +
+                        '                <strong>{{senderFirstName}} {{senderLastName}}</strong>' +
+                        '                <span class="text-muted">' +
+                        '                    <small><em><time class="timeago" datetime="{{creationDate}}">{{formatedDate}}</time></em></small>' +
+                        '                </span>' +
+                        '            </div>' +
+                        '            {{messageTitle}}' +
+                        '        </div>' +
+                        '    </div>' +
+                        '</a>';
+                var myMessagesDropdown = $('#myMessagesDropdownId');
+                var indicatorTemplate = '<div class="fetch-indicator text-center m-2 p-2"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>';
+                var workingDown = false;
+                var startFrom = 0;
+                var recordPerPage = 10;
+                var allCount = Number.MAX_SAFE_INTEGER;
+                var currentFetchedCount = 0;
+                var toUserId = javatmp.user.id;
+                var myMessagesScrollable = $(".dynamic-messages-scroll-content", myMessagesDropdown);
+                myMessagesScrollable.mCustomScrollbar({
+                    theme: "javatmp",
+                    alwaysShowScrollbar: 2,
+                    scrollButtons: {
+                        enable: false
+                    },
+                    mouseWheel: {
+                        preventDefault: true
+                    },
+                    callbacks: {
+                        onInit: function () {
+                        },
+                        onScroll: function () {
+                            console.log("top = " + this.mcs.top + " , direction = " + this.mcs.direction);
+                        },
+                        onTotalScroll: function () {
+                            if (!workingDown) {
+                                console.log("** onTotalScroll currentFetch [" + currentFetchedCount + "], allCount [" + allCount + "]");
+                                if (currentFetchedCount < allCount) {
+                                    workingDown = true;
+                                    this.mcs.content.append(indicatorTemplate);
+                                    var that = this;
+                                    var passData = {
+                                        "_ajaxGlobalBlockUI": false,
+                                        "start": startFrom,
+                                        "length": recordPerPage,
+                                        "order[0][column]": 0,
+                                        "order[0][dir]": "ASC",
+                                        "columns[0][data]": "creationDate",
+                                        "columns[1][data]": "toUserId",
+                                        "columns[1][search][value]": toUserId
+                                    };
+                                    $.ajax({
+                                        url: javatmp.settings.contextPath + "/user/ListMessagesController",
+                                        data: passData,
+                                        success: function (response, textStatus, jqXHR) {
+                                            that.mcs.content.find(".fetch-indicator").remove();
+                                            var data = response.data.data;
+                                            allCount = response.data.recordsTotal;
+                                            $.each(data, function (index, row) {
+                                                currentFetchedCount++;
+                                                var readyData = template.composeTemplate({
+                                                    'messageId': row.messageId,
+                                                    'messageTitle': row.messageTitle,
+                                                    'messageContentText': row.messageContentText,
+                                                    'senderFirstName': row.fromUser.firstName,
+                                                    'senderLastName': row.fromUser.lastName,
+                                                    'creationDate': row.creationDate,
+                                                    'formatedDate': moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss"),
+                                                    'contextPath': javatmp.settings.contextPath
+                                                });
+                                                that.mcs.content.append(readyData);
+                                                that.mcs.content.find("time.timeago").timeago();
+                                            });
+                                            workingDown = false;
+                                            startFrom += data.length;
+                                        }
+                                    });
+                                }
+                            }
+                        },
+                        onTotalScrollBackOffset: 0,
+                        onTotalScrollOffset: 200,
+                        alwaysTriggerOffsets: true
+                    }
+                });
+
+                myMessagesDropdown.on('show.bs.dropdown', function () {
+                    console.log("Opening dropdown..");
+                });
+
+                myMessagesDropdown.on('shown.bs.dropdown', function () {
+                    if (!workingDown && startFrom === 0) {
+                        console.log("fetch initial messages only once");
+                        if (currentFetchedCount < allCount) {
+                            workingDown = true;
+                            $(".mCSB_container", myMessagesScrollable).append(indicatorTemplate);
+                            var passData = {
+                                "_ajaxGlobalBlockUI": false,
+                                "start": startFrom,
+                                "length": recordPerPage,
+                                "order[0][column]": 0,
+                                "order[0][dir]": "ASC",
+                                "columns[0][data]": "creationDate",
+                                "columns[1][data]": "toUserId",
+                                "columns[1][search][value]": toUserId
+
+                            };
+                            $.ajax({
+                                url: javatmp.settings.contextPath + "/user/ListMessagesController",
+                                data: passData,
+                                success: function (response, textStatus, jqXHR) {
+                                    $(".mCSB_container", myMessagesScrollable).find(".fetch-indicator").remove();
+                                    var data = response.data.data;
+                                    allCount = response.data.recordsTotal;
+                                    $.each(data, function (index, row) {
+                                        currentFetchedCount++;
+                                        var readyData = template.composeTemplate({
+                                            'messageId': row.messageId,
+                                            'messageTitle': row.messageTitle,
+                                            'messageContentText': row.messageContentText,
+                                            'senderFirstName': row.fromUser.firstName,
+                                            'senderLastName': row.fromUser.lastName,
+                                            'creationDate': row.creationDate,
+                                            'formatedDate': moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss"),
+                                            'contextPath': javatmp.settings.contextPath
+                                        });
+                                        $(".mCSB_container", myMessagesScrollable).append(readyData);
+                                        $(".mCSB_container", myMessagesScrollable).find("time.timeago").timeago();
+                                    });
+                                    workingDown = false;
+                                    startFrom += data.length;
+                                }
+                            });
+                        }
+                    }
+                });
+
+                myMessagesDropdown.on('hide.bs.dropdown', function () {
+                    console.log("Hiding dropdown..");
+                });
+
+                myMessagesDropdown.on('hidden.bs.dropdown', function () {
+                    console.log("Dropdown hidden..");
+                });
+
             });
         </script>
         <script type="text/javascript">
