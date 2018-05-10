@@ -26,7 +26,7 @@ import javax.servlet.http.Part;
 
 @WebServlet("/UploadController")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024,
-        maxFileSize = 1024 * 1024 * 50, maxRequestSize = 1024 * 1024 * 50 * 5)
+        maxFileSize = 1024 * 1024 * 1, maxRequestSize = 1024 * 1024 * 5)
 public class UploadController extends HttpServlet {
 
     @Override

@@ -32,7 +32,7 @@ import javax.servlet.http.Part;
 
 @WebServlet("/user/CreateUserController")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024,
-        maxFileSize = 1024 * 1024, maxRequestSize = 1024 * 1024 * 2)
+        maxFileSize = 1024 * 1024 * 1, maxRequestSize = 1024 * 1024 * 2)
 public class CreateUserController extends HttpServlet {
 
     @Override
