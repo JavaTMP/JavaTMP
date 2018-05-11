@@ -45,20 +45,16 @@ public class MessageService {
                 User fromUser = new User();
                 fromUser.setId(fromUserId);
 
-                User dbUser = this.userService.readUserByUserId(fromUser);
-                if (dbUser != null) {
-                    fromUser.setFirstName(dbUser.getFirstName());
-                    fromUser.setLastName(dbUser.getLastName());
+                fromUser = this.userService.readUserByUserId(fromUser);
+                if (fromUser != null) {
                     row.setFromUser(fromUser);
                 }
 
                 User toUser = new User();
                 toUser.setId(toUserId);
 
-                dbUser = this.userService.readUserByUserId(toUser);
-                if (dbUser != null) {
-                    toUser.setFirstName(dbUser.getFirstName());
-                    toUser.setLastName(dbUser.getLastName());
+                toUser = this.userService.readUserByUserId(toUser);
+                if (toUser != null) {
                     row.setToUser(toUser);
                 }
                 return row;

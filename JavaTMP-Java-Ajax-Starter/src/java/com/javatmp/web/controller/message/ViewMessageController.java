@@ -30,7 +30,7 @@ import javax.servlet.http.HttpSession;
 public class ViewMessageController extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
@@ -44,7 +44,7 @@ public class ViewMessageController extends HttpServlet {
             System.out.println("message to read [" + MvcHelper.deepToString(message) + "]");
 
             message = ms.readMessageById(message);
-
+            System.out.println("Dynamic View Message [" + MvcHelper.deepToString(message) + "]");
             request.setAttribute("message", message);
 
             request.getRequestDispatcher("/WEB-INF/pages/custom-pages/inbox/ajax/view-dynamic-message.jsp").forward(request, response);

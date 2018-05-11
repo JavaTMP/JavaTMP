@@ -10,7 +10,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <img src="${pageContext.request.contextPath}/assets/img/64x64.gif" class="" style="">
-                            <span class="">${requestScope.message.fromUser.firstName + ' ' + requestScope.message.fromUser.lastName}</span>
+                            <span class="">${requestScope.message.fromUser.firstName}&nbsp;${requestScope.message.fromUser.lastName}</span>
                             <span>&lt;${requestScope.message.fromUser.email}&gt; </span> on ${requestScope.message.creationDate}
                             <div class="float-right">
                                 <div class="btn-group">
