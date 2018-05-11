@@ -3,7 +3,7 @@
 <!doctype html>
 <html lang="${labels["global.language"]}" dir="${labels["global.direction"]}">
     <head>
-        <title>JavaTMP - Java Bootstrap Admin and Dashboard Template</title>
+        <title>${labels["global.page.title"]}</title>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
