@@ -25,6 +25,8 @@ public class Message implements Serializable {
     private User toUser;
     private Short messageStatus;
 
+    private Long[] messageTos;
+
     public Message() {
     }
 
@@ -162,6 +164,20 @@ public class Message implements Serializable {
      */
     public void setToUser(User toUser) {
         this.toUser = toUser;
+    }
+
+    /**
+     * @return the messageTos
+     */
+    public Long[] getMessageTos() {
+        return messageTos;
+    }
+
+    /**
+     * @param messageTos the messageTos to set
+     */
+    public void setMessageTos(Long[] messageTos) {
+        this.messageTos = messageTos;
     }
 
 }

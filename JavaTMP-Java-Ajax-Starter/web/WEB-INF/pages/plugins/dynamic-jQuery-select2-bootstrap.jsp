@@ -65,11 +65,14 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="form-group form-row">
                                 <label for="remoteUsersSelectId" class="col-sm-2 col-form-label">Select Users</label>
-                                <div class="col-sm-10">
+                                <div class="col-sm-8">
                                     <select id="remoteUsersSelectId" class="form-control" multiple>
                                     </select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <button id="getRemoteUsersSelectId" type="button" class="btn btn-block btn-primary">Get Selected</button>
                                 </div>
                             </div>
                         </div>
@@ -226,6 +229,9 @@
         });
 
         $("#remoteUsersSelectId").select2({
+            theme: "bootstrap",
+            dir: javatmp.settings.direction,
+            placeholder: "Recipients Of Your Email",
             width: '',
             containerCssClass: ':all:',
             ajax: {
@@ -274,10 +280,12 @@
             escapeMarkup: function (markup) {
                 return markup;
             },
-            minimumInputLength: 1,
             templateResult: formatUser,
             templateSelection: formatUserSelection,
-            dropdownCssClass: "remoteUsers-dropdown"
+            dropdownCssClass: "remoteUsers-dropdown",
+            closeOnSelect: false
+        }).on("select2:select", function () {
+            (this).focus();
         });
         function formatUser(repo) {
             if (repo.loading)
@@ -320,6 +328,10 @@
         function formatUserSelection(repo) {
             return repo.text || repo.firstName + " " + repo.lastName + " (" + repo.id + ")";
         }
+
+        $("#getRemoteUsersSelectId").on("click", function () {
+            alert($("#remoteUsersSelectId").val());
+        });
 
     </script>
 </div>

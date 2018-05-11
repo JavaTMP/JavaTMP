@@ -46,6 +46,12 @@ public class MessageService {
         throw new IllegalArgumentException("Record id [" + message.getMessageId() + "] Not found");
     }
 
+    public Message createMessage(Message message) {
+        message.setMessageId(DBFaker.getNextCounter());
+        this.dBFaker.getMessages().add(message);
+        return message;
+    }
+
     public Page<Message> listMessage(Page<Message> page) {
         List<Message> retList = new LinkedList<>();
         List<Message> db = this.dBFaker.getMessages();

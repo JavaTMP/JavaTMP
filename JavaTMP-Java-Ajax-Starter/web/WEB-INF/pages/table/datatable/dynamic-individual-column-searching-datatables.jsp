@@ -113,7 +113,7 @@
                                 placeholder: "-- Filter --",
                                 containerCssClass: ':all:',
                                 multiple: false,
-                                minimumResultsForSearch: 0,
+                                minimumResultsForSearch: 0
 //                                width: '242',
 //                                dropdownAutoWidth: true
                             });
