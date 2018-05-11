@@ -93,6 +93,7 @@
     "select2-bootstrap-theme": "git+https://github.com/angel-vladov/select2-bootstrap-theme.git",
     "jquery-ui-touch-punch": "git+https://github.com/furf/jquery-ui-touch-punch.git",
     "font-awesome": "git+https://github.com/FortAwesome/Font-Awesome.git",
-    "canvas-toBlob" : "git+https://github.com/eligrey/canvas-toBlob.js.git"
+    "canvas-toBlob" : "git+https://github.com/eligrey/canvas-toBlob.js.git",
+    "Blob" : "git+https://github.com/eligrey/Blob.js"
   }
 }

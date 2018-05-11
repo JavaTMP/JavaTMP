@@ -10,8 +10,12 @@ import com.javatmp.service.DocumentService;
 import com.javatmp.service.ServicesFactory;
 import com.javatmp.util.Constants;
 import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.nio.file.Paths;
 import java.util.Date;
 import java.util.LinkedList;
@@ -41,6 +45,8 @@ public class UploadController extends HttpServlet {
 //        System.out.println("FileName requested to Upload [" + fileName + "] type[" + contentType + "]");
 //        response.getWriter().print("UPLOAD DONE");
 //
+        OutputStreamWriter isr = new OutputStreamWriter(new FileOutputStream("m.txt"));
+        System.out.println("encoding is [" + isr.getEncoding() + "]");
         ResponseMessage responseMessage = new ResponseMessage();
         List<Document> documentsUploaded = new LinkedList<>();
         ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
