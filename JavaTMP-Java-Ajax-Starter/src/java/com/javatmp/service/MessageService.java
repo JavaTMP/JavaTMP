@@ -40,6 +40,27 @@ public class MessageService {
         List<Message> db = this.dBFaker.getMessages();
         for (Message row : db) {
             if (row.getMessageId().equals(message.getMessageId())) {
+                Long fromUserId = row.getFromUserId();
+                Long toUserId = row.getToUserId();
+                User fromUser = new User();
+                fromUser.setId(fromUserId);
+
+                User dbUser = this.userService.readUserByUserId(fromUser);
+                if (dbUser != null) {
+                    fromUser.setFirstName(dbUser.getFirstName());
+                    fromUser.setLastName(dbUser.getLastName());
+                    row.setFromUser(fromUser);
+                }
+
+                User toUser = new User();
+                toUser.setId(toUserId);
+
+                dbUser = this.userService.readUserByUserId(toUser);
+                if (dbUser != null) {
+                    toUser.setFirstName(dbUser.getFirstName());
+                    toUser.setLastName(dbUser.getLastName());
+                    row.setToUser(toUser);
+                }
                 return row;
             }
         }

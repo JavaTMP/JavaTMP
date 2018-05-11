@@ -1551,7 +1551,7 @@
                     };
                 }());
                 var template =
-                        '<a class="p-1 list-group-item list-group-item-action" actionType="ajax-model" href="${pageContext.request.contextPath}/pages/custom-pages/inbox/ajax/ajax-view-message">' +
+                        '<a class="p-1 list-group-item list-group-item-action" actionType="ajax-model" href="{{contextPath}}/message/ViewMessageController?messageId={{messageId}}">' +
                         '    <div class="media">' +
                         '        <img class="mr-1" src="{{contextPath}}/assets/img/64x64.gif" alt="Generic placeholder image"/>' +
                         '        <div class="media-body">' +

@@ -22,7 +22,7 @@
                                 <div class="form-group form-row">
                                     <label for="messageUsersToDropdown" class="col-sm-2 col-form-label">Select Users</label>
                                     <div class="col-sm-10">
-                                        <select name="messageTos" id="messageUsersToDropdown" class="form-control" multiple></select>
+                                        <select name="messageTos" id="messageUsersToDropdown" class="form-control forceValidate" multiple></select>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -34,7 +34,7 @@
 
                                 <div class="form-group row">
                                     <div class="col-lg-12">
-                                        <textarea class="form-control ajax-email-body" rows="8" name="messageContentText"></textarea>
+                                        <textarea class="form-control ajax-email-body forceValidate" rows="8" name="messageContentText"></textarea>
                                     </div>
                                 </div>
 
@@ -59,11 +59,14 @@
             // passed as parameter to request by name "ajaxModalId"
             // or for demo purposese ONLY we can get a reference top modal
             // in current open managed instances in BootstrapModalWrapperFactory
+            var validator = null;
+            var summerNote = null;
             var currentParentModal = BootstrapModalWrapperFactory.globalModals[BootstrapModalWrapperFactory.globalModals.length - 1];
 //            console.log(currentParentModal.options.id);
             $("#" + currentParentModal.options.id).on(javatmp.settings.javaTmpAjaxContainerReady, function (event, modal) {
                 // fire AFTER all transition done and your ajax content is shown to user.
-                $("#" + currentParentModal.options.id).find('.ajax-email-body').summernote({
+                summerNote = $("#" + currentParentModal.options.id).find('.ajax-email-body');
+                summerNote.summernote({
                     height: 100,
                     dialogsInBody: true
                 });
@@ -241,6 +244,12 @@
                 });
                 var createMessageForm = $('#createMessageForm');
                 $("#compose-message-send-id").on("click", function () {
+
+                    summerNote.summernote('triggerEvent', 'change');
+                    if (!createMessageForm.valid()) {
+                        return false;
+                    }
+
                     BootstrapModalWrapperFactory.createModal({
                         message: "Are You sure you want to Send This Message ?",
                         title: "Alert",
@@ -297,6 +306,44 @@
                     }).show();
                 });
 
+                jQuery.validator.addMethod("summernoteRequired", function (value, element, params) {
+                    if (this.optional(element))
+                        return true;
+                    if (value !== "" && value !== "<p><br></p>")
+                        return true;
+                    return false;
+                }, 'Kindly Provide a value');
+
+                validator = createMessageForm.validate($.extend(true, {}, window.jqueryValidationDefaultOptions, {
+//                    ignore: ":hidden",
+                    ignore: ":hidden:not(.forceValidate), [contenteditable='true']:not([name])",
+                    rules: {
+                        messageTos: {
+                            required: true
+                        },
+                        messageTitle: {
+                            required: true,
+                            minlength: 5,
+                            maxlength: 50
+                        },
+                        messageContentText: {
+                            required: true,
+                            summernoteRequired: true
+                        }
+                    },
+                    messages: {
+                        messageTos: {
+                            required: "Kindly provide choose your reciever users"
+                        },
+                        messageTitle: {
+                            required: "Kindly provide your message title"
+                        },
+                        messageContentText: {
+                            required: "Kindly provide your message content",
+                            summernoteRequired: "Kindly provide your message content"
+                        }
+                    }
+                }));
 
             });
         });
