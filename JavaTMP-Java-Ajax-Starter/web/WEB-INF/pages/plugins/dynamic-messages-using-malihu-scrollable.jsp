@@ -90,6 +90,7 @@
 
             var indicatorTemplate = '<div class="fetch-indicator text-center m-2 p-2"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>';
             var workingDown = false;
+            var workingTop = false;
             var startFrom = 0;
             var recordPerPage = 10;
             var allCount = Number.MAX_SAFE_INTEGER;
@@ -109,6 +110,55 @@
                     },
                     onScroll: function () {
                         console.log("top = " + this.mcs.top + " , direction = " + this.mcs.direction);
+                    },
+                    onTotalScrollBack: function () {
+                        if (!workingTop) {
+                            console.log("** onTotalScrollBack currentFetch [" + currentFetchedCount + "], allCount [" + allCount + "]");
+                            if (currentFetchedCount < allCount) {
+                                workingTop = true;
+                                $("#infinite-scroll").mCustomScrollbar('scrollTo', 'top', {scrollInertia: 20});
+                                this.mcs.content.prepend(indicatorTemplate);
+                                var that = this;
+                                var passData = {
+                                    "_ajaxGlobalBlockUI": false,
+                                    "start": startFrom,
+                                    "length": recordPerPage,
+                                    "order[0][column]": 0,
+                                    "order[0][dir]": "ASC",
+                                    "columns[0][data]": "creationDate",
+                                    "columns[1][data]": "toUserId",
+                                    "columns[1][search][value]": toUserId
+                                };
+                                $.ajax({
+                                    url: javatmp.settings.contextPath + "/user/ListMessagesController",
+                                    data: passData,
+                                    success: function (response, textStatus, jqXHR) {
+                                        that.mcs.content.find(".fetch-indicator").remove();
+                                        var data = response.data.data;
+                                        allCount = response.data.recordsTotal;
+                                        console.log(JSON.stringify(data));
+                                        $.each(data, function (index, row) {
+                                            currentFetchedCount++;
+                                            var readyData = template.composeTemplate({
+                                                'messageId': row.messageId,
+                                                'messageTitle': row.messageTitle,
+                                                'messageContentText': row.messageContentText,
+                                                'senderFirstName': row.fromUser.firstName,
+                                                'senderLastName': row.fromUser.lastName,
+                                                'creationDate': row.creationDate,
+                                                'formatedDate': moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss"),
+                                                'contextPath': javatmp.settings.contextPath
+                                            });
+                                            that.mcs.content.prepend(readyData);
+                                            that.mcs.content.find("time.timeago").timeago();
+                                        });
+                                        $(that).mCustomScrollbar("scrollTo", 1);
+                                        startFrom += data.length;
+                                        workingTop = false;
+                                    }
+                                });
+                            }
+                        }
                     },
                     onTotalScroll: function () {
                         if (!workingDown) {
@@ -167,7 +217,6 @@
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
                 console.log("** Start Populate content dynamically ***");
-                $("#infinite-scroll").mCustomScrollbar("update");
                 if (!workingDown) {
                     if (currentFetchedCount < allCount) {
                         workingDown = true;
@@ -205,6 +254,7 @@
                                     $("#infinite-scroll .mCSB_container").append(readyData);
                                     $("#infinite-scroll .mCSB_container").find("time.timeago").timeago();
                                 });
+                                $("#infinite-scroll").mCustomScrollbar("scrollTo", 1);
                                 workingDown = false;
                                 startFrom += data.length;
                             }
