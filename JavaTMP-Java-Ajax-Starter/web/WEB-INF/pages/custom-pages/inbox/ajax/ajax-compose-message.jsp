@@ -4,10 +4,9 @@
         <div class="col-lg-12">
             <div class="card" id="compose-message-id">
                 <div class="card-header d-flex align-items-center py-2">
-                    <div class="btn-group d-inline float-left">
+                    <div class="btn-group d-inline float-left" role="group">
                         <button type="button" class="btn btn-sm btn-success">Send</button>
-                        <button type="button" class="btn btn-sm btn-danger">Discard</button>
-                        <button type="button" class="btn btn-sm btn-default">Draft</button>
+                        <button id="compose-message-discard-id" type="button" class="btn btn-sm btn-danger">Discard & Close Dialog</button>
                     </div>
                 </div>
                 <div class="card-body">
@@ -21,20 +20,6 @@
                                         <input id="textinput1" name="textinput" type="text" placeholder="Recipients Of Your Email" class="form-control">
                                     </div>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-2 col-form-label" for="textinput2">Cc</label>
-                                    <div class="col-lg-10">
-                                        <input id="textinput2" name="textinput" type="text" placeholder="Carbon Copy" class="form-control input-md">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <label class="col-lg-2 col-form-label" for="textinput3">Bcc</label>
-                                    <div class="col-lg-10">
-                                        <input id="textinput3" name="textinput" type="text" placeholder="Blind Carbon Copy" class="form-control input-md">
-                                    </div>
-                                </div>
-
                                 <div class="form-group row">
                                     <label class="col-lg-2 col-form-label" for="textinput4">Subject</label>
                                     <div class="col-lg-10">
@@ -108,7 +93,7 @@
                         });
                     }
                 });
-                modal.addButton({
+                var closeButton = modal.addButton({
                     label: "Close",
                     cssClass: "btn btn-primary",
                     action: function (modalWrapper, button, buttonData, originalEvent) {
@@ -134,6 +119,10 @@
                         }
                     });
                     return false;
+                });
+
+                $("#compose-message-discard-id").on("click", function () {
+                    closeButton.trigger("click");
                 });
             });
         });

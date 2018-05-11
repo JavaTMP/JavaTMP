@@ -65,6 +65,13 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="form-group row">
+                                <label for="remoteUsersSelectId" class="col-sm-2 col-form-label">Select Users</label>
+                                <div class="col-sm-10">
+                                    <select id="remoteUsersSelectId" class="form-control" multiple>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -102,6 +109,10 @@
         .select2-results__option--highlighted .select2-result-repository__title {
             color: white;
         }
+        .remoteUsers-dropdown .select2-results__option--highlighted .text-muted {
+            color: white!important;
+        }
+
     </style>
     <script>
         // Set the "bootstrap" theme as the default theme for all Select2
@@ -193,8 +204,6 @@
             containerCssClass: ':all:',
             width: ''
         });
-//        var option = new Option("", "", true, true);
-//        input.append(option);
         $.ajax({
             type: 'GET',
             url: javatmp.settings.contextPath + '/user/ListUsersPositionsController'
@@ -215,6 +224,102 @@
 //                }
 //            });
         });
+
+        $("#remoteUsersSelectId").select2({
+            width: '',
+            containerCssClass: ':all:',
+            ajax: {
+                url: javatmp.settings.contextPath + "/user/ListUsersController",
+                dataType: 'json',
+                delay: 250,
+                cache: true,
+                data: function (params) {
+                    return {
+                        _ajaxGlobalBlockUI: false,
+                        "start": (params.page ? params.page - 1 : 0) * 10,
+                        "length": 10,
+                        "draw": 1,
+                        "search[value]": params.term
+                    };
+                },
+                processResults: function (data, params) {
+                    // parse the results into the format expected by Select2
+                    // since we are using custom formatting functions we do not need to
+                    // alter the remote JSON data, except to indicate that infinite
+                    // scrolling can be used
+                    params.page = params.page || 1;
+
+                    // https://stackoverflow.com/questions/14819865/select2-ajax-method-not-selecting
+                    var actualResult = [];
+                    for (var i = 0; i < data.data.data.length; i++) {
+                        actualResult.push({
+                            id: data.data.data[i].id,
+                            text: data.data.data[i].firstName + " " + data.data.data[i].lastName,
+                            firstName: data.data.data[i].firstName,
+                            lastName: data.data.data[i].lastName,
+                            position: data.data.data[i].position,
+                            office: data.data.data[i].office,
+                            email: data.data.data[i].email
+                        });
+                    }
+                    console.log("params.page [" + params.page + "] total [" + data.data.recordsTotal + "] isMore [" + ((params.page * 10) < data.data.recordsTotal) + "]");
+                    return {
+                        results: actualResult,
+                        pagination: {
+                            more: (params.page * 10) < data.data.recordsTotal
+                        }
+                    };
+                }
+            },
+            escapeMarkup: function (markup) {
+                return markup;
+            },
+            minimumInputLength: 1,
+            templateResult: formatUser,
+            templateSelection: formatUserSelection,
+            dropdownCssClass: "remoteUsers-dropdown"
+        });
+        function formatUser(repo) {
+            if (repo.loading)
+                return repo.text;
+            var template =
+                    '    <div class="media">' +
+                    '        <img class="mr-1" src="{{contextPath}}/assets/img/64x64.gif" alt="user profile image"/>' +
+                    '        <div class="media-body">' +
+                    '            <div class="mt-0 d-flex justify-content-between">' +
+                    '                <strong>{{firstName}} {{lastName}}</strong>' +
+                    '                <span class="text-muted">' +
+                    '                    <small><em>{{office}} office</em></small>' +
+                    '                </span>' +
+                    '            </div>' +
+                    '            {{position}}' +
+                    '            <div class="small">{{email}}</div>' +
+                    '        </div>' +
+                    '    </div>';
+            String.prototype.composeTemplate = (function () {
+                var re = /\{{(.+?)\}}/g;
+                return function (o) {
+                    return this.replace(re, function (_, k) {
+                        return typeof o[k] !== 'undefined' ? o[k] : '';
+                    });
+                };
+            }());
+            var readyData = template.composeTemplate({
+                'messageId': repo.id,
+                'position': repo.position,
+                'firstName': repo.firstName,
+                'lastName': repo.lastName,
+                'office': repo.office,
+                'email': repo.email,
+                'contextPath': javatmp.settings.contextPath
+            });
+
+            return readyData;
+        }
+
+        function formatUserSelection(repo) {
+            return repo.text || repo.firstName + " " + repo.lastName + " (" + repo.id + ")";
+        }
 
     </script>
 </div>
