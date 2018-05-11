@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.javatmp.domain.Document;
 import com.javatmp.mvc.ClassTypeAdapter;
+import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.ResponseMessage;
 import com.javatmp.service.DocumentService;
 import com.javatmp.service.ServicesFactory;
@@ -26,7 +27,7 @@ import javax.servlet.http.Part;
 
 @WebServlet("/UploadController")
 @MultipartConfig(fileSizeThreshold = 1024 * 1024,
-        maxFileSize = 1024 * 1024 * 1, maxRequestSize = 1024 * 1024 * 5)
+        maxFileSize = 1024 * 1024 * 10, maxRequestSize = 1024 * 1024 * 5)
 public class UploadController extends HttpServlet {
 
     @Override
