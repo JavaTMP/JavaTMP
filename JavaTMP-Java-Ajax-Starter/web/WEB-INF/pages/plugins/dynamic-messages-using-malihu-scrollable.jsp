@@ -136,7 +136,6 @@
                                         that.mcs.content.find(".fetch-indicator").remove();
                                         var data = response.data.data;
                                         allCount = response.data.recordsTotal;
-                                        console.log(JSON.stringify(data));
                                         $.each(data, function (index, row) {
                                             currentFetchedCount++;
                                             var readyData = template.composeTemplate({
