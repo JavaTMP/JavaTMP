@@ -215,8 +215,9 @@
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
-                console.log("** Start Populate content dynamically ***");
+                console.log("** Start Populate content dynamically (!workingDown) is (" + (!workingDown) + ")");
                 if (!workingDown) {
+                    console.log("currentFetchedCount < allCount is (" + (currentFetchedCount < allCount) + ")");
                     if (currentFetchedCount < allCount) {
                         workingDown = true;
                         $("#infinite-scroll .mCSB_container").append(indicatorTemplate);
