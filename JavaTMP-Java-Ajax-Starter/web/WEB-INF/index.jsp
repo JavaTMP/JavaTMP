@@ -1426,44 +1426,46 @@
                 $.ajaxSetup({
                     statusCode: {
                         401: function (jqXHR, textStatus, errorThrown) {
-                            alert(this.url);
-                            var modalMessage = null;
-                            var redirectURL = null;
-                            try {
-                                var ResponseMessage = JSON.parse(jqXHR.responseText);
-                                modalMessage = ResponseMessage.message;
-                                redirectURL = ResponseMessage.redirectURL;
-                            } catch (ex) {
-                                modalMessage = jqXHR.responseText;
-                                redirectURL = javatmp.settings.contextPath + "/";
-                            }
+                            alert(this.url + " = index [" + this.url.indexOf("_handleAjaxErrorGlobally=false") + "]");
+                            if (this.url.indexOf("_handleAjaxErrorGlobally=false") === -1) {
+                                var modalMessage = null;
+                                var redirectURL = null;
+                                try {
+                                    var ResponseMessage = JSON.parse(jqXHR.responseText);
+                                    modalMessage = ResponseMessage.message;
+                                    redirectURL = ResponseMessage.redirectURL;
+                                } catch (ex) {
+                                    modalMessage = jqXHR.responseText;
+                                    redirectURL = javatmp.settings.contextPath + "/";
+                                }
 
-                            var modalWrapper = BootstrapModalWrapperFactory.createModal({
-                                message: modalMessage,
-                                title: jqXHR.status + " : " + jqXHR.statusText,
-                                closable: false,
-                                closeByBackdrop: false,
-                                buttons: [
-                                    {
-                                        label: "Return",
-                                        cssClass: "btn btn-secondary",
-                                        action: function (modalWrapper, button, buttonData, originalEvent) {
-                                            modalWrapper.hide();
+                                var modalWrapper = BootstrapModalWrapperFactory.createModal({
+                                    message: modalMessage,
+                                    title: jqXHR.status + " : " + jqXHR.statusText,
+                                    closable: false,
+                                    closeByBackdrop: false,
+                                    buttons: [
+                                        {
+                                            label: "Return",
+                                            cssClass: "btn btn-secondary",
+                                            action: function (modalWrapper, button, buttonData, originalEvent) {
+                                                modalWrapper.hide();
+                                            }
+                                        },
+                                        {
+                                            label: "Redirect",
+                                            cssClass: "btn btn-danger",
+                                            action: function (modalWrapper, button, buttonData, originalEvent) {
+                                                modalWrapper.hide();
+                                                setTimeout(function () {
+                                                    window.location.replace(redirectURL);
+                                                }, 200);
+                                            }
                                         }
-                                    },
-                                    {
-                                        label: "Redirect",
-                                        cssClass: "btn btn-danger",
-                                        action: function (modalWrapper, button, buttonData, originalEvent) {
-                                            modalWrapper.hide();
-                                            setTimeout(function () {
-                                                window.location.replace(redirectURL);
-                                            }, 200);
-                                        }
-                                    }
-                                ]
-                            });
-                            modalWrapper.show();
+                                    ]
+                                });
+                                modalWrapper.show();
+                            }
                         }
                     }
                 });

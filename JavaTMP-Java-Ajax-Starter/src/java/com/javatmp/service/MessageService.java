@@ -1,6 +1,5 @@
 package com.javatmp.service;
 
-import com.javatmp.domain.Content;
 import com.javatmp.domain.Message;
 import com.javatmp.domain.User;
 import com.javatmp.domain.table.DataTableColumnSpecs;
@@ -9,7 +8,6 @@ import com.javatmp.domain.table.DataTableResults;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.Page;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
