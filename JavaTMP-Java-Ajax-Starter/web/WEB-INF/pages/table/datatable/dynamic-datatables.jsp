@@ -51,6 +51,9 @@
                 scrollCollapse: false,
                 "searching": true,
                 searchDelay: 500,
+                "autoWidth": false,
+                fixedColumns: true,
+                fixedHeader: true,
                 "processing": true,
                 "serverSide": true,
                 "ajax": {
