@@ -190,11 +190,13 @@
                     dropdownCssClass: "remoteUsers-dropdown",
                     closeOnSelect: false
                 }).on("select2:select", function () {
-                    (this).focus();
+//                    (this).focus();
                 }).on("select2:open", function () {
+                    // select2 postpone dropdown creation in ajax mode until first result come so,
+                    // we should add z-index after select2 dropdown creation.
                     var modalZIndex = modal.originalModal.css('zIndex');
                     modalZIndex = modalZIndex + 1;
-                    $(".select2-container--bootstrap").css('z-index', modalZIndex);
+                    $(".remoteUsers-dropdown", ".select2-container--bootstrap").css('z-index', modalZIndex);
                 });
                 function formatUser(repo) {
                     if (repo.loading)
@@ -281,6 +283,10 @@
                                     $disabledFields.prop('disabled', false); // enable fields so they are included
                                     var formArray = createMessageForm.serializeArray();
                                     $disabledFields.prop('disabled', true); // back to disabled
+                                    // add default parameters:
+                                    $.each(javatmp.settings.defaultPassData, function (index, value) {
+                                        formArray.push({name: index, value: value});
+                                    });
                                     $.ajax({
                                         type: "POST",
                                         url: javatmp.settings.contextPath + "/message/CreateMessageController",
