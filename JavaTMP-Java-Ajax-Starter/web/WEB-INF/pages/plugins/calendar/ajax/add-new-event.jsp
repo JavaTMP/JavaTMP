@@ -260,8 +260,8 @@
 //                $("#new-event-form-start-date").data('daterangepicker').minDate = moment();
 //                $("#new-event-form-end-date").data('daterangepicker').minDate = $("#new-event-form-start-date").data('daterangepicker').minDate;
                 var modalZIndex = modal.originalModal.css('zIndex');
-                $(".daterangepicker.dropdown-menu").css('z-index', modalZIndex + 1);
-                $(".daterangepicker.dropdown-menu > .ranges").hide();
+                $(".daterangepicker").css('z-index', modalZIndex + 1);
+                $(".daterangepicker > .ranges").hide();
                 $('.Date-and-Time').inputmask({
                     alias: "datetime",
                     inputformat: "dd/mm/yyyy HH:MM",

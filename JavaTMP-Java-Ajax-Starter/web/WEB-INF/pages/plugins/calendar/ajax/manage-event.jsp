@@ -346,8 +346,8 @@
                 $("#new-event-form-start-date").data('daterangepicker').maxDate = $("#new-event-form-end-date").data('daterangepicker').startDate;
                 $("#new-event-form-end-date").data('daterangepicker').minDate = $("#new-event-form-start-date").data('daterangepicker').startDate;
                 var modalZIndex = modal.originalModal.css('zIndex');
-                $(".daterangepicker.dropdown-menu").css('z-index', modalZIndex + 1);
-                $(".daterangepicker.dropdown-menu > .ranges").hide();
+                $(".daterangepicker").css('z-index', modalZIndex + 1);
+                $(".daterangepicker > .ranges").hide();
                 $('.Date-and-Time').inputmask({
                     alias: "datetime",
                     inputformat: "dd/mm/yyyy HH:MM",
