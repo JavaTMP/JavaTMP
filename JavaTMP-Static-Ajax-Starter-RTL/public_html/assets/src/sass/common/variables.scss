@@ -73,3 +73,9 @@ $javatmp-footer-bar-border-color: $border-color!default;
 //*********************************
 // JavaTMP Plugins Customization
 //*********************************
+
+// Daterangepicker Plugin Custom variables:
+// override to support darken theme:
+$daterangepicker-cell-color:                 $dropdown-link-color !default;
+$daterangepicker-cell-hover-color:           $dropdown-link-hover-color!default;
+$daterangepicker-cell-hover-bg-color:        $dropdown-link-hover-bg!default;
