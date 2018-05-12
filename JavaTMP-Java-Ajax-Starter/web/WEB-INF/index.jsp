@@ -1408,7 +1408,7 @@
                     httpMethod: "GET",
                     dataType: "html",
                     updateURLHash: true,
-                    defaultPassData: {_ajax: "ajax", _ajaxGlobalBlockUI: true},
+                    defaultPassData: {_ajax: "ajax", _ajaxGlobalBlockUI: true, _handleAjaxErrorGlobally: true},
                     defaultOutputSelector: '.main-body-content-container',
                     defaultUrl: '${pageContext.request.contextPath}/pages/home',
                     floatDefault: "${labels['global.floatDefault']}",
@@ -1419,52 +1419,66 @@
                 });
                 javatmp.user = {};
                 javatmp.user.id = ${sessionScope.user.id};
+
+                javatmp.settings.handle401Error = function (jqXHR, textStatus, errorThrown) {
+                    var modalMessage = null;
+                    var redirectURL = null;
+                    try {
+                        var ResponseMessage = JSON.parse(jqXHR.responseText);
+                        modalMessage = ResponseMessage.message;
+                        redirectURL = ResponseMessage.redirectURL;
+                    } catch (ex) {
+                        modalMessage = jqXHR.responseText;
+                        redirectURL = javatmp.settings.contextPath + "/";
+                    }
+
+                    var modalWrapper = BootstrapModalWrapperFactory.createModal({
+                        message: modalMessage,
+                        title: jqXHR.statusText + " : " + jqXHR.status,
+                        closable: false,
+                        closeByBackdrop: false,
+                        buttons: [
+                            {
+                                label: "Return",
+                                cssClass: "btn btn-secondary",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    modalWrapper.hide();
+                                }
+                            },
+                            {
+                                label: "Redirect",
+                                cssClass: "btn btn-danger",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    modalWrapper.hide();
+                                    setTimeout(function () {
+                                        window.location.replace(redirectURL);
+                                    }, 200);
+                                }
+                            }
+                        ]
+                    });
+                    modalWrapper.show();
+                };
             });
         </script>
         <script type="text/javascript">
             jQuery(function ($) {
                 $.ajaxSetup({
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        if (this.url.indexOf("_handleAjaxErrorGlobally=false") === -1) {
+                            var msg = 'Error on calling request.';
+                            toastr.error(msg, xhr.statusText + " : " + xhr.status, {
+                                timeOut: 4000,
+                                progressBar: true,
+                                rtl: javatmp.settings.isRTL,
+                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                            });
+                        }
+                    },
                     statusCode: {
                         401: function (jqXHR, textStatus, errorThrown) {
-                            alert(this.url + " = index [" + this.url.indexOf("_handleAjaxErrorGlobally=false") + "]");
                             if (this.url.indexOf("_handleAjaxErrorGlobally=false") === -1) {
-                                var modalMessage = null;
-                                var redirectURL = null;
-                                try {
-                                    var ResponseMessage = JSON.parse(jqXHR.responseText);
-                                    modalMessage = ResponseMessage.message;
-                                    redirectURL = ResponseMessage.redirectURL;
-                                } catch (ex) {
-                                    modalMessage = jqXHR.responseText;
-                                    redirectURL = javatmp.settings.contextPath + "/";
-                                }
-
-                                var modalWrapper = BootstrapModalWrapperFactory.createModal({
-                                    message: modalMessage,
-                                    title: jqXHR.status + " : " + jqXHR.statusText,
-                                    closable: false,
-                                    closeByBackdrop: false,
-                                    buttons: [
-                                        {
-                                            label: "Return",
-                                            cssClass: "btn btn-secondary",
-                                            action: function (modalWrapper, button, buttonData, originalEvent) {
-                                                modalWrapper.hide();
-                                            }
-                                        },
-                                        {
-                                            label: "Redirect",
-                                            cssClass: "btn btn-danger",
-                                            action: function (modalWrapper, button, buttonData, originalEvent) {
-                                                modalWrapper.hide();
-                                                setTimeout(function () {
-                                                    window.location.replace(redirectURL);
-                                                }, 200);
-                                            }
-                                        }
-                                    ]
-                                });
-                                modalWrapper.show();
+                                javatmp.settings.handle401Error(jqXHR, textStatus, errorThrown);
                             }
                         }
                     }

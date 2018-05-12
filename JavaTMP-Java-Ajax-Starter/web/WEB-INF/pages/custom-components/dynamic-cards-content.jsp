@@ -185,7 +185,7 @@
                         type: "GET",
                         cache: false,
                         url: href,
-                        data: {_ajaxGlobalBlockUI: false},
+                        data: {_ajaxGlobalBlockUI: false, _handleAjaxErrorGlobally: false},
                         dataType: "html",
                         success: function (remoteContent) {
                             toastr.success('Data successfully fetched from Server', 'SUCCESS', {
@@ -199,14 +199,19 @@
                         },
                         error: function (xhr, ajaxOptions, thrownError) {
                             $(cardBody).unblock();
-                            var msg = 'Error on reloading the card. Please check your remote server url';
-                            toastr.error(msg, 'ERROR', {
+                            var msg = 'Error on reloading the card. Please check your remote server url.';
+                            toastr.error(msg, xhr.statusText + " : " + xhr.status, {
                                 timeOut: 4000,
                                 progressBar: true,
                                 rtl: javatmp.settings.isRTL,
                                 positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
                             });
                             cardBody.html("<div class='text-danger'>" + msg + "</div>");
+                        },
+                        statusCode: {
+                            401: function (jqXHR, textStatus, errorThrown) {
+                                javatmp.settings.handle401Error(jqXHR, textStatus, errorThrown);
+                            }
                         }
                     });
                 });

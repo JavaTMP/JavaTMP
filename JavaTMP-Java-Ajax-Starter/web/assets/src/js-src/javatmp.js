@@ -90,7 +90,7 @@
             async: true,
             cache: true,
             data: javatmp.settings.defaultPassData,
-            error: function (xhr) {
+            error: function (xhr, ajaxOptions, thrownError) {
             },
             statusCode: {
                 200: function (event, request, settings) {

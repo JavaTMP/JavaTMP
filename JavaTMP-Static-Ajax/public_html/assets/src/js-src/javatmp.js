@@ -22,7 +22,8 @@
         // and block browser page and indicate to user
         // Setting _ajaxGlobalBlockUI parameter to false will NOT use BlockUI plugin
         // and The ajax request will silent and the user can operate in the site.
-        defaultPassData: {_ajax: "ajax", _ajaxGlobalBlockUI: true},
+        // Setting _handleAjaxErrorGlobally to false will not handle any error globally and it is responsibilites to handle it.
+        defaultPassData: {_ajax: "ajax", _ajaxGlobalBlockUI: true, _handleAjaxErrorGlobally: true},
 
         // Main Output selector for ajax request content.
         // it should be one and only one.
@@ -89,7 +90,7 @@
             async: true,
             cache: true,
             data: javatmp.settings.defaultPassData,
-            error: function (xhr) {
+            error: function (xhr, ajaxOptions, thrownError) {
             },
             statusCode: {
                 200: function (event, request, settings) {
