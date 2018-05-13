@@ -67,6 +67,7 @@ public class AuthenticatorFilter implements Filter {
                 HttpSession session = req.getSession();
                 System.out.println("Session Attribute [" + session.getAttribute("user") + "]");
                 User user = (User) session.getAttribute("user");
+                System.out.println("Session User is [" + user + "]");
                 if (user != null) {
                     chain.doFilter(request, response);
                 } else if ("ajax".equals(req.getParameter("_ajax"))) {

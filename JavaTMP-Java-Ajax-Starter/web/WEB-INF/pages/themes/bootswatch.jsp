@@ -127,6 +127,11 @@
                 <img class="img-thumbnail" src="${pageContext.request.contextPath}/assets/img/themes/Yeti.png" alt=""/>
             </a>
         </div>
+        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
+            <a class="applyTheme" themeName="default"  href="javascript:void(0);">
+                <img class="img-thumbnail" src="${pageContext.request.contextPath}/assets/img/themes/Default.png" alt=""/>
+            </a>
+        </div>
     </div>
     <style type="text/css">
     </style>

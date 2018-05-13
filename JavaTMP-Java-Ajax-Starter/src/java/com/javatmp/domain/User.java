@@ -29,6 +29,11 @@ public class User {
 
     }
 
+    public User(String userName, String password) {
+        this.userName = userName;
+        this.password = password;
+    }
+
     public User(Long id, String userName, String password, String firstName, String lastName, Short status, Date birthOfDate, Date creationDate,
             String email, String mobile, String lang, String theme, String countryId, String address, String position,
             String office, Date joiningDate, BigDecimal salary) {

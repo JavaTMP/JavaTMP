@@ -5,6 +5,10 @@
         <filter-class>com.javatmp.web.filter.LoggingFilter</filter-class>
     </filter>
     <filter>
+        <filter-name>ServiceFactoryInjector</filter-name>
+        <filter-class>com.javatmp.web.filter.ServiceFactoryInjector</filter-class>
+    </filter>
+    <filter>
         <filter-name>LocalizationFilter</filter-name>
         <filter-class>com.javatmp.web.filter.LocalizationFilter</filter-class>
     </filter>
@@ -26,6 +30,11 @@
     </filter>
     <filter-mapping>
         <filter-name>LoggingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>ServiceFactoryInjector</filter-name>
         <url-pattern>/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
