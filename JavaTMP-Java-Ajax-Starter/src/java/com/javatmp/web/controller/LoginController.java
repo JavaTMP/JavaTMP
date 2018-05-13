@@ -54,6 +54,7 @@ public class LoginController extends HttpServlet {
         try {
             MvcHelper.populateBeanByRequestParameters(request, user);
             System.out.println("Check User [" + MvcHelper.deepToString(user) + "]");
+            System.out.println("sf [" + sf + "]");
             User dbUser = sf.getUserService().readUserByUsername(user);
 
             if (dbUser != null && dbUser.getPassword().equals(MD5Util.convertToMD5(user.getPassword()))) {
