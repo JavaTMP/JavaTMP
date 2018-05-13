@@ -2,6 +2,50 @@
 <div class="dynamic-ajax-content">
     <div class="row">
         <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
+            <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/" >
+                <i class="fas fa-coffee"></i>
+
+            </button>
+        </div>
+        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
+            <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/" >
+                <i class="fas fa-coffee"></i>
+
+            </button>
+        </div>
+        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
+            <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/" >
+                <i class="fas fa-coffee"></i>
+
+            </button>
+        </div>
+        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
+            <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/" >
+                <i class="fas fa-coffee"></i>
+
+            </button>
+        </div>
+        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
+            <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/" >
+                <i class="fas fa-coffee"></i>
+
+            </button>
+        </div>
+        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
+            <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/" >
+                <i class="fas fa-coffee"></i>
+
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
             <button type="button" class="javatmp-btn btn btn-primary btn-block my-2"
                     actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/bootstrap/modal" >
                 <i class="fa fa-wrench"></i>

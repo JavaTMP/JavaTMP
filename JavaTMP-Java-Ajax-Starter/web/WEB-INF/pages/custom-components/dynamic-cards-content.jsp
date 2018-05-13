@@ -179,8 +179,6 @@
                             backgroundColor: '#000',
                             opacity: 0.4
                         }});
-
-
                     $.ajax({
                         type: "GET",
                         cache: false,
