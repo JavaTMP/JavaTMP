@@ -1519,12 +1519,8 @@
         <script type="text/javascript">
             jQuery(function ($) {
                 window.jqueryValidationDefaultOptions = {
-                    rules: {
-
-                    },
-                    messages: {
-
-                    },
+                    rules: {},
+                    messages: {},
                     highlight: function (element) {
                         $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
                     },
@@ -1546,15 +1542,15 @@
             });
         </script>
         <style type="text/css">
-            #myMessagesDropdownId .offset{
-                display: block;
-                width: 100%;
-                height: auto;
-                color: #ffed0d;
-                -webkit-border-radius: 3px;
-                -moz-border-radius: 3px;
-                border-radius: 3px;
-            }
+            /*            #myMessagesDropdownId .offset{
+                            display: block;
+                            width: 100%;
+                            height: auto;
+                            color: #ffed0d;
+                            -webkit-border-radius: 3px;
+                            -moz-border-radius: 3px;
+                            border-radius: 3px;
+                        }*/
         </style>
         <script type="text/javascript">
 

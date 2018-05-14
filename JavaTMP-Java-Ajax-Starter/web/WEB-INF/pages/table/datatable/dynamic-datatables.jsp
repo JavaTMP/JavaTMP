@@ -57,9 +57,11 @@
                 "processing": true,
                 "serverSide": true,
                 "ajax": {
+//                    "type": "POST",
                     "url": javatmp.settings.contextPath + "/user/ListUsersController",
                     "data": function (currentDate) {
                         currentDate._ajaxGlobalBlockUI = false; // window blocked until data return
+                        console.log(JSON.stringify(currentDate));
                     },
                     "dataSrc": function (json) {
                         json["recordsTotal"] = json.data.recordsTotal;
@@ -76,7 +78,6 @@
                     {
                         data: 'birthOfDate', "type": "date",
                         "render": function (data, type, row) {
-                            console.log("current [" + moment().toString() + "], data[" + data + "]");
                             return Math.ceil(moment().diff(moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ"), 'years', true));
                         }
                     },
