@@ -32,7 +32,7 @@ public class DataTableColumnSpecs {
     /**
      * The search.
      */
-    private String search;
+    private Search search;
 
     /**
      * The regex.
@@ -137,7 +137,7 @@ public class DataTableColumnSpecs {
      *
      * @return the search
      */
-    public String getSearch() {
+    public Search getSearch() {
         return search;
     }
 
@@ -146,7 +146,7 @@ public class DataTableColumnSpecs {
      *
      * @param search the search to set
      */
-    public void setSearch(String search) {
+    public void setSearch(Search search) {
         this.search = search;
     }
 
@@ -216,7 +216,7 @@ public class DataTableColumnSpecs {
         this.setName(request.getParameter("columns[" + i + "][name]"));
         this.setOrderable(Boolean.valueOf(request.getParameter("columns[" + i + "][orderable]")));
         this.setRegex(Boolean.valueOf(request.getParameter("columns[" + i + "][search][regex]")));
-        this.setSearch(request.getParameter("columns[" + i + "][search][value]"));
+        this.setSearch(new Search(request.getParameter("columns[" + i + "][search][value]"), false));
         this.setSearchable(Boolean.valueOf(request.getParameter("columns[" + i + "][searchable]")));
 
         int sortableCol = Integer.parseInt(request.getParameter("order[0][column]"));

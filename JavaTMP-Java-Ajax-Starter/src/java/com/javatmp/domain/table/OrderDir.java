@@ -1,15 +1,15 @@
 package com.javatmp.domain.table;
 
-public enum SortOrder {
+public enum OrderDir {
 
     /**
      * The asc.
      */
-    ASC("ASC"),
+    ASC("asc"),
     /**
      * The desc.
      */
-    DESC("DESC");
+    DESC("desc");
 
     /**
      * The value.
@@ -21,7 +21,7 @@ public enum SortOrder {
      *
      * @param v the v
      */
-    SortOrder(String v) {
+    OrderDir(String v) {
         value = v;
     }
 
@@ -31,9 +31,9 @@ public enum SortOrder {
      * @param v the v
      * @return the sort order
      */
-    public static SortOrder fromValue(String v) {
-        for (SortOrder c : SortOrder.values()) {
-            if (c.name().equals(v)) {
+    public static OrderDir fromValue(String v) {
+        for (OrderDir c : OrderDir.values()) {
+            if (c.name().toLowerCase().equals(v != null ? v.toLowerCase() : "")) {
                 return c;
             }
         }

@@ -2,6 +2,7 @@ package com.javatmp.domain.table;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -32,7 +33,7 @@ public class DataTableRequest<T> {
     /**
      * The search.
      */
-    private String search;
+    private Search search;
 
     /**
      * The regex.
@@ -47,7 +48,7 @@ public class DataTableRequest<T> {
     /**
      * The order.
      */
-    private DataTableColumnSpecs order;
+    private List<Order> order;
 
     /**
      * The is global search.
@@ -122,7 +123,7 @@ public class DataTableRequest<T> {
      *
      * @return the search
      */
-    public String getSearch() {
+    public Search getSearch() {
         return search;
     }
 
@@ -131,7 +132,7 @@ public class DataTableRequest<T> {
      *
      * @param search the search to set
      */
-    public void setSearch(String search) {
+    public void setSearch(Search search) {
         this.search = search;
     }
 
@@ -176,7 +177,7 @@ public class DataTableRequest<T> {
      *
      * @return the order
      */
-    public DataTableColumnSpecs getOrder() {
+    public List<Order> getOrder() {
         return order;
     }
 
@@ -185,7 +186,7 @@ public class DataTableRequest<T> {
      *
      * @param order the order to set
      */
-    public void setOrder(DataTableColumnSpecs order) {
+    public void setOrder(List<Order> order) {
         this.order = order;
     }
 
@@ -244,8 +245,10 @@ public class DataTableRequest<T> {
                 this.setDraw(Integer.parseInt(request.getParameter(PaginationCriteria.DRAW)));
             }
 
-            this.setSearch(request.getParameter("search[value]"));
+            this.setSearch(new Search(request.getParameter("search[value]"), false));
             this.setRegex(Boolean.valueOf(request.getParameter("search[regex]")));
+
+            this.order = new LinkedList<>();
 
             String sortableColValue;
             int sortableCol = -1;
@@ -268,7 +271,8 @@ public class DataTableRequest<T> {
                         && !AppUtil.isObjectEmpty(request.getParameter("columns[" + i + "][data]"))) {
                     DataTableColumnSpecs colSpec = new DataTableColumnSpecs(request, i);
                     if (i == sortableCol) {
-                        this.setOrder(colSpec);
+                        Order order = new Order(colSpec.getIndex(), OrderDir.ASC);
+                        this.order.add(order);
                     }
                     columns.add(colSpec);
 
@@ -293,39 +297,6 @@ public class DataTableRequest<T> {
             }
         }
         return lstOfParams.size();
-    }
-
-    /**
-     * Gets the pagination request.
-     *
-     * @return the pagination request
-     */
-    public PaginationCriteria getPaginationRequest() {
-
-        PaginationCriteria pagination = new PaginationCriteria();
-        pagination.setPageNumber(this.getStart());
-        pagination.setPageSize(this.getLength());
-
-        SortBy sortBy = null;
-        if (!AppUtil.isObjectEmpty(this.getOrder())) {
-            sortBy = new SortBy();
-            sortBy.addSort(this.getOrder().getData(), SortOrder.fromValue(this.getOrder().getSortDir()));
-        }
-
-        FilterBy filterBy = new FilterBy();
-        filterBy.setGlobalSearch(this.isGlobalSearch());
-        for (DataTableColumnSpecs colSpec : this.getColumns()) {
-            if (colSpec.isSearchable()) {
-                if (!AppUtil.isObjectEmpty(this.getSearch()) || !AppUtil.isObjectEmpty(colSpec.getSearch())) {
-                    filterBy.addFilter(colSpec.getData(), (this.isGlobalSearch()) ? this.getSearch() : colSpec.getSearch());
-                }
-            }
-        }
-
-        pagination.setSortBy(sortBy);
-        pagination.setFilterBy(filterBy);
-
-        return pagination;
     }
 
     /**

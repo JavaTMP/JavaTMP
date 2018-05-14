@@ -200,10 +200,10 @@ public class PaginationCriteria {
         StringBuilder sbsb = null;
 
         if (!isSortByEmpty()) {
-            Iterator<Map.Entry<String, SortOrder>> sbit = sortBy.getSortBys().entrySet().iterator();
+            Iterator<Map.Entry<String, OrderDir>> sbit = sortBy.getSortBys().entrySet().iterator();
 
             while (sbit.hasNext()) {
-                Map.Entry<String, SortOrder> pair = sbit.next();
+                Map.Entry<String, OrderDir> pair = sbit.next();
                 if (null == sbsb) {
                     sbsb = new StringBuilder();
                     sbsb.append(ORDER_BY).append(pair.getKey()).append(SPACE).append(pair.getValue());

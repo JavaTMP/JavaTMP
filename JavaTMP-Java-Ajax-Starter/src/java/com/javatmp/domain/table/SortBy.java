@@ -8,14 +8,14 @@ public class SortBy {
     /**
      * The map of sorts.
      */
-    private Map<String, SortOrder> mapOfSorts;
+    private Map<String, OrderDir> mapOfSorts;
 
     /**
      * Instantiates a new sort by.
      */
     public SortBy() {
         if (null == mapOfSorts) {
-            mapOfSorts = new HashMap<String, SortOrder>();
+            mapOfSorts = new HashMap<String, OrderDir>();
         }
     }
 
@@ -24,7 +24,7 @@ public class SortBy {
      *
      * @return the sortBys
      */
-    public Map<String, SortOrder> getSortBys() {
+    public Map<String, OrderDir> getSortBys() {
         return mapOfSorts;
     }
 
@@ -34,7 +34,7 @@ public class SortBy {
      * @param sortBy the sort by
      */
     public void addSort(String sortBy) {
-        mapOfSorts.put(sortBy, SortOrder.ASC);
+        mapOfSorts.put(sortBy, OrderDir.ASC);
     }
 
     /**
@@ -43,7 +43,7 @@ public class SortBy {
      * @param sortBy the sort by
      * @param sortOrder the sort order
      */
-    public void addSort(String sortBy, SortOrder sortOrder) {
+    public void addSort(String sortBy, OrderDir sortOrder) {
         mapOfSorts.put(sortBy, sortOrder);
     }
 

@@ -5,13 +5,18 @@ import com.google.gson.GsonBuilder;
 import com.javatmp.domain.User;
 import com.javatmp.domain.table.DataTableRequest;
 import com.javatmp.domain.table.DataTableResults;
+import com.javatmp.domain.table.OrderDir;
 import com.javatmp.mvc.ClassTypeAdapter;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.ResponseMessage;
+import com.javatmp.mvc.OrderDirTypeAdapter;
 import com.javatmp.service.ServicesFactory;
 import com.javatmp.service.UserService;
 import com.javatmp.util.Constants;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,25 +27,40 @@ import javax.servlet.http.HttpServletResponse;
 public class ListUsersController extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         ResponseMessage responseMessage = new ResponseMessage();
         ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         UserService cs = sf.getUserService();
 
-        DataTableRequest<User> tableRequest = new DataTableRequest<User>(request);
-
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").serializeNulls()
+                .registerTypeAdapter(Class.class, new ClassTypeAdapter())
+                .registerTypeAdapter(OrderDir.class, new OrderDirTypeAdapter())
+                //                .registerTypeAdapter(Date.class, new DateTypeAdapter())
+                .create();
+//        InputStream in = request.getInputStream();
+//        ByteArrayOutputStream tempArry = new ByteArrayOutputStream();
+//        byte[] buffer = new byte[4096];
+//        int bytesRead = -1;
+//        while ((bytesRead = in.read(buffer)) != -1) {
+//            tempArry.write(buffer, 0, bytesRead);
+//        }
+//        String postBody = new String(tempArry.toByteArray(), "UTF8");
+//        System.out.println("postBody[" + postBody + "]");
+//        if (true) {
+//            return;
+//        }
+        DataTableRequest<User> tableRequest = gson.fromJson(request.getReader(), DataTableRequest.class);
         System.out.println("datatableRequest [" + MvcHelper.deepToString(tableRequest) + "]");
-//        try {
 
         DataTableResults<User> dataTableResult = cs.listUsers(tableRequest);
 
         responseMessage.setOverAllStatus(true);
         responseMessage.setData(dataTableResult);
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-                .registerTypeAdapter(Class.class, new ClassTypeAdapter())
-                .create();
+//        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+//                .registerTypeAdapter(Class.class, new ClassTypeAdapter())
+//                .create();
         String json = gson.toJson(responseMessage);
         System.out.println("response [" + json + "]");
         response.setContentType("application/json");
