@@ -1660,7 +1660,6 @@
                 });
 
                 myMessagesDropdown.on('show.bs.dropdown', function () {
-                    console.log("Opening dropdown..");
                 });
 
                 myMessagesDropdown.on('shown.bs.dropdown', function () {
@@ -1711,11 +1710,9 @@
                 });
 
                 myMessagesDropdown.on('hide.bs.dropdown', function () {
-                    console.log("Hiding dropdown..");
                 });
 
                 myMessagesDropdown.on('hidden.bs.dropdown', function () {
-                    console.log("Dropdown hidden..");
                 });
 
             });
