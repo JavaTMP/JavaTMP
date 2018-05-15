@@ -1,12 +1,6 @@
 package com.javatmp.domain.table;
 
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import javax.servlet.http.HttpServletRequest;
 
 public class DataTableRequest<T> {
 
@@ -60,8 +54,7 @@ public class DataTableRequest<T> {
      *
      * @param request the request
      */
-    public DataTableRequest(HttpServletRequest request) {
-        prepareDataTableRequest(request);
+    public DataTableRequest() {
     }
 
     /**
@@ -224,79 +217,6 @@ public class DataTableRequest<T> {
      */
     public void setGlobalSearch(boolean isGlobalSearch) {
         this.isGlobalSearch = isGlobalSearch;
-    }
-
-    /**
-     * Prepare data table request.
-     *
-     * @param request the request
-     */
-    private void prepareDataTableRequest(HttpServletRequest request) {
-
-        Enumeration<String> parameterNames = request.getParameterNames();
-
-        if (parameterNames.hasMoreElements()) {
-
-            this.setStart(Integer.parseInt(request.getParameter(PaginationCriteria.PAGE_NO)));
-            this.setLength(Integer.parseInt(request.getParameter(PaginationCriteria.PAGE_SIZE)));
-            this.setUniqueId(request.getParameter("_"));
-            String drawValue;
-            if ((drawValue = request.getParameter(PaginationCriteria.DRAW)) != null) {
-                this.setDraw(Integer.parseInt(request.getParameter(PaginationCriteria.DRAW)));
-            }
-
-            this.setSearch(new Search(request.getParameter("search[value]"), false));
-            this.setRegex(Boolean.valueOf(request.getParameter("search[regex]")));
-
-            this.order = new LinkedList<>();
-
-            String sortableColValue;
-            int sortableCol = -1;
-            if ((sortableColValue = request.getParameter("order[0][column]")) != null) {
-                sortableCol = Integer.parseInt(request.getParameter("order[0][column]"));
-            }
-            System.out.println("sortableCol index [" + sortableCol + "]");
-
-            this.columns = new ArrayList<DataTableColumnSpecs>();
-
-            if (!AppUtil.isObjectEmpty(this.getSearch())) {
-                this.setGlobalSearch(true);
-            }
-
-            maxParamsToCheck = getNumberOfColumns(request);
-
-            for (int i = 0; i < maxParamsToCheck; i++) {
-                if (null != request.getParameter("columns[" + i + "][data]")
-                        && !"null".equalsIgnoreCase(request.getParameter("columns[" + i + "][data]"))
-                        && !AppUtil.isObjectEmpty(request.getParameter("columns[" + i + "][data]"))) {
-                    DataTableColumnSpecs colSpec = new DataTableColumnSpecs(request, i);
-                    if (i == sortableCol) {
-                        Order order = new Order(colSpec.getIndex(), OrderDir.ASC);
-                        this.order.add(order);
-                    }
-                    columns.add(colSpec);
-
-                    if (!AppUtil.isObjectEmpty(colSpec.getSearch())) {
-                        this.setGlobalSearch(false);
-                    }
-                }
-            }
-        }
-    }
-
-    private int getNumberOfColumns(HttpServletRequest request) {
-        Pattern p = Pattern.compile("columns\\[[0-9]+\\]\\[data\\]");
-        @SuppressWarnings("rawtypes")
-        Enumeration params = request.getParameterNames();
-        List<String> lstOfParams = new ArrayList<String>();
-        while (params.hasMoreElements()) {
-            String paramName = (String) params.nextElement();
-            Matcher m = p.matcher(paramName);
-            if (m.matches()) {
-                lstOfParams.add(paramName);
-            }
-        }
-        return lstOfParams.size();
     }
 
     /**
