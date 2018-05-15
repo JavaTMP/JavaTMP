@@ -484,10 +484,15 @@ public class DBFaker {
                     calendar.set(Calendar.SECOND, ThreadLocalRandom.current().nextInt(60));
                     calendar.set(Calendar.MILLISECOND, ThreadLocalRandom.current().nextInt(1000));
                 } else {
-                    calendar.set(Calendar.HOUR_OF_DAY, ThreadLocalRandom.current().nextInt(calendar.get(Calendar.HOUR_OF_DAY)));
-                    calendar.set(Calendar.MINUTE, ThreadLocalRandom.current().nextInt(calendar.get(Calendar.MINUTE)));
-                    calendar.set(Calendar.SECOND, ThreadLocalRandom.current().nextInt(calendar.get(Calendar.SECOND)));
-                    calendar.set(Calendar.MILLISECOND, ThreadLocalRandom.current().nextInt(calendar.get(Calendar.MILLISECOND)));
+                    int value = 0;
+                    value = calendar.get(Calendar.HOUR_OF_DAY);
+                    calendar.set(Calendar.HOUR_OF_DAY, ThreadLocalRandom.current().nextInt(value == 0 ? 1 : value));
+                    value = calendar.get(Calendar.MINUTE);
+                    calendar.set(Calendar.MINUTE, ThreadLocalRandom.current().nextInt(value == 0 ? 1 : value));
+                    value = calendar.get(Calendar.SECOND);
+                    calendar.set(Calendar.SECOND, ThreadLocalRandom.current().nextInt(value == 0 ? 1 : value));
+                    value = calendar.get(Calendar.MILLISECOND);
+                    calendar.set(Calendar.MILLISECOND, ThreadLocalRandom.current().nextInt(value == 0 ? 1 : value));
                 }
 
                 message.setCreationDate(calendar.getTime());

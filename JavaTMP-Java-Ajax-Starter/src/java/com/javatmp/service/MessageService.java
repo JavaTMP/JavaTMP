@@ -5,6 +5,8 @@ import com.javatmp.domain.User;
 import com.javatmp.domain.table.DataTableColumnSpecs;
 import com.javatmp.domain.table.DataTableRequest;
 import com.javatmp.domain.table.DataTableResults;
+import com.javatmp.domain.table.Order;
+import com.javatmp.domain.table.Search;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.Page;
 import java.text.SimpleDateFormat;
@@ -85,11 +87,12 @@ public class MessageService {
         List<Message> retList = new LinkedList<>();
         List<Message> database = this.dBFaker.getMessages();
         List<Message> db = null;
-        DataTableColumnSpecs orderOrder = tableRequest.getOrder();
+        List<Order> orders = tableRequest.getOrder();
+
         System.out.println("is global search provide");
         if (tableRequest.isGlobalSearch()) {
             System.out.println("*** isGlobalSearch starting ***");
-            String query = tableRequest.getSearch().trim().toLowerCase();
+            String query = tableRequest.getSearch().getValue().trim().toLowerCase();
             db = new LinkedList<>();
             for (Message msg : database) {
                 String userStr = MvcHelper.deepToString(msg);
@@ -101,7 +104,7 @@ public class MessageService {
             db = new LinkedList<>(this.dBFaker.getMessages());
         }
         System.out.println("Start mapping search parameteres");
-        Map<String, Object> searchParameters = new HashMap<>();
+        Map<String, Search> searchParameters = new HashMap<>();
         int index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(0, "messageId"));
         DataTableColumnSpecs column;
         if (index != -1) {
@@ -138,7 +141,7 @@ public class MessageService {
         List<Message> newDB = new LinkedList<>();
         for (Message msg : db) {
             try {
-                if (searchParameters.get("messageId") != null && !searchParameters.get("messageId").equals("")) {
+                if (searchParameters.get("messageId") != null && !searchParameters.get("messageId").getValue().equals("")) {
                     Object searchValueObject = searchParameters.get("messageId");
                     Long searchValue = new Long(searchValueObject.toString());
                     Long dbValue = msg.getMessageId();
@@ -146,7 +149,7 @@ public class MessageService {
                         continue;
                     }
                 }
-                if (searchParameters.get("messageTitle") != null && !searchParameters.get("messageTitle").equals("")) {
+                if (searchParameters.get("messageTitle") != null && !searchParameters.get("messageTitle").getValue().equals("")) {
                     Object searchValueObject = searchParameters.get("messageTitle");
                     String searchValue = searchValueObject.toString().trim().toLowerCase();
                     String dbValue = msg.getMessageTitle();
@@ -154,7 +157,7 @@ public class MessageService {
                         continue;
                     }
                 }
-                if (searchParameters.get("creationDate") != null && !searchParameters.get("creationDate").equals("")) {
+                if (searchParameters.get("creationDate") != null && !searchParameters.get("creationDate").getValue().equals("")) {
                     Object searchValueObject = searchParameters.get("joiningDate");
                     String searchValue = searchValueObject.toString().trim().toLowerCase();
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -165,7 +168,7 @@ public class MessageService {
                         continue;
                     }
                 }
-                if (searchParameters.get("fromUserId") != null && !searchParameters.get("fromUserId").equals("")) {
+                if (searchParameters.get("fromUserId") != null && !searchParameters.get("fromUserId").getValue().equals("")) {
                     Object searchValueObject = searchParameters.get("fromUserId");
                     String searchValueStr = searchValueObject.toString().trim().toLowerCase();
                     Long searchValue = new Long(searchValueStr);
@@ -174,7 +177,7 @@ public class MessageService {
                         continue;
                     }
                 }
-                if (searchParameters.get("toUserId") != null && !searchParameters.get("toUserId").equals("")) {
+                if (searchParameters.get("toUserId") != null && !searchParameters.get("toUserId").getValue().equals("")) {
                     Object searchValueObject = searchParameters.get("toUserId");
                     String searchValueStr = searchValueObject.toString().trim().toLowerCase();
                     Long searchValue = new Long(searchValueStr);
@@ -192,17 +195,23 @@ public class MessageService {
         Collections.sort(db, new Comparator<Message>() {
             @Override
             public int compare(Message o1, Message o2) {
-                int factor = orderOrder.getSortDir().equals("DESC") ? -1 : +1;
                 int retCompare = 0;
-                if (orderOrder.getData().equals("messageId")) { // messageId
+                if (orders == null || orders.size() == 0) {
+                    return retCompare;
+                }
+                // we support only one sort:
+                Order order = orders.get(0);
+                int factor = order.getDir().value().equals("desc") ? -1 : +1;
+
+                if (order.getColumn().equals(0)) { // messageId
                     retCompare = o1.getMessageId().compareTo(o2.getMessageId()) * factor;
-                } else if (orderOrder.getData().equals("messageTitle")) { // messageTitle
+                } else if (order.getColumn().equals(1)) { // messageTitle
                     retCompare = o1.getMessageTitle().compareTo(o2.getMessageTitle()) * factor;
-                } else if (orderOrder.getData().equals("creationDate")) { // creationDate
+                } else if (order.getColumn().equals(2)) { // creationDate
                     retCompare = o1.getCreationDate().compareTo(o2.getCreationDate()) * factor * -1;
-                } else if (orderOrder.getData().equals("fromUserId")) { // fromUser
+                } else if (order.getColumn().equals(3)) { // fromUser
                     retCompare = o1.getFromUserId().compareTo(o2.getFromUserId()) * factor;
-                } else if (orderOrder.getData().equals("toUserId")) { // toUser
+                } else if (order.getColumn().equals(4)) { // toUser
                     retCompare = o1.getToUserId().compareTo(o2.getToUserId()) * factor;
                 }
                 return retCompare;

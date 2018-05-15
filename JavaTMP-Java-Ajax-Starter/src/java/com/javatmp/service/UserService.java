@@ -80,7 +80,7 @@ public class UserService {
 
         if (tableRequest.isGlobalSearch()) {
             System.out.println("*** isGlobalSearch starting ***");
-            String query = tableRequest.getSearch().trim().toLowerCase();
+            String query = tableRequest.getSearch().getValue().trim().toLowerCase();
             db = new LinkedList<>();
             for (User user : database) {
                 String userStr = MvcHelper.toString(user);
@@ -253,7 +253,7 @@ public class UserService {
                 if (orders == null || orders.size() == 0) {
                     return retCompare;
                 }
-                // we support now first order:
+                // we support only one sort:
                 Order order = orders.get(0);
 
                 int factor = order.getDir().value().equals("desc") ? -1 : +1;
