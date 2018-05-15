@@ -1,12 +1,6 @@
 package com.javatmp.web.controller.message;
 
-import com.javatmp.web.controller.calendar.*;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.javatmp.domain.DiaryEvent;
 import com.javatmp.domain.Message;
-import com.javatmp.domain.User;
-import com.javatmp.mvc.ClassTypeAdapter;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.ResponseMessage;
 import com.javatmp.service.MessageService;
@@ -14,9 +8,6 @@ import com.javatmp.service.ServicesFactory;
 import com.javatmp.util.Constants;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.text.ParseException;
-import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
