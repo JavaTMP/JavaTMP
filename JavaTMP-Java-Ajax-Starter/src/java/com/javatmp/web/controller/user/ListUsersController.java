@@ -39,18 +39,7 @@ public class ListUsersController extends HttpServlet {
                 .registerTypeAdapter(OrderDir.class, new OrderDirTypeAdapter())
                 //                .registerTypeAdapter(Date.class, new DateTypeAdapter())
                 .create();
-//        InputStream in = request.getInputStream();
-//        ByteArrayOutputStream tempArry = new ByteArrayOutputStream();
-//        byte[] buffer = new byte[4096];
-//        int bytesRead = -1;
-//        while ((bytesRead = in.read(buffer)) != -1) {
-//            tempArry.write(buffer, 0, bytesRead);
-//        }
-//        String postBody = new String(tempArry.toByteArray(), "UTF8");
-//        System.out.println("postBody[" + postBody + "]");
-//        if (true) {
-//            return;
-//        }
+
         DataTableRequest<User> tableRequest = gson.fromJson(request.getReader(), DataTableRequest.class);
         System.out.println("datatableRequest [" + MvcHelper.deepToString(tableRequest) + "]");
 
@@ -58,9 +47,7 @@ public class ListUsersController extends HttpServlet {
 
         responseMessage.setOverAllStatus(true);
         responseMessage.setData(dataTableResult);
-//        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-//                .registerTypeAdapter(Class.class, new ClassTypeAdapter())
-//                .create();
+
         String json = gson.toJson(responseMessage);
         System.out.println("response [" + json + "]");
         response.setContentType("application/json");

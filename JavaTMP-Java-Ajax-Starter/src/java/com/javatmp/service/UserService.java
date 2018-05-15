@@ -78,7 +78,7 @@ public class UserService {
         List<User> db = null;
         List<Order> orders = tableRequest.getOrder();
 
-        if (tableRequest.isGlobalSearch()) {
+        if (tableRequest.getSearch() != null && tableRequest.getSearch().getValue() != null && !tableRequest.getSearch().getValue().trim().equals("")) {
             System.out.println("*** isGlobalSearch starting ***");
             String query = tableRequest.getSearch().getValue().trim().toLowerCase();
             db = new LinkedList<>();
@@ -147,7 +147,7 @@ public class UserService {
             column = tableRequest.getColumns().get(index);
             searchParameters.put("email", column.getSearch());
         }
-        System.out.println("search [" + searchParameters + "]");
+        System.out.println("search [" + MvcHelper.deepToString(searchParameters) + "]");
 // apply individual column search:
         List<User> newDB = new LinkedList<>();
         for (User user : db) {
@@ -211,7 +211,7 @@ public class UserService {
                     Date dbValue = user.getJoiningDate();
                     Date searchDate = sdf.parse(searchValue);
                     Long search = searchDate.getTime();
-                    if (dbValue.getTime() > search) {
+                    if (dbValue.getTime() < search) {
                         continue;
                     }
                 }
@@ -245,7 +245,7 @@ public class UserService {
             }
         }
         db = newDB;
-        System.out.println("orderOrder [" + orders + "]");
+        System.out.println("orderOrder [" + MvcHelper.deepToString(orders) + "]");
         Collections.sort(db, new Comparator<User>() {
             @Override
             public int compare(User o1, User o2) {

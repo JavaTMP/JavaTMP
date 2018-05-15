@@ -63,7 +63,6 @@
                     contentType: "application/json; charset=UTF-8",
                     "data": function (currentDate) {
                         currentDate._ajaxGlobalBlockUI = false; // window blocked until data return
-                        console.log(JSON.stringify(currentDate));
                         return JSON.stringify(currentDate);
                     },
                     "dataSrc": function (json) {

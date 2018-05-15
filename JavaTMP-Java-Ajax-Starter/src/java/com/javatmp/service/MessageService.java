@@ -136,30 +136,30 @@ public class MessageService {
             searchParameters.put("toUserId", column.getSearch());
         }
 
-        System.out.println("search [" + searchParameters + "]");
+        System.out.println("search [" + MvcHelper.deepToString(searchParameters) + "]");
 // apply individual column search:
         List<Message> newDB = new LinkedList<>();
         for (Message msg : db) {
             try {
                 if (searchParameters.get("messageId") != null && !searchParameters.get("messageId").getValue().equals("")) {
-                    Object searchValueObject = searchParameters.get("messageId");
-                    Long searchValue = new Long(searchValueObject.toString());
+                    Search searchValueObject = searchParameters.get("messageId");
+                    Long searchValue = new Long(searchValueObject.getValue());
                     Long dbValue = msg.getMessageId();
                     if (!dbValue.equals(searchValue)) {
                         continue;
                     }
                 }
-                if (searchParameters.get("messageTitle") != null && !searchParameters.get("messageTitle").getValue().equals("")) {
-                    Object searchValueObject = searchParameters.get("messageTitle");
-                    String searchValue = searchValueObject.toString().trim().toLowerCase();
+                if (searchParameters.get("messageTitle") != null && searchParameters.get("messageTitle").getValue() != null && !searchParameters.get("messageTitle").getValue().equals("")) {
+                    Search searchValueObject = searchParameters.get("messageTitle");
+                    String searchValue = searchValueObject.getValue().trim().toLowerCase();
                     String dbValue = msg.getMessageTitle();
                     if (!dbValue.toLowerCase().contains(searchValue)) {
                         continue;
                     }
                 }
-                if (searchParameters.get("creationDate") != null && !searchParameters.get("creationDate").getValue().equals("")) {
-                    Object searchValueObject = searchParameters.get("joiningDate");
-                    String searchValue = searchValueObject.toString().trim().toLowerCase();
+                if (searchParameters.get("creationDate") != null && searchParameters.get("creationDate").getValue() != null && !searchParameters.get("creationDate").getValue().equals("")) {
+                    Search searchValueObject = searchParameters.get("joiningDate");
+                    String searchValue = searchValueObject.getValue().trim().toLowerCase();
                     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                     Date dbValue = msg.getCreationDate();
                     Date searchDate = sdf.parse(searchValue);
@@ -168,18 +168,18 @@ public class MessageService {
                         continue;
                     }
                 }
-                if (searchParameters.get("fromUserId") != null && !searchParameters.get("fromUserId").getValue().equals("")) {
-                    Object searchValueObject = searchParameters.get("fromUserId");
-                    String searchValueStr = searchValueObject.toString().trim().toLowerCase();
+                if (searchParameters.get("fromUserId") != null && searchParameters.get("fromUserId").getValue() != null && !searchParameters.get("fromUserId").getValue().equals("")) {
+                    Search searchValueObject = searchParameters.get("fromUserId");
+                    String searchValueStr = searchValueObject.getValue().trim().toLowerCase();
                     Long searchValue = new Long(searchValueStr);
                     Long dbValue = msg.getFromUserId();
                     if (!dbValue.equals(searchValue)) {
                         continue;
                     }
                 }
-                if (searchParameters.get("toUserId") != null && !searchParameters.get("toUserId").getValue().equals("")) {
-                    Object searchValueObject = searchParameters.get("toUserId");
-                    String searchValueStr = searchValueObject.toString().trim().toLowerCase();
+                if (searchParameters.get("toUserId") != null && searchParameters.get("toUserId").getValue() != null && !searchParameters.get("toUserId").getValue().equals("")) {
+                    Search searchValueObject = searchParameters.get("toUserId");
+                    String searchValueStr = searchValueObject.getValue().trim().toLowerCase();
                     Long searchValue = new Long(searchValueStr);
                     Long dbValue = msg.getToUserId();
                     if (!dbValue.equals(searchValue)) {
