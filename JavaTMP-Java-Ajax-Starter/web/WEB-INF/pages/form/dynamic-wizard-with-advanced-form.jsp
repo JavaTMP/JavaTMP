@@ -717,7 +717,7 @@
                     }
                 });
 
-                $(".daterangepicker.dropdown-menu").css('z-index', modalZIndex);
+                $(".daterangepicker").css('z-index', modalZIndex);
                 $(".select2-container--bootstrap").css('z-index', modalZIndex);
 
 
