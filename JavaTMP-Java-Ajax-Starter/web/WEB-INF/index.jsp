@@ -1615,18 +1615,30 @@
                                     this.mcs.content.append(indicatorTemplate);
                                     var that = this;
                                     var passData = {
-                                        "_ajaxGlobalBlockUI": false,
-                                        "start": startFrom,
-                                        "length": recordPerPage,
-                                        "order[0][column]": 0,
-                                        "order[0][dir]": "ASC",
-                                        "columns[0][data]": "creationDate",
-                                        "columns[1][data]": "toUserId",
-                                        "columns[1][search][value]": toUserId
+                                        _ajaxGlobalBlockUI: false,
+                                        start: startFrom,
+                                        length: recordPerPage,
+                                        order: [
+                                            {"column": 0, "dir": "asc"}
+                                        ],
+                                        columns: [{
+                                                "data": "creationDate"
+                                            },
+                                            {
+                                                "data": "toUserId",
+                                                search: {
+                                                    "value": toUserId
+                                                }
+                                            }
+                                        ]
                                     };
+
                                     $.ajax({
+                                        "type": "POST",
                                         url: javatmp.settings.contextPath + "/user/ListMessagesController",
-                                        data: passData,
+                                        dataType: "json",
+                                        contentType: "application/json; charset=UTF-8",
+                                        data: JSON.stringify(passData),
                                         success: function (response, textStatus, jqXHR) {
                                             that.mcs.content.find(".fetch-indicator").remove();
                                             var data = response.data.data;
@@ -1662,6 +1674,16 @@
                 myMessagesDropdown.on('show.bs.dropdown', function () {
                 });
 
+                $(document).ajaxSend(function (event, xhr, ajaxOptions) {
+
+                    if ((ajaxOptions.url.indexOf("_ajaxGlobalBlockUI=false") === -1)
+                            && !(!!ajaxOptions.data && !!ajaxOptions.data.indexOf && (ajaxOptions.data.indexOf('"_ajaxGlobalBlockUI":false') !== -1))) {
+                        //alert("we block globally");
+                    } else {
+                        //alert("we will not block globally");
+                    }
+                });
+
                 myMessagesDropdown.on('shown.bs.dropdown', function () {
                     if (!workingDown && startFrom === 0) {
                         console.log("fetch initial messages only once");
@@ -1669,24 +1691,24 @@
                             workingDown = true;
                             $(".mCSB_container", myMessagesScrollable).append(indicatorTemplate);
                             var passData = {
-
-                            };
-                            passData._ajaxGlobalBlockUI = false;
-                            passData.start = startFrom;
-                            passData.length = recordPerPage;
-                            passData.order = [
-                                {"column": 0, "dir": "asc"}
-                            ];
-                            passData.columns = [{
-                                    "data": "creationDate"
-                                },
-                                {
-                                    "data": "toUserId",
-                                    search: {
-                                        "value": toUserId
+                                _ajaxGlobalBlockUI: false,
+                                start: startFrom,
+                                length: recordPerPage,
+                                order: [
+                                    {"column": 0, "dir": "asc"}
+                                ],
+                                columns: [{
+                                        "data": "creationDate"
+                                    },
+                                    {
+                                        "data": "toUserId",
+                                        search: {
+                                            "value": toUserId
+                                        }
                                     }
-                                }
-                            ];
+                                ]
+                            };
+
                             $.ajax({
                                 "type": "POST",
                                 url: javatmp.settings.contextPath + "/user/ListMessagesController",
