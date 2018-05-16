@@ -39,12 +39,13 @@ public class UpdateThemeController extends HttpServlet {
             ResponseMessage responseMessage = new ResponseMessage();
 
             MvcHelper.populateBeanByRequestParameters(request, user);
-            System.out.println("User created [" + MvcHelper.deepToString(user) + "]");
+            System.out.println("Theme requested [" + MvcHelper.deepToString(user) + "]");
 
             // get current login user in session
             User loginUser = (User) request.getSession().getAttribute("user");
+            System.out.println("Logged In User [" + MvcHelper.deepToString(user) + "]");
             loginUser.setTheme(user.getTheme());
-
+            System.out.println("Logged In User [" + MvcHelper.deepToString(user) + "]");
             responseMessage.setOverAllStatus(true);
             responseMessage.setRedirect(true);
             responseMessage.setRedirectURL(request.getContextPath() + "/");
