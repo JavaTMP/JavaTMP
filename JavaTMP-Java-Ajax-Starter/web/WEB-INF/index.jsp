@@ -1668,18 +1668,24 @@
                         if (currentFetchedCount < allCount) {
                             workingDown = true;
                             $(".mCSB_container", myMessagesScrollable).append(indicatorTemplate);
-                            var passData = {};
+                            var passData = {
+
+                            };
                             passData._ajaxGlobalBlockUI = false;
                             passData.start = startFrom;
                             passData.length = recordPerPage;
                             passData.order = [
                                 {"column": 0, "dir": "asc"}
                             ];
-                            passData.columns = [
-                                {"data": "creationDate"},
-                                {"data": "toUserId", search: {
+                            passData.columns = [{
+                                    "data": "creationDate"
+                                },
+                                {
+                                    "data": "toUserId",
+                                    search: {
                                         "value": toUserId
-                                    }}
+                                    }
+                                }
                             ];
                             $.ajax({
                                 "type": "POST",
