@@ -144,7 +144,7 @@
                         url: javatmp.settings.contextPath + "/user/ListUsersController",
                         dataType: "json",
                         contentType: "application/json; charset=UTF-8",
-                        delay: 250,
+                        delay: 300,
                         cache: true,
                         data: function (params) {
                             return JSON.stringify({
