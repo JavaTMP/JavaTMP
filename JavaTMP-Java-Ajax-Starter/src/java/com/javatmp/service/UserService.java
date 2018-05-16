@@ -94,58 +94,60 @@ public class UserService {
         }
 
         Map<String, Search> searchParameters = new HashMap<>();
-        DataTableColumnSpecs column;
-        int index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(0, "id"));
-        if (index != -1) {
-            column = tableRequest.getColumns().get(index);
-            searchParameters.put("id", column.getSearch());
-        }
+        if (tableRequest.getColumns() != null && tableRequest.getColumns().size() > 0) {
+            DataTableColumnSpecs column;
+            int index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(0, "id"));
+            if (index != -1) {
+                column = tableRequest.getColumns().get(index);
+                searchParameters.put("id", column.getSearch());
+            }
 
-        index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(1, "firstName"));
-        if (index != -1) {
-            column = tableRequest.getColumns().get(index);
-            searchParameters.put("firstName", column.getSearch());
-        }
+            index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(1, "firstName"));
+            if (index != -1) {
+                column = tableRequest.getColumns().get(index);
+                searchParameters.put("firstName", column.getSearch());
+            }
 
-        index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(2, "lastName"));
-        if (index != -1) {
-            column = tableRequest.getColumns().get(index);
-            searchParameters.put("lastName", column.getSearch());
-        }
-        index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(3, "position"));
-        if (index != -1) {
-            column = tableRequest.getColumns().get(index);
-            searchParameters.put("position", column.getSearch());
-        }
-        index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(4, "office"));
-        if (index != -1) {
-            column = tableRequest.getColumns().get(index);
-            searchParameters.put("office", column.getSearch());
-        }
-        index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(5, "birthOfDate"));
-        if (index != -1) {
-            column = tableRequest.getColumns().get(index);
-            searchParameters.put("birthOfDate", column.getSearch());
-        }
-        index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(6, "joiningDate"));
-        if (index != -1) {
-            column = tableRequest.getColumns().get(index);
-            searchParameters.put("joiningDate", column.getSearch());
-        }
-        index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(7, "salary"));
-        if (index != -1) {
-            column = tableRequest.getColumns().get(index);
-            searchParameters.put("salary", column.getSearch());
-        }
-        index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(8, "mobile"));
-        if (index != -1) {
-            column = tableRequest.getColumns().get(index);
-            searchParameters.put("mobile", column.getSearch());
-        }
-        index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(9, "email"));
-        if (index != -1) {
-            column = tableRequest.getColumns().get(index);
-            searchParameters.put("email", column.getSearch());
+            index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(2, "lastName"));
+            if (index != -1) {
+                column = tableRequest.getColumns().get(index);
+                searchParameters.put("lastName", column.getSearch());
+            }
+            index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(3, "position"));
+            if (index != -1) {
+                column = tableRequest.getColumns().get(index);
+                searchParameters.put("position", column.getSearch());
+            }
+            index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(4, "office"));
+            if (index != -1) {
+                column = tableRequest.getColumns().get(index);
+                searchParameters.put("office", column.getSearch());
+            }
+            index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(5, "birthOfDate"));
+            if (index != -1) {
+                column = tableRequest.getColumns().get(index);
+                searchParameters.put("birthOfDate", column.getSearch());
+            }
+            index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(6, "joiningDate"));
+            if (index != -1) {
+                column = tableRequest.getColumns().get(index);
+                searchParameters.put("joiningDate", column.getSearch());
+            }
+            index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(7, "salary"));
+            if (index != -1) {
+                column = tableRequest.getColumns().get(index);
+                searchParameters.put("salary", column.getSearch());
+            }
+            index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(8, "mobile"));
+            if (index != -1) {
+                column = tableRequest.getColumns().get(index);
+                searchParameters.put("mobile", column.getSearch());
+            }
+            index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(9, "email"));
+            if (index != -1) {
+                column = tableRequest.getColumns().get(index);
+                searchParameters.put("email", column.getSearch());
+            }
         }
         System.out.println("search [" + MvcHelper.deepToString(searchParameters) + "]");
 // apply individual column search:
@@ -245,7 +247,6 @@ public class UserService {
             }
         }
         db = newDB;
-        System.out.println("orderOrder [" + MvcHelper.deepToString(orders) + "]");
         Collections.sort(db, new Comparator<User>() {
             @Override
             public int compare(User o1, User o2) {

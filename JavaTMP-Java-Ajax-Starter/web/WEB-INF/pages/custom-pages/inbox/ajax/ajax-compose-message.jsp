@@ -140,18 +140,20 @@
                     width: '',
                     containerCssClass: ':all:',
                     ajax: {
+                        "type": "POST",
                         url: javatmp.settings.contextPath + "/user/ListUsersController",
-                        dataType: 'json',
+                        dataType: "json",
+                        contentType: "application/json; charset=UTF-8",
                         delay: 250,
                         cache: true,
                         data: function (params) {
-                            return {
+                            return JSON.stringify({
                                 _ajaxGlobalBlockUI: false,
                                 "start": (params.page ? params.page - 1 : 0) * 10,
                                 "length": 10,
                                 "draw": 1,
-                                "search[value]": params.term
-                            };
+                                "search": {value: params.term}
+                            });
                         },
                         processResults: function (data, params) {
                             // parse the results into the format expected by Select2
