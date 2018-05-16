@@ -3,42 +3,130 @@
     <div class="row">
         <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
             <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
-                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/" >
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/themes/bootswatch" >
+                <i class="fas fa-coffee"></i>
+                Switching Themes
+            </button>
+        </div>
+        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
+            <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/login" >
+                <i class="fas fa-coffee"></i>
+                Login Page
+            </button>
+        </div>
+        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
+            <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/logout" >
+                <i class="fas fa-coffee"></i>
+                Logout Page
+            </button>
+        </div>
+        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
+            <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/custom-components/dynamic-cards-content" >
+                <i class="fas fa-coffee"></i>
+                Dynamic Card Contents
+            </button>
+        </div>
+        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
+            <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/plugins/tree/fancytree/plain_fancytree" >
+                <i class="fas fa-coffee"></i>
+                Files Tree List
+            </button>
+        </div>
+        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
+            <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/plugins/tree/fancytree/table_fancytree" >
+                <i class="fas fa-coffee"></i>
+                Files Table Tree List
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
+            <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/plugins/tree/fancytree/chart-of-accounts" >
+                <i class="fas fa-coffee"></i>
+                Chart of accounts
+            </button>
+        </div>
+        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
+            <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/plugins/calendar/jQuery-fullcalendar-diary-system" >
+                <i class="fas fa-coffee"></i>
+                Diary Web Calendar
+            </button>
+        </div>
+        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
+            <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/DynamicSelect2PageController" >
+                <i class="fas fa-coffee"></i>
+                Dynamic Select2 Plugin
+            </button>
+        </div>
+        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
+            <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/cms/ContentPageController" >
+                <i class="fas fa-coffee"></i>
+                Dynamic Summernote Plugin
+            </button>
+        </div>
+        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
+            <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/gallery/file-controller-serve" >
+                <i class="fas fa-coffee"></i>
+                Dynamic Fetch Images
+            </button>
+        </div>
+        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
+            <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/gallery/edit-image-locally" >
+                <i class="fas fa-coffee"></i>
+                Edit & Crop Image
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
+            <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}" >
                 <i class="fas fa-coffee"></i>
 
             </button>
         </div>
         <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
             <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
-                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/" >
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}" >
                 <i class="fas fa-coffee"></i>
 
             </button>
         </div>
         <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
             <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
-                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/" >
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}" >
                 <i class="fas fa-coffee"></i>
 
             </button>
         </div>
         <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
             <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
-                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/" >
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}" >
                 <i class="fas fa-coffee"></i>
 
             </button>
         </div>
         <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
             <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
-                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/" >
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}" >
                 <i class="fas fa-coffee"></i>
 
             </button>
         </div>
         <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
             <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
-                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/" >
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}" >
                 <i class="fas fa-coffee"></i>
 
             </button>

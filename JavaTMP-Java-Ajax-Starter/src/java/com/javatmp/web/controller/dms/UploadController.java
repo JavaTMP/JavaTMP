@@ -27,7 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
 @WebServlet("/UploadController")
-@MultipartConfig(fileSizeThreshold = 1024 * 15, maxFileSize = 1024 * 50, maxRequestSize = 1024 * 200)
+@MultipartConfig(fileSizeThreshold = 1024 * 15, maxFileSize = 1024 * 50, maxRequestSize = 1024 * 100)
 public class UploadController extends HttpServlet {
 
     @Override
@@ -100,8 +100,10 @@ public class UploadController extends HttpServlet {
         } catch (IllegalStateException e) {
             System.out.println("ERROR : " + e.getMessage());
             e.printStackTrace();
-            responseMessage.setOverAllStatus(true);
+            responseMessage.setOverAllStatus(false);
             responseMessage.setMessage(e.getMessage());
+            response.setStatus(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE);
+            responseMessage.setStatusCode(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE);
         }
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").serializeNulls()
                 .registerTypeAdapter(Class.class, new ClassTypeAdapter())

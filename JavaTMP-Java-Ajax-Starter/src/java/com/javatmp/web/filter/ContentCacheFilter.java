@@ -8,7 +8,6 @@ package com.javatmp.web.filter;
  * the book and help support the authors, development of more free code,
  * and the JSP/Servlet/J2EE community.
  */
-import com.javatmp.mvc.MvcHelper;
 import com.javatmp.util.CacheEntry;
 import com.javatmp.util.CacheResponseWrapper;
 import java.io.*;

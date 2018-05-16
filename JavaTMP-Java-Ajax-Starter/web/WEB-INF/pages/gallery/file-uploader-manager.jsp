@@ -178,7 +178,7 @@
                     },
                     error: function (xhr, status, error, $form) {
                         BootstrapModalWrapperFactory.createModal({
-                            title: "ERROR",
+                            title: xhr.statusText + " : " + xhr.status,
                             message: "error[" + xhr + "][" + status + "][" + error + "][" + $form + "]"
                         }).show();
                     }

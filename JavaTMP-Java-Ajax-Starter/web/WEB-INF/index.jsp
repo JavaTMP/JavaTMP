@@ -32,7 +32,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li class="${sessionScope.user.lang == 'en' ? 'disabled' : ''}">
-                            <a class="dropdown-item ${sessionScope.user.lang == 'en' ? 'disabled' : ''}" href="${pageContext.request.contextPath}/updateLanguage?lang=en">
+                            <a class="updateLanguagelink dropdown-item ${sessionScope.user.lang == 'en' ? 'disabled' : ''}" href="${pageContext.request.contextPath}/updateLanguage?lang=en">
                                 <div>
                                     <img src="${pageContext.request.contextPath}/assets/img/flags/us.png" class="" alt="">
                                     ${labels['global.navbar.lang.en']}
@@ -40,7 +40,7 @@
                             </a>
                         </li>
                         <li class="${sessionScope.user.lang == 'ar' ? 'disabled' : ''}">
-                            <a class="dropdown-item ${sessionScope.user.lang == 'ar' ? 'disabled' : ''}" href="${pageContext.request.contextPath}/updateLanguage?lang=ar">
+                            <a class="updateLanguagelink dropdown-item ${sessionScope.user.lang == 'ar' ? 'disabled' : ''}" href="${pageContext.request.contextPath}/updateLanguage?lang=ar">
                                 <div>
                                     <img src="${pageContext.request.contextPath}/assets/img/flags/sa.png" class="" alt="">
                                     ${labels['global.navbar.lang.ar']}
@@ -1245,7 +1245,7 @@
                                         </a>
                                         <ul>
                                             <li>
-                                                <a target="_blank"  href="${pageContext.request.contextPath}/pages/custom-pages/login-pages/default-login-page">
+                                                <a target="_blank"  href="${pageContext.request.contextPath}/login">
                                                     <i class="far fa-lg fa-fw fa-file-alt"></i>
                                                     Default Login Page
                                                 </a>
@@ -1748,6 +1748,26 @@
                 myMessagesDropdown.on('hidden.bs.dropdown', function () {
                 });
 
+            });
+        </script>
+        <script type="text/javascript">
+            jQuery(function ($) {
+                $(".updateLanguagelink").on("click", function (event) {
+                    event.preventDefault();
+                    var url = $(this).attr("href");
+                    $.ajax({
+                        cache: false,
+                        type: "GET",
+                        url: url,
+                        beforeSend: function () {
+                        },
+                        success: function (response, textStatus, jqXHR) {
+                            window.location.reload();
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                        }
+                    });
+                });
             });
         </script>
         <script type="text/javascript">

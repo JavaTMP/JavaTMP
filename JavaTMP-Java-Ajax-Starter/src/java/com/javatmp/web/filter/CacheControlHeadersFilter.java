@@ -2,16 +2,12 @@ package com.javatmp.web.filter;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
-import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -32,12 +28,11 @@ public class CacheControlHeadersFilter implements Filter {
             FilterChain chain)
             throws IOException, ServletException {
 
-        try {
-            if (response instanceof HttpServletResponse && request instanceof HttpServletRequest) {
-                HttpServletRequest httpRequest = (HttpServletRequest) request;
-                HttpServletResponse httpResponse = (HttpServletResponse) response;
-
-                String url = null;
+        if (response instanceof HttpServletResponse && request instanceof HttpServletRequest) {
+            HttpServletRequest httpRequest = (HttpServletRequest) request;
+            HttpServletResponse httpResponse = (HttpServletResponse) response;
+            if ("GET".equals(httpRequest.getMethod())) {
+                String url;
                 if (httpRequest.getQueryString() != null) {
                     url = httpRequest.getRequestURI() + "?" + httpRequest.getQueryString();
                 } else {
@@ -54,11 +49,9 @@ public class CacheControlHeadersFilter implements Filter {
                 httpResponse.addHeader("Cache-Control", "max-age=" + cacheAge);
                 System.out.println("Added Cache header to url [" + url + "]");
             }
-            chain.doFilter(request, response);
-        } catch (Throwable t) {
-            t.printStackTrace();
-            throw new ServletException(t);
         }
+        chain.doFilter(request, response);
+
     }
 
     /**

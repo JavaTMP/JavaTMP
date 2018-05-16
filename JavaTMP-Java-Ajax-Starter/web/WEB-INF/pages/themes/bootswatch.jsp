@@ -146,6 +146,7 @@
                 $(".applyTheme").on("click", function () {
                     var themeName = $(this).attr("themeName");
                     $.ajax({
+                        cache: false,
                         type: javatmp.settings.httpMethod,
                         url: javatmp.settings.contextPath + "/updateTheme",
                         data: {"theme": themeName},
