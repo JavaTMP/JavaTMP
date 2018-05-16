@@ -29,7 +29,7 @@ public class ListAllUsersController extends HttpServlet {
         ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         UserService cs = sf.getUserService();
 
-        DataTableRequest<User> tableRequest = new DataTableRequest<User>(request);
+        DataTableRequest<User> tableRequest = new DataTableRequest<>();
 
         System.out.println("datatableRequest [" + MvcHelper.deepToString(tableRequest) + "]");
 //        try {

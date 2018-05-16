@@ -39,7 +39,7 @@ public class ListMessagesController extends HttpServlet {
 
         System.out.println("Try to convert request to datatable request");
 
-        DataTableRequest<Message> tableRequest = new DataTableRequest<>(request);
+        DataTableRequest<Message> tableRequest = new DataTableRequest<>();
 
         System.out.println("datatableRequest [" + MvcHelper.deepToString(tableRequest) + "]");
 
