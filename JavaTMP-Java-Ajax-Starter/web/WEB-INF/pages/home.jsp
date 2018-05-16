@@ -91,44 +91,61 @@
     <div class="row">
         <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
             <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
-                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}" >
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/plugins/dynamic-malihu-custom-scrollbar-plugin" >
                 <i class="fas fa-coffee"></i>
-
+                Dynamic malihu scroll bar
             </button>
         </div>
         <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
             <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
-                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}" >
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/form/advance-form-plugins" >
                 <i class="fas fa-coffee"></i>
-
+                Advanced Form Plugin
             </button>
         </div>
         <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
             <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
-                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}" >
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/form/dynamic-wizard-with-advanced-form-page" >
                 <i class="fas fa-coffee"></i>
-
+                Dynamic wizard
             </button>
         </div>
         <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
             <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
-                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}" >
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/table/datatable/dynamic-datatables" >
                 <i class="fas fa-coffee"></i>
-
+                Dynamic Datatables content
             </button>
         </div>
         <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
             <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
-                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}" >
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/table/datatable/dynamic-individual-column-searching-datatables" >
                 <i class="fas fa-coffee"></i>
-
+                Individual column search Datatables
             </button>
         </div>
         <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
             <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
-                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}" >
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/chart/dynamic-echarts" >
                 <i class="fas fa-coffee"></i>
-
+                Dynamic Charts
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
+            <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
+                    actionType="ajax-model"
+                    href="${pageContext.request.contextPath}/pages/custom-pages/inbox/ajax/ajax-compose-message" >
+                <i class="fas fa-coffee"></i>
+                Send New messages
+            </button>
+        </div>
+        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
+            <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/FileManagerPageController" >
+                <i class="fas fa-coffee"></i>
+                File Manager
             </button>
         </div>
     </div>

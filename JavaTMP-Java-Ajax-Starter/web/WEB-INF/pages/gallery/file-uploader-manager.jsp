@@ -168,7 +168,6 @@
                                 'contextPath': javatmp.settings.contextPath
                             }));
                         }
-
                     },
                     complete: function (xhr) {
                         $("#updateFormId")[0].reset();
@@ -176,6 +175,7 @@
                         $("#updateFormId input[type=file]").val(null).next("label").text("Choose file...");
 
                     },
+                    timeout: 160 * 1000,
                     error: function (xhr, status, error, $form) {
                         BootstrapModalWrapperFactory.createModal({
                             title: xhr.statusText + " : " + xhr.status,
