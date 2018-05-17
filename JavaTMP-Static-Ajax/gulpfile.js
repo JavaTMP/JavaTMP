@@ -245,6 +245,9 @@ var config = {
         ],
         "bootstrap-alert-wrapper": [
             {"from": "${sourceNodeLib}/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js", "to": "${destComponentsLib}/bootstrap-alert-wrapper/dist"}
+        ],
+        "numeral": [
+            {"from": "${sourceNodeLib}/numeral/min/numeral.min.js", "to": "${destComponentsLib}/numeral/min"}
         ]
 
     }

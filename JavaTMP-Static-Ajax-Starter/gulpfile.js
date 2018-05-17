@@ -201,6 +201,9 @@ var config = {
         ],
         "bootstrap-alert-wrapper": [
             {"from": "${sourceNodeLib}/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js", "to": "${destComponentsLib}/bootstrap-alert-wrapper/dist"}
+        ],
+        "numeral": [
+            {"from": "${sourceNodeLib}/numeral/min/numeral.min.js", "to": "${destComponentsLib}/numeral/min"}
         ]
     }
 };
@@ -296,7 +299,8 @@ var src = {
         "./public_html/components/bootstrap-modal-wrapper/dist/bootstrap-modal-wrapper-factory.min.js",
         "./public_html/components/bootstrap-actionable/dist/bootstrap-actionable.min.js",
         "./public_html/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.js",
-        "./public_html/components/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js"
+        "./public_html/components/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js",
+        "./web/components/numeral/min/numeral.min.js"
     ]
 }
 ;

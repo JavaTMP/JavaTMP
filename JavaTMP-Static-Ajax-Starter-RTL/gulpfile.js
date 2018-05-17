@@ -205,6 +205,9 @@ var config = {
         "jquery-contextmenurtl": [
             {"from": "${sourceNodeLib}/jquery-contextmenurtl/dist/css/jquery.contextMenuRtl.min.css", "to": "${destComponentsLib}/jquery-contextmenurtl/dist/css"},
             {"from": "${sourceNodeLib}/jquery-contextmenurtl/dist/js/jquery.contextMenuRtl.min.js", "to": "${destComponentsLib}/jquery-contextmenurtl/dist/js"}
+        ],
+        "numeral": [
+            {"from": "${sourceNodeLib}/numeral/min/numeral.min.js", "to": "${destComponentsLib}/numeral/min"}
         ]
     }
 };
@@ -303,7 +306,8 @@ var src = {
         "./public_html/components/bootstrap-actionable/dist/bootstrap-actionable.min.js",
         "./public_html/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.js",
         "./public_html/components/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js",
-        "./public_html/components/jquery-contextmenurtl/dist/js/jquery.contextMenuRtl.min.js"
+        "./public_html/components/jquery-contextmenurtl/dist/js/jquery.contextMenuRtl.min.js",
+        "./web/components/numeral/min/numeral.min.js"
     ]
 }
 ;

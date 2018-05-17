@@ -58,7 +58,8 @@
     "bootstrap-alert-wrapper": "^1.0.3",
     "jquery.fancytree": "^2.28.1",
     "bootswatch": "^4.1.1",
-    "jquery-contextmenurtl": "1.0.0"
+    "jquery-contextmenurtl": "1.0.0",
+    "numeral" : "2.0.6"
   },
   "devDependencies": {
     "del": "^3.0.0",
