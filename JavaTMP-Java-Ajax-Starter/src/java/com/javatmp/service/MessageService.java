@@ -88,7 +88,7 @@ public class MessageService {
         List<Message> database = this.dBFaker.getMessages();
         List<Message> db = null;
         List<Order> orders = tableRequest.getOrder();
-
+        System.out.println("Order requested [" + orders + "]");
         System.out.println("is global search provide");
         if (tableRequest.isGlobalSearch()) {
             System.out.println("*** isGlobalSearch starting ***");
@@ -136,7 +136,7 @@ public class MessageService {
             searchParameters.put("toUserId", column.getSearch());
         }
 
-        System.out.println("search [" + MvcHelper.deepToString(searchParameters) + "]");
+        System.out.println("search [" + searchParameters + "]");
 // apply individual column search:
         List<Message> newDB = new LinkedList<>();
         for (Message msg : db) {
@@ -202,16 +202,22 @@ public class MessageService {
                 // we support only one sort:
                 Order order = orders.get(0);
                 int factor = order.getDir().value().equals("desc") ? -1 : +1;
-
-                if (order.getColumn().equals(0)) { // messageId
+                DataTableColumnSpecs orderColumn = tableRequest.getColumns().get(order.getColumn());
+//                System.out.println("Order by column [" + orderColumn + "]");
+                if (!(orderColumn != null && orderColumn.getData() != null)) {
+                    return retCompare;
+                }
+                String orderColumnName = orderColumn.getData();
+//                System.out.println("Order by column name [" + orderColumnName + "]");
+                if ("messageId".equals(orderColumnName)) { // messageId
                     retCompare = o1.getMessageId().compareTo(o2.getMessageId()) * factor;
-                } else if (order.getColumn().equals(1)) { // messageTitle
+                } else if ("messageTitle".equals(orderColumnName)) { // messageTitle
                     retCompare = o1.getMessageTitle().compareTo(o2.getMessageTitle()) * factor;
-                } else if (order.getColumn().equals(2)) { // creationDate
+                } else if ("creationDate".equals(orderColumnName)) { // creationDate
                     retCompare = o1.getCreationDate().compareTo(o2.getCreationDate()) * factor * -1;
-                } else if (order.getColumn().equals(3)) { // fromUser
+                } else if ("fromUser".equals(orderColumnName)) { // fromUser
                     retCompare = o1.getFromUserId().compareTo(o2.getFromUserId()) * factor;
-                } else if (order.getColumn().equals(4)) { // toUser
+                } else if ("toUser".equals(orderColumnName)) { // toUser
                     retCompare = o1.getToUserId().compareTo(o2.getToUserId()) * factor;
                 }
                 return retCompare;

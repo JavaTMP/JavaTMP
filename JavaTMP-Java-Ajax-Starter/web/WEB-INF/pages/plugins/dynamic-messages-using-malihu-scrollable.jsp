@@ -113,18 +113,29 @@
                                 this.mcs.content.prepend(indicatorTemplate);
                                 var that = this;
                                 var passData = {
-                                    "_ajaxGlobalBlockUI": false,
-                                    "start": startFrom,
-                                    "length": recordPerPage,
-                                    "order[0][column]": 0,
-                                    "order[0][dir]": "ASC",
-                                    "columns[0][data]": "creationDate",
-                                    "columns[1][data]": "toUserId",
-                                    "columns[1][search][value]": toUserId
+                                    _ajaxGlobalBlockUI: false,
+                                    start: startFrom,
+                                    length: recordPerPage,
+                                    order: [
+                                        {"column": 0, "dir": "asc"}
+                                    ],
+                                    columns: [{
+                                            "data": "creationDate"
+                                        },
+                                        {
+                                            "data": "toUserId",
+                                            search: {
+                                                "value": toUserId
+                                            }
+                                        }
+                                    ]
                                 };
                                 $.ajax({
+                                    "type": "POST",
                                     url: javatmp.settings.contextPath + "/user/ListMessagesController",
-                                    data: passData,
+                                    dataType: "json",
+                                    contentType: "application/json; charset=UTF-8",
+                                    data: JSON.stringify(passData),
                                     success: function (response, textStatus, jqXHR) {
                                         that.mcs.content.find(".fetch-indicator").remove();
                                         var data = response.data.data;
@@ -160,18 +171,29 @@
                                 this.mcs.content.append(indicatorTemplate);
                                 var that = this;
                                 var passData = {
-                                    "_ajaxGlobalBlockUI": false,
-                                    "start": startFrom,
-                                    "length": recordPerPage,
-                                    "order[0][column]": 0,
-                                    "order[0][dir]": "ASC",
-                                    "columns[0][data]": "creationDate",
-                                    "columns[1][data]": "toUserId",
-                                    "columns[1][search][value]": toUserId
+                                    _ajaxGlobalBlockUI: false,
+                                    start: startFrom,
+                                    length: recordPerPage,
+                                    order: [
+                                        {"column": 0, "dir": "asc"}
+                                    ],
+                                    columns: [{
+                                            "data": "creationDate"
+                                        },
+                                        {
+                                            "data": "toUserId",
+                                            search: {
+                                                "value": toUserId
+                                            }
+                                        }
+                                    ]
                                 };
                                 $.ajax({
+                                    "type": "POST",
                                     url: javatmp.settings.contextPath + "/user/ListMessagesController",
-                                    data: passData,
+                                    dataType: "json",
+                                    contentType: "application/json; charset=UTF-8",
+                                    data: JSON.stringify(passData),
                                     success: function (response, textStatus, jqXHR) {
                                         that.mcs.content.find(".fetch-indicator").remove();
                                         var data = response.data.data;
@@ -215,19 +237,29 @@
                         workingDown = true;
                         $("#infinite-scroll .mCSB_container").append(indicatorTemplate);
                         var passData = {
-                            "_ajaxGlobalBlockUI": false,
-                            "start": startFrom,
-                            "length": recordPerPage,
-                            "order[0][column]": 0,
-                            "order[0][dir]": "ASC",
-                            "columns[0][data]": "creationDate",
-                            "columns[1][data]": "toUserId",
-                            "columns[1][search][value]": toUserId
-
+                            _ajaxGlobalBlockUI: false,
+                            start: startFrom,
+                            length: recordPerPage,
+                            order: [
+                                {"column": 0, "dir": "asc"}
+                            ],
+                            columns: [{
+                                    "data": "creationDate"
+                                },
+                                {
+                                    "data": "toUserId",
+                                    search: {
+                                        "value": toUserId
+                                    }
+                                }
+                            ]
                         };
                         $.ajax({
+                            "type": "POST",
                             url: javatmp.settings.contextPath + "/user/ListMessagesController",
-                            data: passData,
+                            dataType: "json",
+                            contentType: "application/json; charset=UTF-8",
+                            data: JSON.stringify(passData),
                             success: function (response, textStatus, jqXHR) {
                                 $("#infinite-scroll .mCSB_container").find(".fetch-indicator").remove();
                                 var data = response.data.data;
