@@ -214,6 +214,9 @@ var config = {
         ],
         "file-saver": [
             {"from": "${sourceNodeLib}/file-saver/FileSaver.min.js", "to": "${destComponentsLib}/file-saver"}
+        ],
+        "numeral": [
+            {"from": "${sourceNodeLib}/numeral/min/numeral.min.js", "to": "${destComponentsLib}/numeral/min"}
         ]
     }
 };
@@ -314,7 +317,8 @@ var src = {
         "./web/components/bootstrap-actionable/dist/bootstrap-actionable.min.js",
         "./web/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.js",
         "./web/components/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js",
-        "./web/components/jquery-contextmenurtl/dist/js/jquery.contextMenuRtl.min.js"
+        "./web/components/jquery-contextmenurtl/dist/js/jquery.contextMenuRtl.min.js",
+        "./web/components/numeral/min/numeral.min.js"
     ]
 }
 ;
