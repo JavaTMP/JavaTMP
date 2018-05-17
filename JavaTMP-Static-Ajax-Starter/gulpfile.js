@@ -202,6 +202,15 @@ var config = {
         "bootstrap-alert-wrapper": [
             {"from": "${sourceNodeLib}/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js", "to": "${destComponentsLib}/bootstrap-alert-wrapper/dist"}
         ],
+        "Blob": [
+            {"from": "${sourceNodeLib}/Blob/Blob.js", "to": "${destComponentsLib}/Blob", processJS: true}
+        ],
+        "canvas-toBlob": [
+            {"from": "${sourceNodeLib}/canvas-toBlob/canvas-toBlob.js", "to": "${destComponentsLib}/canvas-toBlob", processJS: true}
+        ],
+        "file-saver": [
+            {"from": "${sourceNodeLib}/file-saver/FileSaver.min.js", "to": "${destComponentsLib}/file-saver"}
+        ],
         "numeral": [
             {"from": "${sourceNodeLib}/numeral/min/numeral.min.js", "to": "${destComponentsLib}/numeral/min"}
         ]
@@ -277,6 +286,9 @@ var src = {
         "./public_html/components/ion-rangeslider/js/ion.rangeSlider.min.js",
         "./public_html/components/bootstrap-slider/dist/bootstrap-slider.min.js",
         "./public_html/components/fullcalendar/dist/fullcalendar.min.js",
+        "./public_html/components/Blob/Blob.js",
+        "./public_html/components/canvas-toBlob/canvas-toBlob.js",
+        "./public_html/components/file-saver/FileSaver.min.js",
         "./public_html/components/cropper/dist/cropper.min.js",
         "./public_html/components/waypoints/lib/jquery.waypoints.min.js",
         "./public_html/components/jquery.counterup/jquery.counterup.min.js",
