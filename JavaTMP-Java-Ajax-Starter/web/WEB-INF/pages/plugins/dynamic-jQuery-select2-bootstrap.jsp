@@ -82,40 +82,9 @@
         </div>
     </div>
     <style type="text/css">
-
-        .select2-result-repository {
-            padding-top: 4px;
-            padding-bottom: 3px;
-        }
-        .select2-result-repository__avatar {
-            float: left;
-            width: 25px;
-            margin-right: 10px;
-            line-height: 20px;
-
-        }
-        .select2-result-repository__avatar img {
-            width: 100%;
-            height: auto;
-            border-radius: 2px;
-            vertical-align: middle;
-        }
-        .select2-result-repository__title {
-            color: black;
-            font-weight: bold;
-            word-wrap: break-word;
-            line-height: 1.1;
-            margin-bottom: 4px;
-            vertical-align: middle;
-            line-height: 20px;
-        }
-        .select2-results__option--highlighted .select2-result-repository__title {
-            color: white;
-        }
         .remoteUsers-dropdown .select2-results__option--highlighted .text-muted {
             color: white!important;
         }
-
     </style>
     <script>
         // Set the "bootstrap" theme as the default theme for all Select2
@@ -180,23 +149,53 @@
             templateResult: formatCountry,
             templateSelection: formatCountrySelection
         });
+
+
         function formatCountry(repo) {
             if (repo.loading)
                 return repo.text;
             var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
 
-            var markup =
-                    "<div class='select2-result-repository clearfix'>" +
-                    "    <div class='select2-result-repository__avatar'><img src='" + imagePath + "' /></div>" +
-                    "    <div class='select2-result-repository__title'>" + repo.text + " (" + repo.id + ")</div>" +
-                    "</div>";
+            var template =
+                    '    <div class="media d-flex align-items-center">' +
+                    '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
+                    '        <div class="media-body">' +
+                    '            <strong>{{countryText}} ({{countryId}})</strong>' +
+                    '        </div>' +
+                    '    </div>';
 
-            return markup;
+            var readyData = template.composeTemplate({
+                'imagePath': imagePath,
+                'countryText': repo.text,
+                'countryId': repo.id
+            });
+
+            return readyData;
         }
-
         function formatCountrySelection(repo) {
-            return repo.text || repo.countryName + " (" + repo.countryId + ")";
+            if (!repo.id) {
+                return repo.text;
+            }
+
+            var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
+
+            var template =
+                    '    <div class="media d-flex align-items-center">' +
+                    '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
+                    '        <div class="media-body">' +
+                    '            <span>{{countryText}} ({{countryId}})</span>' +
+                    '        </div>' +
+                    '    </div>';
+
+            var readyData = template.composeTemplate({
+                'imagePath': imagePath,
+                'countryText': repo.text,
+                'countryId': repo.id
+            });
+
+            return readyData;
         }
+
 
         var input = $("#remotePositionsSelectId");
         input.select2({
@@ -306,14 +305,7 @@
                     '            <div class="small">{{email}}</div>' +
                     '        </div>' +
                     '    </div>';
-            String.prototype.composeTemplate = (function () {
-                var re = /\{{(.+?)\}}/g;
-                return function (o) {
-                    return this.replace(re, function (_, k) {
-                        return typeof o[k] !== 'undefined' ? o[k] : '';
-                    });
-                };
-            }());
+
             var readyData = template.composeTemplate({
                 'messageId': repo.id,
                 'position': repo.position,

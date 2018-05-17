@@ -351,211 +351,201 @@
     <style type="text/css">
 
     </style>
-    <style type="text/css">
+</style>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        (function ($) {
+            var form = $('#jquery-form-plugin-test-id');
+            var validator = null;
+            form.ajaxForm({
+                clearForm: true, // clear all form fields after successful submit
+                resetForm: true, // reset the form after successful submit
+                beforeSerialize: function ($form, options) {
+                    $("#summernote").summernote('triggerEvent', 'change');
+                    if (!$form.valid()) {
+                        return false;
+                    }
+                },
+                beforeSubmit: function (formData, jqForm, options) {
 
-        .select2-result-repository {
-            padding: 3px;
-        }
-        .select2-result-repository__avatar {
-            float: left;
-            width: 25px;
-            margin-right: 10px;
-            line-height: 20px;
+                },
+                success: function (formData, jqForm, options) {
+                    form.find("textarea[name='address']").summernote('code', '');
+                    form.resetForm();
+                    form.find(".form-group.has-success").removeClass(".has-success");
+                }
+            });
+            // pre-submit callback
 
-        }
-        .select2-result-repository__avatar img {
-            width: 100%;
-            height: auto;
-            border-radius: 2px;
-            vertical-align: sub;
-        }
-        .select2-result-repository__title {
-            color: black;
-            word-wrap: break-word;
-            line-height: 1.1;
-            margin-bottom: 4px;
-            line-height: 20px;
-        }
-        .select2-results__option--highlighted .select2-result-repository__title {
-            color: white;
-        }
-    </style>
-    <script type="text/javascript">
-        jQuery(document).ready(function () {
-            (function ($) {
-                var form = $('#jquery-form-plugin-test-id');
-                var validator = null;
-                form.ajaxForm({
-                    clearForm: true, // clear all form fields after successful submit
-                    resetForm: true, // reset the form after successful submit
-                    beforeSerialize: function ($form, options) {
-                        $("#summernote").summernote('triggerEvent', 'change');
-                        if (!$form.valid()) {
-                            return false;
-                        }
+            validator = form.validate($.extend(true, {}, window.jqueryValidationDefaultOptions, {
+                ignore1: ":hidden:not(.forceValidate)",
+                ignore: ":hidden:not(.forceValidate), [contenteditable='true']:not([name])",
+                rules: {
+                    fullName: {
+                        required: true},
+                    email: {
+                        required: true,
+                        email: true,
+                        minlength: 5,
+                        maxlength: 50
                     },
-                    beforeSubmit: function (formData, jqForm, options) {
-
+                    birthOfDate: {
+                        required: true,
+                        validDate: true,
+                        dateBeforeNow: true
                     },
-                    success: function (formData, jqForm, options) {
-                        form.find("textarea[name='address']").summernote('code', '');
-                        form.resetForm();
-                        form.find(".form-group.has-success").removeClass(".has-success");
-                    }
-                });
-                // pre-submit callback
-
-                validator = form.validate($.extend(true, {}, window.jqueryValidationDefaultOptions, {
-                    ignore1: ":hidden:not(.forceValidate)",
-                    ignore: ":hidden:not(.forceValidate), [contenteditable='true']:not([name])",
-                    rules: {
-                        fullName: {
-                            required: true},
-                        email: {
-                            required: true,
-                            email: true,
-                            minlength: 5,
-                            maxlength: 50
-                        },
-                        birthOfDate: {
-                            required: true,
-                            validDate: true,
-                            dateBeforeNow: true
-                        },
-                        countryId: {
-                            required: true
-                        },
-                        address: {
-                            required: true,
-                            maxlength: 400
-                        },
-                        userName: {
-                            required: true
-                        },
-                        password: {
-                            required: true,
-                            minlength: 6,
-                            maxlength: 20
-                        },
-                        rpassword: {
-                            required: true,
-                            equalTo: "#password"
-                        },
-                        profilePicture: {
-                            required: true
-                        },
-                        tnc: {
-                            required: true
-                        },
-                        note: {
-                            required: true,
-                            summernoteRequired: true
-                        }
+                    countryId: {
+                        required: true
                     },
-                    messages: {
-                        fullName: {
-                            required: "Kindly provide us with your full name"
-                        },
-                        email: {
-                            required: "Kindly provide your email address",
-                            email: "Kindly provide a valid email address"
-                        },
-                        birthOfDate: {
-                            required: "Kindly provide your Birth Of Date",
-                            validDate: "Kindly Provide a valid date value in format DD/MM/YYYY",
-                            dateBeforeNow: "Kindly Provide a date in the past before today at least"
-                        },
-                        countryId: {
-                            required: "Kindly select your nationality"
-                        },
-                        address: {
-                            required: "Kindly provide your address"
-                        },
-                        note: {
-                            summernoteRequired: "Kindly Provide a note"
-                        }
+                    address: {
+                        required: true,
+                        maxlength: 400
+                    },
+                    userName: {
+                        required: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6,
+                        maxlength: 20
+                    },
+                    rpassword: {
+                        required: true,
+                        equalTo: "#password"
+                    },
+                    profilePicture: {
+                        required: true
+                    },
+                    tnc: {
+                        required: true
+                    },
+                    note: {
+                        required: true,
+                        summernoteRequired: true
                     }
-                }));
-
-                form.find("input[name='birthOfDate']").inputmask({
-                    alias: "date",
-                    placeholder: "dd/mm/yyyy",
-                    inputFormat: "dd/mm/yyyy",
-                    displayFormat: true,
-                    hourFormat: "24",
-                    clearMaskOnLostFocus: false
-                });
-                form.find("input[name='birthOfDate']").daterangepicker({
-                    "opens": javatmp.settings.floatReverse,
-                    //                    startDate: false,
-                    singleDatePicker: true,
-                    showDropdowns: true,
-                    timePicker: false,
-                    timePickerIncrement: 1,
-                    timePicker24Hour: true,
-                    autoApply: true,
-                    autoUpdateInput: false,
-                    minDate: '01/01/1900',
-                    maxDate: '31/12/2099',
-                    //                    maxDate: '',
-                    //                    minDate: moment(),
-                    locale: {
-                        "direction": javatmp.settings.direction,
-                        format: 'DD/MM/YYYY'
+                },
+                messages: {
+                    fullName: {
+                        required: "Kindly provide us with your full name"
+                    },
+                    email: {
+                        required: "Kindly provide your email address",
+                        email: "Kindly provide a valid email address"
+                    },
+                    birthOfDate: {
+                        required: "Kindly provide your Birth Of Date",
+                        validDate: "Kindly Provide a valid date value in format DD/MM/YYYY",
+                        dateBeforeNow: "Kindly Provide a date in the past before today at least"
+                    },
+                    countryId: {
+                        required: "Kindly select your nationality"
+                    },
+                    address: {
+                        required: "Kindly provide your address"
+                    },
+                    note: {
+                        summernoteRequired: "Kindly Provide a note"
                     }
-                }, function (start, end, label) {
-                    var formatedDateSelected = moment(start).format("DD/MM/YYYY");
-                    form.find("input[name='birthOfDate']").val(formatedDateSelected);
-                });
-                $(".daterangepicker.dropdown-menu").css('z-index', 600 + 1);
+                }
+            }));
+
+            form.find("input[name='birthOfDate']").inputmask({
+                alias: "date",
+                placeholder: "dd/mm/yyyy",
+                inputFormat: "dd/mm/yyyy",
+                displayFormat: true,
+                hourFormat: "24",
+                clearMaskOnLostFocus: false
+            });
+            form.find("input[name='birthOfDate']").daterangepicker({
+                "opens": javatmp.settings.floatReverse,
+                //                    startDate: false,
+                singleDatePicker: true,
+                showDropdowns: true,
+                timePicker: false,
+                timePickerIncrement: 1,
+                timePicker24Hour: true,
+                autoApply: true,
+                autoUpdateInput: false,
+                minDate: '01/01/1900',
+                maxDate: '31/12/2099',
+                //                    maxDate: '',
+                //                    minDate: moment(),
+                locale: {
+                    "direction": javatmp.settings.direction,
+                    format: 'DD/MM/YYYY'
+                }
+            }, function (start, end, label) {
+                var formatedDateSelected = moment(start).format("DD/MM/YYYY");
+                form.find("input[name='birthOfDate']").val(formatedDateSelected);
+            });
+            $(".daterangepicker.dropdown-menu").css('z-index', 600 + 1);
 
 
-                form.find("textarea[name='address']").summernote({height: 250});
+            form.find("textarea[name='address']").summernote({height: 250});
 
-                $.fn.select2.defaults.set("theme", "bootstrap");
-                $.fn.select2.defaults.set("dir", javatmp.settings.direction);
-                form.find("select[name='countryId']").select2({
-                    theme: "bootstrap",
-                    dir: javatmp.settings.direction,
-                    allowClear: true,
-                    placeholder: "Select a country",
-                    containerCssClass: ':all:',
-                    width: '',
-                    templateSelection: formatCountrySelection,
-                    templateResult: formatCountry,
-                    escapeMarkup: function (markup) {
-                        return markup;
-                    }
-                });
-                function formatCountry(repo) {
-                    if (repo.loading)
-                        return repo.text;
-                    var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
-
-                    var markup =
-                            "<div class='select2-result-repository clearfix'>" +
-                            "    <div class='select2-result-repository__avatar'><img src='" + imagePath + "' /></div>" +
-                            "    <div class='select2-result-repository__title'>" + repo.text + " (" + repo.id + ")</div>" +
-                            "</div>";
-
+            $.fn.select2.defaults.set("theme", "bootstrap");
+            $.fn.select2.defaults.set("dir", javatmp.settings.direction);
+            form.find("select[name='countryId']").select2({
+                theme: "bootstrap",
+                dir: javatmp.settings.direction,
+                allowClear: true,
+                placeholder: "Select a country",
+                containerCssClass: ':all:',
+                width: '',
+                templateSelection: formatCountrySelection,
+                templateResult: formatCountry,
+                escapeMarkup: function (markup) {
                     return markup;
                 }
-                function formatCountrySelection(repo) {
-                    if (!repo.id) {
-                        return repo.text;
-                    }
+            }).on("select2:select", function () {
+                (this).focus();
+            });
+            function formatCountry(repo) {
+                if (repo.loading)
+                    return repo.text;
+                var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
 
-                    var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
+                var template =
+                        '    <div class="media d-flex align-items-center">' +
+                        '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
+                        '        <div class="media-body">' +
+                        '            <strong>{{countryText}} ({{countryId}})</strong>' +
+                        '        </div>' +
+                        '    </div>';
 
-                    var markup =
-                            "<div class='select2-result-repository clearfix'>" +
-                            "    <div class='select2-result-repository__avatar'><img src='" + imagePath + "' /></div>" +
-                            "    <div class='select2-result-repository__title'>" + repo.text + " (" + repo.id + ")</div>" +
-                            "</div>";
+                var readyData = template.composeTemplate({
+                    'imagePath': imagePath,
+                    'countryText': repo.text,
+                    'countryId': repo.id
+                });
 
-                    return markup;
+                return readyData;
+            }
+            function formatCountrySelection(repo) {
+                if (!repo.id) {
+                    return repo.text;
                 }
-            }(jQuery));
-        });
-    </script>
+
+                var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
+
+                var template =
+                        '    <div class="media d-flex align-items-center">' +
+                        '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
+                        '        <div class="media-body">' +
+                        '            <span>{{countryText}} ({{countryId}})</span>' +
+                        '        </div>' +
+                        '    </div>';
+
+                var readyData = template.composeTemplate({
+                    'imagePath': imagePath,
+                    'countryText': repo.text,
+                    'countryId': repo.id
+                });
+
+                return readyData;
+            }
+        }(jQuery));
+    });
+</script>
 </div>

@@ -184,15 +184,6 @@
                     }
                 }).submit();
             }
-            //Compose template string
-            String.prototype.composeTemplate = (function () {
-                var re = /\{{(.+?)\}}/g;
-                return function (o) {
-                    return this.replace(re, function (_, k) {
-                        return typeof o[k] !== 'undefined' ? o[k] : '';
-                    });
-                };
-            }());
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.

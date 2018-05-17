@@ -217,14 +217,7 @@
                             '            <div class="small">{{email}}</div>' +
                             '        </div>' +
                             '    </div>';
-                    String.prototype.composeTemplate = (function () {
-                        var re = /\{{(.+?)\}}/g;
-                        return function (o) {
-                            return this.replace(re, function (_, k) {
-                                return typeof o[k] !== 'undefined' ? o[k] : '';
-                            });
-                        };
-                    }());
+
                     var readyData = template.composeTemplate({
                         'messageId': repo.id,
                         'position': repo.position,

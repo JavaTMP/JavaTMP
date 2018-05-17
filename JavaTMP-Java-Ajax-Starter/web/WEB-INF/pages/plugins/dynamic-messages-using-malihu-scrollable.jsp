@@ -74,14 +74,7 @@
                 '</a>';
 
         //Compose template string
-        String.prototype.composeTemplate = (function () {
-            var re = /\{{(.+?)\}}/g;
-            return function (o) {
-                return this.replace(re, function (_, k) {
-                    return typeof o[k] !== 'undefined' ? o[k] : '';
-                });
-            };
-        }());
+
         jQuery(function ($) {
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.

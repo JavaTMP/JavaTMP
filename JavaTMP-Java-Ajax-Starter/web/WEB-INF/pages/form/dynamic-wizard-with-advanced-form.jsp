@@ -7,7 +7,7 @@
                     <a class="disabled nav-item nav-link" id="step1-" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">1. Personal Informaiton</a>
                     <a class="disabled nav-item nav-link" id="step2-" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">2. Address Information</a>
                     <a class="disabled nav-item nav-link" id="step3-" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">3. Profile Informaiton</a>
-                    <a class="disabled nav-item nav-link" id="step4-" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Step 4</a>
+                    <a class="disabled nav-item nav-link" id="step4-" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">4. Send And Create New User</a>
                 </div>
             </div>
             <div class="col-lg-9">
@@ -368,35 +368,6 @@
         /*
         Embed CSS styling for current page.
         */
-        .select2-container--bootstrap{
-            z-index: 999999;
-        }
-        .select2-result-repository {
-            padding: 3px;
-        }
-        .select2-result-repository__avatar {
-            float: left;
-            width: 25px;
-            margin-right: 10px;
-            line-height: 20px;
-
-        }
-        .select2-result-repository__avatar img {
-            width: 100%;
-            height: auto;
-            border-radius: 2px;
-            vertical-align: sub;
-        }
-        .select2-result-repository__title {
-            color: black;
-            word-wrap: break-word;
-            line-height: 1.1;
-            margin-bottom: 4px;
-            line-height: 20px;
-        }
-        .select2-results__option--highlighted .select2-result-repository__title {
-            color: white;
-        }
     </style>
 
     <!--
@@ -669,6 +640,9 @@
 
                 $.fn.select2.defaults.set("theme", "bootstrap");
                 $.fn.select2.defaults.set("dir", javatmp.settings.direction);
+
+                var dynamicCountryDropdownClass = "selectCountryAdvWizard";
+
                 form.find("select[name='countryId']").select2({
                     theme: "bootstrap",
                     dir: javatmp.settings.direction,
@@ -676,15 +650,23 @@
                     placeholder: "Select a country",
                     containerCssClass: ':all:',
                     width: '',
+                    dropdownCssClass: dynamicCountryDropdownClass,
                     templateSelection: formatCountrySelection,
                     templateResult: formatCountry,
                     escapeMarkup: function (markup) {
                         return markup;
                     }
+                }).on("select2:select select2:unselect select2:close", function () {
+                    (this).focus();
+                }).on("select2:open", function () {
+                    // select2 postpone dropdown creation in ajax mode until first result come so,
+                    // we should add z-index after select2 dropdown creation.
+                    var modalZIndex = modal.originalModal.css('zIndex');
+                    modalZIndex = modalZIndex + 1;
+                    $("." + dynamicCountryDropdownClass, ".select2-container--bootstrap").css('z-index', modalZIndex);
                 });
 
                 $(".daterangepicker").css('z-index', modalZIndex);
-                $(".select2-container--bootstrap").css('z-index', modalZIndex);
 
 
                 function formatCountry(repo) {
@@ -692,13 +674,21 @@
                         return repo.text;
                     var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
 
-                    var markup =
-                            "<div class='select2-result-repository clearfix'>" +
-                            "    <div class='select2-result-repository__avatar'><img src='" + imagePath + "' /></div>" +
-                            "    <div class='select2-result-repository__title'>" + repo.text + " (" + repo.id + ")</div>" +
-                            "</div>";
+                    var template =
+                            '    <div class="media d-flex align-items-center">' +
+                            '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
+                            '        <div class="media-body">' +
+                            '            <strong>{{countryText}} ({{countryId}})</strong>' +
+                            '        </div>' +
+                            '    </div>';
 
-                    return markup;
+                    var readyData = template.composeTemplate({
+                        'imagePath': imagePath,
+                        'countryText': repo.text,
+                        'countryId': repo.id
+                    });
+
+                    return readyData;
                 }
                 function formatCountrySelection(repo) {
                     if (!repo.id) {
@@ -707,13 +697,21 @@
 
                     var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
 
-                    var markup =
-                            "<div class='select2-result-repository clearfix'>" +
-                            "    <div class='select2-result-repository__avatar'><img src='" + imagePath + "' /></div>" +
-                            "    <div class='select2-result-repository__title'>" + repo.text + " (" + repo.id + ")</div>" +
-                            "</div>";
+                    var template =
+                            '    <div class="media d-flex align-items-center">' +
+                            '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
+                            '        <div class="media-body">' +
+                            '            <span>{{countryText}} ({{countryId}})</span>' +
+                            '        </div>' +
+                            '    </div>';
 
-                    return markup;
+                    var readyData = template.composeTemplate({
+                        'imagePath': imagePath,
+                        'countryText': repo.text,
+                        'countryId': repo.id
+                    });
+
+                    return readyData;
                 }
 
 
