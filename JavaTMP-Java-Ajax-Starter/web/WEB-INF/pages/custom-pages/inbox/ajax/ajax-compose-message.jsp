@@ -19,7 +19,7 @@
                                         <input type="text" readonly class="form-control-plaintext" id="currentUserName" value="${sessionScope.user.firstName}&nbsp;${sessionScope.user.lastName}">
                                     </div>
                                 </div>
-                                <div class="form-group form-row">
+                                <div class="form-group row">
                                     <label for="messageUsersToDropdown" class="col-sm-2 col-form-label">Select Users</label>
                                     <div class="col-sm-10">
                                         <select name="messageTos" id="messageUsersToDropdown" class="form-control forceValidate" multiple></select>
