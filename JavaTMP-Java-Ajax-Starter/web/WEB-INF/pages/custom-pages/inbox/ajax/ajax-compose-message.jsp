@@ -314,14 +314,6 @@
                     }).show();
                 });
 
-                jQuery.validator.addMethod("summernoteRequired", function (value, element, params) {
-                    if (this.optional(element))
-                        return true;
-                    if (value !== "" && value !== "<p><br></p>")
-                        return true;
-                    return false;
-                }, 'Kindly Provide a value');
-
                 validator = createMessageForm.validate($.extend(true, {}, window.jqueryValidationDefaultOptions, {
 //                    ignore: ":hidden",
                     ignore: ":hidden:not(.forceValidate), [contenteditable='true']:not([name])",

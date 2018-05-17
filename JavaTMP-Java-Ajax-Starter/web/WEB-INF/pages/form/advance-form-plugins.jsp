@@ -405,39 +405,6 @@
                 });
                 // pre-submit callback
 
-                jQuery.validator.addMethod("validDateTime", function (value, element) {
-                    return this.optional(element) || moment(value, "DD/MM/YYYY HH:mm", true).isValid();
-                }, "Please enter a valid date in the format DD/MM/YYYY HH:MI");
-
-                jQuery.validator.addMethod("dateTimeBeforeNow",
-                        function (value, element, params) {
-                            if (this.optional(element) || $(params).val() === "")
-                                return true;
-                            if (moment(value, "DD/MM/YYYY HH:mm").isBefore(moment()))
-                                return true;
-                            return false;
-                        }, 'Must be less than Now.');
-
-                jQuery.validator.addMethod("validDate", function (value, element) {
-                    return this.optional(element) || moment(value, "DD/MM/YYYY", true).isValid();
-                }, "Please enter a valid date in the format DD/MM/YYYY");
-
-                jQuery.validator.addMethod("dateBeforeNow", function (value, element, params) {
-                    if (this.optional(element) || value === "")
-                        return true;
-                    if (moment(value, "DD/MM/YYYY").isBefore(moment().set({hour: 0, minute: 0, second: 0, millisecond: 0})))
-                        return true;
-                    return false;
-                }, 'Must be less than Now.');
-
-                jQuery.validator.addMethod("summernoteRequired", function (value, element, params) {
-                    if (this.optional(element))
-                        return true;
-                    if (value !== "" && value !== "<p><br></p>")
-                        return true;
-                    return false;
-                }, 'Kindly Provide a value');
-
                 validator = form.validate($.extend(true, {}, window.jqueryValidationDefaultOptions, {
                     ignore1: ":hidden:not(.forceValidate)",
                     ignore: ":hidden:not(.forceValidate), [contenteditable='true']:not([name])",

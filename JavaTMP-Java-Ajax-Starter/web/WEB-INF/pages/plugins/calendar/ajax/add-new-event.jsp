@@ -142,42 +142,7 @@
                     });
                 });
 
-                jQuery.validator.addMethod("validDate", function (value, element) {
-                    return this.optional(element) || moment(value, "DD/MM/YYYY HH:mm").isValid();
-                }, "Please enter a valid date in the format DD/MM/YYYY HH:MI");
-                jQuery.validator.addMethod("dateGreaterThan",
-                        function (value, element, params) {
-                            if (this.optional(element) || $(params).val() === "")
-                                return true;
-                            if (moment(value, "DD/MM/YYYY HH:mm").isAfter(moment($(params).val(), "DD/MM/YYYY HH:mm")))
-                                return true;
-                            return false;
-                        }, 'Must be greater than other value.');
-                jQuery.validator.addMethod("dateLessThan",
-                        function (value, element, params) {
-                            if (this.optional(element) || $(params).val() === "")
-                                return true;
-                            if (moment(value, "DD/MM/YYYY HH:mm").isBefore(moment($(params).val(), "DD/MM/YYYY HH:mm")))
-                                return true;
-                            return false;
-                        }, 'Must be less than other value.');
-                jQuery.validator.addMethod("dateEqualOrGreaterThan",
-                        function (value, element, params) {
-                            if (this.optional(element) || $(params).val() === "")
-                                return true;
-                            if (moment(value, "DD/MM/YYYY HH:mm").isSameOrAfter(moment($(params).val(), "DD/MM/YYYY HH:mm")))
-                                return true;
-                            return false;
-                        }, 'Must be equal or greater than other value.');
-                jQuery.validator.addMethod("dateEqualOrLessThan",
-                        function (value, element, params) {
-                            if (this.optional(element) || $(params).val() === "")
-                                return true;
-                            if (moment(value, "DD/MM/YYYY HH:mm").isSameOrBefore(moment($(params).val(), "DD/MM/YYYY HH:mm")))
-                                return true;
-                            return false;
-                        }, 'Must be equal or less than other value.');
-                validator = eventForm.validate({
+                validator = eventForm.validate($.extend(true, {}, window.jqueryValidationDefaultOptions, {
                     rules: {
                         title: {
                             required: true
@@ -207,25 +172,9 @@
                             validDate: "Kindly enter a valid date format 'DD/MM/YYYY HH:MI'",
                             dateGreaterThan: "Kindly enter a date greater than the start date of this event"
                         }
-                    },
-                    highlight: function (element) {
-                        $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-                    },
-                    unhighlight: function (element) {
-                        $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
-                    },
-                    errorElement: 'small',
-                    errorClass: 'form-text text-danger',
-                    errorPlacement: function (error, element) {
-                        if (element.length) {
-                            var targetParent = $(element).parent();
-                            if (targetParent.hasClass("form-check") || targetParent.hasClass("custom-control")) {
-                                targetParent = targetParent.parent();
-                            }
-                            targetParent.append(error);
-                        }
                     }
-                });
+                }));
+
                 $('.Date-and-Time').css({
                     direction: "ltr",
                     "text-align": javatmp.settings.floatDefault
@@ -243,7 +192,7 @@
                     minDate: '01/01/1900 00:00:00',
                     maxDate: '31/12/2099 23:59:59',
 //                    maxDate: '',
-//                    minDate: moment(),
+                    //                    minDate: moment(),
                     locale: {
                         "direction": javatmp.settings.direction,
                         format: 'DD/MM/YYYY HH:mm'
@@ -258,7 +207,7 @@
                     $("#new-event-form-start-date").data('daterangepicker').maxDate = $("#new-event-form-end-date").data('daterangepicker').startDate;
                 });
 //                $("#new-event-form-start-date").data('daterangepicker').minDate = moment();
-//                $("#new-event-form-end-date").data('daterangepicker').minDate = $("#new-event-form-start-date").data('daterangepicker').minDate;
+                //                $("#new-event-form-end-date").data('daterangepicker').minDate = $("#new-event-form-start-date").data('daterangepicker').minDate;
                 var modalZIndex = modal.originalModal.css('zIndex');
                 $(".daterangepicker").css('z-index', modalZIndex + 1);
                 $(".daterangepicker > .ranges").hide();
