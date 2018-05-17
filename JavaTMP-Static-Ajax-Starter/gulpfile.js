@@ -300,7 +300,7 @@ var src = {
         "./public_html/components/bootstrap-actionable/dist/bootstrap-actionable.min.js",
         "./public_html/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.js",
         "./public_html/components/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js",
-        "./web/components/numeral/min/numeral.min.js"
+        "./public_html/components/numeral/min/numeral.min.js"
     ]
 }
 ;
