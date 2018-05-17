@@ -271,16 +271,18 @@
                     }});
 
                 $.ajax({
-                    type: "GET",
+                    "type": "POST",
                     cache: false,
                     url: href,
-                    data: {
+                    dataType: "json",
+                    contentType: "application/json; charset=UTF-8",
+                    data: JSON.stringify({
                         _ajaxGlobalBlockUI: false,
                         "start": 0,
-                        "length": 100,
+                        "length": 1000000,
                         "draw": 1,
-                        "order[0][column]": 0
-                    },
+                        "order": [{column: 0}]
+                    }),
                     success: function (remoteContent) {
                         $(cardBody).unblock();
                         toastr.success('Bar Chart Data successfully fetched from Server', 'SUCCESS', {
@@ -338,16 +340,18 @@
                         opacity: 0.3
                     }});
                 $.ajax({
-                    type: "GET",
+                    "type": "POST",
                     cache: false,
                     url: href,
-                    data: {
+                    dataType: "json",
+                    contentType: "application/json; charset=UTF-8",
+                    data: JSON.stringify({
                         _ajaxGlobalBlockUI: false,
                         "start": 0,
-                        "length": 100,
+                        "length": 1000000,
                         "draw": 1,
-                        "order[0][column]": 0
-                    },
+                        "order": [{column: 0}]
+                    }),
                     success: function (remoteContent) {
                         $(cardBody).unblock();
                         toastr.success('Line Chart Data successfully fetched from Server', 'SUCCESS', {
@@ -396,16 +400,18 @@
                         opacity: 0.3
                     }});
                 $.ajax({
-                    type: "GET",
+                    "type": "POST",
                     cache: false,
                     url: href,
-                    data: {
+                    dataType: "json",
+                    contentType: "application/json; charset=UTF-8",
+                    data: JSON.stringify({
                         _ajaxGlobalBlockUI: false,
                         "start": 0,
-                        "length": 100,
+                        "length": 1000000,
                         "draw": 1,
-                        "order[0][column]": 0
-                    },
+                        "order": [{column: 0}]
+                    }),
                     success: function (remoteContent) {
                         $(cardBody).unblock();
                         toastr.success('Doughnut Chart Data successfully fetched from Server', 'SUCCESS', {
@@ -474,16 +480,18 @@
                         opacity: 0.3
                     }});
                 $.ajax({
-                    type: "GET",
+                    "type": "POST",
                     cache: false,
                     url: href,
-                    data: {
+                    dataType: "json",
+                    contentType: "application/json; charset=UTF-8",
+                    data: JSON.stringify({
                         _ajaxGlobalBlockUI: false,
                         "start": 0,
-                        "length": 100,
+                        "length": 1000000,
                         "draw": 1,
-                        "order[0][column]": 0
-                    },
+                        "order": [{column: 0}]
+                    }),
                     success: function (remoteContent) {
                         $(cardBody).unblock();
                         toastr.success('Pic Chart Data successfully fetched from Server', 'SUCCESS', {
