@@ -377,7 +377,7 @@
             });
             // pre-submit callback
 
-            validator = form.validate($.extend(true, {}, window.jqueryValidationDefaultOptions, {
+            validator = form.validate($.extend(true, {}, javatmp.settings.jqueryValidationDefaultOptions, {
                 ignore1: ":hidden:not(.forceValidate)",
                 ignore: ":hidden:not(.forceValidate), [contenteditable='true']:not([name])",
                 rules: {

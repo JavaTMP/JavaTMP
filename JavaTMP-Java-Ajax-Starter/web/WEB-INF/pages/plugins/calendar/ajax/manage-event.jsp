@@ -227,7 +227,7 @@
                         }
                     });
                 });
-                validator = eventForm.validate($.extend(true, {}, window.jqueryValidationDefaultOptions, {
+                validator = eventForm.validate($.extend(true, {}, javatmp.settings.jqueryValidationDefaultOptions, {
                     rules: {
                         title: {
                             required: true

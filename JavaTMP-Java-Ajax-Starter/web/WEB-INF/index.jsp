@@ -1518,7 +1518,7 @@
         </script>
         <script type="text/javascript">
             jQuery(function ($) {
-                window.jqueryValidationDefaultOptions = {
+                javatmp.settings.jqueryValidationDefaultOptions = {
                     rules: {},
                     messages: {},
                     highlight: function (element) {
@@ -1601,17 +1601,6 @@
 
             });
         </script>
-        <style type="text/css">
-            /*            #myMessagesDropdownId .offset{
-                            display: block;
-                            width: 100%;
-                            height: auto;
-                            color: #ffed0d;
-                            -webkit-border-radius: 3px;
-                            -moz-border-radius: 3px;
-                            border-radius: 3px;
-                        }*/
-        </style>
         <script type="text/javascript">
 
             // Bug in ie11:

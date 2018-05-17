@@ -531,7 +531,7 @@
                     }
                 });
 
-                validator = form.validate($.extend(true, {}, window.jqueryValidationDefaultOptions, {
+                validator = form.validate($.extend(true, {}, javatmp.settings.jqueryValidationDefaultOptions, {
 //                    ignore: ":hidden",
                     ignore: ":hidden:not(.forceValidate), [contenteditable='true']:not([name])",
                     rules: {
