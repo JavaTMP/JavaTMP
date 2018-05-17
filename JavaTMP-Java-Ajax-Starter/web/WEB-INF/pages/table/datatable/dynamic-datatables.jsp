@@ -88,7 +88,11 @@
                         "render": function (data, type, row) {
                             return moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("DD/MM/YYYY HH:mm");
                         }},
-                    {data: 'salary', "type": "num", render: $.fn.dataTable.render.number(',', '.', 2, '$')},
+//                    {data: 'salary', "type": "num", render: $.fn.dataTable.render.number(',', '.', 2, '$')},
+                    {
+                        data: 'salary', "type": "num", render: function (data, type, row) {
+                            return numeral(data).format('$0,0.00');
+                        }},
                     {data: 'mobile'},
                     {data: 'email'}
                 ]
