@@ -44,8 +44,6 @@ public class ListMessagesController extends HttpServlet {
 
         DataTableResults<Message> dataTableResult = cs.listMessages(tableRequest);
 
-        List<Message> messages = dataTableResult.getListOfDataObjects();
-
         responseMessage.setOverAllStatus(true);
         responseMessage.setData(dataTableResult);
 

@@ -1,7 +1,5 @@
 package com.javatmp.domain.table;
 
-import javax.servlet.http.HttpServletRequest;
-
 public class DataTableColumnSpecs {
 
     /**
@@ -47,17 +45,6 @@ public class DataTableColumnSpecs {
     public DataTableColumnSpecs(int index, String data) {
         this.setIndex(index);
         this.setData(data);
-    }
-
-    /**
-     * Instantiates a new data table column specs.
-     *
-     * @param request the request
-     * @param i the i
-     */
-    public DataTableColumnSpecs(HttpServletRequest request, int i) {
-        this.setIndex(i);
-        prepareColumnSpecs(request, i);
     }
 
     /**
@@ -202,29 +189,6 @@ public class DataTableColumnSpecs {
      */
     public void setIndex(int index) {
         this.index = index;
-    }
-
-    /**
-     * Prepare column specs.
-     *
-     * @param request the request
-     * @param i the i
-     */
-    private void prepareColumnSpecs(HttpServletRequest request, int i) {
-
-        this.setData(request.getParameter("columns[" + i + "][data]"));
-        this.setName(request.getParameter("columns[" + i + "][name]"));
-        this.setOrderable(Boolean.valueOf(request.getParameter("columns[" + i + "][orderable]")));
-        this.setRegex(Boolean.valueOf(request.getParameter("columns[" + i + "][search][regex]")));
-        this.setSearch(new Search(request.getParameter("columns[" + i + "][search][value]"), false));
-        this.setSearchable(Boolean.valueOf(request.getParameter("columns[" + i + "][searchable]")));
-
-        int sortableCol = Integer.parseInt(request.getParameter("order[0][column]"));
-        String sortDir = request.getParameter("order[0][dir]");
-
-        if (i == sortableCol) {
-            this.setSortDir(sortDir);
-        }
     }
 
     @Override

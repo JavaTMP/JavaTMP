@@ -252,7 +252,7 @@ public class MessageService {
         }
 
         DataTableResults<Message> dataTableResult = new DataTableResults<>();
-        dataTableResult.setListOfDataObjects(retList);
+        dataTableResult.setData(retList);
         dataTableResult.setRecordsTotal(Long.valueOf(db.size()));
         dataTableResult.setRecordsFiltered(Long.valueOf(db.size()));
         dataTableResult.setDraw(tableRequest.getDraw());

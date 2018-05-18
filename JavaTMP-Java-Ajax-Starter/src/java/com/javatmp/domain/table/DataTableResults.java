@@ -1,7 +1,5 @@
 package com.javatmp.domain.table;
 
-import com.google.gson.Gson;
-import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 public class DataTableResults<T> {
@@ -24,12 +22,7 @@ public class DataTableResults<T> {
     /**
      * The list of data objects.
      */
-    @SerializedName("data")
-    List<T> listOfDataObjects;
-
-    public String getJson() {
-        return new Gson().toJson(this);
-    }
+    private List<T> data;
 
     /**
      * Gets the draw.
@@ -86,21 +79,17 @@ public class DataTableResults<T> {
     }
 
     /**
-     * Gets the list of data objects.
-     *
-     * @return the listOfDataObjects
+     * @return the data
      */
-    public List<T> getListOfDataObjects() {
-        return listOfDataObjects;
+    public List<T> getData() {
+        return data;
     }
 
     /**
-     * Sets the list of data objects.
-     *
-     * @param listOfDataObjects the listOfDataObjects to set
+     * @param data the data to set
      */
-    public void setListOfDataObjects(List<T> listOfDataObjects) {
-        this.listOfDataObjects = listOfDataObjects;
+    public void setData(List<T> data) {
+        this.data = data;
     }
 
 }
