@@ -1,6 +1,5 @@
 package com.javatmp.web.controller.user;
 
-import com.javatmp.web.controller.dms.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.javatmp.domain.Document;
@@ -14,8 +13,8 @@ import com.javatmp.util.Constants;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Paths;
-import java.text.ParseException;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -47,7 +46,7 @@ public class CreateUserController extends HttpServlet {
 
             User userToBeCreated = new User();
 
-            MvcHelper.convertRequestParameterToBean(request, userToBeCreated);
+            MvcHelper.populateBeanByRequestParameters(request, userToBeCreated);
             System.out.println("User to be created is [" + MvcHelper.toString(userToBeCreated) + "]");
             Part filePart = request.getPart("profilePicture"); // Retrieves <input type="file" name="file">
             String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
@@ -101,9 +100,9 @@ public class CreateUserController extends HttpServlet {
             e.printStackTrace();
             responseMessage.setOverAllStatus(true);
             responseMessage.setMessage(e.getMessage());
-        } catch (ParseException ex) {
-            Logger.getLogger(CreateUserController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
+            Logger.getLogger(CreateUserController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvocationTargetException ex) {
             Logger.getLogger(CreateUserController.class.getName()).log(Level.SEVERE, null, ex);
         }
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").serializeNulls()
