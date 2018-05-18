@@ -17,9 +17,10 @@ var config = {
     "destComponentsLib": "./web/components",
     "destDist": "./web/assets/dist",
     "plugins": {
-        "font-awesome": [
-            {"from": "${sourceNodeLib}/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css", "to": "${destComponentsLib}/font-awesome/web-fonts-with-css/css"},
-            {"from": "${sourceNodeLib}/font-awesome/web-fonts-with-css/webfonts/*", "to": "${destComponentsLib}/font-awesome/web-fonts-with-css/webfonts"}
+        "fontawesome-free-webfonts": [
+            // go to \assets\src\sass\pages\font-awesome.scss
+//            {"from": "${sourceNodeLib}/@fortawesome/fontawesome-free-webfonts/css/**/*", "to": "${destComponentsLib}/fontawesome-free-webfonts/css", processCSS: true},
+            {"from": "${sourceNodeLib}/@fortawesome/fontawesome-free-webfonts/webfonts/**/*", "to": "${destComponentsLib}/fontawesome-free-webfonts/webfonts"}
         ],
         "font-awesome-animation": [
             {"from": "${sourceNodeLib}/font-awesome-animation/dist/font-awesome-animation.min.css", "to": "${destComponentsLib}/font-awesome-animation/dist"}
@@ -222,7 +223,7 @@ var config = {
 };
 var src = {
     "css": [
-        "./web/components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css",
+//        "./web/components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css",
         "./web/components/font-awesome-animation/dist/font-awesome-animation.min.css",
         "./web/components/jquery-ui-dist/jquery-ui.min.css",
 //        "./web/components/bootstrap/dist/css/bootstrap.min.css",
@@ -256,7 +257,7 @@ var src = {
         "./web/components/fullcalendar/dist/fullcalendar.print.min.css"
     ],
     "fonts": [
-        "./web/components/font-awesome/web-fonts-with-css/webfonts/**/*",
+        "./web/components/fontawesome-free-webfonts/webfonts/**/*",
         "./web/components/jquery-contextmenu/dist/font/**/*",
         "./web/components/summernote/dist/font/**/*",
         "./web/components/slick-carousel/slick/fonts/**/*",

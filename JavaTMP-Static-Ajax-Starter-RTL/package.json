@@ -60,7 +60,8 @@
     "bootswatch": "^4.1.1",
     "jquery-contextmenurtl": "1.0.0",
     "file-saver": "^1.3.8",
-    "numeral" : "2.0.6"
+    "numeral" : "2.0.6",
+    "@fortawesome/fontawesome-free-webfonts": "^1.0.9"
   },
   "devDependencies": {
     "del": "^3.0.0",
@@ -93,7 +94,6 @@
     "jquery-idletimer": "git+https://github.com/thorst/jquery-idletimer.git",
     "select2-bootstrap-theme": "git+https://github.com/angel-vladov/select2-bootstrap-theme.git",
     "jquery-ui-touch-punch": "git+https://github.com/furf/jquery-ui-touch-punch.git",
-    "font-awesome": "git+https://github.com/FortAwesome/Font-Awesome.git",
     "canvas-toBlob": "git+https://github.com/eligrey/canvas-toBlob.js.git",
     "Blob": "git+https://github.com/eligrey/Blob.js"
   }

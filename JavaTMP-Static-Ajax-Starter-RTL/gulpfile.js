@@ -17,9 +17,10 @@ var config = {
     "destComponentsLib": "./public_html/components",
     "destDist": "./public_html/assets/dist",
     "plugins": {
-        "font-awesome": [
-            {"from": "${sourceNodeLib}/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css", "to": "${destComponentsLib}/font-awesome/web-fonts-with-css/css"},
-            {"from": "${sourceNodeLib}/font-awesome/web-fonts-with-css/webfonts/*", "to": "${destComponentsLib}/font-awesome/web-fonts-with-css/webfonts"}
+        "fontawesome-free-webfonts": [
+            // go to \assets\src\sass\pages\font-awesome.scss
+//            {"from": "${sourceNodeLib}/@fortawesome/fontawesome-free-webfonts/css/**/*", "to": "${destComponentsLib}/fontawesome-free-webfonts/css", processCSS: true},
+            {"from": "${sourceNodeLib}/@fortawesome/fontawesome-free-webfonts/webfonts/**/*", "to": "${destComponentsLib}/fontawesome-free-webfonts/webfonts"}
         ],
         "font-awesome-animation": [
             {"from": "${sourceNodeLib}/font-awesome-animation/dist/font-awesome-animation.min.css", "to": "${destComponentsLib}/font-awesome-animation/dist"}
@@ -222,7 +223,7 @@ var config = {
 };
 var src = {
     "css": [
-        "./public_html/components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css",
+//        "./public_html/components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css",
         "./public_html/components/font-awesome-animation/dist/font-awesome-animation.min.css",
         "./public_html/components/jquery-ui-dist/jquery-ui.min.css",
 //        "./public_html/components/bootstrap/dist/css/bootstrap.min.css",
@@ -257,7 +258,7 @@ var src = {
         "./public_html/components/fullcalendar/dist/fullcalendar.print.min.css"
     ],
     "fonts": [
-        "./public_html/components/font-awesome/web-fonts-with-css/webfonts/**/*",
+        "./public_html/components/fontawesome-free-webfonts/webfonts/**/*",
         "./public_html/components/jquery-contextmenu/dist/font/**/*",
         "./public_html/components/summernote/dist/font/**/*",
         "./public_html/components/slick-carousel/slick/fonts/**/*",
