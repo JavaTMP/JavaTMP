@@ -1,8 +1,10 @@
 package com.javatmp.web.controller.cms;
 
 import com.javatmp.domain.Content;
+import com.javatmp.domain.table.DataTableRequest;
+import com.javatmp.domain.table.DataTableResults;
 import com.javatmp.mvc.MvcHelper;
-import com.javatmp.mvc.Page;
+import com.javatmp.mvc.PageTemp;
 import com.javatmp.mvc.ResponseMessage;
 import com.javatmp.service.ContentService;
 import com.javatmp.service.ServicesFactory;
@@ -28,14 +30,15 @@ public class ListContentController extends HttpServlet {
         ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         ContentService cs = sf.getContentService();
 
-        Page<Content> requestedPage = new Page<>(Content.class);
+        DataTableRequest requestedPage = new DataTableRequest();
+//        PageTemp<Content> requestedPage = new PageTemp<>(Content.class);
         try {
             MvcHelper.populateBeanByRequestParameters(request, requestedPage);
-            requestedPage = cs.listContent(requestedPage);
+            DataTableResults<Content> results = cs.listContent(requestedPage);
 
             responseMessage.setOverAllStatus(true);
             responseMessage.setMessage("Content Read successfully");
-            responseMessage.setData(requestedPage);
+            responseMessage.setData(results);
             MvcHelper.sendMessageAsJson(response, responseMessage);
 
         } catch (IllegalAccessException ex) {
