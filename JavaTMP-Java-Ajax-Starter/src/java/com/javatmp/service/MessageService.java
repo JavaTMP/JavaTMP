@@ -8,7 +8,6 @@ import com.javatmp.domain.table.DataTableResults;
 import com.javatmp.domain.table.Order;
 import com.javatmp.domain.table.Search;
 import com.javatmp.mvc.MvcHelper;
-import com.javatmp.mvc.Page;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Comparator;
@@ -67,20 +66,6 @@ public class MessageService {
         message.setMessageId(DBFaker.getNextCounter());
         this.dBFaker.getMessages().add(message);
         return message;
-    }
-
-    public Page<Message> listMessage(Page<Message> page) {
-        List<Message> retList = new LinkedList<>();
-        List<Message> db = this.dBFaker.getMessages();
-        for (int i = (page.getRequestedPageNum() - 1) * page.getNumOfRowsPerPage();
-                i < db.size() && i < (page.getRequestedPageNum()) * page.getNumOfRowsPerPage(); i++) {
-            retList.add(db.get(i));
-        }
-        page.setRecords(retList);
-
-        page.setAllCount(this.getAllCount());
-
-        return page;
     }
 
     public DataTableResults<Message> listMessages(DataTableRequest tableRequest) {
