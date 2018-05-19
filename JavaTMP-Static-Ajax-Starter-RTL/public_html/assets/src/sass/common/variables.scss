@@ -79,3 +79,6 @@ $javatmp-footer-bar-border-color: $border-color!default;
 $daterangepicker-cell-color:                 $dropdown-link-color !default;
 $daterangepicker-cell-hover-color:           $dropdown-link-hover-color!default;
 $daterangepicker-cell-hover-bg-color:        $dropdown-link-hover-bg!default;
+
+// Overriding font-awesome font path files
+$fa-font-path: $javatmp-font-path!default;
