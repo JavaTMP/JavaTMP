@@ -355,7 +355,7 @@ gulp.task('git-add', function (cb) {
 gulp.task('git-commit', function (cb) {
     return gulp.src('./*')
             .pipe(git.commit(undefined, {
-                args: '-am \"' + pkg.version + '"',
+                args: '-m \"' + pkg.version + '"',
                 disableMessageRequirement: true
             }, cb));
 });
