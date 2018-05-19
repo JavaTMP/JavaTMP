@@ -125,8 +125,8 @@
                                 var that = this;
                                 var passData = {
                                     "_ajaxGlobalBlockUI": false,
-                                    numOfRowsPerPage: recordPerPage,
-                                    requestedPageNum: pageRequested
+                                    length: recordPerPage,
+                                    start: currentFetchedCount
                                 };
                                 pageRequested++;
                                 $.ajax({
@@ -134,8 +134,8 @@
                                     data: passData,
                                     success: function (response, textStatus, jqXHR) {
                                         that.mcs.content.find(".fetch-indicator").remove();
-                                        var data = response.data.records;
-                                        allCount = response.data.allCount;
+                                        var data = response.data.data;
+                                        allCount = response.data.recordsTotal;
                                         $.each(data, function (index, row) {
                                             currentFetchedCount++;
                                             var readyData = template.composeTemplate({
@@ -165,8 +165,8 @@
                                 var that = this;
                                 var passData = {
                                     "_ajaxGlobalBlockUI": false,
-                                    numOfRowsPerPage: recordPerPage,
-                                    requestedPageNum: pageRequested
+                                    length: recordPerPage,
+                                    start: currentFetchedCount
                                 };
                                 pageRequested++;
                                 $.ajax({
@@ -174,8 +174,8 @@
                                     data: passData,
                                     success: function (response, textStatus, jqXHR) {
                                         that.mcs.content.find(".fetch-indicator").remove();
-                                        var data = response.data.records;
-                                        allCount = response.data.allCount;
+                                        var data = response.data.data;
+                                        allCount = response.data.recordsTotal;
                                         $.each(data, function (index, row) {
                                             currentFetchedCount++;
                                             var readyData = template.composeTemplate({
@@ -213,8 +213,8 @@
                         $("#infinite-scroll .mCSB_container").append(indicatorTemplate);
                         var passData = {
                             "_ajaxGlobalBlockUI": false,
-                            numOfRowsPerPage: recordPerPage,
-                            requestedPageNum: pageRequested
+                            length: recordPerPage,
+                            start: currentFetchedCount
                         };
                         pageRequested++;
                         $.ajax({
@@ -222,8 +222,8 @@
                             data: passData,
                             success: function (response, textStatus, jqXHR) {
                                 $("#infinite-scroll .mCSB_container").find(".fetch-indicator").remove();
-                                var data = response.data.records;
-                                allCount = response.data.allCount;
+                                var data = response.data.data;
+                                allCount = response.data.recordsTotal;
                                 $.each(data, function (index, row) {
                                     currentFetchedCount++;
                                     var readyData = template.composeTemplate({
