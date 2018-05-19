@@ -2,6 +2,11 @@
 @import "common/variables.scss";
 @import "common/colors-variables.scss";
 
+/*!************************************
+Include original Bootstrap SCSS file
+***************************************/
+@import "../../../../../node_modules/bootstrap/scss/bootstrap";
+
 /*!********************************************
 JavaTMP Base Tempalte Imports
 *********************************************/
