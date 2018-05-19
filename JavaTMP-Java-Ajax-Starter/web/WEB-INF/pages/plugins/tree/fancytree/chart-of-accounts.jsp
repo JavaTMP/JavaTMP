@@ -143,7 +143,7 @@
 //                        }, true);
                     },
                     postProcess: function (event, data) {
-                        data.result = convertData(data.response);
+                        data.result = convertData(data.response.data);
 //                        data.result = {
 //                            error: "ERROR #" + orgResponse.faultCode + ": " + orgResponse.faultMsg
 //                        };

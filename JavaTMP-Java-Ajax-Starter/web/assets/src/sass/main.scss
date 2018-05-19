@@ -1,11 +1,18 @@
-
-@import "common/variables.scss";
-@import "common/colors-variables.scss";
+/*!****************************************
+Include Global overriding variables file
+*******************************************/
+@import "common/overriding-variables.scss";
 
 /*!************************************
 Include original Bootstrap SCSS file
 ***************************************/
 @import "../../../../../node_modules/bootstrap/scss/bootstrap";
+
+/*!********************************************
+JavaTMP Global Variables Imports
+*********************************************/
+@import "common/variables.scss";
+@import "common/colors-variables.scss";
 
 /*!********************************************
 JavaTMP Base Tempalte Imports

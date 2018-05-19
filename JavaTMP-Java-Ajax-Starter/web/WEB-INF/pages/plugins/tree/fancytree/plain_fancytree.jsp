@@ -72,6 +72,9 @@
                         debugDelay: 200,
                         cache: true
                     },
+                    postProcess: function (event, data) {
+                        data.result = data.response.data;
+                    },
                     lazyLoad: function (event, data) {
                         data.result = {
                             url: javatmp.settings.contextPath + "/tree/files",

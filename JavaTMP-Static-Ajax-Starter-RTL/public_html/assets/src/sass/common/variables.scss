@@ -1,10 +1,4 @@
 
-// --- override default bootstrap variables here
-$font-family-base: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
-
-// Include original Bootstrap SCSS file
-@import "../../../../../node_modules/bootstrap/scss/bootstrap";
-
 // Global Path Variables:
 $javatmp-font-path: "../fonts" !default;
 $javatmp-img-path: "../img" !default;

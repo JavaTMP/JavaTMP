@@ -81,8 +81,11 @@
                         debugDelay: 200,
                         cache: true
                     },
+                    postProcess: function (event, data) {
+                        data.result = data.response.data;
+                    },
                     table: {
-                        indentation: 25,
+                        indentation: 30,
                         nodeColumnIdx: 1
                     },
                     activate: function (event, data) {
