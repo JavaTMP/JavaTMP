@@ -5,7 +5,6 @@ import com.google.gson.GsonBuilder;
 import com.javatmp.domain.User;
 import com.javatmp.mvc.ClassTypeAdapter;
 import com.javatmp.mvc.ResponseMessage;
-import com.javatmp.service.DBFaker;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.service.ServicesFactory;
 import com.javatmp.util.Constants;
@@ -13,9 +12,6 @@ import com.javatmp.util.MD5Util;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
-import java.math.BigDecimal;
-import java.security.NoSuchAlgorithmException;
-import java.util.Date;
 import java.util.ResourceBundle;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -66,17 +62,11 @@ public class LoginController extends HttpServlet {
             } else {
                 // un authenticated user
                 responseMessage.setOverAllStatus(false);
-                responseMessage.setMessage("kindly Check your username and password or Refresh current page");
+                responseMessage.setMessage("kindly Check your username and password");
             }
 
-            Gson gson = new GsonBuilder().serializeNulls()
-                    .registerTypeAdapter(Class.class, new ClassTypeAdapter())
-                    .create();
-            String json = gson.toJson(responseMessage);
-            System.out.println("response [" + json + "]");
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(json);
+            MvcHelper.sendMessageAsJson(response, responseMessage);
+
         } catch (IllegalAccessException ex) {
             ex.printStackTrace();
             throw new ServletException(ex);

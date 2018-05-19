@@ -4,7 +4,6 @@ import com.javatmp.domain.Content;
 import com.javatmp.domain.table.DataTableRequest;
 import com.javatmp.domain.table.DataTableResults;
 import com.javatmp.mvc.MvcHelper;
-import com.javatmp.mvc.PageTemp;
 import com.javatmp.mvc.ResponseMessage;
 import com.javatmp.service.ContentService;
 import com.javatmp.service.ServicesFactory;

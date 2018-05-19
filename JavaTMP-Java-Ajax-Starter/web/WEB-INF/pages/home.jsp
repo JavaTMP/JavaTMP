@@ -16,7 +16,7 @@
             </button>
         </div>
         <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
-            <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
+            <button type="button" class="logout-home-btn-id javatmp-btn btn btn-success btn-block my-2"
                     actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/logout" >
                 <i class="fas fa-coffee"></i>
                 Logout Page
@@ -569,6 +569,9 @@
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
+                $(".logout-home-btn-id").on("click", function () {
+                    window.location.replace($(this).attr("action-ref-by-href"));
+                });
             });
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
