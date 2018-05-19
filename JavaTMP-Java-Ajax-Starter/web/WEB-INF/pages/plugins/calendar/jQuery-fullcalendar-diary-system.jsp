@@ -92,8 +92,23 @@
                     eventLimit: true,
                     slotDuration: '00:15:00',
                     slotLabelInterval: "01:00",
-                    timezone: 'UTC',
-                    events: javatmp.settings.contextPath + '/calendar/getDiaryEvents',
+//                    timezone: 'UTC',
+                    timezone: 'Asia/Dubai',
+                    events: function (start, end, timezone, callback) {
+                        $.ajax({
+                            cache: false,
+                            url: javatmp.settings.contextPath + '/calendar/getDiaryEvents',
+                            dataType: 'json',
+                            data: {
+                                start: start.unix(),
+                                end: end.unix(),
+                                timezone: timezone
+                            },
+                            success: function (message) {
+                                callback(message.data);
+                            }
+                        });
+                    },
                     eventClick: function (calEvent, jsEvent, view) {
                         manageEvent(calEvent.id);
                     },
@@ -119,12 +134,10 @@
 //                        $(element).addClass("bg-danger text-white");
 //                    }
                 });
-
                 $(".changeCalendarViewMenuItem").on("click", function () {
                     var targetView = $(this).attr("newCalendarView");
                     $('#web-diary-calendar').fullCalendar('changeView', targetView);
                 });
-
                 function manageEvent(eventId) {
                     var passData = {};
                     passData.callback = "fullcalendarCallback";
@@ -214,7 +227,6 @@
                                                 $('#web-diary-calendar').fullCalendar('refetchEvents');
                                             }, 100, "fullCalendar-update-event");
                                             modalWrapper.hide();
-
                                         }
                                     }
                                 ]
@@ -246,7 +258,6 @@
                                                 $('#web-diary-calendar').fullCalendar('refetchEvents');
                                             }, 100, "fullCalendar-populateFakeDatabase");
                                             modalWrapper.hide();
-
                                         }
                                     }
                                 ]

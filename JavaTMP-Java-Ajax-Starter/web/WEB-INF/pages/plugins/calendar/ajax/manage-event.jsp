@@ -20,13 +20,13 @@
                     <div class="form-group row">
                         <label class="col-lg-2 col-form-label" for="textinput2">Event Start Date</label>
                         <div class="col-lg-10">
-                            <input id="new-event-form-start-date" name="start" type="text" placeholder="Event Start Date" class="form-control required Date-and-Time" value="<fmt:formatDate pattern='dd/MM/yyyy HH:mm' value='${requestScope.event.start}'/>">
+                            <input id="new-event-form-start-date" name="start" type="text" placeholder="Event Start Date" class="form-control required Date-and-Time" value="<fmt:formatDate pattern='dd/MM/yyyy HH:mm' timeZone="Asia/Dubai" value='${requestScope.event.start}'/>">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-lg-2 col-form-label" for="textinput3">Event End Date</label>
                         <div class="col-lg-10">
-                            <input id="new-event-form-end-date" name="end" type="text" placeholder="Event End Date" class="form-control required Date-and-Time" value="<fmt:formatDate pattern='dd/MM/yyyy HH:mm' value='${requestScope.event.end}'/>">
+                            <input id="new-event-form-end-date" name="end" type="text" placeholder="Event End Date" class="form-control required Date-and-Time" value="<fmt:formatDate pattern='dd/MM/yyyy HH:mm' timeZone="Asia/Dubai" value='${requestScope.event.end}'/>">
                         </div>
                     </div>
                 </form>
@@ -103,8 +103,8 @@
                                         });
                                         m.originalModal.find(".modal-dialog").css({transition: 'all 0.5s'});
                                         m.show();
-                                        formData.start = moment(formData.start, 'DD/MM/YYYY HH:mm').format("YYYY-MM-DDTHH:mm:ss");
-                                        formData.end = moment(formData.end, 'DD/MM/YYYY HH:mm').format("YYYY-MM-DDTHH:mm:ss");
+                                        formData.start = moment(formData.start, 'DD/MM/YYYY HH:mm').format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+                                        formData.end = moment(formData.end, 'DD/MM/YYYY HH:mm').format("YYYY-MM-DDTHH:mm:ss.SSSZ");
                                         $.ajax({
                                             type: "POST",
                                             url: javatmp.settings.contextPath + "/calendar/deleteEvent",
@@ -191,10 +191,9 @@
 //                    // re-disabled the set of inputs that you previously enabled
 //                    disabled.attr('disabled', 'disabled');
                     var form_data = null;
-
                     form_data = convertFormToJson($(this));
-                    form_data.start = moment(form_data.start, 'DD/MM/YYYY HH:mm').format("YYYY-MM-DDTHH:mm:ss");
-                    form_data.end = moment(form_data.end, 'DD/MM/YYYY HH:mm').format("YYYY-MM-DDTHH:mm:ss");
+                    form_data.start = moment(form_data.start, 'DD/MM/YYYY HH:mm').format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+                    form_data.end = moment(form_data.end, 'DD/MM/YYYY HH:mm').format("YYYY-MM-DDTHH:mm:ss.SSSZ");
                     $.ajax({
                         type: httpType,
                         url: post_url,
@@ -234,12 +233,12 @@
                         },
                         start: {
                             required: true,
-                            validDate: true,
+                            validDateTime: true,
                             dateEqualOrLessThan: '#new-event-form-end-date'
                         },
                         end: {
                             required: true,
-                            validDate: true,
+                            validDateTime: true,
                             dateEqualOrGreaterThan: "#new-event-form-start-date"
                         }
                     },
@@ -249,12 +248,12 @@
                         },
                         start: {
                             required: "Kindly enter the start date of this event",
-                            validDate: "Kindly enter a valid date format 'DD/MM/YYYY HH:MI'",
+                            validDateTime: "Kindly enter a valid date format 'DD/MM/YYYY HH:MI'",
                             dateLessThan: "Kindly enter a date less than the end date of this event"
                         },
                         end: {
                             required: "Kindly enter the end date of this event",
-                            validDate: "Kindly enter a valid date format 'DD/MM/YYYY HH:MI'",
+                            validDateTime: "Kindly enter a valid date format 'DD/MM/YYYY HH:MI'",
                             dateGreaterThan: "Kindly enter a date greater than the start date of this event"
                         }
                     }

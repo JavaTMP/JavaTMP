@@ -109,8 +109,8 @@
                         return returnArray;
                     }
                     form_data = objectifyForm(form_data);
-                    form_data.start = moment(form_data.start, 'DD/MM/YYYY HH:mm').format("YYYY-MM-DDTHH:mm:ss");
-                    form_data.end = moment(form_data.end, 'DD/MM/YYYY HH:mm').format("YYYY-MM-DDTHH:mm:ss");
+                    form_data.start = moment(form_data.start, 'DD/MM/YYYY HH:mm').format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+                    form_data.end = moment(form_data.end, 'DD/MM/YYYY HH:mm').format("YYYY-MM-DDTHH:mm:ss.SSSZ");
                     $.ajax({
                         type: httpType,
                         url: post_url,
@@ -149,12 +149,12 @@
                         },
                         start: {
                             required: true,
-                            validDate: true,
+                            validDateTime: true,
                             dateEqualOrLessThan: '#new-event-form-end-date'
                         },
                         end: {
                             required: true,
-                            validDate: true,
+                            validDateTime: true,
                             dateEqualOrGreaterThan: "#new-event-form-start-date"
                         }
                     },
@@ -164,12 +164,12 @@
                         },
                         start: {
                             required: "Kindly enter the start date of this event",
-                            validDate: "Kindly enter a valid date format 'DD/MM/YYYY HH:MI'",
+                            validDateTime: "Kindly enter a valid date format 'DD/MM/YYYY HH:MI'",
                             dateLessThan: "Kindly enter a date less than the end date of this event"
                         },
                         end: {
                             required: "Kindly enter the end date of this event",
-                            validDate: "Kindly enter a valid date format 'DD/MM/YYYY HH:MI'",
+                            validDateTime: "Kindly enter a valid date format 'DD/MM/YYYY HH:MI'",
                             dateGreaterThan: "Kindly enter a date greater than the start date of this event"
                         }
                     }

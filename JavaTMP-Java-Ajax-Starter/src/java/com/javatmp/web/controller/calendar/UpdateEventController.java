@@ -27,12 +27,7 @@ public class UpdateEventController extends HttpServlet {
         ResponseMessage responseMessage = new ResponseMessage();
         responseMessage.setOverAllStatus(true);
 
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").serializeNulls()
-                .registerTypeAdapter(Class.class, new ClassTypeAdapter())
-                //                .registerTypeAdapter(Date.class, new DateTypeAdapter())
-                .create();
-
-        DiaryEvent event = gson.fromJson(request.getReader(), DiaryEvent.class);
+        DiaryEvent event = (DiaryEvent) MvcHelper.readObjectFromRequest(request, DiaryEvent.class);
         System.out.println("Event read from request prior to update [" + MvcHelper.toString(event) + "]");
         boolean found = false;
         String msg = "Event id [" + event.getId() + "] not found";
@@ -49,11 +44,7 @@ public class UpdateEventController extends HttpServlet {
         }
         responseMessage.setOverAllStatus(found);
         responseMessage.setMessage(msg);
-        String json = gson.toJson(responseMessage);
-        System.out.println("response [" + json + "]");
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json);
+        MvcHelper.sendMessageAsJson(response, responseMessage);
     }
 
 }
