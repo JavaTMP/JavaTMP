@@ -41,4 +41,9 @@ public class Search {
         this.regex = regex;
     }
 
+    @Override
+    public String toString() {
+        return "(value[" + this.value + "], regex[" + this.regex + "])";
+    }
+
 }

@@ -196,13 +196,17 @@ public class MessageService {
             @Override
             public int compare(Message o1, Message o2) {
                 int retCompare = 0;
+//                System.out.println("Could we order [" + !(orders == null || orders.size() == 0) + "]");
                 if (orders == null || orders.size() == 0) {
                     return retCompare;
                 }
                 // we support only one sort:
                 Order order = orders.get(0);
+//                System.out.println("Order by [" + order + "]");
                 int factor = order.getDir().value().equals("desc") ? -1 : +1;
+//                System.out.println("Order factor [" + factor + "]");
                 DataTableColumnSpecs orderColumn = tableRequest.getColumns().get(order.getColumn());
+//                System.out.println("orderColumn [" + orderColumn + "]");
 //                System.out.println("Order by column [" + orderColumn + "]");
                 if (!(orderColumn != null && orderColumn.getData() != null)) {
                     return retCompare;
@@ -215,9 +219,9 @@ public class MessageService {
                     retCompare = o1.getMessageTitle().compareTo(o2.getMessageTitle()) * factor;
                 } else if ("creationDate".equals(orderColumnName)) { // creationDate
                     retCompare = o1.getCreationDate().compareTo(o2.getCreationDate()) * factor * -1;
-                } else if ("fromUser".equals(orderColumnName)) { // fromUser
+                } else if ("fromUserId".equals(orderColumnName)) { // fromUser
                     retCompare = o1.getFromUserId().compareTo(o2.getFromUserId()) * factor;
-                } else if ("toUser".equals(orderColumnName)) { // toUser
+                } else if ("toUserId".equals(orderColumnName)) { // toUser
                     retCompare = o1.getToUserId().compareTo(o2.getToUserId()) * factor;
                 }
                 return retCompare;

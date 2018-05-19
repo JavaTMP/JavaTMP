@@ -41,4 +41,9 @@ public class Order {
         this.dir = dir;
     }
 
+    public String toString() {
+        String ret = "column[" + column + "], OrderDir[" + this.dir + "]";
+        return ret;
+    }
+
 }

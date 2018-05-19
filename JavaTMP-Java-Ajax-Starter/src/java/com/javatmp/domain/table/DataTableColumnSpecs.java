@@ -209,4 +209,11 @@ public class DataTableColumnSpecs {
         return this.data.equals(that.data);
     }
 
+    @Override
+    public String toString() {
+        return "index[" + this.index + "], data[" + this.data + "], name[" + this.name
+                + "], searchable[" + this.searchable + "],orderable[" + orderable
+                + "], search[" + this.search + "], regex[" + this.regex + "], sortDir[" + this.sortDir + "]";
+    }
+
 }
