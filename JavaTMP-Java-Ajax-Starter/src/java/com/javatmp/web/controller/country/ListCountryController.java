@@ -1,9 +1,9 @@
 package com.javatmp.web.controller.country;
 
 import com.javatmp.domain.Country;
-import com.javatmp.domain.table.DataTableResults;
+import com.javatmp.mvc.domain.table.DataTableResults;
 import com.javatmp.mvc.MvcHelper;
-import com.javatmp.mvc.ResponseMessage;
+import com.javatmp.mvc.domain.ResponseMessage;
 import com.javatmp.service.CountryService;
 import com.javatmp.service.ServicesFactory;
 import com.javatmp.util.Constants;

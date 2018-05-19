@@ -1,7 +1,7 @@
 package com.javatmp.web.controller.calendar;
 
 import com.javatmp.mvc.MvcHelper;
-import com.javatmp.mvc.ResponseMessage;
+import com.javatmp.mvc.domain.ResponseMessage;
 import com.javatmp.service.ServicesFactory;
 import com.javatmp.util.Constants;
 import java.io.IOException;

@@ -1,8 +1,8 @@
 package com.javatmp.service;
 
 import com.javatmp.domain.Content;
-import com.javatmp.domain.table.DataTableRequest;
-import com.javatmp.domain.table.DataTableResults;
+import com.javatmp.mvc.domain.table.DataTableRequest;
+import com.javatmp.mvc.domain.table.DataTableResults;
 import java.util.LinkedList;
 import java.util.List;
 

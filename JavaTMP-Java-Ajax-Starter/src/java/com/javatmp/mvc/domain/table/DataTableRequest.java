@@ -1,4 +1,4 @@
-package com.javatmp.domain.table;
+package com.javatmp.mvc.domain.table;
 
 import java.util.List;
 

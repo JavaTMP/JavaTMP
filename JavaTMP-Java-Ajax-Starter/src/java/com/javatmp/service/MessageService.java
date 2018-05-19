@@ -2,11 +2,11 @@ package com.javatmp.service;
 
 import com.javatmp.domain.Message;
 import com.javatmp.domain.User;
-import com.javatmp.domain.table.DataTableColumnSpecs;
-import com.javatmp.domain.table.DataTableRequest;
-import com.javatmp.domain.table.DataTableResults;
-import com.javatmp.domain.table.Order;
-import com.javatmp.domain.table.Search;
+import com.javatmp.mvc.domain.table.DataTableColumnSpecs;
+import com.javatmp.mvc.domain.table.DataTableRequest;
+import com.javatmp.mvc.domain.table.DataTableResults;
+import com.javatmp.mvc.domain.table.Order;
+import com.javatmp.mvc.domain.table.Search;
 import com.javatmp.mvc.MvcHelper;
 import java.text.SimpleDateFormat;
 import java.util.Collections;

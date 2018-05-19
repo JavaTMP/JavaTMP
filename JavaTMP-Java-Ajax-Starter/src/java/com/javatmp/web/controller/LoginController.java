@@ -1,10 +1,7 @@
 package com.javatmp.web.controller;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.javatmp.domain.User;
-import com.javatmp.mvc.ClassTypeAdapter;
-import com.javatmp.mvc.ResponseMessage;
+import com.javatmp.mvc.domain.ResponseMessage;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.service.ServicesFactory;
 import com.javatmp.util.Constants;

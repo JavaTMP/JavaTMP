@@ -1,8 +1,11 @@
 package com.javatmp.mvc;
 
+import com.javatmp.mvc.domain.ResponseMessage;
+import com.javatmp.mvc.adapter.OrderDirTypeAdapter;
+import com.javatmp.mvc.adapter.ClassTypeAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.javatmp.domain.table.OrderDir;
+import com.javatmp.mvc.domain.table.OrderDir;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;

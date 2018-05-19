@@ -3,7 +3,7 @@ package com.javatmp.web.controller.user;
 import com.javatmp.domain.Document;
 import com.javatmp.domain.User;
 import com.javatmp.mvc.MvcHelper;
-import com.javatmp.mvc.ResponseMessage;
+import com.javatmp.mvc.domain.ResponseMessage;
 import com.javatmp.service.DocumentService;
 import com.javatmp.service.ServicesFactory;
 import com.javatmp.util.Constants;

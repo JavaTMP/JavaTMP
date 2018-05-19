@@ -2,7 +2,7 @@ package com.javatmp.web.controller.cms;
 
 import com.javatmp.domain.Content;
 import com.javatmp.mvc.MvcHelper;
-import com.javatmp.mvc.ResponseMessage;
+import com.javatmp.mvc.domain.ResponseMessage;
 import com.javatmp.service.ContentService;
 import com.javatmp.service.ServicesFactory;
 import com.javatmp.util.Constants;
