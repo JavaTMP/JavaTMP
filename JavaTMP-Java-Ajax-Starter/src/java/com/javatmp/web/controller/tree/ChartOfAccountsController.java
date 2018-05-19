@@ -1,9 +1,8 @@
 package com.javatmp.web.controller.tree;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.javatmp.domain.Account;
-import com.javatmp.mvc.ClassTypeAdapter;
+import com.javatmp.mvc.MvcHelper;
+import com.javatmp.mvc.ResponseMessage;
 import com.javatmp.service.ServicesFactory;
 import com.javatmp.util.Constants;
 import java.io.IOException;
@@ -24,14 +23,11 @@ public class ChartOfAccountsController extends HttpServlet {
         ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         List<Account> chartOfAccounts = sf.getAccountService().getChartOfAccounts();
 
-        Gson gson = new GsonBuilder().serializeNulls()
-                .registerTypeAdapter(Class.class, new ClassTypeAdapter())
-                .create();
-        String json = gson.toJson(chartOfAccounts);
-        System.out.println("loginController response [" + json + "]");
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json);
+        ResponseMessage responseMessage = new ResponseMessage();
+        responseMessage.setOverAllStatus(true);
+        responseMessage.setData(chartOfAccounts);
+
+        MvcHelper.sendMessageAsJson(response, responseMessage);
 
     }
 

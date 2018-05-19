@@ -1,9 +1,6 @@
 package com.javatmp.web.controller.cms;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.javatmp.domain.Content;
-import com.javatmp.mvc.ClassTypeAdapter;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.ResponseMessage;
 import com.javatmp.service.ContentService;
@@ -43,15 +40,7 @@ public class UpdateContentController extends HttpServlet {
                 responseMessage.setMessage("Content NOT Updated");
             }
 
-            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").serializeNulls()
-                    .registerTypeAdapter(Class.class, new ClassTypeAdapter())
-                    //                .registerTypeAdapter(Date.class, new DateTypeAdapter())
-                    .create();
-            String json = gson.toJson(responseMessage);
-            System.out.println("response [" + json + "]");
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(json);
+            MvcHelper.sendMessageAsJson(response, responseMessage);
 
         } catch (IllegalAccessException ex) {
             Logger.getLogger(UpdateContentController.class.getName()).log(Level.SEVERE, null, ex);

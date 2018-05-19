@@ -72,7 +72,7 @@ public class UserService {
         return ret;
     }
 
-    public DataTableResults<User> listUsers(DataTableRequest<User> tableRequest) {
+    public DataTableResults<User> listUsers(DataTableRequest tableRequest) {
         List<User> retList = new LinkedList<>();
         List<User> database = this.dBFaker.getUsers();
         List<User> db = null;
@@ -299,7 +299,7 @@ public class UserService {
         return dataTableResult;
     }
 
-    public DataTableResults<User> listAllUsers(DataTableRequest<User> tableRequest) {
+    public DataTableResults<User> listAllUsers(DataTableRequest tableRequest) {
         List<User> retList = new LinkedList<>();
         List<User> db = this.dBFaker.getUsers();
 

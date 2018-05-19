@@ -1,26 +1,18 @@
 package com.javatmp.web.filter;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.javatmp.domain.User;
-import com.javatmp.mvc.ClassTypeAdapter;
-import com.javatmp.mvc.ResponseMessage;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 public class UselessWaitFilter implements Filter {
 
@@ -54,7 +46,7 @@ public class UselessWaitFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
-        System.out.println("*** Start AuthenticatorFilter ****");
+        System.out.println("*** Start UselessWaitFilter ****");
 
         // https://stackoverflow.com/questions/46592664/request-getservletpath-returned-null-from-spring-mvc
         HttpServletRequest req = (HttpServletRequest) request;

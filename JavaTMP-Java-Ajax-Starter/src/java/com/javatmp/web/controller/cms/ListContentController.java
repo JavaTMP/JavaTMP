@@ -1,9 +1,6 @@
 package com.javatmp.web.controller.cms;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.javatmp.domain.Content;
-import com.javatmp.mvc.ClassTypeAdapter;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.Page;
 import com.javatmp.mvc.ResponseMessage;
@@ -12,7 +9,6 @@ import com.javatmp.service.ServicesFactory;
 import com.javatmp.util.Constants;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -40,15 +36,7 @@ public class ListContentController extends HttpServlet {
             responseMessage.setOverAllStatus(true);
             responseMessage.setMessage("Content Read successfully");
             responseMessage.setData(requestedPage);
-            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-                    .registerTypeAdapter(Class.class, new ClassTypeAdapter())
-                    //                .registerTypeAdapter(Date.class, new DateTypeAdapter())
-                    .create();
-            String json = gson.toJson(responseMessage);
-            System.out.println("response [" + json + "]");
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(json);
+            MvcHelper.sendMessageAsJson(response, responseMessage);
 
         } catch (IllegalAccessException ex) {
             Logger.getLogger(ListContentController.class.getName()).log(Level.SEVERE, null, ex);

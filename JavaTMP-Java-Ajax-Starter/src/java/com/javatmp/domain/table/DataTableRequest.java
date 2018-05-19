@@ -2,7 +2,7 @@ package com.javatmp.domain.table;
 
 import java.util.List;
 
-public class DataTableRequest<T> {
+public class DataTableRequest {
 
     /**
      * The unique id.

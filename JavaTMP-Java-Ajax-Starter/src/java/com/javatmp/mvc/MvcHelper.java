@@ -2,6 +2,7 @@ package com.javatmp.mvc;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.javatmp.domain.table.OrderDir;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
@@ -22,6 +23,7 @@ public class MvcHelper {
     private static final Gson gson = new GsonBuilder()
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").serializeNulls()
             .registerTypeAdapter(Class.class, new ClassTypeAdapter())
+            .registerTypeAdapter(OrderDir.class, new OrderDirTypeAdapter())
             .create();
 
     /**

@@ -51,14 +51,7 @@ public class UpdateThemeController extends HttpServlet {
             responseMessage.setRedirectURL(request.getContextPath() + "/");
             responseMessage.setMessage("Theme Updated successfully");
 
-            Gson gson = new GsonBuilder().serializeNulls()
-                    .registerTypeAdapter(Class.class, new ClassTypeAdapter())
-                    .create();
-            String json = gson.toJson(responseMessage);
-            System.out.println("loginController response [" + json + "]");
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(json);
+            MvcHelper.sendMessageAsJson(response, responseMessage);
 
         } catch (IllegalAccessException ex) {
             ex.printStackTrace();

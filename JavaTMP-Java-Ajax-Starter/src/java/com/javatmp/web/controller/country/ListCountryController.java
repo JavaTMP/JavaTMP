@@ -1,9 +1,6 @@
 package com.javatmp.web.controller.country;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.javatmp.domain.Country;
-import com.javatmp.mvc.ClassTypeAdapter;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.Page;
 import com.javatmp.mvc.ResponseMessage;
@@ -59,15 +56,8 @@ public class ListCountryController extends HttpServlet {
             page.setRecords(foundCountries);
             responseMessage.setData(page);
 
-            Gson gson = new GsonBuilder().serializeNulls()
-                    .registerTypeAdapter(Class.class, new ClassTypeAdapter())
-                    .create();
+            MvcHelper.sendMessageAsJson(response, responseMessage);
 
-            String json = gson.toJson(responseMessage);
-            System.out.println("loginController response [" + json + "]");
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(json);
         } catch (IllegalAccessException ex) {
             Logger.getLogger(ListCountryController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InvocationTargetException ex) {

@@ -1,8 +1,6 @@
 package com.javatmp.web.controller.user;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.javatmp.mvc.ClassTypeAdapter;
+import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.ResponseMessage;
 import com.javatmp.service.ServicesFactory;
 import com.javatmp.service.UserService;
@@ -30,14 +28,8 @@ public class ListUsersPositionsController extends HttpServlet {
 
         responseMessage.setOverAllStatus(true);
         responseMessage.setData(positions);
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-                .registerTypeAdapter(Class.class, new ClassTypeAdapter())
-                .create();
-        String json = gson.toJson(responseMessage);
-        System.out.println("response [" + json + "]");
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json);
+
+        MvcHelper.sendMessageAsJson(response, responseMessage);
 
     }
 }

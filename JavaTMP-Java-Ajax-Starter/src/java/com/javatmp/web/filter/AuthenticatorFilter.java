@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.javatmp.domain.User;
 import com.javatmp.mvc.ClassTypeAdapter;
+import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.ResponseMessage;
 import java.io.IOException;
 import java.util.HashSet;
@@ -51,47 +52,39 @@ public class AuthenticatorFilter implements Filter {
             FilterChain chain)
             throws IOException, ServletException {
         System.out.println("*** Start AuthenticatorFilter ****");
-        try {
-            // https://stackoverflow.com/questions/46592664/request-getservletpath-returned-null-from-spring-mvc
-            HttpServletRequest req = (HttpServletRequest) request;
-            HttpServletResponse res = (HttpServletResponse) response;
-            String path = req.getRequestURI().substring(req.getContextPath().length());
 
-            this.filterConfig.getServletContext().log("path [" + path + "] is [" + isReqInWhiteList(path) + "]");
-            if (isReqInWhiteList(path)) {
+        // https://stackoverflow.com/questions/46592664/request-getservletpath-returned-null-from-spring-mvc
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse res = (HttpServletResponse) response;
+        String path = req.getRequestURI().substring(req.getContextPath().length());
+
+        this.filterConfig.getServletContext().log("path [" + path + "] is [" + isReqInWhiteList(path) + "]");
+        if (isReqInWhiteList(path)) {
+            chain.doFilter(request, response);
+        } else {
+            // check if requester is authenticated or not
+            HttpSession session = req.getSession();
+            System.out.println("Session Attribute [" + session.getAttribute("user") + "]");
+            User user = (User) session.getAttribute("user");
+            System.out.println("Session User is [" + user + "]");
+            if (user != null) {
                 chain.doFilter(request, response);
-            } else {
-                // check if requester is authenticated or not
-                HttpSession session = req.getSession();
-                System.out.println("Session Attribute [" + session.getAttribute("user") + "]");
-                User user = (User) session.getAttribute("user");
-                System.out.println("Session User is [" + user + "]");
-                if (user != null) {
-                    chain.doFilter(request, response);
-                } else if ("ajax".equals(req.getParameter("_ajax"))) {
-                    // we send an error ajax message response consisting
-                    ResponseMessage responseMessage = new ResponseMessage();
-                    responseMessage.setOverAllStatus(false);
-                    responseMessage.setRedirect(true);
-                    responseMessage.setRedirectURL(req.getContextPath() + "/");
-                    responseMessage.setMessage("Un-Authorized Access or your session has been deactivated");
-                    Gson gson = new GsonBuilder().serializeNulls()
-                            .registerTypeAdapter(Class.class, new ClassTypeAdapter())
-                            .create();
-                    String json = gson.toJson(responseMessage);
-                    System.out.println("response [" + json + "]");
-                    res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                    res.setContentType("application/json");
-                    res.setCharacterEncoding("UTF-8");
-                    res.getWriter().write(json);
+            } else if ("ajax".equals(req.getParameter("_ajax"))) {
+                // we send an error ajax message response consisting
+                res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                ResponseMessage responseMessage = new ResponseMessage();
+                responseMessage.setOverAllStatus(false);
+                responseMessage.setRedirect(true);
+                responseMessage.setRedirectURL(req.getContextPath() + "/");
+                responseMessage.setMessage("Un-Authorized Access or your session has been deactivated");
+                MvcHelper.sendMessageAsJson(res, responseMessage);
 
-                } else {
-                    res.sendRedirect(req.getContextPath() + "/login");
-                }
+            } else {
+                res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                res.sendRedirect(req.getContextPath() + "/login");
             }
-        } catch (Throwable t) {
-            t.printStackTrace();
         }
+
     }
 
     public static String getBaseUrl(HttpServletRequest request) {

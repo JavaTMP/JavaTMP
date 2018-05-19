@@ -1,9 +1,6 @@
 package com.javatmp.web.controller.cms;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.javatmp.domain.Content;
-import com.javatmp.mvc.ClassTypeAdapter;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.ResponseMessage;
 import com.javatmp.service.ContentService;
@@ -37,15 +34,8 @@ public class ReadContentController extends HttpServlet {
             responseMessage.setOverAllStatus(true);
             responseMessage.setMessage("Content Read successfully");
             responseMessage.setData(dbContent);
-            Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-                    .registerTypeAdapter(Class.class, new ClassTypeAdapter())
-                    //                .registerTypeAdapter(Date.class, new DateTypeAdapter())
-                    .create();
-            String json = gson.toJson(responseMessage);
-            System.out.println("response [" + json + "]");
-            response.setContentType("application/json");
-            response.setCharacterEncoding("UTF-8");
-            response.getWriter().write(json);
+
+            MvcHelper.sendMessageAsJson(response, responseMessage);
 
         } catch (IllegalAccessException ex) {
             Logger.getLogger(ReadContentController.class.getName()).log(Level.SEVERE, null, ex);

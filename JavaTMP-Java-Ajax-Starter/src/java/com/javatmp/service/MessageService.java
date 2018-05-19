@@ -83,7 +83,7 @@ public class MessageService {
         return page;
     }
 
-    public DataTableResults<Message> listMessages(DataTableRequest<Message> tableRequest) {
+    public DataTableResults<Message> listMessages(DataTableRequest tableRequest) {
         List<Message> retList = new LinkedList<>();
         List<Message> database = this.dBFaker.getMessages();
         List<Message> db = null;

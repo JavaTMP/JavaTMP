@@ -1,14 +1,9 @@
 package com.javatmp.web.controller.user;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.javatmp.domain.User;
 import com.javatmp.domain.table.DataTableRequest;
 import com.javatmp.domain.table.DataTableResults;
-import com.javatmp.domain.table.OrderDir;
-import com.javatmp.mvc.ClassTypeAdapter;
 import com.javatmp.mvc.MvcHelper;
-import com.javatmp.mvc.OrderDirTypeAdapter;
 import com.javatmp.mvc.ResponseMessage;
 import com.javatmp.service.ServicesFactory;
 import com.javatmp.service.UserService;
@@ -30,24 +25,15 @@ public class ListAllUsersController extends HttpServlet {
         ResponseMessage responseMessage = new ResponseMessage();
         ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         UserService cs = sf.getUserService();
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").serializeNulls()
-                .registerTypeAdapter(Class.class, new ClassTypeAdapter())
-                .registerTypeAdapter(OrderDir.class, new OrderDirTypeAdapter())
-                //                .registerTypeAdapter(Date.class, new DateTypeAdapter())
-                .create();
 
-        DataTableRequest<User> tableRequest = gson.fromJson(request.getReader(), DataTableRequest.class);
+        DataTableRequest tableRequest = (DataTableRequest) MvcHelper.readObjectFromRequest(request, DataTableRequest.class);
         System.out.println("datatableRequest [" + MvcHelper.deepToString(tableRequest) + "]");
 
         DataTableResults<User> dataTableResult = cs.listAllUsers(tableRequest);
 
         responseMessage.setOverAllStatus(true);
         responseMessage.setData(dataTableResult);
-        String json = gson.toJson(responseMessage);
-        System.out.println("response [" + json + "]");
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json);
+        MvcHelper.sendMessageAsJson(response, responseMessage);
 
     }
 }

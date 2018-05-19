@@ -1,14 +1,9 @@
 package com.javatmp.web.controller.message;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.javatmp.domain.Message;
 import com.javatmp.domain.table.DataTableRequest;
 import com.javatmp.domain.table.DataTableResults;
-import com.javatmp.domain.table.OrderDir;
-import com.javatmp.mvc.ClassTypeAdapter;
 import com.javatmp.mvc.MvcHelper;
-import com.javatmp.mvc.OrderDirTypeAdapter;
 import com.javatmp.mvc.ResponseMessage;
 import com.javatmp.service.MessageService;
 import com.javatmp.service.ServicesFactory;
@@ -31,12 +26,7 @@ public class ListMessagesController extends HttpServlet {
         ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         MessageService cs = sf.getMessageService();
 
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").serializeNulls()
-                .registerTypeAdapter(Class.class, new ClassTypeAdapter())
-                .registerTypeAdapter(OrderDir.class, new OrderDirTypeAdapter())
-                .create();
-
-        DataTableRequest<Message> tableRequest = gson.fromJson(request.getReader(), DataTableRequest.class);
+        DataTableRequest tableRequest = (DataTableRequest) MvcHelper.readObjectFromRequest(request, DataTableRequest.class);
         System.out.println("datatableRequest [" + MvcHelper.deepToString(tableRequest) + "]");
 
         DataTableResults<Message> dataTableResult = cs.listMessages(tableRequest);
@@ -44,10 +34,7 @@ public class ListMessagesController extends HttpServlet {
         responseMessage.setOverAllStatus(true);
         responseMessage.setData(dataTableResult);
 
-        String json = gson.toJson(responseMessage);
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json);
+        MvcHelper.sendMessageAsJson(response, responseMessage);
 
     }
 }
