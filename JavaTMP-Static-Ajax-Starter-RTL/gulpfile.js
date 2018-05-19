@@ -218,6 +218,9 @@ var config = {
         ],
         "numeral": [
             {"from": "${sourceNodeLib}/numeral/min/numeral.min.js", "to": "${destComponentsLib}/numeral/min"}
+        ],
+        "moment-timezone": [
+            {"from": "${sourceNodeLib}/moment-timezone/**/*", "to": "${destComponentsLib}/moment-timezone"}
         ]
     }
 };
@@ -283,6 +286,7 @@ var src = {
         "./public_html/components/jquery-idletimer/dist/idle-timer.min.js",
         "./public_html/components/moment/min/moment.min.js",
         "./public_html/components/moment/min/locales.min.js",
+        "./public_html/components/moment-timezone/builds/moment-timezone-with-data.min.js",
         "./public_html/components/bootstrap-daterangepicker/daterangepicker.js",
         "./public_html/components/bootstrap-colorselector/dist/bootstrap-colorselector.min.js",
         "./public_html/components/select2/dist/js/select2.full.min.js",
