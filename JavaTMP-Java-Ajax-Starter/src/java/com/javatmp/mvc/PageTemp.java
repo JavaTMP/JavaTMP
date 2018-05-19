@@ -6,7 +6,7 @@ package com.javatmp.mvc;
 
 import java.util.List;
 
-public class Page<T> {
+public class PageTemp<T> {
 
     private Class<T> type;
     private T exampleObject;
@@ -21,18 +21,18 @@ public class Page<T> {
 
     private String[] selects;
 
-    public Page(Class<T> type) {
+    public PageTemp(Class<T> type) {
         this.type = type;
     }
 
-    public Page(Integer requestedInteger, Integer numberOfRowsPerPage, String sortColumn, String sortOrder) {
+    public PageTemp(Integer requestedInteger, Integer numberOfRowsPerPage, String sortColumn, String sortOrder) {
         this.requestedPageNum = requestedInteger;
         this.numOfRowsPerPage = numberOfRowsPerPage;
         this.sortColumn = sortColumn;
         this.sortOrder = sortOrder;
     }
 
-    public Page(Integer requestedInteger, Integer numberOfRowsPerPage,
+    public PageTemp(Integer requestedInteger, Integer numberOfRowsPerPage,
             String sortColumn, String sortOrder, Class<T> type) {
         this.requestedPageNum = requestedInteger;
         this.numOfRowsPerPage = numberOfRowsPerPage;

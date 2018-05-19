@@ -128,16 +128,16 @@
 
                     // https://stackoverflow.com/questions/14819865/select2-ajax-method-not-selecting
                     var actualResult = [];
-                    for (var i = 0; i < data.data.records.length; i++) {
+                    for (var i = 0; i < data.data.data.length; i++) {
                         actualResult.push({
-                            id: data.data.records[i].countryId,
-                            text: data.data.records[i].countryName
+                            id: data.data.data[i].countryId,
+                            text: data.data.data[i].countryName
                         });
                     }
                     return {
                         results: actualResult,
                         pagination: {
-                            more: (params.page * data.data.numOfRowsPerPage) < data.data.allCount
+                            more: (params.page * 10) < data.data.recordsTotal
                         }
                     };
                 }

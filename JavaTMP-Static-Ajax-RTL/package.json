@@ -81,7 +81,7 @@
     "gulp-connect": "^5.5.0",
     "gulp-eslint": "^4.0.2",
     "gulp-if": "^2.0.2",
-    "gulp-rename": "^1.2.2",
+    "gulp-rename": "^1.2.3",
     "gulp-sass": "^4.0.1",
     "gulp-uglify": "^3.0.0",
     "napa": "^3.0.0",

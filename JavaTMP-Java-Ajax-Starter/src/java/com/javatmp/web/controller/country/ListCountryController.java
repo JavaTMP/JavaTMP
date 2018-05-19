@@ -1,8 +1,8 @@
 package com.javatmp.web.controller.country;
 
 import com.javatmp.domain.Country;
+import com.javatmp.domain.table.DataTableResults;
 import com.javatmp.mvc.MvcHelper;
-import com.javatmp.mvc.Page;
 import com.javatmp.mvc.ResponseMessage;
 import com.javatmp.service.CountryService;
 import com.javatmp.service.ServicesFactory;
@@ -50,10 +50,10 @@ public class ListCountryController extends HttpServlet {
             responseMessage.setOverAllStatus(true);
             responseMessage.setMessage(this.getClass().getCanonicalName());
 
-            Page<Country> page = new Page<>(Country.class);
-            page.setAllCount(Long.valueOf(all.size()));
-            page.setNumOfRowsPerPage(10);
-            page.setRecords(foundCountries);
+            DataTableResults<Country> page = new DataTableResults<>();
+            page.setRecordsTotal(Long.valueOf(all.size()));
+            page.setRecordsFiltered(Long.valueOf(all.size()));
+            page.setData(foundCountries);
             responseMessage.setData(page);
 
             MvcHelper.sendMessageAsJson(response, responseMessage);
