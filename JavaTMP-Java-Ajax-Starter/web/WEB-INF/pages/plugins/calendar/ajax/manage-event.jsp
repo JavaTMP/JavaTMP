@@ -20,13 +20,13 @@
                     <div class="form-group row">
                         <label class="col-lg-2 col-form-label" for="textinput2">Event Start Date</label>
                         <div class="col-lg-10">
-                            <input id="new-event-form-start-date" name="start" type="text" placeholder="Event Start Date" class="form-control required Date-and-Time" value="<fmt:formatDate pattern='dd/MM/yyyy HH:mm' timeZone="Asia/Dubai" value='${requestScope.event.start}'/>">
+                            <input id="new-event-form-start-date" name="start" type="text" placeholder="Event Start Date" class="form-control required Date-and-Time" value="<fmt:formatDate pattern='dd/MM/yyyy HH:mm' timeZone="UTC" value='${requestScope.event.start}'/>">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-lg-2 col-form-label" for="textinput3">Event End Date</label>
                         <div class="col-lg-10">
-                            <input id="new-event-form-end-date" name="end" type="text" placeholder="Event End Date" class="form-control required Date-and-Time" value="<fmt:formatDate pattern='dd/MM/yyyy HH:mm' timeZone="Asia/Dubai" value='${requestScope.event.end}'/>">
+                            <input id="new-event-form-end-date" name="end" type="text" placeholder="Event End Date" class="form-control required Date-and-Time" value="<fmt:formatDate pattern='dd/MM/yyyy HH:mm' timeZone="UTC" value='${requestScope.event.end}'/>">
                         </div>
                     </div>
                 </form>

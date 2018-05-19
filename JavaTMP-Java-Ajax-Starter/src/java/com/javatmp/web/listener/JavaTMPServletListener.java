@@ -23,7 +23,8 @@ public class JavaTMPServletListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         sce.getServletContext().log("*** Start App @ [" + new Date() + "] ***");
         // just for demo:
-        TimeZone.setDefault(TimeZone.getTimeZone("GMT"));
+        // -Duser.timezone=UTC
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
         sce.getServletContext().log("****** End @ [" + new Date() + "] *********");
 
     }

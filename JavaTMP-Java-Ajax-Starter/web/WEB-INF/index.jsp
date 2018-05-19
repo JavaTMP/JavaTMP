@@ -1822,9 +1822,6 @@
         <script type="text/javascript">
             jQuery(function ($) {
                 $("#oneTimeOverlay").remove();
-                setTimeout(function () {
-                    alert(moment.tz());
-                }, 1000);
             });
         </script>
     </body>

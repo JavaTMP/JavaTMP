@@ -92,8 +92,8 @@
                     eventLimit: true,
                     slotDuration: '00:15:00',
                     slotLabelInterval: "01:00",
-//                    timezone: 'UTC',
-                    timezone: 'Asia/Dubai',
+                    timezone: 'UTC',
+//                    timezone: 'local',
                     events: function (start, end, timezone, callback) {
                         $.ajax({
                             cache: false,
