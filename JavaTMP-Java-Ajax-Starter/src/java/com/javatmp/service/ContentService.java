@@ -1,7 +1,8 @@
 package com.javatmp.service;
 
 import com.javatmp.domain.Content;
-import com.javatmp.mvc.Page;
+import com.javatmp.domain.table.DataTableRequest;
+import com.javatmp.domain.table.DataTableResults;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -43,18 +44,20 @@ public class ContentService {
         throw new IllegalArgumentException("Record id [" + content.getContentId() + "] Not found");
     }
 
-    public Page<Content> listContent(Page<Content> page) {
+    public DataTableResults<Content> listContent(DataTableRequest page) {
         List<Content> retList = new LinkedList<>();
         List<Content> db = this.dBFaker.getContents();
-        for (int i = (page.getRequestedPageNum() - 1) * page.getNumOfRowsPerPage();
-                i < db.size() && i < (page.getRequestedPageNum()) * page.getNumOfRowsPerPage(); i++) {
+        for (int i = page.getStart();
+                i < db.size() && i < (page.getStart() + page.getLength()); i++) {
             retList.add(db.get(i));
         }
-        page.setRecords(retList);
+        DataTableResults<Content> dataTableResult = new DataTableResults<>();
+        dataTableResult.setData(retList);
+        dataTableResult.setRecordsTotal(Long.valueOf(db.size()));
+        dataTableResult.setRecordsFiltered(Long.valueOf(db.size()));
+        dataTableResult.setDraw(page.getDraw());
 
-        page.setAllCount(this.getAllCount());
-
-        return page;
+        return dataTableResult;
     }
 
 }
