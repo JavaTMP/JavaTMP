@@ -48,9 +48,13 @@
                             <!-- <h3>Data:</h3> -->
                             <div class="docs-data">
                                 <div class="input-group input-group-sm">
-                                    <label class="input-group-addon" for="dataX">X</label>
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">X</span>
+                                    </div>
                                     <input type="text" class="form-control" id="dataX" placeholder="x">
-                                    <span class="input-group-addon">px</span>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">px</span>
+                                    </div>
                                 </div>
                                 <div class="input-group input-group-sm">
                                     <label class="input-group-addon" for="dataY">Y</label>

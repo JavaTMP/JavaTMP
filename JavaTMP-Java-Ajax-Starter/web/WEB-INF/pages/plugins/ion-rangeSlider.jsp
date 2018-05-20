@@ -7,7 +7,7 @@
         <div class="col-lg-12">
             <div class="alert alert-info">
                 <p>Ion.RangeSlider. Is an easy, flexible and responsive range slider with tons of options.</p>
-                <br/>
+                <p><span class="text-danger">NO SUPPORT FOR RTL IN CURRENT 2.2.0 version</span></p>
                 <p>
                     <a class="btn btn-info" target="_blank" href="http://ionden.com/a/plugins/ion.rangeSlider/en.html"><i class="fa fa-external-link-alt fa-fw"></i>Demo Page</a>
                     <a class="btn btn-info" target="_blank" href="https://github.com/IonDen/ion.rangeSlider"><i class="fa fa-external-link-alt fa-fw"></i>github.com Page</a>
