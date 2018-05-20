@@ -51,6 +51,15 @@
                         loading: "fa fa-sync fa-spin"
                     }
                 };
+                if (javatmp.settings.isRTL === true) {
+                    $.extend(true, glyph_opts, {
+                        map: {
+                            dropMarker: "fa fa-arrow-left",
+                            expanderClosed: "fa fa-chevron-left",
+                            expanderLazy: "fa fa-chevron-left"
+                        }
+                    });
+                }
                 var SOURCE = [
                     {title: "item1 with key and tooltip", tooltip: "Look, a tool tip!"},
                     {title: "item2: selected on init", selected: true},
@@ -93,6 +102,7 @@
                 // Initialize Fancytree
 
                 $("#Checkboxes_Fancytree_id").fancytree({
+                    rtl: javatmp.settings.isRTL,
                     checkbox: true,
                     selectMode: 3,
                     extensions: ["glyph"],
@@ -127,6 +137,21 @@
                         if (event.which === 32) {
                             data.node.toggleSelected();
                             return false;
+                        }
+                        if (javatmp.settings.isRTL === true) {
+                            var KC = $.ui.keyCode;
+                            var oe = event.originalEvent;
+                            // Swap LEFT/RIGHT keys
+                            switch (event.which) {
+                                case KC.LEFT:
+                                    oe.keyCode = KC.RIGHT;
+                                    oe.which = KC.RIGHT;
+                                    break;
+                                case KC.RIGHT:
+                                    oe.keyCode = KC.LEFT;
+                                    oe.which = KC.LEFT;
+                                    break;
+                            }
                         }
                     }
                 });

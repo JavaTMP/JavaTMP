@@ -51,6 +51,15 @@
                         loading: "fa fa-sync fa-spin"
                     }
                 };
+                if (javatmp.settings.isRTL === true) {
+                    $.extend(true, glyph_opts, {
+                        map: {
+                            dropMarker: "fa fa-arrow-left",
+                            expanderClosed: "fa fa-chevron-left",
+                            expanderLazy: "fa fa-chevron-left"
+                        }
+                    });
+                }
                 var SOURCE = [
                     {title: "item1 with key and tooltip", tooltip: "Look, a tool tip!"},
                     {title: "item2: selected on init", selected: true},
@@ -93,6 +102,7 @@
                 // Initialize Fancytree
 
                 $('#ContextMenu_Fancytree_id').fancytree({
+                    rtl: javatmp.settings.isRTL,
                     extensions: ["glyph"],
 //                    extensions: ['contextMenu'],
                     glyph: glyph_opts,
@@ -102,9 +112,26 @@
                     lazyLoad: function (event, data) {
                         data.result = {url: 'assets/data/fancytreeCheckboxes.json'};
                     },
+                    keydown: function (event, data) {
+                        if (javatmp.settings.isRTL === true) {
+                            var KC = $.ui.keyCode;
+                            var oe = event.originalEvent;
+                            // Swap LEFT/RIGHT keys
+                            switch (event.which) {
+                                case KC.LEFT:
+                                    oe.keyCode = KC.RIGHT;
+                                    oe.which = KC.RIGHT;
+                                    break;
+                                case KC.RIGHT:
+                                    oe.keyCode = KC.LEFT;
+                                    oe.which = KC.LEFT;
+                                    break;
+                            }
+                        }
+                    },
                     init: function (event, data, flag) {
                         $.contextMenu({
-                            rtl: true,
+                            rtl: javatmp.settings.isRTL,
                             selector: '.fancytree-title',
 //                            appendTo: javatmp.settings.defaultOutputSelector,
                             reposition: true,
@@ -114,6 +141,25 @@
                                     node.setSelected(true);
                                     node.setActive(true);
                                 }
+                            },
+                            position: function (opt, x, y) {
+                                var menuWidth = $(opt.$menu).outerWidth();
+                                var menuHeightWithMargin = $(opt.$menu).outerHeight(true);
+                                var menuHeight = $(opt.$menu).outerHeight();
+                                var targetY = y;
+                                var offset = $(this).offset();
+                                var posY = offset.top - $(window).scrollTop();
+                                posY = posY - javatmp.getFixedOffset();
+                                console.log("targety = " + posY
+                                        + " , ajaxoutput height = " + $(window).height()
+                                        + " . menu height = " + menuHeightWithMargin);
+                                if ($(opt.$menu).outerHeight() + posY > $(window).height()) {
+                                    targetY = y - menuHeight;
+                                }
+                                console.log("current y : " + targetY + " , x : " + (x - menuWidth));
+//                                console.log("top : " + currentMousePos.y + " , x :" + (x - menuWidth));
+                                opt.$menu.css({top: targetY, left: x - menuWidth});
+                                return true;
                             },
                             callback: function (key, options) {
                                 var node = $.ui.fancytree.getNode(this);

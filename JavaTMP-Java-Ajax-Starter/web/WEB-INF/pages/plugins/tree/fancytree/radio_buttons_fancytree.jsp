@@ -51,8 +51,17 @@
                         loading: "fa fa-sync fa-spin"
                     }
                 };
-
+                if (javatmp.settings.isRTL === true) {
+                    $.extend(true, glyph_opts, {
+                        map: {
+                            dropMarker: "fa fa-arrow-left",
+                            expanderClosed: "fa fa-chevron-left",
+                            expanderLazy: "fa fa-chevron-left"
+                        }
+                    });
+                }
                 $("#Checkboxes_Fancytree_id").fancytree({
+                    rtl: javatmp.settings.isRTL,
                     extensions: ["glyph"],
                     checkbox: 1,
                     selectMode: 1,
@@ -81,6 +90,23 @@
                         data.node.setSelected(true);
                     },
                     select: function (event, data) {
+                    },
+                    keydown: function (event, data) {
+                        if (javatmp.settings.isRTL === true) {
+                            var KC = $.ui.keyCode;
+                            var oe = event.originalEvent;
+                            // Swap LEFT/RIGHT keys
+                            switch (event.which) {
+                                case KC.LEFT:
+                                    oe.keyCode = KC.RIGHT;
+                                    oe.which = KC.RIGHT;
+                                    break;
+                                case KC.RIGHT:
+                                    oe.keyCode = KC.LEFT;
+                                    oe.which = KC.LEFT;
+                                    break;
+                            }
+                        }
                     }
                 });
 

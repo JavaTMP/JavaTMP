@@ -104,7 +104,18 @@
                     }
                 };
 
+                if (javatmp.settings.isRTL === true) {
+                    $.extend(true, glyph_opts, {
+                        map: {
+                            dropMarker: "fa fa-arrow-left",
+                            expanderClosed: "fa fa-chevron-left",
+                            expanderLazy: "fa fa-chevron-left"
+                        }
+                    });
+                }
+
                 $("#tree").fancytree({
+                    rtl: javatmp.settings.isRTL,
                     extensions: ["glyph", "filter"],
                     glyph: glyph_opts,
                     quicksearch: true,
@@ -127,6 +138,23 @@
                     },
                     lazyLoad: function (event, data) {
                         data.result = {url: "${pageContext.request.contextPath}/assets/data/fancytreeSub.json"};
+                    },
+                    keydown: function (event, data) {
+                        if (javatmp.settings.isRTL === true) {
+                            var KC = $.ui.keyCode;
+                            var oe = event.originalEvent;
+                            // Swap LEFT/RIGHT keys
+                            switch (event.which) {
+                                case KC.LEFT:
+                                    oe.keyCode = KC.RIGHT;
+                                    oe.which = KC.RIGHT;
+                                    break;
+                                case KC.RIGHT:
+                                    oe.keyCode = KC.LEFT;
+                                    oe.which = KC.LEFT;
+                                    break;
+                            }
+                        }
                     }
                 });
 

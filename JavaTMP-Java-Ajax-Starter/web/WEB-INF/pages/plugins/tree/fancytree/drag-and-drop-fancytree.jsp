@@ -51,7 +51,15 @@
                         loading: "fa fa-sync fa-spin"
                     }
                 };
-
+                if (javatmp.settings.isRTL === true) {
+                    $.extend(true, glyph_opts, {
+                        map: {
+                            dropMarker: "fa fa-arrow-left",
+                            expanderClosed: "fa fa-chevron-left",
+                            expanderLazy: "fa fa-chevron-left"
+                        }
+                    });
+                }
                 var sourceData = [
                     {
                         "title": "Animalia",
@@ -120,6 +128,7 @@
                 ];
                 // Initialize Fancytree
                 $("#tree").fancytree({
+                    rtl: javatmp.settings.isRTL,
                     extensions: ["glyph", "dnd", "edit"],
                     glyph: glyph_opts,
                     source: sourceData,
@@ -161,6 +170,23 @@
                     },
                     activate: function (event, data) {
 //                        alert("activate " + data.node);
+                    },
+                    keydown: function (event, data) {
+                        if (javatmp.settings.isRTL === true) {
+                            var KC = $.ui.keyCode;
+                            var oe = event.originalEvent;
+                            // Swap LEFT/RIGHT keys
+                            switch (event.which) {
+                                case KC.LEFT:
+                                    oe.keyCode = KC.RIGHT;
+                                    oe.which = KC.RIGHT;
+                                    break;
+                                case KC.RIGHT:
+                                    oe.keyCode = KC.LEFT;
+                                    oe.which = KC.LEFT;
+                                    break;
+                            }
+                        }
                     }
                 });
             }(jQuery));
