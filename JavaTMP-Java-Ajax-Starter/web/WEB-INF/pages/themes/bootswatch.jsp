@@ -164,7 +164,7 @@
                                 redirectURL = javatmp.settings.contextPath + "/";
                             }
 //                            window.location.replace(redirectURL);
-                            window.location.reload();
+                            window.location.reload(true);
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
                             alert("error");
