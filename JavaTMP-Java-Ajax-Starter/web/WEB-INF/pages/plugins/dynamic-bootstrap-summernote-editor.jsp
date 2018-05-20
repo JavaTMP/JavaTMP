@@ -59,6 +59,7 @@
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
             $('#summernote').summernote({
+                direction: javatmp.settings.direction,
                 height: 350,
                 tabsize: 2,
                 dialogsInBody: true,
