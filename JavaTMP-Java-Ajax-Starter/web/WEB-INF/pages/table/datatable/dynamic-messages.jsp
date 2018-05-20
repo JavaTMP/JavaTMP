@@ -42,10 +42,10 @@
         #table-panel table.dataTable {
             margin: 0!important;
         }
-        /*        table#defalut-dataTables-example {
-                    table-layout: fixed;
-                    word-wrap:break-word;
-                }*/
+        table#defalut-dataTables-example {
+            table-layout: fixed;
+            word-wrap:break-word;
+        }
         #filterHeader > th {
             padding: 0;
         }
@@ -115,18 +115,17 @@
                     }
                 },
                 columns: [
-                    {data: 'messageId', width: 75},
+                    {data: 'messageId'},
                     {data: 'messageTitle'},
                     {
                         data: 'creationDate',
                         "type": "date",
-                        width: 125,
                         "render": function (data, type, row) {
                             return moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("DD/MM/YYYY HH:mm");
                         }
                     },
-                    {data: 'fromUserId', width: 100},
-                    {data: 'toUserId', width: 100}
+                    {data: 'fromUserId'},
+                    {data: 'toUserId'}
                 ]
             });
 
