@@ -46,33 +46,6 @@
         </div>
     </div>
     <style type="text/css">
-        .context-menu-icon-good-job:before {
-            font-family: FontAwesome !important;
-            content: "\f087";
-        }
-        .context-menu-item.context-menu-icon-png {  }
-
-        .context-menu-icon-png:before {
-            content: ".";
-            background-image: url(assets/img/thumbs-up.png);
-            background-repeat: no-repeat;
-            position: absolute;
-            top: auto;
-            left: 7px;
-            line-height: inherit;
-            vertical-align: baseline;
-            color: transparent!important;
-            text-align: center;
-            -webkit-transform: none;
-            -ms-transform: none;
-            -o-transform: none;
-            transform: none;
-            -webkit-font-smoothing: none;
-            -moz-osx-font-smoothing: none;
-        }
-        .context-menu-icon::before {
-            /*color: #428BCA;*/
-        }
 
     </style>
     <script type="text/javascript">
@@ -80,6 +53,15 @@
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
             $.contextMenu({
+                rtl: javatmp.settings.isRTL,
+                position: function (opt, x, y) {
+                    if (javatmp.settings.isRTL === true) {
+                        var menuWidth = $(opt.$menu).outerWidth();
+                        opt.$menu.css({top: y, left: x - menuWidth});
+                    } else {
+                        opt.$menu.css({top: y, left: x});
+                    }
+                },
                 selector: '.context-menu-one',
                 callback: function (key, options) {
                     var m = "clicked: " + key;
@@ -92,10 +74,19 @@
                     "paste": {name: "Paste", icon: "paste"},
                     "delete": {name: "Delete", icon: "delete"},
                     "sep1": "---------",
-                    "quit": {name: "Quit", icon: "fa-close"}
+                    "quit": {name: "Quit", "icon": "quit"}
                 }
             });
             $.contextMenu({
+                rtl: javatmp.settings.isRTL,
+                position: function (opt, x, y) {
+                    if (javatmp.settings.isRTL === true) {
+                        var menuWidth = $(opt.$menu).outerWidth();
+                        opt.$menu.css({top: y, left: x - menuWidth});
+                    } else {
+                        opt.$menu.css({top: y, left: x});
+                    }
+                },
                 selector: '.left-context-menu-one',
                 trigger: 'left',
                 callback: function (key, options) {
@@ -109,12 +100,19 @@
                     "paste": {name: "Paste", icon: "paste"},
                     "delete": {name: "Delete", icon: "delete"},
                     "sep1": "---------",
-                    "quit": {name: "Quit", icon: function ($element, key, item) {
-                            return 'context-menu-icon context-menu-icon-quit';
-                        }}
+                    "icon": "quit"
                 }
             });
             $.contextMenu({
+                rtl: javatmp.settings.isRTL,
+                position: function (opt, x, y) {
+                    if (javatmp.settings.isRTL === true) {
+                        var menuWidth = $(opt.$menu).outerWidth();
+                        opt.$menu.css({top: y, left: x - menuWidth});
+                    } else {
+                        opt.$menu.css({top: y, left: x});
+                    }
+                },
                 selector: '.left-context-submenus-one',
                 callback: function (key, options) {
                     var m = "clicked: " + key;
