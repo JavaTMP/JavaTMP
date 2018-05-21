@@ -6,6 +6,7 @@ import com.javatmp.service.ServicesFactory;
 import com.javatmp.util.Constants;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.ResourceBundle;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -41,8 +42,13 @@ public class ServiceFactoryInjector implements Filter {
                     session.setAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME, sf);
                     User fakeUserLogging = new User("user1", "user1");
                     User dbUser = sf.getUserService().readUserByUsername(fakeUserLogging);
+
+                    // update locale for this user:
+                    ResourceBundle finalBundle = (ResourceBundle) httpRequest.getSession().getAttribute(Constants.LANGUAGE_ATTR_KEY);
+                    dbUser.setLang(finalBundle.getLocale().getLanguage());
                     System.out.println("db user is [" + MvcHelper.toString(dbUser) + "]");
-                    // Authenticated user
+
+                    // Auto Authenticated user for demo purposes.
                     session.setAttribute("user", dbUser);
                 }
             }

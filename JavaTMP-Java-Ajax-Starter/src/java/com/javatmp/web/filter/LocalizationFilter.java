@@ -85,7 +85,9 @@ public class LocalizationFilter implements Filter {
                     httpRequest.getSession().setAttribute(Constants.LANGUAGE_ATTR_KEY, bundle);
                 }
             }
-            System.out.println(httpRequest.getSession().getAttribute(Constants.LANGUAGE_ATTR_KEY).toString());
+
+            ResourceBundle finalBundle = (ResourceBundle) httpRequest.getSession().getAttribute(Constants.LANGUAGE_ATTR_KEY);
+            System.out.println("LocalizationFilter Lang is [" + finalBundle.getLocale() + "]");
             chain.doFilter(request, response);
         } catch (Throwable t) {
             t.printStackTrace();

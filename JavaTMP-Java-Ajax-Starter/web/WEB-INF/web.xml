@@ -9,12 +9,12 @@
         <filter-class>com.javatmp.web.filter.UselessWaitFilter</filter-class>
     </filter>
     <filter>
-        <filter-name>ServiceFactoryInjector</filter-name>
-        <filter-class>com.javatmp.web.filter.ServiceFactoryInjector</filter-class>
-    </filter>
-    <filter>
         <filter-name>LocalizationFilter</filter-name>
         <filter-class>com.javatmp.web.filter.LocalizationFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>ServiceFactoryInjector</filter-name>
+        <filter-class>com.javatmp.web.filter.ServiceFactoryInjector</filter-class>
     </filter>
     <filter>
         <filter-name>AuthenticatorFilter</filter-name>
@@ -43,12 +43,12 @@
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
     <filter-mapping>
-        <filter-name>ServiceFactoryInjector</filter-name>
+        <filter-name>LocalizationFilter</filter-name>
         <url-pattern>/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
     <filter-mapping>
-        <filter-name>LocalizationFilter</filter-name>
+        <filter-name>ServiceFactoryInjector</filter-name>
         <url-pattern>/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>

@@ -331,10 +331,15 @@ var src = {
         "./web/components/jquery-contextmenurtl/dist/js/jquery.contextMenuRtl.min.js",
         "./web/components/numeral/min/numeral.min.js"
     ],
-    "localeJS": [// for simplicity we create only on localeJS that contains all needed locales
-        "./web/components/timeago/locales/jquery.timeago.en.js",
-        "./web/components/timeago/locales/jquery.timeago.ar.js"
-    ]
+    "localeJS": {
+        "en": [
+            "./web/components/timeago/locales/jquery.timeago.en.js"
+        ],
+        "ar": [
+            "./web/components/timeago/locales/jquery.timeago.ar.js"
+        ]
+
+    }
 }
 ;
 function getClass(object) {
@@ -451,11 +456,31 @@ gulp.task('generate-dist', ['copy-components', "delete-dist", "delete-css", "del
                     .on('end', next);
         },
         function (next) {
-            console.log("Generate javatmp-plugins-locale-all.min.js");
-            gulp.src(src.localeJS)
-                    .pipe(concat("javatmp-plugins-locale-all.min.js", {newLine: '\n;'}))
-                    .pipe(gulp.dest("./web/assets/dist/js"))
-                    .on('end', next);
+            console.log("Generating javatmp-plugins-all-locale-*.min.js files");
+            var count = 0;
+            for (var key in src.localeJS) {
+                if (src.localeJS.hasOwnProperty(key)) {
+                    count++;
+                    var currentKey = key;
+                    var langArray = src.localeJS[currentKey];
+
+                    console.log("Generating javatmp-plugins-all-locale-" + currentKey + ".min.js");
+                    gulp.src(langArray)
+                            .pipe(concat("javatmp-plugins-all-locale-" + currentKey + ".min.js", {newLine: '\n;'}))
+                            .pipe(gulp.dest("./web/assets/dist/js"))
+                            .on('end', (function () {
+                                var k = currentKey;
+                                return function () {
+                                    count--;
+                                    console.log("Finish javatmp-plugins-all-locale-" + k + ".min.js");
+                                    if (count === 0) {
+                                        console.log("Finish javatmp-plugins-all-locale-*.min.js files");
+                                        next();
+                                    }
+                                };
+                            })());
+                }
+            }
         },
         function (next) {
             console.log("Copy plugins img to dist/img");

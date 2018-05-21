@@ -1294,7 +1294,7 @@
             </div>
         </div>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-locale-all.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all-locale-${sessionScope.user.lang}.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp.min.js" type="text/javascript"></script>
         <!-- custom style for sidebar menu search text field -->
         <style type="text/css">
@@ -1418,8 +1418,10 @@
                     isRTL: ${labels['global.direction'] == 'ltr' ? 'false' : 'true'},
                     contextPath: '${pageContext.request.contextPath}'
                 });
+
                 javatmp.user = {};
                 javatmp.user.id = ${sessionScope.user.id};
+                javatmp.user.lang = "${sessionScope.user.lang}";
 
                 javatmp.settings.handle401Error = function (jqXHR, textStatus, errorThrown) {
                     var modalMessage = null;
