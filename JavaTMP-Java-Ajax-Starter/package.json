@@ -78,7 +78,7 @@
     "gulp-uglify": "^3.0.0",
     "napa": "^3.0.0",
     "pump": "^3.0.0",
-    "async": "^2.6.0"
+    "async": "^2.6.1"
   },
   "scripts": {
     "install": "napa",
