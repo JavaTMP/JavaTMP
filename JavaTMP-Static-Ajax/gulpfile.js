@@ -140,9 +140,12 @@ var config = {
             {"from": "${sourceNodeLib}/fullcalendar/dist/fullcalendar.print.min.css", "to": "${destComponentsLib}/fullcalendar/dist"},
             {"from": "${sourceNodeLib}/fullcalendar/dist/fullcalendar.min.js", "to": "${destComponentsLib}/fullcalendar/dist"}
         ],
-        "cropper": [
-            {"from": "${sourceNodeLib}/cropper/dist/cropper.min.css", "to": "${destComponentsLib}/cropper/dist"},
-            {"from": "${sourceNodeLib}/cropper/dist/cropper.min.js", "to": "${destComponentsLib}/cropper/dist"}
+        "cropperjs": [
+            {"from": "${sourceNodeLib}/cropperjs/dist/cropper.min.css", "to": "${destComponentsLib}/cropperjs/dist"},
+            {"from": "${sourceNodeLib}/cropperjs/dist/cropper.min.js", "to": "${destComponentsLib}/cropperjs/dist"}
+        ],
+        "jquery-cropper": [
+            {"from": "${sourceNodeLib}/jquery-cropper/dist/jquery-cropper.min.js", "to": "${destComponentsLib}/jquery-cropper/dist"}
         ],
         "waypoints": [
             {"from": "${sourceNodeLib}/waypoints/lib/jquery.waypoints.min.js", "to": "${destComponentsLib}/waypoints/lib"}

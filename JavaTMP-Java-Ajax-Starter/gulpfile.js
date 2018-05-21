@@ -120,9 +120,12 @@ var config = {
             {"from": "${sourceNodeLib}/fullcalendar/dist/fullcalendar.print.min.css", "to": "${destComponentsLib}/fullcalendar/dist"},
             {"from": "${sourceNodeLib}/fullcalendar/dist/fullcalendar.min.js", "to": "${destComponentsLib}/fullcalendar/dist"}
         ],
-        "cropper": [
-            {"from": "${sourceNodeLib}/cropper/dist/cropper.min.css", "to": "${destComponentsLib}/cropper/dist"},
-            {"from": "${sourceNodeLib}/cropper/dist/cropper.min.js", "to": "${destComponentsLib}/cropper/dist"}
+        "cropperjs": [
+            {"from": "${sourceNodeLib}/cropperjs/dist/cropper.min.css", "to": "${destComponentsLib}/cropperjs/dist"},
+            {"from": "${sourceNodeLib}/cropperjs/dist/cropper.min.js", "to": "${destComponentsLib}/cropperjs/dist"}
+        ],
+        "jquery-cropper": [
+            {"from": "${sourceNodeLib}/jquery-cropper/dist/jquery-cropper.min.js", "to": "${destComponentsLib}/jquery-cropper/dist"}
         ],
         "waypoints": [
             {"from": "${sourceNodeLib}/waypoints/lib/jquery.waypoints.min.js", "to": "${destComponentsLib}/waypoints/lib"}
@@ -244,7 +247,7 @@ var src = {
         "./web/components/ion-rangeslider/css/ion.rangeSlider.skinHTML5.css",
         "./web/components/bootstrap-slider/dist/css/bootstrap-slider.min.css",
         "./web/components/fullcalendar/dist/fullcalendar.min.css",
-        "./web/components/cropper/dist/cropper.min.css",
+        "./web/components/cropperjs/dist/cropper.min.css",
         "./web/components/datatables.net-bs4/css/dataTables.bootstrap4.css",
         "./web/components/datatables.net-fixedheader-bs4/css/fixedHeader.bootstrap4.min.css",
         "./web/components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css",
@@ -299,7 +302,8 @@ var src = {
         "./web/components/Blob/Blob.js",
         "./web/components/canvas-toBlob/canvas-toBlob.js",
         "./web/components/file-saver/FileSaver.min.js",
-        "./web/components/cropper/dist/cropper.min.js",
+        "./web/components/cropperjs/dist/cropper.min.js",
+        "./web/components/jquery-cropper/dist/jquery-cropper.min.js",
         "./web/components/waypoints/lib/jquery.waypoints.min.js",
         "./web/components/jquery.counterup/jquery.counterup.min.js",
         "./web/components/timeago/jquery.timeago.js",
