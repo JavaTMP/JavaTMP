@@ -1294,6 +1294,7 @@
             </div>
         </div>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-locale-all.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp.min.js" type="text/javascript"></script>
         <!-- custom style for sidebar menu search text field -->
         <style type="text/css">

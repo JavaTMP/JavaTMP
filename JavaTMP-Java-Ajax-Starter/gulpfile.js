@@ -134,7 +134,9 @@ var config = {
             {"from": "${sourceNodeLib}/jquery.counterup/jquery.counterup.min.js", "to": "${destComponentsLib}/jquery.counterup"}
         ],
         "timeago": [
-            {"from": "${sourceNodeLib}/timeago/jquery.timeago.js", "to": "${destComponentsLib}/timeago", processJS: true}
+            {"from": "${sourceNodeLib}/timeago/jquery.timeago.js", "to": "${destComponentsLib}/timeago", processJS: true},
+            {"from": "${sourceNodeLib}/timeago/locales/jquery.timeago.en.js", "to": "${destComponentsLib}/timeago/locales", processJS: true},
+            {"from": "${sourceNodeLib}/timeago/locales/jquery.timeago.ar.js", "to": "${destComponentsLib}/timeago/locales", processJS: true}
         ],
         "jquery-validation": [
             {"from": "${sourceNodeLib}/jquery-validation/dist/jquery.validate.min.js", "to": "${destComponentsLib}/jquery-validation/dist"},
@@ -328,6 +330,10 @@ var src = {
         "./web/components/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js",
         "./web/components/jquery-contextmenurtl/dist/js/jquery.contextMenuRtl.min.js",
         "./web/components/numeral/min/numeral.min.js"
+    ],
+    "localeJS": [// for simplicity we create only on localeJS that contains all needed locales
+        "./web/components/timeago/locales/jquery.timeago.en.js",
+        "./web/components/timeago/locales/jquery.timeago.ar.js"
     ]
 }
 ;
@@ -441,6 +447,13 @@ gulp.task('generate-dist', ['copy-components', "delete-dist", "delete-css", "del
             console.log("Compile and generate javatmp-plugins-all.min.js");
             gulp.src(src.js)
                     .pipe(concat("javatmp-plugins-all.min.js", {newLine: '\n;'}))
+                    .pipe(gulp.dest("./web/assets/dist/js"))
+                    .on('end', next);
+        },
+        function (next) {
+            console.log("Generate javatmp-plugins-locale-all.min.js");
+            gulp.src(src.localeJS)
+                    .pipe(concat("javatmp-plugins-locale-all.min.js", {newLine: '\n;'}))
                     .pipe(gulp.dest("./web/assets/dist/js"))
                     .on('end', next);
         },
