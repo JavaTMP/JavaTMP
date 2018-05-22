@@ -186,6 +186,58 @@
             var formatTooltipLine = function (color, value) {
                 return "<span style='display:inline-block;width:10px;height:10px;border-radius:50%;background-color:" + color + ";margin-" + javatmp.settings.floatReverse + ":5px;'></span><span>" + value + "</span>";
             };
+
+            var barChartData = [
+                {
+                    name: 'Dataset 1',
+                    type: 'bar',
+                    data: [24, 44.6, 81, 11, 32, 41, 27, 5.9, 4.2, 71.8, 51.6, 22.8],
+                    textStyle: {
+                        fontFamily: "Open Sans",
+                        align: javatmp.settings.floatDefault
+                    }
+                },
+                {
+                    name: 'Dataset 2',
+                    type: 'bar',
+                    data: [26.8, 41.5, 10, 25, 37, 35, 22, 12, 7, 81, 30.8, 62],
+                    textStyle: {
+                        fontFamily: "Open Sans",
+                        align: javatmp.settings.floatDefault
+                    }
+                }
+            ];
+            if (javatmp.settings.isRTL === true) {
+                barChartData = barChartData.reverse();
+            }
+            var formaterFunction = null;
+            if (javatmp.settings.isRTL === true) {
+                formaterFunction = function (params) {
+                    return [
+                        '<span>' + params[0].axisValue + '</span>',
+                        "<br/>",
+                        formatTooltipLine(params[1].color, params[1].seriesName + ':' + params[1].data),
+                        "<br/>",
+                        formatTooltipLine(params[0].color, params[0].seriesName + ':' + params[0].data)
+                    ].join('');
+                };
+            }
+
+            var lineChartSeries = [
+                {
+                    name: 'Dataset 1',
+                    type: 'line',
+                    data: [24, 44.6, 81, 11, 32, 41, 27, 5.9, 4.2, 71.8, 51.6, 22.8]
+                },
+                {
+                    name: 'Dataset 2',
+                    type: 'line',
+                    data: [26.8, 41.5, 10, 25, 37, 35, 22, 12, 7, 81, 30.8, 62]
+                }
+            ];
+            if (javatmp.settings.isRTL === true) {
+                lineChartSeries = lineChartSeries.reverse();
+            }
             var option = {
                 title: {
                     text: 'Echarts Bar Chart',
@@ -202,15 +254,7 @@
                         fontFamily: "Open Sans",
                         align: javatmp.settings.floatDefault
                     },
-                    formatter: function (params) {
-                        return [
-                            '<span>' + params[0].axisValue + '</span>',
-                            "<br/>",
-                            formatTooltipLine(params[1].color, params[1].seriesName + ':' + params[1].data),
-                            "<br/>",
-                            formatTooltipLine(params[0].color, params[0].seriesName + ':' + params[0].data)
-                        ].join('');
-                    }
+                    formatter: formaterFunction
                 },
                 legend: {
                     align: javatmp.settings.floatDefault,
@@ -243,19 +287,8 @@
                         }
                     }
                 ],
-                color: ['#007bff', '#dc3545'],
-                series: [
-                    {
-                        name: 'Dataset 1',
-                        type: 'bar',
-                        data: [24, 44.6, 81, 11, 32, 41, 27, 5.9, 4.2, 71.8, 51.6, 22.8]
-                    },
-                    {
-                        name: 'Dataset 2',
-                        type: 'bar',
-                        data: [26.8, 41.5, 10, 25, 37, 35, 22, 12, 7, 81, 30.8, 62]
-                    }
-                ]
+                color: javatmp.settings.isRTL === true ? ['#007bff', '#dc3545'].reverse() : ['#007bff', '#dc3545'],
+                series: barChartData
             };
 
 
@@ -268,40 +301,53 @@
                 title: {
                     text: 'Echarts Line Chart',
                     x: 'center',
-                    y: 0
+                    y: 0,
+                    textStyle: {
+                        fontFamily: "Open Sans",
+                        align: javatmp.settings.floatDefault
+                    }
                 },
                 tooltip: {
-                    trigger: 'axis'
+                    trigger: 'axis',
+                    textStyle: {
+                        fontFamily: "Open Sans",
+                        align: javatmp.settings.floatDefault
+                    },
+                    formatter: formaterFunction
                 },
                 legend: {
-                    data: ['Dataset 1', 'Dataset 2'],
+                    align: javatmp.settings.floatDefault,
+                    data: javatmp.settings.isRTL === true ? ['Dataset 1', 'Dataset 2'].reverse() : ['Dataset 1', 'Dataset 2'],
                     x: 'center',
-                    y: '30px'
+                    y: '30px',
+                    textStyle: {
+                        fontFamily: "Open Sans",
+                        align: javatmp.settings.floatDefault
+                    }
                 },
                 calculable: true,
                 xAxis: [
                     {
-                        data: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+                        inverse: javatmp.settings.isRTL,
+                        data: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                        textStyle: {
+                            fontFamily: "Open Sans",
+                            align: javatmp.settings.floatDefault
+                        }
                     }
                 ],
                 yAxis: [
                     {
-                        type: 'value'
+                        position: javatmp.settings.floatDefault,
+                        type: 'value',
+                        textStyle: {
+                            fontFamily: "Open Sans",
+                            align: javatmp.settings.floatDefault
+                        }
                     }
                 ],
-                color: ['#007bff', '#dc3545'],
-                series: [
-                    {
-                        name: 'Dataset 1',
-                        type: 'line',
-                        data: [24, 44.6, 81, 11, 32, 41, 27, 5.9, 4.2, 71.8, 51.6, 22.8]
-                    },
-                    {
-                        name: 'Dataset 2',
-                        type: 'line',
-                        data: [26.8, 41.5, 10, 25, 37, 35, 22, 12, 7, 81, 30.8, 62]
-                    }
-                ]
+                color: javatmp.settings.isRTL === true ? ['#007bff', '#dc3545'].reverse() : ['#007bff', '#dc3545'],
+                series: lineChartSeries
             };
 
 
