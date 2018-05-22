@@ -34,26 +34,26 @@
                             <form role="form">
                                 <div class="form-group">
                                     <label>Date Input</label>
-                                    <input
-                                        class="form-control"
-                                        data-inputmask="'alias': 'date'"
-                                        data-inputmask-clearmaskonlostfocus="false" />
+                                    <input dir="ltr"
+                                           class="form-control inputmaskTextField"
+                                           data-inputmask="'alias': 'date'"
+                                           data-inputmask-clearmaskonlostfocus="false" />
                                     <p class="help-block">Date Input Mask.</p>
                                 </div>
                                 <div class="form-group">
                                     <label>Phone Input</label>
-                                    <input
-                                        class="form-control"
-                                        data-inputmask="'alias': 'phone'"
-                                        data-inputmask-clearmaskonlostfocus="false" />
+                                    <input dir="ltr"
+                                           class="form-control inputmaskTextField"
+                                           data-inputmask="'alias': 'phone'"
+                                           data-inputmask-clearmaskonlostfocus="false" />
                                     <p class="help-block">Phone Input Mask.</p>
                                 </div>
                                 <div class="form-group">
                                     <label>Custom Phone Input</label>
-                                    <input
-                                        class="form-control"
-                                        data-inputmask="'mask': '( 999 ) - 9999999'"
-                                        data-inputmask-clearmaskonlostfocus="false" />
+                                    <input dir="ltr"
+                                           class="form-control inputmaskTextField"
+                                           data-inputmask="'mask': '( 999 ) - 9999999'"
+                                           data-inputmask-clearmaskonlostfocus="false" />
                                     <p class="help-block">Custom Phone Input Mask.</p>
                                 </div>
                             </form>
@@ -70,6 +70,9 @@
         jQuery(document).ready(function () {
             (function ($) {
 //                $("#test-date-mask-id").inputmask({"alias": "date"});
+                $(".inputmaskTextField").css({
+                    "text-align": javatmp.settings.floatDefault
+                });
             }(jQuery));
         });
     </script>
