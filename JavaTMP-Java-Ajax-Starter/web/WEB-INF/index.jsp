@@ -1245,7 +1245,7 @@
                                         </a>
                                         <ul>
                                             <li>
-                                                <a target="_blank"  href="${pageContext.request.contextPath}/login">
+                                                <a target="_blank" action-name="login-page"  href="${pageContext.request.contextPath}/login?lang=${labels["global.language"]}">
                                                     <i class="far fa-lg fa-fw fa-file-alt"></i>
                                                     Default Login Page
                                                 </a>
@@ -1296,6 +1296,7 @@
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all-locale-${sessionScope.user.lang}.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp.min.js" type="text/javascript"></script>
+
         <!-- custom style for sidebar menu search text field -->
         <style type="text/css">
             .has-feedback-icon {

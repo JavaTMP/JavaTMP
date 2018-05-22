@@ -1,14 +1,20 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
+<html lang="${labels["global.language"]}" dir="${labels["global.direction"]}">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>JavaTMP - Bootstrap Components Template Default Login Page</title>
+        <title>${labels["global.page.title"]}</title>
 
         <link href="${pageContext.request.contextPath}/assets/dist/css/javatmp-plugins-all.min.css" rel="stylesheet" type="text/css"/>
         <link href='${pageContext.request.contextPath}/assets/dist/css/javatmp-plugins-print-all.min.css' rel='stylesheet' media='print' />
-        <link id="themeStyleSheet" href="${pageContext.request.contextPath}/assets/dist/css/javatmp-default.min.css" rel="stylesheet" type="text/css"/>
+        <c:if test="${labels['global.direction'] == 'ltr'}">
+            <link id="themeStyleSheet" href="${pageContext.request.contextPath}/assets/dist/css/javatmp-${sessionScope.user.theme}.min.css" rel="stylesheet" type="text/css"/>
+        </c:if>
+        <c:if test="${labels['global.direction'] == 'rtl'}">
+            <link id="themeStyleSheet" href="${pageContext.request.contextPath}/assets/dist/css/javatmp-${sessionScope.user.theme}-rtl.min.css" rel="stylesheet" type="text/css"/>
+        </c:if>
     </head>
     <body class="login">
         <div id="oneTimeOverlay" style="position: fixed;width: 100%;height: 100%;top: 0px;left: 0;right: 0;bottom: 0;background-color: rgba(255,255,255,1);z-index: 1000000;cursor: wait;">Loading ...</div>
@@ -46,6 +52,7 @@
 
         </style>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all-locale-${labels["global.language"]}.min.js" type="text/javascript"></script>
         <script type="text/javascript">
             (function ($) {
                 // https://www.sanwebe.com/2016/07/ajax-form-submit-examples-using-jquery
@@ -61,13 +68,13 @@
                     $('#' + alertError).remove();
                     var httpType = $(this).attr("method");
                     var post_url = $(this).attr("action"); //get form action url
-//                    var form_data = new FormData(loginForm); //Creates new FormData object
+                    //                    var form_data = new FormData(loginForm); //Creates new FormData object
                     var form_data = $(this).serializeArray();
                     $.ajax({
                         type: httpType,
                         url: post_url,
-//                        processData: false,
-//                        contentType: false,
+                        //                        processData: false,
+                        //                        contentType: false,
                         data: form_data,
                         success: function (data) {
                             if (data.overAllStatus) {

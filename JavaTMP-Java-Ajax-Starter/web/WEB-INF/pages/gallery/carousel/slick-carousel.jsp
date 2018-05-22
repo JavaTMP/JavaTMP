@@ -177,30 +177,33 @@
         jQuery(function ($) {
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
-            $("#slickSimple1").slick();
+            $("#slickSimple1").slick({rtl: javatmp.settings.isRTL});
 
             $("#slickSimple2").slick({
                 "slidesToShow": 3,
                 "slidesToScroll": 3,
-                dots: true
+                dots: true,
+                rtl: javatmp.settings.isRTL
             });
             $("#slickSimple3").slick({
                 "slidesToShow": 3,
                 "slidesToScroll": 3,
                 dots: true,
-                rtl: true
+                rtl: javatmp.settings.isRTL
             });
             $('#slickSimple4').slick({
                 slidesToShow: 3,
                 slidesToScroll: 1,
                 autoplay: true,
-                autoplaySpeed: 2000
+                autoplaySpeed: 2000,
+                rtl: javatmp.settings.isRTL
             });
             $('#slickSimple5').slick({
                 slidesToShow: 3,
                 slidesToScroll: 3,
                 autoplay: true,
-                autoplaySpeed: 2000
+                autoplaySpeed: 2000,
+                rtl: javatmp.settings.isRTL
             });
 
 

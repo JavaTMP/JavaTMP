@@ -18,6 +18,12 @@ $fa-font-path: "../../../components/fontawesome-free-webfonts/webfonts" !default
 .fa-backward-prev:before {
     content: fa-content($fa-var-backward);
 }
+.fa-angle-next:before {
+    content: fa-content($fa-var-angle-right);
+}
+.fa-angle-prev:before {
+    content: fa-content($fa-var-angle-left);
+}
 [dir=rtl] {
     .fa-chevron-prev:before {
         content: fa-content($fa-var-chevron-right);
@@ -30,5 +36,11 @@ $fa-font-path: "../../../components/fontawesome-free-webfonts/webfonts" !default
     }
     .fa-backward-prev:before {
         content: fa-content($fa-var-forward);
+    }
+    .fa-angle-next:before {
+        content: fa-content($fa-var-angle-left);
+    }
+    .fa-angle-prev:before {
+        content: fa-content($fa-var-angle-right);
     }
 }

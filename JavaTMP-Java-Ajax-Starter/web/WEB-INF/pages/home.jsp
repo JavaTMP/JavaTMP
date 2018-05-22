@@ -10,7 +10,7 @@
         </div>
         <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
             <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
-                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/login" >
+                    actionType="action-ref" action-ref-by-name="login-page" >
                 <i class="fas fa-coffee"></i>
                 Login Page
             </button>
