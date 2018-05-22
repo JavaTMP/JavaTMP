@@ -24,6 +24,7 @@ public class GZIPCompressingFilter implements Filter {
                 System.out.println("GZIP supported, compressing [" + request.getRequestURI() + "]");
                 GZIPResponseWrapper wrappedResponse = new GZIPResponseWrapper(response);
                 chain.doFilter(req, wrappedResponse);
+                System.out.println("Finished GZIP.doFilter now we will finish Response");
                 wrappedResponse.finishResponse();
                 return;
             }

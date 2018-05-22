@@ -208,8 +208,11 @@
             // controll return to main javascript file.
             // <--- HERE --->
             //
-
-            $("#demo-scroll-table > thead ").css({"margin-right": getScrollBarWidth});
+            if (javatmp.settings.isRTL === true) {
+                $("#demo-scroll-table > thead ").css({"margin-left": getScrollBarWidth});
+            } else {
+                $("#demo-scroll-table > thead ").css({"margin-right": getScrollBarWidth});
+            }
 //            alert(getScrollBarWidth());
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {

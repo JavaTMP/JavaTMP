@@ -21,8 +21,8 @@
                         <div class="col-12 mb-3">
                             <h4 class="mr-auto float-left">Latest Products:</h4>
                             <div class="ml-auto controls float-right hidden-xs">
-                                <a class="left fa fa-chevron-left btn btn-primary" href="#carousel-example" data-slide="prev"></a>
-                                <a class="right fa fa-chevron-right btn btn-primary" href="#carousel-example" data-slide="next"></a>
+                                <a class="left fa fa-chevron-prev btn btn-primary" href="#carousel-example" data-slide="prev"></a>
+                                <a class="right fa fa-chevron-next btn btn-primary" href="#carousel-example" data-slide="next"></a>
                             </div>
                         </div>
                     </div>
@@ -212,9 +212,9 @@
                         <div class="col-md-3">
                             <!-- Controls -->
                             <div class="controls float-right hidden-xs">
-                                <a class="left fa fa-chevron-left btn btn-primary" href="#carousel-example-generic"
+                                <a class="left fa fa-chevron-prev btn btn-primary" href="#carousel-example-generic"
                                    data-slide="prev"></a>
-                                <a class="right fa fa-chevron-right btn btn-primary" href="#carousel-example-generic"
+                                <a class="right fa fa-chevron-next btn btn-primary" href="#carousel-example-generic"
                                    data-slide="next"></a>
                             </div>
                         </div>

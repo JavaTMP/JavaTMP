@@ -30,6 +30,7 @@ public class GZIPResponseWrapper extends HttpServletResponseWrapper {
     }
 
     public void finishResponse() {
+        System.out.println("finishResponse, writer [" + writer + "], stream[" + stream + "]");
         try {
             if (writer != null) {
                 writer.close();
@@ -39,14 +40,18 @@ public class GZIPResponseWrapper extends HttpServletResponseWrapper {
                 }
             }
         } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
+    @Override
     public void flushBuffer() throws IOException {
         stream.flush();
     }
 
+    @Override
     public ServletOutputStream getOutputStream() throws IOException {
+        System.out.println("Called getOutputStream");
         if (writer != null) {
             throw new IllegalStateException("getWriter() has already been called!");
         }
@@ -57,7 +62,9 @@ public class GZIPResponseWrapper extends HttpServletResponseWrapper {
         return (stream);
     }
 
+    @Override
     public PrintWriter getWriter() throws IOException {
+        System.out.println("Called getWRiter");
         if (writer != null) {
             return (writer);
         }
@@ -71,6 +78,7 @@ public class GZIPResponseWrapper extends HttpServletResponseWrapper {
         return (writer);
     }
 
+    @Override
     public void setContentLength(int length) {
     }
 }

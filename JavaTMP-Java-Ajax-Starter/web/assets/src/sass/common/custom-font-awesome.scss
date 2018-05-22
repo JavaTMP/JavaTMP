@@ -4,3 +4,31 @@ $fa-font-path: "../../../components/fontawesome-free-webfonts/webfonts" !default
 @import "../../../../../node_modules/@fortawesome/fontawesome-free-webfonts/scss/fa-solid.scss";
 @import "../../../../../node_modules/@fortawesome/fontawesome-free-webfonts/scss/fa-regular.scss";
 @import "../../../../../node_modules/@fortawesome/fontawesome-free-webfonts/scss/fa-brands.scss";
+
+// introduce more synonyms icons for directions:
+.fa-chevron-prev:before {
+    content: fa-content($fa-var-chevron-left);
+}
+.fa-chevron-next:before {
+    content: fa-content($fa-var-chevron-right);
+}
+.fa-forward-next:before {
+    content: fa-content($fa-var-forward);
+}
+.fa-backward-prev:before {
+    content: fa-content($fa-var-backward);
+}
+[dir=rtl] {
+    .fa-chevron-prev:before {
+        content: fa-content($fa-var-chevron-right);
+    }
+    .fa-chevron-next:before {
+        content: fa-content($fa-var-chevron-left);
+    }
+    .fa-forward-next:before {
+        content: fa-content($fa-var-backward);
+    }
+    .fa-backward-prev:before {
+        content: fa-content($fa-var-forward);
+    }
+}

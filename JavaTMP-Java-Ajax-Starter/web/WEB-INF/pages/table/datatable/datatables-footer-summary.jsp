@@ -45,7 +45,7 @@
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th colspan="5" style="text-align:right">Total:</th>
+                                        <th colspan="5" class="text-right">Total:</th>
                                         <th></th>
                                     </tr>
                                 </tfoot>
