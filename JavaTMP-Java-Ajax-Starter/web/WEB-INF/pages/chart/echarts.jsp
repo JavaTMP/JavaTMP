@@ -183,30 +183,64 @@
 
             // based on prepared DOM, initialize echarts instance
             var barChart = echarts.init(document.getElementById('bar-1-canvas'));
-
+            var formatTooltipLine = function (color, value) {
+                return "<span style='display:inline-block;width:10px;height:10px;border-radius:50%;background-color:" + color + ";margin-" + javatmp.settings.floatReverse + ":5px;'></span><span>" + value + "</span>";
+            };
             var option = {
                 title: {
                     text: 'Echarts Bar Chart',
                     x: 'center',
-                    y: 0
+                    y: 0,
+                    textStyle: {
+                        fontFamily: "Open Sans",
+                        align: javatmp.settings.floatDefault
+                    }
                 },
                 tooltip: {
-                    trigger: 'axis'
+                    trigger: 'axis',
+                    textStyle: {
+                        fontFamily: "Open Sans",
+                        align: javatmp.settings.floatDefault
+                    },
+                    formatter: function (params) {
+                        return [
+                            '<span>' + params[0].axisValue + '</span>',
+                            "<br/>",
+                            formatTooltipLine(params[1].color, params[1].seriesName + ':' + params[1].data),
+                            "<br/>",
+                            formatTooltipLine(params[0].color, params[0].seriesName + ':' + params[0].data)
+                        ].join('');
+                    }
                 },
                 legend: {
-                    data: ['Dataset 1', 'Dataset 2'],
+                    align: javatmp.settings.floatDefault,
+                    data: javatmp.settings.isRTL === true ? ['Dataset 1', 'Dataset 2'].reverse() : ['Dataset 1', 'Dataset 2'],
                     x: 'center',
-                    y: '30px'
+                    y: '30px',
+                    textStyle: {
+                        fontFamily: "Open Sans",
+                        align: javatmp.settings.floatDefault
+                    }
                 },
                 calculable: true,
                 xAxis: [
                     {
-                        data: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+                        inverse: javatmp.settings.isRTL,
+                        data: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+                        textStyle: {
+                            fontFamily: "Open Sans",
+                            align: javatmp.settings.floatDefault
+                        }
                     }
                 ],
                 yAxis: [
                     {
-                        type: 'value'
+                        position: javatmp.settings.floatDefault,
+                        type: 'value',
+                        textStyle: {
+                            fontFamily: "Open Sans",
+                            align: javatmp.settings.floatDefault
+                        }
                     }
                 ],
                 color: ['#007bff', '#dc3545'],
