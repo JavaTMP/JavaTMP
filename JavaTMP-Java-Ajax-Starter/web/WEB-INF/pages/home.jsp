@@ -148,6 +148,13 @@
                 File Manager
             </button>
         </div>
+        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
+            <button type="button" class="javatmp-btn btn btn-success btn-block my-2"
+                    actionType="action-ref" action-ref-by-name="404-error-page" >
+                <i class="fas fa-coffee"></i>
+                404 Page
+            </button>
+        </div>
     </div>
     <div class="row">
         <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">

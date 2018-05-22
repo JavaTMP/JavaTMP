@@ -1265,7 +1265,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a target="_blank" href="${pageContext.request.contextPath}/pages/custom-pages/404-page">
+                                        <a target="_blank" action-name="404-error-page" href="${pageContext.request.contextPath}/pages/custom-pages/404-page?lang=${labels["global.language"]}">
                                             <i class="far fa-lg fa-fw fa-file-alt"></i>
                                             404 Page
                                         </a>
