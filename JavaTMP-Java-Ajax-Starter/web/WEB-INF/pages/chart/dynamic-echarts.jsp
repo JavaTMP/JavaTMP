@@ -99,33 +99,76 @@
         jQuery(function ($) {
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
-            moment.lang("ar");
+            moment.lang(javatmp.user.lang);
+            var months = moment.months();
+            var formatTooltipLine = function (color, value) {
+                return "<span style='display:inline-block;width:10px;height:10px;border-radius:50%;background-color:" + color + ";margin-" + javatmp.settings.floatReverse + ":5px;'></span><span>" + value + "</span>";
+            };
+
+            var formaterFunction = null;
+            if (javatmp.settings.isRTL === true) {
+                formaterFunction = function (params) {
+                    return [
+                        '<span>' + params[0].axisValue + '</span>',
+                        "<br/>",
+                        formatTooltipLine(params[0].color, params[0].seriesName + ':' + params[0].data)
+                    ].join('');
+                };
+            }
+
             var barChartOption = {
                 title: {
                     text: "Users Birthday Frequencies",
                     x: 'center',
-                    y: 0
+                    y: 0,
+                    textStyle: {
+                        fontFamily: "Open Sans",
+                        align: javatmp.settings.floatDefault
+                    }
                 },
                 tooltip: {
-                    trigger: 'axis'
+                    trigger: 'axis',
+                    textStyle: {
+                        fontFamily: "Open Sans",
+                        align: javatmp.settings.floatDefault
+                    },
+                    formatter: formaterFunction
                 },
                 legend: {
+                    align: javatmp.settings.floatDefault,
                     data: ['Birthday'],
                     x: 'center',
-                    y: '30px'
+                    y: '30px',
+                    textStyle: {
+                        fontFamily: "Open Sans",
+                        align: javatmp.settings.floatDefault
+                    }
                 },
                 calculable: true,
                 xAxis: [
                     {
-                        data: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+                        inverse: javatmp.settings.isRTL,
+                        data: months,
+//                        axisLabel: {
+//                            interval: 0
+//                        },
+                        textStyle: {
+                            fontFamily: "Open Sans",
+                            align: javatmp.settings.floatDefault
+                        }
                     }
                 ],
                 yAxis: [
                     {
-                        type: 'value'
+                        position: javatmp.settings.floatDefault,
+                        type: 'value',
+                        textStyle: {
+                            fontFamily: "Open Sans",
+                            align: javatmp.settings.floatDefault
+                        }
                     }
                 ],
-                color: ['#007bff', '#dc3545'],
+                color: ['#007bff'],
                 series: [
                     {
                         name: 'Birthday',
@@ -138,25 +181,49 @@
                 title: {
                     text: "Users Birthday Frequencies",
                     x: 'center',
-                    y: 0
+                    y: 0,
+                    textStyle: {
+                        fontFamily: "Open Sans",
+                        align: javatmp.settings.floatDefault
+                    }
                 },
                 tooltip: {
-                    trigger: 'axis'
+                    trigger: 'axis',
+                    textStyle: {
+                        fontFamily: "Open Sans",
+                        align: javatmp.settings.floatDefault
+                    },
+                    formatter: formaterFunction
                 },
                 legend: {
+                    align: javatmp.settings.floatDefault,
                     data: ['Birthday'],
                     x: 'center',
-                    y: '30px'
+                    y: '30px',
+                    textStyle: {
+                        fontFamily: "Open Sans",
+                        align: javatmp.settings.floatDefault
+                    }
                 },
                 calculable: true,
                 xAxis: [
                     {
-                        data: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+                        inverse: javatmp.settings.isRTL,
+                        data: months,
+                        textStyle: {
+                            fontFamily: "Open Sans",
+                            align: javatmp.settings.floatDefault
+                        }
                     }
                 ],
                 yAxis: [
                     {
-                        type: 'value'
+                        position: javatmp.settings.floatDefault,
+                        type: 'value',
+                        textStyle: {
+                            fontFamily: "Open Sans",
+                            align: javatmp.settings.floatDefault
+                        }
                     }
                 ],
                 color: ['#007bff'],
@@ -171,12 +238,21 @@
             var doughnutChartOption = {
                 tooltip: {
                     trigger: 'item',
-                    formatter: "{a} <br/>{b}: {c} ({d}%)"
+                    formatter: "{a} <br/>{b}: {c} ({d}%)",
+                    textStyle: {
+                        fontFamily: "Open Sans",
+                        align: javatmp.settings.floatDefault
+                    }
                 },
                 legend: {
+                    align: javatmp.settings.floatDefault,
                     orient: 'vertical',
-                    x: 'left',
-                    data: []
+                    x: javatmp.settings.floatDefault,
+                    data: [],
+                    textStyle: {
+                        fontFamily: "Open Sans",
+                        align: javatmp.settings.floatDefault
+                    }
                 },
                 hover: true,
                 color: ['#007bff',
@@ -186,6 +262,7 @@
                     '#6c757d', '#e38533', '#7d5642'],
                 series: [
                     {
+                        clockwise: !javatmp.settings.isRTL,
                         name: 'Dataset 1',
                         type: 'pie',
                         center: ['50%', '60%'],
@@ -202,6 +279,10 @@
                                     fontSize: '30',
                                     fontWeight: 'normal'
                                 }
+                            },
+                            textStyle: {
+                                fontFamily: "Open Sans",
+                                align: javatmp.settings.floatDefault
                             }
                         },
                         labelLine: {
@@ -223,19 +304,30 @@
                 title: {
                     text: 'Users Offices Locations',
                     x: 'center',
-                    y: 0
+                    y: 0,
+                    textStyle: {
+                        fontFamily: "Open Sans",
+                        align: javatmp.settings.floatDefault
+                    }
                 },
                 tooltip: {
                     trigger: 'item',
-                    formatter: "{a} - {b} : {c} ({d}%)"
-
-
+                    formatter: "{a} - {b} : {c} ({d}%)",
+                    textStyle: {
+                        fontFamily: "Open Sans",
+                        align: javatmp.settings.floatDefault
+                    }
                 },
                 legend: {
+                    align: javatmp.settings.floatDefault,
                     orient: 'horizontal',
                     x: 'center',
                     y: 30,
-                    data: []
+                    data: [],
+                    textStyle: {
+                        fontFamily: "Open Sans",
+                        align: javatmp.settings.floatDefault
+                    }
                 },
                 hover: true,
                 color: ['#007bff',
@@ -245,10 +337,15 @@
                     '#6c757d', '#e38533', '#7d5642'],
                 series: [
                     {
+                        clockwise: !javatmp.settings.isRTL,
                         type: 'pie',
                         center: ['50%', '60%'],
                         radius: '60%',
-                        data: []
+                        data: [],
+                        textStyle: {
+                            fontFamily: "Open Sans",
+                            align: javatmp.settings.floatDefault
+                        }
                     }
                 ]
             };
@@ -264,7 +361,7 @@
                 var cardBody = $(this).closest(".card").children(".card-body");
                 var href = javatmp.settings.contextPath + "/user/ListAllUsersController";
 
-                $(cardBody).block({message: null,
+                $(cardBody).block({message: "Loading ...",
                     overlayCSS: {
                         backgroundColor: '#000',
                         opacity: 0.3
@@ -334,7 +431,7 @@
                 var cardBody = $(this).closest(".card").children(".card-body");
                 var href = javatmp.settings.contextPath + "/user/ListAllUsersController";
 
-                $(cardBody).block({message: null,
+                $(cardBody).block({message: "Loading ...",
                     overlayCSS: {
                         backgroundColor: '#000',
                         opacity: 0.3
@@ -394,7 +491,7 @@
                 var cardBody = $(this).closest(".card").children(".card-body");
                 var href = javatmp.settings.contextPath + "/user/ListAllUsersController";
 
-                $(cardBody).block({message: null,
+                $(cardBody).block({message: "Loading ...",
                     overlayCSS: {
                         backgroundColor: '#000',
                         opacity: 0.3
@@ -474,7 +571,7 @@
                 var cardBody = $(this).closest(".card").children(".card-body");
                 var href = javatmp.settings.contextPath + "/user/ListAllUsersController";
 
-                $(cardBody).block({message: null,
+                $(cardBody).block({message: "Loading ...",
                     overlayCSS: {
                         backgroundColor: '#000',
                         opacity: 0.3
@@ -522,6 +619,7 @@
                                 value: value, name: key
                             });
                         });
+
                         pieChartOption = $.extend(true, pieChartOption, {
                             legend: {
                                 data: officesArray
