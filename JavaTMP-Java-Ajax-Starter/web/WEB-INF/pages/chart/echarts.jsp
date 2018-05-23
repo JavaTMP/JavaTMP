@@ -359,12 +359,21 @@
             var option = {
                 tooltip: {
                     trigger: 'item',
-                    formatter: "{a} <br/>{b}: {c} ({d}%)"
+                    formatter: "{a} <br/>{b}: {c} ({d}%)",
+                    textStyle: {
+                        fontFamily: "Open Sans",
+                        align: javatmp.settings.floatDefault
+                    }
                 },
                 legend: {
+                    align: javatmp.settings.floatDefault,
                     orient: 'vertical',
-                    x: 'left',
-                    data: ['value 1', 'value 2', 'value 3', 'value 4', 'value 5']
+                    x: javatmp.settings.floatDefault,
+                    data: ['value 1', 'value 2', 'value 3', 'value 4', 'value 5'],
+                    textStyle: {
+                        fontFamily: "Open Sans",
+                        align: javatmp.settings.floatDefault
+                    }
                 },
                 hover: true,
                 color: ['#007bff',
@@ -374,6 +383,7 @@
                     '#6c757d'],
                 series: [
                     {
+                        clockwise: !javatmp.settings.isRTL,
                         name: 'Dataset 1',
                         type: 'pie',
                         radius: ['50%', '70%'],
@@ -389,6 +399,10 @@
                                     fontSize: '30',
                                     fontWeight: 'bold'
                                 }
+                            },
+                            textStyle: {
+                                fontFamily: "Open Sans",
+                                align: javatmp.settings.floatDefault
                             }
                         },
                         labelLine: {
@@ -418,13 +432,19 @@
                 title: {
                     text: 'Echarts Pie Chart',
                     x: 'center',
-                    y: 0
+                    y: 0,
+                    textStyle: {
+                        fontFamily: "Open Sans",
+                        align: javatmp.settings.floatDefault
+                    }
                 },
                 tooltip: {
                     trigger: 'item',
-                    formatter: "{a} - {b} : {c} ({d}%)"
-
-
+                    formatter: "{a} - {b} : {c} ({d}%)",
+                    textStyle: {
+                        fontFamily: "Open Sans",
+                        align: javatmp.settings.floatDefault
+                    }
                 },
                 hover: true,
                 color: ['#007bff',
@@ -434,6 +454,7 @@
                     '#6c757d'],
                 series: [
                     {
+                        clockwise: !javatmp.settings.isRTL,
                         type: 'pie',
                         radius: '60%',
                         data: [
@@ -442,7 +463,11 @@
                             {value: 17, name: 'value 3'},
                             {value: 23, name: 'value 4'},
                             {value: 10, name: 'value 5'}
-                        ]
+                        ],
+                        textStyle: {
+                            fontFamily: "Open Sans",
+                            align: javatmp.settings.floatDefault
+                        }
                     }
                 ]
             };
@@ -453,30 +478,60 @@
 
             var radarChart = echarts.init(document.getElementById('radar-1-canvas'));
 
+            var radarLegendData = ['Allocated Budget', 'Actual Spending'];
+            if (javatmp.settings.isRTL === true) {
+                radarLegendData = radarLegendData.reverse();
+            }
+
+            var radarIndicator = [
+                {name: 'sales', max: 6500},
+                {name: 'Administration', max: 16000},
+                {name: 'Information Techology', max: 30000},
+                {name: 'Customer Support', max: 38000},
+                {name: 'Development', max: 52000},
+                {name: 'Marketing', max: 25000}
+            ];
+            if (javatmp.settings.isRTL === true) {
+                radarIndicator = radarIndicator.reverse();
+            }
+
+            var seriesBudgetData = [4300, 10000, 28000, 35000, 50000, 19000];
+            var seriesSpendingData = [5000, 14000, 28000, 31000, 42000, 21000];
+            if (javatmp.settings.isRTL) {
+                seriesBudgetData = seriesBudgetData.reverse();
+                seriesSpendingData = seriesSpendingData.reverse();
+            }
             var option = {
                 title: {
                     text: 'Radar Chart',
                     x: 'center',
-                    y: 0
+                    y: 0,
+                    textStyle: {
+                        fontFamily: "Open Sans",
+                        align: javatmp.settings.floatDefault
+                    }
                 },
                 tooltip: {},
                 legend: {
-                    data: ['Allocated Budget', 'Actual Spending'],
+                    align: javatmp.settings.floatDefault,
+                    data: radarLegendData,
                     x: 'center',
-                    y: '30px'
+                    y: '30px',
+                    textStyle: {
+                        fontFamily: "Open Sans",
+                        align: javatmp.settings.floatDefault
+                    }
                 },
                 radar: {
+                    startAngle: javatmp.settings.isRTL ? 150 : 90,
                     shape: 'circle',
                     center: ['50%', '60%'],
                     radius: 80,
-                    indicator: [
-                        {name: 'sales', max: 6500},
-                        {name: 'Administration', max: 16000},
-                        {name: 'Information Techology', max: 30000},
-                        {name: 'Customer Support', max: 38000},
-                        {name: 'Development', max: 52000},
-                        {name: 'Marketing', max: 25000}
-                    ]
+                    indicator: radarIndicator,
+                    textStyle: {
+                        fontFamily: "Open Sans",
+                        align: javatmp.settings.floatDefault
+                    }
                 },
                 color: ['#007bff', '#dc3545'],
                 series: [{
@@ -485,14 +540,26 @@
                         // areaStyle: {normal: {}},
                         data: [
                             {
-                                value: [4300, 10000, 28000, 35000, 50000, 19000],
-                                name: 'Allocated Budget'
+                                value: seriesBudgetData,
+                                name: 'Allocated Budget',
+                                textStyle: {
+                                    fontFamily: "Open Sans",
+                                    align: javatmp.settings.floatDefault
+                                }
                             },
                             {
-                                value: [5000, 14000, 28000, 31000, 42000, 21000],
-                                name: 'Actual Spending'
+                                value: seriesSpendingData,
+                                name: 'Actual Spending',
+                                textStyle: {
+                                    fontFamily: "Open Sans",
+                                    align: javatmp.settings.floatDefault
+                                }
                             }
-                        ]
+                        ],
+                        textStyle: {
+                            fontFamily: "Open Sans",
+                            align: javatmp.settings.floatDefault
+                        }
                     }]
             };
 
