@@ -592,7 +592,11 @@
 
             var option = {
                 title: {
-                    text: 'Time Line Chart'
+                    text: 'Time Line Chart',
+                    textStyle: {
+                        fontFamily: "Open Sans",
+                        align: javatmp.settings.floatDefault
+                    }
                 },
                 tooltip: {
                     trigger: 'axis',
@@ -603,15 +607,21 @@
                     },
                     axisPointer: {
                         animation: false
+                    },
+                    textStyle: {
+                        fontFamily: "Open Sans",
+                        align: javatmp.settings.floatDefault
                     }
                 },
                 xAxis: {
+                    inverse: javatmp.settings.isRTL,
                     type: 'time',
                     splitLine: {
                         show: false
                     }
                 },
                 yAxis: {
+                    position: javatmp.settings.floatDefault,
                     type: 'value',
                     boundaryGap: [0, '100%'],
                     splitLine: {
@@ -624,7 +634,11 @@
                         type: 'line',
                         showSymbol: false,
                         hoverAnimation: false,
-                        data: data
+                        data: data,
+                        textStyle: {
+                            fontFamily: "Open Sans",
+                            align: javatmp.settings.floatDefault
+                        }
                     }]
             };
             // use configuration item and data specified to show chart
