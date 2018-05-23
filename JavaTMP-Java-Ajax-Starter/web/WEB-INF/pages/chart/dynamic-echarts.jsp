@@ -588,16 +588,16 @@
                 // when card compress by pressing the top right tool button
                 var cardId = card.attr("id");
                 if (cardId === "BarChart") {
-                    $('#bar-1-canvas').css({"minHeight": 500});
+                    $('#bar-1-canvas').css({"minHeight": 600});
                     barChart.resize();
                 } else if (cardId === "LineChart") {
-                    $('#line-1-canvas').css({"minHeight": 500});
+                    $('#line-1-canvas').css({"minHeight": 600});
                     lineChart.resize();
                 } else if (cardId === "DoughnutChart") {
-                    $('#doughnut-1-canvas').css({"minHeight": 500});
+                    $('#doughnut-1-canvas').css({"minHeight": 600});
                     doughnutChart.resize();
                 } else if (cardId === "PieChart") {
-                    $('#pie-1-canvas').css({"minHeight": 500});
+                    $('#pie-1-canvas').css({"minHeight": 600});
                     pieChart.resize();
                 }
             });
