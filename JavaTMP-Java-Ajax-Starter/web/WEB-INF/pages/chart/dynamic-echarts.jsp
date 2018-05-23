@@ -99,7 +99,7 @@
         jQuery(function ($) {
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
-
+            moment.lang("ar");
             var barChartOption = {
                 title: {
                     text: "Users Birthday Frequencies",
