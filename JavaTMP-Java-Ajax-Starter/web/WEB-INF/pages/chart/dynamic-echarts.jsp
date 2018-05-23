@@ -709,6 +709,8 @@
                 $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenCompress);
                 $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenExpand);
                 $(javatmp.settings.defaultOutputSelector).off();
+                // reset default moment locale
+                moment.lang("en");
                 return true;
             });
         });

@@ -1417,7 +1417,6 @@
                 javatmp.user = {};
                 javatmp.user.id = ${sessionScope.user.id};
                 javatmp.user.lang = "${sessionScope.user.lang}";
-                moment.lang(javatmp.user.lang);
 
                 javatmp.settings.handle401Error = function (jqXHR, textStatus, errorThrown) {
                     var modalMessage = null;

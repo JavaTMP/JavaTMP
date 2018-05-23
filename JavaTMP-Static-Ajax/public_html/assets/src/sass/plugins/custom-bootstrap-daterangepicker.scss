@@ -402,7 +402,6 @@ $daterangepicker-arrow-suffix-size: ($daterangepicker-arrow-size - $daterangepic
         margin: 5px auto;
         line-height: $daterangepicker-control-line-height;
         position: relative;
-        padding-left: 28px;
 
         select {
             &.disabled {
@@ -420,10 +419,6 @@ $daterangepicker-arrow-suffix-size: ($daterangepicker-arrow-size - $daterangepic
         .daterangepicker_input i {
             left: auto;
             right: 8px;
-        }
-        .calendar-time {
-            padding-right: 28px;
-            padding-left: 0;
         }
         td {
             &.start-date {
@@ -478,7 +473,29 @@ $daterangepicker-arrow-suffix-size: ($daterangepicker-arrow-size - $daterangepic
             }
         }
     }
+    .calendar-table .next span, .calendar-table .prev span {
+        color: $daterangepicker-cell-color;
+        border-color: $daterangepicker-cell-color;
+    }
+    &.rtl {
+        .calendar-table .next span {
+            transform: rotate(135deg);
+            -webkit-transform: rotate(135deg);
+        }
 
+        .calendar-table .prev span {
+            transform: rotate(-45deg);
+            -webkit-transform: rotate(-45deg);
+        }
+    }
+    .drp-buttons {
+        text-align: left;
+
+    }
+    .drp-selected {
+        padding-right: 0;
+        padding-left: 8px;
+    }
 }
 
 
