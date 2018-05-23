@@ -97,9 +97,8 @@ public class UploadController extends HttpServlet {
 
         } catch (IllegalStateException e) {
             System.out.println("ERROR : " + e.getMessage());
-            e.printStackTrace();
             responseMessage.setOverAllStatus(false);
-            responseMessage.setMessage(e.getMessage());
+            responseMessage.setMessage("The file to be uploaded exceeds its maximum permitted size of 51200 bytes");
             response.setStatus(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE);
             responseMessage.setStatusCode(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE);
         }

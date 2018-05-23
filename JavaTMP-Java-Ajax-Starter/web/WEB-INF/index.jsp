@@ -1112,7 +1112,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/FileManagerPageController">
+                                        <a href="${pageContext.request.contextPath}/pages/gallery/file-uploader-manager">
                                             <i class="far fa-lg fa-fw fa-image"></i>
                                             File Uploader Manager
                                         </a>

@@ -130,6 +130,7 @@
                                         data: formData,
                                         processData: false,
                                         contentType: false,
+                                        dataType: "json",
                                         success: function (response, statusText, xhr) {
                                             toastr.success(response.message, 'SUCCESS', {
                                                 timeOut: 3000,
@@ -145,6 +146,7 @@
                                                     '<p>Creation Date : {{creationDate}}</p>' +
                                                     '<p>Link To View Inline : <a class="" target="" href="{{contextPath}}/ViewUploadedFileController?documentId={{link}}&amp;randomHash={{randomHash}}&amp;viewType=inline">View Inline</a></p>' +
                                                     '<p>Link To View As attachement : <a class="" target="" href="{{contextPath}}/ViewUploadedFileController?documentId={{link}}&amp;randomHash={{randomHash}}&amp;viewType=attachment">View As Attachment</a></p>' +
+                                                    '<p><a actionType="action-ref-href" href="{{contextPath}}/pages/gallery/file-uploader-manager">Go To File Manager To See Uploaded Files</a></p>' +
                                                     '</div>';
                                             for (var i = 0; i < response.data.length; i++) {
                                                 var tempRow = row.composeTemplate({
@@ -164,9 +166,10 @@
                                             }).show();
                                         },
                                         error: function (xhr, status, error) {
+                                            var errorObj = $.parseJSON(xhr.responseText);
                                             BootstrapModalWrapperFactory.createModal({
-                                                title: "ERROR",
-                                                message: "error[" + xhr + "][" + status + "][" + error + "]"
+                                                title: xhr.statusText + " : " + xhr.status,
+                                                message: errorObj.message
                                             }).show();
                                         }
                                     });
@@ -180,7 +183,7 @@
                             if (typeof $("#downloadBtn-id")[0].download === 'undefined') {
                                 $("#downloadBtn-id").addClass('disabled');
                             }
-                        }, 100);
+                        }, 400);
 
                     }
                 });

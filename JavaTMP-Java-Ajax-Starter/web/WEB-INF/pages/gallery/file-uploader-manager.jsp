@@ -1,7 +1,4 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <div class="dynamic-ajax-content">
     <div class="page-header">
         <h1>File Uploader Manager</h1>
@@ -61,6 +58,7 @@
                                         <tr>
                                             <th width="100px">#</th>
                                             <th width="100%">Document Name</th>
+                                            <th width="150px">Document Size</th>
                                             <th width="200px">Content Type</th>
                                             <th width="225px">Creation Date</th>
                                             <th width="150px">View Inline</th>
@@ -68,25 +66,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:choose>
-                                            <c:when test = "${fn:length(requestScope.documents) > 0}">
-                                                <c:forEach items="${requestScope.documents}" var="document">
-                                                    <tr>
-                                                        <td>${document.documentId}</th>
-                                                        <td>${document.documentName}</th>
-                                                        <td>${document.contentType}</th>
-                                                        <td dir="ltr"><fmt:formatDate pattern='dd/MM/yyyy HH:mm' value='${document.creationDate}'/></th>
-                                                        <td><a class="" target="" href="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${document.documentId}&amp;randomHash=${document.randomHash}&amp;viewType=inline">View Inline</a></td>
-                                                        <td><a class="" target="" href="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${document.documentId}&amp;randomHash=${document.randomHash}&amp;viewType=attachment">View As Attachment</a></td>
-                                                    </tr>
-                                                </c:forEach>
-                                            </c:when>
-                                            <c:otherwise>
-                                                <tr id="emptyUploadedFilesSizeRowId">
-                                                    <td colspan="6" align="center">Empty Uploaded Files Size</th>
-                                                </tr>
-                                            </c:otherwise>
-                                        </c:choose>
+                                        <tr id="emptyUploadedFilesSizeRowId">
+                                            <td colspan="7" align="center">Empty Uploaded Files Size</th>
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -146,6 +128,7 @@
                         var row = '<tr>' +
                                 '<td>{{id}}</td>' +
                                 '<td>{{documentName}}</td>' +
+                                '<td>{{documentSize}}</td>' +
                                 '<td>{{contentType}}</td>' +
                                 '<td>{{creationDate}}</td>' +
                                 '<td><a class="" target="" href="{{contextPath}}/ViewUploadedFileController?documentId={{link}}&amp;randomHash={{randomHash}}&amp;viewType=inline">View Inline</a></td>' +
@@ -161,8 +144,9 @@
                             table.append(row.composeTemplate({
                                 'id': response.data[i].documentId,
                                 'documentName': response.data[i].documentName,
+                                'documentSize': numeral(response.data[i].documentSize).format('0 b'),
                                 'contentType': response.data[i].contentType,
-                                'creationDate': moment(response.data[i].creationDate, "YYYY-MM-DDTHH:mm:ss").format("DD/MM/YYYY HH:mm"),
+                                'creationDate': moment(response.data[i].creationDate, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("DD/MM/YYYY HH:mm:ss"),
                                 'link': response.data[i].documentId,
                                 'randomHash': response.data[i].randomHash,
                                 'contextPath': javatmp.settings.contextPath
@@ -184,6 +168,46 @@
                     }
                 }).submit();
             }
+
+            $.ajax({
+                "type": "GET",
+                cache: false,
+                url: javatmp.settings.contextPath + "/dms/FileManagerPageController",
+                dataType: "json",
+                contentType: "application/json; charset=UTF-8",
+//                data: JSON.stringify(passData),
+                success: function (response, textStatus, jqXHR) {
+                    var tbody = $('#formPluginAjaxUpload').children('tbody');
+                    var table = tbody.length ? tbody : $('#formPluginAjaxUpload');
+                    var row = '<tr>' +
+                            '<td>{{id}}</td>' +
+                            '<td>{{documentName}}</td>' +
+                            '<td>{{documentSize}}</td>' +
+                            '<td>{{contentType}}</td>' +
+                            '<td>{{creationDate}}</td>' +
+                            '<td><a class="" target="" href="{{contextPath}}/ViewUploadedFileController?documentId={{link}}&amp;randomHash={{randomHash}}&amp;viewType=inline">View Inline</a></td>' +
+                            '<td><a class="" target="" href="{{contextPath}}/ViewUploadedFileController?documentId={{link}}&amp;randomHash={{randomHash}}&amp;viewType=attachment">View As Attachment</a></td>' +
+                            '</tr>';
+
+                    // remove emptyUploadedFilesSizeRowId if response data length more than one:
+                    if (response.data.length) {
+                        $("#emptyUploadedFilesSizeRowId").remove();
+                    }
+                    //Add row
+                    for (var i = 0; i < response.data.length; i++) {
+                        table.append(row.composeTemplate({
+                            'id': response.data[i].documentId,
+                            'documentName': response.data[i].documentName,
+                            'documentSize': numeral(response.data[i].documentSize).format('0 b'),
+                            'contentType': response.data[i].contentType,
+                            'creationDate': moment(response.data[i].creationDate, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("DD/MM/YYYY HH:mm:ss"),
+                            'link': response.data[i].documentId,
+                            'randomHash': response.data[i].randomHash,
+                            'contextPath': javatmp.settings.contextPath
+                        }));
+                    }
+                }
+            });
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
