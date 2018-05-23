@@ -24,6 +24,7 @@ public class User {
     private String office;
     private Date joiningDate;
     private BigDecimal salary;
+    private Long profilePicDocumentId;
 
     public User() {
 
@@ -307,6 +308,20 @@ public class User {
      */
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    /**
+     * @return the profilePicDocumentId
+     */
+    public Long getProfilePicDocumentId() {
+        return profilePicDocumentId;
+    }
+
+    /**
+     * @param profilePicDocumentId the profilePicDocumentId to set
+     */
+    public void setProfilePicDocumentId(Long profilePicDocumentId) {
+        this.profilePicDocumentId = profilePicDocumentId;
     }
 
 }

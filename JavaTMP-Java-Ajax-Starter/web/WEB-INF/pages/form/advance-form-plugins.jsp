@@ -41,7 +41,7 @@
                                             <div class="col-lg-3">
                                                 <div class="form-group">
                                                     <label class="control-label">Birth Of Date</label>
-                                                    <input class="form-control" type="text" name="birthOfDate">
+                                                    <input class="form-control" type="text" name="birthOfDateStr">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3">
@@ -367,12 +367,24 @@
                     }
                 },
                 beforeSubmit: function (formData, jqForm, options) {
+                    for (var i = 0; i < formData.length; i++) {
+                        if (formData[i].name === "birthOfDateStr") {
+                            var value = formData[i].value;
+                            var newDate = moment(value, "DD/MM/YYYY").format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+                            formData.push({"name": "birthOfDate", "value": newDate});
+                            break;
+                        }
+                    }
 
                 },
-                success: function (formData, jqForm, options) {
-                    form.find("textarea[name='address']").summernote('code', '');
-                    form.resetForm();
-                    form.find(".form-group.has-success").removeClass(".has-success");
+                success: function (response, statusText, xhr, $form) {
+//                    form.find("textarea[name='address']").summernote('code', '');
+//                    form.resetForm();
+//                    form.find(".form-group.has-success").removeClass(".has-success");
+                    BootstrapModalWrapperFactory.createModal({
+                        title: "Response",
+                        message: response.message
+                    }).show();
                 }
             });
             // pre-submit callback
@@ -449,7 +461,7 @@
                 }
             }));
 
-            form.find("input[name='birthOfDate']").inputmask({
+            form.find("input[name='birthOfDateStr']").inputmask({
                 alias: "date",
                 placeholder: "dd/mm/yyyy",
                 inputFormat: "dd/mm/yyyy",
@@ -457,7 +469,7 @@
                 hourFormat: "24",
                 clearMaskOnLostFocus: false
             });
-            form.find("input[name='birthOfDate']").daterangepicker({
+            form.find("input[name='birthOfDateStr']").daterangepicker({
                 "opens": javatmp.settings.floatReverse,
                 //                    startDate: false,
                 singleDatePicker: true,
@@ -477,7 +489,7 @@
                 }
             }, function (start, end, label) {
                 var formatedDateSelected = moment(start).format("DD/MM/YYYY");
-                form.find("input[name='birthOfDate']").val(formatedDateSelected);
+                form.find("input[name='birthOfDateStr']").val(formatedDateSelected);
             });
             $(".daterangepicker.dropdown-menu").css('z-index', 600 + 1);
 

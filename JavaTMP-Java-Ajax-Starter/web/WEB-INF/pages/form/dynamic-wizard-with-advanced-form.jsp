@@ -524,7 +524,7 @@
                     beforeSubmit: function (formData, jqForm, options) {
 
                     },
-                    success: function (formData, jqForm, options) {
+                    success: function (response, statusText, xhr, $form) {
                         form.find("textarea[name='address']").summernote('code', '');
                         form.resetForm();
                         form.find(".form-group.has-success").removeClass(".has-success");

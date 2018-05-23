@@ -60,6 +60,7 @@ public class DBFaker {
     }
 
     public synchronized void addUser(User user) {
+        user.setId(DBFaker.getNextCounter());
         getUsers().add(user);
     }
 

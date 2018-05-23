@@ -6,11 +6,13 @@ import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.domain.ResponseMessage;
 import com.javatmp.service.DocumentService;
 import com.javatmp.service.ServicesFactory;
+import com.javatmp.service.UserService;
 import com.javatmp.util.Constants;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
+import java.math.BigDecimal;
 import java.nio.file.Paths;
 import java.util.Date;
 import java.util.LinkedList;
@@ -34,9 +36,9 @@ public class CreateUserController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         ResponseMessage responseMessage = new ResponseMessage();
-        List<Document> documentsUploaded = new LinkedList<>();
         ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         DocumentService ds = sf.getDocumentService();
+        UserService us = sf.getUserService();
 
         String text = "";
         try {
@@ -79,18 +81,20 @@ public class CreateUserController extends HttpServlet {
             System.out.println(t);
             text += t;
 
-            Document uploaded = new Document();
-            uploaded.setDocumentId(fileUploading.getDocumentId());
-            uploaded.setDocumentName(fileUploading.getDocumentName());
-            uploaded.setRandomHash(fileUploading.getRandomHash());
-            uploaded.setContentType(fileUploading.getContentType());
-            uploaded.setDocumentSize(fileUploading.getDocumentSize());
-            uploaded.setCreationDate(fileUploading.getCreationDate());
-            documentsUploaded.add(uploaded);
+            userToBeCreated.setProfilePicDocumentId(fileUploading.getDocumentId());
+            userToBeCreated.setCreationDate(new Date());
+            userToBeCreated.setJoiningDate(new Date());
+            userToBeCreated.setSalary(BigDecimal.ZERO);
+            userToBeCreated.setFirstName("");
+            userToBeCreated.setLastName("");
+            userToBeCreated.setPosition("");
+            userToBeCreated.setOffice("");
+            userToBeCreated.setMobile("");
+            us.createNewUser(userToBeCreated);
 
             responseMessage.setOverAllStatus(true);
             responseMessage.setMessage("User Created successfully");
-            responseMessage.setData(documentsUploaded);
+            responseMessage.setData(userToBeCreated);
 
         } catch (IllegalStateException e) {
             System.out.println("ERROR : " + e.getMessage());
