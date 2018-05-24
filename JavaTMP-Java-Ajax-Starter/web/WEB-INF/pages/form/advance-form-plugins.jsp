@@ -41,7 +41,7 @@
                                             <div class="col-lg-3">
                                                 <div class="form-group">
                                                     <label class="control-label">Birth Of Date</label>
-                                                    <input class="form-control" type="text" name="birthOfDateStr">
+                                                    <input dir="ltr" class="form-control"  type="text" name="birthOfDateStr">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3">
@@ -461,6 +461,10 @@
                 }
             }));
 
+            form.find("input[name='birthOfDateStr']").css({
+                "text-align": javatmp.settings.floatDefault
+            });
+
             form.find("input[name='birthOfDateStr']").inputmask({
                 alias: "date",
                 placeholder: "dd/mm/yyyy",
@@ -488,7 +492,13 @@
                     format: 'DD/MM/YYYY'
                 }
             }, function (start, end, label) {
-                var formatedDateSelected = moment(start).format("DD/MM/YYYY");
+                var currentLocale = moment.locale();
+                alert("current locale [" + currentLocale + "]");
+                moment.locale('en-gb');
+                alert("current locale [" + moment.locale() + "]");
+                var formatedDateSelected = moment(start, "en-gb", true).format("DD/MM/YYYY");
+                moment.locale(currentLocale);
+                alert("start[" + start + "]" + formatedDateSelected);
                 form.find("input[name='birthOfDateStr']").val(formatedDateSelected);
             });
             $(".daterangepicker.dropdown-menu").css('z-index', 600 + 1);
