@@ -80,6 +80,8 @@
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
             $('#email-body').summernote({
+                direction: javatmp.settings.direction,
+                lang: javatmp.user.lang === "ar" ? "ar-AR" : javatmp.user.lang,
                 height: 200
             });
 

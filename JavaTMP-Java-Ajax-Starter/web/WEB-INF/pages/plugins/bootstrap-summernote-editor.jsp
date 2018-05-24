@@ -166,6 +166,7 @@
 
             $('#summernote').summernote({
                 direction: javatmp.settings.direction,
+                lang: javatmp.user.lang === "ar" ? "ar-AR" : javatmp.user.lang,
                 height: 350,
                 tabsize: 2,
                 dialogsInBody: true,
@@ -183,6 +184,7 @@
 
             $('#summernote-airMode').summernote({
                 direction: javatmp.settings.direction,
+                lang: javatmp.user.lang === "ar" ? "ar-AR" : javatmp.user.lang,
                 airMode: true
             });
 
@@ -208,6 +210,7 @@
 
             $("#hint2basic").summernote({
                 direction: javatmp.settings.direction,
+                lang: javatmp.user.lang === "ar" ? "ar-AR" : javatmp.user.lang,
                 height: 200,
                 toolbar: false,
                 placeholder: 'type with apple, orange, watermelon and lemon',
@@ -237,6 +240,7 @@
 
             $("#hint2emoji").summernote({
                 direction: javatmp.settings.direction,
+                lang: javatmp.user.lang === "ar" ? "ar-AR" : javatmp.user.lang,
                 height: 100,
                 toolbar: false,
                 placeholder: 'type starting with : and any alphabet',
@@ -268,6 +272,7 @@
 
             $("#hint2mention").summernote({
                 direction: javatmp.settings.direction,
+                lang: javatmp.user.lang === "ar" ? "ar-AR" : javatmp.user.lang,
                 height: 100,
                 toolbar: false,
                 hint: {

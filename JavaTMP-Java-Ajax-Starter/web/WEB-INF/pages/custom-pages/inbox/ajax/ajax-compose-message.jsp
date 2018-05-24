@@ -67,6 +67,8 @@
                 // fire AFTER all transition done and your ajax content is shown to user.
                 summerNote = $("#" + currentParentModal.options.id).find('.ajax-email-body');
                 summerNote.summernote({
+                    direction: javatmp.settings.direction,
+                    lang: javatmp.user.lang === "ar" ? "ar-AR" : javatmp.user.lang,
                     height: 100,
                     dialogsInBody: true
                 });

@@ -60,6 +60,7 @@
             // controll return to main javascript file.
             $('#summernote').summernote({
                 direction: javatmp.settings.direction,
+                lang: javatmp.user.lang === "ar" ? "ar-AR" : javatmp.user.lang,
                 height: 350,
                 tabsize: 2,
                 dialogsInBody: true,

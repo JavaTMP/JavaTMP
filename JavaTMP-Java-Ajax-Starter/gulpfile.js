@@ -76,7 +76,8 @@ var config = {
         ],
         "moment": [
             {"from": "${sourceNodeLib}/moment/min/moment.min.js", "to": "${destComponentsLib}/moment/min"},
-            {"from": "${sourceNodeLib}/moment/min/locales.min.js", "to": "${destComponentsLib}/moment/min"}
+//            {"from": "${sourceNodeLib}/moment/min/locales.min.js", "to": "${destComponentsLib}/moment/min"}
+            {"from": "${sourceNodeLib}/moment/locale/ar.js", "to": "${destComponentsLib}/moment/locale", processJS: true}
         ],
         "bootstrap-daterangepicker": [
             {"from": "${sourceNodeLib}/bootstrap-daterangepicker/daterangepicker.css", "to": "${destComponentsLib}/bootstrap-daterangepicker", processCSS: true},
@@ -103,6 +104,7 @@ var config = {
 //            {"from": "${sourceNodeLib}/summernote/dist/**/*", "to": "${destComponentsLib}/summernote/dist"},
             {"from": "${sourceNodeLib}/summernote/dist/font/**/*", "to": "${destComponentsLib}/summernote/dist/font"},
 //            {"from": "${sourceNodeLib}/summernote/dist/lang/**/*", "to": "${destComponentsLib}/summernote/dist/lang"},
+            {"from": "${sourceNodeLib}/summernote/dist/lang/summernote-ar-AR.min.js", "to": "${destComponentsLib}/summernote/dist/lang"},
             {"from": "${sourceNodeLib}/summernote/dist/summernote-bs4.min.js", "to": "${destComponentsLib}/summernote/dist"},
             {"from": "${sourceNodeLib}/summernote/dist/summernote-bs4.css", "to": "${destComponentsLib}/summernote/dist"}
         ],
@@ -118,7 +120,8 @@ var config = {
         "fullcalendar": [
             {"from": "${sourceNodeLib}/fullcalendar/dist/fullcalendar.min.css", "to": "${destComponentsLib}/fullcalendar/dist"},
             {"from": "${sourceNodeLib}/fullcalendar/dist/fullcalendar.print.min.css", "to": "${destComponentsLib}/fullcalendar/dist"},
-            {"from": "${sourceNodeLib}/fullcalendar/dist/fullcalendar.min.js", "to": "${destComponentsLib}/fullcalendar/dist"}
+            {"from": "${sourceNodeLib}/fullcalendar/dist/fullcalendar.min.js", "to": "${destComponentsLib}/fullcalendar/dist"},
+            {"from": "${sourceNodeLib}/fullcalendar/dist/locale/ar.js", "to": "${destComponentsLib}/fullcalendar/dist/locale"}
         ],
         "cropperjs": [
             {"from": "${sourceNodeLib}/cropperjs/dist/cropper.min.css", "to": "${destComponentsLib}/cropperjs/dist"},
@@ -289,14 +292,14 @@ var src = {
         "./web/components/toastr/build/toastr.min.js",
         "./web/components/jquery-idletimer/dist/idle-timer.min.js",
         "./web/components/moment/min/moment.min.js",
-        "./web/components/moment/min/locales.min.js",
+//        "./web/components/moment/min/locales.min.js",
         "./web/components/moment-timezone/builds/moment-timezone-with-data.min.js",
         "./web/components/bootstrap-daterangepicker/daterangepicker.js",
         "./web/components/bootstrap-colorselector/dist/bootstrap-colorselector.min.js",
         "./web/components/select2/dist/js/select2.full.min.js",
         "./web/components/bootstrap-maxlength/bootstrap-maxlength.min.js",
         "./web/components/autosize/dist/autosize.min.js",
-        "./web/components/summernote/dist/lang/**/*",
+//        "./web/components/summernote/dist/lang/**/*",
         "./web/components/summernote/dist/summernote-bs4.min.js",
         "./web/components/ion-rangeslider/js/ion.rangeSlider.min.js",
         "./web/components/bootstrap-slider/dist/bootstrap-slider.min.js",
@@ -336,6 +339,9 @@ var src = {
             "./web/components/timeago/locales/jquery.timeago.en.js"
         ],
         "ar": [
+            "./web/components/moment/locale/ar.js",
+            "./web/components/summernote/dist/lang/summernote-ar-AR.min.js",
+            "./web/components/fullcalendar/dist/locale/ar.js",
             "./web/components/timeago/locales/jquery.timeago.ar.js"
         ]
 

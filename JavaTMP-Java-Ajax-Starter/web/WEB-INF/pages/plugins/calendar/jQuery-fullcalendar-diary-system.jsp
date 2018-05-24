@@ -83,6 +83,7 @@
                 }
                 $('#web-diary-calendar').fullCalendar({
                     isRTL: javatmp.settings.isRTL,
+                    locale: javatmp.user.lang,
                     header: targetHeader,
                     defaultView: 'month',
                     navLinks: true,
