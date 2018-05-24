@@ -16,6 +16,14 @@
                             <a id="ShowCroppedImage-btn-id" class="nav-link" href="javascript:void(0);">
                                 <i class="far fa-image fa-fw fa-lg"></i>Show Cropped Image</a>
                         </li>
+                        <li class="nav-item">
+                            <a href="javascript:void(0);" class="nav-link"
+                               actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/gallery/file-uploader-manager" >
+                                <i class="far fa-lg fa-fw fa-image"></i>
+                                File Manager
+                            </a>
+                        </li>
+
                     </ul>
                     <div class="options float-right">
                         <a href="#" class="settings"><i class="fa fa-cog"></i></a>
@@ -94,6 +102,9 @@
                 viewMode: 1,
                 aspectRatio: 1 / 1
             };
+            var croppedImageModal;
+            var uplodateModal;
+
 //Compose template string
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
@@ -105,7 +116,7 @@
                 $("#ShowCroppedImage-btn-id").on("click", function () {
                     result = $image.cropper("getCroppedCanvas", cropperOptions);
                     if (result) {
-                        var croppedImageModal = BootstrapModalWrapperFactory.createModal({
+                        croppedImageModal = BootstrapModalWrapperFactory.createModal({
                             title: "Cropped Image",
                             message: result
                         });
@@ -146,7 +157,7 @@
                                                     '<p>Creation Date : {{creationDate}}</p>' +
                                                     '<p>Link To View Inline : <a class="" target="" href="{{contextPath}}/ViewUploadedFileController?documentId={{link}}&amp;randomHash={{randomHash}}&amp;viewType=inline">View Inline</a></p>' +
                                                     '<p>Link To View As attachement : <a class="" target="" href="{{contextPath}}/ViewUploadedFileController?documentId={{link}}&amp;randomHash={{randomHash}}&amp;viewType=attachment">View As Attachment</a></p>' +
-                                                    '<p><a actionType="action-ref-href" href="{{contextPath}}/pages/gallery/file-uploader-manager">Go To File Manager To See Uploaded Files</a></p>' +
+                                                    '<p><a href="javascript:void(0);" class="" actionType="action-ref-href" action-ref-by-href="{{contextPath}}/pages/gallery/file-uploader-manager">Go To File Manager To See Uploaded Files</a></p>' +
                                                     '</div>';
                                             for (var i = 0; i < response.data.length; i++) {
                                                 var tempRow = row.composeTemplate({
@@ -160,10 +171,11 @@
                                                 });
                                                 table += tempRow;
                                             }
-                                            BootstrapModalWrapperFactory.createModal({
+                                            uplodateModal = BootstrapModalWrapperFactory.createModal({
                                                 title: "Server Uplod Response",
                                                 message: table
-                                            }).show();
+                                            });
+                                            uplodateModal.show();
                                         },
                                         error: function (xhr, status, error) {
                                             var errorObj = $.parseJSON(xhr.responseText);
@@ -246,6 +258,9 @@
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {
                 $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenCompress);
                 $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenExpand);
+                uplodateModal = uplodateModal && uplodateModal.hide();
+                croppedImageModal = croppedImageModal && croppedImageModal.hide();
+
                 $image.cropper("destroy");
                 $inputImage.off();
                 return true;
