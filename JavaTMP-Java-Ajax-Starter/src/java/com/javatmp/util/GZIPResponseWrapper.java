@@ -30,7 +30,6 @@ public class GZIPResponseWrapper extends HttpServletResponseWrapper {
     }
 
     public void finishResponse() {
-        System.out.println("finishResponse, writer [" + writer + "], stream[" + stream + "]");
         try {
             if (writer != null) {
                 writer.close();
@@ -51,7 +50,6 @@ public class GZIPResponseWrapper extends HttpServletResponseWrapper {
 
     @Override
     public ServletOutputStream getOutputStream() throws IOException {
-        System.out.println("Called getOutputStream");
         if (writer != null) {
             throw new IllegalStateException("getWriter() has already been called!");
         }
@@ -64,7 +62,6 @@ public class GZIPResponseWrapper extends HttpServletResponseWrapper {
 
     @Override
     public PrintWriter getWriter() throws IOException {
-        System.out.println("Called getWRiter");
         if (writer != null) {
             return (writer);
         }

@@ -12,6 +12,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.beanutils.BeanUtils;
@@ -23,6 +24,7 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 public class MvcHelper {
 
+    private static final Logger logger = Logger.getLogger(MvcHelper.class.getName());
     private static final Gson gson = new GsonBuilder()
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").serializeNulls()
             .registerTypeAdapter(Class.class, new ClassTypeAdapter())
@@ -74,7 +76,6 @@ public class MvcHelper {
 
         while (names.hasMoreElements()) {
             String name = (String) names.nextElement();
-            System.out.println(name + "=[" + Arrays.toString(request.getParameterValues(name)) + "]");
             map.put(name, request.getParameterValues(name));
         }
 
@@ -83,7 +84,7 @@ public class MvcHelper {
 
     public static void sendMessageAsJson(HttpServletResponse response, ResponseMessage responseMessage) throws IOException {
         String json = gson.toJson(responseMessage);
-        System.out.println("response [" + json + "]");
+        logger.info("response [" + json + "]");
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);

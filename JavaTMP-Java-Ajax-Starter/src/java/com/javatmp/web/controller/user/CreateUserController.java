@@ -32,6 +32,8 @@ import javax.servlet.http.Part;
 @MultipartConfig(fileSizeThreshold = 1024 * 15, maxFileSize = 1024 * 50, maxRequestSize = 1024 * 200)
 public class CreateUserController extends HttpServlet {
 
+    private final Logger logger = Logger.getLogger(getClass().getName());
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -46,14 +48,14 @@ public class CreateUserController extends HttpServlet {
             User userToBeCreated = new User();
 
             MvcHelper.populateBeanByRequestParameters(request, userToBeCreated);
-            System.out.println("User to be created is [" + MvcHelper.toString(userToBeCreated) + "]");
+            logger.info("User to be created is [" + MvcHelper.toString(userToBeCreated) + "]");
             Part filePart = request.getPart("profilePicture"); // Retrieves <input type="file" name="file">
             String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
             String contentType = filePart.getContentType();
             InputStream fileContentStream = filePart.getInputStream();
             String fieldName = filePart.getName();
             long partSize = filePart.getSize();
-            System.out.println("partSize [" + partSize + "]");
+            logger.info("partSize [" + partSize + "]");
 
             Document fileUploading = new Document();
             fileUploading.setContentType(contentType);
@@ -73,12 +75,12 @@ public class CreateUserController extends HttpServlet {
             }
 
             fileUploading.setDocumentContent(buffer.toByteArray());
-            System.out.println("original size [" + fileUploading.getDocumentSize()
+            logger.info("original size [" + fileUploading.getDocumentSize()
                     + "] stream size [" + fileUploading.getDocumentContent().length + "]");
             ds.createNewDocument(fileUploading);
-            System.out.println("db fake id [" + fileUploading.getDocumentId() + "]");
+            logger.info("db fake id [" + fileUploading.getDocumentId() + "]");
             String t = "FileName 'requested' \"to\" Upload [" + fileName + "] type[" + contentType + "] name [" + fieldName + "]size[" + partSize + "]<br/>";
-            System.out.println(t);
+            logger.info(t);
             text += t;
 
             userToBeCreated.setProfilePicDocumentId(fileUploading.getDocumentId());
@@ -97,7 +99,7 @@ public class CreateUserController extends HttpServlet {
             responseMessage.setData(userToBeCreated);
 
         } catch (IllegalStateException e) {
-            System.out.println("ERROR : " + e.getMessage());
+            logger.info("ERROR : " + e.getMessage());
             e.printStackTrace();
             responseMessage.setOverAllStatus(true);
             responseMessage.setMessage(e.getMessage());

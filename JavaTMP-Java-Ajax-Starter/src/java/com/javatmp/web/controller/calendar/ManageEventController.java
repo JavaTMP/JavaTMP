@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/calendar/ManageEventController")
 public class ManageEventController extends HttpServlet {
 
+    private final Logger logger = Logger.getLogger(getClass().getName());
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -25,9 +27,9 @@ public class ManageEventController extends HttpServlet {
 
             DiaryEvent event = new DiaryEvent();
             MvcHelper.populateBeanByRequestParameters(request, event);
-            System.out.println("Event read from request [" + MvcHelper.toString(event) + "]");
+            logger.info("Event read from request [" + MvcHelper.toString(event) + "]");
             event = sf.getDiaryEventService().getEventById(event);
-            System.out.println("Event read from Database [" + MvcHelper.toString(event) + "]");
+            logger.info("Event read from Database [" + MvcHelper.toString(event) + "]");
             request.setAttribute("event", event);
             request.getRequestDispatcher("/WEB-INF/pages/plugins/calendar/ajax/manage-event.jsp").forward(request, response);
         } catch (InvocationTargetException ex) {

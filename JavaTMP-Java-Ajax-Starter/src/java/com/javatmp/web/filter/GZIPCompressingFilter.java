@@ -2,6 +2,7 @@ package com.javatmp.web.filter;
 
 import com.javatmp.util.GZIPResponseWrapper;
 import java.io.IOException;
+import java.util.logging.Logger;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -14,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 
 public class GZIPCompressingFilter implements Filter {
 
+    private final Logger logger = Logger.getLogger(getClass().getName());
+
     public void doFilter(ServletRequest req, ServletResponse res,
             FilterChain chain) throws IOException, ServletException {
         if (req instanceof HttpServletRequest) {
@@ -21,10 +24,10 @@ public class GZIPCompressingFilter implements Filter {
             HttpServletResponse response = (HttpServletResponse) res;
             String ae = request.getHeader("accept-encoding");
             if (ae != null && ae.contains("gzip")) {
-                System.out.println("GZIP supported, compressing [" + request.getRequestURI() + "]");
+                logger.info("GZIP supported, compressing [" + request.getRequestURI() + "]");
                 GZIPResponseWrapper wrappedResponse = new GZIPResponseWrapper(response);
                 chain.doFilter(req, wrappedResponse);
-                System.out.println("Finished GZIP.doFilter now we will finish Response");
+                logger.info("Finished GZIP.doFilter now we will finish Response");
                 wrappedResponse.finishResponse();
                 return;
             }

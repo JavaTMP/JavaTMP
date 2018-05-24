@@ -7,6 +7,7 @@ import com.javatmp.util.Constants;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -18,6 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class ServiceFactoryInjector implements Filter {
+
+    private final Logger logger = Logger.getLogger(getClass().getName());
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -46,14 +49,14 @@ public class ServiceFactoryInjector implements Filter {
                     // update locale for this user:
                     ResourceBundle finalBundle = (ResourceBundle) httpRequest.getSession().getAttribute(Constants.LANGUAGE_ATTR_KEY);
                     dbUser.setLang(finalBundle.getLocale().getLanguage());
-                    System.out.println("db user is [" + MvcHelper.toString(dbUser) + "]");
+                    logger.info("db user is [" + MvcHelper.toString(dbUser) + "]");
 
                     // Auto Authenticated user for demo purposes.
                     session.setAttribute("user", dbUser);
                 }
             }
         }
-        System.out.println("ServiceFactory Instance [" + sf + "]");
+        logger.info("ServiceFactory Instance [" + sf + "]");
         chain.doFilter(request, response);
 
     }

@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +24,8 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/updateLanguage")
 public class UpdateLanguageController extends HttpServlet {
 
+    private final Logger logger = Logger.getLogger(getClass().getName());
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -30,14 +33,14 @@ public class UpdateLanguageController extends HttpServlet {
         try {
             ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
             ResourceBundle bundle = (ResourceBundle) request.getSession().getAttribute(Constants.LANGUAGE_ATTR_KEY);
-            System.out.println("user bundle [" + bundle + "]");
-            System.out.println("user locale [" + bundle.getLocale() + "]");
-            System.out.println("user locale lang [" + bundle.getLocale().getLanguage() + "]");
-            System.out.println("user locale country [" + bundle.getLocale().getCountry() + "]");
+            logger.info("user bundle [" + bundle + "]");
+            logger.info("user locale [" + bundle.getLocale() + "]");
+            logger.info("user locale lang [" + bundle.getLocale().getLanguage() + "]");
+            logger.info("user locale country [" + bundle.getLocale().getCountry() + "]");
             // Create a fake user
             User user = new User();
             MvcHelper.populateBeanByRequestParameters(request, user);
-            System.out.println("User created [" + MvcHelper.deepToString(user) + "]");
+            logger.info("User created [" + MvcHelper.deepToString(user) + "]");
 
             // get current login user in session
             User loginUser = (User) request.getSession().getAttribute("user");
@@ -66,7 +69,7 @@ public class UpdateLanguageController extends HttpServlet {
         ResponseMessage responseMessage = new ResponseMessage();
         try {
             MvcHelper.populateBeanByRequestParameters(request, user);
-            System.out.println("Check User [" + MvcHelper.deepToString(user) + "]");
+            logger.info("Check User [" + MvcHelper.deepToString(user) + "]");
             User dbUser = sf.getUserService().readUserByUsername(user);
 
             if (dbUser != null && dbUser.getPassword().equals(MD5Util.convertToMD5(user.getPassword()))) {
@@ -85,7 +88,7 @@ public class UpdateLanguageController extends HttpServlet {
                     .registerTypeAdapter(Class.class, new ClassTypeAdapter())
                     .create();
             String json = gson.toJson(responseMessage);
-            System.out.println("loginController response [" + json + "]");
+            logger.info("loginController response [" + json + "]");
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(json);

@@ -19,6 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/calendar/addNewEvent")
 public class AddNewEventController extends HttpServlet {
 
+    private final Logger logger = Logger.getLogger(getClass().getName());
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -30,7 +32,7 @@ public class AddNewEventController extends HttpServlet {
 
             DiaryEvent event = new DiaryEvent();
             MvcHelper.populateBeanByRequestParameters(request, event);
-            System.out.println("Event read from request prior to update [" + MvcHelper.toString(event) + "]");
+            logger.info("Event read from request prior to update [" + MvcHelper.toString(event) + "]");
 
             List<DiaryEvent> events = sf.getDiaryEventService().getDiaryEvents();
             events.add(event);

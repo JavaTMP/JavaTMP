@@ -20,6 +20,8 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/message/ViewMessageController")
 public class ViewMessageController extends HttpServlet {
 
+    private final Logger logger = Logger.getLogger(getClass().getName());
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -32,10 +34,10 @@ public class ViewMessageController extends HttpServlet {
 
             Message message = new Message();
             MvcHelper.populateBeanByRequestParameters(request, message);
-            System.out.println("message to read [" + MvcHelper.deepToString(message) + "]");
+            logger.info("message to read [" + MvcHelper.deepToString(message) + "]");
 
             message = ms.readMessageById(message);
-            System.out.println("Dynamic View Message [" + MvcHelper.deepToString(message) + "]");
+            logger.info("Dynamic View Message [" + MvcHelper.deepToString(message) + "]");
             request.setAttribute("message", message);
 
             request.getRequestDispatcher("/WEB-INF/pages/custom-pages/inbox/ajax/view-dynamic-message.jsp").forward(request, response);

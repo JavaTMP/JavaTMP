@@ -1,9 +1,11 @@
 package com.javatmp.service;
 
 import java.util.Date;
+import java.util.logging.Logger;
 
 public class ServicesFactory {
 
+    private final Logger logger = Logger.getLogger(getClass().getName());
     private DBFaker dbFaker;
     private UserService userService;
     private AccountService accountService;
@@ -14,7 +16,7 @@ public class ServicesFactory {
     private MessageService messageService;
 
     public ServicesFactory() {
-        System.out.println("*** Start ServicesFactory Constructor @ [" + new Date() + "]");
+        logger.info("*** Start ServicesFactory Constructor @ [" + new Date() + "]");
         this.dbFaker = new DBFaker();
         this.userService = new UserService(this.dbFaker);
         this.accountService = new AccountService(dbFaker);
@@ -23,7 +25,7 @@ public class ServicesFactory {
         this.countryService = new CountryService(dbFaker);
         this.contentService = new ContentService(dbFaker);
         this.messageService = new MessageService(dbFaker, this.userService);
-        System.out.println("*** End ServicesFactory Constructor @ [" + new Date() + "]");
+        logger.info("*** End ServicesFactory Constructor @ [" + new Date() + "]");
     }
 
     public void destroy() {

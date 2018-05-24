@@ -17,11 +17,11 @@ import javax.servlet.annotation.WebListener;
 @WebListener
 public class JavaTMPServletListener implements ServletContextListener {
 
-    private Logger logger = LogManager.getLogManager().getLogger(JavaTMPServletListener.class.getName());
+    private final Logger logger = Logger.getLogger(getClass().getName());
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        sce.getServletContext().log("*** Start App @ [" + new Date() + "] ***");
+        logger.info("*** Start App @ [" + new Date() + "] ***");
         // just for demo:
         // -Duser.timezone=UTC
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
@@ -31,6 +31,6 @@ public class JavaTMPServletListener implements ServletContextListener {
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
-        sce.getServletContext().log("*** End App @ [" + new Date() + "] ***");
+        logger.info("*** End App @ [" + new Date() + "] ***");
     }
 }

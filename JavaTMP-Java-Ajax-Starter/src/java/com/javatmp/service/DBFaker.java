@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.javatmp.service;
 
 import com.javatmp.domain.Account;
@@ -12,7 +7,6 @@ import com.javatmp.domain.DiaryEvent;
 import com.javatmp.domain.Document;
 import com.javatmp.domain.Message;
 import com.javatmp.domain.User;
-import com.javatmp.mvc.MvcHelper;
 import com.javatmp.util.MD5Util;
 import java.math.BigDecimal;
 import java.util.Calendar;
@@ -21,6 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,6 +23,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class DBFaker {
 
+    private final Logger logger = Logger.getLogger(getClass().getName());
     private List<User> users = new LinkedList<>();
     private List<DiaryEvent> diaryEvents = new LinkedList<>();
     private List<Document> documents = new LinkedList<>();
@@ -465,7 +461,7 @@ public class DBFaker {
             for (int j = 0; j < 250; j++) {
                 int randomTo = 0;
                 while ((randomTo = rand.nextInt(this.users.size())) == i);
-//                System.out.println("i[" + i + "] => random to is [" + randomTo + "]");
+//                logger.info("i[" + i + "] => random to is [" + randomTo + "]");
                 Long to = this.users.get(randomTo).getId();
                 Message message = new Message();
                 message.setMessageId(DBFaker.getNextCounter());

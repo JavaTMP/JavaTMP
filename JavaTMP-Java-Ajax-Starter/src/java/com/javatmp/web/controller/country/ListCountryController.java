@@ -22,6 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/country/ListCountryController")
 public class ListCountryController extends HttpServlet {
 
+    private final Logger logger = Logger.getLogger(getClass().getName());
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -31,7 +33,7 @@ public class ListCountryController extends HttpServlet {
 
             Country requestCountry = new Country();
             MvcHelper.populateBeanByRequestParameters(request, requestCountry);
-            System.out.println("Country to look for [" + MvcHelper.deepToString(requestCountry) + "]");
+            logger.info("Country to look for [" + MvcHelper.deepToString(requestCountry) + "]");
 
             String requestedPageStr = request.getParameter("page");
             int requestedPage = 1;

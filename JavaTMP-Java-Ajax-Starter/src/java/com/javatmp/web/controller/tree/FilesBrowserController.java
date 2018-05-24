@@ -13,6 +13,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,6 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/tree/files")
 public class FilesBrowserController extends HttpServlet {
+
+    private final Logger logger = Logger.getLogger(getClass().getName());
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -31,11 +34,11 @@ public class FilesBrowserController extends HttpServlet {
 
         String basePath = request.getServletContext().getRealPath("");
         String parent = request.getParameter("parent");
-        System.out.println("parent [" + parent + "]");
+        logger.info("parent [" + parent + "]");
         File file = new File(basePath, parent);
 
-        System.out.println("basePath [" + basePath + "]");
-        System.out.println("file [" + file.getAbsolutePath() + "]");
+        logger.info("basePath [" + basePath + "]");
+        logger.info("file [" + file.getAbsolutePath() + "]");
 
         List<Map<String, Object>> files = new LinkedList<>();
         File[] children = file.listFiles();
@@ -65,7 +68,7 @@ public class FilesBrowserController extends HttpServlet {
                 myMap.put("expanded", !item.isDirectory());
                 myMap.put("logicalPath", item.getAbsolutePath().substring(basePath.length()));
             }
-            System.out.println(item.getAbsolutePath().substring(basePath.length()));
+            logger.info(item.getAbsolutePath().substring(basePath.length()));
             files.add(myMap);
         }
 

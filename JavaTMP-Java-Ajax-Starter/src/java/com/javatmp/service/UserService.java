@@ -24,13 +24,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Logger;
 
-/**
- *
- * @author m_dar
- */
 public class UserService {
 
+    private final Logger logger = Logger.getLogger(getClass().getName());
     private final DBFaker dBFaker;
 
     public UserService(DBFaker dBFaker) {
@@ -79,12 +77,12 @@ public class UserService {
         List<Order> orders = tableRequest.getOrder();
 
         if (tableRequest.getSearch() != null && tableRequest.getSearch().getValue() != null && !tableRequest.getSearch().getValue().trim().equals("")) {
-            System.out.println("*** isGlobalSearch starting ***");
+            logger.info("*** isGlobalSearch starting ***");
             String query = tableRequest.getSearch().getValue().trim().toLowerCase();
             db = new LinkedList<>();
             for (User user : database) {
                 String userStr = MvcHelper.toString(user);
-                System.out.println("query[" + query + "] found in [" + userStr + "]");
+                logger.info("query[" + query + "] found in [" + userStr + "]");
                 if (userStr.toLowerCase().contains(query)) {
                     db.add(user);
                 }
@@ -149,7 +147,7 @@ public class UserService {
                 searchParameters.put("email", column.getSearch());
             }
         }
-        System.out.println("search [" + MvcHelper.deepToString(searchParameters) + "]");
+        logger.info("search [" + MvcHelper.deepToString(searchParameters) + "]");
 // apply individual column search:
         List<User> newDB = new LinkedList<>();
         for (User user : db) {

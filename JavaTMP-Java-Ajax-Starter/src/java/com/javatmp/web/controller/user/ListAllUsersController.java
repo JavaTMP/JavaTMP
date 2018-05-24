@@ -9,6 +9,7 @@ import com.javatmp.service.ServicesFactory;
 import com.javatmp.service.UserService;
 import com.javatmp.util.Constants;
 import java.io.IOException;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,6 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/user/ListAllUsersController")
 public class ListAllUsersController extends HttpServlet {
+
+    private final Logger logger = Logger.getLogger(getClass().getName());
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -27,7 +30,7 @@ public class ListAllUsersController extends HttpServlet {
         UserService cs = sf.getUserService();
 
         DataTableRequest tableRequest = (DataTableRequest) MvcHelper.readObjectFromRequest(request, DataTableRequest.class);
-        System.out.println("datatableRequest [" + MvcHelper.deepToString(tableRequest) + "]");
+        logger.info("datatableRequest [" + MvcHelper.deepToString(tableRequest) + "]");
 
         DataTableResults<User> dataTableResult = cs.listAllUsers(tableRequest);
 

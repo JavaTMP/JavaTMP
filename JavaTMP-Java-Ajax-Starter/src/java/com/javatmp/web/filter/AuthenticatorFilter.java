@@ -9,6 +9,7 @@ import com.javatmp.mvc.domain.ResponseMessage;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.logging.Logger;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -20,6 +21,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 public class AuthenticatorFilter implements Filter {
+
+    private final Logger logger = Logger.getLogger(getClass().getName());
 
     private FilterConfig filterConfig = null;
 
@@ -51,7 +54,7 @@ public class AuthenticatorFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
-        System.out.println("*** Start AuthenticatorFilter ****");
+        logger.info("*** Start AuthenticatorFilter ****");
 
         // https://stackoverflow.com/questions/46592664/request-getservletpath-returned-null-from-spring-mvc
         HttpServletRequest req = (HttpServletRequest) request;
@@ -64,9 +67,9 @@ public class AuthenticatorFilter implements Filter {
         } else {
             // check if requester is authenticated or not
             HttpSession session = req.getSession();
-            System.out.println("Session Attribute [" + session.getAttribute("user") + "]");
+            logger.info("Session Attribute [" + session.getAttribute("user") + "]");
             User user = (User) session.getAttribute("user");
-            System.out.println("Session User is [" + user + "]");
+            logger.info("Session User is [" + user + "]");
             if (user != null) {
                 chain.doFilter(request, response);
             } else if ("ajax".equals(req.getParameter("_ajax"))) {

@@ -20,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/ViewUploadedFileController")
 public class ViewUploadedFileController extends HttpServlet {
 
+    private final Logger logger = Logger.getLogger(getClass().getName());
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -30,7 +32,7 @@ public class ViewUploadedFileController extends HttpServlet {
             Document temp = new Document();
 
             MvcHelper.populateBeanByRequestParameters(request, temp);
-            System.out.println("Requested Document [" + MvcHelper.deepToString(temp) + "]");
+            logger.info("Requested Document [" + MvcHelper.deepToString(temp) + "]");
             String viewTypeTemp = request.getParameter("viewType");
             Document document = ds.readDocumentById(temp);
 

@@ -2,6 +2,7 @@ package com.javatmp.web.filter;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.logging.Logger;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class CacheControlHeadersFilter implements Filter {
 
+    private final Logger logger = Logger.getLogger(getClass().getName());
     private FilterConfig filterConfig = null;
 
     public CacheControlHeadersFilter() {
@@ -47,7 +49,7 @@ public class CacheControlHeadersFilter implements Filter {
                 httpResponse.setDateHeader("Date", currentDate.getTime());
                 httpResponse.setDateHeader("Expires", expiry);
                 httpResponse.addHeader("Cache-Control", "max-age=" + cacheAge);
-                System.out.println("Added Cache header to url [" + url + "]");
+                logger.info("Added Cache header to url [" + url + "]");
             }
         }
         chain.doFilter(request, response);

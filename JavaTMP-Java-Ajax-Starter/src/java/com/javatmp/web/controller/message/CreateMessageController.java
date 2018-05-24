@@ -22,6 +22,8 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/message/CreateMessageController")
 public class CreateMessageController extends HttpServlet {
 
+    private final Logger logger = Logger.getLogger(getClass().getName());
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -34,7 +36,7 @@ public class CreateMessageController extends HttpServlet {
 
             Message message = new Message();
             MvcHelper.populateBeanByRequestParameters(request, message);
-            System.out.println("message to create [" + MvcHelper.deepToString(message) + "]");
+            logger.info("message to create [" + MvcHelper.deepToString(message) + "]");
 
             User loggedInUser = (User) session.getAttribute("user");
             String responseBody = "";

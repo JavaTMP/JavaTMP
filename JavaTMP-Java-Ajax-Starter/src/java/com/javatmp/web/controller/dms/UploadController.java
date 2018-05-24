@@ -15,6 +15,7 @@ import java.nio.file.Paths;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -28,6 +29,8 @@ import javax.servlet.http.Part;
 @MultipartConfig(fileSizeThreshold = 1024 * 15, maxFileSize = 1024 * 50, maxRequestSize = 1024 * 100)
 public class UploadController extends HttpServlet {
 
+    private final Logger logger = Logger.getLogger(getClass().getName());
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -36,23 +39,23 @@ public class UploadController extends HttpServlet {
 //        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
 //        String contentType = filePart.getContentType();
 //        InputStream fileContent = filePart.getInputStream();
-//        System.out.println("FileName requested to Upload [" + fileName + "] type[" + contentType + "]");
+//        logger.info("FileName requested to Upload [" + fileName + "] type[" + contentType + "]");
 //        response.getWriter().print("UPLOAD DONE");
 //
         OutputStreamWriter isr = new OutputStreamWriter(new FileOutputStream("m.txt"));
-        System.out.println("encoding is [" + isr.getEncoding() + "]");
+        logger.info("encoding is [" + isr.getEncoding() + "]");
         ResponseMessage responseMessage = new ResponseMessage();
         List<Document> documentsUploaded = new LinkedList<>();
         ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         DocumentService ds = sf.getDocumentService();
         String tmpDir = System.getProperty("java.io.tmpdir");
-        System.out.println("tmpDir [" + tmpDir + "]");
+        logger.info("tmpDir [" + tmpDir + "]");
         String text = "";
         try {
             for (Part filePart : request.getParts()) {
                 String fieldName = filePart.getName();
                 long partSize = filePart.getSize();
-                System.out.println("partSize [" + partSize + "]");
+                logger.info("partSize [" + partSize + "]");
                 String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
                 String contentType = filePart.getContentType();
                 InputStream fileContentStream = filePart.getInputStream();
@@ -74,12 +77,12 @@ public class UploadController extends HttpServlet {
                 }
 
                 fileUploading.setDocumentContent(buffer.toByteArray());
-                System.out.println("original size [" + fileUploading.getDocumentSize()
+                logger.info("original size [" + fileUploading.getDocumentSize()
                         + "] stream size [" + fileUploading.getDocumentContent().length + "]");
                 ds.createNewDocument(fileUploading);
-                System.out.println("db fake id [" + fileUploading.getDocumentId() + "]");
+                logger.info("db fake id [" + fileUploading.getDocumentId() + "]");
                 String t = "FileName 'requested' \"to\" Upload [" + fileName + "] type[" + contentType + "] name [" + fieldName + "]size[" + partSize + "]<br/>";
-                System.out.println(t);
+                logger.info(t);
                 text += t;
 
                 Document uploaded = new Document();
@@ -96,7 +99,7 @@ public class UploadController extends HttpServlet {
             responseMessage.setData(documentsUploaded);
 
         } catch (IllegalStateException e) {
-            System.out.println("ERROR : " + e.getMessage());
+            logger.info("ERROR : " + e.getMessage());
             responseMessage.setOverAllStatus(false);
             responseMessage.setMessage("The file to be uploaded exceeds its maximum permitted size of 51200 bytes");
             response.setStatus(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE);

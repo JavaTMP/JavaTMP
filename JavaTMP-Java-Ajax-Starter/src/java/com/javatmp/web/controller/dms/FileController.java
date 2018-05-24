@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -15,16 +16,18 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/FileController/*")
 public class FileController extends HttpServlet {
 
+    private final Logger logger = Logger.getLogger(getClass().getName());
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         // if you want to use a relative path to context root:
         String folderBase = getServletContext().getRealPath("");
-        System.out.println("relativePath = " + folderBase);
+        logger.info("relativePath = " + folderBase);
 
         // Get requested file by path info.
         String requestedFile = request.getPathInfo();
-        System.out.println("Requested File [" + requestedFile + "]");
+        logger.info("Requested File [" + requestedFile + "]");
         File downloadFile = new File(folderBase, requestedFile);
         FileInputStream inStream = new FileInputStream(downloadFile);
         // obtains ServletContext
@@ -36,7 +39,7 @@ public class FileController extends HttpServlet {
             mimeType = "application/octet-stream";
         }
 
-        System.out.println("MIME type: " + mimeType);
+        logger.info("MIME type: " + mimeType);
         // modifies response
         response.setContentType(mimeType);
         response.setContentLength((int) downloadFile.length());

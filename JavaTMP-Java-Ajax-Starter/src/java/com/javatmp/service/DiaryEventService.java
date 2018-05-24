@@ -5,21 +5,16 @@
  */
 package com.javatmp.service;
 
-import com.javatmp.domain.Account;
 import com.javatmp.domain.DiaryEvent;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.logging.Logger;
 
-/**
- *
- * @author m_dar
- */
 public class DiaryEventService {
 
+    private final Logger logger = Logger.getLogger(getClass().getName());
     private DBFaker dBFaker;
 
     public DiaryEventService(DBFaker dBFaker) {
@@ -48,14 +43,14 @@ public class DiaryEventService {
             }
 
             Calendar end = Calendar.getInstance();
-            System.out.println("Start [" + item.getStart() + "]");
+            logger.info("Start [" + item.getStart() + "]");
             end.setTime(item.getStart());
             int add = (ThreadLocalRandom.current().nextInt(4) + 1) * 15;
 
-            System.out.println("end minute [" + end.get(Calendar.MINUTE) + "] added [" + add + "]");
+            logger.info("end minute [" + end.get(Calendar.MINUTE) + "] added [" + add + "]");
             end.add(Calendar.MINUTE, add);
             item.setEnd(end.getTime());
-            System.out.println("End [" + item.getEnd() + "]");
+            logger.info("End [" + item.getEnd() + "]");
             this.dBFaker.addDiaryEvent(item);
             item.setTitle("Appt: " + item.getId());
         }

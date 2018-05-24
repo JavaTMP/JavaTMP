@@ -16,9 +16,11 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 public class MessageService {
 
+    private final Logger logger = Logger.getLogger(getClass().getName());
     private final DBFaker dBFaker;
     private UserService userService;
 
@@ -73,10 +75,10 @@ public class MessageService {
         List<Message> database = this.dBFaker.getMessages();
         List<Message> db = null;
         List<Order> orders = tableRequest.getOrder();
-        System.out.println("Order requested [" + orders + "]");
-        System.out.println("is global search provide");
+        logger.info("Order requested [" + orders + "]");
+        logger.info("is global search provide");
         if (tableRequest.isGlobalSearch()) {
-            System.out.println("*** isGlobalSearch starting ***");
+            logger.info("*** isGlobalSearch starting ***");
             String query = tableRequest.getSearch().getValue().trim().toLowerCase();
             db = new LinkedList<>();
             for (Message msg : database) {
@@ -88,7 +90,7 @@ public class MessageService {
         } else {
             db = new LinkedList<>(this.dBFaker.getMessages());
         }
-        System.out.println("Start mapping search parameteres");
+        logger.info("Start mapping search parameteres");
         Map<String, Search> searchParameters = new HashMap<>();
         int index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(0, "messageId"));
         DataTableColumnSpecs column;
@@ -121,7 +123,7 @@ public class MessageService {
             searchParameters.put("toUserId", column.getSearch());
         }
 
-        System.out.println("search [" + searchParameters + "]");
+        logger.info("search [" + searchParameters + "]");
 // apply individual column search:
         List<Message> newDB = new LinkedList<>();
         for (Message msg : db) {
@@ -181,23 +183,23 @@ public class MessageService {
             @Override
             public int compare(Message o1, Message o2) {
                 int retCompare = 0;
-//                System.out.println("Could we order [" + !(orders == null || orders.size() == 0) + "]");
+//                logger.info("Could we order [" + !(orders == null || orders.size() == 0) + "]");
                 if (orders == null || orders.size() == 0) {
                     return retCompare;
                 }
                 // we support only one sort:
                 Order order = orders.get(0);
-//                System.out.println("Order by [" + order + "]");
+//                logger.info("Order by [" + order + "]");
                 int factor = order.getDir().value().equals("desc") ? -1 : +1;
-//                System.out.println("Order factor [" + factor + "]");
+//                logger.info("Order factor [" + factor + "]");
                 DataTableColumnSpecs orderColumn = tableRequest.getColumns().get(order.getColumn());
-//                System.out.println("orderColumn [" + orderColumn + "]");
-//                System.out.println("Order by column [" + orderColumn + "]");
+//                logger.info("orderColumn [" + orderColumn + "]");
+//                logger.info("Order by column [" + orderColumn + "]");
                 if (!(orderColumn != null && orderColumn.getData() != null)) {
                     return retCompare;
                 }
                 String orderColumnName = orderColumn.getData();
-//                System.out.println("Order by column name [" + orderColumnName + "]");
+//                logger.info("Order by column name [" + orderColumnName + "]");
                 if ("messageId".equals(orderColumnName)) { // messageId
                     retCompare = o1.getMessageId().compareTo(o2.getMessageId()) * factor;
                 } else if ("messageTitle".equals(orderColumnName)) { // messageTitle

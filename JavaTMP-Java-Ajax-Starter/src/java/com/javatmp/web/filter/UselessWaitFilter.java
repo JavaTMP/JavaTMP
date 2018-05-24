@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class UselessWaitFilter implements Filter {
 
+    private final Logger logger = Logger.getLogger(getClass().getName());
     private FilterConfig filterConfig = null;
 
     private Set<String> excludeControllers = new HashSet<>();
@@ -46,7 +47,7 @@ public class UselessWaitFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
-        System.out.println("*** Start UselessWaitFilter ****");
+        logger.info("*** Start UselessWaitFilter ****");
 
         // https://stackoverflow.com/questions/46592664/request-getservletpath-returned-null-from-spring-mvc
         HttpServletRequest req = (HttpServletRequest) request;
@@ -55,7 +56,7 @@ public class UselessWaitFilter implements Filter {
 
         if (!isReqInWhiteList(path)) {
             try {
-                System.out.println("Wait current request for 1 Second");
+                logger.info("Wait current request for 1 Second");
                 Thread.sleep(1 * 1000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(UselessWaitFilter.class.getName()).log(Level.SEVERE, null, ex);

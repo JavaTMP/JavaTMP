@@ -8,11 +8,6 @@ import java.util.logging.Logger;
 
 public class MD5Util {
 
-    public static void main(String[] args) throws UnsupportedEncodingException, NoSuchAlgorithmException {
-        String password = "testing";
-        System.out.println("pass string [" + convertToMD5(password) + "]");
-    }
-
     public static String convertToMD5(String original) {
         String retPass = original;
         try {
