@@ -22,7 +22,6 @@ JavaTMP Base Tempalte Imports
 @import "partials/sidebar.scss";
 @import "partials/breadcrumb.scss";
 @import "partials/footer.scss";
-@import "pages/dropdown-menu-extender.scss";
 
 /*!********************************************
 Custom Plugins Imports
@@ -47,6 +46,7 @@ Custom Plugins Imports
 @import "plugins/custom-toastr.scss";
 @import "plugins/custom-bootstrap-card-extender.scss";
 @import "plugins/custom-font-awesome.scss";
+@import "plugins/custom-bootstrap-dropdown.scss";
 
 /*!********************************************
 Pages Imports for demo purposes
