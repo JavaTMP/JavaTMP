@@ -274,7 +274,8 @@ var src = {
         "./web/components/jquery-contextmenu/dist/font/**/*",
         "./web/components/summernote/dist/font/**/*",
         "./web/components/slick-carousel/slick/fonts/**/*",
-        "./web/assets/src/fonts/**/*"
+        "./web/assets/src/fonts/open-sans/**/*",
+        "./web/assets/src/fonts/droidarabickufi/**/*"
     ],
     "img": [
         "./web/components/slick-carousel/slick/ajax-loader.gif",
@@ -347,6 +348,14 @@ var src = {
             "./web/components/fullcalendar/dist/locale/ar.js",
             "./web/components/timeago/locales/jquery.timeago.ar.js",
             "./web/components/jquery-validation/dist/localization/messages_ar.js"
+        ]
+    },
+    "fontFamilyFiles": {
+        "en": [
+            "./web/assets/src/sass/font-family/font-family-en.scss"
+        ],
+        "ar": [
+            "./web/assets/src/sass/font-family/font-family-ar.scss"
         ]
 
     }
@@ -485,6 +494,35 @@ gulp.task('generate-dist', ['copy-components', "delete-dist", "delete-css", "del
                                     console.log("Finish javatmp-plugins-all-locale-" + k + ".min.js");
                                     if (count === 0) {
                                         console.log("Finish javatmp-plugins-all-locale-*.min.js files");
+                                        next();
+                                    }
+                                };
+                            })());
+                }
+            }
+        },
+        function (next) {
+            console.log("Generating font-family-*.min.css");
+            var count = 0;
+            for (var key in src.fontFamilyFiles) {
+                if (src.fontFamilyFiles.hasOwnProperty(key)) {
+                    count++;
+                    var currentKey = key;
+                    var array = src.fontFamilyFiles[currentKey];
+
+                    console.log("Generating font-family-" + currentKey + ".min.css");
+                    gulp.src(array)
+                            .pipe(sass().on('error', sass.logError))
+                            .pipe(cleanCSS())
+                            .pipe(concat("font-family-" + currentKey + ".min.css", {newLine: '\n;'}))
+                            .pipe(gulp.dest("./web/assets/dist/css"))
+                            .on('end', (function () {
+                                var k = currentKey;
+                                return function () {
+                                    count--;
+                                    console.log("Finish font-family-" + k + ".min.css");
+                                    if (count === 0) {
+                                        console.log("Finish All font-family-*.min.css files");
                                         next();
                                     }
                                 };

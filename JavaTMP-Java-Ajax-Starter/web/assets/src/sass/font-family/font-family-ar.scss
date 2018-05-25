@@ -1,0 +1,28 @@
+$javatmp-font-path: "../fonts" !default;
+/*
+ * Droid Arabic Kufi (Arabic) http://www.google.com/fonts/earlyaccess
+ * Downloaded from http://fonts.googleapis.com/earlyaccess/droidarabickufi.css
+ */
+@font-face {
+    font-family: 'Droid Arabic Kufi';
+    font-style: normal;
+    font-weight: 400;
+    src: url(#{$javatmp-font-path}/DroidKufi-Regular.eot);
+    src: url(#{$javatmp-font-path}/DroidKufi-Regular.eot?#iefix) format('embedded-opentype'),
+        url(#{$javatmp-font-path}/DroidKufi-Regular.woff2) format('woff2'),
+        url(#{$javatmp-font-path}/DroidKufi-Regular.woff) format('woff'),
+        url(#{$javatmp-font-path}/DroidKufi-Regular.ttf) format('truetype');
+}
+@font-face {
+    font-family: 'Droid Arabic Kufi';
+    font-style: normal;
+    font-weight: 700;
+    src: url(#{$javatmp-font-path}/DroidKufi-Bold.eot);
+    src: url(#{$javatmp-font-path}/DroidKufi-Bold.eot?#iefix) format('embedded-opentype'),
+        url(#{$javatmp-font-path}/DroidKufi-Bold.woff2) format('woff2'),
+        url(#{$javatmp-font-path}/DroidKufi-Bold.woff) format('woff'),
+        url(#{$javatmp-font-path}/DroidKufi-Bold.ttf) format('truetype');
+}
+body {
+    font-family: 'Droid Arabic Kufi', sans-serif;
+}
