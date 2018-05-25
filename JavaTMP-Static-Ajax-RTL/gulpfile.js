@@ -374,7 +374,18 @@ gulp.task('pages-sass', ["plugins-sass"], function () {
             .pipe(rename({suffix: '.min'}))
             .pipe(gulp.dest('./public_html/assets/css/pages/'));
 });
-gulp.task('sass', ["pages-sass"], function () {
+gulp.task('font-family', ["pages-sass"], function () {
+    return gulp.src(['./public_html/assets/src/sass/font-family/**/*.scss'])
+            .pipe(sass().on('error', sass.logError))
+            .pipe(autoprefixer({
+                browsers: ['last 2 versions'],
+                cascade: false
+            }))
+            .pipe(cleanCSS())
+            .pipe(rename({suffix: '.min'}))
+            .pipe(gulp.dest('./public_html/assets/css/font-family/'));
+});
+gulp.task('sass', ["font-family"], function () {
     console.log("sass generate css files successfully");
 });
 gulp.task('compress-js', ["delete-js"], function (cb) {

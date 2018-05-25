@@ -1,6 +1,5 @@
 
 // --- override default bootstrap variables here
-$font-family-base: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 // Include Required parts of Bootstrap
 @import "../../../../../node_modules/bootstrap/scss/functions";
@@ -8,6 +7,7 @@ $font-family-base: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 @import "../../../../../node_modules/bootstrap/scss/mixins";
 
 // JavaTMP Global Variables
+$javatmp-font-path: "../../fonts" !default;
 $javatmp-primary-bg: $primary!default;
 $javatmp-secondary-bg: $gray-200!default;
 $javatmp-transition: $transition-base!default;

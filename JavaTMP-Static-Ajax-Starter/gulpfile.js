@@ -263,7 +263,7 @@ var src = {
         "./public_html/components/jquery-contextmenu/dist/font/**/*",
         "./public_html/components/summernote/dist/font/**/*",
         "./public_html/components/slick-carousel/slick/fonts/**/*",
-        "./public_html/assets/src/fonts/**/*"
+        "./public_html/assets/src/fonts/open-sans/**/*"
     ],
     "img": [
         "./public_html/components/slick-carousel/slick/ajax-loader.gif",
@@ -323,7 +323,12 @@ var src = {
         "./public_html/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.js",
         "./public_html/components/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js",
         "./public_html/components/numeral/min/numeral.min.js"
-    ]
+    ],
+    "fontFamilyFiles": {
+        "en": [
+            "./public_html/assets/src/sass/font-family/font-family-en.scss"
+        ]
+    }
 }
 ;
 function getClass(object) {
@@ -432,6 +437,35 @@ gulp.task('generate-dist', ['copy-components', "delete-dist", "delete-css", "del
                     .pipe(concat("javatmp-plugins-all.min.js", {newLine: '\n;'}))
                     .pipe(gulp.dest("./public_html/assets/dist/js"))
                     .on('end', next);
+        },
+        function (next) {
+            console.log("Generating font-family-*.min.css");
+            var count = 0;
+            for (var key in src.fontFamilyFiles) {
+                if (src.fontFamilyFiles.hasOwnProperty(key)) {
+                    count++;
+                    var currentKey = key;
+                    var array = src.fontFamilyFiles[currentKey];
+
+                    console.log("Generating font-family-" + currentKey + ".min.css");
+                    gulp.src(array)
+                            .pipe(sass().on('error', sass.logError))
+                            .pipe(cleanCSS())
+                            .pipe(concat("font-family-" + currentKey + ".min.css", {newLine: '\n;'}))
+                            .pipe(gulp.dest("./public_html/assets/dist/css"))
+                            .on('end', (function () {
+                                var k = currentKey;
+                                return function () {
+                                    count--;
+                                    console.log("Finish font-family-" + k + ".min.css");
+                                    if (count === 0) {
+                                        console.log("Finish All font-family-*.min.css files");
+                                        next();
+                                    }
+                                };
+                            })());
+                }
+            }
         },
         function (next) {
             gulp.src(src.img)
