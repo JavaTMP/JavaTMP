@@ -47,6 +47,7 @@ Custom Plugins Imports
 @import "plugins/custom-slick-carousel.scss";
 @import "plugins/custom-toastr.scss";
 @import "plugins/custom-bootstrap-card-extender.scss";
+@import "plugins/custom-font-awesome.scss";
 
 /*!********************************************
 Pages Imports for demo purposes
@@ -55,8 +56,3 @@ Pages Imports for demo purposes
 @import "pages/color_display.scss";
 @import "pages/custom-steps.scss";
 @import "pages/icon-preview-block.scss";
-
-/*!********************************************
-Resetting for resources like fonts & imgs path
-*********************************************/
-@import "common/custom-font-awesome.scss";
