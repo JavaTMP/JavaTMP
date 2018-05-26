@@ -143,23 +143,12 @@
                                 }
                             },
                             position: function (opt, x, y) {
-                                var menuWidth = $(opt.$menu).outerWidth();
-                                var menuHeightWithMargin = $(opt.$menu).outerHeight(true);
-                                var menuHeight = $(opt.$menu).outerHeight();
-                                var targetY = y;
-                                var offset = $(this).offset();
-                                var posY = offset.top - $(window).scrollTop();
-                                posY = posY - javatmp.getFixedOffset();
-                                console.log("targety = " + posY
-                                        + " , ajaxoutput height = " + $(window).height()
-                                        + " . menu height = " + menuHeightWithMargin);
-                                if ($(opt.$menu).outerHeight() + posY > $(window).height()) {
-                                    targetY = y - menuHeight;
+                                if (javatmp.settings.isRTL === true) {
+                                    var menuWidth = $(opt.$menu).outerWidth();
+                                    opt.$menu.css({top: y, left: x - menuWidth});
+                                } else {
+                                    opt.$menu.css({top: y, left: x});
                                 }
-                                console.log("current y : " + targetY + " , x : " + (x - menuWidth));
-//                                console.log("top : " + currentMousePos.y + " , x :" + (x - menuWidth));
-                                opt.$menu.css({top: targetY, left: x - menuWidth});
-                                return true;
                             },
                             callback: function (key, options) {
                                 var node = $.ui.fancytree.getNode(this);
