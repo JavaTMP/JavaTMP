@@ -138,7 +138,7 @@
                             console.log("Try fetching any message newer than [" + moment(newestDate).format("YYYY/MM/DD HH:mm:ss.SSS Z") + "]");
                             $.ajax({
                                 "type": "POST",
-                                url: javatmp.settings.contextPath + "/user/FetchMessagesController",
+                                url: javatmp.settings.contextPath + "/user/ListMessagesController",
                                 dataType: "json",
                                 contentType: "application/json; charset=UTF-8",
                                 data: JSON.stringify(passData),
@@ -162,7 +162,8 @@
                                             console.log("newestDate [" + moment(newestDate).format("YYYY/MM/DD HH:mm:ss") + "] become [" + moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss") + "]");
                                             newestDate = moment(row.creationDate);
                                         }
-                                        that.mcs.content.prepend(readyData);
+                                        $(readyData).hide().prependTo(that.mcs.content).fadeIn(1000);
+//                                        that.mcs.content.prepend(readyData);
                                         that.mcs.content.find("time.timeago").timeago();
                                     });
                                     $(that).mCustomScrollbar("scrollTo", 1);
@@ -203,7 +204,7 @@
                                 };
                                 $.ajax({
                                     "type": "POST",
-                                    url: javatmp.settings.contextPath + "/user/FetchMessagesController",
+                                    url: javatmp.settings.contextPath + "/user/ListMessagesController",
                                     dataType: "json",
                                     contentType: "application/json; charset=UTF-8",
                                     data: JSON.stringify(passData),
@@ -278,7 +279,7 @@
                         };
                         $.ajax({
                             "type": "POST",
-                            url: javatmp.settings.contextPath + "/user/FetchMessagesController",
+                            url: javatmp.settings.contextPath + "/user/ListMessagesController",
                             dataType: "json",
                             contentType: "application/json; charset=UTF-8",
                             data: JSON.stringify(passData),
@@ -306,7 +307,7 @@
                                         console.log("oldest [" + moment(oldestDate).format("YYYY/MM/DD HH:mm:ss") + "] become [" + moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss") + "]");
                                         oldestDate = moment(row.creationDate);
                                     }
-                                    $("#infinite-scroll .mCSB_container").append(readyData);
+                                    $("#infinite-scroll .mCSB_container").append(readyData).fadeIn(1000);
                                     $("#infinite-scroll .mCSB_container").find("time.timeago").timeago();
                                 });
                                 $("#infinite-scroll").mCustomScrollbar("scrollTo", 1);
