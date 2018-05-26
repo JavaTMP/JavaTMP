@@ -312,6 +312,24 @@
                                 &nbsp;faa-burst
                             </a>
                         </div>
+                        <div class="col-md-4">
+                            <a href="#">
+                                <i class="far fa-star faa-falling animated"></i>
+                                &nbsp;faa-falling animated
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="#">
+                                <i class="far fa-star faa-falling animated-hover"></i>
+                                &nbsp;faa-falling animated-hover
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a href="#" class="faa-parent animated-hover">
+                                <i class="far fa-star faa-falling"></i>
+                                &nbsp;faa-falling
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -327,7 +345,7 @@
                     $("#ex6").bootstrapSlider();
                     $("#ex6").on("slide", function (slideEvt) {
 //                        $("#ex6SliderVal").text(slideEvt.value);
-                        $("#font-awsome-animation-icons-panel-body-id i.fa").css('font-size', slideEvt.value);
+                        $("#font-awsome-animation-icons-panel-body-id .col-md-4 i").css('font-size', slideEvt.value);
                     });
                 }(jQuery));
             });
