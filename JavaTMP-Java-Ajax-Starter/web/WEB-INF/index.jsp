@@ -1637,11 +1637,16 @@
                 var myMessagesDropdown = $('#myMessagesDropdownId');
                 var indicatorTemplate = '<div class="fetch-indicator text-center m-2 p-2"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>';
                 var workingDown = false;
+                var workingTop = false;
                 var startFrom = 0;
+                var fetchOnce = false;
                 var recordPerPage = 10;
+                var oldestCount = Number.MAX_SAFE_INTEGER;
                 var allCount = Number.MAX_SAFE_INTEGER;
                 var currentFetchedCount = 0;
                 var toUserId = javatmp.user.id;
+                var oldestDate;
+                var newestDate;
                 var myMessagesScrollable = $(".dynamic-messages-scroll-content", myMessagesDropdown);
                 myMessagesScrollable.mCustomScrollbar({
                     theme: "javatmp",
@@ -1658,22 +1663,93 @@
                         onScroll: function () {
                             console.log("top = " + this.mcs.top + " , direction = " + this.mcs.direction);
                         },
+                        onTotalScrollBack: function () {
+                            if (!workingTop) {
+                                workingTop = true;
+                                myMessagesScrollable.mCustomScrollbar('scrollTo', 'top', {scrollInertia: 20});
+                                this.mcs.content.prepend(indicatorTemplate);
+                                var that = this;
+
+                                var passData = {
+                                    _ajaxGlobalBlockUI: false,
+                                    start: 0,
+                                    length: recordPerPage,
+                                    order: [
+                                        {"column": 0, "dir": "desc"}
+                                    ],
+                                    columns: [{
+                                            "data": "creationDate",
+                                            search: {
+                                                "value": moment(newestDate).format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
+                                                "operatorType": "newerThan"
+                                            }
+                                        },
+                                        {
+                                            "data": "toUserId",
+                                            search: {
+                                                "value": toUserId
+                                            }
+                                        }
+                                    ]
+                                };
+                                console.log("Try fetching any message newer than [" + moment(newestDate).format("YYYY/MM/DD HH:mm:ss.SSS Z") + "]");
+                                $.ajax({
+                                    "type": "POST",
+                                    url: javatmp.settings.contextPath + "/user/ListMessagesController",
+                                    dataType: "json",
+                                    contentType: "application/json; charset=UTF-8",
+                                    data: JSON.stringify(passData),
+                                    success: function (response, textStatus, jqXHR) {
+                                        that.mcs.content.find(".fetch-indicator").remove();
+                                        var data = response.data.data;
+                                        allCount = response.data.recordsTotal;
+                                        $.each(data, function (index, row) {
+                                            currentFetchedCount++;
+                                            var readyData = template.composeTemplate({
+                                                'messageId': row.messageId,
+                                                'messageTitle': row.messageTitle,
+                                                'messageContentText': row.messageContentText,
+                                                'senderFirstName': row.fromUser.firstName,
+                                                'senderLastName': row.fromUser.lastName,
+                                                'creationDate': row.creationDate,
+                                                'formatedDate': moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss"),
+                                                'contextPath': javatmp.settings.contextPath
+                                            });
+                                            if (moment(newestDate).isBefore(moment(row.creationDate))) {
+                                                console.log("newestDate [" + moment(newestDate).format("YYYY/MM/DD HH:mm:ss") + "] become [" + moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss") + "]");
+                                                newestDate = moment(row.creationDate);
+                                            }
+                                            $(readyData).hide().prependTo(that.mcs.content).fadeIn(1000);
+//                                        that.mcs.content.prepend(readyData);
+                                            that.mcs.content.find("time.timeago").timeago();
+                                        });
+                                        myMessagesScrollable.mCustomScrollbar("scrollTo", 1);
+                                        workingTop = false;
+                                    }
+                                });
+                            }
+                        },
                         onTotalScroll: function () {
                             if (!workingDown) {
-                                console.log("** onTotalScroll currentFetch [" + currentFetchedCount + "], allCount [" + allCount + "]");
-                                if (currentFetchedCount < allCount) {
+                                console.log("** onTotalScroll currentFetch [" + currentFetchedCount + "], allCount [" + oldestCount + "]");
+                                if (oldestCount > 0) {
                                     workingDown = true;
                                     this.mcs.content.append(indicatorTemplate);
                                     var that = this;
+                                    oldestDate = oldestDate || moment();
                                     var passData = {
                                         _ajaxGlobalBlockUI: false,
-                                        start: startFrom,
+                                        start: 0,
                                         length: recordPerPage,
                                         order: [
                                             {"column": 0, "dir": "asc"}
                                         ],
                                         columns: [{
-                                                "data": "creationDate"
+                                                "data": "creationDate",
+                                                search: {
+                                                    "value": moment(oldestDate).format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
+                                                    "operatorType": "olderThan"
+                                                }
                                             },
                                             {
                                                 "data": "toUserId",
@@ -1683,7 +1759,6 @@
                                             }
                                         ]
                                     };
-
                                     $.ajax({
                                         "type": "POST",
                                         url: javatmp.settings.contextPath + "/user/ListMessagesController",
@@ -1693,7 +1768,7 @@
                                         success: function (response, textStatus, jqXHR) {
                                             that.mcs.content.find(".fetch-indicator").remove();
                                             var data = response.data.data;
-                                            allCount = response.data.recordsTotal;
+                                            oldestCount = response.data.recordsTotal;
                                             $.each(data, function (index, row) {
                                                 currentFetchedCount++;
                                                 var readyData = template.composeTemplate({
@@ -1706,11 +1781,16 @@
                                                     'formatedDate': moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss"),
                                                     'contextPath': javatmp.settings.contextPath
                                                 });
+
+                                                if (moment(oldestDate).isAfter(moment(row.creationDate))) {
+                                                    console.log("oldest [" + moment(oldestDate).format("YYYY/MM/DD HH:mm:ss") + "] become [" + moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss") + "]");
+                                                    oldestDate = moment(row.creationDate);
+                                                }
+
                                                 that.mcs.content.append(readyData);
                                                 that.mcs.content.find("time.timeago").timeago();
                                             });
                                             workingDown = false;
-                                            startFrom += data.length;
                                         }
                                     });
                                 }
@@ -1725,31 +1805,27 @@
                 myMessagesDropdown.on('show.bs.dropdown', function () {
                 });
 
-                $(document).ajaxSend(function (event, xhr, ajaxOptions) {
-
-                    if ((ajaxOptions.url.indexOf("_ajaxGlobalBlockUI=false") === -1)
-                            && !(!!ajaxOptions.data && !!ajaxOptions.data.indexOf && (ajaxOptions.data.indexOf('"_ajaxGlobalBlockUI":false') !== -1))) {
-                        //alert("we block globally");
-                    } else {
-                        //alert("we will not block globally");
-                    }
-                });
-
                 myMessagesDropdown.on('shown.bs.dropdown', function () {
-                    if (!workingDown && startFrom === 0) {
+                    console.log("calling shown.bs.dropdown");
+                    if (!workingDown && !fetchOnce) {
                         console.log("fetch initial messages only once");
-                        if (currentFetchedCount < allCount) {
+                        if (oldestCount > 0) {
                             workingDown = true;
                             $(".mCSB_container", myMessagesScrollable).append(indicatorTemplate);
+                            oldestDate = oldestDate || moment();
                             var passData = {
                                 _ajaxGlobalBlockUI: false,
-                                start: startFrom,
+                                start: 0,
                                 length: recordPerPage,
                                 order: [
                                     {"column": 0, "dir": "asc"}
                                 ],
                                 columns: [{
-                                        "data": "creationDate"
+                                        "data": "creationDate",
+                                        search: {
+                                            "value": moment(oldestDate).format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
+                                            "operatorType": "olderThan"
+                                        }
                                     },
                                     {
                                         "data": "toUserId",
@@ -1759,7 +1835,6 @@
                                     }
                                 ]
                             };
-
                             $.ajax({
                                 "type": "POST",
                                 url: javatmp.settings.contextPath + "/user/ListMessagesController",
@@ -1769,8 +1844,12 @@
                                 success: function (response, textStatus, jqXHR) {
                                     $(".mCSB_container", myMessagesScrollable).find(".fetch-indicator").remove();
                                     var data = response.data.data;
-                                    allCount = response.data.recordsTotal;
+                                    oldestCount = response.data.recordsTotal;
                                     $.each(data, function (index, row) {
+                                        if (index === 0) {
+                                            newestDate = moment(row.creationDate);
+                                            console.log("newest date become [" + moment(newestDate).format("YYYY/MM/DD HH:mm:ss") + "]");
+                                        }
                                         currentFetchedCount++;
                                         var readyData = template.composeTemplate({
                                             'messageId': row.messageId,
@@ -1782,14 +1861,22 @@
                                             'formatedDate': moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss"),
                                             'contextPath': javatmp.settings.contextPath
                                         });
+                                        if (moment(oldestDate).isAfter(moment(row.creationDate))) {
+                                            console.log("oldest [" + moment(oldestDate).format("YYYY/MM/DD HH:mm:ss") + "] become [" + moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss") + "]");
+                                            oldestDate = moment(row.creationDate);
+                                        }
                                         $(".mCSB_container", myMessagesScrollable).append(readyData);
                                         $(".mCSB_container", myMessagesScrollable).find("time.timeago").timeago();
                                     });
+                                    myMessagesScrollable.mCustomScrollbar("scrollTo", 1);
                                     workingDown = false;
-                                    startFrom += data.length;
+                                    fetchOnce = true;
                                 }
                             });
                         }
+                    } else {
+                        console.log("already fetch initial data");
+                        myMessagesScrollable.mCustomScrollbar("scrollTo", 1, {callbacks: true});
                     }
                 });
 
