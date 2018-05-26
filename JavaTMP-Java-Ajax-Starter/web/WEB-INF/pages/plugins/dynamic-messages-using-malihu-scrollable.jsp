@@ -6,9 +6,10 @@
     <div class="row">
         <div class="col">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header d-flex align-items-center">
+                    <button class="fakeRecivedNewMsg btn-sm btn btn-primary">send you random newest msgs</button>
                     Scroll to bottom or top to load additional content
-                    <div class="options float-right">
+                    <div class="options float-right ml-auto">
                         <a class="settings"><i class="fa fa-cog"></i></a>
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
                         <a href="#" class="reload"><i class="fa fa-sync"></i></a>
@@ -85,10 +86,13 @@
             var workingDown = false;
             var workingTop = false;
             var startFrom = 0;
-            var recordPerPage = 10;
+            var recordPerPage = 2;
             var allCount = Number.MAX_SAFE_INTEGER;
+            var oldestCount = Number.MAX_SAFE_INTEGER;
             var currentFetchedCount = 0;
             var toUserId = javatmp.user.id;
+            var oldestDate;
+            var newestDate;
             $("#infinite-scroll").mCustomScrollbar({
                 theme: "javatmp",
                 alwaysShowScrollbar: 2,
@@ -106,79 +110,91 @@
                     },
                     onTotalScrollBack: function () {
                         if (!workingTop) {
-                            console.log("** onTotalScrollBack currentFetch [" + currentFetchedCount + "], allCount [" + allCount + "]");
-                            if (currentFetchedCount < allCount) {
-                                workingTop = true;
-                                $("#infinite-scroll").mCustomScrollbar('scrollTo', 'top', {scrollInertia: 20});
-                                this.mcs.content.prepend(indicatorTemplate);
-                                var that = this;
-                                var passData = {
-                                    _ajaxGlobalBlockUI: false,
-                                    start: startFrom,
-                                    length: recordPerPage,
-                                    order: [
-                                        {"column": 0, "dir": "asc"}
-                                    ],
-                                    columns: [{
-                                            "data": "creationDate"
-                                        },
-                                        {
-                                            "data": "toUserId",
-                                            search: {
-                                                "value": toUserId
-                                            }
+                            workingTop = true;
+                            $("#infinite-scroll").mCustomScrollbar('scrollTo', 'top', {scrollInertia: 20});
+                            this.mcs.content.prepend(indicatorTemplate);
+                            var that = this;
+
+                            var passData = {
+                                _ajaxGlobalBlockUI: false,
+                                start: 0,
+                                length: recordPerPage,
+                                order: [
+                                    {"column": 0, "dir": "desc"}
+                                ],
+                                columns: [{
+                                        "data": "creationDate",
+                                        search: {
+                                            "value": moment(newestDate).format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
+                                            "operatorType": "newerThan"
                                         }
-                                    ]
-                                };
-                                $.ajax({
-                                    "type": "POST",
-                                    url: javatmp.settings.contextPath + "/user/ListMessagesController",
-                                    dataType: "json",
-                                    contentType: "application/json; charset=UTF-8",
-                                    data: JSON.stringify(passData),
-                                    success: function (response, textStatus, jqXHR) {
-                                        that.mcs.content.find(".fetch-indicator").remove();
-                                        var data = response.data.data;
-                                        allCount = response.data.recordsTotal;
-                                        $.each(data, function (index, row) {
-                                            currentFetchedCount++;
-                                            var readyData = template.composeTemplate({
-                                                'messageId': row.messageId,
-                                                'messageTitle': row.messageTitle,
-                                                'messageContentText': row.messageContentText,
-                                                'senderFirstName': row.fromUser.firstName,
-                                                'senderLastName': row.fromUser.lastName,
-                                                'creationDate': row.creationDate,
-                                                'formatedDate': moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss"),
-                                                'contextPath': javatmp.settings.contextPath
-                                            });
-                                            that.mcs.content.prepend(readyData);
-                                            that.mcs.content.find("time.timeago").timeago();
-                                        });
-                                        $(that).mCustomScrollbar("scrollTo", 1);
-                                        startFrom += data.length;
-                                        workingTop = false;
+                                    },
+                                    {
+                                        "data": "toUserId",
+                                        search: {
+                                            "value": toUserId
+                                        }
                                     }
-                                });
-                            }
+                                ]
+                            };
+                            console.log("Try fetching any message newer than [" + moment(newestDate).format("YYYY/MM/DD HH:mm:ss.SSS Z") + "]");
+                            $.ajax({
+                                "type": "POST",
+                                url: javatmp.settings.contextPath + "/user/FetchMessagesController",
+                                dataType: "json",
+                                contentType: "application/json; charset=UTF-8",
+                                data: JSON.stringify(passData),
+                                success: function (response, textStatus, jqXHR) {
+                                    that.mcs.content.find(".fetch-indicator").remove();
+                                    var data = response.data.data;
+                                    allCount = response.data.recordsTotal;
+                                    $.each(data, function (index, row) {
+                                        currentFetchedCount++;
+                                        var readyData = template.composeTemplate({
+                                            'messageId': row.messageId,
+                                            'messageTitle': row.messageTitle,
+                                            'messageContentText': row.messageContentText,
+                                            'senderFirstName': row.fromUser.firstName,
+                                            'senderLastName': row.fromUser.lastName,
+                                            'creationDate': row.creationDate,
+                                            'formatedDate': moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss"),
+                                            'contextPath': javatmp.settings.contextPath
+                                        });
+                                        if (moment(newestDate).isBefore(moment(row.creationDate))) {
+                                            console.log("newestDate [" + moment(newestDate).format("YYYY/MM/DD HH:mm:ss") + "] become [" + moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss") + "]");
+                                            newestDate = moment(row.creationDate);
+                                        }
+                                        that.mcs.content.prepend(readyData);
+                                        that.mcs.content.find("time.timeago").timeago();
+                                    });
+                                    $(that).mCustomScrollbar("scrollTo", 1);
+                                    startFrom += data.length;
+                                    workingTop = false;
+                                }
+                            });
                         }
                     },
                     onTotalScroll: function () {
                         if (!workingDown) {
-                            console.log("** onTotalScroll currentFetch [" + currentFetchedCount + "], allCount [" + allCount + "]");
-                            if (currentFetchedCount < allCount) {
+                            console.log("** onTotalScroll currentFetch [" + currentFetchedCount + "], allCount [" + oldestCount + "]");
+                            if (oldestCount > 0) {
                                 workingDown = true;
                                 this.mcs.content.append(indicatorTemplate);
                                 var that = this;
+                                oldestDate = oldestDate || moment();
                                 var passData = {
                                     _ajaxGlobalBlockUI: false,
-                                    start: startFrom,
+                                    start: 0,
                                     length: recordPerPage,
                                     order: [
                                         {"column": 0, "dir": "asc"}
                                     ],
                                     columns: [{
-                                            "data": "creationDate"
+                                            "data": "creationDate",
+                                            search: {
+                                                "value": moment(oldestDate).format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
+                                                "operatorType": "olderThan"
+                                            }
                                         },
                                         {
                                             "data": "toUserId",
@@ -190,14 +206,14 @@
                                 };
                                 $.ajax({
                                     "type": "POST",
-                                    url: javatmp.settings.contextPath + "/user/ListMessagesController",
+                                    url: javatmp.settings.contextPath + "/user/FetchMessagesController",
                                     dataType: "json",
                                     contentType: "application/json; charset=UTF-8",
                                     data: JSON.stringify(passData),
                                     success: function (response, textStatus, jqXHR) {
                                         that.mcs.content.find(".fetch-indicator").remove();
                                         var data = response.data.data;
-                                        allCount = response.data.recordsTotal;
+                                        oldestCount = response.data.recordsTotal;
                                         $.each(data, function (index, row) {
                                             currentFetchedCount++;
                                             var readyData = template.composeTemplate({
@@ -210,6 +226,12 @@
                                                 'formatedDate': moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss"),
                                                 'contextPath': javatmp.settings.contextPath
                                             });
+
+                                            if (moment(oldestDate).isAfter(moment(row.creationDate))) {
+                                                console.log("oldest [" + moment(oldestDate).format("YYYY/MM/DD HH:mm:ss") + "] become [" + moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss") + "]");
+                                                oldestDate = moment(row.creationDate);
+                                            }
+
                                             that.mcs.content.append(readyData);
                                             that.mcs.content.find("time.timeago").timeago();
                                         });
@@ -232,19 +254,23 @@
                 // fire AFTER all transition done and your ajax content is shown to user.
                 console.log("** Start Populate content dynamically (!workingDown) is (" + (!workingDown) + ")");
                 if (!workingDown) {
-                    console.log("currentFetchedCount < allCount is (" + (currentFetchedCount < allCount) + ")");
-                    if (currentFetchedCount < allCount) {
+                    if (oldestCount > 0) {
                         workingDown = true;
                         $("#infinite-scroll .mCSB_container").append(indicatorTemplate);
+                        oldestDate = oldestDate || moment();
                         var passData = {
                             _ajaxGlobalBlockUI: false,
-                            start: startFrom,
-                            length: recordPerPage,
+                            start: 0,
+                            length: 10,
                             order: [
                                 {"column": 0, "dir": "asc"}
                             ],
                             columns: [{
-                                    "data": "creationDate"
+                                    "data": "creationDate",
+                                    search: {
+                                        "value": moment(oldestDate).format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
+                                        "operatorType": "olderThan"
+                                    }
                                 },
                                 {
                                     "data": "toUserId",
@@ -256,15 +282,19 @@
                         };
                         $.ajax({
                             "type": "POST",
-                            url: javatmp.settings.contextPath + "/user/ListMessagesController",
+                            url: javatmp.settings.contextPath + "/user/FetchMessagesController",
                             dataType: "json",
                             contentType: "application/json; charset=UTF-8",
                             data: JSON.stringify(passData),
                             success: function (response, textStatus, jqXHR) {
                                 $("#infinite-scroll .mCSB_container").find(".fetch-indicator").remove();
                                 var data = response.data.data;
-                                allCount = response.data.recordsTotal;
+                                oldestCount = response.data.recordsTotal;
                                 $.each(data, function (index, row) {
+                                    if (index === 0) {
+                                        newestDate = moment(row.creationDate);
+                                        console.log("newest date become [" + moment(newestDate).format("YYYY/MM/DD HH:mm:ss") + "]");
+                                    }
                                     currentFetchedCount++;
                                     var readyData = template.composeTemplate({
                                         'messageId': row.messageId,
@@ -276,6 +306,10 @@
                                         'formatedDate': moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss"),
                                         'contextPath': javatmp.settings.contextPath
                                     });
+                                    if (moment(oldestDate).isAfter(moment(row.creationDate))) {
+                                        console.log("oldest [" + moment(oldestDate).format("YYYY/MM/DD HH:mm:ss") + "] become [" + moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss") + "]");
+                                        oldestDate = moment(row.creationDate);
+                                    }
                                     $("#infinite-scroll .mCSB_container").append(readyData);
                                     $("#infinite-scroll .mCSB_container").find("time.timeago").timeago();
                                 });
@@ -286,6 +320,35 @@
                         });
                     }
                 }
+
+                $(".fakeRecivedNewMsg").on("click", function () {
+                    console.log("request to populate your inbox with newst messages");
+                    var formArray = [
+                        {name: "messageTos", value: javatmp.user.id},
+                        {name: "messageTitle", value: "New message @ [" + moment().format("YYYY/MM/DD HH:mm:ss.SSS Z") + "]"},
+                        {name: "messageContentText", value: "<p>new message for testing purposes client local time [" + moment().format("YYYY/MM/DD HH:mm:ss.SSS Z") + "]</p>"}
+                    ];
+                    // add default parameters:
+                    $.each(javatmp.settings.defaultPassData, function (index, value) {
+                        formArray.push({name: index, value: value});
+                    });
+                    $.ajax({
+                        type: "POST",
+                        url: javatmp.settings.contextPath + "/message/CreateMessageController",
+                        data: formArray,
+                        success: function (data) {
+                            toastr.success(data.message, 'SUCCESS', {
+                                timeOut: 3000,
+                                progressBar: true,
+                                rtl: javatmp.settings.isRTL,
+                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                            });
+                        },
+                        error: function (data) {
+                            alert("error" + JSON.stringify(data));
+                        }
+                    });
+                });
             });
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {

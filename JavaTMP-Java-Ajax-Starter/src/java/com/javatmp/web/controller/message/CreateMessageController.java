@@ -49,6 +49,7 @@ public class CreateMessageController extends HttpServlet {
                 msg.setMessageTitle(message.getMessageTitle());
                 msg.setMessageStatus((short) 1);
                 ms.createMessage(msg);
+                logger.info("message after created [" + MvcHelper.toString(msg) + "]");
                 responseBody += "Message Created id [" + msg.getMessageId() + "]<br/>";
             }
             responseMessage.setOverAllStatus(true);

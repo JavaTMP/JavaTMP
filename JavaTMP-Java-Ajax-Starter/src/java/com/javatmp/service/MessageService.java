@@ -145,13 +145,28 @@ public class MessageService {
                     }
                 }
                 if (searchParameters.get("creationDate") != null && searchParameters.get("creationDate").getValue() != null && !searchParameters.get("creationDate").getValue().equals("")) {
-                    Search searchValueObject = searchParameters.get("joiningDate");
-                    String searchValue = searchValueObject.getValue().trim().toLowerCase();
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    Search searchValueObject = searchParameters.get("creationDate");
+                    String searchValue = searchValueObject.getValue();
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
                     Date dbValue = msg.getCreationDate();
                     Date searchDate = sdf.parse(searchValue);
                     Long search = searchDate.getTime();
-                    if (dbValue.getTime() > search) {
+                    System.out.println("to[" + msg.getFromUserId() + "] db msg id [" + msg.getMessageId() + "] Operator [" + searchValueObject.getOperatorType() + "], search[" + searchDate + "] , database [" + dbValue + "]");
+                    if ((dbValue.getTime() >= search) && (searchValueObject.getOperatorType() != null && searchValueObject.getOperatorType().equals("olderThan"))) {
+                        //escape current
+                        System.out.println("escaped 1");
+                        continue;
+                    } else if ((dbValue.getTime() <= search) && (searchValueObject.getOperatorType() != null && searchValueObject.getOperatorType().equals("newerThan"))) {
+                        //escape current
+                        System.out.println("escaped 2");
+                        continue;
+                    } else if ((dbValue.getTime() != search) && (searchValueObject.getOperatorType() != null && searchValueObject.getOperatorType().equals("equalThan"))) {
+                        //escape current
+                        System.out.println("escaped 3");
+                        continue;
+                    } else if (dbValue.getTime() != search && (searchValueObject.getOperatorType() == null || searchValueObject.getOperatorType().equals(""))) {
+                        //escape current
+                        System.out.println("escaped 4");
                         continue;
                     }
                 }
@@ -170,9 +185,11 @@ public class MessageService {
                     Long searchValue = new Long(searchValueStr);
                     Long dbValue = msg.getToUserId();
                     if (!dbValue.equals(searchValue)) {
+                        System.out.println("escaped 5");
                         continue;
                     }
                 }
+                System.out.println("msg added [" + msg.getMessageId() + "]");
                 newDB.add(msg);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -214,6 +231,7 @@ public class MessageService {
                 return retCompare;
             }
         });
+        System.out.println("return result size [" + db.size() + "]");
         for (int i = tableRequest.getStart();
                 i < db.size() && i < (tableRequest.getStart() + tableRequest.getLength()); i++) {
             Message msg = db.get(i);

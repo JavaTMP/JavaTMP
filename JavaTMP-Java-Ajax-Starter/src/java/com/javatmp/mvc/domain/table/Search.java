@@ -4,6 +4,7 @@ public class Search {
 
     private String value;
     private Boolean regex;
+    private String operatorType;
 
     public Search() {
     }
@@ -43,7 +44,21 @@ public class Search {
 
     @Override
     public String toString() {
-        return "(value[" + this.value + "], regex[" + this.regex + "])";
+        return "(value[" + this.value + "], operatorType[" + this.operatorType + "], regex[" + this.regex + "])";
+    }
+
+    /**
+     * @return the operatorType
+     */
+    public String getOperatorType() {
+        return operatorType;
+    }
+
+    /**
+     * @param operatorType the operatorType to set
+     */
+    public void setOperatorType(String operatorType) {
+        this.operatorType = operatorType;
     }
 
 }
