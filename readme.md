@@ -17,6 +17,7 @@ at support@javatmp.com and we will try to reply as soon as possible.
 Kindly visit the following online page for details folders and files description:
 https://www.javatmp.com/pages/high-level-template-structure
 
+## Running
 It is best to run JavaTMP's applications with in a HTTP web server. However,
 inside each project there is a gulp task that run a local web server.
 So you can use it for testing purposes by running the following command:
@@ -27,7 +28,7 @@ gulp run-local-web-server
 ```
 
 the above command will run a local web server listening
-on port 8888 and context root "public_html". To access the application
+on port 8888 and context root "web". To access the application
 after running the above command, use the following web address:
 
 http://localhost:8888/
