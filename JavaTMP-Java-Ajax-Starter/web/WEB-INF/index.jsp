@@ -1750,7 +1750,6 @@
                                 contentType: "application/json; charset=UTF-8",
                                 data: JSON.stringify(passData),
                                 success: function (response, textStatus, jqXHR) {
-
                                     $(".mCSB_container", myMessagesScrollable).find(".fetch-indicator").remove();
                                     var data = response.data.data;
                                     oldestCount = response.data.recordsTotal;
