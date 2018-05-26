@@ -1662,6 +1662,7 @@
                         },
                         onScroll: function () {
                             console.log("top = " + this.mcs.top + " , direction = " + this.mcs.direction);
+
                         },
                         onTotalScrollBack: function () {
                             if (!workingTop) {
@@ -1876,7 +1877,7 @@
                         }
                     } else {
                         console.log("already fetch initial data");
-                        myMessagesScrollable.mCustomScrollbar("scrollTo", 1, {callbacks: true});
+                        myMessagesScrollable.mCustomScrollbar("scrollTo", 1);
                     }
                 });
 
