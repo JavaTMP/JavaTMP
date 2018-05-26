@@ -14,8 +14,8 @@ Please send your questions, comments, suggestions and bug reports to our support
 at support@javatmp.com and we will try to reply as soon as possible.
 
 Folder's contents:
-- Folder JavaTMP-Static-Ajax
-It is a static web application containing template pages.
+Kindly visit the following online page for details folders and files description:
+https://www.javatmp.com/pages/high-level-template-structure
 
 It is best to run JavaTMP's applications with in a HTTP web server. However,
 inside each project there is a gulp task that run a local web server.
