@@ -113,9 +113,9 @@ gulp.task('copy-JavaTMP-Static-Ajax-Starter-RTL', function (cb) {
 //    return gulp
 //            .src([
 //                'temp/JavaTMP-Static-Ajax/**/*',
-//                "!**/public_html/components{,/**}",
-//                "!**/public_html/assets/fonts{,/**}",
-//                "!**/public_html/assets/img{,/**}"], {dot: true})
+//                "!**/web/components{,/**}",
+//                "!**/web/assets/fonts{,/**}",
+//                "!**/web/assets/img{,/**}"], {dot: true})
 //            .pipe(header(banner, {pkg: pkg}))
 //            .pipe(gulp.dest("temp/JavaTMP-Static-Ajax"))
 //            .on('end', function () {
@@ -126,9 +126,9 @@ gulp.task('copy-JavaTMP-Static-Ajax-Starter-RTL', function (cb) {
 //    return gulp
 //            .src([
 //                'temp/JavaTMP-Static-Ajax-RTL/**/*',
-//                "!**/public_html/components{,/**}",
-//                "!**/public_html/assets/fonts{,/**}",
-//                "!**/public_html/assets/img{,/**}"], {dot: true})
+//                "!**/web/components{,/**}",
+//                "!**/web/assets/fonts{,/**}",
+//                "!**/web/assets/img{,/**}"], {dot: true})
 //            .pipe(header(banner, {pkg: pkg}))
 //            .pipe(gulp.dest("temp/JavaTMP-Static-Ajax-RTL"))
 //            .on('end', function () {
@@ -138,7 +138,7 @@ gulp.task('copy-JavaTMP-Static-Ajax-Starter-RTL', function (cb) {
 
 gulp.task('save-project-online-static-demo', function (cb) {
     return gulp
-            .src(['temp/JavaTMP-Static-Ajax/public_html/**/*'], {dot: true})
+            .src(['temp/JavaTMP-Static-Ajax/web/**/*'], {dot: true})
             .pipe(gulp.dest("temp/online-static-demo"))
             .on('end', function () {
                 cb();
@@ -146,7 +146,7 @@ gulp.task('save-project-online-static-demo', function (cb) {
 });
 gulp.task('save-project-online-static-demo-rtl', function (cb) {
     return gulp
-            .src(['temp/JavaTMP-Static-Ajax-RTL/public_html/**/*'], {dot: true})
+            .src(['temp/JavaTMP-Static-Ajax-RTL/web/**/*'], {dot: true})
             .pipe(gulp.dest("temp/online-static-demo-rtl"))
             .on('end', function () {
                 cb();
@@ -154,7 +154,7 @@ gulp.task('save-project-online-static-demo-rtl', function (cb) {
 });
 gulp.task('save-project-online-static-demo-starter', function (cb) {
     return gulp
-            .src(['temp/JavaTMP-Static-Ajax-Starter/public_html/**/*'], {dot: true})
+            .src(['temp/JavaTMP-Static-Ajax-Starter/web/**/*'], {dot: true})
             .pipe(gulp.dest("temp/online-static-demo-starter"))
             .on('end', function () {
                 cb();
@@ -162,7 +162,7 @@ gulp.task('save-project-online-static-demo-starter', function (cb) {
 });
 gulp.task('save-project-online-static-demo-starter-rtl', function (cb) {
     return gulp
-            .src(['temp/JavaTMP-Static-Ajax-Starter-RTL/public_html/**/*'], {dot: true})
+            .src(['temp/JavaTMP-Static-Ajax-Starter-RTL/web/**/*'], {dot: true})
             .pipe(gulp.dest("temp/online-static-demo-starter-rtl"))
             .on('end', function () {
                 cb();
@@ -297,25 +297,25 @@ gulp.task('remove-online-static-demos (LTR & RTL)', function (cb) {
     ], cb());
 });
 //gulp.task('remove-embedded-code', function (cb) {
-//    return gulp.src('temp/JavaTMP-Static-Ajax/public_html/assets/src/js-src/javatmp.js')
+//    return gulp.src('temp/JavaTMP-Static-Ajax/web/assets/src/js-src/javatmp.js')
 //            .pipe(eslint())
 //            .pipe(eslint.format())
 //            .pipe(processhtml())
 //            .pipe(uglify({output: {comments: /^!/}}))
 //            .pipe(rename({suffix: '.min'}))
-//            .pipe(gulp.dest('temp/JavaTMP-Static-Ajax/public_html/assets/js/')).on('end', function () {
+//            .pipe(gulp.dest('temp/JavaTMP-Static-Ajax/web/assets/js/')).on('end', function () {
 //        cb();
 //    });
 //});
 //gulp.task('remove-embedded-code-rtl', function (cb) {
 //    return gulp
-//            .src('temp/JavaTMP-Static-Ajax-RTL/public_html/assets/src/js-src/javatmp.js')
+//            .src('temp/JavaTMP-Static-Ajax-RTL/web/assets/src/js-src/javatmp.js')
 //            .pipe(eslint())
 //            .pipe(eslint.format())
 //            .pipe(processhtml())
 //            .pipe(uglify({output: {comments: /^!/}}))
 //            .pipe(rename({suffix: '.min'}))
-//            .pipe(gulp.dest('temp/JavaTMP-Static-Ajax-RTL/public_html/assets/js/'))
+//            .pipe(gulp.dest('temp/JavaTMP-Static-Ajax-RTL/web/assets/js/'))
 //            .on('end', function () {
 //                cb();
 //            });
