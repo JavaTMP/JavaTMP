@@ -14,6 +14,7 @@ Please send your questions, comments, suggestions and bug reports to our support
 at support@javatmp.com and we will try to reply as soon as possible.
 
 Folder's contents:
+
 Kindly visit the following online page for details folders and files description:
 https://www.javatmp.com/pages/high-level-template-structure
 
