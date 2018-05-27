@@ -1421,7 +1421,8 @@
                 javatmp.user = {};
                 javatmp.user.id = ${sessionScope.user.id};
                 javatmp.user.lang = "${sessionScope.user.lang}";
-
+                // force en as a moment locale for now
+                moment.locale("en");
                 javatmp.settings.handle401Error = function (jqXHR, textStatus, errorThrown) {
                     var modalMessage = null;
                     var redirectURL = null;
@@ -1842,7 +1843,7 @@
                         beforeSend: function () {
                         },
                         success: function (response, textStatus, jqXHR) {
-                            window.location.reload();
+                            window.location.reload(true);
                         },
                         error: function (jqXHR, textStatus, errorThrown) {
                         }

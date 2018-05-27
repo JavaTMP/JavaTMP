@@ -151,22 +151,22 @@ public class MessageService {
                     Date dbValue = msg.getCreationDate();
                     Date searchDate = sdf.parse(searchValue);
                     Long search = searchDate.getTime();
-                    System.out.println("to[" + msg.getFromUserId() + "] db msg id [" + msg.getMessageId() + "] Operator [" + searchValueObject.getOperatorType() + "], search[" + searchDate + "] , database [" + dbValue + "]");
+//                    System.out.println("to[" + msg.getFromUserId() + "] db msg id [" + msg.getMessageId() + "] Operator [" + searchValueObject.getOperatorType() + "], search[" + searchDate + "] , database [" + dbValue + "]");
                     if ((dbValue.getTime() >= search) && (searchValueObject.getOperatorType() != null && searchValueObject.getOperatorType().equals("olderThan"))) {
                         //escape current
-                        System.out.println("escaped 1");
+//                        System.out.println("escaped 1");
                         continue;
                     } else if ((dbValue.getTime() <= search) && (searchValueObject.getOperatorType() != null && searchValueObject.getOperatorType().equals("newerThan"))) {
                         //escape current
-                        System.out.println("escaped 2");
+//                        System.out.println("escaped 2");
                         continue;
                     } else if ((dbValue.getTime() != search) && (searchValueObject.getOperatorType() != null && searchValueObject.getOperatorType().equals("equalThan"))) {
                         //escape current
-                        System.out.println("escaped 3");
+//                        System.out.println("escaped 3");
                         continue;
                     } else if (dbValue.getTime() != search && (searchValueObject.getOperatorType() == null || searchValueObject.getOperatorType().equals(""))) {
                         //escape current
-                        System.out.println("escaped 4");
+//                        System.out.println("escaped 4");
                         continue;
                     }
                 }
@@ -185,7 +185,7 @@ public class MessageService {
                     Long searchValue = new Long(searchValueStr);
                     Long dbValue = msg.getToUserId();
                     if (!dbValue.equals(searchValue)) {
-                        System.out.println("escaped 5");
+//                        System.out.println("escaped 5");
                         continue;
                     }
                 }

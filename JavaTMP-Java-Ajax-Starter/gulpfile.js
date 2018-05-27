@@ -76,9 +76,9 @@ var config = {
         ],
         "moment": [
             {"from": "${sourceNodeLib}/moment/min/moment.min.js", "to": "${destComponentsLib}/moment/min"},
-//            {"from": "${sourceNodeLib}/moment/min/locales.min.js", "to": "${destComponentsLib}/moment/min"}
-            {"from": "${sourceNodeLib}/moment/locale/ar.js", "to": "${destComponentsLib}/moment/locale", processJS: true},
-            {"from": "${sourceNodeLib}/moment/locale/en-gb.js", "to": "${destComponentsLib}/moment/locale", processJS: true}
+            {"from": "${sourceNodeLib}/moment/min/locales.min.js", "to": "${destComponentsLib}/moment/min"}
+//            {"from": "${sourceNodeLib}/moment/locale/ar.js", "to": "${destComponentsLib}/moment/locale", processJS: true},
+//            {"from": "${sourceNodeLib}/moment/locale/en-gb.js", "to": "${destComponentsLib}/moment/locale", processJS: true}
         ],
         "bootstrap-daterangepicker": [
             {"from": "${sourceNodeLib}/bootstrap-daterangepicker/daterangepicker.css", "to": "${destComponentsLib}/bootstrap-daterangepicker", processCSS: true},
@@ -339,11 +339,13 @@ var src = {
     ],
     "localeJS": {
         "en": [
+            "./web/components/moment/min/locales.min.js",
             "./web/components/timeago/locales/jquery.timeago.en.js"
         ],
         "ar": [
-            "./web/components/moment/locale/en-gb.js",
-            "./web/components/moment/locale/ar.js",
+            "./web/components/moment/min/locales.min.js",
+//            "./web/components/moment/locale/en-gb.js",
+//            "./web/components/moment/locale/ar.js",
             "./web/components/summernote/dist/lang/summernote-ar-AR.min.js",
             "./web/components/fullcalendar/dist/locale/ar.js",
             "./web/components/timeago/locales/jquery.timeago.ar.js",

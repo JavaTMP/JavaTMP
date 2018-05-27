@@ -492,13 +492,7 @@
                     format: 'DD/MM/YYYY'
                 }
             }, function (start, end, label) {
-                var currentLocale = moment.locale();
-                alert("current locale [" + currentLocale + "]");
-                moment.locale('en-gb');
-                alert("current locale [" + moment.locale() + "]");
-                var formatedDateSelected = moment(start, "en-gb", true).format("DD/MM/YYYY");
-                moment.locale(currentLocale);
-                alert("start[" + start + "]" + formatedDateSelected);
+                var formatedDateSelected = moment(start).format("DD/MM/YYYY");
                 form.find("input[name='birthOfDateStr']").val(formatedDateSelected);
             });
             $(".daterangepicker.dropdown-menu").css('z-index', 600 + 1);
