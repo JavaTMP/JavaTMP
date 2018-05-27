@@ -1,3 +1,5 @@
+@import "../common/variables.scss";
+@import "../common/colors-variables";
 
 @mixin createTextColorClass($selector, $colorValue) {
     .text-#{$selector} {

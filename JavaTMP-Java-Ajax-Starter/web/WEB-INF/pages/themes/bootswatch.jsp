@@ -7,6 +7,7 @@
         <div class="col-lg-12">
             <div class="alert alert-info">
                 <p>Bootswatch is a collection of open source themes for Bootstrap that are easy to install and customize.</p>
+                <p class="text-warning">Note that because we apply our font family at end of css files list, any custom font used in bootswatch themes will be override by ours.</p>
                 <p class="text-danger">Note that we apply the Bootswatch themes without any tweeks or modifications.</p>
                 <p>
                     <a class="btn btn-info" target="_blank" href="https://bootswatch.com/">Demo Page</a>

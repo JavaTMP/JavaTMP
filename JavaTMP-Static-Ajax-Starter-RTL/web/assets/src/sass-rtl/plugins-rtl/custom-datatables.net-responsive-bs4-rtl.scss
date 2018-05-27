@@ -1,3 +1,5 @@
+@import "../common/variables.scss";
+
 $dataTables-cell-padding: $table-cell-padding!default;
 
 table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > td:first-child,

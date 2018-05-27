@@ -1,3 +1,5 @@
+@import "../common/variables.scss";
+
 .sidebar {
     border-right: none;
     border-left: $javatmp-sidebar-border-width solid $javatmp-sidebar-border-color;
