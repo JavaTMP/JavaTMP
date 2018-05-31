@@ -99,7 +99,7 @@
         jQuery(function ($) {
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
-            moment.lang(javatmp.user.lang);
+            moment.locale(javatmp.user.lang);
             var months = moment.months();
             var formatTooltipLine = function (color, value) {
                 return "<span style='display:inline-block;width:10px;height:10px;border-radius:50%;background-color:" + color + ";margin-" + javatmp.settings.floatReverse + ":5px;'></span><span>" + value + "</span>";
