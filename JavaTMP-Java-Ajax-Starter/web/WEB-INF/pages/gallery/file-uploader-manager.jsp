@@ -146,7 +146,7 @@
                                 'documentName': response.data[i].documentName,
                                 'documentSize': numeral(response.data[i].documentSize).format('0b'),
                                 'contentType': response.data[i].contentType,
-                                'creationDate': moment(response.data[i].creationDate, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("DD/MM/YYYY HH:mm:ss"),
+                                'creationDate': moment(response.data[i].creationDate, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("LLLL"),
                                 'link': response.data[i].documentId,
                                 'randomHash': response.data[i].randomHash,
                                 'contextPath': javatmp.settings.contextPath
@@ -200,7 +200,7 @@
                             'documentName': response.data[i].documentName,
                             'documentSize': numeral(response.data[i].documentSize).format('0b'),
                             'contentType': response.data[i].contentType,
-                            'creationDate': moment(response.data[i].creationDate, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("DD/MM/YYYY HH:mm:ss"),
+                            'creationDate': moment(response.data[i].creationDate, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("LLLL"),
                             'link': response.data[i].documentId,
                             'randomHash': response.data[i].randomHash,
                             'contextPath': javatmp.settings.contextPath
