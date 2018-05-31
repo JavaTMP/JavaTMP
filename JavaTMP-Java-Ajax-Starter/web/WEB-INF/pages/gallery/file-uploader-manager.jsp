@@ -90,6 +90,15 @@
             // <--- HERE --->
             //
             var alertMessage;
+            var row = '<tr>' +
+                    '<td>{{id}}</td>' +
+                    '<td>{{documentName}}</td>' +
+                    '<td>{{documentSize}}</td>' +
+                    '<td>{{contentType}}</td>' +
+                    '<td>{{creationDate}}</td>' +
+                    '<td><a class="" target="" href="{{contextPath}}/ViewUploadedFileController?documentId={{link}}&amp;randomHash={{randomHash}}&amp;viewType=inline">View Inline</a></td>' +
+                    '<td><a class="" target="" href="{{contextPath}}/ViewUploadedFileController?documentId={{link}}&amp;randomHash={{randomHash}}&amp;viewType=attachment">View As Attachment</a></td>' +
+                    '</tr>';
             function uploadSelectedFiles() {
                 $('#updateFormId').ajaxForm({
                     url: javatmp.settings.contextPath + '/UploadController',
@@ -125,15 +134,6 @@
 //                                    alert(unescape(JSON.stringify(response)));
                         var tbody = $('#formPluginAjaxUpload').children('tbody');
                         var table = tbody.length ? tbody : $('#formPluginAjaxUpload');
-                        var row = '<tr>' +
-                                '<td>{{id}}</td>' +
-                                '<td>{{documentName}}</td>' +
-                                '<td>{{documentSize}}</td>' +
-                                '<td>{{contentType}}</td>' +
-                                '<td>{{creationDate}}</td>' +
-                                '<td><a class="" target="" href="{{contextPath}}/ViewUploadedFileController?documentId={{link}}&amp;randomHash={{randomHash}}&amp;viewType=inline">View Inline</a></td>' +
-                                '<td><a class="" target="" href="{{contextPath}}/ViewUploadedFileController?documentId={{link}}&amp;randomHash={{randomHash}}&amp;viewType=attachment">View As Attachment</a></td>' +
-                                '</tr>';
 
                         // remove emptyUploadedFilesSizeRowId if response data length more than one:
                         if (response.data.length) {
@@ -180,16 +180,6 @@
                 success: function (response, textStatus, jqXHR) {
                     var tbody = $('#formPluginAjaxUpload').children('tbody');
                     var table = tbody.length ? tbody : $('#formPluginAjaxUpload');
-                    var row = '<tr>' +
-                            '<td>{{id}}</td>' +
-                            '<td>{{documentName}}</td>' +
-                            '<td>{{documentSize}}</td>' +
-                            '<td>{{contentType}}</td>' +
-                            '<td>{{creationDate}}</td>' +
-                            '<td><a class="" target="" href="{{contextPath}}/ViewUploadedFileController?documentId={{link}}&amp;randomHash={{randomHash}}&amp;viewType=inline">View Inline</a></td>' +
-                            '<td><a class="" target="" href="{{contextPath}}/ViewUploadedFileController?documentId={{link}}&amp;randomHash={{randomHash}}&amp;viewType=attachment">View As Attachment</a></td>' +
-                            '</tr>';
-
                     // remove emptyUploadedFilesSizeRowId if response data length more than one:
                     if (response.data.length) {
                         $("#emptyUploadedFilesSizeRowId").remove();
