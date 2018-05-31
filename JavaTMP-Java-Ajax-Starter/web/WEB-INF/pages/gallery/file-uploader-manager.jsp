@@ -144,7 +144,7 @@
                             table.append(row.composeTemplate({
                                 'id': response.data[i].documentId,
                                 'documentName': response.data[i].documentName,
-                                'documentSize': numeral(response.data[i].documentSize).format('0b'),
+                                'documentSize': numeral(response.data[i].documentSize).format("0b"),
                                 'contentType': response.data[i].contentType,
                                 'creationDate': moment(response.data[i].creationDate, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("LLLL"),
                                 'link': response.data[i].documentId,
@@ -198,7 +198,7 @@
                         table.append(row.composeTemplate({
                             'id': response.data[i].documentId,
                             'documentName': response.data[i].documentName,
-                            'documentSize': numeral(response.data[i].documentSize).format('0b'),
+                            'documentSize': numeral(response.data[i].documentSize).format("0b"),
                             'contentType': response.data[i].contentType,
                             'creationDate': moment(response.data[i].creationDate, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("LLLL"),
                             'link': response.data[i].documentId,
