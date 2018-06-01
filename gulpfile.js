@@ -288,6 +288,7 @@ gulp.task('process-online-java-demo-starter', function (cb) {
                 minifyJS: true,
                 removeComments: true,
                 ignoreCustomComments: false,
+                keepClosingSlash: true,
                 ignoreCustomFragments: [/<%@[\s\S]*?%>/, /\$\{[\s\S]*?\}/, /<fmt:[\s\S]*?\/>/, /\{\{[\s\S]*?\}\}/]
             }))
             .pipe(gulp.dest("temp/online-java-demo-starter"))
