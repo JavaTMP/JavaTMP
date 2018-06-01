@@ -144,8 +144,8 @@
                             table.append(row.composeTemplate({
                                 'id': response.data[i].documentId,
                                 'documentName': response.data[i].documentName,
-//                                'documentSize': numeral(response.data[i].documentSize).format("0b"),
-                                'documentSize': response.data[i].documentSize,
+                                'documentSize': numeral(response.data[i].documentSize).format("0b"),
+//                                'documentSize': response.data[i].documentSize,
                                 'contentType': response.data[i].contentType,
                                 'creationDate': moment(response.data[i].creationDate, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("LLLL"),
                                 'link': response.data[i].documentId,
@@ -189,8 +189,8 @@
                         table.append(row.composeTemplate({
                             'id': response.data[i].documentId,
                             'documentName': response.data[i].documentName,
-//                            'documentSize': numeral(response.data[i].documentSize).format("0b"),
-                            'documentSize': response.data[i].documentSize,
+                            'documentSize': numeral(response.data[i].documentSize).format("0b"),
+//                            'documentSize': response.data[i].documentSize,
                             'contentType': response.data[i].contentType,
                             'creationDate': moment(response.data[i].creationDate, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("LLLL"),
                             'link': response.data[i].documentId,
@@ -205,7 +205,7 @@
                 // fire AFTER all transition done and your ajax content is shown to user.
                 // We can attach the `fileselect` event to all file inputs on the page
                 $("#updateFormId input[type=file]").attr("accept", "*/*").on("change", function () {
-                    var max = 1000 * 1024 * 1024; // 1024MB
+                    var max = 1 * 50 * 1024; // 50kb
                     for (var i = 0; i < this.files.length; i++) {
                         if (this.files && this.files[i].size > max) {
                             alert("[" + this.files[i].name + " ] File too large."); // Do your thing to handle the error.
@@ -220,7 +220,7 @@
                     if (input.get(0).files && input.get(0).files.length > 0) {
                         for (var i = 0; i < input.get(0).files.length; i++) {
                             var file = input.get(0).files[i];
-                            fileMsg += "<br/># [" + (i + 1) + "][" + file.name + "]";
+                            fileMsg += '<br>[' + (i + 1) + "][" + file.name + "]";
                         }
                         BootstrapModalWrapperFactory.confirm({
                             title: "Confirm",
