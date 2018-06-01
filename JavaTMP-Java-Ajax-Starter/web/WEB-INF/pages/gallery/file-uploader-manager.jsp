@@ -60,7 +60,7 @@
                                             <th width="100%">Document Name</th>
                                             <th width="150px">Document Size</th>
                                             <th width="200px">Content Type</th>
-                                            <th width="225px">Creation Date</th>
+                                            <th width="300px">Creation Date</th>
                                             <th width="150px">View Inline</th>
                                             <th width="175px">View Attachment</th>
                                         </tr>
