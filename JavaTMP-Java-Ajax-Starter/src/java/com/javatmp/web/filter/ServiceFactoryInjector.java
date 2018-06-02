@@ -5,7 +5,6 @@ import com.javatmp.mvc.MvcHelper;
 import com.javatmp.service.ServicesFactory;
 import com.javatmp.util.Constants;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 import javax.servlet.Filter;
