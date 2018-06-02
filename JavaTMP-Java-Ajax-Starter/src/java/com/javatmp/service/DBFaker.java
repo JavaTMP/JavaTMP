@@ -17,10 +17,6 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Logger;
 
-/**
- *
- * @author m_dar
- */
 public class DBFaker {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
