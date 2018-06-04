@@ -28,28 +28,28 @@ var banner = ['/*!',
     ''].join('\n');
 
 gulp.task('update-version', function (cb) {
-//    pkg.version = "v" + pkg.version;
-    var versionParts = pkg.version.split('.');
-    var vArray = {
-        vMajor: versionParts[0],
-        vMinor: versionParts[1],
-        vPatch: versionParts[2]
-    };
-
-    vArray.vPatch = parseFloat(vArray.vPatch) + 1;
-    var periodString = ".";
-
-    pkg.version = vArray.vMajor + periodString +
-            vArray.vMinor + periodString +
-            vArray.vPatch;
-    console.log(JSON.stringify(pkg));
-    fs.writeFile('./package.json', JSON.stringify(pkg, null, 4), 'utf8', function (err) {
-        if (err)
-            throw err;
-        pkg.version = "v" + pkg.version;
-        console.log("Package Version updated [" + pkg.version + "]");
-        cb();
-    });
+    pkg.version = "v" + pkg.version;
+//    var versionParts = pkg.version.split('.');
+//    var vArray = {
+//        vMajor: versionParts[0],
+//        vMinor: versionParts[1],
+//        vPatch: versionParts[2]
+//    };
+//
+//    vArray.vPatch = parseFloat(vArray.vPatch) + 1;
+//    var periodString = ".";
+//
+//    pkg.version = vArray.vMajor + periodString +
+//            vArray.vMinor + periodString +
+//            vArray.vPatch;
+//    console.log(JSON.stringify(pkg));
+//    fs.writeFile('./package.json', JSON.stringify(pkg, null, 4), 'utf8', function (err) {
+//        if (err)
+//            throw err;
+//        pkg.version = "v" + pkg.version;
+//        console.log("Package Version updated [" + pkg.version + "]");
+//        cb();
+//    });
 });
 
 gulp.task('clean', function (cb) {
