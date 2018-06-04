@@ -29,6 +29,7 @@ var banner = ['/*!',
 
 gulp.task('update-version', function (cb) {
     pkg.version = "v" + pkg.version;
+    cb();
 //    var versionParts = pkg.version.split('.');
 //    var vArray = {
 //        vMajor: versionParts[0],
