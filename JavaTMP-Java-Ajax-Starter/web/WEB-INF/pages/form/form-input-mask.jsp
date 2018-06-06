@@ -36,7 +36,7 @@
                                     <label>Date Input</label>
                                     <input dir="ltr"
                                            class="form-control inputmaskTextField"
-                                           data-inputmask="'alias': 'date'"
+                                           data-inputmask="'alias': 'datetime', 'inputformat' : 'dd/mm/yyyy'"
                                            data-inputmask-clearmaskonlostfocus="false" />
                                     <p class="help-block">Date Input Mask.</p>
                                 </div>
