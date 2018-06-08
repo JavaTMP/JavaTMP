@@ -1,0 +1,154 @@
+@import "../common/variables.scss";
+// Container Sizing
+$context-menu-min-width: $dropdown-min-width !default;
+$context-menu-max-width: $context-menu-min-width * 2 !default;
+$context-menu-container-padding: $dropdown-padding-y 0 !default;
+$context-menu-container-margin: $dropdown-spacer !default;
+$context-menu-border-radius: $dropdown-border-radius !default;
+
+// Container Font
+$context-menu-font-family: $font-family-base !default;
+$context-menu-font-size: $font-size-base !default;
+
+// Container Color
+$context-menu-background-color: $dropdown-bg !default;
+$context-menu-color: $body-color;
+$context-menu-border-width: $dropdown-border-width !default;
+$context-menu-border-style: solid !default;
+$context-menu-border-color: $dropdown-border-color !default;
+$context-menu-box-shadow: $dropdown-box-shadow !default;
+
+// Item Sizing
+$context-menu-padding-vertical: .2em !default;
+$context-menu-padding-horizontal: 2em !default;
+$context-menu-item-line-height: $line-height-base;
+// Item Default
+$context-menu-item-padding: $context-menu-padding-vertical $context-menu-padding-horizontal !default;
+$context-menu-text-color: $dropdown-link-color !default;
+$context-menu-item-color: transparent !default;
+
+// Item Hover
+$context-menu-item-color-hover: $dropdown-link-hover-bg !default;
+$context-menu-text-color-hover: $dropdown-link-hover-color !default;
+
+// Item Disabled
+$context-menu-item-color-disabled: transparent !default;
+$context-menu-text-color-disabled: $dropdown-link-disabled-color !default;
+
+// Submenu
+$context-menu-submenu-arrow-color: $context-menu-text-color !default;
+
+// Separator
+$context-menu-separator-height: 1px !default;
+$context-menu-separator-style: solid !default;
+$context-menu-separator-color: $dropdown-divider-bg !default;
+$context-menu-separator-margin: ($spacer / 2) 0 !default;
+
+// Icons
+$context-menu-icons-cachebust: "1f6p1";
+$context-menu-icon-font-path: $javatmp-font-path !default;
+$context-menu-icon-font-name: 'context-menu-icons' !default;
+$context-menu-icon-size: 1em !default;
+$context-menu-icon-color: $context-menu-text-color;
+$context-menu-icon-color-hover: $context-menu-text-color-hover;
+
+@font-face {
+    font-family: '#{$context-menu-icon-font-name}';
+    src: url('#{$context-menu-icon-font-path}/#{$context-menu-icon-font-name}.eot?#{$context-menu-icons-cachebust}');
+    src: url('#{$context-menu-icon-font-path}/#{$context-menu-icon-font-name}.eot?#{$context-menu-icons-cachebust}#iefix') format('embedded-opentype'),
+        url('#{$context-menu-icon-font-path}/#{$context-menu-icon-font-name}.woff2?#{$context-menu-icons-cachebust}') format('woff2'),
+        url('#{$context-menu-icon-font-path}/#{$context-menu-icon-font-name}.woff?#{$context-menu-icons-cachebust}') format('woff'),
+        url('#{$context-menu-icon-font-path}/#{$context-menu-icon-font-name}.ttf?#{$context-menu-icons-cachebust}') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@mixin base-context-menu-icon($icon-font: "context-menu-icons") {
+    &::before {
+        color: $context-menu-icon-color;
+        font-family: $icon-font;
+        font-style: normal;
+        font-weight: normal;
+        font-size: $context-menu-icon-size;
+        left: 0;
+        line-height: $context-menu-item-line-height;
+        position: absolute;
+        text-align: center;
+        top: 50%;
+        transform: translateY(-50%);
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        width: 2em;
+    }
+}
+
+.context-menu-icon {
+    @include base-context-menu-icon;
+
+    &.context-menu-hover:before {
+        color: $context-menu-icon-color-hover;
+    }
+    &.context-menu-disabled::before {
+        color: $context-menu-text-color-disabled;
+    }
+
+    &.context-menu-icon--fa {
+        display: list-item;
+        font-family: $context-menu-font-family;
+        font-size: $context-menu-font-size;
+        line-height: $context-menu-item-line-height;
+        @include base-context-menu-icon(FontAwesome);
+
+        &.context-menu-hover:before {
+            color: $context-menu-icon-color-hover;
+        }
+        &.context-menu-disabled::before {
+            color: $context-menu-text-color-disabled;
+        }
+
+        padding: $context-menu-item-padding;
+    }
+}
+
+.context-menu-list {
+    background: $context-menu-background-color;
+    color: $context-menu-color;
+    border: $context-menu-border-width $context-menu-border-style $context-menu-border-color;
+    font-family: $context-menu-font-family;
+    font-size: $context-menu-font-size;
+    margin: $context-menu-container-margin;
+    max-width: $context-menu-max-width;
+    min-width: $context-menu-min-width;
+    padding: $context-menu-container-padding;
+    @include border-radius($context-menu-border-radius);
+    @include box-shadow($context-menu-box-shadow);
+    box-shadow: none;
+}
+
+.context-menu-item {
+    background-color: $context-menu-background-color;
+    color: $context-menu-text-color;
+    padding: $context-menu-item-padding;
+}
+
+.context-menu-separator {
+    border-bottom: $context-menu-separator-height $context-menu-separator-style $context-menu-separator-color;
+    margin: $context-menu-separator-margin;
+}
+.context-menu-item.context-menu-hover {
+    background-color: $context-menu-item-color-hover;
+    color: $context-menu-text-color-hover;
+}
+
+.context-menu-item.context-menu-disabled {
+    background-color: $context-menu-item-color-disabled;
+    color: $context-menu-text-color-disabled;
+}
+
+.context-menu-input.context-menu-hover {
+    color: $context-menu-text-color;
+}
+
+.context-menu-submenu:after {
+    border-color: transparent transparent transparent $context-menu-submenu-arrow-color;
+}

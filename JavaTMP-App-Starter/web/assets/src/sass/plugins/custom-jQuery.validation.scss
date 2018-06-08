@@ -1,0 +1,54 @@
+@import "../common/variables.scss";
+$jquery-validation-success-color: $success;
+$jquery-validation-success-border-color: $jquery-validation-success-color;
+$jquery-validation-error-color: $danger;
+$jquery-validation-error-border-color: $jquery-validation-error-color;
+
+.has-error, .has-success {
+    position: relative;
+}
+.has-error .form-control {
+    border-color: $jquery-validation-error-border-color;
+    color: $jquery-validation-error-color;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.has-error .custom-file,
+.has-error .custom-select,
+.has-error .checkbox,
+.has-error .checkbox-inline,
+.has-error .control-label,
+.has-error .help-block,
+.has-error .radio,
+.has-error .radio-inline,
+.has-error label,
+.has-error.checkbox label,
+.has-error.checkbox-inline label,
+.has-error.radio label,
+.has-error.radio-inline label {
+    border-color: $jquery-validation-error-border-color;
+    color: $jquery-validation-error-color;
+}
+
+.has-success .form-control {
+    border-color: $jquery-validation-success-border-color;
+    color: $jquery-validation-success-color;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+.has-success .custom-file,
+.has-success .custom-select,
+.has-success .checkbox,
+.has-success .checkbox-inline,
+.has-success .control-label,
+.has-success .help-block,
+.has-success .radio,
+.has-success .radio-inline,
+.has-success label,
+.has-success.checkbox label,
+.has-success.checkbox-inline label,
+.has-success.radio label,
+.has-success.radio-inline label {
+    border-color: $jquery-validation-success-border-color;
+    color: $jquery-validation-success-color;
+}

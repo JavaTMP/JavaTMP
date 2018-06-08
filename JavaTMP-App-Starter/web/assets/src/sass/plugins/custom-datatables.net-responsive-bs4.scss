@@ -1,0 +1,44 @@
+@import "../common/variables.scss";
+$datatables-border-width: $table-border-width!default;
+$datatables-border-color: $table-border-color!default;
+$datatables-cell-padding: $table-cell-padding!default;
+$datatables-collapsed-btn-bg: $primary!default;
+$datatables-collapsed-btn-color: color-yiq($datatables-collapsed-btn-bg)!default;
+$datatables-collapsed-border-color: $body-bg!default;
+$datatables-collapsed-box-shadow-color: $body-color!default;
+$datatables-collapse-btn-bg: $danger!default;
+$datatables-collapse-btn-color: color-yiq($datatables-collapse-btn-bg)!default;
+
+
+table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > td:first-child:before,
+table.dataTable.dtr-inline.collapsed > tbody > tr[role="row"] > th:first-child:before {
+    color: $datatables-collapsed-btn-color;
+    border: 2px solid $datatables-collapsed-border-color;
+    box-shadow: 0 0 3px $datatables-collapsed-box-shadow-color;
+    background-color: $datatables-collapsed-btn-bg;
+}
+table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td:first-child:before,
+table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th:first-child:before {
+    background-color: $datatables-collapse-btn-bg;
+    color: $datatables-collapse-btn-color;
+}
+
+table.dataTable.dtr-column > tbody > tr > td.control:before,
+table.dataTable.dtr-column > tbody > tr > th.control:before {
+    color: $datatables-collapsed-btn-color;
+    border: 2px solid $datatables-collapsed-border-color;
+    box-shadow: 0 0 3px $datatables-collapsed-box-shadow-color;
+    background-color: $datatables-collapsed-btn-bg;
+}
+table.dataTable.dtr-column > tbody > tr.parent td.control:before,
+table.dataTable.dtr-column > tbody > tr.parent th.control:before {
+    background-color: $datatables-collapse-btn-bg;
+    color: $datatables-collapse-btn-color;
+}
+table.dataTable > tbody > tr.child ul.dtr-details {
+    display: block;
+}
+table.dataTable > tbody > tr.child ul.dtr-details > li {
+    border-bottom: $datatables-border-width solid $datatables-border-color;
+    padding: $datatables-cell-padding;
+}

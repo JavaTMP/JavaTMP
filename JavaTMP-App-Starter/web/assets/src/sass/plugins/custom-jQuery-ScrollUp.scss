@@ -1,0 +1,32 @@
+@import "../common/variables.scss";
+$scrollUp-bg: $primary!default;
+$scrollUp-color: color-yiq($scrollUp-bg)!default;
+$scrollUp-hover-bg: $primary!default;
+$scrollUp-hover-color: color-yiq($scrollUp-hover-bg)!default;
+$scrollUp-border-width: $border-width!default;
+$scrollUp-border-color: $scrollUp-bg!default;
+$scrollUp-padding: 5px 10px!default;
+$scrollUp-transition: $transition-base!default;
+
+#scrollUp {
+    bottom: 1em;
+    right: 1em;
+    background-color: $scrollUp-bg;
+    color: $scrollUp-color;
+    text-decoration: none;
+    opacity: .5;
+    padding: $scrollUp-padding;
+    backface-visibility: hidden;
+    border: $border-width solid $scrollUp-border-color;
+    @include transition($scrollUp-transition);
+
+    [dir="rtl"] & {
+        right: auto;
+        left: 1em;
+    }
+}
+
+#scrollUp:hover {
+    background-color: $scrollUp-hover-bg;
+    opacity: 1;
+}
