@@ -9,11 +9,8 @@
                 <div class="card-header">
                     Users Table
                     <div class="options float-right">
-                        <a class="settings"><i class="fa fa-cog"></i></a>
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
-                        <a href="#" class="reload"><i class="fa fa-sync"></i></a>
                         <a href="#" class="fullscreen"><i class=" fa fa-expand"></i></a>
-                        <a href="#" class="remove"><i class="fa fa-times"></i></a>
                     </div>
                 </div>
                 <table cellspacing="0" class="table table-condensed table-bordered table-hover table-striped" id="defalut-dataTables-example">

@@ -1,11 +1,23 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
     <div class="page-header">
-        <h1>Page Title</h1>
+        <h1>Blank Card Page Title</h1>
     </div>
     <div class="row">
-        <div class="col-lg-12">
-            <p class="">Page Content</p>
+        <div class="col">
+            <div class="card my-3">
+                <div class="card-header">
+                    Blank Card Title
+                    <div class="options float-right">
+                        <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
+                        <a href="#" class="fullscreen"><i class=" fa fa-expand"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title text-primary">Special title treatment</h4>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                </div>
+            </div>
         </div>
     </div>
     <!--
@@ -44,13 +56,22 @@
                 // fire when user resize browser window or sidebar hide / show
             });
 
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenCompress, function (event, card) {
+                // when card compress by pressing the top right tool button
+            });
+
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenExpand, function (event, card) {
+                // when card Expand by pressing the top right tool button
+            });
+
             /**
              * When another sidebar menu item pressed and before container issues new ajax request.
              * You can cancel, destroy, or remove any thing here before replace main output ajax container.
              * return false or event.preventDefault() will cancel ajax and stay you in the current page and do nothing.
              **/
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {
-                var newLink = $(event._newTarget);
+                $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenCompress);
+                $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenExpand);
                 return true;
             });
         });

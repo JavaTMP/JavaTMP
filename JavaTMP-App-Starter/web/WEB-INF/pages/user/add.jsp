@@ -1,59 +1,48 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
     <div class="page-header">
-        <h1>jQuery Form Plugin</h1>
+        <h1>Advanced Form Plugins</h1>
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <div class="alert alert-info">
-                <p>The jQuery Form Plugin allows you to easily and unobtrusively upgrade HTML forms to use AJAX. The main methods, ajaxForm and ajaxSubmit, gather information from the form element to determine how to manage the submit process. Both of these methods support numerous options which allows you to have full control over how the data is submitted.</p>
-                <p>No special markup is needed, just a normal form. Submitting a form with AJAX doesn't get any easier than this!</p>
-                <p>
-                    <a class="btn btn-info" target="_blank" href="http://malsup.com/jquery/form/">http://malsup.com/jquery/form/</a>
-                    <a class="btn btn-info" target="_blank" href="https://github.com/jquery-form/form">https://github.com/jquery-form/form</a>
-                </p>
-            </div>
-            <div class="card my-3">
+            <div class="card">
                 <div class="card-header">
-                    Examples
+                    Create New User
                     <div class="options float-right">
-                        <a class="settings"><i class="fa fa-cog"></i></a>
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
-                        <a href="#" class="reload"><i class="fa fa-sync"></i></a>
                         <a href="#" class="fullscreen"><i class=" fa fa-expand"></i></a>
-                        <a href="#" class="remove"><i class="fa fa-times"></i></a>
                     </div>
                 </div>
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <form id="jquery-form-plugin-test-id" class="form" action="index.html" method="post" novalidate="novalidate">
-                                <div class="row">
+                            <form enctype="multipart/form-data" autocomplete="off" id="jquery-form-plugin-test-id" class="form" action="${pageContext.request.contextPath}/user/CreateUserController" method="post" novalidate="novalidate">
+                                <div class="form-row">
                                     <div class="col-lg-12">
-                                        <h3 class="font-green">Sign Up</h3>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <p class="hint"> Enter your personal details below: </p>
-                                        <div class="form-group">
-                                            <label class="control-label">Full Name</label>
-                                            <input class="form-control" type="text" placeholder="Full Name" name="fullname">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Email</label>
-                                            <input class="form-control" type="text" placeholder="Email" name="email">
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Address</label>
-                                            <input class="form-control" type="text" placeholder="Address" name="address">
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-lg-6">
+                                        <div class="form-row">
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label class="control-label">Full Name</label>
+                                                    <input class="form-control" type="text" placeholder="Full Name" name="fullName">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label class="control-label">Email</label>
+                                                    <input class="form-control" type="text" placeholder="Email" name="email">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
+                                                <div class="form-group">
+                                                    <label class="control-label">Birth Of Date</label>
+                                                    <input dir="ltr" class="form-control"  type="text" name="birthOfDateStr">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3">
                                                 <div class="form-group">
                                                     <label class="control-label">Country</label>
-                                                    <select name="country" class="form-control">
-                                                        <option value="">Country</option>
+                                                    <select name="countryId" class="form-control">
+                                                        <option value="">Choose ...</option>
                                                         <option value="AF">Afghanistan</option>
                                                         <option value="AL">Albania</option>
                                                         <option value="DZ">Algeria</option>
@@ -291,53 +280,60 @@
                                                     </select>
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">address</label>
+                                            <textarea rows="5" class="form-control forceValidate" placeholder="" name="address"></textarea>
+                                        </div>
+                                        <div class="form-row">
                                             <div class="col-lg-6">
                                                 <div class="form-group">
-                                                    <label class="control-label">City/Town</label>
-                                                    <input class="form-control" type="text" placeholder="City/Town" name="city">
+                                                    <label class="control-label">Username</label>
+                                                    <input class="form-control" type="text" autocomplete="off" placeholder="Username"
+                                                           name="userName">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label for="exampleFormControlFile1">Add Profile Picture</label>
+                                                    <div class="custom-file">
+                                                        <input name="profilePicture" type="file" class="custom-file-input" id="validatedCustomFile">
+                                                        <label class="custom-file-label" for="validatedCustomFile">Choose Profile Picture file...</label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <p class="hint"> Enter your account details below: </p>
-                                        <div class="form-group">
-                                            <label class="control-label">Username</label>
-                                            <input class="form-control" type="text" autocomplete="off" placeholder="Username"
-                                                   name="username">
+                                        <div class="form-row">
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Password</label>
+                                                    <input class="form-control" type="password" autocomplete="off" id="password"
+                                                           placeholder="Password" name="password">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Re-type Your Password</label>
+                                                    <input class="form-control" type="password" autocomplete="off" placeholder="Re-type Your Password"
+                                                           name="rpassword">
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label">Password</label>
-                                            <input class="form-control" type="password" autocomplete="off" id="register_password"
-                                                   placeholder="Password" name="password">
+                                            <div class="custom-control custom-checkbox">
+                                                <input name="tnc" type="checkbox" class="custom-control-input" id="customCheck1">
+                                                <label class="custom-control-label" for="customCheck1">
+                                                    I agree to the
+                                                    <a href="javascript:;">Terms of Service </a> &amp;
+                                                    <a href="javascript:;">Privacy Policy </a>
+                                                </label>
+                                            </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label class="control-label">Re-type Your Password</label>
-                                            <input class="form-control" type="password" autocomplete="off" placeholder="Re-type Your Password"
-                                                   name="rpassword">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label class="">
-                                                <input type="checkbox" name="tnc" class=""> I agree to the
-                                                <a href="javascript:;">Terms of Service </a> &amp;
-                                                <a href="javascript:;">Privacy Policy </a>
-                                                <span></span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="form-actions">
-                                            <button type="submit" id="register-submit-btn" class="btn btn-success">Submit</button>
+                                        <div class="form-group mt-3">
+                                            <button type="submit" id="register-submit-btn" class="btn btn-primary">Submit</button>
                                         </div>
                                     </div>
                                 </div>
-
                             </form>
                         </div>
                     </div>
@@ -347,75 +343,219 @@
     </div>
     <!--<link href="components/" rel="stylesheet">-->
     <style type="text/css">
-        .form-actions {
-            display: block;
-            background-color: #F5F5F5;
-            border-top: 1px solid #E5E5E5;
-            margin-bottom: 20px;
-            margin-top: 20px;
-            padding: 19px 20px 20px;
-        }
+
     </style>
-    <script type="text/javascript">
-        jQuery(document).ready(function () {
-            (function ($) {
+</style>
+<script type="text/javascript">
+    jQuery(document).ready(function () {
+        (function ($) {
+            var form = $('#jquery-form-plugin-test-id');
+            var validator = null;
+            form.ajaxForm({
+                clearForm: true, // clear all form fields after successful submit
+                resetForm: true, // reset the form after successful submit
+                beforeSerialize: function ($form, options) {
+                    $("#summernote").summernote('triggerEvent', 'change');
+                    if (!$form.valid()) {
+                        return false;
+                    }
+                },
+                beforeSubmit: function (formData, jqForm, options) {
+                    for (var i = 0; i < formData.length; i++) {
+                        if (formData[i].name === "birthOfDateStr") {
+                            var value = formData[i].value;
+                            var newDate = moment(value, "DD/MM/YYYY").format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+                            formData.push({"name": "birthOfDate", "value": newDate});
+                            break;
+                        }
+                    }
 
-//                $('#jquery-form-plugin-test-id').submit(function () {
-//                    // inside event callbacks 'this' is the DOM element so we first
-//                    // wrap it in a jQuery object and then invoke ajaxSubmit
-//                    $(this).ajaxSubmit();
-//
-//                    // !!! Important !!!
-//                    // always return false to prevent standard browser submit and page navigation
-//                    return false;
-//                });
-                $('#jquery-form-plugin-test-id').ajaxForm({
-                    beforeSubmit: showRequest, // pre-submit callback
-                    success: showResponse  // post-submit callback
-                            // other available options:
-                            //url:       url         // override for form's 'action' attribute
-                            //type:      type        // 'get' or 'post', override for form's 'method' attribute
-                            //dataType:  null        // 'xml', 'script', or 'json' (expected server response type)
-                            //clearForm: true        // clear all form fields after successful submit
-                            //resetForm: true        // reset the form after successful submit
+                },
+                success: function (response, statusText, xhr, $form) {
+//                    form.find("textarea[name='address']").summernote('code', '');
+//                    form.resetForm();
+//                    form.find(".form-group.has-success").removeClass(".has-success");
+                    BootstrapModalWrapperFactory.createModal({
+                        title: "Response",
+                        message: response.message
+                    }).show();
+                }
+            });
+            // pre-submit callback
 
-                            // $.ajax options can be used here too, for example:
-                            //timeout:   3000
+            validator = form.validate($.extend(true, {}, javatmp.settings.jqueryValidationDefaultOptions, {
+                ignore1: ":hidden:not(.forceValidate)",
+                ignore: ":hidden:not(.forceValidate), [contenteditable='true']:not([name])",
+                rules: {
+                    fullName: {
+                        required: true},
+                    email: {
+                        required: true,
+                        email: true,
+                        minlength: 5,
+                        maxlength: 50
+                    },
+                    birthOfDate: {
+                        required: true,
+                        validDate: true,
+                        dateBeforeNow: true
+                    },
+                    countryId: {
+                        required: true
+                    },
+                    address: {
+                        required: true,
+                        maxlength: 400
+                    },
+                    userName: {
+                        required: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 6,
+                        maxlength: 20
+                    },
+                    rpassword: {
+                        required: true,
+                        equalTo: "#password"
+                    },
+                    profilePicture: {
+                        required: true
+                    },
+                    tnc: {
+                        required: true
+                    },
+                    note: {
+                        required: true,
+                        summernoteRequired: true
+                    }
+                },
+                messages: {
+                    fullName: {
+                        required: "Kindly provide us with your full name"
+                    },
+                    email: {
+                        required: "Kindly provide your email address",
+                        email: "Kindly provide a valid email address"
+                    },
+                    birthOfDate: {
+                        required: "Kindly provide your Birth Of Date",
+                        validDate: "Kindly Provide a valid date value in format DD/MM/YYYY",
+                        dateBeforeNow: "Kindly Provide a date in the past before today at least"
+                    },
+                    countryId: {
+                        required: "Kindly select your nationality"
+                    },
+                    address: {
+                        required: "Kindly provide your address"
+                    },
+                    note: {
+                        summernoteRequired: "Kindly Provide a note"
+                    }
+                }
+            }));
+
+            form.find("input[name='birthOfDateStr']").css({
+                "text-align": javatmp.settings.floatDefault
+            });
+
+            form.find("input[name='birthOfDateStr']").inputmask({
+                alias: "date",
+                placeholder: "dd/mm/yyyy",
+                inputFormat: "dd/mm/yyyy",
+                displayFormat: true,
+                hourFormat: "24",
+                clearMaskOnLostFocus: false
+            });
+            form.find("input[name='birthOfDateStr']").daterangepicker({
+                "opens": javatmp.settings.floatReverse,
+                //                    startDate: false,
+                singleDatePicker: true,
+                showDropdowns: true,
+                timePicker: false,
+                timePickerIncrement: 1,
+                timePicker24Hour: true,
+                autoApply: true,
+                autoUpdateInput: false,
+                minDate: '01/01/1900',
+                maxDate: '31/12/2099',
+                //                    maxDate: '',
+                //                    minDate: moment(),
+                locale: {
+                    "direction": javatmp.settings.direction,
+                    format: 'DD/MM/YYYY'
+                }
+            }, function (start, end, label) {
+                var formatedDateSelected = moment(start).format("DD/MM/YYYY");
+                form.find("input[name='birthOfDateStr']").val(formatedDateSelected);
+            });
+            $(".daterangepicker.dropdown-menu").css('z-index', 600 + 1);
+
+
+            form.find("textarea[name='address']").summernote({height: 250});
+
+            $.fn.select2.defaults.set("theme", "bootstrap");
+            $.fn.select2.defaults.set("dir", javatmp.settings.direction);
+            form.find("select[name='countryId']").select2({
+                theme: "bootstrap",
+                dir: javatmp.settings.direction,
+                allowClear: true,
+                placeholder: "Select a country",
+                containerCssClass: ':all:',
+                width: '',
+                templateSelection: formatCountrySelection,
+                templateResult: formatCountry,
+                escapeMarkup: function (markup) {
+                    return markup;
+                }
+            }).on("select2:select", function () {
+                (this).focus();
+            });
+            function formatCountry(repo) {
+                if (repo.loading)
+                    return repo.text;
+                var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
+
+                var template =
+                        '    <div class="media d-flex align-items-center">' +
+                        '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
+                        '        <div class="media-body">' +
+                        '            <strong>{{countryText}} ({{countryId}})</strong>' +
+                        '        </div>' +
+                        '    </div>';
+
+                var readyData = template.composeTemplate({
+                    'imagePath': imagePath,
+                    'countryText': repo.text,
+                    'countryId': repo.id
                 });
-                // pre-submit callback
-                function showRequest(formData, jqForm, options) {
-                    // formData is an array; here we use $.param to convert it to a string to display it
-                    // but the form plugin does this for you automatically when it submits the data
-                    var queryString = $.param(formData);
 
-                    // jqForm is a jQuery object encapsulating the form element.  To access the
-                    // DOM element for the form do this:
-                    // var formElement = jqForm[0];
-
-                    alert('About to submit: \n\n' + queryString);
-
-                    // here we could return false to prevent the form from being submitted;
-                    // returning anything other than false will allow the form submit to continue
-                    return true;
+                return readyData;
+            }
+            function formatCountrySelection(repo) {
+                if (!repo.id) {
+                    return repo.text;
                 }
 
-// post-submit callback
-                function showResponse(responseText, statusText, xhr, $form) {
-                    // for normal html responses, the first argument to the success callback
-                    // is the XMLHttpRequest object's responseText property
+                var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
 
-                    // if the ajaxForm method was passed an Options Object with the dataType
-                    // property set to 'xml' then the first argument to the success callback
-                    // is the XMLHttpRequest object's responseXML property
+                var template =
+                        '    <div class="media d-flex align-items-center">' +
+                        '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
+                        '        <div class="media-body">' +
+                        '            <span>{{countryText}} ({{countryId}})</span>' +
+                        '        </div>' +
+                        '    </div>';
 
-                    // if the ajaxForm method was passed an Options Object with the dataType
-                    // property set to 'json' then the first argument to the success callback
-                    // is the json data object returned by the server
+                var readyData = template.composeTemplate({
+                    'imagePath': imagePath,
+                    'countryText': repo.text,
+                    'countryId': repo.id
+                });
 
-                    alert('status: ' + statusText + '\n\nresponseText: \n' + responseText +
-                            '\n\nThe output div should have already been updated with the responseText.');
-                }
-            }(jQuery));
-        });
-    </script>
+                return readyData;
+            }
+        }(jQuery));
+    });
+</script>
 </div>
