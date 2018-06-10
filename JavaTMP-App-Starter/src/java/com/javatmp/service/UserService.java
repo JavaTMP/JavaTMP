@@ -53,18 +53,6 @@ public class UserService {
         return user;
     }
 
-    public List<String> listUsersPositions() {
-        Set<String> retList = new LinkedHashSet<>();
-        List<User> database = this.dBFaker.getUsers();
-        for (int i = 0; i < database.size(); i++) {
-            retList.add(database.get(i).getPosition().trim());
-        }
-        List<String> ret = new LinkedList(retList);
-        Collections.sort(ret);
-
-        return ret;
-    }
-
     public DataTableResults<User> listUsers(DataTableRequest tableRequest) {
         List<User> retList = new LinkedList<>();
         List<User> database = this.dBFaker.getUsers();
@@ -171,58 +159,14 @@ public class UserService {
                         continue;
                     }
                 }
-                if (searchParameters.get("position") != null && !searchParameters.get("position").getValue().equals("")) {
-                    Search searchValueObject = searchParameters.get("position");
-                    String searchValue = searchValueObject.getValue().toString().trim().toLowerCase();
-                    String dbValue = user.getPosition();
-                    if (!dbValue.toLowerCase().contains(searchValue)) {
-                        continue;
-                    }
-                }
-                if (searchParameters.get("office") != null && !searchParameters.get("office").getValue().equals("")) {
-                    Search searchValueObject = searchParameters.get("office");
-                    String searchValue = searchValueObject.getValue().toString().trim().toLowerCase();
-                    String dbValue = user.getOffice();
-                    if (!dbValue.toLowerCase().contains(searchValue)) {
-                        continue;
-                    }
-                }
-                if (searchParameters.get("birthOfDate") != null && !searchParameters.get("birthOfDate").getValue().equals("")) {
+                if (searchParameters.get("birthDate") != null && !searchParameters.get("birthDate").getValue().equals("")) {
                     Search searchValueObject = searchParameters.get("birthOfDate");
                     String searchValue = searchValueObject.getValue().toString().trim().toLowerCase();
-                    Date dbValue = user.getBirthOfDate();
+                    Date dbValue = user.getBirthDate();
                     Calendar cal = Calendar.getInstance();
                     cal.add(Calendar.YEAR, Integer.parseInt(searchValue) * -1);
                     Long search = cal.getTimeInMillis();
                     if (dbValue.getTime() > search) {
-                        continue;
-                    }
-                }
-
-                if (searchParameters.get("joiningDate") != null && !searchParameters.get("joiningDate").getValue().equals("")) {
-                    Search searchValueObject = searchParameters.get("joiningDate");
-                    String searchValue = searchValueObject.getValue().toString().trim().toLowerCase();
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                    Date dbValue = user.getJoiningDate();
-                    Date searchDate = sdf.parse(searchValue);
-                    Long search = searchDate.getTime();
-                    if (dbValue.getTime() < search) {
-                        continue;
-                    }
-                }
-                if (searchParameters.get("salary") != null && !searchParameters.get("salary").getValue().equals("")) {
-                    Search searchValueObject = searchParameters.get("salary");
-                    BigDecimal searchValue = new BigDecimal(searchValueObject.getValue().toString());
-                    BigDecimal dbValue = user.getSalary();
-                    if (dbValue.compareTo(searchValue) < 0) {
-                        continue;
-                    }
-                }
-                if (searchParameters.get("mobile") != null && !searchParameters.get("mobile").getValue().equals("")) {
-                    Search searchValueObject = searchParameters.get("mobile");
-                    String searchValue = searchValueObject.getValue().toString().trim().toLowerCase();
-                    String dbValue = user.getMobile();
-                    if (!dbValue.toLowerCase().contains(searchValue)) {
                         continue;
                     }
                 }
@@ -258,22 +202,8 @@ public class UserService {
                     retCompare = o1.getFirstName().compareTo(o2.getFirstName()) * factor;
                 } else if (order.getColumn() == 2) { //
                     retCompare = o1.getLastName().compareTo(o2.getLastName()) * factor;
-                } else if (order.getColumn() == 3) { //
-                    retCompare = o1.getPosition().compareTo(o2.getPosition()) * factor;
-                } else if (order.getColumn() == 4) { //
-                    retCompare = o1.getOffice().compareTo(o2.getOffice()) * factor;
-                } else if (order.getColumn() == 5) { //
-                    retCompare = o1.getBirthOfDate().compareTo(o2.getBirthOfDate()) * factor * -1;
-                } else if (order.getColumn() == 6) { //
-                    retCompare = o1.getJoiningDate().compareTo(o2.getJoiningDate()) * factor * -1;
-                } else if (order.getColumn() == 7) { //
-                    retCompare = o1.getSalary().compareTo(o2.getSalary()) * factor;
-                } else if (order.getColumn() == 8) { //
-                    retCompare = o1.getMobile().compareTo(o2.getMobile()) * factor;
                 } else if (order.getColumn() == 9) { //
                     retCompare = o1.getEmail().compareTo(o2.getEmail()) * factor;
-                } else if (order.getColumn() == 10) { //
-                    retCompare = o1.getPosition().compareTo(o2.getPosition()) * factor;
                 }
                 return retCompare;
             }

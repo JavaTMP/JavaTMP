@@ -85,13 +85,8 @@ public class CreateUserController extends HttpServlet {
 
             userToBeCreated.setProfilePicDocumentId(fileUploading.getDocumentId());
             userToBeCreated.setCreationDate(new Date());
-            userToBeCreated.setJoiningDate(new Date());
-            userToBeCreated.setSalary(BigDecimal.ZERO);
             userToBeCreated.setFirstName("");
             userToBeCreated.setLastName("");
-            userToBeCreated.setPosition("");
-            userToBeCreated.setOffice("");
-            userToBeCreated.setMobile("");
             us.createNewUser(userToBeCreated);
 
             responseMessage.setOverAllStatus(true);

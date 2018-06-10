@@ -1,69 +1,33 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
     <div class="page-header">
-        <h1>Dynamic Individual Column Searching Datatables</h1>
+        <h1>Users List</h1>
     </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div id="table-panel" class="card">
-                <div class="card-header">
-                    Users Table
-                    <div class="options float-right">
-                        <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
-                        <a href="#" class="fullscreen"><i class=" fa fa-expand"></i></a>
-                    </div>
-                </div>
-                <table cellspacing="0" class="table table-condensed table-bordered table-hover table-striped" id="defalut-dataTables-example">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>First name</th>
-                            <th>Last name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                            <th>Age</th>
-                            <th>Start date</th>
-                            <th>Salary</th>
-                            <th>Extn.</th>
-                            <th>E-mail</th>
-                        </tr>
-                        <tr id="filterHeader">
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th>
-                                <div class="form-group m-0">
-                                    <select id="remotePositionsSelectId" class="form-control">
-                                        <!--<option value=""></option>-->
-                                    </select>
-                                </div>
-                            </th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <style type="text/css">
-        #table-panel table.dataTable {
-            margin: 0!important;
-        }
-        table#defalut-dataTables-example {
-            table-layout: fixed;
-            word-wrap:break-word;
-        }
-        #filterHeader > th {
-            padding: 0;
-        }
-    </style>
 
+    <table cellspacing="0" class="table table-condensed table-bordered table-hover table-striped" id="defalut-dataTables-example">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>First name</th>
+                <th>Last name</th>
+                <th>Age</th>
+                <th>E-mail</th>
+            </tr>
+            <tr id="filterHeader">
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <style type="text/css">
+
+    </style>
     <script type="text/javascript">
         jQuery(function ($) {
             // any code put here will be run after content attach to ajax output container and before
@@ -101,54 +65,7 @@
                                         var val = $.fn.dataTable.util.escapeRegex($(this).val());
                                         column.search(val ? val : '', true, false).draw();
                                     });
-                        } else if (index === 3) {
-                            var input = $("#remotePositionsSelectId");
-                            input.select2({
-                                theme: "bootstrap",
-                                dir: javatmp.settings.direction,
-                                allowClear: true,
-                                placeholder: "-- Filter --",
-                                containerCssClass: ':all:',
-                                multiple: false,
-                                minimumResultsForSearch: 0
-//                                width: '242',
-//                                dropdownAutoWidth: true
-                            });
-                            $.ajax({
-                                type: 'GET',
-                                url: javatmp.settings.contextPath + '/user/ListUsersPositionsController'
-                            }).then(function (data) {
-                                // create the option and append to Select2
-                                var select2Data = [];
-                                for (var i = 0; i < data.data.length; i++) {
-                                    var row = data.data[i];
-                                    var option = new Option(row, row, false, false);
-                                    input.append(option);
-                                    select2Data.push({
-                                        id: row,
-                                        text: row
-                                    });
-                                }
-                                input.val(null).trigger('change');
-                                input.on('select2:select', function (e) {
-                                    var selectedId = "";
-                                    var selectedRows = $(this).select2('data');
-                                    if (selectedRows.length > 0) {
-                                        var selectedRow = selectedRows[0];
-                                        selectedId = selectedRow.id;
-                                    }
-                                    column.search(selectedId ? selectedId : '', true, false).draw();
-                                });
-                                input.on('select2:close', function (e) {
-                                    var selectedId = "";
-                                    var selectedRows = $(this).select2('data');
-//                                    alert(JSON.stringify(selectedRows));
-                                    if (selectedRows.length === 0) {
-                                        column.search(selectedId, true, false).draw();
-                                    }
-                                });
-                            });
-                        } else if (index === 6) {
+                        } else if (index === 4) {
                             var input = $('<input class="form-control" />')
                                     .appendTo($("#filterHeader").find('th').eq(index).empty())
                                     .on('change', function () {
@@ -156,7 +73,7 @@
                                         column.search(val ? val : '', true, false).draw();
                                     });
                             input.inputmask({
-                                alias: "date",
+                                alias: "datetime",
                                 placeholder: "dd/mm/yyyy",
                                 inputFormat: "dd/mm/yyyy",
                                 displayFormat: true,
@@ -214,24 +131,16 @@
                 },
                 columns: [
                     {data: 'id', "width": 50},
+                    {data: 'userName', "width": 100},
                     {data: 'firstName', "width": 100},
                     {data: 'lastName', "width": 100},
-                    {data: 'position', "width": 200},
-                    {data: 'office', "width": 100},
                     {
-                        data: 'birthOfDate', "type": "date", "width": 35,
+                        data: 'birthDate', "type": "date", "width": 35,
                         "render": function (data, type, row) {
                             return Math.ceil(moment().diff(moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ"), 'years', true));
                         }
                     },
-                    {
-                        data: 'joiningDate', "type": "date", "width": 150,
-                        "render": function (data, type, row) {
-                            return moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("DD/MM/YYYY HH:mm");
-                        }},
-                    {data: 'salary', "width": 100, "type": "num", render: $.fn.dataTable.render.number(',', '.', 2, '$')},
-                    {data: 'mobile', "width": 100},
-                    {data: 'email', "width": 200}
+                    {data: 'email', "width": 150}
                 ]
             });
 

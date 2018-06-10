@@ -1,7 +1,6 @@
 package com.javatmp.domain;
 
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.Date;
 
 public class User {
@@ -12,19 +11,15 @@ public class User {
     private String firstName;
     private String lastName;
     private Short status;
-    private Date birthOfDate;
-    private Date creationDate;
-    private String email;
-    private String mobile;
-    private String lang;
-    private String theme;
+    private Date birthDate;
     private String countryId;
     private String address;
-    private String position;
-    private String office;
-    private Date joiningDate;
-    private BigDecimal salary;
+    private String email;
+    private String lang;
+    private String theme;
+    private String timezone;
     private Long profilePicDocumentId;
+    private Date creationDate;
 
     public User() {
 
@@ -35,27 +30,24 @@ public class User {
         this.password = password;
     }
 
-    public User(Long id, String userName, String password, String firstName, String lastName, Short status, Date birthOfDate, Date creationDate,
-            String email, String mobile, String lang, String theme, String countryId, String address, String position,
-            String office, Date joiningDate, BigDecimal salary) {
+    public User(Long id, String userName, String password, String firstName, String lastName, Short status, Date birthDate,
+            Date creationDate,
+            String email, String lang, String theme, String countryId, String address,
+            String timezone) {
         this.id = id;
         this.userName = userName;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.status = status;
-        this.birthOfDate = birthOfDate;
+        this.birthDate = birthDate;
         this.creationDate = creationDate;
         this.email = email;
-        this.mobile = mobile;
         this.lang = lang;
         this.theme = theme;
         this.countryId = countryId;
         this.address = address;
-        this.position = position;
-        this.office = office;
-        this.joiningDate = joiningDate;
-        this.salary = salary;
+        this.timezone = timezone;
     }
 
     /**
@@ -143,20 +135,6 @@ public class User {
     }
 
     /**
-     * @return the mobile
-     */
-    public String getMobile() {
-        return mobile;
-    }
-
-    /**
-     * @param mobile the mobile to set
-     */
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
-    }
-
-    /**
      * @return the lang
      */
     public String getLang() {
@@ -187,15 +165,15 @@ public class User {
     /**
      * @return the birthOfDate
      */
-    public Date getBirthOfDate() {
-        return birthOfDate;
+    public Date getBirthDate() {
+        return birthDate;
     }
 
     /**
      * @param birthOfDate the birthOfDate to set
      */
-    public void setBirthOfDate(Date birthOfDate) {
-        this.birthOfDate = birthOfDate;
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 
     /**
@@ -224,62 +202,6 @@ public class User {
      */
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    /**
-     * @return the position
-     */
-    public String getPosition() {
-        return position;
-    }
-
-    /**
-     * @param position the position to set
-     */
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
-    /**
-     * @return the office
-     */
-    public String getOffice() {
-        return office;
-    }
-
-    /**
-     * @param office the office to set
-     */
-    public void setOffice(String office) {
-        this.office = office;
-    }
-
-    /**
-     * @return the joiningDate
-     */
-    public Date getJoiningDate() {
-        return joiningDate;
-    }
-
-    /**
-     * @param joiningDate the joiningDate to set
-     */
-    public void setJoiningDate(Date joiningDate) {
-        this.joiningDate = joiningDate;
-    }
-
-    /**
-     * @return the salary
-     */
-    public BigDecimal getSalary() {
-        return salary;
-    }
-
-    /**
-     * @param salary the salary to set
-     */
-    public void setSalary(BigDecimal salary) {
-        this.salary = salary;
     }
 
     /**
@@ -322,6 +244,20 @@ public class User {
      */
     public void setProfilePicDocumentId(Long profilePicDocumentId) {
         this.profilePicDocumentId = profilePicDocumentId;
+    }
+
+    /**
+     * @return the timezone
+     */
+    public String getTimezone() {
+        return timezone;
+    }
+
+    /**
+     * @param timezone the timezone to set
+     */
+    public void setTimezone(String timezone) {
+        this.timezone = timezone;
     }
 
 }
