@@ -66,8 +66,8 @@ public class AuthenticatorFilter implements Filter {
             HttpSession session = req.getSession();
             logger.info("Session Attribute [" + session.getAttribute("user") + "]");
             User user = (User) session.getAttribute("user");
-            logger.info("Session User is [" + user + "]");
             if (user != null) {
+                logger.info("Session User is [" + MvcHelper.deepToString(user) + "]");
                 chain.doFilter(request, response);
             } else if ("ajax".equals(req.getParameter("_ajax"))) {
                 // we send an error ajax message response consisting
@@ -82,7 +82,7 @@ public class AuthenticatorFilter implements Filter {
             } else {
                 String redirectUrl = req.getContextPath() + "/login";
                 logger.info("redirect user to login page");
-                res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+//                res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 res.sendRedirect(redirectUrl);
             }
         }

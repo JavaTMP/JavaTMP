@@ -8,15 +8,14 @@ import com.javatmp.service.DocumentService;
 import com.javatmp.service.ServicesFactory;
 import com.javatmp.service.UserService;
 import com.javatmp.util.Constants;
+import com.javatmp.util.MD5Util;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
-import java.math.BigDecimal;
 import java.nio.file.Paths;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -85,8 +84,11 @@ public class CreateUserController extends HttpServlet {
 
             userToBeCreated.setProfilePicDocumentId(fileUploading.getDocumentId());
             userToBeCreated.setCreationDate(new Date());
-            userToBeCreated.setFirstName("");
-            userToBeCreated.setLastName("");
+            userToBeCreated.setLang("en");
+            userToBeCreated.setTheme("default");
+            userToBeCreated.setTimezone(TimeZone.getTimeZone("UTC").getID());
+            logger.info("UserToBeCreated is [" + MvcHelper.deepToString(userToBeCreated) + "]");
+            userToBeCreated.setPassword(MD5Util.convertToMD5(userToBeCreated.getPassword()));
             us.createNewUser(userToBeCreated);
 
             responseMessage.setOverAllStatus(true);

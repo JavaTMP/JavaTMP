@@ -154,11 +154,6 @@
                                             Current User Profile
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="${pageContext.request.contextPath}/pages/user/add">
-                                            Logout
-                                        </a>
-                                    </li>
                                 </ul>
                             </li>
                         </ul>

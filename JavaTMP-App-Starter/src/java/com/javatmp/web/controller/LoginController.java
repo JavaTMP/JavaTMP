@@ -46,6 +46,7 @@ public class LoginController extends HttpServlet {
 
             if (dbUser != null && dbUser.getPassword().equals(MD5Util.convertToMD5(user.getPassword()))) {
                 // Authenticated user
+                logger.info("User found [" + MvcHelper.deepToString(dbUser) + "]");
                 session.setAttribute("user", dbUser);
 
                 responseMessage.setOverAllStatus(true);

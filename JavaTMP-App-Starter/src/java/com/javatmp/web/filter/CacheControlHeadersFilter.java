@@ -2,6 +2,8 @@ package com.javatmp.web.filter;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Logger;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -16,8 +18,21 @@ public class CacheControlHeadersFilter implements Filter {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
     private FilterConfig filterConfig = null;
+    private Set<String> excludes = new HashSet<>();
 
     public CacheControlHeadersFilter() {
+        excludes.add("/");
+    }
+
+    private boolean ignoreURL(String requestPath) {
+        boolean ignore = false;
+        for (String path : excludes) {
+            if (path.equals(requestPath)) {
+                ignore = true;
+                break;
+            }
+        }
+        return ignore;
     }
 
     @Override
@@ -33,14 +48,16 @@ public class CacheControlHeadersFilter implements Filter {
         if (response instanceof HttpServletResponse && request instanceof HttpServletRequest) {
             HttpServletRequest httpRequest = (HttpServletRequest) request;
             HttpServletResponse httpResponse = (HttpServletResponse) response;
-            if ("GET".equals(httpRequest.getMethod())) {
-                String url;
-                if (httpRequest.getQueryString() != null) {
-                    url = httpRequest.getRequestURI() + "?" + httpRequest.getQueryString();
-                } else {
-                    url = httpRequest.getRequestURI();
-                }
-                String path = url.substring(httpRequest.getContextPath().length());
+            String path = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length());
+            logger.info("Ignore ? path [" + path + "], ? > [" + ignoreURL(path) + "]");
+            if ("GET".equals(httpRequest.getMethod()) && !ignoreURL(path)) {
+//                String url;
+//                if (httpRequest.getQueryString() != null) {
+//                    url = httpRequest.getRequestURI() + "?" + httpRequest.getQueryString();
+//                } else {
+//                    url = httpRequest.getRequestURI();
+//                }
+//                String path = url.substring(httpRequest.getContextPath().length());
 
 //                int cacheAge = 60 * 60; // in seconds
                 int cacheAge = 60 * 60; // in seconds
@@ -49,7 +66,9 @@ public class CacheControlHeadersFilter implements Filter {
                 httpResponse.setDateHeader("Date", currentDate.getTime());
                 httpResponse.setDateHeader("Expires", expiry);
                 httpResponse.addHeader("Cache-Control", "max-age=" + cacheAge);
-                logger.info("Added Cache header to url [" + url + "]");
+                logger.info("Added Cache header to url [" + path + "]");
+            } else {
+                logger.info("Not Add Cache-Controler to path [" + path + "]");
             }
         }
         chain.doFilter(request, response);
