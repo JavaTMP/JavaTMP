@@ -26,7 +26,7 @@ public class ListAllUsersController extends HttpServlet {
             throws ServletException, IOException {
 
         ResponseMessage responseMessage = new ResponseMessage();
-        ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
+        ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         UserService cs = sf.getUserService();
 
         DataTableRequest tableRequest = (DataTableRequest) MvcHelper.readObjectFromRequest(request, DataTableRequest.class);

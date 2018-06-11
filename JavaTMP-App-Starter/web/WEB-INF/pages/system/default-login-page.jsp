@@ -38,11 +38,11 @@
                             <form id="main-login-form" method="POST" role="form" action="${pageContext.request.contextPath}/login">
                                 <div class="form-group">
                                     <label>Username:</label>
-                                    <input class="form-control required" placeholder="Username" name="userName" type="text" autofocus>
+                                    <input class="form-control required" placeholder="Username" name="userName" type="text" autofocus value="user1">
                                 </div>
                                 <div class="form-group">
                                     <label>Password:</label>
-                                    <input class="form-control required" placeholder="Password" name="password" type="password">
+                                    <input class="form-control required" placeholder="Password" name="password" type="password" value="user1">
                                 </div>
                                 <button disabled="" type="submit" href="javascript:;" class="btn btn-lg btn-primary btn-block">Login</button>
                             </form>

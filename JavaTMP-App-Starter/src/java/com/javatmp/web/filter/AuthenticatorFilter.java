@@ -58,7 +58,7 @@ public class AuthenticatorFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
         String path = req.getRequestURI().substring(req.getContextPath().length());
 
-        this.filterConfig.getServletContext().log("path [" + path + "] is [" + isReqInWhiteList(path) + "]");
+        logger.info("path [" + path + "] is [" + isReqInWhiteList(path) + "]");
         if (isReqInWhiteList(path)) {
             chain.doFilter(request, response);
         } else {
@@ -80,8 +80,10 @@ public class AuthenticatorFilter implements Filter {
                 MvcHelper.sendMessageAsJson(res, responseMessage);
 
             } else {
+                String redirectUrl = req.getContextPath() + "/login";
+                logger.info("redirect user to login page");
                 res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                res.sendRedirect(req.getContextPath() + "/login");
+                res.sendRedirect(redirectUrl);
             }
         }
 
