@@ -29,6 +29,34 @@
                             </div>
                         </div>
                         <div class="form-row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label">Interface Language</label>
+                                    <select name="lang" class="form-control">
+                                        <option value="">Choose ...</option>
+                                        <option value="ar">Arabic (AR)</option>
+                                        <option value="en">English (EN)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label">Interface Theme</label>
+                                    <select name="theme" class="form-control">
+                                        <option value="">Choose ...</option>
+                                        <option value="ar">Arabic (AR)</option>
+                                        <option value="en">English (EN)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label">Timezone</label>
+                                    <input class="form-control" type="text" placeholder="Email" name="timezone">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label class="control-label">Your date of birth</label>
@@ -425,6 +453,9 @@
                     note: {
                         required: true,
                         summernoteRequired: true
+                    },
+                    lang: {
+                        required: true
                     }
                 },
                 messages: {
@@ -491,6 +522,18 @@
             form.find("textarea[name='address']").summernote({height: 250});
             $.fn.select2.defaults.set("theme", "bootstrap");
             $.fn.select2.defaults.set("dir", javatmp.settings.direction);
+            form.find("select[name='lang']").select2({
+                allowClear: true,
+                placeholder: "Select a language",
+                containerCssClass: ':all:',
+                width: ''
+            });
+            form.find("select[name='theme']").select2({
+                allowClear: true,
+                placeholder: "Select a theme",
+                containerCssClass: ':all:',
+                width: ''
+            });
             form.find("select[name='countryId']").select2({
                 theme: "bootstrap",
                 dir: javatmp.settings.direction,
