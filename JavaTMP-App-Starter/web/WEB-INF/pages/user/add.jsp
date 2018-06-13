@@ -660,6 +660,7 @@
                 });
                 return readyData;
             }
+            alert(moment.tz.guess());
         }(jQuery));
     }
     );
