@@ -371,9 +371,29 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12 text-center" id="profilePicturePreviewContainerId">
-                                <img id="profilePicturePreview" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
+                            <div class="col-lg-12 d-flex flex-row">
+                                <div class="p-2" style="width: 200px; height: 200px;display: inline-block;position: relative">
+                                    <div id="profilePicturePreviewContainerId" style="width: 200px; height: 200px;">
+                                        <img id="profilePicturePreview" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
+                                    </div>
+                                </div>
+                                <div class="p-2" style="width: 200px; height: 200px;display: inline-block;">
+                                    <img id="profilePictureResizePreview" style="width: 200px; height: 200px;" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
+                                </div>
+                                <div class="p-2" style="width: 200px; height: 200px;display: inline-block;">
+                                    <img id="profilePictureAvatarPreview" style="width: 40px; height: 40px;" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
+                                </div>
                             </div>
+                            <!--                            <div class="col-lg-4">
+                                                            <div id="profilePictureResizePreviewContainerId" style="width: 200px; height: 200px;">
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <div id="profilePictureAvatarPreviewContainerId" style="width: 40px; height: 40px;">
+
+                                                            </div>
+                                                        </div>-->
                             <div class="col-lg-12">
                                 <div class="form-group text-center">
                                     <input name="profilePictureStr" type="text" readonly="" hidden="" value=""/>
@@ -696,16 +716,20 @@
                     var reader = new FileReader();
                     reader.onload = function (e) {
                         var image = form.find("img[id='profilePicturePreview']");
+                        var resizeImage = form.find("img[id='profilePictureResizePreview']");
+                        var avatarImage = form.find("img[id='profilePictureAvatarPreview']");
                         image.one("load", function () {
-                            var currentImageHeight = this.height;
-                            if (currentImageHeight > 250) {
-                                $("#profilePicturePreviewContainerId").height(250);
-                            } else {
-                                $("#profilePicturePreviewContainerId").height(currentImageHeight);
-                            }
-                            $("#profilePicturePreviewContainerId").mCustomScrollbar("update");
+//                            var currentImageHeight = this.height;
+//                            if (currentImageHeight > 250) {
+//                                $("#profilePicturePreviewContainerId").height(250);
+//                            } else {
+//                                $("#profilePicturePreviewContainerId").height(currentImageHeight);
+//                            }
+//                            $("#profilePicturePreviewContainerId").mCustomScrollbar("update");
                         });
                         image.attr('src', e.target.result);
+                        resizeImage.attr('src', e.target.result);
+                        avatarImage.attr('src', e.target.result);
                     };
                     reader.readAsDataURL(this.files[0]);
                 }
