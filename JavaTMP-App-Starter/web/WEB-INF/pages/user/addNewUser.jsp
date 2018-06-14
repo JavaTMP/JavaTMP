@@ -697,7 +697,6 @@
                     reader.onload = function (e) {
                         var image = form.find("img[id='profilePicturePreview']");
                         image.one("load", function () {
-                            alert("loaded");
                             var currentImageHeight = this.height;
                             if (currentImageHeight > 250) {
                                 $("#profilePicturePreviewContainerId").height(250);
