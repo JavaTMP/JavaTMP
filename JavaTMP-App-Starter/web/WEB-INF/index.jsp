@@ -137,7 +137,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/user/add">
+                                        <a href="${pageContext.request.contextPath}/user/CreateUserController">
                                             Add New User
                                         </a>
                                     </li>

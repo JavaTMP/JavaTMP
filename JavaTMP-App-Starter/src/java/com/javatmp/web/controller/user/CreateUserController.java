@@ -15,6 +15,9 @@ import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Paths;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
 import java.util.TimeZone;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,6 +35,32 @@ import javax.servlet.http.Part;
 public class CreateUserController extends HttpServlet {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String requestPage = "/WEB-INF/pages/user/addNewUser.jsp";
+
+        // prepare a list of timezones - you should prepare them once instead of each request.
+        String[] ids = TimeZone.getAvailableIDs();
+        List<String[]> timezones = new LinkedList<>();
+        for (String id : ids) {
+            TimeZone zone = TimeZone.getTimeZone(id);
+            int offset = zone.getRawOffset() / 1000;
+            int hour = offset / 3600;
+            int minutes = (offset % 3600) / 60;
+            String displayName = zone.getDisplayName();
+            String d = zone.getDisplayName(zone.useDaylightTime(), TimeZone.SHORT);
+            String displayTimezoneInfo = String.format(new Locale("ar"), "(GMT%+03d:%02d) %s - %s (%s)", hour, Math.abs(minutes), id, displayName, d);
+            System.out.println(displayTimezoneInfo);
+
+            String[] timezone = new String[2];
+            timezone[0] = id;
+            timezone[1] = displayTimezoneInfo;
+            timezones.add(timezone);
+        }
+        request.setAttribute("timezones", timezones);
+        request.getRequestDispatcher(requestPage).forward(request, response);
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -84,9 +113,6 @@ public class CreateUserController extends HttpServlet {
 
             userToBeCreated.setProfilePicDocumentId(fileUploading.getDocumentId());
             userToBeCreated.setCreationDate(new Date());
-            userToBeCreated.setLang("en");
-            userToBeCreated.setTheme("default");
-            userToBeCreated.setTimezone(TimeZone.getTimeZone("UTC").getID());
             logger.info("UserToBeCreated is [" + MvcHelper.deepToString(userToBeCreated) + "]");
             userToBeCreated.setPassword(MD5Util.convertToMD5(userToBeCreated.getPassword()));
             us.createNewUser(userToBeCreated);

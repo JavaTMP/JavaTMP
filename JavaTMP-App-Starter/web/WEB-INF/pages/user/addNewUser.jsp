@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <div class="dynamic-ajax-content">
     <div class="page-header">
         <h1>Create New User</h1>
@@ -9,19 +11,25 @@
                 <div class="form-row">
                     <div class="col-lg-12">
                         <div class="form-row">
-                            <div class="col-lg-4">
+                            <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">First Name</label>
                                     <input class="form-control" type="text" placeholder="Full Name" name="firstName">
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">Last Name</label>
                                     <input class="form-control" type="text" placeholder="Full Name" name="lastName">
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="control-label">Your date of birth</label>
+                                    <input dir="ltr" class="form-control"  type="text" name="birthOfDateStr">
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">Email</label>
                                     <input class="form-control" type="text" placeholder="Email" name="email">
@@ -29,65 +37,7 @@
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label class="control-label">Interface Language</label>
-                                    <select name="lang" class="form-control">
-                                        <option value="">Choose ...</option>
-                                        <option value="ar">Arabic (AR)</option>
-                                        <option value="en">English (EN)</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label class="control-label">Interface Theme</label>
-                                    <select name="theme" class="form-control">
-                                        <option value="">Choose ...</option>
-                                        <option value="default">Default</option>
-                                        <option value="cerulean">Cerulean</option>
-                                        <option value="cosmo">Cosmo</option>
-                                        <option value="cyborg">Cyborg</option>
-                                        <option value="darkly">Darkly</option>
-                                        <option value="flatly">Flatly</option>
-                                        <option value="journal">Journal</option>
-                                        <option value="litera">Litera</option>
-                                        <option value="lumen">Lumen</option>
-                                        <option value="lux">Lux</option>
-                                        <option value="materia">Materia</option>
-                                        <option value="minty">Minty</option>
-                                        <option value="pulse">Pulse</option>
-                                        <option value="sandstone">Sandstone</option>
-                                        <option value="simplex">Simplex</option>
-                                        <option value="sketchy">Sketchy</option>
-                                        <option value="slate">Slate</option>
-                                        <option value="solar">Solar</option>
-                                        <option value="spacelab">Spacelab</option>
-                                        <option value="superhero">Superhero</option>
-                                        <option value="united">United</option>
-                                        <option value="yeti">Yeti</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <label class="control-label">Timezone</label>
-                                    <select name="timezone" class="form-control">
-                                        <option value="">Choose ...</option>
-                                        <option value="ar">Arabic (AR)</option>
-                                        <option value="en">English (EN)</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="control-label">Your date of birth</label>
-                                    <input dir="ltr" class="form-control"  type="text" name="birthOfDateStr">
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">Country</label>
                                     <select name="countryId" class="form-control">
@@ -329,16 +279,90 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="control-label">Interface Language</label>
+                                    <select name="lang" class="form-control">
+                                        <option value="">Choose ...</option>
+                                        <option value="ar">Arabic (AR)</option>
+                                        <option value="en">English (EN)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="control-label">Interface Theme</label>
+                                    <select name="theme" class="form-control">
+                                        <option value="">Choose ...</option>
+                                        <option value="default">Default</option>
+                                        <option value="cerulean">Cerulean</option>
+                                        <option value="cosmo">Cosmo</option>
+                                        <option value="cyborg">Cyborg</option>
+                                        <option value="darkly">Darkly</option>
+                                        <option value="flatly">Flatly</option>
+                                        <option value="journal">Journal</option>
+                                        <option value="litera">Litera</option>
+                                        <option value="lumen">Lumen</option>
+                                        <option value="lux">Lux</option>
+                                        <option value="materia">Materia</option>
+                                        <option value="minty">Minty</option>
+                                        <option value="pulse">Pulse</option>
+                                        <option value="sandstone">Sandstone</option>
+                                        <option value="simplex">Simplex</option>
+                                        <option value="sketchy">Sketchy</option>
+                                        <option value="slate">Slate</option>
+                                        <option value="solar">Solar</option>
+                                        <option value="spacelab">Spacelab</option>
+                                        <option value="superhero">Superhero</option>
+                                        <option value="united">United</option>
+                                        <option value="yeti">Yeti</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="control-label">Timezone</label>
+                                    <select name="timezone" class="form-control">
+                                        <option value="">Choose ...</option>
+                                        <c:choose>
+                                            <c:when test="${fn:length(requestScope.timezones) > 0}">
+                                                <c:forEach items="${requestScope.timezones}" var="timezone">
+                                                    <option value="${timezone[0]}">${timezone[1]}</option>
+                                                </c:forEach>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option value="-1">No Record Found</option>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="form-row">
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="control-label">Username</label>
                                     <input class="form-control" type="text" autocomplete="off" placeholder="Username"
                                            name="userName">
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label">Password</label>
+                                    <input class="form-control" type="password" autocomplete="off" id="password"
+                                           placeholder="Password" name="password">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label">Re-type Your Password</label>
+                                    <input class="form-control" type="password" autocomplete="off" placeholder="Re-type Your Password"
+                                           name="rpassword">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="exampleFormControlFile1">Add Profile Picture</label>
                                     <div class="custom-file">
@@ -347,20 +371,12 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="control-label">Password</label>
-                                    <input class="form-control" type="password" autocomplete="off" id="password"
-                                           placeholder="Password" name="password">
-                                </div>
+                            <div class="col-lg-12 text-center" id="profilePicturePreviewContainerId">
+                                <img id="profilePicturePreview" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
                             </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="control-label">Re-type Your Password</label>
-                                    <input class="form-control" type="password" autocomplete="off" placeholder="Re-type Your Password"
-                                           name="rpassword">
+                            <div class="col-lg-12">
+                                <div class="form-group text-center">
+                                    <input name="profilePictureStr" type="text" readonly="" hidden="" value=""/>
                                 </div>
                             </div>
                         </div>
@@ -565,7 +581,7 @@
             });
             form.find("select[name='timezone']").select2({
                 allowClear: true,
-                placeholder: "Select a theme",
+                placeholder: "Select a timezone",
                 containerCssClass: ':all:',
                 width: ''
             });
@@ -660,7 +676,42 @@
                 });
                 return readyData;
             }
-            alert(moment.tz.guess());
+            $("#profilePicturePreviewContainerId").mCustomScrollbar({
+                axis: "yx",
+                theme: "javatmp",
+                scrollInertia: 0,
+                advanced: {
+                    updateOnContentResize: true,
+                    autoExpandHorizontalScroll: true,
+                    updateOnImageLoad: true
+                },
+                mouseWheel: {
+                    preventDefault: true,
+                    scrollAmount: 85
+                }
+            });
+            form.find("select[name='timezone']").val(moment.tz.guess()).trigger('change.select2');
+            form.find("input[name='profilePicture'][type=file]").attr("accept", "*/*").on("change", function () {
+                if (this.files && this.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var image = form.find("img[id='profilePicturePreview']");
+                        image.attr('src', e.target.result);
+                        // update scrollable:
+                        setTimeout(function () {
+                            var currentImageHeight = image[0].height;
+                            if (currentImageHeight > 250) {
+                                $("#profilePicturePreviewContainerId").height(250);
+                            } else {
+                                $("#profilePicturePreviewContainerId").height(currentImageHeight);
+                            }
+                            $("#profilePicturePreviewContainerId").mCustomScrollbar("update");
+                        }, 0);
+
+                    };
+                    reader.readAsDataURL(this.files[0]);
+                }
+            });
         }(jQuery));
     }
     );

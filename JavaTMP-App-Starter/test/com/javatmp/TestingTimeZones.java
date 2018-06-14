@@ -5,6 +5,10 @@
  */
 package com.javatmp;
 
+import com.javatmp.mvc.MvcHelper;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -25,6 +29,7 @@ public class TestingTimeZones {
         }
 
         String[] ids = TimeZone.getAvailableIDs();
+        List<String[]> timezones = new LinkedList<>();
         for (String id : ids) {
             TimeZone zone = TimeZone.getTimeZone(id);
             int offset = zone.getRawOffset() / 1000;
@@ -32,7 +37,13 @@ public class TestingTimeZones {
             int minutes = (offset % 3600) / 60;
             String displayName = zone.getDisplayName();
             String d = zone.getDisplayName(zone.useDaylightTime(), TimeZone.SHORT);
-            System.out.println(String.format(new Locale("ar"), "(GMT%+03d:%02d) %s - %s (%s)", hour, Math.abs(minutes), id, displayName, d));
+            String displayTimezoneInfo = String.format(new Locale("ar"), "(GMT%+03d:%02d) %s - %s (%s)", hour, Math.abs(minutes), id, displayName, d);
+            System.out.println(displayTimezoneInfo);
+
+            String[] timezone = new String[2];
+            timezone[0] = id;
+            timezone[1] = displayTimezoneInfo;
+            timezones.add(timezone);
         }
 
     }
