@@ -691,23 +691,22 @@
                 }
             });
             form.find("select[name='timezone']").val(moment.tz.guess()).trigger('change.select2');
-            form.find("input[name='profilePicture'][type=file]").attr("accept", "*/*").on("change", function () {
+            form.find("input[name='profilePicture'][type=file]").on("change", function () {
                 if (this.files && this.files[0]) {
                     var reader = new FileReader();
                     reader.onload = function (e) {
                         var image = form.find("img[id='profilePicturePreview']");
-                        image.attr('src', e.target.result);
-                        // update scrollable:
-                        setTimeout(function () {
-                            var currentImageHeight = image[0].height;
+                        image.one("load", function () {
+                            alert("loaded");
+                            var currentImageHeight = this.height;
                             if (currentImageHeight > 250) {
                                 $("#profilePicturePreviewContainerId").height(250);
                             } else {
                                 $("#profilePicturePreviewContainerId").height(currentImageHeight);
                             }
                             $("#profilePicturePreviewContainerId").mCustomScrollbar("update");
-                        }, 0);
-
+                        });
+                        image.attr('src', e.target.result);
                     };
                     reader.readAsDataURL(this.files[0]);
                 }
