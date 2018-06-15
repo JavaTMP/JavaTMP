@@ -33,9 +33,6 @@
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
 
-            $.fn.select2.defaults.set("theme", "bootstrap");
-            $.fn.select2.defaults.set("dir", javatmp.settings.direction);
-
             $.fn.dataTable.ext.errMode = 'none';
             var table = $('#defalut-dataTables-example').DataTable({
                 //                responsive: true,
@@ -56,63 +53,7 @@
                     //                    alert('DataTables has redrawn the table');
                 },
                 initComplete: function () {
-                    this.api().columns().every(function (index) {
-                        var column = this;
-                        if (index === 0) {
-                            var input = $('<input id="id-search-input-id" class="form-control"/>')
-                                    .appendTo($("#filterHeader").find('th').eq(0).empty())
-                                    .on('keyup change', function () {
-                                        var val = $.fn.dataTable.util.escapeRegex($(this).val());
-                                        column.search(val ? val : '', true, false).draw();
-                                    });
-                        } else if (index === 4) {
-                            var input = $('<input class="form-control" />')
-                                    .appendTo($("#filterHeader").find('th').eq(index).empty())
-                                    .on('change', function () {
-                                        var val = $(this).val();
-                                        column.search(val ? val : '', true, false).draw();
-                                    });
-                            input.inputmask({
-                                alias: "datetime",
-                                placeholder: "dd/mm/yyyy",
-                                inputFormat: "dd/mm/yyyy",
-                                displayFormat: true,
-                                hourFormat: "24",
-                                clearMaskOnLostFocus: false
-                            });
-                            input.daterangepicker({
-                                "opens": javatmp.settings.floatDefault,
-                                //                    startDate: false,
-                                singleDatePicker: true,
-                                showDropdowns: true,
-                                timePicker: false,
-                                timePickerIncrement: 1,
-                                timePicker24Hour: true,
-                                autoApply: true,
-                                autoUpdateInput: false,
-                                minDate: '01/01/1900',
-                                maxDate: '31/12/2099',
-                                //                    maxDate: '',
-                                //                    minDate: moment(),
-                                locale: {
-                                    "direction": javatmp.settings.direction,
-                                    format: 'DD/MM/YYYY'
-                                }
-                            }, function (start, end, label) {
-                                var formatedDateSelected = moment(start).format("DD/MM/YYYY");
-                                $(input).val(formatedDateSelected).trigger("change");
-                            });
 
-                        } else {
-                            var input = $('<input class="form-control" />')
-                                    .appendTo($("#filterHeader").find('th').eq(index).empty())
-                                    .on('keyup change', function () {
-                                        var val = $.fn.dataTable.util.escapeRegex($(this).val());
-                                        column.search(val ? val : '', true, false).draw();
-                                    });
-                        }
-
-                    });
                 },
                 "ajax": {
                     "type": "POST",

@@ -112,9 +112,12 @@ public class CreateUserController extends HttpServlet {
             text += t;
 
             userToBeCreated.setProfilePicDocumentId(fileUploading.getDocumentId());
-            userToBeCreated.setCreationDate(new Date());
+
             logger.info("UserToBeCreated is [" + MvcHelper.deepToString(userToBeCreated) + "]");
             userToBeCreated.setPassword(MD5Util.convertToMD5(userToBeCreated.getPassword()));
+            userToBeCreated.setCreationDate(new Date());
+            userToBeCreated.setStatus((short) 1);
+
             us.createNewUser(userToBeCreated);
 
             responseMessage.setOverAllStatus(true);
@@ -123,15 +126,15 @@ public class CreateUserController extends HttpServlet {
 
         } catch (IllegalStateException e) {
             logger.info("ERROR : " + e.getMessage());
-            e.printStackTrace();
-            responseMessage.setOverAllStatus(true);
-            responseMessage.setMessage(e.getMessage());
+            responseMessage.setOverAllStatus(false);
+            responseMessage.setMessage("The file to be uploaded exceeds its maximum permitted size of 51200 bytes - " + e.getMessage());
+            response.setStatus(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE);
+            responseMessage.setStatusCode(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE);
         } catch (IllegalAccessException ex) {
             Logger.getLogger(CreateUserController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InvocationTargetException ex) {
             Logger.getLogger(CreateUserController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         MvcHelper.sendMessageAsJson(response, responseMessage);
 
     }
