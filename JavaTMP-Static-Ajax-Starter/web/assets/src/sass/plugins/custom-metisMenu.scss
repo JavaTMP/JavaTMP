@@ -1,4 +1,5 @@
 @import "../common/variables.scss";
+
 $metismenu-bg: $javatmp-sidebar-bg!default;
 $metismenu-link-bg: $metismenu-bg!default;
 $metismenu-link-color: $javatmp-sidebar-link-color!default;
@@ -103,5 +104,8 @@ $metismenu-submenu-vertical-border-color: darken($metismenu-bg, 10%)!default;
         padding-right: 0px;
         border-left: none;
         border-right: 1px solid $metismenu-submenu-vertical-border-color;
+    }
+    .active > .has-arrow:after {
+        transform: rotate(45deg) translateY(-50%);
     }
 }
