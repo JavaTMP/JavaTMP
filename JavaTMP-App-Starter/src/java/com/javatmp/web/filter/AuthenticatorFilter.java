@@ -80,10 +80,13 @@ public class AuthenticatorFilter implements Filter {
                 MvcHelper.sendMessageAsJson(res, responseMessage);
 
             } else {
-                String redirectUrl = req.getContextPath() + "/login";
+//                String redirectUrl = req.getContextPath() + "/login";
+                String redirectUrl = "/login";
                 logger.info("redirect user to login page");
-//                res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                res.sendRedirect(redirectUrl);
+                res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+//                res.setHeader("Location", res.encodeRedirectURL(redirectUrl));
+//                res.sendRedirect(redirectUrl);
+                request.getRequestDispatcher(redirectUrl).forward(request, response);
             }
         }
 

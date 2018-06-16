@@ -50,6 +50,7 @@ public class DBFaker {
         logingUser.setTheme("default");
         logingUser.setTimezone(TimeZone.getTimeZone("UTC").getID());
         logingUser.setBirthDate(new Date(-399571200000L));
+        logingUser.setCountryId("USA");
         this.users.add(logingUser);
 //        this.users.add(new User(DBFaker.getNextCounter(), null, null, "Tiger", "Nixon", (short) 1, new Date(-399571200000L), new Date(), "t.nixon@datatables.net", "5421", "en", "default", "US", "address not specified yet", "System Architect", "Edinburgh", new Date(1293307200000L));
 //        this.users.add(new User(DBFaker.getNextCounter(), null, null, "Garrett", "Winters", (short) 1, new Date(-462729600000L), new Date(), "g.winters@datatables.net", "8422", "en", "default", "US", "address not specified yet", "Accountant", "Tokyo", new Date(1293307200000L), new BigDecimal("170750")));

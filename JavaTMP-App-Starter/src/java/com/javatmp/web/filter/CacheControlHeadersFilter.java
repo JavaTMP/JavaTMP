@@ -22,6 +22,8 @@ public class CacheControlHeadersFilter implements Filter {
 
     public CacheControlHeadersFilter() {
         excludes.add("/");
+        excludes.add("/logout");
+        excludes.add("/login");
     }
 
     private boolean ignoreURL(String requestPath) {

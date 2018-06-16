@@ -13,8 +13,22 @@
                 <th>Last name</th>
                 <th>Age</th>
                 <th>E-mail</th>
+                <th>Status</th>
+                <th>Country Id</th>
+                <th>Address</th>
+                <th>Language</th>
+                <th>Theme</th>
+                <th>Timezone</th>
+                <th>Creation Date</th>
             </tr>
             <tr id="filterHeader">
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
                 <th></th>
                 <th></th>
                 <th></th>
@@ -81,7 +95,16 @@
                             return Math.ceil(moment().diff(moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ"), 'years', true));
                         }
                     },
-                    {data: 'email', "width": 150}
+                    {data: 'email', "width": 150},
+                    {data: 'status', "width": 150},
+                    {data: 'countryId', "width": 150},
+                    {data: 'address', "width": 150},
+                    {data: 'lang', "width": 150},
+                    {data: 'theme', "width": 150},
+                    {data: 'timezone', "width": 150},
+                    {data: 'creationDate', "width": 500, "type": "date", "render": function (data, type, row) {
+                            return moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY HH:mm');
+                        }}
                 ]
             });
 
