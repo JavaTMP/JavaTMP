@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/user/GetCreateNewUserPopupController")
-@MultipartConfig(fileSizeThreshold = 1024 * 15, maxFileSize = 1024 * 50, maxRequestSize = 1024 * 200)
 public class GetCreateNewUserPopupController extends HttpServlet {
 
     private final Logger logger = Logger.getLogger(getClass().getName());

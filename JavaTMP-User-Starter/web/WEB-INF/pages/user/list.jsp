@@ -6,11 +6,14 @@
     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
         <div class="btn-group mr-2" role="group" aria-label="First group">
             <button type="button" class="btn btn-primary"
-                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/user/CreateUserController">
+                    actionType="action-ref-href"
+                    action-ref-by-href="${pageContext.request.contextPath}/user/CreateUserController">
                 <i class="fa fa-fw fa-user"></i>
                 Add New User
             </button>
-            <button type="button" class="btn btn-primary">
+            <button type="button" class="btn btn-primary"
+                    actionType="ajax-model"
+                    href="${pageContext.request.contextPath}/user/GetCreateNewUserPopupController">
                 <i class="fa fa-external-link-alt fa-fw"></i>
                 Add New User Popup
             </button>
