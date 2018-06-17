@@ -57,7 +57,7 @@
                 scrollX: true,
                 "autoWidth": false,
                 fixedColumns: true,
-                scrollCollapse: false,
+                scrollCollapse: true,
                 "searching": true,
                 searchDelay: 500,
                 orderCellsTop: true, // important to for two row header with filteration below header column names.
@@ -102,8 +102,14 @@
                     {data: 'lang', "width": 150},
                     {data: 'theme', "width": 150},
                     {data: 'timezone', "width": 150},
-                    {data: 'creationDate', "width": 500, "type": "date", "render": function (data, type, row) {
-                            return moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY HH:mm');
+                    {data: 'creationDate', "width": 200, "type": "date",
+                        "render": function (data, type, row) {
+                            if (type === "sort" || type === 'type' || type === 'filter') {
+                                return moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY HH:mm');
+                            } else {
+                                return "<p class='m-0 p-0' style='width: 200px;'>" + moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY HH:mm') + "</p>";
+                            }
+
                         }}
                 ]
             });
