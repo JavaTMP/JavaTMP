@@ -1,8 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Users List</h1>
-    </div>
+<div class="dynamic-ajax-content pt-3">
     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
         <div class="btn-group mr-2" role="group" aria-label="First group">
             <button type="button" class="btn btn-primary"
@@ -17,8 +14,12 @@
                 <i class="fa fa-external-link-alt fa-fw"></i>
                 Add New User Popup
             </button>
-            <button type="button" class="btn btn-primary">3</button>
-            <button type="button" class="btn btn-primary">4</button>
+            <button type="button" class="btn btn-primary"
+                    actionType="ajax-model"
+                    href="${pageContext.request.contextPath}/user/GetCreateNewUserPopupController">
+                <i class="fa fa-user-edit fa-fw"></i>
+                Update User
+            </button>
         </div>
         <div class="btn-group mr-2" role="group" aria-label="Second group">
             <button type="button" class="btn btn-primary">5</button>
@@ -65,7 +66,9 @@
         <tbody></tbody>
     </table>
     <style type="text/css">
-
+        table.dataTable tbody tr {
+            cursor: pointer;
+        }
     </style>
     <script type="text/javascript">
         jQuery(function ($) {
@@ -78,6 +81,7 @@
                 dom: "<'row'<'col-sm-12 px-0'tr>>" +
                         "<'row'<'col-sm-6'i><'col-sm-6 pt-2 text-right'l>>" +
                         "<'row'<'col-sm-12'p>>",
+                select: true,
                 scrollY: 400,
                 scrollX: true,
                 "autoWidth": false,
