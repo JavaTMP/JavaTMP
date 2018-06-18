@@ -1,34 +1,26 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<div class="dynamic-ajax-content pt-3">
-    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-        <div class="btn-group mr-2" role="group" aria-label="First group">
-            <button type="button" class="btn btn-primary"
-                    actionType="action-ref-href"
-                    action-ref-by-href="${pageContext.request.contextPath}/user/CreateUserController">
-                <i class="fa fa-fw fa-user"></i>
-                Add New User
-            </button>
-            <button type="button" class="btn btn-primary"
-                    actionType="ajax-model"
-                    href="${pageContext.request.contextPath}/user/GetCreateNewUserPopupController">
-                <i class="fa fa-external-link-alt fa-fw"></i>
-                Add New User Popup
-            </button>
-            <button type="button" class="btn btn-primary"
-                    actionType="ajax-model"
-                    href="${pageContext.request.contextPath}/user/GetCreateNewUserPopupController">
-                <i class="fa fa-user-edit fa-fw"></i>
-                Update User
-            </button>
-        </div>
-        <div class="btn-group mr-2" role="group" aria-label="Second group">
-            <button type="button" class="btn btn-primary">5</button>
-            <button type="button" class="btn btn-primary">6</button>
-            <button type="button" class="btn btn-primary">7</button>
-        </div>
-        <div class="btn-group" role="group" aria-label="Third group">
-            <button type="button" class="btn btn-primary">8</button>
-        </div>
+<div class="dynamic-ajax-content">
+    <div class="user-list-btn-toolbar my-3" role="toolbar" aria-label="Toolbar with button groups">
+        <button type="button" class="btn btn-primary"
+                actionType="action-ref-href"
+                action-ref-by-href="${pageContext.request.contextPath}/user/CreateUserController">
+            <i class="fa fa-fw fa-user"></i>
+            Add New User
+        </button>
+        <button type="button" class="btn btn-primary"
+                actionType="ajax-model"
+                href="${pageContext.request.contextPath}/user/GetCreateNewUserPopupController">
+            <i class="fa fa-external-link-alt fa-fw"></i>
+            Add New User Popup
+        </button>
+        <button id="UserList-UpdateSelectedUserId" type="button" class="btn btn-primary">
+            <i class="fa fa-user-edit fa-fw"></i>
+            Update User
+        </button>
+        <button type="button" class="btn btn-primary">5</button>
+        <button type="button" class="btn btn-primary">6</button>
+        <button type="button" class="btn btn-primary">7</button>
+        <button type="button" class="btn btn-primary">8</button>
     </div>
     <table cellspacing="0" class="table table-condensed table-bordered table-hover table-striped" id="defalut-dataTables-example">
         <thead>
@@ -40,7 +32,7 @@
                 <th>Age</th>
                 <th>E-mail</th>
                 <th>Status</th>
-                <th>Country Id</th>
+                <th>Country Name</th>
                 <th>Address</th>
                 <th>Language</th>
                 <th>Theme</th>
@@ -115,9 +107,40 @@
                 },
                 columns: [
                     {data: 'id', "width": 50},
-                    {data: 'userName', "width": 100},
-                    {data: 'firstName', "width": 100},
-                    {data: 'lastName', "width": 100},
+                    {
+                        data: 'userName',
+                        "render": function (data, type, row) {
+                            if (type === "sort" || type === 'type' || type === 'filter') {
+                                return data;
+                            } else {
+                                return "<p class='m-0 p-0' style='width: 150px;'>" + data + "</p>";
+                            }
+
+                        }
+                    },
+                    {
+                        data: 'firstName',
+                        "render": function (data, type, row) {
+                            if (type === "sort" || type === 'type' || type === 'filter') {
+                                return data;
+                            } else {
+                                return "<p class='m-0 p-0' style='width: 150px;'>" + data + "</p>";
+                            }
+
+                        }
+                    },
+                    {
+                        data: 'lastName',
+                        "width": 100,
+                        "render": function (data, type, row) {
+                            if (type === "sort" || type === 'type' || type === 'filter') {
+                                return data;
+                            } else {
+                                return "<p class='m-0 p-0' style='width: 150px;'>" + data + "</p>";
+                            }
+
+                        }
+                    },
                     {
                         data: 'birthDate', "type": "date", "width": 35,
                         "render": function (data, type, row) {
@@ -126,7 +149,16 @@
                     },
                     {data: 'email', "width": 150},
                     {data: 'status', "width": 150},
-                    {data: 'countryId', "width": 150},
+                    {
+                        data: 'countryId',
+                        "render": function (data, type, row) {
+                            if (type === "sort" || type === 'type' || type === 'filter') {
+                                return data;
+                            } else {
+                                return "<p class='m-0 p-0' style='width: 150px;'>" + data + "</p>";
+                            }
+
+                        }},
                     {data: 'address', "width": 150},
                     {data: 'lang', "width": 150},
                     {data: 'theme', "width": 150},
@@ -141,6 +173,17 @@
 
                         }}
                 ]
+            });
+
+            $("#UserList-UpdateSelectedUserId").on("click", function (event) {
+                var selectedCount = table.rows({selected: true}).count();
+                var selectedData = table.rows({selected: true}).data();
+                var selectedNodes = table.rows({selected: true}).nodes();
+                alert("count[" + selectedCount + "], length [" + selectedData.length + "]");
+                alert("data[" + JSON.stringify(selectedData) + "]");
+                alert("nodes[" + JSON.stringify(selectedNodes) + "]");
+                var selectedRecord = selectedData[0];
+                alert("row[" + JSON.stringify(selectedRecord) + "]");
             });
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
