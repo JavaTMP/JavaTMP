@@ -17,10 +17,6 @@
             <i class="fa fa-user-edit fa-fw"></i>
             Update User
         </button>
-        <button type="button" class="btn btn-primary">5</button>
-        <button type="button" class="btn btn-primary">6</button>
-        <button type="button" class="btn btn-primary">7</button>
-        <button type="button" class="btn btn-primary">8</button>
     </div>
     <table cellspacing="0" class="table table-condensed table-bordered table-hover" id="defalut-dataTables-example">
         <thead>
@@ -68,14 +64,23 @@
         jQuery(function ($) {
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
-
+            var updateUserButton = $("#UserList-UpdateSelectedUserId");
+//            updateUserButton.addClass("disabled");
+            function disabled() {
+                updateUserButton.prop("disabled", true);
+            }
+            function enabled() {
+                updateUserButton.prop("disabled", false);
+            }
+            disabled();
             $.fn.dataTable.ext.errMode = 'none';
             var table = $('#defalut-dataTables-example').DataTable({
                 //                responsive: true,
                 dom: "<'row'<'col-sm-12 px-0'tr>>" +
                         "<'row'<'col-sm-6'i><'col-sm-6 pt-2 text-right'l>>" +
                         "<'row'<'col-sm-12'p>>",
-                select: true,
+//                select: true,
+                select: "single",
                 scrollY: 400,
                 scrollX: true,
                 "autoWidth": false,
@@ -196,15 +201,28 @@
                 ]
             });
 
-            $("#UserList-UpdateSelectedUserId").on("click", function (event) {
-                var selectedCount = table.rows({selected: true}).count();
+            table.on('select', function (e, dt, type, indexes) {
+//                alert("select");
+                var rowData = table.rows(indexes).data().toArray();
+                enabled();
+                alert('<div><b>' + type + ' selection</b> - ' + JSON.stringify(rowData) + '</div>');
+            }).on('deselect', function (e, dt, type, indexes) {
+//                alert("descelect");
+                var rowData = table.rows(indexes).data().toArray();
+                disabled();
+                alert('<div><b>' + type + ' selection</b> - ' + JSON.stringify(rowData) + '</div>');
+            });
+
+            updateUserButton.on("click", function (event) {
+                //                var selectedCount = table.rows({selected: true}).count();
                 var selectedData = table.rows({selected: true}).data();
-                var selectedNodes = table.rows({selected: true}).nodes();
-                alert("count[" + selectedCount + "], length [" + selectedData.length + "]");
-                alert("data[" + JSON.stringify(selectedData) + "]");
-                alert("nodes[" + JSON.stringify(selectedNodes) + "]");
-                var selectedRecord = selectedData[0];
-                alert("row[" + JSON.stringify(selectedRecord) + "]");
+                if (selectedData.length > 0) {
+                    var selectedRecord = selectedData[0];
+                    alert("row[" + JSON.stringify(selectedRecord) + "]");
+                } else {
+                    BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
+                }
+
             });
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
