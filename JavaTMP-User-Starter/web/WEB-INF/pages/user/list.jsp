@@ -22,13 +22,14 @@
         <button type="button" class="btn btn-primary">7</button>
         <button type="button" class="btn btn-primary">8</button>
     </div>
-    <table cellspacing="0" class="table table-condensed table-bordered table-hover table-striped" id="defalut-dataTables-example">
+    <table cellspacing="0" class="table table-condensed table-bordered table-hover" id="defalut-dataTables-example">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Username</th>
                 <th>First name</th>
                 <th>Last name</th>
+                <th>Date Of Birth</th>
                 <th>Age</th>
                 <th>E-mail</th>
                 <th>Status</th>
@@ -39,21 +40,22 @@
                 <th>Timezone</th>
                 <th>Creation Date</th>
             </tr>
-            <tr id="filterHeader">
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-            </tr>
+            <!--            <tr id="filterHeader">
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                        </tr>-->
         </thead>
         <tbody></tbody>
     </table>
@@ -115,7 +117,6 @@
                             } else {
                                 return "<p class='m-0 p-0' style='width: 150px;'>" + data + "</p>";
                             }
-
                         }
                     },
                     {
@@ -142,6 +143,16 @@
                         }
                     },
                     {
+                        data: 'birthDate', "type": "date", "width": 150,
+                        "render": function (data, type, row) {
+                            if (type === "sort" || type === 'type' || type === 'filter') {
+                                return moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY HH:mm');
+                            } else {
+                                return "<p class='m-0 p-0' style='width: 150px;'>" + moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY') + "</p>";
+                            }
+                        }
+                    },
+                    {
                         data: 'birthDate', "type": "date", "width": 35,
                         "render": function (data, type, row) {
                             return Math.ceil(moment().diff(moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ"), 'years', true));
@@ -158,8 +169,18 @@
                                 return "<p class='m-0 p-0' style='width: 150px;'>" + data + "</p>";
                             }
 
-                        }},
-                    {data: 'address', "width": 150},
+                        }
+                    },
+                    {data: 'address', "width": 150,
+                        "render": function (data, type, row) {
+                            if (type === "sort" || type === 'type' || type === 'filter') {
+                                return data;
+                            } else {
+                                return "<p class='m-0 p-0' style='width: 150px;'>Will Be Show</p>";
+                            }
+
+                        }
+                    },
                     {data: 'lang', "width": 150},
                     {data: 'theme', "width": 150},
                     {data: 'timezone', "width": 150},
