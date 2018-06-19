@@ -434,7 +434,7 @@
             var form = $('#AddNewUserPopupFormId');
             var validator = null;
 
-            modal.updateTitle("Add New Diary Event");
+            modal.updateTitle("Add New User");
             modal.updateClosable(true);
             modal.updateSize("modal-lg");
             modal.addButton({
