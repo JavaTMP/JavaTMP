@@ -18,7 +18,7 @@
             Update User
         </button>
     </div>
-    <table cellspacing="0" class="table table-condensed table-bordered table-hover" id="defalut-dataTables-example">
+    <table cellspacing="0" class="table table-condensed table-bordered table-hover" id="UsersListTableId">
         <thead>
             <tr>
                 <th>ID</th>
@@ -68,6 +68,7 @@
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
             var updateUserButton = $("#UserList-UpdateSelectedUserId");
+            var userTableElement = $('#UsersListTableId');
 //            updateUserButton.addClass("disabled");
             function disabled() {
                 updateUserButton.prop("disabled", true);
@@ -77,7 +78,7 @@
             }
             disabled();
             $.fn.dataTable.ext.errMode = 'none';
-            var table = $('#defalut-dataTables-example').DataTable({
+            var table = userTableElement.DataTable({
                 //                responsive: true,
                 dom: "<'row'<'col-sm-12 px-0'tr>>" +
                         "<'row'<'col-sm-6'i><'col-sm-6 pt-2 text-right'l>>" +
@@ -96,13 +97,13 @@
                 "serverSide": true,
                 "rowCallback": function (row, data, index) {
                     // replace the contents of the first column (rowid) with an edit link
-                    alert($(row).html());
+                    $(row).attr("data-row-id", data.id);
                 },
                 "drawCallback": function (settings) {
                     //                    alert('DataTables has redrawn the table');
                 },
                 initComplete: function (settings, json) {
-
+                    $("", userTableElement).on("click");
                 },
                 "ajax": {
                     "type": "POST",
@@ -111,6 +112,7 @@
                     contentType: "application/json; charset=UTF-8",
                     "data": function (currentDate) {
                         currentDate._ajaxGlobalBlockUI = false; // window blocked until data return
+                        currentDate._ajaxGlobalBlockUI = false;
                         return JSON.stringify(currentDate);
                     },
                     "dataSrc": function (json) {
