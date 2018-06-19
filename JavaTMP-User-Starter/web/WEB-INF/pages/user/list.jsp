@@ -59,6 +59,9 @@
         table.dataTable tbody tr {
             cursor: pointer;
         }
+        .my_class {
+            width: 200px!important;
+        }
     </style>
     <script type="text/javascript">
         jQuery(function ($) {
@@ -113,7 +116,7 @@
                     }
                 },
                 columns: [
-                    {data: 'id', "width": 50},
+                    {data: 'id', "width": 50, className: ""},
                     {
                         data: 'userName',
                         "render": function (data, type, row) {
@@ -203,14 +206,16 @@
 
             table.on('select', function (e, dt, type, indexes) {
 //                alert("select");
-                var rowData = table.rows(indexes).data().toArray();
+                var rowsData = table.rows(indexes).data().toArray();
+                var rowData = rowsData[0];
                 enabled();
-                alert('<div><b>' + type + ' selection</b> - ' + JSON.stringify(rowData) + '</div>');
+                alert(JSON.stringify(rowData));
             }).on('deselect', function (e, dt, type, indexes) {
 //                alert("descelect");
-                var rowData = table.rows(indexes).data().toArray();
+                var rowsData = table.rows(indexes).data().toArray();
+                var rowData = rowsData[0];
                 disabled();
-                alert('<div><b>' + type + ' selection</b> - ' + JSON.stringify(rowData) + '</div>');
+                alert(JSON.stringify(rowData));
             });
 
             updateUserButton.on("click", function (event) {
