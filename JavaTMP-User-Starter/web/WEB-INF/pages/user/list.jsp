@@ -210,18 +210,26 @@
                 ]
             });
 
+            $('tbody', userTableElement).on('contextmenu', 'tr', function () {
+                var rowId = $(this).data("row-id");
+                if ($(this).hasClass("selected") === false) {
+                    table.row(this).select();
+                }
+                alert("context on " + rowId);
+            });
+
             table.on('select', function (e, dt, type, indexes) {
 //                alert("select");
                 var rowsData = table.rows(indexes).data().toArray();
                 var rowData = rowsData[0];
                 enabled();
-                alert(JSON.stringify(rowData));
+                alert("select" + JSON.stringify(rowData));
             }).on('deselect', function (e, dt, type, indexes) {
 //                alert("descelect");
                 var rowsData = table.rows(indexes).data().toArray();
                 var rowData = rowsData[0];
                 disabled();
-                alert(JSON.stringify(rowData));
+                alert("descelect" + JSON.stringify(rowData));
             });
 
             updateUserButton.on("click", function (event) {
