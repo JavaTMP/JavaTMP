@@ -94,10 +94,14 @@
                 orderCellsTop: true, // important to for two row header with filteration below header column names.
                 "processing": true,
                 "serverSide": true,
+                "rowCallback": function (row, data, index) {
+                    // replace the contents of the first column (rowid) with an edit link
+                    alert($(row).html());
+                },
                 "drawCallback": function (settings) {
                     //                    alert('DataTables has redrawn the table');
                 },
-                initComplete: function () {
+                initComplete: function (settings, json) {
 
                 },
                 "ajax": {
