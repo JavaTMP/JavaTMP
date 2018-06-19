@@ -1,5 +1,6 @@
 package com.javatmp.web.controller;
 
+import com.javatmp.util.Constants;
 import java.io.IOException;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -19,6 +20,8 @@ public class LogoutController extends HttpServlet {
             throws ServletException, IOException {
         logger.info("*** we should logout current user and redirect him to login page");
         HttpSession session = request.getSession();
+        session.setAttribute(Constants.LANGUAGE_ATTR_KEY, null);
+        session.removeAttribute(Constants.LANGUAGE_ATTR_KEY);
         session.setAttribute("user", null);
         session.removeAttribute("user");
 

@@ -9,6 +9,8 @@ import com.javatmp.util.MD5Util;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -47,6 +49,10 @@ public class LoginController extends HttpServlet {
             if (dbUser != null && dbUser.getPassword().equals(MD5Util.convertToMD5(user.getPassword()))) {
                 // Authenticated user
                 logger.info("User found [" + MvcHelper.deepToString(dbUser) + "]");
+
+                Locale locale = Locale.forLanguageTag(dbUser.getLang());
+                ResourceBundle bundle = ResourceBundle.getBundle(Constants.RESOURCE_BUNDLE_BASE_NAME, locale);
+                session.setAttribute(Constants.LANGUAGE_ATTR_KEY, bundle);
                 session.setAttribute("user", dbUser);
 
                 responseMessage.setOverAllStatus(true);
