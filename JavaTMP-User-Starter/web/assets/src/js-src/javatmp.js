@@ -217,10 +217,11 @@
                     $(window).on('mousemove', handlingMouseMove);
                 }
             } else {
-                $("body").addClass("sidebar-active");
                 // disabled auto show on mouse move
-                $("body").removeClass("mouse-auto-show");
                 $(window).off('mousemove', handlingMouseMove);
+                $("body").removeClass("mouse-auto-show");
+                $("body").addClass("sidebar-active");
+
             }
         });
 
