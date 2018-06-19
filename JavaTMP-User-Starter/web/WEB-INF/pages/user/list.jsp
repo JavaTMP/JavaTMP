@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<div class="dynamic-ajax-content">
+<div class="dynamic-ajax-content m-0 p-0">
     <div class="user-list-btn-toolbar my-3" role="toolbar" aria-label="Toolbar with button groups">
         <button type="button" class="btn btn-primary"
                 actionType="action-ref-href"
@@ -36,31 +36,28 @@
                 <th>Timezone</th>
                 <th>Creation Date</th>
             </tr>
-            <!--            <tr id="filterHeader">
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>-->
+            <tr id="filterHeader">
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
         </thead>
         <tbody></tbody>
     </table>
     <style type="text/css">
         table.dataTable tbody tr {
             cursor: pointer;
-        }
-        .my_class {
-            width: 200px!important;
         }
     </style>
     <script type="text/javascript">
@@ -101,6 +98,7 @@
                 },
                 "drawCallback": function (settings) {
                     //                    alert('DataTables has redrawn the table');
+                    disabled();
                 },
                 initComplete: function (settings, json) {
                     $("", userTableElement).on("click");
@@ -223,13 +221,13 @@
                 var rowsData = table.rows(indexes).data().toArray();
                 var rowData = rowsData[0];
                 enabled();
-                alert("select" + JSON.stringify(rowData));
+//                alert("select" + JSON.stringify(rowData));
             }).on('deselect', function (e, dt, type, indexes) {
 //                alert("descelect");
                 var rowsData = table.rows(indexes).data().toArray();
                 var rowData = rowsData[0];
                 disabled();
-                alert("descelect" + JSON.stringify(rowData));
+//                alert("descelect" + JSON.stringify(rowData));
             });
 
             updateUserButton.on("click", function (event) {
@@ -237,12 +235,30 @@
                 var selectedData = table.rows({selected: true}).data();
                 if (selectedData.length > 0) {
                     var selectedRecord = selectedData[0];
-                    alert("row[" + JSON.stringify(selectedRecord) + "]");
+//                    alert("row[" + JSON.stringify(selectedRecord) + "]");
+                    var passData = {};
+                    passData.callback = "actionCallback";
+                    passData.id = selectedRecord.id;
+                    BootstrapModalWrapperFactory.createAjaxModal({
+                        message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
+                        passData: passData,
+                        url: javatmp.settings.contextPath + "/user/GetUpdateUserPopupController",
+                        ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
+                    });
                 } else {
                     BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
                 }
 
             });
+
+            window.actionCallback = function (callbackData) {
+                alert(JSON.stringify(callbackData));
+                if (callbackData.cancel === true) {
+                } else {
+                    alert("we should update table");
+                }
+            };
+
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
