@@ -7,6 +7,8 @@ public class ServicesFactory {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
     private DBFaker dbFaker;
+    private ThemeService themeService;
+    private LanguageService languageService;
     private CountryService countryService;
     private UserService userService;
     private DocumentService documentService;
@@ -14,6 +16,8 @@ public class ServicesFactory {
     public ServicesFactory() {
         logger.info("*** Start ServicesFactory Constructor @ [" + new Date() + "]");
         this.dbFaker = new DBFaker();
+        this.themeService = new ThemeService(dbFaker);
+        this.languageService = new LanguageService(dbFaker);
         this.countryService = new CountryService(dbFaker);
         this.userService = new UserService(this.dbFaker);
         this.documentService = new DocumentService(dbFaker);
@@ -41,9 +45,16 @@ public class ServicesFactory {
     }
 
     /**
-     * @param countryService the countryService to set
+     * @return the languageService
      */
-    public void setCountryService(CountryService countryService) {
-        this.countryService = countryService;
+    public LanguageService getLanguageService() {
+        return languageService;
+    }
+
+    /**
+     * @return the themeService
+     */
+    public ThemeService getThemeService() {
+        return themeService;
     }
 }

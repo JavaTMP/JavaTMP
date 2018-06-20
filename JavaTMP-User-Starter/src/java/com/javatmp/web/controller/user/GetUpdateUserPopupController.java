@@ -1,6 +1,8 @@
 package com.javatmp.web.controller.user;
 
 import com.javatmp.domain.Country;
+import com.javatmp.domain.Language;
+import com.javatmp.domain.Theme;
 import com.javatmp.domain.User;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.service.ServicesFactory;
@@ -59,6 +61,10 @@ public class GetUpdateUserPopupController extends HttpServlet {
             logger.info("DB user to be Updated is [" + MvcHelper.deepToString(dbUser) + "]");
 
             List<Country> countries = sf.getCountryService().getCountries();
+            List<Language> languages = sf.getLanguageService().getLanguages();
+            List<Theme> themes = sf.getThemeService().getThemes();
+            request.setAttribute("themes", themes);
+            request.setAttribute("languages", languages);
             request.setAttribute("countries", countries);
             request.setAttribute("user", dbUser);
             request.setAttribute("timezones", timezones);

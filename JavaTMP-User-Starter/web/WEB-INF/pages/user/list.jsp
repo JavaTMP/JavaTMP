@@ -97,11 +97,9 @@
                     $(row).attr("data-row-id", data.id);
                 },
                 "drawCallback": function (settings) {
-                    //                    alert('DataTables has redrawn the table');
                     disabled();
                 },
                 initComplete: function (settings, json) {
-                    $("", userTableElement).on("click");
                 },
                 "ajax": {
                     "type": "POST",

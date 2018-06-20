@@ -58,9 +58,17 @@
                                 <div class="form-group">
                                     <label class="control-label">Interface Language</label>
                                     <select name="lang" class="form-control">
-                                        <option value="">Choose ...</option>
-                                        <option value="ar">Arabic (AR)</option>
-                                        <option value="en">English (EN)</option>
+                                        <c:choose>
+                                            <c:when test="${fn:length(requestScope.languages) > 0}">
+                                                <option value="">Choose ...</option>
+                                                <c:forEach items="${requestScope.languages}" var="language">
+                                                    <option ${requestScope.user.lang == language.languageId ? 'selected="selected"' : ''} value="${language.languageId}">${language.languageName}</option>
+                                                </c:forEach>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option value="">No Record Found</option>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </select>
                                 </div>
                             </div>
@@ -68,29 +76,17 @@
                                 <div class="form-group">
                                     <label class="control-label">Interface Theme</label>
                                     <select name="theme" class="form-control">
-                                        <option value="">Choose ...</option>
-                                        <option value="default">Default</option>
-                                        <option value="cerulean">Cerulean</option>
-                                        <option value="cosmo">Cosmo</option>
-                                        <option value="cyborg">Cyborg</option>
-                                        <option value="darkly">Darkly</option>
-                                        <option value="flatly">Flatly</option>
-                                        <option value="journal">Journal</option>
-                                        <option value="litera">Litera</option>
-                                        <option value="lumen">Lumen</option>
-                                        <option value="lux">Lux</option>
-                                        <option value="materia">Materia</option>
-                                        <option value="minty">Minty</option>
-                                        <option value="pulse">Pulse</option>
-                                        <option value="sandstone">Sandstone</option>
-                                        <option value="simplex">Simplex</option>
-                                        <option value="sketchy">Sketchy</option>
-                                        <option value="slate">Slate</option>
-                                        <option value="solar">Solar</option>
-                                        <option value="spacelab">Spacelab</option>
-                                        <option value="superhero">Superhero</option>
-                                        <option value="united">United</option>
-                                        <option value="yeti">Yeti</option>
+                                        <c:choose>
+                                            <c:when test="${fn:length(requestScope.themes) > 0}">
+                                                <option value="">Choose ...</option>
+                                                <c:forEach items="${requestScope.themes}" var="theme">
+                                                    <option ${requestScope.user.theme == theme.themeId ? 'selected="selected"' : ''} value="${theme.themeId}">${theme.themeName}</option>
+                                                </c:forEach>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option value="">No Record Found</option>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </select>
                                 </div>
                             </div>
@@ -101,8 +97,9 @@
                                         <option value="">Choose ...</option>
                                         <c:choose>
                                             <c:when test="${fn:length(requestScope.timezones) > 0}">
+                                                <option value="">Choose ...</option>
                                                 <c:forEach items="${requestScope.timezones}" var="timezone">
-                                                    <option value="${timezone[0]}">${timezone[1]}</option>
+                                                    <option ${requestScope.user.timezone == timezone[0] ? 'selected="selected"' : ''}  value="${timezone[0]}">${timezone[1]}</option>
                                                 </c:forEach>
                                             </c:when>
                                             <c:otherwise>
@@ -565,7 +562,6 @@
                     scrollAmount: 85
                 }
             });
-            form.find("select[name='timezone']").val(moment.tz.guess()).trigger('change.select2');
             form.find("input[name='profilePicture'][type=file]").on("change", function () {
                 if (this.files && this.files[0]) {
                     var reader = new FileReader();

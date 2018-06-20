@@ -2,6 +2,8 @@ package com.javatmp.service;
 
 import com.javatmp.domain.Country;
 import com.javatmp.domain.Document;
+import com.javatmp.domain.Language;
+import com.javatmp.domain.Theme;
 import com.javatmp.domain.User;
 import com.javatmp.util.MD5Util;
 import java.util.Date;
@@ -16,6 +18,8 @@ public class DBFaker {
     private List<User> users = new LinkedList<>();
     private List<Document> documents = new LinkedList<>();
     private List<Country> countries = new LinkedList<>();
+    private List<Language> languages = new LinkedList<>();
+    private List<Theme> themes = new LinkedList<>();
     private static Long counter = 0L;
 
     public static synchronized Long getNextCounter() {
@@ -23,6 +27,8 @@ public class DBFaker {
     }
 
     public DBFaker() {
+        this.generateThemes();
+        this.generateLanguages();
         this.generateCountries();
         this.generateFakeUsers();
     }
@@ -34,6 +40,36 @@ public class DBFaker {
     public synchronized void addUser(User user) {
         user.setId(DBFaker.getNextCounter());
         getUsers().add(user);
+    }
+
+    private void generateThemes() {
+        this.themes.add(new Theme("default", "Default"));
+        this.themes.add(new Theme("cerulean", "Cerulean"));
+        this.themes.add(new Theme("cosmo", "Cosmo"));
+        this.themes.add(new Theme("cyborg", "Cyborg"));
+        this.themes.add(new Theme("darkly", "Darkly"));
+        this.themes.add(new Theme("flatly", "Flatly"));
+        this.themes.add(new Theme("journal", "Journal"));
+        this.themes.add(new Theme("litera", "Litera"));
+        this.themes.add(new Theme("lumen", "Lumen"));
+        this.themes.add(new Theme("lux", "Lux"));
+        this.themes.add(new Theme("materia", "Materia"));
+        this.themes.add(new Theme("minty", "Minty"));
+        this.themes.add(new Theme("pulse", "Pulse"));
+        this.themes.add(new Theme("sandstone", "Sandstone"));
+        this.themes.add(new Theme("simplex", "Simplex"));
+        this.themes.add(new Theme("sketchy", "Sketchy"));
+        this.themes.add(new Theme("slate", "Slate"));
+        this.themes.add(new Theme("solar", "Solar"));
+        this.themes.add(new Theme("spacelab", "Spacelab"));
+        this.themes.add(new Theme("superhero", "Superhero"));
+        this.themes.add(new Theme("united", "United"));
+        this.themes.add(new Theme("yeti", "Yeti"));
+    }
+
+    private void generateLanguages() {
+        this.languages.add(new Language("ar", "Arabic (AR)"));
+        this.languages.add(new Language("en", "English (EN)"));
     }
 
     private void generateFakeUsers() {
@@ -313,8 +349,24 @@ public class DBFaker {
         getCountries().add(new Country("ZW", "Zimbabwe"));
     }
 
-    public static void main(String[] args) {
-        DBFaker faker = new DBFaker();
+    /**
+     * @return the languages
+     */
+    public List<Language> getLanguages() {
+        return languages;
+    }
 
+    /**
+     * @param languages the languages to set
+     */
+    public void setLanguages(List<Language> languages) {
+        this.languages = languages;
+    }
+
+    /**
+     * @return the themes
+     */
+    public List<Theme> getThemes() {
+        return themes;
     }
 }
