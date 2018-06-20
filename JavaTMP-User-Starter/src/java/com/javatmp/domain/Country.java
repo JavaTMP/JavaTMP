@@ -61,9 +61,4 @@ public class Country implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "com.bean.Country[ countryId=" + countryId + " ]";
-    }
-
 }

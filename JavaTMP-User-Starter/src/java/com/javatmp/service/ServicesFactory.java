@@ -7,6 +7,7 @@ public class ServicesFactory {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
     private DBFaker dbFaker;
+    private TimezoneService timezoneService;
     private ThemeService themeService;
     private LanguageService languageService;
     private CountryService countryService;
@@ -16,6 +17,7 @@ public class ServicesFactory {
     public ServicesFactory() {
         logger.info("*** Start ServicesFactory Constructor @ [" + new Date() + "]");
         this.dbFaker = new DBFaker();
+        this.timezoneService = new TimezoneService(dbFaker);
         this.themeService = new ThemeService(dbFaker);
         this.languageService = new LanguageService(dbFaker);
         this.countryService = new CountryService(dbFaker);
@@ -56,5 +58,12 @@ public class ServicesFactory {
      */
     public ThemeService getThemeService() {
         return themeService;
+    }
+
+    /**
+     * @return the timezoneService
+     */
+    public TimezoneService getTimezoneService() {
+        return timezoneService;
     }
 }

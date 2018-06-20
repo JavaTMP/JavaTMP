@@ -36,11 +36,6 @@ public class Language implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "com.bean.Country[ languageId=" + getLanguageId() + " ]";
-    }
-
     /**
      * @return the languageId
      */

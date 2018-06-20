@@ -4,11 +4,13 @@ import com.javatmp.domain.Country;
 import com.javatmp.domain.Document;
 import com.javatmp.domain.Language;
 import com.javatmp.domain.Theme;
+import com.javatmp.domain.Timezone;
 import com.javatmp.domain.User;
 import com.javatmp.util.MD5Util;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.TimeZone;
 import java.util.logging.Logger;
 
@@ -20,6 +22,7 @@ public class DBFaker {
     private List<Country> countries = new LinkedList<>();
     private List<Language> languages = new LinkedList<>();
     private List<Theme> themes = new LinkedList<>();
+    private List<Timezone> timezones = new LinkedList<>();
     private static Long counter = 0L;
 
     public static synchronized Long getNextCounter() {
@@ -31,6 +34,22 @@ public class DBFaker {
         this.generateLanguages();
         this.generateCountries();
         this.generateFakeUsers();
+        this.generateTimezones();
+    }
+
+    private void generateTimezones() {
+        // prepare a list of timezones - you should prepare them once instead of each request.
+        String[] ids = TimeZone.getAvailableIDs();
+        for (String id : ids) {
+            TimeZone zone = TimeZone.getTimeZone(id);
+            int offset = zone.getRawOffset() / 1000;
+            int hour = offset / 3600;
+            int minutes = (offset % 3600) / 60;
+            String displayName = zone.getDisplayName();
+            String d = zone.getDisplayName(zone.useDaylightTime(), TimeZone.SHORT);
+            String displayTimezoneInfo = String.format("(GMT%+03d:%02d) %s - %s (%s)", hour, Math.abs(minutes), id, displayName, d);
+            timezones.add(new Timezone(id, displayTimezoneInfo));
+        }
     }
 
     public List<User> getUsersList() {
@@ -368,5 +387,12 @@ public class DBFaker {
      */
     public List<Theme> getThemes() {
         return themes;
+    }
+
+    /**
+     * @return the timezones
+     */
+    public List<Timezone> getTimezones() {
+        return timezones;
     }
 }

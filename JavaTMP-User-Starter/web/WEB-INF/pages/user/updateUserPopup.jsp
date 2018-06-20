@@ -99,7 +99,7 @@
                                             <c:when test="${fn:length(requestScope.timezones) > 0}">
                                                 <option value="">Choose ...</option>
                                                 <c:forEach items="${requestScope.timezones}" var="timezone">
-                                                    <option ${requestScope.user.timezone == timezone[0] ? 'selected="selected"' : ''}  value="${timezone[0]}">${timezone[1]}</option>
+                                                    <option ${requestScope.user.timezone == timezone.timezoneId ? 'selected="selected"' : ''}  value="${timezone.timezoneId}">${timezone.timezoneName}</option>
                                                 </c:forEach>
                                             </c:when>
                                             <c:otherwise>

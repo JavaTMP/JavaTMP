@@ -36,11 +36,6 @@ public class Theme implements Serializable {
         return true;
     }
 
-    @Override
-    public String toString() {
-        return "com.bean.Country[ themeId=" + this.getThemeId() + " ]";
-    }
-
     /**
      * @return the themeId
      */
