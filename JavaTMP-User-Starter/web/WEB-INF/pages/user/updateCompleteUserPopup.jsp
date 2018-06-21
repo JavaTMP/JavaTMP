@@ -273,12 +273,16 @@
 //                    form.find("textarea[name='address']").summernote('code', '');
 //                    form.resetForm();
 //                    form.find(".form-group.has-success").removeClass(".has-success");
+                    callbackData.cancel = false;
+                    callbackData.success = true;
                     BootstrapModalWrapperFactory.createModal({
                         title: "Response",
                         message: response.message
                     }).show();
                 },
                 error: function (xhr, status, error, $form) {
+                    callbackData.cancel = true;
+                    callbackData.success = false;
                     var resultText = xhr.responseText;
                     var errorMsg = resultText;
                     var obj = JSON.parse(resultText);
