@@ -206,7 +206,6 @@
             // fire AFTER all transition done and your ajax content is shown to user.
             var form = $('#AddNewUserPopupFormId');
             var validator = null;
-
             modal.updateTitle("Update Complete User");
             modal.updateClosable(true);
             modal.updateSize("modal-lg");
@@ -250,7 +249,6 @@
                 return false;
             });
             modal.originalModal.find(".modal-footer").addClass("justify-content-start");
-
             form.ajaxForm({
                 clearForm: true, // clear all form fields after successful submit
 //                resetForm: true, // reset the form after successful submit
@@ -319,6 +317,11 @@
                     },
                     userName: {
                         required: true
+                    },
+                    oldPassword: {
+                        required: true,
+                        minlength: 6,
+                        maxlength: 20
                     },
                     password: {
                         required: true,
@@ -412,7 +415,6 @@
                 form.find("input[name='birthOfDateStr']").val(formatedDateSelected).trigger("change");
             });
             $(".daterangepicker").css('z-index', modalZIndex + 1);
-
             form.find("textarea[name='address']").summernote({
                 direction: javatmp.settings.direction,
                 lang: javatmp.user.lang === "ar" ? "ar-AR" : javatmp.user.lang,
@@ -582,7 +584,6 @@
                         resizeImage.attr('src', e.target.result);
                         avatarImage.attr('src', e.target.result);
                         avatarRoundedImage.attr('src', e.target.result);
-
                     };
                     reader.readAsDataURL(this.files[0]);
                 }
