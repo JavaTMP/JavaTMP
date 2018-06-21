@@ -31,8 +31,8 @@
             <ul class="main-navbar-menu nav ml-auto">
                 <li class="nav-item py-0 dropdown">
                     <a class="nav-link user-profile-menu-item dropdown-toggle" data-toggle="dropdown" href="#">
-                        <img class="user-profile-pic rounded-circle"
-                             src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt=""/>
+                        <img class="user-profile-pic rounded-circle" width="40" height="40"
+                             src="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${sessionScope.user.profilePicDocument.documentId}&amp;randomHash=${sessionScope.user.profilePicDocument.randomHash}&amp;viewType=inline" alt=""/>
                         <span class="user-profile-menu-item-info d-none d-md-inline-block">
                             <small>Welcome,</small>
                             ${sessionScope.user.firstName}&nbsp;${sessionScope.user.lastName}

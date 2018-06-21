@@ -53,6 +53,31 @@ public class UserService {
         return user;
     }
 
+    public int updateCompleteUser(User userToBeUpdated) {
+        int updateStatus = 0;
+        for (User dbUser : dBFaker.getUsersList()) {
+            if (dbUser.getId().equals(userToBeUpdated.getId())) {
+                dbUser.setUserName(userToBeUpdated.getUserName());
+                dbUser.setPassword(userToBeUpdated.getPassword());
+                dbUser.setFirstName(userToBeUpdated.getFirstName());
+                dbUser.setLastName(userToBeUpdated.getLastName());
+                dbUser.setStatus(userToBeUpdated.getStatus());
+                dbUser.setBirthDate(userToBeUpdated.getBirthDate());
+                dbUser.setCountryId(userToBeUpdated.getCountryId());
+                dbUser.setAddress(userToBeUpdated.getAddress());
+                dbUser.setEmail(userToBeUpdated.getEmail());
+                dbUser.setLang(userToBeUpdated.getLang());
+                dbUser.setTheme(userToBeUpdated.getTheme());
+                dbUser.setTimezone(userToBeUpdated.getTimezone());
+                dbUser.setProfilePicDocument(userToBeUpdated.getProfilePicDocument());
+                dbUser.setProfilePicDocumentId(userToBeUpdated.getProfilePicDocumentId());
+                updateStatus = 1;
+                break;
+            }
+        }
+        return updateStatus;
+    }
+
     public DataTableResults<User> listUsers(DataTableRequest tableRequest) {
         List<User> retList = new LinkedList<>();
         List<User> database = this.dBFaker.getUsers();

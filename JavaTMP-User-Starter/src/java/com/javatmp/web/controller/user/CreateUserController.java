@@ -110,7 +110,7 @@ public class CreateUserController extends HttpServlet {
             String t = "FileName 'requested' \"to\" Upload [" + fileName + "] type[" + contentType + "] name [" + fieldName + "]size[" + partSize + "]<br/>";
             logger.info(t);
             text += t;
-
+            System.out.println("Text[" + text + "]");
             userToBeCreated.setProfilePicDocumentId(fileUploading.getDocumentId());
 
             logger.info("UserToBeCreated is [" + MvcHelper.deepToString(userToBeCreated) + "]");
@@ -124,6 +124,8 @@ public class CreateUserController extends HttpServlet {
             responseMessage.setMessage("User Created successfully");
             responseMessage.setData(userToBeCreated);
 
+            MvcHelper.sendMessageAsJson(response, responseMessage);
+
         } catch (IllegalStateException e) {
             logger.info("ERROR : " + e.getMessage());
             responseMessage.setOverAllStatus(false);
@@ -135,7 +137,5 @@ public class CreateUserController extends HttpServlet {
         } catch (InvocationTargetException ex) {
             Logger.getLogger(CreateUserController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        MvcHelper.sendMessageAsJson(response, responseMessage);
-
     }
 }

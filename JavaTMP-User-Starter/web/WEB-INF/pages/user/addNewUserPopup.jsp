@@ -549,7 +549,7 @@
                     },
                     password: {
                         required: true,
-                        minlength: 6,
+                        minlength: 5,
                         maxlength: 20
                     },
                     rpassword: {
@@ -646,6 +646,7 @@
                 height: 100,
                 dialogsInBody: true
             });
+            modal.originalModal.removeAttr('tabindex');
             $.fn.select2.defaults.set("theme", "bootstrap");
             $.fn.select2.defaults.set("dir", javatmp.settings.direction);
             form.find("select[name='lang']").select2({
@@ -655,7 +656,7 @@
                 width: '',
                 dropdownCssClass: "select2-lang-dropdown"
             }).on("select2:open", function () {
-                $(".select2-lang-dropdown", ".select2-container").css('z-index', modalZIndex);
+                $(".select2-lang-dropdown", ".select2-container").css('z-index', modalZIndex + 1);
             });
             form.find("select[name='theme']").select2({
                 allowClear: true,
@@ -669,7 +670,7 @@
                 templateResult: formatThemeResult,
                 dropdownCssClass: "select2-theme-dropdown"
             }).on("select2:open", function () {
-                $(".select2-theme-dropdown", ".select2-container").css('z-index', modalZIndex);
+                $(".select2-theme-dropdown", ".select2-container").css('z-index', modalZIndex + 1);
             });
             form.find("select[name='timezone']").select2({
                 allowClear: true,
@@ -678,7 +679,7 @@
                 width: '',
                 dropdownCssClass: "select2-timezone-dropdown"
             }).on("select2:open", function () {
-                $(".select2-timezone-dropdown", ".select2-container").css('z-index', modalZIndex);
+                $(".select2-timezone-dropdown", ".select2-container").css('z-index', modalZIndex + 1);
             });
             form.find("select[name='countryId']").select2({
                 theme: "bootstrap",
@@ -696,7 +697,7 @@
             }).on("select2:select", function () {
                 (this).focus();
             }).on("select2:open", function () {
-                $(".select2-countryId-dropdown", ".select2-container").css('z-index', modalZIndex);
+                $(".select2-countryId-dropdown", ".select2-container").css('z-index', modalZIndex + 1);
             });
             function formatCountry(repo) {
                 if (repo.loading)

@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-lg-12">
             <form enctype="multipart/form-data" autocomplete="off" id="AddNewUserPopupFormId" class="form"
-                  action="${pageContext.request.contextPath}/user/CreateUserController" method="post" novalidate="novalidate">
+                  action="${pageContext.request.contextPath}/user/UpdateCompleteUserController" method="post" novalidate="novalidate">
                 <div class="form-group form-row">
                     <label class="control-label col-sm-2 col-form-label">User Id</label>
                     <div class="col-sm-10">
@@ -159,18 +159,18 @@
                             <div class="col-lg-3 text-center">
                                 <div style="width: 200px; height: 200px;display: inline-block;position: relative">
                                     <div id="profilePicturePreviewContainerId" style="width: 200px; height: 200px;">
-                                        <img id="profilePicturePreview" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
+                                        <img id="profilePicturePreview" src="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${requestScope.user.profilePicDocument.documentId}&amp;randomHash=${requestScope.user.profilePicDocument.randomHash}&amp;viewType=inline" alt="Your Profile Image Preview" />
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-3 text-center">
-                                <img id="profilePictureResizePreview" style="width: 200px; height: 200px;" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
+                                <img id="profilePictureResizePreview" style="width: 200px; height: 200px;" src="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${requestScope.user.profilePicDocument.documentId}&amp;randomHash=${requestScope.user.profilePicDocument.randomHash}&amp;viewType=inline" alt="Your Profile Image Preview" />
                             </div>
                             <div class="col-lg-3 text-center">
-                                <img id="profilePictureAvatarPreview" style="width: 40px; height: 40px;" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
+                                <img id="profilePictureAvatarPreview" style="width: 40px; height: 40px;" src="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${requestScope.user.profilePicDocument.documentId}&amp;randomHash=${requestScope.user.profilePicDocument.randomHash}&amp;viewType=inline" alt="Your Profile Image Preview" />
                             </div>
                             <div class="col-lg-3 text-center">
-                                <img class="rounded-circle" id="profilePictureAvatarRoundedPreview" style="width: 40px; height: 40px;" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
+                                <img class="rounded-circle" id="profilePictureAvatarRoundedPreview" style="width: 40px; height: 40px;" src="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${requestScope.user.profilePicDocument.documentId}&amp;randomHash=${requestScope.user.profilePicDocument.randomHash}&amp;viewType=inline" alt="Your Profile Image Preview" />
                             </div>
                         </div>
                         <div class="form-row">
@@ -217,7 +217,7 @@
                 }
             });
             modal.addButton({
-                label: "Create a New User",
+                label: "Update Complete User",
                 cssClass: "btn btn-primary",
                 action: function (modalWrapper, button, buttonData, originalEvent) {
                     form.trigger("submit");
@@ -279,9 +279,13 @@
                     }).show();
                 },
                 error: function (xhr, status, error, $form) {
+                    var resultText = xhr.responseText;
+                    var errorMsg = resultText;
+                    var obj = JSON.parse(resultText);
+                    errorMsg = obj.message;
                     BootstrapModalWrapperFactory.createModal({
                         title: xhr.statusText + " : " + xhr.status,
-                        message: "error[" + xhr + "][" + status + "][" + error + "][" + $form + "]"
+                        message: errorMsg
                     }).show();
                 }
             });
@@ -320,12 +324,12 @@
                     },
                     oldPassword: {
                         required: true,
-                        minlength: 6,
+                        minlength: 5,
                         maxlength: 20
                     },
                     password: {
                         required: true,
-                        minlength: 6,
+                        minlength: 5,
                         maxlength: 20
                     },
                     rpassword: {
@@ -421,8 +425,11 @@
                 height: 100,
                 dialogsInBody: true
             });
+            modal.originalModal.removeAttr('tabindex');
             $.fn.select2.defaults.set("theme", "bootstrap");
             $.fn.select2.defaults.set("dir", javatmp.settings.direction);
+//            alert(modal.options.id);
+//            $.fn.select2.defaults.set("dropdownParent", "#" + modal.options.id);
             form.find("select[name='lang']").select2({
                 allowClear: true,
                 placeholder: "Select a language",

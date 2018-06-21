@@ -20,6 +20,8 @@ public class User {
     private Long profilePicDocumentId;
     private Date creationDate;
 
+    private Document profilePicDocument;
+
     public User() {
 
     }
@@ -257,6 +259,20 @@ public class User {
      */
     public void setTimezone(String timezone) {
         this.timezone = timezone;
+    }
+
+    /**
+     * @return the profilePicDocument
+     */
+    public Document getProfilePicDocument() {
+        return profilePicDocument;
+    }
+
+    /**
+     * @param profilePicDocument the profilePicDocument to set
+     */
+    public void setProfilePicDocument(Document profilePicDocument) {
+        this.profilePicDocument = profilePicDocument;
     }
 
 }

@@ -7,10 +7,10 @@ import com.javatmp.domain.Theme;
 import com.javatmp.domain.Timezone;
 import com.javatmp.domain.User;
 import com.javatmp.util.MD5Util;
+import java.util.Base64;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 import java.util.TimeZone;
 import java.util.logging.Logger;
 
@@ -35,6 +35,7 @@ public class DBFaker {
         this.generateCountries();
         this.generateFakeUsers();
         this.generateTimezones();
+
     }
 
     private void generateTimezones() {
@@ -110,6 +111,22 @@ public class DBFaker {
         logingUser.setBirthDate(new Date(-399571200000L));
         logingUser.setCountryId("US");
         logingUser.setAddress("<p>Not provided yet</p>");
+
+        Document profileDocument = new Document();
+        profileDocument.setDocumentId(DBFaker.getNextCounter());
+        profileDocument.setDocumentName("profilePicture");
+        profileDocument.setContentType("image/png");
+        profileDocument.setCreationDate(new Date());
+        long randomLongValue = Double.valueOf((Math.random() + 1) * 1000L).longValue();
+        profileDocument.setRandomHash((Long) Math.abs(profileDocument.getDocumentName().hashCode() + randomLongValue));
+
+        String defaultProfileImage = "iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAABP0lEQVR4nO3XMavqMBiH8Sf1aqnp4CZEHEVE/AZ+/8nFSUTEqSooWDcDTXKHA2dtDu+Be4f3N/cPD0mXmN1ul/iPFf86oI8GSmmglAZKaaCUBkppoJQGSv3J/fDz+bDf79lsNqSUOBwOpJRYrVbUdf3rux8Hns9nYozEGLler0wmE4wxNE3DcrnkdDpRFAUxRqy1OOeydn2yrvj9ftN1HaPRCPg6laqqGI/HeO8BcM7xfD5p25bpdJq9+5XA2+2Gc46u60gpkVLCGEMIAWMMANZaiqLAWstgMMje9cm64hACx+MRgMvlQlmWeO8JIVBVFfB1WsYYXq8X3nvKssza9ck6wfV6zXa7ZTgcslgsmM1mPB4P2rb9/teapmE+n1PXNff7PXvXx+irTkgDpTRQSgOlNFBKA6U0UEoDpTRQ6i+ZRr8OBrK0SQAAAABJRU5ErkJggg==";
+        byte[] newImage = Base64.getDecoder().decode(defaultProfileImage);
+        profileDocument.setDocumentSize(newImage.length);
+        profileDocument.setDocumentContent(newImage);
+        logingUser.setProfilePicDocument(profileDocument);
+        logingUser.setProfilePicDocumentId(profileDocument.getDocumentId());
+        this.documents.add(profileDocument);
         this.users.add(logingUser);
     }
 

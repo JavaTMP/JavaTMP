@@ -15,7 +15,7 @@
         </button>
         <button id="UserList-UpdateSelectedUserId" type="button" class="btn btn-primary">
             <i class="fa fa-user-edit fa-fw"></i>
-            Update User
+            Update Complete User
         </button>
     </div>
     <table cellspacing="0" class="table table-condensed table-bordered table-hover" id="UsersListTableId">
