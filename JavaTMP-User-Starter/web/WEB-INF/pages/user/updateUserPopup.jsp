@@ -7,6 +7,12 @@
         <div class="col-lg-12">
             <form enctype="multipart/form-data" autocomplete="off" id="AddNewUserPopupFormId" class="form"
                   action="${pageContext.request.contextPath}/user/CreateUserController" method="post" novalidate="novalidate">
+                <div class="form-group form-row">
+                    <label class="control-label col-sm-2 col-form-label">User Id</label>
+                    <div class="col-sm-10">
+                        <input readonly="readonly" class="form-control" type="text" name="id" value="${requestScope.user.id}">
+                    </div>
+                </div>
                 <div class="form-row">
                     <div class="col-lg-12">
                         <div class="form-row">
@@ -111,24 +117,31 @@
                             </div>
                         </div>
                         <div class="form-row">
-                            <div class="col-lg-4">
+                            <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">Username</label>
                                     <input class="form-control" type="text" autocomplete="off" placeholder="Username"
-                                           name="userName">
+                                           name="userName" value="${requestScope.user.userName}">
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="control-label">Old Password</label>
+                                    <input class="form-control" type="password" autocomplete="off" id="oldPassword"
+                                           placeholder="Old Password" name="oldPassword">
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">Password</label>
                                     <input class="form-control" type="password" autocomplete="off" id="password"
-                                           placeholder="Password" name="password">
+                                           placeholder="New Password" name="password">
                                 </div>
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">Re-type Your Password</label>
-                                    <input class="form-control" type="password" autocomplete="off" placeholder="Re-type Your Password"
+                                    <input class="form-control" type="password" autocomplete="off" placeholder="Re-type Your New Password"
                                            name="rpassword">
                                 </div>
                             </div>
@@ -169,21 +182,7 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label">address</label>
-                            <textarea rows="5" class="form-control forceValidate" placeholder="" name="address"></textarea>
-                        </div>
-                        <div class="form-row">
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <div class="custom-control custom-checkbox">
-                                        <input name="tnc" type="checkbox" class="custom-control-input" id="customCheck1">
-                                        <label class="custom-control-label" for="customCheck1">
-                                            I agree to the
-                                            <a href="javascript:;">Terms of Service </a> &amp;
-                                            <a href="javascript:;">Privacy Policy </a>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
+                            <textarea rows="5" class="form-control forceValidate" placeholder="" name="address">${requestScope.user.address}</textarea>
                         </div>
                     </div>
                 </div>
@@ -208,7 +207,7 @@
             var form = $('#AddNewUserPopupFormId');
             var validator = null;
 
-            modal.updateTitle("Add New User");
+            modal.updateTitle("Update Complete User");
             modal.updateClosable(true);
             modal.updateSize("modal-lg");
             modal.addButton({

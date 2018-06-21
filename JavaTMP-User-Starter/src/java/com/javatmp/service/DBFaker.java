@@ -109,6 +109,7 @@ public class DBFaker {
         logingUser.setTimezone(TimeZone.getTimeZone("UTC").getID());
         logingUser.setBirthDate(new Date(-399571200000L));
         logingUser.setCountryId("US");
+        logingUser.setAddress("<p>Not provided yet</p>");
         this.users.add(logingUser);
     }
 
