@@ -83,7 +83,7 @@
     window.javatmp.init = function (options) {
 
         // initialize application settings from default and options paramters:
-        this.settings = $.extend(true, {}, this.defaults, options);
+        this.settings = $.extend({}, this.defaults, options);
 
         // initialize global jquery ajax configuration:
         $.ajaxSetup({
@@ -111,7 +111,7 @@
             $(".breadcrumb-submenu > a > i.fa.faa-spin").removeClass("text-primary");
             $(".breadcrumb-submenu > a > i.fa.faa-spin").addClass("animated text-danger");
         }).ajaxSend(function (event, xhr, ajaxOptions) {
-            if ((ajaxOptions.url.indexOf("_ajaxGlobalBlockUI=false") === -1) && !(!!ajaxOptions.data && !!ajaxOptions.data.indexOf && (ajaxOptions.data.indexOf('"_ajaxGlobalBlockUI":false') !== -1))) {
+            if (ajaxOptions.url.indexOf("_ajaxGlobalBlockUI=false") === -1) {
                 $.blockUI({message: null,
                     overlayCSS: {
                         backgroundColor: 'transparent',
@@ -121,7 +121,7 @@
                     baseZ: 2147483647});
             }
         }).ajaxComplete(function (event, xhr, ajaxOptions) {
-            if ((ajaxOptions.url.indexOf("_ajaxGlobalBlockUI=false") === -1) && !(!!ajaxOptions.data && !!ajaxOptions.data.indexOf && (ajaxOptions.data.indexOf('"_ajaxGlobalBlockUI":false') !== -1))) {
+            if (ajaxOptions.url.indexOf("_ajaxGlobalBlockUI=false") === -1) {
                 $.unblockUI({
                     fadeOut: 0 // supporting fadeOut value may hang the windows an issue in the plugin itself.
                 });
@@ -218,10 +218,11 @@
                 }
             } else {
                 // disabled auto show on mouse move
-                $(window).off('mousemove', handlingMouseMove);
+                clearTimeout(menuTimeout);
+                menuTimeout = null;
                 $("body").removeClass("mouse-auto-show");
+                $(window).off('mousemove', handlingMouseMove);
                 $("body").addClass("sidebar-active");
-
             }
         });
 
@@ -232,6 +233,8 @@
                 // default on <= navbar-expand-sm devices.
                 $("body").removeClass("sidebar-active");
                 // remove mouse-auto-show feature
+                clearTimeout(menuTimeout);
+                menuTimeout = null;
                 $("body").removeClass("mouse-auto-show");
                 $(window).off('mousemove', handlingMouseMove);
             } else {
@@ -272,9 +275,11 @@
                                     $this.parents("ul").addClass("in");
 
                                     if (javatmp.isWidthSmall() || ($("body").hasClass("mouse-auto-show") && $('body').hasClass("sidebar-active"))) {
-                                        $(window).off('mousemove', handlingMouseMove);
+                                        clearTimeout(menuTimeout);
+                                        menuTimeout = null;
                                         $("body").removeClass("mouse-auto-show");
                                         $('body').removeClass("sidebar-active");
+                                        $(window).off('mousemove', handlingMouseMove);
                                     }
 
                                     var scrollTopValue = $this.offset().top

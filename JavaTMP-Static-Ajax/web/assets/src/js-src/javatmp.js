@@ -82,7 +82,7 @@
 
     window.javatmp.init = function (options) {
 
-        // initialize application settings from default and options paramters:
+        // initialize application settings from default and options paramters
         this.settings = $.extend({}, this.defaults, options);
 
         // initialize global jquery ajax configuration:

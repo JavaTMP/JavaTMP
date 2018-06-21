@@ -217,10 +217,12 @@
                     $(window).on('mousemove', handlingMouseMove);
                 }
             } else {
-                $("body").addClass("sidebar-active");
                 // disabled auto show on mouse move
+                clearTimeout(menuTimeout);
+                menuTimeout = null;
                 $("body").removeClass("mouse-auto-show");
                 $(window).off('mousemove', handlingMouseMove);
+                $("body").addClass("sidebar-active");
             }
         });
 
@@ -231,6 +233,8 @@
                 // default on <= navbar-expand-sm devices.
                 $("body").removeClass("sidebar-active");
                 // remove mouse-auto-show feature
+                clearTimeout(menuTimeout);
+                menuTimeout = null;
                 $("body").removeClass("mouse-auto-show");
                 $(window).off('mousemove', handlingMouseMove);
             } else {
@@ -271,9 +275,11 @@
                                     $this.parents("ul").addClass("in");
 
                                     if (javatmp.isWidthSmall() || ($("body").hasClass("mouse-auto-show") && $('body').hasClass("sidebar-active"))) {
-                                        $(window).off('mousemove', handlingMouseMove);
+                                        clearTimeout(menuTimeout);
+                                        menuTimeout = null;
                                         $("body").removeClass("mouse-auto-show");
                                         $('body').removeClass("sidebar-active");
+                                        $(window).off('mousemove', handlingMouseMove);
                                     }
 
                                     var scrollTopValue = $this.offset().top

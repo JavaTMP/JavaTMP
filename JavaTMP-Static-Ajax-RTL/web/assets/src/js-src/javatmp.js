@@ -74,7 +74,7 @@
         // attribute for some of plugins that support RTL through initialization parameter.
         isRTL: false,
 
-        // additional string work as a URL contextPath of your web application:
+        // additional string work as a URL contextPath of your web application
         contextPath: ""
     };
 
@@ -82,7 +82,7 @@
 
     window.javatmp.init = function (options) {
 
-        // initialize application settings from default and options paramters
+        // initialize application settings from default and options paramters:
         this.settings = $.extend({}, this.defaults, options);
 
         // initialize global jquery ajax configuration:
@@ -191,7 +191,7 @@
             // check if mouse is near the left edge of the browser in LTR or right edige for RTL.
             var insideEdge = javatmp.settings.isRTL ? (e.pageX > ($(window).innerWidth() - 10)) : e.pageX < 10;
             if (insideEdge || $('.sidebar').is(':hover')) {
-                // Show the menu if mouse is within 20 pixels from the left or we are hovering over it
+                // Show the menu if mouse is within 10 pixels from the left or we are hovering over it
                 clearTimeout(menuTimeout);
                 menuTimeout = null;
                 $("body").addClass("sidebar-active");
@@ -207,7 +207,7 @@
             var originalButton = this;
             $(originalButton).prop('disabled', true);
             // we manually collapse sidebar:
-            if ($("body").hasClass("sidebar-active")) {
+            if ($('body').hasClass("sidebar-active")) {
                 $("body").removeClass("sidebar-active");
                 // activate mouse on desktop and large devices:
                 if (!javatmp.isWidthSmall()) {
@@ -217,10 +217,12 @@
                     $(window).on('mousemove', handlingMouseMove);
                 }
             } else {
-                $("body").addClass("sidebar-active");
                 // disabled auto show on mouse move
+                clearTimeout(menuTimeout);
+                menuTimeout = null;
                 $("body").removeClass("mouse-auto-show");
                 $(window).off('mousemove', handlingMouseMove);
+                $("body").addClass("sidebar-active");
             }
         });
 
@@ -231,6 +233,8 @@
                 // default on <= navbar-expand-sm devices.
                 $("body").removeClass("sidebar-active");
                 // remove mouse-auto-show feature
+                clearTimeout(menuTimeout);
+                menuTimeout = null;
                 $("body").removeClass("mouse-auto-show");
                 $(window).off('mousemove', handlingMouseMove);
             } else {
@@ -271,9 +275,11 @@
                                     $this.parents("ul").addClass("in");
 
                                     if (javatmp.isWidthSmall() || ($("body").hasClass("mouse-auto-show") && $('body').hasClass("sidebar-active"))) {
-                                        $(window).off('mousemove', handlingMouseMove);
+                                        clearTimeout(menuTimeout);
+                                        menuTimeout = null;
                                         $("body").removeClass("mouse-auto-show");
                                         $('body').removeClass("sidebar-active");
+                                        $(window).off('mousemove', handlingMouseMove);
                                     }
 
                                     var scrollTopValue = $this.offset().top
