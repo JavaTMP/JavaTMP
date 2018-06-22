@@ -7,9 +7,7 @@
             <i class="fa fa-fw fa-user"></i>
             Add New User
         </button>
-        <button type="button" class="btn btn-primary"
-                actionType="ajax-model"
-                href="${pageContext.request.contextPath}/user/GetCreateNewUserPopupController">
+        <button id="UserList-AddNewUserPopupId" type="button" class="btn btn-primary">
             <i class="fa fa-external-link-alt fa-fw"></i>
             Add New User Popup
         </button>
@@ -64,6 +62,7 @@
         jQuery(function ($) {
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
+            var addNewUserPopupButton = $("#UserList-AddNewUserPopupId");
             var updateUserButton = $("#UserList-UpdateSelectedUserId");
             var userTableElement = $('#UsersListTableId');
 //            updateUserButton.addClass("disabled");
@@ -228,6 +227,17 @@
 //                alert("descelect" + JSON.stringify(rowData));
             });
 
+            addNewUserPopupButton.on("click", function (event) {
+                var passData = {};
+                passData.callback = "actionCallback";
+                BootstrapModalWrapperFactory.createAjaxModal({
+                    message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
+                    passData: passData,
+                    url: javatmp.settings.contextPath + "/user/GetCreateNewUserPopupController",
+                    ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
+                });
+
+            });
             updateUserButton.on("click", function (event) {
                 //                var selectedCount = table.rows({selected: true}).count();
                 var selectedData = table.rows({selected: true}).data();
