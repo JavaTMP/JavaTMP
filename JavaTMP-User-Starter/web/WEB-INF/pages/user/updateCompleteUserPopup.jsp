@@ -7,10 +7,22 @@
         <div class="col-lg-12">
             <form enctype="multipart/form-data" autocomplete="off" id="AddNewUserPopupFormId" class="form"
                   action="${pageContext.request.contextPath}/user/UpdateCompleteUserController" method="post" novalidate="novalidate">
-                <div class="form-group form-row">
-                    <label class="control-label col-sm-2 col-form-label">User Id</label>
-                    <div class="col-sm-10">
-                        <input readonly="readonly" class="form-control" type="text" name="id" value="${requestScope.user.id}">
+                <div class="form-row">
+                    <div class="col-sm-3">
+                        <div class="form-group form-row">
+                            <label class="control-label col-sm-3 col-form-label">User Id</label>
+                            <div class="col-sm-9">
+                                <input readonly="readonly" class="form-control-plaintext" type="text" name="id" value="${requestScope.user.id}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="form-group form-row">
+                            <label class="control-label col-sm-3 col-form-label">User Status</label>
+                            <div class="col-sm-9">
+                                <input readonly="readonly" class="form-control" type="text" name="status" value="${requestScope.user.status}">
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="form-row">
