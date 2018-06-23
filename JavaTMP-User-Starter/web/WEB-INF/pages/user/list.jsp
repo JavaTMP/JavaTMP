@@ -130,6 +130,13 @@
                     disabled();
                 },
                 initComplete: function (settings, json) {
+                    var api = this.api();
+                    // prepare id filter search field:
+                    var idFilterInput = $("#userlist-id-filter");
+                    idFilterInput.on('keyup change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                        api.column(0).search(val ? val : '', true, false).draw();
+                    });
                 },
                 "ajax": {
                     "type": "POST",
