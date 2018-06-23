@@ -34,21 +34,49 @@
                 <th>Timezone</th>
                 <th>Creation Date</th>
             </tr>
-            <tr id="filterHeader">
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
+            <tr id="UserListFilterHeader">
+                <th style="width: 100px;">
+                    <input id="userlist-id-filter" class="form-control"/>
+                </th>
+                <th style="width: 150px;">
+                    <input id="userlist-username-filter" class="form-control"/>
+                </th>
+                <th style="width: 150px;">
+                    <input id="userlist-firstname-filter" class="form-control"/>
+                </th>
+                <th style="width: 150px;">
+                    <input id="userlist-lastname-filter" class="form-control"/>
+                </th>
+                <th style="width: 200px;">
+                    <input id="userlist-birthdate-filter" class="form-control"/>
+                </th>
+                <th style="width: 100px;">
+                    <input id="userlist-age-filter" class="form-control"/>
+                </th>
+                <th style="width: 200px;">
+                    <input id="userlist-email-filter" class="form-control"/>
+                </th>
+                <th style="width: 100px;">
+                    <input id="userlist-status-filter" class="form-control"/>
+                </th>
+                <th style="width: 200px;">
+                    <input id="userlist-country-filter" class="form-control"/>
+                </th>
+                <th style="width: 150px;">
+                    <input id="userlist-address-filter" class="form-control"/>
+                </th>
+                <th style="width: 100px;">
+                    <input id="userlist-language-filter" class="form-control"/>
+                </th>
+                <th style="width: 100px;">
+                    <input id="userlist-theme-filter" class="form-control"/>
+                </th>
+                <th style="width: 100px;">
+                    <input id="userlist-timezone-filter" class="form-control"/>
+                </th>
+                <th style="width: 200px;">
+                    <input id="userlist-creationdate-filter" class="form-control"/>
+                </th>
             </tr>
         </thead>
         <tbody></tbody>
@@ -56,6 +84,9 @@
     <style type="text/css">
         table.dataTable tbody tr {
             cursor: pointer;
+        }
+        #UserListFilterHeader th {
+            padding: 0;
         }
     </style>
     <script type="text/javascript">
@@ -76,7 +107,7 @@
             $.fn.dataTable.ext.errMode = 'none';
             var table = userTableElement.DataTable({
                 //                responsive: true,
-                dom: "<'row'<'col-sm-12 px-0'tr>>" +
+                dom: "<'row'<'col-sm-12'tr>>" +
                         "<'row'<'col-sm-6'i><'col-sm-6 pt-2 text-right'l>>" +
                         "<'row'<'col-sm-12'p>>",
 //                select: true,
@@ -117,7 +148,16 @@
                     }
                 },
                 columns: [
-                    {data: 'id', "width": 50, className: ""},
+                    {data: 'id', className: "",
+                        "render": function (data, type, row) {
+                            if (type === "display") {
+                                return "<p class='m-0 p-0' style='width: 100px;'>" + data + "</p>";
+                            } else {
+                                return data;
+                            }
+
+                        }
+                    },
                     {
                         data: 'userName',
                         "render": function (data, type, row) {
@@ -141,7 +181,6 @@
                     },
                     {
                         data: 'lastName',
-                        "width": 100,
                         "render": function (data, type, row) {
                             if (type === "sort" || type === 'type' || type === 'filter') {
                                 return data;
@@ -152,35 +191,61 @@
                         }
                     },
                     {
-                        data: 'birthDate', "type": "date", "width": 150,
+                        data: 'birthDate', "type": "date",
                         "render": function (data, type, row) {
                             if (type === "sort" || type === 'type' || type === 'filter') {
                                 return moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY HH:mm');
                             } else {
-                                return "<p class='m-0 p-0' style='width: 150px;'>" + moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY') + "</p>";
+                                return "<p class='m-0 p-0' style='width: 200px;'>" + moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY') + "</p>";
                             }
                         }
                     },
                     {
-                        data: 'birthDate', "type": "date", "width": 35,
+                        data: 'birthDate', "type": "date",
                         "render": function (data, type, row) {
-                            return Math.ceil(moment().diff(moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ"), 'years', true));
+                            data = Math.ceil(moment().diff(moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ"), 'years', true));
+                            if (type === "display") {
+                                return "<p class='m-0 p-0' style='width: 100px;'>" + data + "</p>";
+                            } else {
+                                return data;
+                            }
                         }
                     },
-                    {data: 'email', "width": 150},
-                    {data: 'status', "width": 150},
+                    {data: 'email',
+                        "render": function (data, type, row) {
+                            if (type === "display") {
+                                return "<p class='m-0 p-0' style='width: 200px;'>" + data + "</p>";
+                            } else {
+                                return data;
+                            }
+
+                        }
+                    },
+                    {data: 'status',
+                        "render": function (data, type, row) {
+
+                            var statusMap = {"-1": {label: "Deleted", style: "danger"}, "0": {label: "Deactive", style: "warning"}, "1": {label: "Active", style: "success"}};
+
+                            if (type === "display") {
+                                return "<p class='m-0 p-0' style='width: 100px;'><span class='badge badge-" + statusMap[data].style + "'>" + statusMap[data].label + "</span></p>";
+                            } else {
+                                return data;
+                            }
+
+                        }
+                    },
                     {
                         data: 'countryId',
                         "render": function (data, type, row) {
                             if (type === "sort" || type === 'type' || type === 'filter') {
                                 return data;
                             } else {
-                                return "<p class='m-0 p-0' style='width: 150px;'>" + data + "</p>";
+                                return "<p class='m-0 p-0' style='width: 200px;'>" + data + "</p>";
                             }
 
                         }
                     },
-                    {data: 'address', "width": 150,
+                    {data: 'address',
                         "render": function (data, type, row) {
                             if (type === "sort" || type === 'type' || type === 'filter') {
                                 return data;
@@ -190,9 +255,36 @@
 
                         }
                     },
-                    {data: 'lang', "width": 150},
-                    {data: 'theme', "width": 150},
-                    {data: 'timezone', "width": 150},
+                    {data: 'lang',
+                        "render": function (data, type, row) {
+                            if (type === "display") {
+                                return "<p class='m-0 p-0' style='width: 100px;'>" + data + "</p>";
+                            } else {
+                                return data;
+                            }
+
+                        }
+                    },
+                    {data: 'theme',
+                        "render": function (data, type, row) {
+                            if (type === "display") {
+                                return "<p class='m-0 p-0' style='width: 100px;'>" + data + "</p>";
+                            } else {
+                                return data;
+                            }
+
+                        }
+                    },
+                    {data: 'timezone',
+                        "render": function (data, type, row) {
+                            if (type === "display") {
+                                return "<p class='m-0 p-0' style='width: 100px;'>" + data + "</p>";
+                            } else {
+                                return data;
+                            }
+
+                        }
+                    },
                     {data: 'creationDate', "type": "date",
                         "render": function (data, type, row) {
                             if (type === "sort" || type === 'type' || type === 'filter') {

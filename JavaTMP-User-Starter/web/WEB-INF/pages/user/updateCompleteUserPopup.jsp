@@ -20,7 +20,11 @@
                         <div class="form-group form-row">
                             <label class="control-label col-sm-3 col-form-label">User Status</label>
                             <div class="col-sm-9">
-                                <input readonly="readonly" class="form-control" type="text" name="status" value="${requestScope.user.status}">
+                                <select name="status" class="custom-select">
+                                    <option ${requestScope.user.status == 1 ? 'selected="selected"' : ''} value="1">Activated</option>
+                                    <option ${requestScope.user.status == 0 ? 'selected="selected"' : ''} value="0">Deactivated</option>
+                                    <option ${requestScope.user.status == -1 ? 'selected="selected"' : ''} value="-1">Deleted</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -145,14 +149,14 @@
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label class="control-label">Password</label>
+                                    <label class="control-label">New Password</label>
                                     <input class="form-control" type="password" autocomplete="off" id="password"
                                            placeholder="New Password" name="password">
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label class="control-label">Re-type Your Password</label>
+                                    <label class="control-label">Re-type Your New Password</label>
                                     <input class="form-control" type="password" autocomplete="off" placeholder="Re-type Your New Password"
                                            name="rpassword">
                                 </div>
@@ -370,8 +374,10 @@
                     },
                     theme: {
                         required: true
+                    },
+                    status: {
+                        required: true
                     }
-
                 },
                 messages: {
                     firstName: {
