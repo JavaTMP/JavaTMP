@@ -102,13 +102,6 @@
                                     title="${labels['global.sidebar.home']}">
                                 <i class="fa fa-home fa-fw"></i>
                             </button>
-                            <button class="btn btn-primary"
-                                    actionType="action-ref-href"
-                                    action-ref-by-href="${pageContext.request.contextPath}/pages/home"
-                                    data-toggle="tooltip" data-placement="auto"
-                                    title="${labels['global.sidebar.home']}">
-                                <i class="fa fa-home fa-fw"></i>
-                            </button>
                         </div>
                         <div class="sidebar-menu-filter-form mx-2 my-1">
                             <form autocomplete="off" class="search-menu-form">

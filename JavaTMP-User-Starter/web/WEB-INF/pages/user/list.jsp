@@ -107,7 +107,7 @@
             $.fn.dataTable.ext.errMode = 'none';
             var table = userTableElement.DataTable({
                 //                responsive: true,
-                dom: "<'row'<'col-sm-12'tr>>" +
+                dom: "<'row'<'col-sm-12 p-0'tr>>" +
                         "<'row'<'col-sm-6'i><'col-sm-6 pt-2 text-right'l>>" +
                         "<'row'<'col-sm-12'p>>",
 //                select: true,
