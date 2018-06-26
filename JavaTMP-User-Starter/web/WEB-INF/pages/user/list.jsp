@@ -71,7 +71,7 @@
                 <th style="width: 100px;">
                     <input id="userlist-theme-filter" class="form-control"/>
                 </th>
-                <th style="width: 100px;">
+                <th style="width: 150px;">
                     <input id="userlist-timezone-filter" class="form-control"/>
                 </th>
                 <th style="width: 200px;">
@@ -221,7 +221,7 @@
                     {data: 'email',
                         "render": function (data, type, row) {
                             if (type === "display") {
-                                return "<p class='m-0 p-0' style='width: 200px;'>" + data + "</p>";
+                                return "<p class='m-0 p-0 text-truncate' style='width: 200px;'>" + data + "</p>";
                             } else {
                                 return data;
                             }
@@ -285,7 +285,7 @@
                     {data: 'timezone',
                         "render": function (data, type, row) {
                             if (type === "display") {
-                                return "<p class='m-0 p-0' style='width: 100px;'>" + data + "</p>";
+                                return "<p class='m-0 p-0 text-truncate' style='width: 150px;'>" + data + "</p>";
                             } else {
                                 return data;
                             }

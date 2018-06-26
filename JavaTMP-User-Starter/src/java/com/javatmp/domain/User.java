@@ -34,7 +34,7 @@ public class User {
     public User(Long id, String userName, String password, String firstName, String lastName, Short status, Date birthDate,
             Date creationDate,
             String email, String lang, String theme, String countryId, String address,
-            String timezone) {
+            String timezone, Long profilePicDocumentId) {
         this.id = id;
         this.userName = userName;
         this.password = password;
@@ -49,6 +49,7 @@ public class User {
         this.countryId = countryId;
         this.address = address;
         this.timezone = timezone;
+        this.profilePicDocumentId = profilePicDocumentId;
     }
 
     /**
