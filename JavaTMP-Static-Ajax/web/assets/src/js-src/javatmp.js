@@ -82,7 +82,7 @@
 
     window.javatmp.init = function (options) {
 
-        // initialize application settings from default and options paramters
+        // initialize application settings from default and options paramters:
         this.settings = $.extend({}, this.defaults, options);
 
         // initialize global jquery ajax configuration:
@@ -111,7 +111,11 @@
             $(".breadcrumb-submenu > a > i.fa.faa-spin").removeClass("text-primary");
             $(".breadcrumb-submenu > a > i.fa.faa-spin").addClass("animated text-danger");
         }).ajaxSend(function (event, xhr, ajaxOptions) {
-            if (ajaxOptions.url.indexOf("_ajaxGlobalBlockUI=false") === -1) {
+            if (
+                    (ajaxOptions.url.indexOf("_ajaxGlobalBlockUI=false") === -1) // parameter is part of the get URL
+                    && !(!!ajaxOptions.data && !!ajaxOptions.data.indexOf && (ajaxOptions.data.indexOf('"_ajaxGlobalBlockUI":false') !== -1)) // parameter is part of Post JSON data
+                    )
+            {
                 $.blockUI({message: null,
                     overlayCSS: {
                         backgroundColor: 'transparent',
@@ -121,7 +125,10 @@
                     baseZ: 2147483647});
             }
         }).ajaxComplete(function (event, xhr, ajaxOptions) {
-            if (ajaxOptions.url.indexOf("_ajaxGlobalBlockUI=false") === -1) {
+            if (
+                    (ajaxOptions.url.indexOf("_ajaxGlobalBlockUI=false") === -1) // parameter is part of the get URL
+                    && !(!!ajaxOptions.data && !!ajaxOptions.data.indexOf && (ajaxOptions.data.indexOf('"_ajaxGlobalBlockUI":false') !== -1)) // parameter is part of Post JSON data
+                    ) {
                 $.unblockUI({
                     fadeOut: 0 // supporting fadeOut value may hang the windows an issue in the plugin itself.
                 });
