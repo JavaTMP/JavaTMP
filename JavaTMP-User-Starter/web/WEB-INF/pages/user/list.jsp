@@ -178,8 +178,16 @@
                         }, 400, "@userlist-lastname-filter");
                     });
 
-                    // should be for date and age
-                    // 4 and 5
+                    var birthdateFilterInput = $("#userlist-birthdate-filter");
+                    birthdateFilterInput.on('keyup change', function () {
+                        var $this = $(this);
+                        javatmp.waitForFinalEvent(function () {
+                            var val = $.fn.dataTable.util.escapeRegex($this.val());
+                            api.column(4).search(val ? val : '', true, false).draw();
+                        }, 400, "@userlist-birthdate-filter");
+                    });
+
+                    // should be for age 5
 
                     var emailFilterInput = $("#userlist-email-filter");
                     emailFilterInput.on('keyup change', function () {

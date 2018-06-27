@@ -126,10 +126,10 @@ public class UserService {
                 column = tableRequest.getColumns().get(index);
                 searchParameters.put("lastName", column.getSearch());
             }
-            index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(5, "birthOfDate"));
+            index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(5, "birthDate"));
             if (index != -1) {
                 column = tableRequest.getColumns().get(index);
-                searchParameters.put("birthOfDate", column.getSearch());
+                searchParameters.put("birthDate", column.getSearch());
             }
             index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(9, "email"));
             if (index != -1) {
@@ -181,7 +181,7 @@ public class UserService {
                     }
                 }
                 if (searchParameters.get("birthDate") != null && !searchParameters.get("birthDate").getValue().equals("")) {
-                    Search searchValueObject = searchParameters.get("birthOfDate");
+                    Search searchValueObject = searchParameters.get("birthDate");
                     String searchValue = searchValueObject.getValue().toString().trim().toLowerCase();
                     Date dbValue = user.getBirthDate();
                     Calendar cal = Calendar.getInstance();
@@ -223,7 +223,7 @@ public class UserService {
                 }
                 // we support only one sort:
                 Order order = orders.get(0);
-                System.out.println("order column number is [" + order.getColumn() + "]");
+//                System.out.println("order column number is [" + order.getColumn() + "]");
                 int factor = order.getDir().value().equals("desc") ? -1 : +1;
                 if (order.getColumn() == 0) { // id
                     retCompare = o1.getId().compareTo(o2.getId()) * factor;

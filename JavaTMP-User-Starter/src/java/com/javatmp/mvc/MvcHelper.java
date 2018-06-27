@@ -90,7 +90,7 @@ public class MvcHelper {
 
     public static void sendMessageAsJson(HttpServletResponse response, ResponseMessage responseMessage) throws IOException {
         String json = gson.toJson(responseMessage);
-        logger.info("response [" + json + "]");
+//        logger.info("response [" + json + "]");
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);
