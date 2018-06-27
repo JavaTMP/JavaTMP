@@ -108,6 +108,13 @@ public class UserService {
                 searchParameters.put("id", column.getSearch());
             }
 
+            index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(1, "userName"));
+
+            if (index != -1) {
+                column = tableRequest.getColumns().get(index);
+                searchParameters.put("userName", column.getSearch());
+            }
+
             index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(1, "firstName"));
             if (index != -1) {
                 column = tableRequest.getColumns().get(index);
@@ -155,7 +162,7 @@ public class UserService {
                 searchParameters.put("email", column.getSearch());
             }
         }
-        logger.info("search [" + MvcHelper.deepToString(searchParameters) + "]");
+        logger.info("search [" + searchParameters + "]");
 // apply individual column search:
         List<User> newDB = new LinkedList<>();
         for (User user : db) {
@@ -165,6 +172,15 @@ public class UserService {
                     Long searchValue = new Long(searchValueObject.getValue().toString());
                     Long dbValue = user.getId();
                     if (!dbValue.equals(searchValue)) {
+                        continue;
+                    }
+                }
+                System.out.println("username search parameter [" + searchParameters.get("userName") + "]");
+                if (searchParameters.get("userName") != null && !searchParameters.get("userName").getValue().equals("")) {
+                    Search searchValueObject = searchParameters.get("userName");
+                    String searchValue = searchValueObject.getValue().trim().toLowerCase();
+                    String dbValue = user.getUserName();
+                    if (!dbValue.toLowerCase().contains(searchValue)) {
                         continue;
                     }
                 }

@@ -141,6 +141,14 @@
                             api.column(0).search(val ? val : '', true, false).draw();
                         }, 400, "@userlist-id-filter");
                     });
+                    var usernameFilterInput = $("#userlist-username-filter");
+                    usernameFilterInput.on('keyup change', function () {
+                        var $this = $(this);
+                        javatmp.waitForFinalEvent(function () {
+                            var val = $.fn.dataTable.util.escapeRegex($this.val());
+                            api.column(1).search(val ? val : '', true, false).draw();
+                        }, 400, "@userlist-username-filter");
+                    });
                 },
                 "ajax": {
                     "type": "POST",
