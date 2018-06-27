@@ -108,8 +108,9 @@
             var table = userTableElement.DataTable({
                 //                responsive: true,
                 dom: "<'row'<'col-sm-12 p-0'tr>>" +
-                        "<'row'<'col-sm-6'i><'col-sm-6 pt-2 text-right'l>>" +
-                        "<'row'<'col-sm-12'p>>",
+                        "<'row'<'col-sm-6'i><'col-sm-6 pt-2 text-right'p>>"
+//                        + "<'row'<'col-sm-12'p>>"
+                ,
 //                select: true,
                 select: "single",
                 scrollY: 400,
@@ -134,8 +135,11 @@
                     // prepare id filter search field:
                     var idFilterInput = $("#userlist-id-filter");
                     idFilterInput.on('keyup change', function () {
-                        var val = $.fn.dataTable.util.escapeRegex($(this).val());
-                        api.column(0).search(val ? val : '', true, false).draw();
+                        var $this = $(this);
+                        javatmp.waitForFinalEvent(function () {
+                            var val = $.fn.dataTable.util.escapeRegex($this.val());
+                            api.column(0).search(val ? val : '', true, false).draw();
+                        }, 400, "@userlist-id-filter");
                     });
                 },
                 "ajax": {
