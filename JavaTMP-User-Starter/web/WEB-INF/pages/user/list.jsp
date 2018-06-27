@@ -157,7 +157,6 @@
                     contentType: "application/json; charset=UTF-8",
                     "data": function (currentDate) {
                         currentDate._ajaxGlobalBlockUI = false; // window blocked until data return
-                        currentDate._ajaxGlobalBlockUI = false;
                         return JSON.stringify(currentDate);
                     },
                     "dataSrc": function (json) {
