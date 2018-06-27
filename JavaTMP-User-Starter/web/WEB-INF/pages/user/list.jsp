@@ -57,7 +57,12 @@
                     <input id="userlist-email-filter" class="form-control"/>
                 </th>
                 <th style="width: 100px;">
-                    <input id="userlist-status-filter" class="form-control"/>
+                    <select id="userlist-status-filter" class="custom-select">
+                        <option value="">-- ALL --</option>
+                        <option value="1">Activated</option>
+                        <option value="0">Deactivated</option>
+                        <option value="-1">Deleted</option>
+                    </select>
                 </th>
                 <th style="width: 200px;">
                     <input id="userlist-country-filter" class="form-control"/>
@@ -87,6 +92,13 @@
         }
         #UserListFilterHeader th {
             padding: 0;
+        }
+
+        #UserListFilterHeader th > .form-control {
+            border-radius: 0;
+        }
+        #UserListFilterHeader th > .custom-select {
+            border-radius: 0;
         }
     </style>
     <script type="text/javascript">
@@ -149,6 +161,45 @@
                             api.column(1).search(val ? val : '', true, false).draw();
                         }, 400, "@userlist-username-filter");
                     });
+                    var firstNameFilterInput = $("#userlist-firstname-filter");
+                    firstNameFilterInput.on('keyup change', function () {
+                        var $this = $(this);
+                        javatmp.waitForFinalEvent(function () {
+                            var val = $.fn.dataTable.util.escapeRegex($this.val());
+                            api.column(2).search(val ? val : '', true, false).draw();
+                        }, 400, "@userlist-firstname-filter");
+                    });
+                    var lastNameFilterInput = $("#userlist-lastname-filter");
+                    lastNameFilterInput.on('keyup change', function () {
+                        var $this = $(this);
+                        javatmp.waitForFinalEvent(function () {
+                            var val = $.fn.dataTable.util.escapeRegex($this.val());
+                            api.column(3).search(val ? val : '', true, false).draw();
+                        }, 400, "@userlist-lastname-filter");
+                    });
+
+                    // should be for date and age
+                    // 4 and 5
+
+                    var emailFilterInput = $("#userlist-email-filter");
+                    emailFilterInput.on('keyup change', function () {
+                        var $this = $(this);
+                        javatmp.waitForFinalEvent(function () {
+                            var val = $.fn.dataTable.util.escapeRegex($this.val());
+                            api.column(6).search(val ? val : '', true, false).draw();
+                        }, 400, "@userlist-email-filter");
+                    });
+
+                    var statusFilterInput = $("#userlist-status-filter");
+                    statusFilterInput.on('change', function () {
+                        var $this = $(this);
+                        javatmp.waitForFinalEvent(function () {
+//                            var val = $.fn.dataTable.util.escapeRegex($this.val());
+                            var val = $this.val();
+                            api.column(7).search(val ? val : '', false, false).draw();
+                        }, 400, "@userlist-status-filter");
+                    });
+
                 },
                 "ajax": {
                     "type": "POST",

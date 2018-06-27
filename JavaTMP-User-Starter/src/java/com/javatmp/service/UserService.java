@@ -126,40 +126,20 @@ public class UserService {
                 column = tableRequest.getColumns().get(index);
                 searchParameters.put("lastName", column.getSearch());
             }
-            index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(3, "position"));
-            if (index != -1) {
-                column = tableRequest.getColumns().get(index);
-                searchParameters.put("position", column.getSearch());
-            }
-            index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(4, "office"));
-            if (index != -1) {
-                column = tableRequest.getColumns().get(index);
-                searchParameters.put("office", column.getSearch());
-            }
             index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(5, "birthOfDate"));
             if (index != -1) {
                 column = tableRequest.getColumns().get(index);
                 searchParameters.put("birthOfDate", column.getSearch());
             }
-            index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(6, "joiningDate"));
-            if (index != -1) {
-                column = tableRequest.getColumns().get(index);
-                searchParameters.put("joiningDate", column.getSearch());
-            }
-            index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(7, "salary"));
-            if (index != -1) {
-                column = tableRequest.getColumns().get(index);
-                searchParameters.put("salary", column.getSearch());
-            }
-            index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(8, "mobile"));
-            if (index != -1) {
-                column = tableRequest.getColumns().get(index);
-                searchParameters.put("mobile", column.getSearch());
-            }
             index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(9, "email"));
             if (index != -1) {
                 column = tableRequest.getColumns().get(index);
                 searchParameters.put("email", column.getSearch());
+            }
+            index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(9, "status"));
+            if (index != -1) {
+                column = tableRequest.getColumns().get(index);
+                searchParameters.put("status", column.getSearch());
             }
         }
         logger.info("search [" + searchParameters + "]");
@@ -175,7 +155,7 @@ public class UserService {
                         continue;
                     }
                 }
-                System.out.println("username search parameter [" + searchParameters.get("userName") + "]");
+//                System.out.println("username search parameter [" + searchParameters.get("userName") + "]");
                 if (searchParameters.get("userName") != null && !searchParameters.get("userName").getValue().equals("")) {
                     Search searchValueObject = searchParameters.get("userName");
                     String searchValue = searchValueObject.getValue().trim().toLowerCase();
@@ -194,7 +174,7 @@ public class UserService {
                 }
                 if (searchParameters.get("lastName") != null && !searchParameters.get("lastName").getValue().equals("")) {
                     Search searchValueObject = searchParameters.get("lastName");
-                    String searchValue = searchValueObject.getValue().toString().trim().toLowerCase();
+                    String searchValue = searchValueObject.getValue().trim().toLowerCase();
                     String dbValue = user.getLastName();
                     if (!dbValue.toLowerCase().contains(searchValue)) {
                         continue;
@@ -219,6 +199,15 @@ public class UserService {
                         continue;
                     }
                 }
+                if (searchParameters.get("status") != null && !searchParameters.get("status").getValue().equals("")) {
+                    Search searchValueObject = searchParameters.get("status");
+                    String searchValueStr = searchValueObject.getValue().trim();
+                    Short searchValue = Short.valueOf(searchValueStr);
+                    Short dbValue = user.getStatus();
+                    if (!dbValue.equals(searchValue)) {
+                        continue;
+                    }
+                }
                 newDB.add(user);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -234,17 +223,24 @@ public class UserService {
                 }
                 // we support only one sort:
                 Order order = orders.get(0);
-
+                System.out.println("order column number is [" + order.getColumn() + "]");
                 int factor = order.getDir().value().equals("desc") ? -1 : +1;
-
                 if (order.getColumn() == 0) { // id
                     retCompare = o1.getId().compareTo(o2.getId()) * factor;
                 } else if (order.getColumn() == 1) { //
-                    retCompare = o1.getFirstName().compareTo(o2.getFirstName()) * factor;
+                    retCompare = o1.getUserName().compareTo(o2.getUserName()) * factor;
                 } else if (order.getColumn() == 2) { //
+                    retCompare = o1.getFirstName().compareTo(o2.getFirstName()) * factor;
+                } else if (order.getColumn() == 3) { //
                     retCompare = o1.getLastName().compareTo(o2.getLastName()) * factor;
-                } else if (order.getColumn() == 9) { //
+                } else if (order.getColumn() == 4) { //
+                    retCompare = o1.getBirthDate().compareTo(o2.getBirthDate()) * factor * -1;
+                } else if (order.getColumn() == 5) { //
+                    retCompare = o1.getBirthDate().compareTo(o2.getBirthDate()) * factor * -1;
+                } else if (order.getColumn() == 6) { //
                     retCompare = o1.getEmail().compareTo(o2.getEmail()) * factor;
+                } else if (order.getColumn() == 7) { //
+                    retCompare = o1.getStatus().compareTo(o2.getStatus()) * factor;
                 }
                 return retCompare;
             }
