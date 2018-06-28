@@ -146,6 +146,11 @@ public class UserService {
                 column = tableRequest.getColumns().get(index);
                 searchParameters.put("status", column.getSearch());
             }
+            index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(9, "countryId"));
+            if (index != -1) {
+                column = tableRequest.getColumns().get(index);
+                searchParameters.put("countryId", column.getSearch());
+            }
         }
         logger.info("search [" + searchParameters + "]");
 // apply individual column search:
@@ -227,6 +232,14 @@ public class UserService {
                         continue;
                     }
                 }
+                if (searchParameters.get("countryId") != null && !searchParameters.get("countryId").getValue().equals("")) {
+                    Search searchValueObject = searchParameters.get("countryId");
+                    String searchValueStr = searchValueObject.getValue().trim();
+                    String dbValue = user.getCountryId();
+                    if (!dbValue.equals(searchValueStr)) {
+                        continue;
+                    }
+                }
                 newDB.add(user);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -260,6 +273,8 @@ public class UserService {
                     retCompare = o1.getEmail().compareTo(o2.getEmail()) * factor;
                 } else if (order.getColumn() == 7) { //
                     retCompare = o1.getStatus().compareTo(o2.getStatus()) * factor;
+                } else if (order.getColumn() == 8) { //
+                    retCompare = o1.getCountryId().compareTo(o2.getCountryId()) * factor;
                 }
                 return retCompare;
             }

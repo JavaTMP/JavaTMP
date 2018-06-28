@@ -17,14 +17,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/user/GetCreateNewUserPopupController")
-public class GetCreateNewUserPopupController extends HttpServlet {
+@WebServlet("/user/GetListUsersPage")
+public class GetListUsersPage extends HttpServlet {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String requestPage = "/WEB-INF/pages/user/addNewUserPopup.jsp";
+        String requestPage = "/WEB-INF/pages/user/listUsers.jsp";
 
         ServletContext context = request.getServletContext();
         ServicesFactory sf = (ServicesFactory) context.getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);

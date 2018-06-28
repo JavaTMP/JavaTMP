@@ -1,4 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <div class="dynamic-ajax-content m-0 p-0">
     <div class="user-list-btn-toolbar my-3" role="toolbar" aria-label="Toolbar with button groups">
         <button type="button" class="btn btn-primary"
@@ -19,20 +21,20 @@
     <table cellspacing="0" class="table table-condensed table-bordered table-hover" id="UsersListTableId">
         <thead>
             <tr id="UserListMainHeader">
-                <th><p style="width: 100px;">ID</p></th>
-                <th><p style="width: 150px;">Username</p></th>
-                <th><p style="width: 150px;">First name</p></th>
-                <th>Last name</th>
-                <th>Date Of Birth</th>
-                <th>Age</th>
-                <th>E-mail</th>
-                <th>Status</th>
-                <th>Country Name</th>
-                <th>Address</th>
-                <th>Language</th>
-                <th>Theme</th>
-                <th>Timezone</th>
-                <th>Creation Date</th>
+                <th style="width: 100px;"><p style="width: 100px;">ID</p></th>
+                <th style="width: 150px;"><p style="width: 150px;">Username</p></th>
+                <th style="width: 150px;"><p style="width: 150px;">First name</p></th>
+                <th style="width: 150px;"><p style="width: 150px;">Last name</p></th>
+                <th style="width: 200px;"><p style="width: 200px;">Date Of Birth</p></th>
+                <th style="width: 100px;"><p style="width: 100px;">Age</p></th>
+                <th style="width: 200px;"><p style="width: 200px;">E-mail</p></th>
+                <th style="width: 100px;"><p style="width: 100px;">Status</p></th>
+                <th style="width: 200px;"><p style="width: 200px;">Country Name</p></th>
+                <th style="width: 150px;"><p style="width: 150px;">Address</p></th>
+                <th style="width: 100px;"><p style="width: 100px;">Language</p></th>
+                <th style="width: 100px;"><p style="width: 100px;">Theme</p></th>
+                <th style="width: 150px;"><p style="width: 150px;">Timezone</p></th>
+                <th style="width: 200px;"><p style="width: 200px;">Creation Date</p></th>
             </tr>
             <tr id="UserListFilterHeader">
                 <th style="width: 100px;">
@@ -65,7 +67,19 @@
                     </select>
                 </th>
                 <th style="width: 200px;">
-                    <input id="userlist-country-filter" class="form-control"/>
+                    <select id="userlist-country-filter" class="form-control">
+                        <c:choose>
+                            <c:when test="${fn:length(requestScope.countries) > 0}">
+                                <option value="">Choose ...</option>
+                                <c:forEach items="${requestScope.countries}" var="country">
+                                    <option value="${country.countryId}">${country.countryName}</option>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="">No Record Found</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </select>
                 </th>
                 <th style="width: 150px;">
                     <input id="userlist-address-filter" class="form-control"/>
@@ -130,8 +144,8 @@
                 select: "single",
                 scrollY: 400,
                 scrollX: true,
-                "autoWidth": true,
-                fixedColumns: false,
+                "autoWidth": false,
+                fixedColumns: true,
                 scrollCollapse: true,
                 "searching": true,
                 searchDelay: 500,
@@ -247,6 +261,95 @@
                             api.column(7).search(val ? val : '', false, false).draw();
                         }, 400, "@userlist-status-filter");
                     });
+
+                    var countryFilterInput = $("#userlist-country-filter");
+//                    countryFilterInput.on('change', function () {
+//                        var $this = $(this);
+//                        javatmp.waitForFinalEvent(function () {
+//                            var val = $this.val();
+//                            api.column(8).search(val ? val : '', false, false).draw();
+//                        }, 400, "@userlist-country-filter");
+//                    });
+                    countryFilterInput.select2({
+                        theme: "bootstrap",
+                        dir: javatmp.settings.direction,
+                        allowClear: true,
+                        placeholder: "Select a country",
+                        containerCssClass: ':all:',
+//                        width: "",
+                        templateSelection: formatCountrySelection,
+                        templateResult: formatCountry,
+                        escapeMarkup: function (markup) {
+                            return markup;
+                        }
+//                        dropdownCssClass: "select2-countryId-dropdown"
+                    }).on('select2:select', function (e) {
+                        var selectedId = "";
+                        var selectedRows = $(this).select2('data');
+                        if (selectedRows.length > 0) {
+                            var selectedRow = selectedRows[0];
+                            selectedId = selectedRow.id;
+                        }
+                        api.column(8).search(selectedId ? selectedId : '', false, false).draw();
+//                    }).on('select2:close', function (e) {
+//                        var selectedId = "";
+//                        var selectedRows = $(this).select2('data');
+//                        alert(JSON.stringify(selectedRows));
+//                        if (selectedRows.length === 0) {
+//                            api.column(8).search(selectedId, false, false).draw();
+//                        }
+                    }).on('select2:unselect', function (e) {
+                        var selectedId = "";
+                        var selectedRows = $(this).select2('data');
+//                        alert("unselect{" + JSON.stringify(selectedRows));
+                        if (selectedRows.length > 0) {
+                            var selectedRow = selectedRows[0];
+                            selectedId = selectedRow.id;
+                            if (selectedId === "") {
+                                api.column(8).search(selectedId, false, false).draw();
+                            }
+                        }
+
+                    });
+                    function formatCountry(repo) {
+                        if (repo.loading)
+                            return repo.text;
+                        var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
+                        var template =
+                                '    <div class="media d-flex align-items-center">' +
+                                '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
+                                '        <div class="media-body">' +
+                                '            <strong class="">{{countryText}} ({{countryId}})</strong>' +
+                                '        </div>' +
+                                '    </div>';
+                        var readyData = template.composeTemplate({
+                            'imagePath': imagePath,
+                            'countryText': repo.text,
+                            'countryId': repo.id
+                        });
+                        return readyData;
+                    }
+                    function formatCountrySelection(repo) {
+                        if (!repo.id) {
+                            return repo.text;
+                        }
+
+                        var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
+                        var template =
+                                '    <div class="media d-flex align-items-center">' +
+                                '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
+                                '        <div class="media-body">' +
+                                '            <span class="">{{countryText}} ({{countryId}})</span>' +
+                                '        </div>' +
+                                '    </div>';
+                        var readyData = template.composeTemplate({
+                            'imagePath': imagePath,
+                            'countryText': repo.text,
+                            'countryId': repo.id
+                        });
+                        return readyData;
+                    }
+
 
                 },
                 "ajax": {

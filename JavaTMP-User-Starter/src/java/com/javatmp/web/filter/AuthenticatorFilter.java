@@ -69,7 +69,7 @@ public class AuthenticatorFilter implements Filter {
             if (user != null) {
                 logger.info("Session User is [" + MvcHelper.deepToString(user) + "]");
                 chain.doFilter(request, response);
-            } else if ("ajax".equals(req.getParameter("_ajax"))) {
+            } else if ("ajax".equals(req.getParameter("_ajax")) || req.getMethod().equals("POST")) {
                 // we send an error ajax message response consisting
                 res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 ResponseMessage responseMessage = new ResponseMessage();

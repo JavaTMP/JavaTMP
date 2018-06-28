@@ -125,7 +125,7 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/user/list">
+                                        <a href="${pageContext.request.contextPath}/user/GetListUsersPage">
                                             Users List
                                         </a>
                                     </li>

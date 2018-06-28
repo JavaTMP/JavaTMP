@@ -36,6 +36,7 @@ public class ListAllUsersController extends HttpServlet {
 
         responseMessage.setOverAllStatus(true);
         responseMessage.setData(dataTableResult);
+
         MvcHelper.sendMessageAsJson(response, responseMessage);
 
     }

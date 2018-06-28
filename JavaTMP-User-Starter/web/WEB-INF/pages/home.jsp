@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
             <button type="button" class="javatmp-btn btn btn-primary btn-block my-2"
-                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/user/list" >
+                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/user/GetListUsersPage" >
                 <i class="fas fa-user"></i>
                 User List
             </button>
