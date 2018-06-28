@@ -42,9 +42,9 @@ public class DataTableColumnSpecs {
      */
     private String sortDir;
 
-    public DataTableColumnSpecs(int index, String data) {
+    public DataTableColumnSpecs(int index, String name) {
         this.setIndex(index);
-        this.setData(data);
+        this.setName(name);
     }
 
     /**
@@ -199,14 +199,8 @@ public class DataTableColumnSpecs {
         if (!(aThat instanceof DataTableColumnSpecs)) {
             return false;
         }
-        //Alternative to the above line :
-        //if ( aThat == null || aThat.getClass() != this.getClass() ) return false;
-
-        //cast to native object is now safe
         DataTableColumnSpecs that = (DataTableColumnSpecs) aThat;
-        //now a proper field-by-field evaluation can be made
-//        return this.index == that.index && this.data.equals(that.data);
-        return this.data.equals(that.data);
+        return this.name.equals(that.name);
     }
 
     @Override

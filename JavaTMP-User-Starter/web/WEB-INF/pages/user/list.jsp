@@ -18,10 +18,10 @@
     </div>
     <table cellspacing="0" class="table table-condensed table-bordered table-hover" id="UsersListTableId">
         <thead>
-            <tr>
-                <th>ID</th>
-                <th>Username</th>
-                <th>First name</th>
+            <tr id="UserListMainHeader">
+                <th><p style="width: 100px;">ID</p></th>
+                <th><p style="width: 150px;">Username</p></th>
+                <th><p style="width: 150px;">First name</p></th>
                 <th>Last name</th>
                 <th>Date Of Birth</th>
                 <th>Age</th>
@@ -100,6 +100,9 @@
         #UserListFilterHeader th > .custom-select {
             border-radius: 0;
         }
+        #UserListMainHeader th > p {
+            margin-bottom: 0;
+        }
     </style>
     <script type="text/javascript">
         jQuery(function ($) {
@@ -127,8 +130,8 @@
                 select: "single",
                 scrollY: 400,
                 scrollX: true,
-                "autoWidth": false,
-                fixedColumns: true,
+                "autoWidth": true,
+                fixedColumns: false,
                 scrollCollapse: true,
                 "searching": true,
                 searchDelay: 500,
@@ -194,7 +197,37 @@
                         hourFormat: "24",
                         clearMaskOnLostFocus: false
                     });
-                    // should be for age 5
+                    birthdateFilterInput.daterangepicker({
+                        "opens": javatmp.settings.floatDefault,
+                        //                    startDate: false,
+                        singleDatePicker: true,
+                        showDropdowns: true,
+                        timePicker: false,
+                        timePickerIncrement: 1,
+                        timePicker24Hour: true,
+                        autoApply: true,
+                        autoUpdateInput: false,
+                        minDate: '01/01/1900',
+                        maxDate: '31/12/2099',
+                        //                    maxDate: '',
+                        //                    minDate: moment(),
+                        locale: {
+                            "direction": javatmp.settings.direction,
+                            format: 'DD/MM/YYYY'
+                        }
+                    }, function (start, end, label) {
+                        var formatedDateSelected = moment(start).format("DD/MM/YYYY");
+                        birthdateFilterInput.val(formatedDateSelected).trigger("change");
+                    });
+
+                    var ageFilterInput = $("#userlist-age-filter");
+                    ageFilterInput.on('keyup change', function () {
+                        var $this = $(this);
+                        javatmp.waitForFinalEvent(function () {
+                            var val = $this.val();
+                            api.column(5).search(val ? val : '', true, false).draw();
+                        }, 400, "@userlist-age-filter");
+                    });
 
                     var emailFilterInput = $("#userlist-email-filter");
                     emailFilterInput.on('keyup change', function () {
@@ -209,7 +242,7 @@
                     statusFilterInput.on('change', function () {
                         var $this = $(this);
                         javatmp.waitForFinalEvent(function () {
-//                            var val = $.fn.dataTable.util.escapeRegex($this.val());
+                            //                            var val = $.fn.dataTable.util.escapeRegex($this.val());
                             var val = $this.val();
                             api.column(7).search(val ? val : '', false, false).draw();
                         }, 400, "@userlist-status-filter");
@@ -232,7 +265,7 @@
                     }
                 },
                 columns: [
-                    {data: 'id', className: "",
+                    {data: 'id', className: "", name: "id", width: 100,
                         "render": function (data, type, row) {
                             if (type === "display") {
                                 return "<p class='m-0 p-0' style='width: 100px;'>" + data + "</p>";
@@ -243,7 +276,7 @@
                         }
                     },
                     {
-                        data: 'userName',
+                        data: 'userName', name: "userName", width: 150,
                         "render": function (data, type, row) {
                             if (type === "sort" || type === 'type' || type === 'filter') {
                                 return data;
@@ -253,18 +286,7 @@
                         }
                     },
                     {
-                        data: 'firstName',
-                        "render": function (data, type, row) {
-                            if (type === "sort" || type === 'type' || type === 'filter') {
-                                return data;
-                            } else {
-                                return "<p class='m-0 p-0' style='width: 150px;'>" + data + "</p>";
-                            }
-
-                        }
-                    },
-                    {
-                        data: 'lastName',
+                        data: 'firstName', name: "firstName", width: 150,
                         "render": function (data, type, row) {
                             if (type === "sort" || type === 'type' || type === 'filter') {
                                 return data;
@@ -275,7 +297,18 @@
                         }
                     },
                     {
-                        data: 'birthDate', "type": "date",
+                        data: 'lastName', name: "lastName", width: 150,
+                        "render": function (data, type, row) {
+                            if (type === "sort" || type === 'type' || type === 'filter') {
+                                return data;
+                            } else {
+                                return "<p class='m-0 p-0' style='width: 150px;'>" + data + "</p>";
+                            }
+
+                        }
+                    },
+                    {
+                        data: 'birthDate', "type": "date", name: "birthDate", width: 200,
                         "render": function (data, type, row) {
                             if (type === "sort" || type === 'type' || type === 'filter') {
                                 return moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY HH:mm');
@@ -285,7 +318,7 @@
                         }
                     },
                     {
-                        data: 'birthDate', "type": "date",
+                        data: 'birthDate', name: "age", "type": "date", width: 100,
                         "render": function (data, type, row) {
                             data = Math.ceil(moment().diff(moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ"), 'years', true));
                             if (type === "display") {
@@ -295,7 +328,7 @@
                             }
                         }
                     },
-                    {data: 'email',
+                    {data: 'email', name: "email", width: 200,
                         "render": function (data, type, row) {
                             if (type === "display") {
                                 return "<p class='m-0 p-0 text-truncate' style='width: 200px;'>" + data + "</p>";
@@ -305,7 +338,7 @@
 
                         }
                     },
-                    {data: 'status',
+                    {data: 'status', name: "status", width: 100,
                         "render": function (data, type, row) {
 
                             var statusMap = {"-1": {label: "Deleted", style: "danger"}, "0": {label: "Deactive", style: "warning"}, "1": {label: "Active", style: "success"}};
@@ -319,7 +352,7 @@
                         }
                     },
                     {
-                        data: 'countryId',
+                        data: 'countryId', name: "countryId", width: 200,
                         "render": function (data, type, row) {
                             if (type === "sort" || type === 'type' || type === 'filter') {
                                 return data;
@@ -329,7 +362,7 @@
 
                         }
                     },
-                    {data: 'address',
+                    {data: 'address', name: "address", width: 150,
                         "render": function (data, type, row) {
                             if (type === "sort" || type === 'type' || type === 'filter') {
                                 return data;
@@ -339,7 +372,7 @@
 
                         }
                     },
-                    {data: 'lang',
+                    {data: 'lang', name: "lang", width: 100,
                         "render": function (data, type, row) {
                             if (type === "display") {
                                 return "<p class='m-0 p-0' style='width: 100px;'>" + data + "</p>";
@@ -349,7 +382,7 @@
 
                         }
                     },
-                    {data: 'theme',
+                    {data: 'theme', name: "theme", width: 100,
                         "render": function (data, type, row) {
                             if (type === "display") {
                                 return "<p class='m-0 p-0' style='width: 100px;'>" + data + "</p>";
@@ -359,7 +392,7 @@
 
                         }
                     },
-                    {data: 'timezone',
+                    {data: 'timezone', name: "timezone", width: 150,
                         "render": function (data, type, row) {
                             if (type === "display") {
                                 return "<p class='m-0 p-0 text-truncate' style='width: 150px;'>" + data + "</p>";
@@ -369,7 +402,7 @@
 
                         }
                     },
-                    {data: 'creationDate', "type": "date",
+                    {data: 'creationDate', "type": "date", name: "creationDate", width: 200,
                         "render": function (data, type, row) {
                             if (type === "sort" || type === 'type' || type === 'filter') {
                                 return moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY HH:mm');
@@ -390,17 +423,17 @@
             });
 
             table.on('select', function (e, dt, type, indexes) {
-//                alert("select");
+                //                alert("select");
                 var rowsData = table.rows(indexes).data().toArray();
                 var rowData = rowsData[0];
                 enabled();
-//                alert("select" + JSON.stringify(rowData));
+                //                alert("select" + JSON.stringify(rowData));
             }).on('deselect', function (e, dt, type, indexes) {
-//                alert("descelect");
+                //                alert("descelect");
                 var rowsData = table.rows(indexes).data().toArray();
                 var rowData = rowsData[0];
                 disabled();
-//                alert("descelect" + JSON.stringify(rowData));
+                //                alert("descelect" + JSON.stringify(rowData));
             });
 
             addNewUserPopupButton.on("click", function (event) {
@@ -419,7 +452,7 @@
                 var selectedData = table.rows({selected: true}).data();
                 if (selectedData.length > 0) {
                     var selectedRecord = selectedData[0];
-//                    alert("row[" + JSON.stringify(selectedRecord) + "]");
+                    //                    alert("row[" + JSON.stringify(selectedRecord) + "]");
                     var passData = {};
                     passData.callback = "actionCallback";
                     passData.id = selectedRecord.id;

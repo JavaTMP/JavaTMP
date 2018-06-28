@@ -131,6 +131,11 @@ public class UserService {
                 column = tableRequest.getColumns().get(index);
                 searchParameters.put("birthDate", column.getSearch());
             }
+            index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(5, "age"));
+            if (index != -1) {
+                column = tableRequest.getColumns().get(index);
+                searchParameters.put("age", column.getSearch());
+            }
             index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(9, "email"));
             if (index != -1) {
                 column = tableRequest.getColumns().get(index);
@@ -188,6 +193,20 @@ public class UserService {
                     Date dbValue = user.getBirthDate();
                     System.out.println("Doest dbValue [" + dbValue + "] equal search [" + searchValue + "]");
                     if (!dbValue.equals(searchValue)) {
+                        continue;
+                    }
+                }
+                if (searchParameters.get("age") != null && !searchParameters.get("age").getValue().equals("")) {
+                    Search searchValueObject = searchParameters.get("age");
+                    String searchValueStr = searchValueObject.getValue().trim().toLowerCase();
+                    Integer searchValue = Integer.valueOf(searchValueStr);
+                    Date dbValue = user.getBirthDate();
+                    Date now = new Date();
+                    long timeBetween = now.getTime() - dbValue.getTime();
+                    double yearsBetween = timeBetween / 3.15576e+10;
+                    Integer age = (int) Math.ceil(yearsBetween);
+                    System.out.println("Doest dbValue [" + age + "] equal search [" + searchValue + "]");
+                    if (!age.equals(searchValue)) {
                         continue;
                     }
                 }
