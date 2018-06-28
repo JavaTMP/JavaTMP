@@ -182,12 +182,12 @@ public class UserService {
                 }
                 if (searchParameters.get("birthDate") != null && !searchParameters.get("birthDate").getValue().equals("")) {
                     Search searchValueObject = searchParameters.get("birthDate");
-                    String searchValue = searchValueObject.getValue().toString().trim().toLowerCase();
+                    String searchValueStr = searchValueObject.getValue().trim().toLowerCase();
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    Date searchValue = sdf.parse(searchValueStr);
                     Date dbValue = user.getBirthDate();
-                    Calendar cal = Calendar.getInstance();
-                    cal.add(Calendar.YEAR, Integer.parseInt(searchValue) * -1);
-                    Long search = cal.getTimeInMillis();
-                    if (dbValue.getTime() > search) {
+                    System.out.println("Doest dbValue [" + dbValue + "] equal search [" + searchValue + "]");
+                    if (!dbValue.equals(searchValue)) {
                         continue;
                     }
                 }

@@ -179,14 +179,21 @@
                     });
 
                     var birthdateFilterInput = $("#userlist-birthdate-filter");
-                    birthdateFilterInput.on('keyup change', function () {
+                    birthdateFilterInput.on('change', function () {
                         var $this = $(this);
                         javatmp.waitForFinalEvent(function () {
-                            var val = $.fn.dataTable.util.escapeRegex($this.val());
+                            var val = $this.val();
                             api.column(4).search(val ? val : '', true, false).draw();
                         }, 400, "@userlist-birthdate-filter");
                     });
-
+                    birthdateFilterInput.inputmask({
+                        alias: "datetime",
+                        placeholder: "dd/mm/yyyy",
+                        inputFormat: "dd/mm/yyyy",
+                        displayFormat: true,
+                        hourFormat: "24",
+                        clearMaskOnLostFocus: false
+                    });
                     // should be for age 5
 
                     var emailFilterInput = $("#userlist-email-filter");

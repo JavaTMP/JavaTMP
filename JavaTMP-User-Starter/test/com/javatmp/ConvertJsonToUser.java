@@ -7,20 +7,17 @@ package com.javatmp;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.javatmp.domain.User;
-import com.javatmp.service.DBFaker;
-import com.javatmp.util.MD5Util;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
+import java.util.TimeZone;
 
 /**
  *
@@ -32,7 +29,7 @@ public class ConvertJsonToUser {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws ParseException, FileNotFoundException {
-
+        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
         String jsonStr = "";
 
         Gson gson = new Gson();
@@ -58,7 +55,15 @@ public class ConvertJsonToUser {
 
             String birthdateStr = record.get("birthDate");
             SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-            long birthLong = formater.parse(birthdateStr).getTime();
+            Date birthDate = formater.parse(birthdateStr);
+            Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+            cal.setTime(birthDate);
+            cal.set(Calendar.HOUR_OF_DAY, -24);
+            cal.set(Calendar.MINUTE, 0);
+            cal.set(Calendar.SECOND, 0);
+            cal.set(Calendar.MILLISECOND, 0);
+//            System.out.println(cal.getTime());
+            long birthLong = cal.getTimeInMillis();
 
             tempRec = tempRec.replaceFirst("###birthDate###", birthLong + "L");
             long creationDateLong = formater.parse(record.get("creationDate")).getTime();
