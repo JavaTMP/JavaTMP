@@ -9,6 +9,7 @@ import com.javatmp.mvc.domain.table.Search;
 import com.javatmp.mvc.MvcHelper;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
@@ -151,6 +152,26 @@ public class UserService {
                 column = tableRequest.getColumns().get(index);
                 searchParameters.put("countryId", column.getSearch());
             }
+            index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(9, "lang"));
+            if (index != -1) {
+                column = tableRequest.getColumns().get(index);
+                searchParameters.put("lang", column.getSearch());
+            }
+            index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(9, "theme"));
+            if (index != -1) {
+                column = tableRequest.getColumns().get(index);
+                searchParameters.put("theme", column.getSearch());
+            }
+            index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(9, "timezone"));
+            if (index != -1) {
+                column = tableRequest.getColumns().get(index);
+                searchParameters.put("timezone", column.getSearch());
+            }
+            index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(9, "creationDate"));
+            if (index != -1) {
+                column = tableRequest.getColumns().get(index);
+                searchParameters.put("creationDate", column.getSearch());
+            }
         }
         logger.info("search [" + searchParameters + "]");
 // apply individual column search:
@@ -240,6 +261,47 @@ public class UserService {
                         continue;
                     }
                 }
+                if (searchParameters.get("lang") != null && !searchParameters.get("lang").getValue().equals("")) {
+                    Search searchValueObject = searchParameters.get("lang");
+                    String searchValueStr = searchValueObject.getValue().trim();
+                    String dbValue = user.getLang();
+                    if (!dbValue.equals(searchValueStr)) {
+                        continue;
+                    }
+                }
+                if (searchParameters.get("theme") != null && !searchParameters.get("theme").getValue().equals("")) {
+                    Search searchValueObject = searchParameters.get("theme");
+                    String searchValueStr = searchValueObject.getValue().trim();
+                    String dbValue = user.getTheme();
+                    if (!dbValue.equals(searchValueStr)) {
+                        continue;
+                    }
+                }
+                if (searchParameters.get("timezone") != null && !searchParameters.get("timezone").getValue().equals("")) {
+                    Search searchValueObject = searchParameters.get("timezone");
+                    String searchValueStr = searchValueObject.getValue().trim();
+                    String dbValue = user.getTimezone();
+                    if (!dbValue.equals(searchValueStr)) {
+                        continue;
+                    }
+                }
+                if (searchParameters.get("creationDate") != null && !searchParameters.get("creationDate").getValue().equals("")) {
+                    Search searchValueObject = searchParameters.get("creationDate");
+                    String searchValueStr = searchValueObject.getValue().trim();
+                    System.out.println("search value str [" + searchValueStr + "]");
+                    String[] dateParts = searchValueStr.split("##TO##");
+                    System.out.println(Arrays.toString(dateParts));
+                    String startStr = dateParts[0];
+                    String endStr = dateParts[1];
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+                    Date start = sdf.parse(startStr);
+                    Date end = sdf.parse(endStr);
+                    Date dbValue = user.getCreationDate();
+                    // https://stackoverflow.com/questions/883060/how-can-i-determine-if-a-date-is-between-two-dates-in-java
+                    if (!(start.compareTo(dbValue) * dbValue.compareTo(end) >= 0)) {
+                        continue;
+                    }
+                }
                 newDB.add(user);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -275,6 +337,16 @@ public class UserService {
                     retCompare = o1.getStatus().compareTo(o2.getStatus()) * factor;
                 } else if (order.getColumn() == 8) { //
                     retCompare = o1.getCountryId().compareTo(o2.getCountryId()) * factor;
+                } else if (order.getColumn() == 9) { // address
+                    retCompare = o1.getCountryId().compareTo(o2.getCountryId()) * factor;
+                } else if (order.getColumn() == 10) { // lang
+                    retCompare = o1.getLang().compareTo(o2.getLang()) * factor;
+                } else if (order.getColumn() == 11) { // theme
+                    retCompare = o1.getTheme().compareTo(o2.getTheme()) * factor;
+                } else if (order.getColumn() == 12) { // theme
+                    retCompare = o1.getTimezone().compareTo(o2.getTimezone()) * factor;
+                } else if (order.getColumn() == 13) { // theme
+                    retCompare = o1.getCreationDate().compareTo(o2.getCreationDate()) * factor;
                 }
                 return retCompare;
             }

@@ -182,7 +182,7 @@
                 user.theme = themeArray[getRandomInt(themeArray.length)];
                 user.timezone = timezones[getRandomInt(timezones.length)];
                 user.profilePicDocumentId = faker.internet.avatar();
-                user.creationDate = faker.date.past(1);
+                user.creationDate = faker.date.recent(10);
                 jQuery.ajax({
                     url: user.profilePicDocumentId,
                     cache: false,
@@ -222,7 +222,7 @@
         <script type="text/javascript">
             var usersArray = [];
             var timeout = 1000;
-            var count = 25;
+            var count = 50;
             function fun() {
                 console.log("fun start with len [" + usersArray.length + "]");
                 if (usersArray.length < count) {

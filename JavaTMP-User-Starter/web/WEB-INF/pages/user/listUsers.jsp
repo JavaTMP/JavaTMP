@@ -31,9 +31,9 @@
                 <th style="width: 100px;"><p style="width: 100px;">Status</p></th>
                 <th style="width: 200px;"><p style="width: 200px;">Country Name</p></th>
                 <th style="width: 150px;"><p style="width: 150px;">Address</p></th>
-                <th style="width: 100px;"><p style="width: 100px;">Language</p></th>
-                <th style="width: 100px;"><p style="width: 100px;">Theme</p></th>
-                <th style="width: 150px;"><p style="width: 150px;">Timezone</p></th>
+                <th style="width: 125px;"><p style="width: 125px;">Language</p></th>
+                <th style="width: 150px;"><p style="width: 150px;">Theme</p></th>
+                <th style="width: 250px;"><p style="width: 250px;">Timezone</p></th>
                 <th style="width: 200px;"><p style="width: 200px;">Creation Date</p></th>
             </tr>
             <tr id="UserListFilterHeader">
@@ -59,8 +59,8 @@
                     <input id="userlist-email-filter" class="form-control"/>
                 </th>
                 <th style="width: 100px;">
-                    <select id="userlist-status-filter" class="custom-select">
-                        <option value="">-- ALL --</option>
+                    <select id="userlist-status-filter" class="form-control">
+                        <option value="">ALL Statuses</option>
                         <option value="1">Activated</option>
                         <option value="0">Deactivated</option>
                         <option value="-1">Deleted</option>
@@ -70,7 +70,7 @@
                     <select id="userlist-country-filter" class="form-control">
                         <c:choose>
                             <c:when test="${fn:length(requestScope.countries) > 0}">
-                                <option value="">Choose ...</option>
+                                <option value="">All Countries</option>
                                 <c:forEach items="${requestScope.countries}" var="country">
                                     <option value="${country.countryId}">${country.countryName}</option>
                                 </c:forEach>
@@ -84,14 +84,50 @@
                 <th style="width: 150px;">
                     <input id="userlist-address-filter" class="form-control"/>
                 </th>
-                <th style="width: 100px;">
-                    <input id="userlist-language-filter" class="form-control"/>
-                </th>
-                <th style="width: 100px;">
-                    <input id="userlist-theme-filter" class="form-control"/>
+                <th style="width: 125px;">
+                    <select id="userlist-language-filter" name="lang" class="form-control">
+                        <c:choose>
+                            <c:when test="${fn:length(requestScope.languages) > 0}">
+                                <option value="">All Languages</option>
+                                <c:forEach items="${requestScope.languages}" var="language">
+                                    <option value="${language.languageId}">${language.languageName}</option>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="">No Record Found</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </select>
                 </th>
                 <th style="width: 150px;">
-                    <input id="userlist-timezone-filter" class="form-control"/>
+                    <select id="userlist-theme-filter" name="theme" class="form-control">
+                        <c:choose>
+                            <c:when test="${fn:length(requestScope.themes) > 0}">
+                                <option value="">All Themes</option>
+                                <c:forEach items="${requestScope.themes}" var="theme">
+                                    <option value="${theme.themeId}">${theme.themeName}</option>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="">No Record Found</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </select>
+                </th>
+                <th style="width: 250px;">
+                    <select id="userlist-timezone-filter" name="timezone" class="form-control">
+                        <c:choose>
+                            <c:when test="${fn:length(requestScope.timezones) > 0}">
+                                <option value="">All Timezones</option>
+                                <c:forEach items="${requestScope.timezones}" var="timezone">
+                                    <option value="${timezone.timezoneId}">${timezone.timezoneName}</option>
+                                </c:forEach>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="-1">No Record Found</option>
+                            </c:otherwise>
+                        </c:choose>
+                    </select>
                 </th>
                 <th style="width: 200px;">
                     <input id="userlist-creationdate-filter" class="form-control"/>
@@ -122,6 +158,45 @@
         jQuery(function ($) {
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
+
+            // build lookup map for countries:
+            var countriesMap = {};
+            var countriesSelect = $("#userlist-country-filter");
+            var languagesMap = {};
+            var languagesSelect = $("#userlist-language-filter");
+            var themesMap = {};
+            var themesSelect = $("#userlist-theme-filter");
+            var timezonesMap = {};
+            var timezoneSelect = $("#userlist-timezone-filter");
+            $("option", countriesSelect).map(function (i, item) {
+                var text = $(item).text();
+                var value = $(item).attr("value");
+                if (!(value === "-1" || value === "")) {
+                    countriesMap[value] = text;
+                }
+            });
+            $("option", languagesSelect).map(function (i, item) {
+                var text = $(item).text();
+                var value = $(item).attr("value");
+                if (!(value === "-1" || value === "")) {
+                    languagesMap[value] = text;
+                }
+            });
+            $("option", themesSelect).map(function (i, item) {
+                var text = $(item).text();
+                var value = $(item).attr("value");
+                if (!(value === "-1" || value === "")) {
+                    themesMap[value] = text;
+                }
+            });
+            $("option", timezoneSelect).map(function (i, item) {
+                var text = $(item).text();
+                var value = $(item).attr("value");
+                if (!(value === "-1" || value === "")) {
+                    timezonesMap[value] = text;
+                }
+            });
+
             var addNewUserPopupButton = $("#UserList-AddNewUserPopupId");
             var updateUserButton = $("#UserList-UpdateSelectedUserId");
             var userTableElement = $('#UsersListTableId');
@@ -137,8 +212,8 @@
             var table = userTableElement.DataTable({
                 //                responsive: true,
                 dom: "<'row'<'col-sm-12 p-0'tr>>" +
-                        "<'row'<'col-sm-6'i><'col-sm-6 pt-2 text-right'p>>"
-//                        + "<'row'<'col-sm-12'p>>"
+                        "<'row'<'col-sm-6'i><'col-sm-6 pt-2 text-right'l>>"
+                        + "<'row'<'col-sm-12'p>>"
                 ,
 //                select: true,
                 select: "single",
@@ -168,7 +243,7 @@
                         javatmp.waitForFinalEvent(function () {
                             var val = $.fn.dataTable.util.escapeRegex($this.val());
                             api.column(0).search(val ? val : '', true, false).draw();
-                        }, 400, "@userlist-id-filter");
+                        }, 200, "@userlist-main-table-filter");
                     });
                     var usernameFilterInput = $("#userlist-username-filter");
                     usernameFilterInput.on('keyup change', function () {
@@ -176,7 +251,7 @@
                         javatmp.waitForFinalEvent(function () {
                             var val = $.fn.dataTable.util.escapeRegex($this.val());
                             api.column(1).search(val ? val : '', true, false).draw();
-                        }, 400, "@userlist-username-filter");
+                        }, 200, "@userlist-main-table-filter");
                     });
                     var firstNameFilterInput = $("#userlist-firstname-filter");
                     firstNameFilterInput.on('keyup change', function () {
@@ -184,7 +259,7 @@
                         javatmp.waitForFinalEvent(function () {
                             var val = $.fn.dataTable.util.escapeRegex($this.val());
                             api.column(2).search(val ? val : '', true, false).draw();
-                        }, 400, "@userlist-firstname-filter");
+                        }, 200, "@userlist-main-table-filter");
                     });
                     var lastNameFilterInput = $("#userlist-lastname-filter");
                     lastNameFilterInput.on('keyup change', function () {
@@ -192,7 +267,7 @@
                         javatmp.waitForFinalEvent(function () {
                             var val = $.fn.dataTable.util.escapeRegex($this.val());
                             api.column(3).search(val ? val : '', true, false).draw();
-                        }, 400, "@userlist-lastname-filter");
+                        }, 200, "@userlist-main-table-filter");
                     });
 
                     var birthdateFilterInput = $("#userlist-birthdate-filter");
@@ -201,7 +276,7 @@
                         javatmp.waitForFinalEvent(function () {
                             var val = $this.val();
                             api.column(4).search(val ? val : '', true, false).draw();
-                        }, 400, "@userlist-birthdate-filter");
+                        }, 200, "@userlist-main-table-filter");
                     });
                     birthdateFilterInput.inputmask({
                         alias: "datetime",
@@ -240,7 +315,7 @@
                         javatmp.waitForFinalEvent(function () {
                             var val = $this.val();
                             api.column(5).search(val ? val : '', true, false).draw();
-                        }, 400, "@userlist-age-filter");
+                        }, 200, "@userlist-main-table-filter");
                     });
 
                     var emailFilterInput = $("#userlist-email-filter");
@@ -249,7 +324,7 @@
                         javatmp.waitForFinalEvent(function () {
                             var val = $.fn.dataTable.util.escapeRegex($this.val());
                             api.column(6).search(val ? val : '', true, false).draw();
-                        }, 400, "@userlist-email-filter");
+                        }, 200, "@userlist-main-table-filter");
                     });
 
                     var statusFilterInput = $("#userlist-status-filter");
@@ -259,97 +334,235 @@
                             //                            var val = $.fn.dataTable.util.escapeRegex($this.val());
                             var val = $this.val();
                             api.column(7).search(val ? val : '', false, false).draw();
-                        }, 400, "@userlist-status-filter");
+                        }, 200, "@userlist-main-table-filter");
                     });
-
+                    statusFilterInput.select2({
+                        theme: "bootstrap",
+                        dir: javatmp.settings.direction,
+                        containerCssClass: ':all:',
+                        escapeMarkup: function (markup) {
+                            return markup;
+                        }
+                    });
                     var countryFilterInput = $("#userlist-country-filter");
-//                    countryFilterInput.on('change', function () {
-//                        var $this = $(this);
-//                        javatmp.waitForFinalEvent(function () {
-//                            var val = $this.val();
-//                            api.column(8).search(val ? val : '', false, false).draw();
-//                        }, 400, "@userlist-country-filter");
-//                    });
+                    countryFilterInput.on('change', function () {
+                        var $this = $(this);
+                        javatmp.waitForFinalEvent(function () {
+                            var val = $this.val();
+                            api.column(8).search(val ? val : '', false, false).draw();
+                        }, 200, "@userlist-main-table-filter");
+                    });
                     countryFilterInput.select2({
                         theme: "bootstrap",
                         dir: javatmp.settings.direction,
-                        allowClear: true,
-                        placeholder: "Select a country",
-                        containerCssClass: ':all:',
-//                        width: "",
                         templateSelection: formatCountrySelection,
                         templateResult: formatCountry,
                         escapeMarkup: function (markup) {
                             return markup;
                         }
-//                        dropdownCssClass: "select2-countryId-dropdown"
-                    }).on('select2:select', function (e) {
-                        var selectedId = "";
-                        var selectedRows = $(this).select2('data');
-                        if (selectedRows.length > 0) {
-                            var selectedRow = selectedRows[0];
-                            selectedId = selectedRow.id;
-                        }
-                        api.column(8).search(selectedId ? selectedId : '', false, false).draw();
-//                    }).on('select2:close', function (e) {
-//                        var selectedId = "";
-//                        var selectedRows = $(this).select2('data');
-//                        alert(JSON.stringify(selectedRows));
-//                        if (selectedRows.length === 0) {
-//                            api.column(8).search(selectedId, false, false).draw();
-//                        }
-                    }).on('select2:unselect', function (e) {
-                        var selectedId = "";
-                        var selectedRows = $(this).select2('data');
-//                        alert("unselect{" + JSON.stringify(selectedRows));
-                        if (selectedRows.length > 0) {
-                            var selectedRow = selectedRows[0];
-                            selectedId = selectedRow.id;
-                            if (selectedId === "") {
-                                api.column(8).search(selectedId, false, false).draw();
-                            }
-                        }
-
                     });
+
                     function formatCountry(repo) {
                         if (repo.loading)
                             return repo.text;
-                        var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
+
+                        var targetData = {};
+                        if (repo.id === "") {
+                            targetData = {
+                                'imagePath': javatmp.settings.contextPath + "/assets/img/flags/globe.png",
+                                'countryText': repo.text,
+                                'countryId': ""
+                            };
+                        } else {
+                            targetData = {
+                                'imagePath': javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png",
+                                'countryText': repo.text,
+                                'countryId': " (" + repo.id + ")"
+                            };
+                        }
                         var template =
                                 '    <div class="media d-flex align-items-center">' +
                                 '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
                                 '        <div class="media-body">' +
-                                '            <strong class="">{{countryText}} ({{countryId}})</strong>' +
+                                '            <strong class="">{{countryText}}{{countryId}}</strong>' +
                                 '        </div>' +
                                 '    </div>';
-                        var readyData = template.composeTemplate({
-                            'imagePath': imagePath,
-                            'countryText': repo.text,
-                            'countryId': repo.id
-                        });
+                        var readyData = template.composeTemplate(targetData);
                         return readyData;
                     }
                     function formatCountrySelection(repo) {
                         if (!repo.id) {
                             return repo.text;
                         }
+                        var targetData = {};
+                        if (repo.id === "") {
+                            targetData = {
+                                'imagePath': javatmp.settings.contextPath + "/assets/img/flags/globe.png",
+                                'countryText': repo.text,
+                                'countryId': ""
+                            };
+                        } else {
+                            targetData = {
+                                'imagePath': javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png",
+                                'countryText': repo.text,
+                                'countryId': " (" + repo.id + ")"
+                            };
+                        }
 
-                        var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
                         var template =
                                 '    <div class="media d-flex align-items-center">' +
                                 '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
                                 '        <div class="media-body">' +
-                                '            <span class="">{{countryText}} ({{countryId}})</span>' +
+                                '            <span class="">{{countryText}}{{countryId}}</span>' +
+                                '        </div>' +
+                                '    </div>';
+                        var readyData = template.composeTemplate(targetData);
+                        return readyData;
+                    }
+
+                    // Address field
+                    var addressFilterInput = $("#userlist-address-filter");
+                    addressFilterInput.on('change', function () {
+                        var $this = $(this);
+                        javatmp.waitForFinalEvent(function () {
+                            var val = $this.val();
+                            api.column(9).search(val ? val : '', false, false).draw();
+                        }, 200, "@userlist-main-table-filter");
+                    });
+                    // 10 Language Field userlist-language-filter
+                    var languageFilterInput = $("#userlist-language-filter");
+                    languageFilterInput.on('change', function () {
+                        var $this = $(this);
+                        javatmp.waitForFinalEvent(function () {
+                            var val = $this.val();
+                            api.column(10).search(val ? val : '', false, false).draw();
+                        }, 200, "@userlist-main-table-filter");
+                    });
+                    languageFilterInput.select2({
+                        theme: "bootstrap",
+                        dir: javatmp.settings.direction,
+                        containerCssClass: ':all:',
+                        escapeMarkup: function (markup) {
+                            return markup;
+                        }
+                    });
+
+                    // 11 Theme Field userlist-theme-filter
+                    var themeFilterInput = $("#userlist-theme-filter");
+                    themeFilterInput.on('change', function () {
+                        var $this = $(this);
+                        javatmp.waitForFinalEvent(function () {
+                            var val = $this.val();
+                            api.column(11).search(val ? val : '', false, false).draw();
+                        }, 200, "@userlist-main-table-filter");
+                    });
+                    themeFilterInput.select2({
+                        theme: "bootstrap",
+                        dir: javatmp.settings.direction,
+                        containerCssClass: ':all:',
+                        escapeMarkup: function (markup) {
+                            return markup;
+                        },
+                        templateSelection: formatThemeSelection,
+                        templateResult: formatThemeResult
+                    });
+                    function formatThemeSelection(repo) {
+                        if (!repo.id) {
+                            return repo.text;
+                        }
+
+                        var imagePath = javatmp.settings.contextPath + "/assets/img/themes/" + repo.text + ".png";
+                        var template =
+                                '    <div class="media d-flex align-items-center">' +
+                                '        <img style="height: 25px;" class="mr-1" src="{{imagePath}}" alt="{{themeName}}"/>' +
+                                '        <div class="media-body">' +
+                                '            <span>{{themeName}}</span>' +
                                 '        </div>' +
                                 '    </div>';
                         var readyData = template.composeTemplate({
                             'imagePath': imagePath,
-                            'countryText': repo.text,
-                            'countryId': repo.id
+                            'themeName': repo.text
                         });
                         return readyData;
                     }
+                    function formatThemeResult(repo) {
+                        if (!repo.id) {
+                            return repo.text;
+                        }
 
+                        var imagePath = javatmp.settings.contextPath + "/assets/img/themes/" + repo.text + ".png";
+                        var template =
+                                '    <div class="media d-flex align-items-center">' +
+                                '        <img style="height: 32px;" class="mr-1" src="{{imagePath}}" alt="{{themeName}}"/>' +
+                                '        <div class="media-body">' +
+                                '            <span>{{themeName}}</span>' +
+                                '        </div>' +
+                                '    </div>';
+                        var readyData = template.composeTemplate({
+                            'imagePath': imagePath,
+                            'themeName': repo.text
+                        });
+                        return readyData;
+                    }
+                    // 12 Timezone Filed userlist-timezone-filter
+                    var timezoneFilterInput = $("#userlist-timezone-filter");
+                    timezoneFilterInput.on('change', function () {
+                        var $this = $(this);
+                        javatmp.waitForFinalEvent(function () {
+                            var val = $this.val();
+                            api.column(12).search(val ? val : '', false, false).draw();
+                        }, 200, "@userlist-main-table-filter");
+                    });
+                    timezoneFilterInput.select2({
+                        theme: "bootstrap",
+                        dir: javatmp.settings.direction,
+                        containerCssClass: ':all:',
+                        escapeMarkup: function (markup) {
+                            return markup;
+                        }
+                    });
+                    // 13 CreationDate Field
+                    var creationdateFilterInput = $("#userlist-creationdate-filter");
+                    creationdateFilterInput.on('change', function () {
+                        var $this = $(this);
+                        javatmp.waitForFinalEvent(function () {
+                            var start = $this.data("start");
+                            var end = $this.data("end");
+                            var val = start.format("YYYY-MM-DDTHH:mm:ss.SSSZ") + "##TO##" + end.format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+                            api.column(13).search(val ? val : '', false, false).draw();
+                        }, 200, "@userlist-main-table-filter");
+                    });
+                    creationdateFilterInput.daterangepicker({
+                        "opens": javatmp.settings.floatDefault,
+                        startDate: moment().subtract(100, 'years'),
+                        endDate: moment(),
+                        minDate: '01/01/1900',
+                        maxDate: '31/12/2099',
+                        timePicker: true,
+                        autoApply: true,
+                        autoUpdateInput: false,
+                        locale: {
+                            "direction": javatmp.settings.direction,
+                            format: 'MM/DD/YYYY HH:mm:ss'
+
+                        },
+                        ranges: {
+                            'Today': [moment().startOf('day'), moment().endOf("day")],
+                            'Yesterday': [moment().subtract(1, 'days').startOf('day'), moment().subtract(1, 'days').endOf("day")],
+                            'Last 7 Days': [moment().subtract(6, 'days').startOf('day'), moment().endOf("day")],
+                            'Last 30 Days': [moment().subtract(29, 'days').startOf('day'), moment().endOf("day")],
+                            'This Month': [moment().startOf('month').startOf('day'), moment().endOf('month').endOf("day")],
+                            'Last Month': [moment().subtract(1, 'month').startOf('month').startOf('day'), moment().subtract(1, 'month').endOf('month').endOf("day")]
+                        }
+                    });
+                    creationdateFilterInput.on('apply.daterangepicker', function (ev, picker) {
+                        creationdateFilterInput.data("start", picker.startDate);
+                        creationdateFilterInput.data("end", picker.endDate);
+                        creationdateFilterInput.val(picker.startDate.format('MM/DD/YYYY HH:mm:ss') + ' - ' + picker.endDate.format('MM/DD/YYYY HH:mm:ss')).trigger("change");
+                    });
+                    creationdateFilterInput.on('cancel.daterangepicker', function (ev, picker) {
+                        $(this).val('').trigger("change");
+                    });
 
                 },
                 "ajax": {
@@ -438,7 +651,6 @@
                             } else {
                                 return data;
                             }
-
                         }
                     },
                     {data: 'status', name: "status", width: 100,
@@ -451,7 +663,6 @@
                             } else {
                                 return data;
                             }
-
                         }
                     },
                     {
@@ -460,9 +671,8 @@
                             if (type === "sort" || type === 'type' || type === 'filter') {
                                 return data;
                             } else {
-                                return "<p class='m-0 p-0' style='width: 200px;'>" + data + "</p>";
+                                return "<p class='m-0 p-0 text-truncate' style='width: 200px;'>" + countriesMap[data] + "</p>";
                             }
-
                         }
                     },
                     {data: 'address', name: "address", width: 150,
@@ -472,37 +682,33 @@
                             } else {
                                 return "<p class='m-0 p-0' style='width: 150px;'>Will Be Show</p>";
                             }
-
                         }
                     },
-                    {data: 'lang', name: "lang", width: 100,
+                    {data: 'lang', name: "lang", width: 125,
                         "render": function (data, type, row) {
                             if (type === "display") {
-                                return "<p class='m-0 p-0' style='width: 100px;'>" + data + "</p>";
+                                return "<p class='m-0 p-0' style='width: 125px;'>" + languagesMap[data] + "</p>";
                             } else {
                                 return data;
                             }
-
                         }
                     },
-                    {data: 'theme', name: "theme", width: 100,
+                    {data: 'theme', name: "theme", width: 150,
                         "render": function (data, type, row) {
                             if (type === "display") {
-                                return "<p class='m-0 p-0' style='width: 100px;'>" + data + "</p>";
+                                return "<p class='m-0 p-0' style='width: 150px;'>" + themesMap[data] + "</p>";
                             } else {
                                 return data;
                             }
-
                         }
                     },
-                    {data: 'timezone', name: "timezone", width: 150,
+                    {data: 'timezone', name: "timezone", width: 250,
                         "render": function (data, type, row) {
                             if (type === "display") {
-                                return "<p class='m-0 p-0 text-truncate' style='width: 150px;'>" + data + "</p>";
+                                return "<p class='m-0 p-0 text-truncate' style='width: 250px;'>" + timezonesMap[data] + "</p>";
                             } else {
                                 return data;
                             }
-
                         }
                     },
                     {data: 'creationDate', "type": "date", name: "creationDate", width: 200,

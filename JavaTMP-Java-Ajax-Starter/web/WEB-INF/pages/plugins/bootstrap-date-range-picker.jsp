@@ -245,168 +245,168 @@
         }
     </style>
     <script type="text/javascript">
-            jQuery(function ($) {
+        jQuery(function ($) {
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
 
             // fire AFTER all transition done and your ajax content is shown to user.
-                $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
-                    $('#default-drp').daterangepicker({"opens": "right",
-                        locale: {
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
+                $('#default-drp').daterangepicker({"opens": "right",
+                    locale: {
                         "direction": javatmp.settings.direction,
-                    format: 'YYYY-MM-DD'
-                }});
-                    $('#default-drp-with-options').daterangepicker({
+                        format: 'YYYY-MM-DD'
+                    }});
+                $('#default-drp-with-options').daterangepicker({
                     "opens": javatmp.settings.floatDefault,
-                        locale: {
+                    locale: {
                         "direction": javatmp.settings.direction,
-                    format: 'YYYY-MM-DD'
+                        format: 'YYYY-MM-DD'
                     },
                     startDate: '2017-01-01',
-                endDate: '2017-01-31'
-                    }, function (start, end, label) {
-                alert("A new date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+                    endDate: '2017-01-31'
+                }, function (start, end, label) {
+                    alert("A new date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
                 });
-                    $('#Date-and-Time').daterangepicker({
+                $('#Date-and-Time').daterangepicker({
                     timePicker: true,
                     timePickerIncrement: 30,
                     "opens": javatmp.settings.floatDefault,
-                        locale: {
+                    locale: {
                         "direction": javatmp.settings.direction,
-                    format: 'MM/DD/YYYY h:mm A'
-                }
+                        format: 'MM/DD/YYYY h:mm A'
+                    }
 
                 });
-                    $('#single_date_picker').daterangepicker({
+                $('#single_date_picker').daterangepicker({
                     "opens": javatmp.settings.floatDefault,
                     singleDatePicker: true,
                     showDropdowns: true,
-                        locale: {
+                    locale: {
                         "direction": javatmp.settings.direction,
-                    format: 'MM/DD/YYYY h:mm A'
-                }
+                        format: 'MM/DD/YYYY h:mm A'
+                    }
                 });
 
                 var start = moment().subtract(29, 'days');
                 var end = moment();
 
-                    function cb(start, end) {
-                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                function cb(start, end) {
+                    $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
                 }
 
-                    $('#reportrange').daterangepicker({
+                $('#reportrange').daterangepicker({
                     "opens": javatmp.settings.floatReverse,
                     startDate: start,
                     endDate: end,
-                        locale: {
+                    locale: {
                         "direction": javatmp.settings.direction,
-                    format: 'MM/DD/YYYY h:mm A'
+                        format: 'MM/DD/YYYY h:mm A'
                     },
-                        ranges: {
+                    ranges: {
                         'Today': [moment(), moment()],
                         'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
                         'Last 7 Days': [moment().subtract(6, 'days'), moment()],
                         'Last 30 Days': [moment().subtract(29, 'days'), moment()],
                         'This Month': [moment().startOf('month'), moment().endOf('month')],
-                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                }
+                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                    }
                 }, cb);
-            cb(start, end);
+                cb(start, end);
             });
 
             // fire when user resize browser window or sidebar hide / show
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
 
             });
-                $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenCompress, function (event, card) {
-            // when card compress by pressing the top right tool button
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenCompress, function (event, card) {
+                // when card compress by pressing the top right tool button
 
             });
-                $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenExpand, function (event, card) {
-            // when card Expand by pressing the top right tool button
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenExpand, function (event, card) {
+                // when card Expand by pressing the top right tool button
             });
             // When another menu item pressed and before container replaced with new ajax content.
-                $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {
                 $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenCompress);
                 $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenExpand);
-            return true;
-        });
+                return true;
+            });
         });
     </script>
     <script type="text/javascript">
-            jQuery(document).ready(function () {
-                (function ($) {
-                    $('#config-text').keyup(function () {
-                eval($(this).val());
+        jQuery(document).ready(function () {
+            (function ($) {
+                $('#config-text').keyup(function () {
+                    eval($(this).val());
                 });
 
-                    $('.configurator input, .configurator select').change(function () {
-                updateConfig();
+                $('.configurator input, .configurator select').change(function () {
+                    updateConfig();
                 });
 
-                    $('.demo i').click(function () {
-                $(this).parent().find('input').click();
+                $('.demo i').click(function () {
+                    $(this).parent().find('input').click();
                 });
 
-                    $('#startDate').daterangepicker({
+                $('#startDate').daterangepicker({
                     singleDatePicker: true,
-                startDate: moment().subtract(6, 'days')
+                    startDate: moment().subtract(6, 'days')
                 });
 
-                    $('#endDate').daterangepicker({
+                $('#endDate').daterangepicker({
                     singleDatePicker: true,
-                startDate: moment()
+                    startDate: moment()
                 });
 
                 updateConfig();
 
-                    function updateConfig() {
+                function updateConfig() {
                     var options = {};
 
-                        if ($('#singleDatePicker').is(':checked'))
-                    options.singleDatePicker = true;
+                    if ($('#singleDatePicker').is(':checked'))
+                        options.singleDatePicker = true;
 
-                        if ($('#showDropdowns').is(':checked'))
-                    options.showDropdowns = true;
+                    if ($('#showDropdowns').is(':checked'))
+                        options.showDropdowns = true;
 
-                        if ($('#showWeekNumbers').is(':checked'))
-                    options.showWeekNumbers = true;
+                    if ($('#showWeekNumbers').is(':checked'))
+                        options.showWeekNumbers = true;
 
-                        if ($('#showISOWeekNumbers').is(':checked'))
-                    options.showISOWeekNumbers = true;
+                    if ($('#showISOWeekNumbers').is(':checked'))
+                        options.showISOWeekNumbers = true;
 
-                        if ($('#timePicker').is(':checked'))
-                    options.timePicker = true;
+                    if ($('#timePicker').is(':checked'))
+                        options.timePicker = true;
 
-                        if ($('#timePicker24Hour').is(':checked'))
-                    options.timePicker24Hour = true;
+                    if ($('#timePicker24Hour').is(':checked'))
+                        options.timePicker24Hour = true;
 
-                        if ($('#timePickerIncrement').val().length && $('#timePickerIncrement').val() !== 1)
-                    options.timePickerIncrement = parseInt($('#timePickerIncrement').val(), 10);
+                    if ($('#timePickerIncrement').val().length && $('#timePickerIncrement').val() !== 1)
+                        options.timePickerIncrement = parseInt($('#timePickerIncrement').val(), 10);
 
-                        if ($('#timePickerSeconds').is(':checked'))
-                    options.timePickerSeconds = true;
+                    if ($('#timePickerSeconds').is(':checked'))
+                        options.timePickerSeconds = true;
 
-                        if ($('#autoApply').is(':checked'))
-                    options.autoApply = true;
+                    if ($('#autoApply').is(':checked'))
+                        options.autoApply = true;
 
-                        if ($('#dateLimit').is(':checked'))
-                    options.dateLimit = {days: 7};
+                    if ($('#dateLimit').is(':checked'))
+                        options.dateLimit = {days: 7};
 
-                        if ($('#ranges').is(':checked')) {
-                            options.ranges = {
+                    if ($('#ranges').is(':checked')) {
+                        options.ranges = {
                             'Today': [moment(), moment()],
                             'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
                             'Last 7 Days': [moment().subtract(6, 'days'), moment()],
                             'Last 30 Days': [moment().subtract(29, 'days'), moment()],
                             'This Month': [moment().startOf('month'), moment().endOf('month')],
-                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                    };
+                            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                        };
                     }
 
-                        if ($('#locale').is(':checked')) {
+                    if ($('#locale').is(':checked')) {
                         $('#rtl-wrap').show();
-                            options.locale = {
+                        options.locale = {
                             direction: $('#rtl').is(':checked') ? 'rtl' : 'ltr',
                             format: 'MM/DD/YYYY HH:mm',
                             separator: ' - ',
@@ -417,62 +417,62 @@
                             customRangeLabel: 'Custom',
                             daysOfWeek: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
                             monthNames: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-                        firstDay: 1
-                    };
-                        } else {
-                    $('#rtl-wrap').hide();
+                            firstDay: 1
+                        };
+                    } else {
+                        $('#rtl-wrap').hide();
                     }
 
-                        if (!$('#linkedCalendars').is(':checked'))
-                    options.linkedCalendars = false;
+                    if (!$('#linkedCalendars').is(':checked'))
+                        options.linkedCalendars = false;
 
-                        if (!$('#autoUpdateInput').is(':checked'))
-                    options.autoUpdateInput = false;
+                    if (!$('#autoUpdateInput').is(':checked'))
+                        options.autoUpdateInput = false;
 
-                        if (!$('#showCustomRangeLabel').is(':checked'))
-                    options.showCustomRangeLabel = false;
+                    if (!$('#showCustomRangeLabel').is(':checked'))
+                        options.showCustomRangeLabel = false;
 
-                        if ($('#alwaysShowCalendars').is(':checked'))
-                    options.alwaysShowCalendars = true;
+                    if ($('#alwaysShowCalendars').is(':checked'))
+                        options.alwaysShowCalendars = true;
 
-                        if ($('#parentEl').val().length)
-                    options.parentEl = $('#parentEl').val();
+                    if ($('#parentEl').val().length)
+                        options.parentEl = $('#parentEl').val();
 
-                        if ($('#startDate').val().length)
-                    options.startDate = $('#startDate').val();
+                    if ($('#startDate').val().length)
+                        options.startDate = $('#startDate').val();
 
-                        if ($('#endDate').val().length)
-                    options.endDate = $('#endDate').val();
+                    if ($('#endDate').val().length)
+                        options.endDate = $('#endDate').val();
 
-                        if ($('#minDate').val().length)
-                    options.minDate = $('#minDate').val();
+                    if ($('#minDate').val().length)
+                        options.minDate = $('#minDate').val();
 
-                        if ($('#maxDate').val().length)
-                    options.maxDate = $('#maxDate').val();
+                    if ($('#maxDate').val().length)
+                        options.maxDate = $('#maxDate').val();
 
-                        if ($('#opens').val().length && $('#opens').val() != 'right')
-                    options.opens = $('#opens').val();
+                    if ($('#opens').val().length && $('#opens').val() != 'right')
+                        options.opens = $('#opens').val();
 
-                        if ($('#drops').val().length && $('#drops').val() != 'down')
-                    options.drops = $('#drops').val();
+                    if ($('#drops').val().length && $('#drops').val() != 'down')
+                        options.drops = $('#drops').val();
 
-                        if ($('#buttonClasses').val().length && $('#buttonClasses').val() != 'btn btn-sm')
-                    options.buttonClasses = $('#buttonClasses').val();
+                    if ($('#buttonClasses').val().length && $('#buttonClasses').val() != 'btn btn-sm')
+                        options.buttonClasses = $('#buttonClasses').val();
 
-                        if ($('#applyClass').val().length && $('#applyClass').val() != 'btn-success')
-                    options.applyClass = $('#applyClass').val();
+                    if ($('#applyClass').val().length && $('#applyClass').val() != 'btn-success')
+                        options.applyClass = $('#applyClass').val();
 
-                        if ($('#cancelClass').val().length && $('#cancelClass').val() != 'btn-default')
-                    options.cancelClass = $('#cancelClass').val();
+                    if ($('#cancelClass').val().length && $('#cancelClass').val() != 'btn-default')
+                        options.cancelClass = $('#cancelClass').val();
 
                     $('#config-text').val("$('#demo').daterangepicker(" + JSON.stringify(options, null, '    ') + ", function(start, end, label) {\n  console.log(\"New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')\");\n});");
 
-                        $('#config-demo').daterangepicker(options, function (start, end, label) {
-                    console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
-                });
+                    $('#config-demo').daterangepicker(options, function (start, end, label) {
+                        console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+                    });
 
-            }
-        }(jQuery));
+                }
+            }(jQuery));
         });
     </script>
 </div>
