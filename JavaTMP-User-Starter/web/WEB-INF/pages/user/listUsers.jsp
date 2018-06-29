@@ -17,6 +17,10 @@
             <i class="fa fa-user-edit fa-fw"></i>
             Update Complete User
         </button>
+        <button id="UserList-DeleteSelectedUserId" type="button" class="btn btn-primary">
+            <i class="fa fa-times fa-fw"></i>
+            Delete User
+        </button>
     </div>
     <table cellspacing="0" class="table table-condensed table-bordered table-hover" id="UsersListTableId">
         <thead>
@@ -199,13 +203,17 @@
 
             var addNewUserPopupButton = $("#UserList-AddNewUserPopupId");
             var updateUserButton = $("#UserList-UpdateSelectedUserId");
+            var deleteUserButton = $("#UserList-DeleteSelectedUserId");
+
             var userTableElement = $('#UsersListTableId');
 //            updateUserButton.addClass("disabled");
             function disabled() {
                 updateUserButton.prop("disabled", true);
+                deleteUserButton.prop("disabled", true);
             }
             function enabled() {
                 updateUserButton.prop("disabled", false);
+                deleteUserButton.prop("disabled", false);
             }
             disabled();
             $.fn.dataTable.ext.errMode = 'none';
@@ -771,6 +779,82 @@
                         url: javatmp.settings.contextPath + "/user/GetUpdateUserPopupController",
                         ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                     });
+                } else {
+                    BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
+                }
+
+            });
+
+            deleteUserButton.on("click", function (event) {
+                var selectedData = table.rows({selected: true}).data();
+                if (selectedData.length > 0) {
+                    var selectedRecord = selectedData[0];
+                    //                    alert("row[" + JSON.stringify(selectedRecord) + "]");
+                    var passData = {};
+                    passData.callback = "actionCallback";
+                    passData.id = selectedRecord.id;
+                    BootstrapModalWrapperFactory.createModal({
+                        message: "Are you sure you want to delete user ?",
+                        title: "Confiramation",
+                        closable: false,
+                        closeByBackdrop: false,
+                        buttons: [
+                            {
+                                label: "Cancel",
+                                cssClass: "btn btn-secondary",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    return modalWrapper.hide();
+                                }
+                            },
+                            {
+                                label: "Delete User " + selectedRecord.userName,
+                                cssClass: "btn btn-danger",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    modalWrapper.hide();
+                                    var m = BootstrapModalWrapperFactory.createModal({
+                                        message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
+                                        closable: false,
+                                        closeByBackdrop: false,
+                                        closeByKeyboard: false
+                                    });
+                                    m.originalModal.find(".modal-dialog").css({transition: 'all 0.5s'});
+                                    m.show();
+                                    $.ajax({
+                                        type: "POST",
+                                        url: javatmp.settings.contextPath + "/user/DeleteUserController",
+                                        data: passData,
+//                                        dataType: "json",
+//                                        contentType: "application/json; charset=UTF-8",
+                                        success: function (data) {
+                                            m.updateMessage(data.message);
+                                            m.updateClosable(true);
+                                            m.updateTitle("Deleted Action Response");
+
+                                            toastr.success(data.message, 'SUCCESS', {
+                                                timeOut: 3000,
+                                                progressBar: true,
+                                                rtl: javatmp.settings.isRTL,
+                                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                                            });
+
+                                            // refresh users table:
+                                            table.columns.adjust().draw();
+                                        },
+                                        error: function (data) {
+                                            m.hide();
+                                            toastr.error("Could Not complete the action", 'ERROR', {
+                                                timeOut: 3000,
+                                                progressBar: true,
+                                                rtl: javatmp.settings.isRTL,
+                                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                                            });
+//                                            alert("error" + JSON.stringify(data));
+                                        }
+                                    });
+                                }
+                            }
+                        ]
+                    }).show();
                 } else {
                     BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
                 }
