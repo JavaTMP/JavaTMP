@@ -46,7 +46,7 @@ public class DeleteUserController extends HttpServlet {
             dbUser = us.readUserByUserId(userToBeUpdated);
             logger.info("Existing DB User to be Updated is [" + MvcHelper.toString(dbUser) + "]");
             int updateStatus = 0;
-//            updateStatus = us.updateCompleteUser(userToBeUpdated);
+            updateStatus = us.deleteUser(userToBeUpdated);
 
             responseMessage.setOverAllStatus(true);
             responseMessage.setMessage("User deleted status [" + updateStatus + "]");
@@ -58,12 +58,6 @@ public class DeleteUserController extends HttpServlet {
             responseMessage.setMessage(e.getMessage());
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             responseMessage.setStatusCode(HttpServletResponse.SC_BAD_REQUEST);
-        } catch (IllegalStateException e) {
-            logger.info("ERROR : " + e.getMessage());
-            responseMessage.setOverAllStatus(false);
-            responseMessage.setMessage("The file to be uploaded exceeds its maximum permitted size of 51200 bytes - " + e.getMessage());
-            response.setStatus(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE);
-            responseMessage.setStatusCode(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE);
         } catch (IllegalAccessException ex) {
             Logger.getLogger(DeleteUserController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InvocationTargetException ex) {

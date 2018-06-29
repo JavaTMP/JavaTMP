@@ -25,7 +25,7 @@
     <table cellspacing="0" class="table table-condensed table-bordered table-hover" id="UsersListTableId">
         <thead>
             <tr id="UserListMainHeader">
-                <th style="width: 100px;"><p style="width: 100px;">ID</p></th>
+                <th style="width: 75px;"><p style="width: 75px;">ID</p></th>
                 <th style="width: 150px;"><p style="width: 150px;">Username</p></th>
                 <th style="width: 150px;"><p style="width: 150px;">First name</p></th>
                 <th style="width: 150px;"><p style="width: 150px;">Last name</p></th>
@@ -41,7 +41,7 @@
                 <th style="width: 200px;"><p style="width: 200px;">Creation Date</p></th>
             </tr>
             <tr id="UserListFilterHeader">
-                <th style="width: 100px;">
+                <th style="width: 75px;">
                     <input id="userlist-id-filter" class="form-control"/>
                 </th>
                 <th style="width: 150px;">
@@ -218,7 +218,6 @@
             disabled();
             $.fn.dataTable.ext.errMode = 'none';
             var table = userTableElement.DataTable({
-                //                responsive: true,
                 dom: "<'row'<'col-sm-12 p-0'tr>>" +
                         "<'row'<'col-sm-6'i><'col-sm-6 pt-2 text-right'l>>"
                         + "<'row'<'col-sm-12'p>>"
@@ -589,10 +588,10 @@
                     }
                 },
                 columns: [
-                    {data: 'id', className: "", name: "id", width: 100,
+                    {data: 'id', className: "", name: "id", width: 75,
                         "render": function (data, type, row) {
                             if (type === "display") {
-                                return "<p class='m-0 p-0' style='width: 100px;'>" + data + "</p>";
+                                return "<p class='m-0 p-0' style='width: 105px;'>" + data + "</p>";
                             } else {
                                 return data;
                             }
@@ -841,8 +840,17 @@
                                             table.columns.adjust().draw();
                                         },
                                         error: function (data) {
-                                            m.hide();
-                                            toastr.error("Could Not complete the action", 'ERROR', {
+                                            var errorMsg = "Could Not complete the action";
+                                            try {
+                                                var jsonData = $.parseJSON(data.responseText);
+                                                errorMsg = jsonData.message;
+                                            } catch (error) {
+                                            }
+                                            m.updateMessage(errorMsg);
+                                            m.updateClosable(true);
+                                            m.updateTitle("Error Response");
+
+                                            toastr.error(errorMsg, 'ERROR', {
                                                 timeOut: 3000,
                                                 progressBar: true,
                                                 rtl: javatmp.settings.isRTL,

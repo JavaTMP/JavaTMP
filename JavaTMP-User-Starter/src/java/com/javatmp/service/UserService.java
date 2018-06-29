@@ -79,6 +79,21 @@ public class UserService {
         return updateStatus;
     }
 
+    public int deleteUser(User userToBeDeleted) {
+        int updateStatus = 0;
+        for (User dbUser : dBFaker.getUsersList()) {
+            if (dbUser.getId().equals(userToBeDeleted.getId())) {
+                if (dbUser.getStatus().equals((short) -1)) {
+                    throw new IllegalArgumentException("user is already deleted !!!");
+                }
+                dbUser.setStatus((short) -1);
+                updateStatus = 1;
+                break;
+            }
+        }
+        return updateStatus;
+    }
+
     public DataTableResults<User> listUsers(DataTableRequest tableRequest) {
         List<User> retList = new LinkedList<>();
         List<User> database = this.dBFaker.getUsers();
