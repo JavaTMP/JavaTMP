@@ -4,28 +4,29 @@
 <div class="dynamic-ajax-content m-0 p-0">
     <div class="user-list-btn-toolbar my-3" role="toolbar" aria-label="Toolbar with button groups">
         <button type="button" class="btn btn-primary"
+                action-name="Add-New-User-Action"
                 actionType="action-ref-href"
                 action-ref-by-href="${pageContext.request.contextPath}/user/CreateUserController">
             <i class="fa fa-fw fa-user"></i>
             Add New User
         </button>
-        <button id="UserList-AddNewUserPopupId" type="button" class="btn btn-primary">
+        <button action-name="Add-New-User-Popup-Action" id="UserList-AddNewUserPopupId" type="button" class="btn btn-primary">
             <i class="fa fa-external-link-alt fa-fw"></i>
             Add New User Popup
         </button>
-        <button id="UserList-UpdateSelectedUserId" type="button" class="btn btn-primary">
+        <button action-name="Update-Complete-User-Action" id="UserList-UpdateSelectedUserId" type="button" class="btn btn-primary">
             <i class="fa fa-user-edit fa-fw"></i>
             Update Complete User
         </button>
-        <button id="UserList-DeleteSelectedUserId" type="button" class="btn btn-primary">
+        <button action-name="Delete-User-Action" id="UserList-DeleteSelectedUserId" type="button" class="btn btn-primary">
             <i class="fa fa-user-times fa-fw text-danger"></i>
             Delete User
         </button>
-        <button id="UserList-ActivateSelectedUserId" type="button" class="btn btn-primary">
+        <button action-name="Activate-User-Action" id="UserList-ActivateSelectedUserId" type="button" class="btn btn-primary">
             <i class="fa fa-user-check fa-fw text-success"></i>
             Activate User
         </button>
-        <button id="UserList-DeactivateSelectedUserId" type="button" class="btn btn-primary">
+        <button action-name="Deactivate-User-Action" id="UserList-DeactivateSelectedUserId" type="button" class="btn btn-primary">
             <i class="fa fa-user-slash fa-fw text-warning"></i>
             Deactivate User
         </button>
@@ -148,6 +149,33 @@
         </thead>
         <tbody></tbody>
     </table>
+    <ul id="contextMenu" class="dropdown-menu" role="menu" style="display:none;position: fixed;" >
+        <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Add-New-User-Action">
+            <i class="fa fa-fw fa-user text-primary"></i>
+            Add New User
+        </a>
+        <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Add-New-User-Popup-Action">
+            <i class="fa fa-external-link-alt fa-fw text-primary"></i>
+            Add New User Popup
+        </a>
+        <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Update-Complete-User-Action">
+            <i class="fa fa-user-edit fa-fw text-primary"></i>
+            Update Complete User
+        </a>
+        <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Activate-User-Action">
+            <i class="fa fa-user-check fa-fw text-success"></i>
+            Activate User
+        </a>
+        <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Deactivate-User-Action">
+            <i class="fa fa-user-slash fa-fw text-warning"></i>
+            Deactivate User
+        </a>
+        <div class="dropdown-divider"></div>
+        <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Delete-User-Action">
+            <i class="fa fa-user-times fa-fw text-danger"></i>
+            Delete User
+        </a>
+    </ul>
     <style type="text/css">
         table.dataTable tbody tr {
             cursor: pointer;
@@ -743,13 +771,45 @@
                         }}
                 ]
             });
-
-            $('tbody', userTableElement).on('contextmenu', 'tr', function () {
+            function getMenuPosition($contextMenu, mouse, direction, scrollDir, isRTL) {
+                var win = $(window)[direction]();
+                var scroll = $(window)[scrollDir]();
+                var menu = $($contextMenu)[direction]();
+//                var position = mouse + scroll;
+                var position = mouse + 0;
+                if (direction === "width" && (position - $($contextMenu)[direction]() > 0) && isRTL) {
+                    position = position - $($contextMenu)[direction]();
+                } else {
+                    // opening menu would pass the side of the page
+                    if (mouse + menu > win && menu < mouse)
+                        position -= menu;
+                }
+                return position;
+            }
+            $('tbody', userTableElement).on('contextmenu', 'tr[data-row-id]', function (e) {
                 var rowId = $(this).data("row-id");
                 if ($(this).hasClass("selected") === false) {
                     table.row(this).select();
                 }
-                alert("context on " + rowId);
+                if (e.ctrlKey)
+                    return;
+                var $contextMenu = $("#contextMenu");
+                $contextMenu.on("click", "a", function () {
+                    $contextMenu.hide();
+                });
+                $('body').on("click", function () {
+                    $contextMenu.hide();
+                });
+                $contextMenu.css({
+                    display: "block",
+//                        left: e.pageX,
+//                        top: e.pageY
+                    left: getMenuPosition($contextMenu, e.clientX, 'width', 'scrollLeft', javatmp.settings.isRTL),
+                    right: "auto",
+                    top: getMenuPosition($contextMenu, e.clientY, 'height', 'scrollTop', javatmp.settings.isRTL)
+                });
+
+                return false;
             });
 
             table.on('select', function (e, dt, type, indexes) {
