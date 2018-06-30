@@ -30,7 +30,7 @@
                 <th style="width: 150px;"><p style="width: 150px;">First name</p></th>
                 <th style="width: 150px;"><p style="width: 150px;">Last name</p></th>
                 <th style="width: 200px;"><p style="width: 200px;">Date Of Birth</p></th>
-                <th style="width: 100px;"><p style="width: 100px;">Age</p></th>
+                <th style="width: 40px;"><p style="width: 40px;">Age</p></th>
                 <th style="width: 200px;"><p style="width: 200px;">E-mail</p></th>
                 <th style="width: 100px;"><p style="width: 100px;">Status</p></th>
                 <th style="width: 200px;"><p style="width: 200px;">Country Name</p></th>
@@ -56,7 +56,7 @@
                 <th style="width: 200px;">
                     <input id="userlist-birthdate-filter" class="form-control"/>
                 </th>
-                <th style="width: 100px;">
+                <th style="width: 40px;">
                     <input id="userlist-age-filter" class="form-control"/>
                 </th>
                 <th style="width: 200px;">
@@ -641,11 +641,11 @@
                         }
                     },
                     {
-                        data: 'birthDate', name: "age", "type": "date", width: 100,
+                        data: 'birthDate', name: "age", "type": "date", width: 40,
                         "render": function (data, type, row) {
                             data = Math.ceil(moment().diff(moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ"), 'years', true));
                             if (type === "display") {
-                                return "<p class='m-0 p-0' style='width: 100px;'>" + data + "</p>";
+                                return "<p class='m-0 p-0' style='width: 40px;'>" + data + "</p>";
                             } else {
                                 return data;
                             }
