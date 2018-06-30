@@ -1,10 +1,31 @@
 package com.javatmp.domain;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 
-public class User {
+@Entity
+@Table(name = "user", uniqueConstraints = {
+    @UniqueConstraint(
+            columnNames = {"userName"},
+            name = "user_userName_uni"
+    )
+})
+public class User implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String userName;
     private String password;
     private String firstName;
@@ -18,8 +39,10 @@ public class User {
     private String theme;
     private String timezone;
     private Long profilePicDocumentId;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
 
+    @Transient
     private Document profilePicDocument;
 
     public User() {

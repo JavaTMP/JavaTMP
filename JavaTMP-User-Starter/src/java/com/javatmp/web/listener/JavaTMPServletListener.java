@@ -1,10 +1,14 @@
 package com.javatmp.web.listener;
 
+import com.javatmp.domain.User_;
 import com.javatmp.service.ServicesFactory;
 import com.javatmp.util.Constants;
 import java.util.Date;
 import java.util.TimeZone;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
@@ -21,6 +25,10 @@ public class JavaTMPServletListener implements ServletContextListener {
         // just for demo:
         // -Duser.timezone=UTC
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
+
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("AppPU");
+        EntityManager entityManager = factory.createEntityManager();
+
         sf = new ServicesFactory();
         sce.getServletContext().setAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME, sf);
         logger.info("****** End @ [" + new Date() + "] *********");
