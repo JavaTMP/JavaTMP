@@ -18,8 +18,16 @@
             Update Complete User
         </button>
         <button id="UserList-DeleteSelectedUserId" type="button" class="btn btn-primary">
-            <i class="fa fa-times fa-fw"></i>
+            <i class="fa fa-user-times fa-fw text-danger"></i>
             Delete User
+        </button>
+        <button id="UserList-ActivateSelectedUserId" type="button" class="btn btn-primary">
+            <i class="fa fa-user-check fa-fw text-success"></i>
+            Activate User
+        </button>
+        <button id="UserList-DeactivateSelectedUserId" type="button" class="btn btn-primary">
+            <i class="fa fa-user-slash fa-fw text-warning"></i>
+            Deactivate User
         </button>
     </div>
     <table cellspacing="0" class="table table-condensed table-bordered table-hover" id="UsersListTableId">
@@ -205,15 +213,21 @@
             var updateUserButton = $("#UserList-UpdateSelectedUserId");
             var deleteUserButton = $("#UserList-DeleteSelectedUserId");
 
+            var activateUserButton = $("#UserList-ActivateSelectedUserId");
+            var deActivateUserButton = $("#UserList-DeactivateSelectedUserId");
             var userTableElement = $('#UsersListTableId');
 //            updateUserButton.addClass("disabled");
             function disabled() {
                 updateUserButton.prop("disabled", true);
                 deleteUserButton.prop("disabled", true);
+                activateUserButton.prop("disabled", true);
+                deActivateUserButton.prop("disabled", true);
             }
             function enabled() {
                 updateUserButton.prop("disabled", false);
                 deleteUserButton.prop("disabled", false);
+                activateUserButton.prop("disabled", false);
+                deActivateUserButton.prop("disabled", false);
             }
             disabled();
             $.fn.dataTable.ext.errMode = 'none';
@@ -783,7 +797,6 @@
                 }
 
             });
-
             deleteUserButton.on("click", function (event) {
                 var selectedData = table.rows({selected: true}).data();
                 if (selectedData.length > 0) {
@@ -830,7 +843,7 @@
                                             m.updateTitle("Deleted Action Response");
 
                                             toastr.success(data.message, 'SUCCESS', {
-                                                timeOut: 3000,
+                                                timeOut: 5000,
                                                 progressBar: true,
                                                 rtl: javatmp.settings.isRTL,
                                                 positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
@@ -851,7 +864,7 @@
                                             m.updateTitle("Error Response");
 
                                             toastr.error(errorMsg, 'ERROR', {
-                                                timeOut: 3000,
+                                                timeOut: 5000,
                                                 progressBar: true,
                                                 rtl: javatmp.settings.isRTL,
                                                 positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
@@ -868,7 +881,174 @@
                 }
 
             });
+            activateUserButton.on("click", function (event) {
+                var selectedData = table.rows({selected: true}).data();
+                if (selectedData.length > 0) {
+                    var selectedRecord = selectedData[0];
+                    //                    alert("row[" + JSON.stringify(selectedRecord) + "]");
+                    var passData = {};
+                    passData.callback = "actionCallback";
+                    passData.id = selectedRecord.id;
+                    BootstrapModalWrapperFactory.createModal({
+                        message: "Are you sure you want to Activate user ?",
+                        title: "Confiramation",
+                        closable: false,
+                        closeByBackdrop: false,
+                        buttons: [
+                            {
+                                label: "Cancel",
+                                cssClass: "btn btn-secondary",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    return modalWrapper.hide();
+                                }
+                            },
+                            {
+                                label: "Activate User " + selectedRecord.userName,
+                                cssClass: "btn btn-primary",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    modalWrapper.hide();
+                                    var m = BootstrapModalWrapperFactory.createModal({
+                                        message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
+                                        closable: false,
+                                        closeByBackdrop: false,
+                                        closeByKeyboard: false
+                                    });
+                                    m.originalModal.find(".modal-dialog").css({transition: 'all 0.5s'});
+                                    m.show();
+                                    $.ajax({
+                                        type: "POST",
+                                        url: javatmp.settings.contextPath + "/user/ActivateUserController",
+                                        data: passData,
+//                                        dataType: "json",
+//                                        contentType: "application/json; charset=UTF-8",
+                                        success: function (data) {
+                                            m.updateMessage(data.message);
+                                            m.updateClosable(true);
+                                            m.updateTitle("Activate Action Response");
 
+                                            toastr.success(data.message, 'SUCCESS', {
+                                                timeOut: 5000,
+                                                progressBar: true,
+                                                rtl: javatmp.settings.isRTL,
+                                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                                            });
+
+                                            // refresh users table:
+                                            table.columns.adjust().draw();
+                                        },
+                                        error: function (data) {
+                                            var errorMsg = "Could Not complete the action";
+                                            try {
+                                                var jsonData = $.parseJSON(data.responseText);
+                                                errorMsg = jsonData.message;
+                                            } catch (error) {
+                                            }
+                                            m.updateMessage(errorMsg);
+                                            m.updateClosable(true);
+                                            m.updateTitle("Error Response");
+
+                                            toastr.error(errorMsg, 'ERROR', {
+                                                timeOut: 5000,
+                                                progressBar: true,
+                                                rtl: javatmp.settings.isRTL,
+                                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                                            });
+//                                            alert("error" + JSON.stringify(data));
+                                        }
+                                    });
+                                }
+                            }
+                        ]
+                    }).show();
+                } else {
+                    BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
+                }
+
+            });
+            deActivateUserButton.on("click", function (event) {
+                var selectedData = table.rows({selected: true}).data();
+                if (selectedData.length > 0) {
+                    var selectedRecord = selectedData[0];
+                    //                    alert("row[" + JSON.stringify(selectedRecord) + "]");
+                    var passData = {};
+                    passData.callback = "actionCallback";
+                    passData.id = selectedRecord.id;
+                    BootstrapModalWrapperFactory.createModal({
+                        message: "Are you sure you want to Deactivate user ?",
+                        title: "Confiramation",
+                        closable: false,
+                        closeByBackdrop: false,
+                        buttons: [
+                            {
+                                label: "Cancel",
+                                cssClass: "btn btn-secondary",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    return modalWrapper.hide();
+                                }
+                            },
+                            {
+                                label: "Deactivate User " + selectedRecord.userName,
+                                cssClass: "btn btn-warning",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    modalWrapper.hide();
+                                    var m = BootstrapModalWrapperFactory.createModal({
+                                        message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
+                                        closable: false,
+                                        closeByBackdrop: false,
+                                        closeByKeyboard: false
+                                    });
+                                    m.originalModal.find(".modal-dialog").css({transition: 'all 0.5s'});
+                                    m.show();
+                                    $.ajax({
+                                        type: "POST",
+                                        url: javatmp.settings.contextPath + "/user/DeactivateUserController",
+                                        data: passData,
+//                                        dataType: "json",
+//                                        contentType: "application/json; charset=UTF-8",
+                                        success: function (data) {
+                                            m.updateMessage(data.message);
+                                            m.updateClosable(true);
+                                            m.updateTitle("Deactivate Action Response");
+
+                                            toastr.success(data.message, 'SUCCESS', {
+                                                timeOut: 5000,
+                                                progressBar: true,
+                                                rtl: javatmp.settings.isRTL,
+                                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                                            });
+
+                                            // refresh users table:
+                                            table.columns.adjust().draw();
+                                        },
+                                        error: function (data) {
+                                            var errorMsg = "Could Not complete the action";
+                                            try {
+                                                var jsonData = $.parseJSON(data.responseText);
+                                                errorMsg = jsonData.message;
+                                            } catch (error) {
+                                            }
+                                            m.updateMessage(errorMsg);
+                                            m.updateClosable(true);
+                                            m.updateTitle("Error Response");
+
+                                            toastr.error(errorMsg, 'ERROR', {
+                                                timeOut: 5000,
+                                                progressBar: true,
+                                                rtl: javatmp.settings.isRTL,
+                                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                                            });
+//                                            alert("error" + JSON.stringify(data));
+                                        }
+                                    });
+                                }
+                            }
+                        ]
+                    }).show();
+                } else {
+                    BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
+                }
+
+            });
             window.actionCallback = function (callbackData) {
                 if (callbackData.cancel === true) {
                 } else {

@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/user/DeleteUserController")
-public class DeleteUserController extends HttpServlet {
+@WebServlet("/user/ActivateUserController")
+public class ActivateUserController extends HttpServlet {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
 
@@ -37,15 +37,15 @@ public class DeleteUserController extends HttpServlet {
             User dbUser = null;
 
             MvcHelper.populateBeanByRequestParameters(request, userToBeUpdated);
-            logger.info("User to be deleted is [" + MvcHelper.toString(userToBeUpdated) + "]");
+            logger.info("User to be Activated is [" + MvcHelper.toString(userToBeUpdated) + "]");
 
             dbUser = us.readUserByUserId(userToBeUpdated);
             logger.info("Existing DB User to be Updated is [" + MvcHelper.toString(dbUser) + "]");
             int updateStatus = 0;
-            updateStatus = us.deleteUser(userToBeUpdated);
+            updateStatus = us.activateUser(userToBeUpdated);
 
             responseMessage.setOverAllStatus(true);
-            responseMessage.setMessage("User deleted status [" + updateStatus + "]");
+            responseMessage.setMessage("User Activated Successfully with status [" + updateStatus + "]");
             responseMessage.setData(userToBeUpdated);
 
         } catch (IllegalArgumentException e) {
@@ -55,9 +55,9 @@ public class DeleteUserController extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             responseMessage.setStatusCode(HttpServletResponse.SC_BAD_REQUEST);
         } catch (IllegalAccessException ex) {
-            Logger.getLogger(DeleteUserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ActivateUserController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InvocationTargetException ex) {
-            Logger.getLogger(DeleteUserController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ActivateUserController.class.getName()).log(Level.SEVERE, null, ex);
         }
         MvcHelper.sendMessageAsJson(response, responseMessage);
 

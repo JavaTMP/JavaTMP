@@ -94,6 +94,36 @@ public class UserService {
         return updateStatus;
     }
 
+    public int activateUser(User userToBeUpdated) {
+        int updateStatus = 0;
+        for (User dbUser : dBFaker.getUsersList()) {
+            if (dbUser.getId().equals(userToBeUpdated.getId())) {
+                if (dbUser.getStatus().equals((short) 1)) {
+                    throw new IllegalArgumentException("user is already Active !!!");
+                }
+                dbUser.setStatus((short) 1);
+                updateStatus = 1;
+                break;
+            }
+        }
+        return updateStatus;
+    }
+
+    public int deActivateUser(User userToBeUpdated) {
+        int updateStatus = 0;
+        for (User dbUser : dBFaker.getUsersList()) {
+            if (dbUser.getId().equals(userToBeUpdated.getId())) {
+                if (dbUser.getStatus().equals((short) 0)) {
+                    throw new IllegalArgumentException("user is already Deactivate !!!");
+                }
+                dbUser.setStatus((short) 0);
+                updateStatus = 1;
+                break;
+            }
+        }
+        return updateStatus;
+    }
+
     public DataTableResults<User> listUsers(DataTableRequest tableRequest) {
         List<User> retList = new LinkedList<>();
         List<User> database = this.dBFaker.getUsers();
