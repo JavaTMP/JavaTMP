@@ -1,3 +1,14 @@
+CREATE TABLE document (
+    documentId BIGINT NOT NULL AUTO_INCREMENT,
+    documentName varchar(255) NOT NULL,
+    documentSize BIGINT NOT NULL,
+    contentType varchar(255) NOT NULL,
+    documentContent BLOB NOT NULL,
+    creationDate TIMESTAMP NOT NULL,
+    randomHash BIGINT NOT NULL,
+    CONSTRAINT document_documentId_pk PRIMARY KEY (documentId)
+) ENGINE=InnoDB;
+
 CREATE TABLE user (
     id BIGINT NOT NULL AUTO_INCREMENT,
     userName varchar(48) NOT NULL,
@@ -14,6 +25,9 @@ CREATE TABLE user (
     timezone varchar(48) NOT NULL,
     profilePicDocumentId BIGINT NOT NULL,
     creationDate TIMESTAMP NOT NULL,
-    CONSTRAINT `user-id-pk` PRIMARY KEY (id)
+    CONSTRAINT user_id_pk PRIMARY KEY (id),
+    CONSTRAINT user_userName_uni UNIQUE(userName),
+    CONSTRAINT user_profilePicDocumentId_fk FOREIGN KEY (profilePicDocumentId)
+    REFERENCES document (documentId)
+    ON DELETE CASCADE
 ) ENGINE=InnoDB;
-ALTER TABLE user ADD CONSTRAINT user_userName_uni UNIQUE(userName);

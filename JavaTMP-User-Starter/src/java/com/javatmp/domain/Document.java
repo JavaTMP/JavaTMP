@@ -1,14 +1,29 @@
 package com.javatmp.domain;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
-public class Document {
+@Entity
+@Table(name = "document")
+public class Document implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long documentId;
     private String documentName;
     private long documentSize;
     private String contentType;
+    @Lob
     private byte[] documentContent;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
     private Long randomHash;
 

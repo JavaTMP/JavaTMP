@@ -5,6 +5,7 @@
  */
 package com.javatmp;
 
+import com.javatmp.domain.Document;
 import com.javatmp.domain.User;
 import com.javatmp.service.DBFaker;
 import com.javatmp.util.MD5Util;
@@ -40,7 +41,11 @@ public class TestingHibernateJPA {
 
             List<User> users = faker.getUsers();
             for (User user : users) {
+                Document document = user.getProfilePicDocument();
+                document.setDocumentId(null);
+                em.persist(document);
                 user.setId(null);
+                user.setProfilePicDocumentId(document.getDocumentId());
                 em.persist(user);
             }
 //
