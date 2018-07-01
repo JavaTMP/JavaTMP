@@ -6,10 +6,12 @@
 package com.javatmp;
 
 import com.javatmp.domain.User;
+import com.javatmp.service.DBFaker;
 import com.javatmp.util.MD5Util;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Date;
+import java.util.List;
 import java.util.TimeZone;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -29,27 +31,35 @@ public class TestingHibernateJPA {
     public static void main(String[] args) throws SQLException {
         EntityManagerFactory factory = null;
         EntityManager em = null;
+        DBFaker faker = new DBFaker();
         try {
             factory = Persistence.createEntityManagerFactory("AppPU");
             em = factory.createEntityManager();
 
             em.getTransaction().begin();
-            User newUser = new User();
-            newUser.setUserName("user1");
-            newUser.setPassword(MD5Util.convertToMD5(newUser.getUserName()));
-            newUser.setFirstName("firstName");
-            newUser.setLastName("lastName");
-            newUser.setStatus((short) 1);
-            newUser.setCreationDate(new Date());
-            newUser.setEmail("support@javatmp.com");
-            newUser.setLang("en");
-            newUser.setTheme("default");
-            newUser.setTimezone(TimeZone.getTimeZone("UTC").getID());
-            newUser.setBirthDate(new Date(-399571200000L));
-            newUser.setCountryId("US");
-            newUser.setAddress("<p>Not provided yet</p>");
-            newUser.setProfilePicDocumentId(0L);
-            em.persist(newUser);
+
+            List<User> users = faker.getUsers();
+            for (User user : users) {
+                user.setId(null);
+                em.persist(user);
+            }
+//
+//            User newUser = new User();
+//            newUser.setUserName("user2");
+//            newUser.setPassword(MD5Util.convertToMD5(newUser.getUserName()));
+//            newUser.setFirstName("firstName");
+//            newUser.setLastName("lastName");
+//            newUser.setStatus((short) 1);
+//            newUser.setCreationDate(new Date());
+//            newUser.setEmail("support@javatmp.com");
+//            newUser.setLang("en");
+//            newUser.setTheme("default");
+//            newUser.setTimezone(TimeZone.getTimeZone("UTC").getID());
+//            newUser.setBirthDate(new Date(-399571200000L));
+//            newUser.setCountryId("US");
+//            newUser.setAddress("<p>Not provided yet</p>");
+//            newUser.setProfilePicDocumentId(0L);
+//            em.persist(newUser);
 
             em.getTransaction().commit();
         } catch (PersistenceException e) {
