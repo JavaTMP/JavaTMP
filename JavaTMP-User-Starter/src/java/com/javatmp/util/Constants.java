@@ -13,4 +13,6 @@ public class Constants {
     public static final String RESPONSES_CHANGE_LANG_SUCCESS_MSG = "";
 
     public static final String SERVICES_FACTORY_ATTRIBUTE_NAME = "servicesFactory";
+
+    public static final String DEFAULT_PERSISTENT_UNIT_NAME = "AppPU";
 }

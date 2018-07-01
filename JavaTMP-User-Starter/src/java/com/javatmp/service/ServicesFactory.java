@@ -7,6 +7,8 @@ public class ServicesFactory {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
     private DBFaker dbFaker;
+    private JpaDaoHelper jpaDaoHelper;
+
     private TimezoneService timezoneService;
     private ThemeService themeService;
     private LanguageService languageService;
@@ -14,9 +16,10 @@ public class ServicesFactory {
     private UserService userService;
     private DocumentService documentService;
 
-    public ServicesFactory() {
+    public ServicesFactory(String persistentUnitName) {
         logger.info("*** Start ServicesFactory Constructor @ [" + new Date() + "]");
         this.dbFaker = new DBFaker();
+        this.jpaDaoHelper = new JpaDaoHelper(persistentUnitName);
         this.timezoneService = new TimezoneService(dbFaker);
         this.themeService = new ThemeService(dbFaker);
         this.languageService = new LanguageService(dbFaker);

@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS appdb;
+USE appdb;
+
 CREATE TABLE document (
     documentId BIGINT NOT NULL AUTO_INCREMENT,
     documentName varchar(255) NOT NULL,
@@ -23,11 +26,10 @@ CREATE TABLE user (
     lang varchar(48) NOT NULL,
     theme varchar(48) NOT NULL,
     timezone varchar(48) NOT NULL,
-    profilePicDocumentId BIGINT NOT NULL,
+    profilePicDocumentId BIGINT,
     creationDate TIMESTAMP NOT NULL,
     CONSTRAINT user_id_pk PRIMARY KEY (id),
     CONSTRAINT user_userName_uni UNIQUE(userName),
     CONSTRAINT user_profilePicDocumentId_fk FOREIGN KEY (profilePicDocumentId)
     REFERENCES document (documentId)
-    ON DELETE CASCADE
 ) ENGINE=InnoDB;

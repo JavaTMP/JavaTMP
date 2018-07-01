@@ -25,11 +25,7 @@ public class JavaTMPServletListener implements ServletContextListener {
         // just for demo:
         // -Duser.timezone=UTC
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
-
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("AppPU");
-        EntityManager entityManager = factory.createEntityManager();
-
-        sf = new ServicesFactory();
+        sf = new ServicesFactory(Constants.DEFAULT_PERSISTENT_UNIT_NAME);
         sce.getServletContext().setAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME, sf);
         logger.info("****** End @ [" + new Date() + "] *********");
     }
