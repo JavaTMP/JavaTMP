@@ -786,7 +786,9 @@
                 }
                 return position;
             }
+
             $('tbody', userTableElement).on('contextmenu', 'tr[data-row-id]', function (e) {
+                // https://stackoverflow.com/questions/18666601/use-bootstrap-3-dropdown-menu-as-context-menu
                 var rowId = $(this).data("row-id");
                 if ($(this).hasClass("selected") === false) {
                     table.row(this).select();
