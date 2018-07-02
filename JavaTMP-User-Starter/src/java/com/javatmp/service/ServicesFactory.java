@@ -5,16 +5,15 @@ import java.util.logging.Logger;
 
 public class ServicesFactory {
 
-    private final Logger logger = Logger.getLogger(getClass().getName());
-    private DBFaker dbFaker;
-    private JpaDaoHelper jpaDaoHelper;
-
-    private TimezoneService timezoneService;
-    private ThemeService themeService;
-    private LanguageService languageService;
-    private CountryService countryService;
-    private UserService userService;
-    private DocumentService documentService;
+    private static final Logger logger = Logger.getLogger(ServicesFactory.class.getName());
+    private final DBFaker dbFaker;
+    private final JpaDaoHelper jpaDaoHelper;
+    private final TimezoneService timezoneService;
+    private final ThemeService themeService;
+    private final LanguageService languageService;
+    private final CountryService countryService;
+    private final UserService userService;
+    private final DocumentService documentService;
 
     public ServicesFactory(String persistentUnitName) {
         logger.info("*** Start ServicesFactory Constructor @ [" + new Date() + "]");
@@ -30,8 +29,7 @@ public class ServicesFactory {
     }
 
     public void destroy() {
-        this.userService = null;
-        this.dbFaker = null;
+
     }
 
     public UserService getUserService() {
