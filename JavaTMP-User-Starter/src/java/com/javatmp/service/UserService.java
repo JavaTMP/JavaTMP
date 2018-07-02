@@ -1,5 +1,6 @@
 package com.javatmp.service;
 
+import com.javatmp.domain.Document;
 import com.javatmp.domain.User;
 import com.javatmp.mvc.domain.table.DataTableColumnSpecs;
 import com.javatmp.mvc.domain.table.DataTableRequest;
@@ -7,28 +8,33 @@ import com.javatmp.mvc.domain.table.DataTableResults;
 import com.javatmp.mvc.domain.table.Order;
 import com.javatmp.mvc.domain.table.Search;
 import com.javatmp.mvc.MvcHelper;
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.logging.Logger;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.PersistenceException;
+import org.hibernate.exception.ConstraintViolationException;
 
 public class UserService {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
     private final DBFaker dBFaker;
+    private final JpaDaoHelper jpaDaoHelper;
+    private DocumentService documentService;
 
-    public UserService(DBFaker dBFaker) {
+    public UserService(DBFaker dBFaker, JpaDaoHelper jpaDaoHelper, DocumentService documentService) {
         this.dBFaker = dBFaker;
+        this.jpaDaoHelper = jpaDaoHelper;
+        this.documentService = documentService;
     }
 
     public User readUserByUsername(User user) {
@@ -41,16 +47,57 @@ public class UserService {
     }
 
     public User readUserByUserId(User user) {
-        for (User u : dBFaker.getUsersList()) {
-            if (user.getId().equals(u.getId())) {
-                return u;
-            }
-        }
-        return null;
+        return this.jpaDaoHelper.read(User.class, user.getId());
     }
 
     public User createNewUser(User user) {
-        this.dBFaker.addUser(user);
+
+        EntityManagerFactory factory = null;
+        EntityManager em = null;
+        DBFaker faker = new DBFaker();
+        try {
+            factory = Persistence.createEntityManagerFactory("AppPU");
+            em = factory.createEntityManager();
+
+            em.getTransaction().begin();
+
+            List<User> users = faker.getUsers();
+            for (User user : users) {
+                Document document = user.getProfilePicDocument();
+                document.setDocumentId(null);
+                em.persist(document);
+                user.setId(null);
+                user.setProfilePicDocumentId(document.getDocumentId());
+//                user.setProfilePicDocument(document);
+                em.persist(user);
+            }
+//
+//            User newUser = new User();
+//            newUser.setUserName("user2");
+//            newUser.setPassword(MD5Util.convertToMD5(newUser.getUserName()));
+//            newUser.setFirstName("firstName");
+//            newUser.setLastName("lastName");
+//            newUser.setStatus((short) 1);
+//            newUser.setCreationDate(new Date());
+//            newUser.setEmail("support@javatmp.com");
+//            newUser.setLang("en");
+//            newUser.setTheme("default");
+//            newUser.setTimezone(TimeZone.getTimeZone("UTC").getID());
+//            newUser.setBirthDate(new Date(-399571200000L));
+//            newUser.setCountryId("US");
+//            newUser.setAddress("<p>Not provided yet</p>");
+//            newUser.setProfilePicDocumentId(0L);
+//            em.persist(newUser);
+
+            em.getTransaction().commit();
+        } catch (PersistenceException e) {
+            e.printStackTrace();
+            if (em != null) {
+                em.getTransaction().rollback();
+            }
+
+        }
+
         return user;
     }
 

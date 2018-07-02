@@ -49,6 +49,10 @@ public class MvcHelper {
         return ReflectionToStringBuilder.toString(object);
     }
 
+    public static String toString(Object object, String... fields) {
+        return ReflectionToStringBuilder.toStringExclude(object, fields);
+    }
+
     /**
      * Returns a String object representation of passing object attributes.
      *

@@ -39,7 +39,7 @@ public class GetUpdateUserPopupController extends HttpServlet {
             MvcHelper.populateBeanByRequestParameters(request, user);
             logger.info("request user is [" + MvcHelper.deepToString(user) + "]");
             User dbUser = sf.getUserService().readUserByUserId(user);
-            logger.info("DB user to be Updated is [" + MvcHelper.deepToString(dbUser) + "]");
+            logger.info("DB user to be Updated is [" + dbUser + "]");
 
             List<Timezone> timezones = sf.getTimezoneService().getTimezones();
             List<Country> countries = sf.getCountryService().getCountries();

@@ -7,9 +7,11 @@ import java.util.List;
 public class DocumentService {
 
     private DBFaker dBFaker;
+    private final JpaDaoHelper jpaDaoHelper;
 
-    public DocumentService(DBFaker dBFaker) {
+    public DocumentService(DBFaker dBFaker, JpaDaoHelper jpaDaoHelper) {
         this.dBFaker = dBFaker;
+        this.jpaDaoHelper = jpaDaoHelper;
     }
 
     public List<Document> getAllDocuments() {
@@ -40,12 +42,6 @@ public class DocumentService {
     }
 
     public Document readDocumentById(Document document) {
-        for (Document doc : this.dBFaker.getDocuments()) {
-            if (doc.getDocumentId().equals(document.getDocumentId())) {
-                return doc;
-            }
-        }
-        throw new IllegalArgumentException("document id [" + document.getDocumentId() + "] not found");
+        return this.jpaDaoHelper.read(Document.class, document.getDocumentId());
     }
-
 }

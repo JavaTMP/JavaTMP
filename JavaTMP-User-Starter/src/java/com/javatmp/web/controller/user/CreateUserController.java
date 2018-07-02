@@ -62,11 +62,8 @@ public class CreateUserController extends HttpServlet {
         DocumentService ds = sf.getDocumentService();
         UserService us = sf.getUserService();
 
-        String text = "";
         try {
-
             User userToBeCreated = new User();
-
             MvcHelper.populateBeanByRequestParameters(request, userToBeCreated);
             logger.info("User to be created is [" + MvcHelper.toString(userToBeCreated) + "]");
             Part filePart = request.getPart("profilePicture"); // Retrieves <input type="file" name="file">
@@ -97,14 +94,10 @@ public class CreateUserController extends HttpServlet {
             fileUploading.setDocumentContent(buffer.toByteArray());
             logger.info("original size [" + fileUploading.getDocumentSize()
                     + "] stream size [" + fileUploading.getDocumentContent().length + "]");
-            ds.createNewDocument(fileUploading);
-            logger.info("db fake id [" + fileUploading.getDocumentId() + "]");
             String t = "FileName 'requested' \"to\" Upload [" + fileName + "] type[" + contentType + "] name [" + fieldName + "]size[" + partSize + "]<br/>";
             logger.info(t);
-            text += t;
-            System.out.println("Text[" + text + "]");
-            userToBeCreated.setProfilePicDocumentId(fileUploading.getDocumentId());
 
+            userToBeCreated.setProfilePicDocument(fileUploading);
             logger.info("UserToBeCreated is [" + MvcHelper.deepToString(userToBeCreated) + "]");
             userToBeCreated.setPassword(MD5Util.convertToMD5(userToBeCreated.getPassword()));
             userToBeCreated.setCreationDate(new Date());

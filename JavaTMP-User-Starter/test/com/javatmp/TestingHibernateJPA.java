@@ -41,6 +41,7 @@ public class TestingHibernateJPA {
                 em.persist(document);
                 user.setId(null);
                 user.setProfilePicDocumentId(document.getDocumentId());
+//                user.setProfilePicDocument(document);
                 em.persist(user);
             }
 //
@@ -63,7 +64,10 @@ public class TestingHibernateJPA {
 
             em.getTransaction().commit();
         } catch (PersistenceException e) {
-            em.getTransaction().rollback();
+            e.printStackTrace();
+            if (em != null) {
+                em.getTransaction().rollback();
+            }
             System.out.println("is sql [" + (e.getCause() instanceof ConstraintViolationException));
             System.out.println(e.getCause() instanceof ConstraintViolationException);
             if (e.getCause() instanceof ConstraintViolationException) {
