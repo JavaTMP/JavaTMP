@@ -19,6 +19,7 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
+import javax.persistence.metamodel.SingularAttribute;
 import org.hibernate.criterion.MatchMode;
 
 public class JpaDaoHelper {
@@ -162,6 +163,24 @@ public class JpaDaoHelper {
     }
 
     public <T> List<T> findByProperty(Class<T> clazz, String propertyName, Object value) {
+        EntityManager em = null;
+        List<T> retList = null;
+        try {
+            em = emf.createEntityManager();
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<T> cq = cb.createQuery(clazz);
+            Root<T> root = cq.from(clazz);
+            cq.where(cb.equal(root.get(propertyName), value));
+            retList = em.createQuery(cq).getResultList();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+        return retList;
+    }
+
+    public <T> List<T> findByProperty(Class<T> clazz, SingularAttribute<T, String> propertyName, Object value) {
         EntityManager em = null;
         List<T> retList = null;
         try {

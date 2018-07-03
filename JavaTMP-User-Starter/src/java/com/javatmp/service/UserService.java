@@ -2,6 +2,7 @@ package com.javatmp.service;
 
 import com.javatmp.domain.Document;
 import com.javatmp.domain.User;
+import com.javatmp.domain.User_;
 import com.javatmp.mvc.domain.table.DataTableColumnSpecs;
 import com.javatmp.mvc.domain.table.DataTableRequest;
 import com.javatmp.mvc.domain.table.DataTableResults;
@@ -38,10 +39,11 @@ public class UserService {
     }
 
     public User readUserByUsername(User user) {
-        for (User u : dBFaker.getUsersList()) {
-            if (user.getUserName().equals(u.getUserName())) {
-                return u;
-            }
+        List<User> users = this.jpaDaoHelper.findByProperty(User.class, User_.userName, user.getUserName());
+        if (users != null && users.size() > 0) {
+            return users.get(0);
+        } else {
+
         }
         return null;
     }
@@ -52,50 +54,21 @@ public class UserService {
 
     public User createNewUser(User user) {
 
-        EntityManagerFactory factory = null;
         EntityManager em = null;
-        DBFaker faker = new DBFaker();
         try {
-            factory = Persistence.createEntityManagerFactory("AppPU");
-            em = factory.createEntityManager();
-
+            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
             em.getTransaction().begin();
-
-            List<User> users = faker.getUsers();
-            for (User user : users) {
-                Document document = user.getProfilePicDocument();
-                document.setDocumentId(null);
-                em.persist(document);
-                user.setId(null);
-                user.setProfilePicDocumentId(document.getDocumentId());
-//                user.setProfilePicDocument(document);
-                em.persist(user);
-            }
-//
-//            User newUser = new User();
-//            newUser.setUserName("user2");
-//            newUser.setPassword(MD5Util.convertToMD5(newUser.getUserName()));
-//            newUser.setFirstName("firstName");
-//            newUser.setLastName("lastName");
-//            newUser.setStatus((short) 1);
-//            newUser.setCreationDate(new Date());
-//            newUser.setEmail("support@javatmp.com");
-//            newUser.setLang("en");
-//            newUser.setTheme("default");
-//            newUser.setTimezone(TimeZone.getTimeZone("UTC").getID());
-//            newUser.setBirthDate(new Date(-399571200000L));
-//            newUser.setCountryId("US");
-//            newUser.setAddress("<p>Not provided yet</p>");
-//            newUser.setProfilePicDocumentId(0L);
-//            em.persist(newUser);
-
+            Document document = user.getProfilePicDocument();
+            em.persist(document);
+            user.setProfilePicDocumentId(document.getDocumentId());
+            em.persist(user);
             em.getTransaction().commit();
         } catch (PersistenceException e) {
             e.printStackTrace();
             if (em != null) {
                 em.getTransaction().rollback();
             }
-
+            throw new PersistenceException("@ create new user", e);
         }
 
         return user;
