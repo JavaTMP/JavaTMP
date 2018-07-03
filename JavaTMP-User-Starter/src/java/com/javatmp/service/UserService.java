@@ -20,25 +20,20 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
-import org.hibernate.exception.ConstraintViolationException;
 
 public class UserService {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
     private final DBFaker dBFaker;
     private final JpaDaoHelper jpaDaoHelper;
-    private DocumentService documentService;
 
-    public UserService(DBFaker dBFaker, JpaDaoHelper jpaDaoHelper, DocumentService documentService) {
+    public UserService(DBFaker dBFaker, JpaDaoHelper jpaDaoHelper) {
         this.dBFaker = dBFaker;
         this.jpaDaoHelper = jpaDaoHelper;
-        this.documentService = documentService;
     }
 
-    public User readUserByUsername(User user) {
+    public User readUserByUsernameOld(User user) {
         List<User> users = this.jpaDaoHelper.findByProperty(User.class, User_.userName, user.getUserName());
         if (users != null && users.size() > 0) {
             return users.get(0);
@@ -48,8 +43,32 @@ public class UserService {
         return null;
     }
 
+    public User readUserByUsername(User user) {
+        EntityManager em = null;
+        try {
+            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            user = em.createQuery(
+                    "select new com.javatmp.domain.User(user.id, user.userName, user.firstName, user.lastName, user.status, "
+                    + "user.birthDate, user.creationDate, user.email, user.lang, user.theme, user.countryId, user.address, "
+                    + "user.timezone, user.profilePicDocumentId, user.profilePicDocument.randomHash) "
+                    + "from User user "
+                    + "where user.userName = :userName", User.class)
+                    .setParameter("userName", "user1")
+                    .getSingleResult();
+        } catch (PersistenceException e) {
+            e.printStackTrace();
+            throw new PersistenceException("@ read user by username", e);
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+        return user;
+    }
+
     public User readUserByUserId(User user) {
-        return this.jpaDaoHelper.read(User.class, user.getId());
+        return this.jpaDaoHelper.read(User.class,
+                user.getId());
     }
 
     public User createNewUser(User user) {

@@ -2,7 +2,9 @@ package com.javatmp.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Basic;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,13 +20,20 @@ public class Document implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long documentId;
+
     private String documentName;
+
     private long documentSize;
+
     private String contentType;
+
     @Lob
+    @Basic(fetch = FetchType.LAZY)
     private byte[] documentContent;
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
+
     private Long randomHash;
 
     /**

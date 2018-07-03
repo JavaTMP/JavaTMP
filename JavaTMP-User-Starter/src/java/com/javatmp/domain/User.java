@@ -12,7 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "user")
@@ -84,6 +83,29 @@ public class User implements Serializable {
         this.address = address;
         this.timezone = timezone;
         this.profilePicDocumentId = profilePicDocumentId;
+    }
+
+    public User(Long id, String userName, String firstName, String lastName, Short status, Date birthDate,
+            Date creationDate,
+            String email, String lang, String theme, String countryId, String address,
+            String timezone, Long profilePicDocumentId, Long documentRandomHash) {
+        this.id = id;
+        this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.status = status;
+        this.birthDate = birthDate;
+        this.creationDate = creationDate;
+        this.email = email;
+        this.lang = lang;
+        this.theme = theme;
+        this.countryId = countryId;
+        this.address = address;
+        this.timezone = timezone;
+        this.profilePicDocumentId = profilePicDocumentId;
+        this.profilePicDocument = new Document();
+        this.profilePicDocument.setDocumentId(profilePicDocumentId);
+        this.profilePicDocument.setRandomHash(documentRandomHash);
     }
 
     /**

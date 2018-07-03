@@ -24,7 +24,7 @@ public class ServicesFactory {
         this.languageService = new LanguageService(dbFaker);
         this.countryService = new CountryService(dbFaker);
         this.documentService = new DocumentService(dbFaker, jpaDaoHelper);
-        this.userService = new UserService(this.dbFaker, jpaDaoHelper, this.documentService);
+        this.userService = new UserService(this.dbFaker, jpaDaoHelper);
 
         logger.info("*** End ServicesFactory Constructor @ [" + new Date() + "]");
     }
