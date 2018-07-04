@@ -20,7 +20,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Fetch;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Root;
 
 public class UserService {
 
@@ -48,7 +56,7 @@ public class UserService {
         try {
             em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
             user = em.createQuery(
-                    "select new com.javatmp.domain.User(user.id, user.userName, user.firstName, user.lastName, user.status, "
+                    "select new com.javatmp.domain.User(user.id, user.userName, user.password, user.firstName, user.lastName, user.status, "
                     + "user.birthDate, user.creationDate, user.email, user.lang, user.theme, user.countryId, user.address, "
                     + "user.timezone, user.profilePicDocumentId, profilePicDocument.randomHash) "
                     + "from User user left join user.profilePicDocument as profilePicDocument "
@@ -67,8 +75,7 @@ public class UserService {
     }
 
     public User readUserByUserId(User user) {
-        return this.jpaDaoHelper.read(User.class,
-                user.getId());
+        return this.jpaDaoHelper.read(User.class, user.getId());
     }
 
     public User createNewUser(User user) {
@@ -89,7 +96,6 @@ public class UserService {
             }
             throw new PersistenceException("@ create new user", e);
         }
-
         return user;
     }
 
@@ -449,6 +455,42 @@ public class UserService {
         return dataTableResult;
     }
 
+    public DataTableResults<User> listUsersAccounts(DataTableRequest tableRequest) {
+        List<User> retList = new LinkedList<>();
+        List<Order> orders = tableRequest.getOrder();
+        List<User> database = this.dBFaker.getUsers();
+        // global search based on tableRequest.getSearch().getValue()
+// apply individual column search:
+
+        EntityManager em = null;
+        try {
+            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            TypedQuery<User> tq = em.createQuery(
+                    "select new com.javatmp.domain.User(user.id, user.userName, user.password, user.firstName, user.lastName, user.status, "
+                    + "user.birthDate, user.creationDate, user.email, user.lang, user.theme, user.countryId, user.address, "
+                    + "user.timezone, user.profilePicDocumentId, profilePicDocument.randomHash) "
+                    + "from User user left join user.profilePicDocument as profilePicDocument", User.class);
+
+            tq.setFirstResult(tableRequest.getStart());
+            tq.setMaxResults(tableRequest.getLength());
+
+            DataTableResults<User> dataTableResult = new DataTableResults<>();
+            dataTableResult.setData(retList);
+            dataTableResult.setRecordsTotal(Long.valueOf(database.size()));
+            dataTableResult.setRecordsFiltered(Long.valueOf(database.size()));
+            dataTableResult.setDraw(tableRequest.getDraw());
+
+            return dataTableResult;
+        } catch (PersistenceException e) {
+            e.printStackTrace();
+            throw new PersistenceException("@ read user by username", e);
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
     public DataTableResults<User> listAllUsers(DataTableRequest tableRequest) {
         List<User> retList = new LinkedList<>();
         List<User> db = this.dBFaker.getUsers();
@@ -465,6 +507,45 @@ public class UserService {
         dataTableResult.setDraw(tableRequest.getDraw());
 
         return dataTableResult;
+    }
+
+    public User retrieveUser(User user) {
+
+        EntityManager em = null;
+        try {
+            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<User> cq = cb.createQuery(User.class);
+            Root<User> from = cq.from(User.class);
+            Join<User, Document> join = from.join("profilePicDocument", JoinType.LEFT);
+            cq.multiselect(
+                    from.get("id"),
+                    from.get("userName"),
+                    from.get("password"),
+                    from.get("firstName"),
+                    from.get("lastName"),
+                    from.get("status"),
+                    from.get("birthDate"),
+                    from.get("creationDate"),
+                    from.get("email"),
+                    from.get("lang"),
+                    from.get("theme"),
+                    from.get("countryId"),
+                    from.get("address"),
+                    from.get("timezone"),
+                    from.get("profilePicDocumentId"),
+                    from.get("profilePicDocument").get("randomHash")
+            );
+            cq.where(cb.equal(from.get("userName"), user.getUserName()));
+            TypedQuery<User> query = em.createQuery(cq);
+
+            user = query.getSingleResult();
+            return user;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
     }
 
 }

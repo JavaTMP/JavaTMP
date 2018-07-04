@@ -206,49 +206,6 @@
 //
 //    }
 //
-//    public Employee retrieveEmployee(Employee employee) {
-//
-//        EntityManager em = null;
-//        EntityTransaction tx = null;
-//        Employee retEmployee = null;
-//        try {
-//            em = this.jpaDao.getEntityManagerFactory().createEntityManager();
-//            tx = em.getTransaction();
-//            tx.begin();
-//            CriteriaBuilder cb = em.getCriteriaBuilder();
-//            CriteriaQuery<Employee> cq = cb.createQuery(Employee.class);
-//            Root<Employee> from = cq.from(Employee.class);
-//
-//            cq.multiselect(
-//                    from.get("employeeId"),
-//                    from.get("firstName"),
-//                    from.get("lastName"),
-//                    from.get("email"),
-//                    from.get("phoneNumber"),
-//                    from.get("hireDate"),
-//                    from.get("salary"),
-//                    from.get("commissionPct"),
-//                    from.get("departmentId").get("departmentId"),
-//                    from.get("departmentId").get("departmentName"),
-//                    from.get("managerId").get("employeeId"),
-//                    from.get("jobId").get("jobId"),
-//                    from.get("jobId").get("jobTitle")
-//            );
-//
-//            cq.where(cb.equal(from.get("employeeId"), employee.getEmployeeId()));
-//            TypedQuery<Employee> query = em.createQuery(cq);
-//
-//            retEmployee = query.getSingleResult();
-//            return retEmployee;
-//        } finally {
-//            if (tx != null) {
-//                tx.commit();
-//            }
-//            if (em != null) {
-//                em.close();
-//            }
-//        }
-//    }
 //
 //    public Long getAllCount() {
 //        return this.jpaDao.getAllCount(Employee.class);
