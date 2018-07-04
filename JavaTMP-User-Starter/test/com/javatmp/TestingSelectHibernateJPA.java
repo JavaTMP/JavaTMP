@@ -27,10 +27,10 @@ public class TestingSelectHibernateJPA {
             factory = Persistence.createEntityManagerFactory("AppPU");
             em = factory.createEntityManager();
             User user = em.createQuery(
-                    "select new com.javatmp.domain.User(user.id, user.userName, user.firstName, user.lastName, user.status, user.birthDate, "
-                    + "user.creationDate, user.email, user.lang, user.theme, user.countryId, user.address, user.timezone, "
-                    + "user.profilePicDocumentId, user.profilePicDocument.randomHash) "
-                    + "from User user "
+                    "select new com.javatmp.domain.User(user.id, user.userName, user.firstName, user.lastName, user.status, "
+                    + "user.birthDate, user.creationDate, user.email, user.lang, user.theme, user.countryId, user.address, "
+                    + "user.timezone, user.profilePicDocumentId, profilePicDocument.randomHash) "
+                    + "from User user left join user.profilePicDocument as profilePicDocument "
                     + "where user.userName = :userName", User.class)
                     .setParameter("userName", "user1")
                     .getSingleResult();

@@ -10,15 +10,7 @@ import com.javatmp.mvc.MvcHelper;
 import com.javatmp.service.DBFaker;
 import com.javatmp.service.JpaDaoHelper;
 import com.javatmp.service.UserService;
-import com.javatmp.util.MD5Util;
 import java.sql.SQLException;
-import java.util.Date;
-import java.util.TimeZone;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceException;
-import org.hibernate.exception.ConstraintViolationException;
 
 /**
  *
