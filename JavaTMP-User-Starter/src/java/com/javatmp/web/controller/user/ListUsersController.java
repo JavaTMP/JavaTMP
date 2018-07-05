@@ -32,8 +32,8 @@ public class ListUsersController extends HttpServlet {
         DataTableRequest tableRequest = (DataTableRequest) MvcHelper.readObjectFromRequest(request, DataTableRequest.class);
         logger.info("datatableRequest [" + MvcHelper.deepToString(tableRequest) + "]");
 
-        DataTableResults<User> dataTableResult = cs.listUsers(tableRequest);
-
+//        DataTableResults<User> dataTableResult = cs.listUsers(tableRequest);
+        DataTableResults<User> dataTableResult = cs.listAllUsers(tableRequest);
         responseMessage.setOverAllStatus(true);
         responseMessage.setData(dataTableResult);
 

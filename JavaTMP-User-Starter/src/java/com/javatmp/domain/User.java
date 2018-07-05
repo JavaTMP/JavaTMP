@@ -86,12 +86,18 @@ public class User implements Serializable {
     }
 
     public User(Long id, String userName, String password, String firstName, String lastName, Short status, Date birthDate,
-            Date creationDate,
-            String email, String lang, String theme, String countryId, String address,
+            Date creationDate, String email, String lang, String theme, String countryId, String address,
+            String timezone, Long profilePicDocumentId, Long documentRandomHash) {
+        this(id, userName, firstName, lastName, status, birthDate, creationDate, email, lang, theme,
+                countryId, address, timezone, profilePicDocumentId, documentRandomHash);
+        this.password = password;
+    }
+
+    public User(Long id, String userName, String firstName, String lastName, Short status, Date birthDate,
+            Date creationDate, String email, String lang, String theme, String countryId, String address,
             String timezone, Long profilePicDocumentId, Long documentRandomHash) {
         this.id = id;
         this.userName = userName;
-        this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.status = status;

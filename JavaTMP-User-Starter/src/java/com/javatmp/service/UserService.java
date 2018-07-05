@@ -3,14 +3,17 @@ package com.javatmp.service;
 import com.javatmp.domain.Document;
 import com.javatmp.domain.User;
 import com.javatmp.domain.User_;
+import com.javatmp.domain.Document_;
 import com.javatmp.mvc.domain.table.DataTableColumnSpecs;
 import com.javatmp.mvc.domain.table.DataTableRequest;
 import com.javatmp.mvc.domain.table.DataTableResults;
 import com.javatmp.mvc.domain.table.Order;
 import com.javatmp.mvc.domain.table.Search;
 import com.javatmp.mvc.MvcHelper;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -18,17 +21,18 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Fetch;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 public class UserService {
@@ -456,44 +460,8 @@ public class UserService {
         return dataTableResult;
     }
 
-    public DataTableResults<User> listUsersAccounts(DataTableRequest tableRequest) {
-        List<User> retList = new LinkedList<>();
-        List<Order> orders = tableRequest.getOrder();
-        List<User> database = this.dBFaker.getUsers();
-        // global search based on tableRequest.getSearch().getValue()
-// apply individual column search:
-
-        EntityManager em = null;
-        try {
-            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
-            TypedQuery<User> tq = em.createQuery(
-                    "select new com.javatmp.domain.User(user.id, user.userName, user.password, user.firstName, user.lastName, user.status, "
-                    + "user.birthDate, user.creationDate, user.email, user.lang, user.theme, user.countryId, user.address, "
-                    + "user.timezone, user.profilePicDocumentId, profilePicDocument.randomHash) "
-                    + "from User user left join user.profilePicDocument as profilePicDocument", User.class);
-
-            tq.setFirstResult(tableRequest.getStart());
-            tq.setMaxResults(tableRequest.getLength());
-
-            DataTableResults<User> dataTableResult = new DataTableResults<>();
-            dataTableResult.setData(retList);
-            dataTableResult.setRecordsTotal(Long.valueOf(database.size()));
-            dataTableResult.setRecordsFiltered(Long.valueOf(database.size()));
-            dataTableResult.setDraw(tableRequest.getDraw());
-
-            return dataTableResult;
-        } catch (PersistenceException e) {
-            e.printStackTrace();
-            throw new PersistenceException("@ read user by username", e);
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
-    }
-
-    public DataTableResults<User> listAllUsers(DataTableRequest tableRequest) {
-        List<User> retList = new LinkedList<>();
+    public DataTableResults<User> listAllUsers(DataTableRequest tableRequest) throws ParseException {
+        List<User> retList = null;
         EntityManager em = null;
         try {
             em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
@@ -501,13 +469,150 @@ public class UserService {
             CriteriaQuery<User> cq = cb.createQuery(User.class);
             Root<User> from = cq.from(User.class);
             Join<User, Document> join = from.join(User_.profilePicDocument, JoinType.LEFT);
-            cq.multiselect(from.get("id"), from.get("userName"), from.get("password"), from.get("firstName"),
-                    from.get("lastName"), from.get("status"), from.get("birthDate"), from.get("creationDate"),
-                    from.get("email"), from.get("lang"), from.get("theme"), from.get("countryId"), from.get("address"),
-                    from.get("timezone"), from.get("profilePicDocumentId"), from.get("profilePicDocument").get("randomHash")
+            cq.multiselect(from.get(User_.id), from.get(User_.userName), from.get(User_.firstName),
+                    from.get(User_.lastName), from.get(User_.status), from.get(User_.birthDate), from.get(User_.creationDate),
+                    from.get(User_.email), from.get(User_.lang), from.get(User_.theme), from.get(User_.countryId), from.get(User_.address),
+                    from.get(User_.timezone), from.get(User_.profilePicDocumentId), from.get(User_.profilePicDocument).get(Document_.randomHash)
             );
 
+            List<Order> orders = tableRequest.getOrder();
+            for (Order order : orders) {
+                Integer columnIndex = order.getColumn();
+                DataTableColumnSpecs orderColumn = tableRequest.getColumns().get(columnIndex);
+
+                Path<?> sortPath = this.jpaDaoHelper.convertStringToPath(from, orderColumn.getName());
+                if (order.getDir().value().equals("desc")) {
+                    cq.orderBy(cb.desc(sortPath));
+                } else {
+                    cq.orderBy(cb.asc(sortPath));
+                }
+            }
+
+            // where clouse:
+            Predicate predicate = cb.conjunction();
+            for (DataTableColumnSpecs column : tableRequest.getColumns()) {
+                String columnName = column.getName();
+                String columnSearchValue = column.getSearch().getValue().trim();
+                logger.info("column name [" + columnName + "] search value [" + columnSearchValue + "]");
+                if (columnSearchValue != null && !columnSearchValue.equals("")) {
+                    //predicate = cb.and(predicate, cb.equal(from.get(columnName), columnSearchValue));
+                    if (columnName.equals("id")) {
+                        Long searchValue = new Long(columnSearchValue);
+                        predicate = cb.and(predicate, cb.equal(from.get(columnName), searchValue));
+                    }
+                    if (columnName.equals("userName")) {
+                        String searchValue = new String(columnSearchValue);
+                        predicate = cb.and(predicate, cb.equal(from.get(columnName), searchValue));
+                    }
+                    if (columnName.equals("firstName")) {
+                        String searchValue = new String(columnSearchValue);
+                        predicate = cb.and(predicate, cb.equal(from.get(columnName), searchValue));
+                    }
+                    if (columnName.equals("lastName")) {
+                        String searchValue = new String(columnSearchValue);
+                        predicate = cb.and(predicate, cb.equal(from.get(columnName), searchValue));
+                    }
+                    if (columnName.equals("birthDate")) {
+                        String searchValue = new String(columnSearchValue);
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                        Date objSearchValue = sdf.parse(searchValue);
+                        predicate = cb.and(predicate, cb.equal(from.get(columnName), objSearchValue));
+                    }
+                    if (columnName.equals("age")) {
+                        Integer searchValue = new Integer(columnSearchValue);
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.set(Calendar.YEAR, searchValue * -1);
+                        Date minDate = calendar.getTime();
+                        Expression<java.sql.Date> dateExpression = cb.currentDate();
+                        Expression<java.sql.Date> columnObj = from.get("birthDate");
+                        predicate = cb.and(predicate, cb.greaterThan(columnObj, dateExpression));
+                    }
+
+//                    if (searchParameters.get("age") != null && !searchParameters.get("age").getValue().equals("")) {
+//                        Search searchValueObject = searchParameters.get("age");
+//                        String searchValueStr = searchValueObject.getValue().trim().toLowerCase();
+//                        Integer searchValue = Integer.valueOf(searchValueStr);
+//                        Date dbValue = user.getBirthDate();
+//                        Date now = new Date();
+//                        long timeBetween = now.getTime() - dbValue.getTime();
+//                        double yearsBetween = timeBetween / 3.15576e+10;
+//                        Integer age = (int) Math.ceil(yearsBetween);
+//                        System.out.println("Doest dbValue [" + age + "] equal search [" + searchValue + "]");
+//                        if (!age.equals(searchValue)) {
+//                            continue;
+//                        }
+//                    }
+//                    if (searchParameters.get("email") != null && !searchParameters.get("email").getValue().equals("")) {
+//                        Search searchValueObject = searchParameters.get("email");
+//                        String searchValue = searchValueObject.getValue().toString().trim().toLowerCase();
+//                        String dbValue = user.getEmail();
+//                        if (!dbValue.toLowerCase().contains(searchValue)) {
+//                            continue;
+//                        }
+//                    }
+//                    if (searchParameters.get("status") != null && !searchParameters.get("status").getValue().equals("")) {
+//                        Search searchValueObject = searchParameters.get("status");
+//                        String searchValueStr = searchValueObject.getValue().trim();
+//                        Short searchValue = Short.valueOf(searchValueStr);
+//                        Short dbValue = user.getStatus();
+//                        if (!dbValue.equals(searchValue)) {
+//                            continue;
+//                        }
+//                    }
+//                    if (searchParameters.get("countryId") != null && !searchParameters.get("countryId").getValue().equals("")) {
+//                        Search searchValueObject = searchParameters.get("countryId");
+//                        String searchValueStr = searchValueObject.getValue().trim();
+//                        String dbValue = user.getCountryId();
+//                        if (!dbValue.equals(searchValueStr)) {
+//                            continue;
+//                        }
+//                    }
+//                    if (searchParameters.get("lang") != null && !searchParameters.get("lang").getValue().equals("")) {
+//                        Search searchValueObject = searchParameters.get("lang");
+//                        String searchValueStr = searchValueObject.getValue().trim();
+//                        String dbValue = user.getLang();
+//                        if (!dbValue.equals(searchValueStr)) {
+//                            continue;
+//                        }
+//                    }
+//                    if (searchParameters.get("theme") != null && !searchParameters.get("theme").getValue().equals("")) {
+//                        Search searchValueObject = searchParameters.get("theme");
+//                        String searchValueStr = searchValueObject.getValue().trim();
+//                        String dbValue = user.getTheme();
+//                        if (!dbValue.equals(searchValueStr)) {
+//                            continue;
+//                        }
+//                    }
+//                    if (searchParameters.get("timezone") != null && !searchParameters.get("timezone").getValue().equals("")) {
+//                        Search searchValueObject = searchParameters.get("timezone");
+//                        String searchValueStr = searchValueObject.getValue().trim();
+//                        String dbValue = user.getTimezone();
+//                        if (!dbValue.equals(searchValueStr)) {
+//                            continue;
+//                        }
+//                    }
+//                    if (searchParameters.get("creationDate") != null && !searchParameters.get("creationDate").getValue().equals("")) {
+//                        Search searchValueObject = searchParameters.get("creationDate");
+//                        String searchValueStr = searchValueObject.getValue().trim();
+//                        System.out.println("search value str [" + searchValueStr + "]");
+//                        String[] dateParts = searchValueStr.split("##TO##");
+//                        System.out.println(Arrays.toString(dateParts));
+//                        String startStr = dateParts[0];
+//                        String endStr = dateParts[1];
+//                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+//                        Date start = sdf.parse(startStr);
+//                        Date end = sdf.parse(endStr);
+//                        Date dbValue = user.getCreationDate();
+//                        // https://stackoverflow.com/questions/883060/how-can-i-determine-if-a-date-is-between-two-dates-in-java
+//                        if (!(start.compareTo(dbValue) * dbValue.compareTo(end) >= 0)) {
+//                            continue;
+//                        }
+//                    }
+                }
+            }
+            cq.where(predicate);
             TypedQuery<User> query = em.createQuery(cq);
+
             query.setFirstResult(tableRequest.getStart());
             query.setMaxResults(tableRequest.getLength());
 
@@ -515,8 +620,17 @@ public class UserService {
 
             DataTableResults<User> dataTableResult = new DataTableResults<>();
             dataTableResult.setData(retList);
-//        dataTableResult.setRecordsTotal(Long.valueOf(db.size()));
-//        dataTableResult.setRecordsFiltered(Long.valueOf(db.size()));
+
+            CriteriaQuery<Long> cqLong = cb.createQuery(Long.class);
+            from = cqLong.from(cq.getResultType());
+            join = from.join(User_.profilePicDocument, JoinType.LEFT);
+
+            cqLong.select(cb.count(from));
+            cqLong.where(predicate);
+            Long allCount = em.createQuery(cqLong).getSingleResult();
+
+            dataTableResult.setRecordsTotal(allCount);
+            dataTableResult.setRecordsFiltered(allCount);
             dataTableResult.setDraw(tableRequest.getDraw());
 
             return dataTableResult;

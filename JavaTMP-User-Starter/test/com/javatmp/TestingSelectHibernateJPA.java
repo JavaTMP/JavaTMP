@@ -37,7 +37,10 @@ public class TestingSelectHibernateJPA {
             em.close();
             System.out.println(MvcHelper.deepToString(user));
         } catch (PersistenceException e) {
-            e.printStackTrace();
+            Throwable t;
+            for (t = e.getCause(); t != null; t = t.getCause()) {
+                System.out.println("Exception:" + t);
+            }
         } finally {
             if (em != null && em.isOpen()) {
                 em.close();
