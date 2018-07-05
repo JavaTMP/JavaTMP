@@ -18,7 +18,7 @@ import javax.persistence.PersistenceException;
  *
  * @author JavaTMP
  */
-public class TestingHibernateJPA {
+public class PopulateDB {
 
     /**
      * @param args the command line arguments

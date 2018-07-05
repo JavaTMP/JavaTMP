@@ -1,0 +1,2 @@
+-- Command to dump database:
+-- mysqldump --complete-insert --extended-insert=FALSE --hex-blob -uroot -p  appdb > text.sql

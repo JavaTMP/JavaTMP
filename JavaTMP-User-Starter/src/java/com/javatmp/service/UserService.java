@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -44,41 +45,57 @@ public class UserService {
         this.jpaDaoHelper = jpaDaoHelper;
     }
 
-    public User readUserByUsernameOld(User user) {
-        List<User> users = this.jpaDaoHelper.findByProperty(User.class, User_.userName, user.getUserName());
-        if (users != null && users.size() > 0) {
-            return users.get(0);
-        } else {
-
-        }
-        return null;
+    public User readUserByUserId(User user) {
+        return this.jpaDaoHelper.read(User.class, user.getId());
     }
 
-    public User readUserByUsername(User user) {
+    public User readCompleteUserById(User user) {
+
         EntityManager em = null;
         try {
             em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
-            user = em.createQuery(
-                    "select new com.javatmp.domain.User(user.id, user.userName, user.password, user.firstName, user.lastName, user.status, "
-                    + "user.birthDate, user.creationDate, user.email, user.lang, user.theme, user.countryId, user.address, "
-                    + "user.timezone, user.profilePicDocumentId, profilePicDocument.randomHash) "
-                    + "from User user left join user.profilePicDocument as profilePicDocument "
-                    + "where user.userName = :userName", User.class)
-                    .setParameter("userName", "user1")
-                    .getSingleResult();
-        } catch (PersistenceException e) {
-            e.printStackTrace();
-            throw new PersistenceException("@ read user by username", e);
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<User> cq = cb.createQuery(User.class);
+
+            Root<User> from = cq.from(User.class);
+            from.fetch(User_.profilePicDocument, JoinType.LEFT);
+            Join<User, Document> join = from.join(User_.profilePicDocument, JoinType.LEFT);
+            cq.select(from);
+            cq.where(cb.equal(from.get(User_.id), user.getId()));
+            TypedQuery<User> query = em.createQuery(cq);
+            user = query.getSingleResult();
+            return user;
         } finally {
             if (em != null) {
                 em.close();
             }
         }
-        return user;
     }
 
-    public User readUserByUserId(User user) {
-        return this.jpaDaoHelper.read(User.class, user.getId());
+    public User readUserByUsername(User user) {
+
+        EntityManager em = null;
+        try {
+            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<User> cq = cb.createQuery(User.class);
+            Root<User> from = cq.from(User.class);
+            Join<User, Document> join = from.join(User_.profilePicDocument, JoinType.LEFT);
+            cq.multiselect(from.get("id"), from.get("userName"), from.get("password"), from.get("firstName"),
+                    from.get("lastName"), from.get("status"), from.get("birthDate"), from.get("creationDate"),
+                    from.get("email"), from.get("lang"), from.get("theme"), from.get("countryId"), from.get("address"),
+                    from.get("timezone"), from.get("profilePicDocumentId"), from.get("profilePicDocument").get("randomHash")
+            );
+            cq.where(cb.equal(from.get(User_.userName), user.getUserName()));
+            TypedQuery<User> query = em.createQuery(cq);
+
+            user = query.getSingleResult();
+            return user;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
     }
 
     public User createNewUser(User user) {
@@ -104,26 +121,52 @@ public class UserService {
 
     public int updateCompleteUser(User userToBeUpdated) {
         int updateStatus = 0;
-        for (User dbUser : dBFaker.getUsersList()) {
-            if (dbUser.getId().equals(userToBeUpdated.getId())) {
-                dbUser.setUserName(userToBeUpdated.getUserName());
-                dbUser.setPassword(userToBeUpdated.getPassword());
-                dbUser.setFirstName(userToBeUpdated.getFirstName());
-                dbUser.setLastName(userToBeUpdated.getLastName());
-                dbUser.setStatus(userToBeUpdated.getStatus());
-                dbUser.setBirthDate(userToBeUpdated.getBirthDate());
-                dbUser.setCountryId(userToBeUpdated.getCountryId());
-                dbUser.setAddress(userToBeUpdated.getAddress());
-                dbUser.setEmail(userToBeUpdated.getEmail());
-                dbUser.setLang(userToBeUpdated.getLang());
-                dbUser.setTheme(userToBeUpdated.getTheme());
-                dbUser.setTimezone(userToBeUpdated.getTimezone());
-                dbUser.setProfilePicDocument(userToBeUpdated.getProfilePicDocument());
-                dbUser.setProfilePicDocumentId(userToBeUpdated.getProfilePicDocumentId());
-                updateStatus = 1;
-                break;
+        EntityManager em = null;
+        try {
+//            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+//            em.getTransaction().begin();
+//            User dbUser = em.find(User.class, userToBeUpdated.getId(), LockModeType.PESSIMISTIC_WRITE);
+            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            em.getTransaction().begin();
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<User> cq = cb.createQuery(User.class);
+
+            Root<User> from = cq.from(User.class);
+            from.fetch(User_.profilePicDocument, JoinType.LEFT);
+            cq.select(from);
+            cq.where(cb.equal(from.get(User_.id), userToBeUpdated.getId()));
+            TypedQuery<User> query = em.createQuery(cq);
+            query.setLockMode(LockModeType.PESSIMISTIC_WRITE);
+            User dbUser = query.getSingleResult();
+            dbUser.setUserName(userToBeUpdated.getUserName());
+            dbUser.setPassword(userToBeUpdated.getPassword());
+            dbUser.setFirstName(userToBeUpdated.getFirstName());
+            dbUser.setLastName(userToBeUpdated.getLastName());
+            dbUser.setStatus(userToBeUpdated.getStatus());
+            dbUser.setBirthDate(userToBeUpdated.getBirthDate());
+            dbUser.setCountryId(userToBeUpdated.getCountryId());
+            dbUser.setAddress(userToBeUpdated.getAddress());
+            dbUser.setEmail(userToBeUpdated.getEmail());
+            dbUser.setLang(userToBeUpdated.getLang());
+            dbUser.setTheme(userToBeUpdated.getTheme());
+            dbUser.setTimezone(userToBeUpdated.getTimezone());
+            if (userToBeUpdated.getProfilePicDocument() != null) {
+                Document doc = em.merge(userToBeUpdated.getProfilePicDocument());
+                dbUser.setProfilePicDocument(doc);
+                dbUser.setProfilePicDocumentId(doc.getDocumentId());
+
             }
+
+            em.getTransaction().commit();
+            updateStatus = 1;
+        } catch (PersistenceException e) {
+            e.printStackTrace();
+            if (em != null) {
+                em.getTransaction().rollback();
+            }
+            throw e;
         }
+
         return updateStatus;
     }
 
@@ -595,32 +638,6 @@ public class UserService {
             }
         }
 
-    }
-
-    public User retrieveUser(User user) {
-
-        EntityManager em = null;
-        try {
-            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
-            CriteriaBuilder cb = em.getCriteriaBuilder();
-            CriteriaQuery<User> cq = cb.createQuery(User.class);
-            Root<User> from = cq.from(User.class);
-            Join<User, Document> join = from.join(User_.profilePicDocument, JoinType.LEFT);
-            cq.multiselect(from.get("id"), from.get("userName"), from.get("password"), from.get("firstName"),
-                    from.get("lastName"), from.get("status"), from.get("birthDate"), from.get("creationDate"),
-                    from.get("email"), from.get("lang"), from.get("theme"), from.get("countryId"), from.get("address"),
-                    from.get("timezone"), from.get("profilePicDocumentId"), from.get("profilePicDocument").get("randomHash")
-            );
-            cq.where(cb.equal(from.get(User_.userName), user.getUserName()));
-            TypedQuery<User> query = em.createQuery(cq);
-
-            user = query.getSingleResult();
-            return user;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
     }
 
 }

@@ -33,7 +33,7 @@ public class TestingUserServicesJPA {
         user.setUserName("user1");
         user = userService.readUserByUsername(user);
         System.out.println(MvcHelper.deepToString(user));
-        user = userService.retrieveUser(user);
+        user = userService.readUserByUsername(user);
         System.out.println(MvcHelper.deepToString(user));
         System.out.println(user.getProfilePicDocument());
 
