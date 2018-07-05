@@ -13,7 +13,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
-import org.hibernate.exception.ConstraintViolationException;
 
 /**
  *
@@ -67,12 +66,6 @@ public class TestingHibernateJPA {
             e.printStackTrace();
             if (em != null) {
                 em.getTransaction().rollback();
-            }
-            System.out.println("is sql [" + (e.getCause() instanceof ConstraintViolationException));
-            System.out.println(e.getCause() instanceof ConstraintViolationException);
-            if (e.getCause() instanceof ConstraintViolationException) {
-                ConstraintViolationException c = (ConstraintViolationException) e.getCause();
-                System.out.println("dfdfdfd " + c.getConstraintName() + "]");
             }
             e.getCause().printStackTrace();
             System.out.println("class [" + e.getClass().getName() + "]");

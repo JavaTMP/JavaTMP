@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceException;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -493,20 +494,38 @@ public class UserService {
 
     public DataTableResults<User> listAllUsers(DataTableRequest tableRequest) {
         List<User> retList = new LinkedList<>();
-        List<User> db = this.dBFaker.getUsers();
+        EntityManager em = null;
+        try {
+            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<User> cq = cb.createQuery(User.class);
+            Root<User> from = cq.from(User.class);
+            Join<User, Document> join = from.join(User_.profilePicDocument, JoinType.LEFT);
+            cq.multiselect(from.get("id"), from.get("userName"), from.get("password"), from.get("firstName"),
+                    from.get("lastName"), from.get("status"), from.get("birthDate"), from.get("creationDate"),
+                    from.get("email"), from.get("lang"), from.get("theme"), from.get("countryId"), from.get("address"),
+                    from.get("timezone"), from.get("profilePicDocumentId"), from.get("profilePicDocument").get("randomHash")
+            );
 
-        for (int i = tableRequest.getStart();
-                i < db.size() && i < (tableRequest.getStart() + tableRequest.getLength()); i++) {
-            retList.add(db.get(i));
+            TypedQuery<User> query = em.createQuery(cq);
+            query.setFirstResult(tableRequest.getStart());
+            query.setMaxResults(tableRequest.getLength());
+
+            retList = query.getResultList();
+
+            DataTableResults<User> dataTableResult = new DataTableResults<>();
+            dataTableResult.setData(retList);
+//        dataTableResult.setRecordsTotal(Long.valueOf(db.size()));
+//        dataTableResult.setRecordsFiltered(Long.valueOf(db.size()));
+            dataTableResult.setDraw(tableRequest.getDraw());
+
+            return dataTableResult;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
         }
 
-        DataTableResults<User> dataTableResult = new DataTableResults<>();
-        dataTableResult.setData(retList);
-        dataTableResult.setRecordsTotal(Long.valueOf(db.size()));
-        dataTableResult.setRecordsFiltered(Long.valueOf(db.size()));
-        dataTableResult.setDraw(tableRequest.getDraw());
-
-        return dataTableResult;
     }
 
     public User retrieveUser(User user) {
@@ -517,26 +536,13 @@ public class UserService {
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaQuery<User> cq = cb.createQuery(User.class);
             Root<User> from = cq.from(User.class);
-            Join<User, Document> join = from.join("profilePicDocument", JoinType.LEFT);
-            cq.multiselect(
-                    from.get("id"),
-                    from.get("userName"),
-                    from.get("password"),
-                    from.get("firstName"),
-                    from.get("lastName"),
-                    from.get("status"),
-                    from.get("birthDate"),
-                    from.get("creationDate"),
-                    from.get("email"),
-                    from.get("lang"),
-                    from.get("theme"),
-                    from.get("countryId"),
-                    from.get("address"),
-                    from.get("timezone"),
-                    from.get("profilePicDocumentId"),
-                    from.get("profilePicDocument").get("randomHash")
+            Join<User, Document> join = from.join(User_.profilePicDocument, JoinType.LEFT);
+            cq.multiselect(from.get("id"), from.get("userName"), from.get("password"), from.get("firstName"),
+                    from.get("lastName"), from.get("status"), from.get("birthDate"), from.get("creationDate"),
+                    from.get("email"), from.get("lang"), from.get("theme"), from.get("countryId"), from.get("address"),
+                    from.get("timezone"), from.get("profilePicDocumentId"), from.get("profilePicDocument").get("randomHash")
             );
-            cq.where(cb.equal(from.get("userName"), user.getUserName()));
+            cq.where(cb.equal(from.get(User_.userName), user.getUserName()));
             TypedQuery<User> query = em.createQuery(cq);
 
             user = query.getSingleResult();
