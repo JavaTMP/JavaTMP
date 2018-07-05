@@ -21,14 +21,12 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Path;
@@ -480,7 +478,7 @@ public class UserService {
                 Integer columnIndex = order.getColumn();
                 DataTableColumnSpecs orderColumn = tableRequest.getColumns().get(columnIndex);
 
-                Path<?> sortPath = this.jpaDaoHelper.convertStringToPath(from, orderColumn.getName());
+                Path<?> sortPath = this.jpaDaoHelper.convertStringToPath(from, orderColumn.getData());
                 if (order.getDir().value().equals("desc")) {
                     cq.orderBy(cb.desc(sortPath));
                 } else {
@@ -521,93 +519,50 @@ public class UserService {
                     if (columnName.equals("age")) {
                         Integer searchValue = new Integer(columnSearchValue);
                         Calendar calendar = Calendar.getInstance();
-                        calendar.set(Calendar.YEAR, searchValue * -1);
+                        calendar.add(Calendar.YEAR, searchValue * -1);
                         Date minDate = calendar.getTime();
-                        Expression<java.sql.Date> dateExpression = cb.currentDate();
-                        Expression<java.sql.Date> columnObj = from.get("birthDate");
-                        predicate = cb.and(predicate, cb.greaterThan(columnObj, dateExpression));
+                        calendar.add(Calendar.YEAR, 1);
+                        Date maxDate = calendar.getTime();
+                        System.out.println("min [" + minDate + "], max [" + maxDate + "]");
+                        Predicate betweenDate = cb.between(from.get(User_.birthDate), minDate, maxDate);
+                        predicate = cb.and(predicate, betweenDate);
                     }
-
-//                    if (searchParameters.get("age") != null && !searchParameters.get("age").getValue().equals("")) {
-//                        Search searchValueObject = searchParameters.get("age");
-//                        String searchValueStr = searchValueObject.getValue().trim().toLowerCase();
-//                        Integer searchValue = Integer.valueOf(searchValueStr);
-//                        Date dbValue = user.getBirthDate();
-//                        Date now = new Date();
-//                        long timeBetween = now.getTime() - dbValue.getTime();
-//                        double yearsBetween = timeBetween / 3.15576e+10;
-//                        Integer age = (int) Math.ceil(yearsBetween);
-//                        System.out.println("Doest dbValue [" + age + "] equal search [" + searchValue + "]");
-//                        if (!age.equals(searchValue)) {
-//                            continue;
-//                        }
-//                    }
-//                    if (searchParameters.get("email") != null && !searchParameters.get("email").getValue().equals("")) {
-//                        Search searchValueObject = searchParameters.get("email");
-//                        String searchValue = searchValueObject.getValue().toString().trim().toLowerCase();
-//                        String dbValue = user.getEmail();
-//                        if (!dbValue.toLowerCase().contains(searchValue)) {
-//                            continue;
-//                        }
-//                    }
-//                    if (searchParameters.get("status") != null && !searchParameters.get("status").getValue().equals("")) {
-//                        Search searchValueObject = searchParameters.get("status");
-//                        String searchValueStr = searchValueObject.getValue().trim();
-//                        Short searchValue = Short.valueOf(searchValueStr);
-//                        Short dbValue = user.getStatus();
-//                        if (!dbValue.equals(searchValue)) {
-//                            continue;
-//                        }
-//                    }
-//                    if (searchParameters.get("countryId") != null && !searchParameters.get("countryId").getValue().equals("")) {
-//                        Search searchValueObject = searchParameters.get("countryId");
-//                        String searchValueStr = searchValueObject.getValue().trim();
-//                        String dbValue = user.getCountryId();
-//                        if (!dbValue.equals(searchValueStr)) {
-//                            continue;
-//                        }
-//                    }
-//                    if (searchParameters.get("lang") != null && !searchParameters.get("lang").getValue().equals("")) {
-//                        Search searchValueObject = searchParameters.get("lang");
-//                        String searchValueStr = searchValueObject.getValue().trim();
-//                        String dbValue = user.getLang();
-//                        if (!dbValue.equals(searchValueStr)) {
-//                            continue;
-//                        }
-//                    }
-//                    if (searchParameters.get("theme") != null && !searchParameters.get("theme").getValue().equals("")) {
-//                        Search searchValueObject = searchParameters.get("theme");
-//                        String searchValueStr = searchValueObject.getValue().trim();
-//                        String dbValue = user.getTheme();
-//                        if (!dbValue.equals(searchValueStr)) {
-//                            continue;
-//                        }
-//                    }
-//                    if (searchParameters.get("timezone") != null && !searchParameters.get("timezone").getValue().equals("")) {
-//                        Search searchValueObject = searchParameters.get("timezone");
-//                        String searchValueStr = searchValueObject.getValue().trim();
-//                        String dbValue = user.getTimezone();
-//                        if (!dbValue.equals(searchValueStr)) {
-//                            continue;
-//                        }
-//                    }
-//                    if (searchParameters.get("creationDate") != null && !searchParameters.get("creationDate").getValue().equals("")) {
-//                        Search searchValueObject = searchParameters.get("creationDate");
-//                        String searchValueStr = searchValueObject.getValue().trim();
-//                        System.out.println("search value str [" + searchValueStr + "]");
-//                        String[] dateParts = searchValueStr.split("##TO##");
-//                        System.out.println(Arrays.toString(dateParts));
-//                        String startStr = dateParts[0];
-//                        String endStr = dateParts[1];
-//                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-//                        Date start = sdf.parse(startStr);
-//                        Date end = sdf.parse(endStr);
-//                        Date dbValue = user.getCreationDate();
-//                        // https://stackoverflow.com/questions/883060/how-can-i-determine-if-a-date-is-between-two-dates-in-java
-//                        if (!(start.compareTo(dbValue) * dbValue.compareTo(end) >= 0)) {
-//                            continue;
-//                        }
-//                    }
+                    if (columnName.equals("email")) {
+                        String searchValue = columnSearchValue.toLowerCase();
+                        predicate = cb.and(predicate, cb.like(cb.lower(from.get(User_.email)), "%" + searchValue + "%"));
+                    }
+                    if (columnName.equals("status")) {
+                        Short searchValue = new Short(columnSearchValue);
+                        predicate = cb.and(predicate, cb.equal(from.get(columnName), searchValue));
+                    }
+                    if (columnName.equals("countryId")) {
+                        String searchValue = new String(columnSearchValue);
+                        predicate = cb.and(predicate, cb.equal(from.get(columnName), searchValue));
+                    }
+                    if (columnName.equals("lang")) {
+                        String searchValue = new String(columnSearchValue);
+                        predicate = cb.and(predicate, cb.equal(from.get(columnName), searchValue));
+                    }
+                    if (columnName.equals("theme")) {
+                        String searchValue = new String(columnSearchValue);
+                        predicate = cb.and(predicate, cb.equal(from.get(columnName), searchValue));
+                    }
+                    if (columnName.equals("timezone")) {
+                        String searchValue = new String(columnSearchValue);
+                        predicate = cb.and(predicate, cb.equal(from.get(columnName), searchValue));
+                    }
+                    if (columnName.equals("creationDate")) {
+                        String[] dateParts = columnSearchValue.split("##TO##");
+                        System.out.println(Arrays.toString(dateParts));
+                        String startStr = dateParts[0];
+                        String endStr = dateParts[1];
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+                        Date start = sdf.parse(startStr);
+                        Date end = sdf.parse(endStr);
+                        System.out.println("start [" + start + "], end [" + end + "]");
+                        Predicate betweenDate = cb.between(from.get(User_.creationDate), start, end);
+                        predicate = cb.and(predicate, betweenDate);
+                    }
                 }
             }
             cq.where(predicate);
