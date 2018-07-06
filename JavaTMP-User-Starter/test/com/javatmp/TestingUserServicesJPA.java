@@ -8,7 +8,7 @@ package com.javatmp;
 import com.javatmp.domain.User;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.service.DBFaker;
-import com.javatmp.service.JpaDaoHelper;
+import com.javatmp.db.JpaDaoHelper;
 import com.javatmp.service.UserService;
 import java.sql.SQLException;
 

@@ -17,7 +17,7 @@ import com.javatmp.mvc.domain.table.DataTableRequest;
 import com.javatmp.mvc.domain.table.DataTableResults;
 import com.javatmp.mvc.domain.table.OrderDir;
 import com.javatmp.service.DBFaker;
-import com.javatmp.service.JpaDaoHelper;
+import com.javatmp.db.JpaDaoHelper;
 import com.javatmp.service.UserService;
 import java.sql.Date;
 import java.sql.SQLException;

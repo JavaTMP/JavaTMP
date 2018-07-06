@@ -1,5 +1,6 @@
 package com.javatmp.service;
 
+import com.javatmp.db.JpaDaoHelper;
 import com.javatmp.domain.Document;
 import com.javatmp.domain.User;
 import com.javatmp.domain.User_;
@@ -215,7 +216,7 @@ public class UserService {
         return updateStatus;
     }
 
-    public DataTableResults<User> listUsers(DataTableRequest tableRequest) {
+    public DataTableResults<User> listUsers(DataTableRequest<User> tableRequest) {
         List<User> retList = new LinkedList<>();
         List<User> database = this.dBFaker.getUsers();
         List<User> db = null;
@@ -501,7 +502,7 @@ public class UserService {
         return dataTableResult;
     }
 
-    public DataTableResults<User> listAllUsers(DataTableRequest tableRequest) throws ParseException {
+    public DataTableResults<User> listAllUsers(DataTableRequest<User> tableRequest) throws ParseException {
         List<User> retList = null;
         EntityManager em = null;
         try {

@@ -1,5 +1,6 @@
 package com.javatmp.service;
 
+import com.javatmp.db.JpaDaoHelper;
 import com.javatmp.domain.Document;
 import com.javatmp.domain.User;
 import java.util.List;

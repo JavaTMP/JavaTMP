@@ -1,8 +1,11 @@
-package com.javatmp.service;
+package com.javatmp.db;
 
-import com.javatmp.service.old.Page;
+import com.javatmp.domain.User;
+import com.javatmp.mvc.domain.table.DataTableColumnSpecs;
+import com.javatmp.mvc.domain.table.DataTableRequest;
+import com.javatmp.mvc.domain.table.DataTableResults;
+import com.javatmp.mvc.domain.table.Order;
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
@@ -15,12 +18,12 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
 import javax.persistence.metamodel.SingularAttribute;
-import org.hibernate.criterion.MatchMode;
 
 public class JpaDaoHelper {
 
@@ -199,14 +202,14 @@ public class JpaDaoHelper {
     }
 
     public <T> List<T> findByProperty(Class<T> clazz, String propertyName,
-            String value, MatchMode matchMode) {
+            String value, String matchMode) {
         //convert the value String to lowercase
         value = value.toLowerCase();
-        if (MatchMode.START.equals(matchMode)) {
+        if ("START".equals(matchMode)) {
             value = value + "%";
-        } else if (MatchMode.END.equals(matchMode)) {
+        } else if ("END".equals(matchMode)) {
             value = "%" + value;
-        } else if (MatchMode.ANYWHERE.equals(matchMode)) {
+        } else if ("ANYWHERE".equals(matchMode)) {
             value = "%" + value + "%";
         }
 
@@ -239,36 +242,57 @@ public class JpaDaoHelper {
         return retLists;
     }
 
-    public <T> void retrievePageRequestDetails(Page<T> page) {
+    public <T> DataTableResults<T> retrievePageRequestDetails(DataTableRequest<T> page) {
 
         EntityManager em = null;
         List retList = null;
         try {
             em = getEntityManagerFactory().createEntityManager();
             CriteriaBuilder cb = em.getCriteriaBuilder();
-            CriteriaQuery<T> cq = cb.createQuery(page.getType());
-            Root<T> from = cq.from(page.getType());
+            CriteriaQuery<T> cq = cb.createQuery(page.getClassType());
+            Root<T> from = cq.from(page.getClassType());
+            for (String pathStr : page.getSelects()) {
+                String[] attributes = pathStr.split("\\.");
+                if (attributes != null && attributes.length > 1) {
+                    from.join(attributes[0], JoinType.LEFT);
+                }
+            }
 
             cq.multiselect(this.convertArrToPaths(from, page.getSelects()));
 
-            Path<?> sortPath = this.convertStringToPath(from, page.getSortColumn());
-            if (page.getSortOrder().equals("asc")) {
-                cq.orderBy(cb.asc(sortPath));
-            } else {
-                cq.orderBy(cb.desc(sortPath));
+            List<Order> orders = page.getOrder();
+            if (orders != null) {
+                for (Order order : orders) {
+                    Integer columnIndex = order.getColumn();
+                    DataTableColumnSpecs orderColumn = page.getColumns().get(columnIndex);
+
+                    Path<?> sortPath = this.convertStringToPath(from, orderColumn.getData());
+                    if (order.getDir().value().equals("desc")) {
+                        cq.orderBy(cb.desc(sortPath));
+                    } else {
+                        cq.orderBy(cb.asc(sortPath));
+                    }
+                }
             }
 
             Query query = em.createQuery(cq);
 
-            query.setFirstResult(page.getFrom());
-            query.setMaxResults(page.getNumOfRowsPerPage());
+            query.setFirstResult(page.getStart());
+            query.setMaxResults(page.getLength());
             retList = query.getResultList();
 
-            page.setRecords(retList);
+            DataTableResults<User> dataTableResult = new DataTableResults<>();
+            dataTableResult.setData(retList);
 
             CriteriaQuery<Long> cqLong = cb.createQuery(Long.class);
             Root<T> entity_ = cqLong.from(cq.getResultType());
             cqLong.select(cb.count(entity_));
+            for (String pathStr : page.getSelects()) {
+                String[] attributes = pathStr.split("\\.");
+                if (attributes != null && attributes.length > 1) {
+                    entity_.join(attributes[0], JoinType.LEFT);
+                }
+            }
             Predicate restriction = cq.getRestriction();
             if (restriction != null) {
                 cqLong.where(restriction); // Copy restrictions
@@ -276,7 +300,11 @@ public class JpaDaoHelper {
 
             Long allCount = em.createQuery(cqLong).getSingleResult();
 
-            page.setAllCount(allCount);
+            dataTableResult.setRecordsTotal(allCount);
+            dataTableResult.setRecordsFiltered(allCount);
+            dataTableResult.setDraw(page.getDraw());
+
+            return (DataTableResults<T>) dataTableResult;
         } finally {
             if (em != null) {
                 em.close();

@@ -2,7 +2,11 @@ package com.javatmp.mvc.domain.table;
 
 import java.util.List;
 
-public class DataTableRequest {
+public class DataTableRequest<T> {
+
+    private Class<T> classType;
+
+    private String[] selects;
 
     /**
      * The unique id.
@@ -217,6 +221,34 @@ public class DataTableRequest {
      */
     public void setGlobalSearch(boolean isGlobalSearch) {
         this.isGlobalSearch = isGlobalSearch;
+    }
+
+    /**
+     * @return the classType
+     */
+    public Class<T> getClassType() {
+        return classType;
+    }
+
+    /**
+     * @param classType the classType to set
+     */
+    public void setClassType(Class<T> classType) {
+        this.classType = classType;
+    }
+
+    /**
+     * @return the selects
+     */
+    public String[] getSelects() {
+        return selects;
+    }
+
+    /**
+     * @param selects the selects to set
+     */
+    public void setSelects(String[] selects) {
+        this.selects = selects;
     }
 
     /**

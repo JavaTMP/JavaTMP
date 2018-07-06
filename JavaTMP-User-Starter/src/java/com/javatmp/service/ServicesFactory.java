@@ -1,5 +1,6 @@
 package com.javatmp.service;
 
+import com.javatmp.db.JpaDaoHelper;
 import java.util.Date;
 import java.util.logging.Logger;
 

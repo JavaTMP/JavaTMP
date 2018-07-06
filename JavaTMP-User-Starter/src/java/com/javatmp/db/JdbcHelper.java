@@ -1,4 +1,4 @@
-package com.javatmp;
+package com.javatmp.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
