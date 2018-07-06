@@ -1,5 +1,3 @@
-CREATE DATABASE IF NOT EXISTS appdb;
-USE appdb;
 
 CREATE TABLE document (
     documentId BIGINT NOT NULL AUTO_INCREMENT,

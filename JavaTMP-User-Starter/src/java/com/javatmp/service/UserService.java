@@ -73,7 +73,7 @@ public class UserService {
     }
 
     public User readUserByUsername(User user) {
-
+        User dbUser = null;
         EntityManager em = null;
         try {
             em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
@@ -89,8 +89,8 @@ public class UserService {
             cq.where(cb.equal(from.get(User_.userName), user.getUserName()));
             TypedQuery<User> query = em.createQuery(cq);
 
-            user = query.getSingleResult();
-            return user;
+            dbUser = query.getSingleResult();
+            return dbUser;
         } finally {
             if (em != null) {
                 em.close();

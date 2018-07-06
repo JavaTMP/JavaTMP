@@ -9,6 +9,8 @@ import com.javatmp.service.ServicesFactory;
 import com.javatmp.service.UserService;
 import com.javatmp.util.Constants;
 import java.io.IOException;
+import java.text.ParseException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,19 +27,24 @@ public class ListUsersController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        ResponseMessage responseMessage = new ResponseMessage();
-        ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
-        UserService cs = sf.getUserService();
+        try {
+            ResponseMessage responseMessage = new ResponseMessage();
+            ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
+            UserService cs = sf.getUserService();
 
-        DataTableRequest tableRequest = (DataTableRequest) MvcHelper.readObjectFromRequest(request, DataTableRequest.class);
-        logger.info("datatableRequest [" + MvcHelper.deepToString(tableRequest) + "]");
+            DataTableRequest tableRequest = (DataTableRequest) MvcHelper.readObjectFromRequest(request, DataTableRequest.class);
+            logger.info("datatableRequest [" + MvcHelper.deepToString(tableRequest) + "]");
 
 //        DataTableResults<User> dataTableResult = cs.listUsers(tableRequest);
-        DataTableResults<User> dataTableResult = cs.listAllUsers(tableRequest);
-        responseMessage.setOverAllStatus(true);
-        responseMessage.setData(dataTableResult);
+            DataTableResults<User> dataTableResult = cs.listAllUsers(tableRequest);
+            responseMessage.setOverAllStatus(true);
+            responseMessage.setData(dataTableResult);
 
-        MvcHelper.sendMessageAsJson(response, responseMessage);
+            MvcHelper.sendMessageAsJson(response, responseMessage);
+        } catch (ParseException ex) {
+            logger.log(Level.SEVERE, null, ex);
+            throw new ServletException("@ListUsersController", ex);
+        }
 
     }
 }
