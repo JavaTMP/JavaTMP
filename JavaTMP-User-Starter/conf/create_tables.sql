@@ -29,5 +29,5 @@ CREATE TABLE user (
     CONSTRAINT user_id_pk PRIMARY KEY (id),
     CONSTRAINT user_userName_uni UNIQUE(userName),
     CONSTRAINT user_profilePicDocumentId_fk FOREIGN KEY (profilePicDocumentId)
-    REFERENCES document (documentId) ON DELETE CASCADE
+    REFERENCES document (documentId)
 ) ENGINE=InnoDB;

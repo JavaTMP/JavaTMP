@@ -9,6 +9,7 @@ import com.javatmp.domain.User;
 import com.javatmp.db.JpaDaoHelper;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.service.UserService;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 
 /**
@@ -27,17 +28,19 @@ public class TestDeleteUser {
         userService = new UserService(jpaDaoHelper);
         try {
             User user = new User(1L);
-            user = userService.readCompleteUserById(user);
+//            user = userService.readCompleteUserById(user);
             int status = 0;
             System.out.println("User to be Deleted [" + MvcHelper.deepToString(user) + "]");
             status = userService.deleteUser(user);
 
             System.out.println("status [" + status + "]");
+//        } catch (NoResultException e) {
+//            System.out.println("e [" + e.getMessage() + "]");
         } catch (PersistenceException e) {
             Throwable t = e;
             while (t != null) {
-                System.out.println("type [" + e.getClass().getName() + "]");
-                System.out.println("e [" + e.getMessage() + "]");
+                System.out.println("type [" + t.getClass().getName() + "]");
+                System.out.println("t [" + t.getMessage() + "]");
                 t = t.getCause();
             }
         }

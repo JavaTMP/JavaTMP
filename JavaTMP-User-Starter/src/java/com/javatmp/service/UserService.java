@@ -188,6 +188,7 @@ public class UserService {
                 deleteUser.where(cb.equal(userRoot.get(User_.id), dbUser.getId()));
                 updateStatus = em.createQuery(deleteUser).executeUpdate();
             }
+            em.getTransaction().commit();
             return updateStatus;
         } catch (IllegalArgumentException | PersistenceException e) {
             e.printStackTrace();
