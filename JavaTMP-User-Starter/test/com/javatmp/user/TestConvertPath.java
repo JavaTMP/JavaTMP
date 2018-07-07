@@ -7,7 +7,6 @@ package com.javatmp.user;
 
 import com.javatmp.domain.User;
 import com.javatmp.domain.User_;
-import com.javatmp.service.DBFaker;
 import com.javatmp.db.JpaDaoHelper;
 import com.javatmp.service.UserService;
 import java.util.List;
@@ -32,12 +31,10 @@ public class TestConvertPath {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        DBFaker dbFaker;
         JpaDaoHelper jpaDaoHelper;
         UserService userService;
-        dbFaker = new DBFaker();
         jpaDaoHelper = new JpaDaoHelper("AppPU");
-        userService = new UserService(dbFaker, jpaDaoHelper);
+        userService = new UserService(jpaDaoHelper);
         EntityManager em = null;
         try {
             em = jpaDaoHelper.getEntityManagerFactory().createEntityManager();

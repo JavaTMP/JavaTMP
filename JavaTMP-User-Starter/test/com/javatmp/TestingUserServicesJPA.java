@@ -7,7 +7,6 @@ package com.javatmp;
 
 import com.javatmp.domain.User;
 import com.javatmp.mvc.MvcHelper;
-import com.javatmp.service.DBFaker;
 import com.javatmp.db.JpaDaoHelper;
 import com.javatmp.service.UserService;
 import java.sql.SQLException;
@@ -22,12 +21,10 @@ public class TestingUserServicesJPA {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException {
-        DBFaker dbFaker;
         JpaDaoHelper jpaDaoHelper;
         UserService userService;
-        dbFaker = new DBFaker();
         jpaDaoHelper = new JpaDaoHelper("AppPU");
-        userService = new UserService(dbFaker, jpaDaoHelper);
+        userService = new UserService(jpaDaoHelper);
 
         User user = new User();
         user.setUserName("user1");

@@ -9,7 +9,6 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.javatmp.domain.Document;
 import com.javatmp.domain.User;
-import com.javatmp.service.DBFaker;
 import com.javatmp.util.MD5Util;
 import java.io.FileNotFoundException;
 import java.io.InputStream;

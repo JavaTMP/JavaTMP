@@ -6,7 +6,6 @@
 package com.javatmp.user;
 
 import com.javatmp.domain.User;
-import com.javatmp.mvc.MvcHelper;
 import com.javatmp.db.JpaDaoHelper;
 import com.javatmp.service.UserService;
 import javax.persistence.PersistenceException;
@@ -15,7 +14,7 @@ import javax.persistence.PersistenceException;
  *
  * @author JavaTMP
  */
-public class TestUpdateUser {
+public class TestUpdateStatusUser {
 
     /**
      * @param args the command line arguments
@@ -25,14 +24,12 @@ public class TestUpdateUser {
         UserService userService;
         jpaDaoHelper = new JpaDaoHelper("AppPU");
         userService = new UserService(jpaDaoHelper);
-
-        User user = userService.readCompleteUserById(new User(1L));
-        System.out.println(MvcHelper.deepToString(user));
         try {
-            user.setUserName("daw232323223232rim");
-            user.getProfilePicDocument().setDocumentName("232w32323223232");
-            int updateStatus = userService.updateCompleteUser(user);
-            System.out.println("Update status >" + (updateStatus));
+            User user = new User(1L);
+            user = userService.readUserByUserId(user);
+
+            int status = userService.deActivateUser(user);
+            System.out.println("status [" + status + "]");
         } catch (PersistenceException e) {
             Throwable t = e;
             while (t != null) {

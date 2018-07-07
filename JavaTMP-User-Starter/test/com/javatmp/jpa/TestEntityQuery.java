@@ -5,21 +5,8 @@
  */
 package com.javatmp.jpa;
 
-import com.javatmp.user.*;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.javatmp.*;
 import com.javatmp.domain.User;
-import com.javatmp.mvc.MvcHelper;
-import com.javatmp.mvc.adapter.ClassTypeAdapter;
-import com.javatmp.mvc.adapter.OrderDirTypeAdapter;
-import com.javatmp.mvc.domain.table.DataTableRequest;
-import com.javatmp.mvc.domain.table.DataTableResults;
-import com.javatmp.mvc.domain.table.OrderDir;
-import com.javatmp.service.DBFaker;
 import com.javatmp.db.JpaDaoHelper;
-import com.javatmp.service.UserService;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
