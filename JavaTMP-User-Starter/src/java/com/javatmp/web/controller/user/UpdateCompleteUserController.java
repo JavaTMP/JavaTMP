@@ -44,7 +44,7 @@ public class UpdateCompleteUserController extends HttpServlet {
             logger.info("User to be Updated is [" + MvcHelper.toString(userToBeUpdated) + "]");
             Document fileUploading = MvcHelper.readDocumentFromRequest(request, "profilePicture");
 
-            dbUser = us.readUserByUserId(userToBeUpdated);
+            dbUser = us.readCompleteUserById(userToBeUpdated);
             logger.info("Existing DB User to be Updated is [" + MvcHelper.toString(dbUser) + "]");
 
             // first check if existing db password equal provided old password:

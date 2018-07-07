@@ -76,7 +76,6 @@
                         <option value="">ALL Statuses</option>
                         <option value="1">Activated</option>
                         <option value="0">Deactivated</option>
-                        <option value="-1">Deleted</option>
                     </select>
                 </th>
                 <th style="width: 200px;">

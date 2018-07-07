@@ -75,13 +75,13 @@ public class PopulateDBFromJson {
         logingUser.setAddress("<p>Not provided yet</p>");
 
         profileDocument = prepareDocument("profilePicture", "image/png", "iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAABP0lEQVR4nO3XMavqMBiH8Sf1aqnp4CZEHEVE/AZ+/8nFSUTEqSooWDcDTXKHA2dtDu+Be4f3N/cPD0mXmN1ul/iPFf86oI8GSmmglAZKaaCUBkppoJQGSv3J/fDz+bDf79lsNqSUOBwOpJRYrVbUdf3rux8Hns9nYozEGLler0wmE4wxNE3DcrnkdDpRFAUxRqy1OOeydn2yrvj9ftN1HaPRCPg6laqqGI/HeO8BcM7xfD5p25bpdJq9+5XA2+2Gc46u60gpkVLCGEMIAWMMANZaiqLAWstgMMje9cm64hACx+MRgMvlQlmWeO8JIVBVFfB1WsYYXq8X3nvKssza9ck6wfV6zXa7ZTgcslgsmM1mPB4P2rb9/teapmE+n1PXNff7PXvXx+irTkgDpTRQSgOlNFBKA6U0UEoDpTRQ6i+ZRr8OBrK0SQAAAABJRU5ErkJggg==");
-        logingUser.setProfilePicDocument(profileDocument);
+
+        profileDocument.setDocumentId(1L);
+        em.merge(profileDocument);
+//        logingUser.setId(null);
         logingUser.setProfilePicDocumentId(profileDocument.getDocumentId());
-        em.persist(profileDocument);
-        logingUser.setId(null);
-        logingUser.setProfilePicDocumentId(profileDocument.getDocumentId());
         logingUser.setProfilePicDocument(profileDocument);
-        em.persist(logingUser);
+        em.merge(logingUser);
         for (int i = 0; i < data.size(); i++) {
             User user = new User();
             Map<String, String> record = data.get(i);

@@ -23,7 +23,6 @@
                                 <select name="status" class="custom-select">
                                     <option ${requestScope.user.status == 1 ? 'selected="selected"' : ''} value="1">Activated</option>
                                     <option ${requestScope.user.status == 0 ? 'selected="selected"' : ''} value="0">Deactivated</option>
-                                    <option ${requestScope.user.status == -1 ? 'selected="selected"' : ''} value="-1">Deleted</option>
                                 </select>
                             </div>
                         </div>

@@ -39,9 +39,6 @@ public class UserService {
         this.jpaDaoHelper = jpaDaoHelper;
     }
 
-//    public User readUserByUserId(User user) {
-//        return this.jpaDaoHelper.read(User.class, user.getId());
-//    }
     public User readCompleteUserById(User user) {
 
         EntityManager em = null;
@@ -163,7 +160,7 @@ public class UserService {
     }
 
     public int deleteUser(User userToBeDeleted) {
-        int updateStatus = 0;
+        int deletedStatus = 0;
         EntityManager em = null;
         try {
             em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
@@ -176,20 +173,23 @@ public class UserService {
             TypedQuery<User> query = em.createQuery(cq);
             query.setLockMode(LockModeType.PESSIMISTIC_WRITE);
             User dbUser = query.getSingleResult();
+            // here you can check for any pre delete code:
 
-            // delete document first:
-            CriteriaDelete<Document> delete = cb.createCriteriaDelete(Document.class);
-            Root<Document> e = delete.from(Document.class);
-            delete.where(cb.equal(e.get(Document_.documentId), dbUser.getProfilePicDocumentId()));
-            int deletedStatus = em.createQuery(delete).executeUpdate();
+            // delete user first:
+            CriteriaDelete<User> deleteUser = cb.createCriteriaDelete(User.class);
+            Root<User> userRoot = deleteUser.from(User.class);
+            deleteUser.where(cb.equal(userRoot.get(User_.id), dbUser.getId()));
+            deletedStatus = em.createQuery(deleteUser).executeUpdate();
+            // delete document second if user deleted:
             if (deletedStatus == 1) {
-                CriteriaDelete<User> deleteUser = cb.createCriteriaDelete(User.class);
-                Root<User> userRoot = deleteUser.from(User.class);
-                deleteUser.where(cb.equal(userRoot.get(User_.id), dbUser.getId()));
-                updateStatus = em.createQuery(deleteUser).executeUpdate();
+                CriteriaDelete<Document> delete = cb.createCriteriaDelete(Document.class);
+                Root<Document> e = delete.from(Document.class);
+                delete.where(cb.equal(e.get(Document_.documentId), dbUser.getProfilePicDocumentId()));
+                deletedStatus = em.createQuery(delete).executeUpdate();
             }
+
             em.getTransaction().commit();
-            return updateStatus;
+            return deletedStatus;
         } catch (IllegalArgumentException | PersistenceException e) {
             e.printStackTrace();
             if (em != null) {

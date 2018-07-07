@@ -12,6 +12,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
+import javax.persistence.NoResultException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -46,7 +47,7 @@ public class LoginController extends HttpServlet {
             logger.info("Check User [" + MvcHelper.deepToString(user) + "]");
             User dbUser = sf.getUserService().readUserByUsername(user);
 
-            if (dbUser != null && dbUser.getPassword().equals(MD5Util.convertToMD5(user.getPassword()))) {
+            if (dbUser.getPassword().equals(MD5Util.convertToMD5(user.getPassword()))) {
                 // Authenticated user
                 logger.info("User found [" + MvcHelper.deepToString(dbUser) + "]");
 
@@ -62,19 +63,19 @@ public class LoginController extends HttpServlet {
                 responseMessage.setOverAllStatus(false);
                 responseMessage.setMessage("kindly Check your username and password");
             }
-
-            MvcHelper.sendMessageAsJson(response, responseMessage);
-
+        } catch (NoResultException ex) {
+            // un authenticated user
+            responseMessage.setOverAllStatus(false);
+            responseMessage.setMessage("kindly Check your username and password");
         } catch (IllegalAccessException ex) {
             ex.printStackTrace();
             throw new ServletException(ex);
         } catch (InvocationTargetException ex) {
             ex.printStackTrace();
             throw new ServletException(ex);
-        } catch (UnsupportedEncodingException ex) {
-            ex.printStackTrace();
-            throw new ServletException(ex);
         }
+
+        MvcHelper.sendMessageAsJson(response, responseMessage);
     }
 
 }
