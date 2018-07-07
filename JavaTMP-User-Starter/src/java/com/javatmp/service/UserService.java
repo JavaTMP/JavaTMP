@@ -21,6 +21,7 @@ import javax.persistence.LockModeType;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Join;
@@ -38,10 +39,9 @@ public class UserService {
         this.jpaDaoHelper = jpaDaoHelper;
     }
 
-    public User readUserByUserId(User user) {
-        return this.jpaDaoHelper.read(User.class, user.getId());
-    }
-
+//    public User readUserByUserId(User user) {
+//        return this.jpaDaoHelper.read(User.class, user.getId());
+//    }
     public User readCompleteUserById(User user) {
 
         EntityManager em = null;
@@ -164,17 +164,38 @@ public class UserService {
 
     public int deleteUser(User userToBeDeleted) {
         int updateStatus = 0;
-//        for (User dbUser : dBFaker.getUsersList()) {
-//            if (dbUser.getId().equals(userToBeDeleted.getId())) {
-//                if (dbUser.getStatus().equals((short) -1)) {
-//                    throw new IllegalArgumentException("user is already deleted !!!");
-//                }
-//                dbUser.setStatus((short) -1);
-//                updateStatus = 1;
-//                break;
-//            }
-//        }
-        return updateStatus;
+        EntityManager em = null;
+        try {
+            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            em.getTransaction().begin();
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<User> cq = cb.createQuery(User.class);
+            Root<User> from = cq.from(User.class);
+            cq.multiselect(from.get(User_.id), from.get(User_.profilePicDocumentId));
+            cq.where(cb.equal(from.get(User_.id), userToBeDeleted.getId()));
+            TypedQuery<User> query = em.createQuery(cq);
+            query.setLockMode(LockModeType.PESSIMISTIC_WRITE);
+            User dbUser = query.getSingleResult();
+
+            // delete document first:
+            CriteriaDelete<Document> delete = cb.createCriteriaDelete(Document.class);
+            Root<Document> e = delete.from(Document.class);
+            delete.where(cb.equal(e.get(Document_.documentId), dbUser.getProfilePicDocumentId()));
+            int deletedStatus = em.createQuery(delete).executeUpdate();
+            if (deletedStatus == 1) {
+                CriteriaDelete<User> deleteUser = cb.createCriteriaDelete(User.class);
+                Root<User> userRoot = deleteUser.from(User.class);
+                deleteUser.where(cb.equal(userRoot.get(User_.id), dbUser.getId()));
+                updateStatus = em.createQuery(deleteUser).executeUpdate();
+            }
+            return updateStatus;
+        } catch (IllegalArgumentException | PersistenceException e) {
+            e.printStackTrace();
+            if (em != null) {
+                em.getTransaction().rollback();
+            }
+            throw e;
+        }
     }
 
     public int activateUser(User userToBeUpdated) {
@@ -195,8 +216,12 @@ public class UserService {
                 throw new IllegalArgumentException("user is already Active !!!");
             }
             dbUser.setStatus((short) 1);
+            CriteriaUpdate<User> update = cb.createCriteriaUpdate(User.class);
+            Root<User> e = update.from(User.class);
+            update.set("status", 1);
+            update.where(cb.equal(from.get(User_.id), userToBeUpdated.getId()));
+            updateStatus = em.createQuery(update).executeUpdate();
             em.getTransaction().commit();
-            updateStatus = 1;
             return updateStatus;
         } catch (IllegalArgumentException | PersistenceException e) {
             e.printStackTrace();

@@ -14,6 +14,7 @@ public class TimezoneService {
 
     public TimezoneService(JpaDaoHelper jpaDaoHelper) {
         this.jpaDaoHelper = jpaDaoHelper;
+        generateTimezones();
     }
 
     private void generateTimezones() {

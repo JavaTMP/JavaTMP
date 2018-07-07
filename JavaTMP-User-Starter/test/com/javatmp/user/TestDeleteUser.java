@@ -7,6 +7,7 @@ package com.javatmp.user;
 
 import com.javatmp.domain.User;
 import com.javatmp.db.JpaDaoHelper;
+import com.javatmp.mvc.MvcHelper;
 import com.javatmp.service.UserService;
 import javax.persistence.PersistenceException;
 
@@ -14,7 +15,7 @@ import javax.persistence.PersistenceException;
  *
  * @author JavaTMP
  */
-public class TestUpdateStatusUser {
+public class TestDeleteUser {
 
     /**
      * @param args the command line arguments
@@ -26,16 +27,10 @@ public class TestUpdateStatusUser {
         userService = new UserService(jpaDaoHelper);
         try {
             User user = new User(1L);
-            user = userService.readUserByUserId(user);
+            user = userService.readCompleteUserById(user);
             int status = 0;
-            System.out.println("current status = " + user.getStatus());
-            if (user.getStatus().equals(new Short("1"))) {
-                System.out.println("Start deactivate");
-                status = userService.deActivateUser(user);
-            } else {
-                System.out.println("Start activate");
-                status = userService.activateUser(user);
-            }
+            System.out.println("User to be Deleted [" + MvcHelper.deepToString(user) + "]");
+            status = userService.deleteUser(user);
 
             System.out.println("status [" + status + "]");
         } catch (PersistenceException e) {

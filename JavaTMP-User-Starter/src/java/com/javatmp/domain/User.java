@@ -68,6 +68,11 @@ public class User implements Serializable {
         this.status = status;
     }
 
+    public User(Long id, Long profilePicDocumentId) {
+        this.id = id;
+        this.profilePicDocumentId = profilePicDocumentId;
+    }
+
     public User(String userName, String password) {
         this.userName = userName;
         this.password = password;

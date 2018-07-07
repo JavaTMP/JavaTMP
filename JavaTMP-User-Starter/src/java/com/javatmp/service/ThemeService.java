@@ -13,6 +13,7 @@ public class ThemeService {
 
     public ThemeService(JpaDaoHelper jpaDaoHelper) {
         this.jpaDaoHelper = jpaDaoHelper;
+        generateThemes();
     }
 
     private void generateThemes() {

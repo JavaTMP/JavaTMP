@@ -39,8 +39,6 @@ public class DeactivateUserController extends HttpServlet {
             MvcHelper.populateBeanByRequestParameters(request, userToBeUpdated);
             logger.info("User to be Deactivated is [" + MvcHelper.toString(userToBeUpdated) + "]");
 
-            dbUser = us.readUserByUserId(userToBeUpdated);
-            logger.info("Existing DB User to be Updated is [" + MvcHelper.toString(dbUser) + "]");
             int updateStatus = 0;
             updateStatus = us.deActivateUser(userToBeUpdated);
 
