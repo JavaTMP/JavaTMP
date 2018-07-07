@@ -1,12 +1,18 @@
 package com.javatmp.domain;
 
 import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "country")
 public class Country implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private String countryId;
 
+    @Id
+    private String countryId;
     private String countryName;
 
     public Country() {

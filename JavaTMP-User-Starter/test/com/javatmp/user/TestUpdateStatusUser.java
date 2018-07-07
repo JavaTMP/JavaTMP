@@ -26,7 +26,7 @@ public class TestUpdateStatusUser {
         userService = new UserService(jpaDaoHelper);
         try {
             User user = new User(1L);
-            user = userService.readUserByUserId(user);
+            user = userService.readCompleteUserById(user);
             int status = 0;
             System.out.println("current status = " + user.getStatus());
             if (user.getStatus().equals(new Short("1"))) {

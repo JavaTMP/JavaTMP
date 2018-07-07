@@ -312,14 +312,7 @@ public class JpaDaoHelper {
         }
     }
 
-    /**
-     * @return the entityManagerFactory
-     */
     public EntityManagerFactory getEntityManagerFactory() {
         return emf;
-    }
-
-    public static void main(String[] args) {
-        // TODO code application logic here
     }
 }
