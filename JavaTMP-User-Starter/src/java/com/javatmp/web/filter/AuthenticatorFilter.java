@@ -29,6 +29,7 @@ public class AuthenticatorFilter implements Filter {
         excludeControllers.add("/assets");
         excludeControllers.add("/login");
         excludeControllers.add("/logout");
+        excludeControllers.add("/register");
     }
 
     @Override

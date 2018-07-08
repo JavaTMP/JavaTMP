@@ -41,7 +41,7 @@ CREATE TABLE `user` (
     status TINYINT NOT NULL,
     birthDate DATE NOT NULL,
     countryId varchar(4) NOT NULL,
-    address TEXT NOT NULL,
+    address TEXT,
     email varchar(45) NOT NULL,
     lang varchar(4) NOT NULL,
     theme varchar(48) NOT NULL,

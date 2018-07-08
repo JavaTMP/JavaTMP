@@ -6,10 +6,8 @@
 package com.javatmp.timezones;
 
 import com.javatmp.db.JpaDaoHelper;
-import com.javatmp.domain.Theme;
 import com.javatmp.domain.Timezone;
 import com.javatmp.mvc.MvcHelper;
-import com.javatmp.service.ThemeService;
 import com.javatmp.service.TimezoneService;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -33,7 +31,7 @@ public class TestingPopulateTimezone {
         List<Timezone> timezones = timezoneService.getTimezones();
 
         timezones.forEach((timezone) -> {
-            System.out.println(MvcHelper.deepToString(timezone));
+//            System.out.println(MvcHelper.deepToString(timezone));
             jpaDaoHelper.create(timezone);
         });
 

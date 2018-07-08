@@ -22,11 +22,11 @@
             <property name="hibernate.connection.useUnicode" value="true"/>
             <property name="hibernate.connection.characterEncoding" value="UTF8"/>
             <!-- Configuring Connection Pool -->
-            <property name="hibernate.c3p0.min_size" value="1"/>
+            <property name="hibernate.c3p0.min_size" value="0"/>
             <property name="hibernate.c3p0.max_size" value="1"/>
             <property name="hibernate.c3p0.timeout" value="1000"/>
             <property name="hibernate.c3p0.max_statements" value="50"/>
-            <property name="hibernate.c3p0.idle_test_period" value="2000"/>
+            <property name="hibernate.c3p0.idle_test_period" value="10000"/>
         </properties>
     </persistence-unit>
 </persistence>
