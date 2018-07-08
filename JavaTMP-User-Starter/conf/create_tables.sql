@@ -4,6 +4,11 @@ CREATE TABLE theme (
     CONSTRAINT theme_themeId_pk PRIMARY KEY (themeId)
 ) ENGINE=InnoDB;
 
+CREATE TABLE timezone (
+    timezoneId varchar(64) NOT NULL,
+    CONSTRAINT timezone_timezoneId_pk PRIMARY KEY (timezoneId)
+) ENGINE=InnoDB;
+
 CREATE TABLE language (
     languageId varchar(4) NOT NULL,
     languageName varchar(255) NOT NULL,
@@ -27,7 +32,7 @@ CREATE TABLE document (
     CONSTRAINT document_documentId_pk PRIMARY KEY (documentId)
 ) ENGINE=InnoDB;
 
-CREATE TABLE user (
+CREATE TABLE `user` (
     id BIGINT NOT NULL AUTO_INCREMENT,
     userName varchar(48) NOT NULL,
     password varchar(48) NOT NULL,
@@ -40,7 +45,7 @@ CREATE TABLE user (
     email varchar(45) NOT NULL,
     lang varchar(4) NOT NULL,
     theme varchar(48) NOT NULL,
-    timezone varchar(48) NOT NULL,
+    timezone varchar(64) NOT NULL,
     profilePicDocumentId BIGINT,
     creationDate TIMESTAMP NOT NULL,
     CONSTRAINT user_id_pk PRIMARY KEY (id),
@@ -48,5 +53,6 @@ CREATE TABLE user (
     CONSTRAINT user_profilePicDocumentId_fk FOREIGN KEY (profilePicDocumentId) REFERENCES document (documentId),
     CONSTRAINT user_countryId_fk FOREIGN KEY (countryId) REFERENCES country (countryId),
     CONSTRAINT user_lang_fk FOREIGN KEY (lang) REFERENCES language (languageId),
-    CONSTRAINT user_theme_fk FOREIGN KEY (theme) REFERENCES theme (themeId)
+    CONSTRAINT user_theme_fk FOREIGN KEY (theme) REFERENCES theme (themeId),
+    CONSTRAINT user_timezone_fk FOREIGN KEY (timezone) REFERENCES timezone (timezoneId)
 ) ENGINE=InnoDB;

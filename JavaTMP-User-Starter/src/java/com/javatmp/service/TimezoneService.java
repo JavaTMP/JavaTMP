@@ -1,7 +1,6 @@
 package com.javatmp.service;
 
 import com.javatmp.db.JpaDaoHelper;
-import com.javatmp.domain.Theme;
 import com.javatmp.domain.Timezone;
 import java.util.LinkedList;
 import java.util.List;

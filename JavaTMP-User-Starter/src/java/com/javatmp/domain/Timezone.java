@@ -1,11 +1,20 @@
 package com.javatmp.domain;
 
 import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
+@Entity
+@Table(name = "timezone")
 public class Timezone implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @Id
     private String timezoneId;
+
+    @Transient
     private String timezoneName;
 
     public Timezone() {
