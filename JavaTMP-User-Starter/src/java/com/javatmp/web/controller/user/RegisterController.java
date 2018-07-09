@@ -4,21 +4,21 @@ import com.javatmp.domain.Country;
 import com.javatmp.domain.Language;
 import com.javatmp.domain.Theme;
 import com.javatmp.domain.Timezone;
-import com.javatmp.web.controller.*;
 import com.javatmp.domain.User;
 import com.javatmp.mvc.domain.ResponseMessage;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.service.ServicesFactory;
+import com.javatmp.service.UserService;
 import com.javatmp.util.Constants;
 import com.javatmp.util.MD5Util;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 import javax.persistence.NoResultException;
+import javax.persistence.PersistenceException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -58,34 +58,23 @@ public class RegisterController extends HttpServlet {
         HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
         ServicesFactory sf = (ServicesFactory) context.getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
+        UserService userService = sf.getUserService();
 
         User user = new User();
         ResponseMessage responseMessage = new ResponseMessage();
         try {
             MvcHelper.populateBeanByRequestParameters(request, user);
-            logger.info("Check User [" + MvcHelper.deepToString(user) + "]");
-            User dbUser = sf.getUserService().readUserByUsername(user);
+            logger.info("User to be Registerd [" + MvcHelper.deepToString(user) + "]");
 
-            if (dbUser.getPassword().equals(MD5Util.convertToMD5(user.getPassword()))) {
-                // Authenticated user
-                logger.info("User found [" + MvcHelper.deepToString(dbUser) + "]");
+            userService.createNewBasicUser(user);
 
-                Locale locale = Locale.forLanguageTag(dbUser.getLang());
-                ResourceBundle bundle = ResourceBundle.getBundle(Constants.RESOURCE_BUNDLE_BASE_NAME, locale);
-                session.setAttribute(Constants.LANGUAGE_ATTR_KEY, bundle);
-                session.setAttribute("user", dbUser);
-
-                responseMessage.setOverAllStatus(true);
-                responseMessage.setMessage(request.getContextPath() + "/");
-            } else {
-                // un authenticated user
-                responseMessage.setOverAllStatus(false);
-                responseMessage.setMessage("kindly Check your username and password");
-            }
-        } catch (NoResultException ex) {
-            // un authenticated user
+            responseMessage.setOverAllStatus(true);
+            responseMessage.setMessage("User has registered successfully");
+            responseMessage.setRedirectURL(request.getContextPath() + "/");
+        } catch (PersistenceException e) {
+            e.printStackTrace();
             responseMessage.setOverAllStatus(false);
-            responseMessage.setMessage("kindly Check your username and password");
+            responseMessage.setMessage("error during connecting to database =>" + e.getMessage());
         } catch (IllegalAccessException ex) {
             ex.printStackTrace();
             throw new ServletException(ex);

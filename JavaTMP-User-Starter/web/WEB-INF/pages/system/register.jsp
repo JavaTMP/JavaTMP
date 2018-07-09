@@ -241,6 +241,16 @@
                     var post_url = $(this).attr("action"); //get form action url
                     //                    var form_data = new FormData(form); //Creates new FormData object
                     var form_data = $(this).serializeArray();
+                    console.log(JSON.stringify(form_data));
+                    alert(JSON.stringify(form_data));
+                    for (var i = 0; i < form_data.length; i++) {
+                        if (form_data[i].name === "birthOfDateStr") {
+                            var value = form_data[i].value;
+                            var newDate = moment(value, "DD/MM/YYYY").format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+                            form_data.push({"name": "birthDate", "value": newDate});
+                            break;
+                        }
+                    }
                     $.ajax({
                         type: httpType,
                         url: post_url,
@@ -249,15 +259,21 @@
                         data: form_data,
                         success: function (data) {
                             if (data.overAllStatus) {
-                                window.location.replace(data.message);
+                                alertError = BootstrapAlertWrapper.createAlert({
+                                    container: form,
+                                    place: "prepent",
+                                    type: "success",
+                                    message: data.message,
+                                    close: true
+                                });
                             } else {
                                 // show error to user
-                                var alertError = BootstrapAlertWrapper.createAlert({
+                                alertError = BootstrapAlertWrapper.createAlert({
                                     container: form,
                                     place: "prepent",
                                     type: "danger",
                                     message: data.message,
-                                    close: false
+                                    close: true
                                 });
                             }
                         },

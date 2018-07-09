@@ -109,6 +109,32 @@ public class UserService {
         return user;
     }
 
+    public User createNewBasicUser(User user) {
+
+        EntityManager em = null;
+
+        // set any default values:
+        user.setStatus((short) 1);
+
+        try {
+            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            em.getTransaction().begin();
+            em.persist(user);
+            em.getTransaction().commit();
+        } catch (PersistenceException e) {
+            e.printStackTrace();
+            if (em != null) {
+                em.getTransaction().rollback();
+            }
+            throw new PersistenceException("@ create new basic user", e);
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+        return user;
+    }
+
     public int updateCompleteUser(User userToBeUpdated) {
         int updateStatus = 0;
         EntityManager em = null;

@@ -39,24 +39,21 @@ public class GetUpdateUserPopupController extends HttpServlet {
             MvcHelper.populateBeanByRequestParameters(request, user);
             logger.info("request user is [" + MvcHelper.deepToString(user) + "]");
             User dbUser = sf.getUserService().readCompleteUserById(user);
-            logger.info("DB user to be Updated is [" + dbUser + "]");
+            logger.info("DB user to be Updated is [" + MvcHelper.deepToString(dbUser) + "]");
 
             List<Timezone> timezones = sf.getTimezoneService().getTimezones();
             List<Country> countries = sf.getCountryService().getCountries();
             List<Language> languages = sf.getLanguageService().getLanguages();
             List<Theme> themes = sf.getThemeService().getThemes();
-            DocumentService ds = sf.getDocumentService();
-            Document document = new Document();
-            document.setDocumentId(dbUser.getProfilePicDocumentId());
-            document = ds.readDocumentById(document);
-            dbUser.setProfilePicDocument(document);
 
             request.setAttribute("themes", themes);
             request.setAttribute("languages", languages);
             request.setAttribute("countries", countries);
             request.setAttribute("user", dbUser);
             request.setAttribute("timezones", timezones);
+
             request.getRequestDispatcher(requestPage).forward(request, response);
+
         } catch (IllegalAccessException ex) {
             logger.log(Level.SEVERE, null, ex);
             throw new ServletException(ex);
