@@ -45,6 +45,7 @@
                                     <input class="form-control required" placeholder="Password" name="password" type="password" value="user1">
                                 </div>
                                 <button disabled="" type="submit" href="javascript:;" class="btn btn-lg btn-primary btn-block">Login</button>
+                                <a href="${pageContext.request.contextPath}/register" class="btn btn-success btn-block">Register</a>
                             </form>
                         </div>
                     </div>

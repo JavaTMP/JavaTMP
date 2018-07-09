@@ -156,26 +156,6 @@
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <div class="col-md-3">
-                                        <div class="form-group">
-                                            <label for="exampleFormControlFile1">Profile Picture</label>
-                                            <div class="custom-file">
-                                                <input name="profilePicture" type="file" class="custom-file-input" id="validatedCustomFile">
-                                                <label class="custom-file-label" for="validatedCustomFile">Choose Profile Picture</label>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <img class="img-fluid" id="profilePictureResizePreview" style="width: 100%;" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
-                                        </div>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <div class="form-group">
-                                            <label class="control-label">address</label>
-                                            <textarea rows="8" class="form-control forceValidate" placeholder="" name="address"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-row">
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox">
@@ -211,12 +191,47 @@
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all-locale-${labels["global.language"]}.min.js" type="text/javascript"></script>
         <script type="text/javascript">
             (function ($) {
+                String.prototype.composeTemplate = (function () {
+                    var re = /\{{(.+?)\}}/g;
+                    return function (o) {
+                        return this.replace(re, function (_, k) {
+                            return typeof o[k] !== 'undefined' ? o[k] : '';
+                        });
+                    };
+                }());
+                // global variables initializing:
+                var javatmp = javatmp || {};
+                javatmp.settings = javatmp.settings || {};
+
+                javatmp.settings.httpMethod = "GET";
+                javatmp.settings.dataType = "html";
+                javatmp.settings.updateURLHash = true;
+                javatmp.settings.defaultPassData = {_ajax: "ajax", _ajaxGlobalBlockUI: true, _handleAjaxErrorGlobally: true};
+                javatmp.settings.defaultOutputSelector = '.main-body-content-container';
+                javatmp.settings.defaultUrl = '${pageContext.request.contextPath}/pages/home';
+                javatmp.settings.floatDefault = "${labels['global.floatDefault']}";
+                javatmp.settings.floatReverse = "${labels['global.floatReverse']}";
+                javatmp.settings.direction = "${labels['global.direction']}";
+                javatmp.settings.isRTL = ${labels['global.direction'] == 'ltr' ? 'false' : 'true'};
+                javatmp.settings.contextPath = '${pageContext.request.contextPath}';
+
+                jQuery.validator.addMethod("validDate", function (value, element) {
+                    return this.optional(element) || moment(value, "DD/MM/YYYY", true).isValid();
+                }, "Please enter a valid date in the format DD/MM/YYYY");
+                jQuery.validator.addMethod("dateBeforeNow", function (value, element, params) {
+                    if (this.optional(element) || value === "")
+                        return true;
+                    if (moment(value, "DD/MM/YYYY").isBefore(moment().set({hour: 0, minute: 0, second: 0, millisecond: 0})))
+                        return true;
+                    return false;
+                }, 'Must be less than Now.');
+
                 // https://www.sanwebe.com/2016/07/ajax-form-submit-examples-using-jquery
                 // https://stackoverflow.com/questions/1960240/jquery-ajax-submit-form
-                var loginForm = $('#main-register-form');
+                var form = $('#main-register-form');
                 var validator = null;
                 var alertError = null;
-                loginForm.on("submit", function (event) {
+                form.on("submit", function (event) {
                     event.preventDefault();
                     if (!$(this).valid()) {
                         return;
@@ -224,7 +239,7 @@
                     $('#' + alertError).remove();
                     var httpType = $(this).attr("method");
                     var post_url = $(this).attr("action"); //get form action url
-                    //                    var form_data = new FormData(loginForm); //Creates new FormData object
+                    //                    var form_data = new FormData(form); //Creates new FormData object
                     var form_data = $(this).serializeArray();
                     $.ajax({
                         type: httpType,
@@ -238,7 +253,7 @@
                             } else {
                                 // show error to user
                                 var alertError = BootstrapAlertWrapper.createAlert({
-                                    container: loginForm,
+                                    container: form,
                                     place: "prepent",
                                     type: "danger",
                                     message: data.message,
@@ -252,12 +267,54 @@
                     });
                 });
 
-                validator = loginForm.validate({
+                validator = form.validate({
                     rules: {
-                        username: {
+                        firstName: {
+                            required: true
+                        },
+                        lastName: {
+                            required: true
+                        },
+                        email: {
+                            required: true,
+                            email: true,
+                            minlength: 5,
+                            maxlength: 50
+                        },
+                        birthOfDateStr: {
+                            required: true,
+                            validDate: true,
+                            dateBeforeNow: true
+                        },
+                        countryId: {
+                            required: true
+                        },
+                        address: {
+                            required: true,
+                            maxlength: 400
+                        },
+                        userName: {
                             required: true
                         },
                         password: {
+                            required: true,
+                            minlength: 6,
+                            maxlength: 20
+                        },
+                        rpassword: {
+                            required: true,
+                            equalTo: "#password"
+                        },
+                        tnc: {
+                            required: true
+                        },
+                        lang: {
+                            required: true
+                        },
+                        timezone: {
+                            required: true
+                        },
+                        theme: {
                             required: true
                         }
                     },
@@ -279,6 +336,156 @@
                         }
                     }
                 });
+
+                form.find("input[name='birthOfDateStr']").inputmask({
+                    alias: "datetime",
+                    placeholder: "dd/mm/yyyy",
+                    inputFormat: "dd/mm/yyyy",
+                    displayFormat: true,
+                    hourFormat: "24",
+                    clearMaskOnLostFocus: false
+                });
+                form.find("input[name='birthOfDateStr']").daterangepicker({
+                    "opens": javatmp.settings.floatReverse,
+                    startDate: moment().format("DD/MM/YYYY"),
+                    singleDatePicker: true,
+                    showDropdowns: true,
+                    timePicker: false,
+                    timePickerIncrement: 1,
+                    timePicker24Hour: true,
+                    autoApply: true,
+                    autoUpdateInput: false,
+                    minDate: '01/01/1900',
+                    maxDate: '31/12/2099',
+                    //                    maxDate: '',
+                    //                    minDate: moment(),
+                    locale: {
+                        "direction": javatmp.settings.direction,
+                        format: 'DD/MM/YYYY'
+                    }
+                }, function (start, end, label) {
+                    var formatedDateSelected = moment(start).format("DD/MM/YYYY");
+                    form.find("input[name='birthOfDateStr']").val(formatedDateSelected).trigger("change");
+                });
+                $(".daterangepicker.dropdown-menu").css('z-index', 600 + 1);
+                form.find("textarea[name='address']").summernote({height: 250});
+                $.fn.select2.defaults.set("theme", "bootstrap");
+                $.fn.select2.defaults.set("dir", javatmp.settings.direction);
+                form.find("select[name='lang']").select2({
+                    allowClear: true,
+                    placeholder: "Select a language",
+                    containerCssClass: ':all:',
+                    width: ''
+                });
+                form.find("select[name='theme']").select2({
+                    allowClear: true,
+                    placeholder: "Select a theme",
+                    containerCssClass: ':all:',
+                    width: '',
+                    escapeMarkup: function (markup) {
+                        return markup;
+                    },
+                    templateSelection: formatThemeSelection,
+                    templateResult: formatThemeResult
+                });
+                form.find("select[name='timezone']").select2({
+                    allowClear: true,
+                    placeholder: "Select a timezone",
+                    containerCssClass: ':all:',
+                    width: ''
+                });
+                form.find("select[name='countryId']").select2({
+                    theme: "bootstrap",
+                    dir: javatmp.settings.direction,
+                    allowClear: true,
+                    placeholder: "Select a country",
+                    containerCssClass: ':all:',
+                    width: '',
+                    templateSelection: formatCountrySelection,
+                    templateResult: formatCountry,
+                    escapeMarkup: function (markup) {
+                        return markup;
+                    }
+                }).on("select2:select", function () {
+                    (this).focus();
+                });
+                function formatCountry(repo) {
+                    if (repo.loading)
+                        return repo.text;
+                    var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
+                    var template =
+                            '    <div class="media d-flex align-items-center">' +
+                            '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
+                            '        <div class="media-body">' +
+                            '            <strong>{{countryText}} ({{countryId}})</strong>' +
+                            '        </div>' +
+                            '    </div>';
+                    var readyData = template.composeTemplate({
+                        'imagePath': imagePath,
+                        'countryText': repo.text,
+                        'countryId': repo.id
+                    });
+                    return readyData;
+                }
+                function formatCountrySelection(repo) {
+                    if (!repo.id) {
+                        return repo.text;
+                    }
+
+                    var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
+                    var template =
+                            '    <div class="media d-flex align-items-center">' +
+                            '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
+                            '        <div class="media-body">' +
+                            '            <span>{{countryText}} ({{countryId}})</span>' +
+                            '        </div>' +
+                            '    </div>';
+                    var readyData = template.composeTemplate({
+                        'imagePath': imagePath,
+                        'countryText': repo.text,
+                        'countryId': repo.id
+                    });
+                    return readyData;
+                }
+                function formatThemeSelection(repo) {
+                    if (!repo.id) {
+                        return repo.text;
+                    }
+
+                    var imagePath = javatmp.settings.contextPath + "/assets/img/themes/" + repo.text + ".png";
+                    var template =
+                            '    <div class="media d-flex align-items-center">' +
+                            '        <img style="height: 25px;" class="mr-1" src="{{imagePath}}" alt="{{themeName}}"/>' +
+                            '        <div class="media-body">' +
+                            '            <span>{{themeName}}</span>' +
+                            '        </div>' +
+                            '    </div>';
+                    var readyData = template.composeTemplate({
+                        'imagePath': imagePath,
+                        'themeName': repo.text
+                    });
+                    return readyData;
+                }
+                function formatThemeResult(repo) {
+                    if (!repo.id) {
+                        return repo.text;
+                    }
+
+                    var imagePath = javatmp.settings.contextPath + "/assets/img/themes/" + repo.text + ".png";
+                    var template =
+                            '    <div class="media d-flex align-items-center">' +
+                            '        <img style="height: 75px;" class="mr-1" src="{{imagePath}}" alt="{{themeName}}"/>' +
+                            '        <div class="media-body">' +
+                            '            <span>{{themeName}}</span>' +
+                            '        </div>' +
+                            '    </div>';
+                    var readyData = template.composeTemplate({
+                        'imagePath': imagePath,
+                        'themeName': repo.text
+                    });
+                    return readyData;
+                }
+                form.find("select[name='timezone']").val(moment.tz.guess()).trigger('change.select2');
             }(jQuery));
         </script>
         <script type="text/javascript">

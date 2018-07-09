@@ -10,7 +10,7 @@
             <!-- Configuring JDBC properties -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/appdb?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/appdb?zeroDateTimeBehavior=CONVERT_TO_NULL&amp;useSSL=false"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
             <property name="javax.persistence.jdbc.password" value="mmmmmm"/>
             <!-- Hibernate properties -->
