@@ -30,6 +30,7 @@ public class AuthenticatorFilter implements Filter {
         excludeControllers.add("/login");
         excludeControllers.add("/logout");
         excludeControllers.add("/register");
+        excludeControllers.add("/CaptchaImageController");
     }
 
     @Override
