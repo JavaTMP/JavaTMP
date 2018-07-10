@@ -158,6 +158,15 @@
                                 <div class="form-row">
                                     <div class="col-lg-12">
                                         <div class="form-group">
+                                            <label for="captchaCharactersTextField">Kindly type the characters in the image below</label>
+                                            <img src="${pageContext.request.contextPath}/CaptchaImageController?_cancelGzip" class="d-block mt-1 mb-2" alt=""/>
+                                            <input name="captchaAnswer" type="text" class="form-control required" id="captchaCharactersTextField"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
                                             <div class="custom-control custom-checkbox">
                                                 <input name="tnc" type="checkbox" class="custom-control-input" id="customCheck1">
                                                 <label class="custom-control-label" for="customCheck1">

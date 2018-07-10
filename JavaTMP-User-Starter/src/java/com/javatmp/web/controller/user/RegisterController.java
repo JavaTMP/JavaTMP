@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import nl.captcha.Captcha;
 
 @WebServlet("/register")
 public class RegisterController extends HttpServlet {
@@ -59,18 +60,33 @@ public class RegisterController extends HttpServlet {
         User user = new User();
         ResponseMessage responseMessage = new ResponseMessage();
         try {
-            MvcHelper.populateBeanByRequestParameters(request, user);
-            logger.info("User to be Registerd [" + MvcHelper.deepToString(user) + "]");
+            Captcha captcha = (Captcha) session.getAttribute(Captcha.NAME);
+            String captchaAnswer = request.getParameter("captchaAnswer");
+            if (captcha.isCorrect(captchaAnswer)) {
+                MvcHelper.populateBeanByRequestParameters(request, user);
+                logger.info("User to be Registerd [" + MvcHelper.deepToString(user) + "]");
 
-            userService.createNewBasicUser(user);
+                userService.createNewBasicUser(user);
 
-            responseMessage.setOverAllStatus(true);
-            responseMessage.setMessage("User has registered successfully");
-            responseMessage.setRedirectURL(request.getContextPath() + "/");
+                responseMessage.setOverAllStatus(true);
+                responseMessage.setMessage("User has registered successfully");
+                responseMessage.setRedirectURL(request.getContextPath() + "/");
+            } else {
+                responseMessage.setOverAllStatus(false);
+                responseMessage.setMessage("Wrong Characters typed from the image");
+            }
+
         } catch (PersistenceException e) {
-            e.printStackTrace();
+            Throwable t = e;
+            String msg = "";
+            while (t != null) {
+                msg += t.getClass().getName() + ".\n";
+                msg += t.getMessage() + ".\n";
+                System.out.println("e [" + t.getMessage() + "]");
+                t = t.getCause();
+            }
             responseMessage.setOverAllStatus(false);
-            responseMessage.setMessage("error during connecting to database =>" + e.getMessage());
+            responseMessage.setMessage("error during connecting to database =>" + msg);
         } catch (IllegalAccessException ex) {
             ex.printStackTrace();
             throw new ServletException(ex);

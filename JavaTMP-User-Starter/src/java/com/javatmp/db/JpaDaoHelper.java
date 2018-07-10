@@ -229,16 +229,7 @@ public class JpaDaoHelper {
     public <T> Path<?> convertStringToPath(Root<T> from, String strPathName) {
         String[] attributes = strPathName.split("\\.");
         Path<?> retPath = from.get(attributes[0]);
-        Join join = null;
-        if (attributes.length > 1) {
-            join = from.join(attributes[0], JoinType.LEFT);
-        }
-        System.out.println("path name [" + strPathName + "]");
         for (int i = 1; i < attributes.length; i++) {
-            if (join != null && (i < (attributes.length - 1))) {
-                System.out.println("joinging attr [" + attributes[i] + "]");
-                join = join.join(attributes[i], JoinType.LEFT);
-            }
             retPath = retPath.get(attributes[i]);
         }
         return retPath;
