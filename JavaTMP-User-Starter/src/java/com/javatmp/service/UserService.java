@@ -9,6 +9,7 @@ import com.javatmp.mvc.domain.table.DataTableColumnSpecs;
 import com.javatmp.mvc.domain.table.DataTableRequest;
 import com.javatmp.mvc.domain.table.DataTableResults;
 import com.javatmp.mvc.domain.table.Order;
+import com.javatmp.util.MD5Util;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -115,6 +116,7 @@ public class UserService {
 
         // set any default values:
         user.setStatus((short) 1);
+        user.setPassword(MD5Util.convertToMD5(user.getPassword()));
 
         try {
             em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();

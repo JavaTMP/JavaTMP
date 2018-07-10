@@ -173,6 +173,7 @@
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <button type="submit" id="register-submit-btn" class="btn btn-primary">Create New User Account</button>
+                                            <a href="${pageContext.request.contextPath}/login" class="btn btn-secondary">Return To Login Page</a>
                                         </div>
                                     </div>
                                 </div>
@@ -202,7 +203,6 @@
                 // global variables initializing:
                 var javatmp = javatmp || {};
                 javatmp.settings = javatmp.settings || {};
-
                 javatmp.settings.httpMethod = "GET";
                 javatmp.settings.dataType = "html";
                 javatmp.settings.updateURLHash = true;
@@ -214,7 +214,6 @@
                 javatmp.settings.direction = "${labels['global.direction']}";
                 javatmp.settings.isRTL = ${labels['global.direction'] == 'ltr' ? 'false' : 'true'};
                 javatmp.settings.contextPath = '${pageContext.request.contextPath}';
-
                 jQuery.validator.addMethod("validDate", function (value, element) {
                     return this.optional(element) || moment(value, "DD/MM/YYYY", true).isValid();
                 }, "Please enter a valid date in the format DD/MM/YYYY");
@@ -225,7 +224,6 @@
                         return true;
                     return false;
                 }, 'Must be less than Now.');
-
                 // https://www.sanwebe.com/2016/07/ajax-form-submit-examples-using-jquery
                 // https://stackoverflow.com/questions/1960240/jquery-ajax-submit-form
                 var form = $('#main-register-form');
@@ -241,8 +239,6 @@
                     var post_url = $(this).attr("action"); //get form action url
                     //                    var form_data = new FormData(form); //Creates new FormData object
                     var form_data = $(this).serializeArray();
-                    console.log(JSON.stringify(form_data));
-                    alert(JSON.stringify(form_data));
                     for (var i = 0; i < form_data.length; i++) {
                         if (form_data[i].name === "birthOfDateStr") {
                             var value = form_data[i].value;
@@ -263,9 +259,14 @@
                                     container: form,
                                     place: "prepent",
                                     type: "success",
-                                    message: data.message,
+                                    message: data.message + " . ",
                                     close: true
                                 });
+                                $('<a>', {
+                                    text: 'Go To login page',
+                                    class: '',
+                                    href: data.redirectURL
+                                }).appendTo("#" + alertError);
                             } else {
                                 // show error to user
                                 alertError = BootstrapAlertWrapper.createAlert({
@@ -282,7 +283,6 @@
                         }
                     });
                 });
-
                 validator = form.validate({
                     rules: {
                         firstName: {
@@ -352,7 +352,6 @@
                         }
                     }
                 });
-
                 form.find("input[name='birthOfDateStr']").inputmask({
                     alias: "datetime",
                     placeholder: "dd/mm/yyyy",
