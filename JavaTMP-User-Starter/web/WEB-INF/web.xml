@@ -59,4 +59,24 @@
             10
         </session-timeout>
     </session-config>
+
+    <!-- http://simplecaptcha.sourceforge.net/installing.html -->
+    <servlet>
+        <servlet-name>SimpleCaptchaServlet</servlet-name>
+        <servlet-class>nl.captcha.servlet.SimpleCaptchaServlet</servlet-class>
+        <!-- The width and height params are optional;
+        if unspecified they default to 200 and 50 respectively. -->
+        <init-param>
+            <param-name>width</param-name>
+            <param-value>250</param-value>
+        </init-param>
+        <init-param>
+            <param-name>height</param-name>
+            <param-value>75</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SimpleCaptchaServlet</servlet-name>
+        <url-pattern>/CaptchaImageController</url-pattern>
+    </servlet-mapping>
 </web-app>
