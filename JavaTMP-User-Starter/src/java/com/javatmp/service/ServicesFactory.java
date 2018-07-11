@@ -14,6 +14,7 @@ public class ServicesFactory {
     private final CountryService countryService;
     private final UserService userService;
     private final DocumentService documentService;
+    private final UserStatsService userStatsService;
 
     public ServicesFactory(String persistentUnitName) {
         logger.info("*** Start ServicesFactory Constructor @ [" + new Date() + "]");
@@ -24,8 +25,8 @@ public class ServicesFactory {
         this.countryService = new CountryService(jpaDaoHelper);
         this.documentService = new DocumentService(jpaDaoHelper);
         this.userService = new UserService(jpaDaoHelper);
-
-        logger.info("*** End ServicesFactory Constructor @ [" + new Date() + "]");
+        this.userStatsService = new UserStatsService(jpaDaoHelper);
+        this.logger.info("*** End ServicesFactory Constructor @ [" + new Date() + "]");
     }
 
     public void destroy() {
@@ -66,5 +67,12 @@ public class ServicesFactory {
      */
     public TimezoneService getTimezoneService() {
         return timezoneService;
+    }
+
+    /**
+     * @return the userStatsService
+     */
+    public UserStatsService getUserStatsService() {
+        return userStatsService;
     }
 }
