@@ -2,35 +2,12 @@ package com.javatmp.service;
 
 import com.javatmp.db.JpaDaoHelper;
 import com.javatmp.domain.Activity;
-import com.javatmp.domain.Document;
-import com.javatmp.domain.User;
-import com.javatmp.domain.User_;
-import com.javatmp.domain.Document_;
-import com.javatmp.mvc.domain.table.DataTableColumnSpecs;
-import com.javatmp.mvc.domain.table.DataTableRequest;
-import com.javatmp.mvc.domain.table.DataTableResults;
-import com.javatmp.mvc.domain.table.Order;
-import com.javatmp.util.MD5Util;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
-import javax.persistence.LockModeType;
 import javax.persistence.PersistenceException;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaDelete;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.CriteriaUpdate;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.JoinType;
-import javax.persistence.criteria.Path;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
+import javax.persistence.Query;
+import javax.persistence.Tuple;
 
 public class ActivityService {
 
@@ -81,6 +58,39 @@ public class ActivityService {
                 em.close();
             }
         }
+    }
+
+    public List userPageViews() {
+        EntityManager em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+
+        Query query = em.createQuery(
+                "SELECT YEAR(e.creationDate), MONTH(e.creationDate), DAY(e.creationDate), "
+                + "HOUR(e.creationDate), MINUTE(e.creationDate), SECOND(e.creationDate) FROM Activity e",
+                Tuple.class);
+        List resultList = query.getResultList();
+        System.out.println(resultList);
+        em.close();
+        return resultList;
+    }
+
+    public List userPageViewsActivitiesPerHour() {
+        EntityManager em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+
+        Query query = em.createQuery(
+                "SELECT HOUR(e.creationDate) , count(*) FROM Activity e group by HOUR(e.creationDate)");
+        List resultList = query.getResultList();
+        em.close();
+        return resultList;
+    }
+
+    public List avgPagesLoadTimePerHour() {
+        EntityManager em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+
+        Query query = em.createQuery(
+                "SELECT HOUR(e.creationDate) , avg(e.timeLast) FROM Activity e group by HOUR(e.creationDate)");
+        List resultList = query.getResultList();
+        em.close();
+        return resultList;
     }
 
 }
