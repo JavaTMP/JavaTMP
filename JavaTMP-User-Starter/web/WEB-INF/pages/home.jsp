@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="row">
-        <div class="col-lg-3 col-md-6">
+    <div class="form-row">
+        <div class="col-xl-3 col-lg-6 col-md-6">
             <div class="card my-3">
                 <div class="card-header">
                     Registered Users
@@ -26,7 +26,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6">
+        <div class="col-xl-3 col-lg-6 col-md-6">
             <div class="card my-3">
                 <div class="card-header">
                     Visitors Today
@@ -51,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6">
+        <div class="col-xl-3 col-lg-6 col-md-6">
             <div class="card my-3">
                 <div class="card-header">
                     Page Views Per Hour
@@ -77,7 +77,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6">
+        <div class="col-xl-3 col-lg-6 col-md-6">
             <div class="card my-3">
                 <div class="card-header">
                     Load Time Per Hour
@@ -105,23 +105,20 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="form-row">
         <div class="col-lg-6">
             <div class="card" id="BarChart">
                 <div class="card-header">
-                    Bar Chart
+                    Users Locations
                     <div class="options float-right">
-                        <a href="javascript:;" class="settings"><i class="fa fa-cog"></i></a>
-                        <a href="javascript:;" class="collapse"><i class="fa fa-chevron-up"></i></a>
                         <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
                         <a href="javascript:;" class="fullscreen"><i class=" fa fa-expand"></i></a>
-                        <a href="javascript:;" class="remove"><i class="fa fa-times"></i></a>
                     </div>
                 </div>
-                <div class="card-body bg-light">
+                <div class="card-body bg-light p-0">
                     <div class="row">
                         <div class="col-lg-12">
-                            <div id="bar-1-canvas" style="width: 100%;min-height: 300px"></div>
+                            <div id="UsersLocationsInTheWorld" style="width: 100%;min-height: 300px"></div>
                         </div>
                     </div>
                 </div>
@@ -130,37 +127,46 @@
         <div class="col-lg-6">
             <div class="card" id="BarChart">
                 <div class="card-header">
-                    Quick Shortcut Buttons
-                    <div class="options float-right">
-                        <a href="javascript:;" class="settings"><i class="fa fa-cog"></i></a>
-                        <a href="javascript:;" class="collapse"><i class="fa fa-chevron-up"></i></a>
-                        <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
-                        <a href="javascript:;" class="fullscreen"><i class=" fa fa-expand"></i></a>
-                        <a href="javascript:;" class="remove"><i class="fa fa-times"></i></a>
-                    </div>
+                    Users Birthday Per Months
                 </div>
                 <div class="card-body bg-light">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div id="UsersBirthdayPerMonths" style="width: 100%;min-height: 300px"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-lg-12">
+            <div class="card my-3" id="BarChart">
+                <div class="card-header">
+                    Quick Shortcut Buttons
+                </div>
+                <div class="card-body bg-light p-2">
                     <div class="form-row">
                         <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 text-center">
-                            <button type="button" class="javatmp-btn btn btn-primary btn-block my-2"
+                            <button type="button" class="javatmp-btn btn btn-primary btn-block my-1"
                                 actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/user/GetListUsersPage" >
                                 User List
                             </button>
                         </div>
                         <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 text-center">
-                            <button type="button" class="javatmp-btn btn btn-primary btn-block my-2"
+                            <button type="button" class="javatmp-btn btn btn-primary btn-block my-1"
                                 actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/user/CreateUserController">
                                 Add New User
                             </button>
                         </div>
                         <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 text-center">
-                            <button type="button" class="javatmp-btn btn btn-primary btn-block my-2"
+                            <button type="button" class="javatmp-btn btn btn-primary btn-block my-1"
                                 actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/user/current-user-profile" >
                                 Current User Profile
                             </button>
                         </div>
                         <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 text-center">
-                            <button type="button" class="logout-home-btn-id javatmp-btn btn btn-primary btn-block my-2"
+                            <button type="button" class="logout-home-btn-id javatmp-btn btn btn-primary btn-block my-1"
                                 actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/logout" >
                                 Logout
                             </button>
@@ -184,6 +190,7 @@
             display: block;
         }
     </style>
+    <script src="${pageContext.request.contextPath}/assets/dist/js/world.js" type="text/javascript"></script>
     <script type="text/javascript">
         jQuery(function ($) {
             // any code put here will be run after content attach to ajax output container and before
@@ -451,9 +458,44 @@
             var loadtimePerHourChart = echarts.init(document.getElementById('loadtimePerHourChart'));
             loadtimePerHourChart.setOption(loadtimePerHourChartOption);
 
+            var UsersLocationsInTheWorld = echarts.init(document.getElementById('UsersLocationsInTheWorld'));
+            var UsersLocationsInTheWorldOption = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{b}'
+                },
+                geo: [{
+                    name: '世界地图',
+                    type: 'map',
+                    map: 'world',
+                    roam: true,
+                    selectedMode : 'single',
+                    label:{
+                        normal: {
+                            show:false
+                        },
+                        emphasis: {
+                            label:{
+                                show:true
+                            }
+                        }
+                    }
+                }],
+                series: []
+            };
+            UsersLocationsInTheWorld.setOption(UsersLocationsInTheWorldOption);
+
             var monthsName = moment.months();
             var barChartOption = {
+                grid: {
+                    show: false,
+                    top: 25,
+                    bottom: 25,
+                    left: 30,
+                    right: 0
+                },
                 title: {
+                    show: false,
                     text: "Users Birthday Frequencies",
                     x: 'center',
                     y: 0,
@@ -471,6 +513,7 @@
                     formatter: formaterFunction
                 },
                 legend: {
+                    show: false,
                     align: javatmp.settings.floatDefault,
                     data: ['Birthday'],
                     x: 'center',
@@ -513,7 +556,7 @@
                     }
                 ]
             };
-            
+
             var months = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
             barChartOption = $.extend(true, barChartOption, {
                 series: [
@@ -523,9 +566,9 @@
                 ]
             });
 
-            var barChart = echarts.init(document.getElementById('bar-1-canvas'));
-            barChart.setOption(barChartOption);
-            
+            var UsersBirthdayPerMonths = echarts.init(document.getElementById('UsersBirthdayPerMonths'));
+            UsersBirthdayPerMonths.setOption(barChartOption);
+
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
                 $(".logout-home-btn-id").on("click", function () {
