@@ -12,6 +12,8 @@ import com.javatmp.service.TimezoneService;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 
 /**
  *
@@ -30,10 +32,21 @@ public class TestingPopulateTimezone {
 
         List<Timezone> timezones = timezoneService.getTimezones();
 
-        timezones.forEach((timezone) -> {
-//            System.out.println(MvcHelper.deepToString(timezone));
-            jpaDaoHelper.create(timezone);
-        });
+        EntityManager em = null;
+        EntityTransaction tx = null;
+        try {
+            em = jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            tx = em.getTransaction();
+            tx.begin();
+            for (Timezone timezone : timezones) {
+                em.persist(timezone);
+            }
+            tx.commit();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
 
     }
 

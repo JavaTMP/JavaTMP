@@ -39,6 +39,7 @@ CREATE TABLE `user` (
     firstName varchar(30) NOT NULL,
     lastName varchar(30) NOT NULL,
     status TINYINT NOT NULL,
+    gender TINYINT UNSIGNED,
     birthDate DATE NOT NULL,
     countryId varchar(4) NOT NULL,
     address TEXT,
@@ -46,6 +47,7 @@ CREATE TABLE `user` (
     lang varchar(4) NOT NULL,
     theme varchar(48) NOT NULL,
     timezone varchar(64) NOT NULL,
+    lastAccessTime TIMESTAMP NULL DEFAULT NULL, -- https://dev.mysql.com/doc/refman/5.5/en/timestamp-initialization.html
     profilePicDocumentId BIGINT,
     creationDate TIMESTAMP NOT NULL,
     CONSTRAINT user_id_pk PRIMARY KEY (id),
@@ -55,4 +57,19 @@ CREATE TABLE `user` (
     CONSTRAINT user_lang_fk FOREIGN KEY (lang) REFERENCES language (languageId),
     CONSTRAINT user_theme_fk FOREIGN KEY (theme) REFERENCES theme (themeId),
     CONSTRAINT user_timezone_fk FOREIGN KEY (timezone) REFERENCES timezone (timezoneId)
+) ENGINE=InnoDB;
+
+CREATE TABLE activity (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    creationDate TIMESTAMP NOT NULL,
+    userId BIGINT,
+    sessionId varchar(128),
+    IPaddress varchar(48),
+    timeLast int unsigned,
+    actionType varchar(128),
+    actionId varchar(255),
+    parentActId BIGINT,
+    CONSTRAINT activity_id_pk PRIMARY KEY (id),
+    CONSTRAINT activity_userId_fk FOREIGN KEY (userId) REFERENCES `user` (id),
+    CONSTRAINT activity_parentActId_fk FOREIGN KEY (parentActId) REFERENCES activity (id)
 ) ENGINE=InnoDB;

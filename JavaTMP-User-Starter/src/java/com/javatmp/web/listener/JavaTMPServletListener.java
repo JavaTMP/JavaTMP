@@ -1,14 +1,10 @@
 package com.javatmp.web.listener;
 
-import com.javatmp.domain.User_;
 import com.javatmp.service.ServicesFactory;
 import com.javatmp.util.Constants;
 import java.util.Date;
 import java.util.TimeZone;
 import java.util.logging.Logger;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;

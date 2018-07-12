@@ -7,8 +7,8 @@ import com.javatmp.service.ServicesFactory;
 import com.javatmp.util.Constants;
 import com.javatmp.util.MD5Util;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
@@ -55,6 +55,8 @@ public class LoginController extends HttpServlet {
                 ResourceBundle bundle = ResourceBundle.getBundle(Constants.RESOURCE_BUNDLE_BASE_NAME, locale);
                 session.setAttribute(Constants.LANGUAGE_ATTR_KEY, bundle);
                 session.setAttribute("user", dbUser);
+
+                sf.getUserService().updateValidUserAccess(dbUser);
 
                 responseMessage.setOverAllStatus(true);
                 responseMessage.setMessage(request.getContextPath() + "/");

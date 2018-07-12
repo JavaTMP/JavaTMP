@@ -46,10 +46,15 @@ public class User implements Serializable {
 
     private String timezone;
 
+    private Short gender;
+
     private Long profilePicDocumentId;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastAccessTime;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(insertable = false, updatable = false, name = "profilePicDocumentId", referencedColumnName = "documentId")
@@ -351,6 +356,34 @@ public class User implements Serializable {
      */
     public void setProfilePicDocument(Document profilePicDocument) {
         this.profilePicDocument = profilePicDocument;
+    }
+
+    /**
+     * @return the lastAccessTime
+     */
+    public Date getLastAccessTime() {
+        return lastAccessTime;
+    }
+
+    /**
+     * @param lastAccessTime the lastAccessTime to set
+     */
+    public void setLastAccessTime(Date lastAccessTime) {
+        this.lastAccessTime = lastAccessTime;
+    }
+
+    /**
+     * @return the gender
+     */
+    public Short getGender() {
+        return gender;
+    }
+
+    /**
+     * @param gender the gender to set
+     */
+    public void setGender(Short gender) {
+        this.gender = gender;
     }
 
 }

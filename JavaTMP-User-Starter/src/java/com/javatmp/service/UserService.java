@@ -187,6 +187,36 @@ public class UserService {
         return updateStatus;
     }
 
+    public int updateValidUserAccess(User userToBeUpdated) {
+        int updateStatus = 0;
+        EntityManager em = null;
+
+        userToBeUpdated.setLastAccessTime(new Date());
+
+        try {
+            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            em.getTransaction().begin();
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaUpdate<User> update = cb.createCriteriaUpdate(User.class);
+            Root<User> root = update.from(User.class);
+            update.set(root.get(User_.lastAccessTime), userToBeUpdated.getLastAccessTime());
+            update.where(cb.equal(root.get(User_.id), userToBeUpdated.getId()));
+            updateStatus = em.createQuery(update).executeUpdate();
+            em.getTransaction().commit();
+            return updateStatus;
+        } catch (PersistenceException e) {
+            e.printStackTrace();
+            if (em != null) {
+                em.getTransaction().rollback();
+            }
+            throw e;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
     public int deleteUser(User userToBeDeleted) {
         int deletedStatus = 0;
         EntityManager em = null;

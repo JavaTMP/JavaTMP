@@ -50,6 +50,7 @@ INSERT INTO `country` (`countryId`, `countryName`) VALUES ('BG','Bulgaria');
 INSERT INTO `country` (`countryId`, `countryName`) VALUES ('BH','Bahrain');
 INSERT INTO `country` (`countryId`, `countryName`) VALUES ('BI','Burundi');
 INSERT INTO `country` (`countryId`, `countryName`) VALUES ('BJ','Benin');
+INSERT INTO `country` (`countryId`, `countryName`) VALUES ('BL','Saint Barthelemy');
 INSERT INTO `country` (`countryId`, `countryName`) VALUES ('BM','Bermuda');
 INSERT INTO `country` (`countryId`, `countryName`) VALUES ('BN','Brunei Darussalam');
 INSERT INTO `country` (`countryId`, `countryName`) VALUES ('BO','Bolivia');

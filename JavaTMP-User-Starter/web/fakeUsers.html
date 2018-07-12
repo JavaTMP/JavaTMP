@@ -14,6 +14,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
         <script type="text/javascript">
 
+            var genderArray = [1, 1, 1, 2];
             var statusArray = [0, 1, 1];
             var langArray = ["ar", "en", "en", "en", "ar"];
             var themeArray = ["default", "default", "default", "cerulean", "cosmo", "cyborg", "darkly", "flatly", "journal", "litera", "lumen", "lux", "materia",
@@ -181,6 +182,7 @@
                 user.lang = langArray[getRandomInt(langArray.length)];
                 user.theme = themeArray[getRandomInt(themeArray.length)];
                 user.timezone = timezones[getRandomInt(timezones.length)];
+                user.gender = genderArray[getRandomInt(genderArray.length)];
                 user.profilePicDocumentId = faker.internet.avatar();
                 user.creationDate = faker.date.recent(10);
                 jQuery.ajax({

@@ -1,3 +1,4 @@
+drop table if exists activity;
 drop table IF EXISTS user;
 drop table IF EXISTS document;
 drop table IF EXISTS country;
