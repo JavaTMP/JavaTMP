@@ -460,29 +460,50 @@
 
             var UsersLocationsInTheWorld = echarts.init(document.getElementById('UsersLocationsInTheWorld'));
             var UsersLocationsInTheWorldOption = {
-                tooltip: {
-                    trigger: 'item',
-                    formatter: '{b}'
+    tooltip: {
+        trigger: 'item',
+        formatter: '{b}'
+    },
+    series: [
+        {
+            type: 'map',
+            roam: true,
+            selectedMode : 'single',
+            label:{
+                normal: {
+                    show:false
                 },
-                geo: [{
-                    name: '世界地图',
-                    type: 'map',
-                    map: 'world',
-                    roam: true,
-                    selectedMode : 'single',
+                emphasis: {
                     label:{
-                        normal: {
-                            show:false
-                        },
-                        emphasis: {
-                            label:{
-                                show:true
-                            }
-                        }
+                        show:true
                     }
-                }],
-                series: []
-            };
+                }
+            },
+                        name: '12',
+                        type: 'map',
+                        map: 'world',
+                       data: [
+                            {
+                                name: "China",
+                                value: 10,
+                                selected: false,
+                                itemStyle: {
+                                    normal: {
+                                        color: "#FFFFFF"
+                                    }
+                                }
+                            },
+                            {name: "Saudi Arabia", value: 15, selected: false,
+                                itemStyle: {
+                                    normal: {
+                                        color: "#FFFFFF"
+                                    }
+                                }
+                            }
+                            ]
+                    }
+        ]
+};
             UsersLocationsInTheWorld.setOption(UsersLocationsInTheWorldOption);
 
             var monthsName = moment.months();
@@ -557,7 +578,7 @@
                 ]
             };
 
-            var months = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
             barChartOption = $.extend(true, barChartOption, {
                 series: [
                     {
