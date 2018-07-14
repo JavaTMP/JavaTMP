@@ -40,7 +40,7 @@
                 <div class="card-body p-1 bg-light">
                     <div class="row d-flex align-items-center">
                         <div class="col-6 text-center">
-                            <span class="d-block display-4 counter">1</span>
+                            <span class="d-block display-4 counter">8</span>
                         </div>
                         <div class="col-6 text-left">
                             <div id="todayVisitUserPieChart" style="width: 100%;min-height: 100px"></div>
@@ -349,8 +349,8 @@
                             }
                         },
                         data: [
-                            {value: 1, name: 'Visit'},
-                            {value: 25, name: 'Not login yet'}
+                            {value: 8, name: 'Visit'},
+                            {value: 18, name: 'Not login yet'}
                         ]
                     }
                 ]
