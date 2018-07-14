@@ -210,7 +210,8 @@ var config = {
             {"from": "${sourceNodeLib}/chart.js/dist/Chart.min.js", "to": "${destComponentsLib}/chart.js/dist"}
         ],
         "echarts": [
-            {"from": "${sourceNodeLib}/echarts/dist/echarts.min.js", "to": "${destComponentsLib}/echarts/dist"}
+            {"from": "${sourceNodeLib}/echarts/dist/echarts.min.js", "to": "${destComponentsLib}/echarts/dist"},
+            {"from": "${sourceNodeLib}/echarts/map/js/world.js", "to": "${destComponentsLib}/echarts/map/js/"}
         ],
         "ekko-lightbox": [
             {"from": "${sourceNodeLib}/ekko-lightbox/dist/ekko-lightbox.css", "to": "${destComponentsLib}/ekko-lightbox/dist"},

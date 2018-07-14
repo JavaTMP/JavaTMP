@@ -179,7 +179,8 @@ var config = {
             {"from": "${sourceNodeLib}/datatables.net-select-bs4/css/select.bootstrap4.min.css", "to": "${destComponentsLib}/datatables.net-select-bs4/css"}
         ],
         "echarts": [
-            {"from": "${sourceNodeLib}/echarts/dist/echarts.min.js", "to": "${destComponentsLib}/echarts/dist"}
+            {"from": "${sourceNodeLib}/echarts/dist/echarts.min.js", "to": "${destComponentsLib}/echarts/dist"},
+            {"from": "${sourceNodeLib}/echarts/map/js/world.js", "to": "${destComponentsLib}/echarts/map/js/"}
         ],
         "slick-carousel": [
             {"from": "${sourceNodeLib}/slick-carousel/slick/ajax-loader.gif", "to": "${destComponentsLib}/slick-carousel/slick"},
@@ -319,6 +320,7 @@ var src = {
         "./web/components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js",
         "./web/components/datatables.net-select/js/dataTables.select.min.js",
         "./web/components/echarts/dist/echarts.min.js",
+        "./web/components/echarts/map/js/world.js",
         "./web/components/slick-carousel/slick/slick.min.js",
         "./web/components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js",
         "./web/components/bootstrap-modal-wrapper/dist/bootstrap-modal-wrapper-factory.min.js",

@@ -26,6 +26,9 @@ $fa-font-path: "../../../components/fontawesome-free-webfonts/webfonts" !default
 .fa-angle-prev:before {
     content: fa-content($fa-var-angle-left);
 }
+.fa-arrow-circle-next:before {
+    content: fa-content($fa-var-arrow-circle-right);
+}
 [dir=rtl] {
     .fa-chevron-prev:before {
         content: fa-content($fa-var-chevron-right);
@@ -44,5 +47,8 @@ $fa-font-path: "../../../components/fontawesome-free-webfonts/webfonts" !default
     }
     .fa-angle-prev:before {
         content: fa-content($fa-var-angle-right);
+    }
+    .fa-arrow-circle-next:before {
+        content: fa-content($fa-var-arrow-circle-left);
     }
 }

@@ -1,9 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<div class="dynamic-ajax-content">
+<div class="dynamic-ajax-content pt-3">
     <div class="form-row">
         <div class="col-xl-3 col-lg-6 col-md-6">
-            <div class="card my-3">
-                <div class="card-header" id="#">
+            <div class="card mb-3" id="userStatusPieChartCard">
+                <div class="card-header">
                     Registered Users
                     <div class="options float-right">
                         <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="#" actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/user/GetListUsersPage">
+                    <a href="#">
                         View Details
                         <span class="float-right">
                             <i class="fa fa-arrow-circle-next"></i>
@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-md-6">
-            <div class="card my-3">
+            <div class="card mb-3" id="todayVisitUserPieChartCard">
                 <div class="card-header">
                     Visitors Today
                     <div class="options float-right">
@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="#" actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/user/GetListUsersPage">
+                    <a href="#">
                         View Details
                         <span class="float-right">
                             <i class="fa fa-arrow-circle-next"></i>
@@ -58,7 +58,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-md-6">
-            <div class="card my-3">
+            <div class="card mb-3" id="pageViewActivitesPerHourChartCard">
                 <div class="card-header">
                     Page Views Per Hour
                     <div class="options float-right">
@@ -77,7 +77,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="#" actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/user/GetListUsersPage">
+                    <a href="#">
                         View Details
                         <span class="float-right">
                             <i class="fa fa-arrow-circle-next"></i>
@@ -87,7 +87,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-md-6">
-            <div class="card my-3">
+            <div class="card mb-3" id="loadtimePerHourChartCard">
                 <div class="card-header">
                     Load Time Per Hour
                     <div class="options float-right">
@@ -106,7 +106,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="#" actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/user/GetListUsersPage">
+                    <a href="#">
                         View Details
                         <span class="float-right">
                             <i class="fa fa-arrow-circle-next"></i>
@@ -119,7 +119,7 @@
     </div>
     <div class="form-row">
         <div class="col-lg-6">
-            <div class="card" id="BarChart">
+            <div class="card" id="UsersLocationsInTheWorldCard">
                 <div class="card-header">
                     Users Locations
                     <div class="options float-right">
@@ -137,7 +137,7 @@
             </div>
         </div>
         <div class="col-lg-6">
-            <div class="card" id="BarChart">
+            <div class="card" id="UsersBirthdayPerMonthsCard">
                 <div class="card-header">
                     Users Birthday Per Months
                     <div class="options float-right">
@@ -215,11 +215,12 @@
                 delay: 10,
                 time: 1000
             });
-
             var userStatusPieChart = echarts.init(document.getElementById('userStatusPieChart'));
             var todayVisitUserPieChart = echarts.init(document.getElementById('todayVisitUserPieChart'));
             var pageViewActivitesPerHourChart = echarts.init(document.getElementById('pageViewActivitesPerHourChart'));
-
+            var loadtimePerHourChart = echarts.init(document.getElementById('loadtimePerHourChart'));
+            var UsersLocationsInTheWorld = echarts.init(document.getElementById('UsersLocationsInTheWorld'));
+            var UsersBirthdayPerMonths = echarts.init(document.getElementById('UsersBirthdayPerMonths'));
             var userStatusPieChartOption = {
                 tooltip: {
                     trigger: 'item',
@@ -257,71 +258,6 @@
                 ]
             };
             userStatusPieChart.setOption(userStatusPieChartOption);
-            $(javatmp.settings.defaultOutputSelector).on("click", "#1BarChart a.reload", function (e) {
-                e.preventDefault();
-
-                var cardBody = $(this).closest(".card").children(".card-body");
-                var href = javatmp.settings.contextPath + "/user/ListAllUsersController";
-
-                $(cardBody).block({message: "Loading ...",
-                    overlayCSS: {
-                        backgroundColor: '#000',
-                        opacity: 0.3
-                    }});
-
-                $.ajax({
-                    "type": "POST",
-                    cache: false,
-                    url: href,
-                    dataType: "json",
-                    contentType: "application/json; charset=UTF-8",
-                    data: JSON.stringify({
-                        _ajaxGlobalBlockUI: false,
-                        "start": 0,
-                        "length": 1000000,
-                        "draw": 1,
-                        "order": [{column: 0}]
-                    }),
-                    success: function (remoteContent) {
-                        $(cardBody).unblock();
-
-                        var months = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-                        for (var i = 0; i < remoteContent.data.data.length; i++) {
-                            var user = remoteContent.data.data[i];
-                            var birthdayDate = moment(user.birthOfDate, "YYYY-MM-DDTHH:mm:ss.SSSZ");
-                            var month = birthdayDate.month();
-                            months[month]++;
-                        }
-                        barChartOption = $.extend(true, barChartOption, {
-                            series: [
-                                {
-                                    data: months
-                                }
-                            ]
-                        });
-                        userStatusPieChart.setOption(userStatusPieChartOption);
-                        userStatusPieChart.on('click', function (params) {
-                            console.log(params);
-                        });
-
-                        userStatusPieChart.on('legendselectchanged', function (params) {
-                            console.log(params);
-                        });
-                    },
-                    error: function (xhr, ajaxOptions, thrownError) {
-                        $(cardBody).unblock();
-                        var msg = 'Error on reloading the card. Please check your remote server url';
-                        toastr.error(msg, 'ERROR', {
-                            timeOut: 2500,
-                            progressBar: true,
-                            rtl: javatmp.settings.isRTL,
-                            positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                        });
-                        // clean the bar graph
-                    }
-                });
-            });
-
             var todayVisitUserPieChartOption = {
                 tooltip: {
                     trigger: 'item',
@@ -355,11 +291,13 @@
                     }
                 ]
             };
-
             todayVisitUserPieChart.setOption(todayVisitUserPieChartOption);
 
-            var formaterFunction = null;
+            var formatTooltipLine = function (color, value) {
+                return "<span style='display:inline-block;width:10px;height:10px;border-radius:50%;background-color:" + color + ";margin-" + javatmp.settings.floatReverse + ":5px;'></span><span>" + value + "</span>";
+            };
 
+            var formaterFunction = null;
             if (javatmp.settings.isRTL === true) {
                 formaterFunction = function (params) {
                     return [
@@ -442,7 +380,6 @@
                     }
                 ]
             };
-
             pageViewActivitesPerHourChartOption = $.extend(true, pageViewActivitesPerHourChartOption, {
                 series: [
                     {
@@ -451,7 +388,6 @@
                 ]
             });
             pageViewActivitesPerHourChart.setOption(pageViewActivitesPerHourChartOption);
-
             var loadtimePerHourChartOption = {
                 grid: {
                     show: false,
@@ -524,7 +460,6 @@
                     }
                 ]
             };
-
             loadtimePerHourChartOption = $.extend(true, loadtimePerHourChartOption, {
                 series: [
                     {
@@ -532,11 +467,7 @@
                     }
                 ]
             });
-
-            var loadtimePerHourChart = echarts.init(document.getElementById('loadtimePerHourChart'));
             loadtimePerHourChart.setOption(loadtimePerHourChartOption);
-
-            var UsersLocationsInTheWorld = echarts.init(document.getElementById('UsersLocationsInTheWorld'));
             var UsersLocationsInTheWorldOption = {
                 tooltip: {
                     trigger: 'item',
@@ -558,7 +489,6 @@
                             }
                         },
                         name: '12',
-                        type: 'map',
                         map: 'world',
                         data: [
                             {
@@ -585,21 +515,7 @@
             var itemStyle = {
                 normal: {
                     borderWidth: 0.3,
-                    borderColor: 'black',
-                    color: function (obj) {
-                        var color = "";
-//                     console.log(JSON.stringify(obj.data));
-                        switch (obj.data.value) {
-                            case 88:
-                                console.log(JSON.stringify(obj.data));
-                                color = "#f3c937";
-                                break;
-                            case 40:
-                                color = "#083a8f";
-                                break;
-                        }
-                        return color;
-                    }
+                    borderColor: 'black'
                 },
                 emphasis: {
                     label: {show: true}
@@ -614,15 +530,14 @@
                     trigger: 'item',
                     formatter: function (params) {
                         var value = (params.value + '').split('.');
-                        value = value[0].replace(/(\d{1,3})(?=(?:\d{3})+(?!\d))/g, '$1,')
-                                + '.' + value[1];
+                        value = value[0].replace(/(\d{1,3})(?=(?:\d{3})+(?!\d))/g, '$1,');
                         return params.seriesName + '<br/>' + params.name + ' : ' + value;
                     }
                 },
                 visualMap: {
                     min: 0,
                     max: 100,
-                    left: 'left',
+                    left: javatmp.settings.floatDefault,
                     top: 'bottom',
                     text: ['High', 'Low'],
                     seriesIndex: [0],
@@ -821,7 +736,6 @@
                 ]
             };
             UsersLocationsInTheWorld.setOption(UsersLocationsInTheWorldOption);
-
             var monthsName = moment.months();
             var barChartOption = {
                 grid: {
@@ -829,7 +743,7 @@
                     top: 25,
                     bottom: 30,
                     left: 45,
-                    right: 30
+                    right: 45
                 },
                 title: {
                     show: false,
@@ -893,8 +807,6 @@
                     }
                 ]
             };
-
-
             barChartOption = $.extend(true, barChartOption, {
                 series: [
                     {
@@ -902,22 +814,48 @@
                     }
                 ]
             });
-
-            var UsersBirthdayPerMonths = echarts.init(document.getElementById('UsersBirthdayPerMonths'));
             UsersBirthdayPerMonths.setOption(barChartOption);
-
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
                 $(".logout-home-btn-id").on("click", function () {
                     window.location.replace($(this).attr("action-ref-by-href"));
                 });
-
             });
-
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
                 // fire when user resize browser window or sidebar hide / show
+                // we resize the current charts:
+                javatmp.waitForFinalEvent(function () {
+                    userStatusPieChart.resize();
+                    todayVisitUserPieChart.resize();
+                    pageViewActivitesPerHourChart.resize();
+                    loadtimePerHourChart.resize();
+                    UsersLocationsInTheWorld.resize();
+                    UsersBirthdayPerMonths.resize();
+                }, 100, "@users-dashboard-page-resize");
             });
 
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenCompress, function (event, card) {
+                // when card compress by pressing the top right tool button
+                var cardId = card.attr("id");
+                if (cardId === "UsersLocationsInTheWorldCard") {
+                    $('#UsersLocationsInTheWorld').css({"minHeight": 300});
+                    UsersLocationsInTheWorld.resize();
+                } else if (cardId === "UsersBirthdayPerMonthsCard") {
+                    $('#UsersBirthdayPerMonths').css({"minHeight": 300});
+                    UsersBirthdayPerMonths.resize();
+                }
+            });
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenExpand, function (event, card) {
+                // when card compress by pressing the top right tool button
+                var cardId = card.attr("id");
+                if (cardId === "UsersLocationsInTheWorldCard") {
+                    $('#UsersLocationsInTheWorld').css({"minHeight": 700});
+                    UsersLocationsInTheWorld.resize();
+                } else if (cardId === "UsersBirthdayPerMonthsCard") {
+                    $('#UsersBirthdayPerMonths').css({"minHeight": 500});
+                    UsersBirthdayPerMonths.resize();
+                }
+            });
             /**
              * When another sidebar menu item pressed and before container replaced with new ajax content.
              * You can cancel, destroy, or remove any thing here before replace main output ajax container.

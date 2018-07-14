@@ -1212,6 +1212,20 @@
                                     <li>
                                         <a class="has-arrow" href="#">
                                             <i class="far fa-lg fa-fw fa-file-alt"></i>
+                                            Dashboard Pages
+                                        </a>
+                                        <ul aria-expanded="true">
+                                            <li>
+                                                <a href="${pageContext.request.contextPath}/pages/custom-pages/dashboard/users-dashboard">
+                                                    <i class="far fa-lg fa-fw fa-file-alt"></i>
+                                                    Users Dashboard
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a class="has-arrow" href="#">
+                                            <i class="far fa-lg fa-fw fa-file-alt"></i>
                                             Inbox
                                         </a>
                                         <ul aria-expanded="true">
