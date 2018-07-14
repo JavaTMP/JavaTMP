@@ -1216,9 +1216,9 @@
                                         </a>
                                         <ul aria-expanded="true">
                                             <li>
-                                                <a href="${pageContext.request.contextPath}/pages/custom-pages/dashboard/users-dashboard">
+                                                <a href="${pageContext.request.contextPath}/pages/custom-pages/dashboard/users-dashboard-1">
                                                     <i class="far fa-lg fa-fw fa-file-alt"></i>
-                                                    Users Dashboard
+                                                    Users Dashboard 1
                                                 </a>
                                             </li>
                                         </ul>

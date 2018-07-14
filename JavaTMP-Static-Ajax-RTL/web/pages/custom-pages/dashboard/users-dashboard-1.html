@@ -1,6 +1,6 @@
 <div class="dynamic-ajax-content">
     <div class="page-header">
-        <h1>Users Analytics Dashboard</h1>
+        <h1>Users Analytics Dashboard 1</h1>
     </div>
     <div class="form-row">
         <div class="col-xl-3 col-lg-6 col-md-6">
@@ -171,6 +171,11 @@
             display: block;
         }
     </style>
+    <script src="components/moment/min/moment.min.js"></script>
+    <script src="components/waypoints/lib/jquery.waypoints.min.js" type="text/javascript"></script>
+    <script src="components/jquery.counterup/jquery.counterup.min.js" type="text/javascript"></script>
+    <script src="components/echarts/dist/echarts.min.js"></script>
+    <script src="components/echarts/map/js/world.js" type="text/javascript"></script>
     <script type="text/javascript">
         jQuery(function ($) {
             // any code put here will be run after content attach to ajax output container and before
@@ -814,7 +819,7 @@
                 // when card compress by pressing the top right tool button
                 var cardId = card.attr("id");
                 if (cardId === "UsersLocationsInTheWorldCard") {
-                    $('#UsersLocationsInTheWorld').css({"minHeight": 700});
+                    $('#UsersLocationsInTheWorld').css({"minHeight": 600});
                     UsersLocationsInTheWorld.resize();
                 } else if (cardId === "UsersBirthdayPerMonthsCard") {
                     $('#UsersBirthdayPerMonths').css({"minHeight": 500});
