@@ -3,8 +3,11 @@
     <div class="form-row">
         <div class="col-xl-3 col-lg-6 col-md-6">
             <div class="card my-3">
-                <div class="card-header">
+                <div class="card-header" id="#">
                     Registered Users
+                    <div class="options float-right">
+                        <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
+                    </div>
                 </div>
                 <div class="card-body p-1 bg-light">
                     <div class="row d-flex align-items-center">
@@ -30,6 +33,9 @@
             <div class="card my-3">
                 <div class="card-header">
                     Visitors Today
+                    <div class="options float-right">
+                        <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
+                    </div>
                 </div>
                 <div class="card-body p-1 bg-light">
                     <div class="row d-flex align-items-center">
@@ -55,6 +61,9 @@
             <div class="card my-3">
                 <div class="card-header">
                     Page Views Per Hour
+                    <div class="options float-right">
+                        <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
+                    </div>
                 </div>
                 <div class="card-body p-1 bg-light">
                     <div class="row d-flex align-items-center">
@@ -81,6 +90,9 @@
             <div class="card my-3">
                 <div class="card-header">
                     Load Time Per Hour
+                    <div class="options float-right">
+                        <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
+                    </div>
                 </div>
                 <div class="card-body p-1 bg-light">
                     <div class="row d-flex align-items-center">
@@ -128,8 +140,12 @@
             <div class="card" id="BarChart">
                 <div class="card-header">
                     Users Birthday Per Months
+                    <div class="options float-right">
+                        <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
+                        <a href="javascript:;" class="fullscreen"><i class=" fa fa-expand"></i></a>
+                    </div>
                 </div>
-                <div class="card-body bg-light">
+                <div class="card-body bg-light p-0">
                     <div class="row">
                         <div class="col-lg-12">
                             <div id="UsersBirthdayPerMonths" style="width: 100%;min-height: 300px"></div>
@@ -149,25 +165,25 @@
                     <div class="form-row">
                         <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 text-center">
                             <button type="button" class="javatmp-btn btn btn-primary btn-block my-1"
-                                actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/user/GetListUsersPage" >
+                                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/user/GetListUsersPage" >
                                 User List
                             </button>
                         </div>
                         <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 text-center">
                             <button type="button" class="javatmp-btn btn btn-primary btn-block my-1"
-                                actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/user/CreateUserController">
+                                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/user/CreateUserController">
                                 Add New User
                             </button>
                         </div>
                         <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 text-center">
                             <button type="button" class="javatmp-btn btn btn-primary btn-block my-1"
-                                actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/user/current-user-profile" >
+                                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/user/current-user-profile" >
                                 Current User Profile
                             </button>
                         </div>
                         <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 text-center">
                             <button type="button" class="logout-home-btn-id javatmp-btn btn btn-primary btn-block my-1"
-                                actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/logout" >
+                                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/logout" >
                                 Logout
                             </button>
                         </div>
@@ -190,7 +206,6 @@
             display: block;
         }
     </style>
-    <script src="${pageContext.request.contextPath}/assets/dist/js/world.js" type="text/javascript"></script>
     <script type="text/javascript">
         jQuery(function ($) {
             // any code put here will be run after content attach to ajax output container and before
@@ -205,7 +220,7 @@
             var todayVisitUserPieChart = echarts.init(document.getElementById('todayVisitUserPieChart'));
             var pageViewActivitesPerHourChart = echarts.init(document.getElementById('pageViewActivitesPerHourChart'));
 
-            var option = {
+            var userStatusPieChartOption = {
                 tooltip: {
                     trigger: 'item',
                     formatter: "{a} <br/>{b}: {c} ({d}%)",
@@ -241,8 +256,71 @@
                     }
                 ]
             };
+            userStatusPieChart.setOption(userStatusPieChartOption);
+            $(javatmp.settings.defaultOutputSelector).on("click", "#1BarChart a.reload", function (e) {
+                e.preventDefault();
 
-            userStatusPieChart.setOption(option);
+                var cardBody = $(this).closest(".card").children(".card-body");
+                var href = javatmp.settings.contextPath + "/user/ListAllUsersController";
+
+                $(cardBody).block({message: "Loading ...",
+                    overlayCSS: {
+                        backgroundColor: '#000',
+                        opacity: 0.3
+                    }});
+
+                $.ajax({
+                    "type": "POST",
+                    cache: false,
+                    url: href,
+                    dataType: "json",
+                    contentType: "application/json; charset=UTF-8",
+                    data: JSON.stringify({
+                        _ajaxGlobalBlockUI: false,
+                        "start": 0,
+                        "length": 1000000,
+                        "draw": 1,
+                        "order": [{column: 0}]
+                    }),
+                    success: function (remoteContent) {
+                        $(cardBody).unblock();
+
+                        var months = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                        for (var i = 0; i < remoteContent.data.data.length; i++) {
+                            var user = remoteContent.data.data[i];
+                            var birthdayDate = moment(user.birthOfDate, "YYYY-MM-DDTHH:mm:ss.SSSZ");
+                            var month = birthdayDate.month();
+                            months[month]++;
+                        }
+                        barChartOption = $.extend(true, barChartOption, {
+                            series: [
+                                {
+                                    data: months
+                                }
+                            ]
+                        });
+                        userStatusPieChart.setOption(userStatusPieChartOption);
+                        userStatusPieChart.on('click', function (params) {
+                            console.log(params);
+                        });
+
+                        userStatusPieChart.on('legendselectchanged', function (params) {
+                            console.log(params);
+                        });
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        $(cardBody).unblock();
+                        var msg = 'Error on reloading the card. Please check your remote server url';
+                        toastr.error(msg, 'ERROR', {
+                            timeOut: 2500,
+                            progressBar: true,
+                            rtl: javatmp.settings.isRTL,
+                            positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                        });
+                        // clean the bar graph
+                    }
+                });
+            });
 
             var todayVisitUserPieChartOption = {
                 tooltip: {
@@ -460,29 +538,29 @@
 
             var UsersLocationsInTheWorld = echarts.init(document.getElementById('UsersLocationsInTheWorld'));
             var UsersLocationsInTheWorldOption = {
-    tooltip: {
-        trigger: 'item',
-        formatter: '{b}'
-    },
-    series: [
-        {
-            type: 'map',
-            roam: true,
-            selectedMode : 'single',
-            label:{
-                normal: {
-                    show:false
+                tooltip: {
+                    trigger: 'item',
+                    formatter: '{b}'
                 },
-                emphasis: {
-                    label:{
-                        show:true
-                    }
-                }
-            },
+                series: [
+                    {
+                        type: 'map',
+                        roam: true,
+                        selectedMode: 'single',
+                        label: {
+                            normal: {
+                                show: false
+                            },
+                            emphasis: {
+                                label: {
+                                    show: true
+                                }
+                            }
+                        },
                         name: '12',
                         type: 'map',
                         map: 'world',
-                       data: [
+                        data: [
                             {
                                 name: "China",
                                 value: 10,
@@ -500,10 +578,248 @@
                                     }
                                 }
                             }
-                            ]
+                        ]
                     }
-        ]
-};
+                ]
+            };
+            var itemStyle = {
+                normal: {
+                    borderWidth: 0.3,
+                    borderColor: 'black',
+                    color: function (obj) {
+                        var color = "";
+//                     console.log(JSON.stringify(obj.data));
+                        switch (obj.data.value) {
+                            case 88:
+                                console.log(JSON.stringify(obj.data));
+                                color = "#f3c937";
+                                break;
+                            case 40:
+                                color = "#083a8f";
+                                break;
+                        }
+                        return color;
+                    }
+                },
+                emphasis: {
+                    label: {show: true}
+                    // shadowOffsetX: 0,
+                    // shadowOffsetY: 0,
+                    // shadowBlur: 20,
+                    // shadowColor: 'rgba(0, 0, 0, 0.3)'
+                }
+            };
+            UsersLocationsInTheWorldOption = {
+                tooltip: {
+                    trigger: 'item',
+                    formatter: function (params) {
+                        var value = (params.value + '').split('.');
+                        value = value[0].replace(/(\d{1,3})(?=(?:\d{3})+(?!\d))/g, '$1,')
+                                + '.' + value[1];
+                        return params.seriesName + '<br/>' + params.name + ' : ' + value;
+                    }
+                },
+                visualMap: {
+                    min: 0,
+                    max: 100,
+                    left: 'left',
+                    top: 'bottom',
+                    text: ['High', 'Low'],
+                    seriesIndex: [0],
+                    inRange: {
+                        color: ['#ffffff', '#007bff']
+                    },
+                    calculable: true
+                },
+                series: [
+                    {
+                        name: "Country",
+                        type: 'map',
+                        map: 'world',
+                        roam: true,
+                        itemStyle: itemStyle,
+                        data: [
+                            {name: 'Afghanistan', value: 88},
+                            {name: 'Angola', value: 94},
+                            {name: 'Albania', value: 31},
+                            {name: 'United Arab Emirates', value: 84},
+                            {name: 'Argentina', value: 40},
+                            {name: 'Armenia', value: 29},
+                            {name: 'French Southern and Antarctic Lands', value: 26},
+                            {name: 'Australia', value: 22},
+                            {name: 'Austria', value: 84},
+                            {name: 'Azerbaijan', value: 90},
+                            {name: 'Burundi', value: 92},
+                            {name: 'Belgium', value: 45},
+                            {name: 'Benin', value: 95},
+                            {name: 'Burkina Faso', value: 75},
+                            {name: 'Bangladesh', value: 66},
+                            {name: 'Bulgaria', value: 73},
+                            {name: 'The Bahamas', value: 66},
+                            {name: 'Bosnia and Herzegovina', value: 38},
+                            {name: 'Belarus', value: 94},
+                            {name: 'Belize', value: 30},
+                            {name: 'Bermuda', value: 64},
+                            {name: 'Bolivia', value: 71},
+                            {name: 'Brazil', value: 19},
+                            {name: 'Brunei', value: 27},
+                            {name: 'Bhutan', value: 71},
+                            {name: 'Botswana', value: 19},
+                            {name: 'Central African Republic', value: 43},
+                            {name: 'Canada', value: 34},
+                            {name: 'Switzerland', value: 78},
+                            {name: 'Chile', value: 96},
+                            {name: 'China', value: 88},
+                            {name: 'Ivory Coast', value: 60},
+                            {name: 'Cameroon', value: 20},
+                            {name: 'Democratic Republic of the Congo', value: 62},
+                            {name: 'Republic of the Congo', value: 35},
+                            {name: 'Colombia', value: 46},
+                            {name: 'Costa Rica', value: 46},
+                            {name: 'Cuba', value: 11},
+                            {name: 'Northern Cyprus', value: 1},
+                            {name: 'Cyprus', value: 11},
+                            {name: 'Czech Republic', value: 10},
+                            {name: 'Germany', value: 83},
+                            {name: 'Djibouti', value: 83},
+                            {name: 'Denmark', value: 55},
+                            {name: 'Dominican Republic', value: 10},
+                            {name: 'Algeria', value: 37},
+                            {name: 'Ecuador', value: 15},
+                            {name: 'Egypt', value: 78},
+                            {name: 'Eritrea', value: 57},
+                            {name: 'Spain', value: 46},
+                            {name: 'Estonia', value: 12},
+                            {name: 'Ethiopia', value: 87},
+                            {name: 'Finland', value: 53},
+                            {name: 'Fiji', value: 86},
+                            {name: 'Falkland Islands', value: 49},
+                            {name: 'France', value: 63},
+                            {name: 'Gabon', value: 15},
+                            {name: 'United Kingdom', value: 62},
+                            {name: 'Georgia', value: 43},
+                            {name: 'Ghana', value: 24},
+                            {name: 'Guinea', value: 10},
+                            {name: 'Gambia', value: 16},
+                            {name: 'Guinea Bissau', value: 10},
+                            {name: 'Equatorial Guinea', value: 69},
+                            {name: 'Greece', value: 11},
+                            {name: 'Greenland', value: 56},
+                            {name: 'Guatemala', value: 14},
+                            {name: 'French Guiana', value: 23},
+                            {name: 'Guyana', value: 78},
+                            {name: 'Honduras', value: 76},
+                            {name: 'Croatia', value: 43},
+                            {name: 'Haiti', value: 98},
+                            {name: 'Hungary', value: 10},
+                            {name: 'Indonesia', value: 24},
+                            {name: 'India', value: 12},
+                            {name: 'Ireland', value: 44},
+                            {name: 'Iran', value: 24},
+                            {name: 'Iraq', value: 30},
+                            {name: 'Iceland', value: 31},
+                            {name: 'Israel', value: 74},
+                            {name: 'Italy', value: 60},
+                            {name: 'Jamaica', value: 27},
+                            {name: 'Jordan', value: 64},
+                            {name: 'Japan', value: 12},
+                            {name: 'Kazakhstan', value: 15},
+                            {name: 'Kenya', value: 40},
+                            {name: 'Kyrgyzstan', value: 53},
+                            {name: 'Cambodia', value: 14},
+                            {name: 'South Korea', value: 51},
+                            {name: 'Kosovo', value: 97},
+                            {name: 'Kuwait', value: 29},
+                            {name: 'Laos', value: 63},
+                            {name: 'Lebanon', value: 43},
+                            {name: 'Liberia', value: 39},
+                            {name: 'Libya', value: 60},
+                            {name: 'Sri Lanka', value: 20},
+                            {name: 'Lesotho', value: 20},
+                            {name: 'Lithuania', value: 307},
+                            {name: 'Luxembourg', value: 50},
+                            {name: 'Latvia', value: 20},
+                            {name: 'Morocco', value: 31},
+                            {name: 'Moldova', value: 10},
+                            {name: 'Madagascar', value: 21},
+                            {name: 'Mexico', value: 11},
+                            {name: 'Macedonia', value: 50},
+                            {name: 'Mali', value: 13},
+                            {name: 'Myanmar', value: 51},
+                            {name: 'Montenegro', value: 62},
+                            {name: 'Mongolia', value: 27},
+                            {name: 'Mozambique', value: 23},
+                            {name: 'Mauritania', value: 36},
+                            {name: 'Malawi', value: 15},
+                            {name: 'Malaysia', value: 28},
+                            {name: 'Namibia', value: 21},
+                            {name: 'New Caledonia', value: 24},
+                            {name: 'Niger', value: 15},
+                            {name: 'Nigeria', value: 15},
+                            {name: 'Nicaragua', value: 58},
+                            {name: 'Netherlands', value: 16},
+                            {name: 'Norway', value: 48},
+                            {name: 'Nepal', value: 26},
+                            {name: 'New Zealand', value: 43},
+                            {name: 'Oman', value: 28},
+                            {name: 'Pakistan', value: 17},
+                            {name: 'Panama', value: 36},
+                            {name: 'Peru', value: 29},
+                            {name: 'Philippines', value: 93},
+                            {name: 'Papua New Guinea', value: 68},
+                            {name: 'Poland', value: 38},
+                            {name: 'Puerto Rico', value: 37},
+                            {name: 'North Korea', value: 1},
+                            {name: 'Portugal', value: 10},
+                            {name: 'Paraguay', value: 64},
+                            {name: 'Qatar', value: 17},
+                            {name: 'Romania', value: 21},
+                            {name: 'Russia', value: 21},
+                            {name: 'Rwanda', value: 10},
+                            {name: 'Western Sahara', value: 51},
+                            {name: 'Saudi Arabia', value: 27},
+                            {name: 'Sudan', value: 35},
+                            {name: 'South Sudan', value: 99},
+                            {name: 'Senegal', value: 12},
+                            {name: 'Solomon Islands', value: 52},
+                            {name: 'Sierra Leone', value: 57},
+                            {name: 'El Salvador', value: 62},
+                            {name: 'Somaliland', value: 96},
+                            {name: 'Somalia', value: 96},
+                            {name: 'Republic of Serbia', value: 34},
+                            {name: 'Suriname', value: 52},
+                            {name: 'Slovakia', value: 54},
+                            {name: 'Slovenia', value: 20},
+                            {name: 'Sweden', value: 93},
+                            {name: 'Swaziland', value: 11},
+                            {name: 'Syria', value: 78},
+                            {name: 'Chad', value: 11},
+                            {name: 'Togo', value: 63},
+                            {name: 'Thailand', value: 66},
+                            {name: 'Tajikistan', value: 76},
+                            {name: 'Turkmenistan', value: 50},
+                            {name: 'East Timor', value: 10},
+                            {name: 'Trinidad and Tobago', value: 13},
+                            {name: 'Tunisia', value: 10},
+                            {name: 'Turkey', value: 72},
+                            {name: 'United Republic of Tanzania', value: 44},
+                            {name: 'Uganda', value: 33},
+                            {name: 'Ukraine', value: 46},
+                            {name: 'Uruguay', value: 33},
+                            {name: 'United States', value: 88},
+                            {name: 'Uzbekistan', value: 27},
+                            {name: 'Venezuela', value: 23},
+                            {name: 'Vietnam', value: 89},
+                            {name: 'Vanuatu', value: 23},
+                            {name: 'West Bank', value: 13},
+                            {name: 'Yemen', value: 22},
+                            {name: 'South Africa', value: 51},
+                            {name: 'Zambia', value: 13},
+                            {name: 'Zimbabwe', value: 13}
+                        ]
+                    }
+                ]
+            };
             UsersLocationsInTheWorld.setOption(UsersLocationsInTheWorldOption);
 
             var monthsName = moment.months();
@@ -511,9 +827,9 @@
                 grid: {
                     show: false,
                     top: 25,
-                    bottom: 25,
-                    left: 30,
-                    right: 0
+                    bottom: 30,
+                    left: 45,
+                    right: 30
                 },
                 title: {
                     show: false,

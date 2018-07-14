@@ -31,6 +31,12 @@ public class UsersGenderGrouping {
             System.out.println(Arrays.toString(row));
         }
 
+        results = userStatsService.overallUsersStatuses();
+
+        for (Object[] row : results) {
+            System.out.println(Arrays.toString(row));
+        }
+
         results = userStatsService.usersBirthdayGroupingByMonth();
 
         for (Object[] row : results) {
@@ -44,6 +50,11 @@ public class UsersGenderGrouping {
         }
 
         results = activityService.avgPagesLoadTimePerHour();
+        for (Object[] row : results) {
+            System.out.println(Arrays.toString(row));
+        }
+
+        results = userStatsService.usersCountriesGrouping();
         for (Object[] row : results) {
             System.out.println(Arrays.toString(row));
         }

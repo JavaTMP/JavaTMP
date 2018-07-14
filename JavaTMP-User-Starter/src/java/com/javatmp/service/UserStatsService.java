@@ -75,6 +75,33 @@ public class UserStatsService {
         }
     }
 
+    public List<Object[]> usersCountriesGrouping() {
+        List<Object[]> results;
+        EntityManager em = null;
+        try {
+            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Object[]> query = cb.createQuery(Object[].class);
+            Root<User> root = query.from(User.class);
+            query.multiselect(root.get(User_.countryId), cb.count(root.get(User_.countryId)));
+            query.groupBy(root.get(User_.countryId));
+            results = em.createQuery(query).getResultList();
+
+            return results;
+        } catch (PersistenceException e) {
+            Throwable t = e;
+            String lastMsg = e.getMessage();
+            while (t != null) {
+                System.out.println("type [" + t.getClass().getName() + "]");
+                System.out.println("e [" + t.getMessage() + "]");
+                lastMsg = t.getMessage();
+                t = t.getCause();
+
+            }
+            throw new PersistenceException(lastMsg, e);
+        }
+    }
+
     public List<Object[]> usersBirthdayGroupingByMonth() {
         List<Object[]> results;
         EntityManager em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
