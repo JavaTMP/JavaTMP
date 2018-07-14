@@ -23,7 +23,7 @@
                     <a href="#" actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/user/GetListUsersPage">
                         View Details
                         <span class="float-right">
-                            <i class="fa fa-arrow-circle-right"></i>
+                            <i class="fa fa-arrow-circle-next"></i>
                         </span>
                     </a>
                 </div>
@@ -51,7 +51,7 @@
                     <a href="#" actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/user/GetListUsersPage">
                         View Details
                         <span class="float-right">
-                            <i class="fa fa-arrow-circle-right"></i>
+                            <i class="fa fa-arrow-circle-next"></i>
                         </span>
                     </a>
                 </div>
@@ -80,7 +80,7 @@
                     <a href="#" actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/user/GetListUsersPage">
                         View Details
                         <span class="float-right">
-                            <i class="fa fa-arrow-circle-right"></i>
+                            <i class="fa fa-arrow-circle-next"></i>
                         </span>
                     </a>
                 </div>
@@ -109,7 +109,7 @@
                     <a href="#" actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/user/GetListUsersPage">
                         View Details
                         <span class="float-right">
-                            <i class="fa fa-arrow-circle-right"></i>
+                            <i class="fa fa-arrow-circle-next"></i>
                         </span>
                     </a>
                 </div>
