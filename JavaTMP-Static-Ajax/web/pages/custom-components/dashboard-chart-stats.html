@@ -128,16 +128,16 @@
                 </div>
                 <div class="card-body text-center">
                     <div id="userFeedbackPercentagePieChart" style="width: 100%;min-height: 200px"></div>
-                    <ul class="list-inline mt-2">
-                        <li class="d-inline-block border-right pr-3 text-center">
+                    <div class="d-flex mt-1">
+                        <div class="flex-fill border-right text-center">
                             <h1><span class="counter">90</span><span>%</span></h1>
                             <span class="text-success"><i class="fa fa-thumbs-up"></i> Positive</span>
-                        </li>
-                        <li class="d-inline-block pl-3 text-center">
+                        </div>
+                        <div class="flex-fill text-center">
                             <h1><span class="counter">10</span><span>%</span></h1>
                             <span class="text-danger"><i class="fa fa-thumbs-down"></i> Negative</span>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -149,14 +149,14 @@
                 </div>
                 <div class="card-body text-center px-0">
                     <div id="userNewSubscribersLineChart" style="width: 100%;min-height: 200px"></div>
-                    <ul class="list-inline mt-2">
-                        <li>
+                    <div class="d-flex mt-1">
+                        <div class="flex-fill text-center">
                             <h1 class="counter">1465</h1>
                             <span class="text-success">
                                 <i class="fa fa-heart"></i> Average Monthly Subscribers
                             </span>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -168,16 +168,16 @@
                 </div>
                 <div class="card-body text-center px-0">
                     <div id="userGenerNewBarChart" style="width: 100%;min-height: 200px"></div>
-                    <ul class="list-inline clearfix mt-2">
-                        <li class="pr-3 d-inline-block border-right">
+                    <div class="d-flex mt-1">
+                        <div class="flex-fill border-right text-center">
                             <h1><span class="counter">56</span><span>%</span></h1>
                             <span class="text-success"><i class="fa fa-male"></i> Male</span>
-                        </li>
-                        <li class="pl-3 d-inline-block">
+                        </div>
+                        <div class="flex-fill text-center">
                             <h1><span class="counter">44</span><span>%</span></h1>
-                            <span class="text-warning"><i class="fa fa-female"></i> Female</span>
-                        </li>
-                    </ul>
+                            <span class="text-danger"><i class="fa fa-female"></i> Female</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -534,7 +534,7 @@ if your feature or plugins could not support to run globally.
                         shadowBlur: 10},
                     areaStyle: {
                         color: "#28a745",
-                        opacity: 0.1
+                        opacity: 0.2
                     }
                 }]
         };
