@@ -862,6 +862,8 @@
              * returning false will cancel the new request and do nothing.
              **/
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {
+                $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenCompress);
+                $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenExpand);
                 return true;
             });
         });
