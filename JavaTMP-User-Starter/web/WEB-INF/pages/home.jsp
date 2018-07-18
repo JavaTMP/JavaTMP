@@ -12,17 +12,17 @@
                 <div class="card-body p-1 bg-light">
                     <div class="row d-flex align-items-center">
                         <div class="col-6 text-center">
-                            <span class="d-block display-4 counter">26</span>
+                            <span class="d-block display-4 counter" id="userStatusPieChartCard_totalCount">0</span>
                         </div>
                         <div class="col-6 text-left">
-                            <div id="userStatusPieChart" style="width: 100%;min-height: 100px"></div>
+                            <div id="userStatusPieChart" style="min-height: 100px"></div>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="#">
+                    <a href="#" class="d-flex">
                         View Details
-                        <span class="float-right">
+                        <span class="ml-auto">
                             <i class="fa fa-arrow-circle-next"></i>
                         </span>
                     </a>
@@ -43,14 +43,14 @@
                             <span class="d-block display-4 counter">8</span>
                         </div>
                         <div class="col-6 text-left">
-                            <div id="todayVisitUserPieChart" style="width: 100%;min-height: 100px"></div>
+                            <div id="todayVisitUserPieChart" style="min-height: 100px"></div>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="#">
+                    <a href="#" class="d-flex">
                         View Details
-                        <span class="float-right">
+                        <span class="ml-auto">
                             <i class="fa fa-arrow-circle-next"></i>
                         </span>
                     </a>
@@ -72,14 +72,14 @@
                             <span class="d-block muted small">all Page Views</span>
                         </div>
                         <div class="col-6 text-left">
-                            <div id="pageViewActivitesPerHourChart" style="width: 100%;min-height: 100px"></div>
+                            <div id="pageViewActivitesPerHourChart" style="min-height: 100px"></div>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="#">
+                    <a href="#" class="d-flex">
                         View Details
-                        <span class="float-right">
+                        <span class="ml-auto">
                             <i class="fa fa-arrow-circle-next"></i>
                         </span>
                     </a>
@@ -101,14 +101,14 @@
                             <span class="d-block muted small">Avg Load Time</span>
                         </div>
                         <div class="col-6 text-left">
-                            <div id="loadtimePerHourChart" style="width: 100%;min-height: 100px"></div>
+                            <div id="loadtimePerHourChart" style="min-height: 100px"></div>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="#">
+                    <a href="#" class="d-flex">
                         View Details
-                        <span class="float-right">
+                        <span class="ml-auto">
                             <i class="fa fa-arrow-circle-next"></i>
                         </span>
                     </a>
@@ -130,7 +130,7 @@
                 <div class="card-body bg-light p-0">
                     <div class="row">
                         <div class="col-lg-12">
-                            <div id="UsersLocationsInTheWorld" style="width: 100%;min-height: 300px"></div>
+                            <div id="UsersLocationsInTheWorld" style="min-height: 300px"></div>
                         </div>
                     </div>
                 </div>
@@ -148,7 +148,7 @@
                 <div class="card-body bg-light p-0">
                     <div class="row">
                         <div class="col-lg-12">
-                            <div id="UsersBirthdayPerMonths" style="width: 100%;min-height: 300px"></div>
+                            <div id="UsersBirthdayPerMonths" style="min-height: 300px"></div>
                         </div>
                     </div>
                 </div>
@@ -211,6 +211,25 @@
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
 
+            var formatTooltipLine = function (color, value) {
+                return "<span style='display:inline-block;width:10px;height:10px;border-radius:50%;background-color:" + color + ";margin-" + javatmp.settings.floatReverse + ":5px;'></span><span>" + value + "</span>";
+            };
+
+            var formaterFunction = null;
+            if (javatmp.settings.isRTL === true) {
+                formaterFunction = function (params) {
+                    var retStr = "";
+                    for (var i = 0; i < params.length; i++) {
+                        retStr += [
+                            '<span>' + params[i].axisValue + '</span>',
+                            "<br/>",
+                            formatTooltipLine(params[i].color, params[i].seriesName + ':' + params[i].data)
+                        ].join('');
+                    }
+                    return retStr;
+                };
+            }
+
             $('.counter').counterUp({
                 delay: 10,
                 time: 1000
@@ -251,13 +270,23 @@
                             }
                         },
                         data: [
-                            {value: 18, name: 'Active'},
-                            {value: 32, name: 'Deactive'}
+                            {value: 0, name: 'Active'},
+                            {value: 0, name: 'Deactive'}
                         ]
                     }
                 ]
             };
             userStatusPieChart.setOption(userStatusPieChartOption);
+            var userStatusPieChartUpdateFunc = function () {
+                userStatusPieChartOption.series[0].data[0].value = 1;
+                userStatusPieChartOption.series[0].data[1].value = 16;
+                userStatusPieChart.setOption(userStatusPieChartOption);
+                $("#userStatusPieChartCard_totalCount").html(17).counterUp({
+                    delay: 10,
+                    time: 1000
+                });
+            };
+            setTimeout(userStatusPieChartUpdateFunc, 2000);
             var todayVisitUserPieChartOption = {
                 tooltip: {
                     trigger: 'item',
@@ -292,21 +321,6 @@
                 ]
             };
             todayVisitUserPieChart.setOption(todayVisitUserPieChartOption);
-
-            var formatTooltipLine = function (color, value) {
-                return "<span style='display:inline-block;width:10px;height:10px;border-radius:50%;background-color:" + color + ";margin-" + javatmp.settings.floatReverse + ":5px;'></span><span>" + value + "</span>";
-            };
-
-            var formaterFunction = null;
-            if (javatmp.settings.isRTL === true) {
-                formaterFunction = function (params) {
-                    return [
-                        '<span>' + params[0].axisValue + '</span>',
-                        "<br/>",
-                        formatTooltipLine(params[0].color, params[0].seriesName + ':' + params[0].data)
-                    ].join('');
-                };
-            }
 
             var pageViewActivitesPerHourChartOption = {
                 grid: {
@@ -512,19 +526,7 @@
                     }
                 ]
             };
-            var itemStyle = {
-                normal: {
-                    borderWidth: 0.3,
-                    borderColor: 'black'
-                },
-                emphasis: {
-                    label: {show: true}
-                    // shadowOffsetX: 0,
-                    // shadowOffsetY: 0,
-                    // shadowBlur: 20,
-                    // shadowColor: 'rgba(0, 0, 0, 0.3)'
-                }
-            };
+//            var itemStyle = ;
             UsersLocationsInTheWorldOption = {
                 tooltip: {
                     trigger: 'item',
@@ -552,7 +554,19 @@
                         type: 'map',
                         map: 'world',
                         roam: true,
-                        itemStyle: itemStyle,
+                        itemStyle: {
+                            normal: {
+                                borderWidth: 0.3,
+                                borderColor: 'black'
+                            },
+                            emphasis: {
+                                label: {show: true}
+                                // shadowOffsetX: 0,
+                                // shadowOffsetY: 0,
+                                // shadowBlur: 20,
+                                // shadowColor: 'rgba(0, 0, 0, 0.3)'
+                            }
+                        },
                         data: [
                             {name: 'Afghanistan', value: 88},
                             {name: 'Angola', value: 94},
@@ -815,6 +829,7 @@
                 ]
             });
             UsersBirthdayPerMonths.setOption(barChartOption);
+
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
                 $(".logout-home-btn-id").on("click", function () {
