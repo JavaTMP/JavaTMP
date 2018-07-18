@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
     <div class="page-header">
         <h1>Dashboard Chart Stats</h1>
@@ -129,7 +130,7 @@
                 <div class="card-body text-center px-0">
                     <div id="userFeedbackPercentagePieChart" style="width: 100%;min-height: 200px"></div>
                     <div class="d-flex mt-3">
-                        <div class="flex-fill border-right border-secondary text-center">
+                        <div class="flex-fill border-right text-center">
                             <h1><span class="counter">90</span><span>%</span></h1>
                             <span class="text-success"><i class="fa fa-thumbs-up"></i> Positive</span>
                         </div>
@@ -169,7 +170,7 @@
                 <div class="card-body text-center px-0">
                     <div id="userGenerNewBarChart" style="width: 100%;min-height: 200px"></div>
                     <div class="d-flex mt-3">
-                        <div class="flex-fill border-right border-secondary text-center">
+                        <div class="flex-fill border-right text-center">
                             <h1><span class="counter">56</span><span>%</span></h1>
                             <span class="text-success"><i class="fa fa-male"></i> Male</span>
                         </div>
@@ -356,11 +357,15 @@
             var formaterFunction = null;
             if (javatmp.settings.isRTL === true) {
                 formaterFunction = function (params) {
-                    return [
-                        '<span>' + params[0].axisValue + '</span>',
-                        "<br/>",
-                        formatTooltipLine(params[0].color, params[0].seriesName + ':' + params[0].data)
-                    ].join('');
+                    var retStr = "";
+                    for (var i = 0; i < params.length; i++) {
+                        retStr += [
+                            '<span>' + params[i].axisValue + '</span>',
+                            "<br/>",
+                            formatTooltipLine(params[i].color, params[i].seriesName + ':' + params[i].data)
+                        ].join('');
+                    }
+                    return retStr;
                 };
             }
             $('.counter').counterUp({
@@ -693,7 +698,12 @@
                     right: 0
                 },
                 tooltip: {
-                    trigger: 'axis'
+                    trigger: 'axis',
+                    textStyle: {
+                        fontFamily: "Open Sans",
+                        align: javatmp.settings.floatDefault
+                    },
+                    formatter: formaterFunction
                 },
                 xAxis: {
                     show: false,
@@ -1093,7 +1103,12 @@
                     trigger: 'axis',
                     axisPointer: {
                         type: 'shadow'
-                    }
+                    },
+                    textStyle: {
+                        fontFamily: "Open Sans",
+                        align: javatmp.settings.floatDefault
+                    },
+                    formatter: formaterFunction
                 },
                 grid: {
                     left: 0,
@@ -1105,13 +1120,23 @@
                     {
                         show: false,
                         type: 'category',
+                        inverse: javatmp.settings.isRTL,
+                        textStyle: {
+                            fontFamily: "Open Sans",
+                            align: javatmp.settings.floatDefault
+                        },
                         data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
                     }
                 ],
                 yAxis: [
                     {
                         show: false,
-                        type: 'value'
+                        position: javatmp.settings.floatDefault,
+                        type: 'value',
+                        textStyle: {
+                            fontFamily: "Open Sans",
+                            align: javatmp.settings.floatDefault
+                        }
                     }
                 ],
                 color: ['#dc3545', '#ffc107', '#28a745'],
@@ -1154,13 +1179,23 @@
                     {
                         show: false,
                         type: 'category',
-                        data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+                        data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+                        inverse: javatmp.settings.isRTL,
+                        textStyle: {
+                            fontFamily: "Open Sans",
+                            align: javatmp.settings.floatDefault
+                        }
                     }
                 ],
                 yAxis: [
                     {
                         show: false,
-                        type: 'value'
+                        type: 'value',
+                        position: javatmp.settings.floatDefault,
+                        textStyle: {
+                            fontFamily: "Open Sans",
+                            align: javatmp.settings.floatDefault
+                        }
                     }
                 ],
                 color: ['#dc3545', '#ffc107'],
@@ -1197,13 +1232,23 @@
                     {
                         show: false,
                         type: 'category',
-                        data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+                        data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
+                        inverse: javatmp.settings.isRTL,
+                        textStyle: {
+                            fontFamily: "Open Sans",
+                            align: javatmp.settings.floatDefault
+                        }
                     }
                 ],
                 yAxis: [
                     {
                         show: false,
-                        type: 'value'
+                        type: 'value',
+                        position: javatmp.settings.floatDefault,
+                        textStyle: {
+                            fontFamily: "Open Sans",
+                            align: javatmp.settings.floatDefault
+                        }
                     }
                 ],
                 color: ['#dc3545', '#ffc107', '#28a745'],
