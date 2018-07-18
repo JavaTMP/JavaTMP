@@ -562,6 +562,12 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a href="${pageContext.request.contextPath}/pages/custom-components/dashboard-chart-stats">
+                                            <i class="far fa-lg fa-fw fa-lightbulb"></i>
+                                            Dashboard Chart Stats
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="${pageContext.request.contextPath}/pages/custom-components/bootstrap-steps">
                                             <i class="far fa-lg fa-fw fa-lightbulb"></i>
                                             Bootstrap Steps
