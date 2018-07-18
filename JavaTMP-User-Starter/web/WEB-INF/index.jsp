@@ -67,26 +67,26 @@
                 <div class="col-12 m-0 p-0">
                     <div class="sidebar scroll-content">
                         <div class="sidebar-shortcut-button text-center m-1">
-                            <button class="btn btn-primary"
+                            <button class="btn btn-primary logout-home-btn-id"
                                     actionType="action-ref-href"
-                                    action-ref-by-href="${pageContext.request.contextPath}/pages/home"
+                                    action-ref-by-href="${pageContext.request.contextPath}/logout"
                                     data-toggle="tooltip" data-placement="auto"
-                                    title="${labels['global.sidebar.home']}">
-                                <i class="fa fa-home fa-fw"></i>
+                                    title="Exit and Sign out">
+                                <i class="fas fa-sign-out-alt"></i>
                             </button>
                             <button class="btn btn-primary"
                                     actionType="action-ref-href"
-                                    action-ref-by-href="${pageContext.request.contextPath}/pages/home"
+                                    action-ref-by-href="${pageContext.request.contextPath}/user/GetListUsersPage"
                                     data-toggle="tooltip" data-placement="auto"
-                                    title="${labels['global.sidebar.home']}">
-                                <i class="fa fa-home fa-fw"></i>
+                                    title="Users List">
+                                <i class="fas fa-users fa-fw"></i>
                             </button>
                             <button class="btn btn-primary"
                                     actionType="action-ref-href"
-                                    action-ref-by-href="${pageContext.request.contextPath}/pages/home"
+                                    action-ref-by-href="${pageContext.request.contextPath}/user/CreateUserController"
                                     data-toggle="tooltip" data-placement="auto"
-                                    title="${labels['global.sidebar.home']}">
-                                <i class="fa fa-home fa-fw"></i>
+                                    title="Add New User">
+                                <i class="fas fa-user-plus"></i>
                             </button>
                             <button class="btn btn-primary"
                                     actionType="action-ref-href"
@@ -498,6 +498,12 @@
         </script>
         <script type="text/javascript">
             jQuery(function ($) {
+
+                // register logout handler:
+                $(".logout-home-btn-id").on("click", function () {
+                    window.location.replace($(this).attr("action-ref-by-href"));
+                });
+
                 $("#oneTimeOverlay").remove();
             });
         </script>

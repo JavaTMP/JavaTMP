@@ -165,12 +165,6 @@
                     <div class="form-row">
                         <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 text-center">
                             <button type="button" class="javatmp-btn btn btn-primary btn-block my-1"
-                                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/user/GetListUsersPage" >
-                                User List
-                            </button>
-                        </div>
-                        <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 text-center">
-                            <button type="button" class="javatmp-btn btn btn-primary btn-block my-1"
                                     actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/user/CreateUserController">
                                 Add New User
                             </button>
@@ -179,12 +173,6 @@
                             <button type="button" class="javatmp-btn btn btn-primary btn-block my-1"
                                     actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/user/current-user-profile" >
                                 Current User Profile
-                            </button>
-                        </div>
-                        <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 text-center">
-                            <button type="button" class="logout-home-btn-id javatmp-btn btn btn-primary btn-block my-1"
-                                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/logout" >
-                                Logout
                             </button>
                         </div>
                     </div>
@@ -832,9 +820,7 @@
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
-                $(".logout-home-btn-id").on("click", function () {
-                    window.location.replace($(this).attr("action-ref-by-href"));
-                });
+
             });
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
                 // fire when user resize browser window or sidebar hide / show
