@@ -68,7 +68,7 @@
                 <div class="card-body p-1 bg-light">
                     <div class="row d-flex align-items-center">
                         <div class="col-6 text-center">
-                            <span class="d-block display-4 counter">527</span>
+                            <span class="d-block display-4 counter" id="pageViewActivitesPerHourChartCard_totalCount">0</span>
                             <span class="d-block muted small">all Page Views</span>
                         </div>
                         <div class="col-6 text-left">
@@ -340,13 +340,7 @@
                     }
                 ]
             };
-            pageViewActivitesPerHourChartOption = $.extend(true, pageViewActivitesPerHourChartOption, {
-                series: [
-                    {
-                        data: [24, 44, 81, 11, 32, 41, 27, 5, 4, 71, 51, 22, 0, 0, 43, 451, 413, 90, 27, 5, 4, 71, 51, 22]
-                    }
-                ]
-            });
+
             pageViewActivitesPerHourChart.setOption(pageViewActivitesPerHourChartOption);
             var loadtimePerHourChartOption = {
                 grid: {
@@ -870,6 +864,75 @@
                         });
 
                         todayVisitUserPieChart.on('legendselectchanged', function (params) {
+                            console.log(params);
+                        });
+
+                        $(cardBody).unblock();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        $(cardBody).unblock();
+                        var msg = 'Error on reloading the card. Please check your remote server url';
+                        toastr.error(msg, 'ERROR', {
+                            timeOut: 2500,
+                            progressBar: true,
+                            rtl: javatmp.settings.isRTL,
+                            positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                        });
+                        // clean the bar graph
+                    }
+                });
+            });
+
+            $(javatmp.settings.defaultOutputSelector).on("click", "#pageViewActivitesPerHourChartCard a.reload", function (e) {
+                e.preventDefault();
+
+                var cardBody = $(this).closest(".card").children(".card-body");
+                var href = javatmp.settings.contextPath + "/stats/GetUsersPageViewsPerHourCountController";
+
+                $(cardBody).block({message: "Loading ...",
+                    overlayCSS: {
+                        backgroundColor: '#000',
+                        opacity: 0.7
+                    }});
+
+                $.ajax({
+                    "type": "POST",
+                    cache: false,
+                    url: href,
+                    dataType: "json",
+                    contentType: "application/json; charset=UTF-8",
+                    data: null,
+                    success: function (remoteContent) {
+                        var dataArray = remoteContent.data;
+                        var totalPages = 0;
+                        var outputHoursArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                        for (var i = 0; i < dataArray.length; i++) {
+                            outputHoursArray[dataArray[i][0]] += dataArray[i][1];
+                            totalPages += dataArray[i][1];
+                        }
+
+                        $("#pageViewActivitesPerHourChartCard_totalCount").attr("title", totalPages).html(totalPages).counterUp({
+                            delay: 10,
+                            time: 1000,
+                            formatter: function (n) {
+                                return numeral(n).format('0 a');
+                            }
+                        });
+
+                        pageViewActivitesPerHourChartOption = $.extend(true, pageViewActivitesPerHourChartOption, {
+                            series: [
+                                {
+                                    data: outputHoursArray
+                                }
+                            ]
+                        });
+                        pageViewActivitesPerHourChart.setOption(pageViewActivitesPerHourChartOption);
+
+                        pageViewActivitesPerHourChart.on('click', function (params) {
+                            console.log(params);
+                        });
+
+                        pageViewActivitesPerHourChart.on('legendselectchanged', function (params) {
                             console.log(params);
                         });
 
