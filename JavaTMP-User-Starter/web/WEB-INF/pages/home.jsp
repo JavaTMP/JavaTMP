@@ -1,8 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<div class="dynamic-ajax-content pt-3">
+<div id="UsersMngHomePageDynamicAjaxCont" class="dynamic-ajax-content pt-3">
     <div class="form-row">
         <div class="col-xl-3 col-lg-6 col-md-6">
-            <div class="card mb-3" id="userStatusPieChartCard">
+            <div class="card shadow mb-3" id="userStatusPieChartCard">
                 <div class="card-header">
                     Registered Users
                     <div class="options float-right">
@@ -30,7 +30,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-md-6">
-            <div class="card mb-3" id="todayVisitUserPieChartCard">
+            <div class="card shadow mb-3" id="todayVisitUserPieChartCard">
                 <div class="card-header">
                     Visitors Today
                     <div class="options float-right">
@@ -58,7 +58,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-md-6">
-            <div class="card mb-3" id="pageViewActivitesPerHourChartCard">
+            <div class="card shadow mb-3" id="pageViewActivitesPerHourChartCard">
                 <div class="card-header">
                     Page Views Per Hour
                     <div class="options float-right">
@@ -87,7 +87,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-md-6">
-            <div class="card mb-3" id="loadtimePerHourChartCard">
+            <div class="card shadow mb-3" id="loadtimePerHourChartCard">
                 <div class="card-header">
                     Load Time Per Hour
                     <div class="options float-right">
@@ -119,7 +119,7 @@
     </div>
     <div class="form-row">
         <div class="col-lg-6">
-            <div class="card" id="UsersLocationsInTheWorldCard">
+            <div class="card shadow" id="UsersLocationsInTheWorldCard">
                 <div class="card-header">
                     Users Locations
                     <div class="options float-right">
@@ -137,7 +137,7 @@
             </div>
         </div>
         <div class="col-lg-6">
-            <div class="card" id="UsersBirthdayPerMonthsCard">
+            <div class="card shadow" id="UsersBirthdayPerMonthsCard">
                 <div class="card-header">
                     Users Birthday Per Months
                     <div class="options float-right">
@@ -155,44 +155,11 @@
             </div>
         </div>
     </div>
-    <div class="form-row">
-        <div class="col-lg-12">
-            <div class="card my-3" id="BarChart">
-                <div class="card-header">
-                    Quick Shortcut Buttons
-                </div>
-                <div class="card-body bg-light p-2">
-                    <div class="form-row">
-                        <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 text-center">
-                            <button type="button" class="javatmp-btn btn btn-primary btn-block my-1"
-                                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/user/CreateUserController">
-                                Add New User
-                            </button>
-                        </div>
-                        <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3 text-center">
-                            <button type="button" class="javatmp-btn btn btn-primary btn-block my-1"
-                                    actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/user/current-user-profile" >
-                                Current User Profile
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <style type="text/css">
-        .javatmp-btn {
-            height: 100px;
-            white-space: normal;
-            max-width: 215px;
-            margin: auto;
-        }
-        .javatmp-btn:hover {
-            cursor: pointer;
-        }
-        .javatmp-btn > i {
-            display: block;
-        }
+        /*        #UsersMngHomePageDynamicAjaxCont .card {
+                    -webkit-box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.07), 0 2px 9px 0 rgba(62, 57, 107, 0.06);
+                    box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.07), 0 2px 9px 0 rgba(62, 57, 107, 0.06);
+                }*/
     </style>
     <script type="text/javascript">
         jQuery(function ($) {

@@ -90,10 +90,10 @@
                             </button>
                             <button class="btn btn-primary"
                                     actionType="action-ref-href"
-                                    action-ref-by-href="${pageContext.request.contextPath}/pages/home"
+                                    action-ref-by-href="${pageContext.request.contextPath}/pages/user/current-user-profile"
                                     data-toggle="tooltip" data-placement="auto"
-                                    title="${labels['global.sidebar.home']}">
-                                <i class="fa fa-home fa-fw"></i>
+                                    title="Current User Profile">
+                                <i class="far fa-user-circle"></i>
                             </button>
                             <button class="btn btn-primary"
                                     actionType="action-ref-href"
@@ -152,7 +152,7 @@
                         </ul>
                     </div>
                     <div class="main-content">
-                        <div class="main-breadcrumb-bar d-flex flex-row">
+                        <div class="main-breadcrumb-bar d-flex flex-row shadow">
                             <ol class="breadcrumb"></ol>
                             <div class="breadcrumb-submenu">
                                 <a class="float-right min-tools-button">
