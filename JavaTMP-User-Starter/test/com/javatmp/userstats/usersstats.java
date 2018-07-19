@@ -10,6 +10,7 @@ import com.javatmp.domain.User;
 import com.javatmp.domain.User_;
 import com.javatmp.db.JpaDaoHelper;
 import com.javatmp.mvc.MvcHelper;
+import com.javatmp.service.ActivityService;
 import com.javatmp.service.ServicesFactory;
 import com.javatmp.service.UserService;
 import com.javatmp.service.UserStatsService;
@@ -45,6 +46,37 @@ public class usersstats {
         List<Object[]> results = userStatsService.overallUsersStatuses();
 
         System.out.println(MvcHelper.toString(results));
+
+        results = userStatsService.usersBirthdayGroupingByMonth();
+
+        for (Object[] row : results) {
+            System.out.println(Arrays.toString(row));
+        }
+
+        ActivityService activityService = sf.getActivityService();
+        results = activityService.userPageViewsActivitiesPerHour();
+        for (Object[] row : results) {
+            System.out.println(Arrays.toString(row));
+        }
+
+        results = activityService.avgPagesLoadTimePerHour();
+        for (Object[] row : results) {
+            System.out.println(Arrays.toString(row));
+        }
+
+        results = userStatsService.usersCountriesGrouping();
+        for (Object[] row : results) {
+            System.out.println(Arrays.toString(row));
+        }
+
+        Long count = userStatsService.usersVistingToday();
+
+        System.out.println("visiting users today is [" + count + "]");
+
+        count = userStatsService.usersNotVistingToday();
+
+        System.out.println("Not visiting users today is [" + count + "]");
+
     }
 
 }

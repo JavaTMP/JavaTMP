@@ -37,28 +37,6 @@ public class UsersGenderGrouping {
             System.out.println(Arrays.toString(row));
         }
 
-        results = userStatsService.usersBirthdayGroupingByMonth();
-
-        for (Object[] row : results) {
-            System.out.println(Arrays.toString(row));
-        }
-
-        ActivityService activityService = sf.getActivityService();
-        results = activityService.userPageViewsActivitiesPerHour();
-        for (Object[] row : results) {
-            System.out.println(Arrays.toString(row));
-        }
-
-        results = activityService.avgPagesLoadTimePerHour();
-        for (Object[] row : results) {
-            System.out.println(Arrays.toString(row));
-        }
-
-        results = userStatsService.usersCountriesGrouping();
-        for (Object[] row : results) {
-            System.out.println(Arrays.toString(row));
-        }
-
     }
 
 }

@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="#" class="d-flex">
+                    <a href="javascript:;" class="d-flex">
                         View Details
                         <span class="ml-auto">
                             <i class="fa fa-arrow-circle-next"></i>
@@ -40,7 +40,7 @@
                 <div class="card-body p-1 bg-light">
                     <div class="row d-flex align-items-center">
                         <div class="col-6 text-center">
-                            <span class="d-block display-4 counter">8</span>
+                            <span class="d-block display-4 counter" id="todayVisitUserPieChartCard_totalCount">0</span>
                         </div>
                         <div class="col-6 text-left">
                             <div id="todayVisitUserPieChart" style="min-height: 100px"></div>
@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="#" class="d-flex">
+                    <a href="javascript:;" class="d-flex">
                         View Details
                         <span class="ml-auto">
                             <i class="fa fa-arrow-circle-next"></i>
@@ -77,7 +77,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="#" class="d-flex">
+                    <a href="javascript:;" class="d-flex">
                         View Details
                         <span class="ml-auto">
                             <i class="fa fa-arrow-circle-next"></i>
@@ -106,7 +106,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="#" class="d-flex">
+                    <a href="javascript:;" class="d-flex">
                         View Details
                         <span class="ml-auto">
                             <i class="fa fa-arrow-circle-next"></i>
@@ -232,16 +232,7 @@
                 ]
             };
             userStatusPieChart.setOption(userStatusPieChartOption);
-            var userStatusPieChartUpdateFunc = function () {
-                userStatusPieChartOption.series[0].data[0].value = 1;
-                userStatusPieChartOption.series[0].data[1].value = 16;
-                userStatusPieChart.setOption(userStatusPieChartOption);
-                $("#userStatusPieChartCard_totalCount").html(17).counterUp({
-                    delay: 10,
-                    time: 1000
-                });
-            };
-            setTimeout(userStatusPieChartUpdateFunc, 2000);
+
             var todayVisitUserPieChartOption = {
                 tooltip: {
                     trigger: 'item',
@@ -269,8 +260,8 @@
                             }
                         },
                         data: [
-                            {value: 8, name: 'Visit'},
-                            {value: 18, name: 'Not login yet'}
+                            {value: 0, name: 'Visit Today'},
+                            {value: 0, name: 'Not Visiting or login yet'}
                         ]
                     }
                 ]
@@ -785,9 +776,124 @@
             });
             UsersBirthdayPerMonths.setOption(barChartOption);
 
+            $(javatmp.settings.defaultOutputSelector).on("click", "#userStatusPieChartCard a.reload", function (e) {
+                e.preventDefault();
+
+                var cardBody = $(this).closest(".card").children(".card-body");
+                var href = javatmp.settings.contextPath + "/stats/GetRegisteredUsersStatusesController";
+
+                $(cardBody).block({message: "Loading ...",
+                    overlayCSS: {
+                        backgroundColor: '#000',
+                        opacity: 0.7
+                    }});
+
+                $.ajax({
+                    "type": "POST",
+                    cache: false,
+                    url: href,
+                    dataType: "json",
+                    contentType: "application/json; charset=UTF-8",
+                    data: null,
+                    success: function (remoteContent) {
+                        var activeUsersCount = remoteContent.data[1][1];
+                        var inactiveUsersCount = remoteContent.data[0][1];
+                        var allUsersCount = activeUsersCount + inactiveUsersCount;
+
+                        userStatusPieChartOption.series[0].data[0].value = activeUsersCount;
+                        userStatusPieChartOption.series[0].data[1].value = inactiveUsersCount;
+                        $("#userStatusPieChartCard_totalCount").html(allUsersCount).counterUp({
+                            delay: 10,
+                            time: 1000
+                        });
+                        userStatusPieChart.setOption(userStatusPieChartOption);
+
+
+
+                        userStatusPieChart.on('click', function (params) {
+                            console.log(params);
+                        });
+
+                        userStatusPieChart.on('legendselectchanged', function (params) {
+                            console.log(params);
+                        });
+
+                        $(cardBody).unblock();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        $(cardBody).unblock();
+                        var msg = 'Error on reloading the card. Please check your remote server url';
+                        toastr.error(msg, 'ERROR', {
+                            timeOut: 2500,
+                            progressBar: true,
+                            rtl: javatmp.settings.isRTL,
+                            positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                        });
+                        // clean the bar graph
+                    }
+                });
+            });
+
+            $(javatmp.settings.defaultOutputSelector).on("click", "#todayVisitUserPieChartCard a.reload", function (e) {
+                e.preventDefault();
+
+                var cardBody = $(this).closest(".card").children(".card-body");
+                var href = javatmp.settings.contextPath + "/stats/GetVisitingUsersCountController";
+
+                $(cardBody).block({message: "Loading ...",
+                    overlayCSS: {
+                        backgroundColor: '#000',
+                        opacity: 0.7
+                    }});
+
+                $.ajax({
+                    "type": "POST",
+                    cache: false,
+                    url: href,
+                    dataType: "json",
+                    contentType: "application/json; charset=UTF-8",
+                    data: null,
+                    success: function (remoteContent) {
+                        var visitingToday = remoteContent.data[0];
+                        var notVisitingTodayOrLoginYet = remoteContent.data[1];
+
+                        todayVisitUserPieChartOption.series[0].data[0].value = visitingToday;
+                        todayVisitUserPieChartOption.series[0].data[1].value = notVisitingTodayOrLoginYet;
+                        $("#todayVisitUserPieChartCard_totalCount").html(visitingToday).counterUp({
+                            delay: 10,
+                            time: 1000
+                        });
+                        todayVisitUserPieChart.setOption(todayVisitUserPieChartOption);
+
+                        todayVisitUserPieChart.on('click', function (params) {
+                            console.log(params);
+                        });
+
+                        todayVisitUserPieChart.on('legendselectchanged', function (params) {
+                            console.log(params);
+                        });
+
+                        $(cardBody).unblock();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        $(cardBody).unblock();
+                        var msg = 'Error on reloading the card. Please check your remote server url';
+                        toastr.error(msg, 'ERROR', {
+                            timeOut: 2500,
+                            progressBar: true,
+                            rtl: javatmp.settings.isRTL,
+                            positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                        });
+                        // clean the bar graph
+                    }
+                });
+            });
+
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
-
+                $(javatmp.settings.defaultOutputSelector).find("[load-on-starup=true]").each(function () {
+                    $(this).trigger("click");
+                });
             });
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
                 // fire when user resize browser window or sidebar hide / show
@@ -832,6 +938,7 @@
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {
                 $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenCompress);
                 $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenExpand);
+                $(javatmp.settings.defaultOutputSelector).off("click");
                 return true;
             });
         });

@@ -113,4 +113,26 @@ public class UserStatsService {
         return resultList;
     }
 
+    public Long usersVistingToday() {
+        Long results;
+        EntityManager em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+
+        Query query = em.createQuery(
+                "SELECT count(*) FROM User user where user.lastAccessTime >= CURRENT_DATE");
+        results = (Long) query.getSingleResult();
+        em.close();
+        return results;
+    }
+
+    public Long usersNotVistingToday() {
+        Long results;
+        EntityManager em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+
+        Query query = em.createQuery(
+                "SELECT count(*) FROM User user where user.lastAccessTime < CURRENT_DATE or user.lastAccessTime is null");
+        results = (Long) query.getSingleResult();
+        em.close();
+        return results;
+    }
+
 }

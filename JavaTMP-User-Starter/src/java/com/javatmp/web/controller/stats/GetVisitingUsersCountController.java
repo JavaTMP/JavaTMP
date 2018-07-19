@@ -22,8 +22,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/stats/GetRegisteredUsersStatusesController")
-public class GetRegisteredUsersStatusesController extends HttpServlet {
+@WebServlet("/stats/GetVisitingUsersCountController")
+public class GetVisitingUsersCountController extends HttpServlet {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
 
@@ -35,7 +35,11 @@ public class GetRegisteredUsersStatusesController extends HttpServlet {
         UserStatsService userStatsService = sf.getUserStatsService();
 
         try {
-            List<Object[]> results = userStatsService.overallUsersStatuses();
+            Long usersVisitingTodayCount = userStatsService.usersVistingToday();
+            Long usersNotVisitingTodayCount = userStatsService.usersNotVistingToday();
+            Long[] results = new Long[2];
+            results[0] = usersVisitingTodayCount;
+            results[1] = usersNotVisitingTodayCount;
             responseMessage.setOverAllStatus(true);
             responseMessage.setMessage(null);
             responseMessage.setData(results);
