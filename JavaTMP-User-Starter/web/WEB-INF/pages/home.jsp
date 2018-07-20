@@ -882,7 +882,7 @@
 
                         var outputMonthsArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
                         for (var i = 0; i < dataArray.length; i++) {
-                            outputMonthsArray[dataArray[i][0]] += dataArray[i][1];
+                            outputMonthsArray[dataArray[i][0] - 1] += dataArray[i][1];
                         }
 
                         barChartOption = $.extend(true, barChartOption, {
