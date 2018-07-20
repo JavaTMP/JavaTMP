@@ -60,6 +60,10 @@ public class User implements Serializable {
     @JoinColumn(insertable = false, updatable = false, name = "profilePicDocumentId", referencedColumnName = "documentId")
     private Document profilePicDocument;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(insertable = false, updatable = false, name = "countryId", referencedColumnName = "countryId")
+    private Country country;
+
     public User() {
 
     }
@@ -384,6 +388,20 @@ public class User implements Serializable {
      */
     public void setGender(Short gender) {
         this.gender = gender;
+    }
+
+    /**
+     * @return the country
+     */
+    public Country getCountry() {
+        return country;
+    }
+
+    /**
+     * @param country the country to set
+     */
+    public void setCountry(Country country) {
+        this.country = country;
     }
 
 }

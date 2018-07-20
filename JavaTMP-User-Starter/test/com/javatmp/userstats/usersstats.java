@@ -48,6 +48,7 @@ public class usersstats {
             System.out.println(Arrays.toString(row));
         }
 
+        System.out.println("usersCountriesGrouping");
         results = userStatsService.usersCountriesGrouping();
         for (Object[] row : results) {
             System.out.println(Arrays.toString(row));

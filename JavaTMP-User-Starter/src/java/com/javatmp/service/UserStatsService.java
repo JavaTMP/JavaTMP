@@ -1,6 +1,8 @@
 package com.javatmp.service;
 
 import com.javatmp.db.JpaDaoHelper;
+import com.javatmp.domain.Country;
+import com.javatmp.domain.Country_;
 import com.javatmp.domain.User;
 import com.javatmp.domain.User_;
 import java.util.List;
@@ -10,6 +12,8 @@ import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 
 public class UserStatsService {
@@ -83,8 +87,9 @@ public class UserStatsService {
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaQuery<Object[]> query = cb.createQuery(Object[].class);
             Root<User> root = query.from(User.class);
-            query.multiselect(root.get(User_.countryId), cb.count(root.get(User_.countryId)));
-            query.groupBy(root.get(User_.countryId));
+//            Join<User, Country> join1 = root.join(User_.country, JoinType.LEFT);
+            query.multiselect(root.get(User_.country).get(Country_.countryName), cb.count(root.get(User_.country).get(Country_.countryName)));
+            query.groupBy(root.get(User_.country).get(Country_.countryName));
             results = em.createQuery(query).getResultList();
 
             return results;

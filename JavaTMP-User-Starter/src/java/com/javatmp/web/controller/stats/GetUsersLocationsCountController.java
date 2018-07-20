@@ -4,6 +4,7 @@ import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.domain.ResponseMessage;
 import com.javatmp.service.ActivityService;
 import com.javatmp.service.ServicesFactory;
+import com.javatmp.service.UserStatsService;
 import com.javatmp.util.Constants;
 import java.io.IOException;
 import java.util.List;
@@ -16,8 +17,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/stats/GetAvgLoadTimePerHourController")
-public class GetAvgLoadTimePerHourController extends HttpServlet {
+@WebServlet("/stats/GetUsersLocationsCountController")
+public class GetUsersLocationsCountController extends HttpServlet {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
 
@@ -26,10 +27,10 @@ public class GetAvgLoadTimePerHourController extends HttpServlet {
 
         ResponseMessage responseMessage = new ResponseMessage();
         ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
-        ActivityService activityService = sf.getActivityService();
+        UserStatsService userStatsService = sf.getUserStatsService();
 
         try {
-            List<Object[]> results = activityService.avgPagesLoadTimePerHour();
+            List<Object[]> results = userStatsService.usersCountriesGrouping();
             responseMessage.setOverAllStatus(true);
             responseMessage.setMessage(null);
             responseMessage.setData(results);
