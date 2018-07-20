@@ -1,1 +1,10 @@
+
+@import "../common/variables";
+
+$card-border-color: darken($javatmp-secondary-bg, 9%);
+$card-cap-bg: $javatmp-secondary-bg;
+$javatmp-navbar-border-color: darken($javatmp-secondary-bg, 9%);
+$javatmp-sidebar-border-color: darken($javatmp-secondary-bg, 9%);
+$javatmp-footer-bar-border-color: darken($javatmp-secondary-bg, 9%);
+
 @import "../main.scss";
