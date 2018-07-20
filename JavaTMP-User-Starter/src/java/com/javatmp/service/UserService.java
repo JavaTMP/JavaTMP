@@ -1,6 +1,7 @@
 package com.javatmp.service;
 
 import com.javatmp.db.JpaDaoHelper;
+import com.javatmp.domain.Country;
 import com.javatmp.domain.Document;
 import com.javatmp.domain.User;
 import com.javatmp.domain.User_;
@@ -50,7 +51,9 @@ public class UserService {
 
             Root<User> from = cq.from(User.class);
             from.fetch(User_.profilePicDocument, JoinType.LEFT);
-            Join<User, Document> join = from.join(User_.profilePicDocument, JoinType.LEFT);
+            from.fetch(User_.country, JoinType.LEFT);
+//            Join<User, Document> join = from.join(User_.profilePicDocument, JoinType.LEFT);
+//            Join<User, Country> countryJoin = from.join(User_.country, JoinType.LEFT);
             cq.select(from);
             cq.where(cb.equal(from.get(User_.id), user.getId()));
             TypedQuery<User> query = em.createQuery(cq);

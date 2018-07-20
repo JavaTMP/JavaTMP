@@ -43,9 +43,9 @@
                             <a class="dropdown-item"
                                actionType="action-ref-href"
                                href="#"
-                               action-ref-by-href="${pageContext.request.contextPath}/pages/user/current-user-profile">
+                               action-ref-by-href="${pageContext.request.contextPath}/user/CurrentUserProfileController">
                                 <i class="fa fa-lg fa-fw fa-user"></i>
-                                User Profile
+                                User Profile Settings
                             </a>
                         </li>
                         <li class="dropdown-divider"></li>
@@ -90,7 +90,7 @@
                             </button>
                             <button class="btn btn-primary"
                                     actionType="action-ref-href"
-                                    action-ref-by-href="${pageContext.request.contextPath}/pages/user/current-user-profile"
+                                    action-ref-by-href="${pageContext.request.contextPath}/user/CurrentUserProfileController"
                                     data-toggle="tooltip" data-placement="auto"
                                     title="Current User Profile">
                                 <i class="far fa-user-circle"></i>
@@ -143,8 +143,8 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/user/current-user-profile">
-                                            Current User Profile
+                                        <a href="${pageContext.request.contextPath}/user/CurrentUserProfileController">
+                                            User Profile Settings
                                         </a>
                                     </li>
                                 </ul>
