@@ -464,7 +464,7 @@
             var barChartOption = {
                 grid: {
                     show: false,
-                    top: 25,
+//                    top: 25,
                     bottom: 30,
                     left: 45,
                     right: 45
@@ -475,6 +475,7 @@
                     x: 'center',
                     y: 0,
                     textStyle: {
+                        fontWeight: "normal",
                         fontFamily: "Open Sans",
                         align: javatmp.settings.floatDefault
                     }
@@ -531,13 +532,7 @@
                     }
                 ]
             };
-            barChartOption = $.extend(true, barChartOption, {
-                series: [
-                    {
-                        data: [24, 44.6, 81, 11, 32, 41, 27, 5.9, 4.2, 71.8, 51.6, 22.8]
-                    }
-                ]
-            });
+
             UsersBirthdayPerMonths.setOption(barChartOption);
 
             $(javatmp.settings.defaultOutputSelector).on("click", "#userStatusPieChartCard a.reload", function (e) {
@@ -844,6 +839,67 @@
                         });
 
                         UsersLocationsInTheWorld.on('legendselectchanged', function (params) {
+                            console.log(params);
+                        });
+
+                        $(cardBody).unblock();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        $(cardBody).unblock();
+                        var msg = 'Error on reloading the card. Please check your remote server url';
+                        toastr.error(msg, 'ERROR', {
+                            timeOut: 2500,
+                            progressBar: true,
+                            rtl: javatmp.settings.isRTL,
+                            positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                        });
+                        // clean the bar graph
+                    }
+                });
+            });
+
+            $(javatmp.settings.defaultOutputSelector).on("click", "#UsersBirthdayPerMonthsCard a.reload", function (e) {
+                e.preventDefault();
+
+                var cardBody = $(this).closest(".card").children(".card-body");
+                var href = javatmp.settings.contextPath + "/stats/GetUsersBirthdayCountController";
+
+                $(cardBody).block({message: "Loading ...",
+                    overlayCSS: {
+                        backgroundColor: '#000',
+                        opacity: 0.7
+                    }});
+
+                $.ajax({
+                    "type": "POST",
+                    cache: false,
+                    url: href,
+                    dataType: "json",
+                    contentType: "application/json; charset=UTF-8",
+                    data: null,
+                    success: function (remoteContent) {
+                        var dataArray = remoteContent.data;
+
+                        var outputMonthsArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                        for (var i = 0; i < dataArray.length; i++) {
+                            outputMonthsArray[dataArray[i][0]] += dataArray[i][1];
+                        }
+
+                        barChartOption = $.extend(true, barChartOption, {
+                            series: [
+                                {
+                                    data: outputMonthsArray
+                                }
+                            ]
+                        });
+
+                        UsersBirthdayPerMonths.setOption(barChartOption);
+
+                        UsersBirthdayPerMonths.on('click', function (params) {
+                            console.log(params);
+                        });
+
+                        UsersBirthdayPerMonths.on('legendselectchanged', function (params) {
                             console.log(params);
                         });
 
