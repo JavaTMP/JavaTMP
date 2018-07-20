@@ -5,31 +5,14 @@
  */
 package com.javatmp.userstats;
 
-import com.javatmp.user.*;
-import com.javatmp.domain.User;
-import com.javatmp.domain.User_;
-import com.javatmp.db.JpaDaoHelper;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.service.ActivityService;
 import com.javatmp.service.ServicesFactory;
-import com.javatmp.service.UserService;
 import com.javatmp.service.UserStatsService;
 import com.javatmp.util.Constants;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceException;
-import javax.persistence.Query;
-import javax.persistence.Tuple;
-import javax.persistence.TupleElement;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.JoinType;
-import javax.persistence.criteria.Path;
-import javax.persistence.criteria.Root;
-import org.apache.commons.beanutils.BeanUtils;
 
 /**
  *
@@ -59,6 +42,7 @@ public class usersstats {
             System.out.println(Arrays.toString(row));
         }
 
+        System.out.println("average load time per hour");
         results = activityService.avgPagesLoadTimePerHour();
         for (Object[] row : results) {
             System.out.println(Arrays.toString(row));

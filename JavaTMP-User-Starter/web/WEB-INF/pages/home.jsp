@@ -97,7 +97,7 @@
                 <div class="card-body p-1 bg-light">
                     <div class="row d-flex align-items-center">
                         <div class="col-6 text-center">
-                            <span class="d-block display-4 counter">211</span>
+                            <span class="d-block display-4 counter" id="loadtimePerHourChartCard_totalCount">0</span>
                             <span class="d-block muted small">Avg Load Time</span>
                         </div>
                         <div class="col-6 text-left">
@@ -410,17 +410,10 @@
                     {
                         name: 'Average Load Time Per Hour',
                         type: 'line',
-                        data: []
+                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                     }
                 ]
             };
-            loadtimePerHourChartOption = $.extend(true, loadtimePerHourChartOption, {
-                series: [
-                    {
-                        data: [24, 44, 81, 11, 32, 41, 27, 5, 4, 71, 51, 22, 24, 44, 81, 11, 32, 41, 27, 5, 4, 71, 51, 22]
-                    }
-                ]
-            });
             loadtimePerHourChart.setOption(loadtimePerHourChartOption);
             var UsersLocationsInTheWorldOption = {
                 tooltip: {
@@ -952,6 +945,77 @@
                 });
             });
 
+            $(javatmp.settings.defaultOutputSelector).on("click", "#loadtimePerHourChartCard a.reload", function (e) {
+                e.preventDefault();
+
+                var cardBody = $(this).closest(".card").children(".card-body");
+                var href = javatmp.settings.contextPath + "/stats/GetAvgLoadTimePerHourController";
+
+                $(cardBody).block({message: "Loading ...",
+                    overlayCSS: {
+                        backgroundColor: '#000',
+                        opacity: 0.7
+                    }});
+
+                $.ajax({
+                    "type": "POST",
+                    cache: false,
+                    url: href,
+                    dataType: "json",
+                    contentType: "application/json; charset=UTF-8",
+                    data: null,
+                    success: function (remoteContent) {
+                        var dataArray = remoteContent.data;
+                        var totalAvgs = 0;
+                        var avgLoadTime = 0;
+                        var outputHoursArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+                        for (var i = 0; i < dataArray.length; i++) {
+                            outputHoursArray[dataArray[i][0]] += dataArray[i][1];
+                            totalAvgs += dataArray[i][1];
+                        }
+                        console.log("totalAvgs = " + totalAvgs + " on length = " + dataArray.length);
+                        avgLoadTime = totalAvgs / dataArray.length;
+
+                        $("#loadtimePerHourChartCard_totalCount").attr("title", avgLoadTime).html(avgLoadTime).counterUp({
+                            delay: 10,
+                            time: 1000,
+                            formatter: function (n) {
+                                return numeral(n).format('0 a');
+                            }
+                        });
+
+                        loadtimePerHourChartOption = $.extend(true, loadtimePerHourChartOption, {
+                            series: [
+                                {
+                                    data: outputHoursArray
+                                }
+                            ]
+                        });
+                        loadtimePerHourChart.setOption(loadtimePerHourChartOption);
+
+                        loadtimePerHourChart.on('click', function (params) {
+                            console.log(params);
+                        });
+
+                        loadtimePerHourChart.on('legendselectchanged', function (params) {
+                            console.log(params);
+                        });
+
+                        $(cardBody).unblock();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        $(cardBody).unblock();
+                        var msg = 'Error on reloading the card. Please check your remote server url';
+                        toastr.error(msg, 'ERROR', {
+                            timeOut: 2500,
+                            progressBar: true,
+                            rtl: javatmp.settings.isRTL,
+                            positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                        });
+                        // clean the bar graph
+                    }
+                });
+            });
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
                 $(javatmp.settings.defaultOutputSelector).find("[load-on-starup=true]").each(function () {
