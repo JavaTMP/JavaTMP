@@ -34,7 +34,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 @WebServlet("/user/CurrentUserProfileController")
-@MultipartConfig(fileSizeThreshold = 1024 * 15, maxFileSize = 1024 * 50, maxRequestSize = 1024 * 200)
+@MultipartConfig(fileSizeThreshold = 1024 * 15, maxFileSize = 1024 * 100, maxRequestSize = 1024 * 200)
 public class CurrentUserProfileController extends HttpServlet {
 
     private final Logger logger = Logger.getLogger(getClass().getName());

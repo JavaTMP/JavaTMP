@@ -26,7 +26,7 @@ CREATE TABLE document (
     documentName varchar(255) NOT NULL,
     documentSize BIGINT NOT NULL,
     contentType varchar(255) NOT NULL,
-    documentContent BLOB NOT NULL,
+    documentContent MEDIUMBLOB NOT NULL,
     creationDate TIMESTAMP NOT NULL,
     randomHash BIGINT NOT NULL,
     CONSTRAINT document_documentId_pk PRIMARY KEY (documentId)
