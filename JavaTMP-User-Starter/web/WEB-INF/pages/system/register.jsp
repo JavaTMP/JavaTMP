@@ -26,7 +26,7 @@
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-sm-8">
-                    <div class="card mt-2">
+                    <div class="card mt-2 bg-light shadow">
                         <div class="card-header">
                             Register New User Account
                         </div>

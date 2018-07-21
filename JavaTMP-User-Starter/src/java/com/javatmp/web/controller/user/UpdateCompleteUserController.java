@@ -80,9 +80,9 @@ public class UpdateCompleteUserController extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE);
             responseMessage.setStatusCode(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE);
         } catch (IllegalAccessException ex) {
-            Logger.getLogger(UpdateCompleteUserController.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, null, ex);
         } catch (InvocationTargetException ex) {
-            Logger.getLogger(UpdateCompleteUserController.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, null, ex);
         }
         MvcHelper.sendMessageAsJson(response, responseMessage);
 

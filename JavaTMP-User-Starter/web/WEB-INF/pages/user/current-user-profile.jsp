@@ -5,7 +5,7 @@
 <div class="dynamic-ajax-content">
     <div class="row">
         <div class="col">
-            <div class="card my-3">
+            <div class="card my-3 bg-light shadow">
                 <div class="card-header">
                     User Profile Settings
                     <div class="options float-right">
@@ -17,7 +17,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <form enctype="multipart/form-data" autocomplete="off" id="UpdateCurrentUserFormId" class="form"
-                                  action="${pageContext.request.contextPath}/user/UpdateCompleteUserController" method="post" novalidate="novalidate">
+                                  action="${pageContext.request.contextPath}/user/CurrentUserProfileController" method="post" novalidate="novalidate">
                                 <div class="form-row">
                                     <div class="col-sm-3">
                                         <div class="form-group form-row">

@@ -24,7 +24,7 @@
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-xl-3 col-lg-3 col-md-6">
-                    <div class="card my-3">
+                    <div class="card my-3 bg-light shadow">
                         <div class="card-header">
                             Please Sign In
                         </div>

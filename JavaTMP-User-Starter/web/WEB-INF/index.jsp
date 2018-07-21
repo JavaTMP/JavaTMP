@@ -152,7 +152,7 @@
                         </ul>
                     </div>
                     <div class="main-content">
-                        <div class="main-breadcrumb-bar d-flex flex-row">
+                        <div class="main-breadcrumb-bar d-flex flex-row shadow">
                             <ol class="breadcrumb"></ol>
                             <div class="breadcrumb-submenu">
                                 <a class="float-right min-tools-button">
