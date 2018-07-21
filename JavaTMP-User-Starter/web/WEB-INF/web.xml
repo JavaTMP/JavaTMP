@@ -41,7 +41,7 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>CacheControlHeadersFilter</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/assets/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
     <filter-mapping>

@@ -68,18 +68,15 @@ public class CurrentUserProfileController extends HttpServlet {
         ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         DocumentService ds = sf.getDocumentService();
         UserService us = sf.getUserService();
-
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
         try {
 
             User userToBeUpdated = new User();
-            User dbUser = null;
+            User dbUser = sf.getUserService().readCompleteUserById(user);
             String oldPassword = request.getParameter("oldPassword");
             MvcHelper.populateBeanByRequestParameters(request, userToBeUpdated);
             logger.info("User to be Updated is [" + MvcHelper.toString(userToBeUpdated) + "]");
-            Document fileUploading = MvcHelper.readDocumentFromRequest(request, "profilePicture");
-
-            dbUser = us.readCompleteUserById(userToBeUpdated);
-            logger.info("Existing DB User to be Updated is [" + MvcHelper.toString(dbUser) + "]");
 
             // first check if existing db password equal provided old password:
             if (dbUser.getPassword().equals(MD5Util.convertToMD5(oldPassword)) == false) {
@@ -91,10 +88,12 @@ public class CurrentUserProfileController extends HttpServlet {
             userToBeUpdated.setPassword(MD5Util.convertToMD5(userToBeUpdated.getPassword()));
 //            userToBeUpdated.setStatus((short) 1);
 
-            fileUploading.setDocumentId(dbUser.getProfilePicDocumentId());
-            userToBeUpdated.setProfilePicDocument(fileUploading);
-            userToBeUpdated.setProfilePicDocumentId(fileUploading.getDocumentId());
-            ds.updateDocument(fileUploading);
+            Document fileUploading = MvcHelper.readDocumentFromRequestIfExist(request, "profilePicture");
+            if (fileUploading != null) {
+                fileUploading.setDocumentId(dbUser.getProfilePicDocumentId());
+                userToBeUpdated.setProfilePicDocument(fileUploading);
+                userToBeUpdated.setProfilePicDocumentId(fileUploading.getDocumentId());
+            }
             int updateStatus = us.updateCompleteUser(userToBeUpdated);
 
             responseMessage.setOverAllStatus(true);

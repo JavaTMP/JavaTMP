@@ -266,4 +266,42 @@ public class MvcHelper {
         return fileUploading;
     }
 
+    public static Document readDocumentFromRequestIfExist(HttpServletRequest request, String partName) throws IOException, ServletException {
+        Document fileUploading = null;
+        Part filePart = request.getPart(partName); // Retrieves <input type="file" name="{{partName}}">
+        logger.log(Level.INFO, "filePart [" + filePart + "]");
+        logger.log(Level.INFO, "file part size [" + filePart.getSize() + "]");
+
+        if (filePart.getSize() != 0) {
+            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+            String contentType = filePart.getContentType();
+            InputStream fileContentStream = filePart.getInputStream();
+            String fieldName = filePart.getName();
+            long partSize = filePart.getSize();
+
+            fileUploading = new Document();
+            fileUploading.setContentType(contentType);
+            fileUploading.setDocumentName(fileName);
+            fileUploading.setDocumentSize(partSize);
+            fileUploading.setCreationDate(new Date());
+            long randomLongValue = Double.valueOf((Math.random() + 1) * 1000L).longValue();
+            fileUploading.setRandomHash((Long) Math.abs(fileUploading.getDocumentName().hashCode() + randomLongValue));
+            // the following block is intended for simple cases
+            // where it is convenient to read all bytes into a byte array.
+            // It is not intended for reading input streams with large amounts of data.
+            int nRead;
+            byte[] data = new byte[4 * 1024];
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            while ((nRead = fileContentStream.read(data, 0, data.length)) != -1) {
+                buffer.write(data, 0, nRead);
+            }
+
+            fileUploading.setDocumentContent(buffer.toByteArray());
+            logger.info("original size [" + fileUploading.getDocumentSize()
+                    + "] stream size [" + fileUploading.getDocumentContent().length + "]");
+        }
+
+        return fileUploading;
+    }
+
 }

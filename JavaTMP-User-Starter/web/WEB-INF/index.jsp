@@ -65,7 +65,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 m-0 p-0">
-                    <div class="sidebar scroll-content">
+                    <div class="sidebar scroll-content shadow">
                         <div class="sidebar-shortcut-button text-center m-1">
                             <button class="btn btn-primary logout-home-btn-id"
                                     actionType="action-ref-href"

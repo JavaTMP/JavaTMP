@@ -336,7 +336,7 @@
                         equalTo: "#password"
                     },
                     profilePicture: {
-                        required: true
+                        required: false
                     },
                     tnc: {
                         required: true
