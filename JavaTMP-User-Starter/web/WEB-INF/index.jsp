@@ -31,8 +31,17 @@
             <ul class="main-navbar-menu nav ml-auto">
                 <li class="nav-item py-0 dropdown">
                     <a class="nav-link user-profile-menu-item dropdown-toggle" data-toggle="dropdown" href="#">
-                        <img class="user-profile-pic rounded-circle" width="40" height="40"
-                             src="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${sessionScope.user.profilePicDocument.documentId}&amp;randomHash=${sessionScope.user.profilePicDocument.randomHash}&amp;viewType=inline" alt=""/>
+                        <c:choose>
+                            <c:when test="${not empty sessionScope.user.profilePicDocument.documentId and not empty sessionScope.user.profilePicDocument.randomHash}">
+                                <img class="user-profile-pic rounded-circle" width="40" height="40"
+                                     src="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${sessionScope.user.profilePicDocument.documentId}&amp;randomHash=${sessionScope.user.profilePicDocument.randomHash}&amp;viewType=inline" alt=""/>
+                            </c:when>
+                            <c:otherwise>
+                                <img class="user-profile-pic rounded-circle" width="40" height="40"
+                                     src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt=""/>
+                            </c:otherwise>
+                        </c:choose>
+
                         <span class="user-profile-menu-item-info d-none d-md-inline-block">
                             <small>Welcome,</small>
                             ${sessionScope.user.firstName}&nbsp;${sessionScope.user.lastName}
@@ -132,6 +141,11 @@
                                     <li>
                                         <a href="${pageContext.request.contextPath}/user/CreateUserController">
                                             Add New User
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/user/SearchForUserProfileController">
+                                            Search For User
                                         </a>
                                     </li>
                                 </ul>

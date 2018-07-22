@@ -15,13 +15,13 @@
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">First Name</label>
-                                    <input class="form-control" type="text" placeholder="Full Name" name="firstName">
+                                    <input class="form-control" type="text" placeholder="First Name" name="firstName">
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">Last Name</label>
-                                    <input class="form-control" type="text" placeholder="Full Name" name="lastName">
+                                    <input class="form-control" type="text" placeholder="Last Name" name="lastName">
                                 </div>
                             </div>
                             <div class="col-lg-3">
