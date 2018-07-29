@@ -18,6 +18,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.NoResultException;
 import javax.servlet.ServletContext;
 
 import javax.servlet.ServletException;
@@ -63,50 +64,32 @@ public class SearchForUserProfileController extends HttpServlet {
         User user = (User) session.getAttribute("user");
         try {
 
-            User userToBeUpdated = new User();
-            User dbUser = sf.getUserService().readCompleteUserById(user);
-            String oldPassword = request.getParameter("oldPassword");
-            MvcHelper.populateBeanByRequestParameters(request, userToBeUpdated);
-            logger.info("User to be Updated is [" + MvcHelper.toString(userToBeUpdated) + "]");
+            User userToBeFind = new User();
+            MvcHelper.populateBeanByRequestParameters(request, userToBeFind);
+            logger.info("User to be find is [" + MvcHelper.toString(userToBeFind) + "]");
 
-            // first check if existing db password equal provided old password:
-            if (dbUser.getPassword().equals(MD5Util.convertToMD5(oldPassword)) == false) {
-                throw new IllegalArgumentException("Existing Password does not match provided old password");
-            }
-
-            //ds.createNewDocument(fileUploading);
-            logger.info("UserToBeCreated is [" + MvcHelper.deepToString(userToBeUpdated) + "]");
-            userToBeUpdated.setPassword(MD5Util.convertToMD5(userToBeUpdated.getPassword()));
-//            userToBeUpdated.setStatus((short) 1);
-
-            Document fileUploading = MvcHelper.readDocumentFromRequestIfExist(request, "profilePicture");
-            if (fileUploading != null) {
-                fileUploading.setDocumentId(dbUser.getProfilePicDocumentId());
-                userToBeUpdated.setProfilePicDocument(fileUploading);
-                userToBeUpdated.setProfilePicDocumentId(fileUploading.getDocumentId());
-            }
-            int updateStatus = us.updateCompleteUser(userToBeUpdated);
+            User dbUser = sf.getUserService().readCompleteUserById(userToBeFind);
 
             responseMessage.setOverAllStatus(true);
-            responseMessage.setMessage("User Update status [" + updateStatus + "]");
-            responseMessage.setData(userToBeUpdated);
+            responseMessage.setMessage("Search User");
+            responseMessage.setData(dbUser);
 
+        } catch (NoResultException e) {
+            logger.info("ERROR : " + e.getMessage());
+            responseMessage.setOverAllStatus(false);
+            responseMessage.setMessage(e.getMessage());
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            responseMessage.setStatusCode(HttpServletResponse.SC_BAD_REQUEST);
         } catch (IllegalArgumentException e) {
             logger.info("ERROR : " + e.getMessage());
             responseMessage.setOverAllStatus(false);
             responseMessage.setMessage(e.getMessage());
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             responseMessage.setStatusCode(HttpServletResponse.SC_BAD_REQUEST);
-        } catch (IllegalStateException e) {
-            logger.info("ERROR : " + e.getMessage());
-            responseMessage.setOverAllStatus(false);
-            responseMessage.setMessage("The file to be uploaded exceeds its maximum permitted size of 51200 bytes - " + e.getMessage());
-            response.setStatus(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE);
-            responseMessage.setStatusCode(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE);
         } catch (IllegalAccessException ex) {
-            logger.log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchForUserProfileController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InvocationTargetException ex) {
-            logger.log(Level.SEVERE, null, ex);
+            Logger.getLogger(SearchForUserProfileController.class.getName()).log(Level.SEVERE, null, ex);
         }
         MvcHelper.sendMessageAsJson(response, responseMessage);
 

@@ -16,17 +16,17 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <form enctype="multipart/form-data" autocomplete="off" id="SearchForUserProfileFormId" class="form"
-                                  action="${pageContext.request.contextPath}/user/CurrentUserProfileController" method="post" novalidate="novalidate">
+                            <form autocomplete="off" id="SearchParametersFormId" class="form"
+                                  action="${pageContext.request.contextPath}/user/SearchForUserProfileController" method="post" novalidate="novalidate">
                                 <div class="form-row">
                                     <div class="col-sm-12">
                                         <div class="form-group form-row">
                                             <label class="control-label col-sm-1 col-form-label">User:</label>
                                             <div class="col-sm-10">
                                                 <div class="form-inline">
-                                                    <input style="width: 7rem;" type="text" class="mr-1 form-control" name="searchId" placeholder="id" value="">
-                                                    <input style="width: 12rem;" type="text" class="mr-1 form-control" name="searchUserName" placeholder="Username" value="">
-                                                    <button class="btn btn-primary mr-1" type="button">Search</button>
+                                                    <input style="width: 7rem;" type="text" class="mr-1 form-control" name="id" placeholder="id" value="">
+                                                    <input style="width: 12rem;" type="text" class="mr-1 form-control" name="userName" placeholder="Username" value="">
+                                                    <button class="btn btn-primary mr-1" type="submit">Search</button>
                                                     <button class="btn btn-primary" type="button">Lookup</button>
                                                 </div>
 
@@ -34,6 +34,13 @@
                                         </div>
                                     </div>
                                 </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form enctype="multipart/form-data" autocomplete="off" id="SearchForUserProfileFormId" class="form"
+                                  action="${pageContext.request.contextPath}/user/CurrentUserProfileController" method="post" novalidate="novalidate">
                                 <div class="form-row">
                                     <div class="col-lg-12">
                                         <div class="form-row">
@@ -253,8 +260,82 @@
             // controll return to main javascript file.
             // <--- HERE --->
             //
+            function populateForm(frm, data) {
+                $.each(data, function (key, value) {
+                    var $ctrl = $('[name=' + key + ']', frm);
+                    if ($ctrl.is('select')) {
+                        $("option", $ctrl).each(function () {
+                            if (this.value === value) {
+                                $(this).prop("selected", true).trigger("change");
+                            }
+                        });
+                    } else {
+                        switch ($ctrl.attr("type"))
+                        {
+                            case "text" :
+                            case "hidden":
+                            case "textarea":
+                                $ctrl.val(value).trigger("change");
+                                break;
+                            case "radio" :
+                            case "checkbox":
+                                $ctrl.each(function () {
+                                    if ($(this).attr('value') === value) {
+                                        $(this).prop("checked", value).trigger("change");
+                                    }
+                                });
+                                break;
+                        }
+                    }
+                });
+            }
+            var searchForm = $("#SearchParametersFormId");
+            var searchFormValidator = null;
+
             var form = $('#SearchForUserProfileFormId');
             var validator = null;
+
+            searchForm.ajaxForm({
+                clearForm: false, // clear all form fields after successful submit
+                resetForm: false, // reset the form after successful submit
+                beforeSerialize: function ($form, options) {
+                    if (!$form.valid()) {
+                        return false;
+                    }
+                },
+                beforeSubmit: function (formData, jqForm, options) {
+                    for (var i = 0; i < formData.length; i++) {
+                        if (formData[i].name === "birthOfDateStr") {
+                            var value = formData[i].value;
+                            var newDate = moment(value, "DD/MM/YYYY").format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+                            formData.push({"name": "birthDate", "value": newDate});
+                            break;
+                        }
+                    }
+
+                },
+                success: function (response, statusText, xhr, $form) {
+                    // now we populate $form by response.data json object:
+                    var rowObject = response.data;
+                    populateForm(form, rowObject);
+                    form.find("textarea[name='address']").summernote('code', rowObject.address);
+                    form.find("textarea[name='address']").summernote('triggerEvent', 'change');
+                },
+                error: function (xhr, status, error, $form) {
+                    var resultText = xhr.responseText;
+                    var errorMsg = resultText;
+                    var obj = JSON.parse(resultText);
+                    errorMsg = obj.message;
+                    BootstrapModalWrapperFactory.createModal({
+                        title: xhr.statusText + " : " + xhr.status,
+                        message: errorMsg
+                    }).show();
+                }
+            });
+
+            searchFormValidator = searchForm.validate($.extend(true, {}, javatmp.settings.jqueryValidationDefaultOptions, {}));
+
+
 
             form.ajaxForm({
                 clearForm: true, // clear all form fields after successful submit
