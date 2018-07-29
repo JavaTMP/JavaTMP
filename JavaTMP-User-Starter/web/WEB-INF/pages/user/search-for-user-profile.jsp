@@ -219,7 +219,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">address</label>
-                                            <textarea rows="5" class="form-control forceValidate" placeholder="" name="address"></textarea>
+                                            <textarea rows="7" class="form-control forceValidate" placeholder="" name="address"></textarea>
                                         </div>
                                         <div class="form-group">
                                             <input type="submit" class="btn btn-primary" value="Update Your Profile"/>
@@ -264,11 +264,16 @@
                 $.each(data, function (key, value) {
                     var $ctrl = $('[name=' + key + ']', frm);
                     if ($ctrl.is('select')) {
-                        $("option", $ctrl).each(function () {
-                            if (this.value === value) {
-                                $(this).prop("selected", true).trigger("change");
-                            }
-                        });
+                        $ctrl.val(value).trigger("change");
+//                        $("option", $ctrl).each(function () {
+//                            console.log("this.value is [" + this.value + "], value [" + value + "]");
+//                            if (this.value === value) {
+//                                console.log("Matched and we select now");
+//                                $(this).prop("selected", true).trigger("change");
+//                            }
+//                        });
+                    } else if ($ctrl.is('textarea')) {
+                        $ctrl.val(value).trigger("change");
                     } else {
                         switch ($ctrl.attr("type"))
                         {
@@ -312,14 +317,15 @@
                             break;
                         }
                     }
-
                 },
                 success: function (response, statusText, xhr, $form) {
                     // now we populate $form by response.data json object:
                     var rowObject = response.data;
                     populateForm(form, rowObject);
                     form.find("textarea[name='address']").summernote('code', rowObject.address);
-                    form.find("textarea[name='address']").summernote('triggerEvent', 'change');
+//                    form.find("textarea[name='address']").summernote('triggerEvent', 'change');
+
+                    form.find("input[name='birthOfDateStr']").val(moment(rowObject.birthDate, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("DD/MM/YYYY"));
                 },
                 error: function (xhr, status, error, $form) {
                     var resultText = xhr.responseText;
