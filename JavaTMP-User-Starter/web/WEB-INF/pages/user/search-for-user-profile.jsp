@@ -17,7 +17,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <form autocomplete="off" id="SearchParametersFormId" class="form"
-                                  action="${pageContext.request.contextPath}/user/SearchForUserProfileController" method="post" novalidate="novalidate">
+                                  action="${pageContext.request.contextPath}/user/ListUsersController" method="post" novalidate="novalidate">
                                 <div class="form-row">
                                     <div class="col-sm-12">
                                         <div class="form-group form-row">
@@ -294,50 +294,130 @@
                     }
                 });
             }
+            var currentUser = {};
             var searchForm = $("#SearchParametersFormId");
             var searchFormValidator = null;
-
             var form = $('#SearchForUserProfileFormId');
             var validator = null;
 
-            searchForm.ajaxForm({
-                clearForm: false, // clear all form fields after successful submit
-                resetForm: false, // reset the form after successful submit
-                beforeSerialize: function ($form, options) {
-                    if (!$form.valid()) {
-                        return false;
-                    }
-                },
-                beforeSubmit: function (formData, jqForm, options) {
-                    for (var i = 0; i < formData.length; i++) {
-                        if (formData[i].name === "birthOfDateStr") {
-                            var value = formData[i].value;
-                            var newDate = moment(value, "DD/MM/YYYY").format("YYYY-MM-DDTHH:mm:ss.SSSZ");
-                            formData.push({"name": "birthDate", "value": newDate});
-                            break;
-                        }
-                    }
-                },
-                success: function (response, statusText, xhr, $form) {
-                    // now we populate $form by response.data json object:
-                    var rowObject = response.data;
-                    populateForm(form, rowObject);
-                    form.find("textarea[name='address']").summernote('code', rowObject.address);
-//                    form.find("textarea[name='address']").summernote('triggerEvent', 'change');
+            searchForm.on("submit", function (event) {
+                event.preventDefault();
 
-                    form.find("input[name='birthOfDateStr']").val(moment(rowObject.birthDate, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("DD/MM/YYYY"));
-                },
-                error: function (xhr, status, error, $form) {
-                    var resultText = xhr.responseText;
-                    var errorMsg = resultText;
-                    var obj = JSON.parse(resultText);
-                    errorMsg = obj.message;
-                    BootstrapModalWrapperFactory.createModal({
-                        title: xhr.statusText + " : " + xhr.status,
-                        message: errorMsg
-                    }).show();
+                if (!$(this).valid()) {
+                    return false;
                 }
+
+                var httpType = $(this).attr("method");
+                var post_url = $(this).attr("action"); //get form action url
+                var form_data = $(this).serializeArray();
+//                function objectifyForm(formArray) {//serialize data function
+//
+//                    var returnArray = {};
+//                    for (var i = 0; i < formArray.length; i++) {
+//                        returnArray[formArray[i]['name']] = formArray[i]['value'];
+//                    }
+//                    return returnArray;
+//                }
+
+                //form_data = objectifyForm(form_data);
+
+                console.log(JSON.stringify(form_data));
+
+                var searchObject = {};
+                // {"columns":[{"name":"id","search":{"value":"1"}}],"start":0,"length":1}
+                searchObject["start"] = 0;
+                searchObject["length"] = 1;
+                searchObject["columns"] = [];
+                for (var i = 0; i < form_data.length; i++) {
+                    var item = form_data[i];
+                    if (item.value !== "") {
+                        var columnName = item.name;
+                        var columnValue = item.value;
+                        console.log("name [" + columnName + "], value [" + columnValue + "]");
+                        searchObject["columns"].push({"name": columnName, "search": {"value": columnValue}});
+                    }
+                }
+
+                console.log("final object : " + JSON.stringify(searchObject));
+//                return false;
+                $.ajax({
+                    type: httpType,
+                    url: post_url,
+                    data: JSON.stringify(searchObject),
+                    dataType: "json",
+                    contentType: "application/json; charset=UTF-8",
+                    success: function (response, textStatus, jqXHR) {
+                        // now we populate $form by response.data json object:
+                        if (response.data.recordsTotal > 0) {
+                            var rowObject = response.data.data[0];
+                            currentUser = rowObject;
+                            console.log(rowObject);
+                            populateForm(form, rowObject);
+                            form.find("textarea[name='address']").summernote('code', rowObject.address);
+//                    form.find("textarea[name='address']").summernote('triggerEvent', 'change');
+                            form.find("input[name='birthOfDateStr']").val(moment(rowObject.birthDate, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("DD/MM/YYYY"));
+                        } else {
+                            BootstrapModalWrapperFactory.createModal({
+                                title: "Warning",
+                                message: "No Records Found"
+                            }).show();
+                        }
+
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        var resultText = jqXHR.responseText;
+                        var errorMsg = resultText;
+                        var obj = JSON.parse(resultText);
+                        errorMsg = obj.message;
+                        BootstrapModalWrapperFactory.createModal({
+                            title: jqXHR.statusText + " : " + jqXHR.status,
+                            message: errorMsg
+                        }).show();
+                    }
+                });
+
             });
+
+//
+//            searchForm.ajaxForm({
+//                clearForm: false, // clear all form fields after successful submit
+//                resetForm: false, // reset the form after successful submit
+//                beforeSerialize: function ($form, options) {
+//                    if (!$form.valid()) {
+//                        return false;
+//                    }
+//                },
+//                beforeSubmit: function (formData, jqForm, options) {
+//                    for (var i = 0; i < formData.length; i++) {
+//                        if (formData[i].name === "birthOfDateStr") {
+//                            var value = formData[i].value;
+//                            var newDate = moment(value, "DD/MM/YYYY").format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+//                            formData.push({"name": "birthDate", "value": newDate});
+//                            break;
+//                        }
+//                    }
+//                },
+//                success: function (response, statusText, xhr, $form) {
+//                    // now we populate $form by response.data json object:
+//                    var rowObject = response.data;
+//                    populateForm(form, rowObject);
+//                    form.find("textarea[name='address']").summernote('code', rowObject.address);
+////                    form.find("textarea[name='address']").summernote('triggerEvent', 'change');
+//
+//                    form.find("input[name='birthOfDateStr']").val(moment(rowObject.birthDate, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("DD/MM/YYYY"));
+//                },
+//                error: function (xhr, status, error, $form) {
+//                    var resultText = xhr.responseText;
+//                    var errorMsg = resultText;
+//                    var obj = JSON.parse(resultText);
+//                    errorMsg = obj.message;
+//                    BootstrapModalWrapperFactory.createModal({
+//                        title: xhr.statusText + " : " + xhr.status,
+//                        message: errorMsg
+//                    }).show();
+//                }
+//            });
+//
 
             searchFormValidator = searchForm.validate($.extend(true, {}, javatmp.settings.jqueryValidationDefaultOptions, {}));
 
@@ -703,6 +783,5 @@
                 $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenExpand);
                 return true;
             });
-        });
-    </script>
+        });</script>
 </div>
