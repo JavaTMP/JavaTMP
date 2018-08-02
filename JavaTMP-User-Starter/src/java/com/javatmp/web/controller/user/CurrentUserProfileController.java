@@ -83,21 +83,22 @@ public class CurrentUserProfileController extends HttpServlet {
                 throw new IllegalArgumentException("Existing Password does not match provided old password");
             }
 
-            //ds.createNewDocument(fileUploading);
             logger.info("UserToBeCreated is [" + MvcHelper.deepToString(userToBeUpdated) + "]");
-            userToBeUpdated.setPassword(MD5Util.convertToMD5(userToBeUpdated.getPassword()));
-//            userToBeUpdated.setStatus((short) 1);
 
+            userToBeUpdated.setPassword(MD5Util.convertToMD5(userToBeUpdated.getPassword()));
             Document fileUploading = MvcHelper.readDocumentFromRequestIfExist(request, "profilePicture");
             if (fileUploading != null) {
                 fileUploading.setDocumentId(dbUser.getProfilePicDocumentId());
                 userToBeUpdated.setProfilePicDocument(fileUploading);
                 userToBeUpdated.setProfilePicDocumentId(fileUploading.getDocumentId());
             }
-            int updateStatus = us.updateCompleteUser(userToBeUpdated);
 
-            responseMessage.setOverAllStatus(true);
-            responseMessage.setMessage("User Update status [" + updateStatus + "]");
+            int updateStatus = us.updateCompleteUser(userToBeUpdated);
+            session.setAttribute("user", userToBeUpdated);
+
+            responseMessage.setOverAllStatus(Boolean.TRUE);
+            responseMessage.setRedirect(Boolean.TRUE);
+            responseMessage.setMessage("User Updated successfully");
             responseMessage.setData(userToBeUpdated);
 
         } catch (IllegalArgumentException e) {

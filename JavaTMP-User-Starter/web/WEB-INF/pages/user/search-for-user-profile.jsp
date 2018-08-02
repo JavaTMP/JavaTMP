@@ -40,7 +40,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <form enctype="multipart/form-data" autocomplete="off" id="SearchForUserProfileFormId" class="form"
-                                  action="${pageContext.request.contextPath}/user/CurrentUserProfileController" method="post" novalidate="novalidate">
+                                  action="${pageContext.request.contextPath}/user/UpdateCompleteUserController" method="post" novalidate="novalidate">
                                 <div class="form-row">
                                     <div class="col-lg-12">
                                         <div class="form-row">
@@ -222,7 +222,7 @@
                                             <textarea rows="7" class="form-control forceValidate" placeholder="" name="address"></textarea>
                                         </div>
                                         <div class="form-group">
-                                            <input type="submit" class="btn btn-primary" value="Update Your Profile"/>
+                                            <input type="submit" class="btn btn-primary" value="Update Profile & Clear Fields"/>
                                         </div>
                                     </div>
                                 </div>
@@ -356,6 +356,20 @@
                             form.find("textarea[name='address']").summernote('code', rowObject.address);
 //                    form.find("textarea[name='address']").summernote('triggerEvent', 'change');
                             form.find("input[name='birthOfDateStr']").val(moment(rowObject.birthDate, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("DD/MM/YYYY"));
+
+                            var image = form.find("img[id='profilePicturePreview']");
+                            var resizeImage = form.find("img[id='profilePictureResizePreview']");
+                            var avatarImage = form.find("img[id='profilePictureAvatarPreview']");
+                            var avatarRoundedImage = form.find("img[id='profilePictureAvatarRoundedPreview']");
+
+                            var avatarImageSrc = javatmp.settings.contextPath + "/ViewUploadedFileController?documentId=" + rowObject.profilePicDocumentId + "&randomHash=" + rowObject.profilePicDocument.randomHash + "&viewType=inline";
+
+                            image.attr('src', avatarImageSrc);
+                            resizeImage.attr('src', avatarImageSrc);
+                            avatarImage.attr('src', avatarImageSrc);
+                            avatarRoundedImage.attr('src', avatarImageSrc);
+
+
                         } else {
                             BootstrapModalWrapperFactory.createModal({
                                 title: "Warning",
@@ -378,50 +392,11 @@
 
             });
 
-//
-//            searchForm.ajaxForm({
-//                clearForm: false, // clear all form fields after successful submit
-//                resetForm: false, // reset the form after successful submit
-//                beforeSerialize: function ($form, options) {
-//                    if (!$form.valid()) {
-//                        return false;
-//                    }
-//                },
-//                beforeSubmit: function (formData, jqForm, options) {
-//                    for (var i = 0; i < formData.length; i++) {
-//                        if (formData[i].name === "birthOfDateStr") {
-//                            var value = formData[i].value;
-//                            var newDate = moment(value, "DD/MM/YYYY").format("YYYY-MM-DDTHH:mm:ss.SSSZ");
-//                            formData.push({"name": "birthDate", "value": newDate});
-//                            break;
-//                        }
-//                    }
-//                },
-//                success: function (response, statusText, xhr, $form) {
-//                    // now we populate $form by response.data json object:
-//                    var rowObject = response.data;
-//                    populateForm(form, rowObject);
-//                    form.find("textarea[name='address']").summernote('code', rowObject.address);
-////                    form.find("textarea[name='address']").summernote('triggerEvent', 'change');
-//
-//                    form.find("input[name='birthOfDateStr']").val(moment(rowObject.birthDate, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("DD/MM/YYYY"));
-//                },
-//                error: function (xhr, status, error, $form) {
-//                    var resultText = xhr.responseText;
-//                    var errorMsg = resultText;
-//                    var obj = JSON.parse(resultText);
-//                    errorMsg = obj.message;
-//                    BootstrapModalWrapperFactory.createModal({
-//                        title: xhr.statusText + " : " + xhr.status,
-//                        message: errorMsg
-//                    }).show();
-//                }
-//            });
-//
-
             searchFormValidator = searchForm.validate($.extend(true, {}, javatmp.settings.jqueryValidationDefaultOptions, {}));
 
+            $("#SearchForUserProfile-UpdateProfileButton").on("click", function () {
 
+            });
 
             form.ajaxForm({
                 clearForm: true, // clear all form fields after successful submit
@@ -434,6 +409,7 @@
                 },
                 beforeSubmit: function (formData, jqForm, options) {
                     for (var i = 0; i < formData.length; i++) {
+                        formData.push({"name": "id", "value": currentUser.id});
                         if (formData[i].name === "birthOfDateStr") {
                             var value = formData[i].value;
                             var newDate = moment(value, "DD/MM/YYYY").format("YYYY-MM-DDTHH:mm:ss.SSSZ");

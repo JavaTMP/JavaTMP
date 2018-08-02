@@ -20,6 +20,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/user/UpdateCompleteUserController")
 @MultipartConfig(fileSizeThreshold = 1024 * 15, maxFileSize = 1024 * 100, maxRequestSize = 1024 * 200)
@@ -42,7 +43,6 @@ public class UpdateCompleteUserController extends HttpServlet {
             String oldPassword = request.getParameter("oldPassword");
             MvcHelper.populateBeanByRequestParameters(request, userToBeUpdated);
             logger.info("User to be Updated is [" + MvcHelper.toString(userToBeUpdated) + "]");
-            Document fileUploading = MvcHelper.readDocumentFromRequest(request, "profilePicture");
 
             dbUser = us.readCompleteUserById(userToBeUpdated);
             logger.info("Existing DB User to be Updated is [" + MvcHelper.toString(dbUser) + "]");
@@ -52,19 +52,20 @@ public class UpdateCompleteUserController extends HttpServlet {
                 throw new IllegalArgumentException("Existing Password does not match provided old password");
             }
 
-            //ds.createNewDocument(fileUploading);
             logger.info("UserToBeCreated is [" + MvcHelper.deepToString(userToBeUpdated) + "]");
             userToBeUpdated.setPassword(MD5Util.convertToMD5(userToBeUpdated.getPassword()));
-//            userToBeUpdated.setStatus((short) 1);
 
-            fileUploading.setDocumentId(dbUser.getProfilePicDocumentId());
-            userToBeUpdated.setProfilePicDocument(fileUploading);
-            userToBeUpdated.setProfilePicDocumentId(fileUploading.getDocumentId());
-            ds.updateDocument(fileUploading);
+            Document fileUploading = MvcHelper.readDocumentFromRequestIfExist(request, "profilePicture");
+            if (fileUploading != null) {
+                fileUploading.setDocumentId(dbUser.getProfilePicDocumentId());
+                userToBeUpdated.setProfilePicDocument(fileUploading);
+                userToBeUpdated.setProfilePicDocumentId(fileUploading.getDocumentId());
+            }
+
             int updateStatus = us.updateCompleteUser(userToBeUpdated);
 
-            responseMessage.setOverAllStatus(true);
-            responseMessage.setMessage("User Update status [" + updateStatus + "]");
+            responseMessage.setOverAllStatus(Boolean.TRUE);
+            responseMessage.setMessage("User Updated successfully");
             responseMessage.setData(userToBeUpdated);
 
         } catch (IllegalArgumentException e) {

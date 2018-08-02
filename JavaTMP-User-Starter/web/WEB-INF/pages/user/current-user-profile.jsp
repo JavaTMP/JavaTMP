@@ -273,10 +273,23 @@
 
                 },
                 success: function (response, statusText, xhr, $form) {
-                    BootstrapModalWrapperFactory.createModal({
+                    var successModal = BootstrapModalWrapperFactory.createModal({
                         title: "Response",
-                        message: response.message
-                    }).show();
+                        message: response.message,
+                        buttons: [
+                            {
+                                label: "Close And Refresh",
+                                cssClass: "btn btn-primary",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    javatmp.waitForFinalEvent(function () {
+                                        window.location.reload(true);
+                                    }, 200, "@update-current-user-profile");
+                                    return modalWrapper.hide();
+                                }
+                            }
+                        ]
+                    });
+                    successModal.show();
                 },
                 error: function (xhr, status, error, $form) {
                     var resultText = xhr.responseText;
