@@ -20,6 +20,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletContext;
@@ -94,6 +96,10 @@ public class CurrentUserProfileController extends HttpServlet {
             }
 
             int updateStatus = us.updateCompleteUser(userToBeUpdated);
+
+            Locale locale = Locale.forLanguageTag(userToBeUpdated.getLang());
+            ResourceBundle bundle = ResourceBundle.getBundle(Constants.RESOURCE_BUNDLE_BASE_NAME, locale);
+            session.setAttribute(Constants.LANGUAGE_ATTR_KEY, bundle);
             session.setAttribute("user", userToBeUpdated);
 
             responseMessage.setOverAllStatus(Boolean.TRUE);
