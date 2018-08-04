@@ -54,7 +54,7 @@
                                href="#"
                                action-ref-by-href="${pageContext.request.contextPath}/user/CurrentUserProfileController">
                                 <i class="fa fa-lg fa-fw fa-user"></i>
-                                User Profile Settings
+                                User Settings
                             </a>
                         </li>
                         <li class="dropdown-divider"></li>
