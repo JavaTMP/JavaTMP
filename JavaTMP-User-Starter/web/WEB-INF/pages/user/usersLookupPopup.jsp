@@ -6,14 +6,14 @@
     <table cellspacing="0" class="table table-condensed table-bordered table-hover" id="UsersListTableId">
         <thead>
             <tr id="UserListMainHeader">
-                <th style="width: 75px;"><p style="width: 75px;">ID</p></th>
-                <th style="width: 150px;"><p style="width: 150px;">Username</p></th>
+                <th>ID</th>
+                <th>Username</th>
             </tr>
             <tr id="UserListFilterHeader">
-                <th style="width: 75px;">
+                <th>
                     <input id="userlist-id-filter" class="form-control"/>
                 </th>
-                <th style="width: 150px;">
+                <th>
                     <input id="userlist-username-filter" class="form-control"/>
                 </th>
             </tr>
@@ -51,7 +51,6 @@
 //            console.log(currentParentModal.options.id);
         $("#" + currentParentModal.options.id).on(javatmp.settings.javaTmpAjaxContainerReady, function (event, modal) {
             // fire AFTER all transition done and your ajax content is shown to user.
-
 
             modal.updateTitle("Select User");
             modal.updateClosable(true);
