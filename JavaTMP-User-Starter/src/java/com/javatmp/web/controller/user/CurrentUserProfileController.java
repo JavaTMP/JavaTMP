@@ -13,12 +13,8 @@ import com.javatmp.service.ServicesFactory;
 import com.javatmp.service.UserService;
 import com.javatmp.util.Constants;
 import com.javatmp.util.MD5Util;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
-import java.nio.file.Paths;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -33,7 +29,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.BeanUtilsBean2;
 
 @WebServlet("/user/CurrentUserProfileController")
 @MultipartConfig(fileSizeThreshold = 1024 * 15, maxFileSize = 1024 * 100, maxRequestSize = 1024 * 200)
@@ -96,6 +93,21 @@ public class CurrentUserProfileController extends HttpServlet {
             }
 
             int updateStatus = us.updateCompleteUser(userToBeUpdated);
+
+            if (dbUser.getProfilePicDocument() != null) {
+                // saving space:
+                dbUser.getProfilePicDocument().setDocumentContent(null);
+                dbUser.getProfilePicDocument().setContentType(null);
+                dbUser.getProfilePicDocument().setCreationDate(null);
+                dbUser.getProfilePicDocument().setDocumentName(null);
+                dbUser.getProfilePicDocument().setDocumentSize(0);
+            }
+
+            if (userToBeUpdated.getProfilePicDocumentId() == null && dbUser.getProfilePicDocument() != null) {
+                Document dbProfileDocument = dbUser.getProfilePicDocument();
+                userToBeUpdated.setProfilePicDocument(dbProfileDocument);
+                userToBeUpdated.setProfilePicDocumentId(dbProfileDocument.getDocumentId());
+            }
 
             Locale locale = Locale.forLanguageTag(userToBeUpdated.getLang());
             ResourceBundle bundle = ResourceBundle.getBundle(Constants.RESOURCE_BUNDLE_BASE_NAME, locale);

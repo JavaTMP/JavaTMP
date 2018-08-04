@@ -144,9 +144,7 @@ public class UserService {
         int updateStatus = 0;
         EntityManager em = null;
         try {
-//            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
-//            em.getTransaction().begin();
-//            User dbUser = em.find(User.class, userToBeUpdated.getId(), LockModeType.PESSIMISTIC_WRITE);
+
             em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
             em.getTransaction().begin();
             CriteriaBuilder cb = em.getCriteriaBuilder();
