@@ -285,7 +285,7 @@
                     var api = this.api();
                     // prepare id filter search field:
                     var idFilterInput = $("#userlist-id-filter");
-                    idFilterInput.on('keyup change', function () {
+                    idFilterInput.on('keyup', function () {
                         var $this = $(this);
                         javatmp.waitForFinalEvent(function () {
                             var val = $.fn.dataTable.util.escapeRegex($this.val());
@@ -293,7 +293,7 @@
                         }, 200, "@userlist-main-table-filter");
                     });
                     var usernameFilterInput = $("#userlist-username-filter");
-                    usernameFilterInput.on('keyup change', function () {
+                    usernameFilterInput.on('keyup', function () {
                         var $this = $(this);
                         javatmp.waitForFinalEvent(function () {
                             var val = $.fn.dataTable.util.escapeRegex($this.val());
@@ -301,7 +301,7 @@
                         }, 200, "@userlist-main-table-filter");
                     });
                     var firstNameFilterInput = $("#userlist-firstname-filter");
-                    firstNameFilterInput.on('keyup change', function () {
+                    firstNameFilterInput.on('keyup', function () {
                         var $this = $(this);
                         javatmp.waitForFinalEvent(function () {
                             var val = $.fn.dataTable.util.escapeRegex($this.val());
@@ -309,7 +309,7 @@
                         }, 200, "@userlist-main-table-filter");
                     });
                     var lastNameFilterInput = $("#userlist-lastname-filter");
-                    lastNameFilterInput.on('keyup change', function () {
+                    lastNameFilterInput.on('keyup', function () {
                         var $this = $(this);
                         javatmp.waitForFinalEvent(function () {
                             var val = $.fn.dataTable.util.escapeRegex($this.val());
@@ -357,7 +357,7 @@
                     });
 
                     var ageFilterInput = $("#userlist-age-filter");
-                    ageFilterInput.on('keyup change', function () {
+                    ageFilterInput.on('keyup', function () {
                         var $this = $(this);
                         javatmp.waitForFinalEvent(function () {
                             var val = $this.val();
@@ -366,7 +366,7 @@
                     });
 
                     var emailFilterInput = $("#userlist-email-filter");
-                    emailFilterInput.on('keyup change', function () {
+                    emailFilterInput.on('keyup', function () {
                         var $this = $(this);
                         javatmp.waitForFinalEvent(function () {
                             var val = $.fn.dataTable.util.escapeRegex($this.val());
