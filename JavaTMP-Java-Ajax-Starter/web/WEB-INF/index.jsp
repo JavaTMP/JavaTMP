@@ -280,7 +280,7 @@
                     </ul>
                 </li>
             </ul>
-            <button class="navbar-toggler sidebar-toggler-button my-1 ml-1" type="button">
+            <button class="navbar-toggler sidebar-toggler-button my-1 ml-1 align-self-center" type="button">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </nav>
