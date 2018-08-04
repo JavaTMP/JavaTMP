@@ -27,7 +27,7 @@
                                                     <input style="width: 7rem;" type="text" class="mr-1 form-control" name="id" placeholder="id" value="">
                                                     <input style="width: 12rem;" type="text" class="mr-1 form-control" name="userName" placeholder="Username" value="">
                                                     <button class="btn btn-primary mr-1" type="submit">Search</button>
-                                                    <button class="btn btn-primary" type="button">Lookup</button>
+                                                    <button id="usersSearchLookupButton" class="btn btn-primary" type="button">Lookup</button>
                                                 </div>
 
                                             </div>
@@ -222,7 +222,19 @@
                                             <textarea rows="7" class="form-control forceValidate" placeholder="" name="address"></textarea>
                                         </div>
                                         <div class="form-group">
-                                            <input type="submit" class="btn btn-primary" value="Update Profile & Clear Fields"/>
+                                            <input id="UserList-UpdateSelectedUserId" type="submit" class="btn btn-primary" value="Update Profile"/>
+                                            <button action-name="Delete-User-Action" id="UserList-DeleteSelectedUserId" type="button" class="btn btn-primary">
+                                                <i class="fa fa-user-times fa-fw text-danger"></i>
+                                                Delete User
+                                            </button>
+                                            <button action-name="Activate-User-Action" id="UserList-ActivateSelectedUserId" type="button" class="btn btn-primary">
+                                                <i class="fa fa-user-check fa-fw text-success"></i>
+                                                Activate User
+                                            </button>
+                                            <button action-name="Deactivate-User-Action" id="UserList-DeactivateSelectedUserId" type="button" class="btn btn-primary">
+                                                <i class="fa fa-user-slash fa-fw text-warning"></i>
+                                                Deactivate User
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
@@ -260,6 +272,9 @@
             // controll return to main javascript file.
             // <--- HERE --->
             //
+
+
+
             function populateForm(frm, data) {
                 $.each(data, function (key, value) {
                     var $ctrl = $('[name=' + key + ']', frm);
@@ -299,6 +314,25 @@
             var searchFormValidator = null;
             var form = $('#SearchForUserProfileFormId');
             var validator = null;
+
+            var updateUserButton = $("#UserList-UpdateSelectedUserId");
+            var deleteUserButton = $("#UserList-DeleteSelectedUserId");
+            var activateUserButton = $("#UserList-ActivateSelectedUserId");
+            var deActivateUserButton = $("#UserList-DeactivateSelectedUserId");
+
+            function disabled() {
+                updateUserButton.prop("disabled", true);
+                deleteUserButton.prop("disabled", true);
+                activateUserButton.prop("disabled", true);
+                deActivateUserButton.prop("disabled", true);
+            }
+            function enabled() {
+                updateUserButton.prop("disabled", false);
+                deleteUserButton.prop("disabled", false);
+                activateUserButton.prop("disabled", false);
+                deActivateUserButton.prop("disabled", false);
+            }
+            disabled();
 
             searchForm.on("submit", function (event) {
                 event.preventDefault();
@@ -369,6 +403,7 @@
                             avatarImage.attr('src', avatarImageSrc);
                             avatarRoundedImage.attr('src', avatarImageSrc);
 
+                            enabled();
 
                         } else {
                             BootstrapModalWrapperFactory.createModal({
@@ -394,13 +429,31 @@
 
             searchFormValidator = searchForm.validate($.extend(true, {}, javatmp.settings.jqueryValidationDefaultOptions, {}));
 
-            $("#SearchForUserProfile-UpdateProfileButton").on("click", function () {
+            var usersSearchLookupButton = $("#usersSearchLookupButton");
 
+            window.usersLookupActionCallback = function (callbackData) {
+                if ((callbackData.cancel !== true)) {
+                    searchForm.find("input[name='id']").val(callbackData.userSelected.id);
+                    searchForm.find("input[name='userName']").val(callbackData.userSelected.userName);
+                    searchForm.trigger("submit");
+                }
+            };
+
+            usersSearchLookupButton.on("click", function () {
+                var passData = {};
+                passData.callback = "usersLookupActionCallback";
+                passData.id = 1;
+                BootstrapModalWrapperFactory.createAjaxModal({
+                    message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
+                    passData: passData,
+                    url: javatmp.settings.contextPath + "/user/GetUsersLookupPopupPage",
+                    ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
+                });
             });
 
             form.ajaxForm({
                 clearForm: true, // clear all form fields after successful submit
-                //                resetForm: true, // reset the form after successful submit
+                resetForm: true, // reset the form after successful submit
                 beforeSerialize: function ($form, options) {
                     $("#summernote").summernote('triggerEvent', 'change');
                     if (!$form.valid()) {
@@ -732,6 +785,245 @@
                 }
             });
 
+            deleteUserButton.on("click", function (event) {
+                if (currentUser && (currentUser.id !== 0)) {
+                    var selectedRecord = currentUser;
+                    var passData = {};
+                    passData.callback = "actionCallback";
+                    passData.id = selectedRecord.id;
+                    BootstrapModalWrapperFactory.createModal({
+                        message: "Are you sure you want to delete user ?",
+                        title: "Confiramation",
+                        closable: false,
+                        closeByBackdrop: false,
+                        buttons: [
+                            {
+                                label: "Cancel",
+                                cssClass: "btn btn-secondary",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    return modalWrapper.hide();
+                                }
+                            },
+                            {
+                                label: "Delete User " + selectedRecord.userName,
+                                cssClass: "btn btn-danger",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    modalWrapper.hide();
+                                    var m = BootstrapModalWrapperFactory.createModal({
+                                        message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
+                                        closable: false,
+                                        closeByBackdrop: false,
+                                        closeByKeyboard: false
+                                    });
+                                    m.originalModal.find(".modal-dialog").css({transition: 'all 0.5s'});
+                                    m.show();
+                                    $.ajax({
+                                        type: "POST",
+                                        url: javatmp.settings.contextPath + "/user/DeleteUserController",
+                                        data: passData,
+//                                        dataType: "json",
+//                                        contentType: "application/json; charset=UTF-8",
+                                        success: function (data) {
+                                            m.updateMessage(data.message);
+                                            m.updateClosable(true);
+                                            m.updateTitle("Deleted Action Response");
+
+                                            toastr.success(data.message, 'SUCCESS', {
+                                                timeOut: 5000,
+                                                progressBar: true,
+                                                rtl: javatmp.settings.isRTL,
+                                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                                            });
+                                        },
+                                        error: function (data) {
+                                            var errorMsg = "Could Not complete the action";
+                                            try {
+                                                var jsonData = $.parseJSON(data.responseText);
+                                                errorMsg = jsonData.message;
+                                            } catch (error) {
+                                            }
+                                            m.updateMessage(errorMsg);
+                                            m.updateClosable(true);
+                                            m.updateTitle("Error Response");
+
+                                            toastr.error(errorMsg, 'ERROR', {
+                                                timeOut: 5000,
+                                                progressBar: true,
+                                                rtl: javatmp.settings.isRTL,
+                                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                                            });
+//                                            alert("error" + JSON.stringify(data));
+                                        }
+                                    });
+                                }
+                            }
+                        ]
+                    }).show();
+                } else {
+                    BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
+                }
+
+            });
+            activateUserButton.on("click", function (event) {
+                if (currentUser && (currentUser.id !== 0)) {
+                    var selectedRecord = currentUser;
+                    //                    alert("row[" + JSON.stringify(selectedRecord) + "]");
+                    var passData = {};
+                    passData.callback = "actionCallback";
+                    passData.id = selectedRecord.id;
+                    BootstrapModalWrapperFactory.createModal({
+                        message: "Are you sure you want to Activate user ?",
+                        title: "Confiramation",
+                        closable: false,
+                        closeByBackdrop: false,
+                        buttons: [
+                            {
+                                label: "Cancel",
+                                cssClass: "btn btn-secondary",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    return modalWrapper.hide();
+                                }
+                            },
+                            {
+                                label: "Activate User " + selectedRecord.userName,
+                                cssClass: "btn btn-primary",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    modalWrapper.hide();
+                                    var m = BootstrapModalWrapperFactory.createModal({
+                                        message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
+                                        closable: false,
+                                        closeByBackdrop: false,
+                                        closeByKeyboard: false
+                                    });
+                                    m.originalModal.find(".modal-dialog").css({transition: 'all 0.5s'});
+                                    m.show();
+                                    $.ajax({
+                                        type: "POST",
+                                        url: javatmp.settings.contextPath + "/user/ActivateUserController",
+                                        data: passData,
+//                                        dataType: "json",
+//                                        contentType: "application/json; charset=UTF-8",
+                                        success: function (data) {
+                                            m.updateMessage(data.message);
+                                            m.updateClosable(true);
+                                            m.updateTitle("Activate Action Response");
+
+                                            toastr.success(data.message, 'SUCCESS', {
+                                                timeOut: 5000,
+                                                progressBar: true,
+                                                rtl: javatmp.settings.isRTL,
+                                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                                            });
+                                        },
+                                        error: function (data) {
+                                            var errorMsg = "Could Not complete the action";
+                                            try {
+                                                var jsonData = $.parseJSON(data.responseText);
+                                                errorMsg = jsonData.message;
+                                            } catch (error) {
+                                            }
+                                            m.updateMessage(errorMsg);
+                                            m.updateClosable(true);
+                                            m.updateTitle("Error Response");
+
+                                            toastr.error(errorMsg, 'ERROR', {
+                                                timeOut: 5000,
+                                                progressBar: true,
+                                                rtl: javatmp.settings.isRTL,
+                                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                                            });
+//                                            alert("error" + JSON.stringify(data));
+                                        }
+                                    });
+                                }
+                            }
+                        ]
+                    }).show();
+                } else {
+                    BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
+                }
+
+            });
+            deActivateUserButton.on("click", function (event) {
+                if (currentUser && (currentUser.id !== 0)) {
+                    var selectedRecord = currentUser;
+                    //                    alert("row[" + JSON.stringify(selectedRecord) + "]");
+                    var passData = {};
+                    passData.callback = "actionCallback";
+                    passData.id = selectedRecord.id;
+                    BootstrapModalWrapperFactory.createModal({
+                        message: "Are you sure you want to Deactivate user ?",
+                        title: "Confiramation",
+                        closable: false,
+                        closeByBackdrop: false,
+                        buttons: [
+                            {
+                                label: "Cancel",
+                                cssClass: "btn btn-secondary",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    return modalWrapper.hide();
+                                }
+                            },
+                            {
+                                label: "Deactivate User " + selectedRecord.userName,
+                                cssClass: "btn btn-warning",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    modalWrapper.hide();
+                                    var m = BootstrapModalWrapperFactory.createModal({
+                                        message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
+                                        closable: false,
+                                        closeByBackdrop: false,
+                                        closeByKeyboard: false
+                                    });
+                                    m.originalModal.find(".modal-dialog").css({transition: 'all 0.5s'});
+                                    m.show();
+                                    $.ajax({
+                                        type: "POST",
+                                        url: javatmp.settings.contextPath + "/user/DeactivateUserController",
+                                        data: passData,
+//                                        dataType: "json",
+//                                        contentType: "application/json; charset=UTF-8",
+                                        success: function (data) {
+                                            m.updateMessage(data.message);
+                                            m.updateClosable(true);
+                                            m.updateTitle("Deactivate Action Response");
+
+                                            toastr.success(data.message, 'SUCCESS', {
+                                                timeOut: 5000,
+                                                progressBar: true,
+                                                rtl: javatmp.settings.isRTL,
+                                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                                            });
+                                        },
+                                        error: function (data) {
+                                            var errorMsg = "Could Not complete the action";
+                                            try {
+                                                var jsonData = $.parseJSON(data.responseText);
+                                                errorMsg = jsonData.message;
+                                            } catch (error) {
+                                            }
+                                            m.updateMessage(errorMsg);
+                                            m.updateClosable(true);
+                                            m.updateTitle("Error Response");
+
+                                            toastr.error(errorMsg, 'ERROR', {
+                                                timeOut: 5000,
+                                                progressBar: true,
+                                                rtl: javatmp.settings.isRTL,
+                                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                                            });
+//                                            alert("error" + JSON.stringify(data));
+                                        }
+                                    });
+                                }
+                            }
+                        ]
+                    }).show();
+                } else {
+                    BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
+                }
+
+            });
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.

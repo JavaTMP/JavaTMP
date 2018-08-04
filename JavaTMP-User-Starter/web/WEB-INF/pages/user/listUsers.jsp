@@ -239,7 +239,6 @@
             var addNewUserPopupButton = $("#UserList-AddNewUserPopupId");
             var updateUserButton = $("#UserList-UpdateSelectedUserId");
             var deleteUserButton = $("#UserList-DeleteSelectedUserId");
-
             var activateUserButton = $("#UserList-ActivateSelectedUserId");
             var deActivateUserButton = $("#UserList-DeactivateSelectedUserId");
             var userTableElement = $('#UsersListTableId');
