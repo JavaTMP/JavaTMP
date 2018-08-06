@@ -148,7 +148,7 @@
         </thead>
         <tbody></tbody>
     </table>
-    <ul id="contextMenu" class="dropdown-menu" role="menu" style="display:none;position: fixed;" >
+    <div id="contextMenu" class="dropdown-menu" role="menu" style="display:none;position: fixed;" >
         <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Add-New-User-Action">
             <i class="fa fa-fw fa-user text-primary"></i>
             Add New User
@@ -174,7 +174,7 @@
             <i class="fa fa-user-times fa-fw text-danger"></i>
             Delete User
         </a>
-    </ul>
+    </div>
     <style type="text/css">
         table.dataTable tbody tr {
             cursor: pointer;
