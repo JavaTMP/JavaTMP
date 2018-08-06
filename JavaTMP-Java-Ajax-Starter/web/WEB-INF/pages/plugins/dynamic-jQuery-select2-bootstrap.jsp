@@ -232,6 +232,7 @@
             dir: javatmp.settings.direction,
             placeholder: "Recipients Of Your Email",
             width: '',
+//            dropdownAutoWidth: true,
             containerCssClass: ':all:',
             ajax: {
                 "type": "POST",
