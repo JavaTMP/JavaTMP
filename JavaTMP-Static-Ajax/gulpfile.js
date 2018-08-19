@@ -19,9 +19,8 @@ var config = {
             {"from": "${sourceNodeLib}/material-design-icons/iconfont/MaterialIcons-Regular.*", "to": "${destComponentsLib}/material-design-icons/iconfont"},
             {"from": "${sourceNodeLib}/material-design-icons/iconfont/material-icons.css", "to": "${destComponentsLib}/material-design-icons/iconfont", processCSS: true}
         ],
-        "fontawesome-free-webfonts": [
-            {"from": "${sourceNodeLib}/@fortawesome/fontawesome-free-webfonts/css/**/*", "to": "${destComponentsLib}/fontawesome-free-webfonts/css", processCSS: true},
-            {"from": "${sourceNodeLib}/@fortawesome/fontawesome-free-webfonts/webfonts/**/*", "to": "${destComponentsLib}/fontawesome-free-webfonts/webfonts"}
+        "fontawesome-free": [
+            {"from": "${sourceNodeLib}/@fortawesome/fontawesome-free/webfonts/**/*", "to": "${destComponentsLib}/fontawesome-free/webfonts"}
         ],
         "font-awesome-animation": [
             {"from": "${sourceNodeLib}/font-awesome-animation/dist/font-awesome-animation.min.css", "to": "${destComponentsLib}/font-awesome-animation/dist"}
