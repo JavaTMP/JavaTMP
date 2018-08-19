@@ -1037,16 +1037,48 @@
                 return false;
             });
             var form = $('#SearchForUserProfileFormId');
+
+            function populateForm(frm, data) {
+                $.each(data, function (key, value) {
+                    var $ctrl = $('[name=' + key + ']', frm);
+                    if ($ctrl.is('select')) {
+                        $ctrl.val(value).trigger("change");
+//                        $("option", $ctrl).each(function () {
+//                            console.log("this.value is [" + this.value + "], value [" + value + "]");
+//                            if (this.value === value) {
+//                                console.log("Matched and we select now");
+//                                $(this).prop("selected", true).trigger("change");
+//                            }
+//                        });
+                    } else if ($ctrl.is('textarea')) {
+                        $ctrl.val(value).trigger("change");
+                    } else {
+                        switch ($ctrl.attr("type"))
+                        {
+                            case "text" :
+                            case "hidden":
+                            case "textarea":
+                                $ctrl.val(value).trigger("change");
+                                break;
+                            case "radio" :
+                            case "checkbox":
+                                $ctrl.each(function () {
+                                    if ($(this).attr('value') === value) {
+                                        $(this).prop("checked", value).trigger("change");
+                                    }
+                                });
+                                break;
+                        }
+                    }
+                });
+            }
             table.on('select', function (e, dt, type, indexes) {
                 //                alert("select");
                 var rowsData = table.rows(indexes).data().toArray();
                 var rowData = rowsData[0];
                 enabled();
 
-                alert("select" + JSON.stringify(rowData));
-
-                var rowObject = rowData
-                console.log(rowObject);
+                var rowObject = rowData;
                 populateForm(form, rowObject);
                 form.find("textarea[name='address']").summernote('code', rowObject.address);
 //                    form.find("textarea[name='address']").summernote('triggerEvent', 'change');
