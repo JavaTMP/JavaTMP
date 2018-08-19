@@ -139,6 +139,11 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a href="${pageContext.request.contextPath}/user/GetListUsersWithDetailsPage">
+                                            Users List With Details
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="${pageContext.request.contextPath}/user/CreateUserController">
                                             Add New User
                                         </a>
