@@ -550,7 +550,7 @@
                 });
                 return readyData;
             }
-            $("#profilePicturePreviewContainerId").mCustomScrollbar({
+            form.find("#profilePicturePreviewContainerId").mCustomScrollbar({
                 axis: "yx",
                 theme: "javatmp",
                 scrollInertia: 0,

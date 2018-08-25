@@ -166,202 +166,184 @@
                     <div class="scroll-content" style="height: 500px;">
                         <form enctype="multipart/form-data" autocomplete="off" id="SearchForUserProfileFormId" class="form m-3"
                               action="${pageContext.request.contextPath}/user/UpdateCompleteUserController" method="post" novalidate="novalidate">
+
                             <div class="form-row">
-                                <div class="col-lg-12">
-                                    <div class="form-row">
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label class="control-label">User Status</label>
-                                                <select name="status" class="custom-select">
-                                                    <option value="1">Activated</option>
-                                                    <option value="0">Deactivated</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label class="control-label">First Name</label>
-                                                <input class="form-control" type="text" placeholder="First Name" name="firstName" value="">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                <label class="control-label">Last Name</label>
-                                                <input class="form-control" type="text" placeholder="Last Name" name="lastName" value="">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="control-label">Your date of birth</label>
-                                                <input dir="ltr" class="form-control"  type="text" name="birthOfDateStr" value="">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="control-label">Email</label>
-                                                <input class="form-control" type="text" placeholder="Email" name="email" value="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="control-label">Country</label>
-                                                <select name="countryId" class="form-control">
-                                                    <c:choose>
-                                                        <c:when test="${fn:length(requestScope.countries) > 0}">
-                                                            <option value="">Choose ...</option>
-                                                            <c:forEach items="${requestScope.countries}" var="country">
-                                                                <option value="${country.countryId}">${country.countryName}</option>
-                                                            </c:forEach>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <option value="">No Record Found</option>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="control-label">Interface Language</label>
-                                                <select name="lang" class="form-control">
-                                                    <c:choose>
-                                                        <c:when test="${fn:length(requestScope.languages) > 0}">
-                                                            <option value="">Choose ...</option>
-                                                            <c:forEach items="${requestScope.languages}" var="language">
-                                                                <option value="${language.languageId}">${language.languageName}</option>
-                                                            </c:forEach>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <option value="">No Record Found</option>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="control-label">Interface Theme</label>
-                                                <select name="theme" class="form-control">
-                                                    <c:choose>
-                                                        <c:when test="${fn:length(requestScope.themes) > 0}">
-                                                            <option value="">Choose ...</option>
-                                                            <c:forEach items="${requestScope.themes}" var="theme">
-                                                                <option value="${theme.themeId}">${theme.themeName}</option>
-                                                            </c:forEach>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <option value="">No Record Found</option>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="control-label">Timezone</label>
-                                                <select name="timezone" class="form-control">
-                                                    <option value="">Choose ...</option>
-                                                    <c:choose>
-                                                        <c:when test="${fn:length(requestScope.timezones) > 0}">
-                                                            <option value="">Choose ...</option>
-                                                            <c:forEach items="${requestScope.timezones}" var="timezone">
-                                                                <option value="${timezone.timezoneId}">${timezone.timezoneName}</option>
-                                                            </c:forEach>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <option value="-1">No Record Found</option>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="control-label">Username</label>
-                                                <input class="form-control" type="text" autocomplete="off" placeholder="Username"
-                                                       name="userName" value="">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="control-label">Old Password</label>
-                                                <input class="form-control" type="password" autocomplete="off" id="oldPassword"
-                                                       placeholder="Old Password" name="oldPassword">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="control-label">New Password</label>
-                                                <input class="form-control" type="password" autocomplete="off" id="password"
-                                                       placeholder="New Password" name="password">
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <label class="control-label">Re-type Your New Password</label>
-                                                <input class="form-control" type="password" autocomplete="off" placeholder="Re-type Your New Password"
-                                                       name="rpassword">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="col-lg-12">
-                                            <div class="form-group">
-                                                <label for="exampleFormControlFile1">Add Profile Picture</label>
-                                                <div class="custom-file">
-                                                    <input name="profilePicture" type="file" class="custom-file-input" id="validatedCustomFile">
-                                                    <label class="custom-file-label" for="validatedCustomFile">Choose Profile Picture file...</label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 text-center">
-                                            <div style="width: 200px; height: 200px;display: inline-block;position: relative">
-                                                <div id="profilePicturePreviewContainerId" style="width: 200px; height: 200px;">
-                                                    <img id="profilePicturePreview" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-3 text-center">
-                                            <img id="profilePictureResizePreview" style="width: 200px; height: 200px;" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
-                                        </div>
-                                        <div class="col-lg-3 text-center">
-                                            <img id="profilePictureAvatarPreview" style="width: 40px; height: 40px;" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
-                                        </div>
-                                        <div class="col-lg-3 text-center">
-                                            <img class="rounded-circle" id="profilePictureAvatarRoundedPreview" style="width: 40px; height: 40px;" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
-                                        </div>
-                                    </div>
-                                    <div class="form-row">
-                                        <div class="col-lg-12">
-                                            <div class="form-group text-center">
-                                                <input name="profilePictureStr" type="text" readonly="" hidden="" value=""/>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label class="control-label">address</label>
-                                        <textarea rows="7" class="form-control forceValidate" placeholder="" name="address"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <input id="UserList-UpdateSelectedUserId" type="submit" class="btn btn-primary" value="Update Profile"/>
-                                        <button action-name="Delete-User-Action" id="UserList-DeleteSelectedUserId" type="button" class="btn btn-primary">
-                                            <i class="fa fa-user-times fa-fw text-danger"></i>
-                                            Delete User
-                                        </button>
-                                        <button action-name="Activate-User-Action" id="UserList-ActivateSelectedUserId" type="button" class="btn btn-primary">
-                                            <i class="fa fa-user-check fa-fw text-success"></i>
-                                            Activate User
-                                        </button>
-                                        <button action-name="Deactivate-User-Action" id="UserList-DeactivateSelectedUserId" type="button" class="btn btn-primary">
-                                            <i class="fa fa-user-slash fa-fw text-warning"></i>
-                                            Deactivate User
-                                        </button>
+                                        <label class="control-label">User Status</label>
+                                        <select name="status" class="custom-select">
+                                            <option value="1">Activated</option>
+                                            <option value="0">Deactivated</option>
+                                        </select>
                                     </div>
                                 </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="control-label">First Name</label>
+                                        <input class="form-control" type="text" placeholder="First Name" name="firstName" value="">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Last Name</label>
+                                        <input class="form-control" type="text" placeholder="Last Name" name="lastName" value="">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Your date of birth</label>
+                                        <input dir="ltr" class="form-control"  type="text" name="birthOfDateStr" value="">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Email</label>
+                                        <input class="form-control" type="text" placeholder="Email" name="email" value="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Country</label>
+                                        <select name="countryId" class="form-control">
+                                            <c:choose>
+                                                <c:when test="${fn:length(requestScope.countries) > 0}">
+                                                    <option value="">Choose ...</option>
+                                                    <c:forEach items="${requestScope.countries}" var="country">
+                                                        <option value="${country.countryId}">${country.countryName}</option>
+                                                    </c:forEach>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <option value="">No Record Found</option>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Interface Language</label>
+                                        <select name="lang" class="form-control">
+                                            <c:choose>
+                                                <c:when test="${fn:length(requestScope.languages) > 0}">
+                                                    <option value="">Choose ...</option>
+                                                    <c:forEach items="${requestScope.languages}" var="language">
+                                                        <option value="${language.languageId}">${language.languageName}</option>
+                                                    </c:forEach>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <option value="">No Record Found</option>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Interface Theme</label>
+                                        <select name="theme" class="form-control">
+                                            <c:choose>
+                                                <c:when test="${fn:length(requestScope.themes) > 0}">
+                                                    <option value="">Choose ...</option>
+                                                    <c:forEach items="${requestScope.themes}" var="theme">
+                                                        <option value="${theme.themeId}">${theme.themeName}</option>
+                                                    </c:forEach>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <option value="">No Record Found</option>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Timezone</label>
+                                        <select name="timezone" class="form-control">
+                                            <option value="">Choose ...</option>
+                                            <c:choose>
+                                                <c:when test="${fn:length(requestScope.timezones) > 0}">
+                                                    <option value="">Choose ...</option>
+                                                    <c:forEach items="${requestScope.timezones}" var="timezone">
+                                                        <option value="${timezone.timezoneId}">${timezone.timezoneName}</option>
+                                                    </c:forEach>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <option value="-1">No Record Found</option>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Username</label>
+                                        <input class="form-control" type="text" autocomplete="off" placeholder="Username"
+                                               name="userName" value="">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Old Password</label>
+                                        <input class="form-control" type="password" autocomplete="off" id="oldPassword"
+                                               placeholder="Old Password" name="oldPassword">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="control-label">New Password</label>
+                                        <input class="form-control" type="password" autocomplete="off" id="password"
+                                               placeholder="New Password" name="password">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="control-label">Re-type Your New Password</label>
+                                        <input class="form-control" type="password" autocomplete="off" placeholder="Re-type Your New Password"
+                                               name="rpassword">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-lg-12">
+                                    <div class="form-group">
+                                        <label for="exampleFormControlFile1">Add Profile Picture</label>
+                                        <div class="custom-file">
+                                            <input name="profilePicture" type="file" class="custom-file-input" id="validatedCustomFile">
+                                            <label class="custom-file-label" for="validatedCustomFile">Choose Profile Picture file...</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 text-center">
+                                    <div style="width: 200px; height: 200px;display: inline-block;position: relative">
+                                        <div id="profilePicturePreviewContainerId" style="width: 200px; height: 200px;">
+                                            <img id="profilePicturePreview" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 text-center">
+                                    <img id="profilePictureResizePreview" style="width: 200px; height: 200px;" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
+                                </div>
+                                <div class="col-lg-3 text-center">
+                                    <img id="profilePictureAvatarPreview" style="width: 40px; height: 40px;" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
+                                </div>
+                                <div class="col-lg-3 text-center">
+                                    <img class="rounded-circle" id="profilePictureAvatarRoundedPreview" style="width: 40px; height: 40px;" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-lg-12">
+                                    <div class="form-group text-center">
+                                        <input name="profilePictureStr" type="text" readonly="" hidden="" value=""/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">address</label>
+                                <textarea rows="7" class="form-control forceValidate" placeholder="" name="address"></textarea>
                             </div>
                         </form>
                     </div>
@@ -1033,10 +1015,194 @@
                     right: "auto",
                     top: getMenuPosition($contextMenu, e.clientY, 'height', 'scrollTop', javatmp.settings.isRTL)
                 });
-
                 return false;
             });
             var form = $('#SearchForUserProfileFormId');
+
+            form.find("input[name='birthOfDateStr']").inputmask({
+                alias: "datetime",
+                placeholder: "dd/mm/yyyy",
+                inputFormat: "dd/mm/yyyy",
+                displayFormat: true,
+                hourFormat: "24",
+                clearMaskOnLostFocus: false
+            });
+            form.find("input[name='birthOfDateStr']").daterangepicker({
+                "opens": javatmp.settings.floatReverse,
+                startDate: moment().format("DD/MM/YYYY"),
+                singleDatePicker: true,
+                showDropdowns: true,
+                timePicker: false,
+                timePickerIncrement: 1,
+                timePicker24Hour: true,
+                autoApply: true,
+                autoUpdateInput: false,
+                minDate: '01/01/1900',
+                maxDate: '31/12/2099',
+                //                    maxDate: '',
+                //                    minDate: moment(),
+                locale: {
+                    "direction": javatmp.settings.direction,
+                    format: 'DD/MM/YYYY'
+                }
+            }, function (start, end, label) {
+                var formatedDateSelected = moment(start).format("DD/MM/YYYY");
+                form.find("input[name='birthOfDateStr']").val(formatedDateSelected).trigger("change");
+            });
+            form.find("textarea[name='address']").summernote({
+                direction: javatmp.settings.direction,
+                lang: javatmp.user.lang === "ar" ? "ar-AR" : javatmp.user.lang,
+                height: 100,
+                dialogsInBody: true
+            });
+
+            $.fn.select2.defaults.set("theme", "bootstrap");
+            $.fn.select2.defaults.set("dir", javatmp.settings.direction);
+
+            form.find("select[name='lang']").select2({
+                allowClear: true,
+                placeholder: "Select a language",
+                containerCssClass: ':all:',
+                width: '',
+                dropdownCssClass: "select2-lang-dropdown"
+            }).on("select2:open", function () {
+//                $(".select2-lang-dropdown", ".select2-container").css('z-index', modalZIndex + 1);
+            });
+            form.find("select[name='theme']").select2({
+                allowClear: true,
+                placeholder: "Select a theme",
+                containerCssClass: ':all:',
+                width: '',
+                escapeMarkup: function (markup) {
+                    return markup;
+                },
+                templateSelection: formatThemeSelection,
+                templateResult: formatThemeResult,
+                dropdownCssClass: "select2-theme-dropdown"
+            }).on("select2:open", function () {
+//                $(".select2-theme-dropdown", ".select2-container").css('z-index', modalZIndex + 1);
+            });
+            form.find("select[name='timezone']").select2({
+                allowClear: true,
+                placeholder: "Select a timezone",
+                containerCssClass: ':all:',
+                width: '',
+                dropdownCssClass: "select2-timezone-dropdown"
+            }).on("select2:open", function () {
+//                $(".select2-timezone-dropdown", ".select2-container").css('z-index', modalZIndex + 1);
+            });
+            form.find("select[name='countryId']").select2({
+                theme: "bootstrap",
+                dir: javatmp.settings.direction,
+                allowClear: true,
+                placeholder: "Select a country",
+                containerCssClass: ':all:',
+                width: '',
+                templateSelection: formatCountrySelection,
+                templateResult: formatCountry,
+                escapeMarkup: function (markup) {
+                    return markup;
+                },
+                dropdownCssClass: "select2-countryId-dropdown"
+            }).on("select2:select", function () {
+                (this).focus();
+            }).on("select2:open", function () {
+//                $(".select2-countryId-dropdown", ".select2-container").css('z-index', modalZIndex + 1);
+            });
+
+            form.find("#profilePicturePreviewContainerId").mCustomScrollbar({
+                axis: "yx",
+                theme: "javatmp",
+                scrollInertia: 0,
+                advanced: {
+                    updateOnContentResize: true,
+                    autoExpandHorizontalScroll: true,
+                    updateOnImageLoad: true
+                },
+                mouseWheel: {
+                    preventDefault: true,
+                    scrollAmount: 85
+                }
+            });
+
+            function formatCountry(repo) {
+                if (repo.loading)
+                    return repo.text;
+                var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
+                var template =
+                        '    <div class="media d-flex align-items-center">' +
+                        '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
+                        '        <div class="media-body">' +
+                        '            <strong>{{countryText}} ({{countryId}})</strong>' +
+                        '        </div>' +
+                        '    </div>';
+                var readyData = template.composeTemplate({
+                    'imagePath': imagePath,
+                    'countryText': repo.text,
+                    'countryId': repo.id
+                });
+                return readyData;
+            }
+            function formatCountrySelection(repo) {
+                if (!repo.id) {
+                    return repo.text;
+                }
+
+                var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
+                var template =
+                        '    <div class="media d-flex align-items-center">' +
+                        '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
+                        '        <div class="media-body">' +
+                        '            <span>{{countryText}} ({{countryId}})</span>' +
+                        '        </div>' +
+                        '    </div>';
+                var readyData = template.composeTemplate({
+                    'imagePath': imagePath,
+                    'countryText': repo.text,
+                    'countryId': repo.id
+                });
+                return readyData;
+            }
+            function formatThemeSelection(repo) {
+                if (!repo.id) {
+                    return repo.text;
+                }
+
+                var imagePath = javatmp.settings.contextPath + "/assets/img/themes/" + repo.text + ".png";
+                var template =
+                        '    <div class="media d-flex align-items-center">' +
+                        '        <img style="height: 25px;" class="mr-1" src="{{imagePath}}" alt="{{themeName}}"/>' +
+                        '        <div class="media-body">' +
+                        '            <span>{{themeName}}</span>' +
+                        '        </div>' +
+                        '    </div>';
+                var readyData = template.composeTemplate({
+                    'imagePath': imagePath,
+                    'themeName': repo.text
+                });
+                return readyData;
+            }
+            function formatThemeResult(repo) {
+                if (!repo.id) {
+                    return repo.text;
+                }
+
+                var imagePath = javatmp.settings.contextPath + "/assets/img/themes/" + repo.text + ".png";
+                var template =
+                        '    <div class="media d-flex align-items-center">' +
+                        '        <img style="height: 75px;" class="mr-1" src="{{imagePath}}" alt="{{themeName}}"/>' +
+                        '        <div class="media-body">' +
+                        '            <span>{{themeName}}</span>' +
+                        '        </div>' +
+                        '    </div>';
+                var readyData = template.composeTemplate({
+                    'imagePath': imagePath,
+                    'themeName': repo.text
+                });
+                return readyData;
+            }
+
+
 
             function populateForm(frm, data) {
                 $.each(data, function (key, value) {
