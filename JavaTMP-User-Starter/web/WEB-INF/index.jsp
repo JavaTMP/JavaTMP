@@ -24,26 +24,25 @@
     <body class="sidebar-active">
         <div id="oneTimeOverlay" style="position: fixed;width: 100%;height: 100%;top: 0px;left: 0;right: 0;bottom: 0;background-color: rgba(255,255,255,1);z-index: 1000000;cursor: wait;">Loading ...</div>
         <nav class="main-javatmp-navbar navbar fixed-top my-0 py-0">
-            <a class="navbar-brand mr-auto py-0 d-none d-md-inline" href="${pageContext.request.contextPath}/">
+            <a class="text-center navbar-brand mr-auto d-none d-md-flex align-items-stretch" href="${pageContext.request.contextPath}/">
                 <span class="d-xl-none d-lg-none d-sm-inline">${labels['global.system.name.short']}</span>
                 <span class="d-none d-lg-inline">${labels['global.system.name.long']}</span>
             </a>
             <ul class="main-navbar-menu nav ml-auto">
-                <li class="nav-item py-0 dropdown">
-                    <a class="nav-link user-profile-menu-item dropdown-toggle" data-toggle="dropdown" href="#">
+                <li class="nav-item dropdown">
+                    <a class="d-flex align-items-center h-100 text-left nav-link dropdown-toggle" data-toggle="dropdown" href="#">
                         <c:choose>
                             <c:when test="${not empty sessionScope.user.profilePicDocument.documentId and not empty sessionScope.user.profilePicDocument.randomHash}">
-                                <img class="user-profile-pic rounded-circle" width="40" height="40"
+                                <img class="rounded-circle mr-1" width="40" height="40"
                                      src="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${sessionScope.user.profilePicDocument.documentId}&amp;randomHash=${sessionScope.user.profilePicDocument.randomHash}&amp;viewType=inline" alt=""/>
                             </c:when>
                             <c:otherwise>
-                                <img class="user-profile-pic rounded-circle" width="40" height="40"
+                                <img class="rounded-circle mr-1" width="40" height="40"
                                      src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt=""/>
                             </c:otherwise>
                         </c:choose>
-
-                        <span class="user-profile-menu-item-info d-none d-md-inline-block">
-                            <small>Welcome,</small>
+                        <span class="d-none d-md-inline">
+                            <small class="d-flex">Welcome,</small>
                             ${sessionScope.user.firstName}&nbsp;${sessionScope.user.lastName}
                         </span>
                     </a>

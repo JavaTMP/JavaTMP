@@ -29,9 +29,9 @@
                 <span class="d-none d-lg-inline">${labels['global.system.name.long']}</span>
             </a>
             <ul class="main-navbar-menu nav ml-auto">
-                <li class="nav-item py-0 dropdown d-none d-sm-inline">
-                    <a class="nav-link dropdown-toggle faa-parent animated-hover" data-toggle="dropdown" href="">
-                        <i class="fa fa-globe fa-lg faa-spin"></i>
+                <li class="nav-item dropdown d-none d-sm-flex d-flex align-items-stretch">
+                    <a class="nav-link dropdown-toggle faa-parent animated-hover d-flex align-items-center" data-toggle="dropdown" href="">
+                        <i class="fa fa-globe fa-lg faa-spin mr-1"></i>
                         <span class="d-none d-lg-inline">${labels['global.navbar.lang.current']}</span>
                     </a>
                     <ul class="dropdown-menu">
@@ -53,9 +53,9 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item py-0 dropdown mega-on-sm" id="myMessagesDropdownId">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope fa-lg faa-shake animated"></i>
+                <li class="nav-item dropdown mega-on-sm d-flex align-items-stretch" id="myMessagesDropdownId">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center" data-toggle="dropdown" href="#">
+                        <i class="fa fa-envelope fa-lg faa-shake animated mr-1"></i>
                         <span class="badge badge-danger d-none d-md-inline">99+</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-extender">
@@ -78,9 +78,9 @@
                         </div>
                     </div>
                 </li>
-                <li class="nav-item py-0 dropdown mega-on-sm">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-lg fa-bars faa-float animated"></i>
+                <li class="nav-item dropdown mega-on-sm d-flex align-items-stretch">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center" data-toggle="dropdown" href="#">
+                        <i class="fa fa-lg fa-bars faa-float animated mr-1"></i>
                         <span class="badge badge-danger d-none d-md-inline">99+</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-extender">
@@ -185,9 +185,9 @@
                         </div>
                     </div>
                 </li>
-                <li class="nav-item py-0 dropdown mega-on-sm">
-                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-lg fa-bell faa-ring animated"></i>
+                <li class="nav-item dropdown mega-on-sm d-flex align-items-stretch">
+                    <a class="nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-lg fa-bell faa-ring animated mr-1"></i>
                         <span class="badge badge-danger d-none d-md-inline">99+</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-extender">
@@ -242,12 +242,12 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item py-0 dropdown">
-                    <a class="nav-link user-profile-menu-item dropdown-toggle" data-toggle="dropdown" href="#">
-                        <img class="user-profile-pic rounded-circle"
+                <li class="nav-item dropdown">
+                    <a class="d-flex align-items-center h-100 text-left nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                        <img class="rounded-circle mr-1"
                              src="${pageContext.request.contextPath}/assets/img/avatar/profile_pic_min.png" alt=""/>
-                        <span class="user-profile-menu-item-info d-none d-md-inline-block">
-                            <small>Welcome,</small>
+                        <span class="d-none d-md-inline">
+                            <small class="d-flex">Welcome,</small>
                             ${sessionScope.user.firstName}&nbsp;${sessionScope.user.lastName}
                         </span>
                     </a>
@@ -529,6 +529,12 @@
                                             Menu
                                         </a>
                                         <ul aria-expanded="true">
+                                            <li>
+                                                <a href="${pageContext.request.contextPath}/pages/custom-components/menu/custom-bootstrap-dropdown-button">
+                                                    <i class="far fa-lg fa-fw fa-lightbulb"></i>
+                                                    Custom Bootstrap Dropdown Button
+                                                </a>
+                                            </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/custom-components/menu/horizontal-mega-menu">
                                                     <i class="far fa-lg fa-fw fa-lightbulb"></i>

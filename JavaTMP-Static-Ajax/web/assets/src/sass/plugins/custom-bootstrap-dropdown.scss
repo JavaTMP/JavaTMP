@@ -54,3 +54,20 @@ $javatmp-dropdown-menu-extender-content-height: 250px!default;
         }
     }
 }
+
+[dir=rtl] {
+    .dropdown {
+        &.mega-on-sm {
+            > .dropdown-menu {
+                right: auto;
+                left: 0;
+            }
+        }
+        > .dropdown-menu {
+            &.dropdown-menu-right{
+                right: auto;
+                left: 0;
+            }
+        }
+    }
+}

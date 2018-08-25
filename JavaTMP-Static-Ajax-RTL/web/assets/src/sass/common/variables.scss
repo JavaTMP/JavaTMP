@@ -20,7 +20,7 @@ $javatmp-footer-bar-z-index: 100!default;
 //--------------------------------------------------
 
 // JavaTMP Navbar variables
-$javatmp-navbar-height: 50px!default;
+$javatmp-navbar-height: 3rem!default;
 $javatmp-navbar-menu-enable-border: true!default;
 /*$javatmp-navbar-border-color: $border-color;*/
 $javatmp-navbar-bg: $javatmp-primary-bg!default;
@@ -30,8 +30,8 @@ $javatmp-navbar-toggler-border-color: $navbar-dark-toggler-border-color!default;
 $javatmp-navbar-toggler-icon-bg-image: $navbar-dark-toggler-icon-bg!default;
 $javatmp-navbar-border-color: $javatmp-secondary-bg!default;
 $javatmp-navbar-border-width: $border-width!default;
-$javatmp-navbar-brand-align-self: flex-end!default;
-$javatmp-navbar-menu-align-self: flex-end!default;
+$javatmp-navbar-brand-align-self: stretch!default;
+$javatmp-navbar-menu-align-self: stretch!default;
 $javatmp-navbar-menu-link-color: $navbar-dark-active-color!default;
 $javatmp-navbar-menu-link-hover-color: $navbar-dark-active-color!default;
 $javatmp-navbar-menu-link-hover-bg: darken($primary, 7.5%)!default;
@@ -40,7 +40,7 @@ $javatmp-navbar-menu-link-active-bg: darken($primary, 12%)!default;
 //--------------------------------------------------
 
 // JavaTMP Sidebar:
-$javatmp-sidebar-width: 325px!default;
+$javatmp-sidebar-width: 20rem!default;
 $javatmp-sidebar-bg: $javatmp-secondary-bg!default;
 $javatmp-sidebar-link-color: $link-color!default;
 
@@ -49,7 +49,7 @@ $javatmp-sidebar-border-color: $border-color!default;
 //--------------------------------------------------
 
 // JavaTMP BreadcrumbBar variables
-$javatmp-breadcrumb-bar-height: 40px!default;
+$javatmp-breadcrumb-bar-height: 2.5rem!default;
 $javatmp-breadcrumb-bar-bg: $javatmp-secondary-bg!default;
 $javatmp-breadcrumb-link-color: $primary!default;
 $javatmp-breadcrumb-link-active-color: darken($primary, 10%)!default;
@@ -63,7 +63,7 @@ $javatmp-main-content-page-header-h1-color: $primary!default;
 
 // JavaTMP Footer variables
 $javatmp-footer-bar-bg: $javatmp-secondary-bg!default;
-$javatmp-footer-bar-height: 34px!default;
+$javatmp-footer-bar-height: 2rem!default;
 $javatmp-footer-bar-border-width: $border-width!default;
 $javatmp-footer-bar-border-color: $border-color!default;
 //--------------------------------------------------

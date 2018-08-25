@@ -3,7 +3,6 @@
 
 .main-javatmp-navbar {
 
-
     body.longer-sidebar.sidebar-active & {
         left: 0;
         right: 0;
@@ -19,32 +18,11 @@
 
         }
     }
-
-
     .main-navbar-menu {
         > .nav-item {
             @if $javatmp-navbar-menu-enable-border {
                 border-left: none;
                 border-right: $javatmp-navbar-border-width solid $javatmp-navbar-border-color;
-            }
-        }
-        > .dropdown {
-            > .user-profile-menu-item {
-                > .user-profile-menu-item-info {
-                    text-align: right;
-                }
-            }
-            &.mega-on-sm {
-                > .dropdown-menu {
-                    right: auto;
-                    left: 0;
-                }
-            }
-            > .dropdown-menu {
-                &.dropdown-menu-right{
-                    right: auto;
-                    left: 0;
-                }
             }
         }
     }

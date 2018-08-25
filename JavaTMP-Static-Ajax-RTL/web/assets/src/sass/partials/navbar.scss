@@ -26,34 +26,22 @@
 
         }
     }
-
     .navbar-brand {
-        line-height: 50px;
-        align-self: $javatmp-navbar-brand-align-self;
         color: $javatmp-navbar-brand-color;
     }
-
     .navbar-toggler {
         flex-direction: row;
         flex-wrap: nowrap;
-        align-self: $javatmp-navbar-menu-align-self;
         color: $javatmp-navbar-toggler-color;
         border-color: $javatmp-navbar-toggler-border-color;
     }
-
     .navbar-toggler-icon {
         background-image: $javatmp-navbar-toggler-icon-bg-image;
     }
-
     .main-navbar-menu {
-        -ms-flex-direction: row;
         flex-direction: row;
         flex-wrap: nowrap;
         align-self: $javatmp-navbar-menu-align-self;
-        .nav-link {
-            line-height: 49px;
-            margin-bottom: 1px;
-        }
         > .nav-item {
             @if $javatmp-navbar-menu-enable-border {
                 border-left: $javatmp-navbar-border-width solid $javatmp-navbar-border-color;
@@ -62,7 +50,6 @@
                 color: $javatmp-navbar-menu-link-color;
                 padding: 0rem 1rem;
                 &:hover, &:focus {
-                    /*padding-top:1px;*/
                     color: $javatmp-navbar-menu-link-hover-color;
                     background-color: $javatmp-navbar-menu-link-hover-bg;
                 }
@@ -70,51 +57,6 @@
             &.show > a {
                 color: $javatmp-navbar-menu-link-active-color;
                 background-color: $javatmp-navbar-menu-link-active-bg;
-            }
-        }
-        > .dropdown {
-            > .user-profile-menu-item {
-                /*                padding: 0px 8px;
-                                line-height: 50px;*/
-                > .user-profile-pic {
-                    border: 1px solid #FFF;
-                    vertical-align: middle;
-                }
-                > .user-profile-menu-item-info {
-                    max-width: 100px;
-                    display: inline-block;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                    text-align: left;
-                    vertical-align: middle;
-                    line-height: 16px;
-                    position: relative;
-                    > small {
-                        display: block;
-                    }
-                }
-            }
-            &.mega-on-sm {
-                > .dropdown-menu {
-                    width: 350px;
-                    right: 0;
-                    left: auto;
-                }
-                @media (max-width: 768px) {
-                    position: static;
-                    > .dropdown-menu {
-                        width: 100%;
-                        left: 0;
-                        right: 0;
-                    }
-                }
-            }
-            > .dropdown-menu {
-                &.dropdown-menu-right{
-                    right: 0;
-                    left: auto;
-                }
             }
         }
     }
