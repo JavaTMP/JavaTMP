@@ -7,6 +7,7 @@ $javatmp-dropdown-menu-extender-item-border-width: $dropdown-border-width!defaul
 $javatmp-dropdown-menu-extender-item-border-color: $dropdown-divider-bg!default;
 
 $javatmp-dropdown-menu-extender-content-height: 250px!default;
+
 .dropdown-menu-extender {
     /*padding: 0;*/
     .dropdown-item {
@@ -27,5 +28,29 @@ $javatmp-dropdown-menu-extender-content-height: 250px!default;
     }
     .dropdown-menu-content {
         height: $javatmp-dropdown-menu-extender-content-height;
+    }
+}
+
+.dropdown {
+    &.mega-on-sm {
+        > .dropdown-menu {
+            width: 350px;
+            right: 0;
+            left: auto;
+        }
+        @media (max-width: 768px) {
+            position: static;
+            > .dropdown-menu {
+                width: 100%;
+                left: 0;
+                right: 0;
+            }
+        }
+    }
+    > .dropdown-menu {
+        &.dropdown-menu-right{
+            right: 0;
+            left: auto;
+        }
     }
 }

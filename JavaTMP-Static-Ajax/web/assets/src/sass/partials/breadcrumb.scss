@@ -20,7 +20,7 @@
 
     .breadcrumb {
         background-color: $javatmp-breadcrumb-bar-bg;
-        padding: 0 0 0 15px;
+        padding: 0 0 0 1rem;
         /*padding: .25rem 1rem;*/
         width: calc(100% - 50px);
         flex-wrap: nowrap;
@@ -39,7 +39,7 @@
         a {
             color: $javatmp-breadcrumb-link-color;
             vertical-align: middle;
-            line-height: 39px;
+            line-height: $javatmp-breadcrumb-bar-height;
         }
         a.active {
             color: $javatmp-breadcrumb-link-active-color;
@@ -55,10 +55,12 @@
         width: 49px;
         min-height: 36px;
         .min-tools-button {
-            font-size: 28px;
-            line-height: 36px;
+            font-size: 2rem;
+            /*line-height: 36px;*/
             padding: 0 5px;
-            margin-top:1px;
+            vertical-align: middle;
+            line-height: 2.5rem;
+            /*margin-top:1px;*/
         }
     }
 }
