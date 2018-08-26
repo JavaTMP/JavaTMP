@@ -123,6 +123,19 @@ gulp.task('copy-JavaTMP-Java-Ajax-Starter', function (cb) {
                 cb();
             });
 });
+gulp.task('copy-JavaTMP-User-Starter', function (cb) {
+    return gulp
+            .src([
+                './JavaTMP-User-Starter/**/*',
+                '!**/node_modules{,/**}',
+                '!**/nbproject/private{,/**}',
+                '!**/package-lock.json'
+            ], {dot: true})
+            .pipe(gulp.dest("temp/JavaTMP-User-Starter"))
+            .on('end', function () {
+                cb();
+            });
+});
 //gulp.task('license-javatmp-static-ajax', function (cb) {
 //    return gulp
 //            .src([
@@ -190,6 +203,14 @@ gulp.task('save-project-online-java-demo-starter', function (cb) {
                 cb();
             });
 });
+gulp.task('save-project-online-java-user-demo-starter', function (cb) {
+    return gulp
+            .src(['temp/JavaTMP-User-Starter/build/web/**/*'], {dot: true})
+            .pipe(gulp.dest("temp/online-java-user-demo-starter"))
+            .on('end', function () {
+                cb();
+            });
+});
 gulp.task('process-javatmp-static-ajax', function (cb) {
     return gulp
             .src(['temp/JavaTMP-Static-Ajax/**/*.html'], {dot: true})
@@ -235,9 +256,19 @@ gulp.task('process-javatmp-java-ajax-starter', function (cb) {
                 cb();
             });
 });
+gulp.task('process-javatmp-user-starter', function (cb) {
+    return gulp
+            .src(['temp/JavaTMP-User-Starter/**/*.html', 'temp/JavaTMP-User-Starter/**/*.jsp'], {dot: true})
+            .pipe(processhtml())
+            .pipe(gulp.dest("temp/JavaTMP-User-Starter"))
+            .on('end', function () {
+                cb();
+            });
+});
 gulp.task('remove-demo-assets-src', function (cb) {
     del.sync([
         'temp/online-java-demo-starter/assets/src',
+        'temp/online-java-user-demo-starter/assets/src',
         'temp/online-static-demo-starter-rtl/assets/src',
         'temp/online-static-demo-starter/assets/src',
         'temp/online-static-demo-rtl/assets/src',
@@ -298,11 +329,28 @@ gulp.task('process-online-java-demo-starter', function (cb) {
             });
 });
 
+gulp.task('process-online-java-user-demo-starter', function (cb) {
+    return gulp
+            .src(['temp/online-java-user-demo-starter/**/*.html', 'temp/online-java-user-demo-starter/**/*.jsp'], {dot: true})
+            .pipe(htmlmin({collapseWhitespace: true,
+                minifyCSS: true,
+                minifyJS: true,
+                removeComments: true,
+                ignoreCustomComments: false,
+                keepClosingSlash: true,
+                ignoreCustomFragments: [/<%@[\s\S]*?%>/, /\$\{[\s\S]*?\}/, /<fmt:[\s\S]*?\/>/, /\{\{[\s\S]*?\}\}/]
+            }))
+            .pipe(gulp.dest("temp/online-java-user-demo-starter"))
+            .on('end', function () {
+                cb();
+            });
+});
+
 gulp.task('generate-online-static-demo-zip', function (cb) {
     return gulp.src(['temp/online-static-demo/**/*'], {dot: true})
             .pipe(chmod(0o644, true))
             .pipe(zip('javatmp-static-ajax.zip'))
-            .pipe(gulp.dest('temp'))
+            .pipe(gulp.dest('dist'))
             .on('end', function () {
                 cb();
             });
@@ -311,7 +359,7 @@ gulp.task('generate-online-static-demo-rtl-zip', function (cb) {
     return gulp.src(['temp/online-static-demo-rtl/**/*'], {dot: true})
             .pipe(chmod(0o644, true))
             .pipe(zip('javatmp-static-ajax-rtl.zip'))
-            .pipe(gulp.dest('temp'))
+            .pipe(gulp.dest('dist'))
             .on('end', function () {
                 cb();
             });
@@ -320,7 +368,7 @@ gulp.task('generate-online-static-demo-starter-zip', function (cb) {
     return gulp.src(['temp/online-static-demo-starter/**/*'], {dot: true})
             .pipe(chmod(0o644, true))
             .pipe(zip('javatmp-static-ajax-starter.zip'))
-            .pipe(gulp.dest('temp'))
+            .pipe(gulp.dest('dist'))
             .on('end', function () {
                 cb();
             });
@@ -329,7 +377,7 @@ gulp.task('generate-online-static-demo-starter-rtl-zip', function (cb) {
     return gulp.src(['temp/online-static-demo-starter-rtl/**/*'], {dot: true})
             .pipe(chmod(0o644, true))
             .pipe(zip('javatmp-static-ajax-starter-rtl.zip'))
-            .pipe(gulp.dest('temp'))
+            .pipe(gulp.dest('dist'))
             .on('end', function () {
                 cb();
             });
@@ -338,45 +386,36 @@ gulp.task('generate-online-java-demo-starter-war', function (cb) {
     return gulp.src(['temp/online-java-demo-starter/**/*'], {dot: true})
             .pipe(chmod(0o644, true))
             .pipe(zip('JavaTMP-Java-Ajax-Starter.war'))
-            .pipe(gulp.dest('temp'))
+            .pipe(gulp.dest('dist'))
             .on('end', function () {
                 cb();
             });
 });
+
+gulp.task('generate-online-java-user-demo-starter-war', function (cb) {
+    return gulp.src(['temp/online-java-user-demo-starter/**/*'], {dot: true})
+            .pipe(chmod(0o644, true))
+            .pipe(zip('JavaTMP-User-Starter.war'))
+            .pipe(gulp.dest('dist'))
+            .on('end', function () {
+                cb();
+            });
+});
+
 gulp.task('remove-online-static-demos-folders', function (cb) {
     del.sync([
         'temp/online-static-demo',
         'temp/online-static-demo-rtl',
         'temp/online-static-demo-starter',
         'temp/online-static-demo-starter-rtl',
-        'temp/online-java-demo-starter'
+        'temp/online-java-demo-starter',
+        'temp/JavaTMP-Java-Ajax-Starter/build',
+        'temp/JavaTMP-Java-Ajax-Starter/dist',
+        'temp/online-java-user-demo-starter',
+        'temp/JavaTMP-User-Starter/build',
+        'temp/JavaTMP-User-Starter/dist',
     ], cb());
 });
-//gulp.task('remove-embedded-code', function (cb) {
-//    return gulp.src('temp/JavaTMP-Static-Ajax/web/assets/src/js-src/javatmp.js')
-//            .pipe(eslint())
-//            .pipe(eslint.format())
-//            .pipe(processhtml())
-//            .pipe(uglify({output: {comments: /^!/}}))
-//            .pipe(rename({suffix: '.min'}))
-//            .pipe(gulp.dest('temp/JavaTMP-Static-Ajax/web/assets/js/')).on('end', function () {
-//        cb();
-//    });
-//});
-//gulp.task('remove-embedded-code-rtl', function (cb) {
-//    return gulp
-//            .src('temp/JavaTMP-Static-Ajax-RTL/web/assets/src/js-src/javatmp.js')
-//            .pipe(eslint())
-//            .pipe(eslint.format())
-//            .pipe(processhtml())
-//            .pipe(uglify({output: {comments: /^!/}}))
-//            .pipe(rename({suffix: '.min'}))
-//            .pipe(gulp.dest('temp/JavaTMP-Static-Ajax-RTL/web/assets/js/'))
-//            .on('end', function () {
-//                cb();
-//            });
-//});
-
 
 gulp.task('copy-readme', function (cb) {
     return gulp
@@ -423,6 +462,7 @@ gulp.task('save-projects',
                 'copy-JavaTMP-Static-Ajax-Starter',
                 'copy-JavaTMP-Static-Ajax-Starter-RTL',
                 'copy-JavaTMP-Java-Ajax-Starter',
+                'copy-JavaTMP-User-Starter',
 //                'license-javatmp-static-ajax',
 //                'license-javatmp-static-ajax-rtl',
                 'save-project-online-static-demo',
@@ -430,25 +470,27 @@ gulp.task('save-projects',
                 'save-project-online-static-demo-starter',
                 'save-project-online-static-demo-starter-rtl',
                 'save-project-online-java-demo-starter',
+                'save-project-online-java-user-demo-starter',
                 'process-javatmp-static-ajax',
                 'process-javatmp-static-ajax-rtl',
                 'process-javatmp-static-ajax-starter',
                 'process-javatmp-static-ajax-starter-rtl',
                 'process-javatmp-java-ajax-starter',
+                'process-javatmp-user-starter',
                 'remove-demo-assets-src',
                 'process-online-static-demo',
                 'process-online-static-demo-rtl',
                 'process-online-static-demo-starter',
                 'process-online-static-demo-starter-rtl',
                 'process-online-java-demo-starter',
+                'process-online-java-user-demo-starter',
                 'generate-online-static-demo-zip',
                 'generate-online-static-demo-rtl-zip',
                 'generate-online-static-demo-starter-zip',
                 'generate-online-static-demo-starter-rtl-zip',
                 'generate-online-java-demo-starter-war',
+                'generate-online-java-user-demo-starter-war',
                 'remove-online-static-demos-folders',
-//                'remove-embedded-code',
-//                'remove-embedded-code-rtl',
                 'copy-readme',
                 'zip',
                 function (cb) {
