@@ -33,11 +33,11 @@
                     <a class="d-flex align-items-center h-100 text-left nav-link dropdown-toggle" data-toggle="dropdown" href="#">
                         <c:choose>
                             <c:when test="${not empty sessionScope.user.profilePicDocument.documentId and not empty sessionScope.user.profilePicDocument.randomHash}">
-                                <img class="rounded-circle mr-1" width="40" height="40"
+                                <img class="rounded-circle mr-1" width="38" height="38"
                                      src="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${sessionScope.user.profilePicDocument.documentId}&amp;randomHash=${sessionScope.user.profilePicDocument.randomHash}&amp;viewType=inline" alt=""/>
                             </c:when>
                             <c:otherwise>
-                                <img class="rounded-circle mr-1" width="40" height="40"
+                                <img class="rounded-circle mr-1" width="38" height="38"
                                      src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt=""/>
                             </c:otherwise>
                         </c:choose>
