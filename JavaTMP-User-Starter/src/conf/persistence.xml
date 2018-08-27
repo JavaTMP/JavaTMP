@@ -21,6 +21,10 @@
             <property name="hibernate.globally_quoted_identifiers" value="false"/>
             <property name="hibernate.connection.useUnicode" value="true"/>
             <property name="hibernate.connection.characterEncoding" value="UTF8"/>
+
+            <!-- https://access.redhat.com/documentation/en-us/jboss_enterprise_application_platform/5/html/hibernate_core_reference_guide/architecture-current-session -->
+            <property name="hibernate.current_session_context_class" value="thread"/>
+
             <!-- Configuring Connection Pool -->
             <property name="hibernate.c3p0.min_size" value="0"/>
             <property name="hibernate.c3p0.max_size" value="1"/>
