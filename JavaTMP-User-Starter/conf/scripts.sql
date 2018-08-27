@@ -2,5 +2,5 @@
 -- mysqldump --complete-insert --extended-insert=FALSE --hex-blob -uroot -p  appdb > text.sql
 -- Command to import script to existing database called 'appdb'
 -- mysql -uroot -pmmmmmm -D appdb < build.sql
--- Run timezons inserter Java code: ./test/com.javatmp.timezones.TestingTimeZones
+-- Run timezons inserter Java code: ./test/com.javatmp.timezones.TestingPopulateTimezone
 -- Run users inserter Java code:  ./test/com.javatmp.PopulateDBFromJson
