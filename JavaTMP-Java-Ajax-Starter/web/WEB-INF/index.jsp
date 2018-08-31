@@ -987,6 +987,12 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a href="${pageContext.request.contextPath}/pages/table/dynamic-sortable-table">
+                                            <i class="far fa-lg fa-fw fa-list-alt"></i>
+                                            Dynamic Sortable Table
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a class="has-arrow" href="#">
                                             <i class="far fa-lg fa-fw fa-list-alt"></i>
                                             DataTables Plugin
@@ -1278,6 +1284,32 @@
                                                 <a target="_blank" action-name="login-page"  href="${pageContext.request.contextPath}/login?lang=${labels["global.language"]}">
                                                     <i class="far fa-lg fa-fw fa-file-alt"></i>
                                                     Default Login Page
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a class="has-arrow" href="#">
+                                            <i class="far fa-lg fa-fw fa-file-alt"></i>
+                                            Invoices Templates
+                                        </a>
+                                        <ul>
+                                            <li>
+                                                <a href="${pageContext.request.contextPath}/pages/custom-pages/invoice/create-invoice-form">
+                                                    <i class="far fa-lg fa-fw fa-file-alt"></i>
+                                                    Create Invoice Form
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="${pageContext.request.contextPath}/pages/custom-pages/invoice/invoice-template-1">
+                                                    <i class="far fa-lg fa-fw fa-file-alt"></i>
+                                                    Invoice Template 1
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="${pageContext.request.contextPath}/pages/custom-pages/invoice/invoice-template-2">
+                                                    <i class="far fa-lg fa-fw fa-file-alt"></i>
+                                                    Invoice Template 2
                                                 </a>
                                             </li>
                                         </ul>
