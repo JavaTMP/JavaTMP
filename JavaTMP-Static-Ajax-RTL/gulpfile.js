@@ -265,6 +265,9 @@ var config = {
         ],
         "numeral": [
             {"from": "${sourceNodeLib}/numeral/min/numeral.min.js", "to": "${destComponentsLib}/numeral/min"}
+        ],
+        "moment-timezone": [
+            {"from": "${sourceNodeLib}/moment-timezone/builds/moment-timezone-with-data.min.js", "to": "${destComponentsLib}/moment-timezone/builds"}
         ]
 
     }

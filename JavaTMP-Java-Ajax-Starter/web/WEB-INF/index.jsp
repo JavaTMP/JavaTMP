@@ -858,6 +858,12 @@
                                             Bootstrap ContextMenu Plugin
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="pages/plugins/moment.js">
+                                            <i class="far fa-lg fa-fw fa-gem"></i>
+                                            Moment.js Date/Time Plugin
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li>

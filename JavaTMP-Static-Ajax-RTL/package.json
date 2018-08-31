@@ -71,7 +71,8 @@
     "jquery.fancytree": "^2.29.1",
     "file-saver": "^1.3.8",
     "numeral" : "2.0.6",
-    "@fortawesome/fontawesome-free": "^5.2.0"
+    "@fortawesome/fontawesome-free": "^5.2.0",
+    "moment-timezone": "^0.5.21"
   },
   "devDependencies": {
     "del": "^3.0.0",
