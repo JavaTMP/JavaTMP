@@ -16,7 +16,7 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <form accept-charset="utf-8" enctype="multipart/form-data" autocomplete="off" id="UpdateCurrentUserFormId" class="form"
+                            <form accept-charset="UTF-8" enctype="multipart/form-data" autocomplete="off" id="UpdateCurrentUserFormId" class="form"
                                   action="${pageContext.request.contextPath}/user/CurrentUserProfileController" method="post" novalidate="novalidate">
                                 <div class="form-row">
                                     <div class="col-sm-3">
@@ -253,6 +253,7 @@
             var validator = null;
 
             form.ajaxForm({
+                contentType: "multipart/form-data;charset=UTF-8",
 //                iframe: true,
                 clearForm: false, // clear all form fields after successful submit
                 resetForm: false, // reset the form after successful submit
