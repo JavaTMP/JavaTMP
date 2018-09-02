@@ -81,6 +81,7 @@
                         debugDelay: 200,
                         cache: true
                     },
+                    scrollParent: window,
                     postProcess: function (event, data) {
                         data.result = data.response.data;
                     },

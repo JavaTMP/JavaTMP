@@ -135,6 +135,7 @@
                         debugDelay: 500,
                         cache: false
                     },
+                    scrollParent: window,
                     init: function (event, data) {
 //                        data.tree.getRootNode().sortChildren(function (a, b) {
 //                            var x = a.key,
