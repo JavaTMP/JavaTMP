@@ -22,7 +22,7 @@
         <link href="${pageContext.request.contextPath}/assets/dist/css/font-family-${labels['global.language']}.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <body class="sidebar-active">
-        <div id="oneTimeOverlay" style="position: fixed;width: 100%;height: 100%;top: 0px;left: 0;right: 0;bottom: 0;background-color: rgba(255,255,255,1);z-index: 1000000;cursor: wait;">Loading ...</div>
+        <div id="oneTimeOverlay" style="position: fixed;width: 100%;height: 100%;top: 0px;left: 0;right: 0;bottom: 0;background-color: rgba(255,255,255,1);z-index: 1000000;cursor: wait;">${labels['global.loadingText']}</div>
         <nav class="main-javatmp-navbar navbar fixed-top my-0 py-0">
             <a class="text-center navbar-brand mr-auto d-none d-md-flex align-items-stretch" href="${pageContext.request.contextPath}/">
                 <span class="d-xl-none d-lg-none d-sm-inline">${labels['global.system.name.short']}</span>
@@ -42,7 +42,7 @@
                             </c:otherwise>
                         </c:choose>
                         <span class="d-none d-md-inline">
-                            <small class="d-flex">Welcome,</small>
+                            <small class="d-flex">${labels['navbar.user.welcome']}</small>
                             ${sessionScope.user.firstName}&nbsp;${sessionScope.user.lastName}
                         </span>
                     </a>
@@ -53,14 +53,14 @@
                                href="#"
                                action-ref-by-href="${pageContext.request.contextPath}/user/CurrentUserProfileController">
                                 <i class="fa fa-lg fa-fw fa-user"></i>
-                                User Settings
+                                ${labels['navbar.user.settings']}
                             </a>
                         </li>
                         <li class="dropdown-divider"></li>
                         <li>
                             <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">
                                 <i class="fa fa-lg fa-fw fa-sign-out-alt"></i>
-                                Logout
+                                ${labels['navbar.user.logout']}
                             </a>
                         </li>
                     </ul>

@@ -60,9 +60,9 @@ public class RegisterController extends HttpServlet {
         User user = new User();
         ResponseMessage responseMessage = new ResponseMessage();
         try {
-            Captcha captcha = (Captcha) session.getAttribute(Captcha.NAME);
             String captchaAnswer = request.getParameter("captchaAnswer");
-            if (captcha.isCorrect(captchaAnswer)) {
+            Captcha captcha = (Captcha) session.getAttribute(Captcha.NAME);
+            if (captcha != null && captcha.isCorrect(captchaAnswer)) {
                 MvcHelper.populateBeanByRequestParameters(request, user);
                 logger.info("User to be Registerd [" + MvcHelper.deepToString(user) + "]");
 
@@ -73,7 +73,7 @@ public class RegisterController extends HttpServlet {
                 responseMessage.setRedirectURL(request.getContextPath() + "/");
             } else {
                 responseMessage.setOverAllStatus(false);
-                responseMessage.setMessage("Wrong Characters typed from the image");
+                responseMessage.setMessage("Wrong Characters typed from the captcha image");
             }
 
         } catch (PersistenceException e) {
