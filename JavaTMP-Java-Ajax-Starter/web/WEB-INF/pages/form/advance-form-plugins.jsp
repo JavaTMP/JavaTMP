@@ -26,13 +26,19 @@
                                 <div class="form-row">
                                     <div class="col-lg-12">
                                         <div class="form-row">
-                                            <div class="col-lg-3">
+                                            <div class="col-lg-2">
                                                 <div class="form-group">
-                                                    <label class="control-label">Full Name</label>
-                                                    <input class="form-control" type="text" placeholder="Full Name" name="fullName">
+                                                    <label class="control-label">First Name</label>
+                                                    <input class="form-control" type="text" placeholder="First Name" name="firstName">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-3">
+                                            <div class="col-lg-2">
+                                                <div class="form-group">
+                                                    <label class="control-label">Last Name</label>
+                                                    <input class="form-control" type="text" placeholder="Last Name" name="lastName">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2">
                                                 <div class="form-group">
                                                     <label class="control-label">Email</label>
                                                     <input class="form-control" type="text" placeholder="Email" name="email">
@@ -393,8 +399,12 @@
                 ignore1: ":hidden:not(.forceValidate)",
                 ignore: ":hidden:not(.forceValidate), [contenteditable='true']:not([name])",
                 rules: {
-                    fullName: {
-                        required: true},
+                    firstName: {
+                        required: true
+                    },
+                    lastName: {
+                        required: true
+                    },
                     email: {
                         required: true,
                         email: true,
@@ -437,8 +447,11 @@
                     }
                 },
                 messages: {
-                    fullName: {
-                        required: "Kindly provide us with your full name"
+                    firstName: {
+                        required: "Kindly provide us with your first name"
+                    },
+                    lastName: {
+                        required: "Kindly provide us with your last name"
                     },
                     email: {
                         required: "Kindly provide your email address",

@@ -87,8 +87,6 @@ public class CreateUserController extends HttpServlet {
             userToBeCreated.setCreationDate(new Date());
             userToBeCreated.setJoiningDate(new Date());
             userToBeCreated.setSalary(BigDecimal.ZERO);
-            userToBeCreated.setFirstName("");
-            userToBeCreated.setLastName("");
             userToBeCreated.setPosition("");
             userToBeCreated.setOffice("");
             userToBeCreated.setMobile("");
