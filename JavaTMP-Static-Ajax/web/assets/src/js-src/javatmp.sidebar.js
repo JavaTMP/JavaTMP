@@ -1,8 +1,9 @@
 /*!
- * JavaTMP Main JS File.
+ * JavaTMP Sidebar JS File.
  */
 (function ($) {
-    window.javatmp.setup = function () {
+    window.javatmp.sidebar = window.javatmp.sidebar || {};
+    window.javatmp.sidebar.init = function () {
 
         // listen to transition on sidebar instead of fixed wait to trigger event
         $('.sidebar').on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', function (event) {

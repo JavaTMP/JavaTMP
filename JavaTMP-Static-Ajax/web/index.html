@@ -1491,7 +1491,7 @@
         <script src="assets/js/javatmp.init.min.js" type="text/javascript"></script>
         <script src="assets/js/javatmp.ajax.min.js" type="text/javascript"></script>
         <script src="assets/js/javatmp.util.min.js" type="text/javascript"></script>
-        <script src="assets/js/javatmp.min.js"></script>
+        <script src="assets/js/javatmp.sidebar.min.js" type="text/javascript"></script>
         <!-- custom style for sidebar menu search text field -->
         <style type="text/css">
             .has-feedback-icon {
@@ -1611,6 +1611,7 @@
                 };
                 javatmp.init(defaults);
                 javatmp.ajax.init();
+                javatmp.sidebar.init();
 
 
 // default parameters for mCustomScrollBar Plugin.
@@ -1641,8 +1642,6 @@
                     $(".sidebar").mCustomScrollbar("scrollTo", scrollTopValue, {scrollInertia: 1000});
                 }).on('hidden.metisMenu', function (event) {
                 });
-
-                javatmp.setup();
 
                 // Override Some of Bootstrap Actionable plugin parameters
                 BootstrapActionable.options = {
