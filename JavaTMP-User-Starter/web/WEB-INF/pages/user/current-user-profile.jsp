@@ -253,8 +253,6 @@
             var validator = null;
 
             form.ajaxForm({
-                contentType: "multipart/form-data;charset=UTF-8",
-//                iframe: true,
                 clearForm: false, // clear all form fields after successful submit
                 resetForm: false, // reset the form after successful submit
                 beforeSerialize: function ($form, options) {

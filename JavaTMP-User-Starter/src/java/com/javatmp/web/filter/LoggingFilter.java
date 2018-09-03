@@ -31,6 +31,14 @@ public class LoggingFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain) throws IOException, ServletException {
+        logger.info("request.getCharacterEncoding() [" + request.getCharacterEncoding() + "] request.getContentType() [" + request.getContentType() + "]");
+        if (request.getCharacterEncoding() == null) {
+//            String encoding = selectEncoding(request);
+            request.setCharacterEncoding("UTF-8");
+//            if (encoding != null) {
+//                request.setCharacterEncoding("UTF-8");
+//            }
+        }
 
         Date creationDate = new Date();
         long startTime = creationDate.getTime();
