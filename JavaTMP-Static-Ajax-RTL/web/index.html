@@ -1482,6 +1482,7 @@
         <script src="components/bootstrap-card-extender/dist/bootstrap-card-extender.min.js" type="text/javascript"></script>
         <script src="components/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js" type="text/javascript"></script>
         <script src="assets/js/javatmp.init.min.js" type="text/javascript"></script>
+        <script src="assets/js/javatmp.ajax.min.js" type="text/javascript"></script>
         <script src="assets/js/javatmp.util.min.js" type="text/javascript"></script>
         <script src="assets/js/javatmp.min.js"></script>
         <!-- custom style for sidebar menu search text field -->
@@ -1621,8 +1622,8 @@
         <!-- /build -->
         <script type="text/javascript">
             jQuery(function ($) {
-                var defaults = {
-                    httpMethod: "GET",
+            var defaults = {
+            httpMethod: "GET",
                     dataType: "html",
                     updateURLHash: true,
                     defaultPassData: {_ajax: "ajax", _ajaxGlobalBlockUI: true},
@@ -1632,10 +1633,10 @@
                     floatReverse: 'left',
                     direction: "rtl",
                     isRTL: true
-                };
-                javatmp.init(defaults);
-                javatmp.setup();
-            });
+            };
+                    javatmp.init(defaults);
+                    javatmp.ajax.init();
+                    javatmp.setup();
         </script>
     </body>
 </html>

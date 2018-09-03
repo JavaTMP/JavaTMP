@@ -251,12 +251,11 @@
         jQuery(function ($) {
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
-
-
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
 
-                $(javatmp.settings.defaultOutputSelector).find('.scroll-content').mCustomScrollbar(javatmp.mCustomScrollbarOptions);
+                $(javatmp.settings.defaultOutputSelector).find('.scroll-content')
+                        .mCustomScrollbar(javatmp.settings.mCustomScrollbarOptions);
 
                 $(".dropdown-menu.update-item-after-select a.dropdown-item").click(function () {
                     $(".dropdown-menu.update-item-after-select a.dropdown-item").removeClass('active');

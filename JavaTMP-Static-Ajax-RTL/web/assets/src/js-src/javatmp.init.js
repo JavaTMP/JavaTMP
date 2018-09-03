@@ -82,7 +82,7 @@
 
     window.javatmp.init = function (options) {
         // initialize application settings from default and options paramters:
-        window.javatmp.settings = $.extend(true, {}, window.javatmp.defaults, options);
+        $.extend(true, window.javatmp.settings, window.javatmp.defaults, options);
     };
 }(jQuery));
 

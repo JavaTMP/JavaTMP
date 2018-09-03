@@ -1489,6 +1489,7 @@
         <script src="components/bootstrap-card-extender/dist/bootstrap-card-extender.min.js" type="text/javascript"></script>
         <script src="components/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js" type="text/javascript"></script>
         <script src="assets/js/javatmp.init.min.js" type="text/javascript"></script>
+        <script src="assets/js/javatmp.ajax.min.js" type="text/javascript"></script>
         <script src="assets/js/javatmp.util.min.js" type="text/javascript"></script>
         <script src="assets/js/javatmp.min.js"></script>
         <!-- custom style for sidebar menu search text field -->
@@ -1609,7 +1610,216 @@
                     defaultUrl: 'pages/home.html'
                 };
                 javatmp.init(defaults);
+                javatmp.ajax.init();
+
+
+// default parameters for mCustomScrollBar Plugin.
+                javatmp.settings.mCustomScrollbarOptions = {
+                    theme: "javatmp",
+                    alwaysShowScrollbar: 0,
+                    scrollInertia: 0,
+                    mouseWheel: {
+                        preventDefault: true,
+                        scrollAmount: 85
+                    },
+                    advanced: {
+                        autoScrollOnFocus: false,
+                        updateOnContentResize: true
+                    }
+                };
+
+                $('.scroll-content').mCustomScrollbar(javatmp.settings.mCustomScrollbarOptions);
+
+                $('.metismenu').metisMenu({
+                    toggle: false,
+                    preventDefault: true
+                }).on('shown.metisMenu', function (event) {
+                    // https://stackoverflow.com/questions/2905867/how-to-scroll-to-specific-item-using-jquery
+                    var scrollTopValue = $(event.target).parent('li').offset().top
+                            - $('.sidebar .mCSB_container').offset().top
+                            + $('.sidebar .mCSB_container').scrollTop();
+                    $(".sidebar").mCustomScrollbar("scrollTo", scrollTopValue, {scrollInertia: 1000});
+                }).on('hidden.metisMenu', function (event) {
+                });
+
                 javatmp.setup();
+
+                // Override Some of Bootstrap Actionable plugin parameters
+                BootstrapActionable.options = {
+                    loadingHtml: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
+                    ajaxHttpMethod: "GET",
+                    ajaxContainerReady: javatmp.settings.javaTmpAjaxContainerReady
+                };
+                // Override Some of Bootstrap Card Extender plugin parameters
+                BootstrapCardExtender.options = {
+                    cardFullscreenExpand: javatmp.settings.cardFullscreenExpand,
+                    cardFullscreenCompress: javatmp.settings.cardFullscreenCompress
+                };
+
+
+                $.fn.BootstrapActionable = function (options) {
+                    function BootstrapActionable(element, defaults) {
+                        this.options = $.extend(true, {}, {
+                            rootDomElement: element
+                        }, defaults);
+                    }
+
+                    function populate(populateOptions) {
+                        var $this = populateOptions.linkElement;
+                        var event = populateOptions.linkEvent;
+                        event.preventDefault();
+                        var javaTmpRemoveEvent = $.Event(javatmp.settings.javaTmpContainerRemoveEventName, {_newTarget: $this});
+                        $(javatmp.settings.defaultOutputSelector).trigger(javaTmpRemoveEvent).promise().done(function () {
+                            if (!javaTmpRemoveEvent.isDefaultPrevented()) {
+                                $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.javaTmpAjaxContainerReady).promise().done(function () {
+                                    $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.javaTmpContainerResizeEventName).promise().done(function () {
+                                        $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.javaTmpContainerRemoveEventName).promise().done(function () {
+                                            $(javatmp.settings.defaultOutputSelector).off(javaTmpRemoveEvent).promise().done(function () {
+                                                $.ajax({
+                                                    type: javatmp.settings.httpMethod,
+                                                    async: true,
+                                                    cache: true,
+                                                    dataType: javatmp.settings.dataType,
+                                                    url: $this.attr("href"),
+                                                    data: javatmp.settings.defaultPassData,
+                                                    beforeSend: function (jqXHR, settings) {
+                                                        if (javatmp.settings.updateURLHash === true) {
+                                                            window.location.hash = $this.attr("href");
+                                                        }
+
+                                                        $('.metismenu a.active').removeClass("active");
+
+                                                        $this.addClass('active');
+                                                        $this.parents("li").addClass("active");
+                                                        $this.parents("ul").css({"height": "auto"});
+                                                        $this.parents("ul").addClass("in");
+
+                                                        if (javatmp.util.isWidthSmall() || ($("body").hasClass("mouse-auto-show") && $('body').hasClass("sidebar-active"))) {
+                                                            clearTimeout(menuTimeout);
+                                                            menuTimeout = null;
+                                                            $("body").removeClass("mouse-auto-show");
+                                                            $('body').removeClass("sidebar-active");
+                                                            $(window).off('mousemove', handlingMouseMove);
+                                                        }
+
+                                                        var scrollTopValue = $this.offset().top
+                                                                - $('.sidebar .mCSB_container').offset().top
+                                                                + $('.sidebar .mCSB_container').scrollTop();
+                                                        $(".sidebar").mCustomScrollbar("scrollTo", scrollTopValue, {scrollInertia: 1000});
+
+                                                        var currentItem = $this;
+                                                        $(".breadcrumb").html("");
+
+                                                        $(currentItem.parents("li").get().reverse()).each(function () {
+                                                            var element = $(this).children("a").clone();
+//                                        $(element).addClass("breadcrumb-item");
+                                                            element.find('i').remove();
+//                              element = element.replace(/<(?:.|\n)*?>/gm, '');
+                                                            element.html(element.text());
+                                                            $("<li/>").addClass("breadcrumb-item").append(element).appendTo($(".breadcrumb"));
+                                                        });
+                                                        // You can clean Ajax Default Output Selector before send request.
+                                                        // and then add an ajax indicator.
+                                                        $(javatmp.settings.defaultOutputSelector).html("Loading ...");
+                                                    },
+                                                    success: function (response, textStatus, jqXHR) {
+                                                        $(javatmp.settings.defaultOutputSelector).html(response).promise().done(function () {
+//                                                $('html').animate({scrollTop: 0}, 'slow').promise().done(function () {
+//                                                    $(javatmp.settings.defaultOutputSelector).trigger(javatmp.settings.javaTmpAjaxContainerReady);
+//                                                });
+                                                            setTimeout(function () {
+                                                                $(javatmp.settings.defaultOutputSelector).trigger(javatmp.settings.javaTmpAjaxContainerReady);
+                                                            }, 0);
+                                                        });
+                                                    },
+                                                    error: function (jqXHR, textStatus, errorThrown) {
+                                                        $(javatmp.settings.defaultOutputSelector).html("Error Loading Request !!!");
+                                                    }
+                                                });
+                                            });
+                                        });
+                                    });
+                                });
+                            }
+                        });
+                    }
+
+                    BootstrapActionable.prototype.populateByUrl = function (options) {
+                        populate(options);
+                    };
+                    BootstrapActionable.prototype.populateByLinkEvent = function (options) {
+                        populate(options);
+                    };
+                    //expose methods
+                    if (typeof options === 'string') {
+                        var args = Array.prototype.slice.call(arguments, 1);
+                        if ($.isFunction(this.data('BootstrapActionable')[options])) {
+                            return this.data('BootstrapActionable')[options].apply(this.data('BootstrapActionable'), args);
+                        } else {
+                            throw new Error("Function [" + options + "] does not found in plugin BootstrapActionable");
+                        }
+                    }
+                    return this.each(function (index) {
+                        var element = $(this);
+
+                        // Return early if this element already has a plugin instance
+                        if (element.data('BootstrapActionable'))
+                            return element.data('BootstrapActionable');
+                        // pass options to plugin constructor
+                        var bootstrapActionableInstance = new BootstrapActionable(element, options);
+                        // Store plugin object in this element's data
+                        element.data('BootstrapActionable', bootstrapActionableInstance);
+                        return bootstrapActionableInstance;
+                    });
+                };
+
+                $(javatmp.settings.defaultOutputSelector).BootstrapActionable({
+
+                });
+//                $(javatmp.settings.defaultOutputSelector).BootstrapActionable({}).BootstrapActionable("populateByUrl", {
+//                    url: "pages/home.html"
+//                });
+//
+//                $(javatmp.settings.defaultOutputSelector).BootstrapActionable("populateByLinkEvent", {
+//                    linkElement: "linkElement",
+//                    event: "event"
+//                });
+
+                // listen on click event on breadcrumb bar's links
+                $(".main-breadcrumb-bar").on("click", 'a[target!="_blank"][href!="#"]', function (event) {
+                    event.preventDefault();
+                    $('.metismenu a[href="' + $(this).attr("href") + '"]').trigger("click");
+                });
+
+                // Initialize and define main AJAX lifecycle for template by listening on click event of sidebar's metismenu links.
+                $(".metismenu").on("click", 'a[target!="_blank"][href!="#"]', function (event) {
+                    $(javatmp.settings.defaultOutputSelector).BootstrapActionable("populateByLinkEvent", {
+                        linkElement: $(this),
+                        linkEvent: event
+                    });
+                });
+
+                // Trigger the initial click event on sidebar <a> links
+                // which its href equal URL hash String or the defaultUrl String
+                if (javatmp.settings.updateURLHash === true) {
+                    var loc = window.location.href,
+                            index = loc.indexOf('#');
+                    if (index > 0 && window.location.hash.length > 1) {
+                        var ajaxUrl = window.location.hash.replace('#', '');
+                        $('a[href="' + ajaxUrl + '"]').trigger("click");
+                    } else {
+                        $('a[href="' + javatmp.settings.defaultUrl + '"]').trigger("click");
+                    }
+                } else {
+                    var loc = window.location.href,
+                            index = loc.indexOf('#');
+                    if (index > 0) {
+                        window.location.replace(loc.substring(0, index));
+                    } else {
+                        $('a[href="' + javatmp.settings.defaultUrl + '"]').trigger("click");
+                    }
+                }
+
             });
         </script>
     </body>
