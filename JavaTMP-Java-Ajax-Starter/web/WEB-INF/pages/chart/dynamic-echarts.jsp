@@ -658,7 +658,7 @@
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
                 // fire when user resize browser window or sidebar hide / show
-                javatmp.waitForFinalEvent(function () {
+                javatmp.util.waitForFinalEvent(function () {
                     barChart.resize();
                     lineChart.resize();
                     doughnutChart.resize();

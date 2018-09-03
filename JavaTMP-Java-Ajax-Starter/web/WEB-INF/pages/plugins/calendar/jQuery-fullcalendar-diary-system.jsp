@@ -224,7 +224,7 @@
                                         label: "Return And Refresh",
                                         cssClass: "btn btn-success",
                                         action: function (modalWrapper, button, buttonData, originalEvent) {
-                                            javatmp.waitForFinalEvent(function () {
+                                            javatmp.util.waitForFinalEvent(function () {
                                                 $('#web-diary-calendar').fullCalendar('refetchEvents');
                                             }, 100, "fullCalendar-update-event");
                                             modalWrapper.hide();
@@ -255,7 +255,7 @@
                                         label: "Return And Refresh",
                                         cssClass: "btn btn-success",
                                         action: function (modalWrapper, button, buttonData, originalEvent) {
-                                            javatmp.waitForFinalEvent(function () {
+                                            javatmp.util.waitForFinalEvent(function () {
                                                 $('#web-diary-calendar').fullCalendar('refetchEvents');
                                             }, 100, "fullCalendar-populateFakeDatabase");
                                             modalWrapper.hide();

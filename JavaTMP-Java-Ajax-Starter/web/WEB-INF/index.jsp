@@ -1481,6 +1481,7 @@
                     isRTL: ${labels['global.direction'] == 'ltr' ? 'false' : 'true'},
                     contextPath: '${pageContext.request.contextPath}'
                 });
+                javatmp.setup();
 
                 javatmp.user = {};
                 javatmp.user.id = ${sessionScope.user.id};

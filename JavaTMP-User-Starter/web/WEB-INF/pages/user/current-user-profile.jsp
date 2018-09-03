@@ -281,7 +281,7 @@
                                 label: "Close And Refresh",
                                 cssClass: "btn btn-primary",
                                 action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    javatmp.waitForFinalEvent(function () {
+                                    javatmp.util.waitForFinalEvent(function () {
                                         window.location.reload(true);
                                     }, 200, "@update-current-user-profile");
                                     return modalWrapper.hide();

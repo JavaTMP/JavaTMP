@@ -316,6 +316,8 @@
                     contextPath: '${pageContext.request.contextPath}'
                 });
 
+                javatmp.setup();
+
                 javatmp.user = {};
                 javatmp.user.id = ${sessionScope.user.id};
                 javatmp.user.lang = "${sessionScope.user.lang}";

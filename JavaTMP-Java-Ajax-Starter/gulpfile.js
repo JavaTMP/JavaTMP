@@ -461,11 +461,14 @@ gulp.task('generate-dist', ['copy-components', "delete-dist", "delete-css", "del
         },
         function (next) {
             console.log("Compile and generate js-src");
-            gulp.src('./web/assets/src/js-src/**/*')
+            gulp.src([
+                './web/assets/src/js-src/javatmp.init.js',
+                './web/assets/src/js-src/javatmp.util.js',
+                './web/assets/src/js-src/javatmp.js'])
                     .pipe(eslint())
                     .pipe(eslint.format())
                     .pipe(uglify({output: {comments: /^!/}}))
-                    .pipe(rename({suffix: '.min'}))
+                    .pipe(concat("javatmp.min.js", {newLine: '\n'}))
                     .pipe(gulp.dest('./web/assets/dist/js/'))
                     .on('end', next);
         },

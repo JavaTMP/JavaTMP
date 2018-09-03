@@ -77,11 +77,11 @@
                 modal.setOnDestroy(function (modalWrapper) {
                     modalWrapper.setOnDestroy(null);
                     // here we run passing function name as a remote callback
-                    javatmp.waitForFinalEvent(function () {
+                    javatmp.util.waitForFinalEvent(function () {
                         if ($.isFunction(modal.options.passData.callback)) {
                             modal.options.passData.callback.apply();
                         } else if ($.type(modal.options.passData.callback) === "string") {
-                            javatmp.executeFunctionByName(modal.options.passData.callback, window, callbackData);
+                            javatmp.util.executeFunctionByName(modal.options.passData.callback, window, callbackData);
                         }
                     }, 200, "@usersLookupPopup");
                     return true;
@@ -120,7 +120,7 @@
                         var idFilterInput = $("#userlist-id-filter");
                         idFilterInput.on('keyup', function () {
                             var $this = $(this);
-                            javatmp.waitForFinalEvent(function () {
+                            javatmp.util.waitForFinalEvent(function () {
                                 var val = $.fn.dataTable.util.escapeRegex($this.val());
                                 api.column(0).search(val ? val : '', true, false).draw();
                             }, 200, "@userlist-main-table-filter");
@@ -128,7 +128,7 @@
                         var usernameFilterInput = $("#userlist-username-filter");
                         usernameFilterInput.on('keyup', function () {
                             var $this = $(this);
-                            javatmp.waitForFinalEvent(function () {
+                            javatmp.util.waitForFinalEvent(function () {
                                 var val = $.fn.dataTable.util.escapeRegex($this.val());
                                 api.column(1).search(val ? val : '', true, false).draw();
                             }, 200, "@userlist-main-table-filter");

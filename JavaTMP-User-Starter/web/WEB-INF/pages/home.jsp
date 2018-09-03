@@ -928,7 +928,7 @@
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
                 // fire when user resize browser window or sidebar hide / show
                 // we resize the current charts:
-                javatmp.waitForFinalEvent(function () {
+                javatmp.util.waitForFinalEvent(function () {
                     userStatusPieChart.resize();
                     todayVisitUserPieChart.resize();
                     pageViewActivitesPerHourChart.resize();

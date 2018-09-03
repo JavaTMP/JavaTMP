@@ -2,89 +2,7 @@
  * JavaTMP Main JS File.
  */
 (function ($) {
-
-    window.javatmp = {};
-
-    window.javatmp.defaults = {
-        // Http method to use when calling any ajax requests passing to jquery $.ajax
-        httpMethod: "GET",
-
-        // Datatype of ajax content passing to jquery $.ajax
-        dataType: "html",
-
-        // update browser hash with ajax url parts or not.
-        // sometime you want to forbbid URL bookmarking or sharing so set it to false.
-        updateURLHash: true,
-
-        // extra parameters to send with the ajax requests or for managing template.
-        // useful to notify your remote server.
-        // Setting _ajaxGlobalBlockUI parameter to true will use BlockUI plugin
-        // and block browser page and indicate to user
-        // Setting _ajaxGlobalBlockUI parameter to false will NOT use BlockUI plugin
-        // and The ajax request will silent and the user can operate in the site.
-        // Setting _handleAjaxErrorGlobally to false will not handle any error globally and it is responsibilites to handle it.
-        defaultPassData: {_ajax: "ajax", _ajaxGlobalBlockUI: true, _handleAjaxErrorGlobally: true},
-
-        // Main Output selector for ajax request content.
-        // it should be one and only one.
-        defaultOutputSelector: '.main-body-content-container',
-
-        // Whenever the browser resize on all devices
-        // or user press collapse button to hide or show the sidebar on large screen only.
-        // The template fire this event on defaultOutputSelector element above.
-        javaTmpContainerResizeEventName: "javatmp-container-resize",
-
-        // whenever the sidebar metismenu link click,
-        // the template fire this event on defaultOutputSelector
-        // and waiting until event's handler code finish and if the return value
-        // from event's handler code is false or event.preventDefault() was called
-        // will cancel current ajax request and keep you in the current page.
-        // You can run any destruction code in this event's handler function.
-        javaTmpContainerRemoveEventName: "javatmp-container-remove",
-
-        // Whenever card's copress fullscreen button press the event fire
-        // on defaultOutputSelector selector
-        // with card object as parameter to handler fuction.
-        cardFullscreenCompress: "card.fullscreen.compress",
-
-        // Whenever card's expand fullscreen button press the event fire
-        // on defaultOutputSelector selector
-        // with card object as parameter to handler fuction.
-        cardFullscreenExpand: "card.fullscreen.expand",
-
-        // After the ajax request finished and content fetched and updated the page
-        // the tempalte fire this event on defaultOutputSelector.
-        // it is considered the safest way to run your initialiation code regarding new content.
-        javaTmpAjaxContainerReady: "javatmp-ajax-container-ready",
-
-        // Default url string to start the template from.
-        // after template load it search for this string in href attribute
-        // in sidebar's metismenu to fire a click on.
-        defaultUrl: 'pages/home.html',
-
-        // default float or direction used
-        floatDefault: "left",
-
-        // reverse float or direction used.
-        floatReverse: 'right',
-
-        // direction of the document:
-        direction: "ltr",
-
-        // attribute for some of plugins that support RTL through initialization parameter.
-        isRTL: false,
-
-        // additional string work as a URL contextPath of your web application
-        contextPath: ""
-    };
-
-    window.javatmp.settings = {};
-
-    window.javatmp.init = function (options) {
-
-        // initialize application settings from default and options paramters:
-        this.settings = $.extend({}, this.defaults, options);
-
+    window.javatmp.setup = function () {
         // initialize global jquery ajax configuration:
         $.ajaxSetup({
             async: true,
@@ -173,16 +91,16 @@
                     && (event.originalEvent.propertyName)
                     && (event.originalEvent.propertyName.indexOf("margin-" + javatmp.settings.floatDefault) !== -1)) {
                 $(".sidebar-toggler-button").prop('disabled', false);
-                if ((javatmp.isWidthSmall() === false)) {
+                if ((javatmp.util.isWidthSmall() === false)) {
                     $(javatmp.settings.defaultOutputSelector).trigger(javatmp.settings.javaTmpContainerResizeEventName);
                 }
             } else {
                 // re cheek if auto-show is activiated or not bug in ie11 & edge:
-                if ((javatmp.isWidthSmall() === false)
+                if ((javatmp.util.isWidthSmall() === false)
                         && ($("body").hasClass("mouse-auto-show") === false)
                         && ($('body').hasClass("sidebar-active") === false)) {
                     setTimeout(function () {
-                        if ((javatmp.isWidthSmall() === false)
+                        if ((javatmp.util.isWidthSmall() === false)
                                 && ($("body").hasClass("mouse-auto-show") === false)
                                 && ($('body').hasClass("sidebar-active") === false)) {
                             $("body").addClass("mouse-auto-show");
@@ -217,7 +135,7 @@
             if ($('body').hasClass("sidebar-active")) {
                 $("body").removeClass("sidebar-active");
                 // activate mouse on desktop and large devices:
-                if (!javatmp.isWidthSmall()) {
+                if (!javatmp.util.isWidthSmall()) {
                     $("body").addClass("mouse-auto-show");
                     // just in case:
 //                    $(window).off('mousemove', handlingMouseMove);
@@ -281,7 +199,7 @@
                                     $this.parents("ul").css({"height": "auto"});
                                     $this.parents("ul").addClass("in");
 
-                                    if (javatmp.isWidthSmall() || ($("body").hasClass("mouse-auto-show") && $('body').hasClass("sidebar-active"))) {
+                                    if (javatmp.util.isWidthSmall() || ($("body").hasClass("mouse-auto-show") && $('body').hasClass("sidebar-active"))) {
                                         clearTimeout(menuTimeout);
                                         menuTimeout = null;
                                         $("body").removeClass("mouse-auto-show");
@@ -366,74 +284,6 @@
             cardFullscreenExpand: javatmp.settings.cardFullscreenExpand,
             cardFullscreenCompress: javatmp.settings.cardFullscreenCompress
         };
-
-    };
-
-    window.javatmp.getFixedOffset = function () {
-
-        var retOffset = 0;
-        retOffset = retOffset + $('.main-javatmp-navbar').outerHeight(true);
-        retOffset = retOffset + $('.main-breadcrumb-bar').outerHeight(true);
-        return retOffset;
-
-    };
-
-    window.javatmp.isWidthSmall = function () {
-        var width = (window.innerWidth > 0) ? window.innerWidth : this.screen.width;
-        if ((width < 768)) {
-            return true;
-        } else {
-            return false;
-        }
-    };
-
-// http://stackoverflow.com/questions/1397329/how-to-remove-the-hash-from-window-location-with-javascript-without-page-refresh/5298684#5298684
-    window.javatmp.removeHash = function () {
-        var scrollV, scrollH, loc = window.location;
-        if ("pushState" in history)
-            history.replaceState("", document.title, loc.pathname + loc.search);
-        else {
-            // Prevent scrolling by storing the page's current scroll offset
-            scrollV = (document.documentElement && document.documentElement.scrollTop) ||
-                    document.body.scrollTop;
-            scrollH = (document.documentElement && document.documentElement.scrollLeft) ||
-                    document.body.scrollLeft;
-
-            loc.hash = "";
-
-            // Restore the scroll offset, should be flicker free
-            document.body.scrollTop = scrollV;
-            document.body.scrollLeft = scrollH;
-        }
-    };
-
-// http://stackoverflow.com/a/4541963/1461221
-    window.javatmp.waitForFinalEvent = (function () {
-        var timers = {};
-        return function (callback, ms, uniqueId) {
-            if (!uniqueId) {
-                uniqueId = "Don't call this twice without a uniqueId";
-            }
-            if (timers[uniqueId]) {
-                clearTimeout(timers[uniqueId]);
-            }
-            timers[uniqueId] = setTimeout(callback, ms);
-        };
-    })();
-
-    // https://stackoverflow.com/a/4351575/1461221
-    window.javatmp.executeFunctionByName = function (functionName, context /*, args */) {
-        var originalFunctionName = functionName;
-        var originalContext = context;
-        var args = Array.prototype.slice.call(arguments, 2);
-        var namespaces = functionName.split(".");
-        var func = namespaces.pop();
-        for (var i = 0; i < namespaces.length; i++) {
-            context = context[namespaces[i]];
-        }
-        if (typeof context[func] !== 'function') {
-            throw "[" + originalFunctionName + "] is not a function of [" + originalContext + "]";
-        }
-        return context[func].apply(context, args);
     };
 }(jQuery));
+

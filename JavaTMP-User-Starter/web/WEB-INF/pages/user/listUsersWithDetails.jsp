@@ -494,7 +494,7 @@
                     var idFilterInput = $("#userlist-id-filter");
                     idFilterInput.on('keyup', function () {
                         var $this = $(this);
-                        javatmp.waitForFinalEvent(function () {
+                        javatmp.util.waitForFinalEvent(function () {
                             var val = $.fn.dataTable.util.escapeRegex($this.val());
                             api.column(0).search(val ? val : '', true, false).draw();
                         }, 200, "@userlist-main-table-filter");
@@ -502,7 +502,7 @@
                     var usernameFilterInput = $("#userlist-username-filter");
                     usernameFilterInput.on('keyup', function () {
                         var $this = $(this);
-                        javatmp.waitForFinalEvent(function () {
+                        javatmp.util.waitForFinalEvent(function () {
                             var val = $.fn.dataTable.util.escapeRegex($this.val());
                             api.column(1).search(val ? val : '', true, false).draw();
                         }, 200, "@userlist-main-table-filter");
@@ -510,7 +510,7 @@
                     var firstNameFilterInput = $("#userlist-firstname-filter");
                     firstNameFilterInput.on('keyup', function () {
                         var $this = $(this);
-                        javatmp.waitForFinalEvent(function () {
+                        javatmp.util.waitForFinalEvent(function () {
                             var val = $.fn.dataTable.util.escapeRegex($this.val());
                             api.column(2).search(val ? val : '', true, false).draw();
                         }, 200, "@userlist-main-table-filter");
@@ -518,7 +518,7 @@
                     var lastNameFilterInput = $("#userlist-lastname-filter");
                     lastNameFilterInput.on('keyup', function () {
                         var $this = $(this);
-                        javatmp.waitForFinalEvent(function () {
+                        javatmp.util.waitForFinalEvent(function () {
                             var val = $.fn.dataTable.util.escapeRegex($this.val());
                             api.column(3).search(val ? val : '', true, false).draw();
                         }, 200, "@userlist-main-table-filter");
@@ -527,7 +527,7 @@
                     var birthdateFilterInput = $("#userlist-birthdate-filter");
                     birthdateFilterInput.on('change', function () {
                         var $this = $(this);
-                        javatmp.waitForFinalEvent(function () {
+                        javatmp.util.waitForFinalEvent(function () {
                             var val = $this.val();
                             api.column(4).search(val ? val : '', true, false).draw();
                         }, 200, "@userlist-main-table-filter");
@@ -566,7 +566,7 @@
                     var ageFilterInput = $("#userlist-age-filter");
                     ageFilterInput.on('keyup', function () {
                         var $this = $(this);
-                        javatmp.waitForFinalEvent(function () {
+                        javatmp.util.waitForFinalEvent(function () {
                             var val = $this.val();
                             api.column(5).search(val ? val : '', true, false).draw();
                         }, 200, "@userlist-main-table-filter");
@@ -575,7 +575,7 @@
                     var emailFilterInput = $("#userlist-email-filter");
                     emailFilterInput.on('keyup', function () {
                         var $this = $(this);
-                        javatmp.waitForFinalEvent(function () {
+                        javatmp.util.waitForFinalEvent(function () {
                             var val = $.fn.dataTable.util.escapeRegex($this.val());
                             api.column(6).search(val ? val : '', true, false).draw();
                         }, 200, "@userlist-main-table-filter");
@@ -584,7 +584,7 @@
                     var statusFilterInput = $("#userlist-status-filter");
                     statusFilterInput.on('change', function () {
                         var $this = $(this);
-                        javatmp.waitForFinalEvent(function () {
+                        javatmp.util.waitForFinalEvent(function () {
                             //                            var val = $.fn.dataTable.util.escapeRegex($this.val());
                             var val = $this.val();
                             api.column(7).search(val ? val : '', false, false).draw();
@@ -601,7 +601,7 @@
                     var countryFilterInput = $("#userlist-country-filter");
                     countryFilterInput.on('change', function () {
                         var $this = $(this);
-                        javatmp.waitForFinalEvent(function () {
+                        javatmp.util.waitForFinalEvent(function () {
                             var val = $this.val();
                             api.column(8).search(val ? val : '', false, false).draw();
                         }, 200, "@userlist-main-table-filter");
@@ -678,7 +678,7 @@
                     var addressFilterInput = $("#userlist-address-filter");
                     addressFilterInput.on('change', function () {
                         var $this = $(this);
-                        javatmp.waitForFinalEvent(function () {
+                        javatmp.util.waitForFinalEvent(function () {
                             var val = $this.val();
                             api.column(9).search(val ? val : '', false, false).draw();
                         }, 200, "@userlist-main-table-filter");
@@ -687,7 +687,7 @@
                     var languageFilterInput = $("#userlist-language-filter");
                     languageFilterInput.on('change', function () {
                         var $this = $(this);
-                        javatmp.waitForFinalEvent(function () {
+                        javatmp.util.waitForFinalEvent(function () {
                             var val = $this.val();
                             api.column(10).search(val ? val : '', false, false).draw();
                         }, 200, "@userlist-main-table-filter");
@@ -705,7 +705,7 @@
                     var themeFilterInput = $("#userlist-theme-filter");
                     themeFilterInput.on('change', function () {
                         var $this = $(this);
-                        javatmp.waitForFinalEvent(function () {
+                        javatmp.util.waitForFinalEvent(function () {
                             var val = $this.val();
                             api.column(11).search(val ? val : '', false, false).draw();
                         }, 200, "@userlist-main-table-filter");
@@ -762,7 +762,7 @@
                     var timezoneFilterInput = $("#userlist-timezone-filter");
                     timezoneFilterInput.on('change', function () {
                         var $this = $(this);
-                        javatmp.waitForFinalEvent(function () {
+                        javatmp.util.waitForFinalEvent(function () {
                             var val = $this.val();
                             api.column(12).search(val ? val : '', false, false).draw();
                         }, 200, "@userlist-main-table-filter");
@@ -779,7 +779,7 @@
                     var creationdateFilterInput = $("#userlist-creationdate-filter");
                     creationdateFilterInput.on('change', function () {
                         var $this = $(this);
-                        javatmp.waitForFinalEvent(function () {
+                        javatmp.util.waitForFinalEvent(function () {
                             var start = $this.data("start");
                             var end = $this.data("end");
                             var val = start.format("YYYY-MM-DDTHH:mm:ss.SSSZ") + "##TO##" + end.format("YYYY-MM-DDTHH:mm:ss.SSSZ");

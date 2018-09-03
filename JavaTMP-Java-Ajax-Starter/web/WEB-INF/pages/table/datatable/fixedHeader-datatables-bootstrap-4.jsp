@@ -526,11 +526,11 @@
             var table = $('#fixedHeader-dataTables-example').DataTable({
                 "pageLength": 50,
                 fixedHeader: {
-                    headerOffset: javatmp.getFixedOffset()
+                    headerOffset: javatmp.util.getFixedOffset()
                 }
             });
 //            var fixedHeader = new $.fn.dataTable.FixedHeader(table, {
-//                headerOffset: javatmp.getFixedOffset()
+//                headerOffset: javatmp.util.getFixedOffset()
 //            });
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {

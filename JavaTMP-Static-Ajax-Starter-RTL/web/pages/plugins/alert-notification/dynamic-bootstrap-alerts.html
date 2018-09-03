@@ -107,7 +107,7 @@
                         focus: $('#alert_focus').is(":checked"), // auto scroll to the alert after shown
                         closeInSeconds: $('#alert_close_in_seconds').val(), // auto close after defined seconds
                         icon: $('#alert_icon').val(), // put icon before the message
-                        offset: javatmp.getFixedOffset()
+                        offset: javatmp.util.getFixedOffset()
                     });
                 });
             });

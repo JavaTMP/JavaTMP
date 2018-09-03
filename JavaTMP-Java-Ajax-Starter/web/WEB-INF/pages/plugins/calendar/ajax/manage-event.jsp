@@ -152,11 +152,11 @@
                     if (closeAnyWay) {
                         modalWrapper.setOnDestroy(null);
                         // here we run passing function name as a remote callback
-                        javatmp.waitForFinalEvent(function () {
+                        javatmp.util.waitForFinalEvent(function () {
                             if ($.isFunction(modal.options.passData.callback)) {
                                 modal.options.passData.callback.apply();
                             } else if ($.type(modal.options.passData.callback) === "string") {
-                                javatmp.executeFunctionByName(modal.options.passData.callback, window, callbackData);
+                                javatmp.util.executeFunctionByName(modal.options.passData.callback, window, callbackData);
                             }
                         }, 200, "manage-event-callback");
                         return true;
