@@ -83,8 +83,17 @@
                     containerRemoveEventName: "containerRemoveEventName",
                     containerReadyEventName: "containerReadyEventName",
                     ajaxBeforeSend: null,
-                    ajaxSuccess: null,
-                    ajaxError: null
+                    ajaxSuccess: function (response, textStatus, jqXHR) {
+                        var $that = this;
+                        $($that.outputElement).html(response).promise().done(function () {
+                            setTimeout(function () {
+                                $($that.outputElement).trigger(javatmp.settings.javaTmpAjaxContainerReady);
+                            }, 0);
+                        });
+                    },
+                    ajaxError: function (jqXHR, textStatus, errorThrown) {
+                        $(this.outputElement).html("Error Loading Request !!!");
+                    }
                 }, defaults);
             }
 

@@ -1608,11 +1608,14 @@
                     updateURLHash: true,
                     defaultPassData: {_ajax: "ajax", _ajaxGlobalBlockUI: true},
                     defaultOutputSelector: '.main-body-content-container',
-                    defaultUrl: 'pages/home.html'
+                    defaultUrl: 'pages/home.html',
+                    sidebarSelector: ".sidebar"
                 };
                 javatmp.init(defaults);
                 javatmp.ajax.init();
-                javatmp.sidebar.init();
+                javatmp.sidebar.init({
+                    sidebarSelector: javatmp.settings.sidebarSelector
+                });
 
 
 // default parameters for mCustomScrollBar Plugin.
@@ -1638,9 +1641,9 @@
                 }).on('shown.metisMenu', function (event) {
                     // https://stackoverflow.com/questions/2905867/how-to-scroll-to-specific-item-using-jquery
                     var scrollTopValue = $(event.target).parent('li').offset().top
-                            - $('.sidebar .mCSB_container').offset().top
-                            + $('.sidebar .mCSB_container').scrollTop();
-                    $(".sidebar").mCustomScrollbar("scrollTo", scrollTopValue, {scrollInertia: 1000});
+                            - $('.mCSB_container', javatmp.settings.sidebarSelector).offset().top
+                            + $('.mCSB_container', javatmp.settings.sidebarSelector).scrollTop();
+                    $(javatmp.settings.sidebarSelector).mCustomScrollbar("scrollTo", scrollTopValue, {scrollInertia: 1000});
                 }).on('hidden.metisMenu', function (event) {
                 });
 
@@ -1673,7 +1676,10 @@
                         element.parents("ul").css({"height": "auto"});
                         element.parents("ul").addClass("in");
 
-                        if (javatmp.util.isWidthSmall() || ($("body").hasClass("mouse-auto-show") && $('body').hasClass("sidebar-active"))) {
+                        if (javatmp.util.isWidthSmall()) {
+                            javatmp.sidebar.hide();
+                        } else if (javatmp.sidebar.isAutoShowHideActive()) {
+                            javatmp.sidebar.pauseAutoShowHide();
                             javatmp.sidebar.hide();
                         }
 
@@ -1693,18 +1699,6 @@
                         });
                         $(this.outputElement).off(javatmp.settings.javaTmpContainerResizeEventName);
                         $(this.outputElement).html("Loading ...");
-
-                    },
-                    ajaxSuccess: function (response, textStatus, jqXHR) {
-                        var $that = this;
-                        $($that.outputElement).html(response).promise().done(function () {
-                            setTimeout(function () {
-                                $($that.outputElement).trigger(javatmp.settings.javaTmpAjaxContainerReady);
-                            }, 0);
-                        });
-                    },
-                    ajaxError: function (jqXHR, textStatus, errorThrown) {
-                        $(this.outputElement).html("Error Loading Request !!!");
                     }
                 });
 
@@ -1722,8 +1716,39 @@
                     });
                 });
 
+// listen of click event of main navbar-toggler button in navbar.
+                $(".sidebar-toggler-button").on("click", function () {
+                    if (javatmp.sidebar.isShown()) {
+                        javatmp.sidebar.hide();
+                        // activate mouse on desktop and large devices:
+                        if (javatmp.util.isWidthSmall() === false) {
+                            javatmp.sidebar.activateAutoShowHide();
+                        }
+                    } else {
+                        // disabled auto show on mouse move
+                        javatmp.sidebar.deactivateAutoShowHide();
+                        javatmp.sidebar.show();
+                    }
+                });
+
+
                 // listen to resize window event to update sidebar status
+                // ERRRRRRRROR complete
                 $(window).on('javatmpSidebar.hide javatmpSidebar.show', function () {
+                    $(javatmp.settings.defaultOutputSelector).trigger(javatmp.settings.javaTmpContainerResizeEventName);
+                });
+
+// listen to resize window event to update sidebar status
+                $(window).on('resize', function () {
+                    width = (window.innerWidth > 0) ? window.innerWidth : this.screen.width;
+                    if ((width < 768)) {
+                        // default on <= navbar-expand-sm devices.
+                        javatmp.sidebar.hide();
+                        javatmp.sidebar.deactivateAutoShowHide();
+                    } else {
+                        // default on > navbar-expand-sm devices.
+                        javatmp.sidebar.show();
+                    }
                     $(javatmp.settings.defaultOutputSelector).trigger(javatmp.settings.javaTmpContainerResizeEventName);
                 }).resize();
 
