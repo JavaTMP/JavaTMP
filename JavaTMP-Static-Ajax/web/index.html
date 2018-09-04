@@ -1674,11 +1674,7 @@
                         element.parents("ul").addClass("in");
 
                         if (javatmp.util.isWidthSmall() || ($("body").hasClass("mouse-auto-show") && $('body').hasClass("sidebar-active"))) {
-                            clearTimeout(menuTimeout);
-                            menuTimeout = null;
-                            $("body").removeClass("mouse-auto-show");
-                            $('body').removeClass("sidebar-active");
-                            $(window).off('mousemove', handlingMouseMove);
+                            javatmp.sidebar.hide();
                         }
 
                         var scrollTopValue = element.offset().top
@@ -1695,7 +1691,9 @@
                             element.html(element.text());
                             $("<li/>").addClass("breadcrumb-item").append(element).appendTo($(".breadcrumb"));
                         });
+                        $(this.outputElement).off(javatmp.settings.javaTmpContainerResizeEventName);
                         $(this.outputElement).html("Loading ...");
+
                     },
                     ajaxSuccess: function (response, textStatus, jqXHR) {
                         var $that = this;
@@ -1724,6 +1722,11 @@
                     });
                 });
 
+                // listen to resize window event to update sidebar status
+                $(window).on('javatmpSidebar.hide javatmpSidebar.show', function () {
+                    $(javatmp.settings.defaultOutputSelector).trigger(javatmp.settings.javaTmpContainerResizeEventName);
+                }).resize();
+
                 // Trigger the initial click event on sidebar <a> links
                 // which its href equal URL hash String or the defaultUrl String
                 if (javatmp.settings.updateURLHash === true) {
@@ -1744,7 +1747,6 @@
                         $('a[href="' + javatmp.settings.defaultUrl + '"]').trigger("click");
                     }
                 }
-
             });
         </script>
     </body>

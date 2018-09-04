@@ -96,39 +96,37 @@
                 $(localOptions.outputElement).trigger(javaTmpRemoveEvent).promise().done(function () {
                     if (!javaTmpRemoveEvent.isDefaultPrevented()) {
                         $(localOptions.outputElement).off(localOptions.containerReadyEventName).promise().done(function () {
-                            $(localOptions.outputElement).off(javatmp.settings.javaTmpContainerResizeEventName).promise().done(function () {
-                                $(localOptions.outputElement).off(localOptions.containerRemoveEventName).promise().done(function () {
-                                    $(localOptions.outputElement).off(javaTmpRemoveEvent).promise().done(function () {
-                                        $.ajax({
-                                            type: javatmp.settings.httpMethod,
-                                            async: true,
-                                            cache: true,
-                                            dataType: javatmp.settings.dataType,
-                                            url: $this.attr("href"),
-                                            data: javatmp.settings.defaultPassData,
-                                            beforeSend: function (jqXHR, settings) {
-                                                if ($.isFunction(localOptions.ajaxBeforeSend)) {
-                                                    return localOptions.ajaxBeforeSend.call(localOptions, jqXHR, settings);
-                                                }
-                                            },
-                                            success: function (response, textStatus, jqXHR) {
-                                                if ($.isFunction(localOptions.ajaxSuccess)) {
-                                                    return localOptions.ajaxSuccess.call(localOptions, response, textStatus, jqXHR);
-                                                }
-                                            },
-                                            error: function (jqXHR, textStatus, errorThrown) {
-                                                if ($.isFunction(localOptions.ajaxError)) {
-                                                    return localOptions.ajaxError.call(localOptions, jqXHR, textStatus, errorThrown);
-                                                }
+                            $(localOptions.outputElement).off(localOptions.containerRemoveEventName).promise().done(function () {
+                                $(localOptions.outputElement).off(javaTmpRemoveEvent).promise().done(function () {
+                                    $.ajax({
+                                        type: javatmp.settings.httpMethod,
+                                        async: true,
+                                        cache: true,
+                                        dataType: javatmp.settings.dataType,
+                                        url: $this.attr("href"),
+                                        data: javatmp.settings.defaultPassData,
+                                        beforeSend: function (jqXHR, settings) {
+                                            if ($.isFunction(localOptions.ajaxBeforeSend)) {
+                                                return localOptions.ajaxBeforeSend.call(localOptions, jqXHR, settings);
                                             }
-                                        });
+                                        },
+                                        success: function (response, textStatus, jqXHR) {
+                                            if ($.isFunction(localOptions.ajaxSuccess)) {
+                                                return localOptions.ajaxSuccess.call(localOptions, response, textStatus, jqXHR);
+                                            }
+                                        },
+                                        error: function (jqXHR, textStatus, errorThrown) {
+                                            if ($.isFunction(localOptions.ajaxError)) {
+                                                return localOptions.ajaxError.call(localOptions, jqXHR, textStatus, errorThrown);
+                                            }
+                                        }
                                     });
                                 });
                             });
                         });
                     }
                 });
-            }
+            };
 
             BootstrapActionable.prototype.populateByLinkEvent = function (populateOptions) {
                 var localOptions = $.extend(true, {}, this.options, populateOptions);

@@ -3,7 +3,6 @@
  */
 (function ($) {
     window.javatmp.sidebar = window.javatmp.sidebar || {};
-
     window.javatmp.sidebar.init = function () {
 
         // listen to transition on sidebar instead of fixed wait to trigger event
@@ -32,19 +31,43 @@
             }
         });
 
+        var menuTimeout = null;
+        var handlingMouseMove = function (e) {
+            // check if mouse is near the left edge of the browser in LTR or right edige for RTL.
+            var insideEdge = javatmp.settings.isRTL ? (e.pageX > ($(window).innerWidth() - 10)) : e.pageX < 10;
+            if (insideEdge || $('.sidebar').is(':hover')) {
+                // Show the menu if mouse is within 10 pixels from the left or we are hovering over it
+                clearTimeout(menuTimeout);
+                menuTimeout = null;
+                $("body").addClass("sidebar-active");
+            } else if (menuTimeout === null) {
+                menuTimeout = setTimeout(function () {
+                    $("body").removeClass("sidebar-active");
+                }, 300);
+            }
+        };
 
         // listen of click event of main navbar-toggler button in navbar.
         $(".sidebar-toggler-button").on("click", function () {
+            var originalButton = this;
+            $(originalButton).prop('disabled', true);
             // we manually collapse sidebar:
             if ($('body').hasClass("sidebar-active")) {
-                javatmp.sidebar.hide();
+                $("body").removeClass("sidebar-active");
                 // activate mouse on desktop and large devices:
                 if (!javatmp.util.isWidthSmall()) {
-                    javatmp.sidebar.activateAutoShowHide();
+                    $("body").addClass("mouse-auto-show");
+                    // just in case:
+//                    $(window).off('mousemove', handlingMouseMove);
+                    $(window).on('mousemove', handlingMouseMove);
                 }
             } else {
                 // disabled auto show on mouse move
-                javatmp.sidebar.deactivateAutoShowHide();
+                clearTimeout(menuTimeout);
+                menuTimeout = null;
+                $("body").removeClass("mouse-auto-show");
+                $(window).off('mousemove', handlingMouseMove);
+                $("body").addClass("sidebar-active");
             }
         });
 
@@ -55,6 +78,8 @@
                 // default on <= navbar-expand-sm devices.
                 $("body").removeClass("sidebar-active");
                 // remove mouse-auto-show feature
+                clearTimeout(menuTimeout);
+                menuTimeout = null;
                 $("body").removeClass("mouse-auto-show");
                 $(window).off('mousemove', handlingMouseMove);
             } else {
@@ -66,39 +91,19 @@
             $(javatmp.settings.defaultOutputSelector).trigger(javatmp.settings.javaTmpContainerResizeEventName);
         }).resize();
     };
-
-    var handlingMouseMove = function (e) {
-        // check if mouse is near the left edge of the browser in LTR or right edige for RTL.
-        var insideEdge = javatmp.settings.isRTL ? (e.pageX > ($(window).innerWidth() - 10)) : e.pageX < 10;
-        if (insideEdge || $('.sidebar').is(':hover')) {
-            // Show the menu if mouse is within 10 pixels from the left or we are hovering over it
-            javatmp.sidebar.show();
-        } else {
-            javatmp.sidebar.hide();
-        }
-    };
-
     window.javatmp.sidebar.show = function () {
-        $("body").addClass("sidebar-active");
+
     };
     window.javatmp.sidebar.hide = function () {
-        $("body").removeClass("sidebar-active");
+
     };
 
     window.javatmp.sidebar.toggleStatus = function () {
 
     };
 
-    window.javatmp.sidebar.activateAutoShowHide = function () {
-        $("body").addClass("mouse-auto-show");
-        $(window).on('mousemove', handlingMouseMove);
-    };
+    window.javatmp.sidebar.toggleStatus = function () {
 
-    window.javatmp.sidebar.deactivateAutoShowHide = function () {
-        // disabled auto show on mouse move and show
-        $("body").removeClass("mouse-auto-show");
-        $(window).off('mousemove', handlingMouseMove);
-        this.show();
     };
 
 }(jQuery));
