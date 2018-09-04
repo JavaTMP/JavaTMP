@@ -36,7 +36,7 @@
         // listen of click event of main navbar-toggler button in navbar.
         $(".sidebar-toggler-button").on("click", function () {
             // we manually collapse sidebar:
-            if ($('body').hasClass("sidebar-active")) {
+            if (javatmp.sidebar.isShown()) {
                 javatmp.sidebar.hide();
                 // activate mouse on desktop and large devices:
                 if (!javatmp.util.isWidthSmall()) {
@@ -45,6 +45,7 @@
             } else {
                 // disabled auto show on mouse move
                 javatmp.sidebar.deactivateAutoShowHide();
+                javatmp.sidebar.show();
             }
         });
 
@@ -79,10 +80,19 @@
     };
 
     window.javatmp.sidebar.show = function () {
-        $("body").addClass("sidebar-active");
+        if ($("body").hasClass("sidebar-active") === false) {
+            $("body").addClass("sidebar-active");
+        }
     };
+
+    window.javatmp.sidebar.isShown = function () {
+        return $("body").hasClass("sidebar-active");
+    };
+
     window.javatmp.sidebar.hide = function () {
-        $("body").removeClass("sidebar-active");
+        if ($("body").hasClass("sidebar-active") === true) {
+            $("body").removeClass("sidebar-active");
+        }
     };
 
     window.javatmp.sidebar.toggleStatus = function () {
@@ -90,15 +100,16 @@
     };
 
     window.javatmp.sidebar.activateAutoShowHide = function () {
-        $("body").addClass("mouse-auto-show");
-        $(window).on('mousemove', handlingMouseMove);
+        if ($("body").hasClass("mouse-auto-show") === false) {
+            $("body").addClass("mouse-auto-show");
+            $(window).on('mousemove', handlingMouseMove);
+        }
     };
 
     window.javatmp.sidebar.deactivateAutoShowHide = function () {
         // disabled auto show on mouse move and show
         $("body").removeClass("mouse-auto-show");
         $(window).off('mousemove', handlingMouseMove);
-        this.show();
     };
 
 }(jQuery));
