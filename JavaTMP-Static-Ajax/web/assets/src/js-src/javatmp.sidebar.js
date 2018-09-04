@@ -1,10 +1,15 @@
 /*!
  * JavaTMP Sidebar JS File.
  */
+
 (function ($) {
     window.javatmp.sidebar = window.javatmp.sidebar || {settings: {}};
     var defaults = {
-        sidebarSelector: null
+        sidebarSelector: null,
+        sidebarBeforeHideEventName: "sidebarBeforeHide",
+        sidebarHideEventName: "sidebarHide",
+        sidebarBeforeShowEventName: "sidebarBeforeShow",
+        sidebarShowEventName: "sidebarShow"
     };
     window.javatmp.sidebar.init = function (options) {
 
@@ -13,12 +18,18 @@
         // listen to transition on sidebar instead of fixed wait to trigger event
         $($this.settings.sidebarSelector).on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', function (event) {
             var propertyName = "margin-" + javatmp.settings.floatDefault;
+            var propertyValue = $($this.settings.sidebarSelector).css(propertyName);
             if (event.originalEvent && event.originalEvent.propertyName
                     && (event.originalEvent.propertyName.indexOf(propertyName) !== -1)) {
-                console.log("transition event occured related to sidebar [" + propertyName + "] is " + $($this.settings.sidebarSelector).css(propertyName));
+                if (propertyValue === "0px") {
+                    // just shown:
+                    $($this.settings.sidebarSelector).trigger($this.settings.sidebarShowEventName);
+                } else {
+                    // just hidden:
+                    $($this.settings.sidebarSelector).trigger($this.settings.sidebarHideEventName);
+                }
                 if ((javatmp.util.isWidthSmall() === false)) {
                     // Here large and desktop devices:
-                    $(javatmp.settings.defaultOutputSelector).trigger(javatmp.settings.javaTmpContainerResizeEventName);
                     // recheck if auto is paused or not:
                     if (javatmp.sidebar.isAutoShowHideActive()) {
                         javatmp.sidebar.continueAutoShowHide();
@@ -41,7 +52,9 @@
 
     window.javatmp.sidebar.show = function () {
         if ($("body").hasClass("sidebar-active") === false) {
-            $("body").addClass("sidebar-active");
+            $(this.settings.sidebarSelector).trigger(this.settings.sidebarBeforeShowEventName).promise().done(function () {
+                $("body").addClass("sidebar-active");
+            });
         }
     };
 
@@ -51,7 +64,9 @@
 
     window.javatmp.sidebar.hide = function () {
         if ($("body").hasClass("sidebar-active") === true) {
-            $("body").removeClass("sidebar-active");
+            $(this.settings.sidebarSelector).trigger(this.settings.sidebarBeforeHideEventName).promise().done(function () {
+                $("body").removeClass("sidebar-active");
+            });
         }
     };
 

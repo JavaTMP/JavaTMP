@@ -1498,7 +1498,7 @@
             .has-feedback-icon {
                 position: relative;
             }
-            .search-menu-form .fa.form-control-clear {
+            .has-feedback-icon .form-control-clear {
                 pointer-events: initial;  /* or - auto // or -  unset  */
                 line-height: 1.5;
                 padding: .375rem .75rem;
@@ -1528,80 +1528,6 @@
         </style>
         <script type="text/javascript">
             jQuery(function ($) {
-                $("body").on("click", '.disabled', function (event) {
-                    event.stopPropagation();
-                    event.preventDefault();
-                    return false;
-                });
-
-                $("body").on("click", ".dropdown-menu-header,.dropdown-menu-footer", function (event) {
-                    event.stopPropagation();
-                });
-
-                // tooltip demo
-                $('.sidebar').tooltip({
-                    selector: "[data-toggle=tooltip]",
-                    container: ".sidebar"
-                });
-
-                $.scrollUp({zIndex: 1000, scrollText: '<i class="fa fa-arrow-up"></i>'});
-
-                $('#filter-menu-id').on('input propertychange', function () {
-                    var $this = $(this);
-                    var visible = Boolean($this.val());
-                    $this.siblings('.form-control-clear').toggleClass('d-none', !visible);
-                }).trigger('propertychange').trigger('keyup');
-                $('.form-control-clear').click(function () {
-                    $(this).siblings('input[type="text"]').val('')
-                            .trigger('propertychange').trigger('keyup').focus();
-                });
-
-                $('#filter-menu-id').keyup(function () {
-                    var text = $(this).val().toLowerCase();
-                    $('.metismenu li').each(function () {
-                        if ($(this).text().toLowerCase().indexOf(text) === -1) {
-                            $(this).hide();
-                            $(this).children().removeClass("active");
-                            $(this).children().removeClass("in");
-                        } else {
-                            $(this).show();
-                            $(this).children("ul").css({height: "auto"});
-                            $(this).parentsUntil(".metismenu", "li").addClass("active");
-                            $(this).parentsUntil(".metismenu", "ul").addClass("in");
-                        }
-                    });
-                });
-            });
-        </script>
-        <!-- build:remove -->
-        <script>
-            (function (i, s, o, g, r, a, m) {
-                i['GoogleAnalyticsObject'] = r;
-                i[r] = i[r] || function () {
-                    (i[r].q = i[r].q || []).push(arguments);
-                }, i[r].l = 1 * new Date();
-                a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0];
-                a.async = 1;
-                a.src = g;
-                m.parentNode.insertBefore(a, m);
-            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
-            ga('create', 'UA-104738122-1', 'auto');
-        </script>
-        <script type="text/javascript">
-            jQuery(function ($) {
-                $(document).ajaxComplete(function (event, xhr, ajaxOptions) {
-                    if (ajaxOptions.url.indexOf("assets/data") === -1) {
-                        var ajaxurl = window.location.pathname + "#" + ajaxOptions.url;
-                        ga('send', 'pageview', ajaxurl);
-                    }
-                });
-            });
-        </script>
-        <!-- /build -->
-        <script type="text/javascript">
-            jQuery(function ($) {
                 var defaults = {
                     httpMethod: "GET",
                     dataType: "html",
@@ -1609,7 +1535,9 @@
                     defaultPassData: {_ajax: "ajax", _ajaxGlobalBlockUI: true},
                     defaultOutputSelector: '.main-body-content-container',
                     defaultUrl: 'pages/home.html',
-                    sidebarSelector: ".sidebar"
+                    sidebarSelector: ".sidebar",
+                    sidebarHideEventName: "sidebarHide",
+                    sidebarShowEventName: "sidebarShow"
                 };
                 javatmp.init(defaults);
                 javatmp.ajax.init();
@@ -1716,7 +1644,51 @@
                     });
                 });
 
-// listen of click event of main navbar-toggler button in navbar.
+                $("body").on("click", '.disabled', function (event) {
+                    event.stopPropagation();
+                    event.preventDefault();
+                    return false;
+                });
+
+                $("body").on("click", ".dropdown-menu-header,.dropdown-menu-footer", function (event) {
+                    event.stopPropagation();
+                });
+
+                // tooltip demo
+                $('.sidebar').tooltip({
+                    selector: "[data-toggle=tooltip]",
+                    container: ".sidebar"
+                });
+
+                $.scrollUp({zIndex: 1000, scrollText: '<i class="fa fa-arrow-up"></i>'});
+
+                $('#filter-menu-id').on('input propertychange', function () {
+                    var $this = $(this);
+                    var visible = Boolean($this.val());
+                    $this.siblings('.form-control-clear').toggleClass('d-none', !visible);
+                }).trigger('propertychange').trigger('keyup');
+                $('.form-control-clear').click(function () {
+                    $(this).siblings('input[type="text"]').val('')
+                            .trigger('propertychange').trigger('keyup').focus();
+                });
+
+                $('#filter-menu-id').keyup(function () {
+                    var text = $(this).val().toLowerCase();
+                    $('.metismenu li').each(function () {
+                        if ($(this).text().toLowerCase().indexOf(text) === -1) {
+                            $(this).hide();
+                            $(this).children().removeClass("active");
+                            $(this).children().removeClass("in");
+                        } else {
+                            $(this).show();
+                            $(this).children("ul").css({height: "auto"});
+                            $(this).parentsUntil(".metismenu", "li").addClass("active");
+                            $(this).parentsUntil(".metismenu", "ul").addClass("in");
+                        }
+                    });
+                });
+
+                // listen of click event of main navbar-toggler button in navbar.
                 $(".sidebar-toggler-button").on("click", function () {
                     if (javatmp.sidebar.isShown()) {
                         javatmp.sidebar.hide();
@@ -1734,7 +1706,8 @@
 
                 // listen to resize window event to update sidebar status
                 // ERRRRRRRROR complete
-                $(window).on('javatmpSidebar.hide javatmpSidebar.show', function () {
+                $(javatmp.settings.sidebarSelector).on(javatmp.settings.sidebarHideEventName + ' ' + javatmp.settings.sidebarShowEventName, function () {
+                    console.log("event received");
                     $(javatmp.settings.defaultOutputSelector).trigger(javatmp.settings.javaTmpContainerResizeEventName);
                 });
 
@@ -1774,5 +1747,32 @@
                 }
             });
         </script>
+        <!-- build:remove -->
+        <script>
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments);
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m);
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+            ga('create', 'UA-104738122-1', 'auto');
+        </script>
+        <script type="text/javascript">
+            jQuery(function ($) {
+                $(document).ajaxComplete(function (event, xhr, ajaxOptions) {
+                    if (ajaxOptions.url.indexOf("assets/data") === -1) {
+                        var ajaxurl = window.location.pathname + "#" + ajaxOptions.url;
+                        ga('send', 'pageview', ajaxurl);
+                    }
+                });
+            });
+        </script>
+        <!-- /build -->
     </body>
 </html>
