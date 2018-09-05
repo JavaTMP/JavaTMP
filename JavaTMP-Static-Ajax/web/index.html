@@ -38,7 +38,7 @@
                 <span class="d-xl-none d-lg-none d-sm-inline">JavaTMP</span>
                 <span class="d-none d-lg-inline">JavaTMP Bootstrap Template</span>
             </a>
-            <ul class="main-navbar-menu nav ml-auto">
+            <ul class="main-navbar-menu nav ml-auto align-self-stretch flex-nowrap">
                 <li class="nav-item dropdown d-none d-sm-flex d-flex align-items-stretch">
                     <a class="nav-link dropdown-toggle faa-parent animated-hover d-flex align-items-center" data-toggle="dropdown" href="">
                         <i class="fa fa-globe fa-lg faa-spin mr-1"></i>
@@ -1513,18 +1513,6 @@
             ::-ms-clear {
                 display: none;
             }
-
-            /* Extra large devices (large desktops, 1200px and up) */
-            @media (min-width: 1200px){
-                .modal-lg {
-                    max-width: 1024px;
-                }
-            }
-            @media (min-width: 1400px){
-                .modal-lg {
-                    max-width: 1200px;
-                }
-            }
         </style>
         <script type="text/javascript">
             jQuery(function ($) {
@@ -1537,7 +1525,20 @@
                     defaultUrl: 'pages/home.html',
                     sidebarSelector: ".sidebar",
                     sidebarHideEventName: "sidebarHide",
-                    sidebarShowEventName: "sidebarShow"
+                    sidebarShowEventName: "sidebarShow",
+                    mCustomScrollbarOptions: {
+                        theme: "javatmp",
+                        alwaysShowScrollbar: 0,
+                        scrollInertia: 0,
+                        mouseWheel: {
+                            preventDefault: true,
+                            scrollAmount: 85
+                        },
+                        advanced: {
+                            autoScrollOnFocus: false,
+                            updateOnContentResize: true
+                        }
+                    }
                 };
                 javatmp.init(defaults);
                 javatmp.ajax.init();
@@ -1547,21 +1548,6 @@
                     floatDefault: javatmp.settings.floatDefault
                 });
 
-
-// default parameters for mCustomScrollBar Plugin.
-                javatmp.settings.mCustomScrollbarOptions = {
-                    theme: "javatmp",
-                    alwaysShowScrollbar: 0,
-                    scrollInertia: 0,
-                    mouseWheel: {
-                        preventDefault: true,
-                        scrollAmount: 85
-                    },
-                    advanced: {
-                        autoScrollOnFocus: false,
-                        updateOnContentResize: true
-                    }
-                };
 
                 $('.scroll-content').mCustomScrollbar(javatmp.settings.mCustomScrollbarOptions);
 

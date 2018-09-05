@@ -14,11 +14,7 @@ body {
 }
 
 .main-body-content-container {
-    padding: $javatmp-breadcrumb-bar-height 1rem 1rem 1rem;
-}
-
-.dynamic-ajax-content {
-
+    padding: $javatmp-breadcrumb-bar-height ($grid-gutter-width / 2) 0 ($grid-gutter-width / 2);
 }
 
 // mobile and small devices
@@ -34,7 +30,6 @@ body.sidebar-active .main-content {
     body {
         padding-bottom: $javatmp-footer-bar-height;
     }
-
 }
 
 body.mouse-auto-show.sidebar-active .main-content {
