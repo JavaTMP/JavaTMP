@@ -1516,6 +1516,7 @@
         </style>
         <script type="text/javascript">
             jQuery(function ($) {
+                // define default parameters to apply as a global settings for application.
                 var defaults = {
                     httpMethod: "GET",
                     dataType: "html",
@@ -1526,6 +1527,7 @@
                     sidebarSelector: ".sidebar",
                     sidebarHideEventName: "sidebarHide",
                     sidebarShowEventName: "sidebarShow",
+                    listOfFixedElement: ['.main-javatmp-navbar', '.main-breadcrumb-bar'],
                     mCustomScrollbarOptions: {
                         theme: "javatmp",
                         alwaysShowScrollbar: 0,
@@ -1540,6 +1542,7 @@
                         }
                     }
                 };
+
                 javatmp.init(defaults);
                 javatmp.ajax.init();
                 javatmp.sidebar.init({
@@ -1695,34 +1698,31 @@
                     }
                 });
 
-
-                // listen to resize window event to update sidebar status
-                // ERRRRRRRROR complete
+                // listen to sidebar show/hide events to notify any listener on main output area.
                 $(javatmp.settings.sidebarSelector).on(javatmp.settings.sidebarHideEventName + ' ' + javatmp.settings.sidebarShowEventName, function () {
-                    console.log("event received");
                     $(javatmp.settings.defaultOutputSelector).trigger(javatmp.settings.javaTmpContainerResizeEventName);
-
                     if ((javatmp.util.isWidthSmall() === false)) {
                         // On large and desktop devices recheck if auto is paused or not:
                         if (javatmp.sidebar.isAutoShowHideActive()) {
                             javatmp.sidebar.continueAutoShowHide();
                         }
                     }
-
                 });
 
-// listen to resize window event to update sidebar status
+                // listen to resize window event to update sidebar status
                 $(window).on('resize', function () {
-                    width = (window.innerWidth > 0) ? window.innerWidth : this.screen.width;
-                    if ((width < 768)) {
-                        // default on <= navbar-expand-sm devices.
-                        javatmp.sidebar.hide();
-                        javatmp.sidebar.deactivateAutoShowHide();
-                    } else {
-                        // default on > navbar-expand-sm devices.
-                        javatmp.sidebar.show();
-                    }
-                    $(javatmp.settings.defaultOutputSelector).trigger(javatmp.settings.javaTmpContainerResizeEventName);
+                    javatmp.util.waitForFinalEvent(function () {
+                        width = (window.innerWidth > 0) ? window.innerWidth : this.screen.width;
+                        if ((width < 768)) {
+                            // default on <= navbar-expand-sm devices.
+                            javatmp.sidebar.hide();
+                            javatmp.sidebar.deactivateAutoShowHide();
+                        } else {
+                            // default on > navbar-expand-sm devices.
+                            javatmp.sidebar.show();
+                        }
+                        $(javatmp.settings.defaultOutputSelector).trigger(javatmp.settings.javaTmpContainerResizeEventName);
+                    }, 200, "@global.window.resize");
                 }).resize();
 
                 // Trigger the initial click event on sidebar <a> links
@@ -1747,6 +1747,7 @@
                 }
             });
         </script>
+        <!-- You could put here Your google analytics script tag -->
         <!-- build:remove -->
         <script>
             (function (i, s, o, g, r, a, m) {

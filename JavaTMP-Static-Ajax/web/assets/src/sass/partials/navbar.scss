@@ -6,13 +6,7 @@
     height: $javatmp-navbar-height;
     /*border-bottom: $javatmp-navbar-border-bottom-width solid $javatmp-navbar-border-color;*/
     background: $javatmp-navbar-bg;
-    /*    flex-wrap: nowrap;
-        flex-shrink: 0;
-        flex-direction: row;*/
     transition: $javatmp-transition;
-    /*    > * {
-            flex-shrink: 0;
-        }*/
 
     body.longer-sidebar.sidebar-active & {
         left: 0;
