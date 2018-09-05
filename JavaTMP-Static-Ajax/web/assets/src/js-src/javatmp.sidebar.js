@@ -9,7 +9,9 @@
         sidebarBeforeHideEventName: "sidebarBeforeHide",
         sidebarHideEventName: "sidebarHide",
         sidebarBeforeShowEventName: "sidebarBeforeShow",
-        sidebarShowEventName: "sidebarShow"
+        sidebarShowEventName: "sidebarShow",
+        isRTL: false,
+        floatDefault: "left"
     };
     window.javatmp.sidebar.init = function (options) {
 
@@ -17,7 +19,7 @@
         var $this = this;
         // listen to transition on sidebar instead of fixed wait to trigger event
         $($this.settings.sidebarSelector).on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', function (event) {
-            var propertyName = "margin-" + javatmp.settings.floatDefault;
+            var propertyName = "margin-" + javatmp.sidebar.settings.floatDefault;
             var propertyValue = $($this.settings.sidebarSelector).css(propertyName);
             if (event.originalEvent && event.originalEvent.propertyName
                     && (event.originalEvent.propertyName.indexOf(propertyName) !== -1)) {
@@ -28,20 +30,13 @@
                     // just hidden:
                     $($this.settings.sidebarSelector).trigger($this.settings.sidebarHideEventName);
                 }
-                if ((javatmp.util.isWidthSmall() === false)) {
-                    // Here large and desktop devices:
-                    // recheck if auto is paused or not:
-                    if (javatmp.sidebar.isAutoShowHideActive()) {
-                        javatmp.sidebar.continueAutoShowHide();
-                    }
-                }
             }
         });
     };
 
     var handlingMouseMove = function (e) {
         // check if mouse is near the left edge of the browser in LTR or right edige for RTL.
-        var insideEdge = javatmp.settings.isRTL ? (e.pageX > ($(window).innerWidth() - 10)) : e.pageX < 10;
+        var insideEdge = javatmp.sidebar.settings.isRTL ? (e.pageX > ($(window).innerWidth() - 10)) : e.pageX < 10;
         if (insideEdge || $('.sidebar').is(':hover')) {
             // Show the menu if mouse is within 10 pixels from the left or we are hovering over it
             javatmp.sidebar.show();

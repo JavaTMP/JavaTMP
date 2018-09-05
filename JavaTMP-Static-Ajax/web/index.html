@@ -1542,7 +1542,9 @@
                 javatmp.init(defaults);
                 javatmp.ajax.init();
                 javatmp.sidebar.init({
-                    sidebarSelector: javatmp.settings.sidebarSelector
+                    sidebarSelector: javatmp.settings.sidebarSelector,
+                    isRTL: javatmp.settings.isRTL,
+                    floatDefault: javatmp.settings.floatDefault
                 });
 
 
@@ -1713,6 +1715,14 @@
                 $(javatmp.settings.sidebarSelector).on(javatmp.settings.sidebarHideEventName + ' ' + javatmp.settings.sidebarShowEventName, function () {
                     console.log("event received");
                     $(javatmp.settings.defaultOutputSelector).trigger(javatmp.settings.javaTmpContainerResizeEventName);
+
+                    if ((javatmp.util.isWidthSmall() === false)) {
+                        // On large and desktop devices recheck if auto is paused or not:
+                        if (javatmp.sidebar.isAutoShowHideActive()) {
+                            javatmp.sidebar.continueAutoShowHide();
+                        }
+                    }
+
                 });
 
 // listen to resize window event to update sidebar status
