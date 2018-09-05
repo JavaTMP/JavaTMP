@@ -1590,6 +1590,10 @@
                 $(javatmp.settings.defaultOutputSelector).BootstrapActionable({
                     containerRemoveEventName: javatmp.settings.javaTmpContainerRemoveEventName,
                     containerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady,
+                    ajaxMethodType: javatmp.settings.httpMethod,
+                    ajaxCache: true,
+                    ajaxDefaultData: javatmp.settings.defaultPassData,
+                    ajaxDataType: javatmp.settings.dataType,
                     ajaxBeforeSend: function (jqXHR, settings) {
                         var element = this.linkElement;
                         // this here refere to actionable localOptions.
