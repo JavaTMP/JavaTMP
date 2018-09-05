@@ -31,6 +31,7 @@
         <link href="components/bootstrap-card-extender/dist/bootstrap-card-extender.min.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/plugins/custom-bootstrap-card-extender.min.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/plugins/custom-bootstrap-dropdown.min.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/plugins/custom-bootstrap-extender.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <body class="sidebar-active">
         <nav class="main-javatmp-navbar navbar fixed-top my-0 py-0">
@@ -87,7 +88,7 @@
                             <i class="fa fa-lg fa-fw fa-envelope"></i>5 Messages
                             <a actionType="ajax-model"
                                href="pages/custom-pages/inbox/ajax/ajax-compose-message.html"
-                               data-actionable-options='{"size":"modal-lg"}'
+                               data-actionable-options='{"size":"modal-lg", "title": "Loading Compose Message .."}'
                                class="float-right small">
                                 Create New Message
                             </a>
@@ -415,7 +416,7 @@
                         </div>
                         <div class="sidebar-menu-filter-form mx-2 my-1">
                             <form autocomplete="off" class="search-menu-form">
-                                <div class="has-feedback-icon has-clear">
+                                <div class="has-form-control-clear">
                                     <input id="filter-menu-id" type="text" class="form-control" placeholder="Search menu ..." autocomplete="off"/>
                                     <span class="form-control-clear fa fa-times d-none"></span>
                                 </div>
@@ -1493,27 +1494,7 @@
         <script src="assets/js/javatmp.ajax.min.js" type="text/javascript"></script>
         <script src="assets/js/javatmp.util.min.js" type="text/javascript"></script>
         <script src="assets/js/javatmp.sidebar.min.js" type="text/javascript"></script>
-        <!-- custom style for sidebar menu search text field -->
-        <style type="text/css">
-            .has-feedback-icon {
-                position: relative;
-            }
-            .has-feedback-icon .form-control-clear {
-                pointer-events: initial;  /* or - auto // or -  unset  */
-                line-height: 1.5;
-                padding: .375rem .75rem;
-                font-size: 1rem;
-                z-index: 10;
-                pointer-events: auto;
-                cursor: pointer;
-                position: absolute;
-                right: 0;
-                top: 0;
-            }
-            ::-ms-clear {
-                display: none;
-            }
-        </style>
+
         <script type="text/javascript">
             jQuery(function ($) {
                 // define default parameters to apply as a global settings for application.
@@ -1551,9 +1532,10 @@
                     floatDefault: javatmp.settings.floatDefault
                 });
 
-
+                // initialize mCustomScrollbar on each .scroll-content element.
                 $('.scroll-content').mCustomScrollbar(javatmp.settings.mCustomScrollbarOptions);
 
+                // Initialize sidebar .metismenu element using metisMenu jQuery Plugin.
                 $('.metismenu').metisMenu({
                     toggle: false,
                     preventDefault: true
@@ -1578,6 +1560,7 @@
                     cardFullscreenCompress: javatmp.settings.cardFullscreenCompress
                 };
 
+                // Initialize ajax output selector using BootstrapActionable to be responsible for Ajax Lifecycle events.
                 $(javatmp.settings.defaultOutputSelector).BootstrapActionable({
                     containerRemoveEventName: javatmp.settings.javaTmpContainerRemoveEventName,
                     containerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady,
@@ -1625,7 +1608,7 @@
                     }
                 });
 
-                // listen on click event on breadcrumb bar's links
+                // listen on click event on breadcrumb bar's links and fire corresponding item in the sidebar
                 $(".main-breadcrumb-bar").on("click", 'a[target!="_blank"][href!="#"]', function (event) {
                     event.preventDefault();
                     $('.metismenu a[href="' + $(this).attr("href") + '"]').trigger("click");
