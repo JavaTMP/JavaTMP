@@ -533,7 +533,7 @@
             var table = $('#fixedHeader-dataTables-example').DataTable({
                 "pageLength": 50,
                 fixedHeader: {
-                    headerOffset: javatmp.util.getFixedOffset()
+                    headerOffset: javatmp.util.getFixedOffset(javatmp.settings.listOfFixedElement)
                 }
             });
 
