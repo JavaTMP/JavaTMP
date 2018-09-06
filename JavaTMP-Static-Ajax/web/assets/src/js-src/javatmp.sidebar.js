@@ -2,8 +2,9 @@
  * JavaTMP Sidebar JS File.
  */
 
-(function ($) {
-    window.javatmp.sidebar = window.javatmp.sidebar || {settings: {}};
+;
+(function ($, window, document, undefined) {
+
     var defaults = {
         sidebarSelector: null,
         sidebarBeforeHideEventName: "sidebarBeforeHide",
@@ -13,6 +14,9 @@
         isRTL: false,
         floatDefault: "left"
     };
+
+    window.javatmp.sidebar = window.javatmp.sidebar || {settings: {}};
+
     window.javatmp.sidebar.init = function (options) {
 
         this.settings = $.extend(true, {}, defaults, options);
@@ -94,5 +98,5 @@
         $(window).on('mousemove', handlingMouseMove);
     };
 
-}(jQuery));
+}(jQuery, window, document));
 

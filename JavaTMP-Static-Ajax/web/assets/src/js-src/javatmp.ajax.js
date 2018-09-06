@@ -1,7 +1,10 @@
 /*!
  * JavaTMP AJAX JS File.
  */
-(function ($) {
+;
+(function ($, window, document, undefined) {
+
+    window.javatmp = window.javatmp || {};
 
     window.javatmp.ajax = window.javatmp.ajax || {};
 
@@ -60,5 +63,5 @@
             $(".breadcrumb-submenu > a > i.fa.faa-spin").addClass("text-primary");
         });
     };
-}(jQuery));
+}(jQuery, window, document));
 

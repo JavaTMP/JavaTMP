@@ -1,7 +1,8 @@
 /*!
  * JavaTMP Utils JS File.
  */
-(function ($) {
+;
+(function ($, window, document, undefined) {
 
     window.javatmp.util = window.javatmp.util || {};
 
@@ -72,4 +73,4 @@
         }
         return context[func].apply(context, args);
     };
-}(jQuery));
+}(jQuery, window, document));
