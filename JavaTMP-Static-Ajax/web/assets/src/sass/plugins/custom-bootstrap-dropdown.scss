@@ -9,6 +9,13 @@ $javatmp-dropdown-menu-extender-item-border-color: $dropdown-divider-bg!default;
 $javatmp-dropdown-menu-extender-content-height: 250px!default;
 $dropdown-extender-width: 20rem;
 
+.dropdown-toggle.bs-dd-caret-off::before {
+    display: none;
+}
+.dropdown-toggle.bs-dd-caret-off::after {
+    display: none;
+}
+
 .dropdown-menu-extender {
     /*padding: 0;*/
     .dropdown-item {

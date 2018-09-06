@@ -70,7 +70,11 @@
     };
 
     window.javatmp.sidebar.toggleStatus = function () {
-
+        if (this.isShown() === true) {
+            this.hide();
+        } else {
+            this.show();
+        }
     };
 
     window.javatmp.sidebar.isAutoShowHideActive = function () {

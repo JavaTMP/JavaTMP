@@ -636,6 +636,12 @@
                                         </ul>
                                     </li>
                                     <li>
+                                        <a href="pages/custom-components/layout-options.html">
+                                            <i class="far fa-lg fa-fw fa-lightbulb"></i>
+                                            Layout Options
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="pages/custom-components/dashboard-stats.html">
                                             <i class="far fa-lg fa-fw fa-lightbulb"></i>
                                             Dashboard Stats
@@ -1645,6 +1651,7 @@
                     var visible = Boolean($this.val());
                     $this.siblings('.form-control-clear').toggleClass('d-none', !visible);
                 }).trigger('propertychange').trigger('keyup');
+
                 $('.form-control-clear').click(function () {
                     $(this).siblings('input[type="text"]').val('')
                             .trigger('propertychange').trigger('keyup').focus();

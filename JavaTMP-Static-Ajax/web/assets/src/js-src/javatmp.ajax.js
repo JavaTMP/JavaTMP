@@ -30,7 +30,6 @@
 
         // initialize NProgress and blockUI jquery plugins to work in ajax
         $(document).ajaxStart(function () {
-//            Pace.restart();
             NProgress.start();
             $(".breadcrumb-submenu > a > i.fa.faa-spin").removeClass("text-primary");
             $(".breadcrumb-submenu > a > i.fa.faa-spin").addClass("animated text-danger");

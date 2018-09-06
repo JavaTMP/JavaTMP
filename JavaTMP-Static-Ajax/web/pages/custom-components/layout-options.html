@@ -1,0 +1,159 @@
+<div class="dynamic-ajax-content">
+    <div class="page-header">
+        <h1>Template Layout Options</h1>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <div class="options float-right">
+                        <a href="#" class="settings"><i class="fa fa-cog"></i></a>
+                        <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
+                        <a href="#" class="reload"><i class="fa fa-sync"></i></a>
+                        <a href="#" class="fullscreen"><i class=" fa fa-expand"></i></a>
+                        <a href="#" class="remove"><i class="fa fa-times"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h4 class="mt-3 card-title text-primary">Navbar</h4>
+                    <p class="card-text">
+                        Add <code>.navbar-expand-lg/md</code> class to navbar to hide toggler-button on large and desktop devices
+                        or remove it to show the button on all devices and screen sizes. examples:
+                    </p>
+                    <button id="navbar-add-expand-lg-button" class="btn btn-primary m-1" type="button">Add .navbar-expand-lg</button>
+                    <button id="navbar-remove-expand-lg-button" class="btn btn-primary m-1" type="button">Remove .navbar-expand-lg</button>
+                    <p class="card-text">
+                        Add <code>.bs-dd-caret-off</code> class to dropdown-toggle element to remove the caret shape from it. examples:
+                    </p>
+                    <button id="navbar-add-caretoff-button" class="btn btn-primary m-1" type="button">Add .bs-dd-caret-off</button>
+                    <button id="navbar-remove-caretoff-button" class="btn btn-primary m-1" type="button">Remove .bs-dd-caret-off</button>
+                    <button id="navbar-remove-next-border-button" class="btn btn-primary m-1" type="button">Remove Next Border</button>
+                    <h4 class="mt-3 card-title text-primary">Hide/Show Sidebar</h4>
+                    <p class="card-text">
+                        Use <code>javatmp.sidebar.show();</code> to show hidden sidebar
+                        and <code>javatmp.sidebar.hide();</code> to hide shown sidebar. examples:
+                    </p>
+                    <button id="sidebar-hide-button" class="btn btn-primary m-1" type="button">Hide Sidebar</button>
+                    <button id="sidebar-show-button" class="btn btn-primary m-1" type="button">Show Sidebar</button>
+                    <button id="sidebar-toggle-button" class="btn btn-primary m-1" type="button">Toggle Sidebar Status</button>
+                    <h4 class="mt-3 card-title text-primary">Auto Hide/Show Sidebar On Mouse Move</h4>
+                    <p class="card-text">
+                        Use <code>javatmp.sidebar.activateAutoShowHide();</code> to Activate Auto Show/hide sidebar on main canvas
+                        and <code>javatmp.sidebar.deactivateAutoShowHide();</code> to Deactivate Auto Show/hide sidebar on main canvas. examples:
+                    </p>
+                    <button id="sidebar-activateAutoShowHide-button" class="btn btn-primary m-1" type="button">activate AutoShowHide</button>
+                    <button id="sidebar-deactivateAutoShowHide-button" class="btn btn-primary m-1" type="button">deactivate AutoShowHide</button>
+                    <h4 class="mt-3 card-title text-primary">long-sidebar over wide navbar</h4>
+                    <p class="card-text">
+                        Use <code>body.longer-sidebar</code> to make sidebar longer on all height
+                        or remove class <code>.longer-sidebar</code> from body tag to keep navbar wider on all width of the screen. examples:
+                    </p>
+                    <button id="sidebar-longer-button" class="btn btn-primary m-1" type="button">Add .longer-sidebar to body tag</button>
+                    <button id="sidebar-removelonger-button" class="btn btn-primary m-1" type="button">Remove .longer-sidebar to body tag</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--
+    Reference Your external Stylesheet file here
+    if your feature or plugins could not support to run globally.
+    <link href="components/" rel="stylesheet">
+    -->
+    <style type="text/css">
+        /*
+        Embed CSS styling for current page.
+        */
+    </style>
+
+    <!--
+    Reference Your external Javascript file here
+    if your feature or plugins could not support to run globally.
+    <script src="components/"></script>
+    -->
+    <script type="text/javascript">
+        // You could write safely Javascript code here too as our template
+        // should load mandatory libraries and plugins before.
+        // <--- HERE --->
+        //
+
+        jQuery(function ($) {
+            // any code put here will be run after content attach to ajax output container and before
+            // controll return to main javascript file.
+            // <--- HERE --->
+            //
+
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
+                // fire AFTER all transition done and your ajax content is shown to user.
+
+                $("#navbar-add-expand-lg-button").on("click", function () {
+                    $("nav.main-javatmp-navbar.navbar").addClass("navbar-expand-lg");
+                });
+                $("#navbar-remove-expand-lg-button").on("click", function () {
+                    $("nav.main-javatmp-navbar.navbar").removeClass("navbar-expand-lg");
+                });
+
+                $("#navbar-add-caretoff-button").on("click", function () {
+                    $(".dropdown-toggle", "nav.main-javatmp-navbar.navbar").addClass("bs-dd-caret-off");
+                });
+                $("#navbar-remove-caretoff-button").on("click", function () {
+                    $(".dropdown-toggle", "nav.main-javatmp-navbar.navbar").removeClass("bs-dd-caret-off");
+                });
+                $("#navbar-remove-next-border-button").on("click", function () {
+                    $(".nav-item", "nav.main-javatmp-navbar.navbar").css({"border-left": "none"});
+                });
+
+
+
+                $("#sidebar-show-button").on("click", function () {
+                    javatmp.sidebar.show();
+                });
+                $("#sidebar-hide-button").on("click", function () {
+                    javatmp.sidebar.hide();
+                });
+                $("#sidebar-toggle-button").on("click", function () {
+                    javatmp.sidebar.toggleStatus();
+                });
+                $("#sidebar-activateAutoShowHide-button").on("click", function () {
+                    javatmp.sidebar.activateAutoShowHide();
+                });
+                $("#sidebar-deactivateAutoShowHide-button").on("click", function () {
+                    javatmp.sidebar.deactivateAutoShowHide();
+                });
+                $("#sidebar-longer-button").on("click", function () {
+                    $("body").addClass("longer-sidebar");
+                });
+                $("#sidebar-removelonger-button").on("click", function () {
+                    $("body").removeClass("longer-sidebar");
+                });
+
+
+
+
+
+            });
+
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
+                // fire when user resize browser window or sidebar hide / show
+            });
+
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenCompress, function (event, card) {
+                // when card compress by pressing the top right tool button
+            });
+
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenExpand, function (event, card) {
+                // when card Expand by pressing the top right tool button
+            });
+
+            /**
+             * When another sidebar menu item pressed and before container issues new ajax request.
+             * You can cancel, destroy, or remove any thing here before replace main output ajax container.
+             * return false or event.preventDefault() will cancel ajax and stay you in the current page and do nothing.
+             **/
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {
+                $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenCompress);
+                $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenExpand);
+                return true;
+            });
+        });
+    </script>
+</div>
