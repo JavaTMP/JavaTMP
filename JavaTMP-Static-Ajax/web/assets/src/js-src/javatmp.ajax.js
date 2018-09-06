@@ -31,8 +31,8 @@
         // initialize NProgress and blockUI jquery plugins to work in ajax
         $(document).ajaxStart(function () {
             NProgress.start();
-            $(".breadcrumb-submenu > a > i.fa.faa-spin").removeClass("text-primary");
-            $(".breadcrumb-submenu > a > i.fa.faa-spin").addClass("animated text-danger");
+            $(".breadcrumb-submenu > a > i.fa.faa-spin").removeClass("spin-sync-stop");
+            $(".breadcrumb-submenu > a > i.fa.faa-spin").addClass("animated spin-sync-running");
         }).ajaxSend(function (event, xhr, ajaxOptions) {
             if (
                     (ajaxOptions.url.indexOf("_ajaxGlobalBlockUI=false") === -1) // parameter is part of the get URL
@@ -58,8 +58,8 @@
             }
         }).ajaxStop(function (event, xhr, ajaxOptions) {
             NProgress.done();
-            $(".breadcrumb-submenu > a > i.fa.faa-spin").removeClass("animated text-danger");
-            $(".breadcrumb-submenu > a > i.fa.faa-spin").addClass("text-primary");
+            $(".breadcrumb-submenu > a > i.fa.faa-spin").removeClass("animated spin-sync-running");
+            $(".breadcrumb-submenu > a > i.fa.faa-spin").addClass("spin-sync-stop");
         });
     };
 }(jQuery, window, document));

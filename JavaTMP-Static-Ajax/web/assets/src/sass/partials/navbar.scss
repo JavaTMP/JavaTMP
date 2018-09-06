@@ -51,7 +51,7 @@
     }
 }
 
-// v0.0.3: Added to support theme colors for navbar bg and color
+// v0.0.3: Added to support for navbar bg and color using theme colors
 .main-javatmp-navbar {
     @each $color, $value in $theme-colors {
         &.bg-#{$color} {

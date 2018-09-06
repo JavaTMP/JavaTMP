@@ -57,7 +57,44 @@ table.responsive td, table.responsive > thead > tr > th {
         color: $javatmp-main-content-page-header-h1-color;
     }
 }
-
+// v0.0.3: Added to support for theme colors
+body {
+    @each $color, $value in $theme-colors {
+        &.bg-#{$color} {
+            $temp-color: color-yiq($value);
+            .main-body-content-container {
+                border-bottom-color: $value;
+                background-color: $value;
+                color: $temp-color;
+                h1 {
+                    color: $temp-color;
+                }
+                a {
+                    color: $temp-color;
+                }
+                .card {
+                    background-color: $value;
+                    color: $temp-color;
+                    border-color: darken($value, 5%);
+                }
+                .card-header {
+                    color: $temp-color;
+                    background-color: $value;
+                    border-bottom-color: darken($value, 5%);
+                }
+                .card-footer {
+                    color: $temp-color;
+                    background-color: $value;
+                    border-top-color: darken($value, 5%);
+                }
+                /*                .card-body {
+                                    background-color: $value;
+                                    color: $temp-color;
+                                }*/
+            }
+        }
+    }
+}
 .dropdown-item.disabled, .dropdown-item:disabled {
     cursor: not-allowed;
 }
