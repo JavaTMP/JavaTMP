@@ -33,8 +33,7 @@ $javatmp-navbar-toggler-border-color: $navbar-dark-toggler-border-color!default;
 $javatmp-navbar-toggler-icon-bg-image: $navbar-dark-toggler-icon-bg!default;
 $javatmp-navbar-border-color: $javatmp-secondary-bg!default;
 $javatmp-navbar-border-width: $border-width!default;
-$javatmp-navbar-brand-align-self: stretch!default;
-$javatmp-navbar-menu-align-self: stretch!default;
+
 $javatmp-navbar-menu-link-color: $navbar-dark-active-color!default;
 $javatmp-navbar-menu-link-hover-color: $navbar-dark-active-color!default;
 $javatmp-navbar-menu-link-hover-bg: darken($primary, 7.5%)!default;
@@ -61,7 +60,7 @@ $javatmp-breadcrumb-link-active-color: darken($primary, 10%)!default;
 // JavaTMP Main Content variables
 $javatmp-main-content-page-header-border-bottom-color: $border-color!default;
 $javatmp-main-content-page-header-h1-font-size: $font-size-lg!default;
-$javatmp-main-content-page-header-h1-color: $primary!default;
+$javatmp-main-content-page-header-h1-color: $body-color!default;
 //--------------------------------------------------
 
 // JavaTMP Footer variables

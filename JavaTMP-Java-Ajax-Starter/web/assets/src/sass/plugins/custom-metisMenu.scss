@@ -109,3 +109,50 @@ $metismenu-submenu-vertical-border-color: darken($metismenu-bg, 10%)!default;
         transform: rotate(45deg) translateY(-50%);
     }
 }
+
+// v0.0.3: Added to support for sidebar bg and color using theme colors
+.sidebar {
+    @each $color, $value in $theme-colors {
+        &.bg-#{$color} {
+            $temp-color: color-yiq($value);
+            .metismenu {
+                background: $value;
+                color: $temp-color;
+                a {
+                    color: $temp-color;
+                    background: $value;
+                    &:hover, &:focus, &:active {
+                        background: darken($value, 10%);
+                        color: $temp-color;
+                        border-left-color: $temp-color;
+                    }
+                    &.active {
+                        background: darken($value, 15%);
+                        color: $temp-color;
+                        border-left-color: $temp-color;
+                    }
+                }
+                ul {
+                    border-left-color: $temp-color;
+                }
+                li {
+                    border-bottom-color: lighten($value, 10%);
+                }
+            }
+
+            [dir="rtl"] .metismenu {
+                a {
+                    &:hover, &:focus, &:active {
+                        border-right-color: $temp-color;
+                    }
+                    &.active {
+                        border-right-color: $temp-color;
+                    }
+                }
+                ul {
+                    border-right-color: $temp-color;
+                }
+            }
+        }
+    }
+}

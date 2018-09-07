@@ -526,12 +526,9 @@
             var table = $('#fixedHeader-dataTables-example').DataTable({
                 "pageLength": 50,
                 fixedHeader: {
-                    headerOffset: javatmp.util.getFixedOffset()
+                    headerOffset: javatmp.util.getFixedOffset(javatmp.settings.listOfFixedElement)
                 }
             });
-//            var fixedHeader = new $.fn.dataTable.FixedHeader(table, {
-//                headerOffset: javatmp.util.getFixedOffset()
-//            });
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.

@@ -1,14 +1,16 @@
 /*!
  * JavaTMP Utils JS File.
  */
-(function ($) {
+;
+(function ($, window, document, undefined) {
 
     window.javatmp.util = window.javatmp.util || {};
 
-    window.javatmp.util.getFixedOffset = function () {
+    window.javatmp.util.getFixedOffset = function (listOfFixedElement) {
         var retOffset = 0;
-        retOffset = retOffset + $('.main-javatmp-navbar').outerHeight(true);
-        retOffset = retOffset + $('.main-breadcrumb-bar').outerHeight(true);
+        for (var i = 0; i < listOfFixedElement.length; i++) {
+            retOffset = retOffset + $(listOfFixedElement[i]).outerHeight(true);
+        }
         return retOffset;
 
     };
@@ -71,5 +73,4 @@
         }
         return context[func].apply(context, args);
     };
-
-}(jQuery));
+}(jQuery, window, document));

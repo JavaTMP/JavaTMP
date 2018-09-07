@@ -1,4 +1,5 @@
 @import "../common/variables.scss";
+
 /*$ion-range-slider-radius: $border-radius;*/
 
 $ion-range-slider-irs-bar-bg: $primary!default;
@@ -64,7 +65,7 @@ $ion-range-slider-shadow-bar-bg: $body-color!default;
 
 .irs-shadow {
     height: 2px;
-    top: $ion-range-slider-top + ($ion-range-slider-height/2rem);
+    top: 38px;
     background: $ion-range-slider-shadow-bar-bg;
     opacity: 0.3;
     @include border-left-radius($ion-range-slider-border-radius);

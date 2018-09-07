@@ -147,7 +147,7 @@
                                 var targetY = y;
                                 var offset = $(this).offset();
                                 var posY = offset.top - $(window).scrollTop();
-                                posY = posY - javatmp.util.getFixedOffset(javatmp.settings.listOfFixedElement)
+                                posY = posY - javatmp.util.getFixedOffset(javatmp.settings.listOfFixedElement);
                                 console.log("targety = " + posY
                                         + " , ajaxoutput height = " + $(window).height()
                                         + " . menu height = " + menuHeightWithMargin);

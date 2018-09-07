@@ -53,7 +53,6 @@
     }
     .breadcrumb-submenu {
         width: 49px;
-        min-height: 36px;
         .min-tools-button {
             font-size: 2rem;
             /*line-height: 36px;*/
@@ -61,6 +60,55 @@
             vertical-align: middle;
             line-height: 2.5rem;
             /*margin-top:1px;*/
+        }
+    }
+    .spin-sync-running {
+        color: $danger;
+    }
+    .spin-sync-stop {
+        color: $javatmp-breadcrumb-link-color;
+    }
+}
+
+// v0.0.3: Added to support for theme colors
+.main-breadcrumb-bar {
+    @each $color, $value in $theme-colors {
+        &.bg-#{$color} {
+            $temp-color: color-yiq($value);
+            border-bottom-color: $value;
+            background-color: $value;
+            color: $temp-color;
+            .breadcrumb {
+                background-color: $value;
+                color: $temp-color;
+                a {
+                    color: $temp-color;
+                }
+                a.active {
+                    color: darken($temp-color, 10%);
+                }
+                .breadcrumb-item.active {
+                    color: darken($temp-color, 10%);
+                }
+                .breadcrumb-item + .breadcrumb-item::before {
+                    color: $temp-color;
+                }
+            }
+            .breadcrumb-submenu {
+                background-color: $value;
+                color: $temp-color;
+                .min-tools-button {
+                    background-color: $value;
+                    color: $temp-color;
+                }
+            }
+            .spin-sync-running {
+                color: darken($temp-color, 15%);
+            }
+            .spin-sync-stop {
+                color: $temp-color;
+            }
+
         }
     }
 }
