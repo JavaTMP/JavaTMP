@@ -7,13 +7,20 @@
     window.javatmp = window.javatmp || {};
 
     window.javatmp.ajax = window.javatmp.ajax || {};
+    window.javatmp.ajax.settings = window.javatmp.ajax.settings || {};
 
-    window.javatmp.ajax.init = function () {
+    var defaults = {
+        defaultPassData: {}
+    };
+    window.javatmp.ajax.init = function (options) {
+
+        $.extend(true, this.settings, defaults, options);
+
         // initialize global jquery ajax configuration:
         $.ajaxSetup({
             async: true,
             cache: true,
-            data: javatmp.settings.defaultPassData,
+            data: this.settings.defaultPassData,
             error: function (xhr, ajaxOptions, thrownError) {
             },
             statusCode: {
@@ -28,38 +35,15 @@
             }
         });
 
-        // initialize NProgress and blockUI jquery plugins to work in ajax
+        // initialize jQuery Default Ajax events lifecycle:
         $(document).ajaxStart(function () {
-            NProgress.start();
-            $(".breadcrumb-submenu > a > i.fa.faa-spin").removeClass("spin-sync-stop");
-            $(".breadcrumb-submenu > a > i.fa.faa-spin").addClass("animated spin-sync-running");
+
         }).ajaxSend(function (event, xhr, ajaxOptions) {
-            if (
-                    (ajaxOptions.url.indexOf("_ajaxGlobalBlockUI=false") === -1) // parameter is part of the get URL
-                    && !(!!ajaxOptions.data && !!ajaxOptions.data.indexOf && (ajaxOptions.data.indexOf('"_ajaxGlobalBlockUI":false') !== -1)) // parameter is part of Post JSON data
-                    )
-            {
-                $.blockUI({message: null,
-                    overlayCSS: {
-                        backgroundColor: 'transparent',
-                        opacity: 1
-                    },
-                    ignoreIfBlocked: true,
-                    baseZ: 2147483647});
-            }
+
         }).ajaxComplete(function (event, xhr, ajaxOptions) {
-            if (
-                    (ajaxOptions.url.indexOf("_ajaxGlobalBlockUI=false") === -1) // parameter is part of the get URL
-                    && !(!!ajaxOptions.data && !!ajaxOptions.data.indexOf && (ajaxOptions.data.indexOf('"_ajaxGlobalBlockUI":false') !== -1)) // parameter is part of Post JSON data
-                    ) {
-                $.unblockUI({
-                    fadeOut: 0 // supporting fadeOut value may hang the windows an issue in the plugin itself.
-                });
-            }
+
         }).ajaxStop(function (event, xhr, ajaxOptions) {
-            NProgress.done();
-            $(".breadcrumb-submenu > a > i.fa.faa-spin").removeClass("animated spin-sync-running");
-            $(".breadcrumb-submenu > a > i.fa.faa-spin").addClass("spin-sync-stop");
+
         });
     };
 }(jQuery, window, document));

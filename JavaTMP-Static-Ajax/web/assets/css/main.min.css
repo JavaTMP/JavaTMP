@@ -88,10 +88,11 @@ body.bg-primary .main-body-content-container {
                                     background-color: $value;
                                     color: $temp-color;
                                 }*/ }
-  body.bg-primary .main-body-content-container h1 {
-    color: #fff; }
-  body.bg-primary .main-body-content-container a {
-    color: #fff; }
+  body.bg-primary .main-body-content-container .page-header {
+    /*margin: -15px 0 15px 0;*/
+    border-bottom-color: #fff; }
+    body.bg-primary .main-body-content-container .page-header h1 {
+      color: #fff; }
   body.bg-primary .main-body-content-container .card {
     background-color: #007bff;
     color: #fff;
@@ -113,10 +114,11 @@ body.bg-secondary .main-body-content-container {
                                     background-color: $value;
                                     color: $temp-color;
                                 }*/ }
-  body.bg-secondary .main-body-content-container h1 {
-    color: #fff; }
-  body.bg-secondary .main-body-content-container a {
-    color: #fff; }
+  body.bg-secondary .main-body-content-container .page-header {
+    /*margin: -15px 0 15px 0;*/
+    border-bottom-color: #fff; }
+    body.bg-secondary .main-body-content-container .page-header h1 {
+      color: #fff; }
   body.bg-secondary .main-body-content-container .card {
     background-color: #6c757d;
     color: #fff;
@@ -138,10 +140,11 @@ body.bg-success .main-body-content-container {
                                     background-color: $value;
                                     color: $temp-color;
                                 }*/ }
-  body.bg-success .main-body-content-container h1 {
-    color: #fff; }
-  body.bg-success .main-body-content-container a {
-    color: #fff; }
+  body.bg-success .main-body-content-container .page-header {
+    /*margin: -15px 0 15px 0;*/
+    border-bottom-color: #fff; }
+    body.bg-success .main-body-content-container .page-header h1 {
+      color: #fff; }
   body.bg-success .main-body-content-container .card {
     background-color: #28a745;
     color: #fff;
@@ -163,10 +166,11 @@ body.bg-info .main-body-content-container {
                                     background-color: $value;
                                     color: $temp-color;
                                 }*/ }
-  body.bg-info .main-body-content-container h1 {
-    color: #fff; }
-  body.bg-info .main-body-content-container a {
-    color: #fff; }
+  body.bg-info .main-body-content-container .page-header {
+    /*margin: -15px 0 15px 0;*/
+    border-bottom-color: #fff; }
+    body.bg-info .main-body-content-container .page-header h1 {
+      color: #fff; }
   body.bg-info .main-body-content-container .card {
     background-color: #17a2b8;
     color: #fff;
@@ -188,10 +192,11 @@ body.bg-warning .main-body-content-container {
                                     background-color: $value;
                                     color: $temp-color;
                                 }*/ }
-  body.bg-warning .main-body-content-container h1 {
-    color: #212529; }
-  body.bg-warning .main-body-content-container a {
-    color: #212529; }
+  body.bg-warning .main-body-content-container .page-header {
+    /*margin: -15px 0 15px 0;*/
+    border-bottom-color: #212529; }
+    body.bg-warning .main-body-content-container .page-header h1 {
+      color: #212529; }
   body.bg-warning .main-body-content-container .card {
     background-color: #ffc107;
     color: #212529;
@@ -213,10 +218,11 @@ body.bg-danger .main-body-content-container {
                                     background-color: $value;
                                     color: $temp-color;
                                 }*/ }
-  body.bg-danger .main-body-content-container h1 {
-    color: #fff; }
-  body.bg-danger .main-body-content-container a {
-    color: #fff; }
+  body.bg-danger .main-body-content-container .page-header {
+    /*margin: -15px 0 15px 0;*/
+    border-bottom-color: #fff; }
+    body.bg-danger .main-body-content-container .page-header h1 {
+      color: #fff; }
   body.bg-danger .main-body-content-container .card {
     background-color: #dc3545;
     color: #fff;
@@ -238,10 +244,11 @@ body.bg-light .main-body-content-container {
                                     background-color: $value;
                                     color: $temp-color;
                                 }*/ }
-  body.bg-light .main-body-content-container h1 {
-    color: #212529; }
-  body.bg-light .main-body-content-container a {
-    color: #212529; }
+  body.bg-light .main-body-content-container .page-header {
+    /*margin: -15px 0 15px 0;*/
+    border-bottom-color: #212529; }
+    body.bg-light .main-body-content-container .page-header h1 {
+      color: #212529; }
   body.bg-light .main-body-content-container .card {
     background-color: #f8f9fa;
     color: #212529;
@@ -263,10 +270,11 @@ body.bg-dark .main-body-content-container {
                                     background-color: $value;
                                     color: $temp-color;
                                 }*/ }
-  body.bg-dark .main-body-content-container h1 {
-    color: #fff; }
-  body.bg-dark .main-body-content-container a {
-    color: #fff; }
+  body.bg-dark .main-body-content-container .page-header {
+    /*margin: -15px 0 15px 0;*/
+    border-bottom-color: #fff; }
+    body.bg-dark .main-body-content-container .page-header h1 {
+      color: #fff; }
   body.bg-dark .main-body-content-container .card {
     background-color: #343a40;
     color: #fff;

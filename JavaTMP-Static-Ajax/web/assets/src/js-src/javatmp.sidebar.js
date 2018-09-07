@@ -8,9 +8,9 @@
     var defaults = {
         sidebarSelector: null,
         sidebarBeforeHideEventName: "sidebarBeforeHide",
-        sidebarHideEventName: "sidebarHide",
+        sidebarHiddenEventName: "sidebarHide",
         sidebarBeforeShowEventName: "sidebarBeforeShow",
-        sidebarShowEventName: "sidebarShow",
+        sidebarShownEventName: "sidebarShow",
         isRTL: false,
         floatDefault: "left"
     };
@@ -29,10 +29,10 @@
                     && (event.originalEvent.propertyName.indexOf(propertyName) !== -1)) {
                 if (propertyValue === "0px") {
                     // just shown:
-                    $($this.settings.sidebarSelector).trigger($this.settings.sidebarShowEventName);
+                    $($this.settings.sidebarSelector).trigger($this.settings.sidebarShownEventName);
                 } else {
                     // just hidden:
-                    $($this.settings.sidebarSelector).trigger($this.settings.sidebarHideEventName);
+                    $($this.settings.sidebarSelector).trigger($this.settings.sidebarHiddenEventName);
                 }
             }
         });

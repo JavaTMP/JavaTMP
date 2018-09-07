@@ -66,11 +66,12 @@ body {
                 border-bottom-color: $value;
                 background-color: $value;
                 color: $temp-color;
-                h1 {
-                    color: $temp-color;
-                }
-                a {
-                    color: $temp-color;
+                .page-header {
+                    /*margin: -15px 0 15px 0;*/
+                    border-bottom-color: $temp-color;
+                    h1 {
+                        color: $temp-color;
+                    }
                 }
                 .card {
                     background-color: $value;
