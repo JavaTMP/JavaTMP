@@ -1,4 +1,5 @@
 @import "../common/variables.scss";
+@import "../common/colors-variables";
 
 @each $colorKey, $colorValue in $colorsMap {
     .btn-#{$colorKey} {

@@ -1,4 +1,5 @@
 @import "../common/variables.scss";
+
 $datatables-selected-bg: $primary!default;
 $datatables-selected-color: color-yiq($datatables-selected-bg)!default;
 $datatables-selected-hover-bg: darken($datatables-selected-bg, 7.5%)!default;
