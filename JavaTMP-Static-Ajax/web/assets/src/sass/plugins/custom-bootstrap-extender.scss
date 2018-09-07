@@ -13,8 +13,18 @@
         position: absolute;
         right: 0;
         top: 0;
+
     }
 }
 ::-ms-clear {
     display: none;
+}
+
+[dir=rtl] {
+    .has-form-control-clear {
+        .form-control-clear {
+            right: auto;
+            left: 0;
+        }
+    }
 }

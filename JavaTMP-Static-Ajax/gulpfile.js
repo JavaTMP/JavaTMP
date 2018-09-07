@@ -337,7 +337,7 @@ gulp.task('main-sass', ["delete-css"], function () {
                 browsers: ['last 2 versions'],
                 cascade: false
             }))
-//            .pipe(cleanCSS())
+            .pipe(cleanCSS())
             .pipe(rename({suffix: '.min'}))
             .pipe(gulp.dest('./web/assets/css/'));
 });
