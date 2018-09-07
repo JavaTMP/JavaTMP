@@ -8,37 +8,39 @@
     window.javatmp = window.javatmp || {};
     var index = window.index;
     var javatmp = window.javatmp;
-//    var defaults = {};
+
+    var defaults = {
+        httpMethod: "GET",
+        dataType: "html",
+        updateURLHash: true,
+        defaultPassData: {_ajax: "ajax", _ajaxGlobalBlockUI: true},
+        defaultOutputSelector: '.main-body-content-container',
+        defaultUrl: 'pages/home.html',
+        sidebarSelector: ".sidebar",
+        sidebarHiddenEventName: "sidebarHidden",
+        sidebarShownEventName: "sidebarShown",
+        listOfFixedElement: ['.main-javatmp-navbar', '.main-breadcrumb-bar'],
+        mCustomScrollbarOptions: {
+            theme: "javatmp",
+            alwaysShowScrollbar: 0,
+            scrollInertia: 0,
+            mouseWheel: {
+                preventDefault: true,
+                scrollAmount: 85
+            },
+            advanced: {
+                autoScrollOnFocus: false,
+                updateOnContentResize: true
+            }
+        }
+    };
+
     index.init = function (options) {
 
-//        $.extend(true, this.settings, defaults, options);
+        $.extend(true, defaults, options);
 
         // define default parameters to apply as a global settings for application.
-        var defaults = {
-            httpMethod: "GET",
-            dataType: "html",
-            updateURLHash: true,
-            defaultPassData: {_ajax: "ajax", _ajaxGlobalBlockUI: true},
-            defaultOutputSelector: '.main-body-content-container',
-            defaultUrl: 'pages/home.html',
-            sidebarSelector: ".sidebar",
-            sidebarHiddenEventName: "sidebarHidden",
-            sidebarShownEventName: "sidebarShown",
-            listOfFixedElement: ['.main-javatmp-navbar', '.main-breadcrumb-bar'],
-            mCustomScrollbarOptions: {
-                theme: "javatmp",
-                alwaysShowScrollbar: 0,
-                scrollInertia: 0,
-                mouseWheel: {
-                    preventDefault: true,
-                    scrollAmount: 85
-                },
-                advanced: {
-                    autoScrollOnFocus: false,
-                    updateOnContentResize: true
-                }
-            }
-        };
+
 
         javatmp.init(defaults);
         javatmp.ajax.init({
