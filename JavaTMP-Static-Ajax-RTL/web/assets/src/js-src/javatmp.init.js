@@ -1,11 +1,10 @@
 /*!
  * JavaTMP Init JS File.
  */
-(function ($) {
+;
+(function ($, window, document, undefined) {
 
-    window.javatmp = {};
-
-    window.javatmp.defaults = {
+    var defaults = {
         // Http method to use when calling any ajax requests passing to jquery $.ajax
         httpMethod: "GET",
 
@@ -78,11 +77,13 @@
         contextPath: ""
     };
 
+    window.javatmp = window.javatmp || {};
+
     window.javatmp.settings = {};
 
     window.javatmp.init = function (options) {
         // initialize application settings from default and options paramters:
-        $.extend(true, window.javatmp.settings, window.javatmp.defaults, options);
+        $.extend(true, window.javatmp.settings, defaults, options);
     };
-}(jQuery));
+}(jQuery, window, document));
 
