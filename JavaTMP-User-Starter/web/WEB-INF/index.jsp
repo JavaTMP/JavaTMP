@@ -11,7 +11,7 @@
         <link href="${pageContext.request.contextPath}/assets/dist/css/javatmp-plugins-all.min.css" rel="stylesheet" type="text/css"/>
         <link href='${pageContext.request.contextPath}/assets/dist/css/javatmp-plugins-print-all.min.css' rel='stylesheet' media='print' />
 
-        <!-- Include directional support -->
+        <%-- Include directional support --%>
         <c:if test="${labels['global.direction'] == 'ltr'}">
             <link id="themeStyleSheet" href="${pageContext.request.contextPath}/assets/dist/css/javatmp-${sessionScope.user.theme}.min.css" rel="stylesheet" type="text/css"/>
         </c:if>
@@ -19,7 +19,10 @@
             <link id="themeStyleSheet" href="${pageContext.request.contextPath}/assets/dist/css/javatmp-${sessionScope.user.theme}-rtl.min.css" rel="stylesheet" type="text/css"/>
         </c:if>
 
-        <!-- Include language support font -->
+        <%--
+        Include language support font in our case we named the file with lang ending.
+        You can use if/else or switch to specifiy a file
+        --%>
         <link href="${pageContext.request.contextPath}/assets/dist/css/font-family-${labels['global.language']}.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <body class="sidebar-active">

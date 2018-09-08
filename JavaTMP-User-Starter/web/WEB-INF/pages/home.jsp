@@ -119,7 +119,7 @@
     </div>
     <div class="form-row">
         <div class="col-lg-6">
-            <div class="card shadow" id="UsersLocationsInTheWorldCard">
+            <div class="card shadow mb-3" id="UsersLocationsInTheWorldCard">
                 <div class="card-header">
                     Users Locations
                     <div class="options float-right">
@@ -137,7 +137,7 @@
             </div>
         </div>
         <div class="col-lg-6">
-            <div class="card shadow" id="UsersBirthdayPerMonthsCard">
+            <div class="card shadow mb-3" id="UsersBirthdayPerMonthsCard">
                 <div class="card-header">
                     Users Birthday Per Months
                     <div class="options float-right">
