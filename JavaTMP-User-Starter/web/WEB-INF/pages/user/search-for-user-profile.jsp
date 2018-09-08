@@ -389,8 +389,11 @@
                             populateForm(form, rowObject);
                             form.find("textarea[name='address']").summernote('code', rowObject.address);
 //                    form.find("textarea[name='address']").summernote('triggerEvent', 'change');
+                            // first destory or remote bugy plugins on edge that fire the show of calendar dropdown
+                            // when value change;
+                            form.find("input[name='birthOfDateStr']").data('daterangepicker').remove();
                             form.find("input[name='birthOfDateStr']").val(moment(rowObject.birthDate, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("DD/MM/YYYY"));
-
+                            form.find("input[name='birthOfDateStr']").daterangepicker(birthOfDateDateRangePickerOtions, birthOfDateDateRangePickerOtionsFunction);
                             var image = form.find("img[id='profilePicturePreview']");
                             var resizeImage = form.find("img[id='profilePictureResizePreview']");
                             var avatarImage = form.find("img[id='profilePictureAvatarPreview']");
@@ -597,7 +600,7 @@
                 hourFormat: "24",
                 clearMaskOnLostFocus: false
             });
-            form.find("input[name='birthOfDateStr']").daterangepicker({
+            var birthOfDateDateRangePickerOtions = {
                 "opens": javatmp.settings.floatReverse,
                 startDate: moment().format("DD/MM/YYYY"),
                 singleDatePicker: true,
@@ -615,10 +618,12 @@
                     "direction": javatmp.settings.direction,
                     format: 'DD/MM/YYYY'
                 }
-            }, function (start, end, label) {
+            };
+            var birthOfDateDateRangePickerOtionsFunction = function (start, end, label) {
                 var formatedDateSelected = moment(start).format("DD/MM/YYYY");
                 form.find("input[name='birthOfDateStr']").val(formatedDateSelected).trigger("change");
-            });
+            };
+            form.find("input[name='birthOfDateStr']").daterangepicker(birthOfDateDateRangePickerOtions, birthOfDateDateRangePickerOtionsFunction);
             form.find("textarea[name='address']").summernote({
                 direction: javatmp.settings.direction,
                 lang: javatmp.user.lang === "ar" ? "ar-AR" : javatmp.user.lang,
