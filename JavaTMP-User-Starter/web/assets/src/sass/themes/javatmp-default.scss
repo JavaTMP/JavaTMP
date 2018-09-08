@@ -1,20 +1,3 @@
-
-@import "../common/variables";
-
-/*$font-size-base: 0.8125rem;*/
-/*$grid-gutter-width: 20px;*/
-/*$table-cell-padding: .5rem;*/
-/*$input-btn-padding-x: .5rem;*/
-/*$line-height-base: 1.3;*/
-
-/*$custom-select-padding-x: .5rem;*/
-
-$card-border-color: darken($javatmp-secondary-bg, 9%);
-$card-cap-bg: $javatmp-secondary-bg;
-$javatmp-navbar-border-color: darken($javatmp-secondary-bg, 9%);
-$javatmp-sidebar-border-color: darken($javatmp-secondary-bg, 9%);
-$javatmp-footer-bar-border-color: darken($javatmp-secondary-bg, 9%);
-
 @import "../main.scss";
 
 html {

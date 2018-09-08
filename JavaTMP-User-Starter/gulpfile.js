@@ -464,7 +464,10 @@ gulp.task('generate-dist', ['copy-components', "delete-dist", "delete-css", "del
             gulp.src([
                 './web/assets/src/js-src/javatmp.init.js',
                 './web/assets/src/js-src/javatmp.util.js',
-                './web/assets/src/js-src/javatmp.js'])
+                './web/assets/src/js-src/javatmp.ajax.js',
+                './web/assets/src/js-src/javatmp.sidebar.js',
+                './web/assets/src/js-src/index.js'
+            ])
                     .pipe(eslint())
                     .pipe(eslint.format())
                     .pipe(uglify({output: {comments: /^!/}}))

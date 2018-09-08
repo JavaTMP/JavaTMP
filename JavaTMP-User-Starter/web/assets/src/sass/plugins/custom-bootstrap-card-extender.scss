@@ -43,3 +43,24 @@ $card-extender-options-transition: $transition-base !default;
         }
     }
 }
+
+// v0.0.3: Added to support for theme colors
+body {
+    @each $color, $value in $theme-colors {
+        &.bg-#{$color} {
+            $temp-color: color-yiq($value);
+            .card {
+                > .card-header {
+                    > .options {
+                        > a {
+                            color: $temp-color;
+                            &:hover {
+                                color: darken($temp-color, 10%);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
