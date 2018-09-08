@@ -466,6 +466,26 @@
                                 </ul>
                             </li>
                             <li>
+                                <a href="#" class="has-arrow">
+                                    <i class="far fa-lg fa-fw fa-user-circle"></i>
+                                    Icons
+                                </a>
+                                <ul aria-expanded="true">
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/icon/font_awesome_icons">
+                                            <i class="far fa-lg fa-fw fa-user-circle"></i>
+                                            Font Awesome Icons
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/icon/font_awesome_animation_icon">
+                                            <i class="far fa-lg fa-fw fa-user-circle"></i>
+                                            Font Awesome Animation Icons Set
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
                                 <a class="has-arrow" href="#">
                                     <i class="far fa-lg fa-fw fa-lightbulb"></i>
                                     Custom Components
