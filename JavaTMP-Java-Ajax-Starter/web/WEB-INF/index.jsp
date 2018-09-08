@@ -1348,7 +1348,7 @@
                             <ol class="breadcrumb"></ol>
                             <div class="breadcrumb-submenu">
                                 <a class="float-right min-tools-button">
-                                    <i class="fa fa-sync-alt  faa-spin animated-hover text-primary"></i>
+                                    <i class="fa fa-sync-alt  faa-spin animated-hover"></i>
                                 </a>
                             </div>
                         </div>
@@ -1840,6 +1840,7 @@
         <script type="text/javascript">
             jQuery(function ($) {
                 $("#oneTimeOverlay").remove();
-            });</script>
+            });
+        </script>
     </body>
 </html>
