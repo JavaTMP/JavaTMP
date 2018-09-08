@@ -244,8 +244,8 @@
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="d-flex align-items-center h-100 text-left nav-link dropdown-toggle" data-toggle="dropdown" href="#">
-                        <img class="rounded-circle mr-1"
+                    <a class="line-height-1 d-flex align-items-center h-100 text-left nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                        <img class="logo-image rounded-circle mr-1"
                              src="${pageContext.request.contextPath}/assets/img/avatar/profile_pic_min.png" alt=""/>
                         <span class="d-none d-md-inline">
                             <small class="d-flex">Welcome,</small>
