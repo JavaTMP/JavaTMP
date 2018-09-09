@@ -5,6 +5,7 @@ title: High Level Template Structure
 
 Your purchased package contains separate folder for each template. The following is a high level folder structures of purchased JavaTMP project package with its description and usage:
 
+```
 JavaTMP (your purchased package)
 |---readme.md (read me file)
 |---LICENSE (end-user license agreement (EULA) and copyright information file)
@@ -14,6 +15,7 @@ JavaTMP (your purchased package)
 +---JavaTMP-Static-Ajax-Starter-RTL (RTL bootstrap admin and dashboard components Starter template)
 +---JavaTMP-Java-Ajax-Starter (Dynamic LTR/RTL multi languages Java Bootstrap web application version)
 +---JavaTMP-User-Starter (Advanced Dynamic Java Bootstrap LTR/RTL multi languages User Management Web application Template)
+```
 
 `./JavaTMP/readme.md` file
 --------------------------
