@@ -1,6 +1,5 @@
 ---
 title: Java Bootstrap Admin And Dashboard Template
-header: Java Bootstrap Admin And Dashboard Template
 ---
 # Java Bootstrap Admin And Dashboard Template
 
