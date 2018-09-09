@@ -80,7 +80,7 @@ Bootstrap uses `$theme-color-interval` in `theme-color-level` function in `./n
 
   @return mix($color-base, $color, $level \* $theme-color-interval);
 }
-
+```
 So, Negative level values will lighten the color, while higher levels will darken and this function is called mainly in three locations to automatically generate a color for Alert, list-group-item and  table-row variants. In our example above when we introduce javatmp theme color with `#598234`. bootstrap assign different values for alert-javatmp, list-group-item-javatmp, table-javatmp background,border and text colors.
 
 Note that the mix function that is used above in `theme-color-level` function is Sass build-in function and the following external link provide you more information about it: [Sass mix build-in Function Documentation Page](http://sass-lang.com/documentation/Sass/Script/Functions.html#mix-instance_method "Sass mix build-in Function Documentation Page")
