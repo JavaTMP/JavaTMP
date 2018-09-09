@@ -70,7 +70,7 @@ So, Updating one of them or all will automatically update all other components a
 #### `$theme-color-interval` variable
 
 Bootstrap uses `$theme-color-interval` in `theme-color-level` function in `./node_modules/bootstrap/scss/_functions.scss` Sass file to get a particular level of color from the `$theme-colors` map. The following definition of `theme-color-level` function:
-```
+```scss
 ...
 // Request a theme color level
 @function theme-color-level($color-name: "primary", $level: 0) {
@@ -88,7 +88,7 @@ Note that the mix function that is used above in `theme-color-level` function is
 #### Color contrast
 
 Bootstrap uses the following variables:
-```
+```scss
 // The yiq lightness value that determines when the lightness of color changes from "dark" to "light". Acceptable values are between 0 and 255.
 $yiq-contrasted-threshold: 150 !default;
 
@@ -105,7 +105,7 @@ The definition of `color-yiq` function is reside in `./node_modules/bootstrap/sc
 #### Bootstrap Sass options
 
 Bootstrap uses the following variables to globally modify styling by enabling or disabling optional features:
-```
+```scss
 $enable-caret:              true !default; // Enables pseudo element caret on .dropdown-toggle.
 $enable-rounded:            true !default; // Enables predefined border-radius styles on various components.
 $enable-shadows:            false !default; // Enables predefined box-shadow styles on various components.
@@ -118,7 +118,7 @@ $enable-print-styles:       true !default; // Enables styles for optimizing prin
 #### Bootstrap Body variables
 
 Bootstrap uses the following two important global variables that will use in body and some components elements:
-```
+```scss
 $body-bg:    $white !default;
 $body-color: $gray-900 !default;
 ```
@@ -127,7 +127,7 @@ remember that bg stand for background, So the default Bootstrap color for body b
 #### Bootstrap Links variables
 
 Bootstrap uses the following variables to control the style of link and anchor elements:
-```
+```scss
 $link-color:            theme-color("primary") !default;
 $link-decoration:       none !default;
 $link-hover-color:      darken($link-color, 15%) !default;
@@ -138,7 +138,7 @@ So Bootstrap use custom theme-color function to get the color value of primary. 
 #### Bootstrap Paragraph Variable
 
 Bootstrap uses the following variable to set a bottom margin for paragraph element `<p>`:
-```
+```scss
 $paragraph-margin-bottom: 1rem !default;
 ```
 And it is mainly used in `./node_modules/bootstrap/scss/_reboot.scss`.
@@ -146,7 +146,7 @@ And it is mainly used in `./node_modules/bootstrap/scss/_reboot.scss`.
 #### Bootstrap Grid Breakpoints
 
 Bootstrap primarily uses the following $grid-breakpoints map to define the minimum dimensions at which layout, grid system, and components will change, adapting to different screen sizes, for use in media queries:
-```
+```scss
 $grid-breakpoints: (
   xs: 0,
   sm: 576px,
@@ -158,7 +158,7 @@ $grid-breakpoints: (
 Since Bootstrap is developed to be mobile first, It use a handful of media queries to create sensible breakpoints for its layouts and interfaces. These breakpoints are mostly based on minimum viewport widths and allow them to scale up elements as the viewport changes. Bootstrap provides the following important mixins `media-breakpoint-up` and `media-breakpoint-down` to deal with the above `$grid-breakpoints` map and generate desired media queries in `./node_modules/bootstrap/scss/mixins/_breakpoints.scss` Sass file.
 
 You can use those mixins like this:
-```
+```scss
 @include media-breakpoint-up(xs) {
     .some-class {
         display: block;
@@ -171,7 +171,7 @@ You can use those mixins like this:
 }
 ```
 And the generated CSS will be like this:
-```
+```scss
 @media (min-width: 576px) {
     .some-class {
         display: block;
