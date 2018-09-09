@@ -1,9 +1,4 @@
 ---
----
-
-@import "{{ site.theme }}";
-
----
 title: Java Bootstrap Admin And Dashboard Template
 header: Java Bootstrap Admin And Dashboard Template
 ---
