@@ -16,7 +16,7 @@ It depends mainly on the following external backend java opensource libraries to
 *   Use [mysql-connector-java-8.0.11.jar](https://dev.mysql.com/downloads/connector/j/8.0.html "Java Mysql Connector 8 for JDBC driver").
 *   Use [simplecaptcha-1.2.1.jar](https://sourceforge.net/projects/simplecaptcha/ "Simplecaptcha Home & Download Page").
 
-`JavaTMP-User-Starter` project is a specific dynamic users web application with a subset of dynamic plugins and pages from `JavaTMP-Java-Ajax-Starter` to provide a simple users management demo. The following documentation page provide you with more information for our General dynamic Java web application version : [Dynamic Java Bootstrap Web Application Documentation Home Page](https://www.javatmp.com/pages/javatmp-java-ajax-starter-project-version "Dynamic Java Bootstrap Web Application Documentation Home Page").
+`JavaTMP-User-Starter` project is a specific dynamic users web application with a subset of dynamic plugins and pages from `JavaTMP-Java-Ajax-Starter` to provide a simple users management demo. The following documentation page provide you with more information for our General dynamic Java web application version : [Dynamic Java Bootstrap Web Application Documentation Home Page](/pages/javatmp-java-ajax-starter-project-version "Dynamic Java Bootstrap Web Application Documentation Home Page").
 
 Remember that the `JavaTMP-User-Starter` project is a Netbeans IDE 8.2 project, so you can directly import and open it there.
 
