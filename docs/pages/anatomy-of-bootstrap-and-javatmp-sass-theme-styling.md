@@ -169,9 +169,9 @@ You can use those mixins like this:
         display: block;
     }
 }
-
+```
 And the generated CSS will be like this:
-
+```
 @media (min-width: 576px) {
     .some-class {
         display: block;
