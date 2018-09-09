@@ -7,7 +7,7 @@ Your purchased package contains separate folder for each template. The
 following is a high level folder structures of purchased
 JavaTMP project package with its description and usage:
 
-``` prettyprint linenums lang-html prettyprinted
+```
 JavaTMP (your purchased package)
 |---readme.md (read me file)
 |---LICENSE (end-user license agreement (EULA) and copyright information file)
