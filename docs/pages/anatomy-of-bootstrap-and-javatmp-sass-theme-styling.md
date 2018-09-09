@@ -98,7 +98,7 @@ $yiq-text-light: $white !default;
 ```
 To manage the color contrast function called `color-yiq`. It utilizes the YIQ color space to automatically return a `$yiq-text-light` or `$yiq-text-dark` color based on the specified base color. This function is especially useful for mixins or loops where you’re generating multiple classes. For example Bootstrap uses it to dynamically generate the text color of a button based on background color. The following photo show you a subset of JavaTMP extended buttons and how Bootstrap define the color value of the button's text:
 
-![Bootstrap Extended Buttons with dynamic Text color based on Background color](//cdn.shopify.com/s/files/1/2570/3194/files/Bootstrap-extended-buttons_1024x1024.JPG?v=1516179279)
+![Bootstrap Extended Buttons with dynamic Text color based on Background color](http://cdn.shopify.com/s/files/1/2570/3194/files/Bootstrap-extended-buttons_1024x1024.JPG?v=1516179279)
 
 The definition of `color-yiq` function is reside in `./node_modules/bootstrap/scss/_functions.scss`.
 
