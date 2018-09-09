@@ -1,14 +1,12 @@
 *   [About Java Bootstrap Template](/pages/java-bootstrap-admin-dashboard-template "About Java Bootstrap Admin And Dashboard Components Template")
 *   [High Level Template Structure](/pages/high-level-template-structure "High Level JavaTMP Template Folders And Files Structure")
 *   **Template Versions**
-
-*   [JavaTMP-Static-Ajax Project Version](/pages/javatmp-static-ajax-project-version "Java Bootstrap Admin And Dashboard Template")
-*   [JavaTMP-Static-Ajax-RTL Project Version](/pages/javatmp-static-ajax-rtl-project-version "Java Bootstrap Admin And Dashboard RTL Template")
-*   [JavaTMP-Static-Ajax-Starter Project Version](/pages/javatmp-static-ajax-starter-project-version "Java Bootstrap Admin and Dashboard Starter Template")
-*   [JavaTMP-Static-Ajax-Starter-RTL Project Version](/pages/javatmp-static-ajax-starter-rtl-project-version "Java Bootstrap Admin And Dashboard RTL Template Version")
-*   [JavaTMP-Java-Ajax-Starter Project Version](/pages/javatmp-java-ajax-starter-project-version "Java Dynamic LTR/RTL multi-language Bootstrap Admin and Dashboard Web Application Version")
-*   [JavaTMP-User-Starter Project Version](/pages/javatmp-user-starter-project-version "Advanced Dynamic Java Bootstrap LTR/RTL multi languages User Management Web application Template")
-
+    *   [JavaTMP-Static-Ajax Project Version](/pages/javatmp-static-ajax-project-version "Java Bootstrap Admin And Dashboard Template")
+    *   [JavaTMP-Static-Ajax-RTL Project Version](/pages/javatmp-static-ajax-rtl-project-version "Java Bootstrap Admin And Dashboard RTL Template")
+    *   [JavaTMP-Static-Ajax-Starter Project Version](/pages/javatmp-static-ajax-starter-project-version "Java Bootstrap Admin and Dashboard Starter Template")
+    *   [JavaTMP-Static-Ajax-Starter-RTL Project Version](/pages/javatmp-static-ajax-starter-rtl-project-version "Java Bootstrap Admin And Dashboard RTL Template Version")
+    *   [JavaTMP-Java-Ajax-Starter Project Version](/pages/javatmp-java-ajax-starter-project-version "Java Dynamic LTR/RTL multi-language Bootstrap Admin and Dashboard Web Application Version")
+    *   [JavaTMP-User-Starter Project Version](/pages/javatmp-user-starter-project-version "Advanced Dynamic Java Bootstrap LTR/RTL multi languages User Management Web application Template")
 *   **Folders And Files Structure**
     *   [NPM's package.json file](/pages/javatmp-npms-package-json-file "JavaTMP Main Node.js NPM package.json file")
     *   [Gulp's gulpfile.js build file](https://javatmp.myshopify.com/pages/gulp-build-file)
@@ -40,11 +38,9 @@
     *   [Setting Up Development Environment](https://javatmp.myshopify.com/pages/setting-up-development-environment)
     *   [Manage Front-end dependencies Using Node.js And Gulp](/pages/manage-front-end-dependencies-using-node-js-and-gulp "Manage Front-end Dependencies Using Node.js And Gulp tools")
 *   **Java Bootstrap Web Application Version**
-
-*   [Backend features and resources](https://www.javatmp.com/pages/java-bootstrap-backend-features-and-resources "dynamic java bootstrap backend features and resources")
-*   [Dynamic Java Web Application features](/pages/dynamic-java-bootstrap-web-application-features "Main Dynamic Features of Java Bootstrap Web Application")
-*   [Uploading files from front end to Java Web Application](https://www.javatmp.com/pages/uploading-files-from-front-end-to-java-web-application "Uploading files from front end web browsers to Java Web Applications")
-
+    *   [Backend features and resources](https://www.javatmp.com/pages/java-bootstrap-backend-features-and-resources "dynamic java bootstrap backend features and resources")
+    *   [Dynamic Java Web Application features](/pages/dynamic-java-bootstrap-web-application-features "Main Dynamic Features of Java Bootstrap Web Application")
+    *   [Uploading files from front end to Java Web Application](https://www.javatmp.com/pages/uploading-files-from-front-end-to-java-web-application "Uploading files from front end web browsers to Java Web Applications")
 *   **References**
     *   [JavaTMP Front-end Plugins And Frameworks](/pages/javatmp-front-end-plugins-and-frameworks)
     *   [Development and Environment tools](/pages/development-and-environment-tools)
