@@ -89,7 +89,7 @@ It is a web application context root folder contains everything related to stati
 ----------------------------------------
 
 It is our online demo version of JavaTMP-Static-Ajax project. we provide it without any modification and we were deploying our online demo [http://demo.javatmp.com/JavaTMP-Static-Ajax/](http://demo.javatmp.com/JavaTMP-Static-Ajax/ "Java Bootstrap Admin And Dashboard Components Template") from this file. We generated it using the following special gulp's tasks:
-```JS
+```javascript
 gulp.src('./JavaTMP-Static-Ajax/web/\*\*/\*', {dot: true})
         .pipe(gulp.dest("./online-static-demo"));
 del.sync(\['./online-static-demo/assets/src'\]);

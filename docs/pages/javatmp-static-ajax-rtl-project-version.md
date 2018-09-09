@@ -122,7 +122,7 @@ It is a web application context root folder contains everything related to stati
 --------------------------------------------
 
 It is our RTL online demo version of JavaTMP-Static-Ajax-RTL project. we provide it without any modification and we were deploying our online demo at [http://demo.javatmp.com/JavaTMP-Static-Ajax-RTL/](http://demo.javatmp.com/JavaTMP-Static-Ajax-RTL/ "RTL Java Bootstrap Admin And Dashboard Components Template") from this file. We generated it using the following special gulp's tasks:
-```JS
+```javascript
 gulp.src('./JavaTMP-Static-Ajax-RTL/web/\*\*/\*', {dot: true})
         .pipe(gulp.dest("./online-static-demo-rtl"));
 del.sync(\['./online-static-demo-rtl/assets/src'\]);

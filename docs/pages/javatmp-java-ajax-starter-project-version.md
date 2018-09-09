@@ -750,7 +750,7 @@ Generating Production `JavaTMP-Java-Ajax-Starter.war` file
 ----------------------------------------------------------
 
 Generating our [online production Java Bootstrap Web application war file](http://java.javatmp.com:8080/JavaTMP-Java-Ajax-Starter/#/JavaTMP-Java-Ajax-Starter/pages/home "online production Java Bootstrap Web application war file") is done using the following special gulp's task steps (Make sure first that `ant compile` or `ant dist` is ran first because this task depends on the `build` folder generating from running `ant` script):
-```js
+```javascript
 gulp.src(\[
     './JavaTMP-Java-Ajax-Starter/\*\*/\*',
     '!\*\*/node\_modules{,/\*\*}',

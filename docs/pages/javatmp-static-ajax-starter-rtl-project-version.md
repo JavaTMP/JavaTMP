@@ -197,7 +197,7 @@ The following HTML page code provide the main referenced resources in `./JavaTMP
 ## `./JavaTMP/JavaTMP-Static-Ajax-Starter-RTL.zip` file
 
 It is our Starter RTL online demo version of JavaTMP-Static-Ajax-Starter-RTL project. we provide it without any modification and we were deploying our online demo at [http://demo.javatmp.com/JavaTMP-Static-Ajax-Starter-RTL/](http://demo.javatmp.com/JavaTMP-Static-Ajax-Starter-RTL/ "RTL Java Bootstrap Admin And Dashboard Components Template") from this file. We generated it using the following special gulp's tasks:
-```js
+```javascript
 gulp.src('./JavaTMP-Static-Ajax-Starter-RTL/web/\*\*/\*', {dot: true})
         .pipe(gulp.dest("./online-static-demo-rtl"));
 del.sync(\['./online-static-demo-rtl/assets/src'\]);

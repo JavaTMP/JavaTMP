@@ -37,7 +37,7 @@ This is a gulp's configuration file. gulp is a toolkit for automating painful or
 #### Important Gulp's task `generate-dist`
 
 The following code is the source code of the gulp task `generate-dist`:
-```JS
+```javascript
 gulp.task('generate-dist', \['copy-components', "delete-dist", "delete-css", "delete-js"\], function (cb) {
     async.series(\[
         function (next) {
@@ -128,7 +128,7 @@ gulp.task('generate-dist', \['copy-components', "delete-dist", "delete-css", "de
 The gulp's task `generate-dist` depends on task `copy-components` described in details in page [Managing Front-end dependencies Using Node.js And Gulp](/pages/manage-front-end-dependencies-using-node-js-and-gulp "Manage Front-end dependencies Using Node.js And Gulp") which copy all components defined in config object from `./node_modules` to `./web/components`
 
 The gulp's task `generate-dist` depends too on `src` object that define wanted resources and plugins to be combined together, The definition of the `src` object is:
-```JS
+```javascript
 var src = {
     "css": \[
 //        "./web/components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css",
@@ -344,7 +344,7 @@ It is a web application context root folder contains everything related to stati
 ------------------------------------------------
 
 It is our online demo version of JavaTMP-Static-Ajax-Starter project. we provide it without any modification and we were deploying our online demo [http://demo.javatmp.com/JavaTMP-Static-Ajax-Starter/](http://demo.javatmp.com/JavaTMP-Static-Ajax-Starter/ "Java Bootstrap Admin And Dashboard Components Template") from this file. We generated it using the following special gulp's tasks:
-```JS
+```javascript
 gulp.src('./JavaTMP-Static-Ajax-Starter/web/\*\*/\*', {dot: true})
         .pipe(gulp.dest("./online-static-demo"));
 del.sync(\['./online-static-demo/assets/src'\]);
