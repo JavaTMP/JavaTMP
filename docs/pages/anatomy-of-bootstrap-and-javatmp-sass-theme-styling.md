@@ -72,7 +72,7 @@ So, Updating one of them or all will automatically update all other components a
 Bootstrap uses `$theme-color-interval` in `theme-color-level` function in `./node_modules/bootstrap/scss/_functions.scss` Sass file to get a particular level of color from the `$theme-colors` map. The following definition of `theme-color-level` function:
 ```scss
 ...
-// Request a theme color level
+/* Request a theme color level */
 @function theme-color-level($color-name: "primary", $level: 0) {
   $color: theme-color($color-name);
   $color-base: if($level > 0, #000, #fff);
