@@ -43,7 +43,7 @@ Bootstrap defines all standard theme colors in variables with corresponding name
 #### Theme colors
 
 These are the most important colors in Bootstrap and it is used to construct components styling colors:
-```sass
+```scss
 $primary:       $blue !default;
 $secondary:     $gray-600 !default;
 $success:       $green !default;
@@ -182,5 +182,5 @@ And the generated CSS will be like this:
         display: block;
     }
 }
-111
+```
 
