@@ -194,6 +194,7 @@ The following HTML page code provide the main referenced resources in `./JavaTMP
     </body>
 </html>
 ```
+
 `./JavaTMP/JavaTMP-Static-Ajax-Starter-RTL.zip` file
 ----------------------------------------------------
 
