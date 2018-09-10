@@ -87,15 +87,10 @@ At the same way adding new entry to the `$theme-colors` map will automatically g
 ```
 *   Run gulp command: `gulp sass` or default `gulp`
 
-The above steps will introduce a new theme called `javatmp` with `#598234` color and generated the following new components or classes for that theme:`.text-javatmp, .bg-javatmp, .alert-javatmp, .badge-javatmp, .btn-javatmp, .btn-outline-javatmp, .list-group-item-javatmp, .table-javatmp, .bg-gradient-javatmp, .border-javatmp, .bg-gradient-javatmp`. The following photos show you new components:
-
-![Customizing Bootstrap Theme Colors In JavaTMP Tempalte](//cdn.shopify.com/s/files/1/2570/3194/files/customize-bootstrap-theme-color-in-javatmp-1_1024x1024.JPG?v=1516090852)
-
-![Customizing Bootstrap Theme Colors In JavaTMP Tempalte](//cdn.shopify.com/s/files/1/2570/3194/files/customize-bootstrap-theme-color-in-javatmp-2_1024x1024.JPG?v=1516090902)
-
-![Customizing Bootstrap Theme Colors In JavaTMP Tempalte](//cdn.shopify.com/s/files/1/2570/3194/files/customize-bootstrap-theme-color-in-javatmp-3_1024x1024.JPG?v=1516090933)
-
-![Customizing Bootstrap Theme Colors In JavaTMP Tempalte](//cdn.shopify.com/s/files/1/2570/3194/files/customize-bootstrap-theme-color-in-javatmp-4_1024x1024.JPG?v=1516090949)
+The above steps will introduce a new theme color called `javatmp` with `#598234` color and generated
+the following new components or classes for that theme:
+`.text-javatmp, .bg-javatmp, .alert-javatmp, .badge-javatmp, .btn-javatmp, .btn-outline-javatmp,
+.list-group-item-javatmp, .table-javatmp, .bg-gradient-javatmp, .border-javatmp, .bg-gradient-javatmp`.
 
 So, at the same way you can update all Bootstrap Theme Colors or introduce a new set of different keys with their new components.
 
