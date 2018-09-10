@@ -122,7 +122,7 @@ gulp.task('generate-dist', ['copy-components', "delete-dist", "delete-css", "del
         function (next) {
             del.sync([config.destComponentsLib, "./web/assets/css", "./web/assets/js"], next);
         }
-    \], cb);
+    ], cb);
 });
 ```
 The gulp's task `generate-dist` depends on task `copy-components` described in details in page [Managing Front-end dependencies Using Node.js And Gulp](/pages/manage-front-end-dependencies-using-node-js-and-gulp "Manage Front-end dependencies Using Node.js And Gulp") which copy all components defined in config object from `./node_modules` to `./web/components`
@@ -130,7 +130,7 @@ The gulp's task `generate-dist` depends on task `copy-components` described in 
 The gulp's task `generate-dist` depends too on `src` object that define wanted resources and plugins to be combined together, The definition of the `src` object is:
 ```javascript
 var src = {
-    "css": \[
+    "css": [
 //        "./web/components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css",
         "./web/components/font-awesome-animation/dist/font-awesome-animation.min.css",
         "./web/components/jquery-ui-dist/jquery-ui.min.css",
@@ -159,22 +159,22 @@ var src = {
         "./web/components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css",
 //        "./web/components/bootstrap-reverse/dist/\*\*/\*",
         "./web/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.css"
-    \],
-    "cssForPrint": \[
+    ],
+    "cssForPrint": [
         "./web/components/fullcalendar/dist/fullcalendar.print.min.css"
-    \],
-    "fonts": \[
+    ],
+    "fonts": [
         "./web/components/fontawesome-free-webfonts/webfonts/\*\*/\*",
         "./web/components/jquery-contextmenu/dist/font/\*\*/\*",
         "./web/components/summernote/dist/font/\*\*/\*",
         "./web/components/slick-carousel/slick/fonts/\*\*/\*",
         "./web/assets/src/fonts/open-sans/\*\*/\*"
-    \],
-    "img": \[
+    ],
+    "img": [
         "./web/components/slick-carousel/slick/ajax-loader.gif",
         "./web/components/malihu-custom-scrollbar-plugin/mCSB\_buttons.png"
-    \],
-    "js": \["./web/components/jquery/dist/jquery.min.js",
+    ],
+    "js": ["./web/components/jquery/dist/jquery.min.js",
         "./web/components/jquery-ui-dist/jquery-ui.min.js",
         "./web/components/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js",
         "./web/components/popper.js/dist/umd/popper.min.js",
@@ -228,11 +228,11 @@ var src = {
         "./web/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.js",
         "./web/components/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js",
         "./web/components/numeral/min/numeral.min.js"
-    \],
+    ],
     "fontFamilyFiles": {
-        "en": \[
+        "en": [
             "./web/assets/src/sass/font-family/font-family-en.scss"
-        \]
+        ]
     }
 };
 ```
@@ -347,11 +347,11 @@ It is our online demo version of JavaTMP-Static-Ajax-Starter project. we provide
 ```javascript
 gulp.src('./JavaTMP-Static-Ajax-Starter/web/\*\*/\*', {dot: true})
         .pipe(gulp.dest("./online-static-demo"));
-del.sync(\['./online-static-demo/assets/src'\]);
-gulp.src(\['./online-static-demo/\*\*/\*.html'\], {dot: true})
+del.sync(['./online-static-demo/assets/src'\]);
+gulp.src(['./online-static-demo/\*\*/\*.html'\], {dot: true})
         .pipe(htmlmin({collapseWhitespace: true, minifyCSS: true, minifyJS: true, removeComments: true}))
         .pipe(gulp.dest("./online-static-demo"));
-gulp.src(\['./online-static-demo/\*\*/\*'\], {dot: true})
+gulp.src(['./online-static-demo/\*\*/\*'], {dot: true})
         .pipe(chmod(0o644, true))
         .pipe(zip('javatmp-static-ajax-starter.zip'))
         .pipe(gulp.dest('./'));
