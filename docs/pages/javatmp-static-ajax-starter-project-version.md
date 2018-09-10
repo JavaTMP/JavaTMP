@@ -38,14 +38,14 @@ This is a gulp's configuration file. gulp is a toolkit for automating painful or
 
 The following code is the source code of the gulp task `generate-dist`:
 ```javascript
-gulp.task('generate-dist', \['copy-components', "delete-dist", "delete-css", "delete-js"\], function (cb) {
-    async.series(\[
+gulp.task('generate-dist', ['copy-components', "delete-dist", "delete-css", "delete-js"], function (cb) {
+    async.series([
         function (next) {
-            gulp.src(\[
-                './web/assets/src/sass/themes/javatmp-\*.scss'\])
+            gulp.src([
+                './web/assets/src/sass/themes/javatmp-*.scss'])
                     .pipe(sass().on('error', sass.logError))
                     .pipe(autoprefixer({
-                        browsers: \['last 2 versions'\],
+                        browsers: ['last 2 versions'],
                         cascade: false
                     }))
                     .pipe(cleanCSS())
@@ -55,18 +55,18 @@ gulp.task('generate-dist', \['copy-components', "delete-dist", "delete-css", "de
         },
         function (next) {
             gulp.src(src.css)
-                    .pipe(concat("javatmp-plugins-all.min.css", {newLine: '\\n'}))
+                    .pipe(concat("javatmp-plugins-all.min.css", {newLine: '\n'}))
                     .pipe(gulp.dest("./web/assets/dist/css"))
                     .on('end', next);
         },
         function (next) {
             gulp.src(src.cssForPrint)
-                    .pipe(concat("javatmp-plugins-print-all.min.css", {newLine: '\\n'}))
+                    .pipe(concat("javatmp-plugins-print-all.min.css", {newLine: '\n'}))
                     .pipe(gulp.dest("./web/assets/dist/css"))
                     .on('end', next);
         },
         function (next) {
-            gulp.src('./web/assets/src/js-src/\*\*/\*')
+            gulp.src('./web/assets/src/js-src/**/*')
                     .pipe(eslint())
                     .pipe(eslint.format())
                     .pipe(uglify({output: {comments: /^!/}}))
@@ -76,24 +76,24 @@ gulp.task('generate-dist', \['copy-components', "delete-dist", "delete-css", "de
         },
         function (next) {
             gulp.src(src.js)
-                    .pipe(concat("javatmp-plugins-all.min.js", {newLine: '\\n;'}))
+                    .pipe(concat("javatmp-plugins-all.min.js", {newLine: '\n;'}))
                     .pipe(gulp.dest("./web/assets/dist/js"))
                     .on('end', next);
         },
         function (next) {
-            console.log("Generating font-family-\*.min.css");
+            console.log("Generating font-family-*.min.css");
             var count = 0;
             for (var key in src.fontFamilyFiles) {
                 if (src.fontFamilyFiles.hasOwnProperty(key)) {
                     count++;
                     var currentKey = key;
-                    var array = src.fontFamilyFiles\[currentKey\];
+                    var array = src.fontFamilyFiles[currentKey];
 
                     console.log("Generating font-family-" + currentKey + ".min.css");
                     gulp.src(array)
                             .pipe(sass().on('error', sass.logError))
                             .pipe(cleanCSS())
-                            .pipe(concat("font-family-" + currentKey + ".min.css", {newLine: '\\n;'}))
+                            .pipe(concat("font-family-" + currentKey + ".min.css", {newLine: '\n;'}))
                             .pipe(gulp.dest("./web/assets/dist/css"))
                             .on('end', (function () {
                                 var k = currentKey;
@@ -101,7 +101,7 @@ gulp.task('generate-dist', \['copy-components', "delete-dist", "delete-css", "de
                                     count--;
                                     console.log("Finish font-family-" + k + ".min.css");
                                     if (count === 0) {
-                                        console.log("Finish All font-family-\*.min.css files");
+                                        console.log("Finish All font-family-*.min.css files");
                                         next();
                                     }
                                 };
@@ -120,7 +120,7 @@ gulp.task('generate-dist', \['copy-components', "delete-dist", "delete-css", "de
                     .on('end', next);
         },
         function (next) {
-            del.sync(\[config.destComponentsLib, "./web/assets/css", "./web/assets/js"\], next);
+            del.sync([config.destComponentsLib, "./web/assets/css", "./web/assets/js"], next);
         }
     \], cb);
 });
