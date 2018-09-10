@@ -19,33 +19,23 @@ RTL supported by third-party plugin [bootstrap-reverse](https://github.com/Java
 "Bootstrap RTL plugin to support Bootstrap Right to left by overriding rules and classes")
 
 ### [Select2](https://github.com/select2/select2)
+Select2 is a jQuery based replacement for select boxes.
+It supports searching, remote data sets, and infinite scrolling of results.
+Mandatory on all versions and templates. Merged and Moved in Starter Versions.
+RTL supported by default using `dir: "rtl"` parameter or globally using:
+```$.fn.select2.defaults.set("dir", "rtl");```
 
-Select2 is a jQuery based replacement for select boxes. It supports searching, remote data sets, and infinite scrolling of results.
-
-Mandatory on all versions and templates. Merged and Moved in Starter Versions. RTL supported by default using `dir: "rtl"` parameter or globally using:
-
-$.fn.select2.defaults.set("dir", "rtl");
-
-jQuery
-
-MIT
-
-[Select2 Bootstrap Theme](https://github.com/select2/select2-bootstrap-theme)
-
+### [Select2 Bootstrap Theme](https://github.com/select2/select2-bootstrap-theme)
 A Select2 v4 Theme for Bootstrap 3 & 4.
-
-Mandatory on all versions and templates. Merged and Moved in Starter Versions. RTL and Bootstrap 4 supported by default using `dir:"rtl"` and `theme: "bootstrap"` or globally using:
-
+Mandatory on all versions and templates. Merged and Moved in Starter Versions.
+RTL and Bootstrap 4 supported by default using `dir:"rtl"` and `theme: "bootstrap"` or globally using:
+```
 $.fn.select2.defaults.set("theme", "bootstrap");
 $.fn.select2.defaults.set("dir", "rtl");
-
+```
 And a the following fork for Bootstrap 4 : [https://github.com/angel-vladov/select2-bootstrap-theme](https://github.com/angel-vladov/select2-bootstrap-theme "fork for select2 bootstrap 4 theme") and custom css file adjusting some RTL rules and classes: `./web/assets/src/sass/plugins/custom-bootstrap-select2-bootstrap-theme.scss`
 
-Bootstrap v4
-
-MIT
-
-[Bootstrap Tagsinput](https://github.com/timschlechter/bootstrap-tagsinput)
+### [Bootstrap Tagsinput](https://github.com/timschlechter/bootstrap-tagsinput)
 
 Bootstrap Tags Input is a jQuery plugin providing a Twitter Bootstrap user interface for managing tags.
 
