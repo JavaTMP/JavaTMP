@@ -1,7 +1,7 @@
 ---
-title: JavaTMP NPM's package.json file
+title: Custom Bootstrap Themes and Skins
 ---
-# JavaTMP NPM's package.json file
+# Custom Bootstrap Themes and Skins
 The JavaTMP versions come with default Bootstrap framework with its default styles and skin and we included `./web/components/bootstrap/dist/css/bootstrap.min.css` after copied it from `./node_modules/bootstrap/dist/css/bootstrap.min.css` when gulp's task `copy-components` runs. However, Because we use `SASS` as a css preprocessor in our templates and to support same Bootstrap style and theme for own parts and plugins of the JavaTMP templates we should use one of these options:
 
 *   Use same Bootstrap values for colors, styles and format in our SASS files specially in `./web/assets/src/sass/common/variables.scss`.
