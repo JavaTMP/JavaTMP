@@ -411,7 +411,7 @@
             var timezonesMap = {};
             var timezoneSelect = $("#userlist-timezone-filter");
 
-            $('.scroll-content').mCustomScrollbar(javatmp.mCustomScrollbarOptions);
+            $('.scroll-content').mCustomScrollbar(javatmp.settings.mCustomScrollbarOptions);
 
 
             $("option", countriesSelect).map(function (i, item) {
