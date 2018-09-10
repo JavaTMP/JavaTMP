@@ -41,7 +41,7 @@ And in the `main.scss` we put  the remaining imports:
 // Include Optional parts of Bootstrap
 // un-comment if you provide a customization for main bootstrap variables
 // in common/variables.scss file
-/\*
+/*
 @import "../../../../node\_modules/bootstrap/scss/root";
 @import "../../../../node\_modules/bootstrap/scss/print";
 @import "../../../../node\_modules/bootstrap/scss/reboot";
@@ -74,7 +74,7 @@ And in the `main.scss` we put  the remaining imports:
 @import "../../../../node\_modules/bootstrap/scss/popover";
 @import "../../../../node\_modules/bootstrap/scss/carousel";
 @import "../../../../node\_modules/bootstrap/scss/utilities";
-\*/
+*/
 ```
 That mean we imported Bootstrap `SASS` files but because we don't override any variables we don't include optional files and we should include main `bootstrap.min.css` that came with bootstrap package as we did in `index.html` file (Note That bootstrap folder was moved from `./node_modules` to `./web/components` folder by our gulp's task called `"copy-components"`):
 ```
