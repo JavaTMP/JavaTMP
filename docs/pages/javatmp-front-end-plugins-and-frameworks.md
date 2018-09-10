@@ -4,20 +4,10 @@ title: JavaTMP Front-end Plugins And Frameworks
 # JavaTMP Front-end Plugins And Frameworks
 |Name|Description|Prerequisite|License|
 |--- |--- |--- |--- |
-|jQuery|jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers. With a combination of versatility and extensibility, jQuery has changed the way that millions of people write JavaScript.
-Mandatory on all versions and templates. Merged and Moved in Starter Versions. RTL supported by default|JS|Copyright JS Foundation|
-|Bootstrap|Bootstrap is an open source toolkit for developing with HTML, CSS, and JS. Quickly prototype your ideas or build your entire app with our Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful plugins built on jQuery.
-Mandatory on all versions and templates. Merged and Moved in Starter Versions. RTL supported by third-party plugin bootstrap-reverse|jQuery|MIT|
-|Select2|Select2 is a jQuery based replacement for select boxes. It supports searching, remote data sets, and infinite scrolling of results.
-
-Mandatory on all versions and templates. Merged and Moved in Starter Versions. RTL supported by default using dir: "rtl" parameter or globally using:
-$.fn.select2.defaults.set("dir", "rtl");|jQuery|MIT|
-|Select2 Bootstrap Theme|A Select2 v4 Theme for Bootstrap 3 & 4.
-
-Mandatory on all versions and templates. Merged and Moved in Starter Versions. RTL and Bootstrap 4 supported by default using dir:"rtl" and theme: "bootstrap" or globally using:
-$.fn.select2.defaults.set("theme", "bootstrap");
-$.fn.select2.defaults.set("dir", "rtl");
-And a the following fork for Bootstrap 4 : https://github.com/angel-vladov/select2-bootstrap-theme and custom css file adjusting some RTL rules and classes: ./web/assets/src/sass/plugins/custom-bootstrap-select2-bootstrap-theme.scss|Bootstrap v4|MIT|
+|jQuery|jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers. With a combination of versatility and extensibility, jQuery has changed the way that millions of people write JavaScript. Mandatory on all versions and templates. Merged and Moved in Starter Versions. RTL supported by default|JS|Copyright JS Foundation|
+|Bootstrap|Bootstrap is an open source toolkit for developing with HTML, CSS, and JS. Quickly prototype your ideas or build your entire app with our Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful plugins built on jQuery. Mandatory on all versions and templates. Merged and Moved in Starter Versions. RTL supported by third-party plugin bootstrap-reverse|jQuery|MIT|
+|Select2|Select2 is a jQuery based replacement for select boxes. It supports searching, remote data sets, and infinite scrolling of results. Mandatory on all versions and templates. Merged and Moved in Starter Versions. RTL supported by default using dir: "rtl" parameter or globally using: $.fn.select2.defaults.set("dir", "rtl");|jQuery|MIT|
+|Select2 Bootstrap Theme|A Select2 v4 Theme for Bootstrap 3 & 4. Mandatory on all versions and templates. Merged and Moved in Starter Versions. RTL and Bootstrap 4 supported by default using dir:"rtl" and theme: "bootstrap" or globally using: $.fn.select2.defaults.set("theme", "bootstrap"); $.fn.select2.defaults.set("dir", "rtl"); .And a the following fork for Bootstrap 4 : https://github.com/angel-vladov/select2-bootstrap-theme and custom css file adjusting some RTL rules and classes: ./web/assets/src/sass/plugins/custom-bootstrap-select2-bootstrap-theme.scss|Bootstrap v4|MIT|
 |Bootstrap Tagsinput|Bootstrap Tags Input is a jQuery plugin providing a Twitter Bootstrap user interface for managing tags.
 
 NOT Merged nor Moved in Starter Versions. RTL supported by default but we leave it in favor of Select2 plugin with Bootstrap 4 theme|Bootstrap 4|MIT|
