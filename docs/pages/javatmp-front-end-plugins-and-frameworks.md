@@ -5,10 +5,8 @@ title: JavaTMP Front-end Plugins And Frameworks
 |Name|Description|Prerequisite|License|
 |--- |--- |--- |--- |
 |jQuery|jQuery is a fast, small, and feature-rich JavaScript library. It makes things like HTML document traversal and manipulation, event handling, animation, and Ajax much simpler with an easy-to-use API that works across a multitude of browsers. With a combination of versatility and extensibility, jQuery has changed the way that millions of people write JavaScript.
-
 Mandatory on all versions and templates. Merged and Moved in Starter Versions. RTL supported by default|JS|Copyright JS Foundation|
 |Bootstrap|Bootstrap is an open source toolkit for developing with HTML, CSS, and JS. Quickly prototype your ideas or build your entire app with our Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful plugins built on jQuery.
-
 Mandatory on all versions and templates. Merged and Moved in Starter Versions. RTL supported by third-party plugin bootstrap-reverse|jQuery|MIT|
 |Select2|Select2 is a jQuery based replacement for select boxes. It supports searching, remote data sets, and infinite scrolling of results.
 
@@ -209,4 +207,3 @@ Mandatory on all versions and templates. Merged and Moved in Starter Versions. D
 |Moment Timezone|Timezone support for moment.js
 
 Mandatory on all Starter versions and templates. Merged and Moved in Starter Versions. RTL supported by default|Moment.js|MIT|
-
