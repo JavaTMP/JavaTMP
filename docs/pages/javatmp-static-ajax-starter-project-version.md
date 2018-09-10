@@ -345,13 +345,13 @@ It is a web application context root folder contains everything related to stati
 
 It is our online demo version of JavaTMP-Static-Ajax-Starter project. we provide it without any modification and we were deploying our online demo [http://demo.javatmp.com/JavaTMP-Static-Ajax-Starter/](http://demo.javatmp.com/JavaTMP-Static-Ajax-Starter/ "Java Bootstrap Admin And Dashboard Components Template") from this file. We generated it using the following special gulp's tasks:
 ```javascript
-gulp.src('./JavaTMP-Static-Ajax-Starter/web/\*\*/\*', {dot: true})
+gulp.src('./JavaTMP-Static-Ajax-Starter/web/**/*', {dot: true})
         .pipe(gulp.dest("./online-static-demo"));
-del.sync(['./online-static-demo/assets/src'\]);
-gulp.src(['./online-static-demo/\*\*/\*.html'\], {dot: true})
+del.sync(['./online-static-demo/assets/src']);
+gulp.src(['./online-static-demo/**/*.html'], {dot: true})
         .pipe(htmlmin({collapseWhitespace: true, minifyCSS: true, minifyJS: true, removeComments: true}))
         .pipe(gulp.dest("./online-static-demo"));
-gulp.src(['./online-static-demo/\*\*/\*'], {dot: true})
+gulp.src(['./online-static-demo/**/*'], {dot: true})
         .pipe(chmod(0o644, true))
         .pipe(zip('javatmp-static-ajax-starter.zip'))
         .pipe(gulp.dest('./'));
