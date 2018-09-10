@@ -28,6 +28,7 @@
         "gulp-header": "^2.0.5",
         "gulp-htmlmin": "^4.0.0",
         "gulp-if": "^2.0.2",
+        "gulp-markdown": "^3.0.0",
         "gulp-processhtml": "^1.2.0",
         "gulp-rename": "^1.4.0",
         "gulp-uglify": "^3.0.1",

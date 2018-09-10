@@ -16,7 +16,7 @@ var connect = require('gulp-connect');
 var header = require('gulp-header');
 var pkg = require('./package.json');
 var eslint = require('gulp-eslint');
-
+const markdown = require('gulp-markdown');
 var banner = ['/*!',
     ' * <%= pkg.description %>',
     ' *',
@@ -538,11 +538,44 @@ gulp.task('default', gulp.series('save-projects', 'push', function (cb) {
     cb();
 }));
 
-gulp.task('run', function () {
+gulp.task('generate-docs', function (cb) {
+    del.sync(['./temp/docs/**/*']);
+    gulp.src('./docs/**/*')
+            .pipe(markdown({}))
+            .pipe(rename(function (path) {
+//                path.dirname += "/ciao";
+//                path.basename += "-goodbye";
+                path.extname = "";
+            }))
+            .pipe(gulp.dest('./temp/docs')).on('end', cb);
+});
 
+gulp.task('run', gulp.series('generate-docs', function () {
     connect.server({
 //        root: '',
         port: 8888,
         livereload: true
     });
-});
+}));
+
+gulp.task('run-doc', gulp.series('generate-docs', function () {
+
+    connect.server({
+        root: './temp/docs',
+        port: 8888,
+        livereload: true,
+        middleware: function () {
+            return [function (req, res, next) {
+                    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+                    res.setHeader('Content-Disposition', 'inline');
+                    next();
+                }];
+        }
+    });
+    gulp.watch('./docs/**/*', gulp.series('generate-docs', function (cb) {
+        console.log("finished");
+        connect.reload();
+        cb();
+    }));
+}));
+
