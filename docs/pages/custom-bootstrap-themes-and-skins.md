@@ -207,12 +207,6 @@ Steps to apply Cerulean theme:
 ```
 *   Run gulp'task `sass` by invoking `gulp sass` command. or run default gulp'task by invoking `gulp` command that will run `sass` and `compress-js` and then watches for files change.
 
-The output of above customization is:
-
-![Applying Cerulean Theme from Bootswatch](//cdn.shopify.com/s/files/1/2570/3194/files/javatmp-Cerulean-theme.jpg?v=1515083353)
-
-![Applying Cerulean theme from bootswatch ](//cdn.shopify.com/s/files/1/2570/3194/files/javatmp-Cerulean-theme-buttons.jpg?v=1515083415)
-
 ##### Utilizing Superhero theme
 
 As the same steps we did for applying Cerulean we use for Superhero and instead of contents of
@@ -222,12 +216,10 @@ files we use the contents of the following files
 `https://bootswatch.com/4/superhero/_variables.scss`
 `https://bootswatch.com/4/superhero/_bootswatch.scss`
 
-The output of above Superhero theme customization is:
-
-![javatmp Superhero Theme](//cdn.shopify.com/s/files/1/2570/3194/files/javatmp-Superhero-theme.jpg?v=1515088289) ![javatmp Superhero buttons theme](//cdn.shopify.com/s/files/1/2570/3194/files/javatmp-Superhero-theme-buttons.jpg?v=1515088349)
-
-Then, you can utilize and update any variable you want and adjust width and height.
+So, you can utilize and update any variable you want and adjust width and height.
 
 #### Bootstrap Magic [https://pikock.github.io/bootstrap-magic/](https://pikock.github.io/bootstrap-magic/)
 
-Bootstrap Magic is an online Bootstrap SASS editor help you create your Bootstrap 4.0 themes easily which provides you a live preview, live HTML coding to help you create your Bootstrap 4.0 theme directly in your browser. So you could design and apply your modifications and then save variables sass file and import it to JavaTMP projects using one of the above methods.
+Bootstrap Magic is an online Bootstrap SASS editor help you create your Bootstrap 4.0 themes easily which provides you a live preview,
+live HTML coding to help you create your Bootstrap 4.0 theme directly in your browser. So you could design and apply your modifications
+and then save variables sass file and import it to JavaTMP projects using one of the above methods.
