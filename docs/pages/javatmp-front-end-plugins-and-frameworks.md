@@ -10,17 +10,15 @@ event handling, animation, and Ajax much simpler with an easy-to-use API that wo
 With a combination of versatility and extensibility, jQuery has changed the way that millions of people write JavaScript.
 Mandatory on all versions and templates. Merged and Moved in Starter Versions. RTL supported by default
 
-[Bootstrap](http://getbootstrap.com)
+### [Bootstrap](http://getbootstrap.com)
+Bootstrap is an open source toolkit for developing with HTML, CSS, and JS.
+Quickly prototype your ideas or build your entire app with our Sass variables and mixins,
+responsive grid system, extensive prebuilt components, and powerful plugins built on jQuery.
+Mandatory on all versions and templates. Merged and Moved in Starter Versions.
+RTL supported by third-party plugin [bootstrap-reverse](https://github.com/JavaTMP/bootstrap-reverse
+"Bootstrap RTL plugin to support Bootstrap Right to left by overriding rules and classes")
 
-Bootstrap is an open source toolkit for developing with HTML, CSS, and JS. Quickly prototype your ideas or build your entire app with our Sass variables and mixins, responsive grid system, extensive prebuilt components, and powerful plugins built on jQuery.
-
-Mandatory on all versions and templates. Merged and Moved in Starter Versions. RTL supported by third-party plugin [bootstrap-reverse](https://github.com/JavaTMP/bootstrap-reverse "Bootstrap RTL plugin to support Bootstrap Right to left by overriding rules and classes")
-
-jQuery
-
-MIT
-
-[Select2](https://github.com/select2/select2)
+### [Select2](https://github.com/select2/select2)
 
 Select2 is a jQuery based replacement for select boxes. It supports searching, remote data sets, and infinite scrolling of results.
 
