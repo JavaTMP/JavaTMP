@@ -9,11 +9,11 @@
     *   [JavaTMP-User-Starter Project Version](/pages/javatmp-user-starter-project-version "Advanced Dynamic Java Bootstrap LTR/RTL multi languages User Management Web application Template")
 *   **Folders And Files Structure**
     *   [NPM's package.json file](/pages/javatmp-npms-package-json-file "JavaTMP Main Node.js NPM package.json file")
-    *   [Gulp's gulpfile.js build file](https://javatmp.myshopify.com/pages/gulp-build-file)
+    *   [Gulp's gulpfile.js build file](/pages/gulp-build-file)
     *   [Frameworks And Plugins Files](/pages/javatmp-frontend-frameworks-and-plugins-files "JavaTMP Front-end Frameworks and Plugins Files")
     *   [CSS/SASS Template Files](/pages/javatmp-css-sass-template-files "JavaTMP SASS/CSS Template Files")
     *   [Javascript Files](/pages/javatmp-javascript-files "JavaTMP Javascript Files")
-    *   [HTML Files](https://www.javatmp.com/pages/javatmp-html-files "JavaTMP HTML Files")
+    *   [HTML Files](/pages/javatmp-html-files "JavaTMP HTML Files")
     *   [Bootstrap RTL](/pages/bootstrap-rtl-support-modifications "JavaTMP Bootstrap RTL support and modifications")
 *   **Template Structure**
     *   [Template Layout](/pages/javatmp-template-layout "JavaTMP Template Layout")
@@ -26,26 +26,26 @@
 *   **Templates Themes And Skins**
     *   [Preparing Template for Bootstrap customization](/pages/preparing-template-for-bootstrap-customization "preparing template for bootstrap SASS customization")
     *   [Anatomy Of Bootstrap And JavaTMP SASS Theme Styling](/pages/anatomy-of-bootstrap-and-javatmp-sass-theme-styling "Anatomy Of Bootstrap And JavaTMP SASS Theme Styling")
-    *   [Custom Bootstrap Themes And Skins](https://www.javatmp.com/pages/custom-bootstrap-themes-and-skins "Custom Bootstrap Themes And Skins")
+    *   [Custom Bootstrap Themes And Skins](/pages/custom-bootstrap-themes-and-skins "Custom Bootstrap Themes And Skins")
     *   [Front-end Resources Customization](/pages/javatmp-frontend-resources-customization "JavaTMP Front-end Resources Customization")
 *   **Custom Elements And Components**
     *   [Actionable Plugin](/pages/javatmp-actionable-plugin "JavaTMP Actionable Plugin")
     *   [Extend Bootstrap Card Options](/pages/extended-bootstrap-card-options "JavaTMP Extends Bootstrap Card Tool Options")
-    *   [Bootstrap Modal Wrapper](https://www.javatmp.com/pages/javatmp-bootstrap-modal-wrapper "JavaTMP Bootstrap Modal Wrapper")
+    *   [Bootstrap Modal Wrapper](/pages/javatmp-bootstrap-modal-wrapper "JavaTMP Bootstrap Modal Wrapper")
     *   [Extended Bootstrap Colors And Buttons](/pages/extended-bootstrap-colors-and-buttons "Extended Bootstrap Colors And Buttons")
-    *   [Using jQueryUI Framework](https://www.javatmp.com/pages/using-jqueryui-framework-with-bootstrap-template "Using jQueryUI Framework With Bootstrap Template")
+    *   [Using jQueryUI Framework](/pages/using-jqueryui-framework-with-bootstrap-template "Using jQueryUI Framework With Bootstrap Template")
 *   **Development And Deployment**
-    *   [Setting Up Development Environment](https://javatmp.myshopify.com/pages/setting-up-development-environment)
+    *   [Setting Up Development Environment](/pages/setting-up-development-environment)
     *   [Manage Front-end dependencies Using Node.js And Gulp](/pages/manage-front-end-dependencies-using-node-js-and-gulp "Manage Front-end Dependencies Using Node.js And Gulp tools")
 *   **Java Bootstrap Web Application Version**
-    *   [Backend features and resources](https://www.javatmp.com/pages/java-bootstrap-backend-features-and-resources "dynamic java bootstrap backend features and resources")
+    *   [Backend features and resources](/pages/java-bootstrap-backend-features-and-resources "dynamic java bootstrap backend features and resources")
     *   [Dynamic Java Web Application features](/pages/dynamic-java-bootstrap-web-application-features "Main Dynamic Features of Java Bootstrap Web Application")
-    *   [Uploading files from front end to Java Web Application](https://www.javatmp.com/pages/uploading-files-from-front-end-to-java-web-application "Uploading files from front end web browsers to Java Web Applications")
+    *   [Uploading files from front end to Java Web Application](/pages/uploading-files-from-front-end-to-java-web-application "Uploading files from front end web browsers to Java Web Applications")
 *   **References**
     *   [JavaTMP Front-end Plugins And Frameworks](/pages/javatmp-front-end-plugins-and-frameworks)
     *   [Development and Environment tools](/pages/development-and-environment-tools)
     *   [Steps to add new Javascript plugin](/pages/steps-to-add-new-javascript-plugin)
 *   [Versions Change Log](/pages/java-bootstrap-template-versions-change-log)
-    *   [Version 0.0.3 (Current Development Version)](https://www.javatmp.com/pages/java-bootstrap-template-version-0-0-3)
+    *   [Version 0.0.3 (Current Development Version)](/pages/java-bootstrap-template-version-0-0-3)
     *   [Version 0.0.2 (published on 27th of August, 2018)](/pages/java-bootstrap-template-version-0-0-2)
     *   [Version 0.0.1 (published on 7th of June, 2018)](/pages/java-bootstrap-template-version-0-0-1)
