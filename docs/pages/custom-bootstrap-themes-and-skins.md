@@ -151,7 +151,7 @@ Steps to customize JavaTMP-Static-Ajax Project:
 
 The output of above customization is:
 
-![Customize JavaTMP- Bootstrap Admin And Dashboard Template](assets/img/customize-javatmp-java-bootstrap-admin-dashboard-tempate.jpg)
+![Customize JavaTMP- Bootstrap Admin And Dashboard Template](/assets/img/customize-javatmp-java-bootstrap-admin-dashboard-tempate.jpg)
 
 ### Customize JavaTMP-Static-Ajax by standard third-party Bootstrap themes
 
