@@ -6,5 +6,56 @@ The following table shows the list of front-end Javascript/CSS plugins and frame
 
 | Name | Description | Prerequisite | License |
 | --- | --- | --- | --- |
-| `git status` | List all *new or modified* files | `git status` | List all *new or modified* files |
-| `git diff` | Show file differences that **haven't been** staged | `git status` | List all *new or modified* files |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+| | | | |
+
+End of the table.
+
+
+
+
+
+
+
