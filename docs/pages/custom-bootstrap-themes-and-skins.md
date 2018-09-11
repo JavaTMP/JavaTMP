@@ -24,7 +24,7 @@ As described in [the theming Bootstrap documentation](https://getbootstrap.com/d
                 ├── partials
                 ├── plugins
                 └── main.scss
-└── node\_modules/
+└── node_modules/
     └── bootstrap
         ├── js
         └── scss
@@ -32,9 +32,9 @@ As described in [the theming Bootstrap documentation](https://getbootstrap.com/d
 In our `variables.scss` and `main.scss` files, we'll import Bootstrap’s source Sass files and pick the parts we need. and because `variables.scss` file are shared by all other `SASS` files we put in it the required files:
 ```
 // Include Required parts of Bootstrap
-@import "../../../../../node\_modules/bootstrap/scss/functions";
-@import "../../../../../node\_modules/bootstrap/scss/variables";
-@import "../../../../../node\_modules/bootstrap/scss/mixins";
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
 ```
 And in the `main.scss` we put  the remaining imports:
 ```
@@ -42,38 +42,38 @@ And in the `main.scss` we put  the remaining imports:
 // un-comment if you provide a customization for main bootstrap variables
 // in common/variables.scss file
 /*
-@import "../../../../node\_modules/bootstrap/scss/root";
-@import "../../../../node\_modules/bootstrap/scss/print";
-@import "../../../../node\_modules/bootstrap/scss/reboot";
-@import "../../../../node\_modules/bootstrap/scss/type";
-@import "../../../../node\_modules/bootstrap/scss/images";
-@import "../../../../node\_modules/bootstrap/scss/code";
-@import "../../../../node\_modules/bootstrap/scss/grid";
-@import "../../../../node\_modules/bootstrap/scss/tables";
-@import "../../../../node\_modules/bootstrap/scss/forms";
-@import "../../../../node\_modules/bootstrap/scss/buttons";
-@import "../../../../node\_modules/bootstrap/scss/transitions";
-@import "../../../../node\_modules/bootstrap/scss/dropdown";
-@import "../../../../node\_modules/bootstrap/scss/button-group";
-@import "../../../../node\_modules/bootstrap/scss/input-group";
-@import "../../../../node\_modules/bootstrap/scss/custom-forms";
-@import "../../../../node\_modules/bootstrap/scss/nav";
-@import "../../../../node\_modules/bootstrap/scss/navbar";
-@import "../../../../node\_modules/bootstrap/scss/card";
-@import "../../../../node\_modules/bootstrap/scss/breadcrumb";
-@import "../../../../node\_modules/bootstrap/scss/pagination";
-@import "../../../../node\_modules/bootstrap/scss/badge";
-@import "../../../../node\_modules/bootstrap/scss/jumbotron";
-@import "../../../../node\_modules/bootstrap/scss/alert";
-@import "../../../../node\_modules/bootstrap/scss/progress";
-@import "../../../../node\_modules/bootstrap/scss/media";
-@import "../../../../node\_modules/bootstrap/scss/list-group";
-@import "../../../../node\_modules/bootstrap/scss/close";
-@import "../../../../node\_modules/bootstrap/scss/modal";
-@import "../../../../node\_modules/bootstrap/scss/tooltip";
-@import "../../../../node\_modules/bootstrap/scss/popover";
-@import "../../../../node\_modules/bootstrap/scss/carousel";
-@import "../../../../node\_modules/bootstrap/scss/utilities";
+@import "../../../../node_modules/bootstrap/scss/root";
+@import "../../../../node_modules/bootstrap/scss/print";
+@import "../../../../node_modules/bootstrap/scss/reboot";
+@import "../../../../node_modules/bootstrap/scss/type";
+@import "../../../../node_modules/bootstrap/scss/images";
+@import "../../../../node_modules/bootstrap/scss/code";
+@import "../../../../node_modules/bootstrap/scss/grid";
+@import "../../../../node_modules/bootstrap/scss/tables";
+@import "../../../../node_modules/bootstrap/scss/forms";
+@import "../../../../node_modules/bootstrap/scss/buttons";
+@import "../../../../node_modules/bootstrap/scss/transitions";
+@import "../../../../node_modules/bootstrap/scss/dropdown";
+@import "../../../../node_modules/bootstrap/scss/button-group";
+@import "../../../../node_modules/bootstrap/scss/input-group";
+@import "../../../../node_modules/bootstrap/scss/custom-forms";
+@import "../../../../node_modules/bootstrap/scss/nav";
+@import "../../../../node_modules/bootstrap/scss/navbar";
+@import "../../../../node_modules/bootstrap/scss/card";
+@import "../../../../node_modules/bootstrap/scss/breadcrumb";
+@import "../../../../node_modules/bootstrap/scss/pagination";
+@import "../../../../node_modules/bootstrap/scss/badge";
+@import "../../../../node_modules/bootstrap/scss/jumbotron";
+@import "../../../../node_modules/bootstrap/scss/alert";
+@import "../../../../node_modules/bootstrap/scss/progress";
+@import "../../../../node_modules/bootstrap/scss/media";
+@import "../../../../node_modules/bootstrap/scss/list-group";
+@import "../../../../node_modules/bootstrap/scss/close";
+@import "../../../../node_modules/bootstrap/scss/modal";
+@import "../../../../node_modules/bootstrap/scss/tooltip";
+@import "../../../../node_modules/bootstrap/scss/popover";
+@import "../../../../node_modules/bootstrap/scss/carousel";
+@import "../../../../node_modules/bootstrap/scss/utilities";
 */
 ```
 That mean we imported Bootstrap `SASS` files but because we don't override any variables we don't include optional files and we should include main `bootstrap.min.css` that came with bootstrap package as we did in `index.html` file (Note That bootstrap folder was moved from `./node_modules` to `./web/components` folder by our gulp's task called `"copy-components"`):
