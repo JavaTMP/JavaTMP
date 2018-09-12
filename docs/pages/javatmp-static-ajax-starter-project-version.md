@@ -340,9 +340,7 @@ It is a web application context root folder contains everything related to stati
     4.  Import Custom Plugins SCSS files that Override default plugins CSS rules
     5.  Import demo pages scss files
 
-`./JavaTMP/javatmp-static-ajax-starter.zip` file
-------------------------------------------------
-
+## `./JavaTMP/javatmp-static-ajax-starter.zip` file
 It is our online demo version of JavaTMP-Static-Ajax-Starter project. we provide it without any modification and we were deploying our online demo [http://demo.javatmp.com/JavaTMP-Static-Ajax-Starter/](http://demo.javatmp.com/JavaTMP-Static-Ajax-Starter/ "Java Bootstrap Admin And Dashboard Components Template") from this file. We generated it using the following special gulp's tasks:
 ```javascript
 gulp.src('./JavaTMP-Static-Ajax-Starter/web/**/*', {dot: true})
