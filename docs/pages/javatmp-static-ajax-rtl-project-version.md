@@ -118,18 +118,18 @@ It is a web application context root folder contains everything related to stati
     +---table
     +---wizard
 ```
+
 `./JavaTMP/javatmp-static-ajax-rtl.zip` file
 --------------------------------------------
-
 It is our RTL online demo version of JavaTMP-Static-Ajax-RTL project. we provide it without any modification and we were deploying our online demo at [http://demo.javatmp.com/JavaTMP-Static-Ajax-RTL/](http://demo.javatmp.com/JavaTMP-Static-Ajax-RTL/ "RTL Java Bootstrap Admin And Dashboard Components Template") from this file. We generated it using the following special gulp's tasks:
 ```javascript
-gulp.src('./JavaTMP-Static-Ajax-RTL/web/\*\*/\*', {dot: true})
+gulp.src('./JavaTMP-Static-Ajax-RTL/web/**/*', {dot: true})
         .pipe(gulp.dest("./online-static-demo-rtl"));
-del.sync(\['./online-static-demo-rtl/assets/src'\]);
-gulp.src(\['./online-static-demo-rtl/\*\*/\*.html'\], {dot: true})
+del.sync(['./online-static-demo-rtl/assets/src']);
+gulp.src(['./online-static-demo-rtl/**/*.html'], {dot: true})
         .pipe(htmlmin({collapseWhitespace: true, minifyCSS: true, minifyJS: true, removeComments: true}))
         .pipe(gulp.dest("./online-static-demo-rtl"));
-gulp.src(\['./online-static-demo-rtl/\*\*/\*'\], {dot: true})
+gulp.src(['./online-static-demo-rtl/**/*'], {dot: true})
         .pipe(chmod(0o644, true))
         .pipe(zip('javatmp-static-ajax-rtl.zip'))
         .pipe(gulp.dest('./'));
