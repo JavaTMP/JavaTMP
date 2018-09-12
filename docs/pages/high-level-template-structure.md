@@ -50,6 +50,7 @@ JavaTMP-Static-Ajax project consists of general static bootstrap admin and dashb
 *   For dynamic Java version, make sure you have required experiences to develop and use our backend web development tools and frameworks like `Java`, `Servlet`, `JSP`, `Tomcat`, and external third-party libraries.
 *   Evaluate your choices based on the general criteria or factors of Bootstrap Admin and Dashboard templates like `Design`, `Code`, `Cost`, `Responsiveness`, `Customization`, `Security`, `Support`, `Documentation`, `Ratings and Reviews`, `Number of Downloads or Sales`.
 *   We don't provide a return or refund policy. So, always feel free to ask questions or contact us.
+
 #### What should I do AFTER buying a JavaTMP Bootstrap Template ?
 *   Download the Compressed archive `.zip` file sent to you.
 *   Backup The downloaded file in a safe location.
