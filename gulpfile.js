@@ -321,7 +321,7 @@ gulp.task('process-online-java-demo-starter', function (cb) {
                 removeComments: true,
                 ignoreCustomComments: false,
                 keepClosingSlash: true,
-                ignoreCustomFragments: [/<%@[\s\S]*?%>/, /\$\{[\s\S]*?\}/, /<fmt:[\s\S]+?\/>/, /<c:[\s\S]+?\/?>/, /<\/c:[\s\S]+?>/, /\{\{[\s\S]*?\}\}/]
+                ignoreCustomFragments: [/<%--[\s\S]*?--%>/, /<%@[\s\S]*?%>/, /\$\{[\s\S]*?\}/, /<fmt:[\s\S]+?\/>/, /<c:[\s\S]+?\/?>/, /<\/c:[\s\S]+?>/, /\{\{[\s\S]*?\}\}/]
             }))
             .pipe(gulp.dest("temp/online-java-demo-starter"))
             .on('end', function () {
@@ -338,7 +338,7 @@ gulp.task('process-online-java-user-demo-starter', function (cb) {
                 removeComments: true,
                 ignoreCustomComments: false,
                 keepClosingSlash: true,
-                ignoreCustomFragments: [/<%@[\s\S]*?%>/, /\$\{[\s\S]*?\}/, /<fmt:[\s\S]+?\/>/, /<c:[\s\S]+?\/?>/, /<\/c:[\s\S]+?>/, /\{\{[\s\S]*?\}\}/]
+                ignoreCustomFragments: [/<%--[\s\S]*?--%>/, /<%@[\s\S]*?%>/, /\$\{[\s\S]*?\}/, /<fmt:[\s\S]+?\/>/, /<c:[\s\S]+?\/?>/, /<\/c:[\s\S]+?>/, /\{\{[\s\S]*?\}\}/]
             }))
             .pipe(gulp.dest("temp/online-java-user-demo-starter"))
             .on('end', function () {

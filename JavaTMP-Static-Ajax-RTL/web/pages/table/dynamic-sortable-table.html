@@ -41,10 +41,10 @@
                                         </td>
                                         <td data-name="sel">
                                             <select name="sel0" class="custom-control form-control">
-                                                <option value"">Select Option</option>
-                                                <option value"1">Option 1</option>
-                                                <option value"2">Option 2</option>
-                                                <option value"3">Option 3</option>
+                                                <option value="">Select Option</option>
+                                                <option value="1">Option 1</option>
+                                                <option value="2">Option 2</option>
+                                                <option value="3">Option 3</option>
                                             </select>
                                         </td>
                                         <td data-name="del">
