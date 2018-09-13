@@ -349,7 +349,6 @@
                                 <ul>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/themes/bootswatch">
-                                            <i class="far fa-lg fa-fw fa-object-group"></i>
                                             ${labels['global.sidebar.themes.bootswatch']}
                                         </a>
                                     </li>
@@ -363,103 +362,86 @@
                                 <ul>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/bootstrap/info-components">
-                                            <i class="far fa-lg fa-fw fa-heart"></i>
                                             Info Theme Color Components
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/bootstrap/components">
-                                            <i class="far fa-lg fa-fw fa-heart"></i>
                                             Bootstrap Components
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/bootstrap/grid">
-                                            <i class="far fa-lg fa-fw fa-heart"></i>
                                             Bootstrap Grid
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/bootstrap/media-object">
-                                            <i class="far fa-lg fa-fw fa-heart"></i>
                                             Media object
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/bootstrap/content">
-                                            <i class="far fa-lg fa-fw fa-heart"></i>
                                             Bootstrap Content
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/bootstrap/buttons">
-                                            <i class="far fa-lg fa-fw fa-heart"></i>
                                             Bootstrap Buttons
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/bootstrap/button-group">
-                                            <i class="far fa-lg fa-fw fa-heart"></i>
                                             Bootstrap Button group
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/bootstrap/card">
-                                            <i class="far fa-lg fa-fw fa-heart"></i>
                                             Bootstrap Card
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/bootstrap/carousel">
-                                            <i class="far fa-lg fa-fw fa-heart"></i>
                                             Bootstrap Carousel
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/bootstrap/dropdown">
-                                            <i class="far fa-lg fa-fw fa-heart"></i>
                                             Bootstrap Dropdown
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/bootstrap/forms">
-                                            <i class="far fa-lg fa-fw fa-heart"></i>
                                             Bootstrap Forms
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/bootstrap/input-group">
-                                            <i class="far fa-lg fa-fw fa-heart"></i>
                                             Bootstrap Input Group
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/bootstrap/list-group">
-                                            <i class="far fa-lg fa-fw fa-heart"></i>
                                             Bootstrap List Group
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/bootstrap/modal">
-                                            <i class="far fa-lg fa-fw fa-heart"></i>
                                             Bootstrap Modal
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/bootstrap/navs">
-                                            <i class="far fa-lg fa-fw fa-heart"></i>
                                             Bootstrap Navs
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/bootstrap/navbar">
-                                            <i class="far fa-lg fa-fw fa-heart"></i>
                                             Bootstrap Navbar
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/bootstrap/scrollspy">
-                                            <i class="far fa-lg fa-fw fa-heart"></i>
                                             Bootstrap Scrollspy
                                         </a>
                                     </li>
@@ -473,13 +455,11 @@
                                 <ul aria-expanded="true">
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/icon/font_awesome_icons">
-                                            <i class="far fa-lg fa-fw fa-user-circle"></i>
                                             Font Awesome Icons
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/icon/font_awesome_animation_icon">
-                                            <i class="far fa-lg fa-fw fa-user-circle"></i>
                                             Font Awesome Animation Icons Set
                                         </a>
                                     </li>
@@ -493,83 +473,53 @@
                                 <ul aria-expanded="true">
                                     <li>
                                         <a class="has-arrow" href="#">
-                                            <i class="far fa-lg fa-fw fa-lightbulb"></i>
                                             Color Combinations
                                         </a>
                                         <ul aria-expanded="true">
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/custom-components/color/color-palette-combinations">
-                                                    <i class="far fa-lg fa-fw fa-lightbulb"></i>
                                                     Color Palette Combinations
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/custom-components/color/8-color-combinations">
-                                                    <i class="far fa-lg fa-fw fa-lightbulb"></i>
                                                     8 colors combinations
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/custom-components/color/100-color-combinations">
-                                                    <i class="far fa-lg fa-fw fa-lightbulb"></i>
                                                     100 colors combinations
                                                 </a>
                                             </li>
                                         </ul>
                                     </li>
                                     <li>
-                                        <a href="#" class="has-arrow">
-                                            <i class="fa fa-lg fa-fw fa-camera"></i>
-                                            Icons
-                                        </a>
-                                        <ul aria-expanded="true">
-                                            <li>
-                                                <a href="${pageContext.request.contextPath}/pages/custom-components/icon/font_awesome_icons">
-                                                    <i class="fa fa-lg fa-fw fa-camera"></i>
-                                                    Font Awesome Icons
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="${pageContext.request.contextPath}/pages/custom-components/icon/font_awesome_animation_icon">
-                                                    <i class="fa fa-lg fa-fw fa-camera"></i>
-                                                    Font Awesome Animation Icons Set
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li>
                                         <a class="has-arrow" href="#">
-                                            <i class="far fa-lg fa-fw fa-lightbulb"></i>
                                             Menu
                                         </a>
                                         <ul aria-expanded="true">
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/custom-components/menu/custom-bootstrap-dropdown-button">
-                                                    <i class="far fa-lg fa-fw fa-lightbulb"></i>
                                                     Custom Bootstrap Dropdown Button
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/custom-components/menu/horizontal-mega-menu">
-                                                    <i class="far fa-lg fa-fw fa-lightbulb"></i>
                                                     Yamm Horizontal Mega Menu
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/custom-components/menu/bootstrap-dropdown-hover">
-                                                    <i class="far fa-lg fa-fw fa-lightbulb"></i>
                                                     Bootstrap Dropdown Hover
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/custom-components/menu/bootstrap-multilevel-dropdown-hover">
-                                                    <i class="far fa-lg fa-fw fa-lightbulb"></i>
                                                     Bootstrap Multilevel Dropdown Hover
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/custom-components/menu/scrollable-bootstrap-dropdown">
-                                                    <i class="far fa-lg fa-fw fa-lightbulb"></i>
                                                     Scrollable Bootstrap Dropdown
                                                 </a>
                                             </li>
@@ -577,37 +527,31 @@
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/custom-components/layout-options">
-                                            <i class="far fa-lg fa-fw fa-lightbulb"></i>
                                             Layout Options
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/custom-components/dashboard-stats">
-                                            <i class="far fa-lg fa-fw fa-lightbulb"></i>
                                             Dashboard Stats
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/custom-components/dashboard-chart-stats">
-                                            <i class="far fa-lg fa-fw fa-lightbulb"></i>
                                             Dashboard Chart Stats
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/custom-components/bootstrap-steps">
-                                            <i class="far fa-lg fa-fw fa-lightbulb"></i>
                                             Bootstrap Steps
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/custom-components/sortable-cards">
-                                            <i class="far fa-lg fa-fw fa-lightbulb"></i>
                                             Sortable Cards
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/custom-components/dynamic-cards-content">
-                                            <i class="far fa-lg fa-fw fa-lightbulb"></i>
                                             Dynamic Cards Content
                                         </a>
                                     </li>
@@ -621,60 +565,51 @@
                                 <ul aria-expanded="true">
                                     <li>
                                         <a class="has-arrow" href="#">
-                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                             Tree
                                         </a>
                                         <ul aria-expanded="true">
                                             <li>
                                                 <a class="has-arrow" href="#">
-                                                    <i class="far fa-lg fa-fw fa-gem"></i>Fancytree
+                                                    Fancytree
                                                 </a>
                                                 <ul aria-expanded="true">
                                                     <li>
                                                         <a href="${pageContext.request.contextPath}/pages/plugins/tree/fancytree/plain_fancytree">
-                                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                                             Plain Fancytree
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="${pageContext.request.contextPath}/pages/plugins/tree/fancytree/table_fancytree">
-                                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                                             Table Fancytree
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="${pageContext.request.contextPath}/pages/plugins/tree/fancytree/chart-of-accounts">
-                                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                                             Chart Of Accounts
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="${pageContext.request.contextPath}/pages/plugins/tree/fancytree/checkboxes_fancytree">
-                                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                                             Checkboxes fancytree
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="${pageContext.request.contextPath}/pages/plugins/tree/fancytree/radio_buttons_fancytree">
-                                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                                             Radio Buttons fancytree
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="${pageContext.request.contextPath}/pages/plugins/tree/fancytree/contextMenu_fancytree">
-                                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                                             ContextMenu fancytree
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="${pageContext.request.contextPath}/pages/plugins/tree/fancytree/drag-and-drop-fancytree">
-                                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                                             Drag-and-Drop Fancytree
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a href="${pageContext.request.contextPath}/pages/plugins/tree/fancytree/filter-ext-fancytree">
-                                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                                             Filter Ext Fancytree
                                                         </a>
                                                     </li>
@@ -684,31 +619,26 @@
                                     </li>
                                     <li>
                                         <a class="has-arrow" href="#">
-                                            <i class="far fa-lg fa-fw fa-bell"></i>
                                             Alerts & Notifications
                                         </a>
                                         <ul aria-expanded="true">
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/plugins/alert-notification/jQuery-toastr-notification">
-                                                    <i class="far fa-lg fa-fw fa-bell"></i>
                                                     jQuery Toastr Notifications
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/plugins/alert-notification/block-ui-plugin">
-                                                    <i class="far fa-lg fa-fw fa-bell"></i>
                                                     Block UI Plugin
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/plugins/alert-notification/dynamic-bootstrap-alerts">
-                                                    <i class="far fa-lg fa-fw fa-bell"></i>
                                                     Dynamic Bootstrap Alerts
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/plugins/alert-notification/idle-timer">
-                                                    <i class="far fa-lg fa-fw fa-bell"></i>
                                                     Idle Timer Plugin
                                                 </a>
                                             </li>
@@ -716,37 +646,31 @@
                                     </li>
                                     <li>
                                         <a class="has-arrow" href="#">
-                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                             Calendar
                                         </a>
                                         <ul aria-expanded="true">
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/plugins/calendar/jQuery-fullcalendar">
-                                                    <i class="far fa-lg fa-fw fa-gem"></i>
                                                     jQuery FullCalendar
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/plugins/calendar/jQuery-fullcalendar-event-popup">
-                                                    <i class="far fa-lg fa-fw fa-gem"></i>
                                                     jQuery FullCalendar 1
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/plugins/calendar/jQuery-fullcalendar-constraint">
-                                                    <i class="far fa-lg fa-fw fa-gem"></i>
                                                     jQuery FullCalendar Constraint
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/plugins/calendar/jQuery-fullcalendar-year">
-                                                    <i class="far fa-lg fa-fw fa-gem"></i>
                                                     jQuery FullCalendar Year
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/plugins/calendar/jQuery-fullcalendar-diary-system">
-                                                    <i class="far fa-lg fa-fw fa-gem"></i>
                                                     Web Diary System
                                                 </a>
                                             </li>
@@ -754,133 +678,111 @@
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/plugins/bootstrap-date-range-picker">
-                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                             Bootstrap Date Range Picker
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/plugins/bootstrap-colorselector">
-                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                             Bootstrap Color Selector
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/plugins/jQuery-select2-bootstrap">
-                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                             jQuery Bootstrap Select2 complete demo
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/DynamicSelect2PageController">
-                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                             Dynamic jQuery Bootstrap Select2 complete demo
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/plugins/bootstrap-maxlength">
-                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                             Bootstrap Maxlength
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/plugins/form-textarea-autosize">
-                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                             Form Textarea Autosize
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/plugins/jQuery-contextMenu">
-                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                             Bootstrap Context Menu
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/plugins/bootstrap-summernote-editor">
-                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                             Bootstrap Summernote Editor
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/cms/ContentPageController">
-                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                             Dynamic Bootstrap Summernote Editor
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/plugins/ion-rangeSlider">
-                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                             Ion Range Slider
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/plugins/bootstrap-slider">
-                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                             bootstrap-slider Plugin
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/plugins/cropper-image-cropping">
-                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                             Cropper - Image Cropping Plugin for jQuery
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/plugins/jQuery-ScrollUp">
-                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                             jQuery ScrollUp Plugin
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/plugins/jquery.counterup">
-                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                             jQuery CounterUp Plugin
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/plugins/bootstrap-dual-select">
-                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                             Bootstrap Dual Select
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/plugins/jQuery-timeago">
-                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                             jQuery timeago plugin
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/plugins/malihu-custom-scrollbar-plugin">
-                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                             Malihu Custom Scrollbar Plugin
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/plugins/dynamic-malihu-custom-scrollbar-plugin">
-                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                             Dynamic Malihu Custom Scrollbar Plugin
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/plugins/dynamic-messages-using-malihu-scrollable">
-                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                             Dynamic Messages Using Malihu Scrollable
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/plugins/bootstrap-modal-wrapper">
-                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                             Bootstrap Modal Wrapper Plugin
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/plugins/bootstrap-contextMenu">
-                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                             Bootstrap ContextMenu Plugin
                                         </a>
                                     </li>
                                     <li>
                                         <a href="pages/plugins/moment.js">
-                                            <i class="far fa-lg fa-fw fa-gem"></i>
                                             Moment.js Date/Time Plugin
                                         </a>
                                     </li>
@@ -894,37 +796,31 @@
                                 <ul aria-expanded="true">
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/form/basic-form-validation">
-                                            <i class="far fa-lg fa-fw fa-edit"></i>
                                             Basic HTML5 Form Validation
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/form/jQuery-form-validation">
-                                            <i class="far fa-lg fa-fw fa-edit"></i>
                                             jQuery Form Validation
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/form/form-input-mask">
-                                            <i class="far fa-lg fa-fw fa-edit"></i>
                                             Form Input Mask
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/form/jQuery-form-plugin">
-                                            <i class="far fa-lg fa-fw fa-edit"></i>
                                             jQuery Form Plugin
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/form/advance-form-plugins">
-                                            <i class="far fa-lg fa-fw fa-edit"></i>
                                             Advanced Form Plugins
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/form/dynamic-wizard-with-advanced-form-page">
-                                            <i class="far fa-lg fa-fw fa-edit"></i>
                                             Dynamic Wizard with Advanced Form Plugins
                                         </a>
                                     </li>
@@ -938,49 +834,41 @@
                                 <ul aria-expanded="true">
                                     <li>
                                         <a class="has-arrow" href="#">
-                                            <i class="far fa-lg fa-fw fa-clone"></i>
                                             Native Bootstrap Tab
                                         </a>
                                         <ul aria-expanded="true">
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/wizard/native-bootstrap-tab/default-bootstrap-pill-wizard">
-                                                    <i class="far fa-lg fa-fw fa-clone"></i>
                                                     Default Bootstrap Pill Wizard
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/wizard/native-bootstrap-tab/disabled-bootstrap-pill-wizard">
-                                                    <i class="far fa-lg fa-fw fa-clone"></i>
                                                     Disabled Bootstrap Pill Wizard
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/wizard/native-bootstrap-tab/modal-bootstrap-pill-wizard">
-                                                    <i class="far fa-lg fa-fw fa-clone"></i>
                                                     Modal Bootstrap Pill Wizard
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/wizard/native-bootstrap-tab/vertical-modal-bootstrap-pill-wizard">
-                                                    <i class="far fa-lg fa-fw fa-clone"></i>
                                                     Vertical Modal Bootstrap Pill Wizard
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/wizard/native-bootstrap-tab/ajax-bootstrap-pill-wizard">
-                                                    <i class="far fa-lg fa-fw fa-clone"></i>
                                                     Ajax Modal Bootstrap Pill Wizard
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/wizard/native-bootstrap-tab/vertical-validation-bootstrap-pill-wizard">
-                                                    <i class="far fa-lg fa-fw fa-clone"></i>
                                                     Vertical Validation Bootstrap Pill Wizard
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/wizard/native-bootstrap-tab/horizontal-validation-bootstrap-pill-wizard">
-                                                    <i class="far fa-lg fa-fw fa-clone"></i>
                                                     Horizontal Validation Bootstrap Pill Wizard
                                                 </a>
                                             </li>
@@ -996,98 +884,82 @@
                                 <ul>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/table/bootstrap-table">
-                                            <i class="far fa-lg fa-fw fa-list-alt"></i>
                                             Bootstrap Table
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/table/scrollable-fixed-bootstrap-table">
-                                            <i class="far fa-lg fa-fw fa-list-alt"></i>
                                             Scrollable Fixed Bootstrap Table
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/table/dynamic-sortable-table">
-                                            <i class="far fa-lg fa-fw fa-list-alt"></i>
                                             Dynamic Sortable Table
                                         </a>
                                     </li>
                                     <li>
                                         <a class="has-arrow" href="#">
-                                            <i class="far fa-lg fa-fw fa-list-alt"></i>
                                             DataTables Plugin
 
                                         </a>
                                         <ul aria-expanded="true">
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/table/datatable/defalut-datatables-bootstrap-4">
-                                                    <i class="far fa-lg fa-fw fa-list-alt"></i>
                                                     Defalut Datatables Bootstrap 4 theme
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/table/datatable/responsive-datatables-bootstrap-4">
-                                                    <i class="far fa-lg fa-fw fa-list-alt"></i>
                                                     Responsive Datatables Bootstrap 4 theme
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/table/datatable/fixedHeader-datatables-bootstrap-4">
-                                                    <i class="far fa-lg fa-fw fa-list-alt"></i>
                                                     FixedHeader Datatables Bootstrap 4 theme
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/table/datatable/scrollable-datatables">
-                                                    <i class="far fa-lg fa-fw fa-list-alt"></i>
                                                     Scrollable DataTable
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/table/datatable/selectable-datatables-bootstrap-4">
-                                                    <i class="far fa-lg fa-fw fa-list-alt"></i>
                                                     Selectable DataTable
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/table/datatable/checkbox-selection-datatables-bootstrap-4">
-                                                    <i class="far fa-lg fa-fw fa-list-alt"></i>
                                                     Checkbox selection
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/table/datatable/row-selection-using-checkboxes">
-                                                    <i class="far fa-lg fa-fw fa-list-alt"></i>
                                                     Row selection using checkboxes
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/table/datatable/individual-column-searching">
-                                                    <i class="far fa-lg fa-fw fa-list-alt"></i>
                                                     individual-column-searching
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/table/datatable/datatables-footer-summary">
-                                                    <i class="far fa-lg fa-fw fa-list-alt"></i>
                                                     Datatables with Footer Summary
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/table/datatable/dynamic-datatables">
-                                                    <i class="far fa-lg fa-fw fa-list-alt"></i>
                                                     Dynamic Datatables Demo
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/table/datatable/dynamic-individual-column-searching-datatables">
-                                                    <i class="far fa-lg fa-fw fa-list-alt"></i>
                                                     Dynamic Individual Column Searching Datatables
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/table/datatable/dynamic-messages">
-                                                    <i class="far fa-lg fa-fw fa-list-alt"></i>
                                                     Dynamic Messages
                                                 </a>
                                             </li>
@@ -1103,13 +975,11 @@
                                 <ul aria-expanded="true">
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/chart/echarts">
-                                            <i class="far fa-lg fa-fw fa-chart-bar"></i>
                                             ECharts
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/chart/dynamic-echarts">
-                                            <i class="far fa-lg fa-fw fa-chart-bar"></i>
                                             Dynamic ECharts
                                         </a>
                                     </li>
@@ -1123,31 +993,26 @@
                                 <ul aria-expanded="true">
                                     <li>
                                         <a class="has-arrow" href="#">
-                                            <i class="far fa-lg fa-fw fa-image"></i>
                                             Carousel
                                         </a>
                                         <ul aria-expanded="true">
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/gallery/carousel/bootstrap-carousel">
-                                                    <i class="far fa-lg fa-fw fa-image"></i>
                                                     Bootstrap Carousel
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/gallery/carousel/carousel-product-slider">
-                                                    <i class="far fa-lg fa-fw fa-image"></i>
                                                     Carousel Product Slider
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/gallery/carousel/up-tabbed-slider-carousel">
-                                                    <i class="far fa-lg fa-fw fa-image"></i>
                                                     Up Tabbed Slider Carousel
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/gallery/carousel/slick-carousel">
-                                                    <i class="far fa-lg fa-fw fa-image"></i>
                                                     Slick Carousel
                                                 </a>
                                             </li>
@@ -1155,61 +1020,51 @@
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/gallery/file-controller-serve">
-                                            <i class="far fa-lg fa-fw fa-image"></i>
                                             Simple Servlet for Files
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/gallery/file-uploader-manager">
-                                            <i class="far fa-lg fa-fw fa-image"></i>
                                             File Uploader Manager
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/gallery/edit-image-locally">
-                                            <i class="far fa-lg fa-fw fa-image"></i>
                                             Edit Image Locally
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/gallery/simple-thumbnail-gallery">
-                                            <i class="far fa-lg fa-fw fa-image"></i>
                                             Simple Thumbnail Gallery
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/gallery/view-image-using-bs-model">
-                                            <i class="far fa-lg fa-fw fa-image"></i>
                                             View Image Using Bootstrap Model
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/gallery/view-image-using-pager-bs-model">
-                                            <i class="far fa-lg fa-fw fa-image"></i>
                                             View Image Using Pager Bootstrap Model
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/gallery/view-image-using-pagination-bs-model">
-                                            <i class="far fa-lg fa-fw fa-image"></i>
                                             View Image Using Pagination Bootstrap Model
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/gallery/action-thumbnail-gallery">
-                                            <i class="far fa-lg fa-fw fa-image"></i>
                                             Action Thumbnail Gallery
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/gallery/tool-thumbnail-gallery">
-                                            <i class="far fa-lg fa-fw fa-image"></i>
                                             Tool Thumbnail Gallery
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/gallery/portfolio-gallery-with-filtering-category">
-                                            <i class="far fa-lg fa-fw fa-image"></i>
                                             Portfolio Gallery with filtering category
                                         </a>
                                     </li>
@@ -1223,31 +1078,26 @@
                                 <ul>
                                     <li>
                                         <a class="has-arrow" href="#">
-                                            <i class="far fa-lg fa-fw fa-file-alt"></i>
                                             Empty Pages
                                         </a>
                                         <ul>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/custom-pages/empty-pages/blank-page">
-                                                    <i class="far fa-lg fa-fw fa-file-alt"></i>
                                                     Blank Page
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/custom-pages/empty-pages/empty-page">
-                                                    <i class="far fa-lg fa-fw fa-file-alt"></i>
                                                     Empty Page with nothing
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/custom-pages/empty-pages/card-page">
-                                                    <i class="far fa-lg fa-fw fa-file-alt"></i>
                                                     Card Page
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/custom-pages/empty-pages/event-page">
-                                                    <i class="far fa-lg fa-fw fa-file-alt"></i>
                                                     Page with standard event handling
                                                 </a>
                                             </li>
@@ -1255,13 +1105,11 @@
                                     </li>
                                     <li>
                                         <a class="has-arrow" href="#">
-                                            <i class="far fa-lg fa-fw fa-file-alt"></i>
                                             Dashboard Pages
                                         </a>
                                         <ul aria-expanded="true">
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/custom-pages/dashboard/users-dashboard-1">
-                                                    <i class="far fa-lg fa-fw fa-file-alt"></i>
                                                     Users Dashboard 1
                                                 </a>
                                             </li>
@@ -1269,26 +1117,22 @@
                                     </li>
                                     <li>
                                         <a class="has-arrow" href="#">
-                                            <i class="far fa-lg fa-fw fa-file-alt"></i>
                                             Inbox
                                         </a>
                                         <ul aria-expanded="true">
 
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/custom-pages/inbox/inbox-messages">
-                                                    <i class="far fa-lg fa-fw fa-file-alt"></i>
                                                     Inbox Messages
                                                 </a>
                                             </li>
                                             <li>
                                                 <a action-name="compose-page" href="${pageContext.request.contextPath}/pages/custom-pages/inbox/compose-message">
-                                                    <i class="far fa-lg fa-fw fa-file-alt"></i>
                                                     Compose Message
                                                 </a>
                                             </li>
                                             <li>
                                                 <a action-name="view-message" href="${pageContext.request.contextPath}/pages/custom-pages/inbox/view-message">
-                                                    <i class="far fa-lg fa-fw fa-file-alt"></i>
                                                     View Message
                                                 </a>
                                             </li>
@@ -1296,13 +1140,11 @@
                                     </li>
                                     <li>
                                         <a class="has-arrow" href="#">
-                                            <i class="far fa-lg fa-fw fa-file-alt"></i>
                                             Login Pages
                                         </a>
                                         <ul>
                                             <li>
                                                 <a target="_blank" action-name="login-page"  href="${pageContext.request.contextPath}/login?lang=${labels["global.language"]}">
-                                                    <i class="far fa-lg fa-fw fa-file-alt"></i>
                                                     Default Login Page
                                                 </a>
                                             </li>
@@ -1310,25 +1152,21 @@
                                     </li>
                                     <li>
                                         <a class="has-arrow" href="#">
-                                            <i class="far fa-lg fa-fw fa-file-alt"></i>
                                             Invoices Templates
                                         </a>
                                         <ul>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/custom-pages/invoice/create-invoice-form">
-                                                    <i class="far fa-lg fa-fw fa-file-alt"></i>
                                                     Create Invoice Form
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/custom-pages/invoice/invoice-template-1">
-                                                    <i class="far fa-lg fa-fw fa-file-alt"></i>
                                                     Invoice Template 1
                                                 </a>
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/custom-pages/invoice/invoice-template-2">
-                                                    <i class="far fa-lg fa-fw fa-file-alt"></i>
                                                     Invoice Template 2
                                                 </a>
                                             </li>
@@ -1336,19 +1174,16 @@
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/custom-pages/todo-list">
-                                            <i class="far fa-lg fa-fw fa-file-alt"></i>
                                             ToDo App
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/pages/custom-pages/menu-template">
-                                            <i class="far fa-lg fa-fw fa-file-alt"></i>
                                             Menu Template Page
                                         </a>
                                     </li>
                                     <li>
                                         <a target="_blank" action-name="404-error-page" href="${pageContext.request.contextPath}/pages/custom-pages/404-page?lang=${labels["global.language"]}">
-                                            <i class="far fa-lg fa-fw fa-file-alt"></i>
                                             404 Page
                                         </a>
                                     </li>
