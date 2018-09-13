@@ -2,10 +2,9 @@
 title: JavaTMP Bootstrap Actionable Plugin
 ---
 # JavaTMP Bootstrap Actionable Plugin
-`[Bootstrap Actionable plugin](https://github.com/JavaTMP/bootstrap-actionable)` is a small Javascript code that help us implement click actions for `<a>` and `<button>` tags by declarative way and provide functionalities to load AJAX content in Bootstrap Modal Wrapper instance. The following are the main action types provided by the plugin:
+[Bootstrap Actionable plugin](https://github.com/JavaTMP/bootstrap-actionable) is a small Javascript code that help us implement click actions for `<a>` and `<button>` tags by declarative way and provide functionalities to load AJAX content in Bootstrap Modal Wrapper instance. The following are the main action types provided by the plugin:
 
-`"action-ref-href"` Action Type
--------------------------------
+## `"action-ref-href"` Action Type
 
 This is the simplest function of the plugin which fires other link's `click` event that contains the value of `href`'s attribute equal to provided one. We use this type on sidebar small shortcut `buttons` and on all `home.html`'s `buttons`. See the following button tags html code:
 ```
@@ -34,9 +33,8 @@ Pressing the above button will make actionable code search for link value `"page
     Default Login Page
 </a>
 ```
-`"action-ref"` Action Type
---------------------------
 
+## `"action-ref"` Action Type
 It is similar to `"action-ref-href"` but instead of using URL to search for value of `href` attribute, it uses an alias name to search for. See the following code for `"Compose Message"` and `"View Message"` sidebar link in `index.html` page:
 ```
 <li>
@@ -69,9 +67,8 @@ And see the following tags from `./web/pages/custom-pages/inbox/inbox-messages.
     Customer Support
 </a>
 ```
-`"ajax-request-in-model"` action type
--------------------------------------
 
+## `"ajax-request-in-model"` action type
 This action type is very powerful and it fires an AJAX request using href URL and load its contents in [Bootstrap Modal Wrapper](/pages/javatmp-bootstrap-modal-wrapper "JavaTMP Bootstrap Modal Wrapper Plugin") instance and give the control to the modal. Example links are the message links in dropdown menu items in main navbar in `index.html` page:
 ```
 <a actionType="ajax-request-in-model"
