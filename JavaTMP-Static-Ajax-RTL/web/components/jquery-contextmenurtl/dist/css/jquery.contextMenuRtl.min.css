@@ -1,3 +1,0 @@
-.context-menu-root[dir="rtl"]{direction:rtl;text-align:right}.context-menu-root[dir="rtl"] .context-menu-submenu:after{border-width:.25em .25em .25em 0;border-color:transparent #2f2f2f transparent transparent;left:.5em;right:auto}.context-menu-root[dir="rtl"] .context-menu-item>.context-menu-list{left:-5px;right:auto}.context-menu-root[dir="rtl"] .context-menu-icon:before{right:0;left:auto}
-
-/*# sourceMappingURL=jquery.contextMenuRtl.min.css.map */
