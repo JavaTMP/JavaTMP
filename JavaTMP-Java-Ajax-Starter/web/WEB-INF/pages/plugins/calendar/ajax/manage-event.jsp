@@ -297,10 +297,11 @@
                 $(".daterangepicker > .ranges").hide();
                 $('.Date-and-Time').inputmask({
                     alias: "datetime",
-                    inputformat: "dd/mm/yyyy HH:MM",
+                    placeholder: "dd/mm/yyyy HH:MM",
+                    inputFormat: "dd/mm/yyyy HH:MM",
                     displayFormat: true,
                     hourFormat: "24",
-                    clearmaskonlostfocus: false
+                    clearMaskOnLostFocus: false
                 });
             });
         });
