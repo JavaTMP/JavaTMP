@@ -1,7 +1,11 @@
 ---
-title: Java Bootstrap Template Version 0.0.3 (Current Development Version)
+title: Java Bootstrap Template Version 0.0.3 (published on 13th of September, 2018)
 ---
-# Java Bootstrap Template Version 0.0.3 (Current Development Version)
+# Java Bootstrap Template Version 0.0.3 (published on 13th of September, 2018)
+
+ede9544 on Sep 13, 2018, 10:02 AM GMT+4
+---------------------------------------
+Refactor main javatmp.js file and reduce the font-size of all versions.
 
 11fe3e4 on Sep 8, 2018, 9:28 PM GMT+4
 -------------------------------------
