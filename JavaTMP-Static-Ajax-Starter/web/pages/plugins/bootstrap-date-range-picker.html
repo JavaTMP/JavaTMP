@@ -247,10 +247,18 @@
 
             // fire AFTER all transition done and your ajax content is shown to user.
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
-                $('#default-drp').daterangepicker({"opens": "left"});
-                $('#default-drp-with-options').daterangepicker({
-                    "opens": "left",
+
+                $('#default-drp').daterangepicker({
+                    "opens": javatmp.settings.floatDefault,
                     locale: {
+                        "direction": javatmp.settings.direction,
+                        format: 'YYYY-MM-DD'
+                    }
+                });
+                $('#default-drp-with-options').daterangepicker({
+                    "opens": javatmp.settings.floatDefault,
+                    locale: {
+                        "direction": javatmp.settings.direction,
                         format: 'YYYY-MM-DD'
                     },
                     startDate: '2017-01-01',
@@ -259,14 +267,16 @@
                     alert("A new date range was chosen: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
                 });
                 $('#Date-and-Time').daterangepicker({
-                    timePicker: true,
-                    timePickerIncrement: 30,
+                    "opens": javatmp.settings.floatDefault,
                     locale: {
+                        "direction": javatmp.settings.direction,
                         format: 'MM/DD/YYYY h:mm A'
-                    }
+                    },
+                    timePicker: true,
+                    timePickerIncrement: 30
                 });
                 $('#single_date_picker').daterangepicker({
-                    "opens": "right",
+                    "opens": javatmp.settings.floatReverse,
                     singleDatePicker: true,
                     showDropdowns: true
                 });

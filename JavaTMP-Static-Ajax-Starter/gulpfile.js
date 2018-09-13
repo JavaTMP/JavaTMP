@@ -17,10 +17,6 @@ var config = {
     "destComponentsLib": "./web/components",
     "destDist": "./web/assets/dist",
     "plugins": {
-//        "font-awesome": [
-//            {"from": "${sourceNodeLib}/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css", "to": "${destComponentsLib}/font-awesome/web-fonts-with-css/css"},
-//            {"from": "${sourceNodeLib}/font-awesome/web-fonts-with-css/webfonts/*", "to": "${destComponentsLib}/font-awesome/web-fonts-with-css/webfonts"}
-//        ],
         "fontawesome-free": [
             {"from": "${sourceNodeLib}/@fortawesome/fontawesome-free/webfonts/**/*", "to": "${destComponentsLib}/fontawesome-free/webfonts"}
         ],
@@ -79,6 +75,8 @@ var config = {
         "moment": [
             {"from": "${sourceNodeLib}/moment/min/moment.min.js", "to": "${destComponentsLib}/moment/min"},
             {"from": "${sourceNodeLib}/moment/min/locales.min.js", "to": "${destComponentsLib}/moment/min"}
+//            {"from": "${sourceNodeLib}/moment/locale/ar.js", "to": "${destComponentsLib}/moment/locale", processJS: true},
+//            {"from": "${sourceNodeLib}/moment/locale/en-gb.js", "to": "${destComponentsLib}/moment/locale", processJS: true}
         ],
         "bootstrap-daterangepicker": [
             {"from": "${sourceNodeLib}/bootstrap-daterangepicker/daterangepicker.css", "to": "${destComponentsLib}/bootstrap-daterangepicker", processCSS: true},
@@ -136,7 +134,8 @@ var config = {
             {"from": "${sourceNodeLib}/jquery.counterup/jquery.counterup.min.js", "to": "${destComponentsLib}/jquery.counterup"}
         ],
         "timeago": [
-            {"from": "${sourceNodeLib}/timeago/jquery.timeago.js", "to": "${destComponentsLib}/timeago", processJS: true}
+            {"from": "${sourceNodeLib}/timeago/jquery.timeago.js", "to": "${destComponentsLib}/timeago", processJS: true},
+            {"from": "${sourceNodeLib}/timeago/locales/jquery.timeago.en.js", "to": "${destComponentsLib}/timeago/locales", processJS: true}
         ],
         "jquery-validation": [
             {"from": "${sourceNodeLib}/jquery-validation/dist/jquery.validate.min.js", "to": "${destComponentsLib}/jquery-validation/dist"},
@@ -209,6 +208,10 @@ var config = {
         "bootstrap-alert-wrapper": [
             {"from": "${sourceNodeLib}/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js", "to": "${destComponentsLib}/bootstrap-alert-wrapper/dist"}
         ],
+        "jquery-contextmenurtl": [
+            {"from": "${sourceNodeLib}/jquery-contextmenurtl/dist/css/jquery.contextMenuRtl.min.css", "to": "${destComponentsLib}/jquery-contextmenurtl/dist/css"},
+            {"from": "${sourceNodeLib}/jquery-contextmenurtl/dist/js/jquery.contextMenuRtl.min.js", "to": "${destComponentsLib}/jquery-contextmenurtl/dist/js"}
+        ],
         "Blob": [
             {"from": "${sourceNodeLib}/Blob/Blob.js", "to": "${destComponentsLib}/Blob", processJS: true}
         ],
@@ -255,7 +258,8 @@ var src = {
         "./web/components/slick-carousel/slick/slick-theme.css",
         "./web/components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css",
 //        "./web/components/bootstrap-reverse/dist/**/*",
-        "./web/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.css"
+        "./web/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.css",
+        "./web/components/jquery-contextmenurtl/dist/css/jquery.contextMenuRtl.min.css"
     ],
     "cssForPrint": [
         "./web/components/fullcalendar/dist/fullcalendar.print.min.css"
@@ -325,8 +329,24 @@ var src = {
         "./web/components/bootstrap-actionable/dist/bootstrap-actionable.min.js",
         "./web/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.js",
         "./web/components/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js",
-        "./web/components/numeral/min/numeral.min.js"
+        "./web/components/numeral/min/numeral.min.js",
+        "./web/components/jquery-contextmenurtl/dist/js/jquery.contextMenuRtl.min.js"
     ],
+    "localeJS": {
+        "en": [
+            "./web/components/moment/min/locales.min.js",
+            "./web/components/timeago/locales/jquery.timeago.en.js"
+        ],
+        "ar": [
+            "./web/components/moment/min/locales.min.js",
+//            "./web/components/moment/locale/en-gb.js",
+//            "./web/components/moment/locale/ar.js",
+            "./web/components/summernote/dist/lang/summernote-ar-AR.min.js",
+            "./web/components/fullcalendar/dist/locale/ar.js",
+            "./web/components/timeago/locales/jquery.timeago.ar.js",
+            "./web/components/jquery-validation/dist/localization/messages_ar.js"
+        ]
+    },
     "fontFamilyFiles": {
         "en": [
             "./web/assets/src/sass/font-family/font-family-en.scss"
@@ -389,6 +409,7 @@ gulp.task('copy-components', ["delete-components"], function () {
 gulp.task('generate-dist', ['copy-components', "delete-dist", "delete-css", "delete-js"], function (cb) {
     async.series([
         function (next) {
+            console.log("Compile and generate sass/themes");
             gulp.src([
                 './web/assets/src/sass/themes/javatmp-*.scss'])
                     .pipe(sass().on('error', sass.logError))
@@ -401,32 +422,36 @@ gulp.task('generate-dist', ['copy-components', "delete-dist", "delete-css", "del
                     .pipe(gulp.dest('./web/assets/dist/css'))
                     .on('end', next);
         },
-//        function (next) {
-//            gulp.src([
-//                './web/assets/src/sass/javatmp-*.scss'])
-//                    .pipe(sass().on('error', sass.logError))
-//                    .pipe(autoprefixer({
-//                        browsers: ['last 2 versions'],
-//                        cascade: false
-//                    }))
-//                    .pipe(cleanCSS())
-//                    .pipe(rename({suffix: '.min'}))
-//                    .pipe(gulp.dest('./web/assets/dist/css'))
-//                    .on('end', next);
-//        },
         function (next) {
+            console.log("Compile and generate sass-rtl/themes");
+            gulp.src([
+                './web/assets/src/sass-rtl/themes-rtl/javatmp-*.scss'])
+                    .pipe(sass().on('error', sass.logError))
+                    .pipe(autoprefixer({
+                        browsers: ['last 2 versions'],
+                        cascade: false
+                    }))
+                    .pipe(cleanCSS())
+                    .pipe(rename({suffix: '.min'}))
+                    .pipe(gulp.dest('./web/assets/dist/css'))
+                    .on('end', next);
+        },
+        function (next) {
+            console.log("Compile and generate javatmp-plugins-all.min.css");
             gulp.src(src.css)
                     .pipe(concat("javatmp-plugins-all.min.css", {newLine: '\n'}))
                     .pipe(gulp.dest("./web/assets/dist/css"))
                     .on('end', next);
         },
         function (next) {
+            console.log("Compile and generate javatmp-plugins-print-all.min.css");
             gulp.src(src.cssForPrint)
                     .pipe(concat("javatmp-plugins-print-all.min.css", {newLine: '\n'}))
                     .pipe(gulp.dest("./web/assets/dist/css"))
                     .on('end', next);
         },
         function (next) {
+            console.log("Compile and generate js-src");
             gulp.src([
                 './web/assets/src/js-src/javatmp.init.js',
                 './web/assets/src/js-src/javatmp.util.js',
@@ -442,10 +467,38 @@ gulp.task('generate-dist', ['copy-components', "delete-dist", "delete-css", "del
                     .on('end', next);
         },
         function (next) {
+            console.log("Compile and generate javatmp-plugins-all.min.js");
             gulp.src(src.js)
                     .pipe(concat("javatmp-plugins-all.min.js", {newLine: '\n;'}))
                     .pipe(gulp.dest("./web/assets/dist/js"))
                     .on('end', next);
+        },
+        function (next) {
+            console.log("Generating javatmp-plugins-all-locale-*.min.js files");
+            var count = 0;
+            for (var key in src.localeJS) {
+                if (src.localeJS.hasOwnProperty(key)) {
+                    count++;
+                    var currentKey = key;
+                    var langArray = src.localeJS[currentKey];
+
+                    console.log("Generating javatmp-plugins-all-locale-" + currentKey + ".min.js");
+                    gulp.src(langArray)
+                            .pipe(concat("javatmp-plugins-all-locale-" + currentKey + ".min.js", {newLine: '\n;'}))
+                            .pipe(gulp.dest("./web/assets/dist/js"))
+                            .on('end', (function () {
+                                var k = currentKey;
+                                return function () {
+                                    count--;
+                                    console.log("Finish javatmp-plugins-all-locale-" + k + ".min.js");
+                                    if (count === 0) {
+                                        console.log("Finish javatmp-plugins-all-locale-*.min.js files");
+                                        next();
+                                    }
+                                };
+                            })());
+                }
+            }
         },
         function (next) {
             console.log("Generating font-family-*.min.css");
@@ -477,11 +530,13 @@ gulp.task('generate-dist', ['copy-components', "delete-dist", "delete-css", "del
             }
         },
         function (next) {
+            console.log("Copy plugins img to dist/img");
             gulp.src(src.img)
                     .pipe(gulp.dest("./web/assets/dist/img"))
                     .on('end', next);
         },
         function (next) {
+            console.log("Copy plugins fonts to dist/fonts");
             gulp.src(src.fonts)
                     .pipe(gulp.dest("./web/assets/dist/fonts"))
                     .on('end', next);

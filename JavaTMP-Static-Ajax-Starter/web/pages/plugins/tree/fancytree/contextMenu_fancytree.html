@@ -50,6 +50,15 @@
                         loading: "fa fa-sync fa-spin"
                     }
                 };
+                if (javatmp.settings.isRTL === true) {
+                    $.extend(true, glyph_opts, {
+                        map: {
+                            dropMarker: "fa fa-arrow-left",
+                            expanderClosed: "fa fa-chevron-left",
+                            expanderLazy: "fa fa-chevron-left"
+                        }
+                    });
+                }
                 var SOURCE = [
                     {title: "item1 with key and tooltip", tooltip: "Look, a tool tip!"},
                     {title: "item2: selected on init", selected: true},
@@ -92,6 +101,7 @@
                 // Initialize Fancytree
 
                 $('#ContextMenu_Fancytree_id').fancytree({
+                    rtl: javatmp.settings.isRTL,
                     extensions: ["glyph"],
 //                    extensions: ['contextMenu'],
                     glyph: glyph_opts,

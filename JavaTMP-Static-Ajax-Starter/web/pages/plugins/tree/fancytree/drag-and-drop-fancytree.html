@@ -50,7 +50,15 @@
                         loading: "fa fa-sync fa-spin"
                     }
                 };
-
+                if (javatmp.settings.isRTL === true) {
+                    $.extend(true, glyph_opts, {
+                        map: {
+                            dropMarker: "fa fa-arrow-left",
+                            expanderClosed: "fa fa-chevron-left",
+                            expanderLazy: "fa fa-chevron-left"
+                        }
+                    });
+                }
                 var sourceData = [
                     {
                         "title": "Animalia",
@@ -119,6 +127,7 @@
                 ];
                 // Initialize Fancytree
                 $("#tree").fancytree({
+                    rtl: javatmp.settings.isRTL,
                     extensions: ["glyph", "dnd", "edit"],
                     glyph: glyph_opts,
                     source: sourceData,

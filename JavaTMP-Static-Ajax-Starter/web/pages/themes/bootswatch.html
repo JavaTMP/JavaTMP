@@ -141,7 +141,11 @@
                 $(".applyTheme").on("click", function () {
                     var themeName = $(this).attr("themeName");
                     var styleId = "#themeStyleSheet";
-                    var newUrl = "assets/dist/css/javatmp-" + themeName + ".min.css";
+                    var newUrl = "assets/dist/css/javatmp-" + themeName;
+                    if (javatmp.settings.isRTL === true) {
+                        newUrl += "-rtl";
+                    }
+                    newUrl += ".min.css";
                     $(styleId).attr("href", newUrl);
                 });
             });

@@ -79,6 +79,15 @@
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
             $.contextMenu({
+                rtl: javatmp.settings.isRTL,
+                position: function (opt, x, y) {
+                    if (javatmp.settings.isRTL === true) {
+                        var menuWidth = $(opt.$menu).outerWidth();
+                        opt.$menu.css({top: y, left: x - menuWidth});
+                    } else {
+                        opt.$menu.css({top: y, left: x});
+                    }
+                },
                 selector: '.context-menu-one',
                 callback: function (key, options) {
                     var m = "clicked: " + key;
@@ -95,6 +104,15 @@
                 }
             });
             $.contextMenu({
+                rtl: javatmp.settings.isRTL,
+                position: function (opt, x, y) {
+                    if (javatmp.settings.isRTL === true) {
+                        var menuWidth = $(opt.$menu).outerWidth();
+                        opt.$menu.css({top: y, left: x - menuWidth});
+                    } else {
+                        opt.$menu.css({top: y, left: x});
+                    }
+                },
                 selector: '.left-context-menu-one',
                 trigger: 'left',
                 callback: function (key, options) {
@@ -114,6 +132,15 @@
                 }
             });
             $.contextMenu({
+                rtl: javatmp.settings.isRTL,
+                position: function (opt, x, y) {
+                    if (javatmp.settings.isRTL === true) {
+                        var menuWidth = $(opt.$menu).outerWidth();
+                        opt.$menu.css({top: y, left: x - menuWidth});
+                    } else {
+                        opt.$menu.css({top: y, left: x});
+                    }
+                },
                 selector: '.left-context-submenus-one',
                 callback: function (key, options) {
                     var m = "clicked: " + key;

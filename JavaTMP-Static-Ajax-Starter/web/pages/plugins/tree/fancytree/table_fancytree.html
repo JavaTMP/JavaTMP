@@ -60,8 +60,17 @@
                         loading: "fa fa-sync fa-spin"
                     }
                 };
-
+                if (javatmp.settings.isRTL === true) {
+                    $.extend(true, glyph_opts, {
+                        map: {
+                            dropMarker: "fa fa-arrow-left",
+                            expanderClosed: "fa fa-chevron-left",
+                            expanderLazy: "fa fa-chevron-left"
+                        }
+                    });
+                }
                 $("#treetable").fancytree({
+                    rtl: javatmp.settings.isRTL,
                     extensions: ["glyph", "table"],
                     checkbox: false,
                     glyph: glyph_opts,

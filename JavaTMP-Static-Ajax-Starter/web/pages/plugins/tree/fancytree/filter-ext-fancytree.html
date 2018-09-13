@@ -102,8 +102,17 @@
                         loading: "fa fa-sync fa-spin"
                     }
                 };
-
+                if (javatmp.settings.isRTL === true) {
+                    $.extend(true, glyph_opts, {
+                        map: {
+                            dropMarker: "fa fa-arrow-left",
+                            expanderClosed: "fa fa-chevron-left",
+                            expanderLazy: "fa fa-chevron-left"
+                        }
+                    });
+                }
                 $("#tree").fancytree({
+                    rtl: javatmp.settings.isRTL,
                     extensions: ["glyph", "filter"],
                     glyph: glyph_opts,
                     quicksearch: true,
