@@ -1,8 +1,8 @@
 {
-  "name": "JavaTMP-Static-Ajax-Starter",
+  "name": "JavaTMP-Static-Ajax",
   "version": "0.0.4",
   "private": true,
-  "description": "JavaTMP Bootstrap Admin And Dashboard Starter Template",
+  "description": "JavaTMP Bootstrap Admin And Dashboard Template",
   "keywords": [
     "jquery",
     "bootstrap",

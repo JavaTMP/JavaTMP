@@ -1,0 +1,96 @@
+
+@import "../common/variables.scss";
+
+.main-javatmp-navbar {
+    z-index: $javatmp-navbar-z-index;
+    height: $javatmp-navbar-height;
+    /*border-bottom: $javatmp-navbar-border-bottom-width solid $javatmp-navbar-border-color;*/
+    background: $javatmp-navbar-bg;
+    transition: $javatmp-transition;
+
+    body.longer-sidebar.sidebar-active & {
+        left: 0;
+    }
+    body.longer-sidebar.sidebar-active.mouse-auto-show & {
+        left: 0;
+    }
+    @media (min-width: 768px) {
+        body.longer-sidebar.sidebar-active & {
+            left: $javatmp-sidebar-width;
+
+        }
+    }
+    .navbar-brand {
+        color: $javatmp-navbar-brand-color;
+    }
+    .navbar-toggler {
+        color: $javatmp-navbar-toggler-color;
+        border-color: $javatmp-navbar-toggler-border-color;
+    }
+    .navbar-toggler-icon {
+        background-image: $javatmp-navbar-toggler-icon-bg-image;
+    }
+    .main-navbar-menu {
+        > .nav-item {
+            @if $javatmp-navbar-menu-enable-border {
+                border-left: $javatmp-navbar-border-width solid $javatmp-navbar-border-color;
+            }
+            > a {
+                color: $javatmp-navbar-menu-link-color;
+                padding: 0rem 1rem;
+                &:hover, &:focus {
+                    color: $javatmp-navbar-menu-link-hover-color;
+                    background-color: $javatmp-navbar-menu-link-hover-bg;
+                }
+            }
+            &.show > a {
+                color: $javatmp-navbar-menu-link-active-color;
+                background-color: $javatmp-navbar-menu-link-active-bg;
+            }
+        }
+    }
+}
+
+// v0.0.3: Added to support for navbar bg and color using theme colors
+.main-javatmp-navbar {
+    @each $color, $value in $theme-colors {
+        &.bg-#{$color} {
+            $temp-color: color-yiq($value);
+            $toggler-bg-image: $navbar-dark-toggler-icon-bg;
+            @if ($temp-color == $yiq-text-dark) {
+                $toggler-bg-image: $navbar-light-toggler-icon-bg
+            }
+
+            background: $value;
+            color: $temp-color;
+            .navbar-brand {
+                color: $temp-color;
+            }
+            .navbar-toggler {
+                color: $temp-color;
+                border-color: $temp-color;
+            }
+            .navbar-toggler-icon {
+                background-image: $toggler-bg-image;
+            }
+            .main-navbar-menu {
+                > .nav-item {
+                    @if $javatmp-navbar-menu-enable-border {
+                        border-color: $temp-color;
+                    }
+                    > a {
+                        color: $temp-color;
+                        &:hover, &:focus {
+                            color: lighten($temp-color, 10%);
+                            background-color: darken($value, 10%);
+                        }
+                    }
+                    &.show > a {
+                        color: lighten($temp-color, 10%);
+                        background-color: darken($value, 10%);
+                    }
+                }
+            }
+        }
+    }
+}

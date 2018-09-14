@@ -1,0 +1,24 @@
+@import "../common/variables.scss";
+
+$progressbar-bg : $danger!default;
+$progressbar-z-index: 1031!default;
+$progressbar-height: .2em!default;
+
+#nprogress .bar {
+    background: $progressbar-bg;
+    z-index: $progressbar-z-index;
+    height: $progressbar-height;
+}
+
+#nprogress .peg {
+    box-shadow: 0 0 .2em progressbar-bg;
+}
+
+#nprogress .spinner {
+    display: none;
+}
+
+#nprogress .spinner-icon {
+    border-top-color: progressbar-bg;
+    border-left-color: progressbar-bg;
+}
