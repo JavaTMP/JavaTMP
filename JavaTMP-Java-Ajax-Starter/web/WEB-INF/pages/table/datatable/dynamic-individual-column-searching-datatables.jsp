@@ -159,7 +159,7 @@
                                         column.search(val ? val : '', true, false).draw();
                                     });
                             input.inputmask({
-                                alias: "date",
+                                alias: "datetime",
                                 placeholder: "dd/mm/yyyy",
                                 inputFormat: "dd/mm/yyyy",
                                 displayFormat: true,

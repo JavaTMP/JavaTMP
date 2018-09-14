@@ -615,7 +615,7 @@
                 }));
 
                 form.find("input[name='birthOfDateStr']").inputmask({
-                    alias: "date",
+                    alias: "datetime",
                     placeholder: "dd/mm/yyyy",
                     inputFormat: "dd/mm/yyyy",
                     displayFormat: true,

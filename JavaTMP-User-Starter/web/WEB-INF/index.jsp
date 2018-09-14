@@ -115,7 +115,7 @@
                         </div>
                         <div class="sidebar-menu-filter-form mx-2 my-1">
                             <form autocomplete="off" class="search-menu-form">
-                                <div class="has-feedback-icon has-clear">
+                                <div class="has-form-control-clear">
                                     <input id="filter-menu-id" type="text" class="form-control" placeholder="Search menu ..." autocomplete="off"/>
                                     <span class="form-control-clear fa fa-times d-none"></span>
                                 </div>
