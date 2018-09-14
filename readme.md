@@ -5,7 +5,7 @@ First of all I'd like to thank You For Purchasing JavaTMP - Java Bootstrap Templ
 I hope you like it and find it easy to work with.
 If you have any questions, please email our support team at support@javatmp.com.
 
-The [online documentation](https://help.javatmp.com/pages/java-bootstrap-template-documentation) is brief and may be lacking in some parts.
+The [online documentation](http://help.javatmp.com/) is brief and may be lacking in some parts.
 If you think more explanations and examples are needed, just let us know.
 
 Please send your questions, comments, suggestions and bug reports to our support
