@@ -55,7 +55,7 @@
                 </li>
                 <li class="nav-item dropdown mega-on-sm d-flex align-items-stretch" id="myMessagesDropdownId">
                     <a class="nav-link dropdown-toggle d-flex align-items-center" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope fa-lg faa-shake animated mr-1"></i>
+                        <i class="far fa-envelope fa-lg faa-shake animated mr-1"></i>
                         <span class="badge badge-danger d-none d-md-inline">99+</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-extender">
@@ -188,7 +188,7 @@
                 </li>
                 <li class="nav-item dropdown mega-on-sm d-flex align-items-stretch">
                     <a class="nav-link d-flex align-items-center dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-lg fa-bell faa-ring animated mr-1"></i>
+                        <i class="far fa-bell fa-lg faa-ring animated mr-1"></i>
                         <span class="badge badge-danger d-none d-md-inline">99+</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-extender">

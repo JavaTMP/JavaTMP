@@ -113,6 +113,21 @@
             <i class="fas fa-coffee"></i>
             404 Page
         </button>
+        <button type="button" class="javatmp-btn btn btn-success btn-block m-2"
+                actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/custom-pages/dashboard/users-dashboard-1">
+            <i class="fas fa-coffee"></i>
+            Users Dashboard
+        </button>
+        <button type="button" class="javatmp-btn btn btn-success btn-block m-2"
+                actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/table/dynamic-sortable-table">
+            <i class="fas fa-coffee"></i>
+            Row Sortable Table
+        </button>
+        <button type="button" class="javatmp-btn btn btn-success btn-block m-2"
+                actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/plugins/cropper-image-cropping">
+            <i class="fas fa-coffee"></i>
+            Image Cropping Plugin
+        </button>
     </div>
     <style type="text/css">
         .javatmp-btn {
