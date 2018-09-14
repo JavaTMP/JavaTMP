@@ -118,7 +118,7 @@ $metismenu-submenu-vertical-border-color: darken($metismenu-bg, 10%)!default;
                 background: $value;
                 color: $temp-color;
                 > li {
-                    border-bottom-color: 1px solid lighten($value, 10%);
+                    border-bottom-color: lighten($value, 10%);
                 }
                 a {
                     color: $temp-color;
@@ -135,7 +135,7 @@ $metismenu-submenu-vertical-border-color: darken($metismenu-bg, 10%)!default;
                     }
                 }
                 ul {
-                    border-left-color: $temp-color;
+                    border-left-color: lighten($value, 10%);
                 }
                 /*                li {
                                     border-bottom-color: lighten($value, 10%);
