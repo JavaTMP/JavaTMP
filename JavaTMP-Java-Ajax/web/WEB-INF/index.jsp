@@ -463,6 +463,11 @@
                                             Font Awesome Animation
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/icon/material-icons">
+                                            Material Design icons by Google
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li>
