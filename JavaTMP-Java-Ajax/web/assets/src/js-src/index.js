@@ -197,7 +197,7 @@
 
                     if (javatmp.util.isWidthSmall()) {
                         javatmp.sidebar.hide();
-                    } else if (javatmp.sidebar.isAutoShowHideActive()) {
+                    } else if (javatmp.sidebar.isShown() && javatmp.sidebar.isAutoShowHideActive()) {
                         javatmp.sidebar.pauseAutoShowHide();
                         javatmp.sidebar.hide();
                     }
