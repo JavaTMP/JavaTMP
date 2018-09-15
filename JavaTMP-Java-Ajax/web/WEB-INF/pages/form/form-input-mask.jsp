@@ -41,14 +41,6 @@
                                     <p class="help-block">Date Input Mask.</p>
                                 </div>
                                 <div class="form-group">
-                                    <label>Phone Input</label>
-                                    <input dir="ltr"
-                                           class="form-control inputmaskTextField"
-                                           data-inputmask="'alias': 'phone'"
-                                           data-inputmask-clearmaskonlostfocus="false" />
-                                    <p class="help-block">Phone Input Mask.</p>
-                                </div>
-                                <div class="form-group">
                                     <label>Custom Phone Input</label>
                                     <input dir="ltr"
                                            class="form-control inputmaskTextField"

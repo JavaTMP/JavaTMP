@@ -143,7 +143,6 @@ var config = {
         ],
         "inputmask": [
             {"from": "${sourceNodeLib}/inputmask/dist/min/jquery.inputmask.bundle.min.js", "to": "${destComponentsLib}/inputmask/dist/min"},
-            {"from": "${sourceNodeLib}/inputmask/dist/min/inputmask/phone-codes/phone.min.js", "to": "${destComponentsLib}/inputmask/dist/min/inputmask/phone-codes"},
             {"from": "${sourceNodeLib}/inputmask/dist/min/inputmask/bindings/inputmask.binding.min.js", "to": "${destComponentsLib}/inputmask/dist/min/inputmask/bindings"}
         ],
         "jquery-form": [

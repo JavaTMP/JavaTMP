@@ -26,7 +26,7 @@
         "gulp-eslint": "^5.0.0",
         "gulp-git": "^2.8.0",
         "gulp-header": "^2.0.5",
-        "gulp-htmlmin": "^4.0.0",
+        "gulp-htmlmin": "^5.0.1",
         "gulp-if": "^2.0.2",
         "gulp-markdown": "^3.0.0",
         "gulp-processhtml": "^1.2.0",
