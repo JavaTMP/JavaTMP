@@ -225,6 +225,10 @@ var config = {
         ],
         "moment-timezone": [
             {"from": "${sourceNodeLib}/moment-timezone/**/*", "to": "${destComponentsLib}/moment-timezone"}
+        ],
+        "material-design-icons": [
+            {"from": "${sourceNodeLib}/material-design-icons/iconfont/MaterialIcons-Regular.*", "to": "${destComponentsLib}/material-design-icons/iconfont"},
+            {"from": "${sourceNodeLib}/material-design-icons/iconfont/material-icons.css", "to": "${destComponentsLib}/material-design-icons/iconfont", processCSS: true}
         ]
     }
 };
@@ -259,6 +263,8 @@ var src = {
 //        "./web/components/bootstrap-reverse/dist/**/*",
         "./web/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.css",
         "./web/components/jquery-contextmenurtl/dist/css/jquery.contextMenuRtl.min.css"
+//        ,
+//        "./web/components/material-design-icons/iconfont/material-icons.css"
     ],
     "cssForPrint": [
         "./web/components/fullcalendar/dist/fullcalendar.print.min.css"
@@ -268,7 +274,8 @@ var src = {
         "./web/components/jquery-contextmenu/dist/font/**/*",
         "./web/components/summernote/dist/font/**/*",
         "./web/components/slick-carousel/slick/fonts/**/*",
-        "./web/assets/src/fonts/open-sans/**/*"
+        "./web/assets/src/fonts/open-sans/**/*",
+        "./web/components/material-design-icons/iconfont/**/*"
     ],
     "img": [
         "./web/components/slick-carousel/slick/ajax-loader.gif",
