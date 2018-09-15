@@ -78,11 +78,11 @@
                                         <th colspan="3">
                                             <div class="float-right">
                                                 <span class="pagination-info"> 1 - 5 of 1098 </span>
-                                                <button class="btn btn-sm btn-primary cl-white">
-                                                    <i class="fa fa-angle-prev fa-fw  cl-white"></i>
+                                                <button class="btn btn-sm btn-primary">
+                                                    <i class="fa fa-angle-prev fa-fw"></i>
                                                 </button>
                                                 <button class="btn btn-sm btn-primary">
-                                                    <i class="fa fa-angle-next fa-fw cl-white"></i>
+                                                    <i class="fa fa-angle-next fa-fw"></i>
                                                 </button>
                                             </div>
                                         </th>

@@ -1082,13 +1082,18 @@
                                         </a>
                                         <ul>
                                             <li>
+                                                <a href="${pageContext.request.contextPath}/pages/custom-pages/empty-pages/empty-page">
+                                                    Empty Page with nothing
+                                                </a>
+                                            </li>
+                                            <li>
                                                 <a href="${pageContext.request.contextPath}/pages/custom-pages/empty-pages/blank-page">
                                                     Blank Page
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="${pageContext.request.contextPath}/pages/custom-pages/empty-pages/empty-page">
-                                                    Empty Page with nothing
+                                                <a href="${pageContext.request.contextPath}/pages/custom-pages/empty-pages/two-cols-blank-page">
+                                                    Two Columns Blank Page
                                                 </a>
                                             </li>
                                             <li>
