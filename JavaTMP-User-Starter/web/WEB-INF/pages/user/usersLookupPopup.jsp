@@ -6,14 +6,14 @@
     <table cellspacing="0" class="table table-condensed table-bordered table-hover" id="UsersListTableId">
         <thead>
             <tr id="UserListMainHeader">
-                <th>ID</th>
-                <th>Username</th>
+                <th style="width: 75px;"><p style="width: 75px;">ID</p></th>
+                <th style="width: 150px;"><p style="width: 150px;">Username</p></th>
             </tr>
             <tr id="UserListFilterHeader">
-                <th>
+                <th style="width: 75px;">
                     <input id="userlist-id-filter" class="form-control"/>
                 </th>
-                <th>
+                <th style="width: 150px;">
                     <input id="userlist-username-filter" class="form-control"/>
                 </th>
             </tr>
@@ -158,16 +158,15 @@
                                 } else {
                                     return data;
                                 }
-
                             }
                         },
                         {
-                            data: 'userName', name: "userName", width: "100%",
+                            data: 'userName', name: "userName", width: 150,
                             "render": function (data, type, row) {
-                                if (type === "sort" || type === 'type' || type === 'filter') {
-                                    return data;
+                                if (type === "display") {
+                                    return "<p class='m-0 p-0' style='width: 150px;'>" + data + "</p>";
                                 } else {
-                                    return "<p class='m-0 p-0' style='width: 100%;'>" + data + "</p>";
+                                    return data;
                                 }
                             }
                         }
