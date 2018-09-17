@@ -79,7 +79,7 @@
                     // here we run passing function name as a remote callback
                     javatmp.util.waitForFinalEvent(function () {
                         if ($.isFunction(modal.options.passData.callback)) {
-                            modal.options.passData.callback.apply();
+                            modal.options.passData.callback.apply(modal, callbackData);
                         } else if ($.type(modal.options.passData.callback) === "string") {
                             javatmp.util.executeFunctionByName(modal.options.passData.callback, window, callbackData);
                         }
