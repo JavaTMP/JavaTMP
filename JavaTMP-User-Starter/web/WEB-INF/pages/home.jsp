@@ -964,6 +964,8 @@
              * When another sidebar menu item pressed and before container replaced with new ajax content.
              * You can cancel, destroy, or remove any thing here before replace main output ajax container.
              * returning false will cancel the new request and do nothing.
+             *
+             * @@argument event event event may reference the event that causes the request to destroy.
              **/
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {
                 $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenCompress);
