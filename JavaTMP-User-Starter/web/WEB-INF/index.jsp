@@ -109,14 +109,14 @@
                                     actionType="action-ref-href"
                                     action-ref-by-href="${pageContext.request.contextPath}/pages/home"
                                     data-toggle="tooltip" data-placement="auto"
-                                    title="${labels['global.sidebar.home']}">
+                                    title="${labels['sidebar.menu_item.home']}">
                                 <i class="fa fa-home fa-fw"></i>
                             </button>
                         </div>
                         <div class="sidebar-menu-filter-form mx-2 my-1">
                             <form autocomplete="off" class="search-menu-form">
                                 <div class="has-form-control-clear">
-                                    <input id="filter-menu-id" type="text" class="form-control" placeholder="Search menu ..." autocomplete="off"/>
+                                    <input id="filter-menu-id" type="text" class="form-control" placeholder="${labels['sidebar.search.placeholder']}" autocomplete="off"/>
                                     <span class="form-control-clear fa fa-times d-none"></span>
                                 </div>
                             </form>
@@ -125,13 +125,13 @@
                             <li>
                                 <a href="${pageContext.request.contextPath}/pages/home">
                                     <i class="fa fa-lg fa-fw fa-home"></i>
-                                    ${labels['global.sidebar.home']}
+                                    ${labels['sidebar.menu_item.home']}
                                 </a>
                             </li>
                             <li>
                                 <a class="has-arrow" href="#">
                                     <i class="fa fa-lg fa-fw fa-users"></i>
-                                    Users Management
+                                    ${labels['sidebar.menu_item.users']}
                                 </a>
                                 <ul>
                                     <li>
@@ -159,7 +159,7 @@
                             <li>
                                 <a class="has-arrow" href="#">
                                     <i class="fa fa-lg fa-fw fa-cogs"></i>
-                                    System
+                                    ${labels['sidebar.menu_item.system']}
                                 </a>
                                 <ul>
                                     <li>
