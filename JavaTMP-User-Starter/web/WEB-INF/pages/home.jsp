@@ -96,11 +96,11 @@
                 </div>
                 <div class="card-body p-1 bg-light">
                     <div class="row d-flex align-items-center">
-                        <div class="col-6 text-center">
+                        <div class="col-7 text-center">
                             <span class="d-block display-4 counter" id="loadtimePerHourChartCard_totalCount">0</span>
                             <span class="d-block muted small">Avg Load Time</span>
                         </div>
-                        <div class="col-6 text-left">
+                        <div class="col-5">
                             <div id="loadtimePerHourChart" style="min-height: 100px"></div>
                         </div>
                     </div>
@@ -746,12 +746,13 @@
                             totalAvgs += dataArray[i][1];
                         }
                         avgLoadTime = totalAvgs / dataArray.length;
-
+                        // from: https://stackoverflow.com/questions/11832914/round-to-at-most-2-decimal-places-only-if-necessary
+                        avgLoadTime = Math.round((avgLoadTime + 0.00001) * 100) / 100;
                         $("#loadtimePerHourChartCard_totalCount").attr("title", avgLoadTime).html(avgLoadTime).counterUp({
                             delay: 10,
                             time: 1000,
                             formatter: function (n) {
-                                return numeral(n).format('0 a');
+                                return numeral(n).format('0.00 a');
                             }
                         });
 
