@@ -288,14 +288,14 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="control-label">Old Password</label>
-                                        <input class="form-control" type="password" autocomplete="off" id="oldPassword"
+                                        <input class="form-control" type="password" autocomplete="off"
                                                placeholder="Old Password" name="oldPassword">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="control-label">New Password</label>
-                                        <input class="form-control" type="password" autocomplete="off" id="password"
+                                        <input class="form-control" type="password" autocomplete="off"
                                                placeholder="New Password" name="password">
                                     </div>
                                 </div>

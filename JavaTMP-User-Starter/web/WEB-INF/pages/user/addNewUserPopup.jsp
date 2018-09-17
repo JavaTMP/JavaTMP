@@ -121,7 +121,7 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="control-label">Password</label>
-                                    <input class="form-control" type="password" autocomplete="off" id="password"
+                                    <input class="form-control" type="password" autocomplete="off"
                                            placeholder="Password" name="password">
                                 </div>
                             </div>
@@ -329,7 +329,7 @@
                     },
                     rpassword: {
                         required: true,
-                        equalTo: "#password"
+                        equalTo: $("input[name='password']", form)
                     },
                     profilePicture: {
                         required: true
