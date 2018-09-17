@@ -255,6 +255,24 @@
             $('.metismenu a[href="' + $(this).attr("href") + '"]').trigger("click");
         });
 
+        // issue #186 : Hide sidebar when press outside it
+        var closingSidebarOnBodyClick = function (e) {
+            console.log("firing one click outside");
+            javatmp.sidebar.hide();
+        };
+
+        $(javatmp.settings.sidebarSelector).on(javatmp.settings.sidebarShownEventName, function () {
+            if (javatmp.util.isWidthSmall() === true) {
+                console.log("activate one click outside");
+                $('body,html').one("click", ".main-content,.main-footer-bar,.main-javatmp-navbar", closingSidebarOnBodyClick);
+            }
+        }).on(javatmp.settings.sidebarHiddenEventName, function () {
+            if (javatmp.util.isWidthSmall() === true) {
+                console.log("off activate one click outside");
+                $('body,html').off("click", ".main-content,.main-footer-bar,.main-javatmp-navbar", closingSidebarOnBodyClick);
+            }
+        });
+        // End issue #186 Solution.
 
         // listen to sidebar show/hide events to notify any listener on main output area.
         $(javatmp.settings.sidebarSelector).on(javatmp.settings.sidebarHiddenEventName + ' ' + javatmp.settings.sidebarShownEventName, function () {
