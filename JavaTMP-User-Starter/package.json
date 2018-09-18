@@ -1,8 +1,8 @@
 {
-  "name": "JavaTMP-Java-Ajax-Starter",
+  "name": "JavaTMP-User-Starter",
   "version": "0.0.4",
   "private": true,
-  "description": "JavaTMP Bootstrap Admin And Dashboard Starter Template",
+  "description": "An advanced Dynamic Java Bootstrap LTR/RTL multi languages User Management Web application Template",
   "keywords": [
     "jquery",
     "bootstrap",
