@@ -348,6 +348,11 @@
                                 </a>
                                 <ul>
                                     <li>
+                                        <a href="${pageContext.request.contextPath}/pages/themes/buildin">
+                                            JavaTMP Build-in Themes
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="${pageContext.request.contextPath}/pages/themes/bootswatch">
                                             ${labels['global.sidebar.themes.bootswatch']}
                                         </a>
