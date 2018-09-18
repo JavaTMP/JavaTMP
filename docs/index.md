@@ -45,6 +45,7 @@
     *   [JavaTMP Front-end Plugins And Frameworks](/pages/javatmp-front-end-plugins-and-frameworks)
     *   [Development and Environment tools](/pages/development-and-environment-tools)
     *   [Steps to add new Javascript plugin](/pages/steps-to-add-new-javascript-plugin)
+    *   [Chart types and data visualization](/pages/chart-types-and-data-visualization)
 *   [Versions Change Log](/pages/java-bootstrap-template-versions-change-log)
     *   [Version 0.0.4 (Current Development Version)](/pages/java-bootstrap-template-version-0-0-4)
     *   [Version 0.0.3 (published on 13th of September, 2018)](/pages/java-bootstrap-template-version-0-0-3)
