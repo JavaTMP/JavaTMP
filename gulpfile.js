@@ -532,7 +532,7 @@ gulp.task('release', gulp.series('update-version', 'save-projects', 'push:tag', 
 
 
 //https://stackoverflow.com/questions/5343068/is-there-a-way-to-skip-password-typing-when-using-https-on-github
-gulp.task('default', gulp.series('save-projects', 'push', function (cb) {
+gulp.task('default', gulp.series('push', 'save-projects', function (cb) {
     console.log("*** Zip files in dist should be created ***");
     console.log("Current Version Number [" + pkg.version + "]");
     console.log("Now we commit and push current changes :");
