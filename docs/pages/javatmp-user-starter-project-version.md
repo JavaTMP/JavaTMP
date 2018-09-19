@@ -3,9 +3,9 @@ title: JavaTMP-User-Starter Project Version
 ---
 # JavaTMP-User-Starter Project Version
 
-`JavaTMP-User-Starter` project is an advanced Dynamic Java Bootstrap LTR/RTL multi languages User Management Web application Template derived from `JavaTMP-Java-Ajax-Starter` project with support for data persistent using Mysql Database Management System through java Persistent API and hibernate JPA implementation. The [online Java User Management Web Application demo](http://java.javatmp.com:8080/JavaTMP-User-Starter/ "Dynamic Java Bootstrap LTR/RTL multi languages User Management Web application Template") provide a running version of this project folder on tomcat 9. For more information see [JavaTMP-User-Starter Project Version online documentation page](/pages/javatmp-user-starter-project-version "JavaTMP-User-Starter Project Version Documentation Page").
+`JavaTMP-User-Starter` project is an advanced Dynamic Java Bootstrap LTR/RTL multi languages User Management Web application Template derived from `JavaTMP-Java-Ajax` project with support for data persistent using Mysql Database Management System through java Persistent API and hibernate JPA implementation. The [online Java User Management Web Application demo](http://java.javatmp.com:8080/JavaTMP-User-Starter/ "Dynamic Java Bootstrap LTR/RTL multi languages User Management Web application Template") provide a running version of this project folder on tomcat 9. For more information see [JavaTMP-User-Starter Project Version online documentation page](/pages/javatmp-user-starter-project-version "JavaTMP-User-Starter Project Version Documentation Page").
 
-`JavaTMP-User-Starter` porject is a dynamic `Java` LTR/RTL multi languages Bootstrap User Management Web Application Version of our Java starter version `JavaTMP-Java-Ajax-Starter` minimized to provide a user specific features built mainly using `Java Servlet 4.0` and `JSP 2.3` and deployed on `Apache tomcat 9`. The [Dynamic User Management Java Bootstrap Web Application](http://java.javatmp.com:8080/JavaTMP-User-Starter/ "Dynamic Java Bootstrap LTR/RTL multi languages User Management Web application Template") provide a running version of this project war file on tomcat 9.
+`JavaTMP-User-Starter` porject is a dynamic `Java` LTR/RTL multi languages Bootstrap User Management Web Application Version of our Java starter version `JavaTMP-Java-Ajax` minimized to provide a user specific features built mainly using `Java Servlet 4.0` and `JSP 2.3` and deployed on `Apache tomcat 9`. The [Dynamic User Management Java Bootstrap Web Application](http://java.javatmp.com:8080/JavaTMP-User-Starter/ "Dynamic Java Bootstrap LTR/RTL multi languages User Management Web application Template") provide a running version of this project war file on tomcat 9.
 
 It depends mainly on the following external backend java opensource libraries to provide a dynamic web application features with custom web MVC for serving JSP pages and handling Servlet requests:
 
@@ -16,7 +16,7 @@ It depends mainly on the following external backend java opensource libraries to
 *   Use [mysql-connector-java-8.0.11.jar](https://dev.mysql.com/downloads/connector/j/8.0.html "Java Mysql Connector 8 for JDBC driver").
 *   Use [simplecaptcha-1.2.1.jar](https://sourceforge.net/projects/simplecaptcha/ "Simplecaptcha Home & Download Page").
 
-`JavaTMP-User-Starter` project is a specific dynamic users web application with a subset of dynamic plugins and pages from `JavaTMP-Java-Ajax-Starter` to provide a simple users management demo. The following documentation page provide you with more information for our General dynamic Java web application version : [Dynamic Java Bootstrap Web Application Documentation Home Page](/pages/javatmp-java-ajax-starter-project-version "Dynamic Java Bootstrap Web Application Documentation Home Page").
+`JavaTMP-User-Starter` project is a specific dynamic users web application with a subset of dynamic plugins and pages from `JavaTMP-Java-Ajax` to provide a simple users management demo. The following documentation page provide you with more information for our General dynamic Java web application version : [Dynamic Java Bootstrap Web Application Documentation Home Page](/pages/javatmp-java-ajax-project-version "Dynamic Java Bootstrap Web Application Documentation Home Page").
 
 Remember that the `JavaTMP-User-Starter` project is a Netbeans IDE 8.2 project, so you can directly import and open it there.
 
@@ -38,7 +38,7 @@ The following list provides the main features of Users Management dynamic Java B
 Installation and Deploying
 --------------------------
 
-The JavaTMP-User-Starter project folder structure is the same as JavaTMP-Java-Ajax-Starter one with the following main contents of its folder root:
+The JavaTMP-User-Starter project folder structure is the same as JavaTMP-Java-Ajax one with the following main contents of its folder root:
 ```
 ./JavaTMP-User-Starter
 |---.eslintrc (ESLint plugin configuration file which contains directive and parameters to gulp-eslint gulp plugin)

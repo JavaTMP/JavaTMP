@@ -35,7 +35,7 @@ Its features built mainly using `Java Servlet 4.0` and `JSP 2.3` and deployed on
 The [online Java demo link](http://java.javatmp.com:8080/JavaTMP-Java-Ajax/
 "Dynamic Java Bootstrap LTR/RTL multi languages Admin and dashboard components template")
 provide a running version of this project folder on tomcat 9.
-For more information see ﻿[JavaTMP-Java-Ajax Project Version online documentation page](/pages/javatmp-java-ajax-starter-project-version "﻿JavaTMP-Java-Ajax Project Version Documentation Page").
+For more information see ﻿[JavaTMP-Java-Ajax Project Version online documentation page](/pages/javatmp-java-ajax-project-version "﻿JavaTMP-Java-Ajax Project Version Documentation Page").
 
 ### `JavaTMP-User-Starter` folder
 `JavaTMP-User-Starter` project is an advanced Dynamic Java Bootstrap LTR/RTL multi languages

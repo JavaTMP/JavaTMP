@@ -491,7 +491,7 @@ MIT
 
 Blob.js implements the W3C Blob interface in browsers that do not natively support it.
 
-Used before cropper plugin to support him. Mainly used in `JavaTMP-Java-Ajax-Starter` Project
+Used before cropper plugin to support him. Mainly used in `JavaTMP-Java-Ajax` Project
 
 JS enabled
 
@@ -501,7 +501,7 @@ MIT
 
 A canvas.toBlob() implementation. canvas-toBlob.js implements the standard HTML5 canvas.toBlob() and canvas.toBlobHD() methods in browsers that do not natively support it. canvas-toBlob.js requires Blob support to function, which is not present in all browsers. Blob.js is a cross-browser Blob implementation that solves this.
 
-Used before cropper plugin to support him. Mainly used in `JavaTMP-Java-Ajax-Starter` Project
+Used before cropper plugin to support him. Mainly used in `JavaTMP-Java-Ajax` Project
 
 JS enabled
 
@@ -511,7 +511,7 @@ MIT
 
 An HTML5 saveAs() FileSaver implementation.
 
-Used before cropper plugin to support him. Mainly used in `JavaTMP-Java-Ajax-Starter` Project
+Used before cropper plugin to support him. Mainly used in `JavaTMP-Java-Ajax` Project
 
 JS enabled
 

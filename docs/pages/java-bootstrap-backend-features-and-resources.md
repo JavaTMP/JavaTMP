@@ -2,7 +2,7 @@
 title: Java Bootstrap Backend Features And Resources
 ---
 # Java Bootstrap Backend Features And Resources
-`JavaTMP-Java-Ajax-Starter` project is a dynamic version of JavaTMP Bootstrap admin and dashboard template which consists of the following backend features and resouces:
+`JavaTMP-Java-Ajax` project is a dynamic version of JavaTMP Bootstrap admin and dashboard template which consists of the following backend features and resouces:
 
 1.  Create a Java Web Application Project from NetBeans IDE 8.2 new web application project.
 

@@ -5,7 +5,7 @@
     *   [JavaTMP-Static-Ajax-RTL Project Version](/pages/javatmp-static-ajax-rtl-project-version "Java Bootstrap Admin And Dashboard RTL Template")
     *   [JavaTMP-Static-Ajax-Starter Project Version](/pages/javatmp-static-ajax-starter-project-version "Java Bootstrap Admin and Dashboard Starter Template")
     *   [JavaTMP-Static-Ajax-Starter-RTL Project Version](/pages/javatmp-static-ajax-starter-rtl-project-version "Java Bootstrap Admin And Dashboard RTL Template Version")
-    *   [JavaTMP-Java-Ajax-Starter Project Version](/pages/javatmp-java-ajax-starter-project-version "Java Dynamic LTR/RTL multi-language Bootstrap Admin and Dashboard Web Application Version")
+    *   [JavaTMP-Java-Ajax Project Version](/pages/javatmp-java-ajax-project-version "Java Dynamic LTR/RTL multi-language Bootstrap Admin and Dashboard Web Application Version")
     *   [JavaTMP-User-Starter Project Version](/pages/javatmp-user-starter-project-version "Advanced Dynamic Java Bootstrap LTR/RTL multi languages User Management Web application Template")
 *   **Folders And Files Structure**
     *   [NPM's package.json file](/pages/javatmp-npms-package-json-file "JavaTMP Main Node.js NPM package.json file")

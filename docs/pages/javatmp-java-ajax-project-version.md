@@ -1,9 +1,9 @@
 ---
-title: JavaTMP-Java-Ajax-Starter Project Version
+title: JavaTMP-Java-Ajax Project Version
 ---
-# JavaTMP-Java-Ajax-Starter Project Version
+# JavaTMP-Java-Ajax Project Version
 
-`JavaTMP-Java-Ajax-Starter` porject is a dynamic `Java` LTR/RTL multi languages Bootstrap Admin and Dashboard Web Application Version of our static starters versions `JavaTMP-Static-Ajax-Starter` and `JavaTMP-Static-Ajax-Starter-RTL` combined and developed to provide a dynamic features built mainly using `Java Servlet 4.0` and `JSP 2.3` and deployed on `Apache tomcat 9`. The [online Java demo link](http://java.javatmp.com:8080/JavaTMP-Java-Ajax/ "Dynamic Java Bootstrap LTR/RTL multi languages Admin and dashboard components template") provide a running version of this project war file on tomcat 9.
+`JavaTMP-Java-Ajax` porject is a dynamic `Java` LTR/RTL multi languages Bootstrap Admin and Dashboard Web Application Version of our static starters versions `JavaTMP-Static-Ajax-Starter` and `JavaTMP-Static-Ajax-Starter-RTL` combined and developed to provide a dynamic features built mainly using `Java Servlet 4.0` and `JSP 2.3` and deployed on `Apache tomcat 9`. The [online Java demo link](http://java.javatmp.com:8080/JavaTMP-Java-Ajax/ "Dynamic Java Bootstrap LTR/RTL multi languages Admin and dashboard components template") provide a running version of this project war file on tomcat 9.
 
 It depends mainly on the following external backend java opensource libraries to provide a dynamic web application features with custom web MVC for serving JSP pages and handling Servlet requests:
 
@@ -11,13 +11,13 @@ It depends mainly on the following external backend java opensource libraries to
 *   Use [Google Gson 2.8.2](https://github.com/google/gson "Google Gson JSON Java Library")
 *   Use [Standard Taglib 1.2](http://central.maven.org/maven2/javax/servlet/jstl/1.2/ "Java Web Standard Taglib maven repository")
 
-`JavaTMP-Java-Ajax-Starter` project is a general dynamic web application with a subset of dynamic plugins and pages to provide a general demo to test and use specific plugin in Java Web environment. The following documentation page provide you a list of dynamic pages exist on the dynamic java version : [Dynamic Java Bootstrap Web Application features](/pages/dynamic-java-bootstrap-web-application-features "Dynamic Java Bootstrap Web Application features")
+`JavaTMP-Java-Ajax` project is a general dynamic web application with a subset of dynamic plugins and pages to provide a general demo to test and use specific plugin in Java Web environment. The following documentation page provide you a list of dynamic pages exist on the dynamic java version : [Dynamic Java Bootstrap Web Application features](/pages/dynamic-java-bootstrap-web-application-features "Dynamic Java Bootstrap Web Application features")
 
-Remember that the `JavaTMP-Java-Ajax-Starter` project is a Netbeans IDE 8.2 project, so you can directly import and open it there.
+Remember that the `JavaTMP-Java-Ajax` project is a Netbeans IDE 8.2 project, so you can directly import and open it there.
 
-The following tree provides a high level folder structures of our `JavaTMP-Java-Ajax-Starter` web application with its description and usage and for a running web application structure see our [online demo for WAR file contents](http://java.javatmp.com:8080/JavaTMP-Java-Ajax/#/JavaTMP-Java-Ajax-Starter/pages/plugins/tree/fancytree/plain_fancytree "Dynamic Java Bootstrap WAR file contents structure"):
+The following tree provides a high level folder structures of our `JavaTMP-Java-Ajax` web application with its description and usage and for a running web application structure see our [online demo for WAR file contents](http://java.javatmp.com:8080/JavaTMP-Java-Ajax/#/JavaTMP-Java-Ajax/pages/plugins/tree/fancytree/plain_fancytree "Dynamic Java Bootstrap WAR file contents structure"):
 ```
-./JavaTMP-Java-Ajax-Starter
+./JavaTMP-Java-Ajax
 |---.eslintrc (ESLint plugin configuration file which contains directive and parameters to gulp-eslint gulp plugin)
 |---.gitignore (git SCM meta file to exclude mainly ./node\_modules and ./nbproject/private/ folders from versioning)
 |---build.xml (Netbeans IDE auto generated ant build script. used to compile, build, package project through Netbeans IDE or manually by command line)
@@ -31,7 +31,7 @@ The following tree provides a high level folder structures of our `JavaTMP-Java-
 +---test (Java source code classes for testing and future use)
 +---web (Web specific resources like assets, WEB-INF, JSP folders and pages)
 ```
-`./JavaTMP-Java-Ajax-Starter/build.xml` file
+`./JavaTMP-Java-Ajax/build.xml` file
 --------------------------------------------
 
 A standard Netbeans Java Web project uses an IDE-generated Ant build script to build, run, debug, and distribute your project. The default NetBeans IDE project system is built directly on top of the Ant build system. All of the project commands, such as "Build Project" and "Run File in Debugger", call targets in the project's Ant script. You can therefore build and run your project outside the IDE exactly as it is built and run inside the IDE. Remember that the `build.xml` build script file only contains an import statement that imports targets from `nbproject/build-impl.xml`. Use the `build.xml` to override targets from `build-impl.xml` or to create new targets.
@@ -60,7 +60,7 @@ Read more about Ant and Netbeans IDE Building process:
 *   [Advanced Free-Form Project Configuration](https://netbeans.org/kb/articles/freeform-config.html "Advanced Free-Form Netbeans IDE Project Configuration")
 *   [Netbeans Build System Design](http://wiki.netbeans.org/BuildSystemDesign "Netbeans IDE Build System Design")
 
-`./JavaTMP-Java-Ajax-Starter/gulpfile.js` file
+`./JavaTMP-Java-Ajax/gulpfile.js` file
 ----------------------------------------------
 
 This is a gulp's configuration file. gulp is a toolkit for automating painful or time-consuming tasks in your development workflow. We use gulp to automate our building process like generating JS/CSS. The main important gulp task is `generate-dist` which copy resources from node\_module folders and combine then and compile and generate theme and template Javascript and CSS files and folders. We described it in details in [JavaTMP-Static-Ajax-Starter Project Version documentation page](/pages/javatmp-static-ajax-starter-project-version "Java Bootstrap Admin and Dashboard Starter template documentation Page") and in [JavaTMP-Static-Ajax-Starter-RTL Project Version documentation page](/pages/javatmp-static-ajax-starter-rtl-project-version "Java Bootstrap Admin and Dashboard Starter RTL template documentation Page"). The outline of gulp task `generate-dist` are:
@@ -174,12 +174,12 @@ And the starter Java Bootstrap default Arabic RTL `index.jsp` page that use the 
     </body>
 </html>
 ```
-`./JavaTMP-Java-Ajax-Starter/lib` folder
+`./JavaTMP-Java-Ajax/lib` folder
 ----------------------------------------
 
 The `lib` folder contains external backend java libraries needed to compile and run the dynamic web application features. The libraries binary jars only move to `WAR/WEB-INF/lib` when we build and generate war file. Note that the libraries with its source code and java doc are registered with Netbeans IDE project when we import it in Netbeans IDE 8.2. the following tree provide lib folder contents:
 ```
-./JAVATMP-JAVA-AJAX-STARTER/LIB
+./JAVATMP-JAVA-AJAX/LIB
 +---commons-beanutils-1.9.3
     +---commons-beanutils-1.9.3-javadoc.jar
     +---commons-beanutils-1.9.3-sources.jar
@@ -201,14 +201,14 @@ The `lib` folder contains external backend java libraries needed to compile and 
 +---jstl-1.2
     +---jstl-1.2.jar
 ```
-`./JavaTMP-Java-Ajax-Starter/src` folder
+`./JavaTMP-Java-Ajax/src` folder
 ----------------------------------------
 
-`src` contains sub folders `conf` and `java` which contains the `Java` source code of all backend classes of the `JavaTMP-Java-Ajax-Starter` template version like Servlets, Services, bean, Java Web listener, Java Web Context classes. The following tree provides its contents and followed by important java and Servlets classes description:
+`src` contains sub folders `conf` and `java` which contains the `Java` source code of all backend classes of the `JavaTMP-Java-Ajax` template version like Servlets, Services, bean, Java Web listener, Java Web Context classes. The following tree provides its contents and followed by important java and Servlets classes description:
 
 You should be familiar with the below java package structure as we will not describe it nor the Java servlets in details.
 ```
-./JavaTMP-Java-Ajax-Starter/src/java
+./JavaTMP-Java-Ajax/src/java
 +---com
     +---javatmp
         +---domain (like Account.java, Content.java, Country.java, DiaryEvent.java, Document.java, Message.java, User.java)
@@ -238,7 +238,7 @@ You should be familiar with the below java package structure as we will not des
 ```
 ### `com.javatmp.web.listener.JavaTMPHttpSessionListener` class
 
-The `JavaTMPHttpSessionListener` implements `javax.servlet.ServletContextListener` interface and annotated by `@javax.servlet.annotation.WebListener` annotation to provide a startup and shutdown procedures when we deploy or undeploy `JavaTMP-Java-Ajax-Starter` web application using `ServletContextListener.contextInitialized` and `ServletContextListener.contextDestroyed` methods.
+The `JavaTMPHttpSessionListener` implements `javax.servlet.ServletContextListener` interface and annotated by `@javax.servlet.annotation.WebListener` annotation to provide a startup and shutdown procedures when we deploy or undeploy `JavaTMP-Java-Ajax` web application using `ServletContextListener.contextInitialized` and `ServletContextListener.contextDestroyed` methods.
 
 It considers as a `main` method in the web application environment used normally for initializing global resources like Database connection pool or Datasource lookup. We don't do any important things at startup nor shutdown of the web applicationunless than setting a UTC timezone.
 
@@ -269,7 +269,7 @@ Servlet filters may be declared and mapped using the `WebFilter` annotation, but
 
 ### `com.javatmp.web.controller` package
 
-Java Servlet Classes package for all web application requests and responses. The servlets classes use `com.javatmp.mvc.MvcHelper` to marshal/unmarshal data or request dispatcher mechanism to forward request to specific JSP page in `/WEB-INF/` folder. See our [list of dynamic features currently deploy in the `JavaTMP-Java-Ajax-Starter` project](/pages/dynamic-java-bootstrap-web-application-features "Java Bootstrap Admin And Dashboard Template Dynamic feature list") for usage and information about Java Servlets in this package. The outline classes in `com.javatmp.web.controller` package are:
+Java Servlet Classes package for all web application requests and responses. The servlets classes use `com.javatmp.mvc.MvcHelper` to marshal/unmarshal data or request dispatcher mechanism to forward request to specific JSP page in `/WEB-INF/` folder. See our [list of dynamic features currently deploy in the `JavaTMP-Java-Ajax` project](/pages/dynamic-java-bootstrap-web-application-features "Java Bootstrap Admin And Dashboard Template Dynamic feature list") for usage and information about Java Servlets in this package. The outline classes in `com.javatmp.web.controller` package are:
 
 #### `com.javatmp.web.controller.IndexController` class
 
@@ -633,12 +633,12 @@ public class DBFaker {
     // Setter and getter ...
 }
 ```
-`./JavaTMP-Java-Ajax-Starter/web` folder
+`./JavaTMP-Java-Ajax/web` folder
 ----------------------------------------
 
-This folder contains everything related to front end resources and plugins and JSP pages for all plugin demo and template AJAX requests and web.xml file. The following tree structure provides an outline of its contents with description and usages. See our [online demo page for complete list of JavaTMP WAR File Contents](http://java.javatmp.com:8080/JavaTMP-Java-Ajax/#/JavaTMP-Java-Ajax-Starter/pages/plugins/tree/fancytree/plain_fancytree "online demo page for complete list of JavaTMP WAR File Contents"):
+This folder contains everything related to front end resources and plugins and JSP pages for all plugin demo and template AJAX requests and web.xml file. The following tree structure provides an outline of its contents with description and usages. See our [online demo page for complete list of JavaTMP WAR File Contents](http://java.javatmp.com:8080/JavaTMP-Java-Ajax/#/JavaTMP-Java-Ajax/pages/plugins/tree/fancytree/plain_fancytree "online demo page for complete list of JavaTMP WAR File Contents"):
 ```
-./JavaTMP-Java-Ajax-Starter/web
+./JavaTMP-Java-Ajax/web
 +---assets
     +---data (Static JSON files used in some plugin demo pages)
     +---dist (Output JS/CSS resource from gulp's task generate-dist)
@@ -746,19 +746,19 @@ The main important JSP page in our dynamic Java Bootstrap template is `index.jsp
 *   `labels` object is an instance of `ResourceBundle` which was injected into session by `com.javatmp.web.filter.LocalizationFilter` filter.
 *   Read more about `javatmp.init` Javascript function in the following page : [JavaTMP Javascript Files](/pages/javatmp-javascript-files "JavaTMP Javascript Files").
 
-Generating Production `JavaTMP-Java-Ajax-Starter.war` file
+Generating Production `JavaTMP-Java-Ajax.war` file
 ----------------------------------------------------------
 
-Generating our [online production Java Bootstrap Web application war file](http://java.javatmp.com:8080/JavaTMP-Java-Ajax/#/JavaTMP-Java-Ajax-Starter/pages/home "online production Java Bootstrap Web application war file") is done using the following special gulp's task steps (Make sure first that `ant compile` or `ant dist` is ran first because this task depends on the `build` folder generating from running `ant` script):
+Generating our [online production Java Bootstrap Web application war file](http://java.javatmp.com:8080/JavaTMP-Java-Ajax/#/JavaTMP-Java-Ajax/pages/home "online production Java Bootstrap Web application war file") is done using the following special gulp's task steps (Make sure first that `ant compile` or `ant dist` is ran first because this task depends on the `build` folder generating from running `ant` script):
 ```javascript
 gulp.src(\[
-    './JavaTMP-Java-Ajax-Starter/\*\*/\*',
+    './JavaTMP-Java-Ajax/\*\*/\*',
     '!\*\*/node\_modules{,/\*\*}',
     '!\*\*/nbproject/private{,/\*\*}',
     '!\*\*/package-lock.json'
 \], {dot: true})
-        .pipe(gulp.dest("temp/JavaTMP-Java-Ajax-Starter"));
-gulp.src(\['temp/JavaTMP-Java-Ajax-Starter/build/web/\*\*/\*'\], {dot: true})
+        .pipe(gulp.dest("temp/JavaTMP-Java-Ajax"));
+gulp.src(\['temp/JavaTMP-Java-Ajax/build/web/\*\*/\*'\], {dot: true})
         .pipe(gulp.dest("temp/online-java-demo-starter"));
 gulp.src(\['temp/online-java-demo-starter/\*\*/\*.html', 'temp/online-java-demo-starter/\*\*/\*.jsp'\], {dot: true})
         .pipe(htmlmin({collapseWhitespace: true,
@@ -772,6 +772,6 @@ gulp.src(\['temp/online-java-demo-starter/\*\*/\*.html', 'temp/online-java-demo-
         .pipe(gulp.dest("temp/online-java-demo-starter"));
 gulp.src(\['temp/online-java-demo-starter/\*\*/\*'\], {dot: true})
         .pipe(chmod(0o644, true))
-        .pipe(zip('JavaTMP-Java-Ajax-Starter.war'))
+        .pipe(zip('JavaTMP-Java-Ajax.war'))
         .pipe(gulp.dest('temp'));
 ```
