@@ -35,15 +35,6 @@ $.fn.select2.defaults.set("dir", "rtl");
 ```
 And a the following fork for Bootstrap 4 : [https://github.com/angel-vladov/select2-bootstrap-theme](https://github.com/angel-vladov/select2-bootstrap-theme "fork for select2 bootstrap 4 theme") and custom css file adjusting some RTL rules and classes: `./web/assets/src/sass/plugins/custom-bootstrap-select2-bootstrap-theme.scss`
 
-### [Bootstrap Tagsinput](https://github.com/timschlechter/bootstrap-tagsinput)
-Bootstrap Tags Input is a jQuery plugin providing a Twitter Bootstrap user interface for managing tags.
-
-NOT Merged nor Moved in Starter Versions. RTL supported by default but we leave it in favor of Select2 plugin with Bootstrap 4 theme
-
-Bootstrap 4
-
-MIT
-
 ### [Autosize](https://github.com/jackmoore/autosize)
 Autosize is a small, stand-alone script to automatically adjust textarea height to fit text.
 
@@ -59,15 +50,6 @@ Super simple WYSIWYG Editor. Summernote is a JavaScript library that helps you c
 Mandatory on all versions and templates. Merged and Moved in Starter Versions. RTL supported by default using `direction: "rtl"`.
 
 Bootstrap 4
-
-MIT
-
-### [Twitter Typeahead.js](https://github.com/twitter/typeahead.js/)
-typeahead.js is a fast and fully-featured autocomplete library.
-
-NOT Merged nor Moved in Starter Versions in favor of select2 bootstrap 4 theme. RTL supported by default
-
-jQuery
 
 MIT
 
@@ -113,15 +95,6 @@ toastr is a Javascript library for non-blocking notifications. jQuery is require
 Mandatory on all versions and templates. Merged and Moved in Starter Versions. RTL supported by changing parameters and location of the toaster.
 
 jQuery
-
-MIT
-
-### [Bootstrap Switch](https://github.com/Bttstrp/bootstrap-switch)
-Turn checkboxes and radio buttons in toggle switches.
-
-NOT Merged nor Moved in Starter Versions. RTL NOT supported by default
-
-Bootstrap 3.3.7
 
 MIT
 
@@ -278,15 +251,6 @@ CSS
 
 Apache License Version 2.0
 
-### [jQuery Knob](https://github.com/aterrien/jQuery-Knob)
-Nice, downward compatible, touchable, jQuery dial.
-
-NOT Merged nor Moved in Starter Versions in favor of eCharts library. RTL supported by default
-
-jQuery
-
-MIT
-
 ### [Bootstrap MaxLength](https://github.com/mimo84/bootstrap-maxlength/)
 This plugin integrates by default with Twitter bootstrap using badges to display the maximum lenght of the field where the user is inserting text. Uses the HTML5 attribute "maxlength" to work.
 
@@ -302,15 +266,6 @@ A colorselector for Twitter Bootstrap with which you can select a color from a p
 Mandatory on all versions and templates. Merged and Moved in Starter Versions. RTL supported by default
 
 Bootstrap
-
-MIT
-
-### [Chart.js](https://github.com/chartjs/Chart.js)
-Simple yet flexible JavaScript charting for designers & developers.
-
-NOT Merged nor Moved in Starter Versions in favor of eCharts library. RTL NOT supported by default too
-
-JS
 
 MIT
 
@@ -413,15 +368,6 @@ jQuery
 
 MIT
 
-### [jquery multi-select.js](https://github.com/lou/multi-select)
-A user-friendlier drop-in replacement for the standard select with multiple attribute activated.
-
-NOT Merged nor Moved in Starter Versions in favor of manually write multi select feature that provide your exact requirements. RTL supported by default
-
-jQuery
-
-MIT
-
 ### [jQuery quicksearch](https://github.com/riklomas/quicksearch)
 A jQuery plugin for searching through tables, lists, etc quickly.
 
@@ -431,40 +377,11 @@ jQuery
 
 Copyright JS Foundation
 
-### [Dropzone.js](https://github.com/enyo/dropzone)
-DropzoneJS is an open source library that provides drag’n’drop file uploads with image previews and shows nice progress bars. It’s lightweight, doesn’t depend on any other library (like jQuery) and is highly customizable.
-
-NOT Mandatory on all versions and templates. NOT Merged and Moved in Starter Versions. RTL supported by default. we think the native bootstrap 4 and jquery.form plugins enough to implement any custom file uploader.
-
-JS
-
-MIT
-
 ### [jQuery timeago plugin](https://github.com/rmm5t/jquery-timeago)
 
 Timeago is a jQuery plugin that makes it easy to support automatically updating fuzzy timestamps (e.g. "4 minutes ago" or "about 1 day ago") from ISO 8601 formatted dates and times embedded in your HTML or dynamically using javascript.
 
 Mandatory on all versions and templates. Merged and Moved in Starter Versions. RTL supported by default
-
-jQuery
-
-MIT
-
-### [Bootstrap Lightbox](https://github.com/ashleydw/lightbox)
-
-A lightbox module for Bootstrap that supports images, YouTube videos, and galleries - built around Bootstrap's Modal plugin.
-
-NOT Mandatory on all versions and templates. NOT Merged nor Moved in Starter Versions.
-
-Bootstrap 4
-
-MIT
-
-### [jQuery Magnific Popup Gallery](https://github.com/dimsemenov/Magnific-Popup)
-
-Light and responsive lightbox script with focus on performance.
-
-NOT Mandatory on all versions and templates. NOT Merged nor Moved in Starter Versions.
 
 jQuery
 

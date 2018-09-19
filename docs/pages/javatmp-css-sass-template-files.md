@@ -41,7 +41,6 @@ We keep sass folder in the main assets of the template to simplify development a
     |---custom-bootstrap-slider.scss
     |---custom-bootstrap-switch.scss
     |---custom-bootstrap-tagsinput.scss
-    |---custom-dropzone.js.scss
     |---custom-fancytree-skin-bootstrap.scss
     |---custom-fullcalendar.scss
     |---custom-ion.rangeSlider.skinHTML5.scss

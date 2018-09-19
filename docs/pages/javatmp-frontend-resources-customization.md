@@ -154,33 +154,7 @@ Plugin's usage with custom css file:
 <link href="assets/css/plugins/custom-bootstrap-slider.min.css" rel="stylesheet" type="text/css"/>
 <script src="components/seiyria-bootstrap-slider/dist/bootstrap-slider.min.js"></script>
 ```
-Bootstrap Switch
-----------------
 
-Turn checkboxes and radio buttons in toggle switches
-
-JavaTMP Demo Page : `pages/plugins/bootstrap-switch.html`
-
-Plugin's usage with custom css file:
-```
-<link href="components/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css" rel="stylesheet">
-<link href="assets/css/plugins/custom-bootstrap-switch.min.css" rel="stylesheet" type="text/css"/>
-<script src="components/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
-```
-Bootstrap Tags Input
---------------------
-
-Bootstrap Tags Input is a jQuery plugin providing a Twitter Bootstrap user interface for managing tags
-
-JavaTMP Demo Page : `pages/plugins/bootstrap-tags-input.html`
-
-Plugin's usage with custom css file:
-```
-<link rel="stylesheet" href="components/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
-<link href="assets/css/plugins/custom-bootstrap-tagsinput.min.css" rel="stylesheet" type="text/css"/>
-<script src="components/typeahead.js/dist/typeahead.bundle.min.js"></script>
-<script src="components/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
-```
 jQuery Fancytree
 ----------------
 
@@ -261,33 +235,7 @@ Plugin's usage with custom css file:
 <link href="assets/css/plugins/custom-jQuery-ScrollUp.min.css" rel="stylesheet" type="text/css"/>
 <script src="components/scrollup/dist/jquery.scrollUp.min.js" type="text/javascript"></script>
 ```
-jquery multi-select.js
-----------------------
 
-A user-friendlier drop-in replacement for the standard select with multiple attribute activated.
-
-JavaTMP Demo Page : `pages/plugins/jquery.multi-select.html`
-
-Plugin's usage with custom css file:
-```
-<link href="components/multiselect/css/multi-select.css" rel="stylesheet" type="text/css"/>
-<link href="assets/css/plugins/custom-multi-select.min.css" rel="stylesheet" type="text/css"/>
-<script src="components/quicksearch-master/jquery.quicksearch.js" type="text/javascript"></script>
-<script src="components/multiselect/js/jquery.multi-select.js" type="text/javascript"></script>
-```
-Dropzone.js
------------
-
-DropzoneJS is an open source library that provides drag’n’drop file uploads with image previews and shows nice progress bars. It’s lightweight, doesn’t depend on any other library (like jQuery) and is highly customizable.
-
-JavaTMP Demo Page : `pages/form/dropzone.js.html`
-
-Plugin's usage with custom css file:
-```
-<link href="components/dropzone/dist/min/dropzone.min.css" rel="stylesheet" type="text/css"/>
-<link href="assets/css/plugins/custom-dropzone.js.min.css" rel="stylesheet" type="text/css"/>
-<script src="components/dropzone/dist/min/dropzone.min.js" type="text/javascript"></script>
-```
 jQuery metisMenu Plugin
 -----------------------
 

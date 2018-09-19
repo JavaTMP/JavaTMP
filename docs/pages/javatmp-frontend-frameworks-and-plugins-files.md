@@ -39,7 +39,6 @@ The following is a sub high level folders structure of `./JavaTMP/JavaTMP-Stati
 +---bootstrap-slider
 +---bootstrap-switch
 +---bootstrap-tagsinput
-+---chart.js
 +---cropper
 +---datatables.net
 +---datatables.net-bs4
