@@ -32,7 +32,7 @@ For more information see ﻿[JavaTMP-Static-Ajax Project Version online document
 Project `JavaTMP-Java-Ajax` which consists of combined curated front-end resources
 with dynamic Java LTR/RTL multi languages Bootstrap Admin and Dashboard Web Application Version.
 Its features built mainly using `Java Servlet 4.0` and `JSP 2.3` and deployed on `Apache tomcat 9`.
-The [online Java demo link](http://java.javatmp.com:8080/JavaTMP-Java-Ajax-Starter/
+The [online Java demo link](http://java.javatmp.com:8080/JavaTMP-Java-Ajax/
 "Dynamic Java Bootstrap LTR/RTL multi languages Admin and dashboard components template")
 provide a running version of this project folder on tomcat 9.
 For more information see ﻿[JavaTMP-Java-Ajax Project Version online documentation page](/pages/javatmp-java-ajax-starter-project-version "﻿JavaTMP-Java-Ajax Project Version Documentation Page").

@@ -3,7 +3,7 @@ title: JavaTMP-Java-Ajax-Starter Project Version
 ---
 # JavaTMP-Java-Ajax-Starter Project Version
 
-`JavaTMP-Java-Ajax-Starter` porject is a dynamic `Java` LTR/RTL multi languages Bootstrap Admin and Dashboard Web Application Version of our static starters versions `JavaTMP-Static-Ajax-Starter` and `JavaTMP-Static-Ajax-Starter-RTL` combined and developed to provide a dynamic features built mainly using `Java Servlet 4.0` and `JSP 2.3` and deployed on `Apache tomcat 9`. The [online Java demo link](http://java.javatmp.com:8080/JavaTMP-Java-Ajax-Starter/ "Dynamic Java Bootstrap LTR/RTL multi languages Admin and dashboard components template") provide a running version of this project war file on tomcat 9.
+`JavaTMP-Java-Ajax-Starter` porject is a dynamic `Java` LTR/RTL multi languages Bootstrap Admin and Dashboard Web Application Version of our static starters versions `JavaTMP-Static-Ajax-Starter` and `JavaTMP-Static-Ajax-Starter-RTL` combined and developed to provide a dynamic features built mainly using `Java Servlet 4.0` and `JSP 2.3` and deployed on `Apache tomcat 9`. The [online Java demo link](http://java.javatmp.com:8080/JavaTMP-Java-Ajax/ "Dynamic Java Bootstrap LTR/RTL multi languages Admin and dashboard components template") provide a running version of this project war file on tomcat 9.
 
 It depends mainly on the following external backend java opensource libraries to provide a dynamic web application features with custom web MVC for serving JSP pages and handling Servlet requests:
 
@@ -15,7 +15,7 @@ It depends mainly on the following external backend java opensource libraries to
 
 Remember that the `JavaTMP-Java-Ajax-Starter` project is a Netbeans IDE 8.2 project, so you can directly import and open it there.
 
-The following tree provides a high level folder structures of our `JavaTMP-Java-Ajax-Starter` web application with its description and usage and for a running web application structure see our [online demo for WAR file contents](http://java.javatmp.com:8080/JavaTMP-Java-Ajax-Starter/#/JavaTMP-Java-Ajax-Starter/pages/plugins/tree/fancytree/plain_fancytree "Dynamic Java Bootstrap WAR file contents structure"):
+The following tree provides a high level folder structures of our `JavaTMP-Java-Ajax-Starter` web application with its description and usage and for a running web application structure see our [online demo for WAR file contents](http://java.javatmp.com:8080/JavaTMP-Java-Ajax/#/JavaTMP-Java-Ajax-Starter/pages/plugins/tree/fancytree/plain_fancytree "Dynamic Java Bootstrap WAR file contents structure"):
 ```
 ./JavaTMP-Java-Ajax-Starter
 |---.eslintrc (ESLint plugin configuration file which contains directive and parameters to gulp-eslint gulp plugin)
@@ -636,7 +636,7 @@ public class DBFaker {
 `./JavaTMP-Java-Ajax-Starter/web` folder
 ----------------------------------------
 
-This folder contains everything related to front end resources and plugins and JSP pages for all plugin demo and template AJAX requests and web.xml file. The following tree structure provides an outline of its contents with description and usages. See our [online demo page for complete list of JavaTMP WAR File Contents](http://java.javatmp.com:8080/JavaTMP-Java-Ajax-Starter/#/JavaTMP-Java-Ajax-Starter/pages/plugins/tree/fancytree/plain_fancytree "online demo page for complete list of JavaTMP WAR File Contents"):
+This folder contains everything related to front end resources and plugins and JSP pages for all plugin demo and template AJAX requests and web.xml file. The following tree structure provides an outline of its contents with description and usages. See our [online demo page for complete list of JavaTMP WAR File Contents](http://java.javatmp.com:8080/JavaTMP-Java-Ajax/#/JavaTMP-Java-Ajax-Starter/pages/plugins/tree/fancytree/plain_fancytree "online demo page for complete list of JavaTMP WAR File Contents"):
 ```
 ./JavaTMP-Java-Ajax-Starter/web
 +---assets
@@ -749,7 +749,7 @@ The main important JSP page in our dynamic Java Bootstrap template is `index.jsp
 Generating Production `JavaTMP-Java-Ajax-Starter.war` file
 ----------------------------------------------------------
 
-Generating our [online production Java Bootstrap Web application war file](http://java.javatmp.com:8080/JavaTMP-Java-Ajax-Starter/#/JavaTMP-Java-Ajax-Starter/pages/home "online production Java Bootstrap Web application war file") is done using the following special gulp's task steps (Make sure first that `ant compile` or `ant dist` is ran first because this task depends on the `build` folder generating from running `ant` script):
+Generating our [online production Java Bootstrap Web application war file](http://java.javatmp.com:8080/JavaTMP-Java-Ajax/#/JavaTMP-Java-Ajax-Starter/pages/home "online production Java Bootstrap Web application war file") is done using the following special gulp's task steps (Make sure first that `ant compile` or `ant dist` is ran first because this task depends on the `build` folder generating from running `ant` script):
 ```javascript
 gulp.src(\[
     './JavaTMP-Java-Ajax-Starter/\*\*/\*',
