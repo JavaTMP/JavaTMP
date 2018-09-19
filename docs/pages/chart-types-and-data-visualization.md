@@ -40,9 +40,9 @@ Area Charts are like Line Charts except that the area below the plot line is sol
 The purpose of a Scatter Chart is to observe how the values of two series compares over time or other category.
 
 ## Main Link References
-- https://eazybi.com/blog/data_visualization_and_chart_types/
-- http://fluidsurveys.com/university/use-different-chart-types/
-- https://blog.hubspot.com/marketing/types-of-graphs-for-data-visualization
-- https://www.skillsyouneed.com/num/graphs-charts.html
-- https://infogram.com/page/choose-the-right-chart-data-visualization
-- https://www.optimizesmart.com/how-to-select-best-excel-charts-for-your-data-analysis-reporting/
+- [https://eazybi.com/blog/data_visualization_and_chart_types/](https://eazybi.com/blog/data_visualization_and_chart_types/)
+- [http://fluidsurveys.com/university/use-different-chart-types/](http://fluidsurveys.com/university/use-different-chart-types/)
+- [https://blog.hubspot.com/marketing/types-of-graphs-for-data-visualization](https://blog.hubspot.com/marketing/types-of-graphs-for-data-visualization)
+- [https://www.skillsyouneed.com/num/graphs-charts.html](https://www.skillsyouneed.com/num/graphs-charts.html)
+- [https://infogram.com/page/choose-the-right-chart-data-visualization](https://infogram.com/page/choose-the-right-chart-data-visualization)
+- [https://www.optimizesmart.com/how-to-select-best-excel-charts-for-your-data-analysis-reporting/](https://www.optimizesmart.com/how-to-select-best-excel-charts-for-your-data-analysis-reporting/)
