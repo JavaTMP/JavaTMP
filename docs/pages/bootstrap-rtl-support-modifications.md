@@ -47,24 +47,23 @@ The following is a high level folder structures of our `sass` and `sass-rtl`:
 The following list provides the main modifications applied for `index.html` to support RTL:
 *   Modified `HTML` tag by adding `dir="rtl"` and `lang="en"`.
 *   Reference `-rtl` version instead of normal one for javatmp style used:
-```
-<link id="themeStyleSheet" href="assets/dist/css/javatmp-default-rtl.min.css" rel="stylesheet" type="text/css"/>
-```
+    ```
+    <link id="themeStyleSheet" href="assets/dist/css/javatmp-default-rtl.min.css" rel="stylesheet" type="text/css"/>
+    ```
 *   Added custom Javascript event handler for modifying dropdown's position. Because default behavior for popper.js is wrongly position it in RTL HTML pages with issues and problems.
-*   Initialize JavaTMP Javascript by calling javatmp.init method and explicitly
-override the languages and directional attributes : `direction:"rtl"`,
+*   Initialize JavaTMP Javascript by calling javatmp.init method and explicitly override the languages and directional attributes : `direction:"rtl"`,
 `isRTL=true`, `floatDefault="right"`, and `floatReverse="left"`
-```Javascript
-<script type="text/javascript">
-    jQuery(function ($) {
-        var defaults = {
-                floatDefault: 'right',
-                floatReverse: 'left',
-                direction: "rtl",
-                isRTL: true
-            };
-        index.init(defaults);
-    });
-</script>
-```
+    ```Javascript
+    <script type="text/javascript">
+        jQuery(function ($) {
+            var defaults = {
+                    floatDefault: 'right',
+                    floatReverse: 'left',
+                    direction: "rtl",
+                    isRTL: true
+                };
+            index.init(defaults);
+        });
+    </script>
+    ```
 *   For more details information about custom plugins modifications and usages to support RTL and internationalization features kindly see our [Front-end Plugins And Frameworks documentation page](/pages/javatmp-front-end-plugins-and-frameworks "JavaTMP Front-end Plugins And Frameworks").
