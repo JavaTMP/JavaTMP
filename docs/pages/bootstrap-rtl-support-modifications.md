@@ -2,33 +2,69 @@
 title: Bootstrap RTL support and modifications
 ---
 # Bootstrap RTL support and modifications
-`JavaTMP-Static-Ajax-RTL` project is a mirror copy from `JavaTMP-Static-Ajax` project with a little modifications to support RTL. It consists of general static bootstrap RTL admin and dashboard components template. Our [online RTL demo](http://demo.javatmp.com/JavaTMP-Static-Ajax-RTL/ "Java Bootstrap RTL Admin And Dashboard Components Template") deploys and host this version of JavaTMP.
 
-JavaTMP-Static-Ajax-RTL is a front-end static project that intended to provide demo pages for all plugins and frameworks used separately and in isolation level. it is a base for remaining versions like Java, starter and it is a [Netbeans IDE 8.2](https://netbeans.org/ "Netbeans IDE") project, so you can directly import and open it there.
+We used the idea of overriding classes and rules on `sass` folder
+to produce RTL folder `sass-rtl`. As you will see shortly we copied sass folder
+as is and provide another folder sass-rtl for overriding classes and tags
+that need a directional modification to support RTL.
 
-`JavaTMP-Static-Ajax-RTL` project is not intended to start your custom project from. it is provided to let you test and see various RTL features and user interface components used in remaining projects.
+We used [Bootstrap reverse Plugin](https://github.com/JavaTMP/bootstrap-reverse "Bootstrap 4
+RTL plugin to support RTL template and skin theme") for overriding core bootstrap classes
+to support Right to Left directional behavior instead of left to right.
 
-`./JavaTMP/JavaTMP-Static-Ajax-RTL/web/index.html` file
--------------------------------------------------------
+We copied and overrode from `./JavaTMP/*/web/assets/src/sass` only classes that need to be
+flipped to support RTL and put them in `/JavaTMP/*/web/assets/src/sass-rtl`.
+So we should reference both of them for the same part to support RTL as we'll see later.
+
+The `./JavaTMP/*/web/assets/src/sass/common/variables.scss` file is still the central main variables file for LTR and RTL features.
+
+The `main-rtl.scss` and its compiled version `main-rtl.min.css` file is the overriding
+for `main.scss` and should be referenced after `main.min.css`.
+
+For plugins we modified and add RTL modifications to custom LTR SASS version for the plugin,
+because most Plugin RTL modification is a little and normally should be part of the plugin style itself.
+keep in mind that most plugins support RTL by default.
+
+Custom plugin RTL style rules are separated in `./JavaTMP/*/web/assets/src/sass-rtl/plugins-rtl`
+for [Datatables plugin](https://datatables.net/ "Datatables Plugin")
+because Datatables plugin does not provide support for RTL pages so we overrode some of its rules and classes in these files:
+*   custom-dataTables.bootstrap4-rtl.scss
+*   custom-datatables.net-responsive-bs4-rtl.scss
+*   custom-datatables.net-select-bs4-rtl.scss
+
+The following is a high level folder structures of our `sass` and `sass-rtl`:
+```
+./JavaTMP/JAVATMP-Static-Ajax,JAVATMP-Java-Ajax,JAVATMP-User-Starter
++---web (Web Application Context Root Folder)
+    +---assets (Specific Template JS,CSS,fonts, and images folders and files)
+        +---src (Source folder of the JS/CSS files)
+            +---sass (Default SASS' SCSS source folders)
+            +---sass-rtl (RTL specific classes and rules)
+```
+
+##`./JavaTMP/JavaTMP-Static-Ajax/web/index-rtl.html` file
 
 The following list provides the main modifications applied for `index.html` to support RTL:
-
 *   Modified `HTML` tag by adding `dir="rtl"` and `lang="en"`.
-*   Reference `[bootstrap-reverse plugin](https://github.com/JavaTMP/bootstrap-reverse "Bootstrap RTL plugin")` after main `bootstrap.min.css` file:
+*   Reference `-rtl` version instead of normal one for javatmp style used:
 ```
-    <!-- Bootstrap CSS -->
-    <link href="components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <!-- Bootstrap RTL CSS -->
-    <link href="components/bootstrap-reverse/dist/bootstrap-reverse.min.css" rel="stylesheet" type="text/css"/>
+<link id="themeStyleSheet" href="assets/dist/css/javatmp-default-rtl.min.css" rel="stylesheet" type="text/css"/>
 ```
-*   Reference main JavaTMP RTL CSS file `assets/css/main-rtl.min.css` after `assets/css/main.min.css` file, that override some style rules and classes and generated from compiling `assets/src/sass-rtl/main-rtl.scss` file, like this:
-```
-    <!-- JavaTMP Main CSS files -->
-    <link href="assets/css/main.min.css" rel="stylesheet"/>
-    <!-- JavaTMP Main RTL CSS files -->
-    <link href="assets/css/main-rtl.min.css" rel="stylesheet" type="text/css"/>
-```
-*   Modify custom style for sidebar menu search `textfield` to make the clear icon shown on left when user starts typing.
 *   Added custom Javascript event handler for modifying dropdown's position. Because default behavior for popper.js is wrongly position it in RTL HTML pages with issues and problems.
-*   Initialize JavaTMP Javascript by calling javatmp.init method and explicitly override the languages and directional attributes : `direction:"rtl"`, `isRTL=true`, `floatDefault="right"`, and `floatReverse="left"`
+*   Initialize JavaTMP Javascript by calling javatmp.init method and explicitly
+override the languages and directional attributes : `direction:"rtl"`,
+`isRTL=true`, `floatDefault="right"`, and `floatReverse="left"`
+```Javascript
+<script type="text/javascript">
+    jQuery(function ($) {
+        var defaults = {
+                floatDefault: 'right',
+                floatReverse: 'left',
+                direction: "rtl",
+                isRTL: true
+            };
+        index.init(defaults);
+    });
+</script>
+```
 *   For more details information about custom plugins modifications and usages to support RTL and internationalization features kindly see our [Front-end Plugins And Frameworks documentation page](/pages/javatmp-front-end-plugins-and-frameworks "JavaTMP Front-end Plugins And Frameworks").
