@@ -3,7 +3,11 @@ title: JavaTMP-Java-Ajax Project Version
 ---
 # JavaTMP-Java-Ajax Project Version
 
-`JavaTMP-Java-Ajax` porject is a dynamic `Java` LTR/RTL multi languages Bootstrap Admin and Dashboard Web Application Version of our static starters versions `JavaTMP-Static-Ajax-Starter` and `JavaTMP-Static-Ajax-Starter-RTL` combined and developed to provide a dynamic features built mainly using `Java Servlet 4.0` and `JSP 2.3` and deployed on `Apache tomcat 9`. The [online Java demo link](http://java.javatmp.com:8080/JavaTMP-Java-Ajax/ "Dynamic Java Bootstrap LTR/RTL multi languages Admin and dashboard components template") provide a running version of this project war file on tomcat 9.
+`JavaTMP-Java-Ajax` porject is a dynamic `Java` LTR/RTL multi languages Bootstrap Admin and Dashboard Web Application Version
+of our static version `JavaTMP-Static-Ajax` modified and developed to provide a dynamic features built mainly using
+`Java Servlet 4.0` and `JSP 2.3` and deployed on `Apache tomcat 9`.
+The [online Java demo link](http://java.javatmp.com:8080/JavaTMP-Java-Ajax/ "Dynamic Java Bootstrap LTR/RTL multi languages Admin and dashboard components template")
+provide a running version of this project war file on tomcat 9.
 
 It depends mainly on the following external backend java opensource libraries to provide a dynamic web application features with custom web MVC for serving JSP pages and handling Servlet requests:
 
@@ -31,9 +35,8 @@ The following tree provides a high level folder structures of our `JavaTMP-Java-
 +---test (Java source code classes for testing and future use)
 +---web (Web specific resources like assets, WEB-INF, JSP folders and pages)
 ```
-`./JavaTMP-Java-Ajax/build.xml` file
---------------------------------------------
 
+## `./JavaTMP-Java-Ajax/build.xml` file
 A standard Netbeans Java Web project uses an IDE-generated Ant build script to build, run, debug, and distribute your project. The default NetBeans IDE project system is built directly on top of the Ant build system. All of the project commands, such as "Build Project" and "Run File in Debugger", call targets in the project's Ant script. You can therefore build and run your project outside the IDE exactly as it is built and run inside the IDE. Remember that the `build.xml` build script file only contains an import statement that imports targets from `nbproject/build-impl.xml`. Use the `build.xml` to override targets from `build-impl.xml` or to create new targets.
 
 You do not need to be familiar with Ant to work with applications in the IDE. You can set all the basic compilation and runtime options in your project's Project Properties dialog box and the IDE automatically updates the project's Ant script. If you know how to work with Ant, you can customize a project's Ant script directly or write your own Ant script for your project.
@@ -60,48 +63,12 @@ Read more about Ant and Netbeans IDE Building process:
 *   [Advanced Free-Form Project Configuration](https://netbeans.org/kb/articles/freeform-config.html "Advanced Free-Form Netbeans IDE Project Configuration")
 *   [Netbeans Build System Design](http://wiki.netbeans.org/BuildSystemDesign "Netbeans IDE Build System Design")
 
-`./JavaTMP-Java-Ajax/gulpfile.js` file
-----------------------------------------------
+## `./JavaTMP-Java-Ajax/gulpfile.js` file
+This is a gulp's configuration file. gulp is a toolkit for automating painful or time-consuming tasks in your development workflow.
+We use gulp to automate our building process like generating JS/CSS. The main important gulp task is `generate-dist`
+which copy resources from node_module folders and combine them and compile and generate theme and template Javascript and CSS files
+and folders. We described it in details in [JavaTMP-Static-Ajax Project Version documentation page](/pages/javatmp-static-ajax-project-version "Java Bootstrap Admin and Dashboard template documentation Page").
 
-This is a gulp's configuration file. gulp is a toolkit for automating painful or time-consuming tasks in your development workflow. We use gulp to automate our building process like generating JS/CSS. The main important gulp task is `generate-dist` which copy resources from node\_module folders and combine then and compile and generate theme and template Javascript and CSS files and folders. We described it in details in [JavaTMP-Static-Ajax-Starter Project Version documentation page](/pages/javatmp-static-ajax-starter-project-version "Java Bootstrap Admin and Dashboard Starter template documentation Page") and in [JavaTMP-Static-Ajax-Starter-RTL Project Version documentation page](/pages/javatmp-static-ajax-starter-rtl-project-version "Java Bootstrap Admin and Dashboard Starter RTL template documentation Page"). The outline of gulp task `generate-dist` are:
-
-1.  Compile Bootstrap SASS themes in `./web/assets/src/sass/themes/javatmp-*.scss` and put them to `./web/assets/dist/css` folder
-2.  Compile Bootstrap RTL SASS themes in `./web/assets/src/sass-rtl/themes-rtl/javatmp-*-rtl.scss` and put them to `./web/assets/dist/css` folder
-3.  Concatenate all plugins CSS files define in  `src.css` in order and put the concatenated file in `./web/assets/dist/css/javatmp-plugins-all.min.css`
-4.  Concatenate all plugin CSS files define in  `src.cssForPrint` in order and put the concatenated file in `./web/assets/dist/css/javatmp-plugins-print-all.min.css`
-5.  Generate and uglify main JavaTMP template Javascript file `javatmp.min.js` in `./web/assets/src/js-src/javatmp.js` to `./web/assets/dist/js/javatmp.min.js`
-6.  Concatenate all plugins JS files define in  `src.js` in order and put the concatenated file `./web/assets/dist/js/javatmp-plugins-all.min.js`
-7.  Generate a minification version `javatmp-plugins-all-locale-*.min.js` files of `src.localeJS` for each language key and put it in `./web/assets/dist/js`
-8.  Compile and generate a minification version of `src.fontFamilyFiles` and put the css file in `./web/assets/dist/css`, in above case `./web/assets/dist/css/font-family-en.min.css`
-9.  Copy `src.img` files needed by plugins to `./web/assets/dist/img` folder
-10.  Copy binary fonts files needed by plugins and template from `src.fonts` to `./web/assets/dist/fonts folder`
-11.  finally, remove `./web/components` folder as all front-end resources became combined and concatenated in TWO BIG LARGE MAIN files `javatmp-plugins-all.min.css` and `javatmp-plugins-all.min.js`
-
-So, The main output of `generate-dist` task is folder `./web/assets/dist` which contains the following:
-```
-./JavaTMP/JavaTMP-Static-Ajax-Starter/web/assets/dist
-+---css
-    +---font-family-\*.min.css (For each src.fontFamilyFiles key)
-    +---javatmp-plugins-all.min.css
-    +---javatmp-plugins-print-all.min.css
-    +---javatmp-\*.min.css (For each SASS theme files like javatmp-default.min.css)
-    +---javatmp-\*-rtl.min.css (For each SASS RTL theme files like javatmp-default-rtl.min.css)
-+---fonts (Copy from src.fonts)
-    +---context-menu-icons.eot
-    +---fa-brands-400.eot
-    +---open-sans-v15-latin-300.eot
-    +---DroidKufi-Regular.eot
-    +---slick.eot
-    +---summernote.eot
-    +---...
-+---img (Moved from src.img as needed by plugins)
-    +---ajax-loader.gif
-    +---mCSB\_buttons.png
-+---js
-    +---javatmp-plugins-all-locale-\*.min.js (For each language key define in src.localeJS)
-    +---javatmp-plugins-all.min.js
-    +---javatmp.min.js
-```
 The starter Java Bootstrap default English LTR `index.jsp` page that use the above generated combined files look like the following:
 ```jsp
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

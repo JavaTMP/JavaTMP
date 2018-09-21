@@ -6,7 +6,7 @@ title: Java Bootstrap Backend Features And Resources
 
 1.  Create a Java Web Application Project from NetBeans IDE 8.2 new web application project.
 
-2.  Copy all static files and resources from JavaTMP-Static-Ajax-Starter/-RTL projects.
+2.  Copy all static files and resources from JavaTMP-Static-Ajax projects.
 
 3.  Convert all .html pages and Ajax snippets to .jsp equivalent and move them to /WEB-INF to be restricted access through servlets only.
 4.  add `<%@page contentType="text/html" pageEncoding="UTF-8"%>` to the top of all JSP pages.
