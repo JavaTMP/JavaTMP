@@ -12,10 +12,8 @@ Please review `./gulpfile.js` and `./package.json` files for more information ab
 
 Please Refer to [Development tools](/pages/development-and-environment-tools) Page to read more about `Gulp` plugins used in `gulpfile.js`.
 
-`delete-components` and `copy-components`
------------------------------------------
-
- We manage front-end dependencies like jQuery, Bootstrap, using Node.js NPM and Gulp tools.
+## `delete-components` and `copy-components`
+We manage front-end dependencies like jQuery, Bootstrap, using Node.js NPM and Gulp tools.
 
 So invoking `gulp delete-components` command will remove folder `./web/components` with all its sub-folders and files. 
 
@@ -23,45 +21,23 @@ And invoking `gulp copy-components` command will copy all needed plugins and fra
 
 We created a separate page to describe in details the [process of managing front-end dependencies using Node NPM and gulp](/pages/manage-front-end-dependencies-using-node-js-and-gulp "Manage Front-end Dependencies Using Node NPM and Gulp tools"). kindly read it [here](/pages/manage-front-end-dependencies-using-node-js-and-gulp "Manage Front-end Dependencies Using Node NPM and Gulp tools") for more information.
 
-run-local-web-server
---------------------
-
-We use `run-local-web-server` task to run a local web server for static JavaTMP version.
-
-The following code is the definition of `run-local-web-server` task:
-```javascript
-gulp.task('run-local-web-server', function () {
-    connect.server({
-        root: 'web',
-        port: 8888,
-        livereload: true
-    });
-});
-```
-You can run the gulp's task using the following command line:
+## run-local-web-server
+We use `run-local-web-server` task to run a local web server for static JavaTMP version on port 8888. You can run
+this gulp's task using the following command line:
 ```
 gulp run-local-web-server
 ```
-delete-css
-----------
 
+## delete-css
 We use `delete-css` task to delete css folder with all its files before we regenerate them from compiling SASS files.
 
-This task is not intended to run manually. it is called using one of the below tasks.
-
-The following code is the definition of `delete-css` task:
-```javascript
-gulp.task('delete-css', function () {
-    return del(['./web/assets/css/**/*']);
-});
-```
-You can run the gulp's task using the following command line:
+This task is not intended to run manually. it is called using one of the below tasks. You can run the gulp's task using
+the following command line:
 ```
 gulp delete-css
 ```
-main-sass, plugins-sass, pages-sass, sass
------------------------------------------
 
+## generate-dist
 We use these tasks to generate a minify css files from sass's scss files:
 
 The following code is the definition of these tasks:
