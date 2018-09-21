@@ -23,7 +23,7 @@ The following tree provides a high level folder structures of our `JavaTMP-Java-
 ```
 ./JavaTMP-Java-Ajax
 |---.eslintrc (ESLint plugin configuration file which contains directive and parameters to gulp-eslint gulp plugin)
-|---.gitignore (git SCM meta file to exclude mainly ./node\_modules and ./nbproject/private/ folders from versioning)
+|---.gitignore (git SCM meta file to exclude mainly ./node_modules and ./nbproject/private/ folders from versioning)
 |---build.xml (Netbeans IDE auto generated ant build script. used to compile, build, package project through Netbeans IDE or manually by command line)
 |---gulpfile.js (gulp's configuration file for automating front end resources and generate assets/dist JS/CSS files)
 |---package.json (A Node.js's NPM meta file. This file holds various metadata relevant to the project)
@@ -37,26 +37,35 @@ The following tree provides a high level folder structures of our `JavaTMP-Java-
 ```
 
 ## `./JavaTMP-Java-Ajax/build.xml` file
-A standard Netbeans Java Web project uses an IDE-generated Ant build script to build, run, debug, and distribute your project. The default NetBeans IDE project system is built directly on top of the Ant build system. All of the project commands, such as "Build Project" and "Run File in Debugger", call targets in the project's Ant script. You can therefore build and run your project outside the IDE exactly as it is built and run inside the IDE. Remember that the `build.xml` build script file only contains an import statement that imports targets from `nbproject/build-impl.xml`. Use the `build.xml` to override targets from `build-impl.xml` or to create new targets.
+A standard Netbeans Java Web project uses an IDE-generated Ant build script to build, run, debug, and distribute your project.
+The default NetBeans IDE project system is built directly on top of the Ant build system. All of the project commands,
+such as "Build Project" and "Run File in Debugger", call targets in the project's Ant script. You can therefore build and
+run your project outside the IDE exactly as it is built and run inside the IDE.
+Remember that the `build.xml` build script file only contains an import statement that imports targets from `nbproject/build-impl.xml`.
+Use the `build.xml` to override targets from `build-impl.xml` or to create new targets.
 
-You do not need to be familiar with Ant to work with applications in the IDE. You can set all the basic compilation and runtime options in your project's Project Properties dialog box and the IDE automatically updates the project's Ant script. If you know how to work with Ant, you can customize a project's Ant script directly or write your own Ant script for your project.
+You do not need to be familiar with `Ant` to work with applications in the IDE. You can set all the basic compilation and
+runtime options in your project's Project Properties dialog box and the IDE automatically updates the project's Ant script.
+If you know how to work with Ant, you can customize a project's Ant script directly or write your own Ant script for your project.
 
-So, to build your project outside the IDE exactly as it is built make sure you install `Ant` or you added it to your global path and it is accessible from a command line. If you already install and develop using Netbeans IDE 8.2 it come with `Ant` distribution installed on `[NetBeans 8.2 installation folder]/extide/ant/bin`, So you can add it to global path environment variables.
+So, to build your project outside the IDE exactly as it is built make sure you install `Ant` or you added it to your global path
+and it is accessible from a command line. If you already install and develop using Netbeans IDE 8.2 it come with `Ant` distribution
+installed on `[NetBeans 8.2 installation folder]/extide/ant/bin`, So you can add it to global path environment variables.
 
 ### `ant clean`
-
 Running this command will remove the above `build` and `dist` folders.
 
 ### `ant compile`
-
-Running this command will compile and generate the above `build` folder with `.class` files in `./build/web/WEB-INF/classes` folder, and `./web` folder in `./build/web` and `./lib` in `./build/web/WEB-INF/lib` folder.
+Running this command will compile and generate the above `build` folder with `.class` files in `./build/web/WEB-INF/classes` folder,
+and `./web` folder in `./build/web` and `./lib` in `./build/web/WEB-INF/lib` folder.
 
 ### `ant dist`
+Running this command will generate build folder if it is not exist and create a war package file from`./build/web` folder in it.
+So for testing and developing purposes you can deploy this war in any standard Java Servlet container like tomcat 9.
+Note that we don't use this `war` on our production online demo because we process and minificate JSP pages and remove all source code
+from it before deploy it on production. We create our production war file from a gulp task.
 
-Running this command will generate build folder if it is not exist and create a war package file from`./build/web` folder in it. So for testing and developing purposes you can deploy this war in any standard Java Servlet container like tomcat 9. Note that we don't use this `war` on our production online demo because we process and minificate JSP pages and remove all source code from it before deploy it on production. We create our production war file from a gulp task.
-
-Read more about Ant and Netbeans IDE Building process:
-
+**Read more about Ant and Netbeans IDE Building process:**
 *   [Developing Applications with NetBeans IDE](https://docs.oracle.com/netbeans/nb82/netbeans/NBDAG/toc.htm "Developing Applications with NetBeans IDE")
 *   [Creating, Importing, and Configuring Java Projects](https://netbeans.org/kb/74/java/project-setup.html "Creating, Importing, and Configuring Java Projects in Netbeans IDE")
 *   [Apache Ant Home Page](https://ant.apache.org/ "Apache Ant Home Page")
@@ -66,84 +75,10 @@ Read more about Ant and Netbeans IDE Building process:
 ## `./JavaTMP-Java-Ajax/gulpfile.js` file
 This is a gulp's configuration file. gulp is a toolkit for automating painful or time-consuming tasks in your development workflow.
 We use gulp to automate our building process like generating JS/CSS. The main important gulp task is `generate-dist`
-which copy resources from node_module folders and combine them and compile and generate theme and template Javascript and CSS files
-and folders. We described it in details in [JavaTMP-Static-Ajax Project Version documentation page](/pages/javatmp-static-ajax-project-version "Java Bootstrap Admin and Dashboard template documentation Page").
+which copy resources from node_module folder and combine them and compile and generate theme and template Javascript and CSS files
+and folders. We described it in details in [JavaTMP-Static-Ajax Project Version documentation page](/pages/javatmp-static-ajax-project-version).
 
-The starter Java Bootstrap default English LTR `index.jsp` page that use the above generated combined files look like the following:
-```jsp
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!doctype html>
-<html lang="en" dir="ltr">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link href="${pageContext.request.contextPath}/assets/dist/css/javatmp-plugins-all.min.css" rel="stylesheet" type="text/css"/>
-        <link href='${pageContext.request.contextPath}/assets/dist/css/javatmp-plugins-print-all.min.css' rel='stylesheet' media='print' />
-        <link href="${pageContext.request.contextPath}/assets/dist/css/javatmp-default.min.css" rel="stylesheet" type="text/css"/>
-        <!-- Include language support font -->
-        <link href="${pageContext.request.contextPath}/assets/dist/css/font-family-en.min.css" rel="stylesheet" type="text/css"/>
-        ...
-    </head>
-    <body class="sidebar-active">
-        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all-locale-en.min.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp.min.js" type="text/javascript"></script>
-        ...
-    </body>
-</html>
-```
-And the starter Java Bootstrap default English RTL `index.jsp` page that use the above generated combined files look like the following:
-```jsp
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!doctype html>
-<html lang="en" dir="rtl">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link href="${pageContext.request.contextPath}/assets/dist/css/javatmp-plugins-all.min.css" rel="stylesheet" type="text/css"/>
-        <link href='${pageContext.request.contextPath}/assets/dist/css/javatmp-plugins-print-all.min.css' rel='stylesheet' media='print' />
-        <link href="${pageContext.request.contextPath}/assets/dist/css/javatmp-default-rtl.min.css" rel="stylesheet" type="text/css"/>
-        <!-- Include language support font -->
-        <link href="${pageContext.request.contextPath}/assets/dist/css/font-family-en.min.css" rel="stylesheet" type="text/css"/>
-        ...
-    </head>
-    <body class="sidebar-active">
-        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all-locale-en.min.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp.min.js" type="text/javascript"></script>
-        ...
-    </body>
-</html>
-```
-And the starter Java Bootstrap default Arabic RTL `index.jsp` page that use the above generated combined files look like the following:
-```jsp
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!doctype html>
-<html lang="ar" dir="rtl">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link href="${pageContext.request.contextPath}/assets/dist/css/javatmp-plugins-all.min.css" rel="stylesheet" type="text/css"/>
-        <link href='${pageContext.request.contextPath}/assets/dist/css/javatmp-plugins-print-all.min.css' rel='stylesheet' media='print' />
-        <link href="${pageContext.request.contextPath}/assets/dist/css/javatmp-default-rtl.min.css" rel="stylesheet" type="text/css"/>
-        <!-- Include language support font -->
-        <link href="${pageContext.request.contextPath}/assets/dist/css/font-family-ar.min.css" rel="stylesheet" type="text/css"/>
-        ...
-    </head>
-    <body class="sidebar-active">
-        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all-locale-ar.min.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp.min.js" type="text/javascript"></script>
-        ...
-    </body>
-</html>
-```
-`./JavaTMP-Java-Ajax/lib` folder
-----------------------------------------
-
+## `./JavaTMP-Java-Ajax/lib` folder
 The `lib` folder contains external backend java libraries needed to compile and run the dynamic web application features. The libraries binary jars only move to `WAR/WEB-INF/lib` when we build and generate war file. Note that the libraries with its source code and java doc are registered with Netbeans IDE project when we import it in Netbeans IDE 8.2. the following tree provide lib folder contents:
 ```
 ./JAVATMP-JAVA-AJAX/LIB
@@ -168,9 +103,8 @@ The `lib` folder contains external backend java libraries needed to compile and 
 +---jstl-1.2
     +---jstl-1.2.jar
 ```
-`./JavaTMP-Java-Ajax/src` folder
-----------------------------------------
 
+## `./JavaTMP-Java-Ajax/src` folder
 `src` contains sub folders `conf` and `java` which contains the `Java` source code of all backend classes of the `JavaTMP-Java-Ajax` template version like Servlets, Services, bean, Java Web listener, Java Web Context classes. The following tree provides its contents and followed by important java and Servlets classes description:
 
 You should be familiar with the below java package structure as we will not describe it nor the Java servlets in details.
@@ -600,10 +534,11 @@ public class DBFaker {
     // Setter and getter ...
 }
 ```
-`./JavaTMP-Java-Ajax/web` folder
-----------------------------------------
 
-This folder contains everything related to front end resources and plugins and JSP pages for all plugin demo and template AJAX requests and web.xml file. The following tree structure provides an outline of its contents with description and usages. See our [online demo page for complete list of JavaTMP WAR File Contents](http://java.javatmp.com:8080/JavaTMP-Java-Ajax/#/JavaTMP-Java-Ajax/pages/plugins/tree/fancytree/plain_fancytree "online demo page for complete list of JavaTMP WAR File Contents"):
+## `./JavaTMP-Java-Ajax/web` folder
+This folder contains everything related to front end resources and plugins and JSP pages for all plugin demo
+and template AJAX requests and web.xml file. The following tree structure provides an outline of its contents with description
+and usages. See our [online demo page for complete list of JavaTMP WAR File Contents](http://java.javatmp.com:8080/JavaTMP-Java-Ajax/#/JavaTMP-Java-Ajax/pages/plugins/tree/fancytree/plain_fancytree):
 ```
 ./JavaTMP-Java-Ajax/web
 +---assets
@@ -713,9 +648,82 @@ The main important JSP page in our dynamic Java Bootstrap template is `index.jsp
 *   `labels` object is an instance of `ResourceBundle` which was injected into session by `com.javatmp.web.filter.LocalizationFilter` filter.
 *   Read more about `javatmp.init` Javascript function in the following page : [JavaTMP Javascript Files](/pages/javatmp-javascript-files "JavaTMP Javascript Files").
 
-Generating Production `JavaTMP-Java-Ajax.war` file
-----------------------------------------------------------
+## Dynamic JSP Starter Pages
+The starter Java Bootstrap default English LTR `index.jsp` page that use the above generated combined files look like the following:
+```jsp
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!doctype html>
+<html lang="en" dir="ltr">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link href="${pageContext.request.contextPath}/assets/dist/css/javatmp-plugins-all.min.css" rel="stylesheet" type="text/css"/>
+        <link href='${pageContext.request.contextPath}/assets/dist/css/javatmp-plugins-print-all.min.css' rel='stylesheet' media='print' />
+        <link href="${pageContext.request.contextPath}/assets/dist/css/javatmp-default.min.css" rel="stylesheet" type="text/css"/>
+        <!-- Include language support font -->
+        <link href="${pageContext.request.contextPath}/assets/dist/css/font-family-en.min.css" rel="stylesheet" type="text/css"/>
+        ...
+    </head>
+    <body class="sidebar-active">
+        ...
+        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all-locale-en.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp.min.js" type="text/javascript"></script>
+        ...
+    </body>
+</html>
+```
+And the starter Java Bootstrap default English RTL `index.jsp` page that use the above generated combined files look like the following:
+```jsp
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!doctype html>
+<html lang="en" dir="rtl">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link href="${pageContext.request.contextPath}/assets/dist/css/javatmp-plugins-all.min.css" rel="stylesheet" type="text/css"/>
+        <link href='${pageContext.request.contextPath}/assets/dist/css/javatmp-plugins-print-all.min.css' rel='stylesheet' media='print' />
+        <link href="${pageContext.request.contextPath}/assets/dist/css/javatmp-default-rtl.min.css" rel="stylesheet" type="text/css"/>
+        <!-- Include language support font -->
+        <link href="${pageContext.request.contextPath}/assets/dist/css/font-family-en.min.css" rel="stylesheet" type="text/css"/>
+        ...
+    </head>
+    <body class="sidebar-active">
+        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all-locale-en.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp.min.js" type="text/javascript"></script>
+        ...
+    </body>
+</html>
+```
+And the starter Java Bootstrap default Arabic RTL `index.jsp` page that use the above generated combined files look like the following:
+```jsp
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!doctype html>
+<html lang="ar" dir="rtl">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link href="${pageContext.request.contextPath}/assets/dist/css/javatmp-plugins-all.min.css" rel="stylesheet" type="text/css"/>
+        <link href='${pageContext.request.contextPath}/assets/dist/css/javatmp-plugins-print-all.min.css' rel='stylesheet' media='print' />
+        <link href="${pageContext.request.contextPath}/assets/dist/css/javatmp-default-rtl.min.css" rel="stylesheet" type="text/css"/>
+        <!-- Include language support font -->
+        <link href="${pageContext.request.contextPath}/assets/dist/css/font-family-ar.min.css" rel="stylesheet" type="text/css"/>
+        ...
+    </head>
+    <body class="sidebar-active">
+        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all-locale-ar.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp.min.js" type="text/javascript"></script>
+        ...
+    </body>
+</html>
+```
 
+## Generating Production `JavaTMP-Java-Ajax.war` file
 Generating our [online production Java Bootstrap Web application war file](http://java.javatmp.com:8080/JavaTMP-Java-Ajax/#/JavaTMP-Java-Ajax/pages/home "online production Java Bootstrap Web application war file") is done using the following special gulp's task steps (Make sure first that `ant compile` or `ant dist` is ran first because this task depends on the `build` folder generating from running `ant` script):
 ```javascript
 gulp.src(\[
