@@ -128,7 +128,6 @@ check that by login to mysql and run the following command:
 
 ### JavaTMP Users Project Database Tables
 The database schema contains the following tables:
-
 *   activity. Contains data related to all requests of the public or registered users.
 *   country. Contains data for supported countries referenced by user records.
 *   document. Contains binary and meta data of the profile picture of the users and any supported documents might be used in the future.
