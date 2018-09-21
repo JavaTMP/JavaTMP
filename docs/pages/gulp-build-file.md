@@ -38,120 +38,33 @@ gulp delete-css
 ```
 
 ## generate-dist
-We use these tasks to generate a minify css files from sass's scss files:
-
-The following code is the definition of these tasks:
-```javascript
-gulp.task('main-sass', ["delete-css"], function () {
-    return gulp.src(['./web/assets/src/sass/main.scss'])
-            .pipe(sass().on('error', sass.logError))
-            .pipe(autoprefixer({
-                browsers: ['last 2 versions'],
-                cascade: false
-            }))
-            .pipe(cleanCSS())
-            .pipe(rename({suffix: '.min'}))
-            .pipe(gulp.dest('./web/assets/css/'));
-});
-gulp.task('plugins-sass', ["main-sass"], function () {
-    return gulp.src(['./web/assets/src/sass/plugins/**/*.scss'])
-            .pipe(sass().on('error', sass.logError))
-            .pipe(autoprefixer({
-                browsers: ['last 2 versions'],
-                cascade: false
-            }))
-            .pipe(cleanCSS())
-            .pipe(rename({suffix: '.min'}))
-            .pipe(gulp.dest('./web/assets/css/plugins/'));
-});
-gulp.task('pages-sass', ["plugins-sass"], function () {
-    return gulp.src(['./web/assets/src/sass/pages/**/*.scss'])
-            .pipe(sass().on('error', sass.logError))
-            .pipe(autoprefixer({
-                browsers: ['last 2 versions'],
-                cascade: false
-            }))
-            .pipe(cleanCSS())
-            .pipe(rename({suffix: '.min'}))
-            .pipe(gulp.dest('./web/assets/css/pages/'));
-});
-```
+We use this task to generate the main front end resources JS/CSS files and folders.
 You can run the gulp's task using the following command line:
-
+```
 gulp sass
-
-Note that if you want to generate normal css files instead of minify ones, then you can update the above script and remove `cleanCSS` pipe step.
-
-Note that we don't combine and merge CSS files to simplify the theme and make it simple to customize.
-
-delete-js
----------
-
-We use `delete-js` task to delete js folder with all its Javascript files before we regenerate them from compiling Javascript files reside in `./web/assets/src/js-src/`.
-
-This task is not intended to run manually. it is called using one of the below tasks.
-
-The following code is the definition of `delete-js` task:
-```javascript
-gulp.task('delete-js', function () {
-    return del(['./web/assets/js/**/*']);
-});
 ```
-You can run the gulp's task using the following command line:
+
+Note that if you want to generate normal css files instead of minify ones, then you can update the above script
+and remove `cleanCSS` pipe step.
+
+## delete-js
+We use `delete-js` task to delete js folder with all its Javascript files before we regenerate them from
+compiling Javascript files reside in `./web/assets/src/js-src/`. This task is not intended to run manually and
+it is called using one of the below `generate-dist` task. You could run the gulp's task using the following command line:
 ```
 gulp delete-js
 ```
-compress-js
------------
 
-We use `compress-js` task to reduce and uglify JavaTMP's javascript files.
-
-The following code is the definition of `compress-js` task:
-```javascript
-gulp.task('compress-js', ["delete-js"], function (cb) {
-    pump([
-        gulp.src('./web/assets/src/js-src/**/*'),
-        eslint(),
-        eslint.format(),
-        uglify(),
-        rename({suffix: '.min'}),
-        gulp.dest('./web/assets/js/')
-    ], cb);
-});
-```
-You can run the gulp's task using the following command line:
-
-gulp compress-js
-
-watch-sass-and-js
------------------
-
+## watch-sass-and-js
 We use `watch-sass-and-js` task to watch the source scss and js files for any changes and run corresponding tasks accordingly.
-
-The following code is the definition of `watch-sass-and-js` task:
-```javascript
-gulp.task('watch-sass-and-js', ["delete-css", "delete-js", "sass", "compress-js"], function () {
-    console.log("watching scss & js files changing");
-    gulp.watch('./web/assets/src/sass/**/\*.scss', ['sass']);
-    gulp.watch('./web/assets/src/js-src/**/\*', ['compress-js']);
-});
-```
 You can run the gulp's task using the following command line:
 ```
 gulp watch-sass-and-js
 ```
-default
--------
 
-We use `default` task to run `watch-sass-and-js` through out our development.
-
-The following code is the definition of `default` task:
-```javascript
-gulp.task('default', ['watch-sass-and-js'], function () {
-    process.stdout.write("*** Finished @ [" + new Date() + "] ***");
-});
-```
+## default
+We use `default` task to run `generate-dist` through out our development.
 You can run the default gulp's task using the following command line:
-
+```
 gulp
-
+```
