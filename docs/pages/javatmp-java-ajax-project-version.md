@@ -178,12 +178,7 @@ The root path main Java Servlet class responsible for handling default root requ
 ```java
 package com.javatmp.web.controller;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import ...;
 
 @WebServlet("")
 public class IndexController extends HttpServlet {
@@ -201,15 +196,9 @@ This class consider as a front controller servlets responsible for forwarding re
 ```java
 package com.javatmp.web.controller;
 
-import java.io.IOException;
-import java.util.logging.Logger;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import ...;
 
-@WebServlet("/pages/\*")
+@WebServlet("/pages/*")
 public class PagesController extends HttpServlet {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
@@ -219,7 +208,7 @@ public class PagesController extends HttpServlet {
             throws ServletException, IOException {
         String requestPath = request.getPathInfo();
         String requestPage = "/WEB-INF/pages" + requestPath + ".jsp";
-        logger.info("Request Page \[" + requestPage + "\]");
+        logger.info("Request Page [" + requestPage + "]");
         request.getRequestDispatcher(requestPage).forward(request, response);
     }
 }
@@ -230,24 +219,14 @@ Sometimes, We create a separate servlet for handling page request that need data
 ```java
 package com.javatmp.web.controller.select2;
 
-import com.javatmp.domain.Country;
-import com.javatmp.service.CountryService;
-import com.javatmp.service.ServicesFactory;
-import com.javatmp.util.Constants;
-import java.io.IOException;
-import java.util.List;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import ...;
 
 @WebServlet("/DynamicSelect2PageController")
 public class DynamicSelect2PageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES\_FACTORY\_ATTRIBUTE\_NAME);
+        ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         CountryService countryService = sf.getCountryService();
         List<Country> countries = countryService.getCountries();
         request.setAttribute("countries", countries);
@@ -261,18 +240,7 @@ Sometimes, The servlet is responsible for handling AJAX request and providing a 
 ```java
 package com.javatmp.web.controller.user;
 
-import com.javatmp.mvc.MvcHelper;
-import com.javatmp.mvc.domain.ResponseMessage;
-import com.javatmp.service.ServicesFactory;
-import com.javatmp.service.UserService;
-import com.javatmp.util.Constants;
-import java.io.IOException;
-import java.util.List;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import ...;
 
 @WebServlet("/user/ListUsersPositionsController")
 public class ListUsersPositionsController extends HttpServlet {
@@ -281,7 +249,7 @@ public class ListUsersPositionsController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ResponseMessage responseMessage = new ResponseMessage();
-        ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES\_FACTORY\_ATTRIBUTE\_NAME);
+        ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         UserService cs = sf.getUserService();
         List<String> positions = cs.listUsersPositions();
         responseMessage.setOverAllStatus(true);
@@ -314,12 +282,12 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        ServicesFactory sf = (ServicesFactory) session.getAttribute(Constants.SERVICES\_FACTORY\_ATTRIBUTE\_NAME);
+        ServicesFactory sf = (ServicesFactory) session.getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
 
         User user = new User();
         ResponseMessage responseMessage = new ResponseMessage();
         MvcHelper.populateBeanByRequestParameters(request, user);
-        logger.info("Check User \[" + MvcHelper.deepToString(user) + "\]");
+        logger.info("Check User [" + MvcHelper.deepToString(user) + "]");
         User dbUser = sf.getUserService().readUserByUsername(user);
 
         if (dbUser != null && dbUser.getPassword().equals(MD5Util.convertToMD5(user.getPassword()))) {
@@ -352,11 +320,11 @@ public class ListUsersController extends HttpServlet {
             throws ServletException, IOException {
 
         ResponseMessage responseMessage = new ResponseMessage();
-        ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES\_FACTORY\_ATTRIBUTE\_NAME);
+        ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         UserService cs = sf.getUserService();
 
         DataTableRequest tableRequest = (DataTableRequest) MvcHelper.readObjectFromRequest(request, DataTableRequest.class);
-        logger.info("datatableRequest \[" + MvcHelper.deepToString(tableRequest) + "\]");
+        logger.info("datatableRequest [" + MvcHelper.deepToString(tableRequest) + "]");
 
         DataTableResults<User> dataTableResult = cs.listUsers(tableRequest);
 
@@ -376,12 +344,12 @@ And this is the AJAX request from `Datatables` plugin to retrieved list of users
     dataType: "json",
     contentType: "application/json; charset=UTF-8",
      "data": function (currentData) {
-        currentData.\_ajaxGlobalBlockUI = false;
+        currentData._ajaxGlobalBlockUI = false;
         return JSON.stringify(currentData);
     },
     "dataSrc": function (json) {
-        json\["recordsTotal"\] = json.data.recordsTotal;
-        json\["recordsFiltered"\] = json.data.recordsFiltered;
+        json["recordsTotal"] = json.data.recordsTotal;
+        json["recordsFiltered"] = json.data.recordsFiltered;
         return json.data.data;
     }
 }
@@ -400,11 +368,11 @@ public class ListMessagesController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ResponseMessage responseMessage = new ResponseMessage();
-        ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES\_FACTORY\_ATTRIBUTE\_NAME);
+        ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         MessageService cs = sf.getMessageService();
 
         DataTableRequest tableRequest = (DataTableRequest) MvcHelper.readObjectFromRequest(request, DataTableRequest.class);
-        logger.info("datatableRequest \[" + MvcHelper.deepToString(tableRequest) + "\]");
+        logger.info("datatableRequest [" + MvcHelper.deepToString(tableRequest) + "]");
 
         DataTableResults<Message> dataTableResult = cs.listMessages(tableRequest);
 
@@ -448,8 +416,7 @@ Usually, An instance of `ServicesFactory` class is created at web application st
 ```java
 package com.javatmp.service;
 
-import java.util.Date;
-import java.util.logging.Logger;
+import ...;
 
 public class ServicesFactory {
 
@@ -464,7 +431,7 @@ public class ServicesFactory {
     private MessageService messageService;
 
     public ServicesFactory() {
-        logger.info("\*\*\* Start ServicesFactory Constructor @ \[" + new Date() + "\]");
+        logger.info("*** Start ServicesFactory Constructor @ [" + new Date() + "]");
         this.dbFaker = new DBFaker();
         this.userService = new UserService(this.dbFaker);
         this.accountService = new AccountService(dbFaker);
@@ -473,7 +440,7 @@ public class ServicesFactory {
         this.countryService = new CountryService(dbFaker);
         this.contentService = new ContentService(dbFaker);
         this.messageService = new MessageService(dbFaker, this.userService);
-        logger.info("\*\*\* End ServicesFactory Constructor @ \[" + new Date() + "\]");
+        logger.info("*** End ServicesFactory Constructor @ [" + new Date() + "]");
     }
     // Getter for above Services instances
 }
@@ -556,7 +523,6 @@ and usages. See our [online demo page for complete list of JavaTMP WAR File Cont
             |---main.scss
             +---common
             +---font-family
-            +---pages
             +---partials
             +---plugins
             +---themes
