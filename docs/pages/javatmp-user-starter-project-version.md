@@ -28,8 +28,8 @@ from `JavaTMP-Java-Ajax` to provide a simple users management demo. The followi
 more information for our General dynamic Java web application version :
 [Dynamic Java Bootstrap Web Application Documentation Home Page](/pages/javatmp-java-ajax-project-version "Dynamic Java Bootstrap Web Application Documentation Home Page").
 
-The following list provides the main features of Users Management dynamic Java Bootstrap web application Template version `JavaTMP-User-Starter` Project:
-
+The following list provides the main features of Dynamic Java Bootstrap Users Management web application
+Template version `JavaTMP-User-Starter` Project:
 *   Public Registration Page for user.
 *   Login Page for Register User Authentication.
 *   User Dashboard Providing a summary for users and their activities.
@@ -43,14 +43,13 @@ The following list provides the main features of Users Management dynamic Java B
 *   Use Hibernate JPA implementation as an access layer for Oracle Mysql Database.
 *   Use Simple Java Captcha in the public registration Page to provide a another level of security.
 
-Installation and Deploying
---------------------------
+## Installation and Deploying
 
 The JavaTMP-User-Starter project folder structure is the same as JavaTMP-Java-Ajax one with the following main contents of its folder root:
 ```
 ./JavaTMP-User-Starter
 |---.eslintrc (ESLint plugin configuration file which contains directive and parameters to gulp-eslint gulp plugin)
-|---.gitignore (git SCM meta file to exclude mainly ./node\_modules and ./nbproject/private/ folders from versioning)
+|---.gitignore (git SCM meta file to exclude mainly ./node_modules and ./nbproject/private/ folders from versioning)
 |---build.xml (Netbeans IDE auto generated ant build script. used to compile, build, package project through Netbeans IDE or manually by command line)
 |---gulpfile.js (gulp's configuration file for automating front end resources and generate assets/dist JS/CSS files)
 |---package.json (A Node.js's NPM meta file. This file holds various metadata relevant to the project)
@@ -65,22 +64,27 @@ The JavaTMP-User-Starter project folder structure is the same as JavaTMP-Java-Aj
         |---persistence.xml (Hibernate and JPA configuration to connect to remote database)
     +---java (Java Source codes)
 +---test (Java source code classes for testing and future use)
-\\---web (Web specific resources like assets, WEB-INF, JSP folders and pages)
+\---web (Web specific resources like assets, WEB-INF, JSP folders and pages)
     +---META-INF
         |---context.xml (Web Application Context file for Application Server instructions)
     +---WEB-INF (Web Application HTML/JSP pages and resources)
 ```
 ### Preparing Netbeans 8.2 Project
 
-The `JavaTMP-User-Starter` project is a Netbeans IDE 8.2 project, so you can directly import and open it there for compilation and deploying
+The `JavaTMP-User-Starter` project is a Netbeans IDE 8.2 project, so you can directly import and open it there for
+compilation and deploying
 
 ### Preparing Oracle Mysql Database Management System
 
-Although we use JPA with Hibernate implementation library for managing and wrapping connecting and JDBC handling to provide standard interface for any database management, we tested and deployed our online demo version with Oracle Mysql Database, So we describe and prepare it as a standard database vendor to use in JavaTMP projects.
+Although we use JPA with Hibernate implementation library for managing and wrapping connections and JDBC handling to provide
+standard interface for any database management, we tested and deployed our online demo version with Oracle Mysql Database,
+So we describe and prepare it as a standard database vendor to use in JavaTMP projects.
 
-First of all make sure you install and preparing your Oracle Mysql Database management system in your local development machine and following the documentation on their [website](https://www.mysql.com/ "Oracle Mysql Database Management System Home Page").
+First of all make sure you install and prepare your Oracle Mysql Database management system in your local development machine
+and follow the documentation on their [website](https://www.mysql.com/ "Oracle Mysql Database Management System Home Page").
 
-Most Database parameters like database name, username and password should be saved and changed in `./JavaTMP-User-Starter/src/conf/persistence.xml` file.
+Most Database parameters like database name, username and password should be saved and changed in
+`./JavaTMP-User-Starter/src/conf/persistence.xml` file.
 
 Login to your mysql database instance through the command line:
 
@@ -104,7 +108,8 @@ Grant privileges while assigning the password for javatmpUser:
 
 Note: The localhost field usually doesn’t have to be edited, but you can set it to the specific address.
 
-The above example grants all privileges, obviously. But you will likely want to limit privileges under many circumstances. These parameters include select, insert, and delete, For example:
+The above example grants all privileges, obviously. But you will likely want to limit privileges under many circumstances.
+These parameters include select, insert, and delete, For example:
 
 `mysql > grant select, insert, delete, update on appdb.* to ‘javatmpUser’@’localhost’ identified by ‘javatmpUserPassword’;`
 
@@ -116,12 +121,12 @@ quit to import our database script to your local database instance appdb from `c
 
 `mysql -ujavatmpUser -pjavatmpUserPassword -D appdb < ./JavaTMP-User-Starter/conf/javatmp-27-08-2018.sql`
 
-It should be now your database with the all mandatory data and demo users saved and exited in your local Mysql database 'appdb' instance. check that by login to mysql and run the following command:
+Now, Your local database should be loaded with all mandatory data and demo users in your local Mysql database 'appdb' instance.
+check that by login to mysql and run the following command:
 
 `mysql > show tables;`
 
 ### JavaTMP Users Project Database Tables
-
 The database schema contains the following tables:
 
 *   activity. Contains data related to all requests of the public or registered users.
