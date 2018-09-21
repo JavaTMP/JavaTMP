@@ -180,8 +180,8 @@ It is a web application context root folder contains everything related to stati
     </html>
 ```
 *   The main sass file that include bootstrap and template sass file and override
-    it is `./JavaTMP/*/web/assets/src/sass/main.scss` that was
-    referenced by `./JavaTMP/*/web/assets/src/sass/themes/javatmp-default.scss`
+    it is `./web/assets/src/sass/main.scss` that was
+    referenced by `./web/assets/src/sass/themes/javatmp-default.scss`
     which the later referenced in all other theme files resided in `./web/assets/src/sass/themes`. This main.scss file includes and references the following resources:
     1.  Import JavaTMP Global Variables
     2.  Import original Bootstrap SCSS file
