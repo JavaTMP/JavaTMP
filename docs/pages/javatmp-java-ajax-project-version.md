@@ -337,7 +337,7 @@ public class ListUsersController extends HttpServlet {
 ```
 And this is the AJAX request from `Datatables` plugin to retrieved list of users pages on the current page request it see `./web/WEB-INF/pages/table/datatable/dynamic-datatables.jsp` page:
 ```json
-...
+{
 "ajax": {
     "type": "POST",
     "url": javatmp.settings.contextPath + "/user/ListUsersController",
@@ -353,7 +353,7 @@ And this is the AJAX request from `Datatables` plugin to retrieved list of users
         return json.data.data;
     }
 }
-...
+}
 ```
 #### `com.javatmp.web.controller.message.ListMessagesController` class
 
@@ -711,7 +711,7 @@ gulp.src(['temp/online-java-demo-starter/**/*.html', 'temp/online-java-demo-star
             ignoreCustomFragments: [/<%--[\s\S]*?--%>/, /<%@[\s\S]*?%>/, /\$\{[\s\S]*?\}/, /<fmt:[\s\S]+?\/>/, /<c:[\s\S]+?\/?>/, /<\/c:[\s\S]+?>/, /\{\{[\s\S]*?\}\}/]
         }))
         .pipe(gulp.dest("temp/online-java-demo-starter"));
-gulp.src(['temp/online-java-demo-starter/**/*'\], {dot: true})
+gulp.src(['temp/online-java-demo-starter/**/*'], {dot: true})
         .pipe(chmod(0o644, true))
         .pipe(zip('JavaTMP-Java-Ajax.war'))
         .pipe(gulp.dest('temp'));
