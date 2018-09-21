@@ -555,9 +555,9 @@ The main important JSP page in our dynamic Java Bootstrap template is `index.jsp
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
-<html lang="${labels\["global.language"\]}" dir="${labels\["global.direction"\]}">
+<html lang="${labels["global.language"]}" dir="${labels["global.direction"]}">
     <head>
-        <title>${labels\["global.page.title"\]}</title>
+        <title>${labels["global.page.title"]}</title>
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -565,15 +565,15 @@ The main important JSP page in our dynamic Java Bootstrap template is `index.jsp
         <link href='${pageContext.request.contextPath}/assets/dist/css/javatmp-plugins-print-all.min.css' rel='stylesheet' media='print' />
 
         <!-- Include directional support -->
-        <c:if test="${labels\['global.direction'\] == 'ltr'}">
+        <c:if test="${labels['global.direction'] == 'ltr'}">
             <link id="themeStyleSheet" href="${pageContext.request.contextPath}/assets/dist/css/javatmp-${sessionScope.user.theme}.min.css" rel="stylesheet" type="text/css"/>
         </c:if>
-        <c:if test="${labels\['global.direction'\] == 'rtl'}">
+        <c:if test="${labels['global.direction'] == 'rtl'}">
             <link id="themeStyleSheet" href="${pageContext.request.contextPath}/assets/dist/css/javatmp-${sessionScope.user.theme}-rtl.min.css" rel="stylesheet" type="text/css"/>
         </c:if>
 
         <!-- Include language support font -->
-        <link href="${pageContext.request.contextPath}/assets/dist/css/font-family-${labels\['global.language'\]}.min.css" rel="stylesheet" type="text/css"/>
+        <link href="${pageContext.request.contextPath}/assets/dist/css/font-family-${labels['global.language']}.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <body class="sidebar-active">
         ...
@@ -586,13 +586,13 @@ The main important JSP page in our dynamic Java Bootstrap template is `index.jsp
                     httpMethod: "GET",
                     dataType: "html",
                     updateURLHash: true,
-                    defaultPassData: {\_ajax: "ajax", \_ajaxGlobalBlockUI: true, \_handleAjaxErrorGlobally: true},
+                    defaultPassData: {_ajax: "ajax", _ajaxGlobalBlockUI: true, _handleAjaxErrorGlobally: true},
                     defaultOutputSelector: '.main-body-content-container',
                     defaultUrl: '${pageContext.request.contextPath}/pages/home',
-                    floatDefault: "${labels\['global.floatDefault'\]}",
-                    floatReverse: "${labels\['global.floatReverse'\]}",
-                    direction: "${labels\['global.direction'\]}",
-                    isRTL: ${labels\['global.direction'\] == 'ltr' ? 'false' : 'true'},
+                    floatDefault: "${labels['global.floatDefault']}",
+                    floatReverse: "${labels['global.floatReverse']}",
+                    direction: "${labels['global.direction']}",
+                    isRTL: ${labels['global.direction'] == 'ltr' ? 'false' : 'true'},
                     contextPath: '${pageContext.request.contextPath}'
                 });
 
@@ -607,8 +607,8 @@ The main important JSP page in our dynamic Java Bootstrap template is `index.jsp
     </body>
 </html>
 ```
-### Notes
 
+### Notes
 *   We minimize the use of Java features like EL mixed with Javascript whenever possible other than in `index.jsp` to pass them to `javatmp.init method`
 *   `sessionScope.user` object was injected in the session by `com.javatmp.web.filter.ServiceFactoryInjector` filter.
 *   `labels` object is an instance of `ResourceBundle` which was injected into session by `com.javatmp.web.filter.LocalizationFilter` filter.
@@ -692,26 +692,26 @@ And the starter Java Bootstrap default Arabic RTL `index.jsp` page that use the 
 ## Generating Production `JavaTMP-Java-Ajax.war` file
 Generating our [online production Java Bootstrap Web application war file](http://java.javatmp.com:8080/JavaTMP-Java-Ajax/#/JavaTMP-Java-Ajax/pages/home "online production Java Bootstrap Web application war file") is done using the following special gulp's task steps (Make sure first that `ant compile` or `ant dist` is ran first because this task depends on the `build` folder generating from running `ant` script):
 ```javascript
-gulp.src(\[
-    './JavaTMP-Java-Ajax/\*\*/\*',
-    '!\*\*/node\_modules{,/\*\*}',
-    '!\*\*/nbproject/private{,/\*\*}',
-    '!\*\*/package-lock.json'
-\], {dot: true})
+gulp.src([
+    './JavaTMP-Java-Ajax/**/*',
+    '!**/node_modules{,/**}',
+    '!**/nbproject/private{,/**}',
+    '!**/package-lock.json'
+], {dot: true})
         .pipe(gulp.dest("temp/JavaTMP-Java-Ajax"));
-gulp.src(\['temp/JavaTMP-Java-Ajax/build/web/\*\*/\*'\], {dot: true})
+gulp.src(['temp/JavaTMP-Java-Ajax/build/web/**/*'], {dot: true})
         .pipe(gulp.dest("temp/online-java-demo-starter"));
-gulp.src(\['temp/online-java-demo-starter/\*\*/\*.html', 'temp/online-java-demo-starter/\*\*/\*.jsp'\], {dot: true})
+gulp.src(['temp/online-java-demo-starter/**/*.html', 'temp/online-java-demo-starter/**/*.jsp'], {dot: true})
         .pipe(htmlmin({collapseWhitespace: true,
             minifyCSS: true,
             minifyJS: true,
             removeComments: true,
             ignoreCustomComments: false,
             keepClosingSlash: true,
-            ignoreCustomFragments: \[/<%@\[\\s\\S\]\*?%>/, /\\$\\{\[\\s\\S\]\*?\\}/, /<fmt:\[\\s\\S\]\*?\\/>/, /\\{\\{\[\\s\\S\]\*?\\}\\}/\]
+            ignoreCustomFragments: [/<%--[\s\S]*?--%>/, /<%@[\s\S]*?%>/, /\$\{[\s\S]*?\}/, /<fmt:[\s\S]+?\/>/, /<c:[\s\S]+?\/?>/, /<\/c:[\s\S]+?>/, /\{\{[\s\S]*?\}\}/]
         }))
         .pipe(gulp.dest("temp/online-java-demo-starter"));
-gulp.src(\['temp/online-java-demo-starter/\*\*/\*'\], {dot: true})
+gulp.src(['temp/online-java-demo-starter/**/*'\], {dot: true})
         .pipe(chmod(0o644, true))
         .pipe(zip('JavaTMP-Java-Ajax.war'))
         .pipe(gulp.dest('temp'));
