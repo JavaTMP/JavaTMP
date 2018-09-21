@@ -3,12 +3,18 @@ title: JavaTMP-User-Starter Project Version
 ---
 # JavaTMP-User-Starter Project Version
 
-`JavaTMP-User-Starter` project is an advanced Dynamic Java Bootstrap LTR/RTL multi languages User Management Web application Template derived from `JavaTMP-Java-Ajax` project with support for data persistent using Mysql Database Management System through java Persistent API and hibernate JPA implementation. The [online Java User Management Web Application demo](http://java.javatmp.com:8080/JavaTMP-User-Starter/ "Dynamic Java Bootstrap LTR/RTL multi languages User Management Web application Template") provide a running version of this project folder on tomcat 9. For more information see [JavaTMP-User-Starter Project Version online documentation page](/pages/javatmp-user-starter-project-version "JavaTMP-User-Starter Project Version Documentation Page").
+`JavaTMP-User-Starter` project is an advanced dynamic Java Bootstrap LTR/RTL multi languages User Management Web application Template
+derived from `JavaTMP-Java-Ajax` project with support for data persistent using Mysql Database Management System through
+java Persistent API and hibernate JPA implementation.
 
-`JavaTMP-User-Starter` porject is a dynamic `Java` LTR/RTL multi languages Bootstrap User Management Web Application Version of our Java starter version `JavaTMP-Java-Ajax` minimized to provide a user specific features built mainly using `Java Servlet 4.0` and `JSP 2.3` and deployed on `Apache tomcat 9`. The [Dynamic User Management Java Bootstrap Web Application](http://java.javatmp.com:8080/JavaTMP-User-Starter/ "Dynamic Java Bootstrap LTR/RTL multi languages User Management Web application Template") provide a running version of this project war file on tomcat 9.
+`JavaTMP-User-Starter` porject is a dynamic Java Bootstrap LTR/RTL multi languages User Management Web Application Version
+of our Java starter version `JavaTMP-Java-Ajax` customized to provide a user specific features built mainly using
+`Java Servlet 4.0` and `JSP 2.3` and deployed on `Apache tomcat 9`.
+The [Online Dynamic Java Bootstrap User Management Web Application](http://java.javatmp.com:8080/JavaTMP-User-Starter/ "Dynamic Java Bootstrap LTR/RTL multi languages User Management Web application Template")
+provides a running version of this template war file on tomcat 9.
 
-It depends mainly on the following external backend java opensource libraries to provide a dynamic web application features with custom web MVC for serving JSP pages and handling Servlet requests:
-
+It depends mainly on the following external backend java opensource libraries to provide a dynamic web application features
+with custom web MVC for serving JSP pages and handling Servlet requests:
 *   Use Apache Commons [BeanUtils 1.9.3](https://commons.apache.org/proper/commons-beanutils/ "Apache Commons beanutils Java Library"), [Collections 3.2.2](http://commons.apache.org/proper/commons-collections/ "Apache Commons Collections Java Library"), [Logging 1.2](http://commons.apache.org/proper/commons-logging/ "Apache Commons Logging Java Library"), and [Lang 3.7](http://commons.apache.org/proper/commons-lang/ "Apache Commons Lang Java Library")
 *   Use [Google Gson 2.8.2](https://github.com/google/gson "Google Gson JSON Java Library")
 *   Use [Standard Taglib 1.2](http://central.maven.org/maven2/javax/servlet/jstl/1.2/ "Java Web Standard Taglib maven repository")
