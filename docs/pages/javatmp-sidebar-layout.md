@@ -56,5 +56,5 @@ So if you don't want to use metisMenu plugin and want to remove it completely fr
     for handling event `click` on any link inside .metismenu.
     ```
     // Initialize and define main AJAX lifecycle for template by listening on click event of sidebar's metismenu links.
-    $(".metismenu").on("click", 'a\[target!="\_blank"\]\[href!="#"\]', function (event) {...}
+    $(".metismenu").on("click", 'a[target!="_blank"][href!="#"]', function (event) {...}
     ```
