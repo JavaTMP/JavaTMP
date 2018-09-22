@@ -46,7 +46,6 @@ when you write something on the `textfield`.
 The `metismenu` plugin is initialized in `index.init` method.
 
 So if you don't want to use metisMenu plugin and want to remove it completely from project you should do the following step:
-
 *   Remove `metismenu` key and value from `package.json'`s dependencies.
 *   Remove `metismenu` key and values from `gulpfile.js` config variable.
 *   Remove Javascript file path in src.js array and CSS file path in src.css for metismenu plugin.
