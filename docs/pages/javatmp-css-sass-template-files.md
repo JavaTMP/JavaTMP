@@ -27,11 +27,10 @@ The most important SASS files in `./web/assets/src/sass|sass-rtl` are:
 - `./web/assets/src/sass/main.scss`.
 - `./web/assets/src/sass-rtl/main-rtl.scss`
 
-As a final note if you want to see the compiled CSS files for all SASS files without minification,
+If you want to see the compiled CSS files for all SASS files without minification,
 then simply comments `.pipe(cleanCSS())` line from corresponding gulp's task `generate-dist`.
 
-Note that we separate the import of the bootstrap main sass file `./node_modules/bootstrap/scss/bootstrap.scss` to two location,
-required reside in `common/variables.scss` file to use its variables and function and optional reside in `main.scss` file,
-or include the complete `./node_modules/bootstrap/scss/bootstrap.scss` in `main.scss` again.
-because we provide separate css file for all plugins and pages and we don't want to include custom bootstrap in every generated CSS files.
-In the future we provide a custom SASS file that include all needed features instead of separate files.
+Also, we include the required part of the `./node_modules/bootstrap/scss/bootstrap.scss` file
+in `common/variables.scss` file to use its variables and function
+and include the complete `./node_modules/bootstrap/scss/bootstrap.scss` file again in `main.scss` file
+instead of remaining optional part only.
