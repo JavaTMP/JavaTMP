@@ -1,7 +1,7 @@
 ---
-title: Custom Bootstrap Themes and Skins
+title: Custom JavaTMP Bootstrap Themes and Skins
 ---
-# Custom Bootstrap Themes and Skins
+# Custom JavaTMP Bootstrap Themes and Skins
 The Main JavaTMP SASS file `./web/assets/src/sass/main.scss` included 
 `./node_modules/bootstrap/scss/bootstrap` to apply its style to Bootstrap and all plugins and layouts.
 However, Because we use `SASS` as a css preprocessor in our templates and to support same Bootstrap style and theme for own parts
