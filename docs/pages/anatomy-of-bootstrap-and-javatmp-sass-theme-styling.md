@@ -142,17 +142,19 @@ $enable-hover-media-query:  false !default; // Deprecated, no longer affects any
 $enable-grid-classes:       true !default; // Enables the generation of CSS classes for the grid system (e.g., .container, .row, .col-md-1, etc.).
 $enable-print-styles:       true !default; // Enables styles for optimizing printing.
 ```
-#### Bootstrap Body variables
 
+#### Bootstrap Body variables
 Bootstrap uses the following two important global variables that will use in body and some components elements:
 ```scss
 $body-bg:    $white !default;
 $body-color: $gray-900 !default;
 ```
-remember that bg stand for background, So the default Bootstrap color for body background is `$white` and body text color is `$gray-900`.
+
+remember that bg stand for background, So the default Bootstrap color
+for body background is `$white` and
+body text color is `$gray-900`.
 
 #### Bootstrap Links variables
-
 Bootstrap uses the following variables to control the style of link and anchor elements:
 ```scss
 $link-color:            theme-color("primary") !default;
@@ -160,10 +162,12 @@ $link-decoration:       none !default;
 $link-hover-color:      darken($link-color, 15%) !default;
 $link-hover-decoration: underline !default;
 ```
-So Bootstrap use custom theme-color function to get the color value of primary. So you update the key of assign a different color value for link and you can use those variables in your custom style and plugins. Remember that the darken function is a [Build-in Sass function](http://sass-lang.com/documentation/Sass/Script/Functions.html "Build-in Sass function") that you can read more about [here](http://sass-lang.com/documentation/Sass/Script/Functions.html#darken-instance_method "Build-in Sass function").
+So Bootstrap use custom theme-color function to get the color value of primary. So you update the key of assign a different color value
+for link and you can use those variables in your custom style and plugins. Remember that the darken function is a
+[Build-in Sass function](http://sass-lang.com/documentation/Sass/Script/Functions.html "Build-in Sass function")
+that you can read more about [here](http://sass-lang.com/documentation/Sass/Script/Functions.html#darken-instance_method "Build-in Sass function").
 
 #### Bootstrap Paragraph Variable
-
 Bootstrap uses the following variable to set a bottom margin for paragraph element `<p>`:
 ```scss
 $paragraph-margin-bottom: 1rem !default;
