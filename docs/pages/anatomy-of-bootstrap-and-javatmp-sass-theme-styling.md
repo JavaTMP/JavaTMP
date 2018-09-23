@@ -176,7 +176,8 @@ And it is mainly used in `./node_modules/bootstrap/scss/_reboot.scss`.
 
 #### Bootstrap Grid Breakpoints
 
-Bootstrap primarily uses the following $grid-breakpoints map to define the minimum dimensions at which layout, grid system, and components will change, adapting to different screen sizes, for use in media queries:
+Bootstrap primarily uses the following $grid-breakpoints map to define the minimum dimensions at which layout, grid system,
+and components will change, adapting to different screen sizes, for use in media queries:
 ```scss
 $grid-breakpoints: (
   xs: 0,
@@ -186,32 +187,3 @@ $grid-breakpoints: (
   xl: 1200px
 ) !default;
 ```
-Since Bootstrap is developed to be mobile first, It use a handful of media queries to create sensible breakpoints for its layouts and interfaces. These breakpoints are mostly based on minimum viewport widths and allow them to scale up elements as the viewport changes. Bootstrap provides the following important mixins `media-breakpoint-up` and `media-breakpoint-down` to deal with the above `$grid-breakpoints` map and generate desired media queries in `./node_modules/bootstrap/scss/mixins/_breakpoints.scss` Sass file.
-
-You can use those mixins like this:
-```scss
-@include media-breakpoint-up(xs) {
-    .some-class {
-        display: block;
-    }
-}
-@include media-breakpoint-down(xs) {
-    .some-class {
-        display: block;
-    }
-}
-```
-And the generated CSS will be like this:
-```scss
-@media (min-width: 576px) {
-    .some-class {
-        display: block;
-    }
-}
-@media (max-width: 575.99px) {
-    .some-class {
-        display: block;
-    }
-}
-```
-
