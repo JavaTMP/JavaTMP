@@ -30,7 +30,6 @@
     *   [Extend Bootstrap Card Options](/pages/extended-bootstrap-card-options "JavaTMP Extends Bootstrap Card Tool Options")
     *   [Bootstrap Modal Wrapper](/pages/javatmp-bootstrap-modal-wrapper "JavaTMP Bootstrap Modal Wrapper")
     *   [Extended Bootstrap Colors And Buttons](/pages/extended-bootstrap-colors-and-buttons "Extended Bootstrap Colors And Buttons")
-    *   [Using jQueryUI Framework](/pages/using-jqueryui-framework-with-bootstrap-template "Using jQueryUI Framework With Bootstrap Template")
 *   **Development And Deployment**
     *   [Setting Up Development Environment](/pages/setting-up-development-environment)
     *   [Manage Front-end dependencies Using Node.js And Gulp](/pages/manage-front-end-dependencies-using-node-js-and-gulp "Manage Front-end Dependencies Using Node.js And Gulp tools")
@@ -45,6 +44,7 @@
     *   [Chart types and data visualization](/pages/chart-types-and-data-visualization)
     *   [Analytical Oracle SQL Functions](/pages/analytical-oracle-sql-functions)
     *   [Convert CSS file to SASS' SCSS syntax](/pages/convert-css-to-scss-syntax)
+    *   [Using jQueryUI Framework](/pages/using-jqueryui-framework-with-bootstrap-template "Using jQueryUI Framework With Bootstrap Template")
 *   [Versions Change Log](/pages/java-bootstrap-template-versions-change-log)
     *   [Version 0.0.5 (Current Development Version)](/pages/java-bootstrap-template-version-0-0-5)
     *   [Version 0.0.4 (published on 19th of September, 2018)](/pages/java-bootstrap-template-version-0-0-4)
