@@ -25,8 +25,6 @@
     *   [Anatomy Of Bootstrap And JavaTMP SASS Theme Styling](/pages/anatomy-of-bootstrap-and-javatmp-sass-theme-styling "Anatomy Of Bootstrap And JavaTMP SASS Theme Styling")
     *   [Custom JavaTMP Bootstrap Themes And Skins](/pages/custom-javatmp-bootstrap-themes-and-skins "Custom JavaTMP Bootstrap Themes And Skins")
     *   [Front-end Resources Customization](/pages/javatmp-frontend-resources-customization "JavaTMP Front-end Resources Customization")
-*   **Custom Elements And Components**
-    *   [Extended Bootstrap Colors And Buttons](/pages/extended-bootstrap-colors-and-buttons "Extended Bootstrap Colors And Buttons")
 *   **Development And Deployment**
     *   [Setting Up Development Environment](/pages/setting-up-development-environment)
     *   [Manage Front-end dependencies Using Node.js And Gulp](/pages/manage-front-end-dependencies-using-node-js-and-gulp "Manage Front-end Dependencies Using Node.js And Gulp tools")
