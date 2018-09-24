@@ -26,7 +26,6 @@
     *   [Custom JavaTMP Bootstrap Themes And Skins](/pages/custom-javatmp-bootstrap-themes-and-skins "Custom JavaTMP Bootstrap Themes And Skins")
     *   [Front-end Resources Customization](/pages/javatmp-frontend-resources-customization "JavaTMP Front-end Resources Customization")
 *   **Custom Elements And Components**
-    *   [Extend Bootstrap Card Options](/pages/extended-bootstrap-card-options "JavaTMP Extends Bootstrap Card Tool Options")
     *   [Bootstrap Modal Wrapper](/pages/javatmp-bootstrap-modal-wrapper "JavaTMP Bootstrap Modal Wrapper")
     *   [Extended Bootstrap Colors And Buttons](/pages/extended-bootstrap-colors-and-buttons "Extended Bootstrap Colors And Buttons")
 *   **Development And Deployment**
