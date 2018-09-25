@@ -4,19 +4,13 @@ title: Setting Up Development Environment
 # Setting Up Development Environment
 Doing things manually is fine once but if you can automate things it’s better. With little tools you can speed up development and reduce recursive mundane tasks such as starting a project or setting up boilerplate code. We will show you how to set up and test a development environment on Windows. don't forget to take a backup of any folder or file before changing anythings.
 
-Install Git
------------
-
+### Install Git
 Some Node package need Git SCM to work so first install Git if you don’t have it. Go to their official site and [download a git client version](https://git-scm.com/downloads), Or choose whatever fork you'd like like [Git for Windows](https://git-for-windows.github.io/).
 
-Install Node.js
----------------
-
+### Install Node.js
 Gulp depend on [Node.js](https://nodejs.org/en/) and NPM so you need to get Node.js. Just download the installation package from Node.js site and click through it.
 
-create a package.json file
---------------------------
-
+#### create a package.json file
 To create `package.json` file, you can run `npm init` command and go through its options or manually create the file based on [node official site package.json rules](https://docs.npmjs.com/files/package.json).
 
 Using `npm init` command to create the `package.json` will prompt you for values for the `package.json` fields. The two required fields are name and version. You'll also want to have a value for main. You can use the default, index.js.
@@ -39,9 +33,7 @@ Here's a simple `package.json`:
 ```
 Please go to our `package.json` file in the JavaTMP root directory to get more information about our dependencies and tools.
 
-Install Gulp
-------------
-
+### Install Gulp
 To automate and enhance your development you can use Gulp to automate and run a predefine tasks. We Installed Gulp globally with npm:
 ```
 npm install --global gulp
@@ -50,9 +42,8 @@ Install Gulp also in your project devDependencies (`package.json`'s devDependenc
 ```
 npm install --save-dev gulp
 ```
-Create `gulpfile.js`
---------------------
 
+#### Create `gulpfile.js`
 we need to create the `gulpfile.js` which defines our tasks we want to perform. Then, add the following to your gulpfile.js:
 ```
 var gulp = require('gulp');
