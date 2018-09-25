@@ -23,7 +23,7 @@ Here's a simple `package.json`:
   "description": "your application description",
   "main": "index.js",
   "scripts": {
-    "test": "echo \\"Error: no test specified\\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 1",
   },
   "author": "You",
   "license": "",
@@ -48,12 +48,12 @@ we need to create the `gulpfile.js` which defines our tasks we want to perform. 
 ```
 var gulp = require('gulp');
 
-gulp.task('Generic\_Task', function () {
-    process.stdout.write("\*\*\* Start Generic Task @ \[" + new Date() + "\] \*\*\*")
+gulp.task('Generic_Task', function () {
+    process.stdout.write("*** Start Generic Task @ [" + new Date() + "] ***")
 });
 
-gulp.task('default', \['Generic\_Task'\], function () {
-    process.stdout.write("\*\*\* Finished @ \[" + new Date() + "\] \*\*\*")
+gulp.task('default', ['Generic_Task'], function () {
+    process.stdout.write("*** Finished @ [" + new Date() + "] ***")
 });
 ```
 The default task runs nothing but print the date and time. You can run this `gulpfile.js` through the following `gulp` command:
