@@ -1,4 +1,5 @@
 -- Insert themes:
+INSERT INTO `theme` (`themeId`, `themeName`) VALUES ('ace','Ace');
 INSERT INTO `theme` (`themeId`, `themeName`) VALUES ('cerulean','Cerulean');
 INSERT INTO `theme` (`themeId`, `themeName`) VALUES ('cosmo','Cosmo');
 INSERT INTO `theme` (`themeId`, `themeName`) VALUES ('cyborg','Cyborg');

@@ -8,6 +8,11 @@
                 <img class="img-thumbnail" src="assets/img/themes/Default.png" alt=""/>
             </a>
         </div>
+        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
+            <a class="applyTheme" themeName="ace"  href="javascript:void(0);">
+                <img class="img-thumbnail" src="assets/img/themes/Ace.png" alt=""/>
+            </a>
+        </div>
     </div>
     <style type="text/css">
     </style>
@@ -15,8 +20,6 @@
         jQuery(function ($) {
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
-
-
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
                 $(".applyTheme").on("click", function () {
