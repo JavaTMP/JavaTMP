@@ -54,10 +54,7 @@ $theme-colors: map-merge(
 $theme-colors
 );
 
-/*$enable-rounded:            false !default;*/
-
-
-$body-bg:                   #E4E6E9 !default;
+$body-bg:                   #ecf0f5 !default;
 $body-color:                #393939 !default;
 
 $grid-gutter-width:           20px !default;
@@ -81,33 +78,43 @@ $custom-select-padding-x:           .5rem !default;
 
 $navbar-toggler-padding-x: .5rem !default;
 
-$card-spacer-y:                     .6rem !default;
-
-$card-cap-bg:     #F2F2F2!default;
-
-$dropdown-item-padding-x:           1.2rem !default;
-$nav-link-padding-x:                .8rem !default;
+$card-spacer-y: .6rem !default;
+$card-cap-bg: $light!default;
+$dropdown-item-padding-x: 1.2rem !default;
+$nav-link-padding-x: .8rem !default;
 // --------------------------------
 
-// 2. Override JavaTMP variables:
-$javatmp-secondary-bg: #F2F2F2!default;
+// Include Required parts of Bootstrap
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
 
-$javatmp-sidebar-border-color: #E5E5E5!default;
+// 2. Override JavaTMP variables:
+$javatmp-secondary-bg: $light!default;
+
+$javatmp-navbar-bg: $danger!default;
+$javatmp-navbar-menu-link-hover-bg: darken($javatmp-navbar-bg, 7.5%)!default;;
+$javatmp-navbar-menu-link-active-bg: darken($javatmp-navbar-bg, 12.5%)!default;;
+$javatmp-navbar-brand-color: color-yiq($javatmp-navbar-bg)!default;;
+$javatmp-navbar-toggler-color: color-yiq($javatmp-navbar-bg)!default;;
+$javatmp-navbar-toggler-border-color: color-yiq($javatmp-navbar-bg)!default;;
+$javatmp-navbar-menu-link-color: color-yiq($javatmp-navbar-bg)!default;;
+$javatmp-navbar-menu-link-hover-color: color-yiq($javatmp-navbar-bg)!default;;
+$javatmp-navbar-menu-link-active-color: color-yiq($javatmp-navbar-bg)!default;;
+
+$javatmp-sidebar-bg: #2f2f2f!default;
+$javatmp-sidebar-link-color: color-yiq(#2f2f2f)!default;;
+$javatmp-sidebar-border-color: #2f2f2f!default;
+
 $javatmp-sidebar-link-color: $body-color!default;
 
 
 // 3. Override Plugins variables:
-
-
-// First, Include Required parts of Bootstrap
-@import "../../../../../node_modules/bootstrap/scss/functions";
-@import "../../../../../node_modules/bootstrap/scss/variables";
-@import "../../../../../node_modules/bootstrap/scss/mixins";
 
 @import "javatmp-default.scss";
 
 // Override any Generated CSS classes and styles.
 
 .main-breadcrumb-bar {
-    box-shadow: $box-shadow-sm;
+    box-shadow: $box-shadow;
 }

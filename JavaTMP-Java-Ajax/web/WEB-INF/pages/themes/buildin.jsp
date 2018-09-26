@@ -14,6 +14,11 @@
                 <img class="img-thumbnail" src="assets/img/themes/Ace.png" alt=""/>
             </a>
         </div>
+        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
+            <a class="applyTheme" themeName="schooly"  href="javascript:void(0);">
+                <img class="img-thumbnail" src="assets/img/themes/Schooly.png" alt=""/>
+            </a>
+        </div>
     </div>
     <style type="text/css">
     </style>

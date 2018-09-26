@@ -1,10 +1,11 @@
 -- Insert themes:
+INSERT INTO `theme` (`themeId`, `themeName`) VALUES ('default','Default');
 INSERT INTO `theme` (`themeId`, `themeName`) VALUES ('ace','Ace');
+INSERT INTO `theme` (`themeId`, `themeName`) VALUES ('schooly','Schooly');
 INSERT INTO `theme` (`themeId`, `themeName`) VALUES ('cerulean','Cerulean');
 INSERT INTO `theme` (`themeId`, `themeName`) VALUES ('cosmo','Cosmo');
 INSERT INTO `theme` (`themeId`, `themeName`) VALUES ('cyborg','Cyborg');
 INSERT INTO `theme` (`themeId`, `themeName`) VALUES ('darkly','Darkly');
-INSERT INTO `theme` (`themeId`, `themeName`) VALUES ('default','Default');
 INSERT INTO `theme` (`themeId`, `themeName`) VALUES ('flatly','Flatly');
 INSERT INTO `theme` (`themeId`, `themeName`) VALUES ('journal','Journal');
 INSERT INTO `theme` (`themeId`, `themeName`) VALUES ('litera','Litera');
