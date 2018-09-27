@@ -2,6 +2,8 @@
 INSERT INTO `theme` (`themeId`, `themeName`) VALUES ('default','Default');
 INSERT INTO `theme` (`themeId`, `themeName`) VALUES ('ace','Ace');
 INSERT INTO `theme` (`themeId`, `themeName`) VALUES ('schooly','Schooly');
+INSERT INTO `theme` (`themeId`, `themeName`) VALUES ('greenish','Greenish');
+INSERT INTO `theme` (`themeId`, `themeName`) VALUES ('purplish','Purplish');
 INSERT INTO `theme` (`themeId`, `themeName`) VALUES ('cerulean','Cerulean');
 INSERT INTO `theme` (`themeId`, `themeName`) VALUES ('cosmo','Cosmo');
 INSERT INTO `theme` (`themeId`, `themeName`) VALUES ('cyborg','Cyborg');

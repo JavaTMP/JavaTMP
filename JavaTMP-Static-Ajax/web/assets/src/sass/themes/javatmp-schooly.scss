@@ -1,15 +1,15 @@
 
 // 1. overriding global Bootstrap variables:
 $white:    #fff !default;
-$gray-100: #CFDEE7 !default;
-$gray-200: #CAD9E2 !default;
-$gray-300: #C5D4DD !default;
-$gray-400: #BFCED7 !default;
-$gray-500: #BAC9D2 !default;
-$gray-600: #ABBAC3 !default;
-$gray-700: #92A1AA !default;
-$gray-800: #788790 !default;
-$gray-900: #5F6E77 !default;
+$gray-100: #F8FAFD !default;
+$gray-200: #EBEDF0 !default;
+$gray-300: #DFE1E4 !default;
+$gray-400: #D2D4D7 !default;
+$gray-500: #C5C7CA !default;
+$gray-600: #B8BABD !default;
+$gray-700: #ACAEB1 !default;
+$gray-800: #555555 !default;
+$gray-900: #484848 !default;
 $black:    #000 !default;
 
 $grays: () !default;
@@ -65,12 +65,16 @@ $border-radius-sm:            0 !default;
 
 $transition-base:             all .3s ease-in-out !default;
 
-$table-cell-padding:          .5rem !default;
+$table-cell-padding:          .3rem !default;
 $input-btn-padding-x:         .5rem !default;
 
 $input-btn-padding-x-sm: .4rem !default;
 
 $input-btn-padding-x-lg:      .8rem !default;
+
+$input-color:                           $gray-800 !default;
+$input-border-color:                    $gray-500 !default;
+$input-group-addon-bg: $gray-100 !default;
 
 $form-group-margin-bottom:              .8rem !default;
 
@@ -79,9 +83,11 @@ $custom-select-padding-x:           .5rem !default;
 $navbar-toggler-padding-x: .5rem !default;
 
 $card-spacer-y: .6rem !default;
-$card-cap-bg: $light!default;
+/*$card-cap-bg: $light!default;*/
 $dropdown-item-padding-x: 1.2rem !default;
 $nav-link-padding-x: .8rem !default;
+
+$list-group-action-color: $gray-900 !default;
 // --------------------------------
 
 // Include Required parts of Bootstrap
@@ -105,9 +111,6 @@ $javatmp-navbar-menu-link-active-color: color-yiq($javatmp-navbar-bg)!default;;
 $javatmp-sidebar-bg: #2f2f2f!default;
 $javatmp-sidebar-link-color: color-yiq(#2f2f2f)!default;;
 $javatmp-sidebar-border-color: #2f2f2f!default;
-
-$javatmp-sidebar-link-color: $body-color!default;
-
 
 // 3. Override Plugins variables:
 

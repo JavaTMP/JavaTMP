@@ -29,14 +29,14 @@ $grays: map-merge(
 $grays
 );
 
-$primary:       #428BCA !default;
+$primary:       #68a65e !default;
 $secondary:     #ABBAC3 !default;
-$success:       #87B87F !default;
+$success:       #428BCA !default;
 $info:          #6FB3E0 !default;
 $warning:       #FFB752 !default;
 $danger:        #D15B47 !default;
 $light:         #E7E7E7 !default;
-$dark:          #555555 !default;
+$dark:          $gray-800 !default;
 
 $theme-colors: () !default;
 // stylelint-disable-next-line scss/dollar-variable-default
@@ -54,6 +54,9 @@ $theme-colors: map-merge(
 $theme-colors
 );
 
+/*$enable-rounded:            false !default;*/
+
+
 $body-bg:                   #E4E6E9 !default;
 $body-color:                #393939 !default;
 
@@ -68,51 +71,47 @@ $transition-base:             all .3s ease-in-out !default;
 $table-cell-padding:          .3rem !default;
 $input-btn-padding-x:         .5rem !default;
 
-$input-btn-padding-x-sm: .4rem !default;
+$input-btn-padding-x-sm: .25rem !default;
 
-$input-btn-padding-x-lg:      .8rem !default;
+$input-btn-padding-x-lg:      .65rem !default;
 
 $input-color:                           $gray-800 !default;
 $input-border-color:                    $gray-500 !default;
 $input-group-addon-bg: $gray-100 !default;
 
-$form-group-margin-bottom:              .8rem !default;
+$form-group-margin-bottom:              .7rem !default;
 
-$custom-select-padding-x:           .5rem !default;
+$custom-select-padding-x:           .3rem !default;
 
-$navbar-toggler-padding-x: .5rem !default;
+$navbar-toggler-padding-x: .3rem !default;
 
-$card-spacer-y: .6rem !default;
-/*$card-cap-bg: $light!default;*/
-$dropdown-item-padding-x: 1.2rem !default;
-$nav-link-padding-x: .8rem !default;
+$card-spacer-y:                     .6rem !default;
+
+/*$card-cap-bg:     #F2F2F2!default;*/
+
+$dropdown-item-padding-x:           1rem !default;
+$nav-link-padding-x:                .7rem !default;
 
 $list-group-action-color: $gray-900 !default;
 // --------------------------------
 
-// Include Required parts of Bootstrap
+
+// First, Include Required parts of Bootstrap
 @import "../../../../../node_modules/bootstrap/scss/functions";
 @import "../../../../../node_modules/bootstrap/scss/variables";
 @import "../../../../../node_modules/bootstrap/scss/mixins";
 
+
 // 2. Override JavaTMP variables:
-$javatmp-secondary-bg: $light!default;
+$javatmp-secondary-bg: #F2F2F2!default;
 
-$javatmp-navbar-bg: $danger!default;
-$javatmp-navbar-menu-link-hover-bg: darken($javatmp-navbar-bg, 7.5%)!default;;
-$javatmp-navbar-menu-link-active-bg: darken($javatmp-navbar-bg, 12.5%)!default;;
-$javatmp-navbar-brand-color: color-yiq($javatmp-navbar-bg)!default;;
-$javatmp-navbar-toggler-color: color-yiq($javatmp-navbar-bg)!default;;
-$javatmp-navbar-toggler-border-color: color-yiq($javatmp-navbar-bg)!default;;
-$javatmp-navbar-menu-link-color: color-yiq($javatmp-navbar-bg)!default;;
-$javatmp-navbar-menu-link-hover-color: color-yiq($javatmp-navbar-bg)!default;;
-$javatmp-navbar-menu-link-active-color: color-yiq($javatmp-navbar-bg)!default;;
-
-$javatmp-sidebar-bg: #2f2f2f!default;
-$javatmp-sidebar-link-color: color-yiq(#2f2f2f)!default;;
-$javatmp-sidebar-border-color: #2f2f2f!default;
-
+$javatmp-sidebar-bg: $dark!default;
+$javatmp-sidebar-link-color: color-yiq($javatmp-sidebar-bg)!default;
+$javatmp-sidebar-border-color: lighten($javatmp-sidebar-bg, 10%)!default;
+$metismenu-link-border-bottom-color: $javatmp-sidebar-border-color;
+$metismenu-submenu-vertical-border-color: $javatmp-sidebar-border-color;
 // 3. Override Plugins variables:
+
 
 @import "javatmp-default.scss";
 
