@@ -8,7 +8,6 @@
     *   [NPM's package.json file](/pages/javatmp-npms-package-json-file "JavaTMP Main Node.js NPM package.json file")
     *   [Gulp's gulpfile.js build file](/pages/gulp-build-file)
     *   [Frameworks And Plugins Files](/pages/javatmp-frontend-frameworks-and-plugins-files "JavaTMP Front-end Frameworks and Plugins Files")
-    *   [CSS/SASS Template Files](/pages/javatmp-css-sass-template-files "JavaTMP SASS/CSS Template Files")
     *   [HTML Files](/pages/javatmp-html-files "JavaTMP HTML Files")
 *   **Template Layout**
     *   [Default JavaTMP Template Layout](/pages/default-javatmp-template-layout "Default JavaTMP Template Layout")
