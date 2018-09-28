@@ -1,7 +1,7 @@
 ---
-title: JavaTMP CSS/SASS Template Files
+title: JavaTMP Javascript Files
 ---
-# JavaTMP CSS/SASS Template Files
+# JavaTMP Javascript Files
 The main JavaTMP Javascript files are located in the `./web/assets/dist/js`
 and generated from the gulp's task 'generate-dist` from these locations:
 - From `./web/assets/src/js-src` after compile and minificate to `javatmp.min.js`.
