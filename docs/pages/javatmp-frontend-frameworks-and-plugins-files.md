@@ -30,20 +30,7 @@ And they compile and merge with bootstrap and JavaTMP styling and moved to `./we
 the following page describes the front-end customization for some of the plugins:
 [JavaTMP Resources Customization](/pages/javatmp-frontend-resources-customization).
 
-## JavaTMP Embedded CSS/JS Code in HTML Pages
-For simplicity and complete separation of concerns, we wrote each page with its `CSS/JS` code to run it properly.
-So whenever you want to see the implementation or how to use some functionality or plugins, go to corresponding page
-in `./web/pages` and see the `HTML` page with its embedded `CSS/JS` codes needed to run that part of the plugin.
-
-Embedding Front-end resources help us isolate main or mandatory resources from other ones and escaping the irrelevant features quickly.
-
-Normally, Embedding `CSS/JS` code in `HTML` pages increase learning curve,
-but it does not make the project ready for production quickly.
-
-In this page we are going to discuss the mandatory or global front-end resources with its initialization
-and secondary or demo feature pages only.
-
-### Global And Mandatory Front-end Resources
+## Global And Mandatory Front-end Resources
 In `index.html` page, we defined and initialized the global resources. the following list of front-end resources
 are used when initializing page parts through calling of `index.init` method:
 *   `NProgress`. We use NProgress library to provide a red progress bar at top of the browser page for all fetching activities.
@@ -62,6 +49,19 @@ are used when initializing page parts through calling of `index.init` method:
 *   `bootstrap-actionable`. A small Javascript code that help implement click event actions for a and button tags by declarative way and provide functionalities to load AJAX content in Bootstrap Modal Wrapper instance.
 *   `bootstrap-card-extender`. Extending bootstrap card by adding option buttons that help make Bootstrap Card more responsive and interactive
 *   `bootstrap-alert-wrapper`. Bootstrap alert wrapper factory for creating dynamic alert instances.
+
+## JavaTMP Embedded CSS/JS Code in HTML Pages
+For simplicity and complete separation of concerns, we wrote each page with its `CSS/JS` code to run it properly.
+So whenever you want to see the implementation or how to use some functionality or plugins, go to corresponding page
+in `./web/pages` and see the `HTML` page with its embedded `CSS/JS` codes needed to run that part of the plugin.
+
+Embedding Front-end resources help us isolate main or mandatory resources from other ones and escaping the irrelevant features quickly.
+
+Normally, Embedding `CSS/JS` code in `HTML` pages increase learning curve,
+but it does not make the project ready for production quickly.
+
+In this page we are going to discuss the mandatory or global front-end resources with its initialization
+and secondary or demo feature pages only.
 
 ### Embedded CSS/JS Code in `index.html`
 For separation of concerns and simplicity we moved any `CSS/JS` codes that should be in `index.html` to file `index.js`
