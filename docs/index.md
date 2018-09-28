@@ -9,9 +9,7 @@
     *   [Gulp's gulpfile.js build file](/pages/gulp-build-file)
     *   [Frameworks And Plugins Files](/pages/javatmp-frontend-frameworks-and-plugins-files "JavaTMP Front-end Frameworks and Plugins Files")
     *   [CSS/SASS Template Files](/pages/javatmp-css-sass-template-files "JavaTMP SASS/CSS Template Files")
-    *   [Javascript Files](/pages/javatmp-javascript-files "JavaTMP Javascript Files")
     *   [HTML Files](/pages/javatmp-html-files "JavaTMP HTML Files")
-    *   [Bootstrap RTL](/pages/bootstrap-rtl-support-modifications "JavaTMP Bootstrap RTL support and modifications")
 *   **Template Layout**
     *   [Default JavaTMP Template Layout](/pages/default-javatmp-template-layout "Default JavaTMP Template Layout")
 *   **Templates Themes And Skins**
@@ -27,6 +25,7 @@
     *   [Dynamic Java Web Application features](/pages/dynamic-java-bootstrap-web-application-features "Main Dynamic Features of Java Bootstrap Web Application")
     *   [Uploading files from front end to Java Web Application](/pages/uploading-files-from-front-end-to-java-web-application "Uploading files from front end web browsers to Java Web Applications")
 *   **References**
+    *   [Bootstrap RTL](/pages/bootstrap-rtl-support-modifications "JavaTMP Bootstrap RTL support and modifications")
     *   [JavaTMP Front-end Plugins And Frameworks](/pages/javatmp-front-end-plugins-and-frameworks)
     *   [Development and Environment tools](/pages/development-and-environment-tools)
     *   [Steps to add new Javascript plugin](/pages/steps-to-add-new-javascript-plugin)
