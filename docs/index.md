@@ -14,7 +14,6 @@
     *   [Bootstrap RTL](/pages/bootstrap-rtl-support-modifications "JavaTMP Bootstrap RTL support and modifications")
 *   **Template Layout**
     *   [Default JavaTMP Template Layout](/pages/default-javatmp-template-layout "Default JavaTMP Template Layout")
-    *   [AJAX Page Lifecycle](/pages/javatmp-ajax-page-lifecycle "JavaTMP AJAX Page Lifecycle")
 *   **Templates Themes And Skins**
     *   [Preparing Template for Bootstrap customization](/pages/preparing-template-for-bootstrap-customization "preparing template for bootstrap SASS customization")
     *   [Anatomy Of Bootstrap And JavaTMP SASS Theme Styling](/pages/anatomy-of-bootstrap-and-javatmp-sass-theme-styling "Anatomy Of Bootstrap And JavaTMP SASS Theme Styling")
