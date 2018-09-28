@@ -1,7 +1,160 @@
 ---
 title: JavaTMP Front-end Frameworks And Plugins Files
 ---
-# JavaTMP Front-end Frameworks And Plugins Files
+## JavaTMP NPM's package.json file
+The `package.json` file is normally located at the root directory of a Node.js project. This file holds various metadata relevant
+to the project. This file is used to give information to npm that allows it to handle the project's dependencies.
+It can also contain other metadata such as a project description, the version of the project in a particular distribution,
+license information, even configuration data - all of which can be vital to the end users of the project. 
+
+A `package.json` file:
+*   lists the packages that your project depends on through dependencies, devDependencies, and napa sections.
+*   allows you to specify the versions of a package that your project can use using semantic versioning rules.
+*   makes your build reproducible, and therefore much easier to share with other developers.
+
+Please Refer to [Setting Up Development Environment](/pages/setting-up-development-environment) Page to read more about installing
+`Node` and generating `package.json` file.
+
+Please review `./package.json` file for more information about gulp plugins and front-end plugins and frameworks used in the project.
+
+Please Refer to [Development tools](/pages/development-and-environment-tools) Page to read more about `Node.js` plugins
+used in `package.json`.
+
+The JavaTMP's main NPM file ./package.json is located in root directory of the template and it contains the following scripts:
+
+### `npm install`
+Invoking `npm install` command will download all modules found in `devDependencies` and `dependencies` and save theme
+locally in node_module folder, then it will run `napa` plugin which will fetch all github repositories found
+in napa section of package.json file and save them in local `node_moudle` folder.
+
+### `npm update`
+Invoking `npm update` command will update all modules found in `devDependencies` and `dependencies`, then it will run `napa` plugin
+which will fetch all github repositories found in napa section of package.json file and save them in local `node_moudle` folder.
+
+### `npm run napa`
+Invoking `npm run napa` command will ONLY run `napa` plugin which will fetch all github repositories found in napa section of
+package.json file and save them in local `node_moudle` folder.
+
+## Gulp Build file
+To automate and enhance our development process we use Gulp tool to automate and run a predefine tasks, like plugins update,
+sass compiling. We Installed Gulp globally with npm.
+
+Please Refer to [Setting Up Development Environment](/pages/setting-up-development-environment) Page to read more about
+installing `gulp` and generating `gulpfile.js`.
+
+The JavaTMP's main gulp file `./gulpfile.js` is located in root directory of the template and it contains the following tasks:
+
+Please review `./gulpfile.js` and `./package.json` files for more information about gulp plugins and tasks used in the project.
+
+Please Refer to [Development tools](/pages/development-and-environment-tools) Page to read more about `Gulp` plugins used in
+`gulpfile.js`.
+
+### `delete-components` and `copy-components`
+We manage front-end dependencies like jQuery, Bootstrap, using Node.js NPM and Gulp tools.
+
+So invoking `gulp delete-components` command will remove folder `./web/components` with all its sub-folders and files. 
+
+And invoking `gulp copy-components` command will copy all needed plugins and frameworks
+from `./node_modules` folder to `./web/components` folder based in configuration data found in `gulpfile.js` file. 
+
+We created a separate page to describe in details the
+[process of managing front-end dependencies using Node NPM and gulp](/pages/manage-front-end-dependencies-using-node-js-and-gulp).
+kindly read it for more information.
+
+### run-local-web-server
+We use `run-local-web-server` task to run a local web server for static JavaTMP version on port 8888. You can run
+this gulp's task using the following command line:
+```
+gulp run-local-web-server
+```
+
+### delete-css
+We use `delete-css` task to delete css folder with all its files before we regenerate them from compiling SASS files.
+
+This task is not intended to run manually. it is called using one of the below tasks. You can run the gulp's task using
+the following command line:
+```
+gulp delete-css
+```
+
+### generate-dist
+We use this task to generate the main front end resources JS/CSS files and folders.
+You can run the gulp's task using the following command line:
+```
+gulp sass
+```
+
+Note that if you want to generate normal css files instead of minify ones, then you can update the above script
+and remove `cleanCSS` pipe step.
+
+### delete-js
+We use `delete-js` task to delete js folder with all its Javascript files before we regenerate them from
+compiling Javascript files reside in `./web/assets/src/js-src/`. This task is not intended to run manually and
+it is called using one of the below `generate-dist` task. You could run the gulp's task using the following command line:
+```
+gulp delete-js
+```
+
+### watch-sass-and-js
+We use `watch-sass-and-js` task to watch the source scss and js files for any changes and run corresponding tasks accordingly.
+You can run the gulp's task using the following command line:
+```
+gulp watch-sass-and-js
+```
+
+### default
+We use `default` task to run `generate-dist` through out our development.
+You can run the default gulp's task using the following command line:
+```
+gulp
+```
+
+## JavaTMP HTML Files
+The HTML files for template consist of main html files like `./web/index.html`, `./web/index-rtl.html` files
+and all HTML files located in `./web/pages` folder which most of them are AJAX HTML snippets which called
+from `./web/index.html` file sidebar section and `javatmp.js` Javascript file using jquery AJAX. 
+The following is a high level folder structures of JavaTMP HTML `./web` regarding HTML files,
+kindly see our [online demo](http://demo.javatmp.com/JavaTMP-Static-Ajax/) sidebar links for complete list of folders and links:
+```
+./web
+|---index.html
+|---index-rtl.html
++---assets
++---pages
+    |---home.html
+    +---bootstrap
+    +---chart
+    +---custom-components
+    +---custom-pages
+        |---404-page.html
+        +---empty-pages
+            |---blank-page.html
+            |---card-page.html
+            |---empty-page.html
+            |---event-page.html
+        +---inbox
+        +---login-pages
+    +---form
+    +---gallery
+    +---plugins
+    +---table
+    +---wizard
+```
+There are three types of HTML files exist in above folder.
+
+1.  `index.html` which consists of the main html file used for initializing Javascript
+    and providing main layout structure of the template like navbar, sidebar and use AJAX to load other html snippet files.
+2.  HTML snippet files which consist of HTML code used as an AJAX content to be injected in the index.html file.
+    like most of other pages, for example `./web/pages/custom-pages/empty-pages/card-page.html` page.
+    Kindly refer to `./web/pages/custom-pages/empty-pages/empty-page.html` page to see the minimum required html code needed
+    to create an AJAx snippet content. the following link is an
+    [online demo of empty-page.html](http://demo.javatmp.com/JavaTMP-Static-Ajax/#pages/custom-pages/empty-pages/empty-page.html).
+3.  Separate HTML pages consist of complete code to show specific scenarios or features like `404-page.html`
+    or `default-login-page.html`. they open in new browser tab and sometimes they depends on external front-end resources.
+
+Please see our [online demo](http://demo.javatmp.com/JavaTMP-Static-Ajax/) for those types of pages.
+
+## JavaTMP Front-end Frameworks And Plugins Files
 The JavaTMP Front-end frameworks and plugins consist of the libraries used in the front-end part of the template like jQuery,
 Bootstrap and it is first stored separately in `./web/components` folder with all its Javascript, CSS, and images files.
 Before it is moved and merged to appropriate files in `./web/assets/dist` using gulp's task `generate-dist`.
@@ -12,7 +165,7 @@ which are stored in `./web/assets/src/` folder and moved and merged to `./web/as
 
 We manage our front-end dependencies using Node NPM and gulp so the folder `./web/components`
 are dynamically generated when we run the gulp's task `copy-components`.
-Read more about our [Gulp build file](/pages/gulp-build-file) and
+Read more about our 
 [managing front-end dependencies using Node.js And Gulp](/pages/manage-front-end-dependencies-using-node-js-and-gulp).
 
 Please see the complete list of front-end jquery and bootstrap libraries we used in our template in the following page:
