@@ -12,12 +12,8 @@
     *   [Javascript Files](/pages/javatmp-javascript-files "JavaTMP Javascript Files")
     *   [HTML Files](/pages/javatmp-html-files "JavaTMP HTML Files")
     *   [Bootstrap RTL](/pages/bootstrap-rtl-support-modifications "JavaTMP Bootstrap RTL support and modifications")
-*   **Template Structure**
-    *   [Template Layout](/pages/javatmp-template-layout "JavaTMP Template Layout")
-    *   [Navbar Layout](/pages/javatmp-navbar-layout "JavaTMP Navbar Layout")
-    *   [Sidebar Layout](/pages/javatmp-sidebar-layout "JavaTMP Sidebar Layout")
-    *   [Main Content Layout](/pages/javatmp-main-content-layout "JavaTMP Main Cotent Layout")
-    *   [Footer Layout](/pages/javatmp-footer-layout "JavaTMP Footer Layout")
+*   **Template Layout**
+    *   [Default JavaTMP Template Layout](/pages/default-javatmp-template-layout "Default JavaTMP Template Layout")
     *   [Embedded CSS/JS](/pages/javatmp-embedded-css-js-code-in-html-pages "JavaTMP Embedded CSS/JS Code in HTML Pages")
     *   [AJAX Page Lifecycle](/pages/javatmp-ajax-page-lifecycle "JavaTMP AJAX Page Lifecycle")
 *   **Templates Themes And Skins**
