@@ -612,7 +612,7 @@ The main important JSP page in our dynamic Java Bootstrap template is `index.jsp
 *   We minimize the use of Java features like EL mixed with Javascript whenever possible other than in `index.jsp` to pass them to `javatmp.init method`
 *   `sessionScope.user` object was injected in the session by `com.javatmp.web.filter.ServiceFactoryInjector` filter.
 *   `labels` object is an instance of `ResourceBundle` which was injected into session by `com.javatmp.web.filter.LocalizationFilter` filter.
-*   Read more about `javatmp.init` Javascript function in the following page : [Frameworks And Plugins Files](/pages/javatmp-template-files-structure "JavaTMP Front-end Frameworks and Plugins Files").
+*   Read more about `javatmp.init` Javascript function in the following page : [High Level Template Structure](/pages/high-level-template-structure "High Level JavaTMP Template Folders And Files Structure").
 
 ## Dynamic JSP Starter Pages
 The starter Java Bootstrap default English LTR `index.jsp` page that use the above generated combined files look like the following:

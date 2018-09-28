@@ -5,7 +5,6 @@
     *   [JavaTMP-Java-Ajax Project Version](/pages/javatmp-java-ajax-project-version "Java Dynamic LTR/RTL multi-language Bootstrap Admin and Dashboard Web Application Version")
     *   [JavaTMP-User-Starter Project Version](/pages/javatmp-user-starter-project-version "Advanced Dynamic Java Bootstrap LTR/RTL multi languages User Management Web application Template")
 *   **Template Layout**
-    *   [JavaTMP Files Structure](/pages/javatmp-template-files-structure "JavaTMP Template Files Structure")
     *   [Default JavaTMP Template Layout](/pages/default-javatmp-template-layout "Default JavaTMP Template Layout")
 *   **Templates Themes And Skins**
     *   [Preparing Template for Bootstrap customization](/pages/preparing-template-for-bootstrap-customization "preparing template for bootstrap SASS customization")
