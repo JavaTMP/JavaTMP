@@ -1,6 +1,8 @@
 ---
-title: JavaTMP Front-end Frameworks And Plugins Files
+title: JavaTMP Template Files Structure
 ---
+# JavaTMP Template Files Structure
+
 ## JavaTMP NPM's package.json file
 The `package.json` file is normally located at the root directory of a Node.js project. This file holds various metadata relevant
 to the project. This file is used to give information to npm that allows it to handle the project's dependencies.
@@ -165,7 +167,7 @@ which are stored in `./web/assets/src/` folder and moved and merged to `./web/as
 
 We manage our front-end dependencies using Node NPM and gulp so the folder `./web/components`
 are dynamically generated when we run the gulp's task `copy-components`.
-Read more about our 
+Read more about our
 [managing front-end dependencies using Node.js And Gulp](/pages/manage-front-end-dependencies-using-node-js-and-gulp).
 
 Please see the complete list of front-end jquery and bootstrap libraries we used in our template in the following page:
