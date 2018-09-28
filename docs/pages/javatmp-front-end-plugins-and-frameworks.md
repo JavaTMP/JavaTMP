@@ -108,7 +108,9 @@ jQuery
 MIT
 
 ### [jQuery BlockUI](https://github.com/malsup/blockui/)
-The jQuery BlockUI Plugin lets you simulate synchronous behavior when using AJAX, without locking the browser\[1\]. When activated, it will prevent user activity with the page (or part of the page) until it is deactivated. BlockUI adds elements to the DOM to give it both the appearance and behavior of blocking user interaction.
+The jQuery BlockUI Plugin lets you simulate synchronous behavior when using AJAX, without locking the browser. When activated,
+it will prevent user activity with the page (or part of the page) until it is deactivated.
+BlockUI adds elements to the DOM to give it both the appearance and behavior of blocking user interaction.
 
 Mandatory on all versions and templates. Merged and Moved in Starter Versions. RTL supported by default
 
