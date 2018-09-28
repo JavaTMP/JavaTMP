@@ -5,7 +5,7 @@ title: JavaTMP CSS/SASS Template Files
 The main minificated CSS files for JavaTMP template are located in the `./web/assets/dist/css` folder,
 And it is automatically generated and populated during running of gulp's task `generate-dist` from:
 - Template SASS source theme files reside in `./web/assets/src/sass/themes/javatmp-*.scss` folder.
-- RTL Template SASS source theme files reisde in `./web/assets/src/sass/themes/javatmp-*.scss` folder.
+- RTL Template SASS source theme files reisde in `./web/assets/src/sass-rtl/themes/javatmp-*.scss` folder.
 - Merged plugins original CSS files reside in `src.css` array of files.
 - Merged plugins original Print CSS files reside in `src.cssForPrint` array of files.
 - Font family CSS file for each language key defined in `src.fontFamilyFiles`.
