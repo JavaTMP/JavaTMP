@@ -1,11 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Bootstrap Maxlength</h1>
-    </div>
     <div class="row">
         <div class="col-lg-12">
-            <div class="alert alert-info">
+            <div class="alert alert-info my-3">
                 <p>This plugin integrates by default with Twitter bootstrap using badges to display the maximum lenght of the field where the user is inserting text. Uses the HTML5 attribute "maxlength" to work.</p>
                 <br/>
                 <p>
@@ -15,7 +12,7 @@
             </div>
             <div class="card my-3">
                 <div class="card-header">
-                    Examples
+                    Bootstrap Maxlength
                     <div class="options float-right">
                         <a class="settings"><i class="fa fa-cog"></i></a>
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>

@@ -1,11 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Bootstrap Color Selector</h1>
-    </div>
     <div class="row">
         <div class="col-lg-12">
-            <div class="alert alert-info">
+            <div class="alert alert-info my-3">
                 <p>A colorselector for Twitter Bootstrap which lets you select a color from a predefined set of colors only.</p>
                 <p>In contrast to many other colorpickers found on Github this one is reduced to a predefined set of colors. This is why it is called "colorselector" rather than "colorpicker".</p>
                 <p>
@@ -15,7 +12,7 @@
             </div>
             <div class="card my-3">
                 <div class="card-header">
-                    Examples
+                    Bootstrap Color Selector
                     <div class="options float-right">
                         <a class="settings"><i class="fa fa-cog"></i></a>
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>

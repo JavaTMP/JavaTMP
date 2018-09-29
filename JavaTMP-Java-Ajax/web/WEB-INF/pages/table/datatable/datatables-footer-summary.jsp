@@ -1,11 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Datatables with Footer Summary</h1>
-    </div>
     <div class="row">
         <div class="col-lg-12">
-            <div class="alert alert-info">
+            <div class="alert alert-info my-3">
                 <p>Through the use of the header and footer callback manipulation functions provided by DataTables <code>(headerCallback and footerCallback)</code>, it is possible to perform some powerful and useful data manipulation functions, such as summarising data in the table.</p>
                 <br/>
                 <p>
@@ -20,7 +17,7 @@
             </div>
             <div class="card my-3" id="table-panel">
                 <div class="card-header">
-                    Examples
+                    Datatables with Footer Summary
                     <div class="options float-right">
                         <a class="settings"><i class="fa fa-cog"></i></a>
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>

@@ -1,11 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Moment.js Date/Time Plugin</h1>
-    </div>
     <div class="row">
         <div class="col">
-            <div class="alert alert-info">
+            <div class="alert alert-info my-3">
                 <p>A lightweight JavaScript date library for parsing, validating, manipulating, and formatting dates with support for timezone through Moment Timezone plugin.</p>
                 <p>
                     <a class="btn btn-info" target="_blank" href="http://momentjs.com/">Demo Page</a>

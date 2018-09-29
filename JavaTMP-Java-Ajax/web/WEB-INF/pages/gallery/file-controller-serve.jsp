@@ -1,13 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Simple Servlet for Files</h1>
-    </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="card my-3">
                 <div class="card-header">
-                    Examples
+                    Simple Servlet for Files
                     <div class="options float-right">
                         <a class="settings"><i class="fa fa-cog"></i></a>
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>

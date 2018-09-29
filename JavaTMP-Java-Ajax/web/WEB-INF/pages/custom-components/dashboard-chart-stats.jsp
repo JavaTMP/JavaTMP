@@ -1,12 +1,9 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Dashboard Chart Stats</h1>
-    </div>
-    <div class="form-row">
+    <div class="form-row mt-3">
         <div class="col-xl-3 col-lg-6 col-md-6">
-            <div class="card mb-3 bg-light" id="userStatusPieChartCard">
-                <div class="card-header">
+            <div class="card mb-3 shadow" id="userStatusPieChartCard">
+                <div class="card-header bg-white">
                     Registered Users
                     <div class="options float-right">
                         <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
@@ -22,7 +19,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">
+                <div class="card-footer bg-white">
                     <a href="javascript:;" class="d-flex">
                         View Details
                         <span class="ml-auto">
@@ -33,8 +30,8 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-md-6">
-            <div class="card mb-3 bg-light" id="todayVisitUserPieChartCard">
-                <div class="card-header">
+            <div class="card mb-3 bg-white shadow" id="todayVisitUserPieChartCard">
+                <div class="card-header bg-white">
                     Visitors Today
                     <div class="options float-right">
                         <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
@@ -50,7 +47,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">
+                <div class="card-footer bg-white">
                     <a href="javascript:;" class="d-flex">
                         View Details
                         <span class="ml-auto">
@@ -61,8 +58,8 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-md-6">
-            <div class="card mb-3 bg-light" id="pageViewActivitesPerHourChartCard">
-                <div class="card-header">
+            <div class="card mb-3 bg-white shadow" id="pageViewActivitesPerHourChartCard">
+                <div class="card-header bg-white">
                     Page Views Per Hour
                     <div class="options float-right">
                         <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
@@ -79,7 +76,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">
+                <div class="card-footer bg-white">
                     <a href="javascript:;" class="d-flex">
                         View Details
                         <span class="ml-auto">
@@ -90,8 +87,8 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-md-6">
-            <div class="card mb-3 bg-light" id="loadtimePerHourChartCard">
-                <div class="card-header">
+            <div class="card mb-3 bg-white shadow" id="loadtimePerHourChartCard">
+                <div class="card-header bg-white">
                     Load Time Per Hour
                     <div class="options float-right">
                         <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
@@ -108,7 +105,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">
+                <div class="card-footer bg-white">
                     <a href="javascript:;" class="d-flex">
                         View Details
                         <span class="ml-auto">
@@ -121,8 +118,100 @@
         </div>
     </div>
     <div class="form-row">
+        <div class="col-xl-4 col-lg-6 col-12">
+            <div class="card mb-3 text-danger border border-danger shadow">
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="col-xl-5 col-lg-5 col-12">
+                            <h3>$12,439</h3>
+                            <span class="text-muted">Total Cost</span>
+                        </div>
+                        <div class="col-xl-7 col-lg-7 col-12">
+                            <div id="TotalCostBarChartSmallSize" style="min-height: 65px"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-6 col-12">
+            <div class="card mb-3 text-warning border border-warning shadow">
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="col-xl-5 col-lg-5 col-12">
+                            <h3>$33,755</h3>
+                            <span class="text-muted">Total Sales</span>
+                        </div>
+                        <div class="col-xl-7 col-lg-7 col-12">
+                            <div id="TotalSalesLineChartSmallSize" style="min-height: 65px"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-6 col-12">
+            <div class="card mb-3 text-success border border-success shadow">
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="col-xl-5 col-lg-5 col-12">
+                            <h3>$21,316</h3>
+                            <span class="text-muted">Total Revenue</span>
+                        </div>
+                        <div class="col-xl-7 col-lg-7 col-12">
+                            <div id="TotalRevenueLineChartSmallSize" style="min-height: 65px"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-6 col-12">
+            <div class="card mb-3 text-primary border border-primary shadow">
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="col-xl-7 col-lg-7 col-12">
+                            <div id="TotalLineChartSmallSizeCombined" style="min-height: 65px"></div>
+                        </div>
+                        <div class="col-xl-5 col-lg-5 col-12 text-right">
+                            <h3>$12,439</h3>
+                            <span class="text-muted">Total Cost</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-6 col-12">
+            <div class="card mb-3 text-success border border-success shadow">
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="col-xl-7 col-lg-7 col-12">
+                            <div id="TotalSalesLineChartSmallSizeCombined" style="min-height: 65px"></div>
+                        </div>
+                        <div class="col-xl-5 col-lg-5 col-12 text-right">
+                            <h3>$33,755</h3>
+                            <span class="text-muted">Total Sales</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-6 col-12">
+            <div class="card mb-3 text-dark border border-dark shadow">
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="col-xl-7 col-lg-7 col-12">
+                            <div id="TotalRevenueBarWithLineChartSmallSizeCombined" style="min-height: 65px"></div>
+                        </div>
+                        <div class="col-xl-5 col-lg-5 col-12 text-right">
+                            <h3>$21,316</h3>
+                            <span class="text-muted">Total Revenue</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
         <div class="col-12 col-lg-4 col-md-6">
-            <div class="card mb-3 bg-light">
+            <div class="card mb-3 bg-white shadow">
                 <div class="card-header text-center">
                     <span class="text-warning">New Feedbacks</span>
                     <h3 class="display-4 counter text-warning">21,128</h3>
@@ -143,7 +232,7 @@
             </div>
         </div>
         <div class="col-12 col-lg-4 col-md-6">
-            <div class="card mb-3 bg-light">
+            <div class="card mb-3 bg-white shadow">
                 <div class="card-header text-center">
                     <span class="text-success">New Subscribers</span>
                     <h3 class="display-4 counter text-success">13,854</h3>
@@ -162,7 +251,7 @@
             </div>
         </div>
         <div class="col-12 col-lg-4 col-md-6">
-            <div class="card mb-3 bg-light">
+            <div class="card mb-3 bg-white shadow">
                 <div class="card-header text-center">
                     <span class="text-primary">Total Users</span>
                     <h3 class="display-4 counter text-primary">55,423</h3>
@@ -185,7 +274,7 @@
     </div>
     <div class="form-row">
         <div class="col-lg-4 col-md-6 col-12">
-            <div class="card mb-3 text-warning border border-warning">
+            <div class="card mb-3 text-warning border border-warning shadow">
                 <div class="card-body pb-1">
                     <div class="media d-flex">
                         <div class="media-body">
@@ -201,7 +290,7 @@
             </div>
         </div>
         <div class="col-lg-4 col-md-6 col-12">
-            <div class="card mb-3 text-success border border-success">
+            <div class="card mb-3 text-success border border-success shadow">
                 <div class="card-body pb-1">
                     <div class="media d-flex">
                         <div class="media-body">
@@ -217,7 +306,7 @@
             </div>
         </div>
         <div class="col-lg-4 col-md-6 col-12">
-            <div class="card mb-3 text-primary border border-primary">
+            <div class="card mb-3 text-primary border border-primary shadow">
                 <div class="card-body pb-1">
                     <div class="media d-flex">
                         <div class="media-body">
@@ -230,98 +319,6 @@
                     </div>
                 </div>
                 <div id="TotalRevenueLineWithAreaChart" style="width: 100%;min-height: 60px"></div>
-            </div>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="col-xl-4 col-lg-6 col-12">
-            <div class="card mb-3 text-danger border border-danger">
-                <div class="card-body">
-                    <div class="form-row">
-                        <div class="col-xl-5 col-lg-5 col-12">
-                            <h3>$12,439</h3>
-                            <span class="text-muted">Total Cost</span>
-                        </div>
-                        <div class="col-xl-7 col-lg-7 col-12">
-                            <div id="TotalCostBarChartSmallSize" style="min-height: 65px"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-4 col-lg-6 col-12">
-            <div class="card mb-3 text-warning border border-warning">
-                <div class="card-body">
-                    <div class="form-row">
-                        <div class="col-xl-5 col-lg-5 col-12">
-                            <h3>$33,755</h3>
-                            <span class="text-muted">Total Sales</span>
-                        </div>
-                        <div class="col-xl-7 col-lg-7 col-12">
-                            <div id="TotalSalesLineChartSmallSize" style="min-height: 65px"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-4 col-lg-6 col-12">
-            <div class="card mb-3 text-success border border-success">
-                <div class="card-body">
-                    <div class="form-row">
-                        <div class="col-xl-5 col-lg-5 col-12">
-                            <h3>$21,316</h3>
-                            <span class="text-muted">Total Revenue</span>
-                        </div>
-                        <div class="col-xl-7 col-lg-7 col-12">
-                            <div id="TotalRevenueLineChartSmallSize" style="min-height: 65px"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-4 col-lg-6 col-12">
-            <div class="card mb-3 text-primary border border-primary">
-                <div class="card-body">
-                    <div class="form-row">
-                        <div class="col-xl-7 col-lg-7 col-12">
-                            <div id="TotalLineChartSmallSizeCombined" style="min-height: 65px"></div>
-                        </div>
-                        <div class="col-xl-5 col-lg-5 col-12 text-right">
-                            <h3>$12,439</h3>
-                            <span class="text-muted">Total Cost</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-4 col-lg-6 col-12">
-            <div class="card mb-3 text-success border border-success">
-                <div class="card-body">
-                    <div class="form-row">
-                        <div class="col-xl-7 col-lg-7 col-12">
-                            <div id="TotalSalesLineChartSmallSizeCombined" style="min-height: 65px"></div>
-                        </div>
-                        <div class="col-xl-5 col-lg-5 col-12 text-right">
-                            <h3>$33,755</h3>
-                            <span class="text-muted">Total Sales</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-4 col-lg-6 col-12">
-            <div class="card mb-3 text-dark border border-dark">
-                <div class="card-body">
-                    <div class="form-row">
-                        <div class="col-xl-7 col-lg-7 col-12">
-                            <div id="TotalRevenueBarWithLineChartSmallSizeCombined" style="min-height: 65px"></div>
-                        </div>
-                        <div class="col-xl-5 col-lg-5 col-12 text-right">
-                            <h3>$21,316</h3>
-                            <span class="text-muted">Total Revenue</span>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

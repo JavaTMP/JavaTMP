@@ -2,9 +2,6 @@
 body {
     padding-top: $javatmp-navbar-height;
     padding-bottom: 0;
-    overflow-x: hidden;
-    /*position: relative;*/
-    /*font-size: 13px;*/
 }
 
 .main-content {
@@ -36,27 +33,6 @@ body.mouse-auto-show.sidebar-active .main-content {
     margin-left: 0px;
 }
 
-table.responsive {
-    table-layout: fixed;
-}
-table.responsive td, table.responsive > thead > tr > th {
-    white-space: normal !important;
-    word-wrap: break-word;
-}
-
-.page-header {
-    /*margin: -15px 0 15px 0;*/
-    border-bottom: 1px dotted $javatmp-main-content-page-header-border-bottom-color;
-    padding-bottom: 1px;
-    padding-top: 1px;
-    margin-bottom: 10px;
-    h1 {
-        margin: .6rem 0;
-        display: inline-block;
-        font-size: $javatmp-main-content-page-header-h1-font-size;
-        color: $javatmp-main-content-page-header-h1-color;
-    }
-}
 // v0.0.3: Added to support for theme colors
 body {
     @each $color, $value in $theme-colors {
@@ -66,13 +42,6 @@ body {
                 border-bottom-color: $value;
                 background-color: $value;
                 color: $temp-color;
-                .page-header {
-                    /*margin: -15px 0 15px 0;*/
-                    border-bottom-color: $temp-color;
-                    h1 {
-                        color: $temp-color;
-                    }
-                }
                 .card {
                     background-color: $value;
                     color: $temp-color;

@@ -125,11 +125,9 @@ span.fancytree-node {
 }
 span.fancytree-title {
     color: $fancy-font-color; // inherit doesn't work on IE
-    cursor: pointer;
-    display: inline-block; // Better alignment, when title contains <br>
     vertical-align: middle;
     min-height: $fancytree-line-height;
-    padding: 0 3px 0 3px; // Otherwise italic font will be outside right bounds
+    padding: $fancytree-padding-y $fancytree-padding-x; // Otherwise italic font will be outside right bounds
     margin: $fancy-title-ofs-top 0 0 $fancytree-icon-spacing;
     border: $fancy-node-border-width solid transparent;  // avoid jumping, when a border is added on hover
     @include border-radius($fancy-node-border-radius);
@@ -147,7 +145,7 @@ span.fancytree-childcounter {
     background: #337ab7;  // bootstrap blue
     border: 1px solid gray;
     border-radius: 10px;
-    padding: 2px;
+    padding: 0;
     text-align: center;
 }
 
@@ -159,21 +157,21 @@ div.fancytree-drag-helper {
         color: #fff;
         background: #337ab7;  // bootstrap blue
         border: 1px solid gray;
-        min-width: 10px;
+        min-width: 1em;
         // min-height: 16px;
         height: 10px;
         line-height: 1;
         vertical-align: baseline;
         border-radius: 10px;
-        padding: 2px;
+        padding: 0;
         text-align: center;
-        font-size: 9px;
+        font-size: .7em;
     }
     span.fancytree-childcounter {
         position: absolute;
         // left: 16px;
-        top: -6px;
-        right: -6px;
+        top: -.5em;
+        right: -.5em;
     }
     span.fancytree-dnd-modifier {
         background: #5cb85c;  // bootstrap green
@@ -224,7 +222,7 @@ span.fancytree-drag-source {
 }
 ul.fancytree-container.fancytree-rtl {
     ul {
-        padding: 0 16px 0 0;
+        padding: 0 $fancytree-level-indent 0 0;
     }
     &.fancytree-connectors li {
         background-position: right 0;
@@ -349,16 +347,16 @@ table.fancytree-ext-columnview {
         background: #777;  // #337ab7;  // bootstrap blue
         border: 1px solid gray;
         position: absolute;
-        top: -6px;
-        right: -6px;
-        min-width: 10px;
-        height: 10px;
+        top: -.5em;
+        right: -.5em;
+        min-width: 1em;
+        height: 1em;
         line-height: 1;
         vertical-align: baseline;
         border-radius: 10px;
-        padding: 2px;
+        padding: 0;
         text-align: center;
-        font-size: 9px;
+        font-size: .7em;
     }
 }
 /*------------------------------------------------------------------------------

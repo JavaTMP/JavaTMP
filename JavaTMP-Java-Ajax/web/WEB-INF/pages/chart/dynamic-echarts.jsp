@@ -1,8 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Dynamic ECharts Charts</h1>
-    </div>
+    <h4 class="my-3">Dynamic ECharts Charts</h4>
+    <hr/>
     <div class="form-row">
         <div class="col-lg-6">
             <div class="card" id="BarChart">

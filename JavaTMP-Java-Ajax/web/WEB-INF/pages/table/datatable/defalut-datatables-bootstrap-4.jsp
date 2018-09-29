@@ -1,11 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Defalut Datatables Bootstrap 4 theme</h1>
-    </div>
     <div class="row">
         <div class="col-lg-12">
-            <div class="alert alert-info">
+            <div class="alert alert-info my-3">
                 <p>DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible tool, based upon the foundations of progressive enhancement, and will add advanced interaction controls to any HTML table. Such as Pagination,FixedColumns, RowGroup, Responsive, FixedHeader and many more.</p>
                 <p>The DataTables / Bootstrap integration ensures that you can use all features of both as well as the enhancements that DataTables makes to a plain HTML table.</p>
                 <br/>

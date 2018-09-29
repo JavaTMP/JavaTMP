@@ -3,9 +3,8 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Create New User</h1>
-    </div>
+    <h4 class="my-3">Create New User</h4>
+    <hr/>
     <div class="row">
         <div class="col-lg-12">
             <form enctype="multipart/form-data" autocomplete="off" id="jquery-form-plugin-test-id" class="form" action="${pageContext.request.contextPath}/user/CreateUserController" method="post" novalidate="novalidate">

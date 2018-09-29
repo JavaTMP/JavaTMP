@@ -1,11 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>DataTables Column Searches</h1>
-    </div>
     <div class="row">
         <div class="col-lg-12">
-            <div class="alert alert-info">
+            <div class="alert alert-info my-3">
                 <p>DataTables has the ability to apply searching to a specific column through the <code>column().search()</code> method (note that the name of the method is search not filter since filter() is used to apply a filter to a result set).</p>
                 <p>
                     <a class="btn btn-info" target="_blank" href="https://datatables.net/examples/api/multi_filter_select.html">
@@ -19,7 +16,7 @@
             </div>
             <div class="card my-3" id="table-panel">
                 <div class="card-header">
-                    Examples
+                    DataTables Column Searches
                     <div class="options float-right">
                         <a class="settings"><i class="fa fa-cog"></i></a>
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>

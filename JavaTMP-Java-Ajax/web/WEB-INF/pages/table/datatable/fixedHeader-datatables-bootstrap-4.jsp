@@ -1,11 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>FixedHeader Datatables Bootstrap 4 theme</h1>
-    </div>
     <div class="row">
         <div class="col-lg-12">
-            <div class="alert alert-info">
+            <div class="alert alert-info my-3">
                 <p>
                     FixedHeader provides the ability to make the DataTables table's header fixed to the top of the scrolling window.
                     <br/>
@@ -24,7 +21,7 @@
             </div>
             <div id="FixedHeader-Datatables-Panel-Id" class="card my-3">
                 <div class="card-header">
-                    FixedHeader Datatables example
+                    FixedHeader Datatables Bootstrap 4 theme
                     <div class="options float-right">
                         <a class="settings"><i class="fa fa-cog"></i></a>
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>

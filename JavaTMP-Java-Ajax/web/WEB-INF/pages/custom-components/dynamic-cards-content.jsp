@@ -1,11 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Dynamic Cards Content</h1>
-    </div>
     <div class="row">
         <div class="col-lg-12">
-            <div class="card card-primary" style="">
+            <div class="card my-3" style="">
                 <div class="card-header">
                     Dynamic Panel Content Examples
                     <div class="options float-right">

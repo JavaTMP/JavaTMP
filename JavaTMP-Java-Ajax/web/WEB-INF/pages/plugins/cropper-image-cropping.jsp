@@ -1,11 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>jQuery Cropper</h1>
-    </div>
     <div class="row">
         <div class="col-lg-12">
-            <div class="alert alert-info">
+            <div class="alert alert-info my-3">
                 <p>A jQuery plugin wrapper for JavaScript Cropper.js image cropper</p>
                 <p>
                     <a class="btn btn-info" target="_blank" href="https://fengyuanchen.github.io/jquery-cropper/">
@@ -21,7 +18,7 @@
             </div>
             <div class="card my-3">
                 <div class="card-header">
-                    Examples
+                    jQuery Cropper
                     <div class="options float-right">
                         <a class="settings"><i class="fa fa-cog"></i></a>
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>

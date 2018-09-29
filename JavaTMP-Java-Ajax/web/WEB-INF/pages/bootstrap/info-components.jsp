@@ -1,8 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Info Theme Color Components</h1>
-    </div>
+    <h4 class="my-3">Info Theme Color Components</h4>
+    <hr/>
     <div class="row">
         <div class="col-lg-12">
             <p class="text-info"><code>text-info</code> class will show like this</p>

@@ -1,16 +1,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Bootstrap Dual Select</h1>
-    </div>
     <div class="row">
         <div class="col-lg-12">
-            <div class="alert alert-info">
+            <div class="alert alert-info my-3">
                 <p>Implementing a simple Bootstrap Dual Select feature by moving items between two select lists using javascript</p>
             </div>
             <div class="card my-3">
                 <div class="card-header">
-                    Example
+                    Bootstrap Dual Select
                     <div class="options float-right">
                         <a class="settings"><i class="fa fa-cog"></i></a>
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>

@@ -1,8 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Sortable Cards</h1>
-    </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="card my-3" style="">

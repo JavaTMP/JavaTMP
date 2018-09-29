@@ -1,8 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Two Columns Blank Page Title</h1>
-    </div>
+    <h4 class="my-3">Two Columns Blank Page Title</h4>
+    <hr/>
     <div class="row d-flex justify-content-center">
         <div class="col-lg-10">
             <div class="row">

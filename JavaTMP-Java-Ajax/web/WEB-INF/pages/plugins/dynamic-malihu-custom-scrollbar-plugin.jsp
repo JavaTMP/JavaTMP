@@ -1,11 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Dynamic Malihu Custom Scrollbar Plugin</h1>
-    </div>
     <div class="row">
         <div class="col">
-            <div class="alert alert-info">
+            <div class="alert alert-info my-3">
                 <p>Highly customizable custom scrollbar jQuery plugin, featuring vertical/horizontal scrollbars, scrolling momentum, mouse-wheel, keyboard and touch support.</p>
                 <p>
                     <a class="btn btn-info" target="_blank" href="http://manos.malihu.gr/jquery-custom-content-scroller/">Configuration Page</a>

@@ -1,6 +1,5 @@
 @import "../common/variables.scss";
 
-
 .has-form-control-clear {
     position: relative;
     .form-control-clear {
@@ -36,3 +35,13 @@
 .line-height-1 {
     line-height: 1.2;
 }
+
+// Bootstrap Table Extender:
+table.responsive {
+    table-layout: fixed;
+    td, th {
+        white-space: normal !important;
+        word-wrap: break-word;
+    }
+}
+

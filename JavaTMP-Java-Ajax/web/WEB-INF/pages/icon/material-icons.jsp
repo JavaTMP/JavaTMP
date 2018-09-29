@@ -1,8 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Material Design icons by Google</h1>
-    </div>
+    <h4 class="my-3">Material Design icons by Google</h4>
+    <hr/>
     <div class="row">
         <div class="col-lg-12">
             <div class="alert alert-info">

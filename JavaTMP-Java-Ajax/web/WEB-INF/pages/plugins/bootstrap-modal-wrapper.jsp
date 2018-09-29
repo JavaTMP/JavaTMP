@@ -1,11 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Bootstrap Modal Wrapper Plugin</h1>
-    </div>
     <div class="row">
         <div class="col">
-            <div class="alert alert-info">
+            <div class="alert alert-info my-3">
                 <p>Bootstrap modal wrapper factory for creating dynamic and nested stacked dialog instances.</p>
                 <p>
                     <a class="btn btn-info" target="_blank" href="https://www.javatmp.com/pages/javatmp-bootstrap-modal-wrapper">Demo Page</a>
@@ -14,7 +11,7 @@
             </div>
             <div class="card my-3">
                 <div class="card-header">
-                    Examples
+                    Bootstrap Modal Wrapper Plugin
                     <div class="options float-right">
                         <a href="#" class="settings"><i class="fa fa-cog"></i></a>
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>

@@ -1,8 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>JavaTMP Custom Build-in Themes</h1>
-    </div>
+    <h4 class="my-3">JavaTMP Custom Build-in Themes</h4>
+    <hr/>
     <div class="row">
         <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
             <a class="applyTheme" themeName="default"  href="javascript:void(0);">

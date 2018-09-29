@@ -1,8 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Users Analytics Dashboard 1</h1>
-    </div>
+    <h4 class="my-3">Users Analytics Dashboard 1</h4>
+    <hr/>
     <div class="form-row">
         <div class="col-xl-3 col-lg-6 col-md-6">
             <div class="card mb-3" id="userStatusPieChartCard">

@@ -1,8 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Menu Template Page</h1>
-    </div>
+    <h4 class="my-3">Menu Template Page</h4>
+    <hr/>
     <div class="row">
         <div class="col-sm-3 col-md-3">
             <div id="accordion" role="tablist">

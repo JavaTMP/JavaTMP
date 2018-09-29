@@ -1,8 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Form Input Mask</h1>
-    </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="alert alert-info">
@@ -19,7 +16,7 @@
             </div>
             <div class="card my-3">
                 <div class="card-header">
-                    Examples
+                    Form Input Mask
                     <div class="options float-right">
                         <a class="settings"><i class="fa fa-cog"></i></a>
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>

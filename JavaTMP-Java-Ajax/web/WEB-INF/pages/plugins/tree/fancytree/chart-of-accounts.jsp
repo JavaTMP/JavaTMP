@@ -1,13 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Chart Of Accounts Table</h1>
-    </div>
     <div class="row">
         <div class="col">
             <div class="card my-3">
                 <div class="card-header">
-                    Chart Of Accounts
+                    Chart Of Accounts Table
                     <div class="options float-right">
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
                         <a href="#" class="fullscreen"><i class=" fa fa-expand"></i></a>

@@ -1,8 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Invoice Template 2</h1>
-    </div>
+    <h4 class="my-3">Invoice Template 2</h4>
+    <hr/>
     <div class="row">
         <div class="col">
             <div class="card invoice-template-2-body-card">

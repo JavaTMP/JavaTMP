@@ -1,8 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Dynamic Individual Column Searching Datatables</h1>
-    </div>
+    <h4 class="my-3">Dynamic Individual Column Searching Datatables</h4>
+    <hr/>
     <div class="row">
         <div class="col-lg-12">
             <div id="table-panel" class="card">

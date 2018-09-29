@@ -1,9 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Portfolio Gallery with filtering category</h1>
-    </div>
-
+    <h4 class="my-3">Portfolio Gallery with filtering categor</h4>
+    <hr/>
     <div class="row">
         <div class="col-12 text-center">
             <button class="btn btn-primary filter-button active" data-filter="all">All</button>

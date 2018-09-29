@@ -3,12 +3,9 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>jQuery select2 using Bootstrap theme</h1>
-    </div>
     <div class="row">
         <div class="col-lg-12">
-            <div class="alert alert-info">
+            <div class="alert alert-info my-3">
                 <p>Select2 is a jQuery based replacement for select boxes. It supports searching, remote data sets, and infinite scrolling of results.</p>
                 <p>with A Select2 v4 Theme for Bootstrap 3.</p>
                 <p>
@@ -24,7 +21,7 @@
             </div>
             <div class="card">
                 <div class="card-header">
-                    Examples
+                    Dynamic jQuery select2 using Bootstrap theme
                     <div class="options float-right">
                         <a class="settings"><i class="fa fa-cog"></i></a>
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>

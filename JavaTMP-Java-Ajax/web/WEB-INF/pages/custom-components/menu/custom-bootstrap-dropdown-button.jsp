@@ -1,12 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Custom Bootstrap Dropdown Button</h1>
-    </div>
     <div class="row">
         <div class="col">
-            <div class="card">
+            <div class="card my-3">
                 <div class="card-header">
+                    Custom Bootstrap Dropdown Button
                     <div class="options float-right">
                         <a href="#" class="settings"><i class="fa fa-cog"></i></a>
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>

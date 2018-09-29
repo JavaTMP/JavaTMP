@@ -1,8 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Page Title</h1>
-    </div>
+    <h4 class="my-3">Page Title</h4>
+    <hr/>
     <div class="row">
         <div class="col-lg-12">
             <p class="">Page Content</p>

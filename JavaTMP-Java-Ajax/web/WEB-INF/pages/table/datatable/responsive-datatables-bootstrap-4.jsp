@@ -1,11 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Responsive Datatables Bootstrap 4 theme</h1>
-    </div>
     <div class="row">
         <div class="col-lg-12">
-            <div class="alert alert-info">
+            <div class="alert alert-info my-3">
                 <p>Responsive is an extension for DataTables that optimizes the table's layout for different screen sizes through the dynamic insertion and removal of columns from the table.</p>
                 <br/>
                 <p>

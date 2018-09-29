@@ -1,11 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>jQuery FullCalendar</h1>
-    </div>
     <div class="row">
         <div class="col-lg-12">
-            <div class="alert alert-info">
+            <div class="alert alert-info my-3">
                 <p>Full-sized drag & drop event calendar (jQuery plugin)</p>
                 <p>
                     <a class="btn btn-info" target="_blank" href="https://fullcalendar.io/"><i class="fa fa-external-link-alt fa-fw"></i>Demo Page</a>
@@ -15,7 +12,7 @@
             </div>
             <div class="card my-3">
                 <div class="card-header">
-                    Examples
+                    jQuery FullCalendar
                     <div class="options float-right">
                         <a class="settings"><i class="fa fa-cog"></i></a>
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>

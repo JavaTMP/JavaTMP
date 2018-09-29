@@ -2,7 +2,7 @@
 <div class="dynamic-ajax-content">
     <div class="row">
         <div class="col">
-            <div class="card">
+            <div class="card my-3">
                 <div class="card-header">
                     Bootstrap ContextMenu Plugin
                     <div class="options float-right">
