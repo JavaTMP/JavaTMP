@@ -1,13 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Media object</h1>
-    </div>
     <div class="row">
         <div class="col">
             <div class="card my-3">
                 <div class="card-header">
-                    Examples
+                    Media object
                     <div class="options float-right">
                         <a href="#" class="settings"><i class="fa fa-cog"></i></a>
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>

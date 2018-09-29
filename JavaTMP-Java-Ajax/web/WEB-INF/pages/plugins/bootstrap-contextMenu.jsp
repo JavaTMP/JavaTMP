@@ -1,12 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Bootstrap ContextMenu Plugin</h1>
-    </div>
     <div class="row">
         <div class="col">
             <div class="card">
                 <div class="card-header">
+                    Bootstrap ContextMenu Plugin
                     <div class="options float-right">
                         <a href="#" class="settings"><i class="fa fa-cog"></i></a>
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
@@ -46,13 +44,33 @@
                             </tr>
                         </tbody>
                     </table>
-                    <ul id="contextMenu" class="dropdown-menu" role="menu" style="display:none;position: fixed;" >
-                        <a tabindex="-1" class="dropdown-item" href="javascript:;">Action 1</a>
-                        <a tabindex="-1" class="dropdown-item" href="javascript:;">Action 2</a>
-                        <a tabindex="-1" class="dropdown-item" href="javascript:;">Action 3</a>
+                    <div id="contextMenu" class="dropdown-menu" role="menu" style="display:none;position: fixed;" >
+                        <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Add-New-User-Action">
+                            <i class="fa fa-fw fa-user text-primary"></i>
+                            Add New User
+                        </a>
+                        <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Add-New-User-Popup-Action">
+                            <i class="fa fa-external-link-alt fa-fw text-primary"></i>
+                            Add New User Popup
+                        </a>
+                        <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Update-Complete-User-Action">
+                            <i class="fa fa-user-edit fa-fw text-primary"></i>
+                            Update Complete User
+                        </a>
+                        <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Activate-User-Action">
+                            <i class="fa fa-user-check fa-fw text-success"></i>
+                            Activate User
+                        </a>
+                        <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Deactivate-User-Action">
+                            <i class="fa fa-user-slash fa-fw text-warning"></i>
+                            Deactivate User
+                        </a>
                         <div class="dropdown-divider"></div>
-                        <a tabindex="-1" class="dropdown-item" href="javascript:;">Action 4</a>
-                    </ul>
+                        <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Delete-User-Action">
+                            <i class="fa fa-user-times fa-fw text-danger"></i>
+                            Delete User
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -86,12 +104,14 @@
             //
 
             // https://stackoverflow.com/questions/18666601/use-bootstrap-3-dropdown-menu-as-context-menu
+            var $table = $("#contextmenu-table-demo-1");
             var $contextMenu = $("#contextMenu");
             function getMenuPosition($contextMenu, mouse, direction, scrollDir, isRTL) {
-                var win = $(window)[direction](),
-                        scroll = $(window)[scrollDir](),
-                        menu = $($contextMenu)[direction](),
-                        position = mouse + scroll;
+                var win = $(window)[direction]();
+                var scroll = $(window)[scrollDir]();
+                var menu = $($contextMenu)[direction]();
+//                var position = mouse + scroll;
+                var position = mouse + 0;
                 if (direction === "width" && (position - $($contextMenu)[direction]() > 0) && isRTL) {
                     position = position - $($contextMenu)[direction]();
                 } else {
@@ -102,9 +122,10 @@
                 return position;
             }
 
-            $(javatmp.settings.defaultOutputSelector).on("contextmenu", "#contextmenu-table-demo-1.table td", function (e) {
+            $('tbody', $table).on('contextmenu', 'tr', function (e) {
                 if (e.ctrlKey)
                     return;
+
                 $contextMenu.css({
                     display: "block",
 //                        left: e.pageX,
@@ -113,12 +134,13 @@
                     right: "auto",
                     top: getMenuPosition($contextMenu, e.clientY, 'height', 'scrollTop', javatmp.settings.isRTL)
                 });
+
                 return false;
             });
             $contextMenu.on("click", "a", function () {
                 $contextMenu.hide();
             });
-            $('body').on("click", function () {
+            $('body,html').on("click", function () {
                 $contextMenu.hide();
             });
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {

@@ -1,8 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <div class="page-header">
-        <h1>Bootstrap Grid</h1>
-    </div>
     <div class="row">
         <div class="col">
             <div class="card my-3">
