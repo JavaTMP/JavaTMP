@@ -14,6 +14,7 @@
 *   **Development And Deployment**
     *   [Setting Up Development Environment](/pages/setting-up-development-environment)
     *   [Manage Front-end dependencies Using Node.js And Gulp](/pages/manage-front-end-dependencies-using-node-js-and-gulp "Manage Front-end Dependencies Using Node.js And Gulp tools")
+    *   [Steps to add new Javascript plugin](/pages/steps-to-add-new-javascript-plugin)
 *   **Java Bootstrap Web Application Version**
     *   [Backend features and resources](/pages/java-bootstrap-backend-features-and-resources "dynamic java bootstrap backend features and resources")
     *   [Dynamic Java Web Application features](/pages/dynamic-java-bootstrap-web-application-features "Main Dynamic Features of Java Bootstrap Web Application")
@@ -22,7 +23,6 @@
     *   [Bootstrap RTL](/pages/bootstrap-rtl-support-modifications "JavaTMP Bootstrap RTL support and modifications")
     *   [JavaTMP Front-end Plugins And Frameworks](/pages/javatmp-front-end-plugins-and-frameworks)
     *   [Development and Environment tools](/pages/development-and-environment-tools)
-    *   [Steps to add new Javascript plugin](/pages/steps-to-add-new-javascript-plugin)
     *   [Chart types and data visualization](/pages/chart-types-and-data-visualization)
     *   [Analytical Oracle SQL Functions](/pages/analytical-oracle-sql-functions)
     *   [Convert CSS file to SASS' SCSS syntax](/pages/convert-css-to-scss-syntax)
