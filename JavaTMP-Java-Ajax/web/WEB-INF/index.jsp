@@ -717,11 +717,6 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/plugins/jQuery-contextMenu">
-                                            Bootstrap Context Menu
-                                        </a>
-                                    </li>
-                                    <li>
                                         <a href="${pageContext.request.contextPath}/pages/plugins/bootstrap-summernote-editor">
                                             Bootstrap Summernote Editor
                                         </a>

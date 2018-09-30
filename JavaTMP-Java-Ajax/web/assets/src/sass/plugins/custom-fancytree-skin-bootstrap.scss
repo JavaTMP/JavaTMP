@@ -28,16 +28,16 @@ $fancytree-font-size: $font-size-base!default;
 $fancytree-bg: $body-bg!default;
 $fancytree-border-width: $border-width!default;
 $fancytree-border-color: $border-color!default;
-$fancytree-padding-y: 3px!default;
+$fancytree-padding-y: 1px!default;
 $fancytree-padding-x: 3px!default;
-$fancytree-level-indent: 1.5rem!default;
+$fancytree-level-indent: 1.5em!default;
 $fancytree-disabled-color: silver!default;
 $fancytree-disabled-opacity: 0.5!default;
-$fancytree-line-height: (1rem * $line-height-base)!default;
+$fancytree-line-height: (1em * $line-height-base)!default;
 $fancytree-node-margin-top: 0px!default;    // gap between two node borders
-$fancytree-icon-spacing: 0.5rem!default;    // margin between icon/icon or icon/title
-$fancytree-icon-width: 1rem!default;
-$fancytree-icon-height: 1rem!default;
+$fancytree-icon-spacing: 0.5em!default;    // margin between icon/icon or icon/title
+$fancytree-icon-width: 1em!default;
+$fancytree-icon-height: 1em!default;
 
 ul.fancytree-container {
     font-family: $fancytree-font-family;

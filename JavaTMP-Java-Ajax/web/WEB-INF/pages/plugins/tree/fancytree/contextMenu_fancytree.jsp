@@ -26,9 +26,54 @@
             </div>
         </div>
     </div>
+    <div id="contextMenu" class="dropdown-menu" role="menu" style="display:none;position: fixed;" >
+        <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Add-New-User-Action">
+            <i class="fa fa-fw fa-user text-primary"></i>
+            Add New User
+        </a>
+        <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Add-New-User-Popup-Action">
+            <i class="fa fa-external-link-alt fa-fw text-primary"></i>
+            Add New User Popup
+        </a>
+        <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Update-Complete-User-Action">
+            <i class="fa fa-user-edit fa-fw text-primary"></i>
+            Update Complete User
+        </a>
+        <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Activate-User-Action">
+            <i class="fa fa-user-check fa-fw text-success"></i>
+            Activate User
+        </a>
+        <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Deactivate-User-Action">
+            <i class="fa fa-user-slash fa-fw text-warning"></i>
+            Deactivate User
+        </a>
+        <div class="dropdown-divider"></div>
+        <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Delete-User-Action">
+            <i class="fa fa-user-times fa-fw text-danger"></i>
+            Delete User
+        </a>
+    </div>
     <script type="text/javascript">
         jQuery(document).ready(function () {
             (function ($) {
+
+                var $contextMenu = $("#contextMenu");
+                function getMenuPosition($contextMenu, mouse, direction, scrollDir, isRTL) {
+                    var win = $(window)[direction]();
+                    var scroll = $(window)[scrollDir]();
+                    var menu = $($contextMenu)[direction]();
+//                var position = mouse + scroll;
+                    var position = mouse + 0;
+                    if (direction === "width" && (position - $($contextMenu)[direction]() > 0) && isRTL) {
+                        position = position - $($contextMenu)[direction]();
+                    } else {
+                        // opening menu would pass the side of the page
+                        if (mouse + menu > win && menu < mouse)
+                            position -= menu;
+                    }
+                    return position;
+                }
+
                 glyph_opts = {
                     preset: "awesome5",
                     map: {
@@ -101,7 +146,6 @@
                 $('#ContextMenu_Fancytree_id').fancytree({
                     rtl: javatmp.settings.isRTL,
                     extensions: ["glyph"],
-//                    extensions: ['contextMenu'],
                     glyph: glyph_opts,
                     source: {
                         url: 'assets/data/ajax-tree-local.json'
@@ -127,61 +171,28 @@
                         }
                     },
                     init: function (event, data, flag) {
-                        $.contextMenu({
-                            rtl: javatmp.settings.isRTL,
-                            selector: '.fancytree-title',
-//                            appendTo: javatmp.settings.defaultOutputSelector,
-                            reposition: true,
-                            events: {
-                                show: function (options) {
-                                    var node = $.ui.fancytree.getNode(this);
-                                    node.setSelected(true);
-                                    node.setActive(true);
-                                }
-                            },
-                            position: function (opt, x, y) {
-                                if (javatmp.settings.isRTL === true) {
-                                    var menuWidth = $(opt.$menu).outerWidth();
-                                    opt.$menu.css({top: y, left: x - menuWidth});
-                                } else {
-                                    opt.$menu.css({top: y, left: x});
-                                }
-                            },
-                            callback: function (key, options) {
-                                var node = $.ui.fancytree.getNode(this);
-                                BootstrapModalWrapperFactory.showMessage('Selected action "' + key + '" on node [' + node + "]");
-                                return true;
-                            },
-                            items: {
-                                "edit": {"name": "Edit", "icon": "edit"},
-                                "cut": {"name": "Cut", "icon": "cut"},
-                                "sep1": "---------",
-                                "quit": {"name": "Quit", "icon": "quit"},
-                                "sep2": "---------",
-                                "fold1": {
-                                    "name": "Sub group",
-                                    "items": {
-                                        "fold1-key1": {"name": "Foo bar"},
-                                        "fold2": {
-                                            "name": "Sub group 2",
-                                            "items": {
-                                                "fold2-key1": {"name": "alpha"},
-                                                "fold2-key2": {"name": "bravo"},
-                                                "fold2-key3": {"name": "charlie"}
-                                            }
-                                        },
-                                        "fold1-key3": {"name": "delta"}
-                                    }
-                                },
-                                "fold1a": {
-                                    "name": "Other group",
-                                    "items": {
-                                        "fold1a-key1": {"name": "echo"},
-                                        "fold1a-key2": {"name": "foxtrot"},
-                                        "fold1a-key3": {"name": "golf"}
-                                    }
-                                }
-                            }
+                        $('#ContextMenu_Fancytree_id').on('contextmenu', '.fancytree-title', function (e) {
+                            if (e.ctrlKey)
+                                return;
+
+                            var node = $.ui.fancytree.getNode(this);
+                            node.setSelected(true);
+                            node.setActive(true);
+
+                            $contextMenu.css({
+                                "z-index": 2000,
+                                display: "block",
+                                left: getMenuPosition($contextMenu, e.clientX, 'width', 'scrollLeft', javatmp.settings.isRTL),
+                                right: "auto",
+                                top: getMenuPosition($contextMenu, e.clientY, 'height', 'scrollTop', javatmp.settings.isRTL)
+                            });
+                            return false;
+                        });
+                        $contextMenu.on("click", "a", function () {
+                            $contextMenu.hide();
+                        });
+                        $('body,html').on("click", function () {
+                            $contextMenu.hide();
                         });
                     }
                 });

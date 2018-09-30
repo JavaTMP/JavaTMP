@@ -60,11 +60,6 @@ var config = {
             {"from": "${sourceNodeLib}/jquery.fancytree/dist/skin-bootstrap/ui.fancytree.min.css", "to": "${destComponentsLib}/jquery.fancytree/dist/skin-bootstrap"},
             {"from": "${sourceNodeLib}/jquery.fancytree/dist/jquery.fancytree-all.min.js", "to": "${destComponentsLib}/jquery.fancytree/dist"}
         ],
-        "jquery-contextmenu": [
-            {"from": "${sourceNodeLib}/jquery-contextmenu/dist/font/**/*", "to": "${destComponentsLib}/jquery-contextmenu/dist/font"},
-            {"from": "${sourceNodeLib}/jquery-contextmenu/dist/jquery.contextMenu.min.css", "to": "${destComponentsLib}/jquery-contextmenu/dist"},
-            {"from": "${sourceNodeLib}/jquery-contextmenu/dist/jquery.contextMenu.min.js", "to": "${destComponentsLib}/jquery-contextmenu/dist"}
-        ],
         "toastr": [
             {"from": "${sourceNodeLib}/toastr/build/toastr.min.css", "to": "${destComponentsLib}/toastr/build"},
             {"from": "${sourceNodeLib}/toastr/build/toastr.min.js", "to": "${destComponentsLib}/toastr/build"}
@@ -211,10 +206,6 @@ var config = {
         "bootstrap-alert-wrapper": [
             {"from": "${sourceNodeLib}/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js", "to": "${destComponentsLib}/bootstrap-alert-wrapper/dist"}
         ],
-        "jquery-contextmenurtl": [
-            {"from": "${sourceNodeLib}/jquery-contextmenurtl/dist/css/jquery.contextMenuRtl.min.css", "to": "${destComponentsLib}/jquery-contextmenurtl/dist/css"},
-            {"from": "${sourceNodeLib}/jquery-contextmenurtl/dist/js/jquery.contextMenuRtl.min.js", "to": "${destComponentsLib}/jquery-contextmenurtl/dist/js"}
-        ],
         "Blob": [
             {"from": "${sourceNodeLib}/Blob/Blob.js", "to": "${destComponentsLib}/Blob", processJS: true}
         ],
@@ -245,7 +236,6 @@ var src = {
         "./web/components/metismenu/dist/metisMenu.min.css",
         "./web/components/nprogress/nprogress.css",
         "./web/components/jquery.fancytree/dist/skin-bootstrap/ui.fancytree.min.css",
-        "./web/components/jquery-contextmenu/dist/jquery.contextMenu.min.css",
         "./web/components/toastr/build/toastr.min.css",
         "./web/components/bootstrap-daterangepicker/daterangepicker.css",
         "./web/components/bootstrap-colorselector/dist/bootstrap-colorselector.min.css",
@@ -265,8 +255,7 @@ var src = {
         "./web/components/slick-carousel/slick/slick-theme.css",
         "./web/components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css",
 //        "./web/components/bootstrap-reverse/dist/**/*",
-        "./web/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.css",
-        "./web/components/jquery-contextmenurtl/dist/css/jquery.contextMenuRtl.min.css"
+        "./web/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.css"
 //        ,
 //        "./web/components/material-design-icons/iconfont/material-icons.css"
     ],
@@ -275,7 +264,6 @@ var src = {
     ],
     "fonts": [
         "./web/components/fontawesome-free/webfonts/**/*",
-        "./web/components/jquery-contextmenu/dist/font/**/*",
         "./web/components/summernote/dist/font/**/*",
         "./web/components/slick-carousel/slick/fonts/**/*",
         "./web/assets/src/fonts/open-sans/**/*",
@@ -296,7 +284,6 @@ var src = {
         "./web/components/nprogress/nprogress.js",
         "./web/components/scrollup/dist/jquery.scrollUp.min.js",
         "./web/components/jquery.fancytree/dist/jquery.fancytree-all.min.js",
-        "./web/components/jquery-contextmenu/dist/jquery.contextMenu.min.js",
         "./web/components/toastr/build/toastr.min.js",
         "./web/components/jquery-idletimer/dist/idle-timer.min.js",
         "./web/components/moment/min/moment.min.js",
@@ -340,7 +327,6 @@ var src = {
         "./web/components/bootstrap-actionable/dist/bootstrap-actionable.min.js",
         "./web/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.js",
         "./web/components/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js",
-        "./web/components/jquery-contextmenurtl/dist/js/jquery.contextMenuRtl.min.js",
         "./web/components/numeral/min/numeral.min.js"
     ],
     "localeJS": {
