@@ -37,5 +37,6 @@ We use the following steps when we add new plugins for our template to make sure
 1. Remove plugin reference from `package.json`.
 2. Remove plugin reference from `gulpfile.js` in `config` and `src` variables.
 3. Remove a custom SASS file for plugin in `./web/assets/src/sass/plugins/` if there is any file for this plugin.
-4. Run `gulp` command.
-5. Remove Any use for the plugin in any front-end HTML and JSP pages.
+4. Remove a custom SASS file calling in `./web/assets/src/sass/main.sass` file for this plugin if there is any one.
+5. Run `gulp` command.
+6. Remove Any use for the plugin in any front-end HTML and JSP pages.
