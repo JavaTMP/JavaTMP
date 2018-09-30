@@ -453,7 +453,7 @@
             var imagePath = javatmp.settings.contextPath + "/assets/img/themes/" + repo.text + ".png";
             var template =
                     '    <div class="media d-flex align-items-center">' +
-                    '        <img style="height: 25px;" class="mr-1" src="{{imagePath}}" alt="{{themeName}}"/>' +
+                    '        <img style="height: 1.5rem;" class="mr-1" src="{{imagePath}}" alt="{{themeName}}"/>' +
                     '        <div class="media-body">' +
                     '            <span>{{themeName}}</span>' +
                     '        </div>' +
