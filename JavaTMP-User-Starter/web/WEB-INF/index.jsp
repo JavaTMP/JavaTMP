@@ -109,7 +109,7 @@
                                     actionType="action-ref-href"
                                     action-ref-by-href="${pageContext.request.contextPath}/pages/home"
                                     data-toggle="tooltip" data-placement="auto"
-                                    title="${labels['sidebar.menu_item.home']}">
+                                    title="${labels['sidebar.menuItem.home']}">
                                 <i class="fa fa-home fa-fw"></i>
                             </button>
                         </div>
@@ -125,33 +125,33 @@
                             <li>
                                 <a href="${pageContext.request.contextPath}/pages/home">
                                     <i class="fa fa-lg fa-fw fa-home"></i>
-                                    ${labels['sidebar.menu_item.home']}
+                                    ${labels['sidebar.menuItem.home']}
                                 </a>
                             </li>
                             <li>
                                 <a class="has-arrow" href="#">
                                     <i class="fa fa-lg fa-fw fa-users"></i>
-                                    ${labels['sidebar.menu_item.users']}
+                                    ${labels['sidebar.menuItem.users']}
                                 </a>
                                 <ul>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/user/GetListUsersPage">
-                                            Users List
+                                            ${labels['sidebar.menuItem.users.usersList']}
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/user/GetListUsersWithDetailsPage">
-                                            Users List With Details
+                                            ${labels['sidebar.menuItem.users.usersListWithDetails']}
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/user/CreateUserController">
-                                            Add New User
+                                            ${labels['sidebar.menuItem.users.addNewUser']}
                                         </a>
                                     </li>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/user/SearchForUserProfileController">
-                                            Search For User
+                                            ${labels['sidebar.menuItem.users.searchForUser']}
                                         </a>
                                     </li>
                                 </ul>
@@ -159,12 +159,12 @@
                             <li>
                                 <a class="has-arrow" href="#">
                                     <i class="fa fa-lg fa-fw fa-cogs"></i>
-                                    ${labels['sidebar.menu_item.system']}
+                                    ${labels['sidebar.menuItem.system']}
                                 </a>
                                 <ul>
                                     <li>
                                         <a href="${pageContext.request.contextPath}/user/CurrentUserProfileController">
-                                            User Profile Settings
+                                            ${labels['sidebar.menuItem.system.UserProfileSettings']}
                                         </a>
                                     </li>
                                 </ul>

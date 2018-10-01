@@ -7,7 +7,7 @@
         <div class="col">
             <div class="card my-3 bg-light shadow">
                 <div class="card-header">
-                    User Profile Settings
+                    ${labels['sidebar.menuItem.users.searchForUser']}
                     <div class="options float-right">
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
                         <a href="#" class="fullscreen"><i class=" fa fa-expand"></i></a>

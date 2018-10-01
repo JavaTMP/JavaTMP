@@ -6,15 +6,23 @@
     <table cellspacing="0" class="table table-condensed table-bordered table-hover" id="UsersListTableId">
         <thead>
             <tr id="UserListMainHeader">
-                <th style="width: 75px;"><p style="width: 75px;">ID</p></th>
-                <th style="width: 150px;"><p style="width: 150px;">Username</p></th>
+                <th>ID</th>
+                <th>Username</th>
+                <th>First name</th>
+                <th>Last name</th>
             </tr>
             <tr id="UserListFilterHeader">
-                <th style="width: 75px;">
+                <th style="width: 5rem;">
                     <input id="userlist-id-filter" class="form-control"/>
                 </th>
-                <th style="width: 150px;">
+                <th style="width: 10rem;">
                     <input id="userlist-username-filter" class="form-control"/>
+                </th>
+                <th style="width: 10rem;">
+                    <input id="userlist-firstname-filter" class="form-control"/>
+                </th>
+                <th style="width: 10rem;">
+                    <input id="userlist-lastname-filter" class="form-control"/>
                 </th>
             </tr>
         </thead>
@@ -133,6 +141,22 @@
                                 api.column(1).search(val ? val : '', true, false).draw();
                             }, 200, "@userlist-main-table-filter");
                         });
+                        var firstNameFilterInput = $("#userlist-firstname-filter");
+                        firstNameFilterInput.on('keyup', function () {
+                            var $this = $(this);
+                            javatmp.util.waitForFinalEvent(function () {
+                                var val = $.fn.dataTable.util.escapeRegex($this.val());
+                                api.column(2).search(val ? val : '', true, false).draw();
+                            }, 200, "@userlist-main-table-filter");
+                        });
+                        var lastNameFilterInput = $("#userlist-lastname-filter");
+                        lastNameFilterInput.on('keyup', function () {
+                            var $this = $(this);
+                            javatmp.util.waitForFinalEvent(function () {
+                                var val = $.fn.dataTable.util.escapeRegex($this.val());
+                                api.column(3).search(val ? val : '', true, false).draw();
+                            }, 200, "@userlist-main-table-filter");
+                        });
                     },
                     "ajax": {
                         "type": "POST",
@@ -151,23 +175,45 @@
                     },
                     columns: [
                         {
-                            data: 'id', className: "", name: "id", width: 75,
+                            data: 'id', className: "", name: "id", width: "5rem",
                             "render": function (data, type, row) {
                                 if (type === "display") {
-                                    return "<p class='m-0 p-0' style='width: 75px;'>" + data + "</p>";
+                                    return "<p class='m-0 p-0' style='width: 5rem;'>" + data + "</p>";
                                 } else {
                                     return data;
                                 }
                             }
                         },
                         {
-                            data: 'userName', name: "userName", width: 150,
+                            data: 'userName', name: "userName", width: "10rem",
                             "render": function (data, type, row) {
                                 if (type === "display") {
-                                    return "<p class='m-0 p-0' style='width: 150px;'>" + data + "</p>";
+                                    return "<p class='m-0 p-0' style='width: 10rem;'>" + data + "</p>";
                                 } else {
                                     return data;
                                 }
+                            }
+                        },
+                        {
+                            data: 'firstName', name: "firstName", width: "10rem",
+                            "render": function (data, type, row) {
+                                if (type === "sort" || type === 'type' || type === 'filter') {
+                                    return data;
+                                } else {
+                                    return "<p class='m-0 p-0' style='width: 10rem;'>" + data + "</p>";
+                                }
+
+                            }
+                        },
+                        {
+                            data: 'lastName', name: "lastName", width: "10rem",
+                            "render": function (data, type, row) {
+                                if (type === "sort" || type === 'type' || type === 'filter') {
+                                    return data;
+                                } else {
+                                    return "<p class='m-0 p-0' style='width: 10rem;'>" + data + "</p>";
+                                }
+
                             }
                         }
                     ]
