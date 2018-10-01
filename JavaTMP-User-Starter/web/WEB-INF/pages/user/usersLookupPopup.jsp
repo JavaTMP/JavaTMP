@@ -12,7 +12,7 @@
                 <th>Last name</th>
             </tr>
             <tr id="UserListFilterHeader">
-                <th style="width: 5rem;">
+                <th style="width: 3rem;">
                     <input id="userlist-id-filter" class="form-control"/>
                 </th>
                 <th style="width: 10rem;">
@@ -175,10 +175,10 @@
                     },
                     columns: [
                         {
-                            data: 'id', className: "", name: "id", width: "5rem",
+                            data: 'id', className: "", name: "id", width: "3rem",
                             "render": function (data, type, row) {
                                 if (type === "display") {
-                                    return "<p class='m-0 p-0' style='width: 5rem;'>" + data + "</p>";
+                                    return "<p class='m-0 p-0' style='width: 3rem;'>" + data + "</p>";
                                 } else {
                                     return data;
                                 }
