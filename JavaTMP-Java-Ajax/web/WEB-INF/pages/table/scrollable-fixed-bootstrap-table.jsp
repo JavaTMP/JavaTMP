@@ -13,8 +13,8 @@
                         <a href="#" class="remove"><i class="fa fa-times"></i></a>
                     </div>
                 </div>
-                <div class="card-body">
-                    <table id="demo-scroll-table" class="table table-fixed table-bordered">
+                <div class="card-body p-0">
+                    <table id="demo-scroll-table" class="table table-fixed table-bordered m-0">
                         <thead>
                             <tr>
                                 <th class="col-3">First Name</th>
@@ -142,6 +142,7 @@
 
         .table-fixed {
             width: 100%;
+            border-collapse: collapse;
         }
         .table-fixed tbody {
             height: 200px;
@@ -150,12 +151,15 @@
         }
         .table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
             display: block;
+            border-collapse: collapse;
         }
         .table-fixed tbody td {
             float: left;
+            border-collapse: collapse;
         }
         .table-fixed thead tr th {
             float: left;
+            border-collapse: collapse;
         }
 
     </style>
@@ -205,11 +209,8 @@
             // controll return to main javascript file.
             // <--- HERE --->
             //
-            if (javatmp.settings.isRTL === true) {
-                $("#demo-scroll-table > thead ").css({"margin-left": getScrollBarWidth});
-            } else {
-                $("#demo-scroll-table > thead ").css({"margin-right": getScrollBarWidth});
-            }
+
+            $("#demo-scroll-table > thead ").css({"margin-right": getScrollBarWidth});
 //            alert(getScrollBarWidth());
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {

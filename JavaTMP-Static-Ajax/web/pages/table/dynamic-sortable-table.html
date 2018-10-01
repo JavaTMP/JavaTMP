@@ -17,10 +17,9 @@
                         <div class="col-md-12 table-responsive">
                             <table class="table table-bordered table-hover table-sortable" id="tab_logic">
                                 <thead>
-                                    <tr >
+                                    <tr>
                                         <th class="text-center">Name</th>
                                         <th class="text-center">Email</th>
-                                        <th class="text-center">Notes</th>
                                         <th class="text-center">Option</th>
                                         <th class="text-center">Operations</th>
                                     </tr>
@@ -33,9 +32,6 @@
                                         <td data-name="mail">
                                             <input type="text" name='mail0' placeholder='Email' class="form-control"/>
                                         </td>
-                                        <td data-name="desc">
-                                            <textarea name="desc0" placeholder="Description" class="form-control"></textarea>
-                                        </td>
                                         <td data-name="sel">
                                             <select name="sel0" class="custom-control form-control">
                                                 <option value="">Select Option</option>
@@ -44,8 +40,8 @@
                                                 <option value="3">Option 3</option>
                                             </select>
                                         </td>
-                                        <td data-name="del">
-                                            <button name="del0" class='btn btn-danger fa fa-times row-remove'></button>
+                                        <td data-name="del" style="vertical-align: middle;" class="ml-1">
+                                            <button name="del0" class='btn btn-sm btn-danger fa fa-times row-remove'></button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -68,6 +64,12 @@
         */
         .table-sortable tbody tr {
             cursor: move;
+        }
+        .table-sortable tbody td {
+            padding: 0;
+        }
+        .table-sortable tbody td .form-control {
+            border-radius: 0;
         }
 
     </style>
