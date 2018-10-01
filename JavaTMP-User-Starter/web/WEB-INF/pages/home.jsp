@@ -2,14 +2,14 @@
 <div id="UsersMngHomePageDynamicAjaxCont" class="dynamic-ajax-content pt-3">
     <div class="form-row">
         <div class="col-xl-3 col-lg-6 col-md-6">
-            <div class="card shadow mb-3" id="userStatusPieChartCard">
-                <div class="card-header">
+            <div class="card shadow mb-3 bg-white" id="userStatusPieChartCard">
+                <div class="card-header bg-white">
                     Registered Users
                     <div class="options float-right">
                         <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
                     </div>
                 </div>
-                <div class="card-body p-1 bg-light">
+                <div class="card-body p-1">
                     <div class="row d-flex align-items-center">
                         <div class="col-6 text-center">
                             <span class="d-block display-4 counter" id="userStatusPieChartCard_totalCount">0</span>
@@ -19,7 +19,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">
+                <div class="card-footer bg-white">
                     <a href="javascript:;" class="d-flex">
                         View Details
                         <span class="ml-auto">
@@ -30,14 +30,14 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-md-6">
-            <div class="card shadow mb-3" id="todayVisitUserPieChartCard">
-                <div class="card-header">
+            <div class="card shadow mb-3 bg-white" id="todayVisitUserPieChartCard">
+                <div class="card-header bg-white">
                     Visitors Today
                     <div class="options float-right">
                         <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
                     </div>
                 </div>
-                <div class="card-body p-1 bg-light">
+                <div class="card-body p-1 bg-white">
                     <div class="row d-flex align-items-center">
                         <div class="col-6 text-center">
                             <span class="d-block display-4 counter" id="todayVisitUserPieChartCard_totalCount">0</span>
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">
+                <div class="card-footer bg-white">
                     <a href="javascript:;" class="d-flex">
                         View Details
                         <span class="ml-auto">
@@ -58,14 +58,14 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-md-6">
-            <div class="card shadow mb-3" id="pageViewActivitesPerHourChartCard">
-                <div class="card-header">
+            <div class="card shadow mb-3 bg-white" id="pageViewActivitesPerHourChartCard">
+                <div class="card-header bg-white">
                     Page Views Per Hour
                     <div class="options float-right">
                         <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
                     </div>
                 </div>
-                <div class="card-body p-1 bg-light">
+                <div class="card-body p-1 bg-white">
                     <div class="row d-flex align-items-center">
                         <div class="col-6 text-center">
                             <span class="d-block display-4 counter" id="pageViewActivitesPerHourChartCard_totalCount">0</span>
@@ -76,7 +76,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">
+                <div class="card-footer bg-white">
                     <a href="javascript:;" class="d-flex">
                         View Details
                         <span class="ml-auto">
@@ -87,14 +87,14 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-md-6">
-            <div class="card shadow mb-3" id="loadtimePerHourChartCard">
-                <div class="card-header">
+            <div class="card shadow mb-3 bg-white" id="loadtimePerHourChartCard">
+                <div class="card-header bg-white">
                     Load Time Per Hour
                     <div class="options float-right">
                         <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
                     </div>
                 </div>
-                <div class="card-body p-1 bg-light">
+                <div class="card-body p-1 bg-white">
                     <div class="row d-flex align-items-center">
                         <div class="col-7 text-center">
                             <span class="d-block display-4 counter" id="loadtimePerHourChartCard_totalCount">0</span>
@@ -105,7 +105,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">
+                <div class="card-footer bg-white">
                     <a href="javascript:;" class="d-flex">
                         View Details
                         <span class="ml-auto">
@@ -119,15 +119,15 @@
     </div>
     <div class="form-row">
         <div class="col-lg-6">
-            <div class="card shadow mb-3" id="UsersLocationsInTheWorldCard">
-                <div class="card-header">
+            <div class="card shadow mb-3 bg-white" id="UsersLocationsInTheWorldCard">
+                <div class="card-header bg-white">
                     Users Locations
                     <div class="options float-right">
                         <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
                         <a href="javascript:;" class="fullscreen"><i class=" fa fa-expand"></i></a>
                     </div>
                 </div>
-                <div class="card-body bg-light p-0">
+                <div class="card-body bg-white p-0">
                     <div class="row">
                         <div class="col-lg-12">
                             <div id="UsersLocationsInTheWorld" style="min-height: 300px"></div>
@@ -137,15 +137,15 @@
             </div>
         </div>
         <div class="col-lg-6">
-            <div class="card shadow mb-3" id="UsersBirthdayPerMonthsCard">
-                <div class="card-header">
+            <div class="card shadow mb-3 bg-white" id="UsersBirthdayPerMonthsCard">
+                <div class="card-header bg-white">
                     Users Birthday Per Months
                     <div class="options float-right">
                         <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
                         <a href="javascript:;" class="fullscreen"><i class=" fa fa-expand"></i></a>
                     </div>
                 </div>
-                <div class="card-body bg-light p-0">
+                <div class="card-body bg-white p-0">
                     <div class="row">
                         <div class="col-lg-12">
                             <div id="UsersBirthdayPerMonths" style="min-height: 300px"></div>
