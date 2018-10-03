@@ -194,7 +194,7 @@
                         <div class="form-row">
                             <div class="col-lg-12">
                                 <div class="form-group mt-3">
-                                    <button type="submit" id="register-submit-btn" class="btn btn-primary">Submit</button>
+                                    <button type="submit" id="register-submit-btn" class="btn btn-primary">${labels['domain.user.btn.CreateNewUser']}</button>
                                 </div>
                             </div>
                         </div>

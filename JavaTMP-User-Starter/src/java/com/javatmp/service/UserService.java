@@ -250,7 +250,6 @@ public class UserService {
             em.getTransaction().commit();
             return deletedStatus;
         } catch (IllegalArgumentException | PersistenceException e) {
-            e.printStackTrace();
             if (em != null) {
                 em.getTransaction().rollback();
             }

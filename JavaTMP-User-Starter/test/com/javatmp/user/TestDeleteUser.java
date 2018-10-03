@@ -27,7 +27,7 @@ public class TestDeleteUser {
         jpaDaoHelper = new JpaDaoHelper("AppPU");
         userService = new UserService(jpaDaoHelper);
         try {
-            User user = new User(1L);
+            User user = new User(3L);
 //            user = userService.readCompleteUserById(user);
             int status = 0;
             System.out.println("User to be Deleted [" + MvcHelper.deepToString(user) + "]");
@@ -38,11 +38,13 @@ public class TestDeleteUser {
 //            System.out.println("e [" + e.getMessage() + "]");
         } catch (PersistenceException e) {
             Throwable t = e;
-            while (t != null) {
-                System.out.println("type [" + t.getClass().getName() + "]");
-                System.out.println("t [" + t.getMessage() + "]");
+            while (t.getCause() != null) {
+//                System.out.println("type [" + t.getClass().getName() + "]");
+//                System.out.println("t [" + t.getMessage() + "]");
                 t = t.getCause();
             }
+            System.out.println("type [" + t.getClass().getName() + "]");
+            System.out.println("t [" + t.getMessage() + "]");
         }
 
     }
