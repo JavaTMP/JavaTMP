@@ -3,6 +3,11 @@ title: Java Bootstrap Template Version 0.0.5 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.5 (Current Development Version)
 
+### faf70af on Oct 2, 2018, 1:31 PM GMT+4
+- Remove page-header class and replace all pages
+- Remove jquery contextMenu and refactor fancytree contextmenu demo page and gulp
+- add more locale msgs and more columns to users lookup dialog
+
 ### 0177623 on Sep 27, 2018, 11:21 PM GMT+4
 - Update `./web/assets/src/sass/plugins/custom-fancytree-skin-bootstrap.scss` for theme and skin alignment.
 - Create new build-in skin `javatmp-ace`, `javatmp-schooly`,`javatmp-greenish`, and `javatmp-purplish`.
