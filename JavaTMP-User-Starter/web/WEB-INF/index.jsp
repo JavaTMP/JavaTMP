@@ -202,10 +202,15 @@
                     floatReverse: "${labels['global.floatReverse']}",
                     direction: "${labels['global.direction']}",
                     isRTL: ${labels['global.direction'] == 'ltr' ? 'false' : 'true'},
-                    contextPath: '${pageContext.request.contextPath}'
+                    contextPath: '${pageContext.request.contextPath}',
+                    label: {
+                        loadingText: "${labels['global.loadingText']}"
+                    }
                 };
 
                 index.init(defaults);
+
+
 
                 javatmp.user = {};
                 javatmp.user.id = ${sessionScope.user.id};
