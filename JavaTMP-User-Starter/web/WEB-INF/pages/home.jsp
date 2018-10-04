@@ -4,7 +4,7 @@
         <div class="col-xl-3 col-lg-6 col-md-6">
             <div class="card shadow mb-3 bg-white" id="userStatusPieChartCard">
                 <div class="card-header bg-white">
-                    Registered Users
+                    ${labels['page.home.RegisteredUsers']}
                     <div class="options float-right">
                         <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
                     </div>
@@ -21,7 +21,7 @@
                 </div>
                 <div class="card-footer bg-white">
                     <a href="javascript:;" class="d-flex">
-                        View Details
+                        ${labels['global.viewDetails']}
                         <span class="ml-auto">
                             <i class="fa fa-arrow-circle-next"></i>
                         </span>
@@ -32,7 +32,7 @@
         <div class="col-xl-3 col-lg-6 col-md-6">
             <div class="card shadow mb-3 bg-white" id="todayVisitUserPieChartCard">
                 <div class="card-header bg-white">
-                    Visitors Today
+                    ${labels['page.home.VisitorsToday']}
                     <div class="options float-right">
                         <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
                     </div>
@@ -49,7 +49,7 @@
                 </div>
                 <div class="card-footer bg-white">
                     <a href="javascript:;" class="d-flex">
-                        View Details
+                        ${labels['global.viewDetails']}
                         <span class="ml-auto">
                             <i class="fa fa-arrow-circle-next"></i>
                         </span>
@@ -60,7 +60,7 @@
         <div class="col-xl-3 col-lg-6 col-md-6">
             <div class="card shadow mb-3 bg-white" id="pageViewActivitesPerHourChartCard">
                 <div class="card-header bg-white">
-                    Page Views Per Hour
+                    ${labels['page.home.PageViewsPerHour']}
                     <div class="options float-right">
                         <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
                     </div>
@@ -69,7 +69,7 @@
                     <div class="row d-flex align-items-center">
                         <div class="col-6 text-center">
                             <span class="d-block display-4 counter" id="pageViewActivitesPerHourChartCard_totalCount">0</span>
-                            <span class="d-block muted small">all Page Views</span>
+                            <span class="d-block muted small">${labels['page.home.AllPageViews']}</span>
                         </div>
                         <div class="col-6 text-left">
                             <div id="pageViewActivitesPerHourChart" style="min-height: 100px"></div>
@@ -78,7 +78,7 @@
                 </div>
                 <div class="card-footer bg-white">
                     <a href="javascript:;" class="d-flex">
-                        View Details
+                        ${labels['global.viewDetails']}
                         <span class="ml-auto">
                             <i class="fa fa-arrow-circle-next"></i>
                         </span>
@@ -89,7 +89,7 @@
         <div class="col-xl-3 col-lg-6 col-md-6">
             <div class="card shadow mb-3 bg-white" id="loadtimePerHourChartCard">
                 <div class="card-header bg-white">
-                    Load Time Per Hour
+                    ${labels['page.home.LoadTimePerHour']}
                     <div class="options float-right">
                         <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
                     </div>
@@ -98,7 +98,7 @@
                     <div class="row d-flex align-items-center">
                         <div class="col-7 text-center">
                             <span class="d-block display-4 counter" id="loadtimePerHourChartCard_totalCount">0</span>
-                            <span class="d-block muted small">Avg Load Time</span>
+                            <span class="d-block muted small">${labels['page.home.AvgLoadTime']}</span>
                         </div>
                         <div class="col-5">
                             <div id="loadtimePerHourChart" style="min-height: 100px"></div>
@@ -107,7 +107,7 @@
                 </div>
                 <div class="card-footer bg-white">
                     <a href="javascript:;" class="d-flex">
-                        View Details
+                        ${labels['global.viewDetails']}
                         <span class="ml-auto">
                             <i class="fa fa-arrow-circle-next"></i>
                         </span>
@@ -121,7 +121,7 @@
         <div class="col-lg-6">
             <div class="card shadow mb-3 bg-white" id="UsersLocationsInTheWorldCard">
                 <div class="card-header bg-white">
-                    Users Locations
+                    ${labels['page.home.UsersLocations']}
                     <div class="options float-right">
                         <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
                         <a href="javascript:;" class="fullscreen"><i class=" fa fa-expand"></i></a>
@@ -139,7 +139,7 @@
         <div class="col-lg-6">
             <div class="card shadow mb-3 bg-white" id="UsersBirthdayPerMonthsCard">
                 <div class="card-header bg-white">
-                    Users Birthday Per Months
+                    ${labels['page.home.UsersBirthdayPerMonths']}
                     <div class="options float-right">
                         <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
                         <a href="javascript:;" class="fullscreen"><i class=" fa fa-expand"></i></a>

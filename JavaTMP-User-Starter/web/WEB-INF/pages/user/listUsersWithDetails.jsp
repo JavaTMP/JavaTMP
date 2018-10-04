@@ -179,25 +179,25 @@
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label class="control-label">First Name</label>
+                                        <label class="control-label">${labels['domain.user.firstName']}</label>
                                         <input class="form-control" type="text" placeholder="First Name" name="firstName" value="">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label class="control-label">Last Name</label>
+                                        <label class="control-label">${labels['domain.user.lastName']}</label>
                                         <input class="form-control" type="text" placeholder="Last Name" name="lastName" value="">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="control-label">Your date of birth</label>
+                                        <label class="control-label">${labels['domain.user.birthDate']}</label>
                                         <input dir="ltr" class="form-control"  type="text" name="birthOfDateStr" value="">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="control-label">Email</label>
+                                        <label class="control-label">${labels['domain.user.email']}</label>
                                         <input class="form-control" type="text" placeholder="Email" name="email" value="">
                                     </div>
                                 </div>
@@ -205,7 +205,7 @@
                             <div class="form-row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="control-label">Country</label>
+                                        <label class="control-label">${labels['domain.user.country']}</label>
                                         <select name="countryId" class="form-control">
                                             <c:choose>
                                                 <c:when test="${fn:length(requestScope.countries) > 0}">
@@ -223,7 +223,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="control-label">Interface Language</label>
+                                        <label class="control-label">${labels['domain.user.lang']}</label>
                                         <select name="lang" class="form-control">
                                             <c:choose>
                                                 <c:when test="${fn:length(requestScope.languages) > 0}">
@@ -241,7 +241,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="control-label">Interface Theme</label>
+                                        <label class="control-label">${labels['domain.user.theme']}</label>
                                         <select name="theme" class="form-control">
                                             <c:choose>
                                                 <c:when test="${fn:length(requestScope.themes) > 0}">
@@ -259,7 +259,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="control-label">Timezone</label>
+                                        <label class="control-label">${labels['domain.user.timezone']}</label>
                                         <select name="timezone" class="form-control">
                                             <option value="">Choose ...</option>
                                             <c:choose>
@@ -280,14 +280,14 @@
                             <div class="form-row">
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="control-label">Username</label>
+                                        <label class="control-label">${labels['domain.user.userName']}</label>
                                         <input class="form-control" type="text" autocomplete="off" placeholder="Username"
                                                name="userName" value="">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="control-label">Old Password</label>
+                                        <label class="control-label">${labels['domain.user.password']}</label>
                                         <input class="form-control" type="password" autocomplete="off"
                                                placeholder="Old Password" name="oldPassword">
                                     </div>
@@ -301,7 +301,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <label class="control-label">Re-type Your New Password</label>
+                                        <label class="control-label">${labels['domain.user.reTypePassword']}</label>
                                         <input class="form-control" type="password" autocomplete="off" placeholder="Re-type Your New Password"
                                                name="rpassword">
                                     </div>
@@ -310,7 +310,7 @@
                             <div class="form-row">
                                 <div class="col-lg-12">
                                     <div class="form-group">
-                                        <label for="exampleFormControlFile1">Add Profile Picture</label>
+                                        <label for="exampleFormControlFile1">${labels['domain.user.Document']}</label>
                                         <div class="custom-file">
                                             <input name="profilePicture" type="file" class="custom-file-input" id="validatedCustomFile">
                                             <label class="custom-file-label" for="validatedCustomFile">Choose Profile Picture file...</label>
@@ -342,7 +342,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label">address</label>
+                                <label class="control-label">${labels['domain.user.address']}</label>
                                 <textarea rows="7" class="form-control forceValidate" placeholder="" name="address"></textarea>
                             </div>
                         </form>
@@ -354,7 +354,7 @@
     <div id="contextMenu" class="dropdown-menu" role="menu" style="display:none;position: fixed;" >
         <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Add-New-User-Action">
             <i class="fa fa-fw fa-user text-primary"></i>
-            Add New User
+            ${labels['domain.user.btn.CreateNewUser']}
         </a>
         <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Add-New-User-Popup-Action">
             <i class="fa fa-external-link-alt fa-fw text-primary"></i>
