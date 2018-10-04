@@ -24,7 +24,7 @@
     *   [JavaTMP Front-end Plugins And Frameworks](/pages/javatmp-front-end-plugins-and-frameworks)
     *   [Development and Environment tools](/pages/development-and-environment-tools)
     *   [Chart types and data visualization](/pages/chart-types-and-data-visualization)
-    *   [Database Related Links](/pages/database-related-links)
+    *   [Database Related Information](/pages/database-related-info)
     *   [Convert CSS file to SASS' SCSS syntax](/pages/convert-css-to-scss-syntax)
     *   [Using jQueryUI Framework](/pages/using-jqueryui-framework-with-bootstrap-template "Using jQueryUI Framework With Bootstrap Template")
 *   [Versions Change Log](/pages/java-bootstrap-template-versions-change-log)
