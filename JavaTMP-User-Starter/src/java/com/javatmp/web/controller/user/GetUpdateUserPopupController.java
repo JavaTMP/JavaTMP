@@ -1,13 +1,11 @@
 package com.javatmp.web.controller.user;
 
 import com.javatmp.domain.Country;
-import com.javatmp.domain.Document;
 import com.javatmp.domain.Language;
 import com.javatmp.domain.Theme;
 import com.javatmp.domain.Timezone;
 import com.javatmp.domain.User;
 import com.javatmp.mvc.MvcHelper;
-import com.javatmp.service.DocumentService;
 import com.javatmp.service.ServicesFactory;
 import com.javatmp.util.Constants;
 import java.io.IOException;

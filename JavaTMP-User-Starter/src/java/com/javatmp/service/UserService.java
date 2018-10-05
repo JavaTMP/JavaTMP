@@ -41,7 +41,7 @@ public class UserService {
         this.jpaDaoHelper = jpaDaoHelper;
     }
 
-    public User readCompleteUserById(User user) {
+    public User readCompleteUserById_old(User user) {
 
         EntityManager em = null;
         try {
@@ -55,6 +55,34 @@ public class UserService {
 //            Join<User, Document> join = from.join(User_.profilePicDocument, JoinType.LEFT);
 //            Join<User, Country> countryJoin = from.join(User_.country, JoinType.LEFT);
             cq.select(from);
+            cq.where(cb.equal(from.get(User_.id), user.getId()));
+            TypedQuery<User> query = em.createQuery(cq);
+            user = query.getSingleResult();
+            return user;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+    public User readCompleteUserById(User user) {
+
+        EntityManager em = null;
+        try {
+            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<User> cq = cb.createQuery(User.class);
+
+            Root<User> from = cq.from(User.class);
+            Join<User, Document> joinDocument = from.join(User_.profilePicDocument, JoinType.LEFT);
+            Join<User, Country> joinCountry = from.join(User_.country, JoinType.LEFT);
+
+            cq.multiselect(from.get("id"), from.get("userName"), from.get("password"), from.get("firstName"),
+                    from.get("lastName"), from.get("status"), from.get("birthDate"), from.get("creationDate"),
+                    from.get("email"), from.get("lang"), from.get("theme"), from.get("countryId"), from.get("address"),
+                    from.get("timezone"), from.get("profilePicDocumentId"), from.get("profilePicDocument").get("randomHash")
+            );
             cq.where(cb.equal(from.get(User_.id), user.getId()));
             TypedQuery<User> query = em.createQuery(cq);
             user = query.getSingleResult();
