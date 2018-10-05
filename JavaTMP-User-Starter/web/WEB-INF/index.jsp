@@ -203,7 +203,7 @@
                     direction: "${labels['global.direction']}",
                     isRTL: ${labels['global.direction'] == 'ltr' ? 'false' : 'true'},
                     contextPath: '${pageContext.request.contextPath}',
-                    label: {
+                    labels: {
                         loadingText: "${labels['global.loadingText']}"
                     }
                 };

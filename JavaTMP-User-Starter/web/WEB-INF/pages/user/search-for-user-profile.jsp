@@ -28,6 +28,13 @@
                                                     <input style="width: 12rem;" type="text" class="mr-1 form-control" name="userName" placeholder="Username" value="">
                                                     <button class="btn btn-primary mr-1" type="submit">Search</button>
                                                     <button id="usersSearchLookupButton" class="btn btn-primary" type="button">Lookup</button>
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                                        <div class="input-group-append">
+                                                            <button class="btn btn-outline-secondary" type="button">Button</button>
+                                                            <button class="btn btn-outline-secondary" type="button">Button</button>
+                                                        </div>
+                                                    </div>
                                                 </div>
 
                                             </div>
@@ -193,21 +200,15 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-3 text-center">
+                                            <div class="col-lg-6 text-center">
                                                 <div style="width: 200px; height: 200px;display: inline-block;position: relative">
                                                     <div id="profilePicturePreviewContainerId" style="width: 200px; height: 200px;">
                                                         <img id="profilePicturePreview" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-3 text-center">
+                                            <div class="col-lg-6 text-center">
                                                 <img id="profilePictureResizePreview" style="width: 200px; height: 200px;" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
-                                            </div>
-                                            <div class="col-lg-3 text-center">
-                                                <img id="profilePictureAvatarPreview" style="width: 40px; height: 40px;" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
-                                            </div>
-                                            <div class="col-lg-3 text-center">
-                                                <img class="rounded-circle" id="profilePictureAvatarRoundedPreview" style="width: 40px; height: 40px;" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
                                             </div>
                                         </div>
                                         <div class="form-row">
@@ -403,9 +404,6 @@
 
                             image.attr('src', avatarImageSrc);
                             resizeImage.attr('src', avatarImageSrc);
-                            avatarImage.attr('src', avatarImageSrc);
-                            avatarRoundedImage.attr('src', avatarImageSrc);
-
                             enabled();
 
                         } else {

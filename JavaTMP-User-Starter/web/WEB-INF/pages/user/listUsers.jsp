@@ -8,27 +8,27 @@
                 actionType="action-ref-href"
                 action-ref-by-href="${pageContext.request.contextPath}/user/CreateUserController">
             <i class="fa fa-fw fa-user"></i>
-            Add New User
+            ${labels['page.btn.addNewUserPage']}
         </button>
         <button action-name="Add-New-User-Popup-Action" id="UserList-AddNewUserPopupId" type="button" class="btn btn-primary">
             <i class="fa fa-external-link-alt fa-fw"></i>
-            Add New User Popup
+            ${labels['page.btn.addNewUserPopup']}
         </button>
         <button action-name="Update-Complete-User-Action" id="UserList-UpdateSelectedUserId" type="button" class="btn btn-primary">
             <i class="fa fa-user-edit fa-fw"></i>
-            Update Complete User
+            ${labels['page.btn.updateCompleteUser']}
         </button>
         <button action-name="Delete-User-Action" id="UserList-DeleteSelectedUserId" type="button" class="btn btn-primary">
             <i class="fa fa-user-times fa-fw text-danger"></i>
-            Delete User
+            ${labels['page.btn.deleteUser']}
         </button>
         <button action-name="Activate-User-Action" id="UserList-ActivateSelectedUserId" type="button" class="btn btn-primary">
             <i class="fa fa-user-check fa-fw text-success"></i>
-            Activate User
+            ${labels['page.btn.activateUser']}
         </button>
         <button action-name="Deactivate-User-Action" id="UserList-DeactivateSelectedUserId" type="button" class="btn btn-primary">
             <i class="fa fa-user-slash fa-fw text-warning"></i>
-            Deactivate User
+            ${labels['page.btn.deactivateUser']}
         </button>
     </div>
     <table cellspacing="0" class="table table-condensed table-bordered table-hover" id="UsersListTableId">
@@ -254,17 +254,17 @@
             disabled();
             $.fn.dataTable.ext.errMode = 'none';
             var table = userTableElement.DataTable({
+                "pagingType": "full",
                 dom: "<'row'<'col-sm-12 p-0'tr>>" +
-                        "<'row'<'col-sm-6'i><'col-sm-6 pt-2 text-right'l>>"
-                        + "<'row'<'col-sm-12'p>>"
+                        "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4 pt-2 text-right'l>>"
                 ,
 //                select: true,
                 select: "single",
-                scrollY: 400,
+                scrollY: 250,
                 scrollX: true,
                 "autoWidth": false,
                 fixedColumns: true,
-                scrollCollapse: true,
+                scrollCollapse: false,
                 "searching": true,
                 searchDelay: 500,
                 orderCellsTop: true, // important to for two row header with filteration below header column names.
