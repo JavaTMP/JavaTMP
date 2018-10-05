@@ -220,18 +220,18 @@
                                             <textarea rows="7" class="form-control forceValidate" placeholder="" name="address"></textarea>
                                         </div>
                                         <div class="form-group">
-                                            <input id="UserList-UpdateSelectedUserId" type="submit" class="btn btn-primary" value="Update Profile"/>
+                                            <input id="UserList-UpdateSelectedUserId" type="submit" class="btn btn-primary" value="${labels['page.btn.updateCompleteUser']}"/>
                                             <button action-name="Delete-User-Action" id="UserList-DeleteSelectedUserId" type="button" class="btn btn-primary">
                                                 <i class="fa fa-user-times fa-fw text-danger"></i>
-                                                Delete User
+                                                ${labels['page.btn.deleteUser']}
                                             </button>
                                             <button action-name="Activate-User-Action" id="UserList-ActivateSelectedUserId" type="button" class="btn btn-primary">
                                                 <i class="fa fa-user-check fa-fw text-success"></i>
-                                                Activate User
+                                                ${labels['page.btn.activateUser']}
                                             </button>
                                             <button action-name="Deactivate-User-Action" id="UserList-DeactivateSelectedUserId" type="button" class="btn btn-primary">
                                                 <i class="fa fa-user-slash fa-fw text-warning"></i>
-                                                Deactivate User
+                                                ${labels['page.btn.deactivateUser']}
                                             </button>
                                         </div>
                                     </div>

@@ -38,51 +38,50 @@
             <table cellspacing="0" class="table table-condensed table-bordered table-hover" id="UsersListTableId">
                 <thead>
                     <tr id="UserListMainHeader">
-                        <th style="width: 75px;"><p style="width: 75px;">ID</p></th>
-                        <th style="width: 150px;"><p style="width: 150px;">Username</p></th>
-                        <th style="width: 150px;"><p style="width: 150px;">First name</p></th>
-                        <th style="width: 150px;"><p style="width: 150px;">Last name</p></th>
-                        <th style="width: 200px;"><p style="width: 200px;">Date Of Birth</p></th>
-                        <th style="width: 40px;"><p style="width: 40px;">Age</p></th>
-                        <th style="width: 200px;"><p style="width: 200px;">E-mail</p></th>
-                        <th style="width: 100px;"><p style="width: 100px;">Status</p></th>
-                        <th style="width: 200px;"><p style="width: 200px;">Country Name</p></th>
-                        <th style="width: 150px;"><p style="width: 150px;">Address</p></th>
-                        <th style="width: 125px;"><p style="width: 125px;">Language</p></th>
-                        <th style="width: 150px;"><p style="width: 150px;">Theme</p></th>
-                        <th style="width: 250px;"><p style="width: 250px;">Timezone</p></th>
-                        <th style="width: 200px;"><p style="width: 200px;">Creation Date</p></th>
+                        <th style="width: 5rem;"><p style="width: 5rem;">${labels['domain.user.id']}</p></th>
+                        <th style="width: 9rem;"><p style="width: 9rem;">${labels['domain.user.userName']}</p></th>
+                        <th style="width: 7rem;"><p style="width: 7rem;">${labels['domain.user.firstName']}</p></th>
+                        <th style="width: 7rem;"><p style="width: 7rem;">${labels['domain.user.lastName']}</p></th>
+                        <th style="width: 8rem;"><p style="width: 8rem;">${labels['domain.user.birthDate']}</p></th>
+                        <th style="width: 3rem;"><p style="width: 3rem;">${labels['domain.user.age']}</p></th>
+                        <th style="width: 8rem;"><p style="width: 8rem;">${labels['domain.user.email']}</p></th>
+                        <th style="width: 6rem;"><p style="width: 6rem;">${labels['domain.user.status']}</p></th>
+                        <th style="width: 8rem;"><p style="width: 8rem;">${labels['domain.user.country']}</p></th>
+                        <th style="width: 10rem;"><p style="width: 10rem;">${labels['domain.user.lang']}</p></th>
+                        <th style="width: 10rem;"><p style="width: 10rem;">${labels['domain.user.theme']}</p></th>
+                        <th style="width: 10rem;"><p style="width: 10rem;">${labels['domain.user.timezone']}</p></th>
+                        <th style="width: 8rem;"><p style="width: 8rem;">${labels['domain.user.creationDate']}</p></th>
                     </tr>
                     <tr id="UserListFilterHeader">
-                        <th style="width: 75px;">
+                        <th style="width: 5rem;">
                             <input id="userlist-id-filter" class="form-control"/>
                         </th>
-                        <th style="width: 150px;">
+                        <th style="width: 9rem;">
                             <input id="userlist-username-filter" class="form-control"/>
                         </th>
-                        <th style="width: 150px;">
+                        <th style="width: 7rem;">
                             <input id="userlist-firstname-filter" class="form-control"/>
                         </th>
-                        <th style="width: 150px;">
+                        <th style="width: 7rem;">
                             <input id="userlist-lastname-filter" class="form-control"/>
                         </th>
-                        <th style="width: 200px;">
+                        <th style="width: 8rem;">
                             <input id="userlist-birthdate-filter" class="form-control"/>
                         </th>
-                        <th style="width: 40px;">
+                        <th style="width: 3rem;">
                             <input id="userlist-age-filter" class="form-control"/>
                         </th>
-                        <th style="width: 200px;">
+                        <th style="width: 8rem;">
                             <input id="userlist-email-filter" class="form-control"/>
                         </th>
-                        <th style="width: 100px;">
+                        <th style="width: 6rem;">
                             <select id="userlist-status-filter" class="form-control">
                                 <option value="">ALL Statuses</option>
                                 <option value="1">Activated</option>
                                 <option value="0">Deactivated</option>
                             </select>
                         </th>
-                        <th style="width: 200px;">
+                        <th style="width: 8rem;">
                             <select id="userlist-country-filter" class="form-control">
                                 <c:choose>
                                     <c:when test="${fn:length(requestScope.countries) > 0}">
@@ -97,10 +96,7 @@
                                 </c:choose>
                             </select>
                         </th>
-                        <th style="width: 150px;">
-                            <input id="userlist-address-filter" class="form-control"/>
-                        </th>
-                        <th style="width: 125px;">
+                        <th style="width: 10rem;">
                             <select id="userlist-language-filter" name="lang" class="form-control">
                                 <c:choose>
                                     <c:when test="${fn:length(requestScope.languages) > 0}">
@@ -115,7 +111,7 @@
                                 </c:choose>
                             </select>
                         </th>
-                        <th style="width: 150px;">
+                        <th style="width: 10rem;">
                             <select id="userlist-theme-filter" name="theme" class="form-control">
                                 <c:choose>
                                     <c:when test="${fn:length(requestScope.themes) > 0}">
@@ -130,7 +126,7 @@
                                 </c:choose>
                             </select>
                         </th>
-                        <th style="width: 250px;">
+                        <th style="width: 10rem;">
                             <select id="userlist-timezone-filter" name="timezone" class="form-control">
                                 <c:choose>
                                     <c:when test="${fn:length(requestScope.timezones) > 0}">
@@ -145,7 +141,7 @@
                                 </c:choose>
                             </select>
                         </th>
-                        <th style="width: 200px;">
+                        <th style="width: 8rem;">
                             <input id="userlist-creationdate-filter" class="form-control"/>
                         </th>
                     </tr>
@@ -170,7 +166,7 @@
                             <div class="form-row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
-                                        <label class="control-label">User Status</label>
+                                        <label class="control-label">${labels['domain.user.status']}</label>
                                         <select name="status" class="custom-select">
                                             <option value="1">Activated</option>
                                             <option value="0">Deactivated</option>
@@ -465,11 +461,11 @@
                 ,
 //                select: true,
                 select: "single",
-                scrollY: 400,
+                scrollY: 250,
                 scrollX: true,
                 "autoWidth": false,
                 fixedColumns: true,
-                scrollCollapse: true,
+                scrollCollapse: false,
                 "searching": true,
                 searchDelay: 500,
                 orderCellsTop: true, // important to for two row header with filteration below header column names.
@@ -668,22 +664,13 @@
                         return readyData;
                     }
 
-                    // Address field
-                    var addressFilterInput = $("#userlist-address-filter");
-                    addressFilterInput.on('change', function () {
-                        var $this = $(this);
-                        javatmp.util.waitForFinalEvent(function () {
-                            var val = $this.val();
-                            api.column(9).search(val ? val : '', false, false).draw();
-                        }, 200, "@userlist-main-table-filter");
-                    });
                     // 10 Language Field userlist-language-filter
                     var languageFilterInput = $("#userlist-language-filter");
                     languageFilterInput.on('change', function () {
                         var $this = $(this);
                         javatmp.util.waitForFinalEvent(function () {
                             var val = $this.val();
-                            api.column(10).search(val ? val : '', false, false).draw();
+                            api.column(9).search(val ? val : '', false, false).draw();
                         }, 200, "@userlist-main-table-filter");
                     });
                     languageFilterInput.select2({
@@ -701,7 +688,7 @@
                         var $this = $(this);
                         javatmp.util.waitForFinalEvent(function () {
                             var val = $this.val();
-                            api.column(11).search(val ? val : '', false, false).draw();
+                            api.column(10).search(val ? val : '', false, false).draw();
                         }, 200, "@userlist-main-table-filter");
                     });
                     themeFilterInput.select2({
@@ -758,7 +745,7 @@
                         var $this = $(this);
                         javatmp.util.waitForFinalEvent(function () {
                             var val = $this.val();
-                            api.column(12).search(val ? val : '', false, false).draw();
+                            api.column(11).search(val ? val : '', false, false).draw();
                         }, 200, "@userlist-main-table-filter");
                     });
                     timezoneFilterInput.select2({
@@ -777,7 +764,7 @@
                             var start = $this.data("start");
                             var end = $this.data("end");
                             var val = start.format("YYYY-MM-DDTHH:mm:ss.SSSZ") + "##TO##" + end.format("YYYY-MM-DDTHH:mm:ss.SSSZ");
-                            api.column(13).search(val ? val : '', false, false).draw();
+                            api.column(12).search(val ? val : '', false, false).draw();
                         }, 200, "@userlist-main-table-filter");
                     });
                     creationdateFilterInput.daterangepicker({
@@ -829,10 +816,10 @@
                     }
                 },
                 columns: [
-                    {data: 'id', className: "", name: "id", width: 75,
+                    {data: 'id', className: "", name: "id", width: "6rem",
                         "render": function (data, type, row) {
                             if (type === "display") {
-                                return "<p class='m-0 p-0' style='width: 105px;'>" + data + "</p>";
+                                return "<p class='m-0 p-0' style='width: 6rem;'>" + data + "</p>";
                             } else {
                                 return data;
                             }
@@ -840,131 +827,122 @@
                         }
                     },
                     {
-                        data: 'userName', name: "userName", width: 150,
+                        data: 'userName', name: "userName", width: "10rem",
                         "render": function (data, type, row) {
                             if (type === "sort" || type === 'type' || type === 'filter') {
                                 return data;
                             } else {
-                                return "<p class='m-0 p-0' style='width: 150px;'>" + data + "</p>";
+                                return "<p class='m-0 p-0' style='width: 10rem;'>" + data + "</p>";
                             }
                         }
                     },
                     {
-                        data: 'firstName', name: "firstName", width: 150,
+                        data: 'firstName', name: "firstName", width: "8rem",
                         "render": function (data, type, row) {
                             if (type === "sort" || type === 'type' || type === 'filter') {
                                 return data;
                             } else {
-                                return "<p class='m-0 p-0' style='width: 150px;'>" + data + "</p>";
-                            }
-
-                        }
-                    },
-                    {
-                        data: 'lastName', name: "lastName", width: 150,
-                        "render": function (data, type, row) {
-                            if (type === "sort" || type === 'type' || type === 'filter') {
-                                return data;
-                            } else {
-                                return "<p class='m-0 p-0' style='width: 150px;'>" + data + "</p>";
+                                return "<p class='m-0 p-0' style='width: 8rem;'>" + data + "</p>";
                             }
 
                         }
                     },
                     {
-                        data: 'birthDate', "type": "date", name: "birthDate", width: 200,
+                        data: 'lastName', name: "lastName", width: "8rem",
+                        "render": function (data, type, row) {
+                            if (type === "sort" || type === 'type' || type === 'filter') {
+                                return data;
+                            } else {
+                                return "<p class='m-0 p-0' style='width: 8rem;'>" + data + "</p>";
+                            }
+
+                        }
+                    },
+                    {
+                        data: 'birthDate', "type": "date", name: "birthDate", width: "9rem",
                         "render": function (data, type, row) {
                             if (type === "sort" || type === 'type' || type === 'filter') {
                                 return moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY HH:mm');
                             } else {
-                                return "<p class='m-0 p-0' style='width: 200px;'>" + moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY') + "</p>";
+                                return "<p class='m-0 p-0' style='width: 9rem;'>" + moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY') + "</p>";
                             }
                         }
                     },
                     {
-                        data: 'birthDate', name: "age", "type": "date", width: 40,
+                        data: 'birthDate', name: "age", "type": "date", width: "4rem",
                         "render": function (data, type, row) {
                             data = Math.ceil(moment().diff(moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ"), 'years', true));
                             if (type === "display") {
-                                return "<p class='m-0 p-0' style='width: 40px;'>" + data + "</p>";
+                                return "<p class='m-0 p-0' style='width: 4rem;'>" + data + "</p>";
                             } else {
                                 return data;
                             }
                         }
                     },
-                    {data: 'email', name: "email", width: 200,
+                    {data: 'email', name: "email", width: "9rem",
                         "render": function (data, type, row) {
                             if (type === "display") {
-                                return "<p class='m-0 p-0 text-truncate' style='width: 200px;'>" + data + "</p>";
+                                return "<p class='m-0 p-0 text-truncate' style='width: 9rem;'>" + data + "</p>";
                             } else {
                                 return data;
                             }
                         }
                     },
-                    {data: 'status', name: "status", width: 100,
+                    {data: 'status', name: "status", width: "7rem",
                         "render": function (data, type, row) {
 
                             var statusMap = {"-1": {label: "Deleted", style: "danger"}, "0": {label: "Deactive", style: "warning"}, "1": {label: "Active", style: "success"}};
 
                             if (type === "display") {
-                                return "<p class='m-0 p-0' style='width: 100px;'><span class='badge badge-" + statusMap[data].style + "'>" + statusMap[data].label + "</span></p>";
+                                return "<p class='m-0 p-0' style='width: 7rem;'><span class='badge badge-" + statusMap[data].style + "'>" + statusMap[data].label + "</span></p>";
                             } else {
                                 return data;
                             }
                         }
                     },
                     {
-                        data: 'countryId', name: "countryId", width: 200,
+                        data: 'countryId', name: "countryId", width: "9rem",
                         "render": function (data, type, row) {
                             if (type === "sort" || type === 'type' || type === 'filter') {
                                 return data;
                             } else {
-                                return "<p class='m-0 p-0 text-truncate' style='width: 200px;'>" + countriesMap[data] + "</p>";
+                                return "<p class='m-0 p-0 text-truncate' style='width: 9rem'>" + countriesMap[data] + "</p>";
                             }
                         }
                     },
-                    {data: 'address', name: "address", width: 150,
-                        "render": function (data, type, row) {
-                            if (type === "sort" || type === 'type' || type === 'filter') {
-                                return data;
-                            } else {
-                                return "<p class='m-0 p-0' style='width: 150px;'>Will Be Show</p>";
-                            }
-                        }
-                    },
-                    {data: 'lang', name: "lang", width: 125,
+                    {data: 'lang', name: "lang", width: "10rem",
                         "render": function (data, type, row) {
                             if (type === "display") {
-                                return "<p class='m-0 p-0' style='width: 125px;'>" + languagesMap[data] + "</p>";
+                                return "<p class='m-0 p-0' style='width: 10rem;'>" + languagesMap[data] + "</p>";
                             } else {
                                 return data;
                             }
                         }
                     },
-                    {data: 'theme', name: "theme", width: 150,
+                    {data: 'theme', name: "theme", width: "10rem",
                         "render": function (data, type, row) {
                             if (type === "display") {
-                                return "<p class='m-0 p-0' style='width: 150px;'>" + themesMap[data] + "</p>";
+                                return "<p class='m-0 p-0' style='width: 10rem;'>" + themesMap[data] + "</p>";
                             } else {
                                 return data;
                             }
                         }
                     },
-                    {data: 'timezone', name: "timezone", width: 250,
+                    {data: 'timezone', name: "timezone", width: "11rem",
                         "render": function (data, type, row) {
                             if (type === "display") {
-                                return "<p class='m-0 p-0 text-truncate' style='width: 250px;'>" + timezonesMap[data] + "</p>";
+                                return "<p class='m-0 p-0 text-truncate' style='width: 11rem;'>" + timezonesMap[data] + "</p>";
                             } else {
                                 return data;
                             }
                         }
                     },
-                    {data: 'creationDate', "type": "date", name: "creationDate", width: 200,
+                    {data: 'creationDate', "type": "date", name: "creationDate", width: "9rem",
                         "render": function (data, type, row) {
                             if (type === "sort" || type === 'type' || type === 'filter') {
                                 return moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY HH:mm');
                             } else {
-                                return "<p class='m-0 p-0' style='width: 200px;'>" + moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY HH:mm') + "</p>";
+                                return "<p class='m-0 p-0 text-truncate' style='width: 9rem;'>" + moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY HH:mm') + "</p>";
                             }
 
                         }}

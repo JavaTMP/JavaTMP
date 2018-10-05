@@ -79,14 +79,11 @@ public class RegisterController extends HttpServlet {
         } catch (PersistenceException e) {
             Throwable t = e;
             String msg = "";
-            while (t != null) {
-                msg += t.getClass().getName() + ".\n";
-                msg += t.getMessage() + ".\n";
-                System.out.println("e [" + t.getMessage() + "]");
+            while (t.getCause() != null) {
                 t = t.getCause();
             }
             responseMessage.setOverAllStatus(false);
-            responseMessage.setMessage("error during connecting to database =>" + msg);
+            responseMessage.setMessage("error during connecting to database =>" + t.getMessage());
         } catch (IllegalAccessException ex) {
             ex.printStackTrace();
             throw new ServletException(ex);

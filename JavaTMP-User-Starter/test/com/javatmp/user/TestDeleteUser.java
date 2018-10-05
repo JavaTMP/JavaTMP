@@ -9,6 +9,7 @@ import com.javatmp.domain.User;
 import com.javatmp.db.JpaDaoHelper;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.service.UserService;
+import java.sql.SQLIntegrityConstraintViolationException;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;
 
@@ -39,12 +40,15 @@ public class TestDeleteUser {
         } catch (PersistenceException e) {
             Throwable t = e;
             while (t.getCause() != null) {
-//                System.out.println("type [" + t.getClass().getName() + "]");
-//                System.out.println("t [" + t.getMessage() + "]");
                 t = t.getCause();
             }
-            System.out.println("type [" + t.getClass().getName() + "]");
-            System.out.println("t [" + t.getMessage() + "]");
+            if (t instanceof SQLIntegrityConstraintViolationException) {
+                SQLIntegrityConstraintViolationException sql = (SQLIntegrityConstraintViolationException) t;
+                System.out.println("message [" + sql.getMessage() + "]");
+                System.out.println("code [" + sql.getSQLState() + "]");
+
+            }
+
         }
 
     }

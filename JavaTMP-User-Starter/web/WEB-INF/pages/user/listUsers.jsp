@@ -39,7 +39,7 @@
                 <th style="width: 7rem;"><p style="width: 7rem;">${labels['domain.user.firstName']}</p></th>
                 <th style="width: 7rem;"><p style="width: 7rem;">${labels['domain.user.lastName']}</p></th>
                 <th style="width: 8rem;"><p style="width: 8rem;">${labels['domain.user.birthDate']}</p></th>
-                <th style="width: 3rem;"><p style="width: 3rem;">Age</p></th>
+                <th style="width: 3rem;"><p style="width: 3rem;">${labels['domain.user.age']}</p></th>
                 <th style="width: 8rem;"><p style="width: 8rem;">${labels['domain.user.email']}</p></th>
                 <th style="width: 6rem;"><p style="width: 6rem;">${labels['domain.user.status']}</p></th>
                 <th style="width: 8rem;"><p style="width: 8rem;">${labels['domain.user.country']}</p></th>
@@ -255,9 +255,13 @@
             $.fn.dataTable.ext.errMode = 'none';
             var table = userTableElement.DataTable({
                 "pagingType": "full",
-                dom: "<'row'<'col-sm-12 p-0'tr>>" +
-                        "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4 pt-2 text-right'l>>"
-                ,
+                // https://datatables.net/reference/option/dom
+                dom: "<'row'<'col-sm-12 col-md-6'l>>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+//                dom: "<'row'<'col-sm-12 p-0'tr>>" +
+//                        "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4 pt-2 text-right'l>>"
+//                ,
 //                select: true,
                 select: "single",
                 scrollY: 250,

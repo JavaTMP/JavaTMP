@@ -155,11 +155,10 @@ public class UserService {
             em.persist(user);
             em.getTransaction().commit();
         } catch (PersistenceException e) {
-            e.printStackTrace();
             if (em != null) {
                 em.getTransaction().rollback();
             }
-            throw new PersistenceException("@ create new basic user", e);
+            throw e;
         } finally {
             if (em != null) {
                 em.close();
@@ -202,11 +201,9 @@ public class UserService {
                 dbUser.setProfilePicDocument(doc);
                 dbUser.setProfilePicDocumentId(doc.getDocumentId());
             }
-
             em.getTransaction().commit();
             updateStatus = 1;
         } catch (PersistenceException e) {
-            e.printStackTrace();
             if (em != null) {
                 em.getTransaction().rollback();
             }
@@ -216,7 +213,7 @@ public class UserService {
         return updateStatus;
     }
 
-    public int updateValidUserAccess(User userToBeUpdated) {
+    public int updateLastUserAccess(User userToBeUpdated) {
         int updateStatus = 0;
         EntityManager em = null;
 
@@ -234,7 +231,6 @@ public class UserService {
             em.getTransaction().commit();
             return updateStatus;
         } catch (PersistenceException e) {
-            e.printStackTrace();
             if (em != null) {
                 em.getTransaction().rollback();
             }
@@ -277,7 +273,7 @@ public class UserService {
 
             em.getTransaction().commit();
             return deletedStatus;
-        } catch (IllegalArgumentException | PersistenceException e) {
+        } catch (PersistenceException e) {
             if (em != null) {
                 em.getTransaction().rollback();
             }

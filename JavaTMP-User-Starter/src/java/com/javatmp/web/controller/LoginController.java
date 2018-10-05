@@ -56,7 +56,7 @@ public class LoginController extends HttpServlet {
                 session.setAttribute(Constants.LANGUAGE_ATTR_KEY, bundle);
                 session.setAttribute("user", dbUser);
 
-                sf.getUserService().updateValidUserAccess(dbUser);
+                sf.getUserService().updateLastUserAccess(dbUser);
 
                 responseMessage.setOverAllStatus(true);
                 responseMessage.setMessage(request.getContextPath() + "/");
