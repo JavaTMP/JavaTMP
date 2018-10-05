@@ -194,6 +194,13 @@
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all-locale-${sessionScope.user.lang}.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp.min.js" type="text/javascript"></script>
         <script type="text/javascript">
+            var labels = {};
+            <c:forEach items="${labels.keySet()}" var="entry">
+            labels["${entry}"] = "${labels[entry]}";
+            </c:forEach>
+
+        </script>
+        <script type="text/javascript">
             jQuery(function ($) {
                 var defaults = {
                     defaultPassData: {_ajax: "ajax", _ajaxGlobalBlockUI: true, _handleAjaxErrorGlobally: true},
@@ -203,9 +210,7 @@
                     direction: "${labels['global.direction']}",
                     isRTL: ${labels['global.direction'] == 'ltr' ? 'false' : 'true'},
                     contextPath: '${pageContext.request.contextPath}',
-                    labels: {
-                        loadingText: "${labels['global.loadingText']}"
-                    }
+                    labels: labels
                 };
 
                 index.init(defaults);

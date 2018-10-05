@@ -245,11 +245,16 @@
                 activateUserButton.prop("disabled", true);
                 deActivateUserButton.prop("disabled", true);
             }
-            function enabled() {
+            function enabled(record) {
                 updateUserButton.prop("disabled", false);
                 deleteUserButton.prop("disabled", false);
-                activateUserButton.prop("disabled", false);
-                deActivateUserButton.prop("disabled", false);
+                if (record.status !== 1) {
+                    activateUserButton.prop("disabled", false);
+                }
+                if (record.status !== 0) {
+                    deActivateUserButton.prop("disabled", false);
+                }
+
             }
             disabled();
             $.fn.dataTable.ext.errMode = 'none';
@@ -798,7 +803,7 @@
                 //                alert("select");
                 var rowsData = table.rows(indexes).data().toArray();
                 var rowData = rowsData[0];
-                enabled();
+                enabled(rowData);
                 //                alert("select" + JSON.stringify(rowData));
             }).on('deselect', function (e, dt, type, indexes) {
                 //                alert("descelect");
@@ -878,7 +883,7 @@
                                         url: javatmp.settings.contextPath + "/user/DeleteUserController",
                                         data: passData,
 //                                        dataType: "json",
-//                                        contentType: "application/json; charset=UTF-8",
+                                        //                                        contentType: "application/json; charset=UTF-8",
                                         success: function (data) {
                                             m.updateMessage(data.message);
                                             m.updateClosable(true);
@@ -911,7 +916,7 @@
                                                 rtl: javatmp.settings.isRTL,
                                                 positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
                                             });
-//                                            alert("error" + JSON.stringify(data));
+                                            //                                            alert("error" + JSON.stringify(data));
                                         }
                                     });
                                 }
@@ -962,7 +967,7 @@
                                         url: javatmp.settings.contextPath + "/user/ActivateUserController",
                                         data: passData,
 //                                        dataType: "json",
-//                                        contentType: "application/json; charset=UTF-8",
+                                        //                                        contentType: "application/json; charset=UTF-8",
                                         success: function (data) {
                                             m.updateMessage(data.message);
                                             m.updateClosable(true);
@@ -995,7 +1000,7 @@
                                                 rtl: javatmp.settings.isRTL,
                                                 positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
                                             });
-//                                            alert("error" + JSON.stringify(data));
+                                            //                                            alert("error" + JSON.stringify(data));
                                         }
                                     });
                                 }
@@ -1046,7 +1051,7 @@
                                         url: javatmp.settings.contextPath + "/user/DeactivateUserController",
                                         data: passData,
 //                                        dataType: "json",
-//                                        contentType: "application/json; charset=UTF-8",
+                                        //                                        contentType: "application/json; charset=UTF-8",
                                         success: function (data) {
                                             m.updateMessage(data.message);
                                             m.updateClosable(true);
@@ -1079,7 +1084,7 @@
                                                 rtl: javatmp.settings.isRTL,
                                                 positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
                                             });
-//                                            alert("error" + JSON.stringify(data));
+                                            //                                            alert("error" + JSON.stringify(data));
                                         }
                                     });
                                 }

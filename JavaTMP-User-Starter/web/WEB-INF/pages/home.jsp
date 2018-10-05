@@ -541,7 +541,7 @@
                 var cardBody = $(this).closest(".card").children(".card-body");
                 var href = javatmp.settings.contextPath + "/stats/GetRegisteredUsersStatusesController";
 
-                $(cardBody).block({message: javatmp.settings.labels.loadingText,
+                $(cardBody).block({message: javatmp.settings.labels["global.loadingText"],
                     overlayCSS: {
                         backgroundColor: '#000',
                         opacity: 0.7
@@ -599,7 +599,7 @@
                 var cardBody = $(this).closest(".card").children(".card-body");
                 var href = javatmp.settings.contextPath + "/stats/GetVisitingUsersCountController";
 
-                $(cardBody).block({message: javatmp.settings.labels.loadingText,
+                $(cardBody).block({message: javatmp.settings.labels["global.loadingText"],
                     overlayCSS: {
                         backgroundColor: '#000',
                         opacity: 0.7
@@ -654,7 +654,7 @@
                 var cardBody = $(this).closest(".card").children(".card-body");
                 var href = javatmp.settings.contextPath + "/stats/GetUsersPageViewsPerHourCountController";
 
-                $(cardBody).block({message: javatmp.settings.labels.loadingText,
+                $(cardBody).block({message: javatmp.settings.labels["global.loadingText"],
                     overlayCSS: {
                         backgroundColor: '#000',
                         opacity: 0.7
@@ -723,7 +723,7 @@
                 var cardBody = $(this).closest(".card").children(".card-body");
                 var href = javatmp.settings.contextPath + "/stats/GetAvgLoadTimePerHourController";
 
-                $(cardBody).block({message: javatmp.settings.labels.loadingText,
+                $(cardBody).block({message: javatmp.settings.labels["global.loadingText"],
                     overlayCSS: {
                         backgroundColor: '#000',
                         opacity: 0.7
@@ -795,7 +795,7 @@
                 var cardBody = $(this).closest(".card").children(".card-body");
                 var href = javatmp.settings.contextPath + "/stats/GetUsersLocationsCountController";
 
-                $(cardBody).block({message: javatmp.settings.labels.loadingText,
+                $(cardBody).block({message: javatmp.settings.labels["global.loadingText"],
                     overlayCSS: {
                         backgroundColor: '#000',
                         opacity: 0.7
@@ -865,7 +865,7 @@
                 var cardBody = $(this).closest(".card").children(".card-body");
                 var href = javatmp.settings.contextPath + "/stats/GetUsersBirthdayCountController";
 
-                $(cardBody).block({message: javatmp.settings.labels.loadingText,
+                $(cardBody).block({message: javatmp.settings.labels["global.loadingText"],
                     overlayCSS: {
                         backgroundColor: '#000',
                         opacity: 0.7
