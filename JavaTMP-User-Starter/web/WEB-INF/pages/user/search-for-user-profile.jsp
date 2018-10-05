@@ -21,18 +21,15 @@
                                 <div class="form-row">
                                     <div class="col-sm-12">
                                         <div class="form-group form-row">
-                                            <label class="control-label col-sm-1 col-form-label">User:</label>
+                                            <label class="control-label col-sm-1 col-form-label">${labels['domain.user']}</label>
                                             <div class="col-sm-10">
                                                 <div class="form-inline">
-                                                    <input style="width: 7rem;" type="text" class="mr-1 form-control" name="id" placeholder="id" value="">
-                                                    <input style="width: 12rem;" type="text" class="mr-1 form-control" name="userName" placeholder="Username" value="">
-                                                    <button class="btn btn-primary mr-1" type="submit">Search</button>
-                                                    <button id="usersSearchLookupButton" class="btn btn-primary" type="button">Lookup</button>
                                                     <div class="input-group">
-                                                        <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                                                        <input type="text" class="form-control fixed-sm-6 mr-1" name="id" placeholder="${labels['domain.user.id']}" value="">
+                                                        <input type="text" class="form-control fixed-sm-12 mr-1" name="userName" placeholder="${labels['domain.user.userName']}" value="">
                                                         <div class="input-group-append">
-                                                            <button class="btn btn-outline-secondary" type="button">Button</button>
-                                                            <button class="btn btn-outline-secondary" type="button">Button</button>
+                                                            <button class="btn btn-primary mr-1" type="submit">${labels['page.btn.search']}</button>
+                                                            <button id="usersSearchLookupButton" class="btn btn-primary" type="button">${labels['page.btn.lookup']}</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -255,6 +252,14 @@
         /*
         Embed CSS styling for current page.
         */
+        .fixed-sm-6 {
+            width: 6rem!important;
+            flex: 0 0 6rem!important;
+        }
+        .fixed-sm-12 {
+            width: 12rem!important;
+            flex: 0 0 12rem!important;
+        }
     </style>
 
     <!--

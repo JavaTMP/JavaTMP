@@ -19,18 +19,18 @@
                             <form accept-charset="UTF-8" enctype="multipart/form-data" autocomplete="off" id="UpdateCurrentUserFormId" class="form"
                                   action="${pageContext.request.contextPath}/user/CurrentUserProfileController" method="post" novalidate="novalidate">
                                 <div class="form-row">
-                                    <div class="col-sm-3">
+                                    <div class="col-sm-2">
                                         <div class="form-group form-row">
-                                            <label class="control-label col-sm-3 col-form-label">${labels['domain.user.id']}</label>
-                                            <div class="col-sm-9">
+                                            <label class="control-label col-sm-4 col-form-label">${labels['domain.user.id']}</label>
+                                            <div class="col-sm-8">
                                                 <input readonly="readonly" class="form-control-plaintext" type="text" name="id" value="${requestScope.user.id}">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-9">
+                                    <div class="col-sm-3">
                                         <div class="form-group form-row">
-                                            <label class="control-label col-sm-3 col-form-label">${labels['domain.user.status']}</label>
-                                            <div class="col-sm-9">
+                                            <label class="control-label col-sm-4 col-form-label">${labels['domain.user.status']}</label>
+                                            <div class="col-sm-5">
                                                 <select name="status" class="custom-select">
                                                     <option ${requestScope.user.status == 1 ? 'selected="selected"' : ''} value="1">Activated</option>
                                                     <option ${requestScope.user.status == 0 ? 'selected="selected"' : ''} value="0">Deactivated</option>
@@ -40,186 +40,210 @@
                                     </div>
                                 </div>
                                 <div class="form-row">
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                                        <div class="form-group form-row">
+                                            <label class="control-label col-sm-5 col-form-label">${labels['domain.user.firstName']}</label>
+                                            <div class="col-sm-7">
+                                                <input class="form-control" type="text" placeholder="Full Name" name="firstName" value="${requestScope.user.firstName}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                                        <div class="form-group form-row">
+                                            <label class="control-label col-sm-5 col-form-label">${labels['domain.user.lastName']}</label>
+                                            <div class="col-sm-7">
+                                                <input class="form-control" type="text" placeholder="Full Name" name="lastName" value="${requestScope.user.lastName}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                                        <div class="form-group form-row">
+                                            <label class="control-label col-sm-5 col-form-label">${labels['domain.user.birthDate']}</label>
+                                            <div class="col-sm-7">
+                                                <input dir="ltr" class="form-control"  type="text" name="birthOfDateStr" value="<fmt:formatDate pattern='dd/MM/yyyy' timeZone="${sessionScope.user.timezone}" value='${requestScope.user.birthDate}'/>">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                                        <div class="form-group form-row">
+                                            <label class="control-label col-sm-5 col-form-label">${labels['domain.user.email']}</label>
+                                            <div class="col-sm-7">
+                                                <input class="form-control" type="text" placeholder="Email" name="email" value="${requestScope.user.email}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                                        <div class="form-group form-row">
+                                            <label class="control-label col-sm-5 col-form-label">${labels['domain.user.country']}</label>
+                                            <div class="col-sm-7">
+                                                <select name="countryId" class="form-control">
+                                                    <c:choose>
+                                                        <c:when test="${fn:length(requestScope.countries) > 0}">
+                                                            <option value="">Choose ...</option>
+                                                            <c:forEach items="${requestScope.countries}" var="country">
+                                                                <option ${requestScope.user.countryId == country.countryId ? 'selected="selected"' : ''} value="${country.countryId}">${country.countryName}</option>
+                                                            </c:forEach>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <option value="">No Record Found</option>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                                        <div class="form-group form-row">
+                                            <label class="control-label col-sm-5 col-form-label">${labels['domain.user.lang']}</label>
+                                            <div class="col-sm-7">
+                                                <select name="lang" class="form-control">
+                                                    <c:choose>
+                                                        <c:when test="${fn:length(requestScope.languages) > 0}">
+                                                            <option value="">Choose ...</option>
+                                                            <c:forEach items="${requestScope.languages}" var="language">
+                                                                <option ${requestScope.user.lang == language.languageId ? 'selected="selected"' : ''} value="${language.languageId}">${language.languageName}</option>
+                                                            </c:forEach>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <option value="">No Record Found</option>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                                        <div class="form-group form-row">
+                                            <label class="control-label col-sm-5 col-form-label">${labels['domain.user.theme']}</label>
+                                            <div class="col-sm-7">
+                                                <select name="theme" class="form-control">
+                                                    <c:choose>
+                                                        <c:when test="${fn:length(requestScope.themes) > 0}">
+                                                            <option value="">Choose ...</option>
+                                                            <c:forEach items="${requestScope.themes}" var="theme">
+                                                                <option ${requestScope.user.theme == theme.themeId ? 'selected="selected"' : ''} value="${theme.themeId}">${theme.themeName}</option>
+                                                            </c:forEach>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <option value="">No Record Found</option>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                                        <div class="form-group form-row">
+                                            <label class="control-label col-sm-5 col-form-label">${labels['domain.user.timezone']}</label>
+                                            <div class="col-sm-7">
+                                                <select name="timezone" class="form-control">
+                                                    <option value="">Choose ...</option>
+                                                    <c:choose>
+                                                        <c:when test="${fn:length(requestScope.timezones) > 0}">
+                                                            <option value="">Choose ...</option>
+                                                            <c:forEach items="${requestScope.timezones}" var="timezone">
+                                                                <option ${requestScope.user.timezone == timezone.timezoneId ? 'selected="selected"' : ''}  value="${timezone.timezoneId}">${timezone.timezoneName}</option>
+                                                            </c:forEach>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <option value="-1">No Record Found</option>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                                        <div class="form-group form-row">
+                                            <label class="control-label col-sm-5 col-form-label">${labels['domain.user.userName']}</label>
+                                            <div class="col-sm-7">
+                                                <input class="form-control" type="text" autocomplete="off" placeholder="Username"
+                                                       name="userName" value="${requestScope.user.userName}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                                        <div class="form-group form-row">
+                                            <label class="control-label col-sm-5 col-form-label">${labels['domain.user.currentPassword']}</label>
+                                            <div class="col-sm-7">
+                                                <input class="form-control" type="password" autocomplete="off"
+                                                       placeholder="Old Password" name="oldPassword">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                                        <div class="form-group form-row">
+                                            <label class="control-label col-sm-5 col-form-label">${labels['domain.user.newPassword']}</label>
+                                            <div class="col-sm-7">
+                                                <input class="form-control" type="password" autocomplete="off"
+                                                       placeholder="New Password" name="password">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
+                                        <div class="form-group form-row">
+                                            <label class="control-label col-sm-5 col-form-label">${labels['domain.user.reTypeNewPassword']}</label>
+                                            <div class="col-sm-7">
+                                                <input class="form-control" type="password" autocomplete="off" placeholder="Re-type Your New Password"
+                                                       name="rpassword">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
                                     <div class="col-lg-12">
-                                        <div class="form-row">
-                                            <div class="col-lg-3">
-                                                <div class="form-group">
-                                                    <label class="control-label">${labels['domain.user.firstName']}</label>
-                                                    <input class="form-control" type="text" placeholder="Full Name" name="firstName" value="${requestScope.user.firstName}">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <div class="form-group">
-                                                    <label class="control-label">${labels['domain.user.lastName']}</label>
-                                                    <input class="form-control" type="text" placeholder="Full Name" name="lastName" value="${requestScope.user.lastName}">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <div class="form-group">
-                                                    <label class="control-label">${labels['domain.user.birthDate']}</label>
-                                                    <input dir="ltr" class="form-control"  type="text" name="birthOfDateStr" value="<fmt:formatDate pattern='dd/MM/yyyy' timeZone="${sessionScope.user.timezone}" value='${requestScope.user.birthDate}'/>">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <div class="form-group">
-                                                    <label class="control-label">${labels['domain.user.email']}</label>
-                                                    <input class="form-control" type="text" placeholder="Email" name="email" value="${requestScope.user.email}">
-                                                </div>
+                                        <div class="form-group">
+                                            <label for="exampleFormControlFile1">${labels['domain.user.Document']}</label>
+                                            <div class="custom-file">
+                                                <input name="profilePicture" type="file" class="custom-file-input" id="validatedCustomFile">
+                                                <label class="custom-file-label" for="validatedCustomFile">Choose Profile Picture file...</label>
                                             </div>
                                         </div>
-                                        <div class="form-row">
-                                            <div class="col-lg-3">
-                                                <div class="form-group">
-                                                    <label class="control-label">${labels['domain.user.country']}</label>
-                                                    <select name="countryId" class="form-control">
-                                                        <c:choose>
-                                                            <c:when test="${fn:length(requestScope.countries) > 0}">
-                                                                <option value="">Choose ...</option>
-                                                                <c:forEach items="${requestScope.countries}" var="country">
-                                                                    <option ${requestScope.user.countryId == country.countryId ? 'selected="selected"' : ''} value="${country.countryId}">${country.countryName}</option>
-                                                                </c:forEach>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <option value="">No Record Found</option>
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <div class="form-group">
-                                                    <label class="control-label">${labels['domain.user.lang']}</label>
-                                                    <select name="lang" class="form-control">
-                                                        <c:choose>
-                                                            <c:when test="${fn:length(requestScope.languages) > 0}">
-                                                                <option value="">Choose ...</option>
-                                                                <c:forEach items="${requestScope.languages}" var="language">
-                                                                    <option ${requestScope.user.lang == language.languageId ? 'selected="selected"' : ''} value="${language.languageId}">${language.languageName}</option>
-                                                                </c:forEach>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <option value="">No Record Found</option>
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <div class="form-group">
-                                                    <label class="control-label">${labels['domain.user.theme']}</label>
-                                                    <select name="theme" class="form-control">
-                                                        <c:choose>
-                                                            <c:when test="${fn:length(requestScope.themes) > 0}">
-                                                                <option value="">Choose ...</option>
-                                                                <c:forEach items="${requestScope.themes}" var="theme">
-                                                                    <option ${requestScope.user.theme == theme.themeId ? 'selected="selected"' : ''} value="${theme.themeId}">${theme.themeName}</option>
-                                                                </c:forEach>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <option value="">No Record Found</option>
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <div class="form-group">
-                                                    <label class="control-label">${labels['domain.user.timezone']}</label>
-                                                    <select name="timezone" class="form-control">
-                                                        <option value="">Choose ...</option>
-                                                        <c:choose>
-                                                            <c:when test="${fn:length(requestScope.timezones) > 0}">
-                                                                <option value="">Choose ...</option>
-                                                                <c:forEach items="${requestScope.timezones}" var="timezone">
-                                                                    <option ${requestScope.user.timezone == timezone.timezoneId ? 'selected="selected"' : ''}  value="${timezone.timezoneId}">${timezone.timezoneName}</option>
-                                                                </c:forEach>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <option value="-1">No Record Found</option>
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="col-lg-3">
-                                                <div class="form-group">
-                                                    <label class="control-label">${labels['domain.user.userName']}</label>
-                                                    <input class="form-control" type="text" autocomplete="off" placeholder="Username"
-                                                           name="userName" value="${requestScope.user.userName}">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <div class="form-group">
-                                                    <label class="control-label">${labels['domain.user.currentPassword']}</label>
-                                                    <input class="form-control" type="password" autocomplete="off"
-                                                           placeholder="Old Password" name="oldPassword">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <div class="form-group">
-                                                    <label class="control-label">${labels['domain.user.newPassword']}</label>
-                                                    <input class="form-control" type="password" autocomplete="off"
-                                                           placeholder="New Password" name="password">
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-3">
-                                                <div class="form-group">
-                                                    <label class="control-label">${labels['domain.user.reTypeNewPassword']}</label>
-                                                    <input class="form-control" type="password" autocomplete="off" placeholder="Re-type Your New Password"
-                                                           name="rpassword">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="col-lg-12">
-                                                <div class="form-group">
-                                                    <label for="exampleFormControlFile1">${labels['domain.user.Document']}</label>
-                                                    <div class="custom-file">
-                                                        <input name="profilePicture" type="file" class="custom-file-input" id="validatedCustomFile">
-                                                        <label class="custom-file-label" for="validatedCustomFile">Choose Profile Picture file...</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-row">
-                                            <div class="col-lg-6 text-center">
-                                                <div style="width: 200px; height: 200px;display: inline-block;position: relative">
-                                                    <div id="profilePicturePreviewContainerId" style="width: 200px; height: 200px;">
-                                                        <c:choose>
-                                                            <c:when test="${not empty requestScope.user.profilePicDocument.documentId and not empty requestScope.user.profilePicDocument.randomHash}">
-                                                                <img id="profilePicturePreview" src="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${requestScope.user.profilePicDocument.documentId}&amp;randomHash=${requestScope.user.profilePicDocument.randomHash}&amp;viewType=inline" alt="Your Profile Image Preview" />
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <img id="profilePicturePreview" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt=""/>
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6 text-center">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-lg-6 text-center">
+                                        <div style="width: 200px; height: 200px;display: inline-block;position: relative">
+                                            <div id="profilePicturePreviewContainerId" style="width: 200px; height: 200px;">
                                                 <c:choose>
                                                     <c:when test="${not empty requestScope.user.profilePicDocument.documentId and not empty requestScope.user.profilePicDocument.randomHash}">
-                                                        <img id="profilePictureResizePreview" style="width: 200px; height: 200px;" src="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${requestScope.user.profilePicDocument.documentId}&amp;randomHash=${requestScope.user.profilePicDocument.randomHash}&amp;viewType=inline" alt="Your Profile Image Preview" />
+                                                        <img id="profilePicturePreview" src="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${requestScope.user.profilePicDocument.documentId}&amp;randomHash=${requestScope.user.profilePicDocument.randomHash}&amp;viewType=inline" alt="Your Profile Image Preview" />
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <img id="profilePictureResizePreview" style="width: 200px; height: 200px;" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt=""/>
+                                                        <img id="profilePicturePreview" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt=""/>
                                                     </c:otherwise>
                                                 </c:choose>
                                             </div>
                                         </div>
-                                        <div class="form-row">
-                                            <div class="col-lg-12">
-                                                <div class="form-group text-center">
-                                                    <input name="profilePictureStr" type="text" readonly="" hidden="" value=""/>
-                                                </div>
-                                            </div>
+                                    </div>
+                                    <div class="col-lg-6 text-center">
+                                        <c:choose>
+                                            <c:when test="${not empty requestScope.user.profilePicDocument.documentId and not empty requestScope.user.profilePicDocument.randomHash}">
+                                                <img id="profilePictureResizePreview" style="width: 200px; height: 200px;" src="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${requestScope.user.profilePicDocument.documentId}&amp;randomHash=${requestScope.user.profilePicDocument.randomHash}&amp;viewType=inline" alt="Your Profile Image Preview" />
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img id="profilePictureResizePreview" style="width: 200px; height: 200px;" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt=""/>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group text-center">
+                                            <input name="profilePictureStr" type="text" readonly="" hidden="" value=""/>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-lg-12">
                                         <div class="form-group">
                                             <label class="control-label">${labels['domain.user.address']}</label>
                                             <textarea rows="5" class="form-control forceValidate" placeholder="" name="address">${requestScope.user.address}</textarea>
                                         </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-lg-12">
                                         <div class="form-group">
                                             <input type="submit" class="btn btn-primary" value="Update Your Profile"/>
                                         </div>
@@ -408,9 +432,9 @@
                     }
                 }
             }));
-//            form.find("input[name='birthOfDateStr']").css({
-//                "text-align": javatmp.settings.floatDefault
-//            });
+            //            form.find("input[name='birthOfDateStr']").css({
+            //                "text-align": javatmp.settings.floatDefault
+            //            });
             form.find("input[name='birthOfDateStr']").inputmask({
                 alias: "datetime",
                 placeholder: "dd/mm/yyyy",
@@ -589,13 +613,13 @@
                         var image = form.find("img[id='profilePicturePreview']");
                         var resizeImage = form.find("img[id='profilePictureResizePreview']");
                         image.one("load", function () {
-//                            var currentImageHeight = this.height;
-//                            if (currentImageHeight > 250) {
-//                                $("#profilePicturePreviewContainerId").height(250);
-//                            } else {
-//                                $("#profilePicturePreviewContainerId").height(currentImageHeight);
-//                            }
-                            $("#profilePicturePreviewContainerId").mCustomScrollbar("update");
+                            //                            var currentImageHeight = this.height;
+                            //                            if (currentImageHeight > 250) {
+                            //                                $("#profilePicturePreviewContainerId").height(250);
+                            //                            } else {
+                            //                                $("#profilePicturePreviewContainerId").height(currentImageHeight);
+                            //                            }
+                            form.find("#profilePicturePreviewContainerId").mCustomScrollbar("update");
                         });
                         image.attr('src', e.target.result);
                         resizeImage.attr('src', e.target.result);

@@ -32,6 +32,9 @@
     </table>
     <!--<link href="components/" rel="stylesheet">-->
     <style type="text/css">
+        table.dataTable tbody tr {
+            cursor: pointer;
+        }
         #UserListFilterHeader th {
             padding: 0;
         }
