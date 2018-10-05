@@ -141,21 +141,21 @@
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label class="control-label">Old Password</label>
+                                    <label class="control-label">${labels['domain.user.currentPassword']}</label>
                                     <input class="form-control" type="password" autocomplete="off"
                                            placeholder="Old Password" name="oldPassword">
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label class="control-label">New Password</label>
+                                    <label class="control-label">${labels['domain.user.newPassword']}</label>
                                     <input class="form-control" type="password" autocomplete="off"
                                            placeholder="New Password" name="password">
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label class="control-label">${labels['domain.user.reTypePassword']}</label>
+                                    <label class="control-label">${labels['domain.user.reTypeNewPassword']}</label>
                                     <input class="form-control" type="password" autocomplete="off" placeholder="Re-type Your New Password"
                                            name="rpassword">
                                 </div>

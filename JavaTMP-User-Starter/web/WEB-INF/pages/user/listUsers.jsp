@@ -43,8 +43,8 @@
                 <th style="width: 8rem;"><p style="width: 8rem;">${labels['domain.user.email']}</p></th>
                 <th style="width: 6rem;"><p style="width: 6rem;">${labels['domain.user.status']}</p></th>
                 <th style="width: 8rem;"><p style="width: 8rem;">${labels['domain.user.country']}</p></th>
-                <th style="width: 125px;"><p style="width: 125px;">${labels['domain.user.lang']}</p></th>
-                <th style="width: 150px;"><p style="width: 150px;">${labels['domain.user.theme']}</p></th>
+                <th style="width: 10rem;"><p style="width: 10rem;">${labels['domain.user.lang']}</p></th>
+                <th style="width: 10rem;"><p style="width: 10rem;">${labels['domain.user.theme']}</p></th>
                 <th style="width: 10rem;"><p style="width: 10rem;">${labels['domain.user.timezone']}</p></th>
                 <th style="width: 8rem;"><p style="width: 8rem;">${labels['domain.user.creationDate']}</p></th>
             </tr>
@@ -92,7 +92,7 @@
                         </c:choose>
                     </select>
                 </th>
-                <th style="width: 125px;">
+                <th style="width: 10rem;">
                     <select id="userlist-language-filter" name="lang" class="form-control">
                         <c:choose>
                             <c:when test="${fn:length(requestScope.languages) > 0}">
@@ -107,7 +107,7 @@
                         </c:choose>
                     </select>
                 </th>
-                <th style="width: 150px;">
+                <th style="width: 10rem;">
                     <select id="userlist-theme-filter" name="theme" class="form-control">
                         <c:choose>
                             <c:when test="${fn:length(requestScope.themes) > 0}">
@@ -615,10 +615,10 @@
                     }
                 },
                 columns: [
-                    {data: 'id', className: "", name: "id", width: "5rem",
+                    {data: 'id', className: "", name: "id", width: "6rem",
                         "render": function (data, type, row) {
                             if (type === "display") {
-                                return "<p class='m-0 p-0' style='width: 5rem;'>" + data + "</p>";
+                                return "<p class='m-0 p-0' style='width: 6rem;'>" + data + "</p>";
                             } else {
                                 return data;
                             }
@@ -626,122 +626,122 @@
                         }
                     },
                     {
-                        data: 'userName', name: "userName", width: "9rem",
+                        data: 'userName', name: "userName", width: "10rem",
                         "render": function (data, type, row) {
                             if (type === "sort" || type === 'type' || type === 'filter') {
                                 return data;
                             } else {
-                                return "<p class='m-0 p-0' style='width: 9rem;'>" + data + "</p>";
+                                return "<p class='m-0 p-0' style='width: 10rem;'>" + data + "</p>";
                             }
                         }
                     },
                     {
-                        data: 'firstName', name: "firstName", width: "7rem",
+                        data: 'firstName', name: "firstName", width: "8rem",
                         "render": function (data, type, row) {
                             if (type === "sort" || type === 'type' || type === 'filter') {
                                 return data;
                             } else {
-                                return "<p class='m-0 p-0' style='width: 7rem;'>" + data + "</p>";
-                            }
-
-                        }
-                    },
-                    {
-                        data: 'lastName', name: "lastName", width: "7rem",
-                        "render": function (data, type, row) {
-                            if (type === "sort" || type === 'type' || type === 'filter') {
-                                return data;
-                            } else {
-                                return "<p class='m-0 p-0' style='width: 7rem;'>" + data + "</p>";
+                                return "<p class='m-0 p-0' style='width: 8rem;'>" + data + "</p>";
                             }
 
                         }
                     },
                     {
-                        data: 'birthDate', "type": "date", name: "birthDate", width: "8rem",
+                        data: 'lastName', name: "lastName", width: "8rem",
+                        "render": function (data, type, row) {
+                            if (type === "sort" || type === 'type' || type === 'filter') {
+                                return data;
+                            } else {
+                                return "<p class='m-0 p-0' style='width: 8rem;'>" + data + "</p>";
+                            }
+
+                        }
+                    },
+                    {
+                        data: 'birthDate', "type": "date", name: "birthDate", width: "9rem",
                         "render": function (data, type, row) {
                             if (type === "sort" || type === 'type' || type === 'filter') {
                                 return moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY HH:mm');
                             } else {
-                                return "<p class='m-0 p-0' style='width: 8rem;'>" + moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY') + "</p>";
+                                return "<p class='m-0 p-0' style='width: 9rem;'>" + moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY') + "</p>";
                             }
                         }
                     },
                     {
-                        data: 'birthDate', name: "age", "type": "date", width: "3rem",
+                        data: 'birthDate', name: "age", "type": "date", width: "4rem",
                         "render": function (data, type, row) {
                             data = Math.ceil(moment().diff(moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ"), 'years', true));
                             if (type === "display") {
-                                return "<p class='m-0 p-0' style='width: 3rem;'>" + data + "</p>";
+                                return "<p class='m-0 p-0' style='width: 4rem;'>" + data + "</p>";
                             } else {
                                 return data;
                             }
                         }
                     },
-                    {data: 'email', name: "email", width: "8rem",
+                    {data: 'email', name: "email", width: "9rem",
                         "render": function (data, type, row) {
                             if (type === "display") {
-                                return "<p class='m-0 p-0 text-truncate' style='width: 8rem;'>" + data + "</p>";
+                                return "<p class='m-0 p-0 text-truncate' style='width: 9rem;'>" + data + "</p>";
                             } else {
                                 return data;
                             }
                         }
                     },
-                    {data: 'status', name: "status", width: "6rem",
+                    {data: 'status', name: "status", width: "7rem",
                         "render": function (data, type, row) {
 
                             var statusMap = {"-1": {label: "Deleted", style: "danger"}, "0": {label: "Deactive", style: "warning"}, "1": {label: "Active", style: "success"}};
 
                             if (type === "display") {
-                                return "<p class='m-0 p-0' style='width: 6rem;'><span class='badge badge-" + statusMap[data].style + "'>" + statusMap[data].label + "</span></p>";
+                                return "<p class='m-0 p-0' style='width: 7rem;'><span class='badge badge-" + statusMap[data].style + "'>" + statusMap[data].label + "</span></p>";
                             } else {
                                 return data;
                             }
                         }
                     },
                     {
-                        data: 'countryId', name: "countryId", width: "8rem",
+                        data: 'countryId', name: "countryId", width: "9rem",
                         "render": function (data, type, row) {
                             if (type === "sort" || type === 'type' || type === 'filter') {
                                 return data;
                             } else {
-                                return "<p class='m-0 p-0 text-truncate' style='width: 8rem'>" + countriesMap[data] + "</p>";
+                                return "<p class='m-0 p-0 text-truncate' style='width: 9rem'>" + countriesMap[data] + "</p>";
                             }
                         }
                     },
-                    {data: 'lang', name: "lang", width: 125,
+                    {data: 'lang', name: "lang", width: "10rem",
                         "render": function (data, type, row) {
                             if (type === "display") {
-                                return "<p class='m-0 p-0' style='width: 125px;'>" + languagesMap[data] + "</p>";
+                                return "<p class='m-0 p-0' style='width: 10rem;'>" + languagesMap[data] + "</p>";
                             } else {
                                 return data;
                             }
                         }
                     },
-                    {data: 'theme', name: "theme", width: 150,
+                    {data: 'theme', name: "theme", width: "10rem",
                         "render": function (data, type, row) {
                             if (type === "display") {
-                                return "<p class='m-0 p-0' style='width: 150px;'>" + themesMap[data] + "</p>";
+                                return "<p class='m-0 p-0' style='width: 10rem;'>" + themesMap[data] + "</p>";
                             } else {
                                 return data;
                             }
                         }
                     },
-                    {data: 'timezone', name: "timezone", width: "10rem",
+                    {data: 'timezone', name: "timezone", width: "11rem",
                         "render": function (data, type, row) {
                             if (type === "display") {
-                                return "<p class='m-0 p-0 text-truncate' style='width: 10rem;'>" + timezonesMap[data] + "</p>";
+                                return "<p class='m-0 p-0 text-truncate' style='width: 11rem;'>" + timezonesMap[data] + "</p>";
                             } else {
                                 return data;
                             }
                         }
                     },
-                    {data: 'creationDate', "type": "date", name: "creationDate", width: "8rem",
+                    {data: 'creationDate', "type": "date", name: "creationDate", width: "9rem",
                         "render": function (data, type, row) {
                             if (type === "sort" || type === 'type' || type === 'filter') {
                                 return moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY HH:mm');
                             } else {
-                                return "<p class='m-0 p-0' style='width: 8rem;'>" + moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY HH:mm') + "</p>";
+                                return "<p class='m-0 p-0 text-truncate' style='width: 9rem;'>" + moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY HH:mm') + "</p>";
                             }
 
                         }}

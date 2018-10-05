@@ -46,7 +46,7 @@
                                         <div class="form-row">
                                             <div class="col-sm-2">
                                                 <div class="form-group">
-                                                    <label class="control-label">User Status</label>
+                                                    <label class="control-label">${labels['domain.user.status']}</label>
                                                     <select name="status" class="custom-select">
                                                         <option value="1">Activated</option>
                                                         <option value="0">Deactivated</option>
@@ -55,25 +55,25 @@
                                             </div>
                                             <div class="col-lg-2">
                                                 <div class="form-group">
-                                                    <label class="control-label">First Name</label>
+                                                    <label class="control-label">${labels['domain.user.firstName']}</label>
                                                     <input class="form-control" type="text" placeholder="First Name" name="firstName" value="">
                                                 </div>
                                             </div>
                                             <div class="col-lg-2">
                                                 <div class="form-group">
-                                                    <label class="control-label">Last Name</label>
+                                                    <label class="control-label">${labels['domain.user.lastName']}</label>
                                                     <input class="form-control" type="text" placeholder="Last Name" name="lastName" value="">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3">
                                                 <div class="form-group">
-                                                    <label class="control-label">Your date of birth</label>
+                                                    <label class="control-label">${labels['domain.user.birthDate']}</label>
                                                     <input dir="ltr" class="form-control"  type="text" name="birthOfDateStr" value="">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3">
                                                 <div class="form-group">
-                                                    <label class="control-label">Email</label>
+                                                    <label class="control-label">${labels['domain.user.email']}</label>
                                                     <input class="form-control" type="text" placeholder="Email" name="email" value="">
                                                 </div>
                                             </div>
@@ -81,7 +81,7 @@
                                         <div class="form-row">
                                             <div class="col-lg-3">
                                                 <div class="form-group">
-                                                    <label class="control-label">Country</label>
+                                                    <label class="control-label">${labels['domain.user.country']}</label>
                                                     <select name="countryId" class="form-control">
                                                         <c:choose>
                                                             <c:when test="${fn:length(requestScope.countries) > 0}">
@@ -99,7 +99,7 @@
                                             </div>
                                             <div class="col-lg-3">
                                                 <div class="form-group">
-                                                    <label class="control-label">Interface Language</label>
+                                                    <label class="control-label">${labels['domain.user.lang']}</label>
                                                     <select name="lang" class="form-control">
                                                         <c:choose>
                                                             <c:when test="${fn:length(requestScope.languages) > 0}">
@@ -117,7 +117,7 @@
                                             </div>
                                             <div class="col-lg-3">
                                                 <div class="form-group">
-                                                    <label class="control-label">Interface Theme</label>
+                                                    <label class="control-label">${labels['domain.user.theme']}</label>
                                                     <select name="theme" class="form-control">
                                                         <c:choose>
                                                             <c:when test="${fn:length(requestScope.themes) > 0}">
@@ -135,7 +135,7 @@
                                             </div>
                                             <div class="col-lg-3">
                                                 <div class="form-group">
-                                                    <label class="control-label">Timezone</label>
+                                                    <label class="control-label">${labels['domain.user.timezone']}</label>
                                                     <select name="timezone" class="form-control">
                                                         <option value="">Choose ...</option>
                                                         <c:choose>
@@ -156,28 +156,28 @@
                                         <div class="form-row">
                                             <div class="col-lg-3">
                                                 <div class="form-group">
-                                                    <label class="control-label">Username</label>
+                                                    <label class="control-label">${labels['domain.user.userName']}</label>
                                                     <input class="form-control" type="text" autocomplete="off" placeholder="Username"
                                                            name="userName" value="">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3">
                                                 <div class="form-group">
-                                                    <label class="control-label">Old Password</label>
+                                                    <label class="control-label">${labels['domain.user.currentPassword']}</label>
                                                     <input class="form-control" type="password" autocomplete="off"
                                                            placeholder="Old Password" name="oldPassword">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3">
                                                 <div class="form-group">
-                                                    <label class="control-label">New Password</label>
+                                                    <label class="control-label">${labels['domain.user.newPassword']}</label>
                                                     <input class="form-control" type="password" autocomplete="off"
                                                            placeholder="New Password" name="password">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3">
                                                 <div class="form-group">
-                                                    <label class="control-label">Re-type Your New Password</label>
+                                                    <label class="control-label">${labels['domain.user.reTypeNewPassword']}</label>
                                                     <input class="form-control" type="password" autocomplete="off" placeholder="Re-type Your New Password"
                                                            name="rpassword">
                                                 </div>
@@ -186,7 +186,7 @@
                                         <div class="form-row">
                                             <div class="col-lg-12">
                                                 <div class="form-group">
-                                                    <label for="exampleFormControlFile1">Add Profile Picture</label>
+                                                    <label for="exampleFormControlFile1">${labels['domain.user.Document']}</label>
                                                     <div class="custom-file">
                                                         <input name="profilePicture" type="file" class="custom-file-input" id="validatedCustomFile">
                                                         <label class="custom-file-label" for="validatedCustomFile">Choose Profile Picture file...</label>
@@ -218,7 +218,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label">address</label>
+                                            <label class="control-label">${labels['domain.user.address']}</label>
                                             <textarea rows="7" class="form-control forceValidate" placeholder="" name="address"></textarea>
                                         </div>
                                         <div class="form-group">

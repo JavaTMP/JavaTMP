@@ -90,19 +90,19 @@ public class CurrentUserProfileController extends HttpServlet {
 
             int updateStatus = us.updateCompleteUser(userToBeUpdated);
 
-            if (dbUser.getProfilePicDocument() != null) {
-                // saving space:
-                dbUser.getProfilePicDocument().setDocumentContent(null);
-                dbUser.getProfilePicDocument().setContentType(null);
-                dbUser.getProfilePicDocument().setCreationDate(null);
-                dbUser.getProfilePicDocument().setDocumentName(null);
-                dbUser.getProfilePicDocument().setDocumentSize(0);
-            }
+            logger.info("Updated User is [" + MvcHelper.toString(userToBeUpdated) + "]");
 
+            // When we don't update profile picture and database contains one
+            // We make sure that the current session object has its information:
             if (userToBeUpdated.getProfilePicDocumentId() == null && dbUser.getProfilePicDocument() != null) {
                 Document dbProfileDocument = dbUser.getProfilePicDocument();
                 userToBeUpdated.setProfilePicDocument(dbProfileDocument);
                 userToBeUpdated.setProfilePicDocumentId(dbProfileDocument.getDocumentId());
+                dbProfileDocument.setDocumentContent(null);
+                dbProfileDocument.setContentType(null);
+                dbProfileDocument.setCreationDate(null);
+                dbProfileDocument.setDocumentName(null);
+                dbProfileDocument.setDocumentSize(0);
             }
 
             Locale locale = Locale.forLanguageTag(userToBeUpdated.getLang());
