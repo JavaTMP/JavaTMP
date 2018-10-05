@@ -19,18 +19,18 @@
                             <form accept-charset="UTF-8" enctype="multipart/form-data" autocomplete="off" id="UpdateCurrentUserFormId" class="form"
                                   action="${pageContext.request.contextPath}/user/CurrentUserProfileController" method="post" novalidate="novalidate">
                                 <div class="form-row">
-                                    <div class="col-sm-2">
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="form-group form-row">
-                                            <label class="text-right control-label col-sm-4 col-form-label">${labels['domain.user.id']}</label>
-                                            <div class="col-sm-8">
+                                            <label class="text-right control-label col-sm-5 col-form-label">${labels['domain.user.id']}</label>
+                                            <div class="col-sm-7">
                                                 <input readonly="readonly" class="form-control-plaintext" type="text" name="id" value="${requestScope.user.id}">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="form-group form-row">
-                                            <label class="text-right control-label col-sm-4 col-form-label">${labels['domain.user.status']}</label>
-                                            <div class="col-sm-5">
+                                            <label class="text-right control-label col-sm-5 col-form-label">${labels['domain.user.status']}</label>
+                                            <div class="col-sm-7">
                                                 <select name="status" class="custom-select">
                                                     <option ${requestScope.user.status == 1 ? 'selected="selected"' : ''} value="1">Activated</option>
                                                     <option ${requestScope.user.status == 0 ? 'selected="selected"' : ''} value="0">Deactivated</option>
@@ -155,37 +155,37 @@
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <div class="col-lg-5 col-md-4 col-sm-6">
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="form-group form-row">
-                                            <label class="text-right control-label col-sm-8 col-form-label">${labels['domain.user.userName']}</label>
-                                            <div class="col-sm-4">
+                                            <label class="text-right control-label col-sm-5 col-form-label">${labels['domain.user.userName']}</label>
+                                            <div class="col-sm-7">
                                                 <input class="form-control" type="text" autocomplete="off" placeholder="${labels['domain.user.userName']}"
                                                        name="userName" value="${requestScope.user.userName}">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-5 col-md-4 col-sm-6">
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="form-group form-row">
-                                            <label class="text-right control-label col-sm-8 col-form-label">${labels['domain.user.currentPassword']}</label>
-                                            <div class="col-sm-4">
+                                            <label class="text-right control-label col-sm-5 col-form-label">${labels['domain.user.currentPassword']}</label>
+                                            <div class="col-sm-7">
                                                 <input class="form-control" type="password" autocomplete="off"
                                                        placeholder="${labels['domain.user.currentPassword']}" name="oldPassword">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-5 col-md-4 col-sm-6">
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="form-group form-row">
-                                            <label class="text-right control-label col-sm-8 col-form-label">${labels['domain.user.newPassword']}</label>
-                                            <div class="col-sm-4">
+                                            <label class="text-right control-label col-sm-5 col-form-label">${labels['domain.user.newPassword']}</label>
+                                            <div class="col-sm-7">
                                                 <input class="form-control" type="password" autocomplete="off"
                                                        placeholder="${labels['domain.user.newPassword']}" name="password">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-5 col-md-4 col-sm-6">
+                                    <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="form-group form-row">
-                                            <label class="text-right control-label col-sm-8 col-form-label">${labels['domain.user.reTypeNewPassword']}</label>
-                                            <div class="col-sm-4">
+                                            <label class="text-right control-label col-sm-5 col-form-label">${labels['domain.user.reTypeNewPassword']}</label>
+                                            <div class="col-sm-7">
                                                 <input class="form-control" type="password" autocomplete="off" placeholder="${labels['domain.user.reTypeNewPassword']}"
                                                        name="rpassword">
                                             </div>
