@@ -10,27 +10,27 @@
                         actionType="action-ref-href"
                         action-ref-by-href="${pageContext.request.contextPath}/user/CreateUserController">
                     <i class="fa fa-fw fa-user"></i>
-                    Add New User
+                    ${labels['page.btn.addNewUserPage']}
                 </button>
                 <button action-name="Add-New-User-Popup-Action" id="UserList-AddNewUserPopupId" type="button" class="btn btn-primary">
                     <i class="fa fa-external-link-alt fa-fw"></i>
-                    Add New User Popup
+                    ${labels['page.btn.addNewUserPopup']}
                 </button>
                 <button action-name="Update-Complete-User-Action" id="UserList-UpdateSelectedUserId" type="button" class="btn btn-primary">
                     <i class="fa fa-user-edit fa-fw"></i>
-                    Update Complete User
+                    ${labels['page.btn.updateCompleteUser']}
                 </button>
                 <button action-name="Delete-User-Action" id="UserList-DeleteSelectedUserId" type="button" class="btn btn-primary">
                     <i class="fa fa-user-times fa-fw text-danger"></i>
-                    Delete User
+                    ${labels['page.btn.deleteUser']}
                 </button>
                 <button action-name="Activate-User-Action" id="UserList-ActivateSelectedUserId" type="button" class="btn btn-primary">
                     <i class="fa fa-user-check fa-fw text-success"></i>
-                    Activate User
+                    ${labels['page.btn.activateUser']}
                 </button>
                 <button action-name="Deactivate-User-Action" id="UserList-DeactivateSelectedUserId" type="button" class="btn btn-primary">
                     <i class="fa fa-user-slash fa-fw text-warning"></i>
-                    Deactivate User
+                    ${labels['page.btn.deactivateUser']}
                 </button>
             </div>
         </div>
@@ -317,21 +317,15 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-3 text-center">
+                                <div class="col-lg-6 text-center">
                                     <div style="width: 200px; height: 200px;display: inline-block;position: relative">
                                         <div id="profilePicturePreviewContainerId" style="width: 200px; height: 200px;">
                                             <img id="profilePicturePreview" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-3 text-center">
+                                <div class="col-lg-6 text-center">
                                     <img id="profilePictureResizePreview" style="width: 200px; height: 200px;" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
-                                </div>
-                                <div class="col-lg-3 text-center">
-                                    <img id="profilePictureAvatarPreview" style="width: 40px; height: 40px;" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
-                                </div>
-                                <div class="col-lg-3 text-center">
-                                    <img class="rounded-circle" id="profilePictureAvatarRoundedPreview" style="width: 40px; height: 40px;" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
                                 </div>
                             </div>
                             <div class="form-row">
@@ -1252,16 +1246,11 @@
 
                 var image = form.find("img[id='profilePicturePreview']");
                 var resizeImage = form.find("img[id='profilePictureResizePreview']");
-                var avatarImage = form.find("img[id='profilePictureAvatarPreview']");
-                var avatarRoundedImage = form.find("img[id='profilePictureAvatarRoundedPreview']");
 
                 var avatarImageSrc = javatmp.settings.contextPath + "/ViewUploadedFileController?documentId=" + rowObject.profilePicDocumentId + "&randomHash=" + rowObject.profilePicDocument.randomHash + "&viewType=inline";
 
                 image.attr('src', avatarImageSrc);
                 resizeImage.attr('src', avatarImageSrc);
-                avatarImage.attr('src', avatarImageSrc);
-                avatarRoundedImage.attr('src', avatarImageSrc);
-
 
             }).on('deselect', function (e, dt, type, indexes) {
                 //                alert("descelect");
