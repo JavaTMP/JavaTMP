@@ -1,7 +1,11 @@
 ---
-title: Java Bootstrap Template Version 0.0.5 (Current Development Version)
+title: Java Bootstrap Template Version 0.0.5 (published on 6th of October, 2018)
 ---
-# Java Bootstrap Template Version 0.0.5 (Current Development Version)
+# Java Bootstrap Template Version 0.0.5 (published on 6th of October, 2018)
+
+### 6b89c2b on Oct 6, 2018, 2:41 AM GMT+4
+- Move a lot of text to resourcebundle files for locale supports.
+- Release Version 0.0.5
 
 ### faf70af on Oct 2, 2018, 1:31 PM GMT+4
 - Remove page-header class and replace all pages
