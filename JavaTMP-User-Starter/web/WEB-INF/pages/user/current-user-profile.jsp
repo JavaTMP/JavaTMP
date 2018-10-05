@@ -182,21 +182,17 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-3 text-center">
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="col-lg-6 text-center">
                                                 <div style="width: 200px; height: 200px;display: inline-block;position: relative">
                                                     <div id="profilePicturePreviewContainerId" style="width: 200px; height: 200px;">
                                                         <img id="profilePicturePreview" src="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${requestScope.user.profilePicDocument.documentId}&amp;randomHash=${requestScope.user.profilePicDocument.randomHash}&amp;viewType=inline" alt="Your Profile Image Preview" />
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="col-lg-3 text-center">
+                                            <div class="col-lg-6 text-center">
                                                 <img id="profilePictureResizePreview" style="width: 200px; height: 200px;" src="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${requestScope.user.profilePicDocument.documentId}&amp;randomHash=${requestScope.user.profilePicDocument.randomHash}&amp;viewType=inline" alt="Your Profile Image Preview" />
-                                            </div>
-                                            <div class="col-lg-3 text-center">
-                                                <img id="profilePictureAvatarPreview" style="width: 40px; height: 40px;" src="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${requestScope.user.profilePicDocument.documentId}&amp;randomHash=${requestScope.user.profilePicDocument.randomHash}&amp;viewType=inline" alt="Your Profile Image Preview" />
-                                            </div>
-                                            <div class="col-lg-3 text-center">
-                                                <img class="rounded-circle" id="profilePictureAvatarRoundedPreview" style="width: 40px; height: 40px;" src="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${requestScope.user.profilePicDocument.documentId}&amp;randomHash=${requestScope.user.profilePicDocument.randomHash}&amp;viewType=inline" alt="Your Profile Image Preview" />
                                             </div>
                                         </div>
                                         <div class="form-row">
@@ -578,8 +574,6 @@
                     reader.onload = function (e) {
                         var image = form.find("img[id='profilePicturePreview']");
                         var resizeImage = form.find("img[id='profilePictureResizePreview']");
-                        var avatarImage = form.find("img[id='profilePictureAvatarPreview']");
-                        var avatarRoundedImage = form.find("img[id='profilePictureAvatarRoundedPreview']");
                         image.one("load", function () {
 //                            var currentImageHeight = this.height;
 //                            if (currentImageHeight > 250) {
@@ -587,12 +581,10 @@
 //                            } else {
 //                                $("#profilePicturePreviewContainerId").height(currentImageHeight);
 //                            }
-//                            $("#profilePicturePreviewContainerId").mCustomScrollbar("update");
+                            $("#profilePicturePreviewContainerId").mCustomScrollbar("update");
                         });
                         image.attr('src', e.target.result);
                         resizeImage.attr('src', e.target.result);
-                        avatarImage.attr('src', e.target.result);
-                        avatarRoundedImage.attr('src', e.target.result);
                     };
                     reader.readAsDataURL(this.files[0]);
                 }

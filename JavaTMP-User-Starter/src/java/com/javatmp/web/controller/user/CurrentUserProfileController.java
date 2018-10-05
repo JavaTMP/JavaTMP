@@ -72,14 +72,13 @@ public class CurrentUserProfileController extends HttpServlet {
             User dbUser = sf.getUserService().readCompleteUserById(user);
             String oldPassword = request.getParameter("oldPassword");
             MvcHelper.populateBeanByRequestParameters(request, userToBeUpdated);
-            logger.info("User to be Updated is [" + MvcHelper.toString(userToBeUpdated) + "]");
+            logger.info("User to be Updated is [" + MvcHelper.deepToString(userToBeUpdated) + "]");
 
             // first check if existing db password equal provided old password:
+            logger.info("Old Password is [" + oldPassword + "]");
             if (dbUser.getPassword().equals(MD5Util.convertToMD5(oldPassword)) == false) {
                 throw new IllegalArgumentException("Existing Password does not match provided old password");
             }
-
-            logger.info("UserToBeCreated is [" + MvcHelper.deepToString(userToBeUpdated) + "]");
 
             userToBeUpdated.setPassword(MD5Util.convertToMD5(userToBeUpdated.getPassword()));
             Document fileUploading = MvcHelper.readDocumentFromRequestIfExist(request, "profilePicture");
@@ -116,22 +115,30 @@ public class CurrentUserProfileController extends HttpServlet {
             responseMessage.setMessage("User Updated successfully");
             responseMessage.setData(userToBeUpdated);
 
-        } catch (IllegalArgumentException e) {
-            logger.info("ERROR : " + e.getMessage());
+        } catch (IllegalArgumentException ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
             responseMessage.setOverAllStatus(false);
-            responseMessage.setMessage(e.getMessage());
+            responseMessage.setMessage(ex.getMessage());
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             responseMessage.setStatusCode(HttpServletResponse.SC_BAD_REQUEST);
-        } catch (IllegalStateException e) {
-            logger.info("ERROR : " + e.getMessage());
+        } catch (IllegalStateException ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
             responseMessage.setOverAllStatus(false);
-            responseMessage.setMessage("The file to be uploaded exceeds its maximum permitted size of 51200 bytes - " + e.getMessage());
+            responseMessage.setMessage("The file to be uploaded exceeds its maximum permitted size of 51200 bytes - " + ex.getMessage());
             response.setStatus(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE);
             responseMessage.setStatusCode(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE);
         } catch (IllegalAccessException ex) {
-            logger.log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            responseMessage.setOverAllStatus(false);
+            responseMessage.setMessage(ex.getMessage());
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            responseMessage.setStatusCode(HttpServletResponse.SC_BAD_REQUEST);
         } catch (InvocationTargetException ex) {
-            logger.log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            responseMessage.setOverAllStatus(false);
+            responseMessage.setMessage(ex.getMessage());
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            responseMessage.setStatusCode(HttpServletResponse.SC_BAD_REQUEST);
         }
         MvcHelper.sendMessageAsJson(response, responseMessage);
 
