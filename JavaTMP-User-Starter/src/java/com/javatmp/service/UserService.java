@@ -148,7 +148,7 @@ public class UserService {
         // set any default values:
         user.setStatus((short) 1);
         user.setPassword(MD5Util.convertToMD5(user.getPassword()));
-
+        user.setCreationDate(new Date());
         try {
             em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
             em.getTransaction().begin();
