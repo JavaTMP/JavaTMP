@@ -1,5 +1,6 @@
 -- Command to dump database:
 -- mysqldump --complete-insert --extended-insert=FALSE --hex-blob -uroot -p  appdb > text.sql
+-- Replace "creationDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'" in the script with "`creationDate` timestamp NOT NULL,"
 -- Command to import script to existing database called 'appdb'
 -- mysql -uroot -pmmmmmm -D appdb < build.sql
 -- Run timezons inserter Java code: ./test/com.javatmp.timezones.TestingPopulateTimezone

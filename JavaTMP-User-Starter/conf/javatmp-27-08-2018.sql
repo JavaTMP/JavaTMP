@@ -1102,7 +1102,7 @@ CREATE TABLE `user` (
   `timezone` varchar(64) NOT NULL,
   `lastAccessTime` timestamp NULL DEFAULT NULL,
   `profilePicDocumentId` bigint(20) DEFAULT NULL,
-  `creationDate` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `creationDate` timestamp NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_userName_uni` (`userName`),
   KEY `user_profilePicDocumentId_fk` (`profilePicDocumentId`),
