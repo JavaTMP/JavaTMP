@@ -17,51 +17,50 @@
         <c:if test="${labels['global.direction'] == 'rtl'}">
             <link id="themeStyleSheet" href="${pageContext.request.contextPath}/assets/dist/css/javatmp-${labels['global.defaultThemeName']}-rtl.min.css" rel="stylesheet" type="text/css"/>
         </c:if>
-
         <!-- Include language support font -->
         <link href="${pageContext.request.contextPath}/assets/dist/css/font-family-${labels['global.language']}.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <div id="oneTimeOverlay" style="position: fixed;width: 100%;height: 100%;top: 0px;left: 0;right: 0;bottom: 0;background-color: rgba(255,255,255,1);z-index: 1000000;cursor: wait;">Loading ...</div>
+        <div id="oneTimeOverlay" style="position: fixed;width: 100%;height: 100%;top: 0px;left: 0;right: 0;bottom: 0;background-color: rgba(255,255,255,1);z-index: 1000000;cursor: wait;">${labels['global.loadingText']}</div>
         <div class="container-fluid">
             <div class="row justify-content-center">
                 <div class="col-sm-8">
                     <div class="card mt-2 bg-light shadow">
                         <div class="card-header">
-                            Register New User Account
+                            ${labels["page.register.registerCardTitleText"]}
                         </div>
                         <div class="card-body">
                             <form id="main-register-form" method="POST" role="form" action="${pageContext.request.contextPath}/register">
                                 <div class="form-row">
                                     <div class="col-lg-3">
                                         <div class="form-group">
-                                            <label class="control-label">First Name</label>
-                                            <input class="form-control" type="text" placeholder="First Name" name="firstName">
+                                            <label class="control-label">${labels['domain.user.firstName']}</label>
+                                            <input class="form-control" type="text" placeholder="${labels['domain.user.firstName']}" name="firstName">
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="form-group">
-                                            <label class="control-label">Last Name</label>
-                                            <input class="form-control" type="text" placeholder="Last Name" name="lastName">
+                                            <label class="control-label">${labels['domain.user.lastName']}</label>
+                                            <input class="form-control" type="text" placeholder="${labels['domain.user.lastName']}" name="lastName">
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="form-group">
-                                            <label class="control-label">Your date of birth</label>
+                                            <label class="control-label">${labels['domain.user.birthDate']}</label>
                                             <input dir="ltr" class="form-control"  type="text" name="birthOfDateStr">
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="form-group">
-                                            <label class="control-label">Email</label>
-                                            <input class="form-control" type="text" placeholder="Email" name="email">
+                                            <label class="control-label">${labels['domain.user.email']}</label>
+                                            <input class="form-control" type="text" placeholder="${labels['domain.user.email']}" name="email">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-row">
                                     <div class="col-lg-3">
                                         <div class="form-group">
-                                            <label class="control-label">Country</label>
+                                            <label class="control-label">${labels['domain.user.country']}</label>
                                             <select name="countryId" class="form-control">
                                                 <c:choose>
                                                     <c:when test="${fn:length(requestScope.countries) > 0}">
@@ -79,7 +78,7 @@
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="form-group">
-                                            <label class="control-label">Interface Language</label>
+                                            <label class="control-label">${labels['domain.user.lang']}</label>
                                             <select name="lang" class="form-control">
                                                 <c:choose>
                                                     <c:when test="${fn:length(requestScope.languages) > 0}">
@@ -97,7 +96,7 @@
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="form-group">
-                                            <label class="control-label">Interface Theme</label>
+                                            <label class="control-label">${labels['domain.user.theme']}</label>
                                             <select name="theme" class="form-control">
                                                 <c:choose>
                                                     <c:when test="${fn:length(requestScope.themes) > 0}">
@@ -115,7 +114,7 @@
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="form-group">
-                                            <label class="control-label">Timezone</label>
+                                            <label class="control-label">${labels['domain.user.timezone']}</label>
                                             <select name="timezone" class="form-control">
                                                 <option value="">Choose ...</option>
                                                 <c:choose>
@@ -135,22 +134,22 @@
                                 <div class="form-row">
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label class="control-label">Username</label>
-                                            <input class="form-control" type="text" autocomplete="off" placeholder="Username"
+                                            <label class="control-label">${labels['domain.user.userName']}</label>
+                                            <input class="form-control" type="text" autocomplete="off" placeholder="${labels['domain.user.userName']}"
                                                    name="userName">
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label class="control-label">Password</label>
+                                            <label class="control-label">${labels['domain.user.password']}</label>
                                             <input class="form-control" type="password" autocomplete="off"
-                                                   placeholder="Password" name="password">
+                                                   placeholder="${labels['domain.user.password']}" name="password">
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <label class="control-label">Re-type Your Password</label>
-                                            <input class="form-control" type="password" autocomplete="off" placeholder="Re-type Your Password"
+                                            <label class="control-label">${labels['domain.user.reTypePassword']}</label>
+                                            <input class="form-control" type="password" autocomplete="off" placeholder="${labels['domain.user.reTypePassword']}"
                                                    name="rpassword">
                                         </div>
                                     </div>
@@ -158,7 +157,7 @@
                                 <div class="form-row">
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <label for="captchaCharactersTextField">Kindly type the characters in the image below</label>
+                                            <label for="captchaCharactersTextField">${labels["page.register.captchaLabelText"]}</label>
                                             <img src="${pageContext.request.contextPath}/CaptchaImageController?_cancelGzip" class="d-block mt-1 mb-2" alt=""/>
                                             <input name="captchaAnswer" type="text" class="form-control required" id="captchaCharactersTextField"/>
                                         </div>
@@ -170,9 +169,10 @@
                                             <div class="custom-control custom-checkbox">
                                                 <input name="tnc" type="checkbox" class="custom-control-input" id="customCheck1">
                                                 <label class="custom-control-label" for="customCheck1">
-                                                    I agree to the
-                                                    <a href="javascript:;">Terms of Service </a> &amp;
-                                                    <a href="javascript:;">Privacy Policy </a>
+                                                    ${labels["page.register.agreeLabelText"]}
+                                                    <a href="javascript:;">${labels["page.register.termsOfService"]}</a>
+                                                    ${labels["page.register.and"]}
+                                                    <a href="javascript:;">${labels["page.register.privacyPolicy"]}</a>
                                                 </label>
                                             </div>
                                         </div>
@@ -181,8 +181,8 @@
                                 <div class="form-row">
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <button type="submit" id="register-submit-btn" class="btn btn-primary">Create New User Account</button>
-                                            <a href="${pageContext.request.contextPath}/login" class="btn btn-secondary">Return To Login Page</a>
+                                            <button type="submit" id="register-submit-btn" class="btn btn-primary">${labels["page.btn.registerNewUser"]}</button>
+                                            <a href="${pageContext.request.contextPath}/login" class="btn btn-secondary">${labels["page.btn.returnToLoginPage"]}</a>
                                         </div>
                                     </div>
                                 </div>
