@@ -188,12 +188,12 @@
                         window.location.hash = element.attr("href");
                     }
 
-                    $('.metismenu a.active').removeClass("active");
+                    $('.metismenu a.mm-active').removeClass("mm-active");
 
-                    element.addClass('active');
-                    element.parents("li").addClass("active");
+                    element.addClass('mm-active');
+                    element.parents("li").addClass("mm-active");
                     element.parents("ul").css({"height": "auto"});
-                    element.parents("ul").addClass("in");
+                    element.parents("ul").addClass("mm-show in");
 
                     if (javatmp.util.isWidthSmall()) {
                         javatmp.sidebar.hide();
@@ -238,13 +238,13 @@
             $('.metismenu li').each(function () {
                 if ($(this).text().toLowerCase().indexOf(text) === -1) {
                     $(this).hide();
-                    $(this).children().removeClass("active");
+                    $(this).children().removeClass("mm-active");
                     $(this).children().removeClass("in");
                 } else {
                     $(this).show();
                     $(this).children("ul").css({height: "auto"});
-                    $(this).parentsUntil(".metismenu", "li").addClass("active");
-                    $(this).parentsUntil(".metismenu", "ul").addClass("in");
+                    $(this).parentsUntil(".metismenu", "li").addClass("mm-active");
+                    $(this).parentsUntil(".metismenu", "ul").addClass("mm-show in");
                 }
             });
         });

@@ -53,7 +53,7 @@ $metismenu-submenu-vertical-border-color: darken($metismenu-bg, 10%)!default;
             border-left: $metismenu-link-border-width solid $metismenu-link-hover-border-color;
             border-right: none;
         }
-        &.active {
+        &.mm-active {
             color: $metismenu-link-active-color;
             background: $metismenu-link-active-bg;
             border-left: $metismenu-link-border-width solid $metismenu-link-active-border-color;
@@ -78,7 +78,7 @@ $metismenu-submenu-vertical-border-color: darken($metismenu-bg, 10%)!default;
             right: 1em;
         }
     }
-    .active > .has-arrow:after {
+    .mm-active > .has-arrow:after {
         transform: rotate(45deg) translateY(-50%);
     }
 }
@@ -91,7 +91,7 @@ $metismenu-submenu-vertical-border-color: darken($metismenu-bg, 10%)!default;
             border-right: $metismenu-link-border-width solid $metismenu-link-hover-border-color;
             border-left: none;
         }
-        &.active {
+        &.mm-active {
             border-left: none;
             border-right: $metismenu-link-border-width solid $metismenu-link-active-border-color;
         }
@@ -104,7 +104,7 @@ $metismenu-submenu-vertical-border-color: darken($metismenu-bg, 10%)!default;
         border-left: none;
         border-right: 1px solid $metismenu-submenu-vertical-border-color;
     }
-    .active > .has-arrow:after {
+    .mm-active > .has-arrow:after {
         transform: rotate(45deg) translateY(-50%);
     }
 }
@@ -128,7 +128,7 @@ $metismenu-submenu-vertical-border-color: darken($metismenu-bg, 10%)!default;
                         color: $temp-color;
                         border-left-color: $temp-color;
                     }
-                    &.active {
+                    &.mm-active {
                         background: darken($value, 15%);
                         color: $temp-color;
                         border-left-color: $temp-color;
@@ -147,7 +147,7 @@ $metismenu-submenu-vertical-border-color: darken($metismenu-bg, 10%)!default;
                     &:hover, &:focus, &:active {
                         border-right-color: $temp-color;
                     }
-                    &.active {
+                    &.mm-active {
                         border-right-color: $temp-color;
                     }
                 }
