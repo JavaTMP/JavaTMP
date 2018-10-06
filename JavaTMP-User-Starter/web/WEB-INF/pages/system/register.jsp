@@ -24,7 +24,7 @@
         <div id="oneTimeOverlay" style="position: fixed;width: 100%;height: 100%;top: 0px;left: 0;right: 0;bottom: 0;background-color: rgba(255,255,255,1);z-index: 1000000;cursor: wait;">${labels['global.loadingText']}</div>
         <div class="container-fluid">
             <div class="row justify-content-center">
-                <div class="col-sm-8">
+                <div class="col-lg-7 col-md-8 col-sm-9" >
                     <div class="card mt-2 bg-light shadow">
                         <div class="card-header">
                             ${labels["page.register.registerCardTitleText"]}
@@ -32,25 +32,25 @@
                         <div class="card-body">
                             <form id="main-register-form" method="POST" role="form" action="${pageContext.request.contextPath}/register">
                                 <div class="form-row">
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-3 col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">${labels['domain.user.firstName']}</label>
                                             <input class="form-control" type="text" placeholder="${labels['domain.user.firstName']}" name="firstName">
                                         </div>
                                     </div>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-3 col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">${labels['domain.user.lastName']}</label>
                                             <input class="form-control" type="text" placeholder="${labels['domain.user.lastName']}" name="lastName">
                                         </div>
                                     </div>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-3 col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">${labels['domain.user.birthDate']}</label>
                                             <input dir="ltr" class="form-control"  type="text" name="birthOfDateStr">
                                         </div>
                                     </div>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-3 col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">${labels['domain.user.email']}</label>
                                             <input class="form-control" type="text" placeholder="${labels['domain.user.email']}" name="email">
@@ -58,65 +58,65 @@
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-3 col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">${labels['domain.user.country']}</label>
                                             <select name="countryId" class="form-control">
                                                 <c:choose>
                                                     <c:when test="${fn:length(requestScope.countries) > 0}">
-                                                        <option value="">Choose ...</option>
+                                                        <option value="">${labels['page.text.kindlySelect']}</option>
                                                         <c:forEach items="${requestScope.countries}" var="country">
                                                             <option ${requestScope.user.countryId == country.countryId ? 'selected="selected"' : ''} value="${country.countryId}">${country.countryName}</option>
                                                         </c:forEach>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <option value="">No Record Found</option>
+                                                        <option value="">${labels['page.text.noRecordFound']}</option>
                                                     </c:otherwise>
                                                 </c:choose>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-3 col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">${labels['domain.user.lang']}</label>
                                             <select name="lang" class="form-control">
                                                 <c:choose>
                                                     <c:when test="${fn:length(requestScope.languages) > 0}">
-                                                        <option value="">Choose ...</option>
+                                                        <option value="">${labels['page.text.kindlySelect']}</option>
                                                         <c:forEach items="${requestScope.languages}" var="language">
                                                             <option ${requestScope.user.lang == language.languageId ? 'selected="selected"' : ''} value="${language.languageId}">${language.languageName}</option>
                                                         </c:forEach>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <option value="">No Record Found</option>
+                                                        <option value="">${labels['page.text.noRecordFound']}</option>
                                                     </c:otherwise>
                                                 </c:choose>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-3 col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">${labels['domain.user.theme']}</label>
                                             <select name="theme" class="form-control">
                                                 <c:choose>
                                                     <c:when test="${fn:length(requestScope.themes) > 0}">
-                                                        <option value="">Choose ...</option>
+                                                        <option value="">${labels['page.text.kindlySelect']}</option>
                                                         <c:forEach items="${requestScope.themes}" var="theme">
                                                             <option ${requestScope.user.theme == theme.themeId ? 'selected="selected"' : ''} value="${theme.themeId}">${theme.themeName}</option>
                                                         </c:forEach>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <option value="">No Record Found</option>
+                                                        <option value="">${labels['page.text.noRecordFound']}</option>
                                                     </c:otherwise>
                                                 </c:choose>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-3 col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">${labels['domain.user.timezone']}</label>
                                             <select name="timezone" class="form-control">
-                                                <option value="">Choose ...</option>
+                                                <option value="">${labels['page.text.kindlySelect']}</option>
                                                 <c:choose>
                                                     <c:when test="${fn:length(requestScope.timezones) > 0}">
                                                         <c:forEach items="${requestScope.timezones}" var="timezone">
@@ -124,7 +124,7 @@
                                                         </c:forEach>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <option value="">No Record Found</option>
+                                                        <option value="">${labels['page.text.noRecordFound']}</option>
                                                     </c:otherwise>
                                                 </c:choose>
                                             </select>
@@ -132,21 +132,21 @@
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-4 col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">${labels['domain.user.userName']}</label>
                                             <input class="form-control" type="text" autocomplete="off" placeholder="${labels['domain.user.userName']}"
                                                    name="userName">
                                         </div>
                                     </div>
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-4 col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">${labels['domain.user.password']}</label>
                                             <input class="form-control" type="password" autocomplete="off"
                                                    placeholder="${labels['domain.user.password']}" name="password">
                                         </div>
                                     </div>
-                                    <div class="col-lg-4">
+                                    <div class="col-lg-4 col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">${labels['domain.user.reTypePassword']}</label>
                                             <input class="form-control" type="password" autocomplete="off" placeholder="${labels['domain.user.reTypePassword']}"
@@ -155,7 +155,7 @@
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <div class="col-lg-12">
+                                    <div class="col-lg-4  col-md-6">
                                         <div class="form-group">
                                             <label for="captchaCharactersTextField">${labels["page.register.captchaLabelText"]}</label>
                                             <img src="${pageContext.request.contextPath}/CaptchaImageController?_cancelGzip" class="d-block mt-1 mb-2" alt=""/>
@@ -223,6 +223,11 @@
                 javatmp.settings.direction = "${labels['global.direction']}";
                 javatmp.settings.isRTL = ${labels['global.direction'] == 'ltr' ? 'false' : 'true'};
                 javatmp.settings.contextPath = '${pageContext.request.contextPath}';
+                javatmp.settings.labels = {
+                    "loadingText": "${labels['global.loadingText']}",
+                    "kindlySelect": '${labels['page.text.kindlySelect']}'
+                };
+
                 jQuery.validator.addMethod("validDate", function (value, element) {
                     return this.optional(element) || moment(value, "DD/MM/YYYY", true).isValid();
                 }, "Please enter a valid date in the format DD/MM/YYYY");
@@ -395,15 +400,17 @@
                 form.find("textarea[name='address']").summernote({height: 250});
                 $.fn.select2.defaults.set("theme", "bootstrap");
                 $.fn.select2.defaults.set("dir", javatmp.settings.direction);
+                $.fn.select2.defaults.set("placeholder", javatmp.settings.labels.kindlySelect);
+
                 form.find("select[name='lang']").select2({
                     allowClear: true,
-                    placeholder: "Select a language",
+//                    placeholder: "Select a language",
                     containerCssClass: ':all:',
                     width: ''
                 });
                 form.find("select[name='theme']").select2({
                     allowClear: true,
-                    placeholder: "Select a theme",
+//                    placeholder: "Select a theme",
                     containerCssClass: ':all:',
                     width: '',
                     escapeMarkup: function (markup) {
@@ -414,7 +421,7 @@
                 });
                 form.find("select[name='timezone']").select2({
                     allowClear: true,
-                    placeholder: "Select a timezone",
+//                    placeholder: "Select a timezone",
                     containerCssClass: ':all:',
                     width: ''
                 });
@@ -422,7 +429,7 @@
                     theme: "bootstrap",
                     dir: javatmp.settings.direction,
                     allowClear: true,
-                    placeholder: "Select a country",
+//                    placeholder: "Select a country",
                     containerCssClass: ':all:',
                     width: '',
                     templateSelection: formatCountrySelection,
