@@ -54,23 +54,6 @@ Whether a debit or a credit increases or decreases the account balance depends o
 |Revenue account | Decreases (subtracts from) account balance | Increases (adds to) account balance |
 |Expense account | Increases (adds to) account balance | Decreases (subtracts from) account balance |
 
-| Account Type 	| Debit (DR) Entry 	| Credit (CR) Entry 	|
-|--------------	|------------------	|-------------------	|
-|Asset account | Increases (adds to) account balance | Decreases (subtracts from) account balance |
-|Liability account | Decreases (subtracts from) account balance | Increases (adds to) account balance |
-|Equity account | Decreases (subtracts from) account balance | Increases (adds to) account balance |
-|Revenue account | Decreases (subtracts from) account balance | Increases (adds to) account balance |
-|Expense account | Increases (adds to) account balance | Decreases (subtracts from) account balance |
-
-
-| ...     |Debit (DR) Entry ... | Credit (CR) Entry ...|
-|--|-- | --|
-|Asset account | Increases (adds to) account balance | Decreases (subtracts from) account balance|
-|Liability account | Decreases (subtracts from) account balance | Increases (adds to) account balance|
-|Equity account | Decreases (subtracts from) account balance | Increases (adds to) account balance|
-|Revenue account | Decreases (subtracts from) account balance | Increases (adds to) account balance|
-|Expense account | Increases (adds to) account balance | Decreases (subtracts from) account balance|
-
 In this way, the basic accounting equation always holds, and the Balance sheet stays balanced:
     `Assets = Liabilities + Equities`
 And, for every pair of account entries that follow from a single transaction:
