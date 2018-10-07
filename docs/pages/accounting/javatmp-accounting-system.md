@@ -163,15 +163,31 @@ https://dba.stackexchange.com/questions/17197/what-is-a-common-way-to-save-debit
 
 ### Main Entities involve in the module are:
 - Root Account Type: Asset, Liability, Income, Expense, Capital (Owner's Equity)
-- Account Category Type: (Higher business level naming and categorized type)
+- Account Category Type: (Higher business level naming and categorized types of the above root type)
     - You can simply Categorized Accounts based on their root type like the following:
-      Assets Accounts, Liability Accounts, Income Accounts, Expense Accounts, Equity Accounts.
+    Assets Accounts, Liability Accounts, Income Accounts, Expense Accounts, Equity Accounts.
     - You could use more sophisticated naming like the above:
-      Current Assets, Fixed Assets, Other Assets, Current Liabilities, Long-Term Liabilities, Equity Accounts,
+    Current Assets, Fixed Assets, Other Assets, Current Liabilities, Long-Term Liabilities, Equity Accounts,
     Revenue Accounts, Cost of Goods Sold, Other Expense Accounts
+    - You could use another naming derived from your module and business needs, like the following:
+    Checking or savings bank Account, Accounts receivable, Other current asset, Fixed asset, Accounts payable,
+    Credit card account, Income, Cost of goods sold.
+    - You could use your local official authority types based in your industry and company type.
 - Account (Chart Of Accounts)
+    - A chart of accounts (COA) provides a complete listing of every account in an accounting system.
+    An account is a unique record for each type of asset, liability, equity, revenue and expense.
+    It lists the names of the accounts that a company has identified and made available for recording transactions in its general ledger,
+    establishes the level of detail tracked in a record-keeping system. Typically, a COA contains the accounts’ names, brief descriptions
+    and identification codes and usually shown in A tree or hierarchy level style.
+    - A well-designed COA not only meets the information needs of management, it also helps a business to comply
+    with financial reporting standards. A company has the flexibility to tailor its chart of accounts to best suit its needs
 - Account_transaction (General Ledger)
+    - Each entry in the general ledger must appear in two places: once as a debit and once as a corresponding credit.
+    And the two added together must equal zero.
+    - GL entry or record is called Journal Entry and its grouped by transaction record.
 - Transaction
+    - Business activity applied by one or more modules in the system to update or change accounts balances.
+    - Transaction has at least two journal entries in account_transaction.
 - Transaction Type
 - Module
 - Transaction_module
