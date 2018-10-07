@@ -28,8 +28,7 @@ public class JdbcHelper {
             System.out.println("Row:");
             for (int i = 0; i < metadata.getColumnCount(); i++) {
                 String columnName = metadata.getColumnLabel(i + 1);
-                System.out.println("Column Name: " + columnName + ",  type [" + metadata.getColumnTypeName(i + 1)
-                        + "], value [" + rs.getObject(i + 1) + "] java type [" + rs.getObject(i + 1).getClass().getName() + "]");
+                System.out.println("Column Name: " + columnName + ",  type [" + metadata.getColumnTypeName(i + 1) + "] Class [" + metadata.getColumnClassName(i + 1) + "] value [" + rs.getObject(i + 1) + "]");
                 rowData.put(columnName, rs.getObject(columnName));
             }
         }
