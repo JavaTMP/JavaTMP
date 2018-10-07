@@ -164,9 +164,11 @@ https://dba.stackexchange.com/questions/17197/what-is-a-common-way-to-save-debit
 ### Main Entities involve in the module are:
 - Root Account Type: Asset, Liability, Income, Expense, Capital (Owner's Equity)
 - Account Category Type: (Higher business level naming and categorized type)
-    - You can simply Categorized Accounts based on their root type like the following: Assets Accounts, Liability Accounts, Income Accounts, Expense Accounts, Equity Accounts.
+    - You can simply Categorized Accounts based on their root type like the following:
+    Assets Accounts, Liability Accounts, Income Accounts, Expense Accounts, Equity Accounts.
     - You could use more sophisticated naming like the above:
-
+    Current Assets, Fixed Assets, Other Assets, Current Liabilities, Long-Term Liabilities, Equity Accounts,
+    Revenue Accounts, Cost of Goods Sold, Other Expense Accounts
 - Account (Chart Of Accounts)
 - Account_transaction (General Ledger)
 - Transaction
