@@ -45,6 +45,7 @@ the change in one account called a debit (DR), and the entry in another is calle
 Debits and Credits Impact Differently in Different Account Categories
 the bookkeeper and accountant handle each transaction for an account depends on which of the five account categories includes it.
 Whether a debit or a credit increases or decreases the account balance depends on the account's type:
+
 | Account Type | Debit (DR) Entry | Credit (CR) Entry |
 |--------------|------------------|-------------------|
 |  |  |  |
