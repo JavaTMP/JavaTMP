@@ -181,13 +181,15 @@ https://dba.stackexchange.com/questions/17197/what-is-a-common-way-to-save-debit
     and identification codes and usually shown in A tree or hierarchy level style.
     - A well-designed COA not only meets the information needs of management, it also helps a business to comply
     with financial reporting standards. A company has the flexibility to tailor its chart of accounts to best suit its needs
-- Account_transaction (General Ledger)
+- Account_Transaction (General Ledger)
     - Each entry in the general ledger must appear in two places: once as a debit and once as a corresponding credit.
     And the two added together must equal zero.
-    - GL entry or record is called Journal Entry and its grouped by transaction record.
-- Transaction
+    - GL entries or records is grouped by transaction record or Journal Entry.
+- Transaction (Journal Entry)
     - Business activity applied by one or more modules in the system to update or change accounts balances.
-    - Transaction has at least two journal entries in account_transaction.
+    - Transaction has at least two records in account_transaction.
+    - The journal entry can consist of several recordings in Account_transaction or GL , each of which is either a debit or a credit.
+    The total of the debits must equal the total of the credits or the journal entry is said to be "unbalanced".
 - Transaction Type
 - Module
 - Transaction_module
