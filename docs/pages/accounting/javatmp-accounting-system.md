@@ -43,7 +43,21 @@ For firms that use double-entry systems, every financial transaction causes two 
 the change in one account called a debit (DR), and the entry in another is called a credit (CR).
 
 Debits and Credits Impact Differently in Different Account Categories
-the bookkeeper and accountant handle each transaction for an account depends on which of the five account categories includes it. Whether a debit or a credit increases or decreases the account balance depends on the account's type:
+the bookkeeper and accountant handle each transaction for an account depends on which of the five account categories includes it.
+Whether a debit or a credit increases or decreases the account balance depends on the account's type:
+| Account Type | Debit (DR) Entry | Credit (CR) Entry |
+|--------------|------------------|-------------------|
+|  |  |  |
+|  |  |  |
+|  |  |  |
+
+| Account Type 	| Debit (DR) Entry 	| Credit (CR) Entry 	|
+|--------------	|------------------	|-------------------	|
+|  	|  	|  	|
+|  	|  	|  	|
+|  	|  	|  	|
+
+
 | ...     |Debit (DR) Entry ... | Credit (CR) Entry ...|
 |--|-- | --|
 |Asset account | Increases (adds to) account balance | Decreases (subtracts from) account balance|
