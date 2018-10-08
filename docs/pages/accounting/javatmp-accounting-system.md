@@ -273,6 +273,8 @@ Main Pages:
                     Unit price(s) of the product(s), if relevant;
                     Total amount charged (optionally with breakdown of taxes, if relevant);
                     Payment terms (including method of payment, date of payment, and details about charges for late payment);
+            - Inventory Or Stock. Inventory (American English) or stock (British English) is the goods and materials that a business holds
+            for the ultimate goal of resale (or repair).
 
 - Transaction_module
 
