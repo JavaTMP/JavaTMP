@@ -197,6 +197,7 @@ https://dba.stackexchange.com/questions/17197/what-is-a-common-way-to-save-debit
         - the amount(s) and account(s) that will be credited
         - a short description/memo
         - a reference such as a check number
+
     These journalized amounts (which will appear in the journal in order by date) are then posted to the accounts in the general ledger.
     Today, computerized accounting systems will automatically record most of the business transactions into
     the general ledger accounts immediately after the software prepares the sales invoices, issues checks to creditors,
