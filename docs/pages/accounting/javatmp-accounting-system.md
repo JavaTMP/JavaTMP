@@ -246,6 +246,33 @@ Main Pages:
                 - The Accounts Payable modules tracks money due to vendors, discounts and payment terms for all invoices.
                 - This module has the ability to print computer-generated checks to vendors.
                 - The accounts payable master files contain vendor information, including name, address and phone number.
+            - Invoice
+                - An invoice, bill or tab is a commercial document issued by a seller to a buyer, relating to a sale transaction
+                and indicating the products, quantities, and agreed prices for products or services the seller had provided the buyer.
+                - Payment terms are usually stated on the invoice. These may specify that the buyer has a maximum number of days
+                in which to pay and is sometimes offered a discount if paid before the due date.
+                The buyer could have already paid for the products or services listed on the invoice.
+                - From the point of view of a seller, an invoice is a sales invoice.
+                From the point of view of a buyer, an invoice is a purchase invoice.
+                The document indicates the buyer and seller, but the term invoice indicates money is owed or owing.
+                - Invoices are different from receipts. Both invoices and receipts are ways of tracking purchases of goods and services.
+                But Invoices differ from receipts in that invoices serve to notify customers of payments owed,
+                whereas receipts serve as proof of completed payment.
+                - A typical invoice may contain:
+                    The word invoice (or tax invoice);
+                    A unique reference number (in case of correspondence about the invoice);
+                    Date of the invoice;
+                    Credit terms;
+                    Tax payments, if relevant (e.g., GST or VAT);
+                    Name and contact details of the seller;
+                    Tax or company registration details of seller, if relevant e.g. VAT number for businesses;
+                    Name and contact details of the buyer;
+                    Date that the goods or service was sent or delivered;
+                    Purchase order number (or similar tracking numbers requested by the buyer to be mentioned on the invoice);
+                    Description of the product(s);
+                    Unit price(s) of the product(s), if relevant;
+                    Total amount charged (optionally with breakdown of taxes, if relevant);
+                    Payment terms (including method of payment, date of payment, and details about charges for late payment);
 
 - Transaction_module
 
