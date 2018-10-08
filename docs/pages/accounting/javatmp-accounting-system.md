@@ -190,7 +190,21 @@ https://dba.stackexchange.com/questions/17197/what-is-a-common-way-to-save-debit
     - Transaction has at least two records in account_transaction.
     - The journal entry can consist of several recordings in Account_transaction or GL , each of which is either a debit or a credit.
     The total of the debits must equal the total of the credits or the journal entry is said to be "unbalanced".
+    - In manual accounting or bookkeeping systems, business transactions are first recorded in a journal, hence the term journal entry.
+    A manual journal entry that is recorded in a company's general journal will consist of the following:
+        - the appropriate date,
+        - the amount(s) and account(s) that will be debited
+        - the amount(s) and account(s) that will be credited
+        - a short description/memo
+        - a reference such as a check number
+    These journalized amounts (which will appear in the journal in order by date) are then posted to the accounts in the general ledger.
+    Today, computerized accounting systems will automatically record most of the business transactions into
+    the general ledger accounts immediately after the software prepares the sales invoices, issues checks to creditors,
+    processes receipts from customers, etc. The result is we will not see journal entries for most of the business transactions.
 - Transaction Type
+    - It classifies the transaction (ex, acquisition, retirement, transfer, purchase,
+    expense, payment, borrowing, sale closing, revenue received, and soon on),
+    and determines how the transaction is processed in the system's modules.
 - Module
 - Transaction_module
 
