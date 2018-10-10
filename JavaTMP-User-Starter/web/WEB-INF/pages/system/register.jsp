@@ -155,7 +155,7 @@
                                     </div>
                                 </div>
                                 <div class="form-row">
-                                    <div class="col-lg-4  col-md-6">
+                                    <div class="col-lg-5  col-md-7">
                                         <div class="form-group">
                                             <label for="captchaCharactersTextField">${labels["page.register.captchaLabelText"]}</label>
                                             <img src="${pageContext.request.contextPath}/CaptchaImageController?_cancelGzip" class="d-block mt-1 mb-2" alt=""/>
@@ -186,8 +186,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <!--                                <button disabled="" type="submit" href="javascript:;" class="btn btn-lg btn-primary btn-block"></button>-->
                             </form>
                         </div>
                     </div>
@@ -225,9 +223,10 @@
                 javatmp.settings.contextPath = '${pageContext.request.contextPath}';
                 javatmp.settings.labels = {
                     "loadingText": "${labels['global.loadingText']}",
-                    "kindlySelect": '${labels['page.text.kindlySelect']}'
+                    "kindlySelect": '${labels['page.text.kindlySelect']}',
+                    "goToLoginPage": "${labels['action.register.goToLoginPage']}"
                 };
-
+                moment.locale("ar");
                 jQuery.validator.addMethod("validDate", function (value, element) {
                     return this.optional(element) || moment(value, "DD/MM/YYYY", true).isValid();
                 }, "Please enter a valid date in the format DD/MM/YYYY");
@@ -277,7 +276,7 @@
                                     close: true
                                 });
                                 $('<a>', {
-                                    text: 'Go To login page',
+                                    text: javatmp.settings.labels.goToLoginPage,
                                     class: '',
                                     href: data.redirectURL
                                 }).appendTo("#" + alertError);
@@ -393,7 +392,7 @@
                         format: 'DD/MM/YYYY'
                     }
                 }, function (start, end, label) {
-                    var formatedDateSelected = moment(start).format("DD/MM/YYYY");
+                    var formatedDateSelected = moment(start).locale('en').format("DD/MM/YYYY");
                     form.find("input[name='birthOfDateStr']").val(formatedDateSelected).trigger("change");
                 });
                 $(".daterangepicker.dropdown-menu").css('z-index', 600 + 1);

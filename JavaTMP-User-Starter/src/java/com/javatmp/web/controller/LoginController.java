@@ -8,7 +8,6 @@ import com.javatmp.util.Constants;
 import com.javatmp.util.MD5Util;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
@@ -39,6 +38,7 @@ public class LoginController extends HttpServlet {
         HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
         ServicesFactory sf = (ServicesFactory) context.getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
+        ResourceBundle labels = (ResourceBundle) session.getAttribute(Constants.LANGUAGE_ATTR_KEY);
 
         User user = new User();
         ResponseMessage responseMessage = new ResponseMessage();
@@ -63,17 +63,16 @@ public class LoginController extends HttpServlet {
             } else {
                 // un authenticated user
                 responseMessage.setOverAllStatus(false);
-                responseMessage.setMessage("kindly Check your username and password");
+                responseMessage.setMessage(labels.getString("action.login.wrongUserOrPassword"));
             }
         } catch (NoResultException ex) {
             // un authenticated user
             responseMessage.setOverAllStatus(false);
-            responseMessage.setMessage("kindly Check your username and password");
-        } catch (IllegalAccessException ex) {
+            responseMessage.setMessage(labels.getString("action.login.wrongUserOrPassword"));
+        } catch (IllegalAccessException | InvocationTargetException ex) {
             ex.printStackTrace();
-            throw new ServletException(ex);
-        } catch (InvocationTargetException ex) {
-            ex.printStackTrace();
+            responseMessage.setOverAllStatus(false);
+            responseMessage.setMessage(labels.getString("action.login.exception"));
             throw new ServletException(ex);
         }
 

@@ -12,8 +12,8 @@ import com.javatmp.service.UserService;
 import com.javatmp.util.Constants;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Date;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.logging.Logger;
 import javax.persistence.PersistenceException;
 import javax.servlet.ServletContext;
@@ -57,6 +57,7 @@ public class RegisterController extends HttpServlet {
         ServletContext context = request.getServletContext();
         ServicesFactory sf = (ServicesFactory) context.getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         UserService userService = sf.getUserService();
+        ResourceBundle labels = (ResourceBundle) session.getAttribute(Constants.LANGUAGE_ATTR_KEY);
 
         User user = new User();
         ResponseMessage responseMessage = new ResponseMessage();
@@ -70,11 +71,11 @@ public class RegisterController extends HttpServlet {
                 userService.createNewBasicUser(user);
 
                 responseMessage.setOverAllStatus(true);
-                responseMessage.setMessage("User has registered successfully");
+                responseMessage.setMessage(labels.getString("action.register.success"));
                 responseMessage.setRedirectURL(request.getContextPath() + "/");
             } else {
                 responseMessage.setOverAllStatus(false);
-                responseMessage.setMessage("Wrong Characters typed from the captcha image");
+                responseMessage.setMessage(labels.getString("action.register.wrongCaptcha"));
             }
 
         } catch (PersistenceException e) {
@@ -84,11 +85,10 @@ public class RegisterController extends HttpServlet {
             }
             responseMessage.setOverAllStatus(false);
             responseMessage.setMessage(t.getMessage());
-        } catch (IllegalAccessException ex) {
+        } catch (IllegalAccessException | InvocationTargetException ex) {
             ex.printStackTrace();
-            throw new ServletException(ex);
-        } catch (InvocationTargetException ex) {
-            ex.printStackTrace();
+            responseMessage.setOverAllStatus(false);
+            responseMessage.setMessage(labels.getString("action.register.exception"));
             throw new ServletException(ex);
         }
 
