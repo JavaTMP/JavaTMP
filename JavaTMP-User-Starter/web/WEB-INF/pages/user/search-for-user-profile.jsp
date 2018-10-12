@@ -771,8 +771,7 @@
                     reader.onload = function (e) {
                         var image = form.find("img[id='profilePicturePreview']");
                         var resizeImage = form.find("img[id='profilePictureResizePreview']");
-                        var avatarImage = form.find("img[id='profilePictureAvatarPreview']");
-                        var avatarRoundedImage = form.find("img[id='profilePictureAvatarRoundedPreview']");
+
                         image.one("load", function () {
                             //                            var currentImageHeight = this.height;
                             //                            if (currentImageHeight > 250) {
@@ -780,12 +779,10 @@
                             //                            } else {
                             //                                $("#profilePicturePreviewContainerId").height(currentImageHeight);
                             //                            }
-                            //                            $("#profilePicturePreviewContainerId").mCustomScrollbar("update");
+                            $("#profilePicturePreviewContainerId").mCustomScrollbar("update");
                         });
                         image.attr('src', e.target.result);
                         resizeImage.attr('src', e.target.result);
-                        avatarImage.attr('src', e.target.result);
-                        avatarRoundedImage.attr('src', e.target.result);
                     };
                     reader.readAsDataURL(this.files[0]);
                 }
