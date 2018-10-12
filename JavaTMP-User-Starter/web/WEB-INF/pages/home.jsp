@@ -261,7 +261,7 @@
                         },
                         data: [
                             {value: 0, name: 'Visit Today'},
-                            {value: 0, name: 'Not Visiting or login yet'}
+                            {value: 0, name: 'Not Visiting Today'}
                         ]
                     }
                 ]

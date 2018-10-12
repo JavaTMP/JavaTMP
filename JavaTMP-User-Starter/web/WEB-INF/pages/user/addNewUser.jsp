@@ -55,7 +55,7 @@
                                                 </c:forEach>
                                             </c:when>
                                             <c:otherwise>
-                                                <option value="">No Record Found</option>
+                                                <option value="">${labels['page.text.noRecordFound']}</option>
                                             </c:otherwise>
                                         </c:choose>
                                     </select>
@@ -73,7 +73,7 @@
                                                 </c:forEach>
                                             </c:when>
                                             <c:otherwise>
-                                                <option value="">No Record Found</option>
+                                                <option value="">${labels['page.text.noRecordFound']}</option>
                                             </c:otherwise>
                                         </c:choose>
                                     </select>
@@ -91,7 +91,7 @@
                                                 </c:forEach>
                                             </c:when>
                                             <c:otherwise>
-                                                <option value="">No Record Found</option>
+                                                <option value="">${labels['page.text.noRecordFound']}</option>
                                             </c:otherwise>
                                         </c:choose>
                                     </select>
@@ -109,7 +109,7 @@
                                                 </c:forEach>
                                             </c:when>
                                             <c:otherwise>
-                                                <option value="">No Record Found</option>
+                                                <option value="">${labels['page.text.noRecordFound']}</option>
                                             </c:otherwise>
                                         </c:choose>
                                     </select>

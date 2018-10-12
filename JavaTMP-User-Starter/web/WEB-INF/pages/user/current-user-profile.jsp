@@ -85,7 +85,7 @@
                                                             </c:forEach>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <option value="">No Record Found</option>
+                                                            <option value="">${labels['page.text.noRecordFound']}</option>
                                                         </c:otherwise>
                                                     </c:choose>
                                                 </select>
@@ -105,7 +105,7 @@
                                                             </c:forEach>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <option value="">No Record Found</option>
+                                                            <option value="">${labels['page.text.noRecordFound']}</option>
                                                         </c:otherwise>
                                                     </c:choose>
                                                 </select>
@@ -125,7 +125,7 @@
                                                             </c:forEach>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <option value="">No Record Found</option>
+                                                            <option value="">${labels['page.text.noRecordFound']}</option>
                                                         </c:otherwise>
                                                     </c:choose>
                                                 </select>
@@ -140,13 +140,13 @@
                                                     <option value="">${labels['page.text.kindlySelect']}</option>
                                                     <c:choose>
                                                         <c:when test="${fn:length(requestScope.timezones) > 0}">
-                                                            <option value="">Choose ...</option>
+                                                            <option value="">${labels['page.text.kindlySelect']}</option>
                                                             <c:forEach items="${requestScope.timezones}" var="timezone">
                                                                 <option ${requestScope.user.timezone == timezone.timezoneId ? 'selected="selected"' : ''}  value="${timezone.timezoneId}">${timezone.timezoneName}</option>
                                                             </c:forEach>
                                                         </c:when>
                                                         <c:otherwise>
-                                                            <option value="-1">No Record Found</option>
+                                                            <option value="-1">${labels['page.text.noRecordFound']}</option>
                                                         </c:otherwise>
                                                     </c:choose>
                                                 </select>

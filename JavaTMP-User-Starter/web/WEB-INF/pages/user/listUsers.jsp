@@ -87,7 +87,7 @@
                                 </c:forEach>
                             </c:when>
                             <c:otherwise>
-                                <option value="">No Record Found</option>
+                                <option value="-1">${labels['page.text.noRecordFound']}</option>
                             </c:otherwise>
                         </c:choose>
                     </select>
@@ -102,7 +102,7 @@
                                 </c:forEach>
                             </c:when>
                             <c:otherwise>
-                                <option value="">No Record Found</option>
+                                <option value="-1">${labels['page.text.noRecordFound']}</option>
                             </c:otherwise>
                         </c:choose>
                     </select>
@@ -117,7 +117,7 @@
                                 </c:forEach>
                             </c:when>
                             <c:otherwise>
-                                <option value="">No Record Found</option>
+                                <option value="-1">${labels['page.text.noRecordFound']}</option>
                             </c:otherwise>
                         </c:choose>
                     </select>
@@ -132,7 +132,7 @@
                                 </c:forEach>
                             </c:when>
                             <c:otherwise>
-                                <option value="-1">No Record Found</option>
+                                <option value="-1">${labels['page.text.noRecordFound']}</option>
                             </c:otherwise>
                         </c:choose>
                     </select>
