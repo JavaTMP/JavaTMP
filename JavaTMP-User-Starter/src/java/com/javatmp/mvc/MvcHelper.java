@@ -6,6 +6,7 @@ import com.javatmp.mvc.adapter.ClassTypeAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.javatmp.domain.Document;
+import com.javatmp.mvc.adapter.ByteArrayToBase64TypeAdapter;
 import com.javatmp.mvc.domain.table.OrderDir;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -45,6 +46,7 @@ public class MvcHelper {
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").serializeNulls()
             .registerTypeAdapter(Class.class, new ClassTypeAdapter())
             .registerTypeAdapter(OrderDir.class, new OrderDirTypeAdapter())
+            .registerTypeHierarchyAdapter(byte[].class, new ByteArrayToBase64TypeAdapter())
             .create();
 
     /**

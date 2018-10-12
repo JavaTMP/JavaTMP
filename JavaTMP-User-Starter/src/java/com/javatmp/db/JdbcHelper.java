@@ -1,5 +1,11 @@
 package com.javatmp.db;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.javatmp.mvc.adapter.ByteArrayToBase64TypeAdapter;
+import com.javatmp.mvc.adapter.ClassTypeAdapter;
+import com.javatmp.mvc.adapter.OrderDirTypeAdapter;
+import com.javatmp.mvc.domain.table.OrderDir;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -36,6 +42,18 @@ public class JdbcHelper {
         for (Map<String, Object> row : resultData) {
             System.out.println(row);
         }
+
+        Gson gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").serializeNulls()
+                .registerTypeAdapter(Class.class, new ClassTypeAdapter())
+                .registerTypeAdapter(OrderDir.class, new OrderDirTypeAdapter())
+                .registerTypeHierarchyAdapter(byte[].class, new ByteArrayToBase64TypeAdapter())
+                .create();
+
+        String json = gson.toJson(resultData);
+
+        System.out.println("********");
+        System.out.println(json);
 
     }
 
