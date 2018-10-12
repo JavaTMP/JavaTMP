@@ -8,6 +8,10 @@ $s2bs-dropdown-bg: $dropdown-bg!default;
 
 @import "../../../../../node_modules/select2-bootstrap-theme/src/select2-bootstrap.scss";
 
+.select2-container--bootstrap .select2-results > .select2-results__options {
+    overflow-x: hidden;
+}
+
 .input-group, .form-group {
     > .select2-container--bootstrap {
         width: auto;
