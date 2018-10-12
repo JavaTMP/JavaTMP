@@ -286,14 +286,16 @@
                     x: 'center',
                     y: 0,
                     textStyle: {
-                        fontFamily: "Open Sans",
+                        fontFamily: $("body").css("font-family"),
+                        fontSize: $("body").css("font-size"),
                         align: javatmp.settings.floatDefault
                     }
                 },
                 tooltip: {
                     trigger: 'axis',
                     textStyle: {
-                        fontFamily: "Open Sans",
+                        fontFamily: $("body").css("font-family"),
+                        fontSize: $("body").css("font-size"),
                         align: javatmp.settings.floatDefault
                     },
                     formatter: formaterFunction
@@ -305,7 +307,8 @@
                     x: 'center',
                     y: '30px',
                     textStyle: {
-                        fontFamily: "Open Sans",
+                        fontFamily: $("body").css("font-family"),
+                        fontSize: $("body").css("font-size"),
                         align: javatmp.settings.floatDefault
                     }
                 },
@@ -319,7 +322,8 @@
                         //                            interval: 0
                         //                        },
                         textStyle: {
-                            fontFamily: "Open Sans",
+                            fontFamily: $("body").css("font-family"),
+                            fontSize: $("body").css("font-size"),
                             align: javatmp.settings.floatDefault
                         }
                     }
@@ -330,7 +334,8 @@
                         position: javatmp.settings.floatDefault,
                         type: 'value',
                         textStyle: {
-                            fontFamily: "Open Sans",
+                            fontFamily: $("body").css("font-family"),
+                            fontSize: $("body").css("font-size"),
                             align: javatmp.settings.floatDefault
                         }
                     }
@@ -360,14 +365,16 @@
                     x: 'center',
                     y: 0,
                     textStyle: {
-                        fontFamily: "Open Sans",
+                        fontFamily: $("body").css("font-family"),
+                        fontSize: $("body").css("font-size"),
                         align: javatmp.settings.floatDefault
                     }
                 },
                 tooltip: {
                     trigger: 'axis',
                     textStyle: {
-                        fontFamily: "Open Sans",
+                        fontFamily: $("body").css("font-family"),
+                        fontSize: $("body").css("font-size"),
                         align: javatmp.settings.floatDefault
                     },
                     formatter: formaterFunction
@@ -379,7 +386,8 @@
                     x: 'center',
                     y: '30px',
                     textStyle: {
-                        fontFamily: "Open Sans",
+                        fontFamily: $("body").css("font-family"),
+                        fontSize: $("body").css("font-size"),
                         align: javatmp.settings.floatDefault
                     }
                 },
@@ -393,7 +401,8 @@
                         //                            interval: 0
                         //                        },
                         textStyle: {
-                            fontFamily: "Open Sans",
+                            fontFamily: $("body").css("font-family"),
+                            fontSize: $("body").css("font-size"),
                             align: javatmp.settings.floatDefault
                         }
                     }
@@ -404,7 +413,8 @@
                         position: javatmp.settings.floatDefault,
                         type: 'value',
                         textStyle: {
-                            fontFamily: "Open Sans",
+                            fontFamily: $("body").css("font-family"),
+                            fontSize: $("body").css("font-size"),
                             align: javatmp.settings.floatDefault
                         }
                     }
@@ -422,6 +432,11 @@
             var UsersLocationsInTheWorldOption = {
                 tooltip: {
                     trigger: 'item',
+                    textStyle: {
+                        fontFamily: $("body").css("font-family"),
+                        fontSize: $("body").css("font-size"),
+                        align: javatmp.settings.floatDefault
+                    },
                     formatter: function (params) {
                         var value = (params.value + '').split('.');
                         value = value[0].replace(/(\d{1,3})(?=(?:\d{3})+(?!\d))/g, '$1,');
@@ -479,15 +494,16 @@
                     x: 'center',
                     y: 0,
                     textStyle: {
-                        fontWeight: "normal",
-                        fontFamily: "Open Sans",
+                        fontFamily: $("body").css("font-family"),
+                        fontSize: $("body").css("font-size"),
                         align: javatmp.settings.floatDefault
                     }
                 },
                 tooltip: {
                     trigger: 'axis',
                     textStyle: {
-                        fontFamily: "Open Sans",
+                        fontFamily: $("body").css("font-family"),
+                        fontSize: $("body").css("font-size"),
                         align: javatmp.settings.floatDefault
                     },
                     formatter: formaterFunction
@@ -499,42 +515,43 @@
                     x: 'center',
                     y: '30px',
                     textStyle: {
-                        fontFamily: "Open Sans",
+                        fontFamily: $("body").css("font-family"),
+                        fontSize: $("body").css("font-size"),
                         align: javatmp.settings.floatDefault
                     }
                 },
                 calculable: true,
-                xAxis: [
-                    {
-                        inverse: javatmp.settings.isRTL,
-                        data: monthsName,
-//                        axisLabel: {
-//                            interval: 0
-//                        },
-                        textStyle: {
-                            fontFamily: "Open Sans",
-                            align: javatmp.settings.floatDefault
-                        }
+                xAxis: {
+                    inverse: javatmp.settings.isRTL,
+                    data: monthsName,
+//                    axisLabel: {
+//                        interval: 0
+//                    },
+                    axisLabel: {
+                        fontFamily: $("body").css("font-family"),
+                        fontSize: $("body").css("font-size")
+                    },
+                    textStyle: {
+                        fontFamily: $("body").css("font-family"),
+                        fontSize: $("body").css("font-size"),
+                        align: javatmp.settings.floatDefault
                     }
-                ],
-                yAxis: [
-                    {
-                        position: javatmp.settings.floatDefault,
-                        type: 'value',
-                        textStyle: {
-                            fontFamily: "Open Sans",
-                            align: javatmp.settings.floatDefault
-                        }
+                },
+                yAxis: {
+                    position: javatmp.settings.floatDefault,
+                    type: 'value',
+                    textStyle: {
+                        fontFamily: $("body").css("font-family"),
+                        fontSize: $("body").css("font-size"),
+                        align: javatmp.settings.floatDefault
                     }
-                ],
+                },
                 color: ['#007bff'],
-                series: [
-                    {
-                        name: 'Birthday',
-                        type: 'bar',
-                        data: []
-                    }
-                ]
+                series: {
+                    name: 'Birthday',
+                    type: 'bar',
+                    data: []
+                }
             };
 
             UsersBirthdayPerMonths.setOption(barChartOption);
