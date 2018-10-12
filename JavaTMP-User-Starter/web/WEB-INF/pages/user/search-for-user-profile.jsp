@@ -635,17 +635,16 @@
             });
             $.fn.select2.defaults.set("theme", "bootstrap");
             $.fn.select2.defaults.set("dir", javatmp.settings.direction);
+            $.fn.select2.defaults.set("placeholder", javatmp.settings.labels.kindlySelect);
 
             form.find("select[name='lang']").select2({
                 allowClear: true,
-                placeholder: "Select a language",
                 containerCssClass: ':all:',
                 width: '',
                 dropdownCssClass: "select2-lang-dropdown"
             });
             form.find("select[name='theme']").select2({
                 allowClear: true,
-                placeholder: "Select a theme",
                 containerCssClass: ':all:',
                 width: '',
                 escapeMarkup: function (markup) {
@@ -657,7 +656,6 @@
             });
             form.find("select[name='timezone']").select2({
                 allowClear: true,
-                placeholder: "Select a timezone",
                 containerCssClass: ':all:',
                 width: '',
                 dropdownCssClass: "select2-timezone-dropdown"
@@ -666,7 +664,6 @@
                 theme: "bootstrap",
                 dir: javatmp.settings.direction,
                 allowClear: true,
-                placeholder: "Select a country",
                 containerCssClass: ':all:',
                 width: '',
                 templateSelection: formatCountrySelection,

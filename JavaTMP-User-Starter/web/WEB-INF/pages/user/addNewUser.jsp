@@ -49,7 +49,7 @@
                                     <select name="countryId" class="form-control">
                                         <c:choose>
                                             <c:when test="${fn:length(requestScope.countries) > 0}">
-                                                <option value="">Choose ...</option>
+                                                <option value="">${labels['page.text.kindlySelect']}</option>
                                                 <c:forEach items="${requestScope.countries}" var="country">
                                                     <option ${requestScope.user.countryId == country.countryId ? 'selected="selected"' : ''} value="${country.countryId}">${country.countryName}</option>
                                                 </c:forEach>
@@ -67,7 +67,7 @@
                                     <select name="lang" class="form-control">
                                         <c:choose>
                                             <c:when test="${fn:length(requestScope.languages) > 0}">
-                                                <option value="">Choose ...</option>
+                                                <option value="">${labels['page.text.kindlySelect']}</option>
                                                 <c:forEach items="${requestScope.languages}" var="language">
                                                     <option ${requestScope.user.lang == language.languageId ? 'selected="selected"' : ''} value="${language.languageId}">${language.languageName}</option>
                                                 </c:forEach>
@@ -85,7 +85,7 @@
                                     <select name="theme" class="form-control">
                                         <c:choose>
                                             <c:when test="${fn:length(requestScope.themes) > 0}">
-                                                <option value="">Choose ...</option>
+                                                <option value="">${labels['page.text.kindlySelect']}</option>
                                                 <c:forEach items="${requestScope.themes}" var="theme">
                                                     <option ${requestScope.user.theme == theme.themeId ? 'selected="selected"' : ''} value="${theme.themeId}">${theme.themeName}</option>
                                                 </c:forEach>
@@ -101,7 +101,7 @@
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.timezone']}</label>
                                     <select name="timezone" class="form-control">
-                                        <option value="">Choose ...</option>
+                                        <option value="">${labels['page.text.kindlySelect']}</option>
                                         <c:choose>
                                             <c:when test="${fn:length(requestScope.timezones) > 0}">
                                                 <c:forEach items="${requestScope.timezones}" var="timezone">
@@ -219,7 +219,7 @@
                 for (var i = 0; i < formData.length; i++) {
                     if (formData[i].name === "birthOfDateStr") {
                         var value = formData[i].value;
-                        var newDate = moment(value, "DD/MM/YYYY").format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+                        var newDate = moment(value, "DD/MM/YYYY").locale('en').format("YYYY-MM-DDTHH:mm:ss.SSSZ");
                         formData.push({"name": "birthDate", "value": newDate});
                         break;
                     }
@@ -362,22 +362,22 @@
                 format: 'DD/MM/YYYY'
             }
         }, function (start, end, label) {
-            var formatedDateSelected = moment(start).format("DD/MM/YYYY");
+            var formatedDateSelected = moment(start).locale('en').format("DD/MM/YYYY");
             form.find("input[name='birthOfDateStr']").val(formatedDateSelected).trigger("change");
         });
         $(".daterangepicker.dropdown-menu").css('z-index', 600 + 1);
         form.find("textarea[name='address']").summernote({height: 250});
         $.fn.select2.defaults.set("theme", "bootstrap");
         $.fn.select2.defaults.set("dir", javatmp.settings.direction);
+        $.fn.select2.defaults.set("placeholder", javatmp.settings.labels.kindlySelect);
+
         form.find("select[name='lang']").select2({
             allowClear: true,
-            placeholder: "Select a language",
             containerCssClass: ':all:',
             width: ''
         });
         form.find("select[name='theme']").select2({
             allowClear: true,
-            placeholder: "Select a theme",
             containerCssClass: ':all:',
             width: '',
             escapeMarkup: function (markup) {
@@ -388,7 +388,6 @@
         });
         form.find("select[name='timezone']").select2({
             allowClear: true,
-            placeholder: "Select a timezone",
             containerCssClass: ':all:',
             width: ''
         });
@@ -396,7 +395,6 @@
             theme: "bootstrap",
             dir: javatmp.settings.direction,
             allowClear: true,
-            placeholder: "Select a country",
             containerCssClass: ':all:',
             width: '',
             templateSelection: formatCountrySelection,

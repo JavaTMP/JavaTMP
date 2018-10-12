@@ -162,12 +162,12 @@
                     <div class="scroll-content" style="height: 500px;">
                         <form enctype="multipart/form-data" autocomplete="off" id="SearchForUserProfileFormId" class="form m-3"
                               action="${pageContext.request.contextPath}/user/UpdateCompleteUserController" method="post" novalidate="novalidate">
-
                             <div class="form-row">
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="control-label">${labels['domain.user.status']}</label>
                                         <select name="status" class="custom-select">
+                                            <option value="">${labels['page.text.kindlySelect']}</option>
                                             <option value="1">Activated</option>
                                             <option value="0">Deactivated</option>
                                         </select>
@@ -176,13 +176,13 @@
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="control-label">${labels['domain.user.firstName']}</label>
-                                        <input class="form-control" type="text" placeholder="First Name" name="firstName" value="">
+                                        <input class="form-control" type="text" placeholder="${labels['domain.user.firstName']}" name="firstName" value="">
                                     </div>
                                 </div>
                                 <div class="col-lg-4">
                                     <div class="form-group">
                                         <label class="control-label">${labels['domain.user.lastName']}</label>
-                                        <input class="form-control" type="text" placeholder="Last Name" name="lastName" value="">
+                                        <input class="form-control" type="text" placeholder="${labels['domain.user.lastName']}" name="lastName" value="">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -194,7 +194,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="control-label">${labels['domain.user.email']}</label>
-                                        <input class="form-control" type="text" placeholder="Email" name="email" value="">
+                                        <input class="form-control" type="text" placeholder="${labels['domain.user.email']}" name="email" value="">
                                     </div>
                                 </div>
                             </div>
@@ -205,7 +205,7 @@
                                         <select name="countryId" class="form-control">
                                             <c:choose>
                                                 <c:when test="${fn:length(requestScope.countries) > 0}">
-                                                    <option value="">Choose ...</option>
+                                                    <option value="">${labels['page.text.kindlySelect']}</option>
                                                     <c:forEach items="${requestScope.countries}" var="country">
                                                         <option value="${country.countryId}">${country.countryName}</option>
                                                     </c:forEach>
@@ -223,7 +223,7 @@
                                         <select name="lang" class="form-control">
                                             <c:choose>
                                                 <c:when test="${fn:length(requestScope.languages) > 0}">
-                                                    <option value="">Choose ...</option>
+                                                    <option value="">${labels['page.text.kindlySelect']}</option>
                                                     <c:forEach items="${requestScope.languages}" var="language">
                                                         <option value="${language.languageId}">${language.languageName}</option>
                                                     </c:forEach>
@@ -241,7 +241,7 @@
                                         <select name="theme" class="form-control">
                                             <c:choose>
                                                 <c:when test="${fn:length(requestScope.themes) > 0}">
-                                                    <option value="">Choose ...</option>
+                                                    <option value="">${labels['page.text.kindlySelect']}</option>
                                                     <c:forEach items="${requestScope.themes}" var="theme">
                                                         <option value="${theme.themeId}">${theme.themeName}</option>
                                                     </c:forEach>
@@ -257,7 +257,7 @@
                                     <div class="form-group">
                                         <label class="control-label">${labels['domain.user.timezone']}</label>
                                         <select name="timezone" class="form-control">
-                                            <option value="">Choose ...</option>
+                                            <option value="">${labels['page.text.kindlySelect']}</option>
                                             <c:choose>
                                                 <c:when test="${fn:length(requestScope.timezones) > 0}">
                                                     <option value="">Choose ...</option>
@@ -277,34 +277,11 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="control-label">${labels['domain.user.userName']}</label>
-                                        <input class="form-control" type="text" autocomplete="off" placeholder="Username"
+                                        <input class="form-control" type="text" autocomplete="off" placeholder="${labels['domain.user.userName']}"
                                                name="userName" value="">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="control-label">${labels['domain.user.password']}</label>
-                                        <input class="form-control" type="password" autocomplete="off"
-                                               placeholder="Old Password" name="oldPassword">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="control-label">New Password</label>
-                                        <input class="form-control" type="password" autocomplete="off"
-                                               placeholder="New Password" name="password">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="control-label">${labels['domain.user.reTypePassword']}</label>
-                                        <input class="form-control" type="password" autocomplete="off" placeholder="Re-type Your New Password"
-                                               name="rpassword">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="col-lg-12">
                                     <div class="form-group">
                                         <label for="exampleFormControlFile1">${labels['domain.user.Document']}</label>
                                         <div class="custom-file">
@@ -313,6 +290,8 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="form-row">
                                 <div class="col-lg-6 text-center">
                                     <div style="width: 200px; height: 200px;display: inline-block;position: relative">
                                         <div id="profilePicturePreviewContainerId" style="width: 200px; height: 200px;">
@@ -455,10 +434,10 @@
             disabled();
             $.fn.dataTable.ext.errMode = 'none';
             var table = userTableElement.DataTable({
-                dom: "<'row'<'col-sm-12'tr>>" +
-                        "<'row'<'col-sm-6'i><'col-sm-6 pt-2 text-right'l>>"
-                        + "<'row'<'col-sm-12'p>>"
-                ,
+//                dom: "<'row'<'col-sm-12'tr>>" +
+//                        "<'row'<'col-sm-6'i><'col-sm-6 pt-2 text-right'l>>"
+//                        + "<'row'<'col-sm-12'p>>"
+//                ,
 //                select: true,
                 select: "single",
                 scrollY: 250,
@@ -466,7 +445,7 @@
                 "autoWidth": false,
                 fixedColumns: true,
                 scrollCollapse: false,
-                "searching": true,
+                "searching": false,
                 searchDelay: 500,
                 orderCellsTop: true, // important to for two row header with filteration below header column names.
                 "processing": true,
@@ -549,7 +528,7 @@
                             format: 'DD/MM/YYYY'
                         }
                     }, function (start, end, label) {
-                        var formatedDateSelected = moment(start).format("DD/MM/YYYY");
+                        var formatedDateSelected = moment(start).locale('en').format("DD/MM/YYYY");
                         birthdateFilterInput.val(formatedDateSelected).trigger("change");
                     });
 
@@ -763,7 +742,12 @@
                         javatmp.util.waitForFinalEvent(function () {
                             var start = $this.data("start");
                             var end = $this.data("end");
-                            var val = start.format("YYYY-MM-DDTHH:mm:ss.SSSZ") + "##TO##" + end.format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+                            var val = "";
+                            if ((start !== undefined) && (end !== undefined)) {
+                                val = start.locale('en').format("YYYY-MM-DDTHH:mm:ss.SSSZ")
+                                        + "##TO##"
+                                        + end.locale('en').format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+                            }
                             api.column(12).search(val ? val : '', false, false).draw();
                         }, 200, "@userlist-main-table-filter");
                     });
@@ -796,6 +780,8 @@
                         creationdateFilterInput.val(picker.startDate.format('MM/DD/YYYY HH:mm:ss') + ' - ' + picker.endDate.format('MM/DD/YYYY HH:mm:ss')).trigger("change");
                     });
                     creationdateFilterInput.on('cancel.daterangepicker', function (ev, picker) {
+                        creationdateFilterInput.removeData("start");
+                        creationdateFilterInput.removeData("end");
                         $(this).val('').trigger("change");
                     });
 
@@ -1018,7 +1004,7 @@
                     format: 'DD/MM/YYYY'
                 }
             }, function (start, end, label) {
-                var formatedDateSelected = moment(start).format("DD/MM/YYYY");
+                var formatedDateSelected = moment(start).locale('en').format("DD/MM/YYYY");
                 form.find("input[name='birthOfDateStr']").val(formatedDateSelected).trigger("change");
             });
             form.find("textarea[name='address']").summernote({
@@ -1030,10 +1016,10 @@
 
             $.fn.select2.defaults.set("theme", "bootstrap");
             $.fn.select2.defaults.set("dir", javatmp.settings.direction);
+            $.fn.select2.defaults.set("placeholder", javatmp.settings.labels.kindlySelect);
 
             form.find("select[name='lang']").select2({
                 allowClear: true,
-                placeholder: "Select a language",
                 containerCssClass: ':all:',
                 width: '',
                 dropdownCssClass: "select2-lang-dropdown"
@@ -1042,7 +1028,6 @@
             });
             form.find("select[name='theme']").select2({
                 allowClear: true,
-                placeholder: "Select a theme",
                 containerCssClass: ':all:',
                 width: '',
                 escapeMarkup: function (markup) {
@@ -1056,7 +1041,6 @@
             });
             form.find("select[name='timezone']").select2({
                 allowClear: true,
-                placeholder: "Select a timezone",
                 containerCssClass: ':all:',
                 width: '',
                 dropdownCssClass: "select2-timezone-dropdown"
@@ -1067,7 +1051,6 @@
                 theme: "bootstrap",
                 dir: javatmp.settings.direction,
                 allowClear: true,
-                placeholder: "Select a country",
                 containerCssClass: ':all:',
                 width: '',
                 templateSelection: formatCountrySelection,
@@ -1174,8 +1157,6 @@
                 return readyData;
             }
 
-
-
             function populateForm(frm, data) {
                 $.each(data, function (key, value) {
                     var $ctrl = $('[name=' + key + ']', frm);
@@ -1220,7 +1201,7 @@
                 populateForm(form, rowObject);
                 form.find("textarea[name='address']").summernote('code', rowObject.address);
 //                    form.find("textarea[name='address']").summernote('triggerEvent', 'change');
-                form.find("input[name='birthOfDateStr']").val(moment(rowObject.birthDate, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("DD/MM/YYYY"));
+                form.find("input[name='birthOfDateStr']").val(moment(rowObject.birthDate, "YYYY-MM-DDTHH:mm:ss.SSSZ").locale('en').format("DD/MM/YYYY"));
 
                 var image = form.find("img[id='profilePicturePreview']");
                 var resizeImage = form.find("img[id='profilePictureResizePreview']");

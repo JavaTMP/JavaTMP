@@ -34,13 +34,13 @@
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.firstName']}</label>
-                                    <input class="form-control" type="text" placeholder="Full Name" name="firstName" value="${requestScope.user.firstName}">
+                                    <input class="form-control" type="text" placeholder="${labels['domain.user.firstName']}" name="firstName" value="${requestScope.user.firstName}">
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.lastName']}</label>
-                                    <input class="form-control" type="text" placeholder="Full Name" name="lastName" value="${requestScope.user.lastName}">
+                                    <input class="form-control" type="text" placeholder="${labels['domain.user.lastName']}" name="lastName" value="${requestScope.user.lastName}">
                                 </div>
                             </div>
                             <div class="col-lg-3">
@@ -63,7 +63,7 @@
                                     <select name="countryId" class="form-control">
                                         <c:choose>
                                             <c:when test="${fn:length(requestScope.countries) > 0}">
-                                                <option value="">Choose ...</option>
+                                                <option value="">${labels['page.text.kindlySelect']}</option>
                                                 <c:forEach items="${requestScope.countries}" var="country">
                                                     <option ${requestScope.user.countryId == country.countryId ? 'selected="selected"' : ''} value="${country.countryId}">${country.countryName}</option>
                                                 </c:forEach>
@@ -81,7 +81,7 @@
                                     <select name="lang" class="form-control">
                                         <c:choose>
                                             <c:when test="${fn:length(requestScope.languages) > 0}">
-                                                <option value="">Choose ...</option>
+                                                <option value="">${labels['page.text.kindlySelect']}</option>
                                                 <c:forEach items="${requestScope.languages}" var="language">
                                                     <option ${requestScope.user.lang == language.languageId ? 'selected="selected"' : ''} value="${language.languageId}">${language.languageName}</option>
                                                 </c:forEach>
@@ -99,7 +99,7 @@
                                     <select name="theme" class="form-control">
                                         <c:choose>
                                             <c:when test="${fn:length(requestScope.themes) > 0}">
-                                                <option value="">Choose ...</option>
+                                                <option value="">${labels['page.text.kindlySelect']}</option>
                                                 <c:forEach items="${requestScope.themes}" var="theme">
                                                     <option ${requestScope.user.theme == theme.themeId ? 'selected="selected"' : ''} value="${theme.themeId}">${theme.themeName}</option>
                                                 </c:forEach>
@@ -115,7 +115,7 @@
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.timezone']}</label>
                                     <select name="timezone" class="form-control">
-                                        <option value="">Choose ...</option>
+                                        <option value="">${labels['page.text.kindlySelect']}</option>
                                         <c:choose>
                                             <c:when test="${fn:length(requestScope.timezones) > 0}">
                                                 <option value="">Choose ...</option>
@@ -171,21 +171,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 text-center">
+                            <div class="col-lg-6 text-center">
                                 <div style="width: 200px; height: 200px;display: inline-block;position: relative">
                                     <div id="profilePicturePreviewContainerId" style="width: 200px; height: 200px;">
                                         <img id="profilePicturePreview" src="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${requestScope.user.profilePicDocument.documentId}&amp;randomHash=${requestScope.user.profilePicDocument.randomHash}&amp;viewType=inline" alt="Your Profile Image Preview" />
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 text-center">
+                            <div class="col-lg-6 text-center">
                                 <img id="profilePictureResizePreview" style="width: 200px; height: 200px;" src="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${requestScope.user.profilePicDocument.documentId}&amp;randomHash=${requestScope.user.profilePicDocument.randomHash}&amp;viewType=inline" alt="Your Profile Image Preview" />
-                            </div>
-                            <div class="col-lg-3 text-center">
-                                <img id="profilePictureAvatarPreview" style="width: 40px; height: 40px;" src="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${requestScope.user.profilePicDocument.documentId}&amp;randomHash=${requestScope.user.profilePicDocument.randomHash}&amp;viewType=inline" alt="Your Profile Image Preview" />
-                            </div>
-                            <div class="col-lg-3 text-center">
-                                <img class="rounded-circle" id="profilePictureAvatarRoundedPreview" style="width: 40px; height: 40px;" src="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${requestScope.user.profilePicDocument.documentId}&amp;randomHash=${requestScope.user.profilePicDocument.randomHash}&amp;viewType=inline" alt="Your Profile Image Preview" />
                             </div>
                         </div>
                         <div class="form-row">
@@ -597,8 +591,6 @@
                     reader.onload = function (e) {
                         var image = form.find("img[id='profilePicturePreview']");
                         var resizeImage = form.find("img[id='profilePictureResizePreview']");
-                        var avatarImage = form.find("img[id='profilePictureAvatarPreview']");
-                        var avatarRoundedImage = form.find("img[id='profilePictureAvatarRoundedPreview']");
                         image.one("load", function () {
 //                            var currentImageHeight = this.height;
 //                            if (currentImageHeight > 250) {
@@ -606,12 +598,10 @@
 //                            } else {
 //                                $("#profilePicturePreviewContainerId").height(currentImageHeight);
 //                            }
-//                            $("#profilePicturePreviewContainerId").mCustomScrollbar("update");
+                            $("#profilePicturePreviewContainerId").mCustomScrollbar("update");
                         });
                         image.attr('src', e.target.result);
                         resizeImage.attr('src', e.target.result);
-                        avatarImage.attr('src', e.target.result);
-                        avatarRoundedImage.attr('src', e.target.result);
                     };
                     reader.readAsDataURL(this.files[0]);
                 }

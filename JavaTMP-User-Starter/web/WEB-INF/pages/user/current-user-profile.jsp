@@ -79,7 +79,7 @@
                                                 <select name="countryId" class="form-control">
                                                     <c:choose>
                                                         <c:when test="${fn:length(requestScope.countries) > 0}">
-                                                            <option value="">Choose ...</option>
+                                                            <option value="">${labels['page.text.kindlySelect']}</option>
                                                             <c:forEach items="${requestScope.countries}" var="country">
                                                                 <option ${requestScope.user.countryId == country.countryId ? 'selected="selected"' : ''} value="${country.countryId}">${country.countryName}</option>
                                                             </c:forEach>
@@ -99,7 +99,7 @@
                                                 <select name="lang" class="form-control">
                                                     <c:choose>
                                                         <c:when test="${fn:length(requestScope.languages) > 0}">
-                                                            <option value="">Choose ...</option>
+                                                            <option value="">${labels['page.text.kindlySelect']}</option>
                                                             <c:forEach items="${requestScope.languages}" var="language">
                                                                 <option ${requestScope.user.lang == language.languageId ? 'selected="selected"' : ''} value="${language.languageId}">${language.languageName}</option>
                                                             </c:forEach>
@@ -119,7 +119,7 @@
                                                 <select name="theme" class="form-control">
                                                     <c:choose>
                                                         <c:when test="${fn:length(requestScope.themes) > 0}">
-                                                            <option value="">Choose ...</option>
+                                                            <option value="">${labels['page.text.kindlySelect']}</option>
                                                             <c:forEach items="${requestScope.themes}" var="theme">
                                                                 <option ${requestScope.user.theme == theme.themeId ? 'selected="selected"' : ''} value="${theme.themeId}">${theme.themeName}</option>
                                                             </c:forEach>
@@ -137,7 +137,7 @@
                                             <label class="text-right control-label col-sm-5 col-form-label">${labels['domain.user.timezone']}</label>
                                             <div class="col-sm-7">
                                                 <select name="timezone" class="form-control">
-                                                    <option value="">Choose ...</option>
+                                                    <option value="">${labels['page.text.kindlySelect']}</option>
                                                     <c:choose>
                                                         <c:when test="${fn:length(requestScope.timezones) > 0}">
                                                             <option value="">Choose ...</option>

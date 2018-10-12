@@ -357,7 +357,7 @@
                             format: 'DD/MM/YYYY'
                         }
                     }, function (start, end, label) {
-                        var formatedDateSelected = moment(start).format("DD/MM/YYYY");
+                        var formatedDateSelected = moment(start).locale('en').format("DD/MM/YYYY");
                         birthdateFilterInput.val(formatedDateSelected).trigger("change");
                     });
 
@@ -571,7 +571,12 @@
                         javatmp.util.waitForFinalEvent(function () {
                             var start = $this.data("start");
                             var end = $this.data("end");
-                            var val = start.format("YYYY-MM-DDTHH:mm:ss.SSSZ") + "##TO##" + end.format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+                            var val = "";
+                            if ((start !== undefined) && (end !== undefined)) {
+                                val = start.locale('en').format("YYYY-MM-DDTHH:mm:ss.SSSZ")
+                                        + "##TO##"
+                                        + end.locale('en').format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+                            }
                             api.column(12).search(val ? val : '', false, false).draw();
                         }, 200, "@userlist-main-table-filter");
                     });
@@ -604,6 +609,8 @@
                         creationdateFilterInput.val(picker.startDate.format('MM/DD/YYYY HH:mm:ss') + ' - ' + picker.endDate.format('MM/DD/YYYY HH:mm:ss')).trigger("change");
                     });
                     creationdateFilterInput.on('cancel.daterangepicker', function (ev, picker) {
+                        creationdateFilterInput.removeData("start");
+                        creationdateFilterInput.removeData("end");
                         $(this).val('').trigger("change");
                     });
 

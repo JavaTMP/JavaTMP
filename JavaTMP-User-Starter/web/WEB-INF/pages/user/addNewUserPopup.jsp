@@ -13,13 +13,13 @@
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.firstName']}</label>
-                                    <input class="form-control" type="text" placeholder="Full Name" name="firstName">
+                                    <input class="form-control" type="text" placeholder="${labels['domain.user.firstName']}" name="firstName">
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.lastName']}</label>
-                                    <input class="form-control" type="text" placeholder="Full Name" name="lastName">
+                                    <input class="form-control" type="text" placeholder="${labels['domain.user.lastName']}" name="lastName">
                                 </div>
                             </div>
                             <div class="col-lg-3">
@@ -31,7 +31,7 @@
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.email']}</label>
-                                    <input class="form-control" type="text" placeholder="Email" name="email">
+                                    <input class="form-control" type="text" placeholder="${labels['domain.user.email']}" name="email">
                                 </div>
                             </div>
                         </div>
@@ -42,7 +42,7 @@
                                     <select name="countryId" class="form-control">
                                         <c:choose>
                                             <c:when test="${fn:length(requestScope.countries) > 0}">
-                                                <option value="">Choose ...</option>
+                                                <option value="">${labels['page.text.kindlySelect']}</option>
                                                 <c:forEach items="${requestScope.countries}" var="country">
                                                     <option ${requestScope.user.countryId == country.countryId ? 'selected="selected"' : ''} value="${country.countryId}">${country.countryName}</option>
                                                 </c:forEach>
@@ -60,7 +60,7 @@
                                     <select name="lang" class="form-control">
                                         <c:choose>
                                             <c:when test="${fn:length(requestScope.languages) > 0}">
-                                                <option value="">Choose ...</option>
+                                                <option value="">${labels['page.text.kindlySelect']}</option>
                                                 <c:forEach items="${requestScope.languages}" var="language">
                                                     <option ${requestScope.user.lang == language.languageId ? 'selected="selected"' : ''} value="${language.languageId}">${language.languageName}</option>
                                                 </c:forEach>
@@ -78,7 +78,7 @@
                                     <select name="theme" class="form-control">
                                         <c:choose>
                                             <c:when test="${fn:length(requestScope.themes) > 0}">
-                                                <option value="">Choose ...</option>
+                                                <option value="">${labels['page.text.kindlySelect']}</option>
                                                 <c:forEach items="${requestScope.themes}" var="theme">
                                                     <option ${requestScope.user.theme == theme.themeId ? 'selected="selected"' : ''} value="${theme.themeId}">${theme.themeName}</option>
                                                 </c:forEach>
@@ -94,7 +94,7 @@
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.timezone']}</label>
                                     <select name="timezone" class="form-control">
-                                        <option value="">Choose ...</option>
+                                        <option value="">${labels['page.text.kindlySelect']}</option>
                                         <c:choose>
                                             <c:when test="${fn:length(requestScope.timezones) > 0}">
                                                 <option value="">Choose ...</option>
@@ -114,7 +114,7 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.userName']}</label>
-                                    <input class="form-control" type="text" autocomplete="off" placeholder="Username"
+                                    <input class="form-control" type="text" autocomplete="off" placeholder="${labels['domain.user.userName']}"
                                            name="userName">
                                 </div>
                             </div>
@@ -122,13 +122,13 @@
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.password']}</label>
                                     <input class="form-control" type="password" autocomplete="off"
-                                           placeholder="Password" name="password">
+                                           placeholder="${labels['domain.user.password']}" name="password">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.reTypePassword']}</label>
-                                    <input class="form-control" type="password" autocomplete="off" placeholder="Re-type Your Password"
+                                    <input class="form-control" type="password" autocomplete="off" placeholder="${labels['domain.user.reTypePassword']}"
                                            name="rpassword">
                                 </div>
                             </div>
@@ -139,25 +139,19 @@
                                     <label for="exampleFormControlFile1">${labels['domain.user.Document']}</label>
                                     <div class="custom-file">
                                         <input name="profilePicture" type="file" class="custom-file-input" id="validatedCustomFile">
-                                        <label class="custom-file-label" for="validatedCustomFile">Choose Profile Picture file...</label>
+                                        <label class="custom-file-label" for="validatedCustomFile">${labels['domain.user.Document']}</label>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 text-center">
+                            <div class="col-lg-6 text-center">
                                 <div style="width: 200px; height: 200px;display: inline-block;position: relative">
                                     <div id="profilePicturePreviewContainerId" style="width: 200px; height: 200px;">
                                         <img id="profilePicturePreview" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 text-center">
+                            <div class="col-lg-6 text-center">
                                 <img id="profilePictureResizePreview" style="width: 200px; height: 200px;" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
-                            </div>
-                            <div class="col-lg-3 text-center">
-                                <img id="profilePictureAvatarPreview" style="width: 40px; height: 40px;" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
-                            </div>
-                            <div class="col-lg-3 text-center">
-                                <img class="rounded-circle" id="profilePictureAvatarRoundedPreview" style="width: 40px; height: 40px;" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
                             </div>
                         </div>
                         <div class="form-row">
@@ -265,7 +259,7 @@
                     for (var i = 0; i < formData.length; i++) {
                         if (formData[i].name === "birthOfDateStr") {
                             var value = formData[i].value;
-                            var newDate = moment(value, "DD/MM/YYYY").format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+                            var newDate = moment(value, "DD/MM/YYYY").locale('en').format("YYYY-MM-DDTHH:mm:ss.SSSZ");
                             formData.push({"name": "birthDate", "value": newDate});
                             break;
                         }
@@ -410,7 +404,7 @@
                     format: 'DD/MM/YYYY'
                 }
             }, function (start, end, label) {
-                var formatedDateSelected = moment(start).format("DD/MM/YYYY");
+                var formatedDateSelected = moment(start).locale('en').format("DD/MM/YYYY");
                 form.find("input[name='birthOfDateStr']").val(formatedDateSelected).trigger("change");
             });
             $(".daterangepicker").css('z-index', modalZIndex + 1);
@@ -422,11 +416,13 @@
                 dialogsInBody: true
             });
             modal.originalModal.removeAttr('tabindex');
+
             $.fn.select2.defaults.set("theme", "bootstrap");
             $.fn.select2.defaults.set("dir", javatmp.settings.direction);
+            $.fn.select2.defaults.set("placeholder", javatmp.settings.labels.kindlySelect);
+
             form.find("select[name='lang']").select2({
                 allowClear: true,
-                placeholder: "Select a language",
                 containerCssClass: ':all:',
                 width: '',
                 dropdownCssClass: "select2-lang-dropdown"
@@ -435,7 +431,6 @@
             });
             form.find("select[name='theme']").select2({
                 allowClear: true,
-                placeholder: "Select a theme",
                 containerCssClass: ':all:',
                 width: '',
                 escapeMarkup: function (markup) {
@@ -449,7 +444,6 @@
             });
             form.find("select[name='timezone']").select2({
                 allowClear: true,
-                placeholder: "Select a timezone",
                 containerCssClass: ':all:',
                 width: '',
                 dropdownCssClass: "select2-timezone-dropdown"
@@ -460,7 +454,6 @@
                 theme: "bootstrap",
                 dir: javatmp.settings.direction,
                 allowClear: true,
-                placeholder: "Select a country",
                 containerCssClass: ':all:',
                 width: '',
                 templateSelection: formatCountrySelection,
@@ -571,8 +564,6 @@
                     reader.onload = function (e) {
                         var image = form.find("img[id='profilePicturePreview']");
                         var resizeImage = form.find("img[id='profilePictureResizePreview']");
-                        var avatarImage = form.find("img[id='profilePictureAvatarPreview']");
-                        var avatarRoundedImage = form.find("img[id='profilePictureAvatarRoundedPreview']");
                         image.one("load", function () {
 //                            var currentImageHeight = this.height;
 //                            if (currentImageHeight > 250) {
@@ -584,9 +575,6 @@
                         });
                         image.attr('src', e.target.result);
                         resizeImage.attr('src', e.target.result);
-                        avatarImage.attr('src', e.target.result);
-                        avatarRoundedImage.attr('src', e.target.result);
-
                     };
                     reader.readAsDataURL(this.files[0]);
                 }

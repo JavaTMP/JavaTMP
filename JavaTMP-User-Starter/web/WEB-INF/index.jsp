@@ -204,19 +204,17 @@
                     isRTL: ${labels['global.direction'] == 'ltr' ? 'false' : 'true'},
                     contextPath: '${pageContext.request.contextPath}',
                     labels: {
-                        "global.loadingText": "${labels['global.loadingText']}"
+                        "global.loadingText": "${labels['global.loadingText']}",
+                        "kindlySelect": '${labels['page.text.kindlySelect']}'
                     }
                 };
 
                 index.init(defaults);
-
-
-
                 javatmp.user = {};
-                javatmp.user.id = ${sessionScope.user.id};
+                javatmp.user.id = "${sessionScope.user.id}";
                 javatmp.user.lang = "${sessionScope.user.lang}";
                 // force en as a moment locale for now
-                moment.locale("en");
+                moment.locale(javatmp.user.lang);
                 javatmp.settings.handle401Error = function (jqXHR, textStatus, errorThrown) {
                     var modalMessage = null;
                     var redirectURL = null;

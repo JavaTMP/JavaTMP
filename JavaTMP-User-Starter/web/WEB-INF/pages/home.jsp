@@ -186,8 +186,8 @@
             }
 
             $('.counter').counterUp({
-                delay: 10,
-                time: 1000
+                delay: 0,
+                time: 500
             });
             var userStatusPieChart = echarts.init(document.getElementById('userStatusPieChart'));
             var todayVisitUserPieChart = echarts.init(document.getElementById('todayVisitUserPieChart'));
@@ -209,7 +209,7 @@
                 series: [
                     {
                         clockwise: !javatmp.settings.isRTL,
-                        name: 'Registered User Statuses',
+                        name: '${labels['page.home.RegisteredUsers']}',
                         type: 'pie',
                         radius: '85%',
                         avoidLabelOverlap: false,
@@ -247,7 +247,7 @@
                 series: [
                     {
                         clockwise: !javatmp.settings.isRTL,
-                        name: 'Visiting User Today',
+                        name: '${labels['page.home.VisitorsToday']}',
                         type: 'pie',
                         radius: '85%',
                         avoidLabelOverlap: false,
@@ -278,7 +278,7 @@
                 },
                 title: {
                     show: false,
-                    text: "Users Page View Frequencies Per Hours",
+                    text: "${labels['page.home.PageViewsPerHour']}",
                     x: 'center',
                     y: 0,
                     textStyle: {
@@ -334,7 +334,7 @@
                 color: ['#007bff'],
                 series: [
                     {
-                        name: 'Pages Per Hour',
+                        name: '${labels['page.home.PageViewsPerHour']}',
                         type: 'bar',
                         data: []
                     }
@@ -352,7 +352,7 @@
                 },
                 title: {
                     show: false,
-                    text: "Users Page View Frequencies Per Hours",
+                    text: "${labels['page.home.LoadTimePerHour']}",
                     x: 'center',
                     y: 0,
                     textStyle: {
@@ -408,7 +408,7 @@
                 color: ['#dc3545'],
                 series: [
                     {
-                        name: 'Average Load Time Per Hour',
+                        name: '${labels['page.home.LoadTimePerHour']}',
                         type: 'line',
                         data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                     }
@@ -438,7 +438,7 @@
                 },
                 series: [
                     {
-                        name: "Country",
+                        name: "${labels['page.home.UsersLocations']}",
                         type: 'map',
                         map: 'world',
                         roam: true,
