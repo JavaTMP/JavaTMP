@@ -66,16 +66,16 @@ the sum of all credit entries.
 This example shows the structure and general approach:
 Chart of Accounts
 - Asset Accounts - Current Assets
-    - 100 | Petty cash
-    - 101 | Cash on hand
-    - 103 | Regular checking account
-    - 105 | Payroll checking account
-    - 110 | Accounts receivable
-    - 120 | Allowance for doubtful accounts
-    - 130 | Work in progress inventory
-    - 139 | Finished goods inventory
-    - 140 | Prepaid expenses
-    - 150 | Employee advances
+    100 | Petty cash
+    101 | Cash on hand
+    103 | Regular checking account
+    105 | Payroll checking account
+    110 | Accounts receivable
+    120 | Allowance for doubtful accounts
+    130 | Work in progress inventory
+    139 | Finished goods inventory
+    140 | Prepaid expenses
+    150 | Employee advances
 - Asset Accounts - Fixed Assets
     - 160 | Furniture and fixtures
     - 162 | Vehicles
