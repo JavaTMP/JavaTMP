@@ -16,7 +16,7 @@ public class JdbcHelper {
         Class.forName("com.mysql.cj.jdbc.Driver");
         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/appdb?zeroDateTimeBehavior=CONVERT_TO_NULL", "root", "mmmmmm");
         Statement st = conn.createStatement();
-        String tableName = "user";
+        String tableName = "document";
         List<Map<String, Object>> resultData = new LinkedList<>();
         System.out.println("Table Name: " + tableName);
 
