@@ -165,7 +165,7 @@
         jQuery(function ($) {
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
-
+            alert($("body").css("font-family"));
             var formatTooltipLine = function (color, value) {
                 return "<span style='display:inline-block;width:10px;height:10px;border-radius:50%;background-color:" + color + ";margin-" + javatmp.settings.floatReverse + ":5px;'></span><span>" + value + "</span>";
             };
@@ -200,7 +200,7 @@
                     trigger: 'item',
                     formatter: "{a} <br/>{b}: {c} ({d}%)",
                     textStyle: {
-                        fontFamily: "Open Sans",
+                        fontFamily: $("body").css("font-family"),
                         align: javatmp.settings.floatDefault
                     }
                 },
@@ -225,8 +225,8 @@
                             }
                         },
                         data: [
-                            {value: 0, name: 'Active'},
-                            {value: 0, name: 'Deactive'}
+                            {value: 0, name: '${labels['page.home.RegisteredUsers.active']}'},
+                            {value: 0, name: '${labels['page.home.RegisteredUsers.inactive']}'}
                         ]
                     }
                 ]
