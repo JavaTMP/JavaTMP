@@ -303,7 +303,7 @@
                     for (var i = 0; i < formData.length; i++) {
                         if (formData[i].name === "birthOfDateStr") {
                             var value = formData[i].value;
-                            var newDate = moment(value, "DD/MM/YYYY").format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+                            var newDate = moment(value, "DD/MM/YYYY").locale("en").format("YYYY-MM-DDTHH:mm:ss.SSSZ");
                             formData.push({"name": "birthDate", "value": newDate});
                             break;
                         }

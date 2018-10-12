@@ -2,8 +2,7 @@
 title: JavaTMP Accounting System
 ---
 # JavaTMP Accounting System
-
-In business, each profit making company establishes an accounting system to manage and keep track of its
+In business, each profit or non-profit company establishes an accounting system to manage and keep track of its
 assets, liabilities, equities, revenues, and expenses.
 The accounting system also provides the basis for the financial reports the company must file periodically.
 
@@ -89,7 +88,7 @@ Chart of Accounts
 - Asset Accounts - Other Assets
     - 190 - Accumulated amortization
     - 194 - Notes receivable, non-current
--ability Accounts - Current Liabilities
+- Lability Accounts - Current Liabilities
     - 200 - Accounts payable
     - 234 - Payroll payable
     - 235 - Accrued fees
@@ -347,20 +346,20 @@ There are common and basic modules of ERP which can be found in any ERP System. 
     accepting sales orders, drafting sales invoices with proper taxation, dispatch/Shipment of material or service, tracking pending sales order.
     All these sales transactions are managed by sales module of ERP. CRM module can take help of Sales module
     for future opportunity creation & lead generation.
-- Purchase Module
+- Purchase Module.
     purchase modules take care of all the processes that are part of procurement of items or raw materials that are required for organization.
     Purchase module consist of functionalities like supplier/vendor listing, supplier & item linking, sending quotation request to vendors,
     receiving & recording quotations, analysis of quotations, preparing purchase orders, tracking the purchase items,
     preparing GRNs (Good Receipt Notes) & updating stocks & various reports.
     Purchase module is integrated with Inventory module and Engineering/production module for updating of stocks.
-- Finance & Accounting Module
+- Finance & Accounting Module.
     Whole inflow & outflow of money/capital is managed by finance module.
     This module keeps track of all account related transactions like expenditures, Balance  sheet, account ledgers, budgeting,
     bank statements ,payment receipts, tax management etc. Financial reporting is easy task for this module of ERP.
     Any Financial data that is required for running business is available on one click in Finance module.
     an ERP solution’s financial management module is its most important module, because money is used in every department (obviously),
     and therefore financial data from every department ends up in the module.
-- Customer Relationship Management(CRM)
+- Customer Relationship Management(CRM).
     CRM department is helps to boost the sales performance through better customer service & establishing the healthy relationship
     with customers. All the stored details of customer is available in CRM module.
     CRM module helps to manage & track detailed information of the customer like communication history ,calls, meetings,
@@ -373,7 +372,7 @@ There are common and basic modules of ERP which can be found in any ERP System. 
     Production module is great help for manufacturing industry for delivering product.
     This module consist of functionalities like production planning, machine scheduling, raw material usage,(Bill of material) preparation,
     track daily production progress production forecasting & actual production reporting.
-- Supply Chain Management (SCM)
+- Supply Chain Management (SCM).
     SCM module manages the flow of product items from manufacturer to consumer & consumer to manufacturer.
     Common roles involved are manufacturer, Super Stockiest, Stockiest, distributors, retailers etc.
     SCM involves demand & supply management , sales returns & replacing process, shipping & transportation tracking etc.

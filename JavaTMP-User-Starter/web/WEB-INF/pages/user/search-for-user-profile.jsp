@@ -402,9 +402,6 @@
                             form.find("input[name='birthOfDateStr']").daterangepicker(birthOfDateDateRangePickerOtions, birthOfDateDateRangePickerOtionsFunction);
                             var image = form.find("img[id='profilePicturePreview']");
                             var resizeImage = form.find("img[id='profilePictureResizePreview']");
-                            var avatarImage = form.find("img[id='profilePictureAvatarPreview']");
-                            var avatarRoundedImage = form.find("img[id='profilePictureAvatarRoundedPreview']");
-
                             var avatarImageSrc = javatmp.settings.contextPath + "/ViewUploadedFileController?documentId=" + rowObject.profilePicDocumentId + "&randomHash=" + rowObject.profilePicDocument.randomHash + "&viewType=inline";
 
                             image.attr('src', avatarImageSrc);
@@ -472,7 +469,7 @@
                         formData.push({"name": "id", "value": currentUser.id});
                         if (formData[i].name === "birthOfDateStr") {
                             var value = formData[i].value;
-                            var newDate = moment(value, "DD/MM/YYYY").format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+                            var newDate = moment(value, "DD/MM/YYYY").locale('en').format("YYYY-MM-DDTHH:mm:ss.SSSZ");
                             formData.push({"name": "birthDate", "value": newDate});
                             break;
                         }
