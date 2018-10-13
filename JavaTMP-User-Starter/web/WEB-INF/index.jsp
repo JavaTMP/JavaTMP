@@ -192,7 +192,7 @@
         </div>
         <div id="global-label-items-block" class="d-none">
             <c:forEach items="${labels.keySet()}" var="entry">
-                <span key="${entry}">${labels[entry]}</span>
+                <i k="${entry}">${labels[entry]}</i>
             </c:forEach>
         </div>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
@@ -211,8 +211,8 @@
                     labels: {}
                 };
 
-                $("#global-label-items-block > span[key]").each(function (index, element) {
-                    var key = $(element).attr("key");
+                $("#global-label-items-block > i[k]").each(function (index, element) {
+                    var key = $(element).attr("k");
                     var value = $(element).html();
                     defaults.labels[key] = value;
 
