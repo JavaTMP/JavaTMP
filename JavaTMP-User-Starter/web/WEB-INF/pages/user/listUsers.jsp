@@ -866,7 +866,7 @@
                         closeByBackdrop: false,
                         buttons: [
                             {
-                                label: "Cancel",
+                                label: javatmp.settings.labels["global.cancel"],
                                 cssClass: "btn btn-secondary",
                                 action: function (modalWrapper, button, buttonData, originalEvent) {
                                     return modalWrapper.hide();
@@ -950,7 +950,7 @@
                         closeByBackdrop: false,
                         buttons: [
                             {
-                                label: "Cancel",
+                                label: javatmp.settings.labels["global.cancel"],
                                 cssClass: "btn btn-secondary",
                                 action: function (modalWrapper, button, buttonData, originalEvent) {
                                     return modalWrapper.hide();
@@ -1034,7 +1034,7 @@
                         closeByBackdrop: false,
                         buttons: [
                             {
-                                label: "Cancel",
+                                label: javatmp.settings.labels["global.cancel"],
                                 cssClass: "btn btn-secondary",
                                 action: function (modalWrapper, button, buttonData, originalEvent) {
                                     return modalWrapper.hide();

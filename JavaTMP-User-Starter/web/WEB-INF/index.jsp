@@ -205,7 +205,11 @@
                     contextPath: '${pageContext.request.contextPath}',
                     labels: {
                         "global.loadingText": "${labels['global.loadingText']}",
-                        "kindlySelect": '${labels['page.text.kindlySelect']}'
+                        "kindlySelect": '${labels['page.text.kindlySelect']}',
+                        "global.yes": '${labels['global.yes']}',
+                        "global.no": '${labels['global.no']}',
+                        "global.cancel": '${labels['global.cancel']}',
+                        "global.okey": '${labels['global.okey']}'
                     }
                 };
 
