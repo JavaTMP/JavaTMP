@@ -700,7 +700,7 @@
                     {data: 'email', name: "email", width: "9rem",
                         "render": function (data, type, row) {
                             if (type === "display") {
-                                return "<p class='m-0 p-0 text-truncate' style='width: 9rem;'>" + data + "</p>";
+                                return "<p class='m-0 p-0 text-truncate' style='width: 10rem;'>" + data + "</p>";
                             } else {
                                 return data;
                             }
@@ -876,7 +876,7 @@
                                 }
                             },
                             {
-                                label: javatmp.settings.labels["global.delete"],
+                                label: javatmp.settings.labels["page.btn.deleteUser"],
                                 cssClass: "btn btn-danger",
                                 action: function (modalWrapper, button, buttonData, originalEvent) {
                                     modalWrapper.hide();
@@ -946,8 +946,8 @@
                     passData.callback = "actionCallback";
                     passData.id = selectedRecord.id;
                     BootstrapModalWrapperFactory.createModal({
-                        message: "Are you sure you want to Activate user ?",
-                        title: "Confiramation",
+                        message: javatmp.settings.labels["dialog.activate.message"],
+                        title: javatmp.settings.labels["dialog.activate.title"],
                         closable: false,
                         closeByBackdrop: false,
                         buttons: [
@@ -959,7 +959,7 @@
                                 }
                             },
                             {
-                                label: "Activate User " + selectedRecord.userName,
+                                label: javatmp.settings.labels["page.btn.activateUser"],
                                 cssClass: "btn btn-primary",
                                 action: function (modalWrapper, button, buttonData, originalEvent) {
                                     modalWrapper.hide();
@@ -993,7 +993,7 @@
                                             table.columns.adjust().draw();
                                         },
                                         error: function (data) {
-                                            var errorMsg = "Could Not complete the action";
+                                            var errorMsg = javatmp.settings.labels["dialog.error.message"];
                                             try {
                                                 var jsonData = $.parseJSON(data.responseText);
                                                 errorMsg = jsonData.message;
@@ -1001,15 +1001,14 @@
                                             }
                                             m.updateMessage(errorMsg);
                                             m.updateClosable(true);
-                                            m.updateTitle("Error Response");
+                                            m.updateTitle(javatmp.settings.labels["dialog.error.title"]);
 
-                                            toastr.error(errorMsg, 'ERROR', {
-                                                timeOut: 5000,
+                                            toastr.error(errorMsg, javatmp.settings.labels["dialog.error.title"], {
+                                                timeOut: 3000,
                                                 progressBar: true,
                                                 rtl: javatmp.settings.isRTL,
                                                 positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
                                             });
-                                            //                                            alert("error" + JSON.stringify(data));
                                         }
                                     });
                                 }
@@ -1030,8 +1029,8 @@
                     passData.callback = "actionCallback";
                     passData.id = selectedRecord.id;
                     BootstrapModalWrapperFactory.createModal({
-                        message: "Are you sure you want to Deactivate user ?",
-                        title: "Confiramation",
+                        message: javatmp.settings.labels["dialog.inActivate.message"],
+                        title: javatmp.settings.labels["dialog.inActivate.title"],
                         closable: false,
                         closeByBackdrop: false,
                         buttons: [
@@ -1043,7 +1042,7 @@
                                 }
                             },
                             {
-                                label: "Deactivate User " + selectedRecord.userName,
+                                label: javatmp.settings.labels["page.btn.deactivateUser"],
                                 cssClass: "btn btn-warning",
                                 action: function (modalWrapper, button, buttonData, originalEvent) {
                                     modalWrapper.hide();
@@ -1077,7 +1076,7 @@
                                             table.columns.adjust().draw();
                                         },
                                         error: function (data) {
-                                            var errorMsg = "Could Not complete the action";
+                                            var errorMsg = javatmp.settings.labels["dialog.error.message"];
                                             try {
                                                 var jsonData = $.parseJSON(data.responseText);
                                                 errorMsg = jsonData.message;
@@ -1085,15 +1084,14 @@
                                             }
                                             m.updateMessage(errorMsg);
                                             m.updateClosable(true);
-                                            m.updateTitle("Error Response");
+                                            m.updateTitle(javatmp.settings.labels["dialog.error.title"]);
 
-                                            toastr.error(errorMsg, 'ERROR', {
-                                                timeOut: 5000,
+                                            toastr.error(errorMsg, javatmp.settings.labels["dialog.error.title"], {
+                                                timeOut: 3000,
                                                 progressBar: true,
                                                 rtl: javatmp.settings.isRTL,
                                                 positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
                                             });
-                                            //                                            alert("error" + JSON.stringify(data));
                                         }
                                     });
                                 }
