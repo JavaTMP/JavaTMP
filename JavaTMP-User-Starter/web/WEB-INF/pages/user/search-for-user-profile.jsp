@@ -398,7 +398,7 @@
                             // first destory or remote bugy plugins on edge that fire the show of calendar dropdown
                             // when value change;
                             form.find("input[name='birthOfDateStr']").data('daterangepicker').remove();
-                            form.find("input[name='birthOfDateStr']").val(moment(rowObject.birthDate, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("DD/MM/YYYY"));
+                            form.find("input[name='birthOfDateStr']").val(moment(rowObject.birthDate, "YYYY-MM-DDTHH:mm:ss.SSSZ").locale('en').format("DD/MM/YYYY"));
                             form.find("input[name='birthOfDateStr']").daterangepicker(birthOfDateDateRangePickerOtions, birthOfDateDateRangePickerOtionsFunction);
                             var image = form.find("img[id='profilePicturePreview']");
                             var resizeImage = form.find("img[id='profilePictureResizePreview']");
@@ -620,7 +620,7 @@
                 }
             };
             var birthOfDateDateRangePickerOtionsFunction = function (start, end, label) {
-                var formatedDateSelected = moment(start).format("DD/MM/YYYY");
+                var formatedDateSelected = moment(start).locale('en').format("DD/MM/YYYY");
                 form.find("input[name='birthOfDateStr']").val(formatedDateSelected).trigger("change");
             };
             form.find("input[name='birthOfDateStr']").daterangepicker(birthOfDateDateRangePickerOtions, birthOfDateDateRangePickerOtionsFunction);

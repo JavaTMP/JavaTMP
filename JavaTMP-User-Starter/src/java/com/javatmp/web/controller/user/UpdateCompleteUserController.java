@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.PersistenceException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -66,7 +67,15 @@ public class UpdateCompleteUserController extends HttpServlet {
             responseMessage.setOverAllStatus(Boolean.TRUE);
             responseMessage.setMessage("User Updated successfully");
             responseMessage.setData(userToBeUpdated);
-
+        } catch (PersistenceException e) {
+            Throwable t = e;
+            while (t.getCause() != null) {
+                t = t.getCause();
+            }
+            responseMessage.setOverAllStatus(false);
+            responseMessage.setMessage(t.getMessage());
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            responseMessage.setStatusCode(HttpServletResponse.SC_BAD_REQUEST);
         } catch (IllegalArgumentException e) {
             logger.info("ERROR : " + e.getMessage());
             responseMessage.setOverAllStatus(false);

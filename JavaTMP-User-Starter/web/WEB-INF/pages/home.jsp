@@ -480,6 +480,7 @@
             };
             UsersLocationsInTheWorld.setOption(UsersLocationsInTheWorldOption);
             var monthsName = moment.months();
+
             var barChartOption = {
                 grid: {
                     show: false,
@@ -490,7 +491,7 @@
                 },
                 title: {
                     show: false,
-                    text: "Users Birthday Frequencies",
+                    text: "${labels['page.home.UsersBirthdayPerMonths']}",
                     x: 'center',
                     y: 0,
                     textStyle: {
@@ -521,22 +522,24 @@
                     }
                 },
                 calculable: true,
-                xAxis: {
-                    inverse: javatmp.settings.isRTL,
-                    data: monthsName,
+                xAxis: [
+                    {
+                        inverse: javatmp.settings.isRTL,
+                        data: monthsName,
 //                    axisLabel: {
 //                        interval: 0
 //                    },
-                    axisLabel: {
-                        fontFamily: $("body").css("font-family"),
-                        fontSize: $("body").css("font-size")
-                    },
-                    textStyle: {
-                        fontFamily: $("body").css("font-family"),
-                        fontSize: $("body").css("font-size"),
-                        align: javatmp.settings.floatDefault
+                        axisLabel: {
+                            fontFamily: $("body").css("font-family"),
+                            fontSize: $("body").css("font-size")
+                        },
+                        textStyle: {
+                            fontFamily: $("body").css("font-family"),
+                            fontSize: $("body").css("font-size"),
+                            align: javatmp.settings.floatDefault
+                        }
                     }
-                },
+                ],
                 yAxis: {
                     position: javatmp.settings.floatDefault,
                     type: 'value',
@@ -547,11 +550,11 @@
                     }
                 },
                 color: ['#007bff'],
-                series: {
-                    name: 'Birthday',
-                    type: 'bar',
-                    data: []
-                }
+                series: [{
+                        name: '${labels['page.home.UsersBirthdayPerMonths']}',
+                        type: 'bar',
+                        data: []
+                    }]
             };
 
             UsersBirthdayPerMonths.setOption(barChartOption);
@@ -907,13 +910,7 @@
                             outputMonthsArray[dataArray[i][0] - 1] += dataArray[i][1];
                         }
 
-                        barChartOption = $.extend(true, barChartOption, {
-                            series: [
-                                {
-                                    data: outputMonthsArray
-                                }
-                            ]
-                        });
+                        barChartOption.series[0].data = outputMonthsArray;
 
                         UsersBirthdayPerMonths.setOption(barChartOption);
 

@@ -458,7 +458,7 @@
                 autoApply: true,
                 autoUpdateInput: false,
                 minDate: '01/01/1900',
-                maxDate: '31/12/2099',
+                maxDate: moment(),
                 //                    maxDate: '',
                 //                    minDate: moment(),
                 locale: {
@@ -466,7 +466,7 @@
                     format: 'DD/MM/YYYY'
                 }
             }, function (start, end, label) {
-                var formatedDateSelected = moment(start).format("DD/MM/YYYY");
+                var formatedDateSelected = moment(start).locale("en").format("DD/MM/YYYY");
                 form.find("input[name='birthOfDateStr']").val(formatedDateSelected).trigger("change");
             });
             form.find("textarea[name='address']").summernote({

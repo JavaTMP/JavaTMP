@@ -152,7 +152,7 @@
         <div class="col-sm-5">
             <div class="card mb-3 bg-light shadow">
                 <div class="card-header">
-                    User Details
+                    ${labels['page.listUsers.userDetails']}
                     <div class="options float-right">
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
                         <a href="#" class="fullscreen"><i class=" fa fa-expand"></i></a>

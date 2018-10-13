@@ -81,28 +81,28 @@
                                     actionType="action-ref-href"
                                     action-ref-by-href="${pageContext.request.contextPath}/logout"
                                     data-toggle="tooltip" data-placement="auto"
-                                    title="Exit and Sign out">
+                                    title="${labels['navbar.user.logout']}">
                                 <i class="fas fa-sign-out-alt"></i>
                             </button>
                             <button class="btn btn-primary"
                                     actionType="action-ref-href"
                                     action-ref-by-href="${pageContext.request.contextPath}/user/GetListUsersPage"
                                     data-toggle="tooltip" data-placement="auto"
-                                    title="Users List">
+                                    title="${labels['sidebar.menuItem.users.usersList']}">
                                 <i class="fas fa-users fa-fw"></i>
                             </button>
                             <button class="btn btn-primary"
                                     actionType="action-ref-href"
                                     action-ref-by-href="${pageContext.request.contextPath}/user/CreateUserController"
                                     data-toggle="tooltip" data-placement="auto"
-                                    title="Add New User">
+                                    title="${labels['sidebar.menuItem.users.addNewUser']}">
                                 <i class="fas fa-user-plus"></i>
                             </button>
                             <button class="btn btn-primary"
                                     actionType="action-ref-href"
                                     action-ref-by-href="${pageContext.request.contextPath}/user/CurrentUserProfileController"
                                     data-toggle="tooltip" data-placement="auto"
-                                    title="Current User Profile">
+                                    title="${labels['sidebar.menuItem.system.UserProfileSettings']}">
                                 <i class="far fa-user-circle"></i>
                             </button>
                             <button class="btn btn-primary"
