@@ -190,6 +190,11 @@
                 <a href="http://www.javatmp.com" target="_blank"><span>&copy; 2018 javatmp.com</span></a>
             </div>
         </div>
+        <div id="global-label-items-block" class="d-none">
+            <c:forEach items="${labels.keySet()}" var="entry">
+                <span key="${entry}">${labels[entry]}</span>
+            </c:forEach>
+        </div>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all-locale-${sessionScope.user.lang}.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp.min.js" type="text/javascript"></script>
@@ -203,16 +208,16 @@
                     direction: "${labels['global.direction']}",
                     isRTL: ${labels['global.direction'] == 'ltr' ? 'false' : 'true'},
                     contextPath: '${pageContext.request.contextPath}',
-                    labels: {
-                        "global.loadingText": "${labels['global.loadingText']}",
-                        "kindlySelect": '${labels['page.text.kindlySelect']}',
-                        "global.yes": '${labels['global.yes']}',
-                        "global.no": '${labels['global.no']}',
-                        "global.cancel": '${labels['global.cancel']}',
-                        "global.okey": '${labels['global.okey']}'
-                    }
+                    labels: {}
                 };
 
+                $("#global-label-items-block > span[key]").each(function (index, element) {
+                    var key = $(element).attr("key");
+                    var value = $(element).html();
+                    defaults.labels[key] = value;
+
+                });
+                console.log(defaults);
                 index.init(defaults);
                 javatmp.user = {};
                 javatmp.user.id = "${sessionScope.user.id}";
@@ -315,6 +320,33 @@
                 }
             });
         </script>
+
+        <script type="text/javascript">
+            jQuery(function ($) {
+                if (javatmp.user.lang === "ar") {
+                    numeral.register('locale', 'ar', {
+                        delimiters: {
+                            thousands: ',',
+                            decimal: '.'
+                        },
+                        abbreviations: {
+                            thousand: 'ألف',
+                            million: 'م',
+                            billion: 'ب',
+                            trillion: 'ت'
+                        },
+                        ordinal: function (number) {
+                            return '';
+                        },
+                        currency: {
+                            symbol: '$'
+                        }
+                    });
+                    // switch between locales
+                    numeral.locale('ar');
+                }
+            });
+        </script>
         <script type="text/javascript">
             jQuery(function ($) {
                 javatmp.settings.jqueryValidationDefaultOptions = {
@@ -352,7 +384,6 @@
                 jQuery.validator.addMethod("validDateTime", function (value, element) {
                     return this.optional(element) || moment(value, "DD/MM/YYYY HH:mm", true).isValid();
                 }, "Please enter a valid date in the format DD/MM/YYYY HH:MI");
-
                 jQuery.validator.addMethod("dateTimeBeforeNow", function (value, element, params) {
                     if (this.optional(element) || $(params).val() === "")
                         return true;
@@ -360,7 +391,6 @@
                         return true;
                     return false;
                 }, 'Must be less than Now.');
-
                 jQuery.validator.addMethod("dateBeforeNow", function (value, element, params) {
                     if (this.optional(element) || value === "")
                         return true;
@@ -368,7 +398,6 @@
                         return true;
                     return false;
                 }, 'Must be less than Now.');
-
                 jQuery.validator.addMethod("dateGreaterThan", function (value, element, params) {
                     if (this.optional(element) || $(params).val() === "")
                         return true;
@@ -397,7 +426,6 @@
                         return true;
                     return false;
                 }, 'Must be equal or less than other value.');
-
             });
         </script>
         <script type="text/javascript">
@@ -434,7 +462,6 @@
                 a.src = g;
                 m.parentNode.insertBefore(a, m);
             })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
             ga('create', 'UA-104738122-1', 'auto');
         </script>
         <script type="text/javascript">

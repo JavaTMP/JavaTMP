@@ -257,13 +257,16 @@
 
             }
             disabled();
+
+            $.fn.select2.defaults.set("theme", "bootstrap");
+            $.fn.select2.defaults.set("dir", javatmp.settings.direction);
+
             $.fn.dataTable.ext.errMode = 'none';
             var table = userTableElement.DataTable({
-                "pagingType": "full",
                 // https://datatables.net/reference/option/dom
-                dom: "<'row'<'col-sm-12 col-md-6'l>>" +
+                dom: "<'row'>" +
                         "<'row'<'col-sm-12'tr>>" +
-                        "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+                        "<'row'<'col-sm-6 col-md-2 pt-2'l><'col-sm-6 col-md-3'i><'col-sm-12 col-md-7'p>>",
 //                dom: "<'row'<'col-sm-12 p-0'tr>>" +
 //                        "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4 pt-2 text-right'l>>"
 //                ,
@@ -860,8 +863,8 @@
                     passData.callback = "actionCallback";
                     passData.id = selectedRecord.id;
                     BootstrapModalWrapperFactory.createModal({
-                        message: "Are you sure you want to delete user ?",
-                        title: "Confiramation",
+                        message: javatmp.settings.labels["dialog.delete.message"],
+                        title: javatmp.settings.labels["dialog.delete.title"],
                         closable: false,
                         closeByBackdrop: false,
                         buttons: [
@@ -873,7 +876,7 @@
                                 }
                             },
                             {
-                                label: "Delete User " + selectedRecord.userName,
+                                label: javatmp.settings.labels["global.delete"],
                                 cssClass: "btn btn-danger",
                                 action: function (modalWrapper, button, buttonData, originalEvent) {
                                     modalWrapper.hide();
@@ -907,7 +910,7 @@
                                             table.columns.adjust().draw();
                                         },
                                         error: function (data) {
-                                            var errorMsg = "Could Not complete the action";
+                                            var errorMsg = javatmp.settings.labels["dialog.error.message"];
                                             try {
                                                 var jsonData = $.parseJSON(data.responseText);
                                                 errorMsg = jsonData.message;
@@ -915,15 +918,14 @@
                                             }
                                             m.updateMessage(errorMsg);
                                             m.updateClosable(true);
-                                            m.updateTitle("Error Response");
+                                            m.updateTitle(javatmp.settings.labels["dialog.error.title"]);
 
-                                            toastr.error(errorMsg, 'ERROR', {
-                                                timeOut: 5000,
+                                            toastr.error(errorMsg, javatmp.settings.labels["dialog.error.title"], {
+                                                timeOut: 3000,
                                                 progressBar: true,
                                                 rtl: javatmp.settings.isRTL,
                                                 positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
                                             });
-                                            //                                            alert("error" + JSON.stringify(data));
                                         }
                                     });
                                 }

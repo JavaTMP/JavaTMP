@@ -59,7 +59,7 @@
             $.fn.dataTable.ext.errMode = 'none';
             var table = $('#defalut-dataTables-example').DataTable({
 //                responsive: true,
-                dom: "<'row'<'col-sm-12 px-0'tr>>" +
+                dom: "<'row'<'col-sm-12'tr>>" +
                         "<'row'<'col-sm-6'i><'col-sm-6 pt-2 text-right'l>>" +
                         "<'row'<'col-sm-12'p>>",
                 scrollY: 400,
