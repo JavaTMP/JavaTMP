@@ -174,8 +174,8 @@
                     <div class="main-content">
                         <div class="main-breadcrumb-bar d-flex flex-row shadow">
                             <ol class="breadcrumb"></ol>
-                            <div class="breadcrumb-submenu">
-                                <a class="float-right min-tools-button">
+                            <div class="breadcrumb-submenu d-flex align-items-center pr-1 justify-content-end">
+                                <a class="min-tools-button mr-1">
                                     <i class="fa fa-sync-alt  faa-spin animated-hover"></i>
                                 </a>
                             </div>

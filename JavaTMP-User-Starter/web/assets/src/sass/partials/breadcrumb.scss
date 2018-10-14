@@ -5,7 +5,7 @@
     left: 0;
     height: $javatmp-breadcrumb-bar-height;
     z-index: $javatmp-breadcrumb-bar-z-index;
-    border-bottom: $border-width solid $border-color;
+    /*border-bottom: $border-width solid $border-color;*/
     background-color: $javatmp-breadcrumb-bar-bg;
     transition: $javatmp-transition;
     @media (min-width: 768px) {
@@ -52,15 +52,7 @@
         }
     }
     .breadcrumb-submenu {
-        width: 49px;
-        .min-tools-button {
-            font-size: 2rem;
-            /*line-height: 36px;*/
-            padding: 0 5px;
-            vertical-align: middle;
-            line-height: 2.5rem;
-            /*margin-top:1px;*/
-        }
+
     }
     .spin-sync-running {
         color: $danger;
@@ -75,7 +67,7 @@
     @each $color, $value in $theme-colors {
         &.bg-#{$color} {
             $temp-color: color-yiq($value);
-            border-bottom-color: $value;
+            /*border-bottom-color: $value;*/
             background-color: $value;
             color: $temp-color;
             .breadcrumb {
