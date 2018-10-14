@@ -16,9 +16,10 @@
     *   [Manage Front-end dependencies Using Node.js And Gulp](/pages/manage-front-end-dependencies-using-node-js-and-gulp "Manage Front-end Dependencies Using Node.js And Gulp tools")
     *   [Steps to add new Javascript plugin](/pages/steps-to-add-new-javascript-plugin)
 *   **Java Bootstrap Web Application Version**
-    *   [Backend features and resources](/pages/java-bootstrap-backend-features-and-resources "dynamic java bootstrap backend features and resources")
-    *   [Dynamic Java Web Application features](/pages/dynamic-java-bootstrap-web-application-features "Main Dynamic Features of Java Bootstrap Web Application")
-    *   [Uploading files from front end to Java Web Application](/pages/uploading-files-from-front-end-to-java-web-application "Uploading files from front end web browsers to Java Web Applications")
+    *   [Backend features and resources](/pages/java/java-bootstrap-backend-features-and-resources "dynamic java bootstrap backend features and resources")
+    *   [Dynamic Java Web Application features](/pages/java/dynamic-java-bootstrap-web-application-features "Main Dynamic Features of Java Bootstrap Web Application")
+    *   [Uploading files from front end to Java Web Application](/pages/java/uploading-files-from-front-end-to-java-web-application "Uploading files from front end web browsers to Java Web Applications")
+    *   [Directory Structure For Java Web Application](/pages/java/directory-structure-for-java-web-application)
 *   **References**
     *   [Bootstrap RTL](/pages/bootstrap-rtl-support-modifications "JavaTMP Bootstrap RTL support and modifications")
     *   [JavaTMP Front-end Plugins And Frameworks](/pages/javatmp-front-end-plugins-and-frameworks)
