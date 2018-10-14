@@ -16,5 +16,6 @@ The following links provide you information about Oracle SQL statements related 
 - [http://www.java2s.com/Tutorial/Oracle/0320__Analytical-Functions/Catalog0320__Analytical-Functions.htm](http://www.java2s.com/Tutorial/Oracle/0320__Analytical-Functions/Catalog0320__Analytical-Functions.htm)
 - [https://oracle-base.com/articles/misc/analytic-functions](https://oracle-base.com/articles/misc/analytic-functions)
 - [https://www.red-gate.com/simple-talk/sql/oracle/introduction-to-analytic-functions-part-1-2/](https://www.red-gate.com/simple-talk/sql/oracle/introduction-to-analytic-functions-part-1-2/)
+- [https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/12c/BigDataSQL/BigDataSQL_HOL.html](https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/12c/BigDataSQL/BigDataSQL_HOL.html)
 
 
