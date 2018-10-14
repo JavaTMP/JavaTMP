@@ -20,6 +20,7 @@
     *   [Dynamic Java Web Application features](/pages/java/dynamic-java-bootstrap-web-application-features "Main Dynamic Features of Java Bootstrap Web Application")
     *   [Uploading files from front end to Java Web Application](/pages/java/uploading-files-from-front-end-to-java-web-application "Uploading files from front end web browsers to Java Web Applications")
     *   [Directory Structure For Java Web Application](/pages/java/directory-structure-for-java-web-application)
+    *   [Java Web Based MVC Application Design](/pages/java/java-web-based-mvc-application-design)
 *   **References**
     *   [Bootstrap RTL](/pages/bootstrap-rtl-support-modifications "JavaTMP Bootstrap RTL support and modifications")
     *   [JavaTMP Front-end Plugins And Frameworks](/pages/javatmp-front-end-plugins-and-frameworks)
