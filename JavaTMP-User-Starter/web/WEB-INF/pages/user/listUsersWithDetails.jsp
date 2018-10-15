@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<div class="dynamic-ajax-content m-0 p-0">
+<div class="dynamic-ajax-content">
     <div class="form-row">
         <div class="col-12">
             <div class="user-list-btn-toolbar my-3" role="toolbar" aria-label="Toolbar with button groups">
@@ -34,6 +34,8 @@
                 </button>
             </div>
         </div>
+    </div>
+    <div class="form-row">
         <div class="col-sm-7">
             <table cellspacing="0" class="table table-condensed table-bordered table-hover" id="UsersListTableId">
                 <thead>
@@ -434,9 +436,12 @@
             disabled();
             $.fn.dataTable.ext.errMode = 'none';
             var table = userTableElement.DataTable({
-//                dom: "<'row'<'col-sm-12'tr>>" +
-//                        "<'row'<'col-sm-6'i><'col-sm-6 pt-2 text-right'l>>"
-//                        + "<'row'<'col-sm-12'p>>"
+                // https://datatables.net/reference/option/dom
+                dom: "<'row'>" +
+                        "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-6 col-md-2 pt-2'l><'col-sm-6 col-md-3'i><'col-sm-12 col-md-7'p>>",
+//                dom: "<'row'<'col-sm-12 p-0'tr>>" +
+//                        "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4 pt-2 text-right'l>>"
 //                ,
 //                select: true,
                 select: "single",
@@ -445,7 +450,7 @@
                 "autoWidth": false,
                 fixedColumns: true,
                 scrollCollapse: false,
-                "searching": false,
+                "searching": true,
                 searchDelay: 500,
                 orderCellsTop: true, // important to for two row header with filteration below header column names.
                 "processing": true,
@@ -868,7 +873,7 @@
                     {data: 'email', name: "email", width: "9rem",
                         "render": function (data, type, row) {
                             if (type === "display") {
-                                return "<p class='m-0 p-0 text-truncate' style='width: 9rem;'>" + data + "</p>";
+                                return "<p class='m-0 p-0 text-truncate' style='width: 10rem;'>" + data + "</p>";
                             } else {
                                 return data;
                             }
@@ -1016,7 +1021,7 @@
 
             $.fn.select2.defaults.set("theme", "bootstrap");
             $.fn.select2.defaults.set("dir", javatmp.settings.direction);
-            $.fn.select2.defaults.set("placeholder", javatmp.settings.labels['page.text.kindlySelect']);
+//            $.fn.select2.defaults.set("placeholder", javatmp.settings.labels['page.text.kindlySelect']);
 
             form.find("select[name='lang']").select2({
                 allowClear: true,
