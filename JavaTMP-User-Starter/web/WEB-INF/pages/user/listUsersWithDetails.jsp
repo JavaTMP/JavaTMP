@@ -1021,7 +1021,7 @@
 
             $.fn.select2.defaults.set("theme", "bootstrap");
             $.fn.select2.defaults.set("dir", javatmp.settings.direction);
-            $.fn.select2.defaults.set("placeholder", javatmp.settings.labels['page.text.kindlySelect']);
+//            $.fn.select2.defaults.set("placeholder", javatmp.settings.labels['page.text.kindlySelect']);
 
             form.find("select[name='lang']").select2({
                 allowClear: true,
