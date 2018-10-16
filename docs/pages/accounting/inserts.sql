@@ -1,7 +1,6 @@
 delete from coa_t;
 
-INSERT INTO coa_t (`GL_ID`, `GL_Name_VC`, `BS_Category_VC`, `Segment_VC`, `Status_BT`)
-	VALUES
+INSERT INTO coa_t (`GL_ID`, `GL_Name_VC`, `BS_Category_VC`, `Segment_VC`, `Status_BT`) VALUES
 (1000, 'PPE', 'FA_Cost', null, true), -- Asset - Fixed Asset Cost
 (1001, 'Acc_Deprn', 'FA', null, true),
 (2000, 'Stock', 'CA', null, true), -- Asset - current asset
@@ -21,8 +20,7 @@ INSERT INTO coa_t (`GL_ID`, `GL_Name_VC`, `BS_Category_VC`, `Segment_VC`, `Statu
 (9001, 'Tax', 'Tax', 'BU1', true); -- Expense
 
 delete from journal_t;
-INSERT INTO journal_t (`Doc_No_VC`, `GL_ID`, `Inv_ID_VC`, `Amount_NU`, `Descrip_VC`, `Date_DT`, `Period_TI`, `Year_SI`)
-	VALUES
+INSERT INTO journal_t (`Doc_No_VC`, `GL_ID`, `Inv_ID_VC`, `Amount_NU`, `Descrip_VC`, `Date_DT`, `Period_TI`, `Year_SI`) VALUES
 ('JV1000', 2003, NULL, 2000, 'HP Presario-TX 101 p4', '2007-05-12', 5, 2007),
 ('JV1000', 5001, NULL, -2000, 'HP Presario-TX 101 p4', '2007-05-12', 5, 2007),
 
@@ -112,3 +110,11 @@ INSERT INTO journal_t (`Doc_No_VC`, `GL_ID`, `Inv_ID_VC`, `Amount_NU`, `Descrip_
 
 ('JV1023', 2002, NULL, 2000, 'Receipt from Randy', '2007-07-23', 7, 2007),
 ('JV1023', 2003, NULL, -2000, 'Receipt from Randy', '2007-07-23', 7, 2007);
+
+INSERT INTO accounting.stock_movement_t (`Doc_No_VC`, `Date_DT`, `Pdt_ID_VC`, `Qty_NU`, `Unit_Price_TI`, `Descrip_VC`) VALUES
+('JV1002', '2007-06-03', '1235', -50, 2, 'Do103'),
+('JV1003', '2006-07-20', '1234', -60, 5, 'GRN001'),
+('JV1000', '2007-05-12', '1234', -30, 5, 'DO100'),
+('JV1004', '2006-07-20', '1234', 30, 6, 'GRN002'),
+('JV1005', '2006-07-20', '1235', 110, 2, 'GRN003'),
+('JV1001', '2007-08-22', '1234', -30, 5, 'DO102');
