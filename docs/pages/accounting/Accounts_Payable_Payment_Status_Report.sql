@@ -30,7 +30,7 @@ Status_BT = 0
 
 union all
 select '', '', 'Total Unpaid' as 'Creditors Bal',
- sum(Journal_T.Amount_NU)as 'Invoice Amount'
+ sum(Journal_T.Amount_NU) as 'Invoice Amount'
 from Creditor_T,Purchase_T,Journal_T where
 Creditor_T.Cred_ID_VC = Purchase_T.Cred_ID_VC and
 Purchase_T.Doc_No_VC = Journal_T.Doc_No_VC and
@@ -39,7 +39,7 @@ Status_BT = 0
 
 union all
 select '', '', 'Total paid' as 'Creditors Bal',
- sum(Journal_T.Amount_NU)as 'Invoice Amount'
+ sum(Journal_T.Amount_NU) as 'Invoice Amount'
 from Creditor_T,Purchase_T,Journal_T where
 Creditor_T.Cred_ID_VC = Purchase_T.Cred_ID_VC and
 Purchase_T.Doc_No_VC = Journal_T.Doc_No_VC and
