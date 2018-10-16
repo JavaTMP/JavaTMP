@@ -134,6 +134,10 @@ CREATE TABLE `creditor_t` (
 
 LOCK TABLES `creditor_t` WRITE;
 /*!40000 ALTER TABLE `creditor_t` DISABLE KEYS */;
+INSERT INTO `creditor_t` (`Cred_ID_VC`, `Cred_Name_VC`, `Cred_Add_VC`, `Cred_Contact_VC`, `Credit_Term_TI`, `Cred_Code_IN`) VALUES ('CRE100','Supplier2','34th Alm Street','145432',45,3000);
+INSERT INTO `creditor_t` (`Cred_ID_VC`, `Cred_Name_VC`, `Cred_Add_VC`, `Cred_Contact_VC`, `Credit_Term_TI`, `Cred_Code_IN`) VALUES ('CRE101','Supplier1','56th Georgia','458787',30,3000);
+INSERT INTO `creditor_t` (`Cred_ID_VC`, `Cred_Name_VC`, `Cred_Add_VC`, `Cred_Contact_VC`, `Credit_Term_TI`, `Cred_Code_IN`) VALUES ('CRE102','Furniture1','7th Roland','121212',45,3000);
+INSERT INTO `creditor_t` (`Cred_ID_VC`, `Cred_Name_VC`, `Cred_Add_VC`, `Cred_Contact_VC`, `Credit_Term_TI`, `Cred_Code_IN`) VALUES ('CRE103','Furniture2','7th Roland','121212',60,3000);
 /*!40000 ALTER TABLE `creditor_t` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -384,6 +388,11 @@ CREATE TABLE `purchase_t` (
 
 LOCK TABLES `purchase_t` WRITE;
 /*!40000 ALTER TABLE `purchase_t` DISABLE KEYS */;
+INSERT INTO `purchase_t` (`Cred_ID_VC`, `Pdt_ID_VC`, `Doc_No_VC`, `Date_DT`, `Status_BT`, `Inv_ID_VC`) VALUES ('CRE103',NULL,'JV1010','2006-12-28',0x01,'1256');
+INSERT INTO `purchase_t` (`Cred_ID_VC`, `Pdt_ID_VC`, `Doc_No_VC`, `Date_DT`, `Status_BT`, `Inv_ID_VC`) VALUES ('CRE102',NULL,'JV1013','2007-02-20',0x00,'1257');
+INSERT INTO `purchase_t` (`Cred_ID_VC`, `Pdt_ID_VC`, `Doc_No_VC`, `Date_DT`, `Status_BT`, `Inv_ID_VC`) VALUES ('CRE101','1234','JV1003','2006-07-20',0x00,'IN100');
+INSERT INTO `purchase_t` (`Cred_ID_VC`, `Pdt_ID_VC`, `Doc_No_VC`, `Date_DT`, `Status_BT`, `Inv_ID_VC`) VALUES ('CRE101','1234','JV1004','2006-07-20',0x00,'IN101');
+INSERT INTO `purchase_t` (`Cred_ID_VC`, `Pdt_ID_VC`, `Doc_No_VC`, `Date_DT`, `Status_BT`, `Inv_ID_VC`) VALUES ('CRE100','1235','JV1005','2006-07-20',0x00,'IN102');
 /*!40000 ALTER TABLE `purchase_t` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -437,6 +446,8 @@ CREATE TABLE `stock_balance_t` (
 
 LOCK TABLES `stock_balance_t` WRITE;
 /*!40000 ALTER TABLE `stock_balance_t` DISABLE KEYS */;
+INSERT INTO `stock_balance_t` (`Doc_ID_VC`, `Pdt_ID_VC`, `Qty_NU`, `Unit_Price_TI`, `Date_DT`) VALUES ('RST100','1235',60,2,'2007-06-03');
+INSERT INTO `stock_balance_t` (`Doc_ID_VC`, `Pdt_ID_VC`, `Qty_NU`, `Unit_Price_TI`, `Date_DT`) VALUES ('RZE100','1234',30,6,'2007-08-22');
 /*!40000 ALTER TABLE `stock_balance_t` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -463,6 +474,12 @@ CREATE TABLE `stock_movement_t` (
 
 LOCK TABLES `stock_movement_t` WRITE;
 /*!40000 ALTER TABLE `stock_movement_t` DISABLE KEYS */;
+INSERT INTO `stock_movement_t` (`Doc_No_VC`, `Date_DT`, `Pdt_ID_VC`, `Qty_NU`, `Unit_Price_TI`, `Descrip_VC`) VALUES ('JV1002','2007-06-03','1235',-50,2,'Do103');
+INSERT INTO `stock_movement_t` (`Doc_No_VC`, `Date_DT`, `Pdt_ID_VC`, `Qty_NU`, `Unit_Price_TI`, `Descrip_VC`) VALUES ('JV1003','2006-07-20','1234',-60,5,'GRN001');
+INSERT INTO `stock_movement_t` (`Doc_No_VC`, `Date_DT`, `Pdt_ID_VC`, `Qty_NU`, `Unit_Price_TI`, `Descrip_VC`) VALUES ('JV1000','2007-05-12','1234',-30,5,'DO100');
+INSERT INTO `stock_movement_t` (`Doc_No_VC`, `Date_DT`, `Pdt_ID_VC`, `Qty_NU`, `Unit_Price_TI`, `Descrip_VC`) VALUES ('JV1004','2006-07-20','1234',30,6,'GRN002');
+INSERT INTO `stock_movement_t` (`Doc_No_VC`, `Date_DT`, `Pdt_ID_VC`, `Qty_NU`, `Unit_Price_TI`, `Descrip_VC`) VALUES ('JV1005','2006-07-20','1235',110,2,'GRN003');
+INSERT INTO `stock_movement_t` (`Doc_No_VC`, `Date_DT`, `Pdt_ID_VC`, `Qty_NU`, `Unit_Price_TI`, `Descrip_VC`) VALUES ('JV1001','2007-08-22','1234',-30,5,'DO102');
 /*!40000 ALTER TABLE `stock_movement_t` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -475,4 +492,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-15 20:06:18
+-- Dump completed on 2018-10-17  0:25:36
