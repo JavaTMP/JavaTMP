@@ -111,10 +111,32 @@ INSERT INTO journal_t (`Doc_No_VC`, `GL_ID`, `Inv_ID_VC`, `Amount_NU`, `Descrip_
 ('JV1023', 2002, NULL, 2000, 'Receipt from Randy', '2007-07-23', 7, 2007),
 ('JV1023', 2003, NULL, -2000, 'Receipt from Randy', '2007-07-23', 7, 2007);
 
-INSERT INTO accounting.stock_movement_t (`Doc_No_VC`, `Date_DT`, `Pdt_ID_VC`, `Qty_NU`, `Unit_Price_TI`, `Descrip_VC`) VALUES
+delete from stock_movement_t;
+INSERT INTO stock_movement_t (`Doc_No_VC`, `Date_DT`, `Pdt_ID_VC`, `Qty_NU`, `Unit_Price_TI`, `Descrip_VC`) VALUES
 ('JV1002', '2007-06-03', '1235', -50, 2, 'Do103'),
 ('JV1003', '2006-07-20', '1234', -60, 5, 'GRN001'),
 ('JV1000', '2007-05-12', '1234', -30, 5, 'DO100'),
 ('JV1004', '2006-07-20', '1234', 30, 6, 'GRN002'),
 ('JV1005', '2006-07-20', '1235', 110, 2, 'GRN003'),
 ('JV1001', '2007-08-22', '1234', -30, 5, 'DO102');
+
+delete from stock_balance_t;
+INSERT INTO stock_balance_t (`Doc_ID_VC`, `Pdt_ID_VC`, `Qty_NU`, `Unit_Price_TI`, `Date_DT`)  VALUES
+('RZE100', '1234', 30.0, 6, '2007-08-22'),
+('RST100', '1235', 60.0, 2, '2007-06-03');
+
+delete from purchase_t;
+INSERT INTO purchase_t (`Cred_ID_VC`, `Pdt_ID_VC`, `Doc_No_VC`, `Date_DT`, `Status_BT`, `Inv_ID_VC`) VALUES
+('CRE101', '1234', 'JV1003', '2006-07-20', false, 'IN100'),
+('CRE101', '1234', 'JV1004', '2006-07-20', false, 'IN101'),
+('CRE100', '1235', 'JV1005', '2006-07-20', false, 'IN102'),
+('CRE103', null, 'JV1010', '2006-12-28', true, '1256'),
+('CRE102', null, 'JV1013', '2007-02-20', false, '1257');
+
+delete from creditor_t;
+INSERT INTO creditor_t (`Cred_ID_VC`, `Cred_Name_VC`, `Cred_Add_VC`, `Cred_Contact_VC`, `Credit_Term_TI`, `Cred_Code_IN`) VALUES
+('CRE101', 'Supplier1', '56th Georgia', '458787', 30, 3000),
+('CRE100', 'Supplier2', '34th Alm Street', '145432', 45, 3000),
+('CRE103', 'Furniture2', '7th Roland', '121212', 60, 3000),
+('CRE102', 'Furniture1', '7th Roland', '121212', 45, 3000);
+
