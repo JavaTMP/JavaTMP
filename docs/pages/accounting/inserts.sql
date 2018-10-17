@@ -176,5 +176,31 @@ INSERT INTO bank_statement (`Date`, `Chq_No`, `Detail`, `Amt`, `Period_TI`, `Yea
 ('2007-08-26', 95454, 'Receipt Frm William', -2000.0, 8, 2007),
 ('2007-07-25', 44511, 'Interest From Bank', -250.0, 7, 2007);
 
+delete from fixedasset_t;
+INSERT INTO fixedasset_t (`FA_ID_IN`, `FA_Type_VC`, `FA_Category_VC`, `FA_Descrip_VC`, `Doc_No_VC`) VALUES
+(100, 'CE', 'Deprn', 'Deprn', 'JV1012'),
+(100, 'CE', 'DispCost', 'DispCost', 'JV1011'),
+(100, 'CE', 'DispDeprn', 'DispDeprn', 'JV1011'),
+(101, 'OE', 'Cost', 'OfficeEquip', 'JV1010'),
+(101, 'OE', 'Deprn', 'Deprn', 'JV1012'),
+(101, 'OE', 'DispCost', 'DispCost', 'JV1011'),
+(101, 'OE', 'DispDeprn', 'DispDeprn', 'JV1011'),
+(102, 'FF', 'Cost', 'Furniture', 'JV1010'),
+(102, 'FF', 'Deprn', 'Deprn', 'JV1012'),
+(102, 'FF', 'DispCost', 'DispCost', 'JV1011'),
+(102, 'FF', 'DispDeprn', 'DispDeprn', 'JV1011'),
+(100, 'CE', 'Cost', 'CompEquip', 'JV1013'),
+(100, 'CE', 'Deprn', 'Deprn', 'JV1014'),
+(100, 'CE', 'DispCost', 'DispCost', 'JV1015'),
+(100, 'CE', 'DispDeprn', 'DispDeprn', 'JV1016'),
+(101, 'CE', 'Cost', 'OfficeEquip', 'JV1013'),
+(101, 'OE', 'Deprn', 'Deprn', 'JV1014'),
+(101, 'OE', 'DispCost', 'DispCost', 'JV1015'),
+(101, 'OE', 'DispDeprn', 'DispDeprn', 'JV1016'),
+(102, 'FF', 'Cost', 'Furniture', 'JV1013'),
+(102, 'FF', 'Deprn', 'Deprn', 'JV1014'),
+(102, 'FF', 'DispCost', 'DispCost', 'JV1015'),
+(102, 'FF', 'DispDeprn', 'DispDeprn', 'JV1016'),
+(100, 'CE', 'Cost', 'CompEquip', 'JV1010');
 
 

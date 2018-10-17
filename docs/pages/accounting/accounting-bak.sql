@@ -16,6 +16,36 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `bank_statement`
+--
+
+DROP TABLE IF EXISTS `bank_statement`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bank_statement` (
+  `Date` date DEFAULT NULL,
+  `Chq_No` int(11) DEFAULT NULL,
+  `Detail` varchar(100) DEFAULT NULL,
+  `Amt` float DEFAULT NULL,
+  `Period_TI` tinyint(4) DEFAULT NULL,
+  `Year_SI` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `bank_statement`
+--
+
+LOCK TABLES `bank_statement` WRITE;
+/*!40000 ALTER TABLE `bank_statement` DISABLE KEYS */;
+INSERT INTO `bank_statement` (`Date`, `Chq_No`, `Detail`, `Amt`, `Period_TI`, `Year_SI`) VALUES ('2007-02-02',88258,'Inward TT',-1400,2,2007);
+INSERT INTO `bank_statement` (`Date`, `Chq_No`, `Detail`, `Amt`, `Period_TI`, `Year_SI`) VALUES ('2007-02-17',740244,'Chq clearance',-1500,2,2007);
+INSERT INTO `bank_statement` (`Date`, `Chq_No`, `Detail`, `Amt`, `Period_TI`, `Year_SI`) VALUES ('2007-08-26',95454,'Receipt Frm William',-2000,8,2007);
+INSERT INTO `bank_statement` (`Date`, `Chq_No`, `Detail`, `Amt`, `Period_TI`, `Year_SI`) VALUES ('2007-07-25',44511,'Interest From Bank',-250,7,2007);
+/*!40000 ALTER TABLE `bank_statement` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `bank_t`
 --
 
@@ -64,6 +94,13 @@ CREATE TABLE `cash_t` (
 
 LOCK TABLES `cash_t` WRITE;
 /*!40000 ALTER TABLE `cash_t` DISABLE KEYS */;
+INSERT INTO `cash_t` (`Doc_No_VC`, `Cash_Type_VC`, `Cash_Category_VC`, `Chq_No_VC`, `Bank_Code_VC`) VALUES ('JV1017','OA','OA_Int','745570','CITI');
+INSERT INTO `cash_t` (`Doc_No_VC`, `Cash_Type_VC`, `Cash_Category_VC`, `Chq_No_VC`, `Bank_Code_VC`) VALUES ('JV1018','OA','OA_Int','745571','CITI');
+INSERT INTO `cash_t` (`Doc_No_VC`, `Cash_Type_VC`, `Cash_Category_VC`, `Chq_No_VC`, `Bank_Code_VC`) VALUES ('JV1019','IA','IA_Int','44511','CITI');
+INSERT INTO `cash_t` (`Doc_No_VC`, `Cash_Type_VC`, `Cash_Category_VC`, `Chq_No_VC`, `Bank_Code_VC`) VALUES ('JV1020','FA','FA_Cap','8875','CITI');
+INSERT INTO `cash_t` (`Doc_No_VC`, `Cash_Type_VC`, `Cash_Category_VC`, `Chq_No_VC`, `Bank_Code_VC`) VALUES ('JV1021','IA','IA_Pur','745571','CITI');
+INSERT INTO `cash_t` (`Doc_No_VC`, `Cash_Type_VC`, `Cash_Category_VC`, `Chq_No_VC`, `Bank_Code_VC`) VALUES ('JV1022','OA','OA_Deb','95454','CITI');
+INSERT INTO `cash_t` (`Doc_No_VC`, `Cash_Type_VC`, `Cash_Category_VC`, `Chq_No_VC`, `Bank_Code_VC`) VALUES ('JV1023','OA','OA_Deb','12454','CITI');
 /*!40000 ALTER TABLE `cash_t` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -165,6 +202,9 @@ CREATE TABLE `customer_t` (
 
 LOCK TABLES `customer_t` WRITE;
 /*!40000 ALTER TABLE `customer_t` DISABLE KEYS */;
+INSERT INTO `customer_t` (`Cust_ID_VC`, `Cust_Name_VC`, `Cust_Add_VC`, `Cust_Contact_VC`, `Credit_Term_TI`, `Cust_Code_VC`) VALUES ('CUST100','William','44th Avenue','7879888',30,'2003');
+INSERT INTO `customer_t` (`Cust_ID_VC`, `Cust_Name_VC`, `Cust_Add_VC`, `Cust_Contact_VC`, `Credit_Term_TI`, `Cust_Code_VC`) VALUES ('CUST101','Randy','12th Solrode','121211',45,'2003');
+INSERT INTO `customer_t` (`Cust_ID_VC`, `Cust_Name_VC`, `Cust_Add_VC`, `Cust_Contact_VC`, `Credit_Term_TI`, `Cust_Code_VC`) VALUES ('CUST102','Hulete','11th Palm Beach','455454',60,'2003');
 /*!40000 ALTER TABLE `customer_t` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -180,8 +220,7 @@ CREATE TABLE `fixedasset_t` (
   `FA_Type_VC` varchar(20) DEFAULT NULL,
   `FA_Category_VC` varchar(20) DEFAULT NULL,
   `FA_Descrip_VC` varchar(50) DEFAULT NULL,
-  `Doc_No_VC` varchar(20) NOT NULL,
-  PRIMARY KEY (`Doc_No_VC`)
+  `Doc_No_VC` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -191,6 +230,30 @@ CREATE TABLE `fixedasset_t` (
 
 LOCK TABLES `fixedasset_t` WRITE;
 /*!40000 ALTER TABLE `fixedasset_t` DISABLE KEYS */;
+INSERT INTO `fixedasset_t` (`FA_ID_IN`, `FA_Type_VC`, `FA_Category_VC`, `FA_Descrip_VC`, `Doc_No_VC`) VALUES (100,'CE','Deprn','Deprn','JV1012');
+INSERT INTO `fixedasset_t` (`FA_ID_IN`, `FA_Type_VC`, `FA_Category_VC`, `FA_Descrip_VC`, `Doc_No_VC`) VALUES (100,'CE','DispCost','DispCost','JV1011');
+INSERT INTO `fixedasset_t` (`FA_ID_IN`, `FA_Type_VC`, `FA_Category_VC`, `FA_Descrip_VC`, `Doc_No_VC`) VALUES (100,'CE','DispDeprn','DispDeprn','JV1011');
+INSERT INTO `fixedasset_t` (`FA_ID_IN`, `FA_Type_VC`, `FA_Category_VC`, `FA_Descrip_VC`, `Doc_No_VC`) VALUES (101,'OE','Cost','OfficeEquip','JV1010');
+INSERT INTO `fixedasset_t` (`FA_ID_IN`, `FA_Type_VC`, `FA_Category_VC`, `FA_Descrip_VC`, `Doc_No_VC`) VALUES (101,'OE','Deprn','Deprn','JV1012');
+INSERT INTO `fixedasset_t` (`FA_ID_IN`, `FA_Type_VC`, `FA_Category_VC`, `FA_Descrip_VC`, `Doc_No_VC`) VALUES (101,'OE','DispCost','DispCost','JV1011');
+INSERT INTO `fixedasset_t` (`FA_ID_IN`, `FA_Type_VC`, `FA_Category_VC`, `FA_Descrip_VC`, `Doc_No_VC`) VALUES (101,'OE','DispDeprn','DispDeprn','JV1011');
+INSERT INTO `fixedasset_t` (`FA_ID_IN`, `FA_Type_VC`, `FA_Category_VC`, `FA_Descrip_VC`, `Doc_No_VC`) VALUES (102,'FF','Cost','Furniture','JV1010');
+INSERT INTO `fixedasset_t` (`FA_ID_IN`, `FA_Type_VC`, `FA_Category_VC`, `FA_Descrip_VC`, `Doc_No_VC`) VALUES (102,'FF','Deprn','Deprn','JV1012');
+INSERT INTO `fixedasset_t` (`FA_ID_IN`, `FA_Type_VC`, `FA_Category_VC`, `FA_Descrip_VC`, `Doc_No_VC`) VALUES (102,'FF','DispCost','DispCost','JV1011');
+INSERT INTO `fixedasset_t` (`FA_ID_IN`, `FA_Type_VC`, `FA_Category_VC`, `FA_Descrip_VC`, `Doc_No_VC`) VALUES (102,'FF','DispDeprn','DispDeprn','JV1011');
+INSERT INTO `fixedasset_t` (`FA_ID_IN`, `FA_Type_VC`, `FA_Category_VC`, `FA_Descrip_VC`, `Doc_No_VC`) VALUES (100,'CE','Cost','CompEquip','JV1013');
+INSERT INTO `fixedasset_t` (`FA_ID_IN`, `FA_Type_VC`, `FA_Category_VC`, `FA_Descrip_VC`, `Doc_No_VC`) VALUES (100,'CE','Deprn','Deprn','JV1014');
+INSERT INTO `fixedasset_t` (`FA_ID_IN`, `FA_Type_VC`, `FA_Category_VC`, `FA_Descrip_VC`, `Doc_No_VC`) VALUES (100,'CE','DispCost','DispCost','JV1015');
+INSERT INTO `fixedasset_t` (`FA_ID_IN`, `FA_Type_VC`, `FA_Category_VC`, `FA_Descrip_VC`, `Doc_No_VC`) VALUES (100,'CE','DispDeprn','DispDeprn','JV1016');
+INSERT INTO `fixedasset_t` (`FA_ID_IN`, `FA_Type_VC`, `FA_Category_VC`, `FA_Descrip_VC`, `Doc_No_VC`) VALUES (101,'CE','Cost','OfficeEquip','JV1013');
+INSERT INTO `fixedasset_t` (`FA_ID_IN`, `FA_Type_VC`, `FA_Category_VC`, `FA_Descrip_VC`, `Doc_No_VC`) VALUES (101,'OE','Deprn','Deprn','JV1014');
+INSERT INTO `fixedasset_t` (`FA_ID_IN`, `FA_Type_VC`, `FA_Category_VC`, `FA_Descrip_VC`, `Doc_No_VC`) VALUES (101,'OE','DispCost','DispCost','JV1015');
+INSERT INTO `fixedasset_t` (`FA_ID_IN`, `FA_Type_VC`, `FA_Category_VC`, `FA_Descrip_VC`, `Doc_No_VC`) VALUES (101,'OE','DispDeprn','DispDeprn','JV1016');
+INSERT INTO `fixedasset_t` (`FA_ID_IN`, `FA_Type_VC`, `FA_Category_VC`, `FA_Descrip_VC`, `Doc_No_VC`) VALUES (102,'FF','Cost','Furniture','JV1013');
+INSERT INTO `fixedasset_t` (`FA_ID_IN`, `FA_Type_VC`, `FA_Category_VC`, `FA_Descrip_VC`, `Doc_No_VC`) VALUES (102,'FF','Deprn','Deprn','JV1014');
+INSERT INTO `fixedasset_t` (`FA_ID_IN`, `FA_Type_VC`, `FA_Category_VC`, `FA_Descrip_VC`, `Doc_No_VC`) VALUES (102,'FF','DispCost','DispCost','JV1015');
+INSERT INTO `fixedasset_t` (`FA_ID_IN`, `FA_Type_VC`, `FA_Category_VC`, `FA_Descrip_VC`, `Doc_No_VC`) VALUES (102,'FF','DispDeprn','DispDeprn','JV1016');
+INSERT INTO `fixedasset_t` (`FA_ID_IN`, `FA_Type_VC`, `FA_Category_VC`, `FA_Descrip_VC`, `Doc_No_VC`) VALUES (100,'CE','Cost','CompEquip','JV1010');
 /*!40000 ALTER TABLE `fixedasset_t` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -334,6 +397,10 @@ CREATE TABLE `product_category_t` (
 
 LOCK TABLES `product_category_t` WRITE;
 /*!40000 ALTER TABLE `product_category_t` DISABLE KEYS */;
+INSERT INTO `product_category_t` (`Pdt_Category_VC`, `Category_Name_VC`, `GL_ID`) VALUES ('PDT100','Software',5002);
+INSERT INTO `product_category_t` (`Pdt_Category_VC`, `Category_Name_VC`, `GL_ID`) VALUES ('PDT100','Software',6002);
+INSERT INTO `product_category_t` (`Pdt_Category_VC`, `Category_Name_VC`, `GL_ID`) VALUES ('PDT101','Hardware',5001);
+INSERT INTO `product_category_t` (`Pdt_Category_VC`, `Category_Name_VC`, `GL_ID`) VALUES ('PDT101','Hardware',6001);
 /*!40000 ALTER TABLE `product_category_t` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -420,6 +487,9 @@ CREATE TABLE `sale_t` (
 
 LOCK TABLES `sale_t` WRITE;
 /*!40000 ALTER TABLE `sale_t` DISABLE KEYS */;
+INSERT INTO `sale_t` (`Doc_No_VC`, `Pdt_ID_VC`, `Inv_ID_VC`, `Cust_ID_VC`, `Date_DT`, `Status_BT`) VALUES ('JV1000','1235','INV100','CUST100','2018-10-17',0x01);
+INSERT INTO `sale_t` (`Doc_No_VC`, `Pdt_ID_VC`, `Inv_ID_VC`, `Cust_ID_VC`, `Date_DT`, `Status_BT`) VALUES ('JV1001','1234','INV101','CUST101','2018-10-17',0x01);
+INSERT INTO `sale_t` (`Doc_No_VC`, `Pdt_ID_VC`, `Inv_ID_VC`, `Cust_ID_VC`, `Date_DT`, `Status_BT`) VALUES ('JV1002','1234','INV102','CUST102','2018-06-03',0x00);
 /*!40000 ALTER TABLE `sale_t` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -492,4 +562,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-10-17  0:25:36
+-- Dump completed on 2018-10-18  0:06:11
