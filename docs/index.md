@@ -22,7 +22,7 @@
     *   [Directory Structure For Java Web Application](/pages/java/directory-structure-for-java-web-application)
     *   [Java Web Based MVC Application Design](/pages/java/java-web-based-mvc-application-design)
 *   **References**
-    *   [Bootstrap RTL](/pages/bootstrap-rtl-support-modifications "JavaTMP Bootstrap RTL support and modifications")
+    *   [Bootstrap RTL Support and Customizations](/pages/bootstrap-rtl-support-modifications "JavaTMP Bootstrap RTL support and modifications")
     *   [JavaTMP Front-end Plugins And Frameworks](/pages/javatmp-front-end-plugins-and-frameworks)
     *   [Development and Environment tools](/pages/development-and-environment-tools)
     *   [Chart types and data visualization](/pages/chart-types-and-data-visualization)
