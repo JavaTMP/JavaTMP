@@ -140,3 +140,41 @@ INSERT INTO creditor_t (`Cred_ID_VC`, `Cred_Name_VC`, `Cred_Add_VC`, `Cred_Conta
 ('CRE103', 'Furniture2', '7th Roland', '121212', 60, 3000),
 ('CRE102', 'Furniture1', '7th Roland', '121212', 45, 3000);
 
+delete from sale_t;
+INSERT INTO sale_t (`Doc_No_VC`, `Pdt_ID_VC`, `Inv_ID_VC`, `Cust_ID_VC`, `Date_DT`, `Status_BT`) VALUES
+('JV1000', '1235', 'INV100', 'CUST100', '2018-10-17', true),
+('JV1001', '1234', 'INV101', 'CUST101', '2018-10-17', true),
+('JV1002', '1234', 'INV102', 'CUST102', '2018-06-03', false);
+
+delete from customer_t;
+INSERT INTO customer_t (`Cust_ID_VC`, `Cust_Name_VC`, `Cust_Add_VC`, `Cust_Contact_VC`, `Credit_Term_TI`, `Cust_Code_VC`) VALUES
+('CUST100', 'William', '44th Avenue', '7879888', 30, '2003'),
+('CUST101', 'Randy', '12th Solrode', '121211', 45, '2003'),
+('CUST102', 'Hulete', '11th Palm Beach', '455454', 60, '2003');
+
+delete from product_category_t;
+INSERT INTO product_category_t (`Pdt_Category_VC`, `Category_Name_VC`, `GL_ID`) VALUES
+('PDT100', 'Software', 5002),
+('PDT100', 'Software', 6002),
+('PDT101', 'Hardware', 5001),
+('PDT101', 'Hardware', 6001);
+
+delete from cash_t;
+INSERT INTO cash_t (`Doc_No_VC`, `Cash_Type_VC`, `Cash_Category_VC`, `Chq_No_VC`, `Bank_Code_VC`) VALUES
+('JV1017', 'OA', 'OA_Int', '745570', 'CITI'),
+('JV1018', 'OA', 'OA_Int', '745571', 'CITI'),
+('JV1019', 'IA', 'IA_Int', '44511', 'CITI'),
+('JV1020', 'FA', 'FA_Cap', '8875', 'CITI'),
+('JV1021', 'IA', 'IA_Pur', '745571', 'CITI'),
+('JV1022', 'OA', 'OA_Deb', '95454', 'CITI'),
+('JV1023', 'OA', 'OA_Deb', '12454', 'CITI');
+
+delete from bank_statement;
+INSERT INTO bank_statement (`Date`, `Chq_No`, `Detail`, `Amt`, `Period_TI`, `Year_SI`) VALUES
+('2007-02-02', 88258, 'Inward TT', -1400.0, 2, 2007),
+('2007-02-17', 740244, 'Chq clearance', -1500.0, 2, 2007),
+('2007-08-26', 95454, 'Receipt Frm William', -2000.0, 8, 2007),
+('2007-07-25', 44511, 'Interest From Bank', -250.0, 7, 2007);
+
+
+
