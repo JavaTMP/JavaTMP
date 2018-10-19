@@ -40,9 +40,9 @@ on Journal_T.GL_ID = COA_T.GL_ID
 
 union all
 select '','Total PL Movement in YR 2007',
- sum( case when Amount_NU <0 and Year_SI = '2007' and BS_Category_VC in
+ sum( case when Amount_NU < 0 and Year_SI = '2007' and BS_Category_VC in
  ('Rev','Cos','Otc','Oic','Tax') then Amount_NU else 0 end) +
- sum( case when Amount_NU >0 and Year_SI = '2007' and BS_Category_VC in
+ sum( case when Amount_NU > 0 and Year_SI = '2007' and BS_Category_VC in
  ('Rev','Cos','Otc','Oic','Tax') then Amount_NU else 0 end),0
 from Journal_T join COA_T
 on Journal_T.GL_ID = COA_T.GL_ID
