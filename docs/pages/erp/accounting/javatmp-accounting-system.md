@@ -290,7 +290,7 @@ Main Pages:
             - Any process that involves the recording of financial transactions is a bookkeeping process.
 - Transaction_module
     - each transaction is created based on some activities initiated from modules
-    and for more flexibilities we suppose that transaction may involved more than one module at the time.
+    and for more flexibilities we suppose that transaction may involved in more than one module at the time.
     - This entity will track the relation between one transaction and corresponding modules involved in it.
 
 ### References:

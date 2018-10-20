@@ -7,10 +7,12 @@
  * Author:  JavaTMP
  * Created: Oct 19, 2018
  */
+DROP TABLE IF EXISTS accountTransaction;
 DROP TABLE IF EXISTS account;
 DROP TABLE IF EXISTS accountGroup;
 DROP TABLE IF EXISTS accountType;
-DROP TABLE IF EXISTS accountTransaction;
+DROP TABLE IF EXISTS moduleTransaction;
+DROP TABLE IF EXISTS module;
 DROP TABLE IF EXISTS transaction;
 DROP TABLE IF EXISTS transactionType;
 
@@ -81,9 +83,33 @@ CREATE TABLE accountTransaction (
     transactionId BIGINT UNSIGNED not null,
     accountId BIGINT UNSIGNED not null,
     status TINYINT,
+    amount DECIMAL(33,8),
+    balance DECIMAL(33,8),
     creationDate TIMESTAMP NOT NULL,
     CONSTRAINT accountTransaction_id_pk PRIMARY KEY (id),
     CONSTRAINT accountTransaction_tranId_fk FOREIGN KEY (transactionId) REFERENCES transaction (id),
     CONSTRAINT accountTransaction_acctId_fk FOREIGN KEY (accountId) REFERENCES account (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE module (
+    id BIGINT UNSIGNED not null AUTO_INCREMENT,
+    name varchar(128),
+    description varchar(1024),
+    status TINYINT,
+    creationDate TIMESTAMP NOT NULL,
+    CONSTRAINT module_id_pk PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE moduleTransaction (
+    id BIGINT UNSIGNED not null AUTO_INCREMENT,
+    transactionId BIGINT UNSIGNED not null,
+    moduleId BIGINT UNSIGNED not null,
+    refId BIGINT UNSIGNED not null,
+    description varchar(1024),
+    status TINYINT,
+    creationDate TIMESTAMP NOT NULL,
+    CONSTRAINT moduleTransaction_id_pk PRIMARY KEY (id),
+    CONSTRAINT moduleTransaction_tranId_fk FOREIGN KEY (transactionId) REFERENCES transaction (id),
+    CONSTRAINT moduleTransaction_moduleId_fk FOREIGN KEY (moduleId) REFERENCES module (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
