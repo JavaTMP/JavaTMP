@@ -67,14 +67,7 @@ Chart of Accounts
 - Asset Accounts - Current Assets
     - 100 - Petty cash
     - 101 - Cash on hand
-    - 103 - Regular checking account
-    - 105 - Payroll checking account
     - 110 - Accounts receivable
-    - 120 - Allowance for doubtful accounts
-    - 130 - Work in progress inventory
-    - 139 - Finished goods inventory
-    - 140 - Prepaid expenses
-    - 150 - Employee advances
 - Asset Accounts - Fixed Assets
     - 160 - Furniture and fixtures
     - 162 - Vehicles
@@ -82,22 +75,15 @@ Chart of Accounts
     - 165 - Buildings
     - 169 - Land
     - 170 - Accumulated depreciation, furniture, fixtures
-    - 172 - Accumulated depreciation, vehicles
-    - 175 - Accumulated depreciation, factory mfr equip.
-    - 179 - Accumulated depreciation, buildings
 - Asset Accounts - Other Assets
     - 190 - Accumulated amortization
     - 194 - Notes receivable, non-current
 - Lability Accounts - Current Liabilities
     - 200 - Accounts payable
     - 234 - Payroll payable
-    - 235 - Accrued fees
-    - 240 - Accrued interest
 - Liability Accounts - Long-Term Liabilities
     - 260 - Bonds payable
-    - 270 - Discount on bonds payable
     - 280 - Bank loans payable
-    - 290 - Equipment payable
 - Equity Accounts
     - 320 - Owner capital
     - 350 - Retained earnings
@@ -105,13 +91,9 @@ Chart of Accounts
 - Revenue Accounts
     - 410 - Product sales revenues
     - 420 - Services sales
-    - 430 - Rental property revenues
-    - 450 - Interest earned revenues
 - Expense Accounts - Cost of Goods Sold
     - 520 - Raw materials costs
     - 530 - Direct labor costs
-    - 540 - Indirect labor costs
-    - 550 - Manufacturing plant costs
 - Expense Accounts - Other
     - 601 - Supplies Expense
     - 630 - Bad debt Expense
@@ -119,8 +101,7 @@ Chart of Accounts
     - 720 - Salary and Wage Expense
     - 735 - Travel Expenses
     - 750 - Equipment Lease Expense
-    - 760 - Depreciation Expense,Vehicles
-    - 770 - Depreciation Expense, Factory mfr Equipment
+    - 760 - Depreciation Expense
     - 800 - Other expenses
 
 ### Main Accounting System User Interface Pages
