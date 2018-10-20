@@ -95,12 +95,8 @@ Chart of Accounts
     - 520 - Raw materials costs
     - 530 - Direct labor costs
 - Expense Accounts - Other
-    - 601 - Supplies Expense
-    - 630 - Bad debt Expense
     - 650 - Advertising Expense
     - 720 - Salary and Wage Expense
-    - 735 - Travel Expenses
-    - 750 - Equipment Lease Expense
     - 760 - Depreciation Expense
     - 800 - Other expenses
 
