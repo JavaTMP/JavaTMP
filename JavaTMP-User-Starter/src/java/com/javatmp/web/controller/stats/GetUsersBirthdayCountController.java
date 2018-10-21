@@ -2,7 +2,6 @@ package com.javatmp.web.controller.stats;
 
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.domain.ResponseMessage;
-import com.javatmp.service.ActivityService;
 import com.javatmp.service.ServicesFactory;
 import com.javatmp.service.UserStatsService;
 import com.javatmp.util.Constants;
@@ -35,7 +34,7 @@ public class GetUsersBirthdayCountController extends HttpServlet {
             responseMessage.setMessage(null);
             responseMessage.setData(results);
         } catch (IllegalArgumentException e) {
-            logger.log(Level.SEVERE, "Error", e);
+            logger.log(Level.SEVERE, e.getMessage(), e);
             responseMessage.setOverAllStatus(false);
             responseMessage.setMessage(e.getMessage());
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);

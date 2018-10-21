@@ -64,7 +64,8 @@ public class ViewUploadedFileController extends HttpServlet {
             OutputStream outStream = response.getOutputStream();
             outStream.write(document.getDocumentContent());
         } catch (IllegalAccessException ex) {
-            Logger.getLogger(ViewUploadedFileController.class.getName()).log(Level.SEVERE, null, ex);
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new ServletException(ex);
         } catch (InvocationTargetException ex) {
             Logger.getLogger(ViewUploadedFileController.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -52,10 +52,9 @@ public class ActivateUserController extends HttpServlet {
             responseMessage.setMessage(e.getMessage());
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             responseMessage.setStatusCode(HttpServletResponse.SC_BAD_REQUEST);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(ActivateUserController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvocationTargetException ex) {
-            Logger.getLogger(ActivateUserController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException | InvocationTargetException ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new ServletException(ex);
         }
         MvcHelper.sendMessageAsJson(response, responseMessage);
 

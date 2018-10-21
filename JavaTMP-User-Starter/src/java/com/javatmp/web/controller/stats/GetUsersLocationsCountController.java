@@ -35,7 +35,7 @@ public class GetUsersLocationsCountController extends HttpServlet {
             responseMessage.setMessage(null);
             responseMessage.setData(results);
         } catch (IllegalArgumentException e) {
-            logger.log(Level.SEVERE, "Error", e);
+            logger.log(Level.SEVERE, e.getMessage(), e);
             responseMessage.setOverAllStatus(false);
             responseMessage.setMessage(e.getMessage());
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
