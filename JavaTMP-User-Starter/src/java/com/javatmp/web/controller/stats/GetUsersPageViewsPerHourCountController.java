@@ -1,18 +1,11 @@
 package com.javatmp.web.controller.stats;
 
-import com.javatmp.web.controller.user.*;
-import com.javatmp.domain.User;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.domain.ResponseMessage;
 import com.javatmp.service.ActivityService;
-import com.javatmp.service.DocumentService;
 import com.javatmp.service.ServicesFactory;
-import com.javatmp.service.UserService;
-import com.javatmp.service.UserStatsService;
 import com.javatmp.util.Constants;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;

@@ -9,6 +9,8 @@ import com.javatmp.service.UserService;
 import com.javatmp.util.Constants;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.text.MessageFormat;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/user/ActivateUserController")
 public class ActivateUserController extends HttpServlet {
@@ -30,7 +33,8 @@ public class ActivateUserController extends HttpServlet {
         ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         DocumentService ds = sf.getDocumentService();
         UserService us = sf.getUserService();
-
+        HttpSession session = request.getSession();
+        ResourceBundle labels = (ResourceBundle) session.getAttribute(Constants.LANGUAGE_ATTR_KEY);
         try {
 
             User userToBeUpdated = new User();
@@ -43,11 +47,12 @@ public class ActivateUserController extends HttpServlet {
             updateStatus = us.activateUser(userToBeUpdated);
 
             responseMessage.setOverAllStatus(true);
-            responseMessage.setMessage("User Activated Successfully with status [" + updateStatus + "]");
+            responseMessage.setTitle(labels.getString("action.successTitle"));
+            responseMessage.setMessage(MessageFormat.format(labels.getString("action.ActivateUser.successMsg"), updateStatus));
             responseMessage.setData(userToBeUpdated);
 
         } catch (IllegalArgumentException e) {
-            logger.info("ERROR : " + e.getMessage());
+            logger.log(Level.SEVERE, e.getMessage(), e);
             responseMessage.setOverAllStatus(false);
             responseMessage.setMessage(e.getMessage());
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);

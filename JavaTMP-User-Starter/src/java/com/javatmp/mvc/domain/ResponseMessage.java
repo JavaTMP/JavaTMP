@@ -3,6 +3,7 @@ package com.javatmp.mvc.domain;
 public class ResponseMessage {
 
     private boolean overAllStatus;
+    private String title;
     private String message;
     private Integer statusCode;
     private Boolean redirect;
@@ -106,6 +107,20 @@ public class ResponseMessage {
      */
     public void setData(Object data) {
         this.data = data;
+    }
+
+    /**
+     * @return the title
+     */
+    public String getTitle() {
+        return title;
+    }
+
+    /**
+     * @param title the title to set
+     */
+    public void setTitle(String title) {
+        this.title = title;
     }
 
 }

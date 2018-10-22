@@ -980,9 +980,9 @@
                                         success: function (data) {
                                             m.updateMessage(data.message);
                                             m.updateClosable(true);
-                                            m.updateTitle("Activate Action Response");
+                                            m.updateTitle(data.title);
 
-                                            toastr.success(data.message, 'SUCCESS', {
+                                            toastr.success(data.message, data.title, {
                                                 timeOut: 5000,
                                                 progressBar: true,
                                                 rtl: javatmp.settings.isRTL,
