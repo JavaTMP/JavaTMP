@@ -46,5 +46,10 @@
 
         });
     };
+
+    window.javatmp.ajax.actionRequest = function () {
+
+    };
+
 }(jQuery, window, document));
 

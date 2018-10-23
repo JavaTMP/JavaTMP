@@ -858,9 +858,7 @@
                 var selectedData = table.rows({selected: true}).data();
                 if (selectedData.length > 0) {
                     var selectedRecord = selectedData[0];
-                    //                    alert("row[" + JSON.stringify(selectedRecord) + "]");
                     var passData = {};
-                    passData.callback = "actionCallback";
                     passData.id = selectedRecord.id;
                     BootstrapModalWrapperFactory.createModal({
                         message: javatmp.settings.labels["dialog.delete.message"],
@@ -895,7 +893,6 @@
                                         success: function (data) {
                                             m.updateMessage(data.message);
                                             m.updateClosable(true);
-                                            alert($("#" + m.options.id).data('bs.modal')._config.backdrop);
                                             m.updateClosableByBackdrop(true);
                                             m.updateTitle(data.title);
 
