@@ -9,6 +9,8 @@ import com.javatmp.service.UserService;
 import com.javatmp.util.Constants;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.text.MessageFormat;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.PersistenceException;
@@ -18,6 +20,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/user/DeleteUserController")
 public class DeleteUserController extends HttpServlet {
@@ -31,6 +34,8 @@ public class DeleteUserController extends HttpServlet {
         ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         DocumentService ds = sf.getDocumentService();
         UserService us = sf.getUserService();
+        HttpSession session = request.getSession();
+        ResourceBundle labels = (ResourceBundle) session.getAttribute(Constants.LANGUAGE_ATTR_KEY);
 
         try {
 
@@ -44,7 +49,8 @@ public class DeleteUserController extends HttpServlet {
             updateStatus = us.deleteUser(userToBeUpdated);
 
             responseMessage.setOverAllStatus(true);
-            responseMessage.setMessage("User deleted status [" + updateStatus + "]");
+            responseMessage.setTitle(labels.getString("action.successTitle"));
+            responseMessage.setMessage(MessageFormat.format(labels.getString("action.deleteUser.successMsg"), updateStatus));
             responseMessage.setData(userToBeUpdated);
         } catch (PersistenceException e) {
             Throwable t = e;

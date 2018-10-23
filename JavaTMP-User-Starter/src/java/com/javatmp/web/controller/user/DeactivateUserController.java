@@ -9,6 +9,8 @@ import com.javatmp.service.UserService;
 import com.javatmp.util.Constants;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.text.MessageFormat;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/user/DeactivateUserController")
 public class DeactivateUserController extends HttpServlet {
@@ -30,6 +33,8 @@ public class DeactivateUserController extends HttpServlet {
         ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         DocumentService ds = sf.getDocumentService();
         UserService us = sf.getUserService();
+        HttpSession session = request.getSession();
+        ResourceBundle labels = (ResourceBundle) session.getAttribute(Constants.LANGUAGE_ATTR_KEY);
 
         try {
 
@@ -43,7 +48,8 @@ public class DeactivateUserController extends HttpServlet {
             updateStatus = us.deActivateUser(userToBeUpdated);
 
             responseMessage.setOverAllStatus(true);
-            responseMessage.setMessage("User Deactivated Successfully with status [" + updateStatus + "]");
+            responseMessage.setTitle(labels.getString("action.successTitle"));
+            responseMessage.setMessage(MessageFormat.format(labels.getString("action.DeactivateUser.successMsg"), updateStatus));
             responseMessage.setData(userToBeUpdated);
 
         } catch (IllegalArgumentException e) {
@@ -52,12 +58,10 @@ public class DeactivateUserController extends HttpServlet {
             responseMessage.setMessage(e.getMessage());
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             responseMessage.setStatusCode(HttpServletResponse.SC_BAD_REQUEST);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(DeactivateUserController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvocationTargetException ex) {
-            Logger.getLogger(DeactivateUserController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException | InvocationTargetException ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new ServletException(ex);
         }
         MvcHelper.sendMessageAsJson(response, responseMessage);
-
     }
 }

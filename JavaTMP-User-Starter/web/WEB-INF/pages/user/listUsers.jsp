@@ -867,15 +867,13 @@
                         title: javatmp.settings.labels["dialog.delete.title"],
                         closable: false,
                         closeByBackdrop: false,
-                        buttons: [
-                            {
+                        buttons: [{
                                 label: javatmp.settings.labels["global.cancel"],
                                 cssClass: "btn btn-secondary",
                                 action: function (modalWrapper, button, buttonData, originalEvent) {
                                     return modalWrapper.hide();
                                 }
-                            },
-                            {
+                            }, {
                                 label: javatmp.settings.labels["page.btn.deleteUser"],
                                 cssClass: "btn btn-danger",
                                 action: function (modalWrapper, button, buttonData, originalEvent) {
@@ -897,9 +895,11 @@
                                         success: function (data) {
                                             m.updateMessage(data.message);
                                             m.updateClosable(true);
-                                            m.updateTitle("Deleted Action Response");
+                                            alert($("#" + m.options.id).data('bs.modal')._config.backdrop);
+                                            m.updateClosableByBackdrop(true);
+                                            m.updateTitle(data.title);
 
-                                            toastr.success(data.message, 'SUCCESS', {
+                                            toastr.success(data.message, data.title, {
                                                 timeOut: 5000,
                                                 progressBar: true,
                                                 rtl: javatmp.settings.isRTL,
@@ -980,6 +980,7 @@
                                         success: function (data) {
                                             m.updateMessage(data.message);
                                             m.updateClosable(true);
+                                            m.updateClosableByBackdrop(true);
                                             m.updateTitle(data.title);
 
                                             toastr.success(data.message, data.title, {
@@ -1063,9 +1064,10 @@
                                         success: function (data) {
                                             m.updateMessage(data.message);
                                             m.updateClosable(true);
-                                            m.updateTitle("Deactivate Action Response");
+                                            m.updateClosableByBackdrop(true);
+                                            m.updateTitle(data.title);
 
-                                            toastr.success(data.message, 'SUCCESS', {
+                                            toastr.success(data.message, data.title, {
                                                 timeOut: 5000,
                                                 progressBar: true,
                                                 rtl: javatmp.settings.isRTL,
@@ -1141,6 +1143,5 @@
                 table.destroy(true);
                 return true;
             });
-        });
-    </script>
+        });</script>
 </div>
