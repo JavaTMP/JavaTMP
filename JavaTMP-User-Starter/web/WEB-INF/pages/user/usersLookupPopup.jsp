@@ -6,10 +6,10 @@
     <table cellspacing="0" class="table table-condensed table-bordered table-hover" id="UsersListTableId">
         <thead>
             <tr id="UserListMainHeader">
-                <th>ID</th>
-                <th>Username</th>
-                <th>First name</th>
-                <th>Last name</th>
+                <th>${labels['domain.user.id']}</th>
+                <th>${labels['domain.user.userName']}</th>
+                <th>${labels['domain.user.firstName']}</th>
+                <th>${labels['domain.user.lastName']}</th>
             </tr>
             <tr id="UserListFilterHeader">
                 <th style="width: 3rem;">
@@ -62,7 +62,7 @@
                 modal.updateTitle("Select User");
                 modal.updateClosable(true);
                 modal.addButton({
-                    label: "Close",
+                    label: javatmp.settings.labels["global.cancel"],
                     cssClass: "btn btn-danger mr-auto",
                     action: function (modalWrapper, button, buttonData, originalEvent) {
                         return modalWrapper.hide();
