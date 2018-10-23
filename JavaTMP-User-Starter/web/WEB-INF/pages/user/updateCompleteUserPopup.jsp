@@ -174,7 +174,7 @@
                             <div class="col-lg-6 text-center">
                                 <div style="width: 200px; height: 200px;display: inline-block;position: relative">
                                     <div id="profilePicturePreviewContainerId" style="width: 200px; height: 200px;">
-                                        <img id="profilePicturePreview" src="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${requestScope.user.profilePicDocument.documentId}&amp;randomHash=${requestScope.user.profilePicDocument.randomHash}&amp;viewType=inline" alt="Your Profile Image Preview" />
+                                        <img width="200" height="200" id="profilePicturePreview" src="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${requestScope.user.profilePicDocument.documentId}&amp;randomHash=${requestScope.user.profilePicDocument.randomHash}&amp;viewType=inline" alt="Your Profile Image Preview" />
                                     </div>
                                 </div>
                             </div>
@@ -210,9 +210,11 @@
         // or for demo purposese ONLY we can get a reference top modal
         // in current open managed instances in BootstrapModalWrapperFactory
         var currentParentModal = BootstrapModalWrapperFactory.globalModals[BootstrapModalWrapperFactory.globalModals.length - 1];
+        currentParentModal.originalModal.find(".modal-body").css({"max-height": "75vh", "overflow-y": "auto"});
 //            console.log(currentParentModal.options.id);
         $("#" + currentParentModal.options.id).on(javatmp.settings.javaTmpAjaxContainerReady, function (event, modal) {
             // fire AFTER all transition done and your ajax content is shown to user.
+
             var form = $('#AddNewUserPopupFormId');
             var validator = null;
             modal.updateTitle("Update Complete User");
@@ -582,6 +584,7 @@
                     scrollAmount: 85
                 }
             });
+            form.find("#profilePicturePreview").removeAttr("width").removeAttr("height");
             form.find("input[name='profilePicture'][type=file]").on("change", function () {
                 if (this.files && this.files[0]) {
                     var reader = new FileReader();

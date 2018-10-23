@@ -1230,6 +1230,8 @@
                 BootstrapModalWrapperFactory.createAjaxModal({
                     message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
                     passData: passData,
+                    updateSizeAfterDataFetchTo: "modal-lg", // default is  or null for standard or "modal-sm"
+                    size: "modal-lg",
                     url: javatmp.settings.contextPath + "/user/GetCreateNewUserPopupController",
                     ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                 });
@@ -1247,6 +1249,8 @@
                     BootstrapModalWrapperFactory.createAjaxModal({
                         message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
                         passData: passData,
+                        updateSizeAfterDataFetchTo: "modal-lg", // default is  or null for standard or "modal-sm"
+                        size: "modal-lg",
                         url: javatmp.settings.contextPath + "/user/GetUpdateUserPopupController",
                         ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                     });
