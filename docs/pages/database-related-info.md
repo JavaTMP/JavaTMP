@@ -22,3 +22,8 @@ The following links provide you information about Oracle SQL statements related 
 The following links provide you information to call Oracle stored procedures and functions with JPA and Hibernate:
 - [https://vladmihalcea.com/how-to-call-oracle-stored-procedures-and-functions-from-hibernate/](https://vladmihalcea.com/how-to-call-oracle-stored-procedures-and-functions-from-hibernate/)
 - [https://www.journaldev.com/2502/callablestatement-in-java-example](https://www.journaldev.com/2502/callablestatement-in-java-example)
+
+## Multilingual database Design
+- [https://stackoverflow.com/questions/2227985/whats-the-best-database-structure-to-keep-multilingual-data](https://stackoverflow.com/questions/2227985/whats-the-best-database-structure-to-keep-multilingual-data)
+- [https://stackoverflow.com/questions/316780/schema-for-a-multilanguage-database](https://stackoverflow.com/questions/316780/schema-for-a-multilanguage-database)
+- [https://stackoverflow.com/questions/26765175/multi-language-database-with-default-fallback](https://stackoverflow.com/questions/26765175/multi-language-database-with-default-fallback)

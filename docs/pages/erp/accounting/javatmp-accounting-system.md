@@ -307,3 +307,4 @@ Main Pages:
 - [How accounts are affected by debits and credits](https://community.intuit.com/articles/1146110-how-accounts-are-affected-by-debits-and-credits)
 - [Double entry bookkeeping database design](https://dba.stackexchange.com/questions/102370/double-entry-bookkeeping-database-design)
 - [What is a common way to save 'debit' and 'credit' information?](https://dba.stackexchange.com/questions/17197/what-is-a-common-way-to-save-debit-and-credit-information)
+- [Accounting Basics](https://actionstep.atlassian.net/wiki/spaces/KB/pages/5406942/Accounting+Basics)
