@@ -18,4 +18,7 @@ The following links provide you information about Oracle SQL statements related 
 - [https://www.red-gate.com/simple-talk/sql/oracle/introduction-to-analytic-functions-part-1-2/](https://www.red-gate.com/simple-talk/sql/oracle/introduction-to-analytic-functions-part-1-2/)
 - [https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/12c/BigDataSQL/BigDataSQL_HOL.html](https://www.oracle.com/webfolder/technetwork/tutorials/obe/db/12c/BigDataSQL/BigDataSQL_HOL.html)
 
-
+## Oracle Stored Procedures
+The following links provide you information to call Oracle stored procedures and functions with JPA and Hibernate:
+- [https://vladmihalcea.com/how-to-call-oracle-stored-procedures-and-functions-from-hibernate/](https://vladmihalcea.com/how-to-call-oracle-stored-procedures-and-functions-from-hibernate/)
+- [https://www.journaldev.com/2502/callablestatement-in-java-example](https://www.journaldev.com/2502/callablestatement-in-java-example)

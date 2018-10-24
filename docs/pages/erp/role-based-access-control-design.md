@@ -16,3 +16,15 @@ The permission has to be allowed to occur through the role membership.
 Users won’t be able to perform action permission other than the ones they are authorized for.
 All access is controlled through roles that people are given, which is a set of permissions.
 An user's role determines what permissions he or she is granted.
+
+## References
+- [A Role-Based Access Control (RBAC) system for PHP](https://www.tonymarston.net/php-mysql/role-based-access-control.html)
+- [Role Based Access Control in PHP](https://www.sitepoint.com/role-based-access-control-in-php/)
+- [Role-Based Access Control Design](https://stackoverflow.com/questions/28157798/is-my-role-based-access-control-a-feasible-solution/28159647#28159647)
+- [How to Build Role-Based Access Control in SQL](https://www.xaprb.com/blog/2006/08/16/how-to-build-role-based-access-control-in-sql/)
+- [Role-Based Access Control in SQL, Part 2](https://www.xaprb.com/blog/2006/08/18/role-based-access-control-in-sql-part-2/)
+- []()
+- []()
+- []()
+- []()
+- []()
