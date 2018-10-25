@@ -60,13 +60,13 @@
                                             <div class="col-lg-2">
                                                 <div class="form-group">
                                                     <label class="control-label">${labels['domain.user.firstName']}</label>
-                                                    <input class="form-control" type="text" placeholder="First Name" name="firstName" value="">
+                                                    <input class="form-control" type="text" placeholder="${labels['domain.user.firstName']}" name="firstName" value="">
                                                 </div>
                                             </div>
                                             <div class="col-lg-2">
                                                 <div class="form-group">
                                                     <label class="control-label">${labels['domain.user.lastName']}</label>
-                                                    <input class="form-control" type="text" placeholder="Last Name" name="lastName" value="">
+                                                    <input class="form-control" type="text" placeholder="${labels['domain.user.lastName']}" name="lastName" value="">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3">
@@ -78,7 +78,7 @@
                                             <div class="col-lg-3">
                                                 <div class="form-group">
                                                     <label class="control-label">${labels['domain.user.email']}</label>
-                                                    <input class="form-control" type="text" placeholder="Email" name="email" value="">
+                                                    <input class="form-control" type="text" placeholder="${labels['domain.user.email']}" name="email" value="">
                                                 </div>
                                             </div>
                                         </div>
@@ -89,7 +89,7 @@
                                                     <select name="countryId" class="form-control">
                                                         <c:choose>
                                                             <c:when test="${fn:length(requestScope.countries) > 0}">
-                                                                <option value="">Choose ...</option>
+                                                                <option value="">${labels['page.text.kindlySelect']}</option>
                                                                 <c:forEach items="${requestScope.countries}" var="country">
                                                                     <option value="${country.countryId}">${country.countryName}</option>
                                                                 </c:forEach>
@@ -107,7 +107,7 @@
                                                     <select name="lang" class="form-control">
                                                         <c:choose>
                                                             <c:when test="${fn:length(requestScope.languages) > 0}">
-                                                                <option value="">Choose ...</option>
+                                                                <option value="">${labels['page.text.kindlySelect']}</option>
                                                                 <c:forEach items="${requestScope.languages}" var="language">
                                                                     <option value="${language.languageId}">${language.languageName}</option>
                                                                 </c:forEach>
@@ -125,7 +125,7 @@
                                                     <select name="theme" class="form-control">
                                                         <c:choose>
                                                             <c:when test="${fn:length(requestScope.themes) > 0}">
-                                                                <option value="">Choose ...</option>
+                                                                <option value="">${labels['page.text.kindlySelect']}</option>
                                                                 <c:forEach items="${requestScope.themes}" var="theme">
                                                                     <option value="${theme.themeId}">${theme.themeName}</option>
                                                                 </c:forEach>
@@ -141,10 +141,9 @@
                                                 <div class="form-group">
                                                     <label class="control-label">${labels['domain.user.timezone']}</label>
                                                     <select name="timezone" class="form-control">
-                                                        <option value="">Choose ...</option>
                                                         <c:choose>
                                                             <c:when test="${fn:length(requestScope.timezones) > 0}">
-                                                                <option value="">Choose ...</option>
+                                                                <option value="">${labels['page.text.kindlySelect']}</option>
                                                                 <c:forEach items="${requestScope.timezones}" var="timezone">
                                                                     <option value="${timezone.timezoneId}">${timezone.timezoneName}</option>
                                                                 </c:forEach>
@@ -161,7 +160,7 @@
                                             <div class="col-lg-3">
                                                 <div class="form-group">
                                                     <label class="control-label">${labels['domain.user.userName']}</label>
-                                                    <input class="form-control" type="text" autocomplete="off" placeholder="Username"
+                                                    <input class="form-control" type="text" autocomplete="off" placeholder="${labels['domain.user.userName']}"
                                                            name="userName" value="">
                                                 </div>
                                             </div>
@@ -169,20 +168,20 @@
                                                 <div class="form-group">
                                                     <label class="control-label">${labels['domain.user.currentPassword']}</label>
                                                     <input class="form-control" type="password" autocomplete="off"
-                                                           placeholder="Old Password" name="oldPassword">
+                                                           placeholder="${labels['domain.user.currentPassword']}" name="oldPassword">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3">
                                                 <div class="form-group">
                                                     <label class="control-label">${labels['domain.user.newPassword']}</label>
                                                     <input class="form-control" type="password" autocomplete="off"
-                                                           placeholder="New Password" name="password">
+                                                           placeholder="${labels['domain.user.newPassword']}" name="password">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3">
                                                 <div class="form-group">
                                                     <label class="control-label">${labels['domain.user.reTypeNewPassword']}</label>
-                                                    <input class="form-control" type="password" autocomplete="off" placeholder="Re-type Your New Password"
+                                                    <input class="form-control" type="password" autocomplete="off" placeholder="${labels['domain.user.reTypeNewPassword']}"
                                                            name="rpassword">
                                                 </div>
                                             </div>
@@ -193,7 +192,7 @@
                                                     <label for="exampleFormControlFile1">${labels['domain.user.Document']}</label>
                                                     <div class="custom-file">
                                                         <input name="profilePicture" type="file" class="custom-file-input" id="validatedCustomFile">
-                                                        <label class="custom-file-label" for="validatedCustomFile">Choose Profile Picture file...</label>
+                                                        <label class="custom-file-label" for="validatedCustomFile">${labels['domain.user.Document']}</label>
                                                     </div>
                                                 </div>
                                             </div>

@@ -438,9 +438,12 @@
                         align: javatmp.settings.floatDefault
                     },
                     formatter: function (params) {
-                        var value = (params.value + '').split('.');
-                        value = value[0].replace(/(\d{1,3})(?=(?:\d{3})+(?!\d))/g, '$1,');
-                        return params.seriesName + '<br/>' + params.name + ' : ' + value;
+                        if (params.value) {
+                            console.log("value = " + params.value);
+                            var value = (params.value + '').split('.');
+                            value = value[0].replace(/(\d{1,3})(?=(?:\d{3})+(?!\d))/g, '$1,');
+                            return params.seriesName + '<br/>' + params.name + ' : ' + value;
+                        }
                     }
                 },
                 visualMap: {
@@ -448,10 +451,15 @@
                     max: 100,
                     left: javatmp.settings.floatDefault,
                     top: 'bottom',
-                    text: ['High', 'Low'],
+                    text: ['${labels['page.home.UsersLocations.high']}', '${labels['page.home.UsersLocations.low']}'],
                     seriesIndex: [0],
                     inRange: {
                         color: ['#ffffff', '#007bff']
+                    },
+                    textStyle: {
+                        fontFamily: $("body").css("font-family"),
+                        fontSize: $("body").css("font-size"),
+                        align: javatmp.settings.floatDefault
                     },
                     calculable: true
                 },
