@@ -165,7 +165,14 @@
                         <form enctype="multipart/form-data" autocomplete="off" id="SearchForUserProfileFormId" class="form m-3"
                               action="${pageContext.request.contextPath}/user/UpdateCompleteUserController" method="post" novalidate="novalidate">
                             <div class="form-row">
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label class="control-label">${labels['domain.user.userName']}</label>
+                                        <input class="form-control" type="text" autocomplete="off" placeholder="${labels['domain.user.userName']}"
+                                               name="userName" value="">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="control-label">${labels['domain.user.status']}</label>
                                         <select name="status" class="custom-select">
@@ -175,13 +182,15 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
+                            </div>
+                            <div class="form-row">
+                                <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="control-label">${labels['domain.user.firstName']}</label>
                                         <input class="form-control" type="text" placeholder="${labels['domain.user.firstName']}" name="firstName" value="">
                                     </div>
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="control-label">${labels['domain.user.lastName']}</label>
                                         <input class="form-control" type="text" placeholder="${labels['domain.user.lastName']}" name="lastName" value="">
@@ -276,24 +285,6 @@
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label class="control-label">${labels['domain.user.userName']}</label>
-                                        <input class="form-control" type="text" autocomplete="off" placeholder="${labels['domain.user.userName']}"
-                                               name="userName" value="">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlFile1">${labels['domain.user.Document']}</label>
-                                        <div class="custom-file">
-                                            <input name="profilePicture" type="file" class="custom-file-input" id="validatedCustomFile">
-                                            <label class="custom-file-label" for="validatedCustomFile">Choose Profile Picture file...</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-row">
                                 <div class="col-lg-6 text-center">
                                     <div style="width: 200px; height: 200px;display: inline-block;position: relative">
                                         <div id="profilePicturePreviewContainerId" style="width: 200px; height: 200px;">
@@ -325,7 +316,7 @@
     <div id="contextMenu" class="dropdown-menu" role="menu" style="display:none;position: fixed;" >
         <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Add-New-User-Action">
             <i class="fa fa-fw fa-user text-primary"></i>
-            ${labels['domain.user.btn.CreateNewUser']}
+            ${labels['domain.user.CreateNewUser']}
         </a>
         <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Add-New-User-Popup-Action">
             <i class="fa fa-external-link-alt fa-fw text-primary"></i>
@@ -530,10 +521,10 @@
                         //                    minDate: moment(),
                         locale: {
                             "direction": javatmp.settings.direction,
-                            format: 'DD/MM/YYYY'
+                            format: javatmp.settings.dateFormat
                         }
                     }, function (start, end, label) {
-                        var formatedDateSelected = moment(start).locale('en').format("DD/MM/YYYY");
+                        var formatedDateSelected = moment(start).locale('en').format(javatmp.settings.dateFormat);
                         birthdateFilterInput.val(formatedDateSelected).trigger("change");
                     });
 
@@ -749,9 +740,9 @@
                             var end = $this.data("end");
                             var val = "";
                             if ((start !== undefined) && (end !== undefined)) {
-                                val = start.locale('en').format("YYYY-MM-DDTHH:mm:ss.SSSZ")
+                                val = start.locale('en').format(javatmp.settings.networkDateFormat)
                                         + "##TO##"
-                                        + end.locale('en').format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+                                        + end.locale('en').format(javatmp.settings.networkDateFormat);
                             }
                             api.column(12).search(val ? val : '', false, false).draw();
                         }, 200, "@userlist-main-table-filter");
@@ -767,7 +758,7 @@
                         autoUpdateInput: false,
                         locale: {
                             "direction": javatmp.settings.direction,
-                            format: 'MM/DD/YYYY HH:mm:ss'
+                            format: javatmp.settings.dateTimeSecondFormat
 
                         },
                         ranges: {
@@ -782,7 +773,7 @@
                     creationdateFilterInput.on('apply.daterangepicker', function (ev, picker) {
                         creationdateFilterInput.data("start", picker.startDate);
                         creationdateFilterInput.data("end", picker.endDate);
-                        creationdateFilterInput.val(picker.startDate.format('MM/DD/YYYY HH:mm:ss') + ' - ' + picker.endDate.format('MM/DD/YYYY HH:mm:ss')).trigger("change");
+                        creationdateFilterInput.val(picker.startDate.format(javatmp.settings.dateTimeSecondFormat) + ' - ' + picker.endDate.format(javatmp.settings.dateTimeSecondFormat)).trigger("change");
                     });
                     creationdateFilterInput.on('cancel.daterangepicker', function (ev, picker) {
                         creationdateFilterInput.removeData("start");
@@ -853,16 +844,16 @@
                         data: 'birthDate', "type": "date", name: "birthDate", width: "9rem",
                         "render": function (data, type, row) {
                             if (type === "sort" || type === 'type' || type === 'filter') {
-                                return moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY HH:mm');
+                                return moment(data, javatmp.settings.networkDateFormat).format(javatmp.settings.dateTimeFormat);
                             } else {
-                                return "<p class='m-0 p-0' style='width: 9rem;'>" + moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY') + "</p>";
+                                return "<p class='m-0 p-0' style='width: 9rem;'>" + moment(data, javatmp.settings.networkDateFormat).format(javatmp.settings.dateFormat) + "</p>";
                             }
                         }
                     },
                     {
                         data: 'birthDate', name: "age", "type": "date", width: "4rem",
                         "render": function (data, type, row) {
-                            data = Math.ceil(moment().diff(moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ"), 'years', true));
+                            data = Math.ceil(moment().diff(moment(data, javatmp.settings.networkDateFormat), 'years', true));
                             if (type === "display") {
                                 return "<p class='m-0 p-0' style='width: 4rem;'>" + data + "</p>";
                             } else {
@@ -931,9 +922,9 @@
                     {data: 'creationDate', "type": "date", name: "creationDate", width: "9rem",
                         "render": function (data, type, row) {
                             if (type === "sort" || type === 'type' || type === 'filter') {
-                                return moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY HH:mm');
+                                return moment(data, javatmp.settings.networkDateFormat).format(javatmp.settings.dateTimeFormat);
                             } else {
-                                return "<p class='m-0 p-0 text-truncate' style='width: 9rem;'>" + moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY HH:mm') + "</p>";
+                                return "<p class='m-0 p-0 text-truncate' style='width: 9rem;'>" + moment(data, javatmp.settings.networkDateFormat).format(javatmp.settings.dateTimeFormat) + "</p>";
                             }
 
                         }}
@@ -992,7 +983,7 @@
             });
             form.find("input[name='birthOfDateStr']").daterangepicker({
                 "opens": javatmp.settings.floatReverse,
-                startDate: moment().format("DD/MM/YYYY"),
+                startDate: moment().format(javatmp.settings.dateFormat),
                 singleDatePicker: true,
                 showDropdowns: true,
                 timePicker: false,
@@ -1006,10 +997,10 @@
                 //                    minDate: moment(),
                 locale: {
                     "direction": javatmp.settings.direction,
-                    format: 'DD/MM/YYYY'
+                    format: javatmp.settings.dateFormat
                 }
             }, function (start, end, label) {
-                var formatedDateSelected = moment(start).locale('en').format("DD/MM/YYYY");
+                var formatedDateSelected = moment(start).locale('en').format(javatmp.settings.dateFormat);
                 form.find("input[name='birthOfDateStr']").val(formatedDateSelected).trigger("change");
             });
             form.find("textarea[name='address']").summernote({
@@ -1206,12 +1197,18 @@
                 populateForm(form, rowObject);
                 form.find("textarea[name='address']").summernote('code', rowObject.address);
 //                    form.find("textarea[name='address']").summernote('triggerEvent', 'change');
-                form.find("input[name='birthOfDateStr']").val(moment(rowObject.birthDate, "YYYY-MM-DDTHH:mm:ss.SSSZ").locale('en').format("DD/MM/YYYY"));
+                form.find("input[name='birthOfDateStr']").val(moment(rowObject.birthDate, javatmp.settings.networkDateFormat).locale('en').format(javatmp.settings.dateFormat));
 
                 var image = form.find("img[id='profilePicturePreview']");
                 var resizeImage = form.find("img[id='profilePictureResizePreview']");
 
-                var avatarImageSrc = javatmp.settings.contextPath + "/ViewUploadedFileController?documentId=" + rowObject.profilePicDocumentId + "&randomHash=" + rowObject.profilePicDocument.randomHash + "&viewType=inline";
+                var avatarImageSrc = javatmp.settings.contextPath + "/assets/img/default-profile-pic.png";
+                if (rowObject.profilePicDocumentId) {
+                    avatarImageSrc = javatmp.settings.contextPath
+                            + "/ViewUploadedFileController?documentId=" + rowObject.profilePicDocumentId
+                            + "&randomHash=" + rowObject.profilePicDocument.randomHash
+                            + "&viewType=inline";
+                }
 
                 image.attr('src', avatarImageSrc);
                 resizeImage.attr('src', avatarImageSrc);

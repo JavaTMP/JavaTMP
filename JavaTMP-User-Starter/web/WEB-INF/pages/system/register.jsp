@@ -221,6 +221,10 @@
                 javatmp.settings.direction = "${labels['global.direction']}";
                 javatmp.settings.isRTL = ${labels['global.direction'] == 'ltr' ? 'false' : 'true'};
                 javatmp.settings.contextPath = '${pageContext.request.contextPath}';
+
+                javatmp.settings.networkDateFormat = "YYYY-MM-DDTHH:mm:ss.SSSZ";
+                javatmp.settings.dateFormat = "DD/MM/YYYY";
+
                 javatmp.settings.labels = {
                     "loadingText": "${labels['global.loadingText']}",
                     "kindlySelect": '${labels['page.text.kindlySelect']}',
@@ -228,12 +232,12 @@
                 };
                 moment.locale("ar");
                 jQuery.validator.addMethod("validDate", function (value, element) {
-                    return this.optional(element) || moment(value, "DD/MM/YYYY", true).isValid();
+                    return this.optional(element) || moment(value, javatmp.settings.dateFormat, true).isValid();
                 }, "Please enter a valid date in the format DD/MM/YYYY");
                 jQuery.validator.addMethod("dateBeforeNow", function (value, element, params) {
                     if (this.optional(element) || value === "")
                         return true;
-                    if (moment(value, "DD/MM/YYYY").isBefore(moment().set({hour: 0, minute: 0, second: 0, millisecond: 0})))
+                    if (moment(value, javatmp.settings.dateFormat).isBefore(moment().set({hour: 0, minute: 0, second: 0, millisecond: 0})))
                         return true;
                     return false;
                 }, 'Must be less than Now.');
@@ -255,7 +259,7 @@
                     for (var i = 0; i < form_data.length; i++) {
                         if (form_data[i].name === "birthOfDateStr") {
                             var value = form_data[i].value;
-                            var newDate = moment(value, "DD/MM/YYYY").locale("en").format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+                            var newDate = moment(value, javatmp.settings.dateFormat).locale("en").format(javatmp.settings.networkDateFormat);
                             form_data.push({"name": "birthDate", "value": newDate});
                             break;
                         }
@@ -375,7 +379,7 @@
                 });
                 form.find("input[name='birthOfDateStr']").daterangepicker({
                     "opens": javatmp.settings.floatReverse,
-                    startDate: moment().format("DD/MM/YYYY"),
+                    startDate: moment().format(javatmp.settings.dateFormat),
                     singleDatePicker: true,
                     showDropdowns: true,
                     timePicker: false,
@@ -389,10 +393,10 @@
                     //                    minDate: moment(),
                     locale: {
                         "direction": javatmp.settings.direction,
-                        format: 'DD/MM/YYYY'
+                        format: javatmp.settings.dateFormat
                     }
                 }, function (start, end, label) {
-                    var formatedDateSelected = moment(start).locale('en').format("DD/MM/YYYY");
+                    var formatedDateSelected = moment(start).locale('en').format(javatmp.settings.dateFormat);
                     form.find("input[name='birthOfDateStr']").val(formatedDateSelected).trigger("change");
                 });
                 $(".daterangepicker.dropdown-menu").css('z-index', 600 + 1);

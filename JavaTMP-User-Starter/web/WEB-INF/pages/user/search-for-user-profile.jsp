@@ -397,11 +397,18 @@
                             // first destory or remote bugy plugins on edge that fire the show of calendar dropdown
                             // when value change;
                             form.find("input[name='birthOfDateStr']").data('daterangepicker').remove();
-                            form.find("input[name='birthOfDateStr']").val(moment(rowObject.birthDate, "YYYY-MM-DDTHH:mm:ss.SSSZ").locale('en').format("DD/MM/YYYY"));
+                            form.find("input[name='birthOfDateStr']").val(moment(rowObject.birthDate, javatmp.settings.networkDateFormat).locale('en').format(javatmp.settings.dateFormat));
                             form.find("input[name='birthOfDateStr']").daterangepicker(birthOfDateDateRangePickerOtions, birthOfDateDateRangePickerOtionsFunction);
                             var image = form.find("img[id='profilePicturePreview']");
                             var resizeImage = form.find("img[id='profilePictureResizePreview']");
-                            var avatarImageSrc = javatmp.settings.contextPath + "/ViewUploadedFileController?documentId=" + rowObject.profilePicDocumentId + "&randomHash=" + rowObject.profilePicDocument.randomHash + "&viewType=inline";
+                            var avatarImageSrc = javatmp.settings.contextPath + "/assets/img/default-profile-pic.png";
+                            if (rowObject.profilePicDocumentId) {
+                                avatarImageSrc = javatmp.settings.contextPath
+                                        + "/ViewUploadedFileController?documentId=" + rowObject.profilePicDocumentId
+                                        + "&randomHash=" + rowObject.profilePicDocument.randomHash
+                                        + "&viewType=inline";
+                            }
+
 
                             image.attr('src', avatarImageSrc);
                             resizeImage.attr('src', avatarImageSrc);
@@ -468,7 +475,7 @@
                         formData.push({"name": "id", "value": currentUser.id});
                         if (formData[i].name === "birthOfDateStr") {
                             var value = formData[i].value;
-                            var newDate = moment(value, "DD/MM/YYYY").locale('en').format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+                            var newDate = moment(value, javatmp.settings.dateFormat).locale('en').format(javatmp.settings.networkDateFormat);
                             formData.push({"name": "birthDate", "value": newDate});
                             break;
                         }
@@ -601,7 +608,7 @@
             });
             var birthOfDateDateRangePickerOtions = {
                 "opens": javatmp.settings.floatReverse,
-                startDate: moment().format("DD/MM/YYYY"),
+                startDate: moment().format(javatmp.settings.dateFormat),
                 singleDatePicker: true,
                 showDropdowns: true,
                 timePicker: false,
@@ -615,11 +622,11 @@
                 //                    minDate: moment(),
                 locale: {
                     "direction": javatmp.settings.direction,
-                    format: 'DD/MM/YYYY'
+                    format: javatmp.settings.dateFormat
                 }
             };
             var birthOfDateDateRangePickerOtionsFunction = function (start, end, label) {
-                var formatedDateSelected = moment(start).locale('en').format("DD/MM/YYYY");
+                var formatedDateSelected = moment(start).locale('en').format(javatmp.settings.dateFormat);
                 form.find("input[name='birthOfDateStr']").val(formatedDateSelected).trigger("change");
             };
             form.find("input[name='birthOfDateStr']").daterangepicker(birthOfDateDateRangePickerOtions, birthOfDateDateRangePickerOtionsFunction);

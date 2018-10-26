@@ -174,12 +174,26 @@
                             <div class="col-lg-6 text-center">
                                 <div style="width: 200px; height: 200px;display: inline-block;position: relative">
                                     <div id="profilePicturePreviewContainerId" style="width: 200px; height: 200px;">
-                                        <img width="200" height="200" id="profilePicturePreview" src="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${requestScope.user.profilePicDocument.documentId}&amp;randomHash=${requestScope.user.profilePicDocument.randomHash}&amp;viewType=inline" alt="Your Profile Image Preview" />
+                                        <c:choose>
+                                            <c:when test="${not empty requestScope.user.profilePicDocument.documentId and not empty requestScope.user.profilePicDocument.randomHash}">
+                                                <img width="200" height="200" id="profilePicturePreview" src="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${requestScope.user.profilePicDocument.documentId}&amp;randomHash=${requestScope.user.profilePicDocument.randomHash}&amp;viewType=inline" alt="Your Profile Image Preview" />
+                                            </c:when>
+                                            <c:otherwise>
+                                                <img width="200" height="200" id="profilePicturePreview" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt=""/>
+                                            </c:otherwise>
+                                        </c:choose>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-6 text-center">
-                                <img id="profilePictureResizePreview" style="width: 200px; height: 200px;" src="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${requestScope.user.profilePicDocument.documentId}&amp;randomHash=${requestScope.user.profilePicDocument.randomHash}&amp;viewType=inline" alt="Your Profile Image Preview" />
+                                <c:choose>
+                                    <c:when test="${not empty requestScope.user.profilePicDocument.documentId and not empty requestScope.user.profilePicDocument.randomHash}">
+                                        <img id="profilePictureResizePreview" style="width: 200px; height: 200px;" src="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${requestScope.user.profilePicDocument.documentId}&amp;randomHash=${requestScope.user.profilePicDocument.randomHash}&amp;viewType=inline" alt="Your Profile Image Preview" />
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img id="profilePictureResizePreview" style="width: 200px; height: 200px;" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt=""/>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                         </div>
                         <div class="form-row">
@@ -273,7 +287,7 @@
                     for (var i = 0; i < formData.length; i++) {
                         if (formData[i].name === "birthOfDateStr") {
                             var value = formData[i].value;
-                            var newDate = moment(value, "DD/MM/YYYY").locale('en').format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+                            var newDate = moment(value, javatmp.settings.dateFormat).locale('en').format(javatmp.settings.networkDateFormat);
                             formData.push({"name": "birthDate", "value": newDate});
                             break;
                         }
@@ -415,7 +429,7 @@
             });
             form.find("input[name='birthOfDateStr']").daterangepicker({
                 "opens": javatmp.settings.floatReverse,
-                startDate: moment().format("DD/MM/YYYY"),
+                startDate: moment().format(javatmp.settings.dateFormat),
                 singleDatePicker: true,
                 showDropdowns: true,
                 timePicker: false,
@@ -429,10 +443,10 @@
                 //                    minDate: moment(),
                 locale: {
                     "direction": javatmp.settings.direction,
-                    format: 'DD/MM/YYYY'
+                    format: javatmp.settings.dateFormat
                 }
             }, function (start, end, label) {
-                var formatedDateSelected = moment(start).format("DD/MM/YYYY");
+                var formatedDateSelected = moment(start).format(javatmp.settings.dateFormat);
                 form.find("input[name='birthOfDateStr']").val(formatedDateSelected).trigger("change");
             });
             $(".daterangepicker").css('z-index', modalZIndex + 1);

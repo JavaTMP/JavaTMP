@@ -175,11 +175,12 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <div class="custom-control custom-checkbox">
-                                        <input name="tnc" type="checkbox" class="custom-control-input" id="customCheck1">
-                                        <label class="custom-control-label" for="customCheck1">
-                                            I agree to the
-                                            <a href="javascript:;">Terms of Service </a> &amp;
-                                            <a href="javascript:;">Privacy Policy </a>
+                                        <input name="tnc" type="checkbox" class="custom-control-input" id="tncInputId">
+                                        <label class="custom-control-label" for="tncInputId">
+                                            ${labels["page.register.agreeLabelText"]}
+                                            <a href="javascript:;">${labels["page.register.termsOfService"]}</a>
+                                            ${labels["page.register.and"]}
+                                            <a href="javascript:;">${labels["page.register.privacyPolicy"]}</a>
                                         </label>
                                     </div>
                                 </div>
@@ -188,7 +189,7 @@
                         <div class="form-row">
                             <div class="col-lg-12">
                                 <div class="form-group mt-3">
-                                    <button type="submit" id="register-submit-btn" class="btn btn-primary">${labels['domain.user.btn.CreateNewUser']}</button>
+                                    <button type="submit" id="register-submit-btn" class="btn btn-primary">${labels['domain.user.CreateNewUser']}</button>
                                 </div>
                             </div>
                         </div>
@@ -219,7 +220,7 @@
                 for (var i = 0; i < formData.length; i++) {
                     if (formData[i].name === "birthOfDateStr") {
                         var value = formData[i].value;
-                        var newDate = moment(value, "DD/MM/YYYY").locale('en').format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+                        var newDate = moment(value, javatmp.settings.dateFormat).locale('en').format(javatmp.settings.networkDateFormat);
                         formData.push({"name": "birthDate", "value": newDate});
                         break;
                     }
@@ -306,26 +307,9 @@
 
             },
             messages: {
-                firstName: {
-                    required: "Kindly provide us with your first name"
-                },
-                lastName: {
-                    required: "Kindly provide us with your last name"
-                },
-                email: {
-                    required: "Kindly provide your email address",
-                    email: "Kindly provide a valid email address"
-                },
                 birthOfDateStr: {
-                    required: "Kindly provide your Birth Of Date",
                     validDate: "Kindly Provide a valid date value in format DD/MM/YYYY",
                     dateBeforeNow: "Kindly Provide a date in the past before today at least"
-                },
-                countryId: {
-                    required: "Kindly select your nationality"
-                },
-                address: {
-                    required: "Kindly provide your address"
                 },
                 note: {
                     summernoteRequired: "Kindly Provide a note"
@@ -345,7 +329,7 @@
         });
         form.find("input[name='birthOfDateStr']").daterangepicker({
             "opens": javatmp.settings.floatReverse,
-            startDate: moment().format("DD/MM/YYYY"),
+            startDate: moment().format(javatmp.settings.dateFormat),
             singleDatePicker: true,
             showDropdowns: true,
             timePicker: false,
@@ -359,14 +343,19 @@
             //                    minDate: moment(),
             locale: {
                 "direction": javatmp.settings.direction,
-                format: 'DD/MM/YYYY'
+                format: javatmp.settings.dateFormat
             }
         }, function (start, end, label) {
-            var formatedDateSelected = moment(start).locale('en').format("DD/MM/YYYY");
+            var formatedDateSelected = moment(start).locale('en').format(javatmp.settings.dateFormat);
             form.find("input[name='birthOfDateStr']").val(formatedDateSelected).trigger("change");
         });
         $(".daterangepicker.dropdown-menu").css('z-index', 600 + 1);
-        form.find("textarea[name='address']").summernote({height: 250});
+        form.find("textarea[name='address']").summernote({
+            direction: javatmp.settings.direction,
+            lang: javatmp.user.lang === "ar" ? "ar-AR" : javatmp.user.lang,
+            height: 200,
+            dialogsInBody: true
+        });
         $.fn.select2.defaults.set("theme", "bootstrap");
         $.fn.select2.defaults.set("dir", javatmp.settings.direction);
         $.fn.select2.defaults.set("placeholder", javatmp.settings.labels['page.text.kindlySelect']);

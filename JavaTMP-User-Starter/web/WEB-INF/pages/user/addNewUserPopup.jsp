@@ -261,7 +261,7 @@
                     for (var i = 0; i < formData.length; i++) {
                         if (formData[i].name === "birthOfDateStr") {
                             var value = formData[i].value;
-                            var newDate = moment(value, "DD/MM/YYYY").locale('en').format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+                            var newDate = moment(value, javatmp.settings.dateFormat).locale('en').format(javatmp.settings.networkDateFormat);
                             formData.push({"name": "birthDate", "value": newDate});
                             break;
                         }
@@ -389,7 +389,7 @@
             });
             form.find("input[name='birthOfDateStr']").daterangepicker({
                 "opens": javatmp.settings.floatReverse,
-                startDate: moment().format("DD/MM/YYYY"),
+                startDate: moment().format(javatmp.settings.dateFormat),
                 singleDatePicker: true,
                 showDropdowns: true,
                 timePicker: false,
@@ -403,10 +403,10 @@
                 //                    minDate: moment(),
                 locale: {
                     "direction": javatmp.settings.direction,
-                    format: 'DD/MM/YYYY'
+                    format: javatmp.settings.dateFormat
                 }
             }, function (start, end, label) {
-                var formatedDateSelected = moment(start).locale('en').format("DD/MM/YYYY");
+                var formatedDateSelected = moment(start).locale('en').format(javatmp.settings.dateFormat);
                 form.find("input[name='birthOfDateStr']").val(formatedDateSelected).trigger("change");
             });
             $(".daterangepicker").css('z-index', modalZIndex + 1);

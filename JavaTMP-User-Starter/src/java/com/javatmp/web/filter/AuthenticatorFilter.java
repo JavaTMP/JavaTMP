@@ -3,8 +3,10 @@ package com.javatmp.web.filter;
 import com.javatmp.domain.User;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.domain.ResponseMessage;
+import com.javatmp.util.Constants;
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.logging.Logger;
 import javax.servlet.Filter;
@@ -59,13 +61,14 @@ public class AuthenticatorFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         String path = req.getRequestURI().substring(req.getContextPath().length());
+        HttpSession session = req.getSession();
+        ResourceBundle labels = (ResourceBundle) session.getAttribute(Constants.LANGUAGE_ATTR_KEY);
 
         logger.info("path [" + path + "] is [" + isReqInWhiteList(path) + "]");
         if (isReqInWhiteList(path)) {
             chain.doFilter(request, response);
         } else {
             // check if requester is authenticated or not
-            HttpSession session = req.getSession();
             logger.info("Session Attribute [" + session.getAttribute("user") + "]");
             User user = (User) session.getAttribute("user");
             if (user != null) {
@@ -78,7 +81,7 @@ public class AuthenticatorFilter implements Filter {
                 responseMessage.setOverAllStatus(false);
                 responseMessage.setRedirect(true);
                 responseMessage.setRedirectURL(req.getContextPath() + "/");
-                responseMessage.setMessage("Un-Authorized Access or your session has been deactivated");
+                responseMessage.setMessage(labels.getString("global.illegalAccessMsg"));
                 MvcHelper.sendMessageAsJson(res, responseMessage);
 
             } else {

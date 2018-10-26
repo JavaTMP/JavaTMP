@@ -208,6 +208,10 @@
                     direction: "${labels['global.direction']}",
                     isRTL: ${labels['global.direction'] == 'ltr' ? 'false' : 'true'},
                     contextPath: '${pageContext.request.contextPath}',
+                    networkDateFormat: "YYYY-MM-DDTHH:mm:ss.SSSZ",
+                    dateFormat: "DD/MM/YYYY",
+                    dateTimeFormat: "DD/MM/YYYY HH:mm",
+                    dateTimeSecondFormat: "DD/MM/YYYY HH:mm:ss",
                     labels: {}
                 };
 
@@ -243,14 +247,14 @@
                         closeByBackdrop: false,
                         buttons: [
                             {
-                                label: "Return",
+                                label: "${labels['global.return']}",
                                 cssClass: "btn btn-secondary",
                                 action: function (modalWrapper, button, buttonData, originalEvent) {
                                     modalWrapper.hide();
                                 }
                             },
                             {
-                                label: "Redirect",
+                                label: "${labels['globa.redirectToLoginPage']}",
                                 cssClass: "btn btn-danger",
                                 action: function (modalWrapper, button, buttonData, originalEvent) {
                                     modalWrapper.hide();
@@ -344,6 +348,37 @@
                     });
                     // switch between locales
                     numeral.locale('ar');
+
+                    $.extend(true, $.fn.dataTable.defaults, {
+                        "language": {
+                            "sProcessing": "جارٍ التحميل...",
+                            "sLengthMenu": "أظهر _MENU_ سجل",
+                            "sZeroRecords": "لم يعثر على أية سجلات",
+                            "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ سجل",
+                            "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
+                            "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
+                            "sInfoPostFix": "",
+                            "sInfoSelect": "إختيار",
+                            "sSearch": "ابحث:",
+                            "sUrl": "",
+                            "decimal": ".",
+                            "thousands": ",",
+                            "oPaginate": {
+                                "sFirst": "الأول",
+                                "sPrevious": "السابق",
+                                "sNext": "التالي",
+                                "sLast": "الأخير"
+                            },
+                            select: {
+                                rows: {
+                                    _: "تم إختيار %d سجل",
+                                    0: "إضغط على السجل ليتم إختياره",
+                                    1: "تم إختيار سجل"
+                                }
+                            },
+                            "emptyTable": "لا يوجد أي سجلات"
+                        }
+                    });
                 }
             });
         </script>

@@ -147,7 +147,7 @@
     <div id="contextMenu" class="dropdown-menu" role="menu" style="display:none;position: fixed;" >
         <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Add-New-User-Action">
             <i class="fa fa-fw fa-user text-primary"></i>
-            ${labels['domain.user.btn.CreateNewUser']}
+            ${labels['domain.user.CreateNewUser']}
         </a>
         <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Add-New-User-Popup-Action">
             <i class="fa fa-external-link-alt fa-fw text-primary"></i>
@@ -357,10 +357,10 @@
                         //                    minDate: moment(),
                         locale: {
                             "direction": javatmp.settings.direction,
-                            format: 'DD/MM/YYYY'
+                            format: javatmp.settings.dateFormat
                         }
                     }, function (start, end, label) {
-                        var formatedDateSelected = moment(start).locale('en').format("DD/MM/YYYY");
+                        var formatedDateSelected = moment(start).locale('en').format(javatmp.settings.dateFormat);
                         birthdateFilterInput.val(formatedDateSelected).trigger("change");
                     });
 
@@ -576,9 +576,9 @@
                             var end = $this.data("end");
                             var val = "";
                             if ((start !== undefined) && (end !== undefined)) {
-                                val = start.locale('en').format("YYYY-MM-DDTHH:mm:ss.SSSZ")
+                                val = start.locale('en').format(javatmp.settings.networkDateFormat)
                                         + "##TO##"
-                                        + end.locale('en').format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+                                        + end.locale('en').format(javatmp.settings.networkDateFormat);
                             }
                             api.column(12).search(val ? val : '', false, false).draw();
                         }, 200, "@userlist-main-table-filter");
@@ -594,7 +594,7 @@
                         autoUpdateInput: false,
                         locale: {
                             "direction": javatmp.settings.direction,
-                            format: 'MM/DD/YYYY HH:mm:ss'
+                            format: javatmp.settings.dateTimeSecondFormat
 
                         },
                         ranges: {
@@ -609,7 +609,7 @@
                     creationdateFilterInput.on('apply.daterangepicker', function (ev, picker) {
                         creationdateFilterInput.data("start", picker.startDate);
                         creationdateFilterInput.data("end", picker.endDate);
-                        creationdateFilterInput.val(picker.startDate.format('MM/DD/YYYY HH:mm:ss') + ' - ' + picker.endDate.format('MM/DD/YYYY HH:mm:ss')).trigger("change");
+                        creationdateFilterInput.val(picker.startDate.format(javatmp.settings.dateTimeSecondFormat) + ' - ' + picker.endDate.format(javatmp.settings.dateTimeSecondFormat)).trigger("change");
                     });
                     creationdateFilterInput.on('cancel.daterangepicker', function (ev, picker) {
                         creationdateFilterInput.removeData("start");
@@ -679,16 +679,16 @@
                         data: 'birthDate', "type": "date", name: "birthDate", width: "9rem",
                         "render": function (data, type, row) {
                             if (type === "sort" || type === 'type' || type === 'filter') {
-                                return moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY HH:mm');
+                                return moment(data, javatmp.settings.networkDateFormat).format(javatmp.settings.dateTimeFormat);
                             } else {
-                                return "<p class='m-0 p-0' style='width: 9rem;'>" + moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY') + "</p>";
+                                return "<p class='m-0 p-0' style='width: 9rem;'>" + moment(data, javatmp.settings.networkDateFormat).format(javatmp.settings.dateFormat) + "</p>";
                             }
                         }
                     },
                     {
                         data: 'birthDate', name: "age", "type": "date", width: "4rem",
                         "render": function (data, type, row) {
-                            data = Math.ceil(moment().diff(moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ"), 'years', true));
+                            data = Math.ceil(moment().diff(moment(data, javatmp.settings.networkDateFormat), 'years', true));
                             if (type === "display") {
                                 return "<p class='m-0 p-0' style='width: 4rem;'>" + data + "</p>";
                             } else {
@@ -757,9 +757,9 @@
                     {data: 'creationDate', "type": "date", name: "creationDate", width: "9rem",
                         "render": function (data, type, row) {
                             if (type === "sort" || type === 'type' || type === 'filter') {
-                                return moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY HH:mm');
+                                return moment(data, javatmp.settings.networkDateFormat).format(javatmp.settings.dateTimeFormat);
                             } else {
-                                return "<p class='m-0 p-0 text-truncate' style='width: 9rem;'>" + moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format('DD/MM/YYYY HH:mm') + "</p>";
+                                return "<p class='m-0 p-0 text-truncate' style='width: 9rem;'>" + moment(data, javatmp.settings.networkDateFormat).format(javatmp.settings.dateTimeFormat) + "</p>";
                             }
 
                         }}
@@ -970,48 +970,50 @@
                                         closeByKeyboard: false
                                     });
                                     m.originalModal.find(".modal-dialog").css({transition: 'all 0.5s'});
-                                    m.show();
-                                    $.ajax({
-                                        type: "POST",
-                                        url: javatmp.settings.contextPath + "/user/ActivateUserController",
-                                        data: passData,
+                                    m.originalModal.on('shown.bs.modal', function (e) {
+                                        $.ajax({
+                                            type: "POST",
+                                            url: javatmp.settings.contextPath + "/user/ActivateUserController",
+                                            data: passData,
 //                                        dataType: "json",
-                                        //                                        contentType: "application/json; charset=UTF-8",
-                                        success: function (data) {
-                                            m.updateMessage(data.message);
-                                            m.updateClosable(true);
-                                            m.updateClosableByBackdrop(true);
-                                            m.updateTitle(data.title);
+                                            //                                        contentType: "application/json; charset=UTF-8",
+                                            success: function (data) {
+                                                m.updateMessage(data.message);
+                                                m.updateClosable(true);
+                                                m.updateClosableByBackdrop(true);
+                                                m.updateTitle(data.title);
 
-                                            toastr.success(data.message, data.title, {
-                                                timeOut: 5000,
-                                                progressBar: true,
-                                                rtl: javatmp.settings.isRTL,
-                                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                                            });
+                                                toastr.success(data.message, data.title, {
+                                                    timeOut: 5000,
+                                                    progressBar: true,
+                                                    rtl: javatmp.settings.isRTL,
+                                                    positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                                                });
 
-                                            // refresh users table:
-                                            table.columns.adjust().draw();
-                                        },
-                                        error: function (data) {
-                                            var errorMsg = javatmp.settings.labels["dialog.error.message"];
-                                            try {
-                                                var jsonData = $.parseJSON(data.responseText);
-                                                errorMsg = jsonData.message;
-                                            } catch (error) {
+                                                // refresh users table:
+                                                table.columns.adjust().draw();
+                                            },
+                                            error: function (data) {
+                                                var errorMsg = javatmp.settings.labels["dialog.error.message"];
+                                                try {
+                                                    var jsonData = $.parseJSON(data.responseText);
+                                                    errorMsg = jsonData.message;
+                                                } catch (error) {
+                                                }
+                                                m.updateMessage(errorMsg);
+                                                m.updateClosable(true);
+                                                m.updateTitle(javatmp.settings.labels["dialog.error.title"]);
+
+                                                toastr.error(errorMsg, javatmp.settings.labels["dialog.error.title"], {
+                                                    timeOut: 3000,
+                                                    progressBar: true,
+                                                    rtl: javatmp.settings.isRTL,
+                                                    positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                                                });
                                             }
-                                            m.updateMessage(errorMsg);
-                                            m.updateClosable(true);
-                                            m.updateTitle(javatmp.settings.labels["dialog.error.title"]);
-
-                                            toastr.error(errorMsg, javatmp.settings.labels["dialog.error.title"], {
-                                                timeOut: 3000,
-                                                progressBar: true,
-                                                rtl: javatmp.settings.isRTL,
-                                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                                            });
-                                        }
+                                        });
                                     });
+                                    m.show();
                                 }
                             }
                         ]
@@ -1054,48 +1056,50 @@
                                         closeByKeyboard: false
                                     });
                                     m.originalModal.find(".modal-dialog").css({transition: 'all 0.5s'});
-                                    m.show();
-                                    $.ajax({
-                                        type: "POST",
-                                        url: javatmp.settings.contextPath + "/user/DeactivateUserController",
-                                        data: passData,
+                                    m.originalModal.on('shown.bs.modal', function (e) {
+                                        $.ajax({
+                                            type: "POST",
+                                            url: javatmp.settings.contextPath + "/user/DeactivateUserController",
+                                            data: passData,
 //                                        dataType: "json",
-                                        //                                        contentType: "application/json; charset=UTF-8",
-                                        success: function (data) {
-                                            m.updateMessage(data.message);
-                                            m.updateClosable(true);
-                                            m.updateClosableByBackdrop(true);
-                                            m.updateTitle(data.title);
+                                            //                                        contentType: "application/json; charset=UTF-8",
+                                            success: function (data) {
+                                                m.updateMessage(data.message);
+                                                m.updateClosable(true);
+                                                m.updateClosableByBackdrop(true);
+                                                m.updateTitle(data.title);
 
-                                            toastr.success(data.message, data.title, {
-                                                timeOut: 5000,
-                                                progressBar: true,
-                                                rtl: javatmp.settings.isRTL,
-                                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                                            });
+                                                toastr.success(data.message, data.title, {
+                                                    timeOut: 5000,
+                                                    progressBar: true,
+                                                    rtl: javatmp.settings.isRTL,
+                                                    positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                                                });
 
-                                            // refresh users table:
-                                            table.columns.adjust().draw();
-                                        },
-                                        error: function (data) {
-                                            var errorMsg = javatmp.settings.labels["dialog.error.message"];
-                                            try {
-                                                var jsonData = $.parseJSON(data.responseText);
-                                                errorMsg = jsonData.message;
-                                            } catch (error) {
+                                                // refresh users table:
+                                                table.columns.adjust().draw();
+                                            },
+                                            error: function (data) {
+                                                var errorMsg = javatmp.settings.labels["dialog.error.message"];
+                                                try {
+                                                    var jsonData = $.parseJSON(data.responseText);
+                                                    errorMsg = jsonData.message;
+                                                } catch (error) {
+                                                }
+                                                m.updateMessage(errorMsg);
+                                                m.updateClosable(true);
+                                                m.updateTitle(javatmp.settings.labels["dialog.error.title"]);
+
+                                                toastr.error(errorMsg, javatmp.settings.labels["dialog.error.title"], {
+                                                    timeOut: 3000,
+                                                    progressBar: true,
+                                                    rtl: javatmp.settings.isRTL,
+                                                    positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                                                });
                                             }
-                                            m.updateMessage(errorMsg);
-                                            m.updateClosable(true);
-                                            m.updateTitle(javatmp.settings.labels["dialog.error.title"]);
-
-                                            toastr.error(errorMsg, javatmp.settings.labels["dialog.error.title"], {
-                                                timeOut: 3000,
-                                                progressBar: true,
-                                                rtl: javatmp.settings.isRTL,
-                                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                                            });
-                                        }
+                                        });
                                     });
+                                    m.show();
                                 }
                             }
                         ]
