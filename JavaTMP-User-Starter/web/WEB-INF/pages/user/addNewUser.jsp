@@ -20,25 +20,30 @@
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.firstName']}</label>
-                                    <input class="form-control" type="text" placeholder="${labels['domain.user.firstName']}" name="firstName">
+                                    <input class="form-control required" type="text" placeholder="${labels['domain.user.firstName']}" name="firstName">
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.lastName']}</label>
-                                    <input class="form-control" type="text" placeholder="${labels['domain.user.lastName']}" name="lastName">
+                                    <input class="form-control required" type="text" placeholder="${labels['domain.user.lastName']}" name="lastName">
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.birthDate']}</label>
-                                    <input dir="ltr" class="form-control"  type="text" name="birthOfDateStr">
+                                    <input dir="ltr" class="form-control required"
+                                           type="text" name="birthOfDateStr"
+                                           data-rule-validDate="true"
+                                           data-rule-dateBeforeNow="true">
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.email']}</label>
-                                    <input class="form-control" type="text" placeholder="${labels['domain.user.email']}" name="email">
+                                    <input class="form-control required email"
+                                           type="text" placeholder="${labels['domain.user.email']}" name="email"
+                                           data-rule-minlength="5" data-rule-maxlength="50">
                                 </div>
                             </div>
                         </div>
@@ -46,7 +51,7 @@
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.country']}</label>
-                                    <select name="countryId" class="form-control">
+                                    <select name="countryId" class="form-control required">
                                         <c:choose>
                                             <c:when test="${fn:length(requestScope.countries) > 0}">
                                                 <option value="">${labels['page.text.kindlySelect']}</option>
@@ -64,7 +69,7 @@
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.lang']}</label>
-                                    <select name="lang" class="form-control">
+                                    <select name="lang" class="form-control required">
                                         <c:choose>
                                             <c:when test="${fn:length(requestScope.languages) > 0}">
                                                 <option value="">${labels['page.text.kindlySelect']}</option>
@@ -82,7 +87,7 @@
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.theme']}</label>
-                                    <select name="theme" class="form-control">
+                                    <select name="theme" class="form-control required">
                                         <c:choose>
                                             <c:when test="${fn:length(requestScope.themes) > 0}">
                                                 <option value="">${labels['page.text.kindlySelect']}</option>
@@ -100,7 +105,7 @@
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.timezone']}</label>
-                                    <select name="timezone" class="form-control">
+                                    <select name="timezone" class="form-control required">
                                         <option value="">${labels['page.text.kindlySelect']}</option>
                                         <c:choose>
                                             <c:when test="${fn:length(requestScope.timezones) > 0}">
@@ -120,22 +125,27 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.userName']}</label>
-                                    <input class="form-control" type="text" autocomplete="off" placeholder="${labels['domain.user.userName']}"
-                                           name="userName">
+                                    <input class="form-control required" type="text" autocomplete="off"
+                                           placeholder="${labels['domain.user.userName']}"
+                                           name="userName"
+                                           data-rule-minlength="6"
+                                           data-rule-maxlength="20">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.password']}</label>
-                                    <input class="form-control" type="password" autocomplete="off"
+                                    <input class="form-control required" type="password" autocomplete="off"
                                            placeholder="${labels['domain.user.password']}" name="password">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.reTypePassword']}</label>
-                                    <input class="form-control" type="password" autocomplete="off" placeholder="${labels['domain.user.reTypePassword']}"
-                                           name="rpassword">
+                                    <input class="form-control required" type="password" autocomplete="off"
+                                           placeholder="${labels['domain.user.reTypePassword']}"
+                                           name="rpassword"
+                                           data-rule-equalto="form input[name='password']">
                                 </div>
                             </div>
                         </div>
@@ -144,7 +154,7 @@
                                 <div class="form-group">
                                     <label for="exampleFormControlFile1">${labels['domain.user.Document']}</label>
                                     <div class="custom-file">
-                                        <input name="profilePicture" type="file" class="custom-file-input" id="validatedCustomFile">
+                                        <input name="profilePicture" type="file" class="custom-file-input required" id="validatedCustomFile">
                                         <label class="custom-file-label" for="validatedCustomFile">${labels['domain.user.Document']}</label>
                                     </div>
                                 </div>
@@ -169,13 +179,15 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label">${labels['domain.user.address']}</label>
-                            <textarea rows="5" class="form-control forceValidate" placeholder="" name="address"></textarea>
+                            <textarea class="form-control forceValidate" placeholder="" name="address"
+                                      data-rule-summernoteRequired="true"
+                                      data-rule-maxlength="400"></textarea>
                         </div>
                         <div class="form-row">
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <div class="custom-control custom-checkbox">
-                                        <input name="tnc" type="checkbox" class="custom-control-input" id="tncInputId">
+                                        <input name="tnc" type="checkbox" class="custom-control-input required" id="tncInputId">
                                         <label class="custom-control-label" for="tncInputId">
                                             ${labels["page.register.agreeLabelText"]}
                                             <a href="javascript:;">${labels["page.register.termsOfService"]}</a>
@@ -244,81 +256,9 @@
             }
         });
         // pre-submit callback
+        // initialize jQuery Validation plugin using global data.
+        validator = form.validate($.extend(true, {}, javatmp.settings.jqueryValidationDefaultOptions, {}));
 
-        validator = form.validate($.extend(true, {}, javatmp.settings.jqueryValidationDefaultOptions, {
-            ignore1: ":hidden:not(.forceValidate)",
-            ignore: ":hidden:not(.forceValidate), [contenteditable='true']:not([name])",
-            rules: {
-                firstName: {
-                    required: true
-                },
-                lastName: {
-                    required: true
-                },
-                email: {
-                    required: true,
-                    email: true,
-                    minlength: 5,
-                    maxlength: 50
-                },
-                birthOfDateStr: {
-                    required: true,
-                    validDate: true,
-                    dateBeforeNow: true
-                },
-                countryId: {
-                    required: true
-                },
-                address: {
-                    required: true,
-                    maxlength: 400
-                },
-                userName: {
-                    required: true
-                },
-                password: {
-                    required: true,
-                    minlength: 6,
-                    maxlength: 20
-                },
-                rpassword: {
-                    required: true,
-                    equalTo: $("input[name='password']", form)
-                },
-                profilePicture: {
-                    required: true
-                },
-                tnc: {
-                    required: true
-                },
-                note: {
-                    required: true,
-                    summernoteRequired: true
-                },
-                lang: {
-                    required: true
-                },
-                timezone: {
-                    required: true
-                },
-                theme: {
-                    required: true
-                }
-
-            },
-            messages: {
-                birthOfDateStr: {
-                    validDate: "Kindly Provide a valid date value in format DD/MM/YYYY",
-                    dateBeforeNow: "Kindly Provide a date in the past before today at least"
-                },
-                note: {
-                    summernoteRequired: "Kindly Provide a note"
-                }
-            }
-        }));
-//            form.find("input[name='birthOfDateStr']").css({
-//                "text-align": javatmp.settings.floatDefault
-//            });
         form.find("input[name='birthOfDateStr']").inputmask({
             alias: "datetime",
             placeholder: "dd/mm/yyyy",

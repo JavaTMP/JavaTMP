@@ -385,6 +385,7 @@
         <script type="text/javascript">
             jQuery(function ($) {
                 javatmp.settings.jqueryValidationDefaultOptions = {
+                    ignore: ":hidden:not(.forceValidate), [contenteditable='true']:not([name])",
                     rules: {},
                     messages: {},
                     highlight: function (element) {
@@ -405,62 +406,94 @@
                         }
                     }
                 };
+                $.extend($.validator.messages, {
+                    summernoteRequired: $.validator.messages.required,
+                    validDate: "Please enter a valid date",
+                    validDateTime: "Please enter a valid date and time",
+                    dateBeforeNow: "Must be less than Today",
+                    dateTimeBeforeNow: "Must be less than Now",
+                    dateGreaterThan: "Must be greater than other value",
+                    dateLessThan: 'Must be less than other value',
+                    dateEqualOrGreaterThan: 'Must be equal or greater than other value',
+                    dateEqualOrLessThan: 'Must be equal or less than other value'
+                });
+                if (javatmp.user.lang === "ar") {
+                    $.extend($.validator.messages, {
+                        summernoteRequired: $.validator.messages.required,
+                        validDate: "الرجاء إدخال تاريخ صحيح",
+                        validDateTime: "الرجاء إدخال تاريخ ووقت صحيحين",
+                        dateBeforeNow: "يجب أن يكون التاريخ أقدم من اليوم",
+                        dateTimeBeforeNow: "يجب أن يكون التاريخ والوقت أقدم من الأن",
+                        dateGreaterThan: "يجب أن يكون التاريخ احدث",
+                        dateLessThan: 'يجب أن يكون التاريخ أقدم',
+                        dateEqualOrGreaterThan: 'يجب أن يكون التاريخ يساوي أو أحدث',
+                        dateEqualOrLessThan: 'يجب أن يكون التاريخ يساوي أو أقدم'
+                    });
+                }
+
                 // register global jquery validator methods:
                 jQuery.validator.addMethod("summernoteRequired", function (value, element, params) {
-                    if (this.optional(element))
+                    if ((value !== "") && (value !== "<p><br></p>")) {
                         return true;
-                    if (value !== "" && value !== "<p><br></p>")
-                        return true;
+                    }
                     return false;
-                }, 'Kindly Provide a value');
-                jQuery.validator.addMethod("validDate", function (value, element) {
-                    return this.optional(element) || moment(value, "DD/MM/YYYY", true).isValid();
-                }, "Please enter a valid date in the format DD/MM/YYYY");
+                }, $.validator.messages.summernoteRequired);
+
+                jQuery.validator.addMethod("validDate", function (value, element, params) {
+                    return this.optional(element) || moment(value, javatmp.settings.dateFormat, true).isValid();
+                }, $.validator.messages.validDate);
+
                 jQuery.validator.addMethod("validDateTime", function (value, element) {
-                    return this.optional(element) || moment(value, "DD/MM/YYYY HH:mm", true).isValid();
-                }, "Please enter a valid date in the format DD/MM/YYYY HH:MI");
+                    return this.optional(element) || moment(value, javatmp.settings.dateTimeFormat, true).isValid();
+                }, $.validator.messages.validDateTime);
+
                 jQuery.validator.addMethod("dateTimeBeforeNow", function (value, element, params) {
                     if (this.optional(element) || $(params).val() === "")
                         return true;
-                    if (moment(value, "DD/MM/YYYY HH:mm").isBefore(moment()))
+                    if (moment(value, javatmp.settings.dateTimeFormat).isBefore(moment()))
                         return true;
                     return false;
-                }, 'Must be less than Now.');
+                }, $.validator.messages.dateTimeBeforeNow);
+
                 jQuery.validator.addMethod("dateBeforeNow", function (value, element, params) {
                     if (this.optional(element) || value === "")
                         return true;
-                    if (moment(value, "DD/MM/YYYY").isBefore(moment().set({hour: 0, minute: 0, second: 0, millisecond: 0})))
+                    if (moment(value, javatmp.settings.dateFormat).isBefore(moment().set({hour: 0, minute: 0, second: 0, millisecond: 0})))
                         return true;
                     return false;
-                }, 'Must be less than Now.');
+                }, $.validator.messages.dateBeforeNow);
+
                 jQuery.validator.addMethod("dateGreaterThan", function (value, element, params) {
                     if (this.optional(element) || $(params).val() === "")
                         return true;
-                    if (moment(value, "DD/MM/YYYY HH:mm").isAfter(moment($(params).val(), "DD/MM/YYYY HH:mm")))
+                    if (moment(value, javatmp.settings.dateTimeFormat).isAfter(moment($(params).val(), javatmp.settings.dateTimeFormat)))
                         return true;
                     return false;
-                }, 'Must be greater than other value.');
+                }, $.validator.messages.dateGreaterThan);
+
                 jQuery.validator.addMethod("dateLessThan", function (value, element, params) {
                     if (this.optional(element) || $(params).val() === "")
                         return true;
-                    if (moment(value, "DD/MM/YYYY HH:mm").isBefore(moment($(params).val(), "DD/MM/YYYY HH:mm")))
+                    if (moment(value, javatmp.settings.dateTimeFormat).isBefore(moment($(params).val(), javatmp.settings.dateTimeFormat)))
                         return true;
                     return false;
-                }, 'Must be less than other value.');
+                }, $.validator.messages.dateLessThan);
+
                 jQuery.validator.addMethod("dateEqualOrGreaterThan", function (value, element, params) {
                     if (this.optional(element) || $(params).val() === "")
                         return true;
-                    if (moment(value, "DD/MM/YYYY HH:mm").isSameOrAfter(moment($(params).val(), "DD/MM/YYYY HH:mm")))
+                    if (moment(value, javatmp.settings.dateTimeFormat).isSameOrAfter(moment($(params).val(), javatmp.settings.dateTimeFormat)))
                         return true;
                     return false;
-                }, 'Must be equal or greater than other value.');
+                }, $.validator.messages.dateEqualOrGreaterThan);
+
                 jQuery.validator.addMethod("dateEqualOrLessThan", function (value, element, params) {
                     if (this.optional(element) || $(params).val() === "")
                         return true;
-                    if (moment(value, "DD/MM/YYYY HH:mm").isSameOrBefore(moment($(params).val(), "DD/MM/YYYY HH:mm")))
+                    if (moment(value, javatmp.settings.dateTimeFormat).isSameOrBefore(moment($(params).val(), javatmp.settings.dateTimeFormat)))
                         return true;
                     return false;
-                }, 'Must be equal or less than other value.');
+                }, $.validator.messages.dateEqualOrLessThan);
             });
         </script>
         <script type="text/javascript">
