@@ -33,7 +33,7 @@
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.birthDate']}</label>
                                     <input dir="ltr" class="form-control required"
-                                           type="text" name="birthOfDateStr"
+                                           type="text" name="birthOfDate"
                                            data-rule-validDate="true"
                                            data-rule-dateBeforeNow="true">
                                 </div>
@@ -230,7 +230,7 @@
             },
             beforeSubmit: function (formData, jqForm, options) {
                 for (var i = 0; i < formData.length; i++) {
-                    if (formData[i].name === "birthOfDateStr") {
+                    if (formData[i].name === "birthOfDate") {
                         var value = formData[i].value;
                         var newDate = moment(value, javatmp.settings.dateFormat).locale('en').format(javatmp.settings.networkDateFormat);
                         formData.push({"name": "birthDate", "value": newDate});
@@ -259,7 +259,7 @@
         // initialize jQuery Validation plugin using global data.
         validator = form.validate($.extend(true, {}, javatmp.settings.jqueryValidationDefaultOptions, {}));
 
-        form.find("input[name='birthOfDateStr']").inputmask({
+        form.find("input[name='birthOfDate']").inputmask({
             alias: "datetime",
             placeholder: "dd/mm/yyyy",
             inputFormat: "dd/mm/yyyy",
@@ -267,7 +267,7 @@
             hourFormat: "24",
             clearMaskOnLostFocus: false
         });
-        form.find("input[name='birthOfDateStr']").daterangepicker({
+        form.find("input[name='birthOfDate']").daterangepicker({
             "opens": javatmp.settings.floatReverse,
             startDate: moment().format(javatmp.settings.dateFormat),
             singleDatePicker: true,
@@ -287,7 +287,7 @@
             }
         }, function (start, end, label) {
             var formatedDateSelected = moment(start).locale('en').format(javatmp.settings.dateFormat);
-            form.find("input[name='birthOfDateStr']").val(formatedDateSelected).trigger("change");
+            form.find("input[name='birthOfDate']").val(formatedDateSelected).trigger("change");
         });
         $(".daterangepicker.dropdown-menu").css('z-index', 600 + 1);
         form.find("textarea[name='address']").summernote({
