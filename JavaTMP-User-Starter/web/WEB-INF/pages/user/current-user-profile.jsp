@@ -21,7 +21,7 @@
                                 <div class="form-row">
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="form-group form-row">
-                                            <label class="text-right control-label col-sm-5 col-form-label">${labels['domain.user.id']}</label>
+                                            <label class="text-sm-right control-label col-sm-5 col-form-label">${labels['domain.user.id']}</label>
                                             <div class="col-sm-7">
                                                 <input readonly="readonly" class="form-control-plaintext" type="text" name="id" value="${requestScope.user.id}">
                                             </div>
@@ -29,7 +29,7 @@
                                     </div>
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="form-group form-row">
-                                            <label class="text-right control-label col-sm-5 col-form-label">${labels['domain.user.status']}</label>
+                                            <label class="text-sm-right control-label col-sm-5 col-form-label">${labels['domain.user.status']}</label>
                                             <div class="col-sm-7">
                                                 <select name="status" class="custom-select" data-rule-required="true">
                                                     <option ${requestScope.user.status == 1 ? 'selected="selected"' : ''} value="1">Activated</option>
@@ -42,7 +42,7 @@
                                 <div class="form-row">
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="form-group form-row">
-                                            <label class="text-right control-label col-sm-5 col-form-label">${labels['domain.user.firstName']}</label>
+                                            <label class="text-sm-right control-label col-sm-5 col-form-label">${labels['domain.user.firstName']}</label>
                                             <div class="col-sm-7">
                                                 <input class="form-control" type="text" placeholder="${labels['domain.user.firstName']}"
                                                        name="firstName" value="${requestScope.user.firstName}" data-rule-required="true">
@@ -51,7 +51,7 @@
                                     </div>
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="form-group form-row">
-                                            <label class="text-right control-label col-sm-5 col-form-label">${labels['domain.user.lastName']}</label>
+                                            <label class="text-sm-right control-label col-sm-5 col-form-label">${labels['domain.user.lastName']}</label>
                                             <div class="col-sm-7">
                                                 <input class="form-control" type="text" placeholder="${labels['domain.user.lastName']}"
                                                        name="lastName" value="${requestScope.user.lastName}" data-rule-required="true">
@@ -60,7 +60,7 @@
                                     </div>
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="form-group form-row">
-                                            <label class="text-right control-label col-sm-5 col-form-label">${labels['domain.user.birthDate']}</label>
+                                            <label class="text-sm-right control-label col-sm-5 col-form-label">${labels['domain.user.birthDate']}</label>
                                             <div class="col-sm-7">
                                                 <input dir="ltr" class="form-control"  type="text" name="birthDate"
                                                        value="<fmt:formatDate pattern='dd/MM/yyyy' timeZone="${sessionScope.user.timezone}" value='${requestScope.user.birthDate}'/>"
@@ -72,7 +72,7 @@
                                     </div>
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="form-group form-row">
-                                            <label class="text-right control-label col-sm-5 col-form-label">${labels['domain.user.email']}</label>
+                                            <label class="text-sm-right control-label col-sm-5 col-form-label">${labels['domain.user.email']}</label>
                                             <div class="col-sm-7">
                                                 <input class="form-control" type="text" placeholder="${labels['domain.user.email']}"
                                                        name="email" value="${requestScope.user.email}"
@@ -85,7 +85,7 @@
                                     </div>
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="form-group form-row">
-                                            <label class="text-right control-label col-sm-5 col-form-label">${labels['domain.user.country']}</label>
+                                            <label class="text-sm-right control-label col-sm-5 col-form-label">${labels['domain.user.country']}</label>
                                             <div class="col-sm-7">
                                                 <select name="countryId" class="form-control" data-rule-required="true">
                                                     <c:choose>
@@ -105,7 +105,7 @@
                                     </div>
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="form-group form-row">
-                                            <label class="text-right control-label col-sm-5 col-form-label">${labels['domain.user.lang']}</label>
+                                            <label class="text-sm-right control-label col-sm-5 col-form-label">${labels['domain.user.lang']}</label>
                                             <div class="col-sm-7">
                                                 <select name="lang" class="form-control" data-rule-required="true">
                                                     <c:choose>
@@ -125,7 +125,7 @@
                                     </div>
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="form-group form-row">
-                                            <label class="text-right control-label col-sm-5 col-form-label">${labels['domain.user.theme']}</label>
+                                            <label class="text-sm-right control-label col-sm-5 col-form-label">${labels['domain.user.theme']}</label>
                                             <div class="col-sm-7">
                                                 <select name="theme" class="form-control" data-rule-required="true">
                                                     <c:choose>
@@ -145,7 +145,7 @@
                                     </div>
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="form-group form-row">
-                                            <label class="text-right control-label col-sm-5 col-form-label">${labels['domain.user.timezone']}</label>
+                                            <label class="text-sm-right control-label col-sm-5 col-form-label">${labels['domain.user.timezone']}</label>
                                             <div class="col-sm-7">
                                                 <select name="timezone" class="form-control" data-rule-required="true">
                                                     <option value="">${labels['page.text.kindlySelect']}</option>
@@ -168,7 +168,7 @@
                                 <div class="form-row">
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="form-group form-row">
-                                            <label class="text-right control-label col-sm-5 col-form-label">${labels['domain.user.userName']}</label>
+                                            <label class="text-sm-right control-label col-sm-5 col-form-label">${labels['domain.user.userName']}</label>
                                             <div class="col-sm-7">
                                                 <input class="form-control" type="text" autocomplete="off" placeholder="${labels['domain.user.userName']}"
                                                        name="userName" value="${requestScope.user.userName}"
@@ -180,7 +180,7 @@
                                     </div>
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="form-group form-row">
-                                            <label class="text-right control-label col-sm-5 col-form-label">${labels['domain.user.currentPassword']}</label>
+                                            <label class="text-sm-right control-label col-sm-5 col-form-label">${labels['domain.user.currentPassword']}</label>
                                             <div class="col-sm-7">
                                                 <input class="form-control" type="password" autocomplete="off"
                                                        placeholder="${labels['domain.user.currentPassword']}" name="oldPassword"
@@ -190,7 +190,7 @@
                                     </div>
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="form-group form-row">
-                                            <label class="text-right control-label col-sm-5 col-form-label">${labels['domain.user.newPassword']}</label>
+                                            <label class="text-sm-right control-label col-sm-5 col-form-label">${labels['domain.user.newPassword']}</label>
                                             <div class="col-sm-7">
                                                 <input class="form-control" type="password" autocomplete="off"
                                                        placeholder="${labels['domain.user.newPassword']}" name="password"
@@ -200,7 +200,7 @@
                                     </div>
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="form-group form-row">
-                                            <label class="text-right control-label col-sm-5 col-form-label">${labels['domain.user.reTypeNewPassword']}</label>
+                                            <label class="text-sm-right control-label col-sm-5 col-form-label">${labels['domain.user.reTypeNewPassword']}</label>
                                             <div class="col-sm-7">
                                                 <input class="form-control" type="password" autocomplete="off" placeholder="${labels['domain.user.reTypeNewPassword']}"
                                                        name="rpassword"
@@ -213,7 +213,7 @@
                                 <div class="form-row">
                                     <div class="col-lg-12">
                                         <div class="form-group form-row">
-                                            <label class="text-right control-label col-sm-1 col-form-label" for="exampleFormControlFile1">${labels['domain.user.Document']}</label>
+                                            <label class="text-sm-right control-label col-sm-1 col-form-label" for="exampleFormControlFile1">${labels['domain.user.Document']}</label>
                                             <div class="col-sm-6">
                                                 <div class="custom-file">
                                                     <input name="profilePicture" type="file" class="custom-file-input"
@@ -260,7 +260,7 @@
                                 <div class="form-row">
                                     <div class="col-lg-12">
                                         <div class="form-group">
-                                            <label class="text-right control-label">${labels['domain.user.address']}</label>
+                                            <label class="text-sm-right control-label">${labels['domain.user.address']}</label>
                                             <textarea rows="5" class="form-control forceValidate"
                                                       placeholder="${labels['domain.user.address']}"
                                                       name="address"
