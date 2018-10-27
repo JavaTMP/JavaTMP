@@ -247,7 +247,6 @@
                         var value = formData[i].value;
                         var newDate = moment(value, javatmp.settings.dateFormat).locale('en').format(javatmp.settings.networkDateFormat);
                         formData[i].value = newDate;
-                        //formData.push({"name": "birthDate", "value": newDate});
                         break;
                     }
                 }
@@ -278,185 +277,24 @@
         // initialize jQuery Validation plugin using global data.
         validator = form.validate($.extend(true, {}, javatmp.settings.jqueryValidationDefaultOptions, {}));
 
-        form.find("input[name='birthDate']").inputmask({
-            alias: "datetime",
-            placeholder: "dd/mm/yyyy",
-            inputFormat: "dd/mm/yyyy",
-            displayFormat: true,
-            hourFormat: "24",
-            clearMaskOnLostFocus: false
-        });
-        form.find("input[name='birthDate']").daterangepicker({
-            "opens": javatmp.settings.floatReverse,
-            startDate: moment().format(javatmp.settings.dateFormat),
-            singleDatePicker: true,
-            showDropdowns: true,
-            timePicker: false,
-            timePickerIncrement: 1,
-            timePicker24Hour: true,
-            autoApply: true,
-            autoUpdateInput: false,
-            minDate: '01/01/1900',
-            maxDate: '31/12/2099',
-            //                    maxDate: '',
-            //                    minDate: moment(),
-            locale: {
-                "direction": javatmp.settings.direction,
-                format: javatmp.settings.dateFormat
-            }
-        }, function (start, end, label) {
-            var formatedDateSelected = moment(start).locale('en').format(javatmp.settings.dateFormat);
-            form.find("input[name='birthDate']").val(formatedDateSelected).trigger("change");
-        });
-        $(".daterangepicker.dropdown-menu").css('z-index', 600 + 1);
-        form.find("textarea[name='address']").summernote({
-            direction: javatmp.settings.direction,
-            lang: javatmp.user.lang === "ar" ? "ar-AR" : javatmp.user.lang,
-            height: 200,
-            dialogsInBody: true
-        });
-        $.fn.select2.defaults.set("theme", "bootstrap");
-        $.fn.select2.defaults.set("dir", javatmp.settings.direction);
-        $.fn.select2.defaults.set("placeholder", javatmp.settings.labels['page.text.kindlySelect']);
+        var birthDateInputMask = javatmp.plugins.inputmaskWrapperForDate(form.find("input[name='birthDate']"));
+        var birthDateDatePicker = javatmp.plugins.daterangepickerWrapperForDate(form.find("input[name='birthDate']"));
+        var addressEditor = javatmp.plugins.summernoteWrapper(form.find("textarea[name='address']"));
+        var langSelect = javatmp.plugins.select2Wrapper(form.find("select[name='lang']"));
+        var timezoneSelect = javatmp.plugins.select2Wrapper(form.find("select[name='timezone']"));
+        var themeSelect = javatmp.plugins.select2WrapperForTheme(form.find("select[name='theme']"));
+        var countryIdSelect = javatmp.plugins.select2WrapperForCountry(form.find("select[name='countryId']"));
+        var profilePicScrollbars = javatmp.plugins.select2WrapperForCountry(form.find("#profilePicturePreviewContainerId"));
 
-        form.find("select[name='lang']").select2({
-            allowClear: true,
-            containerCssClass: ':all:',
-            width: ''
-        });
-        form.find("select[name='theme']").select2({
-            allowClear: true,
-            containerCssClass: ':all:',
-            width: '',
-            escapeMarkup: function (markup) {
-                return markup;
-            },
-            templateSelection: formatThemeSelection,
-            templateResult: formatThemeResult
-        });
-        form.find("select[name='timezone']").select2({
-            allowClear: true,
-            containerCssClass: ':all:',
-            width: ''
-        });
-        form.find("select[name='countryId']").select2({
-            theme: "bootstrap",
-            dir: javatmp.settings.direction,
-            allowClear: true,
-            containerCssClass: ':all:',
-            width: '',
-            templateSelection: formatCountrySelection,
-            templateResult: formatCountry,
-            escapeMarkup: function (markup) {
-                return markup;
-            }
-        }).on("select2:select", function () {
-            (this).focus();
-        });
-        function formatCountry(repo) {
-            if (repo.loading)
-                return repo.text;
-            var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
-            var template =
-                    '    <div class="media d-flex align-items-center">' +
-                    '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
-                    '        <div class="media-body">' +
-                    '            <strong>{{countryText}} ({{countryId}})</strong>' +
-                    '        </div>' +
-                    '    </div>';
-            var readyData = template.composeTemplate({
-                'imagePath': imagePath,
-                'countryText': repo.text,
-                'countryId': repo.id
-            });
-            return readyData;
-        }
-        function formatCountrySelection(repo) {
-            if (!repo.id) {
-                return repo.text;
-            }
+        form.find("select[name='timezone']").val(moment.tz.guess()).trigger('change');
 
-            var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
-            var template =
-                    '    <div class="media d-flex align-items-center">' +
-                    '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
-                    '        <div class="media-body">' +
-                    '            <span>{{countryText}} ({{countryId}})</span>' +
-                    '        </div>' +
-                    '    </div>';
-            var readyData = template.composeTemplate({
-                'imagePath': imagePath,
-                'countryText': repo.text,
-                'countryId': repo.id
-            });
-            return readyData;
-        }
-        function formatThemeSelection(repo) {
-            if (!repo.id) {
-                return repo.text;
-            }
-
-            var imagePath = javatmp.settings.contextPath + "/assets/img/themes/" + repo.text + ".png";
-            var template =
-                    '    <div class="media d-flex align-items-center">' +
-                    '        <img style="height: 1.5rem;" class="mr-1" src="{{imagePath}}" alt="{{themeName}}"/>' +
-                    '        <div class="media-body">' +
-                    '            <span>{{themeName}}</span>' +
-                    '        </div>' +
-                    '    </div>';
-            var readyData = template.composeTemplate({
-                'imagePath': imagePath,
-                'themeName': repo.text
-            });
-            return readyData;
-        }
-        function formatThemeResult(repo) {
-            if (!repo.id) {
-                return repo.text;
-            }
-
-            var imagePath = javatmp.settings.contextPath + "/assets/img/themes/" + repo.text + ".png";
-            var template =
-                    '    <div class="media d-flex align-items-center">' +
-                    '        <img style="height: 75px;" class="mr-1" src="{{imagePath}}" alt="{{themeName}}"/>' +
-                    '        <div class="media-body">' +
-                    '            <span>{{themeName}}</span>' +
-                    '        </div>' +
-                    '    </div>';
-            var readyData = template.composeTemplate({
-                'imagePath': imagePath,
-                'themeName': repo.text
-            });
-            return readyData;
-        }
-        form.find("#profilePicturePreviewContainerId").mCustomScrollbar({
-            axis: "yx",
-            theme: "javatmp",
-            scrollInertia: 0,
-            advanced: {
-                updateOnContentResize: true,
-                autoExpandHorizontalScroll: true,
-                updateOnImageLoad: true
-            },
-            mouseWheel: {
-                preventDefault: true,
-                scrollAmount: 85
-            }
-        });
-        form.find("select[name='timezone']").val(moment.tz.guess()).trigger('change.select2');
-        form.find("input[name='profilePicture'][type=file]").on("change", function () {
+        form.find("input[name='profilePicture']").on("change", function () {
             if (this.files && this.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {
                     var image = form.find("img[id='profilePicturePreview']");
                     var resizeImage = form.find("img[id='profilePictureResizePreview']");
                     image.one("load", function () {
-//                            var currentImageHeight = this.height;
-//                            if (currentImageHeight > 250) {
-//                                $("#profilePicturePreviewContainerId").height(250);
-//                            } else {
-//                                $("#profilePicturePreviewContainerId").height(currentImageHeight);
-//                            }
                         form.find("#profilePicturePreviewContainerId").mCustomScrollbar("update");
                     });
                     image.attr('src', e.target.result);

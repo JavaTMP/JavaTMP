@@ -198,6 +198,7 @@
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all-locale-${sessionScope.user.lang}.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/assets/js/javatmp.plugins.js?dfdfd1423566638799763" type="text/javascript"></script>
         <script type="text/javascript">
             jQuery(function ($) {
                 var defaults = {
@@ -226,8 +227,13 @@
                 javatmp.user = {};
                 javatmp.user.id = "${sessionScope.user.id}";
                 javatmp.user.lang = "${sessionScope.user.lang}";
-                // force en as a moment locale for now
+
                 moment.locale(javatmp.user.lang);
+
+                $.fn.select2.defaults.set("theme", "bootstrap");
+                $.fn.select2.defaults.set("dir", javatmp.settings.direction);
+                $.fn.select2.defaults.set("placeholder", javatmp.settings.labels['page.text.kindlySelect']);
+
                 javatmp.settings.handle401Error = function (jqXHR, textStatus, errorThrown) {
                     var modalMessage = null;
                     var redirectURL = null;
