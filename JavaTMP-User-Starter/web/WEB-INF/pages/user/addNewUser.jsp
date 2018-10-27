@@ -284,7 +284,7 @@
         var timezoneSelect = javatmp.plugins.select2Wrapper(form.find("select[name='timezone']"));
         var themeSelect = javatmp.plugins.select2WrapperForTheme(form.find("select[name='theme']"));
         var countryIdSelect = javatmp.plugins.select2WrapperForCountry(form.find("select[name='countryId']"));
-        var profilePicScrollbars = javatmp.plugins.select2WrapperForCountry(form.find("#profilePicturePreviewContainerId"));
+        var profilePicScrollbars = javatmp.plugins.mCustomScrollbarForProfilePicture(form.find("#profilePicturePreviewContainerId"));
 
         form.find("select[name='timezone']").val(moment.tz.guess()).trigger('change');
 
