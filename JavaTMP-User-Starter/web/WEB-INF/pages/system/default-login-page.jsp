@@ -30,11 +30,11 @@
                             <form id="main-login-form" method="POST" role="form" action="${pageContext.request.contextPath}/login">
                                 <div class="form-group">
                                     <label class="control-label col-form-label">${labels['domain.user.userName']}</label>
-                                    <input class="form-control required" placeholder="${labels['domain.user.userName']}" name="userName" type="text" autofocus value="user1">
+                                    <input class="form-control required" placeholder="${labels['domain.user.userName']}" name="userName" type="text" autofocus value="user123">
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-form-label">${labels['domain.user.password']}</label>
-                                    <input class="form-control required" placeholder="${labels['domain.user.password']}" name="password" type="password" value="user1">
+                                    <input class="form-control required" placeholder="${labels['domain.user.password']}" name="password" type="password" value="user123">
                                 </div>
                                 <button disabled="" type="submit" href="javascript:;" class="btn btn-lg btn-primary btn-block">${labels['page.btn.login']}</button>
                                 <a href="${pageContext.request.contextPath}/register" class="btn btn-success btn-block">${labels['page.btn.registerPage']}</a>

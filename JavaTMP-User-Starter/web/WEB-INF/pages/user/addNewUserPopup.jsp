@@ -196,7 +196,7 @@
         // or for demo purposese ONLY we can get a reference top modal
         // in current open managed instances in BootstrapModalWrapperFactory
         var currentParentModal = BootstrapModalWrapperFactory.globalModals[BootstrapModalWrapperFactory.globalModals.length - 1];
-        currentParentModal.originalModal.find(".modal-body").css({"max-height": "75vh", "overflow-y": "auto"});
+        currentParentModal.originalModal.find(".modal-body").css({"max-height": "70vh", "overflow-y": "auto"});
 //            console.log(currentParentModal.options.id);
         $("#" + currentParentModal.options.id).on(javatmp.settings.javaTmpAjaxContainerReady, function (event, modal) {
             // fire AFTER all transition done and your ajax content is shown to user.

@@ -102,11 +102,10 @@
 
                 var userTableElement = $('#UsersListTableId');
 
-                $.fn.dataTable.ext.errMode = 'none';
                 var table = userTableElement.DataTable({
                     dom: "<'row'<'col-sm-12'tr>>" +
-                            "<'row'<'col-sm-6'i><'col-sm-6 text-right'l>>"
-                            + "<'row'<'col-sm-12'p>>"
+                            "<'row'<'col-sm-12'i>>"
+                            + "<'row'<'col-sm-4'l><'col-sm-8'p>>"
                     ,
                     //                select: true,
                     select: "single",

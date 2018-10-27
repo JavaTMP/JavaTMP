@@ -234,6 +234,8 @@
                 $.fn.select2.defaults.set("dir", javatmp.settings.direction);
                 $.fn.select2.defaults.set("placeholder", javatmp.settings.labels['page.text.kindlySelect']);
 
+                $.fn.dataTable.ext.errMode = 'none';
+
                 javatmp.settings.handle401Error = function (jqXHR, textStatus, errorThrown) {
                     var modalMessage = null;
                     var redirectURL = null;

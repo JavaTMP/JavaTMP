@@ -1036,15 +1036,13 @@
                         title: javatmp.settings.labels["dialog.inActivate.title"],
                         closable: false,
                         closeByBackdrop: false,
-                        buttons: [
-                            {
+                        buttons: [{
                                 label: javatmp.settings.labels["global.cancel"],
                                 cssClass: "btn btn-secondary",
                                 action: function (modalWrapper, button, buttonData, originalEvent) {
                                     return modalWrapper.hide();
                                 }
-                            },
-                            {
+                            }, {
                                 label: javatmp.settings.labels["page.btn.deactivateUser"],
                                 cssClass: "btn btn-warning",
                                 action: function (modalWrapper, button, buttonData, originalEvent) {
@@ -1147,5 +1145,6 @@
                 table.destroy(true);
                 return true;
             });
-        });</script>
+        });
+    </script>
 </div>
