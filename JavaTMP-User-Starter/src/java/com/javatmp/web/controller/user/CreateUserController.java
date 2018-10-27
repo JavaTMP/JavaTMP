@@ -20,8 +20,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.PersistenceException;
 import javax.servlet.ServletContext;
 
 import javax.servlet.ServletException;
@@ -30,6 +32,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 @WebServlet("/user/CreateUserController")
@@ -61,6 +64,8 @@ public class CreateUserController extends HttpServlet {
         ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         DocumentService ds = sf.getDocumentService();
         UserService us = sf.getUserService();
+        HttpSession session = request.getSession();
+        ResourceBundle labels = (ResourceBundle) session.getAttribute(Constants.LANGUAGE_ATTR_KEY);
 
         try {
             User userToBeCreated = new User();
@@ -98,7 +103,7 @@ public class CreateUserController extends HttpServlet {
             logger.info(t);
 
             userToBeCreated.setProfilePicDocument(fileUploading);
-            logger.info("UserToBeCreated is [" + MvcHelper.deepToString(userToBeCreated) + "]");
+            logger.info("UserToBeCreated is [" + MvcHelper.toString(userToBeCreated) + "]");
             userToBeCreated.setPassword(MD5Util.convertToMD5(userToBeCreated.getPassword()));
             userToBeCreated.setCreationDate(new Date());
             userToBeCreated.setStatus((short) 1);
@@ -106,21 +111,29 @@ public class CreateUserController extends HttpServlet {
             us.createNewUser(userToBeCreated);
 
             responseMessage.setOverAllStatus(true);
-            responseMessage.setMessage("User Created successfully");
+            responseMessage.setMessage(labels.getString("action.createUser.successMsg"));
             responseMessage.setData(userToBeCreated);
-
-            MvcHelper.sendMessageAsJson(response, responseMessage);
 
         } catch (IllegalStateException e) {
             logger.info("ERROR : " + e.getMessage());
             responseMessage.setOverAllStatus(false);
-            responseMessage.setMessage("The file to be uploaded exceeds its maximum permitted size of 51200 bytes - " + e.getMessage());
+            responseMessage.setMessage(labels.getString("action.createUser.wrongDocumentSize"));
             response.setStatus(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE);
             responseMessage.setStatusCode(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(CreateUserController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvocationTargetException ex) {
-            Logger.getLogger(CreateUserController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (PersistenceException e) {
+            Throwable t = e;
+            while (t.getCause() != null) {
+                t = t.getCause();
+            }
+            logger.log(Level.SEVERE, t.getMessage(), t);
+            responseMessage.setOverAllStatus(false);
+            responseMessage.setMessage(t.getMessage());
+        } catch (IllegalAccessException | InvocationTargetException ex) {
+            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            throw new ServletException(ex);
         }
+
+        MvcHelper.sendMessageAsJson(response, responseMessage);
+
     }
 }

@@ -20,20 +20,25 @@
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.firstName']}</label>
-                                    <input class="form-control required" type="text" placeholder="${labels['domain.user.firstName']}" name="firstName">
+                                    <input class="form-control" type="text" placeholder="${labels['domain.user.firstName']}"
+                                           name="firstName"
+                                           data-rule-required="true">
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.lastName']}</label>
-                                    <input class="form-control required" type="text" placeholder="${labels['domain.user.lastName']}" name="lastName">
+                                    <input class="form-control" type="text" placeholder="${labels['domain.user.lastName']}"
+                                           name="lastName"
+                                           data-rule-required="true">
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.birthDate']}</label>
-                                    <input dir="ltr" class="form-control required"
-                                           type="text" name="birthOfDate"
+                                    <input dir="ltr" class="form-control"
+                                           type="text" name="birthDate"
+                                           data-rule-required="true"
                                            data-rule-validDate="true"
                                            data-rule-dateBeforeNow="true">
                                 </div>
@@ -41,9 +46,12 @@
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.email']}</label>
-                                    <input class="form-control required email"
+                                    <input class="form-control"
                                            type="text" placeholder="${labels['domain.user.email']}" name="email"
-                                           data-rule-minlength="5" data-rule-maxlength="50">
+                                           data-rule-required="true"
+                                           data-rule-email="true"
+                                           data-rule-minlength="5"
+                                           data-rule-maxlength="50">
                                 </div>
                             </div>
                         </div>
@@ -51,7 +59,7 @@
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.country']}</label>
-                                    <select name="countryId" class="form-control required">
+                                    <select name="countryId" class="form-control" data-rule-required="true">
                                         <c:choose>
                                             <c:when test="${fn:length(requestScope.countries) > 0}">
                                                 <option value="">${labels['page.text.kindlySelect']}</option>
@@ -69,7 +77,7 @@
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.lang']}</label>
-                                    <select name="lang" class="form-control required">
+                                    <select name="lang" class="form-control" data-rule-required="true">
                                         <c:choose>
                                             <c:when test="${fn:length(requestScope.languages) > 0}">
                                                 <option value="">${labels['page.text.kindlySelect']}</option>
@@ -87,7 +95,7 @@
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.theme']}</label>
-                                    <select name="theme" class="form-control required">
+                                    <select name="theme" class="form-control" data-rule-required="true">
                                         <c:choose>
                                             <c:when test="${fn:length(requestScope.themes) > 0}">
                                                 <option value="">${labels['page.text.kindlySelect']}</option>
@@ -105,7 +113,7 @@
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.timezone']}</label>
-                                    <select name="timezone" class="form-control required">
+                                    <select name="timezone" class="form-control" data-rule-required="true">
                                         <option value="">${labels['page.text.kindlySelect']}</option>
                                         <c:choose>
                                             <c:when test="${fn:length(requestScope.timezones) > 0}">
@@ -125,9 +133,10 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.userName']}</label>
-                                    <input class="form-control required" type="text" autocomplete="off"
+                                    <input class="form-control" type="text" autocomplete="off"
                                            placeholder="${labels['domain.user.userName']}"
                                            name="userName"
+                                           data-rule-required="true"
                                            data-rule-minlength="6"
                                            data-rule-maxlength="20">
                                 </div>
@@ -136,7 +145,8 @@
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.password']}</label>
                                     <input class="form-control required" type="password" autocomplete="off"
-                                           placeholder="${labels['domain.user.password']}" name="password">
+                                           placeholder="${labels['domain.user.password']}" name="password"
+                                           data-rule-required="true">
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -145,6 +155,7 @@
                                     <input class="form-control required" type="password" autocomplete="off"
                                            placeholder="${labels['domain.user.reTypePassword']}"
                                            name="rpassword"
+                                           data-rule-required="true"
                                            data-rule-equalto="form input[name='password']">
                                 </div>
                             </div>
@@ -154,7 +165,8 @@
                                 <div class="form-group">
                                     <label for="exampleFormControlFile1">${labels['domain.user.Document']}</label>
                                     <div class="custom-file">
-                                        <input name="profilePicture" type="file" class="custom-file-input required" id="validatedCustomFile">
+                                        <input name="profilePicture" type="file" class="custom-file-input" id="validatedCustomFile"
+                                               data-rule-required="true">
                                         <label class="custom-file-label" for="validatedCustomFile">${labels['domain.user.Document']}</label>
                                     </div>
                                 </div>
@@ -187,7 +199,8 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <div class="custom-control custom-checkbox">
-                                        <input name="tnc" type="checkbox" class="custom-control-input required" id="tncInputId">
+                                        <input name="tnc" type="checkbox" class="custom-control-input" id="tncInputId"
+                                               data-rule-required="true">
                                         <label class="custom-control-label" for="tncInputId">
                                             ${labels["page.register.agreeLabelText"]}
                                             <a href="javascript:;">${labels["page.register.termsOfService"]}</a>
@@ -220,8 +233,8 @@
         var form = $('#jquery-form-plugin-test-id');
         var validator = null;
         form.ajaxForm({
-            clearForm: true, // clear all form fields after successful submit
-//                resetForm: true, // reset the form after successful submit
+            clearForm: false, // clear all form fields after successful submit
+            resetForm: false, // reset the form after successful submit
             beforeSerialize: function ($form, options) {
                 $("#summernote").summernote('triggerEvent', 'change');
                 if (!$form.valid()) {
@@ -230,14 +243,14 @@
             },
             beforeSubmit: function (formData, jqForm, options) {
                 for (var i = 0; i < formData.length; i++) {
-                    if (formData[i].name === "birthOfDate") {
+                    if (formData[i].name === "birthDate") {
                         var value = formData[i].value;
                         var newDate = moment(value, javatmp.settings.dateFormat).locale('en').format(javatmp.settings.networkDateFormat);
-                        formData.push({"name": "birthDate", "value": newDate});
+                        formData[i].value = newDate;
+                        //formData.push({"name": "birthDate", "value": newDate});
                         break;
                     }
                 }
-
             },
             success: function (response, statusText, xhr, $form) {
 //                    form.find("textarea[name='address']").summernote('code', '');
@@ -249,17 +262,23 @@
                 }).show();
             },
             error: function (xhr, status, error, $form) {
+                var errorMsg = xhr.responseText;
+                try {
+                    var jsonData = $.parseJSON(errorMsg);
+                    errorMsg = jsonData.message;
+                } catch (error) {
+                }
                 BootstrapModalWrapperFactory.createModal({
-                    title: xhr.statusText + " : " + xhr.status,
-                    message: "error[" + xhr + "][" + status + "][" + error + "][" + $form + "]"
+                    title: "${labels['global.error']}" + " : " + xhr.status,
+                    message: errorMsg
                 }).show();
             }
         });
-        // pre-submit callback
+
         // initialize jQuery Validation plugin using global data.
         validator = form.validate($.extend(true, {}, javatmp.settings.jqueryValidationDefaultOptions, {}));
 
-        form.find("input[name='birthOfDate']").inputmask({
+        form.find("input[name='birthDate']").inputmask({
             alias: "datetime",
             placeholder: "dd/mm/yyyy",
             inputFormat: "dd/mm/yyyy",
@@ -267,7 +286,7 @@
             hourFormat: "24",
             clearMaskOnLostFocus: false
         });
-        form.find("input[name='birthOfDate']").daterangepicker({
+        form.find("input[name='birthDate']").daterangepicker({
             "opens": javatmp.settings.floatReverse,
             startDate: moment().format(javatmp.settings.dateFormat),
             singleDatePicker: true,
@@ -287,7 +306,7 @@
             }
         }, function (start, end, label) {
             var formatedDateSelected = moment(start).locale('en').format(javatmp.settings.dateFormat);
-            form.find("input[name='birthOfDate']").val(formatedDateSelected).trigger("change");
+            form.find("input[name='birthDate']").val(formatedDateSelected).trigger("change");
         });
         $(".daterangepicker.dropdown-menu").css('z-index', 600 + 1);
         form.find("textarea[name='address']").summernote({
