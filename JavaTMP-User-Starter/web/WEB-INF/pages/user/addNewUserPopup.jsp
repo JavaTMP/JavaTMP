@@ -300,8 +300,8 @@
             modal.originalModal.find(".modal-footer").addClass("justify-content-start");
 
             form.ajaxForm({
-                clearForm: true, // clear all form fields after successful submit
-//                resetForm: true, // reset the form after successful submit
+                clearForm: false, // clear all form fields after successful submit
+                resetForm: false, // reset the form after successful submit
                 beforeSerialize: function ($form, options) {
                     $("#summernote").summernote('triggerEvent', 'change');
                     if (!$form.valid()) {
