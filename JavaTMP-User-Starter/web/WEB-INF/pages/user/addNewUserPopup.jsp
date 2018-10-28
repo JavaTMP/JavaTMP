@@ -13,25 +13,38 @@
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.firstName']}</label>
-                                    <input class="form-control" type="text" placeholder="${labels['domain.user.firstName']}" name="firstName">
+                                    <input class="form-control" type="text" placeholder="${labels['domain.user.firstName']}"
+                                           name="firstName"
+                                           data-rule-required="true">
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.lastName']}</label>
-                                    <input class="form-control" type="text" placeholder="${labels['domain.user.lastName']}" name="lastName">
+                                    <input class="form-control" type="text" placeholder="${labels['domain.user.lastName']}"
+                                           name="lastName"
+                                           data-rule-required="true">
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.birthDate']}</label>
-                                    <input dir="ltr" class="form-control"  type="text" name="birthOfDateStr">
+                                    <input dir="ltr" class="form-control"  type="text"
+                                           name="birthDate"
+                                           data-rule-required="true"
+                                           data-rule-validDate="true"
+                                           data-rule-dateBeforeNow="true">
                                 </div>
                             </div>
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.email']}</label>
-                                    <input class="form-control" type="text" placeholder="${labels['domain.user.email']}" name="email">
+                                    <input class="form-control" type="text" placeholder="${labels['domain.user.email']}"
+                                           name="email"
+                                           data-rule-required="true"
+                                           data-rule-email="true"
+                                           data-rule-minlength="5"
+                                           data-rule-maxlength="50">
                                 </div>
                             </div>
                         </div>
@@ -39,7 +52,7 @@
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.country']}</label>
-                                    <select name="countryId" class="form-control">
+                                    <select name="countryId" class="form-control" data-rule-required="true">
                                         <c:choose>
                                             <c:when test="${fn:length(requestScope.countries) > 0}">
                                                 <option value="">${labels['page.text.kindlySelect']}</option>
@@ -57,7 +70,7 @@
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.lang']}</label>
-                                    <select name="lang" class="form-control">
+                                    <select name="lang" class="form-control" data-rule-required="true">
                                         <c:choose>
                                             <c:when test="${fn:length(requestScope.languages) > 0}">
                                                 <option value="">${labels['page.text.kindlySelect']}</option>
@@ -75,7 +88,7 @@
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.theme']}</label>
-                                    <select name="theme" class="form-control">
+                                    <select name="theme" class="form-control" data-rule-required="true">
                                         <c:choose>
                                             <c:when test="${fn:length(requestScope.themes) > 0}">
                                                 <option value="">${labels['page.text.kindlySelect']}</option>
@@ -93,7 +106,7 @@
                             <div class="col-lg-3">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.timezone']}</label>
-                                    <select name="timezone" class="form-control">
+                                    <select name="timezone" class="form-control" data-rule-required="true">
                                         <option value="">${labels['page.text.kindlySelect']}</option>
                                         <c:choose>
                                             <c:when test="${fn:length(requestScope.timezones) > 0}">
@@ -114,22 +127,29 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.userName']}</label>
-                                    <input class="form-control" type="text" autocomplete="off" placeholder="${labels['domain.user.userName']}"
-                                           name="userName">
+                                    <input class="form-control" type="text" autocomplete="off"
+                                           placeholder="${labels['domain.user.userName']}"
+                                           name="userName"
+                                           data-rule-required="true"
+                                           data-rule-minlength="6"
+                                           data-rule-maxlength="20">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.password']}</label>
                                     <input class="form-control" type="password" autocomplete="off"
-                                           placeholder="${labels['domain.user.password']}" name="password">
+                                           placeholder="${labels['domain.user.password']}" name="password"
+                                           data-rule-required="true">
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.reTypePassword']}</label>
                                     <input class="form-control" type="password" autocomplete="off" placeholder="${labels['domain.user.reTypePassword']}"
-                                           name="rpassword">
+                                           name="rpassword"
+                                           data-rule-required="true"
+                                           data-rule-equalto="form input[name='password']">
                                 </div>
                             </div>
                         </div>
@@ -138,7 +158,8 @@
                                 <div class="form-group">
                                     <label for="exampleFormControlFile1">${labels['domain.user.Document']}</label>
                                     <div class="custom-file">
-                                        <input name="profilePicture" type="file" class="custom-file-input" id="validatedCustomFile">
+                                        <input name="profilePicture" type="file" class="custom-file-input" id="validatedCustomFile"
+                                               data-rule-required="true">
                                         <label class="custom-file-label" for="validatedCustomFile">${labels['domain.user.Document']}</label>
                                     </div>
                                 </div>
@@ -163,17 +184,21 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label">${labels['domain.user.address']}</label>
-                            <textarea rows="5" class="form-control forceValidate" placeholder="" name="address"></textarea>
+                            <textarea rows="5" class="form-control forceValidate" placeholder="" name="address"
+                                      data-rule-summernoteRequired="true"
+                                      data-rule-maxlength="400"></textarea>
                         </div>
                         <div class="form-row">
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <div class="custom-control custom-checkbox">
-                                        <input name="tnc" type="checkbox" class="custom-control-input" id="customCheck1">
+                                        <input name="tnc" type="checkbox" class="custom-control-input" id="customCheck1"
+                                               data-rule-required="true">
                                         <label class="custom-control-label" for="customCheck1">
-                                            I agree to the
-                                            <a href="javascript:;">Terms of Service </a> &amp;
-                                            <a href="javascript:;">Privacy Policy </a>
+                                            ${labels["page.register.agreeLabelText"]}
+                                            <a href="javascript:;">${labels["page.register.termsOfService"]}</a>
+                                            ${labels["page.register.and"]}
+                                            <a href="javascript:;">${labels["page.register.privacyPolicy"]}</a>
                                         </label>
                                     </div>
                                 </div>
@@ -204,18 +229,18 @@
             var form = $('#AddNewUserPopupFormId');
             var validator = null;
 
-            modal.updateTitle("Add New User");
+            modal.updateTitle("${labels['domain.user.CreateNewUser']}");
             modal.updateClosable(true);
             modal.updateSize("modal-lg");
             modal.addButton({
-                label: "Close",
+                label: "${labels['global.cancel']}",
                 cssClass: "btn btn-danger mr-auto",
                 action: function (modalWrapper, button, buttonData, originalEvent) {
                     return modalWrapper.hide();
                 }
             });
             modal.addButton({
-                label: "Create a New User",
+                label: "${labels['user.btn.CreateNewUserAction']}",
                 cssClass: "btn btn-primary",
                 action: function (modalWrapper, button, buttonData, originalEvent) {
                     form.trigger("submit");
@@ -223,27 +248,53 @@
             });
             var closeAnyWay = false;
             var callbackData = {success: false, cancel: true};
-            modal.setOnDestroy(function (modalWrapper) {
+            modal.originalModal.on('hidden.bs.modal', function (e) {
+                // here we run passing function name as a remote callback
+                javatmp.util.waitForFinalEvent(function () {
+                    if ($.isFunction(modal.options.passData.callback)) {
+                        modal.options.passData.callback.apply();
+                    } else if ($.type(modal.options.passData.callback) === "string") {
+                        javatmp.util.executeFunctionByName(modal.options.passData.callback, window, callbackData);
+                    }
+                }, 100, "@addNewUserPopup");
+            });
+            modal.setOnDestroy(function (modalInstance) {
                 if (closeAnyWay) {
-                    modalWrapper.setOnDestroy(null);
-                    // here we run passing function name as a remote callback
-                    javatmp.util.waitForFinalEvent(function () {
-                        if ($.isFunction(modal.options.passData.callback)) {
-                            modal.options.passData.callback.apply();
-                        } else if ($.type(modal.options.passData.callback) === "string") {
-                            javatmp.util.executeFunctionByName(modal.options.passData.callback, window, callbackData);
-                        }
-                    }, 200, "@addNewUserPopup");
+//                    modalWrapper.setOnDestroy(null);
                     return true;
                 }
-                BootstrapModalWrapperFactory.confirm({
-                    title: "Confirm",
+//                BootstrapModalWrapperFactory.confirm({
+//                    title: "Confirm",
+//                    message: "Are You Sure You want to Close ?",
+//                    onConfirmAccept: function () {
+//                        closeAnyWay = true;
+//                        modalInstance.hide();
+//                    }
+//                });
+                BootstrapModalWrapperFactory.createModal({
                     message: "Are You Sure You want to Close ?",
-                    onConfirmAccept: function () {
-                        closeAnyWay = true;
-                        modalWrapper.hide();
-                    }
-                });
+                    title: "Confirm",
+                    closable: false,
+                    closeByBackdrop: false,
+                    buttons: [
+                        {
+                            label: javatmp.settings.labels["global.no"],
+                            cssClass: "btn btn-secondary",
+                            action: function (modalWrapper, button, buttonData, originalEvent) {
+                                return modalWrapper.hide();
+                            }
+                        },
+                        {
+                            label: javatmp.settings.labels["global.yes"],
+                            cssClass: "btn btn-primary",
+                            action: function (modalWrapper, button, buttonData, originalEvent) {
+                                closeAnyWay = true;
+                                modalInstance.hide();
+                                return modalWrapper.hide();
+                            }
+                        }
+                    ]
+                }).show();
                 return false;
             });
             modal.originalModal.find(".modal-footer").addClass("justify-content-start");
@@ -259,10 +310,10 @@
                 },
                 beforeSubmit: function (formData, jqForm, options) {
                     for (var i = 0; i < formData.length; i++) {
-                        if (formData[i].name === "birthOfDateStr") {
+                        if (formData[i].name === "birthDate") {
                             var value = formData[i].value;
                             var newDate = moment(value, javatmp.settings.dateFormat).locale('en').format(javatmp.settings.networkDateFormat);
-                            formData.push({"name": "birthDate", "value": newDate});
+                            formData[i].value = newDate;
                             break;
                         }
                     }
@@ -279,107 +330,25 @@
                 error: function (xhr, status, error, $form) {
                     callbackData.cancel = true;
                     callbackData.success = false;
+                    var errorMsg = xhr.responseText;
+                    try {
+                        var jsonData = $.parseJSON(errorMsg);
+                        errorMsg = jsonData.message;
+                    } catch (error) {
+                    }
                     BootstrapModalWrapperFactory.createModal({
-                        title: xhr.statusText + " : " + xhr.status,
-                        message: "error[" + xhr + "][" + status + "][" + error + "][" + $form + "]"
+                        title: "${labels['global.error']}" + " : " + xhr.status,
+                        message: errorMsg
                     }).show();
                 }
             });
             // pre-submit callback
 
-            validator = form.validate($.extend(true, {}, javatmp.settings.jqueryValidationDefaultOptions, {
-                ignore1: ":hidden:not(.forceValidate)",
-                ignore: ":hidden:not(.forceValidate), [contenteditable='true']:not([name])",
-                rules: {
-                    firstName: {
-                        required: true
-                    },
-                    lastName: {
-                        required: true
-                    },
-                    email: {
-                        required: true,
-                        email: true,
-                        minlength: 5,
-                        maxlength: 50
-                    },
-                    birthOfDateStr: {
-                        required: true,
-                        validDate: true,
-                        dateBeforeNow: true
-                    },
-                    countryId: {
-                        required: true
-                    },
-                    address: {
-                        required: true,
-                        maxlength: 400
-                    },
-                    userName: {
-                        required: true
-                    },
-                    password: {
-                        required: true,
-                        minlength: 5,
-                        maxlength: 20
-                    },
-                    rpassword: {
-                        required: true,
-                        equalTo: $("input[name='password']", form)
-                    },
-                    profilePicture: {
-                        required: true
-                    },
-                    tnc: {
-                        required: true
-                    },
-                    note: {
-                        required: true,
-                        summernoteRequired: true
-                    },
-                    lang: {
-                        required: true
-                    },
-                    timezone: {
-                        required: true
-                    },
-                    theme: {
-                        required: true
-                    }
+            // initialize jQuery Validation plugin using global data.
+            validator = form.validate($.extend(true, {}, javatmp.settings.jqueryValidationDefaultOptions, {}));
 
-                },
-                messages: {
-                    firstName: {
-                        required: "Kindly provide us with your first name"
-                    },
-                    lastName: {
-                        required: "Kindly provide us with your last name"
-                    },
-                    email: {
-                        required: "Kindly provide your email address",
-                        email: "Kindly provide a valid email address"
-                    },
-                    birthOfDateStr: {
-                        required: "Kindly provide your Birth Of Date",
-                        validDate: "Kindly Provide a valid date value in format DD/MM/YYYY",
-                        dateBeforeNow: "Kindly Provide a date in the past before today at least"
-                    },
-                    countryId: {
-                        required: "Kindly select your nationality"
-                    },
-                    address: {
-                        required: "Kindly provide your address"
-                    },
-                    note: {
-                        summernoteRequired: "Kindly Provide a note"
-                    }
-                }
-            }));
-//            form.find("input[name='birthOfDateStr']").css({
-//                "text-align": javatmp.settings.floatDefault
-//            });
             var modalZIndex = modal.originalModal.css('zIndex');
-            form.find("input[name='birthOfDateStr']").inputmask({
+            form.find("input[name='birthDate']").inputmask({
                 alias: "datetime",
                 placeholder: "dd/mm/yyyy",
                 inputFormat: "dd/mm/yyyy",
@@ -387,7 +356,7 @@
                 hourFormat: "24",
                 clearMaskOnLostFocus: false
             });
-            form.find("input[name='birthOfDateStr']").daterangepicker({
+            form.find("input[name='birthDate']").daterangepicker({
                 "opens": javatmp.settings.floatReverse,
                 startDate: moment().format(javatmp.settings.dateFormat),
                 singleDatePicker: true,
@@ -407,7 +376,7 @@
                 }
             }, function (start, end, label) {
                 var formatedDateSelected = moment(start).locale('en').format(javatmp.settings.dateFormat);
-                form.find("input[name='birthOfDateStr']").val(formatedDateSelected).trigger("change");
+                form.find("input[name='birthDate']").val(formatedDateSelected).trigger("change");
             });
             $(".daterangepicker").css('z-index', modalZIndex + 1);
 
