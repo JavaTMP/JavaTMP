@@ -612,7 +612,7 @@
 //                            } else {
 //                                $("#profilePicturePreviewContainerId").height(currentImageHeight);
 //                            }
-                            $("#profilePicturePreviewContainerId").mCustomScrollbar("update");
+                            form.find("#profilePicturePreviewContainerId").mCustomScrollbar("update");
                         });
                         image.attr('src', e.target.result);
                         resizeImage.attr('src', e.target.result);

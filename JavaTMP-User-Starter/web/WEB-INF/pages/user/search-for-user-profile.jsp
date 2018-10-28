@@ -754,7 +754,7 @@
                 });
                 return readyData;
             }
-            $("#profilePicturePreviewContainerId").mCustomScrollbar({
+            form.find("#profilePicturePreviewContainerId").mCustomScrollbar({
                 axis: "yx",
                 theme: "javatmp",
                 scrollInertia: 0,
@@ -782,7 +782,7 @@
                             //                            } else {
                             //                                $("#profilePicturePreviewContainerId").height(currentImageHeight);
                             //                            }
-                            $("#profilePicturePreviewContainerId").mCustomScrollbar("update");
+                            form.find("#profilePicturePreviewContainerId").mCustomScrollbar("update");
                         });
                         image.attr('src', e.target.result);
                         resizeImage.attr('src', e.target.result);
