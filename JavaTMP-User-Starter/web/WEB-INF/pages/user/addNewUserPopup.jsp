@@ -245,7 +245,6 @@
                     form.trigger("submit");
                 }
             });
-            var closeAnyWay = false;
             var callbackData = {success: false, cancel: true};
             modal.originalModal.on('hidden.bs.modal', function (e) {
                 // here we run passing function name as a remote callback
@@ -258,36 +257,24 @@
                 }, 100, "@addNewUserPopup");
             });
             modal.setOnDestroy(function (modalInstance) {
-                if (closeAnyWay) {
-                    modalInstance.setOnDestroy(null);
-                    return true;
-                }
-//                BootstrapModalWrapperFactory.confirm({
-//                    title: "Confirm",
-//                    message: "Are You Sure You want to Close ?",
-//                    onConfirmAccept: function () {
-//                        closeAnyWay = true;
-//                        modalInstance.hide();
-//                    }
-//                });
                 BootstrapModalWrapperFactory.createModal({
-                    message: "Are You Sure You want to Close ?",
-                    title: "Confirm",
+                    title: "${labels['dialog.confirmClosing.title']}",
+                    message: "${labels['dialog.confirmClosing.msg']}",
                     closable: false,
                     closeByBackdrop: false,
                     buttons: [
                         {
-                            label: javatmp.settings.labels["global.no"],
+                            label: "${labels['dialog.confirmClosing.noBtn']}",
                             cssClass: "btn btn-secondary",
                             action: function (modalWrapper, button, buttonData, originalEvent) {
                                 return modalWrapper.hide();
                             }
                         },
                         {
-                            label: javatmp.settings.labels["global.yes"],
+                            label: "${labels['dialog.confirmClosing.yesBtn']}",
                             cssClass: "btn btn-primary",
                             action: function (modalWrapper, button, buttonData, originalEvent) {
-                                closeAnyWay = true;
+                                modalInstance.setOnDestroy(null);
                                 modalInstance.hide();
                                 return modalWrapper.hide();
                             }
@@ -322,7 +309,7 @@
                     callbackData.cancel = false;
                     callbackData.success = true;
                     BootstrapModalWrapperFactory.createModal({
-                        title: "Response",
+                        title: "${labels['global.response']}",
                         message: response.message
                     }).show();
                 },

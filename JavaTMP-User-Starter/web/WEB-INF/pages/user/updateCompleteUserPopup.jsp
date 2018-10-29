@@ -189,7 +189,7 @@
                                     <div class="custom-file">
                                         <input name="profilePicture" type="file" class="custom-file-input"
                                                id="validatedCustomFile"
-                                               data-rule-required="true">
+                                               data-rule-required="false">
                                         <label class="custom-file-label" for="validatedCustomFile">Choose Profile Picture file...</label>
                                     </div>
                                 </div>
@@ -286,8 +286,6 @@
                 BootstrapModalWrapperFactory.createModal({
                     title: "${labels['dialog.confirmClosing.title']}",
                     message: "${labels['dialog.confirmClosing.msg']}",
-                    closable: false,
-                    closeByBackdrop: false,
                     buttons: [
                         {
                             label: "${labels['dialog.confirmClosing.noBtn']}",
@@ -311,8 +309,8 @@
             });
             modal.originalModal.find(".modal-footer").addClass("justify-content-start");
             form.ajaxForm({
-                clearForm: true, // clear all form fields after successful submit
-//                resetForm: true, // reset the form after successful submit
+                clearForm: false, // clear all form fields after successful submit
+                resetForm: false, // reset the form after successful submit
                 beforeSerialize: function ($form, options) {
                     $("#summernote").summernote('triggerEvent', 'change');
                     if (!$form.valid()) {
@@ -331,9 +329,6 @@
 
                 },
                 success: function (response, statusText, xhr, $form) {
-//                    form.find("textarea[name='address']").summernote('code', '');
-//                    form.resetForm();
-//                    form.find(".form-group.has-success").removeClass(".has-success");
                     callbackData.cancel = false;
                     callbackData.success = true;
                     BootstrapModalWrapperFactory.createModal({
@@ -356,284 +351,32 @@
             });
             // pre-submit callback
 
-            validator = form.validate($.extend(true, {}, javatmp.settings.jqueryValidationDefaultOptions, {
-                ignore1: ":hidden:not(.forceValidate)",
-                ignore: ":hidden:not(.forceValidate), [contenteditable='true']:not([name])",
-                rules: {
-                    firstName: {
-                        required: true
-                    },
-                    lastName: {
-                        required: true
-                    },
-                    email: {
-                        required: true,
-                        email: true,
-                        minlength: 5,
-                        maxlength: 50
-                    },
-                    birthDate: {
-                        required: true,
-                        validDate: true,
-                        dateBeforeNow: true
-                    },
-                    countryId: {
-                        required: true
-                    },
-                    address: {
-                        required: true,
-                        maxlength: 400
-                    },
-                    userName: {
-                        required: true
-                    },
-                    oldPassword: {
-                        required: true,
-                        minlength: 5,
-                        maxlength: 20
-                    },
-                    password: {
-                        required: true,
-                        minlength: 5,
-                        maxlength: 20
-                    },
-                    rpassword: {
-                        required: true,
-                        equalTo: $("input[name='password']", form)
-                    },
-                    profilePicture: {
-                        required: false
-                    },
-                    tnc: {
-                        required: true
-                    },
-                    note: {
-                        required: true,
-                        summernoteRequired: true
-                    },
-                    lang: {
-                        required: true
-                    },
-                    timezone: {
-                        required: true
-                    },
-                    theme: {
-                        required: true
-                    },
-                    status: {
-                        required: true
-                    }
-                },
-                messages: {
-                    firstName: {
-                        required: "Kindly provide us with your first name"
-                    },
-                    lastName: {
-                        required: "Kindly provide us with your last name"
-                    },
-                    email: {
-                        required: "Kindly provide your email address",
-                        email: "Kindly provide a valid email address"
-                    },
-                    birthDate: {
-                        required: "Kindly provide your Birth Of Date",
-                        validDate: "Kindly Provide a valid date value in format DD/MM/YYYY",
-                        dateBeforeNow: "Kindly Provide a date in the past before today at least"
-                    },
-                    countryId: {
-                        required: "Kindly select your nationality"
-                    },
-                    address: {
-                        required: "Kindly provide your address"
-                    },
-                    note: {
-                        summernoteRequired: "Kindly Provide a note"
-                    }
-                }
-            }));
-//            form.find("input[name='birthDate']").css({
-//                "text-align": javatmp.settings.floatDefault
-//            });
+            // initialize jQuery Validation plugin using global data.
+            validator = form.validate($.extend(true, {}, javatmp.settings.jqueryValidationDefaultOptions, {}));
+
             var modalZIndex = modal.originalModal.css('zIndex');
-            form.find("input[name='birthDate']").inputmask({
-                alias: "datetime",
-                placeholder: "dd/mm/yyyy",
-                inputFormat: "dd/mm/yyyy",
-                displayFormat: true,
-                hourFormat: "24",
-                clearMaskOnLostFocus: false
+            var birthDateInputMask = javatmp.plugins.inputmaskWrapperForDate(form.find("input[name='birthDate']"));
+            var birthDateDatePicker = javatmp.plugins.daterangepickerWrapperForDate(form.find("input[name='birthDate']"), {
+                parentEl: modal.originalModal
             });
-            form.find("input[name='birthDate']").daterangepicker({
-                "opens": javatmp.settings.floatReverse,
-                startDate: moment().format(javatmp.settings.dateFormat),
-                singleDatePicker: true,
-                showDropdowns: true,
-                timePicker: false,
-                timePickerIncrement: 1,
-                timePicker24Hour: true,
-                autoApply: true,
-                autoUpdateInput: false,
-                minDate: '01/01/1900',
-                maxDate: '31/12/2099',
-                //                    maxDate: '',
-                //                    minDate: moment(),
-                locale: {
-                    "direction": javatmp.settings.direction,
-                    format: javatmp.settings.dateFormat
-                }
-            }, function (start, end, label) {
-                var formatedDateSelected = moment(start).format(javatmp.settings.dateFormat);
-                form.find("input[name='birthDate']").val(formatedDateSelected).trigger("change");
+            var addressEditor = javatmp.plugins.summernoteWrapper(form.find("textarea[name='address']"));
+            var langSelect = javatmp.plugins.select2Wrapper(form.find("select[name='lang']"), {
+                dropdownParent: modal.originalModal
             });
-            $(".daterangepicker").css('z-index', modalZIndex + 1);
-            form.find("textarea[name='address']").summernote({
-                direction: javatmp.settings.direction,
-                lang: javatmp.user.lang === "ar" ? "ar-AR" : javatmp.user.lang,
-                height: 100,
-                dialogsInBody: true
-            });
-            modal.originalModal.removeAttr('tabindex');
-            $.fn.select2.defaults.set("theme", "bootstrap");
-            $.fn.select2.defaults.set("dir", javatmp.settings.direction);
-            $.fn.select2.defaults.set("placeholder", javatmp.settings.labels['page.text.kindlySelect']);
-//            alert(modal.options.id);
-//            $.fn.select2.defaults.set("dropdownParent", "#" + modal.options.id);
-            form.find("select[name='lang']").select2({
-                allowClear: true,
-                containerCssClass: ':all:',
-                width: '',
-                dropdownCssClass: "select2-lang-dropdown"
-            }).on("select2:open", function () {
-                $(".select2-lang-dropdown", ".select2-container").css('z-index', modalZIndex);
-            });
-            form.find("select[name='theme']").select2({
-                allowClear: true,
-                containerCssClass: ':all:',
-                width: '',
-                escapeMarkup: function (markup) {
-                    return markup;
-                },
-                templateSelection: formatThemeSelection,
-                templateResult: formatThemeResult,
-                dropdownCssClass: "select2-theme-dropdown"
-            }).on("select2:open", function () {
-                $(".select2-theme-dropdown", ".select2-container").css('z-index', modalZIndex);
-            });
-            form.find("select[name='timezone']").select2({
-                allowClear: true,
-                containerCssClass: ':all:',
-                width: '',
-                dropdownCssClass: "select2-timezone-dropdown"
-            }).on("select2:open", function () {
-                $(".select2-timezone-dropdown", ".select2-container").css('z-index', modalZIndex);
-            });
-            form.find("select[name='countryId']").select2({
-                theme: "bootstrap",
-                dir: javatmp.settings.direction,
-                allowClear: true,
-                containerCssClass: ':all:',
-                width: '',
-                templateSelection: formatCountrySelection,
-                templateResult: formatCountry,
-                escapeMarkup: function (markup) {
-                    return markup;
-                },
-                dropdownCssClass: "select2-countryId-dropdown"
-            }).on("select2:select", function () {
-                (this).focus();
-            }).on("select2:open", function () {
-                $(".select2-countryId-dropdown", ".select2-container").css('z-index', modalZIndex);
-            });
-            function formatCountry(repo) {
-                if (repo.loading)
-                    return repo.text;
-                var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
-                var template =
-                        '    <div class="media d-flex align-items-center">' +
-                        '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
-                        '        <div class="media-body">' +
-                        '            <strong>{{countryText}} ({{countryId}})</strong>' +
-                        '        </div>' +
-                        '    </div>';
-                var readyData = template.composeTemplate({
-                    'imagePath': imagePath,
-                    'countryText': repo.text,
-                    'countryId': repo.id
-                });
-                return readyData;
-            }
-            function formatCountrySelection(repo) {
-                if (!repo.id) {
-                    return repo.text;
-                }
 
-                var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
-                var template =
-                        '    <div class="media d-flex align-items-center">' +
-                        '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
-                        '        <div class="media-body">' +
-                        '            <span>{{countryText}} ({{countryId}})</span>' +
-                        '        </div>' +
-                        '    </div>';
-                var readyData = template.composeTemplate({
-                    'imagePath': imagePath,
-                    'countryText': repo.text,
-                    'countryId': repo.id
-                });
-                return readyData;
-            }
-            function formatThemeSelection(repo) {
-                if (!repo.id) {
-                    return repo.text;
-                }
-
-                var imagePath = javatmp.settings.contextPath + "/assets/img/themes/" + repo.text + ".png";
-                var template =
-                        '    <div class="media d-flex align-items-center">' +
-                        '        <img style="height: 1.5rem;" class="mr-1" src="{{imagePath}}" alt="{{themeName}}"/>' +
-                        '        <div class="media-body">' +
-                        '            <span>{{themeName}}</span>' +
-                        '        </div>' +
-                        '    </div>';
-                var readyData = template.composeTemplate({
-                    'imagePath': imagePath,
-                    'themeName': repo.text
-                });
-                return readyData;
-            }
-            function formatThemeResult(repo) {
-                if (!repo.id) {
-                    return repo.text;
-                }
-
-                var imagePath = javatmp.settings.contextPath + "/assets/img/themes/" + repo.text + ".png";
-                var template =
-                        '    <div class="media d-flex align-items-center">' +
-                        '        <img style="height: 75px;" class="mr-1" src="{{imagePath}}" alt="{{themeName}}"/>' +
-                        '        <div class="media-body">' +
-                        '            <span>{{themeName}}</span>' +
-                        '        </div>' +
-                        '    </div>';
-                var readyData = template.composeTemplate({
-                    'imagePath': imagePath,
-                    'themeName': repo.text
-                });
-                return readyData;
-            }
-            form.find("#profilePicturePreviewContainerId").mCustomScrollbar({
-                axis: "yx",
-                theme: "javatmp",
-                scrollInertia: 0,
-                advanced: {
-                    updateOnContentResize: true,
-                    autoExpandHorizontalScroll: true,
-                    updateOnImageLoad: true
-                },
-                mouseWheel: {
-                    preventDefault: true,
-                    scrollAmount: 85
-                }
+            var timezoneSelect = javatmp.plugins.select2Wrapper(form.find("select[name='timezone']"), {
+                dropdownParent: modal.originalModal
             });
+            var themeSelect = javatmp.plugins.select2WrapperForTheme(form.find("select[name='theme']"), {
+                dropdownParent: modal.originalModal
+            });
+
+            var countryIdSelect = javatmp.plugins.select2WrapperForCountry(form.find("select[name='countryId']"), {
+                dropdownParent: modal.originalModal
+            });
+
+            var profilePicScrollbars = javatmp.plugins.mCustomScrollbarForProfilePicture(form.find("#profilePicturePreviewContainerId"));
+
             form.find("#profilePicturePreview").removeAttr("width").removeAttr("height");
             form.find("input[name='profilePicture'][type=file]").on("change", function () {
                 if (this.files && this.files[0]) {
@@ -642,12 +385,6 @@
                         var image = form.find("img[id='profilePicturePreview']");
                         var resizeImage = form.find("img[id='profilePictureResizePreview']");
                         image.one("load", function () {
-//                            var currentImageHeight = this.height;
-//                            if (currentImageHeight > 250) {
-//                                $("#profilePicturePreviewContainerId").height(250);
-//                            } else {
-//                                $("#profilePicturePreviewContainerId").height(currentImageHeight);
-//                            }
                             form.find("#profilePicturePreviewContainerId").mCustomScrollbar("update");
                         });
                         image.attr('src', e.target.result);
