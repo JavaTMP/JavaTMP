@@ -67,6 +67,7 @@ public class CurrentUserProfileController extends HttpServlet {
         UserService us = sf.getUserService();
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
+        ResourceBundle labels = (ResourceBundle) session.getAttribute(Constants.LANGUAGE_ATTR_KEY);
         try {
 
             User userToBeUpdated = new User();
@@ -113,7 +114,7 @@ public class CurrentUserProfileController extends HttpServlet {
 
             responseMessage.setOverAllStatus(Boolean.TRUE);
             responseMessage.setRedirect(Boolean.TRUE);
-            responseMessage.setMessage("User Updated successfully");
+            responseMessage.setMessage(labels.getString("user.action.CurrentUser.successMsg"));
             responseMessage.setData(userToBeUpdated);
         } catch (PersistenceException e) {
             Throwable t = e;

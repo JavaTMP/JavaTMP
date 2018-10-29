@@ -198,7 +198,7 @@
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all-locale-${sessionScope.user.lang}.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp.min.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/assets/js/javatmp.plugins.js?dfdfd1423566638799123763" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/assets/app/js/javatmp.plugins.js?dfdfd1423566638799123763" type="text/javascript"></script>
         <script type="text/javascript">
             jQuery(function ($) {
                 var defaults = {

@@ -385,11 +385,11 @@
                     processData: false,
                     success: function (response, statusText, xhr) {
                         var successModal = BootstrapModalWrapperFactory.createModal({
-                            title: "Response",
+                            title: "${labels["global.response"]}",
                             message: response.message,
                             buttons: [
                                 {
-                                    label: "Close And Refresh",
+                                    label: "${labels["global.refreshPage"]}",
                                     cssClass: "btn btn-primary",
                                     action: function (modalWrapper, button, buttonData, originalEvent) {
                                         javatmp.util.waitForFinalEvent(function () {
@@ -436,12 +436,6 @@
                         var image = form.find("img[id='profilePicturePreview']");
                         var resizeImage = form.find("img[id='profilePictureResizePreview']");
                         image.one("load", function () {
-                            //                            var currentImageHeight = this.height;
-                            //                            if (currentImageHeight > 250) {
-                            //                                $("#profilePicturePreviewContainerId").height(250);
-                            //                            } else {
-                            //                                $("#profilePicturePreviewContainerId").height(currentImageHeight);
-                            //                            }
                             form.find("#profilePicturePreviewContainerId").mCustomScrollbar("update");
                         });
                         image.attr('src', e.target.result);
