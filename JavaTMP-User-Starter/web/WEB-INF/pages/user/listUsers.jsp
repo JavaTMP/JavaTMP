@@ -62,7 +62,7 @@
                     <input id="userlist-lastname-filter" class="form-control"/>
                 </th>
                 <th style="width: 8rem;">
-                    <input id="userlist-birthdate-filter" class="form-control"/>
+                    <input id="userlist-birthdate-filter" class="form-control" dir="ltr"/>
                 </th>
                 <th style="width: 3rem;">
                     <input id="userlist-age-filter" class="form-control"/>
@@ -333,36 +333,10 @@
                             api.column(4).search(val ? val : '', true, false).draw();
                         }, 200, "@userlist-main-table-filter");
                     });
-                    birthdateFilterInput.inputmask({
-                        alias: "datetime",
-                        placeholder: "dd/mm/yyyy",
-                        inputFormat: "dd/mm/yyyy",
-                        displayFormat: true,
-                        hourFormat: "24",
-                        clearMaskOnLostFocus: false
-                    });
-                    birthdateFilterInput.daterangepicker({
-                        "opens": javatmp.settings.floatDefault,
-                        //                    startDate: false,
-                        singleDatePicker: true,
-                        showDropdowns: true,
-                        timePicker: false,
-                        timePickerIncrement: 1,
-                        timePicker24Hour: true,
-                        autoApply: true,
-                        autoUpdateInput: false,
-                        minDate: '01/01/1900',
-                        maxDate: '31/12/2099',
-                        //                    maxDate: '',
-                        //                    minDate: moment(),
-                        locale: {
-                            "direction": javatmp.settings.direction,
-                            format: javatmp.settings.dateFormat
-                        }
-                    }, function (start, end, label) {
-                        var formatedDateSelected = moment(start).locale('en').format(javatmp.settings.dateFormat);
-                        birthdateFilterInput.val(formatedDateSelected).trigger("change");
-                    });
+                    var birthDateInputMask = javatmp.plugins.inputmaskWrapperForDate(birthdateFilterInput);
+                    var birthDateDatePicker = javatmp.plugins.daterangepickerWrapperForDate(birthdateFilterInput);
+
+
 
                     var ageFilterInput = $("#userlist-age-filter");
                     ageFilterInput.on('keyup', function () {
@@ -391,6 +365,9 @@
                             api.column(7).search(val ? val : '', false, false).draw();
                         }, 200, "@userlist-main-table-filter");
                     });
+
+//                    var statusSelect = javatmp.plugins.select2Wrapper(statusFilterInput);
+
                     statusFilterInput.select2({
                         theme: "bootstrap",
                         dir: javatmp.settings.direction,

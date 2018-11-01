@@ -66,8 +66,8 @@
             dir: javatmp.settings.direction,
             placeholder: javatmp.settings.labels['page.text.kindlySelect'],
             allowClear: true,
-            containerCssClass: ':all:',
-            width: ''
+            containerCssClass: ':all:'
+//            width: '100%'
         }, options);
 
         return $(element).select2(settings).on("select2:select", function () {
@@ -183,7 +183,7 @@
             placeholder: javatmp.settings.labels['page.text.kindlySelect'],
             allowClear: true,
             containerCssClass: ':all:',
-            width: '',
+            width: '100%',
             templateSelection: formatCountrySelection,
             templateResult: formatCountry,
             escapeMarkup: function (markup) {
