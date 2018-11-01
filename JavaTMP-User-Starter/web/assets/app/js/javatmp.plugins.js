@@ -51,7 +51,7 @@
 
         var settings = $.extend(true, {}, {
             direction: javatmp.settings.direction,
-            lang: javatmp.user.lang === "ar" ? "ar-AR" : javatmp.user.lang,
+            lang: javatmp.settings.lang === "ar" ? "ar-AR" : javatmp.settings.lang,
             height: 200,
             dialogsInBody: true
         }, options);

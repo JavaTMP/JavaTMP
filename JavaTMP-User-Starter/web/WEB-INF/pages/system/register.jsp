@@ -47,7 +47,7 @@
                                     <div class="col-lg-3 col-md-6">
                                         <div class="form-group">
                                             <label class="control-label">${labels['domain.user.birthDate']}</label>
-                                            <input dir="ltr" class="form-control"  type="text" name="birthOfDateStr">
+                                            <input dir="ltr" class="form-control"  type="text" name="birthDate">
                                         </div>
                                     </div>
                                     <div class="col-lg-3 col-md-6">
@@ -197,6 +197,8 @@
         </style>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all-locale-${labels["global.language"]}.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/assets/app/js/javatmp.plugins.js?62371063" type="text/javascript"></script>
         <script type="text/javascript">
             (function ($) {
                 String.prototype.composeTemplate = (function () {
@@ -207,30 +209,39 @@
                         });
                     };
                 }());
-                // global variables initializing:
-                var javatmp = javatmp || {};
-                javatmp.settings = javatmp.settings || {};
-                javatmp.settings.httpMethod = "GET";
-                javatmp.settings.dataType = "html";
-                javatmp.settings.updateURLHash = true;
-                javatmp.settings.defaultPassData = {_ajax: "ajax", _ajaxGlobalBlockUI: true, _handleAjaxErrorGlobally: true};
-                javatmp.settings.defaultOutputSelector = '.main-body-content-container';
-                javatmp.settings.defaultUrl = '${pageContext.request.contextPath}/pages/home';
-                javatmp.settings.floatDefault = "${labels['global.floatDefault']}";
-                javatmp.settings.floatReverse = "${labels['global.floatReverse']}";
-                javatmp.settings.direction = "${labels['global.direction']}";
-                javatmp.settings.isRTL = ${labels['global.direction'] == 'ltr' ? 'false' : 'true'};
-                javatmp.settings.contextPath = '${pageContext.request.contextPath}';
 
-                javatmp.settings.networkDateFormat = "YYYY-MM-DDTHH:mm:ss.SSSZ";
-                javatmp.settings.dateFormat = "DD/MM/YYYY";
-
-                javatmp.settings.labels = {
-                    "loadingText": "${labels['global.loadingText']}",
-                    "kindlySelect": '${labels['page.text.kindlySelect']}',
-                    "goToLoginPage": "${labels['action.register.goToLoginPage']}"
+                var defaults = {
+                    defaultPassData: {_ajax: "ajax", _ajaxGlobalBlockUI: true, _handleAjaxErrorGlobally: true},
+                    defaultUrl: '${pageContext.request.contextPath}/pages/home',
+                    floatDefault: "${labels['global.floatDefault']}",
+                    floatReverse: "${labels['global.floatReverse']}",
+                    direction: "${labels['global.direction']}",
+                    isRTL: ${labels['global.direction'] == 'ltr' ? 'false' : 'true'},
+                    contextPath: '${pageContext.request.contextPath}',
+                    networkDateFormat: "YYYY-MM-DDTHH:mm:ss.SSSZ",
+                    dateFormat: "DD/MM/YYYY",
+                    dateTimeFormat: "DD/MM/YYYY HH:mm",
+                    dateTimeSecondFormat: "DD/MM/YYYY HH:mm:ss",
+                    labels: {},
+                    httpMethod: "GET",
+                    dataType: "html",
+                    updateURLHash: true
                 };
-                moment.locale("ar");
+
+                defaults.labels = {
+                    "loadingText": "${labels['global.loadingText']}",
+                    "page.text.kindlySelect": '${labels['page.text.kindlySelect']}',
+                    "goToLoginPage": "${labels['action.register.goToLoginPage']}",
+                    "global.language": "${labels['global.language']}"
+                };
+
+                javatmp.init(defaults);
+                javatmp.ajax.init({
+                    defaultPassData: javatmp.settings.defaultPassData
+                });
+
+                moment.locale(javatmp.settings.labels['global.language']);
+
                 jQuery.validator.addMethod("validDate", function (value, element) {
                     return this.optional(element) || moment(value, javatmp.settings.dateFormat, true).isValid();
                 }, "Please enter a valid date in the format DD/MM/YYYY");
@@ -255,12 +266,12 @@
                     var httpType = $(this).attr("method");
                     var post_url = $(this).attr("action"); //get form action url
                     //                    var form_data = new FormData(form); //Creates new FormData object
-                    var form_data = $(this).serializeArray();
-                    for (var i = 0; i < form_data.length; i++) {
-                        if (form_data[i].name === "birthOfDateStr") {
-                            var value = form_data[i].value;
-                            var newDate = moment(value, javatmp.settings.dateFormat).locale("en").format(javatmp.settings.networkDateFormat);
-                            form_data.push({"name": "birthDate", "value": newDate});
+                    var formData = $(this).serializeArray();
+                    for (var i = 0; i < formData.length; i++) {
+                        if (formData[i].name === "birthDate") {
+                            var value = formData[i].value;
+                            var newDate = moment(value, javatmp.settings.dateFormat).locale('en').format(javatmp.settings.networkDateFormat);
+                            formData[i].value = newDate;
                             break;
                         }
                     }
@@ -269,7 +280,7 @@
                         url: post_url,
                         //                        processData: false,
                         //                        contentType: false,
-                        data: form_data,
+                        data: formData,
                         success: function (data) {
                             if (data.overAllStatus) {
                                 alertError = BootstrapAlertWrapper.createAlert({
@@ -314,7 +325,7 @@
                             minlength: 5,
                             maxlength: 50
                         },
-                        birthOfDateStr: {
+                        birthDate: {
                             required: true,
                             validDate: true,
                             dateBeforeNow: true
@@ -369,156 +380,15 @@
                         }
                     }
                 });
-                form.find("input[name='birthOfDateStr']").inputmask({
-                    alias: "datetime",
-                    placeholder: "dd/mm/yyyy",
-                    inputFormat: "dd/mm/yyyy",
-                    displayFormat: true,
-                    hourFormat: "24",
-                    clearMaskOnLostFocus: false
-                });
-                form.find("input[name='birthOfDateStr']").daterangepicker({
-                    "opens": javatmp.settings.floatReverse,
-                    startDate: moment().format(javatmp.settings.dateFormat),
-                    singleDatePicker: true,
-                    showDropdowns: true,
-                    timePicker: false,
-                    timePickerIncrement: 1,
-                    timePicker24Hour: true,
-                    autoApply: true,
-                    autoUpdateInput: false,
-                    minDate: '01/01/1900',
-                    maxDate: '31/12/2099',
-                    //                    maxDate: '',
-                    //                    minDate: moment(),
-                    locale: {
-                        "direction": javatmp.settings.direction,
-                        format: javatmp.settings.dateFormat
-                    }
-                }, function (start, end, label) {
-                    var formatedDateSelected = moment(start).locale('en').format(javatmp.settings.dateFormat);
-                    form.find("input[name='birthOfDateStr']").val(formatedDateSelected).trigger("change");
-                });
-                $(".daterangepicker.dropdown-menu").css('z-index', 600 + 1);
-                form.find("textarea[name='address']").summernote({height: 250});
-                $.fn.select2.defaults.set("theme", "bootstrap");
-                $.fn.select2.defaults.set("dir", javatmp.settings.direction);
-                $.fn.select2.defaults.set("placeholder", javatmp.settings.labels.kindlySelect);
 
-                form.find("select[name='lang']").select2({
-                    allowClear: true,
-//                    placeholder: "Select a language",
-                    containerCssClass: ':all:',
-                    width: ''
-                });
-                form.find("select[name='theme']").select2({
-                    allowClear: true,
-//                    placeholder: "Select a theme",
-                    containerCssClass: ':all:',
-                    width: '',
-                    escapeMarkup: function (markup) {
-                        return markup;
-                    },
-                    templateSelection: formatThemeSelection,
-                    templateResult: formatThemeResult
-                });
-                form.find("select[name='timezone']").select2({
-                    allowClear: true,
-//                    placeholder: "Select a timezone",
-                    containerCssClass: ':all:',
-                    width: ''
-                });
-                form.find("select[name='countryId']").select2({
-                    theme: "bootstrap",
-                    dir: javatmp.settings.direction,
-                    allowClear: true,
-//                    placeholder: "Select a country",
-                    containerCssClass: ':all:',
-                    width: '',
-                    templateSelection: formatCountrySelection,
-                    templateResult: formatCountry,
-                    escapeMarkup: function (markup) {
-                        return markup;
-                    }
-                }).on("select2:select", function () {
-                    (this).focus();
-                });
-                function formatCountry(repo) {
-                    if (repo.loading)
-                        return repo.text;
-                    var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
-                    var template =
-                            '    <div class="media d-flex align-items-center">' +
-                            '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
-                            '        <div class="media-body">' +
-                            '            <strong>{{countryText}} ({{countryId}})</strong>' +
-                            '        </div>' +
-                            '    </div>';
-                    var readyData = template.composeTemplate({
-                        'imagePath': imagePath,
-                        'countryText': repo.text,
-                        'countryId': repo.id
-                    });
-                    return readyData;
-                }
-                function formatCountrySelection(repo) {
-                    if (!repo.id) {
-                        return repo.text;
-                    }
+                var birthDateInputMask = javatmp.plugins.inputmaskWrapperForDate(form.find("input[name='birthDate']"));
+                var birthDateDatePicker = javatmp.plugins.daterangepickerWrapperForDate(form.find("input[name='birthDate']"));
+                var addressEditor = javatmp.plugins.summernoteWrapper(form.find("textarea[name='address']"));
+                var langSelect = javatmp.plugins.select2Wrapper(form.find("select[name='lang']"));
+                var timezoneSelect = javatmp.plugins.select2Wrapper(form.find("select[name='timezone']"));
+                var themeSelect = javatmp.plugins.select2WrapperForTheme(form.find("select[name='theme']"));
+                var countryIdSelect = javatmp.plugins.select2WrapperForCountry(form.find("select[name='countryId']"));
 
-                    var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
-                    var template =
-                            '    <div class="media d-flex align-items-center">' +
-                            '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
-                            '        <div class="media-body">' +
-                            '            <span>{{countryText}} ({{countryId}})</span>' +
-                            '        </div>' +
-                            '    </div>';
-                    var readyData = template.composeTemplate({
-                        'imagePath': imagePath,
-                        'countryText': repo.text,
-                        'countryId': repo.id
-                    });
-                    return readyData;
-                }
-                function formatThemeSelection(repo) {
-                    if (!repo.id) {
-                        return repo.text;
-                    }
-
-                    var imagePath = javatmp.settings.contextPath + "/assets/img/themes/" + repo.text + ".png";
-                    var template =
-                            '    <div class="media d-flex align-items-center">' +
-                            '        <img style="height: 1.5rem;" class="mr-1" src="{{imagePath}}" alt="{{themeName}}"/>' +
-                            '        <div class="media-body">' +
-                            '            <span>{{themeName}}</span>' +
-                            '        </div>' +
-                            '    </div>';
-                    var readyData = template.composeTemplate({
-                        'imagePath': imagePath,
-                        'themeName': repo.text
-                    });
-                    return readyData;
-                }
-                function formatThemeResult(repo) {
-                    if (!repo.id) {
-                        return repo.text;
-                    }
-
-                    var imagePath = javatmp.settings.contextPath + "/assets/img/themes/" + repo.text + ".png";
-                    var template =
-                            '    <div class="media d-flex align-items-center">' +
-                            '        <img style="height: 75px;" class="mr-1" src="{{imagePath}}" alt="{{themeName}}"/>' +
-                            '        <div class="media-body">' +
-                            '            <span>{{themeName}}</span>' +
-                            '        </div>' +
-                            '    </div>';
-                    var readyData = template.composeTemplate({
-                        'imagePath': imagePath,
-                        'themeName': repo.text
-                    });
-                    return readyData;
-                }
                 form.find("select[name='timezone']").val(moment.tz.guess()).trigger('change.select2');
             }(jQuery));
         </script>
