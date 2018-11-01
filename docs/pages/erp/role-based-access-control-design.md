@@ -27,7 +27,7 @@ An user's role determines what permissions he or she is granted.
 - [What is role-based access control (RBAC)?](https://docs.microsoft.com/en-us/azure/role-based-access-control/overview)
 - [How to design role based access control?](https://softwareengineering.stackexchange.com/questions/348636/how-to-design-role-based-access-control)
 - [High Level Design of Role Based Access Controller](https://cwiki.apache.org/confluence/display/SQOOP/High+Level+Design+of+Role+Based+Access+Controller)
-- []()
+- [Implement Access Control in Node.js](https://blog.nodeswat.com/implement-access-control-in-node-js-8567e7b484d1)
 - []()
 - []()
 - []()
