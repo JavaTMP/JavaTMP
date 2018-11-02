@@ -375,7 +375,22 @@
                     }
                 },
                 columns: [
-                    {data: 'id', className: "", name: "id", width: "6rem", "render": javatmp.plugins.DataTableColRenderWrapper("6rem")},
+                    {data: 'id',
+                        "createdCell111": function (td, cellData, rowData, row, col) {
+                            var idx = table.cell(td).index().column;
+                            var title = table.columns(idx).header();
+                            console.log(table.init());
+                            console.log(table.init().columns[col]);
+                            $(td).css({"width": "1000px", "background-color": "red"});
+                            $(td).addClass("text-white");
+                            $(title).css({"width": "100rem"});
+//                            console.log(table.columns(idx).data());
+//                            console.log("" + table.column(idx).width);
+//                            console.log('Column title clicked on: ' + $(title).html());
+//                            console.log("data source " + this.api().columns(col).dataSrc().join(' '));
+//                            console.log("data header = " + this.api().columns(col).header());
+                        },
+                        className: "", name: "id", width: "6rem", "render": javatmp.plugins.DataTableColRenderWrapper("6rem")},
                     {data: 'userName', name: "userName", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
                     {data: 'firstName', name: "firstName", width: "8rem", "render": javatmp.plugins.DataTableColRenderWrapper("8rem")},
                     {data: 'lastName', name: "lastName", width: "8rem", "render": javatmp.plugins.DataTableColRenderWrapper("8rem")},
