@@ -37,14 +37,10 @@ public class ActivateUserController extends HttpServlet {
         ResourceBundle labels = (ResourceBundle) session.getAttribute(Constants.LANGUAGE_ATTR_KEY);
         try {
 
-            User userToBeUpdated = new User();
-            User dbUser = null;
-
-            MvcHelper.populateBeanByRequestParameters(request, userToBeUpdated);
+            User userToBeUpdated = (User) MvcHelper.readObjectFromRequest(request, User.class);
             logger.info("User to be Activated is [" + MvcHelper.toString(userToBeUpdated) + "]");
 
-            int updateStatus = 0;
-            updateStatus = us.activateUser(userToBeUpdated);
+            int updateStatus = us.activateUser(userToBeUpdated);
 
             responseMessage.setOverAllStatus(true);
             responseMessage.setTitle(labels.getString("action.successTitle"));
@@ -57,9 +53,6 @@ public class ActivateUserController extends HttpServlet {
             responseMessage.setMessage(e.getMessage());
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             responseMessage.setStatusCode(HttpServletResponse.SC_BAD_REQUEST);
-        } catch (IllegalAccessException | InvocationTargetException ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
-            throw new ServletException(ex);
         }
         MvcHelper.sendMessageAsJson(response, responseMessage);
 

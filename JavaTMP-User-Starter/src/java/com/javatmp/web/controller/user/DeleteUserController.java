@@ -39,14 +39,10 @@ public class DeleteUserController extends HttpServlet {
 
         try {
 
-            User userToBeUpdated = new User();
-            User dbUser = null;
-
-            MvcHelper.populateBeanByRequestParameters(request, userToBeUpdated);
+            User userToBeUpdated = (User) MvcHelper.readObjectFromRequest(request, User.class);
             logger.info("User to be deleted is [" + MvcHelper.toString(userToBeUpdated) + "]");
 
-            int updateStatus = 0;
-            updateStatus = us.deleteUser(userToBeUpdated);
+            int updateStatus = updateStatus = us.deleteUser(userToBeUpdated);
 
             responseMessage.setOverAllStatus(true);
             responseMessage.setTitle(labels.getString("action.successTitle"));
@@ -62,15 +58,11 @@ public class DeleteUserController extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             responseMessage.setStatusCode(HttpServletResponse.SC_BAD_REQUEST);
         } catch (IllegalArgumentException e) {
-            logger.info("ERROR : " + e.getMessage());
+            logger.log(Level.SEVERE, e.getMessage(), e);
             responseMessage.setOverAllStatus(false);
             responseMessage.setMessage(e.getMessage());
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             responseMessage.setStatusCode(HttpServletResponse.SC_BAD_REQUEST);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(DeleteUserController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InvocationTargetException ex) {
-            Logger.getLogger(DeleteUserController.class.getName()).log(Level.SEVERE, null, ex);
         }
         MvcHelper.sendMessageAsJson(response, responseMessage);
 

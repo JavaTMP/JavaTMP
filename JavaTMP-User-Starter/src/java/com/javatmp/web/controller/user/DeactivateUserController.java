@@ -38,14 +38,12 @@ public class DeactivateUserController extends HttpServlet {
 
         try {
 
-            User userToBeUpdated = new User();
-            User dbUser = null;
-
-            MvcHelper.populateBeanByRequestParameters(request, userToBeUpdated);
+            User userToBeUpdated = null;
+            userToBeUpdated = (User) MvcHelper.readObjectFromRequest(request, User.class);
+//            MvcHelper.populateBeanByRequestParameters(request, userToBeUpdated);
             logger.info("User to be Deactivated is [" + MvcHelper.toString(userToBeUpdated) + "]");
 
-            int updateStatus = 0;
-            updateStatus = us.deActivateUser(userToBeUpdated);
+            int updateStatus = us.deActivateUser(userToBeUpdated);
 
             responseMessage.setOverAllStatus(true);
             responseMessage.setTitle(labels.getString("action.successTitle"));
@@ -53,14 +51,11 @@ public class DeactivateUserController extends HttpServlet {
             responseMessage.setData(userToBeUpdated);
 
         } catch (IllegalArgumentException e) {
-            logger.info("ERROR : " + e.getMessage());
+            logger.log(Level.SEVERE, e.getMessage(), e);
             responseMessage.setOverAllStatus(false);
             responseMessage.setMessage(e.getMessage());
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             responseMessage.setStatusCode(HttpServletResponse.SC_BAD_REQUEST);
-        } catch (IllegalAccessException | InvocationTargetException ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
-            throw new ServletException(ex);
         }
         MvcHelper.sendMessageAsJson(response, responseMessage);
     }

@@ -262,4 +262,85 @@
         return $(element).wrappedPlugin(settings);
     };
 
+    window.javatmp.plugins.confirmAjaxAction = function (confirmTitleText, confirmMessageText, confirmActionBtnText, cancelActionBtnText,
+            ajaxUrl, ajaxData, successCallback, errorCallback) {
+        BootstrapModalWrapperFactory.createModal({
+            title: confirmTitleText,
+            message: confirmMessageText,
+            closable: false,
+            closeByBackdrop: false,
+            buttons: [{
+                    label: cancelActionBtnText,
+                    cssClass: "btn btn-secondary",
+                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                        return modalWrapper.hide();
+                    }
+                }, {
+                    label: confirmActionBtnText,
+                    cssClass: "btn btn-warning",
+                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                        modalWrapper.hide();
+                        javatmp.plugins.ajaxAction(ajaxUrl, ajaxData, successCallback, errorCallback);
+                    }
+                }
+            ]
+        }).show();
+    };
+
+    window.javatmp.plugins.ajaxAction = function (ajaxUrl, ajaxData, successCallback, errorCallback) {
+        var m = BootstrapModalWrapperFactory.createModal({
+            message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
+            closable: false,
+            closeByBackdrop: false,
+            closeByKeyboard: false
+        });
+        m.originalModal.find(".modal-dialog").css({transition: 'all 0.5s'});
+        m.originalModal.on('shown.bs.modal', function (e) {
+            $.ajax({
+                type: "POST",
+                url: ajaxUrl,
+                data: JSON.stringify(ajaxData),
+                dataType: "json",
+                contentType: "application/json; charset=UTF-8",
+                success: function (data) {
+                    m.updateMessage(data.message);
+                    m.updateClosable(true);
+                    m.updateClosableByBackdrop(true);
+                    m.updateTitle(data.title);
+                    toastr.success(data.message, data.title, {
+                        timeOut: 5000,
+                        progressBar: true,
+                        rtl: javatmp.settings.isRTL,
+                        positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                    });
+                    if (successCallback && (typeof successCallback === "function")) {
+                        successCallback.call(m, data);
+                    }
+                },
+                error: function (data) {
+                    var errorMsg = javatmp.settings.labels["dialog.error.message"];
+                    try {
+                        var jsonData = $.parseJSON(data.responseText);
+                        errorMsg = jsonData.message;
+                    } catch (error) {
+                    }
+                    m.updateMessage(errorMsg);
+                    m.updateClosable(true);
+                    m.updateTitle(javatmp.settings.labels["dialog.error.title"]);
+                    toastr.error(errorMsg, javatmp.settings.labels["dialog.error.title"], {
+                        timeOut: 3000,
+                        progressBar: true,
+                        rtl: javatmp.settings.isRTL,
+                        positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                    });
+                    if (errorCallback && (typeof errorCallback === "function")) {
+                        errorCallback.call(m, data);
+                    }
+                }
+            });
+        });
+        m.show();
+    };
+
+
 }(jQuery, window, document));

@@ -256,12 +256,25 @@
 
             }
             disabled();
-            javatmp.plugins.DataTableColRenderWrapper = function (forceWidth) {
-                return function (data, type, row) {
+            /*
+             "createdCell": function (td, cellData, rowData, row, col) {
+             console.log(cellData);
+             console.log(rowData);
+             console.log(row);
+             console.log(col);
+             }
+             */
+            javatmp.plugins.DataTableColRenderWrapper = function (forceWidth, mapperObject) {
+                return function (data, type, row, meta) {
+//                    console.log(meta);
+//                    console.log(meta.settings);
+//                    console.log(meta.settings.aoColumns);
                     if (type === "sort" || type === 'type' || type === 'filter') {
                         return data;
+                    } else if (type === "display" && meta.settings.aoColumns[meta.col].type === "date") {
+                        return "<p class='m-0 p-0 text-truncate' style='width: " + forceWidth + ";'>" + moment(data, javatmp.settings.networkDateFormat).format(javatmp.settings.dateFormat) + "</p>";
                     } else if (type === "display") {
-                        return "<p class='m-0 p-0' style='width: " + forceWidth + ";'>" + data + "</p>";
+                        return "<p class='m-0 p-0 text-truncate' style='width: " + forceWidth + ";'>" + (mapperObject ? mapperObject[data] : data) + "</p>";
                     } else {
                         return data;
                     }
@@ -429,23 +442,8 @@
                     {data: 'userName', name: "userName", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
                     {data: 'firstName', name: "firstName", width: "8rem", "render": javatmp.plugins.DataTableColRenderWrapper("8rem")},
                     {data: 'lastName', name: "lastName", width: "8rem", "render": javatmp.plugins.DataTableColRenderWrapper("8rem")},
-                    {data: 'birthDate', "type": "date", name: "birthDate", width: "9rem",
-                        "render": function (data, type, row) {
-                            if (type === "sort" || type === 'type' || type === 'filter') {
-                                return moment(data, javatmp.settings.networkDateFormat).format(javatmp.settings.dateTimeFormat);
-                            } else {
-                                return "<p class='m-0 p-0' style='width: 9rem;'>" + moment(data, javatmp.settings.networkDateFormat).format(javatmp.settings.dateFormat) + "</p>";
-                            }
-                        },
-                        "createdCell": function (td, cellData, rowData, row, col) {
-                            console.log(cellData);
-                            console.log(rowData);
-                            console.log(row);
-                            console.log(col);
-                        }
-                    },
-                    {
-                        data: 'birthDate', name: "age", "type": "date", width: "4rem",
+                    {data: 'birthDate', "type": "date", name: "birthDate", width: "9rem", "render": javatmp.plugins.DataTableColRenderWrapper("9rem")},
+                    {data: 'birthDate', name: "age", "type": "date", width: "4rem",
                         "render": function (data, type, row) {
                             data = Math.ceil(moment().diff(moment(data, javatmp.settings.networkDateFormat), 'years', true));
                             if (type === "display") {
@@ -455,19 +453,10 @@
                             }
                         }
                     },
-                    {data: 'email', name: "email", width: "9rem",
-                        "render": function (data, type, row) {
-                            if (type === "display") {
-                                return "<p class='m-0 p-0 text-truncate' style='width: 10rem;'>" + data + "</p>";
-                            } else {
-                                return data;
-                            }
-                        }
-                    },
+                    {data: 'email', name: "email", width: "9rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
                     {data: 'status', name: "status", width: "7rem",
                         "render": function (data, type, row) {
-
-                            var statusMap = {"-1": {label: "Deleted", style: "danger"}, "0": {label: "Deactive", style: "warning"}, "1": {label: "Active", style: "success"}};
+                            var statusMap = {"0": {label: "Deactive", style: "warning"}, "1": {label: "Active", style: "success"}};
                             if (type === "display") {
                                 return "<p class='m-0 p-0' style='width: 7rem;'><span class='badge badge-" + statusMap[data].style + "'>" + statusMap[data].label + "</span></p>";
                             } else {
@@ -475,52 +464,11 @@
                             }
                         }
                     },
-                    {
-                        data: 'countryId', name: "countryId", width: "9rem",
-                        "render": function (data, type, row) {
-                            if (type === "sort" || type === 'type' || type === 'filter') {
-                                return data;
-                            } else {
-                                return "<p class='m-0 p-0 text-truncate' style='width: 9rem'>" + countriesMap[data] + "</p>";
-                            }
-                        }
-                    },
-                    {data: 'lang', name: "lang", width: "10rem",
-                        "render": function (data, type, row) {
-                            if (type === "display") {
-                                return "<p class='m-0 p-0' style='width: 10rem;'>" + languagesMap[data] + "</p>";
-                            } else {
-                                return data;
-                            }
-                        }
-                    },
-                    {data: 'theme', name: "theme", width: "10rem",
-                        "render": function (data, type, row) {
-                            if (type === "display") {
-                                return "<p class='m-0 p-0' style='width: 10rem;'>" + themesMap[data] + "</p>";
-                            } else {
-                                return data;
-                            }
-                        }
-                    },
-                    {data: 'timezone', name: "timezone", width: "11rem",
-                        "render": function (data, type, row) {
-                            if (type === "display") {
-                                return "<p class='m-0 p-0 text-truncate' style='width: 11rem;'>" + timezonesMap[data] + "</p>";
-                            } else {
-                                return data;
-                            }
-                        }
-                    },
-                    {data: 'creationDate', "type": "date", name: "creationDate", width: "9rem",
-                        "render": function (data, type, row) {
-                            if (type === "sort" || type === 'type' || type === 'filter') {
-                                return moment(data, javatmp.settings.networkDateFormat).format(javatmp.settings.dateTimeFormat);
-                            } else {
-                                return "<p class='m-0 p-0 text-truncate' style='width: 9rem;'>" + moment(data, javatmp.settings.networkDateFormat).format(javatmp.settings.dateTimeFormat) + "</p>";
-                            }
-
-                        }}
+                    {data: 'countryId', name: "countryId", width: "9rem", "render": javatmp.plugins.DataTableColRenderWrapper("9rem", countriesMap)},
+                    {data: 'lang', name: "lang", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem", languagesMap)},
+                    {data: 'theme', name: "theme", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem", themesMap)},
+                    {data: 'timezone', name: "timezone", width: "11rem", "render": javatmp.plugins.DataTableColRenderWrapper("11rem", timezonesMap)},
+                    {data: 'creationDate', "type": "date", name: "creationDate", width: "9rem", "render": javatmp.plugins.DataTableColRenderWrapper("9rem")}
                 ]
             });
             function getMenuPosition($contextMenu, mouse, direction, scrollDir, isRTL) {
@@ -556,8 +504,6 @@
                 });
                 $contextMenu.css({
                     display: "block",
-//                        left: e.pageX,
-//                        top: e.pageY
                     left: getMenuPosition($contextMenu, e.clientX, 'width', 'scrollLeft', javatmp.settings.isRTL),
                     right: "auto",
                     top: getMenuPosition($contextMenu, e.clientY, 'height', 'scrollTop', javatmp.settings.isRTL)
@@ -565,17 +511,13 @@
                 return false;
             });
             table.on('select', function (e, dt, type, indexes) {
-                //                alert("select");
                 var rowsData = table.rows(indexes).data().toArray();
                 var rowData = rowsData[0];
                 enabled(rowData);
-                //                alert("select" + JSON.stringify(rowData));
             }).on('deselect', function (e, dt, type, indexes) {
-                //                alert("descelect");
                 var rowsData = table.rows(indexes).data().toArray();
                 var rowData = rowsData[0];
                 disabled();
-                //                alert("descelect" + JSON.stringify(rowData));
             });
             addNewUserPopupButton.on("click", function (event) {
                 var passData = {};
@@ -616,157 +558,36 @@
                 var selectedData = table.rows({selected: true}).data();
                 if (selectedData.length > 0) {
                     var selectedRecord = selectedData[0];
-                    var passData = {};
-                    passData.id = selectedRecord.id;
-                    BootstrapModalWrapperFactory.createModal({
-                        message: javatmp.settings.labels["dialog.delete.message"],
-                        title: javatmp.settings.labels["dialog.delete.title"],
-                        closable: false,
-                        closeByBackdrop: false,
-                        buttons: [{
-                                label: javatmp.settings.labels["global.cancel"],
-                                cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.hide();
-                                }
-                            }, {
-                                label: javatmp.settings.labels["page.btn.deleteUser"],
-                                cssClass: "btn btn-danger",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    modalWrapper.hide();
-                                    var m = BootstrapModalWrapperFactory.createModal({
-                                        message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
-                                        closable: false,
-                                        closeByBackdrop: false,
-                                        closeByKeyboard: false
-                                    });
-                                    m.originalModal.find(".modal-dialog").css({transition: 'all 0.5s'});
-                                    m.show();
-                                    $.ajax({
-                                        type: "POST",
-                                        url: javatmp.settings.contextPath + "/user/DeleteUserController",
-                                        data: passData,
-//                                        dataType: "json",
-                                        //                                        contentType: "application/json; charset=UTF-8",
-                                        success: function (data) {
-                                            m.updateMessage(data.message);
-                                            m.updateClosable(true);
-                                            m.updateClosableByBackdrop(true);
-                                            m.updateTitle(data.title);
-                                            toastr.success(data.message, data.title, {
-                                                timeOut: 5000,
-                                                progressBar: true,
-                                                rtl: javatmp.settings.isRTL,
-                                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                                            });
-                                            // refresh users table:
-                                            table.columns.adjust().draw();
-                                        },
-                                        error: function (data) {
-                                            var errorMsg = javatmp.settings.labels["dialog.error.message"];
-                                            try {
-                                                var jsonData = $.parseJSON(data.responseText);
-                                                errorMsg = jsonData.message;
-                                            } catch (error) {
-                                            }
-                                            m.updateMessage(errorMsg);
-                                            m.updateClosable(true);
-                                            m.updateTitle(javatmp.settings.labels["dialog.error.title"]);
-                                            toastr.error(errorMsg, javatmp.settings.labels["dialog.error.title"], {
-                                                timeOut: 3000,
-                                                progressBar: true,
-                                                rtl: javatmp.settings.isRTL,
-                                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                                            });
-                                        }
-                                    });
-                                }
+                    window.javatmp.plugins.confirmAjaxAction(
+                            javatmp.settings.labels["dialog.delete.title"],
+                            javatmp.settings.labels["dialog.delete.message"],
+                            javatmp.settings.labels["page.btn.deleteUser"],
+                            javatmp.settings.labels["global.cancel"],
+                            javatmp.settings.contextPath + "/user/DeleteUserController",
+                            selectedRecord,
+                            function (data) {
+                                table.columns.adjust().draw();
                             }
-                        ]
-                    }).show();
+                    );
                 } else {
                     BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
                 }
-
             });
             activateUserButton.on("click", function (event) {
                 var selectedData = table.rows({selected: true}).data();
                 if (selectedData.length > 0) {
                     var selectedRecord = selectedData[0];
-                    //                    alert("row[" + JSON.stringify(selectedRecord) + "]");
-                    var passData = {};
-                    passData.callback = "actionCallback";
-                    passData.id = selectedRecord.id;
-                    BootstrapModalWrapperFactory.createModal({
-                        message: javatmp.settings.labels["dialog.activate.message"],
-                        title: javatmp.settings.labels["dialog.activate.title"],
-                        closable: false,
-                        closeByBackdrop: false,
-                        buttons: [
-                            {
-                                label: javatmp.settings.labels["global.cancel"],
-                                cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.hide();
-                                }
-                            },
-                            {
-                                label: javatmp.settings.labels["page.btn.activateUser"],
-                                cssClass: "btn btn-primary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    modalWrapper.hide();
-                                    var m = BootstrapModalWrapperFactory.createModal({
-                                        message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
-                                        closable: false,
-                                        closeByBackdrop: false,
-                                        closeByKeyboard: false
-                                    });
-                                    m.originalModal.find(".modal-dialog").css({transition: 'all 0.5s'});
-                                    m.originalModal.on('shown.bs.modal', function (e) {
-                                        $.ajax({
-                                            type: "POST",
-                                            url: javatmp.settings.contextPath + "/user/ActivateUserController",
-                                            data: passData,
-//                                        dataType: "json",
-                                            //                                        contentType: "application/json; charset=UTF-8",
-                                            success: function (data) {
-                                                m.updateMessage(data.message);
-                                                m.updateClosable(true);
-                                                m.updateClosableByBackdrop(true);
-                                                m.updateTitle(data.title);
-                                                toastr.success(data.message, data.title, {
-                                                    timeOut: 5000,
-                                                    progressBar: true,
-                                                    rtl: javatmp.settings.isRTL,
-                                                    positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                                                });
-                                                // refresh users table:
-                                                table.columns.adjust().draw();
-                                            },
-                                            error: function (data) {
-                                                var errorMsg = javatmp.settings.labels["dialog.error.message"];
-                                                try {
-                                                    var jsonData = $.parseJSON(data.responseText);
-                                                    errorMsg = jsonData.message;
-                                                } catch (error) {
-                                                }
-                                                m.updateMessage(errorMsg);
-                                                m.updateClosable(true);
-                                                m.updateTitle(javatmp.settings.labels["dialog.error.title"]);
-                                                toastr.error(errorMsg, javatmp.settings.labels["dialog.error.title"], {
-                                                    timeOut: 3000,
-                                                    progressBar: true,
-                                                    rtl: javatmp.settings.isRTL,
-                                                    positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                                                });
-                                            }
-                                        });
-                                    });
-                                    m.show();
-                                }
+                    window.javatmp.plugins.confirmAjaxAction(
+                            javatmp.settings.labels["dialog.activate.title"],
+                            javatmp.settings.labels["dialog.activate.message"],
+                            javatmp.settings.labels["page.btn.activateUser"],
+                            javatmp.settings.labels["global.cancel"],
+                            javatmp.settings.contextPath + "/user/ActivateUserController",
+                            selectedRecord,
+                            function (data) {
+                                table.columns.adjust().draw();
                             }
-                        ]
-                    }).show();
+                    );
                 } else {
                     BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
                 }
@@ -776,78 +597,17 @@
                 var selectedData = table.rows({selected: true}).data();
                 if (selectedData.length > 0) {
                     var selectedRecord = selectedData[0];
-                    //                    alert("row[" + JSON.stringify(selectedRecord) + "]");
-                    var passData = {};
-                    passData.callback = "actionCallback";
-                    passData.id = selectedRecord.id;
-                    BootstrapModalWrapperFactory.createModal({
-                        message: javatmp.settings.labels["dialog.inActivate.message"],
-                        title: javatmp.settings.labels["dialog.inActivate.title"],
-                        closable: false,
-                        closeByBackdrop: false,
-                        buttons: [{
-                                label: javatmp.settings.labels["global.cancel"],
-                                cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.hide();
-                                }
-                            }, {
-                                label: javatmp.settings.labels["page.btn.deactivateUser"],
-                                cssClass: "btn btn-warning",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    modalWrapper.hide();
-                                    var m = BootstrapModalWrapperFactory.createModal({
-                                        message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
-                                        closable: false,
-                                        closeByBackdrop: false,
-                                        closeByKeyboard: false
-                                    });
-                                    m.originalModal.find(".modal-dialog").css({transition: 'all 0.5s'});
-                                    m.originalModal.on('shown.bs.modal', function (e) {
-                                        $.ajax({
-                                            type: "POST",
-                                            url: javatmp.settings.contextPath + "/user/DeactivateUserController",
-                                            data: passData,
-//                                        dataType: "json",
-                                            //                                        contentType: "application/json; charset=UTF-8",
-                                            success: function (data) {
-                                                m.updateMessage(data.message);
-                                                m.updateClosable(true);
-                                                m.updateClosableByBackdrop(true);
-                                                m.updateTitle(data.title);
-                                                toastr.success(data.message, data.title, {
-                                                    timeOut: 5000,
-                                                    progressBar: true,
-                                                    rtl: javatmp.settings.isRTL,
-                                                    positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                                                });
-                                                // refresh users table:
-                                                table.columns.adjust().draw();
-                                            },
-                                            error: function (data) {
-                                                var errorMsg = javatmp.settings.labels["dialog.error.message"];
-                                                try {
-                                                    var jsonData = $.parseJSON(data.responseText);
-                                                    errorMsg = jsonData.message;
-                                                } catch (error) {
-                                                }
-                                                m.updateMessage(errorMsg);
-                                                m.updateClosable(true);
-                                                m.updateTitle(javatmp.settings.labels["dialog.error.title"]);
-                                                toastr.error(errorMsg, javatmp.settings.labels["dialog.error.title"], {
-                                                    timeOut: 3000,
-                                                    progressBar: true,
-                                                    rtl: javatmp.settings.isRTL,
-                                                    positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                                                });
-                                            }
-                                        });
-                                    });
-                                    m.show();
-                                }
+                    window.javatmp.plugins.confirmAjaxAction(
+                            javatmp.settings.labels["dialog.inActivate.title"],
+                            javatmp.settings.labels["dialog.inActivate.message"],
+                            javatmp.settings.labels["page.btn.deactivateUser"],
+                            javatmp.settings.labels["global.cancel"],
+                            javatmp.settings.contextPath + "/user/DeactivateUserController",
+                            selectedRecord,
+                            function (data) {
+                                table.columns.adjust().draw();
                             }
-                        ]
-                    }).show();
+                    );
                 } else {
                     BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
                 }
