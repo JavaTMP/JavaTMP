@@ -264,6 +264,15 @@
              console.log(col);
              }
              */
+            javatmp.plugins.DataTableColFilterWrapper = function (dataTableReference, colIndex, escape) {
+                return function (event) {
+                    var $this = $(this);
+                    javatmp.util.waitForFinalEvent(function () {
+                        var val = escape ? $.fn.dataTable.util.escapeRegex($this.val()) : $this.val();
+                        dataTableReference.column(colIndex).search(val ? val : '', true, false).draw();
+                    }, 200, "@table-filter");
+                };
+            };
             javatmp.plugins.DataTableColRenderWrapper = function (forceWidth, mapperObject) {
                 return function (data, type, row, meta) {
 //                    console.log(meta);
@@ -314,97 +323,25 @@
                 initComplete: function (settings, json) {
                     var api = this.api();
                     // prepare id filter search field:
-                    var idFilterInput = $("#userlist-id-filter");
-                    idFilterInput.on('keyup', function () {
-                        var $this = $(this);
-                        javatmp.util.waitForFinalEvent(function () {
-                            var val = $.fn.dataTable.util.escapeRegex($this.val());
-                            api.column(0).search(val ? val : '', true, false).draw();
-                        }, 200, "@userlist-main-table-filter");
-                    });
-                    var usernameFilterInput = $("#userlist-username-filter");
-                    usernameFilterInput.on('keyup', function () {
-                        var $this = $(this);
-                        javatmp.util.waitForFinalEvent(function () {
-                            var val = $.fn.dataTable.util.escapeRegex($this.val());
-                            api.column(1).search(val ? val : '', true, false).draw();
-                        }, 200, "@userlist-main-table-filter");
-                    });
-                    var firstNameFilterInput = $("#userlist-firstname-filter");
-                    firstNameFilterInput.on('keyup', function () {
-                        var $this = $(this);
-                        javatmp.util.waitForFinalEvent(function () {
-                            var val = $.fn.dataTable.util.escapeRegex($this.val());
-                            api.column(2).search(val ? val : '', true, false).draw();
-                        }, 200, "@userlist-main-table-filter");
-                    });
-                    var lastNameFilterInput = $("#userlist-lastname-filter");
-                    lastNameFilterInput.on('keyup', function () {
-                        var $this = $(this);
-                        javatmp.util.waitForFinalEvent(function () {
-                            var val = $.fn.dataTable.util.escapeRegex($this.val());
-                            api.column(3).search(val ? val : '', true, false).draw();
-                        }, 200, "@userlist-main-table-filter");
-                    });
-                    var birthdateFilterInput = $("#userlist-birthdate-filter");
-                    birthdateFilterInput.on('change', function () {
-                        var $this = $(this);
-                        javatmp.util.waitForFinalEvent(function () {
-                            var val = $this.val();
-                            api.column(4).search(val ? val : '', true, false).draw();
-                        }, 200, "@userlist-main-table-filter");
-                    });
+                    var idFilterInput = $("#userlist-id-filter").on('keyup', javatmp.plugins.DataTableColFilterWrapper(api, 0));
+                    var usernameFilterInput = $("#userlist-username-filter").on('keyup', javatmp.plugins.DataTableColFilterWrapper(api, 1));
+                    var firstNameFilterInput = $("#userlist-firstname-filter").on('keyup', javatmp.plugins.DataTableColFilterWrapper(api, 2));
+                    var lastNameFilterInput = $("#userlist-lastname-filter").on('keyup', javatmp.plugins.DataTableColFilterWrapper(api, 3));
+                    var birthdateFilterInput = $("#userlist-birthdate-filter").on('change', javatmp.plugins.DataTableColFilterWrapper(api, 4, false));
                     var birthDateInputMask = javatmp.plugins.inputmaskWrapperForDate(birthdateFilterInput);
                     var birthDateDatePicker = javatmp.plugins.daterangepickerWrapperForDate(birthdateFilterInput);
-                    var ageFilterInput = $("#userlist-age-filter");
-                    ageFilterInput.on('keyup', function () {
-                        var $this = $(this);
-                        javatmp.util.waitForFinalEvent(function () {
-                            var val = $this.val();
-                            api.column(5).search(val ? val : '', true, false).draw();
-                        }, 200, "@userlist-main-table-filter");
-                    });
-                    var emailFilterInput = $("#userlist-email-filter");
-                    emailFilterInput.on('keyup', function () {
-                        var $this = $(this);
-                        javatmp.util.waitForFinalEvent(function () {
-                            var val = $.fn.dataTable.util.escapeRegex($this.val());
-                            api.column(6).search(val ? val : '', true, false).draw();
-                        }, 200, "@userlist-main-table-filter");
-                    });
+                    var ageFilterInput = $("#userlist-age-filter").on('keyup', javatmp.plugins.DataTableColFilterWrapper(api, 5, false));
+                    var emailFilterInput = $("#userlist-email-filter").on('keyup', javatmp.plugins.DataTableColFilterWrapper(api, 6, false));
                     var statusFilterInput = $("#userlist-status-filter");
-                    var statusSelect = javatmp.plugins.select2Wrapper(statusFilterInput);
-                    statusSelect.on("select2:close", function () {
-                        var val = $(this).val();
-                        api.column(7).search(val ? val : '', false, false).draw();
-                    });
+                    var statusSelect = javatmp.plugins.select2Wrapper(statusFilterInput).on("select2:close", javatmp.plugins.DataTableColFilterWrapper(api, 7));
                     var countryFilterInput = $("#userlist-country-filter");
-                    var countryIdSelect = javatmp.plugins.select2WrapperForCountry(countryFilterInput);
-                    countryIdSelect.on("select2:close", function () {
-                        var val = $(this).val();
-                        api.column(8).search(val ? val : '', false, false).draw();
-                    });
-                    // 10 Language Field userlist-language-filter
+                    var countryIdSelect = javatmp.plugins.select2WrapperForCountry(countryFilterInput).on("select2:close", javatmp.plugins.DataTableColFilterWrapper(api, 8));
                     var languageFilterInput = $("#userlist-language-filter");
-                    var langSelect = javatmp.plugins.select2Wrapper(languageFilterInput);
-                    langSelect.on("select2:close", function () {
-                        var val = $(this).val();
-                        api.column(9).search(val ? val : '', false, false).draw();
-                    });
-                    // 11 Theme Field userlist-theme-filter
+                    var langSelect = javatmp.plugins.select2Wrapper(languageFilterInput).on("select2:close", javatmp.plugins.DataTableColFilterWrapper(api, 9));
                     var themeFilterInput = $("#userlist-theme-filter");
-                    var themeSelect = javatmp.plugins.select2WrapperForTheme(themeFilterInput);
-                    themeSelect.on("select2:close", function () {
-                        var val = $(this).val();
-                        api.column(10).search(val ? val : '', false, false).draw();
-                    });
-                    // 12 Timezone Filed userlist-timezone-filter
+                    var themeSelect = javatmp.plugins.select2WrapperForTheme(themeFilterInput).on("select2:close", javatmp.plugins.DataTableColFilterWrapper(api, 10));
                     var timezoneFilterInput = $("#userlist-timezone-filter");
-                    var timezoneSelect = javatmp.plugins.select2Wrapper(timezoneFilterInput);
-                    timezoneSelect.on("select2:close", function () {
-                        var val = $(this).val();
-                        api.column(10).search(val ? val : '', false, false).draw();
-                    });
+                    var timezoneSelect = javatmp.plugins.select2Wrapper(timezoneFilterInput).on("select2:close", javatmp.plugins.DataTableColFilterWrapper(api, 11));
                     var creationdateFilterInput = $("#userlist-creationdate-filter");
                     var creationdateFilterRange = javatmp.plugins.daterangepickerWrapperForDateRange(creationdateFilterInput);
                     creationdateFilterInput.on('change', function () {
@@ -537,7 +474,6 @@
                 var selectedData = table.rows({selected: true}).data();
                 if (selectedData.length > 0) {
                     var selectedRecord = selectedData[0];
-                    //                    alert("row[" + JSON.stringify(selectedRecord) + "]");
                     var passData = {};
                     passData.callback = "actionCallback";
                     passData.id = selectedRecord.id;
