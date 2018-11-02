@@ -408,45 +408,9 @@
                     {data: 'creationDate', "type": "date", name: "creationDate", width: "9rem", "render": javatmp.plugins.DataTableColRenderWrapper("9rem")}
                 ]
             });
-            function getMenuPosition($contextMenu, mouse, direction, scrollDir, isRTL) {
-                var win = $(window)[direction]();
-                var scroll = $(window)[scrollDir]();
-                var menu = $($contextMenu)[direction]();
-//                var position = mouse + scroll;
-                var position = mouse + 0;
-                if (direction === "width" && (position - $($contextMenu)[direction]() > 0) && isRTL) {
-                    position = position - $($contextMenu)[direction]();
-                } else {
-                    // opening menu would pass the side of the page
-                    if (mouse + menu > win && menu < mouse)
-                        position -= menu;
-                }
-                return position;
-            }
 
-            $('tbody', userTableElement).on('contextmenu', 'tr[data-row-id]', function (e) {
-                // https://stackoverflow.com/questions/18666601/use-bootstrap-3-dropdown-menu-as-context-menu
-                var rowId = $(this).data("row-id");
-                if ($(this).hasClass("selected") === false) {
-                    table.row(this).select();
-                }
-                if (e.ctrlKey)
-                    return;
-                var $contextMenu = $("#contextMenu");
-                $contextMenu.on("click", "a", function () {
-                    $contextMenu.hide();
-                });
-                $('body').on("click", function () {
-                    $contextMenu.hide();
-                });
-                $contextMenu.css({
-                    display: "block",
-                    left: getMenuPosition($contextMenu, e.clientX, 'width', 'scrollLeft', javatmp.settings.isRTL),
-                    right: "auto",
-                    top: getMenuPosition($contextMenu, e.clientY, 'height', 'scrollTop', javatmp.settings.isRTL)
-                });
-                return false;
-            });
+            window.javatmp.plugins.contextMenuWrapper($('tbody', userTableElement), 'tr[data-row-id]', $("#contextMenu"));
+
             table.on('select', function (e, dt, type, indexes) {
                 var rowsData = table.rows(indexes).data().toArray();
                 var rowData = rowsData[0];
@@ -557,7 +521,6 @@
             };
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
-
             });
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
                 // fire when user resize browser window or sidebar hide / show

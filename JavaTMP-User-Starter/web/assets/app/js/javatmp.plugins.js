@@ -342,5 +342,44 @@
         m.show();
     };
 
+    window.javatmp.plugins.contextMenuWrapper = function (element, selector, $contextMenu) {
+        function getMenuPosition($contextMenu, mouse, direction, scrollDir, isRTL) {
+            var win = $(window)[direction]();
+            var scroll = $(window)[scrollDir]();
+            var menu = $($contextMenu)[direction]();
+//                var position = mouse + scroll;
+            var position = mouse + 0;
+            if (direction === "width" && (position - $($contextMenu)[direction]() > 0) && isRTL) {
+                position = position - $($contextMenu)[direction]();
+            } else {
+                // opening menu would pass the side of the page
+                if (mouse + menu > win && menu < mouse)
+                    position -= menu;
+            }
+            return position;
+        }
+        $(element).on('contextmenu', selector, function (e) {
+            // https://stackoverflow.com/questions/18666601/use-bootstrap-3-dropdown-menu-as-context-menu
+            if (e.ctrlKey)
+                return;
+
+            $contextMenu.on("click", "a", function () {
+                $contextMenu.hide();
+            });
+
+            $('body').on("click", function () {
+                $contextMenu.hide();
+            });
+
+            $contextMenu.css({
+                display: "block",
+                left: getMenuPosition($contextMenu, e.clientX, 'width', 'scrollLeft', javatmp.settings.isRTL),
+                right: "auto",
+                top: getMenuPosition($contextMenu, e.clientY, 'height', 'scrollTop', javatmp.settings.isRTL)
+            });
+            return false;
+        });
+
+    };
 
 }(jQuery, window, document));
