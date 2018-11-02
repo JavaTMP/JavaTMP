@@ -47,6 +47,42 @@
         });
     };
 
+    window.javatmp.plugins.daterangepickerWrapperForDateRange = function (element, options) {
+
+        var settings = $.extend(true, {}, {
+            "opens": javatmp.settings.floatDefault,
+            startDate: moment().subtract(100, 'years'),
+            endDate: moment(),
+            minDate: '01/01/1900',
+            maxDate: '31/12/2099',
+            timePicker: true,
+            autoApply: true,
+            autoUpdateInput: false,
+            locale: {
+                "direction": javatmp.settings.direction,
+                format: javatmp.settings.dateTimeSecondFormat
+            },
+            ranges: {
+                'Today': [moment().startOf('day'), moment().endOf("day")],
+                'Yesterday': [moment().subtract(1, 'days').startOf('day'), moment().subtract(1, 'days').endOf("day")],
+                'Last 7 Days': [moment().subtract(6, 'days').startOf('day'), moment().endOf("day")],
+                'Last 30 Days': [moment().subtract(29, 'days').startOf('day'), moment().endOf("day")],
+                'This Month': [moment().startOf('month').startOf('day'), moment().endOf('month').endOf("day")],
+                'Last Month': [moment().subtract(1, 'month').startOf('month').startOf('day'), moment().subtract(1, 'month').endOf('month').endOf("day")]
+            }
+        }, options);
+
+        return $(element).daterangepicker(settings).on('apply.daterangepicker', function (ev, picker) {
+            $(element).data("start", picker.startDate);
+            $(element).data("end", picker.endDate);
+            $(element).val(picker.startDate.format(javatmp.settings.dateTimeSecondFormat) + ' - ' + picker.endDate.format(javatmp.settings.dateTimeSecondFormat)).trigger("change");
+        }).on('cancel.daterangepicker', function (ev, picker) {
+            $(element).removeData("start");
+            $(element).removeData("end");
+            $(this).val('').trigger("change");
+        });
+    };
+
     window.javatmp.plugins.summernoteWrapper = function (element, options) {
 
         var settings = $.extend(true, {}, {
@@ -66,8 +102,10 @@
             dir: javatmp.settings.direction,
             placeholder: javatmp.settings.labels['page.text.kindlySelect'],
             allowClear: true,
-            containerCssClass: ':all:'
-//            width: '100%'
+            containerCssClass: ':all:',
+            escapeMarkup: function (markup) {
+                return markup;
+            }
         }, options);
 
         return $(element).select2(settings).on("select2:select", function () {
@@ -183,7 +221,6 @@
             placeholder: javatmp.settings.labels['page.text.kindlySelect'],
             allowClear: true,
             containerCssClass: ':all:',
-            width: '100%',
             templateSelection: formatCountrySelection,
             templateResult: formatCountry,
             escapeMarkup: function (markup) {

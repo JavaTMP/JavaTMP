@@ -231,7 +231,6 @@
                     timezonesMap[value] = text;
                 }
             });
-
             var addNewUserPopupButton = $("#UserList-AddNewUserPopupId");
             var updateUserButton = $("#UserList-UpdateSelectedUserId");
             var deleteUserButton = $("#UserList-DeleteSelectedUserId");
@@ -257,10 +256,20 @@
 
             }
             disabled();
-
+            javatmp.plugins.DataTableColRenderWrapper = function (forceWidth) {
+                return function (data, type, row) {
+                    if (type === "sort" || type === 'type' || type === 'filter') {
+                        return data;
+                    } else if (type === "display") {
+                        return "<p class='m-0 p-0' style='width: " + forceWidth + ";'>" + data + "</p>";
+                    } else {
+                        return data;
+                    }
+                }
+                ;
+            };
             $.fn.select2.defaults.set("theme", "bootstrap");
             $.fn.select2.defaults.set("dir", javatmp.settings.direction);
-
             $.fn.dataTable.ext.errMode = 'none';
             var table = userTableElement.DataTable({
                 // https://datatables.net/reference/option/dom
@@ -324,7 +333,6 @@
                             api.column(3).search(val ? val : '', true, false).draw();
                         }, 200, "@userlist-main-table-filter");
                     });
-
                     var birthdateFilterInput = $("#userlist-birthdate-filter");
                     birthdateFilterInput.on('change', function () {
                         var $this = $(this);
@@ -335,9 +343,6 @@
                     });
                     var birthDateInputMask = javatmp.plugins.inputmaskWrapperForDate(birthdateFilterInput);
                     var birthDateDatePicker = javatmp.plugins.daterangepickerWrapperForDate(birthdateFilterInput);
-
-
-
                     var ageFilterInput = $("#userlist-age-filter");
                     ageFilterInput.on('keyup', function () {
                         var $this = $(this);
@@ -346,7 +351,6 @@
                             api.column(5).search(val ? val : '', true, false).draw();
                         }, 200, "@userlist-main-table-filter");
                     });
-
                     var emailFilterInput = $("#userlist-email-filter");
                     emailFilterInput.on('keyup', function () {
                         var $this = $(this);
@@ -355,197 +359,41 @@
                             api.column(6).search(val ? val : '', true, false).draw();
                         }, 200, "@userlist-main-table-filter");
                     });
-
                     var statusFilterInput = $("#userlist-status-filter");
-                    statusFilterInput.on('change', function () {
-                        var $this = $(this);
-                        javatmp.util.waitForFinalEvent(function () {
-                            //                            var val = $.fn.dataTable.util.escapeRegex($this.val());
-                            var val = $this.val();
-                            api.column(7).search(val ? val : '', false, false).draw();
-                        }, 200, "@userlist-main-table-filter");
-                    });
-
-//                    var statusSelect = javatmp.plugins.select2Wrapper(statusFilterInput);
-
-                    statusFilterInput.select2({
-                        theme: "bootstrap",
-                        dir: javatmp.settings.direction,
-                        containerCssClass: ':all:',
-                        escapeMarkup: function (markup) {
-                            return markup;
-                        }
+                    var statusSelect = javatmp.plugins.select2Wrapper(statusFilterInput);
+                    statusSelect.on("select2:close", function () {
+                        var val = $(this).val();
+                        api.column(7).search(val ? val : '', false, false).draw();
                     });
                     var countryFilterInput = $("#userlist-country-filter");
-                    countryFilterInput.on('change', function () {
-                        var $this = $(this);
-                        javatmp.util.waitForFinalEvent(function () {
-                            var val = $this.val();
-                            api.column(8).search(val ? val : '', false, false).draw();
-                        }, 200, "@userlist-main-table-filter");
+                    var countryIdSelect = javatmp.plugins.select2WrapperForCountry(countryFilterInput);
+                    countryIdSelect.on("select2:close", function () {
+                        var val = $(this).val();
+                        api.column(8).search(val ? val : '', false, false).draw();
                     });
-                    countryFilterInput.select2({
-                        theme: "bootstrap",
-                        dir: javatmp.settings.direction,
-                        templateSelection: formatCountrySelection,
-                        templateResult: formatCountry,
-                        escapeMarkup: function (markup) {
-                            return markup;
-                        }
-                    });
-
-                    function formatCountry(repo) {
-                        if (repo.loading)
-                            return repo.text;
-
-                        var targetData = {};
-                        if (repo.id === "") {
-                            targetData = {
-                                'imagePath': javatmp.settings.contextPath + "/assets/img/flags/globe.png",
-                                'countryText': repo.text,
-                                'countryId': ""
-                            };
-                        } else {
-                            targetData = {
-                                'imagePath': javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png",
-                                'countryText': repo.text,
-                                'countryId': " (" + repo.id + ")"
-                            };
-                        }
-                        var template =
-                                '    <div class="media d-flex align-items-center">' +
-                                '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
-                                '        <div class="media-body">' +
-                                '            <strong class="">{{countryText}}{{countryId}}</strong>' +
-                                '        </div>' +
-                                '    </div>';
-                        var readyData = template.composeTemplate(targetData);
-                        return readyData;
-                    }
-                    function formatCountrySelection(repo) {
-                        if (!repo.id) {
-                            return repo.text;
-                        }
-                        var targetData = {};
-                        if (repo.id === "") {
-                            targetData = {
-                                'imagePath': javatmp.settings.contextPath + "/assets/img/flags/globe.png",
-                                'countryText': repo.text,
-                                'countryId': ""
-                            };
-                        } else {
-                            targetData = {
-                                'imagePath': javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png",
-                                'countryText': repo.text,
-                                'countryId': " (" + repo.id + ")"
-                            };
-                        }
-
-                        var template =
-                                '    <div class="media d-flex align-items-center">' +
-                                '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
-                                '        <div class="media-body">' +
-                                '            <span class="">{{countryText}}{{countryId}}</span>' +
-                                '        </div>' +
-                                '    </div>';
-                        var readyData = template.composeTemplate(targetData);
-                        return readyData;
-                    }
-
                     // 10 Language Field userlist-language-filter
                     var languageFilterInput = $("#userlist-language-filter");
-                    languageFilterInput.on('change', function () {
-                        var $this = $(this);
-                        javatmp.util.waitForFinalEvent(function () {
-                            var val = $this.val();
-                            api.column(9).search(val ? val : '', false, false).draw();
-                        }, 200, "@userlist-main-table-filter");
+                    var langSelect = javatmp.plugins.select2Wrapper(languageFilterInput);
+                    langSelect.on("select2:close", function () {
+                        var val = $(this).val();
+                        api.column(9).search(val ? val : '', false, false).draw();
                     });
-                    languageFilterInput.select2({
-                        theme: "bootstrap",
-                        dir: javatmp.settings.direction,
-                        containerCssClass: ':all:',
-                        escapeMarkup: function (markup) {
-                            return markup;
-                        }
-                    });
-
                     // 11 Theme Field userlist-theme-filter
                     var themeFilterInput = $("#userlist-theme-filter");
-                    themeFilterInput.on('change', function () {
-                        var $this = $(this);
-                        javatmp.util.waitForFinalEvent(function () {
-                            var val = $this.val();
-                            api.column(10).search(val ? val : '', false, false).draw();
-                        }, 200, "@userlist-main-table-filter");
+                    var themeSelect = javatmp.plugins.select2WrapperForTheme(themeFilterInput);
+                    themeSelect.on("select2:close", function () {
+                        var val = $(this).val();
+                        api.column(10).search(val ? val : '', false, false).draw();
                     });
-                    themeFilterInput.select2({
-                        theme: "bootstrap",
-                        dir: javatmp.settings.direction,
-                        containerCssClass: ':all:',
-                        escapeMarkup: function (markup) {
-                            return markup;
-                        },
-                        templateSelection: formatThemeSelection,
-                        templateResult: formatThemeResult
-                    });
-                    function formatThemeSelection(repo) {
-                        if (!repo.id) {
-                            return repo.text;
-                        }
-
-                        var imagePath = javatmp.settings.contextPath + "/assets/img/themes/" + repo.text + ".png";
-                        var template =
-                                '    <div class="media d-flex align-items-center">' +
-                                '        <img style="height: 1.5rem;" class="mr-1" src="{{imagePath}}" alt="{{themeName}}"/>' +
-                                '        <div class="media-body">' +
-                                '            <span>{{themeName}}</span>' +
-                                '        </div>' +
-                                '    </div>';
-                        var readyData = template.composeTemplate({
-                            'imagePath': imagePath,
-                            'themeName': repo.text
-                        });
-                        return readyData;
-                    }
-                    function formatThemeResult(repo) {
-                        if (!repo.id) {
-                            return repo.text;
-                        }
-
-                        var imagePath = javatmp.settings.contextPath + "/assets/img/themes/" + repo.text + ".png";
-                        var template =
-                                '    <div class="media d-flex align-items-center">' +
-                                '        <img style="height: 32px;" class="mr-1" src="{{imagePath}}" alt="{{themeName}}"/>' +
-                                '        <div class="media-body">' +
-                                '            <span>{{themeName}}</span>' +
-                                '        </div>' +
-                                '    </div>';
-                        var readyData = template.composeTemplate({
-                            'imagePath': imagePath,
-                            'themeName': repo.text
-                        });
-                        return readyData;
-                    }
                     // 12 Timezone Filed userlist-timezone-filter
                     var timezoneFilterInput = $("#userlist-timezone-filter");
-                    timezoneFilterInput.on('change', function () {
-                        var $this = $(this);
-                        javatmp.util.waitForFinalEvent(function () {
-                            var val = $this.val();
-                            api.column(11).search(val ? val : '', false, false).draw();
-                        }, 200, "@userlist-main-table-filter");
+                    var timezoneSelect = javatmp.plugins.select2Wrapper(timezoneFilterInput);
+                    timezoneSelect.on("select2:close", function () {
+                        var val = $(this).val();
+                        api.column(10).search(val ? val : '', false, false).draw();
                     });
-                    timezoneFilterInput.select2({
-                        theme: "bootstrap",
-                        dir: javatmp.settings.direction,
-                        containerCssClass: ':all:',
-                        escapeMarkup: function (markup) {
-                            return markup;
-                        }
-                    });
-                    // 13 CreationDate Field
                     var creationdateFilterInput = $("#userlist-creationdate-filter");
+                    var creationdateFilterRange = javatmp.plugins.daterangepickerWrapperForDateRange(creationdateFilterInput);
                     creationdateFilterInput.on('change', function () {
                         var $this = $(this);
                         javatmp.util.waitForFinalEvent(function () {
@@ -560,40 +408,6 @@
                             api.column(12).search(val ? val : '', false, false).draw();
                         }, 200, "@userlist-main-table-filter");
                     });
-                    creationdateFilterInput.daterangepicker({
-                        "opens": javatmp.settings.floatDefault,
-                        startDate: moment().subtract(100, 'years'),
-                        endDate: moment(),
-                        minDate: '01/01/1900',
-                        maxDate: '31/12/2099',
-                        timePicker: true,
-                        autoApply: true,
-                        autoUpdateInput: false,
-                        locale: {
-                            "direction": javatmp.settings.direction,
-                            format: javatmp.settings.dateTimeSecondFormat
-
-                        },
-                        ranges: {
-                            'Today': [moment().startOf('day'), moment().endOf("day")],
-                            'Yesterday': [moment().subtract(1, 'days').startOf('day'), moment().subtract(1, 'days').endOf("day")],
-                            'Last 7 Days': [moment().subtract(6, 'days').startOf('day'), moment().endOf("day")],
-                            'Last 30 Days': [moment().subtract(29, 'days').startOf('day'), moment().endOf("day")],
-                            'This Month': [moment().startOf('month').startOf('day'), moment().endOf('month').endOf("day")],
-                            'Last Month': [moment().subtract(1, 'month').startOf('month').startOf('day'), moment().subtract(1, 'month').endOf('month').endOf("day")]
-                        }
-                    });
-                    creationdateFilterInput.on('apply.daterangepicker', function (ev, picker) {
-                        creationdateFilterInput.data("start", picker.startDate);
-                        creationdateFilterInput.data("end", picker.endDate);
-                        creationdateFilterInput.val(picker.startDate.format(javatmp.settings.dateTimeSecondFormat) + ' - ' + picker.endDate.format(javatmp.settings.dateTimeSecondFormat)).trigger("change");
-                    });
-                    creationdateFilterInput.on('cancel.daterangepicker', function (ev, picker) {
-                        creationdateFilterInput.removeData("start");
-                        creationdateFilterInput.removeData("end");
-                        $(this).val('').trigger("change");
-                    });
-
                 },
                 "ajax": {
                     "type": "POST",
@@ -611,55 +425,23 @@
                     }
                 },
                 columns: [
-                    {data: 'id', className: "", name: "id", width: "6rem",
-                        "render": function (data, type, row) {
-                            if (type === "display") {
-                                return "<p class='m-0 p-0' style='width: 6rem;'>" + data + "</p>";
-                            } else {
-                                return data;
-                            }
-                        }
-                    },
-                    {
-                        data: 'userName', name: "userName", width: "10rem",
-                        "render": function (data, type, row) {
-                            if (type === "sort" || type === 'type' || type === 'filter') {
-                                return data;
-                            } else {
-                                return "<p class='m-0 p-0' style='width: 10rem;'>" + data + "</p>";
-                            }
-                        }
-                    },
-                    {
-                        data: 'firstName', name: "firstName", width: "8rem",
-                        "render": function (data, type, row) {
-                            if (type === "sort" || type === 'type' || type === 'filter') {
-                                return data;
-                            } else {
-                                return "<p class='m-0 p-0' style='width: 8rem;'>" + data + "</p>";
-                            }
-
-                        }
-                    },
-                    {
-                        data: 'lastName', name: "lastName", width: "8rem",
-                        "render": function (data, type, row) {
-                            if (type === "sort" || type === 'type' || type === 'filter') {
-                                return data;
-                            } else {
-                                return "<p class='m-0 p-0' style='width: 8rem;'>" + data + "</p>";
-                            }
-
-                        }
-                    },
-                    {
-                        data: 'birthDate', "type": "date", name: "birthDate", width: "9rem",
+                    {data: 'id', className: "", name: "id", width: "6rem", "render": javatmp.plugins.DataTableColRenderWrapper("6rem")},
+                    {data: 'userName', name: "userName", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                    {data: 'firstName', name: "firstName", width: "8rem", "render": javatmp.plugins.DataTableColRenderWrapper("8rem")},
+                    {data: 'lastName', name: "lastName", width: "8rem", "render": javatmp.plugins.DataTableColRenderWrapper("8rem")},
+                    {data: 'birthDate', "type": "date", name: "birthDate", width: "9rem",
                         "render": function (data, type, row) {
                             if (type === "sort" || type === 'type' || type === 'filter') {
                                 return moment(data, javatmp.settings.networkDateFormat).format(javatmp.settings.dateTimeFormat);
                             } else {
                                 return "<p class='m-0 p-0' style='width: 9rem;'>" + moment(data, javatmp.settings.networkDateFormat).format(javatmp.settings.dateFormat) + "</p>";
                             }
+                        },
+                        "createdCell": function (td, cellData, rowData, row, col) {
+                            console.log(cellData);
+                            console.log(rowData);
+                            console.log(row);
+                            console.log(col);
                         }
                     },
                     {
@@ -686,7 +468,6 @@
                         "render": function (data, type, row) {
 
                             var statusMap = {"-1": {label: "Deleted", style: "danger"}, "0": {label: "Deactive", style: "warning"}, "1": {label: "Active", style: "success"}};
-
                             if (type === "display") {
                                 return "<p class='m-0 p-0' style='width: 7rem;'><span class='badge badge-" + statusMap[data].style + "'>" + statusMap[data].label + "</span></p>";
                             } else {
@@ -781,10 +562,8 @@
                     right: "auto",
                     top: getMenuPosition($contextMenu, e.clientY, 'height', 'scrollTop', javatmp.settings.isRTL)
                 });
-
                 return false;
             });
-
             table.on('select', function (e, dt, type, indexes) {
                 //                alert("select");
                 var rowsData = table.rows(indexes).data().toArray();
@@ -798,7 +577,6 @@
                 disabled();
                 //                alert("descelect" + JSON.stringify(rowData));
             });
-
             addNewUserPopupButton.on("click", function (event) {
                 var passData = {};
                 passData.callback = "actionCallback";
@@ -811,7 +589,6 @@
                     url: javatmp.settings.contextPath + "/user/GetCreateNewUserPopupController",
                     ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                 });
-
             });
             updateUserButton.on("click", function (event) {
                 //                var selectedCount = table.rows({selected: true}).count();
@@ -876,14 +653,12 @@
                                             m.updateClosable(true);
                                             m.updateClosableByBackdrop(true);
                                             m.updateTitle(data.title);
-
                                             toastr.success(data.message, data.title, {
                                                 timeOut: 5000,
                                                 progressBar: true,
                                                 rtl: javatmp.settings.isRTL,
                                                 positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
                                             });
-
                                             // refresh users table:
                                             table.columns.adjust().draw();
                                         },
@@ -897,7 +672,6 @@
                                             m.updateMessage(errorMsg);
                                             m.updateClosable(true);
                                             m.updateTitle(javatmp.settings.labels["dialog.error.title"]);
-
                                             toastr.error(errorMsg, javatmp.settings.labels["dialog.error.title"], {
                                                 timeOut: 3000,
                                                 progressBar: true,
@@ -960,14 +734,12 @@
                                                 m.updateClosable(true);
                                                 m.updateClosableByBackdrop(true);
                                                 m.updateTitle(data.title);
-
                                                 toastr.success(data.message, data.title, {
                                                     timeOut: 5000,
                                                     progressBar: true,
                                                     rtl: javatmp.settings.isRTL,
                                                     positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
                                                 });
-
                                                 // refresh users table:
                                                 table.columns.adjust().draw();
                                             },
@@ -981,7 +753,6 @@
                                                 m.updateMessage(errorMsg);
                                                 m.updateClosable(true);
                                                 m.updateTitle(javatmp.settings.labels["dialog.error.title"]);
-
                                                 toastr.error(errorMsg, javatmp.settings.labels["dialog.error.title"], {
                                                     timeOut: 3000,
                                                     progressBar: true,
@@ -1044,14 +815,12 @@
                                                 m.updateClosable(true);
                                                 m.updateClosableByBackdrop(true);
                                                 m.updateTitle(data.title);
-
                                                 toastr.success(data.message, data.title, {
                                                     timeOut: 5000,
                                                     progressBar: true,
                                                     rtl: javatmp.settings.isRTL,
                                                     positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
                                                 });
-
                                                 // refresh users table:
                                                 table.columns.adjust().draw();
                                             },
@@ -1065,7 +834,6 @@
                                                 m.updateMessage(errorMsg);
                                                 m.updateClosable(true);
                                                 m.updateTitle(javatmp.settings.labels["dialog.error.title"]);
-
                                                 toastr.error(errorMsg, javatmp.settings.labels["dialog.error.title"], {
                                                     timeOut: 3000,
                                                     progressBar: true,
@@ -1091,8 +859,6 @@
                     table.columns.adjust().draw();
                 }
             };
-
-
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
 
