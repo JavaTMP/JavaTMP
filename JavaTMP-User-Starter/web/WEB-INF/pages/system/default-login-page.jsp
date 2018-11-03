@@ -57,11 +57,11 @@
                 var validator = null;
                 var alertError = null;
                 loginForm.on("submit", function (event) {
+                    $('#' + alertError).remove();
                     event.preventDefault();
                     if (!$(this).valid()) {
                         return;
                     }
-                    $('#' + alertError).remove();
                     var httpType = $(this).attr("method");
                     var post_url = $(this).attr("action"); //get form action url
                     //                    var form_data = new FormData(loginForm); //Creates new FormData object
