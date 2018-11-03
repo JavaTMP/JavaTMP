@@ -33,7 +33,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
@@ -51,7 +50,7 @@
                                             <div class="col-sm-2">
                                                 <div class="form-group">
                                                     <label class="control-label">${labels['domain.user.status']}</label>
-                                                    <select name="status" class="custom-select">
+                                                    <select name="status" class="custom-select" data-rule-required="true">
                                                         <option value="1">Activated</option>
                                                         <option value="0">Deactivated</option>
                                                     </select>
@@ -60,25 +59,34 @@
                                             <div class="col-lg-2">
                                                 <div class="form-group">
                                                     <label class="control-label">${labels['domain.user.firstName']}</label>
-                                                    <input class="form-control" type="text" placeholder="${labels['domain.user.firstName']}" name="firstName" value="">
+                                                    <input class="form-control" type="text" placeholder="${labels['domain.user.firstName']}"
+                                                           name="firstName" value="" data-rule-required="true">
                                                 </div>
                                             </div>
                                             <div class="col-lg-2">
                                                 <div class="form-group">
                                                     <label class="control-label">${labels['domain.user.lastName']}</label>
-                                                    <input class="form-control" type="text" placeholder="${labels['domain.user.lastName']}" name="lastName" value="">
+                                                    <input class="form-control" type="text" placeholder="${labels['domain.user.lastName']}"
+                                                           name="lastName" value="" data-rule-required="true">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3">
                                                 <div class="form-group">
                                                     <label class="control-label">${labels['domain.user.birthDate']}</label>
-                                                    <input dir="ltr" class="form-control"  type="text" name="birthOfDateStr" value="">
+                                                    <input dir="ltr" class="form-control"  type="text" name="birthDate" value=""
+                                                           data-rule-required="true"
+                                                           data-rule-validDate="true"
+                                                           data-rule-dateBeforeNow="true">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3">
                                                 <div class="form-group">
                                                     <label class="control-label">${labels['domain.user.email']}</label>
-                                                    <input class="form-control" type="text" placeholder="${labels['domain.user.email']}" name="email" value="">
+                                                    <input class="form-control" type="text" placeholder="${labels['domain.user.email']}" name="email" value=""
+                                                           data-rule-required="true"
+                                                           data-rule-email="true"
+                                                           data-rule-minlength="5"
+                                                           data-rule-maxlength="50">
                                                 </div>
                                             </div>
                                         </div>
@@ -86,7 +94,7 @@
                                             <div class="col-lg-3">
                                                 <div class="form-group">
                                                     <label class="control-label">${labels['domain.user.country']}</label>
-                                                    <select name="countryId" class="form-control">
+                                                    <select name="countryId" class="form-control" data-rule-required="true">
                                                         <c:choose>
                                                             <c:when test="${fn:length(requestScope.countries) > 0}">
                                                                 <option value="">${labels['page.text.kindlySelect']}</option>
@@ -104,7 +112,7 @@
                                             <div class="col-lg-3">
                                                 <div class="form-group">
                                                     <label class="control-label">${labels['domain.user.lang']}</label>
-                                                    <select name="lang" class="form-control">
+                                                    <select name="lang" class="form-control" data-rule-required="true">
                                                         <c:choose>
                                                             <c:when test="${fn:length(requestScope.languages) > 0}">
                                                                 <option value="">${labels['page.text.kindlySelect']}</option>
@@ -122,7 +130,7 @@
                                             <div class="col-lg-3">
                                                 <div class="form-group">
                                                     <label class="control-label">${labels['domain.user.theme']}</label>
-                                                    <select name="theme" class="form-control">
+                                                    <select name="theme" class="form-control" data-rule-required="true">
                                                         <c:choose>
                                                             <c:when test="${fn:length(requestScope.themes) > 0}">
                                                                 <option value="">${labels['page.text.kindlySelect']}</option>
@@ -140,7 +148,7 @@
                                             <div class="col-lg-3">
                                                 <div class="form-group">
                                                     <label class="control-label">${labels['domain.user.timezone']}</label>
-                                                    <select name="timezone" class="form-control">
+                                                    <select name="timezone" class="form-control" data-rule-required="true">
                                                         <c:choose>
                                                             <c:when test="${fn:length(requestScope.timezones) > 0}">
                                                                 <option value="">${labels['page.text.kindlySelect']}</option>
@@ -161,28 +169,35 @@
                                                 <div class="form-group">
                                                     <label class="control-label">${labels['domain.user.userName']}</label>
                                                     <input class="form-control" type="text" autocomplete="off" placeholder="${labels['domain.user.userName']}"
-                                                           name="userName" value="">
+                                                           name="userName" value=""
+                                                           data-rule-required="true"
+                                                           data-rule-minlength="6"
+                                                           data-rule-maxlength="20">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3">
                                                 <div class="form-group">
                                                     <label class="control-label">${labels['domain.user.currentPassword']}</label>
                                                     <input class="form-control" type="password" autocomplete="off"
-                                                           placeholder="${labels['domain.user.currentPassword']}" name="oldPassword">
+                                                           placeholder="${labels['domain.user.currentPassword']}" name="oldPassword"
+                                                           data-rule-required="true">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3">
                                                 <div class="form-group">
                                                     <label class="control-label">${labels['domain.user.newPassword']}</label>
                                                     <input class="form-control" type="password" autocomplete="off"
-                                                           placeholder="${labels['domain.user.newPassword']}" name="password">
+                                                           placeholder="${labels['domain.user.newPassword']}" name="password"
+                                                           data-rule-required="true">
                                                 </div>
                                             </div>
                                             <div class="col-lg-3">
                                                 <div class="form-group">
                                                     <label class="control-label">${labels['domain.user.reTypeNewPassword']}</label>
                                                     <input class="form-control" type="password" autocomplete="off" placeholder="${labels['domain.user.reTypeNewPassword']}"
-                                                           name="rpassword">
+                                                           name="rpassword"
+                                                           data-rule-required="true"
+                                                           data-rule-equalto="form input[name='password']">
                                                 </div>
                                             </div>
                                         </div>
@@ -191,7 +206,8 @@
                                                 <div class="form-group">
                                                     <label for="exampleFormControlFile1">${labels['domain.user.Document']}</label>
                                                     <div class="custom-file">
-                                                        <input name="profilePicture" type="file" class="custom-file-input" id="validatedCustomFile">
+                                                        <input name="profilePicture" type="file" class="custom-file-input"
+                                                               id="validatedCustomFile" data-rule-required="false">
                                                         <label class="custom-file-label" for="validatedCustomFile">${labels['domain.user.Document']}</label>
                                                     </div>
                                                 </div>
@@ -216,7 +232,9 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">${labels['domain.user.address']}</label>
-                                            <textarea rows="7" class="form-control forceValidate" placeholder="" name="address"></textarea>
+                                            <textarea rows="7" class="form-control forceValidate" placeholder="" name="address"
+                                                      data-rule-summernoteRequired="true"
+                                                      data-rule-maxlength="400"></textarea>
                                         </div>
                                         <div class="form-group">
                                             <input id="UserList-UpdateSelectedUserId" type="submit" class="btn btn-primary" value="${labels['page.btn.updateCompleteUser']}"/>
@@ -271,49 +289,12 @@
         // should load mandatory libraries and plugins before.
         // <--- HERE --->
         //
-
         jQuery(function ($) {
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
             // <--- HERE --->
             //
 
-
-
-            function populateForm(frm, data) {
-                $.each(data, function (key, value) {
-                    var $ctrl = $('[name=' + key + ']', frm);
-                    if ($ctrl.is('select')) {
-                        $ctrl.val(value).trigger("change");
-//                        $("option", $ctrl).each(function () {
-//                            console.log("this.value is [" + this.value + "], value [" + value + "]");
-//                            if (this.value === value) {
-//                                console.log("Matched and we select now");
-//                                $(this).prop("selected", true).trigger("change");
-//                            }
-//                        });
-                    } else if ($ctrl.is('textarea')) {
-                        $ctrl.val(value).trigger("change");
-                    } else {
-                        switch ($ctrl.attr("type"))
-                        {
-                            case "text" :
-                            case "hidden":
-                            case "textarea":
-                                $ctrl.val(value).trigger("change");
-                                break;
-                            case "radio" :
-                            case "checkbox":
-                                $ctrl.each(function () {
-                                    if ($(this).attr('value') === value) {
-                                        $(this).prop("checked", value).trigger("change");
-                                    }
-                                });
-                                break;
-                        }
-                    }
-                });
-            }
             var currentUser = {};
             var searchForm = $("#SearchParametersFormId");
             var searchFormValidator = null;
@@ -390,15 +371,13 @@
                         if (response.data.recordsTotal > 0) {
                             var rowObject = response.data.data[0];
                             currentUser = rowObject;
-                            console.log(rowObject);
-                            populateForm(form, rowObject);
+                            window.javatmp.plugins.populateForm(form, rowObject);
                             form.find("textarea[name='address']").summernote('code', rowObject.address);
-//                    form.find("textarea[name='address']").summernote('triggerEvent', 'change');
                             // first destory or remote bugy plugins on edge that fire the show of calendar dropdown
                             // when value change;
-                            form.find("input[name='birthOfDateStr']").data('daterangepicker').remove();
-                            form.find("input[name='birthOfDateStr']").val(moment(rowObject.birthDate, javatmp.settings.networkDateFormat).locale('en').format(javatmp.settings.dateFormat));
-                            form.find("input[name='birthOfDateStr']").daterangepicker(birthOfDateDateRangePickerOtions, birthOfDateDateRangePickerOtionsFunction);
+                            form.find("input[name='birthDate']").data('daterangepicker').remove();
+                            form.find("input[name='birthDate']").val(moment(rowObject.birthDate, javatmp.settings.networkDateFormat).locale('en').format(javatmp.settings.dateFormat));
+                            var birthDateDatePicker = javatmp.plugins.daterangepickerWrapperForDate(form.find("input[name='birthDate']"));
                             var image = form.find("img[id='profilePicturePreview']");
                             var resizeImage = form.find("img[id='profilePictureResizePreview']");
                             var avatarImageSrc = javatmp.settings.contextPath + "/assets/img/default-profile-pic.png";
@@ -408,19 +387,15 @@
                                         + "&randomHash=" + rowObject.profilePicDocument.randomHash
                                         + "&viewType=inline";
                             }
-
-
                             image.attr('src', avatarImageSrc);
                             resizeImage.attr('src', avatarImageSrc);
                             enabled();
-
                         } else {
                             BootstrapModalWrapperFactory.createModal({
                                 title: "Warning",
                                 message: "No Records Found"
                             }).show();
                         }
-
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
                         var resultText = jqXHR.responseText;
@@ -433,7 +408,6 @@
                         }).show();
                     }
                 });
-
             });
 
             searchFormValidator = searchForm.validate($.extend(true, {}, javatmp.settings.jqueryValidationDefaultOptions, {}));
@@ -473,14 +447,13 @@
                 beforeSubmit: function (formData, jqForm, options) {
                     for (var i = 0; i < formData.length; i++) {
                         formData.push({"name": "id", "value": currentUser.id});
-                        if (formData[i].name === "birthOfDateStr") {
+                        if (formData[i].name === "birthDate") {
                             var value = formData[i].value;
                             var newDate = moment(value, javatmp.settings.dateFormat).locale('en').format(javatmp.settings.networkDateFormat);
-                            formData.push({"name": "birthDate", "value": newDate});
+                            formData[i].value = newDate;
                             break;
                         }
                     }
-
                 },
                 success: function (response, statusText, xhr, $form) {
                     BootstrapModalWrapperFactory.createModal({
@@ -500,274 +473,17 @@
                 }
             });
             // pre-submit callback
-            validator = form.validate($.extend(true, {}, javatmp.settings.jqueryValidationDefaultOptions, {
-                ignore1: ":hidden:not(.forceValidate)",
-                ignore: ":hidden:not(.forceValidate), [contenteditable='true']:not([name])",
-                rules: {
-                    firstName: {
-                        required: true
-                    },
-                    lastName: {
-                        required: true
-                    },
-                    email: {
-                        required: true,
-                        email: true,
-                        minlength: 5,
-                        maxlength: 50
-                    },
-                    birthOfDateStr: {
-                        required: true,
-                        validDate: true,
-                        dateBeforeNow: true
-                    },
-                    countryId: {
-                        required: true
-                    },
-                    address: {
-                        required: true,
-                        maxlength: 400
-                    },
-                    userName: {
-                        required: true
-                    },
-                    oldPassword: {
-                        required: true,
-                        minlength: 5,
-                        maxlength: 20
-                    },
-                    password: {
-                        required: true,
-                        minlength: 5,
-                        maxlength: 20
-                    },
-                    rpassword: {
-                        required: true,
-                        equalTo: $("input[name='password']", form)
-                    },
-                    profilePicture: {
-                        required: false
-                    },
-                    tnc: {
-                        required: true
-                    },
-                    note: {
-                        required: true,
-                        summernoteRequired: true
-                    },
-                    lang: {
-                        required: true
-                    },
-                    timezone: {
-                        required: true
-                    },
-                    theme: {
-                        required: true
-                    },
-                    status: {
-                        required: true
-                    }
-                },
-                messages: {
-                    firstName: {
-                        required: "Kindly provide us with your first name"
-                    },
-                    lastName: {
-                        required: "Kindly provide us with your last name"
-                    },
-                    email: {
-                        required: "Kindly provide your email address",
-                        email: "Kindly provide a valid email address"
-                    },
-                    birthOfDateStr: {
-                        required: "Kindly provide your Birth Of Date",
-                        validDate: "Kindly Provide a valid date value in format DD/MM/YYYY",
-                        dateBeforeNow: "Kindly Provide a date in the past before today at least"
-                    },
-                    countryId: {
-                        required: "Kindly select your nationality"
-                    },
-                    address: {
-                        required: "Kindly provide your address"
-                    },
-                    note: {
-                        summernoteRequired: "Kindly Provide a note"
-                    }
-                }
-            }));
-            //            form.find("input[name='birthOfDateStr']").css({
-            //                "text-align": javatmp.settings.floatDefault
-            //            });
-            form.find("input[name='birthOfDateStr']").inputmask({
-                alias: "datetime",
-                placeholder: "dd/mm/yyyy",
-                inputFormat: "dd/mm/yyyy",
-                displayFormat: true,
-                hourFormat: "24",
-                clearMaskOnLostFocus: false
-            });
-            var birthOfDateDateRangePickerOtions = {
-                "opens": javatmp.settings.floatReverse,
-                startDate: moment().format(javatmp.settings.dateFormat),
-                singleDatePicker: true,
-                showDropdowns: true,
-                timePicker: false,
-                timePickerIncrement: 1,
-                timePicker24Hour: true,
-                autoApply: true,
-                autoUpdateInput: false,
-                minDate: '01/01/1900',
-                maxDate: '31/12/2099',
-                //                    maxDate: '',
-                //                    minDate: moment(),
-                locale: {
-                    "direction": javatmp.settings.direction,
-                    format: javatmp.settings.dateFormat
-                }
-            };
-            var birthOfDateDateRangePickerOtionsFunction = function (start, end, label) {
-                var formatedDateSelected = moment(start).locale('en').format(javatmp.settings.dateFormat);
-                form.find("input[name='birthOfDateStr']").val(formatedDateSelected).trigger("change");
-            };
-            form.find("input[name='birthOfDateStr']").daterangepicker(birthOfDateDateRangePickerOtions, birthOfDateDateRangePickerOtionsFunction);
-            form.find("textarea[name='address']").summernote({
-                direction: javatmp.settings.direction,
-                lang: javatmp.user.lang === "ar" ? "ar-AR" : javatmp.user.lang,
-                height: 100,
-                dialogsInBody: true
-            });
-            $.fn.select2.defaults.set("theme", "bootstrap");
-            $.fn.select2.defaults.set("dir", javatmp.settings.direction);
-            $.fn.select2.defaults.set("placeholder", javatmp.settings.labels['page.text.kindlySelect']);
+            // initialize jQuery Validation plugin using global data.
+            validator = form.validate($.extend(true, {}, javatmp.settings.jqueryValidationDefaultOptions, {}));
+            var birthDateInputMask = javatmp.plugins.inputmaskWrapperForDate(form.find("input[name='birthDate']"));
+            var birthDateDatePicker = javatmp.plugins.daterangepickerWrapperForDate(form.find("input[name='birthDate']"));
+            var addressEditor = javatmp.plugins.summernoteWrapper(form.find("textarea[name='address']"));
+            var langSelect = javatmp.plugins.select2Wrapper(form.find("select[name='lang']"));
+            var timezoneSelect = javatmp.plugins.select2Wrapper(form.find("select[name='timezone']"));
+            var themeSelect = javatmp.plugins.select2WrapperForTheme(form.find("select[name='theme']"));
+            var countryIdSelect = javatmp.plugins.select2WrapperForCountry(form.find("select[name='countryId']"));
+            var profilePicScrollbars = javatmp.plugins.mCustomScrollbarForProfilePicture(form.find("#profilePicturePreviewContainerId"));
 
-            form.find("select[name='lang']").select2({
-                allowClear: true,
-                containerCssClass: ':all:',
-                width: '',
-                dropdownCssClass: "select2-lang-dropdown"
-            });
-            form.find("select[name='theme']").select2({
-                allowClear: true,
-                containerCssClass: ':all:',
-                width: '',
-                escapeMarkup: function (markup) {
-                    return markup;
-                },
-                templateSelection: formatThemeSelection,
-                templateResult: formatThemeResult,
-                dropdownCssClass: "select2-theme-dropdown"
-            });
-            form.find("select[name='timezone']").select2({
-                allowClear: true,
-                containerCssClass: ':all:',
-                width: '',
-                dropdownCssClass: "select2-timezone-dropdown"
-            });
-            form.find("select[name='countryId']").select2({
-                theme: "bootstrap",
-                dir: javatmp.settings.direction,
-                allowClear: true,
-                containerCssClass: ':all:',
-                width: '',
-                templateSelection: formatCountrySelection,
-                templateResult: formatCountry,
-                escapeMarkup: function (markup) {
-                    return markup;
-                },
-                dropdownCssClass: "select2-countryId-dropdown"
-            }).on("select2:select", function () {
-                (this).focus();
-            });
-            function formatCountry(repo) {
-                if (repo.loading)
-                    return repo.text;
-                var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
-                var template =
-                        '    <div class="media d-flex align-items-center">' +
-                        '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
-                        '        <div class="media-body">' +
-                        '            <strong>{{countryText}} ({{countryId}})</strong>' +
-                        '        </div>' +
-                        '    </div>';
-                var readyData = template.composeTemplate({
-                    'imagePath': imagePath,
-                    'countryText': repo.text,
-                    'countryId': repo.id
-                });
-                return readyData;
-            }
-            function formatCountrySelection(repo) {
-                if (!repo.id) {
-                    return repo.text;
-                }
-
-                var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
-                var template =
-                        '    <div class="media d-flex align-items-center">' +
-                        '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
-                        '        <div class="media-body">' +
-                        '            <span>{{countryText}} ({{countryId}})</span>' +
-                        '        </div>' +
-                        '    </div>';
-                var readyData = template.composeTemplate({
-                    'imagePath': imagePath,
-                    'countryText': repo.text,
-                    'countryId': repo.id
-                });
-                return readyData;
-            }
-            function formatThemeSelection(repo) {
-                if (!repo.id) {
-                    return repo.text;
-                }
-
-                var imagePath = javatmp.settings.contextPath + "/assets/img/themes/" + repo.text + ".png";
-                var template =
-                        '    <div class="media d-flex align-items-center">' +
-                        '        <img style="height: 1.5rem;" class="mr-1" src="{{imagePath}}" alt="{{themeName}}"/>' +
-                        '        <div class="media-body">' +
-                        '            <span>{{themeName}}</span>' +
-                        '        </div>' +
-                        '    </div>';
-                var readyData = template.composeTemplate({
-                    'imagePath': imagePath,
-                    'themeName': repo.text
-                });
-                return readyData;
-            }
-            function formatThemeResult(repo) {
-                if (!repo.id) {
-                    return repo.text;
-                }
-
-                var imagePath = javatmp.settings.contextPath + "/assets/img/themes/" + repo.text + ".png";
-                var template =
-                        '    <div class="media d-flex align-items-center">' +
-                        '        <img style="height: 75px;" class="mr-1" src="{{imagePath}}" alt="{{themeName}}"/>' +
-                        '        <div class="media-body">' +
-                        '            <span>{{themeName}}</span>' +
-                        '        </div>' +
-                        '    </div>';
-                var readyData = template.composeTemplate({
-                    'imagePath': imagePath,
-                    'themeName': repo.text
-                });
-                return readyData;
-            }
-            form.find("#profilePicturePreviewContainerId").mCustomScrollbar({
-                axis: "yx",
-                theme: "javatmp",
-                scrollInertia: 0,
-                advanced: {
-                    updateOnContentResize: true,
-                    autoExpandHorizontalScroll: true,
-                    updateOnImageLoad: true
-                },
-                mouseWheel: {
-                    preventDefault: true,
-                    scrollAmount: 85
-                }
-            });
             form.find("input[name='profilePicture'][type=file]").on("change", function () {
                 if (this.files && this.files[0]) {
                     var reader = new FileReader();
@@ -793,238 +509,51 @@
 
             deleteUserButton.on("click", function (event) {
                 if (currentUser && (currentUser.id !== 0)) {
-                    var selectedRecord = currentUser;
-                    var passData = {};
-                    passData.callback = "actionCallback";
-                    passData.id = selectedRecord.id;
-                    BootstrapModalWrapperFactory.createModal({
-                        message: "Are you sure you want to delete user ?",
-                        title: "Confiramation",
-                        closable: false,
-                        closeByBackdrop: false,
-                        buttons: [
-                            {
-                                label: "Cancel",
-                                cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.hide();
-                                }
-                            },
-                            {
-                                label: "Delete User " + selectedRecord.userName,
-                                cssClass: "btn btn-danger",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    modalWrapper.hide();
-                                    var m = BootstrapModalWrapperFactory.createModal({
-                                        message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
-                                        closable: false,
-                                        closeByBackdrop: false,
-                                        closeByKeyboard: false
-                                    });
-                                    m.originalModal.find(".modal-dialog").css({transition: 'all 0.5s'});
-                                    m.show();
-                                    $.ajax({
-                                        type: "POST",
-                                        url: javatmp.settings.contextPath + "/user/DeleteUserController",
-                                        data: passData,
-//                                        dataType: "json",
-//                                        contentType: "application/json; charset=UTF-8",
-                                        success: function (data) {
-                                            m.updateMessage(data.message);
-                                            m.updateClosable(true);
-                                            m.updateTitle("Deleted Action Response");
-
-                                            toastr.success(data.message, 'SUCCESS', {
-                                                timeOut: 5000,
-                                                progressBar: true,
-                                                rtl: javatmp.settings.isRTL,
-                                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                                            });
-                                        },
-                                        error: function (data) {
-                                            var errorMsg = "Could Not complete the action";
-                                            try {
-                                                var jsonData = $.parseJSON(data.responseText);
-                                                errorMsg = jsonData.message;
-                                            } catch (error) {
-                                            }
-                                            m.updateMessage(errorMsg);
-                                            m.updateClosable(true);
-                                            m.updateTitle("Error Response");
-
-                                            toastr.error(errorMsg, 'ERROR', {
-                                                timeOut: 5000,
-                                                progressBar: true,
-                                                rtl: javatmp.settings.isRTL,
-                                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                                            });
-//                                            alert("error" + JSON.stringify(data));
-                                        }
-                                    });
-                                }
+                    window.javatmp.plugins.confirmAjaxAction(
+                            javatmp.settings.labels["dialog.delete.title"],
+                            javatmp.settings.labels["dialog.delete.message"],
+                            javatmp.settings.labels["page.btn.deleteUser"],
+                            javatmp.settings.labels["global.cancel"],
+                            javatmp.settings.contextPath + "/user/DeleteUserController",
+                            currentUser,
+                            function (data) {
+//                                table.columns.adjust().draw();
                             }
-                        ]
-                    }).show();
+                    );
                 } else {
                     BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
                 }
-
             });
             activateUserButton.on("click", function (event) {
                 if (currentUser && (currentUser.id !== 0)) {
-                    var selectedRecord = currentUser;
-                    //                    alert("row[" + JSON.stringify(selectedRecord) + "]");
-                    var passData = {};
-                    passData.callback = "actionCallback";
-                    passData.id = selectedRecord.id;
-                    BootstrapModalWrapperFactory.createModal({
-                        message: "Are you sure you want to Activate user ?",
-                        title: "Confiramation",
-                        closable: false,
-                        closeByBackdrop: false,
-                        buttons: [
-                            {
-                                label: "Cancel",
-                                cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.hide();
-                                }
-                            },
-                            {
-                                label: "Activate User " + selectedRecord.userName,
-                                cssClass: "btn btn-primary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    modalWrapper.hide();
-                                    var m = BootstrapModalWrapperFactory.createModal({
-                                        message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
-                                        closable: false,
-                                        closeByBackdrop: false,
-                                        closeByKeyboard: false
-                                    });
-                                    m.originalModal.find(".modal-dialog").css({transition: 'all 0.5s'});
-                                    m.show();
-                                    $.ajax({
-                                        type: "POST",
-                                        url: javatmp.settings.contextPath + "/user/ActivateUserController",
-                                        data: passData,
-//                                        dataType: "json",
-//                                        contentType: "application/json; charset=UTF-8",
-                                        success: function (data) {
-                                            m.updateMessage(data.message);
-                                            m.updateClosable(true);
-                                            m.updateTitle("Activate Action Response");
-
-                                            toastr.success(data.message, 'SUCCESS', {
-                                                timeOut: 5000,
-                                                progressBar: true,
-                                                rtl: javatmp.settings.isRTL,
-                                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                                            });
-                                        },
-                                        error: function (data) {
-                                            var errorMsg = "Could Not complete the action";
-                                            try {
-                                                var jsonData = $.parseJSON(data.responseText);
-                                                errorMsg = jsonData.message;
-                                            } catch (error) {
-                                            }
-                                            m.updateMessage(errorMsg);
-                                            m.updateClosable(true);
-                                            m.updateTitle("Error Response");
-
-                                            toastr.error(errorMsg, 'ERROR', {
-                                                timeOut: 5000,
-                                                progressBar: true,
-                                                rtl: javatmp.settings.isRTL,
-                                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                                            });
-//                                            alert("error" + JSON.stringify(data));
-                                        }
-                                    });
-                                }
+                    window.javatmp.plugins.confirmAjaxAction(
+                            javatmp.settings.labels["dialog.activate.title"],
+                            javatmp.settings.labels["dialog.activate.message"],
+                            javatmp.settings.labels["page.btn.activateUser"],
+                            javatmp.settings.labels["global.cancel"],
+                            javatmp.settings.contextPath + "/user/ActivateUserController",
+                            currentUser,
+                            function (data) {
+                                table.columns.adjust().draw();
                             }
-                        ]
-                    }).show();
+                    );
                 } else {
                     BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
                 }
-
             });
             deActivateUserButton.on("click", function (event) {
                 if (currentUser && (currentUser.id !== 0)) {
-                    var selectedRecord = currentUser;
-                    //                    alert("row[" + JSON.stringify(selectedRecord) + "]");
-                    var passData = {};
-                    passData.callback = "actionCallback";
-                    passData.id = selectedRecord.id;
-                    BootstrapModalWrapperFactory.createModal({
-                        message: "Are you sure you want to Deactivate user ?",
-                        title: "Confiramation",
-                        closable: false,
-                        closeByBackdrop: false,
-                        buttons: [
-                            {
-                                label: "Cancel",
-                                cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.hide();
-                                }
-                            },
-                            {
-                                label: "Deactivate User " + selectedRecord.userName,
-                                cssClass: "btn btn-warning",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    modalWrapper.hide();
-                                    var m = BootstrapModalWrapperFactory.createModal({
-                                        message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
-                                        closable: false,
-                                        closeByBackdrop: false,
-                                        closeByKeyboard: false
-                                    });
-                                    m.originalModal.find(".modal-dialog").css({transition: 'all 0.5s'});
-                                    m.show();
-                                    $.ajax({
-                                        type: "POST",
-                                        url: javatmp.settings.contextPath + "/user/DeactivateUserController",
-                                        data: passData,
-//                                        dataType: "json",
-//                                        contentType: "application/json; charset=UTF-8",
-                                        success: function (data) {
-                                            m.updateMessage(data.message);
-                                            m.updateClosable(true);
-                                            m.updateTitle("Deactivate Action Response");
-
-                                            toastr.success(data.message, 'SUCCESS', {
-                                                timeOut: 5000,
-                                                progressBar: true,
-                                                rtl: javatmp.settings.isRTL,
-                                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                                            });
-                                        },
-                                        error: function (data) {
-                                            var errorMsg = "Could Not complete the action";
-                                            try {
-                                                var jsonData = $.parseJSON(data.responseText);
-                                                errorMsg = jsonData.message;
-                                            } catch (error) {
-                                            }
-                                            m.updateMessage(errorMsg);
-                                            m.updateClosable(true);
-                                            m.updateTitle("Error Response");
-
-                                            toastr.error(errorMsg, 'ERROR', {
-                                                timeOut: 5000,
-                                                progressBar: true,
-                                                rtl: javatmp.settings.isRTL,
-                                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                                            });
-//                                            alert("error" + JSON.stringify(data));
-                                        }
-                                    });
-                                }
+                    window.javatmp.plugins.confirmAjaxAction(
+                            javatmp.settings.labels["dialog.inActivate.title"],
+                            javatmp.settings.labels["dialog.inActivate.message"],
+                            javatmp.settings.labels["page.btn.deactivateUser"],
+                            javatmp.settings.labels["global.cancel"],
+                            javatmp.settings.contextPath + "/user/DeactivateUserController",
+                            currentUser,
+                            function (data) {
+                                table.columns.adjust().draw();
                             }
-                        ]
-                    }).show();
+                    );
                 } else {
                     BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
                 }
@@ -1057,5 +586,6 @@
                 $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenExpand);
                 return true;
             });
-        });</script>
+        });
+    </script>
 </div>

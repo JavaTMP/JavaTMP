@@ -68,7 +68,7 @@
                             <input id="userlist-lastname-filter" class="form-control"/>
                         </th>
                         <th style="width: 8rem;">
-                            <input id="userlist-birthdate-filter" class="form-control"/>
+                            <input id="userlist-birthdate-filter" class="form-control" dir="ltr"/>
                         </th>
                         <th style="width: 3rem;">
                             <input id="userlist-age-filter" class="form-control"/>
@@ -199,7 +199,7 @@
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label class="control-label">${labels['domain.user.birthDate']}</label>
-                                        <input dir="ltr" class="form-control"  type="text" name="birthOfDateStr" value="">
+                                        <input dir="ltr" class="form-control"  type="text" name="birthDate" value="">
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
@@ -456,283 +456,27 @@
                 initComplete: function (settings, json) {
                     var api = this.api();
                     // prepare id filter search field:
-                    var idFilterInput = $("#userlist-id-filter");
-                    idFilterInput.on('keyup', function () {
-                        var $this = $(this);
-                        javatmp.util.waitForFinalEvent(function () {
-                            var val = $.fn.dataTable.util.escapeRegex($this.val());
-                            api.column(0).search(val ? val : '', true, false).draw();
-                        }, 200, "@userlist-main-table-filter");
-                    });
-                    var usernameFilterInput = $("#userlist-username-filter");
-                    usernameFilterInput.on('keyup', function () {
-                        var $this = $(this);
-                        javatmp.util.waitForFinalEvent(function () {
-                            var val = $.fn.dataTable.util.escapeRegex($this.val());
-                            api.column(1).search(val ? val : '', true, false).draw();
-                        }, 200, "@userlist-main-table-filter");
-                    });
-                    var firstNameFilterInput = $("#userlist-firstname-filter");
-                    firstNameFilterInput.on('keyup', function () {
-                        var $this = $(this);
-                        javatmp.util.waitForFinalEvent(function () {
-                            var val = $.fn.dataTable.util.escapeRegex($this.val());
-                            api.column(2).search(val ? val : '', true, false).draw();
-                        }, 200, "@userlist-main-table-filter");
-                    });
-                    var lastNameFilterInput = $("#userlist-lastname-filter");
-                    lastNameFilterInput.on('keyup', function () {
-                        var $this = $(this);
-                        javatmp.util.waitForFinalEvent(function () {
-                            var val = $.fn.dataTable.util.escapeRegex($this.val());
-                            api.column(3).search(val ? val : '', true, false).draw();
-                        }, 200, "@userlist-main-table-filter");
-                    });
-
-                    var birthdateFilterInput = $("#userlist-birthdate-filter");
-                    birthdateFilterInput.on('change', function () {
-                        var $this = $(this);
-                        javatmp.util.waitForFinalEvent(function () {
-                            var val = $this.val();
-                            api.column(4).search(val ? val : '', true, false).draw();
-                        }, 200, "@userlist-main-table-filter");
-                    });
-                    birthdateFilterInput.inputmask({
-                        alias: "datetime",
-                        placeholder: "dd/mm/yyyy",
-                        inputFormat: "dd/mm/yyyy",
-                        displayFormat: true,
-                        hourFormat: "24",
-                        clearMaskOnLostFocus: false
-                    });
-                    birthdateFilterInput.daterangepicker({
-                        "opens": javatmp.settings.floatDefault,
-                        //                    startDate: false,
-                        singleDatePicker: true,
-                        showDropdowns: true,
-                        timePicker: false,
-                        timePickerIncrement: 1,
-                        timePicker24Hour: true,
-                        autoApply: true,
-                        autoUpdateInput: false,
-                        minDate: '01/01/1900',
-                        maxDate: '31/12/2099',
-                        //                    maxDate: '',
-                        //                    minDate: moment(),
-                        locale: {
-                            "direction": javatmp.settings.direction,
-                            format: javatmp.settings.dateFormat
-                        }
-                    }, function (start, end, label) {
-                        var formatedDateSelected = moment(start).locale('en').format(javatmp.settings.dateFormat);
-                        birthdateFilterInput.val(formatedDateSelected).trigger("change");
-                    });
-
-                    var ageFilterInput = $("#userlist-age-filter");
-                    ageFilterInput.on('keyup', function () {
-                        var $this = $(this);
-                        javatmp.util.waitForFinalEvent(function () {
-                            var val = $this.val();
-                            api.column(5).search(val ? val : '', true, false).draw();
-                        }, 200, "@userlist-main-table-filter");
-                    });
-
-                    var emailFilterInput = $("#userlist-email-filter");
-                    emailFilterInput.on('keyup', function () {
-                        var $this = $(this);
-                        javatmp.util.waitForFinalEvent(function () {
-                            var val = $.fn.dataTable.util.escapeRegex($this.val());
-                            api.column(6).search(val ? val : '', true, false).draw();
-                        }, 200, "@userlist-main-table-filter");
-                    });
-
+                    var idFilterInput = $("#userlist-id-filter").on('keyup', javatmp.plugins.DataTableColFilterEventWrapper(api, 0));
+                    var usernameFilterInput = $("#userlist-username-filter").on('keyup', javatmp.plugins.DataTableColFilterEventWrapper(api, 1));
+                    var firstNameFilterInput = $("#userlist-firstname-filter").on('keyup', javatmp.plugins.DataTableColFilterEventWrapper(api, 2));
+                    var lastNameFilterInput = $("#userlist-lastname-filter").on('keyup', javatmp.plugins.DataTableColFilterEventWrapper(api, 3));
+                    var birthdateFilterInput = $("#userlist-birthdate-filter").on('change', javatmp.plugins.DataTableColFilterEventWrapper(api, 4, false));
+                    var birthDateInputMask = javatmp.plugins.inputmaskWrapperForDate(birthdateFilterInput);
+                    var birthDateDatePicker = javatmp.plugins.daterangepickerWrapperForDate(birthdateFilterInput);
+                    var ageFilterInput = $("#userlist-age-filter").on('keyup', javatmp.plugins.DataTableColFilterEventWrapper(api, 5, false));
+                    var emailFilterInput = $("#userlist-email-filter").on('keyup', javatmp.plugins.DataTableColFilterEventWrapper(api, 6, false));
                     var statusFilterInput = $("#userlist-status-filter");
-                    statusFilterInput.on('change', function () {
-                        var $this = $(this);
-                        javatmp.util.waitForFinalEvent(function () {
-                            //                            var val = $.fn.dataTable.util.escapeRegex($this.val());
-                            var val = $this.val();
-                            api.column(7).search(val ? val : '', false, false).draw();
-                        }, 200, "@userlist-main-table-filter");
-                    });
-                    statusFilterInput.select2({
-                        theme: "bootstrap",
-                        dir: javatmp.settings.direction,
-                        containerCssClass: ':all:',
-                        escapeMarkup: function (markup) {
-                            return markup;
-                        }
-                    });
+                    var statusSelect = javatmp.plugins.select2Wrapper(statusFilterInput).on("select2:close", javatmp.plugins.DataTableColFilterEventWrapper(api, 7));
                     var countryFilterInput = $("#userlist-country-filter");
-                    countryFilterInput.on('change', function () {
-                        var $this = $(this);
-                        javatmp.util.waitForFinalEvent(function () {
-                            var val = $this.val();
-                            api.column(8).search(val ? val : '', false, false).draw();
-                        }, 200, "@userlist-main-table-filter");
-                    });
-                    countryFilterInput.select2({
-                        theme: "bootstrap",
-                        dir: javatmp.settings.direction,
-                        templateSelection: formatCountrySelection,
-                        templateResult: formatCountry,
-                        escapeMarkup: function (markup) {
-                            return markup;
-                        }
-                    });
-
-                    function formatCountry(repo) {
-                        if (repo.loading)
-                            return repo.text;
-
-                        var targetData = {};
-                        if (repo.id === "") {
-                            targetData = {
-                                'imagePath': javatmp.settings.contextPath + "/assets/img/flags/globe.png",
-                                'countryText': repo.text,
-                                'countryId': ""
-                            };
-                        } else {
-                            targetData = {
-                                'imagePath': javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png",
-                                'countryText': repo.text,
-                                'countryId': " (" + repo.id + ")"
-                            };
-                        }
-                        var template =
-                                '    <div class="media d-flex align-items-center">' +
-                                '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
-                                '        <div class="media-body">' +
-                                '            <strong class="">{{countryText}}{{countryId}}</strong>' +
-                                '        </div>' +
-                                '    </div>';
-                        var readyData = template.composeTemplate(targetData);
-                        return readyData;
-                    }
-                    function formatCountrySelection(repo) {
-                        if (!repo.id) {
-                            return repo.text;
-                        }
-                        var targetData = {};
-                        if (repo.id === "") {
-                            targetData = {
-                                'imagePath': javatmp.settings.contextPath + "/assets/img/flags/globe.png",
-                                'countryText': repo.text,
-                                'countryId': ""
-                            };
-                        } else {
-                            targetData = {
-                                'imagePath': javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png",
-                                'countryText': repo.text,
-                                'countryId': " (" + repo.id + ")"
-                            };
-                        }
-
-                        var template =
-                                '    <div class="media d-flex align-items-center">' +
-                                '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
-                                '        <div class="media-body">' +
-                                '            <span class="">{{countryText}}{{countryId}}</span>' +
-                                '        </div>' +
-                                '    </div>';
-                        var readyData = template.composeTemplate(targetData);
-                        return readyData;
-                    }
-
-                    // 10 Language Field userlist-language-filter
+                    var countryIdSelect = javatmp.plugins.select2WrapperForCountry(countryFilterInput).on("select2:close", javatmp.plugins.DataTableColFilterEventWrapper(api, 8));
                     var languageFilterInput = $("#userlist-language-filter");
-                    languageFilterInput.on('change', function () {
-                        var $this = $(this);
-                        javatmp.util.waitForFinalEvent(function () {
-                            var val = $this.val();
-                            api.column(9).search(val ? val : '', false, false).draw();
-                        }, 200, "@userlist-main-table-filter");
-                    });
-                    languageFilterInput.select2({
-                        theme: "bootstrap",
-                        dir: javatmp.settings.direction,
-                        containerCssClass: ':all:',
-                        escapeMarkup: function (markup) {
-                            return markup;
-                        }
-                    });
-
-                    // 11 Theme Field userlist-theme-filter
+                    var langSelect = javatmp.plugins.select2Wrapper(languageFilterInput).on("select2:close", javatmp.plugins.DataTableColFilterEventWrapper(api, 9));
                     var themeFilterInput = $("#userlist-theme-filter");
-                    themeFilterInput.on('change', function () {
-                        var $this = $(this);
-                        javatmp.util.waitForFinalEvent(function () {
-                            var val = $this.val();
-                            api.column(10).search(val ? val : '', false, false).draw();
-                        }, 200, "@userlist-main-table-filter");
-                    });
-                    themeFilterInput.select2({
-                        theme: "bootstrap",
-                        dir: javatmp.settings.direction,
-                        containerCssClass: ':all:',
-                        escapeMarkup: function (markup) {
-                            return markup;
-                        },
-                        templateSelection: formatThemeSelection,
-                        templateResult: formatThemeResult
-                    });
-                    function formatThemeSelection(repo) {
-                        if (!repo.id) {
-                            return repo.text;
-                        }
-
-                        var imagePath = javatmp.settings.contextPath + "/assets/img/themes/" + repo.text + ".png";
-                        var template =
-                                '    <div class="media d-flex align-items-center">' +
-                                '        <img style="height: 1.5rem;" class="mr-1" src="{{imagePath}}" alt="{{themeName}}"/>' +
-                                '        <div class="media-body">' +
-                                '            <span>{{themeName}}</span>' +
-                                '        </div>' +
-                                '    </div>';
-                        var readyData = template.composeTemplate({
-                            'imagePath': imagePath,
-                            'themeName': repo.text
-                        });
-                        return readyData;
-                    }
-                    function formatThemeResult(repo) {
-                        if (!repo.id) {
-                            return repo.text;
-                        }
-
-                        var imagePath = javatmp.settings.contextPath + "/assets/img/themes/" + repo.text + ".png";
-                        var template =
-                                '    <div class="media d-flex align-items-center">' +
-                                '        <img style="height: 32px;" class="mr-1" src="{{imagePath}}" alt="{{themeName}}"/>' +
-                                '        <div class="media-body">' +
-                                '            <span>{{themeName}}</span>' +
-                                '        </div>' +
-                                '    </div>';
-                        var readyData = template.composeTemplate({
-                            'imagePath': imagePath,
-                            'themeName': repo.text
-                        });
-                        return readyData;
-                    }
-                    // 12 Timezone Filed userlist-timezone-filter
+                    var themeSelect = javatmp.plugins.select2WrapperForTheme(themeFilterInput).on("select2:close", javatmp.plugins.DataTableColFilterEventWrapper(api, 10));
                     var timezoneFilterInput = $("#userlist-timezone-filter");
-                    timezoneFilterInput.on('change', function () {
-                        var $this = $(this);
-                        javatmp.util.waitForFinalEvent(function () {
-                            var val = $this.val();
-                            api.column(11).search(val ? val : '', false, false).draw();
-                        }, 200, "@userlist-main-table-filter");
-                    });
-                    timezoneFilterInput.select2({
-                        theme: "bootstrap",
-                        dir: javatmp.settings.direction,
-                        containerCssClass: ':all:',
-                        escapeMarkup: function (markup) {
-                            return markup;
-                        }
-                    });
-                    // 13 CreationDate Field
+                    var timezoneSelect = javatmp.plugins.select2Wrapper(timezoneFilterInput).on("select2:close", javatmp.plugins.DataTableColFilterEventWrapper(api, 11));
                     var creationdateFilterInput = $("#userlist-creationdate-filter");
+                    var creationdateFilterRange = javatmp.plugins.daterangepickerWrapperForDateRange(creationdateFilterInput);
                     creationdateFilterInput.on('change', function () {
                         var $this = $(this);
                         javatmp.util.waitForFinalEvent(function () {
@@ -747,40 +491,6 @@
                             api.column(12).search(val ? val : '', false, false).draw();
                         }, 200, "@userlist-main-table-filter");
                     });
-                    creationdateFilterInput.daterangepicker({
-                        "opens": javatmp.settings.floatDefault,
-                        startDate: moment().subtract(100, 'years'),
-                        endDate: moment(),
-                        minDate: '01/01/1900',
-                        maxDate: '31/12/2099',
-                        timePicker: true,
-                        autoApply: true,
-                        autoUpdateInput: false,
-                        locale: {
-                            "direction": javatmp.settings.direction,
-                            format: javatmp.settings.dateTimeSecondFormat
-
-                        },
-                        ranges: {
-                            'Today': [moment().startOf('day'), moment().endOf("day")],
-                            'Yesterday': [moment().subtract(1, 'days').startOf('day'), moment().subtract(1, 'days').endOf("day")],
-                            'Last 7 Days': [moment().subtract(6, 'days').startOf('day'), moment().endOf("day")],
-                            'Last 30 Days': [moment().subtract(29, 'days').startOf('day'), moment().endOf("day")],
-                            'This Month': [moment().startOf('month').startOf('day'), moment().endOf('month').endOf("day")],
-                            'Last Month': [moment().subtract(1, 'month').startOf('month').startOf('day'), moment().subtract(1, 'month').endOf('month').endOf("day")]
-                        }
-                    });
-                    creationdateFilterInput.on('apply.daterangepicker', function (ev, picker) {
-                        creationdateFilterInput.data("start", picker.startDate);
-                        creationdateFilterInput.data("end", picker.endDate);
-                        creationdateFilterInput.val(picker.startDate.format(javatmp.settings.dateTimeSecondFormat) + ' - ' + picker.endDate.format(javatmp.settings.dateTimeSecondFormat)).trigger("change");
-                    });
-                    creationdateFilterInput.on('cancel.daterangepicker', function (ev, picker) {
-                        creationdateFilterInput.removeData("start");
-                        creationdateFilterInput.removeData("end");
-                        $(this).val('').trigger("change");
-                    });
-
                 },
                 "ajax": {
                     "type": "POST",
@@ -798,60 +508,19 @@
                     }
                 },
                 columns: [
-                    {data: 'id', className: "", name: "id", width: "6rem",
-                        "render": function (data, type, row) {
-                            if (type === "display") {
-                                return "<p class='m-0 p-0' style='width: 6rem;'>" + data + "</p>";
-                            } else {
-                                return data;
-                            }
-
-                        }
-                    },
-                    {
-                        data: 'userName', name: "userName", width: "10rem",
-                        "render": function (data, type, row) {
-                            if (type === "sort" || type === 'type' || type === 'filter') {
-                                return data;
-                            } else {
-                                return "<p class='m-0 p-0' style='width: 10rem;'>" + data + "</p>";
-                            }
-                        }
-                    },
-                    {
-                        data: 'firstName', name: "firstName", width: "8rem",
-                        "render": function (data, type, row) {
-                            if (type === "sort" || type === 'type' || type === 'filter') {
-                                return data;
-                            } else {
-                                return "<p class='m-0 p-0' style='width: 8rem;'>" + data + "</p>";
-                            }
-
-                        }
-                    },
-                    {
-                        data: 'lastName', name: "lastName", width: "8rem",
-                        "render": function (data, type, row) {
-                            if (type === "sort" || type === 'type' || type === 'filter') {
-                                return data;
-                            } else {
-                                return "<p class='m-0 p-0' style='width: 8rem;'>" + data + "</p>";
-                            }
-
-                        }
-                    },
-                    {
-                        data: 'birthDate', "type": "date", name: "birthDate", width: "9rem",
-                        "render": function (data, type, row) {
-                            if (type === "sort" || type === 'type' || type === 'filter') {
-                                return moment(data, javatmp.settings.networkDateFormat).format(javatmp.settings.dateTimeFormat);
-                            } else {
-                                return "<p class='m-0 p-0' style='width: 9rem;'>" + moment(data, javatmp.settings.networkDateFormat).format(javatmp.settings.dateFormat) + "</p>";
-                            }
-                        }
-                    },
-                    {
-                        data: 'birthDate', name: "age", "type": "date", width: "4rem",
+                    {data: 'id',
+                        "createdCell111": function (td, cellData, rowData, row, col) {
+                            console.log(table.init().columns[col]);
+                            $(td).css({"width": "1000px", "background-color": "red"});
+                            $(td).addClass("text-white");
+                            $(title).css({"width": "100rem"});
+                        },
+                        className: "", name: "id", width: "6rem", "render": javatmp.plugins.DataTableColRenderWrapper("6rem")},
+                    {data: 'userName', name: "userName", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                    {data: 'firstName', name: "firstName", width: "8rem", "render": javatmp.plugins.DataTableColRenderWrapper("8rem")},
+                    {data: 'lastName', name: "lastName", width: "8rem", "render": javatmp.plugins.DataTableColRenderWrapper("8rem")},
+                    {data: 'birthDate', "type": "date", name: "birthDate", width: "9rem", "render": javatmp.plugins.DataTableColRenderWrapper("9rem")},
+                    {data: 'birthDate', name: "age", "type": "date", width: "4rem",
                         "render": function (data, type, row) {
                             data = Math.ceil(moment().diff(moment(data, javatmp.settings.networkDateFormat), 'years', true));
                             if (type === "display") {
@@ -861,20 +530,10 @@
                             }
                         }
                     },
-                    {data: 'email', name: "email", width: "9rem",
-                        "render": function (data, type, row) {
-                            if (type === "display") {
-                                return "<p class='m-0 p-0 text-truncate' style='width: 10rem;'>" + data + "</p>";
-                            } else {
-                                return data;
-                            }
-                        }
-                    },
+                    {data: 'email', name: "email", width: "9rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
                     {data: 'status', name: "status", width: "7rem",
                         "render": function (data, type, row) {
-
-                            var statusMap = {"-1": {label: "Deleted", style: "danger"}, "0": {label: "Deactive", style: "warning"}, "1": {label: "Active", style: "success"}};
-
+                            var statusMap = {"0": {label: "Deactive", style: "warning"}, "1": {label: "Active", style: "success"}};
                             if (type === "display") {
                                 return "<p class='m-0 p-0' style='width: 7rem;'><span class='badge badge-" + statusMap[data].style + "'>" + statusMap[data].label + "</span></p>";
                             } else {
@@ -882,311 +541,26 @@
                             }
                         }
                     },
-                    {
-                        data: 'countryId', name: "countryId", width: "9rem",
-                        "render": function (data, type, row) {
-                            if (type === "sort" || type === 'type' || type === 'filter') {
-                                return data;
-                            } else {
-                                return "<p class='m-0 p-0 text-truncate' style='width: 9rem'>" + countriesMap[data] + "</p>";
-                            }
-                        }
-                    },
-                    {data: 'lang', name: "lang", width: "10rem",
-                        "render": function (data, type, row) {
-                            if (type === "display") {
-                                return "<p class='m-0 p-0' style='width: 10rem;'>" + languagesMap[data] + "</p>";
-                            } else {
-                                return data;
-                            }
-                        }
-                    },
-                    {data: 'theme', name: "theme", width: "10rem",
-                        "render": function (data, type, row) {
-                            if (type === "display") {
-                                return "<p class='m-0 p-0' style='width: 10rem;'>" + themesMap[data] + "</p>";
-                            } else {
-                                return data;
-                            }
-                        }
-                    },
-                    {data: 'timezone', name: "timezone", width: "11rem",
-                        "render": function (data, type, row) {
-                            if (type === "display") {
-                                return "<p class='m-0 p-0 text-truncate' style='width: 11rem;'>" + timezonesMap[data] + "</p>";
-                            } else {
-                                return data;
-                            }
-                        }
-                    },
-                    {data: 'creationDate', "type": "date", name: "creationDate", width: "9rem",
-                        "render": function (data, type, row) {
-                            if (type === "sort" || type === 'type' || type === 'filter') {
-                                return moment(data, javatmp.settings.networkDateFormat).format(javatmp.settings.dateTimeFormat);
-                            } else {
-                                return "<p class='m-0 p-0 text-truncate' style='width: 9rem;'>" + moment(data, javatmp.settings.networkDateFormat).format(javatmp.settings.dateTimeFormat) + "</p>";
-                            }
-
-                        }}
+                    {data: 'countryId', name: "countryId", width: "9rem", "render": javatmp.plugins.DataTableColRenderWrapper("9rem", countriesMap)},
+                    {data: 'lang', name: "lang", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem", languagesMap)},
+                    {data: 'theme', name: "theme", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem", themesMap)},
+                    {data: 'timezone', name: "timezone", width: "11rem", "render": javatmp.plugins.DataTableColRenderWrapper("11rem", timezonesMap)},
+                    {data: 'creationDate', "type": "date", name: "creationDate", width: "9rem", "render": javatmp.plugins.DataTableColRenderWrapper("9rem")}
                 ]
             });
-            function getMenuPosition($contextMenu, mouse, direction, scrollDir, isRTL) {
-                var win = $(window)[direction]();
-                var scroll = $(window)[scrollDir]();
-                var menu = $($contextMenu)[direction]();
-//                var position = mouse + scroll;
-                var position = mouse + 0;
-                if (direction === "width" && (position - $($contextMenu)[direction]() > 0) && isRTL) {
-                    position = position - $($contextMenu)[direction]();
-                } else {
-                    // opening menu would pass the side of the page
-                    if (mouse + menu > win && menu < mouse)
-                        position -= menu;
-                }
-                return position;
-            }
 
-            $('tbody', userTableElement).on('contextmenu', 'tr[data-row-id]', function (e) {
-                // https://stackoverflow.com/questions/18666601/use-bootstrap-3-dropdown-menu-as-context-menu
-                var rowId = $(this).data("row-id");
-                if ($(this).hasClass("selected") === false) {
-                    table.row(this).select();
-                }
-                if (e.ctrlKey)
-                    return;
-                var $contextMenu = $("#contextMenu");
-                $contextMenu.on("click", "a", function () {
-                    $contextMenu.hide();
-                });
-                $('body').on("click", function () {
-                    $contextMenu.hide();
-                });
-                $contextMenu.css({
-                    display: "block",
-//                        left: e.pageX,
-//                        top: e.pageY
-                    left: getMenuPosition($contextMenu, e.clientX, 'width', 'scrollLeft', javatmp.settings.isRTL),
-                    right: "auto",
-                    top: getMenuPosition($contextMenu, e.clientY, 'height', 'scrollTop', javatmp.settings.isRTL)
-                });
-                return false;
-            });
+            window.javatmp.plugins.contextMenuWrapper($('tbody', userTableElement), 'tr[data-row-id]', $("#contextMenu"));
+
             var form = $('#SearchForUserProfileFormId');
+            var birthDateInputMask = javatmp.plugins.inputmaskWrapperForDate(form.find("input[name='birthDate']"));
+            var birthDateDatePicker = javatmp.plugins.daterangepickerWrapperForDate(form.find("input[name='birthDate']"));
+            var addressEditor = javatmp.plugins.summernoteWrapper(form.find("textarea[name='address']"));
+            var langSelect = javatmp.plugins.select2Wrapper(form.find("select[name='lang']"));
+            var timezoneSelect = javatmp.plugins.select2Wrapper(form.find("select[name='timezone']"));
+            var themeSelect = javatmp.plugins.select2WrapperForTheme(form.find("select[name='theme']"));
+            var countryIdSelect = javatmp.plugins.select2WrapperForCountry(form.find("select[name='countryId']"));
+            var profilePicScrollbars = javatmp.plugins.mCustomScrollbarForProfilePicture(form.find("#profilePicturePreviewContainerId"));
 
-            form.find("input[name='birthOfDateStr']").inputmask({
-                alias: "datetime",
-                placeholder: "dd/mm/yyyy",
-                inputFormat: "dd/mm/yyyy",
-                displayFormat: true,
-                hourFormat: "24",
-                clearMaskOnLostFocus: false
-            });
-            form.find("input[name='birthOfDateStr']").daterangepicker({
-                "opens": javatmp.settings.floatReverse,
-                startDate: moment().format(javatmp.settings.dateFormat),
-                singleDatePicker: true,
-                showDropdowns: true,
-                timePicker: false,
-                timePickerIncrement: 1,
-                timePicker24Hour: true,
-                autoApply: true,
-                autoUpdateInput: false,
-                minDate: '01/01/1900',
-                maxDate: '31/12/2099',
-                //                    maxDate: '',
-                //                    minDate: moment(),
-                locale: {
-                    "direction": javatmp.settings.direction,
-                    format: javatmp.settings.dateFormat
-                }
-            }, function (start, end, label) {
-                var formatedDateSelected = moment(start).locale('en').format(javatmp.settings.dateFormat);
-                form.find("input[name='birthOfDateStr']").val(formatedDateSelected).trigger("change");
-            });
-            form.find("textarea[name='address']").summernote({
-                direction: javatmp.settings.direction,
-                lang: javatmp.user.lang === "ar" ? "ar-AR" : javatmp.user.lang,
-                height: 100,
-                dialogsInBody: true
-            });
-
-            $.fn.select2.defaults.set("theme", "bootstrap");
-            $.fn.select2.defaults.set("dir", javatmp.settings.direction);
-//            $.fn.select2.defaults.set("placeholder", javatmp.settings.labels['page.text.kindlySelect']);
-
-            form.find("select[name='lang']").select2({
-                allowClear: true,
-                containerCssClass: ':all:',
-                width: '',
-                dropdownCssClass: "select2-lang-dropdown"
-            }).on("select2:open", function () {
-//                $(".select2-lang-dropdown", ".select2-container").css('z-index', modalZIndex + 1);
-            });
-            form.find("select[name='theme']").select2({
-                allowClear: true,
-                containerCssClass: ':all:',
-                width: '',
-                escapeMarkup: function (markup) {
-                    return markup;
-                },
-                templateSelection: formatThemeSelection,
-                templateResult: formatThemeResult,
-                dropdownCssClass: "select2-theme-dropdown"
-            }).on("select2:open", function () {
-//                $(".select2-theme-dropdown", ".select2-container").css('z-index', modalZIndex + 1);
-            });
-            form.find("select[name='timezone']").select2({
-                allowClear: true,
-                containerCssClass: ':all:',
-                width: '',
-                dropdownCssClass: "select2-timezone-dropdown"
-            }).on("select2:open", function () {
-//                $(".select2-timezone-dropdown", ".select2-container").css('z-index', modalZIndex + 1);
-            });
-            form.find("select[name='countryId']").select2({
-                theme: "bootstrap",
-                dir: javatmp.settings.direction,
-                allowClear: true,
-                containerCssClass: ':all:',
-                width: '',
-                templateSelection: formatCountrySelection,
-                templateResult: formatCountry,
-                escapeMarkup: function (markup) {
-                    return markup;
-                },
-                dropdownCssClass: "select2-countryId-dropdown"
-            }).on("select2:select", function () {
-                (this).focus();
-            }).on("select2:open", function () {
-//                $(".select2-countryId-dropdown", ".select2-container").css('z-index', modalZIndex + 1);
-            });
-
-            form.find("#profilePicturePreviewContainerId").mCustomScrollbar({
-                axis: "yx",
-                theme: "javatmp",
-                scrollInertia: 0,
-                advanced: {
-                    updateOnContentResize: true,
-                    autoExpandHorizontalScroll: true,
-                    updateOnImageLoad: true
-                },
-                mouseWheel: {
-                    preventDefault: true,
-                    scrollAmount: 85
-                }
-            });
-
-            function formatCountry(repo) {
-                if (repo.loading)
-                    return repo.text;
-                var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
-                var template =
-                        '    <div class="media d-flex align-items-center">' +
-                        '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
-                        '        <div class="media-body">' +
-                        '            <strong>{{countryText}} ({{countryId}})</strong>' +
-                        '        </div>' +
-                        '    </div>';
-                var readyData = template.composeTemplate({
-                    'imagePath': imagePath,
-                    'countryText': repo.text,
-                    'countryId': repo.id
-                });
-                return readyData;
-            }
-            function formatCountrySelection(repo) {
-                if (!repo.id) {
-                    return repo.text;
-                }
-
-                var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
-                var template =
-                        '    <div class="media d-flex align-items-center">' +
-                        '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
-                        '        <div class="media-body">' +
-                        '            <span>{{countryText}} ({{countryId}})</span>' +
-                        '        </div>' +
-                        '    </div>';
-                var readyData = template.composeTemplate({
-                    'imagePath': imagePath,
-                    'countryText': repo.text,
-                    'countryId': repo.id
-                });
-                return readyData;
-            }
-            function formatThemeSelection(repo) {
-                if (!repo.id) {
-                    return repo.text;
-                }
-
-                var imagePath = javatmp.settings.contextPath + "/assets/img/themes/" + repo.text + ".png";
-                var template =
-                        '    <div class="media d-flex align-items-center">' +
-                        '        <img style="height: 1.5rem;" class="mr-1" src="{{imagePath}}" alt="{{themeName}}"/>' +
-                        '        <div class="media-body">' +
-                        '            <span>{{themeName}}</span>' +
-                        '        </div>' +
-                        '    </div>';
-                var readyData = template.composeTemplate({
-                    'imagePath': imagePath,
-                    'themeName': repo.text
-                });
-                return readyData;
-            }
-            function formatThemeResult(repo) {
-                if (!repo.id) {
-                    return repo.text;
-                }
-
-                var imagePath = javatmp.settings.contextPath + "/assets/img/themes/" + repo.text + ".png";
-                var template =
-                        '    <div class="media d-flex align-items-center">' +
-                        '        <img style="height: 75px;" class="mr-1" src="{{imagePath}}" alt="{{themeName}}"/>' +
-                        '        <div class="media-body">' +
-                        '            <span>{{themeName}}</span>' +
-                        '        </div>' +
-                        '    </div>';
-                var readyData = template.composeTemplate({
-                    'imagePath': imagePath,
-                    'themeName': repo.text
-                });
-                return readyData;
-            }
-
-            function populateForm(frm, data) {
-                $.each(data, function (key, value) {
-                    var $ctrl = $('[name=' + key + ']', frm);
-                    if ($ctrl.is('select')) {
-                        $ctrl.val(value).trigger("change");
-//                        $("option", $ctrl).each(function () {
-//                            console.log("this.value is [" + this.value + "], value [" + value + "]");
-//                            if (this.value === value) {
-//                                console.log("Matched and we select now");
-//                                $(this).prop("selected", true).trigger("change");
-//                            }
-//                        });
-                    } else if ($ctrl.is('textarea')) {
-                        $ctrl.val(value).trigger("change");
-                    } else {
-                        switch ($ctrl.attr("type"))
-                        {
-                            case "text" :
-                            case "hidden":
-                            case "textarea":
-                                $ctrl.val(value).trigger("change");
-                                break;
-                            case "radio" :
-                            case "checkbox":
-                                $ctrl.each(function () {
-                                    if ($(this).attr('value') === value) {
-                                        $(this).prop("checked", value).trigger("change");
-                                    }
-                                });
-                                break;
-                        }
-                    }
-                });
-            }
             table.on('select', function (e, dt, type, indexes) {
                 //                alert("select");
                 var rowsData = table.rows(indexes).data().toArray();
@@ -1194,10 +568,10 @@
                 enabled();
 
                 var rowObject = rowData;
-                populateForm(form, rowObject);
+                window.javatmp.plugins.populateForm(form, rowObject);
                 form.find("textarea[name='address']").summernote('code', rowObject.address);
 //                    form.find("textarea[name='address']").summernote('triggerEvent', 'change');
-                form.find("input[name='birthOfDateStr']").val(moment(rowObject.birthDate, javatmp.settings.networkDateFormat).locale('en').format(javatmp.settings.dateFormat));
+                form.find("input[name='birthDate']").val(moment(rowObject.birthDate, javatmp.settings.networkDateFormat).locale('en').format(javatmp.settings.dateFormat));
 
                 var image = form.find("img[id='profilePicturePreview']");
                 var resizeImage = form.find("img[id='profilePictureResizePreview']");
@@ -1260,81 +634,17 @@
                 var selectedData = table.rows({selected: true}).data();
                 if (selectedData.length > 0) {
                     var selectedRecord = selectedData[0];
-                    //                    alert("row[" + JSON.stringify(selectedRecord) + "]");
-                    var passData = {};
-                    passData.callback = "actionCallback";
-                    passData.id = selectedRecord.id;
-                    BootstrapModalWrapperFactory.createModal({
-                        message: "Are you sure you want to delete user ?",
-                        title: "Confiramation",
-                        closable: false,
-                        closeByBackdrop: false,
-                        buttons: [
-                            {
-                                label: "Cancel",
-                                cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.hide();
-                                }
-                            },
-                            {
-                                label: "Delete User " + selectedRecord.userName,
-                                cssClass: "btn btn-danger",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    modalWrapper.hide();
-                                    var m = BootstrapModalWrapperFactory.createModal({
-                                        message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
-                                        closable: false,
-                                        closeByBackdrop: false,
-                                        closeByKeyboard: false
-                                    });
-                                    m.originalModal.find(".modal-dialog").css({transition: 'all 0.5s'});
-                                    m.show();
-                                    $.ajax({
-                                        type: "POST",
-                                        url: javatmp.settings.contextPath + "/user/DeleteUserController",
-                                        data: passData,
-//                                        dataType: "json",
-//                                        contentType: "application/json; charset=UTF-8",
-                                        success: function (data) {
-                                            m.updateMessage(data.message);
-                                            m.updateClosable(true);
-                                            m.updateTitle("Deleted Action Response");
-
-                                            toastr.success(data.message, 'SUCCESS', {
-                                                timeOut: 5000,
-                                                progressBar: true,
-                                                rtl: javatmp.settings.isRTL,
-                                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                                            });
-
-                                            // refresh users table:
-                                            table.columns.adjust().draw();
-                                        },
-                                        error: function (data) {
-                                            var errorMsg = "Could Not complete the action";
-                                            try {
-                                                var jsonData = $.parseJSON(data.responseText);
-                                                errorMsg = jsonData.message;
-                                            } catch (error) {
-                                            }
-                                            m.updateMessage(errorMsg);
-                                            m.updateClosable(true);
-                                            m.updateTitle("Error Response");
-
-                                            toastr.error(errorMsg, 'ERROR', {
-                                                timeOut: 5000,
-                                                progressBar: true,
-                                                rtl: javatmp.settings.isRTL,
-                                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                                            });
-//                                            alert("error" + JSON.stringify(data));
-                                        }
-                                    });
-                                }
+                    window.javatmp.plugins.confirmAjaxAction(
+                            javatmp.settings.labels["dialog.delete.title"],
+                            javatmp.settings.labels["dialog.delete.message"],
+                            javatmp.settings.labels["page.btn.deleteUser"],
+                            javatmp.settings.labels["global.cancel"],
+                            javatmp.settings.contextPath + "/user/DeleteUserController",
+                            selectedRecord,
+                            function (data) {
+                                table.columns.adjust().draw();
                             }
-                        ]
-                    }).show();
+                    );
                 } else {
                     BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
                 }
@@ -1344,81 +654,17 @@
                 var selectedData = table.rows({selected: true}).data();
                 if (selectedData.length > 0) {
                     var selectedRecord = selectedData[0];
-                    //                    alert("row[" + JSON.stringify(selectedRecord) + "]");
-                    var passData = {};
-                    passData.callback = "actionCallback";
-                    passData.id = selectedRecord.id;
-                    BootstrapModalWrapperFactory.createModal({
-                        message: "Are you sure you want to Activate user ?",
-                        title: "Confiramation",
-                        closable: false,
-                        closeByBackdrop: false,
-                        buttons: [
-                            {
-                                label: "Cancel",
-                                cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.hide();
-                                }
-                            },
-                            {
-                                label: "Activate User " + selectedRecord.userName,
-                                cssClass: "btn btn-primary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    modalWrapper.hide();
-                                    var m = BootstrapModalWrapperFactory.createModal({
-                                        message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
-                                        closable: false,
-                                        closeByBackdrop: false,
-                                        closeByKeyboard: false
-                                    });
-                                    m.originalModal.find(".modal-dialog").css({transition: 'all 0.5s'});
-                                    m.show();
-                                    $.ajax({
-                                        type: "POST",
-                                        url: javatmp.settings.contextPath + "/user/ActivateUserController",
-                                        data: passData,
-//                                        dataType: "json",
-//                                        contentType: "application/json; charset=UTF-8",
-                                        success: function (data) {
-                                            m.updateMessage(data.message);
-                                            m.updateClosable(true);
-                                            m.updateTitle("Activate Action Response");
-
-                                            toastr.success(data.message, 'SUCCESS', {
-                                                timeOut: 5000,
-                                                progressBar: true,
-                                                rtl: javatmp.settings.isRTL,
-                                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                                            });
-
-                                            // refresh users table:
-                                            table.columns.adjust().draw();
-                                        },
-                                        error: function (data) {
-                                            var errorMsg = "Could Not complete the action";
-                                            try {
-                                                var jsonData = $.parseJSON(data.responseText);
-                                                errorMsg = jsonData.message;
-                                            } catch (error) {
-                                            }
-                                            m.updateMessage(errorMsg);
-                                            m.updateClosable(true);
-                                            m.updateTitle("Error Response");
-
-                                            toastr.error(errorMsg, 'ERROR', {
-                                                timeOut: 5000,
-                                                progressBar: true,
-                                                rtl: javatmp.settings.isRTL,
-                                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                                            });
-//                                            alert("error" + JSON.stringify(data));
-                                        }
-                                    });
-                                }
+                    window.javatmp.plugins.confirmAjaxAction(
+                            javatmp.settings.labels["dialog.activate.title"],
+                            javatmp.settings.labels["dialog.activate.message"],
+                            javatmp.settings.labels["page.btn.activateUser"],
+                            javatmp.settings.labels["global.cancel"],
+                            javatmp.settings.contextPath + "/user/ActivateUserController",
+                            selectedRecord,
+                            function (data) {
+                                table.columns.adjust().draw();
                             }
-                        ]
-                    }).show();
+                    );
                 } else {
                     BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
                 }
@@ -1428,85 +674,20 @@
                 var selectedData = table.rows({selected: true}).data();
                 if (selectedData.length > 0) {
                     var selectedRecord = selectedData[0];
-                    //                    alert("row[" + JSON.stringify(selectedRecord) + "]");
-                    var passData = {};
-                    passData.callback = "actionCallback";
-                    passData.id = selectedRecord.id;
-                    BootstrapModalWrapperFactory.createModal({
-                        message: "Are you sure you want to Deactivate user ?",
-                        title: "Confiramation",
-                        closable: false,
-                        closeByBackdrop: false,
-                        buttons: [
-                            {
-                                label: "Cancel",
-                                cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.hide();
-                                }
-                            },
-                            {
-                                label: "Deactivate User " + selectedRecord.userName,
-                                cssClass: "btn btn-warning",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    modalWrapper.hide();
-                                    var m = BootstrapModalWrapperFactory.createModal({
-                                        message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
-                                        closable: false,
-                                        closeByBackdrop: false,
-                                        closeByKeyboard: false
-                                    });
-                                    m.originalModal.find(".modal-dialog").css({transition: 'all 0.5s'});
-                                    m.show();
-                                    $.ajax({
-                                        type: "POST",
-                                        url: javatmp.settings.contextPath + "/user/DeactivateUserController",
-                                        data: passData,
-//                                        dataType: "json",
-//                                        contentType: "application/json; charset=UTF-8",
-                                        success: function (data) {
-                                            m.updateMessage(data.message);
-                                            m.updateClosable(true);
-                                            m.updateTitle("Deactivate Action Response");
-
-                                            toastr.success(data.message, 'SUCCESS', {
-                                                timeOut: 5000,
-                                                progressBar: true,
-                                                rtl: javatmp.settings.isRTL,
-                                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                                            });
-
-                                            // refresh users table:
-                                            table.columns.adjust().draw();
-                                        },
-                                        error: function (data) {
-                                            var errorMsg = "Could Not complete the action";
-                                            try {
-                                                var jsonData = $.parseJSON(data.responseText);
-                                                errorMsg = jsonData.message;
-                                            } catch (error) {
-                                            }
-                                            m.updateMessage(errorMsg);
-                                            m.updateClosable(true);
-                                            m.updateTitle("Error Response");
-
-                                            toastr.error(errorMsg, 'ERROR', {
-                                                timeOut: 5000,
-                                                progressBar: true,
-                                                rtl: javatmp.settings.isRTL,
-                                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                                            });
-//                                            alert("error" + JSON.stringify(data));
-                                        }
-                                    });
-                                }
+                    window.javatmp.plugins.confirmAjaxAction(
+                            javatmp.settings.labels["dialog.inActivate.title"],
+                            javatmp.settings.labels["dialog.inActivate.message"],
+                            javatmp.settings.labels["page.btn.deactivateUser"],
+                            javatmp.settings.labels["global.cancel"],
+                            javatmp.settings.contextPath + "/user/DeactivateUserController",
+                            selectedRecord,
+                            function (data) {
+                                table.columns.adjust().draw();
                             }
-                        ]
-                    }).show();
+                    );
                 } else {
                     BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
                 }
-
             });
             window.actionCallback = function (callbackData) {
                 if (callbackData.cancel === true) {
@@ -1514,7 +695,6 @@
                     table.columns.adjust().draw();
                 }
             };
-
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.

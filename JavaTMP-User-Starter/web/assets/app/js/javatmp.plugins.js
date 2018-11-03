@@ -379,7 +379,76 @@
             });
             return false;
         });
-
     };
+
+    window.javatmp.plugins.populateForm = function (frm, data) {
+        $.each(data, function (key, value) {
+            var $ctrl = $('[name=' + key + ']', frm);
+            if ($ctrl.is('select')) {
+                $ctrl.val(value).trigger("change");
+//                        $("option", $ctrl).each(function () {
+//                            console.log("this.value is [" + this.value + "], value [" + value + "]");
+//                            if (this.value === value) {
+//                                console.log("Matched and we select now");
+//                                $(this).prop("selected", true).trigger("change");
+//                            }
+//                        });
+            } else if ($ctrl.is('textarea')) {
+                $ctrl.val(value).trigger("change");
+            } else {
+                switch ($ctrl.attr("type"))
+                {
+                    case "text" :
+                    case "hidden":
+                    case "textarea":
+                        $ctrl.val(value).trigger("change");
+                        break;
+                    case "radio" :
+                    case "checkbox":
+                        $ctrl.each(function () {
+                            if ($(this).attr('value') === value) {
+                                $(this).prop("checked", value).trigger("change");
+                            }
+                        });
+                        break;
+                }
+            }
+        });
+    };
+
+    window.javatmp.plugins.DataTableColFilterEventWrapper = function (dataTableReference, colIndex, escape) {
+        return function (event) {
+            var $this = $(this);
+            javatmp.util.waitForFinalEvent(function () {
+                var val = escape ? $.fn.dataTable.util.escapeRegex($this.val()) : $this.val();
+                dataTableReference.column(colIndex).search(val ? val : '', true, false).draw();
+            }, 200, "@table-filter");
+        };
+    };
+    window.javatmp.plugins.DataTableColRenderWrapper = function (forceWidth, mapperObject) {
+        return function (data, type, row, meta) {
+//                    console.log(meta);
+//                    console.log(meta.settings);
+//                    console.log(meta.settings.aoColumns);
+            if (type === "sort" || type === 'type' || type === 'filter') {
+                return data;
+            } else if (type === "display" && meta.settings.aoColumns[meta.col].type === "date") {
+                return "<p class='m-0 p-0 text-truncate' style='width: " + forceWidth + ";'>" + moment(data, javatmp.settings.networkDateFormat).format(javatmp.settings.dateFormat) + "</p>";
+            } else if (type === "display") {
+                return "<p class='m-0 p-0 text-truncate' style='width: " + forceWidth + ";'>" + (mapperObject ? mapperObject[data] : data) + "</p>";
+            } else {
+                return data;
+            }
+        };
+    };
+
+    /*
+     "createdCell": function (td, cellData, rowData, row, col) {
+     console.log(cellData);
+     console.log(rowData);
+     console.log(row);
+     console.log(col);
+     }
+     */
 
 }(jQuery, window, document));

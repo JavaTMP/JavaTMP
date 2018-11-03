@@ -256,42 +256,7 @@
 
             }
             disabled();
-            /*
-             "createdCell": function (td, cellData, rowData, row, col) {
-             console.log(cellData);
-             console.log(rowData);
-             console.log(row);
-             console.log(col);
-             }
-             */
-            javatmp.plugins.DataTableColFilterWrapper = function (dataTableReference, colIndex, escape) {
-                return function (event) {
-                    var $this = $(this);
-                    javatmp.util.waitForFinalEvent(function () {
-                        var val = escape ? $.fn.dataTable.util.escapeRegex($this.val()) : $this.val();
-                        dataTableReference.column(colIndex).search(val ? val : '', true, false).draw();
-                    }, 200, "@table-filter");
-                };
-            };
-            javatmp.plugins.DataTableColRenderWrapper = function (forceWidth, mapperObject) {
-                return function (data, type, row, meta) {
-//                    console.log(meta);
-//                    console.log(meta.settings);
-//                    console.log(meta.settings.aoColumns);
-                    if (type === "sort" || type === 'type' || type === 'filter') {
-                        return data;
-                    } else if (type === "display" && meta.settings.aoColumns[meta.col].type === "date") {
-                        return "<p class='m-0 p-0 text-truncate' style='width: " + forceWidth + ";'>" + moment(data, javatmp.settings.networkDateFormat).format(javatmp.settings.dateFormat) + "</p>";
-                    } else if (type === "display") {
-                        return "<p class='m-0 p-0 text-truncate' style='width: " + forceWidth + ";'>" + (mapperObject ? mapperObject[data] : data) + "</p>";
-                    } else {
-                        return data;
-                    }
-                }
-                ;
-            };
-            $.fn.select2.defaults.set("theme", "bootstrap");
-            $.fn.select2.defaults.set("dir", javatmp.settings.direction);
+
             $.fn.dataTable.ext.errMode = 'none';
             var table = userTableElement.DataTable({
                 // https://datatables.net/reference/option/dom
@@ -323,25 +288,25 @@
                 initComplete: function (settings, json) {
                     var api = this.api();
                     // prepare id filter search field:
-                    var idFilterInput = $("#userlist-id-filter").on('keyup', javatmp.plugins.DataTableColFilterWrapper(api, 0));
-                    var usernameFilterInput = $("#userlist-username-filter").on('keyup', javatmp.plugins.DataTableColFilterWrapper(api, 1));
-                    var firstNameFilterInput = $("#userlist-firstname-filter").on('keyup', javatmp.plugins.DataTableColFilterWrapper(api, 2));
-                    var lastNameFilterInput = $("#userlist-lastname-filter").on('keyup', javatmp.plugins.DataTableColFilterWrapper(api, 3));
-                    var birthdateFilterInput = $("#userlist-birthdate-filter").on('change', javatmp.plugins.DataTableColFilterWrapper(api, 4, false));
+                    var idFilterInput = $("#userlist-id-filter").on('keyup', javatmp.plugins.DataTableColFilterEventWrapper(api, 0));
+                    var usernameFilterInput = $("#userlist-username-filter").on('keyup', javatmp.plugins.DataTableColFilterEventWrapper(api, 1));
+                    var firstNameFilterInput = $("#userlist-firstname-filter").on('keyup', javatmp.plugins.DataTableColFilterEventWrapper(api, 2));
+                    var lastNameFilterInput = $("#userlist-lastname-filter").on('keyup', javatmp.plugins.DataTableColFilterEventWrapper(api, 3));
+                    var birthdateFilterInput = $("#userlist-birthdate-filter").on('change', javatmp.plugins.DataTableColFilterEventWrapper(api, 4, false));
                     var birthDateInputMask = javatmp.plugins.inputmaskWrapperForDate(birthdateFilterInput);
                     var birthDateDatePicker = javatmp.plugins.daterangepickerWrapperForDate(birthdateFilterInput);
-                    var ageFilterInput = $("#userlist-age-filter").on('keyup', javatmp.plugins.DataTableColFilterWrapper(api, 5, false));
-                    var emailFilterInput = $("#userlist-email-filter").on('keyup', javatmp.plugins.DataTableColFilterWrapper(api, 6, false));
+                    var ageFilterInput = $("#userlist-age-filter").on('keyup', javatmp.plugins.DataTableColFilterEventWrapper(api, 5, false));
+                    var emailFilterInput = $("#userlist-email-filter").on('keyup', javatmp.plugins.DataTableColFilterEventWrapper(api, 6, false));
                     var statusFilterInput = $("#userlist-status-filter");
-                    var statusSelect = javatmp.plugins.select2Wrapper(statusFilterInput).on("select2:close", javatmp.plugins.DataTableColFilterWrapper(api, 7));
+                    var statusSelect = javatmp.plugins.select2Wrapper(statusFilterInput).on("select2:close", javatmp.plugins.DataTableColFilterEventWrapper(api, 7));
                     var countryFilterInput = $("#userlist-country-filter");
-                    var countryIdSelect = javatmp.plugins.select2WrapperForCountry(countryFilterInput).on("select2:close", javatmp.plugins.DataTableColFilterWrapper(api, 8));
+                    var countryIdSelect = javatmp.plugins.select2WrapperForCountry(countryFilterInput).on("select2:close", javatmp.plugins.DataTableColFilterEventWrapper(api, 8));
                     var languageFilterInput = $("#userlist-language-filter");
-                    var langSelect = javatmp.plugins.select2Wrapper(languageFilterInput).on("select2:close", javatmp.plugins.DataTableColFilterWrapper(api, 9));
+                    var langSelect = javatmp.plugins.select2Wrapper(languageFilterInput).on("select2:close", javatmp.plugins.DataTableColFilterEventWrapper(api, 9));
                     var themeFilterInput = $("#userlist-theme-filter");
-                    var themeSelect = javatmp.plugins.select2WrapperForTheme(themeFilterInput).on("select2:close", javatmp.plugins.DataTableColFilterWrapper(api, 10));
+                    var themeSelect = javatmp.plugins.select2WrapperForTheme(themeFilterInput).on("select2:close", javatmp.plugins.DataTableColFilterEventWrapper(api, 10));
                     var timezoneFilterInput = $("#userlist-timezone-filter");
-                    var timezoneSelect = javatmp.plugins.select2Wrapper(timezoneFilterInput).on("select2:close", javatmp.plugins.DataTableColFilterWrapper(api, 11));
+                    var timezoneSelect = javatmp.plugins.select2Wrapper(timezoneFilterInput).on("select2:close", javatmp.plugins.DataTableColFilterEventWrapper(api, 11));
                     var creationdateFilterInput = $("#userlist-creationdate-filter");
                     var creationdateFilterRange = javatmp.plugins.daterangepickerWrapperForDateRange(creationdateFilterInput);
                     creationdateFilterInput.on('change', function () {
@@ -376,11 +341,9 @@
                 },
                 columns: [
                     {data: 'id',
-                        "createdCell111": function (td, cellData, rowData, row, col) {
+                        "createdCell": function (td, cellData, rowData, row, col) {
                             console.log(table.init().columns[col]);
-                            $(td).css({"width": "1000px", "background-color": "red"});
-                            $(td).addClass("text-white");
-                            $(title).css({"width": "100rem"});
+                            $(td).addClass("text-center");
                         },
                         className: "", name: "id", width: "6rem", "render": javatmp.plugins.DataTableColRenderWrapper("6rem")},
                     {data: 'userName', name: "userName", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
@@ -398,7 +361,7 @@
                         }
                     },
                     {data: 'email', name: "email", width: "9rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
-                    {data: 'status', name: "status", width: "7rem",
+                    {data: 'status', className: "text-center", name: "status", width: "7rem",
                         "render": function (data, type, row) {
                             var statusMap = {"0": {label: "Deactive", style: "warning"}, "1": {label: "Active", style: "success"}};
                             if (type === "display") {
