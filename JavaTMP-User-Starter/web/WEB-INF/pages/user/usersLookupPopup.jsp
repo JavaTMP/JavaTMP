@@ -5,13 +5,13 @@
 <div class="dynamic-ajax-content">
     <table cellspacing="0" class="table table-condensed table-bordered table-hover" id="UsersListTableId">
         <thead>
-            <tr id="UserListMainHeader">
+            <tr>
                 <th>${labels['domain.user.id']}</th>
                 <th>${labels['domain.user.userName']}</th>
                 <th>${labels['domain.user.firstName']}</th>
                 <th>${labels['domain.user.lastName']}</th>
             </tr>
-            <tr id="UserListFilterHeader">
+            <tr>
                 <th style="width: 3rem;">
                     <input id="userlist-id-filter" class="form-control"/>
                 </th>
@@ -35,18 +35,18 @@
         table.dataTable tbody tr {
             cursor: pointer;
         }
-        #UserListFilterHeader th {
-            padding: 0;
-        }
-        #UserListFilterHeader th > .form-control {
-            border-radius: 0;
-        }
-        #UserListFilterHeader th > .custom-select {
-            border-radius: 0;
-        }
-        #UserListMainHeader th > p {
-            margin-bottom: 0;
-        }
+        /*        #UserListFilterHeader th {
+                    padding: 0;
+                }
+                #UserListFilterHeader th > .form-control {
+                    border-radius: 0;
+                }
+                #UserListFilterHeader th > .custom-select {
+                    border-radius: 0;
+                }
+                #UserListMainHeader th > p {
+                    margin-bottom: 0;
+                }*/
     </style>
     <script type="text/javascript">
         jQuery(function ($) {
@@ -99,9 +99,7 @@
                 });
                 modal.originalModal.find(".modal-footer").addClass("justify-content-start");
                 modal.originalModal.find(".modal-body").addClass("pt-0");
-
                 var userTableElement = $('#UsersListTableId');
-
                 var table = userTableElement.DataTable({
                     dom: "<'row'<'col-sm-12'tr>>" +
                             "<'row'<'col-sm-12'i>>"
@@ -127,38 +125,10 @@
                     initComplete: function (settings, json) {
                         var api = this.api();
                         // prepare id filter search field:
-                        var idFilterInput = $("#userlist-id-filter");
-                        idFilterInput.on('keyup', function () {
-                            var $this = $(this);
-                            javatmp.util.waitForFinalEvent(function () {
-                                var val = $.fn.dataTable.util.escapeRegex($this.val());
-                                api.column(0).search(val ? val : '', true, false).draw();
-                            }, 200, "@userlist-main-table-filter");
-                        });
-                        var usernameFilterInput = $("#userlist-username-filter");
-                        usernameFilterInput.on('keyup', function () {
-                            var $this = $(this);
-                            javatmp.util.waitForFinalEvent(function () {
-                                var val = $.fn.dataTable.util.escapeRegex($this.val());
-                                api.column(1).search(val ? val : '', true, false).draw();
-                            }, 200, "@userlist-main-table-filter");
-                        });
-                        var firstNameFilterInput = $("#userlist-firstname-filter");
-                        firstNameFilterInput.on('keyup', function () {
-                            var $this = $(this);
-                            javatmp.util.waitForFinalEvent(function () {
-                                var val = $.fn.dataTable.util.escapeRegex($this.val());
-                                api.column(2).search(val ? val : '', true, false).draw();
-                            }, 200, "@userlist-main-table-filter");
-                        });
-                        var lastNameFilterInput = $("#userlist-lastname-filter");
-                        lastNameFilterInput.on('keyup', function () {
-                            var $this = $(this);
-                            javatmp.util.waitForFinalEvent(function () {
-                                var val = $.fn.dataTable.util.escapeRegex($this.val());
-                                api.column(3).search(val ? val : '', true, false).draw();
-                            }, 200, "@userlist-main-table-filter");
-                        });
+                        var idFilterInput = $("#userlist-id-filter").on('keyup', javatmp.plugins.DataTableColFilterEventWrapper(api, 0));
+                        var usernameFilterInput = $("#userlist-username-filter").on('keyup', javatmp.plugins.DataTableColFilterEventWrapper(api, 1));
+                        var firstNameFilterInput = $("#userlist-firstname-filter").on('keyup', javatmp.plugins.DataTableColFilterEventWrapper(api, 2));
+                        var lastNameFilterInput = $("#userlist-lastname-filter").on('keyup', javatmp.plugins.DataTableColFilterEventWrapper(api, 3));
                     },
                     "ajax": {
                         "type": "POST",
@@ -176,58 +146,17 @@
                         }
                     },
                     columns: [
-                        {
-                            data: 'id', className: "", name: "id", width: "3rem",
-                            "render": function (data, type, row) {
-                                if (type === "display") {
-                                    return "<p class='m-0 p-0' style='width: 3rem;'>" + data + "</p>";
-                                } else {
-                                    return data;
-                                }
-                            }
-                        },
-                        {
-                            data: 'userName', name: "userName", width: "10rem",
-                            "render": function (data, type, row) {
-                                if (type === "display") {
-                                    return "<p class='m-0 p-0' style='width: 10rem;'>" + data + "</p>";
-                                } else {
-                                    return data;
-                                }
-                            }
-                        },
-                        {
-                            data: 'firstName', name: "firstName", width: "10rem",
-                            "render": function (data, type, row) {
-                                if (type === "sort" || type === 'type' || type === 'filter') {
-                                    return data;
-                                } else {
-                                    return "<p class='m-0 p-0' style='width: 10rem;'>" + data + "</p>";
-                                }
-
-                            }
-                        },
-                        {
-                            data: 'lastName', name: "lastName", width: "10rem",
-                            "render": function (data, type, row) {
-                                if (type === "sort" || type === 'type' || type === 'filter') {
-                                    return data;
-                                } else {
-                                    return "<p class='m-0 p-0' style='width: 10rem;'>" + data + "</p>";
-                                }
-
-                            }
-                        }
+                        {data: 'id', className: "", name: "id", width: "3rem", "render": javatmp.plugins.DataTableColRenderWrapper("6rem")},
+                        {data: 'userName', name: "userName", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                        {data: 'firstName', name: "firstName", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                        {data: 'lastName', name: "lastName", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")}
                     ]
                 });
-
                 table.on('select', function (e, dt, type, indexes) {
                     selectUserButton.prop("disabled", false);
                 }).on('deselect', function (e, dt, type, indexes) {
                     selectUserButton.prop("disabled", true);
                 });
-
-
             });
         });
     </script>

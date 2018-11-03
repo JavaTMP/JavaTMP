@@ -33,20 +33,20 @@
     </div>
     <table cellspacing="0" class="table table-condensed table-bordered table-hover" id="UsersListTableId">
         <thead>
-            <tr id="UserListMainHeader">
-                <th style="width: 5rem;"><p style="width: 5rem;">${labels['domain.user.id']}</p></th>
-                <th style="width: 9rem;"><p style="width: 9rem;">${labels['domain.user.userName']}</p></th>
-                <th style="width: 7rem;"><p style="width: 7rem;">${labels['domain.user.firstName']}</p></th>
-                <th style="width: 7rem;"><p style="width: 7rem;">${labels['domain.user.lastName']}</p></th>
-                <th style="width: 8rem;"><p style="width: 8rem;">${labels['domain.user.birthDate']}</p></th>
-                <th style="width: 3rem;"><p style="width: 3rem;">${labels['domain.user.age']}</p></th>
-                <th style="width: 8rem;"><p style="width: 8rem;">${labels['domain.user.email']}</p></th>
-                <th style="width: 6rem;"><p style="width: 6rem;">${labels['domain.user.status']}</p></th>
-                <th style="width: 8rem;"><p style="width: 8rem;">${labels['domain.user.country']}</p></th>
-                <th style="width: 10rem;"><p style="width: 10rem;">${labels['domain.user.lang']}</p></th>
-                <th style="width: 10rem;"><p style="width: 10rem;">${labels['domain.user.theme']}</p></th>
-                <th style="width: 10rem;"><p style="width: 10rem;">${labels['domain.user.timezone']}</p></th>
-                <th style="width: 8rem;"><p style="width: 8rem;">${labels['domain.user.creationDate']}</p></th>
+            <tr>
+                <th style="width: 5rem;"><p class="m-0 p-0" style="width: 5rem;">${labels['domain.user.id']}</p></th>
+                <th style="width: 9rem;"><p class="m-0 p-0" style="width: 9rem;">${labels['domain.user.userName']}</p></th>
+                <th style="width: 7rem;"><p class="m-0 p-0" style="width: 7rem;">${labels['domain.user.firstName']}</p></th>
+                <th style="width: 7rem;"><p class="m-0 p-0" style="width: 7rem;">${labels['domain.user.lastName']}</p></th>
+                <th style="width: 8rem;"><p class="m-0 p-0" style="width: 8rem;">${labels['domain.user.birthDate']}</p></th>
+                <th style="width: 3rem;"><p class="m-0 p-0" style="width: 3rem;">${labels['domain.user.age']}</p></th>
+                <th style="width: 12rem;"><p class="m-0 p-0" style="width: 12rem;">${labels['domain.user.email']}</p></th>
+                <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">${labels['domain.user.status']}</p></th>
+                <th style="width: 8rem;"><p class="m-0 p-0" style="width: 8rem;">${labels['domain.user.country']}</p></th>
+                <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">${labels['domain.user.lang']}</p></th>
+                <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">${labels['domain.user.theme']}</p></th>
+                <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">${labels['domain.user.timezone']}</p></th>
+                <th style="width: 8rem;"><p class="m-0 p-0" style="width: 8rem;">${labels['domain.user.creationDate']}</p></th>
             </tr>
             <tr id="UserListFilterHeader">
                 <th style="width: 5rem;">
@@ -67,10 +67,10 @@
                 <th style="width: 3rem;">
                     <input id="userlist-age-filter" class="form-control"/>
                 </th>
-                <th style="width: 8rem;">
+                <th style="width: 12rem;">
                     <input id="userlist-email-filter" class="form-control"/>
                 </th>
-                <th style="width: 6rem;">
+                <th style="width: 10rem;">
                     <select id="userlist-status-filter" class="form-control">
                         <option value="">ALL Statuses</option>
                         <option value="1">Activated</option>
@@ -175,19 +175,19 @@
         table.dataTable tbody tr {
             cursor: pointer;
         }
-        #UserListFilterHeader th {
-            padding: 0;
-        }
+        /*        #UserListFilterHeader th {
+                    padding: 0;
+                }
 
-        #UserListFilterHeader th > .form-control {
-            border-radius: 0;
-        }
-        #UserListFilterHeader th > .custom-select {
-            border-radius: 0;
-        }
-        #UserListMainHeader th > p {
-            margin-bottom: 0;
-        }
+                #UserListFilterHeader th > .form-control {
+                    border-radius: 0;
+                }
+                #UserListFilterHeader th > .custom-select {
+                    border-radius: 0;
+                }
+                #UserListMainHeader th > p {
+                    margin-bottom: 0;
+                }*/
     </style>
     <script type="text/javascript">
         jQuery(function ($) {
@@ -272,7 +272,7 @@
                 scrollX: true,
                 "autoWidth": false,
                 fixedColumns: true,
-                scrollCollapse: false,
+                scrollCollapse: true,
                 "searching": true,
                 searchDelay: 500,
                 orderCellsTop: true, // important to for two row header with filteration below header column names.
@@ -360,12 +360,12 @@
                             }
                         }
                     },
-                    {data: 'email', name: "email", width: "9rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
-                    {data: 'status', className: "text-center", name: "status", width: "7rem",
+                    {data: 'email', name: "email", width: "14rem", "render": javatmp.plugins.DataTableColRenderWrapper("14rem")},
+                    {data: 'status', className: "text-center", name: "status", width: "12rem",
                         "render": function (data, type, row) {
                             var statusMap = {"0": {label: "Deactive", style: "warning"}, "1": {label: "Active", style: "success"}};
                             if (type === "display") {
-                                return "<p class='m-0 p-0' style='width: 7rem;'><span class='badge badge-" + statusMap[data].style + "'>" + statusMap[data].label + "</span></p>";
+                                return "<p class='m-0 p-0' style='width: 12rem;'><span class='badge badge-" + statusMap[data].style + "'>" + statusMap[data].label + "</span></p>";
                             } else {
                                 return data;
                             }
