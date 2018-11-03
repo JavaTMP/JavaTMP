@@ -330,19 +330,6 @@
                 var httpType = $(this).attr("method");
                 var post_url = $(this).attr("action"); //get form action url
                 var form_data = $(this).serializeArray();
-//                function objectifyForm(formArray) {//serialize data function
-//
-//                    var returnArray = {};
-//                    for (var i = 0; i < formArray.length; i++) {
-//                        returnArray[formArray[i]['name']] = formArray[i]['value'];
-//                    }
-//                    return returnArray;
-//                }
-
-                //form_data = objectifyForm(form_data);
-
-                console.log(JSON.stringify(form_data));
-
                 var searchObject = {};
                 // {"columns":[{"name":"id","search":{"value":"1"}}],"start":0,"length":1}
                 searchObject["start"] = 0;

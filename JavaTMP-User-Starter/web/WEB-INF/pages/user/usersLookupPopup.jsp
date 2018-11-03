@@ -59,17 +59,17 @@
             $("#" + currentParentModal.options.id).on(javatmp.settings.javaTmpAjaxContainerReady, function (event, modal) {
                 // fire AFTER all transition done and your ajax content is shown to user.
 
-                modal.updateTitle("Select User");
+                modal.updateTitle(javatmp.settings.labels["user.dialog.selectUserLookup.title"]);
                 modal.updateClosable(true);
                 modal.addButton({
-                    label: javatmp.settings.labels["global.cancel"],
+                    label: javatmp.settings.labels["user.dialog.selectUserLookup.cancelBtn"],
                     cssClass: "btn btn-danger mr-auto",
                     action: function (modalWrapper, button, buttonData, originalEvent) {
                         return modalWrapper.hide();
                     }
                 });
                 var selectUserButton = modal.addButton({
-                    label: "Select User",
+                    label: javatmp.settings.labels["user.dialog.selectUserLookup.selectBtn"],
                     cssClass: "btn btn-primary",
                     action: function (modalWrapper, button, buttonData, originalEvent) {
                         var selectedData = table.rows({selected: true}).data();

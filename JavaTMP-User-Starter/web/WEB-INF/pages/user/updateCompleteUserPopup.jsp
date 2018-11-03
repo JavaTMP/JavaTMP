@@ -354,7 +354,6 @@
             // initialize jQuery Validation plugin using global data.
             validator = form.validate($.extend(true, {}, javatmp.settings.jqueryValidationDefaultOptions, {}));
 
-            var modalZIndex = modal.originalModal.css('zIndex');
             var birthDateInputMask = javatmp.plugins.inputmaskWrapperForDate(form.find("input[name='birthDate']"));
             var birthDateDatePicker = javatmp.plugins.daterangepickerWrapperForDate(form.find("input[name='birthDate']"), {
                 parentEl: modal.originalModal
