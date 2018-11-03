@@ -167,6 +167,11 @@
                                             ${labels['sidebar.menuItem.system.UserProfileSettings']}
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/user/testCardlet">
+                                            Test Cardlet Feature
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
