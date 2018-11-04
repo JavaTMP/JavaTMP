@@ -22,8 +22,9 @@
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
+                alert("ajax container on default output selector");
                 cardBody.BootstrapActionable({
-                    containerRemoveEventName: "mhamed",
+                    containerRemoveEventName: javatmp.settings.javaTmpContainerRemoveEventName,
                     containerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady,
                     ajaxMethodType: javatmp.settings.httpMethod,
                     ajaxCache: false,
@@ -42,7 +43,7 @@
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {
                 alert("someone fire javaTmpContainerRemoveEventName on defaultOutputSelector");
-                $(".testingCardItem a.reload").off();
+//                $(".testingCardItem a.reload").off();
                 return true;
             });
         });

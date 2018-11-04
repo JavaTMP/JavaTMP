@@ -504,7 +504,7 @@
                             javatmp.settings.contextPath + "/user/DeleteUserController",
                             currentUser,
                             function (data) {
-//                                table.columns.adjust().draw();
+                                searchForm.triggerHandler("submit");
                             }
                     );
                 } else {
@@ -521,7 +521,7 @@
                             javatmp.settings.contextPath + "/user/ActivateUserController",
                             currentUser,
                             function (data) {
-                                table.columns.adjust().draw();
+                                searchForm.triggerHandler("submit");
                             }
                     );
                 } else {
@@ -538,7 +538,7 @@
                             javatmp.settings.contextPath + "/user/DeactivateUserController",
                             currentUser,
                             function (data) {
-                                table.columns.adjust().draw();
+                                searchForm.triggerHandler("submit");
                             }
                     );
                 } else {
