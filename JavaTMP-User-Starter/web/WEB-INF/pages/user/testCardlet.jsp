@@ -35,16 +35,13 @@
                         var outputElementId = $(outputDiv).attr('id');
                         if (!!!outputElementId) {
                             outputElementId = javatmp.util.getUniqueID("cardlet");
-                            alert("no id found new [" + outputElementId + "]");
                             $(outputDiv).attr("id", outputElementId);
-                        } else {
-                            alert("id found [" + outputElementId + "]");
                         }
                         var url = settings.url;
                         var separator = url.indexOf('?') > -1 ? '&' : '?';
                         url += separator + encodeURIComponent("cardletId") + "=" + encodeURIComponent(outputElementId);
                         settings.url = url;
-                        alert(settings.url);
+//                        alert(settings.url);
                     }
                 });
 

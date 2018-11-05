@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row d-flex align-items-center">
     <div class="col-6 text-center">
         <span class="d-block display-4 counter" id="userStatusPieChartCard_totalCount">0</span>
@@ -10,7 +11,7 @@
 <script type="text/javascript">
     // get cardletId from request parameter:
     jQuery(function ($) {
-        var currentCardletId = "${param.cardletId}";
+        var currentCardletId = '<c:out value="${param.cardletId}"/>';
         var cardletElement = $("#" + currentCardletId);
         cardletElement.on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
             var userStatusPieChart = echarts.init(document.getElementById('userStatusPieChart'));
