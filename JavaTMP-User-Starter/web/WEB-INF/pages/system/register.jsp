@@ -212,7 +212,7 @@
 
                 var defaults = {
                     defaultPassData: {_ajax: "ajax", _ajaxGlobalBlockUI: true, _handleAjaxErrorGlobally: true},
-                    defaultUrl: '${pageContext.request.contextPath}/pages/home',
+                    defaultUrl: '${pageContext.request.contextPath}/pages/home/home',
                     floatDefault: "${labels['global.floatDefault']}",
                     floatReverse: "${labels['global.floatReverse']}",
                     direction: "${labels['global.direction']}",

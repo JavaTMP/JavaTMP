@@ -107,7 +107,7 @@
                             </button>
                             <button class="btn btn-primary"
                                     actionType="action-ref-href"
-                                    action-ref-by-href="${pageContext.request.contextPath}/pages/home"
+                                    action-ref-by-href="${pageContext.request.contextPath}/pages/home/home"
                                     data-toggle="tooltip" data-placement="auto"
                                     title="${labels['sidebar.menuItem.home']}">
                                 <i class="fa fa-home fa-fw"></i>
@@ -123,7 +123,7 @@
                         </div>
                         <ul class="metismenu">
                             <li>
-                                <a href="${pageContext.request.contextPath}/pages/home">
+                                <a href="${pageContext.request.contextPath}/pages/home/home">
                                     <i class="fa fa-lg fa-fw fa-home"></i>
                                     ${labels['sidebar.menuItem.home']}
                                 </a>
@@ -208,7 +208,7 @@
             jQuery(function ($) {
                 var defaults = {
                     defaultPassData: {_ajax: "ajax", _ajaxGlobalBlockUI: true, _handleAjaxErrorGlobally: true},
-                    defaultUrl: '${pageContext.request.contextPath}/pages/home',
+                    defaultUrl: '${pageContext.request.contextPath}/pages/home/home',
                     floatDefault: "${labels['global.floatDefault']}",
                     floatReverse: "${labels['global.floatReverse']}",
                     direction: "${labels['global.direction']}",

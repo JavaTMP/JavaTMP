@@ -22,7 +22,6 @@
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
-                alert("ajax container on default output selector");
                 cardBody.BootstrapActionable({
                     containerRemoveEventName: javatmp.settings.javaTmpContainerRemoveEventName,
                     containerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady,
@@ -37,6 +36,9 @@
                         linkElement: $(this),
                         linkEvent: e
                     });
+                });
+                $(javatmp.settings.defaultOutputSelector).find("[load-on-starup=true]").each(function () {
+                    $(this).trigger("click");
                 });
             });
 
