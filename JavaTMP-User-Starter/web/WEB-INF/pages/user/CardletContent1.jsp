@@ -9,13 +9,11 @@
         jQuery(function ($) {
             $('.testingCardItem .card-body').on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 alert("cardlet content initialise");
-                event.stopPropagation();
-                return true;
+
             });
-            $('.testingCardItem .card-body').on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
+            $('.testingCardItem .card-body').on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {
                 alert("cardlet content destory");
-                event.stopPropagation();
-                return false;
+                return true;
             });
         });
     </script>

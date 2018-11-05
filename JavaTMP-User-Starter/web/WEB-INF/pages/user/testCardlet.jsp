@@ -33,7 +33,6 @@
                 });
 
                 $("a.reload", card).on("click", function (e) {
-                    alert("before");
                     cardBody.BootstrapActionable("populateByLinkEvent", {
                         linkElement: $(this),
                         linkEvent: e
@@ -42,8 +41,7 @@
             });
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {
-                alert("someone fire javaTmpContainerRemoveEventName on defaultOutputSelector");
-//                $(".testingCardItem a.reload").off();
+                $(".testingCardItem a.reload").off();
                 return true;
             });
         });
