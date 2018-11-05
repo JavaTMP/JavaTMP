@@ -8,10 +8,10 @@
                     <div class="options float-right">
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
                         <a href="#" class="fullscreen"><i class=" fa fa-expand"></i></a>
-                        <a href="${pageContext.request.contextPath}/pages/user/CardletContent1" class="reload"><i class="fa fa-sync"></i></a>
+                        <a href="${pageContext.request.contextPath}/pages/home/UserStatusPieChartCardletBody" load-on-starup="true" class="reload"><i class="fa fa-sync"></i></a>
                     </div>
                 </div>
-                <div class="card-body"></div>
+                <div class="card-body" id=""></div>
             </div>
         </div>
     </div>
@@ -26,9 +26,26 @@
                     containerRemoveEventName: javatmp.settings.javaTmpContainerRemoveEventName,
                     containerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady,
                     ajaxMethodType: javatmp.settings.httpMethod,
-                    ajaxCache: false,
+                    ajaxCache: true,
                     ajaxDefaultData: javatmp.settings.defaultPassData,
-                    ajaxDataType: javatmp.settings.dataType
+                    ajaxDataType: javatmp.settings.dataType,
+                    ajaxBeforeSend: function (jqXHR, settings) {
+                        var element = this.linkElement;
+                        var outputDiv = this.outputElement;
+                        var outputElementId = $(outputDiv).attr('id');
+                        if (!!!outputElementId) {
+                            outputElementId = javatmp.util.getUniqueID("cardlet");
+                            alert("no id found new [" + outputElementId + "]");
+                            $(outputDiv).attr("id", outputElementId);
+                        } else {
+                            alert("id found [" + outputElementId + "]");
+                        }
+                        var url = settings.url;
+                        var separator = url.indexOf('?') > -1 ? '&' : '?';
+                        url += separator + encodeURIComponent("cardletId") + "=" + encodeURIComponent(outputElementId);
+                        settings.url = url;
+                        alert(settings.url);
+                    }
                 });
 
                 $("a.reload", card).on("click", function (e) {

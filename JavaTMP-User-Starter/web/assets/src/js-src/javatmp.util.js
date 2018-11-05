@@ -73,4 +73,21 @@
         }
         return context[func].apply(context, args);
     };
+
+    function uuid() {
+        var uuid = "", i, random;
+        for (i = 0; i < 32; i++) {
+            random = Math.random() * 16 | 0;
+            if (i === 8 || i === 12 || i === 16 || i === 20) {
+                uuid += "-";
+            }
+            uuid += (i === 12 ? 4 : (i === 16 ? (random & 3 | 8) : random)).toString(16);
+        }
+        return uuid;
+    }
+
+    window.javatmp.util.getUniqueID = function (prefix) {
+        return prefix + "-" + Math.floor((Math.random() * 100000000) + 1) + "-" + new Date().getTime() + "-" + uuid();
+    };
+
 }(jQuery, window, document));
