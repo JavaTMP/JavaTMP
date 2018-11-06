@@ -9,16 +9,7 @@
                         <a load-on-starup="true" href="${pageContext.request.contextPath}/pages/home/UserStatusPieChartCardletBody" class="reload"><i class="fa fa-sync"></i></a>
                     </div>
                 </div>
-                <div class="card-body p-1">
-                    <div class="row d-flex align-items-center">
-                        <div class="col-6 text-center">
-                            <span class="d-block display-4 counter" id="userStatusPieChartCard_totalCount">0</span>
-                        </div>
-                        <div class="col-6 text-left">
-                            <div id="userStatusPieChart" style="min-height: 100px"></div>
-                        </div>
-                    </div>
-                </div>
+                <div class="card-body p-1"></div>
                 <div class="card-footer bg-white">
                     <a href="javascript:;" class="d-flex">
                         ${labels['global.viewDetails']}
@@ -34,19 +25,10 @@
                 <div class="card-header bg-white">
                     ${labels['page.home.VisitorsToday']}
                     <div class="options float-right">
-                        <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
+                        <a load-on-starup="true" href="${pageContext.request.contextPath}/pages/home/TodayVisitUserPieChartCardletBody" class="reload"><i class="fa fa-sync"></i></a>
                     </div>
                 </div>
-                <div class="card-body p-1 bg-white">
-                    <div class="row d-flex align-items-center">
-                        <div class="col-6 text-center">
-                            <span class="d-block display-4 counter" id="todayVisitUserPieChartCard_totalCount">0</span>
-                        </div>
-                        <div class="col-6 text-left">
-                            <div id="todayVisitUserPieChart" style="min-height: 100px"></div>
-                        </div>
-                    </div>
-                </div>
+                <div class="card-body p-1 bg-white"></div>
                 <div class="card-footer bg-white">
                     <a href="javascript:;" class="d-flex">
                         ${labels['global.viewDetails']}
@@ -62,20 +44,12 @@
                 <div class="card-header bg-white">
                     ${labels['page.home.PageViewsPerHour']}
                     <div class="options float-right">
-                        <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
+                        <a load-on-starup="true" href="${pageContext.request.contextPath}/pages/home/PageViewActivitesPerHourCardletBody" class="reload">
+                            <i class="fa fa-sync"></i>
+                        </a>
                     </div>
                 </div>
-                <div class="card-body p-1 bg-white">
-                    <div class="row d-flex align-items-center">
-                        <div class="col-6 text-center">
-                            <span class="d-block display-4 counter" id="pageViewActivitesPerHourChartCard_totalCount">0</span>
-                            <span class="d-block muted small">${labels['page.home.AllPageViews']}</span>
-                        </div>
-                        <div class="col-6 text-left">
-                            <div id="pageViewActivitesPerHourChart" style="min-height: 100px"></div>
-                        </div>
-                    </div>
-                </div>
+                <div class="card-body p-1 bg-white"></div>
                 <div class="card-footer bg-white">
                     <a href="javascript:;" class="d-flex">
                         ${labels['global.viewDetails']}
@@ -189,168 +163,11 @@
                 delay: 0,
                 time: 500
             });
-            var userStatusPieChart = echarts.init(document.getElementById('userStatusPieChart'));
-            var todayVisitUserPieChart = echarts.init(document.getElementById('todayVisitUserPieChart'));
-            var pageViewActivitesPerHourChart = echarts.init(document.getElementById('pageViewActivitesPerHourChart'));
+
             var loadtimePerHourChart = echarts.init(document.getElementById('loadtimePerHourChart'));
             var UsersLocationsInTheWorld = echarts.init(document.getElementById('UsersLocationsInTheWorld'));
             var UsersBirthdayPerMonths = echarts.init(document.getElementById('UsersBirthdayPerMonths'));
-            var userStatusPieChartOption = {
-                tooltip: {
-                    trigger: 'item',
-                    formatter: "{a} <br/>{b}: {c} ({d}%)",
-                    textStyle: {
-                        fontFamily: $("body").css("font-family"),
-                        fontSize: $("body").css("font-size"),
-                        align: javatmp.settings.floatDefault
-                    }
-                },
-                hover: true,
-                color: ['#28a745', '#ffc107'],
-                series: [
-                    {
-                        clockwise: !javatmp.settings.isRTL,
-                        name: '${labels['page.home.RegisteredUsers']}',
-                        type: 'pie',
-                        radius: '85%',
-                        avoidLabelOverlap: false,
-                        hoverOffset: 4,
-                        label: {
-                            normal: {
-                                show: false,
-                                position: 'center'
-                            },
-                            textStyle: {
-                                fontFamily: $("body").css("font-family"),
-                                fontSize: $("body").css("font-size"),
-                                align: javatmp.settings.floatDefault
-                            }
-                        },
-                        data: [
-                            {value: 0, name: '${labels['page.home.RegisteredUsers.active']}'},
-                            {value: 0, name: '${labels['page.home.RegisteredUsers.inactive']}'}
-                        ]
-                    }
-                ]
-            };
-            userStatusPieChart.setOption(userStatusPieChartOption);
 
-            var todayVisitUserPieChartOption = {
-                tooltip: {
-                    trigger: 'item',
-                    formatter: "{a} <br/>{b}: {c} ({d}%)",
-                    textStyle: {
-                        fontFamily: $("body").css("font-family"),
-                        fontSize: $("body").css("font-size"),
-                        align: javatmp.settings.floatDefault
-                    }
-                },
-                hover: true,
-                color: ['#007bff', '#dae0e5'],
-                series: [
-                    {
-                        clockwise: !javatmp.settings.isRTL,
-                        name: '${labels['page.home.VisitorsToday']}',
-                        type: 'pie',
-                        radius: '85%',
-                        avoidLabelOverlap: false,
-                        hoverOffset: 4,
-                        label: {
-                            normal: {show: false},
-                            textStyle: {
-                                fontFamily: $("body").css("font-family"),
-                                fontSize: $("body").css("font-size"),
-                                align: javatmp.settings.floatDefault
-                            }
-                        },
-                        data: [
-                            {value: 0, name: '${labels['page.home.VisitorsToday.VisitToday']}'},
-                            {value: 0, name: '${labels['page.home.VisitorsToday.NotVisitingToday']}'}
-                        ]
-                    }
-                ]
-            };
-            todayVisitUserPieChart.setOption(todayVisitUserPieChartOption);
-
-            var pageViewActivitesPerHourChartOption = {
-                grid: {
-                    show: false,
-                    top: 5,
-                    bottom: 15,
-                    left: 0,
-                    right: 0
-                },
-                title: {
-                    show: false,
-                    text: "${labels['page.home.PageViewsPerHour']}",
-                    x: 'center',
-                    y: 0,
-                    textStyle: {
-                        fontFamily: $("body").css("font-family"),
-                        fontSize: $("body").css("font-size"),
-                        align: javatmp.settings.floatDefault
-                    }
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    textStyle: {
-                        fontFamily: $("body").css("font-family"),
-                        fontSize: $("body").css("font-size"),
-                        align: javatmp.settings.floatDefault
-                    },
-                    formatter: formaterFunction
-                },
-                legend: {
-                    show: false,
-                    align: javatmp.settings.floatDefault,
-                    data: ['Page View'],
-                    x: 'center',
-                    y: '30px',
-                    textStyle: {
-                        fontFamily: $("body").css("font-family"),
-                        fontSize: $("body").css("font-size"),
-                        align: javatmp.settings.floatDefault
-                    }
-                },
-                calculable: true,
-                xAxis: [
-                    {
-                        show: false,
-                        inverse: javatmp.settings.isRTL,
-                        data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23],
-                        //                        axisLabel: {
-                        //                            interval: 0
-                        //                        },
-                        textStyle: {
-                            fontFamily: $("body").css("font-family"),
-                            fontSize: $("body").css("font-size"),
-                            align: javatmp.settings.floatDefault
-                        }
-                    }
-                ],
-                yAxis: [
-                    {
-                        show: false,
-                        position: javatmp.settings.floatDefault,
-                        type: 'value',
-                        textStyle: {
-                            fontFamily: $("body").css("font-family"),
-                            fontSize: $("body").css("font-size"),
-                            align: javatmp.settings.floatDefault
-                        }
-                    }
-                ],
-                color: ['#007bff'],
-                series: [
-                    {
-                        name: '${labels['page.home.PageViewsPerHour']}',
-                        type: 'bar',
-                        data: []
-                    }
-                ]
-            };
-
-            pageViewActivitesPerHourChart.setOption(pageViewActivitesPerHourChartOption);
             var loadtimePerHourChartOption = {
                 grid: {
                     show: false,
@@ -575,127 +392,20 @@
                 });
             });
 
+            var todayVisitUserCardletBody = $("#todayVisitUserPieChartCard > .card-body");
+            window.javatmp.plugins.bootstrapActionableWrapper(todayVisitUserCardletBody);
             $(javatmp.settings.defaultOutputSelector).on("click", "#todayVisitUserPieChartCard a.reload", function (e) {
-                e.preventDefault();
-
-                var cardBody = $(this).closest(".card").children(".card-body");
-                var href = javatmp.settings.contextPath + "/stats/GetVisitingUsersCountController";
-
-                $(cardBody).block({message: javatmp.settings.labels["global.loadingText"],
-                    overlayCSS: {
-                        backgroundColor: '#000',
-                        opacity: 0.7
-                    }});
-
-                $.ajax({
-                    "type": "POST",
-                    cache: false,
-                    url: href,
-                    dataType: "json",
-                    contentType: "application/json; charset=UTF-8",
-                    data: null,
-                    success: function (remoteContent) {
-                        var visitingToday = remoteContent.data[0];
-                        var notVisitingTodayOrLoginYet = remoteContent.data[1];
-
-                        todayVisitUserPieChartOption.series[0].data[0].value = visitingToday;
-                        todayVisitUserPieChartOption.series[0].data[1].value = notVisitingTodayOrLoginYet;
-                        $("#todayVisitUserPieChartCard_totalCount").html(visitingToday).counterUp({
-                            delay: 10,
-                            time: 1000
-                        });
-                        todayVisitUserPieChart.setOption(todayVisitUserPieChartOption);
-
-                        todayVisitUserPieChart.on('click', function (params) {
-                            console.log(params);
-                        });
-
-                        todayVisitUserPieChart.on('legendselectchanged', function (params) {
-                            console.log(params);
-                        });
-
-                        $(cardBody).unblock();
-                    },
-                    error: function (xhr, ajaxOptions, thrownError) {
-                        $(cardBody).unblock();
-                        var msg = 'Error on reloading the card. Please check your remote server url';
-                        toastr.error(msg, 'ERROR', {
-                            timeOut: 2500,
-                            progressBar: true,
-                            rtl: javatmp.settings.isRTL,
-                            positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                        });
-                        // clean the bar graph
-                    }
+                todayVisitUserCardletBody.BootstrapActionable("populateByLinkEvent", {
+                    linkElement: $(this), linkEvent: e
                 });
             });
 
+            var pageViewActivitesPerHourChartCard = $("#pageViewActivitesPerHourChartCard > .card-body");
+            window.javatmp.plugins.bootstrapActionableWrapper(pageViewActivitesPerHourChartCard);
+
             $(javatmp.settings.defaultOutputSelector).on("click", "#pageViewActivitesPerHourChartCard a.reload", function (e) {
-                e.preventDefault();
-
-                var cardBody = $(this).closest(".card").children(".card-body");
-                var href = javatmp.settings.contextPath + "/stats/GetUsersPageViewsPerHourCountController";
-
-                $(cardBody).block({message: javatmp.settings.labels["global.loadingText"],
-                    overlayCSS: {
-                        backgroundColor: '#000',
-                        opacity: 0.7
-                    }});
-
-                $.ajax({
-                    "type": "POST",
-                    cache: false,
-                    url: href,
-                    dataType: "json",
-                    contentType: "application/json; charset=UTF-8",
-                    data: null,
-                    success: function (remoteContent) {
-                        var dataArray = remoteContent.data;
-                        var totalPages = 0;
-                        var outputHoursArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-                        for (var i = 0; i < dataArray.length; i++) {
-                            outputHoursArray[dataArray[i][0]] += dataArray[i][1];
-                            totalPages += dataArray[i][1];
-                        }
-
-                        $("#pageViewActivitesPerHourChartCard_totalCount").attr("title", totalPages).html(totalPages).counterUp({
-                            delay: 10,
-                            time: 1000,
-                            formatter: function (n) {
-                                return numeral(n).format('0 a');
-                            }
-                        });
-
-                        pageViewActivitesPerHourChartOption = $.extend(true, pageViewActivitesPerHourChartOption, {
-                            series: [
-                                {
-                                    data: outputHoursArray
-                                }
-                            ]
-                        });
-                        pageViewActivitesPerHourChart.setOption(pageViewActivitesPerHourChartOption);
-
-                        pageViewActivitesPerHourChart.on('click', function (params) {
-                            console.log(params);
-                        });
-
-                        pageViewActivitesPerHourChart.on('legendselectchanged', function (params) {
-                            console.log(params);
-                        });
-
-                        $(cardBody).unblock();
-                    },
-                    error: function (xhr, ajaxOptions, thrownError) {
-                        $(cardBody).unblock();
-                        var msg = 'Error on reloading the card. Please check your remote server url';
-                        toastr.error(msg, 'ERROR', {
-                            timeOut: 2500,
-                            progressBar: true,
-                            rtl: javatmp.settings.isRTL,
-                            positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                        });
-                        // clean the bar graph
-                    }
+                pageViewActivitesPerHourChartCard.BootstrapActionable("populateByLinkEvent", {
+                    linkElement: $(this), linkEvent: e
                 });
             });
 
@@ -906,9 +616,9 @@
                 // fire when user resize browser window or sidebar hide / show
                 // we resize the current charts:
                 javatmp.util.waitForFinalEvent(function () {
-                    userStatusPieChart.resize();
-                    todayVisitUserPieChart.resize();
-                    pageViewActivitesPerHourChart.resize();
+//                    userStatusPieChart.resize();
+//                    todayVisitUserPieChart.resize();
+//                    pageViewActivitesPerHourChart.resize();
                     loadtimePerHourChart.resize();
                     UsersLocationsInTheWorld.resize();
                     UsersBirthdayPerMonths.resize();
