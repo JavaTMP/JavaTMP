@@ -1,12 +1,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row d-flex align-items-center">
-    <div class="col-6 text-center">
-        <span class="d-block display-4 counter" id="pageViewActivitesPerHourChartCard_totalCount">0</span>
-        <span class="d-block muted small">${labels['page.home.AllPageViews']}</span>
+    <div class="col-7 text-center">
+        <span class="d-block display-4 counter" id="loadtimePerHourChartCard_totalCount">0</span>
+        <span class="d-block muted small">${labels['page.home.AvgLoadTime']}</span>
     </div>
-    <div class="col-6 text-left">
-        <div id="pageViewActivitesPerHourChart" style="min-height: 100px"></div>
+    <div class="col-5">
+        <div id="loadtimePerHourChart" style="min-height: 100px"></div>
     </div>
 </div>
 <script type="text/javascript">
@@ -33,9 +33,9 @@
                     return retStr;
                 };
             }
-            var pageViewActivitesPerHourChart = echarts.init(document.getElementById('pageViewActivitesPerHourChart'));
+            var loadtimePerHourChart = echarts.init(document.getElementById('loadtimePerHourChart'));
 
-            var pageViewActivitesPerHourChartOption = {
+            var loadtimePerHourChartOption = {
                 grid: {
                     show: false,
                     top: 5,
@@ -45,7 +45,7 @@
                 },
                 title: {
                     show: false,
-                    text: "${labels['page.home.PageViewsPerHour']}",
+                    text: "${labels['page.home.LoadTimePerHour']}",
                     x: 'center',
                     y: 0,
                     textStyle: {
@@ -103,20 +103,20 @@
                         }
                     }
                 ],
-                color: ['#007bff'],
+                color: ['#dc3545'],
                 series: [
                     {
-                        name: '${labels['page.home.PageViewsPerHour']}',
-                        type: 'bar',
-                        data: []
+                        name: '${labels['page.home.LoadTimePerHour']}',
+                        type: 'line',
+                        data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
                     }
                 ]
             };
-
-            pageViewActivitesPerHourChart.setOption(pageViewActivitesPerHourChartOption);
+            loadtimePerHourChart.setOption(loadtimePerHourChartOption);
 
             var cardBody = cardletElement;
 
+            var cardBody = $(this).closest(".card").children(".card-body");
             $(cardBody).block({message: javatmp.settings.labels["global.loadingText"],
                 overlayCSS: {
                     backgroundColor: '#000',
@@ -126,41 +126,44 @@
             $.ajax({
                 "type": "POST",
                 cache: false,
-                url: javatmp.settings.contextPath + "/stats/GetUsersPageViewsPerHourCountController",
+                url: javatmp.settings.contextPath + "/stats/GetAvgLoadTimePerHourController",
                 dataType: "json",
                 contentType: "application/json; charset=UTF-8",
                 data: null,
                 success: function (remoteContent) {
                     var dataArray = remoteContent.data;
-                    var totalPages = 0;
+                    var totalAvgs = 0;
+                    var avgLoadTime = 0;
                     var outputHoursArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
                     for (var i = 0; i < dataArray.length; i++) {
                         outputHoursArray[dataArray[i][0]] += dataArray[i][1];
-                        totalPages += dataArray[i][1];
+                        totalAvgs += dataArray[i][1];
                     }
-
-                    $("#pageViewActivitesPerHourChartCard_totalCount").attr("title", totalPages).html(totalPages).counterUp({
+                    avgLoadTime = totalAvgs / dataArray.length;
+                    // from: https://stackoverflow.com/questions/11832914/round-to-at-most-2-decimal-places-only-if-necessary
+                    avgLoadTime = Math.round((avgLoadTime + 0.00001) * 100) / 100;
+                    $("#loadtimePerHourChartCard_totalCount").attr("title", avgLoadTime).html(avgLoadTime).counterUp({
                         delay: 10,
                         time: 1000,
                         formatter: function (n) {
-                            return numeral(n).format('0 a');
+                            return numeral(n).format('0.00 a');
                         }
                     });
 
-                    pageViewActivitesPerHourChartOption = $.extend(true, pageViewActivitesPerHourChartOption, {
+                    loadtimePerHourChartOption = $.extend(true, loadtimePerHourChartOption, {
                         series: [
                             {
                                 data: outputHoursArray
                             }
                         ]
                     });
-                    pageViewActivitesPerHourChart.setOption(pageViewActivitesPerHourChartOption);
+                    loadtimePerHourChart.setOption(loadtimePerHourChartOption);
 
-                    pageViewActivitesPerHourChart.on('click', function (params) {
+                    loadtimePerHourChart.on('click', function (params) {
                         console.log(params);
                     });
 
-                    pageViewActivitesPerHourChart.on('legendselectchanged', function (params) {
+                    loadtimePerHourChart.on('legendselectchanged', function (params) {
                         console.log(params);
                     });
 
