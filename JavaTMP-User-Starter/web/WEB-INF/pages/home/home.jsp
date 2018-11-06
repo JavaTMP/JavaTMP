@@ -6,7 +6,7 @@
                 <div class="card-header bg-white">
                     ${labels['page.home.RegisteredUsers']}
                     <div class="options float-right">
-                        <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
+                        <a load-on-starup="true" href="${pageContext.request.contextPath}/pages/home/UserStatusPieChartCardletBody" class="reload"><i class="fa fa-sync"></i></a>
                     </div>
                 </div>
                 <div class="card-body p-1">
@@ -566,62 +566,12 @@
             };
 
             UsersBirthdayPerMonths.setOption(barChartOption);
+            var usersStatusCardletBody = $("#userStatusPieChartCard > .card-body");
+            window.javatmp.plugins.bootstrapActionableWrapper(usersStatusCardletBody);
 
             $(javatmp.settings.defaultOutputSelector).on("click", "#userStatusPieChartCard a.reload", function (e) {
-                e.preventDefault();
-
-                var cardBody = $(this).closest(".card").children(".card-body");
-                var href = javatmp.settings.contextPath + "/stats/GetRegisteredUsersStatusesController";
-
-                $(cardBody).block({message: javatmp.settings.labels["global.loadingText"],
-                    overlayCSS: {
-                        backgroundColor: '#000',
-                        opacity: 0.7
-                    }});
-
-                $.ajax({
-                    "type": "POST",
-                    cache: false,
-                    url: href,
-                    dataType: "json",
-                    contentType: "application/json; charset=UTF-8",
-                    data: null,
-                    success: function (remoteContent) {
-                        var activeUsersCount = remoteContent.data[1][1];
-                        var inactiveUsersCount = remoteContent.data[0][1];
-                        var allUsersCount = activeUsersCount + inactiveUsersCount;
-
-                        userStatusPieChartOption.series[0].data[0].value = activeUsersCount;
-                        userStatusPieChartOption.series[0].data[1].value = inactiveUsersCount;
-                        $("#userStatusPieChartCard_totalCount").html(allUsersCount).counterUp({
-                            delay: 10,
-                            time: 1000
-                        });
-                        userStatusPieChart.setOption(userStatusPieChartOption);
-
-
-
-                        userStatusPieChart.on('click', function (params) {
-                            console.log(params);
-                        });
-
-                        userStatusPieChart.on('legendselectchanged', function (params) {
-                            console.log(params);
-                        });
-
-                        $(cardBody).unblock();
-                    },
-                    error: function (xhr, ajaxOptions, thrownError) {
-                        $(cardBody).unblock();
-                        var msg = 'Error on reloading the card. Please check your remote server url';
-                        toastr.error(msg, 'ERROR', {
-                            timeOut: 2500,
-                            progressBar: true,
-                            rtl: javatmp.settings.isRTL,
-                            positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                        });
-                        // clean the bar graph
-                    }
+                usersStatusCardletBody.BootstrapActionable("populateByLinkEvent", {
+                    linkElement: $(this), linkEvent: e
                 });
             });
 

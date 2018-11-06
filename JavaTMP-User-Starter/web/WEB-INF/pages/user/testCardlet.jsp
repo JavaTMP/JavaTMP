@@ -22,28 +22,7 @@
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
-                cardBody.BootstrapActionable({
-                    containerRemoveEventName: javatmp.settings.javaTmpContainerRemoveEventName,
-                    containerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady,
-                    ajaxMethodType: javatmp.settings.httpMethod,
-                    ajaxCache: true,
-                    ajaxDefaultData: javatmp.settings.defaultPassData,
-                    ajaxDataType: javatmp.settings.dataType,
-                    ajaxBeforeSend: function (jqXHR, settings) {
-                        var element = this.linkElement;
-                        var outputDiv = this.outputElement;
-                        var outputElementId = $(outputDiv).attr('id');
-                        if (!!!outputElementId) {
-                            outputElementId = javatmp.util.getUniqueID("cardlet");
-                            $(outputDiv).attr("id", outputElementId);
-                        }
-                        var url = settings.url;
-                        var separator = url.indexOf('?') > -1 ? '&' : '?';
-                        url += separator + encodeURIComponent("cardletId") + "=" + encodeURIComponent(outputElementId);
-                        settings.url = url;
-//                        alert(settings.url);
-                    }
-                });
+                window.javatmp.plugins.bootstrapActionableWrapper(cardBody);
 
                 $("a.reload", card).on("click", function (e) {
                     cardBody.BootstrapActionable("populateByLinkEvent", {

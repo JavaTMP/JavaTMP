@@ -451,4 +451,30 @@
      }
      */
 
+    window.javatmp.plugins.bootstrapActionableWrapper = function (element, options) {
+
+        var settings = $.extend(true, {}, {
+            containerRemoveEventName: javatmp.settings.javaTmpContainerRemoveEventName,
+            containerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady,
+            ajaxMethodType: javatmp.settings.httpMethod,
+            ajaxCache: true,
+            ajaxDefaultData: javatmp.settings.defaultPassData,
+            ajaxDataType: javatmp.settings.dataType,
+            ajaxBeforeSend: function (jqXHR, settings) {
+                var outputDiv = this.outputElement;
+                var outputElementId = $(outputDiv).attr('id');
+                if (!!!outputElementId) {
+                    outputElementId = javatmp.util.getUniqueID("cardlet");
+                    $(outputDiv).attr("id", outputElementId);
+                }
+                var url = settings.url;
+                var separator = url.indexOf('?') > -1 ? '&' : '?';
+                url += separator + encodeURIComponent("cardletId") + "=" + encodeURIComponent(outputElementId);
+                settings.url = url;
+            }
+        }, options);
+
+        return $(element).BootstrapActionable(settings);
+    };
+
 }(jQuery, window, document));
