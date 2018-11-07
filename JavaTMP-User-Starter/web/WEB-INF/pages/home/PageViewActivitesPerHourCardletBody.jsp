@@ -1,11 +1,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row d-flex align-items-center">
-    <div class="col-6 text-center">
+    <div class="col-7 text-center">
         <span class="d-block display-4 counter" id="pageViewActivitesPerHourChartCard_totalCount">0</span>
         <span class="d-block muted small">${labels['page.home.AllPageViews']}</span>
     </div>
-    <div class="col-6 text-left">
+    <div class="col-5 text-left">
         <div id="pageViewActivitesPerHourChart" style="min-height: 100px"></div>
     </div>
 </div>

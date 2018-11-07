@@ -87,16 +87,11 @@
                 <div class="card-header bg-white">
                     ${labels['page.home.UsersLocations']}
                     <div class="options float-right">
-                        <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
+                        <a load-on-starup="true" href="${pageContext.request.contextPath}/pages/home/UsersLocationsInTheWorldCardletBody" class="reload"><i class="fa fa-sync"></i></a>
                         <a href="javascript:;" class="fullscreen"><i class=" fa fa-expand"></i></a>
                     </div>
                 </div>
                 <div class="card-body bg-white p-0">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div id="UsersLocationsInTheWorld" style="min-height: 300px"></div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -154,76 +149,17 @@
                 time: 500
             });
 
-            var UsersLocationsInTheWorld = echarts.init(document.getElementById('UsersLocationsInTheWorld'));
             var UsersBirthdayPerMonths = echarts.init(document.getElementById('UsersBirthdayPerMonths'));
 
-            var UsersLocationsInTheWorldOption = {
-                tooltip: {
-                    trigger: 'item',
-                    textStyle: {
-                        fontFamily: $("body").css("font-family"),
-                        fontSize: $("body").css("font-size"),
-                        align: javatmp.settings.floatDefault
-                    },
-                    formatter: function (params) {
-                        if (params.value) {
-                            console.log("value = " + params.value);
-                            var value = (params.value + '').split('.');
-                            value = value[0].replace(/(\d{1,3})(?=(?:\d{3})+(?!\d))/g, '$1,');
-                            return params.seriesName + '<br/>' + params.name + ' : ' + value;
-                        }
-                    }
-                },
-                visualMap: {
-                    min: 0,
-                    max: 100,
-                    left: javatmp.settings.floatDefault,
-                    top: 'bottom',
-                    text: ['${labels['page.home.UsersLocations.high']}', '${labels['page.home.UsersLocations.low']}'],
-                    seriesIndex: [0],
-                    inRange: {
-                        color: ['#ffffff', '#007bff']
-                    },
-                    textStyle: {
-                        fontFamily: $("body").css("font-family"),
-                        fontSize: $("body").css("font-size"),
-                        align: javatmp.settings.floatDefault
-                    },
-                    calculable: true
-                },
-                series: [
-                    {
-                        name: "${labels['page.home.UsersLocations']}",
-                        type: 'map',
-                        map: 'world',
-                        roam: true,
-                        itemStyle: {
-                            normal: {
-                                borderWidth: 0.3,
-                                borderColor: 'black'
-                            },
-                            emphasis: {
-                                label: {show: true}
-                                // shadowOffsetX: 0,
-                                // shadowOffsetY: 0,
-                                // shadowBlur: 20,
-                                // shadowColor: 'rgba(0, 0, 0, 0.3)'
-                            }
-                        },
-                        data: null
-                    }
-                ]
-            };
-            UsersLocationsInTheWorld.setOption(UsersLocationsInTheWorldOption);
             var monthsName = moment.months();
 
             var barChartOption = {
                 grid: {
                     show: false,
-//                    top: 25,
+                    top: 30,
                     bottom: 30,
-                    left: 45,
-                    right: 45
+                    left: 30,
+                    right: 30
                 },
                 title: {
                     show: false,
@@ -328,73 +264,11 @@
                 });
             });
 
+            var UsersLocationsInTheWorldCard = $("#UsersLocationsInTheWorldCard > .card-body");
+            window.javatmp.plugins.bootstrapActionableWrapper(UsersLocationsInTheWorldCard);
             $(javatmp.settings.defaultOutputSelector).on("click", "#UsersLocationsInTheWorldCard a.reload", function (e) {
-                e.preventDefault();
-
-                var cardBody = $(this).closest(".card").children(".card-body");
-                var href = javatmp.settings.contextPath + "/stats/GetUsersLocationsCountController";
-
-                $(cardBody).block({message: javatmp.settings.labels["global.loadingText"],
-                    overlayCSS: {
-                        backgroundColor: '#000',
-                        opacity: 0.7
-                    }});
-
-                $.ajax({
-                    "type": "POST",
-                    cache: false,
-                    url: href,
-                    dataType: "json",
-                    contentType: "application/json; charset=UTF-8",
-                    data: null,
-                    success: function (remoteContent) {
-                        var dataArray = remoteContent.data;
-                        var outputCountries = [];
-                        var maxValue = 0;
-                        for (var i = 0; i < dataArray.length; i++) {
-                            var countryItem = {};
-                            countryItem["name"] = dataArray[i][0];
-                            countryItem["value"] = dataArray[i][1];
-                            if (dataArray[i][1] > maxValue) {
-                                maxValue = dataArray[i][1];
-                            }
-                            outputCountries.push(countryItem);
-                        }
-
-                        UsersLocationsInTheWorldOption = $.extend(true, UsersLocationsInTheWorldOption, {
-                            visualMap: {
-                                max: maxValue
-                            },
-                            series: [
-                                {
-                                    data: outputCountries
-                                }
-                            ]
-                        });
-
-                        UsersLocationsInTheWorld.setOption(UsersLocationsInTheWorldOption);
-
-                        UsersLocationsInTheWorld.on('click', function (params) {
-                            console.log(params);
-                        });
-
-                        UsersLocationsInTheWorld.on('legendselectchanged', function (params) {
-                            console.log(params);
-                        });
-
-                        $(cardBody).unblock();
-                    },
-                    error: function (xhr, ajaxOptions, thrownError) {
-                        $(cardBody).unblock();
-                        var msg = 'Error on reloading the card. Please check your remote server url';
-                        toastr.error(msg, 'ERROR', {
-                            timeOut: 2500,
-                            progressBar: true,
-                            rtl: javatmp.settings.isRTL,
-                            positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                        });
-                        // clean the bar graph
-                    }
+                UsersLocationsInTheWorldCard.BootstrapActionable("populateByLinkEvent", {
+                    linkElement: $(this), linkEvent: e
                 });
             });
 
@@ -463,11 +337,7 @@
                 // fire when user resize browser window or sidebar hide / show
                 // we resize the current charts:
                 javatmp.util.waitForFinalEvent(function () {
-//                    userStatusPieChart.resize();
-//                    todayVisitUserPieChart.resize();
-//                    pageViewActivitesPerHourChart.resize();
-                    loadtimePerHourChart.resize();
-                    UsersLocationsInTheWorld.resize();
+                    UsersLocationsInTheWorldCard.triggerHandler(javatmp.settings.javaTmpContainerResizeEventName);
                     UsersBirthdayPerMonths.resize();
                 }, 100, "@users-dashboard-page-resize");
             });
@@ -477,7 +347,7 @@
                 var cardId = card.attr("id");
                 if (cardId === "UsersLocationsInTheWorldCard") {
                     $('#UsersLocationsInTheWorld').css({"minHeight": 300});
-                    UsersLocationsInTheWorld.resize();
+                    UsersLocationsInTheWorldCard.triggerHandler(javatmp.settings.cardFullscreenCompress, card);
                 } else if (cardId === "UsersBirthdayPerMonthsCard") {
                     $('#UsersBirthdayPerMonths').css({"minHeight": 300});
                     UsersBirthdayPerMonths.resize();
@@ -488,7 +358,7 @@
                 var cardId = card.attr("id");
                 if (cardId === "UsersLocationsInTheWorldCard") {
                     $('#UsersLocationsInTheWorld').css({"minHeight": 700});
-                    UsersLocationsInTheWorld.resize();
+                    UsersLocationsInTheWorldCard.triggerHandler(javatmp.settings.cardFullscreenExpand, card);
                 } else if (cardId === "UsersBirthdayPerMonthsCard") {
                     $('#UsersBirthdayPerMonths').css({"minHeight": 500});
                     UsersBirthdayPerMonths.resize();

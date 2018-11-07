@@ -115,8 +115,6 @@
             loadtimePerHourChart.setOption(loadtimePerHourChartOption);
 
             var cardBody = cardletElement;
-
-            var cardBody = $(this).closest(".card").children(".card-body");
             $(cardBody).block({message: javatmp.settings.labels["global.loadingText"],
                 overlayCSS: {
                     backgroundColor: '#000',
