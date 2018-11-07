@@ -253,15 +253,6 @@
         return $(element).mCustomScrollbar(settings);
     };
 
-    window.javatmp.plugins.template = function (element, options) {
-
-        var settings = $.extend(true, {}, {
-
-        }, options);
-
-        return $(element).wrappedPlugin(settings);
-    };
-
     window.javatmp.plugins.confirmAjaxAction = function (confirmTitleText, confirmMessageText, confirmActionBtnText, cancelActionBtnText,
             ajaxUrl, ajaxData, successCallback, errorCallback) {
         BootstrapModalWrapperFactory.createModal({
@@ -287,7 +278,7 @@
         }).show();
     };
 
-    window.javatmp.plugins.ajaxAction = function (ajaxUrl, ajaxData, successCallback, errorCallback) {
+    window.javatmp.plugins.ajaxAction = function (ajaxUrl, ajaxData, successCallback, errorCallback, completeCallBack) {
         var m = BootstrapModalWrapperFactory.createModal({
             message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
             closable: false,
@@ -296,16 +287,11 @@
         });
         m.originalModal.find(".modal-dialog").css({transition: 'all 0.5s'});
         m.originalModal.on('shown.bs.modal', function (e) {
-            $.ajax({
-                type: "POST",
+            window.javatmp.plugins.ajaxJsonAction({
                 url: ajaxUrl,
                 data: JSON.stringify(ajaxData),
-                dataType: "json",
-                contentType: "application/json; charset=UTF-8",
                 success: function (data) {
                     m.updateMessage(data.message);
-                    m.updateClosable(true);
-                    m.updateClosableByBackdrop(true);
                     m.updateTitle(data.title);
                     toastr.success(data.message, data.title, {
                         timeOut: 5000,
@@ -318,29 +304,64 @@
                     }
                 },
                 error: function (data) {
-                    var errorMsg = javatmp.settings.labels["dialog.error.message"];
-                    try {
-                        var jsonData = $.parseJSON(data.responseText);
-                        errorMsg = jsonData.message;
-                    } catch (error) {
-                    }
-                    m.updateMessage(errorMsg);
-                    m.updateClosable(true);
-                    m.updateTitle(javatmp.settings.labels["dialog.error.title"]);
-                    toastr.error(errorMsg, javatmp.settings.labels["dialog.error.title"], {
-                        timeOut: 3000,
-                        progressBar: true,
-                        rtl: javatmp.settings.isRTL,
-                        positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                    });
+                    m.updateMessage(data.message);
+                    m.updateTitle(data.title);
                     if (errorCallback && (typeof errorCallback === "function")) {
                         errorCallback.call(m, data);
+                    }
+                },
+                complete: function (jqXHR, textStatus) {
+                    m.updateClosable(true);
+                    m.updateClosableByBackdrop(true);
+                    if (completeCallBack && (typeof completeCallBack === "function")) {
+                        completeCallBack.call(null, jqXHR, textStatus);
                     }
                 }
             });
         });
         m.show();
     };
+
+    window.javatmp.plugins.ajaxJsonAction = function (ajaxParameters) {
+        $.ajax({
+            type: "POST",
+            url: ajaxParameters.url,
+            data: ajaxParameters.data,
+            dataType: "json",
+            contentType: "application/json; charset=UTF-8",
+            success: function (data) {
+                if (ajaxParameters.success && (typeof ajaxParameters.success === "function")) {
+                    ajaxParameters.success.call(null, data);
+                }
+            },
+            error: function (data) {
+                var errorMsg = {
+                    message: javatmp.settings.labels["dialog.error.message"],
+                    title: javatmp.settings.labels["dialog.error.title"]
+                };
+                try {
+                    var jsonData = $.parseJSON(data.responseText);
+                    errorMsg = jsonData.message;
+                } catch (error) {
+                }
+                toastr.error(errorMsg, errorMsg.title, {
+                    timeOut: 3000,
+                    progressBar: true,
+                    rtl: javatmp.settings.isRTL,
+                    positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                });
+                if (ajaxParameters.error && (typeof ajaxParameters.error === "function")) {
+                    ajaxParameters.error.call(null, errorMsg);
+                }
+            },
+            complete: function (jqXHR, textStatus) {
+                if (ajaxParameters.complete && (typeof ajaxParameters.complete === "function")) {
+                    ajaxParameters.complete.call(null, jqXHR, textStatus);
+                }
+            }
+        });
+    };
+
 
     window.javatmp.plugins.contextMenuWrapper = function (element, selector, $contextMenu) {
         function getMenuPosition($contextMenu, mouse, direction, scrollDir, isRTL) {
@@ -475,6 +496,28 @@
         }, options);
 
         return $(element).BootstrapActionable(settings);
+    };
+
+    window.javatmp.plugins.template = function (element, options) {
+
+        var settings = $.extend(true, {}, {
+
+        }, options);
+
+        return $(element).wrappedPlugin(settings);
+    };
+
+    window.javatmp.plugins.blockWrapper = function (element, options) {
+
+        var settings = $.extend(true, {}, {
+            message: javatmp.settings.labels["global.loadingText"],
+            overlayCSS: {
+                backgroundColor: '#000',
+                opacity: 0.7
+            }
+        }, options);
+
+        return $(element).block(settings);
     };
 
 }(jQuery, window, document));

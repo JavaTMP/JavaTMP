@@ -30,7 +30,6 @@
                 };
             }
 
-
             var UsersLocationsInTheWorld = echarts.init(document.getElementById('UsersLocationsInTheWorld'));
 
             var UsersLocationsInTheWorldOption = {
@@ -94,19 +93,10 @@
 
             var cardBody = cardletElement;
 
-            $(cardBody).block({message: javatmp.settings.labels["global.loadingText"],
-                overlayCSS: {
-                    backgroundColor: '#000',
-                    opacity: 0.7
-                }});
+            javatmp.plugins.blockWrapper(cardBody);
 
-            $.ajax({
-                "type": "POST",
-                cache: false,
+            javatmp.plugins.ajaxJsonAction({
                 url: javatmp.settings.contextPath + "/stats/GetUsersLocationsCountController",
-                dataType: "json",
-                contentType: "application/json; charset=UTF-8",
-                data: null,
                 success: function (remoteContent) {
                     var dataArray = remoteContent.data;
                     var outputCountries = [];
@@ -131,29 +121,10 @@
                             }
                         ]
                     });
-
                     UsersLocationsInTheWorld.setOption(UsersLocationsInTheWorldOption);
-
-                    UsersLocationsInTheWorld.on('click', function (params) {
-                        console.log(params);
-                    });
-
-                    UsersLocationsInTheWorld.on('legendselectchanged', function (params) {
-                        console.log(params);
-                    });
-
-                    $(cardBody).unblock();
                 },
-                error: function (xhr, ajaxOptions, thrownError) {
+                complete: function (jqXHR, textStatus) {
                     $(cardBody).unblock();
-                    var msg = 'Error on reloading the card. Please check your remote server url';
-                    toastr.error(msg, 'ERROR', {
-                        timeOut: 2500,
-                        progressBar: true,
-                        rtl: javatmp.settings.isRTL,
-                        positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                    });
-                    // clean the bar graph
                 }
             });
 
