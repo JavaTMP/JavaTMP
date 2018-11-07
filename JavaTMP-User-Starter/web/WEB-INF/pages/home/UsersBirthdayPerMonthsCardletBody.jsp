@@ -164,9 +164,35 @@
                     // clean the bar graph
                 }
             });
-        });
-        cardletElement.on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {
-            return true;
+
+            cardletElement.on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
+                UsersBirthdayPerMonths.resize();
+            });
+
+            cardletElement.on(javatmp.settings.cardFullscreenCompress, function (event, card) {
+                // when card compress by pressing the top right tool button
+                var cardId = $(card).attr("id");
+                if (cardId === "UsersBirthdayPerMonthsCard") {
+                    $('#UsersBirthdayPerMonths').css({"minHeight": 300});
+                    UsersBirthdayPerMonths.resize();
+                }
+            });
+
+            cardletElement.on(javatmp.settings.cardFullscreenExpand, function (event, card) {
+                // when card compress by pressing the top right tool button
+                var cardId = $(card).attr("id");
+                if (cardId === "UsersBirthdayPerMonthsCard") {
+                    $('#UsersBirthdayPerMonths').css({"minHeight": 500});
+                    UsersBirthdayPerMonths.resize();
+                }
+            });
+
+            cardletElement.on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {
+                cardletElement.off(javatmp.settings.cardFullscreenCompress);
+                cardletElement.off(javatmp.settings.cardFullscreenExpand);
+                return true;
+            });
+
         });
     });
 </script>

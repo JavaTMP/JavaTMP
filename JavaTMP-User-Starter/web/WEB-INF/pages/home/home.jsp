@@ -111,13 +111,6 @@
     </style>
     <script type="text/javascript">
         jQuery(function ($) {
-            // any code put here will be run after content attach to ajax output container and before
-            // controll return to main javascript file.
-
-            $('.counter').counterUp({
-                delay: 0,
-                time: 500
-            });
 
             var usersStatusCardletBody = $("#userStatusPieChartCard > .card-body");
             window.javatmp.plugins.bootstrapActionableWrapper(usersStatusCardletBody);
@@ -180,7 +173,7 @@
                 // we resize the current charts:
                 javatmp.util.waitForFinalEvent(function () {
                     UsersLocationsInTheWorldCard.triggerHandler(javatmp.settings.javaTmpContainerResizeEventName);
-                    UsersBirthdayPerMonths.resize();
+                    UsersBirthdayPerMonthsCard.triggerHandler(javatmp.settings.javaTmpContainerResizeEventName);
                 }, 100, "@users-dashboard-page-resize");
             });
 
@@ -192,7 +185,7 @@
                     UsersLocationsInTheWorldCard.triggerHandler(javatmp.settings.cardFullscreenCompress, card);
                 } else if (cardId === "UsersBirthdayPerMonthsCard") {
                     $('#UsersBirthdayPerMonths').css({"minHeight": 300});
-                    UsersBirthdayPerMonths.resize();
+                    UsersBirthdayPerMonthsCard.triggerHandler(javatmp.settings.cardFullscreenCompress, card);
                 }
             });
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenExpand, function (event, card) {
@@ -203,7 +196,7 @@
                     UsersLocationsInTheWorldCard.triggerHandler(javatmp.settings.cardFullscreenExpand, card);
                 } else if (cardId === "UsersBirthdayPerMonthsCard") {
                     $('#UsersBirthdayPerMonths').css({"minHeight": 500});
-                    UsersBirthdayPerMonths.resize();
+                    UsersBirthdayPerMonthsCard.triggerHandler(javatmp.settings.cardFullscreenExpand, card);
                 }
             });
             /**
