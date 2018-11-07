@@ -139,25 +139,25 @@
     </style>
     <script type="text/javascript">
         jQuery(function ($) {
-            $("body").on("click", '[actionType]', function (event) {
-                var actionType = $(this).attr("actionType") ? $(this).attr("actionType") : "ajax";
-                if (actionType === "ajax-area-in-card") {
-                    var actionOutputArea = $(this).closest(".card").children(".card-body");
-                    window.javatmp.plugins.bootstrapActionableWrapper(actionOutputArea)
-                            .BootstrapActionable("populateByLinkEvent", {
-                                linkElement: $(this), linkEvent: event
-                            });
-                }
-            });
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
+                $(javatmp.settings.defaultOutputSelector).on("click", '[actionType]', function (event) {
+                    var actionType = $(this).attr("actionType") ? $(this).attr("actionType") : "ajax";
+                    if (actionType === "ajax-area-in-card") {
+                        var actionOutputArea = $(this).closest(".card").children(".card-body");
+                        window.javatmp.plugins.bootstrapActionableWrapper(actionOutputArea)
+                                .BootstrapActionable("populateByLinkEvent", {
+                                    linkElement: $(this), linkEvent: event
+                                });
+                    }
+                });
                 $(javatmp.settings.defaultOutputSelector).find("[load-on-starup=true]").each(function () {
                     $(this).trigger("click");
                 });
-            });
-            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {
-                $(javatmp.settings.defaultOutputSelector).off("click");
-                $("body").off("click", '[actionType]');
-                return true;
+                $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {
+                    $(javatmp.settings.defaultOutputSelector).off("click");
+                    $(javatmp.settings.defaultOutputSelector).off("click", '[actionType]');
+                    return true;
+                });
             });
         });
     </script>
