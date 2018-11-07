@@ -5,17 +5,14 @@
 (function ($, window, document, undefined) {
 
     window.javatmp = window.javatmp || {};
-
     window.javatmp.ajax = window.javatmp.ajax || {};
     window.javatmp.ajax.settings = window.javatmp.ajax.settings || {};
-
     var defaults = {
         defaultPassData: {}
     };
     window.javatmp.ajax.init = function (options) {
 
         $.extend(true, this.settings, defaults, options);
-
         // initialize global jquery ajax configuration:
         $.ajaxSetup({
             async: true,
@@ -34,7 +31,6 @@
                 }
             }
         });
-
         // initialize jQuery Default Ajax events lifecycle:
         $(document).ajaxStart(function () {
 
@@ -46,10 +42,8 @@
 
         });
     };
-
     window.javatmp.ajax.actionRequest = function () {
 
     };
-
 }(jQuery, window, document));
 

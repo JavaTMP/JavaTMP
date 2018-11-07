@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<div id="UsersMngHomePageDynamicAjaxCont" class="dynamic-ajax-content pt-3">
+<div class="dynamic-ajax-content pt-3">
     <div class="form-row">
         <div class="col-xl-3 col-lg-6 col-md-6">
             <div class="card shadow mb-3 bg-white" id="userStatusPieChartCard">
@@ -91,8 +91,7 @@
                         <a href="javascript:;" class="fullscreen"><i class=" fa fa-expand"></i></a>
                     </div>
                 </div>
-                <div class="card-body bg-white p-0">
-                </div>
+                <div class="card-body bg-white p-0"></div>
             </div>
         </div>
         <div class="col-lg-6">
@@ -100,136 +99,26 @@
                 <div class="card-header bg-white">
                     ${labels['page.home.UsersBirthdayPerMonths']}
                     <div class="options float-right">
-                        <a load-on-starup="true" href="javascript:;" class="reload"><i class="fa fa-sync"></i></a>
+                        <a load-on-starup="true" href="${pageContext.request.contextPath}/pages/home/UsersBirthdayPerMonthsCardletBody" class="reload"><i class="fa fa-sync"></i></a>
                         <a href="javascript:;" class="fullscreen"><i class=" fa fa-expand"></i></a>
                     </div>
                 </div>
-                <div class="card-body bg-white p-0">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div id="UsersBirthdayPerMonths" style="min-height: 300px"></div>
-                        </div>
-                    </div>
-                </div>
+                <div class="card-body bg-white p-0"></div>
             </div>
         </div>
     </div>
     <style type="text/css">
-        /*        #UsersMngHomePageDynamicAjaxCont .card {
-                    -webkit-box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.07), 0 2px 9px 0 rgba(62, 57, 107, 0.06);
-                    box-shadow: 0 10px 40px 0 rgba(62, 57, 107, 0.07), 0 2px 9px 0 rgba(62, 57, 107, 0.06);
-                }*/
     </style>
     <script type="text/javascript">
         jQuery(function ($) {
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
 
-            var formatTooltipLine = function (color, value) {
-                return "<span style='display:inline-block;width:10px;height:10px;border-radius:50%;background-color:" + color + ";margin-" + javatmp.settings.floatReverse + ":5px;'></span><span>" + value + "</span>";
-            };
-
-            var formaterFunction = null;
-            if (javatmp.settings.isRTL === true) {
-                formaterFunction = function (params) {
-                    var retStr = "";
-                    for (var i = 0; i < params.length; i++) {
-                        retStr += [
-                            '<span>' + params[i].axisValue + '</span>',
-                            "<br/>",
-                            formatTooltipLine(params[i].color, params[i].seriesName + ':' + params[i].data)
-                        ].join('');
-                    }
-                    return retStr;
-                };
-            }
-
             $('.counter').counterUp({
                 delay: 0,
                 time: 500
             });
 
-            var UsersBirthdayPerMonths = echarts.init(document.getElementById('UsersBirthdayPerMonths'));
-
-            var monthsName = moment.months();
-
-            var barChartOption = {
-                grid: {
-                    show: false,
-                    top: 30,
-                    bottom: 30,
-                    left: 30,
-                    right: 30
-                },
-                title: {
-                    show: false,
-                    text: "${labels['page.home.UsersBirthdayPerMonths']}",
-                    x: 'center',
-                    y: 0,
-                    textStyle: {
-                        fontFamily: $("body").css("font-family"),
-                        fontSize: $("body").css("font-size"),
-                        align: javatmp.settings.floatDefault
-                    }
-                },
-                tooltip: {
-                    trigger: 'axis',
-                    textStyle: {
-                        fontFamily: $("body").css("font-family"),
-                        fontSize: $("body").css("font-size"),
-                        align: javatmp.settings.floatDefault
-                    },
-                    formatter: formaterFunction
-                },
-                legend: {
-                    show: false,
-                    align: javatmp.settings.floatDefault,
-                    data: ['Birthday'],
-                    x: 'center',
-                    y: '30px',
-                    textStyle: {
-                        fontFamily: $("body").css("font-family"),
-                        fontSize: $("body").css("font-size"),
-                        align: javatmp.settings.floatDefault
-                    }
-                },
-                calculable: true,
-                xAxis: [
-                    {
-                        inverse: javatmp.settings.isRTL,
-                        data: monthsName,
-//                    axisLabel: {
-//                        interval: 0
-//                    },
-                        axisLabel: {
-                            fontFamily: $("body").css("font-family"),
-                            fontSize: $("body").css("font-size")
-                        },
-                        textStyle: {
-                            fontFamily: $("body").css("font-family"),
-                            fontSize: $("body").css("font-size"),
-                            align: javatmp.settings.floatDefault
-                        }
-                    }
-                ],
-                yAxis: {
-                    position: javatmp.settings.floatDefault,
-                    type: 'value',
-                    textStyle: {
-                        fontFamily: $("body").css("font-family"),
-                        fontSize: $("body").css("font-size"),
-                        align: javatmp.settings.floatDefault
-                    }
-                },
-                color: ['#007bff'],
-                series: [{
-                        name: '${labels['page.home.UsersBirthdayPerMonths']}',
-                        type: 'bar',
-                        data: []
-                    }]
-            };
-
-            UsersBirthdayPerMonths.setOption(barChartOption);
             var usersStatusCardletBody = $("#userStatusPieChartCard > .card-body");
             window.javatmp.plugins.bootstrapActionableWrapper(usersStatusCardletBody);
 
@@ -272,58 +161,11 @@
                 });
             });
 
+            var UsersBirthdayPerMonthsCard = $("#UsersBirthdayPerMonthsCard > .card-body");
+            window.javatmp.plugins.bootstrapActionableWrapper(UsersBirthdayPerMonthsCard);
             $(javatmp.settings.defaultOutputSelector).on("click", "#UsersBirthdayPerMonthsCard a.reload", function (e) {
-                e.preventDefault();
-
-                var cardBody = $(this).closest(".card").children(".card-body");
-                var href = javatmp.settings.contextPath + "/stats/GetUsersBirthdayCountController";
-
-                $(cardBody).block({message: javatmp.settings.labels["global.loadingText"],
-                    overlayCSS: {
-                        backgroundColor: '#000',
-                        opacity: 0.7
-                    }});
-
-                $.ajax({
-                    "type": "POST",
-                    cache: false,
-                    url: href,
-                    dataType: "json",
-                    contentType: "application/json; charset=UTF-8",
-                    data: null,
-                    success: function (remoteContent) {
-                        var dataArray = remoteContent.data;
-
-                        var outputMonthsArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-                        for (var i = 0; i < dataArray.length; i++) {
-                            outputMonthsArray[dataArray[i][0] - 1] += dataArray[i][1];
-                        }
-
-                        barChartOption.series[0].data = outputMonthsArray;
-
-                        UsersBirthdayPerMonths.setOption(barChartOption);
-
-                        UsersBirthdayPerMonths.on('click', function (params) {
-                            console.log(params);
-                        });
-
-                        UsersBirthdayPerMonths.on('legendselectchanged', function (params) {
-                            console.log(params);
-                        });
-
-                        $(cardBody).unblock();
-                    },
-                    error: function (xhr, ajaxOptions, thrownError) {
-                        $(cardBody).unblock();
-                        var msg = 'Error on reloading the card. Please check your remote server url';
-                        toastr.error(msg, 'ERROR', {
-                            timeOut: 2500,
-                            progressBar: true,
-                            rtl: javatmp.settings.isRTL,
-                            positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                        });
-                        // clean the bar graph
-                    }
+                UsersBirthdayPerMonthsCard.BootstrapActionable("populateByLinkEvent", {
+                    linkElement: $(this), linkEvent: e
                 });
             });
 
