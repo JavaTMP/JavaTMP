@@ -27,3 +27,7 @@ The following links provide you information to call Oracle stored procedures and
 - [https://stackoverflow.com/questions/2227985/whats-the-best-database-structure-to-keep-multilingual-data](https://stackoverflow.com/questions/2227985/whats-the-best-database-structure-to-keep-multilingual-data)
 - [https://stackoverflow.com/questions/316780/schema-for-a-multilanguage-database](https://stackoverflow.com/questions/316780/schema-for-a-multilanguage-database)
 - [https://stackoverflow.com/questions/26765175/multi-language-database-with-default-fallback](https://stackoverflow.com/questions/26765175/multi-language-database-with-default-fallback)
+
+## JDBC Helper links
+- [https://www.progress.com/blogs/jdbc-tutorial-extracting-database-metadata-via-jdbc-driver](https://www.progress.com/blogs/jdbc-tutorial-extracting-database-metadata-via-jdbc-driver)
+- [http://commons.apache.org/proper/commons-dbutils/](http://commons.apache.org/proper/commons-dbutils/)

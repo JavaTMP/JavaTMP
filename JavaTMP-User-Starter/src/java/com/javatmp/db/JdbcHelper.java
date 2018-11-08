@@ -7,9 +7,11 @@ import com.javatmp.mvc.adapter.ClassTypeAdapter;
 import com.javatmp.mvc.adapter.OrderDirTypeAdapter;
 import com.javatmp.mvc.domain.table.OrderDir;
 import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -57,11 +59,34 @@ public class JdbcHelper {
 
     }
 
+    public static void getPrimarykey() throws SQLException, ClassNotFoundException {
+
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/appdb?zeroDateTimeBehavior=CONVERT_TO_NULL", "root", "mmmmmm");
+        DatabaseMetaData meta = conn.getMetaData();
+        // meta.getTables(null, null, "%", new String[]{"TABLE"})
+        try (ResultSet tables = meta.getTables("sakila", null, "%", new String[]{"TABLE"})) {
+            while (tables.next()) {
+                String catalog = tables.getString("TABLE_CAT");
+                String schema = tables.getString("TABLE_SCHEM");
+                String tableName = tables.getString("TABLE_NAME");
+                System.out.println("Table: " + tableName);
+                try (ResultSet primaryKeys = meta.getPrimaryKeys(catalog, schema, tableName)) {
+                    while (primaryKeys.next()) {
+                        System.out.println("Primary key: " + primaryKeys.getString("COLUMN_NAME"));
+                    }
+                }
+                // similar for exportedKeys
+            }
+        }
+    }
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) throws Exception {
-        checkData();
+//        checkData();
+        getPrimarykey();
     }
 
 }

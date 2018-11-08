@@ -268,7 +268,7 @@
                     }
                 }, {
                     label: confirmActionBtnText,
-                    cssClass: "btn btn-warning",
+                    cssClass: "btn btn-primary",
                     action: function (modalWrapper, button, buttonData, originalEvent) {
                         modalWrapper.hide();
                         javatmp.plugins.ajaxAction(ajaxUrl, ajaxData, successCallback, errorCallback);
@@ -335,23 +335,24 @@
                 }
             },
             error: function (data) {
-                var errorMsg = {
+                var errorObj = {
                     message: javatmp.settings.labels["dialog.error.message"],
                     title: javatmp.settings.labels["dialog.error.title"]
                 };
                 try {
-                    var jsonData = $.parseJSON(data.responseText);
-                    errorMsg = jsonData.message;
+                    errorObj = $.parseJSON(data.responseText);
+                    errorObj.title = (errorObj.title ? errorObj.title : javatmp.settings.labels["dialog.error.title"]);
+                    errorObj.message = (errorObj.message ? errorObj.message : javatmp.settings.labels["dialog.error.message"]);
                 } catch (error) {
                 }
-                toastr.error(errorMsg, errorMsg.title, {
+                toastr.error(errorObj.message, errorObj.title, {
                     timeOut: 3000,
                     progressBar: true,
                     rtl: javatmp.settings.isRTL,
                     positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
                 });
                 if (ajaxParameters.error && (typeof ajaxParameters.error === "function")) {
-                    ajaxParameters.error.call(null, errorMsg);
+                    ajaxParameters.error.call(null, errorObj);
                 }
             },
             complete: function (jqXHR, textStatus) {
