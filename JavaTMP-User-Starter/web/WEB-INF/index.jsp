@@ -192,14 +192,12 @@
             </div>
         </div>
         <div id="global-label-items-block" class="d-none">
-            <c:forEach items="${labels.keySet()}" var="entry">
-                <i k="${entry}">${labels[entry]}</i>
-            </c:forEach>
-        </div>
-        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
+            <c:forEach items="${labels.keySet()}" var="entry"><i k="${entry}">${labels[entry]}</i></c:forEach>
+            </div>
+            <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all-locale-${sessionScope.user.lang}.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp.min.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/assets/app/js/javatmp.plugins.js?v=15" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/assets/app/js/javatmp.plugins.js?v=20" type="text/javascript"></script>
         <script type="text/javascript">
             jQuery(function ($) {
                 var defaults = {
@@ -221,21 +219,20 @@
                     var key = $(element).attr("k");
                     var value = $(element).html();
                     defaults.labels[key] = value;
-
                 });
 
                 index.init(defaults);
+
+                javatmp.plugins.init({
+                    locale: "${sessionScope.user.lang}",
+                    direction: javatmp.settings.direction,
+                    isRTL: javatmp.settings.isRTL,
+                    defaultSelectPlaceholder: javatmp.settings.labels['page.text.kindlySelect']
+                });
+
                 javatmp.user = {};
                 javatmp.user.id = "${sessionScope.user.id}";
                 javatmp.user.lang = "${sessionScope.user.lang}";
-
-                moment.locale(javatmp.user.lang);
-
-                $.fn.select2.defaults.set("theme", "bootstrap");
-                $.fn.select2.defaults.set("dir", javatmp.settings.direction);
-                $.fn.select2.defaults.set("placeholder", javatmp.settings.labels['page.text.kindlySelect']);
-
-                $.fn.dataTable.ext.errMode = 'none';
 
                 javatmp.settings.handle401Error = function (jqXHR, textStatus, errorThrown) {
                     var modalMessage = null;
@@ -300,222 +297,6 @@
                         }
                     }
                 });
-            });
-        </script>
-        <script type="text/javascript">
-            jQuery(function ($) {
-                if (javatmp.settings.isRTL === true) {
-                    $("body").on('shown.bs.dropdown', '.main-body-content-container .dropdown, .main-body-content-container .btn-group, .main-body-content-container .input-group-prepend, .main-body-content-container .input-group-append', function () {
-                        console.log("firing recalculate popper sub len [" + $(this).parents(".dropdown-submenu").lenght + "]");
-                        if ($(this).parents(".navbar").length !== 0 || (!!$(this).parents(".dropdown-submenu").lenght && $(this).parents(".dropdown-submenu").lenght !== 0)) {
-                            console.log("Cancel and return navbar len [" + $(this).parents(".navbar").length + "] .dropdown-submenu len [" + $(this).parents(".dropdown-submenu").lenght + "]");
-                            return;
-                        }
-
-                        var dropDown = $(this).children(".dropdown-menu");
-                        setTimeout(function () {
-                            var previous =
-                                    dropDown.css("-webkit-transform") ||
-                                    dropDown.css("-moz-transform") ||
-                                    dropDown.css("-ms-transform") ||
-                                    dropDown.css("-o-transform") ||
-                                    dropDown.css("transform") ||
-                                    "Either no transform set, or browser doesn't do getComputedStyle";
-                            var values = previous.split("(")[1];
-                            values = values.split(")")[0];
-                            values = values.split(", ");
-                            var x = 0;
-                            var y = parseInt(values[5]);
-                            var z = 0;
-                            dropDown.css({transform: "translate3d(" + x + "px," + y + "px," + z + "px)", left: "auto", right: "auto"});
-                        }, 0);
-                    });
-                }
-            });
-        </script>
-
-        <script type="text/javascript">
-            jQuery(function ($) {
-                if (javatmp.user.lang === "ar") {
-                    numeral.register('locale', 'ar', {
-                        delimiters: {
-                            thousands: ',',
-                            decimal: '.'
-                        },
-                        abbreviations: {
-                            thousand: 'ألف',
-                            million: 'م',
-                            billion: 'ب',
-                            trillion: 'ت'
-                        },
-                        ordinal: function (number) {
-                            return '';
-                        },
-                        currency: {
-                            symbol: '$'
-                        }
-                    });
-                    // switch between locales
-                    numeral.locale('ar');
-
-                    $.extend(true, $.fn.dataTable.defaults, {
-                        "language": {
-                            "sProcessing": "جارٍ التحميل...",
-                            "sLengthMenu": "أظهر _MENU_ سجل",
-                            "sZeroRecords": "لم يعثر على أية سجلات",
-                            "sInfo": "إظهار _START_ إلى _END_ من أصل _TOTAL_ سجل",
-                            "sInfoEmpty": "يعرض 0 إلى 0 من أصل 0 سجل",
-                            "sInfoFiltered": "(منتقاة من مجموع _MAX_ مُدخل)",
-                            "sInfoPostFix": "",
-                            "sInfoSelect": "إختيار",
-                            "sSearch": "ابحث:",
-                            "sUrl": "",
-                            "decimal": ".",
-                            "thousands": ",",
-                            "oPaginate": {
-                                "sFirst": "الأول",
-                                "sPrevious": "السابق",
-                                "sNext": "التالي",
-                                "sLast": "الأخير"
-                            },
-                            select: {
-                                rows: {
-                                    _: "تم إختيار %d سجل",
-                                    0: "إضغط على السجل ليتم إختياره",
-                                    1: "تم إختيار سجل"
-                                }
-                            },
-                            "emptyTable": "لا يوجد أي سجلات"
-                        }
-                    });
-                }
-            });
-        </script>
-        <script type="text/javascript">
-            jQuery(function ($) {
-                javatmp.settings.jqueryValidationDefaultOptions = {
-                    ignore: ":hidden:not(.forceValidate), [contenteditable='true']:not([name])",
-                    rules: {},
-                    messages: {},
-                    highlight: function (element) {
-                        $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-                    },
-                    unhighlight: function (element) {
-                        $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
-                    },
-                    errorElement: 'small',
-                    errorClass: 'form-text text-danger',
-                    errorPlacement: function (error, element) {
-                        if (element.length) {
-                            var targetParent = $(element).parent();
-                            if (targetParent.hasClass("form-check") || targetParent.hasClass("custom-control")) {
-                                targetParent = targetParent.parent();
-                            }
-                            targetParent.append(error);
-                        }
-                    }
-                };
-                $.extend($.validator.messages, {
-                    summernoteRequired: $.validator.messages.required,
-                    validDate: "Please enter a valid date",
-                    validDateTime: "Please enter a valid date and time",
-                    dateBeforeNow: "Must be less than Today",
-                    dateTimeBeforeNow: "Must be less than Now",
-                    dateGreaterThan: "Must be greater than other value",
-                    dateLessThan: 'Must be less than other value',
-                    dateEqualOrGreaterThan: 'Must be equal or greater than other value',
-                    dateEqualOrLessThan: 'Must be equal or less than other value'
-                });
-                if (javatmp.user.lang === "ar") {
-                    $.extend($.validator.messages, {
-                        summernoteRequired: $.validator.messages.required,
-                        validDate: "الرجاء إدخال تاريخ صحيح",
-                        validDateTime: "الرجاء إدخال تاريخ ووقت صحيحين",
-                        dateBeforeNow: "يجب أن يكون التاريخ أقدم من اليوم",
-                        dateTimeBeforeNow: "يجب أن يكون التاريخ والوقت أقدم من الأن",
-                        dateGreaterThan: "يجب أن يكون التاريخ احدث",
-                        dateLessThan: 'يجب أن يكون التاريخ أقدم',
-                        dateEqualOrGreaterThan: 'يجب أن يكون التاريخ يساوي أو أحدث',
-                        dateEqualOrLessThan: 'يجب أن يكون التاريخ يساوي أو أقدم'
-                    });
-                }
-
-                // register global jquery validator methods:
-                jQuery.validator.addMethod("summernoteRequired", function (value, element, params) {
-                    if ((value !== "") && (value !== "<p><br></p>")) {
-                        return true;
-                    }
-                    return false;
-                }, $.validator.messages.summernoteRequired);
-
-                jQuery.validator.addMethod("validDate", function (value, element, params) {
-                    return this.optional(element) || moment(value, javatmp.settings.dateFormat, true).isValid();
-                }, $.validator.messages.validDate);
-
-                jQuery.validator.addMethod("validDateTime", function (value, element) {
-                    return this.optional(element) || moment(value, javatmp.settings.dateTimeFormat, true).isValid();
-                }, $.validator.messages.validDateTime);
-
-                jQuery.validator.addMethod("dateTimeBeforeNow", function (value, element, params) {
-                    if (this.optional(element) || $(params).val() === "")
-                        return true;
-                    if (moment(value, javatmp.settings.dateTimeFormat).isBefore(moment()))
-                        return true;
-                    return false;
-                }, $.validator.messages.dateTimeBeforeNow);
-
-                jQuery.validator.addMethod("dateBeforeNow", function (value, element, params) {
-                    if (this.optional(element) || value === "")
-                        return true;
-                    if (moment(value, javatmp.settings.dateFormat).isBefore(moment().set({hour: 0, minute: 0, second: 0, millisecond: 0})))
-                        return true;
-                    return false;
-                }, $.validator.messages.dateBeforeNow);
-
-                jQuery.validator.addMethod("dateGreaterThan", function (value, element, params) {
-                    if (this.optional(element) || $(params).val() === "")
-                        return true;
-                    if (moment(value, javatmp.settings.dateTimeFormat).isAfter(moment($(params).val(), javatmp.settings.dateTimeFormat)))
-                        return true;
-                    return false;
-                }, $.validator.messages.dateGreaterThan);
-
-                jQuery.validator.addMethod("dateLessThan", function (value, element, params) {
-                    if (this.optional(element) || $(params).val() === "")
-                        return true;
-                    if (moment(value, javatmp.settings.dateTimeFormat).isBefore(moment($(params).val(), javatmp.settings.dateTimeFormat)))
-                        return true;
-                    return false;
-                }, $.validator.messages.dateLessThan);
-
-                jQuery.validator.addMethod("dateEqualOrGreaterThan", function (value, element, params) {
-                    if (this.optional(element) || $(params).val() === "")
-                        return true;
-                    if (moment(value, javatmp.settings.dateTimeFormat).isSameOrAfter(moment($(params).val(), javatmp.settings.dateTimeFormat)))
-                        return true;
-                    return false;
-                }, $.validator.messages.dateEqualOrGreaterThan);
-
-                jQuery.validator.addMethod("dateEqualOrLessThan", function (value, element, params) {
-                    if (this.optional(element) || $(params).val() === "")
-                        return true;
-                    if (moment(value, javatmp.settings.dateTimeFormat).isSameOrBefore(moment($(params).val(), javatmp.settings.dateTimeFormat)))
-                        return true;
-                    return false;
-                }, $.validator.messages.dateEqualOrLessThan);
-            });
-        </script>
-        <script type="text/javascript">
-            jQuery(function ($) {
-                //Compose template string
-                String.prototype.composeTemplate = (function () {
-                    var re = /\{{(.+?)\}}/g;
-                    return function (o) {
-                        return this.replace(re, function (_, k) {
-                            return typeof o[k] !== 'undefined' ? o[k] : '';
-                        });
-                    };
-                }());
             });
         </script>
         <script type="text/javascript">

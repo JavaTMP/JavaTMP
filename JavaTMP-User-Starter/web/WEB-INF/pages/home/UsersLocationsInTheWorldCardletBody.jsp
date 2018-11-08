@@ -129,7 +129,8 @@
                 }
             });
 
-            cardletElement.on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
+                $('#UsersLocationsInTheWorld').css({"width": "100%"});
                 UsersLocationsInTheWorld.resize();
             });
 
@@ -150,14 +151,9 @@
                 }
             });
 
-            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
-                $('#UsersLocationsInTheWorld').css({"width": "100%"});
-                UsersLocationsInTheWorld.resize();
-            });
-
             cardletElement.on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {
-                cardletElement.off(javatmp.settings.cardFullscreenCompress);
-                cardletElement.off(javatmp.settings.cardFullscreenExpand);
+                containerCard.off(javatmp.settings.cardFullscreenCompress);
+                containerCard.off(javatmp.settings.cardFullscreenExpand);
                 return true;
             });
         });

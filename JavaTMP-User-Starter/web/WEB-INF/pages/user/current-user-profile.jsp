@@ -419,7 +419,7 @@
                 });
             });
 
-            validator = form.validate($.extend(true, {}, javatmp.settings.jqueryValidationDefaultOptions, {}));
+            validator = form.validate();
             var birthDateInputMask = javatmp.plugins.inputmaskWrapperForDate(form.find("input[name='birthDate']"));
             var birthDateDatePicker = javatmp.plugins.daterangepickerWrapperForDate(form.find("input[name='birthDate']"));
             var addressEditor = javatmp.plugins.summernoteWrapper(form.find("textarea[name='address']"));

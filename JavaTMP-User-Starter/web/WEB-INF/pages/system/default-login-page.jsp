@@ -31,11 +31,15 @@
                             <form id="main-login-form" method="POST" role="form" action="${pageContext.request.contextPath}/login">
                                 <div class="form-group">
                                     <label class="control-label col-form-label">${labels['domain.user.userName']}</label>
-                                    <input class="form-control" placeholder="${labels['domain.user.userName']}" name="userName" type="text" autofocus value="user123">
+                                    <input class="form-control" placeholder="${labels['domain.user.userName']}"
+                                           name="userName" type="text" autofocus value="user123"
+                                           data-rule-required="true">
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-form-label">${labels['domain.user.password']}</label>
-                                    <input class="form-control" placeholder="${labels['domain.user.password']}" name="password" type="password" value="user123">
+                                    <input class="form-control" placeholder="${labels['domain.user.password']}"
+                                           name="password" type="password" value="user123"
+                                           data-rule-required="true">
                                 </div>
                                 <button disabled="" type="submit" href="javascript:;" class="btn btn-lg btn-primary btn-block">${labels['page.btn.login']}</button>
                                 <a href="${pageContext.request.contextPath}/register" class="btn btn-success btn-block">${labels['page.btn.registerPage']}</a>
@@ -50,8 +54,15 @@
         </style>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all-locale-${labels["global.language"]}.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/assets/app/js/javatmp.plugins.js?v=20" type="text/javascript"></script>
         <script type="text/javascript">
             (function ($) {
+                javatmp.plugins.init({
+                    locale: "${labels["global.language"]}",
+                    direction: "${labels["global.direction"]}",
+                    isRTL: ${labels['global.direction'] == 'ltr' ? 'false' : 'true'},
+                    defaultSelectPlaceholder: "${labels['page.text.kindlySelect']}"
+                });
                 // https://www.sanwebe.com/2016/07/ajax-form-submit-examples-using-jquery
                 // https://stackoverflow.com/questions/1960240/jquery-ajax-submit-form
                 var loginForm = $('#main-login-form');
@@ -93,33 +104,8 @@
                     });
                 });
 
-                validator = loginForm.validate({
-                    rules: {
-                        userName: {
-                            required: true
-                        },
-                        password: {
-                            required: true
-                        }
-                    },
-                    highlight: function (element) {
-                        $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-                    },
-                    unhighlight: function (element) {
-                        $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
-                    },
-                    errorElement: 'small',
-                    errorClass: 'form-text text-danger',
-                    errorPlacement: function (error, element) {
-                        if (element.length) {
-                            var targetParent = $(element).parent();
-                            if (targetParent.hasClass("form-check") || targetParent.hasClass("custom-control")) {
-                                targetParent = targetParent.parent();
-                            }
-                            targetParent.append(error);
-                        }
-                    }
-                });
+                validator = loginForm.validate();
+
             }(jQuery));
         </script>
         <script type="text/javascript">
