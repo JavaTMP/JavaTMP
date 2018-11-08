@@ -11,6 +11,7 @@
         var currentCardletId = '<c:out value="${param.cardletId}"/>';
         var cardletElement = $("#" + currentCardletId);
         cardletElement.on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
+            var containerCard = cardletElement.closest(".card");
             var formatTooltipLine = function (color, value) {
                 return "<span style='display:inline-block;width:10px;height:10px;border-radius:50%;background-color:" + color + ";margin-" + javatmp.settings.floatReverse + ":5px;'></span><span>" + value + "</span>";
             };
@@ -132,7 +133,7 @@
                 UsersLocationsInTheWorld.resize();
             });
 
-            cardletElement.on(javatmp.settings.cardFullscreenCompress, function (event, card) {
+            containerCard.on(javatmp.settings.cardFullscreenCompress, function (event, card) {
                 // when card compress by pressing the top right tool button
                 var cardId = $(card).attr("id");
                 if (cardId === "UsersLocationsInTheWorldCard") {
@@ -140,7 +141,7 @@
                     UsersLocationsInTheWorld.resize();
                 }
             });
-            cardletElement.on(javatmp.settings.cardFullscreenExpand, function (event, card) {
+            containerCard.on(javatmp.settings.cardFullscreenExpand, function (event, card) {
                 // when card compress by pressing the top right tool button
                 var cardId = $(card).attr("id");
                 if (cardId === "UsersLocationsInTheWorldCard") {

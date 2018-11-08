@@ -4,6 +4,7 @@
 <html lang="${labels["global.language"]}" dir="${labels["global.direction"]}">
     <head>
         <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>${labels["global.page.title"]}</title>
         <link href="${pageContext.request.contextPath}/assets/dist/css/javatmp-plugins-all.min.css" rel="stylesheet" type="text/css"/>
@@ -30,11 +31,11 @@
                             <form id="main-login-form" method="POST" role="form" action="${pageContext.request.contextPath}/login">
                                 <div class="form-group">
                                     <label class="control-label col-form-label">${labels['domain.user.userName']}</label>
-                                    <input class="form-control required" placeholder="${labels['domain.user.userName']}" name="userName" type="text" autofocus value="user123">
+                                    <input class="form-control" placeholder="${labels['domain.user.userName']}" name="userName" type="text" autofocus value="user123">
                                 </div>
                                 <div class="form-group">
                                     <label class="control-label col-form-label">${labels['domain.user.password']}</label>
-                                    <input class="form-control required" placeholder="${labels['domain.user.password']}" name="password" type="password" value="user123">
+                                    <input class="form-control" placeholder="${labels['domain.user.password']}" name="password" type="password" value="user123">
                                 </div>
                                 <button disabled="" type="submit" href="javascript:;" class="btn btn-lg btn-primary btn-block">${labels['page.btn.login']}</button>
                                 <a href="${pageContext.request.contextPath}/register" class="btn btn-success btn-block">${labels['page.btn.registerPage']}</a>
@@ -94,7 +95,7 @@
 
                 validator = loginForm.validate({
                     rules: {
-                        username: {
+                        userName: {
                             required: true
                         },
                         password: {
