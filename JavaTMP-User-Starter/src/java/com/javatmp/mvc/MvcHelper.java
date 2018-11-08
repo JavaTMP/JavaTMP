@@ -100,7 +100,7 @@ public class MvcHelper {
             String name = (String) names.nextElement();
             map.put(name, request.getParameterValues(name));
         }
-
+        System.out.println("map parameters is [" + map + "]");
         BeanUtils.populate(bean, map);
     }
 

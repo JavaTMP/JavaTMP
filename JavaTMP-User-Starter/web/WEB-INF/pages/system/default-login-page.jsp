@@ -54,7 +54,7 @@
         </style>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all-locale-${labels["global.language"]}.min.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/assets/app/js/javatmp.plugins.js?v=20" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/assets/app/js/javatmp.plugins.js?v=23" type="text/javascript"></script>
         <script type="text/javascript">
             (function ($) {
                 javatmp.plugins.init({
@@ -74,16 +74,10 @@
                     if (!$(this).valid()) {
                         return;
                     }
-                    var httpType = $(this).attr("method");
-                    var post_url = $(this).attr("action"); //get form action url
-                    //                    var form_data = new FormData(loginForm); //Creates new FormData object
-                    var form_data = $(this).serializeArray();
                     $.ajax({
-                        type: httpType,
-                        url: post_url,
-                        //                        processData: false,
-                        //                        contentType: false,
-                        data: form_data,
+                        type: $(this).attr("method"),
+                        url: $(this).attr("action"),
+                        data: $(this).serializeArray(),
                         success: function (data) {
                             if (data.overAllStatus) {
                                 window.location.replace(data.message);
