@@ -35,18 +35,6 @@
         table.dataTable tbody tr {
             cursor: pointer;
         }
-        /*        #UserListFilterHeader th {
-                    padding: 0;
-                }
-                #UserListFilterHeader th > .form-control {
-                    border-radius: 0;
-                }
-                #UserListFilterHeader th > .custom-select {
-                    border-radius: 0;
-                }
-                #UserListMainHeader th > p {
-                    margin-bottom: 0;
-                }*/
     </style>
     <script type="text/javascript">
         jQuery(function ($) {
