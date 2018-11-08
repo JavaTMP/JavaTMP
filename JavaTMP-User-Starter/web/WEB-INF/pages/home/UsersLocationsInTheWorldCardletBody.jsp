@@ -145,9 +145,14 @@
                 // when card compress by pressing the top right tool button
                 var cardId = $(card).attr("id");
                 if (cardId === "UsersLocationsInTheWorldCard") {
-                    $('#UsersLocationsInTheWorld').css({"minHeight": 700});
+                    $('#UsersLocationsInTheWorld').css({"minHeight": "90vh"});
                     UsersLocationsInTheWorld.resize();
                 }
+            });
+
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
+                $('#UsersLocationsInTheWorld').css({"width": "100%"});
+                UsersLocationsInTheWorld.resize();
             });
 
             cardletElement.on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {
