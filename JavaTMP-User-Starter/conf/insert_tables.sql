@@ -26,9 +26,39 @@ INSERT INTO `theme` (`themeId`, `themeName`) VALUES ('superhero','Superhero');
 INSERT INTO `theme` (`themeId`, `themeName`) VALUES ('united','United');
 INSERT INTO `theme` (`themeId`, `themeName`) VALUES ('yeti','Yeti');
 
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'default','العادي');
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'ace','أسي');
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'schooly','سكولي');
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'greenish','خضاري');
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'purplish','الأرجواني');
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'cerulean','سماوي');
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'cosmo','كوزمو');
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'cyborg','سايبورغ');
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'darkly','ظلامي');
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'flatly','مسطح');
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'journal','مفعم');
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'litera','يتيرا');
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'lumen','مجوف');
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'lux','لوكس');
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'materia','مادي');
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'minty','نعنعي');
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'pulse','نبضي');
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'sandstone','حجر رملي');
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'simplex','بسيطي');
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'sketchy','رسمي');
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'slate','سليت');
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'solar','شمسي');
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'spacelab','فضائي');
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'superhero','خارق');
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'united','متحد');
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'yeti','اليتي');
+
 -- Insert languages:
 INSERT INTO `language` (`languageId`, `languageName`) VALUES ('ar','Arabic (AR)');
 INSERT INTO `language` (`languageId`, `languageName`) VALUES ('en','English (EN)');
+
+INSERT INTO `languageTranslation` (`id`, `langId`, `languageName`) VALUES ('ar' ,'ar','العربية');
+INSERT INTO `languageTranslation` (`id`, `langId`, `languageName`) VALUES ('en' ,'ar','الإنجليزية');
 
 -- Insert Countries:
 INSERT INTO `country` (`countryId`, `countryName`) VALUES ('AD','Andorra');

@@ -3,6 +3,14 @@ CREATE TABLE theme (
     themeName varchar(255) NOT NULL,
     CONSTRAINT theme_themeId_pk PRIMARY KEY (themeId)
 ) ENGINE=InnoDB;
+CREATE TABLE themeTranslation (
+    themeId varchar(32) NOT NULL,
+    langId varchar(4) NOT NULL,
+    themeName varchar(255) NOT NULL,
+    CONSTRAINT themeTr_pk PRIMARY KEY (themeId, langId),
+    CONSTRAINT themeTr_themeId_fk FOREIGN KEY (themeId) REFERENCES theme (themeId),
+    CONSTRAINT themeTr_langId_fk FOREIGN KEY (langId) REFERENCES language (languageId)
+) ENGINE=InnoDB;
 
 CREATE TABLE timezone (
     timezoneId varchar(64) NOT NULL,
@@ -13,6 +21,15 @@ CREATE TABLE language (
     languageId varchar(4) NOT NULL,
     languageName varchar(255) NOT NULL,
     CONSTRAINT language_languageId_pk PRIMARY KEY (languageId)
+) ENGINE=InnoDB;
+
+CREATE TABLE languageTranslation (
+    id varchar(4) NOT NULL,
+    langId varchar(4) NOT NULL,
+    languageName varchar(255) NOT NULL,
+    CONSTRAINT langTr_pk PRIMARY KEY (id, langId),
+    CONSTRAINT langTr_id_fk FOREIGN KEY (id) REFERENCES language (languageId),
+    CONSTRAINT langTr_langId_fk FOREIGN KEY (langId) REFERENCES language (languageId)
 ) ENGINE=InnoDB;
 
 CREATE TABLE country (
