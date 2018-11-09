@@ -12,7 +12,6 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "theme")
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Theme implements Serializable {
 
     private static final long serialVersionUID = 1L;
