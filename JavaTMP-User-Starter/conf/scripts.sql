@@ -12,6 +12,8 @@ from `language` l
 left OUTER JOIN languagetranslation t on t.`id` = l.`languageId` and t.`langId` = 'ar'
 --left OUTER JOIN `language` d on d.`languageId` = l.`languageId`
 
+-- https://stackoverflow.com/a/10483513/1461221
+
 select l.`languageId`, th.`themeId`, COALESCE(t.`themeName`, th.`themeName`)
 from (`language` l, `theme` th)
 left OUTER JOIN themetranslation t on t.`themeId` = th.`themeId` and t.`langId` = l.`languageId`
