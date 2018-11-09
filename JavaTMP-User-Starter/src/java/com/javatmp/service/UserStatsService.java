@@ -1,7 +1,6 @@
 package com.javatmp.service;
 
 import com.javatmp.db.JpaDaoHelper;
-import com.javatmp.domain.Country;
 import com.javatmp.domain.Country_;
 import com.javatmp.domain.User;
 import com.javatmp.domain.User_;
@@ -12,8 +11,6 @@ import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 
 public class UserStatsService {

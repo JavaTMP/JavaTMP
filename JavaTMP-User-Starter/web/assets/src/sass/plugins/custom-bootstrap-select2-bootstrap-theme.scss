@@ -37,7 +37,8 @@ dynamically set bg of select2 dropdown result:
 **/
 .select2-container--bootstrap .select2-dropdown {
     background-color: $s2bs-dropdown-bg;
-    border-radius: $border-radius;
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
 }
 /**
 flip clear button :

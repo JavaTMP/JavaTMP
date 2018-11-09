@@ -206,7 +206,7 @@
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all-locale-${labels["global.language"]}.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp.min.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/assets/app/js/javatmp.plugins.js?v=30" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/assets/app/js/javatmp.plugins.js?v=39" type="text/javascript"></script>
         <script type="text/javascript">
             (function ($) {
                 var defaults = {
@@ -243,7 +243,9 @@
                     locale: "${labels["global.language"]}",
                     direction: "${labels["global.direction"]}",
                     isRTL: ${labels['global.direction'] == 'ltr' ? 'false' : 'true'},
-                    defaultSelectPlaceholder: "${labels['page.text.kindlySelect']}"
+                    defaultSelectPlaceholder: "${labels['page.text.kindlySelect']}",
+                    dateFormat: javatmp.settings.dateFormat,
+                    dateTimeFormat: javatmp.settings.dateTimeFormat
                 });
 
                 // https://www.sanwebe.com/2016/07/ajax-form-submit-examples-using-jquery

@@ -19,7 +19,6 @@
 
     window.javatmp.plugins.init = function (options) {
         $.extend(true, window.javatmp.plugins.settings, defaults, options);
-
         // set default global locale for moment datetime plugin
         moment.locale(this.settings.locale);
 
@@ -169,17 +168,17 @@
         }, $.validator.messages.summernoteRequired);
 
         jQuery.validator.addMethod("validDate", function (value, element, params) {
-            return this.optional(element) || moment(value, this.settings.dateFormat, true).isValid();
+            return this.optional(element) || moment(value, javatmp.plugins.settings.dateFormat, true).isValid();
         }, $.validator.messages.validDate);
 
         jQuery.validator.addMethod("validDateTime", function (value, element) {
-            return this.optional(element) || moment(value, this.settings.dateTimeFormat, true).isValid();
+            return this.optional(element) || moment(value, javatmp.plugins.settings.dateTimeFormat, true).isValid();
         }, $.validator.messages.validDateTime);
 
         jQuery.validator.addMethod("dateTimeBeforeNow", function (value, element, params) {
             if (this.optional(element) || $(params).val() === "")
                 return true;
-            if (moment(value, this.settings.dateTimeFormat).isBefore(moment()))
+            if (moment(value, javatmp.plugins.settings.dateTimeFormat).isBefore(moment()))
                 return true;
             return false;
         }, $.validator.messages.dateTimeBeforeNow);
@@ -187,7 +186,7 @@
         jQuery.validator.addMethod("dateBeforeNow", function (value, element, params) {
             if (this.optional(element) || value === "")
                 return true;
-            if (moment(value, this.settings.dateFormat).isBefore(moment().set({hour: 0, minute: 0, second: 0, millisecond: 0})))
+            if (moment(value, javatmp.plugins.settings.dateFormat).isBefore(moment().set({hour: 0, minute: 0, second: 0, millisecond: 0})))
                 return true;
             return false;
         }, $.validator.messages.dateBeforeNow);
@@ -195,7 +194,7 @@
         jQuery.validator.addMethod("dateGreaterThan", function (value, element, params) {
             if (this.optional(element) || $(params).val() === "")
                 return true;
-            if (moment(value, this.settings.dateTimeFormat).isAfter(moment($(params).val(), this.settings.dateTimeFormat)))
+            if (moment(value, javatmp.plugins.settings.dateTimeFormat).isAfter(moment($(params).val(), javatmp.plugins.settings.dateTimeFormat)))
                 return true;
             return false;
         }, $.validator.messages.dateGreaterThan);
@@ -203,7 +202,7 @@
         jQuery.validator.addMethod("dateLessThan", function (value, element, params) {
             if (this.optional(element) || $(params).val() === "")
                 return true;
-            if (moment(value, this.settings.dateTimeFormat).isBefore(moment($(params).val(), this.settings.dateTimeFormat)))
+            if (moment(value, javatmp.plugins.settings.dateTimeFormat).isBefore(moment($(params).val(), javatmp.plugins.settings.dateTimeFormat)))
                 return true;
             return false;
         }, $.validator.messages.dateLessThan);
@@ -211,7 +210,7 @@
         jQuery.validator.addMethod("dateEqualOrGreaterThan", function (value, element, params) {
             if (this.optional(element) || $(params).val() === "")
                 return true;
-            if (moment(value, this.settings.dateTimeFormat).isSameOrAfter(moment($(params).val(), this.settings.dateTimeFormat)))
+            if (moment(value, javatmp.plugins.settings.dateTimeFormat).isSameOrAfter(moment($(params).val(), javatmp.plugins.settings.dateTimeFormat)))
                 return true;
             return false;
         }, $.validator.messages.dateEqualOrGreaterThan);
@@ -219,7 +218,7 @@
         jQuery.validator.addMethod("dateEqualOrLessThan", function (value, element, params) {
             if (this.optional(element) || $(params).val() === "")
                 return true;
-            if (moment(value, this.settings.dateTimeFormat).isSameOrBefore(moment($(params).val(), this.settings.dateTimeFormat)))
+            if (moment(value, javatmp.plugins.settings.dateTimeFormat).isSameOrBefore(moment($(params).val(), javatmp.plugins.settings.dateTimeFormat)))
                 return true;
             return false;
         }, $.validator.messages.dateEqualOrLessThan);
@@ -233,6 +232,18 @@
                 });
             };
         }());
+
+        $("body").on("click", '[actionableWrapperType]', function (event) {
+            var actionType = $(this).attr("actionableWrapperType") ? $(this).attr("actionableWrapperType") : "ajax";
+            if (actionType === "ajax-area-in-card") {
+                var actionOutputArea = $(this).closest(".card").children(".card-body");
+                window.javatmp.plugins.bootstrapActionableWrapper(actionOutputArea)
+                        .BootstrapActionable("populateByLinkEvent", {
+                            linkElement: $(this), linkEvent: event
+                        });
+            }
+        });
+
     };
 
     window.javatmp.plugins.inputmaskWrapperForDate = function (element, options) {
@@ -263,8 +274,6 @@
             autoUpdateInput: false,
             minDate: '01/01/1900',
             maxDate: '31/12/2099',
-            //                    maxDate: '',
-            //                    minDate: moment(),
             locale: {
                 "direction": javatmp.settings.direction,
                 format: javatmp.settings.dateFormat
@@ -281,7 +290,7 @@
 
         var settings = $.extend(true, {}, {
             "opens": javatmp.settings.floatDefault,
-            startDate: moment().subtract(100, 'years'),
+            startDate: moment().subtract(1, 'years'),
             endDate: moment(),
             minDate: '01/01/1900',
             maxDate: '31/12/2099',

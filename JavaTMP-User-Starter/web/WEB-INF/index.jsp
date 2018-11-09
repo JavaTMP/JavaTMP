@@ -197,7 +197,7 @@
             <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all-locale-${sessionScope.user.lang}.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp.min.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/assets/app/js/javatmp.plugins.js?v=24" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/assets/app/js/javatmp.plugins.js?v=39" type="text/javascript"></script>
         <script type="text/javascript">
             jQuery(function ($) {
                 var defaults = {
@@ -227,7 +227,9 @@
                     locale: "${sessionScope.user.lang}",
                     direction: javatmp.settings.direction,
                     isRTL: javatmp.settings.isRTL,
-                    defaultSelectPlaceholder: javatmp.settings.labels['page.text.kindlySelect']
+                    defaultSelectPlaceholder: javatmp.settings.labels['page.text.kindlySelect'],
+                    dateFormat: javatmp.settings.dateFormat,
+                    dateTimeFormat: javatmp.settings.dateTimeFormat
                 });
 
                 javatmp.user = {};
@@ -333,20 +335,6 @@
             });
         </script>
         <!-- /build -->
-        <script type="text/javascript">
-            jQuery(function ($) {
-                $("body").on("click", '[actionableWrapperType]', function (event) {
-                    var actionType = $(this).attr("actionableWrapperType") ? $(this).attr("actionableWrapperType") : "ajax";
-                    if (actionType === "ajax-area-in-card") {
-                        var actionOutputArea = $(this).closest(".card").children(".card-body");
-                        window.javatmp.plugins.bootstrapActionableWrapper(actionOutputArea)
-                                .BootstrapActionable("populateByLinkEvent", {
-                                    linkElement: $(this), linkEvent: event
-                                });
-                    }
-                });
-            });
-        </script>
         <script type="text/javascript">
             jQuery(function ($) {
                 $("#oneTimeOverlay").remove();
