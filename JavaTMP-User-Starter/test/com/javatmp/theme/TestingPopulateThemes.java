@@ -50,11 +50,19 @@ public class TestingPopulateThemes {
 //                "SELECT t FROM Themetranslation t "
 //                + "left outer join Themetranslation tra on t.themeId = tra.themeId "
 //                + "left outer join Language l on tra.langId = l.languageId", Themetranslation.class);
-        TypedQuery<Themetranslation> query = em.createQuery(
-                "SELECT new com.javatmp.domain.Themetranslation(l.languageId ,t.themeId, coalesce(tra.themeName, t.themeName)) FROM Theme t "
-                + "left outer join Themetranslation tra on t.themeId = tra.themeId "
-                + "left outer join Language l on tra.langId = l.languageId", Themetranslation.class);
-        List<Themetranslation> resultList = query.getResultList();
+//        TypedQuery<Themetranslation> query = em.createQuery(
+//                "SELECT new com.javatmp.domain.Themetranslation(l.languageId ,t.themeId, coalesce(tra.themeName, t.themeName)) FROM Theme t "
+//                + "left outer join Themetranslation tra on t.themeId = tra.themeId "
+//                + "left outer join Language l on tra.langId = l.languageId", Themetranslation.class);
+        TypedQuery<Object[]> query = em.createQuery(
+                "SELECT l.languageId, th.themeId, t.themeName "
+                + "FROM Language l, Theme th "
+                + "left outer join Themetranslation t on t.langId = l.languageId "
+                //                + "left outer join Theme th on th.themeId = t.themeId "
+                + "where l.languageId = :la", Object[].class);
+        query.setParameter("la", "en");
+        List<Object[]> resultList = query.getResultList();
+        int c = 0;
         resultList.forEach((tt) -> {
             System.out.println(MvcHelper.toString(tt));
         });

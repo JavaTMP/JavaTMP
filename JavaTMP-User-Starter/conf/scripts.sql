@@ -11,3 +11,8 @@ select l.`languageId` as languageId, COALESCE(t.`languageName`, l.`languageName`
 from `language` l
 left OUTER JOIN languagetranslation t on t.`id` = l.`languageId` and t.`langId` = 'ar'
 --left OUTER JOIN `language` d on d.`languageId` = l.`languageId`
+
+select l.`languageId`, th.`themeId`, COALESCE(t.`themeName`, th.`themeName`)
+from (`language` l, `theme` th)
+left OUTER JOIN themetranslation t on t.`themeId` = th.`themeId` and t.`langId` = l.`languageId`
+where l.`languageId` = 'en';
