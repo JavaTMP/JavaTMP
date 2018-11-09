@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.1"
-             xmlns="http://xmlns.jcp.org/xml/ns/persistence"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
     <persistence-unit name="AppPU" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>com.javatmp.domain.User</class>
+        <class>com.javatmp.domain.Themetranslation</class>
         <properties>
             <!-- Configuring JDBC properties -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
@@ -21,10 +19,8 @@
             <property name="hibernate.globally_quoted_identifiers" value="false"/>
             <property name="hibernate.connection.useUnicode" value="true"/>
             <property name="hibernate.connection.characterEncoding" value="UTF8"/>
-
             <!-- https://access.redhat.com/documentation/en-us/jboss_enterprise_application_platform/5/html/hibernate_core_reference_guide/architecture-current-session -->
             <property name="hibernate.current_session_context_class" value="thread"/>
-
             <!-- Configuring Connection Pool -->
             <property name="hibernate.c3p0.min_size" value="0"/>
             <property name="hibernate.c3p0.max_size" value="10"/>

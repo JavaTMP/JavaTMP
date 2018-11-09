@@ -20,12 +20,16 @@ import com.javatmp.mvc.domain.table.OrderDir;
 import com.javatmp.db.JpaDaoHelper;
 import com.javatmp.domain.Country;
 import com.javatmp.domain.Theme;
+import com.javatmp.domain.Themetranslation;
 import com.javatmp.service.CountryService;
 import com.javatmp.service.ThemeService;
 import com.javatmp.service.UserService;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -33,21 +37,49 @@ import java.util.List;
  */
 public class TestingPopulateThemes {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) throws SQLException, ParseException {
         JpaDaoHelper jpaDaoHelper;
         ThemeService themeService;
         jpaDaoHelper = new JpaDaoHelper("AppPU");
         themeService = new ThemeService(jpaDaoHelper);
 
-        List<Theme> themes = themeService.getThemes();
+        List<Object[]> results;
+        EntityManager em = jpaDaoHelper.getEntityManagerFactory().createEntityManager();
 
-        themes.forEach((theme) -> {
-            jpaDaoHelper.create(theme);
+//        TypedQuery<Themetranslation> query = em.createQuery(
+//                "SELECT t FROM Themetranslation t "
+//                + "left outer join Themetranslation tra on t.themeId = tra.themeId "
+//                + "left outer join Language l on tra.langId = l.languageId", Themetranslation.class);
+        TypedQuery<Themetranslation> query = em.createQuery(
+                "SELECT new com.javatmp.domain.Themetranslation(l.languageId ,t.themeId, coalesce(tra.themeName, t.themeName)) FROM Theme t "
+                + "left outer join Themetranslation tra on t.themeId = tra.themeId "
+                + "left outer join Language l on tra.langId = l.languageId", Themetranslation.class);
+        List<Themetranslation> resultList = query.getResultList();
+        resultList.forEach((tt) -> {
+            System.out.println(MvcHelper.toString(tt));
         });
+        em.close();
 
+//        Theme t = new Theme("Testing6", "default name");
+//        jpaDaoHelper.create(t);
+//        List<Theme> themes = themeService.getThemes();
+//        Themetranslation themetranslation = new Themetranslation(t);
+//        themetranslation.setLangId("en");
+//
+//        jpaDaoHelper.create(themetranslation);
+//
+//        Themetranslation ar1 = new Themetranslation(t);
+//        ar1.setLangId("ar");
+//        ar1.setThemeName("عربي");
+//        jpaDaoHelper.create(ar1);
+//        List<Themetranslation> tr = jpaDaoHelper.findAll(Themetranslation.class);
+//        tr.forEach((tt) -> {
+//            System.out.println(MvcHelper.toString(tt));
+//        });
+//
+//        themes.forEach((theme) -> {
+//            jpaDaoHelper.create(theme);
+//        });
     }
 
 }
