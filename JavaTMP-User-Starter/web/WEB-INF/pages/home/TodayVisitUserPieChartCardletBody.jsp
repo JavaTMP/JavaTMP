@@ -51,7 +51,7 @@
                 ]
             };
             todayVisitUserPieChart.setOption(todayVisitUserPieChartOption);
-
+            var cardBody = cardletElement;
             javatmp.plugins.blockWrapper(cardBody);
             javatmp.plugins.ajaxJsonAction({
                 url: javatmp.settings.contextPath + "/stats/GetVisitingUsersCountController",
