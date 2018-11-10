@@ -76,6 +76,13 @@ public class JdbcHelper {
                         System.out.println("Primary key: " + primaryKeys.getString("COLUMN_NAME"));
                     }
                 }
+                //Get Foreign Keys
+                ResultSet FK = meta.getImportedKeys(null, null, tableName);
+                System.out.println("------------FOREIGN KEYS-------------");
+                while (FK.next()) {
+                    System.out.println(FK.getString("PKTABLE_NAME") + " --- " + FK.getString("PKCOLUMN_NAME") + " === " + FK.getString("FKTABLE_NAME") + " --- " + FK.getString("FKCOLUMN_NAME"));
+                }
+                System.out.println("-------------------------");
                 // similar for exportedKeys
             }
         }
