@@ -3,6 +3,7 @@ CREATE TABLE theme (
     themeName varchar(255) NOT NULL,
     CONSTRAINT theme_themeId_pk PRIMARY KEY (themeId)
 ) ENGINE=InnoDB;
+
 CREATE TABLE themeTranslation (
     themeId varchar(32) NOT NULL,
     langId varchar(4) NOT NULL,

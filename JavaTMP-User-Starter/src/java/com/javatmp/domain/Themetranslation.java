@@ -8,11 +8,14 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.SecondaryTable;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -30,6 +33,10 @@ public class Themetranslation implements Serializable {
     private String themeName;
     @Column(name = "langId")
     private String langId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(insertable = false, updatable = false)
+    private Theme theme;
 
     public Themetranslation() {
     }
@@ -80,6 +87,20 @@ public class Themetranslation implements Serializable {
      */
     public void setThemeName(String themeName) {
         this.themeName = themeName;
+    }
+
+    /**
+     * @return the theme
+     */
+    public Theme getTheme() {
+        return theme;
+    }
+
+    /**
+     * @param theme the theme to set
+     */
+    public void setTheme(Theme theme) {
+        this.theme = theme;
     }
 
 }
