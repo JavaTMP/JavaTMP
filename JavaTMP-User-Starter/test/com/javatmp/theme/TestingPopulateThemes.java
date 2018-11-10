@@ -54,14 +54,23 @@ public class TestingPopulateThemes {
 //                "SELECT new com.javatmp.domain.Themetranslation(l.languageId ,t.themeId, coalesce(tra.themeName, t.themeName)) FROM Theme t "
 //                + "left outer join Themetranslation tra on t.themeId = tra.themeId "
 //                + "left outer join Language l on tra.langId = l.languageId", Themetranslation.class);
+//        TypedQuery<Object[]> query = em.createQuery(
+//                "SELECT l.languageId, th.themeId, coalesce(t.themeName, th.themeName) "
+//                + "FROM Language l "
+//                + "left outer join Theme th on (1=1) "
+//                + "left outer join Themetranslation t on t.langId = l.languageId and th.themeId = t.themeId "
+//                //                + "left outer join Theme th on th.themeId = t.themeId "
+//                //                + "where l.languageId = :la", Object[].class);
+//                + "where l.languageId = :la", Object[].class);
+//        query.setParameter("la", "ar");
         TypedQuery<Object[]> query = em.createQuery(
-                "SELECT l.languageId, th.themeId, coalesce(t.themeName, th.themeName) "
-                + "FROM Language l "
-                + "left outer join Theme th on (1=1) "
-                + "left outer join Themetranslation t on t.langId = l.languageId and th.themeId = t.themeId "
+                "SELECT th.themeId, coalesce(t.themeName, th.themeName) "
+                + "FROM Theme th, Language l "
+                + "left outer join Themetranslation t on th.themeId = t.themeId and l.languageId = t.langId "
                 //                + "left outer join Theme th on th.themeId = t.themeId "
+                //                + "where l.languageId = :la", Object[].class);
                 + "where l.languageId = :la", Object[].class);
-        query.setParameter("la", "ar");
+        query.setParameter("la", "en");
         List<Object[]> resultList = query.getResultList();
         int c = 0;
         resultList.forEach((tt) -> {
