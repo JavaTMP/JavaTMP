@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.SecondaryTable;
@@ -21,22 +22,22 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "themetranslation")
-public class Themetranslation extends Theme implements Serializable {
+public class Themetranslation implements Serializable {
 
+    @Id
+    private String themeId;
+
+    private String themeName;
     @Column(name = "langId")
     private String langId;
 
     public Themetranslation() {
     }
 
-    public Themetranslation(Theme theme) {
-        super(theme);
-    }
-
     public Themetranslation(String langId, String themeId, String themeName) {
         this.langId = langId;
-        this.setThemeId(themeId);
-        this.setThemeName(themeName);
+        this.themeId = themeId;
+        this.themeName = themeName;
     }
 
     /**
@@ -51,6 +52,34 @@ public class Themetranslation extends Theme implements Serializable {
      */
     public void setLangId(String langId) {
         this.langId = langId;
+    }
+
+    /**
+     * @return the themeId
+     */
+    public String getThemeId() {
+        return themeId;
+    }
+
+    /**
+     * @param themeId the themeId to set
+     */
+    public void setThemeId(String themeId) {
+        this.themeId = themeId;
+    }
+
+    /**
+     * @return the themeName
+     */
+    public String getThemeName() {
+        return themeName;
+    }
+
+    /**
+     * @param themeName the themeName to set
+     */
+    public void setThemeName(String themeName) {
+        this.themeName = themeName;
     }
 
 }

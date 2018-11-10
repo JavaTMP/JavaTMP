@@ -57,11 +57,11 @@ public class TestingPopulateThemes {
         TypedQuery<Object[]> query = em.createQuery(
                 "SELECT l.languageId, th.themeId, coalesce(t.themeName, th.themeName) "
                 + "FROM Language l "
-                + "join Theme th "
-                + "left outer join Themetranslation t on t.langId = l.languageId and t.themeId = th.themeId "
+                + "left outer join Theme th on (1=1) "
+                + "left outer join Themetranslation t on t.langId = l.languageId and th.themeId = t.themeId "
                 //                + "left outer join Theme th on th.themeId = t.themeId "
                 + "where l.languageId = :la", Object[].class);
-        query.setParameter("la", "en");
+        query.setParameter("la", "ar");
         List<Object[]> resultList = query.getResultList();
         int c = 0;
         resultList.forEach((tt) -> {
