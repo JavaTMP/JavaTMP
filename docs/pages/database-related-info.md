@@ -31,3 +31,7 @@ The following links provide you information to call Oracle stored procedures and
 ## JDBC Helper links
 - [https://www.progress.com/blogs/jdbc-tutorial-extracting-database-metadata-via-jdbc-driver](https://www.progress.com/blogs/jdbc-tutorial-extracting-database-metadata-via-jdbc-driver)
 - [http://commons.apache.org/proper/commons-dbutils/](http://commons.apache.org/proper/commons-dbutils/)
+
+## Tables Join
+- [https://stackoverflow.com/questions/38549/what-is-the-difference-between-inner-join-and-outer-join?rq=1](https://stackoverflow.com/questions/38549/what-is-the-difference-between-inner-join-and-outer-join?rq=1)
+- [https://zeroturnaround.com/rebellabs/how-to-use-jpa-correctly-to-avoid-complaints-of-a-slow-application/](https://zeroturnaround.com/rebellabs/how-to-use-jpa-correctly-to-avoid-complaints-of-a-slow-application/)
