@@ -25,25 +25,20 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "themetranslation")
-public class Themetranslation implements Serializable {
-
-    @Id
-    private String themeId;
+@PrimaryKeyJoinColumn(name = "themeId")
+public class Themetranslation extends Theme implements Serializable {
 
     private String themeName;
+
     @Column(name = "langId")
     private String langId;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(insertable = false, updatable = false)
-    private Theme theme;
 
     public Themetranslation() {
     }
 
     public Themetranslation(String langId, String themeId, String themeName) {
+        super(themeId);
         this.langId = langId;
-        this.themeId = themeId;
         this.themeName = themeName;
     }
 
@@ -62,20 +57,6 @@ public class Themetranslation implements Serializable {
     }
 
     /**
-     * @return the themeId
-     */
-    public String getThemeId() {
-        return themeId;
-    }
-
-    /**
-     * @param themeId the themeId to set
-     */
-    public void setThemeId(String themeId) {
-        this.themeId = themeId;
-    }
-
-    /**
      * @return the themeName
      */
     public String getThemeName() {
@@ -87,20 +68,6 @@ public class Themetranslation implements Serializable {
      */
     public void setThemeName(String themeName) {
         this.themeName = themeName;
-    }
-
-    /**
-     * @return the theme
-     */
-    public Theme getTheme() {
-        return theme;
-    }
-
-    /**
-     * @param theme the theme to set
-     */
-    public void setTheme(Theme theme) {
-        this.theme = theme;
     }
 
 }

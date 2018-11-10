@@ -56,6 +56,24 @@ public class JpaDaoHelper {
         }
     }
 
+    public <T> T merge(T object) {
+
+        EntityManager em = null;
+        EntityTransaction tx = null;
+        try {
+            em = emf.createEntityManager();
+            tx = em.getTransaction();
+            tx.begin();
+            em.merge(object);
+            tx.commit();
+            return object;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
     public <T> T read(Class<T> clazz, Serializable id) {
 
         T retObject = null;

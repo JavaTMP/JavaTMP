@@ -1,17 +1,15 @@
 package com.javatmp.domain;
 
 import java.io.Serializable;
-import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.SecondaryTable;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "theme")
+@Inheritance(strategy = InheritanceType.JOINED) //Highly normalized
 public class Theme implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -19,19 +17,17 @@ public class Theme implements Serializable {
     @Id
     private String themeId;
 
-    private String themeName;
-
+//    private String themeName;
     public Theme() {
     }
 
-    public Theme(String themeId, String themeName) {
+    public Theme(String themeId) {
         this.themeId = themeId;
-        this.themeName = themeName;
     }
 
     public Theme(Theme theme) {
         this.themeId = theme.themeId;
-        this.themeName = theme.themeName;
+//        this.themeName = theme.themeName;
     }
 
     @Override
@@ -67,19 +63,4 @@ public class Theme implements Serializable {
     public void setThemeId(String themeId) {
         this.themeId = themeId;
     }
-
-    /**
-     * @return the themeName
-     */
-    public String getThemeName() {
-        return themeName;
-    }
-
-    /**
-     * @param themeName the themeName to set
-     */
-    public void setThemeName(String themeName) {
-        this.themeName = themeName;
-    }
-
 }
