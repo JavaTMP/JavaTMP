@@ -27,15 +27,16 @@ import javax.persistence.Table;
 @Table(name = "themetranslation")
 public class Themetranslation implements Serializable {
 
-    @Id
-    private String themeId;
+    @EmbeddedId
+    protected ThemetranslationPK themetranslationPK;
 
-    @Column(name = "langId")
-    private String langId;
-
+    @Basic(optional = false)
+    @Column(name = "themeName")
     private String themeName;
 
-    private Integer isDefaultLang;
+    @ManyToOne(optional = false)
+    @JoinColumn(insertable = false, updatable = false, name = "langId", referencedColumnName = "languageId")
+    private Language language;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(insertable = false, updatable = false, name = "themeId", referencedColumnName = "themeId")
@@ -44,24 +45,22 @@ public class Themetranslation implements Serializable {
     public Themetranslation() {
     }
 
-    public Themetranslation(String langId, String themeId, String themeName) {
-        this.themeId = themeId;
-        this.langId = langId;
+    public Themetranslation(String themeId, String langId) {
+        this.themetranslationPK = new ThemetranslationPK(themeId, langId);
+    }
+
+    public Themetranslation(ThemetranslationPK pk) {
+        this.themetranslationPK = pk;
+    }
+
+    public Themetranslation(ThemetranslationPK pk, String themeName) {
+        this(pk);
         this.themeName = themeName;
     }
 
-    /**
-     * @return the langId
-     */
-    public String getLangId() {
-        return langId;
-    }
-
-    /**
-     * @param langId the langId to set
-     */
-    public void setLangId(String langId) {
-        this.langId = langId;
+    public Themetranslation(String themeId, String langId, String themeName) {
+        this(themeId, langId);
+        this.themeName = themeName;
     }
 
     /**
@@ -79,20 +78,6 @@ public class Themetranslation implements Serializable {
     }
 
     /**
-     * @return the themeId
-     */
-    public String getThemeId() {
-        return themeId;
-    }
-
-    /**
-     * @param themeId the themeId to set
-     */
-    public void setThemeId(String themeId) {
-        this.themeId = themeId;
-    }
-
-    /**
      * @return the theme
      */
     public Theme getTheme() {
@@ -106,18 +91,20 @@ public class Themetranslation implements Serializable {
         this.theme = theme;
     }
 
-    /**
-     * @return the isDefaultLang
-     */
-    public Integer getIsDefaultLang() {
-        return isDefaultLang;
+    public ThemetranslationPK getThemetranslationPK() {
+        return themetranslationPK;
     }
 
-    /**
-     * @param isDefaultLang the isDefaultLang to set
-     */
-    public void setIsDefaultLang(Integer isDefaultLang) {
-        this.isDefaultLang = isDefaultLang;
+    public void setThemetranslationPK(com.javatmp.domain.ThemetranslationPK themetranslationPK) {
+        this.themetranslationPK = themetranslationPK;
+    }
+
+    public Language getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(Language language) {
+        this.language = language;
     }
 
 }

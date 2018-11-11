@@ -7,13 +7,16 @@ package com.javatmp.theme;
 
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.db.JpaDaoHelper;
+import com.javatmp.domain.Language;
 import com.javatmp.domain.Theme;
 import com.javatmp.domain.Themetranslation;
 import com.javatmp.service.ThemeService;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
+import java.util.Random;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
 /**
@@ -48,31 +51,61 @@ public class TestingPopulateThemes {
 //                //                + "where l.languageId = :la", Object[].class);
 //                + "where l.languageId = :la", Object[].class);
 //        query.setParameter("la", "ar");
-        TypedQuery<Themetranslation> query = em.createQuery(
-                "SELECT new com.javatmp.domain.Themetranslation(tr.langId, coalesce(tr.themeId, de.themeId), coalesce(tr.themeName, de.themeName)) "
-                + "FROM Theme t "
-                + "left outer join Themetranslation tr on t.themeId = tr.themeId and tr.langId = :la "
-                + "left outer join Themetranslation de on t.themeId = de.themeId and de.isDefaultLang = 1 "
+/*
+select lanTr.`languageName`, t.`themeId`, coalesce(th1.themeName, th2.themeName) as col_2_0_
+from `language` lan
+join languagetranslation lanTr on lanTr.`languageId` = lan.`languageId` and lanTr.`langId` = lan.`languageId`
+left outer join theme t on 1 = 1
+left outer join themetranslation th1 on (t.themeId = th1.themeId and th1.`langId` = lan.`languageId`)
+left outer join themetranslation th2 on (t.themeId = th2.themeId)
+join `language` reflan on reflan.`languageId` = th2.`langId` and reflan.`isDefaultLang` = 1;
+         */
+        TypedQuery<Object[]> query = em.createQuery(
+                "select lanTr.languageName, t.themeId, coalesce(th1.themeName, th2.themeName) "
+                + "from Language lan "
+                + "join lan.languagetranslationList lanTr "
+                + "on lanTr.languagetranslationPK.languageId = lan.languageId "
+                + "and lanTr.languagetranslationPK.langId = 'ar' "
+                + "left outer join Theme t on (1=1) "
+                + "left outer join Themetranslation th1 "
+                + "on (t.themeId = th1.themetranslationPK.themeId and th1.themetranslationPK.langId = lan.languageId)"
+                + "left outer join Themetranslation th2 "
+                + "on (t.themeId = th2.themetranslationPK.themeId)"
+                + "join Language reflan "
+                + "on reflan.languageId = th2.themetranslationPK.langId and reflan.isDefaultLang = 1 "
+                + "where th1.themetranslationPK.langId = lan.languageId"
+                //                + "where lanTr.language1 = :la"
                 //                + "left outer join Theme th on th.themeId = t.themeId "
                 //                + "where l.languageId = :la", Themetranslation.class);
-                + "", Themetranslation.class);
-        query.setParameter("la", "ar");
-        List<Themetranslation> resultList = query.getResultList();
+                + "", Object[].class
+        );
+//        query.setParameter("la", new Language("en"));
+        List<Object[]> resultList = query.getResultList();
         int i;
         for (i = 0; i < resultList.size(); i++) {
-            System.out.println((i + 1) + MvcHelper.toString(resultList.get(i)));
+            Object[] row = resultList.get(i);
+            System.out.println((i + 1) + " " + (row[0]) + " " + (row[1]) + " " + (row[2]));
         }
-        i += 1010;
-        em.close();
+        i += new Random().nextInt(10000) + 1;
 
-        List<Theme> themes = themeService.getThemes();
-        Theme t = new Theme("Testing " + i);
-        jpaDaoHelper.create(t);
+//        List<Theme> themes = themeService.getThemes();
+        EntityTransaction tx = null;
+        try {
+            tx = em.getTransaction();
+            tx.begin();
 
-        Themetranslation englishTranslation = new Themetranslation("en", t.getThemeId(), "en name " + i);
-        Themetranslation arabicTranslation = new Themetranslation("ar", t.getThemeId(), "ar name " + i);
-        jpaDaoHelper.create(englishTranslation);
-        jpaDaoHelper.create(arabicTranslation);
+            Theme t = new Theme("Testing " + i);
+            em.persist(t);
+            Themetranslation englishTranslation = new Themetranslation(t.getThemeId(), "en", "en name " + i);
+            Themetranslation arabicTranslation = new Themetranslation(t.getThemeId(), "ar", "ar name " + i);
+            em.persist(englishTranslation);
+            em.persist(arabicTranslation);
+            tx.commit();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
 
 //        List<Themetranslation> tr = jpaDaoHelper.findAll(Themetranslation.class);
 //        tr.forEach((tt) -> {

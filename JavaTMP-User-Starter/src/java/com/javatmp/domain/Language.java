@@ -1,26 +1,41 @@
 package com.javatmp.domain;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "language")
 public class Language implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "language")
+    private List<Themetranslation> themetranslationList;
+
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Basic(optional = false)
+    @Column(name = "languageId")
     private String languageId;
-    private String languageName;
+
+    @Column(name = "isDefaultLang")
+    private Short isDefaultLang;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "language", fetch = FetchType.LAZY)
+    private List<Languagetranslation> languagetranslationList;
 
     public Language() {
     }
 
-    public Language(String languageId, String languageName) {
+    public Language(String languageId) {
         this.languageId = languageId;
-        this.languageName = languageName;
     }
 
     @Override
@@ -57,18 +72,33 @@ public class Language implements Serializable {
         this.languageId = languageId;
     }
 
-    /**
-     * @return the languageName
-     */
-    public String getLanguageName() {
-        return languageName;
+    public Short getIsDefaultLang() {
+        return isDefaultLang;
     }
 
-    /**
-     * @param languageName the languageName to set
-     */
-    public void setLanguageName(String languageName) {
-        this.languageName = languageName;
+    public void setIsDefaultLang(Short isDefaultLang) {
+        this.isDefaultLang = isDefaultLang;
+    }
+
+    public List<Languagetranslation> getLanguagetranslationList() {
+        return languagetranslationList;
+    }
+
+    public void setLanguagetranslationList(List<Languagetranslation> languagetranslationList) {
+        this.languagetranslationList = languagetranslationList;
+    }
+
+    @Override
+    public String toString() {
+        return "com.javatmp.domain.Language[ languageId=" + languageId + " ]";
+    }
+
+    public List<Themetranslation> getThemetranslationList() {
+        return themetranslationList;
+    }
+
+    public void setThemetranslationList(List<Themetranslation> themetranslationList) {
+        this.themetranslationList = themetranslationList;
     }
 
 }

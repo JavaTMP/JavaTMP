@@ -1,6 +1,20 @@
+CREATE TABLE language (
+    languageId varchar(4) NOT NULL,
+    isDefaultLang TINYINT,
+    CONSTRAINT language_languageId_pk PRIMARY KEY (languageId)
+) ENGINE=InnoDB;
+
+CREATE TABLE languageTranslation (
+    languageId varchar(4) NOT NULL,
+    langId varchar(4) NOT NULL,
+    languageName varchar(255) NOT NULL,
+    CONSTRAINT languageTr_pk PRIMARY KEY (languageId, langId),
+    CONSTRAINT languageTr_id_fk FOREIGN KEY (languageId) REFERENCES language (languageId),
+    CONSTRAINT languageTr_langId_fk FOREIGN KEY (langId) REFERENCES language (languageId)
+) ENGINE=InnoDB;
+
 CREATE TABLE theme (
     themeId varchar(32) NOT NULL,
-    themeName varchar(255) NOT NULL,
     CONSTRAINT theme_themeId_pk PRIMARY KEY (themeId)
 ) ENGINE=InnoDB;
 
@@ -16,22 +30,6 @@ CREATE TABLE themeTranslation (
 CREATE TABLE timezone (
     timezoneId varchar(64) NOT NULL,
     CONSTRAINT timezone_timezoneId_pk PRIMARY KEY (timezoneId)
-) ENGINE=InnoDB;
-
-CREATE TABLE language (
-    languageId varchar(4) NOT NULL,
-    languageName varchar(255) NOT NULL,
-    isDefaultLang TINYINT,
-    CONSTRAINT language_languageId_pk PRIMARY KEY (languageId)
-) ENGINE=InnoDB;
-
-CREATE TABLE languageTranslation (
-    id varchar(4) NOT NULL,
-    langId varchar(4) NOT NULL,
-    languageName varchar(255) NOT NULL,
-    CONSTRAINT langTr_pk PRIMARY KEY (id, langId),
-    CONSTRAINT langTr_id_fk FOREIGN KEY (id) REFERENCES language (languageId),
-    CONSTRAINT langTr_langId_fk FOREIGN KEY (langId) REFERENCES language (languageId)
 ) ENGINE=InnoDB;
 
 CREATE TABLE country (
