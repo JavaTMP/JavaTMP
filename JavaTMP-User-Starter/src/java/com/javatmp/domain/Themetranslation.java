@@ -25,19 +25,27 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "themetranslation")
-@PrimaryKeyJoinColumn(name = "themeId")
-public class Themetranslation extends Theme implements Serializable {
+public class Themetranslation implements Serializable {
 
-    private String themeName;
+    @Id
+    private String themeId;
 
     @Column(name = "langId")
     private String langId;
+
+    private String themeName;
+
+    private Integer isDefaultLang;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(insertable = false, updatable = false, name = "themeId", referencedColumnName = "themeId")
+    private Theme theme;
 
     public Themetranslation() {
     }
 
     public Themetranslation(String langId, String themeId, String themeName) {
-        super(themeId);
+        this.themeId = themeId;
         this.langId = langId;
         this.themeName = themeName;
     }
@@ -68,6 +76,48 @@ public class Themetranslation extends Theme implements Serializable {
      */
     public void setThemeName(String themeName) {
         this.themeName = themeName;
+    }
+
+    /**
+     * @return the themeId
+     */
+    public String getThemeId() {
+        return themeId;
+    }
+
+    /**
+     * @param themeId the themeId to set
+     */
+    public void setThemeId(String themeId) {
+        this.themeId = themeId;
+    }
+
+    /**
+     * @return the theme
+     */
+    public Theme getTheme() {
+        return theme;
+    }
+
+    /**
+     * @param theme the theme to set
+     */
+    public void setTheme(Theme theme) {
+        this.theme = theme;
+    }
+
+    /**
+     * @return the isDefaultLang
+     */
+    public Integer getIsDefaultLang() {
+        return isDefaultLang;
+    }
+
+    /**
+     * @param isDefaultLang the isDefaultLang to set
+     */
+    public void setIsDefaultLang(Integer isDefaultLang) {
+        this.isDefaultLang = isDefaultLang;
     }
 
 }

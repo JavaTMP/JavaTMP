@@ -21,6 +21,7 @@ CREATE TABLE timezone (
 CREATE TABLE language (
     languageId varchar(4) NOT NULL,
     languageName varchar(255) NOT NULL,
+    isDefaultLang TINYINT,
     CONSTRAINT language_languageId_pk PRIMARY KEY (languageId)
 ) ENGINE=InnoDB;
 

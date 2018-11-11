@@ -29,6 +29,7 @@ INSERT INTO `theme` (`themeId`) VALUES ('yeti');
 INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'default','العادي');
 INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'ace','أسي');
 INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'schooly','سكولي');
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('en', 'ace','Ace Theme');
 INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'greenish','خضاري');
 INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'purplish','الأرجواني');
 INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'cerulean','سماوي');
