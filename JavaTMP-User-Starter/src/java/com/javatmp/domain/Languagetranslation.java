@@ -53,6 +53,11 @@ public class Languagetranslation implements Serializable {
         this.languagetranslationPK = new LanguagetranslationPK(languageId, langId);
     }
 
+    public Languagetranslation(String languageId, String langId, String languageName) {
+        this.languagetranslationPK = new LanguagetranslationPK(languageId, langId);
+        this.languageName = languageName;
+    }
+
     public LanguagetranslationPK getLanguagetranslationPK() {
         return languagetranslationPK;
     }

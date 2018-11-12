@@ -2,7 +2,14 @@ package com.javatmp.service;
 
 import com.javatmp.db.JpaDaoHelper;
 import com.javatmp.domain.Language;
+import com.javatmp.domain.Languagetranslation;
+import com.javatmp.domain.User;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 public class LanguageService {
 
@@ -24,5 +31,27 @@ public class LanguageService {
         }
         return languages;
     }
+//
+//    public List<Languagetranslation> getLanguages(User localeUser) {
+//
+//        EntityManager em = null;
+//        List<> retList = null;
+//        try {
+//            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+//            CriteriaBuilder cb = em.getCriteriaBuilder();
+//            CriteriaQuery<T> cq = cb.createQuery(classObject);
+//            Root<T> root = cq.from(classObject);
+//            cq.select(root);
+//            TypedQuery<T> query = em.createQuery(cq);
+//            retList = query.getResultList();
+//            return retList;
+//        } finally {
+//            if (em != null) {
+//                em.close();
+//            }
+//        }
+//
+//        return languages;
+//    }
 
 }
