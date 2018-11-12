@@ -2,8 +2,11 @@ package com.javatmp.web.controller.user;
 
 import com.javatmp.domain.Country;
 import com.javatmp.domain.Language;
+import com.javatmp.domain.Languagetranslation;
 import com.javatmp.domain.Theme;
+import com.javatmp.domain.Themetranslation;
 import com.javatmp.domain.Timezone;
+import com.javatmp.domain.User;
 import com.javatmp.service.ServicesFactory;
 import com.javatmp.util.Constants;
 import java.io.IOException;
@@ -16,6 +19,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/user/GetCreateNewUserPopupController")
 public class GetCreateNewUserPopupController extends HttpServlet {
@@ -27,11 +31,13 @@ public class GetCreateNewUserPopupController extends HttpServlet {
         String requestPage = "/WEB-INF/pages/user/addNewUserPopup.jsp";
 
         ServletContext context = request.getServletContext();
+        HttpSession session = request.getSession();
+        User loggedInUser = (User) session.getAttribute("user");
         ServicesFactory sf = (ServicesFactory) context.getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         List<Timezone> timezones = sf.getTimezoneService().getTimezones();
         List<Country> countries = sf.getCountryService().getCountries();
-        List<Language> languages = sf.getLanguageService().getLanguages();
-        List<Theme> themes = sf.getThemeService().getThemes();
+        List<Languagetranslation> languages = sf.getLanguageService().getLanguages(loggedInUser);
+        List<Themetranslation> themes = sf.getThemeService().getThemes(loggedInUser);
         request.setAttribute("themes", themes);
         request.setAttribute("languages", languages);
         request.setAttribute("countries", countries);

@@ -2,7 +2,9 @@ package com.javatmp.web.controller.user;
 
 import com.javatmp.domain.Country;
 import com.javatmp.domain.Language;
+import com.javatmp.domain.Languagetranslation;
 import com.javatmp.domain.Theme;
+import com.javatmp.domain.Themetranslation;
 import com.javatmp.domain.Timezone;
 import com.javatmp.domain.User;
 import com.javatmp.mvc.domain.ResponseMessage;
@@ -34,12 +36,16 @@ public class RegisterController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ServletContext context = request.getServletContext();
+        HttpSession session = request.getSession();
+        ResourceBundle labels = (ResourceBundle) session.getAttribute(Constants.LANGUAGE_ATTR_KEY);
+
+        User loggedInUser = new User(0L, labels.getString("global.language"));
         ServicesFactory sf = (ServicesFactory) context.getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
 
         List<Timezone> timezones = sf.getTimezoneService().getTimezones();
         List<Country> countries = sf.getCountryService().getCountries();
-        List<Language> languages = sf.getLanguageService().getLanguages();
-        List<Theme> themes = sf.getThemeService().getThemes();
+        List<Languagetranslation> languages = sf.getLanguageService().getLanguages(loggedInUser);
+        List<Themetranslation> themes = sf.getThemeService().getThemes(loggedInUser);
 
         request.setAttribute("themes", themes);
         request.setAttribute("languages", languages);

@@ -359,7 +359,7 @@
                 return repo.text;
             }
 
-            var imagePath = javatmp.settings.contextPath + "/assets/img/themes/" + repo.text + ".png";
+            var imagePath = javatmp.settings.contextPath + "/assets/img/themes/" + repo.id + ".png";
             var template =
                     '    <div class="media d-flex align-items-center">' +
                     '        <img style="height: 1.5rem;" class="mr-1" src="{{imagePath}}" alt="{{themeName}}"/>' +
@@ -378,7 +378,7 @@
                 return repo.text;
             }
 
-            var imagePath = javatmp.settings.contextPath + "/assets/img/themes/" + repo.text + ".png";
+            var imagePath = javatmp.settings.contextPath + "/assets/img/themes/" + repo.id + ".png";
             var template =
                     '    <div class="media d-flex align-items-center">' +
                     '        <img style="height: 3rem;" class="mr-1" src="{{imagePath}}" alt="{{themeName}}"/>' +

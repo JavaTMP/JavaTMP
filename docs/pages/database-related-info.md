@@ -35,3 +35,6 @@ The following links provide you information to call Oracle stored procedures and
 ## Tables Join
 - [https://stackoverflow.com/questions/38549/what-is-the-difference-between-inner-join-and-outer-join?rq=1](https://stackoverflow.com/questions/38549/what-is-the-difference-between-inner-join-and-outer-join?rq=1)
 - [https://zeroturnaround.com/rebellabs/how-to-use-jpa-correctly-to-avoid-complaints-of-a-slow-application/](https://zeroturnaround.com/rebellabs/how-to-use-jpa-correctly-to-avoid-complaints-of-a-slow-application/)
+
+## JPA Links
+- [https://vladmihalcea.com/sql-query-parent-rows-all-children-match-filtering-criteria/](https://vladmihalcea.com/sql-query-parent-rows-all-children-match-filtering-criteria/)

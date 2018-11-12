@@ -2,7 +2,9 @@ package com.javatmp.web.controller.user;
 
 import com.javatmp.domain.Country;
 import com.javatmp.domain.Language;
+import com.javatmp.domain.Languagetranslation;
 import com.javatmp.domain.Theme;
+import com.javatmp.domain.Themetranslation;
 import com.javatmp.domain.Timezone;
 import com.javatmp.domain.User;
 import com.javatmp.mvc.MvcHelper;
@@ -20,6 +22,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @WebServlet("/user/GetUpdateUserPopupController")
 public class GetUpdateUserPopupController extends HttpServlet {
@@ -41,8 +44,10 @@ public class GetUpdateUserPopupController extends HttpServlet {
 
             List<Timezone> timezones = sf.getTimezoneService().getTimezones();
             List<Country> countries = sf.getCountryService().getCountries();
-            List<Language> languages = sf.getLanguageService().getLanguages();
-            List<Theme> themes = sf.getThemeService().getThemes();
+            HttpSession session = request.getSession();
+            User loggedInUser = (User) session.getAttribute("user");
+            List<Languagetranslation> languages = sf.getLanguageService().getLanguages(loggedInUser);
+            List<Themetranslation> themes = sf.getThemeService().getThemes(loggedInUser);
 
             request.setAttribute("themes", themes);
             request.setAttribute("languages", languages);

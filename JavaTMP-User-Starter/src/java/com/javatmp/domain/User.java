@@ -72,6 +72,11 @@ public class User implements Serializable {
         this.id = id;
     }
 
+    public User(Long id, String language) {
+        this.id = id;
+        this.lang = language;
+    }
+
     public User(Long id, Short status) {
         this.id = id;
         this.status = status;

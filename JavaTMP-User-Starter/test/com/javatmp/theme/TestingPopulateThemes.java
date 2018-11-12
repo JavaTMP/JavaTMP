@@ -60,12 +60,31 @@ left outer join themetranslation th1 on (t.themeId = th1.themeId and th1.`langId
 left outer join themetranslation th2 on (t.themeId = th2.themeId)
 join `language` reflan on reflan.`languageId` = th2.`langId` and reflan.`isDefaultLang` = 1;
          */
-        TypedQuery<Object[]> query = em.createQuery(
-                "select lanTr.languageName, t.themeId, coalesce(th1.themeName, th2.themeName) "
+//TypedQuery<Themetranslation> query = em.createQuery(
+//                "select lanTr.languageName, t.themeId, coalesce(th1.themeName, th2.themeName) "
+//                + "from Language lan "
+//                + "join lan.languagetranslationList lanTr "
+//                + "on lanTr.languagetranslationPK.languageId = lan.languageId "
+//                + "and lanTr.languagetranslationPK.langId = 'ar' "
+//                + "left outer join Theme t on (1=1) "
+//                + "left outer join Themetranslation th1 "
+//                + "on (t.themeId = th1.themetranslationPK.themeId and th1.themetranslationPK.langId = lan.languageId)"
+//                + "left outer join Themetranslation th2 "
+//                + "on (t.themeId = th2.themetranslationPK.themeId)"
+//                + "join Language reflan "
+//                + "on reflan.languageId = th2.themetranslationPK.langId and reflan.isDefaultLang = 1 "
+//                + "where th1.themetranslationPK.langId = lan.languageId"
+//                //                + "where lanTr.language1 = :la"
+//                //                + "left outer join Theme th on th.themeId = t.themeId "
+//                //                + "where l.languageId = :la", Themetranslation.class);
+//                + "", Themetranslation.class
+//        );
+        TypedQuery<Themetranslation> query = em.createQuery(
+                "select new com.javatmp.domain.Themetranslation(t.themeId, lan.languageId, coalesce(th1.themeName, th2.themeName)) "
                 + "from Language lan "
                 + "join lan.languagetranslationList lanTr "
                 + "on lanTr.languagetranslationPK.languageId = lan.languageId "
-                + "and lanTr.languagetranslationPK.langId = 'ar' "
+                //                + "and lanTr.languagetranslationPK.langId = 'ar' "
                 + "left outer join Theme t on (1=1) "
                 + "left outer join Themetranslation th1 "
                 + "on (t.themeId = th1.themetranslationPK.themeId and th1.themetranslationPK.langId = lan.languageId)"
@@ -77,14 +96,14 @@ join `language` reflan on reflan.`languageId` = th2.`langId` and reflan.`isDefau
                 //                + "where lanTr.language1 = :la"
                 //                + "left outer join Theme th on th.themeId = t.themeId "
                 //                + "where l.languageId = :la", Themetranslation.class);
-                + "", Object[].class
+                + "", Themetranslation.class
         );
 //        query.setParameter("la", new Language("en"));
-        List<Object[]> resultList = query.getResultList();
+        List<Themetranslation> resultList = query.getResultList();
         int i;
         for (i = 0; i < resultList.size(); i++) {
-            Object[] row = resultList.get(i);
-            System.out.println((i + 1) + " " + (row[0]) + " " + (row[1]) + " " + (row[2]));
+            Themetranslation row = resultList.get(i);
+            System.out.println((i + 1) + " " + MvcHelper.deepToString(row));
         }
         i += new Random().nextInt(10000) + 1;
 
