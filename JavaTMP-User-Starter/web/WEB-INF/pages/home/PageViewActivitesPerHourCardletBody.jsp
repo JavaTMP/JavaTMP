@@ -15,24 +15,7 @@
         var currentCardletId = '<c:out value="${param.cardletId}"/>';
         var cardletElement = $("#" + currentCardletId);
         cardletElement.on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
-            var formatTooltipLine = function (color, value) {
-                return "<span style='display:inline-block;width:10px;height:10px;border-radius:50%;background-color:" + color + ";margin-" + javatmp.settings.floatReverse + ":5px;'></span><span>" + value + "</span>";
-            };
 
-            var formaterFunction = null;
-            if (javatmp.settings.isRTL === true) {
-                formaterFunction = function (params) {
-                    var retStr = "";
-                    for (var i = 0; i < params.length; i++) {
-                        retStr += [
-                            '<span>' + params[i].axisValue + '</span>',
-                            "<br/>",
-                            formatTooltipLine(params[i].color, params[i].seriesName + ':' + params[i].data)
-                        ].join('');
-                    }
-                    return retStr;
-                };
-            }
             var pageViewActivitesPerHourChart = echarts.init(document.getElementById('pageViewActivitesPerHourChart'));
 
             var pageViewActivitesPerHourChartOption = {
@@ -61,7 +44,7 @@
                         fontSize: $("body").css("font-size"),
                         align: javatmp.settings.floatDefault
                     },
-                    formatter: formaterFunction
+                    formatter: javatmp.settings.isRTL === true ? javatmp.plugins.echartCustomTooltipFormatter : null
                 },
                 legend: {
                     show: false,

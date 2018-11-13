@@ -759,4 +759,16 @@
         return $(element).block(settings);
     };
 
+    window.javatmp.plugins.echartCustomTooltipFormatter = function (params) {
+        var retStr = "";
+        for (var i = 0; i < params.length; i++) {
+            retStr += [
+                '<span>' + params[i].axisValue + '</span>',
+                "<br/>",
+                "<span style='display:inline-block;width:10px;height:10px;border-radius:50%;background-color:" + params[i].color + ";margin-" + javatmp.settings.floatReverse + ":5px;'></span><span>" + params[i].seriesName + ':' + params[i].data + "</span>"
+            ].join('');
+        }
+        return retStr;
+    };
+
 }(jQuery, window, document));
