@@ -5,10 +5,10 @@
  */
 package com.javatmp.user;
 
-import com.javatmp.domain.User;
+import com.javatmp.module.user.User;
 import com.javatmp.db.JpaDaoHelper;
 import com.javatmp.mvc.MvcHelper;
-import com.javatmp.service.UserService;
+import com.javatmp.module.user.UserService;
 import java.sql.SQLIntegrityConstraintViolationException;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceException;

@@ -5,9 +5,9 @@
  */
 package com.javatmp.user;
 
-import com.javatmp.domain.User;
+import com.javatmp.module.user.User;
 import com.javatmp.db.JpaDaoHelper;
-import com.javatmp.service.UserService;
+import com.javatmp.module.user.UserService;
 import javax.persistence.PersistenceException;
 
 /**

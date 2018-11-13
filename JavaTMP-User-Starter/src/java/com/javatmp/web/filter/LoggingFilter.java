@@ -1,8 +1,8 @@
 package com.javatmp.web.filter;
 
-import com.javatmp.domain.Activity;
-import com.javatmp.domain.User;
-import com.javatmp.service.ServicesFactory;
+import com.javatmp.module.activity.Activity;
+import com.javatmp.module.user.User;
+import com.javatmp.util.ServicesFactory;
 import com.javatmp.util.Constants;
 import java.io.IOException;
 import java.util.Collection;

@@ -5,7 +5,7 @@
  */
 package com.javatmp.jpa;
 
-import com.javatmp.domain.User;
+import com.javatmp.module.user.User;
 import com.javatmp.db.JpaDaoHelper;
 import java.sql.SQLException;
 import java.text.ParseException;

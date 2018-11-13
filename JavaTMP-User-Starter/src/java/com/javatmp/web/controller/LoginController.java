@@ -1,9 +1,9 @@
 package com.javatmp.web.controller;
 
-import com.javatmp.domain.User;
+import com.javatmp.module.user.User;
 import com.javatmp.mvc.domain.ResponseMessage;
 import com.javatmp.mvc.MvcHelper;
-import com.javatmp.service.ServicesFactory;
+import com.javatmp.util.ServicesFactory;
 import com.javatmp.util.Constants;
 import com.javatmp.util.MD5Util;
 import java.io.IOException;

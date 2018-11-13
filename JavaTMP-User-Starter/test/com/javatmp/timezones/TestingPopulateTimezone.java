@@ -6,9 +6,9 @@
 package com.javatmp.timezones;
 
 import com.javatmp.db.JpaDaoHelper;
-import com.javatmp.domain.Timezone;
+import com.javatmp.module.timezone.Timezone;
 import com.javatmp.mvc.MvcHelper;
-import com.javatmp.service.TimezoneService;
+import com.javatmp.module.timezone.TimezoneService;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;

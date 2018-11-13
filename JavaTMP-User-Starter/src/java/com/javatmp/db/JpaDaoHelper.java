@@ -1,6 +1,6 @@
 package com.javatmp.db;
 
-import com.javatmp.domain.User;
+import com.javatmp.module.user.User;
 import com.javatmp.mvc.domain.table.DataTableColumnSpecs;
 import com.javatmp.mvc.domain.table.DataTableRequest;
 import com.javatmp.mvc.domain.table.DataTableResults;
