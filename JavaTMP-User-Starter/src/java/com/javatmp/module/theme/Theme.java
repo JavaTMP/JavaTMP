@@ -83,6 +83,6 @@ public class Theme implements Serializable {
 
     @Override
     public String toString() {
-        return "com.javatmp.domain.Theme[ themeId=" + themeId + " ]";
+        return "[ themeId=" + themeId + " ]";
     }
 }

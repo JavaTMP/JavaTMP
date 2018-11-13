@@ -49,7 +49,7 @@ public class ThemeService {
         try {
             em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
             TypedQuery<Themetranslation> query = em.createQuery(
-                    "select new com.javatmp.domain.Themetranslation(t.themeId, lan.languageId, coalesce(th1.themeName, th2.themeName)) "
+                    "select new com.javatmp.module.theme.Themetranslation(t.themeId, lan.languageId, coalesce(th1.themeName, th2.themeName)) "
                     + "from Language lan "
                     + "join lan.languagetranslationList lanTr "
                     + "on lanTr.languagetranslationPK.languageId = lan.languageId "

@@ -91,7 +91,7 @@ public class Language implements Serializable {
 
     @Override
     public String toString() {
-        return "com.javatmp.domain.Language[ languageId=" + languageId + " ]";
+        return "[ languageId=" + languageId + " ]";
     }
 
     public List<Themetranslation> getThemetranslationList() {

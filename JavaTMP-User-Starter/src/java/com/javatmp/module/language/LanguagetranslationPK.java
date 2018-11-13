@@ -69,7 +69,7 @@ public class LanguagetranslationPK implements Serializable {
 
     @Override
     public String toString() {
-        return "com.javatmp.domain.LanguagetranslationPK[ languageId=" + languageId + ", langId=" + langId + " ]";
+        return "[ languageId=" + languageId + ", langId=" + langId + " ]";
     }
 
 }

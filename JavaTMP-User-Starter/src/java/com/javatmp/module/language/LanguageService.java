@@ -49,7 +49,7 @@ public class LanguageService {
             em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
             TypedQuery<Languagetranslation> query = em.createQuery(
                     "select "
-                    + "new com.javatmp.domain.Languagetranslation("
+                    + "new com.javatmp.module.language.Languagetranslation("
                     + "l.languageId, lt1.languagetranslationPK.langId, coalesce(lt1.languageName, lt2.languageName)"
                     + ") from Language l "
                     + "left outer join Languagetranslation lt1 on lt1.languagetranslationPK.languageId = l.languageId "
@@ -74,7 +74,7 @@ public class LanguageService {
             em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
             TypedQuery<Languagetranslation> query = em.createQuery(
                     "select "
-                    + "new com.javatmp.domain.Languagetranslation("
+                    + "new com.javatmp.module.language.Languagetranslation("
                     + "l.languageId, lt1.languagetranslationPK.langId, coalesce(lt1.languageName, lt2.languageName)"
                     + ") from Language l "
                     + "left outer join Languagetranslation lt1 on "
