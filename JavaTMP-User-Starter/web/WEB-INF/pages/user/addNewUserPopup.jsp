@@ -75,7 +75,7 @@
                                             <c:when test="${fn:length(requestScope.languages) > 0}">
                                                 <option value="">${labels['page.text.kindlySelect']}</option>
                                                 <c:forEach items="${requestScope.languages}" var="language">
-                                                    <option ${requestScope.user.lang == language.languageId ? 'selected="selected"' : ''} value="${language.languageId}">${language.languageName}</option>
+                                                    <option ${requestScope.user.lang == language.languagetranslationPK.languageId ? 'selected="selected"' : ''} value="${language.languagetranslationPK.languageId}">${language.languageName}</option>
                                                 </c:forEach>
                                             </c:when>
                                             <c:otherwise>
@@ -93,7 +93,7 @@
                                             <c:when test="${fn:length(requestScope.themes) > 0}">
                                                 <option value="">${labels['page.text.kindlySelect']}</option>
                                                 <c:forEach items="${requestScope.themes}" var="theme">
-                                                    <option ${requestScope.user.theme == theme.themeId ? 'selected="selected"' : ''} value="${theme.themeId}">${theme.themeName}</option>
+                                                    <option ${requestScope.user.theme == theme.themetranslationPK.themeId ? 'selected="selected"' : ''} value="${theme.themetranslationPK.themeId}">${theme.themeName}</option>
                                                 </c:forEach>
                                             </c:when>
                                             <c:otherwise>

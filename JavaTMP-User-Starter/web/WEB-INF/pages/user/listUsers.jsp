@@ -96,13 +96,13 @@
                     <select id="userlist-language-filter" name="lang" class="form-control">
                         <c:choose>
                             <c:when test="${fn:length(requestScope.languages) > 0}">
-                                <option value="">All Languages</option>
+                                <option value="">${labels['page.text.kindlySelect']}</option>
                                 <c:forEach items="${requestScope.languages}" var="language">
-                                    <option value="${language.languageId}">${language.languageName}</option>
+                                    <option ${requestScope.user.lang == language.languagetranslationPK.languageId ? 'selected="selected"' : ''} value="${language.languagetranslationPK.languageId}">${language.languageName}</option>
                                 </c:forEach>
                             </c:when>
                             <c:otherwise>
-                                <option value="-1">${labels['page.text.noRecordFound']}</option>
+                                <option value="">${labels['page.text.noRecordFound']}</option>
                             </c:otherwise>
                         </c:choose>
                     </select>
@@ -111,13 +111,13 @@
                     <select id="userlist-theme-filter" name="theme" class="form-control">
                         <c:choose>
                             <c:when test="${fn:length(requestScope.themes) > 0}">
-                                <option value="">All Themes</option>
+                                <option value="">${labels['page.text.kindlySelect']}</option>
                                 <c:forEach items="${requestScope.themes}" var="theme">
-                                    <option value="${theme.themeId}">${theme.themeName}</option>
+                                    <option ${requestScope.user.theme == theme.themetranslationPK.themeId ? 'selected="selected"' : ''} value="${theme.themetranslationPK.themeId}">${theme.themeName}</option>
                                 </c:forEach>
                             </c:when>
                             <c:otherwise>
-                                <option value="-1">${labels['page.text.noRecordFound']}</option>
+                                <option value="">${labels['page.text.noRecordFound']}</option>
                             </c:otherwise>
                         </c:choose>
                     </select>
