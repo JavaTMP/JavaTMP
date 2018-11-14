@@ -175,7 +175,8 @@
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox">
-                                                <input name="tnc" type="checkbox" class="custom-control-input" id="customCheck1">
+                                                <input name="tnc" type="checkbox" class="custom-control-input" id="customCheck1"
+                                                       data-rule-required="true">
                                                 <label class="custom-control-label" for="customCheck1">
                                                     ${labels["page.register.agreeLabelText"]}
                                                     <a href="javascript:;">${labels["page.register.termsOfService"]}</a>
