@@ -34,7 +34,6 @@ CREATE TABLE timezone (
 
 CREATE TABLE country (
     countryId varchar(4) NOT NULL,
-    countryName varchar(255) NOT NULL,
     CONSTRAINT country_countryId_pk PRIMARY KEY (countryId)
 ) ENGINE=InnoDB;
 

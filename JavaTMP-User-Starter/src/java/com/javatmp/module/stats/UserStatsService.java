@@ -1,16 +1,23 @@
 package com.javatmp.module.stats;
 
 import com.javatmp.util.JpaDaoHelper;
+import com.javatmp.module.country.Country;
 import com.javatmp.module.country.Country_;
+import com.javatmp.module.country.Countrytranslation;
 import com.javatmp.module.user.User;
 import com.javatmp.module.user.User_;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.JoinType;
+import javax.persistence.criteria.ListJoin;
+import javax.persistence.criteria.MapJoin;
 import javax.persistence.criteria.Root;
 
 public class UserStatsService {
@@ -81,12 +88,44 @@ public class UserStatsService {
         EntityManager em = null;
         try {
             em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            Query query = em.createQuery("select ctr.countryName, count(ctr.countryName)\n"
+                    + "from User u\n"
+                    + "join Country c on u.countryId = c.countryId\n"
+                    + "join Countrytranslation ctr on c.countryId = ctr.countrytranslationPK.countryId\n"
+                    + "and ctr.countrytranslationPK.langId = 'en'\n"
+                    + "group by u.countryId");
+            results = query.getResultList();
+            return results;
+        } catch (PersistenceException e) {
+            Throwable t = e;
+            String lastMsg = e.getMessage();
+            while (t != null) {
+                System.out.println("type [" + t.getClass().getName() + "]");
+                System.out.println("e [" + t.getMessage() + "]");
+                lastMsg = t.getMessage();
+                t = t.getCause();
+
+            }
+            throw new PersistenceException(lastMsg, e);
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+
+        }
+    }
+
+    public List<Object[]> usersCountriesGroupingByCriteria() {
+        List<Object[]> results;
+        EntityManager em = null;
+        try {
+            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaQuery<Object[]> query = cb.createQuery(Object[].class);
             Root<User> root = query.from(User.class);
 //            Join<User, Country> join1 = root.join(User_.country, JoinType.LEFT);
-            query.multiselect(root.get(User_.country).get(Country_.countryName), cb.count(root.get(User_.country).get(Country_.countryName)));
-            query.groupBy(root.get(User_.country).get(Country_.countryName));
+            query.multiselect(root.get(User_.country).get(Country_.countryId), cb.count(root.get(User_.country).get(Country_.countryId)));
+            query.groupBy(root.get(User_.country).get(Country_.countryId));
             results = em.createQuery(query).getResultList();
 
             return results;

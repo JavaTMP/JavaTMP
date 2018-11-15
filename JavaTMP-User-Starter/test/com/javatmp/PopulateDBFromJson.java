@@ -63,29 +63,29 @@ public class PopulateDBFromJson {
             User logingUser = new User();
             Document profileDocument = null;
 //            logingUser.setId(1L);
-            logingUser.setUserName("user1");
-            logingUser.setPassword(MD5Util.convertToMD5(logingUser.getUserName()));
-            logingUser.setFirstName("firstName");
-            logingUser.setLastName("lastName");
-            logingUser.setStatus((short) 1);
-            logingUser.setCreationDate(new Date());
-            logingUser.setEmail("support@javatmp.com");
-            logingUser.setLang("en");
-            logingUser.setTheme("default");
-            logingUser.setTimezone(TimeZone.getTimeZone("UTC").getID());
-            logingUser.setBirthDate(new Date(-399571200000L));
-            logingUser.setCountryId("US");
-            logingUser.setAddress("<p>Not provided yet</p>");
-            logingUser.setLastAccessTime(null);
-            logingUser.setGender((short) 1);
-            profileDocument = prepareDocument("profilePicture", "image/png", "iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAABP0lEQVR4nO3XMavqMBiH8Sf1aqnp4CZEHEVE/AZ+/8nFSUTEqSooWDcDTXKHA2dtDu+Be4f3N/cPD0mXmN1ul/iPFf86oI8GSmmglAZKaaCUBkppoJQGSv3J/fDz+bDf79lsNqSUOBwOpJRYrVbUdf3rux8Hns9nYozEGLler0wmE4wxNE3DcrnkdDpRFAUxRqy1OOeydn2yrvj9ftN1HaPRCPg6laqqGI/HeO8BcM7xfD5p25bpdJq9+5XA2+2Gc46u60gpkVLCGEMIAWMMANZaiqLAWstgMMje9cm64hACx+MRgMvlQlmWeO8JIVBVFfB1WsYYXq8X3nvKssza9ck6wfV6zXa7ZTgcslgsmM1mPB4P2rb9/teapmE+n1PXNff7PXvXx+irTkgDpTRQSgOlNFBKA6U0UEoDpTRQ6i+ZRr8OBrK0SQAAAABJRU5ErkJggg==");
-
-//            profileDocument.setDocumentId(1L);
-            em.persist(profileDocument);
-//        logingUser.setId(null);
-            logingUser.setProfilePicDocumentId(profileDocument.getDocumentId());
-            logingUser.setProfilePicDocument(profileDocument);
-            em.persist(logingUser);
+//            logingUser.setUserName("user1");
+//            logingUser.setPassword(MD5Util.convertToMD5(logingUser.getUserName()));
+//            logingUser.setFirstName("firstName");
+//            logingUser.setLastName("lastName");
+//            logingUser.setStatus((short) 1);
+//            logingUser.setCreationDate(new Date());
+//            logingUser.setEmail("support@javatmp.com");
+//            logingUser.setLang("en");
+//            logingUser.setTheme("default");
+//            logingUser.setTimezone(TimeZone.getTimeZone("UTC").getID());
+//            logingUser.setBirthDate(new Date(-399571200000L));
+//            logingUser.setCountryId("US");
+//            logingUser.setAddress("<p>Not provided yet</p>");
+//            logingUser.setLastAccessTime(null);
+//            logingUser.setGender((short) 1);
+//            profileDocument = prepareDocument("profilePicture", "image/png", "iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAABP0lEQVR4nO3XMavqMBiH8Sf1aqnp4CZEHEVE/AZ+/8nFSUTEqSooWDcDTXKHA2dtDu+Be4f3N/cPD0mXmN1ul/iPFf86oI8GSmmglAZKaaCUBkppoJQGSv3J/fDz+bDf79lsNqSUOBwOpJRYrVbUdf3rux8Hns9nYozEGLler0wmE4wxNE3DcrnkdDpRFAUxRqy1OOeydn2yrvj9ftN1HaPRCPg6laqqGI/HeO8BcM7xfD5p25bpdJq9+5XA2+2Gc46u60gpkVLCGEMIAWMMANZaiqLAWstgMMje9cm64hACx+MRgMvlQlmWeO8JIVBVFfB1WsYYXq8X3nvKssza9ck6wfV6zXa7ZTgcslgsmM1mPB4P2rb9/teapmE+n1PXNff7PXvXx+irTkgDpTRQSgOlNFBKA6U0UEoDpTRQ6i+ZRr8OBrK0SQAAAABJRU5ErkJggg==");
+//
+////            profileDocument.setDocumentId(1L);
+//            em.persist(profileDocument);
+////        logingUser.setId(null);
+//            logingUser.setProfilePicDocumentId(profileDocument.getDocumentId());
+//            logingUser.setProfilePicDocument(profileDocument);
+//            em.persist(logingUser);
 
             for (int i = 0; i < data.size(); i++) {
                 User user = new User();
@@ -111,6 +111,7 @@ public class PopulateDBFromJson {
                 user.setEmail(record.get("email"));
                 user.setLang(record.get("lang"));
                 user.setTheme(record.get("theme"));
+                System.out.println("countryId [" + record.get("countryId") + "]");
                 user.setCountryId(record.get("countryId"));
                 user.setAddress(record.get("address"));
                 user.setTimezone(record.get("timezone"));

@@ -46,7 +46,7 @@ public class FetchingCountries {
         countries = countryService.getCountries(new User(0L, "en"));
 
         countries.forEach((country) -> {
-            System.out.println(country);
+            System.out.println(country.getCountryName());
         });
 
     }

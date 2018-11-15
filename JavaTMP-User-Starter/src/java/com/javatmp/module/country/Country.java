@@ -20,9 +20,7 @@ public class Country implements Serializable {
     @Basic(optional = false)
     @Column(name = "countryId")
     private String countryId;
-    @Basic(optional = false)
-    @Column(name = "countryName")
-    private String countryName;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "country")
     private List<Countrytranslation> countrytranslationList;
 
@@ -33,29 +31,12 @@ public class Country implements Serializable {
         this.countryId = countryId;
     }
 
-    public Country(String countryId, String countryName) {
-        this.countryId = countryId;
-        this.countryName = countryName;
-    }
-
-    public Country(Country country) {
-        this(country.countryId, country.countryName);
-    }
-
     public String getCountryId() {
         return countryId;
     }
 
     public void setCountryId(String countryId) {
         this.countryId = countryId;
-    }
-
-    public String getCountryName() {
-        return countryName;
-    }
-
-    public void setCountryName(String countryName) {
-        this.countryName = countryName;
     }
 
     @Override

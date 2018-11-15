@@ -218,7 +218,7 @@
                                                 <c:when test="${fn:length(requestScope.countries) > 0}">
                                                     <option value="">${labels['page.text.kindlySelect']}</option>
                                                     <c:forEach items="${requestScope.countries}" var="country">
-                                                        <option value="${country.countryId}">${country.countryName}</option>
+                                                        <option value="${country.countrytranslationPK.countryId}">${country.countryName}</option>
                                                     </c:forEach>
                                                 </c:when>
                                                 <c:otherwise>
@@ -236,7 +236,7 @@
                                                 <c:when test="${fn:length(requestScope.languages) > 0}">
                                                     <option value="">${labels['page.text.kindlySelect']}</option>
                                                     <c:forEach items="${requestScope.languages}" var="language">
-                                                        <option ${requestScope.user.lang == language.languagetranslationPK.languageId ? 'selected="selected"' : ''} value="${language.languagetranslationPK.languageId}">${language.languageName}</option>
+                                                        <option value="${language.languagetranslationPK.languageId}">${language.languageName}</option>
                                                     </c:forEach>
                                                 </c:when>
                                                 <c:otherwise>
@@ -254,7 +254,7 @@
                                                 <c:when test="${fn:length(requestScope.themes) > 0}">
                                                     <option value="">${labels['page.text.kindlySelect']}</option>
                                                     <c:forEach items="${requestScope.themes}" var="theme">
-                                                        <option ${requestScope.user.theme == theme.themetranslationPK.themeId ? 'selected="selected"' : ''} value="${theme.themetranslationPK.themeId}">${theme.themeName}</option>
+                                                        <option value="${theme.themetranslationPK.themeId}">${theme.themeName}</option>
                                                     </c:forEach>
                                                 </c:when>
                                                 <c:otherwise>
