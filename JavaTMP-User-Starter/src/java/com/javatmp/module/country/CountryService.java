@@ -1,6 +1,6 @@
 package com.javatmp.module.country;
 
-import com.javatmp.db.JpaDaoHelper;
+import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.module.country.Country;
 import java.util.List;
 

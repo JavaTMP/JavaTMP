@@ -1,6 +1,6 @@
 package com.javatmp.module.theme;
 
-import com.javatmp.db.JpaDaoHelper;
+import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.module.language.Languagetranslation;
 import com.javatmp.module.theme.Theme;
 import com.javatmp.module.theme.Themetranslation;

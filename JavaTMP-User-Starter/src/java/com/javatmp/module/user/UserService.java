@@ -1,6 +1,6 @@
 package com.javatmp.module.user;
 
-import com.javatmp.db.JpaDaoHelper;
+import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.module.country.Country;
 import com.javatmp.module.dms.Document;
 import com.javatmp.module.user.User_;

@@ -15,7 +15,7 @@ import com.javatmp.mvc.adapter.OrderDirTypeAdapter;
 import com.javatmp.mvc.domain.table.DataTableRequest;
 import com.javatmp.mvc.domain.table.DataTableResults;
 import com.javatmp.mvc.domain.table.OrderDir;
-import com.javatmp.db.JpaDaoHelper;
+import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.module.user.UserService;
 import java.sql.SQLException;
 import java.text.ParseException;

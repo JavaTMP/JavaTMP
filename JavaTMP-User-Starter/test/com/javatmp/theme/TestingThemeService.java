@@ -6,7 +6,7 @@
 package com.javatmp.theme;
 
 import com.javatmp.mvc.MvcHelper;
-import com.javatmp.db.JpaDaoHelper;
+import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.module.theme.Theme;
 import com.javatmp.module.theme.Themetranslation;
 import com.javatmp.module.user.User;

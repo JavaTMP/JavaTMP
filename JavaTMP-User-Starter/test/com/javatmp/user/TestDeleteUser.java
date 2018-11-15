@@ -6,7 +6,7 @@
 package com.javatmp.user;
 
 import com.javatmp.module.user.User;
-import com.javatmp.db.JpaDaoHelper;
+import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.module.user.UserService;
 import java.sql.SQLIntegrityConstraintViolationException;

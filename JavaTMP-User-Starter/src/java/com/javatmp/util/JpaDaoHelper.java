@@ -1,4 +1,4 @@
-package com.javatmp.db;
+package com.javatmp.util;
 
 import com.javatmp.module.user.User;
 import com.javatmp.mvc.domain.table.DataTableColumnSpecs;

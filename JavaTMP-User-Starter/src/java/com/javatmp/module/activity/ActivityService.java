@@ -1,6 +1,6 @@
 package com.javatmp.module.activity;
 
-import com.javatmp.db.JpaDaoHelper;
+import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.module.activity.Activity;
 import java.util.List;
 import java.util.logging.Logger;

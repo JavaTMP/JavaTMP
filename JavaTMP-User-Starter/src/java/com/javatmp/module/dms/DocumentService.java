@@ -1,6 +1,6 @@
 package com.javatmp.module.dms;
 
-import com.javatmp.db.JpaDaoHelper;
+import com.javatmp.util.JpaDaoHelper;
 
 public class DocumentService {
 

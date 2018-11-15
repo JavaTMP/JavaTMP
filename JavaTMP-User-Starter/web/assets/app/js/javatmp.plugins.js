@@ -323,10 +323,9 @@
     };
 
     window.javatmp.plugins.summernoteWrapper = function (element, options) {
-
         var settings = $.extend(true, {}, {
             direction: javatmp.settings.direction,
-            lang: javatmp.settings.lang === "ar" ? "ar-AR" : javatmp.settings.lang,
+            lang: javatmp.plugins.settings.locale === "ar" ? "ar-AR" : javatmp.plugins.settings.locale,
             height: 200,
             dialogsInBody: true
         }, options);

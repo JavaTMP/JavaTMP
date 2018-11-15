@@ -7,7 +7,7 @@ package com.javatmp.language;
 
 import com.javatmp.theme.*;
 import com.javatmp.mvc.MvcHelper;
-import com.javatmp.db.JpaDaoHelper;
+import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.module.language.Language;
 import com.javatmp.module.language.Languagetranslation;
 import com.javatmp.module.theme.Theme;

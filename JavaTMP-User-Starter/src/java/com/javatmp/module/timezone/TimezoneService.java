@@ -1,6 +1,6 @@
 package com.javatmp.module.timezone;
 
-import com.javatmp.db.JpaDaoHelper;
+import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.module.timezone.Timezone;
 import java.util.LinkedList;
 import java.util.List;

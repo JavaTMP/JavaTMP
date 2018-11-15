@@ -1,6 +1,6 @@
 package com.javatmp.module.language;
 
-import com.javatmp.db.JpaDaoHelper;
+import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.module.language.Language;
 import com.javatmp.module.user.User;
 import java.util.HashMap;
