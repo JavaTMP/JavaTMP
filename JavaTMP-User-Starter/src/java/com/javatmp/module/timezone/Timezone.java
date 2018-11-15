@@ -17,12 +17,16 @@ public class Timezone implements Serializable {
     @Transient
     private String timezoneName;
 
+    @Transient
+    private String timezoneDescription;
+
     public Timezone() {
     }
 
-    public Timezone(String timezoneId, String timezoneName) {
+    public Timezone(String timezoneId, String timezoneName, String timezoneDescription) {
         this.timezoneId = timezoneId;
         this.timezoneName = timezoneName;
+        this.timezoneDescription = timezoneDescription;
     }
 
     @Override
@@ -57,6 +61,20 @@ public class Timezone implements Serializable {
      */
     public void setTimezoneId(String timezoneId) {
         this.timezoneId = timezoneId;
+    }
+
+    /**
+     * @return the timezoneDescription
+     */
+    public String getTimezoneDescription() {
+        return timezoneDescription;
+    }
+
+    /**
+     * @param timezoneDescription the timezoneDescription to set
+     */
+    public void setTimezoneDescription(String timezoneDescription) {
+        this.timezoneDescription = timezoneDescription;
     }
 
     /**

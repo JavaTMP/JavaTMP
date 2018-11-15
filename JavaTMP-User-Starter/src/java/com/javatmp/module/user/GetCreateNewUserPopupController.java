@@ -1,6 +1,7 @@
 package com.javatmp.module.user;
 
 import com.javatmp.module.country.Country;
+import com.javatmp.module.country.Countrytranslation;
 import com.javatmp.module.language.Language;
 import com.javatmp.module.language.Languagetranslation;
 import com.javatmp.module.theme.Theme;
@@ -34,7 +35,7 @@ public class GetCreateNewUserPopupController extends HttpServlet {
         User loggedInUser = (User) session.getAttribute("user");
         ServicesFactory sf = (ServicesFactory) context.getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         List<Timezone> timezones = sf.getTimezoneService().getTimezones();
-        List<Country> countries = sf.getCountryService().getCountries();
+        List<Countrytranslation> countries = sf.getCountryService().getCountries(loggedInUser);
         List<Languagetranslation> languages = sf.getLanguageService().getLanguages(loggedInUser);
         List<Themetranslation> themes = sf.getThemeService().getThemes(loggedInUser);
         request.setAttribute("themes", themes);

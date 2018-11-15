@@ -1,6 +1,7 @@
 package com.javatmp.module.user;
 
 import com.javatmp.module.country.Country;
+import com.javatmp.module.country.Countrytranslation;
 import com.javatmp.module.dms.Document;
 import com.javatmp.module.language.Language;
 import com.javatmp.module.language.Languagetranslation;
@@ -49,7 +50,7 @@ public class CreateUserController extends HttpServlet {
         HttpSession session = request.getSession();
         User loggedInUser = (User) session.getAttribute("user");
         List<Timezone> timezones = sf.getTimezoneService().getTimezones();
-        List<Country> countries = sf.getCountryService().getCountries();
+        List<Countrytranslation> countries = sf.getCountryService().getCountries(loggedInUser);
         List<Languagetranslation> languages = sf.getLanguageService().getLanguages(loggedInUser);
         List<Themetranslation> themes = sf.getThemeService().getThemes(loggedInUser);
         request.setAttribute("themes", themes);

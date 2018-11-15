@@ -5,6 +5,7 @@
     <class>com.javatmp.module.user.User</class>
     <class>com.javatmp.module.language.Languagetranslation</class>
     <class>com.javatmp.module.theme.Themetranslation</class>
+    <class>com.javatmp.module.country.Countrytranslation</class>
     <properties>
       <!-- Configuring JDBC properties -->
       <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>

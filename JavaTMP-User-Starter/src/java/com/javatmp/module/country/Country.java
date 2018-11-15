@@ -1,8 +1,13 @@
 package com.javatmp.module.country;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -12,8 +17,14 @@ public class Country implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
+    @Basic(optional = false)
+    @Column(name = "countryId")
     private String countryId;
+    @Basic(optional = false)
+    @Column(name = "countryName")
     private String countryName;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "country")
+    private List<Countrytranslation> countrytranslationList;
 
     public Country() {
     }
@@ -65,6 +76,19 @@ public class Country implements Serializable {
             return false;
         }
         return true;
+    }
+
+    public List<Countrytranslation> getCountrytranslationList() {
+        return countrytranslationList;
+    }
+
+    public void setCountrytranslationList(List<Countrytranslation> countrytranslationList) {
+        this.countrytranslationList = countrytranslationList;
+    }
+
+    @Override
+    public String toString() {
+        return "com.javatmp.module.country.Country[ countryId=" + countryId + " ]";
     }
 
 }

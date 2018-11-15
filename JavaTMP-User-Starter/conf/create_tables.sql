@@ -38,6 +38,15 @@ CREATE TABLE country (
     CONSTRAINT country_countryId_pk PRIMARY KEY (countryId)
 ) ENGINE=InnoDB;
 
+CREATE TABLE countryTranslation (
+    countryId varchar(4) NOT NULL,
+    langId varchar(4) NOT NULL,
+    countryName varchar(255) NOT NULL,
+    CONSTRAINT countryTr_pk PRIMARY KEY (countryId, langId),
+    CONSTRAINT countryTr_countryId_pk FOREIGN KEY (countryId) REFERENCES country (countryId),
+    CONSTRAINT countryTr_langId_fk FOREIGN KEY (langId) REFERENCES language (languageId)
+) ENGINE=InnoDB;
+
 CREATE TABLE document (
     documentId BIGINT NOT NULL AUTO_INCREMENT,
     documentName varchar(255) NOT NULL,

@@ -27,7 +27,8 @@ public class TimezoneService {
             String displayName = zone.getDisplayName();
             String d = zone.getDisplayName(zone.useDaylightTime(), TimeZone.SHORT);
             String displayTimezoneInfo = String.format("(GMT%+03d:%02d) %s - %s (%s)", hour, Math.abs(minutes), id, displayName, d);
-            timezones.add(new Timezone(id, displayTimezoneInfo));
+            System.out.println("id[" + id + "]d[" + zone.getDisplayName(zone.useDaylightTime(), TimeZone.LONG) + "]");
+            timezones.add(new Timezone(id, displayName, displayTimezoneInfo));
         }
     }
 

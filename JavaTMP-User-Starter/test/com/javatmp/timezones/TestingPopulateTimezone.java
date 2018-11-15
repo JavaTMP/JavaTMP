@@ -32,22 +32,10 @@ public class TestingPopulateTimezone {
 
         List<Timezone> timezones = timezoneService.getTimezones();
 
-        EntityManager em = null;
-        EntityTransaction tx = null;
-        try {
-            em = jpaDaoHelper.getEntityManagerFactory().createEntityManager();
-            tx = em.getTransaction();
-            tx.begin();
-            for (Timezone timezone : timezones) {
-                em.persist(timezone);
-            }
-            tx.commit();
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
-
+        timezones.forEach(timezone -> {
+            System.out.println(timezone.getTimezoneName());
+        });
+        System.out.println("size " + timezones.size());
     }
 
 }

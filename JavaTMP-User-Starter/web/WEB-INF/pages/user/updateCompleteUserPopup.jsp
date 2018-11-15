@@ -79,7 +79,7 @@
                                             <c:when test="${fn:length(requestScope.countries) > 0}">
                                                 <option value="">${labels['page.text.kindlySelect']}</option>
                                                 <c:forEach items="${requestScope.countries}" var="country">
-                                                    <option ${requestScope.user.countryId == country.countryId ? 'selected="selected"' : ''} value="${country.countryId}">${country.countryName}</option>
+                                                    <option ${requestScope.user.countryId == country.countrytranslationPK.countryId ? 'selected="selected"' : ''} value="${country.countrytranslationPK.countryId}">${country.countryName}</option>
                                                 </c:forEach>
                                             </c:when>
                                             <c:otherwise>

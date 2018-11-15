@@ -1,5 +1,6 @@
 package com.javatmp.module.language;
 
+import com.javatmp.module.country.Countrytranslation;
 import com.javatmp.module.theme.Themetranslation;
 import java.io.Serializable;
 import java.util.List;
@@ -15,6 +16,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "language")
 public class Language implements Serializable {
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "language")
+    private List<Countrytranslation> countrytranslationList;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "language")
     private List<Themetranslation> themetranslationList;
@@ -100,6 +104,14 @@ public class Language implements Serializable {
 
     public void setThemetranslationList(List<Themetranslation> themetranslationList) {
         this.themetranslationList = themetranslationList;
+    }
+
+    public List<Countrytranslation> getCountrytranslationList() {
+        return countrytranslationList;
+    }
+
+    public void setCountrytranslationList(List<Countrytranslation> countrytranslationList) {
+        this.countrytranslationList = countrytranslationList;
     }
 
 }
