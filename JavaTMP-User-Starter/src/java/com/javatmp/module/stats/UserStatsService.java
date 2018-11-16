@@ -4,6 +4,8 @@ import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.module.country.Country;
 import com.javatmp.module.country.Country_;
 import com.javatmp.module.country.Countrytranslation;
+import com.javatmp.module.country.CountrytranslationPK_;
+import com.javatmp.module.country.Countrytranslation_;
 import com.javatmp.module.user.User;
 import com.javatmp.module.user.User_;
 import java.util.List;
@@ -18,6 +20,7 @@ import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.ListJoin;
 import javax.persistence.criteria.MapJoin;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 public class UserStatsService {
@@ -123,8 +126,11 @@ public class UserStatsService {
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaQuery<Object[]> query = cb.createQuery(Object[].class);
             Root<User> root = query.from(User.class);
-//            Join<User, Country> join1 = root.join(User_.country, JoinType.LEFT);
-            query.multiselect(root.get(User_.country).get(Country_.countryId), cb.count(root.get(User_.country).get(Country_.countryId)));
+            Join<User, Country> userCountry = root.join(User_.country, JoinType.INNER);
+            ListJoin<Country, Countrytranslation> countryTr = userCountry.join(Country_.countrytranslationList, JoinType.LEFT);
+            query.multiselect(countryTr.get(Countrytranslation_.countryName), cb.count(countryTr.get(Countrytranslation_.countryName)));
+            Predicate pr = cb.equal(countryTr.get(Countrytranslation_.countrytranslationPK).get(CountrytranslationPK_.langId), "en");
+            query.where(pr);
             query.groupBy(root.get(User_.country).get(Country_.countryId));
             results = em.createQuery(query).getResultList();
 

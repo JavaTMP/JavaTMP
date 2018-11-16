@@ -782,8 +782,8 @@ INSERT INTO `countrytranslation` (`countryId`, `langId`, `countryName`) VALUES (
 INSERT INTO `countrytranslation` (`countryId`, `langId`, `countryName`) VALUES ('UY','en','Uruguay');
 INSERT INTO `countrytranslation` (`countryId`, `langId`, `countryName`) VALUES ('UZ','ar','أوزبكستان');
 INSERT INTO `countrytranslation` (`countryId`, `langId`, `countryName`) VALUES ('UZ','en','Uzbekistan');
-INSERT INTO `countrytranslation` (`countryId`, `langId`, `countryName`) VALUES ('VA','ar','الكرسي الرسولي (دولة مدينة الفاتيكان)');
-INSERT INTO `countrytranslation` (`countryId`, `langId`, `countryName`) VALUES ('VA','en','Holy See (Vatican City State)');
+INSERT INTO `countrytranslation` (`countryId`, `langId`, `countryName`) VALUES ('VA','ar','الكرسي الرسولي');
+INSERT INTO `countrytranslation` (`countryId`, `langId`, `countryName`) VALUES ('VA','en','Holy See');
 INSERT INTO `countrytranslation` (`countryId`, `langId`, `countryName`) VALUES ('VC','ar','سانت فنسنت وجزر غرينادين');
 INSERT INTO `countrytranslation` (`countryId`, `langId`, `countryName`) VALUES ('VC','en','Saint Vincent and the Grenadines');
 INSERT INTO `countrytranslation` (`countryId`, `langId`, `countryName`) VALUES ('VE','ar','فنزويلا');

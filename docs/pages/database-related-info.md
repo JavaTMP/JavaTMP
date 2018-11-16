@@ -38,3 +38,4 @@ The following links provide you information to call Oracle stored procedures and
 
 ## JPA Links
 - [https://vladmihalcea.com/sql-query-parent-rows-all-children-match-filtering-criteria/](https://vladmihalcea.com/sql-query-parent-rows-all-children-match-filtering-criteria/)
+- [https://www.logicbig.com/tutorials/java-ee-tutorial/jpa/map-joins.html](https://www.logicbig.com/tutorials/java-ee-tutorial/jpa/map-joins.html)
