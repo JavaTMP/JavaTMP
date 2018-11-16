@@ -11,6 +11,7 @@ import com.javatmp.module.timezone.Timezone;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.domain.ResponseMessage;
 import com.javatmp.module.dms.DocumentService;
+import com.javatmp.module.timezone.Timezonetranslation;
 import com.javatmp.util.ServicesFactory;
 import com.javatmp.util.Constants;
 import com.javatmp.util.MD5Util;
@@ -48,7 +49,7 @@ public class CurrentUserProfileController extends HttpServlet {
         ServicesFactory sf = (ServicesFactory) context.getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
 
         User dbUser = sf.getUserService().readCompleteUserById(loggedInUser);
-        List<Timezone> timezones = sf.getTimezoneService().getTimezones();
+        List<Timezonetranslation> timezones = sf.getTimezoneService().getTimezones(loggedInUser);
         List<Countrytranslation> countries = sf.getCountryService().getCountries(loggedInUser);
         List<Languagetranslation> languages = sf.getLanguageService().getLanguages(loggedInUser);
         List<Themetranslation> themes = sf.getThemeService().getThemes(loggedInUser);

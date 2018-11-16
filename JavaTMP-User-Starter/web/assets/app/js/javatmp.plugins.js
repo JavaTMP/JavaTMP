@@ -340,6 +340,7 @@
             dir: javatmp.settings.direction,
             placeholder: javatmp.settings.labels['page.text.kindlySelect'],
             allowClear: true,
+            width: '',
             containerCssClass: ':all:',
             escapeMarkup: function (markup) {
                 return markup;
@@ -458,6 +459,7 @@
             dir: javatmp.settings.direction,
             placeholder: javatmp.settings.labels['page.text.kindlySelect'],
             allowClear: true,
+            width: '',
             containerCssClass: ':all:',
             templateSelection: formatCountrySelection,
             templateResult: formatCountry,

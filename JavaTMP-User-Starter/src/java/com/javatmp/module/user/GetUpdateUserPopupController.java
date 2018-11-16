@@ -7,6 +7,7 @@ import com.javatmp.module.language.Languagetranslation;
 import com.javatmp.module.theme.Theme;
 import com.javatmp.module.theme.Themetranslation;
 import com.javatmp.module.timezone.Timezone;
+import com.javatmp.module.timezone.Timezonetranslation;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.util.ServicesFactory;
 import com.javatmp.util.Constants;
@@ -45,7 +46,7 @@ public class GetUpdateUserPopupController extends HttpServlet {
             HttpSession session = request.getSession();
             User loggedInUser = (User) session.getAttribute("user");
 
-            List<Timezone> timezones = sf.getTimezoneService().getTimezones();
+            List<Timezonetranslation> timezones = sf.getTimezoneService().getTimezones(loggedInUser);
             List<Countrytranslation> countries = sf.getCountryService().getCountries(loggedInUser);
             List<Languagetranslation> languages = sf.getLanguageService().getLanguages(loggedInUser);
             List<Themetranslation> themes = sf.getThemeService().getThemes(loggedInUser);

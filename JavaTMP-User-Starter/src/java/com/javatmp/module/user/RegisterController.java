@@ -7,6 +7,7 @@ import com.javatmp.module.language.Languagetranslation;
 import com.javatmp.module.theme.Theme;
 import com.javatmp.module.theme.Themetranslation;
 import com.javatmp.module.timezone.Timezone;
+import com.javatmp.module.timezone.Timezonetranslation;
 import com.javatmp.mvc.domain.ResponseMessage;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.util.ServicesFactory;
@@ -41,7 +42,7 @@ public class RegisterController extends HttpServlet {
         User loggedInUser = new User(0L, labels.getString("global.language"));
         ServicesFactory sf = (ServicesFactory) context.getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
 
-        List<Timezone> timezones = sf.getTimezoneService().getTimezones();
+        List<Timezonetranslation> timezones = sf.getTimezoneService().getTimezones(loggedInUser);
         List<Countrytranslation> countries = sf.getCountryService().getCountries(loggedInUser);
         List<Languagetranslation> languages = sf.getLanguageService().getLanguages(loggedInUser);
         List<Themetranslation> themes = sf.getThemeService().getThemes(loggedInUser);

@@ -1,8 +1,14 @@
 package com.javatmp.module.timezone;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -10,9 +16,14 @@ import javax.persistence.Transient;
 @Table(name = "timezone")
 public class Timezone implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @Id
+    @Basic(optional = false)
+    @Column(name = "timezoneId")
     private String timezoneId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "timezone", fetch = FetchType.LAZY)
+    private List<Timezonetranslation> timezonetranslationList;
+
+    private static final long serialVersionUID = 1L;
 
     @Transient
     private String timezoneName;
@@ -125,5 +136,22 @@ public class Timezone implements Serializable {
      */
     public void setOffsetDescription(String offsetDescription) {
         this.offsetDescription = offsetDescription;
+    }
+
+    public Timezone(String timezoneId) {
+        this.timezoneId = timezoneId;
+    }
+
+    public List<Timezonetranslation> getTimezonetranslationList() {
+        return timezonetranslationList;
+    }
+
+    public void setTimezonetranslationList(List<Timezonetranslation> timezonetranslationList) {
+        this.timezonetranslationList = timezonetranslationList;
+    }
+
+    @Override
+    public String toString() {
+        return "com.javatmp.module.timezone.Timezone[ timezoneId=" + timezoneId + " ]";
     }
 }

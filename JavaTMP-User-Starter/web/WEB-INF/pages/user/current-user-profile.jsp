@@ -153,7 +153,7 @@
                                                         <c:when test="${fn:length(requestScope.timezones) > 0}">
                                                             <option value="">${labels['page.text.kindlySelect']}</option>
                                                             <c:forEach items="${requestScope.timezones}" var="timezone">
-                                                                <option ${requestScope.user.timezone == timezone.timezoneId ? 'selected="selected"' : ''}  value="${timezone.timezoneId}">${timezone.timezoneDescription}</option>
+                                                                <option ${requestScope.user.timezone == timezone.timezonetranslationPK.timezoneId ? 'selected="selected"' : ''}  value="${timezone.timezonetranslationPK.timezoneId}">${timezone.timezoneNameDescription}</option>
                                                             </c:forEach>
                                                         </c:when>
                                                         <c:otherwise>

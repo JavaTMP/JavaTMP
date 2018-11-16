@@ -134,7 +134,7 @@
                                     <c:when test="${fn:length(requestScope.timezones) > 0}">
                                         <option value="">All Timezones</option>
                                         <c:forEach items="${requestScope.timezones}" var="timezone">
-                                            <option value="${timezone.timezoneId}">${timezone.timezoneDescription}</option>
+                                            <option value="${timezone.timezonetranslationPK.timezoneId}">${timezone.timezoneNameDescription}</option>
                                         </c:forEach>
                                     </c:when>
                                     <c:otherwise>
@@ -273,7 +273,7 @@
                                                 <c:when test="${fn:length(requestScope.timezones) > 0}">
                                                     <option value="">Choose ...</option>
                                                     <c:forEach items="${requestScope.timezones}" var="timezone">
-                                                        <option value="${timezone.timezoneId}">${timezone.timezoneDescription}</option>
+                                                        <option value="${timezone.timezonetranslationPK.timezoneId}">${timezone.timezoneNameDescription}</option>
                                                     </c:forEach>
                                                 </c:when>
                                                 <c:otherwise>
