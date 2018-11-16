@@ -23,7 +23,7 @@
         var $this = this;
         // listen to transition on sidebar instead of fixed wait to trigger event
         $($this.settings.sidebarSelector).on('transitionend webkitTransitionEnd oTransitionEnd otransitionend MSTransitionEnd', function (event) {
-            var propertyName = "margin-" + window.javatmp.sidebar.settings.floatDefault;
+            var propertyName = "margin-" + javatmp.sidebar.settings.floatDefault;
             var propertyValue = $($this.settings.sidebarSelector).css(propertyName);
             if (event.originalEvent && event.originalEvent.propertyName
                     && (event.originalEvent.propertyName.indexOf(propertyName) !== -1)) {

@@ -678,8 +678,8 @@ INSERT INTO `countrytranslation` (`countryId`, `langId`, `countryName`) VALUES (
 INSERT INTO `countrytranslation` (`countryId`, `langId`, `countryName`) VALUES ('PK','en','Pakistan');
 INSERT INTO `countrytranslation` (`countryId`, `langId`, `countryName`) VALUES ('PL','ar','بولندا');
 INSERT INTO `countrytranslation` (`countryId`, `langId`, `countryName`) VALUES ('PL','en','Poland');
-INSERT INTO `countrytranslation` (`countryId`, `langId`, `countryName`) VALUES ('PM','ar','سانت بيير وميكلون');
-INSERT INTO `countrytranslation` (`countryId`, `langId`, `countryName`) VALUES ('PM','en','St. Pierre and Miquelon');
+INSERT INTO `countrytranslation` (`countryId`, `langId`, `countryName`) VALUES ('PM','ar','سان بيير وميكلون');
+INSERT INTO `countrytranslation` (`countryId`, `langId`, `countryName`) VALUES ('PM','en','Saint Pierre and Miquelon');
 INSERT INTO `countrytranslation` (`countryId`, `langId`, `countryName`) VALUES ('PN','ar','بيتكيرن');
 INSERT INTO `countrytranslation` (`countryId`, `langId`, `countryName`) VALUES ('PN','en','Pitcairn');
 INSERT INTO `countrytranslation` (`countryId`, `langId`, `countryName`) VALUES ('PR','ar','بورتوريكو');
