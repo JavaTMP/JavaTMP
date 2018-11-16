@@ -26,9 +26,10 @@ public class TimezoneService {
             int minutes = (offset % 3600) / 60;
             String displayName = zone.getDisplayName();
             String d = zone.getDisplayName(zone.useDaylightTime(), TimeZone.SHORT);
-            String displayTimezoneInfo = String.format("(GMT%+03d:%02d) %s - %s (%s)", hour, Math.abs(minutes), id, displayName, d);
-            System.out.println("id[" + id + "]d[" + zone.getDisplayName(zone.useDaylightTime(), TimeZone.LONG) + "]");
-            timezones.add(new Timezone(id, displayName, displayTimezoneInfo));
+            String longD = zone.getDisplayName(zone.useDaylightTime(), TimeZone.LONG);
+            String offsetDescription = String.format("GMT%+03d:%02d", hour, Math.abs(minutes));
+            String displayTimezoneInfo = String.format("(%s) %s - %s (%s)", offsetDescription, id, displayName, d);
+            timezones.add(new Timezone(id, d, offsetDescription, displayName, displayTimezoneInfo));
         }
     }
 

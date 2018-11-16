@@ -32,6 +32,15 @@ CREATE TABLE timezone (
     CONSTRAINT timezone_timezoneId_pk PRIMARY KEY (timezoneId)
 ) ENGINE=InnoDB;
 
+CREATE TABLE timezoneTranslation (
+    timezoneId varchar(64) NOT NULL,
+    langId varchar(4) NOT NULL,
+    timezoneName varchar(255) NOT NULL,
+    CONSTRAINT timezoneTr_pk PRIMARY KEY (timezoneId, langId),
+    CONSTRAINT timezoneTr_timezoneId_fk FOREIGN KEY (timezoneId) REFERENCES timezone (timezoneId),
+    CONSTRAINT timezoneTr_langId_fk FOREIGN KEY (langId) REFERENCES language (languageId)
+) ENGINE=InnoDB;
+
 CREATE TABLE country (
     countryId varchar(4) NOT NULL,
     CONSTRAINT country_countryId_pk PRIMARY KEY (countryId)
@@ -42,7 +51,7 @@ CREATE TABLE countryTranslation (
     langId varchar(4) NOT NULL,
     countryName varchar(255) NOT NULL,
     CONSTRAINT countryTr_pk PRIMARY KEY (countryId, langId),
-    CONSTRAINT countryTr_countryId_pk FOREIGN KEY (countryId) REFERENCES country (countryId),
+    CONSTRAINT countryTr_countryId_fk FOREIGN KEY (countryId) REFERENCES country (countryId),
     CONSTRAINT countryTr_langId_fk FOREIGN KEY (langId) REFERENCES language (languageId)
 ) ENGINE=InnoDB;
 

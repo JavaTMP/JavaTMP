@@ -32,10 +32,30 @@ public class TestingPopulateTimezone {
 
         List<Timezone> timezones = timezoneService.getTimezones();
 
-        timezones.forEach(timezone -> {
-            System.out.println(timezone.getTimezoneName());
-        });
-        System.out.println("size " + timezones.size());
+        final EntityManager em = jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+        EntityTransaction tx = null;
+        try {
+            tx = em.getTransaction();
+            tx.begin();
+            timezones.forEach(timezone -> {
+//            System.out.println(
+//                    "id[" + timezone.getTimezoneId() + "]"
+//                    + " idName[" + timezone.getIdName() + "]"
+//                    + " offset[" + timezone.getOffsetDescription() + "]"
+//                    + " name[" + timezone.getTimezoneName() + "]"
+//                    + " description[" + timezone.getTimezoneDescription() + "]");
+//            System.out.println(timezone.getTimezoneId() + "|" + timezone.getIdName() + "|" + timezone.getTimezoneName());
+                System.out.println("INSERT INTO `timezone` (`timezoneId`) VALUES ('" + timezone.getTimezoneId() + "');");
+                System.out.println("INSERT INTO `timezoneTranslation` (`timezoneId`, `langId`, `timezoneName`) VALUES ('" + timezone.getTimezoneId() + "', 'en', '" + timezone.getTimezoneName() + "');");
+//                System.out.println(timezone.getTimezoneName());
+//                em.merge(timezone);
+            });
+            tx.commit();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
     }
 
 }

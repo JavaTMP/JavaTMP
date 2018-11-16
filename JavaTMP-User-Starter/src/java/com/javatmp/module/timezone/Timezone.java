@@ -20,11 +20,19 @@ public class Timezone implements Serializable {
     @Transient
     private String timezoneDescription;
 
+    @Transient
+    private String idName;
+
+    @Transient
+    private String offsetDescription;
+
     public Timezone() {
     }
 
-    public Timezone(String timezoneId, String timezoneName, String timezoneDescription) {
+    public Timezone(String timezoneId, String idName, String offsetDescription, String timezoneName, String timezoneDescription) {
         this.timezoneId = timezoneId;
+        this.idName = idName;
+        this.offsetDescription = offsetDescription;
         this.timezoneName = timezoneName;
         this.timezoneDescription = timezoneDescription;
     }
@@ -89,5 +97,33 @@ public class Timezone implements Serializable {
      */
     public void setTimezoneName(String timezoneName) {
         this.timezoneName = timezoneName;
+    }
+
+    /**
+     * @return the idName
+     */
+    public String getIdName() {
+        return idName;
+    }
+
+    /**
+     * @param idName the idName to set
+     */
+    public void setIdName(String idName) {
+        this.idName = idName;
+    }
+
+    /**
+     * @return the offsetDescription
+     */
+    public String getOffsetDescription() {
+        return offsetDescription;
+    }
+
+    /**
+     * @param offsetDescription the offsetDescription to set
+     */
+    public void setOffsetDescription(String offsetDescription) {
+        this.offsetDescription = offsetDescription;
     }
 }
