@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.6 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.6 (Current Development Version)
 
-## on
+## e382a6f on Nov 17, 2018, 7:32 PM GMT+4
 - Add New Pages:
     - `pages/table/datatable/defalut-datatables-fixedcolumn-with-key-navigation.html`
     - `pages/table/datatable/defalut-datatables-row-grouping.html`
