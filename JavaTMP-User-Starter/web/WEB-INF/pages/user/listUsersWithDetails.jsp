@@ -435,11 +435,11 @@
 //                        "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4 pt-2 text-right'l>>"
 //                ,
 //                select: true,
+                keys: true,
                 select: "single",
                 scrollY: 250,
                 scrollX: true,
                 "autoWidth": false,
-                fixedColumns: true,
                 scrollCollapse: false,
                 "searching": true,
                 searchDelay: 500,

@@ -94,11 +94,11 @@
                             + "<'row'<'col-sm-4'l><'col-sm-8'p>>"
                     ,
                     //                select: true,
+                    keys: true,
                     select: "single",
                     scrollY: 300,
                     scrollX: true,
                     "autoWidth": false,
-                    fixedColumns: true,
                     scrollCollapse: true,
                     "searching": true,
                     searchDelay: 500,

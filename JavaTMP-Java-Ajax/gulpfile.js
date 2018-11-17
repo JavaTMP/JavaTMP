@@ -95,10 +95,8 @@ var config = {
             {"from": "${sourceNodeLib}/autosize/dist/autosize.min.js", "to": "${destComponentsLib}/autosize/dist"}
         ],
         "summernote": [
-//            {"from": "${sourceNodeLib}/summernote/dist/**/*", "to": "${destComponentsLib}/summernote/dist"},
             {"from": "${sourceNodeLib}/summernote/dist/font/**/*", "to": "${destComponentsLib}/summernote/dist/font"},
-//            {"from": "${sourceNodeLib}/summernote/dist/lang/**/*", "to": "${destComponentsLib}/summernote/dist/lang"},
-            {"from": "${sourceNodeLib}/summernote/dist/lang/summernote-ar-AR.min.js", "to": "${destComponentsLib}/summernote/dist/lang"},
+            {"from": "${sourceNodeLib}/summernote/dist/lang/**/*", "to": "${destComponentsLib}/summernote/dist/lang"},
             {"from": "${sourceNodeLib}/summernote/dist/summernote-bs4.min.js", "to": "${destComponentsLib}/summernote/dist"},
             {"from": "${sourceNodeLib}/summernote/dist/summernote-bs4.css", "to": "${destComponentsLib}/summernote/dist"}
         ],
@@ -115,7 +113,7 @@ var config = {
             {"from": "${sourceNodeLib}/fullcalendar/dist/fullcalendar.min.css", "to": "${destComponentsLib}/fullcalendar/dist"},
             {"from": "${sourceNodeLib}/fullcalendar/dist/fullcalendar.print.min.css", "to": "${destComponentsLib}/fullcalendar/dist"},
             {"from": "${sourceNodeLib}/fullcalendar/dist/fullcalendar.min.js", "to": "${destComponentsLib}/fullcalendar/dist"},
-            {"from": "${sourceNodeLib}/fullcalendar/dist/locale/ar.js", "to": "${destComponentsLib}/fullcalendar/dist/locale"}
+            {"from": "${sourceNodeLib}/fullcalendar/dist/locale/**/*", "to": "${destComponentsLib}/fullcalendar/dist/locale"}
         ],
         "cropperjs": [
             {"from": "${sourceNodeLib}/cropperjs/dist/cropper.min.css", "to": "${destComponentsLib}/cropperjs/dist"},
@@ -138,7 +136,7 @@ var config = {
         "jquery-validation": [
             {"from": "${sourceNodeLib}/jquery-validation/dist/jquery.validate.min.js", "to": "${destComponentsLib}/jquery-validation/dist"},
             {"from": "${sourceNodeLib}/jquery-validation/dist/additional-methods.js", "to": "${destComponentsLib}/jquery-validation/dist", processJS: true},
-            {"from": "${sourceNodeLib}/jquery-validation/dist/localization/messages_ar.js", "to": "${destComponentsLib}/jquery-validation/dist/localization", processJS: true}
+            {"from": "${sourceNodeLib}/jquery-validation/dist/localization/**/*", "to": "${destComponentsLib}/jquery-validation/dist/localization"}
         ],
         "inputmask": [
             {"from": "${sourceNodeLib}/inputmask/dist/min/jquery.inputmask.bundle.min.js", "to": "${destComponentsLib}/inputmask/dist/min"},
@@ -172,6 +170,27 @@ var config = {
         ],
         "datatables.net-select-bs4": [
             {"from": "${sourceNodeLib}/datatables.net-select-bs4/css/select.bootstrap4.min.css", "to": "${destComponentsLib}/datatables.net-select-bs4/css"}
+        ],
+        "datatables.net-keytable": [
+            {"from": "${sourceNodeLib}/datatables.net-keytable/js/dataTables.keyTable.min.js", "to": "${destComponentsLib}/datatables.net-keytable/js"}
+        ],
+        "datatables.net-keytable-bs4": [
+            {"from": "${sourceNodeLib}/datatables.net-keytable-bs4/css/keyTable.bootstrap4.min.css", "to": "${destComponentsLib}/datatables.net-keytable-bs4/css"},
+            {"from": "${sourceNodeLib}/datatables.net-keytable-bs4/js/keyTable.bootstrap4.min.js", "to": "${destComponentsLib}/datatables.net-keytable-bs4/js"}
+        ],
+        "datatables.net-fixedcolumns": [
+            {"from": "${sourceNodeLib}/datatables.net-fixedcolumns/js/dataTables.fixedColumns.min.js", "to": "${destComponentsLib}/datatables.net-fixedcolumns/js"}
+        ],
+        "datatables.net-fixedcolumns-bs4": [
+            {"from": "${sourceNodeLib}/datatables.net-fixedcolumns-bs4/css/fixedColumns.bootstrap4.min.css", "to": "${destComponentsLib}/datatables.net-fixedcolumns-bs4/css"},
+            {"from": "${sourceNodeLib}/datatables.net-fixedcolumns-bs4/js/fixedColumns.bootstrap4.min.js", "to": "${destComponentsLib}/datatables.net-fixedcolumns-bs4/js"}
+        ],
+        "datatables.net-rowgroup": [
+            {"from": "${sourceNodeLib}/datatables.net-rowgroup/js/dataTables.rowGroup.min.js", "to": "${destComponentsLib}/datatables.net-rowgroup/js"}
+        ],
+        "datatables.net-rowgroup-bs4": [
+            {"from": "${sourceNodeLib}/datatables.net-rowgroup-bs4/css/rowGroup.bootstrap4.min.css", "to": "${destComponentsLib}/datatables.net-rowgroup-bs4/css"},
+            {"from": "${sourceNodeLib}/datatables.net-rowgroup-bs4/js/rowGroup.bootstrap4.min.js", "to": "${destComponentsLib}/datatables.net-rowgroup-bs4/js"}
         ],
         "echarts": [
             {"from": "${sourceNodeLib}/echarts/dist/echarts.min.js", "to": "${destComponentsLib}/echarts/dist"},
@@ -229,10 +248,8 @@ var config = {
 };
 var src = {
     "css": [
-//        "./web/components/font-awesome/web-fonts-with-css/css/fontawesome-all.min.css",
         "./web/components/font-awesome-animation/dist/font-awesome-animation.min.css",
         "./web/components/jquery-ui-dist/jquery-ui.min.css",
-//        "./web/components/bootstrap/dist/css/bootstrap.min.css",
         "./web/components/metismenu/dist/metisMenu.min.css",
         "./web/components/nprogress/nprogress.css",
         "./web/components/jquery.fancytree/dist/skin-bootstrap/ui.fancytree.min.css",
@@ -251,13 +268,13 @@ var src = {
         "./web/components/datatables.net-fixedheader-bs4/css/fixedHeader.bootstrap4.min.css",
         "./web/components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css",
         "./web/components/datatables.net-select-bs4/css/select.bootstrap4.min.css",
+        "./web/components/datatables.net-keytable-bs4/css/keyTable.bootstrap4.min.css",
+        "./web/components/datatables.net-fixedcolumns-bs4/css/fixedColumns.bootstrap4.min.css",
+        "./web/components/datatables.net-rowgroup-bs4/css/rowGroup.bootstrap4.min.css",
         "./web/components/slick-carousel/slick/slick.css",
         "./web/components/slick-carousel/slick/slick-theme.css",
         "./web/components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css",
-//        "./web/components/bootstrap-reverse/dist/**/*",
         "./web/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.css"
-//        ,
-//        "./web/components/material-design-icons/iconfont/material-icons.css"
     ],
     "cssForPrint": [
         "./web/components/fullcalendar/dist/fullcalendar.print.min.css"
@@ -274,7 +291,8 @@ var src = {
         "./web/components/slick-carousel/slick/ajax-loader.gif",
         "./web/components/malihu-custom-scrollbar-plugin/mCSB_buttons.png"
     ],
-    "js": ["./web/components/jquery/dist/jquery.min.js",
+    "js": [
+        "./web/components/jquery/dist/jquery.min.js",
         "./web/components/jquery-ui-dist/jquery-ui.min.js",
         "./web/components/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js",
         "./web/components/popper.js/dist/umd/popper.min.js",
@@ -287,14 +305,12 @@ var src = {
         "./web/components/toastr/build/toastr.min.js",
         "./web/components/jquery-idletimer/dist/idle-timer.min.js",
         "./web/components/moment/min/moment.min.js",
-//        "./web/components/moment/min/locales.min.js",
         "./web/components/moment-timezone/builds/moment-timezone-with-data.min.js",
         "./web/components/bootstrap-daterangepicker/daterangepicker.js",
         "./web/components/bootstrap-colorselector/dist/bootstrap-colorselector.min.js",
         "./web/components/select2/dist/js/select2.full.min.js",
         "./web/components/bootstrap-maxlength/bootstrap-maxlength.min.js",
         "./web/components/autosize/dist/autosize.min.js",
-//        "./web/components/summernote/dist/lang/**/*",
         "./web/components/summernote/dist/summernote-bs4.min.js",
         "./web/components/ion-rangeslider/js/ion.rangeSlider.min.js",
         "./web/components/bootstrap-slider/dist/bootstrap-slider.min.js",
@@ -319,6 +335,12 @@ var src = {
         "./web/components/datatables.net-responsive/js/dataTables.responsive.min.js",
         "./web/components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js",
         "./web/components/datatables.net-select/js/dataTables.select.min.js",
+        "./web/components/datatables.net-keytable/js/dataTables.keyTable.min.js",
+        "./web/components/datatables.net-keytable-bs4/js/keyTable.bootstrap4.min.js",
+        "./web/components/datatables.net-fixedcolumns/js/dataTables.fixedColumns.min.js",
+        "./web/components/datatables.net-fixedcolumns-bs4/js/fixedColumns.bootstrap4.min.js",
+        "./web/components/datatables.net-rowgroup/js/dataTables.rowGroup.min.js",
+        "./web/components/datatables.net-rowgroup-bs4/js/rowGroup.bootstrap4.min.js",
         "./web/components/echarts/dist/echarts.min.js",
         "./web/components/echarts/map/js/world.js",
         "./web/components/slick-carousel/slick/slick.min.js",
@@ -336,12 +358,10 @@ var src = {
         ],
         "ar": [
             "./web/components/moment/min/locales.min.js",
-//            "./web/components/moment/locale/en-gb.js",
-//            "./web/components/moment/locale/ar.js",
             "./web/components/summernote/dist/lang/summernote-ar-AR.min.js",
             "./web/components/fullcalendar/dist/locale/ar.js",
             "./web/components/timeago/locales/jquery.timeago.ar.js",
-            "./web/components/jquery-validation/dist/localization/messages_ar.js"
+            "./web/components/jquery-validation/dist/localization/messages_ar.min.js"
         ]
     },
     "fontFamilyFiles": {
@@ -351,10 +371,8 @@ var src = {
         "ar": [
             "./web/assets/src/sass/font-family/font-family-ar.scss"
         ]
-
     }
-}
-;
+};
 function getClass(object) {
     return Object.prototype.toString.call(object).slice(8, -1);
 }
@@ -561,8 +579,6 @@ gulp.task('delete-css', function () {
 gulp.task('delete-js', function () {
     return del(['./web/assets/js/**/*']);
 });
-
 gulp.task('default', ['generate-dist'], function () {
     process.stdout.write("*** Finished @ [" + new Date() + "] ***");
 });
-

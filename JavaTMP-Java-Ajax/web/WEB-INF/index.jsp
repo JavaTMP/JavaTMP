@@ -914,6 +914,16 @@
                                                 </a>
                                             </li>
                                             <li>
+                                                <a href="${pageContext.request.contextPath}/pages/table/datatable/defalut-datatables-fixedcolumn-with-key-navigation">
+                                                    Datatables Bootstrap Fixed Column with key navigation
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="${pageContext.request.contextPath}/pages/table/datatable/defalut-datatables-row-grouping">
+                                                    Datatables Bootstrap Row Grouping
+                                                </a>
+                                            </li>
+                                            <li>
                                                 <a href="${pageContext.request.contextPath}/pages/table/datatable/responsive-datatables-bootstrap-4">
                                                     Responsive Datatables Bootstrap 4 theme
                                                 </a>
@@ -1476,10 +1486,8 @@
                         myMessagesScrollable.mCustomScrollbar('scrollTo', 'top', {scrollInertia: 20});
                         $(".mCSB_container", myMessagesScrollable).prepend(indicatorTemplate);
                         var passData = {
-                            _ajaxGlobalBlockUI: false,
-                            start: 0,
-                            length: recordPerPage,
-                            order: [
+                            _ajaxGlobalBlockUI: false, start: 0,
+                            length: recordPerPage, order: [
                                 {"column": 0, "dir": "desc"}
                             ],
                             columns: [{
@@ -1607,8 +1615,7 @@
                 };
                 myMessagesScrollable.mCustomScrollbar({
                     theme: "javatmp",
-                    alwaysShowScrollbar: 2,
-                    scrollButtons: {
+                    alwaysShowScrollbar: 2, scrollButtons: {
                         enable: false
                     },
                     mouseWheel: {
@@ -1669,8 +1676,7 @@
                 });
             });</script>
         <!-- build:remove -->
-        <script>
-            (function (i, s, o, g, r, a, m) {
+        <script>             (function (i, s, o, g, r, a, m) {
                 i['GoogleAnalyticsObject'] = r;
                 i[r] = i[r] || function () {
                     (i[r].q = i[r].q || []).push(arguments);

@@ -1,7 +1,19 @@
 ---
 title: Java Bootstrap Template Version 0.0.6 (Current Development Version)
 ---
-# Java Bootstrap Template Version 0.0.5 (Current Development Version)
+# Java Bootstrap Template Version 0.0.6 (Current Development Version)
+
+## on
+- Add New Pages:
+    - `pages/table/datatable/defalut-datatables-fixedcolumn-with-key-navigation.html`
+    - `pages/table/datatable/defalut-datatables-row-grouping.html`
+- Add New Datatables plugin's extensions:
+    - `datatables.net-keytable` version 2.5.0
+    - `datatables.net-keytable-bs4` version 2.5.0
+    - `datatables.net-fixedcolumns` version 3.2.6
+    - `datatables.net-fixedcolumns-bs4` version 3.2.6
+    - `datatables.net-rowgroup` version 1.1.0
+    - `datatables.net-rowgroup-bs4` version 1.1.0
 
 ## de69f43 on Nov 16, 2018, 10:42 PM GMT+4
 - Move all Javatmp-User-Starter project's plugins creation to new Javascript file `.\JavaTMP\JavaTMP-User-Starter\web\assets\app\js\javatmp.plugins.js`
