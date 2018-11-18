@@ -34,6 +34,8 @@ INSERT INTO `theme` (`themeId`) VALUES ('spacelab');
 INSERT INTO `theme` (`themeId`) VALUES ('superhero');
 INSERT INTO `theme` (`themeId`) VALUES ('united');
 INSERT INTO `theme` (`themeId`) VALUES ('yeti');
+INSERT INTO `theme` (`themeId`) VALUES ('office-white');
+INSERT INTO `theme` (`themeId`) VALUES ('purple');
 
 INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'default','العادي');
 INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('en', 'default','Default');
@@ -90,6 +92,10 @@ INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 
 INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('en', 'united','United');
 INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'yeti','اليتي');
 INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('en', 'yeti','Yeti');
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'office-white','المكتب البياضي');
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('en', 'office-white','Office White');
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('ar', 'purple','أرجواني');
+INSERT INTO `themeTranslation` (`langId`, `themeId`, `themeName`) VALUES ('en', 'purple','Purple');
 
 -- Insert Countries:
 INSERT INTO `country` (`countryId`) VALUES ('AD');

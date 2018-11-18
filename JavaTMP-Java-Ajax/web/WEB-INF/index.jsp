@@ -357,6 +357,11 @@
                                             ${labels['global.sidebar.themes.bootswatch']}
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/themes/devexpress-bs4-themes">
+                                            DevExpress Themes for Bootstrap 4
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li>

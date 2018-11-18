@@ -3,6 +3,14 @@ title: Java Bootstrap Template Version 0.0.6 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.6 (Current Development Version)
 
+## on
+- Add New two external Bootstrap 4 theme from DevExpress `https://github.com/DevExpress/bootstrap-themes`:
+    - `\web\pages\themes\devexpress-bs4-themes.html`
+    - `\web\assets\src\sass\themes\javatmp-purple.scss`
+    - `\web\assets\src\sass\themes\javatmp-office-white.scss`
+    - `\web\assets\src\sass-rtl\themes-rtl\javatmp-purple-rtl.scss`
+    - `\web\assets\src\sass-rtl\themes-rtl\javatmp-office-white-rtl.scss`
+
 ## e382a6f on Nov 17, 2018, 7:32 PM GMT+4
 - Add New Pages:
     - `pages/table/datatable/defalut-datatables-fixedcolumn-with-key-navigation.html`
