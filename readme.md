@@ -23,14 +23,14 @@ If you think more explanations and examples are needed, just let us know.
 Please send your questions, comments, suggestions and bug reports to our support
 at support@javatmp.com and we will try to reply as soon as possible.
 
-## Folder's contents:
-Kindly visit the following online page for details folders and files description:
-https://help.javatmp.com/pages/high-level-template-structure
-
 ## Quick Links
 - Official website: [http://www.javatmp.com/](http://www.javatmp.com/)
 - Pricing: [https://www.javatmp.com/products/java-bootstrap-admin-and-dashboard-template](https://www.javatmp.com/products/java-bootstrap-admin-and-dashboard-template)
 - Licensing: [https://github.com/JavaTMP/JavaTMP/blob/master/LICENSE](https://github.com/JavaTMP/JavaTMP/blob/master/LICENSE)
+
+## Folder's contents:
+Kindly visit the following online page for details folders and files description:
+https://help.javatmp.com/pages/high-level-template-structure
 
 ## Running
 It is best to run JavaTMP's applications with in a HTTP web server. However,
