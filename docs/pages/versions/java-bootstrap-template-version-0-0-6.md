@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.6 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.6 (Current Development Version)
 
-## on
+## 06c22ba on Nov 18, 2018, 9:34 PM GMT+4
 - Add New two external Bootstrap 4 theme from DevExpress `https://github.com/DevExpress/bootstrap-themes`:
     - `\web\pages\themes\devexpress-bs4-themes.html`
     - `\web\assets\src\sass\themes\javatmp-purple.scss`

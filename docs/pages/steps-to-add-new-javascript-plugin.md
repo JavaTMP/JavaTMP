@@ -33,7 +33,7 @@ We use the following steps when we add new plugins for our template to make sure
 21.  Check if the new plugins should be exist in the other versions, then implement it there.
 22.  Check if the new plugins need a dynamic backend components and can be run through AJAX and Java, then implement a dynamic behaviour for it in Java version too.
 
-## Steps to remove Javascript plugin.
+## Steps to remove Javascript plugin
 1. Remove plugin reference from `package.json`.
 2. Remove plugin reference from `gulpfile.js` in `config` and `src` variables.
 3. Remove a custom SASS file for plugin in `./web/assets/src/sass/plugins/` if there is any file for this plugin.

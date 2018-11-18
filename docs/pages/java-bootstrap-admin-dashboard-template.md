@@ -115,3 +115,4 @@ Credits:
 *   FileSaver.js - [https://github.com/eligrey/FileSaver.js](https://github.com/eligrey/FileSaver.js "An HTML5 saveAs() FileSaver implementation")
 *   Numeral.js - [https://github.com/adamwdraper/Numeral-js](https://github.com/adamwdraper/Numeral-js "A javascript library for formatting and manipulating numbers")
 *   Moment Timezone - [https://github.com/moment/moment-timezone/](https://github.com/moment/moment-timezone/ "Timezone support for moment.js")
+*   DevExpress bootstrap 4 themes - [https://github.com/DevExpress/bootstrap-themes](https://github.com/DevExpress/bootstrap-themes)

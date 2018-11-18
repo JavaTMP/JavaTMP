@@ -538,3 +538,10 @@ Mandatory on all Starter versions and templates. Merged and Moved in Starter Ver
 Moment.js
 
 MIT
+
+### [bootstrap-themes](https://github.com/DevExpress/bootstrap-themes)
+
+DevExpress Themes for Bootstrap
+
+MIT
+
