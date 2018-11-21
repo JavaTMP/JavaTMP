@@ -91,7 +91,7 @@ Please Refer to [Setting Up Development Environment](/pages/setting-up-developme
 
 Please review `./package.json` file for more information about gulp plugins and front-end plugins and frameworks used in the project.
 
-Please Refer to [Development tools](/pages/development-and-environment-tools) Page to read more about `Node.js` plugins
+Please Refer to [Development tools](/pages/reference/development-and-environment-tools) Page to read more about `Node.js` plugins
 used in `package.json`.
 
 The JavaTMP's main NPM file ./package.json is located in root directory of the template and it contains the following scripts:
@@ -120,7 +120,7 @@ The JavaTMP's main gulp file `./gulpfile.js` is located in root directory of the
 
 Please review `./gulpfile.js` and `./package.json` files for more information about gulp plugins and tasks used in the project.
 
-Please Refer to [Development tools](/pages/development-and-environment-tools) Page to read more about `Gulp` plugins used in
+Please Refer to [Development tools](/pages/reference/development-and-environment-tools) Page to read more about `Gulp` plugins used in
 `gulpfile.js`.
 
 ### `delete-components` and `copy-components`
@@ -243,7 +243,7 @@ Read more about our
 [managing front-end dependencies using Node.js And Gulp](/pages/manage-front-end-dependencies-using-node-js-and-gulp).
 
 Please see the complete list of front-end jquery and bootstrap libraries we used in our template in the following page:
-[JavaTMP Front-end Plugins And Frameworks](/pages/javatmp-front-end-plugins-and-frameworks).
+[JavaTMP Front-end Plugins And Frameworks](/pages/reference/javatmp-front-end-plugins-and-frameworks).
 
 ## Plugins in Projects
 After we downloaded front-end plugins using Node's `npm` command , We copied only needed files like dist folder and images
