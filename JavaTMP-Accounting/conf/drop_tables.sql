@@ -1,0 +1,11 @@
+drop table if exists activity;
+drop table IF EXISTS user;
+drop table IF EXISTS document;
+drop table IF EXISTS countrytranslation;
+drop table IF EXISTS country;
+drop table IF EXISTS timezonetranslation;
+drop table IF EXISTS timezone;
+drop table IF EXISTS themetranslation;
+drop table IF EXISTS theme;
+drop table IF EXISTS languagetranslation;
+drop table IF EXISTS language;

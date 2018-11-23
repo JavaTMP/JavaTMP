@@ -2,11 +2,6 @@
 Bootswatch darkly theme
 https://bootswatch.com/darkly/
 */
-/*
-We should override progress-height as the original standard bootstra 4 is rem and custom bootswatch is px!
-see javatmp-cosmo.scss, javatmp-darkly.scss, javatmp-flatly.scss, javatmp-materia.scss
-*/
-$progress-height: 0.625rem !default;
 @import "../../../../../node_modules/bootswatch/dist/darkly/_variables.scss";
 @import "javatmp-default.scss";
 @import "../../../../../node_modules/bootswatch/dist/darkly/_bootswatch.scss";

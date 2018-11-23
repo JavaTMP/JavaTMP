@@ -1,16 +1,52 @@
+@import "../common/variables.scss";
 $s2bs-dropdown-box-shadow: $dropdown-box-shadow!default;
 $s2bs-dropdown-box-shadow-above: $s2bs-dropdown-box-shadow!default;
 $s2bs-form-control-default-box-shadow: $input-box-shadow!default;
 $s2bs-form-control-focus-box-shadow: none!default;
 $s2bs-form-control-transition: $input-transition!default;
+$s2bs-dropdown-bg: $dropdown-bg!default;
 
 @import "../../../../../node_modules/select2-bootstrap-theme/src/select2-bootstrap.scss";
 
-.input-group > .select2-container--bootstrap {
-    width: auto;
-    > .selection > .select2-selection.form-control {
-        width: 100%;
+.select2-container--bootstrap .select2-results > .select2-results__options {
+    overflow-x: hidden;
+}
+
+.input-group, .form-group {
+    > .select2-container--bootstrap {
+        width: auto;
+        > .selection > .select2-selection.form-control {
+            width: 100%;
+        }
     }
+}
+
+
+$s2bs-btn-default-color: color-yiq($s2bs-btn-default-bg);
+.select2-container--bootstrap {
+    .select2-selection--multiple {
+        .select2-selection__choice {
+            color: $s2bs-btn-default-color; /* instead of $s2bs-input-color; */
+        }
+    }
+}
+
+
+/**
+dynamically set bg of select2 dropdown result:
+**/
+.select2-container--bootstrap .select2-dropdown {
+    background-color: $s2bs-dropdown-bg;
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+}
+/**
+flip clear button :
+*/
+.select2-container--bootstrap[dir=rtl] .select2-selection--multiple .select2-selection__clear {
+    float: left;
+    margin-right: 0;
+    margin-left: 10px;
 }
 
 /**

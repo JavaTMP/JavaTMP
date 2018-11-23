@@ -1,177 +1,171 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html lang="${labels["global.language"]}" dir="${labels["global.direction"]}">
     <head>
-        <title>JavaTMP - Java Bootstrap Admin and Dashboard Template</title>
+        <title>${labels["global.page.title"]}</title>
         <!-- Required meta tags -->
         <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="${pageContext.request.contextPath}/assets/dist/css/javatmp-plugins-all.min.css" rel="stylesheet" type="text/css"/>
         <link href='${pageContext.request.contextPath}/assets/dist/css/javatmp-plugins-print-all.min.css' rel='stylesheet' media='print' />
-        <link id="themeStyleSheet" href="${pageContext.request.contextPath}/assets/dist/css/javatmp-default.min.css" rel="stylesheet" type="text/css"/>
+
+        <%-- Include directional support --%>
+        <c:if test="${labels['global.direction'] == 'ltr'}">
+            <link id="themeStyleSheet" href="${pageContext.request.contextPath}/assets/dist/css/javatmp-${sessionScope.user.theme}.min.css" rel="stylesheet" type="text/css"/>
+        </c:if>
+        <c:if test="${labels['global.direction'] == 'rtl'}">
+            <link id="themeStyleSheet" href="${pageContext.request.contextPath}/assets/dist/css/javatmp-${sessionScope.user.theme}-rtl.min.css" rel="stylesheet" type="text/css"/>
+        </c:if>
+
+        <%--
+        Include language support font in our case we named the file with lang ending.
+        You can use if/else or switch to specifiy a file
+        --%>
+        <link href="${pageContext.request.contextPath}/assets/dist/css/font-family-${labels['global.language']}.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <body class="sidebar-active">
+        <div id="oneTimeOverlay" style="position: fixed;width: 100%;height: 100%;top: 0px;left: 0;right: 0;bottom: 0;background-color: rgba(255,255,255,1);z-index: 1000000;cursor: wait;">${labels['global.loadingText']}</div>
         <nav class="main-javatmp-navbar navbar fixed-top my-0 py-0">
-            <a class="navbar-brand mr-auto py-0 d-none d-md-inline" href="${pageContext.request.contextPath}/">
-                JavaTMP
-                <span class="d-none d-xl-inline"> Accounting System</span>
+            <a class="text-center navbar-brand mr-auto d-none d-md-flex align-items-stretch" href="${pageContext.request.contextPath}/">
+                <span class="d-xl-none d-lg-none d-sm-inline">${labels['global.system.name.short']}</span>
+                <span class="d-none d-lg-inline">${labels['global.system.name.long']}</span>
             </a>
-            <ul class="main-navbar-menu nav ml-auto">
-                <li class="nav-item py-0 dropdown">
-                    <a class="nav-link user-profile-menu-item dropdown-toggle" data-toggle="dropdown" href="#">
-                        <img class="user-profile-pic rounded-circle"
-                             src="${pageContext.request.contextPath}/assets/img/avatar/profile_pic_min.png" alt=""/>
-                        <span class="user-profile-menu-item-info d-none d-md-inline-block">
-                            <small>Welcome,</small>
-                            Admin John smith
+            <ul class="main-navbar-menu nav ml-auto align-self-stretch flex-nowrap">
+                <li class="nav-item dropdown">
+                    <a class="line-height-1 d-flex align-items-center h-100 text-left nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                        <c:choose>
+                            <c:when test="${not empty sessionScope.user.profilePicDocument.documentId and not empty sessionScope.user.profilePicDocument.randomHash}">
+                                <img class="logo-image rounded-circle mr-1" src="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${sessionScope.user.profilePicDocument.documentId}&amp;randomHash=${sessionScope.user.profilePicDocument.randomHash}&amp;viewType=inline" alt=""/>
+                            </c:when>
+                            <c:otherwise>
+                                <img class="logo-image rounded-circle mr-1" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt=""/>
+                            </c:otherwise>
+                        </c:choose>
+                        <span class="d-none d-md-inline">
+                            <small class="d-flex">${labels['navbar.user.welcome']}</small>
+                            ${sessionScope.user.firstName}&nbsp;${sessionScope.user.lastName}
                         </span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-right">
                         <li>
-                            <a class="dropdown-item" href="#"><i class="far fa-lg fa-fw fa-user"></i>User Profile</a>
+                            <a class="dropdown-item"
+                               actionType="action-ref-href"
+                               href="#"
+                               action-ref-by-href="${pageContext.request.contextPath}/user/CurrentUserProfileController">
+                                <i class="fa fa-lg fa-fw fa-user"></i>
+                                ${labels['navbar.user.settings']}
+                            </a>
                         </li>
                         <li class="dropdown-divider"></li>
                         <li>
-                            <a class="dropdown-item" href="#"><i class="fa fa-lg fa-fw fa-square"></i>Lock Screen</a>
-                        </li>
-                        <li>
                             <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">
                                 <i class="fa fa-lg fa-fw fa-sign-out-alt"></i>
-                                Logout
+                                ${labels['navbar.user.logout']}
                             </a>
                         </li>
                     </ul>
                 </li>
             </ul>
-            <button class="navbar-toggler sidebar-toggler-button my-1 ml-1" type="button">
+            <button class="navbar-toggler sidebar-toggler-button my-1 ml-1 align-self-center" type="button">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </nav>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 m-0 p-0">
-                    <div class="sidebar scroll-content">
+                    <div class="sidebar scroll-content shadow">
                         <div class="sidebar-shortcut-button text-center m-1">
-                            <button class="btn btn-primary"
+                            <button class="btn btn-primary logout-home-btn-id"
                                     actionType="action-ref-href"
-                                    action-ref-by-href="${pageContext.request.contextPath}/pages/home"
+                                    action-ref-by-href="${pageContext.request.contextPath}/logout"
                                     data-toggle="tooltip" data-placement="auto"
-                                    title="JavaTMP Home Page">
-                                <i class="fa fa-home fa-fw"></i>
+                                    title="${labels['navbar.user.logout']}">
+                                <i class="fas fa-sign-out-alt"></i>
                             </button>
                             <button class="btn btn-primary"
                                     actionType="action-ref-href"
-                                    action-ref-by-href="${pageContext.request.contextPath}/pages/home"
+                                    action-ref-by-href="${pageContext.request.contextPath}/user/GetListUsersPage"
                                     data-toggle="tooltip" data-placement="auto"
-                                    title="JavaTMP Home Page">
-                                <i class="fa fa-home fa-fw"></i>
+                                    title="${labels['sidebar.menuItem.users.usersList']}">
+                                <i class="fas fa-users fa-fw"></i>
                             </button>
                             <button class="btn btn-primary"
                                     actionType="action-ref-href"
-                                    action-ref-by-href="${pageContext.request.contextPath}/pages/home"
+                                    action-ref-by-href="${pageContext.request.contextPath}/user/CreateUserController"
                                     data-toggle="tooltip" data-placement="auto"
-                                    title="JavaTMP Home Page">
-                                <i class="fa fa-home fa-fw"></i>
+                                    title="${labels['sidebar.menuItem.users.addNewUser']}">
+                                <i class="fas fa-user-plus"></i>
                             </button>
                             <button class="btn btn-primary"
                                     actionType="action-ref-href"
-                                    action-ref-by-href="${pageContext.request.contextPath}/pages/home"
+                                    action-ref-by-href="${pageContext.request.contextPath}/user/CurrentUserProfileController"
                                     data-toggle="tooltip" data-placement="auto"
-                                    title="JavaTMP Home Page">
-                                <i class="fa fa-home fa-fw"></i>
+                                    title="${labels['sidebar.menuItem.system.UserProfileSettings']}">
+                                <i class="far fa-user-circle"></i>
                             </button>
                             <button class="btn btn-primary"
                                     actionType="action-ref-href"
-                                    action-ref-by-href="${pageContext.request.contextPath}/pages/home"
+                                    action-ref-by-href="${pageContext.request.contextPath}/pages/home/home"
                                     data-toggle="tooltip" data-placement="auto"
-                                    title="JavaTMP Home Page">
-                                <i class="fa fa-home fa-fw"></i>
-                            </button>
-                            <button class="btn btn-primary"
-                                    actionType="action-ref-href"
-                                    action-ref-by-href="${pageContext.request.contextPath}/pages/home"
-                                    data-toggle="tooltip" data-placement="auto"
-                                    title="JavaTMP Home Page">
+                                    title="${labels['sidebar.menuItem.home']}">
                                 <i class="fa fa-home fa-fw"></i>
                             </button>
                         </div>
                         <div class="sidebar-menu-filter-form mx-2 my-1">
                             <form autocomplete="off" class="search-menu-form">
-                                <div class="has-feedback-icon has-clear">
-                                    <input id="filter-menu-id" type="text" class="form-control" placeholder="Search menu ..." autocomplete="off"/>
+                                <div class="has-form-control-clear">
+                                    <input id="filter-menu-id" type="text" class="form-control" placeholder="${labels['sidebar.search.placeholder']}" autocomplete="off"/>
                                     <span class="form-control-clear fa fa-times d-none"></span>
                                 </div>
                             </form>
                         </div>
                         <ul class="metismenu">
                             <li>
-                                <a href="${pageContext.request.contextPath}/pages/home">
+                                <a href="${pageContext.request.contextPath}/pages/home/home">
                                     <i class="fa fa-lg fa-fw fa-home"></i>
-                                    Home
+                                    ${labels['sidebar.menuItem.home']}
                                 </a>
                             </li>
                             <li>
                                 <a class="has-arrow" href="#">
-                                    <i class="far fa-lg fa-fw fa-object-group"></i>
-                                    Accounting
+                                    <i class="fa fa-lg fa-fw fa-users"></i>
+                                    ${labels['sidebar.menuItem.users']}
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/accounting/chart-of-accounts">
-                                            <i class="fa fa-lg fa-fw fa-sitemap"></i>
-                                            Chart Of Accounts
+                                        <a href="${pageContext.request.contextPath}/user/GetListUsersPage">
+                                            ${labels['sidebar.menuItem.users.usersList']}
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/accounting/general-ledger">
-                                            <i class="fa fa-lg fa-fw fa-book"></i>
-                                            General Ledger
+                                        <a href="${pageContext.request.contextPath}/user/GetListUsersWithDetailsPage">
+                                            ${labels['sidebar.menuItem.users.usersListWithDetails']}
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/accounting/transaction">
-                                            <i class="far fa-lg fa-fw fa-edit"></i>
-                                            Create Transaction
+                                        <a href="${pageContext.request.contextPath}/user/CreateUserController">
+                                            ${labels['sidebar.menuItem.users.addNewUser']}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/user/SearchForUserProfileController">
+                                            ${labels['sidebar.menuItem.users.searchForUser']}
                                         </a>
                                     </li>
                                 </ul>
                             </li>
                             <li>
                                 <a class="has-arrow" href="#">
-                                    <i class="far fa-lg fa-fw fa-chart-bar"></i>
-                                    Reports
+                                    <i class="fa fa-lg fa-fw fa-cogs"></i>
+                                    ${labels['sidebar.menuItem.system']}
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/reports/profit-loss-income">
-                                            <i class="far fa-lg fa-fw fa-chart-bar"></i>
-                                            Trail Balance
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="${pageContext.request.contextPath}/pages/reports/trial-balance">
-                                            <i class="far fa-lg fa-fw fa-chart-bar"></i>
-                                            Income Statement
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li>
-                                <a class="has-arrow" href="#">
-                                    <i class="fa fa-lg fa-fw fa-cog"></i>
-                                    System
-                                </a>
-                                <ul>
-                                    <li>
-                                        <a href="${pageContext.request.contextPath}/pages/system/user-profile">
-                                            <i class="far fa-lg fa-fw fa-user"></i>
-                                            User Profile
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="${pageContext.request.contextPath}/pages/system/activities-notifications">
-                                            <i class="fa fa-lg fa-fw fa-cog"></i>
-                                            Activities And Notifications
+                                        <a href="${pageContext.request.contextPath}/user/CurrentUserProfileController">
+                                            ${labels['sidebar.menuItem.system.UserProfileSettings']}
                                         </a>
                                     </li>
                                 </ul>
@@ -179,11 +173,11 @@
                         </ul>
                     </div>
                     <div class="main-content">
-                        <div class="main-breadcrumb-bar d-flex flex-row">
+                        <div class="main-breadcrumb-bar d-flex flex-row shadow">
                             <ol class="breadcrumb"></ol>
-                            <div class="breadcrumb-submenu">
-                                <a class="float-right min-tools-button">
-                                    <i class="fa fa-sync-alt  faa-spin animated-hover text-primary"></i>
+                            <div class="breadcrumb-submenu d-flex align-items-center pr-1 justify-content-end">
+                                <a class="min-tools-button mr-1 font-size-15">
+                                    <i class="fa fa-sync-alt faa-spin animated-hover line-height-base"></i>
                                 </a>
                             </div>
                         </div>
@@ -197,85 +191,121 @@
                 <a href="http://www.javatmp.com" target="_blank"><span>&copy; 2018 javatmp.com</span></a>
             </div>
         </div>
-        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
+        <div id="global-label-items-block" class="d-none">
+            <c:forEach items="${labels.keySet()}" var="entry"><i k="${entry}">${labels[entry]}</i></c:forEach>
+            </div>
+            <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all-locale-${sessionScope.user.lang}.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp.min.js" type="text/javascript"></script>
-        <!-- custom style for sidebar menu search text field -->
-        <style type="text/css">
-            .has-feedback-icon {
-                position: relative;
-            }
-            .search-menu-form .fa.form-control-clear {
-                pointer-events: initial;  /* or - auto // or -  unset  */
-                line-height: 1.5;
-                padding: .375rem .75rem;
-                font-size: 1rem;
-                z-index: 10;
-                pointer-events: auto;
-                cursor: pointer;
-                position: absolute;
-                right: 0;
-                top: 0;
-            }
-            ::-ms-clear {
-                display: none;
-            }
-
-            /* Extra large devices (large desktops, 1200px and up) */
-            @media (min-width: 1200px){
-                .modal-lg {
-                    max-width: 1024px;
-                }
-            }
-            @media (min-width: 1400px){
-                .modal-lg {
-                    max-width: 1200px;
-                }
-            }
-        </style>
+        <script src="${pageContext.request.contextPath}/assets/app/js/javatmp.plugins.js?v=47" type="text/javascript"></script>
         <script type="text/javascript">
             jQuery(function ($) {
-                $("body").on("click", '.disabled', function (event) {
-                    event.stopPropagation();
-                    event.preventDefault();
-                    return false;
+                var defaults = {
+                    defaultPassData: {_ajax: "ajax", _ajaxGlobalBlockUI: true, _handleAjaxErrorGlobally: true},
+                    defaultUrl: '${pageContext.request.contextPath}/pages/home/home',
+                    floatDefault: "${labels['global.floatDefault']}",
+                    floatReverse: "${labels['global.floatReverse']}",
+                    direction: "${labels['global.direction']}",
+                    isRTL: ${labels['global.direction'] == 'ltr' ? 'false' : 'true'},
+                    contextPath: '${pageContext.request.contextPath}',
+                    networkDateFormat: "YYYY-MM-DDTHH:mm:ss.SSSZ",
+                    dateFormat: "DD/MM/YYYY",
+                    dateTimeFormat: "DD/MM/YYYY HH:mm",
+                    dateTimeSecondFormat: "DD/MM/YYYY HH:mm:ss",
+                    labels: {}
+                };
+
+                $("#global-label-items-block > i[k]").each(function (index, element) {
+                    var key = $(element).attr("k");
+                    var value = $(element).html();
+                    defaults.labels[key] = value;
                 });
 
-                $("body").on("click", ".dropdown-menu-header,.dropdown-menu-footer", function (event) {
-                    event.stopPropagation();
+                index.init(defaults);
+
+                javatmp.plugins.init({
+                    locale: "${sessionScope.user.lang}",
+                    direction: javatmp.settings.direction,
+                    isRTL: javatmp.settings.isRTL,
+                    defaultSelectPlaceholder: javatmp.settings.labels['page.text.kindlySelect'],
+                    dateFormat: javatmp.settings.dateFormat,
+                    dateTimeFormat: javatmp.settings.dateTimeFormat
                 });
 
-                // tooltip demo
-                $('.sidebar').tooltip({
-                    selector: "[data-toggle=tooltip]",
-                    container: ".sidebar"
-                });
+                javatmp.user = {};
+                javatmp.user.id = "${sessionScope.user.id}";
+                javatmp.user.lang = "${sessionScope.user.lang}";
 
-                $.scrollUp({zIndex: 1000, scrollText: '<i class="fa fa-arrow-up"></i>'});
+                javatmp.settings.handle401Error = function (jqXHR, textStatus, errorThrown) {
+                    var modalMessage = null;
+                    var redirectURL = null;
+                    try {
+                        var ResponseMessage = JSON.parse(jqXHR.responseText);
+                        modalMessage = ResponseMessage.message;
+                        redirectURL = ResponseMessage.redirectURL;
+                    } catch (ex) {
+                        modalMessage = jqXHR.responseText;
+                        redirectURL = javatmp.settings.contextPath + "/";
+                    }
 
-                $('#filter-menu-id').on('input propertychange', function () {
-                    var $this = $(this);
-                    var visible = Boolean($this.val());
-                    $this.siblings('.form-control-clear').toggleClass('d-none', !visible);
-                }).trigger('propertychange').trigger('keyup');
-                $('.form-control-clear').click(function () {
-                    $(this).siblings('input[type="text"]').val('')
-                            .trigger('propertychange').trigger('keyup').focus();
-                });
-
-                $('#filter-menu-id').keyup(function () {
-                    var text = $(this).val().toLowerCase();
-                    $('.metismenu li').each(function () {
-                        if ($(this).text().toLowerCase().indexOf(text) === -1) {
-                            $(this).hide();
-                            $(this).children().removeClass("active");
-                            $(this).children().removeClass("in");
-                        } else {
-                            $(this).show();
-                            $(this).children("ul").css({height: "auto"});
-                            $(this).parentsUntil(".metismenu", "li").addClass("active");
-                            $(this).parentsUntil(".metismenu", "ul").addClass("in");
-                        }
+                    var modalWrapper = BootstrapModalWrapperFactory.createModal({
+                        message: modalMessage,
+                        title: jqXHR.statusText + " : " + jqXHR.status,
+                        closable: false,
+                        closeByBackdrop: false,
+                        buttons: [
+                            {
+                                label: "${labels['global.return']}",
+                                cssClass: "btn btn-secondary",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    modalWrapper.hide();
+                                }
+                            },
+                            {
+                                label: "${labels['globa.redirectToLoginPage']}",
+                                cssClass: "btn btn-danger",
+                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    modalWrapper.hide();
+                                    setTimeout(function () {
+                                        window.location.replace(redirectURL);
+                                    }, 200);
+                                }
+                            }
+                        ]
                     });
+                    modalWrapper.show();
+                };
+            });
+        </script>
+        <script type="text/javascript">
+            jQuery(function ($) {
+                $.ajaxSetup({
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        if (this.url.indexOf("_handleAjaxErrorGlobally=false") === -1) {
+                            var msg = 'Error on calling request.';
+                            toastr.error(msg, xhr.statusText + " : " + xhr.status, {
+                                timeOut: 4000,
+                                progressBar: true,
+                                rtl: javatmp.settings.isRTL,
+                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                            });
+                        }
+                    },
+                    statusCode: {
+                        401: function (jqXHR, textStatus, errorThrown) {
+                            if (this.url.indexOf("_handleAjaxErrorGlobally=false") === -1) {
+                                javatmp.settings.handle401Error(jqXHR, textStatus, errorThrown);
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
+        <script type="text/javascript">
+            jQuery(function ($) {
+                // register logout handler:
+                $(".logout-home-btn-id").on("click", function () {
+                    window.location.replace($(this).attr("action-ref-by-href"));
                 });
             });
         </script>
@@ -292,7 +322,6 @@
                 a.src = g;
                 m.parentNode.insertBefore(a, m);
             })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
             ga('create', 'UA-104738122-1', 'auto');
         </script>
         <script type="text/javascript">
@@ -308,41 +337,8 @@
         <!-- /build -->
         <script type="text/javascript">
             jQuery(function ($) {
-                javatmp.init({
-                    httpMethod: "GET",
-                    dataType: "html",
-                    updateURLHash: true,
-                    defaultPassData: {_ajax: "ajax", _ajaxGlobalBlockUI: true},
-                    defaultOutputSelector: '.main-body-content-container',
-                    defaultUrl: '${pageContext.request.contextPath}/pages/home',
-                    contextPath: '${pageContext.request.contextPath}'
-                });
+                $("#oneTimeOverlay").remove();
             });
         </script>
     </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

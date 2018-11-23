@@ -1,11 +1,9 @@
-
+@import "../common/variables.scss";
 body {
-    font-family: $font-family-base;
     padding-top: $javatmp-navbar-height;
     padding-bottom: 0;
     overflow-x: hidden;
-    /*position: relative;*/
-    /*font-size: 13px;*/
+    position: relative;
 }
 
 .main-content {
@@ -15,11 +13,7 @@ body {
 }
 
 .main-body-content-container {
-    padding: 40px 15px 15px 15px;
-}
-
-.dynamic-ajax-content {
-
+    padding: $javatmp-breadcrumb-bar-height ($grid-gutter-width / 2) 0 ($grid-gutter-width / 2);
 }
 
 // mobile and small devices
@@ -35,35 +29,44 @@ body.sidebar-active .main-content {
     body {
         padding-bottom: $javatmp-footer-bar-height;
     }
-
 }
 
 body.mouse-auto-show.sidebar-active .main-content {
     margin-left: 0px;
 }
 
-table.responsive {
-    table-layout: fixed;
-}
-table.responsive td, table.responsive > thead > tr > th {
-    white-space: normal !important;
-    word-wrap: break-word;
-}
-
-.page-header {
-    /*margin: -15px 0 15px 0;*/
-    border-bottom: 1px dotted $javatmp-main-content-page-header-border-bottom-color;
-    padding-bottom: 1px;
-    padding-top: 1px;
-    margin-bottom: 10px;
-    h1 {
-        margin: 10px 0;
-        display: inline-block;
-        font-size: $javatmp-main-content-page-header-h1-font-size;
-        color: $javatmp-main-content-page-header-h1-color;
+// v0.0.3: Added to support for theme colors
+body {
+    @each $color, $value in $theme-colors {
+        &.bg-#{$color} {
+            $temp-color: color-yiq($value);
+            .main-body-content-container {
+                border-bottom-color: $value;
+                background-color: $value;
+                color: $temp-color;
+                .card {
+                    background-color: $value;
+                    color: $temp-color;
+                    border-color: darken($value, 5%);
+                }
+                .card-header {
+                    color: $temp-color;
+                    background-color: $value;
+                    border-bottom-color: darken($value, 5%);
+                }
+                .card-footer {
+                    color: $temp-color;
+                    background-color: $value;
+                    border-top-color: darken($value, 5%);
+                }
+                /*                .card-body {
+                                    background-color: $value;
+                                    color: $temp-color;
+                                }*/
+            }
+        }
     }
 }
-
 .dropdown-item.disabled, .dropdown-item:disabled {
     cursor: not-allowed;
 }

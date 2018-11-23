@@ -1,3 +1,4 @@
+@import "../common/variables.scss";
 .sidebar {
     z-index: $javatmp-sidebar-z-index;
     position: fixed;
@@ -21,5 +22,20 @@
 
     @media (min-width: 768px) {
         bottom: $javatmp-footer-bar-height;
+    }
+}
+
+
+// v0.0.3: Added to support for sidebar bg and color using theme colors
+.sidebar {
+    @each $color, $value in $theme-colors {
+        &.bg-#{$color} {
+            $temp-color: color-yiq($value);
+
+            background-color: $value;
+            color: $temp-color;
+            border-right-color: $value;
+
+        }
     }
 }

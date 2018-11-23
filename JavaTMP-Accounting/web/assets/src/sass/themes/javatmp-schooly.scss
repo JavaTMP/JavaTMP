@@ -1,0 +1,123 @@
+
+// 1. overriding global Bootstrap variables:
+$white:    #fff !default;
+$gray-100: #F8FAFD !default;
+$gray-200: #EBEDF0 !default;
+$gray-300: #DFE1E4 !default;
+$gray-400: #D2D4D7 !default;
+$gray-500: #C5C7CA !default;
+$gray-600: #B8BABD !default;
+$gray-700: #ACAEB1 !default;
+$gray-800: #555555 !default;
+$gray-900: #484848 !default;
+$black:    #000 !default;
+
+$grays: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$grays: map-merge(
+(
+"100": $gray-100,
+"200": $gray-200,
+"300": $gray-300,
+"400": $gray-400,
+"500": $gray-500,
+"600": $gray-600,
+"700": $gray-700,
+"800": $gray-800,
+"900": $gray-900
+),
+$grays
+);
+
+$primary:       #428BCA !default;
+$secondary:     #ABBAC3 !default;
+$success:       #87B87F !default;
+$info:          #6FB3E0 !default;
+$warning:       #FFB752 !default;
+$danger:        #D15B47 !default;
+$light:         #E7E7E7 !default;
+$dark:          #555555 !default;
+
+$theme-colors: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$theme-colors: map-merge(
+(
+"primary":    $primary,
+"secondary":  $secondary,
+"success":    $success,
+"info":       $info,
+"warning":    $warning,
+"danger":     $danger,
+"light":      $light,
+"dark":       $dark
+),
+$theme-colors
+);
+
+$body-bg:                   #E4E6E9 !default;
+$body-color:                #393939 !default;
+
+$grid-gutter-width:           20px !default;
+
+$border-radius:               0 !default;
+$border-radius-lg:            0 !default;
+$border-radius-sm:            0 !default;
+
+$transition-base:             all .3s ease-in-out !default;
+
+$table-cell-padding:          .3rem !default;
+$input-btn-padding-x:         .5rem !default;
+
+$input-btn-padding-x-sm: .4rem !default;
+
+$input-btn-padding-x-lg:      .8rem !default;
+
+$input-color:                           $gray-800 !default;
+$input-border-color:                    $gray-500 !default;
+$input-group-addon-bg: $gray-100 !default;
+
+$form-group-margin-bottom:              .5rem !default;
+
+$custom-select-padding-x:           .5rem !default;
+
+$navbar-toggler-padding-x: .5rem !default;
+
+$card-spacer-y: .6rem !default;
+/*$card-cap-bg: $light!default;*/
+$dropdown-item-padding-x: 1.2rem !default;
+$nav-link-padding-x: .8rem !default;
+
+$list-group-action-color: $gray-900 !default;
+// --------------------------------
+
+// Include Required parts of Bootstrap
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+
+// 2. Override JavaTMP variables:
+$javatmp-secondary-bg: $light!default;
+
+$javatmp-navbar-bg: $danger!default;
+$javatmp-navbar-menu-link-hover-bg: darken($javatmp-navbar-bg, 7.5%)!default;;
+$javatmp-navbar-menu-link-active-bg: darken($javatmp-navbar-bg, 12.5%)!default;;
+$javatmp-navbar-brand-color: color-yiq($javatmp-navbar-bg)!default;;
+$javatmp-navbar-toggler-color: color-yiq($javatmp-navbar-bg)!default;;
+$javatmp-navbar-toggler-border-color: color-yiq($javatmp-navbar-bg)!default;;
+$javatmp-navbar-menu-link-color: color-yiq($javatmp-navbar-bg)!default;;
+$javatmp-navbar-menu-link-hover-color: color-yiq($javatmp-navbar-bg)!default;;
+$javatmp-navbar-menu-link-active-color: color-yiq($javatmp-navbar-bg)!default;;
+
+$javatmp-sidebar-bg: #2f2f2f!default;
+$javatmp-sidebar-link-color: color-yiq(#2f2f2f)!default;;
+$javatmp-sidebar-border-color: #2f2f2f!default;
+
+// 3. Override Plugins variables:
+
+@import "javatmp-default.scss";
+
+// Override any Generated CSS classes and styles.
+
+.main-breadcrumb-bar {
+    box-shadow: $box-shadow;
+}

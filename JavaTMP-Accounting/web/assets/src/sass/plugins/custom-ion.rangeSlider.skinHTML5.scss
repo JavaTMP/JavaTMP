@@ -1,3 +1,5 @@
+@import "../common/variables.scss";
+
 /*$ion-range-slider-radius: $border-radius;*/
 
 $ion-range-slider-irs-bar-bg: $primary!default;
@@ -10,7 +12,7 @@ $ion-range-slider-border-radius: $progress-border-radius!default;
 
 $ion-range-slider-label-padding: .1em .4em!default;
 $ion-range-slider-label-font-size: $progress-font-size!default;
-$ion-range-slider-label-line-height: 1em!default;
+$ion-range-slider-label-line-height: $progress-height;//1.1em!default;
 $ion-range-slider-label-bg: $ion-range-slider-irs-bar-bg!default;
 $ion-range-slider-label-color: color-yiq($ion-range-slider-label-bg)!default;
 
@@ -19,11 +21,18 @@ $ion-range-slider-edge-label-color: color-yiq($ion-range-slider-edge-label-bg)!d
 $ion-range-slider-grid-color: $body-color!default;
 $ion-range-slider-shadow-bar-bg: $body-color!default;
 
+$irs-height: 3.1rem;
+$irs-grid-height: 2.2rem;
+$irs-with-grid-height: $irs-height + $irs-grid-height;
+$irs-shadow-top: 2.45rem;
 .irs {
-    height: 55px;
+    height: $irs-height;
 }
 .irs-with-grid {
-    height: 75px;
+    height: $irs-with-grid-height;
+}
+.irs-grid {
+    height: $irs-grid-height;
 }
 
 .irs-line {
@@ -63,7 +72,7 @@ $ion-range-slider-shadow-bar-bg: $body-color!default;
 
 .irs-shadow {
     height: 2px;
-    top: $ion-range-slider-top + ($ion-range-slider-height/2rem);
+    top: $irs-shadow-top;
     background: $ion-range-slider-shadow-bar-bg;
     opacity: 0.3;
     @include border-left-radius($ion-range-slider-border-radius);
@@ -104,10 +113,6 @@ $ion-range-slider-shadow-bar-bg: $body-color!default;
     background: $ion-range-slider-label-bg;
     @include border-radius($ion-range-slider-border-radius);
 }
-
-.irs-grid {
-    height: 27px;
-}
 .irs-grid-pol {
     opacity: 0.5;
     background: $ion-range-slider-grid-color;
@@ -126,4 +131,23 @@ $ion-range-slider-shadow-bar-bg: $body-color!default;
 }
 .irs-disable-mask {
     cursor: not-allowed;
+}
+[dir=rtl] {
+    .single-ionRangeSlider {
+        .irs-line {
+            background: $ion-range-slider-shadow-bg;
+            border: 1px solid $ion-range-slider-shadow-bg;
+            background: $ion-range-slider-irs-bar-bg;
+            border: 1px solid $ion-range-slider-irs-bar-bg;
+        }
+        .irs-bar {
+            border-top: 1px solid $ion-range-slider-shadow-bg;
+            border-bottom: 1px solid $ion-range-slider-shadow-bg;
+            background: $ion-range-slider-shadow-bg;
+        }
+        .irs-bar-edge {
+            border: 1px solid $ion-range-slider-shadow-bg;
+            background: $ion-range-slider-shadow-bg;
+        }
+    }
 }

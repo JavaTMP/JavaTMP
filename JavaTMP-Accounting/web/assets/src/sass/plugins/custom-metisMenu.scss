@@ -1,3 +1,5 @@
+@import "../common/variables.scss";
+
 $metismenu-bg: $javatmp-sidebar-bg!default;
 $metismenu-link-bg: $metismenu-bg!default;
 $metismenu-link-color: $javatmp-sidebar-link-color!default;
@@ -7,7 +9,7 @@ $metismenu-transition: $transition-base!default;
 $metismenu-link-font-size: $font-size-base!default;
 $metismenu-link-padding-y: $nav-link-padding-y!default;
 $metismenu-link-padding-x: $nav-link-padding-x!default;
-$metismenu-link-border-width: 3px!default;
+$metismenu-link-border-width: 2px!default;
 $metismenu-link-border-bottom-color: darken($metismenu-bg, 10%)!default;
 
 $metismenu-link-hover-bg: lighten($metismenu-link-bg, 10%)!default;
@@ -18,7 +20,7 @@ $metismenu-link-active-bg: lighten($metismenu-link-bg, 15%)!default;
 $metismenu-link-active-color: darken($metismenu-link-color, 15%)!default;
 $metismenu-link-active-border-color: $metismenu-link-active-color!default;
 
-$metismenu-submenu-indent-width: 1.8em!default;
+$metismenu-submenu-indent-width: 2em!default;
 $metismenu-submenu-vertical-border-color: darken($metismenu-bg, 10%)!default;
 
 .metismenu {
@@ -26,13 +28,12 @@ $metismenu-submenu-vertical-border-color: darken($metismenu-bg, 10%)!default;
     margin: 0;
     background: $metismenu-bg;
     display: flex;
-    -webkit-box-orient: vertical;
     flex-direction: column;
     > li {
         display: flex;
-        -webkit-box-orient: vertical;
         flex-direction: column;
         position: relative;
+        border-bottom: 1px solid $metismenu-link-border-bottom-color;
     }
     a {
         position: relative;
@@ -52,7 +53,7 @@ $metismenu-submenu-vertical-border-color: darken($metismenu-bg, 10%)!default;
             border-left: $metismenu-link-border-width solid $metismenu-link-hover-border-color;
             border-right: none;
         }
-        &.active {
+        &.mm-active {
             color: $metismenu-link-active-color;
             background: $metismenu-link-active-bg;
             border-left: $metismenu-link-border-width solid $metismenu-link-active-border-color;
@@ -64,12 +65,12 @@ $metismenu-submenu-vertical-border-color: darken($metismenu-bg, 10%)!default;
         list-style: none;
         border-left: 1px solid $metismenu-submenu-vertical-border-color;
     }
-    li {
-        border-bottom: 1px solid $metismenu-link-border-bottom-color;
-        &:last-child {
-            border-bottom: 1px solid transparent;
-        }
-    }
+    /*    li {
+            border-bottom: 1px solid $metismenu-link-border-bottom-color;
+            &:last-child {
+                border-bottom: none;
+            }
+        }*/
     .has-arrow {
         &:after {
             transform: rotate(-45deg) translateY(-50%);
@@ -77,7 +78,7 @@ $metismenu-submenu-vertical-border-color: darken($metismenu-bg, 10%)!default;
             right: 1em;
         }
     }
-    .active > .has-arrow:after {
+    .mm-active > .has-arrow:after {
         transform: rotate(45deg) translateY(-50%);
     }
 }
@@ -90,7 +91,7 @@ $metismenu-submenu-vertical-border-color: darken($metismenu-bg, 10%)!default;
             border-right: $metismenu-link-border-width solid $metismenu-link-hover-border-color;
             border-left: none;
         }
-        &.active {
+        &.mm-active {
             border-left: none;
             border-right: $metismenu-link-border-width solid $metismenu-link-active-border-color;
         }
@@ -102,5 +103,58 @@ $metismenu-submenu-vertical-border-color: darken($metismenu-bg, 10%)!default;
         padding-right: 0px;
         border-left: none;
         border-right: 1px solid $metismenu-submenu-vertical-border-color;
+    }
+    .mm-active > .has-arrow:after {
+        transform: rotate(45deg) translateY(-50%);
+    }
+}
+
+// v0.0.3: Added to support for sidebar bg and color using theme colors
+.sidebar {
+    @each $color, $value in $theme-colors {
+        &.bg-#{$color} {
+            $temp-color: color-yiq($value);
+            .metismenu {
+                background: $value;
+                color: $temp-color;
+                > li {
+                    border-bottom-color: lighten($value, 10%);
+                }
+                a {
+                    color: $temp-color;
+                    background: $value;
+                    &:hover, &:focus, &:active {
+                        background: darken($value, 10%);
+                        color: $temp-color;
+                        border-left-color: $temp-color;
+                    }
+                    &.mm-active {
+                        background: darken($value, 15%);
+                        color: $temp-color;
+                        border-left-color: $temp-color;
+                    }
+                }
+                ul {
+                    border-left-color: lighten($value, 10%);
+                }
+                /*                li {
+                                    border-bottom-color: lighten($value, 10%);
+                                }*/
+            }
+
+            [dir="rtl"] .metismenu {
+                a {
+                    &:hover, &:focus, &:active {
+                        border-right-color: $temp-color;
+                    }
+                    &.mm-active {
+                        border-right-color: $temp-color;
+                    }
+                }
+                ul {
+                    border-right-color: lighten($value, 10%);
+                }
+            }
+        }
     }
 }

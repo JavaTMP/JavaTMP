@@ -1,3 +1,4 @@
+@import "../common/variables.scss";
 
 $card-extender-fullscreen-z-index: 1029 !default;
 $card-extender-options-color: $primary !default;
@@ -37,6 +38,27 @@ $card-extender-options-transition: $transition-base !default;
                     color: $card-extender-options-hover-color;
                     text-decoration: underline;
                     transform: scale(1.3);
+                }
+            }
+        }
+    }
+}
+
+// v0.0.3: Added to support for theme colors
+body {
+    @each $color, $value in $theme-colors {
+        &.bg-#{$color} {
+            $temp-color: color-yiq($value);
+            .card {
+                > .card-header {
+                    > .options {
+                        > a {
+                            color: $temp-color;
+                            &:hover {
+                                color: darken($temp-color, 10%);
+                            }
+                        }
+                    }
                 }
             }
         }

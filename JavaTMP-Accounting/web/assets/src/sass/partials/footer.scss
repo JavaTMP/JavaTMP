@@ -1,3 +1,5 @@
+@import "../common/variables.scss";
+
 .main-footer-bar {
     bottom: 0;
     text-align: center;
@@ -11,7 +13,27 @@
         position: fixed;
     }
     .footer-content {
-        padding: 5px;
+        height: $javatmp-footer-bar-height;
+        a {
+            vertical-align: middle;
+        }
     }
 }
+
+// v0.0.3: Added to support for theme colors
+.main-footer-bar {
+    @each $color, $value in $theme-colors {
+        &.bg-#{$color} {
+            $temp-color: color-yiq($value);
+            border-top-color: $value;
+            background-color: $value;
+            color: $temp-color;
+            a {
+                color: $temp-color;
+            }
+        }
+    }
+}
+
+
 
