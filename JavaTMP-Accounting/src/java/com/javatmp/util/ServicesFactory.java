@@ -1,5 +1,6 @@
 package com.javatmp.util;
 
+import com.javatmp.module.accounting.AccountService;
 import com.javatmp.module.timezone.TimezoneService;
 import com.javatmp.module.activity.ActivityService;
 import com.javatmp.module.theme.ThemeService;
@@ -23,6 +24,7 @@ public class ServicesFactory {
     private final DocumentService documentService;
     private final UserStatsService userStatsService;
     private final ActivityService activityService;
+    private final AccountService accountService;
 
     public ServicesFactory(String persistentUnitName) {
         logger.info("*** Start ServicesFactory Constructor @ [" + new Date() + "]");
@@ -35,6 +37,7 @@ public class ServicesFactory {
         this.userService = new UserService(jpaDaoHelper);
         this.userStatsService = new UserStatsService(jpaDaoHelper);
         this.activityService = new ActivityService(jpaDaoHelper);
+        this.accountService = new AccountService(jpaDaoHelper);
         this.logger.info("*** End ServicesFactory Constructor @ [" + new Date() + "]");
     }
 
@@ -90,5 +93,12 @@ public class ServicesFactory {
      */
     public ActivityService getActivityService() {
         return activityService;
+    }
+
+    /**
+     * @return the accountService
+     */
+    public AccountService getAccountService() {
+        return accountService;
     }
 }

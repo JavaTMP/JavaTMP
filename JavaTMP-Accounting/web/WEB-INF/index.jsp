@@ -131,6 +131,52 @@
                             </li>
                             <li>
                                 <a class="has-arrow" href="#">
+                                    <i class="far fa-lg fa-fw fa-object-group"></i>
+                                    Accounting
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/accounting/chart-of-accounts">
+                                            <i class="fa fa-lg fa-fw fa-sitemap"></i>
+                                            Chart Of Accounts
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/accounting/general-ledger">
+                                            <i class="fa fa-lg fa-fw fa-book"></i>
+                                            General Ledger
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/accounting/transaction">
+                                            <i class="far fa-lg fa-fw fa-edit"></i>
+                                            Create Transaction
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="has-arrow" href="#">
+                                    <i class="far fa-lg fa-fw fa-chart-bar"></i>
+                                    Reports
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/reports/profit-loss-income">
+                                            <i class="far fa-lg fa-fw fa-chart-bar"></i>
+                                            Trail Balance
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/reports/trial-balance">
+                                            <i class="far fa-lg fa-fw fa-chart-bar"></i>
+                                            Income Statement
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="has-arrow" href="#">
                                     <i class="fa fa-lg fa-fw fa-users"></i>
                                     ${labels['sidebar.menuItem.users']}
                                 </a>
