@@ -136,7 +136,7 @@ var config = {
         "jquery-validation": [
             {"from": "${sourceNodeLib}/jquery-validation/dist/jquery.validate.min.js", "to": "${destComponentsLib}/jquery-validation/dist"},
             {"from": "${sourceNodeLib}/jquery-validation/dist/additional-methods.js", "to": "${destComponentsLib}/jquery-validation/dist", processJS: true},
-            {"from": "${sourceNodeLib}/jquery-validation/dist/localization/**/*", "to": "${destComponentsLib}/jquery-validation/dist/localization"}
+            {"from": "${sourceNodeLib}/jquery-validation/dist/localization/**/*", "to": "${destComponentsLib}/jquery-validation/dist/localization", processJS: true}
         ],
         "inputmask": [
             {"from": "${sourceNodeLib}/inputmask/dist/min/jquery.inputmask.bundle.min.js", "to": "${destComponentsLib}/inputmask/dist/min"},
@@ -361,7 +361,7 @@ var src = {
             "./web/components/summernote/dist/lang/summernote-ar-AR.min.js",
             "./web/components/fullcalendar/dist/locale/ar.js",
             "./web/components/timeago/locales/jquery.timeago.ar.js",
-            "./web/components/jquery-validation/dist/localization/messages_ar.min.js"
+            "./web/components/jquery-validation/dist/localization/messages_ar.js"
         ]
     },
     "fontFamilyFiles": {
