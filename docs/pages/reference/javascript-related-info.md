@@ -14,3 +14,5 @@ title: Javascript Related Information
 - [Highcharts: Interactive JavaScript charts for webpage](https://www.highcharts.com/)
 - [DevExtreme HTML5 JavaScript Component Suite for Responsive Web Development](https://js.devexpress.com/)
 - [Editable JavaScript TreeGrid/Gantt chart](http://www.treegrid.com/)
+- [TinyMCE WYSIWYG HTML Editor](https://www.tiny.cloud/)
+- [Froala WYSIWYG HTML Editor](https://www.froala.com/wysiwyg-editor)
