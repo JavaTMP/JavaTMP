@@ -139,7 +139,7 @@
                     autoScroll: true,
                     source: {
                         url: "${pageContext.request.contextPath}/accounting/chartOfAccounts",
-                        debugDelay: 500,
+//                        debugDelay: 500,
                         cache: false
                     },
                     init: function (event, data) {
@@ -173,7 +173,7 @@
 //                        ];
                     },
                     table: {
-                        indentation: 20,
+                        indentation: 30,
                         nodeColumnIdx: 1
                     },
                     activate: function (event, data) {
