@@ -8,3 +8,9 @@ title: Javascript Related Information
 
 ## Technical and Articles wanted
 - How to set horizontal and vertical scroll with fixed header and footer to HTML table
+
+## Commercial Front end Components and frameworks
+- [ag-Grid is a fully-featured and highly customizable JavaScript grid/tree table](https://www.ag-grid.com/)
+- [Highcharts: Interactive JavaScript charts for webpage](https://www.highcharts.com/)
+- [DevExtreme HTML5 JavaScript Component Suite for Responsive Web Development](https://js.devexpress.com/)
+- [Editable JavaScript TreeGrid/Gantt chart](http://www.treegrid.com/)
