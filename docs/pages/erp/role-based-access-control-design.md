@@ -8,6 +8,14 @@ to access information they need to do their jobs, while preventing them from acc
 that is not relevant to them. An user's role determines the permissions he or she is granted
 and ensures that lower level users are not able to access sensitive information or perform high-level tasks.
 
+### Entity Definitions:
+The main entities of RBAC system:
+- Action. Things that users can do with the resource. Like create, read, update, delete, print, email or share.
+- Role. Collection of actions that users can have. like manager, admin, supervisor or editor.
+- Resources. Things that users can manipulate. Like contracts, users, documents.
+- User. An individual who has a profile in the system with username and password.
+- Group. A set of users. When you assign a role to a group, all users within that group have that role.
+
 In our RBAC Design, there are three rules:
 - A user must be assigned a certain role in order to conduct a certain action, called a transaction.
 - A user needs a role authorization to be allowed to hold that role.
