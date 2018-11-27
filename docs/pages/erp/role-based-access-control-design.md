@@ -8,22 +8,13 @@ to access information they need to do their jobs, while preventing them from acc
 that is not relevant to them. An user's role determines the permissions he or she is granted
 and ensures that lower level users are not able to access sensitive information or perform high-level tasks.
 
-### Entity Definitions:
-The main entities of RBAC system:
-- Action. Things that users can do with the resource. Like create, read, update, delete, print, email or share.
-- Role. Collection of actions that users can have. like manager, admin, supervisor or editor.
-- Resources. Things that users can manipulate. Like contracts, users, documents.
-- User. An individual who has a profile in the system with username and password.
-- Group. A set of users. When you assign a role to a group, all users within that group have that role.
-
-In our RBAC Design, there are three rules:
-- A user must be assigned a certain role in order to conduct a certain action, called a transaction.
-- A user needs a role authorization to be allowed to hold that role.
-- Permission authorization allows the user to perform certain action.
-The permission has to be allowed to occur through the role membership.
-Users won’t be able to perform action permission other than the ones they are authorized for.
-All access is controlled through roles that people are given, which is a set of permissions.
-An user's role determines what permissions he or she is granted.
+Within an organization, roles are created for various job functions.
+The permissions to perform certain operations are assigned to specific roles.
+Users or Group of users are assigned particular roles, and through those role assignments acquire
+the permissions needed to perform particular system functions. Since users are not assigned permissions directly,
+but only acquire them through their role (or roles), management of individual user rights becomes
+a matter of simply assigning appropriate roles to the user's account;
+this simplifies common operations, such as adding a user, or changing a user's department.
 
 Access management for resources is a critical function for any organization.
 Role-based access control (RBAC) helps you manage who has access to resources,
@@ -32,38 +23,50 @@ what they can do with those resources, and what areas they have access to.
 The way you control access to resources using RBAC is to create role assignments.
 it’s how permissions are enforced. A role assignment consists of three elements: principal, role, and module.
 
-### Principal
-A security principal is an object that represents a user, group.
-- User. An individual who has a profile in the system with username and password.
-- Group. A set of users. When you assign a role to a group, all users within that group have that role.
-
-### Role
-A role is a collection of permissions. A role lists the operations that can be performed,
-such as read, write, and delete. Roles can be high-level, like owner, or specific, like reader.
-System should include several built-in roles that you can use. The following lists four fundamental built-in roles:
-- Owner. Has full access to all resources including the right to delegate access to others.
-- Reader. Can view existing resources.
-- Manager. Has full access to resource.
-- Administrator. Lets you manage user access to resources.
-
-### Module
+### Entity Definitions:
+The main entities of RBAC system are:
+- Operation, Function or Action. Things that users can do with the resource. Like create, read, update, delete, print, email or share.
+- Role. Collection of actions that users can have. like manager, admin, supervisor or editor.
+A role lists the operations that can be performed, such as read, write, and delete.
+Roles can be high-level, like owner, or specific, like reader.
+System should include several built-in roles that you can use like Owner, Reader, Manager or Administrator.
+- Module. Entity/resource type in your application on which certain actions can be performed on.
+A module could be a User, a Membership, a Product, accounting, billing or resource type module.
+Each of these modules come with a set of operations, functions or actions which are pre-defined by the module,
+e.g actions to create a user, activate users etc. These actions get installed along with the modules
+into the applications database table called 'action'.
 Module is the boundary that the access applies to. When you assign a role,
 you can further limit the actions allowed by defining a module.
-This is helpful if you want to make someone an administrator on module and a reader on another module.
-
-### Role assignments
+This is helpful if you want to make someone an administrator on one module but a reader on another module.
+- Resource. Thing that users can manipulate. Like instance of contract, user, document or module.
+- User. An individual who has a profile in the system with username and password.
+- Group. A set of users. When you assign a role to a group, all users within that group have that role.
+- Principal. A principal is an object that represents a user or a group.
+- Permission. A mapping involving User, Role and module.
 A role assignment is the process of binding a role definition to a user or group principal
-at a particular module for the purpose of granting access to specific resources.
+on a particular module for the purpose of granting access to specific resources.
 Access is granted by creating a role assignment, and access is revoked by removing a role assignment.
-
-### Deny assignments
-A deny assignment binds a set of deny actions to a user or group principal
+- Deny assignments. A deny assignment binds a set of deny actions to a user or group principal
 on a particular module for the purpose of denying access to resource.
 A role assignment defines a set of actions that are allowed,
 while a deny assignment defines a set of actions that not allowed.
 In other words, deny assignments block users from performing specified actions
 even if a role assignment grants them access.
 Deny assignments take precedence over role assignments.
+
+### Main Features
+The main feature of RBAC system are:
+- A user must be assigned a certain role in order to exercise a certain action, called a permission.
+- Permission authorization allows the user to perform certain action.
+- All access is controlled through roles that people are given, which is a set of actions.
+This role determines what permissions he or she is granted.
+- A principal can have multiple roles.
+- A role can have multiple principals.
+- A role can have many actions.
+- An action can be assigned to many roles.
+- An user can belong to multiple groups.
+- A group can have many users.
+- A group can have many groups but only one parent group.
 
 ## References
 - [Role-based access control](https://en.wikipedia.org/wiki/Role-based_access_control)
