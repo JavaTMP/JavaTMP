@@ -104,6 +104,6 @@ and providing a table-level control too.
 - [How to design role based access control?](https://softwareengineering.stackexchange.com/questions/348636/how-to-design-role-based-access-control)
 - [High Level Design of Role Based Access Controller](https://cwiki.apache.org/confluence/display/SQOOP/High+Level+Design+of+Role+Based+Access+Controller)
 - [Implement Access Control in Node.js](https://blog.nodeswat.com/implement-access-control-in-node-js-8567e7b484d1)
-- []()
+- [How to design a hierarchical role based access control system](https://stackoverflow.com/questions/16139712/how-to-design-a-hierarchical-role-based-access-control-system)
 - []()
 - []()
