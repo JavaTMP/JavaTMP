@@ -23,11 +23,12 @@ what they can do with those resources, and what areas they have access to.
 The way you control access to resources using RBAC is to create role assignments.
 it’s how permissions are enforced. A role assignment consists of three elements: principal, role, and module.
 
-### Entity Definitions:
+### Entity Definitions
 The main entities of RBAC system are:
 - Operation, Function or Action. Things that users can do with the resource. Like create, read, update, delete, print, email or share.
 - Role. Collection of actions that users can have. like manager, admin, supervisor or editor.
 A role lists the operations that can be performed, such as read, write, and delete.
+Roles conceptually represent a named collection of permissions.
 Roles can be high-level, like owner, or specific, like reader.
 System should include several built-in roles that you can use like Owner, Reader, Manager or Administrator.
 - Module. Entity/resource type in your application on which certain actions can be performed on.
@@ -67,6 +68,11 @@ This role determines what permissions he or she is granted.
 - An user can belong to multiple groups.
 - A group can have many users.
 - A group can have many groups but only one parent group.
+- It will answer the question "does user X have permission to perform action Y ?".
+
+### Implementation
+We will implement a role-based access control to enforce row-level privileges on every row in the database
+and providing a table-level control too.
 
 ## References
 - [Role-based access control](https://en.wikipedia.org/wiki/Role-based_access_control)
