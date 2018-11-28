@@ -75,17 +75,24 @@ This role determines what permissions he or she is granted.
 ### Permission Types
 There are three types of permissions:
 - “row”: a regular row-level permission.
-“table”: a permission granted upon a table itself, as opposed to its contents.
+- “table”: a permission granted upon a table itself, as opposed to its contents.
 For example, “create” action cannot be applied to a row, because a row has to exist for a permission to apply to it.
 “create” can be granted upon a table, which allows a user to create a row in that table.
-“global”: a permission granted on all rows in a given table existed or not yet.
+- “global”: a permission granted on all rows in a given table existed or not yet.
 For example, User Auditor Group should be able to view details for every user which might be hidden from other users.
 A single global permission in the ACL can grant this.
 
 ### Implementation
 We will implement a role-based access control to enforce row-level privileges on every row in the database
 and providing a table-level control too.
-
+- Create a RBAC database schema.
+- Populate RBAC database schema with metadata and a set of actions for each module or type.
+- Implement a way to determine whether a user can take an action.
+- Implement standard RBAC reports. like:
+    - All object permissions. shows you every permission a given user has on an object.
+    - All table permissions shows you every permission a given user has on a table.
+    - All ACL entries shows you all ACL entries defined for a particular row.
+    - All actionable rows shows you all rows a user can take a particular action on.
 ## References
 - [Role-based access control](https://en.wikipedia.org/wiki/Role-based_access_control)
 - [A Role-Based Access Control (RBAC) system for PHP](https://www.tonymarston.net/php-mysql/role-based-access-control.html)
