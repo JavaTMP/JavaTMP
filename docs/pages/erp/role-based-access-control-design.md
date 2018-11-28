@@ -93,6 +93,7 @@ and providing a table-level control too.
     - All table permissions shows you every permission a given user has on a table.
     - All ACL entries shows you all ACL entries defined for a particular row.
     - All actionable rows shows you all rows a user can take a particular action on.
+
 ## References
 - [Role-based access control](https://en.wikipedia.org/wiki/Role-based_access_control)
 - [A Role-Based Access Control (RBAC) system for PHP](https://www.tonymarston.net/php-mysql/role-based-access-control.html)
