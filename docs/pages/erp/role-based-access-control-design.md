@@ -26,6 +26,8 @@ it’s how permissions are enforced. A role assignment consists of three element
 ### Entity Definitions
 The main entities of RBAC system are:
 - Operation, Function or Action. Things that users can do with the resource. Like create, read, update, delete, print, email or share.
+Actions are important because they’re the verbs in the “can user X do Y to object Z” question.
+Certain actions will apply to all types, such as read/write/delete, but others will only apply to specific types
 - Role. Collection of actions that users can have. like manager, admin, supervisor or editor.
 A role lists the operations that can be performed, such as read, write, and delete.
 Roles conceptually represent a named collection of permissions.
@@ -69,6 +71,16 @@ This role determines what permissions he or she is granted.
 - A group can have many users.
 - A group can have many groups but only one parent group.
 - It will answer the question "does user X have permission to perform action Y ?".
+
+### Permission Types
+There are three types of permissions:
+- “row”: a regular row-level permission.
+“table”: a permission granted upon a table itself, as opposed to its contents.
+For example, “create” action cannot be applied to a row, because a row has to exist for a permission to apply to it.
+“create” can be granted upon a table, which allows a user to create a row in that table.
+“global”: a permission granted on all rows in a given table existed or not yet.
+For example, User Auditor Group should be able to view details for every user which might be hidden from other users.
+A single global permission in the ACL can grant this.
 
 ### Implementation
 We will implement a role-based access control to enforce row-level privileges on every row in the database
