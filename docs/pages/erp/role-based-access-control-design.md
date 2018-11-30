@@ -106,5 +106,6 @@ and providing a table-level control too.
 - [High Level Design of Role Based Access Controller](https://cwiki.apache.org/confluence/display/SQOOP/High+Level+Design+of+Role+Based+Access+Controller)
 - [Implement Access Control in Node.js](https://blog.nodeswat.com/implement-access-control-in-node-js-8567e7b484d1)
 - [How to design a hierarchical role based access control system](https://stackoverflow.com/questions/16139712/how-to-design-a-hierarchical-role-based-access-control-system)
-- []()
-- []()
+- [Bitwise operators for permissions](https://codereview.stackexchange.com/questions/79020/bitwise-operators-for-permissions)
+- [Best design pattern to control permissions on a “per object per user” basis with ServiceStack?](https://stackoverflow.com/questions/22375880/best-design-pattern-to-control-permissions-on-a-per-object-per-user-basis-with)
+- [Store an integer for bitwise compare in a permission model using JPA 2](https://stackoverflow.com/questions/14825280/store-an-integer-for-bitwise-compare-in-a-permission-model-using-jpa-2)
