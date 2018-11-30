@@ -3,15 +3,11 @@ package com.javatmp.module.accounting;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,39 +21,42 @@ import javax.persistence.TemporalType;
 public class Account implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
     @Column(name = "id")
     private Long id;
-    @Basic(optional = false)
+
     @Column(name = "accountCode")
     private String accountCode;
-    @Basic(optional = false)
+
     @Column(name = "name")
     private String name;
+
     @Column(name = "description")
     private String description;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+
     @Column(name = "debit")
     private BigDecimal debit;
+
     @Column(name = "credit")
     private BigDecimal credit;
+
     @Column(name = "balance")
     private BigDecimal balance;
+
     @Column(name = "status")
     private Integer accountStatus;
 
-    @Basic(optional = false)
     @Column(name = "creationDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
 
     @Column(name = "accountGroup")
-    private Integer accountType;
+    private Integer accountGroup;
 
     @Column(name = "parentAccount")
-    private Long parentAccountId;
+    private Long parentAccount;
 
     public Account() {
     }
@@ -75,7 +74,7 @@ public class Account implements Serializable {
 
     public Account(Long accountId, String accountCode, String accountName,
             String accountDescription, BigDecimal debit, BigDecimal credit,
-            BigDecimal balance, Integer accountType, Long parentAccountId,
+            BigDecimal balance, Integer accountGroup, Long parentAccount,
             Integer accountStatus) {
         this.id = accountId;
         this.accountCode = accountCode;
@@ -84,8 +83,8 @@ public class Account implements Serializable {
         this.debit = debit;
         this.credit = credit;
         this.balance = balance;
-        this.accountType = accountType;
-        this.parentAccountId = parentAccountId;
+        this.accountGroup = accountGroup;
+        this.parentAccount = parentAccount;
         this.accountStatus = accountStatus;
     }
 
@@ -195,29 +194,29 @@ public class Account implements Serializable {
     /**
      * @return the accountType
      */
-    public Integer getAccountType() {
-        return accountType;
+    public Integer getAccountGroup() {
+        return accountGroup;
     }
 
     /**
-     * @param accountType the accountType to set
+     * @param accountGroup the accountGroup to set
      */
-    public void setAccountType(Integer accountType) {
-        this.accountType = accountType;
+    public void setAccountGroup(Integer accountGroup) {
+        this.accountGroup = accountGroup;
     }
 
     /**
      * @return the parentAccountId
      */
-    public Long getParentAccountId() {
-        return parentAccountId;
+    public Long getParentAccount() {
+        return parentAccount;
     }
 
     /**
      * @param parentAccountId the parentAccountId to set
      */
-    public void setParentAccountId(Long parentAccountId) {
-        this.parentAccountId = parentAccountId;
+    public void setParentAccount(Long parentAccountId) {
+        this.parentAccount = parentAccountId;
     }
 
 }

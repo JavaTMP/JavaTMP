@@ -1,17 +1,13 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <h5 class="my-3">Blank Card Page Title</h5>
+    <h5 class="my-3">Chart Of Accounts</h5>
     <hr/>
     <div class="row">
         <div class="col">
             <div class="card">
                 <div class="card-header">
                     <nav class="nav d-inline">
-                        <a class="d-inline nav-link"
-                           action-name="Add-New-Account-Action"
-                           actionType="ajax-model"
-                           data-actionable-options='{"size":"modal-lg", "title": "Loading .."}'
-                           href="${pageContext.request.contextPath}/pages/accounting/addNewAccountPopup">
+                        <a class="d-inline nav-link" id="Add-New-Account-Action" href="javascript:;">
                             Add New Account
                         </a>
                         <a class="d-inline nav-link" href="#">Link</a>
@@ -108,19 +104,19 @@
 
                     // Pass 1: store all tasks in reference map
                     $.each(childList, function (i, c) {
-                        nodeMap[c.accountId] = c;
+                        nodeMap[c.id] = c;
                     });
                     // Pass 2: adjust fields and fix child structure
                     childList = $.map(childList, function (c) {
                         // Rename 'key' to 'id'
-                        c.key = c.accountId;
-                        c.title = c.accountName;
-                        c.tooltip = c.accountDescription;
+                        c.key = c.id;
+                        c.title = c.name;
+                        c.tooltip = c.description;
 //                        c.icon = "far fa-heart";
                         // Check if c is a child node
-                        if (c.parentAccountId) {
+                        if (c.parentAccount) {
                             // add c to `children` array of parent node
-                            parent = nodeMap[c.parentAccountId];
+                            parent = nodeMap[c.parentAccount];
                             parent.folder = true;
                             parent.expanded = true;
                             if (parent.children) {
@@ -137,7 +133,7 @@
                     return childList;
                 }
 
-                $("#chartOfAccountMainTable").fancytree({
+                var chartOfAccountTree = $("#chartOfAccountMainTable").fancytree({
                     rtl: javatmp.settings.isRTL,
                     extensions: ["glyph", "table"],
                     checkbox: false,
@@ -215,6 +211,23 @@
                     }
                 });
 
+                var addNewUserPopupButton = $("#Add-New-Account-Action");
+                addNewUserPopupButton.on("click", function (event) {
+                    BootstrapModalWrapperFactory.createAjaxModal({
+                        message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
+                        title: "${labels['global.loadingText']}",
+                        passData: {},
+                        updateSizeAfterDataFetchTo: "modal-lg", // default is  or null for standard or "modal-sm"
+                        size: "modal-lg",
+                        url: javatmp.settings.contextPath + "/accounting/AddNewAccountPopup",
+                        ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady,
+                        localData: {
+                            callback: function (callbackData) {
+                                chartOfAccountTree.fancytree("getTree").reload();
+                            }}
+                    });
+                });
+
             });
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
@@ -239,6 +252,5 @@
                 $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenExpand);
                 return true;
             });
-        });
-    </script>
+        });</script>
 </div>

@@ -39,6 +39,12 @@ CREATE TABLE accountGroup (
     CONSTRAINT accountGroup_id_pk PRIMARY KEY (id),
     CONSTRAINT accountGroup_accountType_fk FOREIGN KEY (accountType) REFERENCES accountType (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO accountGroup (id, name, description, accountType) VALUES
+(1, 'Asset account', 'Asset account', 1),
+(2, 'Liability account', 'Liability account', 2),
+(3, 'Capital (Owner''s Equity) account', 'Capital (Owner''s Equity) account', 3),
+(4, 'Revenue account', 'Revenue account', 4),
+(5, 'Expense account', 'Expense account', 5);
 
 CREATE TABLE account (
     id BIGINT UNSIGNED not null AUTO_INCREMENT,

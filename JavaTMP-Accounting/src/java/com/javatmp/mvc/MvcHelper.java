@@ -36,6 +36,8 @@ import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.converters.DateConverter;
 import org.apache.commons.beanutils.converters.DateTimeConverter;
+import org.apache.commons.beanutils.converters.IntegerConverter;
+import org.apache.commons.beanutils.converters.LongConverter;
 import org.apache.commons.lang3.builder.RecursiveToStringStyle;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
@@ -94,7 +96,12 @@ public class MvcHelper {
 
         DateTimeConverter dtConverter = new DateConverter();
         dtConverter.setPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+        IntegerConverter ic = new IntegerConverter(null);
+        LongConverter longConverter = new LongConverter(null);
+
         ConvertUtils.register(dtConverter, Date.class);
+        ConvertUtils.register(ic, Integer.class);
+        ConvertUtils.register(longConverter, Long.class);
 
         while (names.hasMoreElements()) {
             String name = (String) names.nextElement();
