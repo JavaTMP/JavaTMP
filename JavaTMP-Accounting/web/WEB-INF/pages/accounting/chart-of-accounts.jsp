@@ -7,10 +7,16 @@
             <div class="card">
                 <div class="card-header">
                     <nav class="nav d-inline">
-                        <a class="d-inline nav-link active" href="#">Active</a>
+                        <a class="d-inline nav-link"
+                           action-name="Add-New-Account-Action"
+                           actionType="ajax-model"
+                           data-actionable-options='{"size":"modal-lg", "title": "Loading .."}'
+                           href="${pageContext.request.contextPath}/pages/accounting/addNewAccountPopup">
+                            Add New Account
+                        </a>
                         <a class="d-inline nav-link" href="#">Link</a>
                         <a class="d-inline nav-link" href="#">Link</a>
-                        <a class="d-inline nav-link disabled" href="#">Disabled</a>
+                        <a class="d-inline nav-link" href="#">Disabled</a>
                     </nav>
                     <div class="options float-right">
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
