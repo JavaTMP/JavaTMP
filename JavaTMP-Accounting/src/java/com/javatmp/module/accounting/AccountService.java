@@ -135,4 +135,36 @@ public class AccountService {
         }
     }
 
+    public int updateAccount(Account accountToBeUpdated) {
+        int updateStatus = 0;
+        EntityManager em = null;
+        try {
+            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            em.getTransaction().begin();
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Account> cq = cb.createQuery(Account.class);
+            Root<Account> from = cq.from(Account.class);
+            cq.select(from);
+            cq.where(cb.equal(from.get(Account_.id), accountToBeUpdated.getId()));
+            TypedQuery<Account> query = em.createQuery(cq);
+            query.setLockMode(LockModeType.PESSIMISTIC_WRITE);
+            Account dbAccount = query.getSingleResult();
+            dbAccount.setAccountCode(accountToBeUpdated.getAccountCode());
+            dbAccount.setName(accountToBeUpdated.getName());
+            dbAccount.setDescription(accountToBeUpdated.getDescription());
+            dbAccount.setAccountGroup(accountToBeUpdated.getAccountGroup());
+            dbAccount.setAccountStatus(accountToBeUpdated.getAccountStatus());
+            dbAccount.setParentAccount(accountToBeUpdated.getParentAccount());
+            em.getTransaction().commit();
+            updateStatus = 1;
+        } catch (PersistenceException e) {
+            if (em != null) {
+                em.getTransaction().rollback();
+            }
+            throw e;
+        }
+
+        return updateStatus;
+    }
+
 }

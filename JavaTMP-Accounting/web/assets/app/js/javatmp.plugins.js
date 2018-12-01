@@ -603,7 +603,7 @@
         });
     };
 
-    window.javatmp.plugins.contextMenuWrapper = function (element, selector, $contextMenu) {
+    window.javatmp.plugins.contextMenuWrapper = function (element, selector, $contextMenu, beforeShow) {
         function getMenuPosition($contextMenu, mouse, direction, scrollDir, isRTL) {
             var win = $(window)[direction]();
             var scroll = $(window)[scrollDir]();
@@ -623,6 +623,10 @@
             // https://stackoverflow.com/questions/18666601/use-bootstrap-3-dropdown-menu-as-context-menu
             if (e.ctrlKey)
                 return;
+
+            if ($.isFunction(beforeShow)) {
+                beforeShow.call(this, e);
+            }
 
             $contextMenu.on("click", "a", function () {
                 $contextMenu.hide();

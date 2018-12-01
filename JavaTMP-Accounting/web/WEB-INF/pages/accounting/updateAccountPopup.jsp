@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-lg-12">
             <form accept-charset="UTF-8" autocomplete="off" id="addNewAccountPopup" class="form"
-                  action="${pageContext.request.contextPath}/accounting/AddNewAccountPopup" method="post" novalidate="novalidate">
+                  action="${pageContext.request.contextPath}/accounting/UpdateAccountPopup" method="post" novalidate="novalidate">
                 <div class="form-row">
                     <div class="col-lg-12">
                         <div class="form-group form-row">
@@ -19,7 +19,7 @@
                         <div class="form-group form-row">
                             <label class="control-label col-sm-5 col-form-label">Creation Date</label>
                             <div class="col-sm-7">
-                                <input readonly="readonly" class="form-control-plaintext" type="text" name="creationDate"
+                                <input disabled="" readonly="readonly" class="form-control-plaintext disabled" type="text" name="creationDate"
                                        value="${requestScope.account.creationDate}">
                             </div>
                         </div>
@@ -128,7 +128,7 @@
             var form = $('#addNewAccountPopup');
             var validator = null;
 
-            modal.updateTitle("Add New Account");
+            modal.updateTitle("Update Account");
             modal.updateClosable(true);
             modal.updateSize("modal-lg");
             modal.addButton({
@@ -139,7 +139,7 @@
                 }
             });
             modal.addButton({
-                label: "Create New Account",
+                label: "Update Account",
                 cssClass: "btn btn-primary",
                 action: function (modalWrapper, button, buttonData, originalEvent) {
                     form.trigger("submit");
@@ -148,7 +148,6 @@
             var callbackData = {success: false, cancel: true};
             modal.originalModal.on('hidden.bs.modal', function (e) {
                 // here we run passing function name as a remote callback
-
                 if ($.isFunction(modal.options.localData.callback)) {
                     modal.options.localData.callback.call(null, callbackData);
                 } else if ($.type(modal.options.localData.callback) === "string") {
@@ -202,7 +201,6 @@
                             break;
                         }
                     }
-
                 },
                 success: function (response, statusText, xhr, $form) {
                     callbackData.cancel = false;
@@ -232,49 +230,12 @@
             // initialize jQuery Validation plugin using global data.
             validator = form.validate();
 
-            var modalZIndex = modal.originalModal.css('zIndex');
-            var creationDateInputMask = javatmp.plugins.inputmaskWrapperForDate(form.find("input[name='creationDate']"));
-            var creationDateDatePicker = javatmp.plugins.daterangepickerWrapperForDate(form.find("input[name='creationDate']"), {
-                parentEl: modal.originalModal
-            });
             var parentAccountSelect = javatmp.plugins.select2Wrapper(form.find("select[name='parentAccount']"), {
                 dropdownParent: modal.originalModal
             });
 
             var accountGroupSelect = javatmp.plugins.select2Wrapper(form.find("select[name='accountGroup']"), {
                 dropdownParent: modal.originalModal
-            });
-            var themeSelect = javatmp.plugins.select2WrapperForTheme(form.find("select[name='theme']"), {
-                dropdownParent: modal.originalModal
-            });
-
-            var countryIdSelect = javatmp.plugins.select2WrapperForCountry(form.find("select[name='countryId']"), {
-                dropdownParent: modal.originalModal
-            });
-
-            var profilePicScrollbars = javatmp.plugins.mCustomScrollbarForProfilePicture(form.find("#profilePicturePreviewContainerId"));
-
-            form.find("select[name='timezone']").val(moment.tz.guess()).trigger('change.select2');
-            form.find("input[name='profilePicture'][type=file]").on("change", function () {
-                if (this.files && this.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        var image = form.find("img[id='profilePicturePreview']");
-                        var resizeImage = form.find("img[id='profilePictureResizePreview']");
-                        image.one("load", function () {
-//                            var currentImageHeight = this.height;
-//                            if (currentImageHeight > 250) {
-//                                $("#profilePicturePreviewContainerId").height(250);
-//                            } else {
-//                                $("#profilePicturePreviewContainerId").height(currentImageHeight);
-//                            }
-                            form.find("#profilePicturePreviewContainerId").mCustomScrollbar("update");
-                        });
-                        image.attr('src', e.target.result);
-                        resizeImage.attr('src', e.target.result);
-                    };
-                    reader.readAsDataURL(this.files[0]);
-                }
             });
         });
     });

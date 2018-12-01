@@ -10,6 +10,7 @@ import com.javatmp.module.theme.Themetranslation;
 import com.javatmp.module.timezone.Timezone;
 import com.javatmp.module.timezone.Timezonetranslation;
 import com.javatmp.mvc.MvcHelper;
+import com.javatmp.mvc.domain.ResponseMessage;
 import com.javatmp.util.ServicesFactory;
 import com.javatmp.util.Constants;
 import java.io.IOException;
@@ -17,6 +18,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.persistence.PersistenceException;
 import javax.servlet.ServletContext;
 
 import javax.servlet.ServletException;
@@ -63,4 +65,41 @@ public class UpdateAccountPopup extends HttpServlet {
             throw new ServletException(ex);
         }
     }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        ResponseMessage responseMessage = new ResponseMessage();
+        ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
+        AccountService accountService = sf.getAccountService();
+        try {
+
+            Account accountToBeUpdated = new Account();
+            MvcHelper.populateBeanByRequestParameters(request, accountToBeUpdated);
+            logger.info("account to be Updated is [" + MvcHelper.toString(accountToBeUpdated) + "]");
+            int updateStatus = accountService.updateAccount(accountToBeUpdated);
+            responseMessage.setOverAllStatus(Boolean.TRUE);
+            responseMessage.setMessage("Account Updated successfully");
+            responseMessage.setData(accountToBeUpdated);
+        } catch (PersistenceException e) {
+            Throwable t = e;
+            while (t.getCause() != null) {
+                t = t.getCause();
+            }
+            responseMessage.setOverAllStatus(false);
+            responseMessage.setMessage(t.getMessage());
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            responseMessage.setStatusCode(HttpServletResponse.SC_BAD_REQUEST);
+
+        } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
+            logger.info("ERROR : " + e.getMessage());
+            responseMessage.setOverAllStatus(false);
+            responseMessage.setMessage(e.getMessage());
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            responseMessage.setStatusCode(HttpServletResponse.SC_BAD_REQUEST);
+            throw new ServletException(e);
+        }
+        MvcHelper.sendMessageAsJson(response, responseMessage);
+
+    }
+
 }

@@ -7,18 +7,18 @@
             <div class="card">
                 <div class="card-header">
                     <nav class="nav d-inline">
-                        <a class="d-inline nav-link" id="Add-New-Account-Action" href="javascript:;">
+                        <a class="d-inline nav-link"
+                           action-name="Add-New-User-Popup-Action" id="UserList-AddNewUserPopupId" href="javascript:;">
                             Add New Account
-                        </a>
-                        <a class="d-inline nav-link" href="javascript:;"
-                           action-name="Delete-User-Action" id="UserList-DeleteSelectedUserId" >
-                            Delete Selected Account
                         </a>
                         <a class="d-inline nav-link" href="javascript:;"
                            action-name="Update-Complete-User-Action" id="UserList-UpdateSelectedUserId">
                             Update Selected Account
                         </a>
-                        <a class="d-inline nav-link" href="#">Disabled</a>
+                        <a class="d-inline nav-link" href="javascript:;"
+                           action-name="Delete-User-Action" id="UserList-DeleteSelectedUserId" >
+                            Delete Selected Account
+                        </a>
                     </nav>
                     <div class="options float-right">
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
@@ -42,6 +42,21 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div id="contextMenu" class="dropdown-menu" role="menu" style="display:none;position: fixed;" >
+        <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Add-New-User-Popup-Action">
+            <i class="fas fa-plus text-primary"></i>
+            Add New Account
+        </a>
+        <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Update-Complete-User-Action">
+            <i class="fa fa-edit fa-fw text-primary"></i>
+            Update Selected Account
+        </a>
+        <div class="dropdown-divider"></div>
+        <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Delete-User-Action">
+            <i class="fa fa-times fa-fw text-danger"></i>
+            Delete Selected Account
+        </a>
     </div>
     <!--
     Reference Your external Stylesheet file here
@@ -151,6 +166,11 @@
                         cache: false
                     },
                     init: function (event, data) {
+                        window.javatmp.plugins.contextMenuWrapper($(this), '.fancytree-title', $("#contextMenu"), function (e) {
+                            var node = $.ui.fancytree.getNode(this);
+                            node.setSelected(true);
+                            node.setActive(true);
+                        });
                     },
                     postProcess: function (event, data) {
                         data.result = convertData(data.response.data);
@@ -192,7 +212,7 @@
                     }
                 });
 
-                var addNewUserPopupButton = $("#Add-New-Account-Action");
+                var addNewUserPopupButton = $("#UserList-AddNewUserPopupId");
                 addNewUserPopupButton.on("click", function (event) {
                     BootstrapModalWrapperFactory.createAjaxModal({
                         message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
