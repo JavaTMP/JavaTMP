@@ -10,8 +10,14 @@
                         <a class="d-inline nav-link" id="Add-New-Account-Action" href="javascript:;">
                             Add New Account
                         </a>
-                        <a class="d-inline nav-link" href="#">Link</a>
-                        <a class="d-inline nav-link" href="#">Link</a>
+                        <a class="d-inline nav-link" href="javascript:;"
+                           action-name="Delete-User-Action" id="UserList-DeleteSelectedUserId" >
+                            Delete Selected Account
+                        </a>
+                        <a class="d-inline nav-link" href="javascript:;"
+                           action-name="Update-Complete-User-Action" id="UserList-UpdateSelectedUserId">
+                            Update Selected Account
+                        </a>
                         <a class="d-inline nav-link" href="#">Disabled</a>
                     </nav>
                     <div class="options float-right">
@@ -145,37 +151,12 @@
                         cache: false
                     },
                     init: function (event, data) {
-//                        data.tree.getRootNode().sortChildren(function (a, b) {
-//                            var x = a.key,
-//                                    y = b.key;
-//                            return x === y ? 0 : x > y ? -1 : +1;
-//                        }, true);
                     },
                     postProcess: function (event, data) {
                         data.result = convertData(data.response.data);
-//                        data.result = {
-//                            error: "ERROR #" + orgResponse.faultCode + ": " + orgResponse.faultMsg
-//                        };
-//                        data.result = [
-//                            {
-//                                "title": "No Accounts",
-//                                "accountCode": "ERROR",
-//                                "debit": 0.0,
-//                                "credit": 0.0,
-//                                "balance": 0.0
-//                            },
-//                            {
-//                                "title": "No Accounts",
-//                                "accountCode": "ERROR",
-//                                "debit": 0.0,
-//                                "credit": 0.0,
-//                                "balance": 0.0
-//                            }
-//
-//                        ];
                     },
                     table: {
-                        indentation: 30,
+                        indentation: 35,
                         nodeColumnIdx: 1
                     },
                     activate: function (event, data) {
@@ -224,22 +205,69 @@
                         localData: {
                             callback: function (callbackData) {
                                 chartOfAccountTree.fancytree("getTree").reload();
-                            }}
+                            }
+                        }
                     });
+                });
+
+                var deleteUserButton = $("#UserList-DeleteSelectedUserId");
+                deleteUserButton.on("click", function (event) {
+                    var selectedNode = chartOfAccountTree.fancytree('getTree').getActiveNode();
+                    // for checkbox or select
+//                    var selectedData = chartOfAccountTree.fancytree('getTree').getSelectedNodes();
+//                    var selectedData = chartOfAccountTree.fancytree("getSelectedNodes");
+//                    var selectedRecord = selectedData[0].data;
+                    if (selectedNode) {
+                        var selectedRecord = selectedNode.data;
+                        window.javatmp.plugins.confirmAjaxAction(
+                                "Delete Account Confirmation",
+                                "Are You Sure You want to delete selected account ?",
+                                "Delete Account",
+                                javatmp.settings.labels["global.cancel"],
+                                javatmp.settings.contextPath + "/accounting/DeleteAccountController",
+                                selectedRecord,
+                                function (data) {
+                                    chartOfAccountTree.fancytree("getTree").reload();
+                                }
+                        );
+                    } else {
+                        BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
+                    }
+                });
+
+                var updateUserButton = $("#UserList-UpdateSelectedUserId");
+                updateUserButton.on("click", function (event) {
+                    //                var selectedCount = table.rows({selected: true}).count();
+                    var selectedNode = chartOfAccountTree.fancytree('getTree').getActiveNode();
+                    if (selectedNode) {
+                        var selectedRecord = selectedNode.data;
+                        BootstrapModalWrapperFactory.createAjaxModal({
+                            message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
+                            passData: selectedRecord,
+                            updateSizeAfterDataFetchTo: "modal-lg", // default is  or null for standard or "modal-sm"
+                            size: "modal-lg",
+                            url: javatmp.settings.contextPath + "/accounting/UpdateAccountPopup",
+                            ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady,
+                            localData: {
+                                callback: function (callbackData) {
+                                    chartOfAccountTree.fancytree("getTree").reload();
+                                }
+                            }
+                        });
+                    } else {
+                        BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
+                    }
                 });
 
             });
 
-            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
-                // fire when user resize browser window or sidebar hide / show
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {                 // fire when user resize browser window or sidebar hide / show
             });
 
-            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenCompress, function (event, card) {
-                // when card compress by pressing the top right tool button
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenCompress, function (event, card) {                 // when card compress by pressing the top right tool button
             });
 
-            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenExpand, function (event, card) {
-                // when card Expand by pressing the top right tool button
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenExpand, function (event, card) {                 // when card Expand by pressing the top right tool button
             });
 
             /**

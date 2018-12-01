@@ -74,8 +74,7 @@ public class Account implements Serializable {
 
     public Account(Long accountId, String accountCode, String accountName,
             String accountDescription, BigDecimal debit, BigDecimal credit,
-            BigDecimal balance, Integer accountGroup, Long parentAccount,
-            Integer accountStatus) {
+            BigDecimal balance, Integer accountStatus, Date creationDate, Integer accountGroup, Long parentAccount) {
         this.id = accountId;
         this.accountCode = accountCode;
         this.name = accountName;
@@ -83,9 +82,11 @@ public class Account implements Serializable {
         this.debit = debit;
         this.credit = credit;
         this.balance = balance;
+        this.accountStatus = accountStatus;
+        this.creationDate = creationDate;
         this.accountGroup = accountGroup;
         this.parentAccount = parentAccount;
-        this.accountStatus = accountStatus;
+
     }
 
     public Long getId() {
@@ -174,7 +175,7 @@ public class Account implements Serializable {
 
     @Override
     public String toString() {
-        return "com.javatmp.module.accounting.Account_1[ id=" + id + " ]";
+        return "com.javatmp.module.accounting.Account[ id=" + id + " ]";
     }
 
     /**
