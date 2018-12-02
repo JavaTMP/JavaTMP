@@ -80,21 +80,21 @@
                         <div class="form-group form-row">
                             <label class="text-sm-right control-label col-sm-5 col-form-label">status</label>
                             <div class="col-sm-7">
-                                <select name="accountStatus" class="custom-select" data-rule-required="true">
-                                    <option ${requestScope.account.accountStatus == 1 ? 'selected="selected"' : ''} value="1">Active</option>
-                                    <option ${requestScope.account.accountStatus == 0 ? 'selected="selected"' : ''} value="0">Inactive</option>
+                                <select name="status" class="custom-select" data-rule-required="true">
+                                    <option ${requestScope.account.status == 1 ? 'selected="selected"' : ''} value="1">Active</option>
+                                    <option ${requestScope.account.status == 0 ? 'selected="selected"' : ''} value="0">Inactive</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group form-row">
-                            <label class="text-sm-right control-label col-sm-5 col-form-label">parentAccount</label>
+                            <label class="text-sm-right control-label col-sm-5 col-form-label">parentAccountId</label>
                             <div class="col-sm-7">
-                                <select name="parentAccount" class="form-control">
+                                <select name="parentAccountId" class="form-control">
                                     <c:choose>
                                         <c:when test="${fn:length(requestScope.accounts) > 0}">
                                             <option value="">${labels['page.text.kindlySelect']}</option>
                                             <c:forEach items="${requestScope.accounts}" var="account">
-                                                <option ${requestScope.account.parentAccount == account.id ? 'selected="selected"' : ''} value="${account.id}">${account.accountCode} - ${account.name}</option>
+                                                <option ${requestScope.account.parentAccountId == account.id ? 'selected="selected"' : ''} value="${account.id}">${account.accountCode} - ${account.name}</option>
                                             </c:forEach>
                                         </c:when>
                                         <c:otherwise>
@@ -130,7 +130,6 @@
 
             modal.updateTitle("Update Account");
             modal.updateClosable(true);
-            modal.updateSize("modal-lg");
             modal.addButton({
                 label: "${labels['global.cancel']}",
                 cssClass: "btn btn-danger mr-auto",
@@ -230,7 +229,7 @@
             // initialize jQuery Validation plugin using global data.
             validator = form.validate();
 
-            var parentAccountSelect = javatmp.plugins.select2Wrapper(form.find("select[name='parentAccount']"), {
+            var parentAccountIdSelect = javatmp.plugins.select2Wrapper(form.find("select[name='parentAccountId']"), {
                 dropdownParent: modal.originalModal
             });
 

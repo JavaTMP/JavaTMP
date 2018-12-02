@@ -251,6 +251,7 @@ Main Pages:
         - Inventory Or Stock.
             - Inventory (American English) or stock (British English) is the goods and materials that a business holds
             for the ultimate goal of resale (or repair).
+            - Sometimes, Inventory refers to goods that will save for production or transform to another payable item.
             - The concept of inventory, stock or work-in-process has been extended from manufacturing systems
             to service businesses and projects, by generalizing the definition to be
             "all work within the process of production- all work that is or has occurred prior to the completion of production."

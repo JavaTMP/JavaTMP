@@ -146,7 +146,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/accounting/createTransaction">
+                                        <a href="${pageContext.request.contextPath}/accounting/CreateTransaction">
                                             Create Transaction
                                         </a>
                                     </li>

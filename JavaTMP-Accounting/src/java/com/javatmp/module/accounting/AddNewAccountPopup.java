@@ -73,7 +73,7 @@ public class AddNewAccountPopup extends HttpServlet {
             MvcHelper.populateBeanByRequestParameters(request, accountToBeCreated);
             logger.info("User to be created is [" + MvcHelper.toString(accountToBeCreated) + "]");
             accountToBeCreated.setCreationDate(new Date());
-            accountToBeCreated.setAccountStatus(1);
+            accountToBeCreated.setStatus((short) 1);
             accountToBeCreated.setDebit(BigDecimal.ZERO);
             accountToBeCreated.setCredit(BigDecimal.ZERO);
             accountService.createNewAccount(accountToBeCreated);

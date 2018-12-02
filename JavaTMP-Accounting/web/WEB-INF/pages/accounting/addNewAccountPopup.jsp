@@ -73,9 +73,9 @@
                             </div>
                         </div>
                         <div class="form-group form-row">
-                            <label class="text-sm-right control-label col-sm-5 col-form-label">parentAccount</label>
+                            <label class="text-sm-right control-label col-sm-5 col-form-label">parentAccountId</label>
                             <div class="col-sm-7">
-                                <select name="parentAccount" class="form-control">
+                                <select name="parentAccountId" class="form-control">
                                     <c:choose>
                                         <c:when test="${fn:length(requestScope.accounts) > 0}">
                                             <option value="">${labels['page.text.kindlySelect']}</option>
@@ -116,7 +116,6 @@
 
             modal.updateTitle("Add New Account");
             modal.updateClosable(true);
-            modal.updateSize("modal-lg");
             modal.addButton({
                 label: "${labels['global.cancel']}",
                 cssClass: "btn btn-danger mr-auto",
@@ -223,7 +222,7 @@
             var creationDateDatePicker = javatmp.plugins.daterangepickerWrapperForDate(form.find("input[name='creationDate']"), {
                 parentEl: modal.originalModal
             });
-            var parentAccountSelect = javatmp.plugins.select2Wrapper(form.find("select[name='parentAccount']"), {
+            var parentAccountIdSelect = javatmp.plugins.select2Wrapper(form.find("select[name='parentAccountId']"), {
                 dropdownParent: modal.originalModal
             });
 

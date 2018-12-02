@@ -1,18 +1,22 @@
 package com.javatmp.module.accounting;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 /**
@@ -20,44 +24,47 @@ import javax.persistence.Transient;
  * @author JavaTMP
  */
 @Entity
-@Table(name = "accountgroup")
+@Table(name = "module")
 @NamedQueries({
-    @NamedQuery(name = "Accountgroup.findAll", query = "SELECT a FROM Accountgroup a")})
-public class Accountgroup implements Serializable {
-
-    @Transient
-    private List<Account> accountList;
+    @NamedQuery(name = "Module.findAll", query = "SELECT m FROM Module m")})
+public class Module implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Integer id;
-    @Basic(optional = false)
+    private Long id;
     @Column(name = "name")
     private String name;
     @Column(name = "description")
     private String description;
+    @Column(name = "status")
+    private Short status;
+    @Basic(optional = false)
+    @Column(name = "creationDate")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date creationDate;
     @Transient
-    private Accounttype accounttype;
+    private List<Transaction> transactionList;
 
-    public Accountgroup() {
+    public Module() {
     }
 
-    public Accountgroup(Integer id) {
+    public Module(Long id) {
         this.id = id;
     }
 
-    public Accountgroup(Integer id, String name) {
+    public Module(Long id, Date creationDate) {
         this.id = id;
-        this.name = name;
+        this.creationDate = creationDate;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -77,12 +84,28 @@ public class Accountgroup implements Serializable {
         this.description = description;
     }
 
-    public Accounttype getAccounttype() {
-        return accounttype;
+    public Short getStatus() {
+        return status;
     }
 
-    public void setAccounttype(Accounttype accounttype) {
-        this.accounttype = accounttype;
+    public void setStatus(Short status) {
+        this.status = status;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public List<Transaction> getTransactionList() {
+        return transactionList;
+    }
+
+    public void setTransactionList(List<Transaction> transactionList) {
+        this.transactionList = transactionList;
     }
 
     @Override
@@ -95,10 +118,10 @@ public class Accountgroup implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Accountgroup)) {
+        if (!(object instanceof Module)) {
             return false;
         }
-        Accountgroup other = (Accountgroup) object;
+        Module other = (Module) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -107,15 +130,7 @@ public class Accountgroup implements Serializable {
 
     @Override
     public String toString() {
-        return "com.javatmp.module.accounting.Accountgroup[ id=" + id + " ]";
-    }
-
-    public List<Account> getAccountList() {
-        return accountList;
-    }
-
-    public void setAccountList(List<Account> accountList) {
-        this.accountList = accountList;
+        return "com.javatmp.module.accounting.Module[ id=" + id + " ]";
     }
 
 }

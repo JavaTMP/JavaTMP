@@ -135,9 +135,9 @@
                         c.tooltip = c.description;
 //                        c.icon = "far fa-heart";
                         // Check if c is a child node
-                        if (c.parentAccount) {
+                        if (c.parentAccountId) {
                             // add c to `children` array of parent node
-                            parent = nodeMap[c.parentAccount];
+                            parent = nodeMap[c.parentAccountId];
                             parent.folder = true;
                             parent.expanded = true;
                             if (parent.children) {
@@ -218,8 +218,8 @@
                         message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
                         title: "${labels['global.loadingText']}",
                         passData: {},
-                        updateSizeAfterDataFetchTo: "modal-lg", // default is  or null for standard or "modal-sm"
-                        size: "modal-lg",
+                        updateSizeAfterDataFetchTo: null, // default is  or null for standard or "modal-sm"
+//                        size: "modal-lg",
                         url: javatmp.settings.contextPath + "/accounting/AddNewAccountPopup",
                         ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady,
                         localData: {
@@ -228,6 +228,30 @@
                             }
                         }
                     });
+                });
+
+                var updateUserButton = $("#UserList-UpdateSelectedUserId");
+                updateUserButton.on("click", function (event) {
+                    //                var selectedCount = table.rows({selected: true}).count();
+                    var selectedNode = chartOfAccountTree.fancytree('getTree').getActiveNode();
+                    if (selectedNode) {
+                        var selectedRecord = selectedNode.data;
+                        BootstrapModalWrapperFactory.createAjaxModal({
+                            message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
+                            passData: selectedRecord,
+                            updateSizeAfterDataFetchTo: null, // default is  or null for standard or "modal-sm"
+//                            size: "modal-lg",
+                            url: javatmp.settings.contextPath + "/accounting/UpdateAccountPopup",
+                            ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady,
+                            localData: {
+                                callback: function (callbackData) {
+                                    chartOfAccountTree.fancytree("getTree").reload();
+                                }
+                            }
+                        });
+                    } else {
+                        BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
+                    }
                 });
 
                 var deleteUserButton = $("#UserList-DeleteSelectedUserId");
@@ -255,29 +279,6 @@
                     }
                 });
 
-                var updateUserButton = $("#UserList-UpdateSelectedUserId");
-                updateUserButton.on("click", function (event) {
-                    //                var selectedCount = table.rows({selected: true}).count();
-                    var selectedNode = chartOfAccountTree.fancytree('getTree').getActiveNode();
-                    if (selectedNode) {
-                        var selectedRecord = selectedNode.data;
-                        BootstrapModalWrapperFactory.createAjaxModal({
-                            message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
-                            passData: selectedRecord,
-                            updateSizeAfterDataFetchTo: "modal-lg", // default is  or null for standard or "modal-sm"
-                            size: "modal-lg",
-                            url: javatmp.settings.contextPath + "/accounting/UpdateAccountPopup",
-                            ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady,
-                            localData: {
-                                callback: function (callbackData) {
-                                    chartOfAccountTree.fancytree("getTree").reload();
-                                }
-                            }
-                        });
-                    } else {
-                        BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
-                    }
-                });
 
             });
 

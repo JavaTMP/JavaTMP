@@ -3,14 +3,21 @@ package com.javatmp.module.accounting;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  *
@@ -19,6 +26,21 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "account")
 public class Account implements Serializable {
+
+    @Column(name = "status")
+    private Short status;
+
+    @Transient
+    private List<Accounttransaction> accounttransactionList;
+
+    @Transient
+    private Accountgroup accountgroup;
+
+    @Transient
+    private List<Account> accountList;
+
+    @Transient
+    private Account parentAccount;
 
     private static final long serialVersionUID = 1L;
 
@@ -45,9 +67,6 @@ public class Account implements Serializable {
     @Column(name = "balance")
     private BigDecimal balance;
 
-    @Column(name = "status")
-    private Integer accountStatus;
-
     @Column(name = "creationDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
@@ -55,8 +74,8 @@ public class Account implements Serializable {
     @Column(name = "accountGroup")
     private Integer accountGroup;
 
-    @Column(name = "parentAccount")
-    private Long parentAccount;
+    @Column(name = "parentAccountId")
+    private Long parentAccountId;
 
     public Account() {
     }
@@ -74,7 +93,7 @@ public class Account implements Serializable {
 
     public Account(Long accountId, String accountCode, String accountName,
             String accountDescription, BigDecimal debit, BigDecimal credit,
-            BigDecimal balance, Integer accountStatus, Date creationDate, Integer accountGroup, Long parentAccount) {
+            BigDecimal balance, Short status, Date creationDate, Integer accountGroup, Long parentAccountId) {
         this.id = accountId;
         this.accountCode = accountCode;
         this.name = accountName;
@@ -82,10 +101,10 @@ public class Account implements Serializable {
         this.debit = debit;
         this.credit = credit;
         this.balance = balance;
-        this.accountStatus = accountStatus;
+        this.status = status;
         this.creationDate = creationDate;
         this.accountGroup = accountGroup;
-        this.parentAccount = parentAccount;
+        this.parentAccountId = parentAccountId;
 
     }
 
@@ -179,20 +198,6 @@ public class Account implements Serializable {
     }
 
     /**
-     * @return the accountStatus
-     */
-    public Integer getAccountStatus() {
-        return accountStatus;
-    }
-
-    /**
-     * @param accountStatus the accountStatus to set
-     */
-    public void setAccountStatus(Integer accountStatus) {
-        this.accountStatus = accountStatus;
-    }
-
-    /**
      * @return the accountType
      */
     public Integer getAccountGroup() {
@@ -206,18 +211,64 @@ public class Account implements Serializable {
         this.accountGroup = accountGroup;
     }
 
+    public Short getStatus() {
+        return status;
+    }
+
+    public void setStatus(Short status) {
+        this.status = status;
+    }
+
+    public List<Accounttransaction> getAccounttransactionList() {
+        return accounttransactionList;
+    }
+
+    public void setAccounttransactionList(List<Accounttransaction> accounttransactionList) {
+        this.accounttransactionList = accounttransactionList;
+    }
+
+    public Accountgroup getAccountgroup() {
+        return accountgroup;
+    }
+
+    public void setAccountgroup(Accountgroup accountgroup) {
+        this.accountgroup = accountgroup;
+    }
+
+    public List<Account> getAccountList() {
+        return accountList;
+    }
+
+    public void setAccountList(List<Account> accountList) {
+        this.accountList = accountList;
+    }
+
+    /**
+     * @return the parentAccount
+     */
+    public Account getParentAccount() {
+        return parentAccount;
+    }
+
+    /**
+     * @param parentAccount the parentAccount to set
+     */
+    public void setParentAccount(Account parentAccount) {
+        this.parentAccount = parentAccount;
+    }
+
     /**
      * @return the parentAccountId
      */
-    public Long getParentAccount() {
-        return parentAccount;
+    public Long getParentAccountId() {
+        return parentAccountId;
     }
 
     /**
      * @param parentAccountId the parentAccountId to set
      */
-    public void setParentAccount(Long parentAccountId) {
-        this.parentAccount = parentAccountId;
+    public void setParentAccountId(Long parentAccountId) {
+        this.parentAccountId = parentAccountId;
     }
 
 }

@@ -1,12 +1,15 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="dynamic-ajax-content">
     <h5 class="my-3">Create Transaction</h5>
     <hr/>
-    <div class="row">
-        <div class="col">
+    <div class="row justify-content-md-center">
+        <div class="col-lg-6 col-md-9">
             <div class="card">
                 <div class="card-header">
-
+                    Create New Journal Entry Transaction
                     <div class="options float-right">
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
                         <a href="#" class="fullscreen"><i class=" fa fa-expand"></i></a>
@@ -14,67 +17,116 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-hover custom-invoice-table" id="tab_logic">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 3rem;" class="text-center">#</th>
-                                            <th class="text-center">Account</th>
-                                            <th style="width: 8rem;" class="text-center">Debit</th>
-                                            <th style="width: 8rem;" class="text-center">Credit</th>
-                                            <th style="width: 8rem;" class="text-center">Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr id='addr0'>
-                                            <td style="width: 3rem;">1</td>
-                                            <td><input type="text" name='product[]'  placeholder='Enter Product Name' class="form-control"/></td>
-                                            <td style="width: 8rem;"><input type="number" name='qty[]' placeholder='0' class="form-control qty" step="0" min="0"/></td>
-                                            <td style="width: 8rem;"><input type="number" name='price[]' placeholder='0.00' class="form-control price" step="0.00" min="0"/></td>
-                                            <td style="width: 8rem;"><input type="number" name='total[]' placeholder='0.00' class="form-control total" readonly/></td>
-                                        </tr>
-                                        <tr id='addr1'></tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <button id="add_row" class="btn btn-primary float-left">Add Row</button>
-                            <button id='delete_row' class="float-right btn btn-default">Delete Row</button>
-                        </div>
-                    </div>
-                    <div class="row mt-3 justify-content-end">
-                        <div class="col-md-4">
-                            <table class="table table-bordered table-hover custom-invoice-table" id="tab_logic_total">
-                                <tbody>
-                                    <tr>
-                                        <td class="text-center">Sub Total</td>
-                                        <td class="text-center"><input type="number" name='sub_total' placeholder='0.00' class="form-control" id="sub_total" readonly/></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">Tax</td>
-                                        <td class="text-center">
-                                            <div class="input-group mb-2 mb-sm-0">
-                                                <input type="number" class="form-control" id="tax" placeholder="0">
-                                                <div class="input-group-append">
-                                                    <span class="input-group-text" id="basic-addon2">%</span>
-                                                </div>
+                        <div class="col">
+                            <form accept-charset="UTF-8" autocomplete="off" id="addNewTransaction" class="form" action="${pageContext.request.contextPath}/accounting/CreateTransaction" method="post" novalidate="novalidate">
+                                <div class="form-row">
+                                    <div class="col-md-12">
+                                        <div class="form-group form-row">
+                                            <label class="text-sm-right control-label col-sm-5 col-form-label">referenceCode</label>
+                                            <div class="col-sm-7">
+                                                <input class="form-control" type="text" placeholder=""
+                                                       name="referenceCode" value=""
+                                                       data-rule-required="true"
+                                                       >
                                             </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">Tax Amount</td>
-                                        <td class="text-center"><input type="number" name='tax_amount' id="tax_amount" placeholder='0.00' class="form-control" readonly/></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">Grand Total</td>
-                                        <td class="text-center"><input type="number" name='total_amount' id="total_amount" placeholder='0.00' class="form-control" readonly/></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                        </div>
+                                        <div class="form-group form-row">
+                                            <label class="text-sm-right control-label col-sm-5 col-form-label">transactionTypeId</label>
+                                            <div class="col-sm-7">
+                                                <select name="transactionTypeId" class="form-control" data-rule-required="true">
+                                                    <c:choose>
+                                                        <c:when test="${fn:length(requestScope.transactiontypes) > 0}">
+                                                            <option value="">${labels['page.text.kindlySelect']}</option>
+                                                            <c:forEach items="${requestScope.transactiontypes}" var="transactiontype">
+                                                                <option  value="${transactiontype.id}">${transactiontype.name}</option>
+                                                            </c:forEach>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <option value="">${labels['page.text.noRecordFound']}</option>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-row">
+                                            <label class="text-sm-right control-label col-sm-5 col-form-label">moduleId</label>
+                                            <div class="col-sm-7">
+                                                <select name="moduleId" class="form-control" data-rule-required="true">
+                                                    <c:choose>
+                                                        <c:when test="${fn:length(requestScope.modules) > 0}">
+                                                            <option value="">${labels['page.text.kindlySelect']}</option>
+                                                            <c:forEach items="${requestScope.modules}" var="module">
+                                                                <option  value="${module.id}">${module.name}</option>
+                                                            </c:forEach>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <option value="">${labels['page.text.noRecordFound']}</option>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-row">
+                                            <label class="text-sm-right control-label col-sm-5 col-form-label">transactionDate</label>
+                                            <div class="col-sm-7">
+                                                <input class="form-control" type="text" placeholder=""
+                                                       name="transactionDate" value=""
+                                                       data-rule-required="true"
+                                                       >
+                                            </div>
+                                        </div>
+                                        <div class="form-group form-row">
+                                            <label class="text-sm-right control-label col-sm-5 col-form-label">description</label>
+                                            <div class="col-sm-7">
+                                                <input class="form-control" type="text" placeholder=""
+                                                       name="description" value=""
+                                                       data-rule-required="true"
+                                                       >
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover custom-invoice-table" id="tab_logic">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 3rem;" class="text-center">#</th>
+                                                <th class="text-center">Account</th>
+                                                <th style="width: 8rem;" class="text-center">Debit</th>
+                                                <th style="width: 8rem;" class="text-center">Credit</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr id='addr0'>
+                                                <td style="width: 3rem;">1</td>
+                                                <td><input type="text" name='accounttransactionList.accountId'  placeholder='Enter Account Name' class="form-control"/></td>
+                                                <td style="width: 8rem;"><input type="number" name='accounttransactionList.amount' placeholder='0.00' class="form-control" step="0.01" min="0"/></td>
+                                                <td style="width: 8rem;"><input type="number" name='accounttransactionList.amount' placeholder='0.00' class="form-control" step="0.01" min="0"/></td>
+                                            </tr>
+                                            <tr id='addr1'>
+                                                <td style="width: 3rem;">2</td>
+                                                <td><input type="text" name='accounttransactionList.accountId'  placeholder='Enter Account Name' class="form-control"/></td>
+                                                <td style="width: 8rem;"><input type="number" name='accounttransactionList.amount' placeholder='0.00' class="form-control" step="0.01" min="0"/></td>
+                                                <td style="width: 8rem;"><input type="number" name='accounttransactionList.amount' placeholder='0.00' class="form-control" step="0.01" min="0"/></td>
+                                            </tr>
+                                            <tr id='addr2'></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row mb-1">
+                                    <div class="col-md-12">
+                                        <button type="button" id="add_row" class="btn btn-primary float-left">Add Row</button>
+                                        <button type="button" id='delete_row' class="float-right btn btn-default">Delete Row</button>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <input type="submit" class="btn btn-success" value="Post New Transaction"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -129,34 +181,7 @@
             // controll return to main javascript file.
             // <--- HERE --->
             //
-            function calc()
-            {
-                $('#tab_logic tbody tr').each(function (i, element) {
-                    var html = $(this).html();
-                    if (html != '')
-                    {
-                        var qty = $(this).find('.qty').val();
-                        var price = $(this).find('.price').val();
-                        $(this).find('.total').val(qty * price);
-
-                        calc_total();
-                    }
-                });
-            }
-
-            function calc_total()
-            {
-                var total = 0;
-                $('.total').each(function () {
-                    total += parseInt($(this).val());
-                });
-                $('#sub_total').val(total.toFixed(2));
-                var tax_sum = total / 100 * $('#tax').val();
-                $('#tax_amount').val(tax_sum.toFixed(2));
-                $('#total_amount').val((tax_sum + total).toFixed(2));
-            }
-
-            var i = 1;
+            var i = 2;
             $("#add_row").click(function () {
                 b = i - 1;
                 $('#addr' + i).html($('#addr' + b).html()).find('td:first-child').html(i + 1);
@@ -165,7 +190,7 @@
             });
 
             $("#delete_row").click(function () {
-                if (i > 1) {
+                if (i > 2) {
                     $("#addr" + (i - 1)).html('');
                     i--;
                 }
@@ -179,6 +204,57 @@
             $('#tax').on('keyup change', function () {
                 calc_total();
             });
+
+            var form = $('#addNewTransaction');
+            var validator = null;
+
+            form.ajaxForm({
+                clearForm: false, // clear all form fields after successful submit
+                resetForm: false, // reset the form after successful submit
+                beforeSerialize: function ($form, options) {
+                    if (!$form.valid()) {
+                        return false;
+                    }
+                },
+                beforeSubmit: function (formData, jqForm, options) {
+                    for (var i = 0; i < formData.length; i++) {
+                        if (formData[i].name === "transactionDate") {
+                            var value = formData[i].value;
+                            var newDate = moment(value, javatmp.settings.dateFormat).locale('en').format(javatmp.settings.networkDateFormat);
+                            formData[i].value = newDate;
+                            break;
+                        }
+                    }
+
+                },
+                success: function (response, statusText, xhr, $form) {
+                    BootstrapModalWrapperFactory.createModal({
+                        title: "${labels['global.response']}",
+                        message: response.message
+                    }).show();
+                },
+                error: function (xhr, status, error, $form) {
+                    var errorMsg = xhr.responseText;
+                    try {
+                        var jsonData = $.parseJSON(errorMsg);
+                        errorMsg = jsonData.message;
+                    } catch (error) {
+                    }
+                    BootstrapModalWrapperFactory.createModal({
+                        title: "${labels['global.error']}" + " : " + xhr.status,
+                        message: errorMsg
+                    }).show();
+                }
+            });
+
+            // initialize jQuery Validation plugin using global data.
+            validator = form.validate();
+
+            var transactionDateInputMask = javatmp.plugins.inputmaskWrapperForDate(form.find("input[name='transactionDate']"));
+            var transactionDateDatePicker = javatmp.plugins.daterangepickerWrapperForDate(form.find("input[name='transactionDate']"));
+
+            var transactionTypeIdSelect = javatmp.plugins.select2Wrapper(form.find("select[name='transactionTypeId']"));
+            var moduleIdSelect = javatmp.plugins.select2Wrapper(form.find("select[name='moduleId']"));
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.

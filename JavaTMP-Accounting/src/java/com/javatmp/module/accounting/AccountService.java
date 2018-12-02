@@ -38,6 +38,18 @@ public class AccountService {
         return chartOfAccounts;
     }
 
+    public List<Transactiontype> getTransactionTypes() {
+        List<Transactiontype> transactiontypes = new LinkedList<>();
+        transactiontypes = this.jpaDaoHelper.findAll(Transactiontype.class);
+        return transactiontypes;
+    }
+
+    public List<Module> getModules() {
+        List<Module> modules = new LinkedList<>();
+        modules = this.jpaDaoHelper.findAll(Module.class);
+        return modules;
+    }
+
     public List<Accountgroup> getAccountGroups() {
         List<Accountgroup> accountgroups = new LinkedList<>();
         accountgroups = this.jpaDaoHelper.findAll(Accountgroup.class);
@@ -76,6 +88,23 @@ public class AccountService {
             throw e;
         }
         return account;
+    }
+
+    public Transaction createNewTransaction(Transaction transaction) {
+
+        EntityManager em = null;
+        try {
+            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            em.getTransaction().begin();
+            em.persist(transaction);
+            em.getTransaction().commit();
+        } catch (PersistenceException e) {
+            if (em != null) {
+                em.getTransaction().rollback();
+            }
+            throw e;
+        }
+        return transaction;
     }
 
     public int deleteAccount(Account account) {
@@ -122,8 +151,8 @@ public class AccountService {
             Root<Account> from = cq.from(Account.class);
 
             cq.multiselect(from.get(Account_.id), from.get(Account_.accountCode), from.get(Account_.name), from.get(Account_.description),
-                    from.get(Account_.debit), from.get(Account_.credit), from.get(Account_.balance), from.get(Account_.accountStatus),
-                    from.get(Account_.creationDate), from.get(Account_.accountGroup), from.get(Account_.parentAccount));
+                    from.get(Account_.debit), from.get(Account_.credit), from.get(Account_.balance), from.get(Account_.status),
+                    from.get(Account_.creationDate), from.get(Account_.accountGroup), from.get(Account_.parentAccountId));
             cq.where(cb.equal(from.get(Account_.id), account.getId()));
             TypedQuery<Account> query = em.createQuery(cq);
             account = query.getSingleResult();
@@ -153,7 +182,7 @@ public class AccountService {
             dbAccount.setName(accountToBeUpdated.getName());
             dbAccount.setDescription(accountToBeUpdated.getDescription());
             dbAccount.setAccountGroup(accountToBeUpdated.getAccountGroup());
-            dbAccount.setAccountStatus(accountToBeUpdated.getAccountStatus());
+            dbAccount.setStatus(accountToBeUpdated.getStatus());
             dbAccount.setParentAccount(accountToBeUpdated.getParentAccount());
             em.getTransaction().commit();
             updateStatus = 1;

@@ -9,6 +9,10 @@
     <class>com.javatmp.module.timezone.Timezonetranslation</class>
     <class>com.javatmp.module.accounting.Accountgroup</class>
     <class>com.javatmp.module.accounting.Accounttype</class>
+    <class>com.javatmp.module.accounting.Transactiontype</class>
+    <class>com.javatmp.module.accounting.Module</class>
+    <class>com.javatmp.module.accounting.Accounttransaction</class>
+    <class>com.javatmp.module.accounting.Transaction</class>
     <properties>
       <!-- Configuring JDBC properties -->
       <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>

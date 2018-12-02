@@ -11,6 +11,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -36,7 +37,8 @@ public class Accounttype implements Serializable {
     @Basic(optional = false)
     @Column(name = "creditSign")
     private int creditSign;
-    @OneToMany(mappedBy = "accounttype", fetch = FetchType.LAZY)
+
+    @Transient
     private List<Accountgroup> accountgroupList;
 
     public Accounttype() {

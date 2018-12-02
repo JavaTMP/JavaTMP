@@ -33,7 +33,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.commons.beanutils.ConvertUtilsBean;
 import org.apache.commons.beanutils.converters.DateConverter;
 import org.apache.commons.beanutils.converters.DateTimeConverter;
 import org.apache.commons.beanutils.converters.IntegerConverter;
@@ -102,10 +104,12 @@ public class MvcHelper {
         ConvertUtils.register(dtConverter, Date.class);
         ConvertUtils.register(ic, Integer.class);
         ConvertUtils.register(longConverter, Long.class);
-
+        //BeanUtilsBean.getInstance().getConvertUtils().register(false, false, 0);
         while (names.hasMoreElements()) {
             String name = (String) names.nextElement();
-            map.put(name, request.getParameterValues(name));
+            if (request.getParameter(name) != null && !request.getParameter(name).trim().equals("")) {
+                map.put(name, request.getParameterValues(name));
+            }
         }
         System.out.println("map parameters is [" + map + "]");
         BeanUtils.populate(bean, map);
