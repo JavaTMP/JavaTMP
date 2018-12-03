@@ -153,6 +153,14 @@
                         return c;  // Keep top-level nodes
                     });
 
+                    function calcuateSum(list) {
+                        for (var i = 0; i < list.length; i++) {
+                            var item = list[i];
+                            calcuateSum(list[i].children);
+
+                        }
+                    }
+
 //                    alert(JSON.stringify(childList));
                     return childList;
                 }
