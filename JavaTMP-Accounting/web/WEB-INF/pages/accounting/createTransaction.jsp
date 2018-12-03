@@ -115,9 +115,9 @@
                                                     </select>
                                                 </td>
                                                 <td style="width: 8rem;">
-                                                    <input class="form-control accountDebitField" type="number" placeholder='0.00' step="0.01" min="0"/></td>
+                                                    <input class="form-control accountDebitField" type="number" placeholder='0.00' step="1.00" min="0"/></td>
                                                 <td style="width: 8rem;">
-                                                    <input class="form-control accountCreditField" type="number" placeholder='0.00' step="0.01" min="0"/></td>
+                                                    <input class="form-control accountCreditField" type="number" placeholder='0.00' step="1.00" min="0"/></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -218,6 +218,9 @@
             $('#tab_logic tbody').on('keyup change', function () {
                 calc();
             });
+
+            $("#add_row").trigger("click");
+            $("#add_row").trigger("click");
 
             var form = $('#addNewTransaction');
             var validator = null;

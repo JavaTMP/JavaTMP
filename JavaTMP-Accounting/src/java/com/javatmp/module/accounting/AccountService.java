@@ -100,6 +100,9 @@ public class AccountService {
             em.persist(transaction);
             if (transaction.getAccounttransactionList() != null) {
                 for (Accounttransaction trans : transaction.getAccounttransactionList()) {
+                    if (trans.getAccountId() == null) {
+                        continue;
+                    }
                     trans.setTransactionId(transaction.getId());
                     trans.setStatus((short) 1);
                     System.out.println("debit is [" + trans.getDebit() + "] , credit is [" + trans.getCredit() + "]");

@@ -51,6 +51,12 @@ public class CreateTransaction extends HttpServlet {
             LinkedList<Accounttransaction> accounttransactions = new LinkedList<Accounttransaction>();
             accounttransactions.add(new Accounttransaction());
             accounttransactions.add(new Accounttransaction());
+            accounttransactions.add(new Accounttransaction());
+            accounttransactions.add(new Accounttransaction());
+            accounttransactions.add(new Accounttransaction());
+            accounttransactions.add(new Accounttransaction());
+            accounttransactions.add(new Accounttransaction());
+            accounttransactions.add(new Accounttransaction());
             toBe.setAccounttransactionList(accounttransactions);
             MvcHelper.populateBeanByRequestParameters(request, toBe);
             toBe.setAccounttransactionList(accounttransactions);
