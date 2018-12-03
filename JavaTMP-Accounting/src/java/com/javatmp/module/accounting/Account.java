@@ -91,6 +91,13 @@ public class Account implements Serializable {
         this.creationDate = creationDate;
     }
 
+    public Account(Long id, String accountCode, String name, Integer accountGroup) {
+        this.id = id;
+        this.accountCode = accountCode;
+        this.name = name;
+        this.accountGroup = accountGroup;
+    }
+
     public Account(Long accountId, String accountCode, String accountName,
             String accountDescription, BigDecimal debit, BigDecimal credit,
             BigDecimal balance, Short status, Date creationDate, Integer accountGroup, Long parentAccountId) {

@@ -44,6 +44,11 @@ public class TestingGetsAccounting {
             System.out.println(MvcHelper.toString(t));
         }
 
+        List<Account> leafs = accountService.getLeafAccounts();
+        for (Account t : leafs) {
+            System.out.println(MvcHelper.toString(t));
+        }
+
     }
 
 }

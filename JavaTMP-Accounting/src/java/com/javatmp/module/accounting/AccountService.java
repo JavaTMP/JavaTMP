@@ -183,6 +183,28 @@ public class AccountService {
         }
     }
 
+    public List<Account> getLeafAccounts() {
+
+        EntityManager em = null;
+        List<Account> retList = null;
+        try {
+            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            TypedQuery<Account> query = em.createQuery(
+                    "select new com.javatmp.module.accounting.Account("
+                    + "acct.id, acct.accountCode, acct.name, acct.accountGroup)"
+                    + " from Account acct where acct.id not in (select parentAcct.parentAccountId"
+                    + " from Account parentAcct where parentAcct.parentAccountId is not null)"
+                    + "", Account.class
+            );
+            retList = query.getResultList();
+            return retList;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
     public int updateAccount(Account accountToBeUpdated) {
         int updateStatus = 0;
         EntityManager em = null;

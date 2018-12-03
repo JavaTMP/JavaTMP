@@ -97,10 +97,10 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr id='addr0'>
+                                            <tr id='rowTemplate' style="display: none;">
                                                 <td style="width: 3rem;">1</td>
                                                 <td>
-                                                    <select class="form-control" name='accounttransactionList[0].accountId'>
+                                                    <select class="accountListSelect form-control">
                                                         <c:choose>
                                                             <c:when test="${fn:length(requestScope.accounts) > 0}">
                                                                 <option value="">${labels['page.text.kindlySelect']}</option>
@@ -114,30 +114,11 @@
                                                         </c:choose>
                                                     </select>
                                                 </td>
-                                                <td style="width: 8rem;"><input type="number" name='accounttransactionList[0].debit' placeholder='0.00' class="form-control" step="0.01" min="0"/></td>
-                                                <td style="width: 8rem;"><input type="number" name='accounttransactionList[0].credit' placeholder='0.00' class="form-control" step="0.01" min="0"/></td>
+                                                <td style="width: 8rem;">
+                                                    <input class="form-control accountDebitField" type="number" placeholder='0.00' step="0.01" min="0"/></td>
+                                                <td style="width: 8rem;">
+                                                    <input class="form-control accountCreditField" type="number" placeholder='0.00' step="0.01" min="0"/></td>
                                             </tr>
-                                            <tr id='addr1'>
-                                                <td style="width: 3rem;">2</td>
-                                                <td>
-                                                    <select class="form-control" name='accounttransactionList[1].accountId'>
-                                                        <c:choose>
-                                                            <c:when test="${fn:length(requestScope.accounts) > 0}">
-                                                                <option value="">${labels['page.text.kindlySelect']}</option>
-                                                                <c:forEach items="${requestScope.accounts}" var="account">
-                                                                    <option  value="${account.id}">${account.accountCode} - ${account.name}</option>
-                                                                </c:forEach>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <option value="">${labels['page.text.noRecordFound']}</option>
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    </select>
-                                                </td>
-                                                <td style="width: 8rem;"><input type="number" name='accounttransactionList[1].debit' placeholder='0.00' class="form-control" step="0.01" min="0"/></td>
-                                                <td style="width: 8rem;"><input type="number" name='accounttransactionList[1].credit' placeholder='0.00' class="form-control" step="0.01" min="0"/></td>
-                                            </tr>
-                                            <tr id='addr2'></tr>
                                         </tbody>
                                     </table>
                                 </div>
@@ -209,17 +190,26 @@
             // controll return to main javascript file.
             // <--- HERE --->
             //
-            var i = 2;
+            function calc() {
+
+            }
+            var i = 0;
             $("#add_row").click(function () {
-                b = i - 1;
-                $('#addr' + i).html($('#addr' + b).html()).find('td:first-child').html(i + 1);
-                $('#tab_logic').append('<tr id="addr' + (i + 1) + '"></tr>');
+                var newRowId = "row" + i;
+                var newRowObject = $("#rowTemplate").clone(false).attr("id", newRowId).css({"display": ""});
+                var actualRow = $('#tab_logic').append(newRowObject).find("#" + newRowId);
+                actualRow.find('td:first-child').html(i + 1);
+                actualRow.find("select.accountListSelect").attr("name", "accounttransactionList[" + (i) + "].accountId");
+                actualRow.find("input.accountDebitField").attr("name", "accounttransactionList[" + (i) + "].debit");
+                actualRow.find("input.accountCreditField").attr("name", "accounttransactionList[" + (i) + "].credit");
+                javatmp.plugins.select2Wrapper(actualRow.find("select.accountListSelect"));
                 i++;
             });
 
             $("#delete_row").click(function () {
-                if (i > 2) {
-                    $("#addr" + (i - 1)).html('');
+                if (i > 0) {
+                    $("#row" + (i - 1)).find("select.accountListSelect").select2('destroy');
+                    $("#row" + (i - 1)).remove();
                     i--;
                 }
                 calc();
@@ -227,10 +217,6 @@
 
             $('#tab_logic tbody').on('keyup change', function () {
                 calc();
-            });
-
-            $('#tax').on('keyup change', function () {
-                calc_total();
             });
 
             var form = $('#addNewTransaction');

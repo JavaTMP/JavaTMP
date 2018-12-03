@@ -30,7 +30,7 @@ public class CreateTransaction extends HttpServlet {
         ServletContext context = request.getServletContext();
         ServicesFactory sf = (ServicesFactory) context.getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         AccountService accountService = sf.getAccountService();
-        List<Account> accounts = accountService.getChartOfAccounts();
+        List<Account> accounts = accountService.getLeafAccounts();
         List<Transactiontype> transactiontypes = accountService.getTransactionTypes();
         List<Module> modules = accountService.getModules();
         request.setAttribute("accounts", accounts);
