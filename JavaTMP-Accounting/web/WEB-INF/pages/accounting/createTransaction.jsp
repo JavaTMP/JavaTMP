@@ -5,7 +5,7 @@
 <div class="dynamic-ajax-content">
     <h5 class="my-3">Create Transaction</h5>
     <hr/>
-    <div class="row justify-content-md-center">
+    <div class="row">
         <div class="col-lg-6 col-md-9">
             <div class="card">
                 <div class="card-header">
@@ -99,15 +99,43 @@
                                         <tbody>
                                             <tr id='addr0'>
                                                 <td style="width: 3rem;">1</td>
-                                                <td><input type="text" name='accounttransactionList.accountId'  placeholder='Enter Account Name' class="form-control"/></td>
-                                                <td style="width: 8rem;"><input type="number" name='accounttransactionList.amount' placeholder='0.00' class="form-control" step="0.01" min="0"/></td>
-                                                <td style="width: 8rem;"><input type="number" name='accounttransactionList.amount' placeholder='0.00' class="form-control" step="0.01" min="0"/></td>
+                                                <td>
+                                                    <select class="form-control" name='accounttransactionList[0].accountId'>
+                                                        <c:choose>
+                                                            <c:when test="${fn:length(requestScope.accounts) > 0}">
+                                                                <option value="">${labels['page.text.kindlySelect']}</option>
+                                                                <c:forEach items="${requestScope.accounts}" var="account">
+                                                                    <option  value="${account.id}">${account.accountCode} - ${account.name}</option>
+                                                                </c:forEach>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option value="">${labels['page.text.noRecordFound']}</option>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </select>
+                                                </td>
+                                                <td style="width: 8rem;"><input type="number" name='accounttransactionList[0].debit' placeholder='0.00' class="form-control" step="0.01" min="0"/></td>
+                                                <td style="width: 8rem;"><input type="number" name='accounttransactionList[0].credit' placeholder='0.00' class="form-control" step="0.01" min="0"/></td>
                                             </tr>
                                             <tr id='addr1'>
                                                 <td style="width: 3rem;">2</td>
-                                                <td><input type="text" name='accounttransactionList.accountId'  placeholder='Enter Account Name' class="form-control"/></td>
-                                                <td style="width: 8rem;"><input type="number" name='accounttransactionList.amount' placeholder='0.00' class="form-control" step="0.01" min="0"/></td>
-                                                <td style="width: 8rem;"><input type="number" name='accounttransactionList.amount' placeholder='0.00' class="form-control" step="0.01" min="0"/></td>
+                                                <td>
+                                                    <select class="form-control" name='accounttransactionList[1].accountId'>
+                                                        <c:choose>
+                                                            <c:when test="${fn:length(requestScope.accounts) > 0}">
+                                                                <option value="">${labels['page.text.kindlySelect']}</option>
+                                                                <c:forEach items="${requestScope.accounts}" var="account">
+                                                                    <option  value="${account.id}">${account.accountCode} - ${account.name}</option>
+                                                                </c:forEach>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option value="">${labels['page.text.noRecordFound']}</option>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </select>
+                                                </td>
+                                                <td style="width: 8rem;"><input type="number" name='accounttransactionList[1].debit' placeholder='0.00' class="form-control" step="0.01" min="0"/></td>
+                                                <td style="width: 8rem;"><input type="number" name='accounttransactionList[1].credit' placeholder='0.00' class="form-control" step="0.01" min="0"/></td>
                                             </tr>
                                             <tr id='addr2'></tr>
                                         </tbody>

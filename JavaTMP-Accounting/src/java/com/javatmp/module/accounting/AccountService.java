@@ -5,6 +5,7 @@
  */
 package com.javatmp.module.accounting;
 
+import com.javatmp.mvc.MvcHelper;
 import com.javatmp.util.JpaDaoHelper;
 import java.math.BigDecimal;
 import java.util.LinkedList;
@@ -97,6 +98,24 @@ public class AccountService {
             em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
             em.getTransaction().begin();
             em.persist(transaction);
+            if (transaction.getAccounttransactionList() != null) {
+                for (Accounttransaction trans : transaction.getAccounttransactionList()) {
+                    trans.setTransactionId(transaction.getId());
+                    trans.setStatus((short) 1);
+                    System.out.println("debit is [" + trans.getDebit() + "] , credit is [" + trans.getCredit() + "]");
+                    if (trans.getDebit() != null && trans.getDebit().compareTo(BigDecimal.ZERO) > 0) {
+                        trans.setAmount(trans.getDebit());
+                    } else if (trans.getCredit() != null && trans.getCredit().compareTo(BigDecimal.ZERO) > 0) {
+                        trans.setAmount(trans.getCredit().negate());
+                    } else {
+                        // throw exception or set amount to zero:
+                        trans.setAmount(BigDecimal.ZERO);
+                    }
+                    System.out.println("Trans is [" + MvcHelper.deepToString(trans) + "]");
+                    em.persist(trans);
+                }
+            }
+
             em.getTransaction().commit();
         } catch (PersistenceException e) {
             if (em != null) {

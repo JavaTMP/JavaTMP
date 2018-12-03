@@ -38,6 +38,11 @@ public class Accounttransaction implements Serializable {
     @Column(name = "amount")
     private BigDecimal amount;
 
+    @Transient
+    private BigDecimal debit;
+    @Transient
+    private BigDecimal credit;
+
     @Column(name = "accountId")
     private Long accountId;
 
@@ -148,6 +153,34 @@ public class Accounttransaction implements Serializable {
      */
     public void setTransactionId(Long transactionId) {
         this.transactionId = transactionId;
+    }
+
+    /**
+     * @return the debit
+     */
+    public BigDecimal getDebit() {
+        return debit;
+    }
+
+    /**
+     * @param debit the debit to set
+     */
+    public void setDebit(BigDecimal debit) {
+        this.debit = debit;
+    }
+
+    /**
+     * @return the credit
+     */
+    public BigDecimal getCredit() {
+        return credit;
+    }
+
+    /**
+     * @param credit the credit to set
+     */
+    public void setCredit(BigDecimal credit) {
+        this.credit = credit;
     }
 
 }

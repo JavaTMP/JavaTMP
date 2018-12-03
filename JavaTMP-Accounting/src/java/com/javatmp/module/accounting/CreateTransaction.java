@@ -46,13 +46,20 @@ public class CreateTransaction extends HttpServlet {
         ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         AccountService accountService = sf.getAccountService();
         try {
+
             Transaction toBe = new Transaction();
-            toBe.setAccounttransactionList(new LinkedList<Accounttransaction>());
-            logger.info("accounttransactions size [" + toBe.getAccounttransactionList().size() + "]");
-            for (Accounttransaction accounttransaction : toBe.getAccounttransactionList()) {
+            LinkedList<Accounttransaction> accounttransactions = new LinkedList<Accounttransaction>();
+            accounttransactions.add(new Accounttransaction());
+            accounttransactions.add(new Accounttransaction());
+            toBe.setAccounttransactionList(accounttransactions);
+            MvcHelper.populateBeanByRequestParameters(request, toBe);
+            toBe.setAccounttransactionList(accounttransactions);
+            logger.info("accounttransactions size [" + accounttransactions.size() + "]");
+
+            for (Accounttransaction accounttransaction : accounttransactions) {
                 logger.info("accounttransaction [" + MvcHelper.deepToString(accounttransaction) + "]");
             }
-            MvcHelper.populateBeanByRequestParameters(request, toBe);
+
             logger.info("account to be Updated is [" + MvcHelper.deepToString(toBe) + "]");
             toBe.setCreationDate(new Date());
             toBe.setStatus((short) 1);
