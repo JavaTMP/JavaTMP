@@ -138,6 +138,9 @@
                         if (c.parentAccountId) {
                             // add c to `children` array of parent node
                             parent = nodeMap[c.parentAccountId];
+                            parent.debit += c.debit;
+                            parent.credit += c.credit;
+                            parent.balance += c.balance;
                             parent.folder = true;
                             parent.expanded = true;
                             if (parent.children) {

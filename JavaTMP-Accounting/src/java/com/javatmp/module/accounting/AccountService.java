@@ -33,10 +33,34 @@ public class AccountService {
         this.jpaDaoHelper = jpaDaoHelper;
     }
 
-    public List<Account> getChartOfAccounts() {
+    public List<Account> getAllAccountsList() {
         List<Account> chartOfAccounts = new LinkedList<>();
         chartOfAccounts = this.jpaDaoHelper.findAll(Account.class);
         return chartOfAccounts;
+    }
+
+    public List<Account> getChartOfAccounts() {
+        EntityManager em = null;
+        List<Account> retList = null;
+        try {
+            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            TypedQuery<Account> query = em.createQuery(
+                    "select new com.javatmp.module.accounting.Account("
+                    + "acct.id, acct.accountCode, acct.name, acct.parentAccountId, sum(case when att.amount > 0 then att.amount else 0 end),"
+                    + "sum(case when att.amount < 0 then (att.amount * -1) else 0 end), sum(att.amount))"
+                    + " from Account acct"
+                    + " left outer join Accounttransaction att on acct.id = att.accountId"
+                    + " left outer join Transaction trans on att.transactionId = trans.id"
+                    + " group by acct.id, acct.accountCode, acct.name, acct.parentAccountId"
+                    + "", Account.class
+            );
+            retList = query.getResultList();
+            return retList;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
     }
 
     public List<Transactiontype> getTransactionTypes() {
@@ -188,6 +212,14 @@ public class AccountService {
 
     public List<Account> getLeafAccounts() {
 
+        // another solution https://stackoverflow.com/questions/24725228/list-of-employees-who-are-not-managers
+        /*
+        select x.empno, x.ename, x.job, x.sal
+  from emp x
+  left join emp y
+    on x.empno = y.mgr
+ where y.mgr is null
+         */
         EntityManager em = null;
         List<Account> retList = null;
         try {

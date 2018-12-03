@@ -26,7 +26,7 @@ public class TestingGetsAccounting {
         jpaDaoHelper = new JpaDaoHelper("AppPU");
         AccountService accountService = new AccountService(jpaDaoHelper);
 
-        List<Account> accounts = accountService.getChartOfAccounts();
+        List<Account> accounts = accountService.getAllAccountsList();
 
         for (Account acct : accounts) {
             System.out.println(MvcHelper.toString(acct));
@@ -47,6 +47,12 @@ public class TestingGetsAccounting {
         List<Account> leafs = accountService.getLeafAccounts();
         for (Account t : leafs) {
             System.out.println(MvcHelper.toString(t));
+        }
+
+        List<Account> coa = accountService.getChartOfAccounts();
+
+        for (Account acct : coa) {
+            System.out.println(MvcHelper.toString(acct));
         }
 
     }

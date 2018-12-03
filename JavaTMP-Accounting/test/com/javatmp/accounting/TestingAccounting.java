@@ -47,7 +47,7 @@ public class TestingAccounting {
         accountService.mergeAccount(general2);
         accountService.mergeAccount(general3);
 
-        List<Account> accounts = accountService.getChartOfAccounts();
+        List<Account> accounts = accountService.getAllAccountsList();
 
         for (Account acct : accounts) {
             System.out.println(MvcHelper.toString(acct));

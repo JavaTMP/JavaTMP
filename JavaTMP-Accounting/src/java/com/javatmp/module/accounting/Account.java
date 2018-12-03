@@ -115,6 +115,17 @@ public class Account implements Serializable {
 
     }
 
+    public Account(Long id, String accountCode, String name, Long parentAccountId, BigDecimal debit, BigDecimal credit,
+            BigDecimal balance) {
+        this.id = id;
+        this.accountCode = accountCode;
+        this.name = name;
+        this.parentAccountId = parentAccountId;
+        this.debit = debit;
+        this.credit = credit;
+        this.balance = balance;
+    }
+
     public Long getId() {
         return id;
     }

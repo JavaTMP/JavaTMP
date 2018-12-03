@@ -41,7 +41,7 @@ public class UpdateAccountPopup extends HttpServlet {
 
             HttpSession session = request.getSession();
             User loggedInUser = (User) session.getAttribute("user");
-            List<Account> accounts = accountService.getChartOfAccounts();
+            List<Account> accounts = accountService.getAllAccountsList();
             List<Accountgroup> accountGroups = accountService.getAccountGroups();
             request.setAttribute("accounts", accounts);
             request.setAttribute("accountGroups", accountGroups);
