@@ -33,9 +33,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.BeanUtilsBean;
 import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.commons.beanutils.ConvertUtilsBean;
 import org.apache.commons.beanutils.converters.DateConverter;
 import org.apache.commons.beanutils.converters.DateTimeConverter;
+import org.apache.commons.beanutils.converters.IntegerConverter;
+import org.apache.commons.beanutils.converters.LongConverter;
 import org.apache.commons.lang3.builder.RecursiveToStringStyle;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
@@ -94,11 +98,18 @@ public class MvcHelper {
 
         DateTimeConverter dtConverter = new DateConverter();
         dtConverter.setPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-        ConvertUtils.register(dtConverter, Date.class);
+        IntegerConverter ic = new IntegerConverter(null);
+        LongConverter longConverter = new LongConverter(null);
 
+        ConvertUtils.register(dtConverter, Date.class);
+        ConvertUtils.register(ic, Integer.class);
+        ConvertUtils.register(longConverter, Long.class);
+        //BeanUtilsBean.getInstance().getConvertUtils().register(false, false, 0);
         while (names.hasMoreElements()) {
             String name = (String) names.nextElement();
-            map.put(name, request.getParameterValues(name));
+            if (request.getParameter(name) != null && !request.getParameter(name).trim().equals("")) {
+                map.put(name, request.getParameterValues(name));
+            }
         }
         System.out.println("map parameters is [" + map + "]");
         BeanUtils.populate(bean, map);

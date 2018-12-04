@@ -1,16 +1,24 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <h5 class="my-3">Blank Card Page Title</h5>
+    <h5 class="my-3">Chart Of Accounts</h5>
     <hr/>
     <div class="row">
         <div class="col">
             <div class="card">
                 <div class="card-header">
                     <nav class="nav d-inline">
-                        <a class="d-inline nav-link active" href="#">Active</a>
-                        <a class="d-inline nav-link" href="#">Link</a>
-                        <a class="d-inline nav-link" href="#">Link</a>
-                        <a class="d-inline nav-link disabled" href="#">Disabled</a>
+                        <a class="d-inline nav-link"
+                           action-name="Add-New-User-Popup-Action" id="UserList-AddNewUserPopupId" href="javascript:;">
+                            Add New Account
+                        </a>
+                        <a class="d-inline nav-link" href="javascript:;"
+                           action-name="Update-Complete-User-Action" id="UserList-UpdateSelectedUserId">
+                            Update Selected Account
+                        </a>
+                        <a class="d-inline nav-link" href="javascript:;"
+                           action-name="Delete-User-Action" id="UserList-DeleteSelectedUserId" >
+                            Delete Selected Account
+                        </a>
                     </nav>
                     <div class="options float-right">
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
@@ -34,6 +42,21 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div id="contextMenu" class="dropdown-menu" role="menu" style="display:none;position: fixed;" >
+        <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Add-New-User-Popup-Action">
+            <i class="fas fa-plus text-primary"></i>
+            Add New Account
+        </a>
+        <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Update-Complete-User-Action">
+            <i class="fa fa-edit fa-fw text-primary"></i>
+            Update Selected Account
+        </a>
+        <div class="dropdown-divider"></div>
+        <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Delete-User-Action">
+            <i class="fa fa-times fa-fw text-danger"></i>
+            Delete Selected Account
+        </a>
     </div>
     <!--
     Reference Your external Stylesheet file here
@@ -102,19 +125,22 @@
 
                     // Pass 1: store all tasks in reference map
                     $.each(childList, function (i, c) {
-                        nodeMap[c.accountId] = c;
+                        nodeMap[c.id] = c;
                     });
                     // Pass 2: adjust fields and fix child structure
                     childList = $.map(childList, function (c) {
                         // Rename 'key' to 'id'
-                        c.key = c.accountId;
-                        c.title = c.accountName;
-                        c.tooltip = c.accountDescription;
+                        c.key = c.id;
+                        c.title = c.name;
+                        c.tooltip = c.description;
 //                        c.icon = "far fa-heart";
                         // Check if c is a child node
                         if (c.parentAccountId) {
                             // add c to `children` array of parent node
                             parent = nodeMap[c.parentAccountId];
+                            parent.debit += c.debit;
+                            parent.credit += c.credit;
+                            parent.balance += c.balance;
                             parent.folder = true;
                             parent.expanded = true;
                             if (parent.children) {
@@ -127,11 +153,19 @@
                         return c;  // Keep top-level nodes
                     });
 
+                    function calcuateSum(list) {
+                        for (var i = 0; i < list.length; i++) {
+                            var item = list[i];
+                            calcuateSum(list[i].children);
+
+                        }
+                    }
+
 //                    alert(JSON.stringify(childList));
                     return childList;
                 }
 
-                $("#chartOfAccountMainTable").fancytree({
+                var chartOfAccountTree = $("#chartOfAccountMainTable").fancytree({
                     rtl: javatmp.settings.isRTL,
                     extensions: ["glyph", "table"],
                     checkbox: false,
@@ -143,37 +177,17 @@
                         cache: false
                     },
                     init: function (event, data) {
-//                        data.tree.getRootNode().sortChildren(function (a, b) {
-//                            var x = a.key,
-//                                    y = b.key;
-//                            return x === y ? 0 : x > y ? -1 : +1;
-//                        }, true);
+                        window.javatmp.plugins.contextMenuWrapper($(this), '.fancytree-title', $("#contextMenu"), function (e) {
+                            var node = $.ui.fancytree.getNode(this);
+                            node.setSelected(true);
+                            node.setActive(true);
+                        });
                     },
                     postProcess: function (event, data) {
                         data.result = convertData(data.response.data);
-//                        data.result = {
-//                            error: "ERROR #" + orgResponse.faultCode + ": " + orgResponse.faultMsg
-//                        };
-//                        data.result = [
-//                            {
-//                                "title": "No Accounts",
-//                                "accountCode": "ERROR",
-//                                "debit": 0.0,
-//                                "credit": 0.0,
-//                                "balance": 0.0
-//                            },
-//                            {
-//                                "title": "No Accounts",
-//                                "accountCode": "ERROR",
-//                                "debit": 0.0,
-//                                "credit": 0.0,
-//                                "balance": 0.0
-//                            }
-//
-//                        ];
                     },
                     table: {
-                        indentation: 30,
+                        indentation: 35,
                         nodeColumnIdx: 1
                     },
                     activate: function (event, data) {
@@ -209,18 +223,83 @@
                     }
                 });
 
+                var addNewUserPopupButton = $("#UserList-AddNewUserPopupId");
+                addNewUserPopupButton.on("click", function (event) {
+                    BootstrapModalWrapperFactory.createAjaxModal({
+                        message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
+                        title: "${labels['global.loadingText']}",
+                        passData: {},
+                        updateSizeAfterDataFetchTo: null, // default is  or null for standard or "modal-sm"
+//                        size: "modal-lg",
+                        url: javatmp.settings.contextPath + "/accounting/AddNewAccountPopup",
+                        ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady,
+                        localData: {
+                            callback: function (callbackData) {
+                                chartOfAccountTree.fancytree("getTree").reload();
+                            }
+                        }
+                    });
+                });
+
+                var updateUserButton = $("#UserList-UpdateSelectedUserId");
+                updateUserButton.on("click", function (event) {
+                    //                var selectedCount = table.rows({selected: true}).count();
+                    var selectedNode = chartOfAccountTree.fancytree('getTree').getActiveNode();
+                    if (selectedNode) {
+                        var selectedRecord = selectedNode.data;
+                        BootstrapModalWrapperFactory.createAjaxModal({
+                            message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
+                            passData: selectedRecord,
+                            updateSizeAfterDataFetchTo: null, // default is  or null for standard or "modal-sm"
+//                            size: "modal-lg",
+                            url: javatmp.settings.contextPath + "/accounting/UpdateAccountPopup",
+                            ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady,
+                            localData: {
+                                callback: function (callbackData) {
+                                    chartOfAccountTree.fancytree("getTree").reload();
+                                }
+                            }
+                        });
+                    } else {
+                        BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
+                    }
+                });
+
+                var deleteUserButton = $("#UserList-DeleteSelectedUserId");
+                deleteUserButton.on("click", function (event) {
+                    var selectedNode = chartOfAccountTree.fancytree('getTree').getActiveNode();
+                    // for checkbox or select
+//                    var selectedData = chartOfAccountTree.fancytree('getTree').getSelectedNodes();
+//                    var selectedData = chartOfAccountTree.fancytree("getSelectedNodes");
+//                    var selectedRecord = selectedData[0].data;
+                    if (selectedNode) {
+                        var selectedRecord = selectedNode.data;
+                        window.javatmp.plugins.confirmAjaxAction(
+                                "Delete Account Confirmation",
+                                "Are You Sure You want to delete selected account ?",
+                                "Delete Account",
+                                javatmp.settings.labels["global.cancel"],
+                                javatmp.settings.contextPath + "/accounting/DeleteAccountController",
+                                selectedRecord,
+                                function (data) {
+                                    chartOfAccountTree.fancytree("getTree").reload();
+                                }
+                        );
+                    } else {
+                        BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
+                    }
+                });
+
+
             });
 
-            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
-                // fire when user resize browser window or sidebar hide / show
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {                 // fire when user resize browser window or sidebar hide / show
             });
 
-            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenCompress, function (event, card) {
-                // when card compress by pressing the top right tool button
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenCompress, function (event, card) {                 // when card compress by pressing the top right tool button
             });
 
-            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenExpand, function (event, card) {
-                // when card Expand by pressing the top right tool button
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenExpand, function (event, card) {                 // when card Expand by pressing the top right tool button
             });
 
             /**
@@ -233,6 +312,5 @@
                 $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenExpand);
                 return true;
             });
-        });
-    </script>
+        });</script>
 </div>

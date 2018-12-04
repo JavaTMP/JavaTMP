@@ -1,56 +1,137 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.javatmp.module.accounting;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  *
- * @author m_dar
+ * @author JavaTMP
  */
-public class Account {
+@Entity
+@Table(name = "account")
+public class Account implements Serializable {
 
-    private Long accountId;
-    private String accountCode;
-    private String accountName;
-    private String accountDescription;
-    private BigDecimal debit;
-    private BigDecimal credit;
-    private BigDecimal balance;
-    private Integer accountType;
-    private Long parentAccountId;
+    @Column(name = "status")
+    private Short status;
+
+    @Transient
+    private List<Accounttransaction> accounttransactionList;
+
+    @Transient
+    private Accountgroup accountgroup;
+
+    @Transient
+    private List<Account> accountList;
+
+    @Transient
     private Account parentAccount;
-    private Integer accountStatus;
-    private List<Account> children;
+
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
+    @Column(name = "accountCode")
+    private String accountCode;
+
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "description")
+    private String description;
+
+    @Column(name = "debit")
+    private BigDecimal debit;
+
+    @Column(name = "credit")
+    private BigDecimal credit;
+
+    @Column(name = "balance")
+    private BigDecimal balance;
+
+    @Column(name = "creationDate")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date creationDate;
+
+    @Column(name = "accountGroup")
+    private Integer accountGroup;
+
+    @Column(name = "parentAccountId")
+    private Long parentAccountId;
+
+    public Account() {
+    }
+
+    public Account(Long id) {
+        this.id = id;
+    }
+
+    public Account(Long id, String accountCode, String name, Date creationDate) {
+        this.id = id;
+        this.accountCode = accountCode;
+        this.name = name;
+        this.creationDate = creationDate;
+    }
+
+    public Account(Long id, String accountCode, String name, Integer accountGroup) {
+        this.id = id;
+        this.accountCode = accountCode;
+        this.name = name;
+        this.accountGroup = accountGroup;
+    }
 
     public Account(Long accountId, String accountCode, String accountName,
             String accountDescription, BigDecimal debit, BigDecimal credit,
-            BigDecimal balance, Integer accountType, Long parentAccountId,
-            Account parentAccount, Integer accountStatus, List<Account> children) {
-        this.accountId = accountId;
+            BigDecimal balance, Short status, Date creationDate, Integer accountGroup, Long parentAccountId) {
+        this.id = accountId;
         this.accountCode = accountCode;
-        this.accountName = accountName;
-        this.accountDescription = accountDescription;
+        this.name = accountName;
+        this.description = accountDescription;
         this.debit = debit;
         this.credit = credit;
         this.balance = balance;
-        this.accountType = accountType;
+        this.status = status;
+        this.creationDate = creationDate;
+        this.accountGroup = accountGroup;
         this.parentAccountId = parentAccountId;
-        this.parentAccount = parentAccount;
-        this.accountStatus = accountStatus;
-        this.children = children;
+
     }
 
-    public Long getAccountId() {
-        return accountId;
+    public Account(Long id, String accountCode, String name, Long parentAccountId, BigDecimal debit, BigDecimal credit,
+            BigDecimal balance) {
+        this.id = id;
+        this.accountCode = accountCode;
+        this.name = name;
+        this.parentAccountId = parentAccountId;
+        this.debit = debit;
+        this.credit = credit;
+        this.balance = balance;
     }
 
-    public void setAccountId(Long accountId) {
-        this.accountId = accountId;
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getAccountCode() {
@@ -61,12 +142,20 @@ public class Account {
         this.accountCode = accountCode;
     }
 
-    public String getAccountName() {
-        return accountName;
+    public String getName() {
+        return name;
     }
 
-    public void setAccountName(String accountName) {
-        this.accountName = accountName;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public BigDecimal getDebit() {
@@ -93,58 +182,111 @@ public class Account {
         this.balance = balance;
     }
 
-    public Integer getAccountType() {
-        return accountType;
+    public Date getCreationDate() {
+        return creationDate;
     }
 
-    public void setAccountType(Integer accountType) {
-        this.accountType = accountType;
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
-    public Long getParentAccountId() {
-        return parentAccountId;
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
     }
 
-    public void setParentAccountId(Long parentAccountId) {
-        this.parentAccountId = parentAccountId;
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Account)) {
+            return false;
+        }
+        Account other = (Account) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
     }
 
-    public Integer getAccountStatus() {
-        return accountStatus;
+    @Override
+    public String toString() {
+        return "com.javatmp.module.accounting.Account[ id=" + id + " ]";
     }
 
-    public void setAccountStatus(Integer accountStatus) {
-        this.accountStatus = accountStatus;
+    /**
+     * @return the accountType
+     */
+    public Integer getAccountGroup() {
+        return accountGroup;
     }
 
-    public String getAccountDescription() {
-        return accountDescription;
+    /**
+     * @param accountGroup the accountGroup to set
+     */
+    public void setAccountGroup(Integer accountGroup) {
+        this.accountGroup = accountGroup;
     }
 
-    public void setAccountDescription(String accountDescription) {
-        this.accountDescription = accountDescription;
+    public Short getStatus() {
+        return status;
     }
 
+    public void setStatus(Short status) {
+        this.status = status;
+    }
+
+    public List<Accounttransaction> getAccounttransactionList() {
+        return accounttransactionList;
+    }
+
+    public void setAccounttransactionList(List<Accounttransaction> accounttransactionList) {
+        this.accounttransactionList = accounttransactionList;
+    }
+
+    public Accountgroup getAccountgroup() {
+        return accountgroup;
+    }
+
+    public void setAccountgroup(Accountgroup accountgroup) {
+        this.accountgroup = accountgroup;
+    }
+
+    public List<Account> getAccountList() {
+        return accountList;
+    }
+
+    public void setAccountList(List<Account> accountList) {
+        this.accountList = accountList;
+    }
+
+    /**
+     * @return the parentAccount
+     */
     public Account getParentAccount() {
         return parentAccount;
     }
 
+    /**
+     * @param parentAccount the parentAccount to set
+     */
     public void setParentAccount(Account parentAccount) {
         this.parentAccount = parentAccount;
     }
 
     /**
-     * @return the children
+     * @return the parentAccountId
      */
-    public List<Account> getChildren() {
-        return children;
+    public Long getParentAccountId() {
+        return parentAccountId;
     }
 
     /**
-     * @param children the children to set
+     * @param parentAccountId the parentAccountId to set
      */
-    public void setChildren(List<Account> children) {
-        this.children = children;
+    public void setParentAccountId(Long parentAccountId) {
+        this.parentAccountId = parentAccountId;
     }
 
 }
