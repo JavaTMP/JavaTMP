@@ -46,31 +46,14 @@ public class CreateTransaction extends HttpServlet {
         ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         AccountService accountService = sf.getAccountService();
         try {
+            Transaction toBe = (Transaction) MvcHelper.readObjectFromRequest(request, Transaction.class);
+            logger.info("Transaction to be Created [" + MvcHelper.deepToString(toBe) + "]");
 
-            Transaction toBe = new Transaction();
-            LinkedList<Accounttransaction> accounttransactions = new LinkedList<Accounttransaction>();
-            accounttransactions.add(new Accounttransaction());
-            accounttransactions.add(new Accounttransaction());
-            accounttransactions.add(new Accounttransaction());
-            accounttransactions.add(new Accounttransaction());
-            accounttransactions.add(new Accounttransaction());
-            accounttransactions.add(new Accounttransaction());
-            accounttransactions.add(new Accounttransaction());
-            accounttransactions.add(new Accounttransaction());
-            toBe.setAccounttransactionList(accounttransactions);
-            MvcHelper.populateBeanByRequestParameters(request, toBe);
-            toBe.setAccounttransactionList(accounttransactions);
-            logger.info("accounttransactions size [" + accounttransactions.size() + "]");
-
-            for (Accounttransaction accounttransaction : accounttransactions) {
-                logger.info("accounttransaction [" + MvcHelper.deepToString(accounttransaction) + "]");
-            }
-
-            logger.info("account to be Updated is [" + MvcHelper.deepToString(toBe) + "]");
             toBe.setCreationDate(new Date());
             toBe.setStatus((short) 1);
             accountService.createNewTransaction(toBe);
             responseMessage.setOverAllStatus(true);
+            responseMessage.setTitle("Success Creation");
             responseMessage.setMessage("Transaction created successfully");
             responseMessage.setData(toBe);
         } catch (PersistenceException e) {
@@ -82,14 +65,6 @@ public class CreateTransaction extends HttpServlet {
             responseMessage.setMessage(t.getMessage());
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             responseMessage.setStatusCode(HttpServletResponse.SC_BAD_REQUEST);
-
-        } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
-            logger.info("ERROR : " + e.getMessage());
-            responseMessage.setOverAllStatus(false);
-            responseMessage.setMessage(e.getMessage());
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            responseMessage.setStatusCode(HttpServletResponse.SC_BAD_REQUEST);
-            throw new ServletException(e);
         }
         MvcHelper.sendMessageAsJson(response, responseMessage);
 

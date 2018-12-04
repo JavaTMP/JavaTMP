@@ -164,10 +164,6 @@
                                 node.credit += childRow[1];
                                 node.balance += childRow[2];
                             }
-                            node.debit = parseFloat(node.debit).toFixed(2);
-                            node.credit = parseFloat(node.credit).toFixed(2);
-                            node.balance = parseFloat(node.balance).toFixed(2);
-
                             return [node.debit, node.credit, node.balance];
                         } else {
                             console.log("leave node without children node id [" + node.id + "][" + node.title + "]");

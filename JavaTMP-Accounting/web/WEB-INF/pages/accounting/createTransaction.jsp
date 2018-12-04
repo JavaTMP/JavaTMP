@@ -184,7 +184,6 @@
         // should load mandatory libraries and plugins before.
         // <--- HERE --->
         //
-
         jQuery(function ($) {
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
@@ -199,9 +198,9 @@
                 var newRowObject = $("#rowTemplate").clone(false).attr("id", newRowId).css({"display": ""});
                 var actualRow = $('#tab_logic').append(newRowObject).find("#" + newRowId);
                 actualRow.find('td:first-child').html(i + 1);
-                actualRow.find("select.accountListSelect").attr("name", "accounttransactionList[" + (i) + "].accountId");
-                actualRow.find("input.accountDebitField").attr("name", "accounttransactionList[" + (i) + "].debit");
-                actualRow.find("input.accountCreditField").attr("name", "accounttransactionList[" + (i) + "].credit");
+                actualRow.find("select.accountListSelect").attr("name", "accounttransactionList[][accountId]");
+                actualRow.find("input.accountDebitField").attr("name", "accounttransactionList[][debit]");
+                actualRow.find("input.accountCreditField").attr("name", "accounttransactionList[][credit]");
                 javatmp.plugins.select2Wrapper(actualRow.find("select.accountListSelect"));
                 i++;
             });
@@ -225,43 +224,23 @@
             var form = $('#addNewTransaction');
             var validator = null;
 
-            form.ajaxForm({
-                clearForm: false, // clear all form fields after successful submit
-                resetForm: false, // reset the form after successful submit
-                beforeSerialize: function ($form, options) {
-                    if (!$form.valid()) {
-                        return false;
-                    }
-                },
-                beforeSubmit: function (formData, jqForm, options) {
-                    for (var i = 0; i < formData.length; i++) {
-                        if (formData[i].name === "transactionDate") {
-                            var value = formData[i].value;
-                            var newDate = moment(value, javatmp.settings.dateFormat).locale('en').format(javatmp.settings.networkDateFormat);
-                            formData[i].value = newDate;
-                            break;
-                        }
-                    }
-
-                },
-                success: function (response, statusText, xhr, $form) {
-                    BootstrapModalWrapperFactory.createModal({
-                        title: "${labels['global.response']}",
-                        message: response.message
-                    }).show();
-                },
-                error: function (xhr, status, error, $form) {
-                    var errorMsg = xhr.responseText;
-                    try {
-                        var jsonData = $.parseJSON(errorMsg);
-                        errorMsg = jsonData.message;
-                    } catch (error) {
-                    }
-                    BootstrapModalWrapperFactory.createModal({
-                        title: "${labels['global.error']}" + " : " + xhr.status,
-                        message: errorMsg
-                    }).show();
+            form.on("submit", function (event) {
+                event.preventDefault();
+                if (!$(this).valid()) {
+                    return false;
                 }
+                var formObj = $(this).serializeObject();
+
+                formObj.transactionDate = moment(formObj.transactionDate, javatmp.settings.dateFormat).locale('en').format(javatmp.settings.networkDateFormat);
+
+                console.log(formObj);
+                alert(JSON.stringify(formObj));
+                window.javatmp.plugins.ajaxAction(
+                        $(this).attr("action"),
+                        formObj,
+                        function (data) {
+                        }
+                );
             });
 
             // initialize jQuery Validation plugin using global data.

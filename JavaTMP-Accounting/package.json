@@ -68,7 +68,8 @@
     "numeral": "2.0.6",
     "@fortawesome/fontawesome-free": "^5.5.0",
     "moment-timezone": "^0.5.23",
-    "material-design-icons": "^3.0.1"
+    "material-design-icons": "^3.0.1",
+    "form-serializer": "^2.5.0"
   },
   "devDependencies": {
     "del": "^3.0.0",
