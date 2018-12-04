@@ -80,7 +80,7 @@
                                             <div class="col-sm-7">
                                                 <input class="form-control" type="text" placeholder=""
                                                        name="description" value=""
-                                                       data-rule-required="true"
+                                                       data-rule-required="false"
                                                        >
                                             </div>
                                         </div>

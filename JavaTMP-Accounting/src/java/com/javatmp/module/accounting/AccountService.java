@@ -47,7 +47,7 @@ public class AccountService {
             TypedQuery<Account> query = em.createQuery(
                     "select new com.javatmp.module.accounting.Account("
                     + "acct.id, acct.accountCode, acct.name, acct.parentAccountId, sum(case when att.amount > 0 then att.amount else 0 end),"
-                    + "sum(case when att.amount < 0 then (att.amount * -1) else 0 end), sum(att.amount))"
+                    + "sum(case when att.amount < 0 then (att.amount * -1) else 0 end), sum(coalesce(att.amount, 0)))"
                     + " from Account acct"
                     + " left outer join Accounttransaction att on acct.id = att.accountId"
                     + " left outer join Transaction trans on att.transactionId = trans.id"

@@ -138,9 +138,6 @@
                         if (c.parentAccountId) {
                             // add c to `children` array of parent node
                             parent = nodeMap[c.parentAccountId];
-                            parent.debit += c.debit;
-                            parent.credit += c.credit;
-                            parent.balance += c.balance;
                             parent.folder = true;
                             parent.expanded = true;
                             if (parent.children) {
@@ -153,14 +150,33 @@
                         return c;  // Keep top-level nodes
                     });
 
-                    function calcuateSum(list) {
-                        for (var i = 0; i < list.length; i++) {
-                            var item = list[i];
-                            calcuateSum(list[i].children);
-
+                    function calcuateSum(node) {
+                        if (node.children && node.children.length > 0) {
+                            var childNodes = [];
+                            for (var i = 0; i < node.children.length; i++) {
+                                var childNodeData = calcuateSum(node.children[i]);
+                                childNodes.push(childNodeData);
+                            }
+                            console.log(JSON.stringify(childNodes));
+                            for (var i = 0; i < childNodes.length; i++) {
+                                var childRow = childNodes[i];
+                                node.debit += childRow[0];
+                                node.credit += childRow[1];
+                                node.balance += childRow[2];
+                            }
+                            return [node.debit, node.credit, node.balance];
+                        } else {
+                            console.log("leave node without children node id [" + node.id + "][" + node.title + "]");
+                            return [node.debit, node.credit, node.balance];
                         }
                     }
 
+                    function calcuateSumForList(list) {
+                        for (var i = 0; i < list.length; i++) {
+                            calcuateSum(list[i]);
+                        }
+                    }
+                    calcuateSumForList(childList);
 //                    alert(JSON.stringify(childList));
                     return childList;
                 }
