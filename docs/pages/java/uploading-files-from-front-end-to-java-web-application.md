@@ -11,5 +11,5 @@ title: Uploading files from front end to Java Web Application
 *   [https://www.sanwebe.com/2014/04/ajax-contact-form-attachment-jquery-php](https://www.sanwebe.com/2014/04/ajax-contact-form-attachment-jquery-php)
 *   [https://dotnetthoughts.net/how-to-upload-multiple-files-with-html5-and-jquery/](https://dotnetthoughts.net/how-to-upload-multiple-files-with-html5-and-jquery/)
 *   [http://www.nickdesteffen.com/blog/file-uploading-over-ajax-using-html5](http://www.nickdesteffen.com/blog/file-uploading-over-ajax-using-html5)
-*   [http://jsfiddle.net/mdarim/0nx1xk5L/](http://jsfiddle.net/mdarim/0nx1xk5L/)
+*   [http://jsfiddle.net/javatmp/av06zfk2/](http://jsfiddle.net/javatmp/av06zfk2/)
 
