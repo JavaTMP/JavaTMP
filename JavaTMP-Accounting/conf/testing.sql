@@ -12,3 +12,4 @@ where language0_.languageId= 'en';
 select t.`themeId`, tt.themeName, t.`themeName`
 from themetranslation tt
 right outer join theme t on t.`themeId` = tt.`themeId`;
+
