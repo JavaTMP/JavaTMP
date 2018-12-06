@@ -115,9 +115,9 @@
                                                     </select>
                                                 </td>
                                                 <td style="width: 8rem;">
-                                                    <input class="form-control accountDebitField" type="number" placeholder='0.00' step="0.01" min="0"/></td>
+                                                    <input class="form-control accountDebitField" type="number" placeholder='0.00' step="0.01" min="0" value="0.00"/></td>
                                                 <td style="width: 8rem;">
-                                                    <input class="form-control accountCreditField" type="number" placeholder='0.00' step="0.01" min="0"/></td>
+                                                    <input class="form-control accountCreditField" type="number" placeholder='0.00' step="0.01" min="0" value="0.00"/></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -232,9 +232,6 @@
                 var formObj = $(this).serializeObject();
 
                 formObj.transactionDate = moment(formObj.transactionDate, javatmp.settings.dateFormat).locale('en').format(javatmp.settings.networkDateFormat);
-
-                console.log(formObj);
-                alert(JSON.stringify(formObj));
                 window.javatmp.plugins.ajaxAction(
                         $(this).attr("action"),
                         formObj,
