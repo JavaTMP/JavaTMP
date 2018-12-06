@@ -20,9 +20,9 @@
                         <div class="col">
                             <form accept-charset="UTF-8" autocomplete="off" id="addNewTransaction" class="form" action="${pageContext.request.contextPath}/accounting/CreateTransaction" method="post" novalidate="novalidate">
                                 <div class="form-row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-8">
                                         <div class="form-group form-row">
-                                            <label class="text-sm-right control-label col-sm-5 col-form-label">referenceCode</label>
+                                            <label class="control-label col-sm-5 col-form-label">referenceCode</label>
                                             <div class="col-sm-7">
                                                 <input class="form-control" type="text" placeholder=""
                                                        name="referenceCode" value=""
@@ -31,7 +31,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group form-row">
-                                            <label class="text-sm-right control-label col-sm-5 col-form-label">transactionTypeId</label>
+                                            <label class="control-label col-sm-5 col-form-label">transactionTypeId</label>
                                             <div class="col-sm-7">
                                                 <select name="transactionTypeId" class="form-control" data-rule-required="true">
                                                     <c:choose>
@@ -49,7 +49,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group form-row">
-                                            <label class="text-sm-right control-label col-sm-5 col-form-label">moduleId</label>
+                                            <label class="control-label col-sm-5 col-form-label">moduleId</label>
                                             <div class="col-sm-7">
                                                 <select name="moduleId" class="form-control" data-rule-required="true">
                                                     <c:choose>
@@ -67,7 +67,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group form-row">
-                                            <label class="text-sm-right control-label col-sm-5 col-form-label">transactionDate</label>
+                                            <label class="control-label col-sm-5 col-form-label">transactionDate</label>
                                             <div class="col-sm-7">
                                                 <input class="form-control" type="text" placeholder=""
                                                        name="transactionDate" value=""
@@ -76,7 +76,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group form-row">
-                                            <label class="text-sm-right control-label col-sm-5 col-form-label">description</label>
+                                            <label class="control-label col-sm-5 col-form-label">description</label>
                                             <div class="col-sm-7">
                                                 <input class="form-control" type="text" placeholder=""
                                                        name="description" value=""
