@@ -20,7 +20,7 @@
                         <div class="col">
                             <form accept-charset="UTF-8" autocomplete="off" id="addNewTransaction" class="form" action="${pageContext.request.contextPath}/accounting/CreateTransaction" method="post" novalidate="novalidate">
                                 <div class="form-row">
-                                    <div class="col-md-9">
+                                    <div class="col-md-8">
                                         <div class="form-row">
                                             <div class="col-md-6">
                                                 <div class="form-group form-row">
@@ -111,7 +111,7 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <select name="moduleId" class="form-control" data-rule-required="false">
+                                                    <select class="moduleId form-control" data-rule-required="false">
                                                         <c:choose>
                                                             <c:when test="${fn:length(requestScope.modules) > 0}">
                                                                 <option value="">${labels['page.text.kindlySelect']}</option>
@@ -126,7 +126,7 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <select name="transactionTypeId" class="form-control" data-rule-required="false">
+                                                    <select class="moduleRefId form-control" data-rule-required="false">
                                                         <c:choose>
                                                             <c:when test="${fn:length(requestScope.moduleTypeIds) > 0}">
                                                                 <option value="">${labels['page.text.kindlySelect']}</option>
@@ -141,7 +141,7 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <select name="transactionTypeId" class="form-control" data-rule-required="false">
+                                                    <select class="moduleTypeId form-control" data-rule-required="false">
                                                         <c:choose>
                                                             <c:when test="${fn:length(requestScope.moduleTypeIds) > 0}">
                                                                 <option value="">${labels['page.text.kindlySelect']}</option>
@@ -242,6 +242,10 @@
                 actualRow.find("select.accountListSelect").attr("name", "accounttransactionList[][accountId]");
                 actualRow.find("input.accountDebitField").attr("name", "accounttransactionList[][debit]");
                 actualRow.find("input.accountCreditField").attr("name", "accounttransactionList[][credit]");
+                actualRow.find("select.moduleId").attr("name", "accounttransactionList[][moduleId]");
+                actualRow.find("select.moduleRefId").attr("name", "accounttransactionList[][moduleRefId]");
+                actualRow.find("select.moduleTypeId").attr("name", "accounttransactionList[][moduleTypeId]");
+
                 javatmp.plugins.select2Wrapper(actualRow.find("select.accountListSelect"));
                 i++;
             });
@@ -273,6 +277,7 @@
                 var formObj = $(this).serializeObject();
                 formObj.voucherTypeId = 1; // General Ledger Voucher
                 formObj.transactionDate = moment(formObj.transactionDate, javatmp.settings.dateFormat).locale('en').format(javatmp.settings.networkDateFormat);
+                console.log(JSON.stringify(formObj));
                 window.javatmp.plugins.ajaxAction(
                         $(this).attr("action"),
                         formObj,

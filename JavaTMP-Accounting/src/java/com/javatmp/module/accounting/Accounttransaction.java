@@ -30,14 +30,20 @@ public class Accounttransaction implements Serializable {
     @Column(name = "moduleRefId")
     private BigInteger moduleRefId;
 
-    @JoinColumn(name = "moduleId", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @Transient
     private Module module;
-    @JoinColumn(name = "moduleTypeId", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @Column(name = "moduleId")
+    private Integer moduleId;
+
+    @Transient
     private Moduletype moduletype;
 
+    @Column(name = "moduleTypeId")
+    private Integer moduleTypeId;
+
     private static final long serialVersionUID = 1L;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -216,6 +222,34 @@ public class Accounttransaction implements Serializable {
 
     public void setModuletype(Moduletype moduletype) {
         this.moduletype = moduletype;
+    }
+
+    /**
+     * @return the moduleId
+     */
+    public Integer getModuleId() {
+        return moduleId;
+    }
+
+    /**
+     * @param moduleId the moduleId to set
+     */
+    public void setModuleId(Integer moduleId) {
+        this.moduleId = moduleId;
+    }
+
+    /**
+     * @return the moduleTypeId
+     */
+    public Integer getModuleTypeId() {
+        return moduleTypeId;
+    }
+
+    /**
+     * @param moduleTypeId the moduleTypeId to set
+     */
+    public void setModuleTypeId(Integer moduleTypeId) {
+        this.moduleTypeId = moduleTypeId;
     }
 
 }

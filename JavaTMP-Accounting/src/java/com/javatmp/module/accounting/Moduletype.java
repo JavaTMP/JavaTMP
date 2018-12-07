@@ -18,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  *
@@ -25,8 +26,6 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "moduletype")
-@NamedQueries({
-    @NamedQuery(name = "Moduletype.findAll", query = "SELECT m FROM Moduletype m")})
 public class Moduletype implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,10 +45,11 @@ public class Moduletype implements Serializable {
     @Column(name = "creationDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
-    @JoinColumn(name = "moduleId", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+
+    @Transient
     private Module module;
-    @OneToMany(mappedBy = "moduletype", fetch = FetchType.LAZY)
+
+    @Transient
     private List<Accounttransaction> accounttransactionList;
 
     public Moduletype() {

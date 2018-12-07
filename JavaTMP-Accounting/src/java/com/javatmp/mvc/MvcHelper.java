@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.javatmp.module.dms.Document;
 import com.javatmp.mvc.adapter.ByteArrayToBase64TypeAdapter;
+import com.javatmp.mvc.adapter.EmptyStringAsNullTypeAdapter;
 import com.javatmp.mvc.domain.table.OrderDir;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -16,6 +17,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.nio.file.Paths;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
@@ -50,6 +52,9 @@ public class MvcHelper {
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").serializeNulls()
             .registerTypeAdapter(Class.class, new ClassTypeAdapter())
             .registerTypeAdapter(OrderDir.class, new OrderDirTypeAdapter())
+            .registerTypeHierarchyAdapter(BigDecimal.class, new EmptyStringAsNullTypeAdapter<BigDecimal>())
+            .registerTypeHierarchyAdapter(Integer.class, new EmptyStringAsNullTypeAdapter<Integer>())
+            .registerTypeHierarchyAdapter(BigInteger.class, new EmptyStringAsNullTypeAdapter<BigInteger>())
             .registerTypeHierarchyAdapter(byte[].class, new ByteArrayToBase64TypeAdapter())
             .create();
 

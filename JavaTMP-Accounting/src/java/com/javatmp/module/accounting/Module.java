@@ -32,7 +32,7 @@ public class Module implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
-    private Long id;
+    private Integer id;
     @Column(name = "name")
     private String name;
     @Column(name = "description")
@@ -56,20 +56,20 @@ public class Module implements Serializable {
     public Module() {
     }
 
-    public Module(Long id) {
+    public Module(Integer id) {
         this.id = id;
     }
 
-    public Module(Long id, Date creationDate) {
+    public Module(Integer id, Date creationDate) {
         this.id = id;
         this.creationDate = creationDate;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
