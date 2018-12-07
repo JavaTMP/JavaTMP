@@ -25,8 +25,6 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name = "module")
-@NamedQueries({
-    @NamedQuery(name = "Module.findAll", query = "SELECT m FROM Module m")})
 public class Module implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -45,8 +43,15 @@ public class Module implements Serializable {
     @Column(name = "creationDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
+
     @Transient
     private List<Transaction> transactionList;
+
+    @Transient
+    private List<Moduletype> moduletypeList;
+
+    @Transient
+    private List<Accounttransaction> accounttransactionList;
 
     public Module() {
     }
@@ -131,6 +136,22 @@ public class Module implements Serializable {
     @Override
     public String toString() {
         return "com.javatmp.module.accounting.Module[ id=" + id + " ]";
+    }
+
+    public List<Moduletype> getModuletypeList() {
+        return moduletypeList;
+    }
+
+    public void setModuletypeList(List<Moduletype> moduletypeList) {
+        this.moduletypeList = moduletypeList;
+    }
+
+    public List<Accounttransaction> getAccounttransactionList() {
+        return accounttransactionList;
+    }
+
+    public void setAccounttransactionList(List<Accounttransaction> accounttransactionList) {
+        this.accounttransactionList = accounttransactionList;
     }
 
 }

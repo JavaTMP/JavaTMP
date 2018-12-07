@@ -19,8 +19,6 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name = "accounttype")
-@NamedQueries({
-    @NamedQuery(name = "Accounttype.findAll", query = "SELECT a FROM Accounttype a")})
 public class Accounttype implements Serializable {
 
     private static final long serialVersionUID = 1L;

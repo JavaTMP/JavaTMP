@@ -6,7 +6,7 @@
     <h5 class="my-3">Create Transaction</h5>
     <hr/>
     <div class="row">
-        <div class="col-lg-6 col-md-9">
+        <div class="col-lg-12 col-md-12">
             <div class="card">
                 <div class="card-header">
                     Create New Journal Entry Transaction
@@ -20,68 +20,61 @@
                         <div class="col">
                             <form accept-charset="UTF-8" autocomplete="off" id="addNewTransaction" class="form" action="${pageContext.request.contextPath}/accounting/CreateTransaction" method="post" novalidate="novalidate">
                                 <div class="form-row">
-                                    <div class="col-md-8">
-                                        <div class="form-group form-row">
-                                            <label class="control-label col-sm-5 col-form-label">referenceCode</label>
-                                            <div class="col-sm-7">
-                                                <input class="form-control" type="text" placeholder=""
-                                                       name="referenceCode" value=""
-                                                       data-rule-required="true"
-                                                       >
+                                    <div class="col-md-9">
+                                        <div class="form-row">
+                                            <div class="col-md-6">
+                                                <div class="form-group form-row">
+                                                    <label class="control-label col-sm-4 col-form-label">code</label>
+                                                    <div class="col-sm-8">
+                                                        <input class="form-control" type="text" placeholder=""
+                                                               name="code" value=""
+                                                               data-rule-required="true"
+                                                               >
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group form-row">
-                                            <label class="control-label col-sm-5 col-form-label">transactionTypeId</label>
-                                            <div class="col-sm-7">
-                                                <select name="transactionTypeId" class="form-control" data-rule-required="true">
-                                                    <c:choose>
-                                                        <c:when test="${fn:length(requestScope.transactiontypes) > 0}">
-                                                            <option value="">${labels['page.text.kindlySelect']}</option>
-                                                            <c:forEach items="${requestScope.transactiontypes}" var="transactiontype">
-                                                                <option  value="${transactiontype.id}">${transactiontype.name}</option>
-                                                            </c:forEach>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <option value="">${labels['page.text.noRecordFound']}</option>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </select>
+                                            <div class="col-md-6">
+                                                <div class="form-group form-row">
+                                                    <label class="control-label col-sm-4 col-form-label">entity</label>
+                                                    <div class="col-sm-8">
+                                                        <input class="form-control" type="text" placeholder=""
+                                                               name="entity" value=""
+                                                               data-rule-required="false"
+                                                               >
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group form-row">
-                                            <label class="control-label col-sm-5 col-form-label">moduleId</label>
-                                            <div class="col-sm-7">
-                                                <select name="moduleId" class="form-control" data-rule-required="true">
-                                                    <c:choose>
-                                                        <c:when test="${fn:length(requestScope.modules) > 0}">
-                                                            <option value="">${labels['page.text.kindlySelect']}</option>
-                                                            <c:forEach items="${requestScope.modules}" var="module">
-                                                                <option  value="${module.id}">${module.name}</option>
-                                                            </c:forEach>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <option value="">${labels['page.text.noRecordFound']}</option>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                </select>
+                                            <div class="col-md-6">
+                                                <div class="form-group form-row">
+                                                    <label class="control-label col-sm-4 col-form-label">Date</label>
+                                                    <div class="col-sm-8">
+                                                        <input class="form-control" type="text" placeholder=""
+                                                               name="transactionDate" value=""
+                                                               data-rule-required="true">
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group form-row">
-                                            <label class="control-label col-sm-5 col-form-label">transactionDate</label>
-                                            <div class="col-sm-7">
-                                                <input class="form-control" type="text" placeholder=""
-                                                       name="transactionDate" value=""
-                                                       data-rule-required="true"
-                                                       >
+                                            <div class="col-md-6">
+                                                <div class="form-group form-row">
+                                                    <label class="control-label col-sm-4 col-form-label">specialNumber</label>
+                                                    <div class="col-sm-8">
+                                                        <input class="form-control" type="text" placeholder=""
+                                                               name="specialNumber" value=""
+                                                               data-rule-required="false"
+                                                               >
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-group form-row">
-                                            <label class="control-label col-sm-5 col-form-label">description</label>
-                                            <div class="col-sm-7">
-                                                <input class="form-control" type="text" placeholder=""
-                                                       name="description" value=""
-                                                       data-rule-required="false"
-                                                       >
+                                            <div class="col-md-12">
+                                                <div class="form-group form-row">
+                                                    <label class="control-label col-sm-2 col-form-label">note</label>
+                                                    <div class="col-sm-10">
+                                                        <input class="form-control" type="text" placeholder=""
+                                                               name="note" value=""
+                                                               data-rule-required="false"
+                                                               >
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -92,6 +85,9 @@
                                             <tr>
                                                 <th style="width: 3rem;" class="text-center">#</th>
                                                 <th class="text-center">Account</th>
+                                                <th class="text-center" style="width: 12rem;">ModuleId</th>
+                                                <th class="text-center" style="width: 12rem;">Moduel List</th>
+                                                <th class="text-center" style="width: 12rem;">moduleTypeId</th>
                                                 <th style="width: 8rem;" class="text-center">Debit</th>
                                                 <th style="width: 8rem;" class="text-center">Credit</th>
                                             </tr>
@@ -106,6 +102,51 @@
                                                                 <option value="">${labels['page.text.kindlySelect']}</option>
                                                                 <c:forEach items="${requestScope.accounts}" var="account">
                                                                     <option  value="${account.id}">${account.accountCode} - ${account.name}</option>
+                                                                </c:forEach>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option value="">${labels['page.text.noRecordFound']}</option>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select name="moduleId" class="form-control" data-rule-required="false">
+                                                        <c:choose>
+                                                            <c:when test="${fn:length(requestScope.modules) > 0}">
+                                                                <option value="">${labels['page.text.kindlySelect']}</option>
+                                                                <c:forEach items="${requestScope.modules}" var="module">
+                                                                    <option  value="${module.id}">${module.name}</option>
+                                                                </c:forEach>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option value="">${labels['page.text.noRecordFound']}</option>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select name="transactionTypeId" class="form-control" data-rule-required="false">
+                                                        <c:choose>
+                                                            <c:when test="${fn:length(requestScope.moduleTypeIds) > 0}">
+                                                                <option value="">${labels['page.text.kindlySelect']}</option>
+                                                                <c:forEach items="${requestScope.moduleTypeIds}" var="moduleTypeId">
+                                                                    <option  value="${moduleTypeId.id}">${moduleTypeId.name}</option>
+                                                                </c:forEach>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option value="">${labels['page.text.noRecordFound']}</option>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <select name="transactionTypeId" class="form-control" data-rule-required="false">
+                                                        <c:choose>
+                                                            <c:when test="${fn:length(requestScope.moduleTypeIds) > 0}">
+                                                                <option value="">${labels['page.text.kindlySelect']}</option>
+                                                                <c:forEach items="${requestScope.moduleTypeIds}" var="moduleTypeId">
+                                                                    <option  value="${moduleTypeId.id}">${moduleTypeId.name}</option>
                                                                 </c:forEach>
                                                             </c:when>
                                                             <c:otherwise>
@@ -230,7 +271,7 @@
                     return false;
                 }
                 var formObj = $(this).serializeObject();
-
+                formObj.voucherTypeId = 1; // General Ledger Voucher
                 formObj.transactionDate = moment(formObj.transactionDate, javatmp.settings.dateFormat).locale('en').format(javatmp.settings.networkDateFormat);
                 window.javatmp.plugins.ajaxAction(
                         $(this).attr("action"),

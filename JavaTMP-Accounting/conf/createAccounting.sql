@@ -11,9 +11,9 @@ DROP TABLE IF EXISTS accountTransaction;
 DROP TABLE IF EXISTS account;
 DROP TABLE IF EXISTS accountGroup;
 DROP TABLE IF EXISTS accountType;
-DROP TABLE IF EXISTS moduleTransaction;
-DROP TABLE IF EXISTS transaction;
-DROP TABLE IF EXISTS transactionType;
+DROP TABLE IF EXISTS `transaction`;
+DROP TABLE IF EXISTS `voucherType`;
+DROP TABLE IF EXISTS moduleType;
 DROP TABLE IF EXISTS module;
 
 CREATE TABLE accountType (
@@ -63,7 +63,7 @@ CREATE TABLE account (
     CONSTRAINT account_parentAccountId_fk FOREIGN KEY (parentAccountId) REFERENCES account (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO accountingdb.account (id, `accountCode`, `name`, description, `accountGroup`, debit, credit, balance, status, `creationDate`, `parentAccountId`)
+INSERT INTO account (id, `accountCode`, `name`, description, `accountGroup`, debit, credit, balance, status, `creationDate`, `parentAccountId`)
 VALUES (1, '100', 'Main Company Chart Of Accounts', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', NULL),
 (2, '100100', 'Asset Accounts', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 1),
 (3, '100200', 'Lability Accounts', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 1),
@@ -114,25 +114,51 @@ CREATE TABLE module (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO `module` (id, `name`, description, status, `creationDate`) VALUES
-(1, 'General Ledger Module', 'General Ledger Module', 1, DEFAULT),
-(2, 'Customers Management Module', 'Customers Management Module', 1, DEFAULT),
-(3, 'Vendors Management Module', 'Vendors Management Module', 1, DEFAULT),
-(4, 'Accounts Payable Module', 'Accounts Payable Module', 1, DEFAULT),
-(5, 'Accounts Receivable Module', 'Accounts Receivable Module', 1, DEFAULT),
-(6, 'Invoice Module', 'Invoice Module', 1, DEFAULT),
-(7, 'Inventory Or Stock Module', 'Inventory Or Stock Module', 1, DEFAULT),
-(8, 'Purchase Module', 'Purchase Module', 1, DEFAULT),
-(9, 'Sales Module', 'Sales Module', 1, DEFAULT),
-(10, 'Human Resources Module', 'Human Resources Module', 1, DEFAULT),
-(11, 'Payroll Module', 'Payroll Module', 1, DEFAULT),
-(12, 'Document Management Module', 'Document Management Module', 1, DEFAULT),
-(13, 'Content And Template Management Module', 'Content And Template Management Module', 1, DEFAULT),
-(14, 'Alerts And Notifications Module', 'Alerts And Notifications Module', 1, DEFAULT),
-(15, 'Procedures And Workflows Management Module', 'Procedures And Workflows Management Module', 1, DEFAULT),
-(16, 'Access Control (RBAC) Module', 'Access Control (RBAC) Module', 1, DEFAULT),
-(17, 'Point of Sale Module', 'Point of Sale Module', 1, DEFAULT);
+(1, 'Customers', 'Customers', 1, DEFAULT),
+(2, 'Suppliers', 'Suppliers', 1, DEFAULT),
+(3, 'Employee', 'Employee', 1, DEFAULT),
+(4, 'Fixed Assets', 'Fixed Assets', 1, DEFAULT),
+(5, 'Inventory', 'Inventory', 1, DEFAULT);
 
-CREATE TABLE transactionType (
+CREATE TABLE moduleType (
+    id int not null AUTO_INCREMENT,
+    moduleId BIGINT UNSIGNED not null,
+    name varchar(128) not null,
+    description varchar(1024),
+    status TINYINT,
+    creationDate TIMESTAMP NOT NULL,
+    CONSTRAINT moduleType_id_pk PRIMARY KEY (id),
+    CONSTRAINT moduelType_moduleId_fk FOREIGN KEY (moduleId) REFERENCES module (id),
+    CONSTRAINT moduleId_name_uni UNIQUE KEY (moduleId, name)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO moduleType (`moduleId`, `name`, description, status, `creationDate`) VALUES
+(1, 'Trade Receivable', null, 1, default),
+(1, 'PDC - Collection', null, 1, default),
+(1, 'Returne CHQ - Collection', null, 1, default),
+
+(2, 'Trade Payable', null, 1, default),
+(2, 'PDC - Payment', null, 1, default),
+(2, 'Returne CHQ - Payments', null, 1, default),
+
+(3, 'Payroll', null, 1, default),
+(3, 'Annual Leave', null, 1, default),
+(3, 'Unpaid Leave', null, 1, default),
+(3, 'Employee Advances', null, 1, default),
+(3, 'End Of Service', null, 1, default),
+
+(4, 'Purchase', null, 1, default),
+(4, 'Depreciation', null, 1, default),
+(4, 'Sale - Cost Disposal', null, 1, default),
+(4, 'Sale - Acc. Disposal', null, 1, default),
+(4, 'Sale - Profit', null, 1, default),
+
+(5, 'Purchase', null, 1, default),
+(5, 'Sale - Inventory', null, 1, default),
+(5, 'Sale - Cost', null, 1, default),
+(5, 'Wastage/Writte-off', null, 1, default);
+
+CREATE TABLE voucherType (
     id int not null AUTO_INCREMENT,
     name varchar(128) not null,
     description varchar(1024),
@@ -141,59 +167,35 @@ CREATE TABLE transactionType (
     CONSTRAINT transactionType_id_pk PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO accountingdb.transactiontype (id, `name`, description, status, `creationDate`) VALUES
-(1, 'General Journal Entry', 'General Journal Entry', 1, default),
-(2, 'Cheque', 'Cheque', 1, default),
-(3, 'Sales Receipt', 'Sales Receipt', 1, default),
-(4, 'Deposit', 'Deposit', 1, default),
-(5, 'Invoice', 'Invoice', 1, default),
-(6, 'Estimate', 'Estimate', 1, default),
-(7, 'Transfer', 'Transfer', 1, default),
-(8, 'Bill', 'Bill', 1, default),
-(9, 'Credit Card Charge', 'Credit Card Charge', 1, default),
-(10, 'Payment', 'Payment', 1, default),
-(11, 'Credit Note', 'Credit Note', 1, default),
-(12, 'Sales Order', 'Sales Order', 1, default),
-(13, 'Bill Pmt -Cheque', 'Bill Pmt -Cheque', 1, default),
-(14, 'Bill Pmt -CCard', 'Bill Pmt -CCard', 1, default),
-(15, 'Payroll Payment', 'Payroll Payment', 1, default),
-(16, 'Liability Cheque', 'Liability Cheque', 1, default);
+INSERT INTO voucherType (`name`, description, status, `creationDate`)
+	VALUES ('General Ledger Voucher', 'General Ledger Voucher', 1, DEFAULT);
 
 CREATE TABLE transaction (
     id BIGINT UNSIGNED not null AUTO_INCREMENT,
-    referenceCode varchar(1024),
-    transactionTypeId int not null,
-    moduleId BIGINT UNSIGNED not null,
+    code varchar(1024),
+    voucherTypeId int not null,
     transactionDate DATETIME not null,
-    description varchar(1024),
+    note varchar(1024),
+    specialNumber varchar(64),
+    entity varchar(64),
     status TINYINT,
     creationDate TIMESTAMP NOT NULL,
     CONSTRAINT transaction_id_pk PRIMARY KEY (id),
-    CONSTRAINT transaction_transactionTypeId_fk FOREIGN KEY (transactionTypeId) REFERENCES transactionType (id),
-    CONSTRAINT transaction_moduleId_fk FOREIGN KEY (moduleId) REFERENCES module (id)
+    CONSTRAINT transaction_voucherTypeId_fk FOREIGN KEY (voucherTypeId) REFERENCES voucherType (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE accountTransaction (
     id BIGINT UNSIGNED not null AUTO_INCREMENT,
     transactionId BIGINT UNSIGNED not null,
+    moduleId BIGINT UNSIGNED,
+    moduleTypeId int,
+    moduleRefId BIGINT UNSIGNED,
     accountId BIGINT UNSIGNED not null,
     status TINYINT,
     amount DECIMAL(33,8),
-    CONSTRAINT accountTransaction_id_pk PRIMARY KEY (id),
-    CONSTRAINT accountTransaction_tranId_fk FOREIGN KEY (transactionId) REFERENCES transaction (id),
-    CONSTRAINT accountTransaction_acctId_fk FOREIGN KEY (accountId) REFERENCES account (id)
+    CONSTRAINT acctTrans_id_pk PRIMARY KEY (id),
+    CONSTRAINT acctTrans_tranId_fk FOREIGN KEY (transactionId) REFERENCES transaction (id),
+    CONSTRAINT acctTrans_acctId_fk FOREIGN KEY (accountId) REFERENCES account (id),
+    CONSTRAINT acctTrans_moduleId_fk FOREIGN KEY (moduleId) REFERENCES module (id),
+    CONSTRAINT acctTrans_moduleTypeId_fk FOREIGN KEY (moduleTypeId) REFERENCES moduleType (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE moduleTransaction (
-    id BIGINT UNSIGNED not null AUTO_INCREMENT,
-    transactionId BIGINT UNSIGNED not null,
-    moduleId BIGINT UNSIGNED not null,
-    refId BIGINT UNSIGNED not null,
-    description varchar(1024),
-    status TINYINT,
-    creationDate TIMESTAMP NOT NULL,
-    CONSTRAINT moduleTransaction_id_pk PRIMARY KEY (id),
-    CONSTRAINT moduleTransaction_tranId_fk FOREIGN KEY (transactionId) REFERENCES transaction (id),
-    CONSTRAINT moduleTransaction_moduleId_fk FOREIGN KEY (moduleId) REFERENCES module (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-

@@ -1,14 +1,22 @@
 package com.javatmp.module.accounting;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 /**
@@ -16,16 +24,14 @@ import javax.persistence.Transient;
  * @author JavaTMP
  */
 @Entity
-@Table(name = "accountgroup")
+@Table(name = "vouchertype")
 @NamedQueries({
-    @NamedQuery(name = "Accountgroup.findAll", query = "SELECT a FROM Accountgroup a")})
-public class Accountgroup implements Serializable {
-
-    @Transient
-    private List<Account> accountList;
+    @NamedQuery(name = "Vouchertype.findAll", query = "SELECT v FROM Vouchertype v")})
+public class Vouchertype implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
@@ -34,19 +40,27 @@ public class Accountgroup implements Serializable {
     private String name;
     @Column(name = "description")
     private String description;
-    @Transient
-    private Accounttype accounttype;
+    @Column(name = "status")
+    private Short status;
+    @Basic(optional = false)
+    @Column(name = "creationDate")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date creationDate;
 
-    public Accountgroup() {
+    @Transient
+    private List<Transaction> transactionList;
+
+    public Vouchertype() {
     }
 
-    public Accountgroup(Integer id) {
+    public Vouchertype(Integer id) {
         this.id = id;
     }
 
-    public Accountgroup(Integer id, String name) {
+    public Vouchertype(Integer id, String name, Date creationDate) {
         this.id = id;
         this.name = name;
+        this.creationDate = creationDate;
     }
 
     public Integer getId() {
@@ -73,12 +87,28 @@ public class Accountgroup implements Serializable {
         this.description = description;
     }
 
-    public Accounttype getAccounttype() {
-        return accounttype;
+    public Short getStatus() {
+        return status;
     }
 
-    public void setAccounttype(Accounttype accounttype) {
-        this.accounttype = accounttype;
+    public void setStatus(Short status) {
+        this.status = status;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public List<Transaction> getTransactionList() {
+        return transactionList;
+    }
+
+    public void setTransactionList(List<Transaction> transactionList) {
+        this.transactionList = transactionList;
     }
 
     @Override
@@ -91,10 +121,10 @@ public class Accountgroup implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Accountgroup)) {
+        if (!(object instanceof Vouchertype)) {
             return false;
         }
-        Accountgroup other = (Accountgroup) object;
+        Vouchertype other = (Vouchertype) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -103,15 +133,7 @@ public class Accountgroup implements Serializable {
 
     @Override
     public String toString() {
-        return "com.javatmp.module.accounting.Accountgroup[ id=" + id + " ]";
-    }
-
-    public List<Account> getAccountList() {
-        return accountList;
-    }
-
-    public void setAccountList(List<Account> accountList) {
-        this.accountList = accountList;
+        return "com.javatmp.module.accounting.Vouchertype[ id=" + id + " ]";
     }
 
 }

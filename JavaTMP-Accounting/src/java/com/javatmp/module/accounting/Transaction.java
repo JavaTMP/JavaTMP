@@ -4,18 +4,11 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -36,16 +29,22 @@ public class Transaction implements Serializable {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "referenceCode")
-    private String referenceCode;
+    @Column(name = "code")
+    private String code;
 
     @Basic(optional = false)
     @Column(name = "transactionDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date transactionDate;
 
-    @Column(name = "description")
-    private String description;
+    @Column(name = "note")
+    private String note;
+
+    @Column(name = "specialNumber")
+    private String specialNumber;
+
+    @Column(name = "entity")
+    private String entity;
 
     @Column(name = "status")
     private Short status;
@@ -68,7 +67,7 @@ public class Transaction implements Serializable {
     private Module module;
 
     @Transient
-    private Transactiontype transactionType;
+    private Vouchertype vouchertype;
 
     public Transaction() {
     }
@@ -91,28 +90,12 @@ public class Transaction implements Serializable {
         this.id = id;
     }
 
-    public String getReferenceCode() {
-        return referenceCode;
-    }
-
-    public void setReferenceCode(String referenceCode) {
-        this.referenceCode = referenceCode;
-    }
-
     public Date getTransactionDate() {
         return transactionDate;
     }
 
     public void setTransactionDate(Date transactionDate) {
         this.transactionDate = transactionDate;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public Short getStatus() {
@@ -200,18 +183,68 @@ public class Transaction implements Serializable {
         this.transactionTypeId = transactionTypeId;
     }
 
-    /**
-     * @return the transactionType
-     */
-    public Transactiontype getTransactionType() {
-        return transactionType;
+    public Vouchertype getVouchertype() {
+        return vouchertype;
+    }
+
+    public void setVouchertype(Vouchertype vouchertype) {
+        this.vouchertype = vouchertype;
     }
 
     /**
-     * @param transactionType the transactionType to set
+     * @return the code
      */
-    public void setTransactionType(Transactiontype transactionType) {
-        this.transactionType = transactionType;
+    public String getCode() {
+        return code;
+    }
+
+    /**
+     * @param code the code to set
+     */
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    /**
+     * @return the note
+     */
+    public String getNote() {
+        return note;
+    }
+
+    /**
+     * @param note the note to set
+     */
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    /**
+     * @return the specialNumber
+     */
+    public String getSpecialNumber() {
+        return specialNumber;
+    }
+
+    /**
+     * @param specialNumber the specialNumber to set
+     */
+    public void setSpecialNumber(String specialNumber) {
+        this.specialNumber = specialNumber;
+    }
+
+    /**
+     * @return the entity
+     */
+    public String getEntity() {
+        return entity;
+    }
+
+    /**
+     * @param entity the entity to set
+     */
+    public void setEntity(String entity) {
+        this.entity = entity;
     }
 
 }

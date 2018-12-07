@@ -8,7 +8,6 @@ package com.javatmp.accounting;
 import com.javatmp.module.accounting.Account;
 import com.javatmp.module.accounting.AccountService;
 import com.javatmp.module.accounting.Module;
-import com.javatmp.module.accounting.Transactiontype;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.util.JpaDaoHelper;
 import java.sql.SQLException;
@@ -30,12 +29,6 @@ public class TestingGetsAccounting {
 
         for (Account acct : accounts) {
             System.out.println(MvcHelper.toString(acct));
-        }
-
-        List<Transactiontype> transactiontypes = accountService.getTransactionTypes();
-
-        for (Transactiontype t : transactiontypes) {
-            System.out.println(MvcHelper.toString(t));
         }
 
         List<Module> modules = accountService.getModules();

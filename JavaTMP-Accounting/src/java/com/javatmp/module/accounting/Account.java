@@ -4,16 +4,11 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,17 +22,17 @@ import javax.persistence.Transient;
 @Table(name = "account")
 public class Account implements Serializable {
 
-    @Column(name = "status")
-    private Short status;
-
     @Transient
     private List<Accounttransaction> accounttransactionList;
-
     @Transient
     private Accountgroup accountgroup;
-
     @Transient
     private List<Account> accountList;
+    @Transient
+    private Account account;
+
+    @Column(name = "status")
+    private Short status;
 
     @Transient
     private Account parentAccount;
@@ -287,6 +282,14 @@ public class Account implements Serializable {
      */
     public void setParentAccountId(Long parentAccountId) {
         this.parentAccountId = parentAccountId;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
 }

@@ -31,10 +31,9 @@ public class CreateTransaction extends HttpServlet {
         ServicesFactory sf = (ServicesFactory) context.getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         AccountService accountService = sf.getAccountService();
         List<Account> accounts = accountService.getLeafAccounts();
-        List<Transactiontype> transactiontypes = accountService.getTransactionTypes();
+
         List<Module> modules = accountService.getModules();
         request.setAttribute("accounts", accounts);
-        request.setAttribute("transactiontypes", transactiontypes);
         request.setAttribute("modules", modules);
         request.getRequestDispatcher(requestPage).forward(request, response);
 

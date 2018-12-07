@@ -4,30 +4,30 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
 /**
  *
  * @author JavaTMP
  */
 @Entity
-@Table(name = "transactiontype")
+@Table(name = "moduletype")
 @NamedQueries({
-    @NamedQuery(name = "Transactiontype.findAll", query = "SELECT t FROM Transactiontype t")})
-public class Transactiontype implements Serializable {
+    @NamedQuery(name = "Moduletype.findAll", query = "SELECT m FROM Moduletype m")})
+public class Moduletype implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -46,18 +46,20 @@ public class Transactiontype implements Serializable {
     @Column(name = "creationDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
+    @JoinColumn(name = "moduleId", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Module module;
+    @OneToMany(mappedBy = "moduletype", fetch = FetchType.LAZY)
+    private List<Accounttransaction> accounttransactionList;
 
-    @Transient
-    private List<Transaction> transactionList;
-
-    public Transactiontype() {
+    public Moduletype() {
     }
 
-    public Transactiontype(Integer id) {
+    public Moduletype(Integer id) {
         this.id = id;
     }
 
-    public Transactiontype(Integer id, String name, Date creationDate) {
+    public Moduletype(Integer id, String name, Date creationDate) {
         this.id = id;
         this.name = name;
         this.creationDate = creationDate;
@@ -103,12 +105,20 @@ public class Transactiontype implements Serializable {
         this.creationDate = creationDate;
     }
 
-    public List<Transaction> getTransactionList() {
-        return transactionList;
+    public Module getModule() {
+        return module;
     }
 
-    public void setTransactionList(List<Transaction> transactionList) {
-        this.transactionList = transactionList;
+    public void setModule(Module module) {
+        this.module = module;
+    }
+
+    public List<Accounttransaction> getAccounttransactionList() {
+        return accounttransactionList;
+    }
+
+    public void setAccounttransactionList(List<Accounttransaction> accounttransactionList) {
+        this.accounttransactionList = accounttransactionList;
     }
 
     @Override
@@ -121,10 +131,10 @@ public class Transactiontype implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Transactiontype)) {
+        if (!(object instanceof Moduletype)) {
             return false;
         }
-        Transactiontype other = (Transactiontype) object;
+        Moduletype other = (Moduletype) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -133,7 +143,7 @@ public class Transactiontype implements Serializable {
 
     @Override
     public String toString() {
-        return "com.javatmp.module.accounting.Transactiontype[ id=" + id + " ]";
+        return "com.javatmp.module.accounting.Moduletype[ id=" + id + " ]";
     }
 
 }

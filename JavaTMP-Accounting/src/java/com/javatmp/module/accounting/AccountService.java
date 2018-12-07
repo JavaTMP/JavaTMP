@@ -63,12 +63,6 @@ public class AccountService {
         }
     }
 
-    public List<Transactiontype> getTransactionTypes() {
-        List<Transactiontype> transactiontypes = new LinkedList<>();
-        transactiontypes = this.jpaDaoHelper.findAll(Transactiontype.class);
-        return transactiontypes;
-    }
-
     public List<Module> getModules() {
         List<Module> modules = new LinkedList<>();
         modules = this.jpaDaoHelper.findAll(Module.class);

@@ -2,6 +2,7 @@ package com.javatmp.module.accounting;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -25,6 +26,16 @@ import javax.persistence.Transient;
 @NamedQueries({
     @NamedQuery(name = "Accounttransaction.findAll", query = "SELECT a FROM Accounttransaction a")})
 public class Accounttransaction implements Serializable {
+
+    @Column(name = "moduleRefId")
+    private BigInteger moduleRefId;
+
+    @JoinColumn(name = "moduleId", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Module module;
+    @JoinColumn(name = "moduleTypeId", referencedColumnName = "id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Moduletype moduletype;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -181,6 +192,30 @@ public class Accounttransaction implements Serializable {
      */
     public void setCredit(BigDecimal credit) {
         this.credit = credit;
+    }
+
+    public BigInteger getModuleRefId() {
+        return moduleRefId;
+    }
+
+    public void setModuleRefId(BigInteger moduleRefId) {
+        this.moduleRefId = moduleRefId;
+    }
+
+    public Module getModule() {
+        return module;
+    }
+
+    public void setModule(Module module) {
+        this.module = module;
+    }
+
+    public Moduletype getModuletype() {
+        return moduletype;
+    }
+
+    public void setModuletype(Moduletype moduletype) {
+        this.moduletype = moduletype;
     }
 
 }

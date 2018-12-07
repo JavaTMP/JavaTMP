@@ -14,3 +14,4 @@ select acctt.*
 from accounttransaction acctt
 left join account acct on acct.id = acctt.`accountId`
 left join `transaction` t on t.id = acctt.`transactionId`;
+
