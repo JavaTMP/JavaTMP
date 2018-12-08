@@ -45,7 +45,7 @@ public class TestMarshingTransaction {
             jpaDaoHelper = new JpaDaoHelper("AppPU");
             AccountService accountService = new AccountService(jpaDaoHelper);
 
-            String transactionStr = "{\"code\":\"12121\",\"entity\":\"121211\",\"transactionDate\":\"2018-12-08T00:00:00.000+04:00\",\"specialNumber\":\"212121\",\"note\":\"121212\",\"accounttransactionList\":[{\"accountId\":\"14\",\"moduleId\":null,\"moduleRefId\":null,\"moduleTypeId\":null,\"debit\":\"200\",\"credit\":\"0.00\"},{\"accountId\":\"14\",\"moduleId\":null,\"moduleRefId\":null,\"moduleTypeId\":null,\"debit\":\"0.00\",\"credit\":\"200\"}],\"voucherTypeId\":1}";
+            String transactionStr = "{\"code\":\"1\",\"entity\":null,\"transactionDate\":\"2018-12-08T00:00:00.000+04:00\",\"specialNumber\":null,\"note\":\"1\",\"accounttransactionList\":[{\"accountId\":\"10\",\"moduleId\":null,\"moduleRefId\":null,\"moduleTypeId\":null,\"costcenterList\":[{\"id\":\"3\"},{\"id\":\"5\"},{\"id\":\"6\"}],\"debit\":\"100\",\"credit\":\"0.00\",\"description\":null},{\"accountId\":\"13\",\"moduleId\":null,\"moduleRefId\":null,\"moduleTypeId\":null,\"costcenterList\":[{\"id\":\"5\"},{\"id\":\"10\"},{\"id\":\"11\"}],\"debit\":\"0.00\",\"credit\":\"100\",\"description\":null}],\"voucherTypeId\":1}";
 
             Transaction toBe = (Transaction) gson.fromJson(transactionStr, Transaction.class);
             System.out.println("Transaction to be Created [" + MvcHelper.deepToString(toBe) + "]");

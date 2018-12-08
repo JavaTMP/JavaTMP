@@ -45,6 +45,25 @@ public class AccountService {
         return costcenters;
     }
 
+    public void persistObject(Object object) {
+        EntityManager em = null;
+        try {
+            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            em.getTransaction().begin();
+            em.persist(object);
+            em.getTransaction().commit();
+        } catch (PersistenceException e) {
+            if (em != null) {
+                em.getTransaction().rollback();
+            }
+            throw e;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
     public List<Account> getChartOfAccounts() {
         EntityManager em = null;
         List<Account> retList = null;
@@ -157,6 +176,12 @@ public class AccountService {
                     }
                     System.out.println("Trans is [" + MvcHelper.deepToString(trans) + "]");
                     em.persist(trans);
+                    if (trans.getCostcenterList() != null && !trans.getCostcenterList().isEmpty()) {
+                        for (Costcenter costcenter : trans.getCostcenterList()) {
+                            AcctTransCostcenter acctTransCostcenter = new AcctTransCostcenter(trans.getId(), costcenter.getId());
+                            em.persist(acctTransCostcenter);
+                        }
+                    }
                 }
             }
 
