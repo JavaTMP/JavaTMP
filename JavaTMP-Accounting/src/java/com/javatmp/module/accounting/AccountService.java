@@ -209,7 +209,7 @@ public class AccountService {
 
             cq.multiselect(from.get(Account_.id), from.get(Account_.accountCode), from.get(Account_.name), from.get(Account_.description),
                     from.get(Account_.debit), from.get(Account_.credit), from.get(Account_.balance), from.get(Account_.status),
-                    from.get(Account_.creationDate), from.get(Account_.accountGroup), from.get(Account_.parentAccountId));
+                    from.get(Account_.creationDate), from.get(Account_.accountGroup), from.get(Account_.parentAccountId), from.get(Account_.cashFlowId));
             cq.where(cb.equal(from.get(Account_.id), account.getId()));
             TypedQuery<Account> query = em.createQuery(cq);
             account = query.getSingleResult();
@@ -270,7 +270,8 @@ public class AccountService {
             dbAccount.setDescription(accountToBeUpdated.getDescription());
             dbAccount.setAccountGroup(accountToBeUpdated.getAccountGroup());
             dbAccount.setStatus(accountToBeUpdated.getStatus());
-            dbAccount.setParentAccount(accountToBeUpdated.getParentAccount());
+            dbAccount.setParentAccountId(accountToBeUpdated.getParentAccountId());
+            dbAccount.setCashFlowId(accountToBeUpdated.getCashFlowId());
             em.getTransaction().commit();
             updateStatus = 1;
         } catch (PersistenceException e) {

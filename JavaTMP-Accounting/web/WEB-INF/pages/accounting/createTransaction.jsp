@@ -88,15 +88,17 @@
                                                 <th class="text-center" style="width: 12rem;">ModuleId</th>
                                                 <th class="text-center" style="width: 12rem;">Moduel List</th>
                                                 <th class="text-center" style="width: 12rem;">moduleTypeId</th>
+                                                <th class="text-center" style="width: 10rem;">Cost Centre</th>
                                                 <th style="width: 8rem;" class="text-center">Debit</th>
                                                 <th style="width: 8rem;" class="text-center">Credit</th>
+                                                <th style="width: 15rem;" class="text-center">Descreption</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr id='rowTemplate' style="display: none;">
                                                 <td style="width: 3rem;">1</td>
                                                 <td>
-                                                    <select class="accountListSelect form-control">
+                                                    <select class="select2wrapper form-control">
                                                         <c:choose>
                                                             <c:when test="${fn:length(requestScope.accounts) > 0}">
                                                                 <option value="">${labels['page.text.kindlySelect']}</option>
@@ -111,7 +113,7 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <select class="moduleId form-control" data-rule-required="false">
+                                                    <select class="select2wrapper moduleId form-control" data-rule-required="false">
                                                         <c:choose>
                                                             <c:when test="${fn:length(requestScope.modules) > 0}">
                                                                 <option value="">${labels['page.text.kindlySelect']}</option>
@@ -126,10 +128,9 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <select class="moduleRefId form-control" data-rule-required="false">
+                                                    <select class="select2wrapper moduleRefId form-control" data-rule-required="false">
                                                         <c:choose>
                                                             <c:when test="${fn:length(requestScope.moduleTypeIds) > 0}">
-                                                                <option value="">${labels['page.text.kindlySelect']}</option>
                                                                 <c:forEach items="${requestScope.moduleTypeIds}" var="moduleTypeId">
                                                                     <option  value="${moduleTypeId.id}">${moduleTypeId.name}</option>
                                                                 </c:forEach>
@@ -141,7 +142,7 @@
                                                     </select>
                                                 </td>
                                                 <td>
-                                                    <select class="moduleTypeId form-control" data-rule-required="false">
+                                                    <select class="select2wrapper moduleTypeId form-control" data-rule-required="false">
                                                         <c:choose>
                                                             <c:when test="${fn:length(requestScope.moduleTypeIds) > 0}">
                                                                 <option value="">${labels['page.text.kindlySelect']}</option>
@@ -155,10 +156,30 @@
                                                         </c:choose>
                                                     </select>
                                                 </td>
+                                                <td style="width: 10rem;">
+                                                    <select class="select2wrapper costCenters form-control" data-rule-required="false">
+                                                        <c:choose>
+                                                            <c:when test="${fn:length(requestScope.costCenters) > 0}">
+                                                                <option value="">${labels['page.text.kindlySelect']}</option>
+                                                                <c:forEach items="${requestScope.costCenters}" var="costCenter">
+                                                                    <option  value="${costCenter.id}">${costCenter.name}</option>
+                                                                </c:forEach>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <option value="">${labels['page.text.noRecordFound']}</option>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                    </select>
+                                                </td>
                                                 <td style="width: 8rem;">
-                                                    <input class="form-control accountDebitField" type="number" placeholder='0.00' step="0.01" min="0" value="0.00"/></td>
+                                                    <input class="form-control accountDebitField" type="number" placeholder='0.00' step="0.01" min="0" value="0.00"/>
+                                                </td>
                                                 <td style="width: 8rem;">
-                                                    <input class="form-control accountCreditField" type="number" placeholder='0.00' step="0.01" min="0" value="0.00"/></td>
+                                                    <input class="form-control accountCreditField" type="number" placeholder='0.00' step="0.01" min="0" value="0.00"/>
+                                                </td>
+                                                <td style="width: 8rem;">
+                                                    <input class="form-control description" type="text"/>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -245,14 +266,14 @@
                 actualRow.find("select.moduleId").attr("name", "accounttransactionList[][moduleId]");
                 actualRow.find("select.moduleRefId").attr("name", "accounttransactionList[][moduleRefId]");
                 actualRow.find("select.moduleTypeId").attr("name", "accounttransactionList[][moduleTypeId]");
-
-                javatmp.plugins.select2Wrapper(actualRow.find("select.accountListSelect"));
+                actualRow.find("input.description").attr("name", "accounttransactionList[][description]");
+                javatmp.plugins.select2Wrapper(actualRow.find("select.select2wrapper"));
                 i++;
             });
 
             $("#delete_row").click(function () {
                 if (i > 0) {
-                    $("#row" + (i - 1)).find("select.accountListSelect").select2('destroy');
+                    $("#row" + (i - 1)).find("select.select2wrapper").select2('destroy');
                     $("#row" + (i - 1)).remove();
                     i--;
                 }

@@ -28,7 +28,7 @@ public class TestReadAccount {
             JpaDaoHelper jpaDaoHelper;
             jpaDaoHelper = new JpaDaoHelper("AppPU");
             AccountService accountService = new AccountService(jpaDaoHelper);
-            System.out.println(MvcHelper.deepToString(accountService.readAccountById(new Account(51L))));
+            System.out.println(MvcHelper.deepToString(accountService.readAccountById(new Account(1L))));
         } catch (PersistenceException e) {
             Throwable t = e;
             while (t.getCause() != null) {

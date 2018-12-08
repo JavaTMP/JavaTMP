@@ -72,6 +72,9 @@ public class Account implements Serializable {
     @Column(name = "parentAccountId")
     private Long parentAccountId;
 
+    @Column(name = "cashFlowId")
+    private Integer cashFlowId;
+
     public Account() {
     }
 
@@ -95,7 +98,8 @@ public class Account implements Serializable {
 
     public Account(Long accountId, String accountCode, String accountName,
             String accountDescription, BigDecimal debit, BigDecimal credit,
-            BigDecimal balance, Short status, Date creationDate, Integer accountGroup, Long parentAccountId) {
+            BigDecimal balance, Short status, Date creationDate, Integer accountGroup, Long parentAccountId,
+            Integer cashFlowId) {
         this.id = accountId;
         this.accountCode = accountCode;
         this.name = accountName;
@@ -107,7 +111,7 @@ public class Account implements Serializable {
         this.creationDate = creationDate;
         this.accountGroup = accountGroup;
         this.parentAccountId = parentAccountId;
-
+        this.cashFlowId = cashFlowId;
     }
 
     public Account(Long id, String accountCode, String name, Long parentAccountId, BigDecimal debit, BigDecimal credit,
@@ -290,6 +294,20 @@ public class Account implements Serializable {
 
     public void setAccount(Account account) {
         this.account = account;
+    }
+
+    /**
+     * @return the cashFlowId
+     */
+    public Integer getCashFlowId() {
+        return cashFlowId;
+    }
+
+    /**
+     * @param cashFlowId the cashFlowId to set
+     */
+    public void setCashFlowId(Integer cashFlowId) {
+        this.cashFlowId = cashFlowId;
     }
 
 }

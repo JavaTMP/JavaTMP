@@ -7,6 +7,8 @@
  * Author:  JavaTMP
  * Created: Oct 19, 2018
  */
+DROP TABLE IF EXISTS acctTransCtCenter;
+DROP TABLE IF EXISTS costCenter;
 DROP TABLE IF EXISTS accountTransaction;
 DROP TABLE IF EXISTS account;
 DROP TABLE IF EXISTS accountGroup;
@@ -42,9 +44,10 @@ CREATE TABLE accountGroup (
 INSERT INTO accountGroup (id, name, description, accountType) VALUES
 (1, 'Asset account', 'Asset account', 1),
 (2, 'Liability account', 'Liability account', 2),
-(3, 'Capital (Owner''s Equity) account', 'Capital (Owner''s Equity) account', 3),
-(4, 'Revenue account', 'Revenue account', 4),
-(5, 'Expense account', 'Expense account', 5);
+(3, 'Equity account', 'Capital (Owner''s Equity) account', 3),
+(4, 'Income account', 'Income account', 4),
+(5, 'Cost account', 'Cost account', 5),
+(6, 'Expense account', 'Expense account', 5);
 
 CREATE TABLE account (
     id BIGINT UNSIGNED not null AUTO_INCREMENT,
@@ -56,6 +59,7 @@ CREATE TABLE account (
     credit DECIMAL(32,8),
     balance DECIMAL(33,8),
     status TINYINT,
+    cashFlowId TINYINT,
     creationDate TIMESTAMP NOT NULL,
     parentAccountId BIGINT UNSIGNED,
     CONSTRAINT account_id_pk PRIMARY KEY (id),
@@ -191,6 +195,7 @@ CREATE TABLE accountTransaction (
     moduleTypeId int,
     moduleRefId BIGINT UNSIGNED,
     accountId BIGINT UNSIGNED not null,
+    description varchar(1024),
     status TINYINT,
     amount DECIMAL(33,8),
     CONSTRAINT acctTrans_id_pk PRIMARY KEY (id),
@@ -199,3 +204,24 @@ CREATE TABLE accountTransaction (
     CONSTRAINT acctTrans_moduleId_fk FOREIGN KEY (moduleId) REFERENCES module (id),
     CONSTRAINT acctTrans_moduleTypeId_fk FOREIGN KEY (moduleTypeId) REFERENCES moduleType (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE costCenter (
+    id BIGINT UNSIGNED not null AUTO_INCREMENT,
+    name varchar(128) not null,
+    parentId BIGINT UNSIGNED,
+    description varchar(1024),
+    status TINYINT,
+    creationDate TIMESTAMP NOT NULL,
+    CONSTRAINT costCenter_id_pk PRIMARY KEY (id),
+    CONSTRAINT costCenter_parentId_fk FOREIGN KEY (parentId) REFERENCES costCenter (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE acctTransCtCenter (
+    accountId BIGINT UNSIGNED not null,
+    costCenterId BIGINT UNSIGNED not null,
+    CONSTRAINT acctTransCtCent_pk PRIMARY KEY (accountId, costCenterId),
+    CONSTRAINT acctTransCtCent_acctId_fk FOREIGN KEY (accountId) REFERENCES account (id),
+    CONSTRAINT acctTransCtCent_ctCentId_fk FOREIGN KEY (costCenterId) REFERENCES costCenter (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+

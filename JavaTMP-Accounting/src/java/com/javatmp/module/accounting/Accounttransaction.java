@@ -66,6 +66,9 @@ public class Accounttransaction implements Serializable {
     @Column(name = "transactionId")
     private Long transactionId;
 
+    @Column(name = "description")
+    private String description;
+
     @Transient
     private Account account;
 
@@ -250,6 +253,20 @@ public class Accounttransaction implements Serializable {
      */
     public void setModuleTypeId(Integer moduleTypeId) {
         this.moduleTypeId = moduleTypeId;
+    }
+
+    /**
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * @param description the description to set
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 }
