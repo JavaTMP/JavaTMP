@@ -278,6 +278,29 @@
                 formObj.voucherTypeId = 1; // General Ledger Voucher
                 formObj.transactionDate = moment(formObj.transactionDate, javatmp.settings.dateFormat).locale('en').format(javatmp.settings.networkDateFormat);
                 console.log(JSON.stringify(formObj));
+
+                function getClass(object) {
+                    return Object.prototype.toString.call(object).slice(8, -1);
+                }
+
+                applyParameters = function (jsonObj, p) {
+                    console.log("processing key [" + p + "]");
+                    if (getClass(jsonObj) !== 'String') {
+                        for (var key in jsonObj) {
+                            if (jsonObj.hasOwnProperty(key)) {
+                                if (jsonObj[key] !== "") {
+                                    applyParameters(jsonObj[key]);
+                                } else {
+                                    console.log("jsonObj[key] equal empty [" + jsonObj + "]");
+                                    jsonObj[key] = null;
+                                }
+                            }
+                        }
+                    }
+                };
+                applyParameters(formObj);
+
+                console.log(JSON.stringify(formObj));
                 window.javatmp.plugins.ajaxAction(
                         $(this).attr("action"),
                         formObj,

@@ -14,7 +14,6 @@ import com.javatmp.module.accounting.Transaction;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.adapter.ByteArrayToBase64TypeAdapter;
 import com.javatmp.mvc.adapter.ClassTypeAdapter;
-import com.javatmp.mvc.adapter.EmptyStringAsNullTypeAdapter;
 import com.javatmp.mvc.adapter.OrderDirTypeAdapter;
 import com.javatmp.mvc.domain.table.OrderDir;
 import com.javatmp.util.JpaDaoHelper;
@@ -36,9 +35,6 @@ public class TestMarshingTransaction {
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").serializeNulls()
             .registerTypeAdapter(Class.class, new ClassTypeAdapter())
             .registerTypeAdapter(OrderDir.class, new OrderDirTypeAdapter())
-            .registerTypeHierarchyAdapter(BigDecimal.class, new EmptyStringAsNullTypeAdapter<BigDecimal>())
-            .registerTypeHierarchyAdapter(Integer.class, new EmptyStringAsNullTypeAdapter<Integer>())
-            .registerTypeHierarchyAdapter(BigInteger.class, new EmptyStringAsNullTypeAdapter<BigInteger>())
             .registerTypeHierarchyAdapter(byte[].class, new ByteArrayToBase64TypeAdapter())
             .create();
 
@@ -48,7 +44,7 @@ public class TestMarshingTransaction {
             jpaDaoHelper = new JpaDaoHelper("AppPU");
             AccountService accountService = new AccountService(jpaDaoHelper);
 
-            String transactionStr = "{\"code\":\"1\",\"entity\":\"\",\"transactionDate\":\"2018-12-08T00:00:00.000+04:00\",\"specialNumber\":\"\",\"note\":\"\",\"accounttransactionList\":[{\"accountId\":\"16\",\"moduleId\":\"\",\"moduleRefId\":\"\",\"moduleTypeId\":\"\",\"debit\":\"1000\",\"credit\":\"0.00\"},{\"accountId\":\"12\",\"moduleId\":\"\",\"moduleRefId\":\"\",\"moduleTypeId\":\"\",\"debit\":\"0.00\",\"credit\":\"1000\"}],\"voucherTypeId\":1}";
+            String transactionStr = "{\"code\":\"12121\",\"entity\":\"121211\",\"transactionDate\":\"2018-12-08T00:00:00.000+04:00\",\"specialNumber\":\"212121\",\"note\":\"121212\",\"accounttransactionList\":[{\"accountId\":\"14\",\"moduleId\":null,\"moduleRefId\":null,\"moduleTypeId\":null,\"debit\":\"200\",\"credit\":\"0.00\"},{\"accountId\":\"14\",\"moduleId\":null,\"moduleRefId\":null,\"moduleTypeId\":null,\"debit\":\"0.00\",\"credit\":\"200\"}],\"voucherTypeId\":1}";
 
             Transaction toBe = (Transaction) gson.fromJson(transactionStr, Transaction.class);
             System.out.println("Transaction to be Created [" + MvcHelper.deepToString(toBe) + "]");

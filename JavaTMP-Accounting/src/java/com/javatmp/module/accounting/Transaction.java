@@ -54,20 +54,14 @@ public class Transaction implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
 
-    @Column(name = "transactionTypeId")
-    private Integer transactionTypeId;
-
-    @Column(name = "moduleId")
-    private Long moduleId;
-
     @Transient
     private List<Accounttransaction> accounttransactionList;
 
     @Transient
-    private Module module;
-
-    @Transient
     private Vouchertype vouchertype;
+
+    @Column(name = "voucherTypeId")
+    private Integer voucherTypeId;
 
     public Transaction() {
     }
@@ -122,14 +116,6 @@ public class Transaction implements Serializable {
         this.accounttransactionList = accounttransactionList;
     }
 
-    public Module getModule() {
-        return module;
-    }
-
-    public void setModule(Module module) {
-        this.module = module;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -153,34 +139,6 @@ public class Transaction implements Serializable {
     @Override
     public String toString() {
         return "com.javatmp.module.accounting.Transaction[ id=" + id + " ]";
-    }
-
-    /**
-     * @return the moduleId
-     */
-    public Long getModuleId() {
-        return moduleId;
-    }
-
-    /**
-     * @param moduleId the moduleId to set
-     */
-    public void setModuleId(Long moduleId) {
-        this.moduleId = moduleId;
-    }
-
-    /**
-     * @return the transactionTypeId
-     */
-    public Integer getTransactionTypeId() {
-        return transactionTypeId;
-    }
-
-    /**
-     * @param transactionTypeId the transactionTypeId to set
-     */
-    public void setTransactionTypeId(Integer transactionTypeId) {
-        this.transactionTypeId = transactionTypeId;
     }
 
     public Vouchertype getVouchertype() {
@@ -245,6 +203,20 @@ public class Transaction implements Serializable {
      */
     public void setEntity(String entity) {
         this.entity = entity;
+    }
+
+    /**
+     * @return the voucherTypeId
+     */
+    public Integer getVoucherTypeId() {
+        return voucherTypeId;
+    }
+
+    /**
+     * @param voucherTypeId the voucherTypeId to set
+     */
+    public void setVoucherTypeId(Integer voucherTypeId) {
+        this.voucherTypeId = voucherTypeId;
     }
 
 }
