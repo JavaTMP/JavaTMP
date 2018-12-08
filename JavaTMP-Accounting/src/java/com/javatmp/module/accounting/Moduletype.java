@@ -46,6 +46,9 @@ public class Moduletype implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
 
+    @Column(name = "moduleId")
+    private Integer moduleId;
+
     @Transient
     private Module module;
 
@@ -144,6 +147,20 @@ public class Moduletype implements Serializable {
     @Override
     public String toString() {
         return "com.javatmp.module.accounting.Moduletype[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the moduleId
+     */
+    public Integer getModuleId() {
+        return moduleId;
+    }
+
+    /**
+     * @param moduleId the moduleId to set
+     */
+    public void setModuleId(Integer moduleId) {
+        this.moduleId = moduleId;
     }
 
 }

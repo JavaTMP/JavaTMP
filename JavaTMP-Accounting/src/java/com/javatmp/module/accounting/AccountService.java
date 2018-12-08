@@ -69,6 +69,26 @@ public class AccountService {
         return modules;
     }
 
+    public List<Module> getModulesWithType() {
+        EntityManager em = null;
+        List<Module> retList = null;
+        try {
+            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            TypedQuery<Module> query = em.createQuery(
+                    "select m"
+                    + " from Module m"
+                    + " join m.moduletypeList mt"
+                    + "", Module.class
+            );
+            retList = query.getResultList();
+            return retList;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
     public List<Accountgroup> getAccountGroups() {
         List<Accountgroup> accountgroups = new LinkedList<>();
         accountgroups = this.jpaDaoHelper.findAll(Accountgroup.class);
