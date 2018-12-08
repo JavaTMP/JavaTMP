@@ -39,6 +39,12 @@ public class AccountService {
         return chartOfAccounts;
     }
 
+    public List<Costcenter> getAllCostCenterList() {
+        List<Costcenter> costcenters = new LinkedList<>();
+        costcenters = this.jpaDaoHelper.findAll(Costcenter.class);
+        return costcenters;
+    }
+
     public List<Account> getChartOfAccounts() {
         EntityManager em = null;
         List<Account> retList = null;

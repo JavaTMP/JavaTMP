@@ -7,6 +7,7 @@ package com.javatmp.accounting;
 
 import com.javatmp.module.accounting.Account;
 import com.javatmp.module.accounting.AccountService;
+import com.javatmp.module.accounting.Costcenter;
 import com.javatmp.module.accounting.Module;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.util.JpaDaoHelper;
@@ -46,6 +47,12 @@ public class TestingGetsAccounting {
 
         for (Account acct : coa) {
             System.out.println(MvcHelper.toString(acct));
+        }
+
+        List<Costcenter> costcenters = accountService.getAllCostCenterList();
+
+        for (Costcenter costcenter : costcenters) {
+            System.out.println(MvcHelper.toString(costcenter));
         }
 
     }

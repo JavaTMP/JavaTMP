@@ -3,6 +3,7 @@ package com.javatmp.module.accounting;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -23,8 +26,6 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name = "accounttransaction")
-@NamedQueries({
-    @NamedQuery(name = "Accounttransaction.findAll", query = "SELECT a FROM Accounttransaction a")})
 public class Accounttransaction implements Serializable {
 
     @Column(name = "moduleRefId")
@@ -74,6 +75,9 @@ public class Accounttransaction implements Serializable {
 
     @Transient
     private Transaction transaction;
+
+    @Transient
+    private List<Costcenter> costcenterList;
 
     public Accounttransaction() {
     }
@@ -267,6 +271,14 @@ public class Accounttransaction implements Serializable {
      */
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Costcenter> getCostcenterList() {
+        return costcenterList;
+    }
+
+    public void setCostcenterList(List<Costcenter> costcenterList) {
+        this.costcenterList = costcenterList;
     }
 
 }

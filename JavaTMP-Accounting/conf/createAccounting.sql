@@ -216,11 +216,25 @@ CREATE TABLE costCenter (
     CONSTRAINT costCenter_parentId_fk FOREIGN KEY (parentId) REFERENCES costCenter (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO accountingdb.costcenter (`name`, `parentId`, description, status, `creationDate`) VALUES
+('car1', NULL, '', 1, DEFAULT),
+('car2', NULL, '', 1, DEFAULT),
+('project 2', NULL, '', 1, DEFAULT),
+('car 4', NULL, '', 1, DEFAULT),
+('ciggertte', NULL, '', 1, DEFAULT),
+('car41', NULL, '', 1, DEFAULT),
+('traffic fine', NULL, '', 1, DEFAULT),
+('project 5', NULL, '', 1, DEFAULT),
+('project 8', NULL, '', 1, DEFAULT),
+('car 11', NULL, '', 1, DEFAULT),
+('hotel 3', NULL, '', 1, DEFAULT);
+
+
 CREATE TABLE acctTransCtCenter (
-    accountId BIGINT UNSIGNED not null,
+    accountTransactionId BIGINT UNSIGNED not null,
     costCenterId BIGINT UNSIGNED not null,
-    CONSTRAINT acctTransCtCent_pk PRIMARY KEY (accountId, costCenterId),
-    CONSTRAINT acctTransCtCent_acctId_fk FOREIGN KEY (accountId) REFERENCES account (id),
+    CONSTRAINT acctTransCtCent_pk PRIMARY KEY (accountTransactionId, costCenterId),
+    CONSTRAINT acctTransCtCent_acctTransId_fk FOREIGN KEY (accountTransactionId) REFERENCES accountTransaction (id),
     CONSTRAINT acctTransCtCent_ctCentId_fk FOREIGN KEY (costCenterId) REFERENCES costCenter (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

@@ -88,17 +88,17 @@
                                                 <th class="text-center" style="width: 12rem;">ModuleId</th>
                                                 <th class="text-center" style="width: 12rem;">Moduel List</th>
                                                 <th class="text-center" style="width: 12rem;">moduleTypeId</th>
-                                                <th class="text-center" style="width: 10rem;">Cost Centre</th>
-                                                <th style="width: 8rem;" class="text-center">Debit</th>
-                                                <th style="width: 8rem;" class="text-center">Credit</th>
-                                                <th style="width: 15rem;" class="text-center">Descreption</th>
+                                                <th class="text-center" style="width: 15rem;">Cost Centre</th>
+                                                <th style="width: 6rem;" class="text-center">Debit</th>
+                                                <th style="width: 6rem;" class="text-center">Credit</th>
+                                                <th style="width: 15rem;" class="text-center">Description</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr id='rowTemplate' style="display: none;">
                                                 <td style="width: 3rem;">1</td>
                                                 <td>
-                                                    <select class="select2wrapper form-control">
+                                                    <select class="select2wrapper form-control accountListSelect">
                                                         <c:choose>
                                                             <c:when test="${fn:length(requestScope.accounts) > 0}">
                                                                 <option value="">${labels['page.text.kindlySelect']}</option>
@@ -156,12 +156,12 @@
                                                         </c:choose>
                                                     </select>
                                                 </td>
-                                                <td style="width: 10rem;">
-                                                    <select class="select2wrapper costCenters form-control" data-rule-required="false">
+                                                <td style="width: 15rem;">
+                                                    <select multiple="" class="select2wrapper costCenters form-control" data-rule-required="false">
                                                         <c:choose>
-                                                            <c:when test="${fn:length(requestScope.costCenters) > 0}">
+                                                            <c:when test="${fn:length(requestScope.costcenters) > 0}">
                                                                 <option value="">${labels['page.text.kindlySelect']}</option>
-                                                                <c:forEach items="${requestScope.costCenters}" var="costCenter">
+                                                                <c:forEach items="${requestScope.costcenters}" var="costCenter">
                                                                     <option  value="${costCenter.id}">${costCenter.name}</option>
                                                                 </c:forEach>
                                                             </c:when>
@@ -171,13 +171,13 @@
                                                         </c:choose>
                                                     </select>
                                                 </td>
-                                                <td style="width: 8rem;">
+                                                <td style="width: 6rem;">
                                                     <input class="form-control accountDebitField" type="number" placeholder='0.00' step="0.01" min="0" value="0.00"/>
                                                 </td>
-                                                <td style="width: 8rem;">
+                                                <td style="width: 6rem;">
                                                     <input class="form-control accountCreditField" type="number" placeholder='0.00' step="0.01" min="0" value="0.00"/>
                                                 </td>
-                                                <td style="width: 8rem;">
+                                                <td style="width: 15rem;">
                                                     <input class="form-control description" type="text"/>
                                                 </td>
                                             </tr>
@@ -260,13 +260,14 @@
                 var newRowObject = $("#rowTemplate").clone(false).attr("id", newRowId).css({"display": ""});
                 var actualRow = $('#tab_logic').append(newRowObject).find("#" + newRowId);
                 actualRow.find('td:first-child').html(i + 1);
-                actualRow.find("select.accountListSelect").attr("name", "accounttransactionList[][accountId]");
-                actualRow.find("input.accountDebitField").attr("name", "accounttransactionList[][debit]");
-                actualRow.find("input.accountCreditField").attr("name", "accounttransactionList[][credit]");
-                actualRow.find("select.moduleId").attr("name", "accounttransactionList[][moduleId]");
-                actualRow.find("select.moduleRefId").attr("name", "accounttransactionList[][moduleRefId]");
-                actualRow.find("select.moduleTypeId").attr("name", "accounttransactionList[][moduleTypeId]");
-                actualRow.find("input.description").attr("name", "accounttransactionList[][description]");
+                actualRow.find("select.accountListSelect").attr("name", "accounttransactionList[" + i + "][accountId]");
+                actualRow.find("input.accountDebitField").attr("name", "accounttransactionList[" + i + "][debit]");
+                actualRow.find("input.accountCreditField").attr("name", "accounttransactionList[" + i + "][credit]");
+                actualRow.find("select.moduleId").attr("name", "accounttransactionList[" + i + "][moduleId]");
+                actualRow.find("select.moduleRefId").attr("name", "accounttransactionList[" + i + "][moduleRefId]");
+                actualRow.find("select.moduleTypeId").attr("name", "accounttransactionList[" + i + "][moduleTypeId]");
+                actualRow.find("input.description").attr("name", "accounttransactionList[" + i + "][description]");
+                actualRow.find("select.costCenters").attr("name", "accounttransactionList[" + i + "][costcenterList][][id]");
                 javatmp.plugins.select2Wrapper(actualRow.find("select.select2wrapper"));
                 i++;
             });
@@ -295,6 +296,8 @@
                 if (!$(this).valid()) {
                     return false;
                 }
+                var testFormObj = $(this).serializeArray();
+                console.log(testFormObj);
                 var formObj = $(this).serializeObject();
                 formObj.voucherTypeId = 1; // General Ledger Voucher
                 formObj.transactionDate = moment(formObj.transactionDate, javatmp.settings.dateFormat).locale('en').format(javatmp.settings.networkDateFormat);

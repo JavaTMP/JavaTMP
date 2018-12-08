@@ -21,6 +21,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.PersistenceException;
 import javax.servlet.http.HttpServletResponse;
@@ -48,6 +49,9 @@ public class TestMarshingTransaction {
 
             Transaction toBe = (Transaction) gson.fromJson(transactionStr, Transaction.class);
             System.out.println("Transaction to be Created [" + MvcHelper.deepToString(toBe) + "]");
+            toBe.setCreationDate(new Date());
+            toBe.setStatus((short) 1);
+            accountService.createNewTransaction(toBe);
         } catch (PersistenceException e) {
             Throwable t = e;
             while (t.getCause() != null) {
