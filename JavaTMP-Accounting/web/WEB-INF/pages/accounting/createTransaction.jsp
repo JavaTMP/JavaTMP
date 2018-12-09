@@ -79,25 +79,25 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="table-responsive">
+                                <div class="table-responsive-sm">
                                     <table class="table table-bordered table-hover custom-invoice-table" id="tab_logic">
                                         <thead>
                                             <tr>
                                                 <th style="width: 3rem;" class="text-center">#</th>
-                                                <th class="text-center">Account</th>
-                                                <th class="text-center" style="width: 12rem;">ModuleId</th>
-                                                <th class="text-center" style="width: 12rem;">Moduel List</th>
-                                                <th class="text-center" style="width: 12rem;">moduleTypeId</th>
-                                                <th class="text-center" style="width: 15rem;">Cost Centre</th>
+                                                <th style="width: 20rem;" class="text-center">Account</th>
+                                                <th style="width: 12rem;" class="text-center">ModuleId</th>
+                                                <th style="width: 12rem;">Moduel List</th>
+                                                <th style="width: 12rem;">moduleTypeId</th>
+                                                <th style="width: 15rem;">Cost Centre</th>
                                                 <th style="width: 6rem;" class="text-center">Debit</th>
                                                 <th style="width: 6rem;" class="text-center">Credit</th>
-                                                <th style="width: 15rem;" class="text-center">Description</th>
+                                                <th style="width: 20rem;" class="text-center">Description</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr id='rowTemplate' style="display: none;">
                                                 <td style="width: 3rem;">1</td>
-                                                <td>
+                                                <td style="width: 20rem;">
                                                     <select class="select2wrapper form-control accountListSelect">
                                                         <c:choose>
                                                             <c:when test="${fn:length(requestScope.accounts) > 0}">
@@ -112,7 +112,7 @@
                                                         </c:choose>
                                                     </select>
                                                 </td>
-                                                <td>
+                                                <td style="width: 12rem;">
                                                     <select class="select2wrapper moduleId form-control" data-rule-required="false">
                                                         <c:choose>
                                                             <c:when test="${fn:length(requestScope.modules) > 0}">
@@ -127,7 +127,7 @@
                                                         </c:choose>
                                                     </select>
                                                 </td>
-                                                <td>
+                                                <td style="width: 12rem;">
                                                     <select class="select2wrapper moduleRefId form-control" data-rule-required="false">
                                                         <c:choose>
                                                             <c:when test="${fn:length(requestScope.moduleTypeIds) > 0}">
@@ -141,7 +141,7 @@
                                                         </c:choose>
                                                     </select>
                                                 </td>
-                                                <td>
+                                                <td style="width: 12rem;">
                                                     <select class="select2wrapper moduleTypeId form-control" data-rule-required="false">
                                                         <c:choose>
                                                             <c:when test="${fn:length(requestScope.moduleTypeIds) > 0}">

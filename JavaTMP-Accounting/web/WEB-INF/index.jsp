@@ -154,6 +154,121 @@
                             </li>
                             <li>
                                 <a class="has-arrow" href="#">
+                                    <i class="far fa-lg fa-fw fa-address-book"></i>
+                                    Customers
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/accounting/chart-of-accounts">
+                                            Chart Of Accounts
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/accounting/general-ledger">
+                                            General Ledger
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/accounting/CreateTransaction">
+                                            Create Transaction
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="has-arrow" href="#">
+                                    <i class="fas fa-lg fa-fw fa-shopping-cart"></i>
+                                    Suppliers
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/accounting/chart-of-accounts">
+                                            Chart Of Accounts
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/accounting/general-ledger">
+                                            General Ledger
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/accounting/CreateTransaction">
+                                            Create Transaction
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="has-arrow" href="#">
+                                    <i class="far fa-lg fa-fw fa-id-card"></i>
+                                    Employees
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/accounting/chart-of-accounts">
+                                            Chart Of Accounts
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/accounting/general-ledger">
+                                            General Ledger
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/accounting/CreateTransaction">
+                                            Create Transaction
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="has-arrow" href="#">
+                                    <i class="far fa-lg fa-fw fa-gem"></i>
+                                    Fixed Assets
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/accounting/chart-of-accounts">
+                                            Chart Of Accounts
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/accounting/general-ledger">
+                                            General Ledger
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/accounting/CreateTransaction">
+                                            Create Transaction
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="has-arrow" href="#">
+                                    <i class="fas fa-lg fa-fw fa-boxes"></i>
+                                    Inventory
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/accounting/chart-of-accounts">
+                                            Chart Of Accounts
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/accounting/general-ledger">
+                                            General Ledger
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/accounting/CreateTransaction">
+                                            Create Transaction
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="has-arrow" href="#">
                                     <i class="far fa-lg fa-fw fa-chart-bar"></i>
                                     Reports
                                 </a>
