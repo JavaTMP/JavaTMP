@@ -159,18 +159,8 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/accounting/chart-of-accounts">
-                                            Chart Of Accounts
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="${pageContext.request.contextPath}/pages/accounting/general-ledger">
-                                            General Ledger
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="${pageContext.request.contextPath}/accounting/CreateTransaction">
-                                            Create Transaction
+                                        <a href="${pageContext.request.contextPath}/pages/customer/list">
+                                            Customers List
                                         </a>
                                     </li>
                                 </ul>
@@ -182,18 +172,8 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/accounting/chart-of-accounts">
-                                            Chart Of Accounts
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="${pageContext.request.contextPath}/pages/accounting/general-ledger">
-                                            General Ledger
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="${pageContext.request.contextPath}/accounting/CreateTransaction">
-                                            Create Transaction
+                                        <a href="${pageContext.request.contextPath}/pages/supplier/list">
+                                            Suppliers List
                                         </a>
                                     </li>
                                 </ul>
@@ -205,18 +185,8 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/accounting/chart-of-accounts">
-                                            Chart Of Accounts
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="${pageContext.request.contextPath}/pages/accounting/general-ledger">
-                                            General Ledger
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="${pageContext.request.contextPath}/accounting/CreateTransaction">
-                                            Create Transaction
+                                        <a href="${pageContext.request.contextPath}/pages/employee/list">
+                                            Employees List
                                         </a>
                                     </li>
                                 </ul>
@@ -228,18 +198,8 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/accounting/chart-of-accounts">
-                                            Chart Of Accounts
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="${pageContext.request.contextPath}/pages/accounting/general-ledger">
-                                            General Ledger
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="${pageContext.request.contextPath}/accounting/CreateTransaction">
-                                            Create Transaction
+                                        <a href="${pageContext.request.contextPath}/pages/fixed-asset/list">
+                                            Fixed Assets List
                                         </a>
                                     </li>
                                 </ul>
@@ -251,18 +211,8 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/accounting/chart-of-accounts">
-                                            Chart Of Accounts
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="${pageContext.request.contextPath}/pages/accounting/general-ledger">
-                                            General Ledger
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="${pageContext.request.contextPath}/accounting/CreateTransaction">
-                                            Create Transaction
+                                        <a href="${pageContext.request.contextPath}/pages/inventory/list">
+                                            Inventory List
                                         </a>
                                     </li>
                                 </ul>
