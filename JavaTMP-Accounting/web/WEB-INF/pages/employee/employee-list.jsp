@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <h5 class="my-3">Customer List</h5>
+    <h5 class="my-3">Employees List</h5>
     <hr/>
     <div class="row">
         <div class="col">
@@ -88,7 +88,7 @@
                 },
                 "ajax": {
                     "type": "POST",
-                    "url": javatmp.settings.contextPath + "/accounting/ListGeneralLedger",
+                    "url": javatmp.settings.contextPath + "/customer/ListCustomers",
                     dataType: "json",
                     contentType: "application/json; charset=UTF-8",
                     "data": function (currentDate) {

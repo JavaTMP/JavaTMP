@@ -17,6 +17,7 @@
     <class>com.javatmp.module.accounting.Moduletype</class>
     <class>com.javatmp.module.accounting.Vouchertype</class>
     <class>com.javatmp.module.accounting.Costcenter</class>
+    <class>com.javatmp.module.customer.Customer</class>
     <properties>
       <!-- Configuring JDBC properties -->
       <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>

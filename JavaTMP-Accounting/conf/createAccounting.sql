@@ -238,4 +238,19 @@ CREATE TABLE acctTransCtCenter (
     CONSTRAINT acctTransCtCent_ctCentId_fk FOREIGN KEY (costCenterId) REFERENCES costCenter (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE customer (
+    id BIGINT UNSIGNED not null AUTO_INCREMENT,
+    name varchar(128) not null,
+    status TINYINT,
+    creationDate TIMESTAMP NOT NULL,
+    CONSTRAINT customer_id_pk PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO accountingdb.customer (`name`, status, `creationDate`) VALUES
+('Mohamed Darim', 1, DEFAULT),
+('Mohamed Ta7seen', 1, DEFAULT),
+('Ahmad Mohamed', 1, DEFAULT),
+('Reem Mohamed', 1, DEFAULT);
+
+
 

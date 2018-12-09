@@ -7,19 +7,8 @@
             <table cellspacing="0" class="table table-condensed table-bordered table-hover" id="list">
                 <thead>
                     <tr>
-                        <th style="width: 5rem;"><p class="m-0 p-0" style="width: 5rem;">id</p></th>
-                        <th style="width: 9rem;"><p class="m-0 p-0" style="width: 9rem;">${labels['domain.user.userName']}</p></th>
-                        <th style="width: 7rem;"><p class="m-0 p-0" style="width: 7rem;">${labels['domain.user.firstName']}</p></th>
-                        <th style="width: 7rem;"><p class="m-0 p-0" style="width: 7rem;">${labels['domain.user.lastName']}</p></th>
-                        <th style="width: 8rem;"><p class="m-0 p-0" style="width: 8rem;">${labels['domain.user.birthDate']}</p></th>
-                        <th style="width: 3rem;"><p class="m-0 p-0" style="width: 3rem;">${labels['domain.user.age']}</p></th>
-                        <th style="width: 12rem;"><p class="m-0 p-0" style="width: 12rem;">${labels['domain.user.email']}</p></th>
-                        <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">${labels['domain.user.status']}</p></th>
-                        <th style="width: 8rem;"><p class="m-0 p-0" style="width: 8rem;">${labels['domain.user.country']}</p></th>
-                        <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">${labels['domain.user.lang']}</p></th>
-                        <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">${labels['domain.user.theme']}</p></th>
-                        <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">${labels['domain.user.timezone']}</p></th>
-                        <th style="width: 8rem;"><p class="m-0 p-0" style="width: 8rem;">${labels['domain.user.creationDate']}</p></th>
+                        <th style="width: 8rem;"><p class="m-0 p-0" style="width: 8rem;">Customer ID</p></th>
+                        <th style="width: 25rem;"><p class="m-0 p-0" style="width: 25rem;">Customer Name</p></th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -88,7 +77,7 @@
                 },
                 "ajax": {
                     "type": "POST",
-                    "url": javatmp.settings.contextPath + "/accounting/ListGeneralLedger",
+                    "url": javatmp.settings.contextPath + "/customer/ListCustomers",
                     dataType: "json",
                     contentType: "application/json; charset=UTF-8",
                     "data": function (currentDate) {
@@ -102,35 +91,8 @@
                     }
                 },
                 columns: [
-                    {data: 'id',
-                        "createdCell": function (td, cellData, rowData, row, col) {
-                            console.log(table.init().columns[col]);
-                            $(td).addClass("text-center");
-                        },
-                        className: "", name: "id", width: "6rem", "render": javatmp.plugins.DataTableColRenderWrapper("6rem")},
-                    {data: 'userName', name: "userName", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
-                    {data: 'firstName', name: "firstName", width: "8rem", "render": javatmp.plugins.DataTableColRenderWrapper("8rem")},
-                    {data: 'lastName', name: "lastName", width: "8rem", "render": javatmp.plugins.DataTableColRenderWrapper("8rem")},
-                    {data: 'birthDate', "type": "date", name: "birthDate", width: "9rem", "render": javatmp.plugins.DataTableColRenderWrapper("9rem")},
-                    {data: 'birthDate', name: "age", "type": "date", width: "4rem",
-                        "render": function (data, type, row) {
-                            data = Math.ceil(moment().diff(moment(data, javatmp.settings.networkDateFormat), 'years', true));
-                            if (type === "display") {
-                                return "<p class='m-0 p-0' style='width: 4rem;'>" + data + "</p>";
-                            } else {
-                                return data;
-                            }
-                        }
-                    },
-                    {data: 'email', name: "email", width: "14rem", "render": javatmp.plugins.DataTableColRenderWrapper("14rem")},
-                    {data: 'status', className: "text-center", name: "status", width: "12rem",
-                        "render": javatmp.plugins.DataTableColRenderWrapper("12rem")
-                    },
-                    {data: 'countryId', name: "countryId", width: "9rem", "render": javatmp.plugins.DataTableColRenderWrapper("9rem")},
-                    {data: 'lang', name: "lang", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
-                    {data: 'theme', name: "theme", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
-                    {data: 'timezone', name: "timezone", width: "11rem", "render": javatmp.plugins.DataTableColRenderWrapper("11rem")},
-                    {data: 'creationDate', "type": "date", name: "creationDate", width: "9rem", "render": javatmp.plugins.DataTableColRenderWrapper("9rem")}
+                    {data: 'id', name: "id", width: "8rem", "render": javatmp.plugins.DataTableColRenderWrapper("8rem")},
+                    {data: 'name', name: "name", width: "26rem", "render": javatmp.plugins.DataTableColRenderWrapper("26rem")}
                 ]
             });
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
@@ -139,14 +101,17 @@
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
                 // fire when user resize browser window or sidebar hide / show
+                table.columns.adjust().draw();
             });
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenCompress, function (event, card) {
                 // when card compress by pressing the top right tool button
+                table.columns.adjust().draw();
             });
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenExpand, function (event, card) {
                 // when card Expand by pressing the top right tool button
+                table.columns.adjust().draw();
             });
 
             /**
@@ -157,6 +122,8 @@
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {
                 $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenCompress);
                 $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenExpand);
+                table.clear();
+                table.destroy(true);
                 return true;
             });
         });

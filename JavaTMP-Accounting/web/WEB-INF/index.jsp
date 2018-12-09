@@ -159,7 +159,7 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/customer/list">
+                                        <a href="${pageContext.request.contextPath}/pages/customer/customer-list">
                                             Customers List
                                         </a>
                                     </li>
@@ -172,7 +172,7 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/supplier/list">
+                                        <a href="${pageContext.request.contextPath}/pages/supplier/supplier-list">
                                             Suppliers List
                                         </a>
                                     </li>
@@ -185,7 +185,7 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/employee/list">
+                                        <a href="${pageContext.request.contextPath}/pages/employee/employee-list">
                                             Employees List
                                         </a>
                                     </li>
@@ -198,7 +198,7 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/fixed-asset/list">
+                                        <a href="${pageContext.request.contextPath}/pages/fixed-asset/fixed-asset-list">
                                             Fixed Assets List
                                         </a>
                                     </li>
@@ -211,7 +211,7 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/inventory/list">
+                                        <a href="${pageContext.request.contextPath}/pages/inventory/inventory-list">
                                             Inventory List
                                         </a>
                                     </li>

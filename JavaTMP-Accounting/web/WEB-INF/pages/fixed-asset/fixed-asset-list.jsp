@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <h5 class="my-3">Customer List</h5>
+    <h5 class="my-3">Fixed Assets List</h5>
     <hr/>
     <div class="row">
         <div class="col">

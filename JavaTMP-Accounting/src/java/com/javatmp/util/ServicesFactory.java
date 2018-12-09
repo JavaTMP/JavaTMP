@@ -6,6 +6,7 @@ import com.javatmp.module.activity.ActivityService;
 import com.javatmp.module.theme.ThemeService;
 import com.javatmp.module.language.LanguageService;
 import com.javatmp.module.country.CountryService;
+import com.javatmp.module.customer.CustomerService;
 import com.javatmp.module.user.UserService;
 import com.javatmp.module.stats.UserStatsService;
 import com.javatmp.module.dms.DocumentService;
@@ -25,6 +26,7 @@ public class ServicesFactory {
     private final UserStatsService userStatsService;
     private final ActivityService activityService;
     private final AccountService accountService;
+    private final CustomerService customerService;
 
     public ServicesFactory(String persistentUnitName) {
         logger.info("*** Start ServicesFactory Constructor @ [" + new Date() + "]");
@@ -38,6 +40,8 @@ public class ServicesFactory {
         this.userStatsService = new UserStatsService(jpaDaoHelper);
         this.activityService = new ActivityService(jpaDaoHelper);
         this.accountService = new AccountService(jpaDaoHelper);
+        this.customerService = new CustomerService(jpaDaoHelper);
+
         this.logger.info("*** End ServicesFactory Constructor @ [" + new Date() + "]");
     }
 
@@ -100,5 +104,12 @@ public class ServicesFactory {
      */
     public AccountService getAccountService() {
         return accountService;
+    }
+
+    /**
+     * @return the customerService
+     */
+    public CustomerService getCustomerService() {
+        return customerService;
     }
 }
