@@ -7,6 +7,8 @@
  * Author:  JavaTMP
  * Created: Oct 19, 2018
  */
+DROP TABLE IF EXISTS customeraccount;
+DROP TABLE IF EXISTS customer;
 DROP TABLE IF EXISTS acctTransCtCenter;
 DROP TABLE IF EXISTS costCenter;
 DROP TABLE IF EXISTS accountTransaction;
@@ -136,31 +138,36 @@ CREATE TABLE moduleType (
     CONSTRAINT moduleId_name_uni UNIQUE KEY (moduleId, name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO moduleType (`moduleId`, `name`, description, status, `creationDate`) VALUES
-(1, 'Trade Receivable', null, 1, default),
-(1, 'PDC - Collection', null, 1, default),
-(1, 'Returne CHQ - Collection', null, 1, default),
+INSERT INTO moduleType (id, `moduleId`, `name`, description, status, `creationDate`) VALUES
+(1, 1, 'Customer Root Account', null, 1, default),
+(2, 1, 'Trade Receivable', null, 1, default),
+(3, 1, 'PDC - Collection', null, 1, default),
+(4, 1, 'Returne CHQ - Collection', null, 1, default),
 
-(2, 'Trade Payable', null, 1, default),
-(2, 'PDC - Payment', null, 1, default),
-(2, 'Returne CHQ - Payments', null, 1, default),
+(5, 2, 'Supplier Root Account', null, 1, default),
+(6, 2, 'Trade Payable', null, 1, default),
+(7, 2, 'PDC - Payment', null, 1, default),
+(8, 2, 'Returne CHQ - Payments', null, 1, default),
 
-(3, 'Payroll', null, 1, default),
-(3, 'Annual Leave', null, 1, default),
-(3, 'Unpaid Leave', null, 1, default),
-(3, 'Employee Advances', null, 1, default),
-(3, 'End Of Service', null, 1, default),
+(9, 3, 'Employee Root Account', null, 1, default),
+(10, 3, 'Payroll', null, 1, default),
+(11, 3, 'Annual Leave', null, 1, default),
+(12, 3, 'Unpaid Leave', null, 1, default),
+(13, 3, 'Employee Advances', null, 1, default),
+(14, 3, 'End Of Service', null, 1, default),
 
-(4, 'Purchase', null, 1, default),
-(4, 'Depreciation', null, 1, default),
-(4, 'Sale - Cost Disposal', null, 1, default),
-(4, 'Sale - Acc. Disposal', null, 1, default),
-(4, 'Sale - Profit', null, 1, default),
+(15, 4, 'Fixed Asset Root Account', null, 1, default),
+(16, 4, 'Purchase', null, 1, default),
+(17, 4, 'Depreciation', null, 1, default),
+(18, 4, 'Sale - Cost Disposal', null, 1, default),
+(19, 4, 'Sale - Acc. Disposal', null, 1, default),
+(20, 4, 'Sale - Profit', null, 1, default),
 
-(5, 'Purchase', null, 1, default),
-(5, 'Sale - Inventory', null, 1, default),
-(5, 'Sale - Cost', null, 1, default),
-(5, 'Wastage/Writte-off', null, 1, default);
+(21, 5, 'Inventory Item Root Account', null, 1, default),
+(22, 5, 'Purchase', null, 1, default),
+(23, 5, 'Sale - Inventory', null, 1, default),
+(24, 5, 'Sale - Cost', null, 1, default),
+(25, 5, 'Wastage/Writte-off', null, 1, default);
 
 CREATE TABLE voucherType (
     id int not null AUTO_INCREMENT,
@@ -171,8 +178,8 @@ CREATE TABLE voucherType (
     CONSTRAINT transactionType_id_pk PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO voucherType (`name`, description, status, `creationDate`)
-	VALUES ('General Ledger Voucher', 'General Ledger Voucher', 1, DEFAULT);
+INSERT INTO voucherType (id, `name`, description, status, `creationDate`) VALUES
+(1, 'Journal Voucher', 'Journal Voucher', 1, DEFAULT);
 
 CREATE TABLE transaction (
     id BIGINT UNSIGNED not null AUTO_INCREMENT,
@@ -246,11 +253,22 @@ CREATE TABLE customer (
     CONSTRAINT customer_id_pk PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO accountingdb.customer (`name`, status, `creationDate`) VALUES
+INSERT INTO customer (`name`, status, `creationDate`) VALUES
 ('Mohamed Darim', 1, DEFAULT),
 ('Mohamed Ta7seen', 1, DEFAULT),
 ('Ahmad Mohamed', 1, DEFAULT),
 ('Reem Mohamed', 1, DEFAULT);
 
+CREATE TABLE customerAccount (
+    customerId BIGINT UNSIGNED not null,
+    moduleTypeId int,
+    accountId BIGINT UNSIGNED not null,
+    CONSTRAINT customerAccount_pk PRIMARY KEY (customerId, moduleTypeId, accountId),
+    CONSTRAINT custAcct_customerId_fk FOREIGN KEY (customerId) REFERENCES customer (id),
+    CONSTRAINT custAcct_moduleTypeId_fk FOREIGN KEY (moduleTypeId) REFERENCES moduleType (id),
+    CONSTRAINT custAcct_accountId_fk FOREIGN KEY (accountId) REFERENCES account (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+INSERT INTO customeraccount (`customerId`, `moduleTypeId`, `accountId`) VALUES
+(1, 1, 12);
 

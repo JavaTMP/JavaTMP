@@ -55,6 +55,8 @@ public class TestCustomer {
         cust1.setStatus((short) 1);
         jpaDaoHelper.create(cust1);
 
+        customerService.deleteCustomer(cust1);
+
         // test fetch:
         String searchQuery = "{\n"
                 + "                                _ajaxGlobalBlockUI: false,\n"

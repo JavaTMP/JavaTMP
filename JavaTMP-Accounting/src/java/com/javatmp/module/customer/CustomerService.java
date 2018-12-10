@@ -15,8 +15,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
+import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
@@ -31,6 +34,60 @@ public class CustomerService {
 
     public CustomerService(JpaDaoHelper jpaDaoHelper) {
         this.jpaDaoHelper = jpaDaoHelper;
+    }
+
+    public Customer createNewCustomer(Customer customer) {
+
+        EntityManager em = null;
+        try {
+            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            em.getTransaction().begin();
+            em.persist(customer);
+            em.getTransaction().commit();
+        } catch (PersistenceException e) {
+            if (em != null) {
+                em.getTransaction().rollback();
+            }
+            throw e;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+        return customer;
+    }
+
+    public int deleteCustomer(Customer customer) {
+        int deletedStatus = 0;
+        EntityManager em = null;
+        try {
+            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            em.getTransaction().begin();
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Customer> cq = cb.createQuery(Customer.class);
+            Root<Customer> from = cq.from(Customer.class);
+            cq.multiselect(from.get(Customer_.id));
+            cq.where(cb.equal(from.get(Customer_.id), customer.getId()));
+            TypedQuery<Customer> query = em.createQuery(cq);
+            query.setLockMode(LockModeType.PESSIMISTIC_WRITE);
+            Customer dbCustomer = query.getSingleResult();
+            // here you can check for any pre delete code:
+
+            // delete user first:
+            CriteriaDelete<Customer> deleteCriteria = cb.createCriteriaDelete(Customer.class);
+            Root<Customer> userRoot = deleteCriteria.from(Customer.class);
+            deleteCriteria.where(cb.equal(userRoot.get(Customer_.id), customer.getId()));
+            deletedStatus = em.createQuery(deleteCriteria).executeUpdate();
+
+            // delete document second if user deleted:
+            em.getTransaction().commit();
+            return deletedStatus;
+        } catch (PersistenceException e) {
+            if (em != null) {
+                em.getTransaction().rollback();
+            }
+            throw e;
+        }
     }
 
     public DataTableResults<Customer> listAllCustomers(DataTableRequest<Customer> tableRequest) throws ParseException {
