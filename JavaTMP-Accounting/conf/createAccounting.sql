@@ -88,31 +88,6 @@ CREATE TABLE account (
     CONSTRAINT account_parentAccountId_fk FOREIGN KEY (parentAccountId) REFERENCES account (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- 45 Asstes\Current Asstes\Account Receivable\Trade Receivable
--- 46 Asstes\Current Asstes\Account Receivable\PDC - Collection
--- 47 Asstes\Current Asstes\Account Receivable\Retune CHQ - Collection
---
--- 48 Liabiltiy\Current Liabilities\Account Payable\Trade Payable
--- 49 Liabiltiy\Current Liabilities\Account Payable\PDC - Payment
--- 50 Liabiltiy\Current Liabilities\Account Payable\Retune CHQ - Payments
---
--- 51 Liabiltiy\Current Liabilities\Payroll Payable\Payroll
--- 52 Liabiltiy\Current Liabilities\Payroll Payable\Annual Leave
--- 53 Liabiltiy\Current Liabilities\Payroll Payable\Unpaid Leave
--- 54 Liabiltiy\Current Liabilities\Payroll Payable\Employee Advances
--- 55 Liabiltiy\Long Term Liabilities\End Of Service\End Of Service
---
--- 56 Asstes\Fixed Asstes\Purchase
--- 57 Asstes\Fixed Asstes\Depreciation
--- 58 Asstes\Fixed Asstes\Sale - Cost Disposal
--- 59 Asstes\Fixed Asstes\Sale - Acc. Disposal
--- 42 Other Income\Gain or Profit On Assets Sales\Sale - Profit
---
--- 61 Asstes\Current Asstes\Inventory\Purchase
--- 62 Asstes\Current Asstes\Inventory\Sale - Inventory
--- 63 Cost\Cost Of Good Sold\Sale - Cost
--- 64 Other Losses\Inventory Written Off\Wastage/Write-off
-
 INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (2,'100100','Asset Accounts','description',NULL,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-01 12:00:00',NULL);
 INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (3,'100200','Lability Accounts','description',NULL,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-01 12:00:00',NULL);
 INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (4,'100300','Equity Accounts','description',NULL,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-01 12:00:00',NULL);
@@ -201,30 +176,30 @@ CREATE TABLE moduleType (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO moduleType (id, `moduleId`, `name`, description, status, `rootAccountId`, `creationDate`) VALUES
-(1, 1, 'Trade Receivable', null, 1, 2, default),
-(2, 1, 'PDC - Collection', null, 1, 2, default),
-(3, 1, 'Returne CHQ - Collection', null, 1, 2, default),
+(1, 1, 'Trade Receivable', null, 1, 45, default),
+(2, 1, 'PDC - Collection', null, 1, 46, default),
+(3, 1, 'Returne CHQ - Collection', null, 1, 47, default),
 
-(4, 2, 'Trade Payable', null, 1, 2, default),
-(5, 2, 'PDC - Payment', null, 1, 2, default),
-(6, 2, 'Returne CHQ - Payments', null, 1, 2, default),
+(4, 2, 'Trade Payable', null, 1, 48, default),
+(5, 2, 'PDC - Payment', null, 1, 49, default),
+(6, 2, 'Returne CHQ - Payments', null, 1, 50, default),
 
-(7, 3, 'Payroll', null, 1, 2, default),
-(8, 3, 'Annual Leave', null, 1, 2, default),
-(9, 3, 'Unpaid Leave', null, 1, 2, default),
-(10, 3, 'Employee Advances', null, 1, 2, default),
-(11, 3, 'End Of Service', null, 1, 2, default),
+(7, 3, 'Payroll', null, 1, 51, default),
+(8, 3, 'Annual Leave', null, 1, 52, default),
+(9, 3, 'Unpaid Leave', null, 1, 53, default),
+(10, 3, 'Employee Advances', null, 1, 54, default),
+(11, 3, 'End Of Service', null, 1, 55, default),
 
-(12, 4, 'Purchase', null, 1, 2, default),
-(13, 4, 'Depreciation', null, 1, 2, default),
-(14, 4, 'Sale - Cost Disposal', null, 1, 2, default),
-(15, 4, 'Sale - Acc. Disposal', null, 1, 2, default),
-(16, 4, 'Sale - Profit', null, 1, 2, default),
+(12, 4, 'Purchase', null, 1, 56, default),
+(13, 4, 'Depreciation', null, 1, 57, default),
+(14, 4, 'Sale - Cost Disposal', null, 1, 58, default),
+(15, 4, 'Sale - Acc. Disposal', null, 1, 59, default),
+(16, 4, 'Sale - Profit', null, 1, 42, default),
 
-(17, 5, 'Purchase', null, 1, 2, default),
-(18, 5, 'Sale - Inventory', null, 1, 2, default),
-(19, 5, 'Sale - Cost', null, 1, 2, default),
-(20, 5, 'Wastage/Writte-off', null, 1, 2, default);
+(17, 5, 'Purchase', null, 1, 61, default),
+(18, 5, 'Sale - Inventory', null, 1, 62, default),
+(19, 5, 'Sale - Cost', null, 1, 63, default),
+(20, 5, 'Wastage/Writte-off', null, 1, 64, default);
 
 CREATE TABLE voucherType (
     id int not null AUTO_INCREMENT,
