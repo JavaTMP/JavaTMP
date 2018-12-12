@@ -107,7 +107,7 @@
                         <div class="form-group form-row">
                             <label class="text-sm-right control-label col-sm-5 col-form-label">cashFlowId</label>
                             <div class="col-sm-7">
-                                <select name="cashFlowId" class="custom-select" data-rule-required="true">
+                                <select name="cashFlowId" class="custom-select" data-rule-required="false">
                                     <option ${requestScope.account.cashFlowId == null ? 'selected="selected"' : ''} value="">${labels['page.text.kindlySelect']}</option>
                                     <option ${requestScope.account.cashFlowId == 1 ? 'selected="selected"' : ''} value="1">Operating</option>
                                     <option ${requestScope.account.cashFlowId == 2 ? 'selected="selected"' : ''} value="2">Investing</option>

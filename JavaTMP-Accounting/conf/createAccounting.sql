@@ -7,18 +7,21 @@
  * Author:  JavaTMP
  * Created: Oct 19, 2018
  */
-DROP TABLE IF EXISTS customeraccount;
-DROP TABLE IF EXISTS customer;
 DROP TABLE IF EXISTS acctTransCtCenter;
 DROP TABLE IF EXISTS costCenter;
+
 DROP TABLE IF EXISTS accountTransaction;
+
+DROP TABLE IF EXISTS customerAccount;
+DROP TABLE IF EXISTS customer;
+DROP TABLE IF EXISTS moduleType;
+DROP TABLE IF EXISTS module;
+
 DROP TABLE IF EXISTS account;
 DROP TABLE IF EXISTS accountGroup;
 DROP TABLE IF EXISTS accountType;
 DROP TABLE IF EXISTS `transaction`;
 DROP TABLE IF EXISTS `voucherType`;
-DROP TABLE IF EXISTS moduleType;
-DROP TABLE IF EXISTS module;
 
 CREATE TABLE accountType (
     id int(1) UNSIGNED not null,
@@ -32,8 +35,8 @@ INSERT INTO accountType (id, name, debitSign, creditSign) VALUES
 (1, 'Asset account', +1, -1),
 (2, 'Liability account', -1, +1),
 (3, 'Capital (Owner''s Equity) account', -1, +1),
-(4, 'Revenue account', -1, +1),
-(5, 'Expense account', +1, -1);
+(4, 'Revenue/Income account', -1, +1),
+(5, 'Expense/Cost account', +1, -1);
 
 CREATE TABLE accountGroup (
     id int(3) UNSIGNED not null,
@@ -43,13 +46,27 @@ CREATE TABLE accountGroup (
     CONSTRAINT accountGroup_id_pk PRIMARY KEY (id),
     CONSTRAINT accountGroup_accountType_fk FOREIGN KEY (accountType) REFERENCES accountType (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 INSERT INTO accountGroup (id, name, description, accountType) VALUES
-(1, 'Asset account', 'Asset account', 1),
-(2, 'Liability account', 'Liability account', 2),
-(3, 'Equity account', 'Capital (Owner''s Equity) account', 3),
-(4, 'Income account', 'Income account', 4),
-(5, 'Cost account', 'Cost account', 5),
-(6, 'Expense account', 'Expense account', 5);
+(1, 'Current Assets', 'Current Assets', 1),
+(2, 'Non Current Assets', 'Non Current Assets', 1),
+
+(3, 'Current Libilities', 'Current Libilities', 2),
+(4, 'Non Current Libilities', 'Non Current Libilities', 2),
+
+(5, 'Capital', 'Capital', 3),
+(6, 'Current Account', 'Current Account', 3),
+(7, 'Retained Earning', 'Retained Earning', 3),
+(8, 'Profit and Loss', 'Profit and Loss', 3),
+(9, 'OCI', 'OCI', 3),
+
+(10, 'Income', 'Income', 4),
+(11, 'Other Income', 'Other Income', 4),
+
+(12, 'Cost', 'Cost', 5),
+(13, 'Operating Cost', 'Operating Cost', 5),
+(14, 'Expenses', 'Expenses', 5),
+(15, 'Other Losses', 'Other Losses', 5);
 
 CREATE TABLE account (
     id BIGINT UNSIGNED not null AUTO_INCREMENT,
@@ -69,13 +86,39 @@ CREATE TABLE account (
     CONSTRAINT account_parentAccountId_fk FOREIGN KEY (parentAccountId) REFERENCES account (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- 12 Asstes\Current Asstes\Account Receivable\	Trade Receivable
+-- 12 Asstes\Current Asstes\Account Receivable\	PDC - Collection
+-- 12 Asstes\Current Asstes\Account Receivable\	Retune CHQ - Collection
+--
+-- 23 Liabiltiy\Current Liabilities\Account Payable\	Trade Payable
+-- 23 Liabiltiy\Current Liabilities\Account Payable\	PDC - Payment
+-- 23 Liabiltiy\Current Liabilities\Account Payable\	Retune CHQ - Payments
+--
+-- 24 Liabiltiy\Current Liabilities\Payroll Payable\	Payroll
+-- 24 Liabiltiy\Current Liabilities\Payroll Payable\	Annual Leave
+-- 24 Liabiltiy\Current Liabilities\Payroll Payable\	Unpaid Leave
+-- 24 Liabiltiy\Current Liabilities\Payroll Payable\	Employee Advances
+-- 24 Liabiltiy\Long Term Liabilities\End Of Service\	End Of Service
+--
+-- 8 Asstes\Fixed Asstes                               Purchase
+-- 8 Asstes\Fixed Asstes                               Depreciation
+-- 8 Asstes\Fixed Asstes                               Sale - Cost Disposal
+-- 8 Asstes\Fixed Asstes                               Sale - Acc. Disposal
+-- Other Income\Gain or Profit On Assets Sales         Sale - Profit
+--
+-- 40 Asstes\Current Asstes\Inventory                     Purchase
+-- 40 Asstes\Current Asstes\Inventory                     Sale - Inventory
+-- Cost\Cost Of Good Sold                              Sale - Cost
+-- Other Losses\Other Losses\Inventory Written Off     Wastage/Write-off
+
 INSERT INTO account (id, `accountCode`, `name`, description, `accountGroup`, debit, credit, balance, status, `creationDate`, `parentAccountId`)
-VALUES (1, '100', 'Main Company Chart Of Accounts', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', NULL),
-(2, '100100', 'Asset Accounts', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 1),
-(3, '100200', 'Lability Accounts', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 1),
-(4, '100300', 'Equity Accounts', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 1),
-(5, '100400', 'Revenue Accounts', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 1),
-(6, '100500', 'Expense Accounts', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 1),
+VALUES
+-- (1, '100', 'Main Company Chart Of Accounts', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', NULL),
+(2, '100100', 'Asset Accounts', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', NULL),
+(3, '100200', 'Lability Accounts', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', NULL),
+(4, '100300', 'Equity Accounts', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', NULL),
+(5, '100400', 'Revenue Accounts', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', NULL),
+(6, '100500', 'Cost', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', NULL),
 (7, '100100100', 'Current Assets', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 2),
 (8, '100100200', 'Fixed Assets', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 2),
 (9, '100100300', 'Other Assets', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 2),
@@ -108,7 +151,12 @@ VALUES (1, '100', 'Main Company Chart Of Accounts', 'description', NULL, 0, 0, 0
 (36, '100500201', 'Advertising Expense', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 33),
 (37, '100500202', 'Salary and Wage Expense', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 33),
 (38, '100500203', 'Depreciation Expense', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 33),
-(39, '100500204', 'Other expenses', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 33);
+(39, '100500204', 'Other expenses', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 33),
+(40, '100100104', 'Inventory', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 7),
+(41, '100600', 'Other Income', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0',NULL),
+(42, '100600100', 'Gain or Profit On Assets Sales', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 41),
+(43, '100700', 'Other Losses', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', NULL),
+(44, '100700100', 'Inventory Written Off', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 43);
 
 CREATE TABLE module (
     id BIGINT UNSIGNED not null AUTO_INCREMENT,
@@ -132,42 +180,39 @@ CREATE TABLE moduleType (
     name varchar(128) not null,
     description varchar(1024),
     status TINYINT,
+    rootAccountId BIGINT UNSIGNED not null,
     creationDate TIMESTAMP NOT NULL,
     CONSTRAINT moduleType_id_pk PRIMARY KEY (id),
     CONSTRAINT moduelType_moduleId_fk FOREIGN KEY (moduleId) REFERENCES module (id),
+    CONSTRAINT moduleType_rootAccountId_fk FOREIGN KEY (rootAccountId) REFERENCES account (id),
     CONSTRAINT moduleId_name_uni UNIQUE KEY (moduleId, name)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO moduleType (id, `moduleId`, `name`, description, status, `creationDate`) VALUES
-(1, 1, 'Customer Root Account', null, 1, default),
-(2, 1, 'Trade Receivable', null, 1, default),
-(3, 1, 'PDC - Collection', null, 1, default),
-(4, 1, 'Returne CHQ - Collection', null, 1, default),
+INSERT INTO moduleType (id, `moduleId`, `name`, description, status, `rootAccountId`, `creationDate`) VALUES
+(1, 1, 'Trade Receivable', null, 1, 2, default),
+(2, 1, 'PDC - Collection', null, 1, 2, default),
+(3, 1, 'Returne CHQ - Collection', null, 1, 2, default),
 
-(5, 2, 'Supplier Root Account', null, 1, default),
-(6, 2, 'Trade Payable', null, 1, default),
-(7, 2, 'PDC - Payment', null, 1, default),
-(8, 2, 'Returne CHQ - Payments', null, 1, default),
+(4, 2, 'Trade Payable', null, 1, 2, default),
+(5, 2, 'PDC - Payment', null, 1, 2, default),
+(6, 2, 'Returne CHQ - Payments', null, 1, 2, default),
 
-(9, 3, 'Employee Root Account', null, 1, default),
-(10, 3, 'Payroll', null, 1, default),
-(11, 3, 'Annual Leave', null, 1, default),
-(12, 3, 'Unpaid Leave', null, 1, default),
-(13, 3, 'Employee Advances', null, 1, default),
-(14, 3, 'End Of Service', null, 1, default),
+(7, 3, 'Payroll', null, 1, 2, default),
+(8, 3, 'Annual Leave', null, 1, 2, default),
+(9, 3, 'Unpaid Leave', null, 1, 2, default),
+(10, 3, 'Employee Advances', null, 1, 2, default),
+(11, 3, 'End Of Service', null, 1, 2, default),
 
-(15, 4, 'Fixed Asset Root Account', null, 1, default),
-(16, 4, 'Purchase', null, 1, default),
-(17, 4, 'Depreciation', null, 1, default),
-(18, 4, 'Sale - Cost Disposal', null, 1, default),
-(19, 4, 'Sale - Acc. Disposal', null, 1, default),
-(20, 4, 'Sale - Profit', null, 1, default),
+(12, 4, 'Purchase', null, 1, 2, default),
+(13, 4, 'Depreciation', null, 1, 2, default),
+(14, 4, 'Sale - Cost Disposal', null, 1, 2, default),
+(15, 4, 'Sale - Acc. Disposal', null, 1, 2, default),
+(16, 4, 'Sale - Profit', null, 1, 2, default),
 
-(21, 5, 'Inventory Item Root Account', null, 1, default),
-(22, 5, 'Purchase', null, 1, default),
-(23, 5, 'Sale - Inventory', null, 1, default),
-(24, 5, 'Sale - Cost', null, 1, default),
-(25, 5, 'Wastage/Writte-off', null, 1, default);
+(17, 5, 'Purchase', null, 1, 2, default),
+(18, 5, 'Sale - Inventory', null, 1, 2, default),
+(19, 5, 'Sale - Cost', null, 1, 2, default),
+(20, 5, 'Wastage/Writte-off', null, 1, 2, default);
 
 CREATE TABLE voucherType (
     id int not null AUTO_INCREMENT,
@@ -261,14 +306,14 @@ INSERT INTO customer (`name`, status, `creationDate`) VALUES
 
 CREATE TABLE customerAccount (
     customerId BIGINT UNSIGNED not null,
-    moduleTypeId int,
+    moduleTypeId int not null,
     accountId BIGINT UNSIGNED not null,
     CONSTRAINT customerAccount_pk PRIMARY KEY (customerId, moduleTypeId, accountId),
     CONSTRAINT custAcct_customerId_fk FOREIGN KEY (customerId) REFERENCES customer (id),
     CONSTRAINT custAcct_moduleTypeId_fk FOREIGN KEY (moduleTypeId) REFERENCES moduleType (id),
     CONSTRAINT custAcct_accountId_fk FOREIGN KEY (accountId) REFERENCES account (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-INSERT INTO customeraccount (`customerId`, `moduleTypeId`, `accountId`) VALUES
-(1, 1, 12);
-
+--
+-- INSERT INTO customeraccount (`customerId`, `moduleTypeId`, `accountId`) VALUES
+-- (1, 1, 12);
+--
