@@ -43,30 +43,32 @@ CREATE TABLE accountGroup (
     name varchar(32) not null,
     description varchar(1024),
     accountType int(1) UNSIGNED,
+    reportTypeId int unsigned,
     CONSTRAINT accountGroup_id_pk PRIMARY KEY (id),
     CONSTRAINT accountGroup_accountType_fk FOREIGN KEY (accountType) REFERENCES accountType (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO accountGroup (id, name, description, accountType) VALUES
-(1, 'Current Assets', 'Current Assets', 1),
-(2, 'Non Current Assets', 'Non Current Assets', 1),
+-- reportTypeId --> 1: Balance Sheet, 2: Profit and Loss
+INSERT INTO accountGroup (id, name, description, accountType, reportTypeId) VALUES
+(1, 'Current Assets', 'Current Assets', 1, 1),
+(2, 'Non Current Assets', 'Non Current Assets', 1, 1),
 
-(3, 'Current Libilities', 'Current Libilities', 2),
-(4, 'Non Current Libilities', 'Non Current Libilities', 2),
+(3, 'Current Libilities', 'Current Libilities', 2, 1),
+(4, 'Non Current Libilities', 'Non Current Libilities', 2, 1),
 
-(5, 'Capital', 'Capital', 3),
-(6, 'Current Account', 'Current Account', 3),
-(7, 'Retained Earning', 'Retained Earning', 3),
-(8, 'Profit and Loss', 'Profit and Loss', 3),
-(9, 'OCI', 'OCI', 3),
+(5, 'Capital', 'Capital', 3, 1),
+(6, 'Current Account', 'Current Account', 3, 1),
+(7, 'Retained Earning', 'Retained Earning', 3, 1),
+(8, 'Profit and Loss', 'Profit and Loss', 3, 1),
+(9, 'OCI', 'OCI', 3, 1),
 
-(10, 'Income', 'Income', 4),
-(11, 'Other Income', 'Other Income', 4),
+(10, 'Income', 'Income', 4, 2),
+(11, 'Other Income', 'Other Income', 4, 2),
 
-(12, 'Cost', 'Cost', 5),
-(13, 'Operating Cost', 'Operating Cost', 5),
-(14, 'Expenses', 'Expenses', 5),
-(15, 'Other Losses', 'Other Losses', 5);
+(12, 'Cost', 'Cost', 5, 2),
+(13, 'Operating Cost', 'Operating Cost', 5, 2),
+(14, 'Expenses', 'Expenses', 5, 2),
+(15, 'Other Losses', 'Other Losses', 5, 2);
 
 CREATE TABLE account (
     id BIGINT UNSIGNED not null AUTO_INCREMENT,
