@@ -235,7 +235,7 @@
                         $tdList.eq(0).text(node.data.accountCode);
                         $tdList.eq(2).text(node.data.debit);
                         $tdList.eq(3).text(node.data.credit);
-                        $tdList.eq(4).text(node.data.balance);
+                        $tdList.eq(4).text(numeral(node.data.balance).format('(0,0.00)'));
                         $tdList.eq(5).text(accountGroupMap[node.data.accountGroup]);
                         $tdList.eq(6).addClass("text-center").text(node.key);
                     },
