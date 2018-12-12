@@ -1,3 +1,6 @@
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
     <h5 class="my-3">Chart Of Accounts</h5>
@@ -30,10 +33,11 @@
                         <thead>
                             <tr>
                                 <th width="120" class="">Account Code</th>
-                                <th width="*">Account Name</th>
+                                <th>Account Name</th>
                                 <th  width="100">Debit</th>
                                 <th  width="100">Credit</th>
                                 <th  width="100">Balance</th>
+                                <th  width="200">Account Group</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -58,6 +62,15 @@
             Delete Selected Account
         </a>
     </div>
+    <select name="accountGroup" class="form-control" hidden="">
+        <c:choose>
+            <c:when test="${fn:length(requestScope.accountGroups) > 0}">
+                <c:forEach items="${requestScope.accountGroups}" var="accountGroup">
+                    <option  value="${accountGroup.id}">${accountGroup.name}</option>
+                </c:forEach>
+            </c:when>
+        </c:choose>
+    </select>
     <!--
     Reference Your external Stylesheet file here
     if your feature or plugins could not support to run globally.
@@ -86,8 +99,18 @@
             // <--- HERE --->
             //
 
-            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
+            $(javatmp.settings.defaultOutputSelector).one(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
+
+                var accountGroupMap = {};
+                var accountGroupSelect = $("select[name=accountGroup]");
+                $("option", accountGroupSelect).map(function (i, item) {
+                    var text = $(item).text();
+                    var value = $(item).attr("value");
+                    if (!(value === "-1" || value === "")) {
+                        accountGroupMap[value] = text;
+                    }
+                });
 
                 glyph_opts = {
                     preset: "awesome5",
@@ -108,7 +131,6 @@
                         loading: "fa fa-sync fa-spin"
                     }
                 };
-
                 if (javatmp.settings.isRTL === true) {
                     $.extend(true, glyph_opts, {
                         map: {
@@ -122,7 +144,6 @@
                 function convertData(childList) {
                     var parent,
                             nodeMap = {};
-
                     // Pass 1: store all tasks in reference map
                     $.each(childList, function (i, c) {
                         nodeMap[c.id] = c;
@@ -145,11 +166,10 @@
                             } else {
                                 parent.children = [c];
                             }
-                            return null;  // Remove c from childList
+                            return null; // Remove c from childList
                         }
-                        return c;  // Keep top-level nodes
+                        return c; // Keep top-level nodes
                     });
-
                     function calcuateSum(node) {
                         if (node.children && node.children.length > 0) {
                             var childNodes = [];
@@ -189,7 +209,7 @@
                     autoScroll: true,
                     source: {
                         url: "${pageContext.request.contextPath}/accounting/chartOfAccounts",
-//                        debugDelay: 500,
+                        type: "POST",
                         cache: false
                     },
                     init: function (event, data) {
@@ -215,6 +235,7 @@
                         $tdList.eq(2).text(node.data.debit);
                         $tdList.eq(3).text(node.data.credit);
                         $tdList.eq(4).text(node.data.balance);
+                        $tdList.eq(5).text(accountGroupMap[node.data.accountGroup]);
                     },
                     keydown: function (event, data) {
                         if (event.which === 32) {
@@ -238,7 +259,6 @@
                         }
                     }
                 });
-
                 var addNewUserPopupButton = $("#UserList-AddNewUserPopupId");
                 addNewUserPopupButton.on("click", function (event) {
                     BootstrapModalWrapperFactory.createAjaxModal({
@@ -256,7 +276,6 @@
                         }
                     });
                 });
-
                 var updateUserButton = $("#UserList-UpdateSelectedUserId");
                 updateUserButton.on("click", function (event) {
                     //                var selectedCount = table.rows({selected: true}).count();
@@ -280,7 +299,6 @@
                         BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
                     }
                 });
-
                 var deleteUserButton = $("#UserList-DeleteSelectedUserId");
                 deleteUserButton.on("click", function (event) {
                     var selectedNode = chartOfAccountTree.fancytree('getTree').getActiveNode();

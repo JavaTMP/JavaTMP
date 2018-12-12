@@ -28,8 +28,6 @@ public class Account implements Serializable {
     private Accountgroup accountgroup;
     @Transient
     private List<Account> accountList;
-    @Transient
-    private Account account;
 
     @Column(name = "status")
     private Short status;
@@ -115,7 +113,7 @@ public class Account implements Serializable {
     }
 
     public Account(Long id, String accountCode, String name, Long parentAccountId, BigDecimal debit, BigDecimal credit,
-            BigDecimal balance) {
+            BigDecimal balance, Integer accountGroup, Integer cashFlowId) {
         this.id = id;
         this.accountCode = accountCode;
         this.name = name;
@@ -123,6 +121,8 @@ public class Account implements Serializable {
         this.debit = debit;
         this.credit = credit;
         this.balance = balance;
+        this.accountGroup = accountGroup;
+        this.cashFlowId = cashFlowId;
     }
 
     public Long getId() {
@@ -286,14 +286,6 @@ public class Account implements Serializable {
      */
     public void setParentAccountId(Long parentAccountId) {
         this.parentAccountId = parentAccountId;
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public void setAccount(Account account) {
-        this.account = account;
     }
 
     /**

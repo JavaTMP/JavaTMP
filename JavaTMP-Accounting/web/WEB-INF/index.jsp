@@ -136,7 +136,7 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/accounting/chart-of-accounts">
+                                        <a href="${pageContext.request.contextPath}/accounting/chartOfAccounts">
                                             Chart Of Accounts
                                         </a>
                                     </li>

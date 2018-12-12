@@ -111,52 +111,50 @@ CREATE TABLE account (
 -- Cost\Cost Of Good Sold                              Sale - Cost
 -- Other Losses\Other Losses\Inventory Written Off     Wastage/Write-off
 
-INSERT INTO account (id, `accountCode`, `name`, description, `accountGroup`, debit, credit, balance, status, `creationDate`, `parentAccountId`)
-VALUES
--- (1, '100', 'Main Company Chart Of Accounts', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', NULL),
-(2, '100100', 'Asset Accounts', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', NULL),
-(3, '100200', 'Lability Accounts', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', NULL),
-(4, '100300', 'Equity Accounts', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', NULL),
-(5, '100400', 'Revenue Accounts', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', NULL),
-(6, '100500', 'Cost', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', NULL),
-(7, '100100100', 'Current Assets', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 2),
-(8, '100100200', 'Fixed Assets', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 2),
-(9, '100100300', 'Other Assets', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 2),
-(10, '100100101', 'Petty cash', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 7),
-(11, '100100102', 'Cash on hand', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 7),
-(12, '100100103', 'Accounts receivable', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 7),
-(13, '100100201', 'Furniture and fixtures', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 8),
-(14, '100100202', 'Vehicles', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 8),
-(15, '100100203', 'Factory manufacturing equipment', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 8),
-(16, '100100204', 'Buildings', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 8),
-(17, '100100205', 'Land', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 8),
-(18, '100100206', 'Accumulated depreciation, furniture, fixtures', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 8),
-(19, '100100301', 'Accumulated amortization', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 9),
-(20, '100100302', 'Notes receivable, non-current', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 9),
-(21, '100200100', 'Current Liabilities', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 3),
-(22, '100200200', 'Long-Term Liabilities', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 3),
-(23, '100200101', 'Accounts payable', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 21),
-(24, '100200102', 'Payroll payable', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 21),
-(25, '100200201', 'Bonds payable', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 22),
-(26, '100200202', 'Bank loans payable', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 22),
-(27, '100301', 'Owner capital', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 4),
-(28, '100302', 'Retained earnings', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 4),
-(29, '100303', 'Dividends', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 4),
-(30, '100401', 'Product sales revenues', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 5),
-(31, '100402', 'Services sales', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 5),
-(32, '100500100', 'Cost of Goods Sold', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 6),
-(33, '100500200', 'Other', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 6),
-(34, '100500101', 'Raw materials costs', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 32),
-(35, '100500102', 'Direct labor costs', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 32),
-(36, '100500201', 'Advertising Expense', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 33),
-(37, '100500202', 'Salary and Wage Expense', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 33),
-(38, '100500203', 'Depreciation Expense', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 33),
-(39, '100500204', 'Other expenses', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 33),
-(40, '100100104', 'Inventory', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 7),
-(41, '100600', 'Other Income', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0',NULL),
-(42, '100600100', 'Gain or Profit On Assets Sales', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 41),
-(43, '100700', 'Other Losses', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', NULL),
-(44, '100700100', 'Inventory Written Off', 'description', NULL, 0, 0, 0, 1, '2018-12-02 00:00:00.0', 43);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (2,'100100','Asset Accounts','description',1,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-01 20:00:00',NULL);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (3,'100200','Lability Accounts','description',3,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-01 20:00:00',NULL);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (4,'100300','Equity Accounts','description',5,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-01 20:00:00',NULL);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (5,'100400','Revenue Accounts','description',10,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-01 20:00:00',NULL);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (6,'100500','Cost','description',12,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-01 20:00:00',NULL);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (7,'100100100','Current Assets','description',1,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-01 20:00:00',2);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (8,'100100200','Fixed Assets','description',2,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-01 20:00:00',2);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (9,'100100300','Other Assets','description',2,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-01 20:00:00',2);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (10,'100100101','Petty cash','description',1,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-12 16:15:18',7);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (11,'100100102','Cash on hand','description',1,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-12 16:15:18',7);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (12,'100100103','Accounts receivable','description',1,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-12 16:15:18',7);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (13,'100100201','Furniture and fixtures','description',2,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-12 16:16:10',8);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (14,'100100202','Vehicles','description',2,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-12 16:16:10',8);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (15,'100100203','Factory manufacturing equipment','description',2,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-12 16:16:10',8);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (16,'100100204','Buildings','description',2,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-12 16:16:10',8);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (17,'100100205','Land','description',2,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-12 16:16:13',8);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (18,'100100206','Accumulated depreciation, furniture, fixtures','description',2,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-01 20:00:00',8);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (19,'100100301','Accumulated amortization','description',2,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-12 16:17:00',9);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (20,'100100302','Notes receivable, non-current','description',2,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-12 16:17:00',9);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (21,'100200100','Current Liabilities','description',3,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-01 20:00:00',3);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (22,'100200200','Long-Term Liabilities','description',4,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-01 20:00:00',3);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (23,'100200101','Accounts payable','description',3,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-01 20:00:00',21);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (24,'100200102','Payroll payable','description',3,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-01 20:00:00',21);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (25,'100200201','Bonds payable','description',4,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-01 20:00:00',22);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (26,'100200202','Bank loans payable','description',4,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-01 20:00:00',22);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (27,'100301','Owner capital','description',5,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-12 16:18:56',4);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (28,'100302','Retained earnings','description',5,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-12 16:18:56',4);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (29,'100303','Dividends','description',5,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-12 16:18:56',4);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (30,'100401','Product sales revenues','description',10,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-12 16:23:29',5);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (31,'100402','Services sales','description',10,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-12 16:23:29',5);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (32,'100500100','Cost of Goods Sold','description',12,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-12 16:28:07',6);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (33,'100500200','Other','description',12,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-12 16:28:07',6);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (34,'100500101','Raw materials costs','description',12,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-12 16:28:07',32);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (35,'100500102','Direct labor costs','description',12,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-12 16:28:07',32);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (36,'100500201','Advertising Expense','description',12,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-12 16:28:07',33);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (37,'100500202','Salary and Wage Expense','description',12,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-12 16:28:07',33);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (38,'100500203','Depreciation Expense','description',12,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-12 16:28:07',33);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (39,'100500204','Other expenses','description',12,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-12 16:28:07',33);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (40,'100100104','Inventory','description',1,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-01 20:00:00',7);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (41,'100600','Other Income','description',11,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-01 20:00:00',NULL);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (42,'100600100','Gain or Profit On Assets Sales','description',11,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-01 20:00:00',41);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (43,'100700','Other Losses','description',15,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-01 20:00:00',NULL);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (44,'100700100','Inventory Written Off','description',15,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-01 20:00:00',43);
+
 
 CREATE TABLE module (
     id BIGINT UNSIGNED not null AUTO_INCREMENT,
