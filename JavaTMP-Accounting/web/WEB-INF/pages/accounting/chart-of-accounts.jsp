@@ -38,6 +38,7 @@
                                 <th  width="100">Credit</th>
                                 <th  width="100">Balance</th>
                                 <th  width="200">Account Group</th>
+                                <th class="text-center"  width="50">Id</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -236,6 +237,7 @@
                         $tdList.eq(3).text(node.data.credit);
                         $tdList.eq(4).text(node.data.balance);
                         $tdList.eq(5).text(accountGroupMap[node.data.accountGroup]);
+                        $tdList.eq(6).addClass("text-center").text(node.key);
                     },
                     keydown: function (event, data) {
                         if (event.which === 32) {
