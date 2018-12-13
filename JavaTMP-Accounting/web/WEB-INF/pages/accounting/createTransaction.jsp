@@ -272,6 +272,27 @@
                 i++;
             });
 
+            $(document).on("change", "select.moduleId", function (event) {
+                var currentSelectName = $(this).attr("name");
+                var currentSelectVal = $(this).val();
+                var parentRowId = $(this).parents("tr").attr("id");
+                console.log(parentRowId + " > " + currentSelectName + " > " + currentSelectVal);
+                window.javatmp.plugins.ajaxJsonAction({
+                    url: javatmp.settings.contextPath + "/entity/moduleItemList",
+                    data: JSON.stringify({moduleId: currentSelectVal}),
+                    success: function (data) {
+                        alert(JSON.stringify(data));
+                    },
+                    error: function (data) {
+
+                    },
+                    complete: function (jqXHR, textStatus) {
+
+                    }
+                });
+
+            });
+
             $("#delete_row").click(function () {
                 if (i > 0) {
                     $("#row" + (i - 1)).find("select.select2wrapper").select2('destroy');

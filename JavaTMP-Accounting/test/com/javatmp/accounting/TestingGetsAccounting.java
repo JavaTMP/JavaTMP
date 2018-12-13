@@ -9,6 +9,7 @@ import com.javatmp.module.accounting.Account;
 import com.javatmp.module.accounting.AccountService;
 import com.javatmp.module.accounting.Costcenter;
 import com.javatmp.module.accounting.Module;
+import com.javatmp.module.customer.Customer;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.util.JpaDaoHelper;
 import java.sql.SQLException;
@@ -53,6 +54,12 @@ public class TestingGetsAccounting {
 
         for (Costcenter costcenter : costcenters) {
             System.out.println(MvcHelper.toString(costcenter));
+        }
+
+        List<Customer> customers = accountService.getAllCustomerList();
+
+        for (Customer customer : customers) {
+            System.out.println(MvcHelper.toString(customer));
         }
 
     }

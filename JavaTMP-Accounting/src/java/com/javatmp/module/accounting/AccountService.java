@@ -5,6 +5,7 @@
  */
 package com.javatmp.module.accounting;
 
+import com.javatmp.module.customer.Customer;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.util.JpaDaoHelper;
 import java.math.BigDecimal;
@@ -31,6 +32,12 @@ public class AccountService {
 
     public AccountService(JpaDaoHelper jpaDaoHelper) {
         this.jpaDaoHelper = jpaDaoHelper;
+    }
+
+    public List<Customer> getAllCustomerList() {
+        List<Customer> customers = new LinkedList<>();
+        customers = this.jpaDaoHelper.findAll(Customer.class);
+        return customers;
     }
 
     public List<Account> getAllAccountsList() {
