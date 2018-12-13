@@ -32,11 +32,11 @@ CREATE TABLE accountType (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 INSERT INTO accountType (id, name, debitSign, creditSign) VALUES
-(1, 'Asset account', +1, -1),
-(2, 'Liability account', -1, +1),
-(3, 'Capital (Owner''s Equity) account', -1, +1),
-(4, 'Revenue/Income account', -1, +1),
-(5, 'Expense/Cost account', +1, -1);
+(1, 'Assets', +1, -1),
+(2, 'Liabilities', -1, +1),
+(3, 'Equity', -1, +1),
+(4, 'Revenue/Income', -1, +1),
+(5, 'Expense/Cost', +1, -1);
 
 CREATE TABLE accountGroup (
     id int(3) UNSIGNED not null,
