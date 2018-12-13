@@ -31,10 +31,10 @@ public class Accounttype implements Serializable {
     private String name;
     @Basic(optional = false)
     @Column(name = "debitSign")
-    private int debitSign;
+    private Integer debitSign;
     @Basic(optional = false)
     @Column(name = "creditSign")
-    private int creditSign;
+    private Integer creditSign;
 
     @Transient
     private List<Accountgroup> accountgroupList;
@@ -46,8 +46,8 @@ public class Accounttype implements Serializable {
         this.id = id;
     }
 
-    public Accounttype(Integer id, String name, int debitSign, int creditSign) {
-        this.id = id;
+    public Accounttype(Integer typeId, String name, Integer debitSign, Integer creditSign) {
+        this.id = typeId;
         this.name = name;
         this.debitSign = debitSign;
         this.creditSign = creditSign;

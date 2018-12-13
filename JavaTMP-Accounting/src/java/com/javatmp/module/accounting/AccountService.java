@@ -74,12 +74,15 @@ public class AccountService {
                     + "acct.id, acct.accountCode, acct.name, acct.parentAccountId, "
                     + "sum(case when att.amount > 0 then att.amount else 0 end),"
                     + "sum(case when att.amount < 0 then (att.amount * -1) else 0 end), "
-                    + "sum(coalesce(att.amount, 0)), "
-                    + "acct.accountGroup, acct.cashFlowId)"
+                    + "sum(case when coalesce(att.amount, 0) > 0 then (abs(coalesce(att.amount, 0)) * coalesce(at.debitSign, 0)) else (abs(coalesce(att.amount, 0)) * coalesce(at.creditSign, 0)) end), "
+                    + "acct.accountGroup, acct.cashFlowId, ag.name, at.name, at.debitSign, at.creditSign)"
                     + " from Account acct"
                     + " left outer join Accounttransaction att on acct.id = att.accountId"
                     + " left outer join Transaction trans on att.transactionId = trans.id"
-                    + " group by acct.id, acct.accountCode, acct.name, acct.parentAccountId"
+                    + " left outer join Accountgroup ag on acct.accountGroup = ag.id"
+                    + " left outer join Accounttype at on at.id = ag.accountType"
+                    + " group by acct.id, acct.accountCode, acct.name, acct.parentAccountId, acct.accountGroup,"
+                    + "acct.cashFlowId, ag.name, at.name, at.debitSign, at.creditSign"
                     + "", Account.class
             );
             retList = query.getResultList();

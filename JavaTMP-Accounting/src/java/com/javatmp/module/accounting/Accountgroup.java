@@ -35,7 +35,10 @@ public class Accountgroup implements Serializable {
     @Column(name = "description")
     private String description;
     @Transient
-    private Accounttype accounttype;
+    private Accounttype type;
+
+    @Column(name = "accountType")
+    private Integer accountType;
 
     public Accountgroup() {
     }
@@ -73,14 +76,6 @@ public class Accountgroup implements Serializable {
         this.description = description;
     }
 
-    public Accounttype getAccounttype() {
-        return accounttype;
-    }
-
-    public void setAccounttype(Accounttype accounttype) {
-        this.accounttype = accounttype;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -112,6 +107,34 @@ public class Accountgroup implements Serializable {
 
     public void setAccountList(List<Account> accountList) {
         this.accountList = accountList;
+    }
+
+    /**
+     * @return the type
+     */
+    public Accounttype getType() {
+        return type;
+    }
+
+    /**
+     * @param type the type to set
+     */
+    public void setType(Accounttype type) {
+        this.type = type;
+    }
+
+    /**
+     * @return the accountType
+     */
+    public Integer getAccountType() {
+        return accountType;
+    }
+
+    /**
+     * @param accountType the accountType to set
+     */
+    public void setAccountType(Integer accountType) {
+        this.accountType = accountType;
     }
 
 }
