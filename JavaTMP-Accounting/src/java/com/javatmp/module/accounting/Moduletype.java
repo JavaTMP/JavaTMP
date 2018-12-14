@@ -52,6 +52,9 @@ public class Moduletype implements Serializable {
     @Transient
     private Module module;
 
+    @Column(name = "rootAccountId")
+    private Integer rootAccountId;
+
     @Transient
     private List<Accounttransaction> accounttransactionList;
 
@@ -161,6 +164,20 @@ public class Moduletype implements Serializable {
      */
     public void setModuleId(Integer moduleId) {
         this.moduleId = moduleId;
+    }
+
+    /**
+     * @return the rootAccountId
+     */
+    public Integer getRootAccountId() {
+        return rootAccountId;
+    }
+
+    /**
+     * @param rootAccountId the rootAccountId to set
+     */
+    public void setRootAccountId(Integer rootAccountId) {
+        this.rootAccountId = rootAccountId;
     }
 
 }

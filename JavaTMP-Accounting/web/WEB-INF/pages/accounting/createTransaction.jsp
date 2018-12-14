@@ -89,8 +89,8 @@
                                                 <th style="width: 12rem;">Moduel List</th>
                                                 <th style="width: 12rem;">moduleTypeId</th>
                                                 <th style="width: 15rem;">Cost Centre</th>
-                                                <th style="width: 6rem;" class="text-center">Debit</th>
-                                                <th style="width: 6rem;" class="text-center">Credit</th>
+                                                <th style="width: 10rem;" class="text-center">Debit</th>
+                                                <th style="width: 10rem;" class="text-center">Credit</th>
                                                 <th style="width: 20rem;" class="text-center">Description</th>
                                             </tr>
                                         </thead>
@@ -171,10 +171,10 @@
                                                         </c:choose>
                                                     </select>
                                                 </td>
-                                                <td style="width: 6rem;">
+                                                <td style="width: 10rem;">
                                                     <input class="form-control accountDebitField" type="number" placeholder='0.00' step="0.01" min="0" value="0.00"/>
                                                 </td>
-                                                <td style="width: 6rem;">
+                                                <td style="width: 10rem;">
                                                     <input class="form-control accountCreditField" type="number" placeholder='0.00' step="0.01" min="0" value="0.00"/>
                                                 </td>
                                                 <td style="width: 15rem;">
@@ -275,23 +275,72 @@
             $(document).on("change", "select.moduleId", function (event) {
                 var currentSelectName = $(this).attr("name");
                 var currentSelectVal = $(this).val();
-                var parentRowId = $(this).parents("tr").attr("id");
-                console.log(parentRowId + " > " + currentSelectName + " > " + currentSelectVal);
-                window.javatmp.plugins.ajaxJsonAction({
-                    url: javatmp.settings.contextPath + "/entity/moduleItemList",
-                    data: JSON.stringify({moduleId: currentSelectVal}),
-                    success: function (data) {
-                        alert(JSON.stringify(data));
-                    },
-                    error: function (data) {
 
-                    },
-                    complete: function (jqXHR, textStatus) {
+                var parentRow = $(this).parents("tr");
+                console.log(parentRow + " > " + currentSelectName + " > " + currentSelectVal);
+                if (currentSelectVal) {
+                    window.javatmp.plugins.ajaxJsonAction({
+                        url: javatmp.settings.contextPath + "/entity/moduleItemList",
+                        data: JSON.stringify({moduleId: currentSelectVal}),
+                        success: function (response) {
+//                            alert(JSON.stringify(response.data));
+                            $("select.moduleRefId", parentRow).empty(); // Remove all <option> child tags.
+                            $("select.moduleRefId", parentRow).append(// Append an object to the inside of the select box
+                                    $("<option></option>") // Yes you can do this.
+                                    .text("Kindly Select")
+                                    .val(""));
+                            $.each(response.data, function (index, item) { // Iterates through a collection
+                                $("select.moduleRefId", parentRow).append(// Append an object to the inside of the select box
+                                        $("<option></option>") // Yes you can do this.
+                                        .text(item.name)
+                                        .val(item.id));
+                            });
+                            $("select.moduleRefId", parentRow).trigger("change");
+                        },
+                        error: function (data) {
 
-                    }
-                });
+                        },
+                        complete: function (jqXHR, textStatus) {
 
+                        }
+                    });
+                } else {
+                    $("select.moduleRefId", parentRow).empty().trigger("change"); // Remove all <option> child tags.
+                }
             });
+            $(document).on("change", "select.moduleRefId", function (event) {
+                var currentSelectName = $(this).attr("name");
+                var currentSelectVal = $(this).val();
+                var parentRow = $(this).parents("tr");
+                var currentModuleVal = $("select.moduleId", parentRow).val();
+                console.log(parentRow + " > " + currentSelectName + " > " + currentSelectVal);
+                if (currentSelectVal) {
+                    var moduleTypeIds = {
+                        1: [{"Trade Receivable": 1}, {"PDC - Collection": 2}, {"Returne CHQ - Collection": 3}],
+                        2: [{"Trade Payable": 4}, {"PDC - Payment": 5}, {"Returne CHQ - Payments": 6}],
+                        3: [{"Payroll": 7}, {"Annual Leave": 8}, {"Unpaid Leave": 9}, {"Employee Advances": 10}, {"End Of Service": 11}],
+                        4: [{"Purchase": 12}, {"Sale - Inventory": 13}, {"Sale - Cost": 14}, {"Sale - Acc. Disposal": 15}, {"Sale - Profit": 16}],
+                        5: [{"Purchase": 17}, {"Depreciation": 18}, {"Sale - Cost Disposal": 19}, {"Wastage/Writte-off": 20}]
+                    };
+                    $("select.moduleTypeId", parentRow).empty(); // Remove all <option> child tags.
+                    $("select.moduleTypeId", parentRow).append(// Append an object to the inside of the select box
+                            $("<option></option>") // Yes you can do this.
+                            .text("Kindly Select")
+                            .val(""));
+                    $.each(moduleTypeIds[currentModuleVal], function (index, item) { // Iterates through a collection
+                        $.each(item, function (v, k) {
+                            $("select.moduleTypeId", parentRow).append(// Append an object to the inside of the select box
+                                    $("<option></option>") // Yes you can do this.
+                                    .text(v)
+                                    .val(k));
+                        });
+                    });
+                    $("select.moduleTypeId", parentRow).trigger("change");
+                } else {
+                    $("select.moduleTypeId", parentRow).empty().trigger("change"); // Remove all <option> child tags.
+                }
+            });
+
 
             $("#delete_row").click(function () {
                 if (i > 0) {
@@ -387,8 +436,11 @@
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {
                 $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenCompress);
                 $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenExpand);
+                $(document).off("change", "select.moduleId");
+                $(document).off("change", "select.moduleRefId");
                 return true;
             });
-        });
+        }
+        );
     </script>
 </div>
