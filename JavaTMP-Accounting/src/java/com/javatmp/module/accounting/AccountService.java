@@ -34,6 +34,12 @@ public class AccountService {
         this.jpaDaoHelper = jpaDaoHelper;
     }
 
+    public <T> List<T> getAllList(Class<T> classType) {
+        List<T> returnList = new LinkedList<T>();
+        returnList = this.jpaDaoHelper.findAll(classType);
+        return returnList;
+    }
+
     public List<Customer> getAllCustomerList() {
         List<Customer> customers = new LinkedList<>();
         customers = this.jpaDaoHelper.findAll(Customer.class);

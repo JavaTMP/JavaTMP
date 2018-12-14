@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.javatmp.module.customer.Customer;
+import com.javatmp.module.supplier.Supplier;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.domain.ResponseMessage;
 import com.javatmp.util.Constants;
@@ -40,6 +41,9 @@ public class ModuleItemList extends HttpServlet {
         if (moduleId == 1) { // customer
             List<Customer> customers = accountService.getAllCustomerList();
             responseMessage.setData(customers);
+        } else if (moduleId == 2) { // customer
+            List<Supplier> suppliers = accountService.getAllList(Supplier.class);
+            responseMessage.setData(suppliers);
         }
 
         MvcHelper.sendMessageAsJson(response, responseMessage);

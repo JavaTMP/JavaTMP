@@ -14,6 +14,10 @@ DROP TABLE IF EXISTS accountTransaction;
 
 DROP TABLE IF EXISTS customerAccount;
 DROP TABLE IF EXISTS customer;
+
+DROP TABLE IF EXISTS supplierAccount;
+DROP TABLE IF EXISTS supplier;
+
 DROP TABLE IF EXISTS moduleType;
 DROP TABLE IF EXISTS module;
 
@@ -284,7 +288,28 @@ CREATE TABLE customerAccount (
     CONSTRAINT custAcct_moduleTypeId_fk FOREIGN KEY (moduleTypeId) REFERENCES moduleType (id),
     CONSTRAINT custAcct_accountId_fk FOREIGN KEY (accountId) REFERENCES account (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
---
--- INSERT INTO customeraccount (`customerId`, `moduleTypeId`, `accountId`) VALUES
--- (1, 1, 12);
---
+
+
+CREATE TABLE supplier (
+    id BIGINT UNSIGNED not null AUTO_INCREMENT,
+    name varchar(128) not null,
+    status TINYINT,
+    creationDate TIMESTAMP NOT NULL,
+    CONSTRAINT supplier_id_pk PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO supplier (`name`, status, `creationDate`) VALUES
+('Planet Caffee', 1, DEFAULT),
+('Lebanases flower', 1, DEFAULT),
+('AL Manhal Bakery', 1, DEFAULT),
+('Hyundai', 1, DEFAULT);
+
+CREATE TABLE supplierAccount (
+    supplierId BIGINT UNSIGNED not null,
+    moduleTypeId int not null,
+    accountId BIGINT UNSIGNED not null,
+    CONSTRAINT supplierAccount_pk PRIMARY KEY (supplierId, moduleTypeId, accountId),
+    CONSTRAINT supAcct_supplierId_fk FOREIGN KEY (supplierId) REFERENCES supplier (id),
+    CONSTRAINT supAcct_moduleTypeId_fk FOREIGN KEY (moduleTypeId) REFERENCES moduleType (id),
+    CONSTRAINT supAcct_accountId_fk FOREIGN KEY (accountId) REFERENCES account (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
