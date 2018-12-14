@@ -10,6 +10,9 @@ import com.javatmp.module.customer.CustomerService;
 import com.javatmp.module.user.UserService;
 import com.javatmp.module.stats.UserStatsService;
 import com.javatmp.module.dms.DocumentService;
+import com.javatmp.module.employee.EmployeeService;
+import com.javatmp.module.fixedAsset.FixedAssetService;
+import com.javatmp.module.inventory.InventoryService;
 import com.javatmp.module.supplier.SupplierService;
 import java.util.Date;
 import java.util.logging.Logger;
@@ -29,6 +32,9 @@ public class ServicesFactory {
     private final AccountService accountService;
     private final CustomerService customerService;
     private final SupplierService supplierService;
+    private final EmployeeService employeeService;
+    private final FixedAssetService fixedAssetService;
+    private final InventoryService inventoryService;
 
     public ServicesFactory(String persistentUnitName) {
         logger.info("*** Start ServicesFactory Constructor @ [" + new Date() + "]");
@@ -44,6 +50,9 @@ public class ServicesFactory {
         this.accountService = new AccountService(jpaDaoHelper);
         this.customerService = new CustomerService(jpaDaoHelper);
         this.supplierService = new SupplierService(jpaDaoHelper);
+        this.employeeService = new EmployeeService(jpaDaoHelper);
+        this.fixedAssetService = new FixedAssetService(jpaDaoHelper);
+        this.inventoryService = new InventoryService(jpaDaoHelper);
 
         this.logger.info("*** End ServicesFactory Constructor @ [" + new Date() + "]");
     }
@@ -121,5 +130,26 @@ public class ServicesFactory {
      */
     public SupplierService getSupplierService() {
         return supplierService;
+    }
+
+    /**
+     * @return the employeeService
+     */
+    public EmployeeService getEmployeeService() {
+        return employeeService;
+    }
+
+    /**
+     * @return the fixedAssetService
+     */
+    public FixedAssetService getFixedAssetService() {
+        return fixedAssetService;
+    }
+
+    /**
+     * @return the inventoryService
+     */
+    public InventoryService getInventoryService() {
+        return inventoryService;
     }
 }

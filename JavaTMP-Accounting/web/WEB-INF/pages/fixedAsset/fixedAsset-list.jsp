@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <h5 class="my-3">Employee List</h5>
+    <h5 class="my-3">FixedAsset List</h5>
     <hr/>
     <div class="row">
         <div class="col">
@@ -9,15 +9,15 @@
                     <nav class="nav d-inline">
                         <a class="d-inline nav-link"
                            action-name="Add-New-User-Popup-Action" id="TableList-AddNewPopupId" href="javascript:;">
-                            Add New Employee
+                            Add New FixedAsset
                         </a>
                         <a class="d-inline nav-link" href="javascript:;"
                            action-name="Update-Complete-User-Action" id="TableList-UpdatePopupId">
-                            Update Selected Employee
+                            Update Selected FixedAsset
                         </a>
                         <a class="d-inline nav-link" href="javascript:;"
                            action-name="Delete-User-Action" id="TableList-DeletePopupId" >
-                            Delete Selected Employee
+                            Delete Selected FixedAsset
                         </a>
                     </nav>
                     <div class="options float-right">
@@ -29,8 +29,8 @@
                     <table cellspacing="0" class="table table-condensed table-bordered table-hover" id="list">
                         <thead>
                             <tr>
-                                <th style="width: 8rem;"><p class="m-0 p-0" style="width: 8rem;">Employee ID</p></th>
-                                <th style="width: 25rem;"><p class="m-0 p-0" style="width: 25rem;">Employee Name</p></th>
+                                <th style="width: 8rem;"><p class="m-0 p-0" style="width: 8rem;">FixedAsset ID</p></th>
+                                <th style="width: 25rem;"><p class="m-0 p-0" style="width: 25rem;">FixedAsset Name</p></th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -104,7 +104,7 @@
                 },
                 "ajax": {
                     "type": "POST",
-                    "url": javatmp.settings.contextPath + "/employee/ListEmployees",
+                    "url": javatmp.settings.contextPath + "/fixedAsset/ListFixedAssets",
                     dataType: "json",
                     contentType: "application/json; charset=UTF-8",
                     "data": function (currentDate) {
@@ -131,7 +131,7 @@
                     passData: {},
                     updateSizeAfterDataFetchTo: null, // default is  or null for standard or "modal-sm"
                     //                        size: "modal-lg",
-                    url: javatmp.settings.contextPath + "/employee/AddNewEmployeePopup",
+                    url: javatmp.settings.contextPath + "/fixedAsset/AddNewFixedAssetPopup",
                     ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady,
                     localData: {
                         callback: function (callbackData) {
@@ -181,11 +181,11 @@
                 if (selectedData.length > 0) {
                     var selectedRecord = selectedData[0];
                     window.javatmp.plugins.confirmAjaxAction(
-                            "Delete Employee Confirmation",
-                            "Are You Sure You want to delete selected Employee ?",
-                            "Delete Employee",
+                            "Delete FixedAsset Confirmation",
+                            "Are You Sure You want to delete selected FixedAsset ?",
+                            "Delete FixedAsset",
                             javatmp.settings.labels["global.cancel"],
-                            javatmp.settings.contextPath + "/employee/DeleteEmployee",
+                            javatmp.settings.contextPath + "/fixedAsset/DeleteFixedAsset",
                             selectedRecord,
                             function (data) {
                                 table.columns.adjust().draw();

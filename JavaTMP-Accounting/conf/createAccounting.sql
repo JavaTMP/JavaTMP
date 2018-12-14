@@ -1,12 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- * Author:  JavaTMP
- * Created: Oct 19, 2018
- */
+
 DROP TABLE IF EXISTS acctTransCtCenter;
 DROP TABLE IF EXISTS costCenter;
 
@@ -14,9 +6,14 @@ DROP TABLE IF EXISTS accountTransaction;
 
 DROP TABLE IF EXISTS customerAccount;
 DROP TABLE IF EXISTS customer;
-
 DROP TABLE IF EXISTS supplierAccount;
 DROP TABLE IF EXISTS supplier;
+DROP TABLE IF EXISTS employeeAccount;
+DROP TABLE IF EXISTS employee;
+DROP TABLE IF EXISTS fixedAssetAccount;
+DROP TABLE IF EXISTS fixedAsset;
+DROP TABLE IF EXISTS inventoryAccount;
+DROP TABLE IF EXISTS inventory;
 
 DROP TABLE IF EXISTS moduleType;
 DROP TABLE IF EXISTS module;
@@ -289,7 +286,6 @@ CREATE TABLE customerAccount (
     CONSTRAINT custAcct_accountId_fk FOREIGN KEY (accountId) REFERENCES account (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 CREATE TABLE supplier (
     id BIGINT UNSIGNED not null AUTO_INCREMENT,
     name varchar(128) not null,
@@ -312,4 +308,77 @@ CREATE TABLE supplierAccount (
     CONSTRAINT supAcct_supplierId_fk FOREIGN KEY (supplierId) REFERENCES supplier (id),
     CONSTRAINT supAcct_moduleTypeId_fk FOREIGN KEY (moduleTypeId) REFERENCES moduleType (id),
     CONSTRAINT supAcct_accountId_fk FOREIGN KEY (accountId) REFERENCES account (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE employee (
+    id BIGINT UNSIGNED not null AUTO_INCREMENT,
+    name varchar(128) not null,
+    status TINYINT,
+    creationDate TIMESTAMP NOT NULL,
+    CONSTRAINT employee_id_pk PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO employee (`name`, status, `creationDate`) VALUES
+('Mohamed Darim Wasif Sulibi', 1, DEFAULT),
+('Mohamed Ta7sheen', 1, DEFAULT),
+('Reem Mohamed', 1, DEFAULT),
+('Leen Mohamed', 1, DEFAULT);
+
+CREATE TABLE employeeAccount (
+    employeeId BIGINT UNSIGNED not null,
+    moduleTypeId int not null,
+    accountId BIGINT UNSIGNED not null,
+    CONSTRAINT employeeAccount_pk PRIMARY KEY (employeeId, moduleTypeId, accountId),
+    CONSTRAINT empAcct_supplierId_fk FOREIGN KEY (employeeId) REFERENCES employee (id),
+    CONSTRAINT empAcct_moduleTypeId_fk FOREIGN KEY (moduleTypeId) REFERENCES moduleType (id),
+    CONSTRAINT empAcct_accountId_fk FOREIGN KEY (accountId) REFERENCES account (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE fixedAsset (
+    id BIGINT UNSIGNED not null AUTO_INCREMENT,
+    name varchar(128) not null,
+    status TINYINT,
+    creationDate TIMESTAMP NOT NULL,
+    CONSTRAINT fixedAsset_id_pk PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO fixedAsset (`name`, status, `creationDate`) VALUES
+('table', 1, DEFAULT),
+('Car', 1, DEFAULT),
+('Land', 1, DEFAULT),
+('Pencil', 1, DEFAULT);
+
+CREATE TABLE fixedAssetAccount (
+    fixedAssetId BIGINT UNSIGNED not null,
+    moduleTypeId int not null,
+    accountId BIGINT UNSIGNED not null,
+    CONSTRAINT fixedAssetAccount_pk PRIMARY KEY (fixedAssetId, moduleTypeId, accountId),
+    CONSTRAINT fixedAsset_supplierId_fk FOREIGN KEY (fixedAssetId) REFERENCES fixedAsset (id),
+    CONSTRAINT fixedAsset_moduleTypeId_fk FOREIGN KEY (moduleTypeId) REFERENCES moduleType (id),
+    CONSTRAINT fixedAsset_accountId_fk FOREIGN KEY (accountId) REFERENCES account (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE inventory (
+    id BIGINT UNSIGNED not null AUTO_INCREMENT,
+    name varchar(128) not null,
+    status TINYINT,
+    creationDate TIMESTAMP NOT NULL,
+    CONSTRAINT inventory_id_pk PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO inventory (`name`, status, `creationDate`) VALUES
+('Computer', 1, DEFAULT),
+('Mouse', 1, DEFAULT),
+('Screen', 1, DEFAULT),
+('Wifi Router', 1, DEFAULT);
+
+CREATE TABLE inventoryAccount (
+    inventoryId BIGINT UNSIGNED not null,
+    moduleTypeId int not null,
+    accountId BIGINT UNSIGNED not null,
+    CONSTRAINT inventoryAccount_pk PRIMARY KEY (inventoryId, moduleTypeId, accountId),
+    CONSTRAINT inventory_supplierId_fk FOREIGN KEY (inventoryId) REFERENCES inventory (id),
+    CONSTRAINT inventory_moduleTypeId_fk FOREIGN KEY (moduleTypeId) REFERENCES moduleType (id),
+    CONSTRAINT inventory_accountId_fk FOREIGN KEY (accountId) REFERENCES account (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

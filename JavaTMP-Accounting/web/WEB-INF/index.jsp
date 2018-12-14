@@ -198,7 +198,7 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/fixed-asset/fixed-asset-list">
+                                        <a href="${pageContext.request.contextPath}/pages/fixedAsset/fixedAsset-list">
                                             Fixed Assets List
                                         </a>
                                     </li>
