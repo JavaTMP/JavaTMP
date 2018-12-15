@@ -17,8 +17,6 @@ import javax.persistence.Transient;
  */
 @Entity
 @Table(name = "accountgroup")
-@NamedQueries({
-    @NamedQuery(name = "Accountgroup.findAll", query = "SELECT a FROM Accountgroup a")})
 public class Accountgroup implements Serializable {
 
     @Transient

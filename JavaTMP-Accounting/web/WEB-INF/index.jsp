@@ -224,12 +224,12 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/reports/profit-loss-income">
+                                        <a href="${pageContext.request.contextPath}/accounting/ViewTrialBalance">
                                             Trail Balance
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/reports/trial-balance">
+                                        <a href="${pageContext.request.contextPath}/pages/reports/profit-loss-income">
                                             Income Statement
                                         </a>
                                     </li>

@@ -303,6 +303,39 @@ public class AccountService {
         }
     }
 
+    public List<Account> getLeafAccountsForTrialBalance() {
+        EntityManager em = null;
+        List<Account> retList = null;
+        try {
+            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            TypedQuery<Account> query = em.createQuery(
+                    "select new com.javatmp.module.accounting.Account("
+                    + "acct.id, acct.accountCode, acct.name, acct.parentAccountId, "
+                    + "sum(case when att.amount > 0 then att.amount else 0 end),"
+                    + "sum(case when att.amount < 0 then (att.amount * -1) else 0 end), "
+                    + "sum(case when coalesce(att.amount, 0) > 0 then (abs(coalesce(att.amount, 0)) * coalesce(at.debitSign, 0)) else (abs(coalesce(att.amount, 0)) * coalesce(at.creditSign, 0)) end), "
+                    + "acct.accountGroup, acct.cashFlowId, ag.name, at.name, at.debitSign, at.creditSign)"
+                    + " from Account acct "
+                    + " left outer join Accounttransaction att on acct.id = att.accountId"
+                    + " left outer join Transaction trans on att.transactionId = trans.id"
+                    + " left outer join Accountgroup ag on acct.accountGroup = ag.id"
+                    + " left outer join Accounttype at on at.id = ag.accountType"
+                    + " where acct.id not in (select parentAcct.parentAccountId"
+                    + " from Account parentAcct where parentAcct.parentAccountId is not null)"
+                    + " group by acct.id, acct.accountCode, acct.name, acct.parentAccountId, acct.accountGroup,"
+                    + " acct.cashFlowId, ag.name, at.name, at.debitSign, at.creditSign"
+                    + " order by at.id, ag.id, acct.id"
+                    + "", Account.class
+            );
+            retList = query.getResultList();
+            return retList;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
     public List<Account> getAccountForModuleTypeId(Moduletype moduletype) {
 
         EntityManager em = null;
