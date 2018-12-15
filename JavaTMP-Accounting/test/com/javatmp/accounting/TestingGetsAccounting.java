@@ -9,6 +9,7 @@ import com.javatmp.module.accounting.Account;
 import com.javatmp.module.accounting.AccountService;
 import com.javatmp.module.accounting.Costcenter;
 import com.javatmp.module.accounting.Module;
+import com.javatmp.module.accounting.Moduletype;
 import com.javatmp.module.customer.Customer;
 import com.javatmp.module.supplier.Supplier;
 import com.javatmp.mvc.MvcHelper;
@@ -67,6 +68,12 @@ public class TestingGetsAccounting {
 
         for (Supplier s : suppliers) {
             System.out.println(MvcHelper.toString(s));
+        }
+
+        List<Account> acctForType = accountService.getAccountForModuleTypeId(new Moduletype(5));
+
+        for (Account acct : acctForType) {
+            System.out.println(MvcHelper.deepToString(acct));
         }
 
     }

@@ -157,7 +157,7 @@
                                                     </select>
                                                 </td>
                                                 <td style="width: 15rem;">
-                                                    <select multiple="" class="select2wrapper costCenters form-control" data-rule-required="false">
+                                                    <select class="select2wrapper costCenters form-control" data-rule-required="false">
                                                         <c:choose>
                                                             <c:when test="${fn:length(requestScope.costcenters) > 0}">
                                                                 <option value="">${labels['page.text.kindlySelect']}</option>
@@ -328,16 +328,58 @@
                             .text("Kindly Select")
                             .val(""));
                     $.each(moduleTypeIds[currentModuleVal], function (index, item) { // Iterates through a collection
-                        $.each(item, function (v, k) {
+                        $.each(item, function (k, v) {
                             $("select.moduleTypeId", parentRow).append(// Append an object to the inside of the select box
                                     $("<option></option>") // Yes you can do this.
-                                    .text(v)
-                                    .val(k));
+                                    .text(k)
+                                    .val(v));
                         });
                     });
                     $("select.moduleTypeId", parentRow).trigger("change");
                 } else {
                     $("select.moduleTypeId", parentRow).empty().trigger("change"); // Remove all <option> child tags.
+                }
+            });
+
+            $(document).on("change", "select.moduleTypeId", function (event) {
+                var currentSelectName = $(this).attr("name");
+                var currentSelectVal = $(this).val();
+                var parentRow = $(this).parents("tr");
+                var currentModuleVal = $("select.moduleId", parentRow).val();
+                var currentModuleRefIdVal = $("select.moduleRefId", parentRow).val();
+                console.log("module [" + currentModuleVal + "], moduleTypeId [" + currentSelectVal + "] moduleRefIdVal[" + currentModuleRefIdVal + "]");
+                if (currentSelectVal) {
+                    window.javatmp.plugins.ajaxJsonAction({
+                        url: javatmp.settings.contextPath + "/entity/ModuleItemAccount",
+                        data: JSON.stringify({moduleId: currentModuleVal, moduleTypeId: currentSelectVal, moduleRefId: currentModuleRefIdVal}),
+                        success: function (response) {
+                            $("select.accountListSelect", parentRow).empty(); // Remove all <option> child tags.
+                            $.each(response.data, function (index, item) { // Iterates through a collection
+                                $("select.accountListSelect", parentRow).append(// Append an object to the inside of the select box
+                                        $("<option></option>") // Yes you can do this.
+                                        .text(item.name)
+                                        .val(item.id));
+                            });
+                            $("select.accountListSelect", parentRow).trigger("change");
+                        },
+                        error: function (data) {
+
+                        },
+                        complete: function (jqXHR, textStatus) {
+
+                        }
+                    });
+                } else {
+                    $("select.accountListSelect", parentRow).empty().trigger("change"); // Remove all <option> child tags.
+                    $("#rowTemplate").find("select.accountListSelect option").each(function () {
+                        if ($(this).val() === "")
+                            return;
+                        $("select.accountListSelect", parentRow).append(
+                                $("<option></option>")
+                                .text($(this).text()))
+                                .val($(this).val());
+                    });
+                    $("select.accountListSelect", parentRow).trigger("change");
                 }
             });
 
@@ -438,6 +480,7 @@
                 $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenExpand);
                 $(document).off("change", "select.moduleId");
                 $(document).off("change", "select.moduleRefId");
+                $(document).off("change", "select.moduleTypeId");
                 return true;
             });
         }

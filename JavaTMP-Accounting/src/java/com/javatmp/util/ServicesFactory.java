@@ -39,20 +39,20 @@ public class ServicesFactory {
     public ServicesFactory(String persistentUnitName) {
         logger.info("*** Start ServicesFactory Constructor @ [" + new Date() + "]");
         this.jpaDaoHelper = new JpaDaoHelper(persistentUnitName);
-        this.timezoneService = new TimezoneService(jpaDaoHelper);
-        this.themeService = new ThemeService(jpaDaoHelper);
-        this.languageService = new LanguageService(jpaDaoHelper);
-        this.countryService = new CountryService(jpaDaoHelper);
-        this.documentService = new DocumentService(jpaDaoHelper);
-        this.userService = new UserService(jpaDaoHelper);
-        this.userStatsService = new UserStatsService(jpaDaoHelper);
-        this.activityService = new ActivityService(jpaDaoHelper);
-        this.accountService = new AccountService(jpaDaoHelper);
-        this.customerService = new CustomerService(jpaDaoHelper);
-        this.supplierService = new SupplierService(jpaDaoHelper);
-        this.employeeService = new EmployeeService(jpaDaoHelper);
-        this.fixedAssetService = new FixedAssetService(jpaDaoHelper);
-        this.inventoryService = new InventoryService(jpaDaoHelper);
+        this.timezoneService = new TimezoneService(getJpaDaoHelper());
+        this.themeService = new ThemeService(getJpaDaoHelper());
+        this.languageService = new LanguageService(getJpaDaoHelper());
+        this.countryService = new CountryService(getJpaDaoHelper());
+        this.documentService = new DocumentService(getJpaDaoHelper());
+        this.userService = new UserService(getJpaDaoHelper());
+        this.userStatsService = new UserStatsService(getJpaDaoHelper());
+        this.activityService = new ActivityService(getJpaDaoHelper());
+        this.accountService = new AccountService(getJpaDaoHelper());
+        this.customerService = new CustomerService(getJpaDaoHelper());
+        this.supplierService = new SupplierService(getJpaDaoHelper());
+        this.employeeService = new EmployeeService(getJpaDaoHelper());
+        this.fixedAssetService = new FixedAssetService(getJpaDaoHelper());
+        this.inventoryService = new InventoryService(getJpaDaoHelper());
 
         this.logger.info("*** End ServicesFactory Constructor @ [" + new Date() + "]");
     }
@@ -151,5 +151,12 @@ public class ServicesFactory {
      */
     public InventoryService getInventoryService() {
         return inventoryService;
+    }
+
+    /**
+     * @return the jpaDaoHelper
+     */
+    public JpaDaoHelper getJpaDaoHelper() {
+        return jpaDaoHelper;
     }
 }

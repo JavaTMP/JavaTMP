@@ -301,6 +301,30 @@ public class AccountService {
         }
     }
 
+    public List<Account> getAccountForModuleTypeId(Moduletype moduletype) {
+
+        EntityManager em = null;
+        List<Account> retAccts = null;
+        try {
+            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            TypedQuery<Account> query = em.createQuery(
+                    "select new com.javatmp.module.accounting.Account("
+                    + "acct.id, acct.accountCode, acct.name, acct.accountGroup)"
+                    + " from Account acct "
+                    + "join Moduletype mt on acct.id = mt.rootAccountId "
+                    + "where mt.id = :moduleTypeId"
+                    + "", Account.class
+            );
+            query.setParameter("moduleTypeId", moduletype.getId());
+            retAccts = query.getResultList();
+            return retAccts;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
     public int updateAccount(Account accountToBeUpdated) {
         int updateStatus = 0;
         EntityManager em = null;
