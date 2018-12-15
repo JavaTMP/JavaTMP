@@ -267,7 +267,8 @@
                 actualRow.find("select.moduleRefId").attr("name", "accounttransactionList[" + i + "][moduleRefId]");
                 actualRow.find("select.moduleTypeId").attr("name", "accounttransactionList[" + i + "][moduleTypeId]");
                 actualRow.find("input.description").attr("name", "accounttransactionList[" + i + "][description]");
-                actualRow.find("select.costCenters").attr("name", "accounttransactionList[" + i + "][costcenterList][][id]");
+//                actualRow.find("select.costCenters").attr("name", "accounttransactionList[" + i + "][costcenterList][][id]");
+                actualRow.find("select.costCenters").attr("name", "accounttransactionList[" + i + "][costcenterList][0][id]");
                 javatmp.plugins.select2Wrapper(actualRow.find("select.select2wrapper"));
                 i++;
             });
@@ -347,16 +348,15 @@
                 var parentRow = $(this).parents("tr");
                 var currentModuleVal = $("select.moduleId", parentRow).val();
                 var currentModuleRefIdVal = $("select.moduleRefId", parentRow).val();
-                console.log("module [" + currentModuleVal + "], moduleTypeId [" + currentSelectVal + "] moduleRefIdVal[" + currentModuleRefIdVal + "]");
                 if (currentSelectVal) {
                     window.javatmp.plugins.ajaxJsonAction({
                         url: javatmp.settings.contextPath + "/entity/ModuleItemAccount",
                         data: JSON.stringify({moduleId: currentModuleVal, moduleTypeId: currentSelectVal, moduleRefId: currentModuleRefIdVal}),
                         success: function (response) {
-                            $("select.accountListSelect", parentRow).empty(); // Remove all <option> child tags.
-                            $.each(response.data, function (index, item) { // Iterates through a collection
-                                $("select.accountListSelect", parentRow).append(// Append an object to the inside of the select box
-                                        $("<option></option>") // Yes you can do this.
+                            $("select.accountListSelect", parentRow).empty();
+                            $.each(response.data, function (index, item) {
+                                $("select.accountListSelect", parentRow).append(
+                                        $("<option></option>")
                                         .text(item.name)
                                         .val(item.id));
                             });

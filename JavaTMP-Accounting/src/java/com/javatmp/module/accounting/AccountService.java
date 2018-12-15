@@ -197,8 +197,10 @@ public class AccountService {
                     em.persist(trans);
                     if (trans.getCostcenterList() != null && !trans.getCostcenterList().isEmpty()) {
                         for (Costcenter costcenter : trans.getCostcenterList()) {
-                            AcctTransCostcenter acctTransCostcenter = new AcctTransCostcenter(trans.getId(), costcenter.getId());
-                            em.persist(acctTransCostcenter);
+                            if (costcenter.getId() != null) {
+                                AcctTransCostcenter acctTransCostcenter = new AcctTransCostcenter(trans.getId(), costcenter.getId());
+                                em.persist(acctTransCostcenter);
+                            }
                         }
                     }
                 }
