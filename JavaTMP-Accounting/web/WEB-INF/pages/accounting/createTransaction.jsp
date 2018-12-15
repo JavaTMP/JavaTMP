@@ -363,10 +363,8 @@
                             $("select.accountListSelect", parentRow).trigger("change");
                         },
                         error: function (data) {
-
                         },
                         complete: function (jqXHR, textStatus) {
-
                         }
                     });
                 } else {
