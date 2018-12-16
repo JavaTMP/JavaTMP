@@ -21,21 +21,6 @@ import javax.persistence.Transient;
 @Table(name = "accounttransaction")
 public class Accounttransaction implements Serializable {
 
-    @Column(name = "moduleRefId")
-    private BigInteger moduleRefId;
-
-    @Transient
-    private Module module;
-
-    @Column(name = "moduleId")
-    private Integer moduleId;
-
-    @Transient
-    private Moduletype moduletype;
-
-    @Column(name = "moduleTypeId")
-    private Integer moduleTypeId;
-
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -43,16 +28,10 @@ public class Accounttransaction implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Long id;
-    @Column(name = "status")
-    private Short status;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+
+// @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "amount")
     private BigDecimal amount;
-
-    @Transient
-    private BigDecimal debit;
-    @Transient
-    private BigDecimal credit;
 
     @Column(name = "accountId")
     private Long accountId;
@@ -63,6 +42,24 @@ public class Accounttransaction implements Serializable {
     @Column(name = "description")
     private String description;
 
+    @Column(name = "moduleId")
+    private Integer moduleId;
+
+    @Column(name = "moduleRefId")
+    private BigInteger moduleRefId;
+
+    @Column(name = "moduleTypeId")
+    private Integer moduleTypeId;
+
+    @Column(name = "status")
+    private Short status;
+
+    @Transient
+    private BigDecimal debit;
+
+    @Transient
+    private BigDecimal credit;
+
     @Transient
     private Account account;
 
@@ -72,11 +69,32 @@ public class Accounttransaction implements Serializable {
     @Transient
     private List<Costcenter> costcenterList;
 
+    @Transient
+    private Module module;
+
+    @Transient
+    private Moduletype moduletype;
+
     public Accounttransaction() {
     }
 
     public Accounttransaction(Long id) {
         this.id = id;
+    }
+
+    public Accounttransaction(Long id, BigDecimal amount, Long accountId, Long transactionId, String description, Integer moduleId,
+            BigInteger moduleRefId, Integer moduleTypeId, Short status) {
+//id, amount, accountId,  transactionId, description, moduleId,
+//             moduleRefId, moduleTypeId, status
+        this.id = id;
+        this.amount = amount;
+        this.accountId = accountId;
+        this.transactionId = transactionId;
+        this.description = description;
+        this.moduleId = moduleId;
+        this.moduleRefId = moduleRefId;
+        this.moduleTypeId = moduleTypeId;
+        this.status = status;
     }
 
     public Long getId() {

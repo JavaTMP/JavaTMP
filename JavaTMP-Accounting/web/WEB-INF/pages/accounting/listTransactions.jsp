@@ -1,6 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
-    <h5 class="my-3">Customer List</h5>
+    <h5 class="my-3">Transactions List</h5>
     <hr/>
     <div class="row">
         <div class="col">
@@ -12,13 +12,19 @@
                     </div>
                 </div>
                 <div class="card-body p-1">
-                    <table cellspacing="0" class="table table-sm table-condensed table-bordered table-hover" id="list">
+                    <table cellspacing="0" class="table table-sm table-condensed table-bordered" id="TransactionList">
                         <thead>
                             <tr>
+                                <th></th>
                                 <th style="width: 3rem;"><p class="m-0 p-0" style="width: 3rem;">ID</p></th>
                                 <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">Code</p></th>
                                 <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">Transaction Date</p></th>
-                                <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">creationDate Date</p></th>
+                                <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">note</p></th>
+                                <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">specialNumber</p></th>
+                                <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">entity</p></th>
+                                <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">status</p></th>
+                                <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">voucherTypeId</p></th>
+                                <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">creationDate</p></th>
                             </tr>
                         </thead>
                         <tbody></tbody>
@@ -36,8 +42,22 @@
         /*
         Embed CSS styling for current page.
         */
-        table.dataTable tbody tr {
+        #TransactionList tbody tr {
             cursor: pointer;
+        }
+
+        td.details-control {
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            cursor: pointer;
+            text-align: center;
+            width: 1.25em;
+        }
+        td.details-control:before {
+            content: "\f105";
+        }
+        tr.shown td.details-control:before {
+            content: "\f107";
         }
     </style>
 
@@ -58,7 +78,7 @@
             // <--- HERE --->
             //
 
-            var listTableElement = $('#list');
+            var listTableElement = $('#TransactionList');
             var table = listTableElement.DataTable({
                 // https://datatables.net/reference/option/dom
                 dom: "<'row'>" +
@@ -70,15 +90,17 @@
                 //                select: true,
                 keys: true,
                 select: "single",
-                scrollY: 250,
+                scrollY: 1000,
                 scrollX: true,
                 "autoWidth": false,
-                scrollCollapse: false,
+                scrollCollapse: true,
                 "searching": true,
                 searchDelay: 500,
                 orderCellsTop: true, // important to for two row header with filteration below header column names.
                 "processing": true,
                 "serverSide": true,
+                "order": [[1, 'asc']],
+                fixedColumns: false,
                 "rowCallback": function (row, data, index) {
                     $(row).attr("data-row-id", data.id);
                 },
@@ -105,13 +127,120 @@
                     }
                 },
                 columns: [
+                    {
+                        "class": "details-control",
+                        "orderable": false,
+                        "data": null,
+                        "defaultContent": ""
+                    },
                     {data: 'id', name: "id", width: "3rem", "render": javatmp.plugins.DataTableColRenderWrapper("3rem")},
                     {data: 'code', name: "code", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
                     {data: 'transactionDate', name: "transactionDate", "type": "date", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                    {data: 'note', name: "note", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                    {data: 'specialNumber', name: "specialNumber", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                    {data: 'entity', name: "entity", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                    {data: 'status', name: "status", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                    {data: 'voucherTypeId', name: "voucherTypeId", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
                     {data: 'creationDate', name: "creationDate", "type": "date", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")}
                 ]
             });
+            function format(d, transDivId) {
+                return `<div class="ml-3 my-1 p-1 border" id="` + transDivId + `">
+                            <table id="detail-table` + transDivId + `" cellspacing="0" class="table table-sm table-condensed table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 3rem;"><p class="m-0 p-0" style="width: 3rem;">id</p></th>
+                                        <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">transactionId</p></th>
+                                        <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">accountId</p></th>
+                                        <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">moduleId</p></th>
+                                        <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">moduleRefId</p></th>
+                                        <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">moduleTypeId</p></th>
+                                        <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">amount</p></th>
+                                        <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">status</p></th>
+                                        <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">description</p></th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>`;
+            }
 
+            function generateDetailTable(d, transDivId) {
+                var detailsTable = $("#detail-table" + transDivId);
+                var table = detailsTable.DataTable({
+                    // https://datatables.net/reference/option/dom
+                    dom: "<'row'>" +
+                            "<'row'<'col-sm-12'tr>>" +
+                            "<'row'>",
+                    //                dom: "<'row'<'col-sm-12 p-0'tr>>" +
+                    //                        "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4 pt-2 text-right'l>>"
+                    //                ,
+                    //                select: true,
+                    keys: true,
+                    select: "single",
+                    scrollY: true,
+                    scrollX: true,
+                    "autoWidth": false,
+                    scrollCollapse: false,
+                    "searching": true,
+                    searchDelay: 500,
+                    orderCellsTop: true, // important to for two row header with filteration below header column names.
+                    "processing": true,
+                    "serverSide": true,
+                    "rowCallback": function (row, data, index) {
+                    },
+                    "drawCallback": function (settings) {
+                    },
+                    initComplete: function (settings, json) {
+                        var api = this.api();
+                        // prepare id filter search field:
+                    },
+                    "ajax": {
+                        "type": "POST",
+                        "url": javatmp.settings.contextPath + "/accounting/ListEntries",
+                        dataType: "json",
+                        contentType: "application/json; charset=UTF-8",
+                        "data": function (currentDate) {
+                            currentDate._ajaxGlobalBlockUI = false; // window blocked until data return
+                            currentDate.columns[1].search.value = d.id;
+                            return JSON.stringify(currentDate);
+                        },
+                        "dataSrc": function (json) {
+                            json["recordsTotal"] = json.data.recordsTotal;
+                            json["recordsFiltered"] = json.data.recordsFiltered;
+                            return json.data.data;
+                        }
+                    },
+                    columns: [
+                        {data: 'id', name: "id", width: "3rem", "render": javatmp.plugins.DataTableColRenderWrapper("3rem")},
+                        {data: 'transactionId', name: "transactionId", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                        {data: 'accountId', name: "accountId", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                        {data: 'moduleId', name: "moduleId", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                        {data: 'moduleRefId', name: "moduleRefId", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                        {data: 'moduleTypeId', name: "moduleTypeId", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                        {data: 'amount', name: "amount", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                        {data: 'status', name: "status", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                        {data: 'description', name: "description", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")}
+                    ]
+                });
+            }
+
+// Add event listener for opening and closing details
+            $('tbody', listTableElement).on('click', 'td.details-control', function () {
+                var tr = $(this).closest('tr');
+                var row = table.row(tr);
+                var transDivId = "trans-" + row.data().id;
+                if (row.child.isShown()) {
+                    // This row is already open - close it
+                    row.child.hide();
+                    tr.removeClass('shown');
+                } else {
+                    // Open this row
+                    row.child(format(row.data(), transDivId)).show();
+                    generateDetailTable(row.data(), transDivId);
+                    tr.addClass('shown');
+                }
+            });
             var addNewPopupButton = $("#TableList-AddNewPopupId");
             addNewPopupButton.on("click", function (event) {
                 BootstrapModalWrapperFactory.createAjaxModal({
@@ -132,7 +261,6 @@
                     }
                 });
             });
-
             var updateSelectedButton = $("#TableList-UpdatePopupId");
             updateSelectedButton.on("click", function (event) {
 
@@ -142,7 +270,6 @@
                 var selectedData = table.rows({selected: true}).data();
                 if (selectedData.length > 0) {
                     var selectedRecord = selectedData[0];
-
                     BootstrapModalWrapperFactory.createAjaxModal({
                         message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
                         passData: selectedRecord,
@@ -163,7 +290,6 @@
                     BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
                 }
             });
-
             var deleteSelectedButton = $("#TableList-DeletePopupId");
             deleteSelectedButton.on("click", function (event) {
                 var selectedData = table.rows({selected: true}).data();
@@ -184,27 +310,21 @@
                     BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
                 }
             });
-
-
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
             });
-
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
                 // fire when user resize browser window or sidebar hide / show
                 table.columns.adjust().draw();
             });
-
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenCompress, function (event, card) {
                 // when card compress by pressing the top right tool button
                 table.columns.adjust().draw();
             });
-
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenExpand, function (event, card) {
                 // when card Expand by pressing the top right tool button
                 table.columns.adjust().draw();
             });
-
             /**
              * When another sidebar menu item pressed and before container issues new ajax request.
              * You can cancel, destroy, or remove any thing here before replace main output ajax container.

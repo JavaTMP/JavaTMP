@@ -58,7 +58,7 @@ public class TestingGetsAccounting {
             System.out.println(MvcHelper.toString(costcenter));
         }
 
-        List<Customer> customers = accountService.getAllCustomerList();
+        List<Customer> customers = accountService.getAllList(Customer.class);
 
         for (Customer customer : customers) {
             System.out.println(MvcHelper.toString(customer));

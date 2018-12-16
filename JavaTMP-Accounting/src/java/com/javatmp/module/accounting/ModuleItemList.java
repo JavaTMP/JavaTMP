@@ -42,7 +42,7 @@ public class ModuleItemList extends HttpServlet {
         responseMessage.setOverAllStatus(true);
 
         if (moduleId == 1) { // customer
-            List<Customer> customers = accountService.getAllCustomerList();
+            List<Customer> customers = accountService.getAllList(Customer.class);
             responseMessage.setData(customers);
         } else if (moduleId == 2) { // customer
             List<Supplier> suppliers = accountService.getAllList(Supplier.class);

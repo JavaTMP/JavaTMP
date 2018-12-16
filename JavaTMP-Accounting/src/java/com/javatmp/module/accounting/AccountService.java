@@ -407,9 +407,17 @@ public class AccountService {
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaQuery<Transaction> cq = cb.createQuery(Transaction.class);
             Root<Transaction> from = cq.from(Transaction.class);
-            cq.multiselect(from.get(Transaction_.id), from.get(Transaction_.code),
+            cq.multiselect(
+                    from.get(Transaction_.id),
+                    from.get(Transaction_.code),
+                    from.get(Transaction_.transactionDate),
+                    from.get(Transaction_.note),
+                    from.get(Transaction_.specialNumber),
+                    from.get(Transaction_.entity),
+                    from.get(Transaction_.status),
                     from.get(Transaction_.creationDate),
-                    from.get(Transaction_.transactionDate));
+                    from.get(Transaction_.voucherTypeId)
+            );
 
             List<Order> orders = tableRequest.getOrder();
             if (orders != null && orders.size() > 0) {
@@ -453,6 +461,90 @@ public class AccountService {
             retList = query.getResultList();
 
             DataTableResults<Transaction> dataTableResult = new DataTableResults<>();
+            dataTableResult.setData(retList);
+
+            CriteriaQuery<Long> cqLong = cb.createQuery(Long.class);
+            from = cqLong.from(cq.getResultType());
+
+            cqLong.select(cb.count(from));
+            cqLong.where(predicate);
+            Long allCount = em.createQuery(cqLong).getSingleResult();
+
+            dataTableResult.setRecordsTotal(allCount);
+            dataTableResult.setRecordsFiltered(allCount);
+            dataTableResult.setDraw(tableRequest.getDraw());
+
+            return dataTableResult;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+
+    }
+
+    public DataTableResults<Accounttransaction> listAllEntries(DataTableRequest<Accounttransaction> tableRequest) throws ParseException {
+        List<Accounttransaction> retList = null;
+        EntityManager em = null;
+        try {
+            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Accounttransaction> cq = cb.createQuery(Accounttransaction.class);
+            Root<Accounttransaction> from = cq.from(Accounttransaction.class);
+            cq.multiselect(
+                    from.get(Accounttransaction_.id),
+                    from.get(Accounttransaction_.amount),
+                    from.get(Accounttransaction_.accountId),
+                    from.get(Accounttransaction_.transactionId),
+                    from.get(Accounttransaction_.description),
+                    from.get(Accounttransaction_.moduleId),
+                    from.get(Accounttransaction_.moduleRefId),
+                    from.get(Accounttransaction_.moduleTypeId),
+                    from.get(Accounttransaction_.status)
+            );
+
+            List<Order> orders = tableRequest.getOrder();
+            if (orders != null && orders.size() > 0) {
+                for (Order order : orders) {
+                    Integer columnIndex = order.getColumn();
+                    DataTableColumnSpecs orderColumn = tableRequest.getColumns().get(columnIndex);
+
+                    Path<?> sortPath = this.jpaDaoHelper.convertStringToPath(from, orderColumn.getData());
+                    if (order.getDir().value().equals("desc")) {
+                        cq.orderBy(cb.desc(sortPath));
+                    } else {
+                        cq.orderBy(cb.asc(sortPath));
+                    }
+                }
+            }
+
+            // where clouse:
+            Predicate predicate = cb.conjunction();
+            for (DataTableColumnSpecs column : tableRequest.getColumns()) {
+                String columnName = column.getName();
+                String columnSearchValue = column.getSearch().getValue().trim();
+                logger.info("column name [" + columnName + "] search value [" + columnSearchValue + "]");
+                if (columnSearchValue != null && !columnSearchValue.equals("")) {
+                    //predicate = cb.and(predicate, cb.equal(from.get(columnName), columnSearchValue));
+                    if (columnName.equals("id")) {
+                        Long searchValue = new Long(columnSearchValue);
+                        predicate = cb.and(predicate, cb.equal(from.get(Accounttransaction_.id), searchValue));
+                    }
+                    if (columnName.equals("transactionId")) {
+                        String searchValue = new String(columnSearchValue);
+                        predicate = cb.and(predicate, cb.equal(from.get(Accounttransaction_.transactionId), searchValue));
+                    }
+                }
+            }
+            cq.where(predicate);
+            TypedQuery<Accounttransaction> query = em.createQuery(cq);
+
+            query.setFirstResult(tableRequest.getStart());
+            query.setMaxResults(tableRequest.getLength());
+
+            retList = query.getResultList();
+
+            DataTableResults<Accounttransaction> dataTableResult = new DataTableResults<>();
             dataTableResult.setData(retList);
 
             CriteriaQuery<Long> cqLong = cb.createQuery(Long.class);

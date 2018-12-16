@@ -76,11 +76,18 @@ public class Transaction implements Serializable {
         this.creationDate = creationDate;
     }
 
-    public Transaction(Long id, String code, Date creationDate, Date transactionDate) {
+    public Transaction(Long id, String code, Date transactionDate, String note, String specialNumber,
+            String entity, Short status, Date creationDate, Integer voucherTypeId) {
         this.id = id;
         this.code = code;
-        this.creationDate = creationDate;
         this.transactionDate = transactionDate;
+        this.note = note;
+        this.specialNumber = specialNumber;
+        this.entity = entity;
+        this.status = status;
+        this.creationDate = creationDate;
+        this.voucherTypeId = voucherTypeId;
+
     }
 
     public Long getId() {
