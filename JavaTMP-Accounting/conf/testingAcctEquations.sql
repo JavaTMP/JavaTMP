@@ -11,3 +11,7 @@ left outer join accounttype at on at.id = ag.`accountType`
 group by account0_.id , account0_.accountCode , account0_.name ,
 account0_.parentAccountId, account0_.accountGroup, account0_.cashFlowId
 ,ag.`name`, at.name, at.debitSign, at.creditSign;
+
+select Id, `accountId`, amount, @total := @total + amount as cumulative_sum
+from accounttransaction, (Select @total := 0) as total
+where `accountId` = 65;
