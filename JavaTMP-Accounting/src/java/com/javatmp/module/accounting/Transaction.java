@@ -76,6 +76,13 @@ public class Transaction implements Serializable {
         this.creationDate = creationDate;
     }
 
+    public Transaction(Long id, String code, Date creationDate, Date transactionDate) {
+        this.id = id;
+        this.code = code;
+        this.creationDate = creationDate;
+        this.transactionDate = transactionDate;
+    }
+
     public Long getId() {
         return id;
     }

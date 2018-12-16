@@ -150,6 +150,11 @@
                                             Create Transaction
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/accounting/listTransactions">
+                                            List Transactions
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li>
@@ -306,146 +311,140 @@
         <script src="${pageContext.request.contextPath}/assets/app/js/javatmp.plugins.js?v=48" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/assets/app/jquery.serialize-object.min.js" type="text/javascript"></script>
         <script type="text/javascript">
-            jQuery(function ($) {
-                var defaults = {
+                jQuery(function ($) {
+                    var defaults = {
                     defaultPassData: {_ajax: "ajax", _ajaxGlobalBlockUI: true, _handleAjaxErrorGlobally: true},
                     defaultUrl: '${pageContext.request.contextPath}/pages/home/home',
-                    floatDefault: "${labels['global.floatDefault']}",
-                    floatReverse: "${labels['global.floatReverse']}",
-                    direction: "${labels['global.direction']}",
-                    isRTL: ${labels['global.direction'] == 'ltr' ? 'false' : 'true'},
-                    contextPath: '${pageContext.request.contextPath}',
-                    networkDateFormat: "YYYY-MM-DDTHH:mm:ss.SSSZ",
-                    dateFormat: "DD/MM/YYYY",
-                    dateTimeFormat: "DD/MM/YYYY HH:mm",
-                    dateTimeSecondFormat: "DD/MM/YYYY HH:mm:ss",
-                    labels: {}
+                                floatDefault: "${labels['global.floatDefault']}",
+                                floatReverse: "${labels['global.floatReverse']}",
+                                direction: "${labels['global.direction']}",
+                                isRTL: ${labels['global.direction'] == 'ltr' ? 'false' : 'true'},
+                                contextPath: '${pageContext.request.contextPath}',
+                                networkDateFormat: "YYYY-MM-DDTHH:mm:ss.SSSZ",
+                                dateFormat: "DD/MM/YYYY",
+                                dateTimeFormat: "DD/MM/YYYY HH:mm",
+                                dateTimeSecondFormat: "DD/MM/YYYY HH:mm:ss",
+                            labels: {}
                 };
 
-                $("#global-label-items-block > i[k]").each(function (index, element) {
-                    var key = $(element).attr("k");
-                    var value = $(element).html();
-                    defaults.labels[key] = value;
+                                $("#global-label-items-block > i[k]").each(function (index, element) {
+                                var key = $(element).attr("k");
+                                var value = $(element).html();
+                            defaults.labels[key] = value;
                 });
 
                 index.init(defaults);
 
-                javatmp.plugins.init({
-                    locale: "${sessionScope.user.lang}",
-                    direction: javatmp.settings.direction,
-                    isRTL: javatmp.settings.isRTL,
-                    defaultSelectPlaceholder: javatmp.settings.labels['page.text.kindlySelect'],
-                    dateFormat: javatmp.settings.dateFormat,
-                    dateTimeFormat: javatmp.settings.dateTimeFormat
+                                javatmp.plugins.init({
+                                locale: "${sessionScope.user.lang}",
+                                direction: javatmp.settings.direction,
+                                isRTL: javatmp.settings.isRTL,
+                                defaultSelectPlaceholder: javatmp.settings.labels['page.text.kindlySelect'],
+                                dateFormat: javatmp.settings.dateFormat,
+                            dateTimeFormat: javatmp.settings.dateTimeFormat
                 });
 
-                javatmp.user = {};
-                javatmp.user.id = "${sessionScope.user.id}";
+                            javatmp.user = {};
+                        javatmp.user.id = "${sessionScope.user.id}";
                 javatmp.user.lang = "${sessionScope.user.lang}";
 
-                javatmp.settings.handle401Error = function (jqXHR, textStatus, errorThrown) {
-                    var modalMessage = null;
-                    var redirectURL = null;
-                    try {
-                        var ResponseMessage = JSON.parse(jqXHR.responseText);
-                        modalMessage = ResponseMessage.message;
-                        redirectURL = ResponseMessage.redirectURL;
-                    } catch (ex) {
-                        modalMessage = jqXHR.responseText;
-                        redirectURL = javatmp.settings.contextPath + "/";
+                            javatmp.settings.handle401Error = function (jqXHR, textStatus, errorThrown) {
+                            var modalMessage = null;
+                            var redirectURL = null;
+                                try {
+                                var ResponseMessage = JSON.parse(jqXHR.responseText);
+                                modalMessage = ResponseMessage.message;
+                            redirectURL = ResponseMessage.redirectURL;
+                                } catch (ex) {
+                                modalMessage = jqXHR.responseText;
+                            redirectURL = javatmp.settings.contextPath + "/";
                     }
 
-                    var modalWrapper = BootstrapModalWrapperFactory.createModal({
-                        message: modalMessage,
-                        title: jqXHR.statusText + " : " + jqXHR.status,
-                        closable: false,
-                        closeByBackdrop: false,
-                        buttons: [
-                            {
-                                label: "${labels['global.return']}",
-                                cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    modalWrapper.hide();
-                                }
-                            },
-                            {
-                                label: "${labels['globa.redirectToLoginPage']}",
-                                cssClass: "btn btn-danger",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    modalWrapper.hide();
-                                    setTimeout(function () {
-                                        window.location.replace(redirectURL);
-                                    }, 200);
-                                }
-                            }
-                        ]
-                    });
-                    modalWrapper.show();
-                };
-            });
-        </script>
+                                var modalWrapper = BootstrapModalWrapperFactory.createModal({
+                                message: modalMessage,
+                                title: jqXHR.statusText + " : " + jqXHR.status,
+                                closable: false,
+                                closeByBackdrop: false,
+                                    buttons: [
+                                        {
+                                                        label: "${labels['global.return']}",
+                                                        cssClass: "btn btn-secondary",
+                                                            action: function (modalWrapper, button, buttonData, originalEvent) {
+                                                        modalWrapper.hide();
+                                                    }
+                                                    },
+                                                        {
+                                                        label: "${labels['globa.redirectToLoginPage']}",
+                                                        cssClass: "btn btn-danger",
+                                                            action: function (modalWrapper, button, buttonData, originalEvent) {
+                                                            modalWrapper.hide();
+                                                                setTimeout(function () {
+                                                            window.location.replace(redirectURL);
+                                                        }, 200);
+                                                    }
+                                                }
+                                            ]
+                                            });
+                                        modalWrapper.show();
+                                    };
+            });        </script>
         <script type="text/javascript">
-            jQuery(function ($) {
-                $.ajaxSetup({
-                    error: function (xhr, ajaxOptions, thrownError) {
-                        if (this.url.indexOf("_handleAjaxErrorGlobally=false") === -1) {
+                jQuery(function ($) {
+                    $.ajaxSetup({
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            if (this.url.indexOf("_handleAjaxErrorGlobally=false") === -1) {
                             var msg = 'Error on calling request.';
-                            toastr.error(msg, xhr.statusText + " : " + xhr.status, {
+                                toastr.error(msg, xhr.statusText + " : " + xhr.status, {
                                 timeOut: 4000,
                                 progressBar: true,
                                 rtl: javatmp.settings.isRTL,
-                                positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
-                            });
-                        }
+                            positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                        });
+                    }
                     },
-                    statusCode: {
-                        401: function (jqXHR, textStatus, errorThrown) {
-                            if (this.url.indexOf("_handleAjaxErrorGlobally=false") === -1) {
-                                javatmp.settings.handle401Error(jqXHR, textStatus, errorThrown);
-                            }
+                        statusCode: {
+                            401: function (jqXHR, textStatus, errorThrown) {
+                                if (this.url.indexOf("_handleAjaxErrorGlobally=false") === -1) {
+                            javatmp.settings.handle401Error(jqXHR, textStatus, errorThrown);
                         }
                     }
-                });
+                }
             });
-        </script>
+            });        </script>
         <script type="text/javascript">
-            jQuery(function ($) {
+                jQuery(function ($) {
                 // register logout handler:
-                $(".logout-home-btn-id").on("click", function () {
-                    window.location.replace($(this).attr("action-ref-by-href"));
-                });
+                    $(".logout-home-btn-id").on("click", function () {
+                window.location.replace($(this).attr("action-ref-by-href"));
             });
-        </script>
+            });        </script>
         <!-- build:remove -->
         <script>
-            (function (i, s, o, g, r, a, m) {
+                (function (i, s, o, g, r, a, m) {
                 i['GoogleAnalyticsObject'] = r;
-                i[r] = i[r] || function () {
-                    (i[r].q = i[r].q || []).push(arguments);
+                    i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments);
                 }, i[r].l = 1 * new Date();
-                a = s.createElement(o),
-                        m = s.getElementsByTagName(o)[0];
+                        a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
                 a.async = 1;
                 a.src = g;
-                m.parentNode.insertBefore(a, m);
+            m.parentNode.insertBefore(a, m);
             })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-            ga('create', 'UA-104738122-1', 'auto');
-        </script>
+            ga('create', 'UA-104738122-1', 'auto');        </script>
         <script type="text/javascript">
-            jQuery(function ($) {
-                $(document).ajaxComplete(function (event, xhr, ajaxOptions) {
-                    if (ajaxOptions.url.indexOf("${pageContext.request.contextPath}/assets/data") === -1) {
+                jQuery(function ($) {
+                    $(document).ajaxComplete(function (event, xhr, ajaxOptions) {
+                        if (ajaxOptions.url.indexOf("${pageContext.request.contextPath}/assets/data") === -1) {
                         var ajaxurl = window.location.pathname + "#" + ajaxOptions.url;
-                        ga('send', 'pageview', ajaxurl);
-                    }
-                });
+                    ga('send', 'pageview', ajaxurl);
+                }
             });
-        </script>
+            });        </script>
         <!-- /build -->
         <script type="text/javascript">
-            jQuery(function ($) {
-                $("#oneTimeOverlay").remove();
-            });
-        </script>
+                jQuery(function ($) {
+            $("#oneTimeOverlay").remove();
+            });        </script>
     </body>
 </html>
