@@ -131,7 +131,7 @@
                             </li>
                             <li>
                                 <a class="has-arrow" href="#">
-                                    <i class="far fa-lg fa-fw fa-object-group"></i>
+                                    <i class="far fa-lg fa-fw fa-lightbulb"></i>
                                     Accounting
                                 </a>
                                 <ul>
