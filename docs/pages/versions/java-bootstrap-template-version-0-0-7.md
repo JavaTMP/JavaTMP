@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.7 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.7 (Current Development Version)
 
-## on
+## 3cb9d75 on Dec 30, 2018, 4:53 AM GMT+4
 - Update The following packages:
     - gulp-connect from 5.6.1 to 5.7.0
     - gulp-header from 2.0.5 to 2.0.7
