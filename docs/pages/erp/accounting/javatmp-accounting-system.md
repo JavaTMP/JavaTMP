@@ -311,3 +311,4 @@ Main Pages:
 - [Accounting Basics](https://actionstep.atlassian.net/wiki/spaces/KB/pages/5406942/Accounting+Basics)
 - [https://aliphia.com/](https://aliphia.com/)
 - [https://dafater.biz/](https://dafater.biz/)
+- [https://docs.microsoft.com/ar-sa/dynamics365/unified-operations/financials/accounts-receivable/accounts-receivable](https://docs.microsoft.com/ar-sa/dynamics365/unified-operations/financials/accounts-receivable/accounts-receivable)
