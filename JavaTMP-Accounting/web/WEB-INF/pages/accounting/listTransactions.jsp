@@ -145,7 +145,7 @@
                 ]
             });
             function format(d, transDivId) {
-                return `<div class="ml-3 my-1 p-1 border" id="` + transDivId + `">
+                return `<div class="ml-0 my-0 p-1 border" id="` + transDivId + `">
                             <table id="detail-table` + transDivId + `" cellspacing="0" class="table table-sm table-condensed table-bordered">
                                 <thead>
                                     <tr>

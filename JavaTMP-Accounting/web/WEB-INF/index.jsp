@@ -239,6 +239,11 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a href="${pageContext.request.contextPath}/pages/reports/balance-sheet">
+                                            Balance Sheet
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="${pageContext.request.contextPath}/pages/reports/profit-loss-income">
                                             Income Statement
                                         </a>

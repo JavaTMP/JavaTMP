@@ -14,4 +14,4 @@ account0_.parentAccountId, account0_.accountGroup, account0_.cashFlowId
 
 select Id, `accountId`, amount, @total := @total + amount as cumulative_sum
 from accounttransaction, (Select @total := 0) as total
-where `accountId` = 65;
+where `accountId` = 10;
