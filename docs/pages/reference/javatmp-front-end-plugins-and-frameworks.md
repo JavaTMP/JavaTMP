@@ -83,9 +83,20 @@ MIT
 ### [jQuery IonRange Slider](https://github.com/IonDen/ion.rangeSlider/)
 Ion.RangeSlider. Is an easy, flexible and responsive range slider with tons of options.
 
-Mandatory on all versions and templates. Merged and Moved in Starter Versions. RTL NOTsupported YET SO if you want a RTL slider use bootstrap-slider instead, but this plugin is better than bootstrap-slider in features.
+Mandatory on all versions and templates. Merged and Moved in Starter Versions.
+RTL is NOT supported YET SO if you want a RTL slider use bootstrap-slider instead,
+but this plugin is better than bootstrap-slider in features.
 
 jQuery
+
+MIT
+
+### [bootstrap-slider](https://github.com/seiyria/bootstrap-slider)
+A slider component for Bootstrap.
+
+Mandatory on all versions and templates. Merged and Moved in Starter Versions. RTL NOTsupported YET SO if you want a RTL slider use bootstrap-slider instead, but this plugin is better than bootstrap-slider in features.
+
+jQuery, Bootstrap
 
 MIT
 
