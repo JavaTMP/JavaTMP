@@ -3,6 +3,12 @@ title: Java Bootstrap Template Version 0.0.7 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.7 (Current Development Version)
 
+## on
+- Update The following packages:
+    - bootstrap-modal-wrapper from 1.0.15 to 1.0.16
+    - bootstrap-reverse from 1.0.10 to 1.0.11
+- Run `gulp` command which will use default task and generate `dist` folders.
+
 ## 3cb9d75 on Dec 30, 2018, 4:53 AM GMT+4
 - Update The following packages:
     - gulp-connect from 5.6.1 to 5.7.0

@@ -213,14 +213,14 @@
                     },
                     columns: [
                         {data: 'id', name: "id", width: "3rem", "render": javatmp.plugins.DataTableColRenderWrapper("3rem")},
-                        {data: 'transactionId', name: "transactionId", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                        {data: 'transactionId', "visible": true, name: "transactionId", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
                         {data: 'accountId', name: "accountId", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
                         {data: 'moduleId', name: "moduleId", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
                         {data: 'moduleRefId', name: "moduleRefId", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
                         {data: 'moduleTypeId', name: "moduleTypeId", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
                         {data: 'amount', name: "amount", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
-                        {data: 'status', name: "status", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
-                        {data: 'description', name: "description", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")}
+                        {data: 'status', "visible": true, name: "status", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                        {data: 'description', "visible": true, name: "description", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")}
                     ]
                 });
             }
