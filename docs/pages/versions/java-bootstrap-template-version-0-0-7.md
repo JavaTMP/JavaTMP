@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.7 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.7 (Current Development Version)
 
-## on
+## 66c2519 on Jan 1, 2019, 4:37 AM GMT+4
 - Update The following packages:
     - bootstrap-modal-wrapper from 1.0.15 to 1.0.16
     - bootstrap-reverse from 1.0.10 to 1.0.11
