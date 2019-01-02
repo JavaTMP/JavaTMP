@@ -103,6 +103,6 @@
     "jquery-ui-touch-punch": "git+https://github.com/furf/jquery-ui-touch-punch.git",
     "canvas-toBlob": "git+https://github.com/eligrey/canvas-toBlob.js.git",
     "Blob": "git+https://github.com/eligrey/Blob.js",
-    "DevExpress-bootstrap-themes":"git+https://github.com/DevExpress/bootstrap-themes.git"
+    "DevExpress-bootstrap-themes": "git+https://github.com/DevExpress/bootstrap-themes.git"
   }
 }

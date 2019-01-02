@@ -312,3 +312,4 @@ Main Pages:
 - [https://aliphia.com/](https://aliphia.com/)
 - [https://dafater.biz/](https://dafater.biz/)
 - [https://docs.microsoft.com/ar-sa/dynamics365/unified-operations/financials/accounts-receivable/accounts-receivable](https://docs.microsoft.com/ar-sa/dynamics365/unified-operations/financials/accounts-receivable/accounts-receivable)
+- [http://www.weberp.org/weberp/ManualContents.php](http://www.weberp.org/weberp/ManualContents.php)
