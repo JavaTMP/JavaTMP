@@ -141,7 +141,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/accounting/general-ledger">
+                                        <a href="${pageContext.request.contextPath}/accounting/GeneralLedger">
                                             General Ledger
                                         </a>
                                     </li>

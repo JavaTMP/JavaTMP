@@ -135,7 +135,7 @@ CREATE TABLE module (
     name varchar(128),
     description varchar(1024),
     status TINYINT,
-    creationDate TIMESTAMP NOT NULL,
+    creationDate TIMESTAMP NOT NULL default CURRENT_TIMESTAMP ,
     CONSTRAINT module_id_pk PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -153,7 +153,7 @@ CREATE TABLE moduleType (
     description varchar(1024),
     status TINYINT,
     rootAccountId BIGINT UNSIGNED not null,
-    creationDate TIMESTAMP NOT NULL,
+    creationDate TIMESTAMP NOT NULL default CURRENT_TIMESTAMP,
     CONSTRAINT moduleType_id_pk PRIMARY KEY (id),
     CONSTRAINT moduelType_moduleId_fk FOREIGN KEY (moduleId) REFERENCES module (id),
     CONSTRAINT moduleType_rootAccountId_fk FOREIGN KEY (rootAccountId) REFERENCES account (id),
@@ -191,7 +191,7 @@ CREATE TABLE voucherType (
     name varchar(128) not null,
     description varchar(1024),
     status TINYINT,
-    creationDate TIMESTAMP NOT NULL,
+    creationDate TIMESTAMP NOT NULL default CURRENT_TIMESTAMP,
     CONSTRAINT transactionType_id_pk PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -235,7 +235,7 @@ CREATE TABLE costCenter (
     parentId BIGINT UNSIGNED,
     description varchar(1024),
     status TINYINT,
-    creationDate TIMESTAMP NOT NULL,
+    creationDate TIMESTAMP NOT NULL default CURRENT_TIMESTAMP,
     CONSTRAINT costCenter_id_pk PRIMARY KEY (id),
     CONSTRAINT costCenter_parentId_fk FOREIGN KEY (parentId) REFERENCES costCenter (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -266,7 +266,7 @@ CREATE TABLE customer (
     id BIGINT UNSIGNED not null AUTO_INCREMENT,
     name varchar(128) not null,
     status TINYINT,
-    creationDate TIMESTAMP NOT NULL,
+    creationDate TIMESTAMP NOT NULL default CURRENT_TIMESTAMP,
     CONSTRAINT customer_id_pk PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -290,7 +290,7 @@ CREATE TABLE supplier (
     id BIGINT UNSIGNED not null AUTO_INCREMENT,
     name varchar(128) not null,
     status TINYINT,
-    creationDate TIMESTAMP NOT NULL,
+    creationDate TIMESTAMP NOT NULL default CURRENT_TIMESTAMP,
     CONSTRAINT supplier_id_pk PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -314,7 +314,7 @@ CREATE TABLE employee (
     id BIGINT UNSIGNED not null AUTO_INCREMENT,
     name varchar(128) not null,
     status TINYINT,
-    creationDate TIMESTAMP NOT NULL,
+    creationDate TIMESTAMP NOT NULL default CURRENT_TIMESTAMP,
     CONSTRAINT employee_id_pk PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -338,7 +338,7 @@ CREATE TABLE fixedAsset (
     id BIGINT UNSIGNED not null AUTO_INCREMENT,
     name varchar(128) not null,
     status TINYINT,
-    creationDate TIMESTAMP NOT NULL,
+    creationDate TIMESTAMP NOT NULL default CURRENT_TIMESTAMP,
     CONSTRAINT fixedAsset_id_pk PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -363,7 +363,7 @@ CREATE TABLE inventory (
     id BIGINT UNSIGNED not null AUTO_INCREMENT,
     name varchar(128) not null,
     status TINYINT,
-    creationDate TIMESTAMP NOT NULL,
+    creationDate TIMESTAMP NOT NULL default CURRENT_TIMESTAMP,
     CONSTRAINT inventory_id_pk PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

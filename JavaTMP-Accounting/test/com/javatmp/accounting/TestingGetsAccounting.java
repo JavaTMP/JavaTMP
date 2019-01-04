@@ -76,6 +76,12 @@ public class TestingGetsAccounting {
             System.out.println(MvcHelper.deepToString(acct));
         }
 
+        List<Account> gl = accountService.getGeneralLedgerAccounts();
+
+        for (Account acct : gl) {
+            System.out.println(MvcHelper.toString(acct));
+        }
+
     }
 
 }

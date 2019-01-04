@@ -1,5 +1,5 @@
 
-CREATE DATABASE IF NOT EXISTS appdb;
+CREATE DATABASE IF NOT EXISTS accountingdb;
 USE appdb;
 
 source drop_tables.sql
