@@ -1,5 +1,6 @@
-select entryDate, transId, acctTransId, accountId, debit, credit, entryBalance,
-SUM(entryBalance) OVER(ORDER BY entryDate, transId, acctTransId) AS cumulative_sum
+select * from (select entryDate, transId, acctTransId, accountId, debit, credit, entryBalance,
+SUM(entryBalance) OVER(PARTITION BY accountId ORDER BY entryDate, acctTransId
+) AS cumulative_sum
 from (
 select transactio2_.transactionDate as entryDate, accounttra1_.id as acctTransId, transactio2_.id as transId, account0_.id as accountId, account0_.accountCode as accountCode, account0_.name as col_2_0_, account0_.parentAccountId as col_3_0_,
 (case when accounttra1_.amount>0 then accounttra1_.amount else 0 end) as debit,
@@ -12,7 +13,11 @@ left outer join transaction transactio2_ on (accounttra1_.transactionId=transact
 left outer join accountgroup accountgro3_ on (account0_.accountGroup=accountgro3_.id)
 left outer join accounttype accounttyp4_ on (accounttyp4_.id=accountgro3_.accountType)
 ) entries
-where accountId = 23;
+) cumulative
+where
+
+entryDate between STR_TO_DATE('30/12/2018 00:00:00', '%d/%m/%Y %H:%i:%s')
+                and STR_TO_DATE('31/12/2018 23:59:00', '%d/%m/%Y %H:%i:%s') ;
 
 
 
