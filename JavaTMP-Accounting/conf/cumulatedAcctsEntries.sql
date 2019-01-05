@@ -1,23 +1,25 @@
-select * from (select entryDate, transId, acctTransId, accountId, debit, credit, entryBalance,
+CREATE OR REPLACE VIEW transactionEntries AS
+select entryDate, transId, acctTransId, accountId, debit, credit, entryBalance,
 SUM(entryBalance) OVER(PARTITION BY accountId ORDER BY entryDate, acctTransId
-) AS cumulative_sum
+) AS accountBalance
 from (
-select transactio2_.transactionDate as entryDate, accounttra1_.id as acctTransId, transactio2_.id as transId, account0_.id as accountId, account0_.accountCode as accountCode, account0_.name as col_2_0_, account0_.parentAccountId as col_3_0_,
-(case when accounttra1_.amount>0 then accounttra1_.amount else 0 end) as debit,
-(case when accounttra1_.amount<0 then accounttra1_.amount*-1 else 0 end) as credit,
-(case when coalesce(accounttra1_.amount, 0)>0 then abs(coalesce(accounttra1_.amount, 0))*coalesce(accounttyp4_.debitSign, 0) else abs(coalesce(accounttra1_.amount, 0))*coalesce(accounttyp4_.creditSign, 0) end) as entryBalance,
-account0_.accountGroup as col_7_0_, account0_.cashFlowId as col_8_0_, accountgro3_.name as col_9_0_, accounttyp4_.name as col_10_0_, accounttyp4_.debitSign as col_11_0_, accounttyp4_.creditSign as col_12_0_
-from accounttransaction accounttra1_
-join account account0_ on (account0_.id=accounttra1_.accountId)
-left outer join transaction transactio2_ on (accounttra1_.transactionId=transactio2_.id)
-left outer join accountgroup accountgro3_ on (account0_.accountGroup=accountgro3_.id)
-left outer join accounttype accounttyp4_ on (accounttyp4_.id=accountgro3_.accountType)
-) entries
-) cumulative
-where
-
-entryDate between STR_TO_DATE('30/12/2018 00:00:00', '%d/%m/%Y %H:%i:%s')
-                and STR_TO_DATE('31/12/2018 23:59:00', '%d/%m/%Y %H:%i:%s') ;
+select trans.transactionDate as entryDate, acctTrans.id as acctTransId, trans.id as transId,
+acct.id as accountId, acct.accountCode as accountCode, acct.name as acctName, acct.parentAccountId as parentAccountId,
+(case when acctTrans.amount>0 then acctTrans.amount else 0 end) as debit,
+(case when acctTrans.amount<0 then acctTrans.amount*-1 else 0 end) as credit,
+(case when coalesce(acctTrans.amount, 0) > 0 then abs(coalesce(acctTrans.amount, 0))*coalesce(acctt.debitSign, 0) else abs(coalesce(acctTrans.amount, 0))*coalesce(acctt.creditSign, 0) end) as entryBalance,
+acct.accountGroup as col_7_0_, acct.cashFlowId as col_8_0_, acctgrp.name as col_9_0_, acctt.name as col_10_0_, acctt.debitSign as col_11_0_, acctt.creditSign as col_12_0_
+from accounttransaction acctTrans
+join account acct on (acct.id=acctTrans.accountId)
+left outer join transaction trans on (acctTrans.transactionId=trans.id)
+left outer join accountgroup acctgrp on (acct.accountGroup=acctgrp.id)
+left outer join accounttype acctt on (acctt.id = acctgrp.accountType)
+) entries;
+select te.*, last_VALUE(accountBalance) OVER(PARTITION BY accountId ORDER BY entryDate, acctTransId) AS balance
+from transactionEntries te;
+-- where
+-- entryDate between STR_TO_DATE('01/12/2018 20:00:00', '%d/%m/%Y %H:%i:%s')
+--                 and STR_TO_DATE('30/12/2018 20:00:00', '%d/%m/%Y %H:%i:%s') limit 1000000;
 
 
 

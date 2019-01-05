@@ -129,6 +129,7 @@ INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup
 INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (63,'100500101','Sale - Cost','description',12,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-12 06:53:00',32);
 INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (64,'100700101','Wastage/Write-off','description',15,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-12 06:54:11',44);
 INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (65,'100100105','Bank','description',1,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-12 11:16:38',7);
+INSERT INTO `account` (`id`, `accountCode`, `name`, description, `accountGroup`, debit, credit, balance, status, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (66, '100200103', 'Sales tax liability', 'description', 3, 0E-8, 0E-8, 0E-8, 1, NULL, '2019-01-05 09:09:57.0', 21);
 
 CREATE TABLE module (
     id BIGINT UNSIGNED not null AUTO_INCREMENT,
