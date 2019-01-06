@@ -7,7 +7,7 @@ select trans.transactionDate as entryDate, acctTrans.id as acctTransId, trans.id
 acct.id as accountId, acct.accountCode as accountCode, acct.name as acctName, acct.parentAccountId as parentAccountId,
 acctTrans.amount as amount,
 (case when acctTrans.amount > 0 then acctTrans.amount else 0 end) as debit,
-(case when acctTrans.amount < 0 then acctTrans.amount*-1 else 0 end) as credit,
+(case when acctTrans.amount < 0 then acctTrans.amount * -1 else 0 end) as credit,
 (case when coalesce(acctTrans.amount, 0) > 0 then abs(coalesce(acctTrans.amount, 0)) * coalesce(acctt.debitSign, 0)
 else abs(coalesce(acctTrans.amount, 0)) * coalesce(acctt.creditSign, 0) end) as entryBalance,
 acct.accountGroup as accountGroup, acct.cashFlowId as cashFlowId, acctgrp.name as acctGrpName,
