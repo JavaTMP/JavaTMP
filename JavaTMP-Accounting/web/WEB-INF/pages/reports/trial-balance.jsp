@@ -16,7 +16,7 @@
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-hover trialBalanceAccountTable">
+                        <table class="table table-sm table-bordered table-hover trialBalanceAccountTable">
                             <thead>
                                 <tr>
                                     <th style="width: 10rem;" class="text-center">Account Code</th>
