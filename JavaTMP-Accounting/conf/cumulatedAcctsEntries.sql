@@ -17,8 +17,6 @@ left outer join accounttransaction acctTrans on (acct.id = acctTrans.accountId)
 left outer join transaction trans on (acctTrans.transactionId = trans.id)
 left outer join accountgroup acctgrp on (acct.accountGroup = acctgrp.id)
 left outer join accounttype acctt on (acctt.id = acctgrp.accountType)
-left outer join accounttransaction acctTrans on (acct.id = acctTrans.accountId)
-left outer join transaction trans on (acctTrans.transactionId = trans.id)
 ) entries;
 select te.*
 from transactionEntries te where accountid = 31;
