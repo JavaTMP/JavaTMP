@@ -156,13 +156,16 @@
                             <table id="detail-table` + transDivId + `" cellspacing="0" class="table table-sm table-condensed table-bordered">
                                 <thead>
                                     <tr>
+                                        <th>entryDate</th>
                                         <th>id</th>
                                         <th>transactionId</th>
                                         <th>accountId</th>
                                         <th>moduleId</th>
                                         <th>moduleRefId</th>
                                         <th>moduleTypeId</th>
-                                        <th>amount</th>
+                                        <th>debit</th>
+                                        <th>credit</th>
+                                        <th>balance</th>
                                         <th>status</th>
                                         <th>description</th>
                                     </tr>
@@ -209,7 +212,7 @@
                         contentType: "application/json; charset=UTF-8",
                         "data": function (currentDate) {
                             currentDate._ajaxGlobalBlockUI = false; // window blocked until data return
-                            currentDate.columns[2].search.value = d.id;
+                            currentDate.columns[3].search.value = d.id;
                             return JSON.stringify(currentDate);
                         },
                         "dataSrc": function (json) {
@@ -219,13 +222,16 @@
                         }
                     },
                     columns: [
+                        {data: 'entryDate', name: "entryDate", "type": "date", width: "9rem", "render": javatmp.plugins.DataTableColRenderWrapper("9rem")},
                         {data: 'id', name: "id"},
                         {data: 'transactionId', "visible": true, name: "transactionId"},
                         {data: 'accountId', name: "accountId"},
                         {data: 'moduleId', name: "moduleId"},
                         {data: 'moduleRefId', name: "moduleRefId"},
                         {data: 'moduleTypeId', name: "moduleTypeId"},
-                        {data: 'amount', name: "amount"},
+                        {data: 'debit', name: "debit"},
+                        {data: 'credit', name: "credit"},
+                        {data: 'accountBalance', name: "accountBalance"},
                         {data: 'status', "visible": true, name: "status"},
                         {data: 'description', "visible": true, name: "description"}
                     ]

@@ -603,4 +603,81 @@ public class AccountService {
 
     }
 
+    public DataTableResults<TransactionEntry> listAllTransactionEntry(DataTableRequest<TransactionEntry> tableRequest) throws ParseException {
+        List<TransactionEntry> retList = null;
+        EntityManager em = null;
+        try {
+            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<TransactionEntry> cq = cb.createQuery(TransactionEntry.class);
+            Root<TransactionEntry> from = cq.from(TransactionEntry.class);
+            cq.select(from);
+
+//            List<Order> orders = tableRequest.getOrder();
+//            if (orders != null && orders.size() > 0) {
+//                for (Order order : orders) {
+//                    Integer columnIndex = order.getColumn();
+//                    DataTableColumnSpecs orderColumn = tableRequest.getColumns().get(columnIndex);
+//
+//                    Path<?> sortPath = this.jpaDaoHelper.convertStringToPath(from, orderColumn.getData());
+//                    if (order.getDir().value().equals("desc")) {
+//                        cq.orderBy(cb.desc(sortPath));
+//                    } else {
+//                        cq.orderBy(cb.asc(sortPath));
+//                    }
+//                }
+//            }
+            // where clouse:
+            Predicate predicate = cb.conjunction();
+            for (DataTableColumnSpecs column : tableRequest.getColumns()) {
+                String columnName = column.getName();
+                String columnSearchValue = column.getSearch().getValue().trim();
+                logger.info("column name [" + columnName + "] search value [" + columnSearchValue + "]");
+                if (columnSearchValue != null && !columnSearchValue.equals("")) {
+                    //predicate = cb.and(predicate, cb.equal(from.get(columnName), columnSearchValue));
+                    if (columnName.equals("id")) {
+                        Long searchValue = new Long(columnSearchValue);
+                        predicate = cb.and(predicate, cb.equal(from.get(TransactionEntry_.id), searchValue));
+                    }
+                    if (columnName.equals("transactionId")) {
+                        String searchValue = new String(columnSearchValue);
+                        predicate = cb.and(predicate, cb.equal(from.get(TransactionEntry_.transactionId), searchValue));
+                    }
+                    if (columnName.equals("accountId")) {
+                        String searchValue = new String(columnSearchValue);
+                        predicate = cb.and(predicate, cb.equal(from.get(TransactionEntry_.accountId), searchValue));
+                    }
+                }
+            }
+            cq.where(predicate);
+            TypedQuery<TransactionEntry> query = em.createQuery(cq);
+
+            query.setFirstResult(tableRequest.getStart());
+            query.setMaxResults(tableRequest.getLength());
+
+            retList = query.getResultList();
+
+            DataTableResults<TransactionEntry> dataTableResult = new DataTableResults<>();
+            dataTableResult.setData(retList);
+
+            CriteriaQuery<Long> cqLong = cb.createQuery(Long.class);
+            from = cqLong.from(cq.getResultType());
+
+            cqLong.select(cb.count(from));
+            cqLong.where(predicate);
+            Long allCount = em.createQuery(cqLong).getSingleResult();
+
+            dataTableResult.setRecordsTotal(allCount);
+            dataTableResult.setRecordsFiltered(allCount);
+            dataTableResult.setDraw(tableRequest.getDraw());
+
+            return dataTableResult;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+
+    }
+
 }
