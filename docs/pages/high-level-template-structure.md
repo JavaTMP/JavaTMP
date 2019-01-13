@@ -245,6 +245,32 @@ Read more about our
 Please see the complete list of front-end jquery and bootstrap libraries we used in our template in the following page:
 [JavaTMP Front-end Plugins And Frameworks](/pages/reference/javatmp-front-end-plugins-and-frameworks).
 
+## Front-end Resources Customization
+You should read first : [Setting Up Development Environment](/pages/setting-up-development-environment) .
+
+After we downloaded front-end plugins using Node's `npm` command , We remove many plugins unneeded files and kept only needed
+files like dist folder and images, and merge them to be included in 'javatmp-plugins-all.min.js' when gulp's task 'generate-dist' run.
+
+So it is your responsibilities to decide which plugins you need and if you want to merge them in one large js or css files.
+
+we provide a separate CSS customization file for each plugin, so it is simple to change and understand.
+
+You should include custom CSS file after each plugin's main css file. for this reason we include the
+plugins customizations CSS style after main plugin CSS files. like this:
+```
+<link href="assets/dist/css/javatmp-plugins-all.min.css" rel="stylesheet" type="text/css"/>
+<link href="assets/dist/css/javatmp-default.min.css" rel="stylesheet" type="text/css"/>
+```
+
+### Custom Plugins CSS
+All plugins in JavaTMP template projects are located in the `./node_modules` and `./web/components` folder and
+their custom SASS files are located in `./web/assets/src/sass|-rtl/plugins` folder. The compiled CSS files are generated
+in gulp's task `generate-dist`.
+
+Kindly see the source code of gulp's task `generate-dist` for more information about this process.
+and folder `./web/assets/src/sass/plugins` and `./web/assets/src/sass-rtl/plugins`
+for more information about the plugins that we customized to adapt default or custom bootstrap themes and skins.
+
 ## Plugins in Projects
 After we downloaded front-end plugins using Node's `npm` command , We copied only needed files like dist folder and images
 as defined in `config.plugins` in gulp's task `copy-components` from `./node_modules` to `./web/components`
@@ -253,9 +279,7 @@ So it is your responsibilities to decide which plugins you need and if you want 
 
 We provide a CSS customization for some of the plugins styling to apply our themes to them in a form of SASS' SCSS syntax.
 Those custom CSS files reside separately in `./web/assets/src/sass/plugins` or `./web/assets/src/sass-rtl/plugins` folders.
-And they compile and merge with bootstrap and JavaTMP styling and moved to `./web/assets/dist/css/javatmp-*.min.css`
-the following page describes the front-end customization for some of the plugins:
-[JavaTMP Resources Customization](/pages/javatmp-frontend-resources-customization).
+And they compile and merge with bootstrap and JavaTMP styling and moved to `./web/assets/dist/css/javatmp-*.min.css`.
 
 ## JavaTMP CSS/SASS Template Files
 The main minificated CSS files for JavaTMP template are located in the `./web/assets/dist/css` folder,
