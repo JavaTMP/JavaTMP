@@ -197,6 +197,7 @@
                     orderCellsTop: true, // important to for two row header with filteration below header column names.
                     "processing": true,
                     "serverSide": true,
+                    "order": [[0, "asc"], [1, "asc"]],
                     "rowCallback": function (row, data, index) {
                     },
                     "drawCallback": function (settings) {
@@ -222,17 +223,17 @@
                         }
                     },
                     columns: [
-                        {data: 'entryDate', name: "entryDate", "type": "date", width: "9rem", "render": javatmp.plugins.DataTableColRenderWrapper("9rem")},
+                        {data: 'entryDate', name: "entryDate", "type": "date", width: "7rem", "render": javatmp.plugins.DataTableColRenderWrapper("7rem")},
                         {data: 'id', name: "id"},
                         {data: 'transactionId', "visible": true, name: "transactionId"},
-                        {data: 'accountId', name: "accountId"},
+                        {data: 'accountId', name: "accountId", "visible": false},
                         {data: 'moduleId', name: "moduleId"},
                         {data: 'moduleRefId', name: "moduleRefId"},
                         {data: 'moduleTypeId', name: "moduleTypeId"},
                         {data: 'debit', name: "debit"},
                         {data: 'credit', name: "credit"},
                         {data: 'accountBalance', name: "accountBalance"},
-                        {data: 'status', "visible": true, name: "status"},
+                        {data: 'status', "visible": false, name: "status"},
                         {data: 'description', "visible": true, name: "description"}
                     ]
                 });

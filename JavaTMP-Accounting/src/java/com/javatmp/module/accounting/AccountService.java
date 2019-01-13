@@ -613,20 +613,20 @@ public class AccountService {
             Root<TransactionEntry> from = cq.from(TransactionEntry.class);
             cq.select(from);
 
-//            List<Order> orders = tableRequest.getOrder();
-//            if (orders != null && orders.size() > 0) {
-//                for (Order order : orders) {
-//                    Integer columnIndex = order.getColumn();
-//                    DataTableColumnSpecs orderColumn = tableRequest.getColumns().get(columnIndex);
-//
-//                    Path<?> sortPath = this.jpaDaoHelper.convertStringToPath(from, orderColumn.getData());
-//                    if (order.getDir().value().equals("desc")) {
-//                        cq.orderBy(cb.desc(sortPath));
-//                    } else {
-//                        cq.orderBy(cb.asc(sortPath));
-//                    }
-//                }
-//            }
+            List<Order> orders = tableRequest.getOrder();
+            if (orders != null && orders.size() > 0) {
+                for (Order order : orders) {
+                    Integer columnIndex = order.getColumn();
+                    DataTableColumnSpecs orderColumn = tableRequest.getColumns().get(columnIndex);
+
+                    Path<?> sortPath = this.jpaDaoHelper.convertStringToPath(from, orderColumn.getData());
+                    if (order.getDir().value().equals("desc")) {
+                        cq.orderBy(cb.desc(sortPath));
+                    } else {
+                        cq.orderBy(cb.asc(sortPath));
+                    }
+                }
+            }
             // where clouse:
             Predicate predicate = cb.conjunction();
             for (DataTableColumnSpecs column : tableRequest.getColumns()) {
