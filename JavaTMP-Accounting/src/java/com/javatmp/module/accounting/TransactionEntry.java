@@ -26,32 +26,44 @@ public class TransactionEntry implements Serializable {
     @Column(name = "id")
     @Id
     private Long id;
+
     @Column(name = "transactionId")
     private Long transactionId;
+
     @Column(name = "moduleId")
     private Long moduleId;
+
     @Column(name = "moduleTypeId")
     private Integer moduleTypeId;
+
     @Column(name = "moduleRefId")
     private Long moduleRefId;
+
     @Column(name = "accountId")
     private Long accountId;
+
     @Column(name = "description")
     private String description;
+
     @Column(name = "status")
     private Short status;
+
     @Column(name = "entryDate")
     @Temporal(TemporalType.TIMESTAMP)
     private Date entryDate;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+
     @Column(name = "amount")
     private BigDecimal amount;
+
     @Column(name = "debit")
     private BigDecimal debit;
+
     @Column(name = "credit")
     private BigDecimal credit;
+
     @Column(name = "entryAmount")
     private BigDecimal entryAmount;
+
     @Column(name = "accountBalance")
     private BigDecimal accountBalance;
 

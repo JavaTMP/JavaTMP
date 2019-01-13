@@ -35,7 +35,7 @@ public class ListEntries extends HttpServlet {
             ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
             AccountService accountService = sf.getAccountService();
             DataTableRequest tableRequest = (DataTableRequest) MvcHelper.readObjectFromRequest(request, DataTableRequest.class);
-            DataTableResults<Accounttransaction> dataTableResult = accountService.listAllEntries(tableRequest);
+            DataTableResults<TransactionEntry> dataTableResult = accountService.listAllTransactionEntry(tableRequest);
             responseMessage.setOverAllStatus(true);
             responseMessage.setData(dataTableResult);
             MvcHelper.sendMessageAsJson(response, responseMessage);
