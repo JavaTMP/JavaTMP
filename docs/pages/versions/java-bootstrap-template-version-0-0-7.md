@@ -3,6 +3,16 @@ title: Java Bootstrap Template Version 0.0.7 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.7 (Current Development Version)
 
+## on
+- Update The following packages:
+    - gulp-git from 2.8.0 to 2.8.1
+    - bootstrap-slider from 10.4.2 to 10.6.0
+    - fullcalendar from 3.9.0 to 3.10.0
+    - inputmask from 4.0.5 to 4.0.6
+    - jquery.fancytree from 2.30.1 to 2.30.2
+- Add `form-serializer` plugin to every projects and include it in the gulp build task.
+- Run `gulp` command which will use default task and generate `dist` folders.
+
 ## 66c2519 on Jan 1, 2019, 4:37 AM GMT+4
 - Update The following packages:
     - bootstrap-modal-wrapper from 1.0.15 to 1.0.16

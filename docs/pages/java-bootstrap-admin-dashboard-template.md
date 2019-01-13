@@ -49,7 +49,7 @@ Java Version Notes:
 *   Use Google Gson 2.8.2
 *   Use Standard Taglib 1.2
 *   Use [hibernate-5.2.17](http://hibernate.org/orm/releases/5.2/ "Hibernate 5.2.17 Home & Download Page") for Java JPA 2.1 Object Relational Mapping with Mysql Database.
-*   Use [mysql-connector-java-8.0.11.jar](https://dev.mysql.com/downloads/connector/j/8.0.html "Java Mysql Connector 8 for JDBC driver") for Java Mysql Connector 8 for JDBC driver.
+*   Use [mysql-connector-java-8.0.13.jar](https://dev.mysql.com/downloads/connector/j/8.0.html "Java Mysql Connector 8 for JDBC driver") for Java Mysql Connector 8 for JDBC driver.
 *   Use [simplecaptcha-1.2.1.jar](https://sourceforge.net/projects/simplecaptcha/ "Simplecaptcha Home & Download Page") in public registration page.
 *   Custom Java MVC using Servlet/JSP and above libraries.
 
@@ -116,3 +116,4 @@ Credits:
 *   Numeral.js - [https://github.com/adamwdraper/Numeral-js](https://github.com/adamwdraper/Numeral-js "A javascript library for formatting and manipulating numbers")
 *   Moment Timezone - [https://github.com/moment/moment-timezone/](https://github.com/moment/moment-timezone/ "Timezone support for moment.js")
 *   DevExpress bootstrap 4 themes - [https://github.com/DevExpress/bootstrap-themes](https://github.com/DevExpress/bootstrap-themes)
+*   jQuery Serialize Object - [https://github.com/macek/jquery-serialize-object](https://github.com/macek/jquery-serialize-object)

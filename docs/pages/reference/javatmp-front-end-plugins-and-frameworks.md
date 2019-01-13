@@ -556,3 +556,9 @@ DevExpress Themes for Bootstrap
 
 MIT
 
+### [jQuery Serialize Object](https://github.com/macek/jquery-serialize-object)
+
+Converts HTML form into JavaScript object
+
+Copyright (c) 2014, Paul Macek
+

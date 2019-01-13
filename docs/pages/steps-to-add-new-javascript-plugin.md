@@ -28,10 +28,9 @@ We use the following steps when we add new plugins for our template to make sure
 16.  Use the custom styling file for new plugin after the main plugin styling files in your demo page or wherever you use the plugin as we don't merge files for plugins and each custom plugins styling should use explicitly after the its main styling files.
 17.  Update by adding a row of information to [JavaTMP Front-end Plugins And Frameworks](/pages/reference/javatmp-front-end-plugins-and-frameworks) page describing the name, description, URL, Prerequisite and License of new plugin.
 18.  Adding plugin information in credit section of [documentation home page](/pages/java-bootstrap-admin-dashboard-template "Java Bootstrap Admin and Dashboard Template") .
-19.  Update the [Javascript & CSS Plugins & Resources Customization](/pages/javatmp-frontend-resources-customization "JavaTMP Front-end Resources Customization") and describe usage and any customization needed for your new plugins.
-20.  Update [Version Change Log](/pages/java-bootstrap-template-versions-change-log) page by adding information about your modification in next or current version release.
-21.  Check if the new plugins should be exist in the other versions, then implement it there.
-22.  Check if the new plugins need a dynamic backend components and can be run through AJAX and Java, then implement a dynamic behaviour for it in Java version too.
+19.  Update [Version Change Log](/pages/java-bootstrap-template-versions-change-log) page by adding information about your modification in next or current version release.
+20.  Check if the new plugins should be exist in the other versions, then implement it there.
+21.  Check if the new plugins need a dynamic backend components and can be run through AJAX and Java, then implement a dynamic behaviour for it in Java version too.
 
 ## Steps to remove Javascript plugin
 1. Remove plugin reference from `package.json`.
