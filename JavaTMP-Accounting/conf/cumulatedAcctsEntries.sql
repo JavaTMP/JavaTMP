@@ -18,7 +18,7 @@ left outer join accountgroup acctgrp on (acct.accountGroup = acctgrp.id)
 left outer join accounttype acctt on (acctt.id = acctgrp.accountType)
 ) entries;
 select te.*
-from transactionEntry te where te.`accountId` = 10 order by te.id;
+from transactionEntry te where te.`accountId` = 10;
 -- and
 -- entryDate between STR_TO_DATE('16/12/2018 20:00:00', '%d/%m/%Y %H:%i:%s')
 --                 and STR_TO_DATE('31/12/2018 20:00:00', '%d/%m/%Y %H:%i:%s') order by entryDate desc;

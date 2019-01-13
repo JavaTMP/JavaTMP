@@ -615,17 +615,19 @@ public class AccountService {
 
             List<Order> orders = tableRequest.getOrder();
             if (orders != null && orders.size() > 0) {
+                List<javax.persistence.criteria.Order> tableOrders = new LinkedList<>();
                 for (Order order : orders) {
                     Integer columnIndex = order.getColumn();
                     DataTableColumnSpecs orderColumn = tableRequest.getColumns().get(columnIndex);
 
                     Path<?> sortPath = this.jpaDaoHelper.convertStringToPath(from, orderColumn.getData());
                     if (order.getDir().value().equals("desc")) {
-                        cq.orderBy(cb.desc(sortPath));
+                        tableOrders.add(cb.desc(sortPath));
                     } else {
-                        cq.orderBy(cb.asc(sortPath));
+                        tableOrders.add(cb.asc(sortPath));
                     }
                 }
+                cq.orderBy(tableOrders);
             }
             // where clouse:
             Predicate predicate = cb.conjunction();
