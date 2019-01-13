@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.7 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.7 (Current Development Version)
 
-## on
+## a089d2b on Jan 13, 2019, 10:27 PM GMT+4
 - Update The following packages:
     - gulp-git from 2.8.0 to 2.8.1
     - bootstrap-slider from 10.4.2 to 10.6.0
