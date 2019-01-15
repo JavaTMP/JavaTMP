@@ -114,7 +114,7 @@ public class Account implements Serializable {
 
     public Account(Long id, String accountCode, String name, Long parentAccountId, BigDecimal debit, BigDecimal credit,
             BigDecimal balance, Integer accountGroup, Integer cashFlowId, String accountGroupName, String rootTypeName,
-            Integer debitSign, Integer creditSign) {
+            Integer debitSign, Integer creditSign, Integer reportTypeId) {
         this.id = id;
         this.accountCode = accountCode;
         this.name = name;
@@ -126,7 +126,7 @@ public class Account implements Serializable {
         this.cashFlowId = cashFlowId;
 
         this.accountgroup = new Accountgroup(accountGroup, accountGroupName);
-        Accounttype type = new Accounttype(0, rootTypeName, debitSign, creditSign);
+        Accounttype type = new Accounttype(0, rootTypeName, debitSign, creditSign, reportTypeId);
         this.accountgroup.setType(type);
     }
 

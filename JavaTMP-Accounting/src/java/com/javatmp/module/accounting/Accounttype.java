@@ -26,15 +26,21 @@ public class Accounttype implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
+
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
+
     @Basic(optional = false)
     @Column(name = "debitSign")
     private Integer debitSign;
+
     @Basic(optional = false)
     @Column(name = "creditSign")
     private Integer creditSign;
+
+    @Column(name = "reportTypeId")
+    private Integer reportTypeId;
 
     @Transient
     private List<Accountgroup> accountgroupList;
@@ -46,11 +52,12 @@ public class Accounttype implements Serializable {
         this.id = id;
     }
 
-    public Accounttype(Integer typeId, String name, Integer debitSign, Integer creditSign) {
+    public Accounttype(Integer typeId, String name, Integer debitSign, Integer creditSign, Integer reportTypeId) {
         this.id = typeId;
         this.name = name;
         this.debitSign = debitSign;
         this.creditSign = creditSign;
+        this.reportTypeId = reportTypeId;
     }
 
     public Integer getId() {
@@ -116,6 +123,20 @@ public class Accounttype implements Serializable {
     @Override
     public String toString() {
         return "com.javatmp.module.accounting.Accounttype[ id=" + id + " ]";
+    }
+
+    /**
+     * @return the reportTypeId
+     */
+    public Integer getReportTypeId() {
+        return reportTypeId;
+    }
+
+    /**
+     * @param reportTypeId the reportTypeId to set
+     */
+    public void setReportTypeId(Integer reportTypeId) {
+        this.reportTypeId = reportTypeId;
     }
 
 }

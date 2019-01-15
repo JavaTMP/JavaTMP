@@ -239,7 +239,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/reports/balance-sheet">
+                                        <a href="${pageContext.request.contextPath}/accounting/ViewBalanceSheet">
                                             Balance Sheet
                                         </a>
                                     </li>
