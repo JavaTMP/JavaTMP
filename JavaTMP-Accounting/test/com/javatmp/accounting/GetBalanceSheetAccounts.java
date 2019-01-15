@@ -22,14 +22,14 @@ import java.util.List;
  *
  * @author JavaTMP
  */
-public class GetTrialBalanceAccounts {
+public class GetBalanceSheetAccounts {
 
     public static void main(String[] args) throws SQLException, ParseException {
         JpaDaoHelper jpaDaoHelper;
         jpaDaoHelper = new JpaDaoHelper("AppPU");
         AccountService accountService = new AccountService(jpaDaoHelper);
 
-        List<Account> accounts = accountService.getLeafAccountsForTrialBalance();
+        List<Account> accounts = accountService.getChartOfAccountsReport(1);
 
         for (Account acct : accounts) {
             System.out.println(String.format("%-3S", acct.getId())
