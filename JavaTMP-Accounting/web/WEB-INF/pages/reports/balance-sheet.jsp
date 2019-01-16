@@ -24,6 +24,7 @@
                                 <th  width="100">Credit</th>
                                 <th  width="100">Balance</th>
                                 <th  width="200">Account Group</th>
+                                <th  width="200">Account Type</th>
                                 <th class="text-center"  width="50">Id</th>
                             </tr>
                         </thead>
@@ -185,7 +186,8 @@
                         $tdList.eq(3).text(numeral(node.data.credit).format('(0,0.00)'));
                         $tdList.eq(4).text(numeral(node.data.balance).format('(0,0.00)'));
                         $tdList.eq(5).text(node.data.accountgroup.name);
-                        $tdList.eq(6).addClass("text-center").text(node.key);
+                        $tdList.eq(6).text(node.data.accountgroup.type.name);
+                        $tdList.eq(7).addClass("text-center").text(node.key);
                     },
                     keydown: function (event, data) {
                         if (event.which === 32) {

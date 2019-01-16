@@ -21,8 +21,6 @@ INSERT INTO accountingdb.`transaction` (code, `voucherTypeId`, `transactionDate`
 INSERT INTO accountingdb.`transaction` (code, `voucherTypeId`, `transactionDate`, note, `specialNumber`, entity, status, `creationDate`)
 	VALUES ('4333', 1, '2018-12-30 20:00:00.0', NULL, NULL, NULL, 1, '2018-12-31 18:37:56.0');
 INSERT INTO accountingdb.`transaction` (code, `voucherTypeId`, `transactionDate`, note, `specialNumber`, entity, status, `creationDate`)
-	VALUES ('852147', 1, '2018-12-30 20:00:00.0', 'testing', '500', '44', 1, '2018-12-31 18:50:11.0');
-INSERT INTO accountingdb.`transaction` (code, `voucherTypeId`, `transactionDate`, note, `specialNumber`, entity, status, `creationDate`)
 	VALUES ('700', 1, '2018-12-30 20:00:00.0', '159842', '150', '500', 1, '2018-12-31 18:52:33.0');
 
 INSERT INTO accountingdb.accounttransaction (`transactionId`, `moduleId`, `moduleTypeId`, `moduleRefId`, `accountId`, description, status, amount)
@@ -72,11 +70,7 @@ INSERT INTO accountingdb.accounttransaction (`transactionId`, `moduleId`, `modul
 INSERT INTO accountingdb.accounttransaction (`transactionId`, `moduleId`, `moduleTypeId`, `moduleRefId`, `accountId`, description, status, amount)
 	VALUES (11, NULL, NULL, NULL, 31, NULL, 1, -500.00000000);
 INSERT INTO accountingdb.accounttransaction (`transactionId`, `moduleId`, `moduleTypeId`, `moduleRefId`, `accountId`, description, status, amount)
-	VALUES (12, NULL, NULL, NULL, 12, 'for test only', 1, 0E-8);
+	VALUES (12, 1, 1, 1, 12, NULL, 1, 250.00000000);
 INSERT INTO accountingdb.accounttransaction (`transactionId`, `moduleId`, `moduleTypeId`, `moduleRefId`, `accountId`, description, status, amount)
-	VALUES (12, NULL, NULL, NULL, 30, 'customer #333', 1, 0E-8);
-INSERT INTO accountingdb.accounttransaction (`transactionId`, `moduleId`, `moduleTypeId`, `moduleRefId`, `accountId`, description, status, amount)
-	VALUES (13, 1, 1, 1, 12, NULL, 1, 250.00000000);
-INSERT INTO accountingdb.accounttransaction (`transactionId`, `moduleId`, `moduleTypeId`, `moduleRefId`, `accountId`, description, status, amount)
-	VALUES (13, 5, 17, 2, 40, NULL, 1, -250.00000000);
+	VALUES (12, 5, 17, 2, 40, NULL, 1, -250.00000000);
 
