@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div class="card-body p-0">
-                    <table id="chartOfAccountMainTable" class="table table-sm table-condensed table-hover table-bordered">
+                    <table id="chartOfAccountMainTable" class="table table-sm table-condensed table-hover table-bordered mb-0">
                         <thead>
                             <tr>
                                 <th width="120" class="">Account Code</th>
@@ -35,6 +35,196 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <div class="options float-right">
+                        <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
+                        <a href="#" class="fullscreen"><i class=" fa fa-expand"></i></a>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <table border="0" cellpadding="0" cellspacing="0" width="" class="table table-sm table-condensed table-hover table-bordered mb-0">
+                        <thead>
+                            <tr>
+                                <th colspan="7" class="text-center">
+                                    {{CompanyName}}<br/>
+                                    Balance Sheet<br/>
+                                    Date {{DateText}}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="7">ASSETS</td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">Current Assets:</td>
+                                <td>&nbsp;</td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">Cash</td>
+                                <td>$0</td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">Accounts Receivable</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">Inventory</td>
+                                <td>0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">Prepaid Rent</td>
+                                <td>0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">Current Asset 1</td>
+                                <td>0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">Current Asset 2</td>
+                                <td>0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">Current Asset 3</td>
+                                <td>0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">&nbsp;&nbsp;&nbsp;&nbsp;Total Current Assets</td>
+                                <td>$0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="7">Long-Term Assets</td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">Land</td>
+                                <td>$0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">Buildings &amp; Improvements</td>
+                                <td>0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">Furniture &amp; Fixtures</td>
+                                <td>0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">General Equipment</td>
+                                <td>0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">Long-Term Asset 1</td>
+                                <td>0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">Long-Term Asset 2</td>
+                                <td>0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">Long-Term Asset 3</td>
+                                <td>0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">Goodwill</td>
+                                <td>0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">&nbsp;&nbsp;&nbsp;&nbsp;Total Fixed Assets</td>
+                                <td>$0</td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">TOTAL ASSETS</td>
+                                <td>$0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="7">LIABILITIES</td>
+                            </tr>
+                            <tr>
+                                <td colspan="7">Current Liabilities:</td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">Accounts Payable</td>
+                                <td>$0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">Taxes Payable</td>
+                                <td>0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">Salaries/Wages Payable</td>
+                                <td>0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">Interest Payable</td>
+                                <td>0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">Current Liability 1</td>
+                                <td>0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">Current Liability 2</td>
+                                <td>0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">Current Liability 3</td>
+                                <td>0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">&nbsp;&nbsp;&nbsp;&nbsp;Total Current Liabilities
+                                <td>$0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="7">Long Term Liabilities:</td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">Loan 1</td>
+                                <td>$0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">Loan 2</td>
+                                <td>0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">Loan 3</td>
+                                <td>0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">&nbsp;&nbsp;&nbsp;&nbsp;Total Long Term Liabilities</td>
+                                <td>$0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">TOTAL LIABILITIES</td>
+                                <td>$0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="7">OWNER'S EQUITY</td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">Paid in Capital</td>
+                                <td>0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">Retained Earnings</td>
+                                <td>0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">TOTAL OWNER'S EQUITY</td>
+                                <td>$0 </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">TOTAL LIABILITIES &amp; OWNER'S EQUITY</td>
+                                <td>$0 </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!--
     Reference Your external Stylesheet file here
     if your feature or plugins could not support to run globally.
@@ -109,13 +299,13 @@
                         c.key = c.id;
                         c.title = c.name;
                         c.tooltip = c.description;
-//                        c.icon = "far fa-heart";
+                        //                        c.icon = "far fa-heart";
                         // Check if c is a child node
                         if (c.parentAccountId && nodeMap[c.parentAccountId]) {
                             // add c to `children` array of parent node
                             parent = nodeMap[c.parentAccountId];
                             parent.folder = true;
-                            parent.expanded = true;
+                            parent.expanded = false;
                             if (parent.children) {
                                 parent.children.push(c);
                             } else {
@@ -152,7 +342,7 @@
                         }
                     }
                     calcuateSumForList(childList);
-//                    alert(JSON.stringify(childList));
+                    //                    alert(JSON.stringify(childList));
                     return childList;
                 }
 
@@ -196,8 +386,7 @@
                         }
                         if (javatmp.settings.isRTL === true) {
                             var KC = $.ui.keyCode;
-                            var oe = event.originalEvent;
-                            // Swap LEFT/RIGHT keys
+                            var oe = event.originalEvent;                             // Swap LEFT/RIGHT keys
                             switch (event.which) {
                                 case KC.LEFT:
                                     oe.keyCode = KC.RIGHT;
