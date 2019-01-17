@@ -215,7 +215,7 @@
                                 <td>$0 </td>
                             </tr>
                             <tr>
-                                <td colspan="6">TOTAL LIABILITIES &amp; OWNER'S EQUITY</td>
+                                <td>TOTAL LIABILITIES &amp; OWNER'S EQUITY</td>
                                 <td>$0 </td>
                             </tr>
                         </tbody>
@@ -224,7 +224,8 @@
             </div>
         </div>
     </div>
-
+    <script id="balanceSheetId" type="text/template">
+    </script>
     <!--
     Reference Your external Stylesheet file here
     if your feature or plugins could not support to run globally.
@@ -237,9 +238,9 @@
     </style>
 
     <!--
-    Reference Your external Javascript file here
-    if your feature or plugins could not support to run globally.
-    <script src="components/"></script>
+       Reference Your external Javascript file here
+       if your feature or plugins could not support to run globally.
+       <script src="components/"></script>
     -->
     <script type="text/javascript">
         // You could write safely Javascript code here too as our template
