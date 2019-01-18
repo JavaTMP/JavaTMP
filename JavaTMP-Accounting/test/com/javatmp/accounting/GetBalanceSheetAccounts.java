@@ -29,7 +29,7 @@ public class GetBalanceSheetAccounts {
         jpaDaoHelper = new JpaDaoHelper("AppPU");
         AccountService accountService = new AccountService(jpaDaoHelper);
 
-        List<Account> accounts = accountService.getChartOfAccountsReport(1);
+        List<Account> accounts = accountService.getChartOfAccountsReport(2);
 
         for (Account acct : accounts) {
             System.out.println(String.format("%-3S", acct.getId())

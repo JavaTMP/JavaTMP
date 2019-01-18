@@ -134,7 +134,8 @@ public class AccountService {
                     + " left outer join Accounttype at on at.id = ag.accountType"
                     + " where at.reportTypeId = :reportTypeId "
                     + " group by acct.id, acct.accountCode, acct.name, acct.parentAccountId, acct.accountGroup,"
-                    + "acct.cashFlowId, ag.name, at.name, at.debitSign, at.creditSign, at.reportTypeId"
+                    + "acct.cashFlowId, ag.name, at.name, at.debitSign, at.creditSign, at.reportTypeId "
+                    + " order by at.id"
                     + "", Account.class
             );
 
