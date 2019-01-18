@@ -43,5 +43,3 @@ INSERT INTO accountingdb.accounttransaction (`transactionId`, `moduleId`, `modul
 	VALUES (7, NULL, NULL, NULL, 10, NULL, 1, -400.00000000);
 INSERT INTO accountingdb.accounttransaction (`transactionId`, `moduleId`, `moduleTypeId`, `moduleRefId`, `accountId`, description, status, amount)
 	VALUES (7, NULL, NULL, NULL, 65, NULL, 1, -100.25000000);
-
-

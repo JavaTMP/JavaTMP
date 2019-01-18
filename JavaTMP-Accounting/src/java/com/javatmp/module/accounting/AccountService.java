@@ -135,7 +135,7 @@ public class AccountService {
                     + " where at.reportTypeId = :reportTypeId "
                     + " group by acct.id, acct.accountCode, acct.name, acct.parentAccountId, acct.accountGroup,"
                     + "acct.cashFlowId, ag.name, at.name, at.debitSign, at.creditSign, at.reportTypeId "
-                    + " order by at.id"
+                    + " order by at.id, ag.id"
                     + "", Account.class
             );
 
