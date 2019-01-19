@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.7 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.7 (Current Development Version)
 
-## on
+## a5c4b8d on Jan 19, 2019, 4:08 PM GMT+4
 - Upgrade `gulp` from 3.9.1 to 4.0.0
 - Update `gulpfile.js` to support gulp 4 features.
 - Run `gulp` command which will use default task and generate `dist` folders.
