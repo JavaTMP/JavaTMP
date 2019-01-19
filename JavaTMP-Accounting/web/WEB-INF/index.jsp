@@ -244,7 +244,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/reports/profit-loss-income">
+                                        <a href="${pageContext.request.contextPath}/accounting/ViewProfitLossIncome">
                                             Income Statement
                                         </a>
                                     </li>

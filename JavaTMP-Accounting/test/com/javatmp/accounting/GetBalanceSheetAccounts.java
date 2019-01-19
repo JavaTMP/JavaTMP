@@ -7,12 +7,6 @@ package com.javatmp.accounting;
 
 import com.javatmp.module.accounting.Account;
 import com.javatmp.module.accounting.AccountService;
-import com.javatmp.module.accounting.Costcenter;
-import com.javatmp.module.accounting.Module;
-import com.javatmp.module.accounting.Moduletype;
-import com.javatmp.module.customer.Customer;
-import com.javatmp.module.supplier.Supplier;
-import com.javatmp.mvc.MvcHelper;
 import com.javatmp.util.JpaDaoHelper;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -33,11 +27,11 @@ public class GetBalanceSheetAccounts {
 
         for (Account acct : accounts) {
             System.out.println(String.format("%-3S", acct.getId())
-                    + " " + String.format("%-15S", acct.getAccountCode())
+                    + " " + String.format("%-14S", acct.getAccountCode())
                     + " " + String.format("%-40S", acct.getName())
                     + " " + String.format("%-15S", acct.getAccountgroup().getType().getDebitSign())
                     + " " + String.format("%-15S", acct.getAccountgroup().getType().getName())
-                    + " " + String.format("%-25S", acct.getAccountgroup().getName())
+                    + " " + String.format("%-22S", acct.getAccountgroup().getName())
                     + " " + String.format("%-10S", acct.getBalance()));
         }
 

@@ -13,13 +13,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/accounting/ViewBalanceSheet")
-public class ViewBalanceSheet extends HttpServlet {
+@WebServlet("/accounting/ViewProfitLossIncome")
+public class ViewProfitLossIncome extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String requestPage = "/WEB-INF/pages/reports/balance-sheet.jsp";
+        String requestPage = "/WEB-INF/pages/reports/profit-loss-income.jsp";
 
         ServletContext context = request.getServletContext();
         ServicesFactory sf = (ServicesFactory) context.getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
@@ -32,7 +32,7 @@ public class ViewBalanceSheet extends HttpServlet {
             throws ServletException, IOException {
         ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         AccountService accountService = sf.getAccountService();
-        List<Account> chartOfAccounts = accountService.getChartOfAccountsReport(1);
+        List<Account> chartOfAccounts = accountService.getChartOfAccountsReport(2);
         ResponseMessage responseMessage = new ResponseMessage();
         responseMessage.setOverAllStatus(true);
         responseMessage.setData(chartOfAccounts);
