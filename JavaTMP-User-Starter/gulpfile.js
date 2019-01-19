@@ -102,7 +102,6 @@ var config = {
         ],
         "ion-rangeslider": [
             {"from": "${sourceNodeLib}/ion-rangeslider/css/ion.rangeSlider.css", "to": "${destComponentsLib}/ion-rangeslider/css", processCSS: true},
-            {"from": "${sourceNodeLib}/ion-rangeslider/css/ion.rangeSlider.skinHTML5.css", "to": "${destComponentsLib}/ion-rangeslider/css", processCSS: true},
             {"from": "${sourceNodeLib}/ion-rangeslider/js/ion.rangeSlider.min.js", "to": "${destComponentsLib}/ion-rangeslider/js"}
         ],
         "bootstrap-slider": [
@@ -232,7 +231,7 @@ var config = {
             {"from": "${sourceNodeLib}/canvas-toBlob/canvas-toBlob.js", "to": "${destComponentsLib}/canvas-toBlob", processJS: true}
         ],
         "file-saver": [
-            {"from": "${sourceNodeLib}/file-saver/FileSaver.min.js", "to": "${destComponentsLib}/file-saver"}
+            {"from": "${sourceNodeLib}/file-saver/dist/FileSaver.min.js", "to": "${destComponentsLib}/file-saver/dist"}
         ],
         "numeral": [
             {"from": "${sourceNodeLib}/numeral/min/numeral.min.js", "to": "${destComponentsLib}/numeral/min"}
@@ -263,7 +262,6 @@ var src = {
         "./web/components/select2-bootstrap-theme/dist/select2-bootstrap.min.css",
         "./web/components/summernote/dist/summernote-bs4.css",
         "./web/components/ion-rangeslider/css/ion.rangeSlider.css",
-        "./web/components/ion-rangeslider/css/ion.rangeSlider.skinHTML5.css",
         "./web/components/bootstrap-slider/dist/css/bootstrap-slider.min.css",
         "./web/components/fullcalendar/dist/fullcalendar.min.css",
         "./web/components/cropperjs/dist/cropper.min.css",
@@ -320,7 +318,7 @@ var src = {
         "./web/components/fullcalendar/dist/fullcalendar.min.js",
         "./web/components/Blob/Blob.js",
         "./web/components/canvas-toBlob/canvas-toBlob.js",
-        "./web/components/file-saver/FileSaver.min.js",
+        "./web/components/file-saver/dist/FileSaver.min.js",
         "./web/components/cropperjs/dist/cropper.min.js",
         "./web/components/jquery-cropper/dist/jquery-cropper.min.js",
         "./web/components/waypoints/lib/jquery.waypoints.min.js",
@@ -329,7 +327,6 @@ var src = {
         "./web/components/jquery-validation/dist/jquery.validate.min.js",
         "./web/components/jquery-validation/dist/additional-methods.js",
         "./web/components/inputmask/dist/min/jquery.inputmask.bundle.min.js",
-        "./web/components/inputmask/dist/min/inputmask/phone-codes/phone.min.js",
         "./web/components/inputmask/dist/min/inputmask/bindings/inputmask.binding.min.js",
         "./web/components/jquery-form/dist/jquery.form.min.js",
         "./web/components/datatables.net/js/jquery.dataTables.js",
@@ -407,12 +404,19 @@ solveParameters = function (path) {
     return path;
 };
 gulp.task('delete-components', function (cb) {
-    return del([config.destComponentsLib], cb);
+    return del.sync([config.destComponentsLib], cb());
+});
+gulp.task('delete-css', function (cb) {
+    return del.sync(['./web/assets/css/**/*'], cb());
+});
+gulp.task('delete-js', function (cb) {
+    return del.sync(['./web/assets/js/**/*'], cb());
 });
 gulp.task('delete-dist', function (cb) {
-    return del([config.destDist], cb);
+    return del.sync([config.destDist], cb());
 });
-gulp.task('copy-components', ["delete-components"], function () {
+
+gulp.task('copy-components', gulp.series("delete-components", function (cb) {
     for (var key in config.plugins) {
         if (config.plugins.hasOwnProperty(key)) {
             var componentConfig = config.plugins[key];
@@ -428,8 +432,10 @@ gulp.task('copy-components', ["delete-components"], function () {
             }
         }
     }
-});
-gulp.task('generate-dist', ['copy-components', "delete-dist", "delete-css", "delete-js"], function (cb) {
+    cb();
+}));
+
+gulp.task('generate-dist', gulp.series('copy-components', "delete-dist", 'delete-dist', 'delete-js', function (cb) {
     async.series([
         function (next) {
             console.log("Compile and generate sass/themes");
@@ -565,10 +571,10 @@ gulp.task('generate-dist', ['copy-components', "delete-dist", "delete-css", "del
                     .on('end', next);
         },
         function (next) {
-            del.sync([config.destComponentsLib, "./web/assets/css", "./web/assets/js"], next);
+            del.sync([config.destComponentsLib, "./web/assets/css", "./web/assets/js"], next());
         }
     ], cb);
-});
+}));
 gulp.task('run-local-web-server', function () {
 
     connect.server({
@@ -577,12 +583,7 @@ gulp.task('run-local-web-server', function () {
         livereload: true
     });
 });
-gulp.task('delete-css', function () {
-    return del(['./web/assets/css/**/*']);
-});
-gulp.task('delete-js', function () {
-    return del(['./web/assets/js/**/*']);
-});
-gulp.task('default', ['generate-dist'], function () {
+gulp.task('default', gulp.series('generate-dist', function (cb) {
     process.stdout.write("*** Finished @ [" + new Date() + "] ***");
-});
+    cb();
+}));
