@@ -38,7 +38,7 @@
     "datatables.net-fixedcolumns-bs4": "^3.2.6",
     "datatables.net-rowgroup": "^1.1.0",
     "datatables.net-rowgroup-bs4": "^1.1.0",
-    "echarts": "^4.1.0",
+    "echarts": "^4.2.0-rc.2",
     "font-awesome-animation": "^0.2.1",
     "fullcalendar": "^3.10.0",
     "inputmask": "^4.0.6",
