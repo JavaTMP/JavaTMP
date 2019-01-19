@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.7 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.7 (Current Development Version)
 
-##  on 
+## fbd710f on Jan 19, 2019, 9:33 PM GMT+4
 - Upgrade `echarts` from 4.1.0 to 4.2.0-rc.2
 - Run `gulp` command which will use default task and generate `dist` folders.
 
