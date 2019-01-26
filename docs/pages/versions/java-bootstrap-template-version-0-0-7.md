@@ -3,6 +3,14 @@ title: Java Bootstrap Template Version 0.0.7 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.7 (Current Development Version)
 
+## on
+- Upgrade `moment` from 2.23.0 to 2.24.0
+- Upgrade `commons-lang` from 3.7 to 3.8.1
+- Upgrade `google-gson` from 2.8.2 to 2.8.5
+- Upgrade `mysql-connector-java-8.0.11.jar` to `mysql-connector-java-8.0.14.jar`
+- Regenerate database script after migrated to mysql 8.0.14 in `.\JavaTMP\JavaTMP-User-Starter\conf\javatmp-26-1-2019.sql`
+- Run `gulp` command which will use default task and generate `dist` folders.
+
 ## fbd710f on Jan 19, 2019, 9:33 PM GMT+4
 - Upgrade `echarts` from 4.1.0 to 4.2.0-rc.2
 - Run `gulp` command which will use default task and generate `dist` folders.

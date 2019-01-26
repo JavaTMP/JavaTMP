@@ -11,8 +11,11 @@ provide a running version of this project war file on tomcat 9.
 
 It depends mainly on the following external backend java opensource libraries to provide a dynamic web application features with custom web MVC for serving JSP pages and handling Servlet requests:
 
-*   Use Apache Commons [BeanUtils 1.9.3](https://commons.apache.org/proper/commons-beanutils/ "Apache Commons beanutils Java Library"), [Collections 3.2.2](http://commons.apache.org/proper/commons-collections/ "Apache Commons Collections Java Library"), [Logging 1.2](http://commons.apache.org/proper/commons-logging/ "Apache Commons Logging Java Library"), and [Lang 3.7](http://commons.apache.org/proper/commons-lang/ "Apache Commons Lang Java Library")
-*   Use [Google Gson 2.8.2](https://github.com/google/gson "Google Gson JSON Java Library")
+*   Use Apache Commons [BeanUtils 1.9.3](https://commons.apache.org/proper/commons-beanutils/ "Apache Commons beanutils Java Library"),
+[Collections 3.2.2](http://commons.apache.org/proper/commons-collections/ "Apache Commons Collections Java Library"),
+[Logging 1.2](http://commons.apache.org/proper/commons-logging/ "Apache Commons Logging Java Library"), and
+[Lang 3.8.1](http://commons.apache.org/proper/commons-lang/ "Apache Commons Lang Java Library")
+*   Use [Google Gson 2.8.5](https://github.com/google/gson "Google Gson JSON Java Library")
 *   Use [Standard Taglib 1.2](http://central.maven.org/maven2/javax/servlet/jstl/1.2/ "Java Web Standard Taglib maven repository")
 
 `JavaTMP-Java-Ajax` project is a general dynamic web application with a subset of dynamic plugins and pages to provide a general demo to test and use specific plugin in Java Web environment. The following documentation page provide you a list of dynamic pages exist on the dynamic java version : [Dynamic Java Bootstrap Web Application features](/pages/dynamic-java-bootstrap-web-application-features "Dynamic Java Bootstrap Web Application features")
@@ -89,17 +92,17 @@ The `lib` folder contains external backend java libraries needed to compile and 
 +---commons-collections-3.2.2
     +---commons-collections-3.2.2-javadoc.jar
     +---commons-collections-3.2.2.jar
-+---commons-lang3-3.7
-    +---commons-lang3-3.7-javadoc.jar
-    +---commons-lang3-3.7-sources.jar
-    +---commons-lang3-3.7.jar
++---commons-lang-3.8.1
+    +---commons-lang3-3.8.1-javadoc.jar
+    +---commons-lang3-3.8.1-sources.jar
+    +---commons-lang3-3.8.1.jar
 +---commons-logging-1.2
     +---commons-logging-1.2-javadoc.jar
     +---commons-logging-1.2.jar
-+---google-gson-2.8.2
-    +---gson-2.8.2-javadoc.jar
-    +---gson-2.8.2-sources.jar
-    +---gson-2.8.2.jar
++---google-gson-2.8.5
+    +---gson-2.8.5-javadoc.jar
+    +---gson-2.8.5-sources.jar
+    +---gson-2.8.5.jar
 +---jstl-1.2
     +---jstl-1.2.jar
 ```

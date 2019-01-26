@@ -23,13 +23,12 @@ title: Java Bootstrap Backend Features And Resources
     [http://commons.apache.org/proper/commons-logging/](http://commons.apache.org/proper/commons-logging/)
     [http://www-us.apache.org/dist//commons/logging/binaries/commons-logging-1.2-bin.zip](http://www-us.apache.org/dist//commons/logging/binaries/commons-logging-1.2-bin.zip)
 
-9.  Use Apache Commons Lang 3.7 for auto converting of bean instance to string for printing.
+9.  Use Apache Commons Lang 3.8.1 for auto converting of bean instance to string for printing.
     [http://commons.apache.org/proper/commons-lang/](http://commons.apache.org/proper/commons-lang/)
-    [http://www-eu.apache.org/dist//commons/lang/binaries/commons-lang3-3.7-bin.zip](http://www-eu.apache.org/dist//commons/lang/binaries/commons-lang3-3.7-bin.zip)
 
-10.  Use Google Gson 2.8.2 for marshaling and unmarshaling of AJAX request and response beans.
+10.  Use Google Gson 2.8.5 for marshaling and unmarshaling of AJAX request and response beans.
     [https://github.com/google/gson](https://github.com/google/gson)
-    [https://repo1.maven.org/maven2/com/google/code/gson/gson/2.8.2/](https://repo1.maven.org/maven2/com/google/code/gson/gson/2.8.2/)
+    [https://repo1.maven.org/maven2/com/google/code/gson/gson/2.8.5/](https://repo1.maven.org/maven2/com/google/code/gson/gson/2.8.5/)
 
 11.  Use Standard Taglib 1.2 in JSP pages for formatting and looping.
     [http://central.maven.org/maven2/javax/servlet/jstl/1.2/](http://central.maven.org/maven2/javax/servlet/jstl/1.2/)

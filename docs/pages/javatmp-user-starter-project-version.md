@@ -16,11 +16,14 @@ provides a running version of this template war file on tomcat 9.
 
 It depends mainly on the following external backend java opensource libraries to provide a dynamic web application features
 with custom web MVC for serving JSP pages and handling Servlet requests:
-*   Use Apache Commons [BeanUtils 1.9.3](https://commons.apache.org/proper/commons-beanutils/ "Apache Commons beanutils Java Library"), [Collections 3.2.2](http://commons.apache.org/proper/commons-collections/ "Apache Commons Collections Java Library"), [Logging 1.2](http://commons.apache.org/proper/commons-logging/ "Apache Commons Logging Java Library"), and [Lang 3.7](http://commons.apache.org/proper/commons-lang/ "Apache Commons Lang Java Library")
-*   Use [Google Gson 2.8.2](https://github.com/google/gson "Google Gson JSON Java Library")
+*   Use Apache Commons [BeanUtils 1.9.3](https://commons.apache.org/proper/commons-beanutils/ "Apache Commons beanutils Java Library"),
+[Collections 3.2.2](http://commons.apache.org/proper/commons-collections/ "Apache Commons Collections Java Library"),
+[Logging 1.2](http://commons.apache.org/proper/commons-logging/ "Apache Commons Logging Java Library"), and
+[Lang 3.8.1](http://commons.apache.org/proper/commons-lang/ "Apache Commons Lang Java Library")
+*   Use [Google Gson 2.8.5](https://github.com/google/gson "Google Gson JSON Java Library")
 *   Use [Standard Taglib 1.2](http://central.maven.org/maven2/javax/servlet/jstl/1.2/ "Java Web Standard Taglib maven repository")
 *   Use [hibernate-5.2.17](http://hibernate.org/orm/releases/5.2/ "Hibernate 5.2.17 Home & Download Page").
-*   Use [mysql-connector-java-8.0.11.jar](https://dev.mysql.com/downloads/connector/j/8.0.html "Java Mysql Connector 8 for JDBC driver").
+*   Use [mysql-connector-java-8.0.14.jar](https://dev.mysql.com/downloads/connector/j/8.0.html "Java Mysql Connector 8 for JDBC driver").
 *   Use [simplecaptcha-1.2.1.jar](https://sourceforge.net/projects/simplecaptcha/ "Simplecaptcha Home & Download Page").
 
 `JavaTMP-User-Starter` project is a specific dynamic users web application with a subset of dynamic plugins and pages

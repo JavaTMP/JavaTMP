@@ -23,7 +23,7 @@
             <!-- Configuring JDBC properties -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:33061/accountingdb?zeroDateTimeBehavior=CONVERT_TO_NULL&amp;useSSL=false&amp;autoReconnect=true&amp;autoReconnectForPools=true"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/accountingdb?zeroDateTimeBehavior=CONVERT_TO_NULL&amp;useSSL=false&amp;autoReconnect=true&amp;autoReconnectForPools=true&amp;allowPublicKeyRetrieval=true"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
             <property name="javax.persistence.jdbc.password" value="mmmmmm"/>
             <!-- Hibernate properties -->

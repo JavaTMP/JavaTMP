@@ -37,13 +37,32 @@
                 // fire AFTER all transition done and your ajax content is shown to user.
                 $(".applyTheme").on("click", function () {
                     var themeName = $(this).attr("themeName");
-                    var styleId = "#themeStyleSheet";
-                    var newUrl = "assets/dist/css/javatmp-" + themeName;
-                    if (javatmp.settings.isRTL === true) {
-                        newUrl += "-rtl";
-                    }
-                    newUrl += ".min.css";
-                    $(styleId).attr("href", newUrl);
+                    $.ajax({
+                        cache: false,
+                        type: javatmp.settings.httpMethod,
+                        url: javatmp.settings.contextPath + "/updateTheme",
+                        data: {"theme": themeName},
+                        beforeSend: function () {
+                        },
+                        success: function (response, textStatus, jqXHR) {
+                            var modalMessage = null;
+                            var redirectURL = null;
+                            try {
+                                var ResponseMessage = JSON.parse(jqXHR.responseText);
+                                modalMessage = ResponseMessage.message;
+                                redirectURL = ResponseMessage.redirectURL;
+                            } catch (ex) {
+                                modalMessage = jqXHR.responseText;
+                                redirectURL = javatmp.settings.contextPath + "/";
+                            }
+//                            window.location.replace(redirectURL);
+                            window.location.reload(true);
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            alert("error");
+
+                        }
+                    });
                 });
             });
 
