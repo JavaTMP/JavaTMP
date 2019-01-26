@@ -9,6 +9,7 @@ import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.module.timezone.Timezone;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.module.timezone.TimezoneService;
+import com.javatmp.module.timezone.Timezonetranslation;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -40,7 +41,7 @@ public class TestingPopulateTimezone {
         jpaDaoHelper = new JpaDaoHelper("AppPU");
         timezoneService = new TimezoneService(jpaDaoHelper);
 
-        List<Timezone> timezones = timezoneService.getTimezones();
+        List<Timezonetranslation> timezones = timezoneService.getTimezones();
 
         InputStreamReader reader = new InputStreamReader(TestingPopulateTimezone.class.getResourceAsStream("arabicTimezones.txt"), "utf8");
         System.out.println("encoding [" + reader.getEncoding() + "]");

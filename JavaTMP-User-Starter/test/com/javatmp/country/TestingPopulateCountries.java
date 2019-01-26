@@ -50,7 +50,7 @@ public class TestingPopulateCountries {
         countryService = new CountryService(jpaDaoHelper);
         LanguageService languageService = new LanguageService(jpaDaoHelper);
         List<Languagetranslation> languages = languageService.getLanguages(new User(0L, "en"));
-        List<Country> countries = countryService.getCountries();
+        List<Countrytranslation> countries = countryService.getCountries();
 
         InputStreamReader reader = new InputStreamReader(TestingPopulateCountries.class.getResourceAsStream("arabicCountry.txt"), "utf8");
         System.out.println("encoding [" + reader.getEncoding() + "]");
