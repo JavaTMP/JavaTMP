@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.7 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.7 (Current Development Version)
 
-## on
+## 53006c8 on Jan 26, 2019, 7:25 PM GMT+4
 - Upgrade `hibernate` from 5.2.17 to 5.4.1
 - Update persistent.xml JPA's version from 2.1 to 2.2
 - Update mysql hibernate dialect class from `org.hibernate.dialect.MySQLDialect` to `org.hibernate.dialect.MySQL8Dialect`
