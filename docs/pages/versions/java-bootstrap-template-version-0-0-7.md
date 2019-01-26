@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.7 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.7 (Current Development Version)
 
-## on
+## d576b25 on Jan 26, 2019, 3:59 PM GMT+4
 - Upgrade `moment` from 2.23.0 to 2.24.0
 - Upgrade `commons-lang` from 3.7 to 3.8.1
 - Upgrade `google-gson` from 2.8.2 to 2.8.5
