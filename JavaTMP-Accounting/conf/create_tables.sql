@@ -1,61 +1,61 @@
-CREATE TABLE language (
+CREATE TABLE `language` (
     languageId varchar(4) NOT NULL,
     isDefaultLang TINYINT,
     CONSTRAINT language_languageId_pk PRIMARY KEY (languageId)
 ) ENGINE=InnoDB;
 
-CREATE TABLE languageTranslation (
+CREATE TABLE `languageTranslation` (
     languageId varchar(4) NOT NULL,
     langId varchar(4) NOT NULL,
     languageName varchar(255) NOT NULL,
     CONSTRAINT languageTr_pk PRIMARY KEY (languageId, langId),
-    CONSTRAINT languageTr_id_fk FOREIGN KEY (languageId) REFERENCES language (languageId),
-    CONSTRAINT languageTr_langId_fk FOREIGN KEY (langId) REFERENCES language (languageId)
+    CONSTRAINT languageTr_id_fk FOREIGN KEY (languageId) REFERENCES `language` (languageId),
+    CONSTRAINT languageTr_langId_fk FOREIGN KEY (langId) REFERENCES `language` (languageId)
 ) ENGINE=InnoDB;
 
-CREATE TABLE theme (
+CREATE TABLE `theme` (
     themeId varchar(32) NOT NULL,
     CONSTRAINT theme_themeId_pk PRIMARY KEY (themeId)
 ) ENGINE=InnoDB;
 
-CREATE TABLE themeTranslation (
+CREATE TABLE `themeTranslation` (
     themeId varchar(32) NOT NULL,
     langId varchar(4) NOT NULL,
     themeName varchar(255) NOT NULL,
     CONSTRAINT themeTr_pk PRIMARY KEY (themeId, langId),
     CONSTRAINT themeTr_themeId_fk FOREIGN KEY (themeId) REFERENCES theme (themeId),
-    CONSTRAINT themeTr_langId_fk FOREIGN KEY (langId) REFERENCES language (languageId)
+    CONSTRAINT themeTr_langId_fk FOREIGN KEY (langId) REFERENCES `language` (languageId)
 ) ENGINE=InnoDB;
 
-CREATE TABLE timezone (
+CREATE TABLE `timezone` (
     timezoneId varchar(64) NOT NULL,
     CONSTRAINT timezone_timezoneId_pk PRIMARY KEY (timezoneId)
 ) ENGINE=InnoDB;
 
-CREATE TABLE timezoneTranslation (
+CREATE TABLE `timezoneTranslation` (
     timezoneId varchar(64) NOT NULL,
     langId varchar(4) NOT NULL,
     timezoneName varchar(255) NOT NULL,
     CONSTRAINT timezoneTr_pk PRIMARY KEY (timezoneId, langId),
     CONSTRAINT timezoneTr_timezoneId_fk FOREIGN KEY (timezoneId) REFERENCES timezone (timezoneId),
-    CONSTRAINT timezoneTr_langId_fk FOREIGN KEY (langId) REFERENCES language (languageId)
+    CONSTRAINT timezoneTr_langId_fk FOREIGN KEY (langId) REFERENCES `language` (languageId)
 ) ENGINE=InnoDB;
 
-CREATE TABLE country (
+CREATE TABLE `country` (
     countryId varchar(4) NOT NULL,
     CONSTRAINT country_countryId_pk PRIMARY KEY (countryId)
 ) ENGINE=InnoDB;
 
-CREATE TABLE countryTranslation (
+CREATE TABLE `countryTranslation` (
     countryId varchar(4) NOT NULL,
     langId varchar(4) NOT NULL,
     countryName varchar(255) NOT NULL,
     CONSTRAINT countryTr_pk PRIMARY KEY (countryId, langId),
     CONSTRAINT countryTr_countryId_fk FOREIGN KEY (countryId) REFERENCES country (countryId),
-    CONSTRAINT countryTr_langId_fk FOREIGN KEY (langId) REFERENCES language (languageId)
+    CONSTRAINT countryTr_langId_fk FOREIGN KEY (langId) REFERENCES `language` (languageId)
 ) ENGINE=InnoDB;
 
-CREATE TABLE document (
+CREATE TABLE `document` (
     documentId BIGINT NOT NULL AUTO_INCREMENT,
     documentName varchar(255) NOT NULL,
     documentSize BIGINT NOT NULL,
@@ -88,12 +88,12 @@ CREATE TABLE `user` (
     CONSTRAINT user_userName_uni UNIQUE(userName),
     CONSTRAINT user_profilePicDocumentId_fk FOREIGN KEY (profilePicDocumentId) REFERENCES document (documentId),
     CONSTRAINT user_countryId_fk FOREIGN KEY (countryId) REFERENCES country (countryId),
-    CONSTRAINT user_lang_fk FOREIGN KEY (lang) REFERENCES language (languageId),
+    CONSTRAINT user_lang_fk FOREIGN KEY (lang) REFERENCES `language` (languageId),
     CONSTRAINT user_theme_fk FOREIGN KEY (theme) REFERENCES theme (themeId),
     CONSTRAINT user_timezone_fk FOREIGN KEY (timezone) REFERENCES timezone (timezoneId)
 ) ENGINE=InnoDB;
 
-CREATE TABLE activity (
+CREATE TABLE `activity` (
     id BIGINT NOT NULL AUTO_INCREMENT,
     creationDate TIMESTAMP NOT NULL,
     userId BIGINT,
@@ -105,5 +105,5 @@ CREATE TABLE activity (
     parentActId BIGINT,
     CONSTRAINT activity_id_pk PRIMARY KEY (id),
     CONSTRAINT activity_userId_fk FOREIGN KEY (userId) REFERENCES `user` (id),
-    CONSTRAINT activity_parentActId_fk FOREIGN KEY (parentActId) REFERENCES activity (id)
+    CONSTRAINT activity_parentActId_fk FOREIGN KEY (parentActId) REFERENCES `activity` (id)
 ) ENGINE=InnoDB;

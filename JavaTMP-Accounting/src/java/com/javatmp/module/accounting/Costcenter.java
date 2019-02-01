@@ -19,7 +19,7 @@ import javax.persistence.Transient;
  * @author JavaTMP
  */
 @Entity
-@Table(name = "costcenter")
+@Table(name = "costCenter")
 public class Costcenter implements Serializable {
 
     private static final long serialVersionUID = 1L;

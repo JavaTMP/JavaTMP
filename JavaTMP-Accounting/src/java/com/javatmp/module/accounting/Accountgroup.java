@@ -16,7 +16,7 @@ import javax.persistence.Transient;
  * @author JavaTMP
  */
 @Entity
-@Table(name = "accountgroup")
+@Table(name = "accountGroup")
 public class Accountgroup implements Serializable {
 
     @Transient

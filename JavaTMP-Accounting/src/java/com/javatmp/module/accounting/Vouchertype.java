@@ -24,7 +24,7 @@ import javax.persistence.Transient;
  * @author JavaTMP
  */
 @Entity
-@Table(name = "vouchertype")
+@Table(name = "voucherType")
 @NamedQueries({
     @NamedQuery(name = "Vouchertype.findAll", query = "SELECT v FROM Vouchertype v")})
 public class Vouchertype implements Serializable {

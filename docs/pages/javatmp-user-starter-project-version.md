@@ -58,7 +58,7 @@ The JavaTMP-User-Starter project folder structure is the same as JavaTMP-Java-Aj
 |---package.json (A Node.js's NPM meta file. This file holds various metadata relevant to the project)
 +---conf
     ...
-    |---javatmp-27-08-2018.sql (Oracle Mysql Database dump script to start the Users Web Application from)
+    |---build.sql (Oracle Mysql Database dump script to start the Users Web Application from)
 +---lib (External backend Java libraries used in the project)
 +---nbproject (Netbeans IDE metadata about project)
 +---src (Java source code files like Servlets and services classes)
@@ -122,7 +122,7 @@ always be sure to reload all the privileges and changes through the command:
 
 quit to import our database script to your local database instance appdb from `console command line`:
 
-`mysql -ujavatmpUser -pjavatmpUserPassword -D appdb < ./JavaTMP-User-Starter/conf/javatmp-27-08-2018.sql`
+`mysql -ujavatmpUser -pjavatmpUserPassword -D appdb < ./JavaTMP-User-Starter/conf/build.sql`
 
 Now, Your local database should be loaded with all mandatory data and demo users in your local Mysql database 'appdb' instance.
 check that by login to mysql and run the following command:

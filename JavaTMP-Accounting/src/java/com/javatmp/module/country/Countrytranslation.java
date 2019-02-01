@@ -17,7 +17,7 @@ import javax.persistence.Table;
  * @author JavaTMP
  */
 @Entity
-@Table(name = "countrytranslation")
+@Table(name = "countryTranslation")
 public class Countrytranslation implements Serializable {
 
     private static final long serialVersionUID = 1L;

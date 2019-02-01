@@ -18,7 +18,7 @@ import javax.persistence.Transient;
  * @author JavaTMP
  */
 @Entity
-@Table(name = "accounttransaction")
+@Table(name = "accountTransaction")
 public class Accounttransaction implements Serializable {
 
     private static final long serialVersionUID = 1L;

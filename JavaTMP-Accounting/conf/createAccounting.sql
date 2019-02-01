@@ -16,13 +16,15 @@ DROP TABLE IF EXISTS inventoryAccount;
 DROP TABLE IF EXISTS inventory;
 
 DROP TABLE IF EXISTS moduleType;
-DROP TABLE IF EXISTS module;
+DROP TABLE IF EXISTS `module`;
 
 DROP TABLE IF EXISTS account;
 DROP TABLE IF EXISTS accountGroup;
 DROP TABLE IF EXISTS accountType;
 DROP TABLE IF EXISTS `transaction`;
-DROP TABLE IF EXISTS `voucherType`;
+DROP TABLE IF EXISTS voucherType;
+
+DROP VIEW IF EXISTS transactionEntry;
 
 CREATE TABLE accountType (
     id int(1) UNSIGNED not null,
@@ -131,7 +133,7 @@ INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup
 INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (65,'100100105','Bank','description',1,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-12 11:16:38',7);
 INSERT INTO `account` (`id`, `accountCode`, `name`, description, `accountGroup`, debit, credit, balance, status, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (66, '100200103', 'Sales tax liability', 'description', 3, 0E-8, 0E-8, 0E-8, 1, NULL, '2019-01-05 09:09:57.0', 21);
 
-CREATE TABLE module (
+CREATE TABLE `module` (
     id BIGINT UNSIGNED not null AUTO_INCREMENT,
     name varchar(128),
     description varchar(1024),
@@ -226,7 +228,7 @@ CREATE TABLE accountTransaction (
     CONSTRAINT acctTrans_id_pk PRIMARY KEY (id),
     CONSTRAINT acctTrans_tranId_fk FOREIGN KEY (transactionId) REFERENCES transaction (id),
     CONSTRAINT acctTrans_acctId_fk FOREIGN KEY (accountId) REFERENCES account (id),
-    CONSTRAINT acctTrans_moduleId_fk FOREIGN KEY (moduleId) REFERENCES module (id),
+    CONSTRAINT acctTrans_moduleId_fk FOREIGN KEY (moduleId) REFERENCES `module` (id),
     CONSTRAINT acctTrans_moduleTypeId_fk FOREIGN KEY (moduleTypeId) REFERENCES moduleType (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -241,7 +243,7 @@ CREATE TABLE costCenter (
     CONSTRAINT costCenter_parentId_fk FOREIGN KEY (parentId) REFERENCES costCenter (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-INSERT INTO accountingdb.costcenter (`name`, `parentId`, description, status, `creationDate`) VALUES
+INSERT INTO costCenter (`name`, `parentId`, description, status, `creationDate`) VALUES
 ('car1', NULL, '', 1, DEFAULT),
 ('car2', NULL, '', 1, DEFAULT),
 ('project 2', NULL, '', 1, DEFAULT),
@@ -383,3 +385,23 @@ CREATE TABLE inventoryAccount (
     CONSTRAINT inventory_moduleTypeId_fk FOREIGN KEY (moduleTypeId) REFERENCES moduleType (id),
     CONSTRAINT inventory_accountId_fk FOREIGN KEY (accountId) REFERENCES account (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE OR REPLACE VIEW transactionEntry AS
+select entries.*,
+SUM(entryAmount) OVER(PARTITION BY accountId ORDER BY entryDate, id
+) AS accountBalance
+from (
+select acctTrans.id as id, trans.id as transactionId, acctTrans.moduleId as moduleId, acctTrans.moduleTypeId as moduleTypeId,
+acctTrans.moduleRefId as moduleRefId, acctTrans.accountId as accountId, acctTrans.description as description, acctTrans.status as status,
+trans.transactionDate as entryDate,
+acctTrans.amount as amount,
+(case when acctTrans.amount > 0 then acctTrans.amount else 0 end) as debit,
+(case when acctTrans.amount < 0 then acctTrans.amount * -1 else 0 end) as credit,
+(case when coalesce(acctTrans.amount, 0) > 0 then abs(coalesce(acctTrans.amount, 0)) * coalesce(acctt.debitSign, 0)
+else abs(coalesce(acctTrans.amount, 0)) * coalesce(acctt.creditSign, 0) end) as entryAmount
+from accountTransaction acctTrans
+left outer join account acct on (acct.id = acctTrans.accountId)
+left outer join `transaction` trans on (acctTrans.transactionId = trans.id)
+left outer join accountGroup acctgrp on (acct.accountGroup = acctgrp.id)
+left outer join accountType acctt on (acctt.id = acctgrp.accountType)
+) entries;

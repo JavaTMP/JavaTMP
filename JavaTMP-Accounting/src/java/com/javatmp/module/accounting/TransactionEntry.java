@@ -17,9 +17,7 @@ import javax.persistence.TemporalType;
  * @author JavaTMP
  */
 @Entity
-@Table(name = "transactionentry")
-@NamedQueries({
-    @NamedQuery(name = "TransactionEntry.findAll", query = "SELECT t FROM TransactionEntry t")})
+@Table(name = "transactionEntry")
 public class TransactionEntry implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -25,7 +25,7 @@ import javax.persistence.Transient;
  * @author JavaTMP
  */
 @Entity
-@Table(name = "moduletype")
+@Table(name = "moduleType")
 public class Moduletype implements Serializable {
 
     private static final long serialVersionUID = 1L;

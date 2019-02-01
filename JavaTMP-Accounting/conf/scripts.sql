@@ -28,3 +28,31 @@ left outer join themetranslation th2 on (t.themeId = th2.themeId)
 join `language` reflan on reflan.`languageId` = th2.`langId` and reflan.`isDefaultLang` = 1;
 -- where t.`themeId` = 'cyborg'
 ;
+select acct.id, acct.accountCode, acct.name, acct.`parentAccountId`, sum(case when att.amount > 0 then att.amount else 0 end) as 'Debit',
+sum(case when att.amount < 0 then (att.amount * -1) else 0 end) as 'credit', sum(att.amount) balance
+from account acct
+left outer join accounttransaction att on acct.id = att.accountId
+left outer join transaction trans on att.transactionId = trans.id
+group by acct.id, acct.accountCode, acct.name, acct.parentAccountId;
+
+select acctt.id, acctt.`transactionId`, acctt.`accountId`, acct.`name`, acctt.amount
+from accounttransaction acctt
+left join account acct on acct.id = acctt.`accountId`
+left join `transaction` t on t.id = acctt.`transactionId`;
+
+select acctt.*
+from accounttransaction acctt
+left join account acct on acct.id = acctt.`accountId`
+left join `transaction` t on t.id = acctt.`transactionId`;
+
+select language0_.languageId as col_0_0_, theme1_.themeId as col_1_0_, coalesce(themetrans2_.themeName, theme1_.themeName) as col_2_0_
+from language language0_
+join theme theme1_
+left outer join Themetranslation themetrans2_ on (themetrans2_.langId=language0_.languageId and themetrans2_.themeId=theme1_.themeId)
+where language0_.languageId= 'en';
+
+
+select t.`themeId`, tt.themeName, t.`themeName`
+from themetranslation tt
+right outer join theme t on t.`themeId` = tt.`themeId`;
+
