@@ -25,7 +25,7 @@ import javax.persistence.Table;
  * @author JavaTMP
  */
 @Entity
-@Table(name = "themetranslation")
+@Table(name = "themeTranslation")
 public class Themetranslation implements Serializable {
 
     @EmbeddedId

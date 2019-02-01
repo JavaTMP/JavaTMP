@@ -18,9 +18,7 @@ import javax.persistence.Table;
  * @author JavaTMP
  */
 @Entity
-@Table(name = "timezonetranslation")
-@NamedQueries({
-    @NamedQuery(name = "Timezonetranslation.findAll", query = "SELECT t FROM Timezonetranslation t")})
+@Table(name = "timezoneTranslation")
 public class Timezonetranslation implements Serializable {
 
     private static final long serialVersionUID = 1L;
