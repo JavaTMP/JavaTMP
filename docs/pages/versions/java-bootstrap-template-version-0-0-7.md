@@ -1,7 +1,7 @@
 ---
-title: Java Bootstrap Template Version 0.0.7 (Current Development Version)
+title: Java Bootstrap Template Version 0.0.7 (published on 1st of February, 2019)
 ---
-# Java Bootstrap Template Version 0.0.7 (Current Development Version)
+# Java Bootstrap Template Version 0.0.7 (published on 1st of February, 2019)
 
 ## ef2d7d0 on Feb 1, 2019, 4:31 PM GMT+4
 - Update @fortawesome/fontawesome-free from 5.6.3 to 5.7.0
