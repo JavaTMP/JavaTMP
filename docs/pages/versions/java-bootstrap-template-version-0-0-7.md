@@ -3,6 +3,12 @@ title: Java Bootstrap Template Version 0.0.7 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.7 (Current Development Version)
 
+## on
+- Update @fortawesome/fontawesome-free from 5.6.3 to 5.7.0
+- Update popper.js from 1.14.6 to 1.14.7
+- Update timeago from 1.6.3 to 1.6.4
+- Run `gulp` command which will use default task and generate `dist` folders.
+
 ## 53006c8 on Jan 26, 2019, 7:25 PM GMT+4
 - Upgrade `hibernate` from 5.2.17 to 5.4.1
 - Update persistent.xml JPA's version from 2.1 to 2.2
