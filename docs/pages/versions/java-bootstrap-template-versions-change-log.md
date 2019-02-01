@@ -2,7 +2,8 @@
 title: Java Bootstrap Template Versions Change Log
 ---
 # Java Bootstrap Template Versions Change Log
-*   [Version 0.0.8 (Current Development Version)](/pages/versions/java-bootstrap-template-version-0-0-8)
+*   [Version 0.0.9 (Current Development Version)](/pages/versions/java-bootstrap-template-version-0-0-9)
+*   [Version 0.0.8 (published on 1st of February, 2019)](/pages/versions/java-bootstrap-template-version-0-0-8)
 *   [Version 0.0.7 (published on 1st of February, 2019)](/pages/versions/java-bootstrap-template-version-0-0-7)
 *   [Version 0.0.6 (published on 18th of November, 2018)](/pages/versions/java-bootstrap-template-version-0-0-6)
 *   [Version 0.0.5 (published on 6th of October, 2018)](/pages/versions/java-bootstrap-template-version-0-0-5)
