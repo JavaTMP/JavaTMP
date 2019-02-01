@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.7 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.7 (Current Development Version)
 
-## on
+## ef2d7d0 on Feb 1, 2019, 4:31 PM GMT+4
 - Update @fortawesome/fontawesome-free from 5.6.3 to 5.7.0
 - Update popper.js from 1.14.6 to 1.14.7
 - Update timeago from 1.6.3 to 1.6.4
