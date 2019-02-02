@@ -22,7 +22,7 @@ with custom web MVC for serving JSP pages and handling Servlet requests:
 [Lang 3.8.1](http://commons.apache.org/proper/commons-lang/ "Apache Commons Lang Java Library")
 *   Use [Google Gson 2.8.5](https://github.com/google/gson "Google Gson JSON Java Library")
 *   Use [Standard Taglib 1.2](http://central.maven.org/maven2/javax/servlet/jstl/1.2/ "Java Web Standard Taglib maven repository")
-*   Use [hibernate-5.2.17](http://hibernate.org/orm/releases/5.2/ "Hibernate 5.2.17 Home & Download Page").
+*   Use [hibernate 5.4.1](http://hibernate.org/orm/releases/5.4/ "Hibernate 5.4.1 Home & Download Page").
 *   Use [mysql-connector-java-8.0.14.jar](https://dev.mysql.com/downloads/connector/j/8.0.html "Java Mysql Connector 8 for JDBC driver").
 *   Use [simplecaptcha-1.2.1.jar](https://sourceforge.net/projects/simplecaptcha/ "Simplecaptcha Home & Download Page").
 
