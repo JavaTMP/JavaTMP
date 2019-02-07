@@ -6,7 +6,7 @@
 package com.javatmp.user;
 
 import com.javatmp.module.user.User;
-import com.javatmp.domain.User_;
+import com.javatmp.module.user.User_;
 import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.module.user.UserService;
 import java.util.List;
