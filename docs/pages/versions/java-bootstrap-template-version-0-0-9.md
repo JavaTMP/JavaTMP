@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.9 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.9 (Current Development Version)
 
-## on 
+## 56ff38b on Feb 16, 2019, 5:51 PM GMT+4
 - update bootstrap-slider from 10.6.0 to 10.6.1
 - Run `gulp` command which will use default task and generate `dist` folders.
 
