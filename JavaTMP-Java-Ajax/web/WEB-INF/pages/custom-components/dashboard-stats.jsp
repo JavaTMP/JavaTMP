@@ -500,7 +500,7 @@
         <div class="col-xl-3 col-lg-6 col-12">
             <div class="card my-2">
                 <div class="media align-items-stretch">
-                    <div class="p-3 text-center bg-primary bg-darken-10">
+                    <div class="p-3 text-center bg-primary-darker-10">
                         <i class="fas fa-boxes text-white display-4"></i>
                     </div>
                     <div class="p-3 bg-primary text-white media-body">
@@ -513,7 +513,7 @@
         <div class="col-xl-3 col-lg-6 col-12">
             <div class="card my-2">
                 <div class="media align-items-stretch">
-                    <div class="p-3 text-center bg-danger bg-darken-10">
+                    <div class="p-3 text-center bg-danger-darker-10">
                         <i class="fas fa-user-plus text-white display-4"></i>
                     </div>
                     <div class="p-3 bg-danger text-white media-body">
@@ -526,7 +526,7 @@
         <div class="col-xl-3 col-lg-6 col-12">
             <div class="card my-2">
                 <div class="media align-items-stretch">
-                    <div class="p-3 text-center bg-success bg-darken-10">
+                    <div class="p-3 text-center bg-success-darker-10">
                         <i class="fas fa-cart-plus text-white display-4"></i>
                     </div>
                     <div class="p-3 bg-success text-white media-body">
@@ -539,7 +539,7 @@
         <div class="col-xl-3 col-lg-6 col-12">
             <div class="card my-2">
                 <div class="media align-items-stretch">
-                    <div class="p-3 text-center bg-warning bg-darken-10">
+                    <div class="p-3 text-center bg-warning-darker-10">
                         <i class="far fa-handshake text-white display-4"></i>
                     </div>
                     <div class="p-3 bg-warning text-white media-body">
@@ -559,7 +559,7 @@
                             <h5>Products</h5>
                             <h5 class="mb-0">51</h5>
                         </div>
-                        <div class="p-3 text-center bg-warning bg-darken-10">
+                        <div class="p-3 text-center bg-warning-darker-10">
                             <i class="fas fa-boxes text-white display-4"></i>
                         </div>
                     </div>
@@ -574,7 +574,7 @@
                             <h5>New Users</h5>
                             <h5 class="mb-0">2,42,852</h5>
                         </div>
-                        <div class="p-3 text-center bg-success bg-darken-10">
+                        <div class="p-3 text-center bg-success-darker-10">
                             <i class="fas fa-user-plus text-white display-4"></i>
                         </div>
                     </div>
@@ -589,7 +589,7 @@
                             <h5>New Orders</h5>
                             <h5 class="mb-0">1,96,258</h5>
                         </div>
-                        <div class="p-3 text-center bg-danger bg-darken-10">
+                        <div class="p-3 text-center bg-danger-darker-10">
                             <i class="fas fa-cart-plus text-white display-4"></i>
                         </div>
                     </div>
@@ -604,7 +604,7 @@
                             <h5>Total Profit</h5>
                             <h5 class="mb-0">4.7 M</h5>
                         </div>
-                        <div class="p-3 text-center bg-primary bg-darken-10">
+                        <div class="p-3 text-center bg-primary-darker-10">
                             <i class="far fa-handshake text-white display-4"></i>
                         </div>
                     </div>
@@ -760,7 +760,7 @@
         <div class="col-xl-6 col-md-12">
             <div class="card">
                 <div class="media align-items-stretch bg-primary text-white">
-                    <div class="bg-primary bg-darken-10 p-3 media-middle">
+                    <div class="bg-primary-darker-10 p-3 media-middle">
                         <i class="far fa-edit text-white display-4"></i>
                     </div>
                     <div class="media-body p-3">
@@ -776,7 +776,7 @@
         <div class="col-xl-6 col-md-12">
             <div class="card my-2">
                 <div class="media align-items-stretch bg-warning text-white">
-                    <div class="bg-warning bg-darken-10 p-3 media-middle">
+                    <div class="bg-warning-darker-10 p-3 media-middle">
                         <i class="far fa-comment text-white display-4"></i>
                     </div>
                     <div class="media-body p-3">
@@ -801,7 +801,7 @@
                         <h4>Total Sales</h4>
                         <span>Monthly sales</span>
                     </div>
-                    <div class="media-right bg-success bg-darken-10 p-3 media-middle">
+                    <div class="media-right bg-success-darker-10 p-3 media-middle">
                         <i class="far fa-thumbs-up text-white display-4"></i>
                     </div>
                 </div>
@@ -817,7 +817,7 @@
                         <h4>Total Cost</h4>
                         <span>Monthly Cost</span>
                     </div>
-                    <div class="media-right bg-danger bg-darken-10 p-3 media-middle">
+                    <div class="media-right bg-danger-darker-10 p-3 media-middle">
                         <i class="far fa-chart-bar text-white display-4"></i>
                     </div>
                 </div>
@@ -1003,7 +1003,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer bg-primary bg-darken-10">
+                <div class="card-footer bg-primary-darker-10">
                     <a href="javascript:;" class="d-flex text-white">
                         View Details
                         <span class="ml-auto">
@@ -1023,7 +1023,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer bg-warning bg-darken-10">
+                <div class="card-footer bg-warning-darker-10">
                     <a href="javascript:;" class="d-flex text-white">
                         View Details
                         <span class="ml-auto">
@@ -1044,7 +1044,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer bg-success bg-darken-10">
+                <div class="card-footer bg-success-darker-10">
                     <a href="javascript:;" class="d-flex text-white">
                         View Details
                         <span class="ml-auto">
@@ -1065,7 +1065,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer bg-danger bg-darken-10">
+                <div class="card-footer bg-danger-darker-10">
                     <a href="javascript:;" class="d-flex text-white">
                         View Details
                         <span class="ml-auto">
@@ -1188,18 +1188,6 @@
         </div>
     </div>
     <style type="text/css">
-        .bg-primary.bg-darken-10 {
-            background-color: #0062E6!important;
-        }
-        .bg-danger.bg-darken-10 {
-            background-color: #C31C2C!important;
-        }
-        .bg-success.bg-darken-10 {
-            background-color: #0F8E2C!important;
-        }
-        .bg-warning.bg-darken-10 {
-            background-color: #E6A800!important;
-        }
     </style>
     <script type="text/javascript">
         jQuery(document).ready(function () {

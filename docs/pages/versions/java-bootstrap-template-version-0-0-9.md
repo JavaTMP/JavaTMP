@@ -5,6 +5,7 @@ title: Java Bootstrap Template Version 0.0.9 (Current Development Version)
 
 ## on
 - Uploaded missing country flag images.
+- Introduce custom darker and lighter colors for standard themes colors.
 - Run `gulp` command which will use default task and generate `dist` folders.
 
 ## 56ff38b on Feb 16, 2019, 5:51 PM GMT+4
