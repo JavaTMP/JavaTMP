@@ -4,6 +4,7 @@ title: Java Bootstrap Template Version 0.0.9 (Current Development Version)
 # Java Bootstrap Template Version 0.0.9 (Current Development Version)
 
 ## on
+- Refactor doc pages by removing unimportant ones.
 - notify charts in cardlet for width changes.
 - Run `gulp` command which will use default task and generate `dist` folders.
 
