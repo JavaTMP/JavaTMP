@@ -134,9 +134,18 @@
                     $(cardBody).unblock();
                 }
             });
-        });
-        cardletElement.on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {
-            return true;
+
+            var ContainerResizeEventHandler = function (event) {
+                loadtimePerHourChart.resize();
+            };
+
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, ContainerResizeEventHandler);
+
+            cardletElement.on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {
+                $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.javaTmpContainerResizeEventName, ContainerResizeEventHandler);
+                return true;
+            });
+
         });
     });
 </script>
