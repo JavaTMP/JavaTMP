@@ -1,0 +1,6 @@
+@import "../common/variables.scss";
+
+table.dataTable.fixedHeader-floating,
+table.dataTable.fixedHeader-locked {
+    background-color: $body-bg;
+}

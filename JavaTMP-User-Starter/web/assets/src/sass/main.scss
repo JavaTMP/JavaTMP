@@ -1,25 +1,15 @@
-
-/*********************************************
+/********************************************
 Import JavaTMP Global Variables
 *********************************************/
 @import "common/variables.scss";
 @import "common/colors-variables.scss";
 
-/*!************************************
+/*************************************
 Include original Bootstrap SCSS file
 ***************************************/
 @import "../../../../../node_modules/bootstrap/scss/bootstrap";
 
-/*!********************************************
-JavaTMP Base Tempalte Imports
-*********************************************/
-@import "partials/base.scss";
-@import "partials/navbar.scss";
-@import "partials/sidebar.scss";
-@import "partials/breadcrumb.scss";
-@import "partials/footer.scss";
-
-/*!********************************************
+/*!******************************************
 Custom Plugins Imports
 *********************************************/
 @import "plugins/custom-bootstrap-colorselector.scss";
@@ -31,6 +21,9 @@ Custom Plugins Imports
 @import "plugins/custom-datatables.net-responsive-bs4.scss";
 @import "plugins/custom-datatables.net-select-bs4.scss";
 @import "plugins/custom-datatables.net-keyTable.bootstrap4.scss";
+@import "plugins/custom-datatables.net-fixedheader-bs4.scss";
+@import "plugins/custom-datatables.net-fixedcolumns.bootstrap4.scss";
+@import "plugins/custom-datatables.net-rowgroup.bootstrap4.scss";
 @import "plugins/custom-fancytree-skin-bootstrap.scss";
 @import "plugins/custom-fullcalendar.scss";
 @import "plugins/custom-ion.rangeSlider.skinHTML5.scss";
@@ -49,3 +42,12 @@ Custom Plugins Imports
 @import "plugins/custom-material-icons.scss";
 @import "plugins/custom-steps.scss";
 @import "plugins/custom-bootstrap-colors.scss";
+
+/*!******************************************
+JavaTMP Default Layout Imports
+*********************************************/
+@import "partials/base.scss";
+@import "partials/navbar.scss";
+@import "partials/sidebar.scss";
+@import "partials/breadcrumb.scss";
+@import "partials/footer.scss";

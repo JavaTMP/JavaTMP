@@ -20,6 +20,7 @@
         sidebarHiddenEventName: "sidebarHidden",
         sidebarShownEventName: "sidebarShown",
         listOfFixedElement: ['.main-javatmp-navbar', '.main-breadcrumb-bar'],
+        mainSidebarMenuClass: '.main-sidebar-menu',
         mCustomScrollbarOptions: {
             theme: "javatmp",
             alwaysShowScrollbar: 0,
@@ -163,8 +164,8 @@
             container: ".sidebar"
         });
 
-        // Initialize sidebar .metismenu element using metisMenu jQuery Plugin.
-        $('.metismenu').metisMenu({
+        // Initialize sidebar menu element using metisMenu jQuery Plugin.
+        $(javatmp.settings.mainSidebarMenuClass).metisMenu({
             toggle: false,
             preventDefault: true
         }).on('shown.metisMenu', function (event) {
@@ -176,8 +177,8 @@
         }).on('hidden.metisMenu', function (event) {
         });
 
-        // Initialize and define main AJAX lifecycle for template by listening on click event of sidebar's metismenu links.
-        $(".metismenu").on("click", 'a[target!="_blank"][href!="#"]', function (event) {
+        // Initialize and define main AJAX lifecycle for template by listening on click event of sidebar's main menu links.
+        $(javatmp.settings.mainSidebarMenuClass).on("click", 'a[target!="_blank"][href!="#"]', function (event) {
             $(javatmp.settings.defaultOutputSelector).BootstrapActionable("populateByLinkEvent", {
                 linkElement: $(this),
                 linkEvent: event,
@@ -188,7 +189,7 @@
                         window.location.hash = element.attr("href");
                     }
 
-                    $('.metismenu a.mm-active').removeClass("mm-active");
+                    $('a.mm-active', javatmp.settings.mainSidebarMenuClass).removeClass("mm-active");
 
                     element.addClass('mm-active');
                     element.parents("li").addClass("mm-active");
@@ -235,7 +236,7 @@
 
         $('#filter-menu-id').keyup(function () {
             var text = $(this).val().toLowerCase();
-            $('.metismenu li').each(function () {
+            $('li', javatmp.settings.mainSidebarMenuClass).each(function () {
                 if ($(this).text().toLowerCase().indexOf(text) === -1) {
                     $(this).hide();
                     $(this).children().removeClass("mm-active");
@@ -243,8 +244,8 @@
                 } else {
                     $(this).show();
                     $(this).children("ul").css({height: "auto"});
-                    $(this).parentsUntil(".metismenu", "li").addClass("mm-active");
-                    $(this).parentsUntil(".metismenu", "ul").addClass("mm-show in");
+                    $(this).parentsUntil(javatmp.settings.mainSidebarMenuClass, "li").addClass("mm-active");
+                    $(this).parentsUntil(javatmp.settings.mainSidebarMenuClass, "ul").addClass("mm-show in");
                 }
             });
         });
@@ -252,7 +253,7 @@
         // listen on click event on breadcrumb bar's links and fire corresponding item in the sidebar
         $(".main-breadcrumb-bar").on("click", 'a[target!="_blank"][href!="#"]', function (event) {
             event.preventDefault();
-            $('.metismenu a[href="' + $(this).attr("href") + '"]').trigger("click");
+            $('a[href="' + $(this).attr("href") + '"]', javatmp.settings.mainSidebarMenuClass).trigger("click");
         });
 
         // issue #186 : Hide sidebar when press outside it

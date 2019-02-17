@@ -4,6 +4,10 @@ title: Java Bootstrap Template Version 0.0.9 (Current Development Version)
 # Java Bootstrap Template Version 0.0.9 (Current Development Version)
 
 ## on
+- use `main-sidebar-menu` name for `.metismenu` in sidebar in index.js
+- Solve the core sass files for any uses of deprecated BS 4.3.1 mixins
+- solve Datatables Bootstrap Fixed Column and header background
+- Update bootstrap-reverse from 1.0.11 to 4.3.1
 - Refactor doc pages by removing unimportant ones.
 - notify charts in cardlet for width changes.
 - Run `gulp` command which will use default task and generate `dist` folders.

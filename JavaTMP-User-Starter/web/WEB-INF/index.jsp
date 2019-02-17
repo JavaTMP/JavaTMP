@@ -122,7 +122,7 @@
                                 </div>
                             </form>
                         </div>
-                        <ul class="metismenu">
+                        <ul class="main-sidebar-menu metismenu">
                             <li>
                                 <a href="${pageContext.request.contextPath}/pages/home/home">
                                     <i class="fa fa-lg fa-fw fa-home"></i>
