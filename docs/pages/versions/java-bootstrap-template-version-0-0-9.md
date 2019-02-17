@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.9 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.9 (Current Development Version)
 
-## on
+## 454712c on Feb 17, 2019, 2:20 PM GMT+4
 - use `main-sidebar-menu` name for `.metismenu` in sidebar in index.js
 - Solve the core sass files for any uses of deprecated BS 4.3.1 mixins
 - solve Datatables Bootstrap Fixed Column and header background
