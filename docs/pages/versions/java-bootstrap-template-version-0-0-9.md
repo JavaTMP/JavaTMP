@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.9 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.9 (Current Development Version)
 
-## on
+## 9029750 on Feb 20, 2019, 2:51 PM GMT+4
 - Add missing flag images for countries.
 - add more columns `documentType, parentDocumentId, status, createdByUserId` to document table in JavaTMP-User-Starter project.
 - add more country records for country table.
