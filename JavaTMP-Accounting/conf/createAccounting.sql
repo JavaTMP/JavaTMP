@@ -33,7 +33,7 @@ CREATE TABLE accountType (
     creditSign int(1) not null,
     reportTypeId int unsigned,
     CONSTRAINT accountType_id_pk PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 INSERT INTO accountType (id, name, debitSign, creditSign, reportTypeId) VALUES
 (1, 'Assets', +1, -1, 1),
@@ -49,7 +49,7 @@ CREATE TABLE accountGroup (
     accountType int(1) UNSIGNED,
     CONSTRAINT accountGroup_id_pk PRIMARY KEY (id),
     CONSTRAINT accountGroup_accountType_fk FOREIGN KEY (accountType) REFERENCES accountType (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 -- reportTypeId --> 1: Balance Sheet, 2: Profit and Loss
 INSERT INTO accountGroup (id, name, description, accountType) VALUES
@@ -89,7 +89,7 @@ CREATE TABLE account (
     CONSTRAINT account_id_pk PRIMARY KEY (id),
     CONSTRAINT account_accountGroup_fk FOREIGN KEY (accountGroup) REFERENCES accountGroup (id),
     CONSTRAINT account_parentAccountId_fk FOREIGN KEY (parentAccountId) REFERENCES account (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (2,'100100','Asset Accounts','description',NULL,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-01 08:00:00',NULL);
 INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (3,'100200','Lability Accounts','description',NULL,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-01 08:00:00',NULL);
@@ -140,7 +140,7 @@ CREATE TABLE `module` (
     status TINYINT,
     creationDate TIMESTAMP NOT NULL default CURRENT_TIMESTAMP ,
     CONSTRAINT module_id_pk PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 INSERT INTO `module` (id, `name`, description, status, `creationDate`) VALUES
 (1, 'Customers', 'Customers', 1, DEFAULT),
@@ -161,7 +161,7 @@ CREATE TABLE moduleType (
     CONSTRAINT moduelType_moduleId_fk FOREIGN KEY (moduleId) REFERENCES module (id),
     CONSTRAINT moduleType_rootAccountId_fk FOREIGN KEY (rootAccountId) REFERENCES account (id),
     CONSTRAINT moduleId_name_uni UNIQUE KEY (moduleId, name)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 INSERT INTO moduleType (id, `moduleId`, `name`, description, status, `rootAccountId`, `creationDate`) VALUES
 (1, 1, 'Trade Receivable', null, 1, 12, default),
@@ -196,7 +196,7 @@ CREATE TABLE voucherType (
     status TINYINT,
     creationDate TIMESTAMP NOT NULL default CURRENT_TIMESTAMP,
     CONSTRAINT transactionType_id_pk PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 INSERT INTO voucherType (id, `name`, description, status, `creationDate`) VALUES
 (1, 'Journal Voucher', 'Journal Voucher', 1, DEFAULT);
@@ -213,7 +213,7 @@ CREATE TABLE transaction (
     creationDate TIMESTAMP NOT NULL,
     CONSTRAINT transaction_id_pk PRIMARY KEY (id),
     CONSTRAINT transaction_voucherTypeId_fk FOREIGN KEY (voucherTypeId) REFERENCES voucherType (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 CREATE TABLE accountTransaction (
     id BIGINT UNSIGNED not null AUTO_INCREMENT,
@@ -230,7 +230,7 @@ CREATE TABLE accountTransaction (
     CONSTRAINT acctTrans_acctId_fk FOREIGN KEY (accountId) REFERENCES account (id),
     CONSTRAINT acctTrans_moduleId_fk FOREIGN KEY (moduleId) REFERENCES `module` (id),
     CONSTRAINT acctTrans_moduleTypeId_fk FOREIGN KEY (moduleTypeId) REFERENCES moduleType (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 CREATE TABLE costCenter (
     id BIGINT UNSIGNED not null AUTO_INCREMENT,
@@ -241,7 +241,7 @@ CREATE TABLE costCenter (
     creationDate TIMESTAMP NOT NULL default CURRENT_TIMESTAMP,
     CONSTRAINT costCenter_id_pk PRIMARY KEY (id),
     CONSTRAINT costCenter_parentId_fk FOREIGN KEY (parentId) REFERENCES costCenter (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 INSERT INTO costCenter (`name`, `parentId`, description, status, `creationDate`) VALUES
 ('car1', NULL, '', 1, DEFAULT),
@@ -263,7 +263,7 @@ CREATE TABLE acctTransCtCenter (
     CONSTRAINT acctTransCtCent_pk PRIMARY KEY (accountTransactionId, costCenterId),
     CONSTRAINT acctTransCtCent_acctTransId_fk FOREIGN KEY (accountTransactionId) REFERENCES accountTransaction (id),
     CONSTRAINT acctTransCtCent_ctCentId_fk FOREIGN KEY (costCenterId) REFERENCES costCenter (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 CREATE TABLE customer (
     id BIGINT UNSIGNED not null AUTO_INCREMENT,
@@ -271,7 +271,7 @@ CREATE TABLE customer (
     status TINYINT,
     creationDate TIMESTAMP NOT NULL default CURRENT_TIMESTAMP,
     CONSTRAINT customer_id_pk PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 INSERT INTO customer (`name`, status, `creationDate`) VALUES
 ('Mohamed Darim', 1, DEFAULT),
@@ -287,7 +287,7 @@ CREATE TABLE customerAccount (
     CONSTRAINT custAcct_customerId_fk FOREIGN KEY (customerId) REFERENCES customer (id),
     CONSTRAINT custAcct_moduleTypeId_fk FOREIGN KEY (moduleTypeId) REFERENCES moduleType (id),
     CONSTRAINT custAcct_accountId_fk FOREIGN KEY (accountId) REFERENCES account (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 CREATE TABLE supplier (
     id BIGINT UNSIGNED not null AUTO_INCREMENT,
@@ -295,7 +295,7 @@ CREATE TABLE supplier (
     status TINYINT,
     creationDate TIMESTAMP NOT NULL default CURRENT_TIMESTAMP,
     CONSTRAINT supplier_id_pk PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 INSERT INTO supplier (`name`, status, `creationDate`) VALUES
 ('Planet Caffee', 1, DEFAULT),
@@ -311,7 +311,7 @@ CREATE TABLE supplierAccount (
     CONSTRAINT supAcct_supplierId_fk FOREIGN KEY (supplierId) REFERENCES supplier (id),
     CONSTRAINT supAcct_moduleTypeId_fk FOREIGN KEY (moduleTypeId) REFERENCES moduleType (id),
     CONSTRAINT supAcct_accountId_fk FOREIGN KEY (accountId) REFERENCES account (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 CREATE TABLE employee (
     id BIGINT UNSIGNED not null AUTO_INCREMENT,
@@ -319,7 +319,7 @@ CREATE TABLE employee (
     status TINYINT,
     creationDate TIMESTAMP NOT NULL default CURRENT_TIMESTAMP,
     CONSTRAINT employee_id_pk PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 INSERT INTO employee (`name`, status, `creationDate`) VALUES
 ('Mohamed Darim Wasif Sulibi', 1, DEFAULT),
@@ -335,7 +335,7 @@ CREATE TABLE employeeAccount (
     CONSTRAINT empAcct_supplierId_fk FOREIGN KEY (employeeId) REFERENCES employee (id),
     CONSTRAINT empAcct_moduleTypeId_fk FOREIGN KEY (moduleTypeId) REFERENCES moduleType (id),
     CONSTRAINT empAcct_accountId_fk FOREIGN KEY (accountId) REFERENCES account (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 CREATE TABLE fixedAsset (
     id BIGINT UNSIGNED not null AUTO_INCREMENT,
@@ -343,7 +343,7 @@ CREATE TABLE fixedAsset (
     status TINYINT,
     creationDate TIMESTAMP NOT NULL default CURRENT_TIMESTAMP,
     CONSTRAINT fixedAsset_id_pk PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 INSERT INTO fixedAsset (`name`, status, `creationDate`) VALUES
 ('table', 1, DEFAULT),
@@ -359,7 +359,7 @@ CREATE TABLE fixedAssetAccount (
     CONSTRAINT fixedAsset_supplierId_fk FOREIGN KEY (fixedAssetId) REFERENCES fixedAsset (id),
     CONSTRAINT fixedAsset_moduleTypeId_fk FOREIGN KEY (moduleTypeId) REFERENCES moduleType (id),
     CONSTRAINT fixedAsset_accountId_fk FOREIGN KEY (accountId) REFERENCES account (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 
 CREATE TABLE inventory (
@@ -368,7 +368,7 @@ CREATE TABLE inventory (
     status TINYINT,
     creationDate TIMESTAMP NOT NULL default CURRENT_TIMESTAMP,
     CONSTRAINT inventory_id_pk PRIMARY KEY (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 INSERT INTO inventory (`name`, status, `creationDate`) VALUES
 ('Computer', 1, DEFAULT),
@@ -384,7 +384,7 @@ CREATE TABLE inventoryAccount (
     CONSTRAINT inventory_supplierId_fk FOREIGN KEY (inventoryId) REFERENCES inventory (id),
     CONSTRAINT inventory_moduleTypeId_fk FOREIGN KEY (moduleTypeId) REFERENCES moduleType (id),
     CONSTRAINT inventory_accountId_fk FOREIGN KEY (accountId) REFERENCES account (id)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB;
 
 CREATE OR REPLACE VIEW transactionEntry AS
 select entries.*,

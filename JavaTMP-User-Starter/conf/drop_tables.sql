@@ -1,3 +1,4 @@
+SET FOREIGN_KEY_CHECKS = 0;
 drop table if exists `activity`;
 drop table IF EXISTS `user`;
 drop table IF EXISTS `document`;
@@ -9,3 +10,4 @@ drop table IF EXISTS `themeTranslation`;
 drop table IF EXISTS `theme`;
 drop table IF EXISTS `languageTranslation`;
 drop table IF EXISTS `language`;
+SET FOREIGN_KEY_CHECKS = 1;

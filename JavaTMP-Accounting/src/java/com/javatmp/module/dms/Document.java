@@ -36,6 +36,11 @@ public class Document implements Serializable {
 
     private Long randomHash;
 
+    private Short documentType;
+    private Long parentDocumentId;
+    private Short status;
+    private Long createdByUserId;
+
     /**
      * @return the documentId
      */
@@ -132,6 +137,62 @@ public class Document implements Serializable {
      */
     public void setRandomHash(Long randomHash) {
         this.randomHash = randomHash;
+    }
+
+    /**
+     * @return the documentType
+     */
+    public Short getDocumentType() {
+        return documentType;
+    }
+
+    /**
+     * @param documentType the documentType to set
+     */
+    public void setDocumentType(Short documentType) {
+        this.documentType = documentType;
+    }
+
+    /**
+     * @return the parentDocumentId
+     */
+    public Long getParentDocumentId() {
+        return parentDocumentId;
+    }
+
+    /**
+     * @param parentDocumentId the parentDocumentId to set
+     */
+    public void setParentDocumentId(Long parentDocumentId) {
+        this.parentDocumentId = parentDocumentId;
+    }
+
+    /**
+     * @return the status
+     */
+    public Short getStatus() {
+        return status;
+    }
+
+    /**
+     * @param status the status to set
+     */
+    public void setStatus(Short status) {
+        this.status = status;
+    }
+
+    /**
+     * @return the createdByUserId
+     */
+    public Long getCreatedByUserId() {
+        return createdByUserId;
+    }
+
+    /**
+     * @param createdByUserId the createdByUserId to set
+     */
+    public void setCreatedByUserId(Long createdByUserId) {
+        this.createdByUserId = createdByUserId;
     }
 
 }

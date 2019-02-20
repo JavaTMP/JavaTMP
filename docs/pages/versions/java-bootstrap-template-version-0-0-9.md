@@ -3,6 +3,13 @@ title: Java Bootstrap Template Version 0.0.9 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.9 (Current Development Version)
 
+## on
+- Add missing flag images for countries.
+- add more columns `documentType, parentDocumentId, status, createdByUserId` to document table in JavaTMP-User-Starter project.
+- add more country records for country table.
+- separate table user and document testing insert script to `insert_user_and_doc.sql` file.
+- add around 100 testing user profiles to user with profile images.
+
 ## 454712c on Feb 17, 2019, 2:20 PM GMT+4
 - use `main-sidebar-menu` name for `.metismenu` in sidebar in index.js
 - Solve the core sass files for any uses of deprecated BS 4.3.1 mixins

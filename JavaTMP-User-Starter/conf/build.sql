@@ -6,5 +6,6 @@ USE appdb;
 source drop_tables.sql
 source create_tables.sql
 source insert_tables.sql
+source insert_user_and_doc.sql
 
 

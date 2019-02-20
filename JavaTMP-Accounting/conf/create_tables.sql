@@ -63,7 +63,12 @@ CREATE TABLE `document` (
     documentContent MEDIUMBLOB NOT NULL,
     creationDate TIMESTAMP NOT NULL,
     randomHash BIGINT NOT NULL,
-    CONSTRAINT document_documentId_pk PRIMARY KEY (documentId)
+    documentType int(1) NOT NULL,
+    parentDocumentId BIGINT DEFAULT NULL,
+    status TINYINT NOT NULL,
+    createdByUserId BIGINT DEFAULT NULL,
+    CONSTRAINT document_documentId_pk PRIMARY KEY (documentId),
+    CONSTRAINT document_parentDocumentId_fk FOREIGN KEY (parentDocumentId) REFERENCES document (documentId)
 ) ENGINE=InnoDB;
 
 CREATE TABLE `user` (
@@ -92,6 +97,9 @@ CREATE TABLE `user` (
     CONSTRAINT user_theme_fk FOREIGN KEY (theme) REFERENCES theme (themeId),
     CONSTRAINT user_timezone_fk FOREIGN KEY (timezone) REFERENCES timezone (timezoneId)
 ) ENGINE=InnoDB;
+
+-- Add cons CONSTRAINT on document for user id:
+ALTER TABLE document ADD CONSTRAINT document_createdByUserId_fk FOREIGN KEY (createdByUserId) REFERENCES `user` (id);
 
 CREATE TABLE `activity` (
     id BIGINT NOT NULL AUTO_INCREMENT,

@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.javatmp.module.dms.Document;
 import com.javatmp.module.user.User;
+import com.javatmp.module.user.User_;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.util.MD5Util;
 import java.io.FileNotFoundException;
@@ -21,12 +22,17 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -88,6 +94,7 @@ public class PopulateDBFromJson {
 //            em.persist(logingUser);
 
             for (int i = 0; i < data.size(); i++) {
+                System.out.println("Try to persist i [" + i + "]");
                 User user = new User();
                 Map<String, String> record = data.get(i);
                 user.setUserName(record.get("userName"));
@@ -111,8 +118,13 @@ public class PopulateDBFromJson {
                 user.setEmail(record.get("email"));
                 user.setLang(record.get("lang"));
                 user.setTheme(record.get("theme"));
-                System.out.println("countryId [" + record.get("countryId") + "]");
-                user.setCountryId(record.get("countryId"));
+                String countryCode = record.get("countryId");
+                if (countryCode.equals("HM")) {
+                    countryCode = "US";
+                }
+                System.out.println("countryId [" + countryCode + "]");
+
+                user.setCountryId(countryCode);
                 user.setAddress(record.get("address"));
                 user.setTimezone(record.get("timezone"));
                 user.setLastAccessTime(null);
@@ -122,14 +134,24 @@ public class PopulateDBFromJson {
                 String[] parts = imageContentBase64URL.split("[:;,]");
 //            System.out.println(Arrays.toString(parts));
 
-                String docType = parts[1];
-                String docBinary = parts[3];
-                Document document = prepareDocument("profilePicture", docType, docBinary);
-                em.persist(document);
-                user.setProfilePicDocumentId(document.getDocumentId());
+                CriteriaBuilder cb = em.getCriteriaBuilder();
+                CriteriaQuery<User> cq = cb.createQuery(User.class);
+                Root<User> from = cq.from(User.class);
+                cq.select(from);
+                cq.where(cb.equal(from.get(User_.userName), user.getUserName()));
+                TypedQuery<User> query = em.createQuery(cq);
+                List<User> tempList = query.getResultList();
+                if (tempList == null || tempList.size() == 0) {
+                    String docType = parts[1];
+                    String docBinary = parts[3];
+                    Document document = prepareDocument("profilePicture", docType, docBinary);
+                    em.persist(document);
+                    user.setProfilePicDocumentId(document.getDocumentId());
 //                user.setProfilePicDocument(document);
 //                System.out.println("persisting [" + MvcHelper.deepToString(user) + "]");
-                em.persist(user);
+                    em.persist(user);
+                    document.setCreatedByUserId(user.getId());
+                }
             }
             em.flush();
             em.getTransaction().commit();
@@ -151,6 +173,11 @@ public class PopulateDBFromJson {
         byte[] newImage = Base64.getDecoder().decode(defaultProfileImage);
         profileDocument.setDocumentSize(newImage.length);
         profileDocument.setDocumentContent(newImage);
+
+        profileDocument.setDocumentType((short) 1);
+        profileDocument.setParentDocumentId(null);
+        profileDocument.setStatus((short) 1);
+        profileDocument.setCreatedByUserId(null);
 
         return profileDocument;
     }

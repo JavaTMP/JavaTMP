@@ -104,6 +104,10 @@ public class UserService {
             em.persist(document);
             user.setProfilePicDocumentId(document.getDocumentId());
             em.persist(user);
+
+            // update document with user created it
+            document.setCreatedByUserId(user.getId());
+
             em.getTransaction().commit();
         } catch (PersistenceException e) {
             e.printStackTrace();

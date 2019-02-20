@@ -1,13 +1,9 @@
 package com.javatmp.module.user;
 
-import com.javatmp.module.country.Country;
 import com.javatmp.module.country.Countrytranslation;
 import com.javatmp.module.dms.Document;
-import com.javatmp.module.language.Language;
 import com.javatmp.module.language.Languagetranslation;
-import com.javatmp.module.theme.Theme;
 import com.javatmp.module.theme.Themetranslation;
-import com.javatmp.module.timezone.Timezone;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.domain.ResponseMessage;
 import com.javatmp.module.dms.DocumentService;
@@ -88,6 +84,12 @@ public class CreateUserController extends HttpServlet {
             fileUploading.setDocumentName(fileName);
             fileUploading.setDocumentSize(partSize);
             fileUploading.setCreationDate(new Date());
+
+            fileUploading.setDocumentType((short) 1);
+            fileUploading.setParentDocumentId(null);
+            fileUploading.setStatus((short) 1);
+            fileUploading.setCreatedByUserId(null);
+
             long randomLongValue = Double.valueOf((Math.random() + 1) * 1000L).longValue();
             fileUploading.setRandomHash((Long) Math.abs(fileUploading.getDocumentName().hashCode() + randomLongValue));
             // the following block is intended for simple cases
