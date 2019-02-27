@@ -41,7 +41,7 @@ INSERT INTO accountType (id, name, debitSign, creditSign, reportTypeId) VALUES
 (3, 'Equity', -1, +1, 1),
 (4, 'Revenue/Income', -1, +1, 2),
 (5, 'Expense/Cost', +1, -1, 2);
-
+-- (All sum of type 4) - (all sum of type 5) => 3
 CREATE TABLE accountGroup (
     id int(3) UNSIGNED not null,
     name varchar(32) not null,
@@ -200,6 +200,8 @@ CREATE TABLE voucherType (
 
 INSERT INTO voucherType (id, `name`, description, status, `creationDate`) VALUES
 (1, 'Journal Voucher', 'Journal Voucher', 1, DEFAULT);
+INSERT INTO voucherType (id, `name`, description, status, `creationDate`) VALUES
+(1, 'Invoice Voucher', 'Invoice Voucher', 1, DEFAULT);
 
 CREATE TABLE transaction (
     id BIGINT UNSIGNED not null AUTO_INCREMENT,
