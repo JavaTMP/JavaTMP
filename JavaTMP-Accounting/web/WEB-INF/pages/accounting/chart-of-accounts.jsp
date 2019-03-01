@@ -19,6 +19,10 @@
                             Update Selected Account
                         </a>
                         <a class="d-inline nav-link" href="javascript:;"
+                           action-name="viewAccountLedgerPageButton" id="viewAccountLedgerPageButton">
+                            View Account Ledger Page
+                        </a>
+                        <a class="d-inline nav-link" href="javascript:;"
                            action-name="Delete-User-Action" id="UserList-DeleteSelectedUserId" >
                             Delete Selected Account
                         </a>
@@ -51,12 +55,16 @@
     </div>
     <div id="contextMenu" class="dropdown-menu" role="menu" style="display:none;position: fixed;" >
         <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Add-New-User-Popup-Action">
-            <i class="fas fa-plus text-primary"></i>
+            <i class="fas fa-plus fa-fw text-primary"></i>
             Add New Account
         </a>
         <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Update-Complete-User-Action">
             <i class="fa fa-edit fa-fw text-primary"></i>
             Update Selected Account
+        </a>
+        <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="viewAccountLedgerPageButton">
+            <i class="far fa-envelope-open fa-fw text-primary"></i>
+            Account Ledger
         </a>
         <div class="dropdown-divider"></div>
         <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Delete-User-Action">
@@ -64,15 +72,6 @@
             Delete Selected Account
         </a>
     </div>
-    <select name="accountGroup" class="form-control" hidden="">
-        <c:choose>
-            <c:when test="${fn:length(requestScope.accountGroups) > 0}">
-                <c:forEach items="${requestScope.accountGroups}" var="accountGroup">
-                    <option  value="${accountGroup.id}">${accountGroup.name}</option>
-                </c:forEach>
-            </c:when>
-        </c:choose>
-    </select>
     <!--
     Reference Your external Stylesheet file here
     if your feature or plugins could not support to run globally.
@@ -354,7 +353,20 @@
                         BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
                     }
                 });
-
+                var viewAccountLedgerPageButton = $("#viewAccountLedgerPageButton");
+                viewAccountLedgerPageButton.on("click", function (event) {
+                    //                var selectedCount = table.rows({selected: true}).count();
+                    var selectedNode = chartOfAccountTree.fancytree('getTree').getActiveNode();
+                    if (selectedNode) {
+                        var selectedRecord = selectedNode.data;
+                        var urlPath = javatmp.settings.contextPath + "/accounting/AccountLedger";
+                        var passData = {id: selectedRecord.id};
+                        $(javatmp.settings.defaultOutputSelector).data("passData", passData);
+                        $('a[href="' + urlPath + '"]', javatmp.settings.mainSidebarMenuClass).trigger("click");
+                    } else {
+                        BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
+                    }
+                });
 
             });
 

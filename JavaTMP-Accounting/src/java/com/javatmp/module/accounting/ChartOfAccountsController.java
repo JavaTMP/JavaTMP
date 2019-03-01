@@ -25,9 +25,6 @@ public class ChartOfAccountsController extends HttpServlet {
 
         ServletContext context = request.getServletContext();
         ServicesFactory sf = (ServicesFactory) context.getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
-        AccountService accountService = sf.getAccountService();
-        List<Accountgroup> accountGroups = accountService.getAccountGroups();
-        request.setAttribute("accountGroups", accountGroups);
         request.getRequestDispatcher(requestPage).forward(request, response);
     }
 
