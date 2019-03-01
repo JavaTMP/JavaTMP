@@ -6,7 +6,7 @@ import com.google.gson.reflect.TypeToken;
 import com.javatmp.module.customer.Customer;
 import com.javatmp.module.employee.Employee;
 import com.javatmp.module.fixedAsset.FixedAsset;
-import com.javatmp.module.inventory.Inventory;
+import com.javatmp.module.service.Service;
 import com.javatmp.module.supplier.Supplier;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.domain.ResponseMessage;
@@ -54,8 +54,11 @@ public class ModuleItemList extends HttpServlet {
             List<FixedAsset> fixedAssets = accountService.getAllList(FixedAsset.class);
             responseMessage.setData(fixedAssets);
         } else if (moduleId == 5) { // inventory
-            List<Inventory> inventorys = accountService.getAllList(Inventory.class);
+            List<Service> inventorys = accountService.getAllList(Service.class);
             responseMessage.setData(inventorys);
+        } else if (moduleId == 6) { // inventory
+            List<Service> services = accountService.getAllList(Service.class);
+            responseMessage.setData(services);
         }
 
         MvcHelper.sendMessageAsJson(response, responseMessage);

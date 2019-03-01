@@ -1,8 +1,8 @@
-package com.javatmp.module.inventory;
+package com.javatmp.module.service;
 
 import com.javatmp.module.service.*;
-import com.javatmp.module.inventory.*;
-import com.javatmp.module.inventory.*;
+import com.javatmp.module.service.*;
+import com.javatmp.module.service.*;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -16,8 +16,8 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "inventory")
-public class Inventory implements Serializable {
+@Table(name = "service")
+public class Service implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -35,14 +35,14 @@ public class Inventory implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date creationDate;
 
-    public Inventory() {
+    public Service() {
     }
 
-    public Inventory(Long id) {
+    public Service(Long id) {
         this.id = id;
     }
 
-    public Inventory(Long id, String name, Date creationDate) {
+    public Service(Long id, String name, Date creationDate) {
         this.id = id;
         this.name = name;
         this.creationDate = creationDate;
@@ -90,10 +90,10 @@ public class Inventory implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Inventory)) {
+        if (!(object instanceof Service)) {
             return false;
         }
-        Inventory other = (Inventory) object;
+        Service other = (Service) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -102,7 +102,7 @@ public class Inventory implements Serializable {
 
     @Override
     public String toString() {
-        return "com.javatmp.module.inventory.Inventory[ id=" + id + " ]";
+        return "com.javatmp.module.service.Service[ id=" + id + " ]";
     }
 
 }

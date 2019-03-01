@@ -113,7 +113,7 @@
                         "data": function (currentDate) {
                             currentDate._ajaxGlobalBlockUI = false; // window blocked until data return
                             if (passData && passData.id && passData.id > 0) {
-                                currentDate.columns[3].search.value = passData.id;
+                                currentDate.columns[5].search.value = passData.id;
                             }
                             return JSON.stringify(currentDate);
                         },

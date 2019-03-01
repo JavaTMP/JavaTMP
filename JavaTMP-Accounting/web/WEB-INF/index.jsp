@@ -234,6 +234,19 @@
                             </li>
                             <li>
                                 <a class="has-arrow" href="#">
+                                    <i class="far fa-paper-plane fa-lg fa-fw"></i>
+                                    Service
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/service/service-list">
+                                            Service List
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="has-arrow" href="#">
                                     <i class="far fa-lg fa-fw fa-chart-bar"></i>
                                     Reports
                                 </a>

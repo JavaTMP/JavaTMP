@@ -1,6 +1,6 @@
 package com.javatmp.module.inventory;
 
-import com.javatmp.module.inventory.*;
+import com.javatmp.module.service.*;
 import com.javatmp.module.inventory.*;
 import com.javatmp.module.user.*;
 import com.javatmp.mvc.MvcHelper;

@@ -1,4 +1,4 @@
-package com.javatmp.module.inventory;
+package com.javatmp.module.service;
 
 import com.javatmp.module.service.*;
 import com.javatmp.mvc.domain.table.DataTableRequest;
@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/inventory/ListInventorys")
-public class ListInventory extends HttpServlet {
+@WebServlet("/service/ListServices")
+public class ListService extends HttpServlet {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
 
@@ -29,11 +29,11 @@ public class ListInventory extends HttpServlet {
         try {
             ResponseMessage responseMessage = new ResponseMessage();
             ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
-            InventoryService inventoryService = sf.getInventoryService();
+            ServiceService serviceService = sf.getServiceService();
             DataTableRequest tableRequest = (DataTableRequest) MvcHelper.readObjectFromRequest(request, DataTableRequest.class);
             logger.info("datatableRequest [" + MvcHelper.deepToString(tableRequest) + "]");
 
-            DataTableResults<Inventory> dataTableResult = inventoryService.listAllInventorys(tableRequest);
+            DataTableResults<Service> dataTableResult = serviceService.listAllServices(tableRequest);
             responseMessage.setOverAllStatus(true);
             responseMessage.setData(dataTableResult);
 

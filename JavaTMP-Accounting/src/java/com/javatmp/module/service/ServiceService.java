@@ -1,5 +1,8 @@
-package com.javatmp.module.inventory;
+package com.javatmp.module.service;
 
+import com.javatmp.module.service.*;
+import com.javatmp.module.service.*;
+import com.javatmp.module.service.*;
 import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.mvc.domain.table.DataTableColumnSpecs;
 import com.javatmp.mvc.domain.table.DataTableRequest;
@@ -19,22 +22,22 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-public class InventoryService {
+public class ServiceService {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
     private final JpaDaoHelper jpaDaoHelper;
 
-    public InventoryService(JpaDaoHelper jpaDaoHelper) {
+    public ServiceService(JpaDaoHelper jpaDaoHelper) {
         this.jpaDaoHelper = jpaDaoHelper;
     }
 
-    public Inventory createNewInventory(Inventory inventory) {
+    public Service createNewService(Service service) {
 
         EntityManager em = null;
         try {
             em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
             em.getTransaction().begin();
-            em.persist(inventory);
+            em.persist(service);
             em.getTransaction().commit();
         } catch (PersistenceException e) {
             if (em != null) {
@@ -46,29 +49,29 @@ public class InventoryService {
                 em.close();
             }
         }
-        return inventory;
+        return service;
     }
 
-    public int deleteInventory(Inventory inventory) {
+    public int deleteService(Service service) {
         int deletedStatus = 0;
         EntityManager em = null;
         try {
             em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
             em.getTransaction().begin();
             CriteriaBuilder cb = em.getCriteriaBuilder();
-            CriteriaQuery<Inventory> cq = cb.createQuery(Inventory.class);
-            Root<Inventory> from = cq.from(Inventory.class);
-            cq.multiselect(from.get(Inventory_.id));
-            cq.where(cb.equal(from.get(Inventory_.id), inventory.getId()));
-            TypedQuery<Inventory> query = em.createQuery(cq);
+            CriteriaQuery<Service> cq = cb.createQuery(Service.class);
+            Root<Service> from = cq.from(Service.class);
+            cq.multiselect(from.get(Service_.id));
+            cq.where(cb.equal(from.get(Service_.id), service.getId()));
+            TypedQuery<Service> query = em.createQuery(cq);
             query.setLockMode(LockModeType.PESSIMISTIC_WRITE);
-            Inventory dbInventory = query.getSingleResult();
+            Service dbService = query.getSingleResult();
             // here you can check for any pre delete code:
 
             // delete user first:
-            CriteriaDelete<Inventory> deleteCriteria = cb.createCriteriaDelete(Inventory.class);
-            Root<Inventory> userRoot = deleteCriteria.from(Inventory.class);
-            deleteCriteria.where(cb.equal(userRoot.get(Inventory_.id), inventory.getId()));
+            CriteriaDelete<Service> deleteCriteria = cb.createCriteriaDelete(Service.class);
+            Root<Service> userRoot = deleteCriteria.from(Service.class);
+            deleteCriteria.where(cb.equal(userRoot.get(Service_.id), service.getId()));
             deletedStatus = em.createQuery(deleteCriteria).executeUpdate();
 
             // delete document second if user deleted:
@@ -82,15 +85,15 @@ public class InventoryService {
         }
     }
 
-    public DataTableResults<Inventory> listAllInventorys(DataTableRequest<Inventory> tableRequest) throws ParseException {
-        List<Inventory> retList = null;
+    public DataTableResults<Service> listAllServices(DataTableRequest<Service> tableRequest) throws ParseException {
+        List<Service> retList = null;
         EntityManager em = null;
         try {
             em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
             CriteriaBuilder cb = em.getCriteriaBuilder();
-            CriteriaQuery<Inventory> cq = cb.createQuery(Inventory.class);
-            Root<Inventory> from = cq.from(Inventory.class);
-            cq.multiselect(from.get(Inventory_.id), from.get(Inventory_.name), from.get(Inventory_.creationDate));
+            CriteriaQuery<Service> cq = cb.createQuery(Service.class);
+            Root<Service> from = cq.from(Service.class);
+            cq.multiselect(from.get(Service_.id), from.get(Service_.name), from.get(Service_.creationDate));
 
             List<Order> orders = tableRequest.getOrder();
             if (orders != null && orders.size() > 0) {
@@ -117,23 +120,23 @@ public class InventoryService {
                     //predicate = cb.and(predicate, cb.equal(from.get(columnName), columnSearchValue));
                     if (columnName.equals("id")) {
                         Long searchValue = new Long(columnSearchValue);
-                        predicate = cb.and(predicate, cb.equal(from.get(Inventory_.id), searchValue));
+                        predicate = cb.and(predicate, cb.equal(from.get(Service_.id), searchValue));
                     }
                     if (columnName.equals("userName")) {
                         String searchValue = new String(columnSearchValue);
-                        predicate = cb.and(predicate, cb.equal(from.get(Inventory_.name), searchValue));
+                        predicate = cb.and(predicate, cb.equal(from.get(Service_.name), searchValue));
                     }
                 }
             }
             cq.where(predicate);
-            TypedQuery<Inventory> query = em.createQuery(cq);
+            TypedQuery<Service> query = em.createQuery(cq);
 
             query.setFirstResult(tableRequest.getStart());
             query.setMaxResults(tableRequest.getLength());
 
             retList = query.getResultList();
 
-            DataTableResults<Inventory> dataTableResult = new DataTableResults<>();
+            DataTableResults<Service> dataTableResult = new DataTableResults<>();
             dataTableResult.setData(retList);
 
             CriteriaQuery<Long> cqLong = cb.createQuery(Long.class);

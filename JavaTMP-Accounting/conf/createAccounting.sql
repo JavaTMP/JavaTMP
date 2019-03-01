@@ -14,6 +14,8 @@ DROP TABLE IF EXISTS fixedAssetAccount;
 DROP TABLE IF EXISTS fixedAsset;
 DROP TABLE IF EXISTS inventoryAccount;
 DROP TABLE IF EXISTS inventory;
+DROP TABLE IF EXISTS serviceAccount;
+DROP TABLE IF EXISTS service;
 
 DROP TABLE IF EXISTS moduleType;
 DROP TABLE IF EXISTS `module`;
@@ -125,6 +127,8 @@ INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup
 INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (64,'100700101','Wastage/Write-off','description',15,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-12 02:54:11',44);
 INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (65,'100100105','Bank','description',1,0.00000000,0.00000000,0.00000000,1,NULL,'2018-12-12 07:16:38',NULL);
 INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (66,'100200103','Sales tax liability','description',3,0.00000000,0.00000000,0.00000000,1,NULL,'2019-01-05 05:09:57',NULL);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (67, '100200104', 'Fedral Tax Authority', 'Fedral Tax Authority', 3, 0E-8, 0E-8, 0E-8, 1, NULL, '2019-03-01 16:29:43.0', NULL);
+INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (68, '100403', 'Service Discount', 'Service Discount', 10, 0E-8, 0E-8, 0E-8, 1, NULL, '2019-03-01 17:03:39.0', NULL);
 
 CREATE TABLE `module` (
     id BIGINT UNSIGNED not null AUTO_INCREMENT,
@@ -140,7 +144,9 @@ INSERT INTO `module` (id, `name`, description, status, `creationDate`) VALUES
 (2, 'Suppliers', 'Suppliers', 1, DEFAULT),
 (3, 'Employee', 'Employee', 1, DEFAULT),
 (4, 'Fixed Assets', 'Fixed Assets', 1, DEFAULT),
-(5, 'Inventory', 'Inventory', 1, DEFAULT);
+(5, 'Inventory', 'Inventory', 1, DEFAULT),
+(6, 'Service', 'Service', 1, DEFAULT),
+(7, 'VAT', 'Value Added Tax', 1, DEFAULT);
 
 CREATE TABLE moduleType (
     id int not null AUTO_INCREMENT,
@@ -160,10 +166,12 @@ INSERT INTO moduleType (id, `moduleId`, `name`, description, status, `rootAccoun
 (1, 1, 'Trade Receivable', null, 1, 12, default),
 (2, 1, 'PDC - Collection', null, 1, 12, default),
 (3, 1, 'Returne CHQ - Collection', null, 1, 12, default),
+(21, 1, 'Advance Payment', null, 1, 12, default),
 
 (4, 2, 'Trade Payable', null, 1, 23, default),
 (5, 2, 'PDC - Payment', null, 1, 23, default),
 (6, 2, 'Returne CHQ - Payments', null, 1, 23, default),
+(22, 2, 'Advance Payment', null, 1, 23, default),
 
 (7, 3, 'Payroll', null, 1, 24, default),
 (8, 3, 'Annual Leave', null, 1, 24, default),
@@ -177,10 +185,14 @@ INSERT INTO moduleType (id, `moduleId`, `name`, description, status, `rootAccoun
 (15, 4, 'Sale - Acc. Disposal', null, 1, 8, default),
 (16, 4, 'Sale - Profit', null, 1, 42, default),
 
-(17, 5, 'Purchase', null, 1, 40, default),
-(18, 5, 'Sale - Inventory', null, 1, 40, default),
+(17, 5, 'Inventory - Purchase', null, 1, 40, default), -- Q+
+(18, 5, 'Inventory - Sale', null, 1, 40, default), -- Q-
 (19, 5, 'Sale - Cost', null, 1, 32, default),
-(20, 5, 'Wastage/Writte-off', null, 1, 64, default);
+(20, 5, 'Wastage/Writte-off', null, 1, 64, default),
+
+(23, 6, 'Service Sale Income', null, 1, 31, default),
+(24, 6, 'Service Sale Discount', null, 1, 68, default);
+
 
 CREATE TABLE voucherType (
     id int not null AUTO_INCREMENT,
@@ -376,6 +388,30 @@ CREATE TABLE inventoryAccount (
     CONSTRAINT inventory_supplierId_fk FOREIGN KEY (inventoryId) REFERENCES inventory (id),
     CONSTRAINT inventory_moduleTypeId_fk FOREIGN KEY (moduleTypeId) REFERENCES moduleType (id),
     CONSTRAINT inventory_accountId_fk FOREIGN KEY (accountId) REFERENCES account (id)
+) ENGINE=InnoDB;
+
+CREATE TABLE service (
+    id BIGINT UNSIGNED not null AUTO_INCREMENT,
+    name varchar(128) not null,
+    status TINYINT,
+    creationDate TIMESTAMP NOT NULL default CURRENT_TIMESTAMP,
+    CONSTRAINT service_id_pk PRIMARY KEY (id)
+) ENGINE=InnoDB;
+
+INSERT INTO service (`name`, status, `creationDate`) VALUES
+('Cleaning Your Computer', 1, DEFAULT),
+('Formatting Disk', 1, DEFAULT),
+('Typing 30 Papers', 1, DEFAULT),
+('Translating Books', 1, DEFAULT);
+
+CREATE TABLE serviceAccount (
+    serviceId BIGINT UNSIGNED not null,
+    moduleTypeId int not null,
+    accountId BIGINT UNSIGNED not null,
+    CONSTRAINT serviceAccount_pk PRIMARY KEY (serviceId, moduleTypeId, accountId),
+    CONSTRAINT service_supplierId_fk FOREIGN KEY (serviceId) REFERENCES service (id),
+    CONSTRAINT service_moduleTypeId_fk FOREIGN KEY (moduleTypeId) REFERENCES moduleType (id),
+    CONSTRAINT service_accountId_fk FOREIGN KEY (accountId) REFERENCES account (id)
 ) ENGINE=InnoDB;
 
 CREATE OR REPLACE VIEW transactionEntry AS

@@ -1,13 +1,6 @@
 package com.javatmp.module.accounting;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.javatmp.module.customer.Customer;
-import com.javatmp.module.employee.Employee;
-import com.javatmp.module.fixedAsset.FixedAsset;
-import com.javatmp.module.inventory.Inventory;
-import com.javatmp.module.supplier.Supplier;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.domain.ResponseMessage;
 import com.javatmp.util.Constants;
@@ -16,7 +9,6 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

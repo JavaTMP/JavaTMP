@@ -1,9 +1,9 @@
-package com.javatmp.module.inventory;
+package com.javatmp.module.service;
 
 import com.javatmp.module.service.*;
-import com.javatmp.module.inventory.*;
-import com.javatmp.module.inventory.*;
-import com.javatmp.module.inventory.*;
+import com.javatmp.module.service.*;
+import com.javatmp.module.service.*;
+import com.javatmp.module.service.*;
 import com.javatmp.module.accounting.*;
 import com.javatmp.module.user.*;
 import com.javatmp.mvc.MvcHelper;
@@ -26,8 +26,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/inventory/DeleteInventory")
-public class DeleteInventory extends HttpServlet {
+@WebServlet("/service/DeleteService")
+public class DeleteService extends HttpServlet {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
 
@@ -36,15 +36,15 @@ public class DeleteInventory extends HttpServlet {
 
         ResponseMessage responseMessage = new ResponseMessage();
         ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
-        InventoryService inventoryService = sf.getInventoryService();
+        ServiceService serviceService = sf.getServiceService();
         HttpSession session = request.getSession();
         ResourceBundle labels = (ResourceBundle) session.getAttribute(Constants.LANGUAGE_ATTR_KEY);
 
         try {
 
-            Inventory reqObject = (Inventory) MvcHelper.readObjectFromRequest(request, Inventory.class);
+            Service reqObject = (Service) MvcHelper.readObjectFromRequest(request, Service.class);
 
-            int updateStatus = inventoryService.deleteInventory(reqObject);
+            int updateStatus = serviceService.deleteService(reqObject);
 
             responseMessage.setOverAllStatus(true);
             responseMessage.setTitle("Deleted");

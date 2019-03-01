@@ -187,7 +187,7 @@
                                 <div class="row mb-1">
                                     <div class="col-md-12">
                                         <button type="button" id="add_row" class="btn btn-primary float-left">Add Row</button>
-                                        <button type="button" id='delete_row' class="float-right btn btn-default">Delete Row</button>
+                                        <button type="button" id='delete_row' class="float-right btn btn-secondary">Delete Row</button>
                                     </div>
                                 </div>
                                 <div class="form-row">
@@ -321,7 +321,8 @@
                         2: [{"Trade Payable": 4}, {"PDC - Payment": 5}, {"Returne CHQ - Payments": 6}],
                         3: [{"Payroll": 7}, {"Annual Leave": 8}, {"Unpaid Leave": 9}, {"Employee Advances": 10}, {"End Of Service": 11}],
                         4: [{"Purchase": 12}, {"Sale - Inventory": 13}, {"Sale - Cost": 14}, {"Sale - Acc. Disposal": 15}, {"Sale - Profit": 16}],
-                        5: [{"Purchase": 17}, {"Depreciation": 18}, {"Sale - Cost Disposal": 19}, {"Wastage/Writte-off": 20}]
+                        5: [{"Purchase": 17}, {"Depreciation": 18}, {"Sale - Cost Disposal": 19}, {"Wastage/Writte-off": 20}],
+                        6: [{"Service Sale Income": 23}, {"Service Sale Discount": 24}]
                     };
                     $("select.moduleTypeId", parentRow).empty(); // Remove all <option> child tags.
                     $("select.moduleTypeId", parentRow).append(// Append an object to the inside of the select box

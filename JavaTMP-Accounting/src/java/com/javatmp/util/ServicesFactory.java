@@ -13,6 +13,7 @@ import com.javatmp.module.dms.DocumentService;
 import com.javatmp.module.employee.EmployeeService;
 import com.javatmp.module.fixedAsset.FixedAssetService;
 import com.javatmp.module.inventory.InventoryService;
+import com.javatmp.module.service.ServiceService;
 import com.javatmp.module.supplier.SupplierService;
 import java.util.Date;
 import java.util.logging.Logger;
@@ -35,6 +36,7 @@ public class ServicesFactory {
     private final EmployeeService employeeService;
     private final FixedAssetService fixedAssetService;
     private final InventoryService inventoryService;
+    private final ServiceService serviceService;
 
     public ServicesFactory(String persistentUnitName) {
         logger.info("*** Start ServicesFactory Constructor @ [" + new Date() + "]");
@@ -53,7 +55,7 @@ public class ServicesFactory {
         this.employeeService = new EmployeeService(getJpaDaoHelper());
         this.fixedAssetService = new FixedAssetService(getJpaDaoHelper());
         this.inventoryService = new InventoryService(getJpaDaoHelper());
-
+        this.serviceService = new ServiceService(jpaDaoHelper);
         this.logger.info("*** End ServicesFactory Constructor @ [" + new Date() + "]");
     }
 
@@ -151,6 +153,10 @@ public class ServicesFactory {
      */
     public InventoryService getInventoryService() {
         return inventoryService;
+    }
+
+    public ServiceService getServiceService() {
+        return serviceService;
     }
 
     /**
