@@ -390,7 +390,8 @@ acctTrans.amount as amount,
 (case when acctTrans.amount > 0 then acctTrans.amount else 0 end) as debit,
 (case when acctTrans.amount < 0 then acctTrans.amount * -1 else 0 end) as credit,
 (case when coalesce(acctTrans.amount, 0) > 0 then abs(coalesce(acctTrans.amount, 0)) * coalesce(acctt.debitSign, 0)
-else abs(coalesce(acctTrans.amount, 0)) * coalesce(acctt.creditSign, 0) end) as entryAmount
+else abs(coalesce(acctTrans.amount, 0)) * coalesce(acctt.creditSign, 0) end) as entryAmount,
+trans.`voucherTypeId` as sourceDocument, trans.code as code
 from accountTransaction acctTrans
 left outer join account acct on (acct.id = acctTrans.accountId)
 left outer join `transaction` trans on (acctTrans.transactionId = trans.id)

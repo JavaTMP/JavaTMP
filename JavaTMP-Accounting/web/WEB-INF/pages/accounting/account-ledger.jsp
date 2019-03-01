@@ -17,6 +17,8 @@
                             <thead>
                                 <tr>
                                     <th>entryDate</th>
+                                    <th>sourceDocument</th>
+                                    <th>code</th>
                                     <th>id</th>
                                     <th>transactionId</th>
                                     <th>accountId</th>
@@ -46,23 +48,6 @@
         /*
                 Embed CSS styling for current page.
         */
-        #TransactionList tbody tr {
-            cursor: pointer;
-        }
-
-        td.details-control {
-            font-family: 'Font Awesome 5 Free';
-            font-weight: 900;
-            cursor: pointer;
-            text-align: center;
-            width: 1.25em;
-        }
-        td.details-control:before {
-            content: "\f105";
-        }
-        tr.shown td.details-control:before {
-            content: "\f107";
-        }
     </style>
 
     <!--
@@ -140,6 +125,8 @@
                     },
                     columns: [
                         {data: 'entryDate', name: "entryDate", "type": "date", width: "7rem", "render": javatmp.plugins.DataTableColRenderWrapper("7rem")},
+                        {data: 'sourceDocument', name: "sourceDocument"},
+                        {data: 'code', name: "code"},
                         {data: 'id', name: "id"},
                         {data: 'transactionId', "visible": true, name: "transactionId"},
                         {data: 'accountId', name: "accountId", "visible": true},

@@ -65,6 +65,12 @@ public class TransactionEntry implements Serializable {
     @Column(name = "accountBalance")
     private BigDecimal accountBalance;
 
+    @Column(name = "sourceDocument")
+    private Integer sourceDocument;
+
+    @Column(name = "code")
+    private String code;
+
     public TransactionEntry() {
     }
 
@@ -178,6 +184,34 @@ public class TransactionEntry implements Serializable {
 
     public void setAccountBalance(BigDecimal accountBalance) {
         this.accountBalance = accountBalance;
+    }
+
+    /**
+     * @return the sourceDocument
+     */
+    public Integer getSourceDocument() {
+        return sourceDocument;
+    }
+
+    /**
+     * @param sourceDocument the sourceDocument to set
+     */
+    public void setSourceDocument(Integer sourceDocument) {
+        this.sourceDocument = sourceDocument;
+    }
+
+    /**
+     * @return the code
+     */
+    public String getCode() {
+        return code;
+    }
+
+    /**
+     * @param code the code to set
+     */
+    public void setCode(String code) {
+        this.code = code;
     }
 
 }

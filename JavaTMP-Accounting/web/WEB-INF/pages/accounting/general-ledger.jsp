@@ -157,6 +157,8 @@
                                 <thead>
                                     <tr>
                                         <th>entryDate</th>
+                                        <th>sourceDocument</th>
+                                        <th>code</th>
                                         <th>id</th>
                                         <th>transactionId</th>
                                         <th>accountId</th>
@@ -224,15 +226,17 @@
                     },
                     columns: [
                         {data: 'entryDate', name: "entryDate", "type": "date", width: "7rem", "render": javatmp.plugins.DataTableColRenderWrapper("7rem")},
+                        {data: 'sourceDocument', name: "sourceDocument"},
+                        {data: 'code', name: "code"},
                         {data: 'id', name: "id"},
                         {data: 'transactionId', "visible": true, name: "transactionId"},
                         {data: 'accountId', name: "accountId", "visible": false},
                         {data: 'moduleId', name: "moduleId"},
                         {data: 'moduleRefId', name: "moduleRefId"},
                         {data: 'moduleTypeId', name: "moduleTypeId"},
-                        {data: 'debit', name: "debit"},
-                        {data: 'credit', name: "credit"},
-                        {data: 'accountBalance', name: "accountBalance"},
+                        {data: 'debit', name: "debit", "render": currencyRenderFunc},
+                        {data: 'credit', name: "credit", "render": currencyRenderFunc},
+                        {data: 'accountBalance', name: "accountBalance", "render": currencyRenderFunc},
                         {data: 'status', "visible": false, name: "status"},
                         {data: 'description', "visible": true, name: "description"}
                     ]

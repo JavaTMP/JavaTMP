@@ -10,6 +10,7 @@ import com.javatmp.module.accounting.AccountService;
 import com.javatmp.module.accounting.Costcenter;
 import com.javatmp.module.accounting.Module;
 import com.javatmp.module.accounting.Moduletype;
+import com.javatmp.module.accounting.TransactionEntry;
 import com.javatmp.module.customer.Customer;
 import com.javatmp.module.supplier.Supplier;
 import com.javatmp.mvc.MvcHelper;
