@@ -141,13 +141,13 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/accounting/GeneralLedger">
-                                            General Ledger
+                                        <a href="${pageContext.request.contextPath}/accounting/AccountLedger">
+                                            Account Ledger
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/accounting/general-ledger-entries">
-                                            General Ledger Entries
+                                        <a href="${pageContext.request.contextPath}/accounting/GeneralLedger">
+                                            General Ledger
                                         </a>
                                     </li>
                                     <li>
@@ -158,6 +158,11 @@
                                     <li>
                                         <a href="${pageContext.request.contextPath}/accounting/listTransactions">
                                             List Transactions
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/accounting/general-ledger-entries">
+                                            Transaction Entries
                                         </a>
                                     </li>
                                 </ul>

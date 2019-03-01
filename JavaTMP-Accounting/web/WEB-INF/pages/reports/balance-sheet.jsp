@@ -153,6 +153,34 @@
                     }
                     calcuateSumForList(childList);
                     //                    alert(JSON.stringify(childList));
+
+                    function orderAccountsList(list) {
+                        console.log("length of list [" + list.length + "]");
+                        for (var i = 0; i < list.length; i++) {
+                            console.log("check account code [" + list[i].accountCode + "] with children lenght [" + list[i].children + "]");
+                            if (list[i].children && list[i].children.length > 0) {
+                                console.log("check account code [" + list[i].accountCode + "] with children lenght [" + list[i].children.length + "]");
+                                orderAccountsList(list[i].children);
+                            }
+                        }
+                        // now we ordered current list based on list[i].accountgroup.type.id and then list[i].accountgroup.id
+                        function compare(a, b) {
+                            var result;
+                            result = a.accountgroup.type.id - b.accountgroup.type.id;
+                            if (result === 0) {
+                                result = a.accountgroup.id - b.accountgroup.id;
+                                if (result === 0) {
+                                    result = a.id - b.id;
+                                }
+                            }
+                            return result;
+                        }
+                        console.log("sort list of [" + list.length + "]");
+                        list.sort(compare);
+
+                    }
+//                    console.log(JSON.stringify(childList));
+                    orderAccountsList(childList);
                     return childList;
                 }
 
