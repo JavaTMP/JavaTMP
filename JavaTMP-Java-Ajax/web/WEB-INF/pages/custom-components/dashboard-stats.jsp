@@ -2,7 +2,7 @@
 <div class="dynamic-ajax-content">
     <div class="form-row">
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="card-body">
                     <div class="media d-flex">
                         <div class="align-self-center">
@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="card-body">
                     <div class="media d-flex">
                         <div class="align-self-center">
@@ -32,7 +32,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="card-body">
                     <div class="media d-flex">
                         <div class="align-self-center">
@@ -47,7 +47,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="card-body">
                     <div class="media d-flex">
                         <div class="align-self-center">
@@ -64,7 +64,7 @@
     </div>
     <div class="form-row">
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="card-body">
                     <div class="media d-flex">
                         <div class="media-body text-left">
@@ -79,7 +79,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="card-body">
                     <div class="media d-flex">
                         <div class="media-body text-left">
@@ -94,7 +94,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="card-body">
                     <div class="media d-flex">
                         <div class="media-body text-left">
@@ -109,7 +109,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="card-body">
                     <div class="media d-flex">
                         <div class="media-body text-left">
@@ -126,7 +126,7 @@
     </div>
     <div class="form-row">
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="card-body">
                     <div class="media d-flex">
                         <div class="media-body text-left">
@@ -144,7 +144,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="card-body">
                     <div class="media d-flex">
                         <div class="media-body text-left">
@@ -162,7 +162,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="card-body">
                     <div class="media d-flex">
                         <div class="media-body text-left">
@@ -180,7 +180,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="card-body">
                     <div class="media d-flex">
                         <div class="media-body text-left">
@@ -200,7 +200,7 @@
     </div>
     <div class="form-row">
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card  my-2 bg-primary">
+            <div class="shadow card  my-2 bg-primary">
                 <div class="card-body">
                     <div class="media d-flex">
                         <div class="align-self-center">
@@ -215,7 +215,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2 bg-danger">
+            <div class="shadow card my-2 bg-danger">
                 <div class="card-body">
                     <div class="media d-flex">
                         <div class="align-self-center">
@@ -230,7 +230,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card bg-success my-2">
+            <div class="shadow card bg-success my-2">
                 <div class="card-body">
                     <div class="media d-flex">
                         <div class="align-self-center">
@@ -245,7 +245,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card bg-warning my-2">
+            <div class="shadow card bg-warning my-2">
                 <div class="card-body">
                     <div class="media d-flex">
                         <div class="align-self-center">
@@ -262,7 +262,7 @@
     </div>
     <div class="form-row">
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card bg-warning my-2">
+            <div class="shadow card bg-warning my-2">
                 <div class="card-body">
                     <div class="media d-flex">
                         <div class="media-body text-white text-left">
@@ -277,7 +277,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card bg-success my-2">
+            <div class="shadow card bg-success my-2">
                 <div class="card-body">
                     <div class="media d-flex">
                         <div class="media-body text-white text-left">
@@ -292,7 +292,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card bg-danger my-2">
+            <div class="shadow card bg-danger my-2">
                 <div class="card-body">
                     <div class="media d-flex">
                         <div class="media-body text-white text-left">
@@ -307,7 +307,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card bg-primary my-2">
+            <div class="shadow card bg-primary my-2">
                 <div class="card-body">
                     <div class="media d-flex">
                         <div class="media-body text-white text-left">
@@ -324,7 +324,7 @@
     </div>
     <div class="form-row">
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="media align-items-stretch">
                     <div class="p-3 text-center bg-primary">
                         <i class="fas fa-boxes text-white display-4"></i>
@@ -337,7 +337,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="media align-items-stretch">
                     <div class="p-3 text-center bg-danger">
                         <i class="fas fa-user-plus text-white display-4"></i>
@@ -350,7 +350,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="media align-items-stretch">
                     <div class="p-3 text-center bg-success">
                         <i class="fas fa-cart-plus text-white display-4"></i>
@@ -363,7 +363,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="media align-items-stretch">
                     <div class="p-3 text-center bg-warning">
                         <i class="far fa-handshake text-white display-4"></i>
@@ -378,7 +378,7 @@
     </div>
     <div class="form-row">
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="media align-items-stretch">
                     <div class="p-3 media-body text-left">
                         <h5>Products</h5>
@@ -391,7 +391,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="media align-items-stretch">
                     <div class="p-3 media-body text-left">
                         <h5>New Users</h5>
@@ -404,7 +404,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="media align-items-stretch">
                     <div class="p-3 media-body text-left">
                         <h5>New Orders</h5>
@@ -417,7 +417,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="media align-items-stretch">
                     <div class="p-3 media-body text-left">
                         <h5>Total Profit</h5>
@@ -432,7 +432,7 @@
     </div>
     <div class="form-row">
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="media align-items-stretch">
                     <div class="p-3 text-center bg-primary">
                         <i class="fas fa-boxes text-white display-4"></i>
@@ -448,7 +448,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="media align-items-stretch">
                     <div class="p-3 text-center bg-danger">
                         <i class="fas fa-user-plus text-white display-4"></i>
@@ -464,7 +464,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="media align-items-stretch">
                     <div class="p-3 text-center bg-success">
                         <i class="fas fa-cart-plus text-white display-4"></i>
@@ -480,7 +480,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="media align-items-stretch">
                     <div class="p-3 text-center bg-warning">
                         <i class="far fa-handshake text-white display-4"></i>
@@ -498,7 +498,7 @@
     </div>
     <div class="form-row">
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="media align-items-stretch">
                     <div class="p-3 text-center bg-primary-darker-10">
                         <i class="fas fa-boxes text-white display-4"></i>
@@ -511,7 +511,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="media align-items-stretch">
                     <div class="p-3 text-center bg-danger-darker-10">
                         <i class="fas fa-user-plus text-white display-4"></i>
@@ -524,7 +524,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="media align-items-stretch">
                     <div class="p-3 text-center bg-success-darker-10">
                         <i class="fas fa-cart-plus text-white display-4"></i>
@@ -537,7 +537,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="media align-items-stretch">
                     <div class="p-3 text-center bg-warning-darker-10">
                         <i class="far fa-handshake text-white display-4"></i>
@@ -552,7 +552,7 @@
     </div>
     <div class="form-row">
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="card-content">
                     <div class="media align-items-stretch">
                         <div class="p-3 bg-warning text-white media-body text-left">
@@ -567,7 +567,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="card-content">
                     <div class="media align-items-stretch">
                         <div class="p-3 bg-success text-white media-body text-left">
@@ -582,7 +582,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="card-content">
                     <div class="media align-items-stretch">
                         <div class="p-3 bg-danger text-white media-body text-left">
@@ -597,7 +597,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="card-content">
                     <div class="media align-items-stretch">
                         <div class="p-3 bg-primary text-white media-body text-left">
@@ -614,7 +614,7 @@
     </div>
     <div class="form-row">
         <div class="col-xl-6 col-md-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="card-body">
                     <div class="media align-items-stretch">
                         <div class="align-self-center">
@@ -632,7 +632,7 @@
             </div>
         </div>
         <div class="col-xl-6 col-md-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="card-body">
                     <div class="media align-items-stretch">
                         <div class="align-self-center">
@@ -652,7 +652,7 @@
     </div>
     <div class="form-row">
         <div class="col-xl-6 col-md-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="card-body">
                     <div class="media align-items-stretch">
                         <div class="align-self-center">
@@ -670,7 +670,7 @@
             </div>
         </div>
         <div class="col-xl-6 col-md-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="card-body">
                     <div class="media align-items-stretch">
                         <div class="align-self-center">
@@ -690,7 +690,7 @@
     </div>
     <div class="form-row">
         <div class="col-xl-6 col-md-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="media align-items-stretch">
                     <div class="bg-primary p-3 media-middle">
                         <i class="far fa-edit text-white display-4"></i>
@@ -706,7 +706,7 @@
             </div>
         </div>
         <div class="col-xl-6 col-md-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="media align-items-stretch">
                     <div class="bg-warning p-3 media-middle">
                         <i class="far fa-comment text-white display-4"></i>
@@ -724,7 +724,7 @@
     </div>
     <div class="form-row">
         <div class="col-xl-6 col-md-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="media align-items-stretch">
                     <div class="p-3 media-middle">
                         <h2 class="danger">$42,987.26</h2>
@@ -740,7 +740,7 @@
             </div>
         </div>
         <div class="col-xl-6 col-md-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="media align-items-stretch">
                     <div class="p-3 media-middle">
                         <h2 class="success">$42,987.26</h2>
@@ -774,7 +774,7 @@
             </div>
         </div>
         <div class="col-xl-6 col-md-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="media align-items-stretch bg-warning text-white">
                     <div class="bg-warning-darker-10 p-3 media-middle">
                         <i class="far fa-comment text-white display-4"></i>
@@ -792,7 +792,7 @@
     </div>
     <div class="form-row">
         <div class="col-xl-6 col-md-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="media align-items-stretch bg-success text-white">
                     <div class="p-3 media-middle align-self-center">
                         <span class="h1">$42,987.26</span>
@@ -808,7 +808,7 @@
             </div>
         </div>
         <div class="col-xl-6 col-md-12">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="media align-items-stretch bg-danger text-white">
                     <div class="p-3 media-middle align-self-center">
                         <span class="h1">$42,987.26</span>
@@ -826,7 +826,7 @@
     </div>
     <div class="form-row">
         <div class="col-lg-3 col-md-6">
-            <div class="card my-2">
+            <div class="shadow card my-2">
                 <div class="card-body">
                     <div class="form-row">
                         <div class="col-12 text-center">
@@ -847,7 +847,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-6">
-            <div class="card my-2 bg-secondary text-white">
+            <div class="shadow card my-2 bg-secondary text-white">
                 <div class="card-body">
                     <div class="form-row">
                         <div class="col-12 text-center">
@@ -868,7 +868,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-6">
-            <div class="card my-2 bg-primary text-white">
+            <div class="shadow card my-2 bg-primary text-white">
                 <div class="card-body">
                     <div class="form-row">
                         <div class="col-12 text-center">
@@ -889,7 +889,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-6">
-            <div class="card my-2 bg-success text-white">
+            <div class="shadow card my-2 bg-success text-white">
                 <div class="card-body">
                     <div class="form-row">
                         <div class="col-12 text-center">
@@ -912,7 +912,7 @@
     </div>
     <div class="form-row">
         <div class="col-lg-3 col-md-6">
-            <div class="card my-2 bg-danger text-white">
+            <div class="shadow card my-2 bg-danger text-white">
                 <div class="card-header">
                     New Orders
                 </div>
@@ -932,7 +932,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-6">
-            <div class="card my-2 bg-warning text-white">
+            <div class="shadow card my-2 bg-warning text-white">
                 <div class="card-header">
                     New Orders
                 </div>
@@ -952,7 +952,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-6">
-            <div class="card my-2 bg-info text-white">
+            <div class="shadow card my-2 bg-info text-white">
                 <div class="card-header">
                     New Orders
                 </div>
@@ -972,7 +972,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-6">
-            <div class="card my-2 bg-dark text-white">
+            <div class="shadow card my-2 bg-dark text-white">
                 <div class="card-header">
                     New Orders
                 </div>
@@ -994,7 +994,7 @@
     </div>
     <div class="form-row">
         <div class="col-lg-3 col-md-6">
-            <div class="card my-2 bg-primary text-white">
+            <div class="shadow card my-2 bg-primary text-white">
                 <div class="card-body">
                     <h5 class="card-title">New Orders</h5>
                     <div class="form-row">
@@ -1014,7 +1014,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-6">
-            <div class="card my-2 bg-warning text-white">
+            <div class="shadow card my-2 bg-warning text-white">
                 <div class="card-body">
                     <h5 class="card-title">New Orders</h5>
                     <div class="form-row">
@@ -1035,7 +1035,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-6">
-            <div class="card my-2 bg-success text-white">
+            <div class="shadow card my-2 bg-success text-white">
                 <div class="card-body">
                     <h5 class="card-title">New Orders</h5>
                     <div class="form-row">
@@ -1056,7 +1056,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-6">
-            <div class="card my-2 bg-danger text-white">
+            <div class="shadow card my-2 bg-danger text-white">
                 <div class="card-body">
                     <h5 class="card-title">New Orders</h5>
                     <div class="form-row">
@@ -1078,7 +1078,7 @@
     </div>
     <div class="form-row">
         <div class="col-lg-3 col-md-6 col-sm-12">
-            <div class="card my-2 bg-primary">
+            <div class="shadow card my-2 bg-primary">
                 <div class="card-body text-center">
                     <h1 class="display-4 text-white"><i class="fa fa-boxes fa-fw"></i>211</h1>
                     <span class="text-white">Products</span>
@@ -1086,7 +1086,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12">
-            <div class="card my-2 bg-primary">
+            <div class="shadow card my-2 bg-primary">
                 <div class="card-body text-center">
                     <h1 class="display-4 text-white"><i class="fa fa-user fa-fw"></i>6201</h1>
                     <span class="text-white">New Clients</span>
@@ -1094,7 +1094,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12">
-            <div class="card my-2 bg-primary">
+            <div class="shadow card my-2 bg-primary">
                 <div class="card-body text-center">
                     <h1 class="display-4 text-white"><i class="fa fa-chart-line fa-fw"></i>83%</h1>
                     <span class="text-white">Conversion Rate</span>
@@ -1102,7 +1102,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12">
-            <div class="card my-2 bg-primary">
+            <div class="shadow card my-2 bg-primary">
                 <div class="card-body text-center">
                     <h1 class="display-4 text-white">
                         <i class="fa fa-wallet fa-fw"></i>
@@ -1115,7 +1115,7 @@
     </div>
     <div class="form-row">
         <div class="col-lg-3 col-md-6 col-sm-12">
-            <div class="card my-2 bg-light">
+            <div class="shadow card my-2 bg-light">
                 <div class="card-body text-center">
                     <h1 class="display-4"><i class="fa fa-boxes fa-fw"></i>211</h1>
                     <span class="">Products</span>
@@ -1123,7 +1123,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12">
-            <div class="card my-2 bg-light">
+            <div class="shadow card my-2 bg-light">
                 <div class="card-body text-center">
                     <h1 class="display-4"><i class="fa fa-user fa-fw"></i>6201</h1>
                     <span class="">New Clients</span>
@@ -1131,7 +1131,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12">
-            <div class="card my-2 bg-light">
+            <div class="shadow card my-2 bg-light">
                 <div class="card-body text-center">
                     <h1 class="display-4"><i class="fa fa-chart-line fa-fw"></i>83%</h1>
                     <span class="">Conversion Rate</span>
@@ -1139,7 +1139,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12">
-            <div class="card my-2 bg-light">
+            <div class="shadow card my-2 bg-light">
                 <div class="card-body text-center">
                     <h1 class="display-4">
                         <i class="fa fa-wallet fa-fw"></i>
@@ -1152,7 +1152,7 @@
     </div>
     <div class="form-row">
         <div class="col-lg-3 col-md-6 col-sm-12">
-            <div class="card my-2 bg-light border border-primary text-primary">
+            <div class="shadow card my-2 bg-light border border-primary text-primary">
                 <div class="card-body text-center">
                     <h1 class="display-4"><i class="fa fa-boxes fa-fw"></i>211</h1>
                     <span class="">Products</span>
@@ -1160,7 +1160,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12">
-            <div class="card my-2 bg-light border border-primary text-primary">
+            <div class="shadow card my-2 bg-light border border-primary text-primary">
                 <div class="card-body text-center">
                     <h1 class="display-4"><i class="fa fa-user fa-fw"></i>6201</h1>
                     <span class="">New Clients</span>
@@ -1168,7 +1168,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12">
-            <div class="card my-2 bg-light border border-primary text-primary">
+            <div class="shadow card my-2 bg-light border border-primary text-primary">
                 <div class="card-body text-center">
                     <h1 class="display-4"><i class="fa fa-chart-line fa-fw"></i>83%</h1>
                     <span class="">Conversion Rate</span>
@@ -1176,7 +1176,7 @@
             </div>
         </div>
         <div class="col-lg-3 col-md-6 col-sm-12">
-            <div class="card my-2 bg-light border border-primary text-primary">
+            <div class="shadow card my-2 bg-light border border-primary text-primary">
                 <div class="card-body text-center">
                     <h1 class="display-4">
                         <i class="fa fa-wallet fa-fw"></i>
