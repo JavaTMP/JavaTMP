@@ -21,6 +21,8 @@ $ion-range-slider-badge-minmax-bg: $secondary!default;
 $ion-range-slider-badge-minmax-color: color-yiq($ion-range-slider-badge-minmax-bg)!default;
 
 $ion-range-slider-grid-color: $body-color!default;
+$ion-range-slider-grid-text-color: $ion-range-slider-grid-color!default;
+$ion-range-slider-grid-pol-color: $ion-range-slider-grid-text-color!default;
 
 $ion-range-slider-irs-handle-bg: darken($ion-range-slider-irs-bar-bg, 7.5%)!default;
 $ion-range-slider-irs-handle-hover-bg: darken($ion-range-slider-irs-handle-bg, 5%)!default;
@@ -30,8 +32,8 @@ $ion-range-slider-irs-handle-line-hover-bg: darken($ion-range-slider-irs-handle-
 $ion-range-slider-irs-line-height: $progress-height!default;
 
 .irs {
-    font-size: $ion-range-slider-font-size;
-    font-family: $ion-range-slider-font-family;
+    /*font-size: $ion-range-slider-font-size;*/
+    /*font-family: $ion-range-slider-font-family;*/
 }
 .irs-grid {
     height: 20px;
@@ -48,7 +50,7 @@ $ion-range-slider-irs-line-height: $progress-height!default;
     font-size: 9px;
     line-height: 9px;
     padding: 0 3px;
-    color: #000;
+    color: $ion-range-slider-grid-text-color;
 }
 .irs-disable-mask {
     left: -1%;
@@ -139,10 +141,10 @@ $ion-range-slider-irs-line-height: $progress-height!default;
     border-top-color: $ion-range-slider-badge-bg;
 }
 .irs--flat .irs-grid-pol {
-    background-color: #e1e4e9;
+    background-color: $ion-range-slider-grid-pol-color;
 }
 .irs--flat .irs-grid-text {
-    color: #999;
+    color: $ion-range-slider-grid-text-color;
 }
 .irs--big {
     height: 55px;
@@ -213,10 +215,10 @@ $ion-range-slider-irs-line-height: $progress-height!default;
     border-radius: $ion-range-slider-badge-border-radius;
 }
 .irs--big .irs-grid-pol {
-    background-color: #428bca;
+    background-color: $ion-range-slider-grid-pol-color;
 }
 .irs--big .irs-grid-text {
-    color: #428bca;
+    color: $ion-range-slider-grid-text-color;
 }
 .irs--modern {
     height: 55px;
@@ -257,7 +259,7 @@ $ion-range-slider-irs-line-height: $progress-height!default;
 }
 .irs--modern .irs-handle > i:nth-child(1) {
     top: -4px;
-    left: 1px;
+    left: 2px;
     width: 6px;
     height: 6px;
     border: 1px solid $ion-range-slider-irs-handle-bg;
@@ -333,10 +335,10 @@ $ion-range-slider-irs-line-height: $progress-height!default;
     height: 25px;
 }
 .irs--modern .irs-grid-pol {
-    background-color: #dedede;
+    background-color: $ion-range-slider-grid-pol-color;
 }
 .irs--modern .irs-grid-text {
-    color: silver;
+    color: $ion-range-slider-grid-text-color;
     font-size: 13px;
 }
 .irs--sharp {
@@ -428,10 +430,10 @@ $ion-range-slider-irs-line-height: $progress-height!default;
     height: 25px;
 }
 .irs--sharp .irs-grid-pol {
-    background-color: #dedede;
+    background-color: $ion-range-slider-grid-pol-color;
 }
 .irs--sharp .irs-grid-text {
-    color: silver;
+    color: $ion-range-slider-grid-text-color;
     font-size: 13px;
 }
 .irs--round {
@@ -512,10 +514,10 @@ $ion-range-slider-irs-line-height: $progress-height!default;
     height: 25px;
 }
 .irs--round .irs-grid-pol {
-    background-color: #dedede;
+    background-color: $ion-range-slider-grid-pol-color;
 }
 .irs--round .irs-grid-text {
-    color: silver;
+    color: $ion-range-slider-grid-text-color;
     font-size: 13px;
 }
 .irs--square {
@@ -576,9 +578,9 @@ $ion-range-slider-irs-line-height: $progress-height!default;
     height: 25px;
 }
 .irs--square .irs-grid-pol {
-    background-color: #dedede;
+    background-color: $ion-range-slider-grid-pol-color;
 }
 .irs--square .irs-grid-text {
-    color: silver;
+    color: $ion-range-slider-grid-text-color;
     font-size: 11px;
 }
