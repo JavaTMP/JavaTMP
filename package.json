@@ -18,7 +18,7 @@
     },
     "homepage": "http://javatmp.com",
     "devDependencies": {
-        "del": "^3.0.0",
+        "del": "^4.1.0",
         "gulp": "^4.0.0",
         "gulp-chmod": "^2.0.0",
         "gulp-concat": "^2.6.1",
@@ -31,7 +31,7 @@
         "gulp-markdown": "^3.0.0",
         "gulp-processhtml": "^1.2.0",
         "gulp-rename": "^1.4.0",
-        "gulp-uglify": "^3.0.1",
+        "gulp-uglify": "^3.0.2",
         "gulp-zip": "^4.2.0",
         "pump": "^3.0.0",
         "run-sequence": "^2.2.1"

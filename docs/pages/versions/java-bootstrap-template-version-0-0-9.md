@@ -3,6 +3,20 @@ title: Java Bootstrap Template Version 0.0.9 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.9 (Current Development Version)
 
+## on
+- Refactor ion.rangeSlider plugin style to support new features in version 2.3.0 and support all available skin options.
+- Update the following packages:
+    - del from 3.0.0 to 4.1.0
+    - gulp-uglify from 3.0.1 to 3.0.2
+    - @fortawesome/fontawesome-free from 5.7.2 to 5.8.1
+    - cropperjs from 1.4.3 to 1.5.1
+    - datatables.net-select from 1.2.7 to 1.3.0
+    - datatables.net-select-bs4 from 1.2.7 to 1.3.0
+    - file-saver from 2.0.0 to 2.0.1
+    - metismenu from 3.0.3 to 3.0.4
+    - timeago from 1.6.4 to 1.6.5
+- Run `gulp` command which will use default task and generate `dist` folders.
+
 ## 9029750 on Feb 20, 2019, 2:51 PM GMT+4
 - Add missing flag images for countries.
 - add more columns `documentType, parentDocumentId, status, createdByUserId` to document table in JavaTMP-User-Starter project.
