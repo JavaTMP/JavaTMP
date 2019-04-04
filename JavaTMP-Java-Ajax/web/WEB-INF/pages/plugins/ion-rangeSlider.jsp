@@ -74,7 +74,7 @@
                                     <input type="text" class="form-control demo9" value="" />
                                     <p class="help-block">using <code>disable: true</code></p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group single-ionRangeSlider">
                                     <label>Use your own prettify function to transform numbers whatever you like.</label>
                                     <input type="text" class="form-control demo10" value="" />
                                     <p class="help-block">For example calculating logarithm of a number</p>
@@ -156,7 +156,7 @@
                                     <input type="text" class="form-control demo9" value="" />
                                     <p class="help-block">using <code>disable: true</code></p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group single-ionRangeSlider">
                                     <label>Use your own prettify function to transform numbers whatever you like.</label>
                                     <input type="text" class="form-control demo10" value="" />
                                     <p class="help-block">For example calculating logarithm of a number</p>
@@ -240,7 +240,7 @@
                                     <input type="text" class="form-control demo9" value="" />
                                     <p class="help-block">using <code>disable: true</code></p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group single-ionRangeSlider">
                                     <label>Use your own prettify function to transform numbers whatever you like.</label>
                                     <input type="text" class="form-control demo10" value="" />
                                     <p class="help-block">For example calculating logarithm of a number</p>
@@ -322,7 +322,7 @@
                                     <input type="text" class="form-control demo9" value="" />
                                     <p class="help-block">using <code>disable: true</code></p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group single-ionRangeSlider">
                                     <label>Use your own prettify function to transform numbers whatever you like.</label>
                                     <input type="text" class="form-control demo10" value="" />
                                     <p class="help-block">For example calculating logarithm of a number</p>
@@ -406,7 +406,7 @@
                                     <input type="text" class="form-control demo9" value="" />
                                     <p class="help-block">using <code>disable: true</code></p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group single-ionRangeSlider">
                                     <label>Use your own prettify function to transform numbers whatever you like.</label>
                                     <input type="text" class="form-control demo10" value="" />
                                     <p class="help-block">For example calculating logarithm of a number</p>
@@ -488,7 +488,7 @@
                                     <input type="text" class="form-control demo9" value="" />
                                     <p class="help-block">using <code>disable: true</code></p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group single-ionRangeSlider">
                                     <label>Use your own prettify function to transform numbers whatever you like.</label>
                                     <input type="text" class="form-control demo10" value="" />
                                     <p class="help-block">For example calculating logarithm of a number</p>
