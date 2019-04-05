@@ -245,6 +245,9 @@ var config = {
         ],
         "form-serializer": [
             {"from": "${sourceNodeLib}/form-serializer/dist/jquery.serialize-object.min.js", "to": "${destComponentsLib}/form-serializer/dist"}
+        ],
+        "mustache": [
+            {"from": "${sourceNodeLib}/mustache/mustache.min.js", "to": "${destComponentsLib}/mustache"}
         ]
     }
 };
@@ -350,7 +353,8 @@ var src = {
         "./web/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.js",
         "./web/components/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js",
         "./web/components/numeral/min/numeral.min.js",
-        "./web/components/form-serializer/dist/jquery.serialize-object.min.js"
+        "./web/components/form-serializer/dist/jquery.serialize-object.min.js",
+        "./web/components/mustache/mustache.min.js"
     ],
     "localeJS": {
         "en": [

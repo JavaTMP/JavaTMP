@@ -792,8 +792,13 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="pages/plugins/moment.js">
+                                        <a href="${pageContext.request.contextPath}/pages/plugins/moment.js">
                                             Moment.js Date/Time Plugin
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/plugins/mustache.js">
+                                            mustache.js template plugin
                                         </a>
                                     </li>
                                 </ul>

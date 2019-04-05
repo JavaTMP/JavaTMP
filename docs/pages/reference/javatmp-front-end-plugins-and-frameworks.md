@@ -562,3 +562,15 @@ Converts HTML form into JavaScript object
 
 Copyright (c) 2014, Paul Macek
 
+### [mustache.js Template](http://github.com/janl/mustache.js)
+
+mustache.js - Logic-less {{mustache}} templates with JavaScript
+
+MIT
+
+### [mustache.java Template](https://github.com/spullara/mustache.java)
+
+Implementation of mustache.js for Java
+
+Apache License, Version 2.0
+

@@ -3,6 +3,11 @@ title: Java Bootstrap Template Version 0.0.9 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.9 (Current Development Version)
 
+## on
+- Add mustache.js template to front-end and java backend
+- Add a new page in `./web/pages/plugins/mustache.js.html`
+- Add a java version of mustache template `https://github.com/spullara/mustache.java`
+
 ## 9b7cb0f on Apr 3, 2019, 1:02 AM GMT+4
 - Refactor ion.rangeSlider plugin style to support new features in version 2.3.0 and support all available skin options.
 - Update the following packages:
