@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.9 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.9 (Current Development Version)
 
-## on
+## 2ac57bd on Apr 5, 2019, 9:51 PM GMT+4
 - Add mustache.js template to front-end and java backend
 - Add a new page in `./web/pages/plugins/mustache.js.html`
 - Add a java version of mustache template `https://github.com/spullara/mustache.java`
