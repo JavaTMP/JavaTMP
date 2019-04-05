@@ -801,6 +801,11 @@
                                             mustache.js template plugin
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/plugins/metisMenu">
+                                            Metis Menu plugin
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li>
