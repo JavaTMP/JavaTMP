@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row">
     <div class="col-lg-12">
-        <div id="UsersLocationsInTheWorld" style="min-height: 300px"></div>
+        <div class="UsersLocationsInTheWorld" style="min-height: 300px"></div>
     </div>
 </div>
 <script type="text/javascript">
@@ -10,10 +10,13 @@
     jQuery(function ($) {
         var currentCardletId = '<c:out value="${param.cardletId}"/>';
         var cardletElement = $("#" + currentCardletId);
-        cardletElement.on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
-            var containerCard = cardletElement.closest(".card");
+        var containerCard = null;
+        var chartDiv = null;
 
-            var UsersLocationsInTheWorld = echarts.init(document.getElementById('UsersLocationsInTheWorld'));
+        cardletElement.on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
+            containerCard = cardletElement.closest(".card");
+            chartDiv = $('.UsersLocationsInTheWorld', cardletElement)[0];
+            var UsersLocationsInTheWorld = echarts.init(chartDiv);
 
             var UsersLocationsInTheWorldOption = {
                 tooltip: {
@@ -112,25 +115,19 @@
             });
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
-                $('#UsersLocationsInTheWorld').css({"width": "100%"});
+                $(chartDiv).css({"width": "100%"});
                 UsersLocationsInTheWorld.resize();
             });
 
             containerCard.on(javatmp.settings.cardFullscreenCompress, function (event, card) {
                 // when card compress by pressing the top right tool button
-                var cardId = $(card).attr("id");
-                if (cardId === "UsersLocationsInTheWorldCard") {
-                    $('#UsersLocationsInTheWorld').css({"minHeight": 300});
-                    UsersLocationsInTheWorld.resize();
-                }
+                $(chartDiv).css({"minHeight": 300});
+                UsersLocationsInTheWorld.resize();
             });
             containerCard.on(javatmp.settings.cardFullscreenExpand, function (event, card) {
                 // when card compress by pressing the top right tool button
-                var cardId = $(card).attr("id");
-                if (cardId === "UsersLocationsInTheWorldCard") {
-                    $('#UsersLocationsInTheWorld').css({"minHeight": "90vh"});
-                    UsersLocationsInTheWorld.resize();
-                }
+                $(chartDiv).css({"minHeight": "90vh"});
+                UsersLocationsInTheWorld.resize();
             });
 
             cardletElement.on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {

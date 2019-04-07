@@ -2,11 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row d-flex align-items-center">
     <div class="col-7 text-center">
-        <span class="d-block display-4 counter" id="pageViewActivitesPerHourChartCard_totalCount">0</span>
+        <span class="d-block display-4 counter pageViewActivitesPerHourChartCard_totalCount">0</span>
         <span class="d-block muted small">${labels['page.home.AllPageViews']}</span>
     </div>
     <div class="col-5 text-left">
-        <div id="pageViewActivitesPerHourChart" style="min-height: 100px"></div>
+        <div class="pageViewActivitesPerHourChart" style="min-height: 100px"></div>
     </div>
 </div>
 <script type="text/javascript">
@@ -16,8 +16,7 @@
         var cardletElement = $("#" + currentCardletId);
         cardletElement.on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
 
-            var pageViewActivitesPerHourChart = echarts.init(document.getElementById('pageViewActivitesPerHourChart'));
-
+            var pageViewActivitesPerHourChart = echarts.init($('.pageViewActivitesPerHourChart', cardletElement)[0]);
             var pageViewActivitesPerHourChartOption = {
                 grid: {
                     show: false,
@@ -111,7 +110,7 @@
                         totalPages += dataArray[i][1];
                     }
 
-                    $("#pageViewActivitesPerHourChartCard_totalCount").attr("title", totalPages).html(totalPages).counterUp({
+                    $('.pageViewActivitesPerHourChartCard_totalCount', cardletElement).attr("title", totalPages).html(totalPages).counterUp({
                         delay: 10,
                         time: 1000,
                         formatter: function (n) {

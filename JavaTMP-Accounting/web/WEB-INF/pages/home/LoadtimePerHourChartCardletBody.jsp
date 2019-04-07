@@ -2,11 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row d-flex align-items-center">
     <div class="col-7 text-center">
-        <span class="d-block display-4 counter" id="loadtimePerHourChartCard_totalCount">0</span>
+        <span class="d-block display-4 counter loadtimePerHourChartCard_totalCount">0</span>
         <span class="d-block muted small">${labels['page.home.AvgLoadTime']}</span>
     </div>
     <div class="col-5">
-        <div id="loadtimePerHourChart" style="min-height: 100px"></div>
+        <div class="loadtimePerHourChart" style="min-height: 100px"></div>
     </div>
 </div>
 <script type="text/javascript">
@@ -16,7 +16,7 @@
         var cardletElement = $("#" + currentCardletId);
         cardletElement.on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
 
-            var loadtimePerHourChart = echarts.init(document.getElementById('loadtimePerHourChart'));
+            var loadtimePerHourChart = echarts.init($('.loadtimePerHourChart', cardletElement)[0]);
 
             var loadtimePerHourChartOption = {
                 grid: {
@@ -113,7 +113,8 @@
                     avgLoadTime = totalAvgs / dataArray.length;
                     // from: https://stackoverflow.com/questions/11832914/round-to-at-most-2-decimal-places-only-if-necessary
                     avgLoadTime = Math.round((avgLoadTime + 0.00001) * 100) / 100;
-                    $("#loadtimePerHourChartCard_totalCount").attr("title", avgLoadTime).html(avgLoadTime).counterUp({
+
+                    $('.loadtimePerHourChartCard_totalCount', cardletElement).attr("title", avgLoadTime).html(avgLoadTime).counterUp({
                         delay: 10,
                         time: 1000,
                         formatter: function (n) {

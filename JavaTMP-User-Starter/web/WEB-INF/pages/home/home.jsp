@@ -2,7 +2,7 @@
 <div class="dynamic-ajax-content pt-3">
     <div class="form-row">
         <div class="col-xl-3 col-lg-6 col-md-6">
-            <div class="card shadow mb-3 bg-white" id="userStatusPieChartCard">
+            <div class="card shadow mb-3 bg-white">
                 <div class="card-header bg-white">
                     ${labels['page.home.RegisteredUsers']}
                     <div class="options float-right">
@@ -26,7 +26,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-md-6">
-            <div class="card shadow mb-3 bg-white" id="todayVisitUserPieChartCard">
+            <div class="card shadow mb-3 bg-white">
                 <div class="card-header bg-white">
                     ${labels['page.home.VisitorsToday']}
                     <div class="options float-right">
@@ -50,7 +50,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-md-6">
-            <div class="card shadow mb-3 bg-white" id="pageViewActivitesPerHourChartCard">
+            <div class="card shadow mb-3 bg-white">
                 <div class="card-header bg-white">
                     ${labels['page.home.PageViewsPerHour']}
                     <div class="options float-right">
@@ -74,7 +74,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-md-6">
-            <div class="card shadow mb-3 bg-white" id="loadtimePerHourChartCard">
+            <div class="card shadow mb-3 bg-white">
                 <div class="card-header bg-white">
                     ${labels['page.home.LoadTimePerHour']}
                     <div class="options float-right">
@@ -101,7 +101,7 @@
     </div>
     <div class="form-row">
         <div class="col-lg-6">
-            <div class="card shadow mb-3 bg-white" id="UsersLocationsInTheWorldCard">
+            <div class="card shadow mb-3 bg-white">
                 <div class="card-header bg-white">
                     ${labels['page.home.UsersLocations']}
                     <div class="options float-right">
@@ -118,7 +118,7 @@
             </div>
         </div>
         <div class="col-lg-6">
-            <div class="card shadow mb-3 bg-white" id="UsersBirthdayPerMonthsCard">
+            <div class="card shadow mb-3 bg-white">
                 <div class="card-header bg-white">
                     ${labels['page.home.UsersBirthdayPerMonths']}
                     <div class="options float-right">

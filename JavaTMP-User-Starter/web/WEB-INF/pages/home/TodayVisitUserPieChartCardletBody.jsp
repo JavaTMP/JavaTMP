@@ -2,10 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row d-flex align-items-center">
     <div class="col-6 text-center">
-        <span class="d-block display-4 counter" id="todayVisitUserPieChartCard_totalCount">0</span>
+        <span class="d-block display-4 counter todayVisitUserPieChartCard_totalCount">0</span>
     </div>
     <div class="col-6 text-left">
-        <div id="todayVisitUserPieChart" style="min-height: 100px"></div>
+        <div class="todayVisitUserPieChart" style="min-height: 100px"></div>
     </div>
 </div>
 <script type="text/javascript">
@@ -14,7 +14,7 @@
         var currentCardletId = '<c:out value="${param.cardletId}"/>';
         var cardletElement = $("#" + currentCardletId);
         cardletElement.on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
-            var todayVisitUserPieChart = echarts.init(document.getElementById('todayVisitUserPieChart'));
+            var todayVisitUserPieChart = echarts.init($('.todayVisitUserPieChart', cardletElement)[0]);
             var todayVisitUserPieChartOption = {
                 tooltip: {
                     trigger: 'item',
@@ -61,7 +61,7 @@
 
                     todayVisitUserPieChartOption.series[0].data[0].value = visitingToday;
                     todayVisitUserPieChartOption.series[0].data[1].value = notVisitingTodayOrLoginYet;
-                    $("#todayVisitUserPieChartCard_totalCount").html(visitingToday).counterUp({
+                    $('.todayVisitUserPieChartCard_totalCount', cardletElement).html(visitingToday).counterUp({
                         delay: 10,
                         time: 1000
                     });

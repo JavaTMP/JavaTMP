@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row">
     <div class="col-lg-12">
-        <div id="UsersBirthdayPerMonths" style="min-height: 300px"></div>
+        <div class="UsersBirthdayPerMonths" style="min-height: 300px"></div>
     </div>
 </div>
 <script type="text/javascript">
@@ -13,7 +13,7 @@
         cardletElement.on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
             var containerCard = cardletElement.closest(".card");
 
-            var UsersBirthdayPerMonths = echarts.init(document.getElementById('UsersBirthdayPerMonths'));
+            var UsersBirthdayPerMonths = echarts.init($('.UsersBirthdayPerMonths', cardletElement)[0]);
 
             var monthsName = moment.months();
 
