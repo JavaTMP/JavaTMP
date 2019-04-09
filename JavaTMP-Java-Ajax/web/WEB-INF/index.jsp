@@ -455,6 +455,16 @@
                                             Bootstrap Scrollspy
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/bootstrap/spinners">
+                                            Bootstrap Spinners
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/bootstrap/toasts">
+                                            Bootstrap Toasts
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li>
