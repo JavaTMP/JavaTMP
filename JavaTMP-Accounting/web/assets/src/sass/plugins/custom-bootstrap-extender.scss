@@ -87,3 +87,13 @@ table.responsive {
         background-color: lighten($value, 25) !important;
     }
 }
+
+.dropdown-item.disabled, .dropdown-item:disabled {
+    cursor: not-allowed;
+}
+
+.card-placeholder {
+    border: $card-border-width dotted $card-border-color;
+    border-radius: $card-border-radius;
+    padding: 0;
+}
