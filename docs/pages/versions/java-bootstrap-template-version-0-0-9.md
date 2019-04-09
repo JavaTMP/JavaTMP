@@ -3,6 +3,12 @@ title: Java Bootstrap Template Version 0.0.9 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.9 (Current Development Version)
 
+## cddb12c on Apr 9, 2019, 4:57 PM GMT+4
+- create demo pages for new bootstrap components like spinner and toaster.
+- Solve the problem in dropdown demo page for RTL version.
+- Solve the problem in cardlet that depends on id instead of class.
+- create a demo page for metisMenu plugin `./web/pages/plugins/metisMenu.html`
+
 ## e4576c0 on Apr 6, 2019, 3:39 AM GMT+4
 - Add mustache.js template to front-end and java backend
 - Add a new page in `./web/pages/plugins/mustache.js.html`
