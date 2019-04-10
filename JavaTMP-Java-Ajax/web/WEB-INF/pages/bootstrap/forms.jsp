@@ -348,6 +348,111 @@
                             </div>
                         </div>
                     </form>
+                    <h4 class="card-title text-primary">Column sizing</h4>
+                    <p>As shown in the previous examples, our grid system allows you to place any number of <code class="highlighter-rouge">.col</code>s within a <code class="highlighter-rouge">.row</code> or <code class="highlighter-rouge">.form-row</code>. They’ll split the available width equally between them. You may also pick a subset of your columns to take up more or less space, while the remaining <code class="highlighter-rouge">.col</code>s equally split the rest, with specific column classes like <code class="highlighter-rouge">.col-7</code>.</p>
+                    <form>
+                        <div class="form-row">
+                            <div class="col-7">
+                                <input type="text" class="form-control" placeholder="City">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="State">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="Zip">
+                            </div>
+                        </div>
+                    </form>
+                    <h4 class="card-title text-primary">Auto-sizing</h4>
+                    <form>
+                        <div class="form-row align-items-center">
+                            <div class="col-auto">
+                                <label class="sr-only" for="inlineFormInput">Name</label>
+                                <input type="text" class="form-control mb-2" id="inlineFormInput" placeholder="Jane Doe">
+                            </div>
+                            <div class="col-auto">
+                                <label class="sr-only" for="inlineFormInputGroup">Username</label>
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">@</div>
+                                    </div>
+                                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox" id="autoSizingCheck">
+                                    <label class="form-check-label" for="autoSizingCheck">
+                                        Remember me
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                    <p>And Using custom form controls are supported too:</p>
+                    <form>
+                        <div class="form-row align-items-center">
+                            <div class="col-auto my-1">
+                                <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Preference</label>
+                                <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                                    <option selected>Choose...</option>
+                                    <option value="1">One</option>
+                                    <option value="2">Two</option>
+                                    <option value="3">Three</option>
+                                </select>
+                            </div>
+                            <div class="col-auto my-1">
+                                <div class="custom-control custom-checkbox mr-sm-2">
+                                    <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+                                    <label class="custom-control-label" for="customControlAutosizing">Remember my preference</label>
+                                </div>
+                            </div>
+                            <div class="col-auto my-1">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                    <h4 class="card-title text-primary">Inline forms</h4>
+                    <form class="form-inline">
+                        <label class="sr-only" for="inlineFormInputName2">Name</label>
+                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
+
+                        <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
+                        <div class="input-group mb-2 mr-sm-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">@</div>
+                            </div>
+                            <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
+                        </div>
+
+                        <div class="form-check mb-2 mr-sm-2">
+                            <input class="form-check-input" type="checkbox" id="inlineFormCheck">
+                            <label class="form-check-label" for="inlineFormCheck">
+                                Remember me
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary mb-2">Submit</button>
+                    </form>
+                    <h4 class="card-title text-primary">Custom form controls and selects are also supported</h4>
+                    <form class="form-inline">
+                        <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Preference</label>
+                        <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+                            <option selected>Choose...</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+
+                        <div class="custom-control custom-checkbox my-1 mr-sm-2">
+                            <input type="checkbox" class="custom-control-input" id="customControlInline">
+                            <label class="custom-control-label" for="customControlInline">Remember my preference</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary my-1">Submit</button>
+                    </form>
                     <h4 class="card-title text-primary">Help text</h4>
                     <form>
                         <div class="form-group">
@@ -389,18 +494,36 @@
                         </fieldset>
                     </form>
                     <h4 class="card-title text-primary">Validation</h4>
-                    <form class="container" id="needs-validation" novalidate>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
+                    <form class="needs-validation" novalidate>
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
                                 <label for="validationCustom01">First name</label>
                                 <input type="text" class="form-control" id="validationCustom01" placeholder="First name" value="Mark" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
                             </div>
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-4 mb-3">
                                 <label for="validationCustom02">Last name</label>
                                 <input type="text" class="form-control" id="validationCustom02" placeholder="Last name" value="Otto" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="validationCustomUsername">Username</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupPrepend">@</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="validationCustomUsername" placeholder="Username" aria-describedby="inputGroupPrepend" required>
+                                    <div class="invalid-feedback">
+                                        Please choose a username.
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label for="validationCustom03">City</label>
                                 <input type="text" class="form-control" id="validationCustom03" placeholder="City" required>
@@ -423,59 +546,95 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                                <label class="form-check-label" for="invalidCheck">
+                                    Agree to terms and conditions
+                                </label>
+                                <div class="invalid-feedback">
+                                    You must agree before submitting.
+                                </div>
+                            </div>
+                        </div>
                         <button class="btn btn-primary" type="submit">Submit form</button>
                     </form>
                     <h4 class="card-title text-primary">Browser defaults</h4>
                     <form>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
                                 <label for="validationDefault01">First name</label>
                                 <input type="text" class="form-control" id="validationDefault01" placeholder="First name" value="Mark" required>
                             </div>
-                            <div class="col-md-6 mb-3">
+                            <div class="col-md-4 mb-3">
                                 <label for="validationDefault02">Last name</label>
                                 <input type="text" class="form-control" id="validationDefault02" placeholder="Last name" value="Otto" required>
                             </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="validationDefaultUsername">Username</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupPrepend2">@</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="validationDefaultUsername" placeholder="Username" aria-describedby="inputGroupPrepend2" required>
+                                </div>
+                            </div>
                         </div>
-                        <div class="row">
+                        <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label for="validationDefault03">City</label>
                                 <input type="text" class="form-control" id="validationDefault03" placeholder="City" required>
-                                <div class="invalid-feedback">
-                                    Please provide a valid city.
-                                </div>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="validationDefault04">State</label>
                                 <input type="text" class="form-control" id="validationDefault04" placeholder="State" required>
-                                <div class="invalid-feedback">
-                                    Please provide a valid state.
-                                </div>
                             </div>
                             <div class="col-md-3 mb-3">
                                 <label for="validationDefault05">Zip</label>
                                 <input type="text" class="form-control" id="validationDefault05" placeholder="Zip" required>
-                                <div class="invalid-feedback">
-                                    Please provide a valid zip.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
+                                <label class="form-check-label" for="invalidCheck2">
+                                    Agree to terms and conditions
+                                </label>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Submit form</button>
+                    </form>
+                    <h4 class="card-title text-primary">Server side</h4>
+                    <form>
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="validationServer01">First name</label>
+                                <input type="text" class="form-control is-valid" id="validationServer01" placeholder="First name" value="Mark" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="validationServer02">Last name</label>
+                                <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Last name" value="Otto" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="validationServerUsername">Username</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="inputGroupPrepend3">@</span>
+                                    </div>
+                                    <input type="text" class="form-control is-invalid" id="validationServerUsername" placeholder="Username" aria-describedby="inputGroupPrepend3" required>
+                                    <div class="invalid-feedback">
+                                        Please choose a username.
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                        <button class="btn btn-primary" type="submit">Submit form</button>
-                    </form>
-                    <h4 class="card-title text-primary">Validation stats</h4>
-                    <form>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="validationServer01">First name</label>
-                                <input type="text" class="form-control is-valid" id="validationServer01" placeholder="First name" value="Mark" required>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="validationServer02">Last name</label>
-                                <input type="text" class="form-control is-valid" id="validationServer02" placeholder="Last name" value="Otto" required>
-                            </div>
-                        </div>
-                        <div class="row">
+                        <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label for="validationServer03">City</label>
                                 <input type="text" class="form-control is-invalid" id="validationServer03" placeholder="City" required>
@@ -498,7 +657,115 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-prima-ry" type="submit">Submit form</button>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
+                                <label class="form-check-label" for="invalidCheck3">
+                                    Agree to terms and conditions
+                                </label>
+                                <div class="invalid-feedback">
+                                    You must agree before submitting.
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Submit form</button>
+                    </form>
+                    <h4 class="card-title text-primary">Supported Validation Elements</h4>
+                    <form class="was-validated">
+                        <div class="mb-3">
+                            <label for="validationTextarea">Textarea</label>
+                            <textarea class="form-control is-invalid" id="validationTextarea" placeholder="Required example textarea" required></textarea>
+                            <div class="invalid-feedback">
+                                Please enter a message in the textarea.
+                            </div>
+                        </div>
+
+                        <div class="custom-control custom-checkbox mb-3">
+                            <input type="checkbox" class="custom-control-input" id="customControlValidation1" required>
+                            <label class="custom-control-label" for="customControlValidation1">Check this custom checkbox</label>
+                            <div class="invalid-feedback">Example invalid feedback text</div>
+                        </div>
+
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" id="customControlValidation2" name="radio-stacked" required>
+                            <label class="custom-control-label" for="customControlValidation2">Toggle this custom radio</label>
+                        </div>
+                        <div class="custom-control custom-radio mb-3">
+                            <input type="radio" class="custom-control-input" id="customControlValidation3" name="radio-stacked" required>
+                            <label class="custom-control-label" for="customControlValidation3">Or toggle this other custom radio</label>
+                            <div class="invalid-feedback">More example invalid feedback text</div>
+                        </div>
+
+                        <div class="form-group">
+                            <select class="custom-select" required>
+                                <option value="">Open this select menu</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                            <div class="invalid-feedback">Example invalid custom select feedback</div>
+                        </div>
+
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="validatedCustomFile" required>
+                            <label class="custom-file-label" for="validatedCustomFile">Choose file...</label>
+                            <div class="invalid-feedback">Example invalid custom file feedback</div>
+                        </div>
+                    </form>
+                    <h4 class="card-title text-primary">Tooltips Validations</h4>
+                    <form class="needs-validation" novalidate>
+                        <div class="form-row">
+                            <div class="col-md-4 mb-3">
+                                <label for="validationTooltip01">First name</label>
+                                <input type="text" class="form-control" id="validationTooltip01" placeholder="First name" value="Mark" required>
+                                <div class="valid-tooltip">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="validationTooltip02">Last name</label>
+                                <input type="text" class="form-control" id="validationTooltip02" placeholder="Last name" value="Otto" required>
+                                <div class="valid-tooltip">
+                                    Looks good!
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-3">
+                                <label for="validationTooltipUsername">Username</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text" id="validationTooltipUsernamePrepend">@</span>
+                                    </div>
+                                    <input type="text" class="form-control" id="validationTooltipUsername" placeholder="Username" aria-describedby="validationTooltipUsernamePrepend" required>
+                                    <div class="invalid-tooltip">
+                                        Please choose a unique and valid username.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label for="validationTooltip03">City</label>
+                                <input type="text" class="form-control" id="validationTooltip03" placeholder="City" required>
+                                <div class="invalid-tooltip">
+                                    Please provide a valid city.
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="validationTooltip04">State</label>
+                                <input type="text" class="form-control" id="validationTooltip04" placeholder="State" required>
+                                <div class="invalid-tooltip">
+                                    Please provide a valid state.
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <label for="validationTooltip05">Zip</label>
+                                <input type="text" class="form-control" id="validationTooltip05" placeholder="Zip" required>
+                                <div class="invalid-tooltip">
+                                    Please provide a valid zip.
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary" type="submit">Submit form</button>
                     </form>
                     <h4 class="card-title text-primary">custom form controls validation</h4>
                     <form class="was-validated">
@@ -534,6 +801,7 @@
                             <div class="invalid-feedback">Example invalid custom file feedback</div>
                         </div>
                     </form>
+                    <h4 class="card-title text-primary">Custom forms</h4>
                     <h4 class="card-title text-primary">Checkboxes</h4>
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox" class="custom-control-input" id="customCheck1">
@@ -566,6 +834,15 @@
                     <div class="custom-control custom-radio">
                         <input type="radio" id="radio3" name="radioDisabled" id="customRadioDisabled" class="custom-control-input" disabled>
                         <label class="custom-control-label" for="customRadioDisabled">Toggle this custom radio</label>
+                    </div>
+                    <h4 class="card-title text-primary">Switches</h4>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                        <label class="custom-control-label" for="customSwitch1">Toggle this switch element</label>
+                    </div>
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" disabled id="customSwitch2">
+                        <label class="custom-control-label" for="customSwitch2">Disabled switch element</label>
                     </div>
                     <h4 class="card-title text-primary">Select menu</h4>
                     <select class="custom-select mb-3">
@@ -603,6 +880,15 @@
                         <input type="file" class="custom-file-input" id="customFile">
                         <label class="custom-file-label" for="customFile">Choose file</label>
                     </div>
+                    <h4 class="card-title text-primary">Range</h4>
+                    <label for="customRange1">Example range</label>
+                    <input type="range" class="custom-range" id="customRange1">
+                    <p>Range inputs have implicit values for <code class="highlighter-rouge">min</code> and <code class="highlighter-rouge">max</code>—<code class="highlighter-rouge">0</code> and <code class="highlighter-rouge">100</code>, respectively. You may specify new values for those using the <code class="highlighter-rouge">min</code> and <code class="highlighter-rouge">max</code> attributes.</p>
+                    <label for="customRange2">Example range</label>
+                    <input type="range" class="custom-range" min="0" max="5" id="customRange2">
+                    <p>By default, range inputs “snap” to integer values. To change this, you can specify a <code class="highlighter-rouge">step</code> value. In the example below, we double the number of steps by using <code class="highlighter-rouge">step="0.5"</code>.</p>
+                    <label for="customRange3">Example range</label>
+                    <input type="range" class="custom-range" min="0" max="5" step="0.5" id="customRange3">
                 </div>
             </div>
         </div>
@@ -612,14 +898,19 @@
     <script type="text/javascript">
         jQuery(function ($) {
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
-                var form = document.getElementById('needs-validation');
-                $("#needs-validation").on('submit', function (event) {
-                    if (form.checkValidity() === false) {
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
                         event.preventDefault();
-                        event.stopPropagation();
-                    }
-                    form.classList.add('was-validated');
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
                 });
+
             });
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
@@ -638,7 +929,6 @@
                 $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenExpand);
                 return true;
             });
-
         });
     </script>
 </div>
