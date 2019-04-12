@@ -2,7 +2,7 @@
 <div class="dynamic-ajax-content grid-gutter-padding">
     <h4 class="my-3">Free Bootstrap 4 Themes by DevExpress</h4>
     <hr/>
-    <div class="row">
+    <div class="form-row">
         <div class="col-lg-12">
             <div class="alert alert-info">
                 <p>This repository contains free and open source Bootstrap 4 themes.
@@ -15,7 +15,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="form-row">
         <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center">
             <a class="applyTheme" themeName="office-white"  href="javascript:void(0);">
                 <img class="img-thumbnail" src="${pageContext.request.contextPath}/assets/img/themes/office-white.png" alt=""/>

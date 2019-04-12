@@ -2,7 +2,7 @@
 <div class="dynamic-ajax-content grid-gutter-padding">
     <h4 class="my-3">Bootswatch Themes</h4>
     <hr/>
-    <div class="row">
+    <div class="form-row">
         <div class="col-lg-12">
             <div class="alert alert-info">
                 <p>Bootswatch is a collection of open source themes for Bootstrap that are easy to install and customize.</p>
@@ -15,7 +15,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="form-row">
         <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center">
             <a class="applyTheme" themeName="cerulean" href="javascript:void(0);">
                 <img class="img-thumbnail" src="${pageContext.request.contextPath}/assets/img/themes/Cerulean.png" alt=""/>
@@ -47,7 +47,7 @@
             </a>
         </div>
     </div>
-    <div class="row mt-3">
+    <div class="form-row mt-3">
         <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center">
             <a class="applyTheme" themeName="litera" href="javascript:void(0);">
                 <img class="img-thumbnail" src="${pageContext.request.contextPath}/assets/img/themes/Litera.png" alt=""/>
@@ -79,7 +79,7 @@
             </a>
         </div>
     </div>
-    <div class="row mt-3">
+    <div class="form-row mt-3">
         <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center">
             <a class="applyTheme" themeName="sandstone" href="javascript:void(0);">
                 <img class="img-thumbnail" src="${pageContext.request.contextPath}/assets/img/themes/Sandstone.png" alt=""/>
@@ -111,7 +111,7 @@
             </a>
         </div>
     </div>
-    <div class="row mt-3">
+    <div class="form-row mt-3">
         <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center">
             <a class="applyTheme" themeName="superhero" href="javascript:void(0);">
                 <img class="img-thumbnail" src="${pageContext.request.contextPath}/assets/img/themes/Superhero.png" alt=""/>
