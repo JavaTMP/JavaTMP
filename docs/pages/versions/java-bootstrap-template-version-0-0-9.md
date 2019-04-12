@@ -3,6 +3,11 @@ title: Java Bootstrap Template Version 0.0.9 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.9 (Current Development Version)
 
+## on
+- remove horizontal padding in `.main-body-content-container`
+- introduce a class `.grid-gutter-padding` and apply it to `.dynamic-ajax-content` div for padding
+- Run `gulp` command which will use default task and generate `dist` folders.
+
 ## cddb12c on Apr 9, 2019, 4:57 PM GMT+4
 - create demo pages for new bootstrap components like spinner and toaster.
 - Solve the problem in dropdown demo page for RTL version.
