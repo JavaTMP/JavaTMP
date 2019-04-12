@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<div class="dynamic-ajax-content">
+<div class="dynamic-ajax-content grid-gutter-padding">
     <form id="dynamic-advanced-form-plugins-id" enctype="multipart/form-data" autocomplete="off" class="form" action="${pageContext.request.contextPath}/user/CreateUserController" method="post" novalidate="novalidate">
         <div class="row dynamic-form-wizard">
             <div class="col-lg-3">
