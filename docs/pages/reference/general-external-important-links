@@ -37,3 +37,9 @@ title: General External Important Links
 ## Mustache Template links
 - [https://love2dev.com/blog/javascript-mustach-templates/](https://love2dev.com/blog/javascript-mustach-templates/)
 - [http://coenraets.org/blog/2011/12/tutorial-html-templates-with-mustache-js/](http://coenraets.org/blog/2011/12/tutorial-html-templates-with-mustache-js/)
+
+## Javascript table and Spreadsheet Plugins and resources
+- [https://github.com/myliang/x-spreadsheet](https://github.com/myliang/x-spreadsheet)
+- [https://github.com/lethevinh/sticky-table](https://github.com/lethevinh/sticky-table)
+- [https://github.com/paulhodel/jexcel](https://github.com/paulhodel/jexcel)
+- [https://github.com/joeantkowiak/TableScroller](https://github.com/joeantkowiak/TableScroller)
