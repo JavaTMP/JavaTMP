@@ -7,6 +7,7 @@ title: Java Bootstrap Template Version 0.0.9 (Current Development Version)
 - remove horizontal padding in `.main-body-content-container`
 - introduce a class `.grid-gutter-padding` and apply it to `.dynamic-ajax-content` div for padding
 - remove horizontal padding in theme preview demo pages
+- update `pages/bootstrap/dropdown.html` demo page with new Bootstrap 4.3.1 features.
 - Run `gulp` command which will use default task and generate `dist` folders.
 
 ## cddb12c on Apr 9, 2019, 4:57 PM GMT+4
