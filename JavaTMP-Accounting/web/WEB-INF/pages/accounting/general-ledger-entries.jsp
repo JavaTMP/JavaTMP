@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<div class="dynamic-ajax-content">
+<div class="dynamic-ajax-content grid-gutter-padding">
     <h5 class="my-3">General Ledger Entries</h5>
     <hr/>
     <div class="row">

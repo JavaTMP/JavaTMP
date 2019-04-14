@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<div class="dynamic-ajax-content">
+<div class="dynamic-ajax-content grid-gutter-padding">
     <h4 class="my-3">File Uploader Manager</h4>
     <hr/>
     <div class="row">

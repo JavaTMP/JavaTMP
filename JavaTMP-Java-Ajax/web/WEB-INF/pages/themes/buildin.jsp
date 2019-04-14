@@ -1,29 +1,29 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<div class="dynamic-ajax-content">
+<div class="dynamic-ajax-content grid-gutter-padding">
     <h4 class="my-3">JavaTMP Custom Build-in Themes</h4>
     <hr/>
-    <div class="row">
-        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
+    <div class="form-row">
+        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center">
             <a class="applyTheme" themeName="default"  href="javascript:void(0);">
                 <img class="img-thumbnail" src="${pageContext.request.contextPath}/assets/img/themes/Default.png" alt=""/>
             </a>
         </div>
-        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
+        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center">
             <a class="applyTheme" themeName="ace"  href="javascript:void(0);">
                 <img class="img-thumbnail" src="${pageContext.request.contextPath}/assets/img/themes/Ace.png" alt=""/>
             </a>
         </div>
-        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
+        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center">
             <a class="applyTheme" themeName="schooly"  href="javascript:void(0);">
                 <img class="img-thumbnail" src="${pageContext.request.contextPath}/assets/img/themes/Schooly.png" alt=""/>
             </a>
         </div>
-        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
+        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center">
             <a class="applyTheme" themeName="greenish"  href="javascript:void(0);">
                 <img class="img-thumbnail" src="${pageContext.request.contextPath}/assets/img/themes/Greenish.png" alt=""/>
             </a>
         </div>
-        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center px-2">
+        <div class="col-6 col-sm-6 col-md-4 col-lg-2 col-xl-2 text-center">
             <a class="applyTheme" themeName="purplish"  href="javascript:void(0);">
                 <img class="img-thumbnail" src="${pageContext.request.contextPath}/assets/img/themes/Purplish.png" alt=""/>
             </a>

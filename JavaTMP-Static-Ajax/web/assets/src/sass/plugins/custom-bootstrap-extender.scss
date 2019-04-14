@@ -97,3 +97,9 @@ table.responsive {
     border-radius: $card-border-radius;
     padding: 0;
 }
+
+.grid-gutter-padding {
+    padding-left: $grid-gutter-width / 2;
+    padding-right: $grid-gutter-width / 2;
+}
+
