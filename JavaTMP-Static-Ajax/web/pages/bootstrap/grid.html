@@ -315,6 +315,24 @@
             </div>
             <div class="card my-3">
                 <div class="card-header">
+                    Gutters
+                    <div class="options float-right">
+                        <a class="settings"><i class="fa fa-cog"></i></a>
+                        <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
+                        <a href="#" class="reload"><i class="fa fa-sync"></i></a>
+                        <a href="#" class="fullscreen"><i class=" fa fa-expand"></i></a>
+                        <a href="#" class="remove"><i class="fa fa-times"></i></a>
+                    </div>
+                </div>
+                <div class="card-body px-lg-5">
+                    <div class="row mx-lg-n5">
+                        <div class="col py-3 px-lg-5 border bg-light">Custom column padding</div>
+                        <div class="col py-3 px-lg-5 border bg-light">Custom column padding</div>
+                    </div>
+                </div>
+            </div>
+            <div class="card my-3">
+                <div class="card-header">
                     Vertical alignment
                     <div class="options float-right">
                         <a class="settings"><i class="fa fa-cog"></i></a>
@@ -427,6 +445,24 @@
             </div>
             <div class="card my-3">
                 <div class="card-header">
+                    No gutters
+                    <div class="options float-right">
+                        <a class="settings"><i class="fa fa-cog"></i></a>
+                        <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
+                        <a href="#" class="reload"><i class="fa fa-sync"></i></a>
+                        <a href="#" class="fullscreen"><i class=" fa fa-expand"></i></a>
+                        <a href="#" class="remove"><i class="fa fa-times"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row no-gutters">
+                        <div class="col-12 col-sm-6 col-md-8">.col-12 .col-sm-6 .col-md-8</div>
+                        <div class="col-6 col-md-4">.col-6 .col-md-4</div>
+                    </div>
+                </div>
+            </div>
+            <div class="card my-3">
+                <div class="card-header">
                     Column wrapping
                     <div class="options float-right">
                         <a class="settings"><i class="fa fa-cog"></i></a>
@@ -441,6 +477,30 @@
                         <div class="col-9">.col-9</div>
                         <div class="col-4">.col-4<br>Since 9 + 4 = 13 &gt; 12, this 4-column-wide div gets wrapped onto a new line as one contiguous unit.</div>
                         <div class="col-6">.col-6<br>Subsequent columns continue along the new line.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="card my-3">
+                <div class="card-header">
+                    Column breaks
+                    <div class="options float-right">
+                        <a class="settings"><i class="fa fa-cog"></i></a>
+                        <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
+                        <a href="#" class="reload"><i class="fa fa-sync"></i></a>
+                        <a href="#" class="fullscreen"><i class=" fa fa-expand"></i></a>
+                        <a href="#" class="remove"><i class="fa fa-times"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
+                        <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
+
+                        <!-- Force next columns to break to new line -->
+                        <div class="w-100"></div>
+
+                        <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
+                        <div class="col-6 col-sm-3">.col-6 .col-sm-3</div>
                     </div>
                 </div>
             </div>
@@ -493,6 +553,70 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card my-3">
+                <div class="card-header">
+                    Order classes
+                    <div class="options float-right">
+                        <a class="settings"><i class="fa fa-cog"></i></a>
+                        <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
+                        <a href="#" class="reload"><i class="fa fa-sync"></i></a>
+                        <a href="#" class="fullscreen"><i class=" fa fa-expand"></i></a>
+                        <a href="#" class="remove"><i class="fa fa-times"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p>Use <code class="highlighter-rouge">.order-</code> classes for controlling the <strong>visual order</strong> of your content. These classes are responsive, so you can set the <code class="highlighter-rouge">order</code> by breakpoint (e.g., <code class="highlighter-rouge">.order-1.order-md-2</code>). Includes support for <code class="highlighter-rouge">1</code> through <code class="highlighter-rouge">12</code> across all five grid tiers.</p>
+                    <div class="row">
+                        <div class="col">
+                            First, but unordered
+                        </div>
+                        <div class="col order-12">
+                            Second, but last
+                        </div>
+                        <div class="col order-1">
+                            Third, but first
+                        </div>
+                    </div>
+                    <p>There are also responsive <code class="highlighter-rouge">.order-first</code> and <code class="highlighter-rouge">.order-last</code> classes that change the <code class="highlighter-rouge">order</code> of an element by applying <code class="highlighter-rouge">order: -1</code> and <code class="highlighter-rouge">order: 13</code> (<code class="highlighter-rouge">order: $columns + 1</code>), respectively. These classes can also be intermixed with the numbered <code class="highlighter-rouge">.order-*</code> classes as needed.</p>
+                    <div class="row">
+                        <div class="col order-last">
+                            First, but last
+                        </div>
+                        <div class="col">
+                            Second, but unordered
+                        </div>
+                        <div class="col order-first">
+                            Third, but first
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card my-3">
+                <div class="card-header">
+                    Margin utilities
+                    <div class="options float-right">
+                        <a class="settings"><i class="fa fa-cog"></i></a>
+                        <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
+                        <a href="#" class="reload"><i class="fa fa-sync"></i></a>
+                        <a href="#" class="fullscreen"><i class=" fa fa-expand"></i></a>
+                        <a href="#" class="remove"><i class="fa fa-times"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">.col-md-4</div>
+                        <div class="col-md-4 ml-auto">.col-md-4 .ml-auto</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3 ml-md-auto">.col-md-3 .ml-md-auto</div>
+                        <div class="col-md-3 ml-md-auto">.col-md-3 .ml-md-auto</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-auto mr-auto">.col-auto .mr-auto</div>
+                        <div class="col-auto">.col-auto</div>
                     </div>
                 </div>
             </div>
