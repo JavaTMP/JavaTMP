@@ -20,12 +20,14 @@
                         </div>
                         <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
                     </div>
+
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2">
                         <div class="input-group-append">
                             <span class="input-group-text" id="basic-addon2">@example.com</span>
                         </div>
                     </div>
+
                     <label for="basic-url">Your vanity URL</label>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -43,6 +45,23 @@
                             <span class="input-group-text">.00</span>
                         </div>
                     </div>
+
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">With textarea</span>
+                        </div>
+                        <textarea class="form-control" aria-label="With textarea"></textarea>
+                    </div>
+                    <hr/>
+                    <h4 class="card-title text-primary">Wrapping</h4>
+                    <p>Input groups wrap by default via <code class="highlighter-rouge">flex-wrap: wrap</code> in order to accommodate custom form field validation within an input group. You may disable this with <code class="highlighter-rouge">.flex-nowrap</code>.</p>
+                    <div class="input-group flex-nowrap">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="addon-wrapping">@</span>
+                        </div>
+                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
+                    </div>
+                    <hr/>
                     <h4 class="card-title text-primary">Sizing</h4>
                     <div class="input-group input-group-sm mb-3">
                         <div class="input-group-prepend">
@@ -64,6 +83,7 @@
                         </div>
                         <input type="text" class="form-control" aria-label="Large" aria-describedby="inputGroup-sizing-sm">
                     </div>
+                    <hr/>
                     <h4 class="card-title text-primary">Checkboxes and radio addons</h4>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -81,6 +101,7 @@
                         </div>
                         <input type="text" class="form-control" aria-label="Text input with radio button">
                     </div>
+                    <hr/>
                     <h4 class="card-title text-primary">Multiple addons</h4>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -104,6 +125,7 @@
                             <span class="input-group-text">0.00</span>
                         </div>
                     </div>
+                    <hr/>
                     <h4 class="card-title text-primary">Button addons</h4>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -134,6 +156,7 @@
                             <button class="btn btn-outline-secondary" type="button">Button</button>
                         </div>
                     </div>
+                    <hr/>
                     <h4 class="card-title text-primary">Buttons with dropdowns</h4>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -161,6 +184,7 @@
                             </div>
                         </div>
                     </div>
+                    <hr/>
                     <h4 class="card-title text-primary">Segmented buttons</h4>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
@@ -193,6 +217,93 @@
                                 <div role="separator" class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">Separated link</a>
                             </div>
+                        </div>
+                    </div>
+                    <hr/>
+                    <h4 class="card-title text-primary">Custom select</h4>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Options</label>
+                        </div>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            <option selected>Choose...</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <select class="custom-select" id="inputGroupSelect02">
+                            <option selected>Choose...</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                        <div class="input-group-append">
+                            <label class="input-group-text" for="inputGroupSelect02">Options</label>
+                        </div>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-outline-secondary" type="button">Button</button>
+                        </div>
+                        <select class="custom-select" id="inputGroupSelect03" aria-label="Example select with button addon">
+                            <option selected>Choose...</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+                            <option selected>Choose...</option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                        </select>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button">Button</button>
+                        </div>
+                    </div>
+                    <hr/>
+                    <h4 class="card-title text-primary">Custom file input</h4>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile02">
+                            <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGroupFileAddon02">Choose file</label>
+                        </div>
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="inputGroupFileAddon02">Upload</span>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon03">Button</button>
+                        </div>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile03" aria-describedby="inputGroupFileAddon03">
+                            <label class="custom-file-label" for="inputGroupFile03">Choose file</label>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04">
+                            <label class="custom-file-label" for="inputGroupFile04">Choose file</label>
+                        </div>
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="inputGroupFileAddon04">Button</button>
                         </div>
                     </div>
                 </div>
