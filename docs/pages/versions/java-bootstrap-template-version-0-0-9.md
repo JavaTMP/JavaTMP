@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.9 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.9 (Current Development Version)
 
-## on
+## 97958fb on Apr 17, 2019, 12:02 AM GMT+4
 - remove horizontal padding in `.main-body-content-container`
 - introduce a class `.grid-gutter-padding` and apply it to `.dynamic-ajax-content` div for padding
 - remove horizontal padding in theme preview demo pages
