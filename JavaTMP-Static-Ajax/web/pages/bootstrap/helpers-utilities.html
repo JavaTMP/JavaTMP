@@ -1,0 +1,61 @@
+<div class="dynamic-ajax-content grid-gutter-padding">
+    <div class="row">
+        <div class="col">
+            <div class="card my-3">
+                <div class="card-header">
+                    Bootstrap helper and utilities classes
+                    <div class="options float-right">
+                        <a class="settings"><i class="fa fa-cog"></i></a>
+                        <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
+                        <a href="#" class="reload"><i class="fa fa-sync"></i></a>
+                        <a href="#" class="fullscreen"><i class=" fa fa-expand"></i></a>
+                        <a href="#" class="remove"><i class="fa fa-times"></i></a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title text-primary">Basic</h4>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <style type="text/css">
+        .dynamic-ajax-content > .row > .col > .card > .card-body .card-title {
+            margin-top: .75rem;
+            margin-bottom: .5rem;
+        }
+        .dynamic-ajax-content > .row > .col > .card > .card-body .card-title:first-child {
+            margin-top: auto;
+            margin-bottom: .5rem;
+        }
+        .dynamic-ajax-content > .row > .col > .card > .card-body .btn {
+            /*            margin-top: .25rem;
+                        margin-bottom: .25rem;*/
+        }
+    </style>
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
+
+            });
+
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
+
+            });
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenCompress, function (event, card) {
+                // when card compress by pressing the top right tool button
+
+            });
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenExpand, function (event, card) {
+                // when card Expand by pressing the top right tool button
+            });
+            // before container replaced with new ajax content.
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {
+                $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenCompress);
+                $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenExpand);
+                return true;
+            });
+
+        });
+    </script>
+</div>
