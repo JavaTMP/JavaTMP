@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<div class="dynamic-ajax-content pt-3">
+<div class="dynamic-ajax-content grid-gutter-padding pt-3">
     <div class="form-row">
         <div class="col-xl-3 col-lg-6 col-md-6">
             <div class="card shadow mb-3 bg-white">

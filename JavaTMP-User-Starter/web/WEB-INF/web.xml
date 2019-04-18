@@ -11,6 +11,11 @@
     <filter>
         <filter-name>AuthenticatorFilter</filter-name>
         <filter-class>com.javatmp.web.filter.AuthenticatorFilter</filter-class>
+        <init-param>
+            <param-name>excludedUrlsRegex</param-name>
+            <!-- Comma separated list of excluded URLs Regex  -->
+            <param-value>^/assets/.*,^/login,^/logout,^/register,^/CaptchaImageController</param-value>
+        </init-param>
     </filter>
     <filter>
         <filter-name>CacheControlHeadersFilter</filter-name>

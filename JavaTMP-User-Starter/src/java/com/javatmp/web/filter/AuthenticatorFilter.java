@@ -5,6 +5,7 @@ import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.domain.ResponseMessage;
 import com.javatmp.util.Constants;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -25,30 +26,24 @@ public class AuthenticatorFilter implements Filter {
 
     private FilterConfig filterConfig = null;
 
-    private Set<String> excludeControllers = new HashSet<>();
-
-    public AuthenticatorFilter() {
-        excludeControllers.add("/assets");
-        excludeControllers.add("/login");
-        excludeControllers.add("/logout");
-        excludeControllers.add("/register");
-        excludeControllers.add("/CaptchaImageController");
-    }
+    private Set<String> excludedUrlsRegex;
 
     @Override
     public void init(FilterConfig filterConfig) {
         this.filterConfig = filterConfig;
+        String excludePattern = filterConfig.getInitParameter("excludedUrlsRegex");
+        excludedUrlsRegex = new HashSet<>(Arrays.asList(excludePattern.split(",")));
     }
 
-    private boolean isReqInWhiteList(String requestPath) {
-        boolean isWhiteListed = false;
-        for (String path : excludeControllers) {
-            if (requestPath.startsWith(path)) {
-                isWhiteListed = true;
+    private boolean isExcludedUrl(String requestPath) {
+        boolean isExcluded = false;
+        for (String path : excludedUrlsRegex) {
+            if (requestPath.matches(path)) {
+                isExcluded = true;
                 break;
             }
         }
-        return isWhiteListed;
+        return isExcluded;
     }
 
     @Override
@@ -64,8 +59,8 @@ public class AuthenticatorFilter implements Filter {
         HttpSession session = req.getSession();
         ResourceBundle labels = (ResourceBundle) session.getAttribute(Constants.LANGUAGE_ATTR_KEY);
 
-        logger.info("path [" + path + "] is [" + isReqInWhiteList(path) + "]");
-        if (isReqInWhiteList(path)) {
+        logger.info("path [" + path + "] isExcludedUrl [" + isExcludedUrl(path) + "]");
+        if (isExcludedUrl(path)) {
             chain.doFilter(request, response);
         } else {
             // check if requester is authenticated or not
