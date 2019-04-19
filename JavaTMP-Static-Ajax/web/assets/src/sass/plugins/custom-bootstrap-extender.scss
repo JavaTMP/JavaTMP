@@ -1,5 +1,12 @@
 @import "../common/variables.scss";
 
+.bg-body {
+    background-color: $body-bg !important;
+}
+.text-body {
+    color: $gray-900 !important;
+}
+
 .has-form-control-clear {
     position: relative;
     .form-control-clear {
@@ -102,4 +109,42 @@ table.responsive {
     padding-left: $grid-gutter-width / 2;
     padding-right: $grid-gutter-width / 2;
 }
+
+@mixin make-col-fixed($size, $columns: $grid-columns, $breakpointValue : 1) {
+    flex: 0 0 ($size / $columns) * $breakpointValue;
+    // Add a `max-width` to ensure content within each column does not blow out
+    // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
+    // do not appear to require this.
+    max-width: ($size / $columns) * $breakpointValue;
+}
+
+
+$columns: $grid-columns;
+$gutter: $grid-gutter-width;
+$breakpoints: $grid-breakpoints;
+
+/*!******************************************
+custom fixed column breakpoint
+*********************************************/
+@each $breakpoint, $breakpointValue in $breakpoints {
+    $infix: breakpoint-infix($breakpoint, $breakpoints);
+
+    @media (min-width: $breakpointValue) {
+        // Provide basic `.col-{bp}` classes for equal-width flexbox columns
+        .col-fixed#{$infix} {
+            flex: 0 0 $breakpointValue;
+            max-width: $breakpointValue;
+        }
+
+        @for $i from 1 through $columns {
+            .col-fixed#{$infix}-#{$i} {
+                @include make-col-fixed($i, $columns, $breakpointValue);
+            }
+        }
+    }
+}
+/*!******************************************
+End custom fixed column breakpoint
+*********************************************/
+
 
