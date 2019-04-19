@@ -5,25 +5,17 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
-public class LocalizationFilter implements Filter {
+public class LocalizationFilter extends FilterWrapper {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
-    private FilterConfig filterConfig = null;
 
     public LocalizationFilter() {
-    }
-
-    public void init(FilterConfig filterConfig) {
-        this.filterConfig = filterConfig;
-        logger.info("LocalizationFilter:Initializing filter");
     }
 
     public void doFilter(ServletRequest request, ServletResponse response,
@@ -38,7 +30,11 @@ public class LocalizationFilter implements Filter {
             logger.info("Session ID [" + httpRequest.getSession().getId() + "]");
             logger.info("cookies [" + httpRequest.getHeader("cookie") + "]");
             logger.info("sesseion key [" + Constants.LANGUAGE_ATTR_KEY + "]=>[" + httpRequest.getSession().getAttribute(Constants.LANGUAGE_ATTR_KEY) + "]");
-            if (httpRequest.getSession().getAttribute(Constants.LANGUAGE_ATTR_KEY) == null) {
+
+            boolean isExcludedUrl = isExcludedRequest(httpRequest);
+            if (isExcludedUrl == true) {
+                chain.doFilter(request, response);
+            } else if (httpRequest.getSession().getAttribute(Constants.LANGUAGE_ATTR_KEY) == null) {
                 if (httpRequest.getParameter(Constants.LANG_PARAM_NAME) == null) {
                     if (httpRequest.getLocale() != null) {
                         logger.info("locale [" + httpRequest.getLocale() + "]");
@@ -90,10 +86,6 @@ public class LocalizationFilter implements Filter {
             t.printStackTrace();
         }
 
-    }
-
-    public void destroy() {
-        logger.info("Destroy LocalizationFilter filter");
     }
 
 }

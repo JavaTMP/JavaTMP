@@ -5,11 +5,8 @@ import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.domain.ResponseMessage;
 import com.javatmp.util.Constants;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.ResourceBundle;
-import java.util.Set;
 import java.util.logging.Logger;
-import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
@@ -19,37 +16,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class AuthenticatorFilter implements Filter {
+public class AuthenticatorFilter extends FilterWrapper {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
-
-    private FilterConfig filterConfig = null;
-
-    private Set<String> excludeControllers = new HashSet<>();
-
-    public AuthenticatorFilter() {
-        excludeControllers.add("/assets");
-        excludeControllers.add("/login");
-        excludeControllers.add("/logout");
-        excludeControllers.add("/register");
-        excludeControllers.add("/CaptchaImageController");
-    }
-
-    @Override
-    public void init(FilterConfig filterConfig) {
-        this.filterConfig = filterConfig;
-    }
-
-    private boolean isReqInWhiteList(String requestPath) {
-        boolean isWhiteListed = false;
-        for (String path : excludeControllers) {
-            if (requestPath.startsWith(path)) {
-                isWhiteListed = true;
-                break;
-            }
-        }
-        return isWhiteListed;
-    }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
@@ -64,8 +33,9 @@ public class AuthenticatorFilter implements Filter {
         HttpSession session = req.getSession();
         ResourceBundle labels = (ResourceBundle) session.getAttribute(Constants.LANGUAGE_ATTR_KEY);
 
-        logger.info("path [" + path + "] is [" + isReqInWhiteList(path) + "]");
-        if (isReqInWhiteList(path)) {
+        boolean isExcludedUrl = isExcludedUrl(path);
+        logger.info("path [" + path + "] isExcludedUrl [" + isExcludedUrl + "]");
+        if (isExcludedUrl == true) {
             chain.doFilter(request, response);
         } else {
             // check if requester is authenticated or not
@@ -94,35 +64,5 @@ public class AuthenticatorFilter implements Filter {
                 request.getRequestDispatcher(redirectUrl).forward(request, response);
             }
         }
-
-    }
-
-    public static String getBaseUrl(HttpServletRequest request) {
-        String scheme = request.getScheme() + "://";
-        String serverName = request.getServerName();
-        String serverPort = (request.getServerPort() == 80) ? "" : ":" + request.getServerPort();
-        String contextPath = request.getContextPath();
-        return scheme + serverName + serverPort + contextPath;
-    }
-
-    /**
-     * Return the filter configuration object for this filter.
-     *
-     * @return
-     */
-    public FilterConfig getFilterConfig() {
-        return (this.filterConfig);
-    }
-
-    /**
-     * Set the filter configuration object for this filter.
-     *
-     * @param filterConfig The filter configuration object
-     */
-    public void setFilterConfig(FilterConfig filterConfig) {
-        this.filterConfig = filterConfig;
-    }
-
-    public void destroy() {
     }
 }
