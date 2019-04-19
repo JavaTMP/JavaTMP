@@ -6,6 +6,8 @@ title: Java Bootstrap Template Version 0.0.9 (Current Development Version)
 ## on
 - add `&amp;allowPublicKeyRetrieval=true` to mysql database server url in persistence.xml in `JavaTMP-User-Starter`
 - Update all java filters to support excluded regex for urls in web.xml as filter initiate parameters.
+- Add `UTF8InforcerFilter` to filter all request at the beginning to force UTF-8 character encoding request.
+- Add `UTF8InforcerFilter` to web.xml web configuration file.
 
 ## 97958fb on Apr 17, 2019, 12:02 AM GMT+4
 - remove horizontal padding in `.main-body-content-container`

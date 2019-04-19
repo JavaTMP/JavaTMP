@@ -1,37 +1,52 @@
 package com.javatmp.web.filter;
 
+import com.javatmp.util.Constants;
+import com.javatmp.util.ServicesFactory;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 import javax.servlet.Filter;
 import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 
 public abstract class FilterWrapper implements Filter {
 
-    private static final Logger logger = Logger.getLogger(FilterWrapper.class.getName());
+    private final Logger logger = Logger.getLogger(getClass().getName());
 
     private FilterConfig filterConfig = null;
 
     private Set<String> excludedUrlsRegex;
 
+    private ServicesFactory serviceFactory = null;
+
     @Override
-    public void init(FilterConfig filterConfig) {
+    public void init(FilterConfig filterConfig) throws ServletException {
         this.filterConfig = filterConfig;
-        String excludePattern = filterConfig.getInitParameter("excludedUrlsRegex");
-        setExcludedUrlsRegex(new HashSet<>(Arrays.asList(excludePattern.split(","))));
+        String excludePatterns = filterConfig.getInitParameter("excludedUrlsRegex");
+        this.serviceFactory = (ServicesFactory) filterConfig.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
+        if (excludePatterns != null && excludePatterns.trim().equals("") == false) {
+            setExcludedUrlsRegex(new HashSet<>(Arrays.asList(excludePatterns.split(","))));
+        }
     }
 
     public boolean isExcludedUrl(String requestPath) {
         boolean isExcluded = false;
-        for (String path : getExcludedUrlsRegex()) {
-            if (requestPath.matches(path)) {
-                isExcluded = true;
-                break;
+        if (this.getExcludedUrlsRegex() != null && this.getExcludedUrlsRegex().isEmpty() == false) {
+            for (String path : getExcludedUrlsRegex()) {
+                if (requestPath.matches(path)) {
+                    isExcluded = true;
+                    break;
+                }
             }
         }
         return isExcluded;
+    }
+
+    public boolean isExcludedRequest(HttpServletRequest request) {
+        String url = this.getUrl(request);
+        return isExcludedUrl(url);
     }
 
     public static String getBaseUrl(HttpServletRequest request) {
@@ -40,6 +55,16 @@ public abstract class FilterWrapper implements Filter {
         String serverPort = (request.getServerPort() == 80) ? "" : ":" + request.getServerPort();
         String contextPath = request.getContextPath();
         return scheme + serverName + serverPort + contextPath;
+    }
+
+    public String getUrl(HttpServletRequest request) {
+        String url;
+        if (request.getQueryString() != null) {
+            url = request.getRequestURI() + "?" + request.getQueryString();
+        } else {
+            url = request.getRequestURI();
+        }
+        return url.substring(request.getContextPath().length());
     }
 
     /**
@@ -76,5 +101,12 @@ public abstract class FilterWrapper implements Filter {
      */
     public void setExcludedUrlsRegex(Set<String> excludedUrlsRegex) {
         this.excludedUrlsRegex = excludedUrlsRegex;
+    }
+
+    /**
+     * @return the serviceFactory
+     */
+    public ServicesFactory getServiceFactory() {
+        return serviceFactory;
     }
 }

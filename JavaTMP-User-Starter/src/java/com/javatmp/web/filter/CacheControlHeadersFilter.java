@@ -14,33 +14,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class CacheControlHeadersFilter implements Filter {
+public class CacheControlHeadersFilter extends FilterWrapper {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
-    private FilterConfig filterConfig = null;
-    private Set<String> excludes = new HashSet<>();
-
-    public CacheControlHeadersFilter() {
-        excludes.add("/");
-        excludes.add("/logout");
-        excludes.add("/login");
-    }
-
-    private boolean ignoreURL(String requestPath) {
-        boolean ignore = false;
-        for (String path : excludes) {
-            if (path.equals(requestPath)) {
-                ignore = true;
-                break;
-            }
-        }
-        return ignore;
-    }
-
-    @Override
-    public void init(FilterConfig filterConfig) {
-        this.filterConfig = filterConfig;
-    }
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
@@ -50,18 +26,10 @@ public class CacheControlHeadersFilter implements Filter {
         if (response instanceof HttpServletResponse && request instanceof HttpServletRequest) {
             HttpServletRequest httpRequest = (HttpServletRequest) request;
             HttpServletResponse httpResponse = (HttpServletResponse) response;
-            String path = httpRequest.getRequestURI().substring(httpRequest.getContextPath().length());
-            logger.info("Ignore ? path [" + path + "], ? > [" + ignoreURL(path) + "]");
-            if ("GET".equals(httpRequest.getMethod()) && !ignoreURL(path)) {
-//                String url;
-//                if (httpRequest.getQueryString() != null) {
-//                    url = httpRequest.getRequestURI() + "?" + httpRequest.getQueryString();
-//                } else {
-//                    url = httpRequest.getRequestURI();
-//                }
-//                String path = url.substring(httpRequest.getContextPath().length());
-
-//                int cacheAge = 60 * 60; // in seconds
+            String path = this.getUrl(httpRequest);
+            boolean isExcluded = this.isExcludedUrl(path);
+            logger.info("Ignore ? path [" + path + "], ? > [" + isExcluded + "]");
+            if ("GET".equals(httpRequest.getMethod()) && !isExcluded) {
                 int cacheAge = 60 * 60; // in seconds
                 Date currentDate = new Date();
                 long expiry = currentDate.getTime() + (cacheAge * 1000);
@@ -74,28 +42,6 @@ public class CacheControlHeadersFilter implements Filter {
             }
         }
         chain.doFilter(request, response);
-
     }
 
-    /**
-     * Return the filter configuration object for this filter.
-     *
-     * @return
-     */
-    public FilterConfig getFilterConfig() {
-        return (this.filterConfig);
-    }
-
-    /**
-     * Set the filter configuration object for this filter.
-     *
-     * @param filterConfig The filter configuration object
-     */
-    public void setFilterConfig(FilterConfig filterConfig) {
-        this.filterConfig = filterConfig;
-    }
-
-    @Override
-    public void destroy() {
-    }
 }

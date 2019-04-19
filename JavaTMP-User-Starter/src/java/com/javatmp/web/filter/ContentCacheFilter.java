@@ -17,11 +17,10 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 
-public class ContentCacheFilter implements Filter {
+public class ContentCacheFilter extends FilterWrapper {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
-    ServletContext sc;
-    FilterConfig fc;
+
     Map<String, CacheEntry> cache = new ConcurrentHashMap<>();
 
     @Override
@@ -36,7 +35,10 @@ public class ContentCacheFilter implements Filter {
 
         try {
             //set timestamp check
-            if (!cache.containsKey(id) || cache.get(id).content == null || cache.get(id).content.length == 0) {
+            boolean isExcludedUrl = isExcludedRequest(request);
+            if (isExcludedUrl == true) {
+                chain.doFilter(request, response);
+            } else if (!cache.containsKey(id) || cache.get(id).content == null || cache.get(id).content.length == 0) {
 //                if (!cache.containsKey(id)) {
                 logger.info("Not cached yet id[" + id + "]");
                 ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -48,10 +50,7 @@ public class ContentCacheFilter implements Filter {
                 logger.info("Content-Length [" + response.getHeader("Content-Length") + "]");
                 logger.info("Content-Encoding [" + response.getHeader("Content-Encoding") + "]");
                 // print here all header of the response.
-                Collection<String> headers = response.getHeaderNames();
-                for (String header : headers) {
-                    logger.info("header[" + header + "][" + response.getHeader(header) + "]");
-                }
+
                 CacheEntry entry = new CacheEntry();
                 entry.contentType = response.getContentType();
                 entry.characterEncoding = response.getCharacterEncoding();
@@ -67,7 +66,6 @@ public class ContentCacheFilter implements Filter {
                     + "]contentType[" + entry.contentType
                     + "]contentEncoding[" + entry.contentEncoding + "]");
             response.setContentType(entry.contentType);
-//            response.setCharacterEncoding(entry.characterEncoding);
             response.setContentLength(entry.content.length);
             response.setHeader("Content-Encoding", entry.contentEncoding);
             response.setHeader("Content-Disposition", entry.contentDisposition);
@@ -80,13 +78,5 @@ public class ContentCacheFilter implements Filter {
             e.printStackTrace();
             throw e;
         }
-
-    }
-
-    public void init(FilterConfig filterConfig) {
-        this.fc = filterConfig;
-    }
-
-    public void destroy() {
     }
 }
