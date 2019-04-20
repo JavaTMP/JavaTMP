@@ -141,6 +141,11 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a href="${pageContext.request.contextPath}/user/GetListUsersWithSearchBlockPage">
+                                            ${labels['sidebar.menuItem.users.usersListWithSearchBlock']}
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="${pageContext.request.contextPath}/user/GetListUsersWithDetailsPage">
                                             ${labels['sidebar.menuItem.users.usersListWithDetails']}
                                         </a>
