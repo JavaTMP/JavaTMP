@@ -110,22 +110,15 @@ table.responsive {
     padding-right: $grid-gutter-width / 2;
 }
 
-@mixin make-col-fixed($size, $columns: $grid-columns, $breakpointValue : 1) {
-    flex: 0 0 ($size / $columns) * $breakpointValue;
-    // Add a `max-width` to ensure content within each column does not blow out
-    // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
-    // do not appear to require this.
-    max-width: ($size / $columns) * $breakpointValue;
-}
-
-
 $columns: $grid-columns;
-$gutter: $grid-gutter-width;
+$columnSizes: (1, 2, 4, 8, 10, 20, 30, 40, 50, 60, 70, 80);
 $breakpoints: $grid-breakpoints;
 
-/*!******************************************
-custom fixed column breakpoint
-*********************************************/
+@mixin make-col-fixed($index, $values: $columnSizes, $breakpointValue : 1) {
+    flex: 0 0 nth($values, $index) * 1rem;
+    width: nth($values, $index) * 1rem;
+}
+
 @each $breakpoint, $breakpointValue in $breakpoints {
     $infix: breakpoint-infix($breakpoint, $breakpoints);
 
@@ -134,17 +127,13 @@ custom fixed column breakpoint
         .col-fixed#{$infix} {
             flex: 0 0 $breakpointValue;
             max-width: $breakpointValue;
+            width: $breakpointValue;
         }
 
         @for $i from 1 through $columns {
             .col-fixed#{$infix}-#{$i} {
-                @include make-col-fixed($i, $columns, $breakpointValue);
+                @include make-col-fixed($i, $columnSizes, $breakpointValue);
             }
         }
     }
 }
-/*!******************************************
-End custom fixed column breakpoint
-*********************************************/
-
-

@@ -1,6 +1,5 @@
 <div class="dynamic-ajax-content grid-gutter-padding">
-    <h4 class="my-3">Two Columns Blank Page Title</h4>
-    <hr/>
+    <h2 class="text-primary text-truncate my-3">Two Columns Blank Page Title</h2>
     <div class="row d-flex justify-content-center">
         <div class="col-lg-10">
             <div class="row">
@@ -10,9 +9,9 @@
         </div>
     </div>
     <hr/>
-    <h2 class="text-primary text-truncate pt-1">Fixed and Fluid Bootstrap 4</h2>
-    <div class="form-row flex-nowrap">
-        <div class="col-md-4 col-12 fixed-column">
+    <h2 class="text-primary text-truncate pt-1 my-3">Fixed and Fluid Bootstrap 4</h2>
+    <div class="form-row">
+        <div class="col-md-4 col-12 col-fixed-md-6">
             <div class="card card-body p-2">
                 <h4>Fixed Sidebar</h4>
                 <ul class="nav nav-pills flex-column">
@@ -77,14 +76,25 @@
             <!--/row-->
         </div>
     </div>
+    <hr/>
+    <h2 class="text-primary text-truncate pt-1 my-3">Fixed columns Size</h2>
+    <div class="row demo-col-fixed  d-flex justify-content-center">
+        <div class="my-3 col-fixed-sm col-sm col-fixed-md col-md col-fixed-lg col-lg col-fixed-xl col-xl">
+            <div class="card card-body border border-primary"></div>
+        </div>
+        <div class="my-3 col-fixed-sm col-sm col-fixed-md col-md col-fixed-lg col-lg col-fixed-xl col-xl">
+            <div class="card card-body border border-primary"></div>
+        </div>
+        <div class="my-3 col-fixed-sm col-sm col-fixed-md col-md col-fixed-lg col-lg col-fixed-xl col-xl">
+            <div class="card card-body border border-primary"></div>
+        </div>
+        <div class="my-3 col-fixed-sm col-sm col-fixed-md col-md col-fixed-lg col-lg col-fixed-xl col-xl">
+            <div class="card card-body border border-primary"></div>
+        </div>
+    </div>
     <style type="text/css">
-        /*
-        Embed CSS styling for current page.
-        */
-        @media (min-width: 576px) {
-            .fixed-column {
-                flex: 0 0 230px;
-            }
+        .demo-col-fixed div {
+            height: 250px;
         }
     </style>
     <script type="text/javascript">
