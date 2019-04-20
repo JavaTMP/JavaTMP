@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.9 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.9 (Current Development Version)
 
-## 5ffb38c on Apr 19, 2019, 8:10 PM GMT+4
+## dad1344 on Apr 20, 2019, 5:24 PM GMT+4
 - extends bs by providing fixed width classes based on rem measurement like `col-fixed-*`
 - add `&amp;allowPublicKeyRetrieval=true` to mysql database server url in persistence.xml in `JavaTMP-User-Starter`
 - Update all java filters to support excluded regex for urls in web.xml as filter initiate parameters.
