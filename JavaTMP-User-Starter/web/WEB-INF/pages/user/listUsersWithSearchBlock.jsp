@@ -16,8 +16,8 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <form accept-charset="UTF-8" enctype="multipart/form-data" autocomplete="off" id="UpdateCurrentUserFormId" class="form"
-                                  action="${pageContext.request.contextPath}/user/CurrentUserProfileController" method="post" novalidate="novalidate">
+                            <form accept-charset="UTF-8" enctype="multipart/form-data" autocomplete="off" class="form searchAndFilterForm"
+                                  action="#" method="post" novalidate="novalidate">
                                 <div class="form-row">
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="form-group form-row">
@@ -44,6 +44,7 @@
                                             <label class="text-sm-right control-label col-sm-5 col-form-label">${labels['domain.user.status']}</label>
                                             <div class="col-sm-7">
                                                 <select name="status" class="custom-select" data-rule-required="true">
+                                                    <option value="">${labels['page.text.kindlySelect']}</option>
                                                     <option value="1">Activated</option>
                                                     <option value="0">Deactivated</option>
                                                 </select>
@@ -410,6 +411,20 @@
                     timezonesMap[value] = text;
                 }
             });
+
+            var filterForm = $("form.searchAndFilterForm", javatmp.settings.defaultOutputSelector);
+            filterForm.on("submit", function (event) {
+                event.preventDefault();
+                table.columns.adjust().draw();
+            }).on('reset', function (event) {
+                // executes before the form has been reset
+                console.log('before reset: ');
+                setTimeout(function () {
+                    // executes after the form has been reset
+                    table.columns.adjust().draw();
+                }, 25);
+            });
+
             var addNewUserPopupButton = $("#UserList-AddNewUserPopupId");
             var updateUserButton = $("#UserList-UpdateSelectedUserId");
             var deleteUserButton = $("#UserList-DeleteSelectedUserId");
@@ -510,6 +525,32 @@
                     contentType: "application/json; charset=UTF-8",
                     "data": function (currentDate) {
                         currentDate._ajaxGlobalBlockUI = false; // window blocked until data return
+                        var searchFilters = $(filterForm).serializeObject();
+                        console.log("searchFilters [" + JSON.stringify(searchFilters) + "]");
+                        console.log("currentDate [" + JSON.stringify(currentDate) + "]");
+
+                        for (var key in searchFilters) {
+                            if (searchFilters.hasOwnProperty(key)) {
+                                console.log("key[" + key + "]=[" + searchFilters[key] + "]");
+                                if (key && searchFilters[key] && (searchFilters[key] !== "")) {
+                                    console.log("we should filter by it");
+                                    var requestedColumn = null;
+                                    for (var i = 0; i < currentDate.columns.length; i++) {
+                                        var currentColumn = currentDate.columns[i];
+                                        console.log("currentColumn.name [" + currentColumn.name + "]");
+                                        if (currentColumn.name === key) {
+                                            console.log("we find it");
+                                            if (currentColumn.search.value === "") {
+                                                currentColumn.search.value = searchFilters[key];
+                                            }
+                                            break;
+                                        }
+                                    }
+
+                                }
+                            }
+                        }
+
                         return JSON.stringify(currentDate);
                     },
                     "dataSrc": function (json) {
@@ -521,7 +562,7 @@
                 columns: [
                     {data: 'id',
                         "createdCell": function (td, cellData, rowData, row, col) {
-                            console.log(table.init().columns[col]);
+                            //                            console.log(table.init().columns[col]);
                             $(td).addClass("text-center");
                         },
                         className: "", name: "id", width: "6rem", "render": javatmp.plugins.DataTableColRenderWrapper("6rem")},
@@ -592,8 +633,7 @@
                     passData.id = selectedRecord.id;
                     BootstrapModalWrapperFactory.createAjaxModal({
                         message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
-                        passData: passData,
-                        updateSizeAfterDataFetchTo: "modal-lg", // default is  or null for standard or "modal-sm"
+                        passData: passData, updateSizeAfterDataFetchTo: "modal-lg", // default is  or null for standard or "modal-sm"
                         size: "modal-lg",
                         url: javatmp.settings.contextPath + "/user/GetUpdateUserPopupController",
                         ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
@@ -660,7 +700,6 @@
                 } else {
                     BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
                 }
-
             });
             window.actionCallback = function (callbackData) {
                 if (callbackData.cancel === true) {
@@ -668,6 +707,7 @@
                     table.columns.adjust().draw();
                 }
             };
+
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
             });
