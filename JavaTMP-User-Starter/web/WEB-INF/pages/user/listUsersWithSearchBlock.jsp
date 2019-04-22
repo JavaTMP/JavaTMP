@@ -412,19 +412,6 @@
                 }
             });
 
-            var filterForm = $("form.searchAndFilterForm", javatmp.settings.defaultOutputSelector);
-            filterForm.on("submit", function (event) {
-                event.preventDefault();
-                table.columns.adjust().draw();
-            }).on('reset', function (event) {
-                // executes before the form has been reset
-                console.log('before reset: ');
-                setTimeout(function () {
-                    // executes after the form has been reset
-                    table.columns.adjust().draw();
-                }, 25);
-            });
-
             var addNewUserPopupButton = $("#UserList-AddNewUserPopupId");
             var updateUserButton = $("#UserList-UpdateSelectedUserId");
             var deleteUserButton = $("#UserList-DeleteSelectedUserId");
@@ -707,6 +694,26 @@
                     table.columns.adjust().draw();
                 }
             };
+
+            var filterForm = $("form.searchAndFilterForm", javatmp.settings.defaultOutputSelector);
+            filterForm.on("submit", function (event) {
+                event.preventDefault();
+                table.columns.adjust().draw();
+            }).on('reset', function (event) {
+                // executes before the form has been reset
+                console.log('before reset: ');
+                setTimeout(function () {
+                    // executes after the form has been reset
+                    table.columns.adjust().draw();
+                }, 25);
+            });
+
+            var birthDateInputMask = javatmp.plugins.inputmaskWrapperForDate(filterForm.find("input[name='birthDate']"));
+            var birthDateDatePicker = javatmp.plugins.daterangepickerWrapperForDate(filterForm.find("input[name='birthDate']"));
+            var langSelect = javatmp.plugins.select2Wrapper(filterForm.find("select[name='lang']"));
+            var timezoneSelect = javatmp.plugins.select2Wrapper(filterForm.find("select[name='timezone']"));
+            var themeSelect = javatmp.plugins.select2WrapperForTheme(filterForm.find("select[name='theme']"));
+            var countryIdSelect = javatmp.plugins.select2WrapperForCountry(filterForm.find("select[name='countryId']"));
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
