@@ -222,7 +222,7 @@
             ${labels['page.btn.deactivateUser']}
         </button>
     </div>
-    <table cellspacing="0" class="table table-condensed table-bordered table-hover" id="UsersListTableId">
+    <table cellspacing="0" class="table table-condensed table-bordered table-hover wrap" id="UsersListTableId">
         <thead>
             <tr>
                 <th style="width: 5rem;"><p class="m-0 p-0" style="width: 5rem;">${labels['domain.user.id']}</p></th>
@@ -453,7 +453,7 @@
                 scrollY: 250,
                 scrollX: true,
                 "autoWidth": false,
-                scrollCollapse: true,
+                scrollCollapse: false,
                 "searching": true,
                 searchDelay: 500,
                 orderCellsTop: true, // important to for two row header with filteration below header column names.
