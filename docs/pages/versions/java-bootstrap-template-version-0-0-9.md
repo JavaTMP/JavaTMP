@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.9 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.9 (Current Development Version)
 
-## on
+## b66ba89 on Apr 27, 2019, 11:49 PM GMT+4
 - Using Fancytree plugin to dynamically list web application folders and files In JavaTMP-User-Starter.
 - Update the following dependencies:
     - gulp from 4.0.0 to 4.0.1
