@@ -29,5 +29,4 @@
     *   [Database Related Information](/pages/reference/database-related-info)
     *   [Convert CSS file to SASS' SCSS syntax](/pages/reference/convert-css-to-scss-syntax)
     *   [Using jQueryUI Framework](/pages/reference/using-jqueryui-framework-with-bootstrap-template "Using jQueryUI Framework With Bootstrap Template")
-    *   [General External Important Links](/pages/reference/general-links)
 *   **[Versions Change Log](/pages/versions/java-bootstrap-template-versions-change-log)**
