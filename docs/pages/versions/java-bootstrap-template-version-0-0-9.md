@@ -3,6 +3,22 @@ title: Java Bootstrap Template Version 0.0.9 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.9 (Current Development Version)
 
+## on
+- Using Fancytree plugin to dynamically list web application folders and files In JavaTMP-User-Starter.
+- Update the following dependencies:
+    - gulp from 4.0.0 to 4.0.1
+    - gulp-markdown from 3.0.0 to 4.0.0
+    - bootstrap-daterangepicker from 3.0.3 to 3.0.5
+    - echarts 4.2.0-rc.2 4.2.1
+    - gulp-autoprefixer 6.0.0 6.1.0
+    - gulp-clean-css 4.0.0 4.2.0
+    - inputmask 4.0.6 4.0.8
+    - jquery 3.3.1 3.4.0
+    - moment-timezone 0.5.23 0.5.25
+    - popper.js 1.14.7 1.15.0
+    - timeago 1.6.5 1.6.7
+- Run gulp default to regenerate dist folders.
+
 ## dad1344 on Apr 20, 2019, 5:24 PM GMT+4
 - extends bs by providing fixed width classes based on rem measurement like `col-fixed-*`
 - add `&amp;allowPublicKeyRetrieval=true` to mysql database server url in persistence.xml in `JavaTMP-User-Starter`
