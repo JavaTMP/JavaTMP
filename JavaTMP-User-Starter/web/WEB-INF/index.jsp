@@ -173,6 +173,11 @@
                                             File Browser
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/dms/FileStaticResource">
+                                            File Static Resource
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li>
