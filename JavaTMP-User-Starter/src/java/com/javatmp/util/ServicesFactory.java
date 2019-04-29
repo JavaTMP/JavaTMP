@@ -8,6 +8,7 @@ import com.javatmp.module.country.CountryService;
 import com.javatmp.module.user.UserService;
 import com.javatmp.module.stats.UserStatsService;
 import com.javatmp.module.dms.DocumentService;
+import com.javatmp.module.event.DiaryEventService;
 import java.util.Date;
 import java.util.logging.Logger;
 
@@ -23,6 +24,7 @@ public class ServicesFactory {
     private final DocumentService documentService;
     private final UserStatsService userStatsService;
     private final ActivityService activityService;
+    private DiaryEventService diaryEventService;
 
     public ServicesFactory(String persistentUnitName) {
         logger.info("*** Start ServicesFactory Constructor @ [" + new Date() + "]");
@@ -35,6 +37,7 @@ public class ServicesFactory {
         this.userService = new UserService(jpaDaoHelper);
         this.userStatsService = new UserStatsService(jpaDaoHelper);
         this.activityService = new ActivityService(jpaDaoHelper);
+        this.diaryEventService = new DiaryEventService(jpaDaoHelper);
         this.logger.info("*** End ServicesFactory Constructor @ [" + new Date() + "]");
     }
 
@@ -90,5 +93,12 @@ public class ServicesFactory {
      */
     public ActivityService getActivityService() {
         return activityService;
+    }
+
+    /**
+     * @return the diaryEventService
+     */
+    public DiaryEventService getDiaryEventService() {
+        return diaryEventService;
     }
 }
