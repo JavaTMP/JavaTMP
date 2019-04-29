@@ -148,6 +148,7 @@
                         message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
                         closable: false,
                         //                        title: "AJAX Content",
+                        size: "modal-lg",
                         closeByBackdrop: false,
                         passData: passData,
                         url: javatmp.settings.contextPath + "/calendar/ManageEventController",
