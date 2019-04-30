@@ -97,7 +97,7 @@
                     '<td>{{documentSize}}</td>' +
                     '<td>{{contentType}}</td>' +
                     '<td>{{creationDate}}</td>' +
-                    '<td><a class="" target="" href="{{contextPath}}/dms/ViewTempUploadedFileController?documentId={{link}}&amp;randomHash={{randomHash}}&amp;viewType=inline">View Inline</a></td>' +
+                    '<td><a class="" target="_blank" href="{{contextPath}}/dms/ViewTempUploadedFileController?documentId={{link}}&amp;randomHash={{randomHash}}&amp;viewType=inline">View Inline</a></td>' +
                     '<td><a class="" target="" href="{{contextPath}}/dms/ViewTempUploadedFileController?documentId={{link}}&amp;randomHash={{randomHash}}&amp;viewType=attachment">View As Attachment</a></td>' +
                     '</tr>';
             function uploadSelectedFiles() {
