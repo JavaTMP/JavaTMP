@@ -9,9 +9,9 @@ public class DocumentService {
     private final JpaDaoHelper jpaDaoHelper;
     private DBFaker dBFaker;
 
-    public DocumentService(JpaDaoHelper jpaDaoHelper) {
+    public DocumentService(DBFaker dBFaker, JpaDaoHelper jpaDaoHelper) {
         this.jpaDaoHelper = jpaDaoHelper;
-        this.dBFaker = new DBFaker();
+        this.dBFaker = dBFaker;
     }
 
     public int updateDocument(Document document) {

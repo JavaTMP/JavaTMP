@@ -201,6 +201,19 @@
                             <li>
                                 <a class="has-arrow" href="#">
                                     <i class="fa fa-lg fa-fw fa-cogs"></i>
+                                    Message Management
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/message/MessagesManager">
+                                            Messages Manager
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="has-arrow" href="#">
+                                    <i class="fa fa-lg fa-fw fa-cogs"></i>
                                     ${labels['sidebar.menuItem.system']}
                                 </a>
                                 <ul>

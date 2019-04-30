@@ -300,7 +300,7 @@ public class JpaDaoHelper {
             query.setMaxResults(page.getLength());
             retList = query.getResultList();
 
-            DataTableResults<User> dataTableResult = new DataTableResults<>();
+            DataTableResults<T> dataTableResult = new DataTableResults<>();
             dataTableResult.setData(retList);
 
             CriteriaQuery<Long> cqLong = cb.createQuery(Long.class);

@@ -13,8 +13,8 @@ public class DiaryEventService {
     private DBFaker dBFaker;
     final JpaDaoHelper jpaDaoHelper;
 
-    public DiaryEventService(final JpaDaoHelper jpaDaoHelper) {
-        this.dBFaker = new DBFaker();
+    public DiaryEventService(final DBFaker dBFaker, final JpaDaoHelper jpaDaoHelper) {
+        this.dBFaker = dBFaker;
         this.jpaDaoHelper = jpaDaoHelper;
 
     }
