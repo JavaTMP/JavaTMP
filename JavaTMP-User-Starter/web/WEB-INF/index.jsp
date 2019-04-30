@@ -209,6 +209,11 @@
                                             Messages Manager
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/message/ListMessages">
+                                            List User Messages
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li>

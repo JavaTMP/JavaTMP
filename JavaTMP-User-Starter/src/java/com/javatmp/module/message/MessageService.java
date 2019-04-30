@@ -92,9 +92,14 @@ public class MessageService {
             db = new LinkedList<>(this.dBFaker.getMessages());
         }
 
+        for (DataTableColumnSpecs s : tableRequest.getColumns()) {
+            System.out.println(s.getName() + " - " + s.getSearch());
+        }
+
         logger.info("Start mapping search parameteres");
         Map<String, Search> searchParameters = new HashMap<>();
         int index = tableRequest.getColumns().indexOf(new DataTableColumnSpecs(0, "messageId"));
+
         DataTableColumnSpecs column;
         if (index != -1) {
             column = tableRequest.getColumns().get(index);
@@ -242,11 +247,11 @@ public class MessageService {
             User fromUser = new User();
             fromUser.setId(fromUserId);
 
-            User dbUser = this.userService.readUserByUserId(fromUser);
+            User dbUser = this.userService.readCompleteUserById(fromUser);
             if (dbUser != null) {
                 fromUser.setFirstName(dbUser.getFirstName());
                 fromUser.setLastName(dbUser.getLastName());
-                msg.setFromUser(fromUser);
+                msg.setFromUser(dbUser);
             }
 
             User toUser = new User();

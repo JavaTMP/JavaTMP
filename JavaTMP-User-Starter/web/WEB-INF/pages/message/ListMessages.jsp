@@ -60,7 +60,7 @@
         var template =
                 '<a class="p-1 list-group-item list-group-item-action" actionType="ajax-model" href="{{contextPath}}/message/ViewMessageController?messageId={{messageId}}">' +
                 '    <div class="media">' +
-                '        <img class="mr-1" src="{{contextPath}}/assets/img/64x64.gif" alt="Generic placeholder image"/>' +
+                '        <img class="col-fixed-4" class="mr-1" src="{{contextPath}}/ViewUploadedFileController?documentId={{documentId}}&amp;randomHash={{randomHash}}&amp;viewType=inline" alt="Generic placeholder image"/>' +
                 '        <div class="media-body">' +
                 '            <div class="mt-0 d-flex justify-content-between">' +
                 '                <strong>{{senderFirstName}} {{senderLastName}}</strong>' +
@@ -120,14 +120,14 @@
                                     {"column": 0, "dir": "desc"}
                                 ],
                                 columns: [{
-                                        "data": "creationDate",
+                                        "name": "creationDate",
                                         search: {
                                             "value": moment(newestDate).format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
                                             "operatorType": "newerThan"
                                         }
                                     },
                                     {
-                                        "data": "toUserId",
+                                        "name": "toUserId",
                                         search: {
                                             "value": toUserId
                                         }
@@ -155,7 +155,9 @@
                                             'senderLastName': row.fromUser.lastName,
                                             'creationDate': row.creationDate,
                                             'formatedDate': moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss"),
-                                            'contextPath': javatmp.settings.contextPath
+                                            'contextPath': javatmp.settings.contextPath,
+                                            'documentId': row.fromUser.profilePicDocumentId,
+                                            'randomHash': row.fromUser.profilePicDocument.randomHash
                                         });
                                         if (moment(newestDate).isBefore(moment(row.creationDate))) {
                                             console.log("newestDate [" + moment(newestDate).format("YYYY/MM/DD HH:mm:ss") + "] become [" + moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss") + "]");
@@ -187,14 +189,14 @@
                                         {"column": 0, "dir": "asc"}
                                     ],
                                     columns: [{
-                                            "data": "creationDate",
+                                            "name": "creationDate", "data": "creationDate",
                                             search: {
                                                 "value": moment(oldestDate).format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
                                                 "operatorType": "olderThan"
                                             }
                                         },
                                         {
-                                            "data": "toUserId",
+                                            "name": "toUserId", "data": "toUserId",
                                             search: {
                                                 "value": toUserId
                                             }
@@ -221,7 +223,9 @@
                                                 'senderLastName': row.fromUser.lastName,
                                                 'creationDate': row.creationDate,
                                                 'formatedDate': moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss"),
-                                                'contextPath': javatmp.settings.contextPath
+                                                'contextPath': javatmp.settings.contextPath,
+                                                'documentId': row.fromUser.profilePicDocumentId,
+                                                'randomHash': row.fromUser.profilePicDocument.randomHash
                                             });
 
                                             if (moment(oldestDate).isAfter(moment(row.creationDate))) {
@@ -262,14 +266,14 @@
                                 {"column": 0, "dir": "asc"}
                             ],
                             columns: [{
-                                    "data": "creationDate",
+                                    "name": "creationDate", "data": "creationDate",
                                     search: {
                                         "value": moment(oldestDate).format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
                                         "operatorType": "olderThan"
                                     }
                                 },
                                 {
-                                    "data": "toUserId",
+                                    "name": "toUserId", "data": "toUserId",
                                     search: {
                                         "value": toUserId
                                     }
@@ -300,7 +304,9 @@
                                         'senderLastName': row.fromUser.lastName,
                                         'creationDate': row.creationDate,
                                         'formatedDate': moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss"),
-                                        'contextPath': javatmp.settings.contextPath
+                                        'contextPath': javatmp.settings.contextPath,
+                                        'documentId': row.fromUser.profilePicDocumentId,
+                                        'randomHash': row.fromUser.profilePicDocument.randomHash
                                     });
                                     if (moment(oldestDate).isAfter(moment(row.creationDate))) {
                                         console.log("oldest [" + moment(oldestDate).format("YYYY/MM/DD HH:mm:ss") + "] become [" + moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss") + "]");

@@ -13,25 +13,27 @@
                         <a href="#" class="remove"><i class="fa fa-times"></i></a>
                     </div>
                 </div>
-                <table cellspacing="0" class="table table-condensed table-bordered table-hover table-striped display nowrap" id="defalut-dataTables-example">
-                    <thead>
-                        <tr>
-                            <th>Id</th>
-                            <th>Message Title</th>
-                            <th>Creation Date</th>
-                            <th>From User</th>
-                            <th>To User</th>
-                        </tr>
-                        <tr id="filterHeader">
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody></tbody>
-                </table>
+                <div class="card-body">
+                    <table cellspacing="0" class="table table-condensed table-bordered table-hover table-striped display nowrap" id="defalut-dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Message Title</th>
+                                <th>Creation Date</th>
+                                <th>From User</th>
+                                <th>To User</th>
+                            </tr>
+                            <tr id="filterHeader">
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
@@ -53,9 +55,6 @@
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
 
-            $.fn.select2.defaults.set("theme", "bootstrap");
-            $.fn.select2.defaults.set("dir", javatmp.settings.direction);
-
             $.fn.dataTable.ext.errMode = 'none';
             var table = $('#defalut-dataTables-example').DataTable({
 //                responsive: true,
@@ -66,7 +65,8 @@
                 scrollX: true,
                 "autoWidth": false,
 //                fixedColumns: true,
-                scrollCollapse: false,
+//                "deferLoading": 0, // here
+                scrollCollapse: true,
                 "searching": true,
                 searchDelay: 500,
                 orderCellsTop: true, // important to for two row header with filteration below header column names.
@@ -112,17 +112,18 @@
                     }
                 },
                 columns: [
-                    {data: 'messageId'},
-                    {data: 'messageTitle'},
+                    {data: 'messageId', name: 'messageId'},
+                    {data: 'messageTitle', name: 'messageTitle'},
                     {
                         data: 'creationDate',
+                        name: 'creationDate',
                         "type": "date",
                         "render": function (data, type, row) {
                             return moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("DD/MM/YYYY HH:mm");
                         }
                     },
-                    {data: 'fromUserId'},
-                    {data: 'toUserId'}
+                    {data: 'fromUserId', name: 'fromUserId'},
+                    {data: 'toUserId', name: 'toUserId'}
                 ]
             });
 
@@ -132,16 +133,19 @@
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
                 // fire when user resize browser window or sidebar hide / show
                 javatmp.util.waitForFinalEvent(function () {
-                    table.columns.adjust().draw();
+//                    table.columns.adjust().draw();
+                    table.columns.adjust();
                 }, 200, "@dynamic-messages-datatables-resize");
             });
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenCompress, function (event, card) {
                 // when card compress by pressing the top right tool button
-                table.columns.adjust().draw();
+//                table.columns.adjust().draw();
+                table.columns.adjust();
             });
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenExpand, function (event, card) {
                 // when card Expand by pressing the top right tool button
-                table.columns.adjust().draw();
+//                table.columns.adjust().draw();
+                table.columns.adjust();
             });
             /**
              * When another sidebar menu item pressed and before container replaced with new ajax content.
