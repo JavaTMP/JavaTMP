@@ -1,13 +1,17 @@
 package com.javatmp.module.dms;
 
+import com.javatmp.module.event.DBFaker;
 import com.javatmp.util.JpaDaoHelper;
+import java.util.List;
 
 public class DocumentService {
 
     private final JpaDaoHelper jpaDaoHelper;
+    private DBFaker dBFaker;
 
     public DocumentService(JpaDaoHelper jpaDaoHelper) {
         this.jpaDaoHelper = jpaDaoHelper;
+        this.dBFaker = new DBFaker();
     }
 
     public int updateDocument(Document document) {
@@ -30,4 +34,24 @@ public class DocumentService {
     public Document readDocumentById(Document document) {
         return this.jpaDaoHelper.read(Document.class, document.getDocumentId());
     }
+
+    public Document createNewDocument(Document document) {
+        document.setDocumentId(DBFaker.getNextCounter());
+        this.dBFaker.getDocuments().add(document);
+        return document;
+    }
+
+    public List<Document> getAllDocuments() {
+        return dBFaker.getDocuments();
+    }
+
+    public Document readTempDocumentById(Document document) {
+        for (Document doc : this.dBFaker.getDocuments()) {
+            if (doc.getDocumentId().equals(document.getDocumentId())) {
+                return doc;
+            }
+        }
+        throw new IllegalArgumentException("document id [" + document.getDocumentId() + "] not found");
+    }
+
 }

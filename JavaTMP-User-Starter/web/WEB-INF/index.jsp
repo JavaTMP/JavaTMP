@@ -178,6 +178,11 @@
                                             File Static Resource
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/dms/FileManager">
+                                            File Manager
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li>

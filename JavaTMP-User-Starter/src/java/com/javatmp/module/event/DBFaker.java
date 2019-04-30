@@ -1,5 +1,6 @@
 package com.javatmp.module.event;
 
+import com.javatmp.module.dms.Document;
 import com.javatmp.util.MD5Util;
 import java.math.BigDecimal;
 import java.util.Calendar;
@@ -15,7 +16,7 @@ public class DBFaker {
     private final Logger logger = Logger.getLogger(getClass().getName());
 
     private List<DiaryEvent> diaryEvents = new LinkedList<>();
-
+    private List<Document> documents = new LinkedList<>();
     private static Long counter = 0L;
 
     public static synchronized Long getNextCounter() {
@@ -35,6 +36,13 @@ public class DBFaker {
      */
     public List<DiaryEvent> getDiaryEvents() {
         return diaryEvents;
+    }
+
+    /**
+     * @return the documents
+     */
+    public List<Document> getDocuments() {
+        return documents;
     }
 
     public static void main(String[] args) {
