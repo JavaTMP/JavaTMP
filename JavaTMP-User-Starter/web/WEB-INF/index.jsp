@@ -34,6 +34,33 @@
                 <span class="d-none d-lg-inline">${labels['global.system.name.long']}</span>
             </a>
             <ul class="main-navbar-menu nav ml-auto align-self-stretch flex-nowrap">
+                <li class="nav-item dropdown mega-on-sm d-flex align-items-stretch" id="myMessagesDropdownId">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center" data-toggle="dropdown" href="#">
+                        <i class="far fa-envelope fa-lg faa-shake animated mr-1"></i>
+                        <span class="badge badge-pill badge-light d-none d-md-inline">99+</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-extender">
+                        <div class="dropdown-menu-header clearfix">
+                            <i class="fa fa-lg fa-fw fa-envelope"></i>5 Messages
+                            <a actionType="ajax-model"
+                               href="${pageContext.request.contextPath}/pages/message/ComposeMessage"
+                               data-actionable-options='{"size":"modal-lg", "title": "Loading Compose Message .."}'
+                               class="float-right small">
+                                Create New Message
+                            </a>
+                        </div>
+                        <div class="list-group-flush list-group dropdown-menu-content dynamic-messages-scroll-content">
+                        </div>
+                        <div class="dropdown-menu-footer">
+                            <a
+                                actionType="action-ref-href"
+                                action-ref-by-href="${pageContext.request.contextPath}/pages/message/ListMessages"
+                                class="" href="#" alt="Read All Messages">
+                                <strong>Read All Messages</strong>
+                            </a>
+                        </div>
+                    </div>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="line-height-1 d-flex align-items-center h-100 text-left nav-link dropdown-toggle" data-toggle="dropdown" href="#">
                         <c:choose>
@@ -365,6 +392,234 @@
                 // register logout handler:
                 $(".logout-home-btn-id").on("click", function () {
                     window.location.replace($(this).attr("action-ref-by-href"));
+                });
+            });
+        </script>
+        <script type="text/javascript">
+
+            // Bug in ie11:
+            Number.MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER || 9007199254740991;
+            Number.MIN_SAFE_INTEGER = Number.MIN_SAFE_INTEGER || -9007199254740991;
+
+            jQuery(function ($) {
+                //Compose template string
+                String.prototype.composeTemplate = (function () {
+                    var re = /\{{(.+?)\}}/g;
+                    return function (o) {
+                        return this.replace(re, function (_, k) {
+                            return typeof o[k] !== 'undefined' ? o[k] : '';
+                        });
+                    };
+                }());
+                var template =
+                        '<a class="p-2 list-group-item list-group-item-action" actionType="ajax-model" href="{{contextPath}}/message/ViewMessageController?messageId={{messageId}}">' +
+                        '    <div class="media">' +
+                        '        <img class="col-fixed-3 mr-1" src="{{contextPath}}/ViewUploadedFileController?documentId={{documentId}}&amp;randomHash={{randomHash}}&amp;viewType=inline" alt="Generic placeholder image"/>' +
+                        '        <div class="media-body">' +
+                        '            <div class="mt-0 d-flex justify-content-between">' +
+                        '                <strong>{{senderFirstName}} {{senderLastName}}</strong>' +
+                        '                <span class="text-muted">' +
+                        '                    <small><em><time class="timeago" datetime="{{creationDate}}">{{formatedDate}}</time></em></small>' +
+                        '                </span>' +
+                        '            </div>' +
+                        '            {{messageTitle}}' +
+                        '        </div>' +
+                        '    </div>' +
+                        '</a>';
+
+                var indicatorTemplate = '<div class="fetch-indicator text-center m-2 p-2"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>';
+                var workingDown = false;
+                var workingTop = false;
+                var startFrom = 0;
+                var fetchOnce = false;
+                var recordPerPage = 20;
+                var oldestCount = Number.MAX_SAFE_INTEGER;
+                var allCount = Number.MAX_SAFE_INTEGER;
+                var currentFetchedCount = 0;
+                var toUserId = javatmp.user.id;
+                var oldestDate;
+                var newestDate;
+                var myMessagesDropdown = $('#myMessagesDropdownId');
+                var myMessagesScrollable = $(".dynamic-messages-scroll-content", myMessagesDropdown);
+
+                var onTotalScrollBack = function () {
+                    console.log(newestDate);
+                    if (!workingTop) {
+                        workingTop = true;
+                        myMessagesScrollable.mCustomScrollbar('scrollTo', 'top', {scrollInertia: 20});
+                        $(".mCSB_container", myMessagesScrollable).prepend(indicatorTemplate);
+                        var passData = {
+                            _ajaxGlobalBlockUI: false, start: 0,
+                            length: recordPerPage, order: [
+                                {"column": 0, "dir": "desc"}
+                            ],
+                            columns: [{
+                                    "data": "creationDate", "name": "creationDate",
+                                    search: {
+                                        "value": moment(newestDate).format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
+                                        "operatorType": "newerThan"
+                                    }
+                                },
+                                {
+                                    "data": "toUserId", "name": "toUserId",
+                                    search: {
+                                        "value": toUserId
+                                    }
+                                }
+                            ]
+                        };
+                        console.log("Try fetching any message newer than [" + moment(newestDate).format("YYYY/MM/DD HH:mm:ss.SSS Z") + "]");
+                        $.ajax({
+                            "type": "POST",
+                            url: javatmp.settings.contextPath + "/message/ListMessagesController",
+                            dataType: "json",
+                            contentType: "application/json; charset=UTF-8",
+                            data: JSON.stringify(passData),
+                            success: function (response, textStatus, jqXHR) {
+                                $(".mCSB_container", myMessagesScrollable).find(".fetch-indicator").remove();
+                                var data = response.data.data;
+                                allCount = response.data.recordsTotal;
+                                $.each(data, function (index, row) {
+                                    currentFetchedCount++;
+                                    var readyData = template.composeTemplate({
+                                        'messageId': row.messageId,
+                                        'messageTitle': row.messageTitle,
+                                        'messageContentText': row.messageContentText,
+                                        'senderFirstName': row.fromUser.firstName,
+                                        'senderLastName': row.fromUser.lastName,
+                                        'creationDate': row.creationDate,
+                                        'formatedDate': moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss"),
+                                        'contextPath': javatmp.settings.contextPath,
+                                        'documentId': row.fromUser.profilePicDocumentId,
+                                        'randomHash': row.fromUser.profilePicDocument.randomHash
+                                    });
+                                    if (moment(newestDate).isBefore(moment(row.creationDate))) {
+                                        console.log("newestDate [" + moment(newestDate).format("YYYY/MM/DD HH:mm:ss") + "] become [" + moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss") + "]");
+                                        newestDate = moment(row.creationDate);
+                                    }
+                                    $(readyData).hide().prependTo($(".mCSB_container", myMessagesScrollable)).fadeIn(500);
+                                    $(".mCSB_container", myMessagesScrollable).find("time.timeago").timeago();
+                                });
+                                myMessagesScrollable.mCustomScrollbar("scrollTo", 1);
+                                workingTop = false;
+                            }
+                        });
+                    }
+                };
+                var onTotalScroll = function (setNewestDate) {
+                    if (!workingDown) {
+                        console.log("** onTotalScroll currentFetch [" + currentFetchedCount + "], allCount [" + oldestCount + "]");
+                        if (oldestCount > 0) {
+                            workingDown = true;
+                            $(".mCSB_container", myMessagesScrollable).append(indicatorTemplate);
+                            oldestDate = oldestDate || moment();
+                            var passData = {
+                                _ajaxGlobalBlockUI: false,
+                                start: 0,
+                                length: recordPerPage,
+                                order: [
+                                    {"column": 0, "dir": "asc"}
+                                ],
+                                columns: [{
+                                        "data": "creationDate", "name": "creationDate",
+                                        search: {
+                                            "value": moment(oldestDate).format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
+                                            "operatorType": "olderThan"
+                                        }
+                                    },
+                                    {
+                                        "data": "toUserId", "name": "toUserId",
+                                        search: {
+                                            "value": toUserId
+                                        }
+                                    }
+                                ]
+                            };
+                            $.ajax({
+                                "type": "POST",
+                                url: javatmp.settings.contextPath + "/message/ListMessagesController",
+                                dataType: "json",
+                                contentType: "application/json; charset=UTF-8",
+                                data: JSON.stringify(passData),
+                                success: function (response, textStatus, jqXHR) {
+                                    $(".mCSB_container", myMessagesScrollable).find(".fetch-indicator").remove();
+                                    var data = response.data.data;
+                                    oldestCount = response.data.recordsTotal;
+                                    $.each(data, function (index, row) {
+                                        if (index === 0 && setNewestDate) {
+                                            // the newest record will become newestdate
+                                            // instead of setting current datetime as initial newest
+                                            newestDate = moment(row.creationDate);
+                                            console.log("newest date become [" + moment(newestDate).format("YYYY/MM/DD HH:mm:ss") + "]");
+                                        }
+                                        currentFetchedCount++;
+                                        var readyData = template.composeTemplate({
+                                            'messageId': row.messageId,
+                                            'messageTitle': row.messageTitle,
+                                            'messageContentText': row.messageContentText,
+                                            'senderFirstName': row.fromUser.firstName,
+                                            'senderLastName': row.fromUser.lastName,
+                                            'creationDate': row.creationDate,
+                                            'formatedDate': moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss"),
+                                            'contextPath': javatmp.settings.contextPath,
+                                            'documentId': row.fromUser.profilePicDocumentId,
+                                            'randomHash': row.fromUser.profilePicDocument.randomHash
+                                        });
+
+                                        if (moment(oldestDate).isAfter(moment(row.creationDate))) {
+                                            console.log("oldest [" + moment(oldestDate).format("YYYY/MM/DD HH:mm:ss") + "] become [" + moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss") + "]");
+                                            oldestDate = moment(row.creationDate);
+                                        }
+
+                                        $(".mCSB_container", myMessagesScrollable).append(readyData);
+                                        $(".mCSB_container", myMessagesScrollable).find("time.timeago").timeago();
+                                    });
+                                    workingDown = false;
+                                }
+                            });
+                        }
+                    }
+                };
+                myMessagesScrollable.mCustomScrollbar({
+                    theme: "javatmp",
+                    alwaysShowScrollbar: 2, scrollButtons: {
+                        enable: false
+                    },
+                    mouseWheel: {
+                        preventDefault: true
+                    },
+                    callbacks: {
+                        onInit: function () {
+                        },
+                        onScroll: function () {
+                            console.log("top = " + this.mcs.top + " , direction = " + this.mcs.direction);
+                        },
+                        onTotalScrollBack: onTotalScrollBack,
+                        onTotalScroll: onTotalScroll,
+                        onTotalScrollBackOffset: 0,
+                        onTotalScrollOffset: 200,
+                        alwaysTriggerOffsets: true
+                    }
+                });
+
+                myMessagesDropdown.on('show.bs.dropdown', function () {
+                });
+
+                myMessagesDropdown.on('shown.bs.dropdown', function () {
+                    console.log("calling shown.bs.dropdown");
+                    if (!fetchOnce) {
+                        onTotalScroll(true);
+                        fetchOnce = true;
+                    } else {
+                        console.log("already fetch initial data we try to update");
+                        onTotalScrollBack();
+                    }
+                });
+
+                myMessagesDropdown.on('hide.bs.dropdown', function () {
+                });
+
+                myMessagesDropdown.on('hidden.bs.dropdown', function () {
                 });
             });
         </script>
