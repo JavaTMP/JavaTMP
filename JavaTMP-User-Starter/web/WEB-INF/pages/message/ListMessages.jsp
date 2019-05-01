@@ -1,6 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content grid-gutter-padding">
-    <h4 class="my-3">Dynamic Messages Using Malihu Scrollable</h4>
+    <h4 class="my-3">
+        List User Messages
+    </h4>
     <hr/>
     <div class="row">
         <div class="col">
@@ -16,7 +18,7 @@
                         <a href="#" class="remove"><i class="fa fa-times"></i></a>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body p-0">
                     <div id="infinite-scroll" class="list-group-flush list-group content">
                     </div>
                 </div>
@@ -58,13 +60,14 @@
         //
 
         var template =
-                '<a class="p-1 list-group-item list-group-item-action" actionType="ajax-model" href="{{contextPath}}/message/ViewMessageController?messageId={{messageId}}">' +
+                '<a class="p-1 list-group-item list-group-item-action" actionType="ajax-model" href="{{contextPath}}/message/ViewMessageController?messageId={{messageId}}"' +
+                ' data-actionable-options=\'{"size":"modal-lg", "title": "Loading Compose Message .."}\'>' +
                 '    <div class="media">' +
-                '        <img class="col-fixed-4" class="mr-1" src="{{contextPath}}/ViewUploadedFileController?documentId={{documentId}}&amp;randomHash={{randomHash}}&amp;viewType=inline" alt="Generic placeholder image"/>' +
+                '        <img class="col-fixed-4 mr-1" src="{{contextPath}}/ViewUploadedFileController?documentId={{documentId}}&amp;randomHash={{randomHash}}&amp;viewType=inline" alt="Generic placeholder image"/>' +
                 '        <div class="media-body">' +
                 '            <div class="mt-0 d-flex justify-content-between">' +
                 '                <strong>{{senderFirstName}} {{senderLastName}}</strong>' +
-                '                <span class="text-muted">' +
+                '                <span class="text-muted mr-3">' +
                 '                    <small><em><time class="timeago" datetime="{{creationDate}}">{{formatedDate}}</time></em></small>' +
                 '                </span>' +
                 '            </div>' +
@@ -72,7 +75,6 @@
                 '        </div>' +
                 '    </div>' +
                 '</a>';
-
         //Compose template string
 
         jQuery(function ($) {
@@ -84,7 +86,7 @@
             var indicatorTemplate = '<div class="fetch-indicator text-center m-2 p-2"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>';
             var workingDown = false;
             var workingTop = false;
-            var recordPerPage = 10;
+            var recordPerPage = 25;
             var oldestCount = Number.MAX_SAFE_INTEGER;
             var currentFetchedCount = 0;
             var toUserId = javatmp.user.id;
@@ -111,7 +113,6 @@
                             $("#infinite-scroll").mCustomScrollbar('scrollTo', 'top', {scrollInertia: 20});
                             this.mcs.content.prepend(indicatorTemplate);
                             var that = this;
-
                             var passData = {
                                 _ajaxGlobalBlockUI: false,
                                 start: 0,
@@ -120,14 +121,14 @@
                                     {"column": 0, "dir": "desc"}
                                 ],
                                 columns: [{
-                                        "name": "creationDate",
+                                        "name": "creationDate", "data": "creationDate",
                                         search: {
                                             "value": moment(newestDate).format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
                                             "operatorType": "newerThan"
                                         }
                                     },
                                     {
-                                        "name": "toUserId",
+                                        "name": "toUserId", "data": "toUserId",
                                         search: {
                                             "value": toUserId
                                         }
@@ -227,7 +228,6 @@
                                                 'documentId': row.fromUser.profilePicDocumentId,
                                                 'randomHash': row.fromUser.profilePicDocument.randomHash
                                             });
-
                                             if (moment(oldestDate).isAfter(moment(row.creationDate))) {
                                                 console.log("oldest [" + moment(oldestDate).format("YYYY/MM/DD HH:mm:ss") + "] become [" + moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss") + "]");
                                                 oldestDate = moment(row.creationDate);
@@ -247,9 +247,6 @@
                     alwaysTriggerOffsets: true
                 }
             });
-
-
-
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
                 console.log("** Start Populate content dynamically (!workingDown) is (" + (!workingDown) + ")");
@@ -351,19 +348,15 @@
                     });
                 });
             });
-
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
                 // fire when user resize browser window or sidebar hide / show
             });
-
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenCompress, function (event, card) {
                 // when card compress by pressing the top right tool button
             });
-
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenExpand, function (event, card) {
                 // when card Expand by pressing the top right tool button
             });
-
             /**
              * When another sidebar menu item pressed and before container issues new ajax request.
              * You can cancel, destroy, or remove any thing here before replace main output ajax container.

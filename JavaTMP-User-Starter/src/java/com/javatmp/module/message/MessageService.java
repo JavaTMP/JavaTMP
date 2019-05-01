@@ -47,7 +47,7 @@ public class MessageService {
                 User fromUser = new User();
                 fromUser.setId(fromUserId);
 
-                fromUser = this.userService.readUserByUserId(fromUser);
+                fromUser = this.userService.readCompleteUserById(fromUser);
                 if (fromUser != null) {
                     row.setFromUser(fromUser);
                 }
