@@ -2,6 +2,7 @@ package com.javatmp.util;
 
 import com.javatmp.module.timezone.TimezoneService;
 import com.javatmp.module.activity.ActivityService;
+import com.javatmp.module.content.ContentService;
 import com.javatmp.module.theme.ThemeService;
 import com.javatmp.module.language.LanguageService;
 import com.javatmp.module.country.CountryService;
@@ -29,6 +30,7 @@ public class ServicesFactory {
     private final ActivityService activityService;
     private final DiaryEventService diaryEventService;
     private final MessageService messageService;
+    private final ContentService contentService;
 
     public ServicesFactory(String persistentUnitName) {
         logger.info("*** Start ServicesFactory Constructor @ [" + new Date() + "]");
@@ -44,6 +46,7 @@ public class ServicesFactory {
         this.activityService = new ActivityService(jpaDaoHelper);
         this.diaryEventService = new DiaryEventService(this.dBFaker, jpaDaoHelper);
         this.messageService = new MessageService(dBFaker, userService);
+        this.contentService = new ContentService(dBFaker);
         this.logger.info("*** End ServicesFactory Constructor @ [" + new Date() + "]");
     }
 
@@ -113,5 +116,12 @@ public class ServicesFactory {
      */
     public MessageService getMessageService() {
         return messageService;
+    }
+
+    /**
+     * @return the contentService
+     */
+    public ContentService getContentService() {
+        return contentService;
     }
 }

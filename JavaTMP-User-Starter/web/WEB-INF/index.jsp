@@ -246,6 +246,24 @@
                             <li>
                                 <a class="has-arrow" href="#">
                                     <i class="fa fa-lg fa-fw fa-cogs"></i>
+                                    Content Management
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/cms/ContentPageController">
+                                            View Content
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/content/ListContent">
+                                            List Content
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="has-arrow" href="#">
+                                    <i class="fa fa-lg fa-fw fa-cogs"></i>
                                     ${labels['sidebar.menuItem.system']}
                                 </a>
                                 <ul>
