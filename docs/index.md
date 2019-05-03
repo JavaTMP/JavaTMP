@@ -24,9 +24,10 @@
     *   [Bootstrap RTL Support and Customizations](/pages/reference/bootstrap-rtl-support-customizations "JavaTMP Bootstrap RTL support and modifications")
     *   [JavaTMP Front-end Plugins And Frameworks](/pages/reference/javatmp-front-end-plugins-and-frameworks)
     *   [Development and Environment tools](/pages/reference/development-and-environment-tools)
+    *   [Using jQueryUI Framework](/pages/reference/using-jqueryui-framework-with-bootstrap-template "Using jQueryUI Framework With Bootstrap Template")
+*   **Tutorials**
     *   [Chart types and data visualization](/pages/reference/chart-types-and-data-visualization)
     *   [General External Important Links](/pages/reference/general-external-important-links)
     *   [Database Related Information](/pages/reference/database-related-info)
     *   [Convert CSS file to SASS' SCSS syntax](/pages/reference/convert-css-to-scss-syntax)
-    *   [Using jQueryUI Framework](/pages/reference/using-jqueryui-framework-with-bootstrap-template "Using jQueryUI Framework With Bootstrap Template")
 *   **[Versions Change Log](/pages/versions/java-bootstrap-template-versions-change-log)**
