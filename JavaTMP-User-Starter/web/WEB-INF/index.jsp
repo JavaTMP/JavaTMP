@@ -430,7 +430,8 @@
                     };
                 }());
                 var template =
-                        '<a class="p-2 list-group-item list-group-item-action" actionType="ajax-model" href="{{contextPath}}/message/ViewMessageController?messageId={{messageId}}">' +
+                        '<a class="p-2 list-group-item list-group-item-action" actionType="ajax-model" href="{{contextPath}}/message/ViewMessageController?messageId={{messageId}}" ' +
+                        'data-actionable-options=\'{"size":"modal-lg", "title": "Loading Compose Message .."}\'>' +
                         '    <div class="media">' +
                         '        <img class="col-fixed-3 mr-1" src="{{contextPath}}/ViewUploadedFileController?documentId={{documentId}}&amp;randomHash={{randomHash}}&amp;viewType=inline" alt="Generic placeholder image"/>' +
                         '        <div class="media-body">' +
