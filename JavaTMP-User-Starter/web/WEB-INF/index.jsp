@@ -210,6 +210,11 @@
                                             File Manager
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/dms/EditImage">
+                                            Edit Image
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li>

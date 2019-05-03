@@ -515,7 +515,10 @@
                         var searchFilters = $(filterForm).serializeObject();
                         console.log("searchFilters [" + JSON.stringify(searchFilters) + "]");
                         console.log("currentDate [" + JSON.stringify(currentDate) + "]");
-
+                        // add custom modal :
+                        for (var i = 0; i < currentDate.columns.length; i++) {
+                            currentDate.columns[i].searchs = [{value: "1"}, {value: "2"}, {value: "3"}];
+                        }
                         for (var key in searchFilters) {
                             if (searchFilters.hasOwnProperty(key)) {
                                 console.log("key[" + key + "]=[" + searchFilters[key] + "]");
