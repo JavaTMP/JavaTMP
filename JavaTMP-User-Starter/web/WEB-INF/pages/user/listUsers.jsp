@@ -14,6 +14,15 @@
             <i class="fa fa-external-link-alt fa-fw"></i>
             ${labels['page.btn.addNewUserPopup']}
         </button>
+        <a
+            actionType="ajax-model"
+            href="${pageContext.request.contextPath}/pages/user/addUserByWizardPopup"
+            data-actionable-options='{"size":"modal-lg", "title": "Loading Compose Message .."}'
+            href="javascript:;"
+            role="button"
+            class="btn btn-primary">
+            Add User By Wizard Popup
+        </a>
         <button action-name="Update-Complete-User-Action" id="UserList-UpdateSelectedUserId" type="button" class="btn btn-primary">
             <i class="fa fa-user-edit fa-fw"></i>
             ${labels['page.btn.updateCompleteUser']}

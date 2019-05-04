@@ -480,7 +480,7 @@
                             columns: [{
                                     "data": "creationDate", "name": "creationDate",
                                     search: {
-                                        "value": moment(newestDate).format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
+                                        "value": moment(newestDate).locale('en').format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
                                         "operatorType": "newerThan"
                                     }
                                 },
@@ -547,7 +547,7 @@
                                 columns: [{
                                         "data": "creationDate", "name": "creationDate",
                                         search: {
-                                            "value": moment(oldestDate).format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
+                                            "value": moment(oldestDate).locale('en').format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
                                             "operatorType": "olderThan"
                                         }
                                     },
