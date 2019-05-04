@@ -11,7 +11,6 @@
                 </div>
             </div>
             <div class="col-lg-9">
-
                 <div class="tab-content" id="v-pills-tabContent">
                     <div class="tab-pane fade" id="v-pills-home" role="tabpanel" aria-labelledby="step1-">
                         <div class="form-group form-row">
@@ -402,7 +401,7 @@
                 var firstTab = $(".nav .nav-link:first", wizardDiv);
                 var targetPanelId = $(firstTab).attr("href");
                 $(firstTab).removeClass("disabled");
-                $(targetPanelId).addClass("active show");
+                $(targetPanelId).addClass("active");
                 console.log("id of target = " + $(targetPanelId).attr("id"));
                 $(firstTab).tab('show');
 
@@ -417,7 +416,7 @@
                     label: "Previous",
                     cssClass: "btn btn-primary",
                     action: function (modalWrapper, button, buttonData, originalEvent) {
-                        var currentActiveElement = $(".nav .nav-link.active.show", wizardDiv);
+                        var currentActiveElement = $(".nav .nav-link.active", wizardDiv);
                         var previousElement = $(currentActiveElement).prev();
                         console.log("prev-button current[" + $(currentActiveElement).attr("id") + "], next [" + $(previousElement).attr("id") + "]");
                         if ($(previousElement).length > 0) {
@@ -429,7 +428,7 @@
                     label: "Next",
                     cssClass: "btn btn-primary",
                     action: function (modalWrapper, button, buttonData, originalEvent) {
-                        var currentActiveElement = $(".nav .nav-link.active.show", wizardDiv);
+                        var currentActiveElement = $(".nav .nav-link.active", wizardDiv);
                         var nextActiveElement = $(currentActiveElement).next();
                         console.log("next-button current[" + $(currentActiveElement).attr("id") + "], next [" + $(nextActiveElement).attr("id") + "]");
                         if (!form.valid()) {

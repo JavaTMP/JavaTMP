@@ -124,7 +124,7 @@
                     $(firstTab).tab('show');
 
                     $('#myModal .next').on("click", function () {
-                        var currentActiveElement = $("#myModal .nav .nav-link.active.show");
+                        var currentActiveElement = $("#myModal .nav .nav-link.active");
                         var nextActiveElement = $(currentActiveElement).next();
                         console.log("nextActiveElement = " + nextActiveElement.length);
                         if (nextActiveElement.length > 0) {
@@ -134,7 +134,7 @@
 
                     });
                     $('#myModal .previous').on("click", function () {
-                        var currentActiveElement = $("#myModal .nav .nav-link.active.show");
+                        var currentActiveElement = $("#myModal .nav .nav-link.active");
                         var previousActiveElement = $(currentActiveElement).prev();
                         console.log("nextActiveElement = " + previousActiveElement.length);
                         if (previousActiveElement.length > 0) {

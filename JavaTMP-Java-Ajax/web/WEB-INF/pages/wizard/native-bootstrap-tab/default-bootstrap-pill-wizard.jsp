@@ -110,7 +110,7 @@
 
                 $(".previous-button").on("click", function () {
                     var wizardElement = $(this).parents(".bootstrap-pill-wizard").first();
-                    var currentActiveElement = $(".nav .nav-link.active.show", wizardElement);
+                    var currentActiveElement = $(".nav .nav-link.active", wizardElement);
                     var previousElement = $(currentActiveElement).prev();
                     console.log("prev-button current[" + $(currentActiveElement).attr("id") + "], next [" + $(previousElement).attr("id") + "]");
                     if ($(previousElement).length > 0) {
@@ -121,7 +121,7 @@
                 });
                 $(".next-button").on("click", function () {
                     var wizardElement = $(this).parents(".bootstrap-pill-wizard").first();
-                    var currentActiveElement = $(".nav .nav-link.active.show", wizardElement);
+                    var currentActiveElement = $(".nav .nav-link.active", wizardElement);
                     var nextActiveElement = $(currentActiveElement).next();
                     console.log("next-button current[" + $(currentActiveElement).attr("id") + "], next [" + $(nextActiveElement).attr("id") + "]");
                     if ($(nextActiveElement).length > 0) {
