@@ -275,6 +275,7 @@
                 modal.updateSize("modal-lg");
 
                 var form = $("#AddNewUserPopupFormId");
+                var validator;
                 var wizardDiv = modal.originalModal.find(".dynamic-form-wizard");
 
                 // activiate first tab
@@ -285,10 +286,20 @@
                 console.log("id of target = " + $(targetPanelId).attr("id"));
                 $(firstTab).tab('show');
 
+                var callbackData = {success: false, cancel: true};
+                modal.originalModal.on('hidden.bs.modal', function (e) {
+                    // here we run passing function name as a remote callback
+                    if ($.isFunction(modal.options.localData.callback)) {
+                        modal.options.localData.callback.call(null, callbackData);
+                    } else if ($.type(modal.options.localData.callback) === "string") {
+                        javatmp.util.executeFunctionByName(modal.options.localData.callback, window, callbackData);
+                    }
+                });
                 var closeButton = modal.addButton({
                     label: "${labels['global.cancel']}",
                     cssClass: "btn btn-danger mr-auto",
                     action: function (modalWrapper, button, buttonData, originalEvent) {
+                        validator.destroy();
                         return modalWrapper.hide();
                     }
                 });
@@ -508,7 +519,6 @@
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {
                 $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenCompress);
                 $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenExpand);
-                validator.destroy();
                 return true;
             });
         });

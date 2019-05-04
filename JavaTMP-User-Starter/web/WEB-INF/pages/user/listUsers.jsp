@@ -14,15 +14,13 @@
             <i class="fa fa-external-link-alt fa-fw"></i>
             ${labels['page.btn.addNewUserPopup']}
         </button>
-        <a
-            actionType="ajax-model"
-            href="${pageContext.request.contextPath}/pages/user/addUserByWizardPopup"
-            data-actionable-options='{"size":"modal-lg", "title": "Loading Compose Message .."}'
-            href="javascript:;"
-            role="button"
+        <button
+            id="UserList-AddNewUserByWizardPopupId"
+            action-name="Add-New-User-By-Wizard-Popup-Action"
+            type="button"
             class="btn btn-primary">
             Add User By Wizard Popup
-        </a>
+        </button>
         <button action-name="Update-Complete-User-Action" id="UserList-UpdateSelectedUserId" type="button" class="btn btn-primary">
             <i class="fa fa-user-edit fa-fw"></i>
             ${labels['page.btn.updateCompleteUser']}
@@ -241,6 +239,7 @@
                 }
             });
             var addNewUserPopupButton = $("#UserList-AddNewUserPopupId");
+            var addNewUserByWizardPopupButton = $("#UserList-AddNewUserByWizardPopupId");
             var updateUserButton = $("#UserList-UpdateSelectedUserId");
             var deleteUserButton = $("#UserList-DeleteSelectedUserId");
             var activateUserButton = $("#UserList-ActivateSelectedUserId");
@@ -409,6 +408,19 @@
                     updateSizeAfterDataFetchTo: "modal-lg", // default is  or null for standard or "modal-sm"
                     size: "modal-lg",
                     url: javatmp.settings.contextPath + "/user/GetCreateNewUserPopupController",
+                    ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
+                });
+            });
+            addNewUserByWizardPopupButton.on("click", function (event) {
+                var passData = {};
+                passData.callback = "actionCallback";
+                BootstrapModalWrapperFactory.createAjaxModal({
+                    message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
+                    title: "${labels['global.loadingText']}",
+                    passData: passData,
+                    updateSizeAfterDataFetchTo: "modal-lg", // default is  or null for standard or "modal-sm"
+                    size: "modal-lg",
+                    url: javatmp.settings.contextPath + "/pages/user/addUserByWizardPopup",
                     ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                 });
             });
