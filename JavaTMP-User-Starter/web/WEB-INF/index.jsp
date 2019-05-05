@@ -39,7 +39,7 @@
                         <i class="far fa-envelope fa-lg faa-shake animated mr-1"></i>
                         <span class="badge badge-pill badge-light d-none d-md-inline">99+</span>
                     </a>
-                    <div class="dropdown-menu dropdown-menu-extender">
+                    <div class="dropdown-menu dropdown-menu-extender shadow-lg">
                         <div class="dropdown-menu-header clearfix">
                             <i class="fa fa-lg fa-fw fa-envelope"></i>5 Messages
                             <a actionType="ajax-model"

@@ -123,7 +123,7 @@
                                 columns: [{
                                         "name": "creationDate", "data": "creationDate",
                                         search: {
-                                            "value": moment(newestDate).format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
+                                            "value": moment(newestDate).locale('en').format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
                                             "operatorType": "newerThan"
                                         }
                                     },
@@ -161,7 +161,7 @@
                                             'randomHash': row.fromUser.profilePicDocument.randomHash
                                         });
                                         if (moment(newestDate).isBefore(moment(row.creationDate))) {
-                                            console.log("newestDate [" + moment(newestDate).format("YYYY/MM/DD HH:mm:ss") + "] become [" + moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss") + "]");
+                                            console.log("newestDate [" + moment(newestDate).locale('en').format("YYYY/MM/DD HH:mm:ss") + "] become [" + moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss") + "]");
                                             newestDate = moment(row.creationDate);
                                         }
                                         $(readyData).hide().prependTo(that.mcs.content).fadeIn(1000);
@@ -192,7 +192,7 @@
                                     columns: [{
                                             "name": "creationDate", "data": "creationDate",
                                             search: {
-                                                "value": moment(oldestDate).format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
+                                                "value": moment(oldestDate).locale('en').format("YYYY-MM-DDTHH:mm:ss.SSSZ"),
                                                 "operatorType": "olderThan"
                                             }
                                         },
