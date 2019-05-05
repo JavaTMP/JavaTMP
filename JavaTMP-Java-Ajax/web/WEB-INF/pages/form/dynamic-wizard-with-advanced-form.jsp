@@ -723,8 +723,6 @@
 
                     return readyData;
                 }
-
-
             });
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {

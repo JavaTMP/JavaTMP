@@ -413,13 +413,13 @@
             });
             addNewUserByWizardPopupButton.on("click", function (event) {
                 var passData = {};
-                passData.callback = "actionCallback";
                 BootstrapModalWrapperFactory.createAjaxModal({
                     message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
                     title: "${labels['global.loadingText']}",
                     passData: passData,
                     updateSizeAfterDataFetchTo: "modal-lg", // default is  or null for standard or "modal-sm"
                     size: "modal-lg",
+                    localData: {callback: "actionCallback"},
                     url: javatmp.settings.contextPath + "/pages/user/addUserByWizardPopup",
                     ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                 });

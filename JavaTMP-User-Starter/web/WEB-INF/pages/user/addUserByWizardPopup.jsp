@@ -15,10 +15,18 @@
         <div class="row dynamic-form-wizard">
             <div class="col-lg-3">
                 <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <a class="disabled nav-item nav-link" id="step1-" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">1. Personal Informaiton</a>
-                    <a class="disabled nav-item nav-link" id="step2-" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">2. Address Information</a>
-                    <a class="disabled nav-item nav-link" id="step3-" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">3. Profile Informaiton</a>
-                    <a class="disabled nav-item nav-link" id="step4-" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">4. Send And Create New User</a>
+                    <a class="disabled nav-item nav-link" id="step1-" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                        1. Personal Informaiton
+                    </a>
+                    <a class="disabled nav-item nav-link" id="step3-" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                        3. Profile Informaiton
+                    </a>
+                    <a class="disabled nav-item nav-link" id="step2-" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+                        2. Address Information
+                    </a>
+                    <a class="disabled nav-item nav-link" id="step4-" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">
+                        4. Send And Create New User
+                    </a>
                 </div>
             </div>
             <div class="col-lg-9">
@@ -289,11 +297,13 @@
                 var callbackData = {success: false, cancel: true};
                 modal.originalModal.on('hidden.bs.modal', function (e) {
                     // here we run passing function name as a remote callback
-                    if ($.isFunction(modal.options.localData.callback)) {
-                        modal.options.localData.callback.call(null, callbackData);
-                    } else if ($.type(modal.options.localData.callback) === "string") {
-                        javatmp.util.executeFunctionByName(modal.options.localData.callback, window, callbackData);
-                    }
+                    javatmp.util.waitForFinalEvent(function () {
+                        if ($.isFunction(modal.options.localData.callback)) {
+                            modal.options.localData.callback.call(callbackData, callbackData);
+                        } else if ($.type(modal.options.localData.callback) === "string") {
+                            javatmp.util.executeFunctionByName(modal.options.localData.callback, window, callbackData);
+                        }
+                    }, 20, "hidden.bs.modal");
                 });
                 var closeButton = modal.addButton({
                     label: "${labels['global.cancel']}",
