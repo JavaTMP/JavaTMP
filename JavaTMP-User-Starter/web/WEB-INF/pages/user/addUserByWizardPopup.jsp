@@ -18,10 +18,10 @@
                     <a class="disabled nav-item nav-link" id="step1-" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">
                         1. Personal Informaiton
                     </a>
-                    <a class="disabled nav-item nav-link" id="step3-" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                    <a class="disabled nav-item nav-link" id="step3-" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-messages" aria-selected="false">
                         3. Profile Informaiton
                     </a>
-                    <a class="disabled nav-item nav-link" id="step2-" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">
+                    <a class="disabled nav-item nav-link" id="step2-" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-profile" aria-selected="false">
                         2. Address Information
                     </a>
                     <a class="disabled nav-item nav-link" id="step4-" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">
@@ -73,170 +73,170 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-row">
-                                    <div class="col-lg-3">
-                                        <div class="form-group">
-                                            <label class="control-label">${labels['domain.user.country']}</label>
-                                            <select name="countryId" class="form-control" data-rule-required="true">
-                                                <c:choose>
-                                                    <c:when test="${fn:length(requestScope.countries) > 0}">
-                                                        <option value="">${labels['page.text.kindlySelect']}</option>
-                                                        <c:forEach items="${requestScope.countries}" var="country">
-                                                            <option ${requestScope.user.countryId == country.countrytranslationPK.countryId ? 'selected="selected"' : ''} value="${country.countrytranslationPK.countryId}">${country.countryName}</option>
-                                                        </c:forEach>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <option value="">${labels['page.text.noRecordFound']}</option>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="form-group">
-                                            <label class="control-label">${labels['domain.user.lang']}</label>
-                                            <select name="lang" class="form-control" data-rule-required="true">
-                                                <c:choose>
-                                                    <c:when test="${fn:length(requestScope.languages) > 0}">
-                                                        <option value="">${labels['page.text.kindlySelect']}</option>
-                                                        <c:forEach items="${requestScope.languages}" var="language">
-                                                            <option ${requestScope.user.lang == language.languagetranslationPK.languageId ? 'selected="selected"' : ''} value="${language.languagetranslationPK.languageId}">${language.languageName}</option>
-                                                        </c:forEach>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <option value="">${labels['page.text.noRecordFound']}</option>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="form-group">
-                                            <label class="control-label">${labels['domain.user.theme']}</label>
-                                            <select name="theme" class="form-control" data-rule-required="true">
-                                                <c:choose>
-                                                    <c:when test="${fn:length(requestScope.themes) > 0}">
-                                                        <option value="">${labels['page.text.kindlySelect']}</option>
-                                                        <c:forEach items="${requestScope.themes}" var="theme">
-                                                            <option ${requestScope.user.theme == theme.themetranslationPK.themeId ? 'selected="selected"' : ''} value="${theme.themetranslationPK.themeId}">${theme.themeName}</option>
-                                                        </c:forEach>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <option value="">${labels['page.text.noRecordFound']}</option>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
-                                        <div class="form-group">
-                                            <label class="control-label">${labels['domain.user.timezone']}</label>
-                                            <select name="timezone" class="form-control" data-rule-required="true">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="step2-">
+                        <div class="form-row">
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="control-label">${labels['domain.user.country']}</label>
+                                    <select name="countryId" class="form-control" data-rule-required="true">
+                                        <c:choose>
+                                            <c:when test="${fn:length(requestScope.countries) > 0}">
                                                 <option value="">${labels['page.text.kindlySelect']}</option>
-                                                <c:choose>
-                                                    <c:when test="${fn:length(requestScope.timezones) > 0}">
-                                                        <option value="">Choose ...</option>
-                                                        <c:forEach items="${requestScope.timezones}" var="timezone">
-                                                            <option value="${timezone.timezonetranslationPK.timezoneId}">${timezone.timezoneNameDescription}</option>
-                                                        </c:forEach>
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                        <option value="">${labels['page.text.noRecordFound']}</option>
-                                                    </c:otherwise>
-                                                </c:choose>
-                                            </select>
-                                        </div>
+                                                <c:forEach items="${requestScope.countries}" var="country">
+                                                    <option ${requestScope.user.countryId == country.countrytranslationPK.countryId ? 'selected="selected"' : ''} value="${country.countrytranslationPK.countryId}">${country.countryName}</option>
+                                                </c:forEach>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option value="">${labels['page.text.noRecordFound']}</option>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="control-label">${labels['domain.user.lang']}</label>
+                                    <select name="lang" class="form-control" data-rule-required="true">
+                                        <c:choose>
+                                            <c:when test="${fn:length(requestScope.languages) > 0}">
+                                                <option value="">${labels['page.text.kindlySelect']}</option>
+                                                <c:forEach items="${requestScope.languages}" var="language">
+                                                    <option ${requestScope.user.lang == language.languagetranslationPK.languageId ? 'selected="selected"' : ''} value="${language.languagetranslationPK.languageId}">${language.languageName}</option>
+                                                </c:forEach>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option value="">${labels['page.text.noRecordFound']}</option>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="control-label">${labels['domain.user.theme']}</label>
+                                    <select name="theme" class="form-control" data-rule-required="true">
+                                        <c:choose>
+                                            <c:when test="${fn:length(requestScope.themes) > 0}">
+                                                <option value="">${labels['page.text.kindlySelect']}</option>
+                                                <c:forEach items="${requestScope.themes}" var="theme">
+                                                    <option ${requestScope.user.theme == theme.themetranslationPK.themeId ? 'selected="selected"' : ''} value="${theme.themetranslationPK.themeId}">${theme.themeName}</option>
+                                                </c:forEach>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option value="">${labels['page.text.noRecordFound']}</option>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label class="control-label">${labels['domain.user.timezone']}</label>
+                                    <select name="timezone" class="form-control" data-rule-required="true">
+                                        <option value="">${labels['page.text.kindlySelect']}</option>
+                                        <c:choose>
+                                            <c:when test="${fn:length(requestScope.timezones) > 0}">
+                                                <option value="">Choose ...</option>
+                                                <c:forEach items="${requestScope.timezones}" var="timezone">
+                                                    <option value="${timezone.timezonetranslationPK.timezoneId}">${timezone.timezoneNameDescription}</option>
+                                                </c:forEach>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <option value="">${labels['page.text.noRecordFound']}</option>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label">${labels['domain.user.userName']}</label>
+                                    <input class="form-control" type="text" autocomplete="off"
+                                           placeholder="${labels['domain.user.userName']}"
+                                           name="userName"
+                                           data-rule-required="true"
+                                           data-rule-minlength="6"
+                                           data-rule-maxlength="20">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label">${labels['domain.user.password']}</label>
+                                    <input class="form-control" type="password" autocomplete="off"
+                                           placeholder="${labels['domain.user.password']}" name="password"
+                                           data-rule-required="true">
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class="control-label">${labels['domain.user.reTypePassword']}</label>
+                                    <input class="form-control" type="password" autocomplete="off" placeholder="${labels['domain.user.reTypePassword']}"
+                                           name="rpassword"
+                                           data-rule-required="true"
+                                           data-rule-equalto="form input[name='password']">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="exampleFormControlFile1">${labels['domain.user.Document']}</label>
+                                    <div class="custom-file">
+                                        <input name="profilePicture" type="file" class="custom-file-input" id="validatedCustomFile"
+                                               data-rule-required="true">
+                                        <label class="custom-file-label" for="validatedCustomFile">${labels['domain.user.Document']}</label>
                                     </div>
                                 </div>
-                                <div class="form-row">
-                                    <div class="col-lg-4">
-                                        <div class="form-group">
-                                            <label class="control-label">${labels['domain.user.userName']}</label>
-                                            <input class="form-control" type="text" autocomplete="off"
-                                                   placeholder="${labels['domain.user.userName']}"
-                                                   name="userName"
-                                                   data-rule-required="true"
-                                                   data-rule-minlength="6"
-                                                   data-rule-maxlength="20">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="form-group">
-                                            <label class="control-label">${labels['domain.user.password']}</label>
-                                            <input class="form-control" type="password" autocomplete="off"
-                                                   placeholder="${labels['domain.user.password']}" name="password"
-                                                   data-rule-required="true">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div class="form-group">
-                                            <label class="control-label">${labels['domain.user.reTypePassword']}</label>
-                                            <input class="form-control" type="password" autocomplete="off" placeholder="${labels['domain.user.reTypePassword']}"
-                                                   name="rpassword"
-                                                   data-rule-required="true"
-                                                   data-rule-equalto="form input[name='password']">
-                                        </div>
+                            </div>
+                            <div class="col-lg-6 text-center">
+                                <div style="width: 200px; height: 200px;display: inline-block;position: relative">
+                                    <div id="profilePicturePreviewContainerId" style="width: 200px; height: 200px;">
+                                        <img id="profilePicturePreview" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
                                     </div>
                                 </div>
-                                <div class="form-row">
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <label for="exampleFormControlFile1">${labels['domain.user.Document']}</label>
-                                            <div class="custom-file">
-                                                <input name="profilePicture" type="file" class="custom-file-input" id="validatedCustomFile"
-                                                       data-rule-required="true">
-                                                <label class="custom-file-label" for="validatedCustomFile">${labels['domain.user.Document']}</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 text-center">
-                                        <div style="width: 200px; height: 200px;display: inline-block;position: relative">
-                                            <div id="profilePicturePreviewContainerId" style="width: 200px; height: 200px;">
-                                                <img id="profilePicturePreview" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6 text-center">
-                                        <img id="profilePictureResizePreview" style="width: 200px; height: 200px;" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
-                                    </div>
+                            </div>
+                            <div class="col-lg-6 text-center">
+                                <img id="profilePictureResizePreview" style="width: 200px; height: 200px;" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt="Your Profile Image Preview" />
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-lg-12">
+                                <div class="form-group text-center">
+                                    <input name="profilePictureStr" type="text" readonly="" hidden="" value=""/>
                                 </div>
-                                <div class="form-row">
-                                    <div class="col-lg-12">
-                                        <div class="form-group text-center">
-                                            <input name="profilePictureStr" type="text" readonly="" hidden="" value=""/>
-                                        </div>
-                                    </div>
-                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="step3-">
+                        <div class="form-row">
+                            <div class="col-lg-12">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.address']}</label>
                                     <textarea rows="5" class="form-control forceValidate" placeholder="" name="address"
                                               data-rule-summernoteRequired="true"
                                               data-rule-maxlength="400"></textarea>
                                 </div>
-                                <div class="form-row">
-                                    <div class="col-lg-12">
-                                        <div class="form-group">
-                                            <div class="custom-control custom-checkbox">
-                                                <input name="tnc" type="checkbox" class="custom-control-input" id="customCheck1"
-                                                       data-rule-required="true">
-                                                <label class="custom-control-label" for="customCheck1">
-                                                    ${labels["page.register.agreeLabelText"]}
-                                                    <a href="javascript:;">${labels["page.register.termsOfService"]}</a>
-                                                    ${labels["page.register.and"]}
-                                                    <a href="javascript:;">${labels["page.register.privacyPolicy"]}</a>
-                                                </label>
-                                            </div>
-                                        </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <div class="custom-control custom-checkbox">
+                                        <input name="tnc" type="checkbox" class="custom-control-input" id="customCheck1"
+                                               data-rule-required="true">
+                                        <label class="custom-control-label" for="customCheck1">
+                                            ${labels["page.register.agreeLabelText"]}
+                                            <a href="javascript:;">${labels["page.register.termsOfService"]}</a>
+                                            ${labels["page.register.and"]}
+                                            <a href="javascript:;">${labels["page.register.privacyPolicy"]}</a>
+                                        </label>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="step2-">
-
-                    </div>
-                    <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="step3-">
-
                     </div>
                     <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="step4-">
                         <div class="alert alert-success text-center">
