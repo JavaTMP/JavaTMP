@@ -23,8 +23,6 @@ The following links provide you information about Oracle SQL statements related 
 - [https://jaxenter.com/10-sql-tricks-that-you-didnt-think-were-possible-125934.html](https://jaxenter.com/10-sql-tricks-that-you-didnt-think-were-possible-125934.html)
 - [http://www.mysqltutorial.org/mysql-window-functions/](http://www.mysqltutorial.org/mysql-window-functions/)
 - [https://blog.jooq.org/2013/11/03/probably-the-coolest-sql-feature-window-functions/](https://blog.jooq.org/2013/11/03/probably-the-coolest-sql-feature-window-functions/)
-- []()
-- []()
 
 ## Oracle Stored Procedures
 The following links provide you information to call Oracle stored procedures and functions with JPA and Hibernate:
@@ -47,3 +45,7 @@ The following links provide you information to call Oracle stored procedures and
 ## JPA Links
 - [https://vladmihalcea.com/sql-query-parent-rows-all-children-match-filtering-criteria/](https://vladmihalcea.com/sql-query-parent-rows-all-children-match-filtering-criteria/)
 - [https://www.logicbig.com/tutorials/java-ee-tutorial/jpa/map-joins.html](https://www.logicbig.com/tutorials/java-ee-tutorial/jpa/map-joins.html)
+
+## General Links
+- [https://stackoverflow.com/questions/9253244/sql-having-vs-where](https://stackoverflow.com/questions/9253244/sql-having-vs-where)
+- [https://www.essentialsql.com/what-is-the-difference-between-where-and-having-clauses/](https://www.essentialsql.com/what-is-the-difference-between-where-and-having-clauses/)

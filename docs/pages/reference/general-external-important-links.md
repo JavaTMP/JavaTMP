@@ -34,9 +34,12 @@ title: General External Important Links
 - [TinyMCE WYSIWYG HTML Editor](https://www.tiny.cloud/)
 - [Froala WYSIWYG HTML Editor](https://www.froala.com/wysiwyg-editor)
 
-## Mustache Template links
+## Template Engine links
 - [https://love2dev.com/blog/javascript-mustach-templates/](https://love2dev.com/blog/javascript-mustach-templates/)
 - [http://coenraets.org/blog/2011/12/tutorial-html-templates-with-mustache-js/](http://coenraets.org/blog/2011/12/tutorial-html-templates-with-mustache-js/)
+- [https://github.com/wycats/handlebars.js/](https://github.com/wycats/handlebars.js/)
+- [https://github.com/jknack/handlebars.java](https://github.com/jknack/handlebars.java)
+- [https://johnresig.com/blog/javascript-micro-templating/](https://johnresig.com/blog/javascript-micro-templating/)
 
 ## Javascript table and Spreadsheet Plugins and resources
 - [https://github.com/myliang/x-spreadsheet](https://github.com/myliang/x-spreadsheet)
