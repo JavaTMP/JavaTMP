@@ -217,7 +217,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label class="control-label">${labels['domain.user.address']}</label>
-                                    <textarea rows="5" class="form-control forceValidate" placeholder="" name="address"
+                                    <textarea rows="5" class="form-control" placeholder="" name="address"
                                               data-rule-summernoteRequired="true"
                                               data-rule-maxlength="400"></textarea>
                                 </div>
@@ -362,6 +362,11 @@
                     console.log("shown.bs.tab = " + $(e.target).attr("id")); // newly activated tab
                     console.log("shown.bs.tab = " + $(e.relatedTarget).attr("id")); // previous active tab
                     var currentShownElement = $(e.target);
+                    console.log("current shown is " + $(currentShownElement).attr("id"));
+                    if ($(currentShownElement).attr("href") === "#v-pills-messages") {
+                        console.log("Reache #v-pills-messages");
+                        $("#v-pills-messages", wizardDiv).find("textarea[name='address']").addClass('forceValidate');
+                    }
                     if ($(currentShownElement).prev().length > 0) {
                         $(previousButton).prop("disabled", false);
                         $(previousButton).removeClass("disabled");
