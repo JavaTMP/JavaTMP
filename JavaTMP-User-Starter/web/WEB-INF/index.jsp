@@ -277,6 +277,11 @@
                                             ${labels['sidebar.menuItem.system.UserProfileSettings']}
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/system/mustache.js">
+                                            Mustache.js
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
