@@ -3,7 +3,7 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content grid-gutter-padding">
-    <h5 class="my-3">Chart Of Accounts</h5>
+    <h5 class="my-3">Folder Browser</h5>
     <hr/>
     <div class="row">
         <div class="col">
@@ -182,6 +182,9 @@
                             }
                         }
                     }
+                }).on('dblclick', function (e) {
+                    var node = $.ui.fancytree.getNode(e.target);
+                    alert(JSON.stringify(node.data));
                 });
                 var addNewUserPopupButton = $("#UserList-AddNewUserPopupId");
                 addNewUserPopupButton.on("click", function (event) {
