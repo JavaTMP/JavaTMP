@@ -41,6 +41,33 @@ public class Document implements Serializable {
     private Short status;
     private Long createdByUserId;
 
+    public Document() {
+    }
+
+    public Document(Long documentId, String documentName, Long documentSize,
+            String contentType, Date creationDate,
+            Long randomHash, Short documentType, Long parentDocumentId,
+            Short status, Long createdByUserId) {
+
+        this.documentId = documentId;
+
+        this.documentName = documentName;
+
+        this.documentSize = documentSize;
+
+        this.contentType = contentType;
+
+        this.creationDate = creationDate;
+
+        this.randomHash = randomHash;
+
+        this.documentType = documentType;
+        this.parentDocumentId = parentDocumentId;
+        this.status = status;
+        this.createdByUserId = createdByUserId;
+
+    }
+
     /**
      * @return the documentId
      */

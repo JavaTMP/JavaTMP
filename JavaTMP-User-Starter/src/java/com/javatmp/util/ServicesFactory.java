@@ -36,15 +36,15 @@ public class ServicesFactory {
         logger.info("*** Start ServicesFactory Constructor @ [" + new Date() + "]");
         this.jpaDaoHelper = new JpaDaoHelper(persistentUnitName);
         this.dBFaker = new DBFaker();
-        this.timezoneService = new TimezoneService(jpaDaoHelper);
-        this.themeService = new ThemeService(jpaDaoHelper);
-        this.languageService = new LanguageService(jpaDaoHelper);
-        this.countryService = new CountryService(jpaDaoHelper);
-        this.documentService = new DocumentService(dBFaker, jpaDaoHelper);
-        this.userService = new UserService(this.dBFaker, jpaDaoHelper);
-        this.userStatsService = new UserStatsService(jpaDaoHelper);
-        this.activityService = new ActivityService(jpaDaoHelper);
-        this.diaryEventService = new DiaryEventService(this.dBFaker, jpaDaoHelper);
+        this.timezoneService = new TimezoneService(getJpaDaoHelper());
+        this.themeService = new ThemeService(getJpaDaoHelper());
+        this.languageService = new LanguageService(getJpaDaoHelper());
+        this.countryService = new CountryService(getJpaDaoHelper());
+        this.documentService = new DocumentService(dBFaker, getJpaDaoHelper());
+        this.userService = new UserService(this.dBFaker, getJpaDaoHelper());
+        this.userStatsService = new UserStatsService(getJpaDaoHelper());
+        this.activityService = new ActivityService(getJpaDaoHelper());
+        this.diaryEventService = new DiaryEventService(this.dBFaker, getJpaDaoHelper());
         this.messageService = new MessageService(dBFaker, userService);
         this.contentService = new ContentService(dBFaker);
         this.logger.info("*** End ServicesFactory Constructor @ [" + new Date() + "]");
@@ -123,5 +123,12 @@ public class ServicesFactory {
      */
     public ContentService getContentService() {
         return contentService;
+    }
+
+    /**
+     * @return the jpaDaoHelper
+     */
+    public JpaDaoHelper getJpaDaoHelper() {
+        return jpaDaoHelper;
     }
 }

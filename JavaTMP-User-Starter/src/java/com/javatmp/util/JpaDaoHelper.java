@@ -1,6 +1,5 @@
 package com.javatmp.util;
 
-import com.javatmp.module.user.User;
 import com.javatmp.mvc.domain.table.DataTableColumnSpecs;
 import com.javatmp.mvc.domain.table.DataTableRequest;
 import com.javatmp.mvc.domain.table.DataTableResults;
@@ -293,6 +292,18 @@ public class JpaDaoHelper {
                     }
                 }
             }
+
+            Predicate predicate = cb.conjunction();
+
+            if (page.getColumns() != null) {
+                for (DataTableColumnSpecs column : page.getColumns()) {
+                    if (column.getSearch() != null) {
+                        predicate = cb.and(predicate, cb.equal(from.get(column.getName()), column.getSearch().getValue()));
+                    }
+                }
+            }
+
+            cq.where(predicate);
 
             Query query = em.createQuery(cq);
 

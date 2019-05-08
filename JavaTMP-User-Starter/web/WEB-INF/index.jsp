@@ -201,6 +201,16 @@
                                         </a>
                                     </li>
                                     <li>
+                                        <a href="${pageContext.request.contextPath}/pages/dms/FileTableBrowser">
+                                            File Table Browser
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/dms/FolderBrowser">
+                                            Folder Browser
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="${pageContext.request.contextPath}/pages/dms/FileStaticResource">
                                             File Static Resource
                                         </a>

@@ -83,6 +83,7 @@ public class FileBrowser extends HttpServlet {
         for (File item : children) {
             Map<String, Object> myMap = new HashMap<>();
             myMap.put("title", item.getName());
+            myMap.put("size", item.length());
             if (item.isDirectory()) {
                 myMap.put("folder", item.isDirectory());
                 myMap.put("lazy", item.isDirectory());
