@@ -18,7 +18,7 @@
                     <table id="chartOfAccountMainTable" class="table table-sm table-condensed table-hover table-bordered">
                         <thead>
                             <tr>
-                                <th width="150" class="">key</th>
+                                <th width="100" class="">key</th>
                                 <th>Folder</th>
                                 <th  width="100">Size</th>
                                 <th  width="100">Folder</th>
@@ -95,7 +95,8 @@
                             nodeMap = {};
                     // Pass 1: store all tasks in reference map
                     $.each(childList, function (i, c) {
-                        nodeMap[c.id] = c;
+                        console.log("id [" + c.documentId + "] paretn [" + c.parentDocumentId + "]");
+                        nodeMap[c.documentId] = c;
                     });
                     // Pass 2: adjust fields and fix child structure
                     childList = $.map(childList, function (c) {
@@ -103,11 +104,13 @@
                         c.key = c.documentId;
                         c.title = c.documentName;
                         c.tooltip = c.documentName;
+                        c.folder = true;
+                        c.expanded = false;
 //                        c.icon = "far fa-heart";
                         // Check if c is a child node
-                        if (c.parentAccountId) {
+                        if (c.parentDocumentId) {
                             // add c to `children` array of parent node
-                            parent = nodeMap[c.parentAccountId];
+                            parent = nodeMap[c.parentDocumentId];
                             parent.folder = true;
                             parent.expanded = true;
                             if (parent.children) {
@@ -119,61 +122,7 @@
                         }
                         return c; // Keep top-level nodes
                     });
-                    function calcuateSum(node) {
-                        if (node.children && node.children.length > 0) {
-                            var childNodes = [];
-                            for (var i = 0; i < node.children.length; i++) {
-                                var childNodeData = calcuateSum(node.children[i]);
-                                childNodes.push(childNodeData);
-                            }
-                            console.log(JSON.stringify(childNodes));
-                            for (var i = 0; i < childNodes.length; i++) {
-                                var childRow = childNodes[i];
-                                node.debit += childRow[0];
-                                node.credit += childRow[1];
-                                node.balance += childRow[2];
-                            }
-                            return [node.debit, node.credit, node.balance];
-                        } else {
-                            console.log("leave node without children node id [" + node.id + "][" + node.title + "]");
-                            return [node.debit, node.credit, node.balance];
-                        }
-                    }
 
-                    function calcuateSumForList(list) {
-                        for (var i = 0; i < list.length; i++) {
-                            calcuateSum(list[i]);
-                        }
-                    }
-                    calcuateSumForList(childList);
-
-                    function orderAccountsList(list) {
-                        console.log("length of list [" + list.length + "]");
-                        for (var i = 0; i < list.length; i++) {
-                            console.log("check account code [" + list[i].accountCode + "] with children lenght [" + list[i].children + "]");
-                            if (list[i].children && list[i].children.length > 0) {
-                                console.log("check account code [" + list[i].accountCode + "] with children lenght [" + list[i].children.length + "]");
-                                orderAccountsList(list[i].children);
-                            }
-                        }
-                        // now we ordered current list based on list[i].accountgroup.type.id and then list[i].accountgroup.id
-                        function compare(a, b) {
-                            var result;
-                            result = a.accountgroup.type.id - b.accountgroup.type.id;
-                            if (result === 0) {
-                                result = a.accountgroup.id - b.accountgroup.id;
-                                if (result === 0) {
-                                    result = a.id - b.id;
-                                }
-                            }
-                            return result;
-                        }
-                        console.log("sort list of [" + list.length + "]");
-                        list.sort(compare);
-
-                    }
-//                    console.log(JSON.stringify(childList));
-                    orderAccountsList(childList);
                     return childList;
                 }
 
@@ -196,7 +145,7 @@
                         });
                     },
                     postProcess: function (event, data) {
-                        data.result = convertData(data.response.data);
+                        data.result = convertData(data.response.data.data);
                     },
                     table: {
                         indentation: 35,
@@ -207,13 +156,10 @@
                     renderColumns: function (event, data) {
                         var node = data.node;
                         var $tdList = $(node.tr).find(">td");
-                        $tdList.eq(0).text(node.data.accountCode);
-                        $tdList.eq(2).text(numeral(node.data.debit).format('(0,0.00)'));
-                        $tdList.eq(3).text(numeral(node.data.credit).format('(0,0.00)'));
-                        $tdList.eq(4).text(numeral(node.data.balance).format('(0,0.00)'));
-                        $tdList.eq(5).text(node.data.accountgroup.name);
-                        $tdList.eq(6).text(node.data.accountgroup.type.name);
-                        $tdList.eq(7).addClass("text-center").text(node.key);
+                        $tdList.eq(0).text(node.key);
+                        $tdList.eq(0).css({"word-break": "break-all"});
+                        $tdList.eq(2).text(numeral(node.data.size).format('0.00 a'));
+                        $tdList.eq(3).text(!!node.folder);
                     },
                     keydown: function (event, data) {
                         if (event.which === 32) {
