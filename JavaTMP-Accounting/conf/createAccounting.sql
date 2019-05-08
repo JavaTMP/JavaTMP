@@ -417,7 +417,11 @@ CREATE TABLE serviceAccount (
 CREATE OR REPLACE VIEW transactionEntry AS
 select entries.*,
 SUM(entryAmount) OVER(PARTITION BY accountId ORDER BY entryDate, id
-) AS accountBalance
+) AS accountBalance,
+SUM(entryAmount) OVER(PARTITION BY moduleId ORDER BY entryDate, id
+) AS moduleIdBalance,
+SUM(entryAmount) OVER(PARTITION BY moduleId,moduleTypeId,moduleRefId ORDER BY entryDate, id
+) AS entityBalance
 from (
 select acctTrans.id as id, trans.id as transactionId, acctTrans.moduleId as moduleId, acctTrans.moduleTypeId as moduleTypeId,
 acctTrans.moduleRefId as moduleRefId, acctTrans.accountId as accountId, acctTrans.description as description, acctTrans.status as status,
