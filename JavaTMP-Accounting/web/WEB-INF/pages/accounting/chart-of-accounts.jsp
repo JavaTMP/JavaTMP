@@ -103,6 +103,12 @@
             $(javatmp.settings.defaultOutputSelector).one(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
 
+
+                var updateUserButton = $("#UserList-UpdateSelectedUserId");
+                var deleteUserButton = $("#UserList-DeleteSelectedUserId");
+                var viewAccountLedgerPageButton = $("#viewAccountLedgerPageButton");
+
+
                 var accountGroupMap = {};
                 var accountGroupSelect = $("select[name=accountGroup]");
                 $("option", accountGroupSelect).map(function (i, item) {
@@ -288,6 +294,10 @@
                             }
                         }
                     }
+                }).on('dblclick', function (e) {
+                    var node = $.ui.fancytree.getNode(e.target);
+//                    alert(JSON.stringify(node.data));
+                    $(viewAccountLedgerPageButton).trigger("click");
                 });
                 var addNewUserPopupButton = $("#UserList-AddNewUserPopupId");
                 addNewUserPopupButton.on("click", function (event) {
@@ -306,7 +316,7 @@
                         }
                     });
                 });
-                var updateUserButton = $("#UserList-UpdateSelectedUserId");
+
                 updateUserButton.on("click", function (event) {
                     //                var selectedCount = table.rows({selected: true}).count();
                     var selectedNode = chartOfAccountTree.fancytree('getTree').getActiveNode();
@@ -329,7 +339,6 @@
                         BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
                     }
                 });
-                var deleteUserButton = $("#UserList-DeleteSelectedUserId");
                 deleteUserButton.on("click", function (event) {
                     var selectedNode = chartOfAccountTree.fancytree('getTree').getActiveNode();
                     // for checkbox or select
@@ -353,7 +362,6 @@
                         BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
                     }
                 });
-                var viewAccountLedgerPageButton = $("#viewAccountLedgerPageButton");
                 viewAccountLedgerPageButton.on("click", function (event) {
                     //                var selectedCount = table.rows({selected: true}).count();
                     var selectedNode = chartOfAccountTree.fancytree('getTree').getActiveNode();
