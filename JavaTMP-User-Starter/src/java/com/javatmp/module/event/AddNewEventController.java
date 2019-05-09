@@ -31,11 +31,11 @@ public class AddNewEventController extends HttpServlet {
             ResponseMessage responseMessage = new ResponseMessage();
             responseMessage.setOverAllStatus(true);
 
-            DiaryEvent event = new DiaryEvent();
+            Event event = new Event();
             MvcHelper.populateBeanByRequestParameters(request, event);
             logger.info("Event read from request prior to update [" + MvcHelper.toString(event) + "]");
 
-            List<DiaryEvent> events = sf.getDiaryEventService().getDiaryEvents();
+            List<Event> events = sf.getEventService().getEvents();
             events.add(event);
             event.setId(Long.valueOf(events.size()));
             responseMessage.setOverAllStatus(true);

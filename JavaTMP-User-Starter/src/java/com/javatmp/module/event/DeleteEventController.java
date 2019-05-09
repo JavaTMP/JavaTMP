@@ -26,13 +26,13 @@ public class DeleteEventController extends HttpServlet {
         ResponseMessage responseMessage = new ResponseMessage();
         responseMessage.setOverAllStatus(true);
 
-        DiaryEvent event = (DiaryEvent) MvcHelper.readObjectFromRequest(request, DiaryEvent.class);
+        Event event = (Event) MvcHelper.readObjectFromRequest(request, Event.class);
         logger.info("Event read from request [" + MvcHelper.toString(event) + "]");
         boolean found = false;
         String msg = "Event id [" + event.getId() + "] not found";
-        List<DiaryEvent> events = sf.getDiaryEventService().getDiaryEvents();
+        List<Event> events = sf.getEventService().getEvents();
         for (int i = events.size() - 1; i >= 0; i--) {
-            DiaryEvent t = events.get(i);
+            Event t = events.get(i);
             if (t.getId().equals(event.getId())) {
                 found = true;
                 msg = "Event Id [" + event.getId() + "] Deleted Successfully";

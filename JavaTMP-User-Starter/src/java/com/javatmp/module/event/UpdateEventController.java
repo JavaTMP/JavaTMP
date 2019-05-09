@@ -26,19 +26,19 @@ public class UpdateEventController extends HttpServlet {
         ResponseMessage responseMessage = new ResponseMessage();
         responseMessage.setOverAllStatus(true);
 
-        DiaryEvent event = (DiaryEvent) MvcHelper.readObjectFromRequest(request, DiaryEvent.class);
+        Event event = (Event) MvcHelper.readObjectFromRequest(request, Event.class);
         logger.info("Event read from request prior to update [" + MvcHelper.toString(event) + "]");
         boolean found = false;
         String msg = "Event id [" + event.getId() + "] not found";
-        List<DiaryEvent> events = sf.getDiaryEventService().getDiaryEvents();
-        for (DiaryEvent t : events) {
+        List<Event> events = sf.getEventService().getEvents();
+        for (Event t : events) {
             if (t.getId().equals(event.getId())) {
                 found = true;
                 msg = "Event Id [" + event.getId() + "] Updated Successfully";
                 logger.info("Object event found [" + event.getId() + "]");
                 t.setTitle(event.getTitle());
-                t.setStart(event.getStart());
-                t.setEnd(event.getEnd());
+                t.setStartDate(event.getStartDate());
+                t.setEndDate(event.getEndDate());
             }
         }
         responseMessage.setOverAllStatus(found);

@@ -19,7 +19,7 @@ public class PopulateFakeDatabaseController extends HttpServlet {
             throws ServletException, IOException {
         ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
 
-        sf.getDiaryEventService().initialiseDiary();
+        sf.getEventService().initialiseDiary();
 
         ResponseMessage responseMessage = new ResponseMessage();
         responseMessage.setOverAllStatus(true);

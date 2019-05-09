@@ -18,7 +18,6 @@ public class DBFaker {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
 
-    private List<DiaryEvent> diaryEvents = new LinkedList<>();
     private List<Document> documents = new LinkedList<>();
     private List<Message> messages = new LinkedList<>();
     private List<User> users = new LinkedList<>();
@@ -34,23 +33,11 @@ public class DBFaker {
         this.generateContent();
     }
 
-    public synchronized void addDiaryEvent(DiaryEvent event) {
-        this.getDiaryEvents().add(event);
-        event.setId(Long.valueOf(this.diaryEvents.size()));
-    }
-
     /**
      * @return the contents
      */
     public List<Content> getContents() {
         return contents;
-    }
-
-    /**
-     * @return the diaryEvents
-     */
-    public List<DiaryEvent> getDiaryEvents() {
-        return diaryEvents;
     }
 
     /**

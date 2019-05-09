@@ -24,10 +24,10 @@ public class ManageEventController extends HttpServlet {
         try {
             ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
 
-            DiaryEvent event = new DiaryEvent();
+            Event event = new Event();
             MvcHelper.populateBeanByRequestParameters(request, event);
             logger.info("Event read from request [" + MvcHelper.toString(event) + "]");
-            event = sf.getDiaryEventService().getEventById(event);
+            event = sf.getEventService().getEventById(event);
             logger.info("Event read from Database [" + MvcHelper.toString(event) + "]");
             request.setAttribute("event", event);
             request.getRequestDispatcher("/WEB-INF/pages/event/ajax/manage-event.jsp").forward(request, response);

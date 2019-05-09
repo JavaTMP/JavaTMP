@@ -107,7 +107,18 @@
                                 timezone: timezone
                             },
                             success: function (message) {
-                                callback(message.data);
+                                var events = [];
+                                if (!!message.data) {
+                                    $.map(message.data, function (r) {
+                                        events.push({
+                                            id: r.id,
+                                            title: r.title,
+                                            start: r.startDate,
+                                            end: r.endDate
+                                        });
+                                    });
+                                }
+                                callback(events);
                             }
                         });
                     },

@@ -19,7 +19,7 @@ public class DiaryEventsListController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
-        List<DiaryEvent> diaryEvents = sf.getDiaryEventService().getDiaryEvents();
+        List<Event> diaryEvents = sf.getEventService().getEvents();
         ResponseMessage message = new ResponseMessage();
         message.setOverAllStatus(true);
         message.setData(diaryEvents);

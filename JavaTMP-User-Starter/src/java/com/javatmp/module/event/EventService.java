@@ -7,61 +7,63 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Logger;
 
-public class DiaryEventService {
+public class EventService {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
-    private DBFaker dBFaker;
     final JpaDaoHelper jpaDaoHelper;
 
-    public DiaryEventService(final DBFaker dBFaker, final JpaDaoHelper jpaDaoHelper) {
-        this.dBFaker = dBFaker;
+    public EventService(final JpaDaoHelper jpaDaoHelper) {
         this.jpaDaoHelper = jpaDaoHelper;
 
     }
 
-    public List<DiaryEvent> getDiaryEvents() {
-        return dBFaker.getDiaryEvents();
+    public Long getAllEventCount() {
+        return this.jpaDaoHelper.getAllCount(Event.class);
+    }
+
+    public synchronized void addDiaryEvent(Event event) {
+        this.jpaDaoHelper.create(event);
+    }
+
+    public List<Event> getEvents() {
+        return this.jpaDaoHelper.findAll(Event.class);
     }
 
     public void initialiseDiary() {
         for (int i = 0; i < 50; i++) {
-            DiaryEvent item = new DiaryEvent();
-            item.setId(DBFaker.getNextCounter());
+            Event item = new Event();
             item.setStatus(ThreadLocalRandom.current().nextInt(0, 3));
             if (i <= 5) // create ten appointments for todays date
             {
-                item.setStart(GetRandomAppointmentTime(false, true));
+                item.setStartDate(GetRandomAppointmentTime(false, true));
             } else {  // rest of appointments on previous and future dates
                 if (i % 2 == 0) {
-                    item.setStart(GetRandomAppointmentTime(true, false));
+                    item.setStartDate(GetRandomAppointmentTime(true, false));
                 } // flip/flop between date ahead of today and behind today
                 else {
-                    item.setStart(GetRandomAppointmentTime(false, false));
+                    item.setStartDate(GetRandomAppointmentTime(false, false));
                 }
             }
 
             Calendar end = Calendar.getInstance();
-            logger.info("Start [" + item.getStart() + "]");
-            end.setTime(item.getStart());
+            logger.info("Start [" + item.getStartDate() + "]");
+            end.setTime(item.getStartDate());
             int add = (ThreadLocalRandom.current().nextInt(4) + 1) * 15;
 
             logger.info("end minute [" + end.get(Calendar.MINUTE) + "] added [" + add + "]");
             end.add(Calendar.MINUTE, add);
-            item.setEnd(end.getTime());
-            logger.info("End [" + item.getEnd() + "]");
-            this.dBFaker.addDiaryEvent(item);
+            item.setEndDate(end.getTime());
+            logger.info("End [" + item.getEndDate() + "]");
+            item.setCreationDate(new Date());
+            item.setTitle("Event Title");
+            item.setDescription("Event Description");
+            this.addDiaryEvent(item);
             item.setTitle("Appt: " + item.getId());
         }
     }
 
-    public DiaryEvent getEventById(DiaryEvent event) {
-        List<DiaryEvent> events = dBFaker.getDiaryEvents();
-        for (DiaryEvent t : events) {
-            if (t.getId().equals(event.getId())) {
-                return t;
-            }
-        }
-        return null;
+    public Event getEventById(Event event) {
+        return this.jpaDaoHelper.read(Event.class, event);
     }
 
     public static Date GetRandomAppointmentTime(boolean goBackwards, boolean today) {

@@ -10,7 +10,7 @@ import com.javatmp.module.user.UserService;
 import com.javatmp.module.stats.UserStatsService;
 import com.javatmp.module.dms.DocumentService;
 import com.javatmp.module.event.DBFaker;
-import com.javatmp.module.event.DiaryEventService;
+import com.javatmp.module.event.EventService;
 import com.javatmp.module.message.MessageService;
 import java.util.Date;
 import java.util.logging.Logger;
@@ -28,7 +28,7 @@ public class ServicesFactory {
     private final DocumentService documentService;
     private final UserStatsService userStatsService;
     private final ActivityService activityService;
-    private final DiaryEventService diaryEventService;
+    private final EventService eventService;
     private final MessageService messageService;
     private final ContentService contentService;
 
@@ -44,7 +44,7 @@ public class ServicesFactory {
         this.userService = new UserService(this.dBFaker, getJpaDaoHelper());
         this.userStatsService = new UserStatsService(getJpaDaoHelper());
         this.activityService = new ActivityService(getJpaDaoHelper());
-        this.diaryEventService = new DiaryEventService(this.dBFaker, getJpaDaoHelper());
+        this.eventService = new EventService(getJpaDaoHelper());
         this.messageService = new MessageService(dBFaker, userService);
         this.contentService = new ContentService(dBFaker);
         this.logger.info("*** End ServicesFactory Constructor @ [" + new Date() + "]");
@@ -105,10 +105,10 @@ public class ServicesFactory {
     }
 
     /**
-     * @return the diaryEventService
+     * @return the eventService
      */
-    public DiaryEventService getDiaryEventService() {
-        return diaryEventService;
+    public EventService getEventService() {
+        return eventService;
     }
 
     /**

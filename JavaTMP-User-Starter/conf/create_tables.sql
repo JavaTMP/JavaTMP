@@ -115,3 +115,17 @@ CREATE TABLE `activity` (
     CONSTRAINT activity_userId_fk FOREIGN KEY (userId) REFERENCES `user` (id),
     CONSTRAINT activity_parentActId_fk FOREIGN KEY (parentActId) REFERENCES `activity` (id)
 ) ENGINE=InnoDB;
+
+
+CREATE TABLE `event` (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    creationDate TIMESTAMP NOT NULL,
+    createdBy BIGINT,
+    title varchar(255),
+    description TEXT,
+    startDate DATETIME,
+    endDate  DATETIME,
+    status TINYINT NOT NULL,
+    CONSTRAINT event_id_pk PRIMARY KEY (id),
+    CONSTRAINT event_createdBy_fk FOREIGN KEY (createdBy) REFERENCES `user` (id)
+) ENGINE=InnoDB;
