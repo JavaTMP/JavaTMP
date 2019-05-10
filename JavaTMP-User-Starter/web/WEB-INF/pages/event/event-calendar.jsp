@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content grid-gutter-padding">
     <h4 class="my-3">
-        Diary Event Board
+        Event Calendar
     </h4>
     <hr/>
     <div class="row">

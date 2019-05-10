@@ -230,12 +230,12 @@
                             <li>
                                 <a class="has-arrow" href="#">
                                     <i class="fa fa-lg fa-fw fa-cogs"></i>
-                                    Diary Event Management
+                                    Event Management
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/event/jQuery-fullcalendar-diary-system">
-                                            Diary Event Board
+                                        <a href="${pageContext.request.contextPath}/pages/event/event-calendar">
+                                            Event Calendar
                                         </a>
                                     </li>
                                 </ul>

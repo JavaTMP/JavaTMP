@@ -63,7 +63,7 @@ public class EventService {
     }
 
     public Event getEventById(Event event) {
-        return this.jpaDaoHelper.read(Event.class, event);
+        return this.jpaDaoHelper.read(Event.class, event.getId());
     }
 
     public static Date GetRandomAppointmentTime(boolean goBackwards, boolean today) {

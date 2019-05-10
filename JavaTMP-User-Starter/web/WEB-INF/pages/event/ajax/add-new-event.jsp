@@ -44,7 +44,7 @@
                 var eventForm = $('#new-event-form');
                 var validator = null;
                 var alertError = null;
-                modal.updateTitle("Add New Diary Event");
+                modal.updateTitle("Add New Event");
                 modal.updateClosable(true);
                 modal.updateSize("modal-lg");
                 modal.addButton({
