@@ -19,7 +19,6 @@ public class DBFaker {
     private final Logger logger = Logger.getLogger(getClass().getName());
 
     private List<Document> documents = new LinkedList<>();
-    private List<User> users = new LinkedList<>();
     private List<Content> contents = new LinkedList<>();
 
     private static Long counter = 0L;
@@ -93,17 +92,4 @@ public class DBFaker {
         }
     }
 
-    /**
-     * @return the users
-     */
-    public List<User> getUsers() {
-        return users;
-    }
-
-    /**
-     * @param users the users to set
-     */
-    public void setUsers(List<User> users) {
-        this.users = users;
-    }
 }

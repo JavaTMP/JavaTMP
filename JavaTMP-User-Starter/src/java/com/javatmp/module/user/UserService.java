@@ -400,6 +400,20 @@ public class UserService {
 
             // where clouse:
             Predicate predicate = cb.conjunction();
+            Predicate globalPredicate;
+            // support global search:
+            if (tableRequest.getSearch() != null && tableRequest.getSearch().getValue() != null
+                    && !tableRequest.getSearch().getValue().trim().equals("")) {
+                logger.info("*** isGlobalSearch starting ***");
+                String query = tableRequest.getSearch().getValue().trim().toLowerCase();
+                query = "%" + query + "%";
+                Predicate p1 = cb.like(cb.lower(from.get(User_.userName)), query);
+                Predicate p2 = cb.like(cb.lower(from.get(User_.firstName)), query);
+                Predicate p3 = cb.like(cb.lower(from.get(User_.lastName)), query);
+                globalPredicate = cb.or(p1, p2, p3);
+                predicate = cb.or(globalPredicate);
+            }
+
             for (DataTableColumnSpecs column : tableRequest.getColumns()) {
                 String columnName = column.getName();
                 String columnSearchValue = column.getSearch().getValue().trim();

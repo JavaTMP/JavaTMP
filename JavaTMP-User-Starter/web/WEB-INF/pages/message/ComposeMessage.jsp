@@ -151,6 +151,10 @@
                                     {
                                         "name": "toUserId", "data": "toUserId",
                                         search: {"value": ""}
+                                    },
+                                    {
+                                        "name": "toUserId", "data": "toUserId",
+                                        search: {"value": ""}
                                     }
                                 ]
                             });
