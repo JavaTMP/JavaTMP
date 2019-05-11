@@ -32,9 +32,9 @@ import java.util.logging.Logger;
  *
  * @author JavaTMP
  */
-public class TestingDynamicSelectMessages {
+public class TestingReadMessageById {
 
-    private static final Logger logger = Logger.getLogger(TestingDynamicSelectMessages.class.getClass().getName());
+    private static final Logger logger = Logger.getLogger(TestingReadMessageById.class.getClass().getName());
 
     /**
      * @param args the command line arguments
@@ -43,7 +43,6 @@ public class TestingDynamicSelectMessages {
         JpaDaoHelper jpaDaoHelper;
         UserService userService;
         jpaDaoHelper = new JpaDaoHelper("AppPU");
-        DBFaker dBFaker = new DBFaker();
         userService = new UserService(jpaDaoHelper);
         MessageService messageService = new MessageService(jpaDaoHelper, userService);
 //        messageService.generateMessages();
@@ -53,8 +52,7 @@ public class TestingDynamicSelectMessages {
                 .registerTypeAdapter(OrderDir.class, new OrderDirTypeAdapter())
                 .create();
 
-        String msgReq = "{\"draw\":2,\"columns\":[{\"data\":\"messageId\",\"name\":\"\",\"searchable\":true,\"orderable\":true,\"search\":{\"value\":\"2\",\"regex\":true}},{\"data\":\"messageTitle\",\"name\":\"\",\"searchable\":true,\"orderable\":true,\"search\":{\"value\":\"\",\"regex\":false}},{\"data\":\"creationDate\",\"name\":\"\",\"searchable\":true,\"orderable\":true,\"search\":{\"value\":\"\",\"regex\":false}},{\"data\":\"fromUserId\",\"name\":\"\",\"searchable\":true,\"orderable\":true,\"search\":{\"value\":\"\",\"regex\":false}},{\"data\":\"toUserId\",\"name\":\"\",\"searchable\":true,\"orderable\":true,\"search\":{\"value\":\"\",\"regex\":false}}],\"order\":[{\"column\":0,\"dir\":\"asc\"}],\"start\":0,\"length\":10,\"search\":{\"value\":\"\",\"regex\":false},\"_ajaxGlobalBlockUI\":false}";
-        msgReq = "{\"_ajaxGlobalBlockUI\":false,\"start\":0,\"length\":20,\"order\":[{\"column\":0,\"dir\":\"desc\"}],\"columns\":[{\"data\":\"creationDate\",\"name\":\"creationDate\",\"search\":{\"value\":\"2019-05-11T20:53:14.364+04:00\",\"operatorType\":\"olderThan\"}},{\"data\":\"toUserId\",\"name\":\"toUserId\",\"search\":{\"value\":\"1\"}}]}";
+        String msgReq = "{\"_ajaxGlobalBlockUI\":false,\"start\":0,\"length\":10,\"order\":[{\"column\":0,\"dir\":\"desc\"}],\"columns\":[{\"data\":\"creationDate\",\"name\":\"creationDate\",\"search\":{\"value\":\"2019-05-11T20:53:14.364+04:00\",\"operatorType\":\"olderThan\"}},{\"data\":\"toUserId\",\"name\":\"toUserId\",\"search\":{\"value\":\"1\"}}]}";
         DataTableRequest<Message> msgRequest = gson.fromJson(msgReq, DataTableRequest.class);
 
         logger.info(msgRequest.getColumns().toString());
@@ -64,18 +62,8 @@ public class TestingDynamicSelectMessages {
 //        System.out.println(MvcHelper.deepToString(msgs));
         logger.info(msgs.getRecordsTotal().toString());
         for (Message m : msgs.getData()) {
-            logger.info(m.getCreationDate().toString());
-        }
-
-        Map<Long, User> users = new HashMap<Long, User>();
-        for (Message msg : msgs.getData()) {
-            User msgUser = null;
-            if ((msgUser = users.get(msg.getFromUserId())) == null) {
-                msgUser = new User(msg.getFromUserId());
-                msgUser = userService.readBasicUserById(msgUser);
-                users.put(msgUser.getId(), msgUser);
-            }
-            msg.setFromUser(msgUser);
+            Message newMsg = messageService.readMessageById(m);
+            logger.info(MvcHelper.toString(newMsg));
         }
 
     }

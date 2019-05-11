@@ -80,6 +80,34 @@ public class UserService {
         }
     }
 
+    public User readBasicUserById(User user) {
+
+        EntityManager em = null;
+        try {
+            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<User> cq = cb.createQuery(User.class);
+
+            Root<User> from = cq.from(User.class);
+            Join<User, Document> joinDocument = from.join(User_.profilePicDocument, JoinType.LEFT);
+            Join<User, Country> joinCountry = from.join(User_.country, JoinType.LEFT);
+
+            cq.multiselect(from.get(User_.id), from.get(User_.userName), from.get("firstName"),
+                    from.get("lastName"), from.get("status"), from.get("birthDate"), from.get("creationDate"),
+                    from.get("email"), from.get("lang"), from.get("theme"), from.get("countryId"), from.get("address"),
+                    from.get("timezone"), from.get("profilePicDocumentId"), from.get("profilePicDocument").get("randomHash")
+            );
+            cq.where(cb.equal(from.get(User_.id), user.getId()));
+            TypedQuery<User> query = em.createQuery(cq);
+            user = query.getSingleResult();
+            return user;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
     public User readUserByUsername(User user) {
         User dbUser = null;
         EntityManager em = null;

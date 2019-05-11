@@ -5,6 +5,9 @@ import com.javatmp.mvc.domain.table.DataTableRequest;
 import com.javatmp.mvc.domain.table.DataTableResults;
 import com.javatmp.mvc.domain.table.Order;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
@@ -260,7 +263,7 @@ public class JpaDaoHelper {
         return retLists;
     }
 
-    public <T> DataTableResults<T> retrievePageRequestDetails(DataTableRequest<T> page) {
+    public <T> DataTableResults<T> retrievePageRequestDetails(DataTableRequest<T> page) throws ParseException {
 
         EntityManager em = null;
         List retList = null;
@@ -297,8 +300,23 @@ public class JpaDaoHelper {
 
             if (page.getColumns() != null) {
                 for (DataTableColumnSpecs column : page.getColumns()) {
-                    if (column.getSearch() != null) {
-                        predicate = cb.and(predicate, cb.equal(from.get(column.getName()), column.getSearch().getValue()));
+                    if (column.getSearch() != null && column.getSearch().getValue() != null
+                            && !column.getSearch().getValue().trim().equals("")) {
+                        if ("olderThan".equals(column.getSearch().getOperatorType())) {
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+                            Date searchDate = sdf.parse(column.getSearch().getValue());
+                            predicate = cb.and(predicate, cb.lessThan(from.get(column.getName()), (Comparable) searchDate));
+                        } else if ("newerThan".equals(column.getSearch().getOperatorType())) {
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+                            Date searchDate = sdf.parse(column.getSearch().getValue());
+                            predicate = cb.and(predicate, cb.greaterThan(from.get(column.getName()), (Comparable) searchDate));
+                        } else if ("equalThan".equals(column.getSearch().getOperatorType())) {
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+                            Date searchDate = sdf.parse(column.getSearch().getValue());
+                            predicate = cb.and(predicate, cb.equal(from.get(column.getName()), (Comparable) searchDate));
+                        } else {
+                            predicate = cb.and(predicate, cb.equal(from.get(column.getName()), column.getSearch().getValue()));
+                        }
                     }
                 }
             }

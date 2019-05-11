@@ -187,7 +187,7 @@
                                     start: 0,
                                     length: recordPerPage,
                                     order: [
-                                        {"column": 0, "dir": "asc"}
+                                        {"column": 0, "dir": "desc"}
                                     ],
                                     columns: [{
                                             "name": "creationDate", "data": "creationDate",
@@ -260,7 +260,7 @@
                             start: 0,
                             length: recordPerPage,
                             order: [
-                                {"column": 0, "dir": "asc"}
+                                {"column": 0, "dir": "desc"}
                             ],
                             columns: [{
                                     "name": "creationDate", "data": "creationDate",
