@@ -41,11 +41,11 @@ public class ServicesFactory {
         this.languageService = new LanguageService(getJpaDaoHelper());
         this.countryService = new CountryService(getJpaDaoHelper());
         this.documentService = new DocumentService(dBFaker, getJpaDaoHelper());
-        this.userService = new UserService(this.dBFaker, getJpaDaoHelper());
+        this.userService = new UserService(getJpaDaoHelper());
         this.userStatsService = new UserStatsService(getJpaDaoHelper());
         this.activityService = new ActivityService(getJpaDaoHelper());
         this.eventService = new EventService(getJpaDaoHelper());
-        this.messageService = new MessageService(dBFaker, userService);
+        this.messageService = new MessageService(this.jpaDaoHelper, userService);
         this.contentService = new ContentService(dBFaker);
         this.logger.info("*** End ServicesFactory Constructor @ [" + new Date() + "]");
     }

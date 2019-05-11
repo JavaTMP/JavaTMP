@@ -3,20 +3,40 @@ package com.javatmp.module.message;
 import com.javatmp.module.user.User;
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
+@Entity
+@Table(name = "message")
 public class Message implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long messageId;
     private String messageTitle;
     private String messageContentText;
     private Date creationDate;
     private Long fromUserId;
     private Long toUserId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(insertable = false, updatable = false, name = "fromUserId")
     private User fromUser;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(insertable = false, updatable = false, name = "toUserId")
     private User toUser;
     private Short messageStatus;
 
+    @Transient
     private Long[] messageTos;
 
     public Message() {

@@ -39,68 +39,17 @@ public class UserService {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
     private final JpaDaoHelper jpaDaoHelper;
-    private DBFaker dBFaker;
 
-    public UserService(DBFaker dBFaker, JpaDaoHelper jpaDaoHelper) {
+    public UserService(JpaDaoHelper jpaDaoHelper) {
         this.jpaDaoHelper = jpaDaoHelper;
-        this.dBFaker = dBFaker;
-        this.dBFaker.setUsers(this.jpaDaoHelper.findAll(User.class));
-        this.dBFaker.generateMessages();
+    }
+
+    public List<User> getUsers() {
+        return this.jpaDaoHelper.findAll(User.class);
     }
 
     public User readUserByUserId(User user) {
-        for (User u : this.dBFaker.getUsers()) {
-            if (user.getId().equals(u.getId())) {
-                return u;
-            }
-        }
-        return null;
-    }
-
-    private void generateMessages() {
-
-        Random rand = new Random();
-        for (int i = 0; i < this.dBFaker.getUsers().size(); i++) {
-            Long from = this.dBFaker.getUsers().get(i).getId();
-            // get random to:
-            for (int j = 0; j < this.dBFaker.getUsers().size(); j++) {
-                int randomTo = 0;
-                while ((randomTo = rand.nextInt(this.dBFaker.getUsers().size())) == i);
-//                logger.info("i[" + i + "] => random to is [" + randomTo + "]");
-                Long to = this.dBFaker.getUsers().get(randomTo).getId();
-                Message message = new Message();
-                message.setMessageId(DBFaker.getNextCounter());
-                message.setFromUserId(from);
-                message.setToUserId(to);
-                message.setMessageStatus((short) 1);
-                message.setMessageTitle("Fake Message number " + message.getMessageId());
-
-                message.setMessageContentText("<p>A fake data summary text to show you number " + message.getMessageId() + " geneated from fake database, Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>");
-
-                Calendar calendar = Calendar.getInstance();
-                int randomDayOfMonth = ThreadLocalRandom.current().nextInt(31);
-                calendar.add(Calendar.DAY_OF_MONTH, randomDayOfMonth * -1);
-                if (randomDayOfMonth != 0) {
-                    calendar.set(Calendar.HOUR_OF_DAY, ThreadLocalRandom.current().nextInt(24));
-                    calendar.set(Calendar.MINUTE, ThreadLocalRandom.current().nextInt(60));
-                    calendar.set(Calendar.SECOND, ThreadLocalRandom.current().nextInt(60));
-                    calendar.set(Calendar.MILLISECOND, ThreadLocalRandom.current().nextInt(1000));
-                } else {
-                    int value = 0;
-                    value = calendar.get(Calendar.HOUR_OF_DAY);
-                    calendar.set(Calendar.HOUR_OF_DAY, ThreadLocalRandom.current().nextInt(value == 0 ? 1 : value));
-                    value = calendar.get(Calendar.MINUTE);
-                    calendar.set(Calendar.MINUTE, ThreadLocalRandom.current().nextInt(value == 0 ? 1 : value));
-                    value = calendar.get(Calendar.SECOND);
-                    calendar.set(Calendar.SECOND, ThreadLocalRandom.current().nextInt(value == 0 ? 1 : value));
-                    value = calendar.get(Calendar.MILLISECOND);
-                    calendar.set(Calendar.MILLISECOND, ThreadLocalRandom.current().nextInt(value == 0 ? 1 : value));
-                }
-
-                message.setCreationDate(calendar.getTime());
-                this.dBFaker.getMessages().add(message);
-            }
-        }
+        return this.jpaDaoHelper.read(User.class, user.getId());
     }
 
     public User readCompleteUserById(User user) {

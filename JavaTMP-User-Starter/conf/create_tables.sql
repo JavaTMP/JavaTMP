@@ -129,3 +129,16 @@ CREATE TABLE `event` (
     CONSTRAINT event_id_pk PRIMARY KEY (id),
     CONSTRAINT event_createdBy_fk FOREIGN KEY (createdBy) REFERENCES `user` (id)
 ) ENGINE=InnoDB;
+
+CREATE TABLE `message` (
+    messageId BIGINT NOT NULL AUTO_INCREMENT,
+    messageTitle varchar(255),
+    messageContentText TEXT,
+    creationDate TIMESTAMP NOT NULL,
+    fromUserId BIGINT,
+    toUserId BIGINT,
+    messageStatus TINYINT NOT NULL,
+    CONSTRAINT message_id_pk PRIMARY KEY (messageId),
+    CONSTRAINT message_fromUserId_fk FOREIGN KEY (fromUserId) REFERENCES `user` (id),
+    CONSTRAINT message_toUserId_fk FOREIGN KEY (toUserId) REFERENCES `user` (id)
+) ENGINE=InnoDB;

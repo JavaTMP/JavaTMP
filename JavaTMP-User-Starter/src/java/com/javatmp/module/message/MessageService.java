@@ -9,7 +9,9 @@ import com.javatmp.mvc.domain.table.DataTableResults;
 import com.javatmp.mvc.domain.table.Order;
 import com.javatmp.mvc.domain.table.Search;
 import com.javatmp.mvc.MvcHelper;
+import com.javatmp.util.JpaDaoHelper;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -17,29 +19,31 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Logger;
 
 public class MessageService {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
-    private final DBFaker dBFaker;
+    private final JpaDaoHelper jpaDaoHelper;
     private UserService userService;
 
-    public MessageService(DBFaker dBFaker, UserService userService) {
-        this.dBFaker = dBFaker;
+    public MessageService(JpaDaoHelper jpaDaoHelper, UserService userService) {
+        this.jpaDaoHelper = jpaDaoHelper;
         this.userService = userService;
     }
 
     public Long getAllCount() {
-        return Long.valueOf(this.dBFaker.getMessages().size());
+        return this.jpaDaoHelper.getAllCount(Message.class);
     }
 
-    public List<Message> getContents() {
-        return this.dBFaker.getMessages();
+    public List<Message> getMessages() {
+        return this.jpaDaoHelper.findAll(Message.class);
     }
 
     public Message readMessageById(Message message) {
-        List<Message> db = this.dBFaker.getMessages();
+        List<Message> db = this.getMessages();
         for (Message row : db) {
             if (row.getMessageId().equals(message.getMessageId())) {
                 Long fromUserId = row.getFromUserId();
@@ -66,14 +70,12 @@ public class MessageService {
     }
 
     public Message createMessage(Message message) {
-        message.setMessageId(DBFaker.getNextCounter());
-        this.dBFaker.getMessages().add(message);
-        return message;
+        return this.jpaDaoHelper.create(message);
     }
 
     public DataTableResults<Message> listMessages(DataTableRequest<Message> tableRequest) {
         List<Message> retList = new LinkedList<>();
-        List<Message> database = this.dBFaker.getMessages();
+        List<Message> database = this.getMessages();
         List<Message> db = null;
         List<Order> orders = tableRequest.getOrder();
         logger.info("Order requested [" + orders + "]");
@@ -89,7 +91,7 @@ public class MessageService {
                 }
             }
         } else {
-            db = new LinkedList<>(this.dBFaker.getMessages());
+            db = new LinkedList<>(this.getMessages());
         }
 
         for (DataTableColumnSpecs s : tableRequest.getColumns()) {
@@ -274,6 +276,57 @@ public class MessageService {
         dataTableResult.setDraw(tableRequest.getDraw());
 
         return dataTableResult;
+    }
+    private static Long counter = 0L;
+
+    public static synchronized Long getNextCounter() {
+        return ++counter;
+    }
+
+    public void generateMessages() {
+
+        Random rand = new Random();
+        List<User> users = this.userService.getUsers();
+        for (int i = 0; i < users.size(); i++) {
+            Long from = users.get(i).getId();
+            // get random to:
+            for (int j = 0; j < 250; j++) {
+                int randomTo = 0;
+                while ((randomTo = rand.nextInt(users.size())) == i);
+//                logger.info("i[" + i + "] => random to is [" + randomTo + "]");
+                Long to = users.get(randomTo).getId();
+                Message message = new Message();
+                message.setFromUserId(from);
+                message.setToUserId(to);
+                message.setMessageStatus((short) 1);
+                message.setMessageTitle("Fake Message number " + getNextCounter());
+
+                message.setMessageContentText("<p>A fake data summary text to show you number " + getNextCounter() + " geneated from fake database, Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>");
+
+                Calendar calendar = Calendar.getInstance();
+                int randomDayOfMonth = ThreadLocalRandom.current().nextInt(31);
+                calendar.add(Calendar.DAY_OF_MONTH, randomDayOfMonth * -1);
+                if (randomDayOfMonth != 0) {
+                    calendar.set(Calendar.HOUR_OF_DAY, ThreadLocalRandom.current().nextInt(24));
+                    calendar.set(Calendar.MINUTE, ThreadLocalRandom.current().nextInt(60));
+                    calendar.set(Calendar.SECOND, ThreadLocalRandom.current().nextInt(60));
+                    calendar.set(Calendar.MILLISECOND, ThreadLocalRandom.current().nextInt(1000));
+                } else {
+                    int value = 0;
+                    value = calendar.get(Calendar.HOUR_OF_DAY);
+                    calendar.set(Calendar.HOUR_OF_DAY, ThreadLocalRandom.current().nextInt(value == 0 ? 1 : value));
+                    value = calendar.get(Calendar.MINUTE);
+                    calendar.set(Calendar.MINUTE, ThreadLocalRandom.current().nextInt(value == 0 ? 1 : value));
+                    value = calendar.get(Calendar.SECOND);
+                    calendar.set(Calendar.SECOND, ThreadLocalRandom.current().nextInt(value == 0 ? 1 : value));
+                    value = calendar.get(Calendar.MILLISECOND);
+                    calendar.set(Calendar.MILLISECOND, ThreadLocalRandom.current().nextInt(value == 0 ? 1 : value));
+                }
+
+                message.setCreationDate(calendar.getTime());
+                this.createMessage(message);
+            }
+        }
     }
 
 }
