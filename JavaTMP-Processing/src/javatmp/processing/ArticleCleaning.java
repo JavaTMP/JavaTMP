@@ -23,7 +23,7 @@ public class ArticleCleaning {
     public static void main(String[] args) {
 
         String mainFolderName = "C:\\Users\\m_dar\\Downloads\\Process_Articles\\Articles1";
-        String secondFolderName = "C:\\Users\\m_dar\\Downloads\\Process_Articles\\Articles4";
+        String secondFolderName = "C:\\Users\\m_dar\\Downloads\\Process_Articles\\miscellaneous";
         File source = new File(mainFolderName);
         File input = new File(secondFolderName);
 //        List<File> sourceFiles = listFile(source);
@@ -36,7 +36,7 @@ public class ArticleCleaning {
 //                System.out.println(++indx + " = " + key + " = " + sourceFolders.get(key));
 //            }
 //        }
-
+        indx = 0;
         System.out.println("processing input");
 //        Map<String, LinkedList<File>> inputFolders = listFolderName(input);
 //        for (String key : inputFolders.keySet()) {
@@ -44,27 +44,79 @@ public class ArticleCleaning {
 //                System.out.println(++indx + " = " + key + " = " + inputFolders.get(key));
 //            }
 //        }
-
+        indx = 0;
         System.out.println("process sourceFiles ");
         Map<String, LinkedList<File>> sourceFiles = listFileName(source);
-        for (String key : sourceFiles.keySet()) {
-            if (sourceFiles.get(key).size() > 1) {
-//                System.out.println(++indx + " = " + key + " = " + sourceFiles.get(key));
-            }
-        }
-
+//        for (String key : sourceFiles.keySet()) {
+//            if (sourceFiles.get(key).size() > 1) {
+//                System.out.println(++indx + " = " + key);
+//                for (File f : sourceFiles.get(key)) {
+//                    System.out.println(f);
+//                }
+//            }
+//        }
+        indx = 0;
         System.out.println("process inputFile ");
         Map<String, LinkedList<File>> inputFiles = listFileName(input);
-        for (String key : inputFiles.keySet()) {
-            if (inputFiles.get(key).size() > 1) {
-//                System.out.println(++indx + " = " + key + " = " + inputFiles.get(key));
+//        for (String key : inputFiles.keySet()) {
+//            if (inputFiles.get(key).size() > 1) {
+//                System.out.println(++indx + " = " + key);
+//                for (File f : inputFiles.get(key)) {
+//                    System.out.println(f);
+//                }
+//            }
+//        }
+
+        // clean doc if exist txt:
+        int del = 0;
+        for (String str : inputFiles.keySet()) {
+            System.out.println(str);
+            for (File f : inputFiles.get(str)) {
+                if (f.exists() && f.getAbsolutePath().endsWith(".doc")) {
+                    System.out.println(f.getAbsolutePath());
+                    String ss = f.getAbsolutePath().replace(".doc", ".txt");
+                    File s = new File(ss);
+                    if (s.exists()) {
+                        System.out.println("Delete file : " + f.getAbsolutePath());
+                        f.delete();
+                        del++;
+                    }
+                }
             }
         }
-
+        System.out.println("delete count [" + del + "]");
+        if (true) {
+            return;
+        }
+        indx = 0;
         System.out.println("equality inputFile ");
         for (String key : inputFiles.keySet()) {
             if (sourceFiles.containsKey(key)) {
-                System.out.println(++indx + " = " + key + " = " + sourceFiles.get(key));
+                System.out.println(++indx + " = " + key);
+                for (File f : inputFiles.get(key)) {
+                    System.out.println(f);
+                    // check too for doc:
+                    String fStr = null;
+                    if (f.getAbsolutePath().endsWith(".txt")) {
+                        fStr = f.getAbsolutePath().replace(".txt", ".doc");
+                    } else if (f.getAbsolutePath().endsWith(".doc")) {
+                        fStr = f.getAbsolutePath().replace(".doc", ".txt");
+                    } else if (f.getAbsolutePath().endsWith(".rtf")) {
+                        fStr = f.getAbsolutePath().replace(".rtf", ".txt");
+                    } else {
+                        System.out.println("ERROR = " + f.getAbsolutePath());
+                    }
+                    File t = new File(fStr);
+                    if (t.exists()) {
+//                        t.delete();
+                        System.out.println("delete too file [" + t.getAbsolutePath() + "]");
+                    }
+//                    f.delete();
+                }
+                System.out.println("***********");
+                for (File f : sourceFiles.get(key)) {
+                    System.out.println(f);
+                }
             }
         }
 
