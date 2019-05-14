@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -40,12 +42,41 @@ public class UnzipFiles {
                 dir.delete();
             }
         }
-        if (true) {
-            return;
-        }
+//        if (true) {
+//            return;
+//        }
         //removeEmptyFolder(rootFolder);
         System.out.println("list more folders");
-        listMoreDir(rootFolder);
+        //listMoreDir(rootFolder);
+
+        // rename folders:
+        Pattern pattern = Pattern.compile("^(\\d+ |\\d+-|\\d+|-\\d+).*");
+        int count = 1;
+        for (File f : rootFolder.listFiles()) {
+            if (f.isDirectory()) {
+//                System.out.println("Rename [" + f.getAbsolutePath() + "]");
+                String folderName = f.getName();
+//                System.out.println("foldername [" + folderName + "]");
+                Matcher matcher = pattern.matcher(folderName);
+                if (matcher.matches()) {
+                    System.out.println("Rename [" + f.getAbsolutePath() + "]");
+                    String grp = matcher.group(1);
+                    System.out.println("replace [" + grp + "]");
+                    String newFolderName = folderName.replace(grp, "");
+                    System.out.println("new folder name [" + newFolderName + "]");
+
+                    File newDir = new File(f.getParent() + File.separator + newFolderName);
+                    int ind = 1;
+                    while (newDir.exists()) {
+                        newDir = new File(f.getParent() + File.separator + newFolderName + " " + (ind++));
+                    }
+                    System.out.println("exist [" + newDir.getAbsolutePath() + "]");
+                    f.renameTo(newDir);
+//                    break;
+                }
+
+            }
+        }
 
     }
 
