@@ -42,9 +42,19 @@ public class UnzipFiles {
                 dir.delete();
             }
         }
-//        if (true) {
-//            return;
-//        }
+
+        System.out.println("display folder");
+        for (File dir : dirs) {
+            if (dir.getName().contains("-")) {
+                System.out.println(dir.getAbsolutePath());
+                File newFile = new File(dir.getParent(), dir.getName().replaceAll("-", " ").trim());
+                System.out.println("new file [" + newFile.getAbsolutePath() + "]");
+                dir.renameTo(newFile);
+            }
+        }
+        if (true) {
+            return;
+        }
         //removeEmptyFolder(rootFolder);
         System.out.println("list more folders");
         //listMoreDir(rootFolder);

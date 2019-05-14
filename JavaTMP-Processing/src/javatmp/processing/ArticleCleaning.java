@@ -48,7 +48,7 @@ public class ArticleCleaning {
         indx = 0;
         System.out.println("process sourceFiles ");
         Map<String, LinkedList<File>> sourceFiles = null;
-        sourceFiles = listFileName(source);
+//        sourceFiles = listFileName(source);
 //        for (String key : sourceFiles.keySet()) {
 //            if (sourceFiles.get(key).size() > 1) {
 //                System.out.println(++indx + " = " + key);
@@ -58,7 +58,7 @@ public class ArticleCleaning {
 //            }
 //        }
         indx = 0;
-        File temp = new File("C:\\Users\\m_dar\\Downloads\\Process_Articles\\duplicate");
+        File temp = new File("C:\\Users\\m_dar\\Downloads\\Process_Articles\\duplicate1");
         System.out.println("process inputFile ");
         Map<String, LinkedList<File>> inputFiles = listFileName(input);
         for (String key : inputFiles.keySet()) {
@@ -67,7 +67,7 @@ public class ArticleCleaning {
                 for (File f : inputFiles.get(key)) {
                     System.out.println(f);
 //                    System.out.println("parent [" + f.getParent() + "]");
-                    if (f.getParent().endsWith("Process_Articles\\miscellaneous\\MixedNicheArticles")) {
+                    if (f.getParent().endsWith("miscellaneous\\how.to")) {
                         // copy this to temp:
                         File newFile = new File(temp, f.getName());
                         f.renameTo(newFile);
