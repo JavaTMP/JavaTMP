@@ -44,12 +44,13 @@ public class UnzipFiles {
         }
 
         System.out.println("display folder");
+        int lin = 0;
         for (File dir : dirs) {
-            if (dir.getName().contains("-")) {
-                System.out.println(dir.getAbsolutePath());
-                File newFile = new File(dir.getParent(), dir.getName().replaceAll("-", " ").trim());
-                System.out.println("new file [" + newFile.getAbsolutePath() + "]");
-                dir.renameTo(newFile);
+            if (dir.getName().contains("article")) {
+                System.out.println((++lin) + " - " + dir.getAbsolutePath());
+//                File newFile = new File(dir.getParent(), dir.getName().replaceAll("-", " ").trim());
+//                System.out.println("new file [" + newFile.getAbsolutePath() + "]");
+//                dir.renameTo(newFile);
             }
         }
         if (true) {

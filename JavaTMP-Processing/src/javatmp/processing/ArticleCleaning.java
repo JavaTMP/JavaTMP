@@ -58,7 +58,7 @@ public class ArticleCleaning {
 //            }
 //        }
         indx = 0;
-        File temp = new File("C:\\Users\\m_dar\\Downloads\\Process_Articles\\duplicate1");
+        File temp = new File("C:\\Users\\m_dar\\Downloads\\Process_Articles\\duplicate4");
         System.out.println("process inputFile ");
         Map<String, LinkedList<File>> inputFiles = listFileName(input);
         for (String key : inputFiles.keySet()) {
@@ -67,7 +67,7 @@ public class ArticleCleaning {
                 for (File f : inputFiles.get(key)) {
                     System.out.println(f);
 //                    System.out.println("parent [" + f.getParent() + "]");
-                    if (f.getParent().endsWith("miscellaneous\\how.to")) {
+                    if (f.getParent().endsWith("miscellaneous\\zzz")) {
                         // copy this to temp:
                         File newFile = new File(temp, f.getName());
                         f.renameTo(newFile);
