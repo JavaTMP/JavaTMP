@@ -46,7 +46,7 @@ public class ServicesFactory {
         this.activityService = new ActivityService(getJpaDaoHelper());
         this.eventService = new EventService(getJpaDaoHelper());
         this.messageService = new MessageService(this.jpaDaoHelper, userService);
-        this.contentService = new ContentService(dBFaker);
+        this.contentService = new ContentService(this.jpaDaoHelper);
         this.logger.info("*** End ServicesFactory Constructor @ [" + new Date() + "]");
     }
 

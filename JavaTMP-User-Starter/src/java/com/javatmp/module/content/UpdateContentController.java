@@ -28,7 +28,7 @@ public class UpdateContentController extends HttpServlet {
 
         try {
             MvcHelper.populateBeanByRequestParameters(request, contentToBeUpdated);
-            if (cs.updateContentText(contentToBeUpdated)) {
+            if (cs.updateContent(contentToBeUpdated) == 1) {
                 // content updated successfully:
                 responseMessage.setOverAllStatus(true);
                 responseMessage.setMessage("Content Updated successfully");

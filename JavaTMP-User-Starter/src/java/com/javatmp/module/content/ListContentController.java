@@ -8,6 +8,7 @@ import com.javatmp.util.Constants;
 import com.javatmp.util.ServicesFactory;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -41,6 +42,8 @@ public class ListContentController extends HttpServlet {
         } catch (IllegalAccessException ex) {
             Logger.getLogger(ListContentController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InvocationTargetException ex) {
+            Logger.getLogger(ListContentController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
             Logger.getLogger(ListContentController.class.getName()).log(Level.SEVERE, null, ex);
         }
 

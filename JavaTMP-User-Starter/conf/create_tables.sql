@@ -142,3 +142,15 @@ CREATE TABLE `message` (
     CONSTRAINT message_fromUserId_fk FOREIGN KEY (fromUserId) REFERENCES `user` (id),
     CONSTRAINT message_toUserId_fk FOREIGN KEY (toUserId) REFERENCES `user` (id)
 ) ENGINE=InnoDB;
+
+CREATE TABLE `content` (
+    contentId BIGINT NOT NULL AUTO_INCREMENT,
+    title varchar(255),
+    summaryText TEXT,
+    contentText TEXT,
+    creationDate TIMESTAMP NOT NULL,
+    createdBy BIGINT,
+    status TINYINT NOT NULL,
+    CONSTRAINT content_contentId_pk PRIMARY KEY (contentId),
+    CONSTRAINT content_createdBy_fk FOREIGN KEY (createdBy) REFERENCES `user` (id)
+) ENGINE=InnoDB;
