@@ -6,10 +6,13 @@
 package javatmp.processing;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -27,9 +30,31 @@ public class ArticleCleaning {
 //        secondFolderName = "C:\\Users\\m_dar\\Downloads\\Process_Articles\\Articles1\\Arts_Entertainment";
         File source = new File(mainFolderName);
         File input = new File(secondFolderName);
-//        List<File> sourceFiles = listFile(source);
-//        System.out.println("size of source Files [" + sourceFiles.size() + "]");
+        List<File> sourceTraversal = listFile(source);
+        File[] inputFolder = input.listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File pathname) {
+                return pathname.isDirectory();
+            }
+        });
 
+        Set<String> foldersName = new HashSet<String>();
+        for (File i : inputFolder) {
+            foldersName.add(i.getName());
+        }
+        System.out.println("foldersName [" + foldersName + "]");
+        System.out.println("size of source Files [" + sourceTraversal.size() + "]");
+        int c = 0;
+        for (File f : sourceTraversal) {
+            if (foldersName.contains(f.getParentFile().getName())) {
+                System.out.println("found [" + f + "]");
+            }
+
+        }
+
+        if (true) {
+            return;
+        }
         int indx = 0;
 //        Map<String, LinkedList<File>> sourceFolders = listFolderName(source);
 //        for (String key : sourceFolders.keySet()) {

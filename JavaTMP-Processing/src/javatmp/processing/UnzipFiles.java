@@ -46,11 +46,11 @@ public class UnzipFiles {
         System.out.println("display folder");
         int lin = 0;
         for (File dir : dirs) {
-            if (dir.getName().contains("article")) {
+            if (dir.getName().contains("p133")) {
                 System.out.println((++lin) + " - " + dir.getAbsolutePath());
-//                File newFile = new File(dir.getParent(), dir.getName().replaceAll("-", " ").trim());
-//                System.out.println("new file [" + newFile.getAbsolutePath() + "]");
-//                dir.renameTo(newFile);
+                File newFile = new File(dir.getParent(), dir.getName().replaceAll("p133", "").trim());
+                System.out.println("new file [" + newFile.getAbsolutePath() + "]");
+                dir.renameTo(newFile);
             }
         }
         if (true) {
