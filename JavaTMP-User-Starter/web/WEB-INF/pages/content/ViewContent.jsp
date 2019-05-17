@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <div class="dynamic-ajax-content grid-gutter-padding">
-    <h4 class="my-3">Dynamic Bootstrap Summernote Editor</h4>
+    <h4 class="my-3">View And Read Content</h4>
     <hr/>
     <div class="row">
         <div class="col-lg-12">

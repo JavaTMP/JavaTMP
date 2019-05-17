@@ -86,10 +86,13 @@ public class CurrentUserProfileController extends HttpServlet {
 
             userToBeUpdated.setPassword(MD5Util.convertToMD5(userToBeUpdated.getPassword()));
             Document fileUploading = MvcHelper.readDocumentFromRequestIfExist(request, "profilePicture");
+            fileUploading.setDocumentType((short) 1);
+            fileUploading.setStatus((short) 1);
             if (fileUploading != null) {
                 fileUploading.setDocumentId(dbUser.getProfilePicDocumentId());
                 userToBeUpdated.setProfilePicDocument(fileUploading);
                 userToBeUpdated.setProfilePicDocumentId(fileUploading.getDocumentId());
+
             }
 
             int updateStatus = us.updateCompleteUser(userToBeUpdated);

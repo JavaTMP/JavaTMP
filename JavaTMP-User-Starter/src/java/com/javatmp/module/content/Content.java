@@ -36,6 +36,17 @@ public class Content implements Serializable {
     public Content() {
     }
 
+    public Content(Long contentId, String title, String summaryText, String contentText,
+            Date creationDate, Long createdBy, Short status) {
+        this.contentId = contentId;
+        this.title = title;
+        this.summaryText = summaryText;
+        this.contentText = contentText;
+        this.creationDate = creationDate;
+        this.createdBy = createdBy;
+        this.status = status;
+    }
+
     /**
      * @return the contentId
      */
