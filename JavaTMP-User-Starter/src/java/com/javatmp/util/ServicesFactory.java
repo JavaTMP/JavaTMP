@@ -9,7 +9,6 @@ import com.javatmp.module.country.CountryService;
 import com.javatmp.module.user.UserService;
 import com.javatmp.module.stats.UserStatsService;
 import com.javatmp.module.dms.DocumentService;
-import com.javatmp.module.event.DBFaker;
 import com.javatmp.module.event.EventService;
 import com.javatmp.module.message.MessageService;
 import java.util.Date;
@@ -19,7 +18,6 @@ public class ServicesFactory {
 
     private static final Logger logger = Logger.getLogger(ServicesFactory.class.getName());
     private final JpaDaoHelper jpaDaoHelper;
-    private final DBFaker dBFaker;
     private final TimezoneService timezoneService;
     private final ThemeService themeService;
     private final LanguageService languageService;
@@ -35,12 +33,11 @@ public class ServicesFactory {
     public ServicesFactory(String persistentUnitName) {
         logger.info("*** Start ServicesFactory Constructor @ [" + new Date() + "]");
         this.jpaDaoHelper = new JpaDaoHelper(persistentUnitName);
-        this.dBFaker = new DBFaker();
         this.timezoneService = new TimezoneService(getJpaDaoHelper());
         this.themeService = new ThemeService(getJpaDaoHelper());
         this.languageService = new LanguageService(getJpaDaoHelper());
         this.countryService = new CountryService(getJpaDaoHelper());
-        this.documentService = new DocumentService(dBFaker, getJpaDaoHelper());
+        this.documentService = new DocumentService(getJpaDaoHelper());
         this.userService = new UserService(getJpaDaoHelper());
         this.userStatsService = new UserStatsService(getJpaDaoHelper());
         this.activityService = new ActivityService(getJpaDaoHelper());

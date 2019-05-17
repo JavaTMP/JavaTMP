@@ -49,6 +49,8 @@ public class UploadController extends HttpServlet {
                 InputStream fileContentStream = filePart.getInputStream();
                 Document fileUploading = new Document();
                 fileUploading.setContentType(contentType);
+                fileUploading.setDocumentType((short) 1);
+                fileUploading.setStatus((short) 1);
                 fileUploading.setDocumentName(fileName);
                 fileUploading.setDocumentSize(partSize);
                 fileUploading.setCreationDate(new Date());
