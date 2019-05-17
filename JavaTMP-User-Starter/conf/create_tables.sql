@@ -154,3 +154,18 @@ CREATE TABLE `content` (
     CONSTRAINT content_contentId_pk PRIMARY KEY (contentId),
     CONSTRAINT content_createdBy_fk FOREIGN KEY (createdBy) REFERENCES `user` (id)
 ) ENGINE=InnoDB;
+
+CREATE TABLE `file` (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    fileName varchar(255) NOT NULL,
+    contentType varchar(255) NOT NULL,
+    documentId BIGINT,
+    creationDate TIMESTAMP NOT NULL,
+    randomHash BIGINT NOT NULL,
+    fileType int(1) NOT NULL,
+    parentId BIGINT DEFAULT NULL,
+    status TINYINT NOT NULL,
+    createdByUserId BIGINT DEFAULT NULL,
+    CONSTRAINT file_id_pk PRIMARY KEY (id),
+    CONSTRAINT file_parentId_fk FOREIGN KEY (parentId) REFERENCES document (documentId)
+) ENGINE=InnoDB;
