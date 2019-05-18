@@ -2,11 +2,17 @@ package com.javatmp.module.dms;
 
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.domain.ResponseMessage;
+import com.javatmp.mvc.domain.table.DataTableRequest;
+import com.javatmp.mvc.domain.table.DataTableResults;
 import com.javatmp.util.Constants;
 import com.javatmp.util.ServicesFactory;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,19 +22,28 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/dms/FileManagerPageController")
 public class FileManagerPageController extends HttpServlet {
 
+    private final Logger logger = Logger.getLogger(getClass().getName());
+
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
-        DocumentService ds = sf.getDocumentService();
-        List<Document> documents = ds.getAllDocuments();
+        try {
+            ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
+            DocumentService ds = sf.getDocumentService();
 
-        ResponseMessage message = new ResponseMessage();
-        message.setOverAllStatus(true);
-        message.setMessage("All Available File Documents on the Server");
-        message.setData(documents);
+            DataTableRequest tableRequest = (DataTableRequest) MvcHelper.readObjectFromRequest(request, DataTableRequest.class);
+            logger.info("request Page for file manager is [" + MvcHelper.deepToString(tableRequest) + "]");
+            DataTableResults<Document> documents = ds.getAllDocuments(tableRequest);
 
-        MvcHelper.sendMessageAsJson(response, message);
+            ResponseMessage message = new ResponseMessage();
+            message.setOverAllStatus(true);
+            message.setMessage("All Available File Documents on the Server");
+            message.setData(documents);
+
+            MvcHelper.sendMessageAsJson(response, message);
+        } catch (ParseException ex) {
+            Logger.getLogger(FileManagerPageController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 }

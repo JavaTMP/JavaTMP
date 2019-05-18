@@ -32,7 +32,7 @@ public class ViewTempUploadedFileController extends HttpServlet {
             MvcHelper.populateBeanByRequestParameters(request, temp);
             logger.info("Requested Document [" + MvcHelper.deepToString(temp) + "]");
             String viewTypeTemp = request.getParameter("viewType");
-            Document document = ds.readTempDocumentById(temp);
+            Document document = ds.readDocumentById(temp);
 
             // for nano security check if provided hash equal db one:
             if (!document.getRandomHash().equals(temp.getRandomHash())) {

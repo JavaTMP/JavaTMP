@@ -29,7 +29,6 @@ public class ListContentController extends HttpServlet {
         ContentService cs = sf.getContentService();
 
         DataTableRequest requestedPage = new DataTableRequest();
-//        PageTemp<Content> requestedPage = new PageTemp<>(Content.class);
         try {
             MvcHelper.populateBeanByRequestParameters(request, requestedPage);
             DataTableResults<Content> results = cs.listContent(requestedPage);

@@ -1,6 +1,9 @@
 package com.javatmp.module.dms;
 
+import com.javatmp.mvc.domain.table.DataTableRequest;
+import com.javatmp.mvc.domain.table.DataTableResults;
 import com.javatmp.util.JpaDaoHelper;
+import java.text.ParseException;
 import java.util.List;
 
 public class DocumentService {
@@ -36,12 +39,12 @@ public class DocumentService {
         return this.jpaDaoHelper.create(document);
     }
 
-    public List<Document> getAllDocuments() {
-        return this.jpaDaoHelper.findAll(Document.class);
-    }
+    public DataTableResults<Document> getAllDocuments(DataTableRequest<Document> page) throws ParseException {
 
-    public Document readTempDocumentById(Document document) {
-        return this.jpaDaoHelper.read(Document.class, document.getDocumentId());
+        page.setClassType(Document.class);
+        page.setSelects(new String[]{"documentId", "documentName", "documentSize",
+            "contentType", "creationDate", "randomHash", "documentType", "parentDocumentId", "status", "createdByUserId"});
+        DataTableResults<Document> results = jpaDaoHelper.retrievePageRequestDetails(page);
+        return results;
     }
-
 }

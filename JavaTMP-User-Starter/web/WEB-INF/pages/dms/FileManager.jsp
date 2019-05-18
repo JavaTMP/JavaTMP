@@ -54,7 +54,7 @@
                     <div class="row mt-1">
                         <div class="col-lg-12">
                             <div class="table-responsive">
-                                <table id="formPluginAjaxUpload" class="table table-bordered table-hover table-striped">
+                                <table id="formPluginAjaxUpload" class="table table-condensed table-bordered table-hover table-striped display nowrap">
                                     <thead>
                                         <tr>
                                             <th width="100px">#</th>
@@ -171,36 +171,94 @@
                 }).submit();
             }
 
-            $.ajax({
-                "type": "GET",
-                cache: false,
-                url: javatmp.settings.contextPath + "/dms/FileManagerPageController",
-                dataType: "json",
-                contentType: "application/json; charset=UTF-8",
-//                data: JSON.stringify(passData),
-                success: function (response, textStatus, jqXHR) {
-                    var tbody = $('#formPluginAjaxUpload').children('tbody');
-                    var table = tbody.length ? tbody : $('#formPluginAjaxUpload');
-                    // remove emptyUploadedFilesSizeRowId if response data length more than one:
-                    if (response.data.length) {
-                        $("#emptyUploadedFilesSizeRowId").remove();
+            $.fn.dataTable.ext.errMode = 'none';
+            var table = $('#formPluginAjaxUpload').DataTable({
+//                responsive: true,
+                dom: "<'row'<'col-sm-12'tr>>" +
+                        "<'row'<'col-sm-6'i><'col-sm-6 pt-2 text-right'l>>" +
+                        "<'row'<'col-sm-12'p>>",
+                scrollY: 400,
+                scrollX: true,
+                "autoWidth": false,
+//                fixedColumns: true,
+//                "deferLoading": 0, // here
+                scrollCollapse: true,
+                "searching": true,
+                searchDelay: 500,
+                orderCellsTop: true, // important to for two row header with filteration below header column names.
+                "processing": true,
+                "serverSide": true,
+                "drawCallback": function (settings) {
+//                    alert('DataTables has redrawn the table');
+                },
+                initComplete: function () {
+                    this.api().columns().every(function (index) {
+                        var column = this;
+                    });
+                },
+                "ajax": {
+                    "type": "POST",
+                    "url": javatmp.settings.contextPath + "/dms/FileManagerPageController",
+                    dataType: "json",
+                    contentType: "application/json; charset=UTF-8",
+                    "data": function (currentDate) {
+                        currentDate._ajaxGlobalBlockUI = false; // window blocked until data return
+                        return JSON.stringify(currentDate);
+                    },
+                    "dataSrc": function (json) {
+                        json["recordsTotal"] = json.data.recordsTotal;
+                        json["recordsFiltered"] = json.data.recordsFiltered;
+                        return json.data.data;
                     }
-                    //Add row
-                    for (var i = 0; i < response.data.length; i++) {
-                        table.append(row.composeTemplate({
-                            'id': response.data[i].documentId,
-                            'documentName': response.data[i].documentName,
-                            'documentSize': numeral(response.data[i].documentSize).format("0b"),
-//                            'documentSize': response.data[i].documentSize,
-                            'contentType': response.data[i].contentType,
-                            'creationDate': moment(response.data[i].creationDate, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("LLLL"),
-                            'link': response.data[i].documentId,
-                            'randomHash': response.data[i].randomHash,
-                            'contextPath': javatmp.settings.contextPath
-                        }));
-                    }
-                }
+                },
+                columns: [
+                    {data: 'documentId', name: 'documentId'},
+                    {data: 'documentName', name: 'documentName'},
+                    {data: 'documentSize', name: 'documentSize'},
+                    {data: 'contentType', name: 'contentType'},
+                    {
+                        data: 'creationDate',
+                        name: 'creationDate',
+                        "type": "date",
+                        "render": function (data, type, row) {
+                            return moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("DD/MM/YYYY HH:mm");
+                        }
+                    },
+                    {data: 'viewInline', name: 'viewInline'},
+                    {data: 'viewAttachment', name: 'viewAttachment'}
+                ]
             });
+//
+//            $.ajax({
+//                "type": "GET",
+//                cache: false,
+//                url: javatmp.settings.contextPath + "/dms/FileManagerPageController",
+//                dataType: "json",
+//                contentType: "application/json; charset=UTF-8",
+////                data: JSON.stringify(passData),
+//                success: function (response, textStatus, jqXHR) {
+//                    var tbody = $('#formPluginAjaxUpload').children('tbody');
+//                    var table = tbody.length ? tbody : $('#formPluginAjaxUpload');
+//                    // remove emptyUploadedFilesSizeRowId if response data length more than one:
+//                    if (response.data.length) {
+//                        $("#emptyUploadedFilesSizeRowId").remove();
+//                    }
+//                    //Add row
+//                    for (var i = 0; i < response.data.length; i++) {
+//                        table.append(row.composeTemplate({
+//                            'id': response.data[i].documentId,
+//                            'documentName': response.data[i].documentName,
+//                            'documentSize': numeral(response.data[i].documentSize).format("0b"),
+////                            'documentSize': response.data[i].documentSize,
+//                            'contentType': response.data[i].contentType,
+//                            'creationDate': moment(response.data[i].creationDate, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("LLLL"),
+//                            'link': response.data[i].documentId,
+//                            'randomHash': response.data[i].randomHash,
+//                            'contextPath': javatmp.settings.contextPath
+//                        }));
+//                    }
+//                }
+//            });
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
