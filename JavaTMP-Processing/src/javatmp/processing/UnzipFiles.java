@@ -45,10 +45,12 @@ public class UnzipFiles {
 
         System.out.println("display folder");
         int lin = 0;
+        String subToken = "p?\\d+";
+        String token = "^.+(" + subToken + ")$";
         for (File dir : dirs) {
-            if (dir.getName().contains("p133")) {
+            if (dir.getName().matches(token)) {
                 System.out.println((++lin) + " - " + dir.getAbsolutePath());
-                File newFile = new File(dir.getParent(), dir.getName().replaceAll("p133", "").trim());
+                File newFile = new File(dir.getParent(), dir.getName().replaceAll(subToken, "").trim());
                 System.out.println("new file [" + newFile.getAbsolutePath() + "]");
                 dir.renameTo(newFile);
             }

@@ -1,27 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content grid-gutter-padding">
-    <h4 class="my-3">
-        File Uploader Manager
-    </h4>
-    <hr/>
     <div class="row">
         <div class="col-lg-12">
-            <div class="alert alert-info">
-                <p><strong>Implementing Simple AJAX File Upload from scratch using jQuery Form Plugin</strong></p>
-                <p>
-                    The Form Plugin supports use of XMLHttpRequest Level 2 and FormData objects on browsers
-                    that support these features. Files upload will occur seamlessly through the XHR object
-                    and progress updates are available as the upload proceeds. For older browsers,
-                    a fallback technology is used which involves iframes
-                </p>
-                <p>
-                    <a class="btn btn-info" target="_blank" href="http://malsup.com/jquery/form/">http://malsup.com/jquery/form/</a>
-                    <a class="btn btn-info" target="_blank" href="https://github.com/jquery-form/form">https://github.com/jquery-form/form</a>
-                    <a class="btn btn-info" target="_blank" href="https://www.abeautifulsite.net/whipping-file-inputs-into-shape-with-bootstrap-3">Styling file input with bootstrap 3 article</a>
-                </p>
-            </div>
             <div class="card my-3">
                 <div class="card-header">
+                    File Manager
                     <div class="options float-right">
                         <a class="settings"><i class="fa fa-cog"></i></a>
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
@@ -90,7 +73,11 @@
             // controll return to main javascript file.
             // <--- HERE --->
             //
+            $.fn.dataTable.ext.errMode = 'none';
+            var tableSelector = '#formPluginAjaxUpload';
+            var table;
             var alertMessage;
+
             var row = '<tr>' +
                     '<td>{{id}}</td>' +
                     '<td>{{documentName}}</td>' +
@@ -132,9 +119,6 @@
                         });
                         $('.progress-bar').css({width: '100%'});
                         $('.progress-bar').text("100%");
-//                                    alert(unescape(JSON.stringify(response)));
-                        var tbody = $('#formPluginAjaxUpload').children('tbody');
-                        var table = tbody.length ? tbody : $('#formPluginAjaxUpload');
 
                         // remove emptyUploadedFilesSizeRowId if response data length more than one:
                         if (response.data.length) {
@@ -142,18 +126,9 @@
                         }
                         //Add row
                         for (var i = 0; i < response.data.length; i++) {
-                            table.append(row.composeTemplate({
-                                'id': response.data[i].documentId,
-                                'documentName': response.data[i].documentName,
-                                'documentSize': numeral(response.data[i].documentSize).format("0b"),
-//                                'documentSize': response.data[i].documentSize,
-                                'contentType': response.data[i].contentType,
-                                'creationDate': moment(response.data[i].creationDate, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("LLLL"),
-                                'link': response.data[i].documentId,
-                                'randomHash': response.data[i].randomHash,
-                                'contextPath': javatmp.settings.contextPath
-                            }));
+                            table.row.add(response.data[i]);
                         }
+                        table.draw();
                     },
                     complete: function (xhr) {
                         $("#updateFormId")[0].reset();
@@ -171,8 +146,7 @@
                 }).submit();
             }
 
-            $.fn.dataTable.ext.errMode = 'none';
-            var table = $('#formPluginAjaxUpload').DataTable({
+            table = $(tableSelector).DataTable({
 //                responsive: true,
                 dom: "<'row'<'col-sm-12'tr>>" +
                         "<'row'<'col-sm-6'i><'col-sm-6 pt-2 text-right'l>>" +
@@ -224,41 +198,30 @@
                             return moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("DD/MM/YYYY HH:mm");
                         }
                     },
-                    {data: 'viewInline', name: 'viewInline'},
-                    {data: 'viewAttachment', name: 'viewAttachment'}
+                    {data: 'viewInline', name: 'viewInline',
+                        "render": function (data, type, row, meta) {
+                            if (type === "sort" || type === 'type' || type === 'filter') {
+                                return data;
+                            } else if (type === "display") {
+                                return '<a class="" target="" href="' + javatmp.settings.contextPath + '/dms/ViewTempUploadedFileController?documentId=' + row.documentId + '&amp;randomHash=' + row.randomHash + '&amp;viewType=inline">View As Attachment</a>';
+                            } else {
+                                return data;
+                            }
+                        }
+                    },
+                    {data: 'viewAttachment', name: 'viewAttachment',
+                        "render": function (data, type, row, meta) {
+                            if (type === "sort" || type === 'type' || type === 'filter') {
+                                return data;
+                            } else if (type === "display") {
+                                return '<a class="" target="" href="' + javatmp.settings.contextPath + '/dms/ViewTempUploadedFileController?documentId=' + row.documentId + '&amp;randomHash=' + row.randomHash + '&amp;viewType=attachment">View As Attachment</a>';
+                            } else {
+                                return data;
+                            }
+                        }
+                    }
                 ]
             });
-//
-//            $.ajax({
-//                "type": "GET",
-//                cache: false,
-//                url: javatmp.settings.contextPath + "/dms/FileManagerPageController",
-//                dataType: "json",
-//                contentType: "application/json; charset=UTF-8",
-////                data: JSON.stringify(passData),
-//                success: function (response, textStatus, jqXHR) {
-//                    var tbody = $('#formPluginAjaxUpload').children('tbody');
-//                    var table = tbody.length ? tbody : $('#formPluginAjaxUpload');
-//                    // remove emptyUploadedFilesSizeRowId if response data length more than one:
-//                    if (response.data.length) {
-//                        $("#emptyUploadedFilesSizeRowId").remove();
-//                    }
-//                    //Add row
-//                    for (var i = 0; i < response.data.length; i++) {
-//                        table.append(row.composeTemplate({
-//                            'id': response.data[i].documentId,
-//                            'documentName': response.data[i].documentName,
-//                            'documentSize': numeral(response.data[i].documentSize).format("0b"),
-////                            'documentSize': response.data[i].documentSize,
-//                            'contentType': response.data[i].contentType,
-//                            'creationDate': moment(response.data[i].creationDate, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("LLLL"),
-//                            'link': response.data[i].documentId,
-//                            'randomHash': response.data[i].randomHash,
-//                            'contextPath': javatmp.settings.contextPath
-//                        }));
-//                    }
-//                }
-//            });
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
@@ -297,14 +260,17 @@
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
                 // fire when user resize browser window or sidebar hide / show
+                table.columns.adjust().draw();
             });
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenCompress, function (event, card) {
                 // when card compress by pressing the top right tool button
+                table.columns.adjust().draw();
             });
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenExpand, function (event, card) {
                 // when card Expand by pressing the top right tool button
+                table.columns.adjust().draw();
             });
 
             /**
@@ -316,6 +282,8 @@
                 $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenCompress);
                 $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenExpand);
                 $("#updateFormId input[type=file]").off("change");
+                table.clear();
+                table.destroy(true);
                 return true;
             });
         });
