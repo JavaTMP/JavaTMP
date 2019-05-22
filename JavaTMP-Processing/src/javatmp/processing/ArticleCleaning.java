@@ -38,23 +38,48 @@ public class ArticleCleaning {
             }
         });
 
-        Set<String> foldersName = new HashSet<String>();
         for (File i : inputFolder) {
-            foldersName.add(i.getName());
-        }
-        System.out.println("foldersName [" + foldersName + "]");
-        System.out.println("size of source Files [" + sourceTraversal.size() + "]");
-        int c = 0;
-        for (File f : sourceTraversal) {
-            if (foldersName.contains(f.getParentFile().getName())) {
-                System.out.println("found [" + f + "]");
+            String currentFolderName = i.getName();
+//            String newFolderName = i.getName().replaceAll("([A-Z])", " $1").trim();
+            String newFolderName = "";
+            for (int currIndx = 0; currIndx < currentFolderName.length(); currIndx++) {
+                if (currIndx > 0 && Character.isUpperCase(currentFolderName.charAt(currIndx))
+                        && !Character.isUpperCase(currentFolderName.charAt(currIndx - 1)) && currentFolderName.charAt(currIndx - 1) != ' ') {
+                    newFolderName += " " + currentFolderName.charAt(currIndx);
+                } else {
+                    newFolderName += currentFolderName.charAt(currIndx);
+                }
             }
+            if (currentFolderName.equals(newFolderName) == false) {
+                System.out.println("old [" + currentFolderName + "], new [" + newFolderName + "]");
+                File newFile = new File(secondFolderName, newFolderName);
+                boolean ans = i.renameTo(newFile);
+                System.out.println("ans [" + ans + "]");
 
+            }
         }
 
         if (true) {
             return;
         }
+
+//        Set<String> foldersName = new HashSet<String>();
+//        for (File i : inputFolder) {
+//            foldersName.add(i.getName());
+//        }
+//        System.out.println("foldersName [" + foldersName + "]");
+//        System.out.println("size of source Files [" + sourceTraversal.size() + "]");
+//        int c = 0;
+//        for (File f : sourceTraversal) {
+//            if (foldersName.contains(f.getParentFile().getName())) {
+//                System.out.println("found [" + f + "]");
+//            }
+//
+//        }
+//
+//        if (true) {
+//            return;
+//        }
         int indx = 0;
 //        Map<String, LinkedList<File>> sourceFolders = listFolderName(source);
 //        for (String key : sourceFolders.keySet()) {
@@ -83,7 +108,7 @@ public class ArticleCleaning {
 //            }
 //        }
         indx = 0;
-        File temp = new File("C:\\Users\\m_dar\\Downloads\\Process_Articles\\duplicate4");
+        File temp = new File("C:\\Users\\m_dar\\Downloads\\Process_Articles\\duplicate5");
         System.out.println("process inputFile ");
         Map<String, LinkedList<File>> inputFiles = listFileName(input);
         for (String key : inputFiles.keySet()) {
@@ -92,7 +117,7 @@ public class ArticleCleaning {
                 for (File f : inputFiles.get(key)) {
                     System.out.println(f);
 //                    System.out.println("parent [" + f.getParent() + "]");
-                    if (f.getParent().endsWith("miscellaneous\\zzz")) {
+                    if (f.getParent().endsWith("miscellaneous\\niche")) {
                         // copy this to temp:
                         File newFile = new File(temp, f.getName());
                         f.renameTo(newFile);
