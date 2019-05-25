@@ -70,7 +70,7 @@
                 }
             });
             modal.addButton({
-                label: "${labels['user.btn.CreateNewUserAction']}",
+                label: "Create Content",
                 cssClass: "btn btn-primary",
                 action: function (modalWrapper, button, buttonData, originalEvent) {
                     form.trigger("submit");

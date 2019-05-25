@@ -41,85 +41,26 @@ public class CreateNewContent extends HttpServlet {
     private final Logger logger = Logger.getLogger(getClass().getName());
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String requestPage = "/WEB-INF/pages/user/addNewUser.jsp";
-        ServletContext context = request.getServletContext();
-        ServicesFactory sf = (ServicesFactory) context.getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
-        HttpSession session = request.getSession();
-        User loggedInUser = (User) session.getAttribute("user");
-        List<Timezonetranslation> timezones = sf.getTimezoneService().getTimezones(loggedInUser);
-        List<Countrytranslation> countries = sf.getCountryService().getCountries(loggedInUser);
-        List<Languagetranslation> languages = sf.getLanguageService().getLanguages(loggedInUser);
-        List<Themetranslation> themes = sf.getThemeService().getThemes(loggedInUser);
-        request.setAttribute("themes", themes);
-        request.setAttribute("languages", languages);
-        request.setAttribute("countries", countries);
-        request.setAttribute("timezones", timezones);
-        request.getRequestDispatcher(requestPage).forward(request, response);
-    }
-
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         ResponseMessage responseMessage = new ResponseMessage();
         ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
-        DocumentService ds = sf.getDocumentService();
-        UserService us = sf.getUserService();
+        ContentService cs = sf.getContentService();
         HttpSession session = request.getSession();
+        User loggedInUser = (User) session.getAttribute("user");
         ResourceBundle labels = (ResourceBundle) session.getAttribute(Constants.LANGUAGE_ATTR_KEY);
 
         try {
-            User userToBeCreated = new User();
-            MvcHelper.populateBeanByRequestParameters(request, userToBeCreated);
-            logger.info("User to be created is [" + MvcHelper.toString(userToBeCreated) + "]");
-            Part filePart = request.getPart("profilePicture"); // Retrieves <input type="file" name="file">
-            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
-            String contentType = filePart.getContentType();
-            InputStream fileContentStream = filePart.getInputStream();
-            String fieldName = filePart.getName();
-            long partSize = filePart.getSize();
-            logger.info("partSize [" + partSize + "]");
+            Content contentToBeCreated = (Content) MvcHelper.readObjectFromRequest(request, Content.class);
 
-            Document fileUploading = new Document();
-            fileUploading.setContentType(contentType);
-            fileUploading.setDocumentName(fileName);
-            fileUploading.setDocumentSize(partSize);
-            fileUploading.setCreationDate(new Date());
+            contentToBeCreated.setCreationDate(new Date());
+            contentToBeCreated.setStatus((short) 1);
+            contentToBeCreated.setCreatedBy(loggedInUser.getId());
 
-            fileUploading.setDocumentType((short) 1);
-            fileUploading.setParentDocumentId(null);
-            fileUploading.setStatus((short) 1);
-            fileUploading.setCreatedByUserId(null);
-
-            long randomLongValue = Double.valueOf((Math.random() + 1) * 1000L).longValue();
-            fileUploading.setRandomHash((Long) Math.abs(fileUploading.getDocumentName().hashCode() + randomLongValue));
-            // the following block is intended for simple cases
-            // where it is convenient to read all bytes into a byte array.
-            // It is not intended for reading input streams with large amounts of data.
-            int nRead;
-            byte[] data = new byte[4 * 1024];
-            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-            while ((nRead = fileContentStream.read(data, 0, data.length)) != -1) {
-                buffer.write(data, 0, nRead);
-            }
-
-            fileUploading.setDocumentContent(buffer.toByteArray());
-            logger.info("original size [" + fileUploading.getDocumentSize()
-                    + "] stream size [" + fileUploading.getDocumentContent().length + "]");
-            String t = "FileName 'requested' \"to\" Upload [" + fileName + "] type[" + contentType + "] name [" + fieldName + "]size[" + partSize + "]<br/>";
-            logger.info(t);
-
-            userToBeCreated.setProfilePicDocument(fileUploading);
-            logger.info("UserToBeCreated is [" + MvcHelper.toString(userToBeCreated) + "]");
-            userToBeCreated.setPassword(MD5Util.convertToMD5(userToBeCreated.getPassword()));
-            userToBeCreated.setCreationDate(new Date());
-            userToBeCreated.setStatus((short) 1);
-
-            us.createNewUser(userToBeCreated);
-
+            contentToBeCreated = cs.getJpaDaoHelper().create(contentToBeCreated);
             responseMessage.setOverAllStatus(true);
             responseMessage.setMessage(labels.getString("action.createUser.successMsg"));
-            responseMessage.setData(userToBeCreated);
+            responseMessage.setData(contentToBeCreated);
 
         } catch (IllegalStateException e) {
             logger.info("ERROR : " + e.getMessage());
@@ -135,9 +76,6 @@ public class CreateNewContent extends HttpServlet {
             logger.log(Level.SEVERE, t.getMessage(), t);
             responseMessage.setOverAllStatus(false);
             responseMessage.setMessage(t.getMessage());
-        } catch (IllegalAccessException | InvocationTargetException ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
-            throw new ServletException(ex);
         }
 
         MvcHelper.sendMessageAsJson(response, responseMessage);

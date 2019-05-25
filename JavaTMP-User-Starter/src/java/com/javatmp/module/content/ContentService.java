@@ -20,7 +20,7 @@ import javax.persistence.criteria.Root;
 public class ContentService {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
-    final JpaDaoHelper jpaDaoHelper;
+    private final JpaDaoHelper jpaDaoHelper;
 
     public ContentService(JpaDaoHelper jpaDaoHelper) {
         this.jpaDaoHelper = jpaDaoHelper;
@@ -28,11 +28,7 @@ public class ContentService {
     }
 
     public Long getAllCount() {
-        return this.jpaDaoHelper.getAllCount(Content.class);
-    }
-
-    public List<Content> getContents() {
-        return this.jpaDaoHelper.findAll(Content.class);
+        return this.getJpaDaoHelper().getAllCount(Content.class);
     }
 
     public int updateContent(Content content) {
@@ -40,7 +36,7 @@ public class ContentService {
         EntityManager em = null;
         try {
 
-            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            em = this.getJpaDaoHelper().getEntityManagerFactory().createEntityManager();
             em.getTransaction().begin();
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaQuery<Content> cq = cb.createQuery(Content.class);
@@ -67,7 +63,7 @@ public class ContentService {
     }
 
     public Content readContentById(Content content) {
-        return this.jpaDaoHelper.read(Content.class, content.getContentId());
+        return this.getJpaDaoHelper().read(Content.class, content.getContentId());
     }
 
     public DataTableResults<Content> listContent(DataTableRequest<Content> page) throws ParseException {
@@ -75,7 +71,7 @@ public class ContentService {
         page.setClassType(Content.class);
         page.setSelects(new String[]{"contentId", "title", "summaryText",
             "contentText", "creationDate", "createdBy", "status"});
-        DataTableResults<Content> msgs = jpaDaoHelper.retrievePageRequestDetails(page);
+        DataTableResults<Content> msgs = getJpaDaoHelper().retrievePageRequestDetails(page);
         return msgs;
     }
 
@@ -100,7 +96,7 @@ public class ContentService {
                 + "</ul>\n"
                 + "<p>Copy pasted from <a href=\"https://en.wikipedia.org/wiki/Java_(programming_language)\" target=\"_blank\">this wikipedia page</a>.</p>\n"
                 + "");
-        this.jpaDaoHelper.create(content);
+        this.getJpaDaoHelper().create(content);
 
         for (int i = 1; i < 1000; i++) {
             content = new Content();
@@ -122,8 +118,15 @@ public class ContentService {
                     + "<p>A fake data summary text to show you number " + content.getContentId() + " geneated from fake database, Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>\n"
                     + "<p>A fake data summary text to show you number " + content.getContentId() + " geneated from fake database, Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>\n"
                     + "");
-            this.jpaDaoHelper.create(content);
+            this.getJpaDaoHelper().create(content);
         }
+    }
+
+    /**
+     * @return the jpaDaoHelper
+     */
+    public JpaDaoHelper getJpaDaoHelper() {
+        return jpaDaoHelper;
     }
 
 }

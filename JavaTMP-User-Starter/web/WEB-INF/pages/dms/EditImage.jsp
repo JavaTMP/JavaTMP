@@ -154,8 +154,8 @@
                                                     '<p>Document Name : {{documentName}}</p>' +
                                                     '<p>Content Type : {{contentType}}</p>' +
                                                     '<p>Creation Date : {{creationDate}}</p>' +
-                                                    '<p>Link To View Inline : <a target="_blank" class="" href="{{contextPath}}/dms/ViewTempUploadedFileController?documentId={{link}}&amp;randomHash={{randomHash}}&amp;viewType=inline">View Inline</a></p>' +
-                                                    '<p>Link To View As attachement : <a class="" href="{{contextPath}}/dms/ViewTempUploadedFileController?documentId={{link}}&amp;randomHash={{randomHash}}&amp;viewType=attachment">View As Attachment</a></p>' +
+                                                    '<p>Link To View Inline : <a target="_blank" class="" href="{{contextPath}}/dms/ViewUploadedFileController?documentId={{link}}&amp;randomHash={{randomHash}}&amp;viewType=inline">View Inline</a></p>' +
+                                                    '<p>Link To View As attachement : <a class="" href="{{contextPath}}/dms/ViewUploadedFileController?documentId={{link}}&amp;randomHash={{randomHash}}&amp;viewType=attachment">View As Attachment</a></p>' +
                                                     '<p><a href="javascript:void(0);" class="" actionType="action-ref-href" action-ref-by-href="{{contextPath}}/pages/dms/FileManager">Go To File Manager To See Uploaded Files</a></p>' +
                                                     '</div>';
                                             for (var i = 0; i < response.data.length; i++) {

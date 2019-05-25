@@ -81,8 +81,8 @@
                     '<td>{{documentSize}}</td>' +
                     '<td>{{contentType}}</td>' +
                     '<td>{{creationDate}}</td>' +
-                    '<td><a class="" target="_blank" href="{{contextPath}}/dms/ViewTempUploadedFileController?documentId={{link}}&amp;randomHash={{randomHash}}&amp;viewType=inline">View Inline</a></td>' +
-                    '<td><a class="" target="" href="{{contextPath}}/dms/ViewTempUploadedFileController?documentId={{link}}&amp;randomHash={{randomHash}}&amp;viewType=attachment">View As Attachment</a></td>' +
+                    '<td><a class="" target="_blank" href="{{contextPath}}/dms/ViewUploadedFileController?documentId={{link}}&amp;randomHash={{randomHash}}&amp;viewType=inline">View Inline</a></td>' +
+                    '<td><a class="" target="" href="{{contextPath}}/dms/ViewUploadedFileController?documentId={{link}}&amp;randomHash={{randomHash}}&amp;viewType=attachment">View As Attachment</a></td>' +
                     '</tr>';
             function uploadSelectedFiles() {
                 $('#updateFormId').ajaxForm({
@@ -200,7 +200,7 @@
                             if (type === "sort" || type === 'type' || type === 'filter') {
                                 return data;
                             } else if (type === "display") {
-                                return '<a class="" target="" href="' + javatmp.settings.contextPath + '/dms/ViewTempUploadedFileController?documentId=' + row.documentId + '&amp;randomHash=' + row.randomHash + '&amp;viewType=inline">View As Attachment</a>';
+                                return '<a class="" target="" href="' + javatmp.settings.contextPath + '/dms/ViewUploadedFileController?documentId=' + row.documentId + '&amp;randomHash=' + row.randomHash + '&amp;viewType=inline">View As Attachment</a>';
                             } else {
                                 return data;
                             }
@@ -211,7 +211,7 @@
                             if (type === "sort" || type === 'type' || type === 'filter') {
                                 return data;
                             } else if (type === "display") {
-                                return '<a class="" target="" href="' + javatmp.settings.contextPath + '/dms/ViewTempUploadedFileController?documentId=' + row.documentId + '&amp;randomHash=' + row.randomHash + '&amp;viewType=attachment">View As Attachment</a>';
+                                return '<a class="" target="" href="' + javatmp.settings.contextPath + '/dms/ViewUploadedFileController?documentId=' + row.documentId + '&amp;randomHash=' + row.randomHash + '&amp;viewType=attachment">View As Attachment</a>';
                             } else {
                                 return data;
                             }
