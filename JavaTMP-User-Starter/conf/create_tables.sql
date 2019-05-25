@@ -149,7 +149,7 @@ CREATE TABLE `content` (
     summaryText TEXT,
     contentText TEXT,
     creationDate TIMESTAMP NOT NULL,
-    createdBy BIGINT,
+    createdBy BIGINT not null,
     status TINYINT NOT NULL,
     CONSTRAINT content_contentId_pk PRIMARY KEY (contentId),
     CONSTRAINT content_createdBy_fk FOREIGN KEY (createdBy) REFERENCES `user` (id)

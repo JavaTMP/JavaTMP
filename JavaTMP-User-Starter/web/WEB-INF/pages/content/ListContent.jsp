@@ -1,266 +1,194 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content grid-gutter-padding">
     <div class="row">
-        <div class="col">
-            <div class="alert alert-info my-3">
-                <p>Highly customizable custom scrollbar jQuery plugin, featuring vertical/horizontal scrollbars, scrolling momentum, mouse-wheel, keyboard and touch support.</p>
-                <p>
-                    <a class="btn btn-info" target="_blank" href="http://manos.malihu.gr/jquery-custom-content-scroller/">Configuration Page</a>
-                    <a class="btn btn-info" target="_blank" href="http://manos.malihu.gr/repository/custom-scrollbar/demo/examples/complete_examples.html">Demo Page</a>
-                    <a class="btn btn-info" target="_blank" href="https://github.com/malihu/malihu-custom-scrollbar-plugin">github.com Project Link</a>
-                </p>
-            </div>
-            <div class="card">
+        <div class="col-lg-12">
+            <div class="card my-3">
                 <div class="card-header">
-                    Scroll to bottom or top to load additional content
+                    Content Manager
                     <div class="options float-right">
-                        <a class="settings"><i class="fa fa-cog"></i></a>
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
-                        <a href="#" class="reload"><i class="fa fa-sync"></i></a>
                         <a href="#" class="fullscreen"><i class=" fa fa-expand"></i></a>
-                        <a href="#" class="remove"><i class="fa fa-times"></i></a>
                     </div>
                 </div>
                 <div class="card-body">
-                    <div id="infinite-scroll" class="list-group-flush list-group content">
+                    <div class="row mt-1">
+                        <div class="col-lg-12">
+                            <div class="content-list-btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                                <button
+                                    action-name="addNewContentButton"
+                                    type="button" class="addNewContentButton btn btn-primary">
+                                    <i class="fa fa-external-link-alt fa-fw"></i>
+                                    Add Content
+                                </button>
+                                <button
+                                    id="UserList-AddNewUserByWizardPopupId"
+                                    action-name="Add-New-User-By-Wizard-Popup-Action"
+                                    type="button"
+                                    class="btn btn-primary">
+                                    Add User By Wizard Popup
+                                </button>
+                                <button action-name="Update-Complete-User-Action" id="UserList-UpdateSelectedUserId" type="button" class="btn btn-primary">
+                                    <i class="fa fa-user-edit fa-fw"></i>
+                                    ${labels['page.btn.updateCompleteUser']}
+                                </button>
+                                <button action-name="Delete-User-Action" id="UserList-DeleteSelectedUserId" type="button" class="btn btn-primary">
+                                    <i class="fa fa-user-times fa-fw text-danger"></i>
+                                    ${labels['page.btn.deleteUser']}
+                                </button>
+                                <button action-name="Activate-User-Action" id="UserList-ActivateSelectedUserId" type="button" class="btn btn-primary">
+                                    <i class="fa fa-user-check fa-fw text-success"></i>
+                                    ${labels['page.btn.activateUser']}
+                                </button>
+                                <button action-name="Deactivate-User-Action" id="UserList-DeactivateSelectedUserId" type="button" class="btn btn-primary">
+                                    <i class="fa fa-user-slash fa-fw text-warning"></i>
+                                    ${labels['page.btn.deactivateUser']}
+                                </button>
+                            </div>
+                            <div class="table-responsive">
+                                <table id="formPluginAjaxUpload" class="table table-condensed table-bordered table-hover table-striped display nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>contentId</th>
+                                            <th>title</th>
+                                            <th>createdBy</th>
+                                            <th>status</th>
+                                            <th>Creation Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!--
-    Reference Your external Stylesheet file here
-    if your feature or plugins could not support to run globally.
-    <link href="components/" rel="stylesheet">
-    -->
     <style type="text/css">
-        /* theme: "minimal", "minimal-dark" */
-
-
-    </style>
-    <style type="text/css">
-        /*
-        Embed CSS styling for current page.
-        */
-        .content {
-            overflow: auto;
-            position: relative;
-            /*width: 740px;*/
-            border: 1px solid #DDD;
-            height: 400px;
+        table.dataTable tbody tr {
+            cursor: pointer;
         }
     </style>
-    <style type="text/css">
-        #infinite-scroll .offset{
-            display: block;
-            width: 100%;
-            height: auto;
-            color: #ffed0d;
-            -webkit-border-radius: 3px;
-            -moz-border-radius: 3px;
-            border-radius: 3px;
-        }
-    </style>
-
-    <!--
-    Reference Your external Javascript file here
-    if your feature or plugins could not support to run globally.
-    <script src="components/"></script>
-    -->
     <script type="text/javascript">
         // You could write safely Javascript code here too as our template
         // should load mandatory libraries and plugins before.
         // <--- HERE --->
         //
 
-        var template =
-                '<div class="list-group-item list-group-item-action">' +
-                '    <div class="media">' +
-//                '        <img class="mr-3" src="{{contextPath}}/assets/img/64x64.gif" alt="Generic placeholder image"/>' +
-                '        <div class="media-body">' +
-                '            <h5 class="mt-0 d-flex justify-content-between"><span>{{title}}</span><time class="timeago" datetime="{{creationDate}}">{{formatedDate}}</time></h5>' +
-                '            {{contentText}}' +
-                '        </div>' +
-                '    </div>' +
-                '</div>';
-
         jQuery(function ($) {
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
             // <--- HERE --->
             //
-
-            var indicatorTemplate = '<div class="fetch-indicator text-center m-2 p-2"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>';
-            var workingDown = false;
-            var workingTop = false;
-            var pageRequested = 1;
-            var recordPerPage = 20;
-            var allCount = Number.MAX_SAFE_INTEGER;
-            var currentFetchedCount = 0;
-            $("#infinite-scroll").mCustomScrollbar({
-                theme: "javatmp",
-                alwaysShowScrollbar: 2,
-                scrollButtons: {
-                    enable: false
-                },
-                mouseWheel: {
-                    preventDefault: true
-                },
-                callbacks: {
-                    onInit: function () {
-                    },
-                    onScroll: function () {
-                        console.log("top = " + this.mcs.top + " , direction = " + this.mcs.direction);
-                    },
-                    onTotalScrollBack: function () {
-                        if (!workingTop) {
-                            console.log("** onTotalScrollBack currentFetch [" + currentFetchedCount + "], allCount [" + allCount + "]");
-                            if (currentFetchedCount < allCount) {
-                                workingTop = true;
-                                $("#infinite-scroll").mCustomScrollbar('scrollTo', 'top', {scrollInertia: 20});
-                                this.mcs.content.prepend(indicatorTemplate);
-                                var that = this;
-                                var passData = {
-                                    "_ajaxGlobalBlockUI": false,
-                                    length: recordPerPage,
-                                    start: currentFetchedCount
-                                };
-                                pageRequested++;
-                                $.ajax({
-                                    url: javatmp.settings.contextPath + "/cms/ListContentController",
-                                    data: passData,
-                                    success: function (response, textStatus, jqXHR) {
-                                        that.mcs.content.find(".fetch-indicator").remove();
-                                        var data = response.data.data;
-                                        allCount = response.data.recordsTotal;
-                                        $.each(data, function (index, row) {
-                                            currentFetchedCount++;
-                                            var readyData = template.composeTemplate({
-                                                'contentId': row.contentId,
-                                                'title': row.title,
-                                                'contentText': row.summaryText,
-                                                'creationDate': row.creationDate,
-                                                'formatedDate': moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss"),
-                                                'contextPath': javatmp.settings.contextPath
-                                            });
-                                            that.mcs.content.prepend(readyData);
-                                            that.mcs.content.find("time.timeago").timeago();
-                                        });
-                                        $(that).mCustomScrollbar("scrollTo", 1);
-                                        workingTop = false;
-                                    }
-                                });
-                            }
-                        }
-                    },
-                    onTotalScroll: function () {
-                        if (!workingDown) {
-                            console.log("** onTotalScroll currentFetch [" + currentFetchedCount + "], allCount [" + allCount + "]");
-                            if (currentFetchedCount < allCount) {
-                                workingDown = true;
-                                this.mcs.content.append(indicatorTemplate);
-                                var that = this;
-                                var passData = {
-                                    "_ajaxGlobalBlockUI": false,
-                                    length: recordPerPage,
-                                    start: currentFetchedCount
-                                };
-                                pageRequested++;
-                                $.ajax({
-                                    url: javatmp.settings.contextPath + "/cms/ListContentController",
-                                    data: passData,
-                                    success: function (response, textStatus, jqXHR) {
-                                        that.mcs.content.find(".fetch-indicator").remove();
-                                        var data = response.data.data;
-                                        allCount = response.data.recordsTotal;
-                                        $.each(data, function (index, row) {
-                                            currentFetchedCount++;
-                                            var readyData = template.composeTemplate({
-                                                'contentId': row.contentId,
-                                                'title': row.title,
-                                                'contentText': row.summaryText,
-                                                'creationDate': row.creationDate,
-                                                'formatedDate': moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss"),
-                                                'contextPath': javatmp.settings.contextPath
-                                            });
-                                            that.mcs.content.append(readyData);
-                                            that.mcs.content.find("time.timeago").timeago();
-                                        });
-                                        workingDown = false;
-                                    }
-                                });
-                            }
-                        }
-                    },
-                    onTotalScrollBackOffset: 0,
-                    onTotalScrollOffset: 200,
-                    alwaysTriggerOffsets: true
-                }
-            });
+            $.fn.dataTable.ext.errMode = 'none';
+            var tableSelector = '#formPluginAjaxUpload';
+            var table;
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
-                console.log("** Start Populate content dynamically ***");
-                $("#infinite-scroll").mCustomScrollbar("update");
-                if (!workingDown) {
-                    if (currentFetchedCount < allCount) {
-                        workingDown = true;
-                        $("#infinite-scroll .mCSB_container").append(indicatorTemplate);
-                        var passData = {
-                            "_ajaxGlobalBlockUI": false,
-                            length: recordPerPage,
-                            start: currentFetchedCount
-                        };
-                        pageRequested++;
-                        $.ajax({
-                            url: javatmp.settings.contextPath + "/cms/ListContentController",
-                            data: passData,
-                            success: function (response, textStatus, jqXHR) {
-                                $("#infinite-scroll .mCSB_container").find(".fetch-indicator").remove();
-                                var data = response.data.data;
-                                allCount = response.data.recordsTotal;
-                                $.each(data, function (index, row) {
-                                    currentFetchedCount++;
-                                    var readyData = template.composeTemplate({
-                                        'contentId': row.contentId,
-                                        'title': row.title,
-                                        'contentText': row.summaryText,
-                                        'creationDate': row.creationDate,
-                                        'formatedDate': moment(row.creationDate).format("YYYY/MM/DD HH:mm:ss"),
-                                        'contextPath': javatmp.settings.contextPath
-                                    });
-                                    $("#infinite-scroll .mCSB_container").append(readyData);
-                                    $("#infinite-scroll .mCSB_container").find("time.timeago").timeago();
-                                });
-                                workingDown = false;
-                                $("#infinite-scroll").mCustomScrollbar("scrollTo", 1);
-                            }
+
+                table = $(tableSelector).DataTable({
+//                responsive: true,
+                    dom: "<'row'<'col-sm-12'tr>>" +
+                            "<'row'<'col-sm-6'i><'col-sm-6 pt-2 text-right'l>>" +
+                            "<'row'<'col-sm-12'p>>",
+                    scrollY: 400,
+                    scrollX: true,
+                    "autoWidth": false,
+                    keys: true,
+                    select: "single",
+//                fixedColumns: true,
+//                "deferLoading": 0, // here
+                    scrollCollapse: false,
+                    "searching": true,
+                    searchDelay: 500,
+                    orderCellsTop: true, // important to for two row header with filteration below header column names.
+                    "processing": true,
+                    "serverSide": true,
+                    "drawCallback": function (settings) {
+//                    alert('DataTables has redrawn the table');
+                    },
+                    initComplete: function () {
+                        this.api().columns().every(function (index) {
+                            var column = this;
                         });
-                    }
-                }
-            });
+                    },
+                    "ajax": {
+                        "type": "POST",
+                        "url": javatmp.settings.contextPath + "/cms/ListContent",
+                        dataType: "json",
+                        contentType: "application/json; charset=UTF-8",
+                        "data": function (currentDate) {
+                            currentDate._ajaxGlobalBlockUI = false; // window blocked until data return
+                            return JSON.stringify(currentDate);
+                        },
+                        "dataSrc": function (json) {
+                            json["recordsTotal"] = json.data.recordsTotal;
+                            json["recordsFiltered"] = json.data.recordsFiltered;
+                            return json.data.data;
+                        }
+                    },
+                    columns: [
+                        {data: 'contentId', name: 'contentId'},
+                        {data: 'title', name: 'title'},
+                        {data: 'createdBy', name: 'createdBy'},
+                        {data: 'status', name: 'status'},
+                        {
+                            data: 'creationDate',
+                            name: 'creationDate',
+                            "type": "date",
+                            "render": function (data, type, row) {
+                                return moment(data, "YYYY-MM-DDTHH:mm:ss.SSSZ").format("DD/MM/YYYY HH:mm");
+                            }
+                        }
+                    ]
+                });
 
-            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
-                // fire when user resize browser window or sidebar hide / show
-            });
+                $(".addNewContentButton", javatmp.settings.defaultOutputSelector).on("click", function (event) {
+                    var passData = {};
+                    passData.callback = "actionCallback";
+                    BootstrapModalWrapperFactory.createAjaxModal({
+                        message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
+                        title: "${labels['global.loadingText']}",
+                        passData: passData,
+                        updateSizeAfterDataFetchTo: "modal-lg", // default is  or null for standard or "modal-sm"
+                        size: "modal-lg",
+                        url: javatmp.settings.contextPath + "/pages/content/CreateNewContent",
+                        ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
+                    });
+                });
 
-            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenCompress, function (event, card) {
-                // when card compress by pressing the top right tool button
-            });
 
-            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenExpand, function (event, card) {
-                // when card Expand by pressing the top right tool button
-            });
 
-            /**
-             * When another sidebar menu item pressed and before container issues new ajax request.
-             * You can cancel, destroy, or remove any thing here before replace main output ajax container.
-             * return false or event.preventDefault() will cancel ajax and stay you in the current page and do nothing.
-             **/
-            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {
-                $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenCompress);
-                $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenExpand);
-                return true;
+
+                $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
+                    // fire when user resize browser window or sidebar hide / show
+                    table.columns.adjust();
+                });
+
+                $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenCompress, function (event, card) {
+                    // when card compress by pressing the top right tool button
+                    table.columns.adjust();
+                });
+
+                $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenExpand, function (event, card) {
+                    // when card Expand by pressing the top right tool button
+                    table.columns.adjust();
+                });
+
+                /**
+                 * When another sidebar menu item pressed and before container issues new ajax request.
+                 * You can cancel, destroy, or remove any thing here before replace main output ajax container.
+                 * return false or event.preventDefault() will cancel ajax and stay you in the current page and do nothing.
+                 **/
+                $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {
+                    $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenCompress);
+                    $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenExpand);
+                    table.clear();
+                    table.destroy(true);
+                    return true;
+                });
             });
         });
     </script>

@@ -261,7 +261,6 @@
                 if (record.status !== 0) {
                     deActivateUserButton.prop("disabled", false);
                 }
-
             }
             disabled();
 

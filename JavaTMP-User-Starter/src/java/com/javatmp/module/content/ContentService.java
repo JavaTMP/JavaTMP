@@ -85,6 +85,7 @@ public class ContentService {
         calendar.add(Calendar.DAY_OF_MONTH, -1001);
         content.setCreationDate(calendar.getTime());
         content.setStatus((short) 1);
+        content.setCreatedBy(1L);
         content.setTitle("Java (programming language) Wikipedia Page");
         content.setSummaryText("<p><b>Java</b> is a general-purpose <b>computer-programming language</b> that is <b>concurrent</b>, <b>class-based</b>, <b>object-oriented</b>, and specifically designed to have as few implementation dependencies as possible. It is intended to let application developers \"<b>write once, run anywhere</b>\" (WORA), meaning that <b>compiled</b> Java code can run on all platforms that support Java without the need for recompilation.</p>");
         content.setContentText("<p><b>Java</b> is a general-purpose <b>computer-programming language</b> that is <b>concurrent</b>, <b>class-based</b>, <b>object-oriented</b>, and specifically designed to have as few implementation dependencies as possible. It is intended to let application developers \"<b>write once, run anywhere</b>\" (WORA), meaning that <b>compiled</b> Java code can run on all platforms that support Java without the need for recompilation. Java applications are typically compiled to <b>bytecode</b> that can run on any <b>Java virtual machine</b> (JVM) regardless of <b>computer architecture</b>. As of 2016, Java is one of the most <b>popular programming languages</b> in use, particularly for client-server web applications, with a reported 9 million developers. Java was originally developed by<b> James Gosling</b> at <b>Sun Microsystems</b> (which has since been acquired by <b>Oracle Corporation</b>) and released in 1995 as a core component of Sun Microsystems' Java platform. The language derives much of its syntax from C and C++, but it has fewer low-level facilities than either of them.</p>\n"
@@ -110,6 +111,7 @@ public class ContentService {
             calendar.set(Calendar.SECOND, ThreadLocalRandom.current().nextInt(0, 60));
             calendar.set(Calendar.MILLISECOND, ThreadLocalRandom.current().nextInt(0, 1000));
             content.setCreationDate(calendar.getTime());
+            content.setCreatedBy(1L);
             content.setStatus((short) 1);
             content.setTitle("Fake data content title to show you id number " + content.getContentId());
             content.setSummaryText("<p>A fake data summary text to show you number " + content.getContentId() + " geneated from fake database, Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>");

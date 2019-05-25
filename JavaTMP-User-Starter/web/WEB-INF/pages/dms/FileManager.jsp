@@ -50,9 +50,6 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr id="emptyUploadedFilesSizeRowId">
-                                            <td colspan="7" align="center">Empty Uploaded Files Size</th>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
