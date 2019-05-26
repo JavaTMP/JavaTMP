@@ -65,7 +65,7 @@ public class JdbcHelper {
         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/appdb?zeroDateTimeBehavior=CONVERT_TO_NULL", "root", "mmmmmm");
         DatabaseMetaData meta = conn.getMetaData();
         // meta.getTables(null, null, "%", new String[]{"TABLE"})
-        try (ResultSet tables = meta.getTables("sakila", null, "%", new String[]{"TABLE"})) {
+        try (ResultSet tables = meta.getTables("appdb", null, "%", new String[]{"TABLE"})) {
             while (tables.next()) {
                 String catalog = tables.getString("TABLE_CAT");
                 String schema = tables.getString("TABLE_SCHEM");

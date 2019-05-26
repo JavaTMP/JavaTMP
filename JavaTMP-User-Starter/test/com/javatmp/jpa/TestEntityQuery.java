@@ -6,6 +6,7 @@
 package com.javatmp.jpa;
 
 import com.javatmp.module.user.User;
+import com.javatmp.mvc.MvcHelper;
 import com.javatmp.util.JpaDaoHelper;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -41,11 +42,17 @@ public class TestEntityQuery {
         JpaDaoHelper jpaDaoHelper = new JpaDaoHelper("AppPU");
         EntityManager em = jpaDaoHelper.getEntityManagerFactory().createEntityManager();
 
-        EntityQuery.create(em, User.class)
+        List<User> users = EntityQuery.create(em, User.class)
                 .setFirstResult(0)
                 .setMaxResults(10)
                 .addDescendingOrderBy("creationDate")
-                .stringEqualsTo("id", "1").list();
+                .stringEqualsTo("profilePicDocument.documentName", "personal.jpg").list();
+
+        System.out.println("size [" + users.size() + "]");
+        System.out.println("users [" + users + "]");
+        users.forEach(user -> {
+            System.out.println(MvcHelper.toString(user));
+        });
 
     }
 
