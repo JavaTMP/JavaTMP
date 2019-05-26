@@ -36,6 +36,10 @@ public class Content implements Serializable {
     public Content() {
     }
 
+    public Content(Long contentId) {
+        this.contentId = contentId;
+    }
+
     public Content(Long contentId, String title, String summaryText, String contentText,
             Date creationDate, Long createdBy, Short status) {
         this.contentId = contentId;

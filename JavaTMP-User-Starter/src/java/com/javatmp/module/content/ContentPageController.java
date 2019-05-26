@@ -18,7 +18,7 @@ public class ContentPageController extends HttpServlet {
 
         ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         ContentService cs = sf.getContentService();
-        Content content = cs.getContents().get(0);
+        Content content = cs.readContentById(new Content(1L));
         request.setAttribute("content", content);
         request.getRequestDispatcher("/WEB-INF/pages/content/ViewContent.jsp").forward(request, response);
 
