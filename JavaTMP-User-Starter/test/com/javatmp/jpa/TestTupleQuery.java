@@ -5,6 +5,8 @@
  */
 package com.javatmp.jpa;
 
+import com.javatmp.module.dms.Document;
+import com.javatmp.module.dms.Document_;
 import com.javatmp.module.user.User;
 import com.javatmp.module.user.User_;
 import com.javatmp.mvc.MvcHelper;
@@ -46,9 +48,24 @@ public class TestTupleQuery {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<Tuple> query = criteriaBuilder.createTupleQuery();
         Root<User> user = query.from(User.class);
-        query.select(criteriaBuilder.tuple(user.get(User_.firstName), user.get(User_.lastName)));
-        List<Tuple> resultList = em.createQuery(query).getResultList();
+        query.select(criteriaBuilder.tuple(user.get(User_.firstName), user.get(User_.lastName),
+                user.get(User_.profilePicDocument).get(Document_.documentId),
+                user.get(User_.profilePicDocument).get(Document_.documentName)));
+        List<Tuple> resultList = em.createQuery(query).setFirstResult(0).setMaxResults(1).getResultList();
         resultList.forEach(tuple -> {
+            System.out.println("first name [" + tuple.getElements().get(0).getAlias() + "]");
+//            System.out.println(MvcHelper.deepToString(tuple.getElements()));
+            System.out.println(MvcHelper.toString(tuple));
+        });
+
+        query = criteriaBuilder.createTupleQuery();
+        Root<Document> document = query.from(Document.class);
+        query.select(criteriaBuilder.tuple(document.get(Document_.contentType), criteriaBuilder.count(document.get(Document_.contentType))));
+        query.groupBy(document.get(Document_.contentType));
+        resultList = em.createQuery(query).setFirstResult(0).setMaxResults(10).getResultList();
+        resultList.forEach(tuple -> {
+            System.out.println("first name [" + tuple.getElements().get(0).getAlias() + "]");
+//            System.out.println(MvcHelper.deepToString(tuple.getElements()));
             System.out.println(MvcHelper.toString(tuple));
         });
 
