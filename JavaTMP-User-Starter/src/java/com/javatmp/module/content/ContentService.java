@@ -24,7 +24,7 @@ public class ContentService {
 
     public ContentService(JpaDaoHelper jpaDaoHelper) {
         this.jpaDaoHelper = jpaDaoHelper;
-        generateContent();
+//        generateContent();
     }
 
     public Long getAllCount() {
