@@ -35,7 +35,6 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 @WebServlet("/content/CreateNewContent")
-@MultipartConfig(fileSizeThreshold = 1024 * 15, maxFileSize = 1024 * 100, maxRequestSize = 1024 * 200)
 public class CreateNewContent extends HttpServlet {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
@@ -51,7 +50,9 @@ public class CreateNewContent extends HttpServlet {
         ResourceBundle labels = (ResourceBundle) session.getAttribute(Constants.LANGUAGE_ATTR_KEY);
 
         try {
-            Content contentToBeCreated = (Content) MvcHelper.readObjectFromRequest(request, Content.class);
+//            Content contentToBeCreated = (Content) MvcHelper.readObjectFromRequest(request, Content.class);
+            Content contentToBeCreated = new Content();
+            MvcHelper.populateBeanByRequestParameters(request, contentToBeCreated);
 
             contentToBeCreated.setCreationDate(new Date());
             contentToBeCreated.setStatus((short) 1);
@@ -76,6 +77,10 @@ public class CreateNewContent extends HttpServlet {
             logger.log(Level.SEVERE, t.getMessage(), t);
             responseMessage.setOverAllStatus(false);
             responseMessage.setMessage(t.getMessage());
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(CreateNewContent.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvocationTargetException ex) {
+            Logger.getLogger(CreateNewContent.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         MvcHelper.sendMessageAsJson(response, responseMessage);

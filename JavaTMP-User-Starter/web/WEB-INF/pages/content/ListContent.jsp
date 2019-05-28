@@ -16,24 +16,17 @@
                             <div class="content-list-btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
                                 <button
                                     action-name="addNewContentButton"
-                                    type="button" class="addNewContentButton btn btn-primary">
-                                    <i class="fa fa-external-link-alt fa-fw"></i>
+                                    type="button" class="btn btn-primary">
+                                    <i class="fas fa-plus fa-fw"></i>
                                     Add Content
                                 </button>
-                                <button
-                                    id="UserList-AddNewUserByWizardPopupId"
-                                    action-name="Add-New-User-By-Wizard-Popup-Action"
-                                    type="button"
-                                    class="btn btn-primary">
-                                    Add User By Wizard Popup
-                                </button>
-                                <button action-name="Update-Complete-User-Action" id="UserList-UpdateSelectedUserId" type="button" class="btn btn-primary">
-                                    <i class="fa fa-user-edit fa-fw"></i>
-                                    ${labels['page.btn.updateCompleteUser']}
+                                <button action-name="updateContentAction" type="button" class="btn btn-primary">
+                                    <i class="far fa-edit fa-fw"></i>
+                                    Update Content
                                 </button>
                                 <button action-name="Delete-User-Action" id="UserList-DeleteSelectedUserId" type="button" class="btn btn-primary">
-                                    <i class="fa fa-user-times fa-fw text-danger"></i>
-                                    ${labels['page.btn.deleteUser']}
+                                    <i class="fas fa-ban fa-fw text-danger"></i>
+                                    Delete Content
                                 </button>
                                 <button action-name="Activate-User-Action" id="UserList-ActivateSelectedUserId" type="button" class="btn btn-primary">
                                     <i class="fa fa-user-check fa-fw text-success"></i>
@@ -145,7 +138,7 @@
                     ]
                 });
 
-                $(".addNewContentButton", javatmp.settings.defaultOutputSelector).on("click", function (event) {
+                $("[action-name='addNewContentButton']", javatmp.settings.defaultOutputSelector).on("click", function (event) {
                     var passData = {};
                     passData.callback = "actionCallback";
                     BootstrapModalWrapperFactory.createAjaxModal({

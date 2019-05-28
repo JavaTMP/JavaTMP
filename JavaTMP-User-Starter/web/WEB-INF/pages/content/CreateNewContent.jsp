@@ -5,7 +5,7 @@
 <div class="dynamic-ajax-content grid-gutter-padding">
     <div class="row">
         <div class="col-lg-12">
-            <form enctype="multipart/form-data" autocomplete="off" method="post" novalidate="novalidate"
+            <form autocomplete="off" method="post" novalidate="novalidate"
                   class="form addNewContentForm" action="${pageContext.request.contextPath}/content/CreateNewContent">
                 <div class="form-row">
                     <div class="col-lg-12">
@@ -81,7 +81,7 @@
                 // here we run passing function name as a remote callback
                 javatmp.util.waitForFinalEvent(function () {
                     if ($.isFunction(modal.options.passData.callback)) {
-                        modal.options.passData.callback.apply();
+                        modal.options.passData.callback.call(null, callbackData);
                     } else if ($.type(modal.options.passData.callback) === "string") {
                         javatmp.util.executeFunctionByName(modal.options.passData.callback, window, callbackData);
                     }
@@ -126,15 +126,6 @@
                     }
                 },
                 beforeSubmit: function (formData, jqForm, options) {
-                    for (var i = 0; i < formData.length; i++) {
-                        if (formData[i].name === "birthDate") {
-                            var value = formData[i].value;
-                            var newDate = moment(value, javatmp.settings.dateFormat).locale('en').format(javatmp.settings.networkDateFormat);
-                            formData[i].value = newDate;
-                            break;
-                        }
-                    }
-
                 },
                 success: function (response, statusText, xhr, $form) {
                     callbackData.cancel = false;
@@ -164,11 +155,7 @@
             // initialize jQuery Validation plugin using global data.
             validator = form.validate();
 
-            var modalZIndex = modal.originalModal.css('zIndex');
-
             var addressEditor = javatmp.plugins.summernoteWrapper(form.find("textarea[name='contentText']"));
-
-
         });
     });
 </script>
