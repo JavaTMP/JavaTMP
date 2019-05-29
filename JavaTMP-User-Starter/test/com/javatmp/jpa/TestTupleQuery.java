@@ -101,11 +101,11 @@ public class TestTupleQuery {
             System.out.println(MvcHelper.toString(tuple));
         });
 
-        auto = createEntityFromTuple(resultList, Document.class);
-
-        auto.forEach(doc -> {
-            System.out.println(MvcHelper.toString(doc));
-        });
+//        auto = createEntityFromTuple(resultList, Document.class);
+//
+//        auto.forEach(doc -> {
+//            System.out.println(MvcHelper.toString(doc));
+//        });
     }
 
     private static <T> List<T> createEntityFromTuple(List<Tuple> tuples, Class<T> entity) throws InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
