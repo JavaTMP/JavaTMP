@@ -66,6 +66,10 @@ public class ContentService {
         return this.getJpaDaoHelper().read(Content.class, content.getContentId());
     }
 
+    public void deleteContent(Content content) {
+        this.jpaDaoHelper.delete(content);
+    }
+
     public DataTableResults<Content> listContent(DataTableRequest<Content> page) throws ParseException {
 
         page.setClassType(Content.class);
