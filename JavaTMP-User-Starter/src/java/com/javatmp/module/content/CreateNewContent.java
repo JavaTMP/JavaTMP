@@ -1,38 +1,24 @@
 package com.javatmp.module.content;
 
 import com.javatmp.module.user.*;
-import com.javatmp.module.country.Countrytranslation;
-import com.javatmp.module.dms.Document;
-import com.javatmp.module.language.Languagetranslation;
-import com.javatmp.module.theme.Themetranslation;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.domain.ResponseMessage;
-import com.javatmp.module.dms.DocumentService;
-import com.javatmp.module.timezone.Timezonetranslation;
 import com.javatmp.util.ServicesFactory;
 import com.javatmp.util.Constants;
-import com.javatmp.util.MD5Util;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
-import java.nio.file.Paths;
 import java.util.Date;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.PersistenceException;
-import javax.servlet.ServletContext;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
 @WebServlet("/content/CreateNewContent")
 public class CreateNewContent extends HttpServlet {

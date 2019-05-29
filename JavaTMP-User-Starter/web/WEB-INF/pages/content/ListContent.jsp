@@ -147,6 +147,26 @@
                         ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                     });
                 });
+                $("[action-name='updateContentAction']", javatmp.settings.defaultOutputSelector).on("click", function (event) {
+                    //                var selectedCount = table.rows({selected: true}).count();
+                    var selectedData = table.rows({selected: true}).data();
+                    if (selectedData.length > 0) {
+                        var selectedRecord = selectedData[0];
+                        var passData = {};
+                        passData.callback = "actionCallback";
+                        passData.contentId = selectedRecord.contentId;
+                        BootstrapModalWrapperFactory.createAjaxModal({
+                            message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
+                            passData: passData,
+                            updateSizeAfterDataFetchTo: "modal-lg", // default is  or null for standard or "modal-sm"
+                            size: "modal-lg",
+                            url: javatmp.settings.contextPath + "/content/UpdateContent",
+                            ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
+                        });
+                    } else {
+                        BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
+                    }
+                });
                 $("[action-name='deleteContentAction']", javatmp.settings.defaultOutputSelector).on("click", function (event) {
                     var selectedData = table.rows({selected: true}).data();
                     if (selectedData.length > 0) {
@@ -159,7 +179,7 @@
                                 javatmp.settings.contextPath + "/content/DeleteContent",
                                 selectedRecord,
                                 function (data) {
-                                    table.columns.draw();
+                                    table.draw();
                                 }
                         );
                     } else {
