@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-lg-12">
             <form autocomplete="off" method="post" novalidate="novalidate"
-                  class="form addNewContentForm" action="${pageContext.request.contextPath}/content/CreateNewContent">
+                  class="form addNewContentForm" action="${pageContext.request.contextPath}/content/UpdateContent">
                 <div class="form-row">
                     <div class="col-lg-12">
                         <div class="form-row">
@@ -14,7 +14,7 @@
                                 <div class="form-group">
                                     <label class="control-label">title</label>
                                     <input class="form-control" type="text" placeholder="title"
-                                           name="firstName"
+                                           name="firstName" value="${requestScope.content.title}"
                                            data-rule-required="true">
                                 </div>
                             </div>
@@ -23,7 +23,7 @@
                                     <label class="control-label">summaryText</label>
                                     <textarea rows="5" class="form-control forceValidate" placeholder="summaryText" name="summaryText"
                                               data-rule-required="true"
-                                              data-rule-maxlength="1000"></textarea>
+                                              data-rule-maxlength="1000">${requestScope.content.summaryText}</textarea>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -31,7 +31,7 @@
                                     <label class="control-label">contentText</label>
                                     <textarea rows="5" class="form-control forceValidate" placeholder="" name="contentText"
                                               data-rule-summernoteRequired="true"
-                                              data-rule-maxlength="5000"></textarea>
+                                              data-rule-maxlength="5000">${requestScope.content.contentText}</textarea>
                                 </div>
                             </div>
                         </div>

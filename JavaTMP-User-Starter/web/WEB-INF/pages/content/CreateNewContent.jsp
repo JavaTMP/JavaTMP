@@ -14,7 +14,7 @@
                                 <div class="form-group">
                                     <label class="control-label">title</label>
                                     <input class="form-control" type="text" placeholder="title"
-                                           name="firstName"
+                                           name="title"
                                            data-rule-required="true">
                                 </div>
                             </div>

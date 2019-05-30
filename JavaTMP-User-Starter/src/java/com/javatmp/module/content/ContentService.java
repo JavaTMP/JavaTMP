@@ -50,7 +50,7 @@ public class ContentService {
             dbContent.setTitle(content.getTitle());
             dbContent.setSummaryText(content.getSummaryText());
             dbContent.setContentText(content.getContentText());
-            dbContent.setStatus(content.getStatus());
+//            dbContent.setStatus(content.getStatus());
             em.getTransaction().commit();
             updateStatus = 1;
         } catch (PersistenceException e) {

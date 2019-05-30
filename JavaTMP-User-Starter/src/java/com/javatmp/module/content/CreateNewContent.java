@@ -46,15 +46,8 @@ public class CreateNewContent extends HttpServlet {
 
             contentToBeCreated = cs.getJpaDaoHelper().create(contentToBeCreated);
             responseMessage.setOverAllStatus(true);
-            responseMessage.setMessage(labels.getString("action.createUser.successMsg"));
+            responseMessage.setMessage("Content Created Successfully");
             responseMessage.setData(contentToBeCreated);
-
-        } catch (IllegalStateException e) {
-            logger.info("ERROR : " + e.getMessage());
-            responseMessage.setOverAllStatus(false);
-            responseMessage.setMessage(labels.getString("action.createUser.wrongDocumentSize"));
-            response.setStatus(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE);
-            responseMessage.setStatusCode(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE);
         } catch (PersistenceException e) {
             Throwable t = e;
             while (t.getCause() != null) {

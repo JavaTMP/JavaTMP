@@ -49,6 +49,8 @@ public class UpdateContent extends HttpServlet {
             HttpSession session = request.getSession();
             User loggedInUser = (User) session.getAttribute("user");
 
+            request.setAttribute("content", content);
+
             request.getRequestDispatcher(requestPage).forward(request, response);
 
         } catch (IllegalAccessException ex) {
@@ -61,71 +63,34 @@ public class UpdateContent extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
 
         ResponseMessage responseMessage = new ResponseMessage();
         ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
-        DocumentService ds = sf.getDocumentService();
-        UserService us = sf.getUserService();
+        ContentService cs = sf.getContentService();
+        Content contentToBeUpdated = new Content();
 
         try {
-
-            User userToBeUpdated = new User();
-            User dbUser = null;
-            String oldPassword = request.getParameter("oldPassword");
-            MvcHelper.populateBeanByRequestParameters(request, userToBeUpdated);
-            logger.info("User to be Updated is [" + MvcHelper.toString(userToBeUpdated) + "]");
-
-            dbUser = us.readCompleteUserById(userToBeUpdated);
-            logger.info("Existing DB User to be Updated is [" + MvcHelper.toString(dbUser) + "]");
-
-            // first check if existing db password equal provided old password:
-            if (dbUser.getPassword().equals(MD5Util.convertToMD5(oldPassword)) == false) {
-                throw new IllegalArgumentException("Existing Password does not match provided old password");
+            MvcHelper.populateBeanByRequestParameters(request, contentToBeUpdated);
+            if (cs.updateContent(contentToBeUpdated) == 1) {
+                // content updated successfully:
+                responseMessage.setOverAllStatus(true);
+                responseMessage.setMessage("Content Updated successfully");
+            } else {
+                // content does not updated successfully:
+                responseMessage.setOverAllStatus(false);
+                responseMessage.setMessage("Content NOT Updated");
             }
 
-            logger.info("UserToBeCreated is [" + MvcHelper.deepToString(userToBeUpdated) + "]");
-            userToBeUpdated.setPassword(MD5Util.convertToMD5(userToBeUpdated.getPassword()));
+            MvcHelper.sendMessageAsJson(response, responseMessage);
 
-            Document fileUploading = MvcHelper.readDocumentFromRequestIfExist(request, "profilePicture");
-            if (fileUploading != null) {
-                fileUploading.setDocumentId(dbUser.getProfilePicDocumentId());
-                userToBeUpdated.setProfilePicDocument(fileUploading);
-                userToBeUpdated.setProfilePicDocumentId(fileUploading.getDocumentId());
-            }
-
-            int updateStatus = us.updateCompleteUser(userToBeUpdated);
-
-            responseMessage.setOverAllStatus(Boolean.TRUE);
-            responseMessage.setMessage("User Updated successfully");
-            responseMessage.setData(userToBeUpdated);
-        } catch (PersistenceException e) {
-            Throwable t = e;
-            while (t.getCause() != null) {
-                t = t.getCause();
-            }
-            responseMessage.setOverAllStatus(false);
-            responseMessage.setMessage(t.getMessage());
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            responseMessage.setStatusCode(HttpServletResponse.SC_BAD_REQUEST);
-        } catch (IllegalArgumentException e) {
-            logger.info("ERROR : " + e.getMessage());
-            responseMessage.setOverAllStatus(false);
-            responseMessage.setMessage(e.getMessage());
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            responseMessage.setStatusCode(HttpServletResponse.SC_BAD_REQUEST);
-        } catch (IllegalStateException e) {
-            logger.info("ERROR : " + e.getMessage());
-            responseMessage.setOverAllStatus(false);
-            responseMessage.setMessage("The file to be uploaded exceeds its maximum permitted size of 51200 bytes - " + e.getMessage());
-            response.setStatus(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE);
-            responseMessage.setStatusCode(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE);
         } catch (IllegalAccessException ex) {
             logger.log(Level.SEVERE, null, ex);
+            throw new ServletException(ex);
         } catch (InvocationTargetException ex) {
             logger.log(Level.SEVERE, null, ex);
+            throw new ServletException(ex);
         }
-        MvcHelper.sendMessageAsJson(response, responseMessage);
-
     }
 }

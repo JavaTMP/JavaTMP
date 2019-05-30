@@ -105,7 +105,7 @@
                                 }
                                 $('#Update-Content-Form-Id').ajaxSubmit({
 //                                    contentType: "application/json; charset=utf-8",
-                                    url: javatmp.settings.contextPath + '/cms/UpdateContentController',
+                                    url: javatmp.settings.contextPath + '/content/UpdateContent',
                                     beforeSerialize: function ($form, options) {
                                         $("#summernote").summernote('triggerEvent', 'change');
                                     },
