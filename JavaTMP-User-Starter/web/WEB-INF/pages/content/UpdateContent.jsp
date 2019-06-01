@@ -70,7 +70,7 @@
                 }
             });
             modal.addButton({
-                label: "Create Content",
+                label: "Update Content",
                 cssClass: "btn btn-primary",
                 action: function (modalWrapper, button, buttonData, originalEvent) {
                     form.trigger("submit");

@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.9 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.9 (Current Development Version)
 
-##
+## b8140ac on Jun 1, 2019, 5:50 AM GMT+4
 - Update the following dependencies:
     - gulp-chmod from 2.0.0 to 3.0.0
     - gulp-zip from 4.2.0 to 5.0.0
@@ -11,7 +11,7 @@ title: Java Bootstrap Template Version 0.0.9 (Current Development Version)
     - jquery.fancytree from 2.30.2 to 2.31.0
 - Run gulp default to regenerate dist folders.
 
-## bf80747 May 23, 2019, 3:27 AM GMT+4
+## bf80747 on May 23, 2019, 3:27 AM GMT+4
 - Update the following dependencies:
     - del from 4.1.0 to 4.1.1
     - gulp from 4.0.1 to 4.0.2
