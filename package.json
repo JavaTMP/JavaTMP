@@ -20,7 +20,7 @@
     "devDependencies": {
         "del": "^4.1.1",
         "gulp": "^4.0.2",
-        "gulp-chmod": "^2.0.0",
+        "gulp-chmod": "^3.0.0",
         "gulp-concat": "^2.6.1",
         "gulp-connect": "^5.7.0",
         "gulp-eslint": "^5.0.0",
@@ -32,7 +32,7 @@
         "gulp-processhtml": "^1.2.0",
         "gulp-rename": "^1.4.0",
         "gulp-uglify": "^3.0.2",
-        "gulp-zip": "^4.2.0",
+        "gulp-zip": "^5.0.0",
         "pump": "^3.0.0",
         "run-sequence": "^2.2.1"
     }
