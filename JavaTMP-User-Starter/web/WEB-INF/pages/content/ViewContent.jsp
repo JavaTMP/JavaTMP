@@ -5,14 +5,7 @@
     <hr/>
     <div class="row">
         <div class="col-lg-12">
-            <div class="alert alert-info">
-                <p>Summernote is a JavaScript library that helps you create WYSIWYG editors online.</p>
-                <p>
-                    <a class="btn btn-info" target="_blank" href="http://summernote.org/"><i class="fa fa-external-link-alt fa-fw"></i>Demo Page</a>
-                    <a class="btn btn-info" target="_blank" href="https://github.com/summernote/summernote/"><i class="fa fa-external-link-alt fa-fw"></i>github.com Page</a>
-                </p>
-            </div>
-            <div class="card my-3">
+            <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between py-1 px-3">
                     <ul class="nav">
                         <li class="nav-item">

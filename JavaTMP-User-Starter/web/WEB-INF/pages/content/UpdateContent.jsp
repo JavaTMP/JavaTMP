@@ -12,9 +12,17 @@
                         <div class="form-row">
                             <div class="col-12">
                                 <div class="form-group">
+                                    <label class="control-label col-form-label">Content Id</label>
+                                    <input readonly="readonly" class="form-control-plaintext" type="text" placeholder="Content Id"
+                                           name="contentId" value="${requestScope.content.contentId}"
+                                           data-rule-required="true">
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group">
                                     <label class="control-label">title</label>
                                     <input class="form-control" type="text" placeholder="title"
-                                           name="firstName" value="${requestScope.content.title}"
+                                           name="title" value="${requestScope.content.title}"
                                            data-rule-required="true">
                                 </div>
                             </div>

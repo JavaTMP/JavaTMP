@@ -28,7 +28,10 @@
                                     <i class="fas fa-ban fa-fw text-danger"></i>
                                     Delete
                                 </button>
-                                <button action-name="viewContentAction" type="button" class="btn btn-primary">
+                                <button
+                                    action-name="viewContentAction" type="button" class="btn btn-primary"
+                                    actionType="action-ref-href"
+                                    action-ref-by-href="${pageContext.request.contextPath}/pages/content/ViewContent">
                                     <i class="far fa-eye fa-fw text-success"></i>
                                     View
                                 </button>
@@ -76,6 +79,13 @@
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
+
+                window.actionCallback = function (callbackData) {
+                    if (callbackData.cancel === true) {
+                    } else {
+                        table.columns.adjust().draw();
+                    }
+                };
 
                 table = $(tableSelector).DataTable({
 //                responsive: true,

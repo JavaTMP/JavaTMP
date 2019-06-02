@@ -265,7 +265,7 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/cms/ContentPageController">
+                                        <a href="${pageContext.request.contextPath}/pages/content/ViewContent">
                                             View Content
                                         </a>
                                     </li>
