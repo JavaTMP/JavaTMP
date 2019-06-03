@@ -30,11 +30,15 @@
                     <form id="Update-Content-Form-Id" method="POST" action="${pageContext.request.contextPath}/cms/UpdateContentController">
                         <div class="form-group">
                             <label for="contentId">Content Id</label>
-                            <input readonly="" name="contentId" type="text" class="form-control" id="contentId" value="${requestScope.content.contentId}">
+                            <input readonly="" name="contentId" type="text" class="form-control" id="contentId" value="">
+                        </div>
+                        <div class="form-group">
+                            <label for="contentId">Content Title</label>
+                            <input readonly="" name="title" type="text" class="form-control" value="">
                         </div>
                         <div class="form-group">
                             <label for="contentId">Content Body Text</label>
-                            <textarea name="contentText" id="summernote" class="form-control">${fn:escapeXml(requestScope.content.contentText)}</textarea>
+                            <textarea name="contentText" id="summernote" class="form-control"></textarea>
                         </div>
                     </form>
                 </div>
@@ -50,6 +54,7 @@
         jQuery(function ($) {
             // any code put here will be run after content attach to ajax output container and before
             // controll return to main javascript file.
+            var form = $("#Update-Content-Form-Id");
             $('#summernote').summernote({
                 direction: javatmp.settings.direction,
                 lang: javatmp.user.lang === "ar" ? "ar-AR" : javatmp.user.lang,
@@ -173,6 +178,14 @@
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
+                var passData = $(javatmp.settings.defaultOutputSelector).data("passData");
+//                alert(JSON.stringify(passData));
+                if (passData && passData.contentId) {
+//                    alert(JSON.stringify(passData));
+                    window.javatmp.plugins.populateForm(form, passData);
+                    form.find("textarea[name='contentText']").summernote('code', passData.contentText);
+                    form.find("textarea[name='contentText']").summernote('triggerEvent', 'change');
+                }
             });
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
                 // fire when user resize browser window or sidebar hide / show

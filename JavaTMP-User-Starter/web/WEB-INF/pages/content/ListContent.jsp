@@ -197,6 +197,18 @@
                     }
                 });
 
+                $("[action-name='viewContentAction']", javatmp.settings.defaultOutputSelector).on("click", function (event) {
+                    var selectedData = table.rows({selected: true}).data();
+                    if (selectedData.length > 0) {
+                        var selectedRecord = selectedData[0];
+                        $(javatmp.settings.defaultOutputSelector).data("passData", selectedRecord);
+                    } else {
+                        event.preventDefault();
+                        BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
+                        return false;
+                    }
+                });
+
 
 
 
