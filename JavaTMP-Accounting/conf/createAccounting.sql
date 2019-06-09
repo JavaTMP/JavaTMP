@@ -436,8 +436,8 @@ acctTrans.amount as amount,
 else abs(coalesce(acctTrans.amount, 0)) * coalesce(acctt.creditSign, 0) end) as entryAmount,
 trans.`voucherTypeId` as sourceDocument, trans.code as code
 from accountTransaction acctTrans
-left outer join account acct on (acct.id = acctTrans.accountId)
-left outer join `transaction` trans on (acctTrans.transactionId = trans.id)
-left outer join accountGroup acctgrp on (acct.accountGroup = acctgrp.id)
-left outer join accountType acctt on (acctt.id = acctgrp.accountType)
+join account acct on (acct.id = acctTrans.accountId)
+join `transaction` trans on (acctTrans.transactionId = trans.id)
+join accountGroup acctgrp on (acct.accountGroup = acctgrp.id)
+join accountType acctt on (acctt.id = acctgrp.accountType)
 ) entries;
