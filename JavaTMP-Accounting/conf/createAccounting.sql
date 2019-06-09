@@ -219,6 +219,9 @@ CREATE TABLE transaction (
     CONSTRAINT transaction_voucherTypeId_fk FOREIGN KEY (voucherTypeId) REFERENCES voucherType (id)
 ) ENGINE=InnoDB;
 
+CREATE INDEX transaction_transDateASC_ind ON transaction (transactionDate ASC);
+CREATE INDEX transaction_transDateDESC_ind ON transaction (transactionDate DESC);
+
 CREATE TABLE accountTransaction (
     id BIGINT UNSIGNED not null AUTO_INCREMENT,
     transactionId BIGINT UNSIGNED not null,
