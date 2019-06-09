@@ -12,4 +12,6 @@ title: Uploading files from front end to Java Web Application
 *   [https://dotnetthoughts.net/how-to-upload-multiple-files-with-html5-and-jquery/](https://dotnetthoughts.net/how-to-upload-multiple-files-with-html5-and-jquery/)
 *   [http://www.nickdesteffen.com/blog/file-uploading-over-ajax-using-html5](http://www.nickdesteffen.com/blog/file-uploading-over-ajax-using-html5)
 *   [http://jsfiddle.net/javatmp/av06zfk2/](http://jsfiddle.net/javatmp/av06zfk2/)
+*   [https://www.codeforest.net/html5-image-upload-resize-and-crop](https://www.codeforest.net/html5-image-upload-resize-and-crop)
+*   [https://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-uploaded](https://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-uploaded)
 
