@@ -292,6 +292,11 @@
                                             Mustache.js
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/system/editProfileImage">
+                                            Edit Profile Image
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>

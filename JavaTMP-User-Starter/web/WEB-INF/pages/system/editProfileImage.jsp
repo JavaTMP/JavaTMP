@@ -1,10 +1,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="dynamic-ajax-content grid-gutter-padding">
-    <h4 class="my-3">Edit Image Locally Using jQuery Cropper.js plugin</h4>
+    <h4 class="my-3">Edit Profile Image</h4>
     <hr/>
     <div class="row">
         <div class="col">
-            <div class="card my-3">
+            <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between py-1 px-3">
                     <ul class="nav">
                         <li class="nav-item">
@@ -20,6 +21,12 @@
                                actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/dms/FileManager" >
                                 <i class="far fa-lg fa-fw fa-image"></i>
                                 File Manager
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="ImportCurrentProfileImage" class="nav-link" href="javascript:void(0);">
+                                <i class="fas fa-file-import fa-fw fa-lg"></i>
+                                Import Current Image
                             </a>
                         </li>
                     </ul>
@@ -45,8 +52,15 @@
                     </form>
                     <div class="row">
                         <div class="col-12">
-                            <div class="img-container">
-                                <img id="image" src="asasa" alt="" class="img-responsive" />
+                            <div class="img-container d-inline-block">
+                                <c:choose>
+                                    <c:when test="${not empty sessionScope.user.profilePicDocument.documentId and not empty sessionScope.user.profilePicDocument.randomHash}">
+                                        <img id="image" class="img-responsive" src="${pageContext.request.contextPath}/ViewUploadedFileController?documentId=${sessionScope.user.profilePicDocument.documentId}&amp;randomHash=${sessionScope.user.profilePicDocument.randomHash}&amp;viewType=inline" alt=""/>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <img id="image" class="img-responsive" src="${pageContext.request.contextPath}/assets/img/default-profile-pic.png" alt=""/>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                         </div>
                     </div>
@@ -65,8 +79,8 @@
         */
         .img-container,
         .img-preview {
-            background-color: #f7f7f7;
             width: 100%;
+            /*height: 500px;*/
             text-align: center;
         }
     </style>
@@ -97,16 +111,20 @@
             var URL = window.URL || window.webkitURL;
             var result;
             var cropperOptions = {
-                viewMode: 2,
-                aspectRatio: 1 / 1
+                viewMode: 1,
+                aspectRatio: 4 / 5
             };
             var croppedImageModal;
             var uplodateModal;
 
-//Compose template string
+            var defaultImageSrc = $image.attr('src');
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
+
+                $("#ImportCurrentProfileImage").on("click", function () {
+                    $image.cropper('destroy').attr('src', defaultImageSrc).cropper(cropperOptions);
+                });
 
                 $("#ImportWithBLOB-btn-id").on("click", function () {
                     $inputImage.focus().trigger("click");
@@ -231,6 +249,8 @@
                     }
                 });
 
+                $image.cropper(cropperOptions);
+
             });
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
@@ -263,6 +283,5 @@
                 $inputImage.off();
                 return true;
             });
-        });
-    </script>
+        });</script>
 </div>
