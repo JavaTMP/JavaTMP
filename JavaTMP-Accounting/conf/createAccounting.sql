@@ -427,9 +427,9 @@ SUM(entryAmount) OVER(PARTITION BY accountId ORDER BY entryDate
 -- SUM(entryAmount) OVER(PARTITION BY moduleId,moduleTypeId,moduleRefId ORDER BY entryDate
 -- ) AS entityBalance
 from (
-select acctTrans.id as id, trans.id as transactionId, acctTrans.moduleId as moduleId, acctTrans.moduleTypeId as moduleTypeId,
-acctTrans.moduleRefId as moduleRefId, acctTrans.accountId as accountId, acctTrans.description as description, acctTrans.status as status,
-trans.transactionDate as entryDate,
+select acctTrans.id as id, trans.id as transactionId, acctTrans.moduleId as moduleId,
+acctTrans.moduleTypeId as moduleTypeId, acctTrans.moduleRefId as moduleRefId, acctTrans.accountId as accountId,
+acctTrans.description as description, acctTrans.status as status, trans.transactionDate as entryDate,
 acctTrans.amount as amount,
 (case when acctTrans.amount > 0 then acctTrans.amount else 0 end) as debit,
 (case when acctTrans.amount < 0 then acctTrans.amount * -1 else 0 end) as credit,
