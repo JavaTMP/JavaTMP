@@ -39,12 +39,12 @@ public class TestPopulateAccountTransaction {
 
         List<Account> leafAccts = accountService.getLeafAccounts();
         Calendar calendar = Calendar.getInstance();
-        for (int n = 0; n < 1000; n++) {
+        for (int n = 0; n < 2000; n++) {
             Transaction trans = new Transaction();
             trans.setCreationDate(new Date());
 
-//            calendar.add(Calendar.DAY_OF_MONTH, 1 * (ThreadLocalRandom.current().nextInt(0, 1) == 0 ? -1 : +1));
-            calendar.add(Calendar.DAY_OF_MONTH, 1);
+            calendar.add(Calendar.DAY_OF_MONTH, 1 * (ThreadLocalRandom.current().nextInt(0, 1) == 0 ? -1 : +1));
+//            calendar.add(Calendar.DAY_OF_MONTH, 1);
             calendar.set(Calendar.HOUR_OF_DAY, 0);
             calendar.set(Calendar.MINUTE, 0);
             calendar.set(Calendar.SECOND, 0);
@@ -63,7 +63,7 @@ public class TestPopulateAccountTransaction {
                 acctran.setTransactionId(trans.getId());
                 acctran.setStatus((short) 1);
                 BigDecimal result = min.add(range.multiply(new BigDecimal(Math.random())));
-                System.out.println(result);
+//                System.out.println(result);
                 acctran.setAmount(result);
                 acctran.setAccountId(accountId);
                 em.persist(acctran);
