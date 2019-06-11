@@ -417,15 +417,8 @@ CREATE TABLE serviceAccount (
     CONSTRAINT service_accountId_fk FOREIGN KEY (accountId) REFERENCES account (id)
 ) ENGINE=InnoDB;
 
-CREATE OR REPLACE VIEW transactionEntry AS
-select entries.*,
-SUM(entryAmount) OVER(PARTITION BY accountId ORDER BY entryDate) AS accountBalance
--- ,
--- SUM(entryAmount) OVER(PARTITION BY moduleId ORDER BY entryDate
--- ) AS moduleIdBalance,
--- SUM(entryAmount) OVER(PARTITION BY moduleId,moduleTypeId,moduleRefId ORDER BY entryDate
--- ) AS entityBalance
-from (
+
+CREATE OR REPLACE VIEW Entry AS
 select acctTrans.id as id, trans.id as transactionId, acctTrans.moduleId as moduleId,
 acctTrans.moduleTypeId as moduleTypeId, acctTrans.moduleRefId as moduleRefId, acctTrans.accountId as accountId,
 acctTrans.description as description, acctTrans.status as status, trans.transactionDate as entryDate,
@@ -439,5 +432,16 @@ from accountTransaction acctTrans
 join account acct on (acct.id = acctTrans.accountId)
 join `transaction` trans on (acctTrans.transactionId = trans.id)
 join accountGroup acctgrp on (acct.accountGroup = acctgrp.id)
-join accountType acctt on (acctt.id = acctgrp.accountType)
-) entries;
+join accountType acctt on (acctt.id = acctgrp.accountType);
+
+CREATE OR REPLACE VIEW transactionEntry AS
+select entry.*,
+SUM(entryAmount)
+OVER(PARTITION BY accountId ORDER BY entryDate, id ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
+AS accountBalance
+-- ,
+-- SUM(entryAmount) OVER(PARTITION BY moduleId ORDER BY entryDate
+-- ) AS moduleIdBalance,
+-- SUM(entryAmount) OVER(PARTITION BY moduleId,moduleTypeId,moduleRefId ORDER BY entryDate
+-- ) AS entityBalance
+from entry;
