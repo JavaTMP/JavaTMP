@@ -169,12 +169,12 @@
                 var detailsTable = $("#detail-table" + transDivId);
                 var table = detailsTable.DataTable({
                     // https://datatables.net/reference/option/dom
-                    dom: "<'row'>" +
-                            "<'row'<'col-sm-12'tr>>" +
-                            "<'row'>",
-                    //                dom: "<'row'<'col-sm-12 p-0'tr>>" +
-                    //                        "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4 pt-2 text-right'l>>"
-                    //                ,
+//                    dom: "<'row'>" +
+//                            "<'row'<'col-sm-12'tr>>" +
+//                            "<'row'>",
+                    dom: "<'row'<'col-sm-12 p-0'tr>>" +
+                            "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4 pt-2 text-right'l>>"
+                    ,
                     //                select: true,
                     keys: true,
                     select: "single",
