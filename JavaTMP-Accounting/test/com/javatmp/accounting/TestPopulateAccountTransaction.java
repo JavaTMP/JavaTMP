@@ -39,7 +39,7 @@ public class TestPopulateAccountTransaction {
 
         List<Account> leafAccts = accountService.getLeafAccounts();
         Calendar calendar = Calendar.getInstance();
-        for (int n = 0; n < 2000; n++) {
+        for (int n = 0; n < 1000; n++) {
             Transaction trans = new Transaction();
             trans.setCreationDate(new Date());
 

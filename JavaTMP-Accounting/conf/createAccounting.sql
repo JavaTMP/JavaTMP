@@ -219,9 +219,6 @@ CREATE TABLE transaction (
     CONSTRAINT transaction_voucherTypeId_fk FOREIGN KEY (voucherTypeId) REFERENCES voucherType (id)
 ) ENGINE=InnoDB;
 
-CREATE INDEX transaction_transDateASC_ind ON transaction (transactionDate ASC);
-CREATE INDEX transaction_transDateDESC_ind ON transaction (transactionDate DESC);
-
 CREATE TABLE accountTransaction (
     id BIGINT UNSIGNED not null AUTO_INCREMENT,
     transactionId BIGINT UNSIGNED not null,
@@ -434,7 +431,7 @@ join `transaction` trans on (acctTrans.transactionId = trans.id)
 join accountGroup acctgrp on (acct.accountGroup = acctgrp.id)
 join accountType acctt on (acctt.id = acctgrp.accountType);
 
-CREATE OR REPLACE VIEW transactionEntry AS
+CREATE OR REPLACE VIEW transactionEntryVI AS
 select entry.*,
 SUM(entryAmount)
 OVER(PARTITION BY accountId ORDER BY entryDate, id ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)
@@ -445,3 +442,15 @@ AS accountBalance
 -- SUM(entryAmount) OVER(PARTITION BY moduleId,moduleTypeId,moduleRefId ORDER BY entryDate
 -- ) AS entityBalance
 from entry;
+
+DROP TABLE IF EXISTS transactionEntry;
+CREATE TABLE transactionEntry AS SELECT * FROM transactionEntryVI;
+
+ALTER TABLE transactionEntry ADD CONSTRAINT transactionEntry_pk PRIMARY KEY (id);
+ALTER TABLE transactionEntry ADD CONSTRAINT transactionEntry_accountId_fk FOREIGN KEY (accountId) REFERENCES account(id);
+ALTER TABLE transactionEntry ADD CONSTRAINT transactionEntry_transactionId_fk FOREIGN KEY (transactionId) REFERENCES transaction(id);
+
+CREATE INDEX transactionEntry_dateASC_ind ON transactionEntry (entryDate ASC);
+CREATE INDEX transactionEntry_dateDESC_ind ON transactionEntry (entryDate DESC);
+
+INSERT INTO transactionEntry SELECT * FROM transactionEntryVI;

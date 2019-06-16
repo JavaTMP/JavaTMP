@@ -199,7 +199,7 @@
                     orderCellsTop: true, // important to for two row header with filteration below header column names.
                     "processing": true,
                     "serverSide": true,
-                    "order": [[0, "asc"], [1, "asc"]],
+                    "order": [[0, "asc"], [3, "asc"]],
                     "rowCallback": function (row, data, index) {
                     },
                     "drawCallback": function (settings) {
