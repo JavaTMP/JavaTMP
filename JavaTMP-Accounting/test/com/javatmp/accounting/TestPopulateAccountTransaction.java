@@ -29,8 +29,8 @@ public class TestPopulateAccountTransaction {
 
     public static void main(String[] args) throws SQLException, ParseException {
         Random rand = new Random();
-        BigDecimal max = new BigDecimal("1000.00");
-        BigDecimal min = new BigDecimal("-1000.00");
+        BigDecimal max = new BigDecimal("3000.00");
+        BigDecimal min = new BigDecimal("-3000.00");
         BigDecimal range = max.subtract(min);
 
         JpaDaoHelper jpaDaoHelper;
@@ -43,7 +43,7 @@ public class TestPopulateAccountTransaction {
             Transaction trans = new Transaction();
             trans.setCreationDate(new Date());
 
-            calendar.add(Calendar.DAY_OF_MONTH, 1 * (ThreadLocalRandom.current().nextInt(0, 1) == 0 ? -1 : +1));
+            calendar.add(Calendar.DAY_OF_MONTH, 1 * (ThreadLocalRandom.current().nextInt(0, 2) == 0 ? -1 : +1));
 //            calendar.add(Calendar.DAY_OF_MONTH, 1);
             calendar.set(Calendar.HOUR_OF_DAY, 0);
             calendar.set(Calendar.MINUTE, 0);
@@ -56,7 +56,7 @@ public class TestPopulateAccountTransaction {
             em = jpaDaoHelper.getEntityManagerFactory().createEntityManager();
             em.getTransaction().begin();
             em.persist(trans);
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < ThreadLocalRandom.current().nextInt(22, 50); i++) {
                 int accountIdIndex = rand.nextInt(leafAccts.size());
                 Long accountId = leafAccts.get(accountIdIndex).getId();
                 Accounttransaction acctran = new Accounttransaction();
