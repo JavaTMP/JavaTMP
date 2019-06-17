@@ -52,16 +52,43 @@ BEGIN
     for update;
 
     INSERT INTO transactionentry
-        (`transactionId`, `moduleId`, `moduleTypeId`, `moduleRefId`, `accountId`,
+        (id, `transactionId`, `moduleId`, `moduleTypeId`, `moduleRefId`, `accountId`,
         description, status, `entryDate`, amount, debit, credit, `entryAmount`,
         `sourceDocument`, code, `accountBalance`)
 	VALUES
-        (new.transactionId, new.moduleId, new.moduleTypeId, new.moduleRefId, new.accountId,
+        (new.id, new.transactionId, new.moduleId, new.moduleTypeId, new.moduleRefId, new.accountId,
         new.description, new.status, transactionDate, new.amount,
         (case when new.amount > 0 then new.amount else 0 end),
         (case when new.amount < 0 then new.amount * -1 else 0 end),
         entryAmount,
         voucherTypeId, code, accountBalance  + entryAmount);
-END;
+END
+$$
+DELIMITER ;
+
+
+
+DROP TRIGGER IF EXISTS accountTransaction_del_tri;
+DELIMITER $$
+CREATE TRIGGER accountTransaction_del_tri
+AFTER DELETE ON accountTransaction
+FOR EACH ROW
+BEGIN
+    Declare entryAmount DECIMAL(33,8);
+    DECLARE transactionDate DATETIME;
+
+    select te.entryAmount, te.`entryDate`
+    into entryAmount, transactionDate
+    from transactionentry te
+    where te.id = old.id
+    for update;
+
+    update transactionentry t
+    set t.accountBalance = t.accountBalance - entryAmount
+    where ( (entryDate > transactionDate) or (entryDate = transactionDate and id > old.id))
+    and `accountId` = old.accountId;
+
+    delete from transactionentry where id = old.id;
+END
 $$
 DELIMITER ;

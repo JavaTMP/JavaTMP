@@ -30,9 +30,10 @@ from entry;
 DROP TABLE IF EXISTS transactionEntry;
 CREATE TABLE transactionEntry AS SELECT * FROM transactionEntryVI;
 
+ALTER TABLE transactionEntry ADD CONSTRAINT transactionEntry_pk PRIMARY KEY (id);
 -- ALTER TABLE transactionEntry ADD CONSTRAINT transactionEntry_pk PRIMARY KEY (id) AUTO_INCREMENT;
 -- ALTER TABLE transactionEntry ADD CONSTRAINT transactionEntry_pk PRIMARY KEY (id) AUTO_INCREMENT;
-ALTER TABLE transactionEntry MODIFY id BIGINT AUTO_INCREMENT PRIMARY KEY;
+-- ALTER TABLE transactionEntry MODIFY id BIGINT AUTO_INCREMENT;
 ALTER TABLE transactionEntry ADD CONSTRAINT transactionEntry_accountId_fk FOREIGN KEY (accountId) REFERENCES account(id);
 ALTER TABLE transactionEntry ADD CONSTRAINT transactionEntry_transactionId_fk FOREIGN KEY (transactionId) REFERENCES transaction(id);
 

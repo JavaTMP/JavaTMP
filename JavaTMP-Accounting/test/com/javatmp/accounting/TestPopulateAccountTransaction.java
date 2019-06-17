@@ -39,11 +39,11 @@ public class TestPopulateAccountTransaction {
 
         List<Account> leafAccts = accountService.getLeafAccounts();
         Calendar calendar = Calendar.getInstance();
-        for (int n = 0; n < 10000; n++) {
+        for (int n = 0; n < 100; n++) {
             Transaction trans = new Transaction();
             trans.setCreationDate(new Date());
 
-            calendar.add(Calendar.DAY_OF_MONTH, 1 * (ThreadLocalRandom.current().nextInt(0, 2) == 0 ? -1 : +1));
+            calendar.add(Calendar.DAY_OF_MONTH, 1 * (ThreadLocalRandom.current().nextInt(0, 5) == 0 ? +1 : -1));
 //            calendar.add(Calendar.DAY_OF_MONTH, 1);
             calendar.set(Calendar.HOUR_OF_DAY, 0);
             calendar.set(Calendar.MINUTE, 0);
