@@ -92,3 +92,73 @@ BEGIN
 END
 $$
 DELIMITER ;
+
+DROP TRIGGER IF EXISTS transaction_update_tri;
+DELIMITER $$
+CREATE TRIGGER transaction_update_tri
+AFTER UPDATE ON `transaction`
+FOR EACH ROW
+BEGIN
+    -- Declare loop constructs --
+    DECLARE done INT DEFAULT FALSE;
+
+    -- Declare Transaction variables --
+    DECLARE currentTransactionId BIGINT UNSIGNED;
+    Declare id BIGINT UNSIGNED;
+    Declare accountId BIGINT UNSIGNED;
+    Declare entryAmount DECIMAL(33,8);
+    DECLARE oldTransactionEntryDate DATETIME;
+    Declare accountBalance DECIMAL(33,8) DEFAULT 0;
+
+    DECLARE transactionEntriesCursor CURSOR FOR
+    select te.id,te.`accountId`, te.entryAmount
+    from transactionentry te
+    where te.`transactionId` = currentTransactionId
+    for update;
+    -- Declare Continue Handler --
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+    IF (OLD.transactionDate <> NEW.transactionDate) THEN
+        set currentTransactionId = old.id;
+        set accountBalance = 0;
+        OPEN transactionEntriesCursor;
+        read_loop: LOOP
+            -- Fetch data from cursor --
+            FETCH transactionEntriesCursor
+            INTO id, accountId, entryAmount;
+            -- Exit loop if finished --
+            IF done THEN
+                LEAVE read_loop;
+            END IF;
+            -- update current transactionEntry record
+            update transactionentry t
+            set t.accountBalance = t.accountBalance - entryAmount
+            where ( (t.entryDate > OLD.transactionDate) or (t.entryDate = OLD.transactionDate and t.id > id))
+            and t.id != id
+            and t.`accountId` = accountId;
+
+            update transactionentry t set t.accountBalance = t.accountBalance + entryAmount
+            where ((t.entryDate > NEW.transactionDate) or (t.entryDate = NEW.transactionDate and t.id > id) )
+            and t.id != id
+            and t.`accountId` = accountId;
+
+            select IFNULL(t.`accountBalance`, 0)
+            into accountBalance
+            from transactionentry t
+            where ((t.entryDate < NEW.transactionDate) or (t.entryDate = NEW.transactionDate and t.id < id) )
+            and t.`accountId` = accountId
+            and t.id != id
+            order by t.`entryDate` desc, t.id desc
+            limit 1
+            for update;
+
+            update transactionentry t
+            set t.accountBalance = accountBalance + entryAmount, t.entryDate = new.transactionDate
+            where t.id = id and t.`accountId` = accountId;
+
+        END LOOP read_loop;
+        CLOSE transactionEntriesCursor;
+    END IF;
+END
+$$
+DELIMITER ;

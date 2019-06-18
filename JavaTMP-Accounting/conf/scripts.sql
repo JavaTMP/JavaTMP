@@ -56,3 +56,10 @@ select t.`themeId`, tt.themeName, t.`themeName`
 from themetranslation tt
 right outer join theme t on t.`themeId` = tt.`themeId`;
 
+select * from `transaction` where id = 1315;
+
+delete from accounttransaction;
+delete from transactionentry;
+delete from `transaction`;
+commit;
+
