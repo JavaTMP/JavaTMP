@@ -118,11 +118,13 @@ BEGIN
     -- Declare Continue Handler --
     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
 
+insert into log (description) values (CONCAT('start trigger for transactionId=', old.id,
+', oldDate=', old.transactionDate, ' newDate=', NEW.transactionDate));
     IF (OLD.transactionDate <> NEW.transactionDate) THEN
         set currentTransactionId = old.id;
-        set accountBalance = 0;
         OPEN transactionEntriesCursor;
         read_loop: LOOP
+            set done = false;
             -- Fetch data from cursor --
             FETCH transactionEntriesCursor
             INTO id, accountId, entryAmount;
@@ -130,31 +132,41 @@ BEGIN
             IF done THEN
                 LEAVE read_loop;
             END IF;
+            insert into log (description) values (CONCAT('transactionId=', old.id, ',entryId=', id, ',accountid=', accountId));
             -- update current transactionEntry record
             update transactionentry t
             set t.accountBalance = t.accountBalance - entryAmount
             where ( (t.entryDate > OLD.transactionDate) or (t.entryDate = OLD.transactionDate and t.id > id))
-            and t.id != id
+--             and t.id != id
             and t.`accountId` = accountId;
+
+            insert into log (description) values (CONCAT('after update old entries transactionId=', old.id, ',entryId=', id, ',accountid=', accountId));
 
             update transactionentry t set t.accountBalance = t.accountBalance + entryAmount
             where ((t.entryDate > NEW.transactionDate) or (t.entryDate = NEW.transactionDate and t.id > id) )
-            and t.id != id
+--             and t.id != id
             and t.`accountId` = accountId;
 
+            insert into log (description) values (CONCAT('after update new entries transactionId=', old.id, ',entryId=', id, ',accountid=', accountId));
+
+            set accountBalance = 0;
             select IFNULL(t.`accountBalance`, 0)
             into accountBalance
             from transactionentry t
             where ((t.entryDate < NEW.transactionDate) or (t.entryDate = NEW.transactionDate and t.id < id) )
             and t.`accountId` = accountId
-            and t.id != id
+--             and t.id != id
             order by t.`entryDate` desc, t.id desc
             limit 1
             for update;
 
+            insert into log (description) values (CONCAT('after select  accountBalance', accountBalance, ', transactionId=', old.id, ',entryId=', id, ',accountid=', accountId));
+
             update transactionentry t
             set t.accountBalance = accountBalance + entryAmount, t.entryDate = new.transactionDate
             where t.id = id and t.`accountId` = accountId;
+
+            insert into log (description) values (CONCAT('after update current with accountBalance', (accountBalance + entryAmount), ', transactionId=', old.id, ',entryId=', id, ',accountid=', accountId));
 
         END LOOP read_loop;
         CLOSE transactionEntriesCursor;

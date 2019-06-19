@@ -41,3 +41,10 @@ CREATE INDEX transactionEntry_dateASC_ind ON transactionEntry (entryDate ASC);
 CREATE INDEX transactionEntry_dateDESC_ind ON transactionEntry (entryDate DESC);
 
 -- INSERT INTO transactionEntry SELECT * FROM transactionEntryVI;
+
+CREATE TABLE log (
+    id BIGINT UNSIGNED not null AUTO_INCREMENT,
+    creationDate TIMESTAMP NOT NULL default CURRENT_TIMESTAMP,
+    description varchar(1024),
+    CONSTRAINT acctTrans_id_pk PRIMARY KEY (id)
+) ENGINE=InnoDB;
