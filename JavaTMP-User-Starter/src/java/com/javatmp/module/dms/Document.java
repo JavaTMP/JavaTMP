@@ -12,6 +12,7 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "document")
@@ -40,6 +41,9 @@ public class Document implements Serializable {
     private Long parentDocumentId;
     private Short status;
     private Long createdByUserId;
+
+    @Transient
+    private String documentContentTemp;
 
     public Document() {
     }
@@ -220,6 +224,20 @@ public class Document implements Serializable {
      */
     public void setCreatedByUserId(Long createdByUserId) {
         this.createdByUserId = createdByUserId;
+    }
+
+    /**
+     * @return the documentContentTemp
+     */
+    public String getDocumentContentTemp() {
+        return documentContentTemp;
+    }
+
+    /**
+     * @param documentContentTemp the documentContentTemp to set
+     */
+    public void setDocumentContentTemp(String documentContentTemp) {
+        this.documentContentTemp = documentContentTemp;
     }
 
 }
