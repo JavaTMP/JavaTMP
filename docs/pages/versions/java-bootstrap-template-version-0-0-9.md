@@ -3,6 +3,12 @@ title: Java Bootstrap Template Version 0.0.9 (Current Development Version)
 ---
 # Java Bootstrap Template Version 0.0.9 (Current Development Version)
 
+## on
+- Replace mustache.js and mustache.java templates by Handlebars.js and handlebars.java templates
+- un-minify javascrip for Blob.js because gulp-uglify UglifyJS 3 does not support ES6
+- replace <code>./web/pages/plugins/mustache.js.html</code> with <code>./web/pages/plugins/Handlebars.js.html</code>
+- Run gulp default to regenerate dist folders.
+
 ## b8140ac on Jun 1, 2019, 5:50 AM GMT+4
 - Update the following dependencies:
     - gulp-chmod from 2.0.0 to 3.0.0

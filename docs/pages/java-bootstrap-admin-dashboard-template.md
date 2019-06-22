@@ -51,7 +51,7 @@ Java Version Notes:
 *   Use [hibernate 5.4.1](http://hibernate.org/orm/releases/5.4/ "Hibernate 5.4.1 Home & Download Page") for Java JPA 2.2 Object Relational Mapping with Mysql Database.
 *   Use [mysql-connector-java-8.0.14.jar](https://dev.mysql.com/downloads/connector/j/8.0.html "Java Mysql Connector 8 for JDBC driver") for Java Mysql Connector 8 for JDBC driver.
 *   Use [simplecaptcha-1.2.1.jar](https://sourceforge.net/projects/simplecaptcha/ "Simplecaptcha Home & Download Page") in public registration page.
-*   Use [mustache.java 0.9.6](https://mvnrepository.com/artifact/com.github.spullara.mustache.java/compiler/0.9.6) as a dynamic backend template engine.
+*   Use [Handlebars.java 4.0.6](https://github.com/jknack/handlebars.java) as a backend Handlebars.js dynamic backend template engine.
 *   Custom Java MVC using Servlet/JSP and above libraries.
 
 Credits:
@@ -118,5 +118,5 @@ Credits:
 *   Moment Timezone - [https://github.com/moment/moment-timezone/](https://github.com/moment/moment-timezone/ "Timezone support for moment.js")
 *   DevExpress bootstrap 4 themes - [https://github.com/DevExpress/bootstrap-themes](https://github.com/DevExpress/bootstrap-themes)
 *   jQuery Serialize Object - [https://github.com/macek/jquery-serialize-object](https://github.com/macek/jquery-serialize-object)
-*   mustache.js template - [http://github.com/janl/mustache.js](http://github.com/janl/mustache.js)
-*   mustache.java java implementation - [https://github.com/spullara/mustache.java](https://github.com/spullara/mustache.java)
+*   Handlebars.js template - [https://github.com/wycats/handlebars.js](https://github.com/wycats/handlebars.js)
+*   Handlebars.java java implementation - [https://github.com/jknack/handlebars.java](https://github.com/jknack/handlebars.java)

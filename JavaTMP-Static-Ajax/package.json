@@ -70,7 +70,7 @@
     "moment-timezone": "^0.5.25",
     "material-design-icons": "^3.0.1",
     "form-serializer": "^2.5.0",
-    "mustache": "^3.0.1"
+    "handlebars": "^4.1.2"
   },
   "devDependencies": {
     "del": "^4.1.1",

@@ -225,7 +225,7 @@ var config = {
             {"from": "${sourceNodeLib}/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js", "to": "${destComponentsLib}/bootstrap-alert-wrapper/dist"}
         ],
         "Blob": [
-            {"from": "${sourceNodeLib}/Blob/Blob.js", "to": "${destComponentsLib}/Blob", processJS: true}
+            {"from": "${sourceNodeLib}/Blob/Blob.js", "to": "${destComponentsLib}/Blob", processJS: false}
         ],
         "canvas-toBlob": [
             {"from": "${sourceNodeLib}/canvas-toBlob/canvas-toBlob.js", "to": "${destComponentsLib}/canvas-toBlob", processJS: true}
@@ -246,8 +246,8 @@ var config = {
         "form-serializer": [
             {"from": "${sourceNodeLib}/form-serializer/dist/jquery.serialize-object.min.js", "to": "${destComponentsLib}/form-serializer/dist"}
         ],
-        "mustache": [
-            {"from": "${sourceNodeLib}/mustache/mustache.min.js", "to": "${destComponentsLib}/mustache"}
+        "handlebars": [
+            {"from": "${sourceNodeLib}/handlebars/dist/handlebars.min.js", "to": "${destComponentsLib}/handlebars/dist", processJS: false, processCSS: false}
         ]
     }
 };
@@ -354,7 +354,7 @@ var src = {
         "./web/components/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js",
         "./web/components/numeral/min/numeral.min.js",
         "./web/components/form-serializer/dist/jquery.serialize-object.min.js",
-        "./web/components/mustache/mustache.min.js"
+        "./web/components/handlebars/dist/handlebars.min.js"
     ],
     "localeJS": {
         "en": [
@@ -421,25 +421,36 @@ gulp.task('delete-dist', function (cb) {
 });
 
 gulp.task('copy-components', gulp.series("delete-components", function (cb) {
+    var allCount = 0;
     for (var key in config.plugins) {
         if (config.plugins.hasOwnProperty(key)) {
             var componentConfig = config.plugins[key];
+            allCount += componentConfig.length;
             for (var i = 0; i < componentConfig.length; i++) {
                 var componentResource = componentConfig[i];
                 var to = solveParameters(componentResource.to);
                 var from = solveParameters(componentResource.from);
-                console.log("copy resource from [" + from + "] to [" + to + "] processCSS [" + componentResource.processCSS + "], processJS [" + componentResource.processJS + "]");
+//                console.log("copying resource from [" + from + "] to [" + to + "] processCSS [" + componentResource.processCSS + "], processJS [" + componentResource.processJS + "]");
                 gulp.src(from)
                         .pipe(gulpif(componentResource.processJS === true, uglify({output: {comments: /^!/}})))
                         .pipe(gulpif(componentResource.processCSS === true, cleanCSS()))
-                        .pipe(gulp.dest(to));
+                        .pipe(gulp.dest(to))
+                        .on('end', (function (currentFrom, currentTo, processCSS, processJS) {
+                            return function () {
+                                console.log("finished copying from [" + currentFrom + "], to [" + currentTo + "], processCSS [" + processCSS + "], processJS [" + processJS + "]");
+                                if (--allCount === 0) {
+                                    cb();
+                                }
+
+                            };
+                        })(from, to, componentResource.processCSS, componentResource.processJS));
             }
         }
     }
-    cb();
+
 }));
 
-gulp.task('generate-dist', gulp.series('copy-components', "delete-dist", 'delete-dist', 'delete-js', function (cb) {
+gulp.task('generate-dist', gulp.series('copy-components', "delete-dist", 'delete-js', function (cb) {
     async.series([
         function (next) {
             console.log("Compile and generate sass/themes");
@@ -447,7 +458,7 @@ gulp.task('generate-dist', gulp.series('copy-components', "delete-dist", 'delete
                 './web/assets/src/sass/themes/javatmp-*.scss'])
                     .pipe(sass().on('error', sass.logError))
                     .pipe(autoprefixer({
-                        browsers: ['last 2 versions'],
+                        Browserslist: ['last 2 versions'],
                         cascade: false
                     }))
                     .pipe(cleanCSS())
@@ -461,7 +472,7 @@ gulp.task('generate-dist', gulp.series('copy-components', "delete-dist", 'delete
                 './web/assets/src/sass-rtl/themes-rtl/javatmp-*.scss'])
                     .pipe(sass().on('error', sass.logError))
                     .pipe(autoprefixer({
-                        browsers: ['last 2 versions'],
+                        Browserslist: ['last 2 versions'],
                         cascade: false
                     }))
                     .pipe(cleanCSS())

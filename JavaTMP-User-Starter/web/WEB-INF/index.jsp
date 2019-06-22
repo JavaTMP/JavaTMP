@@ -288,8 +288,8 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/pages/system/mustache.js">
-                                            Mustache.js
+                                        <a href="${pageContext.request.contextPath}/pages/system/Handlebars.js">
+                                            Handlebars.js
                                         </a>
                                     </li>
                                     <li>

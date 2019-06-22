@@ -562,15 +562,15 @@ Converts HTML form into JavaScript object
 
 Copyright (c) 2014, Paul Macek
 
-### [mustache.js Template](http://github.com/janl/mustache.js)
+### [Handlebars.js Template](https://github.com/wycats/handlebars.js)
 
-mustache.js - Logic-less {{mustache}} templates with JavaScript
+Handlebars provides the power necessary to let you build semantic templates effectively with no frustration. Handlebars is largely compatible with Mustache templates. In most cases it is possible to swap out Mustache with Handlebars and continue using your current templates.
 
 MIT
 
-### [mustache.java Template](https://github.com/spullara/mustache.java)
+### [Handlebars.java Template](https://github.com/jknack/handlebars.java)
 
-Implementation of mustache.js for Java
+Logic-less and semantic Handlebars templates with Java
 
 Apache License, Version 2.0
 
