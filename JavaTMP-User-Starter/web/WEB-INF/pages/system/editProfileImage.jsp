@@ -17,13 +17,6 @@
                                 <i class="far fa-image fa-fw fa-lg"></i>Show Cropped Image</a>
                         </li>
                         <li class="nav-item">
-                            <a href="javascript:void(0);" class="nav-link"
-                               actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/dms/FileManager" >
-                                <i class="far fa-lg fa-fw fa-image"></i>
-                                File Manager
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a id="ImportCurrentProfileImage" class="nav-link" href="javascript:void(0);">
                                 <i class="fas fa-file-import fa-fw fa-lg"></i>
                                 Import Current Image
@@ -136,13 +129,10 @@
                     $inputImage.focus().trigger("click");
                 });
                 $("#UpdateProfileImage").on("click", function () {
-                    alert("updating");
                     result = $image.cropper("getCroppedCanvas", cropperOptions);
                     if (result) {
                         result.toBlob(function (blob) {
                             var imageContent = result.toDataURL(uploadedImageType);
-                            alert(imageContent);
-                            console.log(imageContent);
                             $.ajax(javatmp.settings.contextPath + '/dms/UpdateProfilePhoto', {
                                 method: "POST",
                                 data: imageContent,
@@ -156,33 +146,15 @@
                                         rtl: javatmp.settings.isRTL,
                                         positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
                                     });
-                                    var table = "";
-                                    var row = '<div>' +
-                                            '<p>Document Id : {{id}}</p>' +
-                                            '<p>Document Name : {{documentName}}</p>' +
-                                            '<p>Content Type : {{contentType}}</p>' +
-                                            '<p>Creation Date : {{creationDate}}</p>' +
-                                            '<p>Link To View Inline : <a target="_blank" class="" href="{{contextPath}}/ViewUploadedFileController?documentId={{link}}&amp;randomHash={{randomHash}}&amp;viewType=inline">View Inline</a></p>' +
-                                            '<p>Link To View As attachement : <a target="_blank" class="" href="{{contextPath}}/ViewUploadedFileController?documentId={{link}}&amp;randomHash={{randomHash}}&amp;viewType=attachment">View As Attachment</a></p>' +
-                                            '<p><a href="javascript:void(0);" class="" actionType="action-ref-href" action-ref-by-href="{{contextPath}}/pages/dms/FileManager">Go To File Manager To See Uploaded Files</a></p>' +
-                                            '</div>';
-                                    for (var i = 0; i < response.data.length; i++) {
-                                        var tempRow = row.composeTemplate({
-                                            'id': response.data[i].documentId,
-                                            'documentName': response.data[i].documentName,
-                                            'contentType': response.data[i].contentType,
-                                            'creationDate': moment(response.data[i].creationDate, "YYYY-MM-DDTHH:mm:ss").format("DD/MM/YYYY HH:mm"),
-                                            'link': response.data[i].documentId,
-                                            'randomHash': response.data[i].randomHash,
-                                            'contextPath': javatmp.settings.contextPath
-                                        });
-                                        table += tempRow;
-                                    }
                                     uplodateModal = BootstrapModalWrapperFactory.createModal({
                                         title: "Server Uplod Response",
-                                        message: table
+                                        message: response.message
                                     });
                                     uplodateModal.show();
+                                    var newsrcTemplate = javatmp.settings.contextPath +
+                                            "/ViewUploadedFileController?documentId=" + response.data.documentId
+                                            + "&randomHash=" + response.data.randomHash + "&viewType=inline";
+                                    $(".personalProfilePhoto").attr("src", newsrcTemplate);
                                 },
                                 error: function (xhr, status, error) {
                                     var errorObj = $.parseJSON(xhr.responseText);

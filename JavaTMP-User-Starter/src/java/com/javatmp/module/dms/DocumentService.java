@@ -4,7 +4,6 @@ import com.javatmp.mvc.domain.table.DataTableRequest;
 import com.javatmp.mvc.domain.table.DataTableResults;
 import com.javatmp.util.JpaDaoHelper;
 import java.text.ParseException;
-import java.util.List;
 
 public class DocumentService {
 
@@ -12,23 +11,6 @@ public class DocumentService {
 
     public DocumentService(JpaDaoHelper jpaDaoHelper) {
         this.jpaDaoHelper = jpaDaoHelper;
-    }
-
-    public int updateDocument(Document document) {
-        int updateStatus = 0;
-//        for (Document dbDoc : dBFaker.getDocuments()) {
-//            if (dbDoc.getDocumentId().equals(document.getDocumentId())) {
-//                dbDoc.setContentType(document.getContentType());
-//                dbDoc.setCreationDate(document.getCreationDate());
-//                dbDoc.setDocumentContent(document.getDocumentContent());
-//                dbDoc.setDocumentName(document.getDocumentName());
-//                dbDoc.setDocumentSize(document.getDocumentSize());
-//                dbDoc.setRandomHash(document.getRandomHash());
-//                updateStatus = 1;
-//                break;
-//            }
-//        }
-        return updateStatus;
     }
 
     public Document readDocumentById(Document document) {

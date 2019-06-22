@@ -48,6 +48,11 @@ public class Document implements Serializable {
     public Document() {
     }
 
+    public Document(Long documentId, Long randomHash) {
+        this.documentId = documentId;
+        this.randomHash = randomHash;
+    }
+
     public Document(Long documentId, String documentName, Long documentSize,
             String contentType, Date creationDate,
             Long randomHash, Short documentType, Long parentDocumentId,

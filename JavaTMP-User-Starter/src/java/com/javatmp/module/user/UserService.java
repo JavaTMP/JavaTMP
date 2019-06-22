@@ -1,14 +1,13 @@
 package com.javatmp.module.user;
 
-import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.module.country.Country;
 import com.javatmp.module.dms.Document;
-import com.javatmp.module.user.User_;
 import com.javatmp.module.dms.Document_;
 import com.javatmp.mvc.domain.table.DataTableColumnSpecs;
 import com.javatmp.mvc.domain.table.DataTableRequest;
 import com.javatmp.mvc.domain.table.DataTableResults;
 import com.javatmp.mvc.domain.table.Order;
+import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.util.MD5Util;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -292,6 +291,10 @@ public class UserService {
                 em.getTransaction().rollback();
             }
             throw e;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
         }
     }
 
@@ -326,6 +329,10 @@ public class UserService {
                 em.getTransaction().rollback();
             }
             throw e;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
         }
     }
 
@@ -361,6 +368,59 @@ public class UserService {
                 em.getTransaction().rollback();
             }
             throw e;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+    public Document updateUserPersonalProfilePhoto(User user, Document document) {
+        EntityManager em = null;
+        try {
+            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            em.getTransaction().begin();
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<User> cq = cb.createQuery(User.class);
+            Root<User> from = cq.from(User.class);
+            cq.multiselect(from.get(User_.id), from.get(User_.profilePicDocumentId));
+            cq.where(cb.equal(from.get(User_.id), user.getId()));
+            TypedQuery<User> query = em.createQuery(cq);
+            query.setLockMode(LockModeType.PESSIMISTIC_WRITE);
+            User dbUser = query.getSingleResult();
+            if (dbUser.getProfilePicDocumentId() != null) {
+                // update existing one
+                CriteriaQuery<Document> docCq = cb.createQuery(Document.class);
+                Root<Document> e = docCq.from(Document.class);
+                docCq.where(cb.equal(e.get(Document_.documentId), dbUser.getProfilePicDocumentId()));
+                TypedQuery<Document> docQuery = em.createQuery(docCq);
+                docQuery.setLockMode(LockModeType.PESSIMISTIC_WRITE);
+                Document dbDocument = docQuery.getSingleResult();
+                dbDocument.setContentType(document.getContentType());
+                dbDocument.setDocumentContent(document.getDocumentContent());
+                dbDocument.setDocumentType(document.getDocumentType());
+                dbDocument.setStatus(document.getStatus());
+                dbDocument.setCreationDate(document.getCreationDate());
+                dbDocument.setDocumentSize(document.getDocumentSize());
+                dbDocument.setRandomHash(document.getRandomHash());
+                dbDocument.setCreatedByUserId(document.getCreatedByUserId());
+                document.setDocumentId(dbDocument.getDocumentId());
+            } else {
+                // create new one for user
+                em.persist(document);
+            }
+            em.getTransaction().commit();
+            return document;
+        } catch (IllegalArgumentException | PersistenceException e) {
+            e.printStackTrace();
+            if (em != null) {
+                em.getTransaction().rollback();
+            }
+            throw e;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
         }
     }
 
