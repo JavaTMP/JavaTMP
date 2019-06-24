@@ -1,20 +1,16 @@
 package com.javatmp.module.user;
 
-import com.javatmp.module.country.Country;
 import com.javatmp.module.country.Countrytranslation;
 import com.javatmp.module.dms.Document;
-import com.javatmp.module.language.Language;
+import com.javatmp.module.dms.DocumentService;
 import com.javatmp.module.language.Languagetranslation;
-import com.javatmp.module.theme.Theme;
 import com.javatmp.module.theme.Themetranslation;
-import com.javatmp.module.timezone.Timezone;
+import com.javatmp.module.timezone.Timezonetranslation;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.domain.ResponseMessage;
-import com.javatmp.module.dms.DocumentService;
-import com.javatmp.module.timezone.Timezonetranslation;
-import com.javatmp.util.ServicesFactory;
 import com.javatmp.util.Constants;
 import com.javatmp.util.MD5Util;
+import com.javatmp.util.ServicesFactory;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -24,7 +20,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.PersistenceException;
 import javax.servlet.ServletContext;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -86,9 +81,9 @@ public class CurrentUserProfileController extends HttpServlet {
 
             userToBeUpdated.setPassword(MD5Util.convertToMD5(userToBeUpdated.getPassword()));
             Document fileUploading = MvcHelper.readDocumentFromRequestIfExist(request, "profilePicture");
-            fileUploading.setDocumentType((short) 1);
-            fileUploading.setStatus((short) 1);
             if (fileUploading != null) {
+                fileUploading.setDocumentType((short) 1);
+                fileUploading.setStatus((short) 1);
                 fileUploading.setDocumentId(dbUser.getProfilePicDocumentId());
                 userToBeUpdated.setProfilePicDocument(fileUploading);
                 userToBeUpdated.setProfilePicDocumentId(fileUploading.getDocumentId());
