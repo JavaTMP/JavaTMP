@@ -10,4 +10,7 @@ drop table IF EXISTS `themeTranslation`;
 drop table IF EXISTS `theme`;
 drop table IF EXISTS `languageTranslation`;
 drop table IF EXISTS `language`;
+drop table IF EXISTS `event`;
+drop table IF EXISTS `message`;
+drop table IF EXISTS `content`;
 SET FOREIGN_KEY_CHECKS = 1;
