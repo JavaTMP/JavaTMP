@@ -1,7 +1,13 @@
 ---
-title: Java Bootstrap Template Version 0.0.9 (Current Development Version)
+title: Java Bootstrap Template Version 0.0.9 (published on Jun 24, 2019)
 ---
-# Java Bootstrap Template Version 0.0.9 (Current Development Version)
+# Java Bootstrap Template Version 0.0.9 (published on Jun 24, 2019)
+
+## f2f46f7 on Jun 24, 2019, 7:32 PM GMT+4
+- Prepare release 0.0.9
+- Remove project JavaTMP-Java-Ajax from release.
+- last release that contains static and dynamic projects before splitting them
+to different products.
 
 ## eda6017 on Jun 22, 2019, 11:35 PM GMT+4
 - Replace mustache.js and mustache.java templates by Handlebars.js and handlebars.java templates
