@@ -2,7 +2,6 @@
 *   [High Level Template Structure](/pages/high-level-template-structure "High Level JavaTMP Template Folders And Files Structure")
 *   **Template Versions**
     *   [JavaTMP-Static-Ajax Project Version](/pages/javatmp-static-ajax-project-version "Java Bootstrap Admin and Dashboard Template")
-    *   [JavaTMP-Java-Ajax Project Version](/pages/javatmp-java-ajax-project-version "Java Dynamic LTR/RTL multi-language Bootstrap Admin and Dashboard Web Application Version")
     *   [JavaTMP-User-Starter Project Version](/pages/javatmp-user-starter-project-version "Advanced Dynamic Java Bootstrap LTR/RTL multi languages User Management Web application Template")
 *   **Template Layout**
     *   [Default JavaTMP Template Layout](/pages/default-javatmp-template-layout "Default JavaTMP Template Layout")
@@ -14,12 +13,7 @@
     *   [Setting Up Development Environment](/pages/setting-up-development-environment)
     *   [Manage Front-end dependencies Using Node.js And Gulp](/pages/manage-front-end-dependencies-using-node-js-and-gulp "Manage Front-end Dependencies Using Node.js And Gulp tools")
     *   [Steps to add new Javascript plugin](/pages/steps-to-add-new-javascript-plugin)
-*   **Java Bootstrap Web Application Version**
-    *   [Backend features and resources](/pages/java/java-bootstrap-backend-features-and-resources "dynamic java bootstrap backend features and resources")
-    *   [Dynamic Java Web Application features](/pages/java/dynamic-java-bootstrap-web-application-features "Main Dynamic Features of Java Bootstrap Web Application")
-    *   [Uploading files from front end to Java Web Application](/pages/java/uploading-files-from-front-end-to-java-web-application "Uploading files from front end web browsers to Java Web Applications")
-    *   [Directory Structure For Java Web Application](/pages/java/directory-structure-for-java-web-application)
-    *   [Java Web Based MVC Application Design](/pages/java/java-web-based-mvc-application-design)
+    *   [Java Bootstrap Web Application Features And Resources](/pages/java/java-bootstrap-web-application-features-and-resources)
 *   **References**
     *   [Bootstrap RTL Support and Customizations](/pages/reference/bootstrap-rtl-support-customizations "JavaTMP Bootstrap RTL support and modifications")
     *   [JavaTMP Front-end Plugins And Frameworks](/pages/reference/javatmp-front-end-plugins-and-frameworks)
