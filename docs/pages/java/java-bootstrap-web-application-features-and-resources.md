@@ -148,7 +148,7 @@ the number of packages remains roughly the same, while the number of classes in 
 - [File Servlet](http://balusc.omnifaces.org/2007/07/fileservlet.html)
 - [FileServlet supporting resume and caching and GZIP](http://balusc.omnifaces.org/2009/02/fileservlet-supporting-resume-and.html)
 
-### Uploading files from front end to Java Web Application
+#### Uploading files from front end to Java Web Application
 There are different ways for sending binary files from front end web browsers to Java Web Applications, The following links provides you more information:
 -   [https://developer.mozilla.org/en-US/docs/Web/API/File/Using\_files\_from\_web\_applications](https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications)
 -   [https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using\_FormData\_Objects](https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects)
