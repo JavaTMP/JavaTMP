@@ -7,7 +7,7 @@ Your purchased package contains separate folder for each template. The following
 of purchased JavaTMP project package with its description and usage:
 
 ```
-JavaTMP (your purchased package)
+JavaTMP
 |---readme.md (read me file)
 |---LICENSE (end-user license agreement (EULA) and copyright information file)
 +---JavaTMP-Static-Ajax (Static LTR/RTL Bootstrap Admin and Dashboard components template)
