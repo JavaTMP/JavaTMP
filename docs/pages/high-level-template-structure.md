@@ -11,7 +11,7 @@ JavaTMP (your purchased package)
 |---readme.md (read me file)
 |---LICENSE (end-user license agreement (EULA) and copyright information file)
 +---JavaTMP-Static-Ajax (Static LTR/RTL Bootstrap Admin and Dashboard components template)
-+---JavaTMP-User-Starter (Advanced Dynamic Java Bootstrap LTR/RTL multi languages User Management Web application version)
++---JavaTMP-User-Starter (Dynamic LTR/RTL multi languages Advanced Java Bootstrap User Management Web application version)
 ```
 
 ### `./JavaTMP/readme.md` file
