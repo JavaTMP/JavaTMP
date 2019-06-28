@@ -11,15 +11,9 @@
             <!-- Configuring JDBC properties -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://50.62.22.14:3306/appdb?zeroDateTimeBehavior=CONVERT_TO_NULL&amp;useSSL=false&amp;autoReconnect=true&amp;autoReconnectForPools=true"/>
-            <property name="javax.persistence.jdbc.user" value="user1"/>
-            <property name="javax.persistence.jdbc.password" value="my^23QWeasm"/>
-
-
-            <!--            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/appdb?zeroDateTimeBehavior=CONVERT_TO_NULL&amp;useSSL=false&amp;autoReconnect=true&amp;autoReconnectForPools=true&amp;allowPublicKeyRetrieval=true"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/appdb?zeroDateTimeBehavior=CONVERT_TO_NULL&amp;useSSL=false&amp;autoReconnect=true&amp;autoReconnectForPools=true&amp;allowPublicKeyRetrieval=true"/>
             <property name="javax.persistence.jdbc.user" value="root"/>
-            <property name="javax.persistence.jdbc.password" value="mmmmmm"/>-->
+            <property name="javax.persistence.jdbc.password" value="mmmmmm"/>
             <!-- Hibernate properties -->
             <property name="hbm2ddl.auto" value="none"/>
             <property name="hibernate.jdbc.time_zone" value="UTC"/>
@@ -32,7 +26,7 @@
             <property name="hibernate.current_session_context_class" value="thread"/>
             <!-- Configuring Connection Pool -->
             <property name="hibernate.c3p0.min_size" value="0"/>
-            <property name="hibernate.c3p0.max_size" value="1"/>
+            <property name="hibernate.c3p0.max_size" value="10"/>
             <property name="hibernate.c3p0.timeout" value="1000"/>
             <property name="hibernate.c3p0.max_statements" value="50"/>
             <property name="hibernate.c3p0.idle_test_period" value="10000"/>
