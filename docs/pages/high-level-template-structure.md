@@ -10,14 +10,16 @@ of purchased JavaTMP project package with its description and usage:
 JavaTMP-html.zip (JavaTMP Static HTML Bootstrap Admin and Dashboard components template)
 |---readme.md (read me file)
 |---LICENSE (end-user license agreement (EULA) and copyright information file)
-+---JavaTMP-Static-Ajax (Static LTR/RTL Bootstrap Admin and Dashboard components template)
++---[JavaTMP-Static-Ajax](http://demo.javatmp.com/JavaTMP-Static-Ajax/
+"Java Bootstrap Admin And Dashboard Components Template") (Static LTR/RTL Bootstrap Admin and Dashboard components template)
 ```
 
 ```
 JavaTMP-java.zip (JavaTMP Dynamic Java Bootstrap Admin and Dashboard components template)
 |---readme.md (read me file)
 |---LICENSE (end-user license agreement (EULA) and copyright information file)
-+---JavaTMP-User-Starter (Dynamic LTR/RTL multi languages Advanced Java Bootstrap User Management Web application version)
++---[JavaTMP-User-Starter](http://java.javatmp.com:8080/JavaTMP-User-Starter/
+"Dynamic Java Bootstrap LTR/RTL multi languages User Management Web application Template") (Dynamic LTR/RTL multi languages Advanced Java Bootstrap User Management Web application version)
 ```
 
 ### `./JavaTMP/readme.md` file
