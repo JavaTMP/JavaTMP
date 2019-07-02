@@ -1,7 +1,7 @@
 ---
 title: JavaTMP Accounting System
 ---
-# JavaTMP Accounting System
+# {{ page.title }}
 In business, each profit or non-profit company establishes an accounting system to manage and keep track of its
 assets, liabilities, equities, revenues, and expenses.
 The accounting system also provides the basis for the financial reports the company must file periodically.

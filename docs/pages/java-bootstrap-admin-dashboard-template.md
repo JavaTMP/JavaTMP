@@ -1,7 +1,7 @@
 ---
 title: Java Bootstrap Admin And Dashboard Template
 ---
-# Java Bootstrap Admin And Dashboard Template
+# {{ page.title }}
 
 JavaTMP is a Java Bootstrap admin and dashboard components template built using HTML 5 , CSS 3 , jQuery 3, Bootstrap 4 and Java programming language come with static and dynamic web application versions. JavaTMP has a huge collection of plugins and UI components and works seamlessly on all major web browsers, tablets and phones. If you have any questions, please email our support team at [support@javatmp.com](mailto:support@javatmp.com).
 

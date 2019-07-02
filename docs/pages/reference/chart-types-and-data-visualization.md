@@ -1,7 +1,7 @@
 ---
 title: Chart types and data visualization
 ---
-# Chart types and data visualization
+# {{ page.title }}
 
 A chart is a graphical representation of data, in which "the data is represented by symbols,
 such as bars in a bar chart, lines in a line chart, or slices in a pie chart".

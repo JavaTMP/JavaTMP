@@ -1,7 +1,7 @@
 ---
 title: JavaTMP-User-Starter Project Version
 ---
-# JavaTMP-User-Starter Project Version
+# {{ page.title }}
 
 `JavaTMP-User-Starter` project is an advanced dynamic Java Bootstrap LTR/RTL multi languages User Management Web application Template
 derived from `JavaTMP-Static-Ajax` modified and developed to provide a dynamic features built mainly using

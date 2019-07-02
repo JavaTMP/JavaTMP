@@ -1,7 +1,7 @@
 ---
 title: Role-Based Access Control Design
 ---
-# Role-Based Access Control Design
+# {{ page.title }}
 
 Role-based access control is a way to provide authentication and authorization because it only allows authorized users
 to access information they need to do their jobs, while preventing them from accessing additional information

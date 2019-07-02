@@ -1,7 +1,7 @@
 ---
 title: Java Bootstrap Web Application Features And Resources
 ---
-## Java Bootstrap Web Application Features And Resources
+# {{ page.title }}
 
 ### Java Bootstrap Backend Features And Resources
 `JavaTMP-User-Starter` project is a dynamic version of JavaTMP Bootstrap admin and dashboard template which consists of the following backend features and resouces:

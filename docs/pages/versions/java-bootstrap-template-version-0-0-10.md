@@ -1,7 +1,7 @@
 ---
 title: Java Bootstrap Template Version 0.0.10 (published on Jun 28, 2019)
 ---
-# Java Bootstrap Template Version 0.0.10 (published on Jun 28, 2019)
+# {{ page.title }}
 
 ## e15af73 on Jun 28, 2019, 4:57 PM GMT+4
 - Start refactoring documentation and code for separation of static and dynamic projects.

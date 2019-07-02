@@ -1,7 +1,7 @@
 ---
 title: General External Important Links
 ---
-# General External Important Links
+# {{ page.title }}
 
 ## Template And Text Contents Information
 - [https://www.besttemplates.com/](https://www.besttemplates.com/)

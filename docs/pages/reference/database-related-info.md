@@ -1,7 +1,7 @@
 ---
 title: Database Related Information
 ---
-# Database Related Links
+# {{ page.title }}
 
 ## Referenced Database Schemas:
 - [http://www.ntu.edu.sg/home/ehchua/programming/sql/sampledatabases.html](http://www.ntu.edu.sg/home/ehchua/programming/sql/sampledatabases.html)

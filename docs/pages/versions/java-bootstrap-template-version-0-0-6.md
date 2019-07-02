@@ -1,7 +1,7 @@
 ---
 title: Java Bootstrap Template Version 0.0.6 (published on 18th of November, 2018)
 ---
-# Java Bootstrap Template Version 0.0.6 (published on 18th of November, 2018)
+# {{ page.title }}
 
 ## 06c22ba on Nov 18, 2018, 9:34 PM GMT+4
 - Add New two external Bootstrap 4 theme from DevExpress `https://github.com/DevExpress/bootstrap-themes`:

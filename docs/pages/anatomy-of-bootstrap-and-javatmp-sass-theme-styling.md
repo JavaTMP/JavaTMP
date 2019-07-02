@@ -1,7 +1,7 @@
 ---
 title: Anatomy Of Bootstrap And JavaTMP SASS Theme Styling
 ---
-# Anatomy Of Bootstrap And JavaTMP SASS Theme Styling
+# {{ page.title }}
 
 In this page, we are going to discuss the use of Bootstrap 4 SASS variables for customizing our JavaTMP HTML pages and plugins styling.
 SASS stands for Syntactically Awesome Stylesheet. It is a CSS pre-processor which helps in the reduction of the repetition with CSS

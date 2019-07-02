@@ -1,7 +1,7 @@
 ---
 title: JavaTMP-Static-Ajax Project Version
 ---
-# JavaTMP-Static-Ajax Project Version
+# {{ page.title }}
 
 `./JavaTMP/JavaTMP-Static-Ajax` Folder
 ----------------------------------------------

@@ -1,7 +1,7 @@
 ---
 title: Java Bootstrap Template Version 0.0.4 (published on 19th of September, 2018)
 ---
-# Java Bootstrap Template Version 0.0.4 (published on 19th of September, 2018)
+# {{ page.title }}
 
 ## 90ed28f on Sep 18, 2018, 5:23 PM GMT+4
 - Support Ion Range Slider RTL configuration

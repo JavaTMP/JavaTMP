@@ -1,7 +1,7 @@
 ---
 title: Java Bootstrap Template Version 0.0.3 (published on 13th of September, 2018)
 ---
-# Java Bootstrap Template Version 0.0.3 (published on 13th of September, 2018)
+# {{ page.title }}
 
 ede9544 on Sep 13, 2018, 10:02 AM GMT+4
 ---------------------------------------

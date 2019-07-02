@@ -1,7 +1,7 @@
 ---
 title: Using jQueryUI Framework With Bootstrap Template
 ---
-# Using jQueryUI Framework With Bootstrap Template
+# {{ page.title }}
 `jQueryUI` is not naturally intended to be in a Bootstrap Template. However, we include it completely for implementing two things.
 First, supporting sortable and moving of bootstrap card option and, Second, implementing third-party plugins that depends on it,
 like jquery Fancytree and jQuery FullCalendar plugins. So the demo pages for them depend on `jQueryUI`.

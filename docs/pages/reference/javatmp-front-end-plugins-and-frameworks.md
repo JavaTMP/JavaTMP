@@ -1,7 +1,7 @@
 ---
 title: JavaTMP Front-end Plugins And Frameworks
 ---
-# JavaTMP Front-end Plugins And Frameworks
+# {{ page.title }}
 The following information provide a list of front-end Javascript/CSS plugins and frameworks used in Java Bootstrap Admin and dashboard template: 
 
 ### [jQuery](http://www.jquery.com)

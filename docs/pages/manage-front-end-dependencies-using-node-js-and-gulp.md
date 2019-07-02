@@ -1,7 +1,7 @@
 ---
 title: Manage Front-end dependencies Using Node.js And Gulp
 ---
-# Manage Front-end dependencies Using Node.js And Gulp
+# {{ page.title }}
 We manage all front-end plugins and framework dependencies like jQuery, Bootstrap using Node NPM and gulp tools. 
 
 We add the dependencies using two methods:

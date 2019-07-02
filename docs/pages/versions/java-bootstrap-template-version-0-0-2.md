@@ -1,7 +1,7 @@
 ---
 title: Java Bootstrap Template Version 0.0.2 (published on 27th of August, 2018)
 ---
-# Java Bootstrap Template Version 0.0.2 (published on 27th of August, 2018)
+# {{ page.title }}
 ### Main Modifications and Updates:
 *   Refactor main JavaTMP navbar dropdown menus by moving custom profile dropdown items style to custom-bootstrap-dropdown.scss.
 *   Refactor projects by cleaning and replacing most px to rem.

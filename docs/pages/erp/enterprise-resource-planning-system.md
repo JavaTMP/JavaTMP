@@ -1,7 +1,7 @@
 ---
 title: Enterprise Resource Planning System
 ---
-# Enterprise Resource Planning System
+# {{ page.title }}
 Enterprise Resource Planning System (ERP) is a system or software that used to manage all the resources of whole enterprise.
 Right from employee payments to single screw coming into the enterprise , everything  can be managed & tracked by using ERP Systems.
 ERP is a cross functional software that supports all the business processes within the organization.

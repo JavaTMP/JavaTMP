@@ -1,7 +1,7 @@
 ---
 title: JavaTMP Template Layout
 ---
-# Default JavaTMP Template Layout
+# {{ page.title }}
 JavaTMP templates are an AJAX based Templates with fixed navbar, sidebar, breadcrumb, and footerbar.
 It is implemented in main html file `index.html` inside `web` folder.
 

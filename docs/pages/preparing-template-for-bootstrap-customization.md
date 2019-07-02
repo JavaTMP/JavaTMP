@@ -1,7 +1,7 @@
 ---
 title: Preparing Template for Bootstrap customization
 ---
-# Preparing Template for Bootstrap customization
+# {{ page.title }}
 Backup JavaTMP project and apply the following steps before continuing:
 *   In file `./web/assets/src/sass/common/variables.scss` and `BEFORE` the imports of required bootstrap SASS parts and at
     comment `//--- override default bootstrap variables here`.

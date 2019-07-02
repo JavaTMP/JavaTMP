@@ -1,7 +1,7 @@
 ---
 title: Java Bootstrap Template Version 0.0.1 (published on 7th of June, 2018)
 ---
-# Java Bootstrap Template Version 0.0.1 (published on 7th of June, 2018)
+# {{ page.title }}
 
 Implementing the following version:
 

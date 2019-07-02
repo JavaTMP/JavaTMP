@@ -1,7 +1,7 @@
 ---
 title: Java Bootstrap Template Version 0.0.5 (published on 6th of October, 2018)
 ---
-# Java Bootstrap Template Version 0.0.5 (published on 6th of October, 2018)
+# {{ page.title }}
 
 ### 5e91f52 on Oct 6, 2018, 2:41 AM GMT+4
 - Move a lot of text to resourcebundle files for locale supports.

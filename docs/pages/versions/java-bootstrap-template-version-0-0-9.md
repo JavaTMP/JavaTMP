@@ -1,7 +1,7 @@
 ---
 title: Java Bootstrap Template Version 0.0.9 (published on Jun 24, 2019)
 ---
-# Java Bootstrap Template Version 0.0.9 (published on Jun 24, 2019)
+# {{ page.title }}
 
 ## f2f46f7 on Jun 24, 2019, 7:32 PM GMT+4
 - Prepare release 0.0.9

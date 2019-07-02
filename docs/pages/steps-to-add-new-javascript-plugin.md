@@ -1,7 +1,7 @@
 ---
 title: Steps to add new Javascript plugin
 ---
-# Steps to add new Javascript plugin
+# {{ page.title }}
 We use the following steps when we add new plugins for our template to make sure the functionalities of new plugin meet our need:
 
 1.  Check first that there is not any exiting plugins with same required functionalities exist in JavaTMP template.

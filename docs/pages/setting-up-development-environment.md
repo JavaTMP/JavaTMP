@@ -1,7 +1,7 @@
 ---
 title: Setting Up Development Environment
 ---
-# Setting Up Development Environment
+# {{ page.title }}
 Doing things manually is fine once but if you can automate things it’s better. With little tools you can speed up development and reduce recursive mundane tasks such as starting a project or setting up boilerplate code. We will show you how to set up and test a development environment on Windows. don't forget to take a backup of any folder or file before changing anythings.
 
 ### Install Git

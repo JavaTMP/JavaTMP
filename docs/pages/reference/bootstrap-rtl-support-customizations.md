@@ -1,7 +1,7 @@
 ---
 title: Bootstrap RTL support and modifications
 ---
-# Bootstrap RTL Support and Customizations
+# {{ page.title }}
 
 We used the idea of overriding classes and rules on `sass` folder
 to produce RTL folder `sass-rtl`. As you will see shortly we copied sass folder
