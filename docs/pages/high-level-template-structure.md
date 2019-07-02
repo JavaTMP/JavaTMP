@@ -1,7 +1,7 @@
 ---
 title: High Level Template Structure
 ---
-# High Level Template Structure
+# {{ page.title }}
 
 Your purchased package contains separate folder for each template. The following is a high level folder structures
 of purchased JavaTMP project package with its description and usage:
