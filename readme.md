@@ -35,7 +35,7 @@ https://help.javatmp.com/pages/high-level-template-structure
 ## Running
 It is best to run JavaTMP's applications with in a HTTP web server. However,
 inside each project there is a gulp task that run a local web server.
-So you can use it for testing purposes by running the following command:
+So you can use it for testing purposes by running the following commands:
 (make sure first that node.js is installed in your machine):
 ```
 npm install
