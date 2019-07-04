@@ -40,7 +40,7 @@ ALTER TABLE transactionEntry ADD CONSTRAINT transactionEntry_transactionId_fk FO
 CREATE INDEX transactionEntry_dateASC_ind ON transactionEntry (entryDate ASC);
 CREATE INDEX transactionEntry_dateDESC_ind ON transactionEntry (entryDate DESC);
 
--- INSERT INTO transactionEntry SELECT * FROM transactionEntryVI;
+INSERT INTO transactionEntry SELECT * FROM transactionEntryVI;
 
 CREATE TABLE log (
     id BIGINT UNSIGNED not null AUTO_INCREMENT,

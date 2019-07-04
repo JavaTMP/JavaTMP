@@ -12,3 +12,4 @@ title: Java Bootstrap Template Version 0.0.10 (Current Development Version)
     - cropperjs from 1.5.1 to 1.5.2
     - jquery-validation from 1.19.0 to 1.19.1
 - Update demo page for `bootstrap-modal-wrapper` `pages/plugins/bootstrap-modal-wrapper.html`
+- Run gulp default to regenerate dist folders.
