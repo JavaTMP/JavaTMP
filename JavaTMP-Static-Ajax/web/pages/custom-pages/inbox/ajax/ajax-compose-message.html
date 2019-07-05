@@ -81,12 +81,14 @@
                 modal.addButton({
                     label: "Open Another Compose Message",
                     cssClass: "btn btn-info",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                    action: function (button, buttonData, originalEvent) {
                         BootstrapModalWrapperFactory.createAjaxModal({
                             message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
                             closable: false,
                             closeByBackdrop: false,
-                            url: "pages/custom-pages/inbox/ajax/ajax-compose-message.html",
+                            ajax: {
+                                url: "pages/custom-pages/inbox/ajax/ajax-compose-message.html"
+                            },
                             ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                         });
                     }
@@ -94,15 +96,17 @@
                 modal.addButton({
                     label: "Close And Open Inbox Messages",
                     cssClass: "btn btn-info",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
-                        modalWrapper.setOnDestroy(null);
+                    action: function (button, buttonData, originalEvent) {
+                        this.setOnDestroy(null);
                         $("#" + currentParentModal.options.id).find('.ajax-email-body').summernote("destroy");
-                        modalWrapper.hide();
+                        this.hide();
                         BootstrapModalWrapperFactory.createAjaxModal({
                             message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
                             closable: false,
                             closeByBackdrop: false,
-                            url: "pages/custom-pages/inbox/ajax/ajax-inbox-messages.html",
+                            ajax: {
+                                url: "pages/custom-pages/inbox/ajax/ajax-inbox-messages.html"
+                            },
                             ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                         });
                     }
@@ -110,8 +114,8 @@
                 modal.addButton({
                     label: "Close",
                     cssClass: "btn btn-primary",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
-                        return modalWrapper.hide();
+                    action: function (button, buttonData, originalEvent) {
+                        return this.hide();
                     }
                 });
 

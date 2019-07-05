@@ -191,10 +191,12 @@
                     BootstrapModalWrapperFactory.createAjaxModal({
                         message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
                         title: "${labels['global.loadingText']}",
-                        passData: {},
                         updateSizeAfterDataFetchTo: null, // default is  or null for standard or "modal-sm"
 //                        size: "modal-lg",
-                        url: javatmp.settings.contextPath + "/accounting/AddNewAccountPopup",
+                        ajax: {
+                            url: javatmp.settings.contextPath + "/accounting/AddNewAccountPopup",
+                            data: {}
+                        },
                         ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady,
                         localData: {
                             callback: function (callbackData) {
@@ -211,10 +213,12 @@
                         var selectedRecord = selectedNode.data;
                         BootstrapModalWrapperFactory.createAjaxModal({
                             message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
-                            passData: {id: selectedRecord.id},
                             updateSizeAfterDataFetchTo: null, // default is  or null for standard or "modal-sm"
 //                            size: "modal-lg",
-                            url: javatmp.settings.contextPath + "/accounting/UpdateAccountPopup",
+                            ajax: {
+                                url: javatmp.settings.contextPath + "/accounting/UpdateAccountPopup",
+                                data: {id: selectedRecord.id}
+                            },
                             ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady,
                             localData: {
                                 callback: function (callbackData) {

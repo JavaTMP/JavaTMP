@@ -60,26 +60,28 @@
                 modal.addButton({
                     label: "Compose A New Message",
                     cssClass: "btn btn-danger",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                    action: function (button, buttonData, originalEvent) {
                         setTimeout(function () {
                             BootstrapModalWrapperFactory.createAjaxModal({
                                 message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
                                 closable: false,
                                 closeByBackdrop: false,
                                 size: "modal-lg",
-                                url: javatmp.settings.contextPath + "/pages/message/ComposeMessage",
+                                ajax: {
+                                    url: javatmp.settings.contextPath + "/pages/message/ComposeMessage"
+                                },
                                 ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                             });
                         }, 300);
                     }
-                }, true);
+                });
                 modal.addButton({
                     label: "Close",
                     cssClass: "btn btn-primary",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
-                        return modalWrapper.hide();
+                    action: function (button, buttonData, originalEvent) {
+                        return this.hide();
                     }
-                }, true);
+                });
 
 
 

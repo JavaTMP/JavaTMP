@@ -50,14 +50,14 @@
                 modal.addButton({
                     label: "Close",
                     cssClass: "btn btn-danger",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
-                        return modalWrapper.hide();
+                    action: function (button, buttonData, originalEvent) {
+                        return this.hide();
                     }
                 });
                 modal.addButton({
                     label: "Add New Event",
                     cssClass: "btn btn-primary",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                    action: function (button, buttonData, originalEvent) {
                         eventForm.trigger("submit");
                     }
                 });
@@ -69,10 +69,10 @@
                         modalWrapper.setOnDestroy(null);
                         // here we run passing function name as a remote callback
                         javatmp.util.waitForFinalEvent(function () {
-                            if ($.isFunction(modal.options.passData.callback)) {
-                                modal.options.passData.callback.apply();
-                            } else if ($.type(modal.options.passData.callback) === "string") {
-                                javatmp.util.executeFunctionByName(modal.options.passData.callback, window, callbackData);
+                            if ($.isFunction(modal.options.ajax.passData.callback)) {
+                                modal.options.ajax.passData.callback.apply();
+                            } else if ($.type(modal.options.ajax.passData.callback) === "string") {
+                                javatmp.util.executeFunctionByName(modal.options.ajax.passData.callback, window, callbackData);
                             }
                         }, 200, "add-new-event-callback");
                         return true;

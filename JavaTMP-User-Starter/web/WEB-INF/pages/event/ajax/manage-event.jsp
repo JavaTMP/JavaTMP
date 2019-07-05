@@ -69,14 +69,14 @@
                 modal.addButton({
                     label: "Close Dialog",
                     cssClass: "btn btn-secondary mr-auto",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
-                        return modalWrapper.hide();
+                    action: function (button, buttonData, originalEvent) {
+                        return this.hide();
                     }
                 });
                 modal.addButton({
                     label: "Delete Event",
                     cssClass: "btn btn-danger",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                    action: function (button, buttonData, originalEvent) {
                         var formData = convertFormToJson(eventForm);
                         BootstrapModalWrapperFactory.createModal({
                             message: "Are You sure you want to DELETE Event ?",
@@ -87,15 +87,15 @@
                                 {
                                     label: "Cancel",
                                     cssClass: "btn btn-secondary",
-                                    action: function (modalWrapper, button, buttonData, originalEvent) {
-                                        return modalWrapper.hide();
+                                    action: function (button, buttonData, originalEvent) {
+                                        return this.hide();
                                     }
                                 },
                                 {
                                     label: "Delete Event ID '" + formData.id + "'",
                                     cssClass: "btn btn-danger",
-                                    action: function (modalWrapper, button, buttonData, originalEvent) {
-                                        modalWrapper.hide();
+                                    action: function (button, buttonData, originalEvent) {
+                                        this.hide();
                                         var m = BootstrapModalWrapperFactory.createModal({
                                             message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
                                             closable: false,
@@ -140,7 +140,7 @@
                 modal.addButton({
                     label: "Update Event",
                     cssClass: "btn btn-primary",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                    action: function (button, buttonData, originalEvent) {
                         eventForm.trigger("submit");
                     }
                 });
@@ -154,10 +154,10 @@
                         modalWrapper.setOnDestroy(null);
                         // here we run passing function name as a remote callback
                         javatmp.util.waitForFinalEvent(function () {
-                            if ($.isFunction(modal.options.passData.callback)) {
-                                modal.options.passData.callback.apply();
-                            } else if ($.type(modal.options.passData.callback) === "string") {
-                                javatmp.util.executeFunctionByName(modal.options.passData.callback, window, callbackData);
+                            if ($.isFunction(modal.options.ajax.passData.callback)) {
+                                modal.options.ajax.passData.callback.apply();
+                            } else if ($.type(modal.options.ajax.passData.callback) === "string") {
+                                javatmp.util.executeFunctionByName(modal.options.ajax.passData.callback, window, callbackData);
                             }
                         }, 200, "manage-event-callback");
                         return true;

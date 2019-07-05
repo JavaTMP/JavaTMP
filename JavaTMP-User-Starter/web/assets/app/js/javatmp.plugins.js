@@ -503,14 +503,15 @@
             buttons: [{
                     label: cancelActionBtnText,
                     cssClass: "btn btn-secondary",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
-                        return modalWrapper.hide();
+                    action: function (button, buttonData, originalEvent) {
+                        return this.hide();
                     }
-                }, {
+                },
+                {
                     label: confirmActionBtnText,
                     cssClass: "btn btn-primary",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
-                        modalWrapper.hide();
+                    action: function (button, buttonData, originalEvent) {
+                        this.hide();
                         javatmp.plugins.ajaxAction(ajaxUrl, ajaxData, successCallback, errorCallback);
                     }
                 }

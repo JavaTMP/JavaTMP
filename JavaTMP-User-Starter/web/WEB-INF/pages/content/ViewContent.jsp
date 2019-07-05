@@ -90,16 +90,16 @@
                             id: "update-content-dialog-cancel-id",
                             label: "Cancel",
                             cssClass: "btn btn-secondary",
-                            action: function (modalWrapper, button, buttonData, originalEvent) {
-                                return modalWrapper.hide();
+                            action: function (button, buttonData, originalEvent) {
+                                return this.hide();
                             }
                         },
                         {
                             label: "Yes",
                             cssClass: "btn btn-primary",
-                            action: function (modalWrapper, button, buttonData, originalEvent) {
+                            action: function (button, buttonData, originalEvent) {
                                 if (send === true) {
-                                    return modalWrapper.hide();
+                                    return this.hide();
                                 }
                                 $('#Update-Content-Form-Id').ajaxSubmit({
 //                                    contentType: "application/json; charset=utf-8",

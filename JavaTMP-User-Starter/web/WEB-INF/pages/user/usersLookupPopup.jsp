@@ -52,21 +52,21 @@
                 modal.addButton({
                     label: javatmp.settings.labels["user.dialog.selectUserLookup.cancelBtn"],
                     cssClass: "btn btn-danger mr-auto",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
-                        return modalWrapper.hide();
+                    action: function (button, buttonData, originalEvent) {
+                        return this.hide();
                     }
                 });
                 var selectUserButton = modal.addButton({
                     label: javatmp.settings.labels["user.dialog.selectUserLookup.selectBtn"],
                     cssClass: "btn btn-primary",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                    action: function (button, buttonData, originalEvent) {
                         var selectedData = table.rows({selected: true}).data();
                         if (selectedData.length > 0) {
                             var selectedRecord = selectedData[0];
                             callbackData.success = true;
                             callbackData.cancel = false;
                             callbackData.userSelected = selectedRecord;
-                            return modalWrapper.hide();
+                            return this.hide();
                         } else {
                             BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
                         }
@@ -77,10 +77,10 @@
                     modalWrapper.setOnDestroy(null);
                     // here we run passing function name as a remote callback
                     javatmp.util.waitForFinalEvent(function () {
-                        if ($.isFunction(modal.options.passData.callback)) {
-                            modal.options.passData.callback.apply(modal, callbackData);
-                        } else if ($.type(modal.options.passData.callback) === "string") {
-                            javatmp.util.executeFunctionByName(modal.options.passData.callback, window, callbackData);
+                        if ($.isFunction(modal.options.ajax.passData.callback)) {
+                            modal.options.ajax.passData.callback.apply(modal, callbackData);
+                        } else if ($.type(modal.options.ajax.passData.callback) === "string") {
+                            javatmp.util.executeFunctionByName(modal.options.ajax.passData.callback, window, callbackData);
                         }
                     }, 200, "@usersLookupPopup");
                     return true;

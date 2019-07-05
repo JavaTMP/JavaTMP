@@ -600,10 +600,12 @@
                 passData.callback = "actionCallback";
                 BootstrapModalWrapperFactory.createAjaxModal({
                     message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
-                    passData: passData,
                     updateSizeAfterDataFetchTo: "modal-lg", // default is  or null for standard or "modal-sm"
                     size: "modal-lg",
-                    url: javatmp.settings.contextPath + "/user/GetCreateNewUserPopupController",
+                    ajax: {
+                        url: javatmp.settings.contextPath + "/user/GetCreateNewUserPopupController",
+                        data: passData
+                    },
                     ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                 });
 
@@ -619,10 +621,12 @@
                     passData.id = selectedRecord.id;
                     BootstrapModalWrapperFactory.createAjaxModal({
                         message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
-                        passData: passData,
                         updateSizeAfterDataFetchTo: "modal-lg", // default is  or null for standard or "modal-sm"
                         size: "modal-lg",
-                        url: javatmp.settings.contextPath + "/user/GetUpdateUserPopupController",
+                        ajax: {
+                            url: javatmp.settings.contextPath + "/user/GetUpdateUserPopupController",
+                            data: passData
+                        },
                         ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                     });
                 } else {

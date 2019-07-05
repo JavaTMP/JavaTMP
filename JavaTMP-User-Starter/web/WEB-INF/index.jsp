@@ -386,15 +386,15 @@
                             {
                                 label: "${labels['global.return']}",
                                 cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    modalWrapper.hide();
+                                action: function (button, buttonData, originalEvent) {
+                                    this.hide();
                                 }
                             },
                             {
                                 label: "${labels['globa.redirectToLoginPage']}",
                                 cssClass: "btn btn-danger",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    modalWrapper.hide();
+                                action: function (button, buttonData, originalEvent) {
+                                    this.hide();
                                     setTimeout(function () {
                                         window.location.replace(redirectURL);
                                     }, 200);

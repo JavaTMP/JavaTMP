@@ -415,9 +415,11 @@
                 passData.id = 1;
                 BootstrapModalWrapperFactory.createAjaxModal({
                     message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
-                    passData: passData,
                     updateSizeAfterDataFetchTo: null,
-                    url: javatmp.settings.contextPath + "/user/GetUsersLookupPopupPage",
+                    ajax: {
+                        url: javatmp.settings.contextPath + "/user/GetUsersLookupPopupPage",
+                        data: passData
+                    },
                     ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                 });
             });

@@ -55,6 +55,13 @@
                             <button id="h1ForTitle" type="button" class="btn btn-primary">
                                 H1 for title
                             </button>
+                            <button id="fullscreenfeatures" type="button" class="btn btn-primary">
+                                Fullscreen modal
+                            </button>
+                            <button id="customTemplateForButtons" type="button" class="btn btn-primary">
+                                A link for buttons
+                            </button>
+
                             <h2 class="mt-3 text-primary">Update Contents on the fly</h2>
                             <button id="updateTitleContent" type="button" class="btn btn-primary">
                                 Update Title and Content
@@ -109,6 +116,41 @@
         Embed CSS styling for current page.
         */
     </style>
+    <style type="text/css">
+        .bootstrap-modal-wrapper-fullscreen {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            overflow: hidden;
+        }
+        .bootstrap-modal-wrapper-fullscreen .modal-dialog {
+            position: fixed;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            padding: 0;top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            max-height: 100%;
+            max-width: 100%;
+            display: flex;
+        }
+        .bootstrap-modal-wrapper-fullscreen .modal-dialog .modal-content {
+            height: 100vh;
+            max-height: 100vh;
+            overflow: hidden;
+        }
+        .bootstrap-modal-wrapper-fullscreen .modal-dialog .modal-content .modal-header,
+        .bootstrap-modal-wrapper-fullscreen .modal-dialog .modal-content .modal-footer {
+            flex-shrink: 0;
+        }
+        .bootstrap-modal-wrapper-fullscreen .modal-dialog .modal-content .modal-body {
+            overflow-y: auto;
+        }
+    </style>
 
     <!--
     Reference Your external Javascript file here
@@ -129,6 +171,9 @@
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
+                console.log("initial z-index [" + BootstrapModalWrapperFactory.options.starterZIndex + "]");
+                BootstrapModalWrapperFactory.options.starterZIndex = 15000;
+                console.log("initial z-index after update [" + BootstrapModalWrapperFactory.options.starterZIndex + "]");
                 $("#simple-message").on("click", function (event) {
                     BootstrapModalWrapperFactory.showMessage("Delfault Message to show to user");
                 });
@@ -183,8 +228,8 @@
                             {
                                 label: "Close Me",
                                 cssClass: "btn btn-primary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.hide();
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.hide();
                                 }
                             }
                         ]
@@ -201,14 +246,14 @@
                             {
                                 label: "Close",
                                 cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.hide();
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.hide();
                                 }
                             },
                             {
                                 label: "Create alert",
                                 cssClass: "btn btn-primary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
+                                action: function (button, buttonData, originalEvent) {
                                     BootstrapModalWrapperFactory.alert("Alert Modal Created");
                                 }
                             }
@@ -225,16 +270,16 @@
                             {
                                 label: "Close",
                                 cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.hide();
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.hide();
                                 }
                             },
                             {
                                 label: "Update Title & Message",
                                 cssClass: "btn btn-primary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    modalWrapper.updateTitle("New Title");
-                                    modalWrapper.updateMessage("Updated message content");
+                                action: function (button, buttonData, originalEvent) {
+                                    this.updateTitle("New Title");
+                                    this.updateMessage("Updated message content");
                                 }
                             }
                         ]
@@ -250,40 +295,40 @@
                             {
                                 label: "Close",
                                 cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.hide();
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.hide();
                                 }
                             },
                             {
                                 label: "Make Me Extra Large",
                                 cssClass: "btn btn-primary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    modalWrapper.originalModal.find(".modal-dialog").css({transition: 'all 0.4s'});
-                                    modalWrapper.updateSize("modal-xl");
+                                action: function (button, buttonData, originalEvent) {
+                                    this.originalModal.find(".modal-dialog").css({transition: 'all 0.4s'});
+                                    this.updateSize("modal-xl");
                                 }
                             },
                             {
                                 label: "Make Me Large",
                                 cssClass: "btn btn-primary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    modalWrapper.originalModal.find(".modal-dialog").css({transition: 'all 0.4s'});
-                                    modalWrapper.updateSize("modal-lg");
+                                action: function (button, buttonData, originalEvent) {
+                                    this.originalModal.find(".modal-dialog").css({transition: 'all 0.4s'});
+                                    this.updateSize("modal-lg");
                                 }
                             },
                             {
                                 label: "Make Me Small",
                                 cssClass: "btn btn-primary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    modalWrapper.originalModal.find(".modal-dialog").css({transition: 'all 0.4s'});
-                                    modalWrapper.updateSize("modal-sm");
+                                action: function (button, buttonData, originalEvent) {
+                                    this.originalModal.find(".modal-dialog").css({transition: 'all 0.4s'});
+                                    this.updateSize("modal-sm");
                                 }
                             },
                             {
                                 label: "Make Me Default",
                                 cssClass: "btn btn-primary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    modalWrapper.originalModal.find(".modal-dialog").css({transition: 'all 0.4s'});
-                                    modalWrapper.updateSize(null);
+                                action: function (button, buttonData, originalEvent) {
+                                    this.originalModal.find(".modal-dialog").css({transition: 'all 0.4s'});
+                                    this.updateSize(null);
                                 }
                             }
                         ]
@@ -300,19 +345,19 @@
                             {
                                 label: "Close",
                                 cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.hide();
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.hide();
                                 }
                             },
                             {
                                 label: "Add Button",
                                 cssClass: "btn btn-primary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    modalWrapper.addButton({
+                                action: function (button, buttonData, originalEvent) {
+                                    this.addButton({
                                         id: "id-" + (++buttonsCount),
                                         label: "New " + buttonsCount,
                                         cssClass: "btn btn-secondary",
-                                        action: function (modalWrapper, button, buttonData, originalEvent) {
+                                        action: function (button, buttonData, originalEvent) {
                                             BootstrapModalWrapperFactory.showMessage("nothing only to show attached event to button id [" + buttonData.id + "]");
                                             return true;
                                         }
@@ -322,8 +367,8 @@
                             {
                                 label: "Delete Button",
                                 cssClass: "btn btn-primary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    modalWrapper.removeButton("id-" + (buttonsCount--));
+                                action: function (button, buttonData, originalEvent) {
+                                    this.removeButton("id-" + (buttonsCount--));
                                 }
                             }
                         ]
@@ -344,8 +389,8 @@
                         m.addButton({
                             label: "Close",
                             cssClass: "btn btn-secondary",
-                            action: function (modalWrapper, button, buttonData, originalEvent) {
-                                return modalWrapper.hide();
+                            action: function (button, buttonData, originalEvent) {
+                                return this.hide();
                             }
                         });
                     }, 2000);
@@ -360,7 +405,9 @@
                         idParameter: "ajaxModalIdTestingName", // default name for url parameter containing id of the modal is "ajaxModalId"
                         updateSizeAfterDataFetchTo: "modal-xl", // default is "modal-lg" or null for standard or "modal-sm"
                         size: "modal-sm",
-                        url: "pages/custom-pages/inbox/ajax/blank-ajax-response.html",
+                        ajax: {
+                            url: "pages/custom-pages/inbox/ajax/blank-ajax-response.html"
+                        },
                         localData: {
                             para1: "any value 1",
                             object1: {m: 1, n: 3},
@@ -381,7 +428,9 @@
                         idParameter: "ajaxModalIdTestingName", // default name for url parameter containing id of the modal is "ajaxModalId"
                         updateSizeAfterDataFetchTo: "modal-sm", // default is "modal-lg" or null for standard or "modal-sm"
                         size: "modal-sm",
-                        url: "pages/custom-pages/inbox/ajax/blank-ajax-response.html",
+                        ajax: {
+                            url: "pages/custom-pages/inbox/ajax/blank-ajax-response.html"
+                        },
                         localData: {
                             para1: "any value 1",
                             object1: {m: 1, n: 3},
@@ -402,7 +451,9 @@
                         idParameter: "ajaxModalIdTestingName", // default name for url parameter containing id of the modal is "ajaxModalId"
                         updateSizeAfterDataFetchTo: null, // default is "modal-lg" or null for standard or "modal-sm"
                         size: null,
-                        url: "pages/custom-pages/inbox/ajax/blank-ajax-response.html",
+                        ajax: {
+                            url: "pages/custom-pages/inbox/ajax/blank-ajax-response.html"
+                        },
                         localData: {
                             para1: "any value 1",
                             object1: {m: 1, n: 3},
@@ -423,7 +474,9 @@
                         idParameter: "ajaxModalIdTestingName", // default name for url parameter containing id of the modal is "ajaxModalId"
                         updateSizeAfterDataFetchTo: "modal-lg", // default is  or null for standard or "modal-sm"
                         size: "modal-lg",
-                        url: "pages/custom-pages/inbox/ajax/blank-ajax-response.html",
+                        ajax: {
+                            url: "pages/custom-pages/inbox/ajax/blank-ajax-response.html"
+                        },
                         localData: {
                             para1: "any value 1",
                             object1: {m: 1, n: 3},
@@ -434,7 +487,6 @@
                         } // Javascript Object kept in the settings object and available from within modal functions by options.localData
                     });
                 });
-
                 $("#ajaxContentinXLargeModal").on("click", function (event) {
                     var m = BootstrapModalWrapperFactory.createAjaxModal({
                         message: '<div class="text-center">Loading</div>',
@@ -445,7 +497,9 @@
                         idParameter: "ajaxModalIdTestingName", // default name for url parameter containing id of the modal is "ajaxModalId"
                         updateSizeAfterDataFetchTo: "modal-xl", // default is  or null for standard or "modal-sm"
                         size: "modal-xl",
-                        url: "pages/custom-pages/inbox/ajax/blank-ajax-response.html",
+                        ajax: {
+                            url: "pages/custom-pages/inbox/ajax/blank-ajax-response.html"
+                        },
                         localData: {
                             para1: "any value 1",
                             object1: {m: 1, n: 3},
@@ -504,22 +558,22 @@
                             {
                                 label: "Set Scrollable True",
                                 cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.updateModalDialogScrollable(true);
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.updateModalDialogScrollable(true);
                                 }
                             },
                             {
                                 label: "Set Scrollable False",
                                 cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.updateModalDialogScrollable(false);
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.updateModalDialogScrollable(false);
                                 }
                             },
                             {
                                 label: "Close",
                                 cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.hide();
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.hide();
                                 }
                             }
                         ]
@@ -539,8 +593,144 @@
                             {
                                 label: "Close",
                                 cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.hide();
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.hide();
+                                }
+                            }
+                        ]
+                    });
+                    dialog.show();
+                });
+
+                $("#fullscreenfeatures").on("click", function (event) {
+                    var lineOfText = "<p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>";
+                    var longContent = "";
+                    for (var i = 0; i < 2; i++) {
+                        longContent += lineOfText;
+                    }
+                    var dialog = BootstrapModalWrapperFactory.createModal({
+                        title: "Fullscreen Long Body Content",
+                        message: longContent,
+                        closable: false,
+                        closeByBackdrop: true,
+                        centered: true,
+                        modalDialogScrollable: false,
+                        buttons: [
+                            {
+                                label: "Set Scrollable True",
+                                cssClass: "btn btn-secondary",
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.updateModalDialogScrollable(true);
+                                }
+                            },
+                            {
+                                label: "Set Scrollable False",
+                                cssClass: "btn btn-secondary",
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.updateModalDialogScrollable(false);
+                                }
+                            },
+                            {
+                                label: "Add More Content",
+                                cssClass: "btn btn-secondary",
+                                action: function (button, buttonData, originalEvent) {
+                                    var currentBody = $(dialog.originalModal).find(".modal-body").html();
+                                    for (var i = 0; i < 5; i++) {
+                                        currentBody += lineOfText;
+                                    }
+                                    $(dialog.originalModal).find(".modal-body").html(currentBody);
+                                }
+                            },
+                            {
+                                label: "Add Fullscreen",
+                                cssClass: "btn btn-secondary",
+                                action: function (button, buttonData, originalEvent) {
+                                    $(dialog.originalModal).addClass("bootstrap-modal-wrapper-fullscreen");
+                                }
+                            },
+                            {
+                                label: "Remove Fullscreen",
+                                cssClass: "btn btn-secondary",
+                                action: function (button, buttonData, originalEvent) {
+                                    $(dialog.originalModal).removeClass("bootstrap-modal-wrapper-fullscreen");
+                                }
+                            },
+                            {
+                                label: "Close",
+                                cssClass: "btn btn-secondary",
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.hide();
+                                }
+                            }
+                        ]
+                    });
+                    $(dialog.originalModal).addClass("bootstrap-modal-wrapper-fullscreen");
+                    dialog.show();
+                });
+                $("#customTemplateForButtons").on("click", function (event) {
+                    var lineOfText = "<p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>";
+                    var longContent = "";
+                    for (var i = 0; i < 2; i++) {
+                        longContent += lineOfText;
+                    }
+                    var dialog = BootstrapModalWrapperFactory.createModal({
+                        title: "Fullscreen Long Body Content",
+                        message: longContent,
+                        closable: false,
+                        closeByBackdrop: true,
+                        centered: true,
+                        modalDialogScrollable: false,
+                        buttons: [
+                            {
+                                template: "<a href='javascript:void(0)'></a>",
+                                label: "Set Scrollable True",
+                                cssClass: "btn btn-link",
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.updateModalDialogScrollable(true);
+                                }
+                            },
+                            {
+                                template: "<a href='javascript:void(0)'></a>",
+                                label: "Set Scrollable False",
+                                cssClass: "btn btn-link",
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.updateModalDialogScrollable(false);
+                                }
+                            },
+                            {
+                                template: "<a href='javascript:void(0)'></a>",
+                                label: "Add More Content",
+                                cssClass: "btn btn-link",
+                                action: function (button, buttonData, originalEvent) {
+                                    var currentBody = $(dialog.originalModal).find(".modal-body").html();
+                                    for (var i = 0; i < 5; i++) {
+                                        currentBody += lineOfText;
+                                    }
+                                    $(dialog.originalModal).find(".modal-body").html(currentBody);
+                                }
+                            },
+                            {
+                                template: "<a href='javascript:void(0)'></a>",
+                                label: "Add Fullscreen",
+                                cssClass: "btn btn-link",
+                                action: function (button, buttonData, originalEvent) {
+                                    $(dialog.originalModal).addClass("bootstrap-modal-wrapper-fullscreen");
+                                }
+                            },
+                            {
+                                template: "<a href='javascript:void(0)'></a>",
+                                label: "Remove Fullscreen",
+                                cssClass: "btn btn-link",
+                                action: function (button, buttonData, originalEvent) {
+                                    $(dialog.originalModal).removeClass("bootstrap-modal-wrapper-fullscreen");
+                                }
+                            },
+                            {
+                                template: "<a href='javascript:void(0)'></a>",
+                                label: "Close",
+                                cssClass: "btn btn-link text-danger bg-light",
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.hide();
                                 }
                             }
                         ]

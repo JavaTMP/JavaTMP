@@ -260,14 +260,14 @@
             modal.addButton({
                 label: "${labels['global.cancel']}",
                 cssClass: "btn btn-danger mr-auto",
-                action: function (modalWrapper, button, buttonData, originalEvent) {
-                    return modalWrapper.hide();
+                action: function (button, buttonData, originalEvent) {
+                    return this.hide();
                 }
             });
             modal.addButton({
                 label: "${labels['user.dialog.updateCompleteUser.btn']}",
                 cssClass: "btn btn-primary",
-                action: function (modalWrapper, button, buttonData, originalEvent) {
+                action: function (button, buttonData, originalEvent) {
                     form.trigger("submit");
                 }
             });
@@ -275,10 +275,10 @@
             modal.originalModal.on('hidden.bs.modal', function (e) {
                 // here we run passing function name as a remote callback
                 javatmp.util.waitForFinalEvent(function () {
-                    if ($.isFunction(modal.options.passData.callback)) {
-                        modal.options.passData.callback.apply();
-                    } else if ($.type(modal.options.passData.callback) === "string") {
-                        javatmp.util.executeFunctionByName(modal.options.passData.callback, window, callbackData);
+                    if ($.isFunction(modal.options.ajax.passData.callback)) {
+                        modal.options.ajax.passData.callback.apply();
+                    } else if ($.type(modal.options.ajax.passData.callback) === "string") {
+                        javatmp.util.executeFunctionByName(modal.options.ajax.passData.callback, window, callbackData);
                     }
                 }, 200, "@update-user-callback");
             });
@@ -290,17 +290,17 @@
                         {
                             label: "${labels['dialog.confirmClosing.noBtn']}",
                             cssClass: "btn btn-secondary",
-                            action: function (modalWrapper, button, buttonData, originalEvent) {
-                                return modalWrapper.hide();
+                            action: function (button, buttonData, originalEvent) {
+                                return this.hide();
                             }
                         },
                         {
                             label: "${labels['dialog.confirmClosing.yesBtn']}",
                             cssClass: "btn btn-primary",
-                            action: function (modalWrapper, button, buttonData, originalEvent) {
+                            action: function (button, buttonData, originalEvent) {
                                 modalInstance.setOnDestroy(null);
                                 modalInstance.hide();
-                                return modalWrapper.hide();
+                                return this.hide();
                             }
                         }
                     ]

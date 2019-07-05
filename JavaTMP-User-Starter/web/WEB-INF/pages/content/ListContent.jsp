@@ -153,7 +153,9 @@
                         passData: passData,
                         updateSizeAfterDataFetchTo: "modal-lg", // default is  or null for standard or "modal-sm"
                         size: "modal-lg",
-                        url: javatmp.settings.contextPath + "/pages/content/CreateNewContent",
+                        ajax: {
+                            url: javatmp.settings.contextPath + "/pages/content/CreateNewContent"
+                        },
                         ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                     });
                 });
@@ -167,10 +169,12 @@
                         passData.contentId = selectedRecord.contentId;
                         BootstrapModalWrapperFactory.createAjaxModal({
                             message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
-                            passData: passData,
                             updateSizeAfterDataFetchTo: "modal-lg", // default is  or null for standard or "modal-sm"
                             size: "modal-lg",
-                            url: javatmp.settings.contextPath + "/content/UpdateContent",
+                            ajax: {
+                                url: javatmp.settings.contextPath + "/content/UpdateContent",
+                                data: passData
+                            },
                             ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                         });
                     } else {

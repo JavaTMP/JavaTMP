@@ -121,14 +121,14 @@
                         croppedImageModal.addButton({
                             label: "Close",
                             cssClass: "btn btn-secondary",
-                            action: function (modalWrapper, button, buttonData, originalEvent) {
-                                modalWrapper.hide();
+                            action: function (button, buttonData, originalEvent) {
+                                this.hide();
                             }
                         });
                         croppedImageModal.addButton({
                             label: "<i class='fas fa-cloud-upload-alt fa-fw fa-lg'></i>&nbsp;Upload",
                             cssClass: "btn btn-primary",
-                            action: function (modalWrapper, button, buttonData, originalEvent) {
+                            action: function (button, buttonData, originalEvent) {
                                 result.toBlob(function (blob) {
                                     var formData = new FormData();
                                     blob.type = uploadedImageType;

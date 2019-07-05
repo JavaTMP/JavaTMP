@@ -308,15 +308,15 @@
                 var closeButton = modal.addButton({
                     label: "${labels['global.cancel']}",
                     cssClass: "btn btn-danger mr-auto",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                    action: function (button, buttonData, originalEvent) {
                         validator.destroy();
-                        return modalWrapper.hide();
+                        return this.hide();
                     }
                 });
                 var previousButton = modal.addButton({
                     label: "Previous",
                     cssClass: "btn btn-primary",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                    action: function (button, buttonData, originalEvent) {
                         var currentActiveElement = $(".nav .nav-link.active", wizardDiv);
                         var previousElement = $(currentActiveElement).prev();
                         console.log("prev-button current[" + $(currentActiveElement).attr("id") + "], next [" + $(previousElement).attr("id") + "]");
@@ -328,7 +328,7 @@
                 var nextButton = modal.addButton({
                     label: "Next",
                     cssClass: "btn btn-primary",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                    action: function (button, buttonData, originalEvent) {
                         var currentActiveElement = $(".nav .nav-link.active", wizardDiv);
                         var nextActiveElement = $(currentActiveElement).next();
                         console.log("next-button current[" + $(currentActiveElement).attr("id") + "], next [" + $(nextActiveElement).attr("id") + "]");
@@ -344,7 +344,7 @@
                 var sendButton = modal.addButton({
                     label: "Send",
                     cssClass: "btn btn-success",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                    action: function (button, buttonData, originalEvent) {
                         form.trigger("submit");
                     }
                 });

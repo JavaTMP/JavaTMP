@@ -81,13 +81,15 @@
                 modal.addButton({
                     label: "Open Another Compose Message",
                     cssClass: "btn btn-info",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                    action: function (button, buttonData, originalEvent) {
                         BootstrapModalWrapperFactory.createAjaxModal({
                             message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
                             closable: false,
                             closeByBackdrop: false,
                             size: "modal-lg",
-                            url: javatmp.settings.contextPath + "/pages/message/ComposeMessage",
+                            ajax: {
+                                url: javatmp.settings.contextPath + "/pages/message/ComposeMessage"
+                            },
                             ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                         });
                     }
@@ -95,8 +97,8 @@
                 var closeButton = modal.addButton({
                     label: "Close",
                     cssClass: "btn btn-primary",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
-                        return modalWrapper.hide();
+                    action: function (button, buttonData, originalEvent) {
+                        return this.hide();
                     }
                 });
 
@@ -264,15 +266,15 @@
                             {
                                 label: "Cancel",
                                 cssClass: "btn btn-secondary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    return modalWrapper.hide();
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.hide();
                                 }
                             },
                             {
                                 label: "Yes, Send it",
                                 cssClass: "btn btn-primary",
-                                action: function (modalWrapper, button, buttonData, originalEvent) {
-                                    modalWrapper.hide();
+                                action: function (button, buttonData, originalEvent) {
+                                    this.hide();
                                     var m = BootstrapModalWrapperFactory.createModal({
                                         message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
                                         closable: false,

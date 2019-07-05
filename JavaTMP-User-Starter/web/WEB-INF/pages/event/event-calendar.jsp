@@ -158,11 +158,12 @@
                     BootstrapModalWrapperFactory.createAjaxModal({
                         message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
                         closable: false,
-                        //                        title: "AJAX Content",
                         size: "modal-lg",
                         closeByBackdrop: false,
-                        passData: passData,
-                        url: javatmp.settings.contextPath + "/calendar/ManageEventController",
+                        ajax: {
+                            url: javatmp.settings.contextPath + "/calendar/ManageEventController",
+                            data: passData
+                        },
                         ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                     });
                 }
@@ -179,8 +180,10 @@
                         closable: false,
                         //                        title: "AJAX Content",
                         closeByBackdrop: false,
-                        passData: passData,
-                        url: javatmp.settings.contextPath + "/pages/event/ajax/add-new-event",
+                        ajax: {
+                            url: javatmp.settings.contextPath + "/pages/event/ajax/add-new-event",
+                            data: passData
+                        },
                         ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                     });
                 }
@@ -197,16 +200,16 @@
                                 {
                                     label: "Cancel",
                                     cssClass: "btn btn-secondary",
-                                    action: function (modalWrapper, button, buttonData, originalEvent) {
-                                        return modalWrapper.hide();
+                                    action: function (button, buttonData, originalEvent) {
+                                        return this.hide();
                                     }
                                 },
                                 {
                                     label: "Refresh",
                                     cssClass: "btn btn-primary",
-                                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    action: function (button, buttonData, originalEvent) {
                                         $('#web-diary-calendar').fullCalendar('refetchEvents');
-                                        return modalWrapper.hide();
+                                        return this.hide();
                                     }
                                 }
                             ]
@@ -236,11 +239,11 @@
                                     {
                                         label: "Return And Refresh",
                                         cssClass: "btn btn-success",
-                                        action: function (modalWrapper, button, buttonData, originalEvent) {
+                                        action: function (button, buttonData, originalEvent) {
                                             javatmp.util.waitForFinalEvent(function () {
                                                 $('#web-diary-calendar').fullCalendar('refetchEvents');
                                             }, 100, "fullCalendar-update-event");
-                                            modalWrapper.hide();
+                                            this.hide();
                                         }
                                     }
                                 ]
@@ -267,11 +270,11 @@
                                     {
                                         label: "Return And Refresh",
                                         cssClass: "btn btn-success",
-                                        action: function (modalWrapper, button, buttonData, originalEvent) {
+                                        action: function (button, buttonData, originalEvent) {
                                             javatmp.util.waitForFinalEvent(function () {
                                                 $('#web-diary-calendar').fullCalendar('refetchEvents');
                                             }, 100, "fullCalendar-populateFakeDatabase");
-                                            modalWrapper.hide();
+                                            this.hide();
                                         }
                                     }
                                 ]

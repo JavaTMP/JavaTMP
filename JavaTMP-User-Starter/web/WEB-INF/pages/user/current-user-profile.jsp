@@ -341,11 +341,11 @@
 //                            {
 //                                label: "Close And Refresh",
 //                                cssClass: "btn btn-primary",
-//                                action: function (modalWrapper, button, buttonData, originalEvent) {
+//                                action: function (button, buttonData, originalEvent) {
 //                                    javatmp.util.waitForFinalEvent(function () {
 //                                        window.location.reload(true);
 //                                    }, 200, "@update-current-user-profile");
-//                                    return modalWrapper.hide();
+//                                    return this.hide();
 //                                }
 //                            }
 //                        ]
@@ -391,11 +391,11 @@
                                 {
                                     label: "${labels["global.refreshPage"]}",
                                     cssClass: "btn btn-primary",
-                                    action: function (modalWrapper, button, buttonData, originalEvent) {
+                                    action: function (button, buttonData, originalEvent) {
                                         javatmp.util.waitForFinalEvent(function () {
                                             window.location.reload(true);
                                         }, 200, "@update-current-user-profile");
-                                        return modalWrapper.hide();
+                                        return this.hide();
                                     }
                                 }
                             ]
