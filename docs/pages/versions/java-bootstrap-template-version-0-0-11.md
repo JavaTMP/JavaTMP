@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.11 (Current Development Version)
 ---
 # {{ page.title }}
 
-## on
+## 88482b0 on Jul 5, 2019, 11:41 PM GMT+4
 - Update the following dependencies
     - bootstrap-modal-wrapper from 1.0.18 to 2.0.0
     - bootstrap-actionable from 1.0.11 to 1.0.12
