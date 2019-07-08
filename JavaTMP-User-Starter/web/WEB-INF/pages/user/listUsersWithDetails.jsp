@@ -596,15 +596,16 @@
             });
 
             addNewUserPopupButton.on("click", function (event) {
-                var passData = {};
-                passData.callback = "actionCallback";
                 BootstrapModalWrapperFactory.createAjaxModal({
                     message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
                     updateSizeAfterDataFetchTo: "modal-lg", // default is  or null for standard or "modal-sm"
                     size: "modal-lg",
+                    localData: {
+                        callback: actionCallback
+                    },
                     ajax: {
                         url: javatmp.settings.contextPath + "/user/GetCreateNewUserPopupController",
-                        data: passData
+                        data: {}
                     },
                     ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                 });
@@ -615,17 +616,18 @@
                 var selectedData = table.rows({selected: true}).data();
                 if (selectedData.length > 0) {
                     var selectedRecord = selectedData[0];
-                    //                    alert("row[" + JSON.stringify(selectedRecord) + "]");
-                    var passData = {};
-                    passData.callback = "actionCallback";
-                    passData.id = selectedRecord.id;
                     BootstrapModalWrapperFactory.createAjaxModal({
                         message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
                         updateSizeAfterDataFetchTo: "modal-lg", // default is  or null for standard or "modal-sm"
                         size: "modal-lg",
+                        localData: {
+                            callback: actionCallback
+                        },
                         ajax: {
                             url: javatmp.settings.contextPath + "/user/GetUpdateUserPopupController",
-                            data: passData
+                            data: {
+                                id: selectedRecord.id
+                            }
                         },
                         ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                     });
@@ -693,7 +695,7 @@
                     BootstrapModalWrapperFactory.showMessage("Kindly Select a record from the table");
                 }
             });
-            window.actionCallback = function (callbackData) {
+            var actionCallback = function (callbackData) {
                 if (callbackData.cancel === true) {
                 } else {
                     table.columns.adjust().draw();

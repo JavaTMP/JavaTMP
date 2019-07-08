@@ -249,10 +249,10 @@
             modal.originalModal.on('hidden.bs.modal', function (e) {
                 // here we run passing function name as a remote callback
                 javatmp.util.waitForFinalEvent(function () {
-                    if ($.isFunction(modal.options.ajax.passData.callback)) {
-                        modal.options.ajax.passData.callback.apply();
-                    } else if ($.type(modal.options.ajax.passData.callback) === "string") {
-                        javatmp.util.executeFunctionByName(modal.options.ajax.passData.callback, window, callbackData);
+                    if ($.isFunction(modal.options.localData.callback)) {
+                        modal.options.localData.callback.apply(callbackData, [callbackData]);
+                    } else if ($.type(modal.options.localData.callback) === "string") {
+                        javatmp.util.executeFunctionByName(modal.options.localData.callback, window, callbackData);
                     }
                 }, 100, "@addNewUserPopup");
             });

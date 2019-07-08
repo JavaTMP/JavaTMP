@@ -147,48 +147,8 @@
 //                        $(element).addClass("bg-danger text-white");
 //                    }
                 });
-                $(".changeCalendarViewMenuItem").on("click", function () {
-                    var targetView = $(this).attr("newCalendarView");
-                    $('#web-diary-calendar').fullCalendar('changeView', targetView);
-                });
-                function manageEvent(eventId) {
-                    var passData = {};
-                    passData.callback = "fullcalendarCallback";
-                    passData.id = eventId;
-                    BootstrapModalWrapperFactory.createAjaxModal({
-                        message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
-                        closable: false,
-                        size: "modal-lg",
-                        closeByBackdrop: false,
-                        ajax: {
-                            url: javatmp.settings.contextPath + "/calendar/ManageEventController",
-                            data: passData
-                        },
-                        ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
-                    });
-                }
-                function addNewEvent(date) {
-                    var passData = {};
-                    passData.callback = "fullcalendarCallback";
-                    //                    passData.callback = "testing.refreshFullcalendarEventsWindow";
-
-                    if (date) {
-                        passData.date = moment(date).format();
-                    }
-                    BootstrapModalWrapperFactory.createAjaxModal({
-                        message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
-                        closable: false,
-                        //                        title: "AJAX Content",
-                        closeByBackdrop: false,
-                        ajax: {
-                            url: javatmp.settings.contextPath + "/pages/event/ajax/add-new-event",
-                            data: passData
-                        },
-                        ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
-                    });
-                }
-                window.fullcalendarCallback = function (callbackData) {
-                    //                    alert(JSON.stringify(callbackData));
+                var fullcalendarCallback = function (callbackData) {
+                    alert(JSON.stringify(callbackData));
                     if (callbackData.cancel === true) {
                     } else {
                         BootstrapModalWrapperFactory.createModal({
@@ -216,6 +176,48 @@
                         }).show();
                     }
                 };
+
+                $(".changeCalendarViewMenuItem").on("click", function () {
+                    var targetView = $(this).attr("newCalendarView");
+                    $('#web-diary-calendar').fullCalendar('changeView', targetView);
+                });
+                function manageEvent(eventId) {
+                    BootstrapModalWrapperFactory.createAjaxModal({
+                        message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
+                        closable: false,
+                        size: "modal-lg",
+                        localData: {
+                            callback: fullcalendarCallback
+                        },
+                        closeByBackdrop: false,
+                        ajax: {
+                            url: javatmp.settings.contextPath + "/calendar/ManageEventController",
+                            data: {
+                                id: eventId
+                            }
+                        },
+                        ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
+                    });
+                }
+                function addNewEvent(date) {
+                    var passData = {};
+                    if (date) {
+                        passData.date = moment(date).format();
+                    }
+                    BootstrapModalWrapperFactory.createAjaxModal({
+                        message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
+                        closable: false,
+                        localData: {
+                            callback: fullcalendarCallback
+                        },
+                        closeByBackdrop: false,
+                        ajax: {
+                            url: javatmp.settings.contextPath + "/pages/event/ajax/add-new-event",
+                            data: passData
+                        },
+                        ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
+                    });
+                }
                 function updateEvent(event) {
                     var dataRow = {
                         'id': event.id,

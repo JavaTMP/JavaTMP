@@ -398,31 +398,33 @@
                 disabled();
             });
             addNewUserPopupButton.on("click", function (event) {
-                var passData = {};
-                passData.callback = "actionCallback";
                 BootstrapModalWrapperFactory.createAjaxModal({
                     message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
                     title: "${labels['global.loadingText']}",
                     updateSizeAfterDataFetchTo: "modal-lg", // default is  or null for standard or "modal-sm"
                     size: "modal-lg",
+                    localData: {
+                        callback: actionCallback
+                    },
                     ajax: {
                         url: javatmp.settings.contextPath + "/user/GetCreateNewUserPopupController",
-                        data: passData
+                        data: {}
                     },
                     ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                 });
             });
             addNewUserByWizardPopupButton.on("click", function (event) {
-                var passData = {};
                 BootstrapModalWrapperFactory.createAjaxModal({
                     message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
                     title: "${labels['global.loadingText']}",
                     updateSizeAfterDataFetchTo: "modal-lg", // default is  or null for standard or "modal-sm"
                     size: "modal-lg",
-                    localData: {callback: "actionCallback"},
+                    localData: {
+                        callback: actionCallback
+                    },
                     ajax: {
                         url: javatmp.settings.contextPath + "/pages/user/addUserByWizardPopup",
-                        data: passData
+                        data: {}
                     },
                     ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                 });
@@ -432,16 +434,18 @@
                 var selectedData = table.rows({selected: true}).data();
                 if (selectedData.length > 0) {
                     var selectedRecord = selectedData[0];
-                    var passData = {};
-                    passData.callback = "actionCallback";
-                    passData.id = selectedRecord.id;
                     BootstrapModalWrapperFactory.createAjaxModal({
                         message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
                         updateSizeAfterDataFetchTo: "modal-lg", // default is  or null for standard or "modal-sm"
                         size: "modal-lg",
+                        localData: {
+                            callback: actionCallback
+                        },
                         ajax: {
                             url: javatmp.settings.contextPath + "/user/GetUpdateUserPopupController",
-                            data: passData
+                            data: {
+                                id: selectedRecord.id
+                            }
                         },
                         ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                     });
@@ -509,7 +513,8 @@
                 }
 
             });
-            window.actionCallback = function (callbackData) {
+
+            var actionCallback = function (callbackData) {
                 if (callbackData.cancel === true) {
                 } else {
                     table.columns.adjust().draw();
