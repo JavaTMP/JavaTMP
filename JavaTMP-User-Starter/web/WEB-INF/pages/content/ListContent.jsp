@@ -80,7 +80,7 @@
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
 
-                window.actionCallback = function (callbackData) {
+                var actionCallback = function (callbackData) {
                     if (callbackData.cancel === true) {
                     } else {
                         table.columns.adjust().draw();
@@ -145,16 +145,17 @@
                 });
 
                 $("[action-name='addNewContentAction']", javatmp.settings.defaultOutputSelector).on("click", function (event) {
-                    var passData = {};
-                    passData.callback = "actionCallback";
                     BootstrapModalWrapperFactory.createAjaxModal({
                         message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
                         title: "${labels['global.loadingText']}",
-                        passData: passData,
                         updateSizeAfterDataFetchTo: "modal-lg", // default is  or null for standard or "modal-sm"
                         size: "modal-lg",
+                        localData: {
+                            callback: actionCallback
+                        },
                         ajax: {
-                            url: javatmp.settings.contextPath + "/pages/content/CreateNewContent"
+                            url: javatmp.settings.contextPath + "/pages/content/CreateNewContent",
+                            data: {}
                         },
                         ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                     });
@@ -165,12 +166,14 @@
                     if (selectedData.length > 0) {
                         var selectedRecord = selectedData[0];
                         var passData = {};
-                        passData.callback = "actionCallback";
                         passData.contentId = selectedRecord.contentId;
                         BootstrapModalWrapperFactory.createAjaxModal({
                             message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
                             updateSizeAfterDataFetchTo: "modal-lg", // default is  or null for standard or "modal-sm"
                             size: "modal-lg",
+                            localData: {
+                                callback: actionCallback
+                            },
                             ajax: {
                                 url: javatmp.settings.contextPath + "/content/UpdateContent",
                                 data: passData
@@ -212,9 +215,6 @@
                         return false;
                     }
                 });
-
-
-
 
                 $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
                     // fire when user resize browser window or sidebar hide / show
