@@ -46,3 +46,6 @@ title: General External Important Links
 - [https://github.com/lethevinh/sticky-table](https://github.com/lethevinh/sticky-table)
 - [https://github.com/paulhodel/jexcel](https://github.com/paulhodel/jexcel)
 - [https://github.com/joeantkowiak/TableScroller](https://github.com/joeantkowiak/TableScroller)
+
+## Collection Links
+- [https://help.optimizely.com/Build_Campaigns_and_Experiments/Use_screen_measurements_to_design_for_responsive_breakpoints](https://help.optimizely.com/Build_Campaigns_and_Experiments/Use_screen_measurements_to_design_for_responsive_breakpoints)
