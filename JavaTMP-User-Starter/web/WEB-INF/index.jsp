@@ -341,7 +341,16 @@
                     dateFormat: "DD/MM/YYYY",
                     dateTimeFormat: "DD/MM/YYYY HH:mm",
                     dateTimeSecondFormat: "DD/MM/YYYY HH:mm:ss",
-                    labels: {}
+                    labels: {},
+                    locale: "${sessionScope.user.lang}",
+                    defaultSelectPlaceholder: "Kindly Select",
+                    defaultAjaxErrorMessage: "Error During Communicating with the remote server",
+                    defaultAjaxErrorTitle: "Ajax Error",
+                    javaTmpContainerRemoveEventName: "javatmp-container-remove",
+                    javaTmpAjaxContainerReady: "javatmp-ajax-container-ready",
+                    httpMethod: "GET",
+                    dataType: "html",
+                    defaultLoadingText: "Loading ..."
                 };
 
                 $("#global-label-items-block > i[k]").each(function (index, element) {
@@ -349,17 +358,13 @@
                     var value = $(element).html();
                     defaults.labels[key] = value;
                 });
-
+                defaults.defaultSelectPlaceholder = defaults.labels['page.text.kindlySelect'];
+                defaults.defaultAjaxErrorMessage = defaults.labels["dialog.error.message"];
+                defaults.defaultAjaxErrorTitle = defaults.labels["dialog.error.title"];
+                defaults.defaultLoadingText = defaults.labels["global.loadingText"];
                 index.init(defaults);
 
-                javatmp.plugins.init({
-                    locale: "${sessionScope.user.lang}",
-                    direction: javatmp.settings.direction,
-                    isRTL: javatmp.settings.isRTL,
-                    defaultSelectPlaceholder: javatmp.settings.labels['page.text.kindlySelect'],
-                    dateFormat: javatmp.settings.dateFormat,
-                    dateTimeFormat: javatmp.settings.dateTimeFormat
-                });
+                javatmp.plugins.init(defaults);
 
                 javatmp.user = {};
                 javatmp.user.id = "${sessionScope.user.id}";

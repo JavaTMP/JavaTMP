@@ -45,6 +45,8 @@ The following links provide you information to call Oracle stored procedures and
 ## JPA Links
 - [https://vladmihalcea.com/sql-query-parent-rows-all-children-match-filtering-criteria/](https://vladmihalcea.com/sql-query-parent-rows-all-children-match-filtering-criteria/)
 - [https://www.logicbig.com/tutorials/java-ee-tutorial/jpa/map-joins.html](https://www.logicbig.com/tutorials/java-ee-tutorial/jpa/map-joins.html)
+- [https://gist.github.com/fwgreen/ff5077bbfdb20c8b6187e9cd0b74fbc0](https://gist.github.com/fwgreen/ff5077bbfdb20c8b6187e9cd0b74fbc0)
+- [https://www.programcreek.com/java-api-examples/?class=javax.persistence.criteria.CriteriaBuilder&method=lessThan](https://www.programcreek.com/java-api-examples/?class=javax.persistence.criteria.CriteriaBuilder&method=lessThan)
 
 ## General Links
 - [https://stackoverflow.com/questions/9253244/sql-having-vs-where](https://stackoverflow.com/questions/9253244/sql-having-vs-where)
