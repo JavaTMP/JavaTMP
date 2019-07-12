@@ -100,6 +100,13 @@
                             <button id="centeredBootModal" type="button" class="btn btn-primary">
                                 Centered Bootstrap Modal
                             </button>
+                            <h2 class="mt-3 text-primary">Draggable Bootstrap Modals</h2>
+                            <button id="DraggableBootstrapModal1" type="button" class="btn btn-primary">
+                                Draggable Bootstrap Modal Using Jquery UI
+                            </button>
+                            <button id="DraggableBootstrapModal2" type="button" class="btn btn-primary ml-1">
+                                Draggable Bootstrap Modal Using Jquery
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -734,6 +741,101 @@
                                 }
                             }
                         ]
+                    });
+                    dialog.show();
+                });
+
+                $("#DraggableBootstrapModal1").on("click", function (event) {
+                    var dialog = BootstrapModalWrapperFactory.createModal({
+                        title: "Draggable Bootstrap Modal",
+                        message: "Draggable Bootstrap Modal Using <b>Jquery UI</b> Body Content",
+                        closable: true,
+                        closeByBackdrop: true,
+//                        centered: true,
+                        buttons: [
+                            {
+                                label: "Close",
+                                cssClass: "btn btn-secondary",
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.hide();
+                                }
+                            }
+                        ]
+                    });
+                    $(dialog.originalModal).on('shown.bs.modal', function (e) {
+                        var $this = $(this).find(".modal-content");
+                        $this.draggable({
+                            containment: [
+                                0,
+                                $(document).scrollTop(),
+                                window.innerWidth - $this.outerWidth(),
+                                $(document).scrollTop() + window.innerHeight - (($this.outerHeight(true) > window.innerHeight) ? 1 : $this.outerHeight(true) + 1)
+                            ],
+                            scroll: false,
+                            cursor: "move",
+                            handle: '.modal-header',
+                            scrollSensitivity: 100,
+                            scrollSpeed: 100,
+                            start: function (event, ui) {
+                            },
+                            drag: function (event, ui) {
+                                return true;
+                            }
+                        });
+                    });
+                    dialog.show();
+                });
+                $("#DraggableBootstrapModal2").on("click", function (event) {
+                    var dialog = BootstrapModalWrapperFactory.createModal({
+                        title: "Draggable Bootstrap Modal",
+                        message: "Draggable Bootstrap Modal Using <b>Jquery</b> Body Content",
+                        closable: true,
+                        closeByBackdrop: true,
+//                        centered: true,
+                        buttons: [
+                            {
+                                label: "Close",
+                                cssClass: "btn btn-secondary",
+                                action: function (button, buttonData, originalEvent) {
+                                    return this.hide();
+                                }
+                            }
+                        ]
+                    });
+                    $(dialog.originalModal).on('shown.bs.modal', function (e) {
+                        var $this = $(this).find(".modal-content");
+                        var handle = $this.find('.modal-header');
+                        var containment = [
+                            0,
+                            $(document).scrollTop(),
+                            window.innerWidth - $this.outerWidth(),
+                            $(document).scrollTop() + window.innerHeight - (($this.outerHeight(true) > window.innerHeight) ? 1 : $this.outerHeight(true) + 1)
+                        ];
+                        function handle_mousedown(e) {
+                            window.my_dragging = {};
+                            my_dragging.pageX0 = e.pageX;
+                            my_dragging.pageY0 = e.pageY;
+                            my_dragging.elem = $this;
+                            my_dragging.offset0 = $(my_dragging.elem).offset();
+                            function handle_dragging(e) {
+
+                                var left = my_dragging.offset0.left + (e.pageX - my_dragging.pageX0);
+                                var top = my_dragging.offset0.top + (e.pageY - my_dragging.pageY0);
+                                if ((left > 0 && left < (window.innerWidth - $this.outerWidth())) && (top > $(document).scrollTop() && (top < ($(document).scrollTop() + window.innerHeight - (($this.outerHeight(true) > window.innerHeight) ? 1 : $this.outerHeight(true) + 1))))) {
+                                    $(my_dragging.elem)
+                                            .offset({top: top, left: left});
+                                }
+                            }
+                            function handle_mouseup(e) {
+                                $('body')
+                                        .off('mousemove', handle_dragging)
+                                        .off('mouseup', handle_mouseup);
+                            }
+                            $('body')
+                                    .on('mouseup', handle_mouseup)
+                                    .on('mousemove', handle_dragging);
+                        }
+                        $(handle).mousedown(handle_mousedown);
                     });
                     dialog.show();
                 });
