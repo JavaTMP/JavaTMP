@@ -803,6 +803,10 @@
                         ]
                     });
                     $(dialog.originalModal).on('shown.bs.modal', function (e) {
+                        // https://stackoverflow.com/questions/2424191/how-do-i-make-an-element-draggable-in-jquery
+                        // https://stackoverflow.com/questions/8569095/draggable-div-without-jquery-ui
+                        // http://tovic.github.io/dte-project/jquery-draggable/index.html
+
                         var $this = $(this).find(".modal-content");
                         var handle = $this.find('.modal-header');
                         var containment = [
