@@ -3,6 +3,9 @@ title: Java Bootstrap Template Version 0.0.11 (Current Development Version)
 ---
 # {{ page.title }}
 
+## 3752ee3 on Jul 12, 2019, 11:31 PM GMT+4
+- update `\web\assets\app\js\javatmp.plugins.js` file to use local settings.
+
 ## 88482b0 on Jul 5, 2019, 11:41 PM GMT+4
 - Update the following dependencies
     - bootstrap-modal-wrapper from 1.0.18 to 2.0.0
