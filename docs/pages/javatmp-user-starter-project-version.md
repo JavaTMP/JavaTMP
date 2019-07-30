@@ -827,7 +827,8 @@ Create the User
 
 Grant privileges while assigning the password for javatmpUser:
 
-`mysql > grant all on appdb.* to ‘javatmpUser’@’localhost’ identified by ‘javatmpUserPassword’;`
+`mysql > grant all on appdb.* to ‘javatmpUser’@’localhost’ identified by ‘javatmpUserPassword’;` or
+`mysql > GRANT all privileges ON appdb.* TO ‘javatmpUser’@’localhost’ WITH GRANT OPTION;`
 
 Note: The localhost field usually doesn’t have to be edited, but you can set it to the specific address.
 
@@ -835,6 +836,7 @@ The above example grants all privileges, obviously. But you will likely want to 
 These parameters include select, insert, and delete, For example:
 
 `mysql > grant select, insert, delete, update on appdb.* to ‘javatmpUser’@’localhost’ identified by ‘javatmpUserPassword’;`
+`mysql > GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES, REFERENCES ON  appdb.* to ‘javatmpUser’@’localhost’ identified by ‘javatmpUserPassword’;`
 
 always be sure to reload all the privileges and changes through the command:
 
