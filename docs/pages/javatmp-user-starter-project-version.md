@@ -149,27 +149,19 @@ and folders. We described it in details in [JavaTMP-Static-Ajax Project Version 
 ### `./JavaTMP-User-Starter/lib` folder
 The `lib` folder contains external backend java libraries needed to compile and run the dynamic web application features. The libraries binary jars only move to `WAR/WEB-INF/lib` when we build and generate war file. Note that the libraries with its source code and java doc are registered with Netbeans IDE project when we import it in Netbeans IDE 8.2. the following tree provide lib folder contents:
 ```
-./JAVATMP-JAVA-AJAX/LIB
+./JavaTMP-User-Starter/lib
+|---mysql-connector-java-8.0.14.jar
+|---simplecaptcha-1.2.1.jar
++---antlr4
 +---commons-beanutils-1.9.3
-    +---commons-beanutils-1.9.3-javadoc.jar
-    +---commons-beanutils-1.9.3-sources.jar
-    +---commons-beanutils-1.9.3.jar
 +---commons-collections-3.2.2
-    +---commons-collections-3.2.2-javadoc.jar
-    +---commons-collections-3.2.2.jar
 +---commons-lang-3.8.1
-    +---commons-lang3-3.8.1-javadoc.jar
-    +---commons-lang3-3.8.1-sources.jar
-    +---commons-lang3-3.8.1.jar
 +---commons-logging-1.2
-    +---commons-logging-1.2-javadoc.jar
-    +---commons-logging-1.2.jar
 +---google-gson-2.8.5
-    +---gson-2.8.5-javadoc.jar
-    +---gson-2.8.5-sources.jar
-    +---gson-2.8.5.jar
++---handlebars-4.0.6
++---hibernate-5.4.1
 +---jstl-1.2
-    +---jstl-1.2.jar
++---slf4j
 ```
 
 ### `./JavaTMP-User-Starter/src` folder
@@ -178,32 +170,31 @@ The `lib` folder contains external backend java libraries needed to compile and 
 You should be familiar with the below java package structure as we will not describe it nor the Java servlets in details.
 ```
 ./JavaTMP-User-Starter/src/java
-+---com
-    +---javatmp
-        +---domain (like Account.java, Content.java, Country.java, DiaryEvent.java, Document.java, Message.java, User.java)
-        +---i18n (like messages.properties, messages\_ar.properties, messages\_en.properties)
+\---com
+    \---javatmp
+        +---i18n
+        +---module
+        |   +---activity
+        |   +---content
+        |   +---country
+        |   +---dms
+        |   +---event
+        |   +---language
+        |   +---message
+        |   +---stats
+        |   +---theme
+        |   +---timezone
+        |   \---user
         +---mvc
-            |---MvcHelper.java (The main class used to provide a Web MVC for handling HTTP requests and sending back responses)
-            +---adapter (helper classes for Gson marshalling and unmarshalling requests and responses)
-            +---domain (Web MVC specific domain modal classes)
-                |---ResponseMessage.java
-                +---table (like DataTableColumnSpecs.java, DataTableRequest.java, DataTableResults.java, FilterBy.java, Order.java, OrderDir.java, Search.java, SortBy.java)
-        +---service (like AccountService.java, ContentService.java, CountryService.java, DBFaker.java, DiaryEventService.java, DocumentService.java, MessageService.java, ServicesFactory.java, UserService.java
-        +---util (like CacheEntry.java, CacheResponseStream.java, CacheResponseWrapper.java, Constants.java, GZIPResponseStream.java, GZIPResponseWrapper.java, MD5Util.java)
-        +---web
-            +---controller (Java Servlet Classes. like IndexController.java, LoginController.java, LogoutController.java, PagesController.java, UpdateLanguageController.java, UpdateThemeController.java)
-                +---calendar (package contains specific Servlet classes for serving dynamic fullcalendar demo page)
-                +---card (package contains specific Servlet classes for serving dynamic card contents demo page)
-                +---cms (package contains specific Servlet classes for serving dynamic content management demo page)
-                +---country (package contains specific Servlet classes for serving dynamic countries demo page)
-                +---dms (package contains specific Servlet classes for serving file management demo page)
-                +---message (package contains specific Servlet classes for serving user messages demo page)
-                +---select2 (package contains specific Servlet classes for serving dynamic select2 demo page)
-                +---tree (package contains specific Servlet classes for serving dynamic fancytree demo page)
-                +---user (package contains specific Servlet classes for serving users demo page)
-                +---util (like servlet AjaxSleeperController.java)
-            +---filter (package for main web filters used like AuthenticatorFilter.java, CacheControlHeadersFilter.java, ContentCacheFilter.java, GZIPCompressingFilter.java, LocalizationFilter.java, LoggingFilter.java, ServiceFactoryInjector.java, UselessWaitFilter.java)
-            +---listener (package contains main web listener used like JavaTMPHttpSessionListener.java, JavaTMPServletListener.java)
+        |   +---adapter
+        |   \---domain
+        |       \---table
+        +---util
+        \---web
+            +---controller
+            +---filter
+            |   \---util
+            \---listener
 ```
 #### `com.javatmp.web.listener.JavaTMPHttpSessionListener` class
 
