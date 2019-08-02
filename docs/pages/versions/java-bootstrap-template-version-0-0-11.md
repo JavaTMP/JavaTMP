@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.11 (Current Development Version)
 ---
 # {{ page.title }}
 
-## on
+## f86590d on Aug 2, 2019, 7:47 PM GMT+4
 - Update the following dependencies
     - gulp-header from 2.0.7 to 2.0.9
     - gulp-if from 2.0.2 to 3.0.0
