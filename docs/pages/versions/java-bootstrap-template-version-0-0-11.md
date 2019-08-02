@@ -3,6 +3,17 @@ title: Java Bootstrap Template Version 0.0.11 (Current Development Version)
 ---
 # {{ page.title }}
 
+## on
+- Update the following dependencies
+    - gulp-header from 2.0.7 to 2.0.9
+    - gulp-if from 2.0.2 to 3.0.0
+    - @fortawesome/fontawesome-free from 5.9.0 to 5.10.0
+    - bootstrap-slider from 10.6.1 to 10.6.2
+    - cropperjs from 1.5.2 to 1.5.4
+    - moment-timezone from 0.5.25 to 0.5.26
+    - select2 from 4.0.7 to 4.0.8
+- Run gulp default to regenerate dist folders.
+
 ## 3752ee3 on Jul 12, 2019, 11:31 PM GMT+4
 - update `\web\assets\app\js\javatmp.plugins.js` file to use local settings.
 
