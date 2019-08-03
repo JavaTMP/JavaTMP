@@ -26,11 +26,11 @@ with custom web MVC for serving JSP pages and handling Servlet requests:
 *   Use [hibernate 5.4.1](http://hibernate.org/orm/releases/5.4/ "Hibernate 5.4.1 Home & Download Page").
 *   Use [mysql-connector-java-8.0.14.jar](https://dev.mysql.com/downloads/connector/j/8.0.html "Java Mysql Connector 8 for JDBC driver").
 *   Use [simplecaptcha-1.2.1.jar](https://sourceforge.net/projects/simplecaptcha/ "Simplecaptcha Home & Download Page").
+*   Use [handlebars.java 4.0.6](https://github.com/jknack/handlebars.java).
 
-`JavaTMP-User-Starter` project is a specific dynamic users web application with a subset of dynamic plugins and pages
-from `JavaTMP-Static-Ajax` to provide a simple users management demo. The following list provides
-the main features of Dynamic Java Bootstrap Users Management web application Template version `JavaTMP-User-Starter`
-Project:
+`JavaTMP-User-Starter` project is a dynamic java web application providing a simple users management demo.
+The following list provides the main features of Dynamic Java Bootstrap Users Management web application Template
+version `JavaTMP-User-Starter` Project:
 *   Public Registration Page for user.
 *   Login Page for Registered User Authentication.
 *   User Dashboard Providing a summary for users and their activities.
@@ -43,40 +43,38 @@ Project:
 *   Use Oracle Mysql Database Management System for storing and persisting Users data and activities. And provides a script to import demo users and lookup data like countries, themes and timezones.
 *   Use Hibernate JPA implementation as an access layer for Oracle Mysql Database.
 *   Use Simple Java Captcha in the public registration Page to provide a another level of security.
-
-**Important Technical Features**
-1.  Dynamically switching of interface language using server side session object User and i18n propertybundle.
-2.  Dynamically switching of theme using server side session object User and bootswatch css files.
-3.  Dynamically login using dynamic login page and server side servlet for Login.
-4.  Dynamically logout using dynamic server side servlet.
-5.  Dynamically fetch card content using jQuery AJAX, BlockUI and toastr plugins.
-6.  Dynamically list web application folders and files using fancytree plugin in.
-7.  Dynamically list chart of accounts as parent/child records using fancytree plugin in.
-8.  Diary Web Calendar through fullcalendar, inputmask, daterangepicker and bootstrap modal wrapper.
-9.  Dynamically populate and fetch select2 AJAX data with/out custom result data.
-10.  Dynamically populate summernote editor plugin in JSP or from AJAX request's content.
-11.  Dynamically serve static resources through simple servlet for binary content.
-12.  Open image on client side to crop it and then upload cropped version to server.
-13.  Dynamically load malihu scrollable pane with ajax content.
-14.  Dynamically submitting form using jQuery AJAX form, jQuery validation, summernote editor.
-15.  Dynamic wizard with form and validations.
-16.  Dynamic Datatables content and pagination plugins and filtration.
-17.  Individual-column search using ajax and select2 and daterangepicker and inputmask.
-18.  Implements dynamic charts using echarts plugin with ajax contents.
-19.  Implements create new message for user using select2 & summernote .
-20.  Implements file manager feature to upload and download files using jquery Ajax form and binary servlet.
-21. Using Fancytree plugin to dynamically list web application folders and files. implements a preview of server sharing folder by parent-child to Using Fancytree plugin to dynamically list web application folders and files.
-22. Diary Web Calendar through fullcalendar, inputmask, daterangepicker and bootstrap modal wrapper. Implements event table diary based requirement to implements Diary Web Calendar through fullcalendar, inputmask, daterangepicker and bootstrap modal wrapper.
-23. Dynamically serve static resources through simple servlet for binary content. External File Browser. impelments a Dynamically serve static resources through simple servlet for binary content. External File Browser.
-24. Implements file manager feature to upload and download files using jquery Ajax form and binary servlet for internal archive and resources. Implements file manager feature to upload and download files using jquery Ajax form and binary servlet for internal archive and resources.
-25. Implements create new message popup for user using select2 & summernote . Implements create new message popup for user using select2 & summernote .
-26. Dynamically load malihu scrollable pane with ajax content. implement dynamic message navbar menu item to Dynamically load malihu scrollable pane with ajax content.
-27. Dynamically populate and fetch select2 AJAX data with/out custom result data. implements messages tables between users to implements Dynamically populate and fetch select2 AJAX data with/out custom result data.
-28. Dynamically populate summernote editor plugin in JSP or from AJAX request's content. create a content table to implements Dynamically populate summernote editor plugin in JSP or from AJAX request's content.
-29. Open image on client side to crop it and then upload cropped version to server. implements edit image file like profile images by Open image on client side to crop it and then upload cropped version to server.
-30. Dynamic wizard with form and validations. Create page for adding new user using Dynamic wizard with form and validations.
-31. Implements a backend feature for mustache.java . Dynamic storing of content contain template node to Implements a backend feature for mustache.java
-32. Dynamically list chart of accounts as parent/child records using fancytree plugin. implements a preview of File manager. Dynamically list chart of accounts as parent/child records using fancytree plugin and see how to paginate result.
+*   Dynamically switching of interface language using server side session object User and i18n propertybundle.
+*   Dynamically switching of theme using server side session object User and bootswatch css files.
+*   Dynamically login using dynamic login page and server side servlet for Login.
+*   Dynamically logout using dynamic server side servlet.
+*   Dynamically fetch card content using jQuery AJAX, BlockUI and toastr plugins.
+*   Dynamically list web application folders and files using fancytree plugin in.
+*   Dynamically list chart of accounts as parent/child records using fancytree plugin in.
+*   Diary Web Calendar through fullcalendar, inputmask, daterangepicker and bootstrap modal wrapper.
+*   Dynamically populate and fetch select2 AJAX data with/out custom result data.
+*   Dynamically populate summernote editor plugin in JSP or from AJAX request's content.
+*   Dynamically serve static resources through simple servlet for binary content.
+*   Open image on client side to crop it and then upload cropped version to server.
+*   Dynamically load malihu scrollable pane with ajax content.
+*   Dynamically submitting form using jQuery AJAX form, jQuery validation, summernote editor.
+*   Dynamic wizard with form and validations.
+*   Dynamic Datatables content and pagination plugins and filtration.
+*   Individual-column search using ajax and select2 and daterangepicker and inputmask.
+*   Implements dynamic charts using echarts plugin with ajax contents.
+*   Implements create new message for user using select2 & summernote .
+*   Implements file manager feature to upload and download files using jquery Ajax form and binary servlet.
+*   Using Fancytree plugin to dynamically list web application folders and files. implements a preview of server sharing folder by parent-child to Using Fancytree plugin to dynamically list web application folders and files.
+*   Diary Web Calendar through fullcalendar, inputmask, daterangepicker and bootstrap modal wrapper. Implements event table diary based requirement to implements Diary Web Calendar through fullcalendar, inputmask, daterangepicker and bootstrap modal wrapper.
+*   Dynamically serve static resources through simple servlet for binary content. External File Browser. impelments a Dynamically serve static resources through simple servlet for binary content. External File Browser.
+*   Implements file manager feature to upload and download files using jquery Ajax form and binary servlet for internal archive and resources. Implements file manager feature to upload and download files using jquery Ajax form and binary servlet for internal archive and resources.
+*   Implements create new message popup for user using select2 & summernote . Implements create new message popup for user using select2 & summernote .
+*   Dynamically load malihu scrollable pane with ajax content. implement dynamic message navbar menu item to Dynamically load malihu scrollable pane with ajax content.
+*   Dynamically populate and fetch select2 AJAX data with/out custom result data. implements messages tables between users to implements Dynamically populate and fetch select2 AJAX data with/out custom result data.
+*   Dynamically populate summernote editor plugin in JSP or from AJAX request's content. create a content table to implements Dynamically populate summernote editor plugin in JSP or from AJAX request's content.
+*   Open image on client side to crop it and then upload cropped version to server. implements edit image file like profile images by Open image on client side to crop it and then upload cropped version to server.
+*   Dynamic wizard with form and validations. Create page for adding new user using Dynamic wizard with form and validations.
+*   Implements a backend feature for mustache.java . Dynamic storing of content contain template node to Implements a backend feature for mustache.java
+*   Dynamically list chart of accounts as parent/child records using fancytree plugin. implements a preview of File manager. Dynamically list chart of accounts as parent/child records using fancytree plugin and see how to paginate result.
 
 ## `JavaTMP-User-Starter` Project Folder Structure
 The JavaTMP-User-Starter project folder structure is the same as JavaTMP-Static-Ajax one with the following main contents of its folder root:
@@ -202,32 +200,48 @@ The `JavaTMPHttpSessionListener` implements `javax.servlet.ServletContextListene
 and annotated by `@javax.servlet.annotation.WebListener` annotation to provide a startup and shutdown procedures
 when we deploy or undeploy `JavaTMP-User-Starter` web application using `ServletContextListener.contextInitialized` and `ServletContextListener.contextDestroyed` methods.
 
-It considers as a `main` method in the web application environment used normally for initializing global resources like Database connection pool or Datasource lookup. We don't do any important things at startup nor shutdown of the web applicationunless than setting a UTC timezone.
+It considers as a `main` method in the web application environment used normally for initializing global resources
+like Database connection pool or Datasource lookup.
+We don't do any important things at startup nor shutdown of the web applicationunless than
+setting a UTC timezone and create a ServiceFactory instance.
 
 #### `com.javatmp.web.listener.JavaTMPHttpSessionListener` class
 
-The `JavaTMPHttpSessionListener` implements `javax.servlet.http.HttpSessionListener` interface and annotated by `@javax.servlet.annotation.WebListener` annotation to trigger when a session is created and destroyed on the application server. So Whenever a new session has been created a `HttpSessionListener.sessionCreated` method will be invoked and whenever a session has been invalidated a `HttpSessionListener.sessionDestroyed` method will be invoked by the application server.
+The `JavaTMPHttpSessionListener` implements `javax.servlet.http.HttpSessionListener` interface
+and annotated by `@javax.servlet.annotation.WebListener` annotation to trigger when a session is created and destroyed
+on the application server. So Whenever a new session has been created a `HttpSessionListener.sessionCreated` method will be
+invoked and whenever a session has been invalidated a `HttpSessionListener.sessionDestroyed` method will be invoked
+by the application server. We don't do any important things at creating or destroying of the session instances.
 
-We don't do any important things at creating or destroying of the session instances unless than removing an instance of `com.javatmp.service.ServicesFactory` class attached to each session for demo purposes in `com.javatmp.web.filter.ServiceFactoryInjector` filter class using the name defined in `com.javatmp.util.Constants.SERVICES_FACTORY_ATTRIBUTE_NAME` variable.
-
-There is no distinct difference between session timeout and session invalidation from the perspective of the session object. whenever it happens the `HttpSessionListener.sessionDestroyed` method will be invoked by the application server.
+There is no distinct difference between session timeout and session invalidation from the perspective of the session object.
+Whenever it happens the `HttpSessionListener.sessionDestroyed` method will be invoked by the application server.
 
 #### `com.javatmp.web.filter` package
 
-A filter dynamically intercepts requests and responses to transform or use the information contained in the requests or responses. Filters typically do not themselves create responses, but instead provide universal functions that can be "attached" to any type of servlet or JSP page. read more about it in [The Essentials of Filters](http://www.oracle.com/technetwork/java/filters-137243.html "The Essentials of Java Web Filters").
+A filter dynamically intercepts requests and responses to transform or use the information contained in the requests
+or responses. Filters typically do not themselves create responses, but instead provide universal functions
+that can be "attached" to any type of servlet or JSP page.
+read more about it in [The Essentials of Filters](http://www.oracle.com/technetwork/java/filters-137243.html "The Essentials of Java Web Filters").
 
-This package contains classes for implements main filters used in the web application. We don't use `@javax.servlet.annotation.WebFilter` annotation but instead declared and mapped them in `./web/WEB-INF/web.xml` to force the order of their executions. read more on this issue on [How to define servlet filter order of execution using annotations in WAR](https://stackoverflow.com/questions/6560969/how-to-define-servlet-filter-order-of-execution-using-annotations-in-war "How to define servlet filter order of execution using annotations in WAR"). the following list provides our filters with their descriptions in order of their executions:
+Servlet filters may be declared and mapped using the `WebFilter` annotation, but there is no way to control filter
+ordering using annotations alone, read more about this issue on
+[How to define servlet filter order of execution using annotations in WAR](https://stackoverflow.com/questions/6560969/how-to-define-servlet-filter-order-of-execution-using-annotations-in-war "How to define servlet filter order of execution using annotations in WAR"). However, you can mix annotations and web.xml to minimize the XML configuration
+by only declaring the filter mappings in the `web.xml`. Because we can not guarantee the compatibles
+in all Java application server we use ONLY `web.xml` file and the order of the chain is determined
+by the order in which matching filter mappings appear in the `web.xml` file.
 
-Servlet filters may be declared and mapped using the `WebFilter` annotation, but there is no way to control filter ordering using annotations alone. However, you can mix annotations and web.xml to minimize the XML configuration by only declaring the filter mappings in the `web.xml`. Because we can not guarantee the compatibles in all Java application server we use ONLY `web.xml` file and the order of the chain is determined by the order in which matching filter mappings appear in the `web.xml` file.
+This package contains classes for implements main filters used in the web application.
+We don't use `@javax.servlet.annotation.WebFilter` annotation but instead declared and mapped them in
+`./web/WEB-INF/web.xml` to force the order of their executions.
+the following list provides our filters with their descriptions in order of their executions:
 
-1.  `com.javatmp.web.filter.LoggingFilter`
-2.  `com.javatmp.web.filter.UselessWaitFilter`
-3.  `com.javatmp.web.filter.LocalizationFilter`
-4.  `com.javatmp.web.filter.ServiceFactoryInjector`
-5.  `com.javatmp.web.filter.AuthenticatorFilter`
-6.  `com.javatmp.web.filter.CacheControlHeadersFilter`
-7.  `com.javatmp.web.filter.ContentCacheFilter`
-8.  `com.javatmp.web.filter.GZIPCompressingFilter`
+*   `com.javatmp.web.filter.UTF8InforcerFilter`
+*   `com.javatmp.web.filter.LoggingFilter`
+*   `com.javatmp.web.filter.LocalizationFilter`
+*   `com.javatmp.web.filter.AuthenticatorFilter`
+*   `com.javatmp.web.filter.CacheControlHeadersFilter`
+*   `com.javatmp.web.filter.ContentCacheFilter`
+*   `com.javatmp.web.filter.GZIPCompressingFilter`
 
 #### `com.javatmp.web.controller` package
 
@@ -239,7 +253,10 @@ and information about Java Servlets in this package. The outline classes in `com
 
 ##### `com.javatmp.web.controller.IndexController` class
 
-The root path main Java Servlet class responsible for handling default root request. It uses an empty `url-pattern` string annotation instead of providing a welcome page with specific url pattern name. The complete source code of `IndexController` class is:
+The root path main Java Servlet class responsible for handling default root request.
+It uses an empty `url-pattern` string annotation instead of providing a welcome page with specific url pattern name.
+The complete source code of `IndexController` class is:
+
 ```java
 package com.javatmp.web.controller;
 
@@ -257,7 +274,10 @@ public class IndexController extends HttpServlet {
 ```
 ##### `com.javatmp.web.controller.PagesController` class
 
-This class consider as a front controller servlets responsible for forwarding requests for all static JSP pages inside `WEB-INFO/pages/*` folder that does not have specific servlet for handling its url. The following code provides its source code:
+This class consider as a front controller servlet responsible for forwarding url requests for JSP pages inside
+`WEB-INFO/pages/*` folder that does not have specific servlet for handling its url.
+The following code provides its source code:
+
 ```java
 package com.javatmp.web.controller;
 
@@ -277,197 +297,35 @@ public class PagesController extends HttpServlet {
         request.getRequestDispatcher(requestPage).forward(request, response);
     }
 }
-```
-##### `com.javatmp.web.controller.select2.DynamicSelect2PageController` class
 
-Sometimes, We create a separate servlet for handling page request that need data to be populated before dispatching like in `DynamicSelect2PageController` class. The following code shows the idea:
-```java
-package com.javatmp.web.controller.select2;
-
-import ...;
-
-@WebServlet("/DynamicSelect2PageController")
-public class DynamicSelect2PageController extends HttpServlet {
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
-        CountryService countryService = sf.getCountryService();
-        List<Country> countries = countryService.getCountries();
-        request.setAttribute("countries", countries);
-        request.getRequestDispatcher("/WEB-INF/pages/plugins/dynamic-jQuery-select2-bootstrap.jsp").forward(request, response);
-    }
-}
-```
-##### `com.javatmp.web.controller.user.ListUsersPositionsController` class
-
-Sometimes, The servlet is responsible for handling AJAX request and providing a JSON response only. The `ListUsersPositionsController` Servlet class handle request using url pattern `/user/ListUsersPositionsController` and called in page `./web/WEB-INF/pages/plugins/dynamic-jQuery-select2-bootstrap.jsp` to populate select2 select at page load. The following code shows the Servlet source code:
-```java
-package com.javatmp.web.controller.user;
-
-import ...;
-
-@WebServlet("/user/ListUsersPositionsController")
-public class ListUsersPositionsController extends HttpServlet {
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        ResponseMessage responseMessage = new ResponseMessage();
-        ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
-        UserService cs = sf.getUserService();
-        List<String> positions = cs.listUsersPositions();
-        responseMessage.setOverAllStatus(true);
-        responseMessage.setData(positions);
-        MvcHelper.sendMessageAsJson(response, responseMessage);
-    }
-}
-```
-##### `com.javatmp.web.controller.LoginController` class
-
-Sometimes, The Servlet need data in request parameters, so we use `MvcHelper.populateBeanByRequestParameters(HttpServletRequest request, Object bean)` method to read them. and the same Servlet class implements `doGet` and `doPost` methods. The source code for `LoginController` provides the idea:
-```java
-package com.javatmp.web.controller;
-
-import ...;
-
-@WebServlet("/login")
-public class LoginController extends HttpServlet {
-
-    private final Logger logger = Logger.getLogger(getClass().getName());
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/pages/custom-pages/login-pages/default-login-page.jsp").forward(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        HttpSession session = request.getSession();
-        ServicesFactory sf = (ServicesFactory) session.getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
-
-        User user = new User();
-        ResponseMessage responseMessage = new ResponseMessage();
-        MvcHelper.populateBeanByRequestParameters(request, user);
-        logger.info("Check User [" + MvcHelper.deepToString(user) + "]");
-        User dbUser = sf.getUserService().readUserByUsername(user);
-
-        if (dbUser != null && dbUser.getPassword().equals(MD5Util.convertToMD5(user.getPassword()))) {
-            // Authenticated user
-            session.setAttribute("user", dbUser);
-            responseMessage.setOverAllStatus(true);
-            responseMessage.setMessage(request.getContextPath() + "/");
-        } else {
-            // un authenticated user
-            responseMessage.setOverAllStatus(false);
-            responseMessage.setMessage("kindly Check your username and password");
-        }
-        MvcHelper.sendMessageAsJson(response, responseMessage);
-    }
-}
-```
-##### `com.javatmp.web.controller.user.ListUsersController` class
-
-Sometimes, The AJAX request has JSON data in the POST request body that should be read to provide another JSON response as a result like the `jQuery Datatables plugin` demo pages. The following source code shows the idea:
-```java
-package com.javatmp.web.controller.user;
-import ...;
-@WebServlet("/user/ListUsersController")
-public class ListUsersController extends HttpServlet {
-
-    private final Logger logger = Logger.getLogger(getClass().getName());
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        ResponseMessage responseMessage = new ResponseMessage();
-        ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
-        UserService cs = sf.getUserService();
-
-        DataTableRequest tableRequest = (DataTableRequest) MvcHelper.readObjectFromRequest(request, DataTableRequest.class);
-        logger.info("datatableRequest [" + MvcHelper.deepToString(tableRequest) + "]");
-
-        DataTableResults<User> dataTableResult = cs.listUsers(tableRequest);
-
-        responseMessage.setOverAllStatus(true);
-        responseMessage.setData(dataTableResult);
-
-       MvcHelper.sendMessageAsJson(response, responseMessage);
-    }
-}
-```
-And this is the AJAX request from `Datatables` plugin to retrieved list of users pages on the current page request it see `./web/WEB-INF/pages/table/datatable/dynamic-datatables.jsp` page:
-```json
-{
-"ajax": {
-    "type": "POST",
-    "url": javatmp.settings.contextPath + "/user/ListUsersController",
-    dataType: "json",
-    contentType: "application/json; charset=UTF-8",
-     "data": function (currentData) {
-        currentData._ajaxGlobalBlockUI = false;
-        return JSON.stringify(currentData);
-    },
-    "dataSrc": function (json) {
-        json["recordsTotal"] = json.data.recordsTotal;
-        json["recordsFiltered"] = json.data.recordsFiltered;
-        return json.data.data;
-    }
-}
-}
-```
-##### `com.javatmp.web.controller.message.ListMessagesController` class
-
-Sometimes, The same Servlet used in different AJAX pages to retrieved data based of specific parameters. The following code shows the source code of `ListMessagesController` class:
-```java
-package com.javatmp.web.controller.message;
-import ...;
-@WebServlet("/user/ListMessagesController")
-public class ListMessagesController extends HttpServlet {
-    private final Logger logger = Logger.getLogger(getClass().getName());
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        ResponseMessage responseMessage = new ResponseMessage();
-        ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
-        MessageService cs = sf.getMessageService();
-
-        DataTableRequest tableRequest = (DataTableRequest) MvcHelper.readObjectFromRequest(request, DataTableRequest.class);
-        logger.info("datatableRequest [" + MvcHelper.deepToString(tableRequest) + "]");
-
-        DataTableResults<Message> dataTableResult = cs.listMessages(tableRequest);
-
-        responseMessage.setOverAllStatus(true);
-        responseMessage.setData(dataTableResult);
-
-        MvcHelper.sendMessageAsJson(response, responseMessage);
-    }
-}
-```
-It was called from `./web/WEB-INF/pages/table/datatable/dynamic-messages.jsp` page to populate normal jQuery Datatables plugin with AJAX data page. Or to provide a virtual scrollable data in dynamic user messages dropdown menu at navbar in `./web/WEB-INF/index.jsp` page. And it used in the `./web/WEB-INF/pages/plugins/dynamic-messages-using-malihu-scrollable.jsp` page too to provide virtual scrollable for user messages.
+*   Sometimes, We create a separate servlet for handling page request that need data to be populated before dispatching
+to specific page. So we use `request.getRequestDispatcher("/WEB-INF/pages/...").forward(request, response);`.
+*   Sometimes, The servlet is responsible for handling AJAX request and providing a JSON response only.
+So We use `MvcHelper.sendMessageAsJson(response, responseMessage);`.
+*   Sometimes, The Servlet need data in request parameters,
+so we use `MvcHelper.populateBeanByRequestParameters(HttpServletRequest request, Object bean)` method to read them.
+and the same Servlet class implements `doGet` and `doPost` methods. See `com.javatmp.web.controller.LoginController`.
+*   Sometimes, The AJAX request has JSON data in the POST request body that should be read to provide another
+JSON response as a result like the `jQuery Datatables plugin` pages. So we read request JSON body using
+`MvcHelper.readObjectFromRequest(request, DataTableRequest.class);`.
 
 #### `com.javatmp.mvc` package
 
-The main parts of `com.javatmp.mvc` package are sub package `com.javatmp.mvc.domain.table` which provides a communication protocol And `com.javatmp.mvc.MvcHelper` class which provides `static` utilities methods for marshaling/unmarshaling AJAX and JSON requests and responses. The following are an overview of these important parts of this package:
+The main parts of `com.javatmp.mvc` package are sub package `com.javatmp.mvc.domain.table`
+which provides a communication protocol And `com.javatmp.mvc.MvcHelper` class which provides `static` utilities methods
+for marshaling/unmarshaling AJAX and JSON requests and responses.
+The following are an overview of these important parts of this package:
 
 ##### `com.javatmp.mvc.domain.table` package
 
-This package contains classes that define a communication protocol for various AJAX requests and JSON responses based on the JSON structure of jQuery Datatables plugin request parameters in server-side processing mode described in details in [Server-side processing sent parameters section](https://datatables.net/manual/server-side "jQuery Datatables Server Side Processing Sent Parameters Section").
+This package contains classes that define a communication protocol for various AJAX requests and JSON responses based
+on the JSON structure of jQuery Datatables plugin request parameters in server-side processing mode described in details in
+[Server-side processing sent parameters section](https://datatables.net/manual/server-side "jQuery Datatables Server Side Processing Sent Parameters Section").
 
 ##### `com.javatmp.mvc.MvcHelper` class
 
-This class provides `static` utilities methods for marshaling/unmarshaling AJAX and JSON requests and responses used almost in all Servlet classes. The main methods in MvcHelper are:
-
-*   `public static String toString(Object object)` - uses Apache Common Lang `ReflectionToStringBuilder` class to dynamically convert an object to String for printing and logging.
-*   `public static String deepToString(Object object)` - uses Apache Common Lang `ReflectionToStringBuilder` class recursively to dynamically convert an object with its children to String for printing and logging.
-*   `public static void populateBeanByRequestParameters(HttpServletRequest request, Object bean)` - Uses Apache Commons Beans utility to inject request parameters into bean
-*   `public static void sendMessageAsJson(HttpServletResponse response, ResponseMessage responseMessage)` - uses `toJson` method from an `Gson` instance to convert the responseMessage object to `JSON` String and then send it in the response body.
-*   `public static <T> T readObjectFromRequest(HttpServletRequest request, T object)` - populate a passing instance of T with JSON String body from the request after convert it using `Gson.fromJson` method.
-*   `public static Object readObjectFromRequest(HttpServletRequest request, Class clz)` - populate an instance of passing clz type with JSON String body from the request after convert it using `Gson.fromJson` method.
+This class provides `static` utilities methods for marshaling/unmarshaling AJAX and JSON requests and responses used almost
+in all Servlet classes.
 
 #### `com.javatmp.service` package
 
