@@ -297,6 +297,7 @@ public class PagesController extends HttpServlet {
         request.getRequestDispatcher(requestPage).forward(request, response);
     }
 }
+```
 
 *   Sometimes, We create a separate servlet for handling page request that need data to be populated before dispatching
 to specific page. So we use `request.getRequestDispatcher("/WEB-INF/pages/...").forward(request, response);`.
