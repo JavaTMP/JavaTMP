@@ -328,103 +328,16 @@ on the JSON structure of jQuery Datatables plugin request parameters in server-s
 This class provides `static` utilities methods for marshaling/unmarshaling AJAX and JSON requests and responses used almost
 in all Servlet classes.
 
-#### `com.javatmp.service` package
+#### `com.javatmp.module` package
 
-This package provides The backend business logic classes implementation of the demo. like UserService, MessageService, DiaryEventService classes. The most important classes in `com.javatmp.service` package are `com.javatmp.service.ServicesFactory` and `com.javatmp.service.DBFaker`:
+This package provides The backend business logic classes implementation of project. It contains sub packages for each module
+used in the `JavaTMP-User-Starter` Web application. The services are created by class `com.javatmp.util.ServicesFactory`.
 
-##### `com.javatmp.service.ServicesFactory` package
+#### `com.javatmp.util.ServicesFactory` class:
 
-It is a Factory instance for all services classes grouped in one class to be injected in the Application Context or Session object for each user. The following code shows you its definition:
-
-Usually, An instance of `ServicesFactory` class is created at web application startup to provide a sharing factory for all users. but for demo purposes and because our data are fake we create an instance of it for each user in the `com.javatmp.web.filter.ServiceFactoryInjector` filter
-```java
-package com.javatmp.service;
-
-import ...;
-
-public class ServicesFactory {
-
-    private final Logger logger = Logger.getLogger(getClass().getName());
-    private DBFaker dbFaker;
-    private UserService userService;
-    private AccountService accountService;
-    private DiaryEventService diaryEventService;
-    private DocumentService documentService;
-    private CountryService countryService;
-    private ContentService contentService;
-    private MessageService messageService;
-
-    public ServicesFactory() {
-        logger.info("*** Start ServicesFactory Constructor @ [" + new Date() + "]");
-        this.dbFaker = new DBFaker();
-        this.userService = new UserService(this.dbFaker);
-        this.accountService = new AccountService(dbFaker);
-        this.diaryEventService = new DiaryEventService(dbFaker);
-        this.documentService = new DocumentService(dbFaker);
-        this.countryService = new CountryService(dbFaker);
-        this.contentService = new ContentService(dbFaker);
-        this.messageService = new MessageService(dbFaker, this.userService);
-        logger.info("*** End ServicesFactory Constructor @ [" + new Date() + "]");
-    }
-    // Getter for above Services instances
-}
-```
-##### `com.javatmp.service.DBFaker` package
-
-It is a fake data set generating based on the hard code data stored in the `LinkedList` instances. Keep in mind that this fake database contains unrelated random domain modal to provide demo and proof of concept. The following code shows you the idea:
-```java
-package com.javatmp.service;
-
-import ...;
-
-public class DBFaker {
-
-    private final Logger logger = Logger.getLogger(getClass().getName());
-    private List<User> users = new LinkedList<>();
-    private List<DiaryEvent> diaryEvents = new LinkedList<>();
-    private List<Document> documents = new LinkedList<>();
-    private List<Country> countries = new LinkedList<>();
-    private List<Content> contents = new LinkedList<>();
-    private List<Account> accounts = new LinkedList<>();
-    private List<Message> messages = new LinkedList<>();
-
-    private static Long counter = 0L;
-
-    public static synchronized Long getNextCounter() {
-        return ++counter;
-    }
-
-    public DBFaker() {
-        this.generateFakeUsers();
-        this.generateChartOfAccounts();
-        this.generateCountries();
-        this.generateContent();
-        this.generateMessages();
-    }
-
-
-    private void generateFakeUsers() {
-        // ...
-    }
-
-    private void generateChartOfAccounts() {
-        // ...
-    }
-
-    private void generateCountries() {
-        // ...
-    }
-
-    private void generateContent() {
-        // ...
-    }
-
-    private void generateMessages() {
-        // ...
-    }
-    // Setter and getter ...
-}
-```
+It is a Factory instance for all services classes grouped in one class to be injected in the Application Context.
+Usually, An instance of `ServicesFactory` class is created at web application startup to provide a sharing factory
+for all users.
 
 ### `./JavaTMP-User-Starter/web` folder
 This folder contains everything related to front end resources and plugins and JSP pages for application
