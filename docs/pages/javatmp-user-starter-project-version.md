@@ -357,37 +357,24 @@ and usages.
         +---fonts
         +---js-src
         +---sass
-            |---main.scss
-            +---common
-            +---font-family
-            +---partials
-            +---plugins
-            +---themes
         +---sass-rtl
-            |---main-rtl.scss
-            +---common
-            +---partials-rtl
-            +---plugins-rtl
-            +---themes-rtl
 +---META-INF
     |---context.xml
 +---WEB-INF (Hidden and not accessible directly from the browser requests)
     |---index.jsp (Main JSP Page)
     |---web.xml
     +---pages
-        |---home.jsp
-        +---bootstrap
-        +---chart
-        +---custom-components
-        +---custom-pages
-        +---form
-        +---gallery
-        +---plugins
-        +---table
-        +---themes
-        +---wizard
+        +---content
+        +---dms
+        +---event
+        +---home
+        +---message
+        +---system
+        +---user
 ```
-The main important JSP page in our dynamic Java Bootstrap template is `index.jsp` which was dispatched from `com.javatmp.web.controller.IndexController` Servlet class to the user. The following HTML code provides its contents:
+The main important JSP page in our dynamic Java Bootstrap template is `index.jsp` which was dispatched from
+`com.javatmp.web.controller.IndexController` Servlet class to the user. The following HTML code provides its contents:
+
 ```jsp
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -446,13 +433,16 @@ The main important JSP page in our dynamic Java Bootstrap template is `index.jsp
 ```
 
 #### Notes
-*   We minimize the use of Java features like EL mixed with Javascript whenever possible other than in `index.jsp` to pass them to `javatmp.init method`
-*   `sessionScope.user` object was injected in the session by `com.javatmp.web.filter.ServiceFactoryInjector` filter.
-*   `labels` object is an instance of `ResourceBundle` which was injected into session by `com.javatmp.web.filter.LocalizationFilter` filter.
-*   Read more about `javatmp.init` Javascript function in the following page : [High Level Template Structure](/pages/high-level-template-structure "High Level JavaTMP Template Folders And Files Structure").
+*   We minimize the use of Java features like EL mixed with Javascript whenever possible other than in `index.jsp`
+to pass them to `javatmp.init method`
+*   `sessionScope.user` object was injected in the session by `com.javatmp.web.controller.LoginController` Servlet.
+*   `labels` object is an instance of `ResourceBundle` which was injected into session by
+`com.javatmp.web.filter.LocalizationFilter` filter.
+*   Read more about `javatmp.init` Javascript function in the following page
+[High Level Template Structure](/pages/high-level-template-structure "High Level JavaTMP Template Folders And Files Structure").
 
 ### Dynamic JSP Starter Pages
-The starter Java Bootstrap default English LTR `index.jsp` page that use the above generated combined files look like the following:
+The starter Java Bootstrap default English LTR page that use the above generated combined files look like the following:
 ```jsp
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
@@ -477,7 +467,7 @@ The starter Java Bootstrap default English LTR `index.jsp` page that use the abo
     </body>
 </html>
 ```
-And the starter Java Bootstrap default English RTL `index.jsp` page that use the above generated combined files look like the following:
+And the starter Java Bootstrap default English RTL page that use the above generated combined files look like the following:
 ```jsp
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
@@ -501,7 +491,8 @@ And the starter Java Bootstrap default English RTL `index.jsp` page that use the
     </body>
 </html>
 ```
-And the starter Java Bootstrap default Arabic RTL `index.jsp` page that use the above generated combined files look like the following:
+
+And the starter Java Bootstrap default Arabic RTL page that use the above generated combined files look like the following:
 ```jsp
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
@@ -527,7 +518,10 @@ And the starter Java Bootstrap default Arabic RTL `index.jsp` page that use the 
 ```
 
 ### Generating Production `JavaTMP-User-Starter.war` file
-Generating our [online production Java Bootstrap User Web application war file](http://java.javatmp.com:8080/JavaTMP-User-Starter/ "Java Bootstrap User Management Web application war file") is done using the following special gulp's task steps (Make sure first that `ant compile` or `ant dist` is ran first because this task depends on the `build` folder generating from running `ant` script):
+Generating our [online production Java Bootstrap User Web application war file](http://java.javatmp.com:8080/JavaTMP-User-Starter/ "Java Bootstrap User Management Web application war file")
+is done using the following special gulp's task steps (Make sure first that `ant compile` or `ant dist` is ran first
+because this task depends on the `build` folder generating from running `ant` script):
+
 ```javascript
 gulp.src([
     './JavaTMP-User-Starter/**/*',
@@ -619,11 +613,18 @@ check that by login to mysql and run the following command:
 ### JavaTMP Users Project Database Tables
 The database schema contains the following tables:
 *   activity. Contains data related to all requests of the public or registered users.
+*   content. Contains data related to contents.
 *   country. Contains data for supported countries referenced by user records.
+*   countrytranslation. Contains data for localizing countries referenced by user records.
 *   document. Contains binary and meta data of the profile picture of the users and any supported documents might be used in the future.
+*   event. Contains events created by user on specific dates.
 *   language. Contains supported languages referenced by user records and used to choose appropriate CSS files.
+*   languagetranslation. Contains localizing languages for users.
+*   message. Contains users' messages.
 *   theme. Contains supported theme names referenced by user records and used to choose appropriate front end CSS theme files.
+*   themetranslation. Contains localizing themes' names.
 *   timezone. Contains supported timezone names supported by Java Virtual machine and referenced by user records to be used for converting string date to correct local date object aligned by the user. 
+*   timezonetrnslation. Contains localizing timeszones' names.
 *   user. Contains user data and it is main table in the system.
 
 Please refer to tables description and corresponding Java bean classes in `com.javatmp.module` package
