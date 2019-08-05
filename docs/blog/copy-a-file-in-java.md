@@ -15,7 +15,9 @@ private void copyFile(File src, File dest) throws IOException {
         inputStream = new FileInputStream(source);
         outputStream = new FileOutputStream(dest);
 
-        // the size of the buffer doesn't have to be exactly 1024 bytes, try playing around with this number and see what effect it will have on the performance
+        // the size of the buffer doesn't have to be exactly 1024 bytes,
+        // try playing around with this number and see what effect
+        // it will have on the performance
         byte[] buffer = new byte[1024];
         int length = 0;
         while ((length = is.read(buffer)) > 0) {
