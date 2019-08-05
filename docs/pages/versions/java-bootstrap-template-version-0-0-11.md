@@ -3,6 +3,9 @@ title: Java Bootstrap Template Version 0.0.11 (Current Development Version)
 ---
 # {{ page.title }}
 
+## 238d050 on Aug 5, 2019, 7:48 PM GMT+4
+- rename javatmp.plugins.js to javatmp.plugins.wrapper.js and reference new file in pages.
+
 ## f86590d on Aug 2, 2019, 7:47 PM GMT+4
 - Update the following dependencies
     - gulp-header from 2.0.7 to 2.0.9
