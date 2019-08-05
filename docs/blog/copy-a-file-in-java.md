@@ -4,6 +4,8 @@ title: Copy a File in Java
 # {{ page.title }}
 Copying a file or directory used to be a typical development task. It's a fundamental concept,
 and it might be useful to know what options does the Java developers have when they need to copy a file.
+Read more about [Java IO classes](https://docs.oracle.com/javase/tutorial/essential/io/index.html) to see available
+options for reading and writing files.
 
 ## I/O Streams
 the standard way to copy a file was by utilizing I/O Streams:
