@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.11 (Current Development Version)
 ---
 # {{ page.title }}
 
-## 238d050 on Aug 5, 2019, 7:48 PM GMT+4
+## d55d911 on Aug 5, 2019, 9:09 PM GMT+4
 - Remove alert comments from JSP pages.
 - rename javatmp.plugins.js to javatmp.plugins.wrapper.js and reference new file in pages.
 
