@@ -106,7 +106,6 @@
                     "processing": true,
                     "serverSide": true,
                     "drawCallback": function (settings) {
-//                    alert('DataTables has redrawn the table');
                     },
                     initComplete: function () {
                         this.api().columns().every(function (index) {

@@ -179,9 +179,7 @@
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
                 var passData = $(javatmp.settings.defaultOutputSelector).data("passData");
-//                alert(JSON.stringify(passData));
                 if (passData && passData.contentId) {
-//                    alert(JSON.stringify(passData));
                     window.javatmp.plugins.populateForm(form, passData);
                     form.find("textarea[name='contentText']").summernote('code', passData.contentText);
                     form.find("textarea[name='contentText']").summernote('triggerEvent', 'change');

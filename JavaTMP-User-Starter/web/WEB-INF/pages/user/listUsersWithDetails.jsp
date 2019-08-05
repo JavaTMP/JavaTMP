@@ -562,7 +562,6 @@
             var profilePicScrollbars = javatmp.plugins.mCustomScrollbarForProfilePicture(form.find("#profilePicturePreviewContainerId"));
 
             table.on('select', function (e, dt, type, indexes) {
-                //                alert("select");
                 var rowsData = table.rows(indexes).data().toArray();
                 var rowData = rowsData[0];
                 enabled();
@@ -588,11 +587,9 @@
                 resizeImage.attr('src', avatarImageSrc);
 
             }).on('deselect', function (e, dt, type, indexes) {
-                //                alert("descelect");
                 var rowsData = table.rows(indexes).data().toArray();
                 var rowData = rowsData[0];
                 disabled();
-                //                alert("descelect" + JSON.stringify(rowData));
             });
 
             addNewUserPopupButton.on("click", function (event) {

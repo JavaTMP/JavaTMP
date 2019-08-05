@@ -148,7 +148,6 @@
 //                    }
                 });
                 var fullcalendarCallback = function (callbackData) {
-                    alert(JSON.stringify(callbackData));
                     if (callbackData.cancel === true) {
                     } else {
                         BootstrapModalWrapperFactory.createModal({
