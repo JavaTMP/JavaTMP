@@ -1,18 +1,17 @@
 package com.javatmp.module.user;
 
 import com.javatmp.module.dms.Document;
+import com.javatmp.module.dms.DocumentService;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.domain.ResponseMessage;
-import com.javatmp.module.dms.DocumentService;
-import com.javatmp.util.ServicesFactory;
 import com.javatmp.util.Constants;
 import com.javatmp.util.MD5Util;
+import com.javatmp.util.ServicesFactory;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.PersistenceException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -33,7 +32,7 @@ public class UpdateCompleteUserController extends HttpServlet {
         ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         DocumentService ds = sf.getDocumentService();
         UserService us = sf.getUserService();
-
+        Files
         try {
 
             User userToBeUpdated = new User();
