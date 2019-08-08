@@ -151,7 +151,7 @@ gulp delete-css
 We use this task to generate the main front end resources JS/CSS files and folders.
 You can run the gulp's task using the following command line:
 ```
-gulp sass
+gulp generate-dist
 ```
 
 Note that if you want to generate normal css files instead of minify ones, then you can update the above script
