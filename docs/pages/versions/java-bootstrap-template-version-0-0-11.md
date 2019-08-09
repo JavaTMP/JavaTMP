@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.11 (Current Development Version)
 ---
 # {{ page.title }}
 
-## on
+## 9f101ef on Aug 9, 2019, 9:03 PM GMT+4
 - Make the JavaTMP schooly style (javatmp-schooly.min.css or javatmp-schooly-rtl.min.css) default style for our templates
 - Create a default admin layout by including all partials scss file inside `html.javatmp-default-admin-layout` selector. So
 you should add a class `javatmp-default-admin-layout` to html tag to use the default admin layout style.
