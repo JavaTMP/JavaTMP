@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.11 (Current Development Version)
 ---
 # {{ page.title }}
 
-## on
+## 33cd400 on Aug 10, 2019, 3:22 AM GMT+4
 - Create a landing Empty starter page `./JavaTMP-Static-Ajax/web/pages/custom-pages/landing-pages/landing-empty-starter.html`
 - Create a landing RTL Arabic Empty starter page `./JavaTMP-Static-Ajax/web/pages/custom-pages/landing-pages/landing-empty-starter-ar.html`
 to start public web site pages from.
