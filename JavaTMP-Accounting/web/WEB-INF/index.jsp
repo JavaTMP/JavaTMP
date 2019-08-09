@@ -327,7 +327,7 @@
         </div>
         <div class="main-footer-bar">
             <div class="footer-content">
-                <a href="http://www.javatmp.com" target="_blank"><span>&copy; 2018 javatmp.com</span></a>
+                <a href="http://www.javatmp.com" target="_blank"><span>&copy; 2019 javatmp.com</span></a>
             </div>
         </div>
         <div id="global-label-items-block" class="d-none">

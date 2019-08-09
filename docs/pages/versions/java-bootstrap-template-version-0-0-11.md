@@ -3,6 +3,12 @@ title: Java Bootstrap Template Version 0.0.11 (Current Development Version)
 ---
 # {{ page.title }}
 
+## on
+- Create a landing Empty starter page `./JavaTMP-Static-Ajax/web/pages/custom-pages/landing-pages/landing-empty-starter.html`
+- Create a landing RTL Arabic Empty starter page `./JavaTMP-Static-Ajax/web/pages/custom-pages/landing-pages/landing-empty-starter-ar.html`
+to start public web site pages from.
+- Update copyright year.
+
 ## 9f101ef on Aug 9, 2019, 9:03 PM GMT+4
 - Make the JavaTMP schooly style (javatmp-schooly.min.css or javatmp-schooly-rtl.min.css) default style for our templates
 - Create a default admin layout by including all partials scss file inside `html.javatmp-default-admin-layout` selector. So
