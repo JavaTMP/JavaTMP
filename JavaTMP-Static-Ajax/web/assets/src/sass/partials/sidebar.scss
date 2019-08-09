@@ -12,19 +12,18 @@
     margin-left: -$javatmp-sidebar-width;
     transition: $javatmp-transition;
 
-    body.longer-sidebar & {
-        top: 0;
-    }
-
-    body.sidebar-active & {
-        margin-left: 0;
-    }
-
     @media (min-width: 768px) {
         bottom: $javatmp-footer-bar-height;
     }
 }
 
+body.longer-sidebar .sidebar {
+    top: 0;
+}
+
+body.sidebar-active .sidebar {
+    margin-left: 0;
+}
 
 // v0.0.3: Added to support for sidebar bg and color using theme colors
 .sidebar {

@@ -44,10 +44,13 @@ Custom Plugins Imports
 @import "plugins/custom-bootstrap-colors.scss";
 
 /*!******************************************
-JavaTMP Default Layout Imports
+JavaTMP Default Admin Layout Imports
 *********************************************/
-@import "partials/base.scss";
-@import "partials/navbar.scss";
-@import "partials/sidebar.scss";
-@import "partials/breadcrumb.scss";
-@import "partials/footer.scss";
+html.javatmp-default-admin-layout {
+    @import "partials/base.scss";
+    @import "partials/navbar.scss";
+    @import "partials/sidebar.scss";
+    @import "partials/breadcrumb.scss";
+    @import "partials/footer.scss";
+}
+

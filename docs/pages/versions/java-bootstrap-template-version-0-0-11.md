@@ -3,6 +3,24 @@ title: Java Bootstrap Template Version 0.0.11 (Current Development Version)
 ---
 # {{ page.title }}
 
+## on
+- Make the JavaTMP schooly style (javatmp-schooly.min.css or javatmp-schooly-rtl.min.css) default style for our templates
+- Create a default admin layout by including all partials scss file inside `html.javatmp-default-admin-layout` selector. So
+you should add a class `javatmp-default-admin-layout` to html tag to use the default admin layout style.
+- Update all html pages that use javatmp-default.min.css to use javatmp-schooly.min.css
+- Update all html pages that use javatmp-default-rtl.min.css to use javatmp-schooly-rtl.min.css
+- Update all admin dashboard html pages index-rtl.html/index.html that use `javatmp-default-admin-layout` class in html tag.
+- Update `/web/pages/plugins/metisMenu.html` page to reference www.javatmp.com site for links.
+- Update `\src\java\com\javatmp\i18n\*.properties` files by setting `global.defaultThemeName=schooly` to make default
+theme for public and login pages.
+- Update base.scss by style element `.main-body-content-container` by padding-top only if it is only adjacent sibling
+of `.main-breadcrumb-bar`. So you remove tag `.main-breadcrumb-bar` element `.main-body-content-container` will have zero
+top padding.
+- Update the following dependencies:
+    - @fortawesome/fontawesome-free from 5.10.0 to 5.10.1
+    - cropperjs from 1.5.4 to 1.5.5
+- Run gulp default to regenerate dist folders.
+
 ## d55d911 on Aug 5, 2019, 9:09 PM GMT+4
 - Remove alert comments from JSP pages.
 - rename javatmp.plugins.js to javatmp.plugins.wrapper.js and reference new file in pages.

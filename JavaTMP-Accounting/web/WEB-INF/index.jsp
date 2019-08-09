@@ -1,7 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
-<html lang="${labels["global.language"]}" dir="${labels["global.direction"]}">
+<html lang="${labels["global.language"]}" dir="${labels["global.direction"]}" class="javatmp-default-admin-layout">
     <head>
         <title>${labels["global.page.title"]}</title>
         <!-- Required meta tags -->

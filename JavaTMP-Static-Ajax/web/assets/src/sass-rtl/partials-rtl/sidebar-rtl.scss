@@ -6,11 +6,10 @@
     margin-left: auto;
     margin-right:  -$javatmp-sidebar-width;
     transition: $javatmp-transition;
-
-    body.sidebar-active & {
-        margin-left: auto;
-        margin-right: 0;
-    }
+}
+body.sidebar-active .sidebar {
+    margin-left: auto;
+    margin-right: 0;
 }
 
 // v0.0.3: Added to support for sidebar bg and color using theme colors

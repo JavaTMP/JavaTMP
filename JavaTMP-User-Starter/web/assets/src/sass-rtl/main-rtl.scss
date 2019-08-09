@@ -3,14 +3,15 @@ Bootstrap RTL resetter import
 *********************************************/
 @import "../../../../node_modules/bootstrap-reverse/src/sass/bootstrap-reverse.scss";
 /*!********************************************
-JavaTMP Base RTL Tempalte Imports
+JavaTMP Default RTL Admin Layout Imports
 *********************************************/
-
-@import "partials-rtl/base-rtl.scss";
-@import "partials-rtl/navbar-rtl.scss";
-@import "partials-rtl/sidebar-rtl.scss";
-@import "partials-rtl/breadcrumb-rtl.scss";
-@import "partials-rtl/footer-rtl.scss";
+html.default-admin-layout {
+    @import "partials-rtl/base-rtl.scss";
+    @import "partials-rtl/navbar-rtl.scss";
+    @import "partials-rtl/sidebar-rtl.scss";
+    @import "partials-rtl/breadcrumb-rtl.scss";
+    @import "partials-rtl/footer-rtl.scss";
+}
 
 /*!********************************************
 Custom RTL Plugins Imports

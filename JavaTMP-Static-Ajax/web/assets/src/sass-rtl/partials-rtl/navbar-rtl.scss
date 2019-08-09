@@ -2,22 +2,6 @@
 @import "../common/variables.scss";
 
 .main-javatmp-navbar {
-
-    body.longer-sidebar.sidebar-active & {
-        left: 0;
-        right: 0;
-    }
-    body.longer-sidebar.sidebar-active.mouse-auto-show & {
-        left: 0;
-        right: 0;
-    }
-    @media (min-width: 768px) {
-        body.longer-sidebar.sidebar-active & {
-            left: 0;
-            right: $javatmp-sidebar-width;
-
-        }
-    }
     .main-navbar-menu {
         > .nav-item {
             @if $javatmp-navbar-menu-enable-border {
@@ -25,5 +9,20 @@
                 border-right: $javatmp-navbar-border-width solid $javatmp-navbar-border-color;
             }
         }
+    }
+}
+body.longer-sidebar.sidebar-active .main-javatmp-navbar {
+    left: 0;
+    right: 0;
+}
+body.longer-sidebar.sidebar-active.mouse-auto-show .main-javatmp-navbar {
+    left: 0;
+    right: 0;
+}
+@media (min-width: 768px) {
+    body.longer-sidebar.sidebar-active .main-javatmp-navbar {
+        left: 0;
+        right: $javatmp-sidebar-width;
+
     }
 }

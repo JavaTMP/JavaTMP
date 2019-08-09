@@ -32,7 +32,7 @@ public class UpdateCompleteUserController extends HttpServlet {
         ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         DocumentService ds = sf.getDocumentService();
         UserService us = sf.getUserService();
-        Files
+
         try {
 
             User userToBeUpdated = new User();

@@ -12,7 +12,7 @@ body {
     transition: $javatmp-transition;
 }
 
-.main-body-content-container {
+.main-breadcrumb-bar + .main-body-content-container {
     padding: $javatmp-breadcrumb-bar-height 0 0 0;
 }
 

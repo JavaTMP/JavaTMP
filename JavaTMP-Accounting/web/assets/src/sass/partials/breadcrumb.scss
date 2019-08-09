@@ -8,15 +8,6 @@
     /*border-bottom: $border-width solid $border-color;*/
     background-color: $javatmp-breadcrumb-bar-bg;
     transition: $javatmp-transition;
-    @media (min-width: 768px) {
-        body.sidebar-active .main-content > & {
-            left: $javatmp-sidebar-width;
-        }
-    }
-
-    body.mouse-auto-show.sidebar-active .main-content > & {
-        left: 0px;
-    }
 
     .breadcrumb {
         background-color: $javatmp-breadcrumb-bar-bg;
@@ -60,6 +51,16 @@
     .spin-sync-stop {
         color: $javatmp-breadcrumb-link-color;
     }
+}
+
+@media (min-width: 768px) {
+    body.sidebar-active .main-content > .main-breadcrumb-bar {
+        left: $javatmp-sidebar-width;
+    }
+}
+
+body.mouse-auto-show.sidebar-active .main-content > .main-breadcrumb-bar {
+    left: 0px;
 }
 
 // v0.0.3: Added to support for theme colors
