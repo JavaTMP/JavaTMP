@@ -3,13 +3,13 @@ title: Java Bootstrap Template Version 0.0.11 (Current Development Version)
 ---
 # {{ page.title }}
 
-## on 
+## on
 - Create a landing Empty starter page `./JavaTMP-Static-Ajax/web/pages/custom-pages/landing-pages/landing-empty-starter.html`
 - Create a landing RTL Arabic Empty starter page `./JavaTMP-Static-Ajax/web/pages/custom-pages/landing-pages/landing-empty-starter-ar.html`
 to start public web site pages from.
 - Create a landing Section starter page `./JavaTMP-Static-Ajax/web/pages/custom-pages/landing-pages/landing-sections-starter.html`
 - Update copyright year.
-- override `$text-muted` variable by setting it to `$gray-800` instead of default `$gray-600`
+- override `$text-muted` variable by setting it to `$gray-800` instead of default `$gray-600` in javatmp-schooly theme
 
 ## 9f101ef on Aug 9, 2019, 9:03 PM GMT+4
 - Make the JavaTMP schooly style (javatmp-schooly.min.css or javatmp-schooly-rtl.min.css) default style for our templates
