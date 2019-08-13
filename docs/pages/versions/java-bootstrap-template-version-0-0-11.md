@@ -4,6 +4,9 @@ title: Java Bootstrap Template Version 0.0.11 (Current Development Version)
 # {{ page.title }}
 
 ## on
+- Create a custom design blocks components inside folder `.\JavaTMP-Static-Ajax\web\pages\custom-design-blocks`.
+for the following items: Header, Call to action, Contacts, Contents, Features, Footers, Forms, Headers,
+Pricings, People, Testimonials, Footer.
 - Update ajax inbox contents
 
 ## a25ce0e on Aug 10, 2019, 7:42 PM GMT+4
