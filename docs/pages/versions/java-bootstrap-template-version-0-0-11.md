@@ -8,6 +8,12 @@ title: Java Bootstrap Template Version 0.0.11 (Current Development Version)
 for the following items: Header, Call to action, Contacts, Contents, Features, Footers, Forms, Headers,
 Pricings, People, Testimonials, Footer.
 - Update ajax inbox contents
+- Add the following new dependencies:
+    - `jquery.easing` version 1.4.1
+    - `aos` version 2.3.4
+    - `animate.css` version 3.7.2
+- Update the following dependencies:
+    - `fullcalendar` from 3.10.0 to 3.10.1
 
 ## a25ce0e on Aug 10, 2019, 7:42 PM GMT+4
 - Create a landing Empty starter page `./JavaTMP-Static-Ajax/web/pages/custom-pages/landing-pages/landing-empty-starter.html`
