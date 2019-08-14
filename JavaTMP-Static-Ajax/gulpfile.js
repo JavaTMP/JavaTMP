@@ -259,6 +259,9 @@ var config = {
         ],
         "animate.css": [
             {"from": "${sourceNodeLib}/animate.css/animate.min.css", "to": "${destComponentsLib}/animate.css", processJS: false, processCSS: false}
+        ],
+        "twbs-pagination": [
+            {"from": "${sourceNodeLib}/twbs-pagination/jquery.twbsPagination.min.js", "to": "${destComponentsLib}/twbs-pagination", processJS: false, processCSS: false}
         ]
     }
 };
@@ -370,7 +373,8 @@ var src = {
         "./web/components/handlebars/dist/handlebars.min.js",
         "./web/components/jquery.easing/jquery.easing.min.js",
         "./web/components/jquery.easing/jquery.easing.compatibility.js",
-        "./web/components/aos/dist/aos.js"
+        "./web/components/aos/dist/aos.js",
+        "./web/components/twbs-pagination/jquery.twbsPagination.min.js"
     ],
     "localeJS": {
         "en": [
