@@ -248,6 +248,17 @@ var config = {
         ],
         "handlebars": [
             {"from": "${sourceNodeLib}/handlebars/dist/handlebars.min.js", "to": "${destComponentsLib}/handlebars/dist", processJS: false, processCSS: false}
+        ],
+        "jquery.easing": [
+            {"from": "${sourceNodeLib}/jquery.easing/jquery.easing.min.js", "to": "${destComponentsLib}/jquery.easing", processJS: false, processCSS: false},
+            {"from": "${sourceNodeLib}/jquery.easing/jquery.easing.compatibility.js", "to": "${destComponentsLib}/jquery.easing", processJS: true, processCSS: false}
+        ],
+        "aos": [
+            {"from": "${sourceNodeLib}/aos/dist/aos.js", "to": "${destComponentsLib}/aos/dist", processJS: false, processCSS: false},
+            {"from": "${sourceNodeLib}/aos/dist/aos.css", "to": "${destComponentsLib}/aos/dist", processJS: false, processCSS: false}
+        ],
+        "animate.css": [
+            {"from": "${sourceNodeLib}/animate.css/animate.min.css", "to": "${destComponentsLib}/animate.css", processJS: false, processCSS: false}
         ]
     }
 };
@@ -278,7 +289,9 @@ var src = {
         "./web/components/slick-carousel/slick/slick.css",
         "./web/components/slick-carousel/slick/slick-theme.css",
         "./web/components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css",
-        "./web/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.css"
+        "./web/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.css",
+        "./web/components/aos/dist/aos.css",
+        "./web/components/animate.css/animate.min.css"
     ],
     "cssForPrint": [
         "./web/components/fullcalendar/dist/fullcalendar.print.min.css"
@@ -354,7 +367,10 @@ var src = {
         "./web/components/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js",
         "./web/components/numeral/min/numeral.min.js",
         "./web/components/form-serializer/dist/jquery.serialize-object.min.js",
-        "./web/components/handlebars/dist/handlebars.min.js"
+        "./web/components/handlebars/dist/handlebars.min.js",
+        "./web/components/jquery.easing/jquery.easing.min.js",
+        "./web/components/jquery.easing/jquery.easing.compatibility.js",
+        "./web/components/aos/dist/aos.js"
     ],
     "localeJS": {
         "en": [
