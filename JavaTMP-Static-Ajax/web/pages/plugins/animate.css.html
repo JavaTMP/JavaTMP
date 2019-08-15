@@ -118,7 +118,6 @@
         Embed CSS styling for current page.
         */
 
-
     </style>
 
     <!--
@@ -136,32 +135,35 @@
             // controll return to main javascript file.
             // <--- HERE --->
             //
-            $('[mouseleaveRemove]').on("mouseleave", function () {
-                if (!$(this).data("active") || $(this).data("active") === false) {
-                    $(this).removeClass($(this).attr("mouseleaveRemove"));
-                    $(this).removeData("active");
-                } else {
-                    console.log("do nothing on mouseleave");
-                }
-            });
+//            $('[mouseleaveRemove]').on("mouseleave", function () {
+//                if (!$(this).data("active") || $(this).data("active") === false) {
+//                    $(this).removeClass($(this).attr("mouseleaveRemove"));
+//                    $(this).removeData("active");
+//                } else {
+//                    console.log("do nothing on mouseleave");
+//                    $(this).one("animationend transitionend webkitAnimationEnd oanimationend MSAnimationEnd webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd", function () {
+//                        $(this).off("animationend transitionend webkitAnimationEnd oanimationend MSAnimationEnd webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd");
+//                        $(this).data("active", false);
+//                        $(this).removeClass($(this).attr("mouseleaveRemove"));
+//                        console.log("animation end event");
+//                    });
+//                }
+//            });
             $('[mouseenterAdd]').on("mouseenter", function (event) {
                 console.log("mouse enter");
-                if (!$(this).data("active") || $(this).data("active") === false) {
-                    $(this).on("animationstart webkitAnimationStart oAnimationStart MSAnimationStart", function () {
-                        console.log("animation start event");
+                if ($(this).hasClass($(this).attr("mouseenterAdd")) === false) {
+                    if (!$(this).data("active") || $(this).data("active") === false) {
                         $(this).data("active", true);
-//                    $('[mouseleaveRemove]').off("mouseleave");
-                    }).on("animationend transitionend webkitAnimationEnd oanimationend MSAnimationEnd webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd", function () {
-                        $(this).data("active", false);
-                        console.log("animation end event");
-//                    $('[mouseleaveRemove]').on("mouseleave");
-//                    $(this).removeClass($(this).attr("mouseleaveRemove"));
-//                    $(this).on("mouseleave", function () {
-//                        $(this).removeClass($(this).attr("mouseleaveRemove"));
-//                    });
-                    }).addClass($(this).attr("mouseenterAdd"));
+                        $(this).one("webkitAnimationEnd mozAnimationEnd oAnimationEnd animationEnd", function () {
+                            console.log("animation end event");
+                            $(this).data("active", false);
+                            $(this).removeClass($(this).attr("mouseleaveRemove"));
+                        }).addClass($(this).attr("mouseenterAdd"));
+                    } else {
+                        console.log("do nothing on mouseenter");
+                    }
                 } else {
-                    console.log("do nothing on mouseenter");
+                    console.log("has already classes");
                 }
 
             });
