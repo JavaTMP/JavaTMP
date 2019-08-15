@@ -12,6 +12,7 @@ Pricings, People, Testimonials, Footer.
     - `jquery.easing` version 1.4.1
     - `aos` version 2.3.4
     - `animate.css` version 3.7.2
+    - `twbs-pagination` version 1.4.2
 - Update the following dependencies:
     - `fullcalendar` from 3.10.0 to 3.10.1
 
