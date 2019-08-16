@@ -1,0 +1,302 @@
+<div class="dynamic-ajax-content grid-gutter-padding">
+    <h4 class="my-3">jQuery QueryBuilder</h4>
+    <hr/>
+    <div class="row">
+        <div class="col">
+            <div class="alert alert-info">
+                <p>jQuery plugin offering an interface to create complex queries</p>
+                <p>
+                    <a class="btn btn-info" target="_blank" href="https://querybuilder.js.org/">Home Page</a>
+                    <a class="btn btn-info" target="_blank" href="https://github.com/mistic100/jQuery-QueryBuilder">github.com Project Link</a>
+                </p>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <h4>Basic Demo:</h4>
+                    <div id="builder-basic"></div>
+                    <div class="btn-group">
+                        <button class="btn btn-warning reset" data-target="basic">Reset</button>
+                        <button class="btn btn-success set-json" data-target="basic">Set rules</button>
+                        <button class="btn btn-primary parse-json" data-target="basic">Get rules</button>
+                    </div>
+                    <hr/>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!--
+    Reference Your external Stylesheet file here
+    if your feature or plugins could not support to run globally.
+    <link href="components/" rel="stylesheet">
+    -->
+    <style type="text/css">
+        /*
+        Embed CSS styling for current page.
+        */
+        /* https://querybuilder.js.org/dev/no-bootstrap.html */
+
+        .query-builder, .query-builder * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .query-builder .rules-group-container {
+            width: 100%;
+        }
+
+        .query-builder {
+            font-family: sans-serif;
+        }
+
+        .query-builder .hide {
+            display: none;
+        }
+
+        .query-builder .pull-right {
+            float: right !important;
+        }
+
+        .query-builder .btn {
+            text-transform: none;
+            display: inline-block;
+            padding: 6px 12px;
+            margin-bottom: 0px;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.42857;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            touch-action: manipulation;
+            cursor: pointer;
+            user-select: none;
+            background-image: none;
+            border: 1px solid transparent;
+            border-radius: 4px;
+        }
+
+        .query-builder .btn.focus, .query-builder .btn:focus, .query-builder .btn:hover {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .query-builder .btn.active, .query-builder .btn:active {
+            background-image: none;
+            outline: 0px none;
+            box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.125) inset;
+        }
+
+        .query-builder .btn-success {
+            color: #FFF;
+            background-color: #5CB85C;
+            border-color: #4CAE4C;
+        }
+
+        .query-builder .btn-primary {
+            color: #FFF;
+            background-color: #337AB7;
+            border-color: #2E6DA4;
+        }
+
+        .query-builder .btn-danger {
+            color: #FFF;
+            background-color: #D9534F;
+            border-color: #D43F3A;
+        }
+
+        .query-builder .btn-success.active, .query-builder .btn-success.focus,
+        .query-builder .btn-success:active, .query-builder .btn-success:focus,
+        .query-builder .btn-success:hover {
+            color: #FFF;
+            background-color: #449D44;
+            border-color: #398439;
+        }
+
+        .query-builder .btn-primary.active, .query-builder .btn-primary.focus,
+        .query-builder .btn-primary:active, .query-builder .btn-primary:focus,
+        .query-builder .btn-primary:hover {
+            color: #FFF;
+            background-color: #286090;
+            border-color: #204D74;
+        }
+
+        .query-builder .btn-danger.active, .query-builder .btn-danger.focus,
+        .query-builder .btn-danger:active, .query-builder .btn-danger:focus,
+        .query-builder .btn-danger:hover {
+            color: #FFF;
+            background-color: #C9302C;
+            border-color: #AC2925;
+        }
+
+        .query-builder .btn-group {
+            position: relative;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .query-builder .btn-group > .btn {
+            position: relative;
+            float: left;
+        }
+
+        .query-builder .btn-group > .btn:first-child {
+            margin-left: 0px;
+        }
+
+        .query-builder .btn-group > .btn:first-child:not(:last-child) {
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+        }
+
+        .query-builder .btn-group > .btn:last-child:not(:first-child) {
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+        }
+
+        .query-builder .btn-group .btn + .btn, .query-builder .btn-group .btn + .btn-group,
+        .query-builder .btn-group .btn-group + .btn, .query-builder .btn-group .btn-group + .btn-group {
+            margin-left: -1px;
+        }
+
+        .query-builder .btn-xs, .query-builder .btn-group-xs > .btn {
+            padding: 1px 5px;
+            font-size: 12px;
+            line-height: 1.5;
+            border-radius: 3px;
+        }
+    </style>
+
+    <!--
+    Reference Your external Javascript file here
+    if your feature or plugins could not support to run globally.
+    <script src="components/"></script>
+    -->
+    <script type="text/javascript">
+        // You could write safely Javascript code here too as our template
+        // should load mandatory libraries and plugins before.
+        // <--- HERE --->
+        //
+        jQuery(function ($) {
+            // any code put here will be run after content attach to ajax output container and before
+            // controll return to main javascript file.
+            // <--- HERE --->
+            //
+            $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
+                // fire AFTER all transition done and your ajax content is shown to user.
+
+                $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
+                    // fire when user resize browser window or sidebar hide / show
+                });
+
+                /**
+                 * When another sidebar menu item pressed and before container issues new ajax request.
+                 * You can cancel, destroy, or remove any thing here before replace main output ajax container.
+                 * return false or event.preventDefault() will cancel ajax and stay you in the current page and do nothing.
+                 **/
+                $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {
+                    var newLink = $(event._newTarget);
+                    return true;
+                });
+
+                // Your custom specific page code here:
+
+                var rules_basic = {
+                    condition: 'AND',
+                    rules: [{
+                            id: 'price',
+                            operator: 'less',
+                            value: 10.25
+                        }, {
+                            condition: 'OR',
+                            rules: [{
+                                    id: 'category',
+                                    operator: 'equal',
+                                    value: 2
+                                }, {
+                                    id: 'category',
+                                    operator: 'equal',
+                                    value: 1
+                                }]
+                        }]
+                };
+
+                $('#builder-basic').queryBuilder({
+                    icons: {
+                        add_group: 'fas fa-plus-square',
+                        add_rule: 'fas fa-plus-circle',
+                        remove_group: 'fas fa-minus-square',
+                        remove_rule: 'fas fa-minus-circle',
+                        error: 'fas fa-exclamation-triangle'
+                    },
+                    filters: [{
+                            id: 'name',
+                            label: 'Name',
+                            type: 'string'
+                        }, {
+                            id: 'category',
+                            label: 'Category',
+                            type: 'integer',
+                            input: 'select',
+                            values: {
+                                1: 'Books',
+                                2: 'Movies',
+                                3: 'Music',
+                                4: 'Tools',
+                                5: 'Goodies',
+                                6: 'Clothes'
+                            },
+                            operators: ['equal', 'not_equal', 'in', 'not_in', 'is_null', 'is_not_null']
+                        }, {
+                            id: 'in_stock',
+                            label: 'In stock',
+                            type: 'integer',
+                            input: 'radio',
+                            values: {
+                                1: 'Yes',
+                                0: 'No'
+                            },
+                            operators: ['equal']
+                        }, {
+                            id: 'price',
+                            label: 'Price',
+                            type: 'double',
+                            validation: {
+                                min: 0,
+                                step: 0.01
+                            }
+                        }, {
+                            id: 'id',
+                            label: 'Identifier',
+                            type: 'string',
+                            placeholder: '____-____-____',
+                            operators: ['equal', 'not_equal'],
+                            validation: {
+                                format: /^.{4}-.{4}-.{4}$/
+                            }
+                        }],
+
+                    rules: rules_basic
+                });
+
+                $('.reset').on('click', function () {
+                    $('#builder-basic').queryBuilder('reset');
+                });
+
+                $('.set-json').on('click', function () {
+                    $('#builder-basic').queryBuilder('setRules', rules_basic);
+                });
+
+                $('.parse-json').on('click', function () {
+                    var result = $('#builder-basic').queryBuilder('getRules');
+
+                    if (!$.isEmptyObject(result)) {
+                        alert(JSON.stringify(result, null, 2));
+                    }
+                });
+
+            });
+        });
+    </script>
+</div>
