@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.11 (Current Development Version)
 ---
 # {{ page.title }}
 
-## e4b25d6 on Aug 13, 2019, 9:10 PM GMT+4
+## cc9ff11 on Aug 16, 2019, 5:30 PM GMT+4
 - new attribute `uglifyES6: true` for javascript front-end resources that need
 to be uglify using `gulp-uglify-es` instead of `gulp-uglify`
 - Create a custom design blocks components inside folder `.\JavaTMP-Static-Ajax\web\pages\custom-design-blocks`.
