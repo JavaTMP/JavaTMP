@@ -4,6 +4,8 @@ title: Java Bootstrap Template Version 0.0.11 (Current Development Version)
 # {{ page.title }}
 
 ## e4b25d6 on Aug 13, 2019, 9:10 PM GMT+4
+- new attribute `uglifyES6: true` for javascript front-end resources that need
+to be uglify using `gulp-uglify-es` instead of `gulp-uglify`
 - Create a custom design blocks components inside folder `.\JavaTMP-Static-Ajax\web\pages\custom-design-blocks`.
 for the following items: Header, Call to action, Contacts, Contents, Features, Footers, Forms, Headers,
 Pricings, People, Testimonials, Footer.
@@ -13,6 +15,8 @@ Pricings, People, Testimonials, Footer.
     - `aos` version 2.3.4
     - `animate.css` version 3.7.2
     - `twbs-pagination` version 1.4.2
+- Add the following new devDependencies:
+    - `gulp-uglify-es` version 1.0.4. for suppport to uglify es6 and above javascript.
 - Update the following dependencies:
     - `fullcalendar` from 3.10.0 to 3.10.1
 

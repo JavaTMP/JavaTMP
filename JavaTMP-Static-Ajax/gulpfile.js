@@ -12,6 +12,13 @@ var eslint = require('gulp-eslint');
 var autoprefixer = require('gulp-autoprefixer');
 var gulpif = require('gulp-if');
 var async = require('async');
+
+// to solve es6 javascript
+// https://stackoverflow.com/questions/44958216/how-to-minify-es6-functions-with-gulp-uglify
+// https://stackoverflow.com/questions/40521506/gulpuglifyerrorunable-to-minify-javascript
+
+var uglifyES6 = require('gulp-uglify-es').default;
+
 var config = {
     "sourceNodeLib": "./node_modules",
     "destComponentsLib": "./web/components",
@@ -225,7 +232,7 @@ var config = {
             {"from": "${sourceNodeLib}/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js", "to": "${destComponentsLib}/bootstrap-alert-wrapper/dist"}
         ],
         "Blob": [
-            {"from": "${sourceNodeLib}/Blob/Blob.js", "to": "${destComponentsLib}/Blob", processJS: false}
+            {"from": "${sourceNodeLib}/Blob/Blob.js", "to": "${destComponentsLib}/Blob", processJS: false, uglifyES6: true}
         ],
         "canvas-toBlob": [
             {"from": "${sourceNodeLib}/canvas-toBlob/canvas-toBlob.js", "to": "${destComponentsLib}/canvas-toBlob", processJS: true}
@@ -452,6 +459,7 @@ gulp.task('copy-components', gulp.series("delete-components", function (cb) {
                 var from = solveParameters(componentResource.from);
 //                console.log("copying resource from [" + from + "] to [" + to + "] processCSS [" + componentResource.processCSS + "], processJS [" + componentResource.processJS + "]");
                 gulp.src(from)
+                        .pipe(gulpif(componentResource.uglifyES6 === true, uglifyES6({output: {comments: /^!/}})))
                         .pipe(gulpif(componentResource.processJS === true, uglify({output: {comments: /^!/}})))
                         .pipe(gulpif(componentResource.processCSS === true, cleanCSS()))
                         .pipe(gulp.dest(to))
