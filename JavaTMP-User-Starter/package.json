@@ -40,7 +40,7 @@
         "datatables.net-rowgroup-bs4": "^1.1.0",
         "echarts": "^4.2.1",
         "font-awesome-animation": "^0.2.1",
-        "fullcalendar": "^3.10.0",
+        "fullcalendar": "^3.10.1",
         "inputmask": "^4.0.8",
         "ion-rangeslider": "^2.3.0",
         "jquery": "^3.4.1",
@@ -70,7 +70,11 @@
         "moment-timezone": "^0.5.26",
         "material-design-icons": "^3.0.1",
         "form-serializer": "^2.5.0",
-        "handlebars": "^4.1.2"
+        "handlebars": "^4.1.2",
+        "jquery.easing": "^1.4.1",
+        "aos": "^2.3.4",
+        "animate.css": "^3.7.2",
+        "bootstrap-input-spinner": "^1.11.8"
     },
     "devDependencies": {
         "del": "^5.0.0",
@@ -86,7 +90,8 @@
         "gulp-uglify": "^3.0.2",
         "napa": "^3.0.0",
         "pump": "^3.0.0",
-        "async": "^3.1.0"
+        "async": "^3.1.0",
+        "gulp-uglify-es": "^1.0.4"
     },
     "scripts": {
         "install": "napa",
@@ -105,6 +110,7 @@
         "jquery-ui-touch-punch": "git+https://github.com/furf/jquery-ui-touch-punch.git",
         "canvas-toBlob": "git+https://github.com/eligrey/canvas-toBlob.js.git",
         "Blob": "git+https://github.com/eligrey/Blob.js",
-        "DevExpress-bootstrap-themes": "git+https://github.com/DevExpress/bootstrap-themes.git"
+        "DevExpress-bootstrap-themes": "git+https://github.com/DevExpress/bootstrap-themes.git",
+        "twbs-pagination": "https://github.com/josecebe/twbs-pagination.git"
     }
 }

@@ -16,6 +16,7 @@ Pricings, People, Testimonials, Footer.
     - `aos` version 2.3.4
     - `animate.css` version 3.7.2
     - `twbs-pagination` version 1.4.2
+    - `bootstrap-input-spinner` version 1.11.8.
 - Add the following new devDependencies:
     - `gulp-uglify-es` version 1.0.4. for suppport to uglify es6 and above javascript.
 - Update the following dependencies:

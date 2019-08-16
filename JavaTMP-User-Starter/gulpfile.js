@@ -12,6 +12,13 @@ var eslint = require('gulp-eslint');
 var autoprefixer = require('gulp-autoprefixer');
 var gulpif = require('gulp-if');
 var async = require('async');
+
+// to solve es6 javascript
+// https://stackoverflow.com/questions/44958216/how-to-minify-es6-functions-with-gulp-uglify
+// https://stackoverflow.com/questions/40521506/gulpuglifyerrorunable-to-minify-javascript
+
+var uglifyES6 = require('gulp-uglify-es').default;
+
 var config = {
     "sourceNodeLib": "./node_modules",
     "destComponentsLib": "./web/components",
@@ -225,7 +232,7 @@ var config = {
             {"from": "${sourceNodeLib}/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js", "to": "${destComponentsLib}/bootstrap-alert-wrapper/dist"}
         ],
         "Blob": [
-            {"from": "${sourceNodeLib}/Blob/Blob.js", "to": "${destComponentsLib}/Blob", processJS: false}
+            {"from": "${sourceNodeLib}/Blob/Blob.js", "to": "${destComponentsLib}/Blob", processJS: false, uglifyES6: true}
         ],
         "canvas-toBlob": [
             {"from": "${sourceNodeLib}/canvas-toBlob/canvas-toBlob.js", "to": "${destComponentsLib}/canvas-toBlob", processJS: true}
@@ -248,6 +255,23 @@ var config = {
         ],
         "handlebars": [
             {"from": "${sourceNodeLib}/handlebars/dist/handlebars.min.js", "to": "${destComponentsLib}/handlebars/dist", processJS: false, processCSS: false}
+        ],
+        "jquery.easing": [
+            {"from": "${sourceNodeLib}/jquery.easing/jquery.easing.min.js", "to": "${destComponentsLib}/jquery.easing", processJS: false, processCSS: false},
+            {"from": "${sourceNodeLib}/jquery.easing/jquery.easing.compatibility.js", "to": "${destComponentsLib}/jquery.easing", processJS: true, processCSS: false}
+        ],
+        "aos": [
+            {"from": "${sourceNodeLib}/aos/dist/aos.js", "to": "${destComponentsLib}/aos/dist", processJS: false, processCSS: false},
+            {"from": "${sourceNodeLib}/aos/dist/aos.css", "to": "${destComponentsLib}/aos/dist", processJS: false, processCSS: false}
+        ],
+        "animate.css": [
+            {"from": "${sourceNodeLib}/animate.css/animate.min.css", "to": "${destComponentsLib}/animate.css", processJS: false, processCSS: false}
+        ],
+        "twbs-pagination": [
+            {"from": "${sourceNodeLib}/twbs-pagination/jquery.twbsPagination.min.js", "to": "${destComponentsLib}/twbs-pagination", processJS: false, processCSS: false}
+        ],
+        "bootstrap-input-spinner": [
+            {"from": "${sourceNodeLib}/bootstrap-input-spinner/src/bootstrap-input-spinner.js", "to": "${destComponentsLib}/bootstrap-input-spinner/src", processJS: true, processCSS: false}
         ]
     }
 };
@@ -278,7 +302,9 @@ var src = {
         "./web/components/slick-carousel/slick/slick.css",
         "./web/components/slick-carousel/slick/slick-theme.css",
         "./web/components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css",
-        "./web/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.css"
+        "./web/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.css",
+        "./web/components/aos/dist/aos.css",
+        "./web/components/animate.css/animate.min.css"
     ],
     "cssForPrint": [
         "./web/components/fullcalendar/dist/fullcalendar.print.min.css"
@@ -354,7 +380,12 @@ var src = {
         "./web/components/bootstrap-alert-wrapper/dist/bootstrap-alert-wrapper.min.js",
         "./web/components/numeral/min/numeral.min.js",
         "./web/components/form-serializer/dist/jquery.serialize-object.min.js",
-        "./web/components/handlebars/dist/handlebars.min.js"
+        "./web/components/handlebars/dist/handlebars.min.js",
+        "./web/components/jquery.easing/jquery.easing.min.js",
+        "./web/components/jquery.easing/jquery.easing.compatibility.js",
+        "./web/components/aos/dist/aos.js",
+        "./web/components/twbs-pagination/jquery.twbsPagination.min.js",
+        "./web/components/bootstrap-input-spinner/src/bootstrap-input-spinner.js"
     ],
     "localeJS": {
         "en": [
@@ -432,6 +463,7 @@ gulp.task('copy-components', gulp.series("delete-components", function (cb) {
                 var from = solveParameters(componentResource.from);
 //                console.log("copying resource from [" + from + "] to [" + to + "] processCSS [" + componentResource.processCSS + "], processJS [" + componentResource.processJS + "]");
                 gulp.src(from)
+                        .pipe(gulpif(componentResource.uglifyES6 === true, uglifyES6({output: {comments: /^!/}})))
                         .pipe(gulpif(componentResource.processJS === true, uglify({output: {comments: /^!/}})))
                         .pipe(gulpif(componentResource.processCSS === true, cleanCSS()))
                         .pipe(gulp.dest(to))

@@ -269,6 +269,9 @@ var config = {
         ],
         "twbs-pagination": [
             {"from": "${sourceNodeLib}/twbs-pagination/jquery.twbsPagination.min.js", "to": "${destComponentsLib}/twbs-pagination", processJS: false, processCSS: false}
+        ],
+        "bootstrap-input-spinner": [
+            {"from": "${sourceNodeLib}/bootstrap-input-spinner/src/bootstrap-input-spinner.js", "to": "${destComponentsLib}/bootstrap-input-spinner/src", processJS: true, processCSS: false}
         ]
     }
 };
@@ -381,7 +384,8 @@ var src = {
         "./web/components/jquery.easing/jquery.easing.min.js",
         "./web/components/jquery.easing/jquery.easing.compatibility.js",
         "./web/components/aos/dist/aos.js",
-        "./web/components/twbs-pagination/jquery.twbsPagination.min.js"
+        "./web/components/twbs-pagination/jquery.twbsPagination.min.js",
+        "./web/components/bootstrap-input-spinner/src/bootstrap-input-spinner.js"
     ],
     "localeJS": {
         "en": [
