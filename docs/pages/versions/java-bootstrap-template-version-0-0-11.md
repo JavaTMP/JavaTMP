@@ -3,6 +3,14 @@ title: Java Bootstrap Template Version 0.0.11 (Current Development Version)
 ---
 # {{ page.title }}
 
+## on
+- Move page `pages/custom-components/layout-options.html` to `/pages/layout-options.html` and update index.html and index-rtl.html
+- Move page `pages/custom-pages/components-index.html` to /pages/components-index.html` and update index.html
+- Create a demo page for jQuery-QueryBuilder plugin `./JavaTMP-Static-Ajax/web/pages/plugins/jQuery-QueryBuilder.html`
+- Add the following new dependencies:
+    - `jQuery-QueryBuilder` version 2.5.0
+- Run gulp default to regenerate dist folders.
+
 ## 894fc7a on Aug 16, 2019, 7:23 PM GMT+4
 - Create a landing Content starter page `./JavaTMP-Static-Ajax/web/pages/custom-pages/landing-pages/landing-content-starter.html`
 - new attribute `uglifyES6: true` for javascript front-end resources that need

@@ -272,6 +272,12 @@ var config = {
         ],
         "bootstrap-input-spinner": [
             {"from": "${sourceNodeLib}/bootstrap-input-spinner/src/bootstrap-input-spinner.js", "to": "${destComponentsLib}/bootstrap-input-spinner/src", processJS: true, processCSS: false}
+        ],
+        "jQuery-QueryBuilder": [
+            {"from": "${sourceNodeLib}/jQuery-QueryBuilder/dist/css/query-builder.default.min.css", "to": "${destComponentsLib}/jQuery-QueryBuilder/dist/css", processJS: false, processCSS: false},
+            {"from": "${sourceNodeLib}/jQuery-QueryBuilder/dist/i18n/query-builder.en.js", "to": "${destComponentsLib}/jQuery-QueryBuilder/dist/i18n", processJS: true, processCSS: false},
+            {"from": "${sourceNodeLib}/jQuery-QueryBuilder/dist/i18n/query-builder.ar.js", "to": "${destComponentsLib}/jQuery-QueryBuilder/dist/i18n", processJS: true, processCSS: false},
+            {"from": "${sourceNodeLib}/jQuery-QueryBuilder/dist/js/query-builder.standalone.min.js", "to": "${destComponentsLib}/jQuery-QueryBuilder/dist/js", processJS: false, processCSS: false}
         ]
     }
 };
@@ -304,7 +310,8 @@ var src = {
         "./web/components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css",
         "./web/components/bootstrap-card-extender/dist/bootstrap-card-extender.min.css",
         "./web/components/aos/dist/aos.css",
-        "./web/components/animate.css/animate.min.css"
+        "./web/components/animate.css/animate.min.css",
+        "./web/components/jQuery-QueryBuilder/dist/css/query-builder.default.min.css"
     ],
     "cssForPrint": [
         "./web/components/fullcalendar/dist/fullcalendar.print.min.css"
@@ -385,19 +392,22 @@ var src = {
         "./web/components/jquery.easing/jquery.easing.compatibility.js",
         "./web/components/aos/dist/aos.js",
         "./web/components/twbs-pagination/jquery.twbsPagination.min.js",
-        "./web/components/bootstrap-input-spinner/src/bootstrap-input-spinner.js"
+        "./web/components/bootstrap-input-spinner/src/bootstrap-input-spinner.js",
+        "./web/components/jQuery-QueryBuilder/dist/js/query-builder.standalone.min.js"
     ],
     "localeJS": {
         "en": [
             "./web/components/moment/min/locales.min.js",
-            "./web/components/timeago/locales/jquery.timeago.en.js"
+            "./web/components/timeago/locales/jquery.timeago.en.js",
+            "./web/components/jQuery-QueryBuilder/dist/i18n/query-builder.en.js"
         ],
         "ar": [
             "./web/components/moment/min/locales.min.js",
             "./web/components/summernote/dist/lang/summernote-ar-AR.min.js",
             "./web/components/fullcalendar/dist/locale/ar.js",
             "./web/components/timeago/locales/jquery.timeago.ar.js",
-            "./web/components/jquery-validation/dist/localization/messages_ar.js"
+            "./web/components/jquery-validation/dist/localization/messages_ar.js",
+            "./web/components/jQuery-QueryBuilder/dist/i18n/query-builder.ar.js"
         ]
     },
     "fontFamilyFiles": {

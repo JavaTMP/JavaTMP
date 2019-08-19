@@ -74,7 +74,8 @@
         "jquery.easing": "^1.4.1",
         "aos": "^2.3.4",
         "animate.css": "^3.7.2",
-        "bootstrap-input-spinner": "^1.11.8"
+        "bootstrap-input-spinner": "^1.11.8",
+        "jQuery-QueryBuilder": "^2.5.0"
     },
     "devDependencies": {
         "del": "^5.0.0",
