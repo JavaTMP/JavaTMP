@@ -62,3 +62,6 @@ A Gulp extension to add a header to file(s) in the pipeline.
 
 ### [async](https://www.npmjs.com/package/async "Async is a utility module which provides functions for working with asynchronous JavaScript")
 Async is a utility module which provides straight-forward, powerful functions for working with asynchronous JavaScript
+
+### [gulp-uglify-es](https://www.npmjs.com/package/gulp-uglify-es "gulp stream to uglify with terser - es6 supported")
+gulp stream to uglify with 'terser' (es6 supported)

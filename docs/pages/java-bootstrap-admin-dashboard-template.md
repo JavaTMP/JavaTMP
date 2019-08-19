@@ -3,13 +3,15 @@ title: Java Bootstrap Admin And Dashboard Template
 ---
 # {{ page.title }}
 
-JavaTMP is a Java Bootstrap admin and dashboard components template built using HTML 5 , CSS 3 , jQuery 3, Bootstrap 4 and Java programming language come with static and dynamic web application versions. JavaTMP has a huge collection of plugins and UI components and works seamlessly on all major web browsers, tablets and phones. If you have any questions, please email our support team at [support@javatmp.com](mailto:support@javatmp.com).
+JavaTMP is a Java Bootstrap admin and dashboard components template built using HTML 5 , CSS 3 , jQuery 3, Bootstrap 4
+and Java programming language come with static and dynamic web application versions.
+JavaTMP has a huge collection of plugins and UI components and works seamlessly on all major web browsers, tablets and phones.
+If you have any questions, please email our support team at [support@javatmp.com](mailto:support@javatmp.com).
 
-We are keen to release continuous long term updates and dozens of new features will be coming soon in the future releases. Once you purchased JavaTMP, you will be entitled to free download of all future updates for the same license.
+We are keen to release continuous long term updates and dozens of new features will be coming soon in the future releases.
+Once you purchased JavaTMP, you will be entitled to free download of all future updates for the same license.
 
-Features:
----------
-
+## Features
 *   Fluid and responsive template used for any type of web applications.
 *   Lightweight and feature rich HTML static or dynamic Java Bootstrap template 
 *   Clean and easy to use and customize AJAX based Template
@@ -21,27 +23,21 @@ Features:
 *   Use SASS's SCSS syntax for generating CSS files.
 *   Use Java Servlet/JSP for dynamic Java Bootstrap Web Application version. 
 
-Supported Browsers:
--------------------
-
+## Supported Browsers
 *   Internet Explorer IE 11.
 *   Latest Microsoft Edge.
 *   Latest Chrome
 *   Latest Firefox
 *   Latest Safari
 
-Development tools:
-------------------
-
+## Development tools
 *   NetBeans IDE 8.2 - [https://netbeans.org/](https://netbeans.org/)
 *   Node.js - [https://nodejs.org/](https://nodejs.org/)
 *   npm - [https://www.npmjs.com/](https://www.npmjs.com/)
 *   Gulp - [https://gulpjs.com/](https://gulpjs.com/)
 *   SASS - [http://sass-lang.com/](http://sass-lang.com/)
 
-Java Version Notes:
--------------------
-
+## Java Version Notes
 *   Developed using NetBeans IDE 8.2
 *   Use Java Serlvet 4.0 and JSP 2.3
 *   Ready to deploy on Apache Tomcat 9
@@ -54,9 +50,7 @@ Java Version Notes:
 *   Use [Handlebars.java 4.0.6](https://github.com/jknack/handlebars.java) as a backend Handlebars.js dynamic backend template engine.
 *   Custom Java MVC using Servlet/JSP and above libraries.
 
-Credits:
---------
-
+## Credits
 *   jQuery - [http://www.jquery.com](http://www.jquery.com/)
 *   Bootstrap - [http://getbootstrap.com](http://getbootstrap.com/)
 *   Select2 - [https://github.com/select2/select2](https://github.com/select2/select2)
@@ -120,3 +114,8 @@ Credits:
 *   jQuery Serialize Object - [https://github.com/macek/jquery-serialize-object](https://github.com/macek/jquery-serialize-object)
 *   Handlebars.js template - [https://github.com/wycats/handlebars.js](https://github.com/wycats/handlebars.js)
 *   Handlebars.java java implementation - [https://github.com/jknack/handlebars.java](https://github.com/jknack/handlebars.java)
+*   jQuery Easing Plugin - [https://github.com/gdsmith/jquery.easing](https://github.com/gdsmith/jquery.easing)
+*   Animate on scroll Plugin - [https://github.com/michalsnik/aos](https://github.com/michalsnik/aos)
+*   Animate CSS - [https://daneden.github.io/animate.css/](https://daneden.github.io/animate.css/)
+*   jQuery pagination plugin - [https://github.com/josecebe/twbs-pagination](https://github.com/josecebe/twbs-pagination)
+*   bootstrap-input-spinner plugin - [https://github.com/shaack/bootstrap-input-spinner](https://github.com/shaack/bootstrap-input-spinner)

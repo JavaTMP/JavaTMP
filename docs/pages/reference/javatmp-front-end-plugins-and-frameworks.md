@@ -574,3 +574,35 @@ Logic-less and semantic Handlebars templates with Java
 
 Apache License, Version 2.0
 
+### [jQuery Easing Plugin](https://github.com/gdsmith/jquery.easing)
+
+jQuery Easing Plugin
+
+Copyright © 2008 George McGinley Smith
+
+### [Animate on scroll Plugin](https://github.com/michalsnik/aos)
+
+Animate on scroll library
+
+MIT
+
+### [Animate CSS](https://daneden.github.io/animate.css/)
+
+animate.css is a bunch of cool, fun, and cross-browser animations for you to use in your projects.
+Great for emphasis, home pages, sliders, and general just-add-water-awesomeness.
+
+MIT
+
+### [jQuery pagination plugin](https://github.com/josecebe/twbs-pagination)
+
+jQuery Bootstrap pagination plugin
+
+Copyright 2014-2018 © Eugene Simakin
+
+### [bootstrap-input-spinner](https://github.com/shaack/bootstrap-input-spinner)
+
+A Bootstrap 4 / jQuery plugin to create input spinner elements for number input
+
+MIT
+
+
