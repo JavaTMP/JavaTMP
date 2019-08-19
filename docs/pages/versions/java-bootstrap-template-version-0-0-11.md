@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.11 (Current Development Version)
 ---
 # {{ page.title }}
 
-## on
+## 2a96f3b on Aug 19, 2019, 8:10 PM GMT+4
 - Move page `pages/custom-components/layout-options.html` to `/pages/layout-options.html` and update index.html and index-rtl.html
 - Move page `pages/custom-pages/components-index.html` to /pages/components-index.html` and update index.html
 - Create a demo page for jQuery-QueryBuilder plugin `./JavaTMP-Static-Ajax/web/pages/plugins/jQuery-QueryBuilder.html`
