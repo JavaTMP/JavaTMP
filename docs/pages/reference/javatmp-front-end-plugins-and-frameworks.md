@@ -605,4 +605,10 @@ A Bootstrap 4 / jQuery plugin to create input spinner elements for number input
 
 MIT
 
+### [jQuery-QueryBuilder](https://github.com/mistic100/jQuery-QueryBuilder)
+
+jQuery plugin offering an interface to create complex queries
+
+MIT
+
 

@@ -119,3 +119,4 @@ Once you purchased JavaTMP, you will be entitled to free download of all future 
 *   Animate CSS - [https://daneden.github.io/animate.css/](https://daneden.github.io/animate.css/)
 *   jQuery pagination plugin - [https://github.com/josecebe/twbs-pagination](https://github.com/josecebe/twbs-pagination)
 *   bootstrap-input-spinner plugin - [https://github.com/shaack/bootstrap-input-spinner](https://github.com/shaack/bootstrap-input-spinner)
+*   jQuery QueryBuilder plugin - [jQuery-QueryBuilder](https://github.com/mistic100/jQuery-QueryBuilder)
