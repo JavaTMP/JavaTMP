@@ -10,15 +10,30 @@
         isRTL: false,
         defaultSelectPlaceholder: "Kindly Select",
         dateFormat: "DD/MM/YYYY",
-        dateTimeFormat: "DD/MM/YYYY HH:mm"
+        dateTimeFormat: "DD/MM/YYYY HH:mm",
+        dateTimeSecondFormat: "DD/MM/YYYY HH:mm:ss",
+        networkDateFormat: "YYYY-MM-DDTHH:mm:ss.SSSZ",
+        floatDefault: "left",
+        floatReverse: "right",
+        contextPath: "",
+        defaultAjaxErrorMessage: "Error During Communicating with the remote server",
+        defaultAjaxErrorTitle: "Ajax Error",
+        javaTmpContainerRemoveEventName: "javatmp-container-remove",
+        javaTmpAjaxContainerReady: "javatmp-ajax-container-ready",
+        defaultPassData: {_ajax: "ajax", _ajaxGlobalBlockUI: true, _handleAjaxErrorGlobally: true},
+        httpMethod: "GET",
+        dataType: "html",
+        defaultLoadingText: "Loading ..."
     };
 
     window.javatmp = window.javatmp || {};
     window.javatmp.plugins = window.javatmp.plugins || {};
     window.javatmp.plugins.settings = {};
 
-    window.javatmp.plugins.init = function (options) {
-        $.extend(true, window.javatmp.plugins.settings, defaults, options);
+    var $this = window.javatmp.plugins;
+
+    $this.init = function (options) {
+        $.extend(true, $this.settings, defaults, options);
         // set default global locale for moment datetime plugin
         moment.locale(this.settings.locale);
 
@@ -168,17 +183,17 @@
         }, $.validator.messages.summernoteRequired);
 
         jQuery.validator.addMethod("validDate", function (value, element, params) {
-            return this.optional(element) || moment(value, javatmp.plugins.settings.dateFormat, true).isValid();
+            return this.optional(element) || moment(value, $this.settings.dateFormat, true).isValid();
         }, $.validator.messages.validDate);
 
         jQuery.validator.addMethod("validDateTime", function (value, element) {
-            return this.optional(element) || moment(value, javatmp.plugins.settings.dateTimeFormat, true).isValid();
+            return this.optional(element) || moment(value, $this.settings.dateTimeFormat, true).isValid();
         }, $.validator.messages.validDateTime);
 
         jQuery.validator.addMethod("dateTimeBeforeNow", function (value, element, params) {
             if (this.optional(element) || $(params).val() === "")
                 return true;
-            if (moment(value, javatmp.plugins.settings.dateTimeFormat).isBefore(moment()))
+            if (moment(value, $this.settings.dateTimeFormat).isBefore(moment()))
                 return true;
             return false;
         }, $.validator.messages.dateTimeBeforeNow);
@@ -186,7 +201,7 @@
         jQuery.validator.addMethod("dateBeforeNow", function (value, element, params) {
             if (this.optional(element) || value === "")
                 return true;
-            if (moment(value, javatmp.plugins.settings.dateFormat).isBefore(moment().set({hour: 0, minute: 0, second: 0, millisecond: 0})))
+            if (moment(value, $this.settings.dateFormat).isBefore(moment().set({hour: 0, minute: 0, second: 0, millisecond: 0})))
                 return true;
             return false;
         }, $.validator.messages.dateBeforeNow);
@@ -194,7 +209,7 @@
         jQuery.validator.addMethod("dateGreaterThan", function (value, element, params) {
             if (this.optional(element) || $(params).val() === "")
                 return true;
-            if (moment(value, javatmp.plugins.settings.dateTimeFormat).isAfter(moment($(params).val(), javatmp.plugins.settings.dateTimeFormat)))
+            if (moment(value, $this.settings.dateTimeFormat).isAfter(moment($(params).val(), $this.settings.dateTimeFormat)))
                 return true;
             return false;
         }, $.validator.messages.dateGreaterThan);
@@ -202,7 +217,7 @@
         jQuery.validator.addMethod("dateLessThan", function (value, element, params) {
             if (this.optional(element) || $(params).val() === "")
                 return true;
-            if (moment(value, javatmp.plugins.settings.dateTimeFormat).isBefore(moment($(params).val(), javatmp.plugins.settings.dateTimeFormat)))
+            if (moment(value, $this.settings.dateTimeFormat).isBefore(moment($(params).val(), $this.settings.dateTimeFormat)))
                 return true;
             return false;
         }, $.validator.messages.dateLessThan);
@@ -210,7 +225,7 @@
         jQuery.validator.addMethod("dateEqualOrGreaterThan", function (value, element, params) {
             if (this.optional(element) || $(params).val() === "")
                 return true;
-            if (moment(value, javatmp.plugins.settings.dateTimeFormat).isSameOrAfter(moment($(params).val(), javatmp.plugins.settings.dateTimeFormat)))
+            if (moment(value, $this.settings.dateTimeFormat).isSameOrAfter(moment($(params).val(), $this.settings.dateTimeFormat)))
                 return true;
             return false;
         }, $.validator.messages.dateEqualOrGreaterThan);
@@ -218,7 +233,7 @@
         jQuery.validator.addMethod("dateEqualOrLessThan", function (value, element, params) {
             if (this.optional(element) || $(params).val() === "")
                 return true;
-            if (moment(value, javatmp.plugins.settings.dateTimeFormat).isSameOrBefore(moment($(params).val(), javatmp.plugins.settings.dateTimeFormat)))
+            if (moment(value, $this.settings.dateTimeFormat).isSameOrBefore(moment($(params).val(), $this.settings.dateTimeFormat)))
                 return true;
             return false;
         }, $.validator.messages.dateEqualOrLessThan);
@@ -237,7 +252,7 @@
             var actionType = $(this).attr("actionableWrapperType") ? $(this).attr("actionableWrapperType") : "ajax";
             if (actionType === "ajax-area-in-card") {
                 var actionOutputArea = $(this).closest(".card").children(".card-body");
-                window.javatmp.plugins.bootstrapActionableWrapper(actionOutputArea)
+                $this.bootstrapActionableWrapper(actionOutputArea)
                         .BootstrapActionable("populateByLinkEvent", {
                             linkElement: $(this), linkEvent: event
                         });
@@ -246,7 +261,7 @@
 
     };
 
-    window.javatmp.plugins.inputmaskWrapperForDate = function (element, options) {
+    $this.inputmaskWrapperForDate = function (element, options) {
 
         var settings = $.extend(true, {}, {
             alias: "datetime",
@@ -260,11 +275,11 @@
         return $(element).inputmask(settings);
     };
 
-    window.javatmp.plugins.daterangepickerWrapperForDate = function (element, options) {
+    $this.daterangepickerWrapperForDate = function (element, options) {
 
         var settings = $.extend(true, {}, {
-            "opens": javatmp.settings.floatReverse,
-            startDate: moment().format(javatmp.settings.dateFormat),
+            "opens": $this.settings.floatReverse,
+            startDate: moment().format($this.settings.dateFormat),
             singleDatePicker: true,
             showDropdowns: true,
             timePicker: false,
@@ -275,21 +290,21 @@
             minDate: '01/01/1900',
             maxDate: '31/12/2099',
             locale: {
-                "direction": javatmp.settings.direction,
-                format: javatmp.settings.dateFormat
+                "direction": $this.settings.direction,
+                format: $this.settings.dateFormat
             }
         }, options);
 
         return $(element).daterangepicker(settings, function (start, end, label) {
-            var formatedDateSelected = moment(start).locale('en').format(javatmp.settings.dateFormat);
+            var formatedDateSelected = moment(start).locale('en').format($this.settings.dateFormat);
             $(element).val(formatedDateSelected).trigger("change");
         });
     };
 
-    window.javatmp.plugins.daterangepickerWrapperForDateRange = function (element, options) {
+    $this.daterangepickerWrapperForDateRange = function (element, options) {
 
         var settings = $.extend(true, {}, {
-            "opens": javatmp.settings.floatDefault,
+            "opens": $this.settings.floatDefault,
             startDate: moment().subtract(1, 'years'),
             endDate: moment(),
             minDate: '01/01/1900',
@@ -298,8 +313,8 @@
             autoApply: true,
             autoUpdateInput: false,
             locale: {
-                "direction": javatmp.settings.direction,
-                format: javatmp.settings.dateTimeSecondFormat
+                "direction": $this.settings.direction,
+                format: $this.settings.dateTimeSecondFormat
             },
             ranges: {
                 'Today': [moment().startOf('day'), moment().endOf("day")],
@@ -314,7 +329,7 @@
         return $(element).daterangepicker(settings).on('apply.daterangepicker', function (ev, picker) {
             $(element).data("start", picker.startDate);
             $(element).data("end", picker.endDate);
-            $(element).val(picker.startDate.format(javatmp.settings.dateTimeSecondFormat) + ' - ' + picker.endDate.format(javatmp.settings.dateTimeSecondFormat)).trigger("change");
+            $(element).val(picker.startDate.format($this.settings.dateTimeSecondFormat) + ' - ' + picker.endDate.format($this.settings.dateTimeSecondFormat)).trigger("change");
         }).on('cancel.daterangepicker', function (ev, picker) {
             $(element).removeData("start");
             $(element).removeData("end");
@@ -322,10 +337,10 @@
         });
     };
 
-    window.javatmp.plugins.summernoteWrapper = function (element, options) {
+    $this.summernoteWrapper = function (element, options) {
         var settings = $.extend(true, {}, {
-            direction: javatmp.settings.direction,
-            lang: javatmp.plugins.settings.locale === "ar" ? "ar-AR" : javatmp.plugins.settings.locale,
+            direction: $this.settings.direction,
+            lang: $this.settings.locale === "ar" ? "ar-AR" : $this.settings.locale,
             height: 200,
             dialogsInBody: true
         }, options);
@@ -333,12 +348,12 @@
         return $(element).summernote(settings);
     };
 
-    window.javatmp.plugins.select2Wrapper = function (element, options) {
+    $this.select2Wrapper = function (element, options) {
 
         var settings = $.extend(true, {}, {
             theme: "bootstrap",
-            dir: javatmp.settings.direction,
-            placeholder: javatmp.settings.labels['page.text.kindlySelect'],
+            dir: $this.settings.direction,
+            placeholder: $this.settings.defaultSelectPlaceholder,
             allowClear: true,
             width: '',
             containerCssClass: ':all:',
@@ -352,14 +367,14 @@
         });
     };
 
-    window.javatmp.plugins.select2WrapperForTheme = function (element, options) {
+    $this.select2WrapperForTheme = function (element, options) {
 
         function formatThemeSelection(repo) {
             if (!repo.id) {
                 return repo.text;
             }
 
-            var imagePath = javatmp.settings.contextPath + "/assets/img/themes/" + repo.id + ".png";
+            var imagePath = $this.settings.contextPath + "/assets/img/themes/" + repo.id + ".png";
             var template =
                     '    <div class="media d-flex align-items-center">' +
                     '        <img style="height: 1.5rem;" class="mr-1" src="{{imagePath}}" alt="{{themeName}}"/>' +
@@ -378,7 +393,7 @@
                 return repo.text;
             }
 
-            var imagePath = javatmp.settings.contextPath + "/assets/img/themes/" + repo.id + ".png";
+            var imagePath = $this.settings.contextPath + "/assets/img/themes/" + repo.id + ".png";
             var template =
                     '    <div class="media d-flex align-items-center">' +
                     '        <img style="height: 3rem;" class="mr-1" src="{{imagePath}}" alt="{{themeName}}"/>' +
@@ -396,8 +411,8 @@
 
         var settings = $.extend(true, {}, {
             theme: "bootstrap",
-            dir: javatmp.settings.direction,
-            placeholder: javatmp.settings.labels['page.text.kindlySelect'],
+            dir: $this.settings.direction,
+            placeholder: $this.settings.defaultSelectPlaceholder,
             allowClear: true,
             containerCssClass: ':all:',
             width: '',
@@ -413,12 +428,12 @@
         });
     };
 
-    window.javatmp.plugins.select2WrapperForCountry = function (element, options) {
+    $this.select2WrapperForCountry = function (element, options) {
 
         function formatCountry(repo) {
             if (repo.loading)
                 return repo.text;
-            var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
+            var imagePath = $this.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
             var template =
                     '    <div class="media d-flex align-items-center">' +
                     '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
@@ -438,7 +453,7 @@
                 return repo.text;
             }
 
-            var imagePath = javatmp.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
+            var imagePath = $this.settings.contextPath + "/assets/img/flags/" + repo.id.toLowerCase() + ".png";
             var template =
                     '    <div class="media d-flex align-items-center">' +
                     '        <img class="mr-1" src="{{imagePath}}" alt="{{countryText}}"/>' +
@@ -456,8 +471,8 @@
 
         var settings = $.extend(true, {}, {
             theme: "bootstrap",
-            dir: javatmp.settings.direction,
-            placeholder: javatmp.settings.labels['page.text.kindlySelect'],
+            dir: $this.settings.direction,
+            placeholder: $this.settings.defaultSelectPlaceholder,
             allowClear: true,
             width: '',
             containerCssClass: ':all:',
@@ -473,7 +488,7 @@
         });
     };
 
-    window.javatmp.plugins.mCustomScrollbarForProfilePicture = function (element, options) {
+    $this.mCustomScrollbarForProfilePicture = function (element, options) {
 
         var settings = $.extend(true, {}, {
             axis: "yx",
@@ -493,7 +508,7 @@
         return $(element).mCustomScrollbar(settings);
     };
 
-    window.javatmp.plugins.confirmAjaxAction = function (confirmTitleText, confirmMessageText, confirmActionBtnText, cancelActionBtnText,
+    $this.confirmAjaxAction = function (confirmTitleText, confirmMessageText, confirmActionBtnText, cancelActionBtnText,
             ajaxUrl, ajaxData, successCallback, errorCallback) {
         BootstrapModalWrapperFactory.createModal({
             title: confirmTitleText,
@@ -503,22 +518,23 @@
             buttons: [{
                     label: cancelActionBtnText,
                     cssClass: "btn btn-secondary",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
-                        return modalWrapper.hide();
+                    action: function (button, buttonData, originalEvent) {
+                        return this.hide();
                     }
-                }, {
+                },
+                {
                     label: confirmActionBtnText,
                     cssClass: "btn btn-primary",
-                    action: function (modalWrapper, button, buttonData, originalEvent) {
-                        modalWrapper.hide();
-                        javatmp.plugins.ajaxAction(ajaxUrl, ajaxData, successCallback, errorCallback);
+                    action: function (button, buttonData, originalEvent) {
+                        this.hide();
+                        $this.ajaxAction(ajaxUrl, ajaxData, successCallback, errorCallback);
                     }
                 }
             ]
         }).show();
     };
 
-    window.javatmp.plugins.ajaxAction = function (ajaxUrl, ajaxData, successCallback, errorCallback, completeCallBack) {
+    $this.ajaxAction = function (ajaxUrl, ajaxData, successCallback, errorCallback, completeCallBack) {
         var m = BootstrapModalWrapperFactory.createModal({
             message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
             closable: false,
@@ -527,7 +543,7 @@
         });
         m.originalModal.find(".modal-dialog").css({transition: 'all 0.5s'});
         m.originalModal.on('shown.bs.modal', function (e) {
-            window.javatmp.plugins.ajaxJsonAction({
+            $this.ajaxJsonAction({
                 url: ajaxUrl,
                 data: JSON.stringify(ajaxData),
                 success: function (data) {
@@ -536,8 +552,8 @@
                     toastr.success(data.message, data.title, {
                         timeOut: 5000,
                         progressBar: true,
-                        rtl: javatmp.settings.isRTL,
-                        positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                        rtl: $this.settings.isRTL,
+                        positionClass: $this.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
                     });
                     if (successCallback && (typeof successCallback === "function")) {
                         successCallback.call(m, data);
@@ -562,7 +578,7 @@
         m.show();
     };
 
-    window.javatmp.plugins.ajaxJsonAction = function (ajaxParameters) {
+    $this.ajaxJsonAction = function (ajaxParameters) {
         $.ajax({
             type: "POST",
             url: ajaxParameters.url,
@@ -575,21 +591,17 @@
                 }
             },
             error: function (data) {
-                var errorObj = {
-                    message: javatmp.settings.labels["dialog.error.message"],
-                    title: javatmp.settings.labels["dialog.error.title"]
-                };
                 try {
-                    errorObj = $.parseJSON(data.responseText);
-                    errorObj.title = (errorObj.title ? errorObj.title : javatmp.settings.labels["dialog.error.title"]);
-                    errorObj.message = (errorObj.message ? errorObj.message : javatmp.settings.labels["dialog.error.message"]);
+                    var errorObj = $.parseJSON(data.responseText);
+                    errorObj.title = (errorObj.title ? errorObj.title : $this.settings.defaultAjaxErrorTitle);
+                    errorObj.message = (errorObj.message ? errorObj.message : $this.settings.defaultAjaxErrorMessage);
                 } catch (error) {
                 }
                 toastr.error(errorObj.message, errorObj.title, {
                     timeOut: 3000,
                     progressBar: true,
-                    rtl: javatmp.settings.isRTL,
-                    positionClass: javatmp.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
+                    rtl: $this.settings.isRTL,
+                    positionClass: $this.settings.isRTL === true ? "toast-top-left" : "toast-top-right"
                 });
                 if (ajaxParameters.error && (typeof ajaxParameters.error === "function")) {
                     ajaxParameters.error.call(null, errorObj);
@@ -603,7 +615,7 @@
         });
     };
 
-    window.javatmp.plugins.contextMenuWrapper = function (element, selector, $contextMenu, beforeShow) {
+    $this.contextMenuWrapper = function (element, selector, $contextMenu) {
         function getMenuPosition($contextMenu, mouse, direction, scrollDir, isRTL) {
             var win = $(window)[direction]();
             var scroll = $(window)[scrollDir]();
@@ -624,10 +636,6 @@
             if (e.ctrlKey)
                 return;
 
-            if ($.isFunction(beforeShow)) {
-                beforeShow.call(this, e);
-            }
-
             $contextMenu.on("click", "a", function () {
                 $contextMenu.hide();
             });
@@ -638,15 +646,15 @@
 
             $contextMenu.css({
                 display: "block",
-                left: getMenuPosition($contextMenu, e.clientX, 'width', 'scrollLeft', javatmp.settings.isRTL),
+                left: getMenuPosition($contextMenu, e.clientX, 'width', 'scrollLeft', $this.settings.isRTL),
                 right: "auto",
-                top: getMenuPosition($contextMenu, e.clientY, 'height', 'scrollTop', javatmp.settings.isRTL)
+                top: getMenuPosition($contextMenu, e.clientY, 'height', 'scrollTop', $this.settings.isRTL)
             });
             return false;
         });
     };
 
-    window.javatmp.plugins.populateForm = function (frm, data) {
+    $this.populateForm = function (frm, data) {
         $.each(data, function (key, value) {
             var $ctrl = $('[name=' + key + ']', frm);
             if ($ctrl.is('select')) {
@@ -681,7 +689,7 @@
         });
     };
 
-    window.javatmp.plugins.DataTableColFilterEventWrapper = function (dataTableReference, colIndex, escape) {
+    $this.DataTableColFilterEventWrapper = function (dataTableReference, colIndex, escape) {
         return function (event) {
             var $this = $(this);
             javatmp.util.waitForFinalEvent(function () {
@@ -690,7 +698,7 @@
             }, 200, "@table-filter");
         };
     };
-    window.javatmp.plugins.DataTableColRenderWrapper = function (forceWidth, mapperObject) {
+    $this.DataTableColRenderWrapper = function (forceWidth, mapperObject) {
         return function (data, type, row, meta) {
 //                    console.log(meta);
 //                    console.log(meta.settings);
@@ -698,7 +706,7 @@
             if (type === "sort" || type === 'type' || type === 'filter') {
                 return data;
             } else if (type === "display" && meta.settings.aoColumns[meta.col].type === "date") {
-                return "<p class='m-0 p-0 text-truncate' style='width: " + forceWidth + ";'>" + moment(data, javatmp.settings.networkDateFormat).format(javatmp.settings.dateFormat) + "</p>";
+                return "<p class='m-0 p-0 text-truncate' style='width: " + forceWidth + ";'>" + moment(data, $this.settings.networkDateFormat).format($this.settings.dateFormat) + "</p>";
             } else if (type === "display") {
                 return "<p class='m-0 p-0 text-truncate' style='width: " + forceWidth + ";'>" + (mapperObject ? mapperObject[data] : data) + "</p>";
             } else {
@@ -716,15 +724,15 @@
      }
      */
 
-    window.javatmp.plugins.bootstrapActionableWrapper = function (element, options) {
+    $this.bootstrapActionableWrapper = function (element, options) {
 
         var settings = $.extend(true, {}, {
-            containerRemoveEventName: javatmp.settings.javaTmpContainerRemoveEventName,
-            containerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady,
-            ajaxMethodType: javatmp.settings.httpMethod,
+            containerRemoveEventName: $this.settings.javaTmpContainerRemoveEventName,
+            containerReadyEventName: $this.settings.javaTmpAjaxContainerReady,
+            ajaxMethodType: $this.settings.httpMethod,
             ajaxCache: true,
-            ajaxDefaultData: javatmp.settings.defaultPassData,
-            ajaxDataType: javatmp.settings.dataType,
+            ajaxDefaultData: $this.settings.defaultPassData,
+            ajaxDataType: $this.settings.dataType,
             ajaxBeforeSend: function (jqXHR, settings) {
                 var outputDiv = this.outputElement;
                 var outputElementId = $(outputDiv).attr('id');
@@ -742,7 +750,7 @@
         return $(element).BootstrapActionable(settings);
     };
 
-    window.javatmp.plugins.template = function (element, options) {
+    $this.template = function (element, options) {
 
         var settings = $.extend(true, {}, {
 
@@ -751,10 +759,10 @@
         return $(element).wrappedPlugin(settings);
     };
 
-    window.javatmp.plugins.blockWrapper = function (element, options) {
+    $this.blockWrapper = function (element, options) {
 
         var settings = $.extend(true, {}, {
-            message: javatmp.settings.labels["global.loadingText"],
+            message: $this.settings.defaultLoadingText,
             overlayCSS: {
                 backgroundColor: '#000',
                 opacity: 0.7
@@ -764,13 +772,13 @@
         return $(element).block(settings);
     };
 
-    window.javatmp.plugins.echartCustomTooltipFormatter = function (params) {
+    $this.echartCustomTooltipFormatter = function (params) {
         var retStr = "";
         for (var i = 0; i < params.length; i++) {
             retStr += [
                 '<span>' + params[i].axisValue + '</span>',
                 "<br/>",
-                "<span style='display:inline-block;width:10px;height:10px;border-radius:50%;background-color:" + params[i].color + ";margin-" + javatmp.settings.floatReverse + ":5px;'></span><span>" + params[i].seriesName + ':' + params[i].data + "</span>"
+                "<span style='display:inline-block;width:10px;height:10px;border-radius:50%;background-color:" + params[i].color + ";margin-" + $this.settings.floatReverse + ":5px;'></span><span>" + params[i].seriesName + ':' + params[i].data + "</span>"
             ].join('');
         }
         return retStr;
