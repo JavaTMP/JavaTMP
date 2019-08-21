@@ -16,6 +16,9 @@ The template layout options for javatmp are:
 *   Longer sidebar layout beside navbar using `longer-sidebar` class on body element.
 *   Auto hide/show of sidebar when user toggle it using navbar toggler's button on large and desktop device screens.
 
+### `HTML` element
+To apply Default JavaTMP Admin Template layout it should has a class name `.javatmp-default-admin-layout`.
+
 ### `head` element
 `head` element contains `title`, `meta` tags, and references for external CSS files.
 

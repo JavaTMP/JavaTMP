@@ -2,7 +2,7 @@
 title: Custom JavaTMP Bootstrap Themes and Skins
 ---
 # {{ page.title }}
-The Main JavaTMP SASS file `./web/assets/src/sass/main.scss` included 
+The Main JavaTMP SASS file `./web/assets/src/sass/main.scss` includes
 `./node_modules/bootstrap/scss/bootstrap` to apply its style to Bootstrap and all plugins and layouts.
 However, Because we use `SASS` as a css preprocessor in our templates and to support same Bootstrap style and theme for own parts
 and plugins of the JavaTMP templates we should use one of these options:
