@@ -213,7 +213,7 @@ The Gulp's task `generate-dist` task makes the following things:
 
 So, The main output of `generate-dist` task is folder `./web/assets/dist` which contains the following:
 ```
-./JavaTMP/JavaTMP-Static-Ajax/web/assets/dist
+./web/assets/dist
 +---css
     +---font-family-en.min.css
     +---javatmp-plugins-all.min.css
