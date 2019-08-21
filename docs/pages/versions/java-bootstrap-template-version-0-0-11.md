@@ -3,6 +3,10 @@ title: Java Bootstrap Template Version 0.0.11 (Current Development Version)
 ---
 # {{ page.title }}
 
+## c01f4be on Aug 21, 2019, 9:18 PM GMT+4
+- Update documentation of `html.javatmp-default-admin-layout` class and landing page starter template.
+- Prepare this release 0.0.11 to be published soon.
+
 ## 2a96f3b on Aug 19, 2019, 8:10 PM GMT+4
 - Move page `pages/custom-components/layout-options.html` to `/pages/layout-options.html` and update index.html and index-rtl.html
 - Move page `pages/custom-pages/components-index.html` to /pages/components-index.html` and update index.html
