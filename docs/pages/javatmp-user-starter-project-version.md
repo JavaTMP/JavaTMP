@@ -379,7 +379,7 @@ The main important JSP page in our dynamic Java Bootstrap template is `index.jsp
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
-<html lang="${labels["global.language"]}" dir="${labels["global.direction"]}">
+<html lang="${labels["global.language"]}" dir="${labels["global.direction"]}" class="javatmp-default-admin-layout">
     <head>
         <title>${labels["global.page.title"]}</title>
         <!-- Required meta tags -->
@@ -446,7 +446,7 @@ The starter Java Bootstrap default English LTR page that use the above generated
 ```jsp
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
-<html lang="en" dir="ltr">
+<html lang="en" dir="ltr" class="javatmp-default-admin-layout">
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
@@ -471,7 +471,7 @@ And the starter Java Bootstrap default English RTL page that use the above gener
 ```jsp
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
-<html lang="en" dir="rtl">
+<html lang="en" dir="rtl" class="javatmp-default-admin-layout">
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
@@ -496,7 +496,7 @@ And the starter Java Bootstrap default Arabic RTL page that use the above genera
 ```jsp
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" class="javatmp-default-admin-layout">
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">

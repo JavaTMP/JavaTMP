@@ -132,7 +132,7 @@ It is a web application context root folder contains everything related to stati
     in gulp's task `generate-dist` and based on the following starter HTML LTR page:
 ```HTML
     <!doctype html>
-    <html lang="en" dir="ltr">
+    <html lang="en" dir="ltr" class="javatmp-default-admin-layout">
         <head>
             <link href="assets/dist/css/javatmp-plugins-all.min.css" rel="stylesheet" type="text/css"/>
             <link href='assets/dist/css/javatmp-plugins-print-all.min.css' rel='stylesheet' media='print' />
@@ -152,7 +152,7 @@ It is a web application context root folder contains everything related to stati
     in gulp's task `generate-dist` and based on the following starter HTML RTL page:
 ```HTML
     <!doctype html>
-    <html lang="en" dir="rtl">
+    <html lang="en" dir="rtl" class="javatmp-default-admin-layout">
         <head>
             <link href="assets/dist/css/javatmp-plugins-all.min.css" rel="stylesheet" type="text/css"/>
             <link href='assets/dist/css/javatmp-plugins-print-all.min.css' rel='stylesheet' media='print' />
