@@ -34,56 +34,12 @@ so we add .gitignore file to exclude mainly `./node_modules`
 and `./nbproject/private/` folders from versioning. 
 
 ### `./JavaTMP/JavaTMP-Static-Ajax/.gulpfile.js` file
-This is a gulp's configuration file. `Gulp` is a toolkit for automating painful
-or time-consuming tasks in your development workflow. We use gulp to automate
-our building process like generating JS/CSS. 
-
-The main important gulp tasks are `generate-dist` which copy resources
-from node_module folder and combine them after compile and generate theme
-and template Javascript and CSS files and folders.
-
-The gulp's task `generate-dist` depends on task `copy-components` described in details in page
+This is a gulp's configuration file. The main important gulp tasks are `generate-dist` which copy resources
+from node_module folder and combine them after compiling and minimizing them and put theme in appropriate folders in `./web/assets/dist/*`.
+The gulp and its configuration file .gulpfile.js is described in details in page
 [Managing Front-end dependencies Using Node.js And Gulp](/pages/manage-front-end-dependencies-using-node-js-and-gulp "Manage Front-end dependencies Using Node.js And Gulp")
 which copy all components defined in config object from `./node_modules` to `./web/components`
 
-The gulp's task `generate-dist` depends too on `src` object that define wanted resources and plugins to be combined together,
-kindly refer to `src` object in gulpfile.js for more information about it.
-
-The Gulp's task `generate-dist` task makes the following things:
-1.  Compile the SASS Bootstrap themes found in `./web/assets/src/sass/themes/javatmp-*.scss` and generate base template CSS file and move them to `./web/assets/dist/css` folder
-2.  Concatenate all CSS files found in above `src.css` in order and put the concatenated file in `./web/assets/dist/css/javatmp-plugins-all.min.css`
-3.  Concatenate all CSS files found in above `src.cssForPrint` in order and put the concatenated file in `./web/assets/dist/css/javatmp-plugins-print-all.min.css`
-4.  Generate and uglify main JavaTMP template Javascript file `javatmp.min.js` in `./web/assets/src/js-src/javatmp.js` to `./web/assets/dist/js/javatmp.min.js`
-5.  Concatenate all JS files found in above `src.js` in order and put the concatenated file `./web/assets/dist/js/javatmp-plugins-all.min.js`
-6.  Compile and generate a minification version of `src.fontFamilyFiles` and put the css file in `./web/assets/dist/css`, in above case `./web/assets/dist/css/font-family-en.min.css`
-7.  Copy `src.img` files needed by plugins to `./web/assets/dist/img` folder
-8.  Copy binary fonts files needed by plugins and template from `src.fonts` to `./web/assets/dist/fonts folder`
-9.  finally, remove `./web/components` folder as all front-end resources became combined and concatenated in TWO BIG LARGE MAIN files `javatmp-plugins-all.min.css` and `javatmp-plugins-all.min.js`
-
-So, The main output of `generate-dist` task is folder `./web/assets/dist` which contains the following:
-```
-./JavaTMP/JavaTMP-Static-Ajax/web/assets/dist
-+---css
-    +---font-family-en.min.css
-    +---javatmp-plugins-all.min.css
-    +---javatmp-plugins-print-all.min.css
-    +---javatmp-*.min.css (For each SASS theme files like javatmp-default.min.css)
-    +---javatmp-*-rtl.min.css (For each SASS theme files like javatmp-default-rtl.min.css)
-+---fonts
-    +---context-menu-icons.eot
-    +---fa-brands-400.eot
-    +---open-sans-v15-latin-300.eot
-    +---slick.eot
-    +---summernote.eot
-    +---...
-+---img
-    +---ajax-loader.gif
-    +---mCSB_buttons.png
-+---js
-    +---javatmp-plugins-all-locale-*.min.js (For each Locale key defines `src.localeJS` object like `src.localeJS.en`)
-    +---javatmp-plugins-all.min.js
-    +---javatmp.min.js
-```
 ### `./JavaTMP/JavaTMP-Static-Ajax/.eslintrc` file
 
 ESLint plugin configuration file which contains directive and parameters to gulp-eslint gulp plugin. the following external links provide more information about the those configuration: [Configuring ESLint](https://eslint.org/docs/user-guide/configuring "Configuring ESLint"), [A sample .eslintrc file](https://gist.github.com/adrianhall/70d63d225e536b4563b2 "A sample .eslintrc file"), [A starter .eslintrc file](https://gist.github.com/cletusw/e01a85e399ab563b1236 "A starter .eslintrc file").
