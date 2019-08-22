@@ -8,18 +8,6 @@
     background: $javatmp-navbar-bg;
     transition: $javatmp-transition;
 
-    body.longer-sidebar.sidebar-active & {
-        left: 0;
-    }
-    body.longer-sidebar.sidebar-active.mouse-auto-show & {
-        left: 0;
-    }
-    @media (min-width: 768px) {
-        body.longer-sidebar.sidebar-active & {
-            left: $javatmp-sidebar-width;
-
-        }
-    }
     .navbar-brand {
         color: $javatmp-navbar-brand-color;
     }
@@ -50,7 +38,18 @@
         }
     }
 }
+body.longer-sidebar.sidebar-active .main-javatmp-navbar {
+    left: 0;
+}
+body.longer-sidebar.sidebar-active.mouse-auto-show .main-javatmp-navbar {
+    left: 0;
+}
+@media (min-width: 768px) {
+    body.longer-sidebar.sidebar-active .main-javatmp-navbar {
+        left: $javatmp-sidebar-width;
 
+    }
+}
 // v0.0.3: Added to support for navbar bg and color using theme colors
 .main-javatmp-navbar {
     @each $color, $value in $theme-colors {
