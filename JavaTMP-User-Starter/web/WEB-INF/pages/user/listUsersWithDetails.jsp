@@ -428,12 +428,10 @@
             $.fn.dataTable.ext.errMode = 'none';
             var table = userTableElement.DataTable({
                 // https://datatables.net/reference/option/dom
-                dom: "<'row'>" +
+                "pagingType": "full",
+                dom: "<'row'<'col-sm-12'i>>" +
                         "<'row'<'col-sm-12'tr>>" +
-                        "<'row'<'col-sm-6 col-md-2 pt-2'l><'col-sm-6 col-md-3'i><'col-sm-12 col-md-7'p>>",
-//                dom: "<'row'<'col-sm-12 p-0'tr>>" +
-//                        "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4 pt-2 text-right'l>>"
-//                ,
+                        "<'row'<'col-sm-4'l><'col-sm-8'p>>",
 //                select: true,
                 keys: true,
                 select: "single",

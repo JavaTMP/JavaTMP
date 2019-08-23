@@ -2,7 +2,7 @@
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<div class="dynamic-ajax-content grid-gutter-padding">
+<div class="dynamic-ajax-content">
     <table cellspacing="0" class="table table-condensed table-bordered table-hover" id="UsersListTableId">
         <thead>
             <tr>
@@ -89,10 +89,10 @@
                 modal.originalModal.find(".modal-body").addClass("pt-0");
                 var userTableElement = $('#UsersListTableId');
                 var table = userTableElement.DataTable({
-                    dom: "<'row'<'col-sm-12'tr>>" +
-                            "<'row'<'col-sm-12'i>>"
-                            + "<'row'<'col-sm-4'l><'col-sm-8'p>>"
-                    ,
+                    "pagingType": "full",
+                    dom: "<'row'<'col-sm-12'i>>" +
+                            "<'row'<'col-sm-12'tr>>" +
+                            "<'row'<'col-sm-4'l><'col-sm-8'p>>",
                     //                select: true,
                     keys: true,
                     select: "single",

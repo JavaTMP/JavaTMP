@@ -239,15 +239,7 @@
                 javatmp.ajax.init({
                     defaultPassData: javatmp.settings.defaultPassData
                 });
-
-                javatmp.plugins.init({
-                    locale: "${labels["global.language"]}",
-                    direction: "${labels["global.direction"]}",
-                    isRTL: ${labels['global.direction'] == 'ltr' ? 'false' : 'true'},
-                    defaultSelectPlaceholder: "${labels['page.text.kindlySelect']}",
-                    dateFormat: javatmp.settings.dateFormat,
-                    dateTimeFormat: javatmp.settings.dateTimeFormat
-                });
+                javatmp.plugins.init(defaults);
 
                 // https://www.sanwebe.com/2016/07/ajax-form-submit-examples-using-jquery
                 // https://stackoverflow.com/questions/1960240/jquery-ajax-submit-form
