@@ -307,6 +307,14 @@ gulp.task('push', gulp.series('git-add', 'git-commit', function (cb) {
     });
 }));
 
+gulp.task('push-only', gulp.series(function (cb) {
+    return git.push('origin', 'master', {args: '--tags'}, function (err) {
+        if (err)
+            throw err;
+        cb();
+    });
+}));
+
 gulp.task('release', gulp.series('update-version', 'generate-html-project', 'generate-java-project', 'push:tag', function (cb) {
     cb();
 }));
