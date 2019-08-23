@@ -35,6 +35,7 @@ var config = {
         ],
         "jquery-ui": [
             {"from": "${sourceNodeLib}/jquery-ui-dist/jquery-ui.min.css", "to": "${destComponentsLib}/jquery-ui-dist"},
+            {"from": "${sourceNodeLib}/jquery-ui-dist/jquery-ui.theme.min.css", "to": "${destComponentsLib}/jquery-ui-dist"},
             {"from": "${sourceNodeLib}/jquery-ui-dist/jquery-ui.min.js", "to": "${destComponentsLib}/jquery-ui-dist"}
 
         ],
@@ -278,6 +279,9 @@ var config = {
             {"from": "${sourceNodeLib}/jQuery-QueryBuilder/dist/i18n/query-builder.en.js", "to": "${destComponentsLib}/jQuery-QueryBuilder/dist/i18n", processJS: true, processCSS: false},
             {"from": "${sourceNodeLib}/jQuery-QueryBuilder/dist/i18n/query-builder.ar.js", "to": "${destComponentsLib}/jQuery-QueryBuilder/dist/i18n", processJS: true, processCSS: false},
             {"from": "${sourceNodeLib}/jQuery-QueryBuilder/dist/js/query-builder.standalone.min.js", "to": "${destComponentsLib}/jQuery-QueryBuilder/dist/js", processJS: false, processCSS: false}
+        ],
+        "Datatables-CellEdit": [
+            {"from": "${sourceNodeLib}/Datatables-CellEdit/js/dataTables.cellEdit.js", "to": "${destComponentsLib}/Datatables-CellEdit/js", processJS: true, processCSS: false}
         ]
     }
 };
@@ -285,6 +289,7 @@ var src = {
     "css": [
         "./web/components/font-awesome-animation/dist/font-awesome-animation.min.css",
         "./web/components/jquery-ui-dist/jquery-ui.min.css",
+        "./web/components/jquery-ui-dist/jquery-ui.theme.min.css",
         "./web/components/metismenu/dist/metisMenu.min.css",
         "./web/components/nprogress/nprogress.css",
         "./web/components/jquery.fancytree/dist/skin-bootstrap/ui.fancytree.min.css",
@@ -377,6 +382,7 @@ var src = {
         "./web/components/datatables.net-fixedcolumns-bs4/js/fixedColumns.bootstrap4.min.js",
         "./web/components/datatables.net-rowgroup/js/dataTables.rowGroup.min.js",
         "./web/components/datatables.net-rowgroup-bs4/js/rowGroup.bootstrap4.min.js",
+        "./web/components/Datatables-CellEdit/js/dataTables.cellEdit.js",
         "./web/components/echarts/dist/echarts.min.js",
         "./web/components/echarts/map/js/world.js",
         "./web/components/slick-carousel/slick/slick.min.js",
