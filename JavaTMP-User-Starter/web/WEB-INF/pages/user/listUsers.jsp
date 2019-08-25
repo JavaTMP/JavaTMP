@@ -85,19 +85,21 @@
                     </select>
                 </th>
                 <th style="width: 8rem;">
-                    <select id="userlist-country-filter" class="form-control">
-                        <c:choose>
-                            <c:when test="${fn:length(requestScope.countries) > 0}">
-                                <option value="">All Countries</option>
-                                <c:forEach items="${requestScope.countries}" var="country">
-                                    <option value="${country.countrytranslationPK.countryId}">${country.countryName}</option>
-                                </c:forEach>
-                            </c:when>
-                            <c:otherwise>
-                                <option value="-1">${labels['page.text.noRecordFound']}</option>
-                            </c:otherwise>
-                        </c:choose>
-                    </select>
+                    <p class="m-0 p-0" style="width: 10rem;">
+                        <select id="userlist-country-filter" class="form-control">
+                            <c:choose>
+                                <c:when test="${fn:length(requestScope.countries) > 0}">
+                                    <option value="">All Countries</option>
+                                    <c:forEach items="${requestScope.countries}" var="country">
+                                        <option value="${country.countrytranslationPK.countryId}">${country.countryName}</option>
+                                    </c:forEach>
+                                </c:when>
+                                <c:otherwise>
+                                    <option value="-1">${labels['page.text.noRecordFound']}</option>
+                                </c:otherwise>
+                            </c:choose>
+                        </select>
+                    </p>
                 </th>
                 <th style="width: 10rem;">
                     <select id="userlist-language-filter" name="lang" class="form-control">
@@ -265,27 +267,10 @@
             disabled();
 
             $.fn.dataTable.ext.errMode = 'none';
-            var table = userTableElement.DataTable({
-                // https://datatables.net/reference/option/dom
-                "pagingType": "full",
-                dom: "<'row'<'col-sm-12'i>>" +
-                        "<'row'<'col-sm-12'tr>>" +
-                        "<'row'<'col-sm-4'l><'col-sm-8'p>>",
-//                dom: "<'row'<'col-sm-12 p-0'tr>>" +
-//                        "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4 pt-2 text-right'l>>"
-//                ,
-//                select: true,
-                keys: true,
-                select: "single",
-                scrollY: 250,
-                scrollX: true,
-                "autoWidth": false,
-                scrollCollapse: true,
-                "searching": true,
-                searchDelay: 500,
-                orderCellsTop: true, // important to for two row header with filteration below header column names.
-                "processing": true,
-                "serverSide": true,
+            var table = javatmp.plugins.DataTableAjaxWrapper(userTableElement, {
+                "ajax": {
+                    "url": javatmp.settings.contextPath + "/user/ListUsersController"
+                },
                 "rowCallback": function (row, data, index) {
                     // replace the contents of the first column (rowid) with an edit link
                     $(row).attr("data-row-id", data.id);
@@ -331,21 +316,6 @@
                             api.column(12).search(val ? val : '', false, false).draw();
                         }, 200, "@userlist-main-table-filter");
                     });
-                },
-                "ajax": {
-                    "type": "POST",
-                    "url": javatmp.settings.contextPath + "/user/ListUsersController",
-                    dataType: "json",
-                    contentType: "application/json; charset=UTF-8",
-                    "data": function (currentDate) {
-                        currentDate._ajaxGlobalBlockUI = false; // window blocked until data return
-                        return JSON.stringify(currentDate);
-                    },
-                    "dataSrc": function (json) {
-                        json["recordsTotal"] = json.data.recordsTotal;
-                        json["recordsFiltered"] = json.data.recordsFiltered;
-                        return json.data.data;
-                    }
                 },
                 columns: [
                     {data: 'id',

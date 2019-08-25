@@ -750,6 +750,49 @@
         return $(element).BootstrapActionable(settings);
     };
 
+    $this.DataTableAjaxWrapper = function (element, options) {
+
+        var settings = $.extend(true, {}, {
+// https://datatables.net/reference/option/dom
+            "pagingType": "full",
+            dom: "<'row'<'col-sm-12'i>>" +
+                    "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-4'l><'col-sm-8'p>>",
+//                dom: "<'row'<'col-sm-12 p-0'tr>>" +
+//                        "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4 pt-2 text-right'l>>"
+//                ,
+//                select: true,
+            keys: true,
+            select: "single",
+            scrollY: 250,
+            scrollX: true,
+            "autoWidth": false,
+            scrollCollapse: true,
+            "searching": true,
+            searchDelay: 500,
+            orderCellsTop: true, // important to for two row header with filteration below header column names.
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                "type": "POST",
+                "url": null,
+                dataType: "json",
+                contentType: "application/json; charset=UTF-8",
+                "data": function (currentData) {
+                    currentData._ajaxGlobalBlockUI = false; // window blocked until data return
+                    return JSON.stringify(currentData);
+                },
+                "dataSrc": function (json) {
+                    json["recordsTotal"] = json.data.recordsTotal;
+                    json["recordsFiltered"] = json.data.recordsFiltered;
+                    return json.data.data;
+                }
+            }
+        }, options);
+
+        return $(element).DataTable(settings);
+    };
+
     $this.template = function (element, options) {
 
         var settings = $.extend(true, {}, {
