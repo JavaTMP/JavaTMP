@@ -272,6 +272,8 @@
                 },
                 "rowCallback": function (row, data, displayNum, displayIndex, dataIndex) {
                     // replace the contents of the first column (rowid) with an edit link
+                    var api = this.api();
+                    console.log(api);
                     $(row).attr("data-row-id", data.id);
                 },
                 "drawCallback": function (settings) {
