@@ -266,12 +266,11 @@
             }
             disabled();
 
-            $.fn.dataTable.ext.errMode = 'none';
             var table = javatmp.plugins.DataTableAjaxWrapper(userTableElement, {
                 "ajax": {
                     "url": javatmp.settings.contextPath + "/user/ListUsersController"
                 },
-                "rowCallback": function (row, data, index) {
+                "rowCallback": function (row, data, displayNum, displayIndex, dataIndex) {
                     // replace the contents of the first column (rowid) with an edit link
                     $(row).attr("data-row-id", data.id);
                 },
