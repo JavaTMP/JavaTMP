@@ -1,16 +1,17 @@
 package com.javatmp.util;
 
-import com.javatmp.module.timezone.TimezoneService;
+import com.javatmp.module.accounting.AccountService;
 import com.javatmp.module.activity.ActivityService;
 import com.javatmp.module.content.ContentService;
-import com.javatmp.module.theme.ThemeService;
-import com.javatmp.module.language.LanguageService;
 import com.javatmp.module.country.CountryService;
-import com.javatmp.module.user.UserService;
-import com.javatmp.module.stats.UserStatsService;
 import com.javatmp.module.dms.DocumentService;
 import com.javatmp.module.event.EventService;
+import com.javatmp.module.language.LanguageService;
 import com.javatmp.module.message.MessageService;
+import com.javatmp.module.stats.UserStatsService;
+import com.javatmp.module.theme.ThemeService;
+import com.javatmp.module.timezone.TimezoneService;
+import com.javatmp.module.user.UserService;
 import java.util.Date;
 import java.util.logging.Logger;
 
@@ -29,6 +30,7 @@ public class ServicesFactory {
     private final EventService eventService;
     private final MessageService messageService;
     private final ContentService contentService;
+    private final AccountService accountService;
 
     public ServicesFactory(String persistentUnitName) {
         logger.info("*** Start ServicesFactory Constructor @ [" + new Date() + "]");
@@ -44,6 +46,7 @@ public class ServicesFactory {
         this.eventService = new EventService(getJpaDaoHelper());
         this.messageService = new MessageService(this.jpaDaoHelper, userService);
         this.contentService = new ContentService(this.jpaDaoHelper);
+        this.accountService = new AccountService(this.jpaDaoHelper);
         this.logger.info("*** End ServicesFactory Constructor @ [" + new Date() + "]");
     }
 
@@ -127,5 +130,12 @@ public class ServicesFactory {
      */
     public JpaDaoHelper getJpaDaoHelper() {
         return jpaDaoHelper;
+    }
+
+    /**
+     * @return the accountService
+     */
+    public AccountService getAccountService() {
+        return accountService;
     }
 }

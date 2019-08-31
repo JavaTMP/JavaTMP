@@ -213,7 +213,7 @@ public class MvcHelper {
     }
 
     public static void sendMessageAsJson(HttpServletResponse response, ResponseMessage responseMessage) throws IOException {
-        String json = gson.toJson(responseMessage);
+        String json = getGson().toJson(responseMessage);
 //        logger.info("response [" + json + "]");
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
@@ -221,11 +221,11 @@ public class MvcHelper {
     }
 
     public static <T> T readObjectFromRequest(HttpServletRequest request, T object) throws IOException {
-        return (T) gson.fromJson(request.getReader(), object.getClass());
+        return (T) getGson().fromJson(request.getReader(), object.getClass());
     }
 
     public static Object readObjectFromRequest(HttpServletRequest request, Class clz) throws IOException {
-        return gson.fromJson(request.getReader(), clz);
+        return getGson().fromJson(request.getReader(), clz);
     }
 
     public static Document readDocumentFromRequest(HttpServletRequest request, String partName) throws IOException, ServletException {
@@ -304,6 +304,13 @@ public class MvcHelper {
         }
 
         return fileUploading;
+    }
+
+    /**
+     * @return the gson
+     */
+    public static Gson getGson() {
+        return gson;
     }
 
 }

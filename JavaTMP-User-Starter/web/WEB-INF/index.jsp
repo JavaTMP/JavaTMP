@@ -278,6 +278,83 @@
                             </li>
                             <li>
                                 <a class="has-arrow" href="#">
+                                    <i class="far fa-lg fa-fw fa-lightbulb"></i>
+                                    Accounting Management
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a class="has-arrow" href="#">
+                                            <i class="far fa-lg fa-fw fa-chart-bar"></i>
+                                            Accounts
+                                        </a>
+                                        <ul>
+                                            <li>
+                                                <a href="${pageContext.request.contextPath}/accounting/chartOfAccounts">
+                                                    Chart Of Accounts
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="${pageContext.request.contextPath}/accounting/AccountLedger">
+                                                    Account Ledger
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="${pageContext.request.contextPath}/accounting/GeneralLedger">
+                                                    General Ledger
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a class="has-arrow" href="#">
+                                            <i class="far fa-lg fa-fw fa-chart-bar"></i>
+                                            Transactions
+                                        </a>
+                                        <ul>
+                                            <li>
+                                                <a href="${pageContext.request.contextPath}/accounting/CreateTransaction">
+                                                    Create Transaction
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="${pageContext.request.contextPath}/accounting/listTransactions">
+                                                    List Transactions
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="${pageContext.request.contextPath}/pages/accounting/general-ledger-entries">
+                                                    Transaction Entries
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a class="has-arrow" href="#">
+                                            <i class="far fa-lg fa-fw fa-chart-bar"></i>
+                                            Reports
+                                        </a>
+                                        <ul>
+                                            <li>
+                                                <a href="${pageContext.request.contextPath}/accounting/ViewTrialBalance">
+                                                    Trail Balance
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="${pageContext.request.contextPath}/accounting/ViewBalanceSheet">
+                                                    Balance Sheet
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="${pageContext.request.contextPath}/accounting/ViewProfitLossIncome">
+                                                    Income Statement
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a class="has-arrow" href="#">
                                     <i class="fa fa-lg fa-fw fa-cogs"></i>
                                     ${labels['sidebar.menuItem.system']}
                                 </a>
