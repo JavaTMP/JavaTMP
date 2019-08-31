@@ -1,4 +1,4 @@
-
+DROP TABLE IF EXISTS transactionEntry;
 DROP TABLE IF EXISTS accountTransaction;
 
 DROP TABLE IF EXISTS moduleType;
@@ -9,8 +9,6 @@ DROP TABLE IF EXISTS accountGroup;
 DROP TABLE IF EXISTS accountType;
 DROP TABLE IF EXISTS `transaction`;
 DROP TABLE IF EXISTS voucherType;
-
-DROP VIEW IF EXISTS transactionEntry;
 
 CREATE TABLE accountType (
     id int(1) UNSIGNED not null,
@@ -189,7 +187,7 @@ CREATE TABLE voucherType (
 
 INSERT INTO voucherType (id, `name`, description, status, `creationDate`) VALUES (1, 'Journal Voucher', 'Journal Voucher', 1, DEFAULT);
 
-CREATE TABLE transaction (
+CREATE TABLE `transaction` (
     id BIGINT UNSIGNED not null AUTO_INCREMENT,
     code varchar(1024),
     voucherTypeId int not null,
@@ -214,7 +212,7 @@ CREATE TABLE accountTransaction (
     status TINYINT,
     amount DECIMAL(33,8),
     CONSTRAINT acctTrans_id_pk PRIMARY KEY (id),
-    CONSTRAINT acctTrans_tranId_fk FOREIGN KEY (transactionId) REFERENCES transaction (id),
+    CONSTRAINT acctTrans_tranId_fk FOREIGN KEY (transactionId) REFERENCES `transaction` (id),
     CONSTRAINT acctTrans_acctId_fk FOREIGN KEY (accountId) REFERENCES account (id),
     CONSTRAINT acctTrans_moduleId_fk FOREIGN KEY (moduleId) REFERENCES `module` (id),
     CONSTRAINT acctTrans_moduleTypeId_fk FOREIGN KEY (moduleTypeId) REFERENCES moduleType (id)
