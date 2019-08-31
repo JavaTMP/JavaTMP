@@ -130,27 +130,27 @@
             modal.addButton({
                 label: "${labels['global.cancel']}",
                 cssClass: "btn btn-danger mr-auto",
-                action: function (modalWrapper, button, buttonData, originalEvent) {
-                    return modalWrapper.hide();
+                action: function (button, buttonData, originalEvent) {
+                    return this.hide();
                 }
             });
             modal.addButton({
                 label: "Create New Account",
                 cssClass: "btn btn-primary",
-                action: function (modalWrapper, button, buttonData, originalEvent) {
+                action: function (button, buttonData, originalEvent) {
                     form.trigger("submit");
                 }
             });
             var callbackData = {success: false, cancel: true};
             modal.originalModal.on('hidden.bs.modal', function (e) {
                 // here we run passing function name as a remote callback
-
-                if ($.isFunction(modal.options.localData.callback)) {
-                    modal.options.localData.callback.call(null, callbackData);
-                } else if ($.type(modal.options.localData.callback) === "string") {
-                    javatmp.util.executeFunctionByName(modal.options.localData.callback, window, callbackData);
-                }
-
+                javatmp.util.waitForFinalEvent(function () {
+                    if ($.isFunction(modal.options.localData.callback)) {
+                        modal.options.localData.callback.apply(callbackData, [callbackData]);
+                    } else if ($.type(modal.options.localData.callback) === "string") {
+                        javatmp.util.executeFunctionByName(modal.options.localData.callback, window, callbackData);
+                    }
+                }, 100, "@addNewAccountPopup");
             });
             modal.setOnDestroy(function (modalInstance) {
                 BootstrapModalWrapperFactory.createModal({
@@ -162,17 +162,17 @@
                         {
                             label: "${labels['dialog.confirmClosing.noBtn']}",
                             cssClass: "btn btn-secondary",
-                            action: function (modalWrapper, button, buttonData, originalEvent) {
-                                return modalWrapper.hide();
+                            action: function (button, buttonData, originalEvent) {
+                                return this.hide();
                             }
                         },
                         {
                             label: "${labels['dialog.confirmClosing.yesBtn']}",
                             cssClass: "btn btn-primary",
-                            action: function (modalWrapper, button, buttonData, originalEvent) {
+                            action: function (button, buttonData, originalEvent) {
                                 modalInstance.setOnDestroy(null);
                                 modalInstance.hide();
-                                return modalWrapper.hide();
+                                return this.hide();
                             }
                         }
                     ]

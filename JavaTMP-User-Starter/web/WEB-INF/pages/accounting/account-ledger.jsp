@@ -81,33 +81,13 @@
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
                 var passData = $(javatmp.settings.defaultOutputSelector).data("passData");
-                table = detailsTable.DataTable({
-                    // https://datatables.net/reference/option/dom
-                    dom: "<'row'<'col-sm-12'tr>>" +
-                            "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4 pt-2 text-right'l>>",
-                    keys: true,
-                    select: "single",
-                    scrollY: true,
-                    scrollX: true,
-                    "autoWidth": false,
-                    scrollCollapse: false,
-                    "searching": true,
-                    searchDelay: 500,
-                    orderCellsTop: true, // important to for two row header with filteration below header column names.
-                    "processing": true,
-                    "serverSide": true,
+                table = javatmp.plugins.DataTableAjaxWrapper(detailsTable, {
                     "order": [[0, "asc"], [3, "asc"]],
-//                    "order": [[0, "desc"]],
-                    "rowCallback": function (row, data, index) {
-                    },
-                    "drawCallback": function (settings) {
-                    },
                     initComplete: function (settings, json) {
                         var api = this.api();
                         // prepare id filter search field:
                     },
                     "ajax": {
-                        "type": "POST",
                         "url": javatmp.settings.contextPath + "/accounting/ListEntries",
                         dataType: "json",
                         contentType: "application/json; charset=UTF-8",
@@ -117,11 +97,6 @@
                                 currentDate.columns[5].search.value = passData.id;
                             }
                             return JSON.stringify(currentDate);
-                        },
-                        "dataSrc": function (json) {
-                            json["recordsTotal"] = json.data.recordsTotal;
-                            json["recordsFiltered"] = json.data.recordsFiltered;
-                            return json.data.data;
                         }
                     },
                     columns: [

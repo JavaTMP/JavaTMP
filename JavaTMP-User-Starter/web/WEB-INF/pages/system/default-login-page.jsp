@@ -18,7 +18,7 @@
         <!-- Include language support font -->
         <link href="${pageContext.request.contextPath}/assets/dist/css/font-family-${labels['global.language']}.min.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body class="login bg-light">
+    <body class="login bg-light pt-5">
         <div id="oneTimeOverlay" style="position: fixed;width: 100%;height: 100%;top: 0px;left: 0;right: 0;bottom: 0;background-color: rgba(255,255,255,1);z-index: 1000000;cursor: wait;">${labels['global.loadingText']}</div>
         <div class="container-fluid">
             <div class="row justify-content-center">

@@ -2,8 +2,8 @@ package com.javatmp.module.accounting;
 
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.domain.ResponseMessage;
-import com.javatmp.util.ServicesFactory;
 import com.javatmp.util.Constants;
+import com.javatmp.util.ServicesFactory;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -24,7 +24,7 @@ public class ViewTrialBalance extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String requestPage = "/WEB-INF/pages/reports/trial-balance.jsp";
+        String requestPage = "/WEB-INF/pages/accounting/reports/trial-balance.jsp";
 
         ServletContext context = request.getServletContext();
         ServicesFactory sf = (ServicesFactory) context.getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);

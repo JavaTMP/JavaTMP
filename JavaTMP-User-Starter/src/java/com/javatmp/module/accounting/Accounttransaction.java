@@ -3,7 +3,6 @@ package com.javatmp.module.accounting;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -65,9 +64,6 @@ public class Accounttransaction implements Serializable {
 
     @Transient
     private Transaction transaction;
-
-    @Transient
-    private List<Costcenter> costcenterList;
 
     @Transient
     private Module module;
@@ -282,14 +278,6 @@ public class Accounttransaction implements Serializable {
      */
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public List<Costcenter> getCostcenterList() {
-        return costcenterList;
-    }
-
-    public void setCostcenterList(List<Costcenter> costcenterList) {
-        this.costcenterList = costcenterList;
     }
 
 }

@@ -757,7 +757,7 @@
             "pagingType": "full",
             dom: "<'row'<'col-sm-12'i>>" +
                     "<'row'<'col-sm-12'tr>>" +
-                    "<'row'<'col-sm-4'l><'col-sm-8'p>>",
+                    "<'row'<'col-sm-4 mt-1'l><'col-sm-8'p>>",
 //                dom: "<'row'<'col-sm-12 p-0'tr>>" +
 //                        "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4 pt-2 text-right'l>>"
 //                ,
@@ -773,6 +773,14 @@
             orderCellsTop: true, // important to for two row header with filteration below header column names.
             "processing": true,
             "serverSide": true,
+            "rowCallback": function (row, data, index) {
+            },
+            "drawCallback": function (settings) {
+            },
+            initComplete: function (settings, json) {
+                var api = this.api();
+                // prepare id filter search field:
+            },
             "ajax": {
                 "type": "POST",
                 "url": null,

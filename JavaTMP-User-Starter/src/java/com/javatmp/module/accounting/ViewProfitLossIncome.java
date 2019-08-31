@@ -19,7 +19,7 @@ public class ViewProfitLossIncome extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String requestPage = "/WEB-INF/pages/reports/profit-loss-income.jsp";
+        String requestPage = "/WEB-INF/pages/accounting/reports/profit-loss-income.jsp";
 
         ServletContext context = request.getServletContext();
         ServicesFactory sf = (ServicesFactory) context.getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);

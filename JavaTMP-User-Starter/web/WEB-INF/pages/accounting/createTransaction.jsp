@@ -88,7 +88,6 @@
                                                 <th style="width: 12rem;" class="text-center">ModuleId</th>
                                                 <th style="width: 12rem;">Moduel List</th>
                                                 <th style="width: 12rem;">moduleTypeId</th>
-                                                <th style="width: 15rem;">Cost Centre</th>
                                                 <th style="width: 10rem;" class="text-center">Debit</th>
                                                 <th style="width: 10rem;" class="text-center">Credit</th>
                                                 <th style="width: 20rem;" class="text-center">Description</th>
@@ -148,21 +147,6 @@
                                                                 <option value="">${labels['page.text.kindlySelect']}</option>
                                                                 <c:forEach items="${requestScope.moduleTypeIds}" var="moduleTypeId">
                                                                     <option  value="${moduleTypeId.id}">${moduleTypeId.name}</option>
-                                                                </c:forEach>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <option value="">${labels['page.text.noRecordFound']}</option>
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    </select>
-                                                </td>
-                                                <td style="width: 15rem;">
-                                                    <select class="select2wrapper costCenters form-control" data-rule-required="false">
-                                                        <c:choose>
-                                                            <c:when test="${fn:length(requestScope.costcenters) > 0}">
-                                                                <option value="">${labels['page.text.kindlySelect']}</option>
-                                                                <c:forEach items="${requestScope.costcenters}" var="costCenter">
-                                                                    <option  value="${costCenter.id}">${costCenter.name}</option>
                                                                 </c:forEach>
                                                             </c:when>
                                                             <c:otherwise>
@@ -267,8 +251,6 @@
                 actualRow.find("select.moduleRefId").attr("name", "accounttransactionList[" + i + "][moduleRefId]");
                 actualRow.find("select.moduleTypeId").attr("name", "accounttransactionList[" + i + "][moduleTypeId]");
                 actualRow.find("input.description").attr("name", "accounttransactionList[" + i + "][description]");
-//                actualRow.find("select.costCenters").attr("name", "accounttransactionList[" + i + "][costcenterList][][id]");
-                actualRow.find("select.costCenters").attr("name", "accounttransactionList[" + i + "][costcenterList][0][id]");
                 javatmp.plugins.select2Wrapper(actualRow.find("select.select2wrapper"));
                 i++;
             });

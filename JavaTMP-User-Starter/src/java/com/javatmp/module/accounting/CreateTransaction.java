@@ -2,12 +2,10 @@ package com.javatmp.module.accounting;
 
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.domain.ResponseMessage;
-import com.javatmp.util.ServicesFactory;
 import com.javatmp.util.Constants;
+import com.javatmp.util.ServicesFactory;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.persistence.PersistenceException;
@@ -32,10 +30,8 @@ public class CreateTransaction extends HttpServlet {
         AccountService accountService = sf.getAccountService();
         List<Account> accounts = accountService.getLeafAccounts();
         List<Module> modules = accountService.getModules();
-        List<Costcenter> costcenters = accountService.getAllCostCenterList();
         request.setAttribute("accounts", accounts);
         request.setAttribute("modules", modules);
-        request.setAttribute("costcenters", costcenters);
         request.getRequestDispatcher(requestPage).forward(request, response);
 
     }

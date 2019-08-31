@@ -58,12 +58,6 @@ public class AccountService {
         return chartOfAccounts;
     }
 
-    public List<Costcenter> getAllCostCenterList() {
-        List<Costcenter> costcenters = new LinkedList<>();
-        costcenters = this.jpaDaoHelper.findAll(Costcenter.class);
-        return costcenters;
-    }
-
     public void persistObject(Object object) {
         EntityManager em = null;
         try {
@@ -272,14 +266,6 @@ public class AccountService {
                     }
                     System.out.println("Trans is [" + MvcHelper.deepToString(trans) + "]");
                     em.persist(trans);
-                    if (trans.getCostcenterList() != null && !trans.getCostcenterList().isEmpty()) {
-                        for (Costcenter costcenter : trans.getCostcenterList()) {
-                            if (costcenter.getId() != null) {
-                                AcctTransCostcenter acctTransCostcenter = new AcctTransCostcenter(trans.getId(), costcenter.getId());
-                                em.persist(acctTransCostcenter);
-                            }
-                        }
-                    }
                 }
             }
 

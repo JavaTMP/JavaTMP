@@ -85,30 +85,9 @@
             };
 
             var generalLedgerAccountsTable = $('#GeneralLedgerAccountsTable');
-            var table = generalLedgerAccountsTable.DataTable({
-                // https://datatables.net/reference/option/dom
-//                dom: "<'row'>" +
-//                        "<'row'<'col-sm-12'tr>>" +
-//                        "<'row'>",
-                dom: "<'row'<'col-sm-12 p-0'tr>>" +
-                        "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4 pt-2 text-right'l>>"
-                ,
-                //                select: true,
-                keys: true,
-                select: "single",
-                scrollY: false,
-                scrollX: false,
-                "autoWidth": false,
-                scrollCollapse: true,
-                "searching": true,
-                searchDelay: 500,
-                orderCellsTop: true, // important to for two row header with filteration below header column names.
-                "processing": true,
-                "serverSide": true,
-                "ordering": false,
+            var table = javatmp.plugins.DataTableAjaxWrapper(generalLedgerAccountsTable, {
                 "order": [[1, 'asc']],
-                "pageLength": 1000000,
-                fixedColumns: false,
+                "pageLength": 100,
                 "rowCallback": function (row, data, index) {
                     $(row).attr("data-row-id", data.id);
                 },
@@ -120,19 +99,7 @@
                     // prepare id filter search field:
                 },
                 "ajax": {
-                    "type": "POST",
-                    "url": javatmp.settings.contextPath + "/accounting/GeneralLedger",
-                    dataType: "json",
-                    contentType: "application/json; charset=UTF-8",
-                    "data": function (currentDate) {
-                        currentDate._ajaxGlobalBlockUI = false; // window blocked until data return
-                        return JSON.stringify(currentDate);
-                    },
-                    "dataSrc": function (json) {
-                        json["recordsTotal"] = json.data.recordsTotal;
-                        json["recordsFiltered"] = json.data.recordsFiltered;
-                        return json.data.data;
-                    }
+                    "url": javatmp.settings.contextPath + "/accounting/GeneralLedger"
                 },
                 columns: [
                     {
@@ -179,49 +146,14 @@
 
             function generateDetailTable(d, transDivId) {
                 var detailsTable = $("#detail-table" + transDivId);
-                var table = detailsTable.DataTable({
-                    // https://datatables.net/reference/option/dom
-//                    dom: "<'row'>" +
-//                            "<'row'<'col-sm-12'tr>>" +
-//                            "<'row'>",
-                    dom: "<'row'<'col-sm-12 p-0'tr>>" +
-                            "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4 pt-2 text-right'l>>"
-                    ,
-                    //                select: true,
-                    keys: true,
-                    select: "single",
-                    scrollY: true,
-                    scrollX: true,
-                    "autoWidth": false,
-                    scrollCollapse: false,
-                    "searching": true,
-                    searchDelay: 500,
-                    orderCellsTop: true, // important to for two row header with filteration below header column names.
-                    "processing": true,
-                    "serverSide": true,
+                var table = javatmp.plugins.DataTableAjaxWrapper(detailsTable, {
                     "order": [[0, "asc"], [3, "asc"]],
-                    "rowCallback": function (row, data, index) {
-                    },
-                    "drawCallback": function (settings) {
-                    },
-                    initComplete: function (settings, json) {
-                        var api = this.api();
-                        // prepare id filter search field:
-                    },
                     "ajax": {
-                        "type": "POST",
                         "url": javatmp.settings.contextPath + "/accounting/ListEntries",
-                        dataType: "json",
-                        contentType: "application/json; charset=UTF-8",
                         "data": function (currentDate) {
                             currentDate._ajaxGlobalBlockUI = false; // window blocked until data return
                             currentDate.columns[5].search.value = d.id;
                             return JSON.stringify(currentDate);
-                        },
-                        "dataSrc": function (json) {
-                            json["recordsTotal"] = json.data.recordsTotal;
-                            json["recordsFiltered"] = json.data.recordsFiltered;
-                            return json.data.data;
                         }
                     },
                     columns: [
