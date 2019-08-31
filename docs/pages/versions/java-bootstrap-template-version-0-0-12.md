@@ -4,6 +4,7 @@ title: Java Bootstrap Template Version 0.0.12 (Current Development Version)
 # {{ page.title }}
 
 ## on
+- Create an Accounting Management module demo pages to demonestrate an a double entry accounting feature
 - Update the following dependencies:
     - del from 5.0.0 to 5.1.0
     - gulp-markdown from 4.0.0 to 5.0.0
