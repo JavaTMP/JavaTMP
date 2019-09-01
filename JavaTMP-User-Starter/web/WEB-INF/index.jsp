@@ -191,7 +191,7 @@
                             </li>
                             <li>
                                 <a class="has-arrow" href="#">
-                                    <i class="fa fa-lg fa-fw fa-cogs"></i>
+                                    <i class="far fa-lg fa-fw fa-folder"></i>
                                     Document Management
                                 </a>
                                 <ul>
@@ -229,7 +229,7 @@
                             </li>
                             <li>
                                 <a class="has-arrow" href="#">
-                                    <i class="fa fa-lg fa-fw fa-cogs"></i>
+                                    <i class="far fa-lg fa-fw fa-calendar-alt"></i>
                                     Event Management
                                 </a>
                                 <ul>
@@ -242,7 +242,7 @@
                             </li>
                             <li>
                                 <a class="has-arrow" href="#">
-                                    <i class="fa fa-lg fa-fw fa-cogs"></i>
+                                    <i class="far fa-lg fa-fw fa-envelope"></i>
                                     Message Management
                                 </a>
                                 <ul>
@@ -260,7 +260,7 @@
                             </li>
                             <li>
                                 <a class="has-arrow" href="#">
-                                    <i class="fa fa-lg fa-fw fa-cogs"></i>
+                                    <i class="far fa-lg fa-fw fa-file-alt"></i>
                                     Content Management
                                 </a>
                                 <ul>
@@ -284,7 +284,6 @@
                                 <ul>
                                     <li>
                                         <a class="has-arrow" href="#">
-                                            <i class="far fa-lg fa-fw fa-chart-bar"></i>
                                             Accounts
                                         </a>
                                         <ul>
@@ -307,7 +306,6 @@
                                     </li>
                                     <li>
                                         <a class="has-arrow" href="#">
-                                            <i class="far fa-lg fa-fw fa-chart-bar"></i>
                                             Transactions
                                         </a>
                                         <ul>
@@ -330,7 +328,6 @@
                                     </li>
                                     <li>
                                         <a class="has-arrow" href="#">
-                                            <i class="far fa-lg fa-fw fa-chart-bar"></i>
                                             Reports
                                         </a>
                                         <ul>
@@ -355,7 +352,7 @@
                             </li>
                             <li>
                                 <a class="has-arrow" href="#">
-                                    <i class="fa fa-lg fa-fw fa-cogs"></i>
+                                    <i class="fas fa-lg fa-fw fa-wrench"></i>
                                     ${labels['sidebar.menuItem.system']}
                                 </a>
                                 <ul>
