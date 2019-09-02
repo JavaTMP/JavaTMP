@@ -232,7 +232,7 @@
             function calculateTotals() {
                 var debits = calculateTotalDebit();
                 var credits = calculateTotalCredit();
-                var difference = debits - credits;
+                var difference = (debits - credits).toFixed(2);
                 console.log("total debits [" + debits + "], credits [" + credits + "], difference [" + difference + "]");
             }
 
