@@ -129,9 +129,6 @@
                                         <th>id</th>
                                         <th>transactionId</th>
                                         <th>accountId</th>
-                                        <th>moduleId</th>
-                                        <th>moduleRefId</th>
-                                        <th>moduleTypeId</th>
                                         <th>debit</th>
                                         <th>credit</th>
                                         <th>balance</th>
@@ -163,9 +160,6 @@
                         {data: 'id', name: "id"},
                         {data: 'transactionId', "visible": true, name: "transactionId"},
                         {data: 'accountId', name: "accountId", "visible": false},
-                        {data: 'moduleId', name: "moduleId"},
-                        {data: 'moduleRefId', name: "moduleRefId"},
-                        {data: 'moduleTypeId', name: "moduleTypeId"},
                         {data: 'debit', name: "debit", "render": currencyRenderFunc},
                         {data: 'credit', name: "credit", "render": currencyRenderFunc},
                         {data: 'accountBalance', name: "accountBalance", "render": currencyRenderFunc},

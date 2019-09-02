@@ -764,7 +764,7 @@
 //                select: true,
             keys: true,
             select: "single",
-            scrollY: 250,
+            scrollY: 400,
             scrollX: true,
             "autoWidth": false,
             scrollCollapse: true,

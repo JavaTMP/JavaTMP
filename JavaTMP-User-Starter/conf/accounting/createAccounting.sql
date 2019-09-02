@@ -1,9 +1,6 @@
 DROP TABLE IF EXISTS transactionEntry;
 DROP TABLE IF EXISTS accountTransaction;
 
-DROP TABLE IF EXISTS moduleType;
-DROP TABLE IF EXISTS `module`;
-
 DROP TABLE IF EXISTS account;
 DROP TABLE IF EXISTS accountGroup;
 DROP TABLE IF EXISTS accountType;
@@ -19,6 +16,7 @@ CREATE TABLE accountType (
     CONSTRAINT accountType_id_pk PRIMARY KEY (id)
 ) ENGINE=InnoDB;
 
+-- reportTypeId --> 1: Balance Sheet, 2: Profit and Loss
 INSERT INTO accountType (id, name, debitSign, creditSign, reportTypeId) VALUES
 (1, 'Assets', +1, -1, 1),
 (2, 'Liabilities', -1, +1, 1),
@@ -26,6 +24,7 @@ INSERT INTO accountType (id, name, debitSign, creditSign, reportTypeId) VALUES
 (4, 'Revenue/Income', -1, +1, 2),
 (5, 'Expense/Cost', +1, -1, 2);
 -- (All sum of type 4) - (all sum of type 5) => 3
+
 CREATE TABLE accountGroup (
     id int(3) UNSIGNED not null,
     name varchar(32) not null,
@@ -35,7 +34,6 @@ CREATE TABLE accountGroup (
     CONSTRAINT accountGroup_accountType_fk FOREIGN KEY (accountType) REFERENCES accountType (id)
 ) ENGINE=InnoDB;
 
--- reportTypeId --> 1: Balance Sheet, 2: Profit and Loss
 INSERT INTO accountGroup (id, name, description, accountType) VALUES
 (1, 'Current Assets', 'Current Assets', 1),
 (2, 'Non Current Assets', 'Non Current Assets', 1),
@@ -112,70 +110,6 @@ INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup
 INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (67, '100200104', 'Fedral Tax Authority', 'Fedral Tax Authority', 3, 0E-8, 0E-8, 0E-8, 1, NULL, '2019-03-01 16:29:43.0', NULL);
 INSERT INTO `account` (`id`, `accountCode`, `name`, `description`, `accountGroup`, `debit`, `credit`, `balance`, `status`, `cashFlowId`, `creationDate`, `parentAccountId`) VALUES (68, '100403', 'Service Discount', 'Service Discount', 10, 0E-8, 0E-8, 0E-8, 1, NULL, '2019-03-01 17:03:39.0', NULL);
 
-CREATE TABLE `module` (
-    id BIGINT UNSIGNED not null AUTO_INCREMENT,
-    name varchar(128),
-    description varchar(1024),
-    status TINYINT,
-    creationDate TIMESTAMP NOT NULL default CURRENT_TIMESTAMP ,
-    CONSTRAINT module_id_pk PRIMARY KEY (id)
-) ENGINE=InnoDB;
-
-INSERT INTO `module` (id, `name`, description, status, `creationDate`) VALUES
-(1, 'Customers', 'Customers', 1, DEFAULT),
-(2, 'Suppliers', 'Suppliers', 1, DEFAULT),
-(3, 'Employee', 'Employee', 1, DEFAULT),
-(4, 'Fixed Assets', 'Fixed Assets', 1, DEFAULT),
-(5, 'Inventory', 'Inventory', 1, DEFAULT),
-(6, 'Service', 'Service', 1, DEFAULT),
-(7, 'VAT', 'Value Added Tax', 1, DEFAULT);
-
-CREATE TABLE moduleType (
-    id int not null AUTO_INCREMENT,
-    moduleId BIGINT UNSIGNED not null,
-    name varchar(128) not null,
-    description varchar(1024),
-    status TINYINT,
-    rootAccountId BIGINT UNSIGNED not null,
-    creationDate TIMESTAMP NOT NULL default CURRENT_TIMESTAMP,
-    CONSTRAINT moduleType_id_pk PRIMARY KEY (id),
-    CONSTRAINT moduelType_moduleId_fk FOREIGN KEY (moduleId) REFERENCES module (id),
-    CONSTRAINT moduleType_rootAccountId_fk FOREIGN KEY (rootAccountId) REFERENCES account (id),
-    CONSTRAINT moduleId_name_uni UNIQUE KEY (moduleId, name)
-) ENGINE=InnoDB;
-
-INSERT INTO moduleType (id, `moduleId`, `name`, description, status, `rootAccountId`, `creationDate`) VALUES
-(1, 1, 'Trade Receivable', null, 1, 12, default),
-(2, 1, 'PDC - Collection', null, 1, 12, default),
-(3, 1, 'Returne CHQ - Collection', null, 1, 12, default),
-(21, 1, 'Advance Payment', null, 1, 12, default),
-
-(4, 2, 'Trade Payable', null, 1, 23, default),
-(5, 2, 'PDC - Payment', null, 1, 23, default),
-(6, 2, 'Returne CHQ - Payments', null, 1, 23, default),
-(22, 2, 'Advance Payment', null, 1, 23, default),
-
-(7, 3, 'Payroll', null, 1, 24, default),
-(8, 3, 'Annual Leave', null, 1, 24, default),
-(9, 3, 'Unpaid Leave', null, 1, 24, default),
-(10, 3, 'Employee Advances', null, 1, 24, default),
-(11, 3, 'End Of Service', null, 1, 55, default),
-
-(12, 4, 'Purchase', null, 1, 8, default),
-(13, 4, 'Depreciation', null, 1, 8, default),
-(14, 4, 'Sale - Cost Disposal', null, 1, 8, default),
-(15, 4, 'Sale - Acc. Disposal', null, 1, 8, default),
-(16, 4, 'Sale - Profit', null, 1, 42, default),
-
-(17, 5, 'Inventory - Purchase', null, 1, 40, default), -- Q+
-(18, 5, 'Inventory - Sale', null, 1, 40, default), -- Q-
-(19, 5, 'Sale - Cost', null, 1, 32, default),
-(20, 5, 'Wastage/Writte-off', null, 1, 64, default),
-
-(23, 6, 'Service Sale Income', null, 1, 31, default),
-(24, 6, 'Service Sale Discount', null, 1, 68, default);
-
-
 CREATE TABLE voucherType (
     id int not null AUTO_INCREMENT,
     name varchar(128) not null,
@@ -204,16 +138,11 @@ CREATE TABLE `transaction` (
 CREATE TABLE accountTransaction (
     id BIGINT UNSIGNED not null AUTO_INCREMENT,
     transactionId BIGINT UNSIGNED not null,
-    moduleId BIGINT UNSIGNED,
-    moduleTypeId int,
-    moduleRefId BIGINT UNSIGNED,
     accountId BIGINT UNSIGNED not null,
     description varchar(1024),
     status TINYINT,
     amount DECIMAL(33,8),
     CONSTRAINT acctTrans_id_pk PRIMARY KEY (id),
     CONSTRAINT acctTrans_tranId_fk FOREIGN KEY (transactionId) REFERENCES `transaction` (id),
-    CONSTRAINT acctTrans_acctId_fk FOREIGN KEY (accountId) REFERENCES account (id),
-    CONSTRAINT acctTrans_moduleId_fk FOREIGN KEY (moduleId) REFERENCES `module` (id),
-    CONSTRAINT acctTrans_moduleTypeId_fk FOREIGN KEY (moduleTypeId) REFERENCES moduleType (id)
+    CONSTRAINT acctTrans_acctId_fk FOREIGN KEY (accountId) REFERENCES account (id)
 ) ENGINE=InnoDB;

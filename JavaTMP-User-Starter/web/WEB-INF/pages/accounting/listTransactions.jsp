@@ -112,9 +112,6 @@
                                         <th style="width: 3rem;"><p class="m-0 p-0" style="width: 3rem;">id</p></th>
                                         <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">transactionId</p></th>
                                         <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">accountId</p></th>
-                                        <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">moduleId</p></th>
-                                        <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">moduleRefId</p></th>
-                                        <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">moduleTypeId</p></th>
                                         <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">amount</p></th>
                                         <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">status</p></th>
                                         <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">description</p></th>
@@ -139,9 +136,6 @@
                         {data: 'id', name: "id", width: "3rem", "render": javatmp.plugins.DataTableColRenderWrapper("3rem")},
                         {data: 'transactionId', "visible": true, name: "transactionId", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
                         {data: 'accountId', name: "accountId", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
-                        {data: 'moduleId', name: "moduleId", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
-                        {data: 'moduleRefId', name: "moduleRefId", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
-                        {data: 'moduleTypeId', name: "moduleTypeId", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
                         {data: 'amount', name: "amount", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
                         {data: 'status', "visible": true, name: "status", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
                         {data: 'description', "visible": true, name: "description", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")}

@@ -13,33 +13,33 @@ INSERT INTO `transaction` (code, `voucherTypeId`, `transactionDate`, note, `spec
 INSERT INTO `transaction` (code, `voucherTypeId`, `transactionDate`, note, `specialNumber`, entity, status, `creationDate`)
 	VALUES ('3321', 1, '2018-12-29 20:00:00.0', NULL, NULL, NULL, 1, '2018-12-30 01:33:52.0');
 
-INSERT INTO accountTransaction (`transactionId`, `moduleId`, `moduleTypeId`, `moduleRefId`, `accountId`, description, status, amount)
-	VALUES (1, NULL, NULL, NULL, 65, NULL, 1, 50000.00000000);
-INSERT INTO accountTransaction (`transactionId`, `moduleId`, `moduleTypeId`, `moduleRefId`, `accountId`, description, status, amount)
-	VALUES (1, NULL, NULL, NULL, 27, NULL, 1, -50000.00000000);
-INSERT INTO accountTransaction (`transactionId`, `moduleId`, `moduleTypeId`, `moduleRefId`, `accountId`, description, status, amount)
-	VALUES (2, NULL, NULL, NULL, 10, NULL, 1, 1000.00000000);
-INSERT INTO accountTransaction (`transactionId`, `moduleId`, `moduleTypeId`, `moduleRefId`, `accountId`, description, status, amount)
-	VALUES (2, NULL, NULL, NULL, 65, NULL, 1, -1000.00000000);
-INSERT INTO accountTransaction (`transactionId`, `moduleId`, `moduleTypeId`, `moduleRefId`, `accountId`, description, status, amount)
-	VALUES (3, NULL, NULL, NULL, 8, NULL, 1, 10000.00000000);
-INSERT INTO accountTransaction (`transactionId`, `moduleId`, `moduleTypeId`, `moduleRefId`, `accountId`, description, status, amount)
-	VALUES (3, NULL, NULL, NULL, 65, NULL, 1, -10000.00000000);
-INSERT INTO accountTransaction (`transactionId`, `moduleId`, `moduleTypeId`, `moduleRefId`, `accountId`, description, status, amount)
-	VALUES (4, NULL, NULL, NULL, 8, NULL, 1, 250.00000000);
-INSERT INTO accountTransaction (`transactionId`, `moduleId`, `moduleTypeId`, `moduleRefId`, `accountId`, description, status, amount)
-	VALUES (4, NULL, NULL, NULL, 10, NULL, 1, -250.00000000);
-INSERT INTO accountTransaction (`transactionId`, `moduleId`, `moduleTypeId`, `moduleRefId`, `accountId`, description, status, amount)
-	VALUES (5, NULL, NULL, NULL, 65, NULL, 1, 5000.00000000);
-INSERT INTO accountTransaction (`transactionId`, `moduleId`, `moduleTypeId`, `moduleRefId`, `accountId`, description, status, amount)
-	VALUES (5, NULL, NULL, NULL, 27, NULL, 1, -5000.00000000);
-INSERT INTO accountTransaction (`transactionId`, `moduleId`, `moduleTypeId`, `moduleRefId`, `accountId`, description, status, amount)
-	VALUES (6, NULL, NULL, NULL, 8, NULL, 1, 100.00000000);
-INSERT INTO accountTransaction (`transactionId`, `moduleId`, `moduleTypeId`, `moduleRefId`, `accountId`, description, status, amount)
-	VALUES (6, NULL, NULL, NULL, 10, NULL, 1, -100.00000000);
-INSERT INTO accountTransaction (`transactionId`, `moduleId`, `moduleTypeId`, `moduleRefId`, `accountId`, description, status, amount)
-	VALUES (7, NULL, NULL, NULL, 8, NULL, 1, 500.25000000);
-INSERT INTO accountTransaction (`transactionId`, `moduleId`, `moduleTypeId`, `moduleRefId`, `accountId`, description, status, amount)
-	VALUES (7, NULL, NULL, NULL, 10, NULL, 1, -400.00000000);
-INSERT INTO accountTransaction (`transactionId`, `moduleId`, `moduleTypeId`, `moduleRefId`, `accountId`, description, status, amount)
-	VALUES (7, NULL, NULL, NULL, 65, NULL, 1, -100.25000000);
+INSERT INTO accountTransaction (`transactionId`, `accountId`, description, status, amount)
+	VALUES (1, 65, NULL, 1, 50000.00000000);
+INSERT INTO accountTransaction (`transactionId`, `accountId`, description, status, amount)
+	VALUES (1, 27, NULL, 1, -50000.00000000);
+INSERT INTO accountTransaction (`transactionId`, `accountId`, description, status, amount)
+	VALUES (2, 10, NULL, 1, 1000.00000000);
+INSERT INTO accountTransaction (`transactionId`, `accountId`, description, status, amount)
+	VALUES (2, 65, NULL, 1, -1000.00000000);
+INSERT INTO accountTransaction (`transactionId`, `accountId`, description, status, amount)
+	VALUES (3, 8, NULL, 1, 10000.00000000);
+INSERT INTO accountTransaction (`transactionId`, `accountId`, description, status, amount)
+	VALUES (3, 65, NULL, 1, -10000.00000000);
+INSERT INTO accountTransaction (`transactionId`, `accountId`, description, status, amount)
+	VALUES (4, 8, NULL, 1, 250.00000000);
+INSERT INTO accountTransaction (`transactionId`, `accountId`, description, status, amount)
+	VALUES (4, 10, NULL, 1, -250.00000000);
+INSERT INTO accountTransaction (`transactionId`, `accountId`, description, status, amount)
+	VALUES (5, 65, NULL, 1, 5000.00000000);
+INSERT INTO accountTransaction (`transactionId`, `accountId`, description, status, amount)
+	VALUES (5, 27, NULL, 1, -5000.00000000);
+INSERT INTO accountTransaction (`transactionId`, `accountId`, description, status, amount)
+	VALUES (6, 8, NULL, 1, 100.00000000);
+INSERT INTO accountTransaction (`transactionId`, `accountId`, description, status, amount)
+	VALUES (6, 10, NULL, 1, -100.00000000);
+INSERT INTO accountTransaction (`transactionId`, `accountId`, description, status, amount)
+	VALUES (7, 8, NULL, 1, 500.25000000);
+INSERT INTO accountTransaction (`transactionId`, `accountId`, description, status, amount)
+	VALUES (7, 10, NULL, 1, -400.00000000);
+INSERT INTO accountTransaction (`transactionId`, `accountId`, description, status, amount)
+	VALUES (7, 65, NULL, 1, -100.25000000);

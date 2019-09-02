@@ -26,15 +26,6 @@ public class TransactionEntry implements Serializable {
     @Column(name = "transactionId")
     private Long transactionId;
 
-    @Column(name = "moduleId")
-    private Long moduleId;
-
-    @Column(name = "moduleTypeId")
-    private Integer moduleTypeId;
-
-    @Column(name = "moduleRefId")
-    private Long moduleRefId;
-
     @Column(name = "accountId")
     private Long accountId;
 
@@ -86,30 +77,6 @@ public class TransactionEntry implements Serializable {
 
     public void setTransactionId(Long transactionId) {
         this.transactionId = transactionId;
-    }
-
-    public Long getModuleId() {
-        return moduleId;
-    }
-
-    public void setModuleId(Long moduleId) {
-        this.moduleId = moduleId;
-    }
-
-    public Integer getModuleTypeId() {
-        return moduleTypeId;
-    }
-
-    public void setModuleTypeId(Integer moduleTypeId) {
-        this.moduleTypeId = moduleTypeId;
-    }
-
-    public Long getModuleRefId() {
-        return moduleRefId;
-    }
-
-    public void setModuleRefId(Long moduleRefId) {
-        this.moduleRefId = moduleRefId;
     }
 
     public Long getAccountId() {

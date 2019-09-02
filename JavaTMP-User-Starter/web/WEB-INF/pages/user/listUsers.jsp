@@ -273,7 +273,8 @@
                 "rowCallback": function (row, data, displayNum, displayIndex, dataIndex) {
                     // replace the contents of the first column (rowid) with an edit link
                     var api = this.api();
-                    $(row).attr("data-row-id", data.id);
+                    var init = api.init();
+//                    $(row).attr("data-row-id", "null");
                 },
                 "drawCallback": function (settings) {
                     disabled();
@@ -320,7 +321,7 @@
                 columns: [
                     {data: 'id',
                         "createdCell": function (td, cellData, rowData, row, col) {
-                            console.log(table.init().columns[col]);
+//                            console.log(table.init().columns[col]);
                             $(td).addClass("text-center");
                         },
                         className: "", name: "id", width: "6rem", "render": javatmp.plugins.DataTableColRenderWrapper("6rem")},
@@ -357,7 +358,7 @@
                 ]
             });
 
-            window.javatmp.plugins.contextMenuWrapper($('tbody', userTableElement), 'tr[data-row-id]', $("#contextMenu"));
+            window.javatmp.plugins.contextMenuWrapper($('tbody', userTableElement), 'tr', $("#contextMenu"));
 
             table.on('select', function (e, dt, type, indexes) {
                 var rowsData = table.rows(indexes).data().toArray();

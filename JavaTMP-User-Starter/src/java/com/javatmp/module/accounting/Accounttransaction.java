@@ -2,7 +2,6 @@ package com.javatmp.module.accounting;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.math.BigInteger;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,15 +40,6 @@ public class Accounttransaction implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "moduleId")
-    private Integer moduleId;
-
-    @Column(name = "moduleRefId")
-    private BigInteger moduleRefId;
-
-    @Column(name = "moduleTypeId")
-    private Integer moduleTypeId;
-
     @Column(name = "status")
     private Short status;
 
@@ -65,12 +55,6 @@ public class Accounttransaction implements Serializable {
     @Transient
     private Transaction transaction;
 
-    @Transient
-    private Module module;
-
-    @Transient
-    private Moduletype moduletype;
-
     public Accounttransaction() {
     }
 
@@ -78,18 +62,12 @@ public class Accounttransaction implements Serializable {
         this.id = id;
     }
 
-    public Accounttransaction(Long id, BigDecimal amount, Long accountId, Long transactionId, String description, Integer moduleId,
-            BigInteger moduleRefId, Integer moduleTypeId, Short status) {
-//id, amount, accountId,  transactionId, description, moduleId,
-//             moduleRefId, moduleTypeId, status
+    public Accounttransaction(Long id, BigDecimal amount, Long accountId, Long transactionId, String description, Short status) {
         this.id = id;
         this.amount = amount;
         this.accountId = accountId;
         this.transactionId = transactionId;
         this.description = description;
-        this.moduleId = moduleId;
-        this.moduleRefId = moduleRefId;
-        this.moduleTypeId = moduleTypeId;
         this.status = status;
     }
 
@@ -212,58 +190,6 @@ public class Accounttransaction implements Serializable {
      */
     public void setCredit(BigDecimal credit) {
         this.credit = credit;
-    }
-
-    public BigInteger getModuleRefId() {
-        return moduleRefId;
-    }
-
-    public void setModuleRefId(BigInteger moduleRefId) {
-        this.moduleRefId = moduleRefId;
-    }
-
-    public Module getModule() {
-        return module;
-    }
-
-    public void setModule(Module module) {
-        this.module = module;
-    }
-
-    public Moduletype getModuletype() {
-        return moduletype;
-    }
-
-    public void setModuletype(Moduletype moduletype) {
-        this.moduletype = moduletype;
-    }
-
-    /**
-     * @return the moduleId
-     */
-    public Integer getModuleId() {
-        return moduleId;
-    }
-
-    /**
-     * @param moduleId the moduleId to set
-     */
-    public void setModuleId(Integer moduleId) {
-        this.moduleId = moduleId;
-    }
-
-    /**
-     * @return the moduleTypeId
-     */
-    public Integer getModuleTypeId() {
-        return moduleTypeId;
-    }
-
-    /**
-     * @param moduleTypeId the moduleTypeId to set
-     */
-    public void setModuleTypeId(Integer moduleTypeId) {
-        this.moduleTypeId = moduleTypeId;
     }
 
     /**

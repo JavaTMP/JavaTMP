@@ -52,11 +52,10 @@ BEGIN
     for update;
 
     INSERT INTO transactionentry
-        (id, `transactionId`, `moduleId`, `moduleTypeId`, `moduleRefId`, `accountId`,
-        description, status, `entryDate`, amount, debit, credit, `entryAmount`,
+        (id, `transactionId`, `accountId`, description, status, `entryDate`, amount, debit, credit, `entryAmount`,
         `sourceDocument`, code, `accountBalance`)
 	VALUES
-        (new.id, new.transactionId, new.moduleId, new.moduleTypeId, new.moduleRefId, new.accountId,
+        (new.id, new.transactionId, new.accountId,
         new.description, new.status, transactionDate, new.amount,
         (case when new.amount > 0 then new.amount else 0 end),
         (case when new.amount < 0 then new.amount * -1 else 0 end),

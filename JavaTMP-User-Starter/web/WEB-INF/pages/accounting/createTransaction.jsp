@@ -85,9 +85,6 @@
                                             <tr>
                                                 <th style="width: 3rem;" class="text-center">#</th>
                                                 <th style="width: 20rem;" class="text-center">Account</th>
-                                                <th style="width: 12rem;" class="text-center">ModuleId</th>
-                                                <th style="width: 12rem;">Moduel List</th>
-                                                <th style="width: 12rem;">moduleTypeId</th>
                                                 <th style="width: 10rem;" class="text-center">Debit</th>
                                                 <th style="width: 10rem;" class="text-center">Credit</th>
                                                 <th style="width: 20rem;" class="text-center">Description</th>
@@ -103,50 +100,6 @@
                                                                 <option value="">${labels['page.text.kindlySelect']}</option>
                                                                 <c:forEach items="${requestScope.accounts}" var="account">
                                                                     <option  value="${account.id}">${account.accountCode} - ${account.name}</option>
-                                                                </c:forEach>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <option value="">${labels['page.text.noRecordFound']}</option>
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    </select>
-                                                </td>
-                                                <td style="width: 12rem;">
-                                                    <select class="select2wrapper moduleId form-control" data-rule-required="false">
-                                                        <c:choose>
-                                                            <c:when test="${fn:length(requestScope.modules) > 0}">
-                                                                <option value="">${labels['page.text.kindlySelect']}</option>
-                                                                <c:forEach items="${requestScope.modules}" var="module">
-                                                                    <option  value="${module.id}">${module.name}</option>
-                                                                </c:forEach>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <option value="">${labels['page.text.noRecordFound']}</option>
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    </select>
-                                                </td>
-                                                <td style="width: 12rem;">
-                                                    <select class="select2wrapper moduleRefId form-control" data-rule-required="false">
-                                                        <c:choose>
-                                                            <c:when test="${fn:length(requestScope.moduleTypeIds) > 0}">
-                                                                <c:forEach items="${requestScope.moduleTypeIds}" var="moduleTypeId">
-                                                                    <option  value="${moduleTypeId.id}">${moduleTypeId.name}</option>
-                                                                </c:forEach>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <option value="">${labels['page.text.noRecordFound']}</option>
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                    </select>
-                                                </td>
-                                                <td style="width: 12rem;">
-                                                    <select class="select2wrapper moduleTypeId form-control" data-rule-required="false">
-                                                        <c:choose>
-                                                            <c:when test="${fn:length(requestScope.moduleTypeIds) > 0}">
-                                                                <option value="">${labels['page.text.kindlySelect']}</option>
-                                                                <c:forEach items="${requestScope.moduleTypeIds}" var="moduleTypeId">
-                                                                    <option  value="${moduleTypeId.id}">${moduleTypeId.name}</option>
                                                                 </c:forEach>
                                                             </c:when>
                                                             <c:otherwise>
@@ -235,6 +188,7 @@
             // controll return to main javascript file.
             // <--- HERE --->
             //
+            var table = $("#tab_logic");
             function calc() {
 
             }
@@ -247,123 +201,10 @@
                 actualRow.find("select.accountListSelect").attr("name", "accounttransactionList[" + i + "][accountId]");
                 actualRow.find("input.accountDebitField").attr("name", "accounttransactionList[" + i + "][debit]");
                 actualRow.find("input.accountCreditField").attr("name", "accounttransactionList[" + i + "][credit]");
-                actualRow.find("select.moduleId").attr("name", "accounttransactionList[" + i + "][moduleId]");
-                actualRow.find("select.moduleRefId").attr("name", "accounttransactionList[" + i + "][moduleRefId]");
-                actualRow.find("select.moduleTypeId").attr("name", "accounttransactionList[" + i + "][moduleTypeId]");
                 actualRow.find("input.description").attr("name", "accounttransactionList[" + i + "][description]");
                 javatmp.plugins.select2Wrapper(actualRow.find("select.select2wrapper"));
                 i++;
             });
-
-            $(document).on("change", "select.moduleId", function (event) {
-                var currentSelectName = $(this).attr("name");
-                var currentSelectVal = $(this).val();
-
-                var parentRow = $(this).parents("tr");
-                console.log(parentRow + " > " + currentSelectName + " > " + currentSelectVal);
-                if (currentSelectVal) {
-                    window.javatmp.plugins.ajaxJsonAction({
-                        url: javatmp.settings.contextPath + "/entity/moduleItemList",
-                        data: JSON.stringify({moduleId: currentSelectVal}),
-                        success: function (response) {
-//                            alert(JSON.stringify(response.data));
-                            $("select.moduleRefId", parentRow).empty(); // Remove all <option> child tags.
-                            $("select.moduleRefId", parentRow).append(// Append an object to the inside of the select box
-                                    $("<option></option>") // Yes you can do this.
-                                    .text("Kindly Select")
-                                    .val(""));
-                            $.each(response.data, function (index, item) { // Iterates through a collection
-                                $("select.moduleRefId", parentRow).append(// Append an object to the inside of the select box
-                                        $("<option></option>") // Yes you can do this.
-                                        .text(item.name)
-                                        .val(item.id));
-                            });
-                            $("select.moduleRefId", parentRow).trigger("change");
-                        },
-                        error: function (data) {
-
-                        },
-                        complete: function (jqXHR, textStatus) {
-
-                        }
-                    });
-                } else {
-                    $("select.moduleRefId", parentRow).empty().trigger("change"); // Remove all <option> child tags.
-                }
-            });
-            $(document).on("change", "select.moduleRefId", function (event) {
-                var currentSelectName = $(this).attr("name");
-                var currentSelectVal = $(this).val();
-                var parentRow = $(this).parents("tr");
-                var currentModuleVal = $("select.moduleId", parentRow).val();
-                console.log(parentRow + " > " + currentSelectName + " > " + currentSelectVal);
-                if (currentSelectVal) {
-                    var moduleTypeIds = {
-                        1: [{"Trade Receivable": 1}, {"PDC - Collection": 2}, {"Returne CHQ - Collection": 3}],
-                        2: [{"Trade Payable": 4}, {"PDC - Payment": 5}, {"Returne CHQ - Payments": 6}],
-                        3: [{"Payroll": 7}, {"Annual Leave": 8}, {"Unpaid Leave": 9}, {"Employee Advances": 10}, {"End Of Service": 11}],
-                        4: [{"Purchase": 12}, {"Sale - Inventory": 13}, {"Sale - Cost": 14}, {"Sale - Acc. Disposal": 15}, {"Sale - Profit": 16}],
-                        5: [{"Purchase": 17}, {"Depreciation": 18}, {"Sale - Cost Disposal": 19}, {"Wastage/Writte-off": 20}],
-                        6: [{"Service Sale Income": 23}, {"Service Sale Discount": 24}]
-                    };
-                    $("select.moduleTypeId", parentRow).empty(); // Remove all <option> child tags.
-                    $("select.moduleTypeId", parentRow).append(// Append an object to the inside of the select box
-                            $("<option></option>") // Yes you can do this.
-                            .text("Kindly Select")
-                            .val(""));
-                    $.each(moduleTypeIds[currentModuleVal], function (index, item) { // Iterates through a collection
-                        $.each(item, function (k, v) {
-                            $("select.moduleTypeId", parentRow).append(// Append an object to the inside of the select box
-                                    $("<option></option>") // Yes you can do this.
-                                    .text(k)
-                                    .val(v));
-                        });
-                    });
-                    $("select.moduleTypeId", parentRow).trigger("change");
-                } else {
-                    $("select.moduleTypeId", parentRow).empty().trigger("change"); // Remove all <option> child tags.
-                }
-            });
-
-            $(document).on("change", "select.moduleTypeId", function (event) {
-                var currentSelectName = $(this).attr("name");
-                var currentSelectVal = $(this).val();
-                var parentRow = $(this).parents("tr");
-                var currentModuleVal = $("select.moduleId", parentRow).val();
-                var currentModuleRefIdVal = $("select.moduleRefId", parentRow).val();
-                if (currentSelectVal) {
-                    window.javatmp.plugins.ajaxJsonAction({
-                        url: javatmp.settings.contextPath + "/entity/ModuleItemAccount",
-                        data: JSON.stringify({moduleId: currentModuleVal, moduleTypeId: currentSelectVal, moduleRefId: currentModuleRefIdVal}),
-                        success: function (response) {
-                            $("select.accountListSelect", parentRow).empty();
-                            $.each(response.data, function (index, item) {
-                                $("select.accountListSelect", parentRow).append(
-                                        $("<option></option>")
-                                        .text(item.name)
-                                        .val(item.id));
-                            });
-                            $("select.accountListSelect", parentRow).trigger("change");
-                        },
-                        error: function (data) {
-                        },
-                        complete: function (jqXHR, textStatus) {
-                        }
-                    });
-                } else {
-                    $("select.accountListSelect", parentRow).empty().trigger("change"); // Remove all <option> child tags.
-                    $("#rowTemplate").find("select.accountListSelect option").each(function () {
-                        if ($(this).val() === "")
-                            return;
-                        $("select.accountListSelect", parentRow).append(
-                                $("<option></option>")
-                                .text($(this).text()))
-                                .val($(this).val());
-                    });
-                    $("select.accountListSelect", parentRow).trigger("change");
-                }
-            });
-
 
             $("#delete_row").click(function () {
                 if (i > 0) {
@@ -373,6 +214,47 @@
                 }
                 calc();
             });
+
+            $(table).on('keyup change', 'input.accountDebitField', function () {
+                console.log("debit press = " + $(this).val());
+                var parentTr = $(this).parents("tr");
+                parentTr.find("input.accountCreditField").val("0.00");
+                calculateTotals();
+            });
+            $(table).on('keyup change', 'input.accountCreditField', function () {
+                console.log("credit press = " + $(this).val());
+                var parentTr = $(this).parents("tr");
+                parentTr.find("input.accountDebitField").val("0.00");
+                calculateTotals();
+            });
+
+
+            function calculateTotals() {
+                var debits = calculateTotalDebit();
+                var credits = calculateTotalCredit();
+                var difference = debits - credits;
+                console.log("total debits [" + debits + "], credits [" + credits + "], difference [" + difference + "]");
+            }
+
+            function calculateTotalDebit() {
+                var totalDebit = parseFloat("0.00");
+                $("input.accountDebitField", table).each(function () {
+                    var debit = parseFloat($(this).val());
+                    console.log(debit);
+                    totalDebit += debit;
+                });
+                return totalDebit;
+            }
+
+            function calculateTotalCredit() {
+                var totalCredit = parseFloat("0.00");
+                $("input.accountCreditField", table).each(function () {
+                    var credit = parseFloat($(this).val());
+                    console.log(credit);
+                    totalCredit += credit;
+                });
+                return totalCredit;
+            }
 
             $('#tab_logic tbody').on('keyup change', function () {
                 calc();
@@ -432,8 +314,6 @@
             var transactionDateInputMask = javatmp.plugins.inputmaskWrapperForDate(form.find("input[name='transactionDate']"));
             var transactionDateDatePicker = javatmp.plugins.daterangepickerWrapperForDate(form.find("input[name='transactionDate']"));
 
-            var transactionTypeIdSelect = javatmp.plugins.select2Wrapper(form.find("select[name='transactionTypeId']"));
-            var moduleIdSelect = javatmp.plugins.select2Wrapper(form.find("select[name='moduleId']"));
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
@@ -459,9 +339,7 @@
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {
                 $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenCompress);
                 $(javatmp.settings.defaultOutputSelector).off(javatmp.settings.cardFullscreenExpand);
-                $(document).off("change", "select.moduleId");
-                $(document).off("change", "select.moduleRefId");
-                $(document).off("change", "select.moduleTypeId");
+
                 return true;
             });
         }

@@ -1,7 +1,6 @@
 
 CREATE OR REPLACE VIEW Entry AS
-select acctTrans.id as id, trans.id as transactionId, acctTrans.moduleId as moduleId,
-acctTrans.moduleTypeId as moduleTypeId, acctTrans.moduleRefId as moduleRefId, acctTrans.accountId as accountId,
+select acctTrans.id as id, trans.id as transactionId, acctTrans.accountId as accountId,
 acctTrans.description as description, acctTrans.status as status, trans.transactionDate as entryDate,
 acctTrans.amount as amount,
 (case when acctTrans.amount > 0 then acctTrans.amount else 0 end) as debit,

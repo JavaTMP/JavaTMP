@@ -178,32 +178,6 @@ public class AccountService {
         }
     }
 
-    public List<Module> getModules() {
-        List<Module> modules = new LinkedList<>();
-        modules = this.jpaDaoHelper.findAll(Module.class);
-        return modules;
-    }
-
-    public List<Module> getModulesWithType() {
-        EntityManager em = null;
-        List<Module> retList = null;
-        try {
-            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
-            TypedQuery<Module> query = em.createQuery(
-                    "select m"
-                    + " from Module m"
-                    + " join m.moduletypeList mt"
-                    + "", Module.class
-            );
-            retList = query.getResultList();
-            return retList;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
-    }
-
     public List<Accountgroup> getAccountGroups() {
         List<Accountgroup> accountgroups = new LinkedList<>();
         accountgroups = this.jpaDaoHelper.findAll(Accountgroup.class);
@@ -399,30 +373,6 @@ public class AccountService {
         }
     }
 
-    public List<Account> getAccountForModuleTypeId(Moduletype moduletype) {
-
-        EntityManager em = null;
-        List<Account> retAccts = null;
-        try {
-            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
-            TypedQuery<Account> query = em.createQuery(
-                    "select new com.javatmp.module.accounting.Account("
-                    + "acct.id, acct.accountCode, acct.name, acct.accountGroup)"
-                    + " from Account acct "
-                    + "join Moduletype mt on acct.id = mt.rootAccountId "
-                    + "where mt.id = :moduleTypeId"
-                    + "", Account.class
-            );
-            query.setParameter("moduleTypeId", moduletype.getId());
-            retAccts = query.getResultList();
-            return retAccts;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
-    }
-
     public int updateAccount(Account accountToBeUpdated) {
         int updateStatus = 0;
         EntityManager em = null;
@@ -553,9 +503,6 @@ public class AccountService {
                     from.get(Accounttransaction_.accountId),
                     from.get(Accounttransaction_.transactionId),
                     from.get(Accounttransaction_.description),
-                    from.get(Accounttransaction_.moduleId),
-                    from.get(Accounttransaction_.moduleRefId),
-                    from.get(Accounttransaction_.moduleTypeId),
                     from.get(Accounttransaction_.status)
             );
 
