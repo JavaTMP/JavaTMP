@@ -8,9 +8,7 @@ source create_tables.sql
 source insert_tables.sql
 source insert_user_and_doc.sql
 source insert_folders.sql
-source accounting/createAccounting.sql
-source accounting/createTransactionEntry.sql
-source accounting/createTransactionEntryTriggers.sql
-source accounting/testAcctTransEntries.sql
+-- Double Entry Accounting Module
+source accounting/accounting.sql
 
 
