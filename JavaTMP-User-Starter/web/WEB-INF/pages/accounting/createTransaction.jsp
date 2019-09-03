@@ -80,7 +80,7 @@
                                     </div>
                                 </div>
                                 <div class="table-responsive-sm">
-                                    <table class="table table-bordered table-hover custom-invoice-table" id="tab_logic">
+                                    <table class="table table-bordered table-hover create-transaction-table" id="tab_logic">
                                         <thead>
                                             <tr>
                                                 <th style="width: 3rem;" class="text-center">#</th>
@@ -94,7 +94,7 @@
                                             <tr id='rowTemplate' style="display: none;">
                                                 <td style="width: 3rem;">1</td>
                                                 <td style="width: 20rem;">
-                                                    <select class="select2wrapper form-control accountListSelect">
+                                                    <select class="select2wrapper form-control accountListSelect" data-rule-required="true">
                                                         <c:choose>
                                                             <c:when test="${fn:length(requestScope.accounts) > 0}">
                                                                 <option value="">${labels['page.text.kindlySelect']}</option>
@@ -155,20 +155,20 @@
         /*
         Embed CSS styling for current page.
         */
-        .custom-invoice-table tbody td {
+        .create-transaction-table tbody td {
             padding: 0;
         }
-        .custom-invoice-table tbody td:first-child {
+        .create-transaction-table tbody td:first-child {
             text-align: center;
             vertical-align: middle;
         }
-        .custom-invoice-table > tbody > tr > td > input {
+        .create-transaction-table > tbody > tr > td > input {
             border-radius: 0;
         }
-        .custom-invoice-table > tbody > tr > td > .input-group > .form-control {
+        .create-transaction-table > tbody > tr > td > .input-group > .form-control {
             border-radius: 0;
         }
-        .custom-invoice-table > tbody > tr > td > .input-group > .input-group-append > .input-group-text {
+        .create-transaction-table > tbody > tr > td > .input-group > .input-group-append > .input-group-text {
             border-radius: 0;
         }
 
@@ -219,21 +219,30 @@
                 console.log("debit press = " + $(this).val());
                 var parentTr = $(this).parents("tr");
                 parentTr.find("input.accountCreditField").val("0.00");
-                calculateTotals();
             });
             $(table).on('keyup change', 'input.accountCreditField', function () {
                 console.log("credit press = " + $(this).val());
                 var parentTr = $(this).parents("tr");
                 parentTr.find("input.accountDebitField").val("0.00");
-                calculateTotals();
             });
 
 
-            function calculateTotals() {
+            function calculateTotalsEquals() {
                 var debits = calculateTotalDebit();
                 var credits = calculateTotalCredit();
-                var difference = (debits - credits).toFixed(2);
-                console.log("total debits [" + debits + "], credits [" + credits + "], difference [" + difference + "]");
+                var difference = (debits - credits);
+                if (difference !== 0) {
+                    var msg = "total debits [" + debits + "], credits [" + credits + "], difference [" + difference.toFixed(2) + "]";
+                    var modalWrapper = BootstrapModalWrapperFactory.createModal({
+                        message: msg,
+                        title: "Error",
+                        closable: true,
+                        closeByBackdrop: true
+                    });
+                    modalWrapper.show();
+                    return false;
+                }
+                return true;
             }
 
             function calculateTotalDebit() {
@@ -269,6 +278,9 @@
             form.on("submit", function (event) {
                 event.preventDefault();
                 if (!$(this).valid()) {
+                    return false;
+                }
+                if (!calculateTotalsEquals()) {
                     return false;
                 }
                 var testFormObj = $(this).serializeArray();
