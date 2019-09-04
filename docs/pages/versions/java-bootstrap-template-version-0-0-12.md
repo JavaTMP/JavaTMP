@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.12 (Current Development Version)
 ---
 # {{ page.title }}
 
-## on
+## b2905d8 on Sep 4, 2019, 12:15 AM GMT+4
 - Create an Accounting Management module demo pages to demonestrate an a double entry accounting feature
 - Update the following dependencies:
     - del from 5.0.0 to 5.1.0
