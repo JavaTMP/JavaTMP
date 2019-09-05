@@ -29,14 +29,6 @@
                         <div class="col-lg-12">
                             <table id="example" class="display table table-bordered table-hover" cellspacing="0" width="100%">
                                 <thead>
-                                    <tr id="filterHeader">
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
                                     <tr>
                                         <th>Name</th>
                                         <th>Position</th>
@@ -531,13 +523,23 @@
                 scrollY: 400,
                 scrollCollapse: true,
                 headerCallback: function (thead, data, start, end, display) {
-                    console.log($(thead).html());
+//                    console.log($(thead).html());
                 },
                 initComplete: function () {
+                    var columnsCount = this.api().columns().count();
+                    var colHeader = this.api().columns(0).header();
+                    var headerTag = $(colHeader).parents("thead");
+//                    var filterHeaders = $("<tr></tr>").appendTo($(headerTag));
+                    var options = this.api().init();
+                    console.log(options);
+                    $(headerTag).prepend("<tr></tr>");
+                    var filterHeaders = $(headerTag).find("tr").first();
+//                    var filterHeaders = $(headerTr).prev("tr");
+                    console.log("start printing columns headers");
                     this.api().columns().every(function (index) {
                         var column = this;
                         var select = $('<select class="form-control" style="width:100%;" ><option value=""></option></select>')
-                                .appendTo($("#filterHeader").find('th').eq(index).empty())
+                                .appendTo($('<th></th>').appendTo($(filterHeaders)))
                                 .on('change', function () {
                                     console.log($(this).val());
                                     var val = $.fn.dataTable.util.escapeRegex($(this).val());
@@ -562,9 +564,9 @@
                         data: 'salary',
                         "type": "num",
                         render: function (data, type, row) {
-                            console.log(type);
+//                            console.log(type);
                             if (type === "sort" || type === 'type' || type === 'filter') {
-                                console.log("original data [" + data + "], converted [" + numeral(data).value() + "]");
+//                                console.log("original data [" + data + "], converted [" + numeral(data).value() + "]");
                                 return numeral(data).value();
                             } else {
                                 return numeral(data).format('0,0.00');
