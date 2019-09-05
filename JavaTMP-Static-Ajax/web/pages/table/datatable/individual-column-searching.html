@@ -522,6 +522,7 @@
             var table = $('#example').DataTable({
                 scrollY: 400,
                 scrollCollapse: true,
+                orderCellsTop: true, // important to for two row header with filteration below header column names.
                 headerCallback: function (thead, data, start, end, display) {
 //                    console.log($(thead).html());
                 },
@@ -531,10 +532,14 @@
                     var headerTag = $(colHeader).parents("thead");
 //                    var filterHeaders = $("<tr></tr>").appendTo($(headerTag));
                     var options = this.api().init();
-                    console.log(options);
-                    $(headerTag).prepend("<tr></tr>");
-                    var filterHeaders = $(headerTag).find("tr").first();
-//                    var filterHeaders = $(headerTr).prev("tr");
+                    var filterHeaders = null;
+                    if (options.orderCellsTop && options.orderCellsTop === true) {
+                        $(headerTag).append("<tr></tr>");
+                        filterHeaders = $(headerTag).find("tr").last();
+                    } else {
+                        $(headerTag).prepend("<tr></tr>");
+                        filterHeaders = $(headerTag).find("tr").first();
+                    }
                     console.log("start printing columns headers");
                     this.api().columns().every(function (index) {
                         var column = this;
