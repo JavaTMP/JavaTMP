@@ -530,6 +530,9 @@
             var table = $('#example').DataTable({
                 scrollY: 400,
                 scrollCollapse: true,
+                headerCallback: function (thead, data, start, end, display) {
+                    console.log($(thead).html());
+                },
                 initComplete: function () {
                     this.api().columns().every(function (index) {
                         var column = this;
@@ -564,7 +567,7 @@
                                 console.log("original data [" + data + "], converted [" + numeral(data).value() + "]");
                                 return numeral(data).value();
                             } else {
-                                return numeral(data).format('$0,0.00');
+                                return numeral(data).format('0,0.00');
                             }
                         }
                     }
