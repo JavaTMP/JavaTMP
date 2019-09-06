@@ -155,6 +155,7 @@ mvn archetype:generate -DarchetypeGroupId=org.apache.maven.archetypes -Darchetyp
 ```
 
 - The default Maven project folders structure is:
+
 ```
 └──demo1
     │   pom.xml
