@@ -6,29 +6,29 @@ title: Java Build Automation Tool Apache Maven
 Building and Managing Java and Java Spring Projects using the Java Build Tool - Apache Maven.
 
 ### Why Maven ?
-    - Support Multi developer environment because 
-    it's independent of any IDE specific configurations.
-    - Manage your Version Control of Source Code.
-    - Provides lifecycle and dependencies management.
-    - Run, build, deploy your project or unit tests.
-    - Supported by a wide range of tools and software like IDE, CI - Continuous Integration.
-    - Describes 'How' the Java Project is Built.
-    - Describes 'Dependencies' the Java Project has.
-    
+- Support Multi developer environment because
+it's independent of any IDE specific configurations.
+- Manage your Version Control of Source Code.
+- Provides lifecycle and dependencies management.
+- Run, build, deploy your project or unit tests.
+- Supported by a wide range of tools and software like IDE, CI - Continuous Integration.
+- Describes 'How' the Java Project is Built.
+- Describes 'Dependencies' the Java Project has.
+
 ### Objectives of Apache Maven
-- A maven Java project is described by a 'POM' or Project Object Model and it's stored in 
+- A maven Java project is described by a 'POM' or Project Object Model and it's stored in
 XML format.
-- Low Configuration with POM inheritance & Aggregation. Which suggested build life cycle and 
+- Low Configuration with POM inheritance & Aggregation. Which suggested build life cycle and
 each life cycle is made up of phases.
-- Maven is a Collection of plugins. which perform the action in Maven. 
+- Maven is a Collection of plugins. which perform the action in Maven.
 they are downloaded via internet (Downloaded only when needed and stored in a local
 repository on your hard drive).
 - Maven requires internet access. And Maven Central holds plugins and third party jar files.
-- Maven encourages best practices and suggested default project structure 
+- Maven encourages best practices and suggested default project structure
 and default build life cycles.
 
 ### Development Environment Tools
-- Apache Maven Tool. http://maven.apache.org/download.cgi 
+- Apache Maven Tool. http://maven.apache.org/download.cgi
 - Java JDK. https://www.oracle.com/java/technologies/javase-downloads.html
 - Eclipse JavaEE. https://www.eclipse.org/downloads/
 - Apache Tomcat. https://tomcat.apache.org/
@@ -44,10 +44,10 @@ and default build life cycles.
 ### Installing Eclipse IDE
 - Download and Install Eclipse IDE for Enterprise Java Developers.
 - Run eclipse and go to help > About Eclipse IDE.
-- Check m2 plugin or Maven Integration for Eclipse feature is installed 
+- Check m2 plugin or Maven Integration for Eclipse feature is installed
 and its id is `org.eclipse.m2e.feature`.
 - To activate a particular perspective when a program is launched, do the following:
-Go to `Window > Preferences > Run/Debug > Perspectives` and check 
+Go to `Window > Preferences > Run/Debug > Perspectives` and check
 Always open the associated perspective when launching.
 
 ### Installing Apache Tomcat
@@ -58,6 +58,7 @@ or any values you would like:
 ```
 set JAVA_OPTS=%JAVA_OPTS% -Dfile.encoding=UTF-8 -server -Xms1024m -Xmx1024m
 ```
+
 - Add or Check for user environment variables `JRE_HOME` and `JAVA_HOME`.
 
 ### Setting up Apache tomcat with eclipse IDE
@@ -72,13 +73,13 @@ set JAVA_OPTS=%JAVA_OPTS% -Dfile.encoding=UTF-8 -server -Xms1024m -Xmx1024m
 
 ### Setting up Maven with Eclipse IDE
 - installed from https://www.eclipse.org/m2e/
-- If it is not installed, Then go to 
+- If it is not installed, Then go to
 Help > Install New Software > `http://download.eclipse.org/technology/m2e/releases`
 - Check its configurations by going to Window > Preferences > Maven
 - Add previously installed Maven by going to Window > Preferences > Maven > Installations
 - Check it as the default one.
 - Check your local maven repository folder `.m2` in Window > Preferences > Maven > User Settings
-- Create a user settings file `C:\Users\m_dar\.m2\settings.xml` 
+- Create a user settings file `C:\Users\m_dar\.m2\settings.xml`
 with contents from `http://maven.apache.org/settings.html` and then check it in user settings.
 - In Project Explorer, Import a Maven Project that contains pom.xml file.
 - Create a new Maven Project from File > New > Maven Project.
@@ -87,33 +88,34 @@ with contents from `http://maven.apache.org/settings.html` and then check it in 
 - Go to Run As > Maven Build... > set goal `clean install`
 
 ### Maven Plugins
-Maven is a plugin execution framework, all work is done by plugins. 
-This following page lists the core plugins and others. 
+Maven is a plugin execution framework, all work is done by plugins.
+This following page lists the core plugins and others.
 There are the build and the reporting plugins: http://maven.apache.org/plugins/index.html
 
 #### Apache Maven Clean Plugin
 The Clean Plugin is used when you want to remove files generated at build-time in a project's directory.
 Read more about clean plugin in the page http://maven.apache.org/plugins/maven-clean-plugin/
-- `clean:clean` attempts to clean a project's working directory of the files 
-that we're generated at build-time. By default, it discovers and deletes 
+- `clean:clean` attempts to clean a project's working directory of the files
+that we're generated at build-time. By default, it discovers and deletes
 the directories configured in `project.build.directory`, `project.build.outputDirectory`,
 `project.build.testOutputDirectory`, and `project.reporting.outputDirectory`.
- 
+
 #### Apache Maven Compiler Plugin
 - Read more about Apache Maven Compiler Plugin in page http://maven.apache.org/plugins/maven-compiler-plugin/
 - `compiler:compile` is bound to the compile phase and is used to compile the main source files.
 
 ### Maven Archetype
-Archetype is a Maven project templating toolkit. An archetype is defined as an original pattern 
-or model from which all other things of the same kind are made. 
-It is a system that provides a consistent means of generating Maven projects. 
-Archetype will help authors create Maven project templates for users, 
+Archetype is a Maven project templating toolkit. An archetype is defined as an original pattern
+or model from which all other things of the same kind are made.
+It is a system that provides a consistent means of generating Maven projects.
+Archetype will help authors create Maven project templates for users,
 and provides users with the means to generate parameterized versions of those project templates.
--To create a new project based on an Archetype, you need to call `mvn archetype:generate` goal, 
+-To create a new project based on an Archetype, you need to call `mvn archetype:generate` goal,
 like the following:
 ```
 mvn archetype:generate ...
 ```
+
 - Read more about Archetype in page http://maven.apache.org/archetype/index.html
 - Read more about `maven-archetype-plugin` plugin in page http://maven.apache.org/archetype/maven-archetype-plugin/index.html
 
@@ -127,6 +129,7 @@ https://maven.apache.org/archetypes/maven-archetype-quickstart/
 ```
 mvn archetype:generate -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4
 ```
+
 - Maven Coordinate consists of Group Id + Artifact Id + Version.
 - The above command will create the Maven project with its pom.xml file like the following:
 ```XML
@@ -149,6 +152,7 @@ mvn archetype:generate -DarchetypeGroupId=org.apache.maven.archetypes -Darchetyp
   </dependencies>
 </project>
 ```
+
 - The default Maven project folders structure is:
 ```
 └───demo1
@@ -167,7 +171,8 @@ mvn archetype:generate -DarchetypeGroupId=org.apache.maven.archetypes -Darchetyp
                         └───demo1
                                 AppTest.java
 ```
-- Run the following command to see available valid lifecycle phases or goals 
+
+- Run the following command to see available valid lifecycle phases or goals
 in your Maven Project:
 ```
 mvn
