@@ -26,4 +26,5 @@
     *   [Database Related Information](/pages/reference/database-related-info)
     *   [Convert CSS file to SASS' SCSS syntax](/pages/reference/convert-css-to-scss-syntax)
     *   [Copy A File In Java](/blog/copy-a-file-in-java)
+    *   [Java Build Automation Tool Apache Maven](/tutorials/maven/Java-Automated-Build-Tool-Apache-Maven)
 *   **[Versions Change Log](/pages/versions/java-bootstrap-template-versions-change-log)**
