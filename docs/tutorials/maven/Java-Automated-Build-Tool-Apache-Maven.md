@@ -182,7 +182,6 @@ mvn
 ### Standard Maven Directory Layout
 - Read more about standard Maven Directory layout in the page https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html
 - A typical Maven project has a pom.xml file and a directory structure based on defined conventions:
-
 ```
 maven-project
 ├───pom.xml
