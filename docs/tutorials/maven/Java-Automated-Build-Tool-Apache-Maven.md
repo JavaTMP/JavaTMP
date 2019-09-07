@@ -28,13 +28,13 @@ repository on your hard drive).
 and default build life cycles.
 
 ### Development Environment Tools
-- Apache Maven Tool. http://maven.apache.org/download.cgi
-- Java JDK. https://www.oracle.com/java/technologies/javase-downloads.html
-- Eclipse JavaEE. https://www.eclipse.org/downloads/
-- Apache Tomcat. https://tomcat.apache.org/
+- Apache Maven Tool. [http://maven.apache.org/download.cgi](http://maven.apache.org/download.cgi)
+- Java JDK. [https://www.oracle.com/java/technologies/javase-downloads.html](https://www.oracle.com/java/technologies/javase-downloads.html)
+- Eclipse JavaEE. [https://www.eclipse.org/downloads/](https://www.eclipse.org/downloads/)
+- Apache Tomcat. [https://tomcat.apache.org/](https://tomcat.apache.org/)
 
 ### Installing Maven
-- Download apache-maven-3.6.2-bin.zip from http://maven.apache.org/download.cgi
+- Download apache-maven-3.6.2-bin.zip from [http://maven.apache.org/download.cgi](http://maven.apache.org/download.cgi)
 - Extract the downloaded file to c:
 - Create new user environment variable 'M2_HOME' point to `'C:\apache-maven-3.6.2'`
 - Create another variable 'M2' point to `'%M2_HOME%\bin'`
@@ -51,7 +51,7 @@ Go to `Window > Preferences > Run/Debug > Perspectives` and check
 Always open the associated perspective when launching.
 
 ### Installing Apache Tomcat
-- Download and extract Apache Tomcat from https://tomcat.apache.org/ to `C:\apache-tomcat-9.0.14`
+- Download and extract Apache Tomcat from [https://tomcat.apache.org/](https://tomcat.apache.org/) to `C:\apache-tomcat-9.0.14`
 - Add `CATALINA_HOME` user variable pointing to `C:\apache-tomcat-9.0.14`
 - Create a new file `setenv.bat` in `%CATALINA_HOME\bin` with the following line
 or any values you would like:
@@ -72,7 +72,7 @@ set JAVA_OPTS=%JAVA_OPTS% -Dfile.encoding=UTF-8 -server -Xms1024m -Xmx1024m
     - Window > Preferences > *
 
 ### Setting up Maven with Eclipse IDE
-- installed from https://www.eclipse.org/m2e/
+- installed from [https://www.eclipse.org/m2e/](https://www.eclipse.org/m2e/)
 - If it is not installed, Then go to
 Help > Install New Software > `http://download.eclipse.org/technology/m2e/releases`
 - Check its configurations by going to Window > Preferences > Maven
@@ -90,18 +90,18 @@ with contents from `http://maven.apache.org/settings.html` and then check it in 
 ### Maven Plugins
 Maven is a plugin execution framework, all work is done by plugins.
 This following page lists the core plugins and others.
-There are the build and the reporting plugins: http://maven.apache.org/plugins/index.html
+There are the build and the reporting plugins: [http://maven.apache.org/plugins/index.html](http://maven.apache.org/plugins/index.html)
 
 #### Apache Maven Clean Plugin
 The Clean Plugin is used when you want to remove files generated at build-time in a project's directory.
-Read more about clean plugin in the page http://maven.apache.org/plugins/maven-clean-plugin/
+Read more about clean plugin in the page [http://maven.apache.org/plugins/maven-clean-plugin/](http://maven.apache.org/plugins/maven-clean-plugin/)
 - `clean:clean` attempts to clean a project's working directory of the files
 that we're generated at build-time. By default, it discovers and deletes
 the directories configured in `project.build.directory`, `project.build.outputDirectory`,
 `project.build.testOutputDirectory`, and `project.reporting.outputDirectory`.
 
 #### Apache Maven Compiler Plugin
-- Read more about Apache Maven Compiler Plugin in page http://maven.apache.org/plugins/maven-compiler-plugin/
+- Read more about Apache Maven Compiler Plugin in page [http://maven.apache.org/plugins/maven-compiler-plugin/](http://maven.apache.org/plugins/maven-compiler-plugin/)
 - `compiler:compile` is bound to the compile phase and is used to compile the main source files.
 
 ### Maven Archetype
@@ -116,15 +116,15 @@ like the following:
 mvn archetype:generate ...
 ```
 
-- Read more about Archetype in page http://maven.apache.org/archetype/index.html
-- Read more about `maven-archetype-plugin` plugin in page http://maven.apache.org/archetype/maven-archetype-plugin/index.html
+- Read more about Archetype in page [http://maven.apache.org/archetype/index.html](http://maven.apache.org/archetype/index.html)
+- Read more about `maven-archetype-plugin` plugin in page [http://maven.apache.org/archetype/maven-archetype-plugin/index.html](http://maven.apache.org/archetype/maven-archetype-plugin/index.html)
 
 ### Creating Maven Project
-- Read more about creating maven project in the page https://maven.apache.org/guides/introduction/introduction-to-archetypes.html
-- Read more about Maven project creation in the page http://maven.apache.org/archetype/maven-archetype-plugin/usage.html
+- Read more about creating maven project in the page [https://maven.apache.org/guides/introduction/introduction-to-archetypes.html](https://maven.apache.org/guides/introduction/introduction-to-archetypes.html)
+- Read more about Maven project creation in the page [http://maven.apache.org/archetype/maven-archetype-plugin/usage.html](http://maven.apache.org/archetype/maven-archetype-plugin/usage.html)
 - To generate a sample Maven project.use the archetype ArtifactIds `maven-archetype-quickstart`
 - Read about the generated folder structure for Maven Quickstart Archetype in the page
-https://maven.apache.org/archetypes/maven-archetype-quickstart/
+[https://maven.apache.org/archetypes/maven-archetype-quickstart/](https://maven.apache.org/archetypes/maven-archetype-quickstart/)
 - To generate a new project from this archetype, type:
 ```
 mvn archetype:generate -DarchetypeGroupId=org.apache.maven.archetypes -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4
@@ -181,7 +181,8 @@ mvn
 ```
 
 ### Standard Maven Directory Layout
-- Read more about standard Maven Directory layout in the page https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html
+- Read more about standard Maven Directory layout in the page [https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html](https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html)
+- Read more about Maven Project Structure in the page [https://examples.javacodegeeks.com/enterprise-java/maven/maven-project-structure-example/](https://examples.javacodegeeks.com/enterprise-java/maven/maven-project-structure-example/)
 - A typical Maven project has a pom.xml file and a directory structure based on defined conventions:
 ```
 maven-project
@@ -205,10 +206,25 @@ maven-project
     ├───site
     └───assembly
 └───target
-    ├───classes
-    ├───test-classes
-    ├───surefire-reports
-    ├───maven-archiver
-    ├───maven-status
-    └───[executable file like .jar]
+    ├───classes (Compiled source files are placed in this folder. This folder will also contain resources, such as XML and property files that are part of the source, placed in src/main/resources)
+    ├───test-classes (Compiled test source files are available in this folder. In addition, it also contains test resources, which are files required for the purpose of testing, but not for running the project)
+    ├───surefire-reports (Test reports are separately placed in this folder. Typically, both XML and HTML report formats are available. The latter can be opened in the browser, while the former can be integrated with a code coverage tool)
+    ├───maven-archiver (hold information used by Maven during the build)
+    ├───maven-status (hold information used by Maven during the build)
+    └───[executable file like .jar] (The generated project artifact is also present in this folder)
 ```
+
+### Importing a Java Maven Project into Eclipse
+- To import the Maven Project demo1 created before above go to Eclipse IDE and import .. > Maven > Existing Maven Projects > Select Your Root Maven Directory contained pom.xml file
+- From your imported Maven project select Maven > Update Project ...
+- Run your Java main class from Run As > Java Application
+
+### Creating a New Java Maven Project in Eclipse
+- From Eclipse IDE Project Explorer select New > Project ...
+- From New Project Dialog select Maven > Maven Project
+- From New Maven Project select project name and location and press next
+- From select an Archetype select archetype with artifact Id `maven-archetype-quickstart` and press next
+- From Specifiy Archetype parameters fill group id, artifact Id, Version, package, 
+and properties available from archetype values and then press finish
+
+
