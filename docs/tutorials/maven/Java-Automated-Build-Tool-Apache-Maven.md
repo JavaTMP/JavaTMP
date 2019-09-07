@@ -183,10 +183,12 @@ mvn
 ### Standard Maven Directory Layout
 - Read more about standard Maven Directory layout in the page [https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html](https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html)
 - Read more about Maven Project Structure in the page [https://examples.javacodegeeks.com/enterprise-java/maven/maven-project-structure-example/](https://examples.javacodegeeks.com/enterprise-java/maven/maven-project-structure-example/)
-- A typical Maven project has a pom.xml file and a directory structure based on defined conventions:
+- You can put any folders inside of the maven project structure,
+but in those cases you have to instruct maven on the build tag of the pom file in order to manage those folder.
+A typical Maven project has a pom.xml file and a directory structure based on defined conventions:
 ```
 maven-project
-├───pom.xml (Project Object Modal Maven Main Configuration File)
+├───pom.xml (Project Object Modal Maven Main Configuration File. it describe how the project have to be build and its dependencies and many more)
 ├───README.txt (Project readme file)
 ├───NOTICE.txt (notes, notices and attributions for the project)
 ├───LICENSE.txt (the project license file)
@@ -197,7 +199,7 @@ maven-project
         ├───filters (all the application filters files)
         ├───config
         ├───scripts
-        └───webapp
+        └───webapp (store all resources and files needed by a java web application)
     ├───test
         ├───java (all the application test source files)
         ├───resources (all the application test resource files)
@@ -205,7 +207,7 @@ maven-project
     ├───it
     ├───site
     └───assembly (the maven assembly plugin files)
-└───target
+└───target (the maven default output folder)
     ├───classes (Compiled source files are placed in this folder. This folder will also contain resources, such as XML and property files that are part of the source, placed in src/main/resources)
     ├───test-classes (Compiled test source files are available in this folder. In addition, it also contains test resources, which are files required for the purpose of testing, but not for running the project)
     ├───surefire-reports (Test reports are separately placed in this folder. Typically, both XML and HTML report formats are available. The latter can be opened in the browser, while the former can be integrated with a code coverage tool)
@@ -234,6 +236,12 @@ maven-project
     - This directory will be put inside the java build path automatically.
 - `src/main/filters`
     - Filters for the artifact should be put in this folder. Read more about Maven Filter in this page [https://maven.apache.org/shared/maven-filtering/](https://maven.apache.org/shared/maven-filtering/)
+- `src/main/webapp`
+    - Contains all the required files for a Java web application like jsp files, js files, html files, css files, template files,
+    reports files, WEB-INF files (like web.xml), META-INF files, etc.
+    - All the content inside of this directory will be put in the classpath of the generated war artifact,
+    all resources will be put inside the WEB-INF directory, so it will be available on the runtime classpath by default.
+    - When the project is build or packaged all those resources will be put in the target/WEB-INF folder
 - `src/test/java`
     - Classes and packages for the application test source files should be put in this folder.
     - It will NOT be put in the classpath of the generated artifact.
@@ -256,6 +264,10 @@ maven-project
     - This directory will be put inside the java build path automatically.
 - `src/assembly`
     - This folder contains files to be used by the maven assembly plugin. Read more about the maven assembly plugin in the page [http://maven.apache.org/plugins/maven-assembly-plugin/](http://maven.apache.org/plugins/maven-assembly-plugin/).
+- `target`
+    - When a project is build or packaged, all the content of the sources, resources and web files will be put inside of it,
+    it will be used for construct the artifacts and for run tests. You can delete all the target folder content with `mvn clean` command.
+
 ### Importing a Java Maven Project into Eclipse
 - To import the Maven Project demo1 created before above go to Eclipse IDE and import .. > Maven > Existing Maven Projects > Select Your Root Maven Directory contained pom.xml file
 - From your imported Maven project select Maven > Update Project ...
