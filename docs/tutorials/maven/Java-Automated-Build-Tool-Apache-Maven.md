@@ -80,7 +80,7 @@ Help > Install New Software > `http://download.eclipse.org/technology/m2e/releas
 - Check it as the default one.
 - Check your local maven repository folder `.m2` in Window > Preferences > Maven > User Settings
 - Create a user settings file `C:\Users\m_dar\.m2\settings.xml`
-with contents from `http://maven.apache.org/settings.html` and then check it in user settings.
+with contents from [http://maven.apache.org/settings.html](http://maven.apache.org/settings.html) and then check it in user settings.
 - In Project Explorer, Import a Maven Project that contains pom.xml file.
 - Create a new Maven Project from File > New > Maven Project.
 - Go to Any Maven Project dropdown Maven menu and see available submenu there.
@@ -192,15 +192,15 @@ maven-project
 ├───LICENSE.txt
 ├───src
     ├───main
-        ├───java
-        ├───resources
+        ├───java (all the application source files)
+        ├───resources (the application resource files)
         ├───filters
         ├───config
         ├───scripts
         └───webapp
     ├───test
-        ├───java
-        ├───resources
+        ├───java (all the application test source files)
+        ├───resources (all the application test resource files)
         └───filters
     ├───it
     ├───site
@@ -215,16 +215,41 @@ maven-project
 ```
 
 - `src/main/java`
-    - Inside this folder you can put all the application source files.
-    Classes and packages for the main (real) artifact should be put in this folder.
+    - Classes and packages for the main (real) artifact should be put in this folder.
     - All the content inside of this directory will be put in the classpath of the generated artifact.
     - If the artifact is a jar file, all the classes and packages will be in the root folder of the generated jar,
     so it will be available by default on the runtime classpath.
     - If the artifact is a war, all the classes and packages will be put inside the WEB-INF/classes directory,
     so it will be available on the runtime classpath by default.
     - When the project is build or packaged all those classes and packages will be put in the target folder.
-    - If you use eclipse as your IDE, this directory will be put inside the java build path automatically
-    when you give the maven nature to the project.
+    - This directory will be put inside the java build path automatically.
+- `src/main/resources`
+    - Resources for the main (real) artifact should be put in this folder.
+    - All the content inside of this directory will be put in the classpath of the generated artifact.
+    - If the artifact is a jar file, all the resources will be in the root folder of the generated jar,
+    so it will be available by default on the runtime classpath.
+    - If the artifact is a war, all resources will be put inside the WEB-INF/classes directory,
+    so it will be available on the runtime classpath by default.
+    - When the project is build or packaged all those resources will be put in the target folder.
+    - This directory will be put inside the java build path automatically.
+- `src/test/java`
+    - Classes and packages for the application test source files should be put in this folder.
+    - It will NOT be put in the classpath of the generated artifact.
+    - When the project is build or packaged all those classes and packages will be put in the `target/test-classes` folder.
+    - When you run your test you must be aware that maven surefire plugin will run the classes from the target directory.
+    - This directory will be put inside the java build path automatically.
+- `src/test/resources`
+    - Resources for the test artifact should be put in this folder.
+    - All the content inside of this directory will NOT be put in the classpath of the generated artifact.
+    - When the project is build or packaged all those test resources will be put in the target folder.
+    - When you run your test you must be awared that maven surefire plugin will use resources from the target directory.
+    - This directory will be put inside the java build path automatically
+- `src/it`
+    - Classes and packages for the integration test artifact should be put in this folder.
+    - All the content inside of this directory will NOT be put in the classpath of the generated artifact.
+    - When the project is build or packaged all those classes and packages will be put in the target folder.
+    - When you run your integration test, the implicated plugin will run the classes from the target directory.
+    - This directory will be put inside the java build path automatically.
 
 ### Importing a Java Maven Project into Eclipse
 - To import the Maven Project demo1 created before above go to Eclipse IDE and import .. > Maven > Existing Maven Projects > Select Your Root Maven Directory contained pom.xml file
