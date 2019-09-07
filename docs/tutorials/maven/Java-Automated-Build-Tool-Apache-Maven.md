@@ -194,14 +194,14 @@ maven-project
     ├───main
         ├───java (all the application source files)
         ├───resources (the application resource files)
-        ├───filters
+        ├───filters (all the application filters files)
         ├───config
         ├───scripts
         └───webapp
     ├───test
         ├───java (all the application test source files)
         ├───resources (all the application test resource files)
-        └───filters
+        └───filters (all the application test filters files)
     ├───it
     ├───site
     └───assembly
@@ -232,6 +232,8 @@ maven-project
     so it will be available on the runtime classpath by default.
     - When the project is build or packaged all those resources will be put in the target folder.
     - This directory will be put inside the java build path automatically.
+- `src/main/filters`
+    - Filters for the artifact should be put in this folder. Read more about Maven Filter in this page [https://maven.apache.org/shared/maven-filtering/](https://maven.apache.org/shared/maven-filtering/)
 - `src/test/java`
     - Classes and packages for the application test source files should be put in this folder.
     - It will NOT be put in the classpath of the generated artifact.
@@ -244,6 +246,8 @@ maven-project
     - When the project is build or packaged all those test resources will be put in the target folder.
     - When you run your test you must be awared that maven surefire plugin will use resources from the target directory.
     - This directory will be put inside the java build path automatically
+- `src/test/filters`
+    - Filters for the test artifact should be put in this folder. You can read more about Maven test filter in this page [https://maven.apache.org/shared/maven-filtering/](https://maven.apache.org/shared/maven-filtering/)
 - `src/it`
     - Classes and packages for the integration test artifact should be put in this folder.
     - All the content inside of this directory will NOT be put in the classpath of the generated artifact.
