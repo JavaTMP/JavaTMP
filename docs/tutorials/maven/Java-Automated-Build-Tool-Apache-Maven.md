@@ -214,6 +214,18 @@ maven-project
     └───[executable file like .jar] (The generated project artifact is also present in this folder)
 ```
 
+- `src/main/java`
+    - Inside this folder you can put all the application source files.
+    Classes and packages for the main (real) artifact should be put in this folder.
+    - All the content inside of this directory will be put in the classpath of the generated artifact.
+    - If the artifact is a jar file, all the classes and packages will be in the root folder of the generated jar,
+    so it will be available by default on the runtime classpath.
+    - If the artifact is a war, all the classes and packages will be put inside the WEB-INF/classes directory,
+    so it will be available on the runtime classpath by default.
+    - When the project is build or packaged all those classes and packages will be put in the target folder.
+    - If you use eclipse as your IDE, this directory will be put inside the java build path automatically
+    when you give the maven nature to the project.
+
 ### Importing a Java Maven Project into Eclipse
 - To import the Maven Project demo1 created before above go to Eclipse IDE and import .. > Maven > Existing Maven Projects > Select Your Root Maven Directory contained pom.xml file
 - From your imported Maven project select Maven > Update Project ...
@@ -224,8 +236,8 @@ maven-project
 - From New Project Dialog select Maven > Maven Project
 - From New Maven Project select project name and location and press next
 - From select an Archetype select archetype with artifact Id `maven-archetype-quickstart` and press next
-- From Specifiy Archetype parameters fill group id, artifact Id, Version, package, 
+- From Specifiy Archetype parameters fill group id, artifact Id, Version, package,
 and properties available from archetype values and then press finish
 
 ### Importing a Java Maven Project into Eclipse IDE from GitHub
-- 
+-
