@@ -186,10 +186,10 @@ mvn
 - A typical Maven project has a pom.xml file and a directory structure based on defined conventions:
 ```
 maven-project
-├───pom.xml
-├───README.txt
-├───NOTICE.txt
-├───LICENSE.txt
+├───pom.xml (Project Object Modal Maven Main Configuration File)
+├───README.txt (Project readme file)
+├───NOTICE.txt (notes, notices and attributions for the project)
+├───LICENSE.txt (the project license file)
 ├───src
     ├───main
         ├───java (all the application source files)
@@ -204,7 +204,7 @@ maven-project
         └───filters (all the application test filters files)
     ├───it
     ├───site
-    └───assembly
+    └───assembly (the maven assembly plugin files)
 └───target
     ├───classes (Compiled source files are placed in this folder. This folder will also contain resources, such as XML and property files that are part of the source, placed in src/main/resources)
     ├───test-classes (Compiled test source files are available in this folder. In addition, it also contains test resources, which are files required for the purpose of testing, but not for running the project)
@@ -254,7 +254,8 @@ maven-project
     - When the project is build or packaged all those classes and packages will be put in the target folder.
     - When you run your integration test, the implicated plugin will run the classes from the target directory.
     - This directory will be put inside the java build path automatically.
-
+- `src/assembly`
+    - This folder contains files to be used by the maven assembly plugin. Read more about the maven assembly plugin in the page [http://maven.apache.org/plugins/maven-assembly-plugin/](http://maven.apache.org/plugins/maven-assembly-plugin/).
 ### Importing a Java Maven Project into Eclipse
 - To import the Maven Project demo1 created before above go to Eclipse IDE and import .. > Maven > Existing Maven Projects > Select Your Root Maven Directory contained pom.xml file
 - From your imported Maven project select Maven > Update Project ...
