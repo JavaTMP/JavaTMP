@@ -320,4 +320,11 @@ and properties available from archetype values and then press finish
 - The Maven Coordinates consistent of groupid (com.mycompany.app) + artifactId (my-app) + version (1).
 - Use the above minimum configuration of pom.xml
 by running command `mvn clean package` and see the generate empty jar file.
--
+- Basically our POM inherits from a super POM and combined they produce what is known as the affective POM.
+- In Eclipse press tab effective POM on any POM file to see the combination of them.
+- Maven use conventions over configurations.
+
+### POM Packaging Types
+- The generated output files of building the Java Maven Project.
+- Can be explicitly set by tag `<packaging></packaging>` as a child of `project` tag.
+- It has values like jar, war, pom, ear types.
