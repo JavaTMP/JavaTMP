@@ -79,7 +79,7 @@ Help > Install New Software > `http://download.eclipse.org/technology/m2e/releas
 - Add previously installed Maven by going to Window > Preferences > Maven > Installations
 - Check it as the default one.
 - Check your local maven repository folder `.m2` in Window > Preferences > Maven > User Settings
-- Create a user settings file `C:\Users\m_dar\.m2\settings.xml`
+- Create a user settings file `C:\Users\[local user name]\.m2\settings.xml`
 with contents from [http://maven.apache.org/settings.html](http://maven.apache.org/settings.html) and then check it in user settings.
 - In Project Explorer, Import a Maven Project that contains pom.xml file.
 - Create a new Maven Project from File > New > Maven Project.
