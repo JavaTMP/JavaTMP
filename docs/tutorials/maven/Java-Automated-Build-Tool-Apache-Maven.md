@@ -298,15 +298,16 @@ and properties available from archetype values and then press finish
 - POM stored in XML format in file named 'pom.xml'
 - Each Maven Project has only 1 pom.xml
 - a POM contains the following information:
-    - General Project Information: 
+    - General Project Information:
     (Project name, URL, devloper names and contribution, License details)
     - Buil Settings:
     (Customise the Maven Life Cycles, add new `Plugins` and `Goals`)
     - Build Environment:
-    (Profiles are used to configure different deployment environment, 
+    (Profiles are used to configure different deployment environment,
     like Development, Test, Production)
     - POM Relationships: (Modules and Sub-Modules)
 - The minimum requirement for a POM are the following:
+
 ```xml
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
@@ -316,7 +317,7 @@ and properties available from archetype values and then press finish
   <version>1</version>
 </project>
 ```
-- The Maven Coordinates consistent of groupid (com.mycompany.app) + artifactId (my-app) + version (1).    
-- Use the above minimum configuration of pom.xml 
+- The Maven Coordinates consistent of groupid (com.mycompany.app) + artifactId (my-app) + version (1).
+- Use the above minimum configuration of pom.xml
 by running command `mvn clean package` and see the generate empty jar file.
-- 
+-
