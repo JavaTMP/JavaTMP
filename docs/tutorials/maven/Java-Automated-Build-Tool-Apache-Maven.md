@@ -282,4 +282,41 @@ maven-project
 and properties available from archetype values and then press finish
 
 ### Importing a Java Maven Project into Eclipse IDE from GitHub
--
+- Remember in Eclipse IDE the dialog for New Item is different that the dialog for importing item.
+- To show the Git Repositories view go to Window > Show View > Other ... to open Show View Dialog
+- From Show View Dialog select Git > Git Repositories and then press Open.
+- Press Clone Git Repository to open Clone dialog.
+- In Source git Repository Enter the location of the source repository and fill needed values then press next
+- In Branch Selection step select branches to clone from remote repository. like master branch.
+- Press finish to import and fetch Maven Project from remote GitHub repository.
+- Select Your imported Maven Project and go to Maven > Update Project ...
+- Run project by selecting Run As > Maven Build ...
+- Fill goals by `clean package` and press Run button.
+
+### Introduction to the Maven 'Project Object Modal' or POM
+- For quick introduction about POM kindly read the page [https://maven.apache.org/guides/introduction/introduction-to-the-pom.html](https://maven.apache.org/guides/introduction/introduction-to-the-pom.html)
+- POM stored in XML format in file named 'pom.xml'
+- Each Maven Project has only 1 pom.xml
+- a POM contains the following information:
+    - General Project Information: 
+    (Project name, URL, devloper names and contribution, License details)
+    - Buil Settings:
+    (Customise the Maven Life Cycles, add new `Plugins` and `Goals`)
+    - Build Environment:
+    (Profiles are used to configure different deployment environment, 
+    like Development, Test, Production)
+    - POM Relationships: (Modules and Sub-Modules)
+- The minimum requirement for a POM are the following:
+```xml
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.mycompany.app</groupId>
+  <artifactId>my-app</artifactId>
+  <version>1</version>
+</project>
+```
+- The Maven Coordinates consistent of groupid (com.mycompany.app) + artifactId (my-app) + version (1).    
+- Use the above minimum configuration of pom.xml 
+by running command `mvn clean package` and see the generate empty jar file.
+- 
