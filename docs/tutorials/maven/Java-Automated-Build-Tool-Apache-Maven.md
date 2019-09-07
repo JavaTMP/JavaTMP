@@ -227,4 +227,5 @@ maven-project
 - From Specifiy Archetype parameters fill group id, artifact Id, Version, package, 
 and properties available from archetype values and then press finish
 
-
+### Importing a Java Maven Project into Eclipse IDE from GitHub
+- 
