@@ -414,3 +414,52 @@ you could assign tasks to each of those build phases by using:
         - The goals that are configured will be added to the goals already bound to 
         the lifecycle from the packaging selected.
 - Read more about [Default Lifecycle Bindings](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html)        
+
+### Maven Plugins
+- Read more about Maven plugins in page [Available Plugins](https://maven.apache.org/plugins/)
+- For example to run a compile goal within a plugin compiler use the following command.
+Read more about Apache Maven Compiler Plugin in this page [https://maven.apache.org/plugins/maven-compiler-plugin/](https://maven.apache.org/plugins/maven-compiler-plugin/)
+
+```
+mvn compiler:compile
+```
+
+### Maven Plugin Configuration
+- Read more about compile goal of compiler plugin of compile phase in page [compiler:compile](https://maven.apache.org/plugins/maven-compiler-plugin/compile-mojo.html)
+- For example to set to true to show messages about what the compiler is doing:
+
+```
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<verbose>true</verbose>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+```
+
+### Maven Javadoc Plugin
+- The Javadoc Plugin uses the Javadoc tool to generate javadocs for the specified project. 
+Read more about javadoc plugin in page [Apache Maven Javadoc Plugin](https://maven.apache.org/plugins/maven-javadoc-plugin/)
+- To Run Javadoc goal of javadoc plugin use the following command:
+
+```
+mvn javadoc:javadoc
+```
+
+### Maven Surefire Plugin
+- The Surefire Plugin is used during the `test` phase of the build lifecycle to execute the unit tests 
+of an application. Read more about it in [Apache Maven Surefire Plugin](https://maven.apache.org/surefire/maven-surefire-plugin/)
+- The Surefire Plugin has only one goal: `surefire:test` runs the unit tests of an application.
+- Make sure to run it after compiling test classes like the following command:
+
+```
+mvn compiler:testCompile surefire:test
+```
+
+
