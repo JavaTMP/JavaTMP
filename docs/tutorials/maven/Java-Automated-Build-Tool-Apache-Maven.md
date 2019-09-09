@@ -328,3 +328,89 @@ by running command `mvn clean package` and see the generate empty jar file.
 - The generated output files of building the Java Maven Project.
 - Can be explicitly set by tag `<packaging></packaging>` as a child of `project` tag.
 - It has values like jar, war, pom, ear types.
+
+### Maven Lifecycles
+- For more informaiton about Maven lifecycles read the page [https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html)
+- A Maven build Lifecycle is Made Up of Phases.
+- The process for building and distributing a particular artifact (project) 
+is clearly defined by phases in specific build lifecycle.
+- There are three built-in build lifecycles: default, clean and site.
+    - The `default` lifecycle handles your project deployment
+    - the `clean` lifecycle handles project cleaning
+    - the `site` lifecycle handles the creation of your project's site documentation.
+- Each of these build lifecycles is defined by a different list of build phases, 
+wherein a build phase represents a stage in the lifecycle(A Goal to be executed).
+- Describe the lifecycle by command:
+
+```
+mvn help:describe -Dcmd=clean
+```
+
+```
+mvn help:describe -Dcmd=compile
+```
+
+### `Default` or `Build` lifecycle
+- The default lifecycle comprises of the following phases 
+(for a complete list of the lifecycle phases, refer to [the Lifecycle Reference page](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html)):
+    - `validate` - validate the project is correct and all necessary information is available
+    - `compile` - compile the source code of the project
+    - `test` - test the compiled source code using a suitable unit testing framework. These tests should not require the code be packaged or deployed
+    - `package` - take the compiled code and package it in its distributable format, such as a JAR.
+    - `verify` - run any checks on results of integration tests to ensure quality criteria are met
+    - `install` - install the package into the local repository, for use as a dependency in other projects locally
+    - `deploy` - done in the build environment, copies the final package to the remote repository for sharing with other developers and projects.
+- These lifecycle phases (plus the other lifecycle phases not shown here) are executed sequentially to complete the default lifecycle.
+- In a development environment, use the following call to build and install 
+artifacts into the local repository. This command executes each default life cycle phase 
+in order (validate, compile, test, package, verify), before executing install. 
+You only need to call the last build phase to be executed, in this case, install:
+
+```
+mvn install
+```
+- In a build environment, use the following call to cleanly build and deploy artifacts 
+into the shared repository:
+
+```
+mvn clean deploy
+```
+
+### A Build Phase is Made Up of Plugin Goals
+- However, even though a build phase is responsible for a specific step in the build lifecycle, 
+the manner in which it carries out those responsibilities may vary. 
+And this is done by declaring the plugin goals bound to those build phases.
+- A plugin goal represents a specific task (finer than a build phase) which contributes to the building 
+and managing of a project. It may be bound to zero or more build phases. 
+A goal not bound to any build phase could be executed outside of the build lifecycle by direct invocation. 
+The order of execution depends on the order in which the goal(s) and the build phase(s) are invoked. 
+For example, consider the command below. The `clean` and `package` arguments are build phases, 
+while the `dependency:copy-dependencies` is a goal (of a plugin):
+
+```
+mvn clean dependency:copy-dependencies package
+```
+- Moreover, if a goal is bound to one or more build phases, that goal will be called in all those phases.
+- Furthermore, a build phase can also have zero or more goals bound to it. 
+If a build phase has no goals bound to it, that build phase will not execute. 
+But if it has one or more goals bound to it, it will execute all those goals.
+
+### Setting Up Your Project to Use the Build Lifecycle
+- The build lifecycle is simple enough to use, but when you are constructing a Maven build for a project, 
+you could assign tasks to each of those build phases by using: 
+    - Packaging
+        - Set the packaging for your project via the equally named POM element `<packaging>`.
+        - Some of the valid packaging values are `jar`, `war`, `ear` and `pom`. 
+        - If no packaging value has been specified, it will default to `jar`.
+        - Each packaging contains a list of goals to bind to a particular phase.
+    - Plugins
+        - To add goals to phases is to configure plugins in your project. 
+        Plugins are artifacts that provide goals to Maven.
+        - A plugin may have one or more goals wherein each goal represents a capability of that plugin.
+        For example, the Compiler plugin has two goals: `compile` and `testCompile`. 
+        - plugins can contain information that indicates which lifecycle phase to bind a goal to. 
+        Note that adding the plugin on its own is not enough information - you must also specify the goals 
+        you want to run as part of your build.
+        - The goals that are configured will be added to the goals already bound to 
+        the lifecycle from the packaging selected.
+- Read more about [Default Lifecycle Bindings](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html)        
