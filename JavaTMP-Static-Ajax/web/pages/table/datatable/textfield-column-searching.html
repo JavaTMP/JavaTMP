@@ -38,16 +38,6 @@
                                         <th>Salary</th>
                                     </tr>
                                 </thead>
-                                <tfoot>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Position</th>
-                                        <th>Office</th>
-                                        <th>Age</th>
-                                        <th>Start date</th>
-                                        <th>Salary</th>
-                                    </tr>
-                                </tfoot>
                                 <tbody>
                                     <tr>
                                         <td>Tiger Nixon</td>
@@ -543,24 +533,13 @@
                     console.log("start printing columns headers");
                     this.api().columns().every(function (index) {
                         var column = this;
-                        var select = $('<select class="form-control" style="width:100%;" ><option value=""></option></select>')
+                        var select = $('<input class="form-control"/>')
                                 .appendTo($('<th></th>').appendTo($(filterHeaders)))
-                                .on('change', function () {
+                                .on('keyup', function () {
                                     console.log($(this).val());
                                     var val = $.fn.dataTable.util.escapeRegex($(this).val());
-                                    column.search(val ? '^' + val + '$' : '', true, false).draw();
+                                    column.search(val ? val : '', true, false).draw();
                                 });
-                        if (index === 5) {
-                            column.data().unique().sort().each(function (d, j) {
-                                var value = numeral(d).value();
-                                var display = numeral(d).format('$0,0.00');
-                                select.append('<option value="' + value + '">' + display + '</option>');
-                            });
-                        } else {
-                            column.data().unique().sort().each(function (d, j) {
-                                select.append('<option value="' + d + '">' + d + '</option>');
-                            });
-                        }
                     });
                     this.api().columns.adjust();
                 },
