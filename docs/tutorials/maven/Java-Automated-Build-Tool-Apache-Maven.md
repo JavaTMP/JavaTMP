@@ -459,7 +459,25 @@ of an application. Read more about it in [Apache Maven Surefire Plugin](https://
 - Make sure to run it after compiling test classes like the following command:
 
 ```
-mvn compiler:testCompile surefire:test
+mvn clean compiler:compile compiler:testCompile surefire:test
+```
+Or Simply Run the command which will run all the phases' goals before it in the default lifecycle:
+
+```
+mvn test
 ```
 
+### Goals with Lifecycles
+- Read more about built-in lifecycle bindings phases' goals in the page [Introduction to the Build Lifecycle](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html)
+- `mvn install` will publish your Java Maven Project to your local Maven repository
+usually inside `.m2` folder.
 
+### Site life Cycle
+- Read more about `site` lifecycle phases in page [lifecycles](https://maven.apache.org/ref/3.6.2/maven-core/lifecycles.html)
+- Run site lifecycle by using the command:
+
+```
+mvn clean install site
+```
+
+And it will generate a `target/site` folder which contains web site for your project.
