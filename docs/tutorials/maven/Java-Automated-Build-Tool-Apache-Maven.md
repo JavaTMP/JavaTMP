@@ -425,6 +425,7 @@ mvn compiler:compile
 ```
 
 ### Maven Plugin Configuration
+- Read more about Maven Plugin Configuration in page [guide to Configuring Plug-ins](https://maven.apache.org/guides/mini/guide-configuring-plugins.html)
 - Read more about compile goal of compiler plugin of compile phase in page [compiler:compile](https://maven.apache.org/plugins/maven-compiler-plugin/compile-mojo.html)
 - For example to set to true to show messages about what the compiler is doing:
 
@@ -501,7 +502,7 @@ Read more about available configuration options in page [https://maven.apache.or
 	<version>3.1</version>
 	<configuration>
         <source>1.7</source>
-		<target>1.7</target>
+        <target>1.7</target>
     </configuration>
 </plugin>
 ```
@@ -545,3 +546,9 @@ Managing dependencies for multi-module projects and applications that consist of
 Maven helps a great deal in defining, creating, and maintaining reproducible builds with well-defined classpaths 
 and library versions.
 Read more about Apache Maven Dependency in page [Introduction to the Dependency Mechanism](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html)
+- You can use Apache Maven Dependency Plugin to get more information about your project's dependencies.
+Run the command `mvn dependency:tree`. Read more about Apache Maven Dependency Plugin in page [https://maven.apache.org/plugins/maven-dependency-plugin/](https://maven.apache.org/plugins/maven-dependency-plugin/)
+- To find and lookup for Maven plugins start looking on [http://search.maven.org](http://search.maven.org)
+or on [https://mvnrepository.com/](https://mvnrepository.com/).
+- You could remove your local repositories by deleting folder `~/.m2/repository`.
+
