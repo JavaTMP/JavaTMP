@@ -506,4 +506,42 @@ Read more about available configuration options in page [https://maven.apache.or
 </plugin>
 ```
 
-- 
+### Customizing Maven Default Life Cycle with the Maven Assembly Plugin
+- The Assembly Plugin for Maven is primarily intended to allow users to aggregate the project output 
+along with its dependencies, modules, site documentation, and other files into a single distributable archive.
+And The main goal in the assembly plugin is the `single` goal. It is used to create all assemblies.
+Read more about `maven-assembly-plugin` 
+in page [https://maven.apache.org/plugins/maven-assembly-plugin/](https://maven.apache.org/plugins/maven-assembly-plugin/)
+- Read more about plugin usage in page [maven-assembly-plugin usage](https://maven.apache.org/plugins/maven-assembly-plugin/usage.html)
+- For example to make the output jar include all the dependencies use customize the plugin by:
+
+```xml
+<plugin>
+    <!-- NOTE: We don't need a groupId specification because the group is 
+	org.apache.maven.plugins ...which is assumed by default. -->
+	<groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-assembly-plugin</artifactId>
+	<version>3.1.1</version>
+	<configuration>
+        <descriptorRefs>
+            <descriptorRef>jar-with-dependencies</descriptorRef>
+        </descriptorRefs>
+    </configuration>
+</plugin>
+```
+
+- To explicitly call this plugin use the command `mvn clean assembly:single`.
+- To Creating an Executable JAR, the Assembly Plugin supports configuration of an `<archive>` element 
+which is handled by maven-archiver. Using this configuration, it's easy to configure 
+the Main-Class attribute of the JAR manifest
+- You can run the plugin's goal within build `package` phase by explicity add an `<executaions>` element to 
+your plugin configuration element.
+- You can also go to effective POM and copy a `maven-jar-plugin` plugin to your pom.xml file and override
+the package phase to `none` which is not exist to not generate default jar file.
+
+### Introduction to Maven Dependencies
+- Dependency management is a core feature of Maven. Managing dependencies for a single project is easy. 
+Managing dependencies for multi-module projects and applications that consist of hundreds of modules is possible. 
+Maven helps a great deal in defining, creating, and maintaining reproducible builds with well-defined classpaths 
+and library versions.
+Read more about Apache Maven Dependency in page [Introduction to the Dependency Mechanism](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html)
