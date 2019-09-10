@@ -428,19 +428,19 @@ mvn compiler:compile
 - Read more about compile goal of compiler plugin of compile phase in page [compiler:compile](https://maven.apache.org/plugins/maven-compiler-plugin/compile-mojo.html)
 - For example to set to true to show messages about what the compiler is doing:
 
-```
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
-				<configuration>
-					<verbose>true</verbose>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+```xml
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>3.8.1</version>
+			<configuration>
+                <verbose>true</verbose>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
 ```
 
 ### Maven Javadoc Plugin
@@ -479,5 +479,31 @@ usually inside `.m2` folder.
 ```
 mvn clean install site
 ```
+- And it will generate a `target/site` folder which contains web site for your project.
+- To override and upgrade `maven-site-plugin` plugin to version 3.7.1 
+use the following option:
 
-And it will generate a `target/site` folder which contains web site for your project.
+```xml
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-site-plugin</artifactId>
+    <version>3.7.1</version>
+</plugin>
+```
+### Customizing Maven Default Life Cycle with the Maven Compiler Plugin
+- To override `maven-compiler-plugin` plugin use the following xml code.
+Read more about available configuration options in page [https://maven.apache.org/plugins/maven-compiler-plugin/compile-mojo.html](https://maven.apache.org/plugins/maven-compiler-plugin/compile-mojo.html) 
+
+```xml
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-compiler-plugin</artifactId>
+	<version>3.1</version>
+	<configuration>
+        <source>1.7</source>
+		<target>1.7</target>
+    </configuration>
+</plugin>
+```
+
+- 
