@@ -390,8 +390,7 @@ while the `dependency:copy-dependencies` is a goal (of a plugin):
 ```
 mvn clean dependency:copy-dependencies package
 ```
-For more information about `maven-dependency-plugin` plugin read the page [Apache Maven Dependency Plugin
-](https://maven.apache.org/plugins/maven-dependency-plugin/)
+For more information about `maven-dependency-plugin` plugin read the page [Apache Maven Dependency Plugin](https://maven.apache.org/plugins/maven-dependency-plugin/)
 - Moreover, if a goal is bound to one or more build phases, that goal will be called in all those phases.
 - Furthermore, a build phase can also have zero or more goals bound to it.
 If a build phase has no goals bound to it, that build phase will not execute.
