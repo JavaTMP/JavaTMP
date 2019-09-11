@@ -553,3 +553,9 @@ Run the command `mvn dependency:tree`. Read more about Apache Maven Dependency P
 or on [https://mvnrepository.com/](https://mvnrepository.com/).
 - You could remove your local repositories by deleting folder `~/.m2/repository`.
 
+### Maven Important Links
+- [Guide to installing 3rd party JARs in Maven repository](https://maven.apache.org/guides/mini/guide-3rd-party-jars-local.html)
+- [force Maven to copy dependencies into target/lib](https://stackoverflow.com/questions/97640/force-maven-to-copy-dependencies-into-target-lib)
+- [3 ways to add local jar to maven project](http://roufid.com/3-ways-to-add-local-jar-to-maven-project/)
+- [How to add local jar files to a Maven project?](https://stackoverflow.com/questions/4955635/how-to-add-local-jar-files-to-a-maven-project)
+
