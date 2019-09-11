@@ -332,13 +332,13 @@ by running command `mvn clean package` and see the generate empty jar file.
 ### Maven Lifecycles
 - For more informaiton about Maven lifecycles read the page [https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html)
 - A Maven build Lifecycle is Made Up of Phases.
-- The process for building and distributing a particular artifact (project) 
+- The process for building and distributing a particular artifact (project)
 is clearly defined by phases in specific build lifecycle.
 - There are three built-in build lifecycles: default, clean and site.
     - The `default` lifecycle handles your project deployment
     - the `clean` lifecycle handles project cleaning
     - the `site` lifecycle handles the creation of your project's site documentation.
-- Each of these build lifecycles is defined by a different list of build phases, 
+- Each of these build lifecycles is defined by a different list of build phases,
 wherein a build phase represents a stage in the lifecycle(A Goal to be executed).
 - Describe the lifecycle by command:
 
@@ -351,7 +351,7 @@ mvn help:describe -Dcmd=compile
 ```
 
 ### `Default` or `Build` lifecycle
-- The default lifecycle comprises of the following phases 
+- The default lifecycle comprises of the following phases
 (for a complete list of the lifecycle phases, refer to [the Lifecycle Reference page](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html)):
     - `validate` - validate the project is correct and all necessary information is available
     - `compile` - compile the source code of the project
@@ -361,15 +361,15 @@ mvn help:describe -Dcmd=compile
     - `install` - install the package into the local repository, for use as a dependency in other projects locally
     - `deploy` - done in the build environment, copies the final package to the remote repository for sharing with other developers and projects.
 - These lifecycle phases (plus the other lifecycle phases not shown here) are executed sequentially to complete the default lifecycle.
-- In a development environment, use the following call to build and install 
-artifacts into the local repository. This command executes each default life cycle phase 
-in order (validate, compile, test, package, verify), before executing install. 
+- In a development environment, use the following call to build and install
+artifacts into the local repository. This command executes each default life cycle phase
+in order (validate, compile, test, package, verify), before executing install.
 You only need to call the last build phase to be executed, in this case, install:
 
 ```
 mvn install
 ```
-- In a build environment, use the following call to cleanly build and deploy artifacts 
+- In a build environment, use the following call to cleanly build and deploy artifacts
 into the shared repository:
 
 ```
@@ -377,43 +377,45 @@ mvn clean deploy
 ```
 
 ### A Build Phase is Made Up of Plugin Goals
-- However, even though a build phase is responsible for a specific step in the build lifecycle, 
-the manner in which it carries out those responsibilities may vary. 
+- However, even though a build phase is responsible for a specific step in the build lifecycle,
+the manner in which it carries out those responsibilities may vary.
 And this is done by declaring the plugin goals bound to those build phases.
-- A plugin goal represents a specific task (finer than a build phase) which contributes to the building 
-and managing of a project. It may be bound to zero or more build phases. 
-A goal not bound to any build phase could be executed outside of the build lifecycle by direct invocation. 
-The order of execution depends on the order in which the goal(s) and the build phase(s) are invoked. 
-For example, consider the command below. The `clean` and `package` arguments are build phases, 
+- A plugin goal represents a specific task (finer than a build phase) which contributes to the building
+and managing of a project. It may be bound to zero or more build phases.
+A goal not bound to any build phase could be executed outside of the build lifecycle by direct invocation.
+The order of execution depends on the order in which the goal(s) and the build phase(s) are invoked.
+For example, consider the command below. The `clean` and `package` arguments are build phases,
 while the `dependency:copy-dependencies` is a goal (of a plugin):
 
 ```
 mvn clean dependency:copy-dependencies package
 ```
+For more information about `maven-dependency-plugin` plugin read the page [Apache Maven Dependency Plugin
+](https://maven.apache.org/plugins/maven-dependency-plugin/)
 - Moreover, if a goal is bound to one or more build phases, that goal will be called in all those phases.
-- Furthermore, a build phase can also have zero or more goals bound to it. 
-If a build phase has no goals bound to it, that build phase will not execute. 
+- Furthermore, a build phase can also have zero or more goals bound to it.
+If a build phase has no goals bound to it, that build phase will not execute.
 But if it has one or more goals bound to it, it will execute all those goals.
 
 ### Setting Up Your Project to Use the Build Lifecycle
-- The build lifecycle is simple enough to use, but when you are constructing a Maven build for a project, 
-you could assign tasks to each of those build phases by using: 
+- The build lifecycle is simple enough to use, but when you are constructing a Maven build for a project,
+you could assign tasks to each of those build phases by using:
     - Packaging
         - Set the packaging for your project via the equally named POM element `<packaging>`.
-        - Some of the valid packaging values are `jar`, `war`, `ear` and `pom`. 
+        - Some of the valid packaging values are `jar`, `war`, `ear` and `pom`.
         - If no packaging value has been specified, it will default to `jar`.
         - Each packaging contains a list of goals to bind to a particular phase.
     - Plugins
-        - To add goals to phases is to configure plugins in your project. 
+        - To add goals to phases is to configure plugins in your project.
         Plugins are artifacts that provide goals to Maven.
         - A plugin may have one or more goals wherein each goal represents a capability of that plugin.
-        For example, the Compiler plugin has two goals: `compile` and `testCompile`. 
-        - plugins can contain information that indicates which lifecycle phase to bind a goal to. 
-        Note that adding the plugin on its own is not enough information - you must also specify the goals 
+        For example, the Compiler plugin has two goals: `compile` and `testCompile`.
+        - plugins can contain information that indicates which lifecycle phase to bind a goal to.
+        Note that adding the plugin on its own is not enough information - you must also specify the goals
         you want to run as part of your build.
-        - The goals that are configured will be added to the goals already bound to 
+        - The goals that are configured will be added to the goals already bound to
         the lifecycle from the packaging selected.
-- Read more about [Default Lifecycle Bindings](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html)        
+- Read more about [Default Lifecycle Bindings](https://maven.apache.org/guides/introduction/introduction-to-the-lifecycle.html)
 
 ### Maven Plugins
 - Read more about Maven plugins in page [Available Plugins](https://maven.apache.org/plugins/)
@@ -445,7 +447,7 @@ mvn compiler:compile
 ```
 
 ### Maven Javadoc Plugin
-- The Javadoc Plugin uses the Javadoc tool to generate javadocs for the specified project. 
+- The Javadoc Plugin uses the Javadoc tool to generate javadocs for the specified project.
 Read more about javadoc plugin in page [Apache Maven Javadoc Plugin](https://maven.apache.org/plugins/maven-javadoc-plugin/)
 - To Run Javadoc goal of javadoc plugin use the following command:
 
@@ -454,7 +456,7 @@ mvn javadoc:javadoc
 ```
 
 ### Maven Surefire Plugin
-- The Surefire Plugin is used during the `test` phase of the build lifecycle to execute the unit tests 
+- The Surefire Plugin is used during the `test` phase of the build lifecycle to execute the unit tests
 of an application. Read more about it in [Apache Maven Surefire Plugin](https://maven.apache.org/surefire/maven-surefire-plugin/)
 - The Surefire Plugin has only one goal: `surefire:test` runs the unit tests of an application.
 - Make sure to run it after compiling test classes like the following command:
@@ -481,7 +483,7 @@ usually inside `.m2` folder.
 mvn clean install site
 ```
 - And it will generate a `target/site` folder which contains web site for your project.
-- To override and upgrade `maven-site-plugin` plugin to version 3.7.1 
+- To override and upgrade `maven-site-plugin` plugin to version 3.7.1
 use the following option:
 
 ```xml
@@ -493,7 +495,7 @@ use the following option:
 ```
 ### Customizing Maven Default Life Cycle with the Maven Compiler Plugin
 - To override `maven-compiler-plugin` plugin use the following xml code.
-Read more about available configuration options in page [https://maven.apache.org/plugins/maven-compiler-plugin/compile-mojo.html](https://maven.apache.org/plugins/maven-compiler-plugin/compile-mojo.html) 
+Read more about available configuration options in page [https://maven.apache.org/plugins/maven-compiler-plugin/compile-mojo.html](https://maven.apache.org/plugins/maven-compiler-plugin/compile-mojo.html)
 
 ```xml
 <plugin>
@@ -508,17 +510,17 @@ Read more about available configuration options in page [https://maven.apache.or
 ```
 
 ### Customizing Maven Default Life Cycle with the Maven Assembly Plugin
-- The Assembly Plugin for Maven is primarily intended to allow users to aggregate the project output 
+- The Assembly Plugin for Maven is primarily intended to allow users to aggregate the project output
 along with its dependencies, modules, site documentation, and other files into a single distributable archive.
 And The main goal in the assembly plugin is the `single` goal. It is used to create all assemblies.
-Read more about `maven-assembly-plugin` 
+Read more about `maven-assembly-plugin`
 in page [https://maven.apache.org/plugins/maven-assembly-plugin/](https://maven.apache.org/plugins/maven-assembly-plugin/)
 - Read more about plugin usage in page [maven-assembly-plugin usage](https://maven.apache.org/plugins/maven-assembly-plugin/usage.html)
 - For example to make the output jar include all the dependencies use customize the plugin by:
 
 ```xml
 <plugin>
-    <!-- NOTE: We don't need a groupId specification because the group is 
+    <!-- NOTE: We don't need a groupId specification because the group is
 	org.apache.maven.plugins ...which is assumed by default. -->
 	<groupId>org.apache.maven.plugins</groupId>
 	<artifactId>maven-assembly-plugin</artifactId>
@@ -532,18 +534,18 @@ in page [https://maven.apache.org/plugins/maven-assembly-plugin/](https://maven.
 ```
 
 - To explicitly call this plugin use the command `mvn clean assembly:single`.
-- To Creating an Executable JAR, the Assembly Plugin supports configuration of an `<archive>` element 
-which is handled by maven-archiver. Using this configuration, it's easy to configure 
+- To Creating an Executable JAR, the Assembly Plugin supports configuration of an `<archive>` element
+which is handled by maven-archiver. Using this configuration, it's easy to configure
 the Main-Class attribute of the JAR manifest
-- You can run the plugin's goal within build `package` phase by explicity add an `<executaions>` element to 
+- You can run the plugin's goal within build `package` phase by explicity add an `<executaions>` element to
 your plugin configuration element.
 - You can also go to effective POM and copy a `maven-jar-plugin` plugin to your pom.xml file and override
 the package phase to `none` which is not exist to not generate default jar file.
 
 ### Introduction to Maven Dependencies
-- Dependency management is a core feature of Maven. Managing dependencies for a single project is easy. 
-Managing dependencies for multi-module projects and applications that consist of hundreds of modules is possible. 
-Maven helps a great deal in defining, creating, and maintaining reproducible builds with well-defined classpaths 
+- Dependency management is a core feature of Maven. Managing dependencies for a single project is easy.
+Managing dependencies for multi-module projects and applications that consist of hundreds of modules is possible.
+Maven helps a great deal in defining, creating, and maintaining reproducible builds with well-defined classpaths
 and library versions.
 Read more about Apache Maven Dependency in page [Introduction to the Dependency Mechanism](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html)
 - You can use Apache Maven Dependency Plugin to get more information about your project's dependencies.
