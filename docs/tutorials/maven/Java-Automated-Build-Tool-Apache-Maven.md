@@ -554,6 +554,7 @@ or on [https://mvnrepository.com/](https://mvnrepository.com/).
 - You could remove your local repositories by deleting folder `~/.m2/repository`.
 
 ### Maven Important Links
+- [POM Reference](https://maven.apache.org/pom.html)
 - [Guide to installing 3rd party JARs in Maven repository](https://maven.apache.org/guides/mini/guide-3rd-party-jars-local.html)
 - [force Maven to copy dependencies into target/lib](https://stackoverflow.com/questions/97640/force-maven-to-copy-dependencies-into-target-lib)
 - [3 ways to add local jar to maven project](http://roufid.com/3-ways-to-add-local-jar-to-maven-project/)
