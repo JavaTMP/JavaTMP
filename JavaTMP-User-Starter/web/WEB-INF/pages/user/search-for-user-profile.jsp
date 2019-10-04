@@ -401,24 +401,23 @@
 
             var usersSearchLookupButton = $("#usersSearchLookupButton");
 
-            window.usersLookupActionCallback = function (callbackData) {
-                if ((callbackData.cancel !== true)) {
-                    searchForm.find("input[name='id']").val(callbackData.userSelected.id);
-                    searchForm.find("input[name='userName']").val(callbackData.userSelected.userName);
-                    searchForm.trigger("submit");
-                }
-            };
-
             usersSearchLookupButton.on("click", function () {
                 var passData = {};
-                passData.callback = "usersLookupActionCallback";
-                passData.id = 1;
                 BootstrapModalWrapperFactory.createAjaxModal({
                     message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
                     updateSizeAfterDataFetchTo: null,
+                    localData: {
+                        callback: function (callbackData) {
+                            if ((callbackData.cancel !== true)) {
+                                searchForm.find("input[name='id']").val(callbackData.userSelected.id);
+                                searchForm.find("input[name='userName']").val(callbackData.userSelected.userName);
+                                searchForm.trigger("submit");
+                            }
+                        }
+                    },
                     ajax: {
                         url: javatmp.settings.contextPath + "/user/GetUsersLookupPopupPage",
-                        data: passData
+                        data: {}
                     },
                     ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                 });
