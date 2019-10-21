@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.javatmp.util.Constants" %>
 <!doctype html>
 <html lang="${labels["global.language"]}" dir="${labels["global.direction"]}" class="javatmp-default-admin-layout">
     <head>
@@ -185,6 +186,16 @@
                                     <li>
                                         <a href="${pageContext.request.contextPath}/user/SearchForUserProfileController">
                                             ${labels['sidebar.menuItem.users.searchForUser']}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/user/GetAdvancedListUsersSearchPage">
+                                            Advanced Users Search
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/user/jQuery-QueryBuilder">
+                                            jQuery-QueryBuilder
                                         </a>
                                     </li>
                                 </ul>
@@ -395,9 +406,11 @@
             </div>
         </div>
         <div id="global-label-items-block" class="d-none">
-            <c:forEach items="${labels.keySet()}" var="entry"><i k="${entry}">${labels[entry]}</i></c:forEach>
-            </div>
-            <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
+            <c:forEach items="${labels.keySet()}" var="entry">
+                <i k="${entry}">${labels[entry]}</i>
+            </c:forEach>
+        </div>
+        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all-locale-${sessionScope.user.lang}.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/assets/app/js/javatmp.plugins.wrapper.js?v=51" type="text/javascript"></script>

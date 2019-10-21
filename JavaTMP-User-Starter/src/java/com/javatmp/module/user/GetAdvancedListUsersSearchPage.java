@@ -17,14 +17,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/user/GetListUsersPage")
-public class GetListUsersPage extends HttpServlet {
+@WebServlet("/user/GetAdvancedListUsersSearchPage")
+public class GetAdvancedListUsersSearchPage extends HttpServlet {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String requestPage = "/WEB-INF/pages/user/listUsers.jsp";
+        String requestPage = "/WEB-INF/pages/user/advancedUsersSearch.jsp";
 
         ServletContext context = request.getServletContext();
         HttpSession session = request.getSession();
