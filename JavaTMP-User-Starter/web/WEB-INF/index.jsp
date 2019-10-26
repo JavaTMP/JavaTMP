@@ -193,11 +193,6 @@
                                             Advanced Users Search
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="${pageContext.request.contextPath}/pages/user/jQuery-QueryBuilder">
-                                            jQuery-QueryBuilder
-                                        </a>
-                                    </li>
                                 </ul>
                             </li>
                             <li>

@@ -10,10 +10,14 @@
     jQuery(function ($) {
         var currentCardletId = '<c:out value="${param.cardletId}"/>';
         var cardletElement = $("#" + currentCardletId);
-        cardletElement.on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
-            var containerCard = cardletElement.closest(".card");
+        var containerCard = null;
+        var chartDiv = null;
 
-            var UsersBirthdayPerMonths = echarts.init($('.UsersBirthdayPerMonths', cardletElement)[0]);
+        cardletElement.on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
+            containerCard = cardletElement.closest(".card");
+            chartDiv = $('.UsersBirthdayPerMonths', cardletElement)[0];
+
+            var UsersBirthdayPerMonths = echarts.init(chartDiv);
 
             var monthsName = moment.months();
 
@@ -62,10 +66,13 @@
                     {
                         inverse: javatmp.settings.isRTL,
                         data: monthsName,
-//                    axisLabel: {
-//                        interval: 0
-//                    },
+//                        axisTick: {
+//                            show: true,
+//                            alignWithLabel: true,
+//                            interval: 0
+//                        },
                         axisLabel: {
+//                            interval: 0,
                             fontFamily: $("body").css("font-family"),
                             fontSize: $("body").css("font-size")
                         },
@@ -125,20 +132,13 @@
 
             containerCard.on(javatmp.settings.cardFullscreenCompress, function (event, card) {
                 // when card compress by pressing the top right tool button
-                var cardId = $(card).attr("id");
-                if (cardId === "UsersBirthdayPerMonthsCard") {
-                    $('#UsersBirthdayPerMonths').css({"minHeight": 300});
-                    UsersBirthdayPerMonths.resize();
-                }
+                $(chartDiv).css({"minHeight": 300});
+                UsersBirthdayPerMonths.resize();
             });
-
             containerCard.on(javatmp.settings.cardFullscreenExpand, function (event, card) {
                 // when card compress by pressing the top right tool button
-                var cardId = $(card).attr("id");
-                if (cardId === "UsersBirthdayPerMonthsCard") {
-                    $('#UsersBirthdayPerMonths').css({"minHeight": 500});
-                    UsersBirthdayPerMonths.resize();
-                }
+                $(chartDiv).css({"minHeight": "90vh"});
+                UsersBirthdayPerMonths.resize();
             });
 
             cardletElement.on(javatmp.settings.javaTmpContainerRemoveEventName, function (event) {
