@@ -20,7 +20,10 @@
                         <!--<button class="btn btn-success set-json" data-target="basic">Set rules</button>-->
                         <button class="btn btn-primary parse-json" data-target="basic">Get rules</button>
                     </div>
-                    <hr class="bg-dark"/>
+                </div>
+            </div>
+            <div class="card mt-3">
+                <div class="card-body">
                     <h4>Demo with Fields:</h4>
                     <div id="builder1"></div>
                     <button class="btn btn-success" id="btn-set">Set Rules</button>
@@ -29,7 +32,16 @@
                     </body>
                 </div>
             </div>
-
+            <div class="card mt-3">
+                <div class="card-body">
+                    <h4>Select2 Plugin:</h4>
+                    <div id="builder2"></div>
+                    <button class="btn btn-success" id="btn-set1">Set Rules</button>
+                    <button class="btn btn-primary" id="btn-get1">Get Rules</button>
+                    <button class="btn btn-warning" id="btn-reset1">Reset</button>
+                    </body>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -239,6 +251,124 @@
                 //When rules changed :
                 $('#builder1').on('getRules.queryBuilder.filter', function (e) {
                     //$log.info(e.value);
+                });
+                console.log($.fn.queryBuilder.constructor.prototype.plugins);
+// define select2 with query builder :
+                $.fn.queryBuilder.define('select2-plugin', function (options) {
+                    alert("called");
+                    if (!$.fn.select2 || !$.fn.select2.Constructor) {
+                        Utils.error('MissingLibrary', 'Select2 is required to use "select2-querybuilder-plugin" plugin. Get it here: https://github.com/select2/select2');
+                    }
+
+                    var Selectors = QueryBuilder.selectors;
+
+                    // init selectpicker
+                    this.on('afterCreateRuleFilters', function (e, rule) {
+                        rule.$el.find(Selectors.rule_filter).removeClass('form-control').selectpicker(options);
+                    });
+
+                    this.on('afterCreateRuleOperators', function (e, rule) {
+                        rule.$el.find(Selectors.rule_operator).removeClass('form-control').selectpicker(options);
+                    });
+
+                    // update selectpicker on change
+                    this.on('afterUpdateRuleFilter', function (e, rule) {
+                        rule.$el.find(Selectors.rule_filter).selectpicker('render');
+                    });
+
+                    this.on('afterUpdateRuleOperator', function (e, rule) {
+                        rule.$el.find(Selectors.rule_operator).selectpicker('render');
+                    });
+
+                    this.on('beforeDeleteRule', function (e, rule) {
+                        rule.$el.find(Selectors.rule_filter).selectpicker('destroy');
+                        rule.$el.find(Selectors.rule_operator).selectpicker('destroy');
+                    });
+                }, {
+
+                });
+
+
+                $('#builder2').queryBuilder({
+                    icons: defaultIcons,
+                    filters: [{
+                            id: 'name',
+                            label: 'Name',
+                            type: 'string'
+                        }, {
+                            id: 'category',
+                            label: 'Category',
+                            type: 'integer',
+                            input: 'select',
+                            multiple: false,
+                            values: {
+                                1: 'Books',
+                                2: 'Movies',
+                                3: 'Music',
+                                4: 'Tools',
+                                5: 'Goodies',
+                                6: 'Clothes'
+                            },
+                            plugin: 'select2-plugin',
+                            plugin_config: {
+                                format: 'yyyy/mm/dd',
+                                todayBtn: 'linked',
+                                todayHighlight: true,
+                                autoclose: true
+                            },
+                            operators: ['equal', 'not_equal', 'in', 'not_in', 'is_null', 'is_not_null']
+                        }, {
+                            id: 'in_stock',
+                            label: 'In stock',
+                            type: 'integer',
+                            input: 'radio',
+                            values: {
+                                1: 'Yes',
+                                0: 'No'
+                            },
+                            operators: ['equal']
+                        }, {
+                            id: 'price',
+                            label: 'Price',
+                            type: 'double',
+                            validation: {
+                                min: 0,
+                                step: 0.01
+                            }
+                        }, {
+                            id: 'id',
+                            label: 'Identifier',
+                            type: 'string',
+                            placeholder: '____-____-____',
+                            operators: ['equal', 'not_equal'],
+                            validation: {
+                                format: /^.{4}-.{4}-.{4}$/
+                            }
+                        }],
+                    rules: rules_basic
+                });
+
+                $('#btn-get1').on('click', function () {
+                    var result = $('#builder2').queryBuilder('getRules');
+                    if (!$.isEmptyObject(result)) {
+                        console.log(JSON.stringify(result, null, 2));
+                        alert(JSON.stringify(result, null, 2));
+                    } else {
+                        console.log("invalid object :");
+                    }
+                    console.log(result);
+                });
+
+                $('#btn-reset1').on('click', function () {
+                    $('#builder2').queryBuilder('reset');
+                });
+
+                $('#btn-set').on('click', function () {
+                    $('#builder2').queryBuilder('setRules', rules_basic);
+//                    var result = $('#builder1').queryBuilder('getRules');
+//                    if (!$.isEmptyObject(result)) {
+//                        rules_basic = result;
+//                    }
                 });
 
             });
