@@ -264,25 +264,25 @@
 
                     // init selectpicker
                     this.on('afterCreateRuleFilters', function (e, rule) {
-                        rule.$el.find(Selectors.rule_filter).removeClass('form-control').selectpicker(options);
+                        rule.$el.find(Selectors.rule_filter).removeClass('form-control').select2(options);
                     });
 
                     this.on('afterCreateRuleOperators', function (e, rule) {
-                        rule.$el.find(Selectors.rule_operator).removeClass('form-control').selectpicker(options);
+                        rule.$el.find(Selectors.rule_operator).removeClass('form-control').select2(options);
                     });
 
                     // update selectpicker on change
                     this.on('afterUpdateRuleFilter', function (e, rule) {
-                        rule.$el.find(Selectors.rule_filter).selectpicker('render');
+                        rule.$el.find(Selectors.rule_filter).select2('render');
                     });
 
                     this.on('afterUpdateRuleOperator', function (e, rule) {
-                        rule.$el.find(Selectors.rule_operator).selectpicker('render');
+                        rule.$el.find(Selectors.rule_operator).select2('render');
                     });
 
                     this.on('beforeDeleteRule', function (e, rule) {
-                        rule.$el.find(Selectors.rule_filter).selectpicker('destroy');
-                        rule.$el.find(Selectors.rule_operator).selectpicker('destroy');
+                        rule.$el.find(Selectors.rule_filter).select2('destroy');
+                        rule.$el.find(Selectors.rule_operator).select2('destroy');
                     });
                 }, {
 
@@ -309,12 +309,9 @@
                                 5: 'Goodies',
                                 6: 'Clothes'
                             },
-                            plugin: 'select2-plugin',
+                            plugin: 'select2',
                             plugin_config: {
-                                format: 'yyyy/mm/dd',
-                                todayBtn: 'linked',
-                                todayHighlight: true,
-                                autoclose: true
+                                "theme": "bootstrap"
                             },
                             operators: ['equal', 'not_equal', 'in', 'not_in', 'is_null', 'is_not_null']
                         }, {
