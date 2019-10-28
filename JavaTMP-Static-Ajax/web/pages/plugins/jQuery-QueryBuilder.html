@@ -252,37 +252,36 @@
                 $('#builder1').on('getRules.queryBuilder.filter', function (e) {
                     //$log.info(e.value);
                 });
-                console.log($.fn.queryBuilder.constructor.prototype.plugins);
-// define select2 with query builder :
-                $.fn.queryBuilder.define('select2-plugin', function (options) {
-                    alert("called");
-                    if (!$.fn.select2 || !$.fn.select2.Constructor) {
-                        Utils.error('MissingLibrary', 'Select2 is required to use "select2-querybuilder-plugin" plugin. Get it here: https://github.com/select2/select2');
-                    }
 
-                    var Selectors = QueryBuilder.selectors;
-
+                // define select2 with query builder :
+                $.fn.queryBuilder.define('custom-plugin', function (options) {
+                    console.log(this.settings);
+                    console.log(options);
                     // init selectpicker
                     this.on('afterCreateRuleFilters', function (e, rule) {
-                        rule.$el.find(Selectors.rule_filter).removeClass('form-control').select2(options);
+                        console.log("afterCreateRuleFilters. e =");
+                        console.log(rule.$el);
                     });
 
                     this.on('afterCreateRuleOperators', function (e, rule) {
-                        rule.$el.find(Selectors.rule_operator).removeClass('form-control').select2(options);
+                        console.log("afterCreateRuleOperators. e =");
+                        console.log(rule.$el);
                     });
 
                     // update selectpicker on change
                     this.on('afterUpdateRuleFilter', function (e, rule) {
-                        rule.$el.find(Selectors.rule_filter).select2('render');
+                        console.log("afterUpdateRuleFilter. e =");
+                        console.log(rule.$el);
                     });
 
                     this.on('afterUpdateRuleOperator', function (e, rule) {
-                        rule.$el.find(Selectors.rule_operator).select2('render');
+                        console.log("afterUpdateRuleOperator. e =");
+                        console.log(rule.$el);
                     });
 
                     this.on('beforeDeleteRule', function (e, rule) {
-                        rule.$el.find(Selectors.rule_filter).select2('destroy');
-                        rule.$el.find(Selectors.rule_operator).select2('destroy');
+                        console.log("beforeDeleteRule. e =");
+                        console.log(rule.$el);
                     });
                 }, {
 
@@ -290,6 +289,7 @@
 
 
                 $('#builder2').queryBuilder({
+                    plugins: ['custom-plugin'],
                     icons: defaultIcons,
                     filters: [{
                             id: 'name',
