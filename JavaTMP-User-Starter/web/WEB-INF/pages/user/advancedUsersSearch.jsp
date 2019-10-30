@@ -4,17 +4,23 @@
 <div class="dynamic-ajax-content grid-gutter-padding">
     <h4 class="my-3">Advanced Users Search</h4>
     <hr/>
-    <div class="row">
-        <div class="col">
+    <div class="form-row">
+        <div class="col-5">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body p-1">
                     <div id="builder1"></div>
                     <button class="btn btn-primary" id="btn-get">Get Rules</button>
                     <button class="btn btn-secondary" id="btn-reset">Reset</button>
                     </body>
                 </div>
             </div>
+        </div>
+        <div class="col-7">
+            <div class="card">
+                <div class="card-body">
 
+                </div>
+            </div>
         </div>
     </div>
 
