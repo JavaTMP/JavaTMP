@@ -231,6 +231,10 @@
 
                 table = javatmp.plugins.DataTableAjaxWrapper(userTableElement, {
                     "ajax": {
+                        "data": function (currentData) {
+                            currentData._ajaxGlobalBlockUI = false; // window blocked until data return
+                            return JSON.stringify(currentData);
+                        },
                         "url": javatmp.settings.contextPath + "/user/ListUsersController"
                     },
                     "rowCallback": function (row, data, displayNum, displayIndex, dataIndex) {
@@ -330,7 +334,7 @@
                 };
 
 
-                $('#builder1').queryBuilder({
+                var queryBuilder = $('#builder1').queryBuilder({
                     icons: defaultIcons,
                     select_placeholder: javatmp.settings.defaultSelectPlaceholder,
                     filters: [{
@@ -589,11 +593,13 @@
                  Triggers and Changers QueryBuilder
                  *****************************************************************/
 
-                $('#btn-get').on('click', function () {
-                    var result = $('#builder1').queryBuilder('getRules');
+                $('#btn-get').on('click', function (event) {
+                    event.preventDefault();
+                    var result = $(queryBuilder).queryBuilder('getRules');
                     if (!$.isEmptyObject(result)) {
                         console.log(JSON.stringify(result, null, 2));
                         alert(JSON.stringify(result, null, 2));
+                        table.draw();
                     } else {
                         console.log("invalid object :");
                     }
@@ -601,7 +607,7 @@
                 });
 
                 $('#btn-reset').on('click', function () {
-                    $('#builder1').queryBuilder('reset');
+                    $(queryBuilder).queryBuilder('reset');
                 });
 
                 //When rules changed :
