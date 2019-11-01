@@ -202,7 +202,9 @@
                         timezonesMap[value] = text;
                     }
                 });
+
                 var table = null;
+                var queryBuilder = null;
 
                 $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
                     // fire when user resize browser window or sidebar hide / show
@@ -215,6 +217,7 @@
                     // when card Expand by pressing the top right tool button
                     table.columns.adjust();
                 });
+
                 /**
                  * When another sidebar menu item pressed and before container issues new ajax request.
                  * You can cancel, destroy, or remove any thing here before replace main output ajax container.
@@ -233,6 +236,11 @@
                     "ajax": {
                         "data": function (currentData) {
                             currentData._ajaxGlobalBlockUI = false; // window blocked until data return
+                            if (queryBuilder) {
+                                var result = $(queryBuilder).queryBuilder('getRules');
+                                console.log(JSON.stringify(result, null, 2));
+                                currentData.advancedSearchQuery = result;
+                            }
                             return JSON.stringify(currentData);
                         },
                         "url": javatmp.settings.contextPath + "/user/ListUsersController"
@@ -334,7 +342,7 @@
                 };
 
 
-                var queryBuilder = $('#builder1').queryBuilder({
+                queryBuilder = $('#builder1').queryBuilder({
                     icons: defaultIcons,
                     select_placeholder: javatmp.settings.defaultSelectPlaceholder,
                     filters: [{
@@ -598,7 +606,7 @@
                     var result = $(queryBuilder).queryBuilder('getRules');
                     if (!$.isEmptyObject(result)) {
                         console.log(JSON.stringify(result, null, 2));
-                        alert(JSON.stringify(result, null, 2));
+//                        alert(JSON.stringify(result, null, 2));
                         table.draw();
                     } else {
                         console.log("invalid object :");
@@ -608,6 +616,7 @@
 
                 $('#btn-reset').on('click', function () {
                     $(queryBuilder).queryBuilder('reset');
+                    table.draw();
                 });
 
                 //When rules changed :

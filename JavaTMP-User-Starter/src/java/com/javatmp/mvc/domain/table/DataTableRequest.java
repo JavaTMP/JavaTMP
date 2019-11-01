@@ -54,6 +54,11 @@ public class DataTableRequest<T> {
     private boolean isGlobalSearch;
 
     /**
+     * The unique id.
+     */
+    private String advancedSearchQuery;
+
+    /**
      * Instantiates a new data table request.
      *
      * @param request the request
@@ -249,6 +254,20 @@ public class DataTableRequest<T> {
      */
     public void setSelects(String[] selects) {
         this.selects = selects;
+    }
+
+    /**
+     * @return the advancedSearchQuery
+     */
+    public String getAdvancedSearchQuery() {
+        return advancedSearchQuery;
+    }
+
+    /**
+     * @param advancedSearchQuery the advancedSearchQuery to set
+     */
+    public void setAdvancedSearchQuery(String advancedSearchQuery) {
+        this.advancedSearchQuery = advancedSearchQuery;
     }
 
     /**

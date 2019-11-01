@@ -6,9 +6,12 @@
 package javatmp.frontend;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import org.apache.commons.lang3.builder.RecursiveToStringStyle;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 /**
  *
@@ -16,12 +19,20 @@ import com.google.gson.JsonObject;
  */
 public class ParseJqueryQueryBuilder {
 
+    private static final Gson gson = new GsonBuilder()
+            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").serializeNulls()
+            .registerTypeAdapter(Filter.class, new FilterTypeAdapter())
+            .registerTypeAdapter(Value.class, new ValueTypeAdapter())
+            //            .registerTypeAdapter(Group.class, new FilterTypeAdapter())
+            .create();
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         String query = "{\n"
                 + "  \"condition\": \"AND\",\n"
+                + "  \"not\": false,"
                 + "  \"rules\": [\n"
                 + "    {\n"
                 + "      \"id\": \"price\",\n"
@@ -33,6 +44,7 @@ public class ParseJqueryQueryBuilder {
                 + "    },\n"
                 + "    {\n"
                 + "      \"condition\": \"OR\",\n"
+                + "      \"not\": false,"
                 + "      \"rules\": [\n"
                 + "        {\n"
                 + "          \"id\": \"category\",\n"
@@ -64,13 +76,62 @@ public class ParseJqueryQueryBuilder {
                 + "  \"valid\": true\n"
                 + "}";
 
-        System.out.println("query [" + query + "]");
+//        System.out.println("query [" + query + "]");
+        JsonObject obj = gson.fromJson(query, JsonObject.class).getAsJsonObject();
 
-        JsonObject obj = new Gson().fromJson(query, JsonObject.class).getAsJsonObject();
-        boolean isValid = obj.get("valid").getAsBoolean();
-        System.out.println("is valid = " + isValid);
+//        traverseObj(obj);
+        QueryBuilder tableRequest = (QueryBuilder) gson.fromJson(query, QueryBuilder.class);
+        System.out.println(ReflectionToStringBuilder.toString(tableRequest, new RecursiveToStringStyle()));
+        System.out.println("***********************************************************");
+        String query1 = "{\n"
+                + "  \"condition\": \"AND\",\n"
+                + "  \"rules\": [\n"
+                + "    {\n"
+                + "      \"id\": \"id\",\n"
+                + "      \"field\": \"id\",\n"
+                + "      \"type\": \"integer\",\n"
+                + "      \"input\": \"number\",\n"
+                + "      \"operator\": \"equal\",\n"
+                + "      \"value\": 1\n"
+                + "    },\n"
+                + "    {\n"
+                + "      \"id\": \"birthDate\",\n"
+                + "      \"field\": \"birthDate\",\n"
+                + "      \"type\": \"date\",\n"
+                + "      \"input\": \"number\",\n"
+                + "      \"operator\": \"less\",\n"
+                + "      \"value\": \"01/11/2019\"\n"
+                + "    },\n"
+                + "    {\n"
+                + "      \"condition\": \"OR\",\n"
+                + "      \"rules\": [\n"
+                + "        {\n"
+                + "          \"id\": \"country\",\n"
+                + "          \"field\": \"country\",\n"
+                + "          \"type\": \"string\",\n"
+                + "          \"input\": \"number\",\n"
+                + "          \"operator\": \"equal\",\n"
+                + "          \"value\": \"AE\"\n"
+                + "        },\n"
+                + "        {\n"
+                + "          \"id\": \"country\",\n"
+                + "          \"field\": \"country\",\n"
+                + "          \"type\": \"string\",\n"
+                + "          \"input\": \"number\",\n"
+                + "          \"operator\": \"equal\",\n"
+                + "          \"value\": \"AF\"\n"
+                + "        }\n"
+                + "      ]\n"
+                + "    }\n"
+                + "  ],\n"
+                + "  \"valid\": true\n"
+                + "}";
+        QueryBuilder tableRequest1 = (QueryBuilder) gson.fromJson(query1, QueryBuilder.class);
+        System.out.println(ReflectionToStringBuilder.toString(tableRequest1, new RecursiveToStringStyle()));
+        System.out.println("***********************************************");
+        System.out.println(gson.toJson(tableRequest));
+        System.out.println(gson.toJson(tableRequest1));
 
-        traverseObj(obj);
     }
 
     public static void traverseObj(JsonObject node) {
