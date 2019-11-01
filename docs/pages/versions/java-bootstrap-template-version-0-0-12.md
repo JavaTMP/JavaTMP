@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.12 (Current Development Version)
 ---
 # {{ page.title }}
 
-## on
+## 91721ce on Nov 1, 2019, 6:23 PM GMT+4
 - Solve callback bug in `\JavaTMP-User-Starter\web\WEB-INF\pages\user\usersLookupPopup.jsp`
 - Update the following dependencies in package.json:
     - gulp-markdown from 5.0.0 to 5.0.1
