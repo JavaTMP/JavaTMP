@@ -56,7 +56,7 @@ public class DataTableRequest<T> {
     /**
      * The unique id.
      */
-    private String advancedSearchQuery;
+    private RuleOrGroup advancedSearchQuery;
 
     /**
      * Instantiates a new data table request.
@@ -259,20 +259,15 @@ public class DataTableRequest<T> {
     /**
      * @return the advancedSearchQuery
      */
-    public String getAdvancedSearchQuery() {
+    public RuleOrGroup getAdvancedSearchQuery() {
         return advancedSearchQuery;
     }
 
     /**
      * @param advancedSearchQuery the advancedSearchQuery to set
      */
-    public void setAdvancedSearchQuery(String advancedSearchQuery) {
+    public void setAdvancedSearchQuery(RuleOrGroup advancedSearchQuery) {
         this.advancedSearchQuery = advancedSearchQuery;
     }
-
-    /**
-     * The max params to check.
-     */
-    private int maxParamsToCheck = 0;
 
 }

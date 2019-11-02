@@ -1,16 +1,64 @@
-package javatmp.frontend;
+package com.javatmp.mvc.domain.table;
+
+import java.util.List;
 
 /**
  *
  * @author JavaTMP
  */
-class Rule implements Filter {
+class RuleOrGroup {
+
+    private Boolean not;
+    private String condition;
+    private List<RuleOrGroup> rules;
 
     private String id;
     private String field;
     private String type;
     private String operator;
-    private Value value;
+    private Object value;
+
+    /**
+     * @return the condition
+     */
+    public String getCondition() {
+        return condition;
+    }
+
+    /**
+     * @param condition the condition to set
+     */
+    public void setCondition(String condition) {
+        this.condition = condition;
+    }
+
+    /**
+     * @return the rules
+     */
+    public List<RuleOrGroup> getRules() {
+        return rules;
+    }
+
+    /**
+     * @param rules the rules to set
+     */
+    public void setRules(List<RuleOrGroup> rules) {
+        this.rules = rules;
+    }
+
+    /**
+     * @return the not
+     */
+    public Boolean getNot() {
+        return not;
+    }
+
+    /**
+     * @param not the not to set
+     */
+    public void setNot(Boolean not) {
+        this.not = not;
+    }
 
     /**
      * @return the id
@@ -71,14 +119,14 @@ class Rule implements Filter {
     /**
      * @return the value
      */
-    public Value getValue() {
+    public Object getValue() {
         return value;
     }
 
     /**
      * @param value the value to set
      */
-    public void setValue(Value value) {
+    public void setValue(Object value) {
         this.value = value;
     }
 }

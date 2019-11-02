@@ -21,14 +21,8 @@ public class ParseJqueryQueryBuilder {
 
     private static final Gson gson = new GsonBuilder()
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").serializeNulls()
-            .registerTypeAdapter(Filter.class, new FilterTypeAdapter())
-            .registerTypeAdapter(Value.class, new ValueTypeAdapter())
-            //            .registerTypeAdapter(Group.class, new FilterTypeAdapter())
             .create();
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         String query = "{\n"
                 + "  \"condition\": \"AND\",\n"
@@ -80,7 +74,7 @@ public class ParseJqueryQueryBuilder {
         JsonObject obj = gson.fromJson(query, JsonObject.class).getAsJsonObject();
 
 //        traverseObj(obj);
-        QueryBuilder tableRequest = (QueryBuilder) gson.fromJson(query, QueryBuilder.class);
+        RuleOrGroup tableRequest = (RuleOrGroup) gson.fromJson(query, RuleOrGroup.class);
         System.out.println(ReflectionToStringBuilder.toString(tableRequest, new RecursiveToStringStyle()));
         System.out.println("***********************************************************");
         String query1 = "{\n"
@@ -126,7 +120,7 @@ public class ParseJqueryQueryBuilder {
                 + "  ],\n"
                 + "  \"valid\": true\n"
                 + "}";
-        QueryBuilder tableRequest1 = (QueryBuilder) gson.fromJson(query1, QueryBuilder.class);
+        RuleOrGroup tableRequest1 = (RuleOrGroup) gson.fromJson(query1, RuleOrGroup.class);
         System.out.println(ReflectionToStringBuilder.toString(tableRequest1, new RecursiveToStringStyle()));
         System.out.println("***********************************************");
         System.out.println(gson.toJson(tableRequest));
