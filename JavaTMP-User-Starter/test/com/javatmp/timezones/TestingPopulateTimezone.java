@@ -5,11 +5,9 @@
  */
 package com.javatmp.timezones;
 
-import com.javatmp.util.JpaDaoHelper;
-import com.javatmp.module.timezone.Timezone;
-import com.javatmp.mvc.MvcHelper;
 import com.javatmp.module.timezone.TimezoneService;
 import com.javatmp.module.timezone.Timezonetranslation;
+import com.javatmp.util.JpaDaoHelper;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -74,11 +72,11 @@ public class TestingPopulateTimezone {
 //                System.out.println("INSERT INTO `timezone` (`timezoneId`) VALUES ('" + timezone.getTimezoneId() + "');");
 //                System.out.println("INSERT INTO `timezoneTranslation` (`timezoneId`, `langId`, `timezoneName`) VALUES ('" + timezone.getTimezoneId() + "', 'en', '" + timezone.getTimezoneName() + "');");
 //                System.out.println("INSERT INTO `timezoneTranslation` (`timezoneId`, `langId`, `timezoneName`) VALUES ('" + timezone.getTimezoneId() + "', 'ar', '" + timezoneList.remove() + "');");
-                    bw.write("INSERT INTO `timezone` (`timezoneId`) VALUES ('" + timezone.getTimezoneId() + "');");
+                    bw.write("INSERT INTO `timezone` (`timezoneId`) VALUES ('" + timezone.getTimezonetranslationPK().getTimezoneId() + "');");
                     bw.newLine();
-                    bw.write("INSERT INTO `timezoneTranslation` (`timezoneId`, `langId`, `timezoneName`) VALUES ('" + timezone.getTimezoneId() + "', 'en', '" + timezone.getTimezoneName() + "');");
+                    bw.write("INSERT INTO `timezoneTranslation` (`timezoneId`, `langId`, `timezoneName`) VALUES ('" + timezone.getTimezonetranslationPK().getTimezoneId() + "', 'en', '" + timezone.getTimezoneName() + "');");
                     bw.newLine();
-                    bw.write("INSERT INTO `timezoneTranslation` (`timezoneId`, `langId`, `timezoneName`) VALUES ('" + timezone.getTimezoneId() + "', 'ar', '" + timezoneList.remove() + "');");
+                    bw.write("INSERT INTO `timezoneTranslation` (`timezoneId`, `langId`, `timezoneName`) VALUES ('" + timezone.getTimezonetranslationPK().getTimezoneId() + "', 'ar', '" + timezoneList.remove() + "');");
                     bw.newLine();
 //                System.out.println(timezone.getTimezoneName());
 //                em.merge(timezone);

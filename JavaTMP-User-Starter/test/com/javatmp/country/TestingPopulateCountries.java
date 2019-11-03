@@ -5,30 +5,16 @@
  */
 package com.javatmp.country;
 
-import com.javatmp.user.*;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.javatmp.*;
-import com.javatmp.module.user.User;
-import com.javatmp.mvc.MvcHelper;
-import com.javatmp.mvc.adapter.ClassTypeAdapter;
-import com.javatmp.mvc.adapter.OrderDirTypeAdapter;
-import com.javatmp.mvc.domain.table.DataTableRequest;
-import com.javatmp.mvc.domain.table.DataTableResults;
-import com.javatmp.mvc.domain.table.OrderDir;
-import com.javatmp.util.JpaDaoHelper;
-import com.javatmp.module.country.Country;
 import com.javatmp.module.country.CountryService;
 import com.javatmp.module.country.Countrytranslation;
 import com.javatmp.module.country.CountrytranslationPK;
 import com.javatmp.module.language.LanguageService;
 import com.javatmp.module.language.Languagetranslation;
-import com.javatmp.module.user.UserService;
+import com.javatmp.module.user.User;
+import com.javatmp.util.JpaDaoHelper;
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.StringReader;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.LinkedList;
@@ -66,11 +52,11 @@ public class TestingPopulateCountries {
         countries.forEach((country) -> {
             //System.out.println(country.getCountryName());
             Countrytranslation newCountry
-                    = new Countrytranslation(new CountrytranslationPK(country.getCountryId(), "en"), country.getCountryName());
+                    = new Countrytranslation(new CountrytranslationPK(country.getCountrytranslationPK().getCountryId(), "en"), country.getCountryName());
 
             jpaDaoHelper.create(newCountry);
             newCountry
-                    = new Countrytranslation(new CountrytranslationPK(country.getCountryId(), "ar"), countryList.remove());
+                    = new Countrytranslation(new CountrytranslationPK(country.getCountrytranslationPK().getCountryId(), "ar"), countryList.remove());
             jpaDaoHelper.create(newCountry);
         });
 

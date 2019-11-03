@@ -7,8 +7,6 @@ package com.javatmp.user;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.javatmp.*;
-import com.javatmp.module.event.DBFaker;
 import com.javatmp.module.user.User;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.adapter.ClassTypeAdapter;

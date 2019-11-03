@@ -6,7 +6,6 @@
 package com.javatmp.user;
 
 import com.javatmp.module.user.User;
-import com.javatmp.domain.User_;
 import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.module.user.UserService;
@@ -17,14 +16,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
-import javax.persistence.Tuple;
-import javax.persistence.TupleElement;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.JoinType;
-import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
-import org.apache.commons.beanutils.BeanUtils;
 
 /**
  *

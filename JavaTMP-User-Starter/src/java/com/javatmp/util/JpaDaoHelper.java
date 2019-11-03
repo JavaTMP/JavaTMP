@@ -1,10 +1,10 @@
 package com.javatmp.util;
 
-import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.domain.table.DataTableColumnSpecs;
 import com.javatmp.mvc.domain.table.DataTableRequest;
 import com.javatmp.mvc.domain.table.DataTableResults;
 import com.javatmp.mvc.domain.table.Order;
+import com.javatmp.mvc.domain.table.RuleOrGroup;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,14 +21,12 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
 import javax.persistence.metamodel.SingularAttribute;
-import com.javatmp.mvc.domain.table.RuleOrGroup;
 
 public class JpaDaoHelper {
 
@@ -248,9 +246,9 @@ public class JpaDaoHelper {
         return em.createQuery(cq).getResultList();
     }
 
-    public <T> Path<?> convertStringToPath(Root<T> from, String strPathName) {
+    public <T> Path<T> convertStringToPath(Root<T> from, String strPathName) {
         String[] attributes = strPathName.split("\\.");
-        Path<?> retPath = from.get(attributes[0]);
+        Path<T> retPath = from.get(attributes[0]);
         for (int i = 1; i < attributes.length; i++) {
             retPath = retPath.get(attributes[i]);
         }
@@ -369,7 +367,7 @@ public class JpaDaoHelper {
         }
     }
 
-    public <T> Predicate applyAdvanedSearchQuery(RuleOrGroup ruleOrGroup, CriteriaBuilder cb, Root<T> from) {
+    public <T> Predicate applyAdvanedSearchQuery(RuleOrGroup ruleOrGroup, CriteriaBuilder cb, Root<T> from) throws ParseException {
         Predicate retPredicate = null;
         String condition = ruleOrGroup.getCondition();
         if (condition != null) {
@@ -405,8 +403,48 @@ public class JpaDaoHelper {
             System.out.print(ruleOrGroup.getField() + " " + ruleOrGroup.getOperator() + " " + ruleOrGroup.getValue());
             System.out.print(")");
             String opt = ruleOrGroup.getOperator();
+
+            Object value = ruleOrGroup.getValue();
+            String type = ruleOrGroup.getType();
+            if (type.equals("date")) {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                value = sdf.parse(value.toString());
+            }
+
             if (opt.equals("equal")) {
-                retPredicate = cb.equal(convertStringToPath(from, ruleOrGroup.getField()), ruleOrGroup.getValue());
+                retPredicate = cb.equal(convertStringToPath(from, ruleOrGroup.getField()), value);
+            } else if (opt.equals("not_equal")) {
+                retPredicate = cb.notEqual(convertStringToPath(from, ruleOrGroup.getField()), value);
+            } else if (opt.equals("less")) {
+                retPredicate = cb.lessThan((Expression<Comparable>) convertStringToPath(from, ruleOrGroup.getField()), (Comparable) value);
+            } else if (opt.equals("less_or_equal")) {
+                retPredicate = cb.lessThanOrEqualTo((Expression<Comparable>) convertStringToPath(from, ruleOrGroup.getField()), (Comparable) value);
+            } else if (opt.equals("greater")) {
+                retPredicate = cb.greaterThan((Expression<Comparable>) convertStringToPath(from, ruleOrGroup.getField()), (Comparable) value);
+            } else if (opt.equals("greater_or_equal")) {
+                retPredicate = cb.greaterThanOrEqualTo((Expression<Comparable>) convertStringToPath(from, ruleOrGroup.getField()), (Comparable) value);
+            } else if (opt.equals("is_null")) {
+                retPredicate = cb.isNull(convertStringToPath(from, ruleOrGroup.getField()));
+            } else if (opt.equals("is_not_null")) {
+                retPredicate = cb.isNotNull(convertStringToPath(from, ruleOrGroup.getField()));
+            } else if (opt.equals("begins_with")) {
+                retPredicate = cb.like((Expression<String>) convertStringToPath(from, ruleOrGroup.getField()), (String) value + "%");
+            } else if (opt.equals("ends_with")) {
+                retPredicate = cb.like((Expression<String>) convertStringToPath(from, ruleOrGroup.getField()), "%" + (String) value);
+            } else if (opt.equals("contains")) {
+                retPredicate = cb.like((Expression<String>) convertStringToPath(from, ruleOrGroup.getField()), "%" + (String) value + "%");
+            } else if (opt.equals("not_begins_with")) {
+                retPredicate = cb.notLike((Expression<String>) convertStringToPath(from, ruleOrGroup.getField()), (String) value + "%");
+            } else if (opt.equals("not_ends_with")) {
+                retPredicate = cb.notLike((Expression<String>) convertStringToPath(from, ruleOrGroup.getField()), "%" + (String) value);
+            } else if (opt.equals("not_contains")) {
+                retPredicate = cb.notLike((Expression<String>) convertStringToPath(from, ruleOrGroup.getField()), "%" + (String) value + "%");
+            } else if (opt.equals("in")) {
+                // we should split value for list of proper type
+                retPredicate = cb.equal(convertStringToPath(from, ruleOrGroup.getField()), value);
+            } else if (opt.equals("not_in")) {
+                // we should split value for list of proper type
+                retPredicate = cb.not(cb.equal(convertStringToPath(from, ruleOrGroup.getField()), value));
             }
 
         }

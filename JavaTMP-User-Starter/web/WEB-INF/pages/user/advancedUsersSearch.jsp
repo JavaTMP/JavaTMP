@@ -377,17 +377,21 @@
                             type: 'date',
                             default_operator: "less",
                             input: function (rule, name) {
+                                console.log(rule.operator);
                                 var $container = rule.$el.find('.rule-value-container');
-                                $($container).append(`<input class="form-control birthdate-filter" dir="ltr"/>`);
-                                var birthDateSelect = $(".birthdate-filter", $container);
+                                $($container).append(`<input  name="` + name + `" class="form-control birthdate-filter" dir="ltr"/>`);
+                                var birthDateSelect = $("input[name='" + name + "']", $container);
                                 var birthDateInputMask = javatmp.plugins.inputmaskWrapperForDate(birthDateSelect);
                                 var birthDateDatePicker = javatmp.plugins.daterangepickerWrapperForDate(birthDateSelect);
                                 $(birthDateSelect).val(moment().format(javatmp.plugins.settings.dateFormat));
+                                return birthDateSelect;
                             },
                             valueGetter: function (rule) {
+
                                 var $container = rule.$el.find('.rule-value-container');
                                 var birthDateSelect = $(".birthdate-filter", $container);
                                 var currentValue = $(birthDateSelect).val();
+                                console.log(currentValue);
                                 return currentValue;
                             },
                             valueSetter: function (rule, value) {
