@@ -6,7 +6,7 @@ import java.util.List;
  *
  * @author JavaTMP
  */
-class RuleOrGroup {
+public class RuleOrGroup {
 
     private Boolean not;
     private String condition;

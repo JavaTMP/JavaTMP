@@ -5,7 +5,7 @@
     <h4 class="my-3">Advanced Users Search</h4>
     <hr/>
     <div class="form-row">
-        <div class="col-5">
+        <div class="col-6">
             <div class="card">
                 <div class="card-body p-1">
                     <div id="builder1"></div>
@@ -15,9 +15,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-7">
+        <div class="col-6">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body pt-0 p-1">
                     <table cellspacing="0" class="table table-condensed table-bordered table-hover" id="UsersListTableId">
                         <thead>
                             <tr>
@@ -344,6 +344,8 @@
 
                 queryBuilder = $('#builder1').queryBuilder({
                     icons: defaultIcons,
+                    allow_empty: true,
+                    display_empty_filter: true,
                     select_placeholder: javatmp.settings.defaultSelectPlaceholder,
                     filters: [{
                             id: 'id',
@@ -421,6 +423,7 @@
                         },
                         {
                             id: 'country',
+                            field: "countryId",
                             label: '${labels['domain.user.country']}',
                             type: 'string',
                             input: function (rule, name) {

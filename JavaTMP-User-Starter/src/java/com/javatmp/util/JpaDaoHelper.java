@@ -1,5 +1,6 @@
 package com.javatmp.util;
 
+import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.domain.table.DataTableColumnSpecs;
 import com.javatmp.mvc.domain.table.DataTableRequest;
 import com.javatmp.mvc.domain.table.DataTableResults;
@@ -27,6 +28,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
 import javax.persistence.metamodel.SingularAttribute;
+import com.javatmp.mvc.domain.table.RuleOrGroup;
 
 public class JpaDaoHelper {
 
@@ -321,6 +323,13 @@ public class JpaDaoHelper {
                 }
             }
 
+            // apply advanced filtration using RuleOrGroup object:
+            System.err.println("tableRequest.getAdvancedSearchQuery() [" + page.getAdvancedSearchQuery() + "]");
+            if (page.getAdvancedSearchQuery() != null) {
+                predicate = cb.and(predicate, applyAdvanedSearchQuery(page.getAdvancedSearchQuery(), cb, from));
+                System.out.println();
+            }
+
             cq.where(predicate);
 
             Query query = em.createQuery(cq);
@@ -358,6 +367,50 @@ public class JpaDaoHelper {
                 em.close();
             }
         }
+    }
+
+    public <T> Predicate applyAdvanedSearchQuery(RuleOrGroup ruleOrGroup, CriteriaBuilder cb, Root<T> from) {
+        Predicate retPredicate = null;
+        String condition = ruleOrGroup.getCondition();
+        if (condition != null) {
+            // Group node:
+//            System.out.println("Condition [" + condition + "] rule node of [" + ruleOrGroup.getRules().size() + "]");
+            if (condition.equals("AND")) {
+                retPredicate = cb.conjunction();
+                System.out.print("(");
+                for (int i = 0; i < ruleOrGroup.getRules().size(); i++) {
+                    RuleOrGroup child = ruleOrGroup.getRules().get(i);
+                    retPredicate = cb.and(retPredicate, applyAdvanedSearchQuery(child, cb, from));
+                    if (i < (ruleOrGroup.getRules().size() - 1)) {
+                        System.out.print(" AND ");
+                    }
+                }
+                System.out.print(")");
+            } else if (condition.equals("OR")) {
+                retPredicate = cb.disjunction();
+                System.out.print("(");
+                for (int i = 0; i < ruleOrGroup.getRules().size(); i++) {
+                    RuleOrGroup child = ruleOrGroup.getRules().get(i);
+                    retPredicate = cb.or(retPredicate, applyAdvanedSearchQuery(child, cb, from));
+                    if (i < (ruleOrGroup.getRules().size() - 1)) {
+                        System.out.print(" OR ");
+                    }
+                }
+                System.out.print(")");
+            }
+        } else {
+            // leaf rule node:
+//            System.out.println("rule node [" + MvcHelper.deepToString(ruleOrGroup));
+            System.out.print("(");
+            System.out.print(ruleOrGroup.getField() + " " + ruleOrGroup.getOperator() + " " + ruleOrGroup.getValue());
+            System.out.print(")");
+            String opt = ruleOrGroup.getOperator();
+            if (opt.equals("equal")) {
+                retPredicate = cb.equal(convertStringToPath(from, ruleOrGroup.getField()), ruleOrGroup.getValue());
+            }
+
+        }
+        return retPredicate;
     }
 
     public EntityManagerFactory getEntityManagerFactory() {

@@ -547,6 +547,13 @@ public class UserService {
                     }
                 }
             }
+
+            System.err.println("tableRequest.getAdvancedSearchQuery() [" + tableRequest.getAdvancedSearchQuery() + "]");
+            if (tableRequest.getAdvancedSearchQuery() != null) {
+                predicate = cb.and(predicate, jpaDaoHelper.applyAdvanedSearchQuery(tableRequest.getAdvancedSearchQuery(), cb, from));
+                System.out.println();
+            }
+
             cq.where(predicate);
             TypedQuery<User> query = em.createQuery(cq);
 
