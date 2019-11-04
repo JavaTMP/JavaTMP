@@ -445,6 +445,12 @@ public class JpaDaoHelper {
             } else if (opt.equals("not_in")) {
                 // we should split value for list of proper type
                 retPredicate = cb.not(cb.equal(convertStringToPath(from, ruleOrGroup.getField()), value));
+            } else if (opt.equals("between")) {
+                // we should split value for list of proper type
+                List<Double> valueList = (List) value;
+                retPredicate = cb.between((Expression<Double>) convertStringToPath(from, ruleOrGroup.getField()), valueList.get(0), valueList.get(1));
+            } else {
+                retPredicate = cb.equal(convertStringToPath(from, ruleOrGroup.getField()), value);
             }
 
         }
