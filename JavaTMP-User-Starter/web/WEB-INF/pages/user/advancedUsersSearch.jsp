@@ -387,12 +387,20 @@
                                 return birthDateSelect;
                             },
                             valueGetter: function (rule) {
-
-                                var $container = rule.$el.find('.rule-value-container');
-                                var birthDateSelect = $(".birthdate-filter", $container);
-                                var currentValue = $(birthDateSelect).val();
-                                console.log(currentValue);
-                                return currentValue;
+                                console.log("value getter");
+                                console.log(rule);
+                                console.log("rule.operator.nb_inputs = " + rule.operator.nb_inputs);
+                                if (rule.operator.nb_inputs > 1) {
+                                    return [rule.$el.find('.rule-value-container [name$=_0]').val(),
+                                        rule.$el.find('.rule-value-container [name$=_1]').val()];
+//                                    var $container = rule.$el.find('.rule-value-container');
+//                                    var birthDateSelect = $(".birthdate-filter", $container);
+//                                    var currentValue = $(birthDateSelect).val();
+//                                    console.log(currentValue);
+                                } else {
+                                    return rule.$el.find('.rule-value-container [name$=_0]').val();
+                                }
+//                                return currentValue;
                             },
                             valueSetter: function (rule, value) {
                                 var $container = rule.$el.find('.rule-value-container');
@@ -441,7 +449,7 @@
             <option value="${country.countrytranslationPK.countryId}">${country.countryName}</option>
         </c:forEach>
 </select>
-`);
+                                                        `);
                                 var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
                                 var select2Object = javatmp.plugins.select2WrapperForCountry(select);
                                 return select;
@@ -473,7 +481,7 @@
             <option value="${language.languagetranslationPK.languageId}">${language.languageName}</option>
         </c:forEach>
 </select>
-`);
+                                                        `);
                                 var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
                                 var select2Object = javatmp.plugins.select2Wrapper(select);
                                 return select;
@@ -505,7 +513,7 @@
             <option value="${theme.themetranslationPK.themeId}">${theme.themeName}</option>
         </c:forEach>
 </select>
-`);
+                                                        `);
                                 var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
                                 var select2Object = javatmp.plugins.select2WrapperForTheme(select);
                                 return select;
@@ -537,7 +545,7 @@
             <option value="${timezone.timezonetranslationPK.timezoneId}">${timezone.timezoneNameDescription}</option>
         </c:forEach>
 </select>
-`);
+                                                        `);
                                 var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
                                 var select2Object = javatmp.plugins.select2Wrapper(select);
                                 return select;
@@ -564,7 +572,7 @@
                                 var $container = rule.$el.find('.rule-value-container');
                                 $($container).append(`
         <input class="form-control" name="` + name + `"/>
-`);
+                                                        `);
                                 var input = $("input[name='" + rule.nameOfCustomElement + "']", $container);
                                 var customInput = javatmp.plugins.daterangepickerWrapperForDateRange(input);
                                 customInput.on('change', function () {
@@ -613,7 +621,7 @@
                     var result = $(queryBuilder).queryBuilder('getRules');
                     if (!$.isEmptyObject(result)) {
                         console.log(JSON.stringify(result, null, 2));
-//                        alert(JSON.stringify(result, null, 2));
+                        //                        alert(JSON.stringify(result, null, 2));
                         table.draw();
                     } else {
                         console.log("invalid object :");
@@ -632,6 +640,5 @@
                 });
 
             });
-        });
-    </script>
+        });</script>
 </div>
