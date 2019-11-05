@@ -408,9 +408,13 @@ public class JpaDaoHelper {
             String type = ruleOrGroup.getType();
 
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat dateTimeFormatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
             if (type.equals("date") && !opt.equals("between") && !opt.equals("not_between")) {
                 value = sdf.parse(value.toString());
+            }
+            if (type.equals("datetime") && !opt.equals("between") && !opt.equals("not_between")) {
+                value = dateTimeFormatter.parse(value.toString());
             }
 
             if (opt.equals("equal")) {

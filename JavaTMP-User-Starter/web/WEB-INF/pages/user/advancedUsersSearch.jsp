@@ -393,10 +393,6 @@
                                 if (rule.operator.nb_inputs > 1) {
                                     return [rule.$el.find('.rule-value-container [name$=_0]').val(),
                                         rule.$el.find('.rule-value-container [name$=_1]').val()];
-//                                    var $container = rule.$el.find('.rule-value-container');
-//                                    var birthDateSelect = $(".birthdate-filter", $container);
-//                                    var currentValue = $(birthDateSelect).val();
-//                                    console.log(currentValue);
                                 } else {
                                     return rule.$el.find('.rule-value-container [name$=_0]').val();
                                 }
@@ -586,12 +582,12 @@
                                                     + "##TO##"
                                                     + end.locale('en').format(javatmp.settings.networkDateFormat);
                                         }
-                                        api.column(12).search(val ? val : '', false, false).draw();
                                     }, 200, "@userlist-main-table-filter");
                                 });
                                 return input;
                             },
                             valueGetter: function (rule) {
+                                console.log("value getter for creationDate");
                                 var $container = rule.$el.find('.rule-value-container');
                                 var input = $("input[name='" + rule.nameOfCustomElement + "']", $container);
                                 var start = input.data("start");
@@ -603,12 +599,50 @@
                                             + end.locale('en').format(javatmp.settings.networkDateFormat);
                                 }
                                 var currentValue = val;
+                                console.log("value getter for creationDate [" + currentValue + "]");
                                 return currentValue;
                             },
                             valueSetter: function (rule, value) {
                                 var $container = rule.$el.find('.rule-value-container');
                                 var select = $("input[name='" + rule.nameOfCustomElement + "']", $container);
                                 $(select).val(value).trigger("change");
+                            }
+                        },
+                        {
+                            id: 'creationDateSeprate',
+                            field: "creationDate",
+                            label: '${labels['domain.user.creationDate']}',
+                            type: 'datetime',
+                            default_operator: "between",
+                            input: function (rule, name) {
+                                console.log(rule.operator);
+                                var $container = rule.$el.find('.rule-value-container');
+                                $($container).append(`<input  name="` + name + `" class="form-control birthdate-filter" dir="ltr"/>`);
+                                var birthDateSelect = $("input[name='" + name + "']", $container);
+                                var birthDateInputMask = javatmp.plugins.inputmaskWrapperForDate(birthDateSelect, {
+                                    placeholder: "dd/mm/yyyy hh:mm:ss",
+                                    inputFormat: "dd/mm/yyyy HH:MM:ss"
+                                });
+                                var birthDateDatePicker = javatmp.plugins.datepickerWrapperForDateTime(birthDateSelect);
+                                $(birthDateSelect).val(moment().format(javatmp.plugins.settings.dateTimeSecondFormat));
+                                return birthDateSelect;
+                            },
+                            valueGetter: function (rule) {
+                                console.log("value getter");
+                                console.log(rule);
+                                console.log("rule.operator.nb_inputs = " + rule.operator.nb_inputs);
+                                if (rule.operator.nb_inputs > 1) {
+                                    return [rule.$el.find('.rule-value-container [name$=_0]').val(),
+                                        rule.$el.find('.rule-value-container [name$=_1]').val()];
+                                } else {
+                                    return rule.$el.find('.rule-value-container [name$=_0]').val();
+                                }
+//                                return currentValue;
+                            },
+                            valueSetter: function (rule, value) {
+                                var $container = rule.$el.find('.rule-value-container');
+                                var birthDateSelect = $(".birthdate-filter", $container);
+                                $(birthDateSelect).val(value).trigger("change");
                             }
                         }]
                 });

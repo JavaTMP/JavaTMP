@@ -301,6 +301,32 @@
         });
     };
 
+    $this.datepickerWrapperForDateTime = function (element, options) {
+
+        var settings = $.extend(true, {}, {
+            "opens": $this.settings.floatReverse,
+            startDate: moment().format($this.settings.dateTimeSecondFormat),
+            singleDatePicker: true,
+            showDropdowns: true,
+            timePicker: true,
+            timePickerIncrement: 1,
+            timePicker24Hour: true,
+            autoApply: true,
+            autoUpdateInput: false,
+            minDate: '01/01/1900 00:00:00',
+            maxDate: '31/12/2099 23:59:59',
+            locale: {
+                "direction": $this.settings.direction,
+                format: $this.settings.dateTimeSecondFormat
+            }
+        }, options);
+
+        return $(element).daterangepicker(settings, function (start, end, label) {
+            var formatedDateSelected = moment(start).locale('en').format($this.settings.dateTimeSecondFormat);
+            $(element).val(formatedDateSelected).trigger("change");
+        });
+    };
+
     $this.daterangepickerWrapperForDateRange = function (element, options) {
 
         var settings = $.extend(true, {}, {
