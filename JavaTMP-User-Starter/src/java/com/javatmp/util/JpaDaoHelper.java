@@ -454,33 +454,39 @@ public class JpaDaoHelper {
             } else if (opt.equals("between")) {
                 // we should split value for list of proper type
                 if (type.equals("date")) {
-
                     List temp = (List) value;
                     List<Date> valueList = new LinkedList<>();
                     for (Object t : temp) {
                         valueList.add(sdf.parse(t.toString()));
                     }
-
                     retPredicate = cb.between((Expression<Date>) convertStringToPath(from, ruleOrGroup.getField()), valueList.get(0), valueList.get(1));
-
+                } else if (type.equals("datetime")) {
+                    List temp = (List) value;
+                    List<Date> valueList = new LinkedList<>();
+                    for (Object t : temp) {
+                        valueList.add(dateTimeFormatter.parse(t.toString()));
+                    }
+                    retPredicate = cb.between((Expression<Date>) convertStringToPath(from, ruleOrGroup.getField()), valueList.get(0), valueList.get(1));
                 } else {
                     List<Double> valueList = (List) value;
                     retPredicate = cb.between((Expression<Double>) convertStringToPath(from, ruleOrGroup.getField()), valueList.get(0), valueList.get(1));
                 }
 
             } else if (opt.equals("not_between")) {
-                // we should split value for list of proper type
-                // we should split value for list of proper type
                 if (type.equals("date")) {
-
                     List temp = (List) value;
                     List<Date> valueList = new LinkedList<>();
                     for (Object t : temp) {
                         valueList.add(sdf.parse(t.toString()));
                     }
-
                     retPredicate = cb.not(cb.between((Expression<Date>) convertStringToPath(from, ruleOrGroup.getField()), valueList.get(0), valueList.get(1)));
-
+                } else if (type.equals("datetime")) {
+                    List temp = (List) value;
+                    List<Date> valueList = new LinkedList<>();
+                    for (Object t : temp) {
+                        valueList.add(dateTimeFormatter.parse(t.toString()));
+                    }
+                    retPredicate = cb.not(cb.between((Expression<Date>) convertStringToPath(from, ruleOrGroup.getField()), valueList.get(0), valueList.get(1)));
                 } else {
                     List<Double> valueList = (List) value;
                     retPredicate = cb.not(cb.between((Expression<Double>) convertStringToPath(from, ruleOrGroup.getField()), valueList.get(0), valueList.get(1)));
