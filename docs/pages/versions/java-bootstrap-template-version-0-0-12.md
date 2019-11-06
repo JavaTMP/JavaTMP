@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.12 (Current Development Version)
 ---
 # {{ page.title }}
 
-## on
+## 04681ae on Nov 6, 2019, 9:00 PM GMT+4
 - Implements advanced User Search Page using jquery-querybuilder plugin in page
 `\JavaTMP-User-Starter\web\WEB-INF\pages\user\advancedUsersSearch.jsp`.
 - Update `.\JavaTMP-User-Starter\src\java\com\javatmp\util\JpaDaoHelper.java`
