@@ -1,5 +1,5 @@
 
-CREATE OR REPLACE VIEW Entry AS
+CREATE OR REPLACE VIEW entry AS
 select acctTrans.id as id, trans.id as transactionId, acctTrans.accountId as accountId,
 acctTrans.description as description, acctTrans.status as status, trans.transactionDate as entryDate,
 acctTrans.amount as amount,
