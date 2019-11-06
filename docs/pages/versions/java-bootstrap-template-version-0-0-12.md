@@ -3,6 +3,17 @@ title: Java Bootstrap Template Version 0.0.12 (Current Development Version)
 ---
 # {{ page.title }}
 
+## on
+- Implements advanced User Search Page using jquery-querybuilder plugin in page
+`\JavaTMP-User-Starter\web\WEB-INF\pages\user\advancedUsersSearch.jsp`.
+- Update `.\JavaTMP-User-Starter\src\java\com\javatmp\util\JpaDaoHelper.java`
+to support dynamic filter using jquery-querybuilder plugin.
+- Add `\JavaTMP-User-Starter\src\java\com\javatmp\mvc\domain\table\RuleOrGroup.java` to support backend advanced query filter.
+- Update the following dependencies in package.json:
+    - select2 from 4.0.10 to 4.0.12
+- Run npm install to fetch new dependencies to ./node_modules folder.
+- Run gulp default to regenerate dist folders.
+
 ## 91721ce on Nov 1, 2019, 6:23 PM GMT+4
 - Solve callback bug in `\JavaTMP-User-Starter\web\WEB-INF\pages\user\usersLookupPopup.jsp`
 - Update the following dependencies in package.json:

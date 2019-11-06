@@ -53,7 +53,7 @@
         "moment": "^2.24.0",
         "nprogress": "^0.2.0",
         "popper.js": "^1.16.0",
-        "select2": "^4.0.10",
+        "select2": "^4.0.12",
         "slick-carousel": "^1.8.1",
         "summernote": "^0.8.12",
         "timeago": "^1.6.7",

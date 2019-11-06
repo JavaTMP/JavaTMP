@@ -12,13 +12,11 @@ var eslint = require('gulp-eslint');
 var autoprefixer = require('gulp-autoprefixer');
 var gulpif = require('gulp-if');
 var async = require('async');
-
 // to solve es6 javascript
 // https://stackoverflow.com/questions/44958216/how-to-minify-es6-functions-with-gulp-uglify
 // https://stackoverflow.com/questions/40521506/gulpuglifyerrorunable-to-minify-javascript
 
 var uglifyES6 = require('gulp-uglify-es').default;
-
 var config = {
     "sourceNodeLib": "./node_modules",
     "destComponentsLib": "./web/components",
@@ -91,7 +89,9 @@ var config = {
         ],
         "select2": [
             {"from": "${sourceNodeLib}/select2/dist/css/select2.min.css", "to": "${destComponentsLib}/select2/dist/css"},
-            {"from": "${sourceNodeLib}/select2/dist/js/select2.full.min.js", "to": "${destComponentsLib}/select2/dist/js"}
+            {"from": "${sourceNodeLib}/select2/dist/js/select2.full.min.js", "to": "${destComponentsLib}/select2/dist/js"},
+            {"from": "${sourceNodeLib}/select2/dist/js/i18n/ar.js", "to": "${destComponentsLib}/select2/dist/js/i18n"},
+            {"from": "${sourceNodeLib}/select2/dist/js/i18n/en.js", "to": "${destComponentsLib}/select2/dist/js/i18n"}
         ],
         "select2-bootstrap-theme": [
             {"from": "${sourceNodeLib}/select2-bootstrap-theme/dist/select2-bootstrap.min.css", "to": "${destComponentsLib}/select2-bootstrap-theme/dist"}
@@ -405,7 +405,8 @@ var src = {
         "en": [
             "./web/components/moment/min/locales.min.js",
             "./web/components/timeago/locales/jquery.timeago.en.js",
-            "./web/components/jQuery-QueryBuilder/dist/i18n/query-builder.en.js"
+            "./web/components/jQuery-QueryBuilder/dist/i18n/query-builder.en.js",
+            "./web/components/select2/dist/js/i18n/en.js"
         ],
         "ar": [
             "./web/components/moment/min/locales.min.js",
@@ -413,7 +414,8 @@ var src = {
             "./web/components/fullcalendar/dist/locale/ar.js",
             "./web/components/timeago/locales/jquery.timeago.ar.js",
             "./web/components/jquery-validation/dist/localization/messages_ar.js",
-            "./web/components/jQuery-QueryBuilder/dist/i18n/query-builder.ar.js"
+            "./web/components/jQuery-QueryBuilder/dist/i18n/query-builder.ar.js",
+            "./web/components/select2/dist/js/i18n/ar.js"
         ]
     },
     "fontFamilyFiles": {
@@ -466,7 +468,6 @@ gulp.task('delete-js', function (cb) {
 gulp.task('delete-dist', function (cb) {
     return del.sync([config.destDist], cb());
 });
-
 gulp.task('copy-components', gulp.series("delete-components", function (cb) {
     var allCount = 0;
     for (var key in config.plugins) {
@@ -497,7 +498,6 @@ gulp.task('copy-components', gulp.series("delete-components", function (cb) {
     }
 
 }));
-
 gulp.task('generate-dist', gulp.series('copy-components', "delete-dist", 'delete-js', function (cb) {
     async.series([
         function (next) {
@@ -573,7 +573,6 @@ gulp.task('generate-dist', gulp.series('copy-components', "delete-dist", 'delete
                     count++;
                     var currentKey = key;
                     var langArray = src.localeJS[currentKey];
-
                     console.log("Generating javatmp-plugins-all-locale-" + currentKey + ".min.js");
                     gulp.src(langArray)
                             .pipe(concat("javatmp-plugins-all-locale-" + currentKey + ".min.js", {newLine: '\n;'}))
@@ -600,7 +599,6 @@ gulp.task('generate-dist', gulp.series('copy-components', "delete-dist", 'delete
                     count++;
                     var currentKey = key;
                     var array = src.fontFamilyFiles[currentKey];
-
                     console.log("Generating font-family-" + currentKey + ".min.css");
                     gulp.src(array)
                             .pipe(sass().on('error', sass.logError))
