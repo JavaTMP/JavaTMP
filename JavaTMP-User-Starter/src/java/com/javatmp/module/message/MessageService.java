@@ -73,7 +73,7 @@ public class MessageService {
             Long from = users.get(i).getId();
             // get random to:
             System.out.println("From i [" + from + "]");
-            for (int j = 0; j < 10; j++) {
+            for (int j = 0; j < 15; j++) {
                 int randomTo = 0;
                 while ((randomTo = rand.nextInt(users.size())) == i);
 //                logger.info("i[" + i + "] => random to is [" + randomTo + "]");
