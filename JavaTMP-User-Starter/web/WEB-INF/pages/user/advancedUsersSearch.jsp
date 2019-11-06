@@ -351,30 +351,35 @@
                             id: 'id',
                             label: '${labels['domain.user.id']}',
                             type: 'integer',
-                            input: 'number'
+                            input: 'number',
+                            operators: ["equal", "not_equal", "less", "less_or_equal", "greater", "greater_or_equal", "between", "not_between", "is_null", "is_not_null"]
                         },
                         {
                             id: 'userName',
                             label: '${labels['domain.user.userName']}',
                             type: 'string',
-                            input: 'text'
+                            input: 'text',
+                            operators: ["equal", "not_equal", "begins_with", "not_begins_with", "contains", "not_contains", "ends_with", "not_ends_with", "is_empty", "is_not_empty", "is_null", "is_not_null"]
                         },
                         {
                             id: 'firstName',
                             label: '${labels['domain.user.firstName']}',
                             type: 'string',
-                            input: 'text'
+                            input: 'text',
+                            operators: ["equal", "not_equal", "begins_with", "not_begins_with", "contains", "not_contains", "ends_with", "not_ends_with", "is_empty", "is_not_empty", "is_null", "is_not_null"]
                         },
                         {
                             id: 'lastName',
                             label: '${labels['domain.user.lastName']}',
                             type: 'string',
-                            input: 'text'
+                            input: 'text',
+                            operators: ["equal", "not_equal", "begins_with", "not_begins_with", "contains", "not_contains", "ends_with", "not_ends_with", "is_empty", "is_not_empty", "is_null", "is_not_null"]
                         },
                         {
                             id: 'birthDate',
                             label: '${labels['domain.user.birthDate']}',
                             type: 'date',
+                            operators: ["equal", "not_equal", "less", "less_or_equal", "greater", "greater_or_equal", "between", "not_between", "is_null", "is_not_null"],
                             default_operator: "less",
                             input: function (rule, name) {
                                 console.log(rule.operator);
@@ -408,37 +413,40 @@
                             id: 'age',
                             label: '${labels['domain.user.age']}',
                             type: 'integer',
-                            input: 'number'
+                            input: 'number',
                         },
                         {
                             id: 'email',
                             label: '${labels['domain.user.email']}',
                             type: 'string',
-                            input: 'text'
+                            input: 'text',
+                            operators: ["equal", "not_equal", "begins_with", "not_begins_with", "contains", "not_contains", "ends_with", "not_ends_with", "is_empty", "is_not_empty", "is_null", "is_not_null"]
                         },
                         {
                             id: 'status',
                             label: '${labels['domain.user.status']}',
                             type: 'integer',
                             input: 'select',
+                            operators: ["equal", "not_equal", "is_null", "is_not_null"],
                             multiple: false,
                             values: [
                                 {"": javatmp.settings.defaultSelectPlaceholder},
                                 {1: 'Active'},
                                 {0: 'Inactive'}
                             ],
-                            operators: ['equal', 'not_equal']
+                            operators: ["equal", "not_equal", "is_null", "is_not_null"]
                         },
                         {
                             id: 'country',
                             field: "countryId",
                             label: '${labels['domain.user.country']}',
-                            type: 'string',
-                            input: function (rule, name) {
-                                rule.nameOfCustomElement = name;
-                                var that = this;
-                                var $container = rule.$el.find('.rule-value-container');
-                                $($container).append(`
+                                                    type: 'string',
+                                                    operators: ["equal", "not_equal", "is_null", "is_not_null"],
+                                                    input: function (rule, name) {
+                                                        rule.nameOfCustomElement = name;
+                                                        var that = this;
+                                                        var $container = rule.$el.find('.rule-value-container');
+                                                        $($container).append(`
 <select class="form-control" name="` + name + `">
         <option value=""></option>
         <c:forEach items="${requestScope.countries}" var="country">
@@ -446,31 +454,32 @@
         </c:forEach>
 </select>
                                                         `);
-                                var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
-                                var select2Object = javatmp.plugins.select2WrapperForCountry(select);
-                                return select;
+                                    var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
+                                    var select2Object = javatmp.plugins.select2WrapperForCountry(select);
+                                    return select;
+                                },
+                                valueGetter: function (rule) {
+                                    var $container = rule.$el.find('.rule-value-container');
+                                    var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
+                                    var currentValue = select.val();
+                                    return currentValue;
+                                },
+                                valueSetter: function (rule, value) {
+                                    var $container = rule.$el.find('.rule-value-container');
+                                    var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
+                                    $(select).val(value).trigger("change");
+                                }
                             },
-                            valueGetter: function (rule) {
-                                var $container = rule.$el.find('.rule-value-container');
-                                var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
-                                var currentValue = select.val();
-                                return currentValue;
-                            },
-                            valueSetter: function (rule, value) {
-                                var $container = rule.$el.find('.rule-value-container');
-                                var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
-                                $(select).val(value).trigger("change");
-                            }
-                        },
-                        {
-                            id: 'lang',
-                            label: '${labels['domain.user.lang']}',
-                            type: 'string',
-                            input: function (rule, name) {
-                                rule.nameOfCustomElement = name;
-                                var that = this;
-                                var $container = rule.$el.find('.rule-value-container');
-                                $($container).append(`
+                            {
+                                id: 'lang',
+                                label: '${labels['domain.user.lang']}',
+                                                        type: 'string',
+                                                        operators: ["equal", "not_equal", "is_null", "is_not_null"],
+                                                        input: function (rule, name) {
+                                                            rule.nameOfCustomElement = name;
+                                                            var that = this;
+                                                            var $container = rule.$el.find('.rule-value-container');
+                                                            $($container).append(`
 <select class="form-control" name="` + name + `">
         <option value=""></option>
         <c:forEach items="${requestScope.languages}" var="language">
@@ -478,31 +487,32 @@
         </c:forEach>
 </select>
                                                         `);
-                                var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
-                                var select2Object = javatmp.plugins.select2Wrapper(select);
-                                return select;
+                                    var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
+                                    var select2Object = javatmp.plugins.select2Wrapper(select);
+                                    return select;
+                                },
+                                valueGetter: function (rule) {
+                                    var $container = rule.$el.find('.rule-value-container');
+                                    var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
+                                    var currentValue = select.val();
+                                    return currentValue;
+                                },
+                                valueSetter: function (rule, value) {
+                                    var $container = rule.$el.find('.rule-value-container');
+                                    var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
+                                    $(select).val(value).trigger("change");
+                                }
                             },
-                            valueGetter: function (rule) {
-                                var $container = rule.$el.find('.rule-value-container');
-                                var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
-                                var currentValue = select.val();
-                                return currentValue;
-                            },
-                            valueSetter: function (rule, value) {
-                                var $container = rule.$el.find('.rule-value-container');
-                                var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
-                                $(select).val(value).trigger("change");
-                            }
-                        },
-                        {
-                            id: 'theme',
-                            label: '${labels['domain.user.theme']}',
-                            type: 'string',
-                            input: function (rule, name) {
-                                rule.nameOfCustomElement = name;
-                                var that = this;
-                                var $container = rule.$el.find('.rule-value-container');
-                                $($container).append(`
+                            {
+                                id: 'theme',
+                                label: '${labels['domain.user.theme']}',
+                                                        type: 'string',
+                                                        operators: ["equal", "not_equal", "is_null", "is_not_null"],
+                                                        input: function (rule, name) {
+                                                            rule.nameOfCustomElement = name;
+                                                            var that = this;
+                                                            var $container = rule.$el.find('.rule-value-container');
+                                                            $($container).append(`
 <select class="form-control" name="` + name + `">
         <option value=""></option>
         <c:forEach items="${requestScope.themes}" var="theme">
@@ -510,31 +520,32 @@
         </c:forEach>
 </select>
                                                         `);
-                                var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
-                                var select2Object = javatmp.plugins.select2WrapperForTheme(select);
-                                return select;
+                                    var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
+                                    var select2Object = javatmp.plugins.select2WrapperForTheme(select);
+                                    return select;
+                                },
+                                valueGetter: function (rule) {
+                                    var $container = rule.$el.find('.rule-value-container');
+                                    var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
+                                    var currentValue = select.val();
+                                    return currentValue;
+                                },
+                                valueSetter: function (rule, value) {
+                                    var $container = rule.$el.find('.rule-value-container');
+                                    var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
+                                    $(select).val(value).trigger("change");
+                                }
                             },
-                            valueGetter: function (rule) {
-                                var $container = rule.$el.find('.rule-value-container');
-                                var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
-                                var currentValue = select.val();
-                                return currentValue;
-                            },
-                            valueSetter: function (rule, value) {
-                                var $container = rule.$el.find('.rule-value-container');
-                                var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
-                                $(select).val(value).trigger("change");
-                            }
-                        },
-                        {
-                            id: 'timezone',
-                            label: '${labels['domain.user.timezone']}',
-                            type: 'string',
-                            input: function (rule, name) {
-                                rule.nameOfCustomElement = name;
-                                var that = this;
-                                var $container = rule.$el.find('.rule-value-container');
-                                $($container).append(`
+                            {
+                                id: 'timezone',
+                                label: '${labels['domain.user.timezone']}',
+                                                        type: 'string',
+                                                        operators: ["equal", "not_equal", "is_null", "is_not_null"],
+                                                        input: function (rule, name) {
+                                                            rule.nameOfCustomElement = name;
+                                                            var that = this;
+                                                            var $container = rule.$el.find('.rule-value-container');
+                                                            $($container).append(`
 <select class="form-control" name="` + name + `">
         <option value=""></option>
         <c:forEach items="${requestScope.timezones}" var="timezone">
@@ -542,137 +553,138 @@
         </c:forEach>
 </select>
                                                         `);
-                                var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
-                                var select2Object = javatmp.plugins.select2Wrapper(select);
-                                return select;
+                                    var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
+                                    var select2Object = javatmp.plugins.select2Wrapper(select);
+                                    return select;
+                                },
+                                valueGetter: function (rule) {
+                                    var $container = rule.$el.find('.rule-value-container');
+                                    var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
+                                    var currentValue = select.val();
+                                    return currentValue;
+                                },
+                                valueSetter: function (rule, value) {
+                                    var $container = rule.$el.find('.rule-value-container');
+                                    var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
+                                    $(select).val(value).trigger("change");
+                                }
                             },
-                            valueGetter: function (rule) {
-                                var $container = rule.$el.find('.rule-value-container');
-                                var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
-                                var currentValue = select.val();
-                                return currentValue;
-                            },
-                            valueSetter: function (rule, value) {
-                                var $container = rule.$el.find('.rule-value-container');
-                                var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
-                                $(select).val(value).trigger("change");
-                            }
-                        },
-                        {
-                            id: 'creationDate',
-                            label: '${labels['domain.user.creationDate']}',
-                            type: 'string',
-                            input: function (rule, name) {
-                                rule.nameOfCustomElement = name;
-                                var that = this;
-                                var $container = rule.$el.find('.rule-value-container');
-                                $($container).append(`
+                            {
+                                id: 'creationDate',
+                                label: '${labels['domain.user.creationDate']}',
+                                                        type: 'string',
+                                                        input: function (rule, name) {
+                                                            rule.nameOfCustomElement = name;
+                                                            var that = this;
+                                                            var $container = rule.$el.find('.rule-value-container');
+                                                            $($container).append(`
         <input class="form-control" name="` + name + `"/>
                                                         `);
-                                var input = $("input[name='" + rule.nameOfCustomElement + "']", $container);
-                                var customInput = javatmp.plugins.daterangepickerWrapperForDateRange(input);
-                                customInput.on('change', function () {
-                                    var $this = $(this);
-                                    javatmp.util.waitForFinalEvent(function () {
-                                        var start = $this.data("start");
-                                        var end = $this.data("end");
-                                        var val = "";
-                                        if ((start !== undefined) && (end !== undefined)) {
-                                            val = start.locale('en').format(javatmp.settings.networkDateFormat)
-                                                    + "##TO##"
-                                                    + end.locale('en').format(javatmp.settings.networkDateFormat);
-                                        }
-                                    }, 200, "@userlist-main-table-filter");
-                                });
-                                return input;
-                            },
-                            valueGetter: function (rule) {
-                                console.log("value getter for creationDate");
-                                var $container = rule.$el.find('.rule-value-container');
-                                var input = $("input[name='" + rule.nameOfCustomElement + "']", $container);
-                                var start = input.data("start");
-                                var end = input.data("end");
-                                var val = input.val();
-                                if ((start !== undefined) && (end !== undefined)) {
-                                    val = start.locale('en').format(javatmp.settings.networkDateFormat)
-                                            + "##TO##"
-                                            + end.locale('en').format(javatmp.settings.networkDateFormat);
-                                }
-                                var currentValue = val;
-                                console.log("value getter for creationDate [" + currentValue + "]");
-                                return currentValue;
-                            },
-                            valueSetter: function (rule, value) {
-                                var $container = rule.$el.find('.rule-value-container');
-                                var select = $("input[name='" + rule.nameOfCustomElement + "']", $container);
-                                $(select).val(value).trigger("change");
-                            }
-                        },
-                        {
-                            id: 'creationDateSeprate',
-                            field: "creationDate",
-                            label: '${labels['domain.user.creationDate']}',
-                            type: 'datetime',
-                            default_operator: "between",
-                            input: function (rule, name) {
-                                console.log(rule.operator);
-                                var $container = rule.$el.find('.rule-value-container');
-                                $($container).append(`<input  name="` + name + `" class="form-control birthdate-filter" dir="ltr"/>`);
-                                var birthDateSelect = $("input[name='" + name + "']", $container);
-                                var birthDateInputMask = javatmp.plugins.inputmaskWrapperForDate(birthDateSelect, {
-                                    placeholder: "dd/mm/yyyy hh:mm:ss",
-                                    inputFormat: "dd/mm/yyyy HH:MM:ss"
-                                });
-                                var birthDateDatePicker = javatmp.plugins.datepickerWrapperForDateTime(birthDateSelect);
-                                $(birthDateSelect).val(moment().format(javatmp.plugins.settings.dateTimeSecondFormat));
-                                return birthDateSelect;
-                            },
-                            valueGetter: function (rule) {
-                                console.log("value getter");
-                                console.log(rule);
-                                console.log("rule.operator.nb_inputs = " + rule.operator.nb_inputs);
-                                if (rule.operator.nb_inputs > 1) {
-                                    return [rule.$el.find('.rule-value-container [name$=_0]').val(),
-                                        rule.$el.find('.rule-value-container [name$=_1]').val()];
-                                } else {
-                                    return rule.$el.find('.rule-value-container [name$=_0]').val();
-                                }
+                                                            var input = $("input[name='" + rule.nameOfCustomElement + "']", $container);
+                                                            var customInput = javatmp.plugins.daterangepickerWrapperForDateRange(input);
+                                                            customInput.on('change', function () {
+                                                                var $this = $(this);
+                                                                javatmp.util.waitForFinalEvent(function () {
+                                                                    var start = $this.data("start");
+                                                                    var end = $this.data("end");
+                                                                    var val = "";
+                                                                    if ((start !== undefined) && (end !== undefined)) {
+                                                                        val = start.locale('en').format(javatmp.settings.networkDateFormat)
+                                                                                + "##TO##"
+                                                                                + end.locale('en').format(javatmp.settings.networkDateFormat);
+                                                                    }
+                                                                }, 200, "@userlist-main-table-filter");
+                                                            });
+                                                            return input;
+                                                        },
+                                                        valueGetter: function (rule) {
+                                                            console.log("value getter for creationDate");
+                                                            var $container = rule.$el.find('.rule-value-container');
+                                                            var input = $("input[name='" + rule.nameOfCustomElement + "']", $container);
+                                                            var start = input.data("start");
+                                                            var end = input.data("end");
+                                                            var val = input.val();
+                                                            if ((start !== undefined) && (end !== undefined)) {
+                                                                val = start.locale('en').format(javatmp.settings.networkDateFormat)
+                                                                        + "##TO##"
+                                                                        + end.locale('en').format(javatmp.settings.networkDateFormat);
+                                                            }
+                                                            var currentValue = val;
+                                                            console.log("value getter for creationDate [" + currentValue + "]");
+                                                            return currentValue;
+                                                        },
+                                                        valueSetter: function (rule, value) {
+                                                            var $container = rule.$el.find('.rule-value-container');
+                                                            var select = $("input[name='" + rule.nameOfCustomElement + "']", $container);
+                                                            $(select).val(value).trigger("change");
+                                                        }
+                                                    },
+                                                    {
+                                                        id: 'creationDateSeprate',
+                                                        field: "creationDate",
+                                                        label: '${labels['domain.user.creationDate']}',
+                                                                                type: 'datetime',
+                                                                                operators: ["equal", "not_equal", "less", "less_or_equal", "greater", "greater_or_equal", "between", "not_between", "is_null", "is_not_null"],
+                                                                                default_operator: "between",
+                                                                                input: function (rule, name) {
+                                                                                    console.log(rule.operator);
+                                                                                    var $container = rule.$el.find('.rule-value-container');
+                                                                                    $($container).append(`<input  name="` + name + `" class="form-control birthdate-filter" dir="ltr"/>`);
+                                                                                    var birthDateSelect = $("input[name='" + name + "']", $container);
+                                                                                    var birthDateInputMask = javatmp.plugins.inputmaskWrapperForDate(birthDateSelect, {
+                                                                                        placeholder: "dd/mm/yyyy hh:mm:ss",
+                                                                                        inputFormat: "dd/mm/yyyy HH:MM:ss"
+                                                                                    });
+                                                                                    var birthDateDatePicker = javatmp.plugins.datepickerWrapperForDateTime(birthDateSelect);
+                                                                                    $(birthDateSelect).val(moment().format(javatmp.plugins.settings.dateTimeSecondFormat));
+                                                                                    return birthDateSelect;
+                                                                                },
+                                                                                valueGetter: function (rule) {
+                                                                                    console.log("value getter");
+                                                                                    console.log(rule);
+                                                                                    console.log("rule.operator.nb_inputs = " + rule.operator.nb_inputs);
+                                                                                    if (rule.operator.nb_inputs > 1) {
+                                                                                        return [rule.$el.find('.rule-value-container [name$=_0]').val(),
+                                                                                            rule.$el.find('.rule-value-container [name$=_1]').val()];
+                                                                                    } else {
+                                                                                        return rule.$el.find('.rule-value-container [name$=_0]').val();
+                                                                                    }
 //                                return currentValue;
-                            },
-                            valueSetter: function (rule, value) {
-                                var $container = rule.$el.find('.rule-value-container');
-                                var birthDateSelect = $(".birthdate-filter", $container);
-                                $(birthDateSelect).val(value).trigger("change");
-                            }
-                        }]
-                });
-                /****************************************************************
-                 Triggers and Changers QueryBuilder
-                 *****************************************************************/
+                                                                                },
+                                                                                valueSetter: function (rule, value) {
+                                                                                    var $container = rule.$el.find('.rule-value-container');
+                                                                                    var birthDateSelect = $(".birthdate-filter", $container);
+                                                                                    $(birthDateSelect).val(value).trigger("change");
+                                                                                }
+                                                                            }]
+                                                                    });
+                                                                    /****************************************************************
+                                                                     Triggers and Changers QueryBuilder
+                                                                     *****************************************************************/
 
-                $('#btn-get').on('click', function (event) {
-                    event.preventDefault();
-                    var result = $(queryBuilder).queryBuilder('getRules');
-                    if (!$.isEmptyObject(result)) {
-                        console.log(JSON.stringify(result, null, 2));
-                        //                        alert(JSON.stringify(result, null, 2));
-                        table.draw();
-                    } else {
-                        console.log("invalid object :");
-                    }
-                    console.log(result);
-                });
+                                                                    $('#btn-get').on('click', function (event) {
+                                                                        event.preventDefault();
+                                                                        var result = $(queryBuilder).queryBuilder('getRules');
+                                                                        if (!$.isEmptyObject(result)) {
+                                                                            console.log(JSON.stringify(result, null, 2));
+                                                                            //                        alert(JSON.stringify(result, null, 2));
+                                                                            table.draw();
+                                                                        } else {
+                                                                            console.log("invalid object :");
+                                                                        }
+                                                                        console.log(result);
+                                                                    });
 
-                $('#btn-reset').on('click', function () {
-                    $(queryBuilder).queryBuilder('reset');
-                    table.draw();
-                });
+                                                                    $('#btn-reset').on('click', function () {
+                                                                        $(queryBuilder).queryBuilder('reset');
+                                                                        table.draw();
+                                                                    });
 
-                //When rules changed :
-                $('#builder1').on('getRules.queryBuilder.filter', function (e) {
-                    //$log.info(e.value);
-                });
+                                                                    //When rules changed :
+                                                                    $('#builder1').on('getRules.queryBuilder.filter', function (e) {
+                                                                        //$log.info(e.value);
+                                                                    });
 
-            });
-        });</script>
+                                                                });
+                                                            });</script>
 </div>
