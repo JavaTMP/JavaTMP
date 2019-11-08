@@ -143,7 +143,7 @@ CREATE TABLE `message` (
     CONSTRAINT message_toUserId_fk FOREIGN KEY (toUserId) REFERENCES `user` (id)
 ) ENGINE=InnoDB;
 
-CREATE TABLE `content` (
+CREATE TABLE `Content` (
     contentId BIGINT NOT NULL AUTO_INCREMENT,
     title varchar(255),
     summaryText TEXT,
