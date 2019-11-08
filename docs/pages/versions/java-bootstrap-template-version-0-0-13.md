@@ -8,3 +8,6 @@ title: Java Bootstrap Template Version 0.0.13 (Current Development Version)
 linux mysql import command did not see it.
 - solve the bug when importing data to mysql running on linux by rename transactionentry to transactionEntry in
 `\JavaTMP-User-Starter\conf\accounting\createTransactionEntryTriggers.sql`
+- rename table content to Content because wrongly writting in Content entity as Content instead of content, in
+`\JavaTMP-User-Starter\conf\drop_tables.sql`
+`\JavaTMP-User-Starter\conf\create_tables.sql`
