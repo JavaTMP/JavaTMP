@@ -207,7 +207,7 @@
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all-locale-${labels["global.language"]}.min.js" type="text/javascript"></script>
         <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp.min.js" type="text/javascript"></script>
-        <script src="${pageContext.request.contextPath}/assets/app/js/javatmp.plugins.wrapper.js?v=43" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/assets/app/js/javatmp.plugins.wrapper.js?v=" type="text/javascript"></script>
         <script type="text/javascript">
             (function ($) {
                 var defaults = {

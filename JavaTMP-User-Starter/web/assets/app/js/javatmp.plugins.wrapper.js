@@ -296,9 +296,16 @@
         }, options);
 
         return $(element).daterangepicker(settings, function (start, end, label) {
-            var formatedDateSelected = moment(start).locale('en').format($this.settings.dateFormat);
-            $(element).val(formatedDateSelected).trigger("change");
+//            console.log("default function");
+//            console.log(start);
+//            console.log(end);
+//            console.log(label);
+//            var formatedDateSelected = moment(start).locale('en').format($this.settings.dateFormat);
+//            $(element).val(formatedDateSelected).trigger("change");
+        }).on('apply.daterangepicker', function (event, picker) {
+            $(this).val(picker.startDate.locale('en').format($this.settings.dateFormat)).trigger("change");
         });
+
     };
 
     $this.datepickerWrapperForDateTime = function (element, options) {
