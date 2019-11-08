@@ -40,18 +40,18 @@ BEGIN
     join account acct on (acct.accountGroup = acctgrp.id)
     where acct.id = new.accountId;
 
-    update transactionentry t set t.accountBalance = t.accountBalance + entryAmount
+    update transactionEntry t set t.accountBalance = t.accountBalance + entryAmount
     where entryDate > transactionDate and `accountId` = new.accountId;
 
-    select coalesce(transactionentry.`accountBalance`, 0)
+    select coalesce(transactionEntry.`accountBalance`, 0)
     into accountBalance
-    from transactionentry
+    from transactionEntry
     where entryDate <= transactionDate and `accountId` = new.accountId
     order by `entryDate` desc, id desc
     limit 1
     for update;
 
-    INSERT INTO transactionentry
+    INSERT INTO transactionEntry
         (id, `transactionId`, `accountId`, description, status, `entryDate`, amount, debit, credit, `entryAmount`,
         `sourceDocument`, code, `accountBalance`)
 	VALUES
@@ -78,16 +78,16 @@ BEGIN
 
     select te.entryAmount, te.`entryDate`
     into entryAmount, transactionDate
-    from transactionentry te
+    from transactionEntry te
     where te.id = old.id
     for update;
 
-    update transactionentry t
+    update transactionEntry t
     set t.accountBalance = t.accountBalance - entryAmount
     where ( (entryDate > transactionDate) or (entryDate = transactionDate and id > old.id))
     and `accountId` = old.accountId;
 
-    delete from transactionentry where id = old.id;
+    delete from transactionEntry where id = old.id;
 END
 $$
 DELIMITER ;
@@ -111,7 +111,7 @@ BEGIN
 
     DECLARE transactionEntriesCursor CURSOR FOR
     select te.id,te.`accountId`, te.entryAmount
-    from transactionentry te
+    from transactionEntry te
     where te.`transactionId` = currentTransactionId
     for update;
     -- Declare Continue Handler --
@@ -133,7 +133,7 @@ insert into log (description) values (CONCAT('start trigger for transactionId=',
             END IF;
             insert into log (description) values (CONCAT('transactionId=', old.id, ',entryId=', id, ',accountid=', accountId));
             -- update current transactionEntry record
-            update transactionentry t
+            update transactionEntry t
             set t.accountBalance = t.accountBalance - entryAmount
             where ( (t.entryDate > OLD.transactionDate) or (t.entryDate = OLD.transactionDate and t.id > id))
 --             and t.id != id
@@ -141,7 +141,7 @@ insert into log (description) values (CONCAT('start trigger for transactionId=',
 
             insert into log (description) values (CONCAT('after update old entries transactionId=', old.id, ',entryId=', id, ',accountid=', accountId));
 
-            update transactionentry t set t.accountBalance = t.accountBalance + entryAmount
+            update transactionEntry t set t.accountBalance = t.accountBalance + entryAmount
             where ((t.entryDate > NEW.transactionDate) or (t.entryDate = NEW.transactionDate and t.id > id) )
 --             and t.id != id
             and t.`accountId` = accountId;
@@ -151,7 +151,7 @@ insert into log (description) values (CONCAT('start trigger for transactionId=',
             set accountBalance = 0;
             select IFNULL(t.`accountBalance`, 0)
             into accountBalance
-            from transactionentry t
+            from transactionEntry t
             where ((t.entryDate < NEW.transactionDate) or (t.entryDate = NEW.transactionDate and t.id < id) )
             and t.`accountId` = accountId
 --             and t.id != id
@@ -161,7 +161,7 @@ insert into log (description) values (CONCAT('start trigger for transactionId=',
 
             insert into log (description) values (CONCAT('after select  accountBalance', accountBalance, ', transactionId=', old.id, ',entryId=', id, ',accountid=', accountId));
 
-            update transactionentry t
+            update transactionEntry t
             set t.accountBalance = accountBalance + entryAmount, t.entryDate = new.transactionDate
             where t.id = id and t.`accountId` = accountId;
 
