@@ -7,6 +7,7 @@ title: Java Bootstrap Template Version 0.0.13 (Current Development Version)
 - Remove Netbeans IDE dependencies from JavaTMP-User-Starter Project.
 - Adopt Apache Maven Build tool to JavaTMP-User-Starter Dynamic Java Project.
 - Database demo files become located in JavaTMP-User-Starter/db_scripts instead of JavaTMP-User-Starter/conf
+- Solve the bug in arabic locale that does not pass to plugins wrapper by `locale: "${labels['global.language']}"`
 
 ## 404f5ea on Nov 8, 2019, 3:26 PM GMT+4
 - Solve bug when selecting today date on daterangepicker plugin by listen

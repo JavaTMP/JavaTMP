@@ -225,7 +225,8 @@
                     labels: {},
                     httpMethod: "GET",
                     dataType: "html",
-                    updateURLHash: true
+                    updateURLHash: true,
+                    locale: "${labels['global.language']}"
                 };
 
                 defaults.labels = {
