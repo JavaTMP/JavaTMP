@@ -73,7 +73,7 @@
             });
         }
 
-        if (this.settings.locale === "ar") {
+        if ($this.settings.locale === "ar") {
             numeral.register('locale', 'ar', {
                 delimiters: {
                     thousands: ',',
@@ -161,7 +161,7 @@
             dateEqualOrGreaterThan: 'Must be equal or greater than other value',
             dateEqualOrLessThan: 'Must be equal or less than other value'
         });
-        if (this.settings.locale === "ar") {
+        if ($this.settings.locale === "ar") {
             $.extend($.validator.messages, {
                 summernoteRequired: $.validator.messages.required,
                 validDate: "الرجاء إدخال تاريخ صحيح",

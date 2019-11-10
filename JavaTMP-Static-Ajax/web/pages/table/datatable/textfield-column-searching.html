@@ -516,7 +516,9 @@
                 headerCallback: function (thead, data, start, end, display) {
 //                    console.log($(thead).html());
                 },
-                initComplete: function () {
+                initComplete: function (settings, json) {
+                    console.log(settings);
+                    console.log(json);
                     var columnsCount = this.api().columns().count();
                     var colHeader = this.api().columns(0).header();
                     var headerTag = $(colHeader).parents("thead");
@@ -547,7 +549,8 @@
                     {
                         targets: 5,
                         data: 'salary',
-                        "type": "num",
+                        "type": "number",
+                        "extraKey": "extra value",
                         render: function (data, type, row) {
 //                            console.log(type);
                             if (type === "sort" || type === 'type' || type === 'filter') {
