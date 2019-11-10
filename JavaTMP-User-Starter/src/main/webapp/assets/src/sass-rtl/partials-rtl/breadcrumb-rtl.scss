@@ -1,0 +1,18 @@
+@import "../common/variables.scss";
+
+.main-breadcrumb-bar {
+    .breadcrumb {
+        padding: 0 1rem 0 0;
+    }
+}
+@media (min-width: 768px) {
+    body.sidebar-active .main-content > .main-breadcrumb-bar {
+        left: 0;
+        right: $javatmp-sidebar-width;
+    }
+}
+body.mouse-auto-show.sidebar-active .main-content > .main-breadcrumb-bar {
+    left: 0px;
+    right: 0px;
+}
+

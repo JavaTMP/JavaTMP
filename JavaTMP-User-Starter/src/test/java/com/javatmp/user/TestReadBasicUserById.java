@@ -1,0 +1,43 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.javatmp.user;
+
+import com.javatmp.module.user.User;
+import com.javatmp.util.JpaDaoHelper;
+import com.javatmp.module.user.UserService;
+import com.javatmp.mvc.MvcHelper;
+import javax.persistence.PersistenceException;
+
+/**
+ *
+ * @author JavaTMP
+ */
+public class TestReadBasicUserById {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        JpaDaoHelper jpaDaoHelper;
+        UserService userService;
+        jpaDaoHelper = new JpaDaoHelper("AppPU");
+        userService = new UserService(jpaDaoHelper);
+        try {
+            User user = new User(1L);
+            user = userService.readBasicUserById(user);
+            System.out.println(MvcHelper.toString(user));
+        } catch (PersistenceException e) {
+            Throwable t = e;
+            while (t != null) {
+                System.out.println("type [" + e.getClass().getName() + "]");
+                System.out.println("e [" + e.getMessage() + "]");
+                t = t.getCause();
+            }
+        }
+
+    }
+
+}

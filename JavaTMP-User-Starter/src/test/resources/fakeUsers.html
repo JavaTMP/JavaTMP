@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript">
+            function getRandomInt(max) {
+                return Math.floor(Math.random() * max);
+            }
+
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Faker/3.1.0/faker.min.js" integrity="sha256-QHdJObhDO++VITP6S4tMlDHRWMaUOk+s/xWIRgF/YY0=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <script type="text/javascript">
+
+            var genderArray = [1, 1, 1, 2];
+            var statusArray = [0, 1, 1];
+            var langArray = ["ar", "en", "en", "en", "ar"];
+            var themeArray = ["default", "default", "default", "cerulean", "cosmo", "cyborg", "darkly", "flatly", "journal", "litera", "lumen", "lux", "materia",
+                "minty", "pulse", "sandstone", "simplex", "sketchy", "slate", "solar", "spacelab", "superhero", "united", "yeti"];
+            var timezones = [
+                "Pacific/Midway",
+                "Pacific/Pago_Pago",
+                "Pacific/Honolulu",
+                "America/Juneau",
+                "America/Los_Angeles",
+                "America/Tijuana",
+                "America/Denver",
+                "America/Phoenix",
+                "America/Chihuahua",
+                "America/Mazatlan",
+                "America/Chicago",
+                "America/Regina",
+                "America/Mexico_City",
+                "America/Mexico_City",
+                "America/Monterrey",
+                "America/Guatemala",
+                "America/New_York",
+                "America/Indiana/Indianapolis",
+                "America/Bogota",
+                "America/Lima",
+                "America/Lima",
+                "America/Halifax",
+                "America/Caracas",
+                "America/La_Paz",
+                "America/Santiago",
+                "America/St_Johns",
+                "America/Sao_Paulo",
+                "America/Argentina/Buenos_Aires",
+                "America/Guyana",
+                "America/Godthab",
+                "Atlantic/South_Georgia",
+                "Atlantic/Azores",
+                "Atlantic/Cape_Verde",
+                "Europe/Dublin",
+                "Europe/London",
+                "Europe/Lisbon",
+                "Europe/London",
+                "Africa/Casablanca",
+                "Africa/Monrovia",
+                "Etc/UTC",
+                "Europe/Belgrade",
+                "Europe/Bratislava",
+                "Europe/Budapest",
+                "Europe/Ljubljana",
+                "Europe/Prague",
+                "Europe/Sarajevo",
+                "Europe/Skopje",
+                "Europe/Warsaw",
+                "Europe/Zagreb",
+                "Europe/Brussels",
+                "Europe/Copenhagen",
+                "Europe/Madrid",
+                "Europe/Paris",
+                "Europe/Amsterdam",
+                "Europe/Berlin",
+                "Europe/Berlin",
+                "Europe/Rome",
+                "Europe/Stockholm",
+                "Europe/Vienna",
+                "Africa/Algiers",
+                "Europe/Bucharest",
+                "Africa/Cairo",
+                "Europe/Helsinki",
+                "Europe/Kiev",
+                "Europe/Riga",
+                "Europe/Sofia",
+                "Europe/Tallinn",
+                "Europe/Vilnius",
+                "Europe/Athens",
+                "Europe/Istanbul",
+                "Europe/Minsk",
+                "Asia/Jerusalem",
+                "Africa/Harare",
+                "Africa/Johannesburg",
+                "Europe/Moscow",
+                "Europe/Moscow",
+                "Europe/Moscow",
+                "Asia/Kuwait",
+                "Asia/Riyadh",
+                "Africa/Nairobi",
+                "Asia/Baghdad",
+                "Asia/Tehran",
+                "Asia/Muscat",
+                "Asia/Muscat",
+                "Asia/Baku",
+                "Asia/Tbilisi",
+                "Asia/Yerevan",
+                "Asia/Kabul",
+                "Asia/Yekaterinburg",
+                "Asia/Karachi",
+                "Asia/Karachi",
+                "Asia/Tashkent",
+                "Asia/Kolkata",
+                "Asia/Kolkata",
+                "Asia/Kolkata",
+                "Asia/Kolkata",
+                "Asia/Kathmandu",
+                "Asia/Dhaka",
+                "Asia/Dhaka",
+                "Asia/Colombo",
+                "Asia/Almaty",
+                "Asia/Novosibirsk",
+                "Asia/Rangoon",
+                "Asia/Bangkok",
+                "Asia/Bangkok",
+                "Asia/Jakarta",
+                "Asia/Krasnoyarsk",
+                "Asia/Shanghai",
+                "Asia/Chongqing",
+                "Asia/Hong_Kong",
+                "Asia/Urumqi",
+                "Asia/Kuala_Lumpur",
+                "Asia/Singapore",
+                "Asia/Taipei",
+                "Australia/Perth",
+                "Asia/Irkutsk",
+                "Asia/Ulaanbaatar",
+                "Asia/Seoul",
+                "Asia/Tokyo",
+                "Asia/Tokyo",
+                "Asia/Tokyo",
+                "Asia/Yakutsk",
+                "Australia/Darwin",
+                "Australia/Adelaide",
+                "Australia/Melbourne",
+                "Australia/Melbourne",
+                "Australia/Sydney",
+                "Australia/Brisbane",
+                "Australia/Hobart",
+                "Asia/Vladivostok",
+                "Pacific/Guam",
+                "Pacific/Port_Moresby",
+                "Asia/Magadan",
+                "Asia/Magadan",
+                "Pacific/Noumea",
+                "Pacific/Fiji",
+                "Asia/Kamchatka",
+                "Pacific/Majuro",
+                "Pacific/Auckland",
+                "Pacific/Auckland",
+                "Pacific/Tongatapu",
+                "Pacific/Fakaofo",
+                "Pacific/Apia"
+            ];
+
+            function prepareUser(callback) {
+                var user = {};
+                user.userName = faker.internet.userName();
+                user.password = user.userName;
+                user.firstName = faker.name.firstName();
+                user.lastName = faker.name.lastName();
+                var statusIndex = getRandomInt(statusArray.length);
+                var arrayValue = statusArray[statusIndex];
+                user.status = arrayValue;
+                user.birthDate = faker.date.past(50, '2000-01-01');
+                user.countryId = faker.address.countryCode();
+                var randomCard = faker.helpers.createCard(); // random contact card containing many properties
+                user.address = randomCard.address.streetA + ", " + randomCard.address.streetB;
+                user.email = faker.internet.email(); // Rusty@arne.info
+                user.lang = langArray[getRandomInt(langArray.length)];
+                user.theme = themeArray[getRandomInt(themeArray.length)];
+                user.timezone = timezones[getRandomInt(timezones.length)];
+                user.gender = genderArray[getRandomInt(genderArray.length)];
+                user.profilePicDocumentId = faker.internet.avatar();
+                user.creationDate = faker.date.recent(10);
+                jQuery.ajax({
+                    url: user.profilePicDocumentId,
+                    cache: false,
+                    timeout: 5 * 1000,
+                    xhr: function () {// Seems like the only way to get access to the xhr object
+                        var xhr = new XMLHttpRequest();
+                        xhr.responseType = 'blob';
+                        return xhr;
+                    },
+                    success: function (data) {
+                        const reader = new FileReader();
+                        reader.addEventListener('loadend', (e) => {
+                            const text = e.srcElement.result;
+//                        var base64data = e.result;
+//                        console.log(text);
+                            user.profilePicDocumentBase64 = text;
+                            callback(user);
+//                        console.log("base64[" + base64data + "]");
+//                        base64data = reader.result;
+//                        console.log("base64[" + base64data + "]");
+
+                        });
+                        reader.readAsDataURL(data);
+//
+//
+//                    var img = document.createElement('img');
+//                    var url = window.URL || window.webkitURL;
+//                    img.src = url.createObjectURL(data);
+                    },
+                    error: function () {
+                        callback(user);
+                    }
+                });
+            }
+
+        </script>
+        <script type="text/javascript">
+            var usersArray = [];
+            var timeout = 850;
+            var count = 250;
+            function fun() {
+                console.log("fun start with len [" + usersArray.length + "]");
+                if (usersArray.length < count) {
+                    prepareUser(function (user) {
+                        console.log("user name [" + user.userName + "] ready , pro doc [" + (user.profilePicDocumentBase64 ? user.profilePicDocumentBase64.length : null) + "]");
+                        if (user.profilePicDocumentBase64) {
+                            usersArray.push(user);
+                        }
+                        setTimeout(fun, timeout);
+                    });
+                } else {
+                    // data is ready now:
+//                    console.log(JSON.stringify(usersArray));
+                    $("body").html(JSON.stringify(usersArray));
+                    for (var i = 0; i < usersArray.length; i++) {
+
+                    }
+                }
+            }
+            setTimeout(fun, timeout);
+        </script>
+    </head>
+    <body>
+        <div>TODO write content</div>
+    </body>
+</html>

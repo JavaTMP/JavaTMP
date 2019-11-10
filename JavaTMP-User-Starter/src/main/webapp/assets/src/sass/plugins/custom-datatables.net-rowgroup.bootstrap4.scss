@@ -1,0 +1,16 @@
+@import "../common/variables.scss";
+
+table.dataTable tr.dtrg-group td {
+    background-color: $body-bg;
+}
+
+table.dataTable tr.dtrg-group.dtrg-level-1 td,
+table.dataTable tr.dtrg-group.dtrg-level-2 td {
+    background-color: inherit;
+    padding: $table-cell-padding;
+    font-size: $font-size-base;
+}
+
+table.dataTable tr.dtrg-group.dtrg-level-2 td {
+    background-color: $body-bg;
+}

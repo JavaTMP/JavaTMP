@@ -13,10 +13,15 @@ projects
 /JavaTMP-User-Starter/nbproject/private/
 /JavaTMP-User-Starter/build/
 /JavaTMP-User-Starter/dist/
-/JavaTMP-Accounting/nbproject/private/
-/JavaTMP-Accounting/build/
-/JavaTMP-Accounting/dist/
-/HTML5Application/nbproject/private/
+/JavaTMP-User-Starter/target/
 /JavaTMP-Processing/nbproject/private/
 /JavaTMP-Processing/build/
 /JavaTMP-Processing/dist/
+
+# eclipse
+.settings
+.classpath
+.project
+
+# netbeans
+*/nb-configuration.xml
