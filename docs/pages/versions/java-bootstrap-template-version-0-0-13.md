@@ -3,6 +3,10 @@ title: Java Bootstrap Template Version 0.0.13 (Current Development Version)
 ---
 # {{ page.title }}
 
+## b856983 on Nov 11, 2019, 12:10 AM GMT+4
+- Remove Netbeans IDE dependencies from JavaTMP-User-Starter Project.
+- Adopt Apache Maven Build tool to JavaTMP-User-Starter Dynamic Java Project.
+
 ## 404f5ea on Nov 8, 2019, 3:26 PM GMT+4
 - Solve bug when selecting today date on daterangepicker plugin by listen
 on event `apply.daterangepicker` instead of default change callback.
