@@ -83,16 +83,34 @@
                 },
 
                 columns: [
-                    {data: 'id', name: "id", width: "6rem"},
-                    {data: 'userName', name: "userName", width: "10rem"},
-                    {data: 'firstName', name: "firstName", width: "8rem"},
-                    {data: 'lastName', name: "lastName", width: "8rem"},
-                    {data: 'birthDate', "type": "date", name: "birthDate", width: "9rem"}
+                    {data: 'id', name: "id", title: "ID", width: "6rem"},
+                    {data: 'userName', name: "userName", title: "User Name", width: "10rem"},
+                    {data: 'firstName', name: "firstName", title: "First Name", width: "8rem"},
+                    {data: 'lastName', name: "lastName", title: "Last Name", width: "8rem"},
+                    {data: 'birthDate', name: "birthDate", title: "BirthDate", "type": "date", width: "9rem"}
                 ]
             });
 
+            function randomDate(start, end) {
+                return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+            }
+
+
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
+                javatmp.util.waitForFinalEvent(function () {
+                    for (var i = 1; i <= 1000; i++) {
+                        var rowNode = table.row.add({
+                            id: i,
+                            userName: 'user ' + i,
+                            firstName: 'user ' + i,
+                            lastName: 'last ' + i,
+                            birthDate: moment(randomDate(new Date(1950, 0, 1), new Date(2005, 0, 1)))}).draw(false).node();
+//                $(rowNode).css('color', 'red').animate({color: 'black'});
+                    }
+                }, 1000);
+
+
             });
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
