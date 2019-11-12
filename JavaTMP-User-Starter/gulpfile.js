@@ -12,15 +12,24 @@ var eslint = require('gulp-eslint');
 var autoprefixer = require('gulp-autoprefixer');
 var gulpif = require('gulp-if');
 var async = require('async');
+const argv = require('yargs').argv;
+
 // to solve es6 javascript
 // https://stackoverflow.com/questions/44958216/how-to-minify-es6-functions-with-gulp-uglify
 // https://stackoverflow.com/questions/40521506/gulpuglifyerrorunable-to-minify-javascript
-
 var uglifyES6 = require('gulp-uglify-es').default;
+
+var defaultDestinationDistLocation = "./web/assets/dist"; // "./src/main/webapp/assets/dist"
+if (argv.dest !== undefined) {
+    var defaultDestinationDistLocation = argv.dest;
+}
+
+console.log("default Destination Dist Location [" + defaultDestinationDistLocation + "]");
+
 var config = {
     "sourceNodeLib": "./node_modules",
     "destComponentsLib": "./web/components",
-    "destDist": "./web/assets/dist",
+    "destDist": defaultDestinationDistLocation,
     "plugins": {
         "fontawesome-free": [
             {"from": "${sourceNodeLib}/@fortawesome/fontawesome-free/webfonts/**/*", "to": "${destComponentsLib}/fontawesome-free/webfonts"}
@@ -511,7 +520,7 @@ gulp.task('generate-dist', gulp.series('copy-components', "delete-dist", 'delete
                     }))
                     .pipe(cleanCSS())
                     .pipe(rename({suffix: '.min'}))
-                    .pipe(gulp.dest('./web/assets/dist/css'))
+                    .pipe(gulp.dest(config.destDist + '/css'))
                     .on('end', next);
         },
         function (next) {
@@ -525,21 +534,21 @@ gulp.task('generate-dist', gulp.series('copy-components', "delete-dist", 'delete
                     }))
                     .pipe(cleanCSS())
                     .pipe(rename({suffix: '.min'}))
-                    .pipe(gulp.dest('./web/assets/dist/css'))
+                    .pipe(gulp.dest(config.destDist + '/css'))
                     .on('end', next);
         },
         function (next) {
             console.log("Compile and generate javatmp-plugins-all.min.css");
             gulp.src(src.css)
                     .pipe(concat("javatmp-plugins-all.min.css", {newLine: '\n'}))
-                    .pipe(gulp.dest("./web/assets/dist/css"))
+                    .pipe(gulp.dest(config.destDist + "/css"))
                     .on('end', next);
         },
         function (next) {
             console.log("Compile and generate javatmp-plugins-print-all.min.css");
             gulp.src(src.cssForPrint)
                     .pipe(concat("javatmp-plugins-print-all.min.css", {newLine: '\n'}))
-                    .pipe(gulp.dest("./web/assets/dist/css"))
+                    .pipe(gulp.dest(config.destDist + "/css"))
                     .on('end', next);
         },
         function (next) {
@@ -555,14 +564,14 @@ gulp.task('generate-dist', gulp.series('copy-components', "delete-dist", 'delete
                     .pipe(eslint.format())
                     .pipe(uglify({output: {comments: /^!/}}))
                     .pipe(concat("javatmp.min.js", {newLine: '\n'}))
-                    .pipe(gulp.dest('./web/assets/dist/js/'))
+                    .pipe(gulp.dest(config.destDist + '/js/'))
                     .on('end', next);
         },
         function (next) {
             console.log("Compile and generate javatmp-plugins-all.min.js");
             gulp.src(src.js)
                     .pipe(concat("javatmp-plugins-all.min.js", {newLine: '\n;'}))
-                    .pipe(gulp.dest("./web/assets/dist/js"))
+                    .pipe(gulp.dest(config.destDist + "/js"))
                     .on('end', next);
         },
         function (next) {
@@ -576,7 +585,7 @@ gulp.task('generate-dist', gulp.series('copy-components', "delete-dist", 'delete
                     console.log("Generating javatmp-plugins-all-locale-" + currentKey + ".min.js");
                     gulp.src(langArray)
                             .pipe(concat("javatmp-plugins-all-locale-" + currentKey + ".min.js", {newLine: '\n;'}))
-                            .pipe(gulp.dest("./web/assets/dist/js"))
+                            .pipe(gulp.dest(config.destDist + "/js"))
                             .on('end', (function () {
                                 var k = currentKey;
                                 return function () {
@@ -604,7 +613,7 @@ gulp.task('generate-dist', gulp.series('copy-components', "delete-dist", 'delete
                             .pipe(sass().on('error', sass.logError))
                             .pipe(cleanCSS())
                             .pipe(concat("font-family-" + currentKey + ".min.css", {newLine: '\n;'}))
-                            .pipe(gulp.dest("./web/assets/dist/css"))
+                            .pipe(gulp.dest(config.destDist + "/css"))
                             .on('end', (function () {
                                 var k = currentKey;
                                 return function () {
@@ -622,13 +631,13 @@ gulp.task('generate-dist', gulp.series('copy-components', "delete-dist", 'delete
         function (next) {
             console.log("Copy plugins img to dist/img");
             gulp.src(src.img)
-                    .pipe(gulp.dest("./web/assets/dist/img"))
+                    .pipe(gulp.dest(config.destDist + "/img"))
                     .on('end', next);
         },
         function (next) {
             console.log("Copy plugins fonts to dist/fonts");
             gulp.src(src.fonts)
-                    .pipe(gulp.dest("./web/assets/dist/fonts"))
+                    .pipe(gulp.dest(config.destDist + "/fonts"))
                     .on('end', next);
         },
         function (next) {

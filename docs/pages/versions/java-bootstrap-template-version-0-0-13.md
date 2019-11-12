@@ -3,6 +3,11 @@ title: Java Bootstrap Template Version 0.0.13 (Current Development Version)
 ---
 # {{ page.title }}
 
+## on
+- Keep frontend src folder outside Maven folders in `./JavaTMP-User-Starter/web/assets/src` to synch with static html version.
+- Add new node dependency 'yargs' to dynamically get destination dest folder for front-end resources.
+- Add node run script `gulpDist` which could run by `npm run gulpDist` that generate resource based on its definition in `package.json` file.
+
 ## b856983 on Nov 11, 2019, 12:10 AM GMT+4
 - Remove Netbeans IDE dependencies from JavaTMP-User-Starter Project.
 - Adopt Apache Maven Build tool to JavaTMP-User-Starter Dynamic Java Project.

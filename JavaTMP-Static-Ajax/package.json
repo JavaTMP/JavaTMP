@@ -13,6 +13,12 @@
     "author": "javatmp",
     "licenses": "JavaTMP License",
     "contributors": [],
+    "scripts": {
+        "install": "napa",
+        "update": "napa",
+        "napa": "napa",
+        "gulpDist": "gulp --dest='./web/assets/dist'"
+    },
     "dependencies": {
         "autosize": "^4.0.2",
         "bootstrap": "^4.3.1",
@@ -92,12 +98,8 @@
         "napa": "^3.0.0",
         "pump": "^3.0.0",
         "async": "^3.1.0",
-        "gulp-uglify-es": "^2.0.0"
-    },
-    "scripts": {
-        "install": "napa",
-        "update": "napa",
-        "napa": "napa"
+        "gulp-uglify-es": "^2.0.0",
+        "yargs": "14.2.0"
     },
     "napa-config": {
         "cache": true,
