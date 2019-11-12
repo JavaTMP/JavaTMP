@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.13 (Current Development Version)
 ---
 # {{ page.title }}
 
-## on
+## c391609 on Nov 12, 2019, 11:06 PM GMT+4
 - Keep frontend src folder outside Maven folders in `./JavaTMP-User-Starter/web/assets/src` to synch with static html version.
 - Add new node dependency 'yargs' to dynamically get destination dest folder for front-end resources.
 - Add node run script `gulpDist` which could run by `npm run gulpDist` that generate resource based on its definition in `package.json` file.
