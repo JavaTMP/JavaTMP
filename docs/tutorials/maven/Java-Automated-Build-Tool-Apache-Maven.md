@@ -395,6 +395,11 @@ For more information about `maven-dependency-plugin` plugin read the page [Apach
 - Furthermore, a build phase can also have zero or more goals bound to it.
 If a build phase has no goals bound to it, that build phase will not execute.
 But if it has one or more goals bound to it, it will execute all those goals.
+- if you want to copy your dependencies (including transitive dependencies) from the repository and place a copy in the specified location.
+for offline development or auditing use the following command:
+```
+mvn dependency:copy-dependencies -DoutputDirectory=./lib
+```
 
 ### Setting Up Your Project to Use the Build Lifecycle
 - The build lifecycle is simple enough to use, but when you are constructing a Maven build for a project,
