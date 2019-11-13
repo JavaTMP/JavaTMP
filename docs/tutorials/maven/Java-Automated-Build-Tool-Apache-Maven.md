@@ -544,7 +544,46 @@ the Main-Class attribute of the JAR manifest
 - You can run the plugin's goal within build `package` phase by explicity add an `<executaions>` element to
 your plugin configuration element.
 - You can also go to effective POM and copy a `maven-jar-plugin` plugin to your pom.xml file and override
-the package phase to `none` which is not exist to not generate default jar file.
+the package phase to `none` which is not exist to not generate default jar file. The following xml snippet
+Include Maven dependencies jars in generated executable main jar:
+```xml
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <!-- <outputDirectory>${project.build.directory}/lib</outputDirectory> -->
+                            <outputDirectory>./lib</outputDirectory>
+                            <!-- <excludeScope>test</excludeScope> -->
+                            <includeScope>runtime</includeScope>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>com.javatmp.jog4j2Demo.App</mainClass>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+```
+
 
 ### Introduction to Maven Dependencies
 - Dependency management is a core feature of Maven. Managing dependencies for a single project is easy.
