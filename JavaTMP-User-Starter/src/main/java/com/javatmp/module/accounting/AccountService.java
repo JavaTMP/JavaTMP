@@ -178,9 +178,9 @@ public class AccountService {
         }
     }
 
-    public List<Accountgroup> getAccountGroups() {
-        List<Accountgroup> accountgroups = new LinkedList<>();
-        accountgroups = this.jpaDaoHelper.findAll(Accountgroup.class);
+    public List<AccountGroup> getAccountGroups() {
+        List<AccountGroup> accountgroups = new LinkedList<>();
+        accountgroups = this.jpaDaoHelper.findAll(AccountGroup.class);
         return accountgroups;
     }
 
@@ -298,7 +298,7 @@ public class AccountService {
 
             cq.multiselect(from.get(Account_.id), from.get(Account_.accountCode), from.get(Account_.name), from.get(Account_.description),
                     from.get(Account_.debit), from.get(Account_.credit), from.get(Account_.balance), from.get(Account_.status),
-                    from.get(Account_.creationDate), from.get(Account_.accountGroup), from.get(Account_.parentAccountId), from.get(Account_.cashFlowId));
+                    from.get(Account_.creationDate), from.get(Account_.accountGroupId), from.get(Account_.parentAccountId), from.get(Account_.cashFlowId));
             cq.where(cb.equal(from.get(Account_.id), account.getId()));
             TypedQuery<Account> query = em.createQuery(cq);
             account = query.getSingleResult();
@@ -390,7 +390,7 @@ public class AccountService {
             dbAccount.setAccountCode(accountToBeUpdated.getAccountCode());
             dbAccount.setName(accountToBeUpdated.getName());
             dbAccount.setDescription(accountToBeUpdated.getDescription());
-            dbAccount.setAccountGroup(accountToBeUpdated.getAccountGroup());
+            dbAccount.setAccountGroupId(accountToBeUpdated.getAccountGroupId());
             dbAccount.setStatus(accountToBeUpdated.getStatus());
             dbAccount.setParentAccountId(accountToBeUpdated.getParentAccountId());
             dbAccount.setCashFlowId(accountToBeUpdated.getCashFlowId());

@@ -34,9 +34,9 @@ public class ViewTrialBalance extends HttpServlet {
         totalBalance.setDebit(BigDecimal.ZERO);
         totalBalance.setCredit(BigDecimal.ZERO);
         for (Account account : accounts) {
-            if (account.getAccountgroup().getType().getDebitSign() == 1) {
+            if (account.getAccountGroup().getType().getDebitSign() == 1) {
                 totalBalance.setDebit(totalBalance.getDebit().add(account.getBalance()));
-            } else if (account.getAccountgroup().getType().getCreditSign() == 1) {
+            } else if (account.getAccountGroup().getType().getCreditSign() == 1) {
                 totalBalance.setCredit(totalBalance.getCredit().add(account.getBalance()));
             }
         }

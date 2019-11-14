@@ -1,27 +1,13 @@
 package com.javatmp.module.accounting;
 
 import com.javatmp.module.user.*;
-import com.javatmp.module.country.Country;
-import com.javatmp.module.country.Countrytranslation;
-import com.javatmp.module.dms.Document;
-import com.javatmp.module.language.Language;
-import com.javatmp.module.language.Languagetranslation;
-import com.javatmp.module.theme.Theme;
-import com.javatmp.module.theme.Themetranslation;
-import com.javatmp.module.timezone.Timezone;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.domain.ResponseMessage;
-import com.javatmp.module.dms.DocumentService;
-import com.javatmp.module.timezone.Timezonetranslation;
-import com.javatmp.util.ServicesFactory;
 import com.javatmp.util.Constants;
-import com.javatmp.util.MD5Util;
-import java.io.ByteArrayOutputStream;
+import com.javatmp.util.ServicesFactory;
 import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
-import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -29,15 +15,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.PersistenceException;
 import javax.servlet.ServletContext;
-
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
 @WebServlet("/accounting/AddNewAccountPopup")
 public class AddNewAccountPopup extends HttpServlet {
@@ -53,7 +36,7 @@ public class AddNewAccountPopup extends HttpServlet {
         User loggedInUser = (User) session.getAttribute("user");
         AccountService accountService = sf.getAccountService();
         List<Account> accounts = accountService.getAllAccountsList();
-        List<Accountgroup> accountGroups = accountService.getAccountGroups();
+        List<AccountGroup> accountGroups = accountService.getAccountGroups();
         request.setAttribute("accounts", accounts);
         request.setAttribute("accountGroups", accountGroups);
         request.getRequestDispatcher(requestPage).forward(request, response);

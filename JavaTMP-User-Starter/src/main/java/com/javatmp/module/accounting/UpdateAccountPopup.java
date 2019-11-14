@@ -3,8 +3,8 @@ package com.javatmp.module.accounting;
 import com.javatmp.module.user.*;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.domain.ResponseMessage;
-import com.javatmp.util.ServicesFactory;
 import com.javatmp.util.Constants;
+import com.javatmp.util.ServicesFactory;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -12,7 +12,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.PersistenceException;
 import javax.servlet.ServletContext;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,7 +41,7 @@ public class UpdateAccountPopup extends HttpServlet {
             HttpSession session = request.getSession();
             User loggedInUser = (User) session.getAttribute("user");
             List<Account> accounts = accountService.getAllAccountsList();
-            List<Accountgroup> accountGroups = accountService.getAccountGroups();
+            List<AccountGroup> accountGroups = accountService.getAccountGroups();
             request.setAttribute("accounts", accounts);
             request.setAttribute("accountGroups", accountGroups);
             request.setAttribute("account", dbAccount);
