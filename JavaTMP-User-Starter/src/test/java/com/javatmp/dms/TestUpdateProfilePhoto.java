@@ -5,7 +5,7 @@
  */
 package com.javatmp.dms;
 
-import com.javatmp.module.dms.Document;
+import com.javatmp.module.dms.entity.Document;
 import com.javatmp.module.user.User;
 import com.javatmp.module.user.UserService;
 import com.javatmp.util.JpaDaoHelper;

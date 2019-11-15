@@ -5,7 +5,7 @@
  */
 package com.javatmp.message;
 
-import com.javatmp.module.message.Message;
+import com.javatmp.module.message.entity.Message;
 import com.javatmp.module.user.User;
 import com.javatmp.module.user.UserService;
 import com.javatmp.util.JpaDaoHelper;

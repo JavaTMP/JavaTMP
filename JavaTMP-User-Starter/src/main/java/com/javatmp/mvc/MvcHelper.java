@@ -5,7 +5,7 @@ import com.javatmp.mvc.adapter.OrderDirTypeAdapter;
 import com.javatmp.mvc.adapter.ClassTypeAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.javatmp.module.dms.Document;
+import com.javatmp.module.dms.entity.Document;
 import com.javatmp.mvc.adapter.ByteArrayToBase64TypeAdapter;
 import com.javatmp.mvc.domain.table.OrderDir;
 import java.io.ByteArrayOutputStream;

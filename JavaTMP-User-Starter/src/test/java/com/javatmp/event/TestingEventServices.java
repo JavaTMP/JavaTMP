@@ -5,7 +5,7 @@
  */
 package com.javatmp.event;
 
-import com.javatmp.module.event.EventService;
+import com.javatmp.module.event.service.EventService;
 import com.javatmp.module.user.User;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.util.JpaDaoHelper;

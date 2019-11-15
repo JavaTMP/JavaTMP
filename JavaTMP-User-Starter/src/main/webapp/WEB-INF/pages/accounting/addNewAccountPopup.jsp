@@ -10,36 +10,30 @@
                 <div class="form-row">
                     <div class="col-lg-12">
                         <div class="form-group form-row">
-                            <label class="text-sm-right control-label col-sm-5 col-form-label">accountCode</label>
+                            <label class="text-sm-right control-label col-sm-5 col-form-label">Account Code</label>
                             <div class="col-sm-7">
-                                <input class="form-control" type="text" placeholder=""
-                                       name="accountCode" value=""
-                                       data-rule-required="true"
-                                       >
+                                <input class="form-control" type="text" placeholder="Account Code"
+                                       name="accountCode" data-rule-required="true">
                             </div>
                         </div>
                         <div class="form-group form-row">
-                            <label class="text-sm-right control-label col-sm-5 col-form-label">name</label>
+                            <label class="text-sm-right control-label col-sm-5 col-form-label">Account Name</label>
                             <div class="col-sm-7">
-                                <input class="form-control" type="text" placeholder=""
-                                       name="name" value=""
-                                       data-rule-required="true"
-                                       >
+                                <input class="form-control" type="text" placeholder="Account Name"
+                                       name="name" data-rule-required="true">
                             </div>
                         </div>
                         <div class="form-group form-row">
-                            <label class="text-sm-right control-label col-sm-5 col-form-label">description</label>
+                            <label class="text-sm-right control-label col-sm-5 col-form-label">Description</label>
                             <div class="col-sm-7">
-                                <input class="form-control" type="text" placeholder=""
-                                       name="description" value="description"
-                                       data-rule-required="true"
-                                       >
+                                <input class="form-control" type="text" placeholder="Description"
+                                       name="description" data-rule-required="true">
                             </div>
                         </div>
                         <div class="form-group form-row">
-                            <label class="text-sm-right control-label col-sm-5 col-form-label">accountGroup</label>
+                            <label class="text-sm-right control-label col-sm-5 col-form-label">Account Group</label>
                             <div class="col-sm-7">
-                                <select name="accountGroup" class="form-control">
+                                <select name="accountGroupId" class="form-control">
                                     <c:choose>
                                         <c:when test="${fn:length(requestScope.accountGroups) > 0}">
                                             <option value="">${labels['page.text.kindlySelect']}</option>
@@ -55,7 +49,7 @@
                             </div>
                         </div>
                         <div class="form-group form-row">
-                            <label class="text-sm-right control-label col-sm-5 col-form-label">balance</label>
+                            <label class="text-sm-right control-label col-sm-5 col-form-label">Balance</label>
                             <div class="col-sm-7">
                                 <input class="form-control" type="text" placeholder=""
                                        name="balance" value="0.00"
@@ -64,7 +58,7 @@
                             </div>
                         </div>
                         <div class="form-group form-row">
-                            <label class="text-sm-right control-label col-sm-5 col-form-label">status</label>
+                            <label class="text-sm-right control-label col-sm-5 col-form-label">Status</label>
                             <div class="col-sm-7">
                                 <select name="status" class="custom-select" data-rule-required="true">
                                     <option value="1">Active</option>
@@ -73,7 +67,7 @@
                             </div>
                         </div>
                         <div class="form-group form-row">
-                            <label class="text-sm-right control-label col-sm-5 col-form-label">parentAccountId</label>
+                            <label class="text-sm-right control-label col-sm-5 col-form-label">Parent Account</label>
                             <div class="col-sm-7">
                                 <select name="parentAccountId" class="form-control">
                                     <c:choose>
@@ -91,7 +85,7 @@
                             </div>
                         </div>
                         <div class="form-group form-row">
-                            <label class="text-sm-right control-label col-sm-5 col-form-label">cashFlowId</label>
+                            <label class="text-sm-right control-label col-sm-5 col-form-label">Cash Flow Type</label>
                             <div class="col-sm-7">
                                 <select name="cashFlowId" class="custom-select" data-rule-required="false">
                                     <option value="">${labels['page.text.kindlySelect']}</option>

@@ -1,7 +1,7 @@
 package com.javatmp.module.user;
 
 import com.javatmp.module.country.Country;
-import com.javatmp.module.dms.Document;
+import com.javatmp.module.dms.entity.Document;
 import com.javatmp.module.dms.Document_;
 import com.javatmp.mvc.domain.table.DataTableColumnSpecs;
 import com.javatmp.mvc.domain.table.DataTableRequest;

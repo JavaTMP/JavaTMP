@@ -10,7 +10,7 @@
                 <div class="form-row">
                     <div class="col-lg-12">
                         <div class="form-group form-row">
-                            <label class="control-label col-sm-5 col-form-label">id</label>
+                            <label class="control-label col-sm-5 col-form-label">Id</label>
                             <div class="col-sm-7">
                                 <input readonly="readonly" class="form-control-plaintext" type="text" name="id"
                                        value="${requestScope.account.id}">
@@ -24,7 +24,7 @@
                             </div>
                         </div>
                         <div class="form-group form-row">
-                            <label class="text-sm-right control-label col-sm-5 col-form-label">accountCode</label>
+                            <label class="text-sm-right control-label col-sm-5 col-form-label">Account Code</label>
                             <div class="col-sm-7">
                                 <input class="form-control" type="text" placeholder=""
                                        name="accountCode" value="${requestScope.account.accountCode}"
@@ -33,7 +33,7 @@
                             </div>
                         </div>
                         <div class="form-group form-row">
-                            <label class="text-sm-right control-label col-sm-5 col-form-label">name</label>
+                            <label class="text-sm-right control-label col-sm-5 col-form-label">Account Name</label>
                             <div class="col-sm-7">
                                 <input class="form-control" type="text" placeholder=""
                                        name="name" value="${requestScope.account.name}"
@@ -42,7 +42,7 @@
                             </div>
                         </div>
                         <div class="form-group form-row">
-                            <label class="text-sm-right control-label col-sm-5 col-form-label">description</label>
+                            <label class="text-sm-right control-label col-sm-5 col-form-label">Description</label>
                             <div class="col-sm-7">
                                 <input class="form-control" type="text" placeholder=""
                                        name="description" value="${requestScope.account.description}"
@@ -51,9 +51,9 @@
                             </div>
                         </div>
                         <div class="form-group form-row">
-                            <label class="text-sm-right control-label col-sm-5 col-form-label">accountGroup</label>
+                            <label class="text-sm-right control-label col-sm-5 col-form-label">Account Group</label>
                             <div class="col-sm-7">
-                                <select name="accountGroup" class="form-control">
+                                <select name="accountGroupId" class="form-control">
                                     <c:choose>
                                         <c:when test="${fn:length(requestScope.accountGroups) > 0}">
                                             <option value="">${labels['page.text.kindlySelect']}</option>
@@ -69,7 +69,7 @@
                             </div>
                         </div>
                         <div class="form-group form-row">
-                            <label class="text-sm-right control-label col-sm-5 col-form-label">balance</label>
+                            <label class="text-sm-right control-label col-sm-5 col-form-label">Account Balance</label>
                             <div class="col-sm-7">
                                 <input class="form-control" type="text" placeholder=""
                                        name="balance" value="${requestScope.account.balance}"
@@ -78,7 +78,7 @@
                             </div>
                         </div>
                         <div class="form-group form-row">
-                            <label class="text-sm-right control-label col-sm-5 col-form-label">status</label>
+                            <label class="text-sm-right control-label col-sm-5 col-form-label">Status</label>
                             <div class="col-sm-7">
                                 <select name="status" class="custom-select" data-rule-required="true">
                                     <option ${requestScope.account.status == 1 ? 'selected="selected"' : ''} value="1">Active</option>
@@ -87,7 +87,7 @@
                             </div>
                         </div>
                         <div class="form-group form-row">
-                            <label class="text-sm-right control-label col-sm-5 col-form-label">parentAccountId</label>
+                            <label class="text-sm-right control-label col-sm-5 col-form-label">Parent Account</label>
                             <div class="col-sm-7">
                                 <select name="parentAccountId" class="form-control">
                                     <c:choose>
@@ -105,7 +105,7 @@
                             </div>
                         </div>
                         <div class="form-group form-row">
-                            <label class="text-sm-right control-label col-sm-5 col-form-label">cashFlowId</label>
+                            <label class="text-sm-right control-label col-sm-5 col-form-label">Cash Flow Type</label>
                             <div class="col-sm-7">
                                 <select name="cashFlowId" class="custom-select" data-rule-required="false">
                                     <option ${requestScope.account.cashFlowId == null ? 'selected="selected"' : ''} value="">${labels['page.text.kindlySelect']}</option>

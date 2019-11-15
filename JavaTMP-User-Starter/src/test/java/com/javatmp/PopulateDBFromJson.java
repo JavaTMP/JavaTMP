@@ -7,7 +7,7 @@ package com.javatmp;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.javatmp.module.dms.Document;
+import com.javatmp.module.dms.entity.Document;
 import com.javatmp.module.user.User;
 import com.javatmp.module.user.User_;
 import com.javatmp.mvc.MvcHelper;

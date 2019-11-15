@@ -33,8 +33,8 @@
                                             <tr accountId="${account.id}">
                                                 <td style="width: 10rem;">${account.accountCode}</td>
                                                 <td>${account.name}</td>
-                                                <td style="width: 5rem;">${account.accountgroup.type.debitSign == 1 ? formatedBalance : ""}</td>
-                                                <td style="width: 5rem;">${account.accountgroup.type.creditSign == 1 ? formatedBalance : ""}</td>
+                                                <td style="width: 5rem;">${account.accountGroup.type.debitSign == 1 ? formatedBalance : ""}</td>
+                                                <td style="width: 5rem;">${account.accountGroup.type.creditSign == 1 ? formatedBalance : ""}</td>
                                             </tr>
                                         </c:forEach>
                                         <fmt:formatNumber type="currency" currencySymbol="" minFractionDigits="2" maxFractionDigits="2" value="${totalBalance.debit}" var="formatedTotalBalanceDebit"/>

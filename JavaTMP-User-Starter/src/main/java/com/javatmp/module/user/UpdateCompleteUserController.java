@@ -1,7 +1,7 @@
 package com.javatmp.module.user;
 
-import com.javatmp.module.dms.Document;
-import com.javatmp.module.dms.DocumentService;
+import com.javatmp.module.dms.entity.Document;
+import com.javatmp.module.dms.service.DocumentService;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.domain.ResponseMessage;
 import com.javatmp.util.Constants;

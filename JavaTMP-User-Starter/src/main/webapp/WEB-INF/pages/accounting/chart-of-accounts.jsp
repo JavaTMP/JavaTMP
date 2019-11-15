@@ -107,17 +107,17 @@
                 var updateUserButton = $("#UserList-UpdateSelectedUserId");
                 var deleteUserButton = $("#UserList-DeleteSelectedUserId");
                 var viewAccountLedgerPageButton = $("#viewAccountLedgerPageButton");
-
-
-                var accountGroupMap = {};
-                var accountGroupSelect = $("select[name=accountGroup]");
-                $("option", accountGroupSelect).map(function (i, item) {
-                    var text = $(item).text();
-                    var value = $(item).attr("value");
-                    if (!(value === "-1" || value === "")) {
-                        accountGroupMap[value] = text;
-                    }
-                });
+//
+//
+//                var accountGroupMap = {};
+//                var accountGroupSelect = $("select[name=accountGroup]");
+//                $("option", accountGroupSelect).map(function (i, item) {
+//                    var text = $(item).text();
+//                    var value = $(item).attr("value");
+//                    if (!(value === "-1" || value === "")) {
+//                        accountGroupMap[value] = text;
+//                    }
+//                });
 
                 glyph_opts = {
                     preset: "awesome5",
@@ -214,12 +214,12 @@
                                 orderAccountsList(list[i].children);
                             }
                         }
-                        // now we ordered current list based on list[i].accountgroup.type.id and then list[i].accountgroup.id
+                        // now we ordered current list based on list[i].accountGroup.type.id and then list[i].accountGroup.id
                         function compare(a, b) {
                             var result;
-                            result = a.accountgroup.type.id - b.accountgroup.type.id;
+                            result = a.accountGroup.type.id - b.accountGroup.type.id;
                             if (result === 0) {
-                                result = a.accountgroup.id - b.accountgroup.id;
+                                result = a.accountGroup.id - b.accountGroup.id;
                                 if (result === 0) {
                                     result = a.id - b.id;
                                 }
@@ -228,9 +228,7 @@
                         }
                         console.log("sort list of [" + list.length + "]");
                         list.sort(compare);
-
                     }
-//                    console.log(JSON.stringify(childList));
                     orderAccountsList(childList);
                     return childList;
                 }
@@ -269,8 +267,8 @@
                         $tdList.eq(2).text(numeral(node.data.debit).format('(0,0.00)'));
                         $tdList.eq(3).text(numeral(node.data.credit).format('(0,0.00)'));
                         $tdList.eq(4).text(numeral(node.data.balance).format('(0,0.00)'));
-                        $tdList.eq(5).text(node.data.accountgroup.name);
-                        $tdList.eq(6).text(node.data.accountgroup.type.name);
+                        $tdList.eq(5).text(node.data.accountGroup.name);
+                        $tdList.eq(6).text(node.data.accountGroup.type.name);
                         $tdList.eq(7).addClass("text-center").text(node.key);
                     },
                     keydown: function (event, data) {
@@ -294,9 +292,9 @@
                             }
                         }
                     }
+
                 }).on('dblclick', function (e) {
                     var node = $.ui.fancytree.getNode(e.target);
-//                    alert(JSON.stringify(node.data));
                     $(viewAccountLedgerPageButton).trigger("click");
                 });
                 var addNewUserPopupButton = $("#UserList-AddNewUserPopupId");

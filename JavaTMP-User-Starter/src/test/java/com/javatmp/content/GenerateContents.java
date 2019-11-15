@@ -5,7 +5,7 @@
  */
 package com.javatmp.content;
 
-import com.javatmp.module.content.Content;
+import com.javatmp.module.content.entity.Content;
 import com.javatmp.module.user.User;
 import com.javatmp.module.user.UserService;
 import com.javatmp.util.JpaDaoHelper;

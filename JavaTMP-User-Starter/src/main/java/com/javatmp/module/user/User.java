@@ -1,7 +1,7 @@
 package com.javatmp.module.user;
 
 import com.javatmp.module.country.Country;
-import com.javatmp.module.dms.Document;
+import com.javatmp.module.dms.entity.Document;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;

@@ -1,14 +1,14 @@
 package com.javatmp.util;
 
-import com.javatmp.module.accounting.AccountService;
+import com.javatmp.module.accounting.service.AccountService;
 import com.javatmp.module.activity.ActivityService;
-import com.javatmp.module.content.ContentService;
+import com.javatmp.module.content.service.ContentService;
 import com.javatmp.module.country.CountryService;
-import com.javatmp.module.dms.DocumentService;
-import com.javatmp.module.event.EventService;
+import com.javatmp.module.dms.service.DocumentService;
+import com.javatmp.module.event.service.EventService;
 import com.javatmp.module.language.LanguageService;
-import com.javatmp.module.message.MessageService;
-import com.javatmp.module.stats.UserStatsService;
+import com.javatmp.module.message.service.MessageService;
+import com.javatmp.module.stats.controller.UserStatsService;
 import com.javatmp.module.theme.ThemeService;
 import com.javatmp.module.timezone.TimezoneService;
 import com.javatmp.module.user.UserService;
