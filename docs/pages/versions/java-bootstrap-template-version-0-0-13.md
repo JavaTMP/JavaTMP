@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.13 (Current Development Version)
 ---
 # {{ page.title }}
 
-## on
+## 75000a7 on Nov 16, 2019, 5:37 AM GMT+4
 - Add Apache Log4j2 logging framework wrapped by Simple Logging Facade for Java (SLF4J) library as Maven dependency.
 - Use Project lombok to generate setter and getter
 - Refactor entity classes by using Project lombok annotations for generating setter/getter/toString/hashCode and equals methods.
