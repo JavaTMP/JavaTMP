@@ -9,7 +9,7 @@ import com.javatmp.mvc.MvcHelper;
 import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.module.theme.Theme;
 import com.javatmp.module.theme.Themetranslation;
-import com.javatmp.module.user.User;
+import com.javatmp.module.user.entity.User;
 import com.javatmp.module.theme.ThemeService;
 import java.sql.SQLException;
 import java.text.ParseException;

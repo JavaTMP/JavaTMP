@@ -1,9 +1,11 @@
-package com.javatmp.module.user;
+package com.javatmp.module.user.service;
 
 import com.javatmp.module.country.Country;
 import com.javatmp.module.dms.entity.Document;
-import com.javatmp.module.dms.Document_;
-import com.javatmp.mvc.domain.table.DataTableColumnSpecs;
+import com.javatmp.module.dms.entity.Document_;
+import com.javatmp.module.user.entity.User;
+import com.javatmp.module.user.entity.User_;
+import com.javatmp.mvc.domain.table.DataTableColumn;
 import com.javatmp.mvc.domain.table.DataTableRequest;
 import com.javatmp.mvc.domain.table.DataTableResults;
 import com.javatmp.mvc.domain.table.Order;
@@ -443,7 +445,7 @@ public class UserService {
             if (orders != null && orders.size() > 0) {
                 for (Order order : orders) {
                     Integer columnIndex = order.getColumn();
-                    DataTableColumnSpecs orderColumn = tableRequest.getColumns().get(columnIndex);
+                    DataTableColumn orderColumn = tableRequest.getColumns().get(columnIndex);
 
                     Path<?> sortPath = this.jpaDaoHelper.convertStringToPath(from, orderColumn.getData());
                     if (order.getDir().value().equals("desc")) {
@@ -470,7 +472,7 @@ public class UserService {
                 predicate = cb.or(globalPredicate);
             }
 
-            for (DataTableColumnSpecs column : tableRequest.getColumns()) {
+            for (DataTableColumn column : tableRequest.getColumns()) {
                 String columnName = column.getName();
                 String columnSearchValue = column.getSearch().getValue().trim();
                 logger.info("column name [" + columnName + "] search value [" + columnSearchValue + "]");

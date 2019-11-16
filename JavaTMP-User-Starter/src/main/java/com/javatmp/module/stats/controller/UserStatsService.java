@@ -1,15 +1,14 @@
 package com.javatmp.module.stats.controller;
 
-import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.module.country.Country;
 import com.javatmp.module.country.Country_;
 import com.javatmp.module.country.Countrytranslation;
 import com.javatmp.module.country.CountrytranslationPK_;
 import com.javatmp.module.country.Countrytranslation_;
-import com.javatmp.module.user.User;
-import com.javatmp.module.user.User_;
+import com.javatmp.module.user.entity.User;
+import com.javatmp.module.user.entity.User_;
+import com.javatmp.util.JpaDaoHelper;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
@@ -19,7 +18,6 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.ListJoin;
-import javax.persistence.criteria.MapJoin;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 

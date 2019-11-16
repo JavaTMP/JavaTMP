@@ -7,7 +7,7 @@ package com.javatmp.user;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.javatmp.module.user.User;
+import com.javatmp.module.user.entity.User;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.adapter.ClassTypeAdapter;
 import com.javatmp.mvc.adapter.OrderDirTypeAdapter;
@@ -15,7 +15,7 @@ import com.javatmp.mvc.domain.table.DataTableRequest;
 import com.javatmp.mvc.domain.table.DataTableResults;
 import com.javatmp.mvc.domain.table.OrderDir;
 import com.javatmp.util.JpaDaoHelper;
-import com.javatmp.module.user.UserService;
+import com.javatmp.module.user.service.UserService;
 import java.sql.SQLException;
 import java.text.ParseException;
 

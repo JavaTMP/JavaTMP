@@ -1,5 +1,7 @@
-package com.javatmp.module.user;
+package com.javatmp.module.user.controller;
 
+import com.javatmp.module.user.entity.User;
+import com.javatmp.module.user.service.UserService;
 import com.javatmp.mvc.domain.table.DataTableRequest;
 import com.javatmp.mvc.domain.table.DataTableResults;
 import com.javatmp.mvc.MvcHelper;

@@ -5,29 +5,19 @@
  */
 package com.javatmp.jpa;
 
-import com.javatmp.module.dms.entity.Document;
-import com.javatmp.module.dms.Document_;
-import com.javatmp.module.user.User;
-import com.javatmp.module.user.User_;
+import com.javatmp.module.user.entity.User;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.util.JpaDaoHelper;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
-import java.sql.SQLException;
-import java.text.ParseException;
 import java.util.Date;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
-import javax.persistence.Tuple;
-import javax.persistence.criteria.CompoundSelection;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
 import org.apache.commons.beanutils.BeanUtils;
@@ -49,9 +39,8 @@ public class TestObjectQuery {
         JpaDaoHelper jpaDaoHelper = new JpaDaoHelper("AppPU");
         EntityManager em = jpaDaoHelper.getEntityManagerFactory().createEntityManager();
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-        String[] selects = new String[]{"id", "userName", "firstName", "lastName", "status",
-            "birthDate", "creationDate", "email", "lang", "theme", "countryId", "address", "timezone",
-            "profilePicDocumentId", "profilePicDocument.randomHash"};
+        String[] selects = new String[]{"lang", "theme", "address", "timezone",
+            "profilePicDocumentId", "profilePicDocument.randomHash", "profilePicDocument.documentId", "countryId", "country.countryId"};
         CriteriaQuery<Object[]> cq = criteriaBuilder.createQuery(Object[].class);
         Root<User> from = cq.from(User.class);
 //        for (String pathStr : selects) {
@@ -64,15 +53,15 @@ public class TestObjectQuery {
         System.out.println("size [" + listOfSelect.size() + "]");
         cq.multiselect(listOfSelect);
 
-        List<Object[]> resultList = em.createQuery(cq).setFirstResult(0).setMaxResults(2).getResultList();
+        DateTimeConverter dtConverter = new DateConverter();
+        dtConverter.setPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+        ConvertUtils.register(dtConverter, Date.class);
+
+        List<Object[]> resultList = em.createQuery(cq).setFirstResult(0).setMaxResults(1).getResultList();
         resultList.forEach(tuple -> {
             System.out.println("Object[] [" + MvcHelper.toString(tuple) + "]");
 
             HashMap<String, Object> map = new HashMap();
-
-            DateTimeConverter dtConverter = new DateConverter();
-            dtConverter.setPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-            ConvertUtils.register(dtConverter, Date.class);
 
             for (int i = 0; i < tuple.length; i++) {
                 String name = selects[i];
@@ -80,6 +69,8 @@ public class TestObjectQuery {
             }
             System.out.println("map parameters is [" + map + "]");
             User bean = new User();
+            // create child beans
+            autoInstantiate(bean, selects);
             try {
                 BeanUtils.populate(bean, map);
                 System.out.println(MvcHelper.toString(bean));
@@ -90,37 +81,28 @@ public class TestObjectQuery {
             }
         });
 
-        resultList.forEach(tuple -> {
-            System.out.println("Object[] [" + MvcHelper.toString(tuple) + "]");
-
-            User bean = new User();
-            try {
-                for (int i = 0; i < tuple.length; i++) {
-                    String name = selects[i];
-                    Object value = tuple[i];
-                    System.out.println("name [" + name + "], value [" + value + "]");
-                    PropertyDescriptor propertyDescriptor;
-
-                    propertyDescriptor = PropertyUtils.getPropertyDescriptor(bean, name);
-
-                    Class<?> propertyType = propertyDescriptor.getPropertyType();
-
-                    PropertyUtils.setProperty(bean, name, value);
-
-                }
-            } catch (IllegalAccessException ex) {
-                Logger.getLogger(TestObjectQuery.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InvocationTargetException ex) {
-                Logger.getLogger(TestObjectQuery.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (NoSuchMethodException ex) {
-                Logger.getLogger(TestObjectQuery.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            System.out.println("custome [" + MvcHelper.toString(bean));
-        });
-
     }
 
-    private void instantiateNestedProperties(Object obj, String fieldName) {
+    public static void instantiate(Object from, List<String> fields) {
+        System.out.println("instantiate [" + fields.get(0) + "] in object [" + from.getClass() + "]");
+        instantiateNestedProperties(from, fields.get(0));
+//        for (int i = 1; i < attributes.length; i++) {
+//            retPath = retPath.get(attributes[i]);
+//        }
+//        return retPath;
+    }
+
+    public static void autoInstantiate(Object from, String[] selectList) {
+
+        for (String select : selectList) {
+            if (select.contains(".")) {
+                instantiateNestedProperties(from, select);
+            }
+        }
+    }
+
+    private static void instantiateNestedProperties(Object obj, String fieldName) {
+        System.out.println("obj [" + obj.getClass() + "], fieldName [" + fieldName + "]");
         try {
             String[] fieldNames = fieldName.split("\\.");
             if (fieldNames.length > 1) {
@@ -131,7 +113,7 @@ public class TestObjectQuery {
                         nestedProperty.append(".");
                     }
                     nestedProperty.append(fn);
-
+                    System.out.println("nested Property [" + nestedProperty + "]");
                     Object value = PropertyUtils.getProperty(obj, nestedProperty.toString());
 
                     if (value == null) {

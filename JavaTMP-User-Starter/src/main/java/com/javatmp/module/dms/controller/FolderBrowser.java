@@ -3,7 +3,7 @@ package com.javatmp.module.dms.controller;
 import com.javatmp.module.dms.entity.Document;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.domain.ResponseMessage;
-import com.javatmp.mvc.domain.table.DataTableColumnSpecs;
+import com.javatmp.mvc.domain.table.DataTableColumn;
 import com.javatmp.mvc.domain.table.DataTableRequest;
 import com.javatmp.mvc.domain.table.DataTableResults;
 import com.javatmp.mvc.domain.table.Search;
@@ -42,9 +42,9 @@ public class FolderBrowser extends HttpServlet {
         tableRequest.setSelects(new String[]{"documentId", "documentName", "documentSize", "contentType", "creationDate",
             "randomHash", "documentType", "parentDocumentId", "status", "createdByUserId"});
         tableRequest.setClassType(Document.class);
-        DataTableColumnSpecs column = new DataTableColumnSpecs(0, "documentType");
+        DataTableColumn column = new DataTableColumn(0, "documentType");
         column.setSearch(new Search("2", null));
-        List<DataTableColumnSpecs> columns = new LinkedList<>();
+        List<DataTableColumn> columns = new LinkedList<>();
         columns.add(column);
         tableRequest.setColumns(columns);
         DataTableResults<Document> dataTableResult;

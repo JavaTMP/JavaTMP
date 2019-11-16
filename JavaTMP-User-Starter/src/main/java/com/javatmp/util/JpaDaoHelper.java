@@ -1,6 +1,6 @@
 package com.javatmp.util;
 
-import com.javatmp.mvc.domain.table.DataTableColumnSpecs;
+import com.javatmp.mvc.domain.table.DataTableColumn;
 import com.javatmp.mvc.domain.table.DataTableRequest;
 import com.javatmp.mvc.domain.table.DataTableResults;
 import com.javatmp.mvc.domain.table.Order;
@@ -285,7 +285,7 @@ public class JpaDaoHelper {
             if (orders != null) {
                 for (Order order : orders) {
                     Integer columnIndex = order.getColumn();
-                    DataTableColumnSpecs orderColumn = page.getColumns().get(columnIndex);
+                    DataTableColumn orderColumn = page.getColumns().get(columnIndex);
 
                     Path<?> sortPath = this.convertStringToPath(from, orderColumn.getData());
                     if (order.getDir().value().equals("desc")) {
@@ -299,7 +299,7 @@ public class JpaDaoHelper {
             Predicate predicate = cb.conjunction();
 
             if (page.getColumns() != null) {
-                for (DataTableColumnSpecs column : page.getColumns()) {
+                for (DataTableColumn column : page.getColumns()) {
                     if (column.getSearch() != null && column.getSearch().getValue() != null
                             && !column.getSearch().getValue().trim().equals("")) {
                         if ("olderThan".equals(column.getSearch().getOperatorType())) {

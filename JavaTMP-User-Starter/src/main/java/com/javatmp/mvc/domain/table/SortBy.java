@@ -2,28 +2,18 @@ package com.javatmp.mvc.domain.table;
 
 import java.util.HashMap;
 import java.util.Map;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class SortBy {
 
-    /**
-     * The map of sorts.
-     */
-    private Map<String, OrderDir> mapOfSorts;
+    private Map<String, OrderDir> mapOfSorts = new HashMap<String, OrderDir>();
 
-    /**
-     * Instantiates a new sort by.
-     */
     public SortBy() {
-        if (null == mapOfSorts) {
-            mapOfSorts = new HashMap<String, OrderDir>();
-        }
     }
 
-    /**
-     * Gets the sort bys.
-     *
-     * @return the sortBys
-     */
     public Map<String, OrderDir> getSortBys() {
         return mapOfSorts;
     }

@@ -5,7 +5,7 @@
  */
 package com.javatmp;
 
-import com.javatmp.module.user.User;
+import com.javatmp.module.user.entity.User;
 import com.javatmp.mvc.MvcHelper;
 import java.sql.SQLException;
 import javax.persistence.EntityManager;

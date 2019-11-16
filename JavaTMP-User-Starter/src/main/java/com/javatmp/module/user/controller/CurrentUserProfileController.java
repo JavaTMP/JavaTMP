@@ -1,4 +1,4 @@
-package com.javatmp.module.user;
+package com.javatmp.module.user.controller;
 
 import com.javatmp.module.country.Countrytranslation;
 import com.javatmp.module.dms.entity.Document;
@@ -6,6 +6,8 @@ import com.javatmp.module.dms.service.DocumentService;
 import com.javatmp.module.language.Languagetranslation;
 import com.javatmp.module.theme.Themetranslation;
 import com.javatmp.module.timezone.Timezonetranslation;
+import com.javatmp.module.user.entity.User;
+import com.javatmp.module.user.service.UserService;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.domain.ResponseMessage;
 import com.javatmp.util.Constants;

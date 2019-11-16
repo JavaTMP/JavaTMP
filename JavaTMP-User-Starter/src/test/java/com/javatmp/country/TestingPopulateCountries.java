@@ -10,7 +10,7 @@ import com.javatmp.module.country.Countrytranslation;
 import com.javatmp.module.country.CountrytranslationPK;
 import com.javatmp.module.language.LanguageService;
 import com.javatmp.module.language.Languagetranslation;
-import com.javatmp.module.user.User;
+import com.javatmp.module.user.entity.User;
 import com.javatmp.util.JpaDaoHelper;
 import java.io.BufferedReader;
 import java.io.IOException;

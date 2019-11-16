@@ -4,7 +4,7 @@ import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.module.language.Languagetranslation;
 import com.javatmp.module.theme.Theme;
 import com.javatmp.module.theme.Themetranslation;
-import com.javatmp.module.user.User;
+import com.javatmp.module.user.entity.User;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;

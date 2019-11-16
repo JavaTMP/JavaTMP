@@ -25,3 +25,6 @@ projects
 
 # netbeans
 */nb-configuration.xml
+
+# log4j folders
+logs

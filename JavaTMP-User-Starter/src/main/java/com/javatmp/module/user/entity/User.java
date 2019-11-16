@@ -1,4 +1,4 @@
-package com.javatmp.module.user;
+package com.javatmp.module.user.entity;
 
 import com.javatmp.module.country.Country;
 import com.javatmp.module.dms.entity.Document;

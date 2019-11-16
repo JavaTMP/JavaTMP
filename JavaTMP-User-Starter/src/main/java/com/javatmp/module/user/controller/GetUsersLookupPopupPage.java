@@ -1,4 +1,4 @@
-package com.javatmp.module.user;
+package com.javatmp.module.user.controller;
 
 import java.io.IOException;
 import java.util.logging.Logger;

@@ -5,7 +5,7 @@
  */
 package com.javatmp.country;
 
-import com.javatmp.module.user.User;
+import com.javatmp.module.user.entity.User;
 import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.module.country.CountryService;
 import com.javatmp.module.country.Countrytranslation;

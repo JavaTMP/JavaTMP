@@ -1,7 +1,7 @@
 package com.javatmp.web.filter;
 
 import com.javatmp.module.activity.Activity;
-import com.javatmp.module.user.User;
+import com.javatmp.module.user.entity.User;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Date;

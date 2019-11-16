@@ -1,6 +1,7 @@
 package com.javatmp.module.content.service;
 
 import com.javatmp.module.content.entity.Content;
+import com.javatmp.module.content.entity.Content_;
 import com.javatmp.mvc.domain.table.DataTableRequest;
 import com.javatmp.mvc.domain.table.DataTableResults;
 import com.javatmp.util.JpaDaoHelper;

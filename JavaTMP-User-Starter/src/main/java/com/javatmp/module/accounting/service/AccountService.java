@@ -15,7 +15,7 @@ import com.javatmp.module.accounting.entity.TransactionEntry;
 import com.javatmp.module.accounting.entity.TransactionEntry_;
 import com.javatmp.module.accounting.entity.Transaction_;
 import com.javatmp.mvc.MvcHelper;
-import com.javatmp.mvc.domain.table.DataTableColumnSpecs;
+import com.javatmp.mvc.domain.table.DataTableColumn;
 import com.javatmp.mvc.domain.table.DataTableRequest;
 import com.javatmp.mvc.domain.table.DataTableResults;
 import com.javatmp.mvc.domain.table.Order;
@@ -440,7 +440,7 @@ public class AccountService {
             if (orders != null && orders.size() > 0) {
                 for (Order order : orders) {
                     Integer columnIndex = order.getColumn();
-                    DataTableColumnSpecs orderColumn = tableRequest.getColumns().get(columnIndex);
+                    DataTableColumn orderColumn = tableRequest.getColumns().get(columnIndex);
 
                     Path<?> sortPath = this.jpaDaoHelper.convertStringToPath(from, orderColumn.getData());
                     if (order.getDir().value().equals("desc")) {
@@ -453,7 +453,7 @@ public class AccountService {
 
             // where clouse:
             Predicate predicate = cb.conjunction();
-            for (DataTableColumnSpecs column : tableRequest.getColumns()) {
+            for (DataTableColumn column : tableRequest.getColumns()) {
                 String columnName = column.getName();
                 String columnSearchValue = column.getSearch().getValue().trim();
                 logger.info("column name [" + columnName + "] search value [" + columnSearchValue + "]");
@@ -519,7 +519,7 @@ public class AccountService {
             if (orders != null && orders.size() > 0) {
                 for (Order order : orders) {
                     Integer columnIndex = order.getColumn();
-                    DataTableColumnSpecs orderColumn = tableRequest.getColumns().get(columnIndex);
+                    DataTableColumn orderColumn = tableRequest.getColumns().get(columnIndex);
 
                     Path<?> sortPath = this.jpaDaoHelper.convertStringToPath(from, orderColumn.getData());
                     if (order.getDir().value().equals("desc")) {
@@ -532,7 +532,7 @@ public class AccountService {
 
             // where clouse:
             Predicate predicate = cb.conjunction();
-            for (DataTableColumnSpecs column : tableRequest.getColumns()) {
+            for (DataTableColumn column : tableRequest.getColumns()) {
                 String columnName = column.getName();
                 String columnSearchValue = column.getSearch().getValue().trim();
                 logger.info("column name [" + columnName + "] search value [" + columnSearchValue + "]");
@@ -598,7 +598,7 @@ public class AccountService {
                 List<javax.persistence.criteria.Order> tableOrders = new LinkedList<>();
                 for (Order order : orders) {
                     Integer columnIndex = order.getColumn();
-                    DataTableColumnSpecs orderColumn = tableRequest.getColumns().get(columnIndex);
+                    DataTableColumn orderColumn = tableRequest.getColumns().get(columnIndex);
 
                     Path<?> sortPath = this.jpaDaoHelper.convertStringToPath(from, orderColumn.getData());
                     if (order.getDir().value().equals("desc")) {
@@ -611,7 +611,7 @@ public class AccountService {
             }
             // where clouse:
             Predicate predicate = cb.conjunction();
-            for (DataTableColumnSpecs column : tableRequest.getColumns()) {
+            for (DataTableColumn column : tableRequest.getColumns()) {
                 String columnName = column.getName();
                 String columnSearchValue = column.getSearch().getValue().trim();
                 logger.info("column name [" + columnName + "] search value [" + columnSearchValue + "]");

@@ -9,7 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.javatmp.module.message.entity.Message;
 import com.javatmp.module.message.service.MessageService;
-import com.javatmp.module.user.UserService;
+import com.javatmp.module.user.service.UserService;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.adapter.ClassTypeAdapter;
 import com.javatmp.mvc.adapter.OrderDirTypeAdapter;

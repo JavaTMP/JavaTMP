@@ -1,4 +1,4 @@
-package com.javatmp.module.user;
+package com.javatmp.module.user.controller;
 
 import com.javatmp.module.country.Country;
 import com.javatmp.module.country.Countrytranslation;
@@ -8,6 +8,7 @@ import com.javatmp.module.theme.Theme;
 import com.javatmp.module.theme.Themetranslation;
 import com.javatmp.module.timezone.Timezone;
 import com.javatmp.module.timezone.Timezonetranslation;
+import com.javatmp.module.user.entity.User;
 import com.javatmp.util.ServicesFactory;
 import com.javatmp.util.Constants;
 import java.io.IOException;

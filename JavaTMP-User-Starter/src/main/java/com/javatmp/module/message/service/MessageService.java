@@ -1,8 +1,8 @@
 package com.javatmp.module.message.service;
 
 import com.javatmp.module.message.entity.Message;
-import com.javatmp.module.user.User;
-import com.javatmp.module.user.UserService;
+import com.javatmp.module.user.entity.User;
+import com.javatmp.module.user.service.UserService;
 import com.javatmp.mvc.domain.table.DataTableRequest;
 import com.javatmp.mvc.domain.table.DataTableResults;
 import com.javatmp.util.JpaDaoHelper;

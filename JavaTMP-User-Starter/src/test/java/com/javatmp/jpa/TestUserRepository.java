@@ -6,7 +6,7 @@
 package com.javatmp.jpa;
 
 import com.javatmp.jpa.repository.AbstractRepository;
-import com.javatmp.module.user.User;
+import com.javatmp.module.user.entity.User;
 
 /**
  *

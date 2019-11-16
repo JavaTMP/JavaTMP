@@ -1,8 +1,10 @@
-package com.javatmp.module.user;
+package com.javatmp.module.user.controller;
 
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.domain.ResponseMessage;
 import com.javatmp.module.dms.service.DocumentService;
+import com.javatmp.module.user.entity.User;
+import com.javatmp.module.user.service.UserService;
 import com.javatmp.util.ServicesFactory;
 import com.javatmp.util.Constants;
 import java.io.IOException;

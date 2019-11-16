@@ -5,10 +5,10 @@
  */
 package com.javatmp.user;
 
-import com.javatmp.module.user.User;
-import com.javatmp.module.user.User_;
+import com.javatmp.module.user.entity.User;
+import com.javatmp.module.user.entity.User_;
+import com.javatmp.module.user.service.UserService;
 import com.javatmp.util.JpaDaoHelper;
-import com.javatmp.module.user.UserService;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;

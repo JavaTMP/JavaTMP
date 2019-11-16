@@ -6,8 +6,8 @@
 package com.javatmp.dms;
 
 import com.javatmp.module.dms.entity.Document;
-import com.javatmp.module.user.User;
-import com.javatmp.module.user.UserService;
+import com.javatmp.module.user.entity.User;
+import com.javatmp.module.user.service.UserService;
 import com.javatmp.util.JpaDaoHelper;
 import java.util.Base64;
 import java.util.Date;

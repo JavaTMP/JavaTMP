@@ -1,6 +1,6 @@
 package com.javatmp.module.message.entity;
 
-import com.javatmp.module.user.User;
+import com.javatmp.module.user.entity.User;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;

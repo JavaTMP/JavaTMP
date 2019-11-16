@@ -1,6 +1,6 @@
 package com.javatmp.module.timezone;
 
-import com.javatmp.module.user.User;
+import com.javatmp.module.user.entity.User;
 import com.javatmp.util.JpaDaoHelper;
 import java.util.HashMap;
 import java.util.LinkedList;

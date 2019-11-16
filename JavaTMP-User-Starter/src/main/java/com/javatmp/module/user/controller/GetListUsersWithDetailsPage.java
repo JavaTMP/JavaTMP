@@ -1,4 +1,4 @@
-package com.javatmp.module.user;
+package com.javatmp.module.user.controller;
 
 import com.javatmp.module.country.Country;
 import com.javatmp.module.country.Countrytranslation;
@@ -8,6 +8,7 @@ import com.javatmp.module.theme.Theme;
 import com.javatmp.module.theme.Themetranslation;
 import com.javatmp.module.timezone.Timezone;
 import com.javatmp.module.timezone.Timezonetranslation;
+import com.javatmp.module.user.entity.User;
 import com.javatmp.util.ServicesFactory;
 import com.javatmp.util.Constants;
 import java.io.IOException;
@@ -22,14 +23,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/user/GetCreateNewUserPopupController")
-public class GetCreateNewUserPopupController extends HttpServlet {
+@WebServlet("/user/GetListUsersWithDetailsPage")
+public class GetListUsersWithDetailsPage extends HttpServlet {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String requestPage = "/WEB-INF/pages/user/addNewUserPopup.jsp";
+        String requestPage = "/WEB-INF/pages/user/listUsersWithDetails.jsp";
 
         ServletContext context = request.getServletContext();
         HttpSession session = request.getSession();

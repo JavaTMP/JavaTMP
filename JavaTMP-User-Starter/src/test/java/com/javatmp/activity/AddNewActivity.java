@@ -10,7 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.javatmp.module.activity.Activity;
 import com.javatmp.module.dms.entity.Document;
-import com.javatmp.module.user.User;
+import com.javatmp.module.user.entity.User;
 import com.javatmp.module.activity.ActivityService;
 import com.javatmp.util.ServicesFactory;
 import com.javatmp.util.Constants;

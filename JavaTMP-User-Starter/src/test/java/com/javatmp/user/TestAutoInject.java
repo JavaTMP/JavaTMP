@@ -5,10 +5,10 @@
  */
 package com.javatmp.user;
 
-import com.javatmp.module.user.User;
+import com.javatmp.module.user.entity.User;
 import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.mvc.MvcHelper;
-import com.javatmp.module.user.UserService;
+import com.javatmp.module.user.service.UserService;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;

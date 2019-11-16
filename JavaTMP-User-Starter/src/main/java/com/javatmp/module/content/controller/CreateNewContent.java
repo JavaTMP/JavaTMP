@@ -1,8 +1,8 @@
 package com.javatmp.module.content.controller;
 
+import com.javatmp.module.user.entity.User;
 import com.javatmp.module.content.service.ContentService;
 import com.javatmp.module.content.entity.Content;
-import com.javatmp.module.user.*;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.domain.ResponseMessage;
 import com.javatmp.util.ServicesFactory;

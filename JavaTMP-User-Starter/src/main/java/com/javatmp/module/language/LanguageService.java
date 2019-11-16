@@ -2,7 +2,7 @@ package com.javatmp.module.language;
 
 import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.module.language.Language;
-import com.javatmp.module.user.User;
+import com.javatmp.module.user.entity.User;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;

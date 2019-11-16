@@ -1,6 +1,6 @@
 package com.javatmp.web.filter;
 
-import com.javatmp.module.user.User;
+import com.javatmp.module.user.entity.User;
 import com.javatmp.mvc.MvcHelper;
 import com.javatmp.mvc.domain.ResponseMessage;
 import com.javatmp.util.Constants;

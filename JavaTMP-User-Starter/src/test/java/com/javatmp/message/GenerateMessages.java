@@ -6,8 +6,8 @@
 package com.javatmp.message;
 
 import com.javatmp.module.message.entity.Message;
-import com.javatmp.module.user.User;
-import com.javatmp.module.user.UserService;
+import com.javatmp.module.user.entity.User;
+import com.javatmp.module.user.service.UserService;
 import com.javatmp.util.JpaDaoHelper;
 import java.util.Calendar;
 import java.util.List;

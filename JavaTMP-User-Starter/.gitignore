@@ -7,3 +7,4 @@ node_modules
 /nbproject/private/
 /build
 /dist
+/logs

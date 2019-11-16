@@ -1,9 +1,10 @@
-package com.javatmp.module.user;
+package com.javatmp.module.user.controller;
 
 import com.javatmp.module.country.Countrytranslation;
 import com.javatmp.module.language.Languagetranslation;
 import com.javatmp.module.theme.Themetranslation;
 import com.javatmp.module.timezone.Timezonetranslation;
+import com.javatmp.module.user.entity.User;
 import com.javatmp.util.Constants;
 import com.javatmp.util.ServicesFactory;
 import java.io.IOException;
@@ -17,14 +18,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/user/GetAdvancedListUsersSearchPage")
-public class GetAdvancedListUsersSearchPage extends HttpServlet {
+@WebServlet("/user/GetListUsersPage")
+public class GetListUsersPage extends HttpServlet {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String requestPage = "/WEB-INF/pages/user/advancedUsersSearch.jsp";
+        String requestPage = "/WEB-INF/pages/user/listUsers.jsp";
 
         ServletContext context = request.getServletContext();
         HttpSession session = request.getSession();
