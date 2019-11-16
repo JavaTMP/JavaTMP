@@ -1,10 +1,9 @@
-package com.javatmp.jpa.repository;
+package com.javatmp.mvc.jpa.repository;
 
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
@@ -16,7 +15,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class EntityManagerWrapper<E, I> {
 
-    //private Class<E> clazz;
+    private Class<E> clazz;
     private EntityManager entityManager;
     private CriteriaQuery<E> query;
     private CriteriaQuery<Long> countingQuery;
@@ -25,14 +24,13 @@ public class EntityManagerWrapper<E, I> {
     private Root<E> countingRoot;
 
     public EntityManagerWrapper(Class<E> clazz, EntityManager em) {
-        System.out.println("start EntityManagerWrapper clz = " + clazz + ", em = " + em);
-        //this.clazz = clazz;
+        this.clazz = clazz;
         this.entityManager = em;
-        this.query = this.entityManager.getCriteriaBuilder().createQuery(clazz);
+        this.query = this.entityManager.getCriteriaBuilder().createQuery(this.clazz);
         this.countingQuery = this.entityManager.getCriteriaBuilder().createQuery(Long.class);
         this.builder = this.entityManager.getCriteriaBuilder();
-        this.root = this.query.from(clazz);
-        this.countingRoot = this.countingQuery.from(clazz);
+        this.root = this.query.from(this.clazz);
+        this.countingRoot = this.countingQuery.from(this.clazz);
     }
 
     public E merge(E entity) {
@@ -95,37 +93,6 @@ public class EntityManagerWrapper<E, I> {
         } finally {
             this.entityManager.close();
         }
-    }
-
-    public Expression<Boolean> findByColumn(String column, Object item) {
-        return builder.equal(root.get(column), item);
-    }
-
-    public Expression<Boolean> findById(I id) {
-        return builder.equal(root.get("id"), id);
-    }
-
-    public Expression<Boolean> listByColumn(String column, Object item) {
-        return builder.equal(root.get(column), item);
-    }
-
-    public Expression<Boolean> listByColumn(String column, List<String> list) {
-        return root.get(column).in(list);
-    }
-
-    public Expression<Boolean> listByIds(List<I> list) {
-        return root.get("id").in(list);
-    }
-
-    /**
-     * Workaround for JPA holding on to stale data Both Eclipselink and Hibernate exhibit the same behavior
-     */
-    public Expression<Boolean> listAll() {
-        return builder.notEqual(root.get("id"), 0l);
-    }
-
-    public Expression<Boolean> countByColumn(String column, Object item) {
-        return builder.equal(countingRoot.get(column), item);
     }
 
     private E find(Expression<Boolean> whereClause) {
