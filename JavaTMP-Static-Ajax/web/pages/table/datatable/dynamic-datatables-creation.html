@@ -15,7 +15,7 @@
             </div>
             <div class="card my-3" id="table-panel">
                 <div class="card-header">
-                    DataTables Textfield Column Searches
+                    Dynamic Datatables Creation
                     <div class="options float-right">
                         <a class="settings"><i class="fa fa-cog"></i></a>
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
@@ -99,16 +99,16 @@
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
                 javatmp.util.waitForFinalEvent(function () {
-                    for (var i = 1; i <= 200; i++) {
+                    for (var i = 1; i <= 50; i++) {
                         var rowNode = table.row.add({
                             id: i,
                             userName: 'user ' + i,
                             firstName: 'user ' + i,
                             lastName: 'last ' + i,
-                            birthDate: moment(randomDate(new Date(1950, 0, 1), new Date(2005, 0, 1)))}).draw(false).node();
+                            birthDate: moment(randomDate(new Date(1950, 0, 1), new Date(2000, 0, 1)))}).draw(false).node();
 //                $(rowNode).css('color', 'red').animate({color: 'black'});
                     }
-                }, 1000);
+                }, 10);
 
 
             });

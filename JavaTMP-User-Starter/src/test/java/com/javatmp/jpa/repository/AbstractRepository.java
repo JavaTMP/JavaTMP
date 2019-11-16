@@ -5,58 +5,64 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public abstract class AbstractRepository<E, I> {
+public class AbstractRepository<E, I> {
 
     private final EntityManagerFactory emf;
-
-    private final EntityQueryFactory.EntityQuery<E, I> query;
+    private Class<E> clazz;
 
     public AbstractRepository(Class<E> clazz, String persistentUnit) {
         emf = Persistence.createEntityManagerFactory(persistentUnit);
-        this.query = EntityQueryFactory.create(clazz, emf);
+        this.clazz = clazz;
+        System.out.println("emf [" + emf + "]");
+    }
+
+    public AbstractRepository(Class<E> clazz, EntityManagerFactory emf) {
+        this.emf = emf;
+        this.clazz = clazz;
+    }
+
+    public EntityManagerWrapper<E, I> getNewEntityMangerWrapper() {
+        System.out.println("crate EntityManagerWrapper");
+        EntityManagerWrapper<E, I> ret = new EntityManagerWrapper<>(clazz, emf.createEntityManager());
+        System.out.println("return EntityManagerWrapper");
+        return ret;
     }
 
     public E update(E entity) {
-        return query.transaction((EntityManager em) -> em.merge(entity));
+        return this.getNewEntityMangerWrapper().transaction((EntityManagerWrapper<E, I> emw) -> {
+            return emw.merge(entity);
+        });
     }
 
     public void save(E entity) {
-        query.transaction((EntityManager em) -> em.persist(entity));
-    }
-
-    public void deleteById(I id) {
-        query.transaction((EntityManager em) -> em.remove(em.merge(find(id))));
-    }
-
-    public void delete(E entity) {
-        query.transaction((EntityManager em) -> em.remove(em.merge(entity)));
+        this.getNewEntityMangerWrapper().transaction((EntityManagerWrapper<E, I> emw) -> {
+            emw.persist(entity);
+        });
     }
 
     public E find(I id) {
-        return query.find((eq) -> eq.findById(id));
-    }
-
-    public E find(String column, Object item) {
-        return query.find((eq) -> eq.findByColumn(column, item));
+        return this.getNewEntityMangerWrapper().find((EntityManagerWrapper<E, I> emw) -> {
+            return emw.findById(id);
+        });
     }
 
     public List<E> list(String column, Object item) {
-        return query.list((eq) -> eq.listByColumn(column, item));
+        return this.getNewEntityMangerWrapper().list((EntityManagerWrapper<E, I> emw) -> emw.listByColumn(column, item));
     }
 
     public List<E> list(List<I> list) {
-        return query.list((eq) -> eq.listByIds(list));
+        return this.getNewEntityMangerWrapper().list((EntityManagerWrapper<E, I> emw) -> emw.listByIds(list));
     }
 
     public List<E> list(String column, List<String> list) {
-        return query.list((eq) -> eq.listByColumn(column, list));
+        return this.getNewEntityMangerWrapper().list((EntityManagerWrapper<E, I> emw) -> emw.listByColumn(column, list));
     }
 
     public List<E> list() {
-        return query.list((eq) -> eq.listAll());
+        return this.getNewEntityMangerWrapper().list((EntityManagerWrapper<E, I> emw) -> emw.listAll());
     }
 
     public Long count(String column, Object item) {
-        return query.count((eq) -> eq.countByColumn(column, item));
+        return this.getNewEntityMangerWrapper().count((EntityManagerWrapper<E, I> emw) -> emw.countByColumn(column, item));
     }
 }
