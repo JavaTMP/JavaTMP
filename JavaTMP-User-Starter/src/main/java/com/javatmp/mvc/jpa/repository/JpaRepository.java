@@ -3,17 +3,17 @@ package com.javatmp.mvc.jpa.repository;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class AbstractRepository<E, I> {
+public class JpaRepository<E, I> {
 
     private final EntityManagerFactory emf;
     private Class<E> clazz;
 
-    public AbstractRepository(Class<E> clazz, String persistentUnit) {
+    public JpaRepository(Class<E> clazz, String persistentUnit) {
         emf = Persistence.createEntityManagerFactory(persistentUnit);
         this.clazz = clazz;
     }
 
-    public AbstractRepository(Class<E> clazz, EntityManagerFactory emf) {
+    public JpaRepository(Class<E> clazz, EntityManagerFactory emf) {
         this.emf = emf;
         this.clazz = clazz;
     }
@@ -25,19 +25,25 @@ public class AbstractRepository<E, I> {
 
     public void persist(E entity) {
         this.getNewEntityMangerWrapper().transaction((EntityManagerWrapper<E, I> emw) -> {
-            emw.persist(entity);
+            emw.getEntityManager().persist(entity);
         });
     }
 
-    public E update(E entity) {
+    public void merge(E entity) {
+        this.getNewEntityMangerWrapper().transaction((EntityManagerWrapper<E, I> emw) -> {
+            emw.getEntityManager().merge(entity);
+        });
+    }
+
+    public E read(I id) {
         return this.getNewEntityMangerWrapper().transaction((EntityManagerWrapper<E, I> emw) -> {
-            return emw.merge(entity);
+            return emw.getEntityManager().find(emw.getClazz(), id);
         });
     }
 
-    public E find(I id) {
-        return this.getNewEntityMangerWrapper().find((EntityManagerWrapper<E, I> emw) -> {
-            return emw.getBuilder().equal(emw.getRoot().get("id"), id);
+    public void remove(E entity) {
+        this.getNewEntityMangerWrapper().transaction((EntityManagerWrapper<E, I> emw) -> {
+            emw.getEntityManager().remove(entity);
         });
     }
 

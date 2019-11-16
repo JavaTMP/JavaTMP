@@ -33,18 +33,6 @@ public class EntityManagerWrapper<E, I> {
         this.countingRoot = this.countingQuery.from(this.clazz);
     }
 
-    public E merge(E entity) {
-        return this.transaction((EntityManagerWrapper<E, I> emw) -> {
-            return emw.entityManager.merge(entity);
-        });
-    }
-
-    public void persist(E entity) {
-        this.transaction((EntityManagerWrapper<E, I> emw) -> {
-            emw.entityManager.persist(entity);
-        });
-    }
-
     public Long count(Function<EntityManagerWrapper<E, I>, Expression<Boolean>> operation) {
         Expression<Boolean> expression = operation.apply((EntityManagerWrapper<E, I>) this);
         return this.count(expression);
