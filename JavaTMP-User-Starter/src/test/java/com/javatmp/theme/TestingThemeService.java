@@ -5,7 +5,7 @@
  */
 package com.javatmp.theme;
 
-import com.javatmp.mvc.MvcHelper;
+import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.module.theme.Theme;
 import com.javatmp.module.theme.Themetranslation;

@@ -2,7 +2,7 @@ package com.javatmp.module.dms.controller;
 
 import com.javatmp.module.dms.service.DocumentService;
 import com.javatmp.module.dms.entity.Document;
-import com.javatmp.mvc.MvcHelper;
+import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.util.ServicesFactory;
 import com.javatmp.util.Constants;
 import java.io.IOException;

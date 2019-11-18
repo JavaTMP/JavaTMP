@@ -1,13 +1,13 @@
-package com.javatmp.mvc;
+package com.javatmp.fw.mvc;
 
-import com.javatmp.mvc.domain.ResponseMessage;
-import com.javatmp.mvc.adapter.OrderDirTypeAdapter;
-import com.javatmp.mvc.adapter.ClassTypeAdapter;
+import com.javatmp.fw.domain.ResponseMessage;
+import com.javatmp.fw.mvc.adapter.OrderDirTypeAdapter;
+import com.javatmp.fw.mvc.adapter.ClassTypeAdapter;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.javatmp.module.dms.entity.Document;
-import com.javatmp.mvc.adapter.ByteArrayToBase64TypeAdapter;
-import com.javatmp.mvc.domain.table.OrderDir;
+import com.javatmp.fw.mvc.adapter.ByteArrayToBase64TypeAdapter;
+import com.javatmp.fw.domain.table.OrderDir;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;

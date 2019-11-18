@@ -1,4 +1,4 @@
-package com.javatmp.mvc.jpa.repository;
+package com.javatmp.fw.data.jpa.repository;
 
 import java.util.List;
 import java.util.function.Consumer;

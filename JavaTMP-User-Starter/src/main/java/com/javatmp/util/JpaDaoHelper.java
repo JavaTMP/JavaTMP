@@ -1,10 +1,10 @@
 package com.javatmp.util;
 
-import com.javatmp.mvc.domain.table.DataTableColumn;
-import com.javatmp.mvc.domain.table.DataTableRequest;
-import com.javatmp.mvc.domain.table.DataTableResults;
-import com.javatmp.mvc.domain.table.Order;
-import com.javatmp.mvc.domain.table.RuleOrGroup;
+import com.javatmp.fw.domain.table.DataTableColumn;
+import com.javatmp.fw.domain.table.DataTableRequest;
+import com.javatmp.fw.domain.table.DataTableResults;
+import com.javatmp.fw.domain.table.Order;
+import com.javatmp.fw.domain.table.RuleOrGroup;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -21,12 +21,12 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
-import javax.persistence.metamodel.SingularAttribute;
 
 public class JpaDaoHelper {
 
@@ -186,71 +186,47 @@ public class JpaDaoHelper {
         }
     }
 
-    public <T> List<T> findByProperty(Class<T> clazz, String propertyName, Object value) {
-        EntityManager em = null;
-        List<T> retList = null;
-        try {
-            em = emf.createEntityManager();
-            CriteriaBuilder cb = em.getCriteriaBuilder();
-            CriteriaQuery<T> cq = cb.createQuery(clazz);
-            Root<T> root = cq.from(clazz);
-            cq.where(cb.equal(root.get(propertyName), value));
-            retList = em.createQuery(cq).getResultList();
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
-        return retList;
-    }
-
-    public <T> List<T> findByProperty(Class<T> clazz, SingularAttribute<T, String> propertyName, Object value) {
-        EntityManager em = null;
-        List<T> retList = null;
-        try {
-            em = emf.createEntityManager();
-            CriteriaBuilder cb = em.getCriteriaBuilder();
-            CriteriaQuery<T> cq = cb.createQuery(clazz);
-            Root<T> root = cq.from(clazz);
-            cq.where(cb.equal(root.get(propertyName), value));
-            retList = em.createQuery(cq).getResultList();
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
-        return retList;
-    }
-
-    public <T> List<T> findByProperty(Class<T> clazz, String propertyName,
-            String value, String matchMode) {
-        //convert the value String to lowercase
-        value = value.toLowerCase();
-        if ("START".equals(matchMode)) {
-            value = value + "%";
-        } else if ("END".equals(matchMode)) {
-            value = "%" + value;
-        } else if ("ANYWHERE".equals(matchMode)) {
-            value = "%" + value + "%";
-        }
-
-        EntityManager em = null;
-        em = emf.createEntityManager();
-
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<T> cq = cb.createQuery(clazz);
-        Root<T> root = cq.from(clazz);
-        Expression<String> path = root.get(propertyName);
-        cq.where(cb.like(cb.lower(path), value));
-
-        return em.createQuery(cq).getResultList();
-    }
-
     public <T> Path<T> convertStringToPath(Root<T> from, String strPathName) {
+        System.out.println("handling str [" + strPathName + "]");
         String[] attributes = strPathName.split("\\.");
         Path<T> retPath = from.get(attributes[0]);
-        for (int i = 1; i < attributes.length; i++) {
-            retPath = retPath.get(attributes[i]);
+        if (attributes.length > 1) {
+            System.out.println("Try to get Alias :");
+            Join<T, ?> join = null;
+            for (Join j : from.getJoins()) {
+                if (j.getAttribute().getName().equals(attributes[0])) {
+                    join = j;
+                    break;
+                }
+            }
+            if (join == null) {
+                System.out.println("join root with [" + attributes[0] + "]");
+                join = from.join(attributes[0], JoinType.LEFT);
+            }
+            for (int i = 1; i < attributes.length; i++) {
+                System.out.println("attr [" + attributes[i] + "] i [" + i + "] len [" + attributes.length + "]");
+                retPath = retPath.get(attributes[i]);
+                if (i < (attributes.length - 1)) {
+                    boolean find = false;
+                    for (Join j : join.getJoins()) {
+                        System.out.println("is att [" + j.getAttribute().getName() + "] e [" + attributes[i] + "]");
+                        if (j.getAttribute().getName().equals(attributes[i])) {
+                            join = j;
+                            System.out.println("find [" + attributes[i] + "] with [" + j.getAttribute().getName() + "]");
+                            find = true;
+                            break;
+                        }
+                    }
+                    if (find == false) {
+                        System.out.println("join [" + attributes[i - 1] + "] with [" + attributes[i] + "]");
+                        join = join.join(attributes[i], JoinType.LEFT);
+                    }
+//                    join.getJoins().stream().forEach(ele -> {
+//                        System.out.println("getAlias [" + ele.getAttribute().getName() + "]");
+//                    });
+
+                }
+            }
         }
         return retPath;
     }

@@ -7,7 +7,7 @@ package com.javatmp.timezones;
 
 import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.module.timezone.Timezone;
-import com.javatmp.mvc.MvcHelper;
+import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.module.timezone.TimezoneService;
 import com.javatmp.module.timezone.Timezonetranslation;
 import java.io.BufferedReader;

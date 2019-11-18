@@ -9,7 +9,7 @@ import com.javatmp.module.theme.Themetranslation;
 import com.javatmp.module.timezone.Timezone;
 import com.javatmp.module.timezone.Timezonetranslation;
 import com.javatmp.module.user.entity.User;
-import com.javatmp.mvc.MvcHelper;
+import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.util.ServicesFactory;
 import com.javatmp.util.Constants;
 import java.io.IOException;

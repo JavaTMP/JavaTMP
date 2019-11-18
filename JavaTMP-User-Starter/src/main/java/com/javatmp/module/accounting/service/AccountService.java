@@ -5,6 +5,11 @@
  */
 package com.javatmp.module.accounting.service;
 
+import com.javatmp.fw.domain.table.DataTableColumn;
+import com.javatmp.fw.domain.table.DataTableRequest;
+import com.javatmp.fw.domain.table.DataTableResults;
+import com.javatmp.fw.domain.table.Order;
+import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.module.accounting.entity.Account;
 import com.javatmp.module.accounting.entity.AccountGroup;
 import com.javatmp.module.accounting.entity.AccountTransaction;
@@ -14,11 +19,6 @@ import com.javatmp.module.accounting.entity.Transaction;
 import com.javatmp.module.accounting.entity.TransactionEntry;
 import com.javatmp.module.accounting.entity.TransactionEntry_;
 import com.javatmp.module.accounting.entity.Transaction_;
-import com.javatmp.mvc.MvcHelper;
-import com.javatmp.mvc.domain.table.DataTableColumn;
-import com.javatmp.mvc.domain.table.DataTableRequest;
-import com.javatmp.mvc.domain.table.DataTableResults;
-import com.javatmp.mvc.domain.table.Order;
 import com.javatmp.util.JpaDaoHelper;
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -65,25 +65,6 @@ public class AccountService {
         List<Account> chartOfAccounts = new LinkedList<>();
         chartOfAccounts = this.jpaDaoHelper.findAll(Account.class);
         return chartOfAccounts;
-    }
-
-    public void persistObject(Object object) {
-        EntityManager em = null;
-        try {
-            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
-            em.getTransaction().begin();
-            em.persist(object);
-            em.getTransaction().commit();
-        } catch (PersistenceException e) {
-            if (em != null) {
-                em.getTransaction().rollback();
-            }
-            throw e;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
     }
 
     public List<Account> getChartOfAccounts() {

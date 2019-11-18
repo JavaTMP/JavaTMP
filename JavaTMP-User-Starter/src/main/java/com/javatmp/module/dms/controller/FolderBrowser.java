@@ -1,12 +1,12 @@
 package com.javatmp.module.dms.controller;
 
 import com.javatmp.module.dms.entity.Document;
-import com.javatmp.mvc.MvcHelper;
-import com.javatmp.mvc.domain.ResponseMessage;
-import com.javatmp.mvc.domain.table.DataTableColumn;
-import com.javatmp.mvc.domain.table.DataTableRequest;
-import com.javatmp.mvc.domain.table.DataTableResults;
-import com.javatmp.mvc.domain.table.Search;
+import com.javatmp.fw.mvc.MvcHelper;
+import com.javatmp.fw.domain.ResponseMessage;
+import com.javatmp.fw.domain.table.DataTableColumn;
+import com.javatmp.fw.domain.table.DataTableRequest;
+import com.javatmp.fw.domain.table.DataTableResults;
+import com.javatmp.fw.domain.table.Search;
 import com.javatmp.util.Constants;
 import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.util.ServicesFactory;

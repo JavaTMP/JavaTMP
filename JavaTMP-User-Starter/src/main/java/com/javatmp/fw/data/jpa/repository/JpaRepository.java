@@ -1,5 +1,6 @@
-package com.javatmp.mvc.jpa.repository;
+package com.javatmp.fw.data.jpa.repository;
 
+import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -45,6 +46,35 @@ public class JpaRepository<E, I> {
         this.getNewEntityMangerWrapper().transaction((EntityManagerWrapper<E, I> emw) -> {
             emw.getEntityManager().remove(entity);
         });
+    }
+
+    public List<E> findAll(int start, int count) {
+        EntityManagerWrapper<E, I> emw = null;
+        try {
+            emw = this.getNewEntityMangerWrapper();
+            return emw.getEntityManager()
+                    .createQuery(emw.getQuery().select(emw.getRoot()))
+                    .setFirstResult(start)
+                    .setMaxResults(count)
+                    .getResultList();
+        } finally {
+            if (emw != null && emw.getEntityManager() != null) {
+                emw.getEntityManager().close();
+            }
+        }
+    }
+
+    public Long getAllCount() {
+        EntityManagerWrapper<E, I> emw = null;
+        try {
+            emw = this.getNewEntityMangerWrapper();
+            emw.getCountingQuery().select(emw.getBuilder().count(emw.getCountingQuery().from(this.clazz)));
+            return emw.getEntityManager().createQuery(emw.getCountingQuery()).getSingleResult();
+        } finally {
+            if (emw != null && emw.getEntityManager() != null) {
+                emw.getEntityManager().close();
+            }
+        }
     }
 
 }

@@ -1,4 +1,4 @@
-package com.javatmp.mvc.adapter;
+package com.javatmp.fw.mvc.adapter;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;

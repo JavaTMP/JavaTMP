@@ -1,4 +1,4 @@
-package com.javatmp.mvc.domain.table;
+package com.javatmp.fw.domain.table;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

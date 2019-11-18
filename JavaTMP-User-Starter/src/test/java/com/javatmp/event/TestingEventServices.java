@@ -7,7 +7,7 @@ package com.javatmp.event;
 
 import com.javatmp.module.event.service.EventService;
 import com.javatmp.module.user.entity.User;
-import com.javatmp.mvc.MvcHelper;
+import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.module.user.service.UserService;
 import java.sql.SQLException;

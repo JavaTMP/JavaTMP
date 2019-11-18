@@ -1,7 +1,7 @@
 package com.javatmp.module.stats.controller;
 
-import com.javatmp.mvc.MvcHelper;
-import com.javatmp.mvc.domain.ResponseMessage;
+import com.javatmp.fw.mvc.MvcHelper;
+import com.javatmp.fw.domain.ResponseMessage;
 import com.javatmp.util.ServicesFactory;
 import com.javatmp.util.Constants;
 import java.io.IOException;

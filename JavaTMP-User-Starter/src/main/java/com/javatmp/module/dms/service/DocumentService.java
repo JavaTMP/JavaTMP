@@ -1,8 +1,8 @@
 package com.javatmp.module.dms.service;
 
 import com.javatmp.module.dms.entity.Document;
-import com.javatmp.mvc.domain.table.DataTableRequest;
-import com.javatmp.mvc.domain.table.DataTableResults;
+import com.javatmp.fw.domain.table.DataTableRequest;
+import com.javatmp.fw.domain.table.DataTableResults;
 import com.javatmp.util.JpaDaoHelper;
 import java.text.ParseException;
 

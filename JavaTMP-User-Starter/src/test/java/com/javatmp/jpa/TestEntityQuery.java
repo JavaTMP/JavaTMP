@@ -6,7 +6,7 @@
 package com.javatmp.jpa;
 
 import com.javatmp.module.user.entity.User;
-import com.javatmp.mvc.MvcHelper;
+import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.util.JpaDaoHelper;
 import java.sql.SQLException;
 import java.text.ParseException;

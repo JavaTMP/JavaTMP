@@ -2,10 +2,10 @@ package com.javatmp.module.user.controller;
 
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
-import com.javatmp.mvc.domain.table.DataTableRequest;
-import com.javatmp.mvc.domain.table.DataTableResults;
-import com.javatmp.mvc.MvcHelper;
-import com.javatmp.mvc.domain.ResponseMessage;
+import com.javatmp.fw.domain.table.DataTableRequest;
+import com.javatmp.fw.domain.table.DataTableResults;
+import com.javatmp.fw.mvc.MvcHelper;
+import com.javatmp.fw.domain.ResponseMessage;
 import com.javatmp.util.ServicesFactory;
 import com.javatmp.util.Constants;
 import java.io.IOException;

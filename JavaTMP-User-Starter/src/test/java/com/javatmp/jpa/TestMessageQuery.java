@@ -6,7 +6,7 @@
 package com.javatmp.jpa;
 
 import com.javatmp.fw.mvc.MvcHelper;
-import com.javatmp.module.user.entity.User;
+import com.javatmp.module.message.entity.Message;
 import com.javatmp.util.JpaDaoHelper;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
@@ -30,7 +30,7 @@ import org.apache.commons.beanutils.converters.DateTimeConverter;
  *
  * @author JavaTMP
  */
-public class TestObjectQuery {
+public class TestMessageQuery {
 
     /**
      * @param args the command line arguments
@@ -39,17 +39,14 @@ public class TestObjectQuery {
         JpaDaoHelper jpaDaoHelper = new JpaDaoHelper("AppPU");
         EntityManager em = jpaDaoHelper.getEntityManagerFactory().createEntityManager();
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-        String[] selects = new String[]{"lang", "theme", "address", "timezone",
-            "profilePicDocumentId", "profilePicDocument.randomHash", "profilePicDocument.documentId", "countryId", "country.countryId",
-             "country.theme.themeId"};
+//        String[] selects = new String[]{"messageId", "messageTitle", "creationDate", "fromUserId",
+//            "toUserId", "fromUser.profilePicDocument.contentType", "fromUser.profilePicDocument.documentName",
+//            "fromUser.country.countryId", "fromUser.countryId", "fromUser.country.countryId"};
+        String[] selects = new String[]{"messageId", "messageTitle", "creationDate", "fromUserId",
+            "toUserId", "fromUser.profilePicDocument.contentType"};
         CriteriaQuery<Object[]> cq = criteriaBuilder.createQuery(Object[].class);
-        Root<User> from = cq.from(User.class);
-//        for (String pathStr : selects) {
-//            String[] attributes = pathStr.split("\\.");
-//            if (attributes != null && attributes.length > 1) {
-//                from.join(attributes[0], JoinType.LEFT);
-//            }
-//        }
+        Root<Message> from = cq.from(Message.class);
+
         List<Selection<?>> listOfSelect = jpaDaoHelper.convertArrToPaths(from, selects);
         System.out.println("size [" + listOfSelect.size() + "]");
         cq.multiselect(listOfSelect);
@@ -69,16 +66,16 @@ public class TestObjectQuery {
                 map.put(name, tuple[i]);
             }
             System.out.println("map parameters is [" + map + "]");
-            User bean = new User();
+            Message bean = new Message();
             // create child beans
             autoInstantiate(bean, selects);
             try {
                 BeanUtils.populate(bean, map);
                 System.out.println(MvcHelper.toString(bean));
             } catch (IllegalAccessException ex) {
-                Logger.getLogger(TestObjectQuery.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TestMessageQuery.class.getName()).log(Level.SEVERE, null, ex);
             } catch (InvocationTargetException ex) {
-                Logger.getLogger(TestObjectQuery.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(TestMessageQuery.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
 

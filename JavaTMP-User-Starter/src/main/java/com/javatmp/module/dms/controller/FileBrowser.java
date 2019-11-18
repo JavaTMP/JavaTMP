@@ -1,8 +1,8 @@
 package com.javatmp.module.dms.controller;
 
 import com.javatmp.module.user.entity.User;
-import com.javatmp.mvc.domain.ResponseMessage;
-import com.javatmp.mvc.MvcHelper;
+import com.javatmp.fw.domain.ResponseMessage;
+import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.util.Constants;
 import com.javatmp.util.ServicesFactory;
 import java.io.File;

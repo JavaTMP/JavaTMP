@@ -7,11 +7,11 @@ package com.javatmp.dms;
 
 import com.javatmp.module.dms.entity.Document;
 import com.javatmp.module.user.service.UserService;
-import com.javatmp.mvc.MvcHelper;
-import com.javatmp.mvc.domain.table.DataTableColumn;
-import com.javatmp.mvc.domain.table.DataTableRequest;
-import com.javatmp.mvc.domain.table.DataTableResults;
-import com.javatmp.mvc.domain.table.Search;
+import com.javatmp.fw.mvc.MvcHelper;
+import com.javatmp.fw.domain.table.DataTableColumn;
+import com.javatmp.fw.domain.table.DataTableRequest;
+import com.javatmp.fw.domain.table.DataTableResults;
+import com.javatmp.fw.domain.table.Search;
 import com.javatmp.util.JpaDaoHelper;
 import java.sql.SQLException;
 import java.text.ParseException;

@@ -9,7 +9,7 @@ import com.javatmp.module.dms.entity.Document;
 import com.javatmp.module.dms.entity.Document_;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.entity.User_;
-import com.javatmp.mvc.MvcHelper;
+import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.util.JpaDaoHelper;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;

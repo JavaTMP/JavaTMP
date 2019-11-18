@@ -6,7 +6,7 @@
 package com.javatmp;
 
 import com.javatmp.module.user.entity.User;
-import com.javatmp.mvc.MvcHelper;
+import com.javatmp.fw.mvc.MvcHelper;
 import java.sql.SQLException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
