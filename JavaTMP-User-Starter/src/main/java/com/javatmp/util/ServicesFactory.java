@@ -42,7 +42,7 @@ public class ServicesFactory {
         this.languageService = new LanguageService(getJpaDaoHelper());
         this.countryService = new CountryService(getJpaDaoHelper());
         this.documentService = new DocumentService(getJpaDaoHelper());
-        this.userService = new UserService(getJpaDaoHelper());
+        this.userService = new UserService(getJpaDaoHelper(), persistentUnitName);
         this.userStatsService = new UserStatsService(getJpaDaoHelper());
         this.activityService = new ActivityService(getJpaDaoHelper());
         this.eventService = new EventService(getJpaDaoHelper());

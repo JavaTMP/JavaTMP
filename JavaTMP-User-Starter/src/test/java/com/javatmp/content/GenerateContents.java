@@ -28,8 +28,8 @@ public class GenerateContents {
         JpaDaoHelper jpaDaoHelper;
         UserService userService;
         jpaDaoHelper = new JpaDaoHelper("AppPU");
-        userService = new UserService(jpaDaoHelper);
-        List<User> users = userService.getUsers();
+        userService = new UserService(jpaDaoHelper, "AppPU");
+        List<User> users = userService.findAll(0, Integer.MAX_VALUE);
         generateContent(jpaDaoHelper, users);
     }
 

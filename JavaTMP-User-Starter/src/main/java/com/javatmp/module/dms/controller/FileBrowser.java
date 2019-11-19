@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,8 +39,6 @@ public class FileBrowser extends HttpServlet {
         User loggedInUser = (User) session.getAttribute("user");
         logger.info("logged in user [" + loggedInUser + "] and username is [" + loggedInUser.getUserName() + "]");
 
-        User dbUser = sf.getUserService().readCompleteUserById(loggedInUser);
-        request.setAttribute("user", dbUser);
         request.getRequestDispatcher(requestPage).forward(request, response);
 
     }

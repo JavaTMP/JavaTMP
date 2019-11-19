@@ -7,15 +7,15 @@ package com.javatmp.message;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.javatmp.module.message.entity.Message;
-import com.javatmp.module.message.service.MessageService;
-import com.javatmp.module.user.service.UserService;
-import com.javatmp.fw.mvc.MvcHelper;
-import com.javatmp.fw.mvc.adapter.ClassTypeAdapter;
-import com.javatmp.fw.mvc.adapter.OrderDirTypeAdapter;
 import com.javatmp.fw.domain.table.DataTableRequest;
 import com.javatmp.fw.domain.table.DataTableResults;
 import com.javatmp.fw.domain.table.OrderDir;
+import com.javatmp.fw.mvc.MvcHelper;
+import com.javatmp.fw.mvc.adapter.ClassTypeAdapter;
+import com.javatmp.fw.mvc.adapter.OrderDirTypeAdapter;
+import com.javatmp.module.message.entity.Message;
+import com.javatmp.module.message.service.MessageService;
+import com.javatmp.module.user.service.UserService;
 import com.javatmp.util.JpaDaoHelper;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -36,7 +36,7 @@ public class TestingReadMessageById {
         JpaDaoHelper jpaDaoHelper;
         UserService userService;
         jpaDaoHelper = new JpaDaoHelper("AppPU");
-        userService = new UserService(jpaDaoHelper);
+        userService = new UserService(jpaDaoHelper, "AppPU");
         MessageService messageService = new MessageService(jpaDaoHelper, userService);
 //        messageService.generateMessages();
         Gson gson = new GsonBuilder()

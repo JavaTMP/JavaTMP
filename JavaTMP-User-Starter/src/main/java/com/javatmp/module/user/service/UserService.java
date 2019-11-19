@@ -1,14 +1,15 @@
 package com.javatmp.module.user.service;
 
+import com.javatmp.fw.data.jpa.repository.JpaRepository;
+import com.javatmp.fw.domain.table.DataTableColumn;
+import com.javatmp.fw.domain.table.DataTableRequest;
+import com.javatmp.fw.domain.table.DataTableResults;
+import com.javatmp.fw.domain.table.Order;
 import com.javatmp.module.country.Country;
 import com.javatmp.module.dms.entity.Document;
 import com.javatmp.module.dms.entity.Document_;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.entity.User_;
-import com.javatmp.fw.domain.table.DataTableColumn;
-import com.javatmp.fw.domain.table.DataTableRequest;
-import com.javatmp.fw.domain.table.DataTableResults;
-import com.javatmp.fw.domain.table.Order;
 import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.util.MD5Util;
 import java.text.ParseException;
@@ -32,22 +33,23 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-public class UserService {
+public class UserService extends JpaRepository<User, Long> {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
     private final JpaDaoHelper jpaDaoHelper;
 
-    public UserService(JpaDaoHelper jpaDaoHelper) {
+    public UserService(JpaDaoHelper jpaDaoHelper, String persistentUnitName) {
+        super(User.class, persistentUnitName);
         this.jpaDaoHelper = jpaDaoHelper;
     }
-
-    public List<User> getUsers() {
-        return this.jpaDaoHelper.findAll(User.class);
-    }
-
-    public User readUserByUserId(User user) {
-        return this.jpaDaoHelper.read(User.class, user.getId());
-    }
+//
+//    public List<User> getUsers() {
+//        return this.jpaDaoHelper.findAll(User.class);
+//    }
+//
+//    public User readUserByUserId(User user) {
+//        return this.jpaDaoHelper.read(User.class, user.getId());
+//    }
 
     public User readCompleteUserById(User user) {
 

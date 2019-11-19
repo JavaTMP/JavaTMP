@@ -3,36 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.javatmp;
+package com.javatmp.user;
 
-import com.javatmp.fw.mvc.MvcHelper;
-import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
 import com.javatmp.util.JpaDaoHelper;
 import java.sql.SQLException;
+import java.text.ParseException;
 
 /**
  *
  * @author JavaTMP
  */
-public class TestingUserServicesJPA {
+public class TestUserService {
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException, ParseException {
         JpaDaoHelper jpaDaoHelper;
         UserService userService;
         jpaDaoHelper = new JpaDaoHelper("AppPU");
         userService = new UserService(jpaDaoHelper, "AppPU");
-
-        User user = new User();
-        user.setUserName("user1");
-        user = userService.readUserByUsername(user);
-        System.out.println(MvcHelper.deepToString(user));
-        user = userService.readUserByUsername(user);
-        System.out.println(MvcHelper.deepToString(user));
-        System.out.println(user.getProfilePicDocument());
 
     }
 

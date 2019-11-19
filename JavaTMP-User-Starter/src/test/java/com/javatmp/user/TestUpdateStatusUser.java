@@ -6,8 +6,8 @@
 package com.javatmp.user;
 
 import com.javatmp.module.user.entity.User;
-import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.module.user.service.UserService;
+import com.javatmp.util.JpaDaoHelper;
 import javax.persistence.PersistenceException;
 
 /**
@@ -23,7 +23,7 @@ public class TestUpdateStatusUser {
         JpaDaoHelper jpaDaoHelper;
         UserService userService;
         jpaDaoHelper = new JpaDaoHelper("AppPU");
-        userService = new UserService(jpaDaoHelper);
+        userService = new UserService(jpaDaoHelper, "AppPU");
         try {
             User user = new User(1L);
             user = userService.readCompleteUserById(user);

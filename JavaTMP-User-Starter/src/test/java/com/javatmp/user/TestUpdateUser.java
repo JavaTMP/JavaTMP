@@ -5,10 +5,10 @@
  */
 package com.javatmp.user;
 
-import com.javatmp.module.user.entity.User;
 import com.javatmp.fw.mvc.MvcHelper;
-import com.javatmp.util.JpaDaoHelper;
+import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
+import com.javatmp.util.JpaDaoHelper;
 import javax.persistence.PersistenceException;
 
 /**
@@ -24,7 +24,7 @@ public class TestUpdateUser {
         JpaDaoHelper jpaDaoHelper;
         UserService userService;
         jpaDaoHelper = new JpaDaoHelper("AppPU");
-        userService = new UserService(jpaDaoHelper);
+        userService = new UserService(jpaDaoHelper, "AppPU");
 
         User user = userService.readCompleteUserById(new User(1L));
         System.out.println(MvcHelper.deepToString(user));

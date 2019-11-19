@@ -5,10 +5,10 @@
  */
 package com.javatmp.user;
 
-import com.javatmp.module.user.entity.User;
-import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.fw.mvc.MvcHelper;
+import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
+import com.javatmp.util.JpaDaoHelper;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
@@ -55,7 +55,7 @@ public class TestAutoInject {
         JpaDaoHelper jpaDaoHelper;
         UserService userService;
         jpaDaoHelper = new JpaDaoHelper("AppPU");
-        userService = new UserService(jpaDaoHelper);
+        userService = new UserService(jpaDaoHelper, "AppPU");
         EntityManager em = null;
         try {
             em = jpaDaoHelper.getEntityManagerFactory().createEntityManager();
