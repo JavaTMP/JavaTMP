@@ -21,7 +21,6 @@ import java.util.List;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
-import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaDelete;
@@ -42,48 +41,29 @@ public class UserService extends JpaRepository<User, Long> {
         super(User.class, persistentUnitName);
         this.jpaDaoHelper = jpaDaoHelper;
     }
-//
-//    public List<User> getUsers() {
-//        return this.jpaDaoHelper.findAll(User.class);
-//    }
-//
-//    public User readUserByUserId(User user) {
-//        return this.jpaDaoHelper.read(User.class, user.getId());
-//    }
 
-    public User readCompleteUserById(User user) {
-
-        EntityManager em = null;
-        try {
-            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+    public User readCompleteUserById(final User user) {
+        return get((EntityManager em) -> {
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaQuery<User> cq = cb.createQuery(User.class);
-
             Root<User> from = cq.from(User.class);
             Join<User, Document> joinDocument = from.join(User_.profilePicDocument, JoinType.LEFT);
             Join<User, Country> joinCountry = from.join(User_.country, JoinType.LEFT);
-
-            cq.multiselect(from.get(User_.id), from.get(User_.userName), from.get("password"), from.get("firstName"),
-                    from.get("lastName"), from.get("status"), from.get("birthDate"), from.get("creationDate"),
-                    from.get("email"), from.get("lang"), from.get("theme"), from.get("countryId"), from.get("address"),
-                    from.get("timezone"), from.get("profilePicDocumentId"), from.get("profilePicDocument").get("randomHash")
+            cq.multiselect(from.get(User_.id), from.get(User_.userName), from.get(User_.password),
+                    from.get(User_.firstName), from.get(User_.lastName), from.get(User_.status),
+                    from.get(User_.birthDate), from.get(User_.creationDate), from.get(User_.email),
+                    from.get(User_.lang), from.get(User_.theme), from.get(User_.countryId),
+                    from.get(User_.address), from.get(User_.timezone), from.get(User_.profilePicDocumentId),
+                    from.get(User_.profilePicDocument).get(Document_.randomHash)
             );
             cq.where(cb.equal(from.get(User_.id), user.getId()));
             TypedQuery<User> query = em.createQuery(cq);
-            user = query.getSingleResult();
-            return user;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+            return query.getSingleResult();
+        });
     }
 
     public User readBasicUserById(User user) {
-
-        EntityManager em = null;
-        try {
-            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+        return get((EntityManager em) -> {
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaQuery<User> cq = cb.createQuery(User.class);
 
@@ -91,109 +71,63 @@ public class UserService extends JpaRepository<User, Long> {
             Join<User, Document> joinDocument = from.join(User_.profilePicDocument, JoinType.LEFT);
             Join<User, Country> joinCountry = from.join(User_.country, JoinType.LEFT);
 
-            cq.multiselect(from.get(User_.id), from.get(User_.userName), from.get("firstName"),
-                    from.get("lastName"), from.get("status"), from.get("birthDate"), from.get("creationDate"),
-                    from.get("email"), from.get("lang"), from.get("theme"), from.get("countryId"), from.get("address"),
-                    from.get("timezone"), from.get("profilePicDocumentId"), from.get("profilePicDocument").get("randomHash")
-            );
+            cq.multiselect(from.get(User_.id), from.get(User_.userName), from.get(User_.firstName),
+                    from.get(User_.lastName), from.get(User_.status), from.get(User_.birthDate), from.get(User_.creationDate),
+                    from.get(User_.email), from.get(User_.lang), from.get(User_.theme), from.get(User_.countryId), from.get(User_.address),
+                    from.get(User_.timezone), from.get(User_.profilePicDocumentId),
+                    from.get(User_.profilePicDocument).get(Document_.randomHash));
             cq.where(cb.equal(from.get(User_.id), user.getId()));
             TypedQuery<User> query = em.createQuery(cq);
-            user = query.getSingleResult();
-            return user;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+            return query.getSingleResult();
+        });
     }
 
     public User readUserByUsername(User user) {
-        User dbUser = null;
-        EntityManager em = null;
-        try {
-            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+        return get((EntityManager em) -> {
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaQuery<User> cq = cb.createQuery(User.class);
             Root<User> from = cq.from(User.class);
             Join<User, Document> join = from.join(User_.profilePicDocument, JoinType.LEFT);
-            cq.multiselect(from.get("id"), from.get("userName"), from.get("password"), from.get("firstName"),
-                    from.get("lastName"), from.get("status"), from.get("birthDate"), from.get("creationDate"),
-                    from.get("email"), from.get("lang"), from.get("theme"), from.get("countryId"), from.get("address"),
-                    from.get("timezone"), from.get("profilePicDocumentId"), from.get("profilePicDocument").get("randomHash")
+            cq.multiselect(from.get(User_.id), from.get(User_.userName), from.get(User_.password),
+                    from.get(User_.firstName), from.get(User_.lastName), from.get(User_.status),
+                    from.get(User_.birthDate), from.get(User_.creationDate), from.get(User_.email),
+                    from.get(User_.lang), from.get(User_.theme), from.get(User_.countryId),
+                    from.get(User_.address), from.get(User_.timezone), from.get(User_.profilePicDocumentId),
+                    from.get(User_.profilePicDocument).get(Document_.randomHash)
             );
             cq.where(cb.equal(from.get(User_.userName), user.getUserName()));
             TypedQuery<User> query = em.createQuery(cq);
-
-            dbUser = query.getSingleResult();
-            return dbUser;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+            return query.getSingleResult();
+        });
     }
 
     public User createNewUser(User user) {
-
-        EntityManager em = null;
-        try {
-            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
-            em.getTransaction().begin();
+        return transaction((EntityManager em) -> {
             Document document = user.getProfilePicDocument();
             em.persist(document);
             user.setProfilePicDocumentId(document.getDocumentId());
             em.persist(user);
-
-            // update document with user created it
             document.setCreatedByUserId(user.getId());
-
-            em.getTransaction().commit();
-        } catch (PersistenceException e) {
-            e.printStackTrace();
-            if (em != null) {
-                em.getTransaction().rollback();
-            }
-            throw new PersistenceException("@ create new user", e);
-        }
-        return user;
+            return user;
+        });
     }
 
     public User createNewBasicUser(User user) {
-
-        EntityManager em = null;
-
-        // set any default values:
-        user.setStatus((short) 1);
-        user.setPassword(MD5Util.convertToMD5(user.getPassword()));
-        user.setCreationDate(new Date());
-        try {
-            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
-            em.getTransaction().begin();
+        return transaction((EntityManager em) -> {
+            // set any default values:
+            user.setStatus((short) 1);
+            user.setPassword(MD5Util.convertToMD5(user.getPassword()));
+            user.setCreationDate(new Date());
             em.persist(user);
-            em.getTransaction().commit();
-        } catch (PersistenceException e) {
-            if (em != null) {
-                em.getTransaction().rollback();
-            }
-            throw e;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
-        return user;
+            return user;
+        });
     }
 
     public int updateCompleteUser(User userToBeUpdated) {
-        int updateStatus = 0;
-        EntityManager em = null;
-        try {
-
-            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
-            em.getTransaction().begin();
+        return statusTransaction((EntityManager em) -> {
+            int updateStatus;
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaQuery<User> cq = cb.createQuery(User.class);
-
             Root<User> from = cq.from(User.class);
             from.fetch(User_.profilePicDocument, JoinType.LEFT);
             cq.select(from);
@@ -218,25 +152,14 @@ public class UserService extends JpaRepository<User, Long> {
                 dbUser.setProfilePicDocument(doc);
                 dbUser.setProfilePicDocumentId(doc.getDocumentId());
             }
-            em.getTransaction().commit();
             updateStatus = 1;
-        } catch (PersistenceException e) {
-            if (em != null) {
-                em.getTransaction().rollback();
-            }
-            throw e;
-        }
-
-        return updateStatus;
+            return updateStatus;
+        });
     }
 
     public int updateLastUserAccess(User userToBeUpdated) {
-        int updateStatus = 0;
-        EntityManager em = null;
-
-        userToBeUpdated.setLastAccessTime(new Date());
-
-        try {
+        return statusTransaction((EntityManager em) -> {
+            userToBeUpdated.setLastAccessTime(new Date());
             em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
             em.getTransaction().begin();
             CriteriaBuilder cb = em.getCriteriaBuilder();
@@ -244,27 +167,13 @@ public class UserService extends JpaRepository<User, Long> {
             Root<User> root = update.from(User.class);
             update.set(root.get(User_.lastAccessTime), userToBeUpdated.getLastAccessTime());
             update.where(cb.equal(root.get(User_.id), userToBeUpdated.getId()));
-            updateStatus = em.createQuery(update).executeUpdate();
-            em.getTransaction().commit();
-            return updateStatus;
-        } catch (PersistenceException e) {
-            if (em != null) {
-                em.getTransaction().rollback();
-            }
-            throw e;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+            return em.createQuery(update).executeUpdate();
+        });
     }
 
-    public int deleteUser(User userToBeDeleted) {
-        int deletedStatus = 0;
-        EntityManager em = null;
-        try {
-            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
-            em.getTransaction().begin();
+    public int deleteUser(final User userToBeDeleted) {
+        return statusTransaction((EntityManager em) -> {
+            Integer deletedStatus = 0;
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaQuery<User> cq = cb.createQuery(User.class);
             Root<User> from = cq.from(User.class);
@@ -287,103 +196,44 @@ public class UserService extends JpaRepository<User, Long> {
                 delete.where(cb.equal(e.get(Document_.documentId), dbUser.getProfilePicDocumentId()));
                 deletedStatus = em.createQuery(delete).executeUpdate();
             }
-
-            em.getTransaction().commit();
             return deletedStatus;
-        } catch (PersistenceException e) {
-            if (em != null) {
-                em.getTransaction().rollback();
+        });
+    }
+
+    private int updateUserStatus(User userToBeUpdated) {
+        return statusTransaction((EntityManager em) -> {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<User> cq = cb.createQuery(User.class);
+            Root<User> from = cq.from(User.class);
+            cq.multiselect(from.get(User_.id), from.get(User_.status));
+            cq.where(cb.equal(from.get(User_.id), userToBeUpdated.getId()));
+            TypedQuery<User> query = em.createQuery(cq);
+            query.setLockMode(LockModeType.PESSIMISTIC_WRITE);
+            User dbUser = query.getSingleResult();
+            if (dbUser.getStatus().equals(userToBeUpdated.getStatus())) {
+                throw new IllegalArgumentException("existing user is already Active !!!");
             }
-            throw e;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+            dbUser.setStatus(userToBeUpdated.getStatus());
+            CriteriaUpdate<User> update = cb.createCriteriaUpdate(User.class);
+            Root<User> e = update.from(User.class);
+            update.set(User_.STATUS, userToBeUpdated.getStatus());
+            update.where(cb.equal(from.get(User_.id), userToBeUpdated.getId()));
+            return em.createQuery(update).executeUpdate();
+        });
     }
 
     public int activateUser(User userToBeUpdated) {
-        int updateStatus = 0;
-        EntityManager em = null;
-        try {
-            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
-            em.getTransaction().begin();
-            CriteriaBuilder cb = em.getCriteriaBuilder();
-            CriteriaQuery<User> cq = cb.createQuery(User.class);
-            Root<User> from = cq.from(User.class);
-            cq.multiselect(from.get(User_.id), from.get(User_.status));
-            cq.where(cb.equal(from.get(User_.id), userToBeUpdated.getId()));
-            TypedQuery<User> query = em.createQuery(cq);
-            query.setLockMode(LockModeType.PESSIMISTIC_WRITE);
-            User dbUser = query.getSingleResult();
-            if (dbUser.getStatus().equals((short) 1)) {
-                throw new IllegalArgumentException("user is already Active !!!");
-            }
-            dbUser.setStatus((short) 1);
-            CriteriaUpdate<User> update = cb.createCriteriaUpdate(User.class);
-            Root<User> e = update.from(User.class);
-            update.set("status", 1);
-            update.where(cb.equal(from.get(User_.id), userToBeUpdated.getId()));
-            updateStatus = em.createQuery(update).executeUpdate();
-            em.getTransaction().commit();
-            return updateStatus;
-        } catch (IllegalArgumentException | PersistenceException e) {
-            e.printStackTrace();
-            if (em != null) {
-                em.getTransaction().rollback();
-            }
-            throw e;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        userToBeUpdated.setStatus((short) 1);
+        return this.updateUserStatus(userToBeUpdated);
     }
 
     public int deActivateUser(User userToBeUpdated) {
-        int updateStatus = 0;
-        EntityManager em = null;
-        try {
-            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
-            em.getTransaction().begin();
-            CriteriaBuilder cb = em.getCriteriaBuilder();
-            CriteriaQuery<User> cq = cb.createQuery(User.class);
-            Root<User> from = cq.from(User.class);
-            cq.multiselect(from.get(User_.id), from.get(User_.status));
-            cq.where(cb.equal(from.get(User_.id), userToBeUpdated.getId()));
-            TypedQuery<User> query = em.createQuery(cq);
-            query.setLockMode(LockModeType.PESSIMISTIC_WRITE);
-            User dbUser = query.getSingleResult();
-            if (dbUser.getStatus().equals((short) 0)) {
-                throw new IllegalArgumentException("user is already deActivated !!!");
-            }
-            dbUser.setStatus((short) 0);
-            CriteriaUpdate<User> update = cb.createCriteriaUpdate(User.class);
-            Root<User> e = update.from(User.class);
-            update.set("status", 0);
-            update.where(cb.equal(from.get(User_.id), userToBeUpdated.getId()));
-            em.createQuery(update).executeUpdate();
-            em.getTransaction().commit();
-            updateStatus = 1;
-            return updateStatus;
-        } catch (IllegalArgumentException | PersistenceException e) {
-            e.printStackTrace();
-            if (em != null) {
-                em.getTransaction().rollback();
-            }
-            throw e;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        userToBeUpdated.setStatus((short) 0);
+        return this.updateUserStatus(userToBeUpdated);
     }
 
-    public Document updateUserPersonalProfilePhoto(User user, Document document) {
-        EntityManager em = null;
-        try {
-            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
-            em.getTransaction().begin();
+    public void updateUserPersonalProfilePhoto(User user, Document document) {
+        transaction((EntityManager em) -> {
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaQuery<User> cq = cb.createQuery(User.class);
             Root<User> from = cq.from(User.class);
@@ -413,19 +263,7 @@ public class UserService extends JpaRepository<User, Long> {
                 // create new one for user
                 em.persist(document);
             }
-            em.getTransaction().commit();
-            return document;
-        } catch (IllegalArgumentException | PersistenceException e) {
-            e.printStackTrace();
-            if (em != null) {
-                em.getTransaction().rollback();
-            }
-            throw e;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        });
     }
 
     public DataTableResults<User> listAllUsers(DataTableRequest<User> tableRequest) throws ParseException {

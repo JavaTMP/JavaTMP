@@ -1,6 +1,9 @@
 package com.javatmp.fw.data.jpa.repository;
 
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -25,26 +28,26 @@ public class JpaRepository<E, I> {
     }
 
     public void persist(E entity) {
-        this.getNewEntityMangerWrapper().transaction((EntityManagerWrapper<E, I> emw) -> {
-            emw.getEntityManager().persist(entity);
+        this.transaction((EntityManager em) -> {
+            em.persist(entity);
         });
     }
 
     public void merge(E entity) {
-        this.getNewEntityMangerWrapper().transaction((EntityManagerWrapper<E, I> emw) -> {
-            emw.getEntityManager().merge(entity);
+        this.transaction((EntityManager em) -> {
+            em.merge(entity);
         });
     }
 
     public E read(I id) {
-        return this.getNewEntityMangerWrapper().transaction((EntityManagerWrapper<E, I> emw) -> {
-            return emw.getEntityManager().find(emw.getClazz(), id);
+        return this.transaction((EntityManager em) -> {
+            return em.find(clazz, id);
         });
     }
 
     public void remove(E entity) {
-        this.getNewEntityMangerWrapper().transaction((EntityManagerWrapper<E, I> emw) -> {
-            emw.getEntityManager().remove(entity);
+        this.transaction((EntityManager em) -> {
+            em.remove(entity);
         });
     }
 
@@ -53,7 +56,7 @@ public class JpaRepository<E, I> {
         try {
             emw = this.getNewEntityMangerWrapper();
             return emw.getEntityManager()
-                    .createQuery(emw.getQuery().select(emw.getRoot()))
+                    .createQuery(emw.getCriteriaQuery().select(emw.getRoot()))
                     .setFirstResult(start)
                     .setMaxResults(count)
                     .getResultList();
@@ -68,8 +71,8 @@ public class JpaRepository<E, I> {
         EntityManagerWrapper<E, I> emw = null;
         try {
             emw = this.getNewEntityMangerWrapper();
-            emw.getCountingQuery().select(emw.getBuilder().count(emw.getCountingQuery().from(this.clazz)));
-            return emw.getEntityManager().createQuery(emw.getCountingQuery()).getSingleResult();
+            emw.getCountingCriteriaQuery().select(emw.getCriteriaBuilder().count(emw.getCountingCriteriaQuery().from(this.clazz)));
+            return emw.getEntityManager().createQuery(emw.getCountingCriteriaQuery()).getSingleResult();
         } finally {
             if (emw != null && emw.getEntityManager() != null) {
                 emw.getEntityManager().close();
@@ -77,4 +80,79 @@ public class JpaRepository<E, I> {
         }
     }
 
+    public E get(Function<EntityManager, E> operation) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            E result = operation.apply(em);
+            return result;
+        } catch (Throwable t1) {
+            throw t1;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+    public E transaction(Function<EntityManager, E> operation) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            E result = operation.apply(em);
+            em.getTransaction().commit();
+            return result;
+        } catch (Throwable t1) {
+            try {
+                em.getTransaction().rollback();
+            } catch (Throwable t2) {
+                t2.printStackTrace();
+            }
+            throw t1;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+    public <F> F statusTransaction(Function<EntityManager, F> operation) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            F result = operation.apply(em);
+            em.getTransaction().commit();
+            return result;
+        } catch (Throwable t1) {
+            try {
+                em.getTransaction().rollback();
+            } catch (Throwable t2) {
+                t2.printStackTrace();
+            }
+            throw t1;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+    public void transaction(Consumer<EntityManager> operation) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            em.getTransaction().begin();
+            operation.accept(em);
+            em.getTransaction().commit();
+        } catch (Throwable t1) {
+            try {
+                em.getTransaction().rollback();
+            } catch (Throwable t2) {
+                t2.printStackTrace();
+            }
+            throw t1;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
 }

@@ -1,10 +1,10 @@
 package com.javatmp.module.dms.controller;
 
+import com.javatmp.fw.domain.ResponseMessage;
+import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.module.dms.entity.Document;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
-import com.javatmp.fw.mvc.MvcHelper;
-import com.javatmp.fw.domain.ResponseMessage;
 import com.javatmp.util.Constants;
 import com.javatmp.util.ServicesFactory;
 import java.io.ByteArrayOutputStream;
@@ -63,8 +63,7 @@ public class UpdateProfilePhoto extends HttpServlet {
             // update logged in user with update document:
             loggedInUser.setProfilePicDocumentId(fileUploading.getDocumentId());
             loggedInUser.setProfilePicDocument(new Document(fileUploading.getDocumentId(), fileUploading.getRandomHash()));
-            responseMessage
-                    .setOverAllStatus(true);
+            responseMessage.setOverAllStatus(true);
             responseMessage.setMessage("Personal Profile Photo Updated Successfully");
             responseMessage.setData(fileUploading);
 

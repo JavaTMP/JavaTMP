@@ -17,20 +17,20 @@ public class EntityManagerWrapper<E, I> {
 
     private Class<E> clazz;
     private EntityManager entityManager;
-    private CriteriaQuery<E> query;
-    private CriteriaQuery<Long> countingQuery;
-    private CriteriaBuilder builder;
+    private CriteriaQuery<E> criteriaQuery;
+    private CriteriaQuery<Long> countingCriteriaQuery;
+    private CriteriaBuilder criteriaBuilder;
     private Root<E> root;
     private Root<E> countingRoot;
 
     public EntityManagerWrapper(Class<E> clazz, EntityManager em) {
         this.clazz = clazz;
         this.entityManager = em;
-        this.query = this.entityManager.getCriteriaBuilder().createQuery(this.clazz);
-        this.countingQuery = this.entityManager.getCriteriaBuilder().createQuery(Long.class);
-        this.builder = this.entityManager.getCriteriaBuilder();
-        this.root = this.query.from(this.clazz);
-        this.countingRoot = this.countingQuery.from(this.clazz);
+        this.criteriaQuery = this.entityManager.getCriteriaBuilder().createQuery(this.clazz);
+        this.countingCriteriaQuery = this.entityManager.getCriteriaBuilder().createQuery(Long.class);
+        this.criteriaBuilder = this.entityManager.getCriteriaBuilder();
+        this.root = this.criteriaQuery.from(this.clazz);
+        this.countingRoot = this.countingCriteriaQuery.from(this.clazz);
     }
 
     public Long count(Function<EntityManagerWrapper<E, I>, Expression<Boolean>> operation) {
@@ -84,20 +84,20 @@ public class EntityManagerWrapper<E, I> {
     }
 
     private E find(Expression<Boolean> whereClause) {
-        query.select(root);
-        query.where(whereClause);
-        return this.entityManager.createQuery(query).setMaxResults(1).getSingleResult();
+        criteriaQuery.select(root);
+        criteriaQuery.where(whereClause);
+        return this.entityManager.createQuery(criteriaQuery).setMaxResults(1).getSingleResult();
     }
 
     private List<E> list(Expression<Boolean> whereClause) {
-        query.select(root);
-        query.where(whereClause);
-        return this.entityManager.createQuery(query).getResultList();
+        criteriaQuery.select(root);
+        criteriaQuery.where(whereClause);
+        return this.entityManager.createQuery(criteriaQuery).getResultList();
     }
 
     private Long count(Expression<Boolean> whereClause) {
-        countingQuery.select(builder.count(countingRoot));
-        countingQuery.where(whereClause);
-        return this.entityManager.createQuery(countingQuery).getSingleResult();
+        countingCriteriaQuery.select(criteriaBuilder.count(countingRoot));
+        countingCriteriaQuery.where(whereClause);
+        return this.entityManager.createQuery(countingCriteriaQuery).getSingleResult();
     }
 }
