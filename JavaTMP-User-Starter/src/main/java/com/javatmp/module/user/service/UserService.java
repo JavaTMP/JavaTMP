@@ -18,6 +18,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -271,10 +272,8 @@ public class UserService extends JpaRepository<User, Long> {
     }
 
     public DataTableResults<User> listAllUsers(DataTableRequest<User> tableRequest) throws ParseException {
-        List<User> retList = null;
-        EntityManager em = null;
-        try {
-            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+        return getList((EntityManager em) -> {
+            List<User> retList = null;
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaQuery<User> cq = cb.createQuery(User.class);
             Root<User> from = cq.from(User.class);
@@ -339,10 +338,16 @@ public class UserService extends JpaRepository<User, Long> {
                         predicate = cb.and(predicate, cb.equal(from.get(columnName), searchValue));
                     }
                     if (columnName.equals("birthDate")) {
-                        String searchValue = new String(columnSearchValue);
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                        Date objSearchValue = sdf.parse(searchValue);
-                        predicate = cb.and(predicate, cb.equal(from.get(columnName), objSearchValue));
+                        try {
+                            String searchValue = new String(columnSearchValue);
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                            Date objSearchValue = sdf.parse(searchValue);
+                            predicate = cb.and(predicate, cb.equal(from.get(columnName), objSearchValue));
+                        } catch (ParseException ex) {
+                            ex.printStackTrace();
+
+                        }
+
                     }
                     if (columnName.equals("age")) {
                         Integer searchValue = new Integer(columnSearchValue);
@@ -352,7 +357,7 @@ public class UserService extends JpaRepository<User, Long> {
                         calendar.add(Calendar.YEAR, 1);
                         Date maxDate = calendar.getTime();
                         System.out.println("min [" + minDate + "], max [" + maxDate + "]");
-                        Predicate betweenDate = cb.between(from.get(User_.birthDate), minDate, maxDate);
+                        Predicate betweenDate = cb.between(from.<Date>get(User_.birthDate), minDate, maxDate);
                         predicate = cb.and(predicate, betweenDate);
                     }
                     if (columnName.equals("email")) {
@@ -380,24 +385,32 @@ public class UserService extends JpaRepository<User, Long> {
                         predicate = cb.and(predicate, cb.equal(from.get(columnName), searchValue));
                     }
                     if (columnName.equals("creationDate")) {
-                        String[] dateParts = columnSearchValue.split("##TO##");
-                        System.out.println(Arrays.toString(dateParts));
-                        String startStr = dateParts[0];
-                        String endStr = dateParts[1];
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-                        Date start = sdf.parse(startStr);
-                        Date end = sdf.parse(endStr);
-                        System.out.println("start [" + start + "], end [" + end + "]");
-                        Predicate betweenDate = cb.between(from.get(User_.creationDate), start, end);
-                        predicate = cb.and(predicate, betweenDate);
+                        try {
+                            String[] dateParts = columnSearchValue.split("##TO##");
+                            System.out.println(Arrays.toString(dateParts));
+                            String startStr = dateParts[0];
+                            String endStr = dateParts[1];
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+                            Date start = sdf.parse(startStr);
+                            Date end = sdf.parse(endStr);
+                            System.out.println("start [" + start + "], end [" + end + "]");
+                            Predicate betweenDate = cb.between(from.<Date>get(User_.creationDate), start, end);
+                            predicate = cb.and(predicate, betweenDate);
+                        } catch (ParseException ex) {
+                            ex.printStackTrace();
+                        }
                     }
                 }
             }
 
             System.err.println("tableRequest.getAdvancedSearchQuery() [" + tableRequest.getAdvancedSearchQuery() + "]");
             if (tableRequest.getAdvancedSearchQuery() != null) {
-                predicate = cb.and(predicate, jpaDaoHelper.applyAdvanedSearchQuery(tableRequest.getAdvancedSearchQuery(), cb, from));
-                System.out.println();
+                try {
+                    predicate = cb.and(predicate, jpaDaoHelper.applyAdvanedSearchQuery(tableRequest.getAdvancedSearchQuery(), cb, from));
+                    System.out.println();
+                } catch (ParseException ex) {
+                    Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
             cq.where(predicate);
@@ -418,18 +431,11 @@ public class UserService extends JpaRepository<User, Long> {
             cqLong.select(cb.count(from));
             cqLong.where(predicate);
             Long allCount = em.createQuery(cqLong).getSingleResult();
-
             dataTableResult.setRecordsTotal(allCount);
             dataTableResult.setRecordsFiltered(allCount);
             dataTableResult.setDraw(tableRequest.getDraw());
-
             return dataTableResult;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
-
+        });
     }
 
 }
