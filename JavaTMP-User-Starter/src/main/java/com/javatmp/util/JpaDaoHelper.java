@@ -36,6 +36,10 @@ public class JpaDaoHelper {
         this.emf = Persistence.createEntityManagerFactory(persistentUnitName);
     }
 
+    public JpaDaoHelper(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
+
     public JpaDaoHelper(String persistentUnitName, Properties properties) {
         this.emf = Persistence.createEntityManagerFactory(persistentUnitName, properties);
     }

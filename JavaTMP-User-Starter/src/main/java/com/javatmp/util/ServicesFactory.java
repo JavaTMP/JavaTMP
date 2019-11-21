@@ -14,6 +14,8 @@ import com.javatmp.module.timezone.TimezoneService;
 import com.javatmp.module.user.service.UserService;
 import java.util.Date;
 import java.util.logging.Logger;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import lombok.Getter;
 
 @Getter
@@ -36,13 +38,15 @@ public class ServicesFactory {
 
     public ServicesFactory(String persistentUnitName) {
         logger.info("*** Start ServicesFactory Constructor @ [" + new Date() + "]");
-        this.jpaDaoHelper = new JpaDaoHelper(persistentUnitName);
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory(persistentUnitName);
+        this.jpaDaoHelper = new JpaDaoHelper(emf);
         this.timezoneService = new TimezoneService(getJpaDaoHelper());
         this.themeService = new ThemeService(getJpaDaoHelper());
         this.languageService = new LanguageService(getJpaDaoHelper());
         this.countryService = new CountryService(getJpaDaoHelper());
         this.documentService = new DocumentService(getJpaDaoHelper());
-        this.userService = new UserService(getJpaDaoHelper(), persistentUnitName);
+        this.userService = new UserService(getJpaDaoHelper(), emf);
         this.userStatsService = new UserStatsService(getJpaDaoHelper());
         this.activityService = new ActivityService(getJpaDaoHelper());
         this.eventService = new EventService(getJpaDaoHelper());

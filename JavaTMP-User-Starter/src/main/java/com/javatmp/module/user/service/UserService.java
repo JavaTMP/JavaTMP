@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.LockModeType;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -39,6 +40,11 @@ public class UserService extends JpaRepository<User, Long> {
 
     public UserService(JpaDaoHelper jpaDaoHelper, String persistentUnitName) {
         super(User.class, persistentUnitName);
+        this.jpaDaoHelper = jpaDaoHelper;
+    }
+
+    public UserService(JpaDaoHelper jpaDaoHelper, EntityManagerFactory emf) {
+        super(User.class, emf);
         this.jpaDaoHelper = jpaDaoHelper;
     }
 
@@ -160,8 +166,6 @@ public class UserService extends JpaRepository<User, Long> {
     public int updateLastUserAccess(User userToBeUpdated) {
         return statusTransaction((EntityManager em) -> {
             userToBeUpdated.setLastAccessTime(new Date());
-            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
-            em.getTransaction().begin();
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaUpdate<User> update = cb.createCriteriaUpdate(User.class);
             Root<User> root = update.from(User.class);
