@@ -194,13 +194,13 @@ public class JpaRepository<E, I> {
         }
     }
 
-    public <T> Path<T> convertStringToPath(Root<T> from, String strPathName) {
+    public Path<E> convertStringToPath(Root<E> from, String strPathName) {
         System.out.println("handling str [" + strPathName + "]");
         String[] attributes = strPathName.split("\\.");
-        Path<T> retPath = from.get(attributes[0]);
+        Path<E> retPath = from.get(attributes[0]);
         if (attributes.length > 1) {
             System.out.println("Try to get Alias :");
-            Join<T, ?> join = null;
+            Join<?, ?> join = null;
             for (Join j : from.getJoins()) {
                 if (j.getAttribute().getName().equals(attributes[0])) {
                     join = j;
@@ -239,7 +239,7 @@ public class JpaRepository<E, I> {
         return retPath;
     }
 
-    public <T> List<Selection<?>> convertArrToPaths(Root<T> from, String[] selectList) {
+    public List<Selection<?>> convertArrToPaths(Root<E> from, String[] selectList) {
         List<Selection<?>> retLists = new LinkedList<Selection<?>>();
         for (String select : selectList) {
             retLists.add(this.convertStringToPath(from, select));
@@ -247,15 +247,15 @@ public class JpaRepository<E, I> {
         return retLists;
     }
 
-    public <T> DataTableResults<T> retrievePageRequestDetails(DataTableRequest<T> page) throws ParseException {
+    public DataTableResults<E> retrievePageRequestDetails(DataTableRequest<E> page) throws ParseException {
 
         EntityManager em = null;
         List retList = null;
         try {
-            em = getEntityManagerFactory().createEntityManager();
+            em = emf.createEntityManager();
             CriteriaBuilder cb = em.getCriteriaBuilder();
-            CriteriaQuery<T> cq = cb.createQuery(page.getClassType());
-            Root<T> from = cq.from(page.getClassType());
+            CriteriaQuery<E> cq = cb.createQuery(page.getClassType());
+            Root<E> from = cq.from(page.getClassType());
             for (String pathStr : page.getSelects()) {
                 String[] attributes = pathStr.split("\\.");
                 if (attributes != null && attributes.length > 1) {
@@ -320,11 +320,11 @@ public class JpaRepository<E, I> {
             query.setMaxResults(page.getLength());
             retList = query.getResultList();
 
-            DataTableResults<T> dataTableResult = new DataTableResults<>();
+            DataTableResults<E> dataTableResult = new DataTableResults<>();
             dataTableResult.setData(retList);
 
             CriteriaQuery<Long> cqLong = cb.createQuery(Long.class);
-            Root<T> entity_ = cqLong.from(cq.getResultType());
+            Root<E> entity_ = cqLong.from(cq.getResultType());
             cqLong.select(cb.count(entity_));
             for (String pathStr : page.getSelects()) {
                 String[] attributes = pathStr.split("\\.");
@@ -343,7 +343,7 @@ public class JpaRepository<E, I> {
             dataTableResult.setRecordsFiltered(allCount);
             dataTableResult.setDraw(page.getDraw());
 
-            return (DataTableResults<T>) dataTableResult;
+            return (DataTableResults<E>) dataTableResult;
         } finally {
             if (em != null) {
                 em.close();
@@ -476,7 +476,6 @@ public class JpaRepository<E, I> {
             } else {
                 retPredicate = cb.equal(convertStringToPath(from, ruleOrGroup.getField()), value);
             }
-
         }
         return retPredicate;
     }

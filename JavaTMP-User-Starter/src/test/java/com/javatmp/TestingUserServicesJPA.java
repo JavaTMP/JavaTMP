@@ -24,7 +24,7 @@ public class TestingUserServicesJPA {
         JpaDaoHelper jpaDaoHelper;
         UserService userService;
         jpaDaoHelper = new JpaDaoHelper("AppPU");
-        userService = new UserService(jpaDaoHelper, "AppPU");
+        userService = new UserService("AppPU");
 
         User user = new User();
         user.setUserName("user1");

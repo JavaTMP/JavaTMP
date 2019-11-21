@@ -10,7 +10,6 @@ import com.javatmp.module.dms.entity.Document;
 import com.javatmp.module.dms.entity.Document_;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.entity.User_;
-import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.util.MD5Util;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -37,16 +36,13 @@ import javax.persistence.criteria.Root;
 public class UserService extends JpaRepository<User, Long> {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
-    private final JpaDaoHelper jpaDaoHelper;
 
-    public UserService(JpaDaoHelper jpaDaoHelper, String persistentUnitName) {
+    public UserService(String persistentUnitName) {
         super(User.class, persistentUnitName);
-        this.jpaDaoHelper = jpaDaoHelper;
     }
 
-    public UserService(JpaDaoHelper jpaDaoHelper, EntityManagerFactory emf) {
+    public UserService(EntityManagerFactory emf) {
         super(User.class, emf);
-        this.jpaDaoHelper = jpaDaoHelper;
     }
 
     public User readCompleteUserById(final User user) {
@@ -290,7 +286,7 @@ public class UserService extends JpaRepository<User, Long> {
                     Integer columnIndex = order.getColumn();
                     DataTableColumn orderColumn = tableRequest.getColumns().get(columnIndex);
 
-                    Path<?> sortPath = this.jpaDaoHelper.convertStringToPath(from, orderColumn.getData());
+                    Path<?> sortPath = this.convertStringToPath(from, orderColumn.getData());
                     if (order.getDir().value().equals("desc")) {
                         cq.orderBy(cb.desc(sortPath));
                     } else {
@@ -406,7 +402,7 @@ public class UserService extends JpaRepository<User, Long> {
             System.err.println("tableRequest.getAdvancedSearchQuery() [" + tableRequest.getAdvancedSearchQuery() + "]");
             if (tableRequest.getAdvancedSearchQuery() != null) {
                 try {
-                    predicate = cb.and(predicate, jpaDaoHelper.applyAdvanedSearchQuery(tableRequest.getAdvancedSearchQuery(), cb, from));
+                    predicate = cb.and(predicate, this.applyAdvanedSearchQuery(tableRequest.getAdvancedSearchQuery(), cb, from));
                     System.out.println();
                 } catch (ParseException ex) {
                     Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);

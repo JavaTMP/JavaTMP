@@ -24,7 +24,7 @@ public class TestReadBasicUserById {
         JpaDaoHelper jpaDaoHelper;
         UserService userService;
         jpaDaoHelper = new JpaDaoHelper("AppPU");
-        userService = new UserService(jpaDaoHelper, "AppPU");
+        userService = new UserService("AppPU");
         try {
             User user = new User(1L);
             user = userService.readBasicUserById(user);

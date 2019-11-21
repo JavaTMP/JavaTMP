@@ -24,7 +24,7 @@ public class TestUpdateUser {
         JpaDaoHelper jpaDaoHelper;
         UserService userService;
         jpaDaoHelper = new JpaDaoHelper("AppPU");
-        userService = new UserService(jpaDaoHelper, "AppPU");
+        userService = new UserService("AppPU");
 
         User user = userService.readCompleteUserById(new User(1L));
         System.out.println(MvcHelper.deepToString(user));

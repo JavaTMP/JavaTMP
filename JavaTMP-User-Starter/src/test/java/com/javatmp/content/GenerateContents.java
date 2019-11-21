@@ -28,7 +28,7 @@ public class GenerateContents {
         JpaDaoHelper jpaDaoHelper;
         UserService userService;
         jpaDaoHelper = new JpaDaoHelper("AppPU");
-        userService = new UserService(jpaDaoHelper, "AppPU");
+        userService = new UserService("AppPU");
         List<User> users = userService.findAll(0, Integer.MAX_VALUE);
         generateContent(jpaDaoHelper, users);
     }

@@ -36,7 +36,7 @@ public class TestingReadMessageById {
         JpaDaoHelper jpaDaoHelper;
         UserService userService;
         jpaDaoHelper = new JpaDaoHelper("AppPU");
-        userService = new UserService(jpaDaoHelper, "AppPU");
+        userService = new UserService("AppPU");
         MessageService messageService = new MessageService(jpaDaoHelper, userService);
 //        messageService.generateMessages();
         Gson gson = new GsonBuilder()

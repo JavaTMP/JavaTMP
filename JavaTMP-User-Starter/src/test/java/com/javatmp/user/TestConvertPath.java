@@ -34,7 +34,7 @@ public class TestConvertPath {
         JpaDaoHelper jpaDaoHelper;
         UserService userService;
         jpaDaoHelper = new JpaDaoHelper("AppPU");
-        userService = new UserService(jpaDaoHelper, "AppPU");
+        userService = new UserService("AppPU");
         EntityManager em = null;
         try {
             em = jpaDaoHelper.getEntityManagerFactory().createEntityManager();

@@ -25,7 +25,7 @@ public class TestDeleteUser {
         JpaDaoHelper jpaDaoHelper;
         UserService userService;
         jpaDaoHelper = new JpaDaoHelper("AppPU");
-        userService = new UserService(jpaDaoHelper, "AppPU");
+        userService = new UserService("AppPU");
         try {
             User user = new User(3L);
 //            user = userService.readCompleteUserById(user);
