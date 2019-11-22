@@ -3,7 +3,7 @@ package com.javatmp.module.user.controller;
 import com.javatmp.module.country.entity.Countrytranslation;
 import com.javatmp.module.language.entity.Languagetranslation;
 import com.javatmp.module.theme.entity.Themetranslation;
-import com.javatmp.module.timezone.Timezonetranslation;
+import com.javatmp.module.timezone.entity.Timezonetranslation;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.util.Constants;
 import com.javatmp.util.ServicesFactory;

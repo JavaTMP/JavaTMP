@@ -6,8 +6,8 @@
 package com.javatmp.timezones;
 
 import com.javatmp.fw.mvc.MvcHelper;
-import com.javatmp.module.timezone.TimezoneService;
-import com.javatmp.module.timezone.Timezonetranslation;
+import com.javatmp.module.timezone.service.TimezoneService;
+import com.javatmp.module.timezone.entity.Timezonetranslation;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;

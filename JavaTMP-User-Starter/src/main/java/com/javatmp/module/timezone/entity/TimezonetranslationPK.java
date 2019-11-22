@@ -1,4 +1,4 @@
-package com.javatmp.module.timezone;
+package com.javatmp.module.timezone.entity;
 
 import java.io.Serializable;
 import javax.persistence.Embeddable;

@@ -1,8 +1,8 @@
 package com.javatmp.module.theme.service;
 
+import com.javatmp.fw.data.jpa.repository.JpaRepository;
 import com.javatmp.module.theme.entity.Theme;
 import com.javatmp.module.theme.entity.Themetranslation;
-import com.javatmp.fw.data.jpa.repository.JpaRepository;
 import com.javatmp.module.user.entity.User;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -47,7 +47,7 @@ public class ThemeService extends JpaRepository<Theme, String> {
         try {
             em = this.emf.createEntityManager();
             TypedQuery<Themetranslation> query = em.createQuery(
-                    "select new com.javatmp.module.theme.Themetranslation(t.themeId, lan.languageId, coalesce(th1.themeName, th2.themeName)) "
+                    "select new com.javatmp.module.theme.entity.Themetranslation(t.themeId, lan.languageId, coalesce(th1.themeName, th2.themeName)) "
                     + "from Language lan "
                     + "join lan.languagetranslationList lanTr "
                     + "on lanTr.languagetranslationPK.languageId = lan.languageId "

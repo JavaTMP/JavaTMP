@@ -5,8 +5,8 @@
  */
 package com.javatmp.timezones;
 
-import com.javatmp.module.timezone.TimezoneService;
-import com.javatmp.module.timezone.Timezonetranslation;
+import com.javatmp.module.timezone.service.TimezoneService;
+import com.javatmp.module.timezone.entity.Timezonetranslation;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;

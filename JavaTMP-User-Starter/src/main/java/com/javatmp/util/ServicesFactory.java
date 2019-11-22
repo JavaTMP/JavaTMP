@@ -13,7 +13,7 @@ import com.javatmp.module.language.service.LanguageService;
 import com.javatmp.module.message.service.MessageService;
 import com.javatmp.module.stats.controller.UserStatsService;
 import com.javatmp.module.theme.service.ThemeService;
-import com.javatmp.module.timezone.TimezoneService;
+import com.javatmp.module.timezone.service.TimezoneService;
 import com.javatmp.module.user.service.UserService;
 import java.util.Date;
 import java.util.logging.Logger;

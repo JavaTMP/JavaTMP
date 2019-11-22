@@ -2,7 +2,7 @@ package com.javatmp.module.language.entity;
 
 import com.javatmp.module.country.entity.Countrytranslation;
 import com.javatmp.module.theme.entity.Themetranslation;
-import com.javatmp.module.timezone.Timezonetranslation;
+import com.javatmp.module.timezone.entity.Timezonetranslation;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;

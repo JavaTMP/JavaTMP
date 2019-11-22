@@ -1,6 +1,8 @@
-package com.javatmp.module.timezone;
+package com.javatmp.module.timezone.service;
 
 import com.javatmp.fw.data.jpa.repository.JpaRepository;
+import com.javatmp.module.timezone.entity.Timezone;
+import com.javatmp.module.timezone.entity.Timezonetranslation;
 import com.javatmp.module.user.entity.User;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -71,7 +73,7 @@ public class TimezoneService extends JpaRepository<Timezone, String> {
             em = emf.createEntityManager();
             TypedQuery<Timezonetranslation> query = em.createQuery(
                     "select "
-                    + "new com.javatmp.module.timezone.Timezonetranslation("
+                    + "new com.javatmp.module.timezone.entity.Timezonetranslation("
                     + "l.timezoneId, lt1.timezonetranslationPK.langId, coalesce(lt1.timezoneName, lt2.timezoneName)"
                     + ") from Timezone l "
                     + "left outer join Timezonetranslation lt1 on lt1.timezonetranslationPK.timezoneId = l.timezoneId "

@@ -1,8 +1,8 @@
 package com.javatmp.module.language.service;
 
-import com.javatmp.module.language.entity.Languagetranslation;
-import com.javatmp.module.language.entity.Language;
 import com.javatmp.fw.data.jpa.repository.JpaRepository;
+import com.javatmp.module.language.entity.Language;
+import com.javatmp.module.language.entity.Languagetranslation;
 import com.javatmp.module.user.entity.User;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -46,7 +46,7 @@ public class LanguageService extends JpaRepository<Language, String> {
         try {
             em = this.emf.createEntityManager();
             TypedQuery<Languagetranslation> query = em.createQuery(
-                    "select new com.javatmp.module.language.Languagetranslation("
+                    "select new com.javatmp.module.language.entity.Languagetranslation("
                     + "l.languageId, lt1.languagetranslationPK.langId, coalesce(lt1.languageName, lt2.languageName)"
                     + ") from Language l "
                     + "left outer join Languagetranslation lt1 on lt1.languagetranslationPK.languageId = l.languageId "
@@ -71,7 +71,7 @@ public class LanguageService extends JpaRepository<Language, String> {
             em = this.emf.createEntityManager();
             TypedQuery<Languagetranslation> query = em.createQuery(
                     "select "
-                    + "new com.javatmp.module.language.Languagetranslation("
+                    + "new com.javatmp.module.language.entity.Languagetranslation("
                     + "l.languageId, lt1.languagetranslationPK.langId, coalesce(lt1.languageName, lt2.languageName)"
                     + ") from Language l "
                     + "left outer join Languagetranslation lt1 on "

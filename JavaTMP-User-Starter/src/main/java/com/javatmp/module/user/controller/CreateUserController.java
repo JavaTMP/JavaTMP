@@ -7,7 +7,7 @@ import com.javatmp.module.theme.entity.Themetranslation;
 import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.fw.domain.ResponseMessage;
 import com.javatmp.module.dms.service.DocumentService;
-import com.javatmp.module.timezone.Timezonetranslation;
+import com.javatmp.module.timezone.entity.Timezonetranslation;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
 import com.javatmp.util.ServicesFactory;

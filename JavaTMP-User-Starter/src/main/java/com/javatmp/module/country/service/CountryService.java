@@ -1,8 +1,8 @@
 package com.javatmp.module.country.service;
 
-import com.javatmp.module.country.entity.Countrytranslation;
-import com.javatmp.module.country.entity.Country;
 import com.javatmp.fw.data.jpa.repository.JpaRepository;
+import com.javatmp.module.country.entity.Country;
+import com.javatmp.module.country.entity.Countrytranslation;
 import com.javatmp.module.user.entity.User;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -58,7 +58,7 @@ public class CountryService extends JpaRepository<Country, String> {
             em = this.emf.createEntityManager();
             TypedQuery<Countrytranslation> query = em.createQuery(
                     "select "
-                    + "new com.javatmp.module.country.Countrytranslation("
+                    + "new com.javatmp.module.country.entity.Countrytranslation("
                     + "l.countryId, lt1.countrytranslationPK.langId, coalesce(lt1.countryName, lt2.countryName)"
                     + ") from Country l "
                     + "left outer join Countrytranslation lt1 on lt1.countrytranslationPK.countryId = l.countryId "
