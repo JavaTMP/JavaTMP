@@ -6,17 +6,17 @@
 package com.javatmp.theme;
 
 import com.javatmp.fw.mvc.MvcHelper;
-import com.javatmp.util.JpaDaoHelper;
-import com.javatmp.module.language.Language;
 import com.javatmp.module.theme.Theme;
-import com.javatmp.module.theme.Themetranslation;
 import com.javatmp.module.theme.ThemeService;
+import com.javatmp.module.theme.Themetranslation;
+import com.javatmp.util.JpaDaoHelper;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
 import java.util.Random;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 /**
@@ -29,7 +29,7 @@ public class TestingPopulateThemes {
         JpaDaoHelper jpaDaoHelper;
         ThemeService themeService;
         jpaDaoHelper = new JpaDaoHelper("AppPU");
-        themeService = new ThemeService(jpaDaoHelper);
+        themeService = new ThemeService(Persistence.createEntityManagerFactory("AppPU"));
 
         List<Object[]> results;
         EntityManager em = jpaDaoHelper.getEntityManagerFactory().createEntityManager();

@@ -1,12 +1,12 @@
 package com.javatmp.module.event.controller;
 
-import com.javatmp.module.event.entity.Event;
-import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.fw.domain.ResponseMessage;
+import com.javatmp.fw.mvc.MvcHelper;
+import com.javatmp.module.event.entity.Event;
+import com.javatmp.module.event.service.EventService;
 import com.javatmp.util.Constants;
 import com.javatmp.util.ServicesFactory;
 import java.io.IOException;
-import java.util.List;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,6 +23,7 @@ public class UpdateEventController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
+        EventService eventService = sf.getEventService();
 
         ResponseMessage responseMessage = new ResponseMessage();
         responseMessage.setOverAllStatus(true);
@@ -30,20 +31,13 @@ public class UpdateEventController extends HttpServlet {
         Event event = (Event) MvcHelper.readObjectFromRequest(request, Event.class);
         logger.info("Event read from request prior to update [" + MvcHelper.toString(event) + "]");
         boolean found = false;
-        String msg = "Event id [" + event.getId() + "] not found";
-        List<Event> events = sf.getEventService().getEvents();
-        for (Event t : events) {
-            if (t.getId().equals(event.getId())) {
-                found = true;
-                msg = "Event Id [" + event.getId() + "] Updated Successfully";
-                logger.info("Object event found [" + event.getId() + "]");
-                t.setTitle(event.getTitle());
-                t.setStartDate(event.getStartDate());
-                t.setEndDate(event.getEndDate());
-            }
-        }
+        Event dbEvent = eventService.getOne(event.getId());
+        dbEvent.setTitle(event.getTitle());
+        dbEvent.setStartDate(event.getStartDate());
+        dbEvent.setEndDate(event.getEndDate());
+        eventService.merge(event);
         responseMessage.setOverAllStatus(found);
-        responseMessage.setMessage(msg);
+        responseMessage.setMessage("event update successfully");
         MvcHelper.sendMessageAsJson(response, responseMessage);
     }
 

@@ -6,11 +6,8 @@
 package com.javatmp.event;
 
 import com.javatmp.module.event.service.EventService;
-import com.javatmp.module.user.entity.User;
-import com.javatmp.fw.mvc.MvcHelper;
-import com.javatmp.util.JpaDaoHelper;
-import com.javatmp.module.user.service.UserService;
 import java.sql.SQLException;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -22,10 +19,7 @@ public class TestingEventServices {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException {
-        JpaDaoHelper jpaDaoHelper;
-        UserService userService;
-        jpaDaoHelper = new JpaDaoHelper("AppPU");
-        EventService eventService = new EventService(jpaDaoHelper);
+        EventService eventService = new EventService(Persistence.createEntityManagerFactory("AppPU"));
         eventService.initialiseDiary();
     }
 

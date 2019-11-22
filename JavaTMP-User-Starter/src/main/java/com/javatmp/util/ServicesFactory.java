@@ -1,6 +1,9 @@
 package com.javatmp.util;
 
+import com.javatmp.module.accounting.service.AccountGroupService;
 import com.javatmp.module.accounting.service.AccountService;
+import com.javatmp.module.accounting.service.TransactionEntryService;
+import com.javatmp.module.accounting.service.TransactionService;
 import com.javatmp.module.activity.ActivityService;
 import com.javatmp.module.content.service.ContentService;
 import com.javatmp.module.country.CountryService;
@@ -35,24 +38,30 @@ public class ServicesFactory {
     private final MessageService messageService;
     private final ContentService contentService;
     private final AccountService accountService;
+    private final TransactionService transactionService;
+    private final AccountGroupService accountGroupService;
+    private final TransactionEntryService transactionEntryService;
 
     public ServicesFactory(String persistentUnitName) {
         logger.info("*** Start ServicesFactory Constructor @ [" + new Date() + "]");
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(persistentUnitName);
         this.jpaDaoHelper = new JpaDaoHelper(emf);
-        this.timezoneService = new TimezoneService(getJpaDaoHelper());
-        this.themeService = new ThemeService(getJpaDaoHelper());
-        this.languageService = new LanguageService(getJpaDaoHelper());
-        this.countryService = new CountryService(getJpaDaoHelper());
-        this.documentService = new DocumentService(getJpaDaoHelper());
+        this.timezoneService = new TimezoneService(emf);
+        this.themeService = new ThemeService(emf);
+        this.languageService = new LanguageService(emf);
+        this.countryService = new CountryService(emf);
+        this.documentService = new DocumentService(emf);
         this.userService = new UserService(emf);
-        this.userStatsService = new UserStatsService(getJpaDaoHelper());
-        this.activityService = new ActivityService(getJpaDaoHelper());
-        this.eventService = new EventService(getJpaDaoHelper());
-        this.messageService = new MessageService(this.jpaDaoHelper, userService);
-        this.contentService = new ContentService(this.jpaDaoHelper);
-        this.accountService = new AccountService(this.jpaDaoHelper);
+        this.userStatsService = new UserStatsService(emf);
+        this.activityService = new ActivityService(emf);
+        this.eventService = new EventService(emf);
+        this.messageService = new MessageService(emf, userService);
+        this.contentService = new ContentService(emf);
+        this.accountService = new AccountService(emf);
+        this.transactionService = new TransactionService(emf);
+        this.accountGroupService = new AccountGroupService(emf);
+        this.transactionEntryService = new TransactionEntryService(emf);
         this.logger.info("*** End ServicesFactory Constructor @ [" + new Date() + "]");
     }
 

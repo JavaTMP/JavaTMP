@@ -1,10 +1,10 @@
 package com.javatmp.module.message.controller;
 
+import com.javatmp.fw.domain.ResponseMessage;
+import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.module.message.entity.Message;
 import com.javatmp.module.message.service.MessageService;
 import com.javatmp.module.user.entity.User;
-import com.javatmp.fw.mvc.MvcHelper;
-import com.javatmp.fw.domain.ResponseMessage;
 import com.javatmp.util.Constants;
 import com.javatmp.util.ServicesFactory;
 import java.io.IOException;
@@ -48,7 +48,7 @@ public class CreateMessageController extends HttpServlet {
                 msg.setMessageContentText(message.getMessageContentText());
                 msg.setMessageTitle(message.getMessageTitle());
                 msg.setMessageStatus((short) 1);
-                ms.createMessage(msg);
+                ms.save(msg);
                 logger.info("message after created [" + MvcHelper.toString(msg) + "]");
                 responseBody += "Message Created id [" + msg.getMessageId() + "]<br/>";
             }

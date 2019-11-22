@@ -1,25 +1,21 @@
 package com.javatmp.module.theme;
 
-import com.javatmp.util.JpaDaoHelper;
-import com.javatmp.module.language.Languagetranslation;
-import com.javatmp.module.theme.Theme;
-import com.javatmp.module.theme.Themetranslation;
+import com.javatmp.fw.data.jpa.repository.JpaRepository;
 import com.javatmp.module.user.entity.User;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 
-public class ThemeService {
-
-    private final JpaDaoHelper jpaDaoHelper;
+public class ThemeService extends JpaRepository<Theme, String> {
 
     private Map<String, List<Themetranslation>> themes;
 
-    public ThemeService(JpaDaoHelper jpaDaoHelper) {
-        this.jpaDaoHelper = jpaDaoHelper;
+    public ThemeService(EntityManagerFactory emf) {
+        super(Theme.class, emf);
     }
 
     public List<Themetranslation> getThemes(User localeUser) {
@@ -47,7 +43,7 @@ public class ThemeService {
         EntityManager em = null;
         List<Themetranslation> retList = null;
         try {
-            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            em = this.emf.createEntityManager();
             TypedQuery<Themetranslation> query = em.createQuery(
                     "select new com.javatmp.module.theme.Themetranslation(t.themeId, lan.languageId, coalesce(th1.themeName, th2.themeName)) "
                     + "from Language lan "

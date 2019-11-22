@@ -1,8 +1,8 @@
 package com.javatmp.module.event.controller;
 
-import com.javatmp.module.event.entity.Event;
-import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.fw.domain.ResponseMessage;
+import com.javatmp.fw.mvc.MvcHelper;
+import com.javatmp.module.event.entity.Event;
 import com.javatmp.util.Constants;
 import com.javatmp.util.ServicesFactory;
 import java.io.IOException;
@@ -36,7 +36,7 @@ public class AddNewEventController extends HttpServlet {
             MvcHelper.populateBeanByRequestParameters(request, event);
             logger.info("Event read from request prior to update [" + MvcHelper.toString(event) + "]");
 
-            List<Event> events = sf.getEventService().getEvents();
+            List<Event> events = sf.getEventService().findAll(0, Integer.MAX_VALUE);
             events.add(event);
             event.setId(Long.valueOf(events.size()));
             responseMessage.setOverAllStatus(true);

@@ -1,5 +1,6 @@
 package com.javatmp.module.stats.controller;
 
+import com.javatmp.fw.data.jpa.repository.JpaRepository;
 import com.javatmp.module.country.Country;
 import com.javatmp.module.country.Country_;
 import com.javatmp.module.country.Countrytranslation;
@@ -7,10 +8,10 @@ import com.javatmp.module.country.CountrytranslationPK_;
 import com.javatmp.module.country.Countrytranslation_;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.entity.User_;
-import com.javatmp.util.JpaDaoHelper;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -21,27 +22,25 @@ import javax.persistence.criteria.ListJoin;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-public class UserStatsService {
+public class UserStatsService extends JpaRepository<Object[], Long> {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
-    private final JpaDaoHelper jpaDaoHelper;
 
-    public UserStatsService(JpaDaoHelper jpaDaoHelper) {
-        this.jpaDaoHelper = jpaDaoHelper;
+    public UserStatsService(EntityManagerFactory emf) {
+        super(Object[].class, emf);
     }
 
     public List<Object[]> overallUsersStatuses() {
         List<Object[]> results;
         EntityManager em = null;
         try {
-            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            em = this.emf.createEntityManager();
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaQuery<Object[]> query = cb.createQuery(Object[].class);
             Root<User> root = query.from(User.class);
             query.multiselect(root.get(User_.status), cb.count(root.get(User_.status)));
             query.groupBy(root.get(User_.status));
             results = em.createQuery(query).getResultList();
-
             return results;
         } catch (PersistenceException e) {
             Throwable t = e;
@@ -51,7 +50,6 @@ public class UserStatsService {
                 System.out.println("e [" + t.getMessage() + "]");
                 lastMsg = t.getMessage();
                 t = t.getCause();
-
             }
             throw new PersistenceException(lastMsg, e);
         }
@@ -61,7 +59,7 @@ public class UserStatsService {
         List<Object[]> results;
         EntityManager em = null;
         try {
-            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            em = this.emf.createEntityManager();
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaQuery<Object[]> query = cb.createQuery(Object[].class);
             Root<User> root = query.from(User.class);
@@ -80,7 +78,7 @@ public class UserStatsService {
                 t = t.getCause();
 
             }
-            throw new PersistenceException(lastMsg, e);
+            throw new PersistenceException(lastMsg, t);
         }
     }
 
@@ -88,7 +86,7 @@ public class UserStatsService {
         List<Object[]> results;
         EntityManager em = null;
         try {
-            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            em = this.emf.createEntityManager();
             Query query = em.createQuery("select ctr.countryName, count(ctr.countryName)\n"
                     + "from User u\n"
                     + "join Country c on u.countryId = c.countryId\n"
@@ -107,7 +105,7 @@ public class UserStatsService {
                 t = t.getCause();
 
             }
-            throw new PersistenceException(lastMsg, e);
+            throw new PersistenceException(lastMsg, t);
         } finally {
             if (em != null) {
                 em.close();
@@ -120,7 +118,7 @@ public class UserStatsService {
         List<Object[]> results;
         EntityManager em = null;
         try {
-            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            em = this.emf.createEntityManager();
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaQuery<Object[]> query = cb.createQuery(Object[].class);
             Root<User> root = query.from(User.class);
@@ -143,13 +141,13 @@ public class UserStatsService {
                 t = t.getCause();
 
             }
-            throw new PersistenceException(lastMsg, e);
+            throw new PersistenceException(lastMsg, t);
         }
     }
 
     public List<Object[]> usersBirthdayGroupingByMonth() {
         List<Object[]> results;
-        EntityManager em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+        EntityManager em = this.emf.createEntityManager();
 
         Query query = em.createQuery(
                 "SELECT MONTH(user.birthDate) , count(*) FROM User user group by MONTH(user.birthDate)");
@@ -160,7 +158,7 @@ public class UserStatsService {
 
     public Long usersVistingToday() {
         Long results;
-        EntityManager em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+        EntityManager em = this.emf.createEntityManager();
 
         Query query = em.createQuery(
                 "SELECT count(*) FROM User user where user.lastAccessTime >= CURRENT_DATE");
@@ -171,7 +169,7 @@ public class UserStatsService {
 
     public Long usersNotVistingToday() {
         Long results;
-        EntityManager em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+        EntityManager em = this.emf.createEntityManager();
 
         Query query = em.createQuery(
                 "SELECT count(*) FROM User user where user.lastAccessTime < CURRENT_DATE or user.lastAccessTime is null");

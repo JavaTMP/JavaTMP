@@ -1,12 +1,12 @@
 package com.javatmp.module.content.controller;
 
-import com.javatmp.module.user.entity.User;
-import com.javatmp.module.content.service.ContentService;
-import com.javatmp.module.content.entity.Content;
-import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.fw.domain.ResponseMessage;
-import com.javatmp.util.ServicesFactory;
+import com.javatmp.fw.mvc.MvcHelper;
+import com.javatmp.module.content.entity.Content;
+import com.javatmp.module.content.service.ContentService;
+import com.javatmp.module.user.entity.User;
 import com.javatmp.util.Constants;
+import com.javatmp.util.ServicesFactory;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
@@ -14,7 +14,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.PersistenceException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -46,7 +45,7 @@ public class CreateNewContent extends HttpServlet {
             contentToBeCreated.setStatus((short) 1);
             contentToBeCreated.setCreatedBy(loggedInUser.getId());
 
-            contentToBeCreated = cs.getJpaDaoHelper().create(contentToBeCreated);
+            cs.save(contentToBeCreated);
             responseMessage.setOverAllStatus(true);
             responseMessage.setMessage("Content Created Successfully");
             responseMessage.setData(contentToBeCreated);

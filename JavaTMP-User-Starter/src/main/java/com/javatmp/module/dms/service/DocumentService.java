@@ -1,25 +1,16 @@
 package com.javatmp.module.dms.service;
 
-import com.javatmp.module.dms.entity.Document;
+import com.javatmp.fw.data.jpa.repository.JpaRepository;
 import com.javatmp.fw.domain.table.DataTableRequest;
 import com.javatmp.fw.domain.table.DataTableResults;
-import com.javatmp.util.JpaDaoHelper;
+import com.javatmp.module.dms.entity.Document;
 import java.text.ParseException;
+import javax.persistence.EntityManagerFactory;
 
-public class DocumentService {
+public class DocumentService extends JpaRepository<Document, Long> {
 
-    private final JpaDaoHelper jpaDaoHelper;
-
-    public DocumentService(JpaDaoHelper jpaDaoHelper) {
-        this.jpaDaoHelper = jpaDaoHelper;
-    }
-
-    public Document readDocumentById(Document document) {
-        return this.jpaDaoHelper.read(Document.class, document.getDocumentId());
-    }
-
-    public Document createNewDocument(Document document) {
-        return this.jpaDaoHelper.create(document);
+    public DocumentService(EntityManagerFactory emf) {
+        super(Document.class, emf);
     }
 
     public DataTableResults<Document> getAllDocuments(DataTableRequest<Document> page) throws ParseException {
@@ -27,7 +18,7 @@ public class DocumentService {
         page.setClassType(Document.class);
         page.setSelects(new String[]{"documentId", "documentName", "documentSize",
             "contentType", "creationDate", "randomHash", "documentType", "parentDocumentId", "status", "createdByUserId"});
-        DataTableResults<Document> results = jpaDaoHelper.retrievePageRequestDetails(page);
+        DataTableResults<Document> results = this.retrievePageRequestDetails(page);
         return results;
     }
 }

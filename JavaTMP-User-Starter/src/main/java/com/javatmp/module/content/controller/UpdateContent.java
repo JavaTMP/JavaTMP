@@ -1,29 +1,18 @@
 package com.javatmp.module.content.controller;
 
-import com.javatmp.module.user.entity.User;
-import com.javatmp.module.content.service.ContentService;
-import com.javatmp.module.content.entity.Content;
-import com.javatmp.module.country.Countrytranslation;
-import com.javatmp.module.dms.entity.Document;
-import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.fw.domain.ResponseMessage;
-import com.javatmp.module.dms.service.DocumentService;
-import com.javatmp.module.language.Languagetranslation;
-import com.javatmp.module.theme.Themetranslation;
-import com.javatmp.module.timezone.Timezonetranslation;
-import com.javatmp.util.ServicesFactory;
+import com.javatmp.fw.mvc.MvcHelper;
+import com.javatmp.module.content.entity.Content;
+import com.javatmp.module.content.service.ContentService;
+import com.javatmp.module.user.entity.User;
 import com.javatmp.util.Constants;
-import com.javatmp.util.MD5Util;
+import com.javatmp.util.ServicesFactory;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.persistence.PersistenceException;
 import javax.servlet.ServletContext;
-
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -45,7 +34,7 @@ public class UpdateContent extends HttpServlet {
             Content content = new Content();
             MvcHelper.populateBeanByRequestParameters(request, content);
             logger.info("request user is [" + MvcHelper.deepToString(content) + "]");
-            content = sf.getContentService().readContentById(content);
+            content = sf.getContentService().getOne(content.getContentId());
             logger.info("DB user to be Updated is [" + MvcHelper.deepToString(content) + "]");
 
             HttpSession session = request.getSession();

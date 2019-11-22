@@ -1,23 +1,21 @@
 package com.javatmp.module.country;
 
-import com.javatmp.util.JpaDaoHelper;
-import com.javatmp.module.country.Country;
-import com.javatmp.module.language.Languagetranslation;
+import com.javatmp.fw.data.jpa.repository.JpaRepository;
 import com.javatmp.module.user.entity.User;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 
-public class CountryService {
+public class CountryService extends JpaRepository<Country, String> {
 
-    private final JpaDaoHelper jpaDaoHelper;
     private Map<String, List<Countrytranslation>> countries;
 
-    public CountryService(JpaDaoHelper jpaDaoHelper) {
-        this.jpaDaoHelper = jpaDaoHelper;
+    public CountryService(EntityManagerFactory emf) {
+        super(Country.class, emf);
     }
 
 //    public List<Country> getCountries(User localeUser) {
@@ -55,7 +53,7 @@ public class CountryService {
         EntityManager em = null;
         List<Countrytranslation> retList = null;
         try {
-            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            em = this.emf.createEntityManager();
             TypedQuery<Countrytranslation> query = em.createQuery(
                     "select "
                     + "new com.javatmp.module.country.Countrytranslation("

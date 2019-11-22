@@ -1,9 +1,9 @@
 package com.javatmp.module.dms.controller;
 
-import com.javatmp.module.dms.service.DocumentService;
-import com.javatmp.module.dms.entity.Document;
-import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.fw.domain.ResponseMessage;
+import com.javatmp.fw.mvc.MvcHelper;
+import com.javatmp.module.dms.entity.Document;
+import com.javatmp.module.dms.service.DocumentService;
 import com.javatmp.util.Constants;
 import com.javatmp.util.ServicesFactory;
 import java.io.ByteArrayOutputStream;
@@ -14,7 +14,6 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -57,7 +56,7 @@ public class UploadController extends HttpServlet {
                 long randomLongValue = Double.valueOf((Math.random() + 1) * 1000L).longValue();
                 fileUploading.setRandomHash((Long) Math.abs(fileUploading.getDocumentName().hashCode() + randomLongValue));
                 // the following block is intended for simple cases
-                // where it is convenient to read all bytes into a byte array.
+                // where it is convenient to getOne all bytes into a byte array.
                 // It is not intended for reading input streams with large amounts of data.
                 int nRead;
                 byte[] data = new byte[4 * 1024];
@@ -69,7 +68,7 @@ public class UploadController extends HttpServlet {
                 fileUploading.setDocumentContent(buffer.toByteArray());
                 logger.info("original size [" + fileUploading.getDocumentSize()
                         + "] stream size [" + fileUploading.getDocumentContent().length + "]");
-                ds.createNewDocument(fileUploading);
+                ds.save(fileUploading);
                 logger.info("db fake id [" + fileUploading.getDocumentId() + "]");
                 String t = "FileName 'requested' \"to\" Upload [" + fileName + "] type[" + contentType + "] name [" + fieldName + "]size[" + partSize + "]<br/>";
                 logger.info(t);

@@ -19,7 +19,7 @@ public class TestAbstractRepository {
      */
     public static void main(String[] args) {
         JpaRepository<User, Long> abstractRepository = new JpaRepository<>(User.class, "AppPU");
-        User user1 = abstractRepository.read(1L);
+        User user1 = abstractRepository.getOne(1L);
         System.out.println(user1.getUserName());
     }
 

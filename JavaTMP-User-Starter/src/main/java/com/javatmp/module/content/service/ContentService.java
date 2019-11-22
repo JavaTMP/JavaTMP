@@ -1,13 +1,14 @@
 package com.javatmp.module.content.service;
 
-import com.javatmp.module.content.entity.Content;
-import com.javatmp.module.content.entity.Content_;
+import com.javatmp.fw.data.jpa.repository.JpaRepository;
 import com.javatmp.fw.domain.table.DataTableRequest;
 import com.javatmp.fw.domain.table.DataTableResults;
-import com.javatmp.util.JpaDaoHelper;
+import com.javatmp.module.content.entity.Content;
+import com.javatmp.module.content.entity.Content_;
 import java.text.ParseException;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.LockModeType;
 import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
@@ -16,18 +17,12 @@ import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
-public class ContentService {
+public class ContentService extends JpaRepository<Content, Long> {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
-    private final JpaDaoHelper jpaDaoHelper;
 
-    public ContentService(JpaDaoHelper jpaDaoHelper) {
-        this.jpaDaoHelper = jpaDaoHelper;
-//        generateContent();
-    }
-
-    public Long getAllCount() {
-        return this.getJpaDaoHelper().getAllCount(Content.class);
+    public ContentService(EntityManagerFactory emf) {
+        super(Content.class, emf);
     }
 
     public int updateContent(Content content) {
@@ -35,7 +30,7 @@ public class ContentService {
         EntityManager em = null;
         try {
 
-            em = this.getJpaDaoHelper().getEntityManagerFactory().createEntityManager();
+            em = this.emf.createEntityManager();
             em.getTransaction().begin();
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaQuery<Content> cq = cb.createQuery(Content.class);
@@ -61,15 +56,11 @@ public class ContentService {
         return updateStatus;
     }
 
-    public Content readContentById(Content content) {
-        return this.getJpaDaoHelper().read(Content.class, content.getContentId());
-    }
-
     public int deleteContent(Content content) {
         int deletedStatus = 0;
         EntityManager em = null;
         try {
-            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            em = this.emf.createEntityManager();
             em.getTransaction().begin();
             CriteriaBuilder cb = em.getCriteriaBuilder();
 //            CriteriaQuery<Content> cq = cb.createQuery(Content.class);
@@ -98,19 +89,11 @@ public class ContentService {
     }
 
     public DataTableResults<Content> listContent(DataTableRequest<Content> page) throws ParseException {
-
         page.setClassType(Content.class);
         page.setSelects(new String[]{"contentId", "title", "summaryText",
             "contentText", "creationDate", "createdBy", "status"});
-        DataTableResults<Content> msgs = getJpaDaoHelper().retrievePageRequestDetails(page);
+        DataTableResults<Content> msgs = this.retrievePageRequestDetails(page);
         return msgs;
-    }
-
-    /**
-     * @return the jpaDaoHelper
-     */
-    public JpaDaoHelper getJpaDaoHelper() {
-        return jpaDaoHelper;
     }
 
 }

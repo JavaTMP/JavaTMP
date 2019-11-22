@@ -1,9 +1,9 @@
 package com.javatmp.module.content.controller;
 
-import com.javatmp.module.content.service.ContentService;
-import com.javatmp.module.content.entity.Content;
-import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.fw.domain.ResponseMessage;
+import com.javatmp.fw.mvc.MvcHelper;
+import com.javatmp.module.content.entity.Content;
+import com.javatmp.module.content.service.ContentService;
 import com.javatmp.util.Constants;
 import com.javatmp.util.ServicesFactory;
 import java.io.IOException;
@@ -30,7 +30,7 @@ public class ReadContentController extends HttpServlet {
 
         try {
             MvcHelper.populateBeanByRequestParameters(request, contentToBeRead);
-            Content dbContent = cs.readContentById(contentToBeRead);
+            Content dbContent = cs.getOne(contentToBeRead.getContentId());
             responseMessage.setOverAllStatus(true);
             responseMessage.setMessage("Content Read successfully");
             responseMessage.setData(dbContent);

@@ -1,35 +1,27 @@
 package com.javatmp.module.message.service;
 
+import com.javatmp.fw.data.jpa.repository.JpaRepository;
+import com.javatmp.fw.domain.table.DataTableRequest;
+import com.javatmp.fw.domain.table.DataTableResults;
 import com.javatmp.module.message.entity.Message;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
-import com.javatmp.fw.domain.table.DataTableRequest;
-import com.javatmp.fw.domain.table.DataTableResults;
-import com.javatmp.util.JpaDaoHelper;
 import java.text.ParseException;
 import java.util.logging.Logger;
+import javax.persistence.EntityManagerFactory;
 
-public class MessageService {
+public class MessageService extends JpaRepository<Message, Long> {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
-    private final JpaDaoHelper jpaDaoHelper;
     private UserService userService;
 
-    public MessageService(JpaDaoHelper jpaDaoHelper, UserService userService) {
-        this.jpaDaoHelper = jpaDaoHelper;
+    public MessageService(EntityManagerFactory emf, UserService userService) {
+        super(Message.class, emf);
         this.userService = userService;
     }
 
-    public Long getAllCount() {
-        return this.jpaDaoHelper.getAllCount(Message.class);
-    }
-
-//    public List<Message> getMessages() {
-//        return this.jpaDaoHelper.findAll(Message.class);
-//    }
     public Message readMessageById(Message message) {
-        Message row = this.jpaDaoHelper.read(Message.class, message.getMessageId());
-
+        Message row = this.getOne(message.getMessageId());
         Long fromUserId = row.getFromUserId();
         Long toUserId = row.getToUserId();
         User fromUser = new User();
@@ -50,15 +42,11 @@ public class MessageService {
         return row;
     }
 
-    public Message createMessage(Message message) {
-        return this.jpaDaoHelper.create(message);
-    }
-
     public DataTableResults<Message> listMessages(DataTableRequest<Message> tableRequest) throws ParseException {
 
         tableRequest.setClassType(Message.class);
         tableRequest.setSelects(new String[]{"messageId", "messageTitle", "messageContentText", "creationDate", "fromUserId", "toUserId", "messageStatus"});
-        DataTableResults<Message> msgs = jpaDaoHelper.retrievePageRequestDetails(tableRequest);
+        DataTableResults<Message> msgs = this.retrievePageRequestDetails(tableRequest);
         return msgs;
     }
 

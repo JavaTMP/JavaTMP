@@ -1,22 +1,22 @@
 package com.javatmp.module.timezone;
 
+import com.javatmp.fw.data.jpa.repository.JpaRepository;
 import com.javatmp.module.user.entity.User;
-import com.javatmp.util.JpaDaoHelper;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 
-public class TimezoneService {
+public class TimezoneService extends JpaRepository<Timezone, String> {
 
-    private final JpaDaoHelper jpaDaoHelper;
     private Map<String, List<Timezonetranslation>> timezones;
 
-    public TimezoneService(JpaDaoHelper jpaDaoHelper) {
-        this.jpaDaoHelper = jpaDaoHelper;
+    public TimezoneService(EntityManagerFactory emf) {
+        super(Timezone.class, emf);
     }
 
     private void generateAllTimezones() {
@@ -68,7 +68,7 @@ public class TimezoneService {
         EntityManager em = null;
         List<Timezonetranslation> retList = null;
         try {
-            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            em = emf.createEntityManager();
             TypedQuery<Timezonetranslation> query = em.createQuery(
                     "select "
                     + "new com.javatmp.module.timezone.Timezonetranslation("

@@ -5,26 +5,16 @@
  */
 package com.javatmp.timezones;
 
-import com.javatmp.util.JpaDaoHelper;
-import com.javatmp.module.timezone.Timezone;
 import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.module.timezone.TimezoneService;
 import com.javatmp.module.timezone.Timezonetranslation;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileOutputStream;
+import com.javatmp.util.JpaDaoHelper;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -39,7 +29,7 @@ public class TestingTimezoneService {
         JpaDaoHelper jpaDaoHelper;
         TimezoneService timezoneService;
         jpaDaoHelper = new JpaDaoHelper("AppPU");
-        timezoneService = new TimezoneService(jpaDaoHelper);
+        timezoneService = new TimezoneService(Persistence.createEntityManagerFactory("AppPU"));
 
         List<Timezonetranslation> timezones = timezoneService.getTimezones();
 

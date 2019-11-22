@@ -1,11 +1,12 @@
 package com.javatmp.module.accounting.controller;
 
-import com.javatmp.module.user.entity.User;
-import com.javatmp.module.accounting.service.AccountService;
-import com.javatmp.module.accounting.entity.AccountGroup;
-import com.javatmp.module.accounting.entity.Account;
-import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.fw.domain.ResponseMessage;
+import com.javatmp.fw.mvc.MvcHelper;
+import com.javatmp.module.accounting.entity.Account;
+import com.javatmp.module.accounting.entity.AccountGroup;
+import com.javatmp.module.accounting.service.AccountGroupService;
+import com.javatmp.module.accounting.service.AccountService;
+import com.javatmp.module.user.entity.User;
 import com.javatmp.util.Constants;
 import com.javatmp.util.ServicesFactory;
 import java.io.IOException;
@@ -35,6 +36,7 @@ public class UpdateAccountPopup extends HttpServlet {
             ServletContext context = request.getServletContext();
             ServicesFactory sf = (ServicesFactory) context.getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
             AccountService accountService = sf.getAccountService();
+            AccountGroupService accountGroupService = sf.getAccountGroupService();
             Account account = new Account();
             MvcHelper.populateBeanByRequestParameters(request, account);
             logger.info("request account is [" + MvcHelper.deepToString(account) + "]");
@@ -43,8 +45,8 @@ public class UpdateAccountPopup extends HttpServlet {
 
             HttpSession session = request.getSession();
             User loggedInUser = (User) session.getAttribute("user");
-            List<Account> accounts = accountService.getAllAccountsList();
-            List<AccountGroup> accountGroups = accountService.getAccountGroups();
+            List<Account> accounts = accountService.findAll(0, Integer.MAX_VALUE);
+            List<AccountGroup> accountGroups = accountGroupService.findAll(0, Integer.MAX_VALUE);
             request.setAttribute("accounts", accounts);
             request.setAttribute("accountGroups", accountGroups);
             request.setAttribute("account", dbAccount);

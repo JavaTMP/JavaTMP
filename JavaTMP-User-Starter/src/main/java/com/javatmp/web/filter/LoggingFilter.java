@@ -3,7 +3,6 @@ package com.javatmp.web.filter;
 import com.javatmp.module.activity.Activity;
 import com.javatmp.module.user.entity.User;
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Date;
 import java.util.logging.Logger;
 import javax.servlet.FilterChain;
@@ -38,7 +37,7 @@ public class LoggingFilter extends FilterWrapper {
             activity.setIPaddress(ipAddress);
             activity.setActionType("page_view");
             activity.setActionId(this.getUrl(httpRequest));
-            getServiceFactory().getActivityService().createActivity(activity);
+            getServiceFactory().getActivityService().save(activity);
 
             HttpSession session = httpRequest.getSession(false);
             if (session != null) {
@@ -66,7 +65,7 @@ public class LoggingFilter extends FilterWrapper {
             logger.info("URI [" + httpRequest.getRequestURI() + "]=[" + (endTime - startTime) + "] milliseconds");
 
             activity.setTimeLast(lastTime);
-            this.getServiceFactory().getActivityService().updateActivity(activity);
+            this.getServiceFactory().getActivityService().merge(activity);
         }
     }
 }

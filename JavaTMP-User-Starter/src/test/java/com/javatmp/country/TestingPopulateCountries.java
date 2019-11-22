@@ -19,6 +19,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.List;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -33,8 +34,8 @@ public class TestingPopulateCountries {
         JpaDaoHelper jpaDaoHelper;
         CountryService countryService;
         jpaDaoHelper = new JpaDaoHelper("AppPU");
-        countryService = new CountryService(jpaDaoHelper);
-        LanguageService languageService = new LanguageService(jpaDaoHelper);
+        countryService = new CountryService(Persistence.createEntityManagerFactory("AppPU"));
+        LanguageService languageService = new LanguageService(Persistence.createEntityManagerFactory("AppPU"));
         List<Languagetranslation> languages = languageService.getLanguages(new User(0L, "en"));
         List<Countrytranslation> countries = countryService.getCountries();
 

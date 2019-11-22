@@ -1,11 +1,12 @@
 package com.javatmp.module.accounting.controller;
 
-import com.javatmp.module.user.entity.User;
-import com.javatmp.module.accounting.service.AccountService;
-import com.javatmp.module.accounting.entity.AccountGroup;
-import com.javatmp.module.accounting.entity.Account;
-import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.fw.domain.ResponseMessage;
+import com.javatmp.fw.mvc.MvcHelper;
+import com.javatmp.module.accounting.entity.Account;
+import com.javatmp.module.accounting.entity.AccountGroup;
+import com.javatmp.module.accounting.service.AccountGroupService;
+import com.javatmp.module.accounting.service.AccountService;
+import com.javatmp.module.user.entity.User;
 import com.javatmp.util.Constants;
 import com.javatmp.util.ServicesFactory;
 import java.io.IOException;
@@ -38,8 +39,9 @@ public class AddNewAccountPopup extends HttpServlet {
         HttpSession session = request.getSession();
         User loggedInUser = (User) session.getAttribute("user");
         AccountService accountService = sf.getAccountService();
-        List<Account> accounts = accountService.getAllAccountsList();
-        List<AccountGroup> accountGroups = accountService.getAccountGroups();
+        AccountGroupService accountGroupService = sf.getAccountGroupService();
+        List<Account> accounts = accountService.findAll(0, Integer.MAX_VALUE);
+        List<AccountGroup> accountGroups = accountGroupService.findAll(0, Integer.MAX_VALUE);
         request.setAttribute("accounts", accounts);
         request.setAttribute("accountGroups", accountGroups);
         request.getRequestDispatcher(requestPage).forward(request, response);
@@ -62,7 +64,7 @@ public class AddNewAccountPopup extends HttpServlet {
             accountToBeCreated.setStatus((short) 1);
             accountToBeCreated.setDebit(BigDecimal.ZERO);
             accountToBeCreated.setCredit(BigDecimal.ZERO);
-            accountService.createNewAccount(accountToBeCreated);
+            accountService.save(accountToBeCreated);
             responseMessage.setOverAllStatus(true);
             responseMessage.setMessage("Account created successfully");
             responseMessage.setData(accountToBeCreated);

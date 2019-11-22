@@ -1,17 +1,16 @@
 package com.javatmp.module.dms.controller;
 
-import com.javatmp.module.dms.service.DocumentService;
-import com.javatmp.module.dms.entity.Document;
 import com.javatmp.fw.mvc.MvcHelper;
-import com.javatmp.util.ServicesFactory;
+import com.javatmp.module.dms.entity.Document;
+import com.javatmp.module.dms.service.DocumentService;
 import com.javatmp.util.Constants;
+import com.javatmp.util.ServicesFactory;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletContext;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,7 +35,7 @@ public class ViewUploadedFileController extends HttpServlet {
             MvcHelper.populateBeanByRequestParameters(request, temp);
             logger.info("Requested Document [" + MvcHelper.deepToString(temp) + "]");
             String viewTypeTemp = request.getParameter("viewType");
-            Document document = ds.readDocumentById(temp);
+            Document document = ds.getOne(temp.getDocumentId());
 
             // for nano security check if provided hash equal db one:
             if (!document.getRandomHash().equals(temp.getRandomHash())) {

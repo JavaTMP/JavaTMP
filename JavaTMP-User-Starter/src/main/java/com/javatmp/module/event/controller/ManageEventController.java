@@ -1,7 +1,8 @@
 package com.javatmp.module.event.controller;
 
-import com.javatmp.module.event.entity.Event;
 import com.javatmp.fw.mvc.MvcHelper;
+import com.javatmp.module.event.entity.Event;
+import com.javatmp.module.event.service.EventService;
 import com.javatmp.util.Constants;
 import com.javatmp.util.ServicesFactory;
 import java.io.IOException;
@@ -24,11 +25,11 @@ public class ManageEventController extends HttpServlet {
             throws ServletException, IOException {
         try {
             ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
-
+            EventService eventService = sf.getEventService();
             Event event = new Event();
             MvcHelper.populateBeanByRequestParameters(request, event);
             logger.info("Event read from request [" + MvcHelper.toString(event) + "]");
-            event = sf.getEventService().getEventById(event);
+            event = eventService.getOne(event.getId());
             logger.info("Event read from Database [" + MvcHelper.toString(event) + "]");
             request.setAttribute("event", event);
             request.getRequestDispatcher("/WEB-INF/pages/event/ajax/manage-event.jsp").forward(request, response);

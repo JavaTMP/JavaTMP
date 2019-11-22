@@ -23,6 +23,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -37,7 +38,7 @@ public class TestingPopulateTimezone {
         JpaDaoHelper jpaDaoHelper;
         TimezoneService timezoneService;
         jpaDaoHelper = new JpaDaoHelper("AppPU");
-        timezoneService = new TimezoneService(jpaDaoHelper);
+        timezoneService = new TimezoneService(Persistence.createEntityManagerFactory("AppPU"));
 
         List<Timezonetranslation> timezones = timezoneService.getTimezones();
 

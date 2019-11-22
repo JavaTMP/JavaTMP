@@ -1,25 +1,21 @@
 package com.javatmp.module.language;
 
-import com.javatmp.util.JpaDaoHelper;
-import com.javatmp.module.language.Language;
+import com.javatmp.fw.data.jpa.repository.JpaRepository;
 import com.javatmp.module.user.entity.User;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
-public class LanguageService {
+public class LanguageService extends JpaRepository<Language, String> {
 
-    private final JpaDaoHelper jpaDaoHelper;
     private Map<String, List<Languagetranslation>> languages;
 
-    public LanguageService(JpaDaoHelper jpaDaoHelper) {
-        this.jpaDaoHelper = jpaDaoHelper;
+    public LanguageService(EntityManagerFactory emf) {
+        super(Language.class, emf);
     }
 
     public List<Languagetranslation> getLanguages(User localeUser) {
@@ -46,10 +42,9 @@ public class LanguageService {
         EntityManager em = null;
         List<Languagetranslation> retList = null;
         try {
-            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            em = this.emf.createEntityManager();
             TypedQuery<Languagetranslation> query = em.createQuery(
-                    "select "
-                    + "new com.javatmp.module.language.Languagetranslation("
+                    "select new com.javatmp.module.language.Languagetranslation("
                     + "l.languageId, lt1.languagetranslationPK.langId, coalesce(lt1.languageName, lt2.languageName)"
                     + ") from Language l "
                     + "left outer join Languagetranslation lt1 on lt1.languagetranslationPK.languageId = l.languageId "
@@ -71,7 +66,7 @@ public class LanguageService {
         EntityManager em = null;
         List<Languagetranslation> retList = null;
         try {
-            em = this.jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+            em = this.emf.createEntityManager();
             TypedQuery<Languagetranslation> query = em.createQuery(
                     "select "
                     + "new com.javatmp.module.language.Languagetranslation("

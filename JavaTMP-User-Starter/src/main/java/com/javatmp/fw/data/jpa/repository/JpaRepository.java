@@ -28,7 +28,7 @@ import javax.persistence.criteria.Selection;
 
 public class JpaRepository<E, I> {
 
-    private final EntityManagerFactory emf;
+    protected final EntityManagerFactory emf;
     private Class<E> clazz;
 
     public JpaRepository(Class<E> clazz, String persistentUnit) {
@@ -41,7 +41,11 @@ public class JpaRepository<E, I> {
         this.clazz = clazz;
     }
 
-    public void persist(E entity) {
+    public EntityManagerFactory getEntityManagerFactory() {
+        return emf;
+    }
+
+    public void save(E entity) {
         this.transaction((EntityManager em) -> {
             em.persist(entity);
         });
@@ -53,13 +57,13 @@ public class JpaRepository<E, I> {
         });
     }
 
-    public E read(I id) {
+    public E getOne(I id) {
         return this.get((EntityManager em) -> {
             return em.find(clazz, id);
         });
     }
 
-    public void remove(E entity) {
+    public void delete(E entity) {
         this.transaction((EntityManager em) -> {
             em.remove(entity);
         });
@@ -81,6 +85,20 @@ public class JpaRepository<E, I> {
         EntityManager em = emf.createEntityManager();
         try {
             E result = operation.apply(em);
+            return result;
+        } catch (Throwable t1) {
+            throw t1;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
+    public Long getCount(Function<EntityManager, Long> operation) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            Long result = operation.apply(em);
             return result;
         } catch (Throwable t1) {
             throw t1;

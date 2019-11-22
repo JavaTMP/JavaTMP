@@ -1,33 +1,19 @@
 package com.javatmp.module.event.service;
 
+import com.javatmp.fw.data.jpa.repository.JpaRepository;
 import com.javatmp.module.event.entity.Event;
-import com.javatmp.util.JpaDaoHelper;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Logger;
+import javax.persistence.EntityManagerFactory;
 
-public class EventService {
+public class EventService extends JpaRepository<Event, Long> {
 
     private final Logger logger = Logger.getLogger(getClass().getName());
-    final JpaDaoHelper jpaDaoHelper;
 
-    public EventService(final JpaDaoHelper jpaDaoHelper) {
-        this.jpaDaoHelper = jpaDaoHelper;
-
-    }
-
-    public Long getAllEventCount() {
-        return this.jpaDaoHelper.getAllCount(Event.class);
-    }
-
-    public synchronized void addDiaryEvent(Event event) {
-        this.jpaDaoHelper.create(event);
-    }
-
-    public List<Event> getEvents() {
-        return this.jpaDaoHelper.findAll(Event.class);
+    public EventService(EntityManagerFactory emf) {
+        super(Event.class, emf);
     }
 
     public void initialiseDiary() {
@@ -58,13 +44,9 @@ public class EventService {
             item.setCreationDate(new Date());
             item.setTitle("Event Title");
             item.setDescription("Event Description");
-            this.addDiaryEvent(item);
+            this.save(item);
             item.setTitle("Appt: " + item.getId());
         }
-    }
-
-    public Event getEventById(Event event) {
-        return this.jpaDaoHelper.read(Event.class, event.getId());
     }
 
     public static Date GetRandomAppointmentTime(boolean goBackwards, boolean today) {

@@ -16,12 +16,12 @@ import com.javatmp.module.message.entity.Message;
 import com.javatmp.module.message.service.MessageService;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
-import com.javatmp.util.JpaDaoHelper;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -35,11 +35,9 @@ public class TestingDynamicSelectMessages {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException, ParseException {
-        JpaDaoHelper jpaDaoHelper;
         UserService userService;
-        jpaDaoHelper = new JpaDaoHelper("AppPU");
         userService = new UserService("AppPU");
-        MessageService messageService = new MessageService(jpaDaoHelper, userService);
+        MessageService messageService = new MessageService(Persistence.createEntityManagerFactory("AppPU"), userService);
 //        messageService.generateMessages();
         Gson gson = new GsonBuilder()
                 .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").serializeNulls()
