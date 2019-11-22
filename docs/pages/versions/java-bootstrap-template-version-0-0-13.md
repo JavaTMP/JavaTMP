@@ -3,6 +3,9 @@ title: Java Bootstrap Template Version 0.0.13 (Current Development Version)
 ---
 # {{ page.title }}
 
+## 250ed5b on Nov 22, 2019, 8:30 PM GMT+4
+- Generic repository using the JPA Criteria API `JpaRepository` and remove JpaDaoHelper class and refactor all classes.
+
 ## 75000a7 on Nov 16, 2019, 5:37 AM GMT+4
 - Add Apache Log4j2 logging framework wrapped by Simple Logging Facade for Java (SLF4J) library as Maven dependency.
 - Use Project lombok to generate setter and getter
