@@ -6,8 +6,8 @@
 package com.javatmp.theme;
 
 import com.javatmp.fw.mvc.MvcHelper;
-import com.javatmp.module.theme.ThemeService;
-import com.javatmp.module.theme.Themetranslation;
+import com.javatmp.module.theme.service.ThemeService;
+import com.javatmp.module.theme.entity.Themetranslation;
 import com.javatmp.module.user.entity.User;
 import java.sql.SQLException;
 import java.text.ParseException;

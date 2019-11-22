@@ -6,10 +6,9 @@
 package com.javatmp.theme;
 
 import com.javatmp.fw.mvc.MvcHelper;
-import com.javatmp.module.theme.Theme;
-import com.javatmp.module.theme.ThemeService;
-import com.javatmp.module.theme.Themetranslation;
-import com.javatmp.util.JpaDaoHelper;
+import com.javatmp.module.theme.entity.Theme;
+import com.javatmp.module.theme.service.ThemeService;
+import com.javatmp.module.theme.entity.Themetranslation;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
@@ -26,13 +25,11 @@ import javax.persistence.TypedQuery;
 public class TestingPopulateThemes {
 
     public static void main(String[] args) throws SQLException, ParseException {
-        JpaDaoHelper jpaDaoHelper;
         ThemeService themeService;
-        jpaDaoHelper = new JpaDaoHelper("AppPU");
         themeService = new ThemeService(Persistence.createEntityManagerFactory("AppPU"));
 
         List<Object[]> results;
-        EntityManager em = jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+        EntityManager em = themeService.getEntityManagerFactory().createEntityManager();
 
 //        TypedQuery<Themetranslation> query = em.createQuery(
 //                "SELECT t FROM Themetranslation t "

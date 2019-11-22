@@ -1,5 +1,7 @@
-package com.javatmp.module.theme;
+package com.javatmp.module.theme.service;
 
+import com.javatmp.module.theme.entity.Theme;
+import com.javatmp.module.theme.entity.Themetranslation;
 import com.javatmp.fw.data.jpa.repository.JpaRepository;
 import com.javatmp.module.user.entity.User;
 import java.util.HashMap;

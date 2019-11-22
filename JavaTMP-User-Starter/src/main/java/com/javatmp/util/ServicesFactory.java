@@ -6,13 +6,13 @@ import com.javatmp.module.accounting.service.TransactionEntryService;
 import com.javatmp.module.accounting.service.TransactionService;
 import com.javatmp.module.activity.ActivityService;
 import com.javatmp.module.content.service.ContentService;
-import com.javatmp.module.country.CountryService;
+import com.javatmp.module.country.service.CountryService;
 import com.javatmp.module.dms.service.DocumentService;
 import com.javatmp.module.event.service.EventService;
-import com.javatmp.module.language.LanguageService;
+import com.javatmp.module.language.service.LanguageService;
 import com.javatmp.module.message.service.MessageService;
 import com.javatmp.module.stats.controller.UserStatsService;
-import com.javatmp.module.theme.ThemeService;
+import com.javatmp.module.theme.service.ThemeService;
 import com.javatmp.module.timezone.TimezoneService;
 import com.javatmp.module.user.service.UserService;
 import java.util.Date;
@@ -25,7 +25,6 @@ import lombok.Getter;
 public class ServicesFactory {
 
     private static final Logger logger = Logger.getLogger(ServicesFactory.class.getName());
-    private final JpaDaoHelper jpaDaoHelper;
     private final TimezoneService timezoneService;
     private final ThemeService themeService;
     private final LanguageService languageService;
@@ -46,7 +45,6 @@ public class ServicesFactory {
         logger.info("*** Start ServicesFactory Constructor @ [" + new Date() + "]");
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory(persistentUnitName);
-        this.jpaDaoHelper = new JpaDaoHelper(emf);
         this.timezoneService = new TimezoneService(emf);
         this.themeService = new ThemeService(emf);
         this.languageService = new LanguageService(emf);

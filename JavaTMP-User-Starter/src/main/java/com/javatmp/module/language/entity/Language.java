@@ -1,7 +1,7 @@
-package com.javatmp.module.language;
+package com.javatmp.module.language.entity;
 
-import com.javatmp.module.country.Countrytranslation;
-import com.javatmp.module.theme.Themetranslation;
+import com.javatmp.module.country.entity.Countrytranslation;
+import com.javatmp.module.theme.entity.Themetranslation;
 import com.javatmp.module.timezone.Timezonetranslation;
 import java.io.Serializable;
 import java.util.List;

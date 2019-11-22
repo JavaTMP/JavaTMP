@@ -5,9 +5,9 @@
  */
 package com.javatmp.jpa;
 
-import com.javatmp.module.user.entity.User;
 import com.javatmp.fw.mvc.MvcHelper;
-import com.javatmp.util.JpaDaoHelper;
+import com.javatmp.module.user.entity.User;
+import com.javatmp.module.user.service.UserService;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -18,6 +18,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -39,8 +40,9 @@ public class TestEntityQuery {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException, ParseException {
-        JpaDaoHelper jpaDaoHelper = new JpaDaoHelper("AppPU");
-        EntityManager em = jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+        UserService userService;
+        userService = new UserService(Persistence.createEntityManagerFactory("AppPU"));
+        EntityManager em = userService.getEntityManagerFactory().createEntityManager();
 
         List<User> users = EntityQuery.create(em, User.class)
                 .setFirstResult(0)

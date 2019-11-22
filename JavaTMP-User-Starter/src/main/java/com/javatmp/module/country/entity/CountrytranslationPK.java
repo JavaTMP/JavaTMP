@@ -1,4 +1,4 @@
-package com.javatmp.module.country;
+package com.javatmp.module.country.entity;
 
 import java.io.Serializable;
 import javax.persistence.Basic;

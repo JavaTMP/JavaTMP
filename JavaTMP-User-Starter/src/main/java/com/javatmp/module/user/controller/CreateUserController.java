@@ -1,9 +1,9 @@
 package com.javatmp.module.user.controller;
 
-import com.javatmp.module.country.Countrytranslation;
+import com.javatmp.module.country.entity.Countrytranslation;
 import com.javatmp.module.dms.entity.Document;
-import com.javatmp.module.language.Languagetranslation;
-import com.javatmp.module.theme.Themetranslation;
+import com.javatmp.module.language.entity.Languagetranslation;
+import com.javatmp.module.theme.entity.Themetranslation;
 import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.fw.domain.ResponseMessage;
 import com.javatmp.module.dms.service.DocumentService;

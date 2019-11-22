@@ -1,4 +1,4 @@
-package com.javatmp.module.theme;
+package com.javatmp.module.theme.entity;
 
 import java.io.Serializable;
 import javax.persistence.Embeddable;

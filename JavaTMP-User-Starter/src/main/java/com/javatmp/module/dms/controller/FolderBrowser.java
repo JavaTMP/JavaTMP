@@ -1,14 +1,14 @@
 package com.javatmp.module.dms.controller;
 
-import com.javatmp.module.dms.entity.Document;
-import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.fw.domain.ResponseMessage;
 import com.javatmp.fw.domain.table.DataTableColumn;
 import com.javatmp.fw.domain.table.DataTableRequest;
 import com.javatmp.fw.domain.table.DataTableResults;
 import com.javatmp.fw.domain.table.Search;
+import com.javatmp.fw.mvc.MvcHelper;
+import com.javatmp.module.dms.entity.Document;
+import com.javatmp.module.dms.service.DocumentService;
 import com.javatmp.util.Constants;
-import com.javatmp.util.JpaDaoHelper;
 import com.javatmp.util.ServicesFactory;
 import java.io.IOException;
 import java.text.ParseException;
@@ -31,8 +31,7 @@ public class FolderBrowser extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
-
-        JpaDaoHelper jpaDaoHelper = sf.getJpaDaoHelper();
+        DocumentService documentService = sf.getDocumentService();
 
         DataTableRequest<Document> tableRequest = new DataTableRequest<>();
 
@@ -49,7 +48,7 @@ public class FolderBrowser extends HttpServlet {
         tableRequest.setColumns(columns);
         DataTableResults<Document> dataTableResult;
         try {
-            dataTableResult = jpaDaoHelper.retrievePageRequestDetails(tableRequest);
+            dataTableResult = documentService.retrievePageRequestDetails(tableRequest);
             ResponseMessage responseMessage = new ResponseMessage();
             responseMessage.setOverAllStatus(true);
             responseMessage.setData(dataTableResult);

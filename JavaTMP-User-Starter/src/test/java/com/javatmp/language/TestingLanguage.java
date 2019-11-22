@@ -6,11 +6,10 @@
 package com.javatmp.language;
 
 import com.javatmp.fw.mvc.MvcHelper;
-import com.javatmp.module.language.LanguageService;
-import com.javatmp.module.language.Languagetranslation;
-import com.javatmp.module.theme.ThemeService;
+import com.javatmp.module.language.service.LanguageService;
+import com.javatmp.module.language.entity.Languagetranslation;
+import com.javatmp.module.theme.service.ThemeService;
 import com.javatmp.module.user.entity.User;
-import com.javatmp.util.JpaDaoHelper;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
@@ -23,10 +22,7 @@ import javax.persistence.Persistence;
 public class TestingLanguage {
 
     public static void main(String[] args) throws SQLException, ParseException {
-        JpaDaoHelper jpaDaoHelper;
-        ThemeService themeService;
-        jpaDaoHelper = new JpaDaoHelper("AppPU");
-        themeService = new ThemeService(Persistence.createEntityManagerFactory("AppPU"));
+        ThemeService themeService = new ThemeService(Persistence.createEntityManagerFactory("AppPU"));
         LanguageService languageService = new LanguageService(Persistence.createEntityManagerFactory("AppPU"));
         User testUser = new User();
         testUser.setLang("ar");

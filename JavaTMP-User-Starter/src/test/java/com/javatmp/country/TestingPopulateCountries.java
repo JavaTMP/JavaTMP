@@ -5,13 +5,13 @@
  */
 package com.javatmp.country;
 
-import com.javatmp.module.country.CountryService;
-import com.javatmp.module.country.Countrytranslation;
-import com.javatmp.module.country.CountrytranslationPK;
-import com.javatmp.module.language.LanguageService;
-import com.javatmp.module.language.Languagetranslation;
+import com.javatmp.module.country.entity.Countrytranslation;
+import com.javatmp.module.country.entity.CountrytranslationPK;
+import com.javatmp.module.country.service.CountryService;
+import com.javatmp.module.country.service.CountryTransalationService;
+import com.javatmp.module.language.entity.Languagetranslation;
+import com.javatmp.module.language.service.LanguageService;
 import com.javatmp.module.user.entity.User;
-import com.javatmp.util.JpaDaoHelper;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -19,6 +19,7 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.List;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 /**
@@ -31,11 +32,11 @@ public class TestingPopulateCountries {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException, ParseException, IOException {
-        JpaDaoHelper jpaDaoHelper;
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("AppPU");
         CountryService countryService;
-        jpaDaoHelper = new JpaDaoHelper("AppPU");
-        countryService = new CountryService(Persistence.createEntityManagerFactory("AppPU"));
-        LanguageService languageService = new LanguageService(Persistence.createEntityManagerFactory("AppPU"));
+        countryService = new CountryService(emf);
+        LanguageService languageService = new LanguageService(emf);
+        CountryTransalationService countryTransalationService = new CountryTransalationService(emf);
         List<Languagetranslation> languages = languageService.getLanguages(new User(0L, "en"));
         List<Countrytranslation> countries = countryService.getCountries();
 
@@ -55,10 +56,10 @@ public class TestingPopulateCountries {
             Countrytranslation newCountry
                     = new Countrytranslation(new CountrytranslationPK(country.getCountrytranslationPK().getCountryId(), "en"), country.getCountryName());
 
-            jpaDaoHelper.create(newCountry);
+            countryTransalationService.save(newCountry);
             newCountry
                     = new Countrytranslation(new CountrytranslationPK(country.getCountrytranslationPK().getCountryId(), "ar"), countryList.remove());
-            jpaDaoHelper.create(newCountry);
+            countryTransalationService.save(newCountry);
         });
 
         languages.forEach((language) -> {

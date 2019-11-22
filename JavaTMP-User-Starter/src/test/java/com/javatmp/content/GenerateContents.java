@@ -6,13 +6,14 @@
 package com.javatmp.content;
 
 import com.javatmp.module.content.entity.Content;
+import com.javatmp.module.content.service.ContentService;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
-import com.javatmp.util.JpaDaoHelper;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -25,15 +26,14 @@ public class GenerateContents {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        JpaDaoHelper jpaDaoHelper;
         UserService userService;
-        jpaDaoHelper = new JpaDaoHelper("AppPU");
-        userService = new UserService("AppPU");
+        userService = new UserService(Persistence.createEntityManagerFactory("AppPU"));
+        ContentService contentService = new ContentService(Persistence.createEntityManagerFactory("AppPU"));
         List<User> users = userService.findAll(0, Integer.MAX_VALUE);
-        generateContent(jpaDaoHelper, users);
+        generateContent(contentService, users);
     }
 
-    public static void generateContent(JpaDaoHelper jpaDaoHelper, List<User> users) {
+    public static void generateContent(ContentService contentService, List<User> users) {
         Content content = new Content();
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH, -1001);
@@ -54,7 +54,7 @@ public class GenerateContents {
                 + "</ul>\n"
                 + "<p>Copy pasted from <a href=\"https://en.wikipedia.org/wiki/Java_(programming_language)\" target=\"_blank\">this wikipedia page</a>.</p>\n"
                 + "");
-        jpaDaoHelper.create(content);
+        contentService.save(content);
         Random rand = new Random();
         for (int i = 1; i < 1000; i++) {
             int randomTo = rand.nextInt(users.size());
@@ -79,7 +79,7 @@ public class GenerateContents {
                     + "<p>A fake data summary text to show you number " + content.getContentId() + " geneated from fake database, Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>\n"
                     + "");
 
-            jpaDaoHelper.create(content);
+            contentService.save(content);
         }
     }
 }

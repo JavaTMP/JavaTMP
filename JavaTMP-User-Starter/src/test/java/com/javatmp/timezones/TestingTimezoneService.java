@@ -8,7 +8,6 @@ package com.javatmp.timezones;
 import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.module.timezone.TimezoneService;
 import com.javatmp.module.timezone.Timezonetranslation;
-import com.javatmp.util.JpaDaoHelper;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
@@ -26,9 +25,7 @@ public class TestingTimezoneService {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException, ParseException, UnsupportedEncodingException, IOException {
-        JpaDaoHelper jpaDaoHelper;
         TimezoneService timezoneService;
-        jpaDaoHelper = new JpaDaoHelper("AppPU");
         timezoneService = new TimezoneService(Persistence.createEntityManagerFactory("AppPU"));
 
         List<Timezonetranslation> timezones = timezoneService.getTimezones();

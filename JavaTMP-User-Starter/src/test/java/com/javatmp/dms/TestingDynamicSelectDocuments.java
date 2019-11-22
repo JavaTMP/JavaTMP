@@ -5,25 +5,23 @@
  */
 package com.javatmp.dms;
 
-import com.javatmp.module.dms.entity.Document;
-import com.javatmp.module.user.service.UserService;
-import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.fw.domain.table.DataTableColumn;
 import com.javatmp.fw.domain.table.DataTableRequest;
 import com.javatmp.fw.domain.table.DataTableResults;
 import com.javatmp.fw.domain.table.Search;
-import com.javatmp.util.JpaDaoHelper;
+import com.javatmp.fw.mvc.MvcHelper;
+import com.javatmp.module.dms.entity.Document;
+import com.javatmp.module.dms.service.DocumentService;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.List;
+import javax.persistence.Persistence;
 
 public class TestingDynamicSelectDocuments {
 
     public static void main(String[] args) throws SQLException, ParseException {
-        JpaDaoHelper jpaDaoHelper;
-        UserService userService;
-        jpaDaoHelper = new JpaDaoHelper("AppPU");
+        DocumentService documentService = new DocumentService(Persistence.createEntityManagerFactory("AppPU"));
 
         DataTableRequest<Document> tableRequest = new DataTableRequest<>();
 
@@ -38,7 +36,7 @@ public class TestingDynamicSelectDocuments {
         List<DataTableColumn> columns = new LinkedList<>();
         columns.add(column);
         tableRequest.setColumns(columns);
-        DataTableResults<Document> dataTableResult = jpaDaoHelper.retrievePageRequestDetails(tableRequest);
+        DataTableResults<Document> dataTableResult = documentService.retrievePageRequestDetails(tableRequest);
 
         System.out.println(dataTableResult.getRecordsTotal());
         for (Document m : dataTableResult.getData()) {

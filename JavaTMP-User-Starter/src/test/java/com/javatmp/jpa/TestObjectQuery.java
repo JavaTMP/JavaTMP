@@ -7,7 +7,7 @@ package com.javatmp.jpa;
 
 import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.module.user.entity.User;
-import com.javatmp.util.JpaDaoHelper;
+import com.javatmp.module.user.service.UserService;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -36,12 +37,13 @@ public class TestObjectQuery {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        JpaDaoHelper jpaDaoHelper = new JpaDaoHelper("AppPU");
-        EntityManager em = jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+        UserService userService;
+        userService = new UserService(Persistence.createEntityManagerFactory("AppPU"));
+        EntityManager em = userService.getEntityManagerFactory().createEntityManager();
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         String[] selects = new String[]{"lang", "theme", "address", "timezone",
             "profilePicDocumentId", "profilePicDocument.randomHash", "profilePicDocument.documentId", "countryId", "country.countryId",
-             "country.theme.themeId"};
+            "country.theme.themeId"};
         CriteriaQuery<Object[]> cq = criteriaBuilder.createQuery(Object[].class);
         Root<User> from = cq.from(User.class);
 //        for (String pathStr : selects) {
@@ -50,7 +52,7 @@ public class TestObjectQuery {
 //                from.join(attributes[0], JoinType.LEFT);
 //            }
 //        }
-        List<Selection<?>> listOfSelect = jpaDaoHelper.convertArrToPaths(from, selects);
+        List<Selection<?>> listOfSelect = userService.convertArrToPaths(from, selects);
         System.out.println("size [" + listOfSelect.size() + "]");
         cq.multiselect(listOfSelect);
 

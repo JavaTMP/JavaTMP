@@ -1,5 +1,7 @@
-package com.javatmp.module.language;
+package com.javatmp.module.language.service;
 
+import com.javatmp.module.language.entity.Languagetranslation;
+import com.javatmp.module.language.entity.Language;
 import com.javatmp.fw.data.jpa.repository.JpaRepository;
 import com.javatmp.module.user.entity.User;
 import java.util.HashMap;

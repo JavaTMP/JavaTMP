@@ -1,6 +1,6 @@
 package com.javatmp.module.timezone;
 
-import com.javatmp.module.language.Language;
+import com.javatmp.module.language.entity.Language;
 import java.io.Serializable;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;

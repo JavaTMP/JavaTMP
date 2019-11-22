@@ -1,11 +1,11 @@
 package com.javatmp.module.stats.controller;
 
 import com.javatmp.fw.data.jpa.repository.JpaRepository;
-import com.javatmp.module.country.Country;
-import com.javatmp.module.country.Country_;
-import com.javatmp.module.country.Countrytranslation;
-import com.javatmp.module.country.CountrytranslationPK_;
-import com.javatmp.module.country.Countrytranslation_;
+import com.javatmp.module.country.entity.Country;
+import com.javatmp.module.country.entity.Country_;
+import com.javatmp.module.country.entity.Countrytranslation;
+import com.javatmp.module.country.entity.CountrytranslationPK_;
+import com.javatmp.module.country.entity.Countrytranslation_;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.entity.User_;
 import java.util.List;

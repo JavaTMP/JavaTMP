@@ -1,4 +1,4 @@
-package com.javatmp.module.language;
+package com.javatmp.module.language.entity;
 
 import java.io.Serializable;
 import javax.persistence.Basic;

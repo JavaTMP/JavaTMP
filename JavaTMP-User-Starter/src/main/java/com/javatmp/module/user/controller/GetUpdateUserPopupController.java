@@ -1,11 +1,11 @@
 package com.javatmp.module.user.controller;
 
-import com.javatmp.module.country.Country;
-import com.javatmp.module.country.Countrytranslation;
-import com.javatmp.module.language.Language;
-import com.javatmp.module.language.Languagetranslation;
-import com.javatmp.module.theme.Theme;
-import com.javatmp.module.theme.Themetranslation;
+import com.javatmp.module.country.entity.Country;
+import com.javatmp.module.country.entity.Countrytranslation;
+import com.javatmp.module.language.entity.Language;
+import com.javatmp.module.language.entity.Languagetranslation;
+import com.javatmp.module.theme.entity.Theme;
+import com.javatmp.module.theme.entity.Themetranslation;
 import com.javatmp.module.timezone.Timezone;
 import com.javatmp.module.timezone.Timezonetranslation;
 import com.javatmp.module.user.entity.User;

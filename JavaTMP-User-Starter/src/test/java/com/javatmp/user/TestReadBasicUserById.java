@@ -8,7 +8,7 @@ package com.javatmp.user;
 import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
-import com.javatmp.util.JpaDaoHelper;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 
 /**
@@ -21,10 +21,8 @@ public class TestReadBasicUserById {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        JpaDaoHelper jpaDaoHelper;
         UserService userService;
-        jpaDaoHelper = new JpaDaoHelper("AppPU");
-        userService = new UserService("AppPU");
+        userService = new UserService(Persistence.createEntityManagerFactory("AppPU"));
         try {
             User user = new User(1L);
             user = userService.readBasicUserById(user);

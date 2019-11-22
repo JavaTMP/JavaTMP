@@ -7,7 +7,6 @@ package com.javatmp.timezones;
 
 import com.javatmp.module.timezone.TimezoneService;
 import com.javatmp.module.timezone.Timezonetranslation;
-import com.javatmp.util.JpaDaoHelper;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -35,9 +34,7 @@ public class TestingPopulateTimezone {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException, ParseException, UnsupportedEncodingException, IOException {
-        JpaDaoHelper jpaDaoHelper;
         TimezoneService timezoneService;
-        jpaDaoHelper = new JpaDaoHelper("AppPU");
         timezoneService = new TimezoneService(Persistence.createEntityManagerFactory("AppPU"));
 
         List<Timezonetranslation> timezones = timezoneService.getTimezones();
@@ -56,7 +53,7 @@ public class TestingPopulateTimezone {
         OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream("insertTimezone.txt"), "utf8");
         BufferedWriter bw = new BufferedWriter(writer);
 
-        final EntityManager em = jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+        final EntityManager em = timezoneService.getEntityManagerFactory().createEntityManager();
         EntityTransaction tx = null;
         try {
             tx = em.getTransaction();

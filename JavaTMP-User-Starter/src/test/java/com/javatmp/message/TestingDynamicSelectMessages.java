@@ -36,7 +36,7 @@ public class TestingDynamicSelectMessages {
      */
     public static void main(String[] args) throws SQLException, ParseException {
         UserService userService;
-        userService = new UserService("AppPU");
+        userService = new UserService(Persistence.createEntityManagerFactory("AppPU"));
         MessageService messageService = new MessageService(Persistence.createEntityManagerFactory("AppPU"), userService);
 //        messageService.generateMessages();
         Gson gson = new GsonBuilder()

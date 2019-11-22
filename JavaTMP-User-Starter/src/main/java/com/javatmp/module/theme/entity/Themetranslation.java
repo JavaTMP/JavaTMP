@@ -1,6 +1,6 @@
-package com.javatmp.module.theme;
+package com.javatmp.module.theme.entity;
 
-import com.javatmp.module.language.Language;
+import com.javatmp.module.language.entity.Language;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;

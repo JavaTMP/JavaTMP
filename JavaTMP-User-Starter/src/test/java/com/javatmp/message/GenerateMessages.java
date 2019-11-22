@@ -6,13 +6,14 @@
 package com.javatmp.message;
 
 import com.javatmp.module.message.entity.Message;
+import com.javatmp.module.message.service.MessageService;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
-import com.javatmp.util.JpaDaoHelper;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -25,15 +26,14 @@ public class GenerateMessages {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        JpaDaoHelper jpaDaoHelper;
         UserService userService;
-        jpaDaoHelper = new JpaDaoHelper("AppPU");
-        userService = new UserService("AppPU");
+        userService = new UserService(Persistence.createEntityManagerFactory("AppPU"));
+        MessageService messageService = new MessageService(Persistence.createEntityManagerFactory("AppPU"), userService);
         List<User> users = userService.findAll(0, Integer.MAX_VALUE);
-        generateMessages(jpaDaoHelper, users);
+        generateMessages(messageService, users);
     }
 
-    public static void generateMessages(JpaDaoHelper jpaDaoHelper, List<User> users) {
+    public static void generateMessages(MessageService messageService, List<User> users) {
         Long counter = 0L;
         Random rand = new Random();
 
@@ -75,7 +75,7 @@ public class GenerateMessages {
                 }
 
                 message.setCreationDate(calendar.getTime());
-                jpaDaoHelper.create(message);
+                messageService.save(message);
             }
         }
     }

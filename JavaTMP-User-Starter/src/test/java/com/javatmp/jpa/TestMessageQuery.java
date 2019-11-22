@@ -7,7 +7,8 @@ package com.javatmp.jpa;
 
 import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.module.message.entity.Message;
-import com.javatmp.util.JpaDaoHelper;
+import com.javatmp.module.message.service.MessageService;
+import com.javatmp.module.user.service.UserService;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
@@ -16,6 +17,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -36,8 +39,11 @@ public class TestMessageQuery {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        JpaDaoHelper jpaDaoHelper = new JpaDaoHelper("AppPU");
-        EntityManager em = jpaDaoHelper.getEntityManagerFactory().createEntityManager();
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("AppPU");
+        UserService userService;
+        userService = new UserService(emf);
+        MessageService messageService = new MessageService(emf, userService);
+        EntityManager em = emf.createEntityManager();
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 //        String[] selects = new String[]{"messageId", "messageTitle", "creationDate", "fromUserId",
 //            "toUserId", "fromUser.profilePicDocument.contentType", "fromUser.profilePicDocument.documentName",
@@ -47,7 +53,7 @@ public class TestMessageQuery {
         CriteriaQuery<Object[]> cq = criteriaBuilder.createQuery(Object[].class);
         Root<Message> from = cq.from(Message.class);
 
-        List<Selection<?>> listOfSelect = jpaDaoHelper.convertArrToPaths(from, selects);
+        List<Selection<?>> listOfSelect = messageService.convertArrToPaths(from, selects);
         System.out.println("size [" + listOfSelect.size() + "]");
         cq.multiselect(listOfSelect);
 

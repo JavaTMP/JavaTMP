@@ -5,11 +5,9 @@
  */
 package com.javatmp.country;
 
-import com.javatmp.module.country.CountryService;
-import com.javatmp.module.country.Countrytranslation;
-import com.javatmp.module.language.LanguageService;
+import com.javatmp.module.country.service.CountryService;
+import com.javatmp.module.country.entity.Countrytranslation;
 import com.javatmp.module.user.entity.User;
-import com.javatmp.util.JpaDaoHelper;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -26,11 +24,8 @@ public class FetchingCountries {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws SQLException, ParseException, IOException {
-        JpaDaoHelper jpaDaoHelper;
         CountryService countryService;
-        jpaDaoHelper = new JpaDaoHelper("AppPU");
         countryService = new CountryService(Persistence.createEntityManagerFactory("AppPU"));
-        LanguageService languageService = new LanguageService(Persistence.createEntityManagerFactory("AppPU"));
 
         List<Countrytranslation> countries = countryService.getCountries();
 

@@ -7,24 +7,18 @@ package com.javatmp.user;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.javatmp.*;
-import com.javatmp.module.message.entity.Message;
-import com.javatmp.module.message.service.MessageService;
-import com.javatmp.module.user.entity.User;
-import com.javatmp.fw.mvc.MvcHelper;
-import com.javatmp.fw.mvc.adapter.ClassTypeAdapter;
-import com.javatmp.fw.mvc.adapter.OrderDirTypeAdapter;
 import com.javatmp.fw.domain.table.DataTableRequest;
 import com.javatmp.fw.domain.table.DataTableResults;
 import com.javatmp.fw.domain.table.OrderDir;
-import com.javatmp.util.JpaDaoHelper;
-import com.javatmp.module.user.service.UserService;
 import com.javatmp.fw.domain.table.RuleOrGroup;
+import com.javatmp.fw.mvc.MvcHelper;
+import com.javatmp.fw.mvc.adapter.ClassTypeAdapter;
+import com.javatmp.fw.mvc.adapter.OrderDirTypeAdapter;
+import com.javatmp.module.user.entity.User;
+import com.javatmp.module.user.service.UserService;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.util.List;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.Predicate;
+import javax.persistence.Persistence;
 
 /**
  *
@@ -66,10 +60,9 @@ public class TestingDynamicSelectUsers {
 //            return;
 //        }
 
-        JpaDaoHelper jpaDaoHelper;
-        jpaDaoHelper = new JpaDaoHelper("AppPU");
+        UserService userService = new UserService(Persistence.createEntityManagerFactory("AppPU"));
 
-        DataTableResults<User> dataTableResult = jpaDaoHelper.retrievePageRequestDetails(tableRequest);
+        DataTableResults<User> dataTableResult = userService.retrievePageRequestDetails(tableRequest);
 
         System.out.println(MvcHelper.deepToString(dataTableResult));
         System.out.println(dataTableResult.getRecordsTotal());
