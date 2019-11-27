@@ -40,7 +40,9 @@ public class TestStreamList {
 
             System.out.println("user [" + user.getId() + "]");
             user.setAddress("here");
-            em.getTransaction().rollback();
+//            em.getTransaction().rollback();
+            System.out.println(em.getTransaction().isActive());
+            em.getTransaction().commit();
         } catch (PersistenceException e) {
             em.getTransaction().rollback();
             Throwable t = e;
