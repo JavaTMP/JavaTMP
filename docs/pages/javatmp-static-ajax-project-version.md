@@ -3,6 +3,7 @@ title: JavaTMP-Static-Ajax Project Version
 ---
 # {{ page.title }}
 
+**(Deprecated and will be merged and be part of dynamic product version 0.0.13)**
 `./JavaTMP/JavaTMP-Static-Ajax` Folder
 ----------------------------------------------
 

@@ -7,6 +7,7 @@ Your purchased package contains separate folder for each template. The following
 of purchased JavaTMP project package with its description and usage:
 
 ```
+**(Deprecated and will be merged and be part of dynamic product version 0.0.13)**
 JavaTMP-html.zip (JavaTMP Static HTML Bootstrap Admin and Dashboard components template)
 |---readme.md (read me file)
 |---LICENSE (end-user license agreement (EULA) and copyright information file)
