@@ -1,4 +1,6 @@
+'use strict';
 
+var cp = require("child_process");
 var gulp = require('gulp');
 var git = require('gulp-git');
 var fs = require('fs');
@@ -66,7 +68,7 @@ gulp.task('update-version', function (cb) {
 
 gulp.task('clean', function (cb) {
 //    del.sync(['./temp', './dist'], cb());
-    del.sync(['./temp'], cb());
+    return del(['./temp'], cb);
 });
 gulp.task('copy-JavaTMP-Static-Ajax', function (cb) {
     return gulp
@@ -86,13 +88,42 @@ gulp.task('copy-JavaTMP-User-Starter', function (cb) {
             .src([
                 './JavaTMP-User-Starter/**/*',
                 '!**/node_modules{,/**}',
-                '!**/nbproject/private{,/**}',
-                '!**/package-lock.json'
+                '!**/nbproject{,/**}',
+                '!**/.settings{,/**}',
+                '!**/logs{,/**}',
+                '!**/package-lock.json',
+                '!./JavaTMP-User-Starter/.project',
+                '!./JavaTMP-User-Starter/.classpath',
+                '!./JavaTMP-User-Starter/nb-configuration.xml',
+                '!./JavaTMP-User-Starter/target{,/**}'
             ], {dot: true})
             .pipe(gulp.dest("temp/JavaTMP-User-Starter"))
             .on('end', function () {
                 cb();
             });
+});
+
+function callExec(command, args, cb) {
+    const call = cp.exec(command, args);
+    // stdout
+    call.stdout.on('data', function (data) {
+        // like console.log, but without the trailing newline
+        process.stdout.write(data.toString());
+    });
+    // stderr
+    call.stderr.on('data', function (data) {
+        console.log(data.toString());
+        cb(data.toString());
+    });
+    call.on('exit', function (code) {
+        console.log('child process exited with code ' + code.toString());
+        cb();
+    });
+}
+
+gulp.task('run-maven', function (cb) {
+    // In gulp 4, you can return a child process to signal task completion
+    callExec('mvn clean install', {cwd: "./temp/online-java-user-demo-starter"}, cb);
 });
 gulp.task('license-javatmp-static-ajax', function (cb) {
     return gulp
@@ -117,7 +148,11 @@ gulp.task('save-project-online-static-demo', function (cb) {
 });
 gulp.task('save-project-online-java-user-demo-starter', function (cb) {
     return gulp
-            .src(['temp/JavaTMP-User-Starter/build/web/**/*'], {dot: true})
+            .src([
+                'temp/JavaTMP-User-Starter/**/*',
+                "!temp/JavaTMP-User-Starter/web{,/**}",
+                "!temp/JavaTMP-User-Starter/db_scripts{,/**}"
+            ], {dot: true})
             .pipe(gulp.dest("temp/online-java-user-demo-starter"))
             .on('end', function () {
                 cb();
@@ -191,17 +226,24 @@ gulp.task('generate-online-java-user-demo-starter-war', function (cb) {
                 cb();
             });
 });
+gulp.task('copy-online-java-user-demo-starter-war', function (cb) {
+    return gulp.src(['./temp/online-java-user-demo-starter/target/JavaTMP-User-Starter.war'], {dot: true})
+            .pipe(gulp.dest('dist'))
+            .on('end', function () {
+                cb();
+            });
+});
 gulp.task('remove-online-static-demos-folders', function (cb) {
     del.sync([
         'temp/online-static-demo'
     ], cb());
 });
 gulp.task('remove-online-java-demos-folders', function (cb) {
-    del.sync([
+    return del([
         'temp/online-java-user-demo-starter',
         'temp/JavaTMP-User-Starter/build',
         'temp/JavaTMP-User-Starter/dist'
-    ], cb());
+    ], cb);
 });
 gulp.task('copy-readme', function (cb) {
     return gulp
@@ -274,10 +316,12 @@ gulp.task('generate-java-project',
                 'process-javatmp-user-starter',
                 'remove-demo-assets-src',
                 'process-online-java-user-demo-starter',
-                'generate-online-java-user-demo-starter-war',
+                'run-maven',
+                'copy-online-java-user-demo-starter-war',
                 'remove-online-java-demos-folders',
                 'copy-readme',
                 'zip-java',
+                "clean",
                 function (cb) {
                     cb();
                 })
