@@ -123,7 +123,7 @@ function callExec(command, args, cb) {
 
 gulp.task('run-maven', function (cb) {
     // In gulp 4, you can return a child process to signal task completion
-    callExec('mvn clean install', {cwd: "./temp/online-java-user-demo-starter"}, cb);
+    callExec('mvn clean package', {cwd: "./temp/online-java-user-demo-starter"}, cb);
 });
 gulp.task('license-javatmp-static-ajax', function (cb) {
     return gulp
