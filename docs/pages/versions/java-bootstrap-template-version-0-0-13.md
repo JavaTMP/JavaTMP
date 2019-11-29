@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.13 (Current Development Version)
 ---
 # {{ page.title }}
 
-## 85be91a on Nov 29, 2019, 3:48 PM GMT+4
+## 50190f5 on Nov 29, 2019, 7:23 PM GMT+4
 - Merge static pages into java version and rename all their extension to .jsp instead of .html.
 - Update the following dependencies in package.json:
     - bootstrap from 4.3.1 to 4.4.1
