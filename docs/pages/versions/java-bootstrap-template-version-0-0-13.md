@@ -5,6 +5,14 @@ title: Java Bootstrap Template Version 0.0.13 (Current Development Version)
 
 ## 85be91a on Nov 29, 2019, 3:48 PM GMT+4
 - Merge static pages into java version and rename all their extension to .jsp instead of .html.
+- Update the following dependencies in package.json:
+    - bootstrap from 4.3.1 to 4.4.1
+    - bootswatch from 4.3.1 to 4.4.0
+    - echarts from 4.4.0 to 4.5.0
+    - handlebars from 4.5.1 to 4.5.3
+    - yargs from 14.2.0 to 15.0.2
+- Run npm install to fetch new dependencies to ./node_modules folder.
+- Run gulp default to regenerate dist folders.
 
 ## 250ed5b on Nov 22, 2019, 8:30 PM GMT+4
 - Generic repository using the JPA Criteria API `JpaRepository` and remove JpaDaoHelper class and refactor all classes.
