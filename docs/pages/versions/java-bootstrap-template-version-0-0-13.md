@@ -3,6 +3,9 @@ title: Java Bootstrap Template Version 0.0.13 (Current Development Version)
 ---
 # {{ page.title }}
 
+## 85be91a on Nov 29, 2019, 3:48 PM GMT+4
+- Merge static pages into java version and rename all their extension to .jsp instead of .html.
+
 ## 250ed5b on Nov 22, 2019, 8:30 PM GMT+4
 - Generic repository using the JPA Criteria API `JpaRepository` and remove JpaDaoHelper class and refactor all classes.
 
