@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content grid-gutter-padding">
     <h4 class="my-3">Bootstrap Input Spinner Plugin</h4>
     <hr/>
@@ -142,7 +143,7 @@
 
                             <p>
                                 Suffix
-                                <input data-suffix="°C" value="50" min="0" max="100" type="number" style="display: none;">
+                                <input data-suffix="Â°C" value="50" min="0" max="100" type="number" style="display: none;">
                             </p>
 
 

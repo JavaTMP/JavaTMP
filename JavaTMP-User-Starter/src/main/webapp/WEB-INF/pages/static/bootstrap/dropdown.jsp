@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content grid-gutter-padding">
     <div class="row">
         <div class="col">
@@ -465,7 +466,7 @@
                     </div>
                     <hr/>
                     <h4 class="card-title text-primary">Text</h4>
-                    <p>Place any freeform text within a dropdown menu with text and use spacing utilities. Note that you’ll likely need additional sizing styles to constrain the menu width.</p>
+                    <p>Place any freeform text within a dropdown menu with text and use spacing utilities. Note that youâll likely need additional sizing styles to constrain the menu width.</p>
                     <div class="bd-example">
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

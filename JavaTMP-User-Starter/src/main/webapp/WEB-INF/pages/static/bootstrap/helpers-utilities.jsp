@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content grid-gutter-padding">
     <h4 class="my-3">Bootstrap helper and utilities classes</h4>
     <hr/>
@@ -72,8 +73,8 @@
                     </div>
                     <hr/>
                     <h4 class="card-title text-primary">Negative margin</h4>
-                    <p>In CSS, <code class="highlighter-rouge">margin</code> properties can utilize negative values (<code class="highlighter-rouge">padding</code> cannot). As of 4.2, we’ve added negative margin utilities for every non-zero integer size listed above (e.g., <code class="highlighter-rouge">1</code>, <code class="highlighter-rouge">2</code>, <code class="highlighter-rouge">3</code>, <code class="highlighter-rouge">4</code>, <code class="highlighter-rouge">5</code>). These utilities are ideal for customizing grid column gutters across breakpoints.</p>
-                    <p>The syntax is nearly the same as the default, positive margin utilities, but with the addition of <code class="highlighter-rouge">n</code> before the requested size. Here’s an example class that’s the opposite of <code class="highlighter-rouge">.mt-1</code>:</p>
+                    <p>In CSS, <code class="highlighter-rouge">margin</code> properties can utilize negative values (<code class="highlighter-rouge">padding</code> cannot). As of 4.2, weâve added negative margin utilities for every non-zero integer size listed above (e.g., <code class="highlighter-rouge">1</code>, <code class="highlighter-rouge">2</code>, <code class="highlighter-rouge">3</code>, <code class="highlighter-rouge">4</code>, <code class="highlighter-rouge">5</code>). These utilities are ideal for customizing grid column gutters across breakpoints.</p>
+                    <p>The syntax is nearly the same as the default, positive margin utilities, but with the addition of <code class="highlighter-rouge">n</code> before the requested size. Hereâs an example class thatâs the opposite of <code class="highlighter-rouge">.mt-1</code>:</p>
                     <div class="row mx-md-n5">
                         <div class="col px-md-5"><div class="p-3 border bg-light">Custom column padding</div></div>
                         <div class="col px-md-5"><div class="p-3 border bg-light">Custom column padding</div></div>

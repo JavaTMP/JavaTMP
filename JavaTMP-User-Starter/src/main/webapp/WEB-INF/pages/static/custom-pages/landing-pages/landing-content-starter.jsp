@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html lang="en" dir="ltr" class="">
     <head>
@@ -121,19 +122,19 @@
                             <span class="anchor" id="sec3"></span>
                             <h4>Compatible</h4>
                             <p>Bootstrap is a mature, tested code-base that is entirely based on standards and cross-browser compliance. Sites that properly utilize what
-                                Bootstrap offers will also benefit from this compatibility. The CSS is the most essential part of Bootstrap. The Bootstrap CSS can be used alone, without the Bootstrap JavaScript components. Generally speaking, Bootstrap’s CSS provides two things…</p>
+                                Bootstrap offers will also benefit from this compatibility. The CSS is the most essential part of Bootstrap. The Bootstrap CSS can be used alone, without the Bootstrap JavaScript components. Generally speaking, Bootstrapâs CSS provides two thingsâ¦</p>
 
                             <div class="pl-4">
                                 <span class="anchor" id="sec3a"></span>
                                 <h6>Element Styles</h6>
                                 <p>
-                                    These are built-in styles for HTML elements such as Buttons, fonts, colors, badges, typography, progress bars, alerts, etc… Using any of these Bootstrap Components is very easy. It’s just a matter of referencing the appropriate Bootstrap CSS class in the HTML markup.
+                                    These are built-in styles for HTML elements such as Buttons, fonts, colors, badges, typography, progress bars, alerts, etcâ¦ Using any of these Bootstrap Components is very easy. Itâs just a matter of referencing the appropriate Bootstrap CSS class in the HTML markup.
                                 </p>
                                 <br>
 
                                 <span class="anchor" id="sec3b"></span>
                                 <h6>The Bootstrap Grid</h6>
-                                <p>Layout helpers using “rows” and “columns”. The Bootstrap Grid System is used for layout, specifically Responsive Layouts. Understanding how it works is vital to understanding Bootstrap. The Grid is made up of groupings of Rows & Columns inside 1 or more Containers.</p>
+                                <p>Layout helpers using ârowsâ and âcolumnsâ. The Bootstrap Grid System is used for layout, specifically Responsive Layouts. Understanding how it works is vital to understanding Bootstrap. The Grid is made up of groupings of Rows & Columns inside 1 or more Containers.</p>
                             </div>
 
                             <hr>
@@ -144,13 +145,13 @@
 
                             <span class="anchor" id="sec5"></span>
                             <h4>Creating Themes</h4>
-                            <p>Of course customization is important since not everyone wants that overly recognizable Bootstrap look. Using the methods (CSS or SASS) described it’s fairly easy to transform your Bootstrap 4 sites with a unique look. Once you understand the basic of customization you're on the way to creating custom Bootstrap themes.</p>
+                            <p>Of course customization is important since not everyone wants that overly recognizable Bootstrap look. Using the methods (CSS or SASS) described itâs fairly easy to transform your Bootstrap 4 sites with a unique look. Once you understand the basic of customization you're on the way to creating custom Bootstrap themes.</p>
 
                             <span class="anchor" id="sec6"></span>
                             <h4>JavaScript</h4>
-                            <p>The Bootstrap documentation, has a very large “Components” section that includes most of the stylized CSS Components that I explained before. However, there’s overlap between the Bootstrap CSS and JavaScript Components. CSS is used to style Components, while JavaScript is used to make Components functional.
+                            <p>The Bootstrap documentation, has a very large âComponentsâ section that includes most of the stylized CSS Components that I explained before. However, thereâs overlap between the Bootstrap CSS and JavaScript Components. CSS is used to style Components, while JavaScript is used to make Components functional.
 
-                                Some Bootstrap Components only provide CSS-driven formatting and style so they don’t utilize JavaScript. These CSS-only Components were explored earlier in the Bootstrap CSS section: Badges, Breadcrumbs, Buttons, Cards, Form inputs, Jumbotron, Pagination.</p>
+                                Some Bootstrap Components only provide CSS-driven formatting and style so they donât utilize JavaScript. These CSS-only Components were explored earlier in the Bootstrap CSS section: Badges, Breadcrumbs, Buttons, Cards, Form inputs, Jumbotron, Pagination.</p>
                         </div>
                         <div class="col-lg-4 col-12">
                             <div class="card mb-3">
@@ -270,7 +271,7 @@
                         <hr>
                         <div class="row f-flex justify-content-between" style="justify-content: space-between;">
                             <div class="col-md-8 text-xs-center  text-left text-secondary my-1">
-                                <p class="mt-2  text-light"> © Copyright 2017 • All Rights Reserved |
+                                <p class="mt-2  text-light"> Â© Copyright 2017 â¢ All Rights Reserved |
                                     <a class=" " href="javascript:;">Disclaimer</a> |
                                     <a class=" " href="javascript:;">Contact</a>
                                 </p>

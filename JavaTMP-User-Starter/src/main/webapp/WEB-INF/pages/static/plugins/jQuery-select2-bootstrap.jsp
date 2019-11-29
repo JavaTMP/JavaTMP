@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content grid-gutter-padding">
     <div class="row">
         <div class="col-lg-12">
@@ -561,7 +562,7 @@
                                     </select>
                                     <span class="input-group-append">
                                         <div class="input-group-text">
-                                            … is my favorite!
+                                            â¦ is my favorite!
                                         </div>
                                     </span>
                                 </div>

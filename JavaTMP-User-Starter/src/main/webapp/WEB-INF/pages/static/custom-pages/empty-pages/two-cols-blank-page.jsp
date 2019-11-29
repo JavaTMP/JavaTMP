@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content grid-gutter-padding">
     <h2 class="text-primary text-truncate my-3">Two Columns Blank Page Title</h2>
     <div class="row d-flex justify-content-center">

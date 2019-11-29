@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content grid-gutter-padding">
     <h4 class="my-3">Free Bootstrap 4 Themes by DevExpress</h4>
     <hr/>

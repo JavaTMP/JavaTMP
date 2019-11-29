@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content grid-gutter-padding">
     <div class="row">
         <div class="col-lg-12">
@@ -84,7 +85,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <p class="modal-title">Heading</p>
-                    <button class="close" type="button" data-dismiss="modal">×</button>
+                    <button class="close" type="button" data-dismiss="modal">Ã</button>
                 </div>
                 <div class="modal-body">
                     <img id="image-gallery-image" class="img-thumbnail img-fluid" style="margin-left: auto; margin-right: auto;" src=""/>

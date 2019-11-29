@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content grid-gutter-padding">
     <div class="row">
         <div class="col-lg-12">
@@ -318,7 +319,7 @@
                             </button>
                             <button type="button" class="btn btn-secondary" data-method="rotateTo" data-option="180">
                                 <span class="docs-tooltip" data-toggle="tooltip" data-animation="false" title="cropper.rotateTo(180)">
-                                    Rotate 180°
+                                    Rotate 180Â°
                                 </span>
                             </button>
                             <button type="button" class="btn btn-secondary" data-method="scale" data-option="-2" data-second-option="-1">

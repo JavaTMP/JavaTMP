@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
     <h4 class="m-3">Contact Us Blocks</h4>
     <hr class="mx-3"/>
@@ -113,7 +114,7 @@
                     <div class="row text-center justify-content-center">
                         <div class="col-12 col-md-8 col-lg-7">
                             <h1>Contact Us</h1>
-                            <p class="text-h3 mt-3 mb-5">If you’re already an active user, please
+                            <p class="text-h3 mt-3 mb-5">If youâre already an active user, please
                                 <a href="javascript:;">sign in</a> before contacting us.</p>
                         </div>
                     </div>

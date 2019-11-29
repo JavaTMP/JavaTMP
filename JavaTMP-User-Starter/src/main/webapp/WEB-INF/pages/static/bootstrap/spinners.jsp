@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content grid-gutter-padding">
     <div class="row">
         <div class="col">
@@ -45,7 +46,7 @@
                         <span class="sr-only">Loading...</span>
                     </div>
                     <h4 class="card-title text-primary">Growing spinner</h4>
-                    <p class="">If you don’t fancy a border spinner, switch to the grow spinner. While it doesn’t technically spin, it does repeatedly grow!.</p>
+                    <p class="">If you donât fancy a border spinner, switch to the grow spinner. While it doesnât technically spin, it does repeatedly grow!.</p>
                     <div class="spinner-grow" role="status">
                         <span class="sr-only">Loading...</span>
                     </div>

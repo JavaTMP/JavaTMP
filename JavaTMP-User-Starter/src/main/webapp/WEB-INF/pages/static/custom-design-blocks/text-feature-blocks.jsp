@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
     <h4 class="m-3">Features And Services Blocks</h4>
     <hr class="mx-3"/>
@@ -1264,7 +1265,7 @@
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3 col-xl-2 ml-xl-auto mr-xl-auto pt-3 pt-lg-0">
                             <h3><strong>Feature 4</strong></h3>
-                            <p>But nothing the copy said could convince her and so it didn’t take long</p>
+                            <p>But nothing the copy said could convince her and so it didnât take long</p>
                         </div>
                     </div>
                     <div class="row text-left justify-content-sm-center pt-3 pt-lg-5">
@@ -1282,7 +1283,7 @@
                         </div>
                         <div class="col-12 col-sm-6 col-lg-3 col-xl-2 ml-xl-auto mr-xl-auto pt-3 pt-lg-0">
                             <h3><strong>Feature 8</strong></h3>
-                            <p>But nothing the copy said could convince her and so it didn’t take long</p>
+                            <p>But nothing the copy said could convince her and so it didnât take long</p>
                         </div>
                     </div>
                 </div>

@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content grid-gutter-padding">
     <h4 class="my-3">Font Awesome Animation Icons Set</h4>
     <hr/>

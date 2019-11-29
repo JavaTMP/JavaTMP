@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content grid-gutter-padding">
     <div class="row">
         <div class="col">
@@ -376,7 +377,7 @@
                     </form>
                     <hr/>
                     <h4 class="card-title text-primary">Column sizing</h4>
-                    <p>As shown in the previous examples, our grid system allows you to place any number of <code class="highlighter-rouge">.col</code>s within a <code class="highlighter-rouge">.row</code> or <code class="highlighter-rouge">.form-row</code>. They’ll split the available width equally between them. You may also pick a subset of your columns to take up more or less space, while the remaining <code class="highlighter-rouge">.col</code>s equally split the rest, with specific column classes like <code class="highlighter-rouge">.col-7</code>.</p>
+                    <p>As shown in the previous examples, our grid system allows you to place any number of <code class="highlighter-rouge">.col</code>s within a <code class="highlighter-rouge">.row</code> or <code class="highlighter-rouge">.form-row</code>. Theyâll split the available width equally between them. You may also pick a subset of your columns to take up more or less space, while the remaining <code class="highlighter-rouge">.col</code>s equally split the rest, with specific column classes like <code class="highlighter-rouge">.col-7</code>.</p>
                     <form>
                         <div class="form-row">
                             <div class="col-7">
@@ -894,10 +895,10 @@
                     <h4 class="card-title text-primary">Range</h4>
                     <label for="customRange1">Example range</label>
                     <input type="range" class="custom-range" id="customRange1">
-                    <p>Range inputs have implicit values for <code class="highlighter-rouge">min</code> and <code class="highlighter-rouge">max</code>—<code class="highlighter-rouge">0</code> and <code class="highlighter-rouge">100</code>, respectively. You may specify new values for those using the <code class="highlighter-rouge">min</code> and <code class="highlighter-rouge">max</code> attributes.</p>
+                    <p>Range inputs have implicit values for <code class="highlighter-rouge">min</code> and <code class="highlighter-rouge">max</code>â<code class="highlighter-rouge">0</code> and <code class="highlighter-rouge">100</code>, respectively. You may specify new values for those using the <code class="highlighter-rouge">min</code> and <code class="highlighter-rouge">max</code> attributes.</p>
                     <label for="customRange2">Example range</label>
                     <input type="range" class="custom-range" min="0" max="5" id="customRange2">
-                    <p>By default, range inputs “snap” to integer values. To change this, you can specify a <code class="highlighter-rouge">step</code> value. In the example below, we double the number of steps by using <code class="highlighter-rouge">step="0.5"</code>.</p>
+                    <p>By default, range inputs âsnapâ to integer values. To change this, you can specify a <code class="highlighter-rouge">step</code> value. In the example below, we double the number of steps by using <code class="highlighter-rouge">step="0.5"</code>.</p>
                     <label for="customRange3">Example range</label>
                     <input type="range" class="custom-range" min="0" max="5" step="0.5" id="customRange3">
                 </div>

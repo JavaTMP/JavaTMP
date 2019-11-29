@@ -545,7 +545,7 @@
                             </li>
                             <li>
                                 <a class="has-arrow" href="#">
-                                    <i class="fas fa-lg fa-fw fa-wrench"></i>
+                                    <i class="far fa-lg fa-fw fa-object-group"></i>
                                     Static Demo Pages
                                 </a>
                                 <ul>

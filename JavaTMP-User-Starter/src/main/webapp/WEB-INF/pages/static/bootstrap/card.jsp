@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content grid-gutter-padding">
     <div class="row">
         <div class="col">
@@ -534,7 +535,7 @@
                     </div>
                     <h4 class="card-title text-primary">Card columns</h4>
                     <p>Cards can be organized into <a href="https://masonry.desandro.com/">Masonry</a>-like columns with just CSS by wrapping them in <code class="highlighter-rouge">.card-columns</code>. Cards are built with CSS <code class="highlighter-rouge">column</code> properties instead of flexbox for easier alignment. Cards are ordered from top to bottom and left to right.</p>
-                    <p><strong>Heads up!</strong> Your mileage with card columns may vary. To prevent cards breaking across columns, we must set them to <code class="highlighter-rouge">display: inline-block</code> as <code class="highlighter-rouge">column-break-inside: avoid</code> isn’t a bulletproof solution yet.</p>
+                    <p><strong>Heads up!</strong> Your mileage with card columns may vary. To prevent cards breaking across columns, we must set them to <code class="highlighter-rouge">display: inline-block</code> as <code class="highlighter-rouge">column-break-inside: avoid</code> isnât a bulletproof solution yet.</p>
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="bd-example">

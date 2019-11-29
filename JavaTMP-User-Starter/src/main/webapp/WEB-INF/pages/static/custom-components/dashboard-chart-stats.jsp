@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content grid-gutter-padding">
     <div class="form-row mt-3">
         <div class="col-xl-3 col-lg-6 col-md-6">

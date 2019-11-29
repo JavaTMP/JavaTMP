@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
     <h4 class="m-3">Header Image Blocks</h4>
     <hr class="mx-3"/>
@@ -201,7 +202,7 @@
                                 <h1 class="display-3">Blog title goes here</h1>
                                 <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
                                 <p>
-                                    <a class="btn btn-primary btn-lg" href="javascript:;" role="button">Learn more »</a>
+                                    <a class="btn btn-primary btn-lg" href="javascript:;" role="button">Learn more Â»</a>
                                 </p>
                             </div>
                             <div class="col-md-3">
@@ -397,7 +398,7 @@
                                 <h1 class="display-3">Hello, world!</h1>
                                 <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
                                 <p>
-                                    <a class="btn btn-primary btn-lg" href="javascript:;" role="button">Learn more »</a>
+                                    <a class="btn btn-primary btn-lg" href="javascript:;" role="button">Learn more Â»</a>
                                 </p>
                             </div>
                             <div class="col-md-3">

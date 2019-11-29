@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content grid-gutter-padding">
     <div class="row">
         <div class="col-lg-12">
@@ -531,7 +532,7 @@
 
                 var my_prettify = function (n) {
                     var num = Math.log2(n);
-                    return n + " → " + (+num.toFixed(3));
+                    return n + " â " + (+num.toFixed(3));
                 };
 
                 var demosGenerator = function (skinType) {

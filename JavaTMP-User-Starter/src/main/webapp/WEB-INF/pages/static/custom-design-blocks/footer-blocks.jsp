@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
     <h4 class="m-3">Footer Blocks</h4>
     <hr class="mx-3"/>
@@ -49,7 +50,7 @@
                         </div>
                         <div class="row mt-5">
                             <div class="col text-center">
-                                © 2018 JavaTMP. All Rights Reserved
+                                Â© 2018 JavaTMP. All Rights Reserved
                             </div>
                         </div>
                     </div>
@@ -78,7 +79,7 @@
                                         <a class="nav-link" href="javascript:;">About</a>
                                     </li>
                                 </ul>
-                                <p class="text-h5 mt-4">© 2013-2018 JavaTMP</p>
+                                <p class="text-h5 mt-4">Â© 2013-2018 JavaTMP</p>
                             </div>
                         </div>
                     </div>
@@ -118,7 +119,7 @@
                     <div class="container">
                         <div class="row text-center">
                             <div class="col-12">
-                                <h1>Made with <span class="heart">❤</span> by @JavaTMP</h1>
+                                <h1>Made with <span class="heart">â¤</span> by @JavaTMP</h1>
                             </div>
                         </div>
                     </div>
@@ -142,7 +143,7 @@
                                         <a class="nav-link" href="javascript:;">About</a>
                                     </li>
                                 </ul>
-                                <p class="text-h5 mt-5">© 2013-2018 JavaTMP</p>
+                                <p class="text-h5 mt-5">Â© 2013-2018 JavaTMP</p>
                             </div>
                         </div>
                     </div>
@@ -170,7 +171,7 @@
                                 </ul>
                             </div>
                             <div class="col-12 col-md-4 mt-4 mt-md-0 text-center text-md-right">
-                                © 2018 JavaTMP. All Rights Reserved
+                                Â© 2018 JavaTMP. All Rights Reserved
                             </div>
                         </div>
                     </div>
@@ -199,7 +200,7 @@
                                         <a class="nav-link" href="javascript:;">About</a>
                                     </li>
                                 </ul>
-                                <p class="text-h5 mt-4">© 2013-2018 JavaTMP</p>
+                                <p class="text-h5 mt-4">Â© 2013-2018 JavaTMP</p>
                             </div>
                         </div>
                     </div>
@@ -269,7 +270,7 @@
                                 </ul>
                             </div>
                             <div class="col-12 col-md-4 mt-4 mt-md-0 text-center text-md-right">
-                                © 2018 JavaTMP. All Rights Reserved
+                                Â© 2018 JavaTMP. All Rights Reserved
                             </div>
                         </div>
                     </div>
@@ -323,7 +324,7 @@
                                 <path fill="currentColor" d="M196.77 471.5V154.43h124.15c54.27 0 91 31.64 91 79.1 0 33-24.17 63.72-54.71 69.21v1.76c43.07 5.49 70.75 35.82 70.75 78 0 55.81-40 89-107.45 89zm39.55-180.4h63.28c46.8 0 72.29-18.68 72.29-53 0-31.42-21.53-48.78-60-48.78h-75.57zm78.22 145.46c47.68 0 72.73-19.34 72.73-56s-25.93-55.37-76.46-55.37h-74.49v111.4z"></path>
                                 </svg>
                             </a>
-                            <small class="d-block mb-3 text-muted">© 2017-2018</small>
+                            <small class="d-block mb-3 text-muted">Â© 2017-2018</small>
                         </div>
                         <div class="col-6 col-md">
                             <h5>Features</h5>
@@ -432,7 +433,7 @@
                         </div>
                         <div class="row mt-4">
                             <div class="col text-center">
-                                © 2018 JavaTMP. All Rights Reserved
+                                Â© 2018 JavaTMP. All Rights Reserved
                             </div>
                         </div>
                     </div>
@@ -531,7 +532,7 @@
                             <hr>
                             <div class="row f-flex justify-content-between" style="justify-content: space-between;">
                                 <div class="col-md-8 text-xs-center  text-left text-secondary my-1">
-                                    <p class="mt-2  text-light"> © Copyright 2018 • All Rights Reserved |
+                                    <p class="mt-2  text-light"> Â© Copyright 2018 â¢ All Rights Reserved |
                                         <a class=" " href="javascript:;">Disclaimer</a> |
                                         <a class=" " href="javascript:;">Contact</a>
                                     </p>
@@ -584,7 +585,7 @@
                                 </ul>
                             </div>
                             <div class="col-12 col-md-4 mt-4 mt-md-0 text-md-right">
-                                © 2013-2018 JavaTMP
+                                Â© 2013-2018 JavaTMP
                             </div>
                         </div>
                     </div>
@@ -626,7 +627,7 @@
                         </div>
                         <div class="row align-items-center text-center">
                             <div class="col-12 col-lg-4 text-lg-left">
-                                © 2018 JavaTMP
+                                Â© 2018 JavaTMP
                             </div>
                             <div class="col-12 col-lg-4 mt-4 mt-lg-0">
                                 <img alt="image" src="http://via.placeholder.com/102x40/007bff/ffffff?text=L O G O" height="40">
@@ -654,7 +655,7 @@
                     <div class="container">
                         <div class="row f-flex justify-content-between" style="justify-content: space-between;">
                             <div class="col-md-5 text-xs-center  text-center text-secondary my-1">
-                                <p class="mt-2  text-light">© 2017 |
+                                <p class="mt-2  text-light">Â© 2017 |
                                     <a class="text-light" href="javascript:;">Disclaimer</a> |
                                     <a class="text-light" href="javascript:;">Contact</a>
                                 </p>
@@ -698,7 +699,7 @@
                                 <img alt="image" src="http://via.placeholder.com/102x40/007bff/ffffff?text=L O G O" height="40">
                             </div>
                             <div class="col-12 col-sm-6 col-md-4 mt-4 mt-sm-0 text-center text-sm-right text-md-center">
-                                © 2013-2018 JavaTMP
+                                Â© 2013-2018 JavaTMP
                             </div>
                             <div class="col-12 col-md-4 mt-4 mt-md-0 text-center text-md-right">
                                 <a href="javascript:;">
@@ -725,7 +726,7 @@
             <section class="">
                 <footer class="my-1 text-muted text-center text-small">
                     <div class="container">
-                        <p class="mb-1">© 2017-2018 Company Name</p>
+                        <p class="mb-1">Â© 2017-2018 Company Name</p>
                         <ul class="list-inline">
                             <li class="list-inline-item">
                                 <a href="javascript:;">Privacy</a>
@@ -833,7 +834,7 @@
                             <hr>
                             <div class="row f-flex justify-content-between" style="justify-content: space-between;">
                                 <div class="col-md-8 text-xs-center  text-left text-secondary my-1">
-                                    <p class="mt-2  text-light"> © Copyright 2017 • All Rights Reserved |
+                                    <p class="mt-2  text-light"> Â© Copyright 2017 â¢ All Rights Reserved |
                                         <a class=" " href="javascript:;">Disclaimer</a> |
                                         <a class=" " href="javascript:;">Contact</a>
                                     </p>
@@ -868,7 +869,7 @@
                         <div class="row">
                             <div class="col-12 col-md-3">
                                 <h3>JavaTMP</h3>
-                                <small class="d-block">© 2019</small>
+                                <small class="d-block">Â© 2019</small>
                                 <small class="">All Rights Reserved.</small>
                             </div>
                             <!--end of col-->

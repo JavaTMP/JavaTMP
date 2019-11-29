@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content">
     <h4 class="m-3">Header Blocks</h4>
     <hr class="mx-3"/>

@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content grid-gutter-padding">
     <div class="row">
         <div class="col">
@@ -23,19 +24,19 @@
                                 </th>
                                 <th class="text-center">
                                     Small<br>
-                                    <small>≥576px</small>
+                                    <small>â¥576px</small>
                                 </th>
                                 <th class="text-center">
                                     Medium<br>
-                                    <small>≥768px</small>
+                                    <small>â¥768px</small>
                                 </th>
                                 <th class="text-center">
                                     Large<br>
-                                    <small>≥992px</small>
+                                    <small>â¥992px</small>
                                 </th>
                                 <th class="text-center">
                                     Extra large<br>
-                                    <small>≥1200px</small>
+                                    <small>â¥1200px</small>
                                 </th>
                             </tr>
                         </thead>

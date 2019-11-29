@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content grid-gutter-padding">
     <div class="row">
         <div class="col-lg-12">
@@ -84,7 +85,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="modalGalleryLabel">Gallery</h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">Ã</button>
                 </div> <!-- /.modal-header -->
 
                 <div class="modal-body text-center p-1">
@@ -160,8 +161,8 @@
                 function createPagination(galleryId, currentSlideIndex) {
                     var pagination = $(galleryId + ' .pagination');
                     var carouselId = $(galleryId).find('.carousel').attr('id');
-                    var prevLink = $('<li class="page-item"><a class="page-link" href="#' + carouselId + '" data-slide="prev">«</a></li>');
-                    var nextLink = $('<li class="page-item"><a class="page-link" href="#' + carouselId + '" data-slide="next">»</a></li>');
+                    var prevLink = $('<li class="page-item"><a class="page-link" href="#' + carouselId + '" data-slide="prev">Â«</a></li>');
+                    var nextLink = $('<li class="page-item"><a class="page-link" href="#' + carouselId + '" data-slide="next">Â»</a></li>');
 
                     prevLink.appendTo(pagination);
                     nextLink.appendTo(pagination);

@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="dynamic-ajax-content grid-gutter-padding">
     <div class="row">
         <div class="col">
@@ -15,7 +16,7 @@
                 <div class="card-body">
                     <h4 class="card-title text-primary">Basic Example</h4>
                     <p class="">Toasts are as flexible as you need and have very little required markup.
-                        At a minimum, we require a single element to contain your “toasted” content
+                        At a minimum, we require a single element to contain your âtoastedâ content
                         and strongly encourage a dismiss button.
                     </p>
                     <div class="toast ShowBasicExampleToast" data-autohide="false" role="alert" aria-live="assertive" aria-atomic="true">
@@ -57,7 +58,7 @@
                         </div>
                     </div>
                     <h4 class="card-title text-primary">Placement Example</h4>
-                    <p class="">Place toasts with custom CSS as you need them. The top right is often used for notifications, as is the top middle. If you’re only ever going to show one toast at a time, put the positioning styles right on the .toast.</p>
+                    <p class="">Place toasts with custom CSS as you need them. The top right is often used for notifications, as is the top middle. If youâre only ever going to show one toast at a time, put the positioning styles right on the .toast.</p>
                     <div class="bg-dark" aria-live="polite" aria-atomic="true" style="position: relative; min-height: 200px;">
                         <div class="toast ShowBasicExampleToast" data-autohide="false" style="position: absolute; top: 0; right: 0;">
                             <div class="toast-header">
