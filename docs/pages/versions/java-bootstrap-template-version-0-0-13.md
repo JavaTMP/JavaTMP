@@ -3,7 +3,8 @@ title: Java Bootstrap Template Version 0.0.13 (Current Development Version)
 ---
 # {{ page.title }}
 
-## 50190f5 on Nov 29, 2019, 7:23 PM GMT+4
+## e9197f on Nov 29, 2019, 9:51 PM GMT+4
+- Update main gulpfile.js that generate deployed war by running a Maven command from gulp task.
 - Merge static pages into java version and rename all their extension to .jsp instead of .html.
 - Update the following dependencies in package.json:
     - bootstrap from 4.3.1 to 4.4.1
