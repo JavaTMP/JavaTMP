@@ -2,47 +2,31 @@
 <div class="dynamic-ajax-content grid-gutter-padding">
     <div class="row">
         <div class="col-lg-12">
-            <div class="card" id="compose-message-id">
-                <div class="card-header d-flex align-items-center py-2">
-                    <div class="btn-group d-inline float-left" role="group">
-                        <button id="compose-message-send-id" type="button" class="btn btn-sm btn-success">Send</button>
-                        <button id="compose-message-discard-id" type="button" class="btn btn-sm btn-danger">Discard & Close Dialog</button>
+            <form class="form-horizontal" id="createMessageForm" action="#" method="POST" enctype="multipart/form-data">
+                <div class="form-group row">
+                    <label for="currentUserName" class="col-sm-2 col-form-label">Your Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" readonly class="form-control-plaintext" id="currentUserName" value="${sessionScope.user.firstName}&nbsp;${sessionScope.user.lastName}">
                     </div>
                 </div>
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <form class="form-horizontal" id="createMessageForm" action="#" method="POST" enctype="multipart/form-data">
-                                <div class="form-group row">
-                                    <label for="currentUserName" class="col-sm-2 col-form-label">Your Name</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" readonly class="form-control-plaintext" id="currentUserName" value="${sessionScope.user.firstName}&nbsp;${sessionScope.user.lastName}">
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label for="messageUsersToDropdown" class="col-sm-2 col-form-label">Select Users</label>
-                                    <div class="col-sm-10">
-                                        <select name="messageTos" id="messageUsersToDropdown" class="form-control forceValidate" multiple></select>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-2 col-form-label" for="textinput4">Subject</label>
-                                    <div class="col-lg-10">
-                                        <input id="textinput4" name="messageTitle" type="text" placeholder="Subject of your Message" class="form-control input-md">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row">
-                                    <div class="col-lg-12">
-                                        <textarea class="form-control ajax-email-body forceValidate" rows="8" name="messageContentText"></textarea>
-                                    </div>
-                                </div>
-
-                            </form>
-                        </div>
+                <div class="form-group row">
+                    <label for="messageUsersToDropdown" class="col-sm-2 col-form-label">Select Users</label>
+                    <div class="col-sm-10">
+                        <select name="messageTos" id="messageUsersToDropdown" class="form-control forceValidate" multiple></select>
                     </div>
                 </div>
-            </div>
+                <div class="form-group row">
+                    <label class="col-lg-2 col-form-label" for="textinput4">Subject</label>
+                    <div class="col-lg-10">
+                        <input id="textinput4" name="messageTitle" type="text" placeholder="Subject of your Message" class="form-control input-md">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-12">
+                        <textarea class="form-control ajax-email-body forceValidate" rows="8" name="messageContentText"></textarea>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
     <style type="text/css">
@@ -77,7 +61,13 @@
                 modal.updateTitle("Compose Message");
                 modal.updateClosable(true);
                 modal.updateSize("modal-lg");
-
+                modal.addButton({
+                    label: "Send",
+                    cssClass: "btn btn-success",
+                    action: function (button, buttonData, originalEvent) {
+                        sendComposeMessage();
+                    }
+                });
                 modal.addButton({
                     label: "Open Another Compose Message",
                     cssClass: "btn btn-info",
@@ -250,7 +240,7 @@
                     closeButton.trigger("click");
                 });
                 var createMessageForm = $('#createMessageForm');
-                $("#compose-message-send-id").on("click", function () {
+                function sendComposeMessage() {
 
                     summerNote.summernote('triggerEvent', 'change');
                     if (!createMessageForm.valid()) {
@@ -315,7 +305,8 @@
                             }
                         ]
                     }).show();
-                });
+                }
+                ;
 
                 validator = createMessageForm.validate($.extend(true, {}, javatmp.settings.jqueryValidationDefaultOptions, {
 //                    ignore: ":hidden",
