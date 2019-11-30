@@ -3,6 +3,11 @@ title: Java Bootstrap Template Version 0.0.13 (Current Development Version)
 ---
 # {{ page.title }}
 
+## on
+- Remove Product and project JavaTMP-Static-Ajax after merging it with JavaTMP-User-Starter project.
+- Update main gulpfile.js by generating only JavaTMP-User-Starter project and product.
+- prepare project for release 0.0.13
+
 ## e9197f on Nov 29, 2019, 9:51 PM GMT+4
 - Update main gulpfile.js that generate deployed war by running a Maven command from gulp task.
 - Merge static pages into java version and rename all their extension to .jsp instead of .html.
