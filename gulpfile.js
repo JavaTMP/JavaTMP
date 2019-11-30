@@ -367,7 +367,6 @@ gulp.task('release', gulp.series('update-version', 'generate-html-project', 'gen
 gulp.task('default', gulp.series('generate-html-project', 'generate-java-project', function (cb) {
     console.log("*** Zip files in dist should be created ***");
     console.log("Current Version Number [" + pkg.version + "]");
-    console.log("Now we commit and push current changes :");
     cb();
 }));
 
