@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS accountGroup;
 DROP TABLE IF EXISTS accountType;
 DROP TABLE IF EXISTS `transaction`;
 DROP TABLE IF EXISTS voucherType;
+DROP TABLE IF EXISTS log;
 
 CREATE TABLE accountType (
     id int(1) UNSIGNED not null,
