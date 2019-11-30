@@ -21,7 +21,7 @@
     },
     "dependencies": {
         "autosize": "^4.0.2",
-        "bootstrap": "^4.3.1",
+        "bootstrap": "^4.4.1",
         "bootstrap-colorselector": "^0.1.0",
         "bootstrap-daterangepicker": "^3.0.5",
         "bootstrap-maxlength": "^1.6.0",
@@ -44,7 +44,7 @@
         "datatables.net-fixedcolumns-bs4": "^3.3.0",
         "datatables.net-rowgroup": "^1.1.1",
         "datatables.net-rowgroup-bs4": "^1.1.1",
-        "echarts": "^4.4.0",
+        "echarts": "^4.5.0",
         "font-awesome-animation": "^0.2.1",
         "fullcalendar": "^3.10.1",
         "inputmask": "^4.0.9",
@@ -69,14 +69,14 @@
         "bootstrap-card-extender": "^1.0.2",
         "bootstrap-alert-wrapper": "^1.0.3",
         "jquery.fancytree": "^2.33.0",
-        "bootswatch": "^4.3.1",
+        "bootswatch": "^4.4.0",
         "file-saver": "^2.0.2",
         "numeral": "2.0.6",
         "@fortawesome/fontawesome-free": "^5.11.2",
         "moment-timezone": "^0.5.27",
         "material-design-icons": "^3.0.1",
         "form-serializer": "^2.5.0",
-        "handlebars": "^4.5.1",
+        "handlebars": "^4.5.3",
         "jquery.easing": "^1.4.1",
         "aos": "^2.3.4",
         "animate.css": "^3.7.2",
@@ -99,7 +99,7 @@
         "pump": "^3.0.0",
         "async": "^3.1.0",
         "gulp-uglify-es": "^2.0.0",
-        "yargs": "14.2.0"
+        "yargs": "^15.0.2"
     },
     "napa-config": {
         "cache": true,
