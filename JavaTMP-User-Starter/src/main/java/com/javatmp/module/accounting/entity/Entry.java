@@ -19,7 +19,7 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "Entry")
+@Table(name = "entry")
 public class Entry implements Serializable {
 
     private static final long serialVersionUID = 1L;
