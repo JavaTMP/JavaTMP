@@ -48,20 +48,14 @@ gulp.task('update-version', function (cb) {
     fs.writeFile('./package.json', JSON.stringify(pkg, null, 4), 'utf8', function (err) {
         if (err)
             throw err;
-        var staticPkg = require('./JavaTMP-Static-Ajax/package.json');
-        staticPkg.version = pkg.version;
-        fs.writeFile('./JavaTMP-Static-Ajax/package.json', JSON.stringify(staticPkg, null, 4), 'utf8', function (err) {
+        var dynamicPkg = require('./JavaTMP-User-Starter/package.json');
+        dynamicPkg.version = pkg.version;
+        fs.writeFile('./JavaTMP-User-Starter/package.json', JSON.stringify(dynamicPkg, null, 4), 'utf8', function (err) {
             if (err)
                 throw err;
-            var dynamicPkg = require('./JavaTMP-User-Starter/package.json');
-            dynamicPkg.version = pkg.version;
-            fs.writeFile('./JavaTMP-User-Starter/package.json', JSON.stringify(dynamicPkg, null, 4), 'utf8', function (err) {
-                if (err)
-                    throw err;
-                pkg.version = "v" + pkg.version;
-                console.log("Package Version updated [" + pkg.version + "]");
-                cb();
-            });
+            pkg.version = "v" + pkg.version;
+            console.log("Package Version updated [" + pkg.version + "]");
+            cb();
         });
     });
 });
@@ -70,19 +64,7 @@ gulp.task('clean', function (cb) {
 //    del.sync(['./temp', './dist'], cb());
     return del(['./temp'], cb);
 });
-gulp.task('copy-JavaTMP-Static-Ajax', function (cb) {
-    return gulp
-            .src([
-                './JavaTMP-Static-Ajax/**/*',
-                '!**/node_modules{,/**}',
-                '!**/nbproject/private{,/**}',
-                '!**/package-lock.json'
-            ], {dot: true})
-            .pipe(gulp.dest("temp/JavaTMP-Static-Ajax"))
-            .on('end', function () {
-                cb();
-            });
-});
+
 gulp.task('copy-JavaTMP-User-Starter', function (cb) {
     return gulp
             .src([
@@ -125,27 +107,6 @@ gulp.task('run-maven', function (cb) {
     // In gulp 4, you can return a child process to signal task completion
     callExec('mvn clean package', {cwd: "./temp/online-java-user-demo-starter"}, cb);
 });
-gulp.task('license-javatmp-static-ajax', function (cb) {
-    return gulp
-            .src([
-                'temp/JavaTMP-Static-Ajax/**/*',
-                "!**/web/components{,/**}",
-                "!**/web/assets/fonts{,/**}",
-                "!**/web/assets/img{,/**}"], {dot: true})
-            .pipe(header(banner, {pkg: pkg}))
-            .pipe(gulp.dest("temp/JavaTMP-Static-Ajax"))
-            .on('end', function () {
-                cb();
-            });
-});
-gulp.task('save-project-online-static-demo', function (cb) {
-    return gulp
-            .src(['temp/JavaTMP-Static-Ajax/web/**/*'], {dot: true})
-            .pipe(gulp.dest("temp/online-static-demo"))
-            .on('end', function () {
-                cb();
-            });
-});
 gulp.task('save-project-online-java-user-demo-starter', function (cb) {
     return gulp
             .src([
@@ -158,15 +119,7 @@ gulp.task('save-project-online-java-user-demo-starter', function (cb) {
                 cb();
             });
 });
-gulp.task('process-javatmp-static-ajax', function (cb) {
-    return gulp
-            .src(['temp/JavaTMP-Static-Ajax/**/*.html'], {dot: true})
-            .pipe(processhtml())
-            .pipe(gulp.dest("temp/JavaTMP-Static-Ajax"))
-            .on('end', function () {
-                cb();
-            });
-});
+
 gulp.task('process-javatmp-user-starter', function (cb) {
     return gulp
             .src(['temp/JavaTMP-User-Starter/**/*.html', 'temp/JavaTMP-User-Starter/**/*.jsp'], {dot: true})
@@ -208,15 +161,7 @@ gulp.task('process-online-java-user-demo-starter', function (cb) {
                 cb();
             });
 });
-gulp.task('generate-online-static-demo-zip', function (cb) {
-    return gulp.src(['temp/online-static-demo/**/*'], {dot: true})
-            .pipe(chmod(0o644, true))
-            .pipe(zip('JavaTMP-Static-Ajax.zip'))
-            .pipe(gulp.dest('dist'))
-            .on('end', function () {
-                cb();
-            });
-});
+
 gulp.task('generate-online-java-user-demo-starter-war', function (cb) {
     return gulp.src(['temp/online-java-user-demo-starter/**/*'], {dot: true})
             .pipe(chmod(0o644, true))
@@ -253,16 +198,6 @@ gulp.task('copy-readme', function (cb) {
                 cb();
             });
 });
-gulp.task('zip', function (cb) {
-    return gulp
-            .src(['temp/**/*'], {dot: true})
-            .pipe(chmod(0o644, true))
-            .pipe(zip('javatmp-html.zip'))
-            .pipe(gulp.dest('dist'))
-            .on('end', function () {
-                cb();
-            });
-});
 gulp.task('zip-java', function (cb) {
     return gulp
             .src(['temp/**/*'], {dot: true})
@@ -291,23 +226,6 @@ gulp.task('git-commit', function (cb) {
                 disableMessageRequirement: true
             }, cb));
 });
-gulp.task('generate-html-project',
-        gulp.series(
-                "clean",
-                'copy-JavaTMP-Static-Ajax',
-                'save-project-online-static-demo',
-                'process-javatmp-static-ajax',
-                'remove-demo-assets-src',
-                'process-online-static-demo',
-                'generate-online-static-demo-zip',
-                'remove-online-static-demos-folders',
-                'copy-readme',
-                'zip',
-                function (cb) {
-                    cb();
-                })
-        );
-
 gulp.task('generate-java-project',
         gulp.series(
                 "clean",
@@ -359,12 +277,17 @@ gulp.task('push-only', gulp.series(function (cb) {
     });
 }));
 
-gulp.task('release', gulp.series('update-version', 'generate-html-project', 'generate-java-project', 'push:tag', function (cb) {
+gulp.task('pre-release', function (cb) {
+//    del.sync(['./temp', './dist'], cb());
+    return del(['./dist/**/*'], cb);
+});
+
+gulp.task('release', gulp.series('pre-release', 'update-version', 'generate-java-project', 'push:tag', function (cb) {
     cb();
 }));
 
 //https://stackoverflow.com/questions/5343068/is-there-a-way-to-skip-password-typing-when-using-https-on-github
-gulp.task('default', gulp.series('generate-html-project', 'generate-java-project', function (cb) {
+gulp.task('default', gulp.series('generate-java-project', function (cb) {
     console.log("*** Zip files in dist should be created ***");
     console.log("Current Version Number [" + pkg.version + "]");
     cb();
