@@ -6,10 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>JavaTMP - Bootstrap Components Template Default Login Page</title>
 
-        <link href="../../../assets/dist/css/javatmp-plugins-all.min.css" rel="stylesheet" type="text/css"/>
-        <link href='../../../assets/dist/css/javatmp-plugins-print-all.min.css' rel='stylesheet' media='print' />
-        <link id="themeStyleSheet" href="../../../assets/dist/css/javatmp-schooly.min.css" rel="stylesheet" type="text/css"/>
-        <link href="../../../assets/dist/css/font-family-en.min.css" rel="stylesheet" type="text/css"/>
+        <link href="${pageContext.request.contextPath}/assets/dist/css/javatmp-plugins-all.min.css" rel="stylesheet" type="text/css"/>
+        <link href="${pageContext.request.contextPath}/assets/dist/css/javatmp-plugins-print-all.min.css" rel='stylesheet' media='print' />
+        <link id="themeStyleSheet" href="${pageContext.request.contextPath}/assets/dist/css/javatmp-schooly.min.css" rel="stylesheet" type="text/css"/>
+        <link href="${pageContext.request.contextPath}/assets/dist/css/font-family-en.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <body class="login">
         <div class="container-fluid">
@@ -42,8 +42,8 @@
         <style type="text/css">
 
         </style>
-        <script src="../../../assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
-        <script src="../../../assets/dist/js/javatmp.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp.min.js" type="text/javascript"></script>
         <script type="text/javascript">
             jQuery(document).ready(function () {
                 (function ($) {

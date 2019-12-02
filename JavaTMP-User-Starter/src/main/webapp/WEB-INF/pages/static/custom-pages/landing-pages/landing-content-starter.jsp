@@ -9,10 +9,10 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link href="../../../assets/dist/css/javatmp-plugins-all.min.css" rel="stylesheet" type="text/css"/>
-        <link href='../../../assets/dist/css/javatmp-plugins-print-all.min.css' rel='stylesheet' media='print' />
-        <link id="themeStyleSheet" href="../../../assets/dist/css/javatmp-schooly.min.css" rel="stylesheet" type="text/css"/>
-        <link href="../../../assets/dist/css/font-family.min.css" rel="stylesheet" type="text/css"/>
+        <link href="${pageContext.request.contextPath}/assets/dist/css/javatmp-plugins-all.min.css" rel="stylesheet" type="text/css"/>
+        <link href='${pageContext.request.contextPath}/assets/dist/css/javatmp-plugins-print-all.min.css' rel='stylesheet' media='print' />
+        <link id="themeStyleSheet" href="${pageContext.request.contextPath}/assets/dist/css/javatmp-schooly.min.css" rel="stylesheet" type="text/css"/>
+        <link href="${pageContext.request.contextPath}/assets/dist/css/font-family.min.css" rel="stylesheet" type="text/css"/>
     </head>
     <body data-spy="scroll" data-target="#sidemenu" data-offset="30">
         <div id="oneTimeOverlay" style="position: fixed;width: 100%;height: 100%;top: 0px;left: 0;right: 0;bottom: 0;background-color: rgba(255,255,255,1);z-index: 1000000;cursor: wait;">Loading ...</div>
@@ -271,7 +271,7 @@
                         <hr>
                         <div class="row f-flex justify-content-between" style="justify-content: space-between;">
                             <div class="col-md-8 text-xs-center  text-left text-secondary my-1">
-                                <p class="mt-2  text-light"> Â© Copyright 2017 â¢ All Rights Reserved |
+                                <p class="mt-2  text-light"> © Copyright 2017 • All Rights Reserved |
                                     <a class=" " href="javascript:;">Disclaimer</a> |
                                     <a class=" " href="javascript:;">Contact</a>
                                 </p>
@@ -322,10 +322,10 @@
             }
 
         </style>
-        <script src="../../../assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
-        <script src="../../../assets/dist/js/javatmp-plugins-all-locale-en.min.js" type="text/javascript"></script>
-        <script src="../../../assets/dist/js/javatmp.min.js" type="text/javascript"></script>
-        <script src="../../../assets/app/js/javatmp.plugins.wrapper.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp-plugins-all-locale-en.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/assets/dist/js/javatmp.min.js" type="text/javascript"></script>
+        <script src="${pageContext.request.contextPath}/assets/app/js/javatmp.plugins.wrapper.js" type="text/javascript"></script>
         <script type="text/javascript">
             jQuery(function ($) {
                 var defaults = {};
