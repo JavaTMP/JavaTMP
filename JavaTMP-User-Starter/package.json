@@ -69,7 +69,7 @@
         "bootstrap-card-extender": "^1.0.2",
         "bootstrap-alert-wrapper": "^1.0.3",
         "jquery.fancytree": "^2.33.0",
-        "bootswatch": "^4.4.0",
+        "bootswatch": "^4.4.1",
         "file-saver": "^2.0.2",
         "numeral": "2.0.6",
         "@fortawesome/fontawesome-free": "^5.11.2",

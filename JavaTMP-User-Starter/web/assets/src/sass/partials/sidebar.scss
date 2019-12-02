@@ -30,10 +30,10 @@ body.sidebar-active .sidebar {
     @each $color, $value in $theme-colors {
         &.bg-#{$color} {
             $temp-color: color-yiq($value);
-
-            background-color: $value;
-            color: $temp-color;
-            border-right-color: $value;
+            // v0.0.13 make values important to override any other ones
+            background-color: $value!important;
+            color: $temp-color!important;
+            border-right-color: $value!important;
 
         }
     }
