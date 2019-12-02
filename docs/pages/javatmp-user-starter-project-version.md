@@ -429,10 +429,9 @@ gulp.src(['temp/online-java-demo-starter/**/*'], {dot: true})
 ```
 
 ## Installation and Deploying
-### Preparing Netbeans 8.2 Project
-
-The `JavaTMP-User-Starter` project is a Netbeans IDE 8.2 project, so you can directly import and open it there for
-compilation and deploying
+### Preparing Maven Project
+The `JavaTMP-User-Starter` project is a standard Apache Maven project structure, so you can directly import and open it
+in any Java IDE support Maven for compilation and deploying
 
 ### Preparing Oracle Mysql Database Management System
 
