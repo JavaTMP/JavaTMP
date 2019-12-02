@@ -13,6 +13,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 /**
@@ -26,9 +27,10 @@ public class GenerateContents {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("AppPU");
         UserService userService;
-        userService = new UserService(Persistence.createEntityManagerFactory("AppPU"));
-        ContentService contentService = new ContentService(Persistence.createEntityManagerFactory("AppPU"));
+        userService = new UserService(emf);
+        ContentService contentService = new ContentService(emf);
         List<User> users = userService.findAll(0, Integer.MAX_VALUE);
         generateContent(contentService, users);
     }
