@@ -161,7 +161,7 @@ the following object hold our required libraries:
 var config = {
     "sourceNodeLib": "./node_modules",
     "destComponentsLib": "./web/components",
-    "destDist": "./web/assets/dist",
+    "destDist": "./src/main/webapp/assets/dist",
     "plugins": {
         "jquery": [
             {"from": "${sourceNodeLib}/jquery/dist/jquery.min.js", "to": "${destComponentsLib}/jquery/dist"}
@@ -192,7 +192,7 @@ We used `gulp-if` plugins to check if the resource need any preprocessing. So i
 on the resource and if it is CSS file we apply `gulp-clean-css` plugin on the resource before move them.
 
 We can simply add another gulp's task called `generate-dist` that will compile all SASS themes files and moved all resources
-to `./web/assets/dist` folder.
+to `./src/main/webapp/assets/dist` folder.
 
 ## Gulp's Task `generate-dist`
 The gulp's task `generate-dist` depends on task `copy-components` described in details above.
@@ -201,19 +201,19 @@ The gulp's task `generate-dist` also depends on `src` object that define needed 
 kindly refer to `src` object in gulpfile.js for more information about it.
 
 The Gulp's task `generate-dist` task makes the following things:
-1.  Compile the SASS Bootstrap themes found in `./web/assets/src/sass/themes/javatmp-*.scss` and generate base template CSS file and move them to `./web/assets/dist/css` folder
-2.  Concatenate all CSS files found in above `src.css` in order and put the concatenated file in `./web/assets/dist/css/javatmp-plugins-all.min.css`
-3.  Concatenate all CSS files found in above `src.cssForPrint` in order and put the concatenated file in `./web/assets/dist/css/javatmp-plugins-print-all.min.css`
-4.  Generate and uglify main JavaTMP template Javascript file `javatmp.min.js` in `./web/assets/src/js-src/javatmp.js` to `./web/assets/dist/js/javatmp.min.js`
-5.  Concatenate all JS files found in above `src.js` in order and put the concatenated file `./web/assets/dist/js/javatmp-plugins-all.min.js`
-6.  Compile and generate a minification version of `src.fontFamilyFiles` and put the css file in `./web/assets/dist/css`, in above case `./web/assets/dist/css/font-family-en.min.css`
-7.  Copy `src.img` files needed by plugins to `./web/assets/dist/img` folder
-8.  Copy binary fonts files needed by plugins and template from `src.fonts` to `./web/assets/dist/fonts folder`
+1.  Compile the SASS Bootstrap themes found in `./web/assets/src/sass/themes/javatmp-*.scss` and generate base template CSS file and move them to `./src/main/webapp/assets/dist/css` folder
+2.  Concatenate all CSS files found in above `src.css` in order and put the concatenated file in `./src/main/webapp/assets/dist/css/javatmp-plugins-all.min.css`
+3.  Concatenate all CSS files found in above `src.cssForPrint` in order and put the concatenated file in `./src/main/webapp/assets/dist/css/javatmp-plugins-print-all.min.css`
+4.  Generate and uglify main JavaTMP template Javascript file `javatmp.min.js` in `./web/assets/src/js-src/javatmp.js` to `./src/main/webapp/assets/dist/js/javatmp.min.js`
+5.  Concatenate all JS files found in above `src.js` in order and put the concatenated file `./src/main/webapp/assets/dist/js/javatmp-plugins-all.min.js`
+6.  Compile and generate a minification version of `src.fontFamilyFiles` and put the css file in `./src/main/webapp/assets/dist/css`, in above case `./src/main/webapp/assets/dist/css/font-family-en.min.css`
+7.  Copy `src.img` files needed by plugins to `./src/main/webapp/assets/dist/img` folder
+8.  Copy binary fonts files needed by plugins and template from `src.fonts` to `./src/main/webapp/assets/dist/fonts folder`
 9.  finally, remove `./web/components` folder as all front-end resources became combined and concatenated in TWO BIG LARGE MAIN files `javatmp-plugins-all.min.css` and `javatmp-plugins-all.min.js`
 
-So, The main output of `generate-dist` task is folder `./web/assets/dist` which contains the following:
+So, The main output of `generate-dist` task is folder `./src/main/webapp/assets/dist` which contains the following:
 ```
-./web/assets/dist
+./src/main/webapp/assets/dist
 +---css
     +---font-family-en.min.css
     +---javatmp-plugins-all.min.css

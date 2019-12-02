@@ -37,7 +37,7 @@ and `./nbproject/private/` folders from versioning. 
 
 ### `./JavaTMP/JavaTMP-Static-Ajax/.gulpfile.js` file
 This is a gulp's configuration file. The main important gulp tasks are `generate-dist` which copy resources
-from node_module folder and combine them after compiling and minimizing them and put theme in appropriate folders in `./web/assets/dist/*`.
+from node_module folder and combine them after compiling and minimizing them and put theme in appropriate folders in `./src/main/webapp/assets/dist/*`.
 The gulp and its configuration file .gulpfile.js is described in details in page
 [Managing Front-end dependencies Using Node.js And Gulp](/pages/manage-front-end-dependencies-using-node-js-and-gulp "Manage Front-end dependencies Using Node.js And Gulp")
 which copy all components defined in config object from `./node_modules` to `./web/components`

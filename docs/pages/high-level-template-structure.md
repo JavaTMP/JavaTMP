@@ -191,11 +191,11 @@ Please see our [online demo](http://java.javatmp.com:8080/JavaTMP-User-Starter/)
 ## JavaTMP Front-end Frameworks And Plugins Files
 The JavaTMP Front-end frameworks and plugins consist of the libraries used in the front-end part of the template like jQuery,
 Bootstrap and it is first stored separately in `./web/components` folder with all its Javascript, CSS, and images files.
-Before it is moved and merged to appropriate files in `./web/assets/dist` using gulp's task `generate-dist`.
+Before it is moved and merged to appropriate files in `./src/main/webapp/assets/dist` using gulp's task `generate-dist`.
 Then, it deleted when gulp's task `generate-dist` finishes running.
 
 Keep in mind that these plugins and frameworks are different than the custom JS/CSS files specifically used in the template,
-which are stored in `./web/assets/src/` folder and moved and merged to `./web/assets/dist` too using same gulp's task.
+which are stored in `./web/assets/src/` folder and moved and merged to `./src/main/webapp/assets/dist` too using same gulp's task.
 
 We manage our front-end dependencies using Node NPM and gulp so the folder `./web/components`
 are dynamically generated when we run the gulp's task `copy-components`.
@@ -239,10 +239,10 @@ So it is your responsibilities to decide which plugins you need and if you want 
 
 We provide a CSS customization for some of the plugins styling to apply our themes to them in a form of SASS' SCSS syntax.
 Those custom CSS files reside separately in `./web/assets/src/sass/plugins` or `./web/assets/src/sass-rtl/plugins` folders.
-And they compile and merge with bootstrap and JavaTMP styling and moved to `./web/assets/dist/css/javatmp-*.min.css`.
+And they compile and merge with bootstrap and JavaTMP styling and moved to `./src/main/webapp/assets/dist/css/javatmp-*.min.css`.
 
 ## JavaTMP CSS/SASS Template Files
-The main minificated CSS files for JavaTMP template are located in the `./web/assets/dist/css` folder,
+The main minificated CSS files for JavaTMP template are located in the `./src/main/webapp/assets/dist/css` folder,
 And it is automatically generated and populated during running of gulp's task `generate-dist` from:
 - Template SASS source theme files reside in `./web/assets/src/sass/themes/javatmp-*.scss` folder.
 - RTL Template SASS source theme files reisde in `./web/assets/src/sass-rtl/themes/javatmp-*.scss` folder.
@@ -252,7 +252,7 @@ And it is automatically generated and populated during running of gulp's task `g
 
 The following file structure provide the output CSS file from gulp's task 'generate-dist':
 ```
-./web/assets/dist/css
+./src/main/webapp/assets/dist/css
 +---font-family-en.min.css
 +---javatmp-plugins-all.min.css
 +---javatmp-plugins-print-all.min.css

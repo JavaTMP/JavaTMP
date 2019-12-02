@@ -10,7 +10,7 @@ Backup JavaTMP project and apply the following steps before continuing:
 *   In each SASS files `./web/assets/src/sass|-rtl/`, You can Override any bootstrap or javatmp variables too to be used **in that part only**.
 *   For example, Updating variables in `./web/assets/src/sass/plugins/custom-fullcalendar.scss` file will effect this plugin's style only.
 *   Run gulp'task `generate-dist` by invoking `gulp sass` command. or run default gulp'task by invoking `gulp` command
-    that will generate `./web/assets/dist` folder with updated styles.
+    that will generate `./src/main/webapp/assets/dist` folder with updated styles.
 *   So, you can customize and use Bootstrap Sass variables and reflect them immediately on the template.
 
 ### Updating `$primary` variable

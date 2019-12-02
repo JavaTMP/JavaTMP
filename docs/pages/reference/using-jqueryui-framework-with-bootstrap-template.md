@@ -7,7 +7,7 @@ First, supporting sortable and moving of bootstrap card option and, Second, impl
 like jquery Fancytree and jQuery FullCalendar plugins. So the demo pages for them depend on `jQueryUI`.
 
 We should include `jQueryUI` library before bootstrap one, So for this reason we included it before bootstrap in
-`./web/assets/dist/js/javatmp-plugins-all.min.js` during gulp's task `generate-dist`.
+`./src/main/webapp/assets/dist/js/javatmp-plugins-all.min.js` during gulp's task `generate-dist`.
 
 As we said before if you are not interested in this feature you can remove `jQueryUI` library in `gulpfile.js` file
 and then re-generate dist folder again using `gulp generate-dist` command.

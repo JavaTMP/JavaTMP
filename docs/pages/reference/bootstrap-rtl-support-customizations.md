@@ -66,8 +66,8 @@ The following is a high level folder structures of our `sass` and `sass-rtl`:
     *   [Manage Front-end dependencies Using Node.js And Gulp](/pages/manage-front-end-dependencies-using-node-js-and-gulp "Manage Front-end dependencies Using Node.js And Gulp")
     *   [Implement gulp's task generate-dist](/pages/javatmp-static-ajax-project-version#generate-dist-gulp-task "Gulp Task for create a concatenated file of all javascript and CSS files")
 
-6.  Run `"gulp"` or `"gulp generate-dist"` from `JavaTMP-Static-Ajax-RTL`. The main different output here are mainly the generated css files as now become `./web/assets/dist/css/javatmp-*-rtl.min.css` instead of `javatmp-*.min.css`.
-7. Update `index.html` file by using `./web/assets/dist/css/javatmp-default-rtl.min.css` INSTEAD OF `javatmp-default.min.css` and NOT after it.
+6.  Run `"gulp"` or `"gulp generate-dist"` from `JavaTMP-Static-Ajax-RTL`. The main different output here are mainly the generated css files as now become `./src/main/webapp/assets/dist/css/javatmp-*-rtl.min.css` instead of `javatmp-*.min.css`.
+7. Update `index.html` file by using `./src/main/webapp/assets/dist/css/javatmp-default-rtl.min.css` INSTEAD OF `javatmp-default.min.css` and NOT after it.
 8. Update `index.html` file by setting `dir=rtl` and `lang=en`
 9. Update `index.html` file by flipping textfield's clear button to left instead of right for sidebar search.
 10. Update `index.html` by adding custom Javascript event handler for modifying dropdown's position. Because default behavior for popper.js is wrongly position it in RTL HTML pages with issues and problems.
