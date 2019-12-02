@@ -71,44 +71,13 @@ The JavaTMP-User-Starter project folder structure is based on Apache Maven build
 |---package.json (A Node.js's NPM meta file. This file holds various metadata relevant to the project)
 +---db_scripts (Oracle Mysql Database dump script to start the Users Web Application from)
 +---src (Standard Maven source code files)
-\---web (Source files of Web specific static resources like fonts, js, and sass folders and files)
++---web (Source files of Web specific static resources like fonts, js, and sass folders and files)
+|---pom.xml (Apache Maven Configuration build file)
 ```
 
-### `./JavaTMP-User-Starter/build.xml` file
-A standard Netbeans Java Web project uses an IDE-generated Ant build script to build, run, debug, and distribute your project.
-The default NetBeans IDE project system is built directly on top of the Ant build system. All of the project commands,
-such as "Build Project" and "Run File in Debugger", call targets in the project's Ant script. You can therefore build and
-run your project outside the IDE exactly as it is built and run inside the IDE.
-Remember that the `build.xml` build script file only contains an import statement that imports targets from `nbproject/build-impl.xml`.
-Use the `build.xml` to override targets from `build-impl.xml` or to create new targets.
-
-You do not need to be familiar with `Ant` to work with applications in the IDE. You can set all the basic compilation and
-runtime options in your project's Project Properties dialog box and the IDE automatically updates the project's Ant script.
-If you know how to work with Ant, you can customize a project's Ant script directly or write your own Ant script for your project.
-
-So, to build your project outside the IDE exactly as it is built make sure you install `Ant` or you added it to your global path
-and it is accessible from a command line. If you already install and develop using Netbeans IDE 8.2 it come with `Ant` distribution
-installed on `[NetBeans 8.2 installation folder]/extide/ant/bin`, So you can add it to global path environment variables.
-
-#### `ant clean`
-Running this command will remove the above `build` and `dist` folders.
-
-#### `ant compile`
-Running this command will compile and generate the above `build` folder with `.class` files in `./build/web/WEB-INF/classes` folder,
-and `./web` folder in `./build/web` and `./lib` in `./build/web/WEB-INF/lib` folder.
-
-#### `ant dist`
-Running this command will generate build folder if it is not exist and create a war package file from`./build/web` folder in it.
-So for testing and developing purposes you can deploy this war in any standard Java Servlet container like tomcat 9.
-Note that we don't use this `war` on our production online demo because we process and minificate JSP pages and remove all source code
-from it before deploy it on production. We create our production war file from a gulp task.
-
-**Read more about Ant and Netbeans IDE Building process:**
-*   [Developing Applications with NetBeans IDE](https://docs.oracle.com/netbeans/nb82/netbeans/NBDAG/toc.htm "Developing Applications with NetBeans IDE")
-*   [Creating, Importing, and Configuring Java Projects](https://netbeans.org/kb/74/java/project-setup.html "Creating, Importing, and Configuring Java Projects in Netbeans IDE")
-*   [Apache Ant Home Page](https://ant.apache.org/ "Apache Ant Home Page")
-*   [Advanced Free-Form Project Configuration](https://netbeans.org/kb/articles/freeform-config.html "Advanced Free-Form Netbeans IDE Project Configuration")
-*   [Netbeans Build System Design](http://wiki.netbeans.org/BuildSystemDesign "Netbeans IDE Build System Design")
+### `./JavaTMP-User-Starter/pom.xml` file
+A standard Apache Maven Java build configuration file contains java dependencies building instructions.
+Read more about Apache Maven in [Java Automated Build Tool Apache Maven](/tutorials/maven/Java-Automated-Build-Tool-Apache-Maven)
 
 ### `./JavaTMP-User-Starter/gulpfile.js` file
 This is a gulp's configuration file. gulp is a toolkit for automating painful or time-consuming tasks in your development workflow.
@@ -116,56 +85,10 @@ We use gulp to automate our building process like generating JS/CSS. The main im
 which copy resources from node_module folder and combine them and compile and generate theme and template Javascript and CSS files
 and folders. We described it in details in [Manage Front-end dependencies Using Node.js And Gulp](/pages/manage-front-end-dependencies-using-node-js-and-gulp).
 
-### `./JavaTMP-User-Starter/lib` folder
-The `lib` folder contains external backend java libraries needed to compile and run the dynamic web application features. The libraries binary jars only move to `WAR/WEB-INF/lib` when we build and generate war file. Note that the libraries with its source code and java doc are registered with Netbeans IDE project when we import it in Netbeans IDE 8.2. the following tree provide lib folder contents:
-```
-./JavaTMP-User-Starter/lib
-|---mysql-connector-java-8.0.14.jar
-|---simplecaptcha-1.2.1.jar
-+---antlr4
-+---commons-beanutils-1.9.3
-+---commons-collections-3.2.2
-+---commons-lang-3.8.1
-+---commons-logging-1.2
-+---google-gson-2.8.5
-+---handlebars-4.0.6
-+---hibernate-5.4.1
-+---jstl-1.2
-+---slf4j
-```
-
 ### `./JavaTMP-User-Starter/src` folder
-`src` contains sub folders `conf` and `java` which contains the `Java` source code of all backend classes of the `JavaTMP-User-Starter` template version like Servlets, Services, bean, Java Web listener, Java Web Context classes. The following tree provides its contents and followed by important java and Servlets classes description:
+`src` contains the `Java` source code of all backend classes like Servlets, Services, bean, Java Web listener, Java Web Context classes.
+Read more about Standard Maven Directory Layout in [Java Automated Build Tool Apache Maven](/tutorials/maven/Java-Automated-Build-Tool-Apache-Maven)
 
-You should be familiar with the below java package structure as we will not describe it nor the Java servlets in details.
-```
-./JavaTMP-User-Starter/src/java
-\---com
-    \---javatmp
-        +---i18n
-        +---module
-        |   +---activity
-        |   +---content
-        |   +---country
-        |   +---dms
-        |   +---event
-        |   +---language
-        |   +---message
-        |   +---stats
-        |   +---theme
-        |   +---timezone
-        |   \---user
-        +---mvc
-        |   +---adapter
-        |   \---domain
-        |       \---table
-        +---util
-        \---web
-            +---controller
-            +---filter
-            |   \---util
-            \---listener
-```
 #### `com.javatmp.web.listener.JavaTMPHttpSessionListener` class
 
 The `JavaTMPHttpSessionListener` implements `javax.servlet.ServletContextListener` interface
@@ -204,7 +127,7 @@ by the order in which matching filter mappings appear in the `web.xml` file.
 
 This package contains classes for implements main filters used in the web application.
 We don't use `@javax.servlet.annotation.WebFilter` annotation but instead declared and mapped them in
-`./web/WEB-INF/web.xml` to force the order of their executions.
+`./src/main/webapp/WEB-INF/web.xml` to force the order of their executions.
 the following list provides our filters with their descriptions in order of their executions:
 
 *   `com.javatmp.web.filter.UTF8InforcerFilter`
@@ -264,7 +187,12 @@ public class PagesController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String requestPath = request.getPathInfo();
-        String requestPage = "/WEB-INF/pages" + requestPath + ".jsp";
+        String requestPage = null;
+        if (!requestPath.endsWith(".html")) {
+            requestPage = "/WEB-INF/pages" + requestPath + ".jsp";
+        } else {
+            requestPage = "/WEB-INF/pages" + requestPath;
+        }
         logger.info("Request Page [" + requestPage + "]");
         request.getRequestDispatcher(requestPage).forward(request, response);
     }
@@ -312,38 +240,18 @@ Usually, An instance of `ServicesFactory` class is created at web application st
 for all users.
 
 ### `./JavaTMP-User-Starter/web` folder
-This folder contains everything related to front end resources and plugins and JSP pages for application
-and template AJAX requests and web.xml file. The following tree structure provides an outline of its contents with description
+This folder contains everything related to front end resources and plugins.
+The following tree structure provides an outline of its contents with description
 and usages.
 ```
-./JavaTMP-User-Starter/web
-+---assets
-    +---data (Static JSON files used in some plugin demo pages)
-    +---dist (Output JS/CSS resource from gulp's task generate-dist)
-        +---css
-        +---fonts
-        +---img
-        +---js
-    +---img (Static images used in the template)
-    +---src (Source folder of front end resources like scss and js files)
-        +---fonts
-        +---js-src
-        +---sass
-        +---sass-rtl
-+---META-INF
-    |---context.xml
-+---WEB-INF (Hidden and not accessible directly from the browser requests)
-    |---index.jsp (Main JSP Page)
-    |---web.xml
-    +---pages
-        +---content
-        +---dms
-        +---event
-        +---home
-        +---message
-        +---system
-        +---user
+./JavaTMP-User-Starter/web/src
++---src (Source folder of front end resources like scss and js files)
+    +---fonts
+    +---js-src
+    +---sass
+    +---sass-rtl
 ```
+
 The main important JSP page in our dynamic Java Bootstrap template is `index.jsp` which was dispatched from
 `com.javatmp.web.controller.IndexController` Servlet class to the user. The following HTML code provides its contents:
 
