@@ -4,30 +4,14 @@ title: Java Bootstrap Web Application Features And Resources
 # {{ page.title }}
 
 ### Java Bootstrap Backend Features And Resources
-`JavaTMP-User-Starter` project is a dynamic version of JavaTMP Bootstrap admin and dashboard template which consists of the following backend features and resouces:
+`JavaTMP-User-Starter` project is a dynamic Java Bootstrap admin and dashboard template
+which consists of the following backend features and resouces:
 
-1.  Create a Java Web Application Project from NetBeans IDE 8.2 new web application project.
-2.  Copy all static files and resources from JavaTMP-Static-Ajax projects.
+1.  Created using the standard Maven Java Web Application layout Project.
+2.  Copy all static files and resources to ./src/main/webapp`.
 3.  Convert all .html pages and Ajax snippets to .jsp equivalent and move them to /WEB-INF to be restricted access through servlets only.
 4.  add `<%@page contentType="text/html" pageEncoding="UTF-8"%>` to the top of all JSP pages.
-5.  Create a custom Java Web MVC using Java Servlet/JSP and below libraries.
-6.  Use Apache Commons BeanUtils 1.9.3 for auto injection of request parameters into specific bean instance.
-    [https://commons.apache.org/proper/commons-beanutils/](https://commons.apache.org/proper/commons-beanutils/)
-    [http://www-us.apache.org/dist//commons/beanutils/binaries/commons-beanutils-1.9.3-bin.zip](http://www-us.apache.org/dist//commons/beanutils/binaries/commons-beanutils-1.9.3-bin.zip)
-7.  Use Apache Commons Collections 3.2.2 as a dependency for above Apache Commons BeanUtils
-    [http://commons.apache.org/proper/commons-collections/](http://commons.apache.org/proper/commons-collections/)
-    [http://www-us.apache.org/dist//commons/collections/binaries/commons-collections-3.2.2-bin.zip](http://www-us.apache.org/dist//commons/collections/binaries/commons-collections-3.2.2-bin.zip)
-8.  Use Apache Commons Logging 1.2 as a dependency for above Apache Commons BeanUtils
-    [http://commons.apache.org/proper/commons-logging/](http://commons.apache.org/proper/commons-logging/)
-    [http://www-us.apache.org/dist//commons/logging/binaries/commons-logging-1.2-bin.zip](http://www-us.apache.org/dist//commons/logging/binaries/commons-logging-1.2-bin.zip)
-9.  Use Apache Commons Lang 3.8.1 for auto converting of bean instance to string for printing.
-    [http://commons.apache.org/proper/commons-lang/](http://commons.apache.org/proper/commons-lang/)
-10.  Use Google Gson 2.8.5 for marshaling and unmarshaling of AJAX request and response beans.
-    [https://github.com/google/gson](https://github.com/google/gson)
-    [https://repo1.maven.org/maven2/com/google/code/gson/gson/2.8.5/](https://repo1.maven.org/maven2/com/google/code/gson/gson/2.8.5/)
-11.  Use Standard Taglib 1.2 in JSP pages for formatting and looping.
-    [http://central.maven.org/maven2/javax/servlet/jstl/1.2/](http://central.maven.org/maven2/javax/servlet/jstl/1.2/)
-    [https://tomcat.apache.org/taglibs/standard/](https://tomcat.apache.org/taglibs/standard/)
+5.  Use backend Maven dependencies for running Java Web Application.
 
 ### Directory Structure For Java Web Application
 The directory structure is the most important thing encountered by a developer when browsing source code.

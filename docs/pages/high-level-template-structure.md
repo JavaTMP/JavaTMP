@@ -61,19 +61,16 @@ For more information see ﻿[JavaTMP-User-Starter Project Version online documen
 *   Backup The downloaded file in a safe location.
 *   Extract Downloaded JavaTMP file using any unzip tools like winrar or winzip.
 *   Check that your extracted JavaTMP folder structures is similar to above folder tree structure.
-*   Make sure you already download and install `git`, `nodejs`, `gulpjs`.
-*   You could check our online demos that exists as is with our google analytics script by deploying them in your local HTTP server.
+*   Make sure you already download and install `git`, `nodejs`, `gulpjs`, `java`, `maven`.
 *   Navigate to `./JavaTMP-Static-Ajax` using command line tool and run the command `npm install` and then `gulp run-local-web-server`.
 Open a browser on `http://localhost:8888` to check it. stop the local server.
-You could import the `JavaTMP-Static-Ajax` project directly from Netbeans IDE by `"Open Project..."` menu item.
+You could import the `JavaTMP-User-Starter` project directly from any Java IDE supporting Maven build tool.
 *   Navigate to `./JavaTMP-User-Starter` using command line tool and run the command `npm install`.
-*   Make sure you already download and install above web development tools and Java development tools like `Java`, `Tomcat`, `Ant`.
-*   For `./JavaTMP-User-Starter` project it is better to import it on Netbeans IDE `"Open Project.."` menu item in File.
+*   Make sure you already download and install above web development tools and Java development tools like `Java`, `Tomcat`, `Maven`.
+*   For `./JavaTMP-User-Starter` project it is better to import it on any Java IDE with Maven support.
 But you can run the following command to clean, compile, or dist project using
-`ant "-Dj2ee.server.home=C:\apache-tomcat-9.0.7" "-Dlibs.CopyLibs.classpath=C:\Program Files\NetBeans 8.2\java\ant\extra\org-netbeans-modules-java-j2seproject-copylibstask.jar" clean`,
-    `ant "-Dj2ee.server.home=C:\apache-tomcat-9.0.7" "-Dlibs.CopyLibs.classpath=C:\Program Files\NetBeans 8.2\java\ant\extra\org-netbeans-modules-java-j2seproject-copylibstask.jar" compile` and
-    `ant "-Dj2ee.server.home=C:\apache-tomcat-9.0.7" "-Dlibs.CopyLibs.classpath=C:\Program Files\NetBeans 8.2\java\ant\extra\org-netbeans-modules-java-j2seproject-copylibstask.jar" dist`.
-*   Note that you could do all above command from Netbeans IDE after importing it.
+`mvn clean package`
+*   Note that you could do all above command from any Java IDE after importing it.
 
 ## JavaTMP NPM's package.json file
 The `package.json` file is normally located at the root directory of a Node.js project. This file holds various metadata relevant

@@ -10,8 +10,8 @@ using Mysql Database Management System through java Persistent API and hibernate
 
 `JavaTMP-User-Starter` porject is a dynamic Java Bootstrap LTR/RTL multi languages User Management Web Application Version
 of our Java starter version `JavaTMP-Static-Ajax` customized to provide a user specific features built mainly using
-`Java Servlet 4.0` and `JSP 2.3` and deployed on `Apache tomcat 9` and it is a Netbeans IDE 8.2 project, so you can directly
-import and open it there.
+`Java Servlet 4.0` and `JSP 2.3` and deployed on `Apache tomcat 9` and it is a standard Maven project, so you can directly
+import and open it in any Java IDE supporting Apache Maven build tool.
 The [Online Dynamic Java Bootstrap User Management Web Application](http://java.javatmp.com:8080/JavaTMP-User-Starter/ "Dynamic Java Bootstrap LTR/RTL multi languages User Management Web application Template")
 provides a running version of this template war file on tomcat 9.
 
