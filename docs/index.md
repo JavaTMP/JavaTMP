@@ -1,7 +1,6 @@
 *   [About Java Bootstrap Template](/pages/java-bootstrap-admin-dashboard-template "About Java Bootstrap Admin And Dashboard Components Template")
 *   [High Level Template Structure](/pages/high-level-template-structure "High Level JavaTMP Template Folders And Files Structure")
 *   **Template Versions**
-    *   [JavaTMP-Static-Ajax Project Version (Deprecated)](/pages/javatmp-static-ajax-project-version "Java Bootstrap Admin and Dashboard Template")
     *   [JavaTMP-User-Starter Project Version](/pages/javatmp-user-starter-project-version "Advanced Dynamic Java Bootstrap LTR/RTL multi languages User Management Web application Template")
 *   **Template Layout**
     *   [Default JavaTMP Admin Template Layout](/pages/default-javatmp-template-layout "Default JavaTMP Template Layout")

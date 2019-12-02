@@ -7,9 +7,9 @@ It is implemented in main html file `index.html` inside `web` folder.
 
 JavaTMP templates layouts are based on fixed-fluid two columns bootstrap 4 layout which you can find separate information and demos in the following pages:
 *   [collapsible fixed sidebar in bootstrap 4 using css transition tutorial](https://www.javatmp.com/blogs/tutorial/collapsible-fixed-sidebar-in-bootstrap-4-using-css-transition "collapsible fixed sidebar in bootstrap 4 using css transition tutorial")
-*   [off canvas sliding fixed sidebar in bootstrap 4 using css transition demo](http://demo.javatmp.com/JavaTMP-Static-Ajax/pages/custom-pages/two-columns-layout/off-canvas-sliding-fixed-sidebar-in-bootstrap-4-using-css-transition.html "off canvas sliding fixed sidebar in bootstrap 4 using css transition demo")
+*   [off canvas sliding fixed sidebar in bootstrap 4 using css transition demo](http://java.javatmp.com:8080/JavaTMP-User-Starter/pages/static/custom-pages/two-columns-layout/off-canvas-sliding-fixed-sidebar-in-bootstrap-4-using-css-transition "off canvas sliding fixed sidebar in bootstrap 4 using css transition demo")
 *   [on canvas sliding hidden fixed sidebar in bootstrap 4 on mouse hover tutorial](https://www.javatmp.com/blogs/tutorial/on-canvas-sliding-hidden-fixed-sidebar-in-bootstrap-4-on-mouse-hover "on canvas sliding hidden fixed sidebar in bootstrap 4 on mouse hover")
-*   [on canvas sliding hidden fixed sidebar in bootstrap 4 on mouse hover demo](http://demo.javatmp.com/JavaTMP-Static-Ajax/pages/custom-pages/two-columns-layout/on-canvas-sliding-hidden-fixed-sidebar-in-bootstrap-4-on-mouse-hover.html "on canvas sliding hidden fixed sidebar in bootstrap 4 on mouse hover demo")
+*   [on canvas sliding hidden fixed sidebar in bootstrap 4 on mouse hover demo](http://java.javatmp.com:8080/JavaTMP-User-Starter/pages/static/custom-pages/two-columns-layout/on-canvas-sliding-hidden-fixed-sidebar-in-bootstrap-4-on-mouse-hover "on canvas sliding hidden fixed sidebar in bootstrap 4 on mouse hover demo")
 
 The template layout options for javatmp are:
 *   wider navbar over sidebar.

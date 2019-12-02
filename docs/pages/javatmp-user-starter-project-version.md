@@ -4,29 +4,14 @@ title: JavaTMP-User-Starter Project Version
 # {{ page.title }}
 
 `JavaTMP-User-Starter` project is an advanced dynamic Java Bootstrap LTR/RTL multi languages User Management Web application Template
-derived from `JavaTMP-Static-Ajax` modified and developed to provide a dynamic features built mainly using
-`Java Servlet 4.0` and `JSP 2.3` and deployed on `Apache tomcat 9` with support for data persistent
-using Mysql Database Management System through java Persistent API and hibernate JPA implementation.
-
-`JavaTMP-User-Starter` porject is a dynamic Java Bootstrap LTR/RTL multi languages User Management Web Application Version
-of our Java starter version `JavaTMP-Static-Ajax` customized to provide a user specific features built mainly using
-`Java Servlet 4.0` and `JSP 2.3` and deployed on `Apache tomcat 9` and it is a standard Maven project, so you can directly
-import and open it in any Java IDE supporting Apache Maven build tool.
+based on combined curated front-end resources of jQuery and Bootstrap LTR/RTL Admin and Dashboard components and plugins modified
+and developed to provide a dynamic features built mainly using `Java Servlet 4.0` and `JSP 2.3` and deployed on `Apache tomcat 9`
+with support for data persistent using Mysql Database Management System through java Persistent API and hibernate JPA implementation.
+It is a standard Maven project, so you can directly import and open it in any Java IDE supporting Apache Maven build tool.
 The [Online Dynamic Java Bootstrap User Management Web Application](http://java.javatmp.com:8080/JavaTMP-User-Starter/ "Dynamic Java Bootstrap LTR/RTL multi languages User Management Web application Template")
 provides a running version of this template war file on tomcat 9.
-
-It depends mainly on the following external backend java opensource libraries to provide a dynamic web application features
-with custom web MVC for serving JSP pages and handling Servlet requests:
-*   Use Apache Commons [BeanUtils 1.9.3](https://commons.apache.org/proper/commons-beanutils/ "Apache Commons beanutils Java Library"),
-[Collections 3.2.2](http://commons.apache.org/proper/commons-collections/ "Apache Commons Collections Java Library"),
-[Logging 1.2](http://commons.apache.org/proper/commons-logging/ "Apache Commons Logging Java Library"), and
-[Lang 3.8.1](http://commons.apache.org/proper/commons-lang/ "Apache Commons Lang Java Library")
-*   Use [Google Gson 2.8.5](https://github.com/google/gson "Google Gson JSON Java Library")
-*   Use [Standard Taglib 1.2](http://central.maven.org/maven2/javax/servlet/jstl/1.2/ "Java Web Standard Taglib maven repository")
-*   Use [hibernate 5.4.1](http://hibernate.org/orm/releases/5.4/ "Hibernate 5.4.1 Home & Download Page").
-*   Use [mysql-connector-java-8.0.14.jar](https://dev.mysql.com/downloads/connector/j/8.0.html "Java Mysql Connector 8 for JDBC driver").
-*   Use [simplecaptcha-1.2.1.jar](https://sourceforge.net/projects/simplecaptcha/ "Simplecaptcha Home & Download Page").
-*   Use [handlebars.java 4.0.6](https://github.com/jknack/handlebars.java).
+Kindly see the Apache Maven build file `./JavaTMP/JavaTMP-User-Starter/pom.xml`
+for more information about our Java backend dependencies.
 
 `JavaTMP-User-Starter` project is a dynamic java web application providing a simple users management demo.
 The following list provides the main features of Dynamic Java Bootstrap Users Management web application Template
@@ -77,29 +62,16 @@ version `JavaTMP-User-Starter` Project:
 *   Dynamically list chart of accounts as parent/child records using fancytree plugin. implements a preview of File manager. Dynamically list chart of accounts as parent/child records using fancytree plugin and see how to paginate result.
 
 ## `JavaTMP-User-Starter` Project Folder Structure
-The JavaTMP-User-Starter project folder structure is the same as JavaTMP-Static-Ajax one with the following main contents of its folder root:
+The JavaTMP-User-Starter project folder structure is based on Apache Maven build tool with the following main contents of its folder root:
 ```
 ./JavaTMP-User-Starter
 |---.eslintrc (ESLint plugin configuration file which contains directive and parameters to gulp-eslint gulp plugin)
-|---.gitignore (git SCM meta file to exclude mainly ./node_modules and ./nbproject/private/ folders from versioning)
-|---build.xml (Netbeans IDE auto generated ant build script. used to compile, build, package project through Netbeans IDE or manually by command line)
+|---.gitignore (git SCM meta file to exclude mainly folders from versioning)
 |---gulpfile.js (gulp's configuration file for automating front end resources and generate assets/dist JS/CSS files)
 |---package.json (A Node.js's NPM meta file. This file holds various metadata relevant to the project)
-+---conf
-    ...
-    |---build.sql (Oracle Mysql Database dump script to start the Users Web Application from)
-+---lib (External backend Java libraries used in the project)
-+---nbproject (Netbeans IDE metadata about project)
-+---src (Java source code files like Servlets and services classes)
-    +---conf
-        |---MANIFEST.MF
-        |---persistence.xml (Hibernate and JPA configuration to connect to remote database)
-    +---java (Java Source codes)
-+---test (Java source code classes for testing and future use)
-\---web (Web specific resources like assets, WEB-INF, JSP folders and pages)
-    +---META-INF
-        |---context.xml (Web Application Context file for Application Server instructions)
-    +---WEB-INF (Web Application HTML/JSP pages and resources)
++---db_scripts (Oracle Mysql Database dump script to start the Users Web Application from)
++---src (Standard Maven source code files)
+\---web (Source files of Web specific static resources like fonts, js, and sass folders and files)
 ```
 
 ### `./JavaTMP-User-Starter/build.xml` file
@@ -142,7 +114,7 @@ from it before deploy it on production. We create our production war file from a
 This is a gulp's configuration file. gulp is a toolkit for automating painful or time-consuming tasks in your development workflow.
 We use gulp to automate our building process like generating JS/CSS. The main important gulp task is `generate-dist`
 which copy resources from node_module folder and combine them and compile and generate theme and template Javascript and CSS files
-and folders. We described it in details in [JavaTMP-Static-Ajax Project Version documentation page](/pages/javatmp-static-ajax-project-version).
+and folders. We described it in details in [Manage Front-end dependencies Using Node.js And Gulp](/pages/manage-front-end-dependencies-using-node-js-and-gulp).
 
 ### `./JavaTMP-User-Starter/lib` folder
 The `lib` folder contains external backend java libraries needed to compile and run the dynamic web application features. The libraries binary jars only move to `WAR/WEB-INF/lib` when we build and generate war file. Note that the libraries with its source code and java doc are registered with Netbeans IDE project when we import it in Netbeans IDE 8.2. the following tree provide lib folder contents:

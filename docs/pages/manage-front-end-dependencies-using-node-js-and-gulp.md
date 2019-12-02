@@ -104,7 +104,7 @@ in local `./node_modules` folder by `node.js` and `napa` tools.
 The following is our complete package.json file updated with all dependencies, devDependencies, and napa entries:
 ```
 {
-  "name": "JavaTMP-Static-Ajax",
+  "name": "JavaTMP",
   "version": "0.0.4",
   "private": true,
   "description": "JavaTMP Bootstrap Admin And Dashboard Template",

@@ -33,7 +33,7 @@ because Datatables plugin does not provide support for RTL pages so we overrode 
 
 The following is a high level folder structures of our `sass` and `sass-rtl`:
 ```
-./JavaTMP/JAVATMP-Static-Ajax,JAVATMP-Java-Ajax,JAVATMP-User-Starter
+./JavaTMP/JavaTMP-User-Starter
 +---web (Web Application Context Root Folder)
     +---assets (Specific Template JS,CSS,fonts, and images folders and files)
         +---src (Source folder of the JS/CSS files)
@@ -48,7 +48,7 @@ The following is a high level folder structures of our `sass` and `sass-rtl`:
     3.  Import Custom RTL Plugins `plugins-rtl/*.scss`
 2.  Create a `./web/assets/src/sass-rtl/themes-rtl` folder which will contain
     the rtl themes of `./web/assets/src/sass/themes`
-3.  For each theme in `./web/assets/src/sass/themes` folder create a similar one in `JavaTMP-Static-Ajax-RTL/web/assets/src/sass-rtl/themes-rtl` with adding suffix `-rtl` to its name
+3.  For each theme in `./web/assets/src/sass/themes` folder create a similar one in `./web/assets/src/sass-rtl/themes-rtl` with adding suffix `-rtl` to its name
 4.  For each theme in `./web/assets/src/sass-rtl/themes-rtl` reference the original LTR version of it
     in `./web/assets/src/sass/themes` and the above `./web/assets/src/sass-rtl/main-rtl.scss`.
     For example, The contents of `./web/assets/src/sass-rtl/themes-rtl/javatmp-default-rtl.scss` is:
@@ -64,13 +64,14 @@ The following is a high level folder structures of our `sass` and `sass-rtl`:
     We will not repeat the description of gulp task `generate-dist` here again or how we manage front-end resource using node's npm and gulp, but for more information read the following pages:
 
     *   [Manage Front-end dependencies Using Node.js And Gulp](/pages/manage-front-end-dependencies-using-node-js-and-gulp "Manage Front-end dependencies Using Node.js And Gulp")
-    *   [Implement gulp's task generate-dist](/pages/javatmp-static-ajax-project-version#generate-dist-gulp-task "Gulp Task for create a concatenated file of all javascript and CSS files")
 
-6.  Run `"gulp"` or `"gulp generate-dist"` from `JavaTMP-Static-Ajax-RTL`. The main different output here are mainly the generated css files as now become `./src/main/webapp/assets/dist/css/javatmp-*-rtl.min.css` instead of `javatmp-*.min.css`.
-7. Update `index.html` file by using `./src/main/webapp/assets/dist/css/javatmp-default-rtl.min.css` INSTEAD OF `javatmp-default.min.css` and NOT after it.
-8. Update `index.html` file by setting `dir=rtl` and `lang=en`
-9. Update `index.html` file by flipping textfield's clear button to left instead of right for sidebar search.
-10. Update `index.html` by adding custom Javascript event handler for modifying dropdown's position. Because default behavior for popper.js is wrongly position it in RTL HTML pages with issues and problems.
+6.  Run `"gulp"` or `"gulp generate-dist"`.
+The main different output here are mainly the generated css files as now become
+`./src/main/webapp/assets/dist/css/javatmp-*-rtl.min.css` instead of `javatmp-*.min.css`.
+7. Update `index.jsp` file by using `./src/main/webapp/assets/dist/css/javatmp-default-rtl.min.css` INSTEAD OF `javatmp-default.min.css` and NOT after it.
+8. Update `index.jsp` file by setting `dir=rtl` and `lang=en`
+9. Update `index.jsp` file by flipping textfield's clear button to left instead of right for sidebar search.
+10. Update `index.jsp` by adding custom Javascript event handler for modifying dropdown's position. Because default behavior for popper.js is wrongly position it in RTL HTML pages with issues and problems.
 11. Update `javatmp.init` invocation by setting `floatDefault: right`, `floatReverse: left`, `direction: rtl`, `isRTL: true`.
 12. Update `package.json` by adding jQuery-contextmenuRTL plugin to `package.json` dependencies. Because jQuery-contextmenu is not support RTL by default and this extension will make it supported.
 13. Update `gulpfile.js` by adding above `jQuery-contextmenuRTL` plugin reference to `config` and `src` object to fetch it and merge it with plugins js.
@@ -90,7 +91,7 @@ The following is a high level folder structures of our `sass` and `sass-rtl`:
 27. Update Datatables plugin footer/total label align to left.
 28. Update Echarts demo page for all charts apply manual RTL modifications.
 29. Update slick-carousel plugin page by `rtl: true`.
-30. Update Login & 404 demo pages by applying same index.html modifications
+30. Update Login & 404 demo pages by applying same index.jsp modifications
 31. The following plugins need modifications to support RTL:
     `fontawesome-free-webfonts`
     it is better to check your icons for LTR/RTL direction. so you could create
@@ -133,7 +134,5 @@ The following is a high level folder structures of our `sass` and `sass-rtl`:
     `jquery-validation`
     add custom localization file for each desire language and locale.
 
-Kindly see the static HTML RTL `./JavaTMP/JavaTMP-Static-Ajax/web/index-rtl.html`
-file for more information about these modifications. And for more details information
-about custom plugins modifications and usages to support RTL and internationalization features
+For more details information about custom plugins modifications and usages to support RTL and internationalization features
 kindly see our [Front-end Plugins And Frameworks documentation page](/pages/reference/javatmp-front-end-plugins-and-frameworks).
