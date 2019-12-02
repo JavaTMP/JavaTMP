@@ -252,6 +252,16 @@ and usages.
     +---sass-rtl
 ```
 
+The main sass file that include bootstrap and template sass file and override it is
+in `./web/assets/src/sass/main.scss` that was referenced by `./web/assets/src/sass/themes/javatmp-default.scss`
+which the later referenced in all other theme files resided in `./web/assets/src/sass/themes`.
+This main.scss file includes and references the following resources:
+1.  Import JavaTMP Global Variables
+2.  Import original Bootstrap SCSS file
+3.  Import JavaTMP Base Tempalte SCSS files
+4.  Import Custom Plugins SCSS files that Override default plugins CSS rules
+5.  Import demo pages scss files
+
 The main important JSP page in our dynamic Java Bootstrap template is `index.jsp` which was dispatched from
 `com.javatmp.web.controller.IndexController` Servlet class to the user. The following HTML code provides its contents:
 
