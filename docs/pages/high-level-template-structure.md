@@ -3,16 +3,7 @@ title: High Level Template Structure
 ---
 # {{ page.title }}
 
-Your purchased package contains separate folder for each template. The following is a high level folder structures
-of purchased JavaTMP project package with its description and usage:
-
-```
-**(Deprecated and will be merged and be part of dynamic product version 0.0.13)**
-JavaTMP-html.zip (JavaTMP Static HTML Bootstrap Admin and Dashboard components template)
-|---readme.md (read me file)
-|---LICENSE (end-user license agreement (EULA) and copyright information file)
-+---JavaTMP-Static-Ajax (Static LTR/RTL Bootstrap Admin and Dashboard components template)
-```
+Your purchased package contains the following folder with its description and usage:
 
 ```
 JavaTMP-java.zip (JavaTMP Dynamic Java Bootstrap Admin and Dashboard components template)
@@ -27,17 +18,10 @@ readme.txt file thanks you for purchasing our template and provides you with a
 ### `./JavaTMP/LICENSE` file
 LICENSE file contains copyright information and end-user license agreement (EULA).
 
-### `./JavaTMP-Static-Ajax` folder
-Project `JavaTMP-Static-Ajax` Which consists of combined curated resources of
-general static bootstrap LTR/RTL Admin and Dashboard components template.
-Our [online demo](http://demo.javatmp.com/JavaTMP-Static-Ajax/
-"Java Bootstrap Admin And Dashboard Components Template")
-deployed and hosted from this folder.
-For more information see ﻿[JavaTMP-Static-Ajax Project Version online documentation page](/pages/javatmp-static-ajax-project-version "﻿JavaTMP-Static-Ajax Project Version Documentation Page").
-
 ### `JavaTMP-User-Starter` folder
 `JavaTMP-User-Starter` project is an advanced Dynamic Java Bootstrap LTR/RTL multi languages
-User Management Web application Template derived from `JavaTMP-Static-Ajax` project
+User Management Web application Template based on combined curated front-end resources
+of jQuery and Bootstrap LTR/RTL Admin and Dashboard components and plugins
 with support for data persistent using Mysql Database Management System through
 java Persistent API and hibernate JPA implementation.
 The [online Java User Management Web Application demo](http://java.javatmp.com:8080/JavaTMP-User-Starter/
@@ -49,12 +33,18 @@ For more information see ﻿[JavaTMP-User-Starter Project Version online documen
 ### Important Notes And Questions
 #### What should I do BEFORE buying a JavaTMP Bootstrap Template ?
 *   Know what your requirements are and have a clear idea of what you want in terms of design and the functionalities.
-*   Go through your design requirements. Know what all functionalities you would need in your template and what plugins are better suited for serving those functionalities.
-*   Go through our documentation and above live demos and see if it provides your desired requirements you are looking for and you have the experiences to customize it and make the changes you need.
-*   For static version, make sure you have required experiences to develop and use our web development tools and frameworks like `jQuery`, `Bootstrap`, `Node`, `gulp.js`, and the thired-party jQuery or Bootstrap plugins.
-*   For dynamic Java version, make sure you have required experiences to develop and use our backend web development tools and frameworks like `Java`, `Servlet`, `JSP`, `Tomcat`, and external third-party libraries.
-*   Evaluate your choices based on the general criteria or factors of Bootstrap Admin and Dashboard templates like `Design`, `Code`, `Cost`, `Responsiveness`, `Customization`, `Security`, `Support`, `Documentation`, `Ratings and Reviews`, `Number of Downloads or Sales`.
-*   We don't provide a return or refund policy. So, always feel free to ask questions or contact us.
+*   Go through your design requirements. Know what all functionalities you would need in your template
+and what plugins are better suited for serving those functionalities.
+*   Go through our documentation and above live demos and see if it provides your desired requirements
+you are looking for and you have the experiences to customize it and make the changes you need.
+*   Make sure you have required experiences to develop and use our web development tools and frameworks
+like `jQuery`, `Bootstrap`, `Node`, `gulp.js`, and the thired-party jQuery or Bootstrap plugins.
+*   Make sure you have required experiences to develop and use our backend web development tools and frameworks
+like `Java`, `Maven`, `Servlet`, `JSP`, `Tomcat`, and external third-party libraries.
+*   Evaluate your choices based on the general criteria or factors of Bootstrap Admin and Dashboard templates like
+`Design`, `Code`, `Cost`, `Responsiveness`, `Customization`, `Security`, `Support`, `Documentation`, `Ratings and Reviews`,
+`Number of Downloads or Sales`.
+*   We don't provide a return or refund policy. So, always feel free to ask any questions or contact us.
 
 #### What should I do AFTER buying a JavaTMP Bootstrap Template ?
 *   Download the Compressed archive `.zip` file sent to you.
@@ -62,10 +52,10 @@ For more information see ﻿[JavaTMP-User-Starter Project Version online documen
 *   Extract Downloaded JavaTMP file using any unzip tools like winrar or winzip.
 *   Check that your extracted JavaTMP folder structures is similar to above folder tree structure.
 *   Make sure you already download and install `git`, `nodejs`, `gulpjs`, `java`, `maven`.
-*   Navigate to `./JavaTMP-Static-Ajax` using command line tool and run the command `npm install` and then `gulp run-local-web-server`.
-Open a browser on `http://localhost:8888` to check it. stop the local server.
+*   To build front-end resources, navigate to project folder using command line tool
+and run the command `npm install` and then `gulp`.
+*   To build Java war file, Navigate to project using command line tool and run the command `mvn clean package`.
 You could import the `JavaTMP-User-Starter` project directly from any Java IDE supporting Maven build tool.
-*   Navigate to `./JavaTMP-User-Starter` using command line tool and run the command `npm install`.
 *   Make sure you already download and install above web development tools and Java development tools like `Java`, `Tomcat`, `Maven`.
 *   For `./JavaTMP-User-Starter` project it is better to import it on any Java IDE with Maven support.
 But you can run the following command to clean, compile, or dist project using
@@ -180,50 +170,23 @@ You can run the default gulp's task using the following command line:
 gulp
 ```
 
-## JavaTMP HTML Files
-The HTML files for template consist of main html files like `./web/index.html`, `./web/index-rtl.html` files
-and all HTML files located in `./web/pages` folder which most of them are AJAX HTML snippets which called
-from `./web/index.html` file sidebar section and `javatmp.js` Javascript file using jquery AJAX. 
-The following is a high level folder structures of JavaTMP HTML `./web` regarding HTML files,
-kindly see our [online demo](http://demo.javatmp.com/JavaTMP-Static-Ajax/) sidebar links for complete list of folders and links:
-```
-./web
-|---index.html
-|---index-rtl.html
-+---assets
-+---pages
-    |---home.html
-    +---bootstrap
-    +---chart
-    +---custom-components
-    +---custom-pages
-        |---404-page.html
-        +---empty-pages
-            |---blank-page.html
-            |---card-page.html
-            |---empty-page.html
-            |---event-page.html
-        +---inbox
-        +---login-pages
-    +---form
-    +---gallery
-    +---plugins
-    +---table
-    +---wizard
-```
+## JavaTMP Static HTML Files
+The HTML files for template consist of JSP pages like `.\JavaTMP-User-Starter\src\main\webapp\WEB-INF\index.jsp`,
+`.\JavaTMP-User-Starter\src\main\webapp\WEB-INF\pages\*` files which most of them are AJAX HTML snippets which called
+from `index.jsp` file sidebar section and `javatmp.js` Javascript file using jquery AJAX. 
+
 There are three types of HTML files exist in above folder.
-
-1.  `index.html` which consists of the main html file used for initializing Javascript
+1.  `index.jsp` which consists of the main html file used for initializing Javascript
     and providing main layout structure of the template like navbar, sidebar and use AJAX to load other html snippet files.
-2.  HTML snippet files which consist of HTML code used as an AJAX content to be injected in the index.html file.
-    like most of other pages, for example `./web/pages/custom-pages/empty-pages/card-page.html` page.
-    Kindly refer to `./web/pages/custom-pages/empty-pages/empty-page.html` page to see the minimum required html code needed
-    to create an AJAx snippet content. the following link is an
-    [online demo of empty-page.html](http://demo.javatmp.com/JavaTMP-Static-Ajax/#pages/custom-pages/empty-pages/empty-page.html).
-3.  Separate HTML pages consist of complete code to show specific scenarios or features like `404-page.html`
-    or `default-login-page.html`. they open in new browser tab and sometimes they depends on external front-end resources.
+2.  HTML snippet files which consist of HTML code used as an AJAX content to be injected in the index.jsp file.
+    like most of other pages, for example `./pages/custom-pages/empty-pages/card-page.jsp` page.
+    Kindly refer to `./pages/custom-pages/empty-pages/empty-page.jsp` page to see the minimum required html code needed
+    to create an AJAX snippet content. the following link is an
+    [online demo of empty-page.jsp](http://java.javatmp.com:8080/JavaTMP-User-Starter/#/JavaTMP-User-Starter/pages/static/custom-pages/empty-pages/empty-page).
+3.  Separate HTML pages consist of complete code to show specific scenarios or features like `404-page.jsp`
+    or `default-login-page.jsp`. they open in new browser tab and sometimes they depends on external front-end resources.
 
-Please see our [online demo](http://demo.javatmp.com/JavaTMP-Static-Ajax/) for those types of pages.
+Please see our [online demo](http://java.javatmp.com:8080/JavaTMP-User-Starter/) for those types of pages.
 
 ## JavaTMP Front-end Frameworks And Plugins Files
 The JavaTMP Front-end frameworks and plugins consist of the libraries used in the front-end part of the template like jQuery,
@@ -313,7 +276,7 @@ and include the complete `./node_modules/bootstrap/scss/bootstrap.scss` file aga
 instead of remaining optional part only.
 
 ## JavaTMP Javascript Files
-The main JavaTMP Javascript files are located in the `./web/assets/dist/js`
+The main JavaTMP Javascript files are located in the `.\JavaTMP-User-Starter\src\main\webapp\assets\dist`
 and generated from the gulp's task 'generate-dist` from these locations:
 - From `./web/assets/src/js-src` after compile and minificate to `javatmp.min.js`.
 - From `src.js` array for each plugin js file after merging to `javatmp-plugins-all.min.js`
@@ -321,19 +284,17 @@ and generated from the gulp's task 'generate-dist` from these locations:
 
 The following file structure provide the output JS files from gulp's task 'generate-dist':
 ```
-./web/assets/dist/js
+.\JavaTMP-User-Starter\src\main\webapp\assets\dist
 +---javatmp-plugins-all-locale-*.min.js (For each Locale key defines `src.localeJS` object like `src.localeJS.en`)
 +---javatmp-plugins-all.min.js
 +---javatmp.min.js
 ```
 
-These Javascript files are referenced from index html/JSP page. kindly see the following pages for more information:
-- `./JavaTMP/JavaTMP-Static-Ajax/web/index.html`
-- `./JavaTMP/JavaTMP-Static-Ajax/web/index-rtl.html`
+These Javascript files are referenced from index.jsp page. kindly see the following pages for more information:
 - `./JavaTMP/JavaTMP-User-Starter/web/WEB-INF/index.jsp`
 
 ## Global And Mandatory Front-end Resources
-In `index.html` page, we defined and initialized the global resources. the following list of front-end resources
+In `index.jsp` page, we defined and initialized the global resources. the following list of front-end resources
 are used when initializing page parts through calling of `index.init` method:
 *   `NProgress`. We use NProgress library to provide a red progress bar at top of the browser page for all fetching activities.
 *   `jQuery`. JavaTMP templates are mainly based on jQuery Javascript library.
@@ -365,14 +326,14 @@ but it does not make the project ready for production quickly.
 In this page we are going to discuss the mandatory or global front-end resources with its initialization
 and secondary or demo feature pages only.
 
-### Embedded CSS/JS Code in `index.html`
-For separation of concerns and simplicity we moved any `CSS/JS` codes that should be in `index.html` to file `index.js`
+### Embedded CSS/JS Code in `index.jsp`
+For separation of concerns and simplicity we moved any `CSS/JS` codes that should be in `index.jsp` to file `index.js`
 and initialize page by calling `index.init` function that will wrap all initialization of above plugins.
 Check out `./web/assets/src/js-src/index.js` Javascript file for more information.
 
-### Embedded CSS/JS Code in `./web/pages` folder
-Most ajax demo pages are based on one of template snippet empty pages reside in `./web/pages/custom-pages/empty-pages`
-specially `card-page.html`. Check out HTML file `./web/pages/custom-pages/empty-pages/card-page.html`
+### Embedded CSS/JS Code in `./pages` folder
+Most ajax demo pages are based on one of template snippet empty pages reside in `./pages/custom-pages/empty-pages`
+specially `card-page.jsp`. Check out HTML file `./web/pages/custom-pages/empty-pages/card-page.jsp`
 So whenever we need to implement a new demo page for plugin or feature, we copy this file to desired folder
 in `./web/pages/` and rename it and add a new link in sidebar menu to point to it and write the code inside this new page
 with all references to external `CSS` and `Javascript` files if there are anyones and embed to any custom styling
@@ -380,38 +341,38 @@ and initialize the plugins in `script` tag. kindly refer to ajax demo pages in `
 
 ### Embedded CSS/JS Code in isolated demo pages in `./web/pages` folder
 These pages are not AJAX snippets and normally run separately from the theme. It is like:
-*   **Login Pages**. for example see `./web/pages/custom-pages/login-pages/default-login-page.html`
-*   **System Pages**, for example see `./web/pages/custom-pages/404-page.html`
+*   **Login Pages**. for example see `./web/pages/custom-pages/login-pages/default-login-page.jsp`
+*   **System Pages**, for example see `./web/pages/custom-pages/404-page.jsp`
 *   **Feature Pages**, these demo pages might reference external `CSS/JS` files too
     that are not exist in our theme for demonstration purposes, So you should be connected to internet when browsing those pages.
     for example see pages in `./web/pages/custom-pages/two-columns-layout` folder.
 
 ## JavaTMP AJAX Page Lifecycle
-JavaTMP templates are a type of `AJAX` based landing page which fetchs `index.html` page using browser address bar
+JavaTMP templates are a type of `AJAX` based landing page which fetchs `index.jsp` page using browser address bar
 and then all remaining pages consist of snippet html codes that are loaded through `AJAX` in `index.js` file.
 In this page we are going to discuss all `AJAX` aspect starting from loading AJAX pages in `index.js` to triggering 
 custom `events` to provide complete life cycle for AJAX page and template.
 
-Whenever you load `index.html` page by explicitly typing it on browser URL address bar or pressing
+Whenever you load `index.jsp` page by explicitly typing it on browser URL address bar or pressing
 a link that point to ROOT directory, the following steps are happened:
-1.  Browser Load `index.html` page from remote server
-2.  Browser Load all CSS/JS files in the head and at the end of the `index.html` document.
-3.  Browser run any embedded JS code in `index.html`
+1.  Browser Load `index.jsp` page from remote server
+2.  Browser Load all CSS/JS files in the head and at the end of the `index.jsp` document.
+3.  Browser run any embedded JS code in `index.jsp`
 4.  Browser run `index.init` which calls `javatmp.init` method with default or overriding parameters.
     the most important parameters for AJAX here is:
-    *   `defaultUrl: 'pages/home.html'`. which is the default URL string to search for in href attribute in sidebar <a> tags
+    *   `defaultUrl: 'pages/home'`. which is the default URL string to search for in href attribute in sidebar <a> tags
         to press after initialization if browser's URL hash string does not contain one to search for,
         because we support `AJAX` URL bookmarking.
     *   `updateURLHash: true`. To support `AJAX` URL bookmarking and showing URL hash string, put this parameter to `true`,
         else pressing on any sidebar links will not update browser URL in address bar and navigating bookmarked URL
-        that contains hash string will redirect to `index.html` page and remove the hash string in URL.  
+        that contains hash string will redirect to `index.jsp` page and remove the hash string in URL.  
 5.  At the end of the `index.init` method a code runs to check which `<a>` link should be pressed
     based on `defaultUrl` and `updateURLHash` parameters. And one of the following should happen:  
-    1.  Removing URL' hash string starting from # character which will redirect the page to index.html again.
+    1.  Removing URL' hash string starting from # character which will redirect the page to index.jsp again.
     2.  Using `defaultUrl` string to look for `<a>`'s `href` equal it and triggers a `click` event on it.
     3.  Using URL's hash string as a searching string after remove `#` character when `javatmp.settings.updateURLHash` is `true`
         and hash is exist in the URL.
-6.  After one of the sidebar <a> link was clicked In our case `pages/home.html` by the above event firing code the following
+6.  After one of the sidebar <a> link was clicked In our case `pages/home.jsp` by the above event firing code the following
     event handling will work and start JavaTMP template AJAX life cycle phases using
     [bootstrap-actionable](https://github.com/JavaTMP/bootstrap-actionable/blob/master/js/bootstrap-actionable.js) plugin.
-7. Kindly refer to `./web/pages/custom-pages/empty-pages/` pages to see more details about AJAX events lifecycle code.
+7. Kindly refer to `./pages/custom-pages/empty-pages/` pages to see more details about AJAX events lifecycle code.
