@@ -19,7 +19,7 @@ const argv = require('yargs').argv;
 // https://stackoverflow.com/questions/40521506/gulpuglifyerrorunable-to-minify-javascript
 var uglifyES6 = require('gulp-uglify-es').default;
 
-var defaultDestinationDistLocation = "./web/assets/dist"; // "./src/main/webapp/assets/dist"
+var defaultDestinationDistLocation = "./src/main/webapp/assets/dist"; // "./web/assets/dist"
 if (argv.dest !== undefined) {
     var defaultDestinationDistLocation = argv.dest;
 }
