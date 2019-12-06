@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package javatmp.processing;
+package com.javatmp.processing;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
