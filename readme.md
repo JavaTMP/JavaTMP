@@ -33,21 +33,16 @@ Kindly visit the following online page for details folders and files description
 https://help.javatmp.com/pages/high-level-template-structure
 
 ## Running
-It is best to run JavaTMP's applications with in a HTTP web server. However,
-inside each project there is a gulp task that run a local web server.
-So you can use it for testing purposes by running the following commands:
+It is best to run JavaTMP's applications with in a Java Maven support IDE. However,
+You can run the following commands to compile and generate resources:
 (make sure first that node.js is installed in your machine):
 ```
-npm install
-gulp run-local-web-server
+npm install (Will install all Node.js dependencies mentioned in package.json file)
+gulp (Re-generate all front-end dependencies)
+maven clean package (clean and generate war file in ./target folder)
 ```
 
-the above command will run a local web server listening
-on port 8888 and context root "web". To access the application
-after running the above command, use the following web address:
-
-http://localhost:8888/
-
 ## Copyright and License
-JavaTMP is copyrighted by [JavaTMP](http://www.javatmp.com) and released under [JavaTMP License](https://github.com/JavaTMP/JavaTMP/blob/master/LICENSE).
+JavaTMP is copyrighted by [JavaTMP](http://www.javatmp.com) and released under
+[JavaTMP License](https://github.com/JavaTMP/JavaTMP/blob/master/LICENSE).
 
