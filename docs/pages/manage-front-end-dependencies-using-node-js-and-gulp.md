@@ -146,7 +146,7 @@ node_modules folder inside your context root folder, indeed not all files and di
 The following is a high level web folder structures of our template web application:
 ```
 web (Web Application Context Root Folder)
-    |---index.html (Main HTML Page references Front-end Libraries from components folder)
+    |---index.jsp (Main HTML Page references Front-end Libraries from components folder)
     +---assets (Specific Template JS,CSS,fonts, and images folders and files)
     +---components (Temporary destination for our Front-end resources Folders)
     \---pages (HTML Pages reference Front-end Libraries from assets folder)

@@ -3,7 +3,7 @@ title: JavaTMP Template Layout
 ---
 # {{ page.title }}
 JavaTMP templates are an AJAX based Templates with fixed navbar, sidebar, breadcrumb, and footerbar.
-It is implemented in main html file `index.html` inside `web` folder.
+It is implemented in main html file `.\src\main\webapp\WEB-INF\index.jsp`.
 
 JavaTMP templates layouts are based on fixed-fluid two columns bootstrap 4 layout which you can find separate information and demos in the following pages:
 *   [collapsible fixed sidebar in bootstrap 4 using css transition tutorial](https://www.javatmp.com/blogs/tutorial/collapsible-fixed-sidebar-in-bootstrap-4-using-css-transition "collapsible fixed sidebar in bootstrap 4 using css transition tutorial")

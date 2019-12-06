@@ -27,7 +27,7 @@ Removing `jQueryUI` library from JavaTMP Tempate
 You could remove `jQueryUI` if you don't want to use sorting card by doing the following steps:
 *   Remove `jquery-ui-dist` and `jquery-ui-touch-punch` references from `package.json` file.
 *   Run `gulp copy-components` command.
-*   Remove from `index.html` the above references for `jqueryUI` and `touch-punch` CSS/JS files.
+*   Remove from `index.jsp` the above references for `jqueryUI` and `touch-punch` CSS/JS files.
 *   The Sorting and moving Card will not work.
 *   The jQuery Fullcalendar plugin will not work too.
 *   For jquery Fancytree plugin use the `jquery.fancytree-all-deps.min.js` instead of `jquery.fancytree-all.min.js`.

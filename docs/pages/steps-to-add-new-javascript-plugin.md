@@ -19,8 +19,8 @@ at the command prompt in root folder of JavaTMP-User-Starter Project:
 ```
 9.  Make sure that the previous command downloaded the plugin folder in `./node_modules` folder
 and updated the `./package.json`'s dependencies section by adding the new module name as dependency.
-10.  Create a demo page for new plugin by using one of empty pages like `./web/pages/custom-pages/empty-pages/card-page.html` page.
-11.  Add a link for new page in sidebar menu in index.html page and make it point to above new plugin page.
+10.  Create a demo page for new plugin by using one of empty pages like `./web/pages/custom-pages/empty-pages/card-page.jsp` page.
+11.  Add a link for new page in sidebar menu in `index.jsp` page and make it point to above new plugin page.
 12.  Implement the plugin functionalities in the new page and check if the new plugin need a custom style to reflect
 the standard JavaTMP template styling.
 13.  If the new plugin need a custom styling page, then create a new empty sass file in assets/sass/plugins folder.
