@@ -47,5 +47,8 @@ title: General External Important Links
 - [https://github.com/paulhodel/jexcel](https://github.com/paulhodel/jexcel)
 - [https://github.com/joeantkowiak/TableScroller](https://github.com/joeantkowiak/TableScroller)
 
+## Convert CSS file to SASS' SCSS syntax
+- [http://sebastianpontow.de/css2compass/](http://sebastianpontow.de/css2compass/)
+
 ## Collection Links
 - [https://help.optimizely.com/Build_Campaigns_and_Experiments/Use_screen_measurements_to_design_for_responsive_breakpoints](https://help.optimizely.com/Build_Campaigns_and_Experiments/Use_screen_measurements_to_design_for_responsive_breakpoints)
