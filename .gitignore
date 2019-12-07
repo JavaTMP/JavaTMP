@@ -14,9 +14,6 @@ projects
 /JavaTMP-User-Starter/build/
 /JavaTMP-User-Starter/dist/
 /JavaTMP-User-Starter/target/
-/JavaTMP-Processing/nbproject/private/
-/JavaTMP-Processing/build/
-/JavaTMP-Processing/dist/
 
 # eclipse
 .settings
