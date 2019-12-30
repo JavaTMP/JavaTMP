@@ -19,7 +19,6 @@ public class IndexController {
     @RequestMapping("/pages/**")
     public String pages(HttpServletRequest request) {
         String requestURI = request.getRequestURI();
-        System.out.println("request path is [" + requestURI + "]");
         log.debug("request path is [" + requestURI + "]");
         String requestPage = null;
         if (!requestURI.endsWith(".html")) {
