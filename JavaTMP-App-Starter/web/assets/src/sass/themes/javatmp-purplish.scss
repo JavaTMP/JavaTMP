@@ -1,0 +1,286 @@
+
+// 1. overriding global Bootstrap variables:
+$white:    #fff !default;
+$gray-100: #F8FAFD !default;
+$gray-200: #EBEDF0 !default;
+$gray-300: #DFE1E4 !default;
+$gray-400: #D2D4D7 !default;
+$gray-500: #C5C7CA !default;
+$gray-600: #B8BABD !default;
+$gray-700: #ACAEB1 !default;
+$gray-800: #555555 !default;
+$gray-900: #484848 !default;
+$black:    #000 !default;
+
+$grays: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$grays: map-merge(
+(
+"100": $gray-100,
+"200": $gray-200,
+"300": $gray-300,
+"400": $gray-400,
+"500": $gray-500,
+"600": $gray-600,
+"700": $gray-700,
+"800": $gray-800,
+"900": $gray-900
+),
+$grays
+);
+
+$primary:       #7864ad  !default;
+$secondary:     #abbac3 !default;
+$success:       #53874a !default;
+$info:          #459dd7 !default;
+$warning:       #ffa21f !default;
+$danger:        #b7422e !default;
+$light:         #e7e7e7 !default;
+$dark:          #3c3c3c !default;
+
+$theme-colors: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$theme-colors: map-merge(
+(
+"primary":    $primary,
+"secondary":  $secondary,
+"success":    $success,
+"info":       $info,
+"warning":    $warning,
+"danger":     $danger,
+"light":      $light,
+"dark":       $dark
+),
+$theme-colors
+);
+
+/*$enable-rounded:            false !default;*/
+
+
+$body-bg:                   #E4E6E9 !default;
+$body-color:                #393939 !default;
+
+$grid-gutter-width:           20px !default;
+
+/*$border-radius:               0 !default;
+$border-radius-lg:            0 !default;
+$border-radius-sm:            0 !default;*/
+
+$transition-base:             all .3s ease-in-out !default;
+
+$table-cell-padding:          .3rem !default;
+$input-btn-padding-x:         .5rem !default;
+
+$input-btn-padding-x-sm: .25rem !default;
+
+$input-btn-padding-x-lg:      .65rem !default;
+
+$input-color:                           $gray-800 !default;
+$input-border-color:                    $gray-500 !default;
+$input-group-addon-bg: $gray-100 !default;
+
+$form-group-margin-bottom:              .7rem !default;
+
+$custom-select-padding-x:           .3rem !default;
+
+$navbar-toggler-padding-x: .3rem !default;
+
+$card-spacer-y:                     .6rem !default;
+
+/*$card-cap-bg:     #F2F2F2!default;*/
+
+$dropdown-item-padding-x:           1rem !default;
+$nav-link-padding-x:                .7rem !default;
+
+$list-group-action-color: $gray-900 !default;
+// --------------------------------
+
+
+// First, Include Required parts of Bootstrap
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+
+
+// 2. Override JavaTMP variables:
+$javatmp-secondary-bg: #F2F2F2!default;
+
+$javatmp-navbar-bg: $light!default;
+$javatmp-navbar-menu-link-hover-bg: darken($javatmp-navbar-bg, 7.5%)!default;;
+$javatmp-navbar-menu-link-active-bg: darken($javatmp-navbar-bg, 12.5%)!default;;
+$javatmp-navbar-brand-color: color-yiq($javatmp-navbar-bg)!default;;
+$javatmp-navbar-toggler-color: color-yiq($javatmp-navbar-bg)!default;;
+$javatmp-navbar-toggler-border-color: color-yiq($javatmp-navbar-bg)!default;;
+$javatmp-navbar-menu-link-color: color-yiq($javatmp-navbar-bg)!default;;
+$javatmp-navbar-menu-link-hover-color: color-yiq($javatmp-navbar-bg)!default;;
+$javatmp-navbar-menu-link-active-color: color-yiq($javatmp-navbar-bg)!default;;
+
+$javatmp-sidebar-bg: transparent!default;
+$javatmp-sidebar-link-color: color-yiq($primary)!default;
+$javatmp-sidebar-border-color: lighten($primary, 10%)!default;
+$metismenu-link-border-bottom-color: $javatmp-sidebar-border-color;
+$metismenu-submenu-vertical-border-color: $javatmp-sidebar-border-color;
+
+$metismenu-link-hover-bg: lighten($primary, 10%)!default;
+$metismenu-link-active-bg: lighten($primary, 15%)!default;
+
+// 3. Override Plugins variables:
+
+
+@import "javatmp-default.scss";
+
+// Override any Generated CSS classes and styles.
+
+.main-breadcrumb-bar {
+    box-shadow: $box-shadow;
+}
+
+// switch navbar toggler lines colors
+$toggler-bg-image: $navbar-dark-toggler-icon-bg;
+@if ($javatmp-navbar-toggler-color == $yiq-text-dark) {
+    $toggler-bg-image: $navbar-light-toggler-icon-bg
+}
+.main-javatmp-navbar {
+    .navbar-toggler-icon {
+        background-image: $toggler-bg-image;
+    }
+}
+
+// imported from bootswatch spacelab theme v 4.1.3:
+// Spacelab 4.1.3
+// Bootswatch
+
+
+// Variables ===================================================================
+
+$web-font-path: "https://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700" !default;
+@import url($web-font-path);
+
+@mixin btn-shadow($color){
+    @include gradient-y-three-colors(lighten($color, 15%), $color, 50%, darken($color, 4%));
+    filter: none;
+    border: 1px solid darken($color, 10%);
+}
+
+.navbar {
+    .nav-link,
+    .navbar-brand {
+        text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.1);
+        transition: color ease-in-out .2s;
+    }
+    &.bg-primary {
+        @include btn-shadow($primary);
+    }
+    &.bg-dark {
+        @include btn-shadow($secondary);
+    }
+    &.bg-light {
+        @include btn-shadow($light);
+
+        .nav-link,
+        .navbar-brand {
+            text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .navbar-brand {
+            color: $navbar-light-color;
+
+            &:hover {
+                color: $info;
+            }
+        }
+    }
+}
+
+// Buttons =====================================================================
+
+.btn {
+    text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.1);
+
+    &-primary {
+        @include btn-shadow($primary);
+
+        &:not(.disabled):hover {
+            @include btn-shadow(darken($primary, 4%));
+        }
+    }
+
+    &-secondary {
+        @include btn-shadow($secondary);
+        color: $white;
+
+        &:not(.disabled):hover {
+            @include btn-shadow(darken($secondary, 4%));
+        }
+    }
+
+    &-success {
+        @include btn-shadow($success);
+
+        &:not(.disabled):hover {
+            @include btn-shadow(darken($success, 4%));
+        }
+    }
+
+    &-info {
+        @include btn-shadow($info);
+
+        &:not(.disabled):hover {
+            @include btn-shadow(darken($info, 4%));
+        }
+    }
+
+    &-warning {
+        @include btn-shadow($warning);
+
+        &:not(.disabled):hover {
+            @include btn-shadow(darken($warning, 4%));
+        }
+    }
+
+    &-danger {
+        @include btn-shadow($danger);
+
+        &:not(.disabled):hover {
+            @include btn-shadow(darken($danger, 4%));
+        }
+    }
+
+    &-dark {
+        @include btn-shadow($dark);
+
+        &:not(.disabled):hover {
+            @include btn-shadow(darken($dark, 4%));
+        }
+    }
+
+    &-light {
+        @include btn-shadow($light);
+        color: $navbar-light-color;
+        text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.1);
+        transition: color ease-in-out .2s;
+
+        &:not(.disabled):hover {
+            @include btn-shadow(darken($light, 4%));
+            color: $info;
+        }
+    }
+
+    &-link {
+        text-shadow: none;
+    }
+
+    &:active,
+        &.active {
+        background-image: none;
+        @include box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
+    }
+}
+
+[class*="btn-outline-"] {
+    text-shadow: none;
+}
+
+.sidebar {
+    @include gradient-y-three-colors(lighten($primary, 15%), $primary, 50%, darken($primary, 5%));
+}
