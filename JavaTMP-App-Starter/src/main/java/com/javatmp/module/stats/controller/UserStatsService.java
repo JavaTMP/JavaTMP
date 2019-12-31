@@ -9,7 +9,6 @@ import com.javatmp.module.country.entity.Countrytranslation_;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.entity.User_;
 import java.util.List;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceException;
@@ -21,10 +20,10 @@ import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.ListJoin;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class UserStatsService extends JpaRepository<Object[], Long> {
-
-    private final Logger logger = Logger.getLogger(getClass().getName());
 
     public UserStatsService(EntityManagerFactory emf) {
         super(Object[].class, emf);
