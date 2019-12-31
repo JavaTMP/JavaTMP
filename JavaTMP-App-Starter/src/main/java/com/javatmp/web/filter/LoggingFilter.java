@@ -12,10 +12,10 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class LoggingFilter extends FilterWrapper {
-
-    private final Logger logger = Logger.getLogger(getClass().getName());
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
@@ -36,7 +36,9 @@ public class LoggingFilter extends FilterWrapper {
             activity.setCreationDate(creationDate);
             activity.setIPaddress(ipAddress);
             activity.setActionType("page_view");
-            activity.setActionId(this.getUrl(httpRequest));
+            String url = this.getUrl(httpRequest);
+            log.debug("url to be logging in db is [" + url + "]");
+            activity.setActionId(url);
             getServiceFactory().getActivityService().save(activity);
 
             HttpSession session = httpRequest.getSession(false);
@@ -62,7 +64,7 @@ public class LoggingFilter extends FilterWrapper {
 
             long endTime = new Date().getTime();
             long lastTime = (endTime - startTime);
-            logger.info("URI [" + httpRequest.getRequestURI() + "]=[" + (endTime - startTime) + "] milliseconds");
+            log.info("URI [" + httpRequest.getRequestURI() + "]=[" + (endTime - startTime) + "] milliseconds");
 
             activity.setTimeLast(lastTime);
             this.getServiceFactory().getActivityService().merge(activity);

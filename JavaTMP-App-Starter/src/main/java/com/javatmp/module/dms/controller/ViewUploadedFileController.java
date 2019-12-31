@@ -16,14 +16,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-@WebServlet("/ViewUploadedFileController")
-public class ViewUploadedFileController extends HttpServlet {
+@Slf4j
+@Controller
+public class ViewUploadedFileController {
 
-    private final Logger logger = Logger.getLogger(getClass().getName());
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @RequestMapping(value = "/ViewUploadedFileController", method = RequestMethod.GET)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         try {
             ServletContext context = request.getServletContext();
@@ -33,7 +36,7 @@ public class ViewUploadedFileController extends HttpServlet {
             Document temp = new Document();
 
             MvcHelper.populateBeanByRequestParameters(request, temp);
-            logger.info("Requested Document [" + MvcHelper.deepToString(temp) + "]");
+            log.info("Requested Document [" + MvcHelper.deepToString(temp) + "]");
             String viewTypeTemp = request.getParameter("viewType");
             Document document = ds.getOne(temp.getDocumentId());
 
@@ -63,10 +66,11 @@ public class ViewUploadedFileController extends HttpServlet {
             OutputStream outStream = response.getOutputStream();
             outStream.write(document.getDocumentContent());
         } catch (IllegalAccessException ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
-            throw new ServletException(ex);
+            log.error(ex.getMessage(), ex);
+            throw new Exception(ex);
         } catch (InvocationTargetException ex) {
-            Logger.getLogger(ViewUploadedFileController.class.getName()).log(Level.SEVERE, null, ex);
+            log.error(ex.getMessage(), ex);
+            throw new Exception(ex);
         }
     }
 }

@@ -43,7 +43,7 @@ public class AuthenticatorFilter extends FilterWrapper {
             chain.doFilter(request, response);
         } else {
             // check if requester is authenticated or not
-            logger.info("Session Attribute [" + session.getAttribute("user") + "]");
+            logger.info("Session is New [" + session.isNew() + "], Session Attribute [" + session.getAttribute("user") + "]");
             User user = (User) session.getAttribute("user");
             if (user != null) {
                 logger.info("Session User is [" + MvcHelper.deepToString(user) + "]");

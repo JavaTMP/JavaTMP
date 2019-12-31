@@ -42,9 +42,11 @@ public class ServicesFactory {
     private final TransactionEntryService transactionEntryService;
 
     public ServicesFactory(String persistentUnitName) {
-        logger.info("*** Start ServicesFactory Constructor @ [" + new Date() + "]");
+        this(Persistence.createEntityManagerFactory(persistentUnitName));
+    }
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory(persistentUnitName);
+    public ServicesFactory(EntityManagerFactory emf) {
+        logger.info("*** Start ServicesFactory Constructor @ [" + new Date() + "]");
         this.timezoneService = new TimezoneService(emf);
         this.themeService = new ThemeService(emf);
         this.languageService = new LanguageService(emf);

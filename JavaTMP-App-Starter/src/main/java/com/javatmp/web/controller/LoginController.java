@@ -19,21 +19,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-@WebServlet("/login")
-public class LoginController extends HttpServlet {
+@Slf4j
+@Controller
+public class LoginController {
 
-    private final Logger logger = Logger.getLogger(getClass().getName());
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
         request.getRequestDispatcher("/WEB-INF/pages/system/default-login-page.jsp").forward(request, response);
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
@@ -44,12 +45,12 @@ public class LoginController extends HttpServlet {
         ResponseMessage responseMessage = new ResponseMessage();
         try {
             MvcHelper.populateBeanByRequestParameters(request, user);
-            logger.info("Check User [" + MvcHelper.deepToString(user) + "]");
+            log.info("Check User [" + MvcHelper.deepToString(user) + "]");
             User dbUser = sf.getUserService().readUserByUsername(user);
 
             if (dbUser.getPassword().equals(MD5Util.convertToMD5(user.getPassword()))) {
                 // Authenticated user
-                logger.info("User found [" + MvcHelper.deepToString(dbUser) + "]");
+                log.info("User found [" + MvcHelper.deepToString(dbUser) + "]");
 
                 Locale locale = Locale.forLanguageTag(dbUser.getLang());
                 ResourceBundle bundle = ResourceBundle.getBundle(Constants.RESOURCE_BUNDLE_BASE_NAME, locale);

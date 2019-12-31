@@ -19,10 +19,6 @@ import javax.persistence.TemporalType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-/**
- *
- * @author Mohamed
- */
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity

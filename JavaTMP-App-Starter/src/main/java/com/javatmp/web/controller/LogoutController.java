@@ -8,16 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-@WebServlet("/logout")
+@Slf4j
+@Controller
 public class LogoutController extends HttpServlet {
 
-    private final Logger logger = Logger.getLogger(getClass().getName());
-
-    @Override
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        logger.info("*** we should logout current user and redirect him to login page");
+        log.info("*** we should logout current user and redirect him to login page");
         HttpSession session = request.getSession();
 //        session.setAttribute(Constants.LANGUAGE_ATTR_KEY, null);
 //        session.removeAttribute(Constants.LANGUAGE_ATTR_KEY);

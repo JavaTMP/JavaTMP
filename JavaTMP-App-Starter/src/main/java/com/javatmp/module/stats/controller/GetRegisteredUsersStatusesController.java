@@ -14,14 +14,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-@WebServlet("/stats/GetRegisteredUsersStatusesController")
+@Slf4j
+@Controller
+@RequestMapping("/stats")
 public class GetRegisteredUsersStatusesController extends HttpServlet {
 
-    private final Logger logger = Logger.getLogger(getClass().getName());
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @RequestMapping(value = "/GetRegisteredUsersStatusesController", method = RequestMethod.POST)
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         ResponseMessage responseMessage = new ResponseMessage();
         ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
@@ -33,7 +37,7 @@ public class GetRegisteredUsersStatusesController extends HttpServlet {
             responseMessage.setMessage(null);
             responseMessage.setData(results);
         } catch (IllegalArgumentException e) {
-            logger.log(Level.SEVERE, "Error", e);
+            log.error(e.getMessage(), e);
             responseMessage.setOverAllStatus(false);
             responseMessage.setMessage(e.getMessage());
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);

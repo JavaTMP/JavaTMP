@@ -8,10 +8,10 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class UTF8InforcerFilter extends FilterWrapper {
-
-    private final Logger logger = Logger.getLogger(getClass().getName());
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
@@ -20,7 +20,7 @@ public class UTF8InforcerFilter extends FilterWrapper {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
-        logger.info("getCharacterEncoding() [" + request.getCharacterEncoding() + "] request.getContentType() [" + request.getContentType() + "]");
+        log.info("getCharacterEncoding() [" + request.getCharacterEncoding() + "] request.getContentType() [" + request.getContentType() + "]");
         boolean isExcludedUrl = isExcludedRequest(httpRequest);
         if (isExcludedUrl == false) {
             if (request.getCharacterEncoding() == null) {

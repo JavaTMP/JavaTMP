@@ -5,25 +5,39 @@ import com.javatmp.util.Constants;
 import java.util.Date;
 import java.util.TimeZone;
 import java.util.logging.Logger;
+import javax.persistence.EntityManagerFactory;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @WebListener
+@Slf4j
 public class JavaTMPServletListener implements ServletContextListener {
 
-    private final Logger logger = Logger.getLogger(getClass().getName());
+    EntityManagerFactory emf;
+
     ServicesFactory sf;
+
+    public JavaTMPServletListener() {
+
+    }
+
+    public JavaTMPServletListener(EntityManagerFactory emf) {
+        this.emf = emf;
+    }
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        logger.info("*** Start App @ [" + new Date() + "] ***");
+        log.info("*** Start App @ [" + new Date() + "] ***");
         // just for demo:
         // -Duser.timezone=UTC
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
-        sf = new ServicesFactory(Constants.DEFAULT_PERSISTENT_UNIT_NAME);
+        sf = new ServicesFactory(this.emf);
         sce.getServletContext().setAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME, sf);
-        logger.info("****** End @ [" + new Date() + "] *********");
+        log.info("****** End @ [" + new Date() + "] *********");
     }
 
     @Override
@@ -31,6 +45,6 @@ public class JavaTMPServletListener implements ServletContextListener {
         sce.getServletContext().setAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME, null);
         sce.getServletContext().removeAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         sf.destroy();
-        logger.info("*** End App @ [" + new Date() + "] ***");
+        log.info("*** End App @ [" + new Date() + "] ***");
     }
 }
