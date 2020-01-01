@@ -10,29 +10,27 @@ import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
 import com.javatmp.util.Constants;
 import com.javatmp.util.ServicesFactory;
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Logger;
 import javax.persistence.PersistenceException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 import nl.captcha.Captcha;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-@WebServlet("/register")
-public class RegisterController extends HttpServlet {
+@Slf4j
+@Controller
+public class RegisterController {
 
-    private final Logger logger = Logger.getLogger(getClass().getName());
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    @RequestMapping(value = "/register", method = RequestMethod.GET)
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ServletContext context = request.getServletContext();
         HttpSession session = request.getSession();
         ResourceBundle labels = (ResourceBundle) session.getAttribute(Constants.LANGUAGE_ATTR_KEY);
@@ -53,9 +51,8 @@ public class RegisterController extends HttpServlet {
         request.getRequestDispatcher("/WEB-INF/pages/system/register.jsp").forward(request, response);
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();
@@ -70,7 +67,7 @@ public class RegisterController extends HttpServlet {
             Captcha captcha = (Captcha) session.getAttribute(Captcha.NAME);
             if (captcha != null && captcha.isCorrect(captchaAnswer)) {
                 MvcHelper.populateBeanByRequestParameters(request, user);
-                logger.info("User to be Registerd [" + MvcHelper.deepToString(user) + "]");
+                log.info("User to be Registerd [" + MvcHelper.deepToString(user) + "]");
 
                 userService.createNewBasicUser(user);
 

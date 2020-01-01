@@ -1,21 +1,17 @@
 package com.javatmp.web.controller;
 
-import com.javatmp.module.user.entity.User;
 import com.javatmp.fw.domain.ResponseMessage;
 import com.javatmp.fw.mvc.MvcHelper;
-import com.javatmp.util.ServicesFactory;
+import com.javatmp.module.user.entity.User;
 import com.javatmp.util.Constants;
 import com.javatmp.util.MD5Util;
-import java.io.IOException;
+import com.javatmp.util.ServicesFactory;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.logging.Logger;
 import javax.persistence.NoResultException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -29,12 +25,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class LoginController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        request.getRequestDispatcher("/WEB-INF/pages/system/default-login-page.jsp").forward(request, response);
+    public String doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        return "/WEB-INF/pages/system/default-login-page.jsp";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();

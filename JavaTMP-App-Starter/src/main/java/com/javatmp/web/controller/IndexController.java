@@ -1,9 +1,5 @@
 package com.javatmp.web.controller;
 
-import java.io.IOException;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -17,9 +13,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Controller
 public class IndexController {
 
+    @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
+    public String doGet(HttpServletRequest request, HttpServletResponse response)
             throws Exception {
-        request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+        return "/WEB-INF/index.jsp";
     }
 }
