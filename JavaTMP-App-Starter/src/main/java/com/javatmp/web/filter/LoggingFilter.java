@@ -1,10 +1,10 @@
 package com.javatmp.web.filter;
 
 import com.javatmp.module.activity.Activity;
+import com.javatmp.module.activity.ActivityService;
 import com.javatmp.module.user.entity.User;
 import java.io.IOException;
 import java.util.Date;
-import java.util.logging.Logger;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -13,9 +13,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Slf4j
 public class LoggingFilter extends FilterWrapper {
+
+    @Autowired
+    ActivityService activityService;
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
@@ -67,7 +71,7 @@ public class LoggingFilter extends FilterWrapper {
             log.info("URI [" + httpRequest.getRequestURI() + "]=[" + (endTime - startTime) + "] milliseconds");
 
             activity.setTimeLast(lastTime);
-            this.getServiceFactory().getActivityService().merge(activity);
+            this.getServiceFactory().getActivityService().save(activity);
         }
     }
 }

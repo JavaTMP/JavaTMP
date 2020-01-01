@@ -20,8 +20,11 @@ import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Getter
+@Service
 public class ServicesFactory {
 
     private static final Logger logger = Logger.getLogger(ServicesFactory.class.getName());
@@ -32,7 +35,8 @@ public class ServicesFactory {
     private final UserService userService;
     private final DocumentService documentService;
     private final UserStatsService userStatsService;
-    private final ActivityService activityService;
+    @Autowired
+    private ActivityService activityService;
     private final EventService eventService;
     private final MessageService messageService;
     private final ContentService contentService;
@@ -40,6 +44,9 @@ public class ServicesFactory {
     private final TransactionService transactionService;
     private final AccountGroupService accountGroupService;
     private final TransactionEntryService transactionEntryService;
+
+    public ServicesFactory() {
+    }
 
     public ServicesFactory(String persistentUnitName) {
         this(Persistence.createEntityManagerFactory(persistentUnitName));
@@ -54,7 +61,7 @@ public class ServicesFactory {
         this.documentService = new DocumentService(emf);
         this.userService = new UserService(emf);
         this.userStatsService = new UserStatsService(emf);
-        this.activityService = new ActivityService(emf);
+//        this.activityService = new ActivityService(emf);
         this.eventService = new EventService(emf);
         this.messageService = new MessageService(emf, userService);
         this.contentService = new ContentService(emf);

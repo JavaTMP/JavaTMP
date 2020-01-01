@@ -12,16 +12,9 @@ public class PagesController {
 
     @RequestMapping("/pages/**")
     protected String doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
         String requestUrl = request.getRequestURI();
         log.debug("request url [" + requestUrl + "]");
-
-        String requestPage = null;
-        if (!requestUrl.endsWith(".html")) {
-            requestPage = "/WEB-INF" + requestUrl + ".jsp";
-        } else {
-            requestPage = "/WEB-INF" + requestUrl;
-        }
+        String requestPage = "/WEB-INF" + requestUrl + ".jsp";
         log.info("Request Page [" + requestPage + "]");
         return requestPage;
     }

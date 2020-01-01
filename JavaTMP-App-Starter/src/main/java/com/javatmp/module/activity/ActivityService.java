@@ -2,16 +2,17 @@ package com.javatmp.module.activity;
 
 import com.javatmp.fw.data.jpa.repository.JpaRepository;
 import java.util.List;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import javax.persistence.Tuple;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Repository;
 
+@Slf4j
+@Repository
 public class ActivityService extends JpaRepository<Activity, Long> {
-
-    private final Logger logger = Logger.getLogger(getClass().getName());
 
     public ActivityService(EntityManagerFactory emf) {
         super(Activity.class, emf);
