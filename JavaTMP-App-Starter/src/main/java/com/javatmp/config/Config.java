@@ -7,6 +7,7 @@ import com.javatmp.web.filter.GZIPCompressingFilter;
 import com.javatmp.web.filter.LocalizationFilter;
 import com.javatmp.web.filter.LoggingFilter;
 import com.javatmp.web.filter.UTF8InforcerFilter;
+import com.javatmp.web.listener.JavaTMPHttpSessionListener;
 import com.javatmp.web.listener.JavaTMPServletListener;
 import javax.persistence.EntityManagerFactory;
 import javax.servlet.DispatcherType;
@@ -37,6 +38,15 @@ public class Config implements WebMvcConfigurer {
         ServletListenerRegistrationBean<JavaTMPServletListener> registrationBean
                 = new ServletListenerRegistrationBean<>();
         registrationBean.setListener(new JavaTMPServletListener(this.emf));
+        return registrationBean;
+    }
+
+    @Bean
+    public ServletListenerRegistrationBean<JavaTMPHttpSessionListener> getJavaTMPHttpSessionListener() {
+        log.debug("EntityManagerFactory [" + emf + "]");
+        ServletListenerRegistrationBean<JavaTMPHttpSessionListener> registrationBean
+                = new ServletListenerRegistrationBean<>();
+        registrationBean.setListener(new JavaTMPHttpSessionListener());
         return registrationBean;
     }
 
