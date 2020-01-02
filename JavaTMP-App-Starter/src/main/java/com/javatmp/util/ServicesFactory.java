@@ -27,23 +27,23 @@ import org.springframework.stereotype.Service;
 @Service
 public class ServicesFactory {
 
-    private static final Logger logger = Logger.getLogger(ServicesFactory.class.getName());
-    private final TimezoneService timezoneService;
-    private final ThemeService themeService;
-    private final LanguageService languageService;
-    private final CountryService countryService;
-    private final UserService userService;
-    private final DocumentService documentService;
-    private final UserStatsService userStatsService;
+    private static Logger logger = Logger.getLogger(ServicesFactory.class.getName());
+    private TimezoneService timezoneService;
+    private ThemeService themeService;
+    private LanguageService languageService;
+    private CountryService countryService;
+    private UserService userService;
+    private DocumentService documentService;
+    private UserStatsService userStatsService;
     @Autowired
     private ActivityService activityService;
-    private final EventService eventService;
-    private final MessageService messageService;
-    private final ContentService contentService;
-    private final AccountService accountService;
-    private final TransactionService transactionService;
-    private final AccountGroupService accountGroupService;
-    private final TransactionEntryService transactionEntryService;
+    private EventService eventService;
+    private MessageService messageService;
+    private ContentService contentService;
+    private AccountService accountService;
+    private TransactionService transactionService;
+    private AccountGroupService accountGroupService;
+    private TransactionEntryService transactionEntryService;
 
     public ServicesFactory() {
     }
@@ -61,7 +61,7 @@ public class ServicesFactory {
         this.documentService = new DocumentService(emf);
         this.userService = new UserService(emf);
         this.userStatsService = new UserStatsService(emf);
-//        this.activityService = new ActivityService(emf);
+        this.activityService = new ActivityService(emf);
         this.eventService = new EventService(emf);
         this.messageService = new MessageService(emf, userService);
         this.contentService = new ContentService(emf);
