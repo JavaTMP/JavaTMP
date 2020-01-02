@@ -25,12 +25,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class LoginController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public String doGet(HttpServletRequest request, HttpServletResponse response) {
         return "/WEB-INF/pages/system/default-login-page.jsp";
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public void doPost(HttpServletRequest request, HttpServletResponse response) {
 
         HttpSession session = request.getSession();
         ServletContext context = request.getServletContext();

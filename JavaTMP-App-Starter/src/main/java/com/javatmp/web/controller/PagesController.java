@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class PagesController {
 
     @RequestMapping("/pages/**")
-    protected String doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    protected String doGet(HttpServletRequest request, HttpServletResponse response) {
         String requestUrl = request.getRequestURI();
         log.debug("request url [" + requestUrl + "]");
         String requestPage = "/WEB-INF" + requestUrl + ".jsp";

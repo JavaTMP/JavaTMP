@@ -71,7 +71,7 @@ public class LoggingFilter extends FilterWrapper {
             log.info("URI [" + httpRequest.getRequestURI() + "]=[" + (endTime - startTime) + "] milliseconds");
 
             activity.setTimeLast(lastTime);
-            this.getServiceFactory().getActivityService().save(activity);
+            this.getServiceFactory().getActivityService().merge(activity);
         }
     }
 }

@@ -15,8 +15,7 @@ public class IndexController {
 
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
-    public String doGet(HttpServletRequest request, HttpServletResponse response)
-            throws Exception {
+    public String doGet(HttpServletRequest request, HttpServletResponse response) {
         return "/WEB-INF/index.jsp";
     }
 }

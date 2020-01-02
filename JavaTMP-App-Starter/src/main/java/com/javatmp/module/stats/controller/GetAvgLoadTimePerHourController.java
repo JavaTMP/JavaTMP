@@ -21,7 +21,7 @@ public class GetAvgLoadTimePerHourController {
 
     @RequestMapping(value = "/GetAvgLoadTimePerHourController", method = RequestMethod.POST)
     public @ResponseBody
-    ResponseMessage doPost(HttpServletResponse response, ResponseMessage responseMessage) throws Exception {
+    ResponseMessage doPost(HttpServletResponse response, ResponseMessage responseMessage) {
 
         try {
             List<Object[]> results = activityService.avgPagesLoadTimePerHour();
