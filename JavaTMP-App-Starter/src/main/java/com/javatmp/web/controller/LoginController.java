@@ -38,7 +38,6 @@ public class LoginController {
         ResourceBundle labels = (ResourceBundle) session.getAttribute(Constants.LANGUAGE_ATTR_KEY);
 
         try {
-//            MvcHelper.populateBeanByRequestParameters(request, user);
             log.info("Check User [" + MvcHelper.deepToString(user) + "]");
             User dbUser = this.userService.readUserByUsername(user);
 

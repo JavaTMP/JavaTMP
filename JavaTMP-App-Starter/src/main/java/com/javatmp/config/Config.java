@@ -6,7 +6,6 @@ import com.javatmp.web.filter.ContentCacheFilter;
 import com.javatmp.web.filter.GZIPCompressingFilter;
 import com.javatmp.web.filter.LocalizationFilter;
 import com.javatmp.web.filter.LoggingFilter;
-import com.javatmp.web.filter.UTF8InforcerFilter;
 import com.javatmp.web.listener.JavaTMPHttpSessionListener;
 import com.javatmp.web.listener.JavaTMPServletListener;
 import javax.persistence.EntityManagerFactory;
@@ -26,6 +25,9 @@ public class Config implements WebMvcConfigurer {
 
     @Autowired
     EntityManagerFactory emf;
+
+    @Autowired
+    LoggingFilter loggingFilter;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
@@ -51,21 +53,10 @@ public class Config implements WebMvcConfigurer {
     }
 
     @Bean
-    public FilterRegistrationBean<UTF8InforcerFilter> getUTF8InforcerFilter() {
-        FilterRegistrationBean<UTF8InforcerFilter> registrationBean
-                = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new UTF8InforcerFilter());
-        registrationBean.addUrlPatterns("/*");
-        registrationBean.setDispatcherTypes(DispatcherType.REQUEST);
-        registrationBean.setOrder(1);
-        return registrationBean;
-    }
-
-    @Bean
     public FilterRegistrationBean<LoggingFilter> getLoggingFilter() {
         FilterRegistrationBean<LoggingFilter> registrationBean
                 = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new LoggingFilter());
+        registrationBean.setFilter(loggingFilter);
         registrationBean.addUrlPatterns("/*");
         registrationBean.setDispatcherTypes(DispatcherType.REQUEST);
         registrationBean.addInitParameter("excludedUrlsRegex", "^/assets/.*,^/CaptchaImageController");

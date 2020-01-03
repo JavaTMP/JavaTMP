@@ -14,8 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Slf4j
+@Component
 public class LoggingFilter extends FilterWrapper {
 
     @Autowired
@@ -71,7 +73,7 @@ public class LoggingFilter extends FilterWrapper {
             log.info("URI [" + httpRequest.getRequestURI() + "]=[" + (endTime - startTime) + "] milliseconds");
 
             activity.setTimeLast(lastTime);
-            this.getServiceFactory().getActivityService().merge(activity);
+            this.activityService.merge(activity);
         }
     }
 }
