@@ -32,10 +32,12 @@ import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Repository;
 
+@Slf4j
+@Repository
 public class UserService extends JpaRepository<User, Long> {
-
-    private final Logger logger = Logger.getLogger(getClass().getName());
 
     public UserService(EntityManagerFactory emf) {
         super(User.class, emf);
@@ -297,7 +299,7 @@ public class UserService extends JpaRepository<User, Long> {
             // support global search:
             if (tableRequest.getSearch() != null && tableRequest.getSearch().getValue() != null
                     && !tableRequest.getSearch().getValue().trim().equals("")) {
-                logger.info("*** isGlobalSearch starting ***");
+                log.info("*** isGlobalSearch starting ***");
                 String query = tableRequest.getSearch().getValue().trim().toLowerCase();
                 query = "%" + query + "%";
                 Predicate p1 = cb.like(cb.lower(from.get(User_.userName)), query);
@@ -310,7 +312,7 @@ public class UserService extends JpaRepository<User, Long> {
             for (DataTableColumn column : tableRequest.getColumns()) {
                 String columnName = column.getName();
                 String columnSearchValue = column.getSearch().getValue().trim();
-                logger.info("column name [" + columnName + "] search value [" + columnSearchValue + "]");
+                log.info("column name [" + columnName + "] search value [" + columnSearchValue + "]");
                 if (columnSearchValue != null && !columnSearchValue.equals("")) {
                     //predicate = cb.and(predicate, cb.equal(from.get(columnName), columnSearchValue));
                     if (columnName.equals("id")) {
