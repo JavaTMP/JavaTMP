@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Slf4j
 @Controller
@@ -32,9 +33,9 @@ public class LoginController {
     }
 
     @PostMapping(value = "/login")
-    public void doPost(User user, ResponseMessage responseMessage, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public @ResponseBody
+    ResponseMessage doPost(User user, ResponseMessage responseMessage, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        HttpSession session = request.getSession();
         ResourceBundle labels = (ResourceBundle) session.getAttribute(Constants.LANGUAGE_ATTR_KEY);
 
         try {
@@ -68,8 +69,7 @@ public class LoginController {
             responseMessage.setMessage(labels.getString("action.login.exception"));
             throw ex;
         }
-
-        MvcHelper.sendMessageAsJson(response, responseMessage);
+        return responseMessage;
     }
 
 }
