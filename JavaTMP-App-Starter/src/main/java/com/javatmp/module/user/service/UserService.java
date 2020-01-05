@@ -265,7 +265,7 @@ public class UserService extends JpaRepository<User, Long> {
         });
     }
 
-    public DataTableResults<User> listAllUsers(DataTableRequest<User> tableRequest) throws ParseException {
+    public DataTableResults<User> listAllUsers(DataTableRequest<User> tableRequest) {
         return getList((EntityManager em) -> {
             List<User> retList = null;
             CriteriaBuilder cb = em.getCriteriaBuilder();
