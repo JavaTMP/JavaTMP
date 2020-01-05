@@ -17,6 +17,7 @@ import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Slf4j
@@ -32,6 +33,13 @@ public class Config implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
 //        registry.addInterceptor(new MinimalInterceptor());
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/static/**")
+                .addResourceLocations("/static/")
+                .setCachePeriod(60 * 60);
     }
 
     @Bean
@@ -94,7 +102,7 @@ public class Config implements WebMvcConfigurer {
         FilterRegistrationBean<CacheControlHeadersFilter> registrationBean
                 = new FilterRegistrationBean<>();
         registrationBean.setFilter(new CacheControlHeadersFilter());
-        registrationBean.addUrlPatterns("/assets/*");
+        registrationBean.addUrlPatterns("/*");
         registrationBean.setDispatcherTypes(DispatcherType.REQUEST);
         registrationBean.addInitParameter("excludedUrlsRegex", "^/,^/login,^/logout,^/register,^/CaptchaImageController");
         registrationBean.setOrder(5);
