@@ -15,7 +15,6 @@ import com.javatmp.module.accounting.entity.TransactionEntry_;
 import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
@@ -24,10 +23,12 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
+@Slf4j
+@Service
 public class TransactionEntryService extends JpaRepository<TransactionEntry, Long> {
-
-    private final Logger logger = Logger.getLogger(getClass().getName());
 
     public TransactionEntryService(EntityManagerFactory emf) {
         super(TransactionEntry.class, emf);
@@ -64,7 +65,7 @@ public class TransactionEntryService extends JpaRepository<TransactionEntry, Lon
             for (DataTableColumn column : tableRequest.getColumns()) {
                 String columnName = column.getName();
                 String columnSearchValue = column.getSearch().getValue().trim();
-                logger.info("column name [" + columnName + "] search value [" + columnSearchValue + "]");
+                log.info("column name [" + columnName + "] search value [" + columnSearchValue + "]");
                 if (columnSearchValue != null && !columnSearchValue.equals("")) {
                     //predicate = cb.and(predicate, cb.equal(from.get(columnName), columnSearchValue));
                     if (columnName.equals("id")) {

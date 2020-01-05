@@ -25,7 +25,7 @@ public class GetListUsersPage extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String requestPage = "/WEB-INF/pages/user/listUsers.jsp";
+        String requestPage = "/pages/user/listUsers.jsp";
 
         ServletContext context = request.getServletContext();
         HttpSession session = request.getSession();

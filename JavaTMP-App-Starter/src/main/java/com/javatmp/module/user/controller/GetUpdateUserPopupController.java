@@ -34,7 +34,7 @@ public class GetUpdateUserPopupController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            String requestPage = "/WEB-INF/pages/user/updateCompleteUserPopup.jsp";
+            String requestPage = "/pages/user/updateCompleteUserPopup.jsp";
 
             ServletContext context = request.getServletContext();
             ServicesFactory sf = (ServicesFactory) context.getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);

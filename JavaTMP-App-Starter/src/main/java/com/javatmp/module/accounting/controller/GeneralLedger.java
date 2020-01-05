@@ -25,7 +25,7 @@ public class GeneralLedger extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String requestPage = "/WEB-INF/pages/accounting/general-ledger.jsp";
+        String requestPage = "/pages/accounting/general-ledger.jsp";
         ServletContext context = request.getServletContext();
         ServicesFactory sf = (ServicesFactory) context.getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         request.getRequestDispatcher(requestPage).forward(request, response);

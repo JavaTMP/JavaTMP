@@ -1,46 +1,38 @@
 package com.javatmp.module.accounting.controller;
 
-import com.javatmp.module.accounting.entity.Account;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.javatmp.module.accounting.service.AccountService;
-import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.fw.domain.ResponseMessage;
-import com.javatmp.util.Constants;
-import com.javatmp.util.ServicesFactory;
-import java.io.IOException;
+import com.javatmp.module.accounting.entity.Account;
+import com.javatmp.module.accounting.service.AccountService;
 import java.util.List;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-@WebServlet("/accounting/chartOfAccounts")
-public class ChartOfAccountsController extends HttpServlet {
+@Slf4j
+@Controller
+public class ChartOfAccountsController {
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String requestPage = "/WEB-INF/pages/accounting/chart-of-accounts.jsp";
+    @Autowired
+    private AccountService accountService;
 
-        ServletContext context = request.getServletContext();
-        ServicesFactory sf = (ServicesFactory) context.getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
-        request.getRequestDispatcher(requestPage).forward(request, response);
+    @GetMapping(value = "/accounting/chartOfAccounts")
+    public String doGet(HttpServletRequest request, HttpServletResponse response) {
+        return "/pages/accounting/chart-of-accounts.jsp";
     }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
-        AccountService accountService = sf.getAccountService();
+    @PostMapping(value = "/accounting/chartOfAccounts")
+    public @ResponseBody
+    ResponseMessage doPost(HttpServletRequest request, HttpServletResponse response) {
         List<Account> chartOfAccounts = accountService.getChartOfAccounts();
         ResponseMessage responseMessage = new ResponseMessage();
         responseMessage.setOverAllStatus(true);
         responseMessage.setData(chartOfAccounts);
-        MvcHelper.sendMessageAsJson(response, responseMessage);
-
+        return responseMessage;
     }
 
 }

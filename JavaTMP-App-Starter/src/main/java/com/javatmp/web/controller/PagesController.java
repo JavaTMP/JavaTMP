@@ -14,7 +14,7 @@ public class PagesController {
     protected String doGet(HttpServletRequest request, HttpServletResponse response) {
         String requestUrl = request.getRequestURI();
         log.debug("request url [" + requestUrl + "]");
-        String requestPage = "/WEB-INF" + requestUrl + ".jsp";
+        String requestPage = "" + requestUrl + ".jsp";
         log.info("Request Page [" + requestPage + "]");
         return requestPage;
     }

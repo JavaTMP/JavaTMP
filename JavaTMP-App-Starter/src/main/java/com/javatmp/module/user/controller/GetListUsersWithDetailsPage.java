@@ -30,7 +30,7 @@ public class GetListUsersWithDetailsPage extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String requestPage = "/WEB-INF/pages/user/listUsersWithDetails.jsp";
+        String requestPage = "/pages/user/listUsersWithDetails.jsp";
 
         ServletContext context = request.getServletContext();
         HttpSession session = request.getSession();

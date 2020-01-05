@@ -43,7 +43,7 @@ public class CreateUserController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String requestPage = "/WEB-INF/pages/user/addNewUser.jsp";
+        String requestPage = "/pages/user/addNewUser.jsp";
         ServletContext context = request.getServletContext();
         ServicesFactory sf = (ServicesFactory) context.getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         HttpSession session = request.getSession();

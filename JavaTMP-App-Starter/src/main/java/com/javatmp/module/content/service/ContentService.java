@@ -6,7 +6,6 @@ import com.javatmp.fw.domain.table.DataTableResults;
 import com.javatmp.module.content.entity.Content;
 import com.javatmp.module.content.entity.Content_;
 import java.text.ParseException;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.LockModeType;
@@ -16,10 +15,12 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
+@Slf4j
+@Service
 public class ContentService extends JpaRepository<Content, Long> {
-
-    private final Logger logger = Logger.getLogger(getClass().getName());
 
     public ContentService(EntityManagerFactory emf) {
         super(Content.class, emf);

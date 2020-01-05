@@ -45,7 +45,7 @@ public class LoggingFilter extends FilterWrapper {
             String url = this.getUrl(httpRequest);
             log.debug("url to be logging in db is [" + url + "]");
             activity.setActionId(url);
-            getServiceFactory().getActivityService().save(activity);
+            this.activityService.save(activity);
 
             HttpSession session = httpRequest.getSession(false);
             if (session != null) {

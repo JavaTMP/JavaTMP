@@ -16,6 +16,6 @@ public class IndexController {
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = {"", "/"}, method = RequestMethod.GET)
     public String doGet(HttpServletRequest request, HttpServletResponse response) {
-        return "/WEB-INF/index.jsp";
+        return "/index.jsp";
     }
 }

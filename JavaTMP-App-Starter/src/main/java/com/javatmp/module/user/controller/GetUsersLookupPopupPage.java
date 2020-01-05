@@ -16,7 +16,7 @@ public class GetUsersLookupPopupPage extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String requestPage = "/WEB-INF/pages/user/usersLookupPopup.jsp";
+        String requestPage = "/pages/user/usersLookupPopup.jsp";
         request.getRequestDispatcher(requestPage).forward(request, response);
     }
 }

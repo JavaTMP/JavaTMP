@@ -30,7 +30,7 @@ public class GetListUsersWithSearchBlockPage extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String requestPage = "/WEB-INF/pages/user/listUsersWithSearchBlock.jsp";
+        String requestPage = "/pages/user/listUsersWithSearchBlock.jsp";
 
         ServletContext context = request.getServletContext();
         HttpSession session = request.getSession();

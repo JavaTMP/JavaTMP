@@ -17,7 +17,6 @@ import com.javatmp.module.accounting.entity.Transaction_;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.List;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceException;
@@ -27,14 +26,12 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
-/**
- *
- * @author m_dar
- */
+@Slf4j
+@Service
 public class TransactionService extends JpaRepository<Transaction, Long> {
-
-    private final Logger logger = Logger.getLogger(getClass().getName());
 
     public TransactionService(EntityManagerFactory emf) {
         super(Transaction.class, emf);
@@ -116,7 +113,7 @@ public class TransactionService extends JpaRepository<Transaction, Long> {
             for (DataTableColumn column : tableRequest.getColumns()) {
                 String columnName = column.getName();
                 String columnSearchValue = column.getSearch().getValue().trim();
-                logger.info("column name [" + columnName + "] search value [" + columnSearchValue + "]");
+                log.info("column name [" + columnName + "] search value [" + columnSearchValue + "]");
                 if (columnSearchValue != null && !columnSearchValue.equals("")) {
                     //predicate = cb.and(predicate, cb.equal(from.get(columnName), columnSearchValue));
                     if (columnName.equals("id")) {

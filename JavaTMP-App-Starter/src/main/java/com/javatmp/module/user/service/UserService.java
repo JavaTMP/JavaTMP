@@ -33,10 +33,10 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 @Slf4j
-@Repository
+@Service
 public class UserService extends JpaRepository<User, Long> {
 
     public UserService(EntityManagerFactory emf) {

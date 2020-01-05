@@ -48,7 +48,7 @@ public class RegisterController {
         request.setAttribute("countries", countries);
         request.setAttribute("timezones", timezones);
 
-        request.getRequestDispatcher("/WEB-INF/pages/system/register.jsp").forward(request, response);
+        request.getRequestDispatcher("/pages/system/register.jsp").forward(request, response);
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)

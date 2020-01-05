@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,10 +30,10 @@ public class LoginController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        return "/WEB-INF/pages/system/default-login-page.jsp";
+        return "/pages/system/default-login-page.jsp";
     }
 
-    @PostMapping(value = "/login")
+    @PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     ResponseMessage doPost(User user, ResponseMessage responseMessage, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
 

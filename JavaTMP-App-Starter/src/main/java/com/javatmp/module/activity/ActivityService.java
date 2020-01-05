@@ -8,10 +8,10 @@ import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import javax.persistence.Tuple;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 @Slf4j
-@Repository
+@Service
 public class ActivityService extends JpaRepository<Activity, Long> {
 
     public ActivityService(EntityManagerFactory emf) {

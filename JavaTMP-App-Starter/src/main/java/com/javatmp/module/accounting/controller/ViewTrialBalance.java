@@ -27,7 +27,7 @@ public class ViewTrialBalance extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String requestPage = "/WEB-INF/pages/accounting/reports/trial-balance.jsp";
+        String requestPage = "/pages/accounting/reports/trial-balance.jsp";
 
         ServletContext context = request.getServletContext();
         ServicesFactory sf = (ServicesFactory) context.getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);

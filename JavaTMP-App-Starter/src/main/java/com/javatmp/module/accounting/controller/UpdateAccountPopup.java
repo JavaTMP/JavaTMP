@@ -7,94 +7,60 @@ import com.javatmp.module.accounting.entity.AccountGroup;
 import com.javatmp.module.accounting.service.AccountGroupService;
 import com.javatmp.module.accounting.service.AccountService;
 import com.javatmp.module.user.entity.User;
-import com.javatmp.util.Constants;
-import com.javatmp.util.ServicesFactory;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.persistence.PersistenceException;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.ModelAndView;
 
-@WebServlet("/accounting/UpdateAccountPopup")
-public class UpdateAccountPopup extends HttpServlet {
+@Slf4j
+@Controller
+public class UpdateAccountPopup {
 
-    private final Logger logger = Logger.getLogger(getClass().getName());
+    @Autowired
+    private AccountService accountService;
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            String requestPage = "/WEB-INF/pages/accounting/updateAccountPopup.jsp";
+    @Autowired
+    private AccountGroupService accountGroupService;
 
-            ServletContext context = request.getServletContext();
-            ServicesFactory sf = (ServicesFactory) context.getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
-            AccountService accountService = sf.getAccountService();
-            AccountGroupService accountGroupService = sf.getAccountGroupService();
-            Account account = new Account();
-            MvcHelper.populateBeanByRequestParameters(request, account);
-            logger.info("request account is [" + MvcHelper.deepToString(account) + "]");
-            Account dbAccount = accountService.readAccountById(account);
-            logger.info("DB account to be Updated is [" + MvcHelper.deepToString(dbAccount) + "]");
+    @GetMapping(value = "/accounting/UpdateAccountPopup")
+    public ModelAndView doGet(@SessionAttribute User user, Account account, ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response) {
+        String requestPage = "/pages/accounting/updateAccountPopup.jsp";
 
-            HttpSession session = request.getSession();
-            User loggedInUser = (User) session.getAttribute("user");
-            List<Account> accounts = accountService.findAll(0, Integer.MAX_VALUE);
-            List<AccountGroup> accountGroups = accountGroupService.findAll(0, Integer.MAX_VALUE);
-            request.setAttribute("accounts", accounts);
-            request.setAttribute("accountGroups", accountGroups);
-            request.setAttribute("account", dbAccount);
+        log.info("request account is [" + MvcHelper.deepToString(account) + "]");
+        Account dbAccount = accountService.readAccountById(account);
+        log.info("DB account to be Updated is [" + MvcHelper.deepToString(dbAccount) + "]");
 
-            request.getRequestDispatcher(requestPage).forward(request, response);
+        log.debug("loged in user is {}", user);
+        List<Account> accounts = accountService.findAll(0, Integer.MAX_VALUE);
+        List<AccountGroup> accountGroups = accountGroupService.findAll(0, Integer.MAX_VALUE);
+        modelAndView.addObject("accounts", accounts);
+        modelAndView.addObject("accountGroups", accountGroups);
+        modelAndView.addObject("account", dbAccount);
+        modelAndView.setViewName(requestPage);
+        return modelAndView;
 
-        } catch (IllegalAccessException ex) {
-            logger.log(Level.SEVERE, null, ex);
-            throw new ServletException(ex);
-        } catch (InvocationTargetException ex) {
-            logger.log(Level.SEVERE, null, ex);
-            throw new ServletException(ex);
-        }
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @PostMapping(value = "/accounting/UpdateAccountPopup")
+    public @ResponseBody
+    ResponseMessage doPost(Account accountToBeUpdated, HttpServletRequest request,
+            HttpServletResponse response) {
 
         ResponseMessage responseMessage = new ResponseMessage();
-        ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
-        AccountService accountService = sf.getAccountService();
-        try {
 
-            Account accountToBeUpdated = new Account();
-            MvcHelper.populateBeanByRequestParameters(request, accountToBeUpdated);
-            logger.info("account to be Updated is [" + MvcHelper.toString(accountToBeUpdated) + "]");
-            int updateStatus = accountService.updateAccount(accountToBeUpdated);
-            responseMessage.setOverAllStatus(Boolean.TRUE);
-            responseMessage.setMessage("Account Updated successfully");
-            responseMessage.setData(accountToBeUpdated);
-        } catch (PersistenceException e) {
-            Throwable t = e;
-            while (t.getCause() != null) {
-                t = t.getCause();
-            }
-            responseMessage.setOverAllStatus(false);
-            responseMessage.setMessage(t.getMessage());
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            responseMessage.setStatusCode(HttpServletResponse.SC_BAD_REQUEST);
-
-        } catch (IllegalArgumentException | IllegalAccessException | InvocationTargetException e) {
-            logger.info("ERROR : " + e.getMessage());
-            responseMessage.setOverAllStatus(false);
-            responseMessage.setMessage(e.getMessage());
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            responseMessage.setStatusCode(HttpServletResponse.SC_BAD_REQUEST);
-            throw new ServletException(e);
-        }
-        MvcHelper.sendMessageAsJson(response, responseMessage);
+        log.info("account to be Updated is [" + MvcHelper.toString(accountToBeUpdated) + "]");
+        int updateStatus = accountService.updateAccount(accountToBeUpdated);
+        responseMessage.setOverAllStatus(Boolean.TRUE);
+        responseMessage.setMessage("Account Updated successfully");
+        responseMessage.setData(accountToBeUpdated);
+        return responseMessage;
 
     }
 

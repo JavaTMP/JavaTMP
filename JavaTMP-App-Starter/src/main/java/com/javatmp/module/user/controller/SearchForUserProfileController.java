@@ -30,7 +30,7 @@ public class SearchForUserProfileController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String requestPage = "/WEB-INF/pages/user/search-for-user-profile.jsp";
+        String requestPage = "/pages/user/search-for-user-profile.jsp";
         ServletContext context = request.getServletContext();
         HttpSession session = request.getSession();
         User loggedInUser = (User) session.getAttribute("user");

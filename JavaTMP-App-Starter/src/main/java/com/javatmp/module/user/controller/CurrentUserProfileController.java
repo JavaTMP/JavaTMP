@@ -18,8 +18,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.PersistenceException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -29,16 +27,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 
 @WebServlet("/user/CurrentUserProfileController")
+@Slf4j
 @MultipartConfig(fileSizeThreshold = 1024 * 15, maxFileSize = 1024 * 100, maxRequestSize = 1024 * 200)
 public class CurrentUserProfileController extends HttpServlet {
 
-    private final Logger logger = Logger.getLogger(getClass().getName());
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String requestPage = "/WEB-INF/pages/user/current-user-profile.jsp";
+        String requestPage = "/pages/user/current-user-profile.jsp";
         ServletContext context = request.getServletContext();
         HttpSession session = request.getSession();
         User loggedInUser = (User) session.getAttribute("user");
@@ -73,10 +71,10 @@ public class CurrentUserProfileController extends HttpServlet {
             User dbUser = sf.getUserService().readCompleteUserById(user);
             String oldPassword = request.getParameter("oldPassword");
             MvcHelper.populateBeanByRequestParameters(request, userToBeUpdated);
-            logger.info("User to be Updated is [" + MvcHelper.deepToString(userToBeUpdated) + "]");
+            log.info("User to be Updated is [" + MvcHelper.deepToString(userToBeUpdated) + "]");
 
             // first check if existing db password equal provided old password:
-            logger.info("Old Password is [" + oldPassword + "]");
+            log.info("Old Password is [" + oldPassword + "]");
             if (dbUser.getPassword().equals(MD5Util.convertToMD5(oldPassword)) == false) {
                 throw new IllegalArgumentException("Existing Password does not match provided old password");
             }
@@ -94,7 +92,7 @@ public class CurrentUserProfileController extends HttpServlet {
 
             int updateStatus = us.updateCompleteUser(userToBeUpdated);
 
-            logger.info("Updated User is [" + MvcHelper.toString(userToBeUpdated) + "]");
+            log.info("Updated User is [" + MvcHelper.toString(userToBeUpdated) + "]");
 
             // When we don't update profile picture and database contains one
             // We make sure that the current session object has its information:
@@ -128,25 +126,25 @@ public class CurrentUserProfileController extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             responseMessage.setStatusCode(HttpServletResponse.SC_BAD_REQUEST);
         } catch (IllegalArgumentException ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            log.error(ex.getMessage(), ex);
             responseMessage.setOverAllStatus(false);
             responseMessage.setMessage(ex.getMessage());
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             responseMessage.setStatusCode(HttpServletResponse.SC_BAD_REQUEST);
         } catch (IllegalStateException ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            log.error(ex.getMessage(), ex);
             responseMessage.setOverAllStatus(false);
             responseMessage.setMessage("The file to be uploaded exceeds its maximum permitted size of 51200 bytes - " + ex.getMessage());
             response.setStatus(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE);
             responseMessage.setStatusCode(HttpServletResponse.SC_REQUEST_ENTITY_TOO_LARGE);
         } catch (IllegalAccessException ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            log.error(ex.getMessage(), ex);
             responseMessage.setOverAllStatus(false);
             responseMessage.setMessage(ex.getMessage());
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             responseMessage.setStatusCode(HttpServletResponse.SC_BAD_REQUEST);
         } catch (InvocationTargetException ex) {
-            logger.log(Level.SEVERE, ex.getMessage(), ex);
+            log.error(ex.getMessage(), ex);
             responseMessage.setOverAllStatus(false);
             responseMessage.setMessage(ex.getMessage());
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);

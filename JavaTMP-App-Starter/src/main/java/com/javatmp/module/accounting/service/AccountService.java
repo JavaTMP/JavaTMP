@@ -13,7 +13,6 @@ import com.javatmp.module.accounting.entity.Account_;
 import com.javatmp.module.accounting.entity.Transaction;
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.LockModeType;
@@ -23,10 +22,12 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
+@Slf4j
+@Service
 public class AccountService extends JpaRepository<Account, Long> {
-
-    private final Logger logger = Logger.getLogger(getClass().getName());
 
     public AccountService(EntityManagerFactory emf) {
         super(Account.class, emf);

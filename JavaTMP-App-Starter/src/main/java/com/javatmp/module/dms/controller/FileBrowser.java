@@ -34,7 +34,7 @@ public class FileBrowser extends HttpServlet {
         ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         ResourceBundle bundle = (ResourceBundle) request.getSession().getAttribute(Constants.LANGUAGE_ATTR_KEY);
 
-        String requestPage = "/WEB-INF/pages/dms/FileBrowser.jsp";
+        String requestPage = "/pages/dms/FileBrowser.jsp";
         HttpSession session = request.getSession();
         User loggedInUser = (User) session.getAttribute("user");
         logger.info("logged in user [" + loggedInUser + "] and username is [" + loggedInUser.getUserName() + "]");

@@ -40,7 +40,7 @@ public class ViewMessageController extends HttpServlet {
 
             request.setAttribute("message", message);
 
-            request.getRequestDispatcher("/WEB-INF/pages/message/ViewMessage.jsp").forward(request, response);
+            request.getRequestDispatcher("/pages/message/ViewMessage.jsp").forward(request, response);
         } catch (IllegalAccessException ex) {
             Logger.getLogger(ViewMessageController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InvocationTargetException ex) {
