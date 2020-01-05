@@ -7,24 +7,21 @@ import com.javatmp.module.timezone.entity.Timezonetranslation;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.util.Constants;
 import com.javatmp.util.ServicesFactory;
-import java.io.IOException;
 import java.util.List;
-import java.util.logging.Logger;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 
-@WebServlet("/user/GetListUsersPage")
-public class GetListUsersPage extends HttpServlet {
+@Slf4j
+@Controller
+public class GetListUsersPage {
 
-    private final Logger logger = Logger.getLogger(getClass().getName());
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @GetMapping("/user/GetListUsersPage")
+    public String doGet(HttpServletRequest request, HttpServletResponse response) {
         String requestPage = "/pages/user/listUsers.jsp";
 
         ServletContext context = request.getServletContext();
@@ -39,6 +36,6 @@ public class GetListUsersPage extends HttpServlet {
         request.setAttribute("languages", languages);
         request.setAttribute("countries", countries);
         request.setAttribute("timezones", timezones);
-        request.getRequestDispatcher(requestPage).forward(request, response);
+        return requestPage;
     }
 }

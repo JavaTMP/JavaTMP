@@ -1,5 +1,10 @@
 package com.javatmp.config;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.javatmp.config.converter.OrderDirTypeJsonDeserializer;
+import com.javatmp.config.converter.OrderDirTypeJsonSerializer;
+import com.javatmp.fw.domain.table.OrderDir;
 import com.javatmp.web.filter.AuthenticatorFilter;
 import com.javatmp.web.filter.CacheControlHeadersFilter;
 import com.javatmp.web.filter.ContentCacheFilter;
@@ -16,6 +21,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -129,6 +135,17 @@ public class Config implements WebMvcConfigurer {
         registrationBean.setDispatcherTypes(DispatcherType.REQUEST);
         registrationBean.setOrder(7);
         return registrationBean;
+    }
+
+    @Bean
+    public ObjectMapper customJacksonJsonMapper() {
+        return new Jackson2ObjectMapperBuilder()
+                .indentOutput(true)
+                .serializationInclusion(JsonInclude.Include.ALWAYS)
+                .simpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+                .deserializerByType(OrderDir.class, new OrderDirTypeJsonDeserializer())
+                .serializerByType(OrderDir.class, new OrderDirTypeJsonSerializer())
+                .build();
     }
 
 }
