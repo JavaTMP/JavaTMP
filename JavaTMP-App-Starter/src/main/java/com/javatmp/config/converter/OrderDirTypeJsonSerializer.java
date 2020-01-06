@@ -21,7 +21,6 @@ public class OrderDirTypeJsonSerializer extends JsonSerializer<OrderDir> {
     @Override
     public void serialize(OrderDir en, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException,
             JsonProcessingException {
-        log.debug("******* >>>> order value [" + en.value() + "]");
         jsonGenerator.writeString(en.value());
     }
 }
