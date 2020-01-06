@@ -22,7 +22,6 @@ public class OrderDirTypeJsonDeserializer extends JsonDeserializer<OrderDir> {
     public OrderDir deserialize(JsonParser jsonParser,
             DeserializationContext deserializationContext) throws IOException,
             JsonProcessingException {
-        log.debug("******* >>>> order value [" + jsonParser.getValueAsString() + "]");
         return OrderDir.fromValue(jsonParser.getValueAsString());
     }
 }

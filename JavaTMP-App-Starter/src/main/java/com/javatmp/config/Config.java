@@ -50,7 +50,6 @@ public class Config implements WebMvcConfigurer {
 
     @Bean
     public ServletListenerRegistrationBean<JavaTMPServletListener> getJavaTMPServletListener() {
-        log.debug("EntityManagerFactory [" + emf + "]");
         ServletListenerRegistrationBean<JavaTMPServletListener> registrationBean
                 = new ServletListenerRegistrationBean<>();
         registrationBean.setListener(new JavaTMPServletListener(this.emf));
