@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class RegisterController {
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public String doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
         ServletContext context = request.getServletContext();
         HttpSession session = request.getSession();
         ResourceBundle labels = (ResourceBundle) session.getAttribute(Constants.LANGUAGE_ATTR_KEY);
@@ -47,7 +47,7 @@ public class RegisterController {
 //        request.setAttribute("languages", languages);
 //        request.setAttribute("countries", countries);
 //        request.setAttribute("timezones", timezones);
-        request.getRequestDispatcher("/pages/system/register.jsp").forward(request, response);
+        return "/pages/system/register.jsp";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
