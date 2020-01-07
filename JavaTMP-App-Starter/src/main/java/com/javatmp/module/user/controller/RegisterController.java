@@ -43,11 +43,10 @@ public class RegisterController {
         List<Languagetranslation> languages = sf.getLanguageService().getLanguages(loggedInUser);
         List<Themetranslation> themes = sf.getThemeService().getThemes(loggedInUser);
 
-        request.setAttribute("themes", themes);
-        request.setAttribute("languages", languages);
-        request.setAttribute("countries", countries);
-        request.setAttribute("timezones", timezones);
-
+//        request.setAttribute("themes", themes);
+//        request.setAttribute("languages", languages);
+//        request.setAttribute("countries", countries);
+//        request.setAttribute("timezones", timezones);
         request.getRequestDispatcher("/pages/system/register.jsp").forward(request, response);
     }
 
