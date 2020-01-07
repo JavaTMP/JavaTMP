@@ -5,54 +5,41 @@ import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.module.dms.service.DocumentService;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
-import com.javatmp.util.Constants;
-import com.javatmp.util.ServicesFactory;
-import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 @WebServlet("/user/ActivateUserController")
-public class ActivateUserController extends HttpServlet {
+@Slf4j
+@Controller
+public class ActivateUserController {
 
-    private final Logger logger = Logger.getLogger(getClass().getName());
+    @Autowired
+    UserService userService;
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @Autowired
+    DocumentService documentService;
 
-        ResponseMessage responseMessage = new ResponseMessage();
-        ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
-        DocumentService ds = sf.getDocumentService();
-        UserService us = sf.getUserService();
-        HttpSession session = request.getSession();
-        ResourceBundle labels = (ResourceBundle) session.getAttribute(Constants.LANGUAGE_ATTR_KEY);
-        try {
+    @PostMapping("/user/ActivateUserController")
+    protected ResponseMessage doPost(@RequestBody User userToBeUpdated, @SessionAttribute ResourceBundle labels, ResponseMessage responseMessage, HttpServletRequest request, HttpServletResponse response) {
 
-            User userToBeUpdated = (User) MvcHelper.readObjectFromRequest(request, User.class);
-            logger.info("User to be Activated is [" + MvcHelper.toString(userToBeUpdated) + "]");
+        log.info("User to be Activated is [" + MvcHelper.toString(userToBeUpdated) + "]");
 
-            int updateStatus = us.activateUser(userToBeUpdated);
+        int updateStatus = userService.activateUser(userToBeUpdated);
 
-            responseMessage.setOverAllStatus(true);
-            responseMessage.setTitle(labels.getString("action.successTitle"));
-            responseMessage.setMessage(MessageFormat.format(labels.getString("action.ActivateUser.successMsg"), updateStatus));
-            responseMessage.setData(userToBeUpdated);
+        responseMessage.setOverAllStatus(true);
+        responseMessage.setTitle(labels.getString("action.successTitle"));
+        responseMessage.setMessage(MessageFormat.format(labels.getString("action.ActivateUser.successMsg"), updateStatus));
+        responseMessage.setData(userToBeUpdated);
 
-        } catch (IllegalArgumentException e) {
-            logger.log(Level.SEVERE, e.getMessage(), e);
-            responseMessage.setOverAllStatus(false);
-            responseMessage.setMessage(e.getMessage());
-            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            responseMessage.setStatusCode(HttpServletResponse.SC_BAD_REQUEST);
-        }
-        MvcHelper.sendMessageAsJson(response, responseMessage);
-
+        return responseMessage;
     }
 }

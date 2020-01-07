@@ -6,7 +6,11 @@ import com.javatmp.fw.domain.table.DataTableResults;
 import com.javatmp.module.dms.entity.Document;
 import java.text.ParseException;
 import javax.persistence.EntityManagerFactory;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
+@Slf4j
+@Service
 public class DocumentService extends JpaRepository<Document, Long> {
 
     public DocumentService(EntityManagerFactory emf) {

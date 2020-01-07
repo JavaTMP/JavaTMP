@@ -46,7 +46,7 @@ public class RegisterController {
 //        request.setAttribute("themes", themes);
 //        request.setAttribute("languages", languages);
 //        request.setAttribute("countries", countries);
-//        request.setAttribute("timezones", timezones);
+//        context.setAttribute("timezoneService", timezones);
         return "/pages/system/register.jsp";
     }
 

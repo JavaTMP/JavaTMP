@@ -13,11 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
 @Controller
@@ -30,7 +30,7 @@ public class UpdateAccountPopup {
     private AccountGroupService accountGroupService;
 
     @GetMapping(value = "/accounting/UpdateAccountPopup")
-    public ModelAndView doGet(@SessionAttribute User user, Account account, ModelAndView modelAndView, HttpServletRequest request, HttpServletResponse response) {
+    public String doGet(@SessionAttribute User user, Account account, Model model) {
         String requestPage = "/pages/accounting/updateAccountPopup.jsp";
 
         log.info("request account is [" + MvcHelper.deepToString(account) + "]");
@@ -40,11 +40,10 @@ public class UpdateAccountPopup {
         log.debug("loged in user is {}", user);
         List<Account> accounts = accountService.findAll(0, Integer.MAX_VALUE);
         List<AccountGroup> accountGroups = accountGroupService.findAll(0, Integer.MAX_VALUE);
-        modelAndView.addObject("accounts", accounts);
-        modelAndView.addObject("accountGroups", accountGroups);
-        modelAndView.addObject("account", dbAccount);
-        modelAndView.setViewName(requestPage);
-        return modelAndView;
+        model.addAttribute("accounts", accounts);
+        model.addAttribute("accountGroups", accountGroups);
+        model.addAttribute("account", dbAccount);
+        return requestPage;
 
     }
 
