@@ -8,7 +8,6 @@ import com.javatmp.util.ServicesFactory;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.logging.Logger;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -17,16 +16,16 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class AuthenticatorFilter extends FilterWrapper {
-
-    private final Logger logger = Logger.getLogger(getClass().getName());
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
-        logger.info("*** Start AuthenticatorFilter ****");
+        log.info("*** Start AuthenticatorFilter ****");
 
         // https://stackoverflow.com/questions/46592664/request-getservletpath-returned-null-from-spring-mvc
         HttpServletRequest req = (HttpServletRequest) request;
@@ -38,15 +37,15 @@ public class AuthenticatorFilter extends FilterWrapper {
         ResourceBundle labels = (ResourceBundle) session.getAttribute(Constants.LANGUAGE_ATTR_KEY);
 
         boolean isExcludedUrl = isExcludedUrl(path);
-        logger.info("path [" + path + "] isExcludedUrl [" + isExcludedUrl + "]");
+        log.info("path [" + path + "] isExcludedUrl [" + isExcludedUrl + "]");
         if (isExcludedUrl == true) {
             chain.doFilter(request, response);
         } else {
             // check if requester is authenticated or not
-            logger.info("Session is New [" + session.isNew() + "], Session Attribute [" + session.getAttribute("user") + "]");
+            log.info("Session is New [" + session.isNew() + "], Session Attribute [" + session.getAttribute("user") + "]");
             User user = (User) session.getAttribute("user");
             if (user != null) {
-                logger.info("Session User is [" + MvcHelper.deepToString(user) + "]");
+                log.info("Session User is [" + MvcHelper.deepToString(user) + "]");
                 chain.doFilter(request, response);
             } else if (session.isNew()) {
                 // for demo and for new time access we support user123 loggedin:
@@ -72,7 +71,7 @@ public class AuthenticatorFilter extends FilterWrapper {
             } else {
 //                String redirectUrl = req.getContextPath() + "/login";
                 String redirectUrl = "/login";
-                logger.info("redirect user to login page");
+                log.info("redirect user to login page");
                 res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 //                res.setHeader("Location", res.encodeRedirectURL(redirectUrl));
 //                res.sendRedirect(redirectUrl);
