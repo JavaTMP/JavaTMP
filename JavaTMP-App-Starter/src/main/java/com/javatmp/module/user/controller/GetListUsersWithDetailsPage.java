@@ -1,21 +1,16 @@
 package com.javatmp.module.user.controller;
 
-import com.javatmp.module.country.entity.Country;
 import com.javatmp.module.country.entity.Countrytranslation;
-import com.javatmp.module.language.entity.Language;
 import com.javatmp.module.language.entity.Languagetranslation;
-import com.javatmp.module.theme.entity.Theme;
 import com.javatmp.module.theme.entity.Themetranslation;
-import com.javatmp.module.timezone.entity.Timezone;
 import com.javatmp.module.timezone.entity.Timezonetranslation;
 import com.javatmp.module.user.entity.User;
-import com.javatmp.util.ServicesFactory;
 import com.javatmp.util.Constants;
+import com.javatmp.util.ServicesFactory;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.servlet.ServletContext;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

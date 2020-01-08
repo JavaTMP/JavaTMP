@@ -17,9 +17,11 @@ import com.javatmp.web.listener.JavaTMPServletListener;
 import javax.persistence.EntityManagerFactory;
 import javax.servlet.DispatcherType;
 import lombok.extern.slf4j.Slf4j;
+import nl.captcha.servlet.SimpleCaptchaServlet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
@@ -137,6 +139,17 @@ public class Config implements WebMvcConfigurer {
         return registrationBean;
     }
 
+    // http://simplecaptcha.sourceforge.net/installing.html
+    @Bean
+    public ServletRegistrationBean<SimpleCaptchaServlet> exampleServletBean() {
+        ServletRegistrationBean<SimpleCaptchaServlet> bean = new ServletRegistrationBean<>();
+        bean.setServlet(new SimpleCaptchaServlet());
+        bean.addInitParameter("width", "250");
+        bean.addInitParameter("height", "75");
+        bean.addUrlMappings("/CaptchaImageController");
+        return bean;
+    }
+
     @Bean
     public ObjectMapper customJacksonJsonMapper() {
         return new Jackson2ObjectMapperBuilder()
@@ -147,5 +160,4 @@ public class Config implements WebMvcConfigurer {
                 .serializerByType(OrderDir.class, new OrderDirTypeJsonSerializer())
                 .build().configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
     }
-
 }
