@@ -2,6 +2,7 @@ package com.javatmp.config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.javatmp.config.converter.OrderDirTypeJsonDeserializer;
 import com.javatmp.config.converter.OrderDirTypeJsonSerializer;
 import com.javatmp.fw.domain.table.OrderDir;
@@ -141,10 +142,10 @@ public class Config implements WebMvcConfigurer {
         return new Jackson2ObjectMapperBuilder()
                 .indentOutput(true)
                 .serializationInclusion(JsonInclude.Include.ALWAYS)
-                .simpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
+                //                .simpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX")
                 .deserializerByType(OrderDir.class, new OrderDirTypeJsonDeserializer())
                 .serializerByType(OrderDir.class, new OrderDirTypeJsonSerializer())
-                .build();
+                .build().configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
     }
 
 }
