@@ -14,6 +14,7 @@ import com.javatmp.web.filter.LocalizationFilter;
 import com.javatmp.web.filter.LoggingFilter;
 import com.javatmp.web.listener.JavaTMPHttpSessionListener;
 import com.javatmp.web.listener.JavaTMPServletListener;
+import java.util.Locale;
 import javax.persistence.EntityManagerFactory;
 import javax.servlet.DispatcherType;
 import lombok.extern.slf4j.Slf4j;
@@ -22,12 +23,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
+import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
+import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 @Slf4j
 @Configuration
@@ -38,11 +45,6 @@ public class Config implements WebMvcConfigurer {
 
     @Autowired
     LoggingFilter loggingFilter;
-
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(new MinimalInterceptor());
-    }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -159,5 +161,37 @@ public class Config implements WebMvcConfigurer {
                 .deserializerByType(OrderDir.class, new OrderDirTypeJsonDeserializer())
                 .serializerByType(OrderDir.class, new OrderDirTypeJsonSerializer())
                 .build().configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
+    }
+
+    @Bean
+    public LocaleResolver getLocaleResolver() {
+        CookieLocaleResolver resolver = new CookieLocaleResolver();
+        // 60 minutes
+        resolver.setCookieMaxAge(Integer.MAX_VALUE);
+        return resolver;
+    }
+
+    @Bean("localeResolver")
+    public LocaleResolver getSessionLocaleResolver() {
+        SessionLocaleResolver resolver = new SessionLocaleResolver();
+        resolver.setDefaultLocale(Locale.ENGLISH);
+        return resolver;
+    }
+
+    @Bean
+    public MessageSource getMessageResource() {
+        ResourceBundleMessageSource messageResource = new ResourceBundleMessageSource();
+        // Read i18n/messages_xxx.properties file.
+        // For example: i18n/messages_en.properties
+        messageResource.setBasename("classpath:i18n/messages");
+        messageResource.setDefaultEncoding("UTF-8");
+        return messageResource;
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        LocaleChangeInterceptor localeInterceptor = new LocaleChangeInterceptor();
+        localeInterceptor.setParamName("lan");
+        registry.addInterceptor(localeInterceptor).addPathPatterns("/*");
     }
 }
