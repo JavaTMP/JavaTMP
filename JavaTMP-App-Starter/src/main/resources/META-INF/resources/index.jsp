@@ -246,7 +246,7 @@
                             <a class="dropdown-item"
                                actionType="action-ref-href"
                                href="#"
-                               action-ref-by-href="${pageContext.request.contextPath}/pages/user/current-user-profile">
+                               action-ref-by-href="${pageContext.request.contextPath}/user/CurrentUserProfileController">
                                 <i class="fa fa-lg fa-fw fa-user"></i>
                                 ${labels['navbar.user.settings']}
                             </a>
