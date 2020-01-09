@@ -11,6 +11,7 @@ import com.javatmp.module.timezone.service.TimezoneService;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.util.Constants;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -33,21 +34,21 @@ public class PagesController {
     private CountryService countryService;
 
     @GetMapping("/pages/**")
-    protected String doGet(@SessionAttribute ResourceBundle labels, @SessionAttribute(Constants.LOG_IN_USER_NAME) User loggedInUser,
+    protected String doGet(@SessionAttribute ResourceBundle labels, @SessionAttribute(Constants.LOG_IN_USER_NAME) Optional<User> loggedInUser,
             HttpServletRequest request) {
 
         String requestUrl = request.getRequestURI();
         String requestPage = requestUrl + ".jsp";
         log.info("request url [" + requestUrl + "] Request Page [" + requestPage + "]");
-
-        if (loggedInUser == null) {
-            loggedInUser = new User(0L, labels.getString("global.language"));
+        User user = new User(0L, labels.getString("global.language"));
+        if (loggedInUser.isPresent()) {
+            user = loggedInUser.get();
         }
 
-        List<Timezonetranslation> timezones = this.timezoneService.getTimezones(loggedInUser);
-        List<Countrytranslation> countries = this.countryService.getCountries(loggedInUser);
-        List<Languagetranslation> languages = this.languageService.getLanguages(loggedInUser);
-        List<Themetranslation> themes = this.themeService.getThemes(loggedInUser);
+        List<Timezonetranslation> timezones = this.timezoneService.getTimezones(user);
+        List<Countrytranslation> countries = this.countryService.getCountries(user);
+        List<Languagetranslation> languages = this.languageService.getLanguages(user);
+        List<Themetranslation> themes = this.themeService.getThemes(user);
 
         request.setAttribute("themes", themes);
         request.setAttribute("languages", languages);

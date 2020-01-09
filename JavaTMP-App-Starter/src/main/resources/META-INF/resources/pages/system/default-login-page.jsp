@@ -42,7 +42,7 @@
                                            data-rule-required="true">
                                 </div>
                                 <button disabled="" type="submit" href="javascript:;" class="btn btn-lg btn-primary btn-block">${labels['page.btn.login']}</button>
-                                <a href="${pageContext.request.contextPath}/register" class="btn btn-success btn-block">${labels['page.btn.registerPage']}</a>
+                                <a href="${pageContext.request.contextPath}/pages/system/register" class="btn btn-success btn-block">${labels['page.btn.registerPage']}</a>
                             </form>
                         </div>
                     </div>

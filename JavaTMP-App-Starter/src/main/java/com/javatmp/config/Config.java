@@ -100,7 +100,7 @@ public class Config implements WebMvcConfigurer {
         registrationBean.setFilter(new AuthenticatorFilter());
         registrationBean.addUrlPatterns("/*");
         registrationBean.setDispatcherTypes(DispatcherType.REQUEST);
-        registrationBean.addInitParameter("excludedUrlsRegex", "^/assets/.*,^/login,^/logout,^/register,^/CaptchaImageController");
+        registrationBean.addInitParameter("excludedUrlsRegex", "^/assets/.*,^/login,^/logout,^/register,^/CaptchaImageController,^/pages/system/register");
         registrationBean.setOrder(4);
         return registrationBean;
     }
@@ -112,7 +112,7 @@ public class Config implements WebMvcConfigurer {
         registrationBean.setFilter(new CacheControlHeadersFilter());
         registrationBean.addUrlPatterns("/*");
         registrationBean.setDispatcherTypes(DispatcherType.REQUEST);
-        registrationBean.addInitParameter("excludedUrlsRegex", "^/,^/login,^/logout,^/register,^/CaptchaImageController");
+        registrationBean.addInitParameter("excludedUrlsRegex", "^/,^/login,^/logout,^/CaptchaImageController");
         registrationBean.setOrder(5);
         return registrationBean;
     }
