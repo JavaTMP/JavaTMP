@@ -13,13 +13,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.stereotype.Component;
-import org.springframework.web.context.annotation.ApplicationScope;
+import org.springframework.stereotype.Service;
 
 @Slf4j
-@ApplicationScope(proxyMode = ScopedProxyMode.TARGET_CLASS)
-@Component("timezoneService")
+@Service
 public class TimezoneService extends JpaRepository<Timezone, String> {
 
     private Map<String, List<Timezonetranslation>> timezones;

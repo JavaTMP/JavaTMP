@@ -13,12 +13,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 @Slf4j
 @Controller
-public class UserStatusController {
+@RequestMapping("/user")
+public class UserOperationController {
 
     @Autowired
     UserService userService;
@@ -26,7 +28,7 @@ public class UserStatusController {
     @Autowired
     DocumentService documentService;
 
-    @PostMapping("/user/ActivateUserController")
+    @PostMapping("/ActivateUserController")
     public @ResponseBody
     ResponseMessage ActivateUser(@RequestBody User userToBeUpdated, @SessionAttribute ResourceBundle labels,
             ResponseMessage responseMessage, HttpServletRequest request, HttpServletResponse response) {
@@ -43,7 +45,7 @@ public class UserStatusController {
         return responseMessage;
     }
 
-    @PostMapping("/user/DeactivateUserController")
+    @PostMapping("/DeactivateUserController")
     public @ResponseBody
     ResponseMessage DeactivateUser(@RequestBody User userToBeUpdated, @SessionAttribute ResourceBundle labels,
             ResponseMessage responseMessage, HttpServletRequest request, HttpServletResponse response) {
@@ -59,4 +61,22 @@ public class UserStatusController {
 
         return responseMessage;
     }
+
+    @PostMapping("/DeleteUserController")
+    public @ResponseBody
+    ResponseMessage DeleteUser(@RequestBody User userToBeDeleted, @SessionAttribute ResourceBundle labels,
+            ResponseMessage responseMessage, HttpServletRequest request, HttpServletResponse response) {
+
+        log.info("User to be Deactivated is {}", userToBeDeleted);
+
+        int updateStatus = this.userService.deleteUser(userToBeDeleted);
+
+        responseMessage.setOverAllStatus(true);
+        responseMessage.setTitle(labels.getString("action.successTitle"));
+        responseMessage.setMessage(MessageFormat.format(labels.getString("action.deleteUser.successMsg"), updateStatus));
+        responseMessage.setData(userToBeDeleted);
+
+        return responseMessage;
+    }
+
 }

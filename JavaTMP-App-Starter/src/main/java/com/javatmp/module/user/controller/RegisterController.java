@@ -9,7 +9,6 @@ import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
 import com.javatmp.util.Constants;
 import com.javatmp.util.ServicesFactory;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.ResourceBundle;
 import javax.servlet.ServletContext;
@@ -51,24 +50,17 @@ public class RegisterController {
         request.setAttribute("countries", countries);
         request.setAttribute("timezones", timezones);
 
-        Enumeration<String> enums = context.getAttributeNames();
-        while (enums.hasMoreElements()) {
-            String currentName = enums.nextElement();
-            log.info("Context Name is [" + currentName + "] type [" + context.getAttribute(currentName).getClass() + "]");
-        }
-
         return "/pages/system/register.jsp";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public @ResponseBody
-    ResponseMessage doPost(User user, @SessionAttribute ResourceBundle labels, HttpSession session,
+    ResponseMessage doPost(String captchaAnswer, User user, @SessionAttribute(Captcha.NAME) Captcha captcha,
+            @SessionAttribute ResourceBundle labels, HttpSession session,
             ResponseMessage responseMessage, HttpServletRequest request) {
 
         log.info("User to be Registerd {}", user);
 
-        String captchaAnswer = request.getParameter("captchaAnswer");
-        Captcha captcha = (Captcha) session.getAttribute(Captcha.NAME);
         if (captcha != null && captcha.isCorrect(captchaAnswer)) {
             userService.createNewBasicUser(user);
             responseMessage.setOverAllStatus(true);

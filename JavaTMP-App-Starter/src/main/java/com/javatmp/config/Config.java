@@ -15,7 +15,6 @@ import com.javatmp.web.filter.LoggingFilter;
 import com.javatmp.web.listener.JavaTMPHttpSessionListener;
 import com.javatmp.web.listener.JavaTMPServletListener;
 import java.util.Locale;
-import javax.persistence.EntityManagerFactory;
 import javax.servlet.DispatcherType;
 import lombok.extern.slf4j.Slf4j;
 import nl.captcha.servlet.SimpleCaptchaServlet;
@@ -41,10 +40,10 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 public class Config implements WebMvcConfigurer {
 
     @Autowired
-    EntityManagerFactory emf;
+    LoggingFilter loggingFilter;
 
     @Autowired
-    LoggingFilter loggingFilter;
+    JavaTMPServletListener javaTMPServletListener;
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -57,13 +56,12 @@ public class Config implements WebMvcConfigurer {
     public ServletListenerRegistrationBean<JavaTMPServletListener> getJavaTMPServletListener() {
         ServletListenerRegistrationBean<JavaTMPServletListener> registrationBean
                 = new ServletListenerRegistrationBean<>();
-        registrationBean.setListener(new JavaTMPServletListener(this.emf));
+        registrationBean.setListener(this.javaTMPServletListener);
         return registrationBean;
     }
 
     @Bean
     public ServletListenerRegistrationBean<JavaTMPHttpSessionListener> getJavaTMPHttpSessionListener() {
-        log.debug("EntityManagerFactory [" + emf + "]");
         ServletListenerRegistrationBean<JavaTMPHttpSessionListener> registrationBean
                 = new ServletListenerRegistrationBean<>();
         registrationBean.setListener(new JavaTMPHttpSessionListener());

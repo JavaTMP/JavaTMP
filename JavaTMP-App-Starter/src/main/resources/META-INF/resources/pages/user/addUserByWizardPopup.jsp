@@ -4,11 +4,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:set var="countries" scope="request" value="${applicationScope[Constants.SERVICES_FACTORY_ATTRIBUTE_NAME].getCountryService().getCountries(sessionScope[Constants.LOG_IN_USER_NAME])}"/>
-<c:set var="languages" scope="request" value="${applicationScope[Constants.SERVICES_FACTORY_ATTRIBUTE_NAME].getLanguageService().getLanguages(sessionScope[Constants.LOG_IN_USER_NAME])}"/>
-<c:set var="themes" scope="request" value="${applicationScope[Constants.SERVICES_FACTORY_ATTRIBUTE_NAME].getThemeService().getThemes(sessionScope[Constants.LOG_IN_USER_NAME])}"/>
-<c:set var="timezones" scope="request" value="${applicationScope[Constants.SERVICES_FACTORY_ATTRIBUTE_NAME].getTimezoneService().getTimezones(sessionScope[Constants.LOG_IN_USER_NAME])}"/>
-
 <div class="dynamic-ajax-content grid-gutter-padding">
     <form id="AddNewUserPopupFormId" enctype="multipart/form-data" autocomplete="off" class="form"
           action="${pageContext.request.contextPath}/user/CreateUserController" method="post" novalidate="novalidate">

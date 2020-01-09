@@ -1,29 +1,24 @@
 package com.javatmp.web.listener;
 
-import com.javatmp.util.ServicesFactory;
 import com.javatmp.util.Constants;
+import com.javatmp.util.ServicesFactory;
 import java.util.Date;
 import java.util.TimeZone;
-import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @WebListener
 @Slf4j
+@Component
 public class JavaTMPServletListener implements ServletContextListener {
 
     EntityManagerFactory emf;
 
     ServicesFactory sf;
-
-    public JavaTMPServletListener() {
-
-    }
 
     public JavaTMPServletListener(EntityManagerFactory emf) {
         this.emf = emf;
@@ -37,6 +32,7 @@ public class JavaTMPServletListener implements ServletContextListener {
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
         sf = new ServicesFactory(this.emf);
         sce.getServletContext().setAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME, sf);
+
         log.info("****** End @ [" + new Date() + "] *********");
     }
 
