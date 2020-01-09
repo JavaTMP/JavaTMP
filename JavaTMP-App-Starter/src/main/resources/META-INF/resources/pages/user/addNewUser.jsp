@@ -11,7 +11,7 @@
                   autocomplete="off"
                   id="jquery-form-plugin-test-id"
                   class="form"
-                  action="${pageContext.request.contextPath}/user/CreateUserController"
+                  action="${pageContext.request.contextPath}/pages/user/addNewUser"
                   method="post"
                   novalidate="novalidate">
                 <div class="form-row">

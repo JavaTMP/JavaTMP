@@ -213,7 +213,7 @@ public class JpaRepository<E, I> {
     }
 
     public Path<E> convertStringToPath(Root<E> from, String strPathName) {
-        System.out.println("handling str [" + strPathName + "]");
+//        System.out.println("handling str [" + strPathName + "]");
         String[] attributes = strPathName.split("\\.");
         Path<E> retPath = from.get(attributes[0]);
         if (attributes.length > 1) {

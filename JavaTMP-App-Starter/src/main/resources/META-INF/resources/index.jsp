@@ -246,7 +246,7 @@
                             <a class="dropdown-item"
                                actionType="action-ref-href"
                                href="#"
-                               action-ref-by-href="${pageContext.request.contextPath}/user/CurrentUserProfileController">
+                               action-ref-by-href="${pageContext.request.contextPath}/pages/user/current-user-profile">
                                 <i class="fa fa-lg fa-fw fa-user"></i>
                                 ${labels['navbar.user.settings']}
                             </a>
@@ -279,14 +279,14 @@
                             </button>
                             <button class="btn btn-primary"
                                     actionType="action-ref-href"
-                                    action-ref-by-href="${pageContext.request.contextPath}/user/GetListUsersPage"
+                                    action-ref-by-href="${pageContext.request.contextPath}/pages/user/listUsers"
                                     data-toggle="tooltip" data-placement="auto"
                                     title="${labels['sidebar.menuItem.users.usersList']}">
                                 <i class="fas fa-users fa-fw"></i>
                             </button>
                             <button class="btn btn-primary"
                                     actionType="action-ref-href"
-                                    action-ref-by-href="${pageContext.request.contextPath}/user/CreateUserController"
+                                    action-ref-by-href="${pageContext.request.contextPath}/pages/user/addNewUser"
                                     data-toggle="tooltip" data-placement="auto"
                                     title="${labels['sidebar.menuItem.users.addNewUser']}">
                                 <i class="fas fa-user-plus"></i>
@@ -328,32 +328,32 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/user/GetListUsersPage">
+                                        <a href="${pageContext.request.contextPath}/pages/user/listUsers">
                                             ${labels['sidebar.menuItem.users.usersList']}
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/user/GetListUsersWithSearchBlockPage">
+                                        <a href="${pageContext.request.contextPath}/pages/user/listUsersWithSearchBlock">
                                             ${labels['sidebar.menuItem.users.usersListWithSearchBlock']}
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/user/GetListUsersWithDetailsPage">
+                                        <a href="${pageContext.request.contextPath}/pages/user/listUsersWithDetails">
                                             ${labels['sidebar.menuItem.users.usersListWithDetails']}
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/user/CreateUserController">
+                                        <a href="${pageContext.request.contextPath}/pages/user/addNewUser">
                                             ${labels['sidebar.menuItem.users.addNewUser']}
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/user/SearchForUserProfileController">
+                                        <a href="${pageContext.request.contextPath}/pages/user/search-for-user-profile">
                                             ${labels['sidebar.menuItem.users.searchForUser']}
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/user/GetAdvancedListUsersSearchPage">
+                                        <a href="${pageContext.request.contextPath}/pages/user/advancedUsersSearch">
                                             Advanced Users Search
                                         </a>
                                     </li>

@@ -6,7 +6,7 @@
         <button type="button" class="btn btn-primary"
                 action-name="Add-New-User-Action"
                 actionType="action-ref-href"
-                action-ref-by-href="${pageContext.request.contextPath}/user/CreateUserController">
+                action-ref-by-href="${pageContext.request.contextPath}/pages/user/addNewUser">
             <i class="fa fa-fw fa-user"></i>
             ${labels['page.btn.addNewUserPage']}
         </button>
@@ -379,7 +379,7 @@
                         callback: actionCallback
                     },
                     ajax: {
-                        url: javatmp.settings.contextPath + "/user/GetCreateNewUserPopupController",
+                        url: javatmp.settings.contextPath + "/pages/user/addNewUserPopup",
                         data: {}
                     },
                     ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady

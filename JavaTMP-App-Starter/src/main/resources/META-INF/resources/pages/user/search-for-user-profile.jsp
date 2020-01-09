@@ -416,7 +416,7 @@
                         }
                     },
                     ajax: {
-                        url: javatmp.settings.contextPath + "/user/GetUsersLookupPopupPage",
+                        url: javatmp.settings.contextPath + "/pages/user/usersLookupPopup",
                         data: {}
                     },
                     ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
