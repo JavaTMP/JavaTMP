@@ -1,7 +1,6 @@
 package com.javatmp.module.content.controller;
 
 import com.javatmp.fw.domain.ResponseMessage;
-import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.module.content.entity.Content;
 import com.javatmp.module.content.service.ContentService;
 import com.javatmp.module.user.entity.User;
@@ -28,9 +27,9 @@ public class UpdateContent {
     public String doGet(Content content, HttpServletRequest request, HttpServletResponse response) {
         String requestPage = "/pages/content/UpdateContent.jsp";
 
-        log.info("request user is [" + MvcHelper.deepToString(content) + "]");
+        log.info("request user is [" + (content) + "]");
         content = this.contentService.getOne(content.getContentId());
-        log.info("DB user to be Updated is [" + MvcHelper.deepToString(content) + "]");
+        log.info("DB user to be Updated is [" + (content) + "]");
 
         HttpSession session = request.getSession();
         User loggedInUser = (User) session.getAttribute("user");

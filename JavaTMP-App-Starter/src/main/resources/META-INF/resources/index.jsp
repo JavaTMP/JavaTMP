@@ -366,7 +366,7 @@
                                 </a>
                                 <ul>
                                     <li>
-                                        <a href="${pageContext.request.contextPath}/dms/FileBrowser">
+                                        <a href="${pageContext.request.contextPath}/pages/dms/FileBrowser">
                                             File Browser
                                         </a>
                                     </li>
@@ -463,7 +463,7 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="${pageContext.request.contextPath}/accounting/AccountLedger">
+                                                <a href="${pageContext.request.contextPath}/pages/accounting/account-ledger">
                                                     Account Ledger
                                                 </a>
                                             </li>

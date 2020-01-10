@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class ActivityService extends JpaRepository<Activity, Long> {
+public class UserActivityService extends JpaRepository<Activity, Long> {
 
-    public ActivityService(EntityManagerFactory emf) {
+    public UserActivityService(EntityManagerFactory emf) {
         super(Activity.class, emf);
     }
 

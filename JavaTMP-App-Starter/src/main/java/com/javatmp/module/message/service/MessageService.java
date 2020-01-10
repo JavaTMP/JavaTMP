@@ -7,12 +7,14 @@ import com.javatmp.module.message.entity.Message;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
 import java.text.ParseException;
-import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
+@Slf4j
+@Service
 public class MessageService extends JpaRepository<Message, Long> {
 
-    private final Logger logger = Logger.getLogger(getClass().getName());
     private UserService userService;
 
     public MessageService(EntityManagerFactory emf, UserService userService) {

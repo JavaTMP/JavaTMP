@@ -57,7 +57,7 @@
                     extensions: ["glyph"],
                     glyph: glyph_opts,
                     source: {
-                        url: javatmp.settings.contextPath + "/dms/FileBrowser",
+                        url: javatmp.settings.contextPath + "/dms/fileBrowser",
                         type: "POST",
                         data: {parent: "/"},
                         debugDelay: 100,
@@ -68,7 +68,7 @@
                     },
                     lazyLoad: function (event, data) {
                         data.result = {
-                            url: javatmp.settings.contextPath + "/dms/FileBrowser",
+                            url: javatmp.settings.contextPath + "/dms/fileBrowser",
                             type: "POST",
                             data: {parent: data.node.data.logicalPath},
                             debugDelay: 100,

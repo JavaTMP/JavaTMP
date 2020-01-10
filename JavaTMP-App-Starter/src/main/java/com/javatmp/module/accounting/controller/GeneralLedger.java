@@ -46,7 +46,7 @@ public class GeneralLedger extends HttpServlet {
         dataTableResult.setDraw(tableRequest.getDraw());
         responseMessage.setOverAllStatus(true);
         responseMessage.setData(dataTableResult);
-        MvcHelper.sendMessageAsJson(response, responseMessage);
+        return responseMessage;
 
     }
 

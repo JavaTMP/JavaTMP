@@ -67,7 +67,7 @@
                     glyph: glyph_opts,
                     autoScroll: true,
                     source: {
-                        url: javatmp.settings.contextPath + "/dms/FileBrowser",
+                        url: javatmp.settings.contextPath + "/dms/fileBrowser",
                         type: "POST",
                         data: {parent: "/"},
                         debugDelay: 50,
@@ -85,7 +85,7 @@
                     },
                     lazyLoad: function (event, data) {
                         data.result = {
-                            url: javatmp.settings.contextPath + "/dms/FileBrowser",
+                            url: javatmp.settings.contextPath + "/dms/fileBrowser",
                             type: "POST",
                             data: {parent: data.node.data.logicalPath},
                             debugDelay: 50,

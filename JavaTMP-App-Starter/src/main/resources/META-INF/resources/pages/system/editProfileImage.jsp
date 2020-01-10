@@ -133,7 +133,7 @@
                     if (result) {
                         result.toBlob(function (blob) {
                             var imageContent = result.toDataURL(uploadedImageType);
-                            $.ajax(javatmp.settings.contextPath + '/dms/UpdateProfilePhoto', {
+                            $.ajax(javatmp.settings.contextPath + '/dms/updateProfilePhoto', {
                                 method: "POST",
                                 data: imageContent,
                                 processData: false,

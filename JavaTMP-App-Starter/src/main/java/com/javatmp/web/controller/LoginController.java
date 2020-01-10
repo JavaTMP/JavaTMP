@@ -1,7 +1,6 @@
 package com.javatmp.web.controller;
 
 import com.javatmp.fw.domain.ResponseMessage;
-import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
 import com.javatmp.util.Constants;
@@ -40,12 +39,12 @@ public class LoginController {
         ResourceBundle labels = (ResourceBundle) session.getAttribute(Constants.LANGUAGE_ATTR_KEY);
 
         try {
-            log.info("Check User [" + MvcHelper.deepToString(user) + "]");
+            log.info("Check User [" + (user) + "]");
             User dbUser = this.userService.readUserByUsername(user);
 
             if (dbUser.getPassword().equals(MD5Util.convertToMD5(user.getPassword()))) {
                 // Authenticated user
-                log.info("User found [" + MvcHelper.deepToString(dbUser) + "]");
+                log.info("User found [" + (dbUser) + "]");
 
                 Locale locale = Locale.forLanguageTag(dbUser.getLang());
                 ResourceBundle bundle = ResourceBundle.getBundle(Constants.RESOURCE_BUNDLE_BASE_NAME, locale);

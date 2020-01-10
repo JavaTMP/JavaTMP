@@ -4,14 +4,14 @@ import com.javatmp.module.accounting.service.AccountGroupService;
 import com.javatmp.module.accounting.service.AccountService;
 import com.javatmp.module.accounting.service.TransactionEntryService;
 import com.javatmp.module.accounting.service.TransactionService;
-import com.javatmp.module.activity.ActivityService;
+import com.javatmp.module.activity.UserActivityService;
 import com.javatmp.module.content.service.ContentService;
 import com.javatmp.module.country.service.CountryService;
 import com.javatmp.module.dms.service.DocumentService;
 import com.javatmp.module.event.service.EventService;
 import com.javatmp.module.language.service.LanguageService;
 import com.javatmp.module.message.service.MessageService;
-import com.javatmp.module.stats.controller.UserStatsService;
+import com.javatmp.module.stats.service.UserStatsService;
 import com.javatmp.module.theme.service.ThemeService;
 import com.javatmp.module.timezone.service.TimezoneService;
 import com.javatmp.module.user.service.UserService;
@@ -36,7 +36,7 @@ public class ServicesFactory {
     private DocumentService documentService;
     private UserStatsService userStatsService;
     @Autowired
-    private ActivityService activityService;
+    private UserActivityService activityService;
     private EventService eventService;
     private MessageService messageService;
     private ContentService contentService;
@@ -61,7 +61,7 @@ public class ServicesFactory {
         this.documentService = new DocumentService(emf);
         this.userService = new UserService(emf);
         this.userStatsService = new UserStatsService(emf);
-        this.activityService = new ActivityService(emf);
+        this.activityService = new UserActivityService(emf);
         this.eventService = new EventService(emf);
         this.messageService = new MessageService(emf, userService);
         this.contentService = new ContentService(emf);

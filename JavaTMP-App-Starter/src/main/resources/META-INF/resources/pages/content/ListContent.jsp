@@ -192,7 +192,7 @@
                                 javatmp.settings.labels["dialog.delete.message"],
                                 "Delete",
                                 javatmp.settings.labels["global.cancel"],
-                                javatmp.settings.contextPath + "/content/DeleteContent",
+                                javatmp.settings.contextPath + "/content/deleteContent",
                                 selectedRecord,
                                 function (data) {
                                     table.draw();

@@ -1,4 +1,4 @@
-package com.javatmp.module.stats.controller;
+package com.javatmp.module.stats.service;
 
 import com.javatmp.fw.data.jpa.repository.JpaRepository;
 import com.javatmp.module.country.entity.Country;
@@ -21,8 +21,10 @@ import javax.persistence.criteria.ListJoin;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
 @Slf4j
+@Service
 public class UserStatsService extends JpaRepository<Object[], Long> {
 
     public UserStatsService(EntityManagerFactory emf) {

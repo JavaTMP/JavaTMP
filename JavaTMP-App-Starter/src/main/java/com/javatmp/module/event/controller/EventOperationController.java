@@ -1,7 +1,6 @@
 package com.javatmp.module.event.controller;
 
 import com.javatmp.fw.domain.ResponseMessage;
-import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.module.event.entity.Event;
 import com.javatmp.module.event.service.EventService;
 import java.io.IOException;
@@ -30,7 +29,7 @@ public class EventOperationController {
     public @ResponseBody
     ResponseMessage addNewEvent(Event event, ResponseMessage responseMessage) {
 
-        log.info("Event read from request prior to update [" + MvcHelper.toString(event) + "]");
+        log.info("Event read from request prior to update [" + (event) + "]");
 
         this.eventService.save(event);
         responseMessage.setOverAllStatus(true);
@@ -42,7 +41,7 @@ public class EventOperationController {
     public @ResponseBody
     ResponseMessage deleteEvent(@RequestBody Event event, HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        log.info("Event read from request to be deleted [" + MvcHelper.toString(event) + "]");
+        log.info("Event read from request to be deleted [" + (event) + "]");
         ResponseMessage responseMessage = new ResponseMessage();
         eventService.delete(event);
         responseMessage.setOverAllStatus(true);
@@ -54,7 +53,7 @@ public class EventOperationController {
     public @ResponseBody
     ResponseMessage updateEvent(@RequestBody Event event, ResponseMessage responseMessage) {
 
-        log.info("Event read from request prior to update [" + MvcHelper.toString(event) + "]");
+        log.info("Event read from request prior to update [" + (event) + "]");
 
         responseMessage.setOverAllStatus(true);
         Event dbEvent = this.eventService.getOne(event.getId());
@@ -80,9 +79,9 @@ public class EventOperationController {
 
     @GetMapping("/ManageEventController")
     public String manageEventController(Event event, HttpServletRequest request, HttpServletResponse response) {
-        log.info("Event read from request [" + MvcHelper.toString(event) + "]");
+        log.info("Event read from request [" + (event) + "]");
         event = eventService.getOne(event.getId());
-        log.info("Event read from Database [" + MvcHelper.toString(event) + "]");
+        log.info("Event read from Database [" + (event) + "]");
         request.setAttribute("event", event);
         return "/pages/event/ajax/manage-event.jsp";
     }
@@ -96,6 +95,17 @@ public class EventOperationController {
         responseMessage.setOverAllStatus(true);
         responseMessage.setData(diaryEvents);
         return responseMessage;
+    }
+
+    @GetMapping("/getDiaryEvents")
+    public @ResponseBody
+    ResponseMessage getDiaryEvents(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        List<Event> diaryEvents = this.eventService.findAll(0, Integer.MAX_VALUE);
+        ResponseMessage message = new ResponseMessage();
+        message.setOverAllStatus(true);
+        message.setData(diaryEvents);
+        return message;
     }
 
 }

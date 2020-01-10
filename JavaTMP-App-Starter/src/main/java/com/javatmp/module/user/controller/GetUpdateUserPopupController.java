@@ -1,6 +1,5 @@
 package com.javatmp.module.user.controller;
 
-import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.module.country.entity.Countrytranslation;
 import com.javatmp.module.country.service.CountryService;
 import com.javatmp.module.language.entity.Languagetranslation;
@@ -40,9 +39,9 @@ public class GetUpdateUserPopupController {
     protected String doGet(@SessionAttribute(Constants.LOG_IN_USER_NAME) User loggedInUser,
             User user, HttpServletRequest request, HttpServletResponse response) {
 
-        log.info("request user is [" + MvcHelper.deepToString(user) + "]");
+        log.info("request user is [" + (user) + "]");
         User dbUser = this.userService.readCompleteUserById(user);
-        log.info("DB user to be Updated is [" + MvcHelper.deepToString(dbUser) + "]");
+        log.info("DB user to be Updated is [" + (dbUser) + "]");
 
         List<Timezonetranslation> timezones = this.timezoneService.getTimezones(loggedInUser);
         List<Countrytranslation> countries = this.countryService.getCountries(loggedInUser);

@@ -260,7 +260,7 @@
                     var selectedNode = chartOfAccountTree.fancytree('getTree').getActiveNode();
                     if (selectedNode) {
                         var selectedRecord = selectedNode.data;
-                        var urlPath = javatmp.settings.contextPath + "/accounting/AccountLedger";
+                        var urlPath = javatmp.settings.contextPath + "/pages/accounting/account-ledger";
                         var passData = {id: selectedRecord.id};
                         $(javatmp.settings.defaultOutputSelector).data("passData", passData);
                         $('a[href="' + urlPath + '"]', javatmp.settings.mainSidebarMenuClass).trigger("click");

@@ -1,62 +1,37 @@
 package com.javatmp.module.dms.controller;
 
-import com.javatmp.module.user.entity.User;
 import com.javatmp.fw.domain.ResponseMessage;
-import com.javatmp.fw.mvc.MvcHelper;
-import com.javatmp.util.Constants;
-import com.javatmp.util.ServicesFactory;
 import java.io.File;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.logging.Logger;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-@WebServlet("/dms/FileBrowser")
-public class FileBrowser extends HttpServlet {
+@Slf4j
+@Controller
+@RequestMapping("/dms")
+public class FileBrowser {
 
-    private final Logger logger = Logger.getLogger(getClass().getName());
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
-        ResourceBundle bundle = (ResourceBundle) request.getSession().getAttribute(Constants.LANGUAGE_ATTR_KEY);
-
-        String requestPage = "/pages/dms/FileBrowser.jsp";
-        HttpSession session = request.getSession();
-        User loggedInUser = (User) session.getAttribute("user");
-        logger.info("logged in user [" + loggedInUser + "] and username is [" + loggedInUser.getUserName() + "]");
-
-        request.getRequestDispatcher(requestPage).forward(request, response);
-
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-
-        ServicesFactory sf = (ServicesFactory) request.getSession().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
-        ResourceBundle bundle = (ResourceBundle) request.getSession().getAttribute(Constants.LANGUAGE_ATTR_KEY);
+    @PostMapping("/fileBrowser")
+    public @ResponseBody
+    ResponseMessage fileBrowser(String parent, HttpServletRequest request, HttpServletResponse response) {
 
         String basePath = request.getServletContext().getRealPath("");
-        String parent = request.getParameter("parent");
-        logger.info("parent [" + parent + "]");
+
+        log.info("parent [" + parent + "]");
         File file = new File(basePath, parent);
 
-        logger.info("basePath [" + basePath + "]");
-        logger.info("file [" + file.getAbsolutePath() + "]");
+        log.info("basePath [" + basePath + "]");
+        log.info("file [" + file.getAbsolutePath() + "]");
 
         List<Map<String, Object>> files = new LinkedList<>();
         File[] children = file.listFiles();
@@ -87,14 +62,13 @@ public class FileBrowser extends HttpServlet {
                 myMap.put("expanded", !item.isDirectory());
                 myMap.put("logicalPath", item.getAbsolutePath().substring(basePath.length()));
             }
-            logger.info(item.getAbsolutePath().substring(basePath.length()));
+            log.info(item.getAbsolutePath().substring(basePath.length()));
             files.add(myMap);
         }
 
         ResponseMessage responseMessage = new ResponseMessage();
         responseMessage.setOverAllStatus(true);
         responseMessage.setData(files);
-        MvcHelper.sendMessageAsJson(response, responseMessage);
-
+        return responseMessage;
     }
 }

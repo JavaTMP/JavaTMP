@@ -53,7 +53,7 @@ public class AddNewAccountPopup {
         ResourceBundle labels = (ResourceBundle) session.getAttribute(Constants.LANGUAGE_ATTR_KEY);
 
         try {
-            log.info("User to be created is [" + MvcHelper.toString(accountToBeCreated) + "]");
+            log.info("User to be created is [" + (accountToBeCreated) + "]");
             accountToBeCreated.setCreationDate(new Date());
             accountToBeCreated.setStatus((short) 1);
             accountToBeCreated.setDebit(BigDecimal.ZERO);

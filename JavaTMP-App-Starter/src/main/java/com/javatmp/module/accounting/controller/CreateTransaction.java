@@ -44,7 +44,7 @@ public class CreateTransaction extends HttpServlet {
         AccountService accountService = sf.getAccountService();
         try {
             Transaction toBe = (Transaction) MvcHelper.readObjectFromRequest(request, Transaction.class);
-            logger.info("Transaction to be Created [" + MvcHelper.deepToString(toBe) + "]");
+            logger.info("Transaction to be Created [" + (toBe) + "]");
 
             toBe.setCreationDate(new Date());
             toBe.setStatus((short) 1);
@@ -63,7 +63,7 @@ public class CreateTransaction extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             responseMessage.setStatusCode(HttpServletResponse.SC_BAD_REQUEST);
         }
-        MvcHelper.sendMessageAsJson(response, responseMessage);
+        return responseMessage;
 
     }
 

@@ -38,7 +38,7 @@ public class ViewBalanceSheet extends HttpServlet {
         ResponseMessage responseMessage = new ResponseMessage();
         responseMessage.setOverAllStatus(true);
         responseMessage.setData(chartOfAccounts);
-        MvcHelper.sendMessageAsJson(response, responseMessage);
+        return responseMessage;
 
     }
 

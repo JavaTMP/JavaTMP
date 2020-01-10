@@ -6,32 +6,27 @@ import com.github.jknack.handlebars.Template;
 import com.github.jknack.handlebars.context.FieldValueResolver;
 import com.github.jknack.handlebars.context.JavaBeanValueResolver;
 import com.github.jknack.handlebars.context.MapValueResolver;
-import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.fw.domain.ResponseMessage;
-import com.javatmp.util.Constants;
-import com.javatmp.util.ServicesFactory;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-@WebServlet("/message/ViewHandlebarsMessageController")
-public class ViewHandlebarsMessageController extends HttpServlet {
+@Slf4j
+@Controller
+public class ViewHandlebarsMessageController {
 
-    private final Logger logger = Logger.getLogger(getClass().getName());
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    @GetMapping("/message/ViewHandlebarsMessageController")
+    public @ResponseBody
+    ResponseMessage doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
 
-        HttpSession session = request.getSession();
         ResponseMessage responseMessage = new ResponseMessage();
 
         String view = "{{#items}}\n"
@@ -56,12 +51,12 @@ public class ViewHandlebarsMessageController extends HttpServlet {
 
         String output = template.apply(context);
 
-        logger.info("generated output from view and model is [" + output + "]");
+        log.info("generated output from view and model is [" + output + "]");
 
         responseMessage.setOverAllStatus(true);
         responseMessage.setData(output);
 
-        MvcHelper.sendMessageAsJson(response, responseMessage);
+        return responseMessage;
 
     }
 }

@@ -400,7 +400,7 @@ public class JpaRepository<E, I> {
             }
         } else {
             // leaf rule node:
-//            System.out.println("rule node [" + MvcHelper.deepToString(ruleOrGroup));
+//            System.out.println("rule node [" + (ruleOrGroup));
             System.out.print("(");
             System.out.print(ruleOrGroup.getField() + " " + ruleOrGroup.getOperator() + " " + ruleOrGroup.getValue());
             System.out.print(")");

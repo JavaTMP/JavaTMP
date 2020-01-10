@@ -35,7 +35,7 @@ public class ListEntries extends HttpServlet {
             DataTableResults<TransactionEntry> dataTableResult = transactionEntryService.listAllTransactionEntry(tableRequest);
             responseMessage.setOverAllStatus(true);
             responseMessage.setData(dataTableResult);
-            MvcHelper.sendMessageAsJson(response, responseMessage);
+            return responseMessage;
         } catch (ParseException ex) {
             logger.log(Level.SEVERE, null, ex);
             throw new ServletException("@ListUsersController", ex);

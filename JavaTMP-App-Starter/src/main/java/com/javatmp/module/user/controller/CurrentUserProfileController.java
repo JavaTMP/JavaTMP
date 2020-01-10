@@ -1,7 +1,6 @@
 package com.javatmp.module.user.controller;
 
 import com.javatmp.fw.domain.ResponseMessage;
-import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.fw.util.Util;
 import com.javatmp.module.country.entity.Countrytranslation;
 import com.javatmp.module.dms.entity.Document;
@@ -70,7 +69,7 @@ public class CurrentUserProfileController {
             HttpSession session, ResponseMessage responseMessage) throws IOException, IllegalArgumentException {
 
         User dbUser = this.userService.readCompleteUserById(user);
-        log.info("User to be Updated is [" + MvcHelper.deepToString(userToBeUpdated) + "]");
+        log.info("User to be Updated is [" + (userToBeUpdated) + "]");
 
         // first check if existing db password equal provided old password:
         log.info("Old Password is [" + oldPassword + "]");
@@ -91,7 +90,7 @@ public class CurrentUserProfileController {
 
         int updateStatus = this.userService.updateCompleteUser(userToBeUpdated);
 
-        log.info("Updated User is [" + MvcHelper.toString(userToBeUpdated) + "]");
+        log.info("Updated User is [" + (userToBeUpdated) + "]");
 
         // When we don't update profile picture and database contains one
         // We make sure that the current session object has its information:

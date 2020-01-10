@@ -33,9 +33,9 @@ public class UpdateAccountPopup {
     public String doGet(@SessionAttribute User user, Account account, Model model) {
         String requestPage = "/pages/accounting/updateAccountPopup.jsp";
 
-        log.info("request account is [" + MvcHelper.deepToString(account) + "]");
+        log.info("request account is [" + (account) + "]");
         Account dbAccount = accountService.readAccountById(account);
-        log.info("DB account to be Updated is [" + MvcHelper.deepToString(dbAccount) + "]");
+        log.info("DB account to be Updated is [" + (dbAccount) + "]");
 
         log.debug("loged in user is {}", user);
         List<Account> accounts = accountService.findAll(0, Integer.MAX_VALUE);
@@ -54,7 +54,7 @@ public class UpdateAccountPopup {
 
         ResponseMessage responseMessage = new ResponseMessage();
 
-        log.info("account to be Updated is [" + MvcHelper.toString(accountToBeUpdated) + "]");
+        log.info("account to be Updated is [" + (accountToBeUpdated) + "]");
         int updateStatus = accountService.updateAccount(accountToBeUpdated);
         responseMessage.setOverAllStatus(Boolean.TRUE);
         responseMessage.setMessage("Account Updated successfully");

@@ -6,7 +6,6 @@
 package com.javatmp.module.accounting.service;
 
 import com.javatmp.fw.data.jpa.repository.JpaRepository;
-import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.module.accounting.entity.Account;
 import com.javatmp.module.accounting.entity.AccountTransaction;
 import com.javatmp.module.accounting.entity.Account_;
@@ -154,7 +153,7 @@ public class AccountService extends JpaRepository<Account, Long> {
                         // throw exception or set amount to zero:
                         trans.setAmount(BigDecimal.ZERO);
                     }
-                    System.out.println("Trans is [" + MvcHelper.deepToString(trans) + "]");
+                    System.out.println("Trans is [" + (trans) + "]");
                     em.persist(trans);
                 }
             }

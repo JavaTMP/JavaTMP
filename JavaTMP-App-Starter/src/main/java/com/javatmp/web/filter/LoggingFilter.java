@@ -1,7 +1,7 @@
 package com.javatmp.web.filter;
 
 import com.javatmp.module.activity.Activity;
-import com.javatmp.module.activity.ActivityService;
+import com.javatmp.module.activity.UserActivityService;
 import com.javatmp.module.user.entity.User;
 import java.io.IOException;
 import java.util.Date;
@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 public class LoggingFilter extends FilterWrapper {
 
     @Autowired
-    ActivityService activityService;
+    UserActivityService activityService;
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,

@@ -10,7 +10,6 @@ import com.javatmp.fw.domain.table.DataTableColumn;
 import com.javatmp.fw.domain.table.DataTableRequest;
 import com.javatmp.fw.domain.table.DataTableResults;
 import com.javatmp.fw.domain.table.Order;
-import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.module.accounting.entity.AccountTransaction;
 import com.javatmp.module.accounting.entity.Transaction;
 import com.javatmp.module.accounting.entity.Transaction_;
@@ -57,7 +56,7 @@ public class TransactionService extends JpaRepository<Transaction, Long> {
                         // throw exception or set amount to zero:
                         trans.setAmount(BigDecimal.ZERO);
                     }
-                    System.out.println("Trans is [" + MvcHelper.deepToString(trans) + "]");
+                    System.out.println("Trans is [" + (trans) + "]");
                     em.persist(trans);
                 }
             }

@@ -49,7 +49,7 @@ public class ListTransactions extends HttpServlet {
             DataTableResults<Transaction> dataTableResult = accountService.listAllTransactions(tableRequest);
             responseMessage.setOverAllStatus(true);
             responseMessage.setData(dataTableResult);
-            MvcHelper.sendMessageAsJson(response, responseMessage);
+            return responseMessage;
         } catch (ParseException ex) {
             logger.log(Level.SEVERE, null, ex);
             throw new ServletException("@ListUsersController", ex);

@@ -45,6 +45,9 @@ public class Config implements WebMvcConfigurer {
     @Autowired
     JavaTMPServletListener javaTMPServletListener;
 
+    @Autowired
+    AuthenticatorFilter authenticatorFilter;
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**")
@@ -97,7 +100,7 @@ public class Config implements WebMvcConfigurer {
     public FilterRegistrationBean<AuthenticatorFilter> getAuthenticatorFilter() {
         FilterRegistrationBean<AuthenticatorFilter> registrationBean
                 = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new AuthenticatorFilter());
+        registrationBean.setFilter(this.authenticatorFilter);
         registrationBean.addUrlPatterns("/*");
         registrationBean.setDispatcherTypes(DispatcherType.REQUEST);
         registrationBean.addInitParameter("excludedUrlsRegex", "^/assets/.*,^/login,^/logout,^/register,^/CaptchaImageController,^/pages/system/register");

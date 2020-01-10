@@ -1,7 +1,7 @@
 package com.javatmp.web.filter;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javatmp.fw.domain.ResponseMessage;
-import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.util.Constants;
 import com.javatmp.util.ServicesFactory;
@@ -17,9 +17,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 @Slf4j
+@Component
 public class AuthenticatorFilter extends FilterWrapper {
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
@@ -45,7 +51,7 @@ public class AuthenticatorFilter extends FilterWrapper {
             log.info("Session is New [" + session.isNew() + "], Session Attribute [" + session.getAttribute("user") + "]");
             User user = (User) session.getAttribute("user");
             if (user != null) {
-                log.info("Session User is [" + MvcHelper.deepToString(user) + "]");
+                log.info("Session User is [" + (user) + "]");
                 chain.doFilter(request, response);
             } else if (session.isNew()) {
                 // for demo and for new time access we support user123 loggedin:
@@ -66,7 +72,10 @@ public class AuthenticatorFilter extends FilterWrapper {
                 responseMessage.setRedirect(true);
                 responseMessage.setRedirectURL(req.getContextPath() + "/");
                 responseMessage.setMessage(labels.getString("global.illegalAccessMsg"));
-                MvcHelper.sendMessageAsJson(res, responseMessage);
+                String responseStr = this.objectMapper.writeValueAsString(responseMessage);
+                response.setContentType("application/json");
+                response.setCharacterEncoding("UTF-8");
+                response.getWriter().write(responseStr);
 
             } else {
 //                String redirectUrl = req.getContextPath() + "/login";

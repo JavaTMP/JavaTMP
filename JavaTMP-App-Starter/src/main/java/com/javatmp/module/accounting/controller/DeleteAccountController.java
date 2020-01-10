@@ -39,7 +39,7 @@ public class DeleteAccountController extends HttpServlet {
         try {
 
             Account accountToBeDeleted = (Account) MvcHelper.readObjectFromRequest(request, Account.class);
-            logger.info("Account to be deleted is [" + MvcHelper.toString(accountToBeDeleted) + "]");
+            logger.info("Account to be deleted is [" + (accountToBeDeleted) + "]");
 
             int updateStatus = as.deleteAccount(accountToBeDeleted);
 
@@ -63,7 +63,7 @@ public class DeleteAccountController extends HttpServlet {
             response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             responseMessage.setStatusCode(HttpServletResponse.SC_BAD_REQUEST);
         }
-        MvcHelper.sendMessageAsJson(response, responseMessage);
+        return responseMessage;
 
     }
 }

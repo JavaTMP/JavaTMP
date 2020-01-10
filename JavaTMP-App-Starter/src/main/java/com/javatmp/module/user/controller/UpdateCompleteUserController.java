@@ -1,7 +1,6 @@
 package com.javatmp.module.user.controller;
 
 import com.javatmp.fw.domain.ResponseMessage;
-import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.fw.util.Util;
 import com.javatmp.module.dms.entity.Document;
 import com.javatmp.module.user.entity.User;
@@ -34,17 +33,17 @@ public class UpdateCompleteUserController {
 
         try {
 
-            log.info("User to be Updated is [" + MvcHelper.toString(userToBeUpdated) + "]");
+            log.info("User to be Updated is [" + (userToBeUpdated) + "]");
 
             User dbUser = this.userService.readCompleteUserById(userToBeUpdated);
-            log.info("Existing DB User to be Updated is [" + MvcHelper.toString(dbUser) + "]");
+            log.info("Existing DB User to be Updated is [" + (dbUser) + "]");
 
             // first check if existing db password equal provided old password:
             if (dbUser.getPassword().equals(MD5Util.convertToMD5(oldPassword)) == false) {
                 throw new IllegalArgumentException("Existing Password does not match provided old password");
             }
 
-            log.info("UserToBeCreated is [" + MvcHelper.deepToString(userToBeUpdated) + "]");
+            log.info("UserToBeCreated is [" + (userToBeUpdated) + "]");
             userToBeUpdated.setPassword(MD5Util.convertToMD5(userToBeUpdated.getPassword()));
 
             Document fileUploading = Util.readDocumentFromRequestIfExist(profilePicture);
