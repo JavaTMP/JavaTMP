@@ -5,15 +5,8 @@ import com.javatmp.module.dms.entity.Document;
 import com.javatmp.module.dms.service.DocumentService;
 import com.javatmp.util.Constants;
 import com.javatmp.util.ServicesFactory;
-import java.io.IOException;
 import java.io.OutputStream;
-import java.lang.reflect.InvocationTargetException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -26,16 +19,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ViewUploadedFileController {
 
     @RequestMapping(value = "/ViewUploadedFileController", method = RequestMethod.GET)
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    protected void doGet(Document temp, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
         try {
             ServletContext context = request.getServletContext();
             ServicesFactory sf = (ServicesFactory) context.getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
             DocumentService ds = sf.getDocumentService();
 
-            Document temp = new Document();
-
-            MvcHelper.populateBeanByRequestParameters(request, temp);
             log.info("Requested Document [" + MvcHelper.deepToString(temp) + "]");
             String viewTypeTemp = request.getParameter("viewType");
             Document document = ds.getOne(temp.getDocumentId());
@@ -66,9 +56,6 @@ public class ViewUploadedFileController {
             OutputStream outStream = response.getOutputStream();
             outStream.write(document.getDocumentContent());
         } catch (IllegalAccessException ex) {
-            log.error(ex.getMessage(), ex);
-            throw new Exception(ex);
-        } catch (InvocationTargetException ex) {
             log.error(ex.getMessage(), ex);
             throw new Exception(ex);
         }

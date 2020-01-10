@@ -1,67 +1,59 @@
 package com.javatmp.module.user.controller;
 
-import com.javatmp.module.country.entity.Countrytranslation;
-import com.javatmp.module.language.entity.Languagetranslation;
-import com.javatmp.module.theme.entity.Themetranslation;
-import com.javatmp.module.timezone.entity.Timezonetranslation;
-import com.javatmp.module.user.entity.User;
 import com.javatmp.fw.mvc.MvcHelper;
-import com.javatmp.util.ServicesFactory;
+import com.javatmp.module.country.entity.Countrytranslation;
+import com.javatmp.module.country.service.CountryService;
+import com.javatmp.module.language.entity.Languagetranslation;
+import com.javatmp.module.language.service.LanguageService;
+import com.javatmp.module.theme.entity.Themetranslation;
+import com.javatmp.module.theme.service.ThemeService;
+import com.javatmp.module.timezone.entity.Timezonetranslation;
+import com.javatmp.module.timezone.service.TimezoneService;
+import com.javatmp.module.user.entity.User;
+import com.javatmp.module.user.service.UserService;
 import com.javatmp.util.Constants;
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.ServletContext;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
-@WebServlet("/user/GetUpdateUserPopupController")
-public class GetUpdateUserPopupController extends HttpServlet {
+@Slf4j
+@Controller
+public class GetUpdateUserPopupController {
 
-    private final Logger logger = Logger.getLogger(getClass().getName());
+    @Autowired
+    UserService userService;
+    @Autowired
+    private TimezoneService timezoneService;
+    @Autowired
+    private ThemeService themeService;
+    @Autowired
+    private LanguageService languageService;
+    @Autowired
+    private CountryService countryService;
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        try {
-            String requestPage = "/pages/user/updateCompleteUserPopup.jsp";
+    @GetMapping("/user/GetUpdateUserPopupController")
+    protected String doGet(@SessionAttribute(Constants.LOG_IN_USER_NAME) User loggedInUser,
+            User user, HttpServletRequest request, HttpServletResponse response) {
 
-            ServletContext context = request.getServletContext();
-            ServicesFactory sf = (ServicesFactory) context.getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
-            User user = new User();
-            MvcHelper.populateBeanByRequestParameters(request, user);
-            logger.info("request user is [" + MvcHelper.deepToString(user) + "]");
-            User dbUser = sf.getUserService().readCompleteUserById(user);
-            logger.info("DB user to be Updated is [" + MvcHelper.deepToString(dbUser) + "]");
+        log.info("request user is [" + MvcHelper.deepToString(user) + "]");
+        User dbUser = this.userService.readCompleteUserById(user);
+        log.info("DB user to be Updated is [" + MvcHelper.deepToString(dbUser) + "]");
 
-            HttpSession session = request.getSession();
-            User loggedInUser = (User) session.getAttribute("user");
+        List<Timezonetranslation> timezones = this.timezoneService.getTimezones(loggedInUser);
+        List<Countrytranslation> countries = this.countryService.getCountries(loggedInUser);
+        List<Languagetranslation> languages = this.languageService.getLanguages(loggedInUser);
+        List<Themetranslation> themes = this.themeService.getThemes(loggedInUser);
 
-            List<Timezonetranslation> timezones = sf.getTimezoneService().getTimezones(loggedInUser);
-            List<Countrytranslation> countries = sf.getCountryService().getCountries(loggedInUser);
-            List<Languagetranslation> languages = sf.getLanguageService().getLanguages(loggedInUser);
-            List<Themetranslation> themes = sf.getThemeService().getThemes(loggedInUser);
-
-            request.setAttribute("themes", themes);
-            request.setAttribute("languages", languages);
-            request.setAttribute("countries", countries);
-            request.setAttribute("user", dbUser);
-            request.setAttribute("timezones", timezones);
-
-            request.getRequestDispatcher(requestPage).forward(request, response);
-
-        } catch (IllegalAccessException ex) {
-            logger.log(Level.SEVERE, null, ex);
-            throw new ServletException(ex);
-        } catch (InvocationTargetException ex) {
-            logger.log(Level.SEVERE, null, ex);
-            throw new ServletException(ex);
-        }
+        request.setAttribute("themes", themes);
+        request.setAttribute("languages", languages);
+        request.setAttribute("countries", countries);
+        request.setAttribute("user", dbUser);
+        request.setAttribute("timezones", timezones);
+        return "/pages/user/updateCompleteUserPopup.jsp";
     }
 }

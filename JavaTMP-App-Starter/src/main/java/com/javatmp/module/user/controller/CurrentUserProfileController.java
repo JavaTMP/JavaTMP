@@ -65,7 +65,7 @@ public class CurrentUserProfileController {
     public @ResponseBody
     ResponseMessage doPost(@SessionAttribute ResourceBundle labels,
             @SessionAttribute(Constants.LOG_IN_USER_NAME) User user,
-            @RequestParam(value = "profilePicture", required = false) MultipartFile profilePicture,
+            @RequestParam(required = false) MultipartFile profilePicture,
             User userToBeUpdated, String oldPassword,
             HttpSession session, ResponseMessage responseMessage) throws IOException, IllegalArgumentException {
 

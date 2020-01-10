@@ -5,12 +5,13 @@ import com.javatmp.module.event.entity.Event;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 
+@Slf4j
+@Service
 public class EventService extends JpaRepository<Event, Long> {
-
-    private final Logger logger = Logger.getLogger(getClass().getName());
 
     public EventService(EntityManagerFactory emf) {
         super(Event.class, emf);
@@ -33,14 +34,14 @@ public class EventService extends JpaRepository<Event, Long> {
             }
 
             Calendar end = Calendar.getInstance();
-            logger.info("Start [" + item.getStartDate() + "]");
+            log.info("Start [" + item.getStartDate() + "]");
             end.setTime(item.getStartDate());
             int add = (ThreadLocalRandom.current().nextInt(4) + 1) * 15;
 
-            logger.info("end minute [" + end.get(Calendar.MINUTE) + "] added [" + add + "]");
+            log.info("end minute [" + end.get(Calendar.MINUTE) + "] added [" + add + "]");
             end.add(Calendar.MINUTE, add);
             item.setEndDate(end.getTime());
-            logger.info("End [" + item.getEndDate() + "]");
+            log.info("End [" + item.getEndDate() + "]");
             item.setCreationDate(new Date());
             item.setTitle("Event Title");
             item.setDescription("Event Description");

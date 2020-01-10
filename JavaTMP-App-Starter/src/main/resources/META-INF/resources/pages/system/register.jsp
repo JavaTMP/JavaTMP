@@ -31,7 +31,7 @@
                             ${labels["page.register.registerCardTitleText"]}
                         </div>
                         <div class="card-body">
-                            <form id="main-register-form" method="POST" role="form" action="${pageContext.request.contextPath}/register">
+                            <form id="main-register-form" method="POST" role="form" action="${pageContext.request.contextPath}/user/register">
                                 <div class="form-row">
                                     <div class="col-lg-3 col-md-6">
                                         <div class="form-group">
