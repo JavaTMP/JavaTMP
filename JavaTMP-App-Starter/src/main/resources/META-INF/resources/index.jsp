@@ -468,7 +468,7 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="${pageContext.request.contextPath}/accounting/GeneralLedger">
+                                                <a href="${pageContext.request.contextPath}/pages/accounting/general-ledger">
                                                     General Ledger
                                                 </a>
                                             </li>
@@ -485,7 +485,7 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="${pageContext.request.contextPath}/accounting/listTransactions">
+                                                <a href="${pageContext.request.contextPath}/pages/accounting/listTransactions">
                                                     List Transactions
                                                 </a>
                                             </li>
@@ -507,12 +507,12 @@
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="${pageContext.request.contextPath}/accounting/ViewBalanceSheet">
+                                                <a href="${pageContext.request.contextPath}/pages/accounting/reports/balance-sheet">
                                                     Balance Sheet
                                                 </a>
                                             </li>
                                             <li>
-                                                <a href="${pageContext.request.contextPath}/accounting/ViewProfitLossIncome">
+                                                <a href="${pageContext.request.contextPath}/pages/accounting/reports/profit-loss-income">
                                                     Income Statement
                                                 </a>
                                             </li>

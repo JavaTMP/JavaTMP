@@ -4,42 +4,36 @@ import com.javatmp.fw.domain.ResponseMessage;
 import com.javatmp.module.accounting.entity.Account;
 import com.javatmp.module.accounting.entity.Transaction;
 import com.javatmp.module.accounting.service.AccountService;
-import com.javatmp.util.Constants;
-import com.javatmp.util.ServicesFactory;
-import java.io.IOException;
 import java.util.Date;
 import java.util.List;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Slf4j
 @Controller
 public class CreateTransaction {
 
+    @Autowired
+    AccountService accountService;
+
     @GetMapping("/accounting/CreateTransaction")
-    public String doGet(HttpServletRequest request, HttpServletResponse response) {
-        String requestPage = "/pages/accounting/createTransaction.jsp";
-        ServletContext context = request.getServletContext();
-        ServicesFactory sf = (ServicesFactory) context.getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
-        AccountService accountService = sf.getAccountService();
+    public String doGet(Model model) {
         List<Account> accounts = accountService.getLeafAccounts();
-        request.setAttribute("accounts", accounts);
-        return requestPage;
+        model.addAttribute("accounts", accounts);
+        return "/pages/accounting/createTransaction.jsp";
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @PostMapping("/accounting/CreateTransaction")
+    public @ResponseBody
+    ResponseMessage doPost(@RequestBody Transaction toBe, ResponseMessage responseMessage) {
 
-        ResponseMessage responseMessage = new ResponseMessage();
-        ServicesFactory sf = (ServicesFactory) request.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
-        AccountService accountService = sf.getAccountService();
-        Transaction toBe = (Transaction) MvcHelper.readObjectFromRequest(request, Transaction.class);
-        logger.info("Transaction to be Created [" + (toBe) + "]");
-
+        log.info("Transaction to be Created [" + (toBe) + "]");
         toBe.setCreationDate(new Date());
         toBe.setStatus((short) 1);
         accountService.createNewTransaction(toBe);
@@ -47,9 +41,7 @@ public class CreateTransaction {
         responseMessage.setTitle("Success Creation");
         responseMessage.setMessage("Transaction created successfully");
         responseMessage.setData(toBe);
-
         return responseMessage;
-
     }
 
 }

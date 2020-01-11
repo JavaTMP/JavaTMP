@@ -5,7 +5,7 @@
  */
 package com.javatmp.user;
 
-import com.javatmp.fw.mvc.MvcHelper;
+
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
 import java.lang.reflect.Field;
@@ -75,7 +75,7 @@ public class TestAutoInject {
                 for (int i = 0; i < row.length; i++) {
                     populate(test, requests[i], row[i]);
                 }
-                System.out.println(MvcHelper.deepToString(test));
+                System.out.println((test));
 
             }
         } catch (PersistenceException e) {

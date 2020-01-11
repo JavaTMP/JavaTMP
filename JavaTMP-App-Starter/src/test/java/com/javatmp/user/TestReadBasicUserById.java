@@ -5,7 +5,7 @@
  */
 package com.javatmp.user;
 
-import com.javatmp.fw.mvc.MvcHelper;
+
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
 import javax.persistence.Persistence;
@@ -26,7 +26,7 @@ public class TestReadBasicUserById {
         try {
             User user = new User(1L);
             user = userService.readBasicUserById(user);
-            System.out.println(MvcHelper.toString(user));
+            System.out.println((user));
         } catch (PersistenceException e) {
             Throwable t = e;
             while (t != null) {

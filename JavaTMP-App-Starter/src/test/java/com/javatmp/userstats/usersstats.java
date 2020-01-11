@@ -5,7 +5,7 @@
  */
 package com.javatmp.userstats;
 
-import com.javatmp.fw.mvc.MvcHelper;
+
 import com.javatmp.module.activity.UserActivityService;
 import com.javatmp.util.ServicesFactory;
 import com.javatmp.module.stats.service.UserStatsService;
@@ -28,7 +28,7 @@ public class usersstats {
 
         List<Object[]> results = userStatsService.overallUsersStatuses();
 
-        System.out.println(MvcHelper.toString(results));
+        System.out.println((results));
 
         results = userStatsService.usersBirthdayGroupingByMonth();
 

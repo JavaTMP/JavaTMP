@@ -5,7 +5,7 @@
  */
 package com.javatmp.theme;
 
-import com.javatmp.fw.mvc.MvcHelper;
+
 import com.javatmp.module.theme.service.ThemeService;
 import com.javatmp.module.theme.entity.Themetranslation;
 import com.javatmp.module.user.entity.User;
@@ -32,7 +32,7 @@ public class TestingThemeService {
 
         for (int i = 0; i < resultList.size(); i++) {
             Themetranslation row = resultList.get(i);
-            System.out.println((i + 1) + " " + MvcHelper.deepToString(row));
+            System.out.println((i + 1) + " " + (row));
         }
 
         User localeUser = new User(0L, "ar");
@@ -40,7 +40,7 @@ public class TestingThemeService {
 
         for (int i = 0; i < resultList.size(); i++) {
             Themetranslation row = resultList.get(i);
-            System.out.println((i + 1) + " " + MvcHelper.deepToString(row));
+            System.out.println((i + 1) + " " + (row));
         }
 
         localeUser.setLang("en");
@@ -48,7 +48,7 @@ public class TestingThemeService {
 
         for (int i = 0; i < resultList.size(); i++) {
             Themetranslation row = resultList.get(i);
-            System.out.println((i + 1) + " " + MvcHelper.deepToString(row));
+            System.out.println((i + 1) + " " + (row));
         }
     }
 

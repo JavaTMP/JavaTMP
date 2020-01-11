@@ -9,7 +9,6 @@ import com.javatmp.fw.domain.table.DataTableColumn;
 import com.javatmp.fw.domain.table.DataTableRequest;
 import com.javatmp.fw.domain.table.DataTableResults;
 import com.javatmp.fw.domain.table.Search;
-import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.module.dms.entity.Document;
 import com.javatmp.module.dms.service.DocumentService;
 import java.sql.SQLException;
@@ -40,7 +39,7 @@ public class TestingDynamicSelectDocuments {
 
         System.out.println(dataTableResult.getRecordsTotal());
         for (Document m : dataTableResult.getData()) {
-            System.out.println(MvcHelper.toString(m));
+            System.out.println((m));
         }
 
     }

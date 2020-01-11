@@ -5,7 +5,6 @@
  */
 package com.javatmp.jpa;
 
-import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
 import java.sql.SQLException;
@@ -53,7 +52,7 @@ public class TestEntityQuery {
         System.out.println("size [" + users.size() + "]");
         System.out.println("users [" + users + "]");
         users.forEach(user -> {
-            System.out.println(MvcHelper.toString(user));
+            System.out.println((user));
         });
 
     }

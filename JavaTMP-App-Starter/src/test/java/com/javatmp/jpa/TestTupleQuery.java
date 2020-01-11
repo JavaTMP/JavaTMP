@@ -5,7 +5,6 @@
  */
 package com.javatmp.jpa;
 
-import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.module.dms.entity.Document;
 import com.javatmp.module.dms.entity.Document_;
 import com.javatmp.module.user.entity.User;
@@ -40,8 +39,8 @@ public class TestTupleQuery {
         List<Tuple> resultList = em.createQuery(query).setFirstResult(0).setMaxResults(1).getResultList();
         resultList.forEach(tuple -> {
             System.out.println("first name [" + tuple.getElements().get(0).getAlias() + "]");
-//            System.out.println(MvcHelper.deepToString(tuple.getElements()));
-            System.out.println(MvcHelper.toString(tuple));
+//            System.out.println((tuple.getElements()));
+            System.out.println((tuple));
         });
 
         query = criteriaBuilder.createTupleQuery();
@@ -60,8 +59,8 @@ public class TestTupleQuery {
             }
 
             System.out.println("first name [" + tuple.getElements().get(0).getAlias() + "]");
-//            System.out.println(MvcHelper.deepToString(tuple.getElements()));
-            System.out.println(MvcHelper.toString(tuple));
+//            System.out.println((tuple.getElements()));
+            System.out.println((tuple));
         });
 
         List<Document> auto = createEntityFromTuple(resultList, Document.class);
@@ -80,14 +79,14 @@ public class TestTupleQuery {
             }
 
             System.out.println("first name [" + tuple.getElements().get(0).getAlias() + "]");
-//            System.out.println(MvcHelper.deepToString(tuple.getElements()));
-            System.out.println(MvcHelper.toString(tuple));
+//            System.out.println((tuple.getElements()));
+            System.out.println((tuple));
         });
 
 //        auto = createEntityFromTuple(resultList, Document.class);
 //
 //        auto.forEach(doc -> {
-//            System.out.println(MvcHelper.toString(doc));
+//            System.out.println((doc));
 //        });
     }
 
@@ -106,7 +105,7 @@ public class TestTupleQuery {
 
                 Object o = t.get(te);
                 System.out.println("object class [" + o.getClass() + "] object [" + o + "]");
-                System.out.println(MvcHelper.toString(o));
+                System.out.println((o));
                 try {
                     Field f = getFieldFromEntity(entity, te.getAlias());
                     f.setAccessible(true);

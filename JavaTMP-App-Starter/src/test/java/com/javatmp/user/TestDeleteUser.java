@@ -5,7 +5,7 @@
  */
 package com.javatmp.user;
 
-import com.javatmp.fw.mvc.MvcHelper;
+
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
 import java.sql.SQLIntegrityConstraintViolationException;
@@ -28,7 +28,7 @@ public class TestDeleteUser {
             User user = new User(3L);
 //            user = userService.readCompleteUserById(user);
             int status = 0;
-            System.out.println("User to be Deleted [" + MvcHelper.deepToString(user) + "]");
+            System.out.println("User to be Deleted [" + (user) + "]");
             status = userService.deleteUser(user);
 
             System.out.println("status [" + status + "]");

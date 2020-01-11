@@ -5,7 +5,7 @@
  */
 package com.javatmp.userstats;
 
-import com.javatmp.fw.mvc.MvcHelper;
+
 import com.javatmp.module.activity.UserActivityService;
 import com.javatmp.util.ServicesFactory;
 import com.javatmp.module.stats.service.UserStatsService;

@@ -25,9 +25,14 @@ public class FileBrowser {
     public @ResponseBody
     ResponseMessage fileBrowser(String parent, HttpServletRequest request, HttpServletResponse response) {
 
-        String basePath = request.getServletContext().getRealPath("");
+        if (parent.contains("..")) {
+            // This is a security check
+            throw new IllegalArgumentException("Cannot store file with relative path outside current directory " + parent);
+        }
 
-        log.info("parent [" + parent + "]");
+//        String basePath = request.getServletContext().getRealPath("");
+        String basePath = ClassLoader.getSystemClassLoader().getResource("").getPath();
+        log.info("parent [" + parent + "] ");
         File file = new File(basePath, parent);
 
         log.info("basePath [" + basePath + "]");
@@ -53,6 +58,7 @@ public class FileBrowser {
             }
         });
         for (File item : children) {
+            log.debug("item file absolute path [" + item.getAbsolutePath() + "]");
             Map<String, Object> myMap = new HashMap<>();
             myMap.put("title", item.getName());
             myMap.put("size", item.length());
@@ -60,9 +66,9 @@ public class FileBrowser {
                 myMap.put("folder", item.isDirectory());
                 myMap.put("lazy", item.isDirectory());
                 myMap.put("expanded", !item.isDirectory());
-                myMap.put("logicalPath", item.getAbsolutePath().substring(basePath.length()));
+                myMap.put("logicalPath", item.getAbsolutePath().substring(basePath.length() - 1));
             }
-            log.info(item.getAbsolutePath().substring(basePath.length()));
+            log.debug("item is {}", myMap);
             files.add(myMap);
         }
 

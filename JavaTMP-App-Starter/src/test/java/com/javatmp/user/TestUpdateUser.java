@@ -5,7 +5,7 @@
  */
 package com.javatmp.user;
 
-import com.javatmp.fw.mvc.MvcHelper;
+
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
 import javax.persistence.Persistence;
@@ -25,7 +25,7 @@ public class TestUpdateUser {
         userService = new UserService(Persistence.createEntityManagerFactory("AppPU"));
 
         User user = userService.readCompleteUserById(new User(1L));
-        System.out.println(MvcHelper.deepToString(user));
+        System.out.println((user));
         try {
             user.setUserName("daw232323223232rim");
             user.getProfilePicDocument().setDocumentName("232w32323223232");

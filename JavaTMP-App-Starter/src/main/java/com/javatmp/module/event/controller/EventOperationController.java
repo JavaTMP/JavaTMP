@@ -88,17 +88,6 @@ public class EventOperationController {
 
     @GetMapping("/getDiaryEvents")
     public @ResponseBody
-    ResponseMessage doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        List<Event> diaryEvents = this.eventService.findAll(0, Integer.MAX_VALUE);
-        ResponseMessage responseMessage = new ResponseMessage();
-        responseMessage.setOverAllStatus(true);
-        responseMessage.setData(diaryEvents);
-        return responseMessage;
-    }
-
-    @GetMapping("/getDiaryEvents")
-    public @ResponseBody
     ResponseMessage getDiaryEvents(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         List<Event> diaryEvents = this.eventService.findAll(0, Integer.MAX_VALUE);

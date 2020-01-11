@@ -6,7 +6,7 @@
 package com.javatmp;
 
 import com.javatmp.module.user.entity.User;
-import com.javatmp.fw.mvc.MvcHelper;
+
 import java.sql.SQLException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -35,7 +35,7 @@ public class TestingSelectHibernateJPA {
                     .setParameter("userName", "user1")
                     .getSingleResult();
             em.close();
-            System.out.println(MvcHelper.deepToString(user));
+            System.out.println((user));
         } catch (PersistenceException e) {
             Throwable t;
             for (t = e.getCause(); t != null; t = t.getCause()) {

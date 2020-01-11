@@ -5,7 +5,7 @@
  */
 package com.javatmp.timezones;
 
-import com.javatmp.fw.mvc.MvcHelper;
+
 import com.javatmp.module.timezone.service.TimezoneService;
 import com.javatmp.module.timezone.entity.Timezonetranslation;
 import java.io.IOException;
@@ -31,7 +31,7 @@ public class TestingTimezoneService {
         List<Timezonetranslation> timezones = timezoneService.getTimezones();
 
         timezones.forEach(timezone -> {
-            System.out.println(MvcHelper.toString(timezone));
+            System.out.println((timezone));
         });
     }
 

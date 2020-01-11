@@ -147,7 +147,7 @@ public class PopulateDBFromJson {
                     em.persist(document);
                     user.setProfilePicDocumentId(document.getDocumentId());
 //                user.setProfilePicDocument(document);
-//                System.out.println("persisting [" + MvcHelper.deepToString(user) + "]");
+//                System.out.println("persisting [" + (user) + "]");
                     em.persist(user);
                     document.setCreatedByUserId(user.getId());
                 }

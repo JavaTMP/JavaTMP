@@ -5,7 +5,6 @@
  */
 package com.javatmp.jpa;
 
-import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
 import java.beans.PropertyDescriptor;
@@ -62,7 +61,7 @@ public class TestObjectQuery {
 
         List<Object[]> resultList = em.createQuery(cq).setFirstResult(0).setMaxResults(1).getResultList();
         resultList.forEach(tuple -> {
-            System.out.println("Object[] [" + MvcHelper.toString(tuple) + "]");
+            System.out.println("Object[] [" + (tuple) + "]");
 
             HashMap<String, Object> map = new HashMap();
 
@@ -76,7 +75,7 @@ public class TestObjectQuery {
             autoInstantiate(bean, selects);
             try {
                 BeanUtils.populate(bean, map);
-                System.out.println(MvcHelper.toString(bean));
+                System.out.println((bean));
             } catch (IllegalAccessException ex) {
                 Logger.getLogger(TestObjectQuery.class.getName()).log(Level.SEVERE, null, ex);
             } catch (InvocationTargetException ex) {

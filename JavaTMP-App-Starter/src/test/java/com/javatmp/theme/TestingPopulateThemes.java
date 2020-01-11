@@ -5,10 +5,9 @@
  */
 package com.javatmp.theme;
 
-import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.module.theme.entity.Theme;
-import com.javatmp.module.theme.service.ThemeService;
 import com.javatmp.module.theme.entity.Themetranslation;
+import com.javatmp.module.theme.service.ThemeService;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
@@ -100,7 +99,7 @@ join `language` reflan on reflan.`languageId` = th2.`langId` and reflan.`isDefau
         int i;
         for (i = 0; i < resultList.size(); i++) {
             Themetranslation row = resultList.get(i);
-            System.out.println((i + 1) + " " + MvcHelper.deepToString(row));
+            System.out.println((i + 1) + " " + (row));
         }
         i += new Random().nextInt(10000) + 1;
 
@@ -125,7 +124,7 @@ join `language` reflan on reflan.`languageId` = th2.`langId` and reflan.`isDefau
 
 //        List<Themetranslation> tr = jpaDaoHelper.findAll(Themetranslation.class);
 //        tr.forEach((tt) -> {
-//            System.out.println(MvcHelper.toString(tt));
+//            System.out.println((tt));
 //        });
 //
 //        themes.forEach((theme) -> {

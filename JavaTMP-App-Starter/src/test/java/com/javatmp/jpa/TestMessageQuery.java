@@ -5,7 +5,6 @@
  */
 package com.javatmp.jpa;
 
-import com.javatmp.fw.mvc.MvcHelper;
 import com.javatmp.module.message.entity.Message;
 import com.javatmp.module.message.service.MessageService;
 import com.javatmp.module.user.service.UserService;
@@ -63,7 +62,7 @@ public class TestMessageQuery {
 
         List<Object[]> resultList = em.createQuery(cq).setFirstResult(0).setMaxResults(1).getResultList();
         resultList.forEach(tuple -> {
-            System.out.println("Object[] [" + MvcHelper.toString(tuple) + "]");
+            System.out.println("Object[] [" + (tuple) + "]");
 
             HashMap<String, Object> map = new HashMap();
 
@@ -77,7 +76,7 @@ public class TestMessageQuery {
             autoInstantiate(bean, selects);
             try {
                 BeanUtils.populate(bean, map);
-                System.out.println(MvcHelper.toString(bean));
+                System.out.println((bean));
             } catch (IllegalAccessException ex) {
                 Logger.getLogger(TestMessageQuery.class.getName()).log(Level.SEVERE, null, ex);
             } catch (InvocationTargetException ex) {

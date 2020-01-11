@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.ApplicationContext;
 
 @SpringBootApplication
 public class JavaTmpAppStarterApplication extends SpringBootServletInitializer {
@@ -14,7 +15,12 @@ public class JavaTmpAppStarterApplication extends SpringBootServletInitializer {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(JavaTmpAppStarterApplication.class, args);
+
+        ApplicationContext context = SpringApplication.run(JavaTmpAppStarterApplication.class, args);
+
+        for (String name : context.getBeanDefinitionNames()) {
+            System.out.println("name [" + name + "] type [" + context.getBean(name).getClass() + "]");
+        }
     }
 
 }

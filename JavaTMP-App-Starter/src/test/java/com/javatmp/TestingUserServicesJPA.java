@@ -5,7 +5,7 @@
  */
 package com.javatmp;
 
-import com.javatmp.fw.mvc.MvcHelper;
+
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
 import java.sql.SQLException;
@@ -27,9 +27,9 @@ public class TestingUserServicesJPA {
         User user = new User();
         user.setUserName("user1");
         user = userService.readUserByUsername(user);
-        System.out.println(MvcHelper.deepToString(user));
+        System.out.println((user));
         user = userService.readUserByUsername(user);
-        System.out.println(MvcHelper.deepToString(user));
+        System.out.println((user));
         System.out.println(user.getProfilePicDocument());
 
     }

@@ -5,9 +5,8 @@
  */
 package com.javatmp.language;
 
-import com.javatmp.fw.mvc.MvcHelper;
-import com.javatmp.module.language.service.LanguageService;
 import com.javatmp.module.language.entity.Languagetranslation;
+import com.javatmp.module.language.service.LanguageService;
 import com.javatmp.module.theme.service.ThemeService;
 import com.javatmp.module.user.entity.User;
 import java.sql.SQLException;
@@ -30,13 +29,13 @@ public class TestingLanguage {
         int i;
         for (i = 0; i < langs.size(); i++) {
             Languagetranslation row = langs.get(i);
-            System.out.println((i + 1) + " " + MvcHelper.toString(row));
+            System.out.println((i + 1) + " " + (row));
         }
 
         langs = languageService.getLanguages();
         for (i = 0; i < langs.size(); i++) {
             Languagetranslation row = langs.get(i);
-            System.out.println((i + 1) + " " + MvcHelper.toString(row));
+            System.out.println((i + 1) + " " + (row));
         }
     }
 
