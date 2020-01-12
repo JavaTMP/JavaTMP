@@ -75,7 +75,7 @@ public class MessageOperationController {
 
     }
 
-    @PostMapping("/ViewMessageController")
+    @PostMapping("/ListMessagesController")
     public @ResponseBody
     ResponseMessage doPost(@RequestBody DataTableRequest tableRequest, ResponseMessage responseMessage, HttpServletRequest request, HttpServletResponse response) throws ParseException {
 

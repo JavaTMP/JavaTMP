@@ -224,7 +224,7 @@
                 // fire AFTER all transition done and your ajax content is shown to user.
                 // We can attach the `fileselect` event to all file inputs on the page
                 $("#updateFormId input[type=file]").attr("accept", "*/*").on("change", function () {
-                    var max = 1 * 50 * 1024; // 50kb
+                    var max = 1 * 1024 * 1024; // 50kb
                     for (var i = 0; i < this.files.length; i++) {
                         if (this.files && this.files[i].size > max) {
                             alert("[" + this.files[i].name + " ] File too large."); // Do your thing to handle the error.

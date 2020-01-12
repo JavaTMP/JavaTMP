@@ -9,31 +9,31 @@ import java.io.InputStream;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import javax.servlet.annotation.WebServlet;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-@WebServlet("/dms/UploadController")
-
 @Slf4j
 @Controller
+@RequestMapping("/dms")
 public class UploadController {
 
     @Autowired
     DocumentService documentService;
 
-    @PostMapping("/dms/UploadController")
+    @PostMapping("/UploadController")
     public @ResponseBody
-    ResponseMessage doPost(@RequestBody MultipartFile[] files) throws IOException {
+    ResponseMessage doPost(@RequestBody MultipartFile[] file) throws IOException {
         ResponseMessage responseMessage = new ResponseMessage();
         List<Document> documentsUploaded = new LinkedList<>();
+        log.debug("multipart file length {}", file.length);
         String text = "";
-        for (MultipartFile filePart : files) {
+        for (MultipartFile filePart : file) {
             String fieldName = filePart.getName();
             long partSize = filePart.getSize();
             log.info("partSize [" + partSize + "]");

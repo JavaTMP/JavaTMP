@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -75,11 +76,11 @@ public class EventOperationController {
     }
 
     @GetMapping("/ManageEventController")
-    public String manageEventController(Event event, HttpServletRequest request, HttpServletResponse response) {
+    public String manageEventController(Event event, Model model) {
         log.info("Event read from request [" + (event) + "]");
         event = eventService.getOne(event.getId());
         log.info("Event read from Database [" + (event) + "]");
-        request.setAttribute("event", event);
+        model.addAttribute("event", event);
         return "/pages/event/ajax/manage-event.jsp";
     }
 

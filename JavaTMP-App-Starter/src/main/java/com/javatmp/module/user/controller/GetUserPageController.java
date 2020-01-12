@@ -12,17 +12,18 @@ import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
 import com.javatmp.util.Constants;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 @Slf4j
 @Controller
-public class GetUpdateUserPopupController {
+@RequestMapping("/user")
+public class GetUserPageController {
 
     @Autowired
     UserService userService;
@@ -35,9 +36,9 @@ public class GetUpdateUserPopupController {
     @Autowired
     private CountryService countryService;
 
-    @GetMapping("/user/GetUpdateUserPopupController")
-    protected String doGet(@SessionAttribute(Constants.LOG_IN_USER_NAME) User loggedInUser,
-            User user, HttpServletRequest request, HttpServletResponse response) {
+    @GetMapping("/GetUpdateUserPopupController")
+    protected String getUpdateUserPopupController(@SessionAttribute(Constants.LOG_IN_USER_NAME) User loggedInUser,
+            User user, Model model) {
 
         log.info("request user is [" + (user) + "]");
         User dbUser = this.userService.readCompleteUserById(user);
@@ -48,11 +49,27 @@ public class GetUpdateUserPopupController {
         List<Languagetranslation> languages = this.languageService.getLanguages(loggedInUser);
         List<Themetranslation> themes = this.themeService.getThemes(loggedInUser);
 
-        request.setAttribute("themes", themes);
-        request.setAttribute("languages", languages);
-        request.setAttribute("countries", countries);
-        request.setAttribute("user", dbUser);
-        request.setAttribute("timezones", timezones);
+        model.addAttribute("themes", themes);
+        model.addAttribute("languages", languages);
+        model.addAttribute("countries", countries);
+        model.addAttribute("user", dbUser);
+        model.addAttribute("timezones", timezones);
         return "/pages/user/updateCompleteUserPopup.jsp";
+    }
+
+    @GetMapping("/CurrentUserProfileController")
+    public String currentUserProfileController(@SessionAttribute(Constants.LOG_IN_USER_NAME) User loggedInUser, Model model) {
+
+        User dbUser = this.userService.readCompleteUserById(loggedInUser);
+        List<Timezonetranslation> timezones = this.timezoneService.getTimezones(loggedInUser);
+        List<Countrytranslation> countries = this.countryService.getCountries(loggedInUser);
+        List<Languagetranslation> languages = this.languageService.getLanguages(loggedInUser);
+        List<Themetranslation> themes = this.themeService.getThemes(loggedInUser);
+        model.addAttribute("themes", themes);
+        model.addAttribute("languages", languages);
+        model.addAttribute("countries", countries);
+        model.addAttribute("timezones", timezones);
+        model.addAttribute("user", dbUser);
+        return "/pages/user/current-user-profile.jsp";
     }
 }
