@@ -2,10 +2,8 @@ package com.javatmp.module.accounting.controller;
 
 import com.javatmp.module.accounting.entity.Account;
 import com.javatmp.module.accounting.service.AccountService;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.List;
-import javax.servlet.ServletException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,7 +18,7 @@ public class ViewTrialBalance {
     private AccountService accountService;
 
     @GetMapping("/accounting/ViewTrialBalance")
-    protected String doGet(Model model) throws ServletException, IOException {
+    protected String doGet(Model model) {
 
         List<Account> accounts = accountService.getLeafAccountsForTrialBalance();
         Account totalBalance = new Account();

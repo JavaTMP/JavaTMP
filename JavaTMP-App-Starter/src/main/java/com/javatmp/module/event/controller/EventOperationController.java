@@ -3,9 +3,7 @@ package com.javatmp.module.event.controller;
 import com.javatmp.fw.domain.ResponseMessage;
 import com.javatmp.module.event.entity.Event;
 import com.javatmp.module.event.service.EventService;
-import java.io.IOException;
 import java.util.List;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -39,8 +37,7 @@ public class EventOperationController {
 
     @PostMapping("/deleteEvent")
     public @ResponseBody
-    ResponseMessage deleteEvent(@RequestBody Event event, HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    ResponseMessage deleteEvent(@RequestBody Event event, HttpServletRequest request, HttpServletResponse response) {
         log.info("Event read from request to be deleted [" + (event) + "]");
         ResponseMessage responseMessage = new ResponseMessage();
         eventService.delete(event);
@@ -88,8 +85,7 @@ public class EventOperationController {
 
     @GetMapping("/getDiaryEvents")
     public @ResponseBody
-    ResponseMessage getDiaryEvents(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    ResponseMessage getDiaryEvents(HttpServletRequest request, HttpServletResponse response) {
         List<Event> diaryEvents = this.eventService.findAll(0, Integer.MAX_VALUE);
         ResponseMessage message = new ResponseMessage();
         message.setOverAllStatus(true);

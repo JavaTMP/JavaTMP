@@ -3,27 +3,27 @@ package com.javatmp.module.user.controller;
 import com.javatmp.fw.domain.ResponseMessage;
 import com.javatmp.fw.util.Util;
 import com.javatmp.module.country.entity.Countrytranslation;
+import com.javatmp.module.country.service.CountryService;
 import com.javatmp.module.dms.entity.Document;
 import com.javatmp.module.language.entity.Languagetranslation;
+import com.javatmp.module.language.service.LanguageService;
 import com.javatmp.module.theme.entity.Themetranslation;
+import com.javatmp.module.theme.service.ThemeService;
 import com.javatmp.module.timezone.entity.Timezonetranslation;
+import com.javatmp.module.timezone.service.TimezoneService;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
 import com.javatmp.util.Constants;
 import com.javatmp.util.MD5Util;
-import com.javatmp.util.ServicesFactory;
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -38,26 +38,29 @@ public class CurrentUserProfileController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    private TimezoneService timezoneService;
+    @Autowired
+    private ThemeService themeService;
+    @Autowired
+    private LanguageService languageService;
+    @Autowired
+    private CountryService countryService;
+
     @GetMapping("/user/CurrentUserProfileController")
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String requestPage = "/pages/user/current-user-profile.jsp";
-        ServletContext context = request.getServletContext();
-        HttpSession session = request.getSession();
-        User loggedInUser = (User) session.getAttribute("user");
+    public String doGet(@SessionAttribute(Constants.LOG_IN_USER_NAME) User loggedInUser, Model model) {
 
-        ServicesFactory sf = (ServicesFactory) context.getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
-
-        User dbUser = sf.getUserService().readCompleteUserById(loggedInUser);
-        List<Timezonetranslation> timezones = sf.getTimezoneService().getTimezones(loggedInUser);
-        List<Countrytranslation> countries = sf.getCountryService().getCountries(loggedInUser);
-        List<Languagetranslation> languages = sf.getLanguageService().getLanguages(loggedInUser);
-        List<Themetranslation> themes = sf.getThemeService().getThemes(loggedInUser);
-        request.setAttribute("themes", themes);
-        request.setAttribute("languages", languages);
-        request.setAttribute("countries", countries);
-        request.setAttribute("timezones", timezones);
-        request.setAttribute("user", dbUser);
-        request.getRequestDispatcher(requestPage).forward(request, response);
+        User dbUser = this.userService.readCompleteUserById(loggedInUser);
+        List<Timezonetranslation> timezones = this.timezoneService.getTimezones(loggedInUser);
+        List<Countrytranslation> countries = this.countryService.getCountries(loggedInUser);
+        List<Languagetranslation> languages = this.languageService.getLanguages(loggedInUser);
+        List<Themetranslation> themes = this.themeService.getThemes(loggedInUser);
+        model.addAttribute("themes", themes);
+        model.addAttribute("languages", languages);
+        model.addAttribute("countries", countries);
+        model.addAttribute("timezones", timezones);
+        model.addAttribute("user", dbUser);
+        return "/pages/user/current-user-profile.jsp";
     }
 
     @PostMapping("/user/CurrentUserProfileController")

@@ -10,7 +10,6 @@ import com.javatmp.fw.domain.ResponseMessage;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -24,8 +23,7 @@ public class ViewHandlebarsMessageController {
 
     @GetMapping("/message/ViewHandlebarsMessageController")
     public @ResponseBody
-    ResponseMessage doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    ResponseMessage doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         ResponseMessage responseMessage = new ResponseMessage();
 

@@ -7,11 +7,9 @@ import com.javatmp.module.content.entity.Content;
 import com.javatmp.module.content.service.ContentService;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.util.Constants;
-import java.io.IOException;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.ResourceBundle;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -54,7 +52,7 @@ public class ContentOperationController {
     public @ResponseBody
     ResponseMessage deleteContent(@SessionAttribute(Constants.LANGUAGE_ATTR_KEY) ResourceBundle labels,
             @SessionAttribute(Constants.LOG_IN_USER_NAME) User loggedInUser,
-            Content contentToBeDeleted, ResponseMessage responseMessage) throws ServletException, IOException {
+            Content contentToBeDeleted, ResponseMessage responseMessage) {
         log.info("User to be deleted is [" + contentToBeDeleted + "]");
 
         this.contentService.deleteContent(contentToBeDeleted);
@@ -69,7 +67,8 @@ public class ContentOperationController {
 
     @PostMapping("/ListContent")
     public @ResponseBody
-    ResponseMessage doPost(@RequestBody DataTableRequest tableRequest, ResponseMessage responseMessage, HttpServletRequest request, HttpServletResponse response)
+    ResponseMessage doPost(@RequestBody DataTableRequest tableRequest, ResponseMessage responseMessage,
+            HttpServletRequest request, HttpServletResponse response)
             throws ParseException {
         DataTableResults<Content> results = this.contentService.listContent(tableRequest);
         responseMessage.setOverAllStatus(true);

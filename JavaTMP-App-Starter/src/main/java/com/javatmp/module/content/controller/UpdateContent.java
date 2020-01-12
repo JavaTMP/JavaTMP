@@ -4,8 +4,6 @@ import com.javatmp.fw.domain.ResponseMessage;
 import com.javatmp.module.content.entity.Content;
 import com.javatmp.module.content.service.ContentService;
 import com.javatmp.module.user.entity.User;
-import java.io.IOException;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -40,8 +38,7 @@ public class UpdateContent {
 
     @PostMapping(value = "/content/UpdateContent")
     public @ResponseBody
-    ResponseMessage doPost(Content contentToBeUpdated, HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    ResponseMessage doPost(Content contentToBeUpdated, HttpServletRequest request, HttpServletResponse response) {
 
         ResponseMessage responseMessage = new ResponseMessage();
 

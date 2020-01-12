@@ -2,10 +2,10 @@ package com.javatmp.module.dms.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStream;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +21,7 @@ public class FileDownloader {
     ServletContext context;
 
     @GetMapping("/FileDownloader/**")
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws FileNotFoundException, IOException {
 
         // Get requested file by path info.
         String requestedFile = request.getRequestURI();
