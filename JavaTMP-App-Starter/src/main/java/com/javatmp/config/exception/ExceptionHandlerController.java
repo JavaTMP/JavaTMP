@@ -25,6 +25,7 @@ public class ExceptionHandlerController {
         while (t.getCause() != null) {
             t = t.getCause();
         }
+        log.error("database related ex : {}", t.getMessage());
         responseMessage.setOverAllStatus(false);
         responseMessage.setMessage(t.getMessage());
         response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
@@ -38,6 +39,7 @@ public class ExceptionHandlerController {
     public @ResponseBody
     ResponseMessage handleIllegalArgumentException(HttpServletRequest request, HttpServletResponse response,
             IllegalArgumentException exception) {
+        log.error("database related ex : {}", exception.getMessage());
         ResponseMessage responseMessage = new ResponseMessage();
         responseMessage.setOverAllStatus(false);
         responseMessage.setMessage(exception.getMessage());
