@@ -824,9 +824,9 @@
                     return JSON.stringify(currentData);
                 },
                 "dataSrc": function (json) {
-                    json["recordsTotal"] = json.data.recordsTotal;
-                    json["recordsFiltered"] = json.data.recordsFiltered;
-                    return json.data.data;
+                    json["recordsTotal"] = json.recordsTotal;
+                    json["recordsFiltered"] = json.recordsFiltered;
+                    return json.data;
                 }
             }
         }, options);

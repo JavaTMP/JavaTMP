@@ -252,7 +252,7 @@
                         });
                     },
                     postProcess: function (event, data) {
-                        data.result = convertData(data.response.data);
+                        data.result = convertData(data.response);
                     },
                     table: {
                         indentation: 35,

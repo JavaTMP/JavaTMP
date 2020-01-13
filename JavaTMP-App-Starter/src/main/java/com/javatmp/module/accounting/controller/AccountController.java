@@ -13,13 +13,10 @@ import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
@@ -36,32 +33,25 @@ public class AccountController {
     TransactionEntryService transactionEntryService;
 
     @PostMapping("/accounting/AccountLedger")
-    public ResponseMessage AccountLedger(@RequestBody DataTableRequest tableRequest) {
-        ResponseMessage responseMessage = new ResponseMessage();
+    public DataTableResults<Account> AccountLedger(@RequestBody DataTableRequest tableRequest) {
         List<Account> generalLedgerAccounts = accountService.getGeneralLedgerAccounts();
         DataTableResults<Account> dataTableResult = new DataTableResults<>();
         dataTableResult.setData(generalLedgerAccounts);
         dataTableResult.setRecordsTotal(Long.valueOf(generalLedgerAccounts.size()));
         dataTableResult.setRecordsFiltered(Long.valueOf(generalLedgerAccounts.size()));
         dataTableResult.setDraw(tableRequest.getDraw());
-        responseMessage.setOverAllStatus(true);
-        responseMessage.setData(dataTableResult);
-        return responseMessage;
+        return dataTableResult;
 
     }
 
     @PostMapping(value = "/accounting/chartOfAccounts")
-    public ResponseMessage chartOfAccounts() {
+    public List<Account> chartOfAccounts() {
         List<Account> chartOfAccounts = accountService.getChartOfAccounts();
-        ResponseMessage responseMessage = new ResponseMessage();
-        responseMessage.setOverAllStatus(true);
-        responseMessage.setData(chartOfAccounts);
-        return responseMessage;
+        return chartOfAccounts;
     }
 
     @PostMapping(value = "/accounting/AddNewAccountPopup")
-    public @ResponseBody
-    ResponseMessage AddNewAccountPopup(Account accountToBeCreated, ResponseMessage responseMessage) {
+    public ResponseMessage AddNewAccountPopup(Account accountToBeCreated, ResponseMessage responseMessage) {
 
         log.info("Account to be created is [" + (accountToBeCreated) + "]");
         accountToBeCreated.setCreationDate(new Date());
@@ -87,33 +77,26 @@ public class AccountController {
         responseMessage.setTitle("Accounting Deleted");
         responseMessage.setMessage("Account deleted successfully with status " + updateStatus);
         responseMessage.setData(accountToBeDeleted);
-        return responseMessage;
 
+        return responseMessage;
     }
 
     @PostMapping("/accounting/ListEntries")
-    public ResponseMessage ListEntries(@RequestBody DataTableRequest tableRequest, ResponseMessage responseMessage) throws ParseException {
+    public DataTableResults<TransactionEntry> ListEntries(@RequestBody DataTableRequest tableRequest) throws ParseException {
 
         DataTableResults<TransactionEntry> dataTableResult = transactionEntryService.listAllTransactionEntry(tableRequest);
-        responseMessage.setOverAllStatus(true);
-        responseMessage.setData(dataTableResult);
-        return responseMessage;
+        return dataTableResult;
     }
 
     @PostMapping("/accounting/listTransactions")
-    public ResponseMessage listTransactions(@RequestBody DataTableRequest tableRequest, ResponseMessage responseMessage) throws ParseException {
+    public DataTableResults<Transaction> listTransactions(@RequestBody DataTableRequest tableRequest) throws ParseException {
 
         DataTableResults<Transaction> dataTableResult = transactionService.listAllTransactions(tableRequest);
-        responseMessage.setOverAllStatus(true);
-        responseMessage.setData(dataTableResult);
-        return responseMessage;
+        return dataTableResult;
     }
 
     @PostMapping(value = "/accounting/UpdateAccountPopup")
-    public ResponseMessage UpdateAccountPopup(Account accountToBeUpdated, HttpServletRequest request,
-            HttpServletResponse response) {
-
-        ResponseMessage responseMessage = new ResponseMessage();
+    public ResponseMessage UpdateAccountPopup(Account accountToBeUpdated, ResponseMessage responseMessage) {
 
         log.info("account to be Updated is [" + (accountToBeUpdated) + "]");
         int updateStatus = accountService.updateAccount(accountToBeUpdated);
@@ -125,18 +108,14 @@ public class AccountController {
     }
 
     @PostMapping("/accounting/ViewBalanceSheet")
-    public ResponseMessage ViewBalanceSheet() {
+    public List<Account> ViewBalanceSheet() {
 
         List<Account> chartOfAccounts = accountService.getChartOfAccountsReport(1);
-        ResponseMessage responseMessage = new ResponseMessage();
-        responseMessage.setOverAllStatus(true);
-        responseMessage.setData(chartOfAccounts);
-        return responseMessage;
-
+        return chartOfAccounts;
     }
 
     @PostMapping("/accounting/GeneralLedger")
-    public ResponseMessage GeneralLedger(@RequestBody DataTableRequest tableRequest, ResponseMessage responseMessage) {
+    public DataTableResults<Account> GeneralLedger(@RequestBody DataTableRequest tableRequest) {
 
         List<Account> generalLedgerAccounts = accountService.getGeneralLedgerAccounts();
         DataTableResults<Account> dataTableResult = new DataTableResults<>();
@@ -145,20 +124,14 @@ public class AccountController {
         dataTableResult.setRecordsTotal(Long.valueOf(generalLedgerAccounts.size()));
         dataTableResult.setRecordsFiltered(Long.valueOf(generalLedgerAccounts.size()));
         dataTableResult.setDraw(tableRequest.getDraw());
-        responseMessage.setOverAllStatus(true);
-        responseMessage.setData(dataTableResult);
-        return responseMessage;
+        return dataTableResult;
 
     }
 
     @PostMapping("/accounting/ViewProfitLossIncome")
-    public ResponseMessage ViewProfitLossIncome() {
-
+    public List<Account> ViewProfitLossIncome() {
         List<Account> chartOfAccounts = accountService.getChartOfAccountsReport(2);
-        ResponseMessage responseMessage = new ResponseMessage();
-        responseMessage.setOverAllStatus(true);
-        responseMessage.setData(chartOfAccounts);
-        return responseMessage;
+        return chartOfAccounts;
 
     }
 
