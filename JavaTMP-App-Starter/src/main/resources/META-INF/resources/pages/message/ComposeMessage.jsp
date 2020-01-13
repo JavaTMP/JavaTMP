@@ -160,24 +160,24 @@
 
                             // https://stackoverflow.com/questions/14819865/select2-ajax-method-not-selecting
                             var actualResult = [];
-                            for (var i = 0; i < data.data.data.length; i++) {
+                            for (var i = 0; i < data.data.length; i++) {
                                 actualResult.push({
-                                    id: data.data.data[i].id,
-                                    text: data.data.data[i].firstName + " " + data.data.data[i].lastName,
-                                    firstName: data.data.data[i].firstName,
-                                    lastName: data.data.data[i].lastName,
-                                    countryId: data.data.data[i].countryId,
-                                    address: data.data.data[i].address,
-                                    email: data.data.data[i].email,
-                                    'documentId': data.data.data[i].profilePicDocumentId,
-                                    'randomHash': data.data.data[i].profilePicDocument.randomHash
+                                    id: data.data[i].id,
+                                    text: data.data[i].firstName + " " + data.data[i].lastName,
+                                    firstName: data.data[i].firstName,
+                                    lastName: data.data[i].lastName,
+                                    countryId: data.data[i].countryId,
+                                    address: data.data[i].address,
+                                    email: data.data[i].email,
+                                    'documentId': data.data[i].profilePicDocumentId,
+                                    'randomHash': data.data[i].profilePicDocument.randomHash
                                 });
                             }
-                            console.log("params.page [" + params.page + "] total [" + data.data.recordsTotal + "] isMore [" + ((params.page * 10) < data.data.recordsTotal) + "]");
+                            console.log("params.page [" + params.page + "] total [" + data.recordsTotal + "] isMore [" + ((params.page * 10) < data.recordsTotal) + "]");
                             return {
                                 results: actualResult,
                                 pagination: {
-                                    more: (params.page * 25) < data.data.recordsTotal
+                                    more: (params.page * 25) < data.recordsTotal
                                 }
                             };
                         }
