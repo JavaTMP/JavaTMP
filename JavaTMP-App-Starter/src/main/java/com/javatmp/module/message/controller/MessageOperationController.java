@@ -39,7 +39,7 @@ public class MessageOperationController {
     @PostMapping("/CreateMessageController")
     public @ResponseBody
     ResponseMessage CreateMessageController(@SessionAttribute(Constants.LOG_IN_USER_NAME) User loggedInUser,
-            Message message, HttpServletRequest request, HttpServletResponse response) {
+            Message message) {
 
         ResponseMessage responseMessage = new ResponseMessage();
 

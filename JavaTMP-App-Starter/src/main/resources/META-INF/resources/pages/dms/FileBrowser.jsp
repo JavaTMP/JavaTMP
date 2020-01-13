@@ -64,7 +64,7 @@
                         cache: true
                     },
                     postProcess: function (event, data) {
-                        data.result = data.response.data;
+                        data.result = data.response;
                     },
                     lazyLoad: function (event, data) {
                         data.result = {

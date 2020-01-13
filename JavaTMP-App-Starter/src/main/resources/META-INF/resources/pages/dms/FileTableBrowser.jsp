@@ -75,7 +75,7 @@
                     },
                     scrollParent: window,
                     postProcess: function (event, data) {
-                        data.result = data.response.data;
+                        data.result = data.response;
                     },
                     table: {
                         indentation: 30,
