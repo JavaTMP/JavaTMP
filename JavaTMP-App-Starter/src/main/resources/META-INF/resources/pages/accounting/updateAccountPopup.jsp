@@ -58,7 +58,7 @@
                                         <c:when test="${fn:length(requestScope.accountGroups) > 0}">
                                             <option value="">${labels['page.text.kindlySelect']}</option>
                                             <c:forEach items="${requestScope.accountGroups}" var="accountGroup">
-                                                <option ${requestScope.account.accountGroup == accountGroup.id ? 'selected="selected"' : ''} value="${accountGroup.id}">${accountGroup.name}</option>
+                                                <option ${requestScope.account.accountGroupId == accountGroup.id ? 'selected="selected"' : ''} value="${accountGroup.id}">${accountGroup.name}</option>
                                             </c:forEach>
                                         </c:when>
                                         <c:otherwise>
