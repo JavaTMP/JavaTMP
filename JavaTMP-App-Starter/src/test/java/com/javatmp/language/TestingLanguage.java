@@ -5,9 +5,9 @@
  */
 package com.javatmp.language;
 
-import com.javatmp.module.language.entity.Languagetranslation;
-import com.javatmp.module.language.service.LanguageService;
-import com.javatmp.module.theme.service.ThemeService;
+import com.javatmp.module.user.entity.Languagetranslation;
+import com.javatmp.module.user.service.LanguageService;
+import com.javatmp.module.user.service.ThemeService;
 import com.javatmp.module.user.entity.User;
 import java.sql.SQLException;
 import java.text.ParseException;

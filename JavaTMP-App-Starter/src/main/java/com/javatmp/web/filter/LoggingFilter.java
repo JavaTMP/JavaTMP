@@ -1,7 +1,7 @@
 package com.javatmp.web.filter;
 
-import com.javatmp.module.activity.Activity;
-import com.javatmp.module.activity.UserActivityService;
+import com.javatmp.module.user.entity.UserActivity;
+import com.javatmp.module.user.service.UserActivityService;
 import com.javatmp.module.user.entity.User;
 import java.io.IOException;
 import java.util.Date;
@@ -38,7 +38,7 @@ public class LoggingFilter extends FilterWrapper {
         if (isExcludedUrl == true) {
             chain.doFilter(request, response);
         } else {
-            Activity activity = new Activity();
+            UserActivity activity = new UserActivity();
             activity.setCreationDate(creationDate);
             activity.setIPaddress(ipAddress);
             activity.setActionType("page_view");

@@ -1,13 +1,13 @@
 package com.javatmp.module.user.controller;
 
-import com.javatmp.module.country.entity.Countrytranslation;
-import com.javatmp.module.country.service.CountryService;
-import com.javatmp.module.language.entity.Languagetranslation;
-import com.javatmp.module.language.service.LanguageService;
-import com.javatmp.module.theme.entity.Themetranslation;
-import com.javatmp.module.theme.service.ThemeService;
-import com.javatmp.module.timezone.entity.Timezonetranslation;
-import com.javatmp.module.timezone.service.TimezoneService;
+import com.javatmp.module.user.entity.Countrytranslation;
+import com.javatmp.module.user.service.CountryService;
+import com.javatmp.module.user.entity.Languagetranslation;
+import com.javatmp.module.user.service.LanguageService;
+import com.javatmp.module.user.entity.Themetranslation;
+import com.javatmp.module.user.service.ThemeService;
+import com.javatmp.module.user.entity.Timezonetranslation;
+import com.javatmp.module.user.service.TimezoneService;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
 import com.javatmp.util.Constants;

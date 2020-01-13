@@ -5,8 +5,8 @@
  */
 package com.javatmp.country;
 
-import com.javatmp.module.country.service.CountryService;
-import com.javatmp.module.country.entity.Countrytranslation;
+import com.javatmp.module.user.service.CountryService;
+import com.javatmp.module.user.entity.Countrytranslation;
 import com.javatmp.module.user.entity.User;
 import java.io.IOException;
 import java.sql.SQLException;

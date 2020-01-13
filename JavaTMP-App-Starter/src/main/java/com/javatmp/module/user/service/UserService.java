@@ -5,7 +5,7 @@ import com.javatmp.fw.domain.table.DataTableColumn;
 import com.javatmp.fw.domain.table.DataTableRequest;
 import com.javatmp.fw.domain.table.DataTableResults;
 import com.javatmp.fw.domain.table.Order;
-import com.javatmp.module.country.entity.Country;
+import com.javatmp.module.user.entity.Country;
 import com.javatmp.module.dms.entity.Document;
 import com.javatmp.module.dms.entity.Document_;
 import com.javatmp.module.user.entity.User;

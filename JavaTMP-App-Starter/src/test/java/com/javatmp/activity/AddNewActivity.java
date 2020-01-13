@@ -5,8 +5,8 @@
  */
 package com.javatmp.activity;
 
-import com.javatmp.module.activity.Activity;
-import com.javatmp.module.activity.UserActivityService;
+import com.javatmp.module.user.entity.UserActivity;
+import com.javatmp.module.user.service.UserActivityService;
 import com.javatmp.util.Constants;
 import com.javatmp.util.ServicesFactory;
 import java.io.FileNotFoundException;
@@ -26,7 +26,7 @@ public class AddNewActivity {
     public static void main(String[] args) throws ParseException, FileNotFoundException {
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
         ServicesFactory sf = new ServicesFactory(Constants.DEFAULT_PERSISTENT_UNIT_NAME);
-        Activity activity = new Activity();
+        UserActivity activity = new UserActivity();
         UserActivityService activityService = sf.getActivityService();
         activity.setCreationDate(new Date());
 //        activity.setSessionId(UUID.randomUUID().toString().replace("-", ""));

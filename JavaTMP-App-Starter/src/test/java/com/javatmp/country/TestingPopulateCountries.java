@@ -5,12 +5,12 @@
  */
 package com.javatmp.country;
 
-import com.javatmp.module.country.entity.Countrytranslation;
-import com.javatmp.module.country.entity.CountrytranslationPK;
-import com.javatmp.module.country.service.CountryService;
-import com.javatmp.module.country.service.CountryTransalationService;
-import com.javatmp.module.language.entity.Languagetranslation;
-import com.javatmp.module.language.service.LanguageService;
+import com.javatmp.module.user.entity.Countrytranslation;
+import com.javatmp.module.user.entity.CountrytranslationPK;
+import com.javatmp.module.user.service.CountryService;
+import com.javatmp.module.user.service.CountryTransalationService;
+import com.javatmp.module.user.entity.Languagetranslation;
+import com.javatmp.module.user.service.LanguageService;
 import com.javatmp.module.user.entity.User;
 import java.io.BufferedReader;
 import java.io.IOException;

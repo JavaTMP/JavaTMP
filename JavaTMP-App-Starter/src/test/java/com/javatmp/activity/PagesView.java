@@ -5,7 +5,7 @@
  */
 package com.javatmp.activity;
 
-import com.javatmp.module.activity.UserActivityService;
+import com.javatmp.module.user.service.UserActivityService;
 import com.javatmp.util.ServicesFactory;
 import com.javatmp.util.Constants;
 import java.lang.reflect.InvocationTargetException;

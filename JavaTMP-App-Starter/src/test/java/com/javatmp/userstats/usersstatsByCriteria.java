@@ -6,9 +6,9 @@
 package com.javatmp.userstats;
 
 
-import com.javatmp.module.activity.UserActivityService;
+import com.javatmp.module.user.service.UserActivityService;
 import com.javatmp.util.ServicesFactory;
-import com.javatmp.module.stats.service.UserStatsService;
+import com.javatmp.module.user.service.UserStatsService;
 import com.javatmp.util.Constants;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
