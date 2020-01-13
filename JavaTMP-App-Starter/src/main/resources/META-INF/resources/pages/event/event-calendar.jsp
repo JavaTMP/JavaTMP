@@ -108,8 +108,8 @@
                             },
                             success: function (message) {
                                 var events = [];
-                                if (!!message.data) {
-                                    $.map(message.data, function (r) {
+                                if (!!message) {
+                                    $.map(message, function (r) {
                                         events.push({
                                             id: r.id,
                                             title: r.title,

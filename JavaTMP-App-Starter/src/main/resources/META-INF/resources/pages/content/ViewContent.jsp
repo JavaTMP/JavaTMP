@@ -150,7 +150,7 @@
                 };
 
                 $.ajax({
-                    url: javatmp.settings.contextPath + "/cms/ReadContentController",
+                    url: javatmp.settings.contextPath + "/content/readContentController",
                     data: passData,
                     success: function (response, textStatus, jqXHR) {
                         var timeOut = 500;
@@ -158,16 +158,12 @@
                         function runWhenDialogOpen() {
 //                    console.log("time out [" + Math.round(timeOut / 2) + "], isOpen [" + ajaxModalContainer.isOpen + "], is show [" + ajaxModalContainer.originalModal.hasClass("show") + "]");
                             if (ajaxModalContainer.isOpen) {
-                                ajaxModalContainer.updateTitle("Remote Content Read")
-                                ajaxModalContainer.updateMessage(response.message);
-                                ajaxModalContainer.updateClosable(true);
-                                $('#summernote').summernote('code', response.data.contentText);
-
+                                $('#summernote').summernote('code', response.contentText);
+                                ajaxModalContainer.hide();
                             } else {
                                 timeOut = timeOut <= 50 ? 50 : Math.round(timeOut / 2);
                                 clearTimeout(timer);
                                 timer = setTimeout(runWhenDialogOpen, timeOut);
-
                             }
                         }
                         runWhenDialogOpen();

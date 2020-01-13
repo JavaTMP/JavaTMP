@@ -3,10 +3,8 @@ package com.javatmp.module.content.controller;
 import com.javatmp.fw.domain.ResponseMessage;
 import com.javatmp.module.content.entity.Content;
 import com.javatmp.module.content.service.ContentService;
-import com.javatmp.module.user.entity.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,23 +21,19 @@ public class UpdateContent {
 
     @GetMapping(value = "/content/UpdateContent")
     public String doGet(Content content, HttpServletRequest request, HttpServletResponse response) {
-        String requestPage = "/pages/content/UpdateContent.jsp";
-
         log.info("request user is [" + (content) + "]");
         content = this.contentService.getOne(content.getContentId());
         log.info("DB user to be Updated is [" + (content) + "]");
 
-        HttpSession session = request.getSession();
-        User loggedInUser = (User) session.getAttribute("user");
-
         request.setAttribute("content", content);
-        return requestPage;
+        return "/pages/content/UpdateContent.jsp";
     }
 
     @PostMapping(value = "/content/UpdateContent")
     public @ResponseBody
     ResponseMessage doPost(Content contentToBeUpdated, HttpServletRequest request, HttpServletResponse response) {
 
+        log.debug("content to be updated is {}", contentToBeUpdated);
         ResponseMessage responseMessage = new ResponseMessage();
 
         if (this.contentService.updateContent(contentToBeUpdated) == 1) {

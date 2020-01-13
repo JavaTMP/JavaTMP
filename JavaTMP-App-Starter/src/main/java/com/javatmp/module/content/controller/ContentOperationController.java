@@ -10,20 +10,17 @@ import com.javatmp.util.Constants;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.ResourceBundle;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 @Slf4j
-@Controller
+@RestController
 @RequestMapping("/content")
 public class ContentOperationController {
 
@@ -31,8 +28,7 @@ public class ContentOperationController {
     ContentService contentService;
 
     @PostMapping("/CreateNewContent")
-    public @ResponseBody
-    ResponseMessage CreateNewContent(@SessionAttribute(Constants.LANGUAGE_ATTR_KEY) ResourceBundle labels,
+    public ResponseMessage CreateNewContent(@SessionAttribute(Constants.LANGUAGE_ATTR_KEY) ResourceBundle labels,
             @SessionAttribute(Constants.LOG_IN_USER_NAME) User loggedInUser,
             Content contentToBeCreated, ResponseMessage responseMessage) {
 
@@ -49,10 +45,11 @@ public class ContentOperationController {
     }
 
     @PostMapping("/deleteContent")
-    public @ResponseBody
-    ResponseMessage deleteContent(@SessionAttribute(Constants.LANGUAGE_ATTR_KEY) ResourceBundle labels,
+    public ResponseMessage deleteContent(
+            @SessionAttribute(Constants.LANGUAGE_ATTR_KEY) ResourceBundle labels,
             @SessionAttribute(Constants.LOG_IN_USER_NAME) User loggedInUser,
-            Content contentToBeDeleted, ResponseMessage responseMessage) {
+            @RequestBody Content contentToBeDeleted,
+            ResponseMessage responseMessage) {
         log.info("User to be deleted is [" + contentToBeDeleted + "]");
 
         this.contentService.deleteContent(contentToBeDeleted);
@@ -66,28 +63,15 @@ public class ContentOperationController {
     }
 
     @PostMapping("/ListContent")
-    public @ResponseBody
-    ResponseMessage doPost(@RequestBody DataTableRequest tableRequest, ResponseMessage responseMessage,
-            HttpServletRequest request, HttpServletResponse response)
+    public DataTableResults<Content> listContent(@RequestBody DataTableRequest tableRequest)
             throws ParseException {
         DataTableResults<Content> results = this.contentService.listContent(tableRequest);
-        responseMessage.setOverAllStatus(true);
-        responseMessage.setMessage("Content Read successfully");
-        responseMessage.setData(results);
-        return responseMessage;
-
+        return results;
     }
 
-    @GetMapping(value = "/cms/ReadContentController")
-    public @ResponseBody
-    ResponseMessage doGet(Content contentToBeRead, HttpServletRequest request, HttpServletResponse response) {
-
-        ResponseMessage responseMessage = new ResponseMessage();
-
+    @GetMapping("/readContentController")
+    public Content readContentController(Content contentToBeRead) {
         Content dbContent = this.contentService.getOne(contentToBeRead.getContentId());
-        responseMessage.setOverAllStatus(true);
-        responseMessage.setMessage("Content Read successfully");
-        responseMessage.setData(dbContent);
-        return responseMessage;
+        return dbContent;
     }
 }

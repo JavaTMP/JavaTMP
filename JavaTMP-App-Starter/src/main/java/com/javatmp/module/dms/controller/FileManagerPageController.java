@@ -6,6 +6,7 @@ import com.javatmp.fw.domain.table.DataTableRequest;
 import com.javatmp.fw.domain.table.DataTableResults;
 import com.javatmp.fw.domain.table.Search;
 import com.javatmp.module.dms.entity.Document;
+import com.javatmp.module.dms.entity.Document_;
 import com.javatmp.module.dms.service.DocumentService;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
@@ -21,15 +22,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 @Slf4j
-@Controller
+@RestController
 @RequestMapping("/dms")
 public class FileManagerPageController {
 
@@ -40,44 +40,40 @@ public class FileManagerPageController {
     UserService userService;
 
     @PostMapping("/FileManagerPageController")
-    public @ResponseBody
-    ResponseMessage doPost(@RequestBody DataTableRequest tableRequest, ResponseMessage message) throws ParseException {
+    public DataTableResults<Document> fileManagerPageController(@RequestBody DataTableRequest tableRequest) throws ParseException {
         log.info("request Page for file manager is [" + (tableRequest) + "]");
         DataTableResults<Document> documents = this.documentService.getAllDocuments(tableRequest);
-        message.setOverAllStatus(true);
-        message.setMessage("All Available File Documents on the Server");
-        message.setData(documents);
-        return message;
+        return documents;
     }
 
     @PostMapping("/FolderBrowser")
-    public @ResponseBody
-    ResponseMessage doPost(HttpServletRequest request, HttpServletResponse response) throws ParseException {
+    public DataTableResults<Document> folderBrowser() throws ParseException {
 
         DataTableRequest<Document> tableRequest = new DataTableRequest<>();
 
         tableRequest.setStart(0);
         tableRequest.setLength(Integer.MAX_VALUE);
 
-        tableRequest.setSelects(new String[]{"documentId", "documentName", "documentSize", "contentType", "creationDate",
-            "randomHash", "documentType", "parentDocumentId", "status", "createdByUserId"});
-        tableRequest.setClassType(Document.class);
-        DataTableColumn column = new DataTableColumn(0, "documentType");
+        tableRequest.setSelects(new String[]{Document_.DOCUMENT_ID, Document_.DOCUMENT_NAME,
+            Document_.DOCUMENT_SIZE, Document_.DOCUMENT_TYPE, Document_.CREATION_DATE,
+            Document_.RANDOM_HASH, Document_.DOCUMENT_TYPE, Document_.PARENT_DOCUMENT_ID,
+            Document_.STATUS, Document_.CREATED_BY_USER_ID});
+        tableRequest.setClassType(Document.class
+        );
+        DataTableColumn column = new DataTableColumn(0, Document_.DOCUMENT_TYPE);
+
         column.setSearch(new Search("2", null));
         List<DataTableColumn> columns = new LinkedList<>();
+
         columns.add(column);
+
         tableRequest.setColumns(columns);
-        DataTableResults<Document> dataTableResult;
-        dataTableResult = documentService.retrievePageRequestDetails(tableRequest);
-        ResponseMessage responseMessage = new ResponseMessage();
-        responseMessage.setOverAllStatus(true);
-        responseMessage.setData(dataTableResult);
-        return responseMessage;
+        DataTableResults<Document> dataTableResult = documentService.retrievePageRequestDetails(tableRequest);
+        return dataTableResult;
     }
 
     @PostMapping("/updateProfilePhoto")
-    public @ResponseBody
-    ResponseMessage updateProfilePhoto(@SessionAttribute(Constants.LOG_IN_USER_NAME) User loggedInUser,
+    public ResponseMessage updateProfilePhoto(@SessionAttribute(Constants.LOG_IN_USER_NAME) User loggedInUser,
             ResponseMessage responseMessage,
             HttpServletRequest request, HttpServletResponse response) throws IOException {
 

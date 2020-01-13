@@ -355,8 +355,8 @@
                     contentType: "application/json; charset=UTF-8",
                     success: function (response, textStatus, jqXHR) {
                         // now we populate $form by response.data json object:
-                        if (response.data.recordsTotal > 0) {
-                            var rowObject = response.data.data[0];
+                        if (response.recordsTotal > 0) {
+                            var rowObject = response.data[0];
                             currentUser = rowObject;
                             window.javatmp.plugins.populateForm(form, rowObject);
                             form.find("textarea[name='address']").summernote('code', rowObject.address);

@@ -27,7 +27,7 @@ public class FileBrowser {
 
         if (parent.contains("..")) {
             // This is a security check
-            throw new IllegalArgumentException("Cannot store file with relative path outside current directory " + parent);
+            throw new IllegalArgumentException("Cannot process relative path" + parent);
         }
 
 //        String basePath = request.getServletContext().getRealPath("");

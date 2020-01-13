@@ -5,7 +5,6 @@ import com.javatmp.fw.domain.table.DataTableRequest;
 import com.javatmp.fw.domain.table.DataTableResults;
 import com.javatmp.fw.util.Util;
 import com.javatmp.module.dms.entity.Document;
-import com.javatmp.module.dms.service.DocumentService;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
 import com.javatmp.util.Constants;
@@ -37,9 +36,6 @@ public class UserOperationController {
 
     @Autowired
     UserService userService;
-
-    @Autowired
-    DocumentService documentService;
 
     @PostMapping("/ActivateUserController")
     public ResponseMessage ActivateUser(@RequestBody User userToBeUpdated, @SessionAttribute ResourceBundle labels,
@@ -109,12 +105,10 @@ public class UserOperationController {
     }
 
     @PostMapping(value = "/ListUsersController", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseMessage listUsersController(@RequestBody DataTableRequest tableRequest, ResponseMessage responseMessage) {
-        log.info("datatableRequest [{}]", tableRequest);
+    public DataTableResults<User> listUsersController(@RequestBody DataTableRequest tableRequest) {
+        log.debug("datatableRequest [{}]", tableRequest);
         DataTableResults<User> dataTableResult = this.userService.listAllUsers(tableRequest);
-        responseMessage.setOverAllStatus(true);
-        responseMessage.setData(dataTableResult);
-        return responseMessage;
+        return dataTableResult;
     }
 
     @PostMapping("/CreateUserController")

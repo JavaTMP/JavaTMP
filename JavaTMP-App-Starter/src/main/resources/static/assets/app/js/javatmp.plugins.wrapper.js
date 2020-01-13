@@ -795,6 +795,7 @@
 //                        "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4 pt-2 text-right'l>>"
 //                ,
 //                select: true,
+            "order": [[0, 'desc']],
             keys: true,
             select: "single",
             scrollY: 400,

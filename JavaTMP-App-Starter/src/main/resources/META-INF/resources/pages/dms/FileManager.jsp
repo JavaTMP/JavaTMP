@@ -143,44 +143,11 @@
                 }).submit();
             }
 
-            table = $(tableSelector).DataTable({
-//                responsive: true,
+
+            table = javatmp.plugins.DataTableAjaxWrapper($(tableSelector), {
                 "order": [[0, 'desc']],
-                dom: "<'row'<'col-sm-12'tr>>" +
-                        "<'row'<'col-sm-6'i><'col-sm-6 pt-2 text-right'l>>" +
-                        "<'row'<'col-sm-12'p>>",
-                scrollY: 400,
-                scrollX: true,
-                "autoWidth": false,
-//                fixedColumns: true,
-//                "deferLoading": 0, // here
-                scrollCollapse: true,
-                "searching": true,
-                searchDelay: 500,
-                orderCellsTop: true, // important to for two row header with filteration below header column names.
-                "processing": true,
-                "serverSide": true,
-                "drawCallback": function (settings) {
-                },
-                initComplete: function () {
-                    this.api().columns().every(function (index) {
-                        var column = this;
-                    });
-                },
                 "ajax": {
-                    "type": "POST",
-                    "url": javatmp.settings.contextPath + "/dms/FileManagerPageController",
-                    dataType: "json",
-                    contentType: "application/json; charset=UTF-8",
-                    "data": function (currentDate) {
-                        currentDate._ajaxGlobalBlockUI = false; // window blocked until data return
-                        return JSON.stringify(currentDate);
-                    },
-                    "dataSrc": function (json) {
-                        json["recordsTotal"] = json.data.recordsTotal;
-                        json["recordsFiltered"] = json.data.recordsFiltered;
-                        return json.data.data;
-                    }
+                    "url": javatmp.settings.contextPath + "/dms/FileManagerPageController"
                 },
                 columns: [
                     {data: 'documentId', name: 'documentId'},
