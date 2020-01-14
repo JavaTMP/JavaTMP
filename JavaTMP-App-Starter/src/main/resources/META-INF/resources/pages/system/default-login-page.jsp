@@ -32,7 +32,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-form-label">${labels['domain.user.userName']}</label>
                                     <input class="form-control" placeholder="${labels['domain.user.userName']}"
-                                           name="userName" type="text" autofocus value="user123"
+                                           name="username" type="text" autofocus value="user123"
                                            data-rule-required="true">
                                 </div>
                                 <div class="form-group">
@@ -65,7 +65,7 @@
                 });
                 // https://www.sanwebe.com/2016/07/ajax-form-submit-examples-using-jquery
                 // https://stackoverflow.com/questions/1960240/jquery-ajax-submit-form
-                var loginForm = $('#main-login-form');
+                var loginForm = $('#main-login-form1');
                 var validator = null;
                 var alertError = null;
                 loginForm.on("submit", function (event) {

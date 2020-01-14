@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.javatmp.fw.config.converter.OrderDirTypeJsonDeserializer;
 import com.javatmp.fw.config.converter.OrderDirTypeJsonSerializer;
 import com.javatmp.fw.domain.table.OrderDir;
-import com.javatmp.web.filter.AuthenticatorFilter;
 import com.javatmp.web.filter.CacheControlHeadersFilter;
 import com.javatmp.web.filter.ContentCacheFilter;
 import com.javatmp.web.filter.GZIPCompressingFilter;
@@ -45,9 +44,8 @@ public class Config implements WebMvcConfigurer {
     @Autowired
     JavaTMPServletListener javaTMPServletListener;
 
-    @Autowired
-    AuthenticatorFilter authenticatorFilter;
-
+//    @Autowired
+//    AuthenticatorFilter authenticatorFilter;
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/static/**")
@@ -96,18 +94,17 @@ public class Config implements WebMvcConfigurer {
         return registrationBean;
     }
 
-    @Bean
-    public FilterRegistrationBean<AuthenticatorFilter> getAuthenticatorFilter() {
-        FilterRegistrationBean<AuthenticatorFilter> registrationBean
-                = new FilterRegistrationBean<>();
-        registrationBean.setFilter(this.authenticatorFilter);
-        registrationBean.addUrlPatterns("/*");
-        registrationBean.setDispatcherTypes(DispatcherType.REQUEST);
-        registrationBean.addInitParameter("excludedUrlsRegex", "^/assets/.*,^/login,^/logout,^/user/register,^/CaptchaImageController,^/pages/system/register");
-        registrationBean.setOrder(4);
-        return registrationBean;
-    }
-
+//    @Bean
+//    public FilterRegistrationBean<AuthenticatorFilter> getAuthenticatorFilter() {
+//        FilterRegistrationBean<AuthenticatorFilter> registrationBean
+//                = new FilterRegistrationBean<>();
+//        registrationBean.setFilter(this.authenticatorFilter);
+//        registrationBean.addUrlPatterns("/*");
+//        registrationBean.setDispatcherTypes(DispatcherType.REQUEST);
+//        registrationBean.addInitParameter("excludedUrlsRegex", "^/assets/.*,^/login,^/logout,^/user/register,^/CaptchaImageController,^/pages/system/register");
+//        registrationBean.setOrder(4);
+//        return registrationBean;
+//    }
     @Bean
     public FilterRegistrationBean<CacheControlHeadersFilter> getCacheControlHeadersFilter() {
         FilterRegistrationBean<CacheControlHeadersFilter> registrationBean
