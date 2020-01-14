@@ -3,35 +3,33 @@
 <div class="dynamic-ajax-content grid-gutter-padding">
     <div class="row">
         <div class="col-lg-12">
-            <div class="col-lg-12">
-                <form class="form-horizontal" id="manage-event-form" action="${pageContext.request.contextPath}/calendar/updateEvent" method="POST">
-                    <div class="form-group row">
-                        <label class="col-lg-2 col-form-label" for="textinput1">Event Id</label>
-                        <div class="col-lg-10">
-                            <input name="id" type="text" placeholder="Event ID" class="form-control required" disabled="" autofocus="" value="${requestScope.event.id}">
-                        </div>
+            <form class="form-horizontal" id="manage-event-form" action="${pageContext.request.contextPath}/calendar/updateEvent" method="POST">
+                <div class="form-group row">
+                    <label class="col-lg-2 col-form-label" for="textinput1">Event Id</label>
+                    <div class="col-lg-10">
+                        <input name="id" type="text" placeholder="Event ID" class="form-control required" disabled="" autofocus="" value="${requestScope.event.id}">
                     </div>
-                    <div class="form-group row">
-                        <label class="col-lg-2 col-form-label" for="textinput1">Event Title</label>
-                        <div class="col-lg-10">
-                            <input name="title" type="text" placeholder="Event Title" class="form-control required" autofocus="" value="${requestScope.event.title}">
-                        </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-2 col-form-label" for="textinput1">Event Title</label>
+                    <div class="col-lg-10">
+                        <input name="title" type="text" placeholder="Event Title" class="form-control required" autofocus="" value="${requestScope.event.title}">
                     </div>
-                    <div class="form-group row">
-                        <label class="col-lg-2 col-form-label" for="textinput2">Event Start Date</label>
-                        <div class="col-lg-4">
-                            <input id="new-event-form-start-date" name="start" type="text" placeholder="Event Start Date" class="form-control required Date-and-Time" value="<fmt:formatDate pattern='dd/MM/yyyy HH:mm' timeZone="UTC" value='${requestScope.event.startDate}'/>">
-                        </div>
-                        <label class="col-lg-2 col-form-label" for="textinput3">Event End Date</label>
-                        <div class="col-lg-4">
-                            <input id="new-event-form-end-date" name="end" type="text" placeholder="Event End Date" class="form-control required Date-and-Time" value="<fmt:formatDate pattern='dd/MM/yyyy HH:mm' timeZone="UTC" value='${requestScope.event.endDate}'/>">
-                        </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-lg-2 col-form-label" for="textinput2">Event Start Date</label>
+                    <div class="col-lg-4">
+                        <input id="new-event-form-start-date" name="start" type="text" placeholder="Event Start Date" class="form-control required Date-and-Time" value="<fmt:formatDate pattern='dd/MM/yyyy HH:mm' timeZone="UTC" value='${requestScope.event.startDate}'/>">
                     </div>
-                    <div class="form-group row">
+                    <label class="col-lg-2 col-form-label" for="textinput3">Event End Date</label>
+                    <div class="col-lg-4">
+                        <input id="new-event-form-end-date" name="end" type="text" placeholder="Event End Date" class="form-control required Date-and-Time" value="<fmt:formatDate pattern='dd/MM/yyyy HH:mm' timeZone="UTC" value='${requestScope.event.endDate}'/>">
+                    </div>
+                </div>
+                <div class="form-group row">
 
-                    </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
     <style type="text/css">
