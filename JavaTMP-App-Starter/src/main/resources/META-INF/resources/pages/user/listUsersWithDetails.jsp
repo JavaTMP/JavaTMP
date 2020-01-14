@@ -372,10 +372,7 @@
             var themesSelect = $("#userlist-theme-filter");
             var timezonesMap = {};
             var timezoneSelect = $("#userlist-timezone-filter");
-
             $('.scroll-content').mCustomScrollbar(javatmp.settings.mCustomScrollbarOptions);
-
-
             $("option", countriesSelect).map(function (i, item) {
                 var text = $(item).text();
                 var value = $(item).attr("value");
@@ -404,7 +401,6 @@
                     timezonesMap[value] = text;
                 }
             });
-
             var addNewUserPopupButton = $("#UserList-AddNewUserPopupId");
             var updateUserButton = $("#UserList-UpdateSelectedUserId");
             var deleteUserButton = $("#UserList-DeleteSelectedUserId");
@@ -425,25 +421,7 @@
                 deActivateUserButton.prop("disabled", false);
             }
             disabled();
-            $.fn.dataTable.ext.errMode = 'none';
-            var table = userTableElement.DataTable({
-                // https://datatables.net/reference/option/dom
-                "pagingType": "full",
-                dom: "<'row'<'col-sm-12'i>>" +
-                        "<'row'<'col-sm-12'tr>>" +
-                        "<'row'<'col-sm-4'l><'col-sm-8'p>>",
-//                select: true,
-                keys: true,
-                select: "single",
-                scrollY: 250,
-                scrollX: true,
-                "autoWidth": false,
-                scrollCollapse: false,
-                "searching": true,
-                searchDelay: 500,
-                orderCellsTop: true, // important to for two row header with filteration below header column names.
-                "processing": true,
-                "serverSide": true,
+            var table = javatmp.plugins.DataTableAjaxWrapper(userTableElement, {
                 "rowCallback": function (row, data, index) {
                     // replace the contents of the first column (rowid) with an edit link
                     $(row).attr("data-row-id", data.id);
@@ -491,19 +469,7 @@
                     });
                 },
                 "ajax": {
-                    "type": "POST",
-                    "url": javatmp.settings.contextPath + "/user/ListUsersController",
-                    dataType: "json",
-                    contentType: "application/json; charset=UTF-8",
-                    "data": function (currentDate) {
-                        currentDate._ajaxGlobalBlockUI = false; // window blocked until data return
-                        return JSON.stringify(currentDate);
-                    },
-                    "dataSrc": function (json) {
-                        json["recordsTotal"] = json.data.recordsTotal;
-                        json["recordsFiltered"] = json.data.recordsFiltered;
-                        return json.data.data;
-                    }
+                    "url": javatmp.settings.contextPath + "/user/ListUsersController"
                 },
                 columns: [
                     {data: 'id',
@@ -546,9 +512,7 @@
                     {data: 'creationDate', "type": "date", name: "creationDate", width: "9rem", "render": javatmp.plugins.DataTableColRenderWrapper("9rem")}
                 ]
             });
-
             window.javatmp.plugins.contextMenuWrapper($('tbody', userTableElement), 'tr[data-row-id]', $("#contextMenu"));
-
             var form = $('#SearchForUserProfileFormId');
             var birthDateInputMask = javatmp.plugins.inputmaskWrapperForDate(form.find("input[name='birthDate']"));
             var birthDateDatePicker = javatmp.plugins.daterangepickerWrapperForDate(form.find("input[name='birthDate']"));
@@ -558,21 +522,17 @@
             var themeSelect = javatmp.plugins.select2WrapperForTheme(form.find("select[name='theme']"));
             var countryIdSelect = javatmp.plugins.select2WrapperForCountry(form.find("select[name='countryId']"));
             var profilePicScrollbars = javatmp.plugins.mCustomScrollbarForProfilePicture(form.find("#profilePicturePreviewContainerId"));
-
             table.on('select', function (e, dt, type, indexes) {
                 var rowsData = table.rows(indexes).data().toArray();
                 var rowData = rowsData[0];
                 enabled();
-
                 var rowObject = rowData;
                 window.javatmp.plugins.populateForm(form, rowObject);
                 form.find("textarea[name='address']").summernote('code', rowObject.address);
 //                    form.find("textarea[name='address']").summernote('triggerEvent', 'change');
                 form.find("input[name='birthDate']").val(moment(rowObject.birthDate, javatmp.settings.networkDateFormat).locale('en').format(javatmp.settings.dateFormat));
-
                 var image = form.find("img[id='profilePicturePreview']");
                 var resizeImage = form.find("img[id='profilePictureResizePreview']");
-
                 var avatarImageSrc = javatmp.settings.contextPath + "/assets/img/default-profile-pic.png";
                 if (rowObject.profilePicDocumentId) {
                     avatarImageSrc = javatmp.settings.contextPath
@@ -583,13 +543,11 @@
 
                 image.attr('src', avatarImageSrc);
                 resizeImage.attr('src', avatarImageSrc);
-
             }).on('deselect', function (e, dt, type, indexes) {
                 var rowsData = table.rows(indexes).data().toArray();
                 var rowData = rowsData[0];
                 disabled();
             });
-
             addNewUserPopupButton.on("click", function (event) {
                 BootstrapModalWrapperFactory.createAjaxModal({
                     message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
@@ -604,7 +562,6 @@
                     },
                     ajaxContainerReadyEventName: javatmp.settings.javaTmpAjaxContainerReady
                 });
-
             });
             updateUserButton.on("click", function (event) {
                 //                var selectedCount = table.rows({selected: true}).count();
@@ -696,7 +653,6 @@
                     table.columns.adjust().draw();
                 }
             };
-
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
 

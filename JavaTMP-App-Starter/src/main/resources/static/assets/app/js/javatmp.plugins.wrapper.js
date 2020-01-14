@@ -807,13 +807,14 @@
             orderCellsTop: true, // important to for two row header with filteration below header column names.
             "processing": true,
             "serverSide": true,
-            "rowCallback": function (row, data, index) {
+            "rowCallback": function (row, data, displayNum, displayIndex, dataIndex) {
+                $(row).attr("data-row-id", data.id);
             },
             "drawCallback": function (settings) {
             },
             initComplete: function (settings, json) {
                 var api = this.api();
-                // prepare id filter search field:
+
             },
             "ajax": {
                 "type": "POST",

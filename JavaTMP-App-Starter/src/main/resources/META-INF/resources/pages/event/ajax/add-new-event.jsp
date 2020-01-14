@@ -46,7 +46,6 @@
                 var alertError = null;
                 modal.updateTitle("Add New Event");
                 modal.updateClosable(true);
-                modal.updateSize("modal-lg");
                 modal.addButton({
                     label: "Close",
                     cssClass: "btn btn-danger",
@@ -109,8 +108,8 @@
                         return returnArray;
                     }
                     form_data = objectifyForm(form_data);
-                    form_data.start = moment(form_data.start, 'DD/MM/YYYY HH:mm').format("YYYY-MM-DDTHH:mm:ss.SSSZ");
-                    form_data.end = moment(form_data.end, 'DD/MM/YYYY HH:mm').format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+                    form_data.startDate = moment(form_data.start, 'DD/MM/YYYY HH:mm').format("YYYY-MM-DDTHH:mm:ss.SSSZ");
+                    form_data.endDate = moment(form_data.end, 'DD/MM/YYYY HH:mm').format("YYYY-MM-DDTHH:mm:ss.SSSZ");
                     $.ajax({
                         type: httpType,
                         url: post_url,

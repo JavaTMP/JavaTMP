@@ -1,16 +1,16 @@
 package com.javatmp.module.user.controller;
 
-import com.javatmp.module.user.entity.Countrytranslation;
-import com.javatmp.module.user.service.CountryService;
-import com.javatmp.module.user.entity.Languagetranslation;
-import com.javatmp.module.user.service.LanguageService;
-import com.javatmp.module.user.entity.Themetranslation;
-import com.javatmp.module.user.service.ThemeService;
-import com.javatmp.module.user.entity.Timezonetranslation;
-import com.javatmp.module.user.service.TimezoneService;
-import com.javatmp.module.user.entity.User;
-import com.javatmp.module.user.service.UserService;
 import com.javatmp.fw.util.Constants;
+import com.javatmp.module.user.entity.Countrytranslation;
+import com.javatmp.module.user.entity.Languagetranslation;
+import com.javatmp.module.user.entity.Themetranslation;
+import com.javatmp.module.user.entity.Timezonetranslation;
+import com.javatmp.module.user.entity.User;
+import com.javatmp.module.user.service.CountryService;
+import com.javatmp.module.user.service.LanguageService;
+import com.javatmp.module.user.service.ThemeService;
+import com.javatmp.module.user.service.TimezoneService;
+import com.javatmp.module.user.service.UserService;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +37,8 @@ public class GetUserPageController {
     private CountryService countryService;
 
     @GetMapping("/GetUpdateUserPopupController")
-    protected String getUpdateUserPopupController(@SessionAttribute(Constants.LOG_IN_USER_NAME) User loggedInUser,
+    protected String getUpdateUserPopupController(
+            @SessionAttribute(Constants.LOG_IN_USER_NAME) User loggedInUser,
             User user, Model model) {
 
         log.info("request user is [" + (user) + "]");

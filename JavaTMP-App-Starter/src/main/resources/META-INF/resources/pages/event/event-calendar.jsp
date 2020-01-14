@@ -209,6 +209,7 @@
                         localData: {
                             callback: fullcalendarCallback
                         },
+                        size: "modal-lg",
                         closeByBackdrop: false,
                         ajax: {
                             url: javatmp.settings.contextPath + "/pages/event/ajax/add-new-event",

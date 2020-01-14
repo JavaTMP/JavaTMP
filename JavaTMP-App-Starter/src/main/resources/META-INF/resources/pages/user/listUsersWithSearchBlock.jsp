@@ -438,29 +438,7 @@
             }
             disabled();
 
-            $.fn.dataTable.ext.errMode = 'none';
-            var table = userTableElement.DataTable({
-                // https://datatables.net/reference/option/dom
-                "pagingType": "full",
-                dom: "<'row'<'col-sm-12'i>>" +
-                        "<'row'<'col-sm-12'tr>>" +
-                        "<'row'<'col-sm-4'l><'col-sm-8'p>>",
-//                select: true,
-                keys: true,
-                select: "single",
-                scrollY: 250,
-                scrollX: true,
-                "autoWidth": false,
-                scrollCollapse: false,
-                "searching": true,
-                searchDelay: 500,
-                orderCellsTop: true, // important to for two row header with filteration below header column names.
-                "processing": true,
-                "serverSide": true,
-                "rowCallback": function (row, data, index) {
-                    // replace the contents of the first column (rowid) with an edit link
-                    $(row).attr("data-row-id", data.id);
-                },
+            var table = javatmp.plugins.DataTableAjaxWrapper(userTableElement, {
                 "drawCallback": function (settings) {
                     disabled();
                 },
@@ -504,7 +482,6 @@
                     });
                 },
                 "ajax": {
-                    "type": "POST",
                     "url": javatmp.settings.contextPath + "/user/ListUsersController",
                     dataType: "json",
                     contentType: "application/json; charset=UTF-8",
@@ -538,13 +515,7 @@
                                 }
                             }
                         }
-
                         return JSON.stringify(currentDate);
-                    },
-                    "dataSrc": function (json) {
-                        json["recordsTotal"] = json.data.recordsTotal;
-                        json["recordsFiltered"] = json.data.recordsFiltered;
-                        return json.data.data;
                     }
                 },
                 columns: [

@@ -3,6 +3,7 @@ package com.javatmp.module.event.controller;
 import com.javatmp.fw.domain.ResponseMessage;
 import com.javatmp.module.event.entity.Event;
 import com.javatmp.module.event.service.EventService;
+import java.util.Date;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +28,8 @@ public class EventOperationController {
 
         log.info("Event read from request prior to update [" + (event) + "]");
 
+        event.setCreationDate(new Date());
+        event.setStatus(1);
         this.eventService.save(event);
         responseMessage.setOverAllStatus(true);
         responseMessage.setMessage("Event id [" + event.getId() + "] Added Successfully");

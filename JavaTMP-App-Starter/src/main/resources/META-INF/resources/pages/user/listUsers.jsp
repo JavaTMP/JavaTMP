@@ -270,12 +270,6 @@
                 "ajax": {
                     "url": javatmp.settings.contextPath + "/user/ListUsersController"
                 },
-                "rowCallback": function (row, data, displayNum, displayIndex, dataIndex) {
-                    // replace the contents of the first column (rowid) with an edit link
-                    var api = this.api();
-                    var init = api.init();
-//                    $(row).attr("data-row-id", "null");
-                },
                 "drawCallback": function (settings) {
                     disabled();
                 },
