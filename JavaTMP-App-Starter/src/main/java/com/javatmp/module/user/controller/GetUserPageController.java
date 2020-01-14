@@ -10,7 +10,7 @@ import com.javatmp.module.user.entity.Timezonetranslation;
 import com.javatmp.module.user.service.TimezoneService;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
-import com.javatmp.util.Constants;
+import com.javatmp.fw.util.Constants;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

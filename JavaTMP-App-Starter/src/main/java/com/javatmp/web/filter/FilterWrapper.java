@@ -1,7 +1,5 @@
 package com.javatmp.web.filter;
 
-import com.javatmp.util.Constants;
-import com.javatmp.util.ServicesFactory;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,13 +16,10 @@ public abstract class FilterWrapper implements Filter {
 
     private Set<String> excludedUrlsRegex;
 
-    private ServicesFactory serviceFactory = null;
-
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         this.filterConfig = filterConfig;
         String excludePatterns = filterConfig.getInitParameter("excludedUrlsRegex");
-        this.serviceFactory = (ServicesFactory) filterConfig.getServletContext().getAttribute(Constants.SERVICES_FACTORY_ATTRIBUTE_NAME);
         if (excludePatterns != null && excludePatterns.trim().equals("") == false) {
             setExcludedUrlsRegex(new HashSet<>(Arrays.asList(excludePatterns.split(","))));
         }
@@ -102,10 +97,4 @@ public abstract class FilterWrapper implements Filter {
         this.excludedUrlsRegex = excludedUrlsRegex;
     }
 
-    /**
-     * @return the serviceFactory
-     */
-    public ServicesFactory getServiceFactory() {
-        return serviceFactory;
-    }
 }

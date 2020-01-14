@@ -6,7 +6,7 @@ import com.javatmp.fw.domain.table.DataTableResults;
 import com.javatmp.module.content.entity.Content;
 import com.javatmp.module.content.service.ContentService;
 import com.javatmp.module.user.entity.User;
-import com.javatmp.util.Constants;
+import com.javatmp.fw.util.Constants;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.ResourceBundle;

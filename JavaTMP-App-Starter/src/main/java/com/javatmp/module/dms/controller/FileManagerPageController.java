@@ -6,11 +6,10 @@ import com.javatmp.fw.domain.table.DataTableRequest;
 import com.javatmp.fw.domain.table.DataTableResults;
 import com.javatmp.fw.domain.table.Search;
 import com.javatmp.module.dms.entity.Document;
-import com.javatmp.module.dms.entity.Document_;
 import com.javatmp.module.dms.service.DocumentService;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
-import com.javatmp.util.Constants;
+import com.javatmp.fw.util.Constants;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -58,14 +57,10 @@ public class FileManagerPageController {
         tableRequest.setStart(0);
         tableRequest.setLength(Integer.MAX_VALUE);
 
-        tableRequest.setSelects(new String[]{Document_.DOCUMENT_ID, Document_.DOCUMENT_NAME,
-            Document_.DOCUMENT_SIZE, Document_.DOCUMENT_TYPE, Document_.CREATION_DATE,
-            Document_.RANDOM_HASH, Document_.DOCUMENT_TYPE, Document_.PARENT_DOCUMENT_ID,
-            Document_.STATUS, Document_.CREATED_BY_USER_ID});
-        tableRequest.setClassType(Document.class
-        );
-        DataTableColumn column = new DataTableColumn(0, Document_.DOCUMENT_TYPE);
-
+        tableRequest.setSelects(new String[]{"documentId", "documentName", "documentSize", "contentType", "creationDate",
+            "randomHash", "documentType", "parentDocumentId", "status", "createdByUserId"});
+        tableRequest.setClassType(Document.class);
+        DataTableColumn column = new DataTableColumn(0, "documentType");
         column.setSearch(new Search("2", null));
         List<DataTableColumn> columns = new LinkedList<>();
 

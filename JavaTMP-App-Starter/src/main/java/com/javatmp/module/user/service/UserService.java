@@ -10,7 +10,7 @@ import com.javatmp.module.dms.entity.Document;
 import com.javatmp.module.dms.entity.Document_;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.entity.User_;
-import com.javatmp.util.MD5Util;
+import com.javatmp.fw.util.MD5Util;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;

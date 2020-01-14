@@ -6,22 +6,17 @@
 package com.javatmp.activity;
 
 import com.javatmp.module.user.service.UserActivityService;
-import com.javatmp.util.ServicesFactory;
-import com.javatmp.util.Constants;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
-/**
- *
- * @author JavaTMP
- */
 public class PagesView {
 
-    public static void main(String[] args) throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    @Autowired
+    UserActivityService activityService;
 
-        ServicesFactory sf = new ServicesFactory(Constants.DEFAULT_PERSISTENT_UNIT_NAME);
-
-        UserActivityService activityService = sf.getActivityService();
+    @Test
+    void main() {
 
         List<Object[]> results = activityService.userPageViews();
 

@@ -12,8 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.CacheControl;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Slf4j
 @Controller
@@ -26,10 +34,11 @@ public class ViewUploadedFileController {
     ServletContext context;
 
     @GetMapping("/ViewUploadedFileController")
-    protected void viewDocuemntController(Document temp, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    protected @ResponseBody
+    ResponseEntity<byte[]> getDocuemnt(@RequestParam("viewType") String viewTypeTemp, Document temp) throws Exception {
 
-        log.info("Requested Document [" + (temp) + "]");
-        String viewTypeTemp = request.getParameter("viewType");
+        log.info("Requested view type is : {} , Document {}", viewTypeTemp, temp);
+
         Document document = this.documentService.getOne(temp.getDocumentId());
 
         // for nano security check if provided hash equal db one:
@@ -42,9 +51,6 @@ public class ViewUploadedFileController {
             document.setContentType("application/octet-stream");
         }
 
-        // modifies response
-        response.setContentType(document.getContentType());
-        response.setContentLength((int) document.getDocumentSize());
         // forces download
         String headerKey = "Content-Disposition";
         String viewType = "attachment";
@@ -52,12 +58,16 @@ public class ViewUploadedFileController {
             viewType = "inline";
         }
         String headerValue = String.format("%s; filename=\"%s\"", viewType, document.getDocumentName());
-        response.setHeader(headerKey, headerValue);
-//        response.setHeader("Content-Disposition", "inline; filename=\"" + file.getName() + "\"");
-// obtains response's output stream
-        OutputStream outStream = response.getOutputStream();
-        outStream.write(document.getDocumentContent());
 
+        // modifies response
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.parseMediaType(document.getContentType()));
+        headers.setContentLength(document.getDocumentSize());
+        headers.setCacheControl(CacheControl.noCache().getHeaderValue());
+        headers.setContentDisposition(ContentDisposition.parse(headerValue));
+
+        ResponseEntity<byte[]> responseEntity = new ResponseEntity<>(document.getDocumentContent(), headers, HttpStatus.OK);
+        return responseEntity;
     }
 
     @GetMapping("/FileDownloader/**")

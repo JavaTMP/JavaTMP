@@ -1,4 +1,4 @@
-package com.javatmp.util;
+package com.javatmp.fw.util;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

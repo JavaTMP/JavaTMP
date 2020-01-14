@@ -5,26 +5,25 @@
  */
 package com.javatmp.userstats;
 
-
-import com.javatmp.module.user.service.UserActivityService;
-import com.javatmp.util.ServicesFactory;
 import com.javatmp.module.user.service.UserStatsService;
-import com.javatmp.util.Constants;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 /**
  *
  * @author JavaTMP
  */
+@SpringBootTest
 public class usersstatsByCriteria {
 
-    public static void main(String[] args) throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    @Autowired
+    UserStatsService userStatsService;
 
-        ServicesFactory sf = new ServicesFactory(Constants.DEFAULT_PERSISTENT_UNIT_NAME);
-
-        UserStatsService userStatsService = sf.getUserStatsService();
+    @Test
+    public void main() {
 
         List<Object[]> results = null;
 

@@ -10,7 +10,7 @@ import com.google.gson.reflect.TypeToken;
 import com.javatmp.module.dms.entity.Document;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.entity.User_;
-import com.javatmp.util.MD5Util;
+import com.javatmp.fw.util.MD5Util;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;

@@ -9,7 +9,7 @@ import com.javatmp.module.user.service.ThemeService;
 import com.javatmp.module.user.entity.Timezonetranslation;
 import com.javatmp.module.user.service.TimezoneService;
 import com.javatmp.module.user.entity.User;
-import com.javatmp.util.Constants;
+import com.javatmp.fw.util.Constants;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;

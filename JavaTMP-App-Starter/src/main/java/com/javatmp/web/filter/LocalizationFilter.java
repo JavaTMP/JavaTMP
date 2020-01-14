@@ -1,6 +1,6 @@
 package com.javatmp.web.filter;
 
-import com.javatmp.util.Constants;
+import com.javatmp.fw.util.Constants;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;

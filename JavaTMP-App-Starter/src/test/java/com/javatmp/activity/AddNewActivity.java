@@ -7,29 +7,26 @@ package com.javatmp.activity;
 
 import com.javatmp.module.user.entity.UserActivity;
 import com.javatmp.module.user.service.UserActivityService;
-import com.javatmp.util.Constants;
-import com.javatmp.util.ServicesFactory;
-import java.io.FileNotFoundException;
-import java.text.ParseException;
 import java.util.Date;
-import java.util.TimeZone;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 /**
  *
  * @author Mohamed
  */
+@SpringBootTest
 public class AddNewActivity {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) throws ParseException, FileNotFoundException {
-        TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
-        ServicesFactory sf = new ServicesFactory(Constants.DEFAULT_PERSISTENT_UNIT_NAME);
+    @Autowired
+    UserActivityService userActivityService;
+
+    @Test
+    void contextLoads() {
         UserActivity activity = new UserActivity();
-        UserActivityService activityService = sf.getActivityService();
         activity.setCreationDate(new Date());
-//        activity.setSessionId(UUID.randomUUID().toString().replace("-", ""));
-        activityService.save(activity);
+        this.userActivityService.save(activity);
     }
+
 }

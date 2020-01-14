@@ -7,7 +7,7 @@ import com.javatmp.module.message.entity.Message;
 import com.javatmp.module.message.service.MessageService;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
-import com.javatmp.util.Constants;
+import com.javatmp.fw.util.Constants;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.HashMap;
