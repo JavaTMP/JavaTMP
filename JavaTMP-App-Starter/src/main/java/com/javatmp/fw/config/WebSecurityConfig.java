@@ -4,7 +4,6 @@ import com.javatmp.fw.util.MD5Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -52,28 +51,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                //                .headers()
-                //                .frameOptions().sameOrigin()
-                //                .and()
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/webjars/**", "/assets/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/login", "/logout", "/CaptchaImageController", "/pages/system/register").permitAll()
-                .antMatchers(HttpMethod.POST, "/login", "/logout", "/user/register").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll();
+        // Disable CSRF (cross site request forgery)
+        http.csrf().disable();
+        http.authorizeRequests().anyRequest().permitAll();
+//
+//        http
+//                //                .headers()
+//                //                .frameOptions().sameOrigin()
+//                //                .and()
+//                .csrf().disable()
+//                .authorizeRequests()
+//                .antMatchers("/**")
+//                .permitAll();
+
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-//        web.ignoring().antMatchers("/resources/**", "/static/**", "/assets/**");
+        web.ignoring().antMatchers("/**");
     }
 
 }

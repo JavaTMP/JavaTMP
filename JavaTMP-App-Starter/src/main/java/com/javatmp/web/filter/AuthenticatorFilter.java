@@ -2,9 +2,9 @@ package com.javatmp.web.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javatmp.fw.domain.ResponseMessage;
+import com.javatmp.fw.util.Constants;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
-import com.javatmp.fw.util.Constants;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
