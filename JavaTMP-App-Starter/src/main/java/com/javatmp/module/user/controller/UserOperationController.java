@@ -3,12 +3,12 @@ package com.javatmp.module.user.controller;
 import com.javatmp.fw.domain.ResponseMessage;
 import com.javatmp.fw.domain.table.DataTableRequest;
 import com.javatmp.fw.domain.table.DataTableResults;
+import com.javatmp.fw.util.Constants;
+import com.javatmp.fw.util.MD5Util;
 import com.javatmp.fw.util.Util;
 import com.javatmp.module.dms.entity.Document;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
-import com.javatmp.fw.util.Constants;
-import com.javatmp.fw.util.MD5Util;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.Date;
@@ -199,7 +199,10 @@ public class UserOperationController {
     }
 
     @PostMapping("/UpdateCompleteUserController")
-    public ResponseMessage updateCompleteUserController(User userToBeUpdated, String oldPassword, @RequestParam MultipartFile profilePicture,
+    public ResponseMessage updateCompleteUserController(
+            User userToBeUpdated,
+            String oldPassword,
+            @RequestParam(value = "profilePicture", required = false) MultipartFile profilePicture,
             HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         ResponseMessage responseMessage = new ResponseMessage();

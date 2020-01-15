@@ -30,6 +30,7 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
@@ -47,6 +48,13 @@ public class Config implements WebMvcConfigurer {
 
     @Autowired
     AuthenticatorFilter authenticatorFilter;
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/").setViewName("/index.jsp");
+        registry.addViewController("").setViewName("/index.jsp");
+//        registry.addViewController("/login").setViewName("/pages/system/default-login-page.jsp");
+    }
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
