@@ -17,7 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
  * @author Mohamed
  */
 @SpringBootTest
-public class AddNewActivity {
+public class AddNewActivityTest {
 
     @Autowired
     UserActivityService userActivityService;

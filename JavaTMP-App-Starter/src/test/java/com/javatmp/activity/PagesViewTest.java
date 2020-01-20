@@ -9,8 +9,10 @@ import com.javatmp.module.user.service.UserActivityService;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
-public class PagesView {
+@SpringBootTest
+public class PagesViewTest {
 
     @Autowired
     UserActivityService activityService;
