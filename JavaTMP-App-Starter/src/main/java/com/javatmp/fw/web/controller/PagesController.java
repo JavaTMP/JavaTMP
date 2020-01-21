@@ -1,4 +1,4 @@
-package com.javatmp.web.controller;
+package com.javatmp.fw.web.controller;
 
 import com.javatmp.module.user.entity.Countrytranslation;
 import com.javatmp.module.user.service.CountryService;

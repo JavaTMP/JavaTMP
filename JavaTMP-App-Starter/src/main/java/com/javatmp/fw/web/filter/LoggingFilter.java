@@ -1,4 +1,4 @@
-package com.javatmp.web.filter;
+package com.javatmp.fw.web.filter;
 
 import com.javatmp.module.user.entity.UserActivity;
 import com.javatmp.module.user.service.UserActivityService;

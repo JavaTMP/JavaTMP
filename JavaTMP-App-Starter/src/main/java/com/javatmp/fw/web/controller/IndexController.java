@@ -1,4 +1,4 @@
-package com.javatmp.web.controller;
+package com.javatmp.fw.web.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;

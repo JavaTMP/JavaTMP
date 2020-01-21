@@ -1,6 +1,6 @@
-package com.javatmp.web.filter;
+package com.javatmp.fw.web.filter;
 
-import com.javatmp.web.filter.util.GZIPResponseWrapper;
+import com.javatmp.fw.web.filter.util.GZIPResponseWrapper;
 import java.io.IOException;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;

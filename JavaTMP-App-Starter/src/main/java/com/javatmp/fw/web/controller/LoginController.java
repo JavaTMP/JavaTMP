@@ -1,4 +1,4 @@
-package com.javatmp.web.controller;
+package com.javatmp.fw.web.controller;
 
 import com.javatmp.fw.domain.ResponseMessage;
 import com.javatmp.fw.util.Constants;

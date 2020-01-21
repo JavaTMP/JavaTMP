@@ -1,4 +1,4 @@
-package com.javatmp.web.controller;
+package com.javatmp.fw.web.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

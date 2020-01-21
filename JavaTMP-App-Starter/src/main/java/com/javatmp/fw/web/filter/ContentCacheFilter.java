@@ -1,7 +1,7 @@
-package com.javatmp.web.filter;
+package com.javatmp.fw.web.filter;
 
-import com.javatmp.web.filter.util.CacheEntry;
-import com.javatmp.web.filter.util.CacheResponseWrapper;
+import com.javatmp.fw.web.filter.util.CacheEntry;
+import com.javatmp.fw.web.filter.util.CacheResponseWrapper;
 import java.io.*;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;

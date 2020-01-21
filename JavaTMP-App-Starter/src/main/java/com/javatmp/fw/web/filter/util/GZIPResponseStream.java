@@ -6,7 +6,7 @@
  * the book and help support the authors, development of more free code,
  * and the JSP/Servlet/J2EE community.
  */
-package com.javatmp.web.filter.util;
+package com.javatmp.fw.web.filter.util;
 
 import java.io.*;
 import java.util.zip.GZIPOutputStream;

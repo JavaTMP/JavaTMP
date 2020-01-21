@@ -1,4 +1,4 @@
-package com.javatmp.web.filter;
+package com.javatmp.fw.web.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javatmp.fw.domain.ResponseMessage;
