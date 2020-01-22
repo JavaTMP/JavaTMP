@@ -49,7 +49,7 @@
                 <th style="width: 3rem;"><p class="m-0 p-0" style="width: 3rem;">${labels['domain.user.age']}</p></th>
                 <th style="width: 12rem;"><p class="m-0 p-0" style="width: 12rem;">${labels['domain.user.email']}</p></th>
                 <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">${labels['domain.user.status']}</p></th>
-                <th style="width: 8rem;"><p class="m-0 p-0" style="width: 8rem;">${labels['domain.user.country']}</p></th>
+                <th style="width: 15rem;"><p class="m-0 p-0" style="width: 15rem;">${labels['domain.user.country']}</p></th>
                 <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">${labels['domain.user.lang']}</p></th>
                 <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">${labels['domain.user.theme']}</p></th>
                 <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">${labels['domain.user.timezone']}</p></th>
@@ -84,8 +84,8 @@
                         <option value="0">Deactivated</option>
                     </select>
                 </th>
-                <th style="width: 8rem;">
-                    <p class="m-0 p-0" style="width: 10rem;">
+                <th style="width: 16rem;">
+                    <p class="m-0 p-0" style="width: 17rem;">
                         <select id="userlist-country-filter" class="form-control">
                             <c:choose>
                                 <c:when test="${fn:length(requestScope.countries) > 0}">
@@ -344,7 +344,7 @@
                             }
                         }
                     },
-                    {data: 'countryId', name: "countryId", width: "9rem", "render": javatmp.plugins.DataTableColRenderWrapper("9rem", countriesMap)},
+                    {data: 'countryId', name: "countryId", width: "17rem", "render": javatmp.plugins.DataTableColRenderWrapper("17rem", countriesMap)},
                     {data: 'lang', name: "lang", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem", languagesMap)},
                     {data: 'theme', name: "theme", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem", themesMap)},
                     {data: 'timezone', name: "timezone", width: "11rem", "render": javatmp.plugins.DataTableColRenderWrapper("11rem", timezonesMap)},
