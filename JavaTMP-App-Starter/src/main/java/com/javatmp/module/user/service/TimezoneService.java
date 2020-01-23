@@ -39,7 +39,13 @@ public class TimezoneService {
     }
 
     public List<Timezonetranslation> getTimezones(User localeUser) {
-        return this.timezoneRepository.getTimezones(localeUser.getLang());
+        List<Timezonetranslation> timezonetranslations = this.timezoneRepository.getTimezones(localeUser.getLang());
+        timezonetranslations.forEach((row) -> {
+            Timezone current = generateTimezone(row.getTimezonetranslationPK().getTimezoneId());
+            row.setTimezone(current);
+        });
+        return timezonetranslations;
+
     }
 
 }
