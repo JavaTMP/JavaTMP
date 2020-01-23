@@ -7,11 +7,10 @@ package com.javatmp.country;
 
 import com.javatmp.module.user.entity.Countrytranslation;
 import com.javatmp.module.user.entity.CountrytranslationPK;
-import com.javatmp.module.user.service.CountryService;
-import com.javatmp.module.user.service.CountryTransalationService;
 import com.javatmp.module.user.entity.Languagetranslation;
-import com.javatmp.module.user.service.LanguageService;
 import com.javatmp.module.user.entity.User;
+import com.javatmp.module.user.service.CountryService;
+import com.javatmp.module.user.service.LanguageService;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
