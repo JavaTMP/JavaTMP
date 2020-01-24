@@ -1,6 +1,5 @@
 package com.javatmp.module.user.service;
 
-import com.javatmp.fw.data.jpa.repository.JpaRepository;
 import com.javatmp.module.user.entity.Language;
 import com.javatmp.module.user.entity.Languagetranslation;
 import com.javatmp.module.user.entity.User;
@@ -9,17 +8,20 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
+import org.springframework.data.jpa.repository.support.JpaEntityInformation;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LanguageService extends JpaRepository<Language, String> {
+public class LanguageService extends SimpleJpaRepository<Language, String> {
 
     private Map<String, List<Languagetranslation>> languages;
+    private final EntityManager em;
 
-    public LanguageService(EntityManagerFactory emf) {
-        super(Language.class, emf);
+    public LanguageService(JpaEntityInformation<Language, String> entityInformation, EntityManager entityManager) {
+        super(entityInformation, entityManager);
+        this.em = entityManager;
     }
 
     public List<Languagetranslation> getLanguages(User localeUser) {
@@ -43,54 +45,40 @@ public class LanguageService extends JpaRepository<Language, String> {
 
     public List<Languagetranslation> getLanguages() {
 
-        EntityManager em = null;
         List<Languagetranslation> retList = null;
-        try {
-            em = this.emf.createEntityManager();
-            TypedQuery<Languagetranslation> query = em.createQuery(
-                    "select new com.javatmp.module.user.entity.Languagetranslation("
-                    + "l.languageId, lt1.languagetranslationPK.langId, coalesce(lt1.languageName, lt2.languageName)"
-                    + ") from Language l "
-                    + "left outer join Languagetranslation lt1 on lt1.languagetranslationPK.languageId = l.languageId "
-                    + "left outer join Languagetranslation lt2 on (lt2.languagetranslationPK.languageId = l.languageId) "
-                    + "join Language deflan on deflan.languageId=lt2.languagetranslationPK.langId and deflan.isDefaultLang = 1 "
-                    + "", Languagetranslation.class
-            );
-            retList = query.getResultList();
-            return retList;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        TypedQuery<Languagetranslation> query = em.createQuery(
+                "select new com.javatmp.module.user.entity.Languagetranslation("
+                + "l.languageId, lt1.languagetranslationPK.langId, coalesce(lt1.languageName, lt2.languageName)"
+                + ") from Language l "
+                + "left outer join Languagetranslation lt1 on lt1.languagetranslationPK.languageId = l.languageId "
+                + "left outer join Languagetranslation lt2 on (lt2.languagetranslationPK.languageId = l.languageId) "
+                + "join Language deflan on deflan.languageId=lt2.languagetranslationPK.langId and deflan.isDefaultLang = 1 "
+                + "", Languagetranslation.class
+        );
+        retList = query.getResultList();
+        return retList;
+
     }
 
     public List<Languagetranslation> getLanguages_old(User localeUser) {
 
-        EntityManager em = null;
         List<Languagetranslation> retList = null;
-        try {
-            em = this.emf.createEntityManager();
-            TypedQuery<Languagetranslation> query = em.createQuery(
-                    "select "
-                    + "new com.javatmp.module.user.entity.Languagetranslation("
-                    + "l.languageId, lt1.languagetranslationPK.langId, coalesce(lt1.languageName, lt2.languageName)"
-                    + ") from Language l "
-                    + "left outer join Languagetranslation lt1 on "
-                    + "(lt1.languagetranslationPK.languageId = l.languageId and lt1.languagetranslationPK.langId = :la) "
-                    + "left outer join Languagetranslation lt2 "
-                    + "on (lt2.languagetranslationPK.languageId = l.languageId) "
-                    + "join Language deflan on deflan.languageId=lt2.languagetranslationPK.langId and deflan.isDefaultLang = 1 "
-                    + "", Languagetranslation.class
-            );
-            query.setParameter("la", localeUser.getLang());
-            retList = query.getResultList();
-            return retList;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        TypedQuery<Languagetranslation> query = em.createQuery(
+                "select "
+                + "new com.javatmp.module.user.entity.Languagetranslation("
+                + "l.languageId, lt1.languagetranslationPK.langId, coalesce(lt1.languageName, lt2.languageName)"
+                + ") from Language l "
+                + "left outer join Languagetranslation lt1 on "
+                + "(lt1.languagetranslationPK.languageId = l.languageId and lt1.languagetranslationPK.langId = :la) "
+                + "left outer join Languagetranslation lt2 "
+                + "on (lt2.languagetranslationPK.languageId = l.languageId) "
+                + "join Language deflan on deflan.languageId=lt2.languagetranslationPK.langId and deflan.isDefaultLang = 1 "
+                + "", Languagetranslation.class
+        );
+        query.setParameter("la", localeUser.getLang());
+        retList = query.getResultList();
+        return retList;
+
     }
 
 }

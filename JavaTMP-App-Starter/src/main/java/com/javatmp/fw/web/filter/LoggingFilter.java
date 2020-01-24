@@ -1,8 +1,8 @@
 package com.javatmp.fw.web.filter;
 
-import com.javatmp.module.user.entity.UserActivity;
-import com.javatmp.module.user.service.UserActivityService;
 import com.javatmp.module.user.entity.User;
+import com.javatmp.module.user.entity.UserActivity;
+import com.javatmp.module.user.repository.UserActivityRepository;
 import java.io.IOException;
 import java.util.Date;
 import javax.servlet.FilterChain;
@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 public class LoggingFilter extends FilterWrapper {
 
     @Autowired
-    UserActivityService activityService;
+    UserActivityRepository userActivityRepository;
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
@@ -45,7 +45,7 @@ public class LoggingFilter extends FilterWrapper {
             String url = this.getUrl(httpRequest);
             log.debug("url to be logging in db is [" + url + "]");
             activity.setActionId(url);
-            this.activityService.save(activity);
+            this.userActivityRepository.save(activity);
 
             HttpSession session = httpRequest.getSession(false);
             if (session != null) {
@@ -73,7 +73,7 @@ public class LoggingFilter extends FilterWrapper {
             log.info("URI [" + httpRequest.getRequestURI() + "]=[" + (endTime - startTime) + "] milliseconds");
 
             activity.setTimeLast(lastTime);
-            this.activityService.merge(activity);
+            this.userActivityRepository.save(activity);
         }
     }
 }

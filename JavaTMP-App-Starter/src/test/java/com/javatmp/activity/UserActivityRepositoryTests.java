@@ -5,24 +5,27 @@
  */
 package com.javatmp.activity;
 
-import com.javatmp.module.user.service.UserActivityService;
+import com.javatmp.module.user.repository.UserActivityRepository;
 import java.util.List;
+import javax.persistence.Tuple;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+@Slf4j
 @SpringBootTest
-public class PagesViewTest {
+public class UserActivityRepositoryTests {
 
     @Autowired
-    UserActivityService activityService;
+    UserActivityRepository userActivityRepository;
 
     @Test
     void main() {
 
-        List<Object[]> results = activityService.userPageViews();
+        List<Tuple> results = userActivityRepository.userPageViews();
 
-        System.out.println((results));
+        log.debug("user page views {}", results);
     }
 
 }

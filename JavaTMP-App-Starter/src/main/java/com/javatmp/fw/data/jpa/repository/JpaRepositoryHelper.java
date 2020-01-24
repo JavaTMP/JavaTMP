@@ -10,11 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.function.Consumer;
 import java.util.function.Function;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -26,133 +23,9 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
 
-public class JpaRepository<E, I> {
+public class JpaRepositoryHelper {
 
-    protected final EntityManagerFactory emf;
-    private Class<E> clazz;
-
-    public JpaRepository(Class<E> clazz, String persistentUnit) {
-        emf = Persistence.createEntityManagerFactory(persistentUnit);
-        this.clazz = clazz;
-    }
-
-    public JpaRepository(Class<E> clazz, EntityManagerFactory emf) {
-        this.emf = emf;
-        this.clazz = clazz;
-    }
-
-    public EntityManagerFactory getEntityManagerFactory() {
-        return emf;
-    }
-
-    public void save(E entity) {
-        this.transaction((EntityManager em) -> {
-            em.persist(entity);
-        });
-    }
-
-    public void merge(E entity) {
-        this.transaction((EntityManager em) -> {
-            em.merge(entity);
-        });
-    }
-
-    public E getOne(I id) {
-        return this.get((EntityManager em) -> {
-            return em.find(clazz, id);
-        });
-    }
-
-    public void delete(E entity) {
-        this.transaction((EntityManager em) -> {
-            em.remove(entity);
-        });
-    }
-
-    public List<E> findAll(int start, int count) {
-        return list((EntityManager em) -> {
-            CriteriaBuilder cb = em.getCriteriaBuilder();
-            CriteriaQuery<E> cq = cb.createQuery(clazz);
-            Root<E> from = cq.from(clazz);
-            return em.createQuery(cq.select(from))
-                    .setFirstResult(start)
-                    .setMaxResults(count)
-                    .getResultList();
-        });
-    }
-
-    public E get(Function<EntityManager, E> operation) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            E result = operation.apply(em);
-            return result;
-        } catch (Throwable t1) {
-            throw t1;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
-    }
-
-    public Long getCount(Function<EntityManager, Long> operation) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            Long result = operation.apply(em);
-            return result;
-        } catch (Throwable t1) {
-            throw t1;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
-    }
-
-    public E transaction(Function<EntityManager, E> operation) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            em.getTransaction().begin();
-            E result = operation.apply(em);
-            em.getTransaction().commit();
-            return result;
-        } catch (Throwable t1) {
-            try {
-                em.getTransaction().rollback();
-            } catch (Throwable t2) {
-                t2.initCause(t1);
-                throw t2;
-            }
-            throw t1;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
-    }
-
-    public List<E> list(Function<EntityManager, List<E>> operation) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            List<E> result = operation.apply(em);
-            return result;
-        } catch (Throwable t1) {
-            try {
-                em.getTransaction().rollback();
-            } catch (Throwable t2) {
-                t2.initCause(t1);
-                throw t2;
-            }
-            throw t1;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
-    }
-
-    public DataTableResults<E> getList(Function<EntityManager, DataTableResults<E>> operation) {
-        EntityManager em = emf.createEntityManager();
+    public static <E> DataTableResults<E> getList(Function<EntityManager, DataTableResults<E>> operation, EntityManager em) {
         try {
             return operation.apply(em);
         } catch (Throwable t1) {
@@ -170,49 +43,7 @@ public class JpaRepository<E, I> {
         }
     }
 
-    public <F> F statusTransaction(Function<EntityManager, F> operation) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            em.getTransaction().begin();
-            F result = operation.apply(em);
-            em.getTransaction().commit();
-            return result;
-        } catch (Throwable t1) {
-            try {
-                em.getTransaction().rollback();
-            } catch (Throwable t2) {
-                t2.initCause(t1);
-                throw t2;
-            }
-            throw t1;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
-    }
-
-    public void transaction(Consumer<EntityManager> operation) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            em.getTransaction().begin();
-            operation.accept(em);
-            em.getTransaction().commit();
-        } catch (Throwable t1) {
-            try {
-                em.getTransaction().rollback();
-            } catch (Throwable t2) {
-                t2.printStackTrace();
-            }
-            throw t1;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
-    }
-
-    public Path<E> convertStringToPath(Root<E> from, String strPathName) {
+    public static <E> Path<E> convertStringToPath(Root<E> from, String strPathName) {
 //        System.out.println("handling str [" + strPathName + "]");
         String[] attributes = strPathName.split("\\.");
         Path<E> retPath = from.get(attributes[0]);
@@ -257,20 +88,18 @@ public class JpaRepository<E, I> {
         return retPath;
     }
 
-    public List<Selection<?>> convertArrToPaths(Root<E> from, String[] selectList) {
+    public static <E> List<Selection<?>> convertArrToPaths(Root<E> from, String[] selectList) {
         List<Selection<?>> retLists = new LinkedList<Selection<?>>();
         for (String select : selectList) {
-            retLists.add(this.convertStringToPath(from, select));
+            retLists.add(JpaRepositoryHelper.convertStringToPath(from, select));
         }
         return retLists;
     }
 
-    public DataTableResults<E> retrievePageRequestDetails(DataTableRequest<E> page) throws ParseException {
+    public static <E> DataTableResults<E> retrievePageRequestDetails(DataTableRequest<E> page, EntityManager em) throws ParseException {
 
-        EntityManager em = null;
         List retList = null;
         try {
-            em = emf.createEntityManager();
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaQuery<E> cq = cb.createQuery(page.getClassType());
             Root<E> from = cq.from(page.getClassType());
@@ -281,7 +110,7 @@ public class JpaRepository<E, I> {
                 }
             }
 
-            cq.multiselect(this.convertArrToPaths(from, page.getSelects()));
+            cq.multiselect(JpaRepositoryHelper.convertArrToPaths(from, page.getSelects()));
 
             List<Order> orders = page.getOrder();
             if (orders != null) {
@@ -289,7 +118,7 @@ public class JpaRepository<E, I> {
                     Integer columnIndex = order.getColumn();
                     DataTableColumn orderColumn = page.getColumns().get(columnIndex);
 
-                    Path<?> sortPath = this.convertStringToPath(from, orderColumn.getData());
+                    Path<?> sortPath = JpaRepositoryHelper.convertStringToPath(from, orderColumn.getData());
                     if (order.getDir().value().equals("desc")) {
                         cq.orderBy(cb.desc(sortPath));
                     } else {
@@ -369,7 +198,7 @@ public class JpaRepository<E, I> {
         }
     }
 
-    public Predicate applyAdvanedSearchQuery(RuleOrGroup ruleOrGroup, CriteriaBuilder cb, Root<E> from) throws ParseException {
+    public static <E> Predicate applyAdvanedSearchQuery(RuleOrGroup ruleOrGroup, CriteriaBuilder cb, Root<E> from) throws ParseException {
         Predicate retPredicate = null;
         String condition = ruleOrGroup.getCondition();
         if (condition != null) {

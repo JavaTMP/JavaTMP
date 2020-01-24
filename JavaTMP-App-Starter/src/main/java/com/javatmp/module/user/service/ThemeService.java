@@ -1,6 +1,5 @@
 package com.javatmp.module.user.service;
 
-import com.javatmp.fw.data.jpa.repository.JpaRepository;
 import com.javatmp.module.user.entity.Theme;
 import com.javatmp.module.user.entity.Themetranslation;
 import com.javatmp.module.user.entity.User;
@@ -9,17 +8,20 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.TypedQuery;
+import org.springframework.data.jpa.repository.support.JpaEntityInformation;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ThemeService extends JpaRepository<Theme, String> {
+public class ThemeService extends SimpleJpaRepository<Theme, String> {
 
     private Map<String, List<Themetranslation>> themes;
+    private final EntityManager em;
 
-    public ThemeService(EntityManagerFactory emf) {
-        super(Theme.class, emf);
+    public ThemeService(JpaEntityInformation<Theme, String> entityInformation, EntityManager entityManager) {
+        super(entityInformation, entityManager);
+        this.em = entityManager;
     }
 
     public List<Themetranslation> getThemes(User localeUser) {
@@ -44,32 +46,25 @@ public class ThemeService extends JpaRepository<Theme, String> {
 
     public List<Themetranslation> getThemes() {
 
-        EntityManager em = null;
         List<Themetranslation> retList = null;
-        try {
-            em = this.emf.createEntityManager();
-            TypedQuery<Themetranslation> query = em.createQuery(
-                    "select new com.javatmp.module.user.entity.Themetranslation(t.themeId, lan.languageId, coalesce(th1.themeName, th2.themeName)) "
-                    + "from Language lan "
-                    + "join lan.languagetranslationList lanTr "
-                    + "on lanTr.languagetranslationPK.languageId = lan.languageId "
-                    + "and lanTr.languagetranslationPK.langId = lan.languageId "
-                    + "left outer join Theme t on (1=1) "
-                    + "left outer join Themetranslation th1 "
-                    + "on (t.themeId = th1.themetranslationPK.themeId and th1.themetranslationPK.langId = lan.languageId)"
-                    + "left outer join Themetranslation th2 "
-                    + "on (t.themeId = th2.themetranslationPK.themeId)"
-                    + "join Language reflan "
-                    + "on reflan.languageId = th2.themetranslationPK.langId and reflan.isDefaultLang = 1 "
-                    + "where th1.themetranslationPK.langId = lan.languageId", Themetranslation.class
-            );
-            retList = query.getResultList();
-            return retList;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        TypedQuery<Themetranslation> query = em.createQuery(
+                "select new com.javatmp.module.user.entity.Themetranslation(t.themeId, lan.languageId, coalesce(th1.themeName, th2.themeName)) "
+                + "from Language lan "
+                + "join lan.languagetranslationList lanTr "
+                + "on lanTr.languagetranslationPK.languageId = lan.languageId "
+                + "and lanTr.languagetranslationPK.langId = lan.languageId "
+                + "left outer join Theme t on (1=1) "
+                + "left outer join Themetranslation th1 "
+                + "on (t.themeId = th1.themetranslationPK.themeId and th1.themetranslationPK.langId = lan.languageId)"
+                + "left outer join Themetranslation th2 "
+                + "on (t.themeId = th2.themetranslationPK.themeId)"
+                + "join Language reflan "
+                + "on reflan.languageId = th2.themetranslationPK.langId and reflan.isDefaultLang = 1 "
+                + "where th1.themetranslationPK.langId = lan.languageId", Themetranslation.class
+        );
+        retList = query.getResultList();
+        return retList;
+
     }
 
 }
