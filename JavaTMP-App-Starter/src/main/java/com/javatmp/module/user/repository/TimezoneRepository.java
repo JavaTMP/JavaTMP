@@ -1,9 +1,9 @@
 package com.javatmp.module.user.repository;
 
+import com.javatmp.fw.data.jpa.repository.ExtendedJpaRepository;
 import com.javatmp.module.user.entity.Timezone;
 import com.javatmp.module.user.entity.Timezonetranslation;
 import java.util.List;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -11,7 +11,7 @@ import org.springframework.data.repository.query.Param;
  *
  * @author JavaTMP
  */
-public interface TimezoneRepository extends JpaRepository<Timezone, Long> {
+public interface TimezoneRepository extends ExtendedJpaRepository<Timezone, Long> {
 
     @Query("select new com.javatmp.module.user.entity.Timezonetranslation("
             + "l.timezoneId, coalesce(lt1.timezonetranslationPK.langId, lt2.timezonetranslationPK.langId) , coalesce(lt1.timezoneName, lt2.timezoneName)"

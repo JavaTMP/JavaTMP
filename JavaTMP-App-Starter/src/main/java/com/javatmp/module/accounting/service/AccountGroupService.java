@@ -5,7 +5,7 @@
  */
 package com.javatmp.module.accounting.service;
 
-import com.javatmp.fw.data.jpa.repository.JpaRepository;
+import com.javatmp.fw.data.jpa.repository.ExtendedJpaRepository;
 import com.javatmp.module.accounting.entity.AccountGroup;
 import javax.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class AccountGroupService extends JpaRepository<AccountGroup, Integer> {
+public class AccountGroupService extends ExtendedJpaRepository<AccountGroup, Integer> {
 
     private EntityManager em;
 

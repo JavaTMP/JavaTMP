@@ -5,7 +5,7 @@
  */
 package com.javatmp.module.accounting.service;
 
-import com.javatmp.fw.data.jpa.repository.JpaRepository;
+import com.javatmp.fw.data.jpa.repository.ExtendedJpaRepository;
 import com.javatmp.fw.domain.table.DataTableColumn;
 import com.javatmp.fw.domain.table.DataTableRequest;
 import com.javatmp.fw.domain.table.DataTableResults;
@@ -29,7 +29,7 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class TransactionService extends JpaRepository<Transaction, Long> {
+public class TransactionService extends ExtendedJpaRepository<Transaction, Long> {
 
     private EntityManager em;
 

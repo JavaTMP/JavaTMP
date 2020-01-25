@@ -14,7 +14,7 @@ import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LanguageService extends SimpleJpaRepository<Language, String> {
+public class LanguageService extends SimpleExtendedJpaRepository<Language, String> {
 
     private Map<String, List<Languagetranslation>> languages;
     private final EntityManager em;

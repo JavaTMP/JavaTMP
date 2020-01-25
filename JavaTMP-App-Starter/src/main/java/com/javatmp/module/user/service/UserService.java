@@ -1,6 +1,6 @@
 package com.javatmp.module.user.service;
 
-import com.javatmp.fw.data.jpa.repository.JpaRepository;
+import com.javatmp.fw.data.jpa.repository.ExtendedJpaRepository;
 import com.javatmp.fw.domain.table.DataTableColumn;
 import com.javatmp.fw.domain.table.DataTableRequest;
 import com.javatmp.fw.domain.table.DataTableResults;
@@ -39,7 +39,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
-public class UserService extends JpaRepository<User, Long> {
+public class UserService extends ExtendedJpaRepository<User, Long> {
 
     private UserRepository userRepository;
     private EntityManager em;

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class EventService extends SimpleJpaRepository<Event, Long> {
+public class EventService extends SimpleExtendedJpaRepository<Event, Long> {
 
     private EntityManager em;
 

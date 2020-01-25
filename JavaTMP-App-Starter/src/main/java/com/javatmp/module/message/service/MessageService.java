@@ -1,6 +1,6 @@
 package com.javatmp.module.message.service;
 
-import com.javatmp.fw.data.jpa.repository.JpaRepository;
+import com.javatmp.fw.data.jpa.repository.ExtendedJpaRepository;
 import com.javatmp.fw.domain.table.DataTableRequest;
 import com.javatmp.fw.domain.table.DataTableResults;
 import com.javatmp.module.message.entity.Message;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class MessageService extends JpaRepository<Message, Long> {
+public class MessageService extends ExtendedJpaRepository<Message, Long> {
 
     private UserService userService;
     private EntityManager em;

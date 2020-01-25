@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class UserActivityService extends SimpleJpaRepository<UserActivity, Long> {
+public class UserActivityService extends SimpleExtendedJpaRepository<UserActivity, Long> {
 
     private UserActivityRepository userActivityRepository;
 

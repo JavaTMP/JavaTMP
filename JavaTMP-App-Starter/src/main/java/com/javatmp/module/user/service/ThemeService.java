@@ -14,7 +14,7 @@ import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ThemeService extends SimpleJpaRepository<Theme, String> {
+public class ThemeService extends SimpleExtendedJpaRepository<Theme, String> {
 
     private Map<String, List<Themetranslation>> themes;
     private final EntityManager em;

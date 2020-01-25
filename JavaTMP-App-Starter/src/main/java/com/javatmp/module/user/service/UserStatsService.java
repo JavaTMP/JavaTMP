@@ -24,7 +24,7 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class UserStatsService extends SimpleJpaRepository<Object[], Long> {
+public class UserStatsService extends SimpleExtendedJpaRepository<Object[], Long> {
 
     private EntityManager em;
 

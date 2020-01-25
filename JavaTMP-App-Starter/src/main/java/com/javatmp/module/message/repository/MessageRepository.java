@@ -1,8 +1,8 @@
 package com.javatmp.module.message.repository;
 
 import com.javatmp.module.message.entity.Message;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.ExtendedJpaRepository;
 
-public interface MessageRepository extends JpaRepository<Message, Long> {
+public interface MessageRepository extends ExtendedJpaRepository<Message, Long> {
 
 }

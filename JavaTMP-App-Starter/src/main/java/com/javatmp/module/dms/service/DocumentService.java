@@ -1,6 +1,6 @@
 package com.javatmp.module.dms.service;
 
-import com.javatmp.fw.data.jpa.repository.JpaRepository;
+import com.javatmp.fw.data.jpa.repository.ExtendedJpaRepository;
 import com.javatmp.fw.domain.table.DataTableRequest;
 import com.javatmp.fw.domain.table.DataTableResults;
 import com.javatmp.module.dms.entity.Document;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class DocumentService extends JpaRepository<Document, Long> {
+public class DocumentService extends ExtendedJpaRepository<Document, Long> {
 
     private EntityManager em;
 

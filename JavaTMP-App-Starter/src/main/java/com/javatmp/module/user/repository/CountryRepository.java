@@ -1,9 +1,9 @@
 package com.javatmp.module.user.repository;
 
+import com.javatmp.fw.data.jpa.repository.ExtendedJpaRepository;
 import com.javatmp.module.user.entity.Country;
 import com.javatmp.module.user.entity.Countrytranslation;
 import java.util.List;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -11,7 +11,7 @@ import org.springframework.data.repository.query.Param;
  *
  * @author JavaTMP
  */
-public interface CountryRepository extends JpaRepository<Country, Long> {
+public interface CountryRepository extends ExtendedJpaRepository<Country, Long> {
 
     @Query("select  new com.javatmp.module.user.entity.Countrytranslation("
             + "l.countryId, coalesce(lt1.countrytranslationPK.langId, lt2.countrytranslationPK.langId) , coalesce(lt1.countryName, lt2.countryName)"

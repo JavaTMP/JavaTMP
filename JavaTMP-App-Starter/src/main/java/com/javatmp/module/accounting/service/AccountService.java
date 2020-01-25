@@ -5,7 +5,7 @@
  */
 package com.javatmp.module.accounting.service;
 
-import com.javatmp.fw.data.jpa.repository.JpaRepository;
+import com.javatmp.fw.data.jpa.repository.ExtendedJpaRepository;
 import com.javatmp.module.accounting.entity.Account;
 import com.javatmp.module.accounting.entity.AccountTransaction;
 import com.javatmp.module.accounting.entity.Account_;
@@ -25,7 +25,7 @@ import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class AccountService extends JpaRepository<Account, Long> {
+public class AccountService extends ExtendedJpaRepository<Account, Long> {
 
     private EntityManager em;
 
