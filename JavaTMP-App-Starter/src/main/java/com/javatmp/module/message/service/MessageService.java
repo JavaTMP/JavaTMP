@@ -7,8 +7,9 @@ import com.javatmp.module.message.entity.Message;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
 import java.text.ParseException;
-import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -16,9 +17,12 @@ import org.springframework.stereotype.Service;
 public class MessageService extends JpaRepository<Message, Long> {
 
     private UserService userService;
+    private EntityManager em;
 
-    public MessageService(EntityManagerFactory emf, UserService userService) {
-        super(Message.class, emf);
+    public MessageService(UserService userService,
+            JpaEntityInformation<Message, Long> entityInformation, EntityManager entityManager) {
+        super(entityInformation, entityManager);
+        this.em = entityManager;
         this.userService = userService;
     }
 

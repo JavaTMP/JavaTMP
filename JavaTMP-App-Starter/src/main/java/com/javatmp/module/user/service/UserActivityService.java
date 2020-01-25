@@ -4,7 +4,6 @@ import com.javatmp.module.user.entity.UserActivity;
 import com.javatmp.module.user.repository.UserActivityRepository;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import javax.persistence.Tuple;
 import lombok.extern.slf4j.Slf4j;
@@ -38,53 +37,19 @@ public class UserActivityService extends SimpleJpaRepository<UserActivity, Long>
     }
 
     public List userPageViewsActivitiesPerHour() {
-        EntityManager em = null;
-        try {
-            em = this.emf.createEntityManager();
-            Query query = em.createQuery(
-                    "SELECT HOUR(e.creationDate) , count(*) FROM UserActivity e group by HOUR(e.creationDate)");
-            List resultList = query.getResultList();
-            return resultList;
-        } catch (PersistenceException e) {
-            Throwable t = e;
-            String lastMsg = e.getMessage();
-            while (t != null) {
-                System.out.println("type [" + t.getClass().getName() + "]");
-                System.out.println("e [" + t.getMessage() + "]");
-                lastMsg = t.getMessage();
-                t = t.getCause();
-            }
-            throw new PersistenceException(lastMsg, e);
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        Query query = em.createQuery(
+                "SELECT HOUR(e.creationDate) , count(*) FROM UserActivity e group by HOUR(e.creationDate)");
+        List resultList = query.getResultList();
+        return resultList;
+
     }
 
     public List avgPagesLoadTimePerHour() {
-        EntityManager em = null;
-        try {
-            em = this.emf.createEntityManager();
-            Query query = em.createQuery(
-                    "SELECT HOUR(e.creationDate) , avg(e.timeLast) FROM UserActivity e group by HOUR(e.creationDate)");
-            List resultList = query.getResultList();
-            return resultList;
-        } catch (PersistenceException e) {
-            Throwable t = e;
-            String lastMsg = e.getMessage();
-            while (t != null) {
-                System.out.println("type [" + t.getClass().getName() + "]");
-                System.out.println("e [" + t.getMessage() + "]");
-                lastMsg = t.getMessage();
-                t = t.getCause();
-            }
-            throw new PersistenceException(lastMsg, e);
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        Query query = em.createQuery(
+                "SELECT HOUR(e.creationDate) , avg(e.timeLast) FROM UserActivity e group by HOUR(e.creationDate)");
+        List resultList = query.getResultList();
+        return resultList;
+
     }
 
 }

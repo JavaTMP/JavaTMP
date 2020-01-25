@@ -1,20 +1,24 @@
 package com.javatmp.module.event.service;
 
-import com.javatmp.fw.data.jpa.repository.JpaRepository;
 import com.javatmp.module.event.entity.Event;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.ThreadLocalRandom;
-import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.jpa.repository.support.JpaEntityInformation;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class EventService extends JpaRepository<Event, Long> {
+public class EventService extends SimpleJpaRepository<Event, Long> {
 
-    public EventService(EntityManagerFactory emf) {
-        super(Event.class, emf);
+    private EntityManager em;
+
+    public EventService(JpaEntityInformation<Event, Long> entityInformation, EntityManager entityManager) {
+        super(entityInformation, entityManager);
+        this.em = entityManager;
     }
 
     public void initialiseDiary() {

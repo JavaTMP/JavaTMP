@@ -26,8 +26,8 @@ public class AccountPageController {
 
     @GetMapping(value = "/accounting/AddNewAccountPopup")
     public String AddNewAccountPopup(Model model) {
-        List<Account> accounts = accountService.findAll(0, Integer.MAX_VALUE);
-        List<AccountGroup> accountGroups = accountGroupService.findAll(0, Integer.MAX_VALUE);
+        List<Account> accounts = accountService.findAll();
+        List<AccountGroup> accountGroups = accountGroupService.findAll();
         model.addAttribute("accounts", accounts);
         model.addAttribute("accountGroups", accountGroups);
         return "/pages/accounting/addNewAccountPopup.jsp";
@@ -40,8 +40,8 @@ public class AccountPageController {
         log.info("DB account to be Updated is [" + (dbAccount) + "]");
 
         log.debug("loged in user is {}", user);
-        List<Account> accounts = accountService.findAll(0, Integer.MAX_VALUE);
-        List<AccountGroup> accountGroups = accountGroupService.findAll(0, Integer.MAX_VALUE);
+        List<Account> accounts = accountService.findAll();
+        List<AccountGroup> accountGroups = accountGroupService.findAll();
         model.addAttribute("accounts", accounts);
         model.addAttribute("accountGroups", accountGroups);
         model.addAttribute("account", dbAccount);

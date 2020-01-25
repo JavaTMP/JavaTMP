@@ -10,7 +10,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.function.Function;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -22,28 +21,19 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
+import org.springframework.data.jpa.repository.support.JpaEntityInformation;
+import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 
-public class JpaRepositoryHelper {
+public class JpaRepository<E, ID> extends SimpleJpaRepository<E, ID> {
 
-    public static <E> DataTableResults<E> getList(Function<EntityManager, DataTableResults<E>> operation, EntityManager em) {
-        try {
-            return operation.apply(em);
-        } catch (Throwable t1) {
-            try {
-                em.getTransaction().rollback();
-            } catch (Throwable t2) {
-                t2.initCause(t1);
-                throw t2;
-            }
-            throw t1;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+    EntityManager em;
+
+    public JpaRepository(JpaEntityInformation<E, ID> entityInformation, EntityManager entityManager) {
+        super(entityInformation, entityManager);
+        this.em = entityManager;
     }
 
-    public static <E> Path<E> convertStringToPath(Root<E> from, String strPathName) {
+    public Path<E> convertStringToPath(Root<E> from, String strPathName) {
 //        System.out.println("handling str [" + strPathName + "]");
         String[] attributes = strPathName.split("\\.");
         Path<E> retPath = from.get(attributes[0]);
@@ -88,15 +78,15 @@ public class JpaRepositoryHelper {
         return retPath;
     }
 
-    public static <E> List<Selection<?>> convertArrToPaths(Root<E> from, String[] selectList) {
+    public List<Selection<?>> convertArrToPaths(Root<E> from, String[] selectList) {
         List<Selection<?>> retLists = new LinkedList<Selection<?>>();
         for (String select : selectList) {
-            retLists.add(JpaRepositoryHelper.convertStringToPath(from, select));
+            retLists.add(this.convertStringToPath(from, select));
         }
         return retLists;
     }
 
-    public static <E> DataTableResults<E> retrievePageRequestDetails(DataTableRequest<E> page, EntityManager em) throws ParseException {
+    public DataTableResults<E> retrievePageRequestDetails(DataTableRequest<E> page) throws ParseException {
 
         List retList = null;
         try {
@@ -110,7 +100,7 @@ public class JpaRepositoryHelper {
                 }
             }
 
-            cq.multiselect(JpaRepositoryHelper.convertArrToPaths(from, page.getSelects()));
+            cq.multiselect(this.convertArrToPaths(from, page.getSelects()));
 
             List<Order> orders = page.getOrder();
             if (orders != null) {
@@ -118,7 +108,7 @@ public class JpaRepositoryHelper {
                     Integer columnIndex = order.getColumn();
                     DataTableColumn orderColumn = page.getColumns().get(columnIndex);
 
-                    Path<?> sortPath = JpaRepositoryHelper.convertStringToPath(from, orderColumn.getData());
+                    Path<?> sortPath = this.convertStringToPath(from, orderColumn.getData());
                     if (order.getDir().value().equals("desc")) {
                         cq.orderBy(cb.desc(sortPath));
                     } else {
@@ -198,7 +188,7 @@ public class JpaRepositoryHelper {
         }
     }
 
-    public static <E> Predicate applyAdvanedSearchQuery(RuleOrGroup ruleOrGroup, CriteriaBuilder cb, Root<E> from) throws ParseException {
+    public Predicate applyAdvanedSearchQuery(RuleOrGroup ruleOrGroup, CriteriaBuilder cb, Root<E> from) throws ParseException {
         Predicate retPredicate = null;
         String condition = ruleOrGroup.getCondition();
         if (condition != null) {

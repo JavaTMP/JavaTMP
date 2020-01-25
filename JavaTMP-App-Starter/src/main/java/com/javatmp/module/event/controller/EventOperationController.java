@@ -56,7 +56,7 @@ public class EventOperationController {
         dbEvent.setTitle(event.getTitle());
         dbEvent.setStartDate(event.getStartDate());
         dbEvent.setEndDate(event.getEndDate());
-        eventService.merge(event);
+        eventService.save(event);
         responseMessage.setOverAllStatus(true);
         responseMessage.setMessage("event update successfully");
         return responseMessage;
@@ -74,7 +74,7 @@ public class EventOperationController {
 
     @GetMapping("/getDiaryEvents")
     public List<Event> getDiaryEvents() {
-        List<Event> diaryEvents = this.eventService.findAll(0, Integer.MAX_VALUE);
+        List<Event> diaryEvents = this.eventService.findAll();
         return diaryEvents;
     }
 

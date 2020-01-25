@@ -5,16 +5,20 @@ import com.javatmp.fw.domain.table.DataTableRequest;
 import com.javatmp.fw.domain.table.DataTableResults;
 import com.javatmp.module.dms.entity.Document;
 import java.text.ParseException;
-import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
 public class DocumentService extends JpaRepository<Document, Long> {
 
-    public DocumentService(EntityManagerFactory emf) {
-        super(Document.class, emf);
+    private EntityManager em;
+
+    public DocumentService(JpaEntityInformation<Document, Long> entityInformation, EntityManager entityManager) {
+        super(entityInformation, entityManager);
+        this.em = entityManager;
     }
 
     public DataTableResults<Document> getAllDocuments(DataTableRequest<Document> page) throws ParseException {

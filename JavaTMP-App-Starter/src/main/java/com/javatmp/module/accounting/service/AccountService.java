@@ -13,216 +13,173 @@ import com.javatmp.module.accounting.entity.Transaction;
 import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.LockModeType;
-import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
 public class AccountService extends JpaRepository<Account, Long> {
 
-    public AccountService(EntityManagerFactory emf) {
-        super(Account.class, emf);
+    private EntityManager em;
+
+    public AccountService(JpaEntityInformation<Account, Long> entityInformation, EntityManager em) {
+        super(entityInformation, em);
+        this.em = em;
     }
 
     public List<Account> getChartOfAccounts() {
-        EntityManager em = null;
         List<Account> retList = null;
-        try {
-            em = this.emf.createEntityManager();
-            TypedQuery<Account> query = em.createQuery(
-                    "select new com.javatmp.module.accounting.entity.Account("
-                    + "acct.id, acct.accountCode, acct.name, acct.parentAccountId, "
-                    + "sum(case when att.amount > 0 then att.amount else 0 end),"
-                    + "sum(case when att.amount < 0 then (att.amount * -1) else 0 end), "
-                    + "sum(case when coalesce(att.amount, 0) > 0 then (abs(coalesce(att.amount, 0)) * coalesce(at.debitSign, 0)) "
-                    + "else (abs(coalesce(att.amount, 0)) * coalesce(at.creditSign, 0)) end), "
-                    + "acct.accountGroupId, acct.cashFlowId, ag.name, at.name, at.debitSign, at.creditSign, at.reportTypeId)"
-                    + " from Account acct"
-                    + " left outer join AccountTransaction att on acct.id = att.accountId"
-                    + " left outer join Transaction trans on att.transactionId = trans.id"
-                    + " left outer join AccountGroup ag on acct.accountGroupId = ag.id"
-                    + " left outer join AccountType at on at.id = ag.accountType"
-                    + " group by acct.id, acct.accountCode, acct.name, acct.parentAccountId, acct.accountGroupId,"
-                    + "acct.cashFlowId, ag.name, at.name, at.debitSign, at.creditSign, at.reportTypeId"
-                    + "", Account.class
-            );
-            retList = query.getResultList();
-            return retList;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        TypedQuery<Account> query = em.createQuery(
+                "select new com.javatmp.module.accounting.entity.Account("
+                + "acct.id, acct.accountCode, acct.name, acct.parentAccountId, "
+                + "sum(case when att.amount > 0 then att.amount else 0 end),"
+                + "sum(case when att.amount < 0 then (att.amount * -1) else 0 end), "
+                + "sum(case when coalesce(att.amount, 0) > 0 then (abs(coalesce(att.amount, 0)) * coalesce(at.debitSign, 0)) "
+                + "else (abs(coalesce(att.amount, 0)) * coalesce(at.creditSign, 0)) end), "
+                + "acct.accountGroupId, acct.cashFlowId, ag.name, at.name, at.debitSign, at.creditSign, at.reportTypeId)"
+                + " from Account acct"
+                + " left outer join AccountTransaction att on acct.id = att.accountId"
+                + " left outer join Transaction trans on att.transactionId = trans.id"
+                + " left outer join AccountGroup ag on acct.accountGroupId = ag.id"
+                + " left outer join AccountType at on at.id = ag.accountType"
+                + " group by acct.id, acct.accountCode, acct.name, acct.parentAccountId, acct.accountGroupId,"
+                + "acct.cashFlowId, ag.name, at.name, at.debitSign, at.creditSign, at.reportTypeId"
+                + "", Account.class
+        );
+        retList = query.getResultList();
+        return retList;
     }
 
     public List<Account> getChartOfAccountsReport(Integer reportTypeId) {
-        EntityManager em = null;
         List<Account> retList = null;
-        try {
-            em = this.emf.createEntityManager();
-            TypedQuery<Account> query = em.createQuery(
-                    "select new com.javatmp.module.accounting.entity.Account("
-                    + "acct.id, acct.accountCode, acct.name, acct.parentAccountId, "
-                    + "sum(case when att.amount > 0 then att.amount else 0 end),"
-                    + "sum(case when att.amount < 0 then (att.amount * -1) else 0 end), "
-                    + "sum(case when coalesce(att.amount, 0) > 0 then (abs(coalesce(att.amount, 0)) * coalesce(at.debitSign, 0)) "
-                    + "else (abs(coalesce(att.amount, 0)) * coalesce(at.creditSign, 0)) end), "
-                    + "acct.accountGroupId, acct.cashFlowId, ag.name, at.name, at.debitSign, at.creditSign, at.reportTypeId)"
-                    + " from Account acct"
-                    + " left outer join AccountTransaction att on acct.id = att.accountId"
-                    + " left outer join Transaction trans on att.transactionId = trans.id"
-                    + " left outer join AccountGroup ag on acct.accountGroupId = ag.id"
-                    + " left outer join AccountType at on at.id = ag.accountType"
-                    + " where at.reportTypeId = :reportTypeId "
-                    + " group by acct.id, acct.accountCode, acct.name, acct.parentAccountId, acct.accountGroupId,"
-                    + " acct.cashFlowId, ag.name, at.name, at.debitSign, at.creditSign, at.reportTypeId"
-                    + " order by at.id, ag.id"
-                    + "", Account.class
-            );
+        TypedQuery<Account> query = em.createQuery(
+                "select new com.javatmp.module.accounting.entity.Account("
+                + "acct.id, acct.accountCode, acct.name, acct.parentAccountId, "
+                + "sum(case when att.amount > 0 then att.amount else 0 end),"
+                + "sum(case when att.amount < 0 then (att.amount * -1) else 0 end), "
+                + "sum(case when coalesce(att.amount, 0) > 0 then (abs(coalesce(att.amount, 0)) * coalesce(at.debitSign, 0)) "
+                + "else (abs(coalesce(att.amount, 0)) * coalesce(at.creditSign, 0)) end), "
+                + "acct.accountGroupId, acct.cashFlowId, ag.name, at.name, at.debitSign, at.creditSign, at.reportTypeId)"
+                + " from Account acct"
+                + " left outer join AccountTransaction att on acct.id = att.accountId"
+                + " left outer join Transaction trans on att.transactionId = trans.id"
+                + " left outer join AccountGroup ag on acct.accountGroupId = ag.id"
+                + " left outer join AccountType at on at.id = ag.accountType"
+                + " where at.reportTypeId = :reportTypeId "
+                + " group by acct.id, acct.accountCode, acct.name, acct.parentAccountId, acct.accountGroupId,"
+                + " acct.cashFlowId, ag.name, at.name, at.debitSign, at.creditSign, at.reportTypeId"
+                + " order by at.id, ag.id"
+                + "", Account.class
+        );
 
-            query.setParameter("reportTypeId", reportTypeId);
+        query.setParameter("reportTypeId", reportTypeId);
 
-            retList = query.getResultList();
-            return retList;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        retList = query.getResultList();
+        return retList;
+
     }
 
     public List<Account> getGeneralLedgerAccounts() {
-        EntityManager em = null;
         List<Account> retList = null;
-        try {
-            em = this.emf.createEntityManager();
-            TypedQuery<Account> query = em.createQuery(
-                    "select new com.javatmp.module.accounting.entity.Account("
-                    + " acct.id, acct.accountCode, acct.name, acct.parentAccountId, "
-                    + " sum(case when att.amount > 0 then att.amount else 0 end),"
-                    + " sum(case when att.amount < 0 then (att.amount * -1) else 0 end), "
-                    + " sum(case when coalesce(att.amount, 0) > 0 then (abs(coalesce(att.amount, 0)) * coalesce(at.debitSign, 0)) "
-                    + "else (abs(coalesce(att.amount, 0)) * coalesce(at.creditSign, 0)) end), "
-                    + " acct.accountGroupId, acct.cashFlowId, ag.name, at.name, at.debitSign, at.creditSign, at.reportTypeId)"
-                    + " from Account acct"
-                    + " left outer join AccountTransaction att on acct.id = att.accountId"
-                    + " left outer join Transaction trans on att.transactionId = trans.id"
-                    + " left outer join AccountGroup ag on acct.accountGroupId = ag.id"
-                    + " left outer join AccountType at on at.id = ag.accountType"
-                    + " where acct.id not in (select parentAcct.parentAccountId"
-                    + " from Account parentAcct where parentAcct.parentAccountId is not null)"
-                    + " group by acct.id, acct.accountCode, acct.name, acct.parentAccountId, acct.accountGroupId,"
-                    + " acct.cashFlowId, ag.name, at.name, at.debitSign, at.creditSign, at.reportTypeId"
-                    + " order by at.id, ag.id, acct.id"
-                    + "", Account.class
-            );
-            retList = query.getResultList();
-            return retList;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        TypedQuery<Account> query = em.createQuery(
+                "select new com.javatmp.module.accounting.entity.Account("
+                + " acct.id, acct.accountCode, acct.name, acct.parentAccountId, "
+                + " sum(case when att.amount > 0 then att.amount else 0 end),"
+                + " sum(case when att.amount < 0 then (att.amount * -1) else 0 end), "
+                + " sum(case when coalesce(att.amount, 0) > 0 then (abs(coalesce(att.amount, 0)) * coalesce(at.debitSign, 0)) "
+                + "else (abs(coalesce(att.amount, 0)) * coalesce(at.creditSign, 0)) end), "
+                + " acct.accountGroupId, acct.cashFlowId, ag.name, at.name, at.debitSign, at.creditSign, at.reportTypeId)"
+                + " from Account acct"
+                + " left outer join AccountTransaction att on acct.id = att.accountId"
+                + " left outer join Transaction trans on att.transactionId = trans.id"
+                + " left outer join AccountGroup ag on acct.accountGroupId = ag.id"
+                + " left outer join AccountType at on at.id = ag.accountType"
+                + " where acct.id not in (select parentAcct.parentAccountId"
+                + " from Account parentAcct where parentAcct.parentAccountId is not null)"
+                + " group by acct.id, acct.accountCode, acct.name, acct.parentAccountId, acct.accountGroupId,"
+                + " acct.cashFlowId, ag.name, at.name, at.debitSign, at.creditSign, at.reportTypeId"
+                + " order by at.id, ag.id, acct.id"
+                + "", Account.class
+        );
+        retList = query.getResultList();
+        return retList;
+
     }
 
     public Transaction createNewTransaction(Transaction transaction) {
 
-        EntityManager em = null;
-        try {
-            em = this.emf.createEntityManager();
-            em.getTransaction().begin();
-            em.persist(transaction);
-            if (transaction.getAccounttransactionList() != null) {
-                for (AccountTransaction trans : transaction.getAccounttransactionList()) {
-                    trans.setTransactionId(transaction.getId());
-                    trans.setStatus((short) 1);
-                    System.out.println("debit is [" + trans.getDebit() + "] , credit is [" + trans.getCredit() + "]");
-                    if (trans.getDebit() != null && trans.getDebit().compareTo(BigDecimal.ZERO) > 0) {
-                        trans.setAmount(trans.getDebit());
-                    } else if (trans.getCredit() != null && trans.getCredit().compareTo(BigDecimal.ZERO) > 0) {
-                        trans.setAmount(trans.getCredit().negate());
-                    } else {
-                        // throw exception or set amount to zero:
-                        trans.setAmount(BigDecimal.ZERO);
-                    }
-                    System.out.println("Trans is [" + (trans) + "]");
-                    em.persist(trans);
+        em.getTransaction().begin();
+        em.persist(transaction);
+        if (transaction.getAccounttransactionList() != null) {
+            for (AccountTransaction trans : transaction.getAccounttransactionList()) {
+                trans.setTransactionId(transaction.getId());
+                trans.setStatus((short) 1);
+                System.out.println("debit is [" + trans.getDebit() + "] , credit is [" + trans.getCredit() + "]");
+                if (trans.getDebit() != null && trans.getDebit().compareTo(BigDecimal.ZERO) > 0) {
+                    trans.setAmount(trans.getDebit());
+                } else if (trans.getCredit() != null && trans.getCredit().compareTo(BigDecimal.ZERO) > 0) {
+                    trans.setAmount(trans.getCredit().negate());
+                } else {
+                    // throw exception or set amount to zero:
+                    trans.setAmount(BigDecimal.ZERO);
                 }
+                System.out.println("Trans is [" + (trans) + "]");
+                em.persist(trans);
             }
-
-            em.getTransaction().commit();
-        } catch (PersistenceException e) {
-            if (em != null) {
-                em.getTransaction().rollback();
-            }
-            throw e;
         }
+
+        em.getTransaction().commit();
+
         return transaction;
     }
 
     public int deleteAccount(Account account) {
         int deletedStatus = 0;
-        EntityManager em = null;
-        try {
-            em = this.emf.createEntityManager();
-            em.getTransaction().begin();
-            CriteriaBuilder cb = em.getCriteriaBuilder();
-            CriteriaQuery<Account> cq = cb.createQuery(Account.class);
-            Root<Account> from = cq.from(Account.class);
-            cq.multiselect(from.get(Account_.id));
-            cq.where(cb.equal(from.get(Account_.id), account.getId()));
-            TypedQuery<Account> query = em.createQuery(cq);
-            query.setLockMode(LockModeType.PESSIMISTIC_WRITE);
-            Account dbAccount = query.getSingleResult();
-            // here you can check for any pre delete code:
+        em.getTransaction().begin();
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Account> cq = cb.createQuery(Account.class);
+        Root<Account> from = cq.from(Account.class);
+        cq.multiselect(from.get(Account_.id));
+        cq.where(cb.equal(from.get(Account_.id), account.getId()));
+        TypedQuery<Account> query = em.createQuery(cq);
+        query.setLockMode(LockModeType.PESSIMISTIC_WRITE);
+        Account dbAccount = query.getSingleResult();
+        // here you can check for any pre delete code:
 
-            // delete user first:
-            CriteriaDelete<Account> deleteAccount = cb.createCriteriaDelete(Account.class);
-            Root<Account> userRoot = deleteAccount.from(Account.class);
-            deleteAccount.where(cb.equal(userRoot.get(Account_.id), account.getId()));
-            deletedStatus = em.createQuery(deleteAccount).executeUpdate();
+        // delete user first:
+        CriteriaDelete<Account> deleteAccount = cb.createCriteriaDelete(Account.class);
+        Root<Account> userRoot = deleteAccount.from(Account.class);
+        deleteAccount.where(cb.equal(userRoot.get(Account_.id), account.getId()));
+        deletedStatus = em.createQuery(deleteAccount).executeUpdate();
 
-            // delete document second if user deleted:
-            em.getTransaction().commit();
-            return deletedStatus;
-        } catch (PersistenceException e) {
-            if (em != null) {
-                em.getTransaction().rollback();
-            }
-            throw e;
-        }
+        // delete document second if user deleted:
+        em.getTransaction().commit();
+        return deletedStatus;
+
     }
 
     public Account readAccountById(Account account) {
 
-        EntityManager em = null;
-        try {
-            em = this.emf.createEntityManager();
-            CriteriaBuilder cb = em.getCriteriaBuilder();
-            CriteriaQuery<Account> cq = cb.createQuery(Account.class);
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Account> cq = cb.createQuery(Account.class);
 
-            Root<Account> from = cq.from(Account.class);
+        Root<Account> from = cq.from(Account.class);
 
-            cq.multiselect(from.get(Account_.id), from.get(Account_.accountCode), from.get(Account_.name), from.get(Account_.description),
-                    from.get(Account_.debit), from.get(Account_.credit), from.get(Account_.balance), from.get(Account_.status),
-                    from.get(Account_.creationDate), from.get(Account_.accountGroupId), from.get(Account_.parentAccountId), from.get(Account_.cashFlowId));
-            cq.where(cb.equal(from.get(Account_.id), account.getId()));
-            TypedQuery<Account> query = em.createQuery(cq);
-            account = query.getSingleResult();
-            return account;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        cq.multiselect(from.get(Account_.id), from.get(Account_.accountCode), from.get(Account_.name), from.get(Account_.description),
+                from.get(Account_.debit), from.get(Account_.credit), from.get(Account_.balance), from.get(Account_.status),
+                from.get(Account_.creationDate), from.get(Account_.accountGroupId), from.get(Account_.parentAccountId), from.get(Account_.cashFlowId));
+        cq.where(cb.equal(from.get(Account_.id), account.getId()));
+        TypedQuery<Account> query = em.createQuery(cq);
+        account = query.getSingleResult();
+        return account;
+
     }
 
     public List<Account> getLeafAccounts() {
@@ -235,88 +192,66 @@ public class AccountService extends JpaRepository<Account, Long> {
     on x.empno = y.mgr
  where y.mgr is null
          */
-        EntityManager em = null;
         List<Account> retList = null;
-        try {
-            em = this.emf.createEntityManager();
-            TypedQuery<Account> query = em.createQuery(
-                    "select new com.javatmp.module.accounting.entity.Account("
-                    + "acct.id, acct.accountCode, acct.name, acct.accountGroupId)"
-                    + " from Account acct where acct.id not in (select parentAcct.parentAccountId"
-                    + " from Account parentAcct where parentAcct.parentAccountId is not null)"
-                    + "", Account.class
-            );
-            retList = query.getResultList();
-            return retList;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        TypedQuery<Account> query = em.createQuery(
+                "select new com.javatmp.module.accounting.entity.Account("
+                + "acct.id, acct.accountCode, acct.name, acct.accountGroupId)"
+                + " from Account acct where acct.id not in (select parentAcct.parentAccountId"
+                + " from Account parentAcct where parentAcct.parentAccountId is not null)"
+                + "", Account.class
+        );
+        retList = query.getResultList();
+        return retList;
+
     }
 
     public List<Account> getLeafAccountsForTrialBalance() {
-        EntityManager em = null;
         List<Account> retList = null;
-        try {
-            em = this.emf.createEntityManager();
-            TypedQuery<Account> query = em.createQuery(
-                    "select new com.javatmp.module.accounting.entity.Account("
-                    + "acct.id, acct.accountCode, acct.name, acct.parentAccountId, "
-                    + "sum(case when att.amount > 0 then att.amount else 0 end),"
-                    + "sum(case when att.amount < 0 then (att.amount * -1) else 0 end), "
-                    + "sum(case when coalesce(att.amount, 0) > 0 then (abs(coalesce(att.amount, 0)) * coalesce(at.debitSign, 0)) else (abs(coalesce(att.amount, 0)) * coalesce(at.creditSign, 0)) end), "
-                    + "acct.accountGroupId, acct.cashFlowId, ag.name, at.name, at.debitSign, at.creditSign, at.reportTypeId)"
-                    + " from Account acct "
-                    + " left outer join AccountTransaction att on acct.id = att.accountId"
-                    + " left outer join Transaction trans on att.transactionId = trans.id"
-                    + " left outer join AccountGroup ag on acct.accountGroupId = ag.id"
-                    + " left outer join AccountType at on at.id = ag.accountType"
-                    + " where acct.id not in (select parentAcct.parentAccountId"
-                    + " from Account parentAcct where parentAcct.parentAccountId is not null)"
-                    + " group by acct.id, acct.accountCode, acct.name, acct.parentAccountId, acct.accountGroupId,"
-                    + " acct.cashFlowId, ag.name, at.name, at.debitSign, at.creditSign, at.reportTypeId"
-                    + " order by at.id, ag.id, acct.id"
-                    + "", Account.class
-            );
-            retList = query.getResultList();
-            return retList;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
-        }
+        TypedQuery<Account> query = em.createQuery(
+                "select new com.javatmp.module.accounting.entity.Account("
+                + "acct.id, acct.accountCode, acct.name, acct.parentAccountId, "
+                + "sum(case when att.amount > 0 then att.amount else 0 end),"
+                + "sum(case when att.amount < 0 then (att.amount * -1) else 0 end), "
+                + "sum(case when coalesce(att.amount, 0) > 0 then (abs(coalesce(att.amount, 0)) * coalesce(at.debitSign, 0)) else (abs(coalesce(att.amount, 0)) * coalesce(at.creditSign, 0)) end), "
+                + "acct.accountGroupId, acct.cashFlowId, ag.name, at.name, at.debitSign, at.creditSign, at.reportTypeId)"
+                + " from Account acct "
+                + " left outer join AccountTransaction att on acct.id = att.accountId"
+                + " left outer join Transaction trans on att.transactionId = trans.id"
+                + " left outer join AccountGroup ag on acct.accountGroupId = ag.id"
+                + " left outer join AccountType at on at.id = ag.accountType"
+                + " where acct.id not in (select parentAcct.parentAccountId"
+                + " from Account parentAcct where parentAcct.parentAccountId is not null)"
+                + " group by acct.id, acct.accountCode, acct.name, acct.parentAccountId, acct.accountGroupId,"
+                + " acct.cashFlowId, ag.name, at.name, at.debitSign, at.creditSign, at.reportTypeId"
+                + " order by at.id, ag.id, acct.id"
+                + "", Account.class
+        );
+        retList = query.getResultList();
+        return retList;
+
     }
 
     public int updateAccount(Account accountToBeUpdated) {
         int updateStatus = 0;
-        EntityManager em = null;
-        try {
-            em = this.emf.createEntityManager();
-            em.getTransaction().begin();
-            CriteriaBuilder cb = em.getCriteriaBuilder();
-            CriteriaQuery<Account> cq = cb.createQuery(Account.class);
-            Root<Account> from = cq.from(Account.class);
-            cq.select(from);
-            cq.where(cb.equal(from.get(Account_.id), accountToBeUpdated.getId()));
-            TypedQuery<Account> query = em.createQuery(cq);
-            query.setLockMode(LockModeType.PESSIMISTIC_WRITE);
-            Account dbAccount = query.getSingleResult();
-            dbAccount.setAccountCode(accountToBeUpdated.getAccountCode());
-            dbAccount.setName(accountToBeUpdated.getName());
-            dbAccount.setDescription(accountToBeUpdated.getDescription());
-            dbAccount.setAccountGroupId(accountToBeUpdated.getAccountGroupId());
-            dbAccount.setStatus(accountToBeUpdated.getStatus());
-            dbAccount.setParentAccountId(accountToBeUpdated.getParentAccountId());
-            dbAccount.setCashFlowId(accountToBeUpdated.getCashFlowId());
-            em.getTransaction().commit();
-            updateStatus = 1;
-        } catch (PersistenceException e) {
-            if (em != null) {
-                em.getTransaction().rollback();
-            }
-            throw e;
-        }
+        em.getTransaction().begin();
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Account> cq = cb.createQuery(Account.class);
+        Root<Account> from = cq.from(Account.class);
+        cq.select(from);
+        cq.where(cb.equal(from.get(Account_.id), accountToBeUpdated.getId()));
+        TypedQuery<Account> query = em.createQuery(cq);
+        query.setLockMode(LockModeType.PESSIMISTIC_WRITE);
+        Account dbAccount = query.getSingleResult();
+        dbAccount.setAccountCode(accountToBeUpdated.getAccountCode());
+        dbAccount.setName(accountToBeUpdated.getName());
+        dbAccount.setDescription(accountToBeUpdated.getDescription());
+        dbAccount.setAccountGroupId(accountToBeUpdated.getAccountGroupId());
+        dbAccount.setStatus(accountToBeUpdated.getStatus());
+        dbAccount.setParentAccountId(accountToBeUpdated.getParentAccountId());
+        dbAccount.setCashFlowId(accountToBeUpdated.getCashFlowId());
+        em.getTransaction().commit();
+        updateStatus = 1;
+
         return updateStatus;
     }
 }

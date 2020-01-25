@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import org.springframework.data.jpa.repository.support.JpaEntityInformation;
+import org.springframework.data.jpa.repository.support.JpaMetamodelEntityInformation;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 
@@ -19,9 +19,9 @@ public class ThemeService extends SimpleJpaRepository<Theme, String> {
     private Map<String, List<Themetranslation>> themes;
     private final EntityManager em;
 
-    public ThemeService(JpaEntityInformation<Theme, String> entityInformation, EntityManager entityManager) {
-        super(entityInformation, entityManager);
-        this.em = entityManager;
+    public ThemeService(EntityManager em) {
+        super(new JpaMetamodelEntityInformation<Theme, String>(Theme.class, em.getMetamodel()), em);
+        this.em = em;
     }
 
     public List<Themetranslation> getThemes(User localeUser) {
