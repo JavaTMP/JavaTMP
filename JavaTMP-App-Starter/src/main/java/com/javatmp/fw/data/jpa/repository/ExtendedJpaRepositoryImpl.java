@@ -94,103 +94,98 @@ public class ExtendedJpaRepositoryImpl<T, ID extends Serializable>
     public DataTableResults<T> retrievePageRequestDetails(DataTableRequest<T> page) throws ParseException {
 
         List retList = null;
-        try {
-            CriteriaBuilder cb = em.getCriteriaBuilder();
-            CriteriaQuery<T> cq = cb.createQuery(page.getClassType());
-            Root<T> from = cq.from(page.getClassType());
-            for (String pathStr : page.getSelects()) {
-                String[] attributes = pathStr.split("\\.");
-                if (attributes != null && attributes.length > 1) {
-                    from.join(attributes[0], JoinType.LEFT);
-                }
-            }
-
-            cq.multiselect(this.convertArrToPaths(from, page.getSelects()));
-
-            List<Order> orders = page.getOrder();
-            if (orders != null) {
-                for (Order order : orders) {
-                    Integer columnIndex = order.getColumn();
-                    DataTableColumn orderColumn = page.getColumns().get(columnIndex);
-
-                    Path<?> sortPath = this.convertStringToPath(from, orderColumn.getData());
-                    if (order.getDir().value().equals("desc")) {
-                        cq.orderBy(cb.desc(sortPath));
-                    } else {
-                        cq.orderBy(cb.asc(sortPath));
-                    }
-                }
-            }
-
-            Predicate predicate = cb.conjunction();
-
-            if (page.getColumns() != null) {
-                for (DataTableColumn column : page.getColumns()) {
-                    if (column.getSearch() != null && column.getSearch().getValue() != null
-                            && !column.getSearch().getValue().trim().equals("")) {
-                        if ("olderThan".equals(column.getSearch().getOperatorType())) {
-                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-                            Date searchDate = sdf.parse(column.getSearch().getValue());
-                            predicate = cb.and(predicate, cb.lessThan(from.get(column.getName()), (Comparable) searchDate));
-                        } else if ("newerThan".equals(column.getSearch().getOperatorType())) {
-                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-                            Date searchDate = sdf.parse(column.getSearch().getValue());
-                            predicate = cb.and(predicate, cb.greaterThan(from.get(column.getName()), (Comparable) searchDate));
-                        } else if ("equalThan".equals(column.getSearch().getOperatorType())) {
-                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-                            Date searchDate = sdf.parse(column.getSearch().getValue());
-                            predicate = cb.and(predicate, cb.equal(from.get(column.getName()), (Comparable) searchDate));
-                        } else {
-                            predicate = cb.and(predicate, cb.equal(from.get(column.getName()), column.getSearch().getValue()));
-                        }
-                    }
-                }
-            }
-
-            // apply advanced filtration using RuleOrGroup object:
-            System.err.println("tableRequest.getAdvancedSearchQuery() [" + page.getAdvancedSearchQuery() + "]");
-            if (page.getAdvancedSearchQuery() != null) {
-                predicate = cb.and(predicate, applyAdvanedSearchQuery(page.getAdvancedSearchQuery(), cb, from));
-                System.out.println();
-            }
-
-            cq.where(predicate);
-
-            Query query = em.createQuery(cq);
-
-            query.setFirstResult(page.getStart());
-            query.setMaxResults(page.getLength());
-            retList = query.getResultList();
-
-            DataTableResults<T> dataTableResult = new DataTableResults<>();
-            dataTableResult.setData(retList);
-
-            CriteriaQuery<Long> cqLong = cb.createQuery(Long.class);
-            Root<T> entity_ = cqLong.from(cq.getResultType());
-            cqLong.select(cb.count(entity_));
-            for (String pathStr : page.getSelects()) {
-                String[] attributes = pathStr.split("\\.");
-                if (attributes != null && attributes.length > 1) {
-                    entity_.join(attributes[0], JoinType.LEFT);
-                }
-            }
-            Predicate restriction = cq.getRestriction();
-            if (restriction != null) {
-                cqLong.where(restriction); // Copy restrictions
-            }
-
-            Long allCount = em.createQuery(cqLong).getSingleResult();
-
-            dataTableResult.setRecordsTotal(allCount);
-            dataTableResult.setRecordsFiltered(allCount);
-            dataTableResult.setDraw(page.getDraw());
-
-            return (DataTableResults<T>) dataTableResult;
-        } finally {
-            if (em != null) {
-                em.close();
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<T> cq = cb.createQuery(page.getClassType());
+        Root<T> from = cq.from(page.getClassType());
+        for (String pathStr : page.getSelects()) {
+            String[] attributes = pathStr.split("\\.");
+            if (attributes != null && attributes.length > 1) {
+                from.join(attributes[0], JoinType.LEFT);
             }
         }
+
+        cq.multiselect(this.convertArrToPaths(from, page.getSelects()));
+
+        List<Order> orders = page.getOrder();
+        if (orders != null) {
+            for (Order order : orders) {
+                Integer columnIndex = order.getColumn();
+                DataTableColumn orderColumn = page.getColumns().get(columnIndex);
+
+                Path<?> sortPath = this.convertStringToPath(from, orderColumn.getData());
+                if (order.getDir().value().equals("desc")) {
+                    cq.orderBy(cb.desc(sortPath));
+                } else {
+                    cq.orderBy(cb.asc(sortPath));
+                }
+            }
+        }
+
+        Predicate predicate = cb.conjunction();
+
+        if (page.getColumns() != null) {
+            for (DataTableColumn column : page.getColumns()) {
+                if (column.getSearch() != null && column.getSearch().getValue() != null
+                        && !column.getSearch().getValue().trim().equals("")) {
+                    if ("olderThan".equals(column.getSearch().getOperatorType())) {
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+                        Date searchDate = sdf.parse(column.getSearch().getValue());
+                        predicate = cb.and(predicate, cb.lessThan(from.get(column.getName()), (Comparable) searchDate));
+                    } else if ("newerThan".equals(column.getSearch().getOperatorType())) {
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+                        Date searchDate = sdf.parse(column.getSearch().getValue());
+                        predicate = cb.and(predicate, cb.greaterThan(from.get(column.getName()), (Comparable) searchDate));
+                    } else if ("equalThan".equals(column.getSearch().getOperatorType())) {
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+                        Date searchDate = sdf.parse(column.getSearch().getValue());
+                        predicate = cb.and(predicate, cb.equal(from.get(column.getName()), (Comparable) searchDate));
+                    } else {
+                        predicate = cb.and(predicate, cb.equal(from.get(column.getName()), column.getSearch().getValue()));
+                    }
+                }
+            }
+        }
+
+        // apply advanced filtration using RuleOrGroup object:
+        System.err.println("tableRequest.getAdvancedSearchQuery() [" + page.getAdvancedSearchQuery() + "]");
+        if (page.getAdvancedSearchQuery() != null) {
+            predicate = cb.and(predicate, applyAdvanedSearchQuery(page.getAdvancedSearchQuery(), cb, from));
+            System.out.println();
+        }
+
+        cq.where(predicate);
+
+        Query query = em.createQuery(cq);
+
+        query.setFirstResult(page.getStart());
+        query.setMaxResults(page.getLength());
+        retList = query.getResultList();
+
+        DataTableResults<T> dataTableResult = new DataTableResults<>();
+        dataTableResult.setData(retList);
+
+        CriteriaQuery<Long> cqLong = cb.createQuery(Long.class);
+        Root<T> entity_ = cqLong.from(cq.getResultType());
+        cqLong.select(cb.count(entity_));
+        for (String pathStr : page.getSelects()) {
+            String[] attributes = pathStr.split("\\.");
+            if (attributes != null && attributes.length > 1) {
+                entity_.join(attributes[0], JoinType.LEFT);
+            }
+        }
+        Predicate restriction = cq.getRestriction();
+        if (restriction != null) {
+            cqLong.where(restriction); // Copy restrictions
+        }
+
+        Long allCount = em.createQuery(cqLong).getSingleResult();
+
+        dataTableResult.setRecordsTotal(allCount);
+        dataTableResult.setRecordsFiltered(allCount);
+        dataTableResult.setDraw(page.getDraw());
+
+        return (DataTableResults<T>) dataTableResult;
+
     }
 
     @Override
