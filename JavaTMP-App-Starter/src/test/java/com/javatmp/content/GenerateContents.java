@@ -8,30 +8,19 @@ package com.javatmp.content;
 import com.javatmp.module.content.entity.Content;
 import com.javatmp.module.content.service.ContentService;
 import com.javatmp.module.user.entity.User;
-import com.javatmp.module.user.service.UserService;
+import com.javatmp.module.user.repository.UserRepository;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
-/**
- *
- * @author JavaTMP
- */
 public class GenerateContents {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("AppPU");
-        UserService userService;
-        userService = new UserService(emf);
-        ContentService contentService = new ContentService(emf);
-        List<User> users = userService.findAll(0, Integer.MAX_VALUE);
+    UserRepository userRepository;
+    ContentService contentService;
+
+    public void main() {
+        List<User> users = userRepository.findAll();
         generateContent(contentService, users);
     }
 

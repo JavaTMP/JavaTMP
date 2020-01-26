@@ -10,17 +10,17 @@ import com.javatmp.fw.domain.table.DataTableRequest;
 import com.javatmp.fw.domain.table.DataTableResults;
 import com.javatmp.fw.domain.table.Search;
 import com.javatmp.module.dms.entity.Document;
-import com.javatmp.module.dms.service.DocumentService;
+import com.javatmp.module.dms.repository.DocumentRepository;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.List;
-import javax.persistence.Persistence;
 
 public class TestingDynamicSelectDocuments {
 
-    public static void main(String[] args) throws SQLException, ParseException {
-        DocumentService documentService = new DocumentService(Persistence.createEntityManagerFactory("AppPU"));
+    DocumentRepository documentRepository;
+
+    public void main() throws SQLException, ParseException {
 
         DataTableRequest<Document> tableRequest = new DataTableRequest<>();
 
@@ -35,7 +35,7 @@ public class TestingDynamicSelectDocuments {
         List<DataTableColumn> columns = new LinkedList<>();
         columns.add(column);
         tableRequest.setColumns(columns);
-        DataTableResults<Document> dataTableResult = documentService.retrievePageRequestDetails(tableRequest);
+        DataTableResults<Document> dataTableResult = documentRepository.retrievePageRequestDetails(tableRequest);
 
         System.out.println(dataTableResult.getRecordsTotal());
         for (Document m : dataTableResult.getData()) {

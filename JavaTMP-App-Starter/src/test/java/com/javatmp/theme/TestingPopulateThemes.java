@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Random;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 import javax.persistence.TypedQuery;
 
 /**
@@ -23,12 +22,12 @@ import javax.persistence.TypedQuery;
  */
 public class TestingPopulateThemes {
 
-    public static void main(String[] args) throws SQLException, ParseException {
-        ThemeService themeService;
-        themeService = new ThemeService(Persistence.createEntityManagerFactory("AppPU"));
+    ThemeService themeService;
+    EntityManager em;
+
+    public void main() throws SQLException, ParseException {
 
         List<Object[]> results;
-        EntityManager em = themeService.getEntityManagerFactory().createEntityManager();
 
 //        TypedQuery<Themetranslation> query = em.createQuery(
 //                "SELECT t FROM Themetranslation t "

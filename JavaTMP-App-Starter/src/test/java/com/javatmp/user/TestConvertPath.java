@@ -5,12 +5,12 @@
  */
 package com.javatmp.user;
 
+import com.javatmp.fw.data.jpa.util.JpaUtil;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.entity.User_;
 import com.javatmp.module.user.service.UserService;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import javax.persistence.Tuple;
@@ -27,25 +27,23 @@ import javax.persistence.criteria.Root;
  */
 public class TestConvertPath {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        UserService userService;
-        userService = new UserService(Persistence.createEntityManagerFactory("AppPU"));
-        EntityManager em = null;
+    UserService userService;
+    EntityManager em;
+
+    public void main() {
+
         try {
-            em = userService.getEntityManagerFactory().createEntityManager();
+
             CriteriaBuilder cb = em.getCriteriaBuilder();
 //            CriteriaQuery<User> cq = cb.createQuery(User.class);
             CriteriaQuery<Tuple> cq = cb.createTupleQuery();
             Root<User> from = cq.from(User.class);
             from.join(User_.profilePicDocument, JoinType.LEFT);
 
-            cq.multiselect(userService.convertArrToPaths(from, new String[]{
+            cq.multiselect(JpaUtil.convertArrToPaths(from, new String[]{
                 "id", "userName", "firstName", "lastName",
                 "profilePicDocument.documentId", "profilePicDocument.randomHash"}));
-            Path<?> sortPath = userService.convertStringToPath(from, "id");
+            Path<?> sortPath = JpaUtil.convertStringToPath(from, "id");
             String sortOrder = "asc";
             if (sortOrder.equals("asc")) {
                 cq.orderBy(cb.asc(sortPath));

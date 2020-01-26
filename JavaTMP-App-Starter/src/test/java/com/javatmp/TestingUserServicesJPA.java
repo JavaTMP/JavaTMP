@@ -5,11 +5,8 @@
  */
 package com.javatmp;
 
-
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
-import java.sql.SQLException;
-import javax.persistence.Persistence;
 
 /**
  *
@@ -17,12 +14,9 @@ import javax.persistence.Persistence;
  */
 public class TestingUserServicesJPA {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) throws SQLException {
-        UserService userService;
-        userService = new UserService(Persistence.createEntityManagerFactory("AppPU"));
+    UserService userService;
+
+    public void main() {
 
         User user = new User();
         user.setUserName("user1");

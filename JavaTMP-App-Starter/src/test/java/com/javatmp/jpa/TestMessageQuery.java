@@ -5,9 +5,8 @@
  */
 package com.javatmp.jpa;
 
+import com.javatmp.fw.data.jpa.util.JpaUtil;
 import com.javatmp.module.message.entity.Message;
-import com.javatmp.module.message.service.MessageService;
-import com.javatmp.module.user.service.UserService;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
@@ -16,33 +15,30 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.beanutils.converters.DateConverter;
 import org.apache.commons.beanutils.converters.DateTimeConverter;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
-/**
- *
- * @author JavaTMP
- */
+@Slf4j
+@SpringBootTest
 public class TestMessageQuery {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("AppPU");
-        UserService userService;
-        userService = new UserService(emf);
-        MessageService messageService = new MessageService(emf, userService);
-        EntityManager em = emf.createEntityManager();
+    @Autowired
+    EntityManager em;
+
+    @Test
+    public void main() {
+
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 //        String[] selects = new String[]{"messageId", "messageTitle", "creationDate", "fromUserId",
 //            "toUserId", "fromUser.profilePicDocument.contentType", "fromUser.profilePicDocument.documentName",
@@ -52,7 +48,7 @@ public class TestMessageQuery {
         CriteriaQuery<Object[]> cq = criteriaBuilder.createQuery(Object[].class);
         Root<Message> from = cq.from(Message.class);
 
-        List<Selection<?>> listOfSelect = messageService.convertArrToPaths(from, selects);
+        List<Selection<?>> listOfSelect = JpaUtil.convertArrToPaths(from, selects);
         System.out.println("size [" + listOfSelect.size() + "]");
         cq.multiselect(listOfSelect);
 

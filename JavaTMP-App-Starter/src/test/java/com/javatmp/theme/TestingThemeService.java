@@ -5,28 +5,22 @@
  */
 package com.javatmp.theme;
 
-
-import com.javatmp.module.user.service.ThemeService;
 import com.javatmp.module.user.entity.Themetranslation;
 import com.javatmp.module.user.entity.User;
+import com.javatmp.module.user.service.ThemeService;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 
-/**
- *
- * @author JavaTMP
- */
 public class TestingThemeService {
 
-    public static void main(String[] args) throws SQLException, ParseException {
-        ThemeService themeService;
-        themeService = new ThemeService(Persistence.createEntityManagerFactory("AppPU"));
+    ThemeService themeService;
+    EntityManager em;
+
+    public void main() throws SQLException, ParseException {
 
         List<Object[]> results;
-        EntityManager em = themeService.getEntityManagerFactory().createEntityManager();
 
         List<Themetranslation> resultList = themeService.getThemes();
 

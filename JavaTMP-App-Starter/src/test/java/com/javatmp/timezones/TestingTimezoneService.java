@@ -5,15 +5,13 @@
  */
 package com.javatmp.timezones;
 
-
-import com.javatmp.module.user.service.TimezoneService;
-import com.javatmp.module.user.entity.Timezonetranslation;
+import com.javatmp.module.user.entity.Timezone;
+import com.javatmp.module.user.repository.TimezoneRepository;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
-import javax.persistence.Persistence;
 
 /**
  *
@@ -21,14 +19,11 @@ import javax.persistence.Persistence;
  */
 public class TestingTimezoneService {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) throws SQLException, ParseException, UnsupportedEncodingException, IOException {
-        TimezoneService timezoneService;
-        timezoneService = new TimezoneService(Persistence.createEntityManagerFactory("AppPU"));
+    TimezoneRepository timezoneRepository;
 
-        List<Timezonetranslation> timezones = timezoneService.getTimezones();
+    public void main() throws SQLException, ParseException, UnsupportedEncodingException, IOException {
+
+        List<Timezone> timezones = timezoneRepository.findAll();
 
         timezones.forEach(timezone -> {
             System.out.println((timezone));

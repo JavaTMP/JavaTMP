@@ -97,7 +97,6 @@ public class UserStatsService {
         Query query = em.createQuery(
                 "SELECT MONTH(user.birthDate) , count(*) FROM User user group by MONTH(user.birthDate)");
         List resultList = query.getResultList();
-        em.close();
         return resultList;
     }
 
@@ -107,7 +106,6 @@ public class UserStatsService {
         Query query = em.createQuery(
                 "SELECT count(*) FROM User user where user.lastAccessTime >= CURRENT_DATE");
         results = (Long) query.getSingleResult();
-        em.close();
         return results;
     }
 
@@ -117,7 +115,6 @@ public class UserStatsService {
         Query query = em.createQuery(
                 "SELECT count(*) FROM User user where user.lastAccessTime < CURRENT_DATE or user.lastAccessTime is null");
         results = (Long) query.getSingleResult();
-        em.close();
         return results;
     }
 

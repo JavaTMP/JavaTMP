@@ -8,13 +8,11 @@ package com.javatmp.message;
 import com.javatmp.module.message.entity.Message;
 import com.javatmp.module.message.service.MessageService;
 import com.javatmp.module.user.entity.User;
-import com.javatmp.module.user.service.UserService;
+import com.javatmp.module.user.repository.UserRepository;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
  *
@@ -22,17 +20,11 @@ import javax.persistence.Persistence;
  */
 public class GenerateMessages {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    MessageService messageService;
+    UserRepository userRepository;
 
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("AppPU");
-        UserService userService;
-        userService = new UserService(emf);
-        MessageService messageService = new MessageService(emf, userService);
-        List<User> users = userService.findAll(0, Integer.MAX_VALUE);
+    public void main() {
+        List<User> users = userRepository.findAll();
         generateMessages(messageService, users);
     }
 

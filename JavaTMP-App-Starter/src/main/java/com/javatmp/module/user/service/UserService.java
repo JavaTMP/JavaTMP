@@ -247,13 +247,11 @@ public class UserService {
     }
 
     public DataTableResults<User> listAllUsers(DataTableRequest<User> tableRequest) throws ParseException {
-//        cq.multiselect(from.get(User_.id), from.get(User_.userName), from.get(User_.firstName),
-//                from.get(User_.lastName), from.get(User_.status), from.get(User_.birthDate), from.get(User_.creationDate),
-//                from.get(User_.email), from.get(User_.lang), from.get(User_.theme), from.get(User_.countryId), from.get(User_.address),
-//                from.get(User_.timezone), from.get(User_.profilePicDocumentId), from.get(User_.profilePicDocument).get(Document_.randomHash)
-//        );
-//
-//
+
+        tableRequest.setSelects(new String[]{User_.ID, User_.USER_NAME, User_.FIRST_NAME,
+            User_.LAST_NAME, User_.STATUS, User_.BIRTH_DATE, User_.CREATION_DATE, User_.EMAIL,
+            User_.LANG, User_.THEME, User_.COUNTRY_ID, User_.ADDRESS, User_.TIMEZONE,
+            User_.PROFILE_PIC_DOCUMENT_ID, User_.PROFILE_PIC_DOCUMENT + "." + Document_.RANDOM_HASH});
         tableRequest.setClassType(User.class);
         return this.userRepository.retrievePageRequestDetails(tableRequest);
 

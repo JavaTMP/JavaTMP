@@ -10,7 +10,6 @@ import com.javatmp.module.user.service.UserService;
 import java.util.Optional;
 import java.util.stream.Stream;
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 import org.hibernate.jpa.QueryHints;
 
@@ -20,15 +19,12 @@ import org.hibernate.jpa.QueryHints;
  */
 public class TestStreamList {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        UserService userService;
-        userService = new UserService(Persistence.createEntityManagerFactory("AppPU"));
-        EntityManager em = null;
+    UserService userService;
+    EntityManager em;
+
+    public void main() {
+
         try {
-            em = userService.getEntityManagerFactory().createEntityManager();
             em.getTransaction().begin();
             Stream<User> retList = em.createNativeQuery(
                     "select * from user p "

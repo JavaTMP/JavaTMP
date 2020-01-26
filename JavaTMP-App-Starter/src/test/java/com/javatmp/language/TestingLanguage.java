@@ -5,14 +5,13 @@
  */
 package com.javatmp.language;
 
+import com.javatmp.module.user.entity.Language;
 import com.javatmp.module.user.entity.Languagetranslation;
-import com.javatmp.module.user.service.LanguageService;
-import com.javatmp.module.user.service.ThemeService;
-import com.javatmp.module.user.entity.User;
+import com.javatmp.module.user.repository.LanguageRepository;
+import com.javatmp.module.user.repository.LanguagetranslationRepository;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
-import javax.persistence.Persistence;
 
 /**
  *
@@ -20,21 +19,25 @@ import javax.persistence.Persistence;
  */
 public class TestingLanguage {
 
-    public static void main(String[] args) throws SQLException, ParseException {
-        ThemeService themeService = new ThemeService(Persistence.createEntityManagerFactory("AppPU"));
-        LanguageService languageService = new LanguageService(Persistence.createEntityManagerFactory("AppPU"));
-        User testUser = new User();
-        testUser.setLang("ar");
-        List<Languagetranslation> langs = languageService.getLanguages(testUser);
-        int i;
-        for (i = 0; i < langs.size(); i++) {
-            Languagetranslation row = langs.get(i);
-            System.out.println((i + 1) + " " + (row));
-        }
+    LanguageRepository languageRepository;
 
-        langs = languageService.getLanguages();
-        for (i = 0; i < langs.size(); i++) {
-            Languagetranslation row = langs.get(i);
+    LanguagetranslationRepository languagetranslationRepository;
+
+    public void main() throws SQLException, ParseException {
+
+        List<Language> lanuages = languageRepository.findAll();
+
+        lanuages.forEach((language) -> {
+            List<Languagetranslation> langs = languagetranslationRepository.listLanguageTransalatedBylanguage(language.getLanguageId());
+            for (int i = 0; i < langs.size(); i++) {
+                Languagetranslation row = langs.get(i);
+                System.out.println((i + 1) + " " + (row));
+            }
+        });
+
+        List<Languagetranslation> languagetranslations = languagetranslationRepository.findAll();
+        for (int i = 0; i < languagetranslations.size(); i++) {
+            Languagetranslation row = languagetranslations.get(i);
             System.out.println((i + 1) + " " + (row));
         }
     }

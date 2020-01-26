@@ -1,7 +1,7 @@
 package com.javatmp.module.dms.controller;
 
 import com.javatmp.module.dms.entity.Document;
-import com.javatmp.module.dms.service.DocumentService;
+import com.javatmp.module.dms.repository.DocumentRepository;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class ViewUploadedFileController {
 
     @Autowired
-    DocumentService documentService;
+    DocumentRepository documentService;
 
     @Autowired
     ServletContext context;
@@ -40,7 +40,7 @@ public class ViewUploadedFileController {
         log.info("Requested view type is : {} , Document {}", viewTypeTemp, temp);
 
         Document document = this.documentService.getOne(temp.getDocumentId());
-
+        log.debug("document request from database is {}", document);
         // for nano security check if provided hash equal db one:
         if (!document.getRandomHash().equals(temp.getRandomHash())) {
             throw new IllegalAccessException("illegal access by providing wrong hash value");

@@ -5,10 +5,8 @@
  */
 package com.javatmp.user;
 
-
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 
 /**
@@ -17,12 +15,9 @@ import javax.persistence.PersistenceException;
  */
 public class TestReadBasicUserById {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        UserService userService;
-        userService = new UserService(Persistence.createEntityManagerFactory("AppPU"));
+    UserService userService;
+
+    public void main() {
         try {
             User user = new User(1L);
             user = userService.readBasicUserById(user);

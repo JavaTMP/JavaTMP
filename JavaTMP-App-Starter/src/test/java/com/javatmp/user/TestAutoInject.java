@@ -5,7 +5,7 @@
  */
 package com.javatmp.user;
 
-
+import com.javatmp.fw.data.jpa.util.JpaUtil;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
 import java.lang.reflect.Field;
@@ -13,7 +13,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -26,7 +25,7 @@ import javax.persistence.criteria.Root;
  */
 public class TestAutoInject {
 
-    public static void populate(Object object, String fieldPath, Object value) throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, InstantiationException {
+    public void populate(Object object, String fieldPath, Object value) throws IllegalArgumentException, IllegalAccessException, NoSuchFieldException, InstantiationException {
         System.out.println("process [" + fieldPath + "]");
         int index = fieldPath.indexOf(".");
         System.out.println("index is [" + index + "]");
@@ -51,12 +50,12 @@ public class TestAutoInject {
         }
     }
 
-    public static void main(String[] args) throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        UserService userService;
-        userService = new UserService(Persistence.createEntityManagerFactory("AppPU"));
-        EntityManager em = null;
+    UserService userService;
+    EntityManager em;
+
+    public void main() throws NoSuchFieldException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, InstantiationException {
+
         try {
-            em = userService.getEntityManagerFactory().createEntityManager();
             CriteriaBuilder cb = em.getCriteriaBuilder();
 //            CriteriaQuery<User> cq = cb.createQuery(User.class);
 
@@ -66,7 +65,7 @@ public class TestAutoInject {
 
             CriteriaQuery cq = cb.createQuery();
             Root e = cq.from(User.class);
-            cq.multiselect(userService.convertArrToPaths(e, requests));
+            cq.multiselect(JpaUtil.convertArrToPaths(e, requests));
             Query query = em.createQuery(cq);
             List<Object[]> result5 = query.getResultList();
             for (Object[] row : result5) {

@@ -5,8 +5,8 @@
  */
 package com.javatmp.jpa;
 
+import com.javatmp.fw.data.jpa.util.JpaUtil;
 import com.javatmp.module.user.entity.User;
-import com.javatmp.module.user.service.UserService;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
@@ -15,34 +15,32 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.beanutils.converters.DateConverter;
 import org.apache.commons.beanutils.converters.DateTimeConverter;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
-/**
- *
- * @author JavaTMP
- */
+@Slf4j
+@SpringBootTest
 public class TestObjectQuery {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        UserService userService;
-        userService = new UserService(Persistence.createEntityManagerFactory("AppPU"));
-        EntityManager em = userService.getEntityManagerFactory().createEntityManager();
+    @Autowired
+    EntityManager em;
+
+    @Test
+    public void main() {
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         String[] selects = new String[]{"lang", "theme", "address", "timezone",
-            "profilePicDocumentId", "profilePicDocument.randomHash", "profilePicDocument.documentId", "countryId", "country.countryId",
-            "country.theme.themeId"};
+            "profilePicDocumentId", "profilePicDocument.randomHash", "profilePicDocument.documentId", "countryId", "country.countryId"};
         CriteriaQuery<Object[]> cq = criteriaBuilder.createQuery(Object[].class);
         Root<User> from = cq.from(User.class);
 //        for (String pathStr : selects) {
@@ -51,7 +49,7 @@ public class TestObjectQuery {
 //                from.join(attributes[0], JoinType.LEFT);
 //            }
 //        }
-        List<Selection<?>> listOfSelect = userService.convertArrToPaths(from, selects);
+        List<Selection<?>> listOfSelect = JpaUtil.convertArrToPaths(from, selects);
         System.out.println("size [" + listOfSelect.size() + "]");
         cq.multiselect(listOfSelect);
 

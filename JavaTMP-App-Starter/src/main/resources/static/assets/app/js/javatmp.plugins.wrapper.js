@@ -788,9 +788,8 @@
         var settings = $.extend(true, {}, {
 // https://datatables.net/reference/option/dom
             "pagingType": "full",
-            dom: "<'row'<'col-sm-12'i>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row'<'col-sm-4 mt-1'l><'col-sm-8'p>>",
+            dom: "<'row'<'col-sm-12'tr>>" +
+                    "<'row'<'col-sm-3 mt-1'l><'col-sm-4 mt-0'i><'col-sm-5'p>>",
 //                dom: "<'row'<'col-sm-12 p-0'tr>>" +
 //                        "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4 pt-2 text-right'l>>"
 //                ,

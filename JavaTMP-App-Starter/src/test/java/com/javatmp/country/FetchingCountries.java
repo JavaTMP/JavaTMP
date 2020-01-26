@@ -5,35 +5,29 @@
  */
 package com.javatmp.country;
 
-import com.javatmp.module.user.service.CountryService;
 import com.javatmp.module.user.entity.Countrytranslation;
 import com.javatmp.module.user.entity.User;
+import com.javatmp.module.user.service.CountryService;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.List;
-import javax.persistence.Persistence;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
-/**
- *
- * @author JavaTMP
- */
+@Slf4j
+@SpringBootTest
 public class FetchingCountries {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) throws SQLException, ParseException, IOException {
-        CountryService countryService;
-        countryService = new CountryService(Persistence.createEntityManagerFactory("AppPU"));
+    @Autowired
+    CountryService countryService;
 
-        List<Countrytranslation> countries = countryService.getCountries();
+    @Test
+    public void main() throws SQLException, ParseException, IOException {
 
-        countries.forEach((country) -> {
-            System.out.println(country);
-        });
-
-        countries = countryService.getCountries(new User(0L, "ar"));
+        List<Countrytranslation> countries = countryService.getCountries(new User(0L, "ar"));
 
         countries.forEach((country) -> {
             System.out.println(country);

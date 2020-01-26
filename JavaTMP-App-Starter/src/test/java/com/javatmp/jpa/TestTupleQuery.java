@@ -9,7 +9,6 @@ import com.javatmp.module.dms.entity.Document;
 import com.javatmp.module.dms.entity.Document_;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.entity.User_;
-import com.javatmp.module.user.service.UserService;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
@@ -17,19 +16,26 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 import javax.persistence.Tuple;
 import javax.persistence.TupleElement;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
+@Slf4j
+@SpringBootTest
 public class TestTupleQuery {
 
-    public static void main(String[] args) throws SQLException, ParseException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
-        UserService userService;
-        userService = new UserService(Persistence.createEntityManagerFactory("AppPU"));
-        EntityManager em = userService.getEntityManagerFactory().createEntityManager();
+    @Autowired
+    EntityManager em;
+
+    @Test
+    public void main() throws SQLException, ParseException, InstantiationException, IllegalAccessException, NoSuchMethodException, InvocationTargetException {
+
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
         CriteriaQuery<Tuple> query = criteriaBuilder.createTupleQuery();
         Root<User> user = query.from(User.class);

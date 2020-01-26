@@ -7,7 +7,6 @@ package com.javatmp.event;
 
 import com.javatmp.module.event.service.EventService;
 import java.sql.SQLException;
-import javax.persistence.Persistence;
 
 /**
  *
@@ -15,11 +14,9 @@ import javax.persistence.Persistence;
  */
 public class TestingEventServices {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) throws SQLException {
-        EventService eventService = new EventService(Persistence.createEntityManagerFactory("AppPU"));
+    EventService eventService;
+
+    public void main() throws SQLException {
         eventService.initialiseDiary();
     }
 

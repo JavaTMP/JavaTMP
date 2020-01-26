@@ -5,11 +5,13 @@
  */
 package com.javatmp.country;
 
+import com.javatmp.module.user.entity.Country;
 import com.javatmp.module.user.entity.Countrytranslation;
 import com.javatmp.module.user.entity.CountrytranslationPK;
 import com.javatmp.module.user.entity.Languagetranslation;
 import com.javatmp.module.user.entity.User;
-import com.javatmp.module.user.service.CountryService;
+import com.javatmp.module.user.repository.CountryRepository;
+import com.javatmp.module.user.repository.CountrytranslationRepository;
 import com.javatmp.module.user.service.LanguageService;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,26 +20,21 @@ import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.List;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.test.context.SpringBootTest;
 
-/**
- *
- * @author JavaTMP
- */
+@Slf4j
+@SpringBootTest
 public class TestingPopulateCountries {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) throws SQLException, ParseException, IOException {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("AppPU");
-        CountryService countryService;
-        countryService = new CountryService(emf);
-        LanguageService languageService = new LanguageService(emf);
-        CountryTransalationService countryTransalationService = new CountryTransalationService(emf);
+    CountryRepository countryRepository;
+    LanguageService languageService;
+    CountrytranslationRepository countrytranslationRepository;
+
+    public void main() throws SQLException, ParseException, IOException {
+
         List<Languagetranslation> languages = languageService.getLanguages(new User(0L, "en"));
-        List<Countrytranslation> countries = countryService.getCountries();
+        List<Country> countries = countryRepository.findAll();
 
         InputStreamReader reader = new InputStreamReader(TestingPopulateCountries.class.getResourceAsStream("arabicCountry.txt"), "utf8");
         System.out.println("encoding [" + reader.getEncoding() + "]");
@@ -53,12 +50,8 @@ public class TestingPopulateCountries {
         countries.forEach((country) -> {
             //System.out.println(country.getCountryName());
             Countrytranslation newCountry
-                    = new Countrytranslation(new CountrytranslationPK(country.getCountrytranslationPK().getCountryId(), "en"), country.getCountryName());
-
-            countryTransalationService.save(newCountry);
-            newCountry
-                    = new Countrytranslation(new CountrytranslationPK(country.getCountrytranslationPK().getCountryId(), "ar"), countryList.remove());
-            countryTransalationService.save(newCountry);
+                    = new Countrytranslation(new CountrytranslationPK(country.getCountryId(), "ar"), countryList.remove());
+            countrytranslationRepository.save(newCountry);
         });
 
         languages.forEach((language) -> {
