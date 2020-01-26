@@ -2,6 +2,7 @@ package com.javatmp.module.event.controller;
 
 import com.javatmp.fw.domain.ResponseMessage;
 import com.javatmp.module.event.entity.Event;
+import com.javatmp.module.event.repository.EventRepository;
 import com.javatmp.module.event.service.EventService;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +24,9 @@ public class EventOperationController {
     @Autowired
     EventService eventService;
 
+    @Autowired
+    EventRepository eventRepository;
+
     @PostMapping("/addNewEvent")
     public ResponseMessage addNewEvent(Event event, ResponseMessage responseMessage) {
 
@@ -30,7 +34,7 @@ public class EventOperationController {
 
         event.setCreationDate(new Date());
         event.setStatus(1);
-        this.eventService.save(event);
+        this.eventRepository.save(event);
         responseMessage.setOverAllStatus(true);
         responseMessage.setMessage("Event id [" + event.getId() + "] Added Successfully");
         return responseMessage;
@@ -40,7 +44,7 @@ public class EventOperationController {
     public ResponseMessage deleteEvent(@RequestBody Event event, HttpServletRequest request, HttpServletResponse response) {
         log.info("Event read from request to be deleted [" + (event) + "]");
         ResponseMessage responseMessage = new ResponseMessage();
-        eventService.delete(event);
+        eventRepository.delete(event);
         responseMessage.setOverAllStatus(true);
         responseMessage.setMessage("Object event found [" + event.getId() + "]");
         return responseMessage;
@@ -52,11 +56,11 @@ public class EventOperationController {
         log.info("Event read from request prior to update [" + (event) + "]");
 
         responseMessage.setOverAllStatus(true);
-        Event dbEvent = this.eventService.getOne(event.getId());
+        Event dbEvent = this.eventRepository.getOne(event.getId());
         dbEvent.setTitle(event.getTitle());
         dbEvent.setStartDate(event.getStartDate());
         dbEvent.setEndDate(event.getEndDate());
-        eventService.save(event);
+        eventRepository.save(event);
         responseMessage.setOverAllStatus(true);
         responseMessage.setMessage("event update successfully");
         return responseMessage;
@@ -74,7 +78,7 @@ public class EventOperationController {
 
     @GetMapping("/getDiaryEvents")
     public List<Event> getDiaryEvents() {
-        List<Event> diaryEvents = this.eventService.findAll();
+        List<Event> diaryEvents = this.eventRepository.findAll();
         return diaryEvents;
     }
 

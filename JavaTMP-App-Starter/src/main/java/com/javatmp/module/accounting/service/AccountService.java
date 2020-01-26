@@ -1,16 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.javatmp.module.accounting.service;
 
-import com.javatmp.fw.data.jpa.repository.ExtendedJpaRepository;
 import com.javatmp.module.accounting.entity.Account;
 import com.javatmp.module.accounting.entity.AccountTransaction;
 import com.javatmp.module.accounting.entity.Account_;
 import com.javatmp.module.accounting.entity.Transaction;
+import com.javatmp.module.accounting.repository.AccountRepository;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
@@ -20,18 +16,19 @@ import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class AccountService extends ExtendedJpaRepository<Account, Long> {
+public class AccountService {
 
     private EntityManager em;
 
-    public AccountService(JpaEntityInformation<Account, Long> entityInformation, EntityManager em) {
-        super(entityInformation, em);
+    private AccountRepository accountRepository;
+
+    public AccountService(EntityManager em, AccountRepository accountRepository) {
         this.em = em;
+        this.accountRepository = accountRepository;
     }
 
     public List<Account> getChartOfAccounts() {
@@ -253,5 +250,17 @@ public class AccountService extends ExtendedJpaRepository<Account, Long> {
         updateStatus = 1;
 
         return updateStatus;
+    }
+
+    public Account save(Account accountToBeCreated) {
+        accountToBeCreated.setCreationDate(new Date());
+        accountToBeCreated.setStatus((short) 1);
+        accountToBeCreated.setDebit(BigDecimal.ZERO);
+        accountToBeCreated.setCredit(BigDecimal.ZERO);
+        return this.accountRepository.save(accountToBeCreated);
+    }
+
+    public List<Account> findAll() {
+        return this.accountRepository.findAll();
     }
 }

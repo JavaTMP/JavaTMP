@@ -1,10 +1,7 @@
 package com.javatmp.module.user.service;
 
-import com.javatmp.fw.data.jpa.repository.ExtendedJpaRepository;
-import com.javatmp.fw.domain.table.DataTableColumn;
 import com.javatmp.fw.domain.table.DataTableRequest;
 import com.javatmp.fw.domain.table.DataTableResults;
-import com.javatmp.fw.domain.table.Order;
 import com.javatmp.fw.util.MD5Util;
 import com.javatmp.module.dms.entity.Document;
 import com.javatmp.module.dms.entity.Document_;
@@ -13,13 +10,7 @@ import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.entity.User_;
 import com.javatmp.module.user.repository.UserRepository;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
 import javax.persistence.TypedQuery;
@@ -29,24 +20,19 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.CriteriaUpdate;
 import javax.persistence.criteria.Join;
 import javax.persistence.criteria.JoinType;
-import javax.persistence.criteria.Path;
-import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.jpa.repository.support.JpaMetamodelEntityInformation;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
-public class UserService extends ExtendedJpaRepository<User, Long> {
+public class UserService {
 
     private UserRepository userRepository;
     private EntityManager em;
 
     public UserService(UserRepository userRepository, EntityManager em) {
-        super(new JpaMetamodelEntityInformation<User, Long>(
-                User.class, em.getMetamodel()), em);
         this.userRepository = userRepository;
         this.em = em;
     }
@@ -260,169 +246,16 @@ public class UserService extends ExtendedJpaRepository<User, Long> {
         }
     }
 
-    public DataTableResults<User> listAllUsers(DataTableRequest<User> tableRequest) {
-        List<User> retList = null;
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<User> cq = cb.createQuery(User.class);
-        Root<User> from = cq.from(User.class);
-        Join<User, Document> join = from.join(User_.profilePicDocument, JoinType.LEFT);
-        cq.multiselect(from.get(User_.id), from.get(User_.userName), from.get(User_.firstName),
-                from.get(User_.lastName), from.get(User_.status), from.get(User_.birthDate), from.get(User_.creationDate),
-                from.get(User_.email), from.get(User_.lang), from.get(User_.theme), from.get(User_.countryId), from.get(User_.address),
-                from.get(User_.timezone), from.get(User_.profilePicDocumentId), from.get(User_.profilePicDocument).get(Document_.randomHash)
-        );
+    public DataTableResults<User> listAllUsers(DataTableRequest<User> tableRequest) throws ParseException {
+//        cq.multiselect(from.get(User_.id), from.get(User_.userName), from.get(User_.firstName),
+//                from.get(User_.lastName), from.get(User_.status), from.get(User_.birthDate), from.get(User_.creationDate),
+//                from.get(User_.email), from.get(User_.lang), from.get(User_.theme), from.get(User_.countryId), from.get(User_.address),
+//                from.get(User_.timezone), from.get(User_.profilePicDocumentId), from.get(User_.profilePicDocument).get(Document_.randomHash)
+//        );
+//
+//
+        tableRequest.setClassType(User.class);
+        return this.userRepository.retrievePageRequestDetails(tableRequest);
 
-        List<Order> orders = tableRequest.getOrder();
-        if (orders != null && orders.size() > 0) {
-            for (Order order : orders) {
-                Integer columnIndex = order.getColumn();
-                DataTableColumn orderColumn = tableRequest.getColumns().get(columnIndex);
-
-                Path<?> sortPath = this.convertStringToPath(from, orderColumn.getData());
-                if (order.getDir().value().equals("desc")) {
-                    cq.orderBy(cb.desc(sortPath));
-                } else {
-                    cq.orderBy(cb.asc(sortPath));
-                }
-            }
-        }
-
-        // where clouse:
-        Predicate predicate = cb.conjunction();
-        Predicate globalPredicate;
-        // support global search:
-        if (tableRequest.getSearch() != null && tableRequest.getSearch().getValue() != null
-                && !tableRequest.getSearch().getValue().trim().equals("")) {
-            log.info("*** isGlobalSearch starting ***");
-            String query = tableRequest.getSearch().getValue().trim().toLowerCase();
-            query = "%" + query + "%";
-            Predicate p1 = cb.like(cb.lower(from.get(User_.userName)), query);
-            Predicate p2 = cb.like(cb.lower(from.get(User_.firstName)), query);
-            Predicate p3 = cb.like(cb.lower(from.get(User_.lastName)), query);
-            globalPredicate = cb.or(p1, p2, p3);
-            predicate = cb.or(globalPredicate);
-        }
-
-        for (DataTableColumn column : tableRequest.getColumns()) {
-            String columnName = column.getName();
-            String columnSearchValue = column.getSearch().getValue().trim();
-            log.info("column name [" + columnName + "] search value [" + columnSearchValue + "]");
-            if (columnSearchValue != null && !columnSearchValue.equals("")) {
-                //predicate = cb.and(predicate, cb.equal(from.get(columnName), columnSearchValue));
-                if (columnName.equals("id")) {
-                    Long searchValue = new Long(columnSearchValue);
-                    predicate = cb.and(predicate, cb.equal(from.get(columnName), searchValue));
-                }
-                if (columnName.equals("userName")) {
-                    String searchValue = new String(columnSearchValue);
-                    predicate = cb.and(predicate, cb.equal(from.get(columnName), searchValue));
-                }
-                if (columnName.equals("firstName")) {
-                    String searchValue = new String(columnSearchValue);
-                    predicate = cb.and(predicate, cb.equal(from.get(columnName), searchValue));
-                }
-                if (columnName.equals("lastName")) {
-                    String searchValue = new String(columnSearchValue);
-                    predicate = cb.and(predicate, cb.equal(from.get(columnName), searchValue));
-                }
-                if (columnName.equals("birthDate")) {
-                    try {
-                        String searchValue = new String(columnSearchValue);
-                        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                        Date objSearchValue = sdf.parse(searchValue);
-                        predicate = cb.and(predicate, cb.equal(from.get(columnName), objSearchValue));
-                    } catch (ParseException ex) {
-                        ex.printStackTrace();
-
-                    }
-
-                }
-                if (columnName.equals("age")) {
-                    Integer searchValue = new Integer(columnSearchValue);
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.add(Calendar.YEAR, searchValue * -1);
-                    Date minDate = calendar.getTime();
-                    calendar.add(Calendar.YEAR, 1);
-                    Date maxDate = calendar.getTime();
-                    System.out.println("min [" + minDate + "], max [" + maxDate + "]");
-                    Predicate betweenDate = cb.between(from.<Date>get(User_.birthDate), minDate, maxDate);
-                    predicate = cb.and(predicate, betweenDate);
-                }
-                if (columnName.equals("email")) {
-                    String searchValue = columnSearchValue.toLowerCase();
-                    predicate = cb.and(predicate, cb.like(cb.lower(from.get(User_.email)), "%" + searchValue + "%"));
-                }
-                if (columnName.equals("status")) {
-                    Short searchValue = new Short(columnSearchValue);
-                    predicate = cb.and(predicate, cb.equal(from.get(columnName), searchValue));
-                }
-                if (columnName.equals("countryId")) {
-                    String searchValue = new String(columnSearchValue);
-                    predicate = cb.and(predicate, cb.equal(from.get(columnName), searchValue));
-                }
-                if (columnName.equals("lang")) {
-                    String searchValue = new String(columnSearchValue);
-                    predicate = cb.and(predicate, cb.equal(from.get(columnName), searchValue));
-                }
-                if (columnName.equals("theme")) {
-                    String searchValue = new String(columnSearchValue);
-                    predicate = cb.and(predicate, cb.equal(from.get(columnName), searchValue));
-                }
-                if (columnName.equals("timezone")) {
-                    String searchValue = new String(columnSearchValue);
-                    predicate = cb.and(predicate, cb.equal(from.get(columnName), searchValue));
-                }
-                if (columnName.equals("creationDate")) {
-                    try {
-                        String[] dateParts = columnSearchValue.split("##TO##");
-                        System.out.println(Arrays.toString(dateParts));
-                        String startStr = dateParts[0];
-                        String endStr = dateParts[1];
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-                        Date start = sdf.parse(startStr);
-                        Date end = sdf.parse(endStr);
-                        System.out.println("start [" + start + "], end [" + end + "]");
-                        Predicate betweenDate = cb.between(from.<Date>get(User_.creationDate), start, end);
-                        predicate = cb.and(predicate, betweenDate);
-                    } catch (ParseException ex) {
-                        ex.printStackTrace();
-                    }
-                }
-            }
-        }
-
-        System.err.println("tableRequest.getAdvancedSearchQuery() [" + tableRequest.getAdvancedSearchQuery() + "]");
-        if (tableRequest.getAdvancedSearchQuery() != null) {
-            try {
-                predicate = cb.and(predicate, this.applyAdvanedSearchQuery(tableRequest.getAdvancedSearchQuery(), cb, from));
-                System.out.println();
-            } catch (ParseException ex) {
-                Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-        cq.where(predicate);
-        TypedQuery<User> query = em.createQuery(cq);
-
-        query.setFirstResult(tableRequest.getStart());
-        query.setMaxResults(tableRequest.getLength());
-
-        retList = query.getResultList();
-
-        DataTableResults<User> dataTableResult = new DataTableResults<>();
-        dataTableResult.setData(retList);
-
-        CriteriaQuery<Long> cqLong = cb.createQuery(Long.class);
-        from = cqLong.from(cq.getResultType());
-        join = from.join(User_.profilePicDocument, JoinType.LEFT);
-
-        cqLong.select(cb.count(from));
-        cqLong.where(predicate);
-        Long allCount = em.createQuery(cqLong).getSingleResult();
-        dataTableResult.setRecordsTotal(allCount);
-        dataTableResult.setRecordsFiltered(allCount);
-        dataTableResult.setDraw(tableRequest.getDraw());
-        return dataTableResult;
     }
-
 }

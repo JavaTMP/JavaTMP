@@ -5,107 +5,29 @@
  */
 package com.javatmp.module.accounting.service;
 
-import com.javatmp.fw.data.jpa.repository.ExtendedJpaRepository;
-import com.javatmp.fw.domain.table.DataTableColumn;
 import com.javatmp.fw.domain.table.DataTableRequest;
 import com.javatmp.fw.domain.table.DataTableResults;
-import com.javatmp.fw.domain.table.Order;
 import com.javatmp.module.accounting.entity.TransactionEntry;
-import com.javatmp.module.accounting.entity.TransactionEntry_;
+import com.javatmp.module.accounting.repository.TransactionEntryRepository;
 import java.text.ParseException;
-import java.util.LinkedList;
-import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Path;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class TransactionEntryService extends ExtendedJpaRepository<TransactionEntry, Long> {
+public class TransactionEntryService {
 
     private EntityManager em;
+    private TransactionEntryRepository transactionEntryRepository;
 
-    public TransactionEntryService(JpaEntityInformation<TransactionEntry, Long> entityInformation, EntityManager em) {
-        super(entityInformation, em);
+    public TransactionEntryService(EntityManager em, TransactionEntryRepository transactionEntryRepository) {
         this.em = em;
-    }
-
-    public DataTableResults<TransactionEntry> listAllTransactionEntry(DataTableRequest<TransactionEntry> tableRequest) throws ParseException {
-        List<TransactionEntry> retList = null;
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<TransactionEntry> cq = cb.createQuery(TransactionEntry.class);
-        Root<TransactionEntry> from = cq.from(TransactionEntry.class);
-        cq.select(from);
-
-        List<Order> orders = tableRequest.getOrder();
-        if (orders != null && orders.size() > 0) {
-            List<javax.persistence.criteria.Order> tableOrders = new LinkedList<>();
-            for (Order order : orders) {
-                Integer columnIndex = order.getColumn();
-                DataTableColumn orderColumn = tableRequest.getColumns().get(columnIndex);
-
-                Path<?> sortPath = this.convertStringToPath(from, orderColumn.getData());
-                if (order.getDir().value().equals("desc")) {
-                    tableOrders.add(cb.desc(sortPath));
-                } else {
-                    tableOrders.add(cb.asc(sortPath));
-                }
-            }
-            cq.orderBy(tableOrders);
-        }
-        // where clouse:
-        Predicate predicate = cb.conjunction();
-        for (DataTableColumn column : tableRequest.getColumns()) {
-            String columnName = column.getName();
-            String columnSearchValue = column.getSearch().getValue().trim();
-            log.info("column name [" + columnName + "] search value [" + columnSearchValue + "]");
-            if (columnSearchValue != null && !columnSearchValue.equals("")) {
-                //predicate = cb.and(predicate, cb.equal(from.get(columnName), columnSearchValue));
-                if (columnName.equals("id")) {
-                    Long searchValue = new Long(columnSearchValue);
-                    predicate = cb.and(predicate, cb.equal(from.get(TransactionEntry_.id), searchValue));
-                }
-                if (columnName.equals("transactionId")) {
-                    String searchValue = new String(columnSearchValue);
-                    predicate = cb.and(predicate, cb.equal(from.get(TransactionEntry_.transactionId), searchValue));
-                }
-                if (columnName.equals("accountId")) {
-                    String searchValue = new String(columnSearchValue);
-                    predicate = cb.and(predicate, cb.equal(from.get(TransactionEntry_.accountId), searchValue));
-                }
-            }
-        }
-        cq.where(predicate);
-        TypedQuery<TransactionEntry> query = em.createQuery(cq);
-
-        query.setFirstResult(tableRequest.getStart());
-        query.setMaxResults(tableRequest.getLength());
-
-        retList = query.getResultList();
-
-        DataTableResults<TransactionEntry> dataTableResult = new DataTableResults<>();
-        dataTableResult.setData(retList);
-
-        CriteriaQuery<Long> cqLong = cb.createQuery(Long.class);
-        from = cqLong.from(cq.getResultType());
-
-        cqLong.select(cb.count(from));
-        cqLong.where(predicate);
-        Long allCount = em.createQuery(cqLong).getSingleResult();
-
-        dataTableResult.setRecordsTotal(allCount);
-        dataTableResult.setRecordsFiltered(allCount);
-        dataTableResult.setDraw(tableRequest.getDraw());
-
-        return dataTableResult;
+        this.transactionEntryRepository = transactionEntryRepository;
 
     }
 
+    public DataTableResults<TransactionEntry> listAllTransactionEntry(DataTableRequest tableRequest) throws ParseException {
+        return this.transactionEntryRepository.retrievePageRequestDetails(tableRequest);
+    }
 }

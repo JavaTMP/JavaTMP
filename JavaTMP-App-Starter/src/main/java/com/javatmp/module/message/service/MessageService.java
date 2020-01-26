@@ -1,33 +1,35 @@
 package com.javatmp.module.message.service;
 
-import com.javatmp.fw.data.jpa.repository.ExtendedJpaRepository;
 import com.javatmp.fw.domain.table.DataTableRequest;
 import com.javatmp.fw.domain.table.DataTableResults;
 import com.javatmp.module.message.entity.Message;
+import com.javatmp.module.message.repository.MessageRepository;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
 import java.text.ParseException;
 import javax.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class MessageService extends ExtendedJpaRepository<Message, Long> {
+public class MessageService {
 
-    private UserService userService;
     private EntityManager em;
 
+    private MessageRepository messageRepository;
+
+    private UserService userService;
+
     public MessageService(UserService userService,
-            JpaEntityInformation<Message, Long> entityInformation, EntityManager entityManager) {
-        super(entityInformation, entityManager);
+            MessageRepository messageRepository, EntityManager entityManager) {
         this.em = entityManager;
         this.userService = userService;
+        this.messageRepository = messageRepository;
     }
 
     public Message readMessageById(Message message) {
-        Message row = this.getOne(message.getMessageId());
+        Message row = this.messageRepository.getOne(message.getMessageId());
         Long fromUserId = row.getFromUserId();
         Long toUserId = row.getToUserId();
         User fromUser = new User();
@@ -52,8 +54,12 @@ public class MessageService extends ExtendedJpaRepository<Message, Long> {
 
         tableRequest.setClassType(Message.class);
         tableRequest.setSelects(new String[]{"messageId", "messageTitle", "messageContentText", "creationDate", "fromUserId", "toUserId", "messageStatus"});
-        DataTableResults<Message> msgs = this.retrievePageRequestDetails(tableRequest);
+        DataTableResults<Message> msgs = this.messageRepository.retrievePageRequestDetails(tableRequest);
         return msgs;
+    }
+
+    public void save(Message msg) {
+        this.messageRepository.save(msg);
     }
 
 }

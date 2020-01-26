@@ -1,41 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.javatmp.module.accounting.service;
 
-import com.javatmp.fw.data.jpa.repository.ExtendedJpaRepository;
-import com.javatmp.fw.domain.table.DataTableColumn;
 import com.javatmp.fw.domain.table.DataTableRequest;
 import com.javatmp.fw.domain.table.DataTableResults;
-import com.javatmp.fw.domain.table.Order;
 import com.javatmp.module.accounting.entity.AccountTransaction;
 import com.javatmp.module.accounting.entity.Transaction;
 import com.javatmp.module.accounting.entity.Transaction_;
+import com.javatmp.module.accounting.repository.TransactionRepository;
 import java.math.BigDecimal;
 import java.text.ParseException;
-import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Path;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class TransactionService extends ExtendedJpaRepository<Transaction, Long> {
+public class TransactionService {
 
     private EntityManager em;
+    private TransactionRepository transactionRepository;
 
-    public TransactionService(JpaEntityInformation<Transaction, Long> entityInformation, EntityManager em) {
-        super(entityInformation, em);
+    public TransactionService(EntityManager em, TransactionRepository transactionRepository) {
         this.em = em;
+        this.transactionRepository = this.transactionRepository;
     }
 
     public Transaction createNewTransaction(Transaction transaction) {
@@ -65,79 +51,15 @@ public class TransactionService extends ExtendedJpaRepository<Transaction, Long>
         return transaction;
     }
 
-    public DataTableResults<Transaction> listAllTransactions(DataTableRequest<Transaction> tableRequest) throws ParseException {
-        DataTableResults<Transaction> dataTableResult = new DataTableResults<>();
-        List<Transaction> retList = null;
-        CriteriaBuilder cb = em.getCriteriaBuilder();
-        CriteriaQuery<Transaction> cq = cb.createQuery(Transaction.class);
-        Root<Transaction> from = cq.from(Transaction.class);
-        cq.multiselect(
-                from.get(Transaction_.id),
-                from.get(Transaction_.code),
-                from.get(Transaction_.transactionDate),
-                from.get(Transaction_.note),
-                from.get(Transaction_.specialNumber),
-                from.get(Transaction_.entity),
-                from.get(Transaction_.status),
-                from.get(Transaction_.creationDate),
-                from.get(Transaction_.voucherTypeId)
-        );
+    public DataTableResults<Transaction> listAllTransactions(DataTableRequest tableRequest) throws ParseException {
+        tableRequest.setSelects(new String[]{
+            Transaction_.ID, Transaction_.CODE,
+            Transaction_.TRANSACTION_DATE, Transaction_.NOTE,
+            Transaction_.SPECIAL_NUMBER, Transaction_.ENTITY,
+            Transaction_.STATUS, Transaction_.CREATION_DATE,
+            Transaction_.VOUCHER_TYPE_ID});
 
-        List<Order> orders = tableRequest.getOrder();
-        if (orders != null && orders.size() > 0) {
-            for (Order order : orders) {
-                Integer columnIndex = order.getColumn();
-                DataTableColumn orderColumn = tableRequest.getColumns().get(columnIndex);
-
-                Path<?> sortPath = this.convertStringToPath(from, orderColumn.getData());
-                if (order.getDir().value().equals("desc")) {
-                    cq.orderBy(cb.desc(sortPath));
-                } else {
-                    cq.orderBy(cb.asc(sortPath));
-                }
-            }
-        }
-
-        // where clouse:
-        Predicate predicate = cb.conjunction();
-        for (DataTableColumn column : tableRequest.getColumns()) {
-            String columnName = column.getName();
-            String columnSearchValue = column.getSearch().getValue().trim();
-            log.info("column name [" + columnName + "] search value [" + columnSearchValue + "]");
-            if (columnSearchValue != null && !columnSearchValue.equals("")) {
-                //predicate = cb.and(predicate, cb.equal(from.get(columnName), columnSearchValue));
-                if (columnName.equals("id")) {
-                    Long searchValue = new Long(columnSearchValue);
-                    predicate = cb.and(predicate, cb.equal(from.get(Transaction_.id), searchValue));
-                }
-                if (columnName.equals("code")) {
-                    String searchValue = new String(columnSearchValue);
-                    predicate = cb.and(predicate, cb.equal(from.get(Transaction_.code), searchValue));
-                }
-            }
-        }
-        cq.where(predicate);
-        TypedQuery<Transaction> query = em.createQuery(cq);
-
-        query.setFirstResult(tableRequest.getStart());
-        query.setMaxResults(tableRequest.getLength());
-
-        retList = query.getResultList();
-        dataTableResult.setData(retList);
-
-        CriteriaQuery<Long> cqLong = cb.createQuery(Long.class);
-        from = cqLong.from(cq.getResultType());
-
-        cqLong.select(cb.count(from));
-        cqLong.where(predicate);
-        Long allCount = em.createQuery(cqLong).getSingleResult();
-
-        dataTableResult.setRecordsTotal(allCount);
-        dataTableResult.setRecordsFiltered(allCount);
-        dataTableResult.setDraw(tableRequest.getDraw());
-
-        return dataTableResult;
-
+        return this.transactionRepository.retrievePageRequestDetails(tableRequest);
     }
 
 }

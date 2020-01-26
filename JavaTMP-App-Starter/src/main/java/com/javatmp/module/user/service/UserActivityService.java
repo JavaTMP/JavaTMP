@@ -1,26 +1,22 @@
 package com.javatmp.module.user.service;
 
-import com.javatmp.module.user.entity.UserActivity;
 import com.javatmp.module.user.repository.UserActivityRepository;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.Tuple;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.jpa.repository.support.JpaEntityInformation;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class UserActivityService extends SimpleExtendedJpaRepository<UserActivity, Long> {
+public class UserActivityService {
 
     private UserActivityRepository userActivityRepository;
 
     private final EntityManager em;
 
-    public UserActivityService(UserActivityRepository userActivityRepository, JpaEntityInformation<UserActivity, Long> entityInformation, EntityManager entityManager) {
-        super(entityInformation, entityManager);
+    public UserActivityService(UserActivityRepository userActivityRepository, EntityManager entityManager) {
         this.em = entityManager;
     }
 

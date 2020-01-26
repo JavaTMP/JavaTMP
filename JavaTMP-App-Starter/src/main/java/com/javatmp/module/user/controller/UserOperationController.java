@@ -11,6 +11,7 @@ import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
 import java.io.IOException;
 import java.text.MessageFormat;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -105,7 +106,7 @@ public class UserOperationController {
     }
 
     @PostMapping(value = "/ListUsersController", produces = MediaType.APPLICATION_JSON_VALUE)
-    public DataTableResults<User> listUsersController(@RequestBody DataTableRequest tableRequest) {
+    public DataTableResults<User> listUsersController(@RequestBody DataTableRequest tableRequest) throws ParseException {
         log.debug("datatableRequest [{}]", tableRequest);
         DataTableResults<User> dataTableResult = this.userService.listAllUsers(tableRequest);
         return dataTableResult;

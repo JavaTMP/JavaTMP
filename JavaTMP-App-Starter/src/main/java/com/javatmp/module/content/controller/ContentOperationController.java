@@ -3,12 +3,11 @@ package com.javatmp.module.content.controller;
 import com.javatmp.fw.domain.ResponseMessage;
 import com.javatmp.fw.domain.table.DataTableRequest;
 import com.javatmp.fw.domain.table.DataTableResults;
+import com.javatmp.fw.util.Constants;
 import com.javatmp.module.content.entity.Content;
 import com.javatmp.module.content.service.ContentService;
 import com.javatmp.module.user.entity.User;
-import com.javatmp.fw.util.Constants;
 import java.text.ParseException;
-import java.util.Date;
 import java.util.ResourceBundle;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +32,7 @@ public class ContentOperationController {
             Content contentToBeCreated, ResponseMessage responseMessage) {
 
         log.debug("content to be created is {}", contentToBeCreated);
-        contentToBeCreated.setCreationDate(new Date());
-        contentToBeCreated.setStatus((short) 1);
         contentToBeCreated.setCreatedBy(loggedInUser.getId());
-
         this.contentService.save(contentToBeCreated);
         responseMessage.setOverAllStatus(true);
         responseMessage.setMessage("Content Created Successfully");

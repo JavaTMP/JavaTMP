@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Slf4j
 @Configuration
-@EnableJpaRepositories(repositoryBaseClass = ExtendedJpaRepositoryImpl.class)
+@EnableJpaRepositories(basePackages = "com.javatmp", repositoryBaseClass = ExtendedJpaRepositoryImpl.class)
 public class JpaConfig {
 }

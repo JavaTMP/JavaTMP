@@ -1,24 +1,24 @@
 package com.javatmp.module.event.service;
 
 import com.javatmp.module.event.entity.Event;
+import com.javatmp.module.event.repository.EventRepository;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.ThreadLocalRandom;
 import javax.persistence.EntityManager;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.jpa.repository.support.JpaEntityInformation;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class EventService extends SimpleExtendedJpaRepository<Event, Long> {
+public class EventService {
 
     private EntityManager em;
+    private EventRepository eventRepository;
 
-    public EventService(JpaEntityInformation<Event, Long> entityInformation, EntityManager entityManager) {
-        super(entityInformation, entityManager);
+    public EventService(EntityManager entityManager, EventRepository eventRepository) {
         this.em = entityManager;
+        this.eventRepository = eventRepository;
     }
 
     public void initialiseDiary() {
@@ -49,7 +49,7 @@ public class EventService extends SimpleExtendedJpaRepository<Event, Long> {
             item.setCreationDate(new Date());
             item.setTitle("Event Title");
             item.setDescription("Event Description");
-            this.save(item);
+            this.eventRepository.save(item);
             item.setTitle("Appt: " + item.getId());
         }
     }
@@ -74,6 +74,10 @@ public class EventService extends SimpleExtendedJpaRepository<Event, Long> {
             baseDate.set(Calendar.MILLISECOND, 0);
         }
         return baseDate.getTime();
+    }
+
+    public Event getOne(Long id) {
+        return this.eventRepository.getOne(id);
     }
 
 }

@@ -1,11 +1,12 @@
 package com.javatmp.module.content.service;
 
-import com.javatmp.fw.data.jpa.repository.ExtendedJpaRepository;
 import com.javatmp.fw.domain.table.DataTableRequest;
 import com.javatmp.fw.domain.table.DataTableResults;
 import com.javatmp.module.content.entity.Content;
 import com.javatmp.module.content.entity.Content_;
+import com.javatmp.module.content.repository.ContentRepository;
 import java.text.ParseException;
+import java.util.Date;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
 import javax.persistence.TypedQuery;
@@ -14,18 +15,18 @@ import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.jpa.repository.support.JpaEntityInformation;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class ContentService extends ExtendedJpaRepository<Content, Long> {
+public class ContentService {
 
     private EntityManager em;
+    private ContentRepository contentRepository;
 
-    public ContentService(JpaEntityInformation<Content, Long> entityInformation, EntityManager em) {
-        super(entityInformation, em);
+    public ContentService(EntityManager em, ContentRepository contentRepository) {
         this.em = em;
+        this.contentRepository = contentRepository;
     }
 
     public int updateContent(Content content) {
@@ -78,8 +79,20 @@ public class ContentService extends ExtendedJpaRepository<Content, Long> {
         page.setClassType(Content.class);
         page.setSelects(new String[]{"contentId", "title", "summaryText",
             "contentText", "creationDate", "createdBy", "status"});
-        DataTableResults<Content> msgs = this.retrievePageRequestDetails(page);
+        DataTableResults<Content> msgs = this.contentRepository.retrievePageRequestDetails(page);
         return msgs;
+    }
+
+    public Content getOne(Long contentId) {
+        return this.contentRepository.getOne(contentId);
+    }
+
+    public Content save(Content contentToBeCreated) {
+
+        contentToBeCreated.setCreationDate(new Date());
+        contentToBeCreated.setStatus((short) 1);
+
+        return this.contentRepository.save(contentToBeCreated);
     }
 
 }

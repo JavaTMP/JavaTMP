@@ -1,47 +1,26 @@
 package com.javatmp.module.user.service;
 
-import com.javatmp.module.user.entity.Theme;
 import com.javatmp.module.user.entity.Themetranslation;
 import com.javatmp.module.user.entity.User;
-import java.util.HashMap;
-import java.util.LinkedList;
+import com.javatmp.module.user.repository.ThemeRepository;
 import java.util.List;
-import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import org.springframework.data.jpa.repository.support.JpaMetamodelEntityInformation;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class ThemeService extends SimpleExtendedJpaRepository<Theme, String> {
+public class ThemeService {
 
-    private Map<String, List<Themetranslation>> themes;
     private final EntityManager em;
+    private ThemeRepository themeRepository;
 
-    public ThemeService(EntityManager em) {
-        super(new JpaMetamodelEntityInformation<Theme, String>(Theme.class, em.getMetamodel()), em);
+    public ThemeService(EntityManager em, ThemeRepository themeRepository) {
         this.em = em;
+        this.themeRepository = themeRepository;
     }
 
     public List<Themetranslation> getThemes(User localeUser) {
-        List<Themetranslation> themes = new LinkedList<>();
-        if (this.themes == null || this.themes.isEmpty()) {
-            synchronized (this) {
-                // Check if still empty and not populated before:
-                if (this.themes == null || this.themes.isEmpty()) {
-                    this.themes = new HashMap<>();
-                    List<Themetranslation> all = this.getThemes();
-                    all.forEach((row) -> {
-                        if (this.themes.containsKey(row.getThemetranslationPK().getLangId()) == false) {
-                            this.themes.put(row.getThemetranslationPK().getLangId(), new LinkedList<>());
-                        }
-                        this.themes.get(row.getThemetranslationPK().getLangId()).add(row);
-                    });
-                }
-            }
-        }
-        return this.themes.get(localeUser.getLang());
+        return this.themeRepository.getThemes(localeUser.getLang());
     }
 
     public List<Themetranslation> getThemes() {

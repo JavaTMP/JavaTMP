@@ -9,7 +9,6 @@ import com.javatmp.module.accounting.entity.TransactionEntry;
 import com.javatmp.module.accounting.service.AccountService;
 import com.javatmp.module.accounting.service.TransactionEntryService;
 import com.javatmp.module.accounting.service.TransactionService;
-import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
@@ -54,10 +53,6 @@ public class AccountController {
     public ResponseMessage AddNewAccountPopup(Account accountToBeCreated, ResponseMessage responseMessage) {
 
         log.info("Account to be created is [" + (accountToBeCreated) + "]");
-        accountToBeCreated.setCreationDate(new Date());
-        accountToBeCreated.setStatus((short) 1);
-        accountToBeCreated.setDebit(BigDecimal.ZERO);
-        accountToBeCreated.setCredit(BigDecimal.ZERO);
         accountService.save(accountToBeCreated);
         responseMessage.setOverAllStatus(true);
         responseMessage.setMessage("Account created successfully");

@@ -6,7 +6,7 @@
 package com.javatmp.activity;
 
 import com.javatmp.module.user.entity.UserActivity;
-import com.javatmp.module.user.service.UserActivityService;
+import com.javatmp.module.user.repository.UserActivityRepository;
 import java.util.Date;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +20,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class AddNewActivityTest {
 
     @Autowired
-    UserActivityService userActivityService;
+    UserActivityRepository userActivityRepository;
 
     @Test
     void contextLoads() {
         UserActivity activity = new UserActivity();
         activity.setCreationDate(new Date());
-        this.userActivityService.save(activity);
+        this.userActivityRepository.save(activity);
     }
 
 }

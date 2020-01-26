@@ -7,6 +7,7 @@ import com.javatmp.module.user.entity.CountrytranslationPK_;
 import com.javatmp.module.user.entity.Countrytranslation_;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.entity.User_;
+import com.javatmp.module.user.repository.UserStatsRepository;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -18,19 +19,18 @@ import javax.persistence.criteria.ListJoin;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.jpa.repository.support.JpaEntityInformation;
-import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class UserStatsService extends SimpleExtendedJpaRepository<Object[], Long> {
+public class UserStatsService {
 
     private EntityManager em;
+    private UserStatsRepository userStatsRepository;
 
-    public UserStatsService(JpaEntityInformation<Object[], Long> entityInformation, EntityManager entityManager) {
-        super(entityInformation, entityManager);
+    public UserStatsService(EntityManager entityManager, UserStatsRepository userStatsRepository) {
         this.em = entityManager;
+        this.userStatsRepository = userStatsRepository;
     }
 
     public List<Object[]> overallUsersStatuses() {
