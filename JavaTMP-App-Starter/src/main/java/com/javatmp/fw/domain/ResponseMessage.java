@@ -29,4 +29,10 @@ public class ResponseMessage {
         this.message = null;
         this.statusCode = statusCode;
     }
+
+    public ResponseMessage(Object data) {
+        this.overAllStatus = true;
+        this.message = null;
+        this.data = data;
+    }
 }

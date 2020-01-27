@@ -1,6 +1,5 @@
 package com.javatmp.module.user.controller;
 
-import com.javatmp.fw.domain.ResponseMessage;
 import com.javatmp.module.user.service.UserActivityService;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
@@ -19,22 +18,12 @@ public class UserActivityController {
     UserActivityService activityService;
 
     @RequestMapping(value = "/GetAvgLoadTimePerHourController", method = RequestMethod.POST)
-    public ResponseMessage getAvgLoadTimePerHourController(ResponseMessage responseMessage) {
-
-        List<Object[]> results = activityService.avgPagesLoadTimePerHour();
-        responseMessage.setOverAllStatus(true);
-        responseMessage.setMessage(null);
-        responseMessage.setData(results);
-
-        return responseMessage;
+    public List<Object[]> getAvgLoadTimePerHourController() {
+        return activityService.avgPagesLoadTimePerHour();
     }
 
     @PostMapping("/GetUsersPageViewsPerHourCountController")
-    public ResponseMessage getUsersPageViewsPerHourCountController(ResponseMessage responseMessage) {
-        List<Object[]> results = activityService.userPageViewsActivitiesPerHour();
-        responseMessage.setOverAllStatus(true);
-        responseMessage.setMessage(null);
-        responseMessage.setData(results);
-        return responseMessage;
+    public List<Object[]> getUsersPageViewsPerHourCountController() {
+        return activityService.userPageViewsActivitiesPerHour();
     }
 }

@@ -17,6 +17,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
@@ -110,9 +111,8 @@ public class AccountService {
 
     }
 
+    @Transactional
     public Transaction createNewTransaction(Transaction transaction) {
-
-        em.getTransaction().begin();
         em.persist(transaction);
         if (transaction.getAccounttransactionList() != null) {
             for (AccountTransaction trans : transaction.getAccounttransactionList()) {
@@ -131,9 +131,6 @@ public class AccountService {
                 em.persist(trans);
             }
         }
-
-        em.getTransaction().commit();
-
         return transaction;
     }
 

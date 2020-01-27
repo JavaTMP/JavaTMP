@@ -19,53 +19,28 @@ public class UserStatsController {
     UserStatsService userStatsService;
 
     @PostMapping("/GetRegisteredUsersStatusesController")
-    public ResponseMessage GetRegisteredUsersStatusesController(ResponseMessage responseMessage) {
-
-        List<Object[]> results = userStatsService.overallUsersStatuses();
-        responseMessage.setOverAllStatus(true);
-        responseMessage.setData(results);
-
-        return responseMessage;
-
+    public List<Object[]> GetRegisteredUsersStatusesController() {
+        return userStatsService.overallUsersStatuses();
     }
 
     @RequestMapping(value = "/GetUsersLocationsCountController", method = RequestMethod.POST)
-    public ResponseMessage getUsersLocationsCountController(ResponseMessage responseMessage) throws Exception {
-
-        List<Object[]> results = userStatsService.usersCountriesGrouping();
-        responseMessage.setOverAllStatus(true);
-        responseMessage.setMessage(null);
-        responseMessage.setData(results);
-
-        return responseMessage;
-
+    public List<Object[]> getUsersLocationsCountController() throws Exception {
+        return userStatsService.usersCountriesGrouping();
     }
 
     @PostMapping(value = "/GetUsersBirthdayCountController")
-    public ResponseMessage getUsersBirthdayCountController(ResponseMessage responseMessage) {
-
-        List<Object[]> results = userStatsService.usersBirthdayGroupingByMonth();
-        responseMessage.setOverAllStatus(true);
-        responseMessage.setMessage(null);
-        responseMessage.setData(results);
-
-        return responseMessage;
-
+    public List<Object[]> getUsersBirthdayCountController(ResponseMessage responseMessage) {
+        return userStatsService.usersBirthdayGroupingByMonth();
     }
 
     @PostMapping("/GetVisitingUsersCountController")
-    public ResponseMessage getVisitingUsersCountController(ResponseMessage responseMessage) {
-
+    public Long[] getVisitingUsersCountController() {
         Long usersVisitingTodayCount = userStatsService.usersVistingToday();
         Long usersNotVisitingTodayCount = userStatsService.usersNotVistingToday();
         Long[] results = new Long[2];
         results[0] = usersVisitingTodayCount;
         results[1] = usersNotVisitingTodayCount;
-        responseMessage.setOverAllStatus(true);
-        responseMessage.setMessage(null);
-        responseMessage.setData(results);
-
-        return responseMessage;
+        return results;
 
     }
 

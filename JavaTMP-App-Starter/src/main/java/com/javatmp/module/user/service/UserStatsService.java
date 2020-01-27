@@ -92,12 +92,7 @@ public class UserStatsService {
     }
 
     public List<Object[]> usersBirthdayGroupingByMonth() {
-        List<Object[]> results;
-
-        Query query = em.createQuery(
-                "SELECT MONTH(user.birthDate) , count(*) FROM User user group by MONTH(user.birthDate)");
-        List resultList = query.getResultList();
-        return resultList;
+        return this.userStatsRepository.getUsersBirthdayGroupingByMonth();
     }
 
     public Long usersVistingToday() {

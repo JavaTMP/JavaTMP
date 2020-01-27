@@ -182,7 +182,6 @@ public class UserService {
         return deletedStatus;
     }
 
-    @Transactional
     private int updateUserStatus(User userToBeUpdated) {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<User> cq = cb.createQuery(User.class);
@@ -203,11 +202,13 @@ public class UserService {
         return em.createQuery(update).executeUpdate();
     }
 
+    @Transactional
     public int activateUser(User userToBeUpdated) {
         userToBeUpdated.setStatus((short) 1);
         return this.updateUserStatus(userToBeUpdated);
     }
 
+    @Transactional
     public int deActivateUser(User userToBeUpdated) {
         userToBeUpdated.setStatus((short) 0);
         return this.updateUserStatus(userToBeUpdated);

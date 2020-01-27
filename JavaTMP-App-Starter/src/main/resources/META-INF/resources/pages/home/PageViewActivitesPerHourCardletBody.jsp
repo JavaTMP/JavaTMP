@@ -102,7 +102,7 @@
             javatmp.plugins.ajaxJsonAction({
                 url: javatmp.settings.contextPath + "/stats/GetUsersPageViewsPerHourCountController",
                 success: function (remoteContent) {
-                    var dataArray = remoteContent.data;
+                    var dataArray = remoteContent;
                     var totalPages = 0;
                     var outputHoursArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
                     for (var i = 0; i < dataArray.length; i++) {

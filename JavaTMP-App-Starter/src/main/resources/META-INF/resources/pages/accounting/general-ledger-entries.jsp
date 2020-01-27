@@ -75,52 +75,9 @@
             //
 
             var listTableElement = $('#TransactionList');
-            var table = listTableElement.DataTable({
-                // https://datatables.net/reference/option/dom
-                dom: "<'row'>" +
-                        "<'row'<'col-sm-12'tr>>" +
-                        "<'row'<'col-sm-6 col-md-2 pt-2'l><'col-sm-6 col-md-3'i><'col-sm-12 col-md-7'p>>",
-                //                dom: "<'row'<'col-sm-12 p-0'tr>>" +
-                //                        "<'row'<'col-sm-4'i><'col-sm-4'p><'col-sm-4 pt-2 text-right'l>>"
-                //                ,
-                //                select: true,
-                keys: true,
-                select: "single",
-                scrollY: 500,
-                scrollX: true,
-                "autoWidth": false,
-                scrollCollapse: true,
-                "searching": true,
-                searchDelay: 500,
-                orderCellsTop: true, // important to for two row header with filteration below header column names.
-                "processing": true,
-                "serverSide": true,
-                "order": [[0, 'asc']],
-//                fixedColumns: false,
-                "rowCallback": function (row, data, index) {
-                    $(row).attr("data-row-id", data.id);
-                },
-                "drawCallback": function (settings) {
-
-                },
-                initComplete: function (settings, json) {
-                    var api = this.api();
-                    // prepare id filter search field:
-                },
+            var table = javatmp.plugins.DataTableAjaxWrapper(listTableElement, {
                 "ajax": {
-                    "type": "POST",
-                    "url": javatmp.settings.contextPath + "/accounting/ListEntries",
-                    dataType: "json",
-                    contentType: "application/json; charset=UTF-8",
-                    "data": function (currentDate) {
-                        currentDate._ajaxGlobalBlockUI = false; // window blocked until data return
-                        return JSON.stringify(currentDate);
-                    },
-                    "dataSrc": function (json) {
-                        json["recordsTotal"] = json.data.recordsTotal;
-                        json["recordsFiltered"] = json.data.recordsFiltered;
-                        return json.data.data;
-                    }
+                    "url": javatmp.settings.contextPath + "/accounting/ListEntries"
                 },
                 columns: [
                     {data: 'id', name: "id", width: "3rem", "render": javatmp.plugins.DataTableColRenderWrapper("3rem")},

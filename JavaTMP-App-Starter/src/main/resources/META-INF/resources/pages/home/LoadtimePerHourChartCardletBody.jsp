@@ -102,7 +102,7 @@
             javatmp.plugins.ajaxJsonAction({
                 url: javatmp.settings.contextPath + "/stats/GetAvgLoadTimePerHourController",
                 success: function (remoteContent) {
-                    var dataArray = remoteContent.data;
+                    var dataArray = remoteContent;
                     var totalAvgs = 0;
                     var avgLoadTime = 0;
                     var outputHoursArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];

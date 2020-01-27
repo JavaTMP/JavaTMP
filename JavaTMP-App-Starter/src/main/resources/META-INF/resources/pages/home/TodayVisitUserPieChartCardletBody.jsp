@@ -56,8 +56,8 @@
             javatmp.plugins.ajaxJsonAction({
                 url: javatmp.settings.contextPath + "/stats/GetVisitingUsersCountController",
                 success: function (remoteContent) {
-                    var visitingToday = remoteContent.data[0];
-                    var notVisitingTodayOrLoginYet = remoteContent.data[1];
+                    var visitingToday = remoteContent[0];
+                    var notVisitingTodayOrLoginYet = remoteContent[1];
 
                     todayVisitUserPieChartOption.series[0].data[0].value = visitingToday;
                     todayVisitUserPieChartOption.series[0].data[1].value = notVisitingTodayOrLoginYet;

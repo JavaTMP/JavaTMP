@@ -59,8 +59,8 @@
             javatmp.plugins.ajaxJsonAction({
                 url: javatmp.settings.contextPath + "/stats/GetRegisteredUsersStatusesController",
                 success: function (remoteContent) {
-                    var activeUsersCount = remoteContent.data[1][1];
-                    var inactiveUsersCount = remoteContent.data[0][1];
+                    var activeUsersCount = remoteContent[1][1];
+                    var inactiveUsersCount = remoteContent[0][1];
                     var allUsersCount = activeUsersCount + inactiveUsersCount;
 
                     userStatusPieChartOption.series[0].data[0].value = activeUsersCount;

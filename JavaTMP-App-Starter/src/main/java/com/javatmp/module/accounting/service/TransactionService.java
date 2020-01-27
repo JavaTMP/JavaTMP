@@ -21,7 +21,7 @@ public class TransactionService {
 
     public TransactionService(EntityManager em, TransactionRepository transactionRepository) {
         this.em = em;
-        this.transactionRepository = this.transactionRepository;
+        this.transactionRepository = transactionRepository;
     }
 
     public Transaction createNewTransaction(Transaction transaction) {
