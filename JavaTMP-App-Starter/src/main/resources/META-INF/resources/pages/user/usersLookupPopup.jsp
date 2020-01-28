@@ -88,26 +88,10 @@
                 modal.originalModal.find(".modal-footer").addClass("justify-content-start");
                 modal.originalModal.find(".modal-body").addClass("pt-0");
                 var userTableElement = $('#UsersListTableId');
-                var table = userTableElement.DataTable({
-                    "pagingType": "full",
-                    dom: "<'row'<'col-sm-12'i>>" +
-                            "<'row'<'col-sm-12'tr>>" +
-                            "<'row'<'col-sm-4'l><'col-sm-8'p>>",
-                    //                select: true,
-                    keys: true,
-                    select: "single",
+                var table = javatmp.plugins.DataTableAjaxWrapper(userTableElement, {
                     scrollY: 300,
                     scrollX: true,
-                    "autoWidth": false,
-                    scrollCollapse: true,
-                    "searching": true,
-                    searchDelay: 500,
-                    orderCellsTop: true, // important to for two row header with filteration below header column names.
-                    "processing": true,
-                    "serverSide": true,
-                    "rowCallback": function (row, data, index) {
-                    },
-                    "drawCallback": function (settings) {
+                    drawCallback: function (settings) {
                         selectUserButton.prop("disabled", true);
                     },
                     initComplete: function (settings, json) {
@@ -117,21 +101,11 @@
                         var usernameFilterInput = $("#userlist-username-filter").on('keyup', javatmp.plugins.DataTableColFilterEventWrapper(api, 1));
                         var firstNameFilterInput = $("#userlist-firstname-filter").on('keyup', javatmp.plugins.DataTableColFilterEventWrapper(api, 2));
                         var lastNameFilterInput = $("#userlist-lastname-filter").on('keyup', javatmp.plugins.DataTableColFilterEventWrapper(api, 3));
+
+                        api.columns.adjust();
                     },
                     "ajax": {
-                        "type": "POST",
-                        "url": javatmp.settings.contextPath + "/user/ListUsersController",
-                        dataType: "json",
-                        contentType: "application/json; charset=UTF-8",
-                        "data": function (currentDate) {
-                            currentDate._ajaxGlobalBlockUI = false; // window blocked until data return
-                            return JSON.stringify(currentDate);
-                        },
-                        "dataSrc": function (json) {
-                            json["recordsTotal"] = json.recordsTotal;
-                            json["recordsFiltered"] = json.recordsFiltered;
-                            return json.data;
-                        }
+                        "url": javatmp.settings.contextPath + "/user/ListUsersController"
                     },
                     columns: [
                         {data: 'id', className: "", name: "id", width: "3rem", "render": javatmp.plugins.DataTableColRenderWrapper("6rem")},

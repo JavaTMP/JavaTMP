@@ -5,9 +5,7 @@ import com.javatmp.module.user.entity.UserActivity;
 import java.util.List;
 import javax.persistence.Tuple;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.stereotype.Repository;
 
-@Repository
 public interface UserActivityRepository extends ExtendedJpaRepository<UserActivity, Long> {
 
     @Query("SELECT YEAR(e.creationDate), MONTH(e.creationDate), DAY(e.creationDate), "

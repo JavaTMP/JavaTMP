@@ -132,7 +132,8 @@
                                 result.toBlob(function (blob) {
                                     var formData = new FormData();
                                     blob.type = uploadedImageType;
-                                    formData.append('croppedImage', blob, uploadedImageName);
+                                    // mandator name coz uploadController required it.
+                                    formData.append('file', blob, uploadedImageName);
 
                                     $.ajax(javatmp.settings.contextPath + '/dms/UploadController', {
                                         method: "POST",

@@ -405,7 +405,7 @@
                 var passData = {};
                 BootstrapModalWrapperFactory.createAjaxModal({
                     message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
-                    updateSizeAfterDataFetchTo: null,
+                    size: "modal-lg",
                     localData: {
                         callback: function (callbackData) {
                             if ((callbackData.cancel !== true)) {

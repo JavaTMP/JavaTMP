@@ -34,12 +34,15 @@ public class UserServiceTest {
         Long userId = 2077L;
 
         User user = this.userRepository.getOne(userId);
-        log.debug("User name from db {}", user.getUserName());
+        log.debug("User db. id {}, username {}, status {}", user.getId(), user.getUserName(), user.getStatus());
 
-        User userToBeUpdated = new User(userId);
-
-        log.debug("user to be update {}", userToBeUpdated);
-        int status = this.userService.activateUser(userToBeUpdated);
+        if (user.getStatus().equals((short) 1)) {
+            int status = this.userService.deActivateUser(user);
+        } else if (user.getStatus().equals((short) 0)) {
+            int status = this.userService.activateUser(user);
+        } else {
+            throw new IllegalArgumentException("unregozine status = " + user.getStatus());
+        }
 
     }
 
