@@ -1,5 +1,6 @@
 package com.javatmp.module.user.service;
 
+import com.javatmp.module.user.entity.LoggedInUser;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.repository.UserRepository;
 import java.util.Collection;
@@ -30,8 +31,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         log.debug("trying to find username {}", userName);
         User user = userRepository.findByUserName(userName)
                 .orElseThrow(() -> new UsernameNotFoundException("Email " + userName + " not found"));
-        return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(),
-                getAuthorities(user));
+        return new LoggedInUser(user, getAuthorities(user));
     }
 
     private static Collection<? extends GrantedAuthority> getAuthorities(User user) {
