@@ -40,8 +40,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public AuthenticationManager customAuthenticationManager() throws Exception {
-        return authenticationManager();
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 
     @Autowired
@@ -52,8 +53,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // Disable CSRF (cross site request forgery)
-        http.csrf().disable();
-        http.authorizeRequests().anyRequest().permitAll();
+        http.csrf().disable().cors();
+//        http.authorizeRequests().anyRequest().permitAll();
+
+        http.authorizeRequests().antMatchers("/assets/**", "/login**", "/logout",
+                "/user/register", "/CaptchaImageController", "/pages/system/register").permitAll().anyRequest().authenticated()
+                .and().formLogin()
+                .loginPage("/login")
+                .loginProcessingUrl("/login-processing")
+                .usernameParameter("userName")
+                .passwordParameter("password")
+                .defaultSuccessUrl("/")
+                .permitAll()
+                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/").permitAll();
 //
 //        http
 //                //                .headers()

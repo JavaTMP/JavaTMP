@@ -1,5 +1,7 @@
 package com.javatmp.module.user.service;
 
+import com.javatmp.module.user.entity.LoggedInUser;
+import com.javatmp.module.user.entity.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,15 +25,13 @@ public class SecurityService {
     @Autowired
     private UserDetailsService userDetailsService;
 
-    public String findLoggedInUsername() {
-        String loggedInUsername = null;
+    public User findLoggedInUser() {
         Object userDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
-        if (userDetails instanceof UserDetails) {
-            loggedInUsername = ((UserDetails) userDetails).getUsername();
+        if (userDetails instanceof LoggedInUser) {
+            return ((LoggedInUser) userDetails).getUser();
         }
-        log.info("logged in username is {}", loggedInUsername);
 
-        return loggedInUsername;
+        return null;
     }
 
     public void autoLogin(String username, String password) {

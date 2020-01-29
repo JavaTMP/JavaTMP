@@ -28,7 +28,7 @@
                             ${labels['page.login.loginCardTitle']}
                         </div>
                         <div class="card-body">
-                            <form id="main-login-form" method="POST" role="form" action="${pageContext.request.contextPath}/login">
+                            <form id="main-login-form" method="POST" role="form" action="${pageContext.request.contextPath}/login-processing">
                                 <div class="form-group">
                                     <label class="control-label col-form-label">${labels['domain.user.userName']}</label>
                                     <input class="form-control" placeholder="${labels['domain.user.userName']}"

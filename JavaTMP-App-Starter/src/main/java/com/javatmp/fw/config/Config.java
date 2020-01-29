@@ -53,7 +53,7 @@ public class Config implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("/index.jsp");
         registry.addViewController("").setViewName("/index.jsp");
-//        registry.addViewController("/login").setViewName("/pages/system/default-login-page.jsp");
+        registry.addViewController("/login").setViewName("/pages/system/default-login-page.jsp");
     }
 
     @Override
@@ -104,18 +104,17 @@ public class Config implements WebMvcConfigurer {
         return registrationBean;
     }
 
-    @Bean
-    public FilterRegistrationBean<AuthenticatorFilter> getAuthenticatorFilter() {
-        FilterRegistrationBean<AuthenticatorFilter> registrationBean
-                = new FilterRegistrationBean<>();
-        registrationBean.setFilter(this.authenticatorFilter);
-        registrationBean.addUrlPatterns("/*");
-        registrationBean.setDispatcherTypes(DispatcherType.REQUEST);
-        registrationBean.addInitParameter("excludedUrlsRegex", "^/assets/.*,^/login,^/logout,^/user/register,^/CaptchaImageController,^/pages/system/register");
-        registrationBean.setOrder(4);
-        return registrationBean;
-    }
-
+//    @Bean
+//    public FilterRegistrationBean<AuthenticatorFilter> getAuthenticatorFilter() {
+//        FilterRegistrationBean<AuthenticatorFilter> registrationBean
+//                = new FilterRegistrationBean<>();
+//        registrationBean.setFilter(this.authenticatorFilter);
+//        registrationBean.addUrlPatterns("/*");
+//        registrationBean.setDispatcherTypes(DispatcherType.REQUEST);
+//        registrationBean.addInitParameter("excludedUrlsRegex", "^/assets/.*,^/login,^/logout,^/user/register,^/CaptchaImageController,^/pages/system/register");
+//        registrationBean.setOrder(4);
+//        return registrationBean;
+//    }
     @Bean
     public FilterRegistrationBean<CacheControlHeadersFilter> getCacheControlHeadersFilter() {
         FilterRegistrationBean<CacheControlHeadersFilter> registrationBean
