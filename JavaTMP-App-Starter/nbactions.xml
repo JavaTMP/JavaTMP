@@ -23,4 +23,11 @@
                 <goal>test</goal>
             </goals>
         </action>
+        <action>
+            <actionName>CUSTOM-clean</actionName>
+            <displayName>clean</displayName>
+            <goals>
+                <goal>clean</goal>
+            </goals>
+        </action>
     </actions>

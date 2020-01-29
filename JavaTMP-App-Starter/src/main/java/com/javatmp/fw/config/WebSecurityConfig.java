@@ -1,6 +1,10 @@
 package com.javatmp.fw.config;
 
 import com.javatmp.fw.util.MD5Util;
+import com.javatmp.fw.web.handler.CustomAuthenticationEntryPoint;
+import com.javatmp.fw.web.handler.CustomAuthenticationFailureHandler;
+import com.javatmp.fw.web.handler.CustomAuthenticationSuccessHandler;
+import com.javatmp.fw.web.handler.CustomLogoutSuccessHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,6 +27,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService customUserDetailsService;
+
+    @Autowired
+    CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;
+
+    @Autowired
+    CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
+
+    @Autowired
+    CustomLogoutSuccessHandler customLogoutSuccessHandler;
+
+    @Autowired
+    CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -57,15 +73,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //        http.authorizeRequests().anyRequest().permitAll();
 
         http.authorizeRequests().antMatchers("/assets/**", "/login**", "/logout",
-                "/user/register", "/CaptchaImageController", "/pages/system/register").permitAll().anyRequest().authenticated()
+                "/user/register", "/CaptchaImageController", "/pages/system/register", "/login-processing", "/error").permitAll().anyRequest().authenticated()
                 .and().formLogin()
+                //        http.authorizeRequests().anyRequest().authenticated()
+                //                .and().formLogin()
                 .loginPage("/login")
                 .loginProcessingUrl("/login-processing")
                 .usernameParameter("userName")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/")
-                .permitAll()
-                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/").permitAll();
+                .successHandler(customAuthenticationSuccessHandler)
+                .failureHandler(customAuthenticationFailureHandler)
+                .and().logout().logoutUrl("/logout")
+                .logoutSuccessHandler(customLogoutSuccessHandler)
+                .logoutSuccessUrl("/");
+
+        http.exceptionHandling().authenticationEntryPoint(customAuthenticationEntryPoint);
 //
 //        http
 //                //                .headers()
@@ -75,12 +97,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .authorizeRequests()
 //                .antMatchers("/**")
 //                .permitAll();
-
     }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/**");
+//        super.configure(web);
+//        web.ignoring().antMatchers("/assets/**", "/login**", "/logout",
+//                "/user/register", "/CaptchaImageController", "/pages/system/register", "/login-processing", "/error");
+//        web.ignoring().antMatchers("/**");
     }
 
 }

@@ -1,10 +1,6 @@
 package com.javatmp.fw.web.filter;
+//@Component
 
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Component;
-
-@Slf4j
-@Component
 public class AuthenticatorFilter {
 //
 //    @Autowired

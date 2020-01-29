@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.javatmp.fw.config.converter.OrderDirTypeJsonDeserializer;
 import com.javatmp.fw.config.converter.OrderDirTypeJsonSerializer;
 import com.javatmp.fw.domain.table.OrderDir;
-import com.javatmp.fw.web.filter.AuthenticatorFilter;
 import com.javatmp.fw.web.filter.CacheControlHeadersFilter;
 import com.javatmp.fw.web.filter.ContentCacheFilter;
 import com.javatmp.fw.web.filter.GZIPCompressingFilter;
@@ -45,9 +44,9 @@ public class Config implements WebMvcConfigurer {
 
     @Autowired
     JavaTMPServletListener javaTMPServletListener;
-
-    @Autowired
-    AuthenticatorFilter authenticatorFilter;
+//
+//    @Autowired
+//    AuthenticatorFilter authenticatorFilter;
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
