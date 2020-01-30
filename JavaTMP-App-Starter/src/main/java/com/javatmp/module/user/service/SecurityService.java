@@ -45,4 +45,5 @@ public class SecurityService {
             log.debug(String.format("Auto login %s successfully!", username));
         }
     }
+
 }

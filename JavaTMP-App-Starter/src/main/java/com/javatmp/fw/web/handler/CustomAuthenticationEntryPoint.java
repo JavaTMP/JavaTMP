@@ -8,8 +8,11 @@ package com.javatmp.fw.web.handler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javatmp.fw.domain.ResponseMessage;
 import com.javatmp.fw.util.Constants;
+import com.javatmp.module.user.entity.User;
+import com.javatmp.module.user.service.SecurityService;
 import com.javatmp.module.user.service.UserService;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -31,6 +34,9 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
     @Autowired
     UserService userService;
 
+    @Autowired
+    SecurityService securityService;
+
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
             AuthenticationException authException) throws IOException, ServletException {
@@ -40,7 +46,31 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
         String path = req.getRequestURI().substring(req.getContextPath().length());
         HttpSession session = req.getSession();
         ResourceBundle labels = (ResourceBundle) session.getAttribute(Constants.LANGUAGE_ATTR_KEY);
-        if ("ajax".equals(req.getParameter("_ajax")) || req.getMethod().equals("POST")) {
+        log.debug("Session is new [" + session.isNew() + "]");
+        if (session.isNew()) {
+            // for demo and for new time access we support user123 loggedin:
+            User dbUser = new User();
+            dbUser.setUserName("user123");
+            dbUser = userService.readUserByUsername(dbUser);
+            Locale locale = Locale.forLanguageTag(dbUser.getLang());
+            ResourceBundle bundle = ResourceBundle.getBundle(Constants.RESOURCE_BUNDLE_BASE_NAME, locale);
+            session.setAttribute(Constants.LANGUAGE_ATTR_KEY, bundle);
+            session.setAttribute("user", dbUser);
+            userService.updateLastUserAccess(dbUser);
+
+            securityService.autoLogin(dbUser.getUserName(), dbUser.getUserName());
+
+            String redirectUrl = req.getContextPath() + "/";
+            log.info("redirect user to {}", redirectUrl);
+//            res.setStatus(HttpServletResponse.SC_OK);
+//            res.setHeader("Location", res.encodeRedirectURL(redirectUrl));
+//            res.sendRedirect(redirectUrl);
+            // Getting request information without the hostname.
+            String uri = request.getRequestURI();
+            String url = request.getRequestURL().toString();
+            log.debug("uri [" + uri + "], url [" + url + "]");
+            request.getRequestDispatcher(uri).forward(request, response);
+        } else if ("ajax".equals(req.getParameter("_ajax")) || req.getMethod().equals("POST")) {
             // we send an error ajax message response consisting
             res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             ResponseMessage responseMessage = new ResponseMessage();

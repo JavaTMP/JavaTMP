@@ -40,6 +40,7 @@ public class UserControllerTests {
         mockMvc.perform(post("/stats/GetRegisteredUsersStatusesController")
                 .contentType("application/json")).andDo(print())
                 .andExpect(status().isOk());
+//                .andExpect(status().is(302));
     }
 
 }
