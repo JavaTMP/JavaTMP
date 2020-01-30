@@ -45,6 +45,9 @@ public class Config implements WebMvcConfigurer {
     @Autowired
     JavaTMPServletListener javaTMPServletListener;
 
+    @Autowired
+    LocalizationFilter localizationFilter;
+
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("/index.jsp");
@@ -92,7 +95,7 @@ public class Config implements WebMvcConfigurer {
     public FilterRegistrationBean<LocalizationFilter> getLocalizationFilter() {
         FilterRegistrationBean<LocalizationFilter> registrationBean
                 = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new LocalizationFilter());
+        registrationBean.setFilter(localizationFilter);
         registrationBean.addUrlPatterns("/*");
         registrationBean.setDispatcherTypes(DispatcherType.REQUEST);
         registrationBean.addInitParameter("excludedUrlsRegex", "^/assets/.*,^/CaptchaImageController");

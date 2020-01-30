@@ -58,9 +58,9 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
             String redirectUrl = "/login";
             log.info("redirect user to login page");
             res.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-//                res.setHeader("Location", res.encodeRedirectURL(redirectUrl));
-//                res.sendRedirect(redirectUrl);
-            request.getRequestDispatcher(redirectUrl).forward(request, response);
+            res.setHeader("Location", res.encodeRedirectURL(redirectUrl));
+            res.sendRedirect(redirectUrl);
+//            request.getRequestDispatcher(redirectUrl).forward(request, response);
         }
     }
 }

@@ -40,6 +40,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     CustomAuthenticationEntryPoint customAuthenticationEntryPoint;
 
+//    @Autowired
+//    LocalizationFilter localizationFilter;
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new PasswordEncoder() {
@@ -72,8 +74,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().cors();
 //        http.authorizeRequests().anyRequest().permitAll();
 
-        http.authorizeRequests().antMatchers("/assets/**", "/login**", "/logout",
-                "/user/register", "/CaptchaImageController", "/pages/system/register", "/login-processing", "/error").permitAll().anyRequest().authenticated()
+        http.authorizeRequests().antMatchers(
+                "/assets/**", "/login**", "/logout", "/user/register", "/CaptchaImageController",
+                "/pages/system/register", "/login-processing", "/error").permitAll()
+                .anyRequest().authenticated()
+                //                .anyRequest().hasAnyRole("ANONYMOUS, USER")
                 .and().formLogin()
                 //        http.authorizeRequests().anyRequest().authenticated()
                 //                .and().formLogin()
@@ -87,7 +92,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessHandler(customLogoutSuccessHandler)
                 .logoutSuccessUrl("/");
 
-        http.exceptionHandling().authenticationEntryPoint(customAuthenticationEntryPoint);
+        http.exceptionHandling()
+                .authenticationEntryPoint(customAuthenticationEntryPoint) //                .accessDeniedHandler(new AccessDeniedHandler() {
+                //                    @Override
+                //                    public void handle(HttpServletRequest hsr, HttpServletResponse hsr1, AccessDeniedException ade) throws IOException, ServletException {
+                //                        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                //                    }
+                //                })
+                ;
+
+//        http.addFilterBefore(localizationFilter, UsernamePasswordAuthenticationFilter.class);
 //
 //        http
 //                //                .headers()
