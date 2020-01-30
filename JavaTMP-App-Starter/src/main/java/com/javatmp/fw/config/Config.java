@@ -44,9 +44,6 @@ public class Config implements WebMvcConfigurer {
 
     @Autowired
     JavaTMPServletListener javaTMPServletListener;
-//
-//    @Autowired
-//    AuthenticatorFilter authenticatorFilter;
 
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
@@ -103,17 +100,6 @@ public class Config implements WebMvcConfigurer {
         return registrationBean;
     }
 
-//    @Bean
-//    public FilterRegistrationBean<AuthenticatorFilter> getAuthenticatorFilter() {
-//        FilterRegistrationBean<AuthenticatorFilter> registrationBean
-//                = new FilterRegistrationBean<>();
-//        registrationBean.setFilter(this.authenticatorFilter);
-//        registrationBean.addUrlPatterns("/*");
-//        registrationBean.setDispatcherTypes(DispatcherType.REQUEST);
-//        registrationBean.addInitParameter("excludedUrlsRegex", "^/assets/.*,^/login,^/logout,^/user/register,^/CaptchaImageController,^/pages/system/register");
-//        registrationBean.setOrder(4);
-//        return registrationBean;
-//    }
     @Bean
     public FilterRegistrationBean<CacheControlHeadersFilter> getCacheControlHeadersFilter() {
         FilterRegistrationBean<CacheControlHeadersFilter> registrationBean
