@@ -19,7 +19,7 @@ const argv = require('yargs').argv;
 // https://stackoverflow.com/questions/40521506/gulpuglifyerrorunable-to-minify-javascript
 var uglifyES6 = require('gulp-uglify-es').default;
 
-var defaultDestinationDistLocation = "./src/main/webapp/assets/dist"; // "./web/assets/dist"
+var defaultDestinationDistLocation = "./src/main/resources/static/assets/dist"; // "./web/assets/dist"
 if (argv.dest !== undefined) {
     var defaultDestinationDistLocation = argv.dest;
 }
@@ -155,8 +155,8 @@ var config = {
             {"from": "${sourceNodeLib}/jquery-validation/dist/localization/**/*", "to": "${destComponentsLib}/jquery-validation/dist/localization", processJS: true}
         ],
         "inputmask": [
-            {"from": "${sourceNodeLib}/inputmask/dist/min/jquery.inputmask.bundle.min.js", "to": "${destComponentsLib}/inputmask/dist/min"},
-            {"from": "${sourceNodeLib}/inputmask/dist/min/inputmask/bindings/inputmask.binding.min.js", "to": "${destComponentsLib}/inputmask/dist/min/inputmask/bindings"}
+            {"from": "${sourceNodeLib}/inputmask/dist/jquery.inputmask.min.js", "to": "${destComponentsLib}/inputmask/dist"},
+            {"from": "${sourceNodeLib}/inputmask/dist/bindings/inputmask.binding.js", "to": "${destComponentsLib}/inputmask/dist/bindings", processJS: true}
         ],
         "jquery-form": [
             {"from": "${sourceNodeLib}/jquery-form/dist/jquery.form.min.js", "to": "${destComponentsLib}/jquery-form/dist"}
@@ -376,8 +376,8 @@ var src = {
         "./web/components/timeago/jquery.timeago.js",
         "./web/components/jquery-validation/dist/jquery.validate.min.js",
         "./web/components/jquery-validation/dist/additional-methods.js",
-        "./web/components/inputmask/dist/min/jquery.inputmask.bundle.min.js",
-        "./web/components/inputmask/dist/min/inputmask/bindings/inputmask.binding.min.js",
+        "./web/components/inputmask/dist/jquery.inputmask.min.js",
+        "./web/components/inputmask/dist/bindings/inputmask.binding.js",
         "./web/components/jquery-form/dist/jquery.form.min.js",
         "./web/components/datatables.net/js/jquery.dataTables.js",
         "./web/components/datatables.net-bs4/js/dataTables.bootstrap4.js",

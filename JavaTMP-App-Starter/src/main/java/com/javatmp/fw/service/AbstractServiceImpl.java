@@ -19,6 +19,7 @@ public abstract class AbstractServiceImpl<T, ID extends Serializable> implements
 
     protected abstract ExtendedJpaRepository<T, ID> getRepository();
 
+    @Override
     public DataTableResults<T> retrievePageRequestDetails(DataTableRequest<T> page) throws ParseException {
         return this.getRepository().retrievePageRequestDetails(page);
 
