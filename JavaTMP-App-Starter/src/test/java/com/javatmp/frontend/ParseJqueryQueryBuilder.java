@@ -10,8 +10,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javatmp.fw.domain.table.RuleOrGroup;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.builder.RecursiveToStringStyle;
-import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -76,7 +74,6 @@ public class ParseJqueryQueryBuilder {
 
 //        traverseObj(obj);
         RuleOrGroup tableRequest = (RuleOrGroup) objectMapper.readValue(query, RuleOrGroup.class);
-        System.out.println(ReflectionToStringBuilder.toString(tableRequest, new RecursiveToStringStyle()));
         System.out.println("***********************************************************");
         String query1 = "{\n"
                 + "  \"condition\": \"AND\",\n"
@@ -122,7 +119,6 @@ public class ParseJqueryQueryBuilder {
                 + "  \"valid\": true\n"
                 + "}";
         RuleOrGroup tableRequest1 = (RuleOrGroup) objectMapper.readValue(query1, RuleOrGroup.class);
-        System.out.println(ReflectionToStringBuilder.toString(tableRequest1, new RecursiveToStringStyle()));
         System.out.println("***********************************************");
         System.out.println(objectMapper.writeValueAsString(tableRequest));
         System.out.println(objectMapper.writeValueAsString(tableRequest1));

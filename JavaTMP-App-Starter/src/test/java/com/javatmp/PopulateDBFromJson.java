@@ -5,17 +5,17 @@
  */
 package com.javatmp;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javatmp.fw.util.MD5Util;
 import com.javatmp.module.dms.entity.Document;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.entity.User_;
+import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
@@ -23,9 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -34,6 +31,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @SpringBootTest
@@ -42,17 +40,19 @@ public class PopulateDBFromJson {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private EntityManager em;
+
     @Test
-    public void main() throws ParseException, FileNotFoundException {
+    @Transactional
+    public void main() throws ParseException, FileNotFoundException, IOException {
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
-        EntityManagerFactory factory = null;
-        EntityManager em = null;
-        factory = Persistence.createEntityManagerFactory("AppPU");
-        em = factory.createEntityManager();
+
         String jsonStr = "";
 
-        InputStream stream = PopulateDBFromJson.class.getResourceAsStream("UserJsonFake.json");
-        ArrayList<Map<String, String>> data = gson.fromJson(new InputStreamReader(stream), type);
+        File src = new File("D:\\NetBeansProjects\\JavaTMP\\JavaTMP-App-Starter\\src\\test\\java\\com\\javatmp\\UserJsonFake.json");
+        List<Map<String, String>> data = objectMapper.readValue(src, new TypeReference<List<Map<String, String>>>() {
+        });
 //        String userTemplate = "logingUser = new User(DBFaker.getNextCounter(), \"###userName###\", MD5Util.convertToMD5(\"###password###\"), "
 //                + "\"###firstName###\", \"###lastName###\", (short) ###status###, new Date(###birthDate###),\n"
 //                + "            new Date(###creationDate###),\n"
@@ -60,11 +60,8 @@ public class PopulateDBFromJson {
 //                + "            \"###timezone###\", ###profilePicDocumentId###L);";
 //        String docTemplate = "profileDocument = prepareDocument(\"profilePicture\", \"###docType###\", \"###docBinary###\");";
 
-        try {
-            em.getTransaction().begin();
-
-            User logingUser = new User();
-            Document profileDocument = null;
+        User logingUser = new User();
+        Document profileDocument = null;
 //            logingUser.setId(1L);
 //            logingUser.setUserName("user1");
 //            logingUser.setPassword(MD5Util.convertToMD5(logingUser.getUserName()));
@@ -90,71 +87,69 @@ public class PopulateDBFromJson {
 //            logingUser.setProfilePicDocument(profileDocument);
 //            em.persist(logingUser);
 
-            for (int i = 0; i < data.size(); i++) {
-                System.out.println("Try to persist i [" + i + "]");
-                User user = new User();
-                Map<String, String> record = data.get(i);
-                user.setUserName(record.get("userName"));
-                user.setPassword(MD5Util.convertToMD5(record.get("password")));
-                user.setFirstName(record.get("firstName"));
-                user.setLastName(record.get("lastName"));
-                user.setStatus(new Short(record.get("status")));
+        System.out.println("size of data row are [" + data.size() + "]");
 
-                String birthdateStr = record.get("birthDate");
-                SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-                Date birthDate = formater.parse(birthdateStr);
-                Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
-                cal.setTime(birthDate);
-                cal.set(Calendar.HOUR_OF_DAY, -24);
-                cal.set(Calendar.MINUTE, 0);
-                cal.set(Calendar.SECOND, 0);
-                cal.set(Calendar.MILLISECOND, 0);
+        for (int i = 0; i < data.size(); i++) {
+            System.out.println("Try to persist i [" + i + "]");
+            User user = new User();
+            Map<String, String> record = data.get(i);
+            user.setUserName(record.get("userName"));
+            user.setPassword(MD5Util.convertToMD5(record.get("password")));
+            user.setFirstName(record.get("firstName"));
+            user.setLastName(record.get("lastName"));
+            user.setStatus(new Short(record.get("status")));
 
-                user.setBirthDate(cal.getTime());
-                user.setCreationDate(formater.parse(record.get("creationDate")));
-                user.setEmail(record.get("email"));
-                user.setLang(record.get("lang"));
-                user.setTheme(record.get("theme"));
-                String countryCode = record.get("countryId");
-                if (countryCode.equals("HM")) {
-                    countryCode = "US";
-                }
-                System.out.println("countryId [" + countryCode + "]");
+            String birthdateStr = record.get("birthDate");
+            SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+            Date birthDate = formater.parse(birthdateStr);
+            Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+            cal.setTime(birthDate);
+            cal.set(Calendar.HOUR_OF_DAY, -24);
+            cal.set(Calendar.MINUTE, 0);
+            cal.set(Calendar.SECOND, 0);
+            cal.set(Calendar.MILLISECOND, 0);
 
-                user.setCountryId(countryCode);
-                user.setAddress(record.get("address"));
-                user.setTimezone(record.get("timezone"));
-                user.setLastAccessTime(null);
-                user.setGender(new Short(record.get("gender")));
-                String imageContentBase64URL = record.get("profilePicDocumentBase64");
+            user.setBirthDate(cal.getTime());
+            user.setCreationDate(formater.parse(record.get("creationDate")));
+            user.setEmail(record.get("email"));
+            user.setLang(record.get("lang"));
+            user.setTheme(record.get("theme"));
+            String countryCode = record.get("countryId");
+            if (countryCode.equals("HM")) {
+                countryCode = "US";
+            }
+            System.out.println("countryId [" + countryCode + "]");
+
+            user.setCountryId(countryCode);
+            user.setAddress(record.get("address"));
+            user.setTimezone(record.get("timezone"));
+            user.setLastAccessTime(null);
+            user.setGender(new Short(record.get("gender")));
+            String imageContentBase64URL = record.get("profilePicDocumentBase64");
 //            System.out.println(imageContentBase64URL);
-                String[] parts = imageContentBase64URL.split("[:;,]");
+            String[] parts = imageContentBase64URL.split("[:;,]");
 //            System.out.println(Arrays.toString(parts));
 
-                CriteriaBuilder cb = em.getCriteriaBuilder();
-                CriteriaQuery<User> cq = cb.createQuery(User.class);
-                Root<User> from = cq.from(User.class);
-                cq.select(from);
-                cq.where(cb.equal(from.get(User_.userName), user.getUserName()));
-                TypedQuery<User> query = em.createQuery(cq);
-                List<User> tempList = query.getResultList();
-                if (tempList == null || tempList.size() == 0) {
-                    String docType = parts[1];
-                    String docBinary = parts[3];
-                    Document document = prepareDocument("profilePicture", docType, docBinary);
-                    em.persist(document);
-                    user.setProfilePicDocumentId(document.getDocumentId());
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<User> cq = cb.createQuery(User.class);
+            Root<User> from = cq.from(User.class);
+            cq.select(from);
+            cq.where(cb.equal(from.get(User_.userName), user.getUserName()));
+            TypedQuery<User> query = em.createQuery(cq);
+            List<User> tempList = query.getResultList();
+            if (tempList == null || tempList.size() == 0) {
+                String docType = parts[1];
+                String docBinary = parts[3];
+                Document document = prepareDocument("profilePicture", docType, docBinary);
+                em.persist(document);
+                user.setProfilePicDocumentId(document.getDocumentId());
 //                user.setProfilePicDocument(document);
 //                System.out.println("persisting [" + (user) + "]");
-                    em.persist(user);
-                    document.setCreatedByUserId(user.getId());
-                }
+                em.persist(user);
+                document.setCreatedByUserId(user.getId());
             }
-            em.flush();
-            em.getTransaction().commit();
-        } catch (PersistenceException e) {
-            e.printStackTrace();
         }
+        em.flush();
 
     }
 
