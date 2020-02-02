@@ -77,39 +77,6 @@
                         <div class="dropdown-menu-content scroll-content">
                             <div class="list-group list-group-flush">
                                 <a class="list-group-item list-group-item-action" href="#">
-                                    <p>
-                                        <strong>Task 1</strong>
-                                        <span class="float-right text-muted">40% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped">
-                                        <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                            <span class="sr-only">40% Complete (success)</span>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a class="list-group-item list-group-item-action" href="#">
-                                    <p>
-                                        <strong>Task 2</strong>
-                                        <span class="float-right text-muted">20% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped">
-                                        <div class="progress-bar bg-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-                                            <span class="sr-only">20% Complete</span>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a class="list-group-item list-group-item-action" href="#">
-                                    <p>
-                                        <strong>Task 3</strong>
-                                        <span class="float-right text-muted">40% Complete</span>
-                                    </p>
-                                    <div class="progress progress-striped">
-                                        <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-                                            <span class="sr-only">40% Complete (success)</span>
-                                        </div>
-                                    </div>
-                                </a>
-                                <a class="list-group-item list-group-item-action" href="#">
                                     <div>
                                         <p>
                                             <strong>Task 4</strong>
@@ -156,6 +123,39 @@
                                         <div class="progress-bar bg-success" role="progressbar"
                                              aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%">
                                             <span class="sr-only">90% Complete (danger)</span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="list-group-item list-group-item-action" href="#">
+                                    <p>
+                                        <strong>Task 1</strong>
+                                        <span class="float-right text-muted">40% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped">
+                                        <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                            <span class="sr-only">40% Complete (success)</span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="list-group-item list-group-item-action" href="#">
+                                    <p>
+                                        <strong>Task 2</strong>
+                                        <span class="float-right text-muted">20% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped">
+                                        <div class="progress-bar bg-info" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                            <span class="sr-only">20% Complete</span>
+                                        </div>
+                                    </div>
+                                </a>
+                                <a class="list-group-item list-group-item-action" href="#">
+                                    <p>
+                                        <strong>Task 3</strong>
+                                        <span class="float-right text-muted">40% Complete</span>
+                                    </p>
+                                    <div class="progress progress-striped">
+                                        <div class="progress-bar bg-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                            <span class="sr-only">40% Complete (success)</span>
                                         </div>
                                     </div>
                                 </a>
@@ -269,14 +269,14 @@
                 <div class="col-12 m-0 p-0">
                     <div class="sidebar scroll-content shadow">
                         <div class="sidebar-shortcut-button text-center m-1">
-                            <button class="btn btn-primary logout-home-btn-id"
+                            <button class="btn btn-danger logout-home-btn-id"
                                     actionType="action-ref-href"
                                     action-ref-by-href="${pageContext.request.contextPath}/logout"
                                     data-toggle="tooltip" data-placement="auto"
                                     title="${labels['navbar.user.logout']}">
                                 <i class="fas fa-sign-out-alt"></i>
                             </button>
-                            <button class="btn btn-primary"
+                            <button class="btn btn-dark"
                                     actionType="action-ref-href"
                                     action-ref-by-href="${pageContext.request.contextPath}/pages/user/listUsers"
                                     data-toggle="tooltip" data-placement="auto"
@@ -290,14 +290,14 @@
                                     title="${labels['sidebar.menuItem.users.addNewUser']}">
                                 <i class="fas fa-user-plus"></i>
                             </button>
-                            <button class="btn btn-primary"
+                            <button class="btn btn-warning"
                                     actionType="action-ref-href"
                                     action-ref-by-href="${pageContext.request.contextPath}/user/CurrentUserProfileController"
                                     data-toggle="tooltip" data-placement="auto"
                                     title="${labels['sidebar.menuItem.system.UserProfileSettings']}">
                                 <i class="far fa-user-circle"></i>
                             </button>
-                            <button class="btn btn-primary"
+                            <button class="btn btn-success"
                                     actionType="action-ref-href"
                                     action-ref-by-href="${pageContext.request.contextPath}/pages/home/home"
                                     data-toggle="tooltip" data-placement="auto"

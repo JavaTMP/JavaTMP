@@ -5,25 +5,26 @@
  */
 package com.javatmp.frontend;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.javatmp.fw.domain.table.RuleOrGroup;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.builder.RecursiveToStringStyle;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
-/**
- *
- * @author JavaTMP
- */
+@Slf4j
+@SpringBootTest
 public class ParseJqueryQueryBuilder {
 
-    private static final Gson gson = new GsonBuilder()
-            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX").serializeNulls()
-            .create();
+    @Autowired
+    private ObjectMapper objectMapper;
 
-    public static void main(String[] args) {
+    @Test
+    public void main() throws JsonProcessingException {
         String query = "{\n"
                 + "  \"condition\": \"AND\",\n"
                 + "  \"not\": false,"
@@ -71,10 +72,10 @@ public class ParseJqueryQueryBuilder {
                 + "}";
 
 //        System.out.println("query [" + query + "]");
-        JsonObject obj = gson.fromJson(query, JsonObject.class).getAsJsonObject();
+        JsonNode obj = objectMapper.readTree(query);
 
 //        traverseObj(obj);
-        RuleOrGroup tableRequest = (RuleOrGroup) gson.fromJson(query, RuleOrGroup.class);
+        RuleOrGroup tableRequest = (RuleOrGroup) objectMapper.readValue(query, RuleOrGroup.class);
         System.out.println(ReflectionToStringBuilder.toString(tableRequest, new RecursiveToStringStyle()));
         System.out.println("***********************************************************");
         String query1 = "{\n"
@@ -120,40 +121,11 @@ public class ParseJqueryQueryBuilder {
                 + "  ],\n"
                 + "  \"valid\": true\n"
                 + "}";
-        RuleOrGroup tableRequest1 = (RuleOrGroup) gson.fromJson(query1, RuleOrGroup.class);
+        RuleOrGroup tableRequest1 = (RuleOrGroup) objectMapper.readValue(query1, RuleOrGroup.class);
         System.out.println(ReflectionToStringBuilder.toString(tableRequest1, new RecursiveToStringStyle()));
         System.out.println("***********************************************");
-        System.out.println(gson.toJson(tableRequest));
-        System.out.println(gson.toJson(tableRequest1));
-
-    }
-
-    public static void traverseObj(JsonObject node) {
-        // check if node is leave:
-        System.out.println("size = " + node.size());
-        if ((node.size() == 2 || node.size() == 3) && node.has("condition") && node.has("rules")) {
-            String condition = node.get("condition").getAsString();
-            System.out.println("Condition is = " + condition);
-            JsonArray element = null;
-            if ((element = node.get("rules").getAsJsonArray()) != null) {
-                for (JsonElement childElement : element) {
-                    JsonObject child = childElement.getAsJsonObject();
-                    traverseObj(child);
-                }
-            }
-        } else {
-            // process leave:
-            System.out.println("process leave node");
-            String id = node.get("id").getAsString();
-            String field = node.get("field").getAsString();
-            String type = node.get("type").getAsString();
-            String input = node.get("input").getAsString();
-            String operator = node.get("operator").getAsString();
-            JsonElement nodeValueElemt = node.get("value");
-            System.out.println("id = " + id + " , field = " + field + " , type = " + type
-                    + " , input = " + input + " , operator = " + operator
-                    + " , nodeValueObj = " + nodeValueElemt);
-        }
+        System.out.println(objectMapper.writeValueAsString(tableRequest));
+        System.out.println(objectMapper.writeValueAsString(tableRequest1));
 
     }
 }

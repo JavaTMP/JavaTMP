@@ -40,7 +40,7 @@ public class ViewUploadedFileController {
         log.info("Requested view type is : {} , Document {}", viewTypeTemp, temp);
 
         Document document = this.documentService.getOne(temp.getDocumentId());
-        log.debug("document request from database is {}", document);
+        log.debug("document request from database is null ? {}", document == null);
         // for nano security check if provided hash equal db one:
         if (!document.getRandomHash().equals(temp.getRandomHash())) {
             throw new IllegalAccessException("illegal access by providing wrong hash value");

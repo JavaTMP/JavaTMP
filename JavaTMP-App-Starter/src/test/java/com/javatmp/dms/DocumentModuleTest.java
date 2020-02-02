@@ -42,7 +42,7 @@ public class DocumentModuleTest {
         Document document = this.documentRepository.getOne(documentId);
         log.debug("document getOne finished");
 
-        log.debug("document from db [" + document + "]");
+        log.debug("document from db is null ? [" + (document == null) + "]");
         log.debug("document.id from db {}", document.getDocumentId());
     }
 

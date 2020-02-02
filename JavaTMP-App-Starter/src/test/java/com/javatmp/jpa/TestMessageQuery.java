@@ -44,7 +44,7 @@ public class TestMessageQuery {
 //            "toUserId", "fromUser.profilePicDocument.contentType", "fromUser.profilePicDocument.documentName",
 //            "fromUser.country.countryId", "fromUser.countryId", "fromUser.country.countryId"};
         String[] selects = new String[]{"messageId", "messageTitle", "creationDate", "fromUserId",
-            "toUserId", "fromUser.profilePicDocument"};
+            "toUserId", "fromUser.profilePicDocument.documentId"};
         CriteriaQuery<Object[]> cq = criteriaBuilder.createQuery(Object[].class);
         Root<Message> from = cq.from(Message.class);
 

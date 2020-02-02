@@ -5,9 +5,7 @@
  */
 package com.javatmp.activity;
 
-import com.javatmp.module.user.entity.UserActivity;
 import com.javatmp.module.user.repository.UserActivityRepository;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Tuple;
 import lombok.extern.slf4j.Slf4j;
@@ -23,18 +21,11 @@ public class AddNewActivityTest {
     UserActivityRepository userActivityRepository;
 
     @Test
-    void contextLoads() {
-        UserActivity activity = new UserActivity();
-        activity.setCreationDate(new Date());
-        this.userActivityRepository.save(activity);
-    }
-
-    @Test
     void main() {
 
         List<Tuple> results = userActivityRepository.userPageViews();
 
-        log.debug("user page views {}", results);
+        log.debug("user page views count {}", results.size());
     }
 
 }

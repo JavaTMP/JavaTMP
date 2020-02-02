@@ -25,7 +25,7 @@ public class UserActivityRepositoryTests {
 
         List<Tuple> results = userActivityRepository.userPageViews();
 
-        log.debug("user page views {}", results);
+        log.debug("user page views count {}", results.size());
     }
 
 }

@@ -5,16 +5,14 @@
  */
 package com.javatmp;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.javatmp.fw.util.MD5Util;
 import com.javatmp.module.dms.entity.Document;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.entity.User_;
-import com.javatmp.fw.util.MD5Util;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,17 +30,20 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
-/**
- *
- * @author Mohamed
- */
+@Slf4j
+@SpringBootTest
 public class PopulateDBFromJson {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) throws ParseException, FileNotFoundException {
+    @Autowired
+    private ObjectMapper objectMapper;
+
+    @Test
+    public void main() throws ParseException, FileNotFoundException {
         TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
         EntityManagerFactory factory = null;
         EntityManager em = null;
@@ -50,9 +51,6 @@ public class PopulateDBFromJson {
         em = factory.createEntityManager();
         String jsonStr = "";
 
-        Gson gson = new Gson();
-        Type type = new TypeToken<ArrayList<Map<String, String>>>() {
-        }.getType();
         InputStream stream = PopulateDBFromJson.class.getResourceAsStream("UserJsonFake.json");
         ArrayList<Map<String, String>> data = gson.fromJson(new InputStreamReader(stream), type);
 //        String userTemplate = "logingUser = new User(DBFaker.getNextCounter(), \"###userName###\", MD5Util.convertToMD5(\"###password###\"), "
