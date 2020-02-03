@@ -41,6 +41,11 @@ $img-margin-right: 10px!default;
 
 $summernote-font-path: $javatmp-font-path !default;
 
+$summernote-note-btn-padding-y: $btn-padding-y !default;
+$summernote-note-btn-padding-x: $btn-padding-x !default;
+$summernote-note-btn-font-size: $btn-font-size !default;
+$summernote-note-btn-bg: $secondary;
+
 @font-face {
     font-family:"summernote";
     src:url("#{$summernote-font-path}/summernote.eot?dbafe969167589eda84514394d126413");
@@ -148,7 +153,7 @@ $summernote-font-path: $javatmp-font-path !default;
 
 /* Popover and Toolbar (Button container)
 ------------------------------------------*/
-.note-popover .popover-content, .panel-heading.note-toolbar {
+.note-popover .popover-content, .note-toolbar {
     margin: 0;
     padding: 0 0 5px 5px;
 
@@ -429,4 +434,14 @@ $summernote-font-path: $javatmp-font-path !default;
 //https://github.com/summernote/summernote/issues/2688
 .note-toolbar-wrapper {
     height: auto !important;
+}
+
+// .\node_modules\summernote\src\styles\summernote-bs4.scss
+.note-toolbar .note-btn {
+    background: $summernote-note-btn-bg;
+    color:color-yiq($summernote-note-btn-bg);
+    border-color: $summernote-note-btn-bg;
+    padding: $summernote-note-btn-padding-y $summernote-note-btn-padding-x;
+    font-size: $summernote-note-btn-font-size;
+    @include button-variant($summernote-note-btn-bg, $summernote-note-btn-bg);
 }
