@@ -6,6 +6,9 @@ $s2bs-form-control-focus-box-shadow: none!default;
 $s2bs-form-control-transition: $input-transition!default;
 $s2bs-dropdown-bg: $dropdown-bg!default;
 
+$s2bs-btn-default-border: $input-group-addon-border-color !default;
+$s2bs-btn-default-color: $input-group-addon-color !default; //color-yiq($input-group-addon-bg) !default;
+
 @import "../../../../../node_modules/select2-bootstrap-theme/src/select2-bootstrap.scss";
 
 .select2-container--bootstrap .select2-results > .select2-results__options {
@@ -22,7 +25,6 @@ $s2bs-dropdown-bg: $dropdown-bg!default;
 }
 
 
-$s2bs-btn-default-color: color-yiq($s2bs-btn-default-bg);
 .select2-container--bootstrap {
     .select2-selection--multiple {
         .select2-selection__choice {
