@@ -46,7 +46,7 @@ public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint 
         String path = req.getRequestURI().substring(req.getContextPath().length());
         HttpSession session = req.getSession();
         ResourceBundle labels = (ResourceBundle) session.getAttribute(Constants.LANGUAGE_ATTR_KEY);
-        log.debug("Session is new [" + session.isNew() + "]");
+        log.debug("Session is new [" + session.isNew() + "] labels [" + labels + "]");
         if (session.isNew()) {
             // for demo and for new time access we support user123 loggedin:
             User dbUser = new User();

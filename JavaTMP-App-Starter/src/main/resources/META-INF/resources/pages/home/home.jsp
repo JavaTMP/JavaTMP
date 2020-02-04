@@ -2,8 +2,8 @@
 <div class="dynamic-ajax-content grid-gutter-padding pt-3">
     <div class="form-row">
         <div class="col-xl-3 col-lg-6 col-md-6">
-            <div class="card shadow mb-3 bg-white">
-                <div class="card-header bg-white">
+            <div class="card shadow mb-3">
+                <div class="card-header">
                     ${labels['page.home.RegisteredUsers']}
                     <div class="options float-right">
                         <a load-on-starup="true"
@@ -15,7 +15,7 @@
                     </div>
                 </div>
                 <div class="card-body p-1"></div>
-                <div class="card-footer bg-white">
+                <div class="card-footer">
                     <a href="javascript:;" class="d-flex">
                         ${labels['global.viewDetails']}
                         <span class="ml-auto">
@@ -26,8 +26,8 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-md-6">
-            <div class="card shadow mb-3 bg-white">
-                <div class="card-header bg-white">
+            <div class="card shadow mb-3">
+                <div class="card-header">
                     ${labels['page.home.VisitorsToday']}
                     <div class="options float-right">
                         <a load-on-starup="true"
@@ -38,8 +38,8 @@
                         </a>
                     </div>
                 </div>
-                <div class="card-body p-1 bg-white"></div>
-                <div class="card-footer bg-white">
+                <div class="card-body p-1"></div>
+                <div class="card-footer">
                     <a href="javascript:;" class="d-flex">
                         ${labels['global.viewDetails']}
                         <span class="ml-auto">
@@ -50,8 +50,8 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-md-6">
-            <div class="card shadow mb-3 bg-white">
-                <div class="card-header bg-white">
+            <div class="card shadow mb-3">
+                <div class="card-header">
                     ${labels['page.home.PageViewsPerHour']}
                     <div class="options float-right">
                         <a load-on-starup="true"
@@ -62,8 +62,8 @@
                         </a>
                     </div>
                 </div>
-                <div class="card-body p-1 bg-white"></div>
-                <div class="card-footer bg-white">
+                <div class="card-body p-1"></div>
+                <div class="card-footer">
                     <a href="javascript:;" class="d-flex">
                         ${labels['global.viewDetails']}
                         <span class="ml-auto">
@@ -74,8 +74,8 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-md-6">
-            <div class="card shadow mb-3 bg-white">
-                <div class="card-header bg-white">
+            <div class="card shadow mb-3">
+                <div class="card-header">
                     ${labels['page.home.LoadTimePerHour']}
                     <div class="options float-right">
                         <a load-on-starup="true"
@@ -86,8 +86,8 @@
                         </a>
                     </div>
                 </div>
-                <div class="card-body p-1 bg-white"></div>
-                <div class="card-footer bg-white">
+                <div class="card-body p-1"></div>
+                <div class="card-footer">
                     <a href="javascript:;" class="d-flex">
                         ${labels['global.viewDetails']}
                         <span class="ml-auto">
@@ -101,8 +101,8 @@
     </div>
     <div class="form-row">
         <div class="col-lg-6">
-            <div class="card shadow mb-3 bg-white">
-                <div class="card-header bg-white">
+            <div class="card shadow mb-3">
+                <div class="card-header">
                     ${labels['page.home.UsersLocations']}
                     <div class="options float-right">
                         <a load-on-starup="true"
@@ -114,12 +114,12 @@
                         <a href="javascript:;" class="fullscreen"><i class=" fa fa-expand"></i></a>
                     </div>
                 </div>
-                <div class="card-body bg-white p-0"></div>
+                <div class="card-body p-0"></div>
             </div>
         </div>
         <div class="col-lg-6">
-            <div class="card shadow mb-3 bg-white">
-                <div class="card-header bg-white">
+            <div class="card shadow mb-3">
+                <div class="card-header">
                     ${labels['page.home.UsersBirthdayPerMonths']}
                     <div class="options float-right">
                         <a load-on-starup="true"
@@ -131,7 +131,7 @@
                         <a href="javascript:;" class="fullscreen"><i class=" fa fa-expand"></i></a>
                     </div>
                 </div>
-                <div class="card-body bg-white p-0"></div>
+                <div class="card-body p-0"></div>
             </div>
         </div>
     </div>

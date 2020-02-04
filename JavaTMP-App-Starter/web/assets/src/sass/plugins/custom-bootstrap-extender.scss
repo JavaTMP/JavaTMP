@@ -1,10 +1,10 @@
 @import "../common/variables.scss";
 
-.bg-body {
+.body-bg {
     background-color: $body-bg !important;
 }
-.text-body {
-    color: $gray-900 !important;
+.body-color {
+    color: $body-color !important;
 }
 
 .has-form-control-clear {
@@ -13,13 +13,13 @@
         pointer-events: initial;  /* or - auto // or -  unset  */
         line-height: $line-height-base;
         padding: $input-padding-y $input-padding-x;
-        font-size: $font-size-base;
+        font-size: $font-size-base * 1.1;
         pointer-events: auto;
         cursor: pointer;
         position: absolute;
         right: 0;
         top: 0;
-
+        color: $input-color;
     }
 }
 ::-ms-clear {
