@@ -48,9 +48,9 @@ gulp.task('update-version', function (cb) {
     fs.writeFile('./package.json', JSON.stringify(pkg, null, 4), 'utf8', function (err) {
         if (err)
             throw err;
-        var dynamicPkg = require('./JavaTMP-User-Starter/package.json');
+        var dynamicPkg = require('./JavaTMP-App-Starter/package.json');
         dynamicPkg.version = pkg.version;
-        fs.writeFile('./JavaTMP-User-Starter/package.json', JSON.stringify(dynamicPkg, null, 4), 'utf8', function (err) {
+        fs.writeFile('./JavaTMP-App-Starter/package.json', JSON.stringify(dynamicPkg, null, 4), 'utf8', function (err) {
             if (err)
                 throw err;
             pkg.version = "v" + pkg.version;
@@ -65,25 +65,25 @@ gulp.task('clean', function (cb) {
     return del(['./temp'], cb);
 });
 
-gulp.task('copy-JavaTMP-User-Starter', function (cb) {
+gulp.task('copy-JavaTMP-App-Starter', gulp.series('clean', function (cb) {
     return gulp
             .src([
-                './JavaTMP-User-Starter/**/*',
+                './JavaTMP-App-Starter/**/*',
                 '!**/node_modules{,/**}',
                 '!**/nbproject{,/**}',
                 '!**/.settings{,/**}',
                 '!**/logs{,/**}',
                 '!**/package-lock.json',
-                '!./JavaTMP-User-Starter/.project',
-                '!./JavaTMP-User-Starter/.classpath',
-                '!./JavaTMP-User-Starter/nb-configuration.xml',
-                '!./JavaTMP-User-Starter/target{,/**}'
+                '!./JavaTMP-App-Starter/.project',
+                '!./JavaTMP-App-Starter/.classpath',
+                '!./JavaTMP-App-Starter/nb-configuration.xml',
+                '!./JavaTMP-App-Starter/target{,/**}'
             ], {dot: true})
-            .pipe(gulp.dest("temp/JavaTMP-User-Starter"))
+            .pipe(gulp.dest("temp/JavaTMP-App-Starter"))
             .on('end', function () {
                 cb();
             });
-});
+}));
 
 function callExec(command, args, cb) {
     const call = cp.exec(command, args);
@@ -98,44 +98,40 @@ function callExec(command, args, cb) {
         cb(data.toString());
     });
     call.on('exit', function (code) {
-        console.log('child process exited with code ' + code.toString());
+        console.log('child process exited with code :');
+        console.log(code);
         cb();
     });
 }
 
-gulp.task('run-maven', function (cb) {
-    // In gulp 4, you can return a child process to signal task completion
-    callExec('mvn clean package', {cwd: "./temp/online-java-user-demo-starter"}, cb);
-});
-gulp.task('save-project-online-java-user-demo-starter', function (cb) {
+
+gulp.task('save-project-online-java-app-demo-starter', gulp.series('copy-JavaTMP-App-Starter', function (cb) {
     return gulp
             .src([
-                'temp/JavaTMP-User-Starter/**/*',
-                "!temp/JavaTMP-User-Starter/web{,/**}",
-                "!temp/JavaTMP-User-Starter/db_scripts{,/**}"
+                'temp/JavaTMP-App-Starter/**/*',
+                "!temp/JavaTMP-App-Starter/web{,/**}",
+                "!temp/JavaTMP-App-Starter/db_scripts{,/**}"
             ], {dot: true})
-            .pipe(gulp.dest("temp/online-java-user-demo-starter"))
+            .pipe(gulp.dest("temp/online-java-app-demo-starter"))
             .on('end', function () {
                 cb();
             });
-});
+}));
 
-gulp.task('process-javatmp-user-starter', function (cb) {
+gulp.task('process-javatmp-app-starter', gulp.series('save-project-online-java-app-demo-starter', function (cb) {
     return gulp
-            .src(['temp/JavaTMP-User-Starter/**/*.html', 'temp/JavaTMP-User-Starter/**/*.jsp'], {dot: true})
+            .src(['temp/JavaTMP-App-Starter/**/*.html', 'temp/JavaTMP-App-Starter/**/*.jsp'], {dot: true})
             .pipe(processhtml())
-            .pipe(gulp.dest("temp/JavaTMP-User-Starter"))
+            .pipe(gulp.dest("temp/JavaTMP-App-Starter"))
             .on('end', function () {
                 cb();
             });
-});
-gulp.task('remove-demo-assets-src', function (cb) {
+}));
+gulp.task('remove-demo-assets-src', gulp.series('process-javatmp-app-starter', function (cb) {
     del.sync([
-        'temp/online-java-demo/assets/src',
-        'temp/online-java-user-demo-starter/assets/src',
-        'temp/online-static-demo/assets/src'
+        'temp/online-java-app-demo-starter/assets/src'
     ], cb());
-});
+}));
 gulp.task('process-online-static-demo', function (cb) {
     return gulp
             .src(['temp/online-static-demo/**/*.html'], {dot: true})
@@ -145,9 +141,9 @@ gulp.task('process-online-static-demo', function (cb) {
                 cb();
             });
 });
-gulp.task('process-online-java-user-demo-starter', function (cb) {
+gulp.task('process-online-java-app-demo-starter', gulp.series('remove-demo-assets-src', function (cb) {
     return gulp
-            .src(['temp/online-java-user-demo-starter/**/*.html', 'temp/online-java-user-demo-starter/**/*.jsp'], {dot: true})
+            .src(['temp/online-java-app-demo-starter/**/*.html', 'temp/online-java-app-demo-starter/**/*.jsp'], {dot: true})
             .pipe(htmlmin({collapseWhitespace: true,
                 minifyCSS: true,
                 minifyJS: true,
@@ -156,23 +152,28 @@ gulp.task('process-online-java-user-demo-starter', function (cb) {
                 keepClosingSlash: true,
                 ignoreCustomFragments: [/<%--[\s\S]*?--%>/, /<%@[\s\S]*?%>/, /\$\{[\s\S]*?\}/, /<fmt:[\s\S]+?\/>/, /<c:[\s\S]+?\/?>/, /<\/c:[\s\S]+?>/, /\{\{[\s\S]*?\}\}/]
             }))
-            .pipe(gulp.dest("temp/online-java-user-demo-starter"))
+            .pipe(gulp.dest("temp/online-java-app-demo-starter"))
             .on('end', function () {
                 cb();
             });
-});
+}));
 
-gulp.task('generate-online-java-user-demo-starter-war', function (cb) {
-    return gulp.src(['temp/online-java-user-demo-starter/**/*'], {dot: true})
+gulp.task('run-maven', gulp.series('process-online-java-app-demo-starter', function (cb) {
+    // In gulp 4, you can return a child process to signal task completion
+    callExec('mvn clean install', {cwd: "./temp/online-java-app-demo-starter"}, cb);
+}));
+
+gulp.task('generate-online-java-app-demo-starter-war', function (cb) {
+    return gulp.src(['temp/online-java-app-demo-starter/**/*'], {dot: true})
             .pipe(chmod(0o644, true))
-            .pipe(zip('JavaTMP-User-Starter.war'))
+            .pipe(zip('JavaTMP-App-Starter.war'))
             .pipe(gulp.dest('dist'))
             .on('end', function () {
                 cb();
             });
 });
-gulp.task('copy-online-java-user-demo-starter-war', function (cb) {
-    return gulp.src(['./temp/online-java-user-demo-starter/target/JavaTMP-User-Starter.war'], {dot: true})
+gulp.task('copy-online-java-app-demo-starter-war', function (cb) {
+    return gulp.src(['./temp/online-java-app-demo-starter/target/JavaTMP-App-Starter.war'], {dot: true})
             .pipe(gulp.dest('dist'))
             .on('end', function () {
                 cb();
@@ -185,9 +186,9 @@ gulp.task('remove-online-static-demos-folders', function (cb) {
 });
 gulp.task('remove-online-java-demos-folders', function (cb) {
     return del([
-        'temp/online-java-user-demo-starter',
-        'temp/JavaTMP-User-Starter/build',
-        'temp/JavaTMP-User-Starter/dist'
+        'temp/online-java-app-demo-starter',
+        'temp/JavaTMP-App-Starter/build',
+        'temp/JavaTMP-App-Starter/dist'
     ], cb);
 });
 gulp.task('copy-readme', function (cb) {
@@ -218,7 +219,6 @@ gulp.task('git-add', function (cb) {
         cb();
     });
 });
-
 gulp.task('git-commit', function (cb) {
     return gulp.src('./*')
             .pipe(git.commit(undefined, {
@@ -228,14 +228,8 @@ gulp.task('git-commit', function (cb) {
 });
 gulp.task('generate-java-project',
         gulp.series(
-                "clean",
-                'copy-JavaTMP-User-Starter',
-                'save-project-online-java-user-demo-starter',
-                'process-javatmp-user-starter',
-                'remove-demo-assets-src',
-                'process-online-java-user-demo-starter',
                 'run-maven',
-                'copy-online-java-user-demo-starter-war',
+                'copy-online-java-app-demo-starter-war',
                 'remove-online-java-demos-folders',
                 'copy-readme',
                 'zip-java',
@@ -244,7 +238,6 @@ gulp.task('generate-java-project',
                     cb();
                 })
         );
-
 gulp.task('create-new-tag', gulp.series('git-add', 'git-commit', function (cb) {
     git.tag(pkg.version, pkg.version, /*{args: '--force'},*/ function (error) {
         if (error) {
@@ -253,7 +246,6 @@ gulp.task('create-new-tag', gulp.series('git-add', 'git-commit', function (cb) {
         cb();
     });
 }));
-
 gulp.task('push:tag', gulp.series('create-new-tag', function (cb) {
     return git.push('origin', 'master', {args: '--tags'}, function (err) {
         if (err)
@@ -268,7 +260,6 @@ gulp.task('push', gulp.series('git-add', 'git-commit', function (cb) {
         cb();
     });
 }));
-
 gulp.task('push-only', gulp.series(function (cb) {
     return git.push('origin', 'master', {args: '--tags'}, function (err) {
         if (err)
@@ -276,23 +267,19 @@ gulp.task('push-only', gulp.series(function (cb) {
         cb();
     });
 }));
-
 gulp.task('pre-release', function (cb) {
 //    del.sync(['./temp', './dist'], cb());
     return del(['./dist/**/*'], cb);
 });
-
 gulp.task('release', gulp.series('pre-release', 'update-version', 'generate-java-project', 'push:tag', function (cb) {
     cb();
 }));
-
 //https://stackoverflow.com/questions/5343068/is-there-a-way-to-skip-password-typing-when-using-https-on-github
 gulp.task('default', gulp.series('generate-java-project', function (cb) {
     console.log("*** Zip files in dist should be created ***");
     console.log("Current Version Number [" + pkg.version + "]");
     cb();
 }));
-
 gulp.task('generate-docs', function (cb) {
     del.sync(['./temp/docs/**/*']);
     gulp.src('./docs/**/*')
@@ -304,7 +291,6 @@ gulp.task('generate-docs', function (cb) {
             }))
             .pipe(gulp.dest('./temp/docs')).on('end', cb);
 });
-
 gulp.task('run', gulp.series('generate-docs', function () {
     connect.server({
 //        root: '',
@@ -312,7 +298,6 @@ gulp.task('run', gulp.series('generate-docs', function () {
         livereload: true
     });
 }));
-
 gulp.task('run-doc', gulp.series('generate-docs', function () {
 
     connect.server({

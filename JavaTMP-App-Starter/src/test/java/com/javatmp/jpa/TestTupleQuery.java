@@ -44,9 +44,9 @@ public class TestTupleQuery {
                 user.get(User_.profilePicDocument).get(Document_.documentName)));
         List<Tuple> resultList = em.createQuery(query).setFirstResult(0).setMaxResults(1).getResultList();
         resultList.forEach(tuple -> {
-            System.out.println("first name [" + tuple.getElements().get(0).getAlias() + "]");
+            log.debug("first name [" + tuple.getElements().get(0).getAlias() + "]");
 //            System.out.println((tuple.getElements()));
-            System.out.println((tuple));
+//            System.out.println((tuple));
         });
 
         query = criteriaBuilder.createTupleQuery();
@@ -63,10 +63,10 @@ public class TestTupleQuery {
             for (TupleElement col : cols) {
                 System.out.println("[" + col.getAlias() + "] = " + tuple.get(col));
             }
-
-            System.out.println("first name [" + tuple.getElements().get(0).getAlias() + "]");
+            log.debug("first name [" + tuple.getElements().get(0).getAlias() + "]"
+            );
 //            System.out.println((tuple.getElements()));
-            System.out.println((tuple));
+//            System.out.println((tuple));
         });
 
         List<Document> auto = createEntityFromTuple(resultList, Document.class);
@@ -84,9 +84,9 @@ public class TestTupleQuery {
                 System.out.println("[" + col.getAlias() + "] = " + tuple.get(col));
             }
 
-            System.out.println("first name [" + tuple.getElements().get(0).getAlias() + "]");
+            log.debug("first name [" + tuple.getElements().get(0).getAlias() + "]");
 //            System.out.println((tuple.getElements()));
-            System.out.println((tuple));
+//            System.out.println((tuple));
         });
 
 //        auto = createEntityFromTuple(resultList, Document.class);
