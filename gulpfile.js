@@ -100,7 +100,7 @@ function callExec(command, args, cb) {
     call.on('exit', function (code) {
         console.log('child process exited with code :');
         console.log(code);
-        cb();
+        cb(code);
     });
 }
 
@@ -160,7 +160,7 @@ gulp.task('process-online-java-app-demo-starter', gulp.series('remove-demo-asset
 
 gulp.task('run-maven', gulp.series('process-online-java-app-demo-starter', function (cb) {
     // In gulp 4, you can return a child process to signal task completion
-    callExec('mvn clean install', {cwd: "./temp/online-java-app-demo-starter"}, cb);
+    callExec('mvn clean package', {cwd: "./temp/online-java-app-demo-starter"}, cb);
 }));
 
 gulp.task('generate-online-java-app-demo-starter-war', function (cb) {
@@ -172,13 +172,13 @@ gulp.task('generate-online-java-app-demo-starter-war', function (cb) {
                 cb();
             });
 });
-gulp.task('copy-online-java-app-demo-starter-war', function (cb) {
-    return gulp.src(['./temp/online-java-app-demo-starter/target/JavaTMP-App-Starter.war'], {dot: true})
-            .pipe(gulp.dest('dist'))
+gulp.task('copy-online-java-app-demo-starter-war', gulp.series('run-maven', function (cb) {
+    return gulp.src(['./temp/online-java-app-demo-starter/target/*.war'], {dot: true})
+            .pipe(gulp.dest('./dist'))
             .on('end', function () {
                 cb();
             });
-});
+}));
 gulp.task('remove-online-static-demos-folders', function (cb) {
     del.sync([
         'temp/online-static-demo'
@@ -228,7 +228,6 @@ gulp.task('git-commit', function (cb) {
 });
 gulp.task('generate-java-project',
         gulp.series(
-                'run-maven',
                 'copy-online-java-app-demo-starter-war',
                 'remove-online-java-demos-folders',
                 'copy-readme',
