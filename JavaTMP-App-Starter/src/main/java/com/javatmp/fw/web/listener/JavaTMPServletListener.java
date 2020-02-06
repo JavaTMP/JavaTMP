@@ -5,11 +5,9 @@ import java.util.TimeZone;
 import javax.persistence.EntityManagerFactory;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import javax.servlet.annotation.WebListener;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-@WebListener
 @Slf4j
 @Component
 public class JavaTMPServletListener implements ServletContextListener {

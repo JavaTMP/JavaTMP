@@ -6,10 +6,10 @@
     <groupId>com.javatmp</groupId>
     <artifactId>JavaTMP-App-Starter</artifactId>
     <version>0.0.14</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <name>JavaTMP-App-Starter</name>
     <url>http://www.javatmp.com</url>
-    <description>An advanced Dynamic Java Bootstrap LTR/RTL multi languages User Management Web application Template</description>
+    <description>An advanced Dynamic Java Bootstrap LTR/RTL multi languages Apps Management Web application Template</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
