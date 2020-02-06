@@ -173,7 +173,7 @@ gulp.task('generate-online-java-app-demo-starter-war', function (cb) {
             });
 });
 gulp.task('copy-online-java-app-demo-starter-war', gulp.series('run-maven', function (cb) {
-    return gulp.src(['./temp/online-java-app-demo-starter/target/*.war'], {dot: true})
+    return gulp.src(['./temp/online-java-app-demo-starter/target/JavaTMP-App-Starter*.war'], {dot: true})
             .pipe(gulp.dest('./dist'))
             .on('end', function () {
                 cb();
