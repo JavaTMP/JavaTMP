@@ -76,6 +76,7 @@ gulp.task('copy-JavaTMP-App-Starter', gulp.series('clean', function (cb) {
                 '!**/package-lock.json',
                 '!./JavaTMP-App-Starter/.project',
                 '!./JavaTMP-App-Starter/.classpath',
+                '!./JavaTMP-App-Starter/nbactions.xml',
                 '!./JavaTMP-App-Starter/nb-configuration.xml',
                 '!./JavaTMP-App-Starter/target{,/**}'
             ], {dot: true})

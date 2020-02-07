@@ -414,7 +414,7 @@
                         updateSizeAfterDataFetchTo: "modal-xl", // default is "modal-lg" or null for standard or "modal-sm"
                         size: "modal-sm",
                         ajax: {
-                            url: "pages/custom-pages/inbox/ajax/blank-ajax-response.html"
+                            url: javatmp.settings.contextPath + "/pages/static/custom-pages/inbox/ajax/blank-ajax-response.html"
                         },
                         localData: {
                             para1: "any value 1",

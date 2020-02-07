@@ -41,9 +41,8 @@ public class TestingUserListJPA {
         log.debug("Data table request is {}", tableRequest);
         tableRequest.setStart(0);
         tableRequest.setLength(10);
-        log.debug("User repository is {}", userRepository);
         DataTableResults<User> dataTableResult = userRepository.retrievePageRequestDetails(tableRequest);
-        log.debug("data table result {}", dataTableResult);
+        log.debug("data table result is null ? {}", (dataTableResult == null));
         log.debug("data table RecordsTotal {}", dataTableResult.getRecordsTotal());
 
     }

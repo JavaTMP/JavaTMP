@@ -31,7 +31,7 @@ public class UserRepositoryTest {
         Pageable pageable = PageRequest.of(0, 10);
 
         Page<User> page = this.userRepository.findAll(pageable);
-        log.debug("current page size is : {} ", page);
+        log.debug("Page getTotalElements is : {} ", page.getTotalElements());
     }
 
 }

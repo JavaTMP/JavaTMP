@@ -148,7 +148,7 @@
             </plugin>
         </plugins>
     </build>
-
+    <!--
     <repositories>
         <repository>
             <id>Central Repository</id>
@@ -175,11 +175,5 @@
             <url>https://repo.spring.io/milestone</url>
         </repository>
     </repositories>
-    <distributionManagement>
-        <repository>
-            <id>Central Maven repository</id>
-            <name>Central Maven repository https</name>
-            <url>https://repo.maven.apache.org/maven2</url>
-        </repository>
-    </distributionManagement>
+    -->
 </project>

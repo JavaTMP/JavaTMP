@@ -4,6 +4,7 @@ title: Java Bootstrap Template Version 0.0.14 (Current Development Version)
 # {{ page.title }}
 
 ## on
+- Prepare `JavaTMP-App-Starter` project for release 0.0.14.
 - Create a `JavaTMP-App-Starter` project which
 is an advanced Dynamic Java Spring Boot Bootstrap LTR/RTL multi languages
 App Management Web application Template
@@ -12,6 +13,8 @@ App Management Web application Template
 - Migrate Custom JPA Repositories to Spring Data Repositories
 - Create a Spring Boot Testing classes
 - Update the following dependencies in package.json:
+    - @fortawesome/fontawesome-free from 5.11.2 to 5.12.1
+    - handlebars from 4.7.2 to 4.7.3
     - gulp-git from 2.9.0  to 2.10.0
     - gulp-rename from 1.4.0 to 2.0.0
     - async from 3.1.0 to 3.1.1

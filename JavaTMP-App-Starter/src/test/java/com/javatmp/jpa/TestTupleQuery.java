@@ -81,7 +81,7 @@ public class TestTupleQuery {
             List<TupleElement<?>> cols = tuple.getElements();
 
             for (TupleElement col : cols) {
-                System.out.println("[" + col.getAlias() + "] = " + tuple.get(col));
+                System.out.println("[" + col.getAlias() + "] = " + tuple.get(col).getClass().getName());
             }
 
             log.debug("first name [" + tuple.getElements().get(0).getAlias() + "]");
@@ -110,8 +110,8 @@ public class TestTupleQuery {
             for (TupleElement<?> te : t.getElements()) {
 
                 Object o = t.get(te);
-                System.out.println("object class [" + o.getClass() + "] object [" + o + "]");
-                System.out.println((o));
+                System.out.println("object class [" + o.getClass() + "]");
+
                 try {
                     Field f = getFieldFromEntity(entity, te.getAlias());
                     f.setAccessible(true);
