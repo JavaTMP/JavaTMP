@@ -160,7 +160,17 @@ gulp.task('process-online-java-app-demo-starter', gulp.series('remove-demo-asset
 
 gulp.task('run-maven', gulp.series('process-online-java-app-demo-starter', function (cb) {
     // In gulp 4, you can return a child process to signal task completion
-    callExec('mvn clean package', {cwd: "./temp/online-java-app-demo-starter"}, cb);
+//    callExec('mvn clean package', {cwd: "./temp/online-java-app-demo-starter"}, cb);
+    const mvn = require('maven').create({
+        cwd: "./temp/online-java-app-demo-starter"
+    });
+    mvn.execute(['clean', 'package'], {'skipTests': false}).then(() => {
+        // As mvn.execute(..) returns a promise, you can use this block to continue
+        // your stuff, once the execution of the command has been finished successfully.
+//        setTimeout(function () {
+        cb();
+//        }, 0);
+    });
 }));
 
 gulp.task('generate-online-java-app-demo-starter-war', function (cb) {
