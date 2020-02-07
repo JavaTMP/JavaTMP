@@ -17,12 +17,8 @@ class GetTimezonesTest {
 
     @Test
     void testGetTimezones() {
-        log.info("Spring Boot app runnin on port : {}");
         List<Timezonetranslation> timezonetranslations = this.timezoneRepository.getTimezones("en");
         log.debug("count of timezone in database is {}", timezonetranslations.size());
-        for (Timezonetranslation timezonetranslation : timezonetranslations) {
-            log.debug("time zone is {}", timezonetranslation);
-        }
 
     }
 
