@@ -16,10 +16,10 @@ We included jQuery UI Touch Punch plugin `jquery.ui.touch-punch.min.js` after `
 that enables the use of touch events on sites using the jQuery UI user interface library.
 
 The following demo page show the implementation of Bootstrap card resorting in separate page: 
-[Sortable Cards using JqueryUI sortable Plugin JavaTMP Demo Page](http://java.javatmp.com:8080/JavaTMP-User-Starter/#/JavaTMP-User-Starter/pages/static/custom-components/sortable-cards).
+[Sortable Cards using JqueryUI sortable Plugin JavaTMP Demo Page](http://java.javatmp.com/#/pages/static/custom-components/sortable-cards).
 
 The following demo page show the implementation of jQuery Fancytree plugin
-[Plain Fancytree Plugin JavaTMP Demo Page](http://java.javatmp.com:8080/JavaTMP-User-Starter/#/JavaTMP-User-Starter/pages/static/plugins/tree/fancytree/plain_fancytree).
+[Plain Fancytree Plugin JavaTMP Demo Page](http://java.javatmp.com/#/pages/static/plugins/tree/fancytree/plain_fancytree).
 
 Removing `jQueryUI` library from JavaTMP Tempate
 ------------------------------------------------

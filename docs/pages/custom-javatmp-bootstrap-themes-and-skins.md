@@ -17,10 +17,10 @@ as we will see soon.
 ## Bootstrap SASS
 As described in [the theming Bootstrap documentation](https://getbootstrap.com/docs/4.1/getting-started/theming/),
 We avoid modifying Bootstrap’s core files. For Sass, that means creating our own stylesheet that imports Bootstrap
-so you can modify and extend it. The following file structure for our `JavaTMP-User-Starter` project provides you the relative files
+so you can modify and extend it. The following file structure for our `JavaTMP-App-Starter` project provides you the relative files
 for Bootstrap and main SASS files:
 ```
-./JavaTMP/JavaTMP-User-Starter
+./JavaTMP/JavaTMP-App-Starter
 ├── web
     └── assets
         ├── dist
@@ -76,7 +76,7 @@ You could directly apply your style changes on:
 
 ### Customize template by standard third-party Bootstrap themes
 
-In this section we show you some examples of how you could customize `JavaTMP-User-Starter` by utilizing third-party Bootstrap
+In this section we show you some examples of how you could customize `JavaTMP-App-Starter` by utilizing third-party Bootstrap
 themes from many sources:
 
 #### Bootswatch [https://bootswatch.com/](https://bootswatch.com/)

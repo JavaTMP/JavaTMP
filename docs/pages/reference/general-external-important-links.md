@@ -52,3 +52,7 @@ title: General External Important Links
 
 ## Collection Links
 - [https://help.optimizely.com/Build_Campaigns_and_Experiments/Use_screen_measurements_to_design_for_responsive_breakpoints](https://help.optimizely.com/Build_Campaigns_and_Experiments/Use_screen_measurements_to_design_for_responsive_breakpoints)
+
+## Datatables Links
+[Server-side processing sent parameters section](https://datatables.net/manual/server-side "jQuery Datatables Server Side Processing Sent Parameters Section")
+

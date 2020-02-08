@@ -4,10 +4,10 @@ title: Java Bootstrap Web Application Features And Resources
 # {{ page.title }}
 
 ### Java Bootstrap Backend Features And Resources
-`JavaTMP-User-Starter` project is a dynamic Java Bootstrap admin and dashboard template
+`JavaTMP-App-Starter` project is a dynamic Java Spring Bootstrap admin and dashboard template
 which consists of the following backend features and resouces:
 
-1.  Created using the standard Maven Java Web Application layout Project.
+1.  Created using Spring Boot framework with the standard Maven Java Web Application layout Project.
 2.  Copy all static files and resources to ./src/main/webapp`.
 3.  Convert all .html pages and Ajax snippets to .jsp equivalent and move them to /WEB-INF to be restricted access through servlets only.
 4.  add `<%@page contentType="text/html" pageEncoding="UTF-8"%>` to the top of all JSP pages.

@@ -3,8 +3,8 @@ title: Java Bootstrap Admin And Dashboard Template
 ---
 # {{ page.title }}
 
-JavaTMP is a Java Bootstrap admin and dashboard components template built using HTML 5 , CSS 3 , jQuery 3, Bootstrap 4
-and Java programming language.
+JavaTMP is a Java Bootstrap admin and dashboard components template built using HTML 5 , CSS 3 , jQuery 3, Bootstrap 4, Java 8
+and Spring Boot framework.
 JavaTMP has a huge collection of plugins and UI components and works seamlessly on all major web browsers, tablets and phones.
 If you have any questions, please email our support team at [support@javatmp.com](mailto:support@javatmp.com).
 
@@ -38,16 +38,9 @@ Once you purchased JavaTMP, you will be entitled to free download of all future 
 
 ## Java Version Notes
 *   Developed Based on Apache Maven build tool.
-*   Use Java Serlvet 4.0 and JSP 2.3
-*   Ready to deploy on Apache Tomcat 9
-*   Use Apache Commons BeanUtils, Collections, Logging, and Lang
-*   Use Google Gson
-*   Use Standard Taglib
-*   Use [hibernate](http://hibernate.org/orm/releases/5.4/ "Hibernate 5.4.1 Home & Download Page") for Java JPA 2.2 Object Relational Mapping with Mysql Database.
-*   Use [mysql-connector-java-8.0.14.jar](https://dev.mysql.com/downloads/connector/j/8.0.html "Java Mysql Connector 8 for JDBC driver") for Java Mysql Connector 8 for JDBC driver.
-*   Use [simplecaptcha-1.2.1.jar](https://sourceforge.net/projects/simplecaptcha/ "Simplecaptcha Home & Download Page") in public registration page.
-*   Use [Handlebars.java 4.0.6](https://github.com/jknack/handlebars.java) as a backend Handlebars.js dynamic backend template engine.
-*   Custom Java MVC using Servlet/JSP and above libraries.
+*   Use Java 8 programming language.
+*   Use Spring Boot 2.2.4 framework.
+*   Embedded tomcat container with the standalone application.
 
 ## Credits
 *   jQuery - [http://www.jquery.com](http://www.jquery.com/)

@@ -33,7 +33,7 @@ because Datatables plugin does not provide support for RTL pages so we overrode 
 
 The following is a high level folder structures of our `sass` and `sass-rtl`:
 ```
-./JavaTMP/JavaTMP-User-Starter
+./JavaTMP/JavaTMP-App-Starter
 +---web (Web Application Context Root Folder)
     +---assets (Specific Template JS,CSS,fonts, and images folders and files)
         +---src (Source folder of the JS/CSS files)

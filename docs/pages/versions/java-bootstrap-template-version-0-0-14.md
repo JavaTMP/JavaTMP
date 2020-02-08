@@ -4,6 +4,7 @@ title: Java Bootstrap Template Version 0.0.14 (Current Development Version)
 # {{ page.title }}
 
 ## on
+- Refactor all online documentation pages for removing `JavaTMP-User-Starter` and introducing `JavaTMP-App-Starter`
 - Prepare `JavaTMP-App-Starter` project for release 0.0.14.
 - Create a `JavaTMP-App-Starter` project which
 is an advanced Dynamic Java Spring Boot Bootstrap LTR/RTL multi languages

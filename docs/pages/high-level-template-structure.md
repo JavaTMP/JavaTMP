@@ -9,7 +9,7 @@ Your purchased package contains the following folder with its description and us
 JavaTMP-java.zip (JavaTMP Dynamic Java Bootstrap Admin and Dashboard components template)
 |---readme.md (read me file)
 |---LICENSE (end-user license agreement (EULA) and copyright information file)
-+---JavaTMP-User-Starter (Dynamic LTR/RTL multi languages Advanced Java Bootstrap User Management Web application version)
++---JavaTMP-App-Starter (Dynamic LTR/RTL multi languages Advanced Java Bootstrap Apps Management Web application version)
 ```
 
 ### `./JavaTMP/readme.md` file
@@ -18,17 +18,17 @@ readme.txt file thanks you for purchasing our template and provides you with a
 ### `./JavaTMP/LICENSE` file
 LICENSE file contains copyright information and end-user license agreement (EULA).
 
-### `JavaTMP-User-Starter` folder
-`JavaTMP-User-Starter` project is an advanced Dynamic Java Bootstrap LTR/RTL multi languages
-User Management Web application Template based on combined curated front-end resources
+### `JavaTMP-App-Starter` folder
+`JavaTMP-App-Starter` project is an advanced Dynamic Java Spring Bootstrap LTR/RTL multi languages
+Apps Management Web application Template based on combined curated front-end resources
 of jQuery and Bootstrap LTR/RTL Admin and Dashboard components and plugins
 with support for data persistent using Mysql Database Management System through
 java Persistent API and hibernate JPA implementation.
-The [online Java User Management Web Application demo](http://java.javatmp.com:8080/JavaTMP-User-Starter/
-"Dynamic Java Bootstrap LTR/RTL multi languages User Management Web application Template")
+The [online Java App Management Web Application demo](http://java.javatmp.com/
+"Dynamic Java Spring Boot LTR/RTL multi languages User Management Web application Template")
 provide a running version of this project folder on tomcat 9.
-For more information see ﻿[JavaTMP-User-Starter Project Version online documentation page](/pages/javatmp-user-starter-project-version
-"﻿JavaTMP-User-Starter Project Version Documentation Page").
+For more information see ﻿[JavaTMP-App-Starter Project Version online documentation page](/pages/javatmp-app-starter-project-version
+"﻿JavaTMP-App-Starter Project Version Documentation Page").
 
 ### Important Notes And Questions
 #### What should I do BEFORE buying a JavaTMP Bootstrap Template ?
@@ -55,9 +55,9 @@ like `Java`, `Maven`, `Servlet`, `JSP`, `Tomcat`, and external third-party libra
 *   To build front-end resources, navigate to project folder using command line tool
 and run the command `npm install` and then `gulp`.
 *   To build Java war file, Navigate to project using command line tool and run the command `mvn clean package`.
-You could import the `JavaTMP-User-Starter` project directly from any Java IDE supporting Maven build tool.
-*   Make sure you already download and install above web development tools and Java development tools like `Java`, `Tomcat`, `Maven`.
-*   For `./JavaTMP-User-Starter` project it is better to import it on any Java IDE with Maven support.
+You could import the `JavaTMP-App-Starter` project directly from any Java IDE supporting Maven build tool.
+*   Make sure you already download and install above web development tools and Java development tools like `Java`, `Maven`.
+*   For `./JavaTMP-App-Starter` project it is better to import it on any Java IDE with Maven support.
 But you can run the following command to clean, compile, or dist project using
 `mvn clean package`
 *   Note that you could do all above command from any Java IDE after importing it.
@@ -171,8 +171,8 @@ gulp
 ```
 
 ## JavaTMP Static HTML Files
-The HTML files for template consist of JSP pages like `.\JavaTMP-User-Starter\src\main\webapp\WEB-INF\index.jsp`,
-`.\JavaTMP-User-Starter\src\main\webapp\WEB-INF\pages\*` files which most of them are AJAX HTML snippets which called
+The HTML files for template consist of JSP pages like `.\JavaTMP-App-Starter\src\main\webapp\WEB-INF\index.jsp`,
+`.\JavaTMP-App-Starter\src\main\webapp\WEB-INF\pages\*` files which most of them are AJAX HTML snippets which called
 from `index.jsp` file sidebar section and `javatmp.js` Javascript file using jquery AJAX. 
 
 There are three types of HTML files exist in above folder.
@@ -182,11 +182,11 @@ There are three types of HTML files exist in above folder.
     like most of other pages, for example `./pages/custom-pages/empty-pages/card-page.jsp` page.
     Kindly refer to `./pages/custom-pages/empty-pages/empty-page.jsp` page to see the minimum required html code needed
     to create an AJAX snippet content. the following link is an
-    [online demo of empty-page.jsp](http://java.javatmp.com:8080/JavaTMP-User-Starter/#/JavaTMP-User-Starter/pages/static/custom-pages/empty-pages/empty-page).
+    [online demo of empty-page.jsp](http://java.javatmp.com/#/pages/static/custom-pages/empty-pages/empty-page).
 3.  Separate HTML pages consist of complete code to show specific scenarios or features like `404-page.jsp`
     or `default-login-page.jsp`. they open in new browser tab and sometimes they depends on external front-end resources.
 
-Please see our [online demo](http://java.javatmp.com:8080/JavaTMP-User-Starter/) for those types of pages.
+Please see our [online demo](http://java.javatmp.com/) for those types of pages.
 
 ## JavaTMP Front-end Frameworks And Plugins Files
 The JavaTMP Front-end frameworks and plugins consist of the libraries used in the front-end part of the template like jQuery,
@@ -276,7 +276,7 @@ and include the complete `./node_modules/bootstrap/scss/bootstrap.scss` file aga
 instead of remaining optional part only.
 
 ## JavaTMP Javascript Files
-The main JavaTMP Javascript files are located in the `.\JavaTMP-User-Starter\src\main\webapp\assets\dist`
+The main JavaTMP Javascript files are located in the `.\JavaTMP-App-Starter\src\main\webapp\assets\dist`
 and generated from the gulp's task 'generate-dist` from these locations:
 - From `./web/assets/src/js-src` after compile and minificate to `javatmp.min.js`.
 - From `src.js` array for each plugin js file after merging to `javatmp-plugins-all.min.js`
@@ -284,14 +284,14 @@ and generated from the gulp's task 'generate-dist` from these locations:
 
 The following file structure provide the output JS files from gulp's task 'generate-dist':
 ```
-.\JavaTMP-User-Starter\src\main\webapp\assets\dist
+.\JavaTMP-App-Starter\src\main\webapp\assets\dist
 +---javatmp-plugins-all-locale-*.min.js (For each Locale key defines `src.localeJS` object like `src.localeJS.en`)
 +---javatmp-plugins-all.min.js
 +---javatmp.min.js
 ```
 
 These Javascript files are referenced from index.jsp page. kindly see the following pages for more information:
-- `./JavaTMP/JavaTMP-User-Starter/web/WEB-INF/index.jsp`
+- `.\JavaTMP\JavaTMP-App-Starter\src\main\webapp\WEB-INF\index.jsp`
 
 ## Global And Mandatory Front-end Resources
 In `index.jsp` page, we defined and initialized the global resources. the following list of front-end resources

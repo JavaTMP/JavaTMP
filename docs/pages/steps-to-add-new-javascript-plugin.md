@@ -13,7 +13,7 @@ and the new plugin has demo pages and examples that describe the plugin.
 6.  Check online demo of plugin and make sure it provide needed functionalities.
 7.  Check that the new plugin is supported and published in node.js.
 8.  Install and register the new plugin in node module by running the following command
-at the command prompt in root folder of JavaTMP-User-Starter Project:
+at the command prompt in root folder of JavaTMP-App-Starter Project:
 ```
     npm install <<module name>> --save
 ```
