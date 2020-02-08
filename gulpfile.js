@@ -264,6 +264,13 @@ gulp.task('push:tag', gulp.series('create-new-tag', function (cb) {
         cb();
     });
 }));
+gulp.task('push:tag-only', function (cb) {
+    return git.push('origin', 'master', {args: '--tags'}, function (err) {
+        if (err)
+            throw err;
+        cb();
+    });
+});
 gulp.task('push', gulp.series('git-add', 'git-commit', function (cb) {
     return git.push('origin', 'master', function (err) {
         if (err)

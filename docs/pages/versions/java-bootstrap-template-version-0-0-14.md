@@ -1,9 +1,9 @@
 ---
-title: Java Bootstrap Template Version 0.0.14 (Current Development Version)
+title: Java Bootstrap Template Version 0.0.14 (published on February 8, 2020)
 ---
 # {{ page.title }}
 
-## on
+## 5f754c1 on Feb 8, 2020, 10:04 PM GMT+4
 - Refactor all online documentation pages for removing `JavaTMP-User-Starter` and introducing `JavaTMP-App-Starter`
 - Prepare `JavaTMP-App-Starter` project for release 0.0.14.
 - Create a `JavaTMP-App-Starter` project which
