@@ -56,3 +56,11 @@ title: General External Important Links
 ## Datatables Links
 [Server-side processing sent parameters section](https://datatables.net/manual/server-side "jQuery Datatables Server Side Processing Sent Parameters Section")
 
+## Linux Server Links
+[https://phoenixnap.com/kb/how-to-restart-apache-centos-linux](https://phoenixnap.com/kb/how-to-restart-apache-centos-linux)
+
+## Maven Links:
+[https://dzone.com/articles/packaging-springboot-application-with-external-dep](https://dzone.com/articles/packaging-springboot-application-with-external-dep)
+
+## Git Links:
+[https://stackoverflow.com/questions/49873519/why-git-fails-to-ignore-the-folder-ive-put-in-gitignore-file](https://stackoverflow.com/questions/49873519/why-git-fails-to-ignore-the-folder-ive-put-in-gitignore-file)
