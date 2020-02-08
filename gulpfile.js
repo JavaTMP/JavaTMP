@@ -225,7 +225,8 @@ gulp.task('git-add', function (cb) {
         "!./temp",
         "!./node_modules",
         '!**/node_modules{,/**}',
-        "!./temp"
+        "!./temp",
+        "!./logs"
     ]).pipe(git.add({args: ''}, cb)).on('end', function () {
         cb();
     });
