@@ -111,12 +111,10 @@ table.responsive {
 }
 
 $columns: $grid-columns;
-$columnSizes: (1, 2, 4, 8, 10, 20, 30, 40, 50, 60, 70, 80);
 $breakpoints: $grid-breakpoints;
-
-@mixin make-col-fixed($index, $values: $columnSizes, $breakpointValue : 1) {
-    flex: 0 0 nth($values, $index) * 1rem;
-    width: nth($values, $index) * 1rem;
+@mixin make-col-fixed($values, $breakpointValue : 1) {
+    flex: 0 0 $values * 1rem;
+    width: $values * 1rem;
 }
 
 @each $breakpoint, $breakpointValue in $breakpoints {
@@ -130,9 +128,9 @@ $breakpoints: $grid-breakpoints;
             width: $breakpointValue;
         }
 
-        @for $i from 1 through $columns {
+        @for $i from 1 through 100 {
             .col-fixed#{$infix}-#{$i} {
-                @include make-col-fixed($i, $columnSizes, $breakpointValue);
+                @include make-col-fixed($i, $breakpointValue);
             }
         }
     }
