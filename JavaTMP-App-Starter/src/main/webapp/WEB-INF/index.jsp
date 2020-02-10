@@ -810,6 +810,11 @@
                                                     Extended Color Outline Button
                                                 </a>
                                             </li>
+                                            <li>
+                                                <a href="${pageContext.request.contextPath}/pages/static/custom-components/custom-bootstrap-table-styling">
+                                                    Custom Table Styling
+                                                </a>
+                                            </li>
                                         </ul>
                                     </li>
                                     <li>

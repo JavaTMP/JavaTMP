@@ -137,3 +137,19 @@ $breakpoints: $grid-breakpoints;
         }
     }
 }
+
+// generate custom table styling #306
+@each $color, $value in $theme-colors {
+    .table-bordered-#{$color} {
+        border-color: $value;
+        th, td {
+            border-color: $value;
+        }
+        thead th {
+            border-bottom-color: $value;
+        }
+        tbody + tbody {
+            border-top-color: $value;
+        }
+    }
+}
