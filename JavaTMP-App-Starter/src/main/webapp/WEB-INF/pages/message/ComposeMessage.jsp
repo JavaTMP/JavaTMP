@@ -203,7 +203,7 @@
                         return repo.text;
                     var template =
                             '    <div class="media">' +
-                            '        <img class="col-fixed-3 mr-1" src="{{contextPath}}/ViewUploadedFileController?documentId={{documentId}}&amp;randomHash={{randomHash}}&amp;viewType=inline" alt="Generic placeholder image"/>' +
+                            '        <img class="col-fixed-4 mr-1" src="{{contextPath}}/ViewUploadedFileController?documentId={{documentId}}&amp;randomHash={{randomHash}}&amp;viewType=inline" alt="Generic placeholder image"/>' +
                             '        <div class="media-body">' +
                             '            <div class="mt-0 d-flex justify-content-between">' +
                             '                <strong>{{firstName}} {{lastName}}</strong>' +

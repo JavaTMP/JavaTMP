@@ -12,7 +12,7 @@
     <hr/>
     <h2 class="text-primary text-truncate pt-1 my-3">Fixed and Fluid Bootstrap 4</h2>
     <div class="form-row">
-        <div class="col-md-4 col-12 col-fixed-md-6">
+        <div class="col-md-4 col-12 col-fixed-md-20">
             <div class="card card-body p-2">
                 <h4>Fixed Sidebar</h4>
                 <ul class="nav nav-pills flex-column">
