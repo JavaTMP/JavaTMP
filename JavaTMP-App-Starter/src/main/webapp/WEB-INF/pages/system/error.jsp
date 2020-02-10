@@ -18,7 +18,7 @@
         <!-- Include language support font -->
         <link href="${pageContext.request.contextPath}/assets/dist/css/font-family-${labels['global.language']}.min.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body class="page-404">
+    <body class="error-page">
         <div class="container-fluid">
             <div class="row justify-content-center mt-3 mb-2">
                 <div class="col-lg-3">
@@ -27,29 +27,21 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-3">
-                    <div class="details text-center">
-                        <h3>Oops! You're lost.</h3>
-                        <p>
-                            We can not find the page you're looking for.
+                    <div class="text-center">
+                        <h3>Oops! Sorry.</h3>
+                        <p class="display-5 text-center">
+                            We can not find the page you're looking for
                             <br/>
-                            <a href="${pageContext.request.contextPath}/"> Return home </a> or try the search bar below.
+                            <br/>
+                            <a href="${pageContext.request.contextPath}/"> Return home </a>
                         </p>
-                        <form action="${pageContext.request.contextPath}/">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="keyword...">
-                                <span class="input-group-append">
-                                    <button type="submit" class="btn btn-danger">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
-                        </form>
+
                     </div>
                 </div>
             </div>
         </div>
         <style type="text/css">
-            .page-404 .number {
+            .error-page .number {
                 line-height: 128px;
                 font-size: 128px;
             }

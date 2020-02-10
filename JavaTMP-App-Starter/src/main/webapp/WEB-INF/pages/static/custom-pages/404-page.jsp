@@ -24,9 +24,9 @@
                         <p>
                             We can not find the page you're looking for.
                             <br/>
-                            <a href="/JavaTMP-Static-Ajax/#pages/home.html"> Return home </a> or try the search bar below.
+                            <a href="${pageContext.request.contextPath}/"> Return home </a> or try the search bar below.
                         </p>
-                        <form action="/JavaTMP-Static-Ajax/#pages/home.html">
+                        <form action="${pageContext.request.contextPath}/">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="keyword...">
                                 <span class="input-group-append">

@@ -1,4 +1,4 @@
-package com.javatmp.fw.config.exception;
+package com.javatmp.fw.web.exception;
 
 import com.javatmp.fw.domain.ResponseMessage;
 import javax.persistence.PersistenceException;

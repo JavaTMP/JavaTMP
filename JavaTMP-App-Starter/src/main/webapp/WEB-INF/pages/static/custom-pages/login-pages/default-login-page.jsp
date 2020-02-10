@@ -20,7 +20,7 @@
                             Please Sign In
                         </div>
                         <div class="card-body">
-                            <form role="form" action="/JavaTMP-Static-Ajax/#pages/home.html">
+                            <form role="form" action="${pageContext.request.contextPath}/">
                                 <div class="form-group">
                                     <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
                                 </div>
