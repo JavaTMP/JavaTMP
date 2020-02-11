@@ -64,3 +64,4 @@ title: General External Important Links
 
 ## Git Links:
 [https://stackoverflow.com/questions/49873519/why-git-fails-to-ignore-the-folder-ive-put-in-gitignore-file](https://stackoverflow.com/questions/49873519/why-git-fails-to-ignore-the-folder-ive-put-in-gitignore-file)
+[https://stackoverflow.com/a/8476004/1461221](https://stackoverflow.com/a/8476004/1461221)
