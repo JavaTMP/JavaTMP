@@ -532,7 +532,7 @@
 
                 var my_prettify = function (n) {
                     var num = Math.log2(n);
-                    return n + " â " + (+num.toFixed(3));
+                    return n + " → " + (+num.toFixed(3));
                 };
 
                 var demosGenerator = function (skinType) {

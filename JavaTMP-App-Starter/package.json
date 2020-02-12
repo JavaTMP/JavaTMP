@@ -102,7 +102,7 @@
         "yargs": "^15.1.0"
     },
     "napa-config": {
-        "cache": true,
+        "cache": false,
         "log-level": "debug"
     },
     "napa": {

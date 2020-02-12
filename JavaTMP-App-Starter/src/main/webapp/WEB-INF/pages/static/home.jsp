@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<div class="dynamic-ajax-content grid-gutter-padding">
+<div class="dynamic-ajax-content grid-gutter-padding pt-5">
     <div class="d-flex flex-row flex-wrap flex-sm-wrap flex-md-wrap flex-lg-nowrap flex-xl-nowrap justify-content-center align-content-center">
         <button type="button" class="javatmp-btn btn btn-primary m-3"
                 actionType="action-ref-href" action-ref-by-href="${pageContext.request.contextPath}/pages/static/bootstrap/modal" >
