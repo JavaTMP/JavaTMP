@@ -138,6 +138,15 @@ $breakpoints: $grid-breakpoints;
 
 // generate custom table styling #306
 @each $color, $value in $theme-colors {
+    .table {
+        .thead-#{$color} {
+            th {
+                color: color-yiq($value);
+                background-color: $value;
+                border-color: $value;
+            }
+        }
+    }
     .table-bordered-#{$color} {
         border-color: $value;
         th, td {

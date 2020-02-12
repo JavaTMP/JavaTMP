@@ -4,7 +4,7 @@
         <div class="col">
             <div class="card my-3">
                 <div class="card-header">
-                    Bootstrap Table
+                    Custom Bootstrap Table Color Styling
                     <div class="options float-right">
                         <a class="settings"><i class="fa fa-cog"></i></a>
                         <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
@@ -17,6 +17,37 @@
                     <h4 class="card-title text-primary">Bordered <code>.table-bordered-primary</code> table</h4>
                     <table class="table-bordered-primary table table-bordered">
                         <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Username</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@TwBootstrap</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <table class="table-bordered-primary table table-bordered">
+                        <thead class="thead-primary">
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">First Name</th>
@@ -78,9 +109,71 @@
                         </tbody>
                     </table>
                     <br/>
+                    <table class="table-bordered-secondary table table-bordered">
+                        <thead class="thead-secondary">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Username</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@TwBootstrap</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
                     <h4 class="card-title text-primary">Bordered <code>.table-bordered-success</code> table</h4>
                     <table class="table-bordered-success table table-bordered">
                         <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Username</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@TwBootstrap</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <table class="table-bordered-success table table-bordered">
+                        <thead class="thead-success">
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">First Name</th>
@@ -142,9 +235,71 @@
                         </tbody>
                     </table>
                     <br/>
+                    <table class="table-bordered-info table table-bordered">
+                        <thead class="thead-info">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Username</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@TwBootstrap</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
                     <h4 class="card-title text-primary">Bordered <code>.table-bordered-warning</code> table</h4>
                     <table class="table-bordered-warning table table-bordered">
                         <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Username</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@TwBootstrap</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <table class="table-bordered-warning table table-bordered">
+                        <thead class="thead-warning">
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">First Name</th>
@@ -206,6 +361,37 @@
                         </tbody>
                     </table>
                     <br/>
+                    <table class="table-bordered-danger table table-bordered">
+                        <thead class="thead-danger">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Username</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@TwBootstrap</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
                     <h4 class="card-title text-primary">Bordered <code>.table-bordered-light</code> table</h4>
                     <table class="table-bordered-light table table-bordered">
                         <thead>
@@ -238,9 +424,71 @@
                         </tbody>
                     </table>
                     <br/>
+                    <table class="table-bordered-light table table-bordered">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Username</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@TwBootstrap</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
                     <h4 class="card-title text-primary">Bordered <code>.table-bordered-dark</code> table</h4>
                     <table class="table-bordered-dark table table-bordered">
                         <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Username</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@mdo</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>@TwBootstrap</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br/>
+                    <table class="table-bordered-dark table table-bordered">
+                        <thead class="thead-dark">
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">First Name</th>
