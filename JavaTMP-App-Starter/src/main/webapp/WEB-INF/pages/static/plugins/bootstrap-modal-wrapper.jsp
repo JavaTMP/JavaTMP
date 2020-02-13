@@ -414,7 +414,7 @@
                         updateSizeAfterDataFetchTo: "modal-xl", // default is "modal-lg" or null for standard or "modal-sm"
                         size: "modal-sm",
                         ajax: {
-                            url: javatmp.settings.contextPath + "/pages/static/custom-pages/inbox/ajax/blank-ajax-response.html"
+                            url: javatmp.settings.contextPath + "/pages/static/custom-pages/inbox/ajax/blank-ajax-response"
                         },
                         localData: {
                             para1: "any value 1",
@@ -437,7 +437,7 @@
                         updateSizeAfterDataFetchTo: "modal-sm", // default is "modal-lg" or null for standard or "modal-sm"
                         size: "modal-sm",
                         ajax: {
-                            url: "pages/custom-pages/inbox/ajax/blank-ajax-response.html"
+                            url: javatmp.settings.contextPath + "/pages/custom-pages/inbox/ajax/blank-ajax-response"
                         },
                         localData: {
                             para1: "any value 1",
@@ -460,7 +460,7 @@
                         updateSizeAfterDataFetchTo: null, // default is "modal-lg" or null for standard or "modal-sm"
                         size: null,
                         ajax: {
-                            url: "pages/custom-pages/inbox/ajax/blank-ajax-response.html"
+                            url: javatmp.settings.contextPath + "/pages/custom-pages/inbox/ajax/blank-ajax-response"
                         },
                         localData: {
                             para1: "any value 1",
@@ -483,7 +483,7 @@
                         updateSizeAfterDataFetchTo: "modal-lg", // default is  or null for standard or "modal-sm"
                         size: "modal-lg",
                         ajax: {
-                            url: "pages/custom-pages/inbox/ajax/blank-ajax-response.html"
+                            url: javatmp.settings.contextPath + "/pages/custom-pages/inbox/ajax/blank-ajax-response"
                         },
                         localData: {
                             para1: "any value 1",
@@ -506,7 +506,7 @@
                         updateSizeAfterDataFetchTo: "modal-xl", // default is  or null for standard or "modal-sm"
                         size: "modal-xl",
                         ajax: {
-                            url: "pages/custom-pages/inbox/ajax/blank-ajax-response.html"
+                            url: javatmp.settings.contextPath + "/pages/custom-pages/inbox/ajax/blank-ajax-response"
                         },
                         localData: {
                             para1: "any value 1",

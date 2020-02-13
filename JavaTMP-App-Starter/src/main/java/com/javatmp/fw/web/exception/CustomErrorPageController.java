@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class CustomErrorPageController implements ErrorController {
 
+    // read more : https://stackoverflow.com/questions/25356781/spring-boot-remove-whitelabel-error-page
     @RequestMapping("/error")
     public String handleError(HttpServletRequest request, HttpServletResponse response) {
         Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
