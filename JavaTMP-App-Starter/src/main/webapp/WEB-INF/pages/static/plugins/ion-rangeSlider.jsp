@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="form-row">
-        <div class="col-lg-6">
+        <div class="col-lg-4">
             <div class="card mb-3">
                 <div class="card-header">
                     Ion Range Slider <span class="badge badge-primary">Flat skin</span>
@@ -29,62 +29,62 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <form role="form" class="ionRangeSlider-flat-skin">
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-primary">
                                     <label>Basic With Set min, max and start value Options:</label>
                                     <input type="text" class="form-control demo1" value="" />
                                     <p class="help-block">Start with <small>min, max, from</small>.</p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-secondary">
                                     <label>Basic With Set min, max and start value and grid Options:</label>
                                     <input type="text" class="form-control demo2" value="" />
                                     <p class="help-block">Start with <small>min, max, from</small>.</p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-success">
                                     <label>Set min, max, and start values</label>
                                     <input type="text" class="form-control demo3" value="" />
                                     <p class="help-block">Set min value, max value and start point.</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group ionRangeSlider-danger">
                                     <label>Range with values</label>
                                     <input type="text" class="form-control demo4" value="" />
                                     <p class="help-block">Set type to double and specify range, also showing grid and adding prefix "$".</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group ionRangeSlider-warning">
                                     <label>Range with negative values</label>
                                     <input type="text" class="form-control demo5" value="" />
                                     <p class="help-block">Set up range with negative values.</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group  ionRangeSlider-info">
                                     <label>Range using step 100</label>
                                     <input type="text" class="form-control demo6" value="" />
                                     <p class="help-block">Range using step 100.</p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-light">
                                     <label>Range using strings</label>
                                     <input type="text" class="form-control demo7" value="" />
                                     <p class="help-block">Range using strings.</p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider  ionRangeSlider-dark">
                                     <label>Range with Formatting Number:</label>
                                     <input type="text" class="form-control demo8" value="" />
                                     <p class="help-block">Prettify visual look of numbers.</p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider  ionRangeSlider-warning">
                                     <label>You can lock your slider, by using disable option:</label>
                                     <input type="text" class="form-control demo9" value="" />
                                     <p class="help-block">using <code>disable: true</code></p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-info">
                                     <label>Use your own prettify function to transform numbers whatever you like.</label>
                                     <input type="text" class="form-control demo10" value="" />
                                     <p class="help-block">For example calculating logarithm of a number</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group ionRangeSlider-success">
                                     <label>Force fractional values.</label>
                                     <input type="text" class="form-control demo11" value="" />
                                     <p class="help-block">For example using fractional step 0.1</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group ionRangeSlider-danger">
                                     <label>Support bar dragging.</label>
                                     <input type="text" class="form-control demo12" value="" />
                                     <p class="help-block">By using <code>drag_interval: true</code></p>
@@ -95,7 +95,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-4">
             <div class="card mb-3">
                 <div class="card-header">
                     Ion Range Slider <span class="badge badge-primary">Big skin</span>
@@ -111,62 +111,62 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <form role="form" class="ionRangeSlider-big-skin">
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-primary">
                                     <label>Basic With Set min, max and start value Options:</label>
                                     <input type="text" class="form-control demo1" value="" />
                                     <p class="help-block">Start with <small>min, max, from</small>.</p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-secondary">
                                     <label>Basic With Set min, max and start value and grid Options:</label>
                                     <input type="text" class="form-control demo2" value="" />
                                     <p class="help-block">Start with <small>min, max, from</small>.</p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-success">
                                     <label>Set min, max, and start values</label>
                                     <input type="text" class="form-control demo3" value="" />
                                     <p class="help-block">Set min value, max value and start point.</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group ionRangeSlider-warning">
                                     <label>Range with values</label>
                                     <input type="text" class="form-control demo4" value="" />
                                     <p class="help-block">Set type to double and specify range, also showing grid and adding prefix "$".</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group ionRangeSlider-danger">
                                     <label>Range with negative values</label>
                                     <input type="text" class="form-control demo5" value="" />
                                     <p class="help-block">Set up range with negative values.</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group ionRangeSlider-info">
                                     <label>Range using step 100</label>
                                     <input type="text" class="form-control demo6" value="" />
                                     <p class="help-block">Range using step 100.</p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-light">
                                     <label>Range using strings</label>
                                     <input type="text" class="form-control demo7" value="" />
                                     <p class="help-block">Range using strings.</p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-dark">
                                     <label>Range with Formatting Number:</label>
                                     <input type="text" class="form-control demo8" value="" />
                                     <p class="help-block">Prettify visual look of numbers.</p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-success">
                                     <label>You can lock your slider, by using disable option:</label>
                                     <input type="text" class="form-control demo9" value="" />
                                     <p class="help-block">using <code>disable: true</code></p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-danger">
                                     <label>Use your own prettify function to transform numbers whatever you like.</label>
                                     <input type="text" class="form-control demo10" value="" />
                                     <p class="help-block">For example calculating logarithm of a number</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group ionRangeSlider-warning">
                                     <label>Force fractional values.</label>
                                     <input type="text" class="form-control demo11" value="" />
                                     <p class="help-block">For example using fractional step 0.1</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group ionRangeSlider-danger">
                                     <label>Support bar dragging.</label>
                                     <input type="text" class="form-control demo12" value="" />
                                     <p class="help-block">By using <code>drag_interval: true</code></p>
@@ -177,9 +177,7 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="form-row">
-        <div class="col-lg-6">
+        <div class="col-lg-4">
             <div class="card mb-3">
                 <div class="card-header">
                     Ion Range Slider <span class="badge badge-primary">Modern skin</span>
@@ -195,62 +193,62 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <form role="form" class="ionRangeSlider-modern-skin">
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-primary">
                                     <label>Basic With Set min, max and start value Options:</label>
                                     <input type="text" class="form-control demo1" value="" />
                                     <p class="help-block">Start with <small>min, max, from</small>.</p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-secondary">
                                     <label>Basic With Set min, max and start value and grid Options:</label>
                                     <input type="text" class="form-control demo2" value="" />
                                     <p class="help-block">Start with <small>min, max, from</small>.</p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-info">
                                     <label>Set min, max, and start values</label>
                                     <input type="text" class="form-control demo3" value="" />
                                     <p class="help-block">Set min value, max value and start point.</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group ionRangeSlider-success">
                                     <label>Range with values</label>
                                     <input type="text" class="form-control demo4" value="" />
                                     <p class="help-block">Set type to double and specify range, also showing grid and adding prefix "$".</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group ionRangeSlider-warning">
                                     <label>Range with negative values</label>
                                     <input type="text" class="form-control demo5" value="" />
                                     <p class="help-block">Set up range with negative values.</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group ionRangeSlider-danger">
                                     <label>Range using step 100</label>
                                     <input type="text" class="form-control demo6" value="" />
                                     <p class="help-block">Range using step 100.</p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-light">
                                     <label>Range using strings</label>
                                     <input type="text" class="form-control demo7" value="" />
                                     <p class="help-block">Range using strings.</p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-dark">
                                     <label>Range with Formatting Number:</label>
                                     <input type="text" class="form-control demo8" value="" />
                                     <p class="help-block">Prettify visual look of numbers.</p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-success">
                                     <label>You can lock your slider, by using disable option:</label>
                                     <input type="text" class="form-control demo9" value="" />
                                     <p class="help-block">using <code>disable: true</code></p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-danger">
                                     <label>Use your own prettify function to transform numbers whatever you like.</label>
                                     <input type="text" class="form-control demo10" value="" />
                                     <p class="help-block">For example calculating logarithm of a number</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group ionRangeSlider-warning">
                                     <label>Force fractional values.</label>
                                     <input type="text" class="form-control demo11" value="" />
                                     <p class="help-block">For example using fractional step 0.1</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group ionRangeSlider-dark">
                                     <label>Support bar dragging.</label>
                                     <input type="text" class="form-control demo12" value="" />
                                     <p class="help-block">By using <code>drag_interval: true</code></p>
@@ -261,7 +259,9 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+    </div>
+    <div class="form-row">
+        <div class="col-lg-4">
             <div class="card mb-3">
                 <div class="card-header">
                     Ion Range Slider <span class="badge badge-primary">Sharp skin</span>
@@ -282,57 +282,57 @@
                                     <input type="text" class="form-control demo1" value="" />
                                     <p class="help-block">Start with <small>min, max, from</small>.</p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-primary">
                                     <label>Basic With Set min, max and start value and grid Options:</label>
                                     <input type="text" class="form-control demo2" value="" />
                                     <p class="help-block">Start with <small>min, max, from</small>.</p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-secondary">
                                     <label>Set min, max, and start values</label>
                                     <input type="text" class="form-control demo3" value="" />
                                     <p class="help-block">Set min value, max value and start point.</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group ionRangeSlider-info">
                                     <label>Range with values</label>
                                     <input type="text" class="form-control demo4" value="" />
                                     <p class="help-block">Set type to double and specify range, also showing grid and adding prefix "$".</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group ionRangeSlider-success">
                                     <label>Range with negative values</label>
                                     <input type="text" class="form-control demo5" value="" />
                                     <p class="help-block">Set up range with negative values.</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group ionRangeSlider-warning">
                                     <label>Range using step 100</label>
                                     <input type="text" class="form-control demo6" value="" />
                                     <p class="help-block">Range using step 100.</p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-danger">
                                     <label>Range using strings</label>
                                     <input type="text" class="form-control demo7" value="" />
                                     <p class="help-block">Range using strings.</p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-light">
                                     <label>Range with Formatting Number:</label>
                                     <input type="text" class="form-control demo8" value="" />
                                     <p class="help-block">Prettify visual look of numbers.</p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-dark">
                                     <label>You can lock your slider, by using disable option:</label>
                                     <input type="text" class="form-control demo9" value="" />
                                     <p class="help-block">using <code>disable: true</code></p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-success">
                                     <label>Use your own prettify function to transform numbers whatever you like.</label>
                                     <input type="text" class="form-control demo10" value="" />
                                     <p class="help-block">For example calculating logarithm of a number</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group ionRangeSlider-danger">
                                     <label>Force fractional values.</label>
                                     <input type="text" class="form-control demo11" value="" />
                                     <p class="help-block">For example using fractional step 0.1</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group ionRangeSlider-dark">
                                     <label>Support bar dragging.</label>
                                     <input type="text" class="form-control demo12" value="" />
                                     <p class="help-block">By using <code>drag_interval: true</code></p>
@@ -343,9 +343,7 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="form-row">
-        <div class="col-lg-6">
+        <div class="col-lg-4">
             <div class="card mb-3">
                 <div class="card-header">
                     Ion Range Slider <span class="badge badge-primary">Round skin</span>
@@ -366,57 +364,57 @@
                                     <input type="text" class="form-control demo1" value="" />
                                     <p class="help-block">Start with <small>min, max, from</small>.</p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-primary">
                                     <label>Basic With Set min, max and start value and grid Options:</label>
                                     <input type="text" class="form-control demo2" value="" />
                                     <p class="help-block">Start with <small>min, max, from</small>.</p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-secondary">
                                     <label>Set min, max, and start values</label>
                                     <input type="text" class="form-control demo3" value="" />
                                     <p class="help-block">Set min value, max value and start point.</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group ionRangeSlider-info">
                                     <label>Range with values</label>
                                     <input type="text" class="form-control demo4" value="" />
                                     <p class="help-block">Set type to double and specify range, also showing grid and adding prefix "$".</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group ionRangeSlider-success">
                                     <label>Range with negative values</label>
                                     <input type="text" class="form-control demo5" value="" />
                                     <p class="help-block">Set up range with negative values.</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group ionRangeSlider-warning">
                                     <label>Range using step 100</label>
                                     <input type="text" class="form-control demo6" value="" />
                                     <p class="help-block">Range using step 100.</p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-danger">
                                     <label>Range using strings</label>
                                     <input type="text" class="form-control demo7" value="" />
                                     <p class="help-block">Range using strings.</p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-light">
                                     <label>Range with Formatting Number:</label>
                                     <input type="text" class="form-control demo8" value="" />
                                     <p class="help-block">Prettify visual look of numbers.</p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-dark">
                                     <label>You can lock your slider, by using disable option:</label>
                                     <input type="text" class="form-control demo9" value="" />
                                     <p class="help-block">using <code>disable: true</code></p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-danger">
                                     <label>Use your own prettify function to transform numbers whatever you like.</label>
                                     <input type="text" class="form-control demo10" value="" />
                                     <p class="help-block">For example calculating logarithm of a number</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group ionRangeSlider-success">
                                     <label>Force fractional values.</label>
                                     <input type="text" class="form-control demo11" value="" />
                                     <p class="help-block">For example using fractional step 0.1</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group ionRangeSlider-warning">
                                     <label>Support bar dragging.</label>
                                     <input type="text" class="form-control demo12" value="" />
                                     <p class="help-block">By using <code>drag_interval: true</code></p>
@@ -427,7 +425,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-4">
             <div class="card mb-3">
                 <div class="card-header">
                     Ion Range Slider <span class="badge badge-primary">Square skin</span>
@@ -448,57 +446,57 @@
                                     <input type="text" class="form-control demo1" value="" />
                                     <p class="help-block">Start with <small>min, max, from</small>.</p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-primary">
                                     <label>Basic With Set min, max and start value and grid Options:</label>
                                     <input type="text" class="form-control demo2" value="" />
                                     <p class="help-block">Start with <small>min, max, from</small>.</p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-secondary">
                                     <label>Set min, max, and start values</label>
                                     <input type="text" class="form-control demo3" value="" />
                                     <p class="help-block">Set min value, max value and start point.</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group ionRangeSlider-info">
                                     <label>Range with values</label>
                                     <input type="text" class="form-control demo4" value="" />
                                     <p class="help-block">Set type to double and specify range, also showing grid and adding prefix "$".</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group ionRangeSlider-success">
                                     <label>Range with negative values</label>
                                     <input type="text" class="form-control demo5" value="" />
                                     <p class="help-block">Set up range with negative values.</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group ionRangeSlider-warning">
                                     <label>Range using step 100</label>
                                     <input type="text" class="form-control demo6" value="" />
                                     <p class="help-block">Range using step 100.</p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-danger">
                                     <label>Range using strings</label>
                                     <input type="text" class="form-control demo7" value="" />
                                     <p class="help-block">Range using strings.</p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-light">
                                     <label>Range with Formatting Number:</label>
                                     <input type="text" class="form-control demo8" value="" />
                                     <p class="help-block">Prettify visual look of numbers.</p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-dark">
                                     <label>You can lock your slider, by using disable option:</label>
                                     <input type="text" class="form-control demo9" value="" />
                                     <p class="help-block">using <code>disable: true</code></p>
                                 </div>
-                                <div class="form-group single-ionRangeSlider">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-success">
                                     <label>Use your own prettify function to transform numbers whatever you like.</label>
                                     <input type="text" class="form-control demo10" value="" />
                                     <p class="help-block">For example calculating logarithm of a number</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group ionRangeSlider-warning">
                                     <label>Force fractional values.</label>
                                     <input type="text" class="form-control demo11" value="" />
                                     <p class="help-block">For example using fractional step 0.1</p>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group ionRangeSlider-danger">
                                     <label>Support bar dragging.</label>
                                     <input type="text" class="form-control demo12" value="" />
                                     <p class="help-block">By using <code>drag_interval: true</code></p>

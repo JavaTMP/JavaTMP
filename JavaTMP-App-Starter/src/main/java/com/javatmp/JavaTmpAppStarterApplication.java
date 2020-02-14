@@ -21,7 +21,7 @@ public class JavaTmpAppStarterApplication extends SpringBootServletInitializer {
         ApplicationContext context = SpringApplication.run(JavaTmpAppStarterApplication.class, args);
 
         for (String name : context.getBeanDefinitionNames()) {
-            log.debug("name [{}] type [{}]", name, context.getBean(name).getClass());
+//            log.debug("name [{}] type [{}]", name, context.getBean(name).getClass());
         }
     }
 

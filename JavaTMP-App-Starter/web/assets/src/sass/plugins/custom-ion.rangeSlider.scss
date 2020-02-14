@@ -600,3 +600,81 @@ $ion-range-slider-irs-line-height: $progress-height!default;
         }
     }
 }
+
+
+// 0.0.15: custom theme colors:
+@each $color, $value in $theme-colors {
+    .ionRangeSlider-#{$color} {
+        .irs-bar {
+            border-color: $value;
+            background: $value;
+        }
+        .irs-from,
+        .irs-to,
+        .irs-single {
+            color: color-yiq($value);
+            background-color: $value;
+            &:before {
+                border-top-color: $value;
+            }
+        }
+        .irs--flat .irs-handle > i:first-child {
+            background-color: $value;
+        }
+        .irs--big .irs-handle {
+            border-color: $value;
+            background-color: $value;
+            &.state_hover, &:hover {
+                border-color: darken($value, 5%);
+                background-color: darken($value, 5%);
+            }
+        }
+        .irs--modern .irs-handle {
+            border-color: $value;
+            > i {
+                &:nth-child(1) {
+                    border-color: $value;
+                    background: $value;
+                }
+                &:nth-child(2) {
+                    background-color: $value;
+                }
+                &:nth-child(3) {
+                    border-left-color: color-yiq($value);
+                    border-right-color: color-yiq($value);
+                }
+            }
+        }
+        .irs--sharp .irs-handle {
+            background-color: $value;
+        }
+        .irs--sharp .irs-handle > i:first-child {
+            border-top-color: $value;
+        }
+        .irs--sharp .irs-handle.state_hover,
+        .irs--sharp .irs-handle:hover {
+            background-color: darken($value, 5%);
+        }
+        .irs--sharp .irs-handle.state_hover > i:first-child,
+            .irs--sharp .irs-handle:hover > i:first-child {
+            border-top-color: darken($value, 5%);
+        }
+        .irs--round .irs-handle {
+            border-color: $value;
+            background-color: $value;
+        }
+        .irs--round .irs-handle.state_hover,
+        .irs--round .irs-handle:hover {
+            background-color: darken($value, 5%);
+        }
+
+        .irs--square .irs-handle {
+            border-color: $value;
+            background-color: $value;
+        }
+        .irs--square .irs-handle.state_hover,
+        .irs--square .irs-handle:hover {
+            background-color: darken($value, 5%);
+        }
+    }
+}
