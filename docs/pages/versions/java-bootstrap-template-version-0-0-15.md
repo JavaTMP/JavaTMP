@@ -3,6 +3,12 @@ title: Java Bootstrap Template Version 0.0.15 (Current Development Version)
 ---
 # {{ page.title }}
 
+## on
+- Support Theme-colors for Ion.RangeSlider plugin
+    - Update `.\web\assets\src\sass\plugins\custom-ion.rangeSlider.scss`
+    - Update `.\src\main\webapp\WEB-INF\pages\static\plugins\ion-rangeSlider.jsp`
+- Run gulp default to regenerate dist folders.
+
 ## 05b5af6 on Feb 10, 2020, 7:59 PM GMT+4
 - Custom Boostrap Table Styling by providing `table-bordered-*` classes and demo page
 `.\src\main\webapp\WEB-INF\pages\static\custom-components\custom-bootstrap-table-styling.jsp`

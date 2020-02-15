@@ -592,7 +592,7 @@ $ion-range-slider-irs-line-height: $progress-height!default;
     .single-ionRangeSlider {
         .irs-line {
             background-color: $ion-range-slider-irs-bar-bg;
-            border: 1px solid $ion-range-slider-irs-bar-bg;
+            border-color: $ion-range-slider-irs-bar-bg;
         }
         .irs-bar {
             border-color: $ion-range-slider-irs-line-bg;
@@ -601,13 +601,22 @@ $ion-range-slider-irs-line-height: $progress-height!default;
     }
 }
 
-
 // 0.0.15: custom theme colors:
 @each $color, $value in $theme-colors {
     .ionRangeSlider-#{$color} {
         .irs-bar {
             border-color: $value;
-            background: $value;
+            background-color: $value;
+        }
+        [dir=rtl] &.single-ionRangeSlider {
+            .irs-line {
+                background-color: $value;
+                border-color: $value;
+            }
+            .irs-bar {
+                border-color: $ion-range-slider-irs-line-bg;
+                background: $ion-range-slider-irs-line-bg;
+            }
         }
         .irs-from,
         .irs-to,

@@ -13,6 +13,38 @@
         </div>
     </div>
     <div class="form-row">
+        <div class="col">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Ion Range Slider <span class="badge badge-primary">Flat skin</span>
+                    <div class="options float-right">
+                        <a class="settings"><i class="fa fa-cog"></i></a>
+                        <a href="#" class="collapse"><i class="fa fa-chevron-up"></i></a>
+                        <a href="#" class="reload"><i class="fa fa-sync"></i></a>
+                        <a href="#" class="fullscreen"><i class=" fa fa-expand"></i></a>
+                        <a href="#" class="remove"><i class="fa fa-times"></i></a>
+                    </div>
+                </div>
+                <div class="card-body px-5">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <form name="dynamicValue" role="form" class="ionRangeSlider-flat-skin">
+                                <div class="form-group single-ionRangeSlider ionRangeSlider-danger">
+                                    <label>Basic With Set min, max and start value Options:</label>
+                                    <input name="rate" type="text" class="form-control auto-change-theme" value="" />
+                                    <p class="help-block">Move slider to change its color</p>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-success" value="View Value" name="action"/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
         <div class="col-lg-4">
             <div class="card mb-3">
                 <div class="card-header">
@@ -533,6 +565,52 @@
                     return n + " → " + (+num.toFixed(3));
                 };
 
+                var min = 0;
+                var max = 100;
+                var from = 0;
+                from = (javatmp.settings.isRTL === true) ? ((max + min) - from) : from;
+                $("form.ionRangeSlider-flat-skin .auto-change-theme").ionRangeSlider({
+                    skin: "flat",
+                    min: min,
+                    max: max,
+                    from: from,
+                    grid: true,
+                    step: 1,
+                    prettify: (javatmp.settings.isRTL === true) ? flipperRTLFunction(min, max) : null,
+                    onChange: function (data) {
+                        console.log("onChange:");
+                        var parentFormGroup = $(data.input).parent();
+                        parentFormGroup.removeClass("ionRangeSlider-danger ionRangeSlider-warning ionRangeSlider-success");
+                        console.log("parent = " + $(data.input).parent().attr("class"));
+                        console.log(data);
+                        console.log(data.from);
+                        var min = data.min;
+                        var max = data.max;
+                        var from = data.from;
+                        from = (javatmp.settings.isRTL === true) ? ((max + min) - from) : from;
+                        data.from = from;
+                        console.log("finial from = " + from);
+                        if (from <= 30) {
+                            parentFormGroup.addClass("ionRangeSlider-danger");
+                        } else if (from <= 70) {
+                            parentFormGroup.addClass("ionRangeSlider-warning");
+                        } else if (from <= 100) {
+                            parentFormGroup.addClass("ionRangeSlider-success");
+                        }
+                    },
+                    onUpdate: function (data) {
+                        console.log("onUpdate:");
+                        console.log(data);
+                        alert();
+                    }
+                });
+
+                var form = $('form[name="dynamicValue"]');
+                form.on("submit", function (event) {
+                    event.preventDefault();
+                    var formObj = $(this).serializeObject();
+                    alert(JSON.stringify(formObj));
+                });
                 var demosGenerator = function (skinType) {
                     var min = 10;
                     var max = 90;
