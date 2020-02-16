@@ -39,13 +39,13 @@ we can set the `GRADLE_OPTS` environment variable with acceptable flags to tune 
 - Task helloWorld and run it using command `gradle -q helloFirstTask`:
 ```
 task helloWorld {
-  println "Hello, World!"
-  println ("Hello, World!")
-  println ("Hello, World!");
-  System.out.println("Hello, World!")
-  System.out.println("Hello, World!");
-  System.out.println "Hello, World!";
-  System.out.println "Hello, World!"
+    println "Hello, World!"
+    println ("Hello, World!")
+    println ("Hello, World!");
+    System.out.println("Hello, World!")
+    System.out.println("Hello, World!");
+    System.out.println "Hello, World!";
+    System.out.println "Hello, World!"
 }
 ```
 
