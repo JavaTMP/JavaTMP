@@ -70,6 +70,7 @@ and we can use the arguments and flags exactly in the same way as we pass to the
 
 ## Building Java Projects
 - In the root of the project directory create the `build.gradle` file and add the following code line to it:
+
 ```java
 apply plugin: 'java'
 ```
@@ -107,6 +108,7 @@ while compiling and running the tests.
 We declared JUnit to be made available in the testCompile scope.
 - In the repositories section, we configure the type and location of the repository where external dependencies will be found.
 - We need to update the build.gradle file as follows:
+
 ```java
 apply plugin: 'java'
 
