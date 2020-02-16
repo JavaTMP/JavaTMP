@@ -36,7 +36,7 @@ we can set the `GRADLE_OPTS` environment variable with acceptable flags to tune 
 ### Gradle build script
 - Gradle treats the current directory as a project root and tries to find the build.gradle file there.
 - Create and open the `build.gradle` file and declare a task by adding the following line `task helloWorld`
-- Task helloWorld and run it using command `gradle -q helloFirstTask`:
+- Task helloWorld and run it using command `gradle -q helloWorld`:
 ```
 task helloWorld {
     println "Hello, World!"
@@ -144,5 +144,109 @@ as a ZIP or TAR archive and also gets the task to install the application distri
 - We could create a gradle.properties in project’s root parallel to the build.gradle file.
 - There are ways to declare properties which can be found at https://docs.gradle.org/current/userguide/build_environment.html.
 
-### Building the distribution archive
+#### Building the distribution archive
 
+- Another interesting task is `distZip`, which packages the application along with OS-specific start scripts: `gradle distZip`.
+- It would have generated the application distribution in ZIP format in the build/distributions relative to the project root.
+- The name of the ZIP defaults to the project name. unless change by using the following property in build.gradle: `distributions.main.baseName = 'someName'`
+- unzip the archive to see its contents and folders structure.
+
+### Generating IDE project files
+- Gradle sports very nice plugins that can generate IDE-specific project files.
+Both IntelliJ IDEA and Eclipse are covered by their respective plugins.
+Depending on which IDE you want to support, you will either include `apply plugin: 'idea'` or `apply plugin: 'eclipse'`.
+- execute the following for Eclipse and IntelliJ IDEA, respectively:
+
+```
+$ gradle eclipse
+$ gradle idea
+```
+
+- Make sure you ignore IDE-specific files in version control. For example, if you are using Git,
+consider adding the following entries in your .gitignore file to prevent someone from accidentally committing
+the IDE-specific files:
+
+```
+.idea/
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+```
+
+## Building a Web Application
+
+- To create the `build.gradle` file for Building a Web Application in the root of the project:
+
+```java
+apply plugin: 'war'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+}
+```
+
+- The war plugin extends the java plugin; so all the tasks that were available when we applied the java plugin are still available
+to us in addition to the war task.
+- the `providedCompile` configuration (scope) tells Gradle not to package the servlet API with the application,
+as it will already be available on the container where the application will be deployed.
+The `providedCompile` configuration is added by the `war` plugin (it also adds `providedRuntime`).
+- To build the deployable WAR file. use command `gradle war`.
+- To verify the tasks available for our build use command `gradle tasks --all`.
+- The war file is created at `/build/libs/hello-web.war`.
+- To list the contents of WAR, use `jar -tf build/libs/hello-web.war` or use any the standard zip/unzip tools.
+- When we say build automation, it implicitly means that no manual intervention should be expected
+and things should work in one click (or one command in Gradle's case).
+- Gradle plugins like a `Gretty` plugin can be found at a Gradle plugin portal,
+This plugin adds numerous tasks to the build and supports various versions of Tomcat and Jetty.
+- To configure it use:
+
+```
+plugins {
+    id "org.akhikhl.gretty" version "2.0.0"
+}
+```
+
+- We can include the `war` plugin's application inside this block. For internal plugins,
+we don't need to specify a version. It will look as follows:
+
+```
+plugins {
+    id "org.akhikhl.gretty" version "1.2.4"
+    id "war"
+}
+```
+
+- If we run gradle tasks now, we must have an appRun task under the Gretty group.
+There are many more tasks in this group, which are added by the Gretty plugin.
+- There are many configurations exposed by the plugin, in order to control aspects such as server version, port number,
+and many more. Add a gretty block to the build.gradle files as follows:
+
+```
+gretty {
+    servletContainer = 'tomcat8'
+    port = 8080
+}
+```
+
+or
+
+```
+gretty {
+    servletContainer = 'jetty9'
+    port = 9080
+}
+```
+
+- Important Reference Links:
+    - Gradle plugin portal: https://plugins.gradle.org/
+    - Tomcat plugin: https://github.com/bmuschko/gradle-tomcat-plugin
+
+### Project dependencies
+- 
