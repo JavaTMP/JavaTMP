@@ -84,6 +84,7 @@ and the jar will be in the `build/libs` directory.
 before actually executing the build task. So, we don't need to explicitly call `compileJava` here to compile classes.
 - The name of the .jar file is the same as that of the project.
 This can be configured by setting the `archivesBaseName` property in the build.gradle file. as
+
 ```java
 archivesBaseName = "my-app"
 ```
