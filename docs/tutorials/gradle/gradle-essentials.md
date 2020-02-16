@@ -249,4 +249,6 @@ gretty {
     - Tomcat plugin: https://github.com/bmuschko/gradle-tomcat-plugin
 
 ### Project dependencies
+- Gradle does an excellent job in locating and making dependencies available
+in the appropriate classpath and packaging if required.
 - 
