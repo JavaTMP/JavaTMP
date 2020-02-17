@@ -249,6 +249,265 @@ gretty {
     - Tomcat plugin: https://github.com/bmuschko/gradle-tomcat-plugin
 
 ### Project dependencies
-- Gradle does an excellent job in locating and making dependencies available
-in the appropriate classpath and packaging if required.
-- 
+- Gradle locates and makes dependencies available in the appropriate classpath and packaging if required.
+
+#### External libraries
+- The dependencies of a project are declared in the `dependencies` section in the build file.
+- the coordinates of an Gradle dependency artifact takes a form of group:name:version. like:
+
+```
+dependencies {
+    compile 'org.springframework:spring-core:4.0.6.RELEASE'
+    compile group:'org.springframework', name:'spring-core', version:'4.0.6.RELEASE'
+}
+```
+
+- We can also specify multiple dependencies as follows: `configurationName dep1, dep2, dep3,...`
+- We run the following code in our build.gradle file: `runtime 'org.slf4j:slf4j-nop:1.7+'` to indicate a dynamic version of the library.
+- run the dependencies task by : `gradle dependencies`
+- Gradle resolves transitive dependencies quite well.
+- To disable Gradle transitive dependencies provide an extra block to dependency declaration:
+
+```
+runtime ('org.slf4j:slf4j-nop:1.7+') {
+    transitive = false
+}
+```
+
+-  To force a given version of the library use:
+
+```
+runtime ('org.slf4j:slf4j-nop:1.7.2') {
+    force = true
+}
+```
+
+#### Dependency configurations
+- The following are configurations that are added by the java plugins: `compile, runtime, testCompile, testRuntime`.
+- The following are configurations that are added by the war plugins: `providedCompile, providedRuntime`.
+- More configurations can be added by plugins, or we can declare them ourselves in our build script.
+
+#### Repositories
+- The repositories section configures the repositories where Gradle will look for dependencies.
+- Repositories such as Maven, Ivy, and flat directory (filesystem) are supported for dependency resolution and uploading artifacts.
+-  Maven repos can be easily configured using the following syntax:
+
+```
+repositories {
+    mavenCentral()  // shortcut to maven central
+    mavenLocal()    // shortcut to maven local (typically ~/.m2)
+    jcenter()       // shortcut to jcenter
+    maven {
+        url "http://repo.company.com/maven"
+    }
+    ivy {
+        url "http://repo.company.com/ivy"
+    }
+    flatDir { // jars kept on local file system
+        dirs 'libDir'
+    }
+}
+```
+
+## Gradle Build Scripts
+- the Gradle build script is written in Groovy language.
+- The two important objects available in our build, namely, the project object and the task object(s).
+- Build phases and life cycle callbacks
+- Some details of the tasks
+
+### Groovy for Gradle build scripts
+- To write effective Gradle build scripts, we need to understand some basics of Groovy, which is a dynamic language.
+- Groovy's syntax is concise, expressive, and powerful.
+- In a Groovy script, the def keyword can define a variable (depending on the context): `def a = 10`
+and the type of a is decided at the runtime depending on what type of object it points to. or `Integer b = 10`
+- We can also use Java primitive data types. but keep in mind that they are not actually primitives in Groovy.
+They are still first-class objects and are actually Java wrapper classes for corresponding data type. for example:
+
+```
+int c = 10
+println c.getClass() // print => class java.lang.Integer
+```
+
+- String literals are using ''.
+- Regular Java string literals ("") can also be used, but they are called GStrings in Groovy,
+Both ${var} and $var are valid:
+
+```
+def name = "Gradle"
+println "$name is an awesome build tool"
+def number = 4
+println "number is even ? ${number % 2 == 0 }"
+```
+
+- Groovy supports multiline string literals:
+
+```
+def multilineString = '''\
+    Hello
+    World
+'''
+println multilineString
+```
+
+- "slashy" string literal, which starts and ends with a single forward slash (/):
+
+```
+def r = /(\d)+/
+println r.class
+```
+
+- Groovy supports a pattern operator (~), which when applied to a string, gives a pattern object:
+
+```
+def pattern = ~/(\d)+/
+println pattern.class // print > class java.util.regex.Pattern
+// or
+if ("groovy" ==~ /gr(.*)/)
+  println "regex support rocks"
+```
+
+- Closure in Groovy is a block of code that can be assigned to a reference or passed around just like any other variable.
+- examples:
+
+```
+def cl1 = {
+    println "hello world!"
+}
+cl1.call()
+def cl2 = { n ->
+    println "value of param : $n"
+}
+cl2.call(101)
+3.times(cl2)
+3.times { println it * it }
+```
+
+- Groovy supports literal declaration of the often-used data structures, which makes the code a lot more terse without sacrificing readability.
+- Examples:
+
+```
+def aList = [] // In Groovy, [] is actually a Java's List instance and not an array.
+println aList.getClass()
+def anotherList = ['a','b','c']
+def list = [10, 20, 30] + [40, 50]
+list  <<  60
+list = list – [20, 30, 40]
+list  -= [20,30,40]
+list.each {println it}
+def aSet = [1,2,3] as Set
+println aSet.class // print > class java.util.LinkedHashSet
+TreeSet anotherSet = [1,2,3]
+println anotherSet.class
+// Adding elements to a set is just like a list using an indirection operator
+aSet << 4
+aSet << 3
+println aSet // [1, 2, 3, 4]
+// Map can be declared using the map literal [:]:
+def a = [:]
+def tool = [version:'2.8', name:'Gradle', platform:'all']
+println tool.name
+println tool["version"]
+println tool.get("platform")
+tool.version = "2.9"
+tool["releaseDate"] = "2015-11-17"
+tool.put("platform", "ALL")
+```
+
+- methods:
+
+```
+int sum(int a, int b) {
+  return a + b;
+}
+def sum(a, b) {
+  a + b // we omitted the return statement as the evaluation of the last expression is automatically returned by a method.
+}
+```
+
+- A method call in Groovy can omit the parenthesis is many cases:
+
+```
+sum(1,2)
+sum 1, 2
+```
+
+- Default values of parameters:
+
+```
+def divide(number, by=2) {
+    number/by
+}
+println divide (10, 5)
+println divide (10)
+// Methods with map parameters/named parameters
+def method(Map options) {
+    def a = options.a ?: 10
+    def b = options.b ?: 20 // options.a ? options.a : 10
+}
+method([a:10,b:20])
+// We can omit the square brackets ([]) because maps have special support in the method call
+method(a:10, b:20)
+// The order of parameters is not important and all the parameters need not be passed.
+// Also, the parenthesis wrapping is optional, just like any method call:
+method b:30, a:40
+method b:30
+// varags are denoted by ..., but providing the type is optional:
+def sumSquares(...numbers) {
+    numbers.collect{ it * it }.sum()
+}
+sumSquares 1, 2, 3
+// Closures are important and, hence, Groovy has a special syntax for closures
+// if the closure is the last parameter of a method signature:
+// the third call is the special syntactical support in which the parenthesis just wraps the other parameters,
+// while the closure is written outside the parenthesis, as if it were a method body.
+def myMethod (param, cls) {
+    ...
+}
+myMethod(1,{ ... })
+myMethod 2, {... }
+myMethod(3) {...}
+```
+
+- Classes are public by default. They can inherit from other classes using extends or implementing interfaces using implmenets.
+Instead of using the def for properties, we can use more specific types.
+- Examples:
+
+```
+class Person {
+  def name, age
+}
+// In addition to the default constructor, classes in Groovy get a special constructor,
+// which takes the map of properties of the class. Here is how we use it:
+def person = new Person(name:"John Doe", age:35)
+println person.age
+person.age = 36
+println person.age
+// We can provide our own getters and/or setter for the desired fields,
+// which will take precedence over the generated one
+void setAge(age){
+    if (age < 0)
+        throw new IllegalArgumentException("age must be a positive number")
+    else
+        this.age = age
+}
+// We can add an instance and static methods to classes just like we do in Java:
+def speak(){
+  println "${this.name} speaking"
+}
+static def now(){
+  new Date().format("yyyy-MM-dd HH:mm:ss")
+}
+```
+
+- in Gradle build script:
+
+```
+apply plugin: 'java' // apply is a method.
+apply(plugin: 'java')
+apply([plugin: 'java'])
+// the apply method is implicitly applied on the project object.
+// So, we can also call it on the project object's reference:
+project.apply([plugin: 'java'])
+```
+
+### Gradle – an object-oriented build tool
