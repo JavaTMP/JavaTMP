@@ -511,3 +511,239 @@ project.apply([plugin: 'java'])
 ```
 
 ### Gradle – an object-oriented build tool
+- Gradle creates objects of both project and task types. These objects are accessible in our build script for us to customize.
+- A project object is a central piece of API that is exposed to and configured via the build scripts.
+A project object is available in the script such that the methods without object reference
+are intelligently invoked on the project object.
+- The task objects are created for each task declared directly in the build file and also for plugins.
+- some tasks are already available in our build without us having to add a single line to our build file
+(such as the help task and the tasks task, and so on).
+
+### Build phases
+- A Gradle build follows a very simple life cycle on every invocation.
+The build passes through three stages: initialization, configuration, and execution.
+- Gradle first figures out whether the current project has child projects or if it is the only project in the build.
+For multi-modules build, Gradle figures out which modules have to be included in the build.
+- Gradle then creates a Project instance for the root project and for each of the child projects of a project.
+- In Configuration phase, the build scripts of participating projects are evaluated against the corresponding project object
+that was created during the initialization phase.
+- When a script is evaluated, all the statements in the script are executed sequentially.
+- Tasks are only configured during the Configuration phase. No matter what tasks are going to be called, all tasks will be configured.
+- In the Execution phase, Gradle figures out which tasks need to be run based on the parameters such as task names
+passed as command line arguments and the current directory.
+- Gradle intelligently determines which tasks need to actually run and which can be skipped.
+- Gradle provides various hooks for executing code at various points during life cycle events.
+We can implement callback interfaces or provide callback closure to DSL in the build script.
+
+### Gradle Project API
+- Gradle creates a project object for each build.gradle for us during the initialization phase.
+This object is available in our build scripts using the project reference.
+- all the top-level method calls in the build scripts are called on a project object if no explicit reference is provided.
+- Examples:
+
+```
+project.apply plugin: 'java'
+project.repositories {
+    mavenCentral()
+}
+project.dependencies {
+    testCompile 'junit:junit:4.11'
+}
+// or
+project.repositories({...})
+project.dependencies({...})
+// Project Properties:
+description = "a sample project"
+version = "1.0"
+task printProperties << {
+    println project.version
+    println project.property("description")
+}
+```
+
+- Gradle makes it very easy to store user-defined properties on a project,
+while still being able to enjoy the niceties of project properties' syntax.
+
+```
+ext.abc = "123"
+task printExtraProperties << {
+    println project.abc
+    println project.property("abc")
+    println project.ext.abc
+}
+```
+
+### Tasks
+- a task is a named action that performs some build logic. It's a unit of build work. For example, clean, compile, dist.
+
+```
+project.task "myTask"
+project.task("myTask")
+```
+
+- The project object has several flavors of a task method to create a task object:
+
+```
+Task task(String name)
+Task task(String name, Closure configureClosure)
+Task task(Map<String, ?> args, String name)
+Task task(Map<String, ?> args, String name, Closure configureClosure)
+```
+
+- A Task object has a method called doLast, which accepts a closure.
+Gradle ensures that all the closures passed to this methods are executed
+in the order they were passed:
+
+```
+someTask.doLast({
+    println "this should be printed when the task is run"
+})
+someTask {
+    doLast {
+        println "third line that should be printed"
+    }
+}
+someTask << {
+    println "the action of someTask"
+}
+```
+
+- Tasks within a project may have a dependency on each other.
+- There are tasks whose execution is dependent on the other task's successful completion. For example
+
+```
+// $ gradle compile dist
+task compile << {
+    println 'compling the source'
+}
+task dist(dependsOn: compile) << {
+    println "preparing a jar dist"
+}
+```
+
+- We can also declare that, if a task is called, it should be followed by another task,
+even if another task is not explicitly called.
+
+```
+task distUsingTemp << {
+  println ("preapring dist using a temp dir")
+}
+task cleanup << {
+  println("removing tmp dir")
+}
+distUsingTemp.finalizedBy cleanup
+```
+
+- We can specify a condition and if it is satisfied, the task will be executed:
+
+```
+cleanup.onlyIf { file("/tmp").exists()}
+```
+
+- mustRunAfter and shouldRunAfter
+
+```
+build.mustRunAfter clean
+build.shouldRunAfter clean
+```
+
+- Creating tasks dynamically
+
+```
+10.times { number ->
+  task "dynamicTask$number" << {
+    println "this is dynamic task number # $number "
+  }
+}
+```
+
+- Setting default tasks `defaultTasks "myTaskName", "myOtherTask"`
+- Custom task types act as a template with some sensible defaults for a common build logic.
+We still need to declare a task in our build, but we just tell Gradle the type of this task
+and configure the settings of this task type, instead of writing the entire task action block again.
+Gradle already ships with many custom task types; for example, Copy, Exec, Delete, Jar, Sync, Test, JavaCompile, Zip
+- We can configure a task that is of type Copy using the following syntax:
+- The closure that we are passing to this task actually gets executed in the configuration phase of build.
+
+```
+task copyDocumentation(type:Copy) {
+from file("src/docs/html")
+into file("$buildDir/docs")
+}
+```
+
+- Creating task types
+
+```
+class Print extends DefaultTask {
+  @Input
+  String message = "Welcome to Gradle"
+  @TaskAction
+  def print() {
+    println "$message"
+  }
+}
+task welcome(type: Print)
+task thanks(type: Print) {
+  message = "Thanks for trying custom tasks"
+}
+task bye(type: Print)
+bye.message = "See you again"
+thanks.dependsOn welcome
+thanks.finalizedBy bye
+```
+
+- References
+    - https://docs.gradle.org/current/dsl/org.gradle.api.Project.html
+    - https://docs.gradle.org/current/dsl/org.gradle.api.invocation.Gradle.html
+    - https://docs.gradle.org/current/dsl/org.gradle.api.Task.html
+
+## Multiprojects Build
+- The arrangement of subprojects relative to the root project may be flat,
+that is, all the subprojects are the direct children of the root project
+or are hierarchical, such that the subproject may also have nested child projects
+or any hybrid directory structure.
+
+### The settings.gradle file
+- During initialization, Gradle reads the settings.gradle file to figure out
+which projects are to take part in a build. Gradle creates an object of type Setting.
+- The most common use of settings.gradle is to enlist all the subprojects participating in the build:
+`include ':repository', ':services', ':web-app'`
+- The colon denotes the project path relative to the root project.
+However, the include method allows level 1 subproject names to omit the colon.
+So, the include call can be rewritten as follows: `include 'repository', 'services', 'web-app'`
+- The projects task lists all the projects available in a Gradle build: `gradle projects`
+- We can find more information on Settings at the Settings DSL documentation https://docs.gradle.org/current/dsl/org.gradle.api.initialization.Settings.html
+- For a multiproject build, we can call tasks on any nested project using the gradle <project-path>:<task-name> syntax 
+or by going into the subproject directory and executing gradle <task-name>. 
+
+### Organizing build logic in multiproject builds
+- Gradle gives us the flexibility to create one build file for all projects or individual build file per project; you can also mix and match. 
+- Gradle DSL provides a first-class support for declaring common build elements across all projects.
+- The allprojects method takes a closure and executes it on the project (object) of the build file and all the subprojects of the current project.
+- We can even apply plugins, declare repositories and dependencies, and so on. So, in essence, we can write any build logic 
+that is common to all projects and then it will be applied to all projects.
+
+```
+allprojects {
+    task whoami << {println "I am ${project.name}"}
+}
+// or 
+allprojects {
+  task("describe${project.name.capitalize()}") << {
+    println project.name
+  }
+}
+```
+
+### Applying build logic to subprojects
+-  the subprojects method applies some build logic only on subprojects without affecting the parent project. 
+- 
+
+```
+subprojects {
+  apply plugin: 'java'
+}
+```
+
+
