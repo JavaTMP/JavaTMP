@@ -120,3 +120,4 @@ List of Spring Boot Framework Resources and Links:
 [https://www.baeldung.com/rest-with-spring-series](https://www.baeldung.com/rest-with-spring-series)
 [https://www.baeldung.com/persistence-with-spring-series](https://www.baeldung.com/persistence-with-spring-series)
 [https://www.journaldev.com/spring](https://www.journaldev.com/spring)
+[https://reflectoring.io/categories/spring-boot/](https://reflectoring.io/categories/spring-boot/)
