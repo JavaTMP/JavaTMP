@@ -94,6 +94,16 @@ uploadArchives {
 }
 ```
 
+## Continuous Integration
+- If there are compile issues and integration issues, a user can figure out at early stages, rather than it being too late.
+- To plan the build and deployment automation solution for any software, we need a different set of tools to work
+together to achieve the common goal. Jenkins is one of the integration tools that helps to integrate the complete workflow.
+It also works on the concept of plugins; you can add different plugins to Jenkins (for example, Gradle, Git, and so on)
+as per your need and configure them to plan the automation flow.
 
+## Generating documentation
+- When you apply `Java plugin` to your build file, Gradle provides you a `javadoc` task.
+- By default, Gradle generates the initial documentation for your code, even if the user does not mention any Javadoc in the file.
+- Run : `gradle clean javadoc`. It will generate the basic Java docs at `{project_root}\build\docs\javadoc`.
 
 
