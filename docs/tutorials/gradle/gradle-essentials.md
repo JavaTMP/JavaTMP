@@ -714,21 +714,21 @@ However, the include method allows level 1 subproject names to omit the colon.
 So, the include call can be rewritten as follows: `include 'repository', 'services', 'web-app'`
 - The projects task lists all the projects available in a Gradle build: `gradle projects`
 - We can find more information on Settings at the Settings DSL documentation https://docs.gradle.org/current/dsl/org.gradle.api.initialization.Settings.html
-- For a multiproject build, we can call tasks on any nested project using the gradle <project-path>:<task-name> syntax 
-or by going into the subproject directory and executing gradle <task-name>. 
+- For a multiproject build, we can call tasks on any nested project using the gradle <project-path>:<task-name> syntax
+or by going into the subproject directory and executing gradle <task-name>.
 
 ### Organizing build logic in multiproject builds
-- Gradle gives us the flexibility to create one build file for all projects or individual build file per project; you can also mix and match. 
+- Gradle gives us the flexibility to create one build file for all projects or individual build file per project; you can also mix and match.
 - Gradle DSL provides a first-class support for declaring common build elements across all projects.
 - The allprojects method takes a closure and executes it on the project (object) of the build file and all the subprojects of the current project.
-- We can even apply plugins, declare repositories and dependencies, and so on. So, in essence, we can write any build logic 
+- We can even apply plugins, declare repositories and dependencies, and so on. So, in essence, we can write any build logic
 that is common to all projects and then it will be applied to all projects.
 
 ```
 allprojects {
     task whoami << {println "I am ${project.name}"}
 }
-// or 
+// or
 allprojects {
   task("describe${project.name.capitalize()}") << {
     println project.name
@@ -737,8 +737,8 @@ allprojects {
 ```
 
 ### Applying build logic to subprojects
--  the subprojects method applies some build logic only on subprojects without affecting the parent project. 
-- 
+-  the subprojects method applies some build logic only on subprojects without affecting the parent project.
+-
 
 ```
 subprojects {
@@ -746,4 +746,26 @@ subprojects {
 }
 ```
 
+- Check the output of `gradle -q tasks --all` in this case.
+- The tasks added by the `java` plugin will only be available on subprojects, whereas tasks such
+as help tasks will be available on all projects.
+
+### Dependency on subprojects
+- Add dependency declaration in the root project's build.gradle.
+
+```
+project(':services') {
+  dependencies {
+    compile project(':repository')
+  }
+}
+```
+
+- Add dependency declaration in the child project's build.gradle.
+
+```
+dependencies {
+  compile project(':services')
+}
+```
 
