@@ -172,3 +172,4 @@ sonarRunner {
 
 - To run the `sonarRunner` task for code analysis. After successful execution of this task,
 you will find the report hosted on the Sonar server: `gradle clean sonarRunner`
+- You can find more on Sonar at http://docs.sonarqube.org/display/SONAR/Documentation/.
