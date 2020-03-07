@@ -14,9 +14,17 @@ A good build automation tool helps us reduce the effort and time it takes to bui
 
 ### Gradle is
 - an advanced build automation tool that brings the best from various proven build tools and innovates on top of them.
+- used to automate compiling, testing, packaging, and deployment of your software or any other types of projects.
 - can be used to produce different kind of artifacts such as web applications, static sites, and desktop applications.
 - Works by conventions over configuration.
 - can be configured using very human-friendly Groovy DSL.
+
+### Gradle's Main Features
+- Declarative builds and convention over configuration
+- Support for Ant Tasks and Maven repositories
+- Incremental builds, the tasks in a build are only executed if necessary.
+- Gradle has great support for multi-project builds.
+- The Gradle Wrapper allows us to execute Gradle builds even if Gradle is not installed on a computer.
 
 ### Installing Gradle
 - Gradle needs Java Runtime Environment (JRE) 6 or Java Development Kit (JDK) 1.6 or higher.
@@ -34,11 +42,12 @@ we can set the `GRADLE_OPTS` environment variable with acceptable flags to tune 
 - Gradle tasks are currently available on project by `gradle tasks` command.
 
 ### Gradle build script
+- Build scripts are Groovy code.
 - Gradle treats the current directory as a project root and tries to find the build.gradle file there.
 - Create and open the `build.gradle` file and declare a task by adding the following line `task helloWorld`
 - Task helloWorld and run it using command `gradle -q helloWorld`:
 ```
-task helloWorld {
+task helloWorld << {
     println "Hello, World!"
     println ("Hello, World!")
     println ("Hello, World!");
@@ -49,10 +58,456 @@ task helloWorld {
 }
 ```
 
+- To define a simple task that prints out a simple message to the console:
+
+```
+// The project object has several properties and methods and it is available in our build scripts
+// Assign value to description property.
+project.description = 'Simple project' // or
+project.setDescription('Simple project')
+// DSL to create a new task using
+// Groovy << operator.
+task simple << {
+    println 'Running simple task for project ' +
+      project.description
+}
+// Or Use create method to add new task instead of Groovy << operator
+project.getTasks().create('simple') {
+    println 'Running simple task for project ' + project.description
+}
+```
+
+- Defining tasks
+
+```
+task first {
+    doFirst {
+        println 'Running first'
+    }
+}
+task second {
+    doLast { Task task ->
+        println "Running ${task.name}"
+    }
+}
+// OR
+task second {
+    doLast {
+        // Using implicit 'it' closure parameter.
+        // The type of 'it' is a Gradle task.
+        println "Running ${it.name}"
+    }
+}
+// Or
+task second {
+    doLast { Task task ->
+        // Using explicit name 'task' as closure parameter.
+        // We also defined the type of the parameter.
+        // This can help the IDE to add code completion.
+        println "Running ${task.name}"
+    }
+}
+// Here we use the << operator
+// as synonym for the doLast method.
+task third << { taskObject ->
+    println 'Running ' + taskObject.name
+}
+```
+
+- Defining actions with the Action interface
+Gradle often has more than one way of defining something, Besides using closures to add actions to a task,
+we can also follows a more verbose way of passing an implementation class of the `org.gradle.api.Action` interface.
+The Action interface has one method: execute. This method is invoked when the task is executed.
+The following piece of code shows a re-implementation of the first task in our build script:
+
+```
+task first {
+    doFirst(
+        new Action() {
+          void execute(O task) {
+            println "Running ${task.name}"
+          }
+       }
+    )
+}
+```
+
 - While calling a gradle task from a command line, we can save a few keystrokes by typing only
 the characters that are enough to uniquely identify the task name. For example,
 the task helloWorld can be called using gradle hW. We can also use helloW, hWorld, or even heWo
 - Gradle Daemon is a process that keeps running in the background to speed up the builds significantly.
+- Defining dependencies between tasks using the `dependsOn` method for a task or `dependsOn` property.
+- Organized better and if the code can be reused instead of repeated
+```
+// We assign the task closure
+// to a variable. We can reuse
+// the variable name in our task definitions.
+def printTaskName = { task ->
+    println "Run ${task.name}"
+}
+// We use the variable with the closure.
+task third(dependsOn: 'second') << printTaskName
+task second(dependsOn: 'first') << printTaskName
+task first << printTaskName
+```
+
+- Defining dependencies via closures
+
+```
+def printTaskName = { task ->
+    println "Run ${task.name}"
+}
+task second << printTaskName
+// We use the dependsOn method
+// with a closure.
+second.dependsOn {
+    // We use the Groovy method findAll
+    // that returns all tasks that
+    // apply to the condition we define
+    // in the closure: the task name
+    // starts with the letter 'f'.
+    project.tasks.findAll { task ->
+        task.name.contains 'f'
+    }
+}
+task first << printTaskName
+task beforeSecond << printTaskName
+```
+
+- Setting default tasks
+
+```
+defaultTasks 'first', 'second'
+task first {
+    doLast {
+        println "I am first"
+    }
+}
+task second {
+    doFirst {
+        println "I am second"
+    }
+}
+```
+
+- Adding a description to tasks
+
+```
+defaultTasks 'second'
+// Use description property to set description.
+task first(description: 'Base task') << {
+    println "I am first"
+}
+task second(
+    dependsOn: first,
+    description: 'Secondary task') << {
+    println "I am second"
+}
+```
+
+- Create a new task:
+
+```
+// Define name of task
+// as a variable.
+def simpleTask = 'simple'
+// Variable is used for the task name.
+task(simpleTask) << { task ->
+    println "Running ${task.name}"
+}
+```
+
+- Create a new task using Groovy GString:
+
+```
+// Name of task as variable.
+def simpleTask = 'simple'
+// Using Groovy GString with
+// ${} expression to use variable
+// as task name.
+task "${simpleTask}" << { task ->
+    println "Running ${task.name}"
+}
+// Or use loops to create multiple tasks.
+['Dev', 'Acc', 'Prod'].each { environment ->
+    // A new task is created for each element
+    // in the list ['Dev', 'Acc', 'Prod'].
+    task "deployTo${environment}" << { task ->
+        println "Deploying to ${environment}"
+    }
+}
+```
+
+-  Add a new task using the tasks property of a project:
+
+```
+def printTaskName = { task ->
+    println "Running ${task.name}"
+}
+// Use tasks project variable to get access
+// to the TaskContainer object.
+// Then we use the create method of
+// TaskContainer to create a new task.
+project.tasks.create(name: 'first') << printTaskName
+// Let Gradle resolve tasks to project variable.
+tasks.create(name: 'second', dependsOn: 'first') << printTaskName
+```
+
+- Using task rules
+
+```
+task first(description: 'First task')
+task second(description: 'Second task')
+tasks.addRule(
+    "Pattern: desc<TaskName>: " +
+    "show description of a task.") { taskName ->
+    if (taskName.startsWith('desc')) {
+        // Remove 'desc' from the task name.
+        def targetTaskName = taskName - 'desc'
+      // Uncapitalize the task name.
+      def targetTaskNameUncapitalize =
+        targetTaskName[0].toLowerCase() +
+          targetTaskName[1..-1]
+      // Find the task in the project we search
+      // the description for.
+      def targetTask =
+        project.tasks.findByName(
+          targetTaskNameUncapitalize)
+      if (targetTask) {
+          task(taskName) << {
+          println "Description of task ${targetTask.name} " +
+            " -> ${targetTask.description}"
+        }
+      }
+    }
+}
+```
+
+- Accessing tasks as project properties
+
+```
+// Create a simple task.
+task simple << { task ->
+    println "Running ${task.name}"
+}
+// The simple task is available as
+// project property.
+simple.description = 'Print task name'
+// We can invoke methods from the
+// Task object.
+simple.doLast {
+    println "Done"
+}
+// We can also reference the task
+// via the project property
+// explicitly.
+project.simple.doFirst {
+    println "Start"
+}
+```
+
+- Adding additional properties to tasks
+
+```
+// Create simple task.
+task simple << {
+    println "Hello ${message}"
+}
+// We set the value for
+// the non-existing message
+// property with the task extension
+// support.
+simple.ext.message = 'world'
+```
+
+- A common mistake when creating a task and adding actions for this task is that we forget the left-shift operator `<<`.
+ instead of adding actions, we have configured our task. The closure we use is then interpreted as a configuration closure.
+All methods and properties in the closure are applied to the task.
+- We can add actions for our tasks in the configuration closure, but we must use the `doFirst` and `doLast` methods.
+We cannot use the left-shift operator `<<`.
+
+```
+def printTaskName = { task ->
+    println "Running ${task.name}"
+}
+task 'one' {
+    // Invoke doFirst method to add action.
+    doFirst printTaskName
+}
+// Assign action through left-shift operator (<<).
+task 'two' << printTaskName
+task 'three' {
+    // This line will be displayed during configuration
+    // and not when we execute the task,
+    // because we use the configuration closure
+    // and forgot the << operator.
+    println "Running three"
+}
+defaultTasks 'one', 'two'
+```
+
+- Every task has an onlyIf method that accepts a closure as an argument. The result of the closure must be true or false.
+If the task must be skipped, the result of the closure must be false, otherwise the task is executed.
+The task object is passed as a parameter to the closure. Gradle evaluates the closure just before the task is executed.
+
+```
+import static java.util.Calendar.*
+task longrunning {
+    // Only run this task if the
+    // closure returns true.
+    onlyIf { task ->
+        def now = Calendar.instance
+        def weekDay = now[DAY_OF_WEEK]
+        def weekDayInWeekend = weekDay in [SATURDAY, SUNDAY]
+        return weekDayInWeekend
+    }
+    // Add an action.
+    doLast {
+        println "Do long running stuff"
+    }
+}
+```
+
+- Besides using a closure to define the condition that determines whether the task needs to be executed or not,
+we can use an implementation of the org.gradle.api.specs.Spec interface.
+
+```
+// Create a new File object.
+def file = new File('data.sample')
+task handleFile {
+    // Use Spec implementation to write
+    // a conditon for the onlyIf method.
+    onlyIf(new Spec() {
+        boolean isSatisfiedBy(task) {
+            file.exists()
+        }
+    })
+    doLast {
+        println "Work with file ${file.name}"
+    }
+}
+```
+
+- Skipping tasks by throwing StopExecutionException
+
+```
+// Define closure with the task actions.
+def printTaskName = { task ->
+    println "Running ${task.name}"
+}
+// Create first task.
+task first << printTaskName
+// Use doFirst method with closure
+// that throws exception when task
+// is executed during work hours.
+first.doFirst {
+    def today = Calendar.instance
+    def workingHours = today[Calendar.HOUR_OF_DAY] in 8..17
+    if (workingHours) {
+        throw new StopExecutionException()
+    }
+}
+// Create second task that depends on first task.
+task second(dependsOn: 'first') << printTaskName
+```
+
+- Enabling and disabling tasks
+Every task has an enabled property.
+
+```
+task listDirectory {
+    def dir = new File('assemble')
+    // Set value for enabled task property.
+    enabled = dir.exists()
+    // This is only executed if enabled is true.
+    doLast {
+        println "List directory contents: " +
+                dir.listFiles().join(',')
+    }
+}
+```
+
+- Skipping from the command line
+we have defined the rules to skip a task in the build file. However, we can use the --exclude-tasks (-x)
+command-line option if we run the build. for example : `gradle third -x second`
+
+- We want the task to be executed only if the source file has changed, or the output file is missing,
+or has changed since the last run of the task.
+
+```
+task convert {
+    def source = new File('source.xml')
+    def output = new File('output.txt')
+    doLast {
+      def xml = new XmlSlurper().parse(source)
+      output.withPrintWriter { writer ->
+          xml.person.each { person ->
+            writer.println "${person.name},${person.email}"
+        }
+      }
+      println "Converted ${source.name} to ${output.name}"
+    }
+}
+// change the definition of our task so that Gradle can determine whether the task needs to be executed based on
+// changes in the input file or output file of the task.
+// A task has the properties inputs and outputs that are used for this purpose.
+// rewrite our task to make it support Gradle's incremental build feature
+// We can use the --rerun-tasks command-line option to ignore the incremental build feature.
+task convert {
+    def source = new File('source.xml')
+    def output = new File('output.txt')
+    // Define input file
+    inputs.file source
+    // Define output file
+    outputs.file output
+    doLast {
+      def xml = new XmlSlurper().parse(source)
+      output.withPrintWriter { writer ->
+        xml.person.each { person ->
+          writer.println "${person.name},${person.email}"
+        }
+      }
+      println "Converted ${source.name} to ${output.name}"
+    }
+}
+// If these methods are not appropriate for our build, we can even use the upToDateWhen method for the outputs property.
+// We pass a closure or implementation of the org.gradle.api.specs.Spec interface to define a predicate that determines
+// whether the output of the task is up to date.
+project.version = '1.0'
+task createVersionDir {
+    def outputDir = new File('output')
+    // If project.version changes then the
+    // task is no longer up-to-date
+    inputs.property 'version', project.version
+    outputs.dir outputDir
+    doLast {
+        println "Making directory ${outputDir.name}"
+        mkdir outputDir
+    }
+}
+task convertFiles {
+    // Define multiple files to be checked as inputs.
+    // Or use inputs.dir 'input' to check a complete directory.
+    inputs.files 'input/input1.xml', 'input/input2.xml'
+    // Use upToDateWhen method to define predicate.
+    outputs.upToDateWhen {
+        // If output directory contains any file which name
+        // starts with output and has the xml extension,
+        // then the task is up-to-date.
+        // We use the Groovy method any to check
+        // if at least one file applies to the condition.
+        // The ==~ syntax is a Groovy shortcut to
+        // check if a regular expression is true.
+        new File('output')
+            .listFiles()
+            any { it.name ==~ /output.*\.xml$/ }
+    }
+    doLast {
+        println "Running convertFiles"
+    }
+}
+```
+
 
 ### Gradle Wrapper
 - A Gradle Wrapper consists of a `gradlew` shell script for Linux/Mac OS X,
@@ -67,6 +522,23 @@ Instead of using the system-wide gradle command, we can run the builds via the w
 `gradle wrapper` or `gradle wrapper --gradle-version 5.0`
 - To running a build via wrapper use it like any other command `gradlew helloWorld`
 and we can use the arguments and flags exactly in the same way as we pass to the gradle command.
+
+### Default Gradle tasks
+- The gradle command is used to execute a build. This command accepts several command-line options: `gradle --help`.
+- to show the available Gradle tasks for our project, type `gradle -q tasks`.
+- The properties task is very useful to see the properties available for our project: `gradle -q properties`.
+- The dependencies task will show dependencies (if any) for our project: `gradle -q dependencies`.
+- The projects tasks will display subprojects (if any) for a root project: `gradle -q projects`.
+- The model tasks displays information about the model that Gradle builds internally from our project build file: `gradle -q model`.
+- Changing the build file and directory:
+`gradle --project-dir [project-root-dir] --build-file [build-file] -q [task-name]`.
+- Gradle provides the `--profile` command-line option to record the time that certain tasks take to complete.
+The data is saved in an HTML file in the `build/reports/profile` directory.
+- You can use the `--offline` command-line option to instruct Gradle to not access any network during the build.
+- To start the Gradle GUI, we invoke the following command: `gradle --gui`.
+- To execute multiple tasks, add each task name to the command line.
+Gradle executes the tasks in the same order as they are defined in the command line.
+and Gradle will only execute a task once during the build.
 
 ## Building Java Projects
 - In the root of the project directory create the `build.gradle` file and add the following code line to it:
@@ -1150,3 +1622,805 @@ customExt {
 }
 ```
 
+## Working with Gradle Build Scripts
+
+- Working with files
+
+```
+// Use String for file reference.
+File wsdl = file('src/wsdl/sample.wsdl')
+// Use File object for file reference.
+File xmlFile = new File('xml/input/sample.xml')
+def inputXml = project.file(xmlFile)
+// Or a URI instance.
+def uri = new URI('file:/README')
+def readmeFile = file(uri)
+// Use a closure to determine the
+// file or directory name.
+def fileNames = ['src', 'web', 'config']
+def configDir = file {
+    fileNames.find { fileName ->
+        fileName.startsWith('config')
+    }
+}
+// Use Callable interface.
+def source = file(new Callable<String>() {
+    String call() {
+        'src'
+    }
+})
+```
+
+```
+// Suppose, we want to work with a directory named config in our build script. The directory must be present, otherwise the build will stop:
+def dir = project.file(new File('config'),    PathValidation.DIRECTORY)
+// Check file or directory exists.
+def readme = project.file('README', PathValidation.EXISTS)
+// Check File object is really a file.
+def license = project.file('License.txt', PathValidation.FILE)
+```
+
+- Using file collections
+
+```
+// Use String instances.
+def multiple =
+    files('README', 'licence.txt')
+// Use File objects.
+def userFiles =
+    files(new File('README'), new File('INSTALL'))
+// We can combine different argument types.
+def combined = files('README', new File('INSTALL'))
+// We can pass a URI or URL object, just as we could with the file() method:
+def urlFiles =
+    files(new URI('file:/README'),
+        new URL('file:/INSTALL'))
+// We can also use an array, Collection, or Iterable object with file names
+// or another ConfigurableFileCollection instance as an argument:
+// Use a Collection with file or directory names.
+def listOfFileNames = ['src', 'test']
+def mainDirectories = files(listOfFileNames)
+// Use an array.
+// We use the Groovy as keyword to
+// force an object to a certain type.
+mainDirectories = files(listOfFileNames as String[])
+// Or an implementation of the Iterable interface.
+mainDirectories = files(listOfFileNames as Iterable)
+// Combine arguments and pass another file collection.
+def allDirectories = files(['config'], mainDirectories)
+// We can also use a closure or instance of the Callable interface to define a list of files, as follows:
+import java.util.concurrent.Callable
+def dirs = files {
+    [new File('src'), file('README')]
+    .findAll { file ->
+        file.directory
+    }
+}
+def rootFiles = files(new Callable<List<File>>() {
+    def files = [new File('src'),
+            file('README'),
+            file('INSTALL')]
+    List<File> call() {
+        files.findAll { fileObject ->
+            fileObject.file
+        }
+    }
+})
+// we can pass a Task object as an argument to the files() method. The outputs property of the task is used to determine
+// the file collection or we can directly use the TaskOutputs object instead of letting Gradle resolve
+// it via the outputs property of the Task object.
+// To get the file collection object in our build script,
+we simply pass the Task instance as an argument to the files() method:
+task convert {
+    def source = new File('source.xml')
+    def output = new File('output.txt')
+    // Define input file
+    inputs.file source
+    // Define output file
+    outputs.file output
+    doLast {
+        def xml = new XmlSlurper().parse(source)
+        output.withPrintWriter { writer ->
+            xml.person.each { person ->
+                writer.println "${person.name},${person.email}"
+            }
+        }
+        println "Converted ${source.name} to ${output.name}"
+    }
+}
+// Get the file collection from
+// the task outputs property.
+def taskOutputFiles = files(convert)
+// Alternatively we could use
+// the outputs property directly.
+taskOutputFiles = files(convert.outputs)
+// The ConfigurableFileCollection interface has useful methods to manipulate the collection, for example,
+// we can use + and - operators to add or remove elements from the collection, respectively:
+// Define collection.
+def fileCollection = files('README', 'INSTALL')
+// Remove INSTALL file from collection.
+def readme = fileCollection - files('INSTALL')
+// Add new collection to existing collection.
+def moreFiles =
+    fileCollection +
+    files(file('config',
+            PathValidation.DIRECTORY))
+// To get the absolute path names for the elements in ConfigurableFileCollection, we can use the asPath property.
+task collectionPath << {
+    def fileCollection = files('README', 'INSTALL')
+    println fileCollection.asPath
+}
+// To get the File objects that make up the file collection, we can use the files property.
+def fileCollection = files('README', [new File('INSTALL')])
+// Get all elements as File objects.
+def allFiles = fileCollection.files
+// Or use casting with as keyword.
+def fileObjects = fileCollection as File[]
+def singleFileCollection = files('INSTALL')
+// Get single file as File object.
+def installFile = singleFileCollection.singleFile
+// we can apply a filter to our file collection with the filter() method.
+task filterFiles << {
+    def rootFiles = files('INSTALL', 'README')
+    // Filter for files with a txt extension.
+    def smallFiles = rootFiles.filter { file ->
+        file.name.endsWith 'txt'
+    }
+    rootFiles = rootFiles + files('LICENSE.txt')
+    // smallFiles now contains 2 files:
+    // INSTALL and LICENSE
+}
+```
+
+- Working with file trees
+
+```
+// Create file tree with base directory 'src/main'
+// and only include files with extension .java
+def srcDir = fileTree('src/main').include('**/*.java')
+// Use map with arguments to create a file tree.
+def resources =
+    fileTree(dir: 'src/main',
+        excludes: ['**/*.java', '**/*.groovy'])
+// Create file tree with project directory as base
+// directory and use method include() on tree
+// object to include 2 files.
+def base = fileTree('.')
+base.include 'README', 'INSTALL'
+// Use closure to create file tree.
+def javaFiles = fileTree {
+    from 'src/main/java'
+    exclude '*.properties'
+}
+// To filter a file tree, we can use the filter() method as we do with file collections, but we can also use the matching() method.
+We pass a closure to the matching() method or an instance of the org.gradle.api.tasks.util.PatternFilterable interface.
+We can use include, includes, exclude, and excludes methods to either include or exclude files from the file tree, as follows:
+def sources = fileTree {
+    from 'src'
+}
+def javaFiles = sources.matching {
+    include '**/*.java'
+}
+def nonJavaFiles = sources.matching {
+    exclude '**/*.java'
+}
+def nonLanguageFiles = sources.matching {
+    exclude '**/*.scala', '**/*.groovy', '**/*.java'
+}
+def modifiedLastWeek = sources.matching {
+    lastWeek = new Date() - 7
+    include { file ->
+        file.lastModified > lastWeek.time
+    }
+}
+// We can use the visit() method to visit each tree node
+def testFiles = fileTree(dir: 'src/test')
+testFiles.visit { fileDetails ->
+    if (fileDetails.directory) {
+        println "Entering directory ${fileDetails.relativePath}"
+    } else {
+        println "File name: ${fileDetails.name}"
+    }
+}
+def projectFiles = fileTree(dir: 'src/test')
+projectFiles.visit(new FileVisitor() {
+    void visitDir(FileVisitDetails details) {
+        println "Directory: ${details.path}"
+    }
+    void visitFile(FileVisitDetails details) {
+        println "File: ${details.path}, size: ${details.size}"
+    }
+})
+```
+
+- Copying files
+
+```
+// To copy files in Gradle, we can use the Copy task
+task simpleCopy(type: Copy) {
+    from 'src/xml'
+    into 'definitions'
+}
+// uses the include() and exclude() methods to select the set of files to be copied:
+// Define a closure with ANT-style
+// pattern for files.
+def getTextFiles = {
+    '**/*.txt'
+}
+task copyTask(type: Copy) {
+    // Copy from directory.
+    from 'src/webapp'
+    // Copy single file.
+    from 'README.txt'
+    // Include files with html extension.
+    include '**/*.html', '**/*.htm'
+    // Use closure to resolve files.
+    include getTextFiles
+    // Exclude file INSTALL.txt.
+    exclude 'INSTALL.txt'
+    // Copy into directory dist
+    // resolved via closure.
+    into { file('dist') }
+}
+// Another way to copy files is with the Project.copy() method. The copy() method accepts a CopySpec interface implementation
+task simpleCopy << {
+    // We use the project.copy()
+    // method in our task. We can
+    // leave out the project reference,
+    // because Gradle knows how to
+    // resolve it automatically.
+    copy {
+        from 'src/xml'
+        into 'definitions'
+    }
+}
+```
+
+- Archiving files
+To create an archive file, we can use Zip, Tar, Jar, War, and Ear tasks
+
+```
+task archiveDist(type: Zip) {
+    from 'dist'
+    // Create output filename.
+    // Final filename is:
+    // dist-files-archive-1.0-sample.zip
+    baseName = 'dist-files'
+    appendix = 'archive'
+    extension = 'zip'
+    version = '1.0'
+    classifier = 'sample'
+}
+// By using task type Zip we instruct
+// Gradle to create an archive
+// in ZIP format.
+task archiveFiles(type: Zip) {
+    from 'dist'
+    // Copy files to a directory inside the archive.
+    into 'files'
+    // Set destination directory for ZIP file.
+    // $buildDir refers to default Gradle
+    // build directory 'build/'.
+    destinationDir = file("$buildDir/zips")
+    // Set complete filename at once.
+    archiveName = 'dist-files.zip'
+}
+// To create a TAR archive with the optional gzip or bzip2 compression, we must use the tarFiles task
+task tarFiles(type: Tar) {
+    from 'dist'
+    // Set destination directory.
+    destinationDir = file("$buildDir/tarballs")
+    // Set filename properties.
+    baseName = 'dist-files'
+    // Default extension for tar files
+    // with gzip compression is tgz.
+    extension = 'tar.gz'
+    // Use gzip compression.
+    compression = Compression.GZIP // or Compression.BZIP2
+}
+```
+
+- Project properties
+
+```
+version = '1.0'
+group = 'Sample'
+description = 'Sample build file to show project properties'
+task defaultProperties << {
+    println "Project: $project"
+    println "Name: $name"
+    println "Path: $path"
+    println "Project directory: $projectDir"
+    println "Build directory: $buildDir"
+    println "Version: $version"
+    println "Group: $project.group"
+    println "Description: $project.description"
+    println "AntBuilder: $ant"
+}
+```
+
+- Defining custom properties in script
+
+```
+// Define new property.
+ext.customProperty = 'custom'
+// Or we can use ext{} script block.
+ext {
+  anotherCustomProperty = 'custom'
+}
+task showProperties {
+    ext {
+        customProperty = 'override'
+    }
+    doLast {
+        // We can refer to the property
+        // in different ways:
+        println customProperty
+        println project.ext.customProperty
+        println project.customProperty
+    }
+}
+```
+
+- Defining properties using an external file
+We can also set the properties for our project in an external file. The file needs to be named gradle.properties,
+and it should be a plain text file with the name of the property and its value on separate lines.
+
+```
+task showProperties {
+    doLast {
+        println "Version: $version"
+        println "Custom property: $customProperty"
+    }
+}
+```
+
+- Passing properties via the command line
+Instead of defining the property directly in the build script or external file, we can use the -P command-line option
+to add an extra property to a build.
+
+```
+// Run By: $ gradle -Pversion=1.1 -PcustomProperty=custom showProperties
+task showProperties {
+    doLast {
+        println "Version: $version"
+        println "Custom property: $customProperty"
+    }
+}
+```
+
+- Defining properties via system properties
+We can also use Java system properties to define properties for our Gradle build.
+We use the -D command-line option just like in a normal Java application.
+
+```
+// run: gradle -Dorg.gradle.project.version=2.0 -Dorg.gradle.project.customProperty=custom showProperties
+task showProperties {
+    doLast {
+        println "Version: $version"
+        println "Custom property: $customProperty"
+    }
+}
+```
+
+- Adding properties via environment variables
+The environment variable name starts with `ORG_GRADLE_PROJECT_` and is followed by the property name.
+We use our build file to show the properties:
+
+```
+// we set ORG_GRADLE_PROJECT_version and ORG_GRADLE_PROJECT_customProperty environment variables,
+// then we run our showProperties task:
+task showProperties {
+    doLast {
+        println "Version: $version"
+        println "Custom property: $customProperty"
+    }
+}
+```
+
+- Using logging
+Every Gradle build file and task has a logger object. The logger object is an instance of a Gradle-specific extension
+of the Simple Logging Facade for Java (SLF4J) Logger interface. SLF4J is a Java logging library.
+
+```
+// Run by : $ gradle --debug logLevels . $ gradle --info logLevels . $ gradle logLevels
+// Simple logging sample.
+task logLevels << {
+    logger.debug 'debug: Most verbose logging level'
+    logger.log LogLevel.DEBUG, 'debug: Most verbose logging level'
+    logger.info 'info: Use for information messages'
+    logger.log LogLevel.INFO, 'info: Use for information messages'
+    logger.lifecycle 'lifecycle: Progress information messages'
+    logger.log LogLevel.LIFECYCLE,
+      'lifecycle: Progress information messages'
+    logger.warn 'warn: Warning messages like invalid        configuration'
+    logger.log LogLevel.WARN,
+      'warn: Warning messages like invalid configuration'
+    logger.quiet 'quiet: This is important but not an error'
+    logger.log LogLevel.QUIET,
+      'quiet: This is important but not an error'
+    logger.error 'error: Use for errors'
+    logger.log LogLevel.ERROR, 'error: Use for errors'
+}
+```
+
+we know that every Gradle project and task has a logger we can use. However,
+we can also explicitly create a logger instance with the Logging class
+
+```
+class Simple {
+    // Create new logger using the Gradle
+    // logging support.
+    private static final Logger logger = Logging.getLogger('Simple')
+    int square(int value) {
+        int square = value * value
+        logger.lifecycle "Calculate square for ${value} = ${square}"
+        return square
+    }
+}
+logger.lifecycle 'Running sample Gradle build.'
+task useSimple {
+    doFirst {
+        logger.lifecycle 'Running useSimple'
+    }
+    doLast {
+        new Simple().square(3)
+    }
+}
+```
+
+- Controlling output
+
+```
+logging.captureStandardOutput LogLevel.INFO
+println 'This message is now logged with log level info instead of quiet'
+task redirectLogging {
+    doFirst {
+      // Use default redirect log level quiet.
+      println 'Start task redirectLogging'
+    }
+    doLast {
+      logging.captureStandardOutput LogLevel.INFO
+      println 'Finished task redirectLogging'
+    }
+}
+```
+
+- Using the Gradle Wrapper
+
+```
+// Creating wrapper scripts
+$ gradle wrapper
+$ gradle wrapper --gradle-version=2.12
+// Customizing the Gradle Wrapper
+task createWrapper(type: Wrapper) {
+    // Set Gradle version for wrapper files.
+    gradleVersion = '2.12'
+    // Rename shell scripts name to
+    // startGradle instead of default gradlew.
+    scriptFile = 'startGradle'
+    // Change location and name of JAR file
+    // with wrapper bootstrap code and
+    // accompanying properties files.
+    jarFile = "${projectDir}/gradle-bin/gradle-bootstrap.jar"
+}
+// run by $ gradle createWrapper
+// To change the URL from where the Gradle version must be downloaded, we can alter the distributionUrl property.
+task createWrapper(type: Wrapper) {
+    // Set URL with custom Gradle distribution.
+    distributionUrl = 'http://intranet/gradle/dist/gradle-custom-2.12.zip'
+}
+```
+
+## Using Gradle for Java Projects
+
+- Working with source sets
+A source set is a collection of source files that are compiled and executed together.
+Without any configuration, we already have the main and test source sets, which are added by the Java plugin.
+
+```
+apply plugin: 'java'
+task sourceSetJavaProperties << {
+    sourceSets {
+        main {
+            println "java.srcDirs = ${java.srcDirs}"
+            println "resources.srcDirs = ${resources.srcDirs}"
+            println "java.files = ${java.files.name}"
+            println "allJava.files = ${allJava.files.name}"
+            println "resources.files = ${resources.files.name}"
+            println "allSource.files = ${allSource.files.name}"
+            println "output.classesDir = ${output.classesDir}"
+            println "output.resourcesDir = ${output.resourcesDir}"
+            println "output.files = ${output.files}"
+      }
+    }
+}
+```
+
+- Creating a new source set
+Gradle will create three new tasks based on this source set—apiClasses, compileApiJava, and processApiResources.
+```
+apply plugin: 'java'
+sourceSets {
+    api
+    main {
+      compileClasspath += files(api.output.classesDir)
+    }
+}
+classes.dependsOn apiClasses
+```
+
+- Custom configuration
+to reconfigure the main and test source sets:
+
+```
+apply plugin: 'java'
+sourceSets {
+    main {
+        java {
+            srcDir 'src/java'
+        }
+        resources {
+            srcDir 'resources/java'
+        }
+    }
+    test {
+        java {
+            srcDir 'test/unit/java'
+        }
+        resources {
+            srcDir 'resources/test'
+        }
+    }
+    'integeration-test' {
+        java {
+            srcDir 'test/integration/java'
+        }
+        resources {
+            srcDir 'resources/test'
+        }
+    }
+}
+```
+
+- Working with properties
+
+```
+task showConvention << {
+    println sourceSets.main.name
+    println project.sourceSets.main.name
+    println project.convention.plugins.java.sourceSets.main.name
+}
+```
+
+```
+apply plugin: 'java'
+archivesBaseName = 'gradle-sample'
+version = '1.0'
+sourceCompatibility = JavaVersion.VERSION_1_8 // Or '1.8' or 8
+jar {
+    manifest {
+      attributes(
+        'Implementation-Version' : version,
+        'Implementation-Title' : 'Gradle Sample'
+      )
+    }
+}
+```
+
+- Creating Javadoc documentation
+
+```
+apply plugin: 'java'
+javadoc {
+    source sourceSets.api.allJava
+}
+// to set some of the options for the javadoc task in our project:
+javadoc {
+    source sourceSets.api.allJava
+    title = 'Gradle Sample Project'
+    options.links = ['http://docs.oracle.com/javase/6/docs/api/']
+    options.footer = "Generated on ${new Date().format('dd MMM yyyy')}"
+    options.header = "Documention for version ${project.version}"
+}
+```
+
+- Assembling archives
+
+```
+apply plugin: 'java'
+archivesBaseName = 'gradle-sample'
+version = '1.0'
+sourceSets {
+    api
+    main {
+        compileClasspath += files(api.output.classesDir)
+    }
+}
+classes.dependsOn apiClasses
+task apiJar(type: Jar) {
+    // Define appendix that will be
+    // appended to the archivesBaseName
+    // for the JAR.
+    appendix = 'api'
+    // Define the input for the JAR file.
+    from sourceSets.api.output
+}
+```
+
+## Dependency Management
+
+### Dependency configuration
+
+Every Gradle build has a ConfigurationContainer object.
+This object is accessible via the Project property with the name containers.
+We can use a closure to configure the container with Configuration objects.
+Each Configuration object has at least a name, but we can change more properties.
+We can set a resolution strategy, if a configuration has version conflicts with dependencies,
+or we can change the visibility of a configuration so that it will not be visible outside of our project.
+A Configuration object also has a hierarchy. So we can extend from the existing Configuration objects to inherit the settings.
+
+```
+configurations {
+    commonsLib {
+        description = 'Common libraries'
+    }
+    mainLib {
+        extendsFrom commonsLib
+        description = 'Main libraries'
+    }
+}
+// Reference mainLib configuration
+// using [] syntax for the
+// configuration container.
+println configurations['mainLib'].name
+// Reference commonsLib in another way,
+// just use the name directly as property.
+println configurations.commonsLib.name
+```
+
+### Repositories
+- Adding Maven repositories
+- Adding Ivy repositories
+- Adding a local directory repository
+
+### Defining dependencies
+- Using external module dependencies
+- Using project dependencies
+- Using client module dependencies
+- Using Gradle and Groovy dependencies
+- Adding optional ANT tasks
+- Using dependency configurations as files
+
+```
+repositories {
+    jcenter()
+}
+configurations {
+    springLibs
+}
+dependencies {
+    springLibs('org.springframework:spring-web:4.2.3.RELEASE')
+}
+task copyCompileDeps(type: Copy) {
+    from configurations.springLibs
+    into "$buildDir/compileLibs"
+}
+```
+
+- Using file dependencies
+
+```
+dependencies {
+    compile files('spring-core.jar', 'spring-aop.jar')
+    compile fileTree(dir: 'deps', include: '*.jar')
+}
+```
+
+## Testing, Building, and Publishing Artifacts
+
+- Testing our projects
+- Configuring the test process
+
+```
+apply plugin: 'java'
+repositories {
+    jcenter()
+}
+dependencies {
+    testCompile('junit:junit:4.12')
+}
+test {
+    // Add System property to running tests.
+    systemProperty 'sysProp', 'value'
+    // Use the following JVM arguments for each test process.
+    jvmArgs '-Xms256m', '-Xmx512m'
+    // Enable debugging mode.
+    debug = true
+    // Ignore any test failues and don't fail the build.
+    ignoreFailures = true
+    // Enable assertions for test with the assert keyword.
+    enableAssertions = true
+    // Run four tests in parallel.
+    maxParallelForks = 4
+    // Restart proces after
+    // 10 executions.
+    forkEvery = 10
+    // Disable automatic scanning
+    // for test classes.
+    scanForTestClasses = false
+    // Include test classes.
+    include('**/*Test.class', '**/*Spec.class')
+    // Exclude test classes.
+    exclude('**/Abstract*.class', '**/Run*.class')
+    // Set exception format to full
+    // instead of default value 'short'.
+    testLogging.exceptionFormat 'full'
+    // We can also use a script block to configure
+    // the testLogging property.
+    testLogging {
+        // No log level specified so the
+        // property is set on LIFECYCLE log level.
+        // We can pass arguments to determine
+        // which test events we want to see in the
+        // command-line output.
+        events 'passed'
+        // Show logging events for test methods.
+        minGranularity = 3
+        // All valid values for the stackTrace output.
+        stackTraceFilters 'groovy', 'entry_point', 'truncate'
+        // Show System.out and System.err output
+        // from the tests.
+        showStandardStreams = true
+        // Configure options for DEBUG log level.
+        debug {
+            events 'started'
+        }
+    }
+}
+```
+
+- Changing the test report directory
+
+```
+apply plugin: 'java'
+repositories {
+    jcenter()
+}
+dependencies {
+    testCompile('junit:junit:4.12')
+}
+task testReport(type: TestReport) {
+    destinationDir = file("$buildDir/test-reports")
+    testResultDirs = files("$buildDir/test-results")
+    reportOn(test)
+}
+// If the test task is finished,
+// we want the testReport to be executed.
+test.finalizedBy(testReport)
+```
+
+- Running an application from a project
+
+```
+apply plugin: 'java' 
+task runJava(dependsOn: classes,
+    description: 'Run gradle.sample.SampleApp') << {
+    javaexec {
+        // Java main class to execute.
+        main = 'gradle.sample.SampleApp'
+        // We need to set the classpath.
+        classpath sourceSets.main.runtimeClasspath
+        // Extra options can be set.
+        maxHeapSize = '128m'
+        systemProperty 'sysProp', 'notUsed'
+        jvmArgs '-client'
+    }
+}
+repositories {
+    jcenter()
+}
+```
+
+## Read more about Gradle
+- [https://docs.gradle.org/current/userguide/userguide.html](https://docs.gradle.org/current/userguide/userguide.html)
