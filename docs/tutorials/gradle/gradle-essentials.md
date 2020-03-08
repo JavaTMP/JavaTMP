@@ -2401,9 +2401,11 @@ test.finalizedBy(testReport)
 ```
 
 - Running an application from a project
+The Project class that is always available in our build file has the javaexec() method. With this method,
+we can execute a Java class.
 
 ```
-apply plugin: 'java' 
+apply plugin: 'java'
 task runJava(dependsOn: classes,
     description: 'Run gradle.sample.SampleApp') << {
     javaexec {
@@ -2421,6 +2423,114 @@ repositories {
     jcenter()
 }
 ```
+
+- Running an application as a task
+Besides the javaexec() method, we can define a new org.gradle.api.tasks.JavaExec task.
+To configure the task, we can use the same methods and properties as with the javaexec() method.
+
+```
+apply plugin: 'java'
+task runJava(type: JavaExec) {
+    dependsOn classes
+    description = 'Run gradle.sample.SampleApp'
+    // Java main class to execute.
+    main = 'gradle.sample.SampleApp'
+    // We need to set the classpath.
+    classpath sourceSets.main.runtimeClasspath
+    // Extra options can be set.
+    systemProperty 'sysProp', 'notUsed'
+    jvmArgs '-client'
+    // We can pass arguments to the main() method
+    // of gradle.sample.SampleApp.
+    args 'mainMethodArgument', 'notUsed'
+}
+```
+
+- Running an application with the application plugin
+
+```
+apply plugin: 'application'
+mainClassName = 'gradle.sample.SampleApp'
+// Extra configuration for run task if needed.
+run {
+    // Extra options can be set.
+    systemProperty 'sysProp', 'notUsed'
+    jvmArgs '-client'
+    // We can pass arguments to the main() method
+    // of gradle.sample.SampleApp.
+    args 'mainMethodArgument', 'notUsed'
+}
+```
+
+- Creating a distributable application archive
+With the application plugin, we can also build a distribution with our Java application. All tasks depend on the Jar task.
+Read more about application plugin in [https://docs.gradle.org/current/userguide/application_plugin.html](https://docs.gradle.org/current/userguide/application_plugin.html)
+
+```
+apply plugin: 'application'
+mainClassName = 'gradle.sample.SampleApp'
+archivesBaseName = 'gradle-sample'
+version = '1.0'
+
+```
+
+- Publishing artifacts
+Read more about publishing artifacts in [https://docs.gradle.org/current/userguide/artifact_management.html](https://docs.gradle.org/current/userguide/artifact_management.html)
+
+- Creating a WAR file
+
+```
+apply plugin: 'java'
+version = '1.0'
+// Custom archive task with
+// specific properties for a WAR archive.
+task war(type: War) {
+    dependsOn classes
+    from 'src/main/webapp'
+    // Files copied to WEB-INF.
+    webInf {
+        from 'src/main/webInf'
+    }
+    // Copied to WEB-INF/classes.
+    classpath sourceSets.main.runtimeClasspath
+    // Copied to WEB-INF/lib.
+    classpath fileTree('libs')
+    // Custom web.xml.
+    webXml = file('  ')
+    baseName = 'gradle-webapp'
+}
+assemble.dependsOn war
+```
+
+## Multi-project Builds
+-  add a new file, `settings.gradle`, in the root directory.
+and use the `include()` method to set the projects that are part of our multi-project build.
+- We can reference a project with the `project()` method and use the complete name of the project as an argument.
+We must use a closure to define the tasks and properties of the project.
+- Gradle has the `allprojects{}` script block to apply project tasks and properties to all projects
+that are part of the multi-project build.
+- the `subprojects{}` script block apply only tasks and properties of the subprojects of a multi-project build are configured.
+- To apply specific configuration to more than one project, we can also use project filtering.
+In our `build.gradle` file, we must use the `configure()` method.
+
+## Maintaining Code Quality
+- There are tools already available for Java projects to analyze and check the source code,
+such as Checkstyle, JDepend, PMD, FindBugs, and CodeNarc. Gradle has plugins for each of these tools.
+
+## Writing Custom Tasks and Plugins
+- create a new task definition in our build file and make it an enhanced task.
+create a new class in our build file and this class extends `org.gradle.api.DefaultTask`.
+To indicate that the method is the action of the class, we will use the `@TaskAction` annotation.
+- place the task class definition file in the buildSrc project source directory.
+- You can create a task in a standalone project.
+- A plugin can contain tasks, configurations, properties, methods, concepts, and more to add extra functionality to our projects.
+and to create a new plugin in the build file, you must implement the `org.gradle.api.Plugin<T>` interface and `apply()` method.
+- You can create a plugin in the project source directory.
+- You can create a plugin in a standalone project.
+
+## Gradle in the Enterprise
+- It is good practice to have a continuous integration tool in a software project.
+With a continuous integration tool, we can automatically build our software in a controlled environment.
 
 ## Read more about Gradle
 - [https://docs.gradle.org/current/userguide/userguide.html](https://docs.gradle.org/current/userguide/userguide.html)
