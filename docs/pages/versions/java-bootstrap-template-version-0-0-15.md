@@ -3,6 +3,14 @@ title: Java Bootstrap Template Version 0.0.15 (Current Development Version)
 ---
 # {{ page.title }}
 
+## on
+- Update the following dependencies in package.json:
+    - async from 3.1.1 to 3.2.0
+    - moment-timezone from 0.5.27 to 0.5.28
+    - summernote from 0.8.15 to 0.8.16
+    - yargs from 15.1.0 to 15.3.0
+- Run gulp default to regenerate dist folders.
+
 ## a86dbc5 on Feb 15, 2020, 7:47 PM GMT+4
 - Support Theme-colors for Ion.RangeSlider plugin LTR/RTL
     - Update `.\web\assets\src\sass\plugins\custom-ion.rangeSlider.scss`
