@@ -44,7 +44,7 @@
         "datatables.net-fixedcolumns-bs4": "^3.3.0",
         "datatables.net-rowgroup": "^1.1.1",
         "datatables.net-rowgroup-bs4": "^1.1.1",
-        "echarts": "^4.5.0",
+        "echarts": "^4.7.0",
         "font-awesome-animation": "^0.2.1",
         "fullcalendar": "^3.10.1",
         "inputmask": "^5.0.3",
@@ -55,7 +55,7 @@
         "jquery-validation": "^1.19.1",
         "jquery.counterup": "^2.1.0",
         "malihu-custom-scrollbar-plugin": "^3.1.5",
-        "metismenu": "^3.0.4",
+        "metismenu": "^3.0.6",
         "moment": "^2.24.0",
         "nprogress": "^0.2.0",
         "popper.js": "^1.16.1",
@@ -87,7 +87,7 @@
         "del": "^5.1.0",
         "gulp": "^4.0.2",
         "gulp-autoprefixer": "^7.0.1",
-        "gulp-clean-css": "^4.2.0",
+        "gulp-clean-css": "^4.3.0",
         "gulp-concat": "^2.6.1",
         "gulp-connect": "^5.7.0",
         "gulp-eslint": "^6.0.0",
@@ -99,7 +99,7 @@
         "pump": "^3.0.0",
         "async": "^3.2.0",
         "gulp-uglify-es": "^2.0.0",
-        "yargs": "^15.3.0"
+        "yargs": "^15.3.1"
     },
     "napa-config": {
         "cache": false,

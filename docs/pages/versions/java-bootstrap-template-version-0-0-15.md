@@ -3,6 +3,14 @@ title: Java Bootstrap Template Version 0.0.15 (Current Development Version)
 ---
 # {{ page.title }}
 
+## on
+- Update the following dependencies in package.json:
+    - echarts from 4.6.0 to 4.7.0
+    - gulp-clean-css from 4.2.0 to 4.3.0
+    - metismenu from 3.0.5 to 3.0.6
+    - yargs from 15.3.0 to 15.3.1
+- Run gulp default to regenerate dist folders.
+
 ## b4c844d on Mar 15, 2020, 3:34 PM GMT+4
 - Update the following dependencies in package.json:
     - async from 3.1.1 to 3.2.0
