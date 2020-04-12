@@ -12,19 +12,7 @@
                     </div>
                 </div>
                 <div class="card-body p-1">
-                    <table cellspacing="0" class="table table-sm table-condensed table-bordered" id="TransactionList">
-                        <thead>
-                            <tr>
-                                <th style="width: 3rem;"><p class="m-0 p-0" style="width: 3rem;">id</p></th>
-                                <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">transactionId</p></th>
-                                <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">accountId</p></th>
-                                <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">amount</p></th>
-                                <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">status</p></th>
-                                <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">description</p></th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
+                    <table cellspacing="0" class="table table-condensed table-bordered" id="TransactionList"></table>
                 </div>
             </div>
         </div>
@@ -80,12 +68,12 @@
                     "url": javatmp.settings.contextPath + "/accounting/ListEntries"
                 },
                 columns: [
-                    {data: 'id', name: "id", width: "3rem", "render": javatmp.plugins.DataTableColRenderWrapper("3rem")},
-                    {data: 'transactionId', name: "transactionId", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
-                    {data: 'accountId', name: "accountId", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
-                    {data: 'amount', name: "amount", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
-                    {data: 'status', name: "status", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
-                    {data: 'description', name: "description", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")}
+                    {title: 'id', data: 'id', name: "id", width: "3rem", "render": javatmp.plugins.DataTableColRenderWrapper("3rem")},
+                    {title: 'transactionId', data: 'transactionId', name: "transactionId", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                    {title: 'accountId', data: 'accountId', name: "accountId", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                    {title: 'amount', data: 'amount', name: "amount", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                    {title: 'status', data: 'status', name: "status", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                    {title: 'description', data: 'description', name: "description", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")}
                 ]
             });
 

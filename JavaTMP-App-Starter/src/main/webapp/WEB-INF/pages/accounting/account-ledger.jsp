@@ -98,17 +98,17 @@
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
                 // fire when user resize browser window or sidebar hide / show
-                table.columns.adjust().draw();
+                table.columns.adjust();
             });
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenCompress, function (event, card) {
                 // when card compress by pressing the top right tool button
-                table.columns.adjust().draw();
+                table.columns.adjust();
             });
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenExpand, function (event, card) {
                 // when card Expand by pressing the top right tool button
-                table.columns.adjust().draw();
+                table.columns.adjust();
             });
 
             /**

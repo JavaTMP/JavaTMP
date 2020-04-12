@@ -24,7 +24,7 @@
         "gulp-concat": "^2.6.1",
         "gulp-connect": "^5.7.0",
         "gulp-eslint": "^6.0.0",
-        "gulp-git": "^2.10.0",
+        "gulp-git": "^2.10.1",
         "gulp-header": "^2.0.9",
         "gulp-htmlmin": "^5.0.1",
         "gulp-if": "^3.0.0",

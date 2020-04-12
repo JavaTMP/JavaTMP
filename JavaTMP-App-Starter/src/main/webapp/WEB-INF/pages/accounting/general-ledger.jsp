@@ -13,19 +13,6 @@
                 </div>
                 <div class="card-body p-1">
                     <table id="GeneralLedgerAccountsTable" class="table table-sm table-condensed table-hover table-bordered">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>Account Code</th>
-                                <th>Account Name</th>
-                                <th>Debit</th>
-                                <th>Credit</th>
-                                <th>Balance</th>
-                                <th>Account Group</th>
-                                <th>Id</th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
                     </table>
                 </div>
             </div>
@@ -102,41 +89,20 @@
                     "url": javatmp.settings.contextPath + "/accounting/GeneralLedger"
                 },
                 columns: [
-                    {
-                        "class": "details-control",
-                        "orderable": false,
-                        "data": null,
-                        "defaultContent": ""
-                    },
-                    {data: 'accountCode', name: "accountCode"},
-                    {data: 'name', name: "name"},
-                    {data: 'debit', name: "debit", "render": currencyRenderFunc},
-                    {data: 'credit', name: "credit", "render": currencyRenderFunc},
-                    {data: 'balance', name: "balance", "render": currencyRenderFunc},
-                    {data: 'accountgroup.name', name: "accountGroup"},
-                    {data: 'id', name: "id"}
+                    {title: '', "class": "details-control", "orderable": false, "data": null, "defaultContent": ""},
+                    {title: 'Account Code', data: 'accountCode', name: "accountCode"},
+                    {title: 'Account Name', data: 'name', name: "name"},
+                    {title: 'Debit', data: 'debit', name: "debit", "render": currencyRenderFunc},
+                    {title: 'Credit', data: 'credit', name: "credit", "render": currencyRenderFunc},
+                    {title: 'Balance', data: 'balance', name: "balance", "render": currencyRenderFunc},
+                    {title: 'Account Group', data: 'accountgroup.name', name: "accountGroup"},
+                    {title: 'Id', data: 'id', name: "id"}
                 ]
             });
 
             function format(d, transDivId) {
                 return `<div class="ml-0 my-0 p-1 border" id="` + transDivId + `">
                             <table id="detail-table` + transDivId + `" cellspacing="0" class="table table-sm table-condensed table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>entryDate</th>
-                                        <th>sourceDocument</th>
-                                        <th>code</th>
-                                        <th>id</th>
-                                        <th>transactionId</th>
-                                        <th>accountId</th>
-                                        <th>debit</th>
-                                        <th>credit</th>
-                                        <th>balance</th>
-                                        <th>status</th>
-                                        <th>description</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
                             </table>
                         </div>`;
             }
@@ -154,17 +120,17 @@
                         }
                     },
                     columns: [
-                        {data: 'entryDate', name: "entryDate", "type": "date", width: "7rem", "render": javatmp.plugins.DataTableColRenderWrapper("7rem")},
-                        {data: 'sourceDocument', name: "sourceDocument"},
-                        {data: 'code', name: "code"},
-                        {data: 'id', name: "id"},
-                        {data: 'transactionId', "visible": true, name: "transactionId"},
-                        {data: 'accountId', name: "accountId", "visible": false},
-                        {data: 'debit', name: "debit", "render": currencyRenderFunc},
-                        {data: 'credit', name: "credit", "render": currencyRenderFunc},
-                        {data: 'accountBalance', name: "accountBalance", "render": currencyRenderFunc},
-                        {data: 'status', "visible": false, name: "status"},
-                        {data: 'description', "visible": true, name: "description"}
+                        {title: 'entryDate', data: 'entryDate', name: "entryDate", "type": "date", width: "7rem", "render": javatmp.plugins.DataTableColRenderWrapper("7rem")},
+                        {title: 'sourceDocument', data: 'sourceDocument', name: "sourceDocument"},
+                        {title: 'code', data: 'code', name: "code"},
+                        {title: 'id', data: 'id', name: "id"},
+                        {title: 'transactionId', data: 'transactionId', "visible": true, name: "transactionId"},
+                        {title: 'accountId', data: 'accountId', name: "accountId", "visible": false},
+                        {title: 'debit', data: 'debit', name: "debit", "render": currencyRenderFunc},
+                        {title: 'credit', data: 'credit', name: "credit", "render": currencyRenderFunc},
+                        {title: 'balance', data: 'accountBalance', name: "accountBalance", "render": currencyRenderFunc},
+                        {title: 'status', data: 'status', "visible": false, name: "status"},
+                        {title: 'description', data: 'description', "visible": true, name: "description"}
                     ]
                 });
             }

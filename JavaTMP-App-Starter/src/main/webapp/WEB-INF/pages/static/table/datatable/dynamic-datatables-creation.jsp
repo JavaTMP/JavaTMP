@@ -29,7 +29,12 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <table id="example" class="display table table-bordered table-hover" cellspacing="0" width="100%">
-
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <table id="example1" class="display table table-bordered table-hover" cellspacing="0" width="100%">
                             </table>
                         </div>
                     </div>
@@ -96,12 +101,37 @@
                 return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
             }
 
+            var table1 = $('#example1').DataTable({
+                scrollY: 400,
+                scrollCollapse: true,
+                orderCellsTop: true, // important to for two row header with filteration below header column names.
+                headerCallback: function (thead, data, start, end, display) {
+//                    console.log($(thead).html());
+                },
+                initComplete: function (settings, json) {
+                },
+
+                columns: [
+                    {data: 'id', name: "id", title: "ID", width: "6rem"},
+                    {data: 'userName', name: "userName", title: "User Name", width: "10rem"},
+                    {data: 'firstName', name: "firstName", title: "First Name", width: "8rem"},
+                    {data: 'lastName', name: "lastName", title: "Last Name", width: "8rem"},
+                    {data: 'birthDate', name: "birthDate", title: "BirthDate", "type": "date", width: "9rem"}
+                ]
+            });
+
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
                 javatmp.util.waitForFinalEvent(function () {
                     for (var i = 1; i <= 50; i++) {
                         var rowNode = table.row.add({
+                            id: i,
+                            userName: 'user ' + i,
+                            firstName: 'user ' + i,
+                            lastName: 'last ' + i,
+                            birthDate: moment(randomDate(new Date(1950, 0, 1), new Date(2000, 0, 1)))}).draw(false).node();
+                        var rowNode1 = table1.row.add({
                             id: i,
                             userName: 'user ' + i,
                             firstName: 'user ' + i,
@@ -117,14 +147,17 @@
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
                 // fire when user resize browser window or sidebar hide / show
                 table.columns.adjust().draw();
+                table1.columns.adjust().draw();
             });
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenCompress, function (event, card) {
                 // when card compress by pressing the top right tool button
                 table.columns.adjust().draw();
+                table1.columns.adjust().draw();
             });
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenExpand, function (event, card) {
                 // when card Expand by pressing the top right tool button
                 table.columns.adjust().draw();
+                table1.columns.adjust().draw();
             });
 
             /**
@@ -138,6 +171,7 @@
                 // it is important to destroy table before leaving current ajax page
                 // so the fixedHeader will not be kept on site pages.
                 table.destroy();
+                table1.destroy();
                 return true;
             });
         });

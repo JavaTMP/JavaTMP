@@ -12,23 +12,7 @@
                     </div>
                 </div>
                 <div class="card-body p-1">
-                    <table cellspacing="0" class="table table-sm table-condensed table-bordered" id="TransactionList">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th style="width: 3rem;"><p class="m-0 p-0" style="width: 3rem;">ID</p></th>
-                                <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">Code</p></th>
-                                <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">Transaction Date</p></th>
-                                <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">note</p></th>
-                                <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">specialNumber</p></th>
-                                <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">entity</p></th>
-                                <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">status</p></th>
-                                <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">voucherTypeId</p></th>
-                                <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">creationDate</p></th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>
+                    <table cellspacing="0" class="table table-condensed table-bordered" id="TransactionList"></table>
                 </div>
             </div>
         </div>
@@ -88,37 +72,20 @@
                     "url": javatmp.settings.contextPath + "/accounting/listTransactions"
                 },
                 columns: [
-                    {
-                        "class": "details-control",
-                        "orderable": false,
-                        "data": null,
-                        "defaultContent": ""
-                    },
-                    {data: 'id', name: "id", width: "3rem", "render": javatmp.plugins.DataTableColRenderWrapper("3rem")},
-                    {data: 'code', name: "code", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
-                    {data: 'transactionDate', name: "transactionDate", "type": "date", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
-                    {data: 'note', name: "note", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
-                    {data: 'specialNumber', name: "specialNumber", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
-                    {data: 'entity', name: "entity", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
-                    {data: 'status', name: "status", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
-                    {data: 'voucherTypeId', name: "voucherTypeId", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
-                    {data: 'creationDate', name: "creationDate", "type": "date", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")}
+                    {title: '', "class": "details-control", "orderable": false, "data": null, "defaultContent": ""},
+                    {title: 'ID', data: 'id', name: "id", width: "3rem", "render": javatmp.plugins.DataTableColRenderWrapper("3rem")},
+                    {title: 'Code', data: 'code', name: "code", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                    {title: 'Transaction Date', data: 'transactionDate', name: "transactionDate", "type": "date", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                    {title: 'note', data: 'note', name: "note", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                    {title: 'specialNumber', data: 'specialNumber', name: "specialNumber", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                    {title: 'entity', data: 'entity', name: "entity", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                    {title: 'status', data: 'status', name: "status", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                    {title: 'voucherTypeId', data: 'voucherTypeId', name: "voucherTypeId", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                    {title: 'creationDate', data: 'creationDate', name: "creationDate", "type": "date", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")}
                 ]
             });
             function format(d, transDivId) {
-                return `<table id="detail-table` + transDivId + `" cellspacing="0" class="table table-sm table-condensed table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 3rem;"><p class="m-0 p-0" style="width: 3rem;">id</p></th>
-                                        <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">transactionId</p></th>
-                                        <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">accountId</p></th>
-                                        <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">amount</p></th>
-                                        <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">status</p></th>
-                                        <th style="width: 10rem;"><p class="m-0 p-0" style="width: 10rem;">description</p></th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>`;
+                return `<table id="detail-table` + transDivId + `" cellspacing="0" class="table table-sm table-condensed table-bordered"></table>`;
             }
 
             function generateDetailTable(d, transDivId) {
@@ -133,12 +100,12 @@
                         }
                     },
                     columns: [
-                        {data: 'id', name: "id", width: "3rem", "render": javatmp.plugins.DataTableColRenderWrapper("3rem")},
-                        {data: 'transactionId', "visible": true, name: "transactionId", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
-                        {data: 'accountId', name: "accountId", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
-                        {data: 'amount', name: "amount", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
-                        {data: 'status', "visible": true, name: "status", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
-                        {data: 'description', "visible": true, name: "description", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")}
+                        {title: 'id', data: 'id', name: "id", width: "3rem", "render": javatmp.plugins.DataTableColRenderWrapper("3rem")},
+                        {title: 'transactionId', data: 'transactionId', "visible": true, name: "transactionId", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                        {title: 'accountId', data: 'accountId', name: "accountId", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                        {title: 'amount', data: 'amount', name: "amount", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                        {title: 'status', data: 'status', "visible": true, name: "status", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
+                        {title: 'description', data: 'description', "visible": true, name: "description", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")}
                     ]
                 });
             }
@@ -233,15 +200,15 @@
             });
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
                 // fire when user resize browser window or sidebar hide / show
-                table.columns.adjust().draw();
+                table.columns.adjust();
             });
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenCompress, function (event, card) {
                 // when card compress by pressing the top right tool button
-                table.columns.adjust().draw();
+                table.columns.adjust();
             });
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.cardFullscreenExpand, function (event, card) {
                 // when card Expand by pressing the top right tool button
-                table.columns.adjust().draw();
+                table.columns.adjust();
             });
             /**
              * When another sidebar menu item pressed and before container issues new ajax request.

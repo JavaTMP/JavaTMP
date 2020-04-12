@@ -9,6 +9,12 @@ title: Java Bootstrap Template Version 0.0.15 (Current Development Version)
     - gulp-clean-css from 4.2.0 to 4.3.0
     - metismenu from 3.0.5 to 3.0.6
     - yargs from 15.3.0 to 15.3.1
+    - gulp-git from 2.10.0  to 2.10.1
+    - @fortawesome/fontawesome-free from 5.12.1 to 5.13.0
+    - bootstrap-input-spinner from 1.13.3 to 1.13.4
+    - handlebars from 4.7.3 to 4.7.6
+    - jquery from 3.4.1 to 3.5.0
+    - jquery.fancytree from 2.34.0 to 2.35.0
 - Run gulp default to regenerate dist folders.
 
 ## b4c844d on Mar 15, 2020, 3:34 PM GMT+4
