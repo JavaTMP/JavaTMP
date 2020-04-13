@@ -327,6 +327,11 @@
                                 </a>
                                 <ul>
                                     <li>
+                                        <a href="${pageContext.request.contextPath}/pages/user/listUsersBasic">
+                                            Basic User List
+                                        </a>
+                                    </li>
+                                    <li>
                                         <a href="${pageContext.request.contextPath}/pages/user/listUsers">
                                             ${labels['sidebar.menuItem.users.usersList']}
                                         </a>

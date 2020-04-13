@@ -62,6 +62,7 @@ public class GetUserPageController {
     public String currentUserProfileController(@SessionAttribute(Constants.LOG_IN_USER_NAME) User loggedInUser, Model model) {
 
         User dbUser = this.userService.readCompleteUserById(loggedInUser);
+        log.debug("CurrentUserProfileController db user {}", dbUser);
         List<Timezonetranslation> timezones = this.timezoneService.getTimezones(loggedInUser);
         List<Countrytranslation> countries = this.countryService.getCountries(loggedInUser);
         List<Languagetranslation> languages = this.languageService.getLanguages(loggedInUser);
