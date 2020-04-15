@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:npm_and_yarn" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b0388ad0-42fa-4e72-a3bd-c0b5e7ea0bdd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/.gitignore" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="spring-beans.schema" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1aadhru81z7oI9m0IvqptM0wrjM" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="js.buildTools.gulp.gulp_package_dir" value="$PROJECT_DIR$/JavaTMP-App-Starter/node_modules/gulp" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/JavaTMP-App-Starter" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn spring-boot:run" />
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.JavaTmpAppStarterApplication">
+    <configuration name="JavaTmpAppStarterApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="JavaTMP-App-Starter" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.javatmp.JavaTmpAppStarterApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="napa" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/JavaTMP-App-Starter/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="napa" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.napa" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpringBeansView">
+    <option name="showInfrastructureBeans" value="false" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b0388ad0-42fa-4e72-a3bd-c0b5e7ea0bdd" name="Default Changelist" comment="" />
+      <created>1586977760606</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1586977760606</updated>
+      <workItem from="1586977765592" duration="77000" />
+      <workItem from="1586977930003" duration="637000" />
+      <workItem from="1586979368915" duration="334000" />
+      <workItem from="1586979720473" duration="3634000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="388" y="192" key="#Console" timestamp="1586981394570">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="388" y="192" key="#Console/0.0.1536.824@0.0.1536.824" timestamp="1586981394570" />
+    <state x="606" y="276" key="#Notifications" timestamp="1586979792965">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="606" y="276" key="#Notifications/0.0.1536.824@0.0.1536.824" timestamp="1586979792965" />
+    <state x="107" y="0" key="#Project_Structure" timestamp="1586980940463">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="107" y="0" key="#Project_Structure/0.0.1536.824@0.0.1536.824" timestamp="1586980940463" />
+    <state x="399" y="102" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1586980824584">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="399" y="102" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.0.1536.824@0.0.1536.824" timestamp="1586980824584" />
+    <state x="475" y="159" key="FileChooserDialogImpl" timestamp="1586981552694">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="475" y="159" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1586981552694" />
+    <state width="1493" height="235" key="GridCell.Tab.0.bottom" timestamp="1586982498778">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="235" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586982498778" />
+    <state width="1493" height="235" key="GridCell.Tab.0.center" timestamp="1586982498777">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="235" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1586982498777" />
+    <state width="1493" height="235" key="GridCell.Tab.0.left" timestamp="1586982498777">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="235" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1586982498777" />
+    <state width="1493" height="235" key="GridCell.Tab.0.right" timestamp="1586982498778">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="235" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1586982498778" />
+    <state width="1493" height="235" key="GridCell.Tab.1.bottom" timestamp="1586982444803">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="235" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586982444803" />
+    <state width="1493" height="235" key="GridCell.Tab.1.center" timestamp="1586982444803">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="235" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1586982444803" />
+    <state width="1493" height="235" key="GridCell.Tab.1.left" timestamp="1586982444803">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="235" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1586982444803" />
+    <state width="1493" height="235" key="GridCell.Tab.1.right" timestamp="1586982444803">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="235" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1586982444803" />
+    <state x="444" y="131" key="NewModule_or_Project.wizard" timestamp="1586980512986">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="444" y="131" key="NewModule_or_Project.wizard/0.0.1536.824@0.0.1536.824" timestamp="1586980512986" />
+    <state x="253" y="27" width="1036" height="797" key="SettingsEditor" timestamp="1586983089457">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="253" y="27" width="1036" height="797" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1586983089457" />
+    <state x="407" y="126" width="672" height="677" key="run.anything.popup" timestamp="1586981557369">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="407" y="126" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1586981557369" />
+  </component>
+</project>
