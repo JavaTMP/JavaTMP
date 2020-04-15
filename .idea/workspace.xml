@@ -33,7 +33,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b0388ad0-42fa-4e72-a3bd-c0b5e7ea0bdd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +94,7 @@
       <command value="mvn spring-boot:run" />
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.JavaTmpAppStarterApplication">
+  <component name="RunManager" selected="npm.test">
     <configuration name="JavaTmpAppStarterApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="JavaTMP-App-Starter" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.javatmp.JavaTmpAppStarterApplication" />
@@ -121,8 +121,19 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="test" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.test" />
         <item itemvalue="npm.napa" />
       </list>
     </recent_temporary>
@@ -143,8 +154,16 @@
       <workItem from="1586977765592" duration="77000" />
       <workItem from="1586977930003" duration="637000" />
       <workItem from="1586979368915" duration="334000" />
-      <workItem from="1586979720473" duration="3634000" />
+      <workItem from="1586979720473" duration="4673000" />
     </task>
+    <task id="LOCAL-00001" summary="support IntelliJ ide by adding specific files">
+      <created>1586983487712</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1586983487712</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -161,6 +180,10 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="support IntelliJ ide by adding specific files" />
+    <option name="LAST_COMMIT_MESSAGE" value="support IntelliJ ide by adding specific files" />
   </component>
   <component name="WindowStateProjectService">
     <state x="388" y="192" key="#Console" timestamp="1586981394570">
@@ -179,26 +202,30 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="399" y="102" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.0.1536.824@0.0.1536.824" timestamp="1586980824584" />
+    <state x="264" y="0" key="CommitChangelistDialog2" timestamp="1586983486416">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="264" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1586983486416" />
     <state x="475" y="159" key="FileChooserDialogImpl" timestamp="1586981552694">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="475" y="159" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1586981552694" />
-    <state width="1493" height="235" key="GridCell.Tab.0.bottom" timestamp="1586982498778">
+    <state width="1493" height="235" key="GridCell.Tab.0.bottom" timestamp="1586983765472">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="235" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586982498778" />
-    <state width="1493" height="235" key="GridCell.Tab.0.center" timestamp="1586982498777">
+    <state width="1493" height="235" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1586983765472" />
+    <state width="1493" height="235" key="GridCell.Tab.0.center" timestamp="1586983765472">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="235" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1586982498777" />
-    <state width="1493" height="235" key="GridCell.Tab.0.left" timestamp="1586982498777">
+    <state width="1493" height="235" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1586983765472" />
+    <state width="1493" height="235" key="GridCell.Tab.0.left" timestamp="1586983765472">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="235" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1586982498777" />
-    <state width="1493" height="235" key="GridCell.Tab.0.right" timestamp="1586982498778">
+    <state width="1493" height="235" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1586983765472" />
+    <state width="1493" height="235" key="GridCell.Tab.0.right" timestamp="1586983765472">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="235" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1586982498778" />
+    <state width="1493" height="235" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1586983765472" />
     <state width="1493" height="235" key="GridCell.Tab.1.bottom" timestamp="1586982444803">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -223,6 +250,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="253" y="27" width="1036" height="797" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1586983089457" />
+    <state x="294" y="165" key="Vcs.Push.Dialog.v2" timestamp="1586983522911">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="294" y="165" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1586983522911" />
     <state x="407" y="126" width="672" height="677" key="run.anything.popup" timestamp="1586981557369">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
