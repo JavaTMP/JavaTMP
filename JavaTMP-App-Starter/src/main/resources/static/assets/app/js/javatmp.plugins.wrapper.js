@@ -624,11 +624,14 @@
                 }
             },
             error: function (data) {
+                var errorObj = {};
                 try {
-                    var errorObj = $.parseJSON(data.responseText);
+                    errorObj = $.parseJSON(data.responseText);
                     errorObj.title = (errorObj.title ? errorObj.title : $this.settings.defaultAjaxErrorTitle);
                     errorObj.message = (errorObj.message ? errorObj.message : $this.settings.defaultAjaxErrorMessage);
                 } catch (error) {
+                    errorObj.title = (errorObj.title ? errorObj.title : $this.settings.defaultAjaxErrorTitle);
+                    errorObj.message = (errorObj.message ? errorObj.message : $this.settings.defaultAjaxErrorMessage);
                 }
                 toastr.error(errorObj.message, errorObj.title, {
                     timeOut: 3000,

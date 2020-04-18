@@ -1,27 +1,17 @@
 package com.javatmp.fw.data.jpa.util;
 
-import com.javatmp.fw.domain.table.DataTableColumn;
-import com.javatmp.fw.domain.table.DataTableRequest;
-import com.javatmp.fw.domain.table.DataTableResults;
 import com.javatmp.fw.domain.table.Order;
-import com.javatmp.fw.domain.table.RuleOrGroup;
+import com.javatmp.fw.domain.table.*;
+import lombok.extern.slf4j.Slf4j;
+
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+import javax.persistence.criteria.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.JoinType;
-import javax.persistence.criteria.Path;
-import javax.persistence.criteria.Predicate;
-import javax.persistence.criteria.Root;
-import javax.persistence.criteria.Selection;
-import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class JpaUtil {
@@ -121,10 +111,10 @@ public class JpaUtil {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             SimpleDateFormat dateTimeFormatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
-            if (type.equals("date") && !opt.equals("between") && !opt.equals("not_between")) {
+            if (type.equals("date") && !opt.equals("between") && !opt.equals("not_between") && !opt.equals("is_null") && !opt.equals("is_not_null")) {
                 value = sdf.parse(value.toString());
             }
-            if (type.equals("datetime") && !opt.equals("between") && !opt.equals("not_between")) {
+            if (type.equals("datetime") && !opt.equals("between") && !opt.equals("not_between") && !opt.equals("is_null") && !opt.equals("is_not_null")) {
                 value = dateTimeFormatter.parse(value.toString());
             }
 
@@ -312,5 +302,63 @@ public class JpaUtil {
         return (DataTableResults<T>) dataTableResult;
 
     }
+
+    public static <T> Long retrievePageRequestCount(EntityManager em, DataTableRequest<T> page) throws ParseException {
+
+        log.debug("datatable request is {}", page);
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+
+        CriteriaQuery<Long> cqLong = cb.createQuery(Long.class);
+        Root<T> entity_ = cqLong.from(page.getClassType());
+        cqLong.select(cb.count(entity_));
+        if (page.getSelects() != null && page.getSelects().length > 0) {
+            for (String pathStr : page.getSelects()) {
+                String[] attributes = pathStr.split("\\.");
+                if (attributes != null && attributes.length > 1) {
+                    entity_.join(attributes[0], JoinType.LEFT);
+                }
+            }
+
+        }
+
+        Predicate predicate = cb.conjunction();
+
+        if (page.getColumns() != null) {
+            for (DataTableColumn column : page.getColumns()) {
+                if (column.getSearch() != null && column.getSearch().getValue() != null
+                        && !column.getSearch().getValue().trim().equals("")) {
+                    if ("olderThan".equals(column.getSearch().getOperatorType())) {
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+                        Date searchDate = sdf.parse(column.getSearch().getValue());
+                        predicate = cb.and(predicate, cb.lessThan(entity_.get(column.getName()), (Comparable) searchDate));
+                    } else if ("newerThan".equals(column.getSearch().getOperatorType())) {
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+                        Date searchDate = sdf.parse(column.getSearch().getValue());
+                        predicate = cb.and(predicate, cb.greaterThan(entity_.get(column.getName()), (Comparable) searchDate));
+                    } else if ("equalThan".equals(column.getSearch().getOperatorType())) {
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
+                        Date searchDate = sdf.parse(column.getSearch().getValue());
+                        predicate = cb.and(predicate, cb.equal(entity_.get(column.getName()), (Comparable) searchDate));
+                    } else {
+                        predicate = cb.and(predicate, cb.equal(entity_.get(column.getName()), column.getSearch().getValue()));
+                    }
+                }
+            }
+        }
+
+        // apply advanced filtration using RuleOrGroup object:
+        System.err.println("tableRequest.getAdvancedSearchQuery() [" + page.getAdvancedSearchQuery() + "]");
+        if (page.getAdvancedSearchQuery() != null) {
+            predicate = cb.and(predicate, JpaUtil.applyAdvanedSearchQuery(page.getAdvancedSearchQuery(), cb, entity_));
+            System.out.println();
+        }
+
+        cqLong.where(predicate);
+        Long allCount = em.createQuery(cqLong).getSingleResult();
+
+        return allCount;
+
+    }
+
 
 }

@@ -1,14 +1,18 @@
 package com.javatmp.module.user.controller;
 
 import com.javatmp.fw.domain.ResponseMessage;
+import com.javatmp.fw.domain.table.DataTableRequest;
+import com.javatmp.module.dms.entity.Document_;
+import com.javatmp.module.user.entity.User;
+import com.javatmp.module.user.entity.User_;
+import com.javatmp.module.user.repository.UserStatsRepository;
 import com.javatmp.module.user.service.UserStatsService;
+
+import java.text.ParseException;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -17,6 +21,16 @@ public class UserStatsController {
 
     @Autowired
     UserStatsService userStatsService;
+
+    @Autowired
+    UserStatsRepository userStatsRepository;
+
+    @PostMapping("/getUsersCount")
+    public Long getUsersCount(@RequestBody DataTableRequest tableRequest) throws ParseException {
+        log.debug("get user count by {}", tableRequest);
+        tableRequest.setClassType(User.class);
+        return userStatsRepository.retrievePageRequestCount(tableRequest);
+    }
 
     @PostMapping("/GetRegisteredUsersStatusesController")
     public List<Object[]> GetRegisteredUsersStatusesController() {

@@ -24,22 +24,17 @@ import java.text.ParseException;
  */
 @SpringBootTest
 @Slf4j
-public class UserRepositoryTest {
+public class UserCountTest {
 
     @Autowired
     UserRepository userRepository;
 
     @Test
-    void selectUsersPage() throws ParseException {
-        Pageable pageable = PageRequest.of(0, 10);
-
-        Page<User> page = this.userRepository.findAll(pageable);
-        log.info("Page getTotalElements is : {} ", page.getTotalElements());
-
+    void getUserCountTest() throws ParseException {
+        System.out.println("start get user count test");
         DataTableRequest<User> request = new DataTableRequest<>();
         Long count = this.userRepository.retrievePageRequestCount(request);
         log.info("User count : {} ", count);
-
     }
 
 }

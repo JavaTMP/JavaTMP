@@ -44,4 +44,27 @@ public class ExtendedJpaRepositoryImpl<T, ID extends Serializable>
         DataTableResults<T> result = JpaUtil.retrievePageRequestDetails(em, page);
         return result;
     }
+
+    public Long retrievePageRequestCount(DataTableRequest<T> page) throws ParseException {
+        if (page.getClassType() == null) {
+            page.setClassType(this.getDomainClass());
+        }
+
+//        if (page.getSelects() == null || page.getSelects().length == 0) {
+//            // populate from column names in the same order:
+//            if (page.getColumns() != null) {
+//                String[] selects = new String[page.getColumns().size()];
+//                for (int i = 0; i < page.getColumns().size(); i++) {
+//                    DataTableColumn column = page.getColumns().get(i);
+//                    selects[i] = column.getData();
+//                }
+//                page.setSelects(selects);
+//            }
+//        }
+
+        log.debug("Class is [{}] . select list to fetch are [{}]", page.getClassType(), Arrays.toString(page.getSelects()));
+        Long result = JpaUtil.retrievePageRequestCount(em, page);
+        return result;
+    }
+
 }

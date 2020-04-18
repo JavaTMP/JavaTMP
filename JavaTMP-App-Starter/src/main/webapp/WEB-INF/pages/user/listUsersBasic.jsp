@@ -38,7 +38,7 @@
             ${labels['page.btn.deactivateUser']}
         </button>
     </div>
-    <table cellspacing="0" class="table-bordered-primary table table-condensed table-bordered table-hover display nowrap" id="UsersListTableId" style="width:100%">
+    <table cellspacing="0" class="bg-white table table-condensed table-hover display nowrap" id="UsersListTableId" style="width:100%">
     </table>
     <div id="contextMenu" class="dropdown-menu" role="menu" style="display:none;position: fixed;" >
         <a tabindex="-1" class="dropdown-item" href="javascript:;" actionType="action-ref" action-ref-by-name="Add-New-User-Action">
@@ -112,11 +112,11 @@
                     disabled();
                 },
                 initComplete: function (settings, json) {
-                    var colHeader = this.api().columns(0).header();
-                    console.log(colHeader);
-                    var headerTag = $(colHeader).parents("thead");
-                    $(headerTag).addClass("thead-primary");
-                    console.log(headerTag);
+                    // var colHeader = this.api().columns(0).header();
+                    // console.log(colHeader);
+                    // var headerTag = $(colHeader).parents("thead");
+                    // $(headerTag).addClass("thead-primary");
+                    // console.log(headerTag);
                 },
                 columns: [
                     {title: '${labels['domain.user.id']}', data: 'id', name: "id"},

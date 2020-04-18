@@ -247,6 +247,11 @@ public class UserService {
         }
     }
 
+    public Long usersCount(DataTableRequest<User> tableRequest) throws ParseException {
+        tableRequest.setClassType(User.class);
+        return this.userRepository.retrievePageRequestCount(tableRequest);
+    }
+
     public DataTableResults<User> listAllUsers(DataTableRequest<User> tableRequest) throws ParseException {
 
         tableRequest.setSelects(new String[]{User_.ID, User_.USER_NAME, User_.FIRST_NAME,
