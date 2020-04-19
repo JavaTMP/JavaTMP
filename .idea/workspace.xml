@@ -32,23 +32,22 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b0388ad0-42fa-4e72-a3bd-c0b5e7ea0bdd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+    <list default="true" id="b0388ad0-42fa-4e72-a3bd-c0b5e7ea0bdd" name="Default Changelist" comment="support IntelliJ ide by adding specific files #318">
+      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2020-04-18T011405.404.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2020-04-18T011417.400.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2020-04-18T011447.400.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/2020-04-18T123720.400.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/http-client.cookies" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/httpRequests/http-requests-log.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/JavaTMP-App-Starter.iml" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/JavaTMP-App-Starter.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/java/com/javatmp/fw/data/jpa/repository/ExtendedJpaRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/java/com/javatmp/fw/data/jpa/repository/ExtendedJpaRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/java/com/javatmp/fw/data/jpa/repository/ExtendedJpaRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/java/com/javatmp/fw/data/jpa/repository/ExtendedJpaRepositoryImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/java/com/javatmp/fw/data/jpa/util/JpaUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/java/com/javatmp/fw/data/jpa/util/JpaUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/java/com/javatmp/module/user/controller/UserActivityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/java/com/javatmp/module/user/controller/UserActivityController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/java/com/javatmp/module/user/controller/UserStatsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/java/com/javatmp/module/user/controller/UserStatsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/java/com/javatmp/module/user/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/java/com/javatmp/module/user/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/resources/log4j2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/resources/log4j2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/resources/static/assets/app/js/javatmp.plugins.wrapper.js" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/resources/static/assets/app/js/javatmp.plugins.wrapper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/home.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/user/listUsersBasic.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/user/listUsersBasic.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/test/java/com/javatmp/user/repository/UserRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/test/java/com/javatmp/user/repository/UserRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/TodayVisitUserCardlet.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/TodayVisitUserCardlet.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/TodayVisitUserPieChartCardletBody.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/TodayVisitUserPieChartCardletBody.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/UserCountCardletBody.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/UserCountCardletBody.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/UserNeverAccessYetCardlet.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/UserNeverAccessYetCardlet.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/UserPagesView.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/UserPagesView.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/UsersLocationsInTheWorldCardletBody.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/UsersLocationsInTheWorldCardletBody.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/web/assets/src/js-src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/web/assets/src/js-src/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,11 +64,18 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="spring-beans.schema" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
   </component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
@@ -100,6 +106,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="DatabaseDriversLRU" value="mysql" />
     <property name="ExpandSpringBootJavaOptionsPanel" value="true" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
@@ -119,10 +126,11 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
+    <property name="settings.editor.selected.configurable" value="database.main" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.javatmp.jpa" />
       <recent name="com.javatmp.user.repository" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
@@ -183,54 +191,47 @@
       <command value="mvn spring-boot:run" />
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.UserRepositoryTest.selectUsersPage">
-    <configuration name="generated-requests#1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" path="$APPLICATION_CONFIG_DIR$/scratches/generated-requests.http" runType="Run single request">
-      <method v="2" />
-    </configuration>
-    <configuration name="UserCountTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.accountServiceTests.getChartOfAccountsReport">
+    <configuration name="EntityHTMLFormGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.javatmp.jpa.EntityHTMLFormGenerator" />
       <module name="JavaTMP-App-Starter" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.javatmp.user.repository.*" />
+          <option name="PATTERN" value="com.javatmp.jpa.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.javatmp.user.repository" />
-      <option name="MAIN_CLASS_NAME" value="com.javatmp.user.repository.UserCountTest" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JavaTmpAppStarterApplicationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="JavaTMP-App-Starter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.javatmp.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.javatmp" />
+      <option name="MAIN_CLASS_NAME" value="com.javatmp.JavaTmpAppStarterApplicationTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
         <option name="BSP.BeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserCountTest.getUserCountTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="JavaTmpAppStarterApplicationTest.test_db" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="JavaTMP-App-Starter" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.javatmp.user.repository.*" />
+          <option name="PATTERN" value="com.javatmp.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.javatmp.user.repository" />
-      <option name="MAIN_CLASS_NAME" value="com.javatmp.user.repository.UserCountTest" />
-      <option name="METHOD_NAME" value="getUserCountTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-        <option name="BSP.BeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UserRepositoryTest.selectUsersPage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="JavaTMP-App-Starter" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.javatmp.user.repository.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.javatmp.user.repository" />
-      <option name="MAIN_CLASS_NAME" value="com.javatmp.user.repository.UserRepositoryTest" />
-      <option name="METHOD_NAME" value="selectUsersPage" />
+      <option name="PACKAGE_NAME" value="com.javatmp" />
+      <option name="MAIN_CLASS_NAME" value="com.javatmp.JavaTmpAppStarterApplicationTest" />
+      <option name="METHOD_NAME" value="test_db" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -239,6 +240,38 @@
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BSP.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="accountServiceTests.getChartOfAccountsReport" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="JavaTMP-App-Starter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.javatmp.accounting.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.javatmp.accounting" />
+      <option name="MAIN_CLASS_NAME" value="com.javatmp.accounting.accountServiceTests" />
+      <option name="METHOD_NAME" value="getChartOfAccountsReport" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+        <option name="BSP.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="com.javatmp.userstats in JavaTMP-App-Starter" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="JavaTMP-App-Starter" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.javatmp.userstats.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.javatmp.userstats" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
         <option name="BSP.BeforeRunTask" enabled="true" />
@@ -253,31 +286,21 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="test" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <list>
-      <item itemvalue="HTTP Request.generated-requests#1" />
-      <item itemvalue="JUnit.UserCountTest" />
-      <item itemvalue="JUnit.UserCountTest.getUserCountTest" />
-      <item itemvalue="JUnit.UserRepositoryTest.selectUsersPage" />
-      <item itemvalue="npm.test" />
       <item itemvalue="Spring Boot.JavaTmpAppStarterApplication" />
+      <item itemvalue="Application.EntityHTMLFormGenerator" />
+      <item itemvalue="JUnit.JavaTmpAppStarterApplicationTest.test_db" />
+      <item itemvalue="JUnit.JavaTmpAppStarterApplicationTest" />
+      <item itemvalue="JUnit.com.javatmp.userstats in JavaTMP-App-Starter" />
+      <item itemvalue="JUnit.accountServiceTests.getChartOfAccountsReport" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.UserRepositoryTest.selectUsersPage" />
-        <item itemvalue="JUnit.UserCountTest.getUserCountTest" />
-        <item itemvalue="HTTP Request.generated-requests#1" />
-        <item itemvalue="JUnit.UserCountTest" />
-        <item itemvalue="npm.test" />
+        <item itemvalue="JUnit.accountServiceTests.getChartOfAccountsReport" />
+        <item itemvalue="JUnit.com.javatmp.userstats in JavaTMP-App-Starter" />
+        <item itemvalue="JUnit.JavaTmpAppStarterApplicationTest" />
+        <item itemvalue="JUnit.JavaTmpAppStarterApplicationTest.test_db" />
+        <item itemvalue="Application.EntityHTMLFormGenerator" />
       </list>
     </recent_temporary>
   </component>
@@ -305,7 +328,9 @@
       <workItem from="1587051488190" duration="1013000" />
       <workItem from="1587052614686" duration="9894000" />
       <workItem from="1587153197881" duration="20699000" />
-      <workItem from="1587227541725" duration="5259000" />
+      <workItem from="1587227541725" duration="6077000" />
+      <workItem from="1587241852708" duration="884000" />
+      <workItem from="1587311581611" duration="13575000" />
     </task>
     <task id="LOCAL-00001" summary="support IntelliJ ide by adding specific files">
       <created>1586983487712</created>
@@ -321,7 +346,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586986060571</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="support for cardlets in home page and support count jpa operation">
+      <created>1587241446880</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1587241446880</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -342,17 +374,18 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="support IntelliJ ide by adding specific files" />
     <MESSAGE value="support IntelliJ ide by adding specific files #318" />
-    <option name="LAST_COMMIT_MESSAGE" value="support IntelliJ ide by adding specific files #318" />
+    <MESSAGE value="support for cardlets in home page and support count jpa operation" />
+    <option name="LAST_COMMIT_MESSAGE" value="support for cardlets in home page and support count jpa operation" />
   </component>
   <component name="WindowStateProjectService">
     <state x="388" y="192" key="#Console" timestamp="1586981394570">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="388" y="192" key="#Console/0.0.1536.824@0.0.1536.824" timestamp="1586981394570" />
-    <state x="552" y="290" key="#Notifications" timestamp="1587227600824">
+    <state x="552" y="290" key="#Notifications" timestamp="1587311594675">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="552" y="290" key="#Notifications/0.0.1536.824@0.0.1536.824" timestamp="1587227600824" />
+    <state x="552" y="290" key="#Notifications/0.0.1536.824@0.0.1536.824" timestamp="1587311594675" />
     <state x="362" y="54" key="#Plugins" timestamp="1587153301514">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -365,38 +398,38 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="308" y="28" key="#UserCountTest/0.0.1536.824@0.0.1536.824" timestamp="1587063472756" />
-    <state x="184" y="46" width="1098" height="688" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587159297659">
+    <state x="202" y="68" width="1098" height="688" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587337726605">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="184" y="46" width="1098" height="688" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1587159297659" />
+    <state x="202" y="68" width="1098" height="688" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1587337726605" />
     <state x="399" y="102" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog" timestamp="1586980824584">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="399" y="102" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.0.1536.824@0.0.1536.824" timestamp="1586980824584" />
-    <state x="264" y="0" key="CommitChangelistDialog2" timestamp="1586986059562">
+    <state x="264" y="0" key="CommitChangelistDialog2" timestamp="1587242737768">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="264" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1586986059562" />
+    <state x="264" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1587242737768" />
     <state x="475" y="159" key="FileChooserDialogImpl" timestamp="1587205881134">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="475" y="159" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1587205881134" />
-    <state width="1493" height="237" key="GridCell.Tab.0.bottom" timestamp="1587241011123">
+    <state width="1493" height="273" key="GridCell.Tab.0.bottom" timestamp="1587337673660">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="237" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587241011123" />
-    <state width="1493" height="237" key="GridCell.Tab.0.center" timestamp="1587241011123">
+    <state width="1493" height="273" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587337673660" />
+    <state width="1493" height="273" key="GridCell.Tab.0.center" timestamp="1587337673659">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="237" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1587241011123" />
-    <state width="1493" height="237" key="GridCell.Tab.0.left" timestamp="1587241011123">
+    <state width="1493" height="273" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1587337673659" />
+    <state width="1493" height="273" key="GridCell.Tab.0.left" timestamp="1587337673659">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="237" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1587241011123" />
-    <state width="1493" height="237" key="GridCell.Tab.0.right" timestamp="1587241011123">
+    <state width="1493" height="273" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1587337673659" />
+    <state width="1493" height="273" key="GridCell.Tab.0.right" timestamp="1587337673660">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="237" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1587241011123" />
+    <state width="1493" height="273" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1587337673660" />
     <state width="1493" height="237" key="GridCell.Tab.1.bottom" timestamp="1587198324339">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -421,34 +454,38 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="379" y="234" key="Registry/0.0.1536.824@0.0.1536.824" timestamp="1587160169324" />
-    <state x="485" y="116" key="RollbackChangesDialog" timestamp="1587154703786">
+    <state x="485" y="116" key="RollbackChangesDialog" timestamp="1587315253870">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="485" y="116" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1587154703786" />
-    <state x="126" y="27" width="1036" height="797" key="SettingsEditor" timestamp="1587228344241">
+    <state x="485" y="116" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1587315253870" />
+    <state x="209" y="80" width="1036" height="726" key="SettingsEditor" timestamp="1587337704979">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="126" y="27" width="1036" height="797" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1587228344241" />
+    <state x="209" y="80" width="1036" height="726" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1587337704979" />
     <state x="420" y="176" key="SpringBootCustomization" timestamp="1587160911229">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="420" y="176" key="SpringBootCustomization/0.0.1536.824@0.0.1536.824" timestamp="1587160911229" />
-    <state x="294" y="165" key="Vcs.Push.Dialog.v2" timestamp="1586986066951">
+    <state x="299" y="164" key="Vcs.Push.Dialog.v2" timestamp="1587241464024">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="294" y="165" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1586986066951" />
-    <state x="527" y="294" width="660" height="530" key="find.popup" timestamp="1587153524640">
+    <state x="299" y="164" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1587241464024" />
+    <state x="418" y="168" width="660" height="530" key="find.popup" timestamp="1587314888955">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="527" y="294" width="660" height="530" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1587153524640" />
-    <state x="407" y="126" width="672" height="677" key="run.anything.popup" timestamp="1587235298647">
+    <state x="418" y="168" width="660" height="530" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1587314888955" />
+    <state x="487" y="315" width="608" height="279" key="org.intellij.images.editor.actions.BackgroundImageDialog" timestamp="1587241713876">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="407" y="126" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1587235298647" />
-    <state x="472" y="260" width="672" height="678" key="search.everywhere.popup" timestamp="1587236232589">
+    <state x="487" y="315" width="608" height="279" key="org.intellij.images.editor.actions.BackgroundImageDialog/0.0.1536.824@0.0.1536.824" timestamp="1587241713876" />
+    <state x="407" y="126" width="672" height="677" key="run.anything.popup" timestamp="1587334155270">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="472" y="260" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1587236232589" />
+    <state x="407" y="126" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1587334155270" />
+    <state x="427" y="91" width="672" height="678" key="search.everywhere.popup" timestamp="1587336670915">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="427" y="91" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1587336670915" />
     <state x="380" y="112" key="spring file set editor" timestamp="1587160849222">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

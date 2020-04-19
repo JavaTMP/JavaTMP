@@ -26,6 +26,7 @@
                     }
                 },
                 hover: true,
+                // todo: parameterize static template color from main classes
                 color: ['#007bff', '#dae0e5'],
                 series: [
                     {

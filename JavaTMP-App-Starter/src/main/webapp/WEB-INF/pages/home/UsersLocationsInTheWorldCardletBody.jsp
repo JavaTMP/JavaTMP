@@ -84,6 +84,7 @@
             javatmp.plugins.ajaxJsonAction({
                 url: javatmp.settings.contextPath + "/stats/GetUsersLocationsCountController",
                 success: function (remoteContent) {
+                    // alert(JSON.stringify(remoteContent));
                     var dataArray = remoteContent;
                     var outputCountries = [];
                     var maxValue = 0;

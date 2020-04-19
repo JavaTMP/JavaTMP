@@ -110,14 +110,16 @@ public class JpaUtil {
 
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             SimpleDateFormat dateTimeFormatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-
+            String oldValue = null;
             if (type.equals("date") && !opt.equals("between") && !opt.equals("not_between") && !opt.equals("is_null") && !opt.equals("is_not_null")) {
+                oldValue = value.toString();
                 value = sdf.parse(value.toString());
             }
             if (type.equals("datetime") && !opt.equals("between") && !opt.equals("not_between") && !opt.equals("is_null") && !opt.equals("is_not_null")) {
+                oldValue = value.toString();
                 value = dateTimeFormatter.parse(value.toString());
             }
-
+            log.debug("old value {}, new value {}", oldValue, value);
             if (opt.equals("equal")) {
                 retPredicate = cb.equal(convertStringToPath(from, ruleOrGroup.getField()), value);
             } else if (opt.equals("not_equal")) {

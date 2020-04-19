@@ -223,12 +223,13 @@
             });
         });
 
+        // todo: move clear input button mini-plugin
         $('#filter-menu-id').on('input propertychange', function () {
             var $this = $(this);
             var visible = Boolean($this.val());
             $this.siblings('.form-control-clear').toggleClass('d-none', !visible);
         }).trigger('propertychange').trigger('keyup');
-
+        // todo: move clear input button mini-plugin
         $('.form-control-clear').click(function () {
             $(this).siblings('input[type="text"]').val('')
                     .trigger('propertychange').trigger('keyup').focus();

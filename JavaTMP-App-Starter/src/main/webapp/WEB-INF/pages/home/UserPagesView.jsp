@@ -8,6 +8,16 @@
         <span class="d-block display-4 counter all_totalCount">0</span>
     </div>
 </div>
+<div class="d-flex mt-3 border-top">
+    <div class="flex-fill text-center">
+        <a href="javascript:;" class="d-flex text-white p-2">
+            ${labels['global.viewDetails']}
+            <span class="ml-auto">
+                <i class="fa fa-arrow-circle-next"></i>
+            </span>
+        </a>
+    </div>
+</div>
 <script type="text/javascript">
     // get cardletId from request parameter:
     jQuery(function ($) {

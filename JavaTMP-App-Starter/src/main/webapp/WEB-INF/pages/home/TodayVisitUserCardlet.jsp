@@ -5,6 +5,16 @@
         <span class="d-block display-4 counter userStatusPieChartCard_totalCount">0</span>
     </div>
 </div>
+<div class="d-flex mt-3 border-top">
+    <div class="flex-fill text-center">
+        <a href="javascript:;" class="d-flex text-white p-2">
+            ${labels['global.viewDetails']}
+            <span class="ml-auto">
+                <i class="fa fa-arrow-circle-next"></i>
+            </span>
+        </a>
+    </div>
+</div>
 <script type="text/javascript">
     // get cardletId from request parameter:
     jQuery(function ($) {
@@ -12,6 +22,7 @@
         var cardletElement = $("#" + currentCardletId);
         cardletElement.on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
             javatmp.plugins.blockWrapper(cardletElement);
+            // alert(moment().utc().locale("ar").format("LLLL"));
             javatmp.plugins.ajaxJsonAction({
                 data: JSON.stringify({
                     advancedSearchQuery:{
@@ -21,7 +32,7 @@
                                 "field": "lastAccessTime",
                                 "type": "date",
                                 "operator": "greater_or_equal",
-                                "value": "18/04/2020"
+                                "value": moment.utc().format("DD/MM/YYYY")
                             }
                         ]
                     }

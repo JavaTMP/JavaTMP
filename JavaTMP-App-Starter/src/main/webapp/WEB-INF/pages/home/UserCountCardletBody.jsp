@@ -1,8 +1,18 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row d-flex align-items-center">
     <div class="col-12 text-center">
         <span class="d-block display-4 counter userStatusPieChartCard_totalCount">0</span>
+    </div>
+</div>
+<div class="d-flex mt-3 border-top">
+    <div class="flex-fill text-center">
+        <a href="javascript:;" class="d-flex text-white p-2">
+            ${labels['global.viewDetails']}
+            <span class="ml-auto">
+                <i class="fa fa-arrow-circle-next"></i>
+            </span>
+        </a>
     </div>
 </div>
 <script type="text/javascript">
