@@ -1,5 +1,5 @@
 ---
-title: Java Bootstrap Template Version 0.0.15 (Current Development Version)
+title: Java Bootstrap Template Version 0.0.15 (published on April 22, 2020)
 ---
 # {{ page.title }}
 
