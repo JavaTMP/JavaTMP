@@ -3,6 +3,10 @@ title: Java Bootstrap Template Version 0.0.15 (Current Development Version)
 ---
 # {{ page.title }}
 
+## on 
+- Add more cardlet tags to home page
+- Prepare projects for release 0.0.15
+
 ## e22385a on Apr 12, 2020, 6:05 AM GMT+4
 - Update the following dependencies in package.json:
     - echarts from 4.6.0 to 4.7.0

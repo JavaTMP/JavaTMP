@@ -202,7 +202,7 @@
         </div>
     </div>
     <div class="form-row">
-        <div class="col-md">
+        <div class="col-md-6">
             <div class="card shadow mb-3">
                 <div class="card-header">
                     Static USA
@@ -219,7 +219,7 @@
                 <div class="card-body p-0"></div>
             </div>
         </div>
-        <div class="col-md">
+        <div class="col-md-6">
             <div class="card shadow mb-3">
                 <div class="card-header">
                     Static UAE

@@ -48,7 +48,7 @@
                                 "field": "creationDate",
                                 "type": "date",
                                 "operator": "greater_or_equal",
-                                "value": "18/04/2020"
+                                "value": moment.utc().format("DD/MM/YYYY")
                             }
                         ]
                     }

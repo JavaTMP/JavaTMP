@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row">
     <div class="col-lg-12">
-        <div class="map" style="min-height: 500px"></div>
+        <div class="map" style="min-height: 300px"></div>
     </div>
 </div>
 <%--https://code.highcharts.com/mapdata/--%>
@@ -48,7 +48,7 @@
                     min: (1000000),
                     max: (13000000),
                     inRange: {
-                        color: ['#ffffff', '#F6FFE8', '#C3FFB5', '#90FF82', '#5DD84F']
+                        color: ['#ffffff', '#007bff', '#0048CC', '#001599', '#000066']
                     },
                     text: ['High', 'Low'],           // 文本，默认为数值文本
                     calculable: true
@@ -101,8 +101,10 @@
 
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
-                $(chartDiv).css({"width": "100%"});
-                myChart.resize();
+                javatmp.util.waitForFinalEvent(function () {
+                    $(chartDiv).css({"width": "100%"});
+                    myChart.resize();
+                }, 200, "@uae-map");
             });
 
             containerCard.on(javatmp.settings.cardFullscreenCompress, function (event, card) {

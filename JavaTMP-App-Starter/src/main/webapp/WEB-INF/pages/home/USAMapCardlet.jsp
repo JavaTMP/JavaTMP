@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row">
     <div class="col-lg-12">
-        <div class="map" style="min-height: 500px"></div>
+        <div class="map" style="min-height: 300px"></div>
     </div>
 </div>
 <script type="text/javascript">
@@ -107,7 +107,7 @@
                                 {name: 'Alaska', value: 731449},
                                 {name: 'Arizona', value: 6553255},
                                 {name: 'Arkansas', value: 2949131},
-                                {name: 'California', value: 38041430},
+                                {name: 'California', value: 8041430},
                                 {name: 'Colorado', value: 5187582},
                                 {name: 'Connecticut', value: 3590347},
                                 {name: 'Delaware', value: 917092},
@@ -164,8 +164,10 @@
             });
 
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
-                $(chartDiv).css({"width": "100%"});
-                myChart.resize();
+                javatmp.util.waitForFinalEvent(function () {
+                    $(chartDiv).css({"width": "100%"});
+                    myChart.resize();
+                }, 200, "@usa-map");
             });
 
             containerCard.on(javatmp.settings.cardFullscreenCompress, function (event, card) {
