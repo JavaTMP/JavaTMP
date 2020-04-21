@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.15 (Current Development Version)
 ---
 # {{ page.title }}
 
-## on 
+## 9c2f726 on Apr 22, 2020, 2:22 AM GMT+4 
 - Add more cardlet tags to home page
 - Prepare projects for release 0.0.15
 

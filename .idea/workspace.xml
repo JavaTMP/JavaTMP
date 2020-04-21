@@ -33,11 +33,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b0388ad0-42fa-4e72-a3bd-c0b5e7ea0bdd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/UAEMapCardlet.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/UAEMapCardlet.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/USAMapCardlet.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/USAMapCardlet.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/UserPagesView.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/UserPagesView.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/home.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/pages/versions/java-bootstrap-template-version-0-0-15.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/pages/versions/java-bootstrap-template-version-0-0-15.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -326,7 +321,7 @@
       <workItem from="1587241852708" duration="884000" />
       <workItem from="1587311581611" duration="13575000" />
       <workItem from="1587411106803" duration="15871000" />
-      <workItem from="1587488303548" duration="4683000" />
+      <workItem from="1587488303548" duration="4870000" />
     </task>
     <task id="LOCAL-00001" summary="support IntelliJ ide by adding specific files">
       <created>1586983487712</created>
@@ -370,7 +365,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587433096810</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="prepare release 0.0.15">
+      <created>1587507752785</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1587507752785</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -395,7 +397,8 @@
     <MESSAGE value="support for cardlets in home page and support count jpa operation" />
     <MESSAGE value="support IntelliJ ide by adding specific files #318" />
     <MESSAGE value="add more cardlet and map" />
-    <option name="LAST_COMMIT_MESSAGE" value="add more cardlet and map" />
+    <MESSAGE value="prepare release 0.0.15" />
+    <option name="LAST_COMMIT_MESSAGE" value="prepare release 0.0.15" />
   </component>
   <component name="WindowStateProjectService">
     <state x="388" y="192" key="#Console" timestamp="1586981394570">
@@ -426,10 +429,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="399" y="102" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.0.1536.824@0.0.1536.824" timestamp="1586980824584" />
-    <state x="264" y="0" key="CommitChangelistDialog2" timestamp="1587433095882">
+    <state x="264" y="0" key="CommitChangelistDialog2" timestamp="1587507751044">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="264" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1587433095882" />
+    <state x="264" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1587507751044" />
     <state x="475" y="159" key="FileChooserDialogImpl" timestamp="1587205881134">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -486,10 +489,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="420" y="176" key="SpringBootCustomization/0.0.1536.824@0.0.1536.824" timestamp="1587160911229" />
-    <state x="299" y="164" key="Vcs.Push.Dialog.v2" timestamp="1587433098985">
+    <state x="299" y="164" key="Vcs.Push.Dialog.v2" timestamp="1587507754961">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="299" y="164" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1587433098985" />
+    <state x="299" y="164" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1587507754961" />
     <state x="418" y="168" width="660" height="530" key="find.popup" timestamp="1587314888955">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
