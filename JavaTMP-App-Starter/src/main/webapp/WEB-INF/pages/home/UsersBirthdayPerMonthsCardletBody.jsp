@@ -24,10 +24,10 @@
             var barChartOption = {
                 grid: {
                     show: false,
-                    top: 30,
+                    top: 20,
                     bottom: 30,
-                    left: 30,
-                    right: 30
+                    left: 35,
+                    right: 5
                 },
                 title: {
                     show: false,

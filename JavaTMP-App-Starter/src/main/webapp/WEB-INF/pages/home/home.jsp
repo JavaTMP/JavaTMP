@@ -68,7 +68,7 @@
     </div>
     <div class="form-row">
         <div class="col-xl-3 col-lg-6 col-md-6">
-            <div class="card shadow mb-3">
+            <div class="card shadow mb-3 bg-light text-dark">
                 <div class="card-header">
                     ${labels['page.home.RegisteredUsers']}
                     <div class="options float-right">
@@ -92,7 +92,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-md-6">
-            <div class="card shadow mb-3">
+            <div class="card shadow mb-3 bg-info">
                 <div class="card-header">
                     ${labels['page.home.VisitorsToday']}
                     <div class="options float-right">
@@ -116,7 +116,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-md-6">
-            <div class="card shadow mb-3">
+            <div class="card shadow mb-3 bg-secondary text-white">
                 <div class="card-header">
                     ${labels['page.home.PageViewsPerHour']}
                     <div class="options float-right">
@@ -140,7 +140,7 @@
             </div>
         </div>
         <div class="col-xl-3 col-lg-6 col-md-6">
-            <div class="card shadow mb-3">
+            <div class="card shadow mb-3 bg-dark text-white">
                 <div class="card-header">
                     ${labels['page.home.LoadTimePerHour']}
                     <div class="options float-right">
@@ -190,6 +190,42 @@
                     <div class="options float-right">
                         <a load-on-starup="true"
                            href="${pageContext.request.contextPath}/pages/home/UsersBirthdayPerMonthsCardletBody"
+                           class="reload"
+                           actionableWrapperType="ajax-area-in-card">
+                            <i class="fa fa-sync"></i>
+                        </a>
+                        <a href="javascript:;" class="fullscreen"><i class=" fa fa-expand"></i></a>
+                    </div>
+                </div>
+                <div class="card-body p-0"></div>
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md">
+            <div class="card shadow mb-3">
+                <div class="card-header">
+                    Static USA
+                    <div class="options float-right">
+                        <a load-on-starup="true"
+                           href="${pageContext.request.contextPath}/pages/home/USAMapCardlet"
+                           class="reload"
+                           actionableWrapperType="ajax-area-in-card">
+                            <i class="fa fa-sync"></i>
+                        </a>
+                        <a href="javascript:;" class="fullscreen"><i class=" fa fa-expand"></i></a>
+                    </div>
+                </div>
+                <div class="card-body p-0"></div>
+            </div>
+        </div>
+        <div class="col-md">
+            <div class="card shadow mb-3">
+                <div class="card-header">
+                    Static UAE
+                    <div class="options float-right">
+                        <a load-on-starup="true"
+                           href="${pageContext.request.contextPath}/pages/home/UAEMapCardlet"
                            class="reload"
                            actionableWrapperType="ajax-area-in-card">
                             <i class="fa fa-sync"></i>
