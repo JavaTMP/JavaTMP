@@ -33,7 +33,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b0388ad0-42fa-4e72-a3bd-c0b5e7ea0bdd" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/docs/pages/versions/java-bootstrap-template-version-0-0-15.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/pages/versions/java-bootstrap-template-version-0-0-15.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/JavaTMP-App-Starter-0.0.14.war" beforeDir="false" afterPath="$PROJECT_DIR$/dist/JavaTMP-App-Starter-0.0.14.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javatmp-java.zip" beforeDir="false" afterPath="$PROJECT_DIR$/dist/javatmp-java.zip" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -181,19 +184,6 @@
     </option>
   </component>
   <component name="RunManager" selected="Spring Boot.JavaTmpAppStarterApplication">
-    <configuration name="EntityHTMLFormGenerator" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.javatmp.jpa.EntityHTMLFormGenerator" />
-      <module name="JavaTMP-App-Starter" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.javatmp.jpa.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="JavaTmpAppStarterApplicationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="JavaTMP-App-Starter" />
       <extension name="coverage">
@@ -275,21 +265,32 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="default" type="js.build_tools.gulp" temporary="true">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile>$PROJECT_DIR$/gulpfile.js</gulpfile>
+      <tasks>
+        <task>default</task>
+      </tasks>
+      <arguments />
+      <envs />
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Application.EntityHTMLFormGenerator" />
       <item itemvalue="JUnit.JavaTmpAppStarterApplicationTest.test_db" />
       <item itemvalue="JUnit.JavaTmpAppStarterApplicationTest" />
       <item itemvalue="JUnit.com.javatmp.userstats in JavaTMP-App-Starter" />
       <item itemvalue="JUnit.accountServiceTests.getChartOfAccountsReport" />
       <item itemvalue="Spring Boot.JavaTmpAppStarterApplication" />
+      <item itemvalue="Gulp.js.default" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gulp.js.default" />
         <item itemvalue="JUnit.accountServiceTests.getChartOfAccountsReport" />
         <item itemvalue="JUnit.com.javatmp.userstats in JavaTMP-App-Starter" />
         <item itemvalue="JUnit.JavaTmpAppStarterApplicationTest" />
         <item itemvalue="JUnit.JavaTmpAppStarterApplicationTest.test_db" />
-        <item itemvalue="Application.EntityHTMLFormGenerator" />
       </list>
     </recent_temporary>
   </component>
@@ -321,7 +322,7 @@
       <workItem from="1587241852708" duration="884000" />
       <workItem from="1587311581611" duration="13575000" />
       <workItem from="1587411106803" duration="15871000" />
-      <workItem from="1587488303548" duration="4870000" />
+      <workItem from="1587488303548" duration="6524000" />
     </task>
     <task id="LOCAL-00001" summary="support IntelliJ ide by adding specific files">
       <created>1586983487712</created>
@@ -372,7 +373,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587507752785</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="doc prepare release 0.0.15">
+      <created>1587507913461</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1587507913461</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -398,7 +406,8 @@
     <MESSAGE value="support IntelliJ ide by adding specific files #318" />
     <MESSAGE value="add more cardlet and map" />
     <MESSAGE value="prepare release 0.0.15" />
-    <option name="LAST_COMMIT_MESSAGE" value="prepare release 0.0.15" />
+    <MESSAGE value="doc prepare release 0.0.15" />
+    <option name="LAST_COMMIT_MESSAGE" value="doc prepare release 0.0.15" />
   </component>
   <component name="WindowStateProjectService">
     <state x="388" y="192" key="#Console" timestamp="1586981394570">
@@ -429,30 +438,30 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="399" y="102" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.0.1536.824@0.0.1536.824" timestamp="1586980824584" />
-    <state x="264" y="0" key="CommitChangelistDialog2" timestamp="1587507751044">
+    <state x="264" y="0" key="CommitChangelistDialog2" timestamp="1587507912577">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="264" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1587507751044" />
+    <state x="264" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1587507912577" />
     <state x="475" y="159" key="FileChooserDialogImpl" timestamp="1587205881134">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="475" y="159" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1587205881134" />
-    <state width="1493" height="219" key="GridCell.Tab.0.bottom" timestamp="1587490049364">
+    <state width="1493" height="219" key="GridCell.Tab.0.bottom" timestamp="1587509060210">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="219" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587490049364" />
-    <state width="1493" height="219" key="GridCell.Tab.0.center" timestamp="1587490049363">
+    <state width="1493" height="219" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587509060210" />
+    <state width="1493" height="219" key="GridCell.Tab.0.center" timestamp="1587509060210">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="219" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1587490049363" />
-    <state width="1493" height="219" key="GridCell.Tab.0.left" timestamp="1587490049363">
+    <state width="1493" height="219" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1587509060210" />
+    <state width="1493" height="219" key="GridCell.Tab.0.left" timestamp="1587509060210">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="219" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1587490049363" />
-    <state width="1493" height="219" key="GridCell.Tab.0.right" timestamp="1587490049364">
+    <state width="1493" height="219" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1587509060210" />
+    <state width="1493" height="219" key="GridCell.Tab.0.right" timestamp="1587509060210">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="219" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1587490049364" />
+    <state width="1493" height="219" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1587509060210" />
     <state width="1493" height="219" key="GridCell.Tab.1.bottom" timestamp="1587490049364">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -489,10 +498,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="420" y="176" key="SpringBootCustomization/0.0.1536.824@0.0.1536.824" timestamp="1587160911229" />
-    <state x="299" y="164" key="Vcs.Push.Dialog.v2" timestamp="1587507754961">
+    <state x="299" y="164" key="Vcs.Push.Dialog.v2" timestamp="1587507915706">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="299" y="164" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1587507754961" />
+    <state x="299" y="164" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1587507915706" />
     <state x="418" y="168" width="660" height="530" key="find.popup" timestamp="1587314888955">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
