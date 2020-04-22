@@ -172,7 +172,7 @@
 
             containerCard.on(javatmp.settings.cardFullscreenCompress, function (event, card) {
                 // when card compress by pressing the top right tool button
-                $(chartDiv).css({"minHeight": 500});
+                $(chartDiv).css({"minHeight": 300});
                 myChart.resize();
             });
             containerCard.on(javatmp.settings.cardFullscreenExpand, function (event, card) {

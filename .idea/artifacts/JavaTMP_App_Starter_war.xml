@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="JavaTMP-App-Starter-0.0.14.war">
+    <root id="archive" name="JavaTMP-App-Starter-0.0.15.war">
       <element id="artifact" artifact-name="JavaTMP-App-Starter:war exploded" />
     </root>
   </artifact>

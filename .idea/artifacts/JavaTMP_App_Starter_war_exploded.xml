@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="JavaTMP-App-Starter:war exploded">
-    <output-path>$PROJECT_DIR$/JavaTMP-App-Starter/target/JavaTMP-App-Starter-0.0.14</output-path>
+    <output-path>$PROJECT_DIR$/JavaTMP-App-Starter/target/JavaTMP-App-Starter-0.0.15</output-path>
     <properties id="maven-jee-properties">
       <options>
         <exploded>true</exploded>
@@ -94,7 +94,7 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/JavaTMP-App-Starter/target/JavaTMP-App-Starter-0.0.14/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/JavaTMP-App-Starter/target/JavaTMP-App-Starter-0.0.15/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="JavaTMP-App-Starter/web/Web" />
     </root>

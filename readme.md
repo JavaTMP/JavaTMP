@@ -39,7 +39,9 @@ You can run the following commands to compile and generate resources:
 ```
 npm install (Will install all Node.js dependencies mentioned in package.json file)
 gulp (Re-generate all front-end dependencies)
+mvn spring-boot:run (run a development version)
 maven clean package (clean and generate war file in ./target folder)
+java -jar -Dserver.port=80 target/JavaTMP-App-Starter-0.0.${version}.war
 ```
 
 ## Copyright and License
