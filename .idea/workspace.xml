@@ -32,13 +32,62 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b0388ad0-42fa-4e72-a3bd-c0b5e7ea0bdd" name="Default Changelist" comment="prepare development new version 0.0.16">
+    <list default="true" id="b0388ad0-42fa-4e72-a3bd-c0b5e7ea0bdd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/artifacts/JavaTMP_App_Starter_war.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/JavaTMP_App_Starter_war.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/artifacts/JavaTMP_App_Starter_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/JavaTMP_App_Starter_war_exploded.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_10_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_10_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_10_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_10_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_10_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_10_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_activation_jakarta_activation_api_1_2_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_xml_bind_jakarta_xml_bind_api_2_3_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_10_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_agent_1_10_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_9_0_30.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_9_0_30.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_jasper_9_0_30.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_9_0_30.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_core_5_4_10_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_jpamodelgen_5_4_10_Final.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jsoup_jsoup_1_12_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_18_10.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_2_2_4_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_2_2_4_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_devtools_2_2_4_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_2_2_4_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_aop_2_2_4_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_jpa_2_2_4_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_jdbc_2_2_4_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_2_4_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_log4j2_2_2_4_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_security_2_2_4_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_test_2_2_4_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_2_2_4_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_validation_2_2_4_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_2_4_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_2_2_4_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_autoconfigure_2_2_4_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_commons_2_2_4_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_config_5_2_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_web_5_2_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_5_2_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aspects_5_2_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_5_2_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_5_2_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_5_2_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jcl_5_2_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_5_2_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_orm_5_2_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_5_2_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_5_2_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_5_2_3_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_xmlunit_xmlunit_core_2_6_3.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/UAEMapCardlet.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/UAEMapCardlet.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/USAMapCardlet.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/USAMapCardlet.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/JavaTMP-App-Starter.iml" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/JavaTMP-App-Starter.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/pages/versions/java-bootstrap-template-version-0-0-16.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/pages/versions/java-bootstrap-template-version-0-0-16.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -182,6 +231,7 @@
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
+      <command value="mvn versions:display-dependency-updates" />
       <command value="mvn spring-boot:run" />
     </option>
   </component>
@@ -319,7 +369,7 @@
       <workItem from="1587311581611" duration="13575000" />
       <workItem from="1587411106803" duration="15871000" />
       <workItem from="1587488303548" duration="9449000" />
-      <workItem from="1587562195933" duration="3902000" />
+      <workItem from="1587562195933" duration="9117000" />
     </task>
     <task id="LOCAL-00001" summary="support IntelliJ ide by adding specific files">
       <created>1586983487712</created>
@@ -384,7 +434,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587512697880</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="remove javatmp-user-starter project update doc">
+      <created>1587571986745</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1587571986745</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -412,7 +469,8 @@
     <MESSAGE value="prepare release 0.0.15" />
     <MESSAGE value="doc prepare release 0.0.15" />
     <MESSAGE value="prepare development new version 0.0.16" />
-    <option name="LAST_COMMIT_MESSAGE" value="prepare development new version 0.0.16" />
+    <MESSAGE value="remove javatmp-user-starter project update doc" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove javatmp-user-starter project update doc" />
   </component>
   <component name="WindowStateProjectService">
     <state x="388" y="192" key="#Console" timestamp="1586981394570">
@@ -443,30 +501,30 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="399" y="102" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.0.1536.824@0.0.1536.824" timestamp="1586980824584" />
-    <state x="264" y="0" key="CommitChangelistDialog2" timestamp="1587513506234">
+    <state x="287" y="0" key="CommitChangelistDialog2" timestamp="1587571983350">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="264" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1587513506234" />
+    <state x="287" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1587571983350" />
     <state x="475" y="159" key="FileChooserDialogImpl" timestamp="1587205881134">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="475" y="159" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1587205881134" />
-    <state width="1493" height="219" key="GridCell.Tab.0.bottom" timestamp="1587513540671">
+    <state width="1493" height="207" key="GridCell.Tab.0.bottom" timestamp="1587590877299">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="219" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587513540671" />
-    <state width="1493" height="219" key="GridCell.Tab.0.center" timestamp="1587513540671">
+    <state width="1493" height="207" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587590877299" />
+    <state width="1493" height="207" key="GridCell.Tab.0.center" timestamp="1587590877298">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="219" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1587513540671" />
-    <state width="1493" height="219" key="GridCell.Tab.0.left" timestamp="1587513540671">
+    <state width="1493" height="207" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1587590877298" />
+    <state width="1493" height="207" key="GridCell.Tab.0.left" timestamp="1587590877298">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="219" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1587513540671" />
-    <state width="1493" height="219" key="GridCell.Tab.0.right" timestamp="1587513540671">
+    <state width="1493" height="207" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1587590877298" />
+    <state width="1493" height="207" key="GridCell.Tab.0.right" timestamp="1587590877298">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="219" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1587513540671" />
+    <state width="1493" height="207" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1587590877298" />
     <state width="1493" height="219" key="GridCell.Tab.1.bottom" timestamp="1587490049364">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -503,10 +561,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="420" y="176" key="SpringBootCustomization/0.0.1536.824@0.0.1536.824" timestamp="1587160911229" />
-    <state x="299" y="164" key="Vcs.Push.Dialog.v2" timestamp="1587512703047">
+    <state x="299" y="164" key="Vcs.Push.Dialog.v2" timestamp="1587571995248">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="299" y="164" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1587512703047" />
+    <state x="299" y="164" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1587571995248" />
     <state x="424" y="166" width="660" height="530" key="find.popup" timestamp="1587571805286">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -515,10 +573,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="487" y="315" width="608" height="279" key="org.intellij.images.editor.actions.BackgroundImageDialog/0.0.1536.824@0.0.1536.824" timestamp="1587241713876" />
-    <state x="407" y="126" width="672" height="677" key="run.anything.popup" timestamp="1587569412667">
+    <state x="407" y="126" width="672" height="677" key="run.anything.popup" timestamp="1587590877250">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="407" y="126" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1587569412667" />
+    <state x="407" y="126" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1587590877250" />
     <state x="427" y="91" width="672" height="678" key="search.everywhere.popup" timestamp="1587490923253">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
