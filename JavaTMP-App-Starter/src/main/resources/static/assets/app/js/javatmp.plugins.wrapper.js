@@ -541,6 +541,7 @@
         return $(element).mCustomScrollbar(settings);
     };
 
+    // todo : accept object instead of parameters and then extends it.
     $this.confirmAjaxAction = function (confirmTitleText, confirmMessageText, confirmActionBtnText, cancelActionBtnText,
             ajaxUrl, ajaxData, successCallback, errorCallback) {
         BootstrapModalWrapperFactory.createModal({
@@ -567,6 +568,7 @@
         }).show();
     };
 
+    // todo : refactor ajaxAction to take object instead of fixed parameters.
     $this.ajaxAction = function (ajaxUrl, ajaxData, successCallback, errorCallback, completeCallBack) {
         var m = BootstrapModalWrapperFactory.createModal({
             message: '<div class="text-center"><i class="fa fa-sync fa-spin fa-3x fa-fw text-primary"></i></div>',
@@ -611,6 +613,7 @@
         m.show();
     };
 
+    // todo : extends ajaxParameters instead of fixed
     $this.ajaxJsonAction = function (ajaxParameters) {
         $.ajax({
             type: "POST",
@@ -734,6 +737,7 @@
             }, 200, "@table-filter");
         };
     };
+    // todo: support datetime and datetimesecond table type.
     $this.DataTableColRenderWrapper = function (forceWidth, mapperObject) {
         return function (data, type, row, meta) {
 //                    console.log(meta);
@@ -810,7 +814,7 @@
             "processing": true,
             "serverSide": true,
             "rowCallback": function (row, data, displayNum, displayIndex, dataIndex) {
-                $(row).attr("data-row-id", data.id);
+                // $(row).attr("data-row-id", data.id);
             },
             "drawCallback": function (settings) {
             },
