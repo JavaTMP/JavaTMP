@@ -28,13 +28,13 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <table id="example" class="display table table-bordered table-hover" cellspacing="0" width="100%">
+                            <table id="example" class="nowrap display table table-bordered table-hover" cellspacing="0" width="100%">
                             </table>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-12">
-                            <table id="example1" class="display table table-bordered table-hover" cellspacing="0" width="100%">
+                            <table id="example1" class="nowrap display table table-bordered table-hover" cellspacing="0" width="100%">
                             </table>
                         </div>
                     </div>
@@ -50,6 +50,7 @@
             // controll return to main javascript file.
             var table = $('#example').DataTable({
                 scrollY: 400,
+                scrollX: true,
                 scrollCollapse: true,
                 orderCellsTop: true, // important to for two row header with filteration below header column names.
                 headerCallback: function (thead, data, start, end, display) {
@@ -89,11 +90,11 @@
                 },
 
                 columns: [
-                    {data: 'id', name: "id", title: "ID", width: "6rem"},
-                    {data: 'userName', name: "userName", title: "User Name", width: "10rem"},
-                    {data: 'firstName', name: "firstName", title: "First Name", width: "8rem"},
-                    {data: 'lastName', name: "lastName", title: "Last Name", width: "8rem"},
-                    {data: 'birthDate', name: "birthDate", title: "BirthDate", "type": "date", width: "9rem"}
+                    {data: 'id', title: "ID", width: "6rem"},
+                    {data: 'userName', title: "User Name", width: "10rem"},
+                    {data: 'firstName', title: "First Name", width: "8rem"},
+                    {data: 'lastName', title: "Last Name", width: "8rem"},
+                    {data: 'birthDate', title: "BirthDate", "type": "date", width: "9rem"}
                 ]
             });
 
@@ -112,11 +113,11 @@
                 },
 
                 columns: [
-                    {data: 'id', name: "id", title: "ID", width: "6rem"},
-                    {data: 'userName', name: "userName", title: "User Name", width: "10rem"},
-                    {data: 'firstName', name: "firstName", title: "First Name", width: "8rem"},
-                    {data: 'lastName', name: "lastName", title: "Last Name", width: "8rem"},
-                    {data: 'birthDate', name: "birthDate", title: "BirthDate", "type": "date", width: "9rem"}
+                    {data: 'id', title: "ID"},
+                    {data: 'userName', title: "User Name"},
+                    {data: 'firstName', title: "First Name"},
+                    {data: 'lastName', title: "Last Name"},
+                    {data: 'birthDate', title: "BirthDate", "type": "date"}
                 ]
             });
 
