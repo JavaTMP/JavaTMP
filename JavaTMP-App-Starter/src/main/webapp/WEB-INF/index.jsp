@@ -1253,6 +1253,11 @@
                                                     ECharts
                                                 </a>
                                             </li>
+                                            <li>
+                                                <a href="${pageContext.request.contextPath}/pages/static/chart/echarts-map">
+                                                    ECharts Map
+                                                </a>
+                                            </li>
                                         </ul>
                                     </li>
                                     <li>

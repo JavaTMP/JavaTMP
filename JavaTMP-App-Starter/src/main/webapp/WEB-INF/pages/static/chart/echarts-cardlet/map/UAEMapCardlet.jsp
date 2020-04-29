@@ -8,7 +8,8 @@
 <%--https://code.highcharts.com/mapdata/--%>
 <%--https://github.com/echarts-maps/echarts-countries-js--%>
 <%--https://github.com/echarts-maps/echarts-mapmaker--%>
-<script src="${pageContext.request.contextPath}/assets/data/United_Arab_Emirates.js?v=4"
+<%--https://github.com/ecomfe/awesome-echarts--%>
+<script src="${pageContext.request.contextPath}/assets/data/United_Arab_Emirates.js"
         type="text/javascript"></script>
 <script type="text/javascript">
     // get cardletId from request parameter:
