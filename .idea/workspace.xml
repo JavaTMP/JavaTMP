@@ -33,6 +33,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b0388ad0-42fa-4e72-a3bd-c0b5e7ea0bdd" name="Default Changelist" comment="add world map with scatter cardlet">
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/JavaTMP_App_Starter_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/JavaTMP_App_Starter_war_exploded.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_10_2.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_10_2.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_10_2.xml" beforeDir="false" />
@@ -83,15 +84,10 @@
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_5_2_3_RELEASE.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_xmlunit_xmlunit_core_2_6_3.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/UAEMapCardlet.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/static/chart/echarts-cardlet/map/UAEMapCardlet.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/USAMapCardlet.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/static/chart/echarts-cardlet/map/USAMapCardlet.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/WorldMapWithScatterCardlet.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/static/chart/echarts-cardlet/map/WorldMapWithScatterCardlet.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/home.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/static/components-index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/static/components-index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/static/custom-components/menu/bootstrap-multilevel-dropdown-hover.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/static/custom-components/menu/bootstrap-multilevel-dropdown-hover.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/static/plugins/bootstrap-modal-wrapper.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/static/plugins/bootstrap-modal-wrapper.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/pages/versions/java-bootstrap-template-version-0-0-16.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/pages/versions/java-bootstrap-template-version-0-0-16.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/JavaTMP-App-Starter.iml" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/JavaTMP-App-Starter.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/java/com/javatmp/fw/web/controller/PagesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/java/com/javatmp/fw/web/controller/PagesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/META-INF/context.xml" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/META-INF/context.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,6 +129,9 @@
       </MavenImportingSettings>
     </option>
   </component>
+  <component name="MavenRunner">
+    <option name="skipTests" value="true" />
+  </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
   </component>
@@ -172,7 +171,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.runner" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -386,7 +385,8 @@
       <workItem from="1587835541698" duration="7245000" />
       <workItem from="1588006179308" duration="4228000" />
       <workItem from="1588109178498" duration="2523000" />
-      <workItem from="1588178255655" duration="8673000" />
+      <workItem from="1588178255655" duration="10258000" />
+      <workItem from="1588265366060" duration="5158000" />
     </task>
     <task id="LOCAL-00001" summary="support IntelliJ ide by adding specific files">
       <created>1586983487712</created>
@@ -486,7 +486,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588036622955</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="refactor and add echarts-cardlet folder">
+      <created>1588202806621</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1588202806621</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -518,7 +525,8 @@
     <MESSAGE value="update java dependencies" />
     <MESSAGE value="add world map with scatter cardlet" />
     <MESSAGE value="refactor dynamic-datatables-creation.jsp" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor dynamic-datatables-creation.jsp" />
+    <MESSAGE value="refactor and add echarts-cardlet folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor and add echarts-cardlet folder" />
   </component>
   <component name="WindowStateProjectService">
     <state x="388" y="192" key="#Console" timestamp="1586981394570">
@@ -549,10 +557,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="399" y="102" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.0.1536.824@0.0.1536.824" timestamp="1586980824584" />
-    <state x="244" y="0" key="CommitChangelistDialog2" timestamp="1588036621554">
+    <state x="109" y="0" key="CommitChangelistDialog2" timestamp="1588202804959">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="244" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1588036621554" />
+    <state x="109" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1588202804959" />
     <state x="56" y="101" key="DiffContextDialog" timestamp="1588202512910">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -561,22 +569,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="475" y="159" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1588178408814" />
-    <state width="1493" height="222" key="GridCell.Tab.0.bottom" timestamp="1588180318863">
+    <state width="1493" height="222" key="GridCell.Tab.0.bottom" timestamp="1588269058755">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="222" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1588180318863" />
-    <state width="1493" height="222" key="GridCell.Tab.0.center" timestamp="1588180318863">
+    <state width="1493" height="222" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1588269058755" />
+    <state width="1493" height="222" key="GridCell.Tab.0.center" timestamp="1588269058754">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="222" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1588180318863" />
-    <state width="1493" height="222" key="GridCell.Tab.0.left" timestamp="1588180318863">
+    <state width="1493" height="222" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1588269058754" />
+    <state width="1493" height="222" key="GridCell.Tab.0.left" timestamp="1588269058754">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="222" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1588180318863" />
-    <state width="1493" height="222" key="GridCell.Tab.0.right" timestamp="1588180318863">
+    <state width="1493" height="222" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1588269058754" />
+    <state width="1493" height="222" key="GridCell.Tab.0.right" timestamp="1588269058755">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="222" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1588180318863" />
+    <state width="1493" height="222" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1588269058755" />
     <state width="1493" height="222" key="GridCell.Tab.1.bottom" timestamp="1588179699101">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -601,10 +609,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="379" y="234" key="Registry/0.0.1536.824@0.0.1536.824" timestamp="1587160169324" />
-    <state x="395" y="151" key="RollbackChangesDialog" timestamp="1588202514676">
+    <state x="395" y="151" key="RollbackChangesDialog" timestamp="1588202635749">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="395" y="151" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1588202514676" />
+    <state x="395" y="151" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1588202635749" />
     <state x="209" y="80" width="1036" height="726" key="SettingsEditor" timestamp="1588179848606">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -613,10 +621,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="420" y="176" key="SpringBootCustomization/0.0.1536.824@0.0.1536.824" timestamp="1587160911229" />
-    <state x="299" y="164" key="Vcs.Push.Dialog.v2" timestamp="1588036627192">
+    <state x="299" y="164" key="Vcs.Push.Dialog.v2" timestamp="1588202813082">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="299" y="164" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1588036627192" />
+    <state x="299" y="164" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1588202813082" />
     <state x="424" y="166" width="660" height="530" key="find.popup" timestamp="1587571805286">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -629,14 +637,14 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="487" y="315" width="608" height="279" key="org.intellij.images.editor.actions.BackgroundImageDialog/0.0.1536.824@0.0.1536.824" timestamp="1587241713876" />
-    <state x="385" y="103" width="672" height="677" key="run.anything.popup" timestamp="1588180318828">
+    <state x="385" y="103" width="672" height="677" key="run.anything.popup" timestamp="1588268296040">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="385" y="103" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1588180318828" />
-    <state x="427" y="91" width="672" height="678" key="search.everywhere.popup" timestamp="1588202335777">
+    <state x="385" y="103" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1588268296040" />
+    <state x="427" y="91" width="672" height="678" key="search.everywhere.popup" timestamp="1588268380956">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="427" y="91" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1588202335777" />
+    <state x="427" y="91" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1588268380956" />
     <state x="380" y="112" key="spring file set editor" timestamp="1587160849222">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
