@@ -33,7 +33,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b0388ad0-42fa-4e72-a3bd-c0b5e7ea0bdd" name="Default Changelist" comment="add world map with scatter cardlet">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/JavaTMP_App_Starter_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/JavaTMP_App_Starter_war_exploded.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_10_2.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_10_2.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_10_2.xml" beforeDir="false" />
@@ -84,10 +83,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_5_2_3_RELEASE.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_xmlunit_xmlunit_core_2_6_3.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/JavaTMP-App-Starter.iml" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/JavaTMP-App-Starter.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/java/com/javatmp/fw/web/controller/PagesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/java/com/javatmp/fw/web/controller/PagesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/META-INF/context.xml" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/META-INF/context.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/pages/versions/java-bootstrap-template-version-0-0-16.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/pages/versions/java-bootstrap-template-version-0-0-16.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -386,7 +382,7 @@
       <workItem from="1588006179308" duration="4228000" />
       <workItem from="1588109178498" duration="2523000" />
       <workItem from="1588178255655" duration="10258000" />
-      <workItem from="1588265366060" duration="5158000" />
+      <workItem from="1588265366060" duration="5830000" />
     </task>
     <task id="LOCAL-00001" summary="support IntelliJ ide by adding specific files">
       <created>1586983487712</created>
@@ -493,7 +489,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588202806621</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Solve the bug when deploying using context root other than / or when deploying to standalone tomcat server. by trimming the context path in PagesController.java.">
+      <created>1588290282279</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1588290282279</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -526,7 +529,8 @@
     <MESSAGE value="add world map with scatter cardlet" />
     <MESSAGE value="refactor dynamic-datatables-creation.jsp" />
     <MESSAGE value="refactor and add echarts-cardlet folder" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor and add echarts-cardlet folder" />
+    <MESSAGE value="Solve the bug when deploying using context root other than / or when deploying to standalone tomcat server. by trimming the context path in PagesController.java." />
+    <option name="LAST_COMMIT_MESSAGE" value="Solve the bug when deploying using context root other than / or when deploying to standalone tomcat server. by trimming the context path in PagesController.java." />
   </component>
   <component name="WindowStateProjectService">
     <state x="388" y="192" key="#Console" timestamp="1586981394570">
@@ -557,10 +561,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="399" y="102" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.0.1536.824@0.0.1536.824" timestamp="1586980824584" />
-    <state x="109" y="0" key="CommitChangelistDialog2" timestamp="1588202804959">
+    <state x="316" y="0" key="CommitChangelistDialog2" timestamp="1588290280882">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="109" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1588202804959" />
+    <state x="316" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1588290280882" />
     <state x="56" y="101" key="DiffContextDialog" timestamp="1588202512910">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -621,10 +625,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="420" y="176" key="SpringBootCustomization/0.0.1536.824@0.0.1536.824" timestamp="1587160911229" />
-    <state x="299" y="164" key="Vcs.Push.Dialog.v2" timestamp="1588202813082">
+    <state x="299" y="164" key="Vcs.Push.Dialog.v2" timestamp="1588290284884">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="299" y="164" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1588202813082" />
+    <state x="299" y="164" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1588290284884" />
     <state x="424" y="166" width="660" height="530" key="find.popup" timestamp="1587571805286">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
