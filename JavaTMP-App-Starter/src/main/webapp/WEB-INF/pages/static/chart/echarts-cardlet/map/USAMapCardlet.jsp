@@ -40,7 +40,7 @@
                     //     width: 2
                     // }
                 });
-                option = {
+                let option = {
                     title: {
                         text: 'USA Population Estimates (2012)',
                         subtext: 'Data from www.census.gov',

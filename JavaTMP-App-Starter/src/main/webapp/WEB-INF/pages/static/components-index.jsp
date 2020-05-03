@@ -10,7 +10,7 @@
         </div>
     </div>
     <div class="row components-index-main-div bg-white m-1 px-1 py-3">
-        <div class="col-2">
+        <div class="col-md-2">
             <h5><strong>Themes</strong></h5>
             <ul class="list-unstyled">
                 <li>
@@ -171,7 +171,7 @@
                 </li>
             </ul>
         </div>
-        <div class="col-2">
+        <div class="col-md-2">
             <h5><strong>Icons</strong></h5>
             <ul class="list-unstyled">
                 <li>
@@ -318,7 +318,7 @@
                 </li>
             </ul>
         </div>
-        <div class="col-2">
+        <div class="col-md-2">
             <h5><strong>Dropdown Menu</strong></h5>
             <ul class="list-unstyled">
                 <li>
@@ -424,7 +424,7 @@
                 </li>
             </ul>
         </div>
-        <div class="col-2">
+        <div class="col-md-2">
             <h5><strong>Forms</strong></h5>
             <ul class="list-unstyled">
                 <li>
@@ -515,7 +515,7 @@
                 </li>
             </ul>
         </div>
-        <div class="col-2">
+        <div class="col-md-2">
             <h5><strong>Plugins</strong></h5>
             <ul class="list-unstyled">
                 <li>
@@ -745,7 +745,7 @@
                 </li>
             </ul>
         </div>
-        <div class="col-2">
+        <div class="col-md-2">
             <h5><strong>Custom Pages</strong></h5>
             <ul class="list-unstyled">
                 <li>

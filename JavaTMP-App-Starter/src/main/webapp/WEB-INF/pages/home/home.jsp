@@ -201,61 +201,6 @@
             </div>
         </div>
     </div>
-    <div class="form-row">
-        <div class="col-md-6">
-            <div class="card shadow mb-3">
-                <div class="card-header">
-                    Static USA
-                    <div class="options float-right">
-                        <a load-on-starup="true"
-                           href="${pageContext.request.contextPath}/pages/home/USAMapCardlet"
-                           class="reload"
-                           actionableWrapperType="ajax-area-in-card">
-                            <i class="fa fa-sync"></i>
-                        </a>
-                        <a href="javascript:;" class="fullscreen"><i class=" fa fa-expand"></i></a>
-                    </div>
-                </div>
-                <div class="card-body p-0"></div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="card shadow mb-3">
-                <div class="card-header">
-                    Static UAE
-                    <div class="options float-right">
-                        <a load-on-starup="true"
-                           href="${pageContext.request.contextPath}/pages/home/UAEMapCardlet"
-                           class="reload"
-                           actionableWrapperType="ajax-area-in-card">
-                            <i class="fa fa-sync"></i>
-                        </a>
-                        <a href="javascript:;" class="fullscreen"><i class=" fa fa-expand"></i></a>
-                    </div>
-                </div>
-                <div class="card-body p-0"></div>
-            </div>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="col-md-12">
-            <div class="card shadow mb-3">
-                <div class="card-header">
-                    World With scatter type
-                    <div class="options float-right">
-                        <a load-on-starup="true"
-                           href="${pageContext.request.contextPath}/pages/home/WorldMapWithScatterCardlet"
-                           class="reload"
-                           actionableWrapperType="ajax-area-in-card">
-                            <i class="fa fa-sync"></i>
-                        </a>
-                        <a href="javascript:;" class="fullscreen"><i class=" fa fa-expand"></i></a>
-                    </div>
-                </div>
-                <div class="card-body p-0"></div>
-            </div>
-        </div>
-    </div>
     <style type="text/css">
     </style>
     <script type="text/javascript">
