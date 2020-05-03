@@ -1255,11 +1255,7 @@
                                             </li>
                                             <li>
                                                 <a href="${pageContext.request.contextPath}/pages/static/chart/echarts-map">
-<<<<<<< HEAD
                                                     ECharts Maps
-=======
-                                                    ECharts Map
->>>>>>> 9be397c7f610ff60356213df0ba6517022ffc315
                                                 </a>
                                             </li>
                                         </ul>

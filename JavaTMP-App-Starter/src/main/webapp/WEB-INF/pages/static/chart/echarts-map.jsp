@@ -7,7 +7,7 @@
                     Static USA
                     <div class="options float-right">
                         <a load-on-starup="true"
-                           href="${pageContext.request.contextPath}/pages/home/USAMapCardlet"
+                           href="${pageContext.request.contextPath}/pages/static/chart/echarts-cardlet/map/USAMapCardlet"
                            class="reload"
                            actionableWrapperType="ajax-area-in-card">
                             <i class="fa fa-sync"></i>
@@ -24,7 +24,7 @@
                     Static UAE
                     <div class="options float-right">
                         <a load-on-starup="true"
-                           href="${pageContext.request.contextPath}/pages/home/UAEMapCardlet"
+                           href="${pageContext.request.contextPath}/pages/static/chart/echarts-cardlet/map/UAEMapCardlet"
                            class="reload"
                            actionableWrapperType="ajax-area-in-card">
                             <i class="fa fa-sync"></i>
@@ -43,7 +43,7 @@
                     World With scatter type
                     <div class="options float-right">
                         <a load-on-starup="true"
-                           href="${pageContext.request.contextPath}/pages/home/WorldMapWithScatterCardlet"
+                           href="${pageContext.request.contextPath}/pages/static/chart/echarts-cardlet/map/WorldMapWithScatterCardlet"
                            class="reload"
                            actionableWrapperType="ajax-area-in-card">
                             <i class="fa fa-sync"></i>

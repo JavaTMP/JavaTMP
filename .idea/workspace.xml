@@ -33,22 +33,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b0388ad0-42fa-4e72-a3bd-c0b5e7ea0bdd" name="Default Changelist" comment="add world map with scatter cardlet">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4487175c-5d29-4ecf-8a80-8fb35d95d0f8.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/java/com/javatmp/JavaTmpAppStarterApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/java/com/javatmp/JavaTmpAppStarterApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/java/com/javatmp/fw/web/controller/PagesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/java/com/javatmp/fw/web/controller/PagesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/java/com/javatmp/module/dms/controller/ViewUploadedFileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/java/com/javatmp/module/dms/controller/ViewUploadedFileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/META-INF/context.xml" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/META-INF/context.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/UAEMapCardlet.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/static/chart/echarts-cardlet/map/UAEMapCardlet.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/USAMapCardlet.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/static/chart/echarts-cardlet/map/USAMapCardlet.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/WorldMapWithScatterCardlet.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/static/chart/echarts-cardlet/map/WorldMapWithScatterCardlet.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/home.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/home/home.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/static/components-index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/static/components-index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/static/plugins/bootstrap-modal-wrapper.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/static/plugins/bootstrap-modal-wrapper.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/pages/versions/java-bootstrap-template-version-0-0-16.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/pages/versions/java-bootstrap-template-version-0-0-16.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/static/chart/echarts-map.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/static/chart/echarts-map.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +68,7 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="D:/apache-maven-3.6.3" />
+        <option name="mavenHome" value="C:/apache-maven-3.6.2" />
       </MavenGeneralSettings>
     </option>
     <option name="importingSettings">
@@ -132,7 +119,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.runner" />
+    <property name="settings.editor.selected.configurable" value="MavenSettings" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -351,7 +338,7 @@
       <workItem from="1588351157686" duration="15010000" />
       <workItem from="1588438193762" duration="8516000" />
       <workItem from="1588470840420" duration="2121000" />
-      <workItem from="1588486879273" duration="1425000" />
+      <workItem from="1588486879273" duration="2199000" />
     </task>
     <task id="LOCAL-00001" summary="support IntelliJ ide by adding specific files">
       <created>1586983487712</created>
@@ -607,10 +594,11 @@
     </state>
     <state x="395" y="151" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1588472823582" />
     <state x="411" y="158" key="RollbackChangesDialog/0.0.1600.860@0.0.1600.860" timestamp="1588487598524" />
-    <state x="209" y="80" width="1036" height="726" key="SettingsEditor" timestamp="1588179848606">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="218" y="83" width="1036" height="726" key="SettingsEditor" timestamp="1588488510572">
+      <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="209" y="80" width="1036" height="726" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1588179848606" />
+    <state x="218" y="83" key="SettingsEditor/0.0.1600.860@0.0.1600.860" timestamp="1588488510572" />
     <state x="420" y="176" key="SpringBootCustomization" timestamp="1587160911229">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -636,10 +624,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="487" y="315" width="608" height="279" key="org.intellij.images.editor.actions.BackgroundImageDialog/0.0.1536.824@0.0.1536.824" timestamp="1587241713876" />
-    <state x="385" y="103" width="672" height="677" key="run.anything.popup" timestamp="1588471129825">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="401" y="108" width="700" height="707" key="run.anything.popup" timestamp="1588488529445">
+      <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="385" y="103" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1588471129825" />
+    <state x="401" y="108" width="700" height="707" key="run.anything.popup/0.0.1600.860@0.0.1600.860" timestamp="1588488529445" />
     <state x="427" y="91" width="672" height="678" key="search.everywhere.popup" timestamp="1588353367263">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
