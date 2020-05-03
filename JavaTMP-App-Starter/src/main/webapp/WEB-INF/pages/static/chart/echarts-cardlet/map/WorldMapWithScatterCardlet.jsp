@@ -20,7 +20,7 @@
 
             javatmp.plugins.blockWrapper(cardletElement);
 
-            var geoCoordMapScatter = {
+            var scatterMap = {
                 "Amsterdam": [4.895168, 52.370216],
                 "Athens": [-83.357567, 33.951935],
                 "Auckland": [174.763332, -36.84846],
@@ -74,14 +74,10 @@
                 "Vienna": [16.373819, 48.208174],
                 "Zurich": [8.541694, 47.376887],
                 "usa1": [-133.710643, 56.684386],
-                "abu dhabi": [
-                    54.36301231384277,
-                    24.46941621124824,
-                    10
-                ]
+                "abu dhabi": [54.36301231384277, 24.46941621124824, 10]
             };
 
-            var geoCoordMap = {
+            var effectScatterMap = {
                 "Madrid": [-3.70379, 40.416775],
                 "Milan": [9.185924, 45.465422],
                 "Manama": [50.58605, 26.228516],
@@ -152,7 +148,7 @@
                         type: 'effectScatter',
                         coordinateSystem: 'geo',
                         symbolSize: 5,
-                        data: makeMapData(geoCoordMap),
+                        data: makeMapData(effectScatterMap),
                         activeOpacity: 1,
                         label: {
                             formatter: '{b}',
@@ -183,7 +179,7 @@
                         type: 'scatter',
                         coordinateSystem: 'geo',
                         symbolSize: 5,
-                        data: makeMapData(geoCoordMapScatter),
+                        data: makeMapData(scatterMap),
                         activeOpacity: 1,
                         label: {
                             formatter: '{b}',
