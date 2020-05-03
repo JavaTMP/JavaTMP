@@ -83,7 +83,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_5_2_3_RELEASE.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_xmlunit_xmlunit_core_2_6_3.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/pages/versions/java-bootstrap-template-version-0-0-16.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/pages/versions/java-bootstrap-template-version-0-0-16.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/java/com/javatmp/JavaTmpAppStarterApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/java/com/javatmp/JavaTmpAppStarterApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -382,7 +382,10 @@
       <workItem from="1588006179308" duration="4228000" />
       <workItem from="1588109178498" duration="2523000" />
       <workItem from="1588178255655" duration="10258000" />
-      <workItem from="1588265366060" duration="5830000" />
+      <workItem from="1588265366060" duration="6665000" />
+      <workItem from="1588351157686" duration="15010000" />
+      <workItem from="1588438193762" duration="8516000" />
+      <workItem from="1588470840420" duration="2121000" />
     </task>
     <task id="LOCAL-00001" summary="support IntelliJ ide by adding specific files">
       <created>1586983487712</created>
@@ -496,7 +499,21 @@
       <option name="project" value="LOCAL" />
       <updated>1588290282279</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Solve the bug when deploying using context root other than / or when deploying to standalone tomcat server. by trimming the context path in PagesController.java.">
+      <created>1588290954321</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1588290954321</updated>
+    </task>
+    <task id="LOCAL-00018" summary="solve the bug when requesting static resource from within the application from ide or standalone or container.">
+      <created>1588467907384</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1588467907384</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -530,7 +547,8 @@
     <MESSAGE value="refactor dynamic-datatables-creation.jsp" />
     <MESSAGE value="refactor and add echarts-cardlet folder" />
     <MESSAGE value="Solve the bug when deploying using context root other than / or when deploying to standalone tomcat server. by trimming the context path in PagesController.java." />
-    <option name="LAST_COMMIT_MESSAGE" value="Solve the bug when deploying using context root other than / or when deploying to standalone tomcat server. by trimming the context path in PagesController.java." />
+    <MESSAGE value="solve the bug when requesting static resource from within the application from ide or standalone or container." />
+    <option name="LAST_COMMIT_MESSAGE" value="solve the bug when requesting static resource from within the application from ide or standalone or container." />
   </component>
   <component name="WindowStateProjectService">
     <state x="388" y="192" key="#Console" timestamp="1586981394570">
@@ -561,10 +579,14 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="399" y="102" key="#com.intellij.ide.util.frameworkSupport.AddFrameworkSupportDialog/0.0.1536.824@0.0.1536.824" timestamp="1586980824584" />
-    <state x="316" y="0" key="CommitChangelistDialog2" timestamp="1588290280882">
+    <state x="450" y="149" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1588470722867">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="316" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1588290280882" />
+    <state x="450" y="149" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1536.824@0.0.1536.824" timestamp="1588470722867" />
+    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1588467906008">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="308" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1588467906008" />
     <state x="56" y="101" key="DiffContextDialog" timestamp="1588202512910">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -573,22 +595,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="475" y="159" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1588178408814" />
-    <state width="1493" height="222" key="GridCell.Tab.0.bottom" timestamp="1588269058755">
+    <state width="1493" height="222" key="GridCell.Tab.0.bottom" timestamp="1588472851306">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="222" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1588269058755" />
-    <state width="1493" height="222" key="GridCell.Tab.0.center" timestamp="1588269058754">
+    <state width="1493" height="222" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1588472851306" />
+    <state width="1493" height="222" key="GridCell.Tab.0.center" timestamp="1588472851306">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="222" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1588269058754" />
-    <state width="1493" height="222" key="GridCell.Tab.0.left" timestamp="1588269058754">
+    <state width="1493" height="222" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1588472851306" />
+    <state width="1493" height="222" key="GridCell.Tab.0.left" timestamp="1588472851305">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="222" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1588269058754" />
-    <state width="1493" height="222" key="GridCell.Tab.0.right" timestamp="1588269058755">
+    <state width="1493" height="222" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1588472851305" />
+    <state width="1493" height="222" key="GridCell.Tab.0.right" timestamp="1588472851306">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="222" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1588269058755" />
+    <state width="1493" height="222" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1588472851306" />
     <state width="1493" height="222" key="GridCell.Tab.1.bottom" timestamp="1588179699101">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -613,10 +635,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="379" y="234" key="Registry/0.0.1536.824@0.0.1536.824" timestamp="1587160169324" />
-    <state x="395" y="151" key="RollbackChangesDialog" timestamp="1588202635749">
+    <state x="395" y="151" key="RollbackChangesDialog" timestamp="1588472823582">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="395" y="151" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1588202635749" />
+    <state x="395" y="151" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1588472823582" />
     <state x="209" y="80" width="1036" height="726" key="SettingsEditor" timestamp="1588179848606">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -625,10 +647,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="420" y="176" key="SpringBootCustomization/0.0.1536.824@0.0.1536.824" timestamp="1587160911229" />
-    <state x="299" y="164" key="Vcs.Push.Dialog.v2" timestamp="1588290284884">
+    <state x="299" y="164" key="Vcs.Push.Dialog.v2" timestamp="1588467910328">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="299" y="164" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1588290284884" />
+    <state x="299" y="164" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1588467910328" />
     <state x="424" y="166" width="660" height="530" key="find.popup" timestamp="1587571805286">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -641,14 +663,14 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="487" y="315" width="608" height="279" key="org.intellij.images.editor.actions.BackgroundImageDialog/0.0.1536.824@0.0.1536.824" timestamp="1587241713876" />
-    <state x="385" y="103" width="672" height="677" key="run.anything.popup" timestamp="1588268296040">
+    <state x="385" y="103" width="672" height="677" key="run.anything.popup" timestamp="1588471129825">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="385" y="103" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1588268296040" />
-    <state x="427" y="91" width="672" height="678" key="search.everywhere.popup" timestamp="1588268380956">
+    <state x="385" y="103" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1588471129825" />
+    <state x="427" y="91" width="672" height="678" key="search.everywhere.popup" timestamp="1588353367263">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="427" y="91" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1588268380956" />
+    <state x="427" y="91" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1588353367263" />
     <state x="380" y="112" key="spring file set editor" timestamp="1587160849222">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
