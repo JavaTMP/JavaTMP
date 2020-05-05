@@ -13,6 +13,8 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
+import java.io.File;
+
 @Slf4j
 @SpringBootApplication
 public class JavaTmpAppStarterApplication extends SpringBootServletInitializer implements CommandLineRunner {
@@ -36,13 +38,15 @@ public class JavaTmpAppStarterApplication extends SpringBootServletInitializer i
     public void run(String... args) throws Exception {
         log.info("CommandLineRunner.run start");
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        Resource[] resources = resolver.getResources("classpath:*");
+        Resource[] resources = resolver.getResources(".");
         log.info("resources count = " + resources.length);
         for(Resource resource : resources) {
             log.info("resource is file = " + resource.isFile());
             log.info("resource urI = " + resource.getURI());
             log.info("resource filename = " + resource.getFilename());
         }
+        File file = new File(".");
+        log.info("file of . is = [" + file.getAbsolutePath() + "]");
         log.info("ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX = " + ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX);
     }
 

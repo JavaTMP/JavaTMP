@@ -33,66 +33,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b0388ad0-42fa-4e72-a3bd-c0b5e7ea0bdd" name="Default Changelist" comment="add world map with scatter cardlet">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/4487175c-5d29-4ecf-8a80-8fb35d95d0f8.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_10_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_10_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_10_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jdk8_2_10_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_datatype_jackson_datatype_jsr310_2_10_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_module_jackson_module_parameter_names_2_10_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_activation_jakarta_activation_api_1_2_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_xml_bind_jakarta_xml_bind_api_2_3_2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_1_10_6.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_bytebuddy_byte_buddy_agent_1_10_6.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_core_9_0_30.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_el_9_0_30.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_jasper_9_0_30.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_tomcat_embed_tomcat_embed_websocket_9_0_30.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_core_5_4_10_Final.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_hibernate_jpamodelgen_5_4_10_Final.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jsoup_jsoup_1_12_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_18_10.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_2_2_4_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_autoconfigure_2_2_4_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_devtools_2_2_4_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_2_2_4_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_aop_2_2_4_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_data_jpa_2_2_4_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_jdbc_2_2_4_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_json_2_2_4_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_log4j2_2_2_4_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_security_2_2_4_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_test_2_2_4_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_tomcat_2_2_4_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_validation_2_2_4_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_web_2_2_4_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_2_2_4_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_test_autoconfigure_2_2_4_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_data_spring_data_commons_2_2_4_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_config_5_2_1_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_web_5_2_1_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aop_5_2_3_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_aspects_5_2_3_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_beans_5_2_3_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_context_5_2_3_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_expression_5_2_3_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jcl_5_2_3_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_jdbc_5_2_3_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_orm_5_2_3_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_test_5_2_3_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_tx_5_2_3_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_spring_web_5_2_3_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_xmlunit_xmlunit_core_2_6_3.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/JavaTMP-App-Starter.iml" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/JavaTMP-App-Starter.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/index.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/static/chart/echarts-cardlet/map/WorldMapWithScatterCardlet.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/static/chart/echarts-cardlet/map/WorldMapWithScatterCardlet.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/static/chart/echarts-map.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/webapp/WEB-INF/pages/static/chart/echarts-map.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/java/com/javatmp/JavaTmpAppStarterApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/java/com/javatmp/JavaTmpAppStarterApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,7 +118,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="MavenSettings" />
+    <property name="settings.editor.selected.configurable" value="tasks.servers" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -396,6 +338,9 @@
       <workItem from="1588438193762" duration="8516000" />
       <workItem from="1588470840420" duration="2121000" />
       <workItem from="1588486879273" duration="2199000" />
+      <workItem from="1588545969226" duration="113000" />
+      <workItem from="1588626061146" duration="139000" />
+      <workItem from="1588626219004" duration="3713000" />
     </task>
     <task id="LOCAL-00001" summary="support IntelliJ ide by adding specific files">
       <created>1586983487712</created>
@@ -527,7 +472,7 @@
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -605,22 +550,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="475" y="159" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1588178408814" />
-    <state width="1493" height="222" key="GridCell.Tab.0.bottom" timestamp="1588472851306">
+    <state width="1493" height="222" key="GridCell.Tab.0.bottom" timestamp="1588634087816">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="222" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1588472851306" />
-    <state width="1493" height="222" key="GridCell.Tab.0.center" timestamp="1588472851306">
+    <state width="1493" height="222" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1588634087816" />
+    <state width="1493" height="222" key="GridCell.Tab.0.center" timestamp="1588634087816">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="222" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1588472851306" />
-    <state width="1493" height="222" key="GridCell.Tab.0.left" timestamp="1588472851305">
+    <state width="1493" height="222" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1588634087816" />
+    <state width="1493" height="222" key="GridCell.Tab.0.left" timestamp="1588634087815">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="222" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1588472851305" />
-    <state width="1493" height="222" key="GridCell.Tab.0.right" timestamp="1588472851306">
+    <state width="1493" height="222" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1588634087815" />
+    <state width="1493" height="222" key="GridCell.Tab.0.right" timestamp="1588634087816">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="222" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1588472851306" />
+    <state width="1493" height="222" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1588634087816" />
     <state width="1493" height="222" key="GridCell.Tab.1.bottom" timestamp="1588179699101">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -650,10 +595,10 @@
     </state>
     <state x="395" y="151" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1588472823582" />
     <state x="411" y="158" key="RollbackChangesDialog/0.0.1600.860@0.0.1600.860" timestamp="1588487598524" />
-    <state x="218" y="83" width="1036" height="726" key="SettingsEditor" timestamp="1588488510572">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state x="250" y="41" width="1036" height="726" key="SettingsEditor" timestamp="1588546058695">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="209" y="80" width="1036" height="726" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1588179848606" />
+    <state x="250" y="41" width="1036" height="726" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1588546058695" />
     <state x="218" y="83" key="SettingsEditor/0.0.1600.860@0.0.1600.860" timestamp="1588488510572" />
     <state x="420" y="176" key="SpringBootCustomization" timestamp="1587160911229">
       <screen x="0" y="0" width="1536" height="824" />
@@ -671,19 +616,19 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="424" y="166" width="660" height="530" key="find.popup/0.0.1536.824@0.0.1536.824" timestamp="1587571805286" />
-    <state x="415" y="211" key="git4idea.merge.GitPullDialog" timestamp="1588487303745">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state x="398" y="202" key="git4idea.merge.GitPullDialog" timestamp="1588627167030">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="398" y="202" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1588178682238" />
+    <state x="398" y="202" key="git4idea.merge.GitPullDialog/0.0.1536.824@0.0.1536.824" timestamp="1588627167030" />
     <state x="415" y="211" key="git4idea.merge.GitPullDialog/0.0.1600.860@0.0.1600.860" timestamp="1588487303745" />
     <state x="487" y="315" width="608" height="279" key="org.intellij.images.editor.actions.BackgroundImageDialog" timestamp="1587241713876">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="487" y="315" width="608" height="279" key="org.intellij.images.editor.actions.BackgroundImageDialog/0.0.1536.824@0.0.1536.824" timestamp="1587241713876" />
-    <state x="401" y="108" width="700" height="707" key="run.anything.popup" timestamp="1588488529445">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state x="385" y="103" width="672" height="677" key="run.anything.popup" timestamp="1588632929979">
+      <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="385" y="103" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1588471129825" />
+    <state x="385" y="103" width="672" height="677" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1588632929979" />
     <state x="401" y="108" width="700" height="707" key="run.anything.popup/0.0.1600.860@0.0.1600.860" timestamp="1588488529445" />
     <state x="427" y="91" width="672" height="678" key="search.everywhere.popup" timestamp="1588353367263">
       <screen x="0" y="0" width="1536" height="824" />
