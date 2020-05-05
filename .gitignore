@@ -25,9 +25,5 @@ projects
 # log4j folders
 logs
 
-# ---< IDEA artifacts and output dirs >---
-*.iml
-*.ipr
-*.iws
-.idea/
-out
+## idea
+.idea
