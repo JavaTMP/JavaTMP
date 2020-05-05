@@ -7,6 +7,12 @@
         <element id="directory" name="classes">
           <element id="module-output" name="JavaTMP" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.springframework:spring-core:5.2.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:5.2.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.security:spring-security-core:5.2.1.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.data:spring-data-jpa:2.2.4.RELEASE" />
+        </element>
       </element>
     </root>
   </artifact>

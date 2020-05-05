@@ -33,8 +33,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b0388ad0-42fa-4e72-a3bd-c0b5e7ea0bdd" name="Default Changelist" comment="add world map with scatter cardlet">
+      <change beforePath="$PROJECT_DIR$/.idea/JavaTMP.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/JavaTMP.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/JavaTMP_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/JavaTMP_war_exploded.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/java/com/javatmp/JavaTmpAppStarterApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/JavaTMP-App-Starter/src/main/java/com/javatmp/JavaTmpAppStarterApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,7 +68,7 @@
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
-        <option name="mavenHome" value="$PROJECT_DIR$/../../apache-maven-3.6.2" />
+        <option name="mavenHome" value="D:/apache-maven-3.6.2" />
       </MavenGeneralSettings>
     </option>
     <option name="importingSettings">
@@ -468,7 +469,21 @@
       <option name="project" value="LOCAL" />
       <updated>1588467907384</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="add world map with scatter cardlet">
+      <created>1588658371853</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1588658371853</updated>
+    </task>
+    <task id="LOCAL-00020" summary="add world map with scatter cardlet">
+      <created>1588658465371</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1588658465371</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -479,12 +494,13 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
@@ -498,12 +514,12 @@
     <MESSAGE value="prepare development new version 0.0.16" />
     <MESSAGE value="remove javatmp-user-starter project update doc" />
     <MESSAGE value="update java dependencies" />
-    <MESSAGE value="add world map with scatter cardlet" />
     <MESSAGE value="refactor dynamic-datatables-creation.jsp" />
     <MESSAGE value="refactor and add echarts-cardlet folder" />
     <MESSAGE value="Solve the bug when deploying using context root other than / or when deploying to standalone tomcat server. by trimming the context path in PagesController.java." />
     <MESSAGE value="solve the bug when requesting static resource from within the application from ide or standalone or container." />
-    <option name="LAST_COMMIT_MESSAGE" value="solve the bug when requesting static resource from within the application from ide or standalone or container." />
+    <MESSAGE value="add world map with scatter cardlet" />
+    <option name="LAST_COMMIT_MESSAGE" value="add world map with scatter cardlet" />
   </component>
   <component name="WindowStateProjectService">
     <state x="388" y="192" key="#Console" timestamp="1586981394570">
@@ -538,10 +554,11 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="450" y="149" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1536.824@0.0.1536.824" timestamp="1588470722867" />
-    <state x="308" y="0" key="CommitChangelistDialog2" timestamp="1588467906008">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="321" y="0" key="CommitChangelistDialog2" timestamp="1588658465070">
+      <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="308" y="0" key="CommitChangelistDialog2/0.0.1536.824@0.0.1536.824" timestamp="1588467906008" />
+    <state x="321" y="0" key="CommitChangelistDialog2/0.0.1600.860@0.0.1600.860" timestamp="1588658465070" />
     <state x="56" y="101" key="DiffContextDialog" timestamp="1588202512910">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -550,22 +567,26 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="475" y="159" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1588178408814" />
-    <state width="1493" height="222" key="GridCell.Tab.0.bottom" timestamp="1588634087816">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1556" height="218" key="GridCell.Tab.0.bottom" timestamp="1588658636543">
+      <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state width="1493" height="222" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1588634087816" />
-    <state width="1493" height="222" key="GridCell.Tab.0.center" timestamp="1588634087816">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1556" height="218" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1588658636543" />
+    <state width="1556" height="218" key="GridCell.Tab.0.center" timestamp="1588658636543">
+      <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state width="1493" height="222" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1588634087816" />
-    <state width="1493" height="222" key="GridCell.Tab.0.left" timestamp="1588634087815">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1556" height="218" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1588658636543" />
+    <state width="1556" height="218" key="GridCell.Tab.0.left" timestamp="1588658636543">
+      <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state width="1493" height="222" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1588634087815" />
-    <state width="1493" height="222" key="GridCell.Tab.0.right" timestamp="1588634087816">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state width="1556" height="218" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1588658636543" />
+    <state width="1556" height="218" key="GridCell.Tab.0.right" timestamp="1588658636543">
+      <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state width="1493" height="222" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1588634087816" />
+    <state width="1556" height="218" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1588658636543" />
     <state width="1493" height="222" key="GridCell.Tab.1.bottom" timestamp="1588179699101">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -595,19 +616,20 @@
     </state>
     <state x="395" y="151" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1588472823582" />
     <state x="411" y="158" key="RollbackChangesDialog/0.0.1600.860@0.0.1600.860" timestamp="1588487598524" />
-    <state x="250" y="41" width="1036" height="726" key="SettingsEditor" timestamp="1588546058695">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="249" y="2" width="1036" height="726" key="SettingsEditor" timestamp="1588658272040">
+      <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="250" y="41" width="1036" height="726" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1588546058695" />
-    <state x="218" y="83" key="SettingsEditor/0.0.1600.860@0.0.1600.860" timestamp="1588488510572" />
+    <state x="249" y="2" key="SettingsEditor/0.0.1600.860@0.0.1600.860" timestamp="1588658272040" />
     <state x="420" y="176" key="SpringBootCustomization" timestamp="1587160911229">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="420" y="176" key="SpringBootCustomization/0.0.1536.824@0.0.1536.824" timestamp="1587160911229" />
-    <state x="299" y="164" key="Vcs.Push.Dialog.v2" timestamp="1588467910328">
-      <screen x="0" y="0" width="1536" height="824" />
+    <state x="311" y="171" key="Vcs.Push.Dialog.v2" timestamp="1588658466956">
+      <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="299" y="164" key="Vcs.Push.Dialog.v2/0.0.1536.824@0.0.1536.824" timestamp="1588467910328" />
+    <state x="311" y="171" key="Vcs.Push.Dialog.v2/0.0.1600.860@0.0.1600.860" timestamp="1588658466956" />
     <state x="439" y="223" key="com.intellij.ide.util.TipDialog" timestamp="1588487171630">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
