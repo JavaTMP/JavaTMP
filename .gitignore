@@ -24,5 +24,10 @@ projects
 
 # log4j folders
 logs
-.idea/libraries
-.idea/workspace.xml
+
+# ---< IDEA artifacts and output dirs >---
+*.iml
+*.ipr
+*.iws
+.idea
+out
