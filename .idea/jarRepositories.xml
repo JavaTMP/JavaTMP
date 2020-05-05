@@ -32,6 +32,11 @@
       <option name="url" value="https://repo.spring.io/release" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="enonic" />
+      <option name="name" value="enonic" />
+      <option name="url" value="https://repo.enonic.com/public/" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="jboss.community" />
       <option name="name" value="JBoss Community repository" />
       <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />

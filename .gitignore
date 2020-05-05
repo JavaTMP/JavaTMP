@@ -29,5 +29,5 @@ logs
 *.iml
 *.ipr
 *.iws
-.idea
+.idea/
 out
