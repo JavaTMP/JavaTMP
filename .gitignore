@@ -25,3 +25,4 @@ projects
 # log4j folders
 logs
 .idea/libraries
+.idea/workspace.xml
