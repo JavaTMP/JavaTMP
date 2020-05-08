@@ -5,6 +5,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.system.ApplicationHome;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.Ordered;
@@ -47,7 +48,12 @@ public class JavaTmpAppStarterApplication extends SpringBootServletInitializer i
         }
         File file = new File(".");
         log.info("file of . is = [" + file.getAbsolutePath() + "]");
-        log.info("ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX = " + ResourcePatternResolver.CLASSPATH_ALL_URL_PREFIX);
+
+        ApplicationHome home = new ApplicationHome(JavaTmpAppStarterApplication.class);
+        System.out.println("home get dir [" + home.getDir() + "]");    // returns the folder where the jar is. This is what I wanted.
+        System.out.println("home getSource [" + home.getSource() + "]"); // returns the jar absolute path.
+
+
     }
 
 }
