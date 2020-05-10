@@ -15,6 +15,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
 import java.io.File;
+import java.util.jar.JarFile;
 
 @Slf4j
 @SpringBootApplication
@@ -48,11 +49,11 @@ public class JavaTmpAppStarterApplication extends SpringBootServletInitializer i
         }
         File file = new File(".");
         log.info("file of . is = [" + file.getAbsolutePath() + "]");
-
         ApplicationHome home = new ApplicationHome(JavaTmpAppStarterApplication.class);
         System.out.println("home get dir [" + home.getDir() + "]");    // returns the folder where the jar is. This is what I wanted.
         System.out.println("home getSource [" + home.getSource() + "]"); // returns the jar absolute path.
-
+        String jarPath = "C:\\NetBeansProjects\\JavaTMP\\JavaTMP-App-Starter\\target\\JavaTMP-App-Starter-0.0.16.war";
+        JarFile jarFile = new JarFile(jarPath);
 
     }
 

@@ -1,5 +1,6 @@
 package com.javatmp.module.dms.controller;
 
+import com.javatmp.JavaTmpAppStarterApplication;
 import com.javatmp.fw.domain.ResponseMessage;
 import com.javatmp.fw.domain.table.DataTableRequest;
 import com.javatmp.fw.domain.table.DataTableResults;
@@ -8,26 +9,22 @@ import com.javatmp.module.dms.entity.Document;
 import com.javatmp.module.dms.service.DocumentService;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.service.UserService;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.system.ApplicationHome;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.text.ParseException;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import javax.servlet.http.HttpServletRequest;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import java.util.*;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 @Slf4j
 @RestController
@@ -54,55 +51,118 @@ public class FileManagerPageController {
     }
 
     @PostMapping("/fileBrowser")
-    public List<Map<String, Object>> fileBrowser(String parent) {
+    public List<Map<String, Object>> fileBrowser(String parent) throws IOException {
 
         if (parent.contains("..")) {
             // This is a security check
             throw new IllegalArgumentException("Cannot process relative path" + parent);
         }
 
-//        String basePath = request.getServletContext().getRealPath("");
-        String basePath = ClassLoader.getSystemClassLoader().getResource("").getPath();
         log.info("parent [" + parent + "] ");
-        File file = new File(basePath, parent);
-
-        log.info("basePath [" + basePath + "]");
-        log.info("file [" + file.getAbsolutePath() + "]");
 
         List<Map<String, Object>> files = new LinkedList<>();
-        File[] children = file.listFiles();
-        Arrays.sort(children, new Comparator<File>() {
-            @Override
-            public int compare(File o1, File o2) {
-                File f1 = (File) o1;
-                File f2 = (File) o2;
-                if (f1.isDirectory() && !f2.isDirectory()) {
-                    // Directory before non-directory
-                    return -1;
-                } else if (!f1.isDirectory() && f2.isDirectory()) {
-                    // Non-directory after directory
-                    return 1;
-                } else {
-                    // Alphabetic order otherwise
-                    return o1.compareTo(o2);
+        URL resource = ClassLoader.getSystemClassLoader().getResource("");
+        if(resource != null) {
+            String basePath = resource.getPath();
+            File file = new File(basePath, parent);
+            log.info("basePath [" + basePath + "]");
+            log.info("file [" + file.getAbsolutePath() + "]");
+
+            File[] children = file.listFiles();
+            Arrays.sort(children, new Comparator<File>() {
+                @Override
+                public int compare(File o1, File o2) {
+                    File f1 = (File) o1;
+                    File f2 = (File) o2;
+                    if (f1.isDirectory() && !f2.isDirectory()) {
+                        // Directory before non-directory
+                        return -1;
+                    } else if (!f1.isDirectory() && f2.isDirectory()) {
+                        // Non-directory after directory
+                        return 1;
+                    } else {
+                        // Alphabetic order otherwise
+                        return o1.compareTo(o2);
+                    }
+                }
+            });
+            for (File item : children) {
+                log.debug("item file absolute path [" + item.getAbsolutePath() + "]");
+                Map<String, Object> myMap = new HashMap<>();
+                myMap.put("title", item.getName());
+                myMap.put("size", item.length());
+                if (item.isDirectory()) {
+                    myMap.put("folder", item.isDirectory());
+                    myMap.put("lazy", item.isDirectory());
+                    myMap.put("expanded", !item.isDirectory());
+                    myMap.put("logicalPath", item.getAbsolutePath().substring(basePath.length() - 1));
+                }
+                log.debug("item is {}", myMap);
+                files.add(myMap);
+            }
+        } else {
+            ApplicationHome home = new ApplicationHome(JavaTmpAppStarterApplication.class);
+            System.out.println("home get dir [" + home.getDir() + "]");    // returns the folder where the jar is. This is what I wanted.
+            System.out.println("home getSource [" + home.getSource() + "]"); // returns the jar absolute path.
+
+            JarFile jarFile = new JarFile(home.getSource());
+            Enumeration<JarEntry> entries = jarFile.entries();
+
+            Node root = new Node();
+            while (entries.hasMoreElements()) {
+                JarEntry entry = entries.nextElement();
+
+                String[] filePathParts = entry.getName().split("/");
+                log.debug("file parts is : {}", Arrays.toString(filePathParts));
+
+                Node pointer = root;
+                for(int i = 0; i < filePathParts.length; i++) {
+                    String name = filePathParts[i];
+                    Node node = new Node();
+                    node.setTitle(name);
+                    Node exist = null;
+                    if((exist = pointer.getChildren().get(node)) != null) {
+                        pointer = exist;
+                    } else {
+                        pointer.getChildren().put(node, node);
+                        pointer = node;
+                    }
+
+                    if(i == (filePathParts.length - 1)) {
+                        pointer.setSize(entry.getSize());
+                    }
+
+                }
+
+            }
+
+            Node pointer = root;
+            String newParent = parent.substring(1);
+            if(!parent.equals("/")) {
+                // traverse tree:
+                String[] filePathParts = newParent.split("/");
+                log.debug("file parts is : {}", Arrays.toString(filePathParts));
+                for(String part : filePathParts) {
+                    Node temp = new Node();
+                    temp.setTitle(part);
+                    pointer = pointer.getChildren().get(temp);
                 }
             }
-        });
-        for (File item : children) {
-            log.debug("item file absolute path [" + item.getAbsolutePath() + "]");
-            Map<String, Object> myMap = new HashMap<>();
-            myMap.put("title", item.getName());
-            myMap.put("size", item.length());
-            if (item.isDirectory()) {
-                myMap.put("folder", item.isDirectory());
-                myMap.put("lazy", item.isDirectory());
-                myMap.put("expanded", !item.isDirectory());
-                myMap.put("logicalPath", item.getAbsolutePath().substring(basePath.length() - 1));
+            for(Node node : pointer.getChildren().keySet()) {
+                System.out.println(node.getTitle() + " , " + node.getSize() + " , " + node.getChildren().size());
+                Map<String, Object> myMap = new HashMap<>();
+                myMap.put("title", node.getTitle());
+                myMap.put("size", node.getSize());
+                if (node.getChildren().size() > 0) {
+                    myMap.put("folder", true);
+                    myMap.put("lazy", true);
+                    myMap.put("expanded", false);
+                    myMap.put("logicalPath", parent + "/" + node.getTitle());
+                }
+                log.debug("item is {}", myMap);
+                files.add(myMap);
             }
-            log.debug("item is {}", myMap);
-            files.add(myMap);
         }
-
         return files;
     }
 
@@ -148,6 +208,16 @@ public class FileManagerPageController {
         responseMessage.setData(fileUploading);
 
         return responseMessage;
+
+    }
+
+    @Data
+    @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+    public class Node {
+        @EqualsAndHashCode.Include
+        private String title;
+        private long size;
+        private Map<Node, Node> children = new HashMap<>();
 
     }
 }
