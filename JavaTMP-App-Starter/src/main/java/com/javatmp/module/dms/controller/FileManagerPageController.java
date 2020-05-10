@@ -137,22 +137,24 @@ public class FileManagerPageController {
             }
 
             Node pointer = root;
-            String newParent = parent.substring(1);
-            if(!parent.equals("/")) {
+            parent = parent.substring(1);
+            if(!parent.equals("")) {
                 // traverse tree:
-                String[] filePathParts = newParent.split("/");
+                String[] filePathParts = parent.split("/");
                 log.debug("file parts is : {}", Arrays.toString(filePathParts));
                 for(String part : filePathParts) {
                     Node temp = new Node();
                     temp.setTitle(part);
                     pointer = pointer.getChildren().get(temp);
                 }
+                parent = "/" + parent;
             }
             for(Node node : pointer.getChildren().keySet()) {
                 System.out.println(node.getTitle() + " , " + node.getSize() + " , " + node.getChildren().size());
                 Map<String, Object> myMap = new HashMap<>();
                 myMap.put("title", node.getTitle());
                 myMap.put("size", node.getSize());
+                myMap.put("folder", false);
                 if (node.getChildren().size() > 0) {
                     myMap.put("folder", true);
                     myMap.put("lazy", true);
@@ -162,6 +164,21 @@ public class FileManagerPageController {
                 log.debug("item is {}", myMap);
                 files.add(myMap);
             }
+            files.sort(new Comparator<Map<String, Object>>() {
+                @Override
+                public int compare(Map<String, Object> o1, Map<String, Object> o2) {
+                    if (new Boolean(o1.get("folder").toString()) && !new Boolean(o2.get("folder").toString())) {
+                        // Directory before non-directory
+                        return -1;
+                    } else if (!new Boolean(o1.get("folder").toString()) && new Boolean(o2.get("folder").toString())) {
+                        // Non-directory after directory
+                        return 1;
+                    } else {
+                        // Alphabetic order otherwise
+                        return o1.get("title").toString().compareTo(o2.get("title").toString());
+                    }
+                }
+            });
         }
         return files;
     }
