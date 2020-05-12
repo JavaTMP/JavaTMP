@@ -106,7 +106,11 @@
                     glyph: glyph_opts,
                     source: SOURCE,
                     lazyLoad: function (event, ctx) {
-                        ctx.result = {url: "assets/data/fancytreeCheckboxes.json", debugDelay: 500};
+                        ctx.result = {
+                            url: "assets/data/fancytreeCheckboxes.json"
+                            // ,
+                            // debugDelay: 500
+                        };
                     },
                     loadChildren: function (event, ctx) {
 //                        ctx.node.fixSelection3AfterClick();

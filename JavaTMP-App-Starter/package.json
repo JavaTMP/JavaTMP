@@ -81,7 +81,8 @@
         "aos": "^2.3.4",
         "animate.css": "^3.7.2",
         "bootstrap-input-spinner": "^1.13.4",
-        "jQuery-QueryBuilder": "^2.5.0"
+        "jQuery-QueryBuilder": "^2.5.0",
+        "formdata-polyfill": "3.0.19"
     },
     "devDependencies": {
         "del": "^5.1.0",

@@ -72,7 +72,9 @@
                     extensions: ["glyph", "table"],
                     checkbox: false,
                     glyph: glyph_opts,
-                    source: {url: "assets/data/fancytreeTaxonomy.json", debugDelay: 500},
+                    source: {url: "assets/data/fancytreeTaxonomy.json"
+                        // , debugDelay: 500
+                    },
                     scrollParent: window,
                     table: {
                         indentation: 25,
@@ -81,7 +83,9 @@
                     activate: function (event, data) {
                     },
                     lazyLoad: function (event, data) {
-                        data.result = {url: "assets/data/fancytreeSub.json", debugDelay: 500};
+                        data.result = {url: "assets/data/fancytreeSub.json"
+                            // , debugDelay: 500
+                        };
                     },
                     renderColumns: function (event, data) {
                         var node = data.node,

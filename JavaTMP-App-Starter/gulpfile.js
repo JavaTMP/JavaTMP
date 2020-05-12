@@ -291,6 +291,9 @@ var config = {
         ],
         "Datatables-CellEdit": [
             {"from": "${sourceNodeLib}/Datatables-CellEdit/js/dataTables.cellEdit.js", "to": "${destComponentsLib}/Datatables-CellEdit/js", processJS: true, processCSS: false}
+        ],
+        "formdata-polyfill": [
+            {"from": "${sourceNodeLib}/formdata-polyfill/formdata.min.js", "to": "${destComponentsLib}/formdata-polyfill", processJS: false, processCSS: false}
         ]
     }
 };
@@ -408,7 +411,8 @@ var src = {
         "./web/components/aos/dist/aos.js",
         "./web/components/twbs-pagination/jquery.twbsPagination.min.js",
         "./web/components/bootstrap-input-spinner/src/bootstrap-input-spinner.js",
-        "./web/components/jQuery-QueryBuilder/dist/js/query-builder.standalone.min.js"
+        "./web/components/jQuery-QueryBuilder/dist/js/query-builder.standalone.min.js",
+        "./web/components/formdata-polyfill/formdata.min.js"
     ],
     "localeJS": {
         "en": [

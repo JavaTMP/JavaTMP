@@ -29,7 +29,7 @@ $javatmp-navbar-bg: $javatmp-primary-bg!default;
 $javatmp-navbar-brand-color: $white!default;
 $javatmp-navbar-toggler-color: $white!default;
 $javatmp-navbar-toggler-border-color: $navbar-dark-toggler-border-color!default;
-$javatmp-navbar-toggler-icon-bg-image: $navbar-dark-toggler-icon-bg!default;
+$javatmp-navbar-toggler-icon-bg-image:escape-svg($navbar-dark-toggler-icon-bg)!default;
 $javatmp-navbar-border-color: $javatmp-secondary-bg!default;
 $javatmp-navbar-border-width: $border-width!default;
 

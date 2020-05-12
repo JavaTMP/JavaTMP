@@ -72,7 +72,7 @@
                     "url": javatmp.settings.contextPath + "/accounting/listTransactions"
                 },
                 columns: [
-                    {title: '', "class": "details-control", "orderable": false, "data": null, "defaultContent": ""},
+                    {title: ' ..... ', "class": "details-control", "orderable": false, "data": null, "defaultContent": ""},
                     {title: 'ID', data: 'id', name: "id", width: "3rem", "render": javatmp.plugins.DataTableColRenderWrapper("3rem")},
                     {title: 'Code', data: 'code', name: "code", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},
                     {title: 'Transaction Date', data: 'transactionDate', name: "transactionDate", "type": "date", width: "10rem", "render": javatmp.plugins.DataTableColRenderWrapper("10rem")},

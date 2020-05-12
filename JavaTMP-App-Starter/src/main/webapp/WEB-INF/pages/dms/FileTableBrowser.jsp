@@ -70,7 +70,7 @@
                         url: javatmp.settings.contextPath + "/dms/fileBrowser",
                         type: "POST",
                         data: {parent: "/"},
-                        debugDelay: 50,
+                        // debugDelay: 50,
                         cache: true
                     },
                     scrollParent: window,
@@ -88,7 +88,7 @@
                             url: javatmp.settings.contextPath + "/dms/fileBrowser",
                             type: "POST",
                             data: {parent: data.node.data.logicalPath},
-                            debugDelay: 50,
+                            // debugDelay: 50,
                             cache: true
                         };
                     },
