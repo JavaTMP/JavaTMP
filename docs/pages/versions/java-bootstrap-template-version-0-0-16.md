@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.16 (Current Development Version)
 ---
 # {{ page.title }}
 
-## on 
+## 6e3b4b5 on May 13, 2020, 1:53 AM GMT+4
 - Solve the bug in ie11 for `.navbar-toggler-icon` background-image by applying `escape-svg` function 
 in `web\assets\src\sass\common\variables.scss` for `$javatmp-navbar-toggler-icon-bg-image` parameter.
 - Solve the bug browsing application files in ide, standalone or within a tomcat container.
