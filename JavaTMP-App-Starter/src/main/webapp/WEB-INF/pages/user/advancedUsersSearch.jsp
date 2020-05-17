@@ -500,14 +500,12 @@
                                 rule.nameOfCustomElement = name;
                                 var that = this;
                                 var $container = rule.$el.find('.rule-value-container');
-<%--                                $($container).append(`--%>
-<%--<select class="form-control" name="` + name + `">--%>
-<%--        <option value=""></option>--%>
-<%--        <c:forEach items="${requestScope.languages}" var="language">--%>
-<%--            <option value="${language.languagetranslationPK.languageId}">${language.languageName}</option>--%>
-<%--        </c:forEach>--%>
-<%--</select>--%>
-<%--                                                        `);--%>
+                                $($container).append('<select class="form-control" name="' + name + '">' +
+                                    '<option value=""></option>' +
+        <c:forEach items="${requestScope.languages}" var="language">
+                                    "<option value='${language.languagetranslationPK.languageId}'>${language.languageName}</option>" +
+        </c:forEach>
+                                    '</select>');
                                 var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
                                 var select2Object = javatmp.plugins.select2Wrapper(select);
                                 return select;
@@ -533,14 +531,13 @@
                                 rule.nameOfCustomElement = name;
                                 var that = this;
                                 var $container = rule.$el.find('.rule-value-container');
-<%--                                $($container).append(`--%>
-<%--<select class="form-control" name="` + name + `">--%>
-<%--        <option value=""></option>--%>
-<%--        <c:forEach items="${requestScope.themes}" var="theme">--%>
-<%--            <option value="${theme.themetranslationPK.themeId}">${theme.themeName}</option>--%>
-<%--        </c:forEach>--%>
-<%--</select>--%>
-<%--                                                        `);--%>
+                                $($container).append(
+                                    '<select class="form-control" name="' + name + '">' +
+                                    '<option value=""></option>' +
+        <c:forEach items="${requestScope.themes}" var="theme">
+                                    "<option value='${theme.themetranslationPK.themeId}'>${theme.themeName}</option>" +
+        </c:forEach>
+                                    '</select>');
                                 var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
                                 var select2Object = javatmp.plugins.select2WrapperForTheme(select);
                                 return select;
@@ -566,14 +563,12 @@
                                 rule.nameOfCustomElement = name;
                                 var that = this;
                                 var $container = rule.$el.find('.rule-value-container');
-<%--                                $($container).append(`--%>
-<%--<select class="form-control" name="` + name + `">--%>
-<%--        <option value=""></option>--%>
-<%--        <c:forEach items="${requestScope.timezones}" var="timezone">--%>
-<%--            <option value="${timezone.timezonetranslationPK.timezoneId}">${timezone.timezoneNameDescription}</option>--%>
-<%--        </c:forEach>--%>
-<%--</select>--%>
-<%--                                                        `);--%>
+                                $($container).append('<select class="form-control" name="' + name + '">' +
+                                    '<option value=""></option>' +
+        <c:forEach items="${requestScope.timezones}" var="timezone">
+            "<option value='${timezone.timezonetranslationPK.timezoneId}'>${timezone.timezoneNameDescription}</option>" +
+        </c:forEach>
+                                '</select>');
                                 var select = $("select[name='" + rule.nameOfCustomElement + "']", $container);
                                 var select2Object = javatmp.plugins.select2Wrapper(select);
                                 return select;
@@ -650,7 +645,7 @@
                             input: function (rule, name) {
                                 console.log(rule.operator);
                                 var $container = rule.$el.find('.rule-value-container');
-                                $($container).append(`<input  name="` + name + `" class="form-control birthdate-filter" dir="ltr"/>`);
+                                $($container).append('<input  name="' + name + '" class="form-control birthdate-filter" dir="ltr"/>');
                                 var birthDateSelect = $("input[name='" + name + "']", $container);
                                 var birthDateInputMask = javatmp.plugins.inputmaskWrapperForDate(birthDateSelect, {
                                     placeholder: "dd/mm/yyyy hh:mm:ss",
