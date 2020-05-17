@@ -106,7 +106,7 @@ var config = {
             {"from": "${sourceNodeLib}/select2-bootstrap-theme/dist/select2-bootstrap.min.css", "to": "${destComponentsLib}/select2-bootstrap-theme/dist"}
         ],
         "bootstrap-maxlength": [
-            {"from": "${sourceNodeLib}/bootstrap-maxlength/bootstrap-maxlength.min.js", "to": "${destComponentsLib}/bootstrap-maxlength"}
+            {"from": "${sourceNodeLib}/bootstrap-maxlength/dist/bootstrap-maxlength.min.js", "to": "${destComponentsLib}/bootstrap-maxlength/dist"}
         ],
         "autosize": [
             {"from": "${sourceNodeLib}/autosize/dist/autosize.min.js", "to": "${destComponentsLib}/autosize/dist"}
@@ -363,7 +363,7 @@ var src = {
         "./web/components/bootstrap-daterangepicker/daterangepicker.js",
         "./web/components/bootstrap-colorselector/dist/bootstrap-colorselector.min.js",
         "./web/components/select2/dist/js/select2.full.min.js",
-        "./web/components/bootstrap-maxlength/bootstrap-maxlength.min.js",
+        "./web/components/bootstrap-maxlength/dist/bootstrap-maxlength.min.js",
         "./web/components/autosize/dist/autosize.min.js",
         "./web/components/summernote/dist/summernote-bs4.min.js",
         "./web/components/ion-rangeslider/js/ion.rangeSlider.min.js",
