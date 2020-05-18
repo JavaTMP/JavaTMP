@@ -5,6 +5,10 @@ title: Java Bootstrap Template Version 0.0.16 (Current Development Version)
 
 ## cd4ca42 on May 17, 2020, 12:40 PM GMT+4
 - Solve the bug in advanced user filtration page `src/main/webapp/WEB-INF/pages/user/advancedUsersSearch.jsp`.
+- Remove page `/src/main/webapp/WEB-INF/pages/static/table/datatable/defalut-datatables-fixedcolumn-with-key-navigation.jsp` 
+and split it to two demo pages `src\main\webapp\WEB-INF\pages\static\table\datatable\key-navigation-datatables.jsp` 
+and `src\main\webapp\WEB-INF\pages\static\table\datatable\fixedcolumn-datatables.jsp` 
+because those extension datatables fixed column and key navigation are not compatible with each other.
 - Update the following dependencies in package.json:
     - animate.css from 3.7.2 to 4.1.0
     - bootstrap from 4.4.1 to 4.5.0
