@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.16 (Current Development Version)
 ---
 # {{ page.title }}
 
-## cd4ca42 on May 17, 2020, 12:40 PM GMT+4
+## 557ecc1 on May 18, 2020, 7:36 AM GMT+4
 - Solve the bug in advanced user filtration page `src/main/webapp/WEB-INF/pages/user/advancedUsersSearch.jsp`.
 - Remove page `/src/main/webapp/WEB-INF/pages/static/table/datatable/defalut-datatables-fixedcolumn-with-key-navigation.jsp` 
 and split it to two demo pages `src\main\webapp\WEB-INF\pages\static\table\datatable\key-navigation-datatables.jsp` 
