@@ -3,6 +3,16 @@ title: Java Bootstrap Template Version 0.0.16 (Current Development Version)
 ---
 # {{ page.title }}
 
+##  on 
+- Update the following dependencies in package.json:
+    - bootstrap-input-spinner from 1.13.4 to 1.13.5
+    - datatables.net-responsive from 2.2.4 to 2.2.5
+    - datatables.net-responsive-bs4 from 2.2.4 to 2.2.5  
+    - fullcalendar from 3.10.1 to 3.10.2 
+    - moment from 2.25.3 to 2.26.0
+    - moment-timezone from 0.5.29 to 0.5.31 
+    - summernote from 0.8.16 to 0.8.18
+- Run gulp default to regenerate dist folders.
 ## 557ecc1 on May 18, 2020, 7:36 AM GMT+4
 - Solve the bug in advanced user filtration page `src/main/webapp/WEB-INF/pages/user/advancedUsersSearch.jsp`.
 - Remove page `/src/main/webapp/WEB-INF/pages/static/table/datatable/defalut-datatables-fixedcolumn-with-key-navigation.jsp` 
