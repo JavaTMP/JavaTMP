@@ -3,7 +3,8 @@ title: Java Bootstrap Template Version 0.0.16 (Current Development Version)
 ---
 # {{ page.title }}
 
-## on
+## f09561d on May 27, 2020, 2:07 AM GMT+4
+- Prepare project for release 0.0.16
 - Update the following dependencies in package.json:
     - bootstrap-daterangepicker from 3.0.5 to 3.1.0
     - cropperjs from 1.5.6 to 1.5.7
