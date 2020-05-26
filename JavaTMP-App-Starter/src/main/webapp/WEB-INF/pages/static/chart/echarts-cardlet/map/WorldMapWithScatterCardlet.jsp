@@ -166,7 +166,7 @@
                         hoverAnimation: true,
                         itemStyle: {
                             borderColor: '#fff',
-                            color: '#d15b47',
+                            color: '#d15b47'
                         },
                         emphasis: {
                             label: {
