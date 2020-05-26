@@ -78,6 +78,7 @@ gulp.task('copy-JavaTMP-App-Starter', gulp.series('clean', function (cb) {
                 '!./JavaTMP-App-Starter/.classpath',
                 '!./JavaTMP-App-Starter/nbactions.xml',
                 '!./JavaTMP-App-Starter/nb-configuration.xml',
+                '!./JavaTMP-App-Starter/JavaTMP-App-Starter.iml',
                 '!./JavaTMP-App-Starter/target{,/**}'
             ], {dot: true})
             .pipe(gulp.dest("temp/JavaTMP-App-Starter"))

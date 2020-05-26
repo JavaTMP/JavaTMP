@@ -3,6 +3,14 @@ title: Java Bootstrap Template Version 0.0.16 (Current Development Version)
 ---
 # {{ page.title }}
 
+## on
+- Update the following dependencies in package.json:
+    - bootstrap-daterangepicker from 3.0.5 to 3.1.0
+    - cropperjs from 1.5.6 to 1.5.7
+    - echarts from 4.7.0 to 4.8.0
+    - jquery-validation from 1.19.1 to 1.19.2
+- Run gulp default to regenerate dist folders.
+
 ## 9abab20 on May 21, 2020, 10:15 PM GMT+4
 - Update the following dependencies in package.json:
     - bootstrap-input-spinner from 1.13.4 to 1.13.5
