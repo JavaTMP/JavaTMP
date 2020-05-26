@@ -75,7 +75,7 @@
                 let rand = Math.floor(Math.random() * 25); // from 0 to 24
                 let slot = [moment().format(javatmp.settings.networkDateFormat), rand];
                 option.series[0].data.push(slot);
-                if(option.series[0].data.length > 10) {
+                if(option.series[0].data.length > 60) {
                     option.series[0].data.shift();
                 }
                 myChart.setOption(option);

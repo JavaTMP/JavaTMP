@@ -5,9 +5,10 @@ import com.javatmp.module.accounting.entity.AccountTransaction;
 import com.javatmp.module.accounting.entity.Account_;
 import com.javatmp.module.accounting.entity.Transaction;
 import com.javatmp.module.accounting.repository.AccountRepository;
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
 import javax.persistence.TypedQuery;
@@ -15,9 +16,9 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaDelete;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -225,9 +226,9 @@ public class AccountService {
 
     }
 
+    @Transactional
     public int updateAccount(Account accountToBeUpdated) {
         int updateStatus = 0;
-        em.getTransaction().begin();
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Account> cq = cb.createQuery(Account.class);
         Root<Account> from = cq.from(Account.class);
@@ -243,7 +244,6 @@ public class AccountService {
         dbAccount.setStatus(accountToBeUpdated.getStatus());
         dbAccount.setParentAccountId(accountToBeUpdated.getParentAccountId());
         dbAccount.setCashFlowId(accountToBeUpdated.getCashFlowId());
-        em.getTransaction().commit();
         updateStatus = 1;
 
         return updateStatus;
