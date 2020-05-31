@@ -456,8 +456,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/pages/static/table/datatable/defalut-datatables-fixedcolumn-with-key-navigation">
-                        Datatables Bootstrap Fixed Column with key navigation
+                    <a href="${pageContext.request.contextPath}/pages/static/table/datatable/fixedcolumn-datatables">
+                        Datatables Bootstrap with Fixed Column
+                    </a>
+                </li>
+                <li>
+                    <a href="${pageContext.request.contextPath}/pages/static/table/datatable/key-navigation-datatables">
+                        Datatables Bootstrap with key navigation
                     </a>
                 </li>
                 <li>
