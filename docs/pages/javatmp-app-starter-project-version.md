@@ -351,6 +351,19 @@ check that by login to mysql and run the following command:
 
 `mysql > show tables;`
 
+Update Spring boot `application.properties` file in `.\JavaTMP-App-Starter\src\main\resources` by
+updating the following properties by your username and password and database names:
+```
+spring.datasource.url=jdbc:mysql://localhost:3306/appdb?zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&autoReconnect=true&autoReconnectForPools=true&allowPublicKeyRetrieval=true
+spring.datasource.username={{{ Your database username }}}
+spring.datasource.password={{{ Your database password }}}
+```
+
+Run JavaTMP from your command line or import it from your Java IDE as a Maven Project: 
+```
+mvn spring-boot:run
+```
+
 ### JavaTMP Apps Database Tables
 The database schema contains the following tables:
 *   activity. Contains data related to all requests of the public or registered users.

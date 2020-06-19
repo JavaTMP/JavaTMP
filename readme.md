@@ -39,7 +39,24 @@ You can run the following commands to compile and generate resources:
 ```
 npm install (Will install all Node.js dependencies mentioned in package.json file)
 gulp (Re-generate all front-end dependencies)
+```
+
+Prepare Your MySql Database server as provided in the [Database Configuration](http://help.javatmp.com/pages/javatmp-app-starter-project-version#preparing-oracle-mysql-database-management-system)
+then update Spring boot `application.properties` file in `.\JavaTMP-App-Starter\src\main\resources` by
+setting the following properties by your username and password and database names:
+```
+spring.datasource.url=jdbc:mysql://localhost:3306/appdb?zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&autoReconnect=true&autoReconnectForPools=true&allowPublicKeyRetrieval=true
+spring.datasource.username={{{ Your database username }}}
+spring.datasource.password={{{ Your database password }}}
+```
+     
+Run JavaTMP from your command line or import it from your Java IDE as a Maven Project by:
+```
 mvn spring-boot:run (run a development version)
+```
+
+Run JavaTMP from your command line as a standalone java project by:
+```
 maven clean package (clean and generate war file in ./target folder)
 java -jar -Dserver.port=80 target/JavaTMP-App-Starter-0.0.${version}.war
 ```
