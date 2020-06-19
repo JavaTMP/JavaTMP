@@ -355,8 +355,8 @@ Update Spring boot `application.properties` file in `.\JavaTMP-App-Starter\src\m
 updating the following properties by your username and password and database names:
 ```
 spring.datasource.url=jdbc:mysql://localhost:3306/appdb?zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&autoReconnect=true&autoReconnectForPools=true&allowPublicKeyRetrieval=true
-spring.datasource.username={{{ Your database username }}}
-spring.datasource.password={{{ Your database password }}}
+spring.datasource.username=Your_database_username
+spring.datasource.password=Your_database_password
 ```
 
 Run JavaTMP from your command line or import it from your Java IDE as a Maven Project: 
