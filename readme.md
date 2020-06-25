@@ -45,7 +45,7 @@ Prepare Your MySql Database server as provided in the [Database Configuration](h
 then update Spring boot `application.properties` file in `.\JavaTMP-App-Starter\src\main\resources` by
 setting the following properties by your username and password and database names:
 ```
-spring.datasource.url=jdbc:mysql://localhost:3306/appdb?zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&autoReconnect=true&autoReconnectForPools=true&allowPublicKeyRetrieval=true
+spring.datasource.url=jdbc:mysql://localhost:3306/appdb?zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&autoReconnect=true&autoReconnectForPools=true&allowPublicKeyRetrieval=true&useTimezone=true&serverTimezone=UTC
 spring.datasource.username=Your_database_username
 spring.datasource.password=Your_database_password
 ```
