@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.17 (Current Development Version)
 ---
 # {{ page.title }}
 
-## on
+## df92b0f on Jun 25, 2020, 9:37 PM GMT+4
 - Add `useTimezone=true&serverTimezone=UTC` parameters to mysql `spring.datasource.url` URL
 - solve the bug in `src\main\webapp\WEB-INF\pages\static\chart\echarts-cardlet\map\WorldMapWithScatterCardlet.jsp`
  when run in ie11 due to error in option object.
