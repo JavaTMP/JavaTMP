@@ -50,7 +50,7 @@
                         </div>
                         <div class="row mt-5">
                             <div class="col text-center">
-                                Â© 2018 JavaTMP. All Rights Reserved
+                                &copy; 2020 JavaTMP. All Rights Reserved
                             </div>
                         </div>
                     </div>
@@ -171,7 +171,7 @@
                                 </ul>
                             </div>
                             <div class="col-12 col-md-4 mt-4 mt-md-0 text-center text-md-right">
-                                Â© 2018 JavaTMP. All Rights Reserved
+                                &copy; 2020 JavaTMP. All Rights Reserved
                             </div>
                         </div>
                     </div>
@@ -270,7 +270,7 @@
                                 </ul>
                             </div>
                             <div class="col-12 col-md-4 mt-4 mt-md-0 text-center text-md-right">
-                                Â© 2018 JavaTMP. All Rights Reserved
+                                &copy; 2020 JavaTMP. All Rights Reserved
                             </div>
                         </div>
                     </div>
@@ -433,7 +433,7 @@
                         </div>
                         <div class="row mt-4">
                             <div class="col text-center">
-                                Â© 2018 JavaTMP. All Rights Reserved
+                                &copy; 2020 JavaTMP. All Rights Reserved
                             </div>
                         </div>
                     </div>
@@ -532,7 +532,7 @@
                             <hr>
                             <div class="row f-flex justify-content-between" style="justify-content: space-between;">
                                 <div class="col-md-8 text-xs-center  text-left text-secondary my-1">
-                                    <p class="mt-2  text-light"> Â© Copyright 2018 â¢ All Rights Reserved |
+                                    <p class="mt-2  text-light"> &copy; Copyright 2020 . All Rights Reserved |
                                         <a class=" " href="javascript:;">Disclaimer</a> |
                                         <a class=" " href="javascript:;">Contact</a>
                                     </p>
@@ -834,7 +834,7 @@
                             <hr>
                             <div class="row f-flex justify-content-between" style="justify-content: space-between;">
                                 <div class="col-md-8 text-xs-center  text-left text-secondary my-1">
-                                    <p class="mt-2  text-light"> Â© Copyright 2017 â¢ All Rights Reserved |
+                                    <p class="mt-2  text-light"> &copy; Copyright 2020 . All Rights Reserved |
                                         <a class=" " href="javascript:;">Disclaimer</a> |
                                         <a class=" " href="javascript:;">Contact</a>
                                     </p>

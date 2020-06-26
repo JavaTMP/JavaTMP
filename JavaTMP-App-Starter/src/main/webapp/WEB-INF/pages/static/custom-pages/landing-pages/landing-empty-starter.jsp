@@ -33,7 +33,7 @@
                         <a class="btn btn-primary btn-lg" href="http://help.javatmp.com/" role="button">Documentation</a>
                     </div>
                     <div class="text-center">
-                        <a href="http://www.javatmp.com" target="_blank"><span>All Rights Reserved &copy; 2019 javatmp.com</span></a>
+                        <a href="http://www.javatmp.com" target="_blank"><span>All Rights Reserved &copy; 2020 javatmp.com</span></a>
                     </div>
                 </div>
             </div>

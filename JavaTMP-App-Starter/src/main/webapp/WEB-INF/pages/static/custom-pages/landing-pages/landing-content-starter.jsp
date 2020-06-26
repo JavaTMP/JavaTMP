@@ -271,7 +271,7 @@
                         <hr>
                         <div class="row f-flex justify-content-between" style="justify-content: space-between;">
                             <div class="col-md-8 text-xs-center  text-left text-secondary my-1">
-                                <p class="mt-2  text-light"> © Copyright 2017 • All Rights Reserved |
+                                <p class="mt-2  text-light"> © Copyright 2020 • All Rights Reserved |
                                     <a class=" " href="javascript:;">Disclaimer</a> |
                                     <a class=" " href="javascript:;">Contact</a>
                                 </p>
