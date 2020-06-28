@@ -4,6 +4,8 @@ title: Java Bootstrap Template Version 0.0.17 (Current Development Version)
 # {{ page.title }}
 
 ## df92b0f on Jun 25, 2020, 9:37 PM GMT+4
+- Make English is a default language for fall back.
+- Update copyright year for some static pages
 - Add Devextreme `Blazing Berry` bootstrap theme and thumbnail image in `src\main\resources\static\assets\img\themes\blazing-berry.png`
 and add a new record for it in theme and themeTranslation tables.
 - Add `useTimezone=true&serverTimezone=UTC` parameters to mysql `spring.datasource.url` URL

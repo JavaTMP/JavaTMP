@@ -1,6 +1,6 @@
 -- Insert languages:
-INSERT INTO `language` (`languageId`, `isDefaultLang`) VALUES ('ar', true);
-INSERT INTO `language` (`languageId`, `isDefaultLang`) VALUES ('en', false);
+INSERT INTO `language` (`languageId`, `isDefaultLang`) VALUES ('ar', false);
+INSERT INTO `language` (`languageId`, `isDefaultLang`) VALUES ('en', true);
 
 INSERT INTO `languageTranslation` (`languageId`, `langId`, `languageName`) VALUES ('ar' ,'ar', 'العربية (AR)');
 INSERT INTO `languageTranslation` (`languageId`, `langId`, `languageName`) VALUES ('ar' ,'en', 'Arabic (AR)');
