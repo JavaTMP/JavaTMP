@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        mavenLocal()
         mavenCentral()
     }
 }
@@ -24,12 +25,14 @@ subprojects {
     apply plugin: 'java'
 
     repositories {
+        mavenLocal()
         mavenCentral()
     }
 
     test {
         useJUnitPlatform()
     }
+
     dependencies {
         implementation ('org.springframework.boot:spring-boot-starter') {
             exclude group: 'org.springframework.boot', module : 'spring-boot-starter-logging'
@@ -46,6 +49,7 @@ subprojects {
             exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
         }
     }
+
     configurations {
         all {
             // https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto-configure-log4j-for-logging
