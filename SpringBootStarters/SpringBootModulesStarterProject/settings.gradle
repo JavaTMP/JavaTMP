@@ -1,0 +1,4 @@
+rootProject.name = 'SpringBootModulesStarterProject'
+
+include 'library'
+include 'application'

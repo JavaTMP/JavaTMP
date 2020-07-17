@@ -1,0 +1,8 @@
+dependencies {
+    implementation project(':library')
+}
+
+bootJar {
+    enabled = true
+}
+
