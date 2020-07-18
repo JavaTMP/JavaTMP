@@ -1,0 +1,4 @@
+rootProject.name = 'JavaTMP-SpringBoot-Modules'
+
+include 'javatmp-library'
+include 'javatmp-application'
