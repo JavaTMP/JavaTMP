@@ -1,4 +1,6 @@
 rootProject.name = 'JavaTMP-SpringBoot-Modules'
 
-include 'springboot-core'
-include 'springboot-autowired'
+include 'spring-boot-core'
+include 'spring-boot-web'
+include 'spring-boot-rest-template'
+include 'spring-boot-autowired'
