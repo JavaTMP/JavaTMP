@@ -72,8 +72,3 @@ subprojects {
         }
     }
 }
-
-bootJar {
-    enabled = false
-}
-

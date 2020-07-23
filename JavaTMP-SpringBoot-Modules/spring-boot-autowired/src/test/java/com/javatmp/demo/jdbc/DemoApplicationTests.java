@@ -1,16 +1,13 @@
-package com.javatmp.demo;
+package com.javatmp.demo.jdbc;
 
+import com.javatmp.DemoApplication;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-@SpringBootTest
+@SpringBootTest(classes = DemoApplication.class)
 @Slf4j
-class RestApplicationTests {
+class DemoApplicationTests {
 
     @Test
     void contextLoads1() {
@@ -20,10 +17,6 @@ class RestApplicationTests {
     @Test
     void contextLoads2() {
         log.debug("*** SpringBoot Test Context Load 2 ***");
-    }
-
-    @SpringBootApplication
-    static class TestConfiguration {
     }
 
 }

@@ -31,4 +31,7 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### Default Logs ###
 /logs/
+logs/
