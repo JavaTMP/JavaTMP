@@ -2,6 +2,10 @@ buildscript {
     repositories {
         mavenLocal()
         mavenCentral()
+        jcenter()
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBoot}")
@@ -9,7 +13,7 @@ buildscript {
 }
 
 plugins {
-    id 'java'
+    id 'java-library'
     id 'org.springframework.boot' version "${springBoot}"
     id 'io.spring.dependency-management' version "${dependencyManagement}"
 }
@@ -35,6 +39,7 @@ subprojects {
     repositories {
         mavenLocal()
         mavenCentral()
+        jcenter()
     }
 
     test {
@@ -71,3 +76,4 @@ subprojects {
 bootJar {
     enabled = false
 }
+
