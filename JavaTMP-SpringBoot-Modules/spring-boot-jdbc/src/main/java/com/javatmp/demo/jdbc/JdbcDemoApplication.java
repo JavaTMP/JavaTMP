@@ -1,6 +1,5 @@
 package com.javatmp.demo.jdbc;
 
-import com.javatmp.demo.jdbc.entity.Customer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -48,5 +47,15 @@ public class JdbcDemoApplication implements CommandLineRunner {
 				"SELECT id, first_name, last_name FROM customers WHERE first_name = ?", new Object[] { "Josh" },
 				(rs, rowNum) -> new Customer(rs.getLong("id"), rs.getString("first_name"), rs.getString("last_name"))
 		).forEach(customer -> log.info(customer.toString()));
+
+		jdbcTemplate.execute("CREATE TABLE STUDENT (\n" +
+				"    SNO VARCHAR2(3 BYTE) NOT NULL ,\n" +
+				"    SNAME VARCHAR2(9 BYTE) NOT NULL ,\n" +
+				"    SSEX CHAR(2 BYTE) NOT NULL \n" +
+				")");
+		jdbcTemplate.execute("INSERT INTO STUDENT VALUES ('001', 'KangKang', 'M ')");
+		jdbcTemplate.execute("INSERT INTO STUDENT VALUES ('002', 'Mike', 'M ')");
+		jdbcTemplate.execute("INSERT INTO STUDENT VALUES ('003', 'Jane', 'F ')");
+
 	}
 }

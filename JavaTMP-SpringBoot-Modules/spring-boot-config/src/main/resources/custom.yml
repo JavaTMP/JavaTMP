@@ -1,0 +1,7 @@
+
+com:
+  javatmp:
+    config:
+      yaml:
+        name: Custom Yaml JavaTMP Configuration Name
+        description: Custom Yaml  JavaTMP Configuration Name

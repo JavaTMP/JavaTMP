@@ -1,0 +1,16 @@
+
+plugins {
+    id 'war'
+}
+bootJar {
+    enabled = false
+}
+bootWar {
+    enabled = true
+}
+
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+}
