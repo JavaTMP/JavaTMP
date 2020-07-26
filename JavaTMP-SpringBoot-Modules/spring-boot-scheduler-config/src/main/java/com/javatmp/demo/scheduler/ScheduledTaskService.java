@@ -14,24 +14,25 @@ public class ScheduledTaskService {
     @Scheduled(fixedRate = 1000, initialDelay = 1000)
     public void fixedRateCurrentDate() throws InterruptedException {
         log.debug("Start fixed rate current date : {}", new Date());
-        TimeUnit.SECONDS.sleep(3);
-        log.debug("End fixed rate current date : {}", new Date());
+        TimeUnit.SECONDS.sleep(10);
+//        log.debug("End fixed rate current date : {}", new Date());
 
     }
 
-    @Scheduled(fixedDelay = 1000, initialDelay = 1000)
+    @Scheduled(fixedDelay = 5000, initialDelay = 1000)
     public void fixedDelayCurrentDate() throws InterruptedException {
         log.debug("Start fixed delay current date : {}", new Date());
-        TimeUnit.SECONDS.sleep(3);
-        log.debug("End fixed delay current date : {}", new Date());
+        TimeUnit.SECONDS.sleep(10);
+//        log.debug("End fixed delay current date : {}", new Date());
     }
 
-    @Scheduled(cron="*/6 * * * * ?")
-    private void process() throws InterruptedException {
-        log.debug("Start cron process current date : {}", new Date());
-        TimeUnit.SECONDS.sleep(3);
-        log.debug("End cron process current date : {}", new Date());
-    }
+//    @Async
+//    @Scheduled(cron="*/6 * * * * ?")
+//    public void process() throws InterruptedException {
+//        log.debug("Start cron process current date : {}", new Date());
+//        TimeUnit.SECONDS.sleep(3);
+//        log.debug("End cron process current date : {}", new Date());
+//    }
 
 
 }

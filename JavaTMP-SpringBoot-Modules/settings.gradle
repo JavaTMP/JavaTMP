@@ -11,6 +11,8 @@ include 'spring-boot-jdbc'
 include 'spring-boot-jpa'
 include 'spring-boot-actuator'
 include 'spring-boot-scheduler'
+include 'spring-boot-scheduler-config'
+include 'spring-boot-async'
 
 rootProject.children.each {project ->
     println "child project is : ${project.name}"
