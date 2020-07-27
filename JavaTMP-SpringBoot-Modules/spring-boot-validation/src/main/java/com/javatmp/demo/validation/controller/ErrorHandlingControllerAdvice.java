@@ -1,8 +1,10 @@
-package com.javatmp.demo.validation.controller.controlleradvice;
+package com.javatmp.demo.validation.controller;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 
+import com.javatmp.demo.validation.validator.ValidationErrorResponse;
+import com.javatmp.demo.validation.validator.Violation;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;

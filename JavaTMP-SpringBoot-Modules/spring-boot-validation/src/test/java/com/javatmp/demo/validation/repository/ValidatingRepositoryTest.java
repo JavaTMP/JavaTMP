@@ -3,7 +3,7 @@ package com.javatmp.demo.validation.repository;
 import javax.persistence.EntityManager;
 import javax.validation.ConstraintViolationException;
 
-import com.javatmp.demo.validation.Input;
+import com.javatmp.demo.validation.entity.Input;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,5 +1,6 @@
-package com.javatmp.demo.validation.controller.parameters;
+package com.javatmp.demo.validation.controller;
 
+import com.javatmp.demo.validation.controller.ValidateParametersController;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.javatmp.demo.validation.controller.controlleradvice;
+package com.javatmp.demo.validation.validator;
 
 public class Violation {
 

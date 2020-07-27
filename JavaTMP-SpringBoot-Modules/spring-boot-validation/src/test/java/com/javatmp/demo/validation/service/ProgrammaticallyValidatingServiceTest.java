@@ -13,21 +13,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class ValidatingServiceTest {
+class ProgrammaticallyValidatingServiceTest {
 
     @Autowired
-    private ValidatingService service;
-
-    @Test
-    void whenInputIsValid_thenThrowsNoException() {
-        Input input = new Input();
-        input.setNumberBetweenOneAndTen(5);
-        input.setIpAddress("111.111.111.111");
-
-        service.validateInput(input);
-
-        // then no exception
-    }
+    private ProgrammaticallyValidatingService service;
 
     @Test
     void whenInputIsInvalid_thenThrowsException() {
@@ -37,6 +26,17 @@ class ValidatingServiceTest {
 
         assertThrows(ConstraintViolationException.class, () -> {
             service.validateInput(input);
+        });
+    }
+
+    @Test
+    void givenInjectedValidator_whenInputIsInvalid_thenThrowsException() {
+        Input input = new Input();
+        input.setNumberBetweenOneAndTen(0);
+        input.setIpAddress("invalid");
+
+        assertThrows(ConstraintViolationException.class, () -> {
+            service.validateInputWithInjectedValidator(input);
         });
     }
 

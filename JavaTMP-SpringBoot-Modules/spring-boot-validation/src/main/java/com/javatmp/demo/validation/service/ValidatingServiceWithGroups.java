@@ -2,7 +2,7 @@ package com.javatmp.demo.validation.service;
 
 import javax.validation.Valid;
 
-import com.javatmp.demo.validation.InputWithCustomValidator;
+import com.javatmp.demo.validation.entity.InputWithCustomValidator;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 

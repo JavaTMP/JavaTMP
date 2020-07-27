@@ -1,5 +1,6 @@
-package com.javatmp.demo.validation;
+package com.javatmp.demo.validation.validator;
 
+import com.javatmp.demo.validation.validator.IpAddressValidator;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

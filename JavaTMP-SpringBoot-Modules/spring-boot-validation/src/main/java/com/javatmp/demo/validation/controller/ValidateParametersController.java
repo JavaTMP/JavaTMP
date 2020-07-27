@@ -1,4 +1,4 @@
-package com.javatmp.demo.validation.controller.parameters;
+package com.javatmp.demo.validation.controller;
 
 import javax.validation.ConstraintViolationException;
 import javax.validation.constraints.Min;

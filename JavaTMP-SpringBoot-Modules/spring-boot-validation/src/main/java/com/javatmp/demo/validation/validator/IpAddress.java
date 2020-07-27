@@ -1,4 +1,4 @@
-package com.javatmp.demo.validation;
+package com.javatmp.demo.validation.validator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

@@ -1,26 +1,34 @@
-package com.javatmp.demo.validation;
+package com.javatmp.demo.validation.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.Pattern;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Null;
+
+import com.javatmp.demo.validation.validator.IpAddress;
+import com.javatmp.demo.validation.service.OnCreate;
+import com.javatmp.demo.validation.service.OnUpdate;
 
 @Entity
-public class Input {
+public class InputWithCustomValidator {
 
   @Id
   @GeneratedValue
+  @NotNull(groups = OnUpdate.class)
+  @Null(groups = OnCreate.class)
   private Long id;
 
   @Min(1)
   @Max(10)
+  @Column
   private int numberBetweenOneAndTen;
 
-  // Note that this is actually not a valid IP address pattern, since
-  // it allows values greater than 255 per octet.
-  @Pattern(regexp = "^[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}$")
+  @IpAddress
+  @Column
   private String ipAddress;
 
   public int getNumberBetweenOneAndTen() {
@@ -37,5 +45,13 @@ public class Input {
 
   public void setIpAddress(String ipAddress) {
     this.ipAddress = ipAddress;
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
   }
 }

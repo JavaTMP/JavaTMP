@@ -1,7 +1,8 @@
-package com.javatmp.demo.validation.controller.requestbody;
+package com.javatmp.demo.validation.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.javatmp.demo.validation.Input;
+import com.javatmp.demo.validation.controller.ValidateRequestBodyController;
+import com.javatmp.demo.validation.entity.Input;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
