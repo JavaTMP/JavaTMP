@@ -1,0 +1,14 @@
+bootJar {
+	enabled = true
+}
+dependencies {
+	implementation('org.springframework.boot:spring-boot-starter-data-jpa')
+	implementation('org.springframework.boot:spring-boot-starter-validation')
+	implementation('org.springframework.boot:spring-boot-starter-web')
+	runtimeOnly('com.h2database:h2')
+
+	// these dependencies are needed when running with Java 11, since they
+	// are no longer part of the JDK
+	implementation('javax.xml.bind:jaxb-api:2.3.1')
+	implementation('org.javassist:javassist:3.23.1-GA')
+}
