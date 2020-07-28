@@ -1,4 +1,4 @@
-package com.javatmp.demo.jdbc;
+package com.javatmp.demo;
 
 import com.javatmp.DemoApplication;
 import lombok.extern.slf4j.Slf4j;
