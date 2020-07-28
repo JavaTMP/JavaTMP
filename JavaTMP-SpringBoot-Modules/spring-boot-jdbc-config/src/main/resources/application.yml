@@ -1,0 +1,15 @@
+
+# Enabling H2 Console
+spring:
+  h2:
+    console:
+      enabled: true # http://localhost:8080/h2-console
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: "jdbc:h2:mem:testdb"
+    username: sa
+    password: sa
+  data:
+    jpa:
+      repositories:
+        bootstrap-mode: default
