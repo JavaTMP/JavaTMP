@@ -1,4 +1,4 @@
-package com.javatmp.demo.jdbc;
+package com.javatmp.demo.web;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
