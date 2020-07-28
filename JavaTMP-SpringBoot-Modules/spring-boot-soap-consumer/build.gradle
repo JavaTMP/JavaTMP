@@ -1,0 +1,61 @@
+bootJar {
+	enabled = true
+}
+// tag::configurations[]
+configurations {
+	jaxb
+}
+// end::configurations[]
+
+// tag::wsdl[]
+task genJaxb {
+	ext.sourcesDir = "${buildDir}/generated-sources/jaxb"
+	ext.classesDir = "${buildDir}/classes/jaxb"
+	ext.schema = "http://localhost:8080/ws/countries.wsdl"
+
+	outputs.dir classesDir
+
+	doLast() {
+		project.ant {
+			taskdef name: "xjc", classname: "com.sun.tools.xjc.XJCTask",
+					classpath: configurations.jaxb.asPath
+			mkdir(dir: sourcesDir)
+			mkdir(dir: classesDir)
+
+				xjc(destdir: sourcesDir, schema: schema,
+						package: "com.example.consumingwebservice.wsdl") {
+						arg(value: "-wsdl")
+					produces(dir: sourcesDir, includes: "**/*.java")
+				}
+
+				javac(destdir: classesDir, source: 1.8, target: 1.8, debug: true,
+						debugLevel: "lines,vars,source",
+						classpath: configurations.jaxb.asPath) {
+					src(path: sourcesDir)
+					include(name: "**/*.java")
+					include(name: "*.java")
+					}
+
+				copy(todir: classesDir) {
+						fileset(dir: sourcesDir, erroronmissingdir: false) {
+						exclude(name: "**/*.java")
+				}
+			}
+		}
+	}
+}
+// end::wsdl[]
+
+dependencies {
+// tag::dependency[]
+	implementation ('org.springframework.boot:spring-boot-starter-web-services') {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+	}
+	implementation 'org.springframework.ws:spring-ws-core'
+	// For Java 11:
+	implementation 'org.glassfish.jaxb:jaxb-runtime'
+	compile(files(genJaxb.classesDir).builtBy(genJaxb))
+
+	jaxb "com.sun.xml.bind:jaxb-xjc:2.1.7"
+// end::dependency[]
+}

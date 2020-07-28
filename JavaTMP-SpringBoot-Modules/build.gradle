@@ -13,7 +13,7 @@ buildscript {
 }
 
 plugins {
-    id 'java-library'
+    id 'java'
     id 'org.springframework.boot' version "${springBoot}"
     id 'io.spring.dependency-management' version "${dependencyManagement}"
 }

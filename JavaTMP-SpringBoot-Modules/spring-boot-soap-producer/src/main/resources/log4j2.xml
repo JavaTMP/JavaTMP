@@ -27,12 +27,12 @@
             <AppenderRef ref="Console"/>
             <AppenderRef ref="RollingFile"/>
         </Root>
-        <Logger name="org.hibernate" level="info" additivity="false">
+        <Logger name="org.hibernate" level="debug" additivity="false">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="RollingFile"/>
         </Logger>
 <!--        org.hibernate.SQL-->
-        <Logger name="org.springframework" level="info" additivity="false">
+        <Logger name="org.springframework" level="debug" additivity="false">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="RollingFile"/>
         </Logger>
