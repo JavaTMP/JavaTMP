@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * Spring Boot Main Runner Class
@@ -16,8 +16,8 @@ import java.util.List;
 public class RestDemoApplication {
 
     @Bean
-    public List<RestDto> getRestDtoRepository() {
-        return Collections.synchronizedList(new LinkedList<RestDto>());
+    public Set<RestDto> getRestDtoRepository() {
+        return Collections.synchronizedSet(new LinkedHashSet<>());
     }
 
     public static void main(String[] args) {

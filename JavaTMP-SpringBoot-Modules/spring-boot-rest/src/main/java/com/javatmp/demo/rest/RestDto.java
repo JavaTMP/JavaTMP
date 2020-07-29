@@ -1,8 +1,6 @@
 package com.javatmp.demo.rest;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -11,9 +9,13 @@ import java.util.List;
 import java.util.Map;
 
 @Data
-@NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class RestDto {
+    @EqualsAndHashCode.Include
+    private Long id;
     private int intField;
     private Integer integerField;
     private String stringField;

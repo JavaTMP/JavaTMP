@@ -2,20 +2,39 @@ package com.javatmp.demo.rest;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import static org.assertj.core.api.Assertions.assertThat;
+import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.web.server.LocalServerPort;
 
-@SpringBootTest
+import java.util.Set;
+
+
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @Slf4j
 class DemoApplicationTests {
 
-    @Test
-    void contextLoads1() {
-        log.debug("*** SpringBoot Test Context Load 1 ***");
-    }
+    @LocalServerPort
+    private int port;
+
+    @Autowired
+    private RestAPIController restAPIController;
+
+    @Autowired
+    private TestRestTemplate restTemplate;
 
     @Test
-    void contextLoads2() {
-        log.debug("*** SpringBoot Test Context Load 2 ***");
+    void contextLoads() {
+        assertThat(restAPIController).isNotNull();
+        log.debug("check controller : {} injected successfully", this.restAPIController.toString());
+
+    }
+    @Test
+    void getAllTest()  throws Exception {
+        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/rest/get",
+                Set.class)).isEmpty();
     }
 
 }
