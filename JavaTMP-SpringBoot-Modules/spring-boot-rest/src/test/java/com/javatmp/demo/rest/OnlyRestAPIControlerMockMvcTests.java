@@ -33,6 +33,4 @@ public class OnlyRestAPIControlerMockMvcTests {
                 .andDo(MockMvcResultHandlers.print())
                 .andReturn();
     }
-
-
 }
