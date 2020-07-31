@@ -34,3 +34,4 @@ These additional references should also help you:
 * [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)
 * [Run background process in linux](https://stackoverflow.com/questions/10408816/how-do-i-use-the-nohup-command-without-getting-nohup-out) 
 * [Spring Boot - Error creating a bean with name](https://javarevisited.blogspot.com/2019/04/spring-boot-error-error-creating-bean.html)
+* [SOAP Web Services With Apache CXF and Spring Boot](https://dzone.com/articles/soap-web-services-with-apache-cxf-and-spring-boot)
