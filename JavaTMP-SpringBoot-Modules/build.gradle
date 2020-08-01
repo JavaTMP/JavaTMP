@@ -71,4 +71,8 @@ subprojects {
             extendsFrom annotationProcessor
         }
     }
+
+    bootJar {
+        enabled = false
+    }
 }
