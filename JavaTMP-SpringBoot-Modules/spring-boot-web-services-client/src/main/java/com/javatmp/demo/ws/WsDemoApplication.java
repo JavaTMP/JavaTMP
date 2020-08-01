@@ -1,11 +1,17 @@
 package com.javatmp.demo.ws;
 
+import com.blog.demo.service.AccountService;
 import com.blog.demo.service.AccountServiceEndpointService;
+import com.blog.demo.webservices.accountservice.AccountDetailsRequest;
+import com.blog.demo.webservices.accountservice.AccountDetailsResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+import javax.xml.namespace.QName;
+import java.net.URL;
 
 /**
  * Spring Boot Main Runner Class
@@ -22,13 +28,20 @@ public class WsDemoApplication {
     public CommandLineRunner springBootMain() throws Exception {
         return args -> {
             log.info("*** Start Spring Boot Project ***");
-            AccountServiceEndpointService endpointService = new AccountServiceEndpointService();
-//
-//            AccountService service = endpointService.getAccountServiceEndpointPort();
-//            AccountDetailsRequest request = new AccountDetailsRequest();
-//            request.setAccountNumber("123");
-//            AccountDetailsResponse response = service.getAccountDetails(request);
-//            log.debug("response : {}", response);
+            URL url  = new URL("http://localhost:8090/soap-api/service/accounts?wsdl");
+            //check above URL in browser, you should see WSDL file
+
+            //creating QName using targetNamespace and name
+            QName qname = new QName("http://service.demo.blog.com/", "AccountServiceEndpointService");
+
+            AccountServiceEndpointService endpointService =
+                    new AccountServiceEndpointService(url, qname);
+
+            AccountService service = endpointService.getAccountServiceEndpointPort();
+            AccountDetailsRequest request = new AccountDetailsRequest();
+            request.setAccountNumber("123");
+            AccountDetailsResponse response = service.getAccountDetails(request);
+            log.debug("response : {}", response);
 //            PersonServiceImplService serviceImpl = new PersonServiceImplService();
 //
 //            PersonService ps = serviceImpl.getPersonServiceImplPort();

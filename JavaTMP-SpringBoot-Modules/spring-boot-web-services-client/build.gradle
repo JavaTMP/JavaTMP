@@ -2,16 +2,19 @@
 configurations {
     jaxws
 }
+//def xjcSourceDir = "${projectDir}/src/main/resources/META-INF/wsdl"
+//def jaxwsTargetSrcDir = "${buildDir}/generated-sources/jaxws"
+//def jaxwsTargetClassesDir = "${buildDir}/classes/jaxws"
 
-def xjcSourceDir = "${projectDir}/src/main/resources"
-def jaxwsTargetSrcDir = "${projectDir}/src/generated"
+def xjcSourceDir = "${projectDir}/src/main/resources/META-INF/wsdl"
+def jaxwsTargetSrcDir = "${projectDir}/src/generated/jaxws"
 def jaxwsTargetClassesDir = "${buildDir}/classes/jaxws"
 
 // tag::wsdl[]
 task genJaxws {
     ext.sourcesDir = "${jaxwsTargetSrcDir}"
     ext.classesDir = "${jaxwsTargetClassesDir}"
-    ext.schema_path = "${projectDir}/src/main/resources"
+    ext.schema_path = "${projectDir}/src/main/resources/META-INF/wsdl"
 
     // Create a file tree with a base directory
     FileTree wsdlTree = fileTree(dir: schema_path, include: '**/*.wsdl')
@@ -22,14 +25,14 @@ task genJaxws {
         // Iterate over the contents of a tree
         wsdlTree.each {File file ->
             println "absolutie path is : " + file.absolutePath
-            println "pat is : " + file.path
+            println "path is : " + file.path
             println "name is : " + file.name
         }
         wsdlTree.each {File file ->
             def wsdlAbsoultePath = file.absolutePath
             println "wsdl file location is : " + wsdlAbsoultePath
-//            def wsdlRelativeFilePath = wsdlAbsoultePath.substring(wsdlAbsoultePath.indexOf('META-INF\\wsdl\\'))
-            def wsdlRelativeFilePath = wsdlAbsoultePath
+            def wsdlRelativeFilePath = wsdlAbsoultePath.substring(wsdlAbsoultePath.indexOf('META-INF\\wsdl\\'))
+            println "wsdl file wsdlRelativeFilePath is : " + wsdlRelativeFilePath
             project.ant {
                 echo(message: "path is ${wsdlAbsoultePath} and Relative Path is classpath:${wsdlRelativeFilePath}")
                 taskdef name: "wsimport", classname: "com.sun.tools.ws.ant.WsImport",
@@ -44,8 +47,13 @@ task genJaxws {
                         verbose: "false",
                         quiet: "false",
                         xnocompile: "true",
-                        wsdl: "${wsdlAbsoultePath}",
-                        wsdlLocation: "classpath:${wsdlRelativeFilePath}") {
+                        wsdl: "${wsdlAbsoultePath}"
+//                        ,
+//                        wsdlLocation: "classpath:${wsdlRelativeFilePath}"
+                        ,
+                        wsdlLocation: "classpath:${wsdlRelativeFilePath}"
+
+                ) {
                     xjcarg(value: "-XautoNameResolution")
                 }
 
@@ -71,10 +79,13 @@ task genJaxws {
 
 dependencies {
     jaxws('com.sun.xml.ws:jaxws-tools:2.1.4')
+    implementation("org.springframework.boot:spring-boot-starter-validation")
 }
 
 task cleanGeneratedSource {
-    delete "${jaxwsTargetSrcDir}"
+    doLast {
+        delete "${jaxwsTargetSrcDir}"
+    }
 }
 
 sourceSets {
@@ -87,7 +98,7 @@ sourceSets {
 
 clean { dependsOn cleanGeneratedSource }
 compileJava { dependsOn genJaxws }
-build { dependsOn clean}
+//build { dependsOn clean}
 bootJar {
     enabled = true
 }
