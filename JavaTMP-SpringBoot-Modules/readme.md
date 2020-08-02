@@ -34,7 +34,3 @@ These additional references should also help you:
 * [Gradle Build Scans – insights for your project's build](https://scans.gradle.com#gradle)
 * [Run background process in linux](https://stackoverflow.com/questions/10408816/how-do-i-use-the-nohup-command-without-getting-nohup-out) 
 * [Spring Boot - Error creating a bean with name](https://javarevisited.blogspot.com/2019/04/spring-boot-error-error-creating-bean.html)
-* [SOAP Web Services With Apache CXF and Spring Boot](https://dzone.com/articles/soap-web-services-with-apache-cxf-and-spring-boot)
-* [Spring Boot & Apache CXF – SOAP on steroids fueled by cxf-spring-boot-starter](https://blog.codecentric.de/en/2016/10/spring-boot-apache-cxf-spring-boot-starter/)
-* [Enterprise & production ready SOAP webservices powered by Spring Boot & Apache CXF](https://github.com/codecentric/cxf-spring-boot-starter)
-* [Which style of WSDL should I use?](https://www.ibm.com/developerworks/library/ws-whichwsdl/index.html)
