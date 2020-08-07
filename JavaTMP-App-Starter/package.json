@@ -21,7 +21,7 @@
     },
     "dependencies": {
         "autosize": "^4.0.2",
-        "bootstrap": "^4.5.0",
+        "bootstrap": "^4.5.2",
         "bootstrap-colorselector": "^0.1.0",
         "bootstrap-daterangepicker": "^3.1.0",
         "bootstrap-maxlength": "^1.10.0",
@@ -47,7 +47,7 @@
         "echarts": "^4.8.0",
         "font-awesome-animation": "^0.2.1",
         "fullcalendar": "^3.10.2",
-        "inputmask": "^5.0.3",
+        "inputmask": "^5.0.5",
         "ion-rangeslider": "^2.3.0",
         "jquery": "^3.5.1",
         "jquery-form": "^4.3.0",
@@ -68,11 +68,11 @@
         "bootstrap-actionable": "^1.0.12",
         "bootstrap-card-extender": "^1.0.2",
         "bootstrap-alert-wrapper": "^1.0.3",
-        "jquery.fancytree": "^2.35.0",
-        "bootswatch": "^4.5.0",
+        "jquery.fancytree": "^2.36.1",
+        "bootswatch": "^4.5.1",
         "file-saver": "^2.0.2",
         "numeral": "2.0.6",
-        "@fortawesome/fontawesome-free": "^5.13.1",
+        "@fortawesome/fontawesome-free": "^5.14.0",
         "moment-timezone": "^0.5.31",
         "material-design-icons": "^3.0.1",
         "form-serializer": "^2.5.0",
@@ -80,7 +80,7 @@
         "jquery.easing": "^1.4.1",
         "aos": "^2.3.4",
         "animate.css": "^4.1.0",
-        "bootstrap-input-spinner": "^1.13.9",
+        "bootstrap-input-spinner": "^1.13.19",
         "jQuery-QueryBuilder": "^2.5.0",
         "formdata-polyfill": "3.0.20"
     },
@@ -100,7 +100,7 @@
         "pump": "^3.0.0",
         "async": "^3.2.0",
         "gulp-uglify-es": "^2.0.0",
-        "yargs": "^15.3.1"
+        "yargs": "^15.4.1"
     },
     "napa-config": {
         "cache": false,
