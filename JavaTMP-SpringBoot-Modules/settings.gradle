@@ -4,6 +4,7 @@ include 'spring-boot-core:spring-boot-empty'
 include 'spring-boot-core:spring-boot-config'
 include 'spring-boot-core:spring-boot-order'
 include 'spring-boot-core:spring-boot-autowired'
+include 'spring-boot-core:spring-boot-bean-lifecycle'
 
 include 'spring-boot-data:spring-boot-jdbc'
 include 'spring-boot-data:spring-boot-jdbc-converter'
