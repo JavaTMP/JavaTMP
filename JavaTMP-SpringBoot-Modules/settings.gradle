@@ -31,7 +31,8 @@ include 'spring-boot-threading:spring-boot-batch'
 
 include 'spring-boot-management:spring-boot-actuator'
 
-include 'spring-boot-validation'
+include 'spring-boot-miscellaneous:spring-boot-validation'
+include 'spring-boot-miscellaneous:spring-boot-itext'
 
 include 'spring-boot-cache:spring-boot-cache-simple'
 

@@ -1,0 +1,15 @@
+
+bootJar {
+    enabled = true
+}
+
+dependencies {
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    // https://mvnrepository.com/artifact/com.itextpdf/itextpdf
+    implementation group: 'com.itextpdf', name: 'itextpdf', version: '5.5.13.1'
+    // https://mvnrepository.com/artifact/com.itextpdf/itext7-core
+    implementation group: 'com.itextpdf', name: 'itext7-core', version: '7.1.12'
+}
+
+
+
