@@ -1,0 +1,16 @@
+
+bootJar {
+    enabled = true
+}
+
+dependencies {
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    // https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports
+    implementation group: 'net.sf.jasperreports', name: 'jasperreports', version: '6.14.0'
+    // https://mvnrepository.com/artifact/com.itextpdf/itextpdf
+    implementation group: 'com.lowagie', name: 'itext', version: '2.1.7'
+
+}
+
+
+

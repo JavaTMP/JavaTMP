@@ -33,6 +33,7 @@ include 'spring-boot-management:spring-boot-actuator'
 
 include 'spring-boot-miscellaneous:spring-boot-validation'
 include 'spring-boot-miscellaneous:spring-boot-itext'
+include 'spring-boot-miscellaneous:spring-boot-JasperReports'
 
 include 'spring-boot-cache:spring-boot-cache-simple'
 
