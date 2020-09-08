@@ -241,6 +241,8 @@ public class JpaUtil {
             for (DataTableColumn column : page.getColumns()) {
                 if (column.getSearch() != null && column.getSearch().getValue() != null
                         && !column.getSearch().getValue().trim().equals("")) {
+                    log.debug("Try to create a predicate for column : {}, value : {}, operator : {}",
+                            column.getName(), column.getSearch().getValue(), column.getSearch().getOperatorType());
                     if ("olderThan".equals(column.getSearch().getOperatorType())) {
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
                         Date searchDate = sdf.parse(column.getSearch().getValue());
@@ -254,7 +256,11 @@ public class JpaUtil {
                         Date searchDate = sdf.parse(column.getSearch().getValue());
                         predicate = cb.and(predicate, cb.equal(from.get(column.getName()), (Comparable) searchDate));
                     } else {
-                        predicate = cb.and(predicate, cb.equal(from.get(column.getName()), column.getSearch().getValue()));
+                        if(column.getSearch().getValueObject() != null) {
+                            predicate = cb.and(predicate, cb.equal(from.get(column.getName()), column.getSearch().getValueObject()));
+                        } else {
+                            predicate = cb.and(predicate, cb.equal(from.get(column.getName()), column.getSearch().getValue()));
+                        }
                     }
                 }
             }

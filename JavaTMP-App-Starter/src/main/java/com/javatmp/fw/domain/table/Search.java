@@ -8,6 +8,7 @@ import lombok.EqualsAndHashCode;
 public class Search {
 
     private String value;
+    private Object valueObject;
     private Boolean regex;
     private String operatorType;
 

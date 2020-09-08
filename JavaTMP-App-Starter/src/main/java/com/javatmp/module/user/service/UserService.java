@@ -2,6 +2,7 @@ package com.javatmp.module.user.service;
 
 import com.javatmp.fw.domain.table.DataTableRequest;
 import com.javatmp.fw.domain.table.DataTableResults;
+import com.javatmp.fw.domain.table.Search;
 import com.javatmp.fw.util.MD5Util;
 import com.javatmp.module.dms.entity.Document;
 import com.javatmp.module.dms.entity.Document_;
@@ -9,28 +10,24 @@ import com.javatmp.module.user.entity.Country;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.entity.User_;
 import com.javatmp.module.user.repository.UserRepository;
-import java.text.ParseException;
-import java.util.Date;
-import javax.persistence.EntityManager;
-import javax.persistence.LockModeType;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaDelete;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.CriteriaUpdate;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.JoinType;
-import javax.persistence.criteria.Root;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Slf4j
 @Service
 public class UserService {
 
-    private UserRepository userRepository;
-    private EntityManager em;
+    private final UserRepository userRepository;
+    private final EntityManager em;
 
     public UserService(UserRepository userRepository, EntityManager em) {
         this.userRepository = userRepository;
@@ -255,10 +252,30 @@ public class UserService {
     public DataTableResults<User> listAllUsers(DataTableRequest<User> tableRequest) throws ParseException {
 
         tableRequest.setSelects(new String[]{User_.ID, User_.USER_NAME, User_.FIRST_NAME,
-            User_.LAST_NAME, User_.STATUS, User_.BIRTH_DATE, User_.CREATION_DATE, User_.EMAIL,
-            User_.LANG, User_.THEME, User_.COUNTRY_ID, User_.ADDRESS, User_.TIMEZONE,
-            User_.PROFILE_PIC_DOCUMENT_ID, User_.PROFILE_PIC_DOCUMENT + "." + Document_.RANDOM_HASH});
+                User_.LAST_NAME, User_.STATUS, User_.BIRTH_DATE, User_.CREATION_DATE, User_.EMAIL,
+                User_.LANG, User_.THEME, User_.COUNTRY_ID, User_.ADDRESS, User_.TIMEZONE,
+                User_.PROFILE_PIC_DOCUMENT_ID, User_.PROFILE_PIC_DOCUMENT + "." + Document_.RANDOM_HASH});
         tableRequest.setClassType(User.class);
+
+        // set explicitly the birthdate value
+        tableRequest.getColumns().forEach(dataTableColumn -> {
+            log.debug("check column : {}", dataTableColumn.getName());
+            if (dataTableColumn.getName().equals("birthDate")) {
+                Search search = dataTableColumn.getSearch();
+                if (search != null && search.getValue() != null) {
+                    log.debug("column : {}, search value : {}, operator : {}",
+                            dataTableColumn.getName(), search.getValue(), search.getOperatorType());
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    try {
+                        Date searchDate = sdf.parse(search.getValue());
+                        search.setValueObject(searchDate);
+                    } catch (ParseException e) {
+                        log.error("error parsing birthdate string", e);
+                    }
+                }
+            }
+        });
+
         return this.userRepository.retrievePageRequestDetails(tableRequest);
 
     }
