@@ -32,7 +32,10 @@
                 success: function (remoteContent) {
                     $('.all_totalCount', cardletElement).html(remoteContent).counterUp({
                         delay: 10,
-                        time: 1000
+                        time: 1000,
+                        formatter: function (n) {
+                            return numeral(n).format('0 a');
+                        }
                     });
                 },
                 complete: function (jqXHR, textStatus) {
@@ -57,7 +60,10 @@
                 success: function (remoteContent) {
                     $('.today_totalCount', cardletElement).html(remoteContent).counterUp({
                         delay: 10,
-                        time: 1000
+                        time: 1000,
+                        formatter: function (n) {
+                            return numeral(n).format('0 a');
+                        }
                     });
                 },
                 complete: function (jqXHR, textStatus) {

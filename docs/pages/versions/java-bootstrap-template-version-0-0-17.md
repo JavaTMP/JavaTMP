@@ -4,16 +4,21 @@ title: Java Bootstrap Template Version 0.0.17 (Current Development Version)
 # {{ page.title }}
 
 ## on
+- fixed some issues in home cardlet related to large number values. By applying 
+number plugin.
 - Update the following dependencies in package.json:
     - gulp-markdown from 5.0.1 to 5.1.0
     - gulp-zip from 5.0.1 to 5.0.2
     - @fortawesome/fontawesome-free from 5.13.1 to 5.14.0
     - bootstrap from 4.5.0 to 4.5.2
-    - bootstrap-input-spinner from 1.13.9 to 1.13.19
-    - bootswatch from 4.5.0 to 4.5.1
     - inputmask from 5.0.3 to 5.0.5
-    - jquery.fancytree from 2.35.0 to 2.36.1
-    - yargs from 15.3.1 to 15.4.1
+    - animate.css from 4.1.0 to 4.1.1
+    - bootstrap-input-spinner from 1.13.19 to 1.14.1
+    - bootswatch from 4.5.0 to 4.5.2
+    - cropperjs from 1.5.7 to 1.5.9
+    - echarts from 4.8.0 to 4.9.0
+    - jquery.fancytree from 2.35.0 to 2.37.0
+    - yargs from 15.3.1 to 16.0.3
 - Run gulp default to regenerate dist folders.
 
 ## df92b0f on Jun 25, 2020, 9:37 PM GMT+4

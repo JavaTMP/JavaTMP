@@ -28,7 +28,7 @@
         "bootstrap-modal-wrapper": "^2.0.1",
         "bootstrap-reverse": "^4.3.1",
         "bootstrap-slider": "^11.0.2",
-        "cropperjs": "^1.5.7",
+        "cropperjs": "^1.5.9",
         "jquery-cropper": "^1.0.1",
         "datatables.net": "^1.10.21",
         "datatables.net-bs4": "^1.10.21",
@@ -44,7 +44,7 @@
         "datatables.net-fixedcolumns-bs4": "^3.3.1",
         "datatables.net-rowgroup": "^1.1.2",
         "datatables.net-rowgroup-bs4": "^1.1.2",
-        "echarts": "^4.8.0",
+        "echarts": "^4.9.0",
         "font-awesome-animation": "^0.2.1",
         "fullcalendar": "^3.10.2",
         "inputmask": "^5.0.5",
@@ -68,8 +68,8 @@
         "bootstrap-actionable": "^1.0.12",
         "bootstrap-card-extender": "^1.0.2",
         "bootstrap-alert-wrapper": "^1.0.3",
-        "jquery.fancytree": "^2.36.1",
-        "bootswatch": "^4.5.1",
+        "jquery.fancytree": "^2.37.0",
+        "bootswatch": "^4.5.2",
         "file-saver": "^2.0.2",
         "numeral": "2.0.6",
         "@fortawesome/fontawesome-free": "^5.14.0",
@@ -79,8 +79,8 @@
         "handlebars": "^4.7.6",
         "jquery.easing": "^1.4.1",
         "aos": "^2.3.4",
-        "animate.css": "^4.1.0",
-        "bootstrap-input-spinner": "^1.13.19",
+        "animate.css": "^4.1.1",
+        "bootstrap-input-spinner": "^1.14.1",
         "jQuery-QueryBuilder": "^2.5.0",
         "formdata-polyfill": "3.0.20"
     },
@@ -100,7 +100,7 @@
         "pump": "^3.0.0",
         "async": "^3.2.0",
         "gulp-uglify-es": "^2.0.0",
-        "yargs": "^15.4.1"
+        "yargs": "^16.0.3"
     },
     "napa-config": {
         "cache": false,

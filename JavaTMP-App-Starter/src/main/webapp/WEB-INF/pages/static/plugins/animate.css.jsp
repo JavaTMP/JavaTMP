@@ -14,97 +14,100 @@
             <div class="card my-3">
                 <div class="card-body">
                     <h4>attention_seekers</h4>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated bounce" mouseleaveRemove="animated bounce" href="javascript:;">bounce</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated flash" mouseleaveRemove="animated flash" href="javascript:;">flash</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated pulse" mouseleaveRemove="animated pulse" href="javascript:;">pulse</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated rubberBand" mouseleaveRemove="animated rubberBand" href="javascript:;">rubberBand</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated shake" mouseleaveRemove="animated shake" href="javascript:;">shake</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated headShake" mouseleaveRemove="animated headShake" href="javascript:;">headShake</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated swing" mouseleaveRemove="animated swing" href="javascript:;">swing</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated tada" mouseleaveRemove="animated tada" href="javascript:;">tada</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated wobble" mouseleaveRemove="animated wobble" href="javascript:;">wobble</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated jello" mouseleaveRemove="animated jello" href="javascript:;">jello</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated heartBeat" mouseleaveRemove="animated heartBeat" href="javascript:;">heartBeat</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__bounce" mouseleaveRemove="animate__animated animate__bounce" href="javascript:;">bounce</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__flash" mouseleaveRemove="animate__animated animate__flash" href="javascript:;">flash</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__pulse" mouseleaveRemove="animate__animated animate__pulse" href="javascript:;">pulse</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__rubberBand" mouseleaveRemove="animate__animated animate__rubberBand" href="javascript:;">rubberBand</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__shakeX" mouseleaveRemove="animate__animated animate__shakeX" href="javascript:;">shake X</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__shakeY" mouseleaveRemove="animate__animated animate__shakeY" href="javascript:;">shake Y</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__headShake" mouseleaveRemove="animate__animated animate__headShake" href="javascript:;">headShake</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__swing" mouseleaveRemove="animate__animated animate__swing" href="javascript:;">swing</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__tada" mouseleaveRemove="animate__animated animate__tada" href="javascript:;">tada</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__wobble" mouseleaveRemove="animate__animated animate__wobble" href="javascript:;">wobble</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__jello" mouseleaveRemove="animate__animated animate__jello" href="javascript:;">jello</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__heartBeat" mouseleaveRemove="animate__animated animate__heartBeat" href="javascript:;">heartBeat</a>
                     <h4>bouncing_entrances</h4>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated bounceIn" mouseleaveRemove="animated bounceIn" href="javascript:;">bounceIn</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated bounceInDown" mouseleaveRemove="animated bounceInDown" href="javascript:;">bounceInDown</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated bounceInLeft" mouseleaveRemove="animated bounceInLeft" href="javascript:;">bounceInLeft</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated bounceInRight" mouseleaveRemove="animated bounceInRight" href="javascript:;">bounceInRight</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated bounceInUp" mouseleaveRemove="animated bounceInUp" href="javascript:;">bounceInUp</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__bounceIn" mouseleaveRemove="animate__animated animate__bounceIn" href="javascript:;">bounceIn</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__bounceInDown" mouseleaveRemove="animate__animated animate__bounceInDown" href="javascript:;">bounceInDown</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__bounceInLeft" mouseleaveRemove="animate__animated animate__bounceInLeft" href="javascript:;">bounceInLeft</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__bounceInRight" mouseleaveRemove="animate__animated animate__bounceInRight" href="javascript:;">bounceInRight</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__bounceInUp" mouseleaveRemove="animate__animated animate__bounceInUp" href="javascript:;">bounceInUp</a>
                     <h4>bouncing_exits</h4>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated bounceOut" mouseleaveRemove="animated bounceOut" href="javascript:;">bounceOut</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated bounceOutDown" mouseleaveRemove="animated bounceOutDown" href="javascript:;">bounceOutDown</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated bounceOutLeft" mouseleaveRemove="animated bounceOutLeft" href="javascript:;">bounceOutLeft</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated bounceOutRight" mouseleaveRemove="animated bounceOutRight" href="javascript:;">bounceOutRight</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated bounceOutUp" mouseleaveRemove="animated bounceOutUp" href="javascript:;">bounceOutUp</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__bounceOut" mouseleaveRemove="animate__animated animate__bounceOut" href="javascript:;">bounceOut</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__bounceOutDown" mouseleaveRemove="animate__animated animate__bounceOutDown" href="javascript:;">bounceOutDown</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__bounceOutLeft" mouseleaveRemove="animate__animated animate__bounceOutLeft" href="javascript:;">bounceOutLeft</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__bounceOutRight" mouseleaveRemove="animate__animated animate__bounceOutRight" href="javascript:;">bounceOutRight</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__bounceOutUp" mouseleaveRemove="animate__animated animate__bounceOutUp" href="javascript:;">bounceOutUp</a>
                     <h4>fading_entrances</h4>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated fadeIn" mouseleaveRemove="animated fadeIn" href="javascript:;">fadeIn</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated fadeInDown" mouseleaveRemove="animated fadeInDown" href="javascript:;">fadeInDown</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated fadeInDownBig" mouseleaveRemove="animated fadeInDownBig" href="javascript:;">fadeInDownBig</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated fadeInLeft" mouseleaveRemove="animated fadeInLeft" href="javascript:;">fadeInLeft</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated fadeInLeftBig" mouseleaveRemove="animated fadeInLeftBig" href="javascript:;">fadeInLeftBig</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated fadeInRight" mouseleaveRemove="animated fadeInRight" href="javascript:;">fadeInRight</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated fadeInRightBig" mouseleaveRemove="animated fadeInRightBig" href="javascript:;">fadeInRightBig</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated fadeInUp" mouseleaveRemove="animated fadeInUp" href="javascript:;">fadeInUp</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated fadeInUpBig" mouseleaveRemove="animated fadeInUpBig" href="javascript:;">fadeInUpBig</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__fadeIn" mouseleaveRemove="animate__animated animate__fadeIn" href="javascript:;">fadeIn</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__fadeInDown" mouseleaveRemove="animate__animated animate__fadeInDown" href="javascript:;">fadeInDown</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__fadeInDownBig" mouseleaveRemove="animate__animated animate__fadeInDownBig" href="javascript:;">fadeInDownBig</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__fadeInLeft" mouseleaveRemove="animate__animated animate__fadeInLeft" href="javascript:;">fadeInLeft</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__fadeInLeftBig" mouseleaveRemove="animate__animated animate__fadeInLeftBig" href="javascript:;">fadeInLeftBig</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__fadeInRight" mouseleaveRemove="animate__animated animate__fadeInRight" href="javascript:;">fadeInRight</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__fadeInRightBig" mouseleaveRemove="animate__animated animate__fadeInRightBig" href="javascript:;">fadeInRightBig</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__fadeInUp" mouseleaveRemove="animate__animated animate__fadeInUp" href="javascript:;">fadeInUp</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__fadeInUpBig" mouseleaveRemove="animate__animated animate__fadeInUpBig" href="javascript:;">fadeInUpBig</a>
                     <h4>fading_exits</h4>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated fadeOut" mouseleaveRemove="animated fadeOut" href="javascript:;">fadeOut</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated fadeOutDown" mouseleaveRemove="animated fadeOutDown" href="javascript:;">fadeOutDown</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated fadeOutDownBig" mouseleaveRemove="animated fadeOutDownBig" href="javascript:;">fadeOutDownBig</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated fadeOutLeft" mouseleaveRemove="animated fadeOutLeft" href="javascript:;">fadeOutLeft</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated fadeOutLeftBig" mouseleaveRemove="animated fadeOutLeftBig" href="javascript:;">fadeOutLeftBig</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated fadeOutRight" mouseleaveRemove="animated fadeOutRight" href="javascript:;">fadeOutRight</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated fadeOutRightBig" mouseleaveRemove="animated fadeOutRightBig" href="javascript:;">fadeOutRightBig</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated fadeOutUp" mouseleaveRemove="animated fadeOutUp" href="javascript:;">fadeOutUp</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated fadeOutUpBig" mouseleaveRemove="animated fadeOutUpBig" href="javascript:;">fadeOutUpBig</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__fadeOut" mouseleaveRemove="animate__animated animate__fadeOut" href="javascript:;">fadeOut</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__fadeOutDown" mouseleaveRemove="animate__animated animate__fadeOutDown" href="javascript:;">fadeOutDown</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__fadeOutDownBig" mouseleaveRemove="animate__animated animate__fadeOutDownBig" href="javascript:;">fadeOutDownBig</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__fadeOutLeft" mouseleaveRemove="animate__animated animate__fadeOutLeft" href="javascript:;">fadeOutLeft</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__fadeOutLeftBig" mouseleaveRemove="animate__animated animate__fadeOutLeftBig" href="javascript:;">fadeOutLeftBig</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__fadeOutRight" mouseleaveRemove="animate__animated animate__fadeOutRight" href="javascript:;">fadeOutRight</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__fadeOutRightBig" mouseleaveRemove="animate__animated animate__fadeOutRightBig" href="javascript:;">fadeOutRightBig</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__fadeOutUp" mouseleaveRemove="animate__animated animate__fadeOutUp" href="javascript:;">fadeOutUp</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__fadeOutUpBig" mouseleaveRemove="animate__animated animate__fadeOutUpBig" href="javascript:;">fadeOutUpBig</a>
                     <h4>flippers</h4>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated flip" mouseleaveRemove="animated flip" href="javascript:;">flip</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated flipInX" mouseleaveRemove="animated flipInX" href="javascript:;">flipInX</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated flipInY" mouseleaveRemove="animated flipInY" href="javascript:;">flipInY</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated flipOutX" mouseleaveRemove="animated flipOutX" href="javascript:;">flipOutX</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated flipOutY" mouseleaveRemove="animated flipOutY" href="javascript:;">flipOutY</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__flip" mouseleaveRemove="animate__animated animate__flip" href="javascript:;">flip</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__flipInX" mouseleaveRemove="animate__animated animate__flipInX" href="javascript:;">flipInX</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__flipInY" mouseleaveRemove="animate__animated animate__flipInY" href="javascript:;">flipInY</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__flipOutX" mouseleaveRemove="animate__animated animate__flipOutX" href="javascript:;">flipOutX</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__flipOutY" mouseleaveRemove="animate__animated animate__flipOutY" href="javascript:;">flipOutY</a>
                     <h4>lightspeed</h4>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated lightSpeedIn" mouseleaveRemove="animated lightSpeedIn" href="javascript:;">lightSpeedIn</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated lightSpeedOut" mouseleaveRemove="animated lightSpeedOut" href="javascript:;">lightSpeedOut</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__lightSpeedInRight" mouseleaveRemove="animate__animated animate__lightSpeedInRight" href="javascript:;">lightSpeedInRight</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__lightSpeedInLeft" mouseleaveRemove="animate__animated animate__lightSpeedInLeft" href="javascript:;">lightSpeedInLeft</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__lightSpeedOutRight" mouseleaveRemove="animate__animated animate__lightSpeedOutRight" href="javascript:;">lightSpeedOutRight</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__lightSpeedOutLeft" mouseleaveRemove="animate__animated animate__lightSpeedOutLeft" href="javascript:;">lightSpeedOutLeft</a>
                     <h4>rotating_entrances</h4>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated rotateIn" mouseleaveRemove="animated rotateIn" href="javascript:;">rotateIn</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated rotateInDownLeft" mouseleaveRemove="animated rotateInDownLeft" href="javascript:;">rotateInDownLeft</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated rotateInDownRight" mouseleaveRemove="animated rotateInDownRight" href="javascript:;">rotateInDownRight</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated rotateInUpLeft" mouseleaveRemove="animated rotateInUpLeft" href="javascript:;">rotateInUpLeft</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated rotateInUpRight" mouseleaveRemove="animated rotateInUpRight" href="javascript:;">rotateInUpRight</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__rotateIn" mouseleaveRemove="animate__animated animate__rotateIn" href="javascript:;">rotateIn</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__rotateInDownLeft" mouseleaveRemove="animate__animated animate__rotateInDownLeft" href="javascript:;">rotateInDownLeft</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__rotateInDownRight" mouseleaveRemove="animate__animated animate__rotateInDownRight" href="javascript:;">rotateInDownRight</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__rotateInUpLeft" mouseleaveRemove="animate__animated animate__rotateInUpLeft" href="javascript:;">rotateInUpLeft</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__rotateInUpRight" mouseleaveRemove="animate__animated animate__rotateInUpRight" href="javascript:;">rotateInUpRight</a>
                     <h4>rotating_exits</h4>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated rotateOut" mouseleaveRemove="animated rotateOut" href="javascript:;">rotateOut</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated rotateOutDownLeft" mouseleaveRemove="animated rotateOutDownLeft" href="javascript:;">rotateOutDownLeft</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated rotateOutDownRight" mouseleaveRemove="animated rotateOutDownRight" href="javascript:;">rotateOutDownRight</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated rotateOutUpLeft" mouseleaveRemove="animated rotateOutUpLeft" href="javascript:;">rotateOutUpLeft</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated rotateOutUpRight" mouseleaveRemove="animated rotateOutUpRight" href="javascript:;">rotateOutUpRight</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__rotateOut" mouseleaveRemove="animate__animated animate__rotateOut" href="javascript:;">rotateOut</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__rotateOutDownLeft" mouseleaveRemove="animate__animated animate__rotateOutDownLeft" href="javascript:;">rotateOutDownLeft</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__rotateOutDownRight" mouseleaveRemove="animate__animated animate__rotateOutDownRight" href="javascript:;">rotateOutDownRight</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__rotateOutUpLeft" mouseleaveRemove="animate__animated animate__rotateOutUpLeft" href="javascript:;">rotateOutUpLeft</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__rotateOutUpRight" mouseleaveRemove="animate__animated animate__rotateOutUpRight" href="javascript:;">rotateOutUpRight</a>
                     <h4>specials</h4>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated hinge" mouseleaveRemove="animated hinge" href="javascript:;">hinge</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated jackInTheBox" mouseleaveRemove="animated jackInTheBox" href="javascript:;">jackInTheBox</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated rollIn" mouseleaveRemove="animated rollIn" href="javascript:;">rollIn</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated rollOut" mouseleaveRemove="animated rollOut" href="javascript:;">rollOut</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__hinge" mouseleaveRemove="animate__animated animate__hinge" href="javascript:;">hinge</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__jackInTheBox" mouseleaveRemove="animate__animated animate__jackInTheBox" href="javascript:;">jackInTheBox</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__rollIn" mouseleaveRemove="animate__animated animate__rollIn" href="javascript:;">rollIn</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__rollOut" mouseleaveRemove="animate__animated animate__rollOut" href="javascript:;">rollOut</a>
                     <h4>zooming_entrances</h4>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated zoomIn" mouseleaveRemove="animated zoomIn" href="javascript:;">zoomIn</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated zoomInDown" mouseleaveRemove="animated zoomInDown" href="javascript:;">zoomInDown</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated zoomInLeft" mouseleaveRemove="animated zoomInLeft" href="javascript:;">zoomInLeft</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated zoomInRight" mouseleaveRemove="animated zoomInRight" href="javascript:;">zoomInRight</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated zoomInUp" mouseleaveRemove="animated zoomInUp" href="javascript:;">zoomInUp</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__zoomIn" mouseleaveRemove="animate__animated animate__zoomIn" href="javascript:;">zoomIn</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__zoomInDown" mouseleaveRemove="animate__animated animate__zoomInDown" href="javascript:;">zoomInDown</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__zoomInLeft" mouseleaveRemove="animate__animated animate__zoomInLeft" href="javascript:;">zoomInLeft</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__zoomInRight" mouseleaveRemove="animate__animated animate__zoomInRight" href="javascript:;">zoomInRight</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__zoomInUp" mouseleaveRemove="animate__animated animate__zoomInUp" href="javascript:;">zoomInUp</a>
                     <h4>zooming_exits</h4>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated zoomOut" mouseleaveRemove="animated zoomOut" href="javascript:;">zoomOut</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated zoomOutDown" mouseleaveRemove="animated zoomOutDown" href="javascript:;">zoomOutDown</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated zoomOutLeft" mouseleaveRemove="animated zoomOutLeft" href="javascript:;">zoomOutLeft</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated zoomOutRight" mouseleaveRemove="animated zoomOutRight" href="javascript:;">zoomOutRight</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated zoomOutUp" mouseleaveRemove="animated zoomOutUp" href="javascript:;">zoomOutUp</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__zoomOut" mouseleaveRemove="animate__animated animate__zoomOut" href="javascript:;">zoomOut</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__zoomOutDown" mouseleaveRemove="animate__animated animate__zoomOutDown" href="javascript:;">zoomOutDown</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__zoomOutLeft" mouseleaveRemove="animate__animated animate__zoomOutLeft" href="javascript:;">zoomOutLeft</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__zoomOutRight" mouseleaveRemove="animate__animated animate__zoomOutRight" href="javascript:;">zoomOutRight</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__zoomOutUp" mouseleaveRemove="animate__animated animate__zoomOutUp" href="javascript:;">zoomOutUp</a>
                     <h4>sliding_entrances</h4>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated slideInDown" mouseleaveRemove="animated slideInDown" href="javascript:;">slideInDown</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated slideInLeft" mouseleaveRemove="animated slideInLeft" href="javascript:;">slideInLeft</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated slideInRight" mouseleaveRemove="animated slideInRight" href="javascript:;">slideInRight</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated slideInUp" mouseleaveRemove="animated slideInUp" href="javascript:;">slideInUp</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__slideInDown" mouseleaveRemove="animate__animated animate__slideInDown" href="javascript:;">slideInDown</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__slideInLeft" mouseleaveRemove="animate__animated animate__slideInLeft" href="javascript:;">slideInLeft</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__slideInRight" mouseleaveRemove="animate__animated animate__slideInRight" href="javascript:;">slideInRight</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__slideInUp" mouseleaveRemove="animate__animated animate__slideInUp" href="javascript:;">slideInUp</a>
                     <h4>sliding_exits</h4>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated slideOutDown" mouseleaveRemove="animated slideOutDown" href="javascript:;">slideOutDown</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated slideOutLeft" mouseleaveRemove="animated slideOutLeft" href="javascript:;">slideOutLeft</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated slideOutRight" mouseleaveRemove="animated slideOutRight" href="javascript:;">slideOutRight</a>
-                    <a class="btn btn-primary ml-1" mouseenterAdd="animated slideOutUp" mouseleaveRemove="animated slideOutUp" href="javascript:;">slideOutUp</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__slideOutDown" mouseleaveRemove="animate__animated animate__slideOutDown" href="javascript:;">slideOutDown</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__slideOutLeft" mouseleaveRemove="animate__animated animate__slideOutLeft" href="javascript:;">slideOutLeft</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__slideOutRight" mouseleaveRemove="animate__animated animate__slideOutRight" href="javascript:;">slideOutRight</a>
+                    <a class="btn btn-primary ml-1" mouseenterAdd="animate__animated animate__slideOutUp" mouseleaveRemove="animate__animated animate__slideOutUp" href="javascript:;">slideOutUp</a>
                 </div>
             </div>
         </div>
