@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.17 (Current Development Version)
 ---
 # {{ page.title }}
 
-## on
+## 6541d63 on Sep 12, 2020, 6:17 PM GMT+4
 - fixed some issues in home cardlet related to large number values. By applying 
 number plugin.
 - Update the following dependencies in package.json:
