@@ -3,6 +3,20 @@ title: Java Bootstrap Template Version 0.0.17 (Current Development Version)
 ---
 # {{ page.title }}
 
+## on 
+- Update the following dependencies in package.json:
+    - bootstrap-input-spinner from 1.14.1 to 1.16.5
+    - datatables.net from 1.10.21 to 1.10.22
+    - datatables.net-bs4 from 1.10.21 to 1.10.22
+    - datatables.net-fixedcolumns from 3.3.1 to 3.3.2
+    - datatables.net-fixedcolumns-bs4 from 3.3.1 to 3.3.2
+    - datatables.net-keytable from 2.5.2 to 2.5.3
+    - datatables.net-keytable-bs4 from 2.5.2 to 2.5.3
+    - datatables.net-responsive from 2.2.5 to 2.2.6
+    - datatables.net-responsive-bs4 from 2.2.5 to 2.2.6
+    - moment from 2.27.0 to 2.29.0
+- Run gulp default to regenerate dist folders.
+
 ## 6541d63 on Sep 12, 2020, 6:17 PM GMT+4
 - fixed some issues in home cardlet related to large number values. By applying 
 number plugin.
