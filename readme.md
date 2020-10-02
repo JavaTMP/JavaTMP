@@ -71,7 +71,6 @@ using Spring Boot Starter with log4j2 logging and gradle build framework.
 using Spring Boot Multi-Module Starter with log4j2 logging and gradle build framework.
 
 ### Spring Boot Core Starters
-Java Spring Boot Core features Starters Gradle Modules:
 * [Spring Boot Autowired Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-core/spring-boot-autowired)
 * [Spring Boot Bean Life Cycle Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-core/spring-boot-bean-lifecycle)
 * [Spring Boot Config Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-core/spring-boot-config)
@@ -79,7 +78,6 @@ Java Spring Boot Core features Starters Gradle Modules:
 * [Spring Boot Bean Order Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-core/spring-boot-order)
 
 ### Spring Boot Data Starters
-Java Spring Boot Data features Starters Gradle Modules:
 * [Spring Boot JDBC Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-data/spring-boot-jdbc)
 * [Spring Boot JDBC Config Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-data/spring-boot-jdbc-config)
 * [Spring Boot JDBC Converter Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-data/spring-boot-jdbc-converter)
@@ -90,7 +88,6 @@ Java Spring Boot Data features Starters Gradle Modules:
 * [Spring Boot JPA Paging Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-data/spring-boot-jpa-paging)
 
 ### Spring Boot Threading Starters
-Java Spring Boot Threading And Scheduling features Starters Gradle Modules:
 * [Spring Boot Async Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-threading/spring-boot-async)
 * [Spring Boot Batch Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-threading/spring-boot-batch)
 * [Spring Boot Quartz Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-threading/spring-boot-quartz)
@@ -100,7 +97,6 @@ Java Spring Boot Threading And Scheduling features Starters Gradle Modules:
 * [Spring Boot Scheduler Config Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-threading/spring-boot-scheduler-config)
 
 ### Spring Boot Web Starters
-Java Spring Boot Web features Starters Gradle Modules:
 * [Spring Boot Rest Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-web/spring-boot-rest)
 * [Spring Boot Rest Template Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-web/spring-boot-rest-template)
 * [Spring Boot War Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-web/spring-boot-war)
@@ -108,22 +104,18 @@ Java Spring Boot Web features Starters Gradle Modules:
 * [Spring Boot Web Session Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-web/spring-boot-web-session)
 
 ### Spring Boot Webservices Starters
-Java Spring Boot Webservices features Starters Gradle Modules:
 * [Spring Boot SOAP Consumer Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-webservices/spring-boot-soap-consumer)
 * [Spring Boot SOAP Producer Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-webservices/spring-boot-soap-producer)
 * [Spring Boot Webservices Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-webservices/spring-boot-web-services)
 * [Spring Boot Webservices Client Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-webservices/spring-boot-web-services-client)
 
 ### Spring Boot Cache Starters
-Java Spring Boot Caching features Starters Gradle Modules:
 * [Spring Boot Simple Cache Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-cache/spring-boot-cache-simple)
 
 ### Spring Boot Management Starters
-Java Spring Boot Management features Starters Gradle Modules:
 * [Spring Boot Actuator Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-management/spring-boot-actuator)
 
 ### Spring Boot Miscellaneous Starters
-Java Spring Boot Miscellaneous features Starters Gradle Modules:
 * [Spring Boot iText Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-miscellaneous/spring-boot-itext)
 * [Spring Boot JasperReports Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-miscellaneous/spring-boot-JasperReports)
 * [Spring Boot Validation Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-miscellaneous/spring-boot-validation)
