@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.17 (Current Development Version)
 ---
 # {{ page.title }}
 
-## on 
+## 835fb06 on Aug 27, 2020, 4:38 AM GMT+4
 - Update the following dependencies in package.json:
     - bootstrap-input-spinner from 1.14.1 to 1.16.5
     - datatables.net from 1.10.21 to 1.10.22
