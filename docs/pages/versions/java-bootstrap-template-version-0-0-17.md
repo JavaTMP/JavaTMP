@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.17 (Current Development Version)
 ---
 # {{ page.title }}
 
-## on
+## 708721a on Oct 3, 2020, 1:14 AM GMT+4
 - Update readme.md by adding description about Spring Boot Gradle Starters Modules
 - Update the following dependencies in package.json:
     - del from 5.1.0 to 6.0.0
