@@ -1,10 +1,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="row d-flex align-items-center">
-    <div class="col-6 text-center">
+    <div class="col-4 text-center">
         <span class="d-block display-4 counter today_totalCount">0</span>
     </div>
-    <div class="col-6 text-center">
+    <div class="col-8 text-center">
         <span class="d-block display-4 counter all_totalCount">0</span>
     </div>
 </div>
