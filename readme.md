@@ -108,7 +108,7 @@ Java Spring Boot Web features Starters Gradle Modules:
 * [Spring Boot Web Session Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-web/spring-boot-web-session)
 
 ### Spring Boot Webservices Starters
-Java Spring Boot Web features Starters Gradle Modules:
+Java Spring Boot Webservices features Starters Gradle Modules:
 * [Spring Boot SOAP Consumer Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-webservices/spring-boot-soap-consumer)
 * [Spring Boot SOAP Producer Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-webservices/spring-boot-soap-producer)
 * [Spring Boot Webservices Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-webservices/spring-boot-web-services)
@@ -123,11 +123,11 @@ Java Spring Boot Management features Starters Gradle Modules:
 * [Spring Boot Actuator Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-management/spring-boot-actuator)
 
 ### Spring Boot Miscellaneous Starters
+Java Spring Boot Miscellaneous features Starters Gradle Modules:
+* [Spring Boot iText Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-miscellaneous/spring-boot-itext)
+* [Spring Boot JasperReports Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-miscellaneous/spring-boot-JasperReports)
+* [Spring Boot Validation Starter Module](JavaTMP-SpringBoot-Modules/spring-boot-miscellaneous/spring-boot-validation)
 
-+---spring-boot-miscellaneous
-|   +---spring-boot-itext
-|   +---spring-boot-JasperReports
-|   +---spring-boot-validation
 ## Copyright and License
 JavaTMP is copyrighted by [JavaTMP](http://www.javatmp.com) and released under
 [JavaTMP License](https://github.com/JavaTMP/JavaTMP/blob/master/LICENSE).
