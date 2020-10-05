@@ -1599,7 +1599,20 @@
                                     </li>
                                 </ul>
                             </li>
-
+                            <li>
+                                <a class="has-arrow" href="#">
+                                    <i class="far fa-lg fa-fw fa-object-group"></i>
+                                    DevExtreme
+                                </a>
+                                <ul>
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/pages/DevExtreme/introduction">
+                                            <i class="fa fa-lg fa-fw fa-home"></i>
+                                            Introduction
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                     <div class="main-content">
