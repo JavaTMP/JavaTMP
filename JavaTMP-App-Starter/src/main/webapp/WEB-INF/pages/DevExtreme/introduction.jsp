@@ -21,8 +21,11 @@
                     <a class="btn btn-info" target="_blank" href="https://js.devexpress.com/Demos/WidgetsGallery/">Demo</a>
                 </p>
             </div>
-            <p class="">Page Content</p>
-            <div id="buttonContainer"></div>
+            <a class="btn btn-info btn-lg"
+               target="_blank"
+               href="${pageContext.request.contextPath}/pages/DevExtreme/devextreme-landing-empty-starter">
+                DevExtreme Landing Empty Starter Demo Page
+            </a>
         </div>
     </div>
     <!--
@@ -30,11 +33,6 @@
     if your feature or plugins could not support to run globally.
     <link href="components/" rel="stylesheet">
     -->
-
-    <!-- DevExtreme themes -->
-    <link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/20.1.7/css/dx.common.css">
-    <link rel="stylesheet" href="https://cdn3.devexpress.com/jslib/20.1.7/css/dx.light.css">
-
     <style type="text/css">
         /*
         Embed CSS styling for current page.
@@ -61,25 +59,8 @@
             // controll return to main javascript file.
             // <--- HERE --->
             //
-            function initialize() {
-                $("#buttonContainer").dxButton({
-                    text: "Click me!",
-                    onClick: function () {
-                        alert("Hello world!");
-                    }
-                });
-
-            }
             $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpAjaxContainerReady, function (event) {
                 // fire AFTER all transition done and your ajax content is shown to user.
-                if (typeof DevExpress == 'undefined')
-                    $.getScript('https://cdn3.devexpress.com/jslib/20.1.7/js/dx.all.js', function (data, textStatus, jqxhr) {
-                        initialize();
-                    });
-                else
-                    initialize();
-
-
                 $(javatmp.settings.defaultOutputSelector).on(javatmp.settings.javaTmpContainerResizeEventName, function (event) {
                     // fire when user resize browser window or sidebar hide / show
                 });

@@ -1611,6 +1611,12 @@
                                             Introduction
                                         </a>
                                     </li>
+                                    <li>
+                                        <a target="_blank" href="${pageContext.request.contextPath}/pages/DevExtreme/devextreme-landing-empty-starter">
+                                            <i class="fa fa-lg fa-fw fa-home"></i>
+                                            DevExtreme Landing
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
