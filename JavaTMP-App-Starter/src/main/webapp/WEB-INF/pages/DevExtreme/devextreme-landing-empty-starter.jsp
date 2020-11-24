@@ -54,10 +54,34 @@
 //                index.init(defaults);
                 javatmp.plugins.init(defaults);
 
+                var popupOptions = {
+                    width: 660,
+                    height: 540,
+                    dragEnabled:true,
+                    resizeEnabled:true,
+                    onContentReady: function () {
+                        // alert("onContentReady");
+                    },
+                    contentTemplate: function() {
+                        var result = "<b>Welcome</b>";
+                        return result;
+                    },
+                    showTitle: true,
+                    visible: false,
+                    dragEnabled: false,
+                    closeOnOutsideClick: true
+                };
+
                 $("#buttonContainer").dxButton({
                     text: "Click me!",
                     onClick: function () {
-                        alert("Hello world!");
+                        $(".popup-property-details").remove();
+                        var container = $("<div />")
+                            .addClass("popup-property-details")
+                            .appendTo($("body"));
+                        var popup = container.dxPopup(popupOptions).dxPopup("instance");
+                        popup.option("title", "hello World");
+                        popup.show();
                     }
                 });
 

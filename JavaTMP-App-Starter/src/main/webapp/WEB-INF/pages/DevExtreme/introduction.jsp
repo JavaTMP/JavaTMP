@@ -14,11 +14,12 @@
                     for today’s modern web browsers.
                 </p>
                 <p>
-                    <a class="btn btn-info" target="_blank" href="https://js.devexpress.com/">Home Page</a>
-                    <a class="btn btn-info" target="_blank" href="https://github.com/DevExpress/DevExtreme">Github Repository</a>
-                    <a class="btn btn-info" target="_blank" href="https://js.devexpress.com/Buy/">Pricing</a>
-                    <a class="btn btn-info" target="_blank" href="https://js.devexpress.com/Licensing/">Licensing</a>
-                    <a class="btn btn-info" target="_blank" href="https://js.devexpress.com/Demos/WidgetsGallery/">Demo</a>
+                    <a class="btn btn-success" target="_blank" href="https://js.devexpress.com/">Home Page</a>
+                    <a class="btn btn-success" target="_blank" href="https://github.com/DevExpress/DevExtreme">Github Repository</a>
+                    <a class="btn btn-success" target="_blank" href="https://js.devexpress.com/Buy/">Pricing</a>
+                    <a class="btn btn-success" target="_blank" href="https://js.devexpress.com/Licensing/">Licensing</a>
+                    <a class="btn btn-success" target="_blank" href="https://js.devexpress.com/Demos/WidgetsGallery/">Demo</a>
+                    <a class="btn btn-success" target="_blank" href="https://js.devexpress.com/Documentation/Guide/Common/Distribution_Channels/ZIP_Archive/">Offline Demo</a>
                 </p>
             </div>
             <a class="btn btn-info btn-lg"
