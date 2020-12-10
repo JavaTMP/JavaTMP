@@ -4,9 +4,10 @@ import com.javatmp.module.user.entity.Languagetranslation;
 import com.javatmp.module.user.entity.User;
 import com.javatmp.module.user.repository.LanguageRepository;
 import com.javatmp.module.user.repository.LanguagetranslationRepository;
-import java.util.List;
-import javax.persistence.EntityManager;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.EntityManager;
+import java.util.List;
 
 @Service
 public class LanguageService {
