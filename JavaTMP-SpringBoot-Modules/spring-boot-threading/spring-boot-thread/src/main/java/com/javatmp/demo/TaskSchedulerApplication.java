@@ -7,8 +7,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.task.TaskExecutor;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.IntStream;
 
 /**
@@ -16,26 +17,42 @@ import java.util.stream.IntStream;
  */
 @SpringBootApplication
 @Slf4j
-public class TaskExecutorApplication {
+public class TaskSchedulerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TaskExecutorApplication.class, args);
+        SpringApplication.run(TaskSchedulerApplication.class, args);
     }
 
     @Autowired
     ApplicationContext applicationContext;
 
     @Autowired
-    TaskExecutor taskExecutor;
+    ThreadPoolTaskScheduler threadPoolTaskScheduler;
 
     @Bean
-    public CommandLineRunner springBootMain2() throws Exception {
+    public ThreadPoolTaskScheduler threadPoolTaskScheduler() {
+        ThreadPoolTaskScheduler pool = new ThreadPoolTaskScheduler();
+        pool.setPoolSize(100);
+        pool.afterPropertiesSet();
+        pool.setWaitForTasksToCompleteOnShutdown(true);
+        return pool;
+    }
+
+    @Bean
+    public CommandLineRunner springBootMain3() throws Exception {
         return args -> {
             log.info("*** Start Spring Boot Project ***");
-            IntStream.range(3, 13).forEach(s -> {
+            IntStream.range(1, 10).forEach(s -> {
                 PrintTask2 thread = applicationContext.getBean(PrintTask2.class);
                 thread.setName("thread " + s);
-                taskExecutor.execute(thread);
+                threadPoolTaskScheduler.execute(thread);
+            });
+
+            IntStream.range(11, 12).forEach(s -> {
+                PrintTask2 thread = applicationContext.getBean(PrintTask2.class);
+                thread.setName("thread " + s);
+                int randomDelay = ThreadLocalRandom.current().nextInt(1000, 2000);
+                threadPoolTaskScheduler.scheduleWithFixedDelay(thread, randomDelay);
             });
 
 //            for (;;) {
