@@ -27,6 +27,7 @@ public class Application {
         AnnotationConfigApplicationContext ctx =
                 new AnnotationConfigApplicationContext(Application.class);
 
+        Environment environment = ctx.getBean(Environment.class);
         Application bean = ctx.getBean(Application.class);
         bean.run();
 
