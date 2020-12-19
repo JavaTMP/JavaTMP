@@ -3,6 +3,7 @@ package com.javatmp.demo;
 import com.javatmp.demo.config.AppPUConfig;
 import com.javatmp.demo.entity.User;
 import com.javatmp.demo.repository.UserRepository;
+import com.javatmp.demo.repository1.UserRepository1;
 import com.javatmp.demo.service.DateTimeService;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -42,6 +43,9 @@ public class Application {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    UserRepository1 userRepository1;
 
     /*
         @PersistenceContext are called Container Managed Entity Manager
@@ -115,10 +119,11 @@ public class Application {
         em.close();
 
         log.info("user repository is : {}", userRepository);
-
         User user3 = this.em.find(User.class, 3L);
-
         log.info("user3 : {}", user3);
+        User user4 = this.userRepository1.findByUserName("Brian_Hagenes54").get();
+
+        log.debug("user 4 is : {}", user4);
     }
 
 }

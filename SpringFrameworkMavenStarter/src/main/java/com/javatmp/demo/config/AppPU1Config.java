@@ -14,14 +14,14 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-        basePackages = {AppPUConfig.BASE_PACKAGES},
-        entityManagerFactoryRef = AppPUConfig.ENTITY_MANAGER_FACTORY_REF,
-        transactionManagerRef = AppPUConfig.TRANSACTION_MANAGER_REF
+        basePackages = {AppPU1Config.BASE_PACKAGES},
+        entityManagerFactoryRef = AppPU1Config.ENTITY_MANAGER_FACTORY_REF,
+        transactionManagerRef = AppPU1Config.TRANSACTION_MANAGER_REF
 //        ,repositoryBaseClass = ExtendedJpaRepositoryImpl.class
 )
-public class AppPUConfig {
-    public static final String PERSISTENT_UNIT_NAME = "AppPU";
-    public static final String BASE_PACKAGES = "com.javatmp.demo.repository";
+public class AppPU1Config {
+    public static final String PERSISTENT_UNIT_NAME = "AppPU1";
+    public static final String BASE_PACKAGES = "com.javatmp.demo.repository1";
     public static final String ENTITY_MANAGER_FACTORY_REF = PERSISTENT_UNIT_NAME + "EntityManagerFactory";
     public static final String TRANSACTION_MANAGER_REF = PERSISTENT_UNIT_NAME + "EntityManagerTransactionManager";
 
