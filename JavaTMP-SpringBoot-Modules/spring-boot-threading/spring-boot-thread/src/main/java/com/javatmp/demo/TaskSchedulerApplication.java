@@ -35,6 +35,8 @@ public class TaskSchedulerApplication {
         pool.setPoolSize(100);
         pool.afterPropertiesSet();
         pool.setWaitForTasksToCompleteOnShutdown(true);
+        // read more:
+        // https://www.javatips.net/api/org.springframework.scheduling.concurrent.threadpooltaskscheduler
         return pool;
     }
 
