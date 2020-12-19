@@ -1,4 +1,4 @@
-package com.javatmp.demo;
+package com.javatmp.demo.config;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
