@@ -2,8 +2,10 @@ package com.javatmp.demo;
 
 import org.apache.catalina.Context;
 import org.apache.catalina.LifecycleException;
+import org.apache.catalina.connector.Connector;
 import org.apache.catalina.core.StandardContext;
 import org.apache.catalina.startup.Tomcat;
+import org.slf4j.bridge.SLF4JBridgeHandler;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,6 +16,9 @@ public class Main {
     public static void main(String[] args) throws Exception {
         //https://www.baeldung.com/register-servlet#3-programmatic-configuration-through-tomcatembeddedservletcontainerfactory
         String appBase = ".";
+        // https://nkonev.name/post/101
+        SLF4JBridgeHandler.removeHandlersForRootLogger();
+        SLF4JBridgeHandler.install();
         Tomcat tomcat = new Tomcat();
         // prevent register jsp servlet
         tomcat.setAddDefaultWebXmlToWebapp(true);
@@ -24,8 +29,10 @@ public class Main {
         context.setAddWebinfClassesResources(true); // process /META-INF/resources for static
 
         //https://stackoverflow.com/questions/48998387/code-works-with-embedded-apache-tomcat-8-but-not-with-9-whats-changed
-        tomcat.getConnector(); // Trigger the creation of the default connector
-
+//        tomcat.getConnector(); // Trigger the creation of the default connector
+        Connector connector = new Connector();
+        connector.setPort(PORT);
+        tomcat.getService().addConnector(connector);
         // fix Illegal reflective access by org.apache.catalina.loader.WebappClassLoaderBase
         // https://github.com/spring-projects/spring-boot/issues/15101#issuecomment-437384942
         StandardContext standardContext = (StandardContext) context;

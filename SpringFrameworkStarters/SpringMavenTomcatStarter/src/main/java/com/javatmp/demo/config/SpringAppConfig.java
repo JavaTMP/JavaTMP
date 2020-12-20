@@ -39,11 +39,11 @@ public class SpringAppConfig implements WebApplicationInitializer {
         container.addListener(new ContextLoaderListener(rootContext));
 
         // Create the dispatcher servlet's Spring application context
-        AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
+//        AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
 
         // Register and map the dispatcher servlet
         ServletRegistration.Dynamic dispatcher = container
-                .addServlet("dispatcher", new DispatcherServlet(dispatcherContext));
+                .addServlet("dispatcher", new DispatcherServlet(rootContext));
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/");
     }
