@@ -3,6 +3,7 @@ package com.javatmp.spring.tomcat;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
@@ -19,6 +20,13 @@ import javax.servlet.ServletRegistration;
 @EnableWebMvc
 @ComponentScan(basePackages = {"com.javatmp.spring.tomcat"})
 public class SpringAppConfig implements WebApplicationInitializer {
+
+    //register PropertySourcesPlaceholderConfigurer
+    //in order to resolve ${...} placeholders
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
 
     @Bean
     public ViewResolver internalResourceViewResolver() {
@@ -39,11 +47,11 @@ public class SpringAppConfig implements WebApplicationInitializer {
         container.addListener(new ContextLoaderListener(rootContext));
 
         // Create the dispatcher servlet's Spring application context
-        AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
+//        AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
 
         // Register and map the dispatcher servlet
         ServletRegistration.Dynamic dispatcher = container
-                .addServlet("dispatcher", new DispatcherServlet(dispatcherContext));
+                .addServlet("dispatcher", new DispatcherServlet(rootContext));
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/");
     }

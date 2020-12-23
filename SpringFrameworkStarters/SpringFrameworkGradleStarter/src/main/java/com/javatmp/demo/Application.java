@@ -85,13 +85,6 @@ public class Application {
         });
     }
 
-//    @Bean
-//    public PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-//        PropertySourcesPlaceholderConfigurer properties = new PropertySourcesPlaceholderConfigurer();
-////        properties.setLocation();
-//        return properties;
-//    }
-
     public void run() {
         log.info("Current time: {}", dateTimeService.getTime());
         log.info("Current date: {}", dateTimeService.getDate());
