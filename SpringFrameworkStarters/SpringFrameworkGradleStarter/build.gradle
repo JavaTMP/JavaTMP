@@ -48,12 +48,12 @@ test {
 
 task getDepsRuntime(type: Copy) {
     from sourceSets.main.runtimeClasspath
-    into 'compile/'
+    into 'build/compile/'
 }
 
 task getDepsCompile(type: Copy) {
     from sourceSets.main.compileClasspath
-    into 'compile/'
+    into 'build/compile/'
 }
 
 getDepsCompile {
