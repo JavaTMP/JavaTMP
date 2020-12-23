@@ -112,6 +112,8 @@ List of Spring Boot Framework Resources and Links:
 - [https://howtodoinjava.com/spring-mvc/spring-bean-validation-example-with-jsr-303-annotations/](https://howtodoinjava.com/spring-mvc/spring-bean-validation-example-with-jsr-303-annotations/)
 
 ### Spring Boot Tutorials
+- [https://attacomsian.com/topics/spring-data-jpa](https://attacomsian.com/topics/spring-data-jpa)
+- [https://attacomsian.com/topics/spring-boot](https://attacomsian.com/topics/spring-boot)
 - [http://zetcode.com/all/#springboot](http://zetcode.com/all/#springboot)
 - [https://howtodoinjava.com/spring-boot2/](https://howtodoinjava.com/spring-boot2/)
 - [https://www.tutorialspoint.com/spring_boot/index.htm](https://www.tutorialspoint.com/spring_boot/index.htm)
