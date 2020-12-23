@@ -45,3 +45,17 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+task getDepsRuntime(type: Copy) {
+    from sourceSets.main.runtimeClasspath
+    into 'compile/'
+}
+
+task getDepsCompile(type: Copy) {
+    from sourceSets.main.compileClasspath
+    into 'compile/'
+}
+
+getDepsCompile {
+    dependsOn getDepsRuntime
+}
