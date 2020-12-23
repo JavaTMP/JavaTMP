@@ -1,0 +1,47 @@
+plugins {
+    id 'java'
+}
+
+group 'com.javatmp.demo'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+// https://stackoverflow.com/questions/30860669/what-is-gradle-missing-to-map-hibernate
+// https://discuss.gradle.org/t/jpa-entity-classes-are-not-discovered-automatically-with-gradle/11339
+sourceSets.main.output.resourcesDir = sourceSets.main.java.outputDir
+sourceSets.test.output.resourcesDir = sourceSets.test.java.outputDir
+
+ext {
+    springframeworkVersion = "5.3.2"
+
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.springframework:spring-context:${springframeworkVersion}"
+    compileOnly "org.projectlombok:lombok:1.18.16"
+    annotationProcessor 'org.projectlombok:lombok:1.18.16'
+    testCompileOnly 'org.projectlombok:lombok:1.18.16'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.16'
+    implementation "org.slf4j:slf4j-api:1.7.30"
+    implementation "org.apache.logging.log4j:log4j-slf4j-impl:2.14.0"
+    implementation "org.hibernate:hibernate-core:5.4.26.Final"
+//    compileOnly "org.hibernate:hibernate-jpamodelgen:5.4.26.Final"
+    annotationProcessor "org.hibernate:hibernate-jpamodelgen:5.4.26.Final"
+    testAnnotationProcessor "org.hibernate:hibernate-jpamodelgen:5.4.26.Final"
+    implementation "org.hibernate:hibernate-c3p0:5.4.26.Final"
+    runtime "mysql:mysql-connector-java:8.0.22"
+    implementation "org.springframework.data:spring-data-jpa:2.4.2"
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+}
+
+test {
+    useJUnitPlatform()
+}
