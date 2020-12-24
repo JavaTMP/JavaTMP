@@ -3,14 +3,16 @@ package com.javatmp.module.content.controller;
 import com.javatmp.fw.domain.ResponseMessage;
 import com.javatmp.module.content.entity.Content;
 import com.javatmp.module.content.service.ContentService;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Slf4j
 @Controller
@@ -20,12 +22,12 @@ public class UpdateContent {
     ContentService contentService;
 
     @GetMapping(value = "/content/UpdateContent")
-    public String doGet(Content content, HttpServletRequest request, HttpServletResponse response) {
-        log.info("request user is [" + (content) + "]");
+    public String doGet(Content content, Model model) {
+        log.info("request content is [" + (content) + "]");
         content = this.contentService.getOne(content.getContentId());
         log.info("DB user to be Updated is [" + (content) + "]");
 
-        request.setAttribute("content", content);
+        model.addAttribute("content", content);
         return "/pages/content/UpdateContent.jsp";
     }
 

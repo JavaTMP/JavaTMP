@@ -3,6 +3,21 @@ title: Java Bootstrap Template Version 0.0.17 (Current Development Version)
 ---
 # {{ page.title }}
 
+## 
+- Update the following dependencies in package.json:
+  - @fortawesome/fontawesome-free from 5.15.0 to 5.15.1
+  - bootstrap from 4.5.2 to 4.5.3
+  - bootstrap-input-spinner from 1.16.5 to 1.16.8
+  - bootswatch from 4.5.2 to 4.5.3
+  - datatables.net from 1.10.22 to 1.10.23
+  - datatables.net-bs4 from 1.10.22 to 1.10.23
+  - echarts from 4.9.0 to 5.0.0
+  - file-saver from 2.0.2 to 2.0.5
+  - moment from 2.29.0 to 2.29.1
+  - moment-timezone from 0.5.31 to 0.5.32
+  - yargs from 16.0.3 to 16.2.0
+- Run gulp default to regenerate dist folders.
+
 ## 708721a on Oct 3, 2020, 1:14 AM GMT+4
 - Update readme.md by adding description about Spring Boot Gradle Starters Modules
 - Update the following dependencies in package.json:
