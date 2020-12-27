@@ -49,22 +49,56 @@ test {
     useJUnitPlatform()
 }
 
-task getDepsRuntime(type: Copy) {
-    from sourceSets.main.runtimeClasspath
-    into 'build/compile/'
+task getRuntimeDeps(type: Copy) {
+    from sourceSets.main.runtimeClasspath - sourceSets.main.compileClasspath
+    include "*.jar"
+    into 'offlineRelease/lib_runtime/'
 }
 
-task getDepsCompile(type: Copy) {
+task getCompileDeps(type: Copy) {
     from sourceSets.main.compileClasspath
-    into 'build/compile/'
+    into 'offlineRelease/lib/'
 }
 
+task getDepsTest(type: Copy) {
+    from sourceSets.test.compileClasspath - sourceSets.main.compileClasspath
+    include "*.jar"
+    into 'offlineRelease/lib_test/'
+}
 
-//task getDepsTest(type: Copy) {
-//    from sourceSets.main.testCompileClasspath
-//    into 'build/test/'
-//}
+task printSourceSetInformation() {
+    doLast {
+        sourceSets.each { srcSet ->
+            println "[" + srcSet.name + "]"
+            print "-->Source directories: " + srcSet.allJava.srcDirs + "\n"
+            print "-->Output directories: " + srcSet.output.classesDirs.files + "\n"
+            print "-->Compile classpath:\n"
+            srcSet.compileClasspath.files.each {
+                println "[" + srcSet.name + "]"
+                print "  " + it.path + "\n"
+            }
+            println ""
+        }
 
-getDepsCompile {
-    dependsOn getDepsRuntime
+        sourceSets.test.compileClasspath.files.each {
+            print "Test[" + it.path + "]\n"
+        }
+    }
+}
+
+task copyDependencies() {
+    print "Dependencies copied successfully"
+}
+task deleteOfflineRelease() {
+    delete 'offlineRelease'
+}
+copyDependencies {
+    dependsOn deleteOfflineRelease, getCompileDeps, getRuntimeDeps, getDepsTest
+}
+
+task offlineRelease(type: Copy, dependsOn: copyDependencies) {
+    delete 'offlineRelease'
+    // https://stackoverflow.com/questions/39109923/copy-entire-directory-in-gradle/39110073
+    from 'src'
+    into 'offlineRelease/src'
 }

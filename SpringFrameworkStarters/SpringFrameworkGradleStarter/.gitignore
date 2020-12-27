@@ -42,3 +42,8 @@ build/
 *.iws
 .idea
 out
+
+/lib
+/lib_test
+/lib_runtime
+/offlineRelease
