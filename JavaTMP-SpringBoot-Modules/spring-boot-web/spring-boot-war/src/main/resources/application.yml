@@ -1,10 +1,10 @@
 server:
   port: 8080
   servlet:
-    context-path: /demo
+    context-path: /
 
 spring:
   mvc:
     view:
-      prefix: ""
+      prefix: "/WEB-INF"
       suffix: ""

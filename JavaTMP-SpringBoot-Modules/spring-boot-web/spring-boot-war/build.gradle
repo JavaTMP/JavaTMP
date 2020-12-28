@@ -13,4 +13,10 @@ bootWar {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+    // https://mvnrepository.com/artifact/javax.servlet/jstl
+    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+    // https://mvnrepository.com/artifact/org.apache.tomcat.embed/tomcat-embed-jasper
+    compile group: 'org.apache.tomcat.embed', name: 'tomcat-embed-jasper'
+
+
 }
