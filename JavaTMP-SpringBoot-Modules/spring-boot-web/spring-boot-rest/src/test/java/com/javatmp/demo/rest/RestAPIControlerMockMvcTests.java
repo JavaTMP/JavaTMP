@@ -28,7 +28,10 @@ public class RestAPIControlerMockMvcTests {
 
     @Test
     public void shouldReturnDefaultMessage() throws Exception {
-        this.mockMvc.perform(get("/rest/get")).andDo(print()).andExpect(status().isOk());
+        mockMvc.perform(
+                get("/rest/get"))
+                .andDo(print())
+                .andExpect(status().isOk());
     }
 
 
