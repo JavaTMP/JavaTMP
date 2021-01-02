@@ -1,21 +1,16 @@
 package com.javatmp.demo.jpa;
 
-import cn.hutool.core.bean.BeanUtil;
-import cn.hutool.core.lang.Snowflake;
 import com.javatmp.demo.jpa.entity.primary.PrimaryMultiTable;
 import com.javatmp.demo.jpa.entity.second.SecondMultiTable;
 import com.javatmp.demo.jpa.repository.primary.PrimaryMultiTableRepository;
 import com.javatmp.demo.jpa.repository.second.SecondMultiTableRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 @Slf4j
 public class SpringBootDemoMultiDatasourceJpaApplicationTests {
@@ -28,7 +23,7 @@ public class SpringBootDemoMultiDatasourceJpaApplicationTests {
 
     @Test
     public void testInsert() {
-        PrimaryMultiTable primary = new PrimaryMultiTable(snowflake.nextId(),"测试名称-1");
+        PrimaryMultiTable primary = new PrimaryMultiTable(snowflake.nextId(), "测试名称-1");
         primaryRepo.save(primary);
 
         SecondMultiTable second = new SecondMultiTable();
@@ -39,7 +34,7 @@ public class SpringBootDemoMultiDatasourceJpaApplicationTests {
     @Test
     public void testUpdate() {
         primaryRepo.findAll().forEach(primary -> {
-            primary.setName("修改后的"+primary.getName());
+            primary.setName("修改后的" + primary.getName());
             primaryRepo.save(primary);
 
             SecondMultiTable second = new SecondMultiTable();
