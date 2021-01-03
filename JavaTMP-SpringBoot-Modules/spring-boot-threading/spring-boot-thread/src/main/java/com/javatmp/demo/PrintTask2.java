@@ -4,9 +4,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import static org.springframework.beans.factory.config.ConfigurableBeanFactory.SCOPE_PROTOTYPE;
+
 @Slf4j
 @Component
-@Scope("prototype")
+@Scope(SCOPE_PROTOTYPE)
 public class PrintTask2 implements Runnable{
 
     String name;

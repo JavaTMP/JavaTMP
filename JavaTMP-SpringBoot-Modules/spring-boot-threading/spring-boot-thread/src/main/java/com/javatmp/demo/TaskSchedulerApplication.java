@@ -30,17 +30,6 @@ public class TaskSchedulerApplication {
     ThreadPoolTaskScheduler threadPoolTaskScheduler;
 
     @Bean
-    public ThreadPoolTaskScheduler threadPoolTaskScheduler() {
-        ThreadPoolTaskScheduler pool = new ThreadPoolTaskScheduler();
-        pool.setPoolSize(100);
-        pool.afterPropertiesSet();
-        pool.setWaitForTasksToCompleteOnShutdown(true);
-        // read more:
-        // https://www.javatips.net/api/org.springframework.scheduling.concurrent.threadpooltaskscheduler
-        return pool;
-    }
-
-    @Bean
     public CommandLineRunner springBootMain3() throws Exception {
         return args -> {
             log.info("*** Start Spring Boot Project ***");
