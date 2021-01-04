@@ -1,7 +1,6 @@
 package com.javatmp.demo.validation.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.javatmp.demo.validation.controller.ValidateRequestBodyController;
 import com.javatmp.demo.validation.entity.Input;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -10,9 +9,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import static org.assertj.core.api.Java6Assertions.assertThat;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = ValidateRequestBodyController.class)
@@ -53,7 +53,8 @@ class ValidateRequestBodyControllerTest {
             .andExpect(status().isBadRequest())
             .andReturn();
 
-    assertThat(result.getResponse().getContentAsString()).contains("violations");
+    assertThat(result.getResponse().getContentAsString())
+            .contains("violations");
   }
 
   @Test
