@@ -46,33 +46,34 @@ public class JpaDemoApplication implements CommandLineRunner {
 
 
         // fetch an individual customer by ID
-        Optional<Customer> customer = repository.findById(1L);
+        Optional<Customer> customer1 = repository.findById(1L);
         log.info("Customer found with findById(1L):");
         log.info("--------------------------------");
-        log.info("customer by findById : {}", customer);
+        log.info("customer by findById : {}", customer1);
         log.info("");
 
         Pageable page = PageRequest.of(10, 10);
         log.info("page is :{}", page);
         Page<Customer> customers = repository.findAll(page);
-        for (Customer customer1 : customers) {
-            log.info("customer from page is {}", customer1);
+        for (Customer customer11 : customers) {
+            log.info("customer from page is {}", customer11);
         }
 
-        Future<Customer> completableFuture = repository.findOneByStatus(1);
+        Future<Customer> completableFuture =
+                repository.findOneById(1L);
 
         Customer come = completableFuture.get();
         log.info("customer from completeable futrue is : {}", come);
 
-        Stream<Customer> customerStream = repository.selectForUpdate();
-        customerStream.forEach(customer1 -> {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            log.info("custom stream count is : {}", customer1);
+        Stream<Customer> customerStream = repository.selectForUpdate(0);
+        Optional<Customer> optionalCustomer = customerStream.findFirst();
+        optionalCustomer.ifPresent(customer -> {
+            log.info("customer exists is {}", customer);
+            customer.setStatus(1);
+            repository.updateCustomerStatus(customer.getId(),
+                    customer.getStatus());
         });
+        log.info("customer1 isPresent : {}", customer1.isPresent());
 
         customerStream.close();
     }

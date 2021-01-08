@@ -4,8 +4,9 @@ bootJar {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
     runtimeOnly 'mysql:mysql-connector-java'
     // https://mvnrepository.com/artifact/com.github.javafaker/javafaker
-    compile group: 'com.github.javafaker', name: 'javafaker', version: '1.0.2'
+    implementation 'com.github.javafaker:javafaker:1.0.1'
 
 }
