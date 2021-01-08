@@ -24,6 +24,8 @@ include 'spring-boot-web:spring-boot-rest-template'
 include 'spring-boot-web:spring-boot-rest'
 
 include 'spring-boot-threading:spring-boot-thread'
+include 'spring-boot-threading:spring-boot-thread-executor'
+include 'spring-boot-threading:spring-boot-thread-scheduler'
 include 'spring-boot-threading:spring-boot-scheduler'
 include 'spring-boot-threading:spring-boot-scheduler-config'
 include 'spring-boot-threading:spring-boot-async'

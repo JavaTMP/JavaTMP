@@ -1,4 +1,4 @@
-# Spring Boot Thread Module
+# Spring Boot Task Executor Module
 
 ## References
 - [https://mkyong.com/spring/spring-and-java-thread-example/](https://mkyong.com/spring/spring-and-java-thread-example/)

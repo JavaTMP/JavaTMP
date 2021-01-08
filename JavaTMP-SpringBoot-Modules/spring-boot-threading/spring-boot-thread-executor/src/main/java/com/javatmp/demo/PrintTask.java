@@ -9,7 +9,7 @@ import static org.springframework.beans.factory.config.ConfigurableBeanFactory.S
 @Slf4j
 @Component
 @Scope(SCOPE_PROTOTYPE)
-public class PrintTask2 implements Runnable{
+public class PrintTask implements Runnable{
 
     String name;
 
