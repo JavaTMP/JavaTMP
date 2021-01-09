@@ -23,7 +23,7 @@ projects
 */nb-configuration.xml
 
 # log4j folders
-logs
+logs/
 
 ## idea
 .idea
