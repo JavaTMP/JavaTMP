@@ -2,17 +2,15 @@
 .DS_Store
 
 # Folders to ignore
-node_modules
+node_modules/
 projects
 /build
 
-/temp
-/nbproject/private/
-/JavaTMP-Static-Ajax/nbproject/private/
-/JavaTMP-User-Starter/nbproject/private/
-/JavaTMP-User-Starter/build/
-/JavaTMP-User-Starter/dist/
-/JavaTMP-User-Starter/target/
+temp/
+nbproject/private/
+build/
+dist/
+target/
 
 # eclipse
 .settings
