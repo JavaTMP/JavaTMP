@@ -23,6 +23,7 @@ include 'spring-boot-web:spring-boot-web-simple'
 include 'spring-boot-web:spring-boot-web-session'
 include 'spring-boot-web:spring-boot-rest-template'
 include 'spring-boot-web:spring-boot-rest'
+include 'spring-boot-web:spring-boot-web-i18n'
 
 include 'spring-boot-threading:spring-boot-thread'
 include 'spring-boot-threading:spring-boot-thread-executor'
