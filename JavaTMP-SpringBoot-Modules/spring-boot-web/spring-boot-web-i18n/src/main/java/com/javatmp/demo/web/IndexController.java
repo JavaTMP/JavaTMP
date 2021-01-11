@@ -31,7 +31,9 @@ public class IndexController {
 
         log.info("current local of request is : {}", locale);
 
-        String returnMsg = messageSource.getMessage(
+        String returnMsg = null;
+        returnMsg = "Current locale country : " + locale.getCountry() + ", language : " + locale.getLanguage()  + "<br/>";
+        returnMsg += messageSource.getMessage(
                 "global.welcome",
                 null, locale);
         returnMsg += "<br/>";
