@@ -16,6 +16,6 @@ public class HelloController {
     @RequestMapping("/page")
     public String page() {
         log.info("page requested Controller");
-        return "/page.html";
+        return "/page.jsp";
     }
 }

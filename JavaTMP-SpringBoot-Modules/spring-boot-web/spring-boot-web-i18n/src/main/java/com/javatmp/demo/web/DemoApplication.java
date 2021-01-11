@@ -43,7 +43,7 @@ public class DemoApplication {
     public LocaleChangeInterceptor localeChangeInterceptor() {
         LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
         // Defaults to "locale" if not set
-        localeChangeInterceptor.setParamName("lang");
+//        localeChangeInterceptor.setParamName("lang");
         return localeChangeInterceptor;
     }
 

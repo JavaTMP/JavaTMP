@@ -11,7 +11,7 @@
 </head>
 <body>
 <div>
-<h1>Welcome To Spring Boot War Template</h1>
+<h1>Welcome To Spring Boot War Template from WEB-INF/page.html</h1>
 </div>
 <script src="" type="text/javascript"></script>
 <script type="text/javascript">
