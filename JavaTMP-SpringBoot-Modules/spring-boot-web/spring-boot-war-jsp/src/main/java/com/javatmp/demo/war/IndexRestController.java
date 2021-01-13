@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-public class IndexController {
-    @RequestMapping({"", "/"})
+public class IndexRestController {
+    @RequestMapping("/index")
     public String index() {
         return "Hello Spring Boot 2.0!";
     }

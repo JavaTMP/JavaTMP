@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html dir="ltr" lang="en">
 <head>
@@ -11,7 +12,7 @@
 </head>
 <body>
 <div>
-<h1>Welcome To Spring Boot War Template from WEB-INF/page.html</h1>
+<h1>Welcome To Spring Boot War Template from /WEB-INF/index.jsp</h1>
 </div>
 <script src="" type="text/javascript"></script>
 <script type="text/javascript">
