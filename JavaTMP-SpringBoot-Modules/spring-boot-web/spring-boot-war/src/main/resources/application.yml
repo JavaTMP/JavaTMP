@@ -2,9 +2,3 @@ server:
   port: 8080
   servlet:
     context-path: /
-
-spring:
-  mvc:
-    view:
-      prefix: "/WEB-INF"
-      suffix: ""
