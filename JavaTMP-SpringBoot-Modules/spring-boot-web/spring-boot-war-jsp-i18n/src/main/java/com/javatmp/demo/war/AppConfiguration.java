@@ -20,8 +20,8 @@ public class AppConfiguration {
         return slr;
     }
 
-    @Bean(name = "messageSource")
-    public MessageSource getMessageResource()  {
+    @Bean
+    public MessageSource messageSource()  {
         ReloadableResourceBundleMessageSource messageResource= new ReloadableResourceBundleMessageSource();
         messageResource.setBasename("classpath:i18n/messages");
         messageResource.setDefaultEncoding("UTF-8");

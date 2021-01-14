@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!doctype html>
 <html dir="ltr" lang="en">
 <head>
@@ -20,6 +21,11 @@
 </div>
 <div>
     <p>Direct from fmt:message is : <fmt:message key="global.welcome"/></p>
+    <p>Direct from spring:message is : <spring:message code="global.welcome" text="global.welcome not found" /></p>
+</div>
+<div>
+    <p>pageContext.request.locale: ${pageContext.request.locale}</p>
+    <p>pageContext.response.locale: ${pageContext.response.locale}</p>
 </div>
 <script src="" type="text/javascript"></script>
 <script type="text/javascript">
