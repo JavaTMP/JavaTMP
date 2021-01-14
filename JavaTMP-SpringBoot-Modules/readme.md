@@ -35,3 +35,4 @@ These additional references should also help you:
 * [Run background process in linux](https://stackoverflow.com/questions/10408816/how-do-i-use-the-nohup-command-without-getting-nohup-out) 
 * [Spring Boot - Error creating a bean with name](https://javarevisited.blogspot.com/2019/04/spring-boot-error-error-creating-bean.html)
 * [How do I revert all local changes in Git managed project to previous state?](https://stackoverflow.com/questions/1146973/how-do-i-revert-all-local-changes-in-git-managed-project-to-previous-state)
+* [12 Factor Apps with Spring Boot](https://reflectoring.io/spring-boot-12-factor-app/)
