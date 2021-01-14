@@ -20,6 +20,7 @@ include 'spring-boot-data:spring-boot-jpa-java8-features'
 
 include 'spring-boot-web:spring-boot-war'
 include 'spring-boot-web:spring-boot-war-jsp'
+include 'spring-boot-web:spring-boot-war-jsp-i18n'
 include 'spring-boot-web:spring-boot-web-simple'
 include 'spring-boot-web:spring-boot-web-session'
 include 'spring-boot-web:spring-boot-rest-template'
