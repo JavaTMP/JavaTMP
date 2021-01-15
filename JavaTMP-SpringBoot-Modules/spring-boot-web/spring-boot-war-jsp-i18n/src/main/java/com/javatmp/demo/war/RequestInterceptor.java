@@ -1,6 +1,9 @@
-package com.javatmp.demo.web.session;
+package com.javatmp.demo.war;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,20 +15,22 @@ import javax.servlet.http.HttpSession;
 
 @Component
 @Slf4j
-public class SessionInterceptor implements HandlerInterceptor {
+public class RequestInterceptor implements HandlerInterceptor {
+
+    @Autowired
+    MessageSource messageSource;
 
     @Override
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response,
-                             Object object) throws Exception {
-        log.info("Before Handler execution");
+                             Object object)
+            throws Exception {
+        log.info(">> Before Handler execution");
         HttpSession session = request.getSession();
-        if (session.getAttribute(Constants.SESSION_KEY) != null) {
-            return true;
-        }
-        String url = "/page/login?redirect=true";
-        response.sendRedirect(request.getContextPath() + url);
-        return false;
+        session.setAttribute("locale", LocaleContextHolder.getLocale());
+        session.setAttribute("labels", messageSource);
+//        this.messageSource.
+        return true;
     }
 
     @Override

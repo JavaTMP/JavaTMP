@@ -12,8 +12,11 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Autowired
     LocaleChangeInterceptor localeChangeInterceptor;
 
+    @Autowired
+    RequestInterceptor requestInterceptor;
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(localeChangeInterceptor).addPathPatterns("/*");
+        registry.addInterceptor(requestInterceptor).addPathPatterns("/*");
     }
 }

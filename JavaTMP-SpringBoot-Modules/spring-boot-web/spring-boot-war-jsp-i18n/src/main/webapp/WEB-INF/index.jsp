@@ -27,6 +27,9 @@
     <p>pageContext.request.locale: ${pageContext.request.locale}</p>
     <p>pageContext.response.locale: ${pageContext.response.locale}</p>
 </div>
+<div>
+    <p>Using sessionScope.labels.getMessage : ${labels.getMessage('global.welcome', null, pageContext.response.locale)}</p>
+</div>
 <script src="" type="text/javascript"></script>
 <script type="text/javascript">
 </script>
