@@ -35,7 +35,7 @@ var config = {
             {"from": "${sourceNodeLib}/@fortawesome/fontawesome-free/webfonts/**/*", "to": "${destComponentsLib}/fontawesome-free/webfonts"}
         ],
         "font-awesome-animation": [
-            {"from": "${sourceNodeLib}/font-awesome-animation/dist/font-awesome-animation.min.css", "to": "${destComponentsLib}/font-awesome-animation/dist"}
+            {"from": "${sourceNodeLib}/font-awesome-animation/css/font-awesome-animation.min.css", "to": "${destComponentsLib}/font-awesome-animation/css"}
         ],
         "jquery": [
             {"from": "${sourceNodeLib}/jquery/dist/jquery.min.js", "to": "${destComponentsLib}/jquery/dist"}
@@ -209,8 +209,9 @@ var config = {
             {"from": "${sourceNodeLib}/datatables.net-rowgroup-bs4/js/rowGroup.bootstrap4.min.js", "to": "${destComponentsLib}/datatables.net-rowgroup-bs4/js"}
         ],
         "echarts": [
-            {"from": "${sourceNodeLib}/echarts/dist/echarts.min.js", "to": "${destComponentsLib}/echarts/dist"},
-            {"from": "${sourceNodeLib}/echarts/map/js/world.js", "to": "${destComponentsLib}/echarts/map/js/"}
+            {"from": "${sourceNodeLib}/echarts/dist/echarts.min.js", "to": "${destComponentsLib}/echarts/dist"}
+            // ,
+            // {"from": "${sourceNodeLib}/echarts/map/js/world.js", "to": "${destComponentsLib}/echarts/map/js/"}
         ],
         "slick-carousel": [
             {"from": "${sourceNodeLib}/slick-carousel/slick/ajax-loader.gif", "to": "${destComponentsLib}/slick-carousel/slick"},
@@ -299,7 +300,7 @@ var config = {
 };
 var src = {
     "css": [
-        "./web/components/font-awesome-animation/dist/font-awesome-animation.min.css",
+        "./web/components/font-awesome-animation/css/font-awesome-animation.min.css",
         "./web/components/jquery-ui-dist/jquery-ui.min.css",
         "./web/components/jquery-ui-dist/jquery-ui.theme.min.css",
         "./web/components/metismenu/dist/metisMenu.min.css",
@@ -396,7 +397,7 @@ var src = {
         "./web/components/datatables.net-rowgroup-bs4/js/rowGroup.bootstrap4.min.js",
         "./web/components/Datatables-CellEdit/js/dataTables.cellEdit.js",
         "./web/components/echarts/dist/echarts.min.js",
-        "./web/components/echarts/map/js/world.js",
+        // "./web/components/echarts/map/js/world.js",
         "./web/components/slick-carousel/slick/slick.min.js",
         "./web/components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js",
         "./web/components/bootstrap-modal-wrapper/dist/bootstrap-modal-wrapper-factory.min.js",
@@ -562,7 +563,8 @@ gulp.task('generate-dist', gulp.series('copy-components', "delete-dist", 'delete
                 './web/assets/src/js-src/javatmp.util.js',
                 './web/assets/src/js-src/javatmp.ajax.js',
                 './web/assets/src/js-src/javatmp.sidebar.js',
-                './web/assets/src/js-src/index.js'
+                './web/assets/src/js-src/index.js',
+                './web/assets/src/js-src/extra/**/*.js'
             ])
                     .pipe(eslint())
                     .pipe(eslint.format())
