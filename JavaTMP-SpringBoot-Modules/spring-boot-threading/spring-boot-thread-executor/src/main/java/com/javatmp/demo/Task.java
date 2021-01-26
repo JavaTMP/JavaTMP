@@ -18,7 +18,7 @@ public class Task implements Runnable {
 
         log.debug("Start");
         try {
-            TimeUnit.SECONDS.sleep(5);
+            TimeUnit.SECONDS.sleep(1);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
