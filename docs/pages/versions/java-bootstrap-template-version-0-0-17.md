@@ -3,7 +3,7 @@ title: Java Bootstrap Template Version 0.0.17 (Current Development Version)
 ---
 # {{ page.title }}
 
-## on
+## e490533 on Jan 26, 2021, 11:36 PM GMT+4
 - Update the following dependencies in package.json:
   - @fortawesome/fontawesome-free from 5.15.1 to 5.15.2
   - bootstrap from 4.5.3 to 4.6.0
