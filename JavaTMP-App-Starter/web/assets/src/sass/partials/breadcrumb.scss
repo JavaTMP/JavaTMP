@@ -53,6 +53,15 @@
     }
 }
 
+// todo: set breadcrumb float property in correct location
+.breadcrumb-item {
+    + .breadcrumb-item {
+        &::before {
+            float: inherit;
+        }
+    }
+}
+
 @media (min-width: 768px) {
     body.sidebar-active .main-content > .main-breadcrumb-bar {
         left: $javatmp-sidebar-width;

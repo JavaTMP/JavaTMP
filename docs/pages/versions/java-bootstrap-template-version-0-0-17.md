@@ -1,9 +1,23 @@
 ---
-title: Java Bootstrap Template Version 0.0.17 (Current Development Version)
+title: Java Bootstrap Template Version 0.0.17 (published on Jan 31, 2021)
 ---
 # {{ page.title }}
 
-## 
+## e490533 on Jan 26, 2021, 11:36 PM GMT+4
+- Update the following dependencies in package.json:
+  - @fortawesome/fontawesome-free from 5.15.1 to 5.15.2
+  - bootstrap from 4.5.3 to 4.6.0
+  - bootstrap-input-spinner from 1.16.8 to 1.17.0
+  - bootswatch from 4.5.3 to 4.6.0
+  - datatables.net-responsive from 2.2.6 to 2.2.7
+  - datatables.net-responsive-bs4 from 2.2.6 to 2.2.7
+  - echarts from 4.9.0 to 5.0.1
+  - font-awesome-animation from 0.2.1 to 1.1.1
+  - jquery-validation from 1.19.2 to 1.19.3
+  - select2 from 4.0.13 to 4.1.0-rc.0
+- Run gulp default to regenerate dist folders.
+
+## a119eeb on Dec 25, 2020, 1:59 AM GMT+4
 - Update the following dependencies in package.json:
   - @fortawesome/fontawesome-free from 5.15.0 to 5.15.1
   - bootstrap from 4.5.2 to 4.5.3

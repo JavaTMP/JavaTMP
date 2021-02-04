@@ -9,7 +9,6 @@ projects
 temp/
 nbproject/private/
 build/
-dist/
 target/
 
 # eclipse
