@@ -65,11 +65,11 @@ public class JpaDemoApplication implements CommandLineRunner {
         Customer come = completableFuture.get();
         log.info("customer from completeable futrue is : {}", come);
 
-        Stream<Customer> customerStream = repository.selectForUpdate(0);
+        Stream<Customer> customerStream = repository.selectForUpdateNative(0);
         Optional<Customer> optionalCustomer = customerStream.findFirst();
         optionalCustomer.ifPresent(customer -> {
             log.info("customer exists is {}", customer);
-            customer.setStatus(1);
+//            customer.setStatus(1);
             repository.updateCustomerStatus(customer.getId(),
                     customer.getStatus());
         });
