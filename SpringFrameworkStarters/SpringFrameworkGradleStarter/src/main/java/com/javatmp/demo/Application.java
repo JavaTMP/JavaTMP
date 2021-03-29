@@ -66,7 +66,7 @@ public class Application {
         AnnotationConfigApplicationContext ctx =
                 new AnnotationConfigApplicationContext();
 
-        Properties props = PropertiesLoaderUtils.loadAllProperties("c:/my.properties");
+        Properties props = PropertiesLoaderUtils.loadAllProperties("my.properties");
         ctx.getEnvironment().getPropertySources().addLast(new PropertiesPropertySource("myProps", props));
         ctx.register(Application.class);
         ctx.refresh();
