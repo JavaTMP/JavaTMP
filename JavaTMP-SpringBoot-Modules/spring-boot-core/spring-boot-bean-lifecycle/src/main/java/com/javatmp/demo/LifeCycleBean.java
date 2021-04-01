@@ -1,5 +1,6 @@
 package com.javatmp.demo;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.*;
 import org.springframework.context.ApplicationContext;
@@ -10,6 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 @Component
+@Slf4j
 public class LifeCycleBean implements InitializingBean, DisposableBean, BeanNameAware,
         BeanFactoryAware, ApplicationContextAware {
     public LifeCycleBean() {
@@ -18,47 +20,47 @@ public class LifeCycleBean implements InitializingBean, DisposableBean, BeanName
 
     @Override
     public void destroy() throws Exception {
-        System.out.println("## The LifeCycleBean bean has been terminated");
+        log.info("## The LifeCycleBean bean has been terminated");
 
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        System.out.println("## The has its properties set!");
+        log.info("## The has its properties set!");
 
     }
 
     @Override
     public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-        System.out.println("## Bean Factory has been set");
+        log.info("## Bean Factory has been set");
     }
 
     @Override
     public void setBeanName(String name) {
-        System.out.println("## My Bean Name is: " + name);
+        log.info("## My Bean Name is: " + name);
 
     }
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        System.out.println("## Application context has been set");
+        log.info("## Application context has been set");
     }
 
     @PostConstruct
     public void postConstruct(){
-        System.out.println("## The Post Construct annotated method has been called");
+        log.info("## The Post Construct annotated method has been called");
     }
 
     @PreDestroy
     public void preDestroy() {
-        System.out.println("## The Predestroy annotated method has been called");
+        log.info("## The Predestroy annotated method has been called");
     }
 
     public void beforeInit(){
-        System.out.println("## - Before Init - Called by Bean Post Processor");
+        log.info("## - Before Init - Called by Bean Post Processor");
     }
 
     public void afterInit(){
-        System.out.println("## - After init called by Bean Post Processor");
+        log.info("## - After init called by Bean Post Processor");
     }
 }

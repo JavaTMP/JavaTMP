@@ -12,7 +12,7 @@ spring:
       minimum-idle: 5
       connection-test-query: SELECT 1 FROM DUAL
       maximum-pool-size: 20
-      auto-commit: true
+      auto-commit: false
       idle-timeout: 30000
       pool-name: SpringBootDemoHikariCP
       max-lifetime: 60000
@@ -23,7 +23,7 @@ spring:
       jdbc:
         batch_size: 1000
       order_inserts: true
-      ddl-auto: validate
+      ddl-auto: none
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL57InnoDBDialect

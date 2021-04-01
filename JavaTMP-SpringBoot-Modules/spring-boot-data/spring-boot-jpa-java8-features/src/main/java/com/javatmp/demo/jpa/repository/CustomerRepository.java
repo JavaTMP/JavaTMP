@@ -32,7 +32,15 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
             @QueryHint(name = "javax.persistence.lock.timeout", value = "" + LockOptions.SKIP_LOCKED)
     })
     @Query(value = "SELECT * FROM Customer where status = ?1 for update skip locked", nativeQuery = true)
-    Stream<Customer> selectForUpdate(Integer status);
+    Stream<Customer> selectForUpdateNative(Integer status);
+
+    @QueryHints(value = {
+            @QueryHint(name = HINT_FETCH_SIZE, value = "100"),
+            @QueryHint(name = HINT_CACHEABLE, value = "false"),
+            @QueryHint(name = "javax.persistence.lock.timeout", value = "" + LockOptions.SKIP_LOCKED)
+    })
+//    @Query(value = "SELECT c FROM Customer where status = ?1")
+    Stream<Customer> findAllByStatus(Integer status);
 
     @Modifying
     @Query("update Customer set status = :status where id = :id")
