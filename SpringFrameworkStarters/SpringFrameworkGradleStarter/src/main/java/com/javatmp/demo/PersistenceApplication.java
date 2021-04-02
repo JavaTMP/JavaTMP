@@ -1,6 +1,6 @@
 package com.javatmp.demo;
 
-import com.javatmp.demo.entity.User;
+import com.javatmp.demo.db.entity.User;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.EntityManager;

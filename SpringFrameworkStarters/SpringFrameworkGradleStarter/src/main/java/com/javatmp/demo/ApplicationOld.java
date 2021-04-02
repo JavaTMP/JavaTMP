@@ -1,6 +1,7 @@
 package com.javatmp.demo;
 
-import com.javatmp.demo.service.DateTimeService;
+import com.javatmp.demo.db.ApplicationConfiguration;
+import com.javatmp.demo.db.service.DateTimeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;

@@ -29,6 +29,7 @@ repositories {
 
 dependencies {
     implementation "org.springframework:spring-context:${springframeworkVersion}"
+    implementation "org.springframework:spring-web:${springframeworkVersion}"
     compileOnly "org.projectlombok:lombok:1.18.16"
     annotationProcessor 'org.projectlombok:lombok:1.18.16'
     testCompileOnly 'org.projectlombok:lombok:1.18.16'
