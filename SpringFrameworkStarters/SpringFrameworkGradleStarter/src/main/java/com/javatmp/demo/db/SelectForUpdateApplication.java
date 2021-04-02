@@ -82,30 +82,6 @@ public class SelectForUpdateApplication {
 
     @Transactional(transactionManager = TRANSACTION_MANAGER_REF)
     public void run() throws ExecutionException, InterruptedException {
-        log.info("env is : {}", env);
-        log.info("ApplicationConfiguration is : {}", applicationConfiguration);
-        log.info("emf : {}", emf);
-
-        EntityManager em = emf.createEntityManager();
-        log.info("em is : {}", em);
-
-        User user = em.find(User.class, new Long(1));
-
-        log.debug("user is : {}", user);
-
-        User user2 = repository.findByUserName("Petra64").get();
-
-        log.debug("user2 : {}", user2);
-
-        user2.setLastAccessTime(new Date());
-
-        repository.save(user2);
-
-        em.close();
-
-        log.info("user repository is : {}", repository);
-        User user3 = this.em.find(User.class, 3L);
-        log.info("user3 : {}", user3);
 
         // fetch an individual customer by ID
         Optional<User> customer1 = repository.findById(1L);
@@ -129,6 +105,7 @@ public class SelectForUpdateApplication {
 
         Stream<User> customerStream = repository.selectForUpdateNative(0);
         Optional<User> optionalCustomer = customerStream.findFirst();
+        log.info("is present : {}", optionalCustomer.isPresent());
         optionalCustomer.ifPresent(customer -> {
             log.info("customer exists is {}", customer);
 //            customer.setStatus(1);
