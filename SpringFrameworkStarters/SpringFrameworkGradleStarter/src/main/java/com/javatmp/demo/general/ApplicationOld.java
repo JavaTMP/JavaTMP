@@ -1,4 +1,4 @@
-package com.javatmp.demo;
+package com.javatmp.demo.general;
 
 import com.javatmp.demo.db.ApplicationConfiguration;
 import com.javatmp.demo.db.service.DateTimeService;

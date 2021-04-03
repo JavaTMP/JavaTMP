@@ -1,4 +1,4 @@
-package com.javatmp.demo;
+package com.javatmp.demo.db;
 
 import com.javatmp.demo.db.entity.User;
 import lombok.extern.slf4j.Slf4j;
