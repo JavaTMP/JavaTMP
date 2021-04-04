@@ -80,7 +80,7 @@ public class SelectForUpdateApplication {
         bean.run();
     }
 
-    @Transactional(transactionManager = TRANSACTION_MANAGER_REF)
+    @Transactional(transactionManager = AppPUConfig.TRANSACTION_MANAGER_REF)
     public void run() throws ExecutionException, InterruptedException {
 
         // fetch an individual customer by ID
@@ -106,11 +106,11 @@ public class SelectForUpdateApplication {
         Stream<User> customerStream = repository.selectForUpdateNative(0);
         Optional<User> optionalCustomer = customerStream.findFirst();
         log.info("is present : {}", optionalCustomer.isPresent());
-        optionalCustomer.ifPresent(customer -> {
-            log.info("customer exists is {}", customer);
+        optionalCustomer.ifPresent(User -> {
+            log.info("customer exists is {}", User);
 //            customer.setStatus(1);
-            repository.updateUserStatus(customer.getId(),
-                    customer.getStatus());
+            repository.updateUserStatus(User.getId(),
+                    User.getStatus());
         });
         log.info("customer1 isPresent : {}", customer1.isPresent());
 
