@@ -2,6 +2,8 @@ package com.javatmp.demo.db.repository;
 
 import com.javatmp.demo.db.entity.User;
 import org.hibernate.LockOptions;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -11,6 +13,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.QueryHint;
+import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
@@ -48,8 +51,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Modifying
     @Query("update User set status = :status where id = :id")
-    int updateUserStatus(@Param("id") Long customerId,
-                                   @Param("status") Short newStatus);
+    int updateUserStatus(@Param("id") Long customerId, @Param("status") Short newStatus);
 
+//    List<User> findAll(Pageable pageable, Sort sort);
 
 }
