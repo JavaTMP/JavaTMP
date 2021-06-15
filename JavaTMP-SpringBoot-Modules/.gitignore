@@ -35,3 +35,6 @@ out/
 ### Default Logs ###
 /logs/
 logs/
+
+*.hprof
+java_pid*

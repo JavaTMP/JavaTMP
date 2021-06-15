@@ -67,6 +67,17 @@ dependencies {
     // https://mvnrepository.com/artifact/joda-time/joda-time
 //    implementation group: 'joda-time', name: 'joda-time', version: '2.10.6'
 
+    // https://mvnrepository.com/artifact/org.springframework.amqp/spring-rabbit
+    implementation group: 'org.springframework.amqp', name: 'spring-rabbit', version: '2.3.0'
+
+    // https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl
+//    implementation group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version: '1.9.13'
+
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.3'
+
+
+
 
 
 }

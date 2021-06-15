@@ -6,6 +6,7 @@ import com.javatmp.demo.jpa.repository.primary.PrimaryMultiTableRepository;
 import com.javatmp.demo.jpa.repository.second.SecondMultiTableRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -18,16 +19,15 @@ public class SpringBootDemoMultiDatasourceJpaApplicationTests {
     private PrimaryMultiTableRepository primaryRepo;
     @Autowired
     private SecondMultiTableRepository secondRepo;
-    @Autowired
-    private Snowflake snowflake;
+
 
     @Test
     public void testInsert() {
-        PrimaryMultiTable primary = new PrimaryMultiTable(snowflake.nextId(), "测试名称-1");
+        PrimaryMultiTable primary = new PrimaryMultiTable(1L, "测试名称-1");
         primaryRepo.save(primary);
 
         SecondMultiTable second = new SecondMultiTable();
-        BeanUtil.copyProperties(primary, second);
+        BeanUtils.copyProperties(primary, second);
         secondRepo.save(second);
     }
 
@@ -38,7 +38,7 @@ public class SpringBootDemoMultiDatasourceJpaApplicationTests {
             primaryRepo.save(primary);
 
             SecondMultiTable second = new SecondMultiTable();
-            BeanUtil.copyProperties(primary, second);
+            BeanUtils.copyProperties(primary, second);
             secondRepo.save(second);
         });
     }

@@ -14,13 +14,10 @@
  * limitations under the License.
  */
 
-package com.example.messagingrabbitmq;
+package com.javatmp.demo;
 
 import java.util.concurrent.TimeUnit;
 
-import com.javatmp.demo.MessagingRabbitmqApplication;
-import com.javatmp.demo.MsgReceiver;
-import com.javatmp.demo.Runner;
 import org.junit.jupiter.api.Test;
 
 import org.springframework.amqp.AmqpConnectException;
@@ -33,7 +30,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 public class MessagingRabbitmqApplicationTest {
 
 	@MockBean
-	private Runner runner;
+	private ProducerRunner producerRunner;
 
 	@Autowired
 	private RabbitTemplate rabbitTemplate;

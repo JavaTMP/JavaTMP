@@ -10,12 +10,12 @@ import java.util.stream.IntStream;
 
 @Component
 @Slf4j
-public class Runner implements CommandLineRunner {
+public class ProducerRunner implements CommandLineRunner {
 
     private final RabbitTemplate rabbitTemplate;
     private final MsgReceiver receiver;
 
-    public Runner(MsgReceiver receiver, RabbitTemplate rabbitTemplate) {
+    public ProducerRunner(MsgReceiver receiver, RabbitTemplate rabbitTemplate) {
         this.receiver = receiver;
         this.rabbitTemplate = rabbitTemplate;
     }

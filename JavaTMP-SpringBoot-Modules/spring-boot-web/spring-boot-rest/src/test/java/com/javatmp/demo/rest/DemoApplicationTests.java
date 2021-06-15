@@ -28,7 +28,7 @@ class DemoApplicationTests {
     @Test
     void contextLoads() {
         assertThat(restAPIController).isNotNull();
-        log.debug("check controller : {} injected successfully", this.restAPIController.toString());
+        log.debug("check runner : {} injected successfully", this.restAPIController.toString());
 
     }
     @Test
