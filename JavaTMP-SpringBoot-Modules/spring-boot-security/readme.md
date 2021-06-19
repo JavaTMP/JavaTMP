@@ -59,4 +59,59 @@ Nonfunctional requirements tend to be more transparent than functional ones.
   and the list continues.
 
 #### Dealing with the exposure of sensitive data
-- 
+- Define the credentials directly in the configuration files for simplicity reasons. 
+- The information in logs written by your application to the console or stored in databases such as Splunk or 
+  Elasticsearch. 
+- The application returns too many details that expose the implementations.
+
+#### The lack of method access control
+- You don’t apply authorization to only one of the tiers.
+- Some future implementation could expose that use case without testing or without testing all the authorization 
+  requirements. 
+
+#### Using dependencies with known vulnerabilities
+- the dependencies like libraries or frameworks that you use to build 
+  the functionality has vulnerabilities.
+- We have to take all the needed measures to avoid the use of any dependency 
+  that has known vulnerabilities.  
+
+### Security applied in various architectures
+- It’s important to understand that different software architectures imply different possible leaks and vulnerabilities.
+
+#### Designing a one-piece web application
+- Spring Security helps you with a relatively easy way of configuring user management. 
+
+#### Designing security for a backend/frontend separation
+- Scalability refers to the quality of a software application 
+  in which it can serve more or fewer requests while adapting 
+  the resources used, without the need to change the application or 
+  its architecture. 
+  Mainly, we classify scalability into two types: vertical and horizontal.
+- When a system is scaled vertically, when there are more requests, more memory and processing power are added to the system
+- We accomplish horizontal scalability by changing the number of instances of the same application that are in execution
+
+#### Understanding the OAuth 2 flow
+- The OAuth 2 flow offers a better way to implement authentication and authorization
+- The OAuth 2 framework defines two separate entities: the authorization server and the resource server.
+- The purpose of the authorization server is to authorize the user and 
+  provide them with a token that specifies, a set of privileges that 
+  they can use.
+- The part of the backend implementing this functionality is called the resource server.
+- The endpoints that can be called are considered protected resources. 
+  Based on the obtained token, and after accomplishing authorization, 
+  a call on a resource is permitted or rejected.
+
+#### Using API keys, cryptographic signatures, and IP validation to secure requests
+- In some cases, you don’t need a username and a password to authenticate and authorize a caller, 
+  but you still want to make sure that nobody altered the exchanged messages.
+
+## Spring Security Project
+- first application uses HTTP Basic to authenticate and authorize 
+the user against an endpoint. The application exposes a REST endpoint 
+at a defined path (/hello). For a successful call, 
+the response returns an HTTP 200 status message and a body. 
+This example demonstrates how the authentication and authorization configured 
+by default with Spring Security works.
+- The only dependencies you need to write for our first project are 
+`spring-boot-starter-web` and `spring-boot-starter-security`,
+- module root folder is [spring-boot-security-web-default](spring-boot-security-web-default)
