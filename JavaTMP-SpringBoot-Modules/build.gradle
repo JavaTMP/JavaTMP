@@ -109,5 +109,5 @@ test {
 
 test.onlyIf { false == true }
 
-// Skips tests if you provide prod project property from command line
-test.onlyIf { !project.hasProperty('prod') }
+// Skips tests if you do not provide prod project property from command line
+test.onlyIf { project.hasProperty('prod') }

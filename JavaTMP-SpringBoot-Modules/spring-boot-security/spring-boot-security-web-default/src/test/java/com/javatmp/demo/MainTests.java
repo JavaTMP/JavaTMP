@@ -1,4 +1,4 @@
-package com.laurentiuspilca.ssia;
+package com.javatmp.demo;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
