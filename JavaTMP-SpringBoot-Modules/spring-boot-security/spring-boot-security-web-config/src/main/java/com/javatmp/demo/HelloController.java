@@ -1,4 +1,4 @@
-package com.javatmp.demo.controllers;
+package com.javatmp.demo;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

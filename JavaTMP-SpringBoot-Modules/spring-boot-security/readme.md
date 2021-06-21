@@ -115,3 +115,14 @@ by default with Spring Security works.
 - The only dependencies you need to write for our first project are 
 `spring-boot-starter-web` and `spring-boot-starter-security`,
 - module root folder is [spring-boot-security-web-default](spring-boot-security-web-default)
+-  The main components acting in the authentication process 
+   for Spring Security and the relationships among these:
+  - The request is intercepted by the authentication filter.
+  - Authentication responsibility is delegated to the authentication manager.
+  - The authentication manager uses the authentication provider, which implements the 
+    authentication logic.
+  - The authentication provider finds the user with a user details service and validates the password using a password encoder.
+  - The result of the authentication is returned to the filter.
+  - Details about the authenticated entity are stored in the security context.
+- The authentication provider uses the `UserDetailsService` and `PasswordEncoder` to find users and to check their passwords.
+- make all the endpoints accessible without the need for credentials using `http.authorizeRequests().anyRequest().permitAll();`
