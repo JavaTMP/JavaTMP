@@ -126,3 +126,8 @@ by default with Spring Security works.
   - Details about the authenticated entity are stored in the security context.
 - The authentication provider uses the `UserDetailsService` and `PasswordEncoder` to find users and to check their passwords.
 - make all the endpoints accessible without the need for credentials using `http.authorizeRequests().anyRequest().permitAll();`
+- In the configuration class, instead of defining these two objects as beans, we set them up through 
+  the `configure(AuthenticationManagerBuilder auth)` method. We override this method from 
+  the `WebSecurityConfigurerAdapter` class and use its parameter of type `AuthenticationManagerBuilder` 
+  to set both the UserDetailsService and the PasswordEncoder as shown in the class
+  [spring-boot-security-web-config/src/main/java/com/javatmp/demo/AnotherWayOfConfig.java]()
