@@ -131,5 +131,5 @@ by default with Spring Security works.
   the `WebSecurityConfigurerAdapter` class and use its parameter of type `AuthenticationManagerBuilder` 
   to set both the UserDetailsService and the PasswordEncoder as shown in the class
   [spring-boot-security-web-config/src/main/java/com/javatmp/demo/AnotherWayOfConfig.java](spring-boot-security-web-config/src/main/java/com/javatmp/demo/AnotherWayOfConfig.java)
--   
-
+- Overriding the AuthenticationProvider implementation by creating a custom authentication provider as in module [spring-boot-security-web-config-custom](spring-boot-security-web-config-custom) 
+- 
