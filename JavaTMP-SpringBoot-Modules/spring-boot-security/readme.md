@@ -133,3 +133,27 @@ by default with Spring Security works.
   [spring-boot-security-web-config/src/main/java/com/javatmp/demo/AnotherWayOfConfig.java](spring-boot-security-web-config/src/main/java/com/javatmp/demo/AnotherWayOfConfig.java)
 - Overriding the AuthenticationProvider implementation by creating a custom authentication provider as in module [spring-boot-security-web-config-custom](spring-boot-security-web-config-custom) 
 - Using multiple configuration classes in your project as in module [spring-boot-security-web-config-multiple](spring-boot-security-web-config-multiple)
+
+## Managing users
+- `UserDetails` which describes the user for Spring Security.
+- `GrantedAuthority` which allows us to define actions that the user 
+  can execute.
+- `UserDetailsManager` which extends the `UserDetailsService` contract. 
+  Beyond the inherited behavior, it also describes actions like creating 
+  a user and modifying or deleting a user’s password.
+
+### Implementing authentication in Spring Security
+- The `UserDetailsService` is only responsible for retrieving 
+  the user by username. This action is the only one needed by 
+  the framework to complete authentication. 
+- The `UserDetailsManager` adds behavior that refers to adding, modifying,
+  or deleting the user, which is a required functionality in most applications. 
+- the actions granted for a user are called authorities. To describe the authorities in Spring Security, 
+  you use the `GrantedAuthority` interface.
+- The `SimpleGrantedAuthority` class offers a way to create immutable 
+  instances of the type `GrantedAuthority`.   
+- You could quickly obtain an instance representing your user with 
+  the `org.springframework.security.core.userdetails.User` builder class.
+- We might implement the `UserDetailsService` to load the user from a database, 
+  an external system, a vault, and so on.
+- 

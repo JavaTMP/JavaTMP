@@ -61,6 +61,8 @@ include 'spring-boot-security:spring-boot-security-web-default'
 include 'spring-boot-security:spring-boot-security-web-config'
 include 'spring-boot-security:spring-boot-security-web-config-custom'
 include 'spring-boot-security:spring-boot-security-web-config-multiple'
+include 'spring-boot-security:spring-boot-security-web-user'
+include 'spring-boot-security:spring-boot-security-web-user-jdbc'
 
 
 
