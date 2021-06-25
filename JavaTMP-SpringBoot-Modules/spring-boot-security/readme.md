@@ -156,4 +156,4 @@ by default with Spring Security works.
   the `org.springframework.security.core.userdetails.User` builder class.
 - We might implement the `UserDetailsService` to load the user from a database, 
   an external system, a vault, and so on.
-- 
+- Using a JdbcUserDetailsManager for user management in module [spring-boot-security-web-user-jdbc](spring-boot-security-web-user-jdbc)
