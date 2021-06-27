@@ -1,6 +1,6 @@
 package com.javatmp.demo;
 
-import com.laurentiuspilca.ssia.config.WithCustomUser;
+import com.javatmp.demo.config.WithCustomUser;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

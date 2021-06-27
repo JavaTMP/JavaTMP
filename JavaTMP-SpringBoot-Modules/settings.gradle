@@ -16,7 +16,7 @@ include 'spring-boot-data:spring-boot-jpa-multi'
 include 'spring-boot-data:spring-boot-jpa-multi-advance'
 include 'spring-boot-data:spring-boot-jpa-paging'
 include 'spring-boot-data:spring-boot-jpa-relations'
-include 'spring-boot-data:spring-boot-jpa-java8-features'
+//include 'spring-boot-data:spring-boot-jpa-java8-features'
 
 include 'spring-boot-web:spring-boot-war'
 include 'spring-boot-web:spring-boot-war-jsp'
@@ -64,6 +64,12 @@ include 'spring-boot-security:spring-boot-security-web-config-multiple'
 include 'spring-boot-security:spring-boot-security-web-user'
 include 'spring-boot-security:spring-boot-security-web-user-jdbc'
 include 'spring-boot-security:spring-boot-security-web-user-ldap'
+include 'spring-boot-security:spring-boot-security-web-password'
+include 'spring-boot-security:spring-boot-security-web-user-authentication'
+include 'spring-boot-security:spring-boot-security-web-context'
+include 'spring-boot-security:spring-boot-security-web-user-authentication-entrypoint'
+include 'spring-boot-security:spring-boot-security-web-user-authentication-handler'
+include 'spring-boot-security:spring-boot-security-web-user-jpa'
 
 
 

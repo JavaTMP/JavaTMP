@@ -157,3 +157,97 @@ by default with Spring Security works.
 - We might implement the `UserDetailsService` to load the user from a database, 
   an external system, a vault, and so on.
 - Using a JdbcUserDetailsManager for user management in module [spring-boot-security-web-user-jdbc](spring-boot-security-web-user-jdbc)
+- Using an LdapUserDetailsManager for user management in module [spring-boot-security-web-user-ldap](spring-boot-security-web-user-ldap)
+- To set up the embedded LDAP server, define a simple LDAP Data Interchange 
+  Format (LDIF) file.
+
+## Dealing with passwords
+- The `AuthenticationProvider` uses the `PasswordEncoder` 
+  to validate the user’s password in the authentication process.
+- The purpose of the `encode(CharSequence rawPassword)` method 
+  is to return a transformation of a provided string.
+- You can use the `matches(CharSequence rawPassword, String encodedPassword)` method
+  afterward to check if an encoded string matches a raw password.
+- Spring Security provides you with some advantageous implementations
+  of `PasswordEncoder` like:
+  - `NoOpPasswordEncoder`. Doesn’t encode the password but keeps it in cleartext.
+  - `StandardPasswordEncoder`. Uses SHA-256 to hash the password and 
+    it's deprecated as it uses a hashing algorithm that we don’t consider 
+    strong enough anymore
+  - `Pbkdf2PasswordEncoder`. Uses the password-based key derivation function 2 (PBKDF2).
+  - `BCryptPasswordEncoder`. Uses a bcrypt strong hashing function to encode the password.
+  - `SCryptPasswordEncoder`. Uses an scrypt hashing function to encode the password.
+
+- The `DelegatingPasswordEncoder` has a list of PasswordEncoder implementations to which it delegates. The DelegatingPasswordEncoder stores each of the instances in a map. 
+
+### the Spring Security Crypto module
+- Install Java Cryptography Extension (JCE) unlimited strength jurisdiction policy files.
+- You’ll see examples of how to use two essential features from the SSCM:
+  - Key generators. Objects used to generate keys for hashing and encryption algorithms
+  - Encryptors. Objects used to encrypt and decrypt data.
+
+#### Using key generators
+- A key generator is an object used to generate a specific kind of key, 
+  generally needed for an encryption or hashing algorithm.
+- The two main types of key generators: 
+  BytesKeyGenerator and StringKeyGenerator.
+
+#### Using encryptors for encryption and decryption operations
+- An encryptor is an object that implements an encryption algorithm. 
+- There are two types of encryptors defined by the SSCM: `BytesEncryptor` and `TextEncryptor`.
+- the standard byte encryptor uses 256-byte AES encryption to encrypt input. 
+- `TextEncryptors` come in three main types. You create these three types by calling 
+  the `Encryptors.text()`, `Encryptors.delux()`, or `Encryptors.queryableText()` methods.
+
+## Implementing authentication
+- The authentication process has only two possible results:
+  - The entity making the request is not authenticated.
+    Usually, in this case, the response status sent back to the client is HTTP 401 Unauthorized.
+  - The entity making the request is authenticated.
+    The details about the requester are stored such that the application 
+    can use these for authorization,  the SecurityContext interface is the instance that stores the details 
+    about the current authenticated request.
+- The `Authentication` interface represents the authentication request 
+  event and holds the details of the entity that requests access 
+  to the application.
+- The `Authentication` contract inherits from the `Principal` contract. 
+  Authentication adds requirements such as the need for a password or 
+  the possibility to specify more details about the authentication request. 
+  Some of these details, like the list of authorities, 
+  are Spring Security-specific.
+- The `AuthenticationProvider` in Spring Security takes care of the authentication logic.
+- Override the `supports(Class<?> c)` method to specify which type of 
+  authentication is supported by the AuthenticationProvider that we define.
+- To plug in the new implementation of the `AuthenticationProvider`, 
+  override the `configure(AuthenticationManagerBuilder auth)` method 
+  of the `WebSecurityConfigurerAdapter` class in the configuration class 
+  of the project.   
+- After successful authentication, the authentication filter stores 
+  the details of the authenticated entity in the security context. 
+  From there, the controller implementing the action mapped to the 
+  request can access these details when needed.
+- Spring Security offers three strategies to manage the SecurityContext 
+  with an object in the role of a manager. It’s named the 
+  `SecurityContextHolder`:
+  - `MODE_THREADLOCAL`. Allows each thread to store its own details in the security context. In a thread-per-request 
+  web application, this is a common approach as each request has an individual thread.
+  - `MODE_INHERITABLETHREADLOCAL`. Similar to MODE_THREADLOCAL but also instructs Spring Security to copy the security 
+    context to the next thread in case of an asynchronous method. This way, we can say that the new thread running the @Async method inherits the security context.
+  - `MODE_GLOBAL`. Makes all the threads of the application see the same security context instance.
+
+- Spring offers various implementations of the utility classes that you 
+  can use in your application to manage the security context when creating 
+  your own threads. like:
+  - DelegatingSecurityContextExecutor
+  - DelegatingSecurityContextExecutorService
+  - DelegatingSecurityContextScheduledExecutorService
+  - DelegatingSecurityContextRunnable
+  - DelegatingSecurityContextCallable
+  
+- To customize the response for a failed authentication, 
+  we can implement an AuthenticationEntryPoint like 
+  in module [spring-boot-security-web-user-authentication-failure](spring-boot-security-web-user-authentication-failure)
+- An unauthenticated user is redirected to a form where they can use 
+  their credentials to authenticate. Once the application authenticates 
+  them, they are redirected to the homepage of the application.
+  
