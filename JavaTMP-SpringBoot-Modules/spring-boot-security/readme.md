@@ -251,3 +251,21 @@ by default with Spring Security works.
   their credentials to authenticate. Once the application authenticates 
   them, they are redirected to the homepage of the application.
   
+## Configuring authorization: Restricting access
+- Authorization is the process during which the application decides whether an authenticated entity 
+  is allowed to access a resource. Authorization always happens after authentication.
+- When the client makes the request, the authentication filter authenticates the user. 
+  After successful authentication, the authentication filter stores the user details in the security context 
+  and forwards the request to the authorization filter. The authorization filter decides whether 
+  the call is permitted. To decide whether to authorize the request, the authorization filter uses 
+  the details from the security context.
+
+### Restricting access based on authorities and roles
+- A user has one or more authorities (actions that a user can do). During the authentication process, 
+  the UserDetailsService obtains all the details about the user, including the authorities. 
+  The application uses the authorities as represented by the GrantedAuthority interface for authorization 
+  after it successfully authenticates the user.
+- Authorities are actions that users can perform in the application. Based on these actions, 
+  you implement the authorization rules. Only users having specific authorities can make 
+  a particular request to an endpoint. 
+- 

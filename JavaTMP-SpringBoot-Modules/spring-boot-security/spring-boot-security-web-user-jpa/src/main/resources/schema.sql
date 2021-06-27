@@ -1,4 +1,3 @@
-create schema spring;
 
 CREATE TABLE IF NOT EXISTS `spring`.`user` (
   `id` INT NOT NULL AUTO_INCREMENT,
