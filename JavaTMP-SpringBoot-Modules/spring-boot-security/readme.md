@@ -285,10 +285,25 @@ by default with Spring Security works.
   It doesn’t need to be related to authorities and roles.
 
 ## Configuring authorization: Applying restrictions
--
+- module location [spring-boot-security-web-authorization-restrictions](spring-boot-security-web-authorization-restrictions)
+- To choose the requests to which we apply authorization configuration, 
+  we use matcher methods. Spring Security offers you three types of matcher methods:
+  - MVC matchers. You use MVC expressions for paths to select endpoints.
+  - Ant matchers. You use Ant expressions for paths to select endpoints.
+  - regex matchers. You use regular expressions (regex) for paths to select endpoints.
+- When you use matchers to refer to requests, the order of the rules should be from particular to general.
+- the Ant matchers apply exactly the given Ant expressions for patterns but know nothing about subtle 
+  Spring MVC functionality.
 
-
-
-
-
-
+## Implementing filters
+- The filter chain receives the request. Each filter uses a manager to apply specific logic 
+  to the request and, eventually, delegates the request further along the chain to the next filter.
+- You can customize the filter chain by adding new filters before, after, or at the position of 
+  existing ones. This way, you can customize authentication as well as the entire process applied
+  to request and response.
+- Each filter has an order number. This determines the order in which filters are applied to 
+  a request. You can add custom filters along with the filters provided by Spring Security.
+- Spring Security provides some filter implementations and their order for us. 
+  Among the provided filters: BasicAuthenticationFilter, CsrfFilter , CorsFilter .
+- Filter module is [spring-boot-security-web-filter](spring-boot-security-web-filter) 
+- 
