@@ -71,6 +71,7 @@ include 'spring-boot-security:spring-boot-security-web-user-authentication-entry
 include 'spring-boot-security:spring-boot-security-web-user-authentication-handler'
 include 'spring-boot-security:spring-boot-security-web-user-jpa'
 include 'spring-boot-security:spring-boot-security-web-authorization'
+include 'spring-boot-security:spring-boot-security-web-authorization-role'
 
 rootProject.children.each {project ->
     println "child project is : ${project.name}"

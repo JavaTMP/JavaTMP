@@ -268,4 +268,27 @@ by default with Spring Security works.
 - Authorities are actions that users can perform in the application. Based on these actions, 
   you implement the authorization rules. Only users having specific authorities can make 
   a particular request to an endpoint. 
-- 
+- you can configure access using `hasAuthority()`,`hasAnyAuthority()`, and `access()` methods.
+- Roles are coarse grained. Each user with a specific role can only do 
+  the actions granted by that role. When applying this philosophy 
+  in authorization, a request is allowed based on the purpose of the 
+  user in the system. Only users who have a specific role can call 
+  a certain endpoint.
+- When defining a role, its name should start with the `ROLE_` prefix.
+- To set constraints for user roles, you can use one of the following 
+  methods: hasRole(), hasAnyRole(), access().
+- When building users with the User builder class as we did in the 
+  example for this section, you specify the role by using the roles() method.
+  This method creates the GrantedAuthority object and automatically 
+  adds the ROLE_ prefix to the names you provide.  
+- the `access()` method is generic. It receives any SpEL expression. 
+  It doesn’t need to be related to authorities and roles.
+
+## Configuring authorization: Applying restrictions
+-
+
+
+
+
+
+
