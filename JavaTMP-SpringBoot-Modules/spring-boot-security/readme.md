@@ -306,4 +306,15 @@ by default with Spring Security works.
 - Spring Security provides some filter implementations and their order for us. 
   Among the provided filters: BasicAuthenticationFilter, CsrfFilter , CorsFilter .
 - Filter module is [spring-boot-security-web-filter](spring-boot-security-web-filter) 
+
+## Applying CSRF protection and CORS
+- The CsrfFilter is one of the filters in the filter chain. It receives the request 
+  and eventually forwards it to the next filter in the chain. To manage CSRF tokens, 
+  CsrfFilter uses a CsrfTokenRepository.
+- The default form login uses a hidden input to send the CSRF token in the request. 
+  This is why the login request that uses an HTTP POST method works with CSRF 
+  protection enabled.
+- Without sending the CSRF token, the server won’t accept the request done with the HTTP POST method.
+  The application redirects the user to a default error page, which confirms that the status 
+  on the response is HTTP 403 Forbidden.
 - 
