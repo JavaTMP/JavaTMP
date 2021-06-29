@@ -317,4 +317,27 @@ by default with Spring Security works.
 - Without sending the CSRF token, the server won’t accept the request done with the HTTP POST method.
   The application redirects the user to a default error page, which confirms that the status 
   on the response is HTTP 403 Forbidden.
+- First, the GET request generates the CSRF token and stores its value 
+  in the database. Any following POST request must send this value. 
+  Then, the CsrfFilter checks if the value in the request corresponds
+  with the one in the database. Based on this, 
+  the request is accepted or rejected.
+- browsers don’t allow requests made for any domain other than 
+  the one from which the site is loaded.
+- CORS allows you to specify from which domain your application 
+  allows requests and what details can be shared. The most important are
+  - Access-Control-Allow-Origin--Specifies the foreign domains (origins) that can access resources on your domain.
+  - Access-Control-Allow-Methods--Lets us refer only to some HTTP methods in situations in which we want to allow 
+    access to a different domain, but only to specific HTTP methods. You use this if you’re going to enable example.com to call some endpoint, but only with HTTP GET, for example.
+  - Access-Control-Allow-Headers--Adds limitations to which headers you can use in a specific request.
+- You can place the @CrossOrigin annotation directly above the method that defines
+  the endpoint and configure it using the allowed origins and methods.
+  The value parameter of @CrossOrigin receives an array to let you define multiple origins
+- By allowing all origins, you expose the application to cross-site scripting (XSS) requests, 
+  which eventually can lead to DDoS attacks
+- You can configure CORS both for an endpoint using the @CrossOrigin 
+  annotation or centralized in the configuration class using the cors()
+  method of the HttpSecurity object.
+
+## Authentication and Authorization Applications
 - 

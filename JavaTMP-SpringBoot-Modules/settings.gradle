@@ -78,6 +78,10 @@ include 'spring-boot-security:spring-boot-security-web-filter-custom'
 include 'spring-boot-security:spring-boot-security-web-filter-custom-authorization'
 include 'spring-boot-security:spring-boot-security-web-filter-CSRF'
 include 'spring-boot-security:spring-boot-security-web-filter-CSRF-demo'
+include 'spring-boot-security:spring-boot-security-web-filter-CSRF-custom'
+include 'spring-boot-security:spring-boot-security-web-filter-CORS'
+include 'spring-boot-security:spring-boot-security-web-authentication-server-demo:authentication-server'
+include 'spring-boot-security:spring-boot-security-web-authentication-server-demo:business-logic-server'
 
 
 rootProject.children.each {project ->
