@@ -1,7 +1,7 @@
 package com.javatmp.demo.config;
 
-import com.javatmp.demo.filters.AuthenticationLoggingFilter;
-import com.javatmp.demo.filters.RequestValidationFilter;
+import com.javatmp.demo.filters.StaticKeyAuthenticationFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -45,16 +45,14 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
         return NoOpPasswordEncoder.getInstance();
     }
 
+
+    @Autowired
+    private StaticKeyAuthenticationFilter filter;
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
-        http.addFilterBefore(
-                new RequestValidationFilter(),
-                BasicAuthenticationFilter.class)
-                .addFilterAfter(
-                        new AuthenticationLoggingFilter(),
-                        BasicAuthenticationFilter.class);
-
+        http.addFilterAt(filter, BasicAuthenticationFilter.class);
         http.authorizeRequests().anyRequest().permitAll();
 
     }

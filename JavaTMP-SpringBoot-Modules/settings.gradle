@@ -75,6 +75,7 @@ include 'spring-boot-security:spring-boot-security-web-authorization-role'
 include 'spring-boot-security:spring-boot-security-web-authorization-restrictions'
 include 'spring-boot-security:spring-boot-security-web-filter'
 include 'spring-boot-security:spring-boot-security-web-filter-custom'
+include 'spring-boot-security:spring-boot-security-web-filter-custom-authorization'
 
 
 rootProject.children.each {project ->
