@@ -1,15 +1,18 @@
 package com.javatmp.demo;
 
+import com.javatmp.demo.authentication.proxy.AuthenticationServerProxy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
-import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
@@ -19,34 +22,53 @@ public class MainTests {
     @Autowired
     private MockMvc mvc;
 
+    @MockBean
+    private MockBean restTemplate;
+
+    @MockBean
+    private AuthenticationServerProxy authenticationServerProxy;
+
     @Test
-    @DisplayName("Test calling /hello endpoint without authentication returns unauthorized.")
-    public void helloUnauthenticated() throws Exception {
-        mvc.perform(get("/hello"))
-                .andExpect(status().isUnauthorized());
+    @DisplayName("Test /login with username and password")
+    public void testLoginWithUsernameAndPassword() throws Exception {
+        mvc.perform(get("/login").servletPath("/login")
+                .header("username", "bill")
+                .header("password", "12345")
+        )
+        .andExpect(status().isOk());
+
+        verify(authenticationServerProxy)
+                .sendAuth("bill", "12345");
     }
 
     @Test
-    @DisplayName("Test calling /hello endpoint authenticated returns ok.")
-    public void helloAuthenticated() throws Exception {
-        mvc.perform(get("/hello")
-                .with(user("john")))
-                .andExpect(status().isOk());
+    @DisplayName("Test /login with username and otp")
+    public void testLoginWithUsernameAndOtp() throws Exception {
+        when(authenticationServerProxy.sendOTP("bill", "5555"))
+                .thenReturn(true);
+
+        mvc.perform(get("/login").servletPath("/login")
+                .header("username", "bill")
+                .header("code", "5555")
+        )
+        .andExpect(header().exists("Authorization"))
+        .andExpect(status().isOk());
     }
 
     @Test
-    @DisplayName("Test calling /hello endpoint authenticating with wrong credentials returns unauthorized.")
-    public void helloAuthenticatingWithWrongUser() throws Exception {
-        mvc.perform(get("/hello")
-                .with(httpBasic("bill","12345")))
-                .andExpect(status().isUnauthorized());
-    }
+    @DisplayName("Test /test with Authorization header")
+    public void testRequestWithAuthorizationHeader() throws Exception {
+        when(authenticationServerProxy.sendOTP("bill", "5555"))
+                .thenReturn(true);
 
-    @Test
-    @DisplayName("Test calling /hello endpoint authenticating with valid credentials returns ok.")
-    public void helloAuthenticatingWithValidUser() throws Exception {
-        mvc.perform(get("/hello")
-                .with(httpBasic("john","12345")))
+        String authorizationHeaderValue = mvc.perform(get("/login").servletPath("/login")
+                .header("username", "bill")
+                .header("code", "5555")
+        )
+                .andReturn().getResponse().getHeader("Authorization");
+
+        mvc.perform(get("/test")
+                .header("Authorization", authorizationHeaderValue))
                 .andExpect(status().isOk());
     }
 }

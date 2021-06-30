@@ -340,4 +340,43 @@ by default with Spring Security works.
   method of the HttpSecurity object.
 
 ## Authentication and Authorization Applications
-- 
+- The client calls the endpoints exposed by the business logic server.
+  To authenticate the user, the business logic server uses the
+  responsibility implemented by the authentication server.
+  The authentication server stores the user credentials in its
+  database.
+- The first authentication step consists of identifying the user with
+  their username and password. The user sends their credentials,
+  and the authentication server returns an OTP for the second 
+  authentication step.
+- The second authentication step. The client sends the code they
+  received through the SMS message, together with their username.
+  The business logic server calls the authentication server to validate the OTP.
+  If the OTP is valid, the business logic server issues a token
+  back to the client. The client uses this token to call any other
+  endpoint on the business logic server.
+- The third authentication step. To call any endpoint exposed
+  by the business logic server, the client adds a valid token
+  in the authorization HTTP request header.
+- When the client authenticates, the server generates a token
+  and returns it to the client. This token is then used by the client
+  to access resources on the server.
+- When the client needs to access a user resource, they must
+  provide a valid token in the request. A valid token is one
+  previously issued by the server when the user authenticates.
+- We send credentials only in the first request to authenticate. 
+  Once authenticated, we get a token, and we can use it to get authorized for
+  calling resources. This way, we only have to send credentials once to obtain 
+  the token.
+- A JWT has three parts, each part separated from the others by a dot (a period).
+- A JWT is composed of three parts: the header, the body, and the signature.
+  The header and the body are JSON representations of the data stored in the token.
+  To make these easy to send in a request header, they are Base64 encoded.
+  The last part of the token is the signature. The parts are concatenated with
+  dots.
+- In many cases, you find more than one good solution for solving a problem.
+  Always consider all possible solutions and, if time allows, implement 
+  proof-of-concepts for all options to understand which better fits your scenario.
+
+## How does OAuth 2 work?
+
