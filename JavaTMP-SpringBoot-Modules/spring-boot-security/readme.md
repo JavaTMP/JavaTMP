@@ -379,4 +379,39 @@ by default with Spring Security works.
   proof-of-concepts for all options to understand which better fits your scenario.
 
 ## How does OAuth 2 work?
-
+- When using HTTP Basic authentication, you need to send credentials 
+  and repeat authentication logic with all requests. This approach implies 
+  sharing credentials often over the network.
+- In an organization, you work with multiple applications. Most of these need 
+  you to authenticate to use them. It would be challenging for you to know
+  multiple passwords and for the organization to manage multiple 
+  sets of credentials.
+- An easier-to-maintain architecture keeps credentials separately and allows
+  all applications to use the same set of credentials for its users.
+- The main components of the OAuth 2 architecture are 
+  the resource owner, the client, the authorization server, and the resource server.
+  Each of these has its own responsibility, which is essential in the
+  authentication and authorization process.
+  - The resource server. The application hosting resources owned by users. 
+    Resources can be users’ data or their authorized actions.
+  - The user (also known as the resource owner). The individual who owns
+    resources exposed by the resource server. A user generally has a username
+    and a password that they use to identify themselves.
+  - The client. The application that accesses the resources owned by the user on their behalf. The client uses a 
+    client ID and a client secret to identify itself. Be careful, these credentials are not the same as the user credentials. The client needs its own credentials to identify itself when making a request.
+  - The authorization server. The application that authorizes the client to
+    access the user’s resources exposed by the resource server. When the
+    authorization server decides that a client is authorized to access
+    a resource on behalf of the user, it issues a token. The client uses 
+    this token to prove to the resource server that it was authorized by 
+    the authorization server. The resource server allows the client to
+    access the resource it requested if it has a valid token.
+- OAuth 2 refers to using tokens for authorization. OAuth 2 offers multiple 
+  possibilities for obtaining a token, called grants. Here are the most
+  common OAuth 2 grants you can choose from:
+  - Authorization code
+  - Password
+  - Refresh token
+  - Client credentials
+  
+- 
