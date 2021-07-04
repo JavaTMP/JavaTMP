@@ -33,8 +33,34 @@
 ## Introduction to Spring Boot
 - Spring Boot, and the Spring Framework that Spring Boot is based on, is a great framework for developing microservices in Java.
 
-## Creating a Set of Cooperating Microservices
-- 
+## Exploring the microservices world with Spring Cloud
+- Spring Cloud offers a set of features that will allow us to quickly build
+  microservice architectures with minimal configurations. like:
+  - Spring Cloud Config. Spring Cloud Config has its own property management repository but also integrates with 
+    open source projects like git, Consul, Eureka.
+  - Spring Cloud Service Discovery. Spring Cloud Service Discovery abstract away the physical location (IP and/or 
+    server name) of where your servers are deployed from the clients consuming the service.
+    can be implemented using the following services: Consul, Zookeeper, Eureka.
+  - Spring Cloud LoadBalancer and Resilience4j. 
+  - Spring Cloud API Gateway. 
+  - Spring Cloud Stream. 
+  - Spring Cloud Sleuth.
+  - Spring Cloud Security.
+  
+## Controlling your configuration with the Spring Cloud Configuration Server
+- When a microservice starts up, it goes through multiple steps in its lifecycle. The application configuration data is read during the service’s bootstrapping phase.
+- You can see the version dependences between Spring Boot and Spring Cloud, along with the different subproject versions contained within the release train, by referring to the Spring Cloud website 
+  [http://projects.spring.io/spring-cloud/](http://projects.spring.io/spring-cloud/).
+
+## On service discovery
+- To Horizontal scaling or scale out and to be Resiliency.
+- The solution for a cloud-based microservice environment is to use 
+  a service discovery mechanism that’s Highly available, Peer-to-peer, 
+  Load balanced, Resilient, Fault tolerant.
+- Client-side load balancing caches the location of the services so that the service client doesn’t need to contact service discovery on every call.
+- Once the Eureka service is up, we can point our browsers to http://localhost:8070 to view the Eureka dashboard.
+
+## When bad things happen: Resiliency patterns with Spring Cloud and Resilience4j
 
 ## References
 - [Spring Microservices in Action, Second Edition](https://www.manning.com/books/spring-microservices-in-action-second-edition)

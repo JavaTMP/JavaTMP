@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: native, git
+  cloud:
+    config:
+      server:
+        # Local configuration: This locations can either of
+        # classpath or locations in the filesystem.
+        native:
+          # Reads from a specific filesystem folder
+          search-locations: classpath:/config # file:///${FILE_PATH:./}
+        git: # Tell spring cloud config to use git as a backend repository
+          uri: https://github.com/JavaTMP/JavaTMP.git
+          search-paths: spring-boot-cloud-config
+

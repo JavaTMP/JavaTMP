@@ -1,4 +1,4 @@
-package com.javatmp.demo;
+package com.javatmp.demo.lifecycle;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;

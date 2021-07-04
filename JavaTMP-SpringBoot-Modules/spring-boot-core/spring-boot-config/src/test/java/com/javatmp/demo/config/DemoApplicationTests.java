@@ -13,9 +13,4 @@ class DemoApplicationTests {
         log.debug("*** SpringBoot Test Context Load 1 ***");
     }
 
-    @Test
-    void contextLoads2() {
-        log.debug("*** SpringBoot Test Context Load 2 ***");
-    }
-
 }

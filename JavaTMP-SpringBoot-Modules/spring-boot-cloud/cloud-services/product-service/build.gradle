@@ -1,0 +1,13 @@
+
+bootJar {
+	enabled = false
+}
+
+dependencies {
+	implementation project(':spring-boot-cloud:cloud-services:cloud-service-common')
+	implementation('org.springframework.boot:spring-boot-starter-actuator')
+	implementation('org.springframework.boot:spring-boot-starter-webflux')
+	testImplementation('io.projectreactor:reactor-test')
+	testImplementation('org.junit.vintage:junit-vintage-engine')
+}
+

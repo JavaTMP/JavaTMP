@@ -1,0 +1,13 @@
+application:
+  message: "Welcome To local property from config server"
+
+spring:
+  application:
+    name: cloud-service-config-client
+  config:
+    import: optional:configserver:${spring.cloud.config.uri}
+  profiles:
+    active: default
+  cloud:
+    config:
+      uri: http://localhost:8071
