@@ -61,6 +61,38 @@
 - Once the Eureka service is up, we can point our browsers to http://localhost:8070 to view the Eureka dashboard.
 
 ## When bad things happen: Resiliency patterns with Spring Cloud and Resilience4j
+- Client-side resiliency software patterns focus on protecting a client 
+  of a remote resource (another microservice call or database lookup)
+  from crashing when the remote resource fails because of errors or poor performance.
+- Client-side load balancing involves having the client look up all of 
+  a service’s individual instances from a service discovery agent
+  (like Netflix Eureka) and then caching the physical location of said
+  service instances.
+- The circuit breaker pattern monitors all calls to a remote resource,
+  and if enough calls fail, the circuit breaker implementation will
+  “pop,” failing fast and preventing future calls to the failing
+  remote resource.
+- With the fallback pattern, when a remote service call fails, rather
+  than generating an exception, the service consumer executes an alternative 
+  code path and tries to carry out the action through another means.
+- When using the bulkhead pattern, you break the calls to remote resources
+  into their own thread pools and reduce the risk that a problem with
+  one slow remote resource call will take down the entire application.
+- Resilience4j is a fault tolerance library inspired by Hystrix. 
+  It offers the following patterns for increasing fault tolerance due 
+  to network problems or failure of any of our multiple services:
+  - Circuit breaker. Stops making requests when an invoked service is failing
+  - Retry. Retries a service when it temporarily fails
+  - Bulkhead. Limits the number of outgoing concurrent service requests to avoid overload
+  - Rate limit. Limits the number of calls that a service receives at a time
+  - Fallback. Sets alternative paths for failing requests
+- Building implementations of the Resilience4j:
+  - Configure the service build file to include the Spring Boot/Resilience4j wrappers
+  - Use Spring Boot/Resilience4j annotations to wrapper remote calls with the circuit breaker, retry, rate limit, and bulkhead patterns
+  - Customize the individual circuit breakers on a remote resource to use custom timeouts for each call
+  - Implement a fallback strategy in the event a circuit breaker has to interrupt a call or the call fails
+  - Use individual thread pools in our service to isolate service calls and build bulkheads between different remote 
+    resources
 
 ## References
 - [Spring Microservices in Action, Second Edition](https://www.manning.com/books/spring-microservices-in-action-second-edition)
