@@ -39,7 +39,7 @@ public class DemoApplication {
     public CommandLineRunner springBootMain(ServiceCall serviceCall) throws Exception {
         return args -> {
             Thread.sleep(60 * 1000);
-//            serviceCall.callService();
+            serviceCall.callService();
         };
     }
 

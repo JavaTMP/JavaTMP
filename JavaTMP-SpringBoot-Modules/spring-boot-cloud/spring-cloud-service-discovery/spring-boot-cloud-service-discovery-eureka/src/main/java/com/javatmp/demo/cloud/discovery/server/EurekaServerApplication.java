@@ -15,10 +15,10 @@ import org.springframework.context.annotation.Bean;
 @Slf4j
 @RefreshScope
 @EnableEurekaServer
-public class DemoApplication {
+public class EurekaServerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DemoApplication.class, args);
+        SpringApplication.run(EurekaServerApplication.class, args);
     }
 
     @Bean

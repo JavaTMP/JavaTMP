@@ -28,11 +28,11 @@ public class ServiceCall {
     @Autowired
     RestTemplateClientType restTemplateClientType;
 
-//    @CircuitBreaker(name = "callService", fallbackMethod = "callServiceFallbackMethod")
-//    @RateLimiter(name = "callService", fallbackMethod = "callServiceFallbackMethod")
-//    @Retry(name = "retryCallService", fallbackMethod = "callServiceFallbackMethod")
-//    @Bulkhead(name = "bulkheadCallService", type = Bulkhead.Type.THREADPOOL,
-//            fallbackMethod = "callServiceFallbackMethod")
+    @CircuitBreaker(name = "callService", fallbackMethod = "callServiceFallbackMethod")
+    @RateLimiter(name = "callService", fallbackMethod = "callServiceFallbackMethod")
+    @Retry(name = "retryCallService", fallbackMethod = "callServiceFallbackMethod")
+    @Bulkhead(name = "bulkheadCallService", type = Bulkhead.Type.THREADPOOL,
+            fallbackMethod = "callServiceFallbackMethod")
     public void callService() {
         log.info("*** Start Spring Boot Project ***");
 

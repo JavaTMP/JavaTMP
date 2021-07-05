@@ -10,7 +10,8 @@ bootJar {
 }
 
 ext {
-    set("resilience4jVersion", "1.5.0")
+    resilience4jVersion = "1.5.0"
+//    set("resilience4jVersion", "1.7.1")
 }
 
 dependencies {
@@ -27,7 +28,8 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
 
-    implementation "io.github.resilience4j:resilience4j-spring-boot2:${resilience4jVersion}"
+    // https://resilience4j.readme.io/docs/getting-started-6
+    implementation "io.github.resilience4j:resilience4j-spring-cloud2:${resilience4jVersion}"
     implementation "io.github.resilience4j:resilience4j-circuitbreaker:${resilience4jVersion}"
     implementation "io.github.resilience4j:resilience4j-timelimiter:${resilience4jVersion}"
 

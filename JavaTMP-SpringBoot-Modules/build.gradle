@@ -6,9 +6,9 @@ buildscript {
         maven {
             url "https://plugins.gradle.org/m2/"
         }
-        maven { url "http://repo.spring.io/snapshot" }
-        maven { url "http://repo.spring.io/milestone" }
-        maven { url "http://repo.spring.io/release" }
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+        maven { url "https://repo.spring.io/release" }
     }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBoot}")
@@ -61,9 +61,9 @@ subprojects {
         maven {
             url "https://plugins.gradle.org/m2/"
         }
-        maven { url "http://repo.spring.io/snapshot" }
-        maven { url "http://repo.spring.io/milestone" }
-        maven { url "http://repo.spring.io/release" }
+        maven { url "https://repo.spring.io/snapshot" }
+        maven { url "https://repo.spring.io/milestone" }
+        maven { url "https://repo.spring.io/release" }
     }
 
     test {
