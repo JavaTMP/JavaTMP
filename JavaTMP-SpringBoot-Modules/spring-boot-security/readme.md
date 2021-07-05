@@ -18,7 +18,7 @@ Nonfunctional requirements tend to be more transparent than functional ones.
 
 ### Why is security important?
 - the company could be liable and could lose a significant amount of money.
-- Customers will probably choose to change the service provider, and the image of the company developing 
+- Customers will probably choose to change the serviceCall provider, and the image of the company developing 
   the application would be dramatically affected.
 
 ### Common security vulnerabilities in web applications
@@ -121,7 +121,7 @@ by default with Spring Security works.
   - Authentication responsibility is delegated to the authentication manager.
   - The authentication manager uses the authentication provider, which implements the 
     authentication logic.
-  - The authentication provider finds the user with a user details service and validates the password using a password encoder.
+  - The authentication provider finds the user with a user details serviceCall and validates the password using a password encoder.
   - The result of the authentication is returned to the filter.
   - Details about the authenticated entity are stored in the security context.
 - The authentication provider uses the `UserDetailsService` and `PasswordEncoder` to find users and to check their passwords.

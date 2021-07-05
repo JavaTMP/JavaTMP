@@ -24,9 +24,9 @@
     - Central configuration. Make it possible to store configuration information for a group of microservices in one place  
     - Centralized log analysis. Add a new component that can manage centralized logging 
     - Distributed tracing. ensure that all related requests and messages are marked with a common correlation ID and that the correlation ID is part of all log events.
-    - Circuit Breaker. Add a Circuit Breaker that prevents new outgoing requests from a caller if it detects a problem with the service it calls. 
+    - Circuit Breaker. Add a Circuit Breaker that prevents new outgoing requests from a caller if it detects a problem with the serviceCall it calls. 
     - Control loop. it is very difficult to manually detect and correct problems such as crashed or hung microservice instances. 
-    - Centralized monitoring and alarms. a monitor service capable of collecting metrics about hardware resource
+    - Centralized monitoring and alarms. a monitor serviceCall capable of collecting metrics about hardware resource
       usage for each microservice instance level.
 - The 12-factor app [https://12factor.net](https://12factor.net) is a set of design principles for building software that can be deployed in the cloud.
 
@@ -39,7 +39,7 @@
   - Spring Cloud Config. Spring Cloud Config has its own property management repository but also integrates with 
     open source projects like git, Consul, Eureka.
   - Spring Cloud Service Discovery. Spring Cloud Service Discovery abstract away the physical location (IP and/or 
-    server name) of where your servers are deployed from the clients consuming the service.
+    server name) of where your servers are deployed from the clients consuming the serviceCall.
     can be implemented using the following services: Consul, Zookeeper, Eureka.
   - Spring Cloud LoadBalancer and Resilience4j. 
   - Spring Cloud API Gateway. 
@@ -48,32 +48,32 @@
   - Spring Cloud Security.
   
 ## Controlling your configuration with the Spring Cloud Configuration Server
-- When a microservice starts up, it goes through multiple steps in its lifecycle. The application configuration data is read during the service’s bootstrapping phase.
+- When a microservice starts up, it goes through multiple steps in its lifecycle. The application configuration data is read during the serviceCall’s bootstrapping phase.
 - You can see the version dependences between Spring Boot and Spring Cloud, along with the different subproject versions contained within the release train, by referring to the Spring Cloud website 
   [http://projects.spring.io/spring-cloud/](http://projects.spring.io/spring-cloud/).
 
-## On service discovery
+## On serviceCall discovery
 - To Horizontal scaling or scale out and to be Resiliency.
 - The solution for a cloud-based microservice environment is to use 
-  a service discovery mechanism that’s Highly available, Peer-to-peer, 
+  a serviceCall discovery mechanism that’s Highly available, Peer-to-peer, 
   Load balanced, Resilient, Fault tolerant.
-- Client-side load balancing caches the location of the services so that the service client doesn’t need to contact service discovery on every call.
-- Once the Eureka service is up, we can point our browsers to http://localhost:8070 to view the Eureka dashboard.
+- Client-side load balancing caches the location of the services so that the serviceCall client doesn’t need to contact serviceCall discovery on every call.
+- Once the Eureka serviceCall is up, we can point our browsers to http://localhost:8070 to view the Eureka dashboard.
 
 ## When bad things happen: Resiliency patterns with Spring Cloud and Resilience4j
 - Client-side resiliency software patterns focus on protecting a client 
   of a remote resource (another microservice call or database lookup)
   from crashing when the remote resource fails because of errors or poor performance.
 - Client-side load balancing involves having the client look up all of 
-  a service’s individual instances from a service discovery agent
+  a serviceCall’s individual instances from a serviceCall discovery agent
   (like Netflix Eureka) and then caching the physical location of said
-  service instances.
+  serviceCall instances.
 - The circuit breaker pattern monitors all calls to a remote resource,
   and if enough calls fail, the circuit breaker implementation will
   “pop,” failing fast and preventing future calls to the failing
   remote resource.
-- With the fallback pattern, when a remote service call fails, rather
-  than generating an exception, the service consumer executes an alternative 
+- With the fallback pattern, when a remote serviceCall call fails, rather
+  than generating an exception, the serviceCall consumer executes an alternative 
   code path and tries to carry out the action through another means.
 - When using the bulkhead pattern, you break the calls to remote resources
   into their own thread pools and reduce the risk that a problem with
@@ -81,19 +81,22 @@
 - Resilience4j is a fault tolerance library inspired by Hystrix. 
   It offers the following patterns for increasing fault tolerance due 
   to network problems or failure of any of our multiple services:
-  - Circuit breaker. Stops making requests when an invoked service is failing
-  - Retry. Retries a service when it temporarily fails
-  - Bulkhead. Limits the number of outgoing concurrent service requests to avoid overload
-  - Rate limit. Limits the number of calls that a service receives at a time
+  - Circuit breaker. Stops making requests when an invoked serviceCall is failing
+  - Retry. Retries a serviceCall when it temporarily fails
+  - Bulkhead. Limits the number of outgoing concurrent serviceCall requests to avoid overload
+  - Rate limit. Limits the number of calls that a serviceCall receives at a time
   - Fallback. Sets alternative paths for failing requests
 - Building implementations of the Resilience4j:
-  - Configure the service build file to include the Spring Boot/Resilience4j wrappers
+  - Configure the serviceCall build file to include the Spring Boot/Resilience4j wrappers
   - Use Spring Boot/Resilience4j annotations to wrapper remote calls with the circuit breaker, retry, rate limit, and bulkhead patterns
   - Customize the individual circuit breakers on a remote resource to use custom timeouts for each call
   - Implement a fallback strategy in the event a circuit breaker has to interrupt a call or the call fails
-  - Use individual thread pools in our service to isolate service calls and build bulkheads between different remote 
+  - Use individual thread pools in our serviceCall to isolate serviceCall calls and build bulkheads between different remote 
     resources
-
+- Resilience4j sits between each remote resource call and protects the client. It doesn’t matter if the remote resource calls a database or a REST-based serviceCall.
+- 
+- 
+- 
 ## References
 - [Spring Microservices in Action, Second Edition](https://www.manning.com/books/spring-microservices-in-action-second-edition)
 - [Hands-On Microservices with Spring Boot and Spring Cloud](https://subscription.packtpub.com/book/web_development/9781789613476)

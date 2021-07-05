@@ -9,7 +9,7 @@
 * [https://roytuts.com/spring-soap-webservice-producers-using-gradle/](https://roytuts.com/spring-soap-webservice-producers-using-gradle/)
 * [https://roytuts.com/generating-stubs-from-multiple-wsdl-files-using-maven-or-gradle/](https://roytuts.com/generating-stubs-from-multiple-wsdl-files-using-maven-or-gradle/)
 * [https://github.com/roytuts/soap](https://github.com/roytuts/soap)
-* [https://dzone.com/articles/creating-a-soap-web-service-with-spring-boot-start](https://dzone.com/articles/creating-a-soap-web-service-with-spring-boot-start)
+* [https://dzone.com/articles/creating-a-soap-web-serviceCall-with-spring-boot-start](https://dzone.com/articles/creating-a-soap-web-serviceCall-with-spring-boot-start)
 * [https://github.com/nilsmagnus/wsdl2java](https://github.com/nilsmagnus/wsdl2java)
 
 

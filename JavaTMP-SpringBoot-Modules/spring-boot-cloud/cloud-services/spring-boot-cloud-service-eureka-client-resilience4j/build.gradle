@@ -1,0 +1,40 @@
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+bootJar {
+    enabled = true
+}
+
+ext {
+    set("resilience4jVersion", "1.5.0")
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    implementation ('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client') {
+        exclude group: 'org.springframework.cloud', module: 'spring-cloud-starter-ribbon'
+        exclude group: 'com.netflix.ribbon', module: 'ribbon-eureka'
+    }
+
+    implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+
+    implementation "io.github.resilience4j:resilience4j-spring-boot2:${resilience4jVersion}"
+    implementation "io.github.resilience4j:resilience4j-circuitbreaker:${resilience4jVersion}"
+    implementation "io.github.resilience4j:resilience4j-timelimiter:${resilience4jVersion}"
+
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+
+
+
+
+}
+

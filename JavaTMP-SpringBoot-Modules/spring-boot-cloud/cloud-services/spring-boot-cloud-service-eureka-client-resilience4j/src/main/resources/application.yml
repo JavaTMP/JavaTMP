@@ -1,0 +1,68 @@
+management.endpoints.web.exposure.include: "*"
+management.endpoints.enabled-by-default: "true"
+
+application:
+  message: "Welcome To local property from config server"
+server:
+  port: 8081 # 8080
+spring:
+  application:
+    name: eureka-client
+  config:
+    import: optional:configserver:${spring.cloud.config.uri}
+  profiles:
+    active: default
+  cloud:
+    config:
+      uri: http://localhost:8071
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: "http://localhost:8070/eureka/"
+
+resilience4j.circuitbreaker:
+  instances:
+    callService:
+      registerHealthIndicator: true
+      ringBufferSizeInClosedState: 5
+      ringBufferSizeInHalfOpenState: 3
+      waitDurationInOpenState: 30s
+      failureRateThreshold: 50
+      recordExceptions:
+        - org.springframework.web.client.HttpServerErrorException
+        - java.io.IOException
+        - java.util.concurrent.TimeoutException
+        - org.springframework.web.client.ResourceAccessException
+resilience4j.ratelimiter:
+  instances:
+    callService:
+      limitForPeriod: 5
+      limitRefreshPeriod: 5000
+      timeoutDuration: 1000ms
+
+resilience4j.retry:
+  instances:
+    retryCallService:
+      maxRetryAttempts: 5
+      waitDuration: 10000
+      retry-exceptions:
+        - java.util.concurrent.TimeoutException
+
+resilience4j.bulkhead:
+  instances:
+    bulkheadCallService:
+      maxWaitDuration: 2ms
+      maxConcurrentCalls: 20
+
+
+resilience4j.thread-pool-bulkhead:
+  instances:
+    bulkheadCallService:
+      maxThreadPoolSize: 1
+      coreThreadPoolSize: 1
+      queueCapacity: 1
