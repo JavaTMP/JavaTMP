@@ -1,0 +1,39 @@
+server:
+  port: 8072
+spring:
+  application:
+    name: gateway-server
+  config:
+    import: optional:configserver:${spring.cloud.config.uri}
+  profiles:
+    active: default
+  cloud:
+    config:
+      uri: http://localhost:8071
+    gateway:
+      ## the Spring Cloud Gateway can automatically
+      ## route requests based on their service IDs
+      ## the Spring Cloud Gateway automatically uses the Eureka service ID of
+      ## the service being called and maps it to a downstream service instance.
+      discovery.locator:
+        enabled: true
+        lowerCaseServiceId: true
+      routes:
+        - id: eureka-client
+          uri: lb://eureka-client
+          predicates:
+            - Path=/client/**
+          filters:
+            - RewritePath=/client/(?<path>.*), /$\{path}
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: "http://localhost:8070/eureka/"
+
+management.endpoints.web.exposure.include: "*"
+management.endpoints.enabled-by-default: true
+

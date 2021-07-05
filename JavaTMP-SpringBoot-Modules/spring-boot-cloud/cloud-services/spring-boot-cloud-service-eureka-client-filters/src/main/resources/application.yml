@@ -4,10 +4,10 @@ management.endpoints.enabled-by-default: true
 application:
   message: "Welcome To local property from config server"
 server:
-  port: 8081 # 8080
+  port: 8088 # 8080
 spring:
   application:
-    name: eureka-client
+    name: eureka-client-filter
   config:
     import: optional:configserver:${spring.cloud.config.uri}
   profiles:

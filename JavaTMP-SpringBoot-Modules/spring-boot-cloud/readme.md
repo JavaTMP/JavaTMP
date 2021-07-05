@@ -94,9 +94,38 @@
   - Use individual thread pools in our serviceCall to isolate serviceCall calls and build bulkheads between different remote 
     resources
 - Resilience4j sits between each remote resource call and protects the client. It doesn’t matter if the remote resource calls a database or a REST-based serviceCall.
+
+## Service routing with Spring Cloud Gateway
+- The service gateway sits between the service client and the corresponding
+  service instances. All service calls (both internal-facing and external)
+  should flow through the service gateway.
+- Examples of cross-cutting concerns that can be implemented in a service gateway include these:
+  - Static routing,Dynamic routing, Authentication and authorization, Metric collection and logging
+  - Load balancers are useful when placed in front of individual groups of services.
+  - Keep any code you write for your service gateway stateless.
+  - Keep the code you write for your service gateway light.
+  
+- Spring Cloud Gateway is the API gateway implementation built on 
+  Spring framework 5, Project Reactor, and Spring Boot 2.0.
+  This gateway is a nonblocking gateway.
+- Spring Cloud Gateway offers several capabilities, including:
+  - Mapping the routes for all the services in your application to a single URL.
+  - Building filters that can inspect and act on the requests and responses coming through the gateway.
+  - Building predicates, which are objects that allow us to check if the requests fulfill a set of given conditions before executing or processing a request.
+  
+- Spring Actuator exposes a POST-based endpoint route, actuator/gateway/refresh, 
+  that will cause it to reload its route configuration.
+- using the Gateway and its Predicate and Filter Factories allows us to implement cross-cutting concerns across all 
+  the services being routed through the gateway.
+- Built-in predicates are objects that allow us to check if the requests fulfill a set of conditions before executing or processing the requests.
+- The built-in Filter Factories allow us to inject policy enforcement points in our code and perform a wide number of actions on all service calls in a consistent fashion.
+- The Spring Cloud Gateway allows us to build custom logic using a filter within the gateway.
+- The pre-filters, target route, and post-filters form a pipeline in which a client request flows. As a request comes into the gateway, custom filters can manipulate the incoming request.
+- Gateway filters provide centralized tracking of service calls and logging. These filters allow us to enforce custom rules and policies against microservice calls.
+
+## Securing your microservices
 - 
-- 
-- 
+
 ## References
 - [Spring Microservices in Action, Second Edition](https://www.manning.com/books/spring-microservices-in-action-second-edition)
 - [Hands-On Microservices with Spring Boot and Spring Cloud](https://subscription.packtpub.com/book/web_development/9781789613476)
