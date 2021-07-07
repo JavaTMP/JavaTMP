@@ -10,7 +10,7 @@ bootJar {
 }
 
 ext {
-    resilience4jVersion = "1.5.0"
+    resilience4jVersion = "1.7.0"
 //    set("resilience4jVersion", "1.7.1")
 }
 
