@@ -55,10 +55,14 @@ Java platform. It includes APIs for a large variety of cryptographic services, i
   The sender uses some publicly known MAC algorithm, inputs the message and the secret 
   key K and produces a MAC value.
 - Secure Random Number Generators
+  Whereas Secure Random implements SHA1PRNG algorithm, which uses SHA1 
+  to generate pseudo-random numbers. The algorithm computes the SHA-1 hash over
+  a true random number(uses an entropy source) and then concatenates it with 
+  a 64-bit counter which increments by 1 on each operation.
   
 - the cryptography APIs are organized into two distinct packages:
   - The java.security and java.security.* packages contains classes that are not subject to export controls (like 
   Signature and MessageDigest)
   - The javax.crypto package contains classes that are subject to export 
     controls (like Cipher and KeyAgreement)
-- 
+-  
