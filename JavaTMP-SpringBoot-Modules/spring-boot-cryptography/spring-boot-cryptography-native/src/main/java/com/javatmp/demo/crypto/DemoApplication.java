@@ -2,10 +2,8 @@ package com.javatmp.demo.crypto;
 
 import chapter1.*;
 import chapter2.*;
-import chapter3.TamperedDigestExample;
-import chapter3.TamperedExample;
-import chapter3.TamperedWithDigestExample;
-import chapter3.TamperedWithHMacExample;
+import chapter3.*;
+import chapter4.BaseRSAExample;
 import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.springframework.boot.CommandLineRunner;
@@ -99,6 +97,20 @@ public class DemoApplication {
             log.info("Tampered message with HMac, encryption with AES in CTR mode ");
             TamperedWithHMacExample.main(null);
 
+            log.info("Message without tampering with MAC (DES), encryption AES in CTR mode ");
+            CipherMacExample.main(null);
+
+            log.info(" A basic implementation of PKCS #5 Scheme 1.");
+            PKCS5Scheme1Test.main(null);
+
+            log.info("mask generator function, as described in PKCS1v2.");
+            MGF1.main(null);
+
+            log.info("Basic IO example using SHA1");
+            DigestIOExample.main(null);
+
+            log.info("Basic RSA example.");
+            BaseRSAExample.main(null);
             log.info("");
             log.info("");
             log.info("");

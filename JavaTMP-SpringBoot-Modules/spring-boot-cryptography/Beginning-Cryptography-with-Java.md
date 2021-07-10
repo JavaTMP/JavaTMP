@@ -25,15 +25,20 @@
 - Tampering with an Encrypted Stream
 - MACs Based on Digests — the HMAC
 - Using a HMAC
--
--
--
--
--
--
+- MACs Based on Symmetric Ciphers
+- Digests in Pseudorandom Functions
+- Mask Generation
+- Doing Digest-Based I/O
 
 ## Chapter 4: Asymmetric Key Cryptography
-
+- The PublicKey and PrivateKey Interfaces
+- The RSA Algorithm
+-
+-
+-
+-
+-
+-
 
 
 ## Chapter 5: Object Description in Cryptography Using ASN.1
