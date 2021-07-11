@@ -135,8 +135,9 @@ public class DemoApplication {
 
             log.info("Three-Party Diffie-Hellman");
             ThreeWayDHExample.main(null);
-            log.info("");
 
+            log.info("El Gamal example with random key generation.");
+            RandomKeyElGamalExample.main(null);
             log.info("");
 
             log.info("");
