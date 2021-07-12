@@ -45,18 +45,30 @@
 - Diffie-Hellman with Elliptic Curve
 - Diffie-Hellman for More Than Two Parties
 - The El Gamal Algorithm
-- 
-- 
-- 
+- Digital Signatures
+- The Digital Signature Algorithm
+- Elliptic Curve DSA
+- RSA-Based Signature Algorithms
+
 ## Chapter 5: Object Description in Cryptography Using ASN.1
-
-
+- Implementing an ASN.1-Based Java Object
+- Encoding Public and Private Keys
 
 ## Chapter 6: Distinguished Names and Certificates
-
+- Distinguished Names
+- Public Key Certificates
+- X.509 Certificates
+- Reading and Writing Certificates
+- Certification Requests
+- Writing a Simple Certificate Authority
+- Certificate Paths and Stores
 
 ## Chapter 7: Certificate Revocation and Path Validation
-
+- 
+- 
+- 
+- 
+- 
 
 
 ## Chapter 8: Key and Certificate Management Using Keystores

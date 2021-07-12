@@ -4,7 +4,17 @@ bootJar {
 }
 
 dependencies {
-    // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on
-    implementation group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.69'
+    // https://stackoverflow.com/questions/6851461/why-does-ssl-handshake-give-could-not-generate-dh-keypair-exception/49424441#49424441
+    // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk14
+    implementation group: 'org.bouncycastle', name: 'bcprov-jdk14', version: '1.38'
+
+    // https://mvnrepository.com/artifact/org.bouncycastle/bcpkix-jdk14
+    implementation group: 'org.bouncycastle', name: 'bcpkix-jdk14', version: '1.47'
+
+    // https://mvnrepository.com/artifact/bouncycastle/bcmail-jdk14
+//    implementation group: 'bouncycastle', name: 'bcmail-jdk14', version: '136'
+
+
+
 
 }

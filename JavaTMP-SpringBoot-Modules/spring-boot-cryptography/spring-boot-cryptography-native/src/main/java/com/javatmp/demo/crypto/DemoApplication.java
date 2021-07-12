@@ -4,6 +4,8 @@ import chapter1.*;
 import chapter2.*;
 import chapter3.*;
 import chapter4.*;
+import chapter5.*;
+import chapter6.*;
 import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.springframework.boot.CommandLineRunner;
@@ -138,8 +140,69 @@ public class DemoApplication {
 
             log.info("El Gamal example with random key generation.");
             RandomKeyElGamalExample.main(null);
-            log.info("");
 
+            log.info("El Gamal Using AlgorithmParameterGenerator");
+            AlgorithmParameterExample.main(null);
+
+            log.info("The Digital Signature Algorithm");
+            BasicDSAExample.main(null);
+
+            log.info("Simple example showing signature creation and verification using ECDSA");
+            BasicECDSAExample.main(null);
+
+            log.info("PKCS #1 1.5 RSA Signature Generation");
+            PKCS1SignatureExample.main(null);
+
+            log.info("Implementing an ASN.1-Based Java Object");
+            MyStructureTest.main(null);
+
+            log.info("Using ASN1Dump");
+            ASN1DumpExample.main(null);
+
+            log.info("Encoding an IV with ASN.1");
+            IVExample.main(null);
+
+            log.info("Looking Inside a PKCS #1 V1.5 Signature");
+            PKCS1SigEncodingExample.main(null);
+
+            log.info("Encoding PSS Parameters ");
+            PSSParamExample.main(null);
+
+            log.info("Using the X509EncodedKeySpec");
+            X509EncodedKeySpecExample.main(null);
+
+            log.info("Using EncryptedPrivateKeyInfo and PBE");
+            EncryptedPrivateKeyInfoExample.main(null);
+
+            log.info("Creating a Self-Signed Version 1 Certificate");
+            X509V1CreateExample.main(null);
+
+            log.info("Creating a Self-Signed Version 3 Certificate ");
+            X509V3CreateExample.main(null);
+
+            log.info("Basic example of using a CertificateFactory");
+            CertificateFactoryExample.main(null);
+
+            log.info("Reading Multiple Certificates");
+            MultipleCertificateExample.main(null);
+
+            log.info("Creating a Certification Request");
+            PKCS10CertRequestExample.main(null);
+
+            log.info(" Adding Extensions to a Certification Request");
+            PKCS10ExtensionExample.main(null);
+
+            log.info("Creating a Certificate from a Certification Request");
+            PKCS10CertCreateExample.main(null);
+
+            log.info("Writing a CertPath");
+            CertPathExample.main(null);
+            log.info("Using a CertStore and a X509CertSelector");
+            CertStoreExample.main(null);
+
+            log.info("");
+            log.info("");
+            log.info("");
             log.info("");
 
 
