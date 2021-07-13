@@ -1,6 +1,6 @@
 package chapter7;
 
-import org.bouncycastle.asn1.DEREnumerated;
+import org.bouncycastle.asn1.ASN1Enumerated;
 import org.bouncycastle.asn1.x509.CRLNumber;
 import org.bouncycastle.asn1.x509.CRLReason;
 import org.bouncycastle.asn1.x509.X509Extensions;
@@ -70,7 +70,7 @@ public class X509CRLExample
 
             if (ext != null)
             {
-                DEREnumerated	reasonCode = (DEREnumerated)X509ExtensionUtil.fromExtensionValue(ext);
+                ASN1Enumerated reasonCode = (ASN1Enumerated )X509ExtensionUtil.fromExtensionValue(ext);
 
                 System.out.println("  Reason Code       : " + reasonCode.getValue());
             }

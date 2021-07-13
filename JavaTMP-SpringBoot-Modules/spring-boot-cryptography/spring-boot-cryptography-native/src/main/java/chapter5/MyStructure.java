@@ -16,9 +16,9 @@ import java.util.Date;
  * <pre>
  *
  */
-public class MyStructure extends ASN1Encodable
+public class MyStructure extends ASN1EncodableVector
 {
-    private DERInteger         version;
+    private ASN1Integer         version;
     private DERGeneralizedTime created;
     private ASN1OctetString    baseData;
     private DERUTF8String      extraData = null;
@@ -28,19 +28,19 @@ public class MyStructure extends ASN1Encodable
      * Constructor from an ASN.1 SEQUENCE
      */
     public MyStructure(
-            ASN1Sequence    seq)
+        ASN1Sequence    seq)
     {
         int index = 0;
 
         // check for version field
-        if (seq.getObjectAt(0) instanceof DERInteger)
+        if (seq.getObjectAt(0) instanceof ASN1Integer)
         {
-            this.version = (DERInteger)seq.getObjectAt(0);
+            this.version = (ASN1Integer)seq.getObjectAt(0);
             index++;
         }
         else
         {
-            this.version = new DERInteger(0);
+            this.version = new ASN1Integer(0);
         }
 
         this.created = (DERGeneralizedTime)seq.getObjectAt(index++);
@@ -53,14 +53,14 @@ public class MyStructure extends ASN1Encodable
 
             switch (t.getTagNo())
             {
-                case 0:
-                    extraData = DERUTF8String.getInstance(t, false);
-                    break;
-                case 1:
-                    commentData = DERUTF8String.getInstance(t, false);
-                    break;
-                default:
-                    throw new IllegalArgumentException("Unknown tag " + t.getTagNo() + " in constructor");
+            case 0:
+                extraData = DERUTF8String.getInstance(t, false);
+                break;
+            case 1:
+                commentData = DERUTF8String.getInstance(t, false);
+                break;
+            default:
+                throw new IllegalArgumentException("Unknown tag " + t.getTagNo() + " in constructor");
             }
         }
     }
@@ -69,13 +69,13 @@ public class MyStructure extends ASN1Encodable
      * Constructor from corresponding Java objects and primitives.
      */
     public MyStructure(
-            int     version,
-            Date	created,
-            byte[]  baseData,
-            String  extraData,
-            String  commentData)
+        int     version,
+        Date	created,
+        byte[]  baseData,
+        String  extraData,
+        String  commentData)
     {
-        this.version = new DERInteger(version);
+        this.version = new ASN1Integer(version);
         this.created = new DERGeneralizedTime(created);
         this.baseData = new DEROctetString(baseData);
 
@@ -93,7 +93,7 @@ public class MyStructure extends ASN1Encodable
     /*
      * Produce an object suitable for writing to an ASN1/DEROutputStream
      */
-    public DERObject toASN1Object()
+    public DERSequence toASN1Object()
     {
         ASN1EncodableVector	v = new ASN1EncodableVector();
 
@@ -116,5 +116,9 @@ public class MyStructure extends ASN1Encodable
         }
 
         return new DERSequence(v);
+    }
+
+    public ASN1Primitive toASN1Primitive() {
+        return null;
     }
 }

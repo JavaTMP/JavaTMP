@@ -4,17 +4,18 @@ bootJar {
 }
 
 dependencies {
-    // https://stackoverflow.com/questions/6851461/why-does-ssl-handshake-give-could-not-generate-dh-keypair-exception/49424441#49424441
-    // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk14
-    implementation group: 'org.bouncycastle', name: 'bcprov-jdk14', version: '1.38'
+    // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk15on
+    implementation group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.69'
+// https://mvnrepository.com/artifact/org.bouncycastle/bcpkix-jdk15on
+    implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.69'
 
-    // https://mvnrepository.com/artifact/org.bouncycastle/bcpkix-jdk14
-    implementation group: 'org.bouncycastle', name: 'bcpkix-jdk14', version: '1.47'
+    // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-ext-jdk15on
+    implementation group: 'org.bouncycastle', name: 'bcprov-ext-jdk15on', version: '1.69'
 
-    // https://mvnrepository.com/artifact/bouncycastle/bcmail-jdk14
-//    implementation group: 'bouncycastle', name: 'bcmail-jdk14', version: '136'
-
-
-
+// https://mvnrepository.com/artifact/com.github.spoofzu/DeepViolet
+    implementation ('com.github.spoofzu:DeepViolet:5.1.16')  {
+        exclude group: 'ch.qos.logback', module: 'logback-classic'
+        exclude group: 'com.fasterxml.jackson.core', module: 'jackson-databind'
+    }
 
 }

@@ -29,7 +29,7 @@ public class ECDH_BC
         //return key.getEncoded();
 
         ECPublicKey eckey = (ECPublicKey)key;
-        return eckey.getQ().getEncoded();
+        return eckey.getQ().getEncoded(false);
     }
 
     public static PublicKey loadPublicKey (byte [] data) throws Exception

@@ -64,14 +64,23 @@
 - Certificate Paths and Stores
 
 ## Chapter 7: Certificate Revocation and Path Validation
-- 
-- 
-- 
-- 
-- 
-
+- Certificate Revocation Lists
+- X.509 Certificate Revocation Lists
+- X.509 CRL Entry Extensions
+- Online Certificate Status Protocol
+- OCSP Request Extensions
+- The Acceptable Response Types Extension
+- Certificate Path Validation
+- Building a Valid Path from a CertStore
 
 ## Chapter 8: Key and Certificate Management Using Keystores
+- The KeyStore Class
+- Standard JDK Keystore Types
+- Bouncy Castle Keystore Types
+- The PKCS #12 Format
+- Using PKCS #12 with the KeyStore API
+- The Keytool
+-
 
 
 

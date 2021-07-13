@@ -1,11 +1,17 @@
 package com.javatmp.demo.crypto;
 
+
 import chapter1.*;
 import chapter2.*;
 import chapter3.*;
 import chapter4.*;
 import chapter5.*;
 import chapter6.*;
+import chapter7.*;
+import chapter8.JCEKSStoreBuilderExample;
+import chapter8.JCEKSStoreEntryExample;
+import chapter8.JKSStoreExample;
+import chapter8.PKCS12StoreExample;
 import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.springframework.boot.CommandLineRunner;
@@ -193,16 +199,48 @@ public class DemoApplication {
             PKCS10ExtensionExample.main(null);
 
             log.info("Creating a Certificate from a Certification Request");
-            PKCS10CertCreateExample.main(null);
+//            PKCS10CertCreateExample.main(null);
 
             log.info("Writing a CertPath");
-            CertPathExample.main(null);
+//            CertPathExample.main(null);
             log.info("Using a CertStore and a X509CertSelector");
-            CertStoreExample.main(null);
+//            CertStoreExample.main(null);
+
+            log.info("Creating a CRL");
+            X509CRLExample.main(null);
+            log.info("Building a CRL Using the CertificateFactory");
+            CRLCertFactoryExample.main(null);
+
+            log.info("Retrieving a CRL from a CertStore");
+            CRLCertStoreExample.main(null);
+
+            log.info("OCSP Request Generation");
+//            OCSPClientExample.main(null);
+
+            log.info("Generating an OCSP Response");
+//            OCSPResponderExample.main(null);
+            log.info("Validating a Certificate Path");
+            CertPathValidatorExample.main(null);
+
+            log.info("Building a Certificate Path Using CertPathBuilder");
+            CertPathBuilderExample.main(null);
+
+            log.info("Using a JKS Keystore");
+            JKSStoreExample.main(null);
+
+            log.info("Using KeyStore.setEntry()");
+            JCEKSStoreEntryExample.main(null);
+
+            log.info("Using KeyStore.Builder");
+            JCEKSStoreBuilderExample.main(null);
+
+            log.info("Using a PKCS #12 Keystore");
+            PKCS12StoreExample.main(null);
 
             log.info("");
+
             log.info("");
-            log.info("");
+
             log.info("");
 
 

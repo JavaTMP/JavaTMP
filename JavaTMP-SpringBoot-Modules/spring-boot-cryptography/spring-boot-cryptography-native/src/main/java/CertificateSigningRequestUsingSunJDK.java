@@ -8,10 +8,7 @@ import java.math.BigInteger;
 import java.security.*;
 import java.util.Base64;
 
-/**
- *
- * @author dopoljak@gmail.com
- */
+
 public class CertificateSigningRequestUsingSunJDK {
 
     public static void main(String[] args) throws NoSuchAlgorithmException, IOException, InvalidKeyException, SignatureException {
