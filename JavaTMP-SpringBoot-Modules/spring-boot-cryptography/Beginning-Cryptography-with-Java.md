@@ -80,12 +80,14 @@
 - The PKCS #12 Format
 - Using PKCS #12 with the KeyStore API
 - The Keytool
--
-
-
+- Jarsigning and Java Policy
 
 ## Chapter 9: CMS and S/MIME
-
+- 
+- 
+- 
+- 
+- 
 
 
 ## Chapter 10: SSL and TLS

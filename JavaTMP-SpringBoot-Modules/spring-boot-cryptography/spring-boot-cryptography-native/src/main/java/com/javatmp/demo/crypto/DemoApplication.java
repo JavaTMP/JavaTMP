@@ -8,10 +8,7 @@ import chapter4.*;
 import chapter5.*;
 import chapter6.*;
 import chapter7.*;
-import chapter8.JCEKSStoreBuilderExample;
-import chapter8.JCEKSStoreEntryExample;
-import chapter8.JKSStoreExample;
-import chapter8.PKCS12StoreExample;
+import chapter8.*;
 import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.springframework.boot.CommandLineRunner;
@@ -237,8 +234,8 @@ public class DemoApplication {
             log.info("Using a PKCS #12 Keystore");
             PKCS12StoreExample.main(null);
 
-            log.info("");
-
+            log.info("Generating Some Sample Keystore Files");
+            KeyStoreFileUtility.main(null);
             log.info("");
 
             log.info("");
