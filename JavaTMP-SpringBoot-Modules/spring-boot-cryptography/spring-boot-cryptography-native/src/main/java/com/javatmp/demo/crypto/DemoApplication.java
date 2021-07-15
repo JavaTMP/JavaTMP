@@ -9,6 +9,7 @@ import chapter5.*;
 import chapter6.*;
 import chapter7.*;
 import chapter8.*;
+import chapter9.CompressedMailExample;
 import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.springframework.boot.CommandLineRunner;
@@ -236,8 +237,21 @@ public class DemoApplication {
 
             log.info("Generating Some Sample Keystore Files");
             KeyStoreFileUtility.main(null);
-            log.info("");
 
+            log.info("Example of generating a detached signature");
+//            SignedDataExample.main(null);
+            log.info("Creating and Decoding CMS Enveloped-Data");
+//            KeyTransEnvelopedDataExample.main(null);
+            log.info("Using Key-Encrypted Keys with Enveloped-Data");
+            log.info("Data Compression in CMS");
+            log.info("Using Compression with CMS ");
+            log.info("Creating and Validating a S/MIME Signed Message\n");
+            log.info("Using S/MIME Enveloped Messages");
+            log.info("Enveloping a Signed Message");
+            log.info("Using S/MIME Compression");
+            CompressedMailExample.main(null);
+            log.info("");
+            log.info("");
             log.info("");
 
 

@@ -17,11 +17,13 @@ dependencies {
         exclude group: 'ch.qos.logback', module: 'logback-classic'
         exclude group: 'com.fasterxml.jackson.core', module: 'jackson-databind'
     }
+    // https://mvnrepository.com/artifact/org.bouncycastle/bcmail-jdk15on
+    implementation group: 'org.bouncycastle', name: 'bcmail-jdk15on', version: '1.69'
+
 
     // https://mvnrepository.com/artifact/javax.mail/javax.mail-api
     implementation group: 'javax.mail', name: 'javax.mail-api', version: '1.6.2'
-
-    // https://mvnrepository.com/artifact/org.bouncycastle/bcmail-jdk15on
-    implementation group: 'org.bouncycastle', name: 'bcmail-jdk15on', version: '1.69'
+// https://mvnrepository.com/artifact/com.sun.mail/javax.mail
+    implementation group: 'com.sun.mail', name: 'javax.mail', version: '1.6.2'
 
 }

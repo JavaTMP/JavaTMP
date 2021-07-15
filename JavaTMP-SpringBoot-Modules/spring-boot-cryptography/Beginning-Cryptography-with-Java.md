@@ -83,6 +83,12 @@
 - Jarsigning and Java Policy
 
 ## Chapter 9: CMS and S/MIME
+- Cryptographic Message Syntax
+- CMS Enveloped-Data
+- Secure/Multipurpose Internet Mail Extensions (S/MIME)
+- S/MIME Signed Messages
+- S/MIME Enveloped Messages
+- Combining Signing with Encryption
 - 
 - 
 - 
