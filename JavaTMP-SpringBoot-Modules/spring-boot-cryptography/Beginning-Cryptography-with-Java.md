@@ -89,20 +89,15 @@
 - S/MIME Signed Messages
 - S/MIME Enveloped Messages
 - Combining Signing with Encryption
-- 
-- 
-- 
-- 
-- 
-
 
 ## Chapter 10: SSL and TLS
-## 
-## 
-## 
-## 
-## 
+- The SSL and TLS Protocols
+- Client-Side Authentication
+- Managing SSL Session Information
+- 
+- 
 
+## 
 
 
 

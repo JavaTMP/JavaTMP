@@ -1,5 +1,7 @@
 package chapter10;
 
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+
 import javax.net.ssl.SSLServerSocket;
 import javax.net.ssl.SSLServerSocketFactory;
 import javax.net.ssl.SSLSocket;
@@ -7,19 +9,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.security.Security;
 
 /**
  * Basic SSL Server - using the '!' protocol.
  */
-public class SSLServerExample
-{
+public class SSLServerExample {
     /**
      * Carry out the '!' protocol - server side.
      */
-    static void doProtocol(
-        Socket sSock)
-        throws IOException
-    {
+    static void doProtocol(Socket sSock) throws IOException {
         System.out.println("session started.");
 
         InputStream in = sSock.getInputStream();
@@ -28,8 +27,7 @@ public class SSLServerExample
         out.write(Utils.toByteArray("Hello "));
 
         int ch = 0;
-        while ((ch = in.read()) != '!')
-        {
+        while ((ch = in.read()) != '!') {
             out.write(ch);
         }
 
@@ -40,14 +38,12 @@ public class SSLServerExample
         System.out.println("session closed.");
     }
 
-    public static void main(
-        String[] args)
-        throws Exception
-    {
-        SSLServerSocketFactory fact = (SSLServerSocketFactory)SSLServerSocketFactory.getDefault();
-        SSLServerSocket        sSock = (SSLServerSocket)fact.createServerSocket(Utils.PORT_NO);
+    public static void main(String[] args) throws Exception {
+        Security.addProvider(new BouncyCastleProvider());
+        SSLServerSocketFactory fact = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
+        SSLServerSocket sSock = (SSLServerSocket) fact.createServerSocket(Utils.PORT_NO);
 
-        SSLSocket sslSock = (SSLSocket)sSock.accept();
+        SSLSocket sslSock = (SSLSocket) sSock.accept();
 
         doProtocol(sslSock);
     }

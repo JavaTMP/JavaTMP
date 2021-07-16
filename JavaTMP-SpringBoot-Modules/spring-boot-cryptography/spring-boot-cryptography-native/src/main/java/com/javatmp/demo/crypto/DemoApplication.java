@@ -2,6 +2,7 @@ package com.javatmp.demo.crypto;
 
 
 import chapter1.*;
+import chapter10.*;
 import chapter2.*;
 import chapter3.*;
 import chapter4.*;
@@ -250,11 +251,44 @@ public class DemoApplication {
             log.info("Enveloping a Signed Message");
             log.info("Using S/MIME Compression");
             CompressedMailExample.main(null);
-            log.info("");
-            log.info("");
-            log.info("");
+
+            log.info("Create the various credentials for an SSL session");
+            // https://stackoverflow.com/questions/15076820/java-sslhandshakeexception-no-cipher-suites-in-common
+            CreateKeyStores.main(null);
+
+            log.info("Basic SSL Server - using the ‘!’ protocol.");
+//            SSLServerExample.main(null);
+            log.info("A Basic SSL Client and Server");
+//            SSLClientExample.main(null);
+
+            log.info("Basic SSL Server with client authentication.");
+//            SSLServerWithClientAuthExample.main(null);
+
+            log.info("Introducing Client-Side Authentication");
+//            SSLClientWithClientAuthExample.main(null);
+
+            log.info("Using the TrustManagerFactory");
+//            SSLClientWithClientAuthTrustExample.main(null);
+
+            log.info("Using SSLSession");
+//            SSLServerWithClientAuthIdExample.main(null);
+
+            log.info("Using SSLSession Client");
+//            SSLClientWithClientAuthTrustExample.main(null);
+
+            log.info("Basic SSL Server with optional client authentication.");
+            HTTPSServerExample.main(null);
+
+            log.info("Using HttpsURLConnection and HostnameVerifier\n");
+            HTTPSClientExample.main(null);
 
 
+
+            log.info("");
+            log.info("");
+            log.info("");
+            log.info("");
+            log.info("");
 
         };
     }
