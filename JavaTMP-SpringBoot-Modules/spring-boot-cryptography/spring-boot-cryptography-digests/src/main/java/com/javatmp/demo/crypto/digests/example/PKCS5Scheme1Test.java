@@ -12,23 +12,19 @@ import java.security.MessageDigest;
 /**
  * Basic test of the PKCS #5 Scheme 1 implementation.
  */
-public class PKCS5Scheme1Test
-{
-    public static void main(
-        String[] args)
-        throws Exception
-    {
+public class PKCS5Scheme1Test {
+    public static void main(String[] args) throws Exception {
         char[] password = "hello".toCharArray();
-        byte[] salt = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
-        byte[] input = new byte[] { 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f };
-        int    iterationCount = 100;
+        byte[] salt = new byte[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 0};
+        byte[] input = new byte[]{0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f};
+        int iterationCount = 100;
 
         System.out.println("input  : " + Utils.toHex(input));
 
         // encryption step using regular PBE
-        Cipher           cipher = Cipher.getInstance("PBEWithSHA1AndDES","BC");
+        Cipher cipher = Cipher.getInstance("PBEWithSHA1AndDES", "BC");
         SecretKeyFactory fact = SecretKeyFactory.getInstance("PBEWithSHA1AndDES", "BC");
-        PBEKeySpec       pbeKeySpec = new PBEKeySpec(password, salt, iterationCount);
+        PBEKeySpec pbeKeySpec = new PBEKeySpec(password, salt, iterationCount);
 
         cipher.init(Cipher.ENCRYPT_MODE, fact.generateSecret(pbeKeySpec));
 

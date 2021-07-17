@@ -1,4 +1,4 @@
 
 dependencies {
-    implementation project(":spring-boot-cryptography:spring-boot-cryptography-symmetric")
+    api project(":spring-boot-cryptography:spring-boot-cryptography-symmetric")
 }

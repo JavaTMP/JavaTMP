@@ -1,0 +1,4 @@
+
+dependencies {
+    api project(":spring-boot-cryptography:spring-boot-cryptography-Asymmetric")
+}

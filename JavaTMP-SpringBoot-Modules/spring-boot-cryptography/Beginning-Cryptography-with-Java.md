@@ -1,6 +1,7 @@
 # Beginning Cryptography with Java
 
 ## Chapter 1: The JCA and the JCE
+
 - Basic Architecture
 - Provider Signing
 - Jurisdiction Policy Files
@@ -14,13 +15,15 @@
     - Installing During Execution
 - How Provider Precedence Works
 - Examining the Capabilities of a Provider
-- Module source code is [/JavaTMP-SpringBoot-Modules/spring-boot-cryptography/spring-boot-cryptography-provider](/JavaTMP-SpringBoot-Modules/spring-boot-cryptography/spring-boot-cryptography-provider)
+- Module source code
+  is [/JavaTMP-SpringBoot-Modules/spring-boot-cryptography/spring-boot-cryptography-provider](/JavaTMP-SpringBoot-Modules/spring-boot-cryptography/spring-boot-cryptography-provider)
 
 ## Chapter 2: Symmetric Key Cryptography
+
 - The SecretKeySpec Class
-- The Cipher Class 
+- The Cipher Class
     - Cipher.getInstance()
-    - Cipher.init() 
+    - Cipher.init()
     - Cipher.update()
     - Cipher.doFinal()
 - Symmetric Block Cipher Padding.
@@ -50,7 +53,7 @@
     - The KeyGenerator Class
         - KeyGenerator.getInstance() 43
         - KeyGenerator.init() 43
-        - KeyGenerator.generateKey()  
+        - KeyGenerator.generateKey()
 - Password-Based Encryption.
     - Basic PBE.
         - The Password
@@ -62,22 +65,31 @@
         - The SecretKeyFactory Class
 - Key Wrapping
 - Doing Cipher-Based I/O
-- Module source code is [/JavaTMP-SpringBoot-Modules/spring-boot-cryptography/spring-boot-cryptography-symmetric](/JavaTMP-SpringBoot-Modules/spring-boot-cryptography/spring-boot-cryptography-symmetric)
+- Module source code
+  is [/JavaTMP-SpringBoot-Modules/spring-boot-cryptography/spring-boot-cryptography-symmetric](/JavaTMP-SpringBoot-Modules/spring-boot-cryptography/spring-boot-cryptography-symmetric)
 
-## Chapter 3: Message Digests, MACs, and HMACs 
-- Tampering with an Encrypted Stream
+## Chapter 3: Message Digests, MACs, and HMACs
+
+- The Problem of Tampering
 - Message Digests
-- The MessageDigest Class
+    - The MessageDigest Class
+    - MessageDigest.update()
+    - MessageDigest.digest()
+    - MessageDigest.isEqual()
 - Tampering with the Digest
-- Tampering with an Encrypted Stream
 - MACs Based on Digests — the HMAC
-- Using a HMAC
+    - The Mac Class
+    - Mac.init()
+    - Mac.update()
+    - Mac.doFinal()
 - MACs Based on Symmetric Ciphers
 - Digests in Pseudorandom Functions
-- Mask Generation
+    - PBE Key Generation 74
+    - Mask Generation
 - Doing Digest-Based I/O
 
 ## Chapter 4: Asymmetric Key Cryptography
+
 - The PublicKey and PrivateKey Interfaces
 - The RSA Algorithm
 - The KeyFactory Class
@@ -98,10 +110,12 @@
 - RSA-Based Signature Algorithms
 
 ## Chapter 5: Object Description in Cryptography Using ASN.1
+
 - Implementing an ASN.1-Based Java Object
 - Encoding Public and Private Keys
 
 ## Chapter 6: Distinguished Names and Certificates
+
 - Distinguished Names
 - Public Key Certificates
 - X.509 Certificates
@@ -111,6 +125,7 @@
 - Certificate Paths and Stores
 
 ## Chapter 7: Certificate Revocation and Path Validation
+
 - Certificate Revocation Lists
 - X.509 Certificate Revocation Lists
 - X.509 CRL Entry Extensions
@@ -121,6 +136,7 @@
 - Building a Valid Path from a CertStore
 
 ## Chapter 8: Key and Certificate Management Using Keystores
+
 - The KeyStore Class
 - Standard JDK Keystore Types
 - Bouncy Castle Keystore Types
@@ -130,6 +146,7 @@
 - Jarsigning and Java Policy
 
 ## Chapter 9: CMS and S/MIME
+
 - Cryptographic Message Syntax
 - CMS Enveloped-Data
 - Secure/Multipurpose Internet Mail Extensions (S/MIME)
@@ -138,13 +155,14 @@
 - Combining Signing with Encryption
 
 ## Chapter 10: SSL and TLS
+
 - The SSL and TLS Protocols
 - Client-Side Authentication
 - Managing SSL Session Information
-- 
-- 
+-
+-
 
-## 
+##    
 
 
 

@@ -10,17 +10,13 @@ import java.security.SecureRandom;
 /**
  * Tampered message, plain encryption, AES in CTR mode
  */
-public class TamperedExample
-{
-    public static void main(
-        String[]    args)
-        throws Exception
-    {
-        SecureRandom	random = new SecureRandom();
+public class TamperedExample {
+    public static void main(String[] args) throws Exception {
+        SecureRandom random = new SecureRandom();
         IvParameterSpec ivSpec = Utils.createCtrIvForAES(1, random);
-        Key             key = Utils.createKeyForAES(256, random);
-        Cipher          cipher = Cipher.getInstance("AES/CTR/NoPadding", "BC");
-        String          input = "Transfer 0000100 to AC 1234-5678";
+        Key key = Utils.createKeyForAES(256, random);
+        Cipher cipher = Cipher.getInstance("AES/CTR/NoPadding", "BC");
+        String input = "Transfer 0000100 to AC 1234-5678";
 
         System.out.println("input : " + input);
 

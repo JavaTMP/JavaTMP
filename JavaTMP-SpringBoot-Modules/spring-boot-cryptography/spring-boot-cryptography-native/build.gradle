@@ -1,8 +1,6 @@
 
 dependencies {
-    implementation project(":spring-boot-cryptography:spring-boot-cryptography-symmetric")
-    implementation group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.69'
-    implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.69'
+    api project(":spring-boot-cryptography:spring-boot-cryptography-keystore")
     implementation group: 'org.bouncycastle', name: 'bcprov-ext-jdk15on', version: '1.69'
     implementation group: 'org.bouncycastle', name: 'bcmail-jdk15on', version: '1.69'
 

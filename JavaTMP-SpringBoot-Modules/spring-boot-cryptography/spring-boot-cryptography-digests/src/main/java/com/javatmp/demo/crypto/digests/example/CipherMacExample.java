@@ -13,20 +13,16 @@ import java.security.SecureRandom;
 /**
  * Message without tampering with MAC (DES), encryption AES in CTR mode
  */
-public class CipherMacExample
-{
-    public static void main(
-        String[]    args)
-        throws Exception
-    {
-        SecureRandom	random = new SecureRandom();
+public class CipherMacExample {
+    public static void main(String[] args) throws Exception {
+        SecureRandom random = new SecureRandom();
         IvParameterSpec ivSpec = Utils.createCtrIvForAES(1, random);
-        Key             key = Utils.createKeyForAES(256, random);
-        Cipher          cipher = Cipher.getInstance("AES/CTR/NoPadding", "BC");
-        String          input = "Transfer 0000100 to AC 1234-5678";
-        Mac             mac = Mac.getInstance("DES", "BC");
-        byte[]          macKeyBytes = new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08 };
-        Key             macKey = new SecretKeySpec(macKeyBytes, "DES");
+        Key key = Utils.createKeyForAES(256, random);
+        Cipher cipher = Cipher.getInstance("AES/CTR/NoPadding", "BC");
+        String input = "Transfer 0000100 to AC 1234-5678";
+        Mac mac = Mac.getInstance("DES", "BC");
+        byte[] macKeyBytes = new byte[]{0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08};
+        Key macKey = new SecretKeySpec(macKeyBytes, "DES");
 
         System.out.println("input : " + input);
 
@@ -48,7 +44,7 @@ public class CipherMacExample
         cipher.init(Cipher.DECRYPT_MODE, key, ivSpec);
 
         byte[] plainText = cipher.doFinal(cipherText, 0, ctLength);
-        int    messageLength = plainText.length - mac.getMacLength();
+        int messageLength = plainText.length - mac.getMacLength();
 
         mac.init(macKey);
         mac.update(plainText, 0, messageLength);

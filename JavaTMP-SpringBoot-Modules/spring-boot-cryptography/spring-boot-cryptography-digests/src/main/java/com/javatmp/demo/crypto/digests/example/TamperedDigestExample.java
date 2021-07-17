@@ -11,18 +11,14 @@ import java.security.SecureRandom;
 /**
  * Tampered message, encryption with digest, AES in CTR mode
  */
-public class TamperedDigestExample
-{
-    public static void main(
-        String[]    args)
-        throws Exception
-    {
-        SecureRandom	random = new SecureRandom();
+public class TamperedDigestExample {
+    public static void main(String[] args) throws Exception {
+        SecureRandom random = new SecureRandom();
         IvParameterSpec ivSpec = Utils.createCtrIvForAES(1, random);
-        Key             key = Utils.createKeyForAES(256, random);
-        Cipher          cipher = Cipher.getInstance("AES/CTR/NoPadding", "BC");
-        String          input = "Transfer 0000100 to AC 1234-5678";
-        MessageDigest   hash = MessageDigest.getInstance("SHA1", "BC");
+        Key key = Utils.createKeyForAES(256, random);
+        Cipher cipher = Cipher.getInstance("AES/CTR/NoPadding", "BC");
+        String input = "Transfer 0000100 to AC 1234-5678";
+        MessageDigest hash = MessageDigest.getInstance("SHA1", "BC");
 
         System.out.println("input : " + input);
 
@@ -47,8 +43,7 @@ public class TamperedDigestExample
         byte[] originalHash = hash.digest(Utils.toByteArray(input));
         byte[] tamperedHash = hash.digest(Utils.toByteArray("Transfer 9000100 to AC 1234-5678"));
 
-        for (int i = ctLength - hash.getDigestLength(), j = 0; i != ctLength; i++, j++)
-        {
+        for (int i = ctLength - hash.getDigestLength(), j = 0; i != ctLength; i++, j++) {
             cipherText[i] ^= originalHash[j] ^ tamperedHash[j];
         }
 
@@ -57,7 +52,7 @@ public class TamperedDigestExample
         cipher.init(Cipher.DECRYPT_MODE, key, ivSpec);
 
         byte[] plainText = cipher.doFinal(cipherText, 0, ctLength);
-        int    messageLength = plainText.length - hash.getDigestLength();
+        int messageLength = plainText.length - hash.getDigestLength();
 
         hash.update(plainText, 0, messageLength);
 
