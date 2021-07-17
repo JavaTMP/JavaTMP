@@ -18,9 +18,13 @@ import java.security.Security;
 @Slf4j
 public class SymmetricDemoApplication {
 
+    static {
+        if(Security.getProvider(BouncyCastleProvider.PROVIDER_NAME) == null) {
+            Security.addProvider(new BouncyCastleProvider());
+        }
+    }
     public static void main(String[] args) {
         // https://stackoverflow.com/questions/40975510/spring-boot-and-jca-providers
-        Security.addProvider(new BouncyCastleProvider());
         SpringApplication.run(SymmetricDemoApplication.class, args);
     }
 

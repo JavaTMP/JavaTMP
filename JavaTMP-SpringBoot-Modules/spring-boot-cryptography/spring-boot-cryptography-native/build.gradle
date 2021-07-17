@@ -1,8 +1,4 @@
 
-bootJar {
-    enabled = true
-}
-
 dependencies {
     implementation project(":spring-boot-cryptography:spring-boot-cryptography-symmetric")
     implementation group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.69'
