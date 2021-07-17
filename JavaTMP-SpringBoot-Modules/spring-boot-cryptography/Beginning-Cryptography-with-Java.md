@@ -14,7 +14,7 @@
     - Installing During Execution
 - How Provider Precedence Works
 - Examining the Capabilities of a Provider
-- Module source code is [JavaTMP-SpringBoot-Modules/spring-boot-cryptography/spring-boot-cryptography-provider](JavaTMP-SpringBoot-Modules/spring-boot-cryptography/spring-boot-cryptography-provider)
+- Module source code is [/JavaTMP-SpringBoot-Modules/spring-boot-cryptography/spring-boot-cryptography-provider](/JavaTMP-SpringBoot-Modules/spring-boot-cryptography/spring-boot-cryptography-provider)
 
 ## Chapter 2: Symmetric Key Cryptography
 - Symmetric Block Cipher Padding
