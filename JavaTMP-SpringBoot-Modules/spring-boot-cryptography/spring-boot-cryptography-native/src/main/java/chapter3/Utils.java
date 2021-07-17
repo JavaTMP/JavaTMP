@@ -10,9 +10,7 @@ import java.security.SecureRandom;
 /**
  * General utilities for the third chapter examples.
  */
-public class Utils
-    extends chapter2.Utils
-{
+public class Utils extends com.javatmp.demo.crypto.symmetric.Utils {
     /**
      * Create a key for use with AES.
      *
@@ -23,10 +21,9 @@ public class Utils
      * @throws NoSuchProviderException
      */
     public static SecretKey createKeyForAES(
-        int          bitLength,
-        SecureRandom random)
-        throws NoSuchAlgorithmException, NoSuchProviderException
-    {
+            int bitLength,
+            SecureRandom random)
+            throws NoSuchAlgorithmException, NoSuchProviderException {
         KeyGenerator generator = KeyGenerator.getInstance("AES", "BC");
 
         generator.init(256, random);
@@ -41,14 +38,13 @@ public class Utils
      * 4 bytes of random data, and a counter of 8 bytes.
      *
      * @param messageNumber the number of the message.
-     * @param random a source of randomness
+     * @param random        a source of randomness
      * @return an initialised IvParameterSpec
      */
     public static IvParameterSpec createCtrIvForAES(
-        int             messageNumber,
-        SecureRandom    random)
-    {
-        byte[]          ivBytes = new byte[16];
+            int messageNumber,
+            SecureRandom random) {
+        byte[] ivBytes = new byte[16];
 
         // initially randomize
 
@@ -56,15 +52,14 @@ public class Utils
 
         // set the message number bytes
 
-        ivBytes[0] = (byte)(messageNumber >> 24);
-        ivBytes[1] = (byte)(messageNumber >> 16);
-        ivBytes[2] = (byte)(messageNumber >> 8);
-        ivBytes[3] = (byte)(messageNumber >> 0);
+        ivBytes[0] = (byte) (messageNumber >> 24);
+        ivBytes[1] = (byte) (messageNumber >> 16);
+        ivBytes[2] = (byte) (messageNumber >> 8);
+        ivBytes[3] = (byte) (messageNumber >> 0);
 
         // set the counter bytes to 1
 
-        for (int i = 0; i != 7; i++)
-        {
+        for (int i = 0; i != 7; i++) {
             ivBytes[8 + i] = 0;
         }
 
@@ -76,19 +71,17 @@ public class Utils
     /**
      * Convert a byte array of 8 bit characters into a String.
      *
-     * @param bytes the array containing the characters
+     * @param bytes  the array containing the characters
      * @param length the number of bytes to process
      * @return a String representation of bytes
      */
     public static String toString(
-        byte[] bytes,
-        int    length)
-    {
-        char[]	chars = new char[length];
+            byte[] bytes,
+            int length) {
+        char[] chars = new char[length];
 
-        for (int i = 0; i != chars.length; i++)
-        {
-            chars[i] = (char)(bytes[i] & 0xff);
+        for (int i = 0; i != chars.length; i++) {
+            chars[i] = (char) (bytes[i] & 0xff);
         }
 
         return new String(chars);
@@ -101,8 +94,7 @@ public class Utils
      * @return a String representation of bytes
      */
     public static String toString(
-        byte[]	bytes)
-    {
+            byte[] bytes) {
         return toString(bytes, bytes.length);
     }
 
@@ -114,14 +106,12 @@ public class Utils
      * @return a byte array representation
      */
     public static byte[] toByteArray(
-        String string)
-    {
-        byte[]	bytes = new byte[string.length()];
-        char[]  chars = string.toCharArray();
+            String string) {
+        byte[] bytes = new byte[string.length()];
+        char[] chars = string.toCharArray();
 
-        for (int i = 0; i != chars.length; i++)
-        {
-            bytes[i] = (byte)chars[i];
+        for (int i = 0; i != chars.length; i++) {
+            bytes[i] = (byte) chars[i];
         }
 
         return bytes;

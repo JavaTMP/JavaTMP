@@ -1,6 +1,7 @@
 package com.javatmp.demo.crypto.provider;
 
 
+import com.javatmp.demo.crypto.provider.example.*;
 import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.springframework.boot.CommandLineRunner;
@@ -24,7 +25,7 @@ public class CryptoProviderApplication {
     }
 
     @Bean
-    public CommandLineRunner springBootMain() throws Exception {
+    public CommandLineRunner cryptoProviderApplicationMain() throws Exception {
         return args -> {
             log.info("*** Start Spring Boot Project ***");
 

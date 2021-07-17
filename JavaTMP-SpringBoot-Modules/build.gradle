@@ -10,9 +10,9 @@ buildscript {
         maven { url "https://repo.spring.io/milestone" }
         maven { url "https://repo.spring.io/release" }
     }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBoot}")
-    }
+//    dependencies {
+//        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBoot}")
+//    }
 
 }
 
@@ -20,7 +20,7 @@ plugins {
     id 'java'
     id 'idea'
     id 'eclipse'
-    id 'org.springframework.boot' version "${springBoot}"
+    id 'org.springframework.boot' version "${springBoot}" apply false
     id 'io.spring.dependency-management' version "${dependencyManagement}"
 }
 // also https://stackoverflow.com/questions/28404149/how-to-download-javadocs-and-sources-for-jar-using-gradle-2-0
@@ -32,8 +32,10 @@ eclipse {
 // read more about idea plugin in https://docs.gradle.org/current/userguide/idea_plugin.html
 idea {
     module {
-        downloadJavadoc(true)
-        downloadSources(true)
+        downloadJavadoc = true
+        downloadSources = true
+//        isDownloadJavadoc(true)
+//        isDownloadSources(true)
     }
 }
 allprojects {
@@ -41,10 +43,6 @@ allprojects {
     version = '0.0.1-SNAPSHOT'
     sourceCompatibility = '1.8'
     targetCompatibility = '1.8'
-
-    bootJar {
-        enabled = false
-    }
 
 }
 

@@ -17,13 +17,52 @@
 - Module source code is [/JavaTMP-SpringBoot-Modules/spring-boot-cryptography/spring-boot-cryptography-provider](/JavaTMP-SpringBoot-Modules/spring-boot-cryptography/spring-boot-cryptography-provider)
 
 ## Chapter 2: Symmetric Key Cryptography
-- Symmetric Block Cipher Padding
+- The SecretKeySpec Class
+- The Cipher Class 
+    - Cipher.getInstance()
+    - Cipher.init() 
+    - Cipher.update()
+    - Cipher.doFinal()
+- Symmetric Block Cipher Padding.
+    - PKCS #5/PKCS #7 Padding
+    - Other Padding Mechanisms.
 - Symmetric Block Cipher Modes
-- Symmetric Stream Ciphers
-- Generating Random Keys
-- Password-Based Encryption
+    - ECB Mode
+    - CBC Mode
+        - Inline IVs
+        - Creating an IV
+        - Random IVs
+        - Creating a SecureRandom Object
+        - Pseudorandom IVs
+    - A Look at Cipher Parameter Objects.
+    - The AlgorithmParameters Class.
+    - CTS Mode: A Special Case of CBC.
+    - Streaming Symmetric Block Cipher Modes.
+        - CTR Mode
+        - OFB Mode
+        - CFB Mode
+- Symmetric Stream Ciphers.
+- Generating Random Keys.
+    - The Key Interface.
+        - Key.getAlgorithm()
+        - Key.getEncoded()
+        - Key.getFormat()
+    - The KeyGenerator Class
+        - KeyGenerator.getInstance() 43
+        - KeyGenerator.init() 43
+        - KeyGenerator.generateKey()  
+- Password-Based Encryption.
+    - Basic PBE.
+        - The Password
+        - The Salt
+        - The Iteration Count
+    - PBE in the JCE
+        - The PBEParameterSpec Class
+        - The PBEKeySpec Class
+        - The SecretKeyFactory Class
 - Key Wrapping
 - Doing Cipher-Based I/O
+- Module source code is [/JavaTMP-SpringBoot-Modules/spring-boot-cryptography/spring-boot-cryptography-symmetric](/JavaTMP-SpringBoot-Modules/spring-boot-cryptography/spring-boot-cryptography-symmetric)
 
 ## Chapter 3: Message Digests, MACs, and HMACs 
 - Tampering with an Encrypted Stream
