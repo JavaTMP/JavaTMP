@@ -1,0 +1,14 @@
+<LSSecure>
+	<InitRequest>
+		<Version></Version>
+		<TxnID></TxnID>
+		<MerchantDetails>
+			<AcquirerBIN></AcquirerBIN>
+			<MID></MID>
+			<Name></Name>
+		</MerchantDetails>
+		<PurchaseDetails>
+			<CardNumber></CardNumber>
+		</PurchaseDetails>
+	</InitRequest>
+</LSSecure>

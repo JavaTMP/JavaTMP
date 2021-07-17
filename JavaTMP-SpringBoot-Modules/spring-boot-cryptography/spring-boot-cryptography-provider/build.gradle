@@ -6,7 +6,4 @@ bootJar {
 dependencies {
     implementation group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.69'
     implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.69'
-    implementation 'commons-io:commons-io:2.5'
-    implementation 'commons-lang:commons-lang:2.6'
-    implementation 'commons-codec:commons-codec:1.10'
 }

@@ -1,4 +1,6 @@
-package chapter1;
+package com.javatmp.demo.crypto.provider;
+
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import java.security.Provider;
 import java.security.Security;
@@ -10,6 +12,7 @@ import java.util.Iterator;
  */
 public class ListBCCapabilities {
     public static void main(String[] args) {
+        Security.addProvider(new BouncyCastleProvider());
         Provider provider = Security.getProvider("BC");
         Iterator it = provider.keySet().iterator();
         while (it.hasNext()) {

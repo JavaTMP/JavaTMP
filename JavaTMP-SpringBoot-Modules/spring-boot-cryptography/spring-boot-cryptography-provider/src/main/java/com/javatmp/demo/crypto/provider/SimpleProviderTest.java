@@ -1,4 +1,6 @@
-package chapter1;
+package com.javatmp.demo.crypto.provider;
+
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import java.security.Provider;
 import java.security.Security;
@@ -9,7 +11,8 @@ import java.security.Security;
  */
 public class SimpleProviderTest {
     public static void main(String[] args) {
-        String providerName = "BC";
+        Security.addProvider(new BouncyCastleProvider());
+        String providerName = BouncyCastleProvider.PROVIDER_NAME;
         Provider bcProvider = Security.getProvider(providerName);
         if (bcProvider == null) {
             System.out.println(providerName + " provider not installed");

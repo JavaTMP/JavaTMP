@@ -38,21 +38,6 @@ public class DemoApplication {
         return args -> {
             log.info("*** Start Spring Boot Project ***");
 
-            log.info("Test to make sure the unrestricted policy files are installed");
-            SimplePolicyTest.main(null);
-
-            log.info("List the currently installed providers in the Java Runtime");
-            ListProviders.main(null);
-
-            log.info("Verifying Bouncy Castle Provider Installation\n");
-            SimpleProviderTest.main(null);
-
-            log.info("Basic demonstration of precedence in action");
-            PrecedenceTest.main(null);
-
-            log.info("Examining the Capabilities of a Provider by listing Provider Capabilities");
-            ListBCCapabilities.main(null);
-
             log.info("Basic symmetric encryption example");
             SimpleSymmetricExample.main(null);
 

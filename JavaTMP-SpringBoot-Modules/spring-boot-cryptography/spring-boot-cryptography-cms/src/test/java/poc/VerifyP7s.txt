@@ -1,0 +1,154 @@
+package test;
+
+import java.security.Security;
+import java.io.*;
+import org.bouncycastle.jce.PKCS7SignedData;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import java.util.Arrays;
+
+/* Verifies pkcs #7 signature for binary-DER or base64 DER files
+			M. Gallant  07/09/2002  */
+
+public class VerifyP7s {
+
+ public static void main(String args[]) {
+   if (args.length < 2)
+	usage();
+
+ //Plug the Provider into the JCA/JCE
+  Security.addProvider(new BouncyCastleProvider());
+
+  FileInputStream freader = null;
+
+
+//------  Get the content data from file -------------
+  File f = new File(args[1]) ;
+  int sizecontent = ((int) f.length());
+  byte[] bytes = new byte[sizecontent];
+
+  try {
+    freader = new FileInputStream(f);
+    System.out.print("\nContent Bytes: " + freader.read(bytes, 0, sizecontent));
+    freader.close();
+   }
+  catch(IOException ioe) {
+	System.out.println(ioe.toString());
+	return;
+	}
+
+
+//------ Get the pkcs #7 data from file -------
+  File p7s = new File(args[0]) ;
+  int size = ((int) p7s.length());
+  byte[] bytessig = new byte[size];
+  try {
+   freader = new FileInputStream(p7s);
+   System.out.println("  PKCS#7 bytes: " + freader.read(bytessig, 0, size));
+   freader.close();
+   }
+  catch(IOException ioe) {
+	System.out.println(ioe.toString());
+	return;
+	}
+
+// --- Use Bouncy Castle provider to attempt verification of p7s ---
+
+ if(isBase64Encoded(bytessig)){
+   System.out.println("Signature file is BASE64 encoded") ;
+   try{
+	sun.misc.BASE64Decoder dec = new sun.misc.BASE64Decoder() ;
+	byte[] bdecoded = dec.decodeBuffer(new String(bytessig));
+	if (isVerified(bdecoded, bytes))
+	 System.out.println("Verified pkcs#7 data: \"" + args[0] + "\" as BASE64-encoded DER file\n" +
+	 "against content file \"" + args[1] + "\"") ;
+	else
+	 System.out.println("Failed to verify " + args[0] + " as valid pkcs#7 detached signature.");
+	}
+    catch(Exception exc) {
+	 System.out.println("Failed to verify " + args[0] + " as valid pkcs#7 detached signature.");
+	 return;
+	}
+  }
+ else {   //if NOT base64 encoded
+  if (isVerified(bytessig, bytes))
+   System.out.println("Verified pkcs#7 data: \"" + args[0] + "\" as binary DER file\n" +
+		"against content file \"" + args[1] + "\"") ;
+  else
+   System.out.println("Failed to verify " + args[0] + " as valid pkcs#7 detached signature.");
+ }
+
+}
+
+
+ private static byte[] toUnicode(byte[] bytes) {
+   byte[] ucbytes = new byte[2*bytes.length];
+    for (int j = 0; j< bytes.length; j++) {
+     ucbytes[2*j] = bytes[j];
+     ucbytes[2*j+1] = 0x00;   //null byte for UNICODE encoding
+   }
+  return ucbytes;
+ }
+
+ private static final boolean isVerified(byte[] sig, byte[] content) {
+ try{
+   PKCS7SignedData pkcs7 = new PKCS7SignedData(sig);
+   pkcs7.update(content, 0, content.length);  // Update checksum
+   boolean verified = pkcs7.verify();     // Does it add up?
+   if(!verified) { 		//see if original data was UNICODE byte encoding
+	//System.out.println("Original byte content not verified.\nTrying UNICODE encoding ...");
+	pkcs7 = new PKCS7SignedData(sig);
+	pkcs7.update(toUnicode(content), 0, 2*content.length);
+	verified = pkcs7.verify();
+	if(verified){
+	  System.out.println("\nUNICODE-encoding of signed content was verified.");
+	  return true;
+	 }
+	else
+	 //System.out.println("\nCould NOT verify signed detached content");
+	 return false;
+	}
+    else
+	System.out.println("ANSI-encoding of signed content was verified.");
+	return true ;
+  }
+  catch(java.security.cert.CRLException crle) {
+	//System.out.println("crl " + crle.toString());
+	return false;
+   }
+  catch(java.security.SignatureException sigex) {
+	//System.out.println("sigexcept " + sigex.toString());
+	return false;
+   }
+  catch(Exception secex) {
+	//System.out.println("other exception " + secex.toString());
+	return false;
+   }
+ }
+
+ private static final boolean isBase64Encoded(byte[] data) {
+  Arrays.sort(Base64Map);
+  for (int i=0; i<data.length; i++){
+	//System.out.println("data[" + i + "] " + (char)data[i]) ;
+	if( Arrays.binarySearch(Base64Map, (char)data[i])<0
+		&& !Character.isWhitespace((char)data[i]) )
+	 return false;
+	}
+  return true;
+ }
+
+   private static char[] Base64Map =
+   {  'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
+      'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+      'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
+      'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',
+      'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
+      'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
+      'w', 'x', 'y', 'z', '0', '1', '2', '3',
+      '4', '5', '6', '7', '8', '9', '+', '/', '='
+   };
+
+ private static void usage() {
+  System.out.println("Usage:\n java VerifyP7s  <pkcs #7 signature file> <contentfile> ") ;
+  System.exit(1);
+ }
+}

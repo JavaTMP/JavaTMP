@@ -1,4 +1,6 @@
-package chapter1;
+package com.javatmp.demo.crypto.provider;
+
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import java.security.Provider;
 import java.security.Security;
@@ -8,6 +10,7 @@ import java.security.Security;
  */
 public class ListProviders {
     public static void main(String[] args) {
+        Security.addProvider(new BouncyCastleProvider());
         Provider[] providers = Security.getProviders();
 
         for (int i = 0; i != providers.length; i++) {

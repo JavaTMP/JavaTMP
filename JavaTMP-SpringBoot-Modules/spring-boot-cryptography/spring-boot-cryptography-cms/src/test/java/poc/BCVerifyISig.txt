@@ -1,0 +1,162 @@
+package test;
+
+import java.io.*;
+import java.util.*;
+import java.security.*;
+import java.security.Security;
+import java.security.cert.*;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.bouncycastle.cms.*;
+
+
+/* Verify INCLUDED CMS signature CMS/pkcs #7 signature using BC provider.
+    Verify with either the included signer certificate, or a specified separate signer
+    certificate file.
+    Output signed content to binary file
+			     M. Gallant  04/01/2005  */
+
+public class BCVerifyISig {
+ static final boolean DEBUG =true;
+
+ public static void main(String args[]) {
+ System.out.println("");
+
+  if (args.length  != 2  && args.length !=3)
+	usage();
+
+ Security.addProvider(new BouncyCastleProvider());
+
+ X509Certificate signercert = null;
+
+ String INFILE	= args[0];	// Input CMS/PKCS#7 included signed content to verify
+ String OUTFILE	= args[1];   //output file containing recovered signed-content
+ if(args.length == 3) {
+	try{
+	 InputStream inStream = new FileInputStream(args[2]);
+	 CertificateFactory cf = CertificateFactory.getInstance("X.509");
+	 signercert = (X509Certificate)cf.generateCertificate(inStream);
+	 inStream.close();
+	 if(DEBUG)
+		System.out.println("Got certificate from file " + args[2]) ;
+	}
+	catch(Exception cerexc) {
+	 System.out.println("Failed to create certificate from file " + args[2]) ;
+	 System.exit(1) ;
+	}
+	}
+
+ boolean INCLUDED = true;   // included (true)  or detached (false) content
+
+  FileInputStream freader = null;
+  File f = null;
+
+//------  Get the included data signature from file -------------
+  f = new File(INFILE) ;
+  int sizecontent = ((int) f.length());
+  byte[] sigbytes = new byte[sizecontent];
+
+  try {
+    freader = new FileInputStream(f);
+    System.out.println("\nSignature Bytes: " + freader.read(sigbytes, 0, sizecontent));
+    freader.close();
+   }
+  catch(IOException ioe) {
+	System.out.println(ioe.toString());
+	return;
+	}
+
+
+
+
+ if(isBase64Encoded(sigbytes)){
+	try{
+	sun.misc.BASE64Decoder dec = new sun.misc.BASE64Decoder() ;
+	sigbytes = dec.decodeBuffer(new String(sigbytes));
+	System.out.println("Signature file is BASE64 encoded") ;
+	}
+	catch(IOException ioe) {System.out.println("Problem decoding from b64") ; }
+   }
+
+// --- Use Bouncy Castle provider to verify included-content CSM/PKCS#7 signature  ---
+ try{
+  CMSSignedData s	= new CMSSignedData(sigbytes) ;
+  CertStore  certs 		= s.getCertificatesAndCRLs("Collection", "BC");
+  SignerInformationStore  signers = s.getSignerInfos();
+  Collection            c 	= signers.getSigners();
+  Iterator                it 	= c.iterator();
+  int verified = 0;
+
+  while (it.hasNext())
+  {
+      X509Certificate cert =null;
+      SignerInformation   signer = (SignerInformation)it.next();
+      Collection          certCollection = certs.getCertificates(signer.getSID());
+      if (certCollection.isEmpty() && signercert==null)
+	continue;
+      else  if (signercert !=null)		// use a signer cert file for verification, if it was provided
+	cert = signercert;
+      else {				// use the certificates included in the signature for verification
+	Iterator        certIt = certCollection.iterator();
+	 cert = (X509Certificate)certIt.next();
+	}
+
+	if(DEBUG)
+		System.out.println("Current certificate " + cert.toString()) ;
+	System.out.println("") ;
+
+      if (signer.verify(cert.getPublicKey(), "BC"))
+	verified++;
+  }
+
+   if(verified == 0)
+	System.out.println("WARNING: No signers' signatures could be verified !") ;
+   else if(signercert !=null)
+	System.out.println("Verified a signature using signer certificate file  '" + args[2] + "'") ;
+   else
+	System.out.println("Verified a signature using a certificate in the signature file '" + INFILE + "'") ;
+
+
+   CMSProcessableByteArray cpb = (CMSProcessableByteArray) s.getSignedContent() ;
+   byte[] rawcontent  = (byte[]) cpb.getContent() ;
+   System.out.println("\nWriting content (" + rawcontent.length + " bytes) to file " + OUTFILE + " ... ") ;
+   FileOutputStream fcontent = new FileOutputStream(OUTFILE);
+   fcontent.write(rawcontent);
+   fcontent.close();
+
+ }
+ catch(Exception ex){
+  System.out.println("Couldn't verify included-content CMS signature\n" + ex.toString()) ;
+ }
+}
+
+
+ private static final boolean isBase64Encoded(byte[] data) {
+  Arrays.sort(Base64Map);
+  for (int i=0; i<data.length; i++){
+	//System.out.println("data[" + i + "] " + (char)data[i]) ;
+	if( Arrays.binarySearch(Base64Map, (char)data[i])<0
+		&& !Character.isWhitespace((char)data[i]) )
+	 return false;
+	}
+  return true;
+ }
+
+   private static char[] Base64Map =
+   {  'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
+      'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
+      'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
+      'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f',
+      'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',
+      'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
+      'w', 'x', 'y', 'z', '0', '1', '2', '3',
+      '4', '5', '6', '7', '8', '9', '+', '/', '='
+   };
+
+
+
+
+ private static void usage() {
+  System.out.println("Usage:\n java BCVerifyISig  <includedContentSignatureFile>  <outputContentFile>  [signercertFile]") ;
+  System.exit(1);
+ }
+}

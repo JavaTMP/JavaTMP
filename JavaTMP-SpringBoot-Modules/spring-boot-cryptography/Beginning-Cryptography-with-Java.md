@@ -4,9 +4,17 @@
 - Basic Architecture
 - Provider Signing
 - Jurisdiction Policy Files
+    - Installing the Unrestricted Policy Files
+    - Troubleshooting Other Issues
+    - How Do You Know the Policy Files Really Behave as Sun Says They Do?
 - Installing the Bouncy Castle Provider
+    - Installing by Configuring the Java Runtime
+        - Install the JAR File Containing the Provider
+        - Enable the Provider by Adding It to the java.security File
+    - Installing During Execution
 - How Provider Precedence Works
 - Examining the Capabilities of a Provider
+- Module source code is [JavaTMP-SpringBoot-Modules/spring-boot-cryptography/spring-boot-cryptography-provider](JavaTMP-SpringBoot-Modules/spring-boot-cryptography/spring-boot-cryptography-provider)
 
 ## Chapter 2: Symmetric Key Cryptography
 - Symmetric Block Cipher Padding

@@ -1,0 +1,110 @@
+package test;
+
+import java.io.*;
+import java.util.*;
+import java.security.*;
+import java.security.Security;
+import java.security.cert.*;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.bouncycastle.cms.*;
+
+
+/* Create CMS/pkcs #7 signature using BC provider
+			     M. Gallant  07/02/2003  */
+
+public class BCSignFile {
+ static final boolean DEBUG = false;
+
+ public static void main(String args[]) {
+ System.out.println("");
+
+  if (args.length < 4)
+	usage();
+
+ Security.addProvider(new BouncyCastleProvider());
+
+ String INFILE   = args[0];	// Input file to be signed
+ String KEYSTORE = args[1];	// Java 2 keystore file
+ String ALIAS    = args[2];	// Java 2 key entry alias
+ String PSWD     = args[3];	// keystore password
+
+ // ---- in real implementation, provide some SECURE way to get keystore
+ // ---- password from user! -------
+
+ KeyStore keystore = null;
+ PublicKey pub = null;
+ PrivateKey priv = null;
+ java.security.cert.Certificate storecert = null;
+ java.security.cert.Certificate[] certChain = null;
+ ArrayList certList = new ArrayList();
+ CertStore certs =null;
+
+ try{
+   keystore = KeyStore.getInstance("JKS");
+   keystore.load(new FileInputStream(KEYSTORE), PSWD.toCharArray());
+
+   certChain = keystore.getCertificateChain(ALIAS);
+   for ( int i = 0; i < certChain.length;i++)
+	certList.add(certChain[i]);
+   certs = CertStore.getInstance("Collection", new CollectionCertStoreParameters(certList), "BC");
+
+   priv = (PrivateKey)(keystore.getKey(ALIAS, PSWD.toCharArray()));
+
+   storecert = keystore.getCertificate(ALIAS);
+   pub = keystore.getCertificate(ALIAS).getPublicKey();
+ }
+ catch(Exception exc){
+  System.out.println("Problem with keystore access: " + exc.toString()) ;
+  return;
+  }
+
+
+  if(DEBUG){
+   System.out.println("Public Key Format: " + pub.getFormat()) ;
+   System.out.println("Certificate " + storecert.toString()) ;
+  }
+
+  FileInputStream freader = null;
+  File f = null;
+
+//------  Get the content data from file -------------
+  f = new File(INFILE) ;
+  int sizecontent = ((int) f.length());
+  byte[] contentbytes = new byte[sizecontent];
+
+  try {
+    freader = new FileInputStream(f);
+    System.out.println("\nContent Bytes: " + freader.read(contentbytes, 0, sizecontent));
+    freader.close();
+   }
+  catch(IOException ioe) {
+	System.out.println(ioe.toString());
+	return;
+	}
+
+
+// --- Use Bouncy Castle provider to create CSM/PKCS#7 signed message ---
+ try{
+  CMSSignedDataGenerator signGen = new CMSSignedDataGenerator();
+  signGen.addSigner(priv, (X509Certificate)storecert, CMSSignedDataGenerator.DIGEST_SHA1);
+  signGen.addCertificatesAndCRLs(certs);
+  CMSProcessable content = new CMSProcessableByteArray(contentbytes);
+
+  CMSSignedData signedData = signGen.generate(content,"BC");
+  byte[] signeddata = signedData.getEncoded();
+  System.out.println("Created signed message: " + signeddata.length + " bytes") ;
+  FileOutputStream envfos = new FileOutputStream("BCsigned.p7s");
+  envfos.write(signeddata);
+  envfos.close();
+ }
+ catch(Exception ex){
+  System.out.println("Couldn't generate CMS signed message\n" + ex.toString()) ;
+ }
+}
+
+
+ private static void usage() {
+  System.out.println("Usage:\n java BCSignFile  <contentfile> <keystore> <alias> <keypasswd>") ;
+  System.exit(1);
+ }
+}
