@@ -1,0 +1,5 @@
+
+dependencies {
+    implementation group: 'org.bouncycastle', name: 'bcprov-ext-jdk15on', version: '1.69'
+    implementation group: 'org.bouncycastle', name: 'bcmail-jdk15on', version: '1.69'
+}

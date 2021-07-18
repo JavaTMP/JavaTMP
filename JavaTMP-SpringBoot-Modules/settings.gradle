@@ -103,9 +103,7 @@ include 'spring-boot-cloud:spring-cloud-gateway:spring-boot-cloud-service-gatewa
 
 include 'spring-boot-cloud:spring-cloud-security:spring-boot-cloud-service-eureka-client-keycloak'
 
-include 'spring-boot-cryptography:spring-boot-cryptography-cms'
 
-include 'spring-boot-cryptography:spring-boot-cryptography-native'
 include 'spring-boot-cryptography:spring-boot-cryptography-provider'
 include 'spring-boot-cryptography:spring-boot-cryptography-symmetric'
 include 'spring-boot-cryptography:spring-boot-cryptography-digests'
@@ -114,6 +112,12 @@ include 'spring-boot-cryptography:spring-boot-cryptography-asn1'
 include 'spring-boot-cryptography:spring-boot-cryptography-certificate'
 include 'spring-boot-cryptography:spring-boot-cryptography-crl'
 include 'spring-boot-cryptography:spring-boot-cryptography-keystore'
+include 'spring-boot-cryptography:spring-boot-cryptography-cms'
+include 'spring-boot-cryptography:spring-boot-cryptography-cms-mime-smime'
+include 'spring-boot-cryptography:spring-boot-cryptography-ssl-tls'
+include 'spring-boot-cryptography:spring-boot-cryptography-handon-examples'
+
+include 'spring-boot-cryptography:spring-boot-cryptography-workshop-bouncycastle'
 
 rootProject.children.each {project ->
     println "child project is : ${project.name}"

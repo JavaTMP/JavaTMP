@@ -1,0 +1,7 @@
+
+dependencies {
+    api project(":spring-boot-cryptography:spring-boot-cryptography-keystore")
+    implementation group: 'org.bouncycastle', name: 'bcmail-jdk15on', version: '1.69'
+    implementation group: 'javax.mail', name: 'javax.mail-api', version: '1.6.2'
+    implementation group: 'com.sun.mail', name: 'javax.mail', version: '1.6.2'
+}

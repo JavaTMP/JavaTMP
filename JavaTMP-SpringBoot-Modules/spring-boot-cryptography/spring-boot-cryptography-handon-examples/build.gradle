@@ -1,0 +1,13 @@
+
+bootJar {
+    enabled = false
+}
+
+dependencies {
+    implementation group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.69'
+    implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.69'
+    implementation ('com.github.spoofzu:DeepViolet:5.1.16')  {
+        exclude group: 'ch.qos.logback', module: 'logback-classic'
+        exclude group: 'com.fasterxml.jackson.core', module: 'jackson-databind'
+    }
+}
