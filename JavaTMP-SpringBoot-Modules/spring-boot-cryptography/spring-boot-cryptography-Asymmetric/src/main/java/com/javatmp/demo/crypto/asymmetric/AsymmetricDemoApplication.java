@@ -69,6 +69,9 @@ public class AsymmetricDemoApplication {
 
             log.info("PKCS #1 1.5 RSA Signature Generation");
             PKCS1SignatureExample.main(null);
+
+            log.info("ECDH_BC");
+            ECDH_BC.main(null);
         };
     }
 
