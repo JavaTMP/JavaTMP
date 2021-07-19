@@ -4,11 +4,15 @@ import com.javatmp.demo.crypto.asn1.Utils;
 
 import java.util.Date;
 
+
 /**
  * Test for MyStructure
  */
-public class MyStructureTest {
-    public static void main(String[] args) throws Exception {
+public class MyStructureTest
+{
+    public static void main(String[] args)
+            throws Exception
+    {
         byte[] baseData = new byte[5];
         Date   created = new Date(0); // 1/1/1970
 

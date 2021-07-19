@@ -17,9 +17,14 @@ import java.security.Security;
 @Slf4j
 public class ASN1DemoApplication {
 
-    public static void main(String[] args) {
+    static {
         // https://stackoverflow.com/questions/40975510/spring-boot-and-jca-providers
-        Security.addProvider(new BouncyCastleProvider());
+        if(Security.getProvider(BouncyCastleProvider.PROVIDER_NAME) == null) {
+            Security.addProvider(new BouncyCastleProvider());
+        }
+    }
+
+    public static void main(String[] args) {
         SpringApplication.run(ASN1DemoApplication.class, args);
     }
 

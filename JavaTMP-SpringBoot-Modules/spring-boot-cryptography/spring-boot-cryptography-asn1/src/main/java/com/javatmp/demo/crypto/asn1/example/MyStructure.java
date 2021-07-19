@@ -15,7 +15,7 @@ import java.util.Date;
  *                   commentData [1] UTF8String OPTIONAL }
  * <pre>
  */
-public class MyStructure extends ASN1EncodableVector {
+public class MyStructure implements ASN1Encodable {
     private final ASN1Integer version;
     private final DERGeneralizedTime created;
     private final ASN1OctetString baseData;
@@ -25,7 +25,8 @@ public class MyStructure extends ASN1EncodableVector {
     /**
      * Constructor from an ASN.1 SEQUENCE
      */
-    public MyStructure(ASN1Sequence seq) {
+    public MyStructure(
+            ASN1Sequence seq) {
         int index = 0;
 
         // check for version field
@@ -81,7 +82,7 @@ public class MyStructure extends ASN1EncodableVector {
     /*
      * Produce an object suitable for writing to an ASN1/DEROutputStream
      */
-    public DERSequence toASN1Object() {
+    public ASN1Object toASN1Object() {
         ASN1EncodableVector v = new ASN1EncodableVector();
 
         if (version.getValue().intValue() != 0) {
@@ -102,7 +103,8 @@ public class MyStructure extends ASN1EncodableVector {
         return new DERSequence(v);
     }
 
+    @Override
     public ASN1Primitive toASN1Primitive() {
-        return null;
+        return toASN1Object().toASN1Primitive();
     }
 }

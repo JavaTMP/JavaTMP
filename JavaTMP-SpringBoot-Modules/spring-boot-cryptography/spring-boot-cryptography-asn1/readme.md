@@ -333,9 +333,12 @@ This also indicates that you are looking at an IMPLICIT tag.
 - The first thing you can notice is the presence of tagging.
 
 ### Analyzing an Unknown Encoded Object
-
+- The API also provides a general-purpose class that allows you to get a, more or less, human-readable
+  dump of an ASN.1-encoded object.
+  
 ## Using ASN.1 in Java: Some Real Examples
-
+- Encoding an IV with ASN.1
+- 
 ## References
 
 - []()

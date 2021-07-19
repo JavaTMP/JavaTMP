@@ -12,7 +12,7 @@ var eslint = require('gulp-eslint');
 var autoprefixer = require('gulp-autoprefixer');
 var gulpif = require('gulp-if');
 var async = require('async');
-const argv = require('yargs').argv;
+var argv = require('yargs').argv;
 
 // to solve es6 javascript
 // https://stackoverflow.com/questions/44958216/how-to-minify-es6-functions-with-gulp-uglify
@@ -47,7 +47,7 @@ var config = {
 
         ],
         "jquery-ui-touch-punch": [
-            {"from": "${sourceNodeLib}/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js", "to": "${destComponentsLib}/jquery-ui-touch-punch"}
+            {"from": "${sourceNodeLib}/jquery-ui-touch-punch/jquery.ui.touch-punch.js", "to": "${destComponentsLib}/jquery-ui-touch-punch", processJS: true}
         ],
         "popper.js": [
             {"from": "${sourceNodeLib}/popper.js/dist/umd/popper.min.js", "to": "${destComponentsLib}/popper.js/dist/umd"}
@@ -349,7 +349,7 @@ var src = {
     "js": [
         "./web/components/jquery/dist/jquery.min.js",
         "./web/components/jquery-ui-dist/jquery-ui.min.js",
-        "./web/components/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js",
+        "./web/components/jquery-ui-touch-punch/jquery.ui.touch-punch.js",
         "./web/components/popper.js/dist/umd/popper.min.js",
         "./web/components/bootstrap/dist/js/bootstrap.min.js",
         "./web/components/metismenu/dist/metisMenu.min.js",
