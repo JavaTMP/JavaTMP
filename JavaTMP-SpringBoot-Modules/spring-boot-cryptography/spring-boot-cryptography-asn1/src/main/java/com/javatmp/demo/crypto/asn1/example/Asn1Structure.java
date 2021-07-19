@@ -38,7 +38,6 @@ public class Asn1Structure  {
         }
         if (commentData != null){
             this.commentData = new DERGeneralString(commentData);
-
         }
     }
 //
