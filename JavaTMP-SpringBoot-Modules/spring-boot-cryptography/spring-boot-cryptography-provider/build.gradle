@@ -1,4 +1,4 @@
 
 dependencies {
-    implementation group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.69'
+    api group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.69'
 }

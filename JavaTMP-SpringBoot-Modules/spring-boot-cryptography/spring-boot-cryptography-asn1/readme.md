@@ -326,8 +326,11 @@ This also indicates that you are looking at an IMPLICIT tag.
   and structured and tagged types is DERObject.
 
 ### Dealing with Tagging 
+- if an object is implicitly tagged, the actual tag the object is meant to 
+  have is implicit from the context in which its encoding appears.
 
 ### Defining Your Own Objects
+- The first thing you can notice is the presence of tagging.
 
 ### Analyzing an Unknown Encoded Object
 

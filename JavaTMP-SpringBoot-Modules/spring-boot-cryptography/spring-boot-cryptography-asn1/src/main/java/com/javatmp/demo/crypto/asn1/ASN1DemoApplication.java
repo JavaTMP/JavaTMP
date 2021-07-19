@@ -28,6 +28,9 @@ public class ASN1DemoApplication {
         return args -> {
             log.info("*** Start Spring Boot Project ***");
 
+            log.info("Asn1StructureTest");
+            Asn1StructureTest.main(null);
+            
             log.info("Implementing an ASN.1-Based Java Object");
             MyStructureTest.main(null);
 
