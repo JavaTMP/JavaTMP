@@ -1,4 +1,4 @@
-package com.javatmp.demo;
+package com.javatmp.demo.rabbitmq;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -13,9 +13,9 @@ import java.util.stream.IntStream;
 public class ProducerRunner implements CommandLineRunner {
 
     private final RabbitTemplate rabbitTemplate;
-    private final MsgReceiver receiver;
+    private final com.javatmp.demo.rabbitmq.MsgReceiver receiver;
 
-    public ProducerRunner(MsgReceiver receiver, RabbitTemplate rabbitTemplate) {
+    public ProducerRunner(com.javatmp.demo.rabbitmq.MsgReceiver receiver, RabbitTemplate rabbitTemplate) {
         this.receiver = receiver;
         this.rabbitTemplate = rabbitTemplate;
     }
@@ -25,7 +25,7 @@ public class ProducerRunner implements CommandLineRunner {
         IntStream.range(0, 1000).forEach(i -> {
             try {
                 log.info("Sending message... {}", i);
-                rabbitTemplate.convertAndSend(MessagingRabbitmqApplication.topicExchangeName, "foo.bar.baz", "Hello from RabbitMQ!");
+                rabbitTemplate.convertAndSend(com.javatmp.demo.rabbitmq.MessagingRabbitmqApplication.topicExchangeName, "foo.bar.baz", "Hello from RabbitMQ!");
                 receiver.getLatch().await(10000, TimeUnit.MILLISECONDS);
             } catch (InterruptedException e) {
                 log.error("error", e);

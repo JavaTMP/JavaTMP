@@ -14,13 +14,11 @@ import java.util.Iterator;
 /**
  * Basic example of using a CertificateFactory.
  */
-public class CollectionMultipleCertificateExample
-{
+public class CollectionMultipleCertificateExample {
     public static void main(String[] args)
-        throws Exception
-    {
+            throws Exception {
         // create the keys
-        KeyPair          pair = Utils.generateRSAKeyPair();
+        KeyPair pair = Utils.generateRSAKeyPair();
 
         // create the input stream
         ByteArrayOutputStream bOut = new ByteArrayOutputStream();
@@ -33,15 +31,14 @@ public class CollectionMultipleCertificateExample
         InputStream in = new ByteArrayInputStream(bOut.toByteArray());
 
         // create the certificate factory
-        CertificateFactory fact = CertificateFactory.getInstance("X.509","BC");
+        CertificateFactory fact = CertificateFactory.getInstance("X.509", "BC");
 
         // read the certificates
-        Collection         collection = fact.generateCertificates(in);
+        Collection collection = fact.generateCertificates(in);
 
         Iterator it = collection.iterator();
-        while (it.hasNext())
-        {
-            System.out.println("version: " + ((X509Certificate)it.next()).getVersion());
+        while (it.hasNext()) {
+            System.out.println("version: " + ((X509Certificate) it.next()).getVersion());
         }
     }
 }

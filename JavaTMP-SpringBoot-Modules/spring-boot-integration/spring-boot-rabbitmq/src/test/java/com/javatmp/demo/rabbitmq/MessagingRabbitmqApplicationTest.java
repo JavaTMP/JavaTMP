@@ -14,17 +14,16 @@
  * limitations under the License.
  */
 
-package com.javatmp.demo;
-
-import java.util.concurrent.TimeUnit;
+package com.javatmp.demo.rabbitmq;
 
 import org.junit.jupiter.api.Test;
-
 import org.springframework.amqp.AmqpConnectException;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+
+import java.util.concurrent.TimeUnit;
 
 @SpringBootTest
 public class MessagingRabbitmqApplicationTest {

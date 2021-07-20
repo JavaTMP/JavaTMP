@@ -1,6 +1,7 @@
 
 bootJar {
-    enabled = false
+    enabled = true
+    mainClass = ''
 }
 
 

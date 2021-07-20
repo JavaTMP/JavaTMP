@@ -32,8 +32,14 @@ public class CertificateDemoApplication {
             log.info("Creating a Self-Signed Version 1 Certificate");
             X509V1CreateExample.main(null);
 
+            log.info("Creating a Self-Signed Version 1 Certificate by X509v1CertificateBuilder");
+            X509V1CreateExampleNew.main(null);
+
             log.info("Creating a Self-Signed Version 3 Certificate ");
             X509V3CreateExample.main(null);
+
+            log.info("Creating a Self-Signed Version 3 Certificate by X509v3CertificateBuilder");
+            X509v3StoreKeyPairExample.main(null);
 
             log.info("Basic example of using a CertificateFactory");
             CertificateFactoryExample.main(null);

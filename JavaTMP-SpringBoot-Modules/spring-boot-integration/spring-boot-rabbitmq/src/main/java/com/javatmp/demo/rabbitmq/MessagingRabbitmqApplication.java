@@ -1,4 +1,4 @@
-package com.javatmp.demo;
+package com.javatmp.demo.rabbitmq;
 
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
