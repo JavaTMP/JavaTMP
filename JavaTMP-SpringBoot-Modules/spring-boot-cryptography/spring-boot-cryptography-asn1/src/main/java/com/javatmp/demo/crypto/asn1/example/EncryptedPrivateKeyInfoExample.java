@@ -4,6 +4,7 @@ import com.javatmp.demo.crypto.asn1.Utils;
 import org.bouncycastle.asn1.ASN1InputStream;
 import org.bouncycastle.asn1.pkcs.PrivateKeyInfo;
 import org.bouncycastle.asn1.util.ASN1Dump;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import javax.crypto.Cipher;
 import javax.crypto.EncryptedPrivateKeyInfo;
@@ -17,10 +18,17 @@ import java.security.spec.PKCS8EncodedKeySpec;
  * Simple example showing how to use PBE and an EncryptedPrivateKeyInfo object.
  */
 public class EncryptedPrivateKeyInfoExample {
+    static {
+        // https://stackoverflow.com/questions/40975510/spring-boot-and-jca-providers
+        if (Security.getProvider(BouncyCastleProvider.PROVIDER_NAME) == null) {
+            Security.addProvider(new BouncyCastleProvider());
+        }
+    }
+
     public static void main(String[] args) throws Exception {
         // generate a key pair
         KeyPairGenerator kpg = KeyPairGenerator.getInstance("RSA", "BC");
-        kpg.initialize(128, Utils.createFixedRandom());
+        kpg.initialize(32, Utils.createFixedRandom());
 
         KeyPair pair = kpg.generateKeyPair();
 
@@ -29,26 +37,31 @@ public class EncryptedPrivateKeyInfoExample {
         byte[] salt = "hello".getBytes(StandardCharsets.UTF_8);
         int iCount = 100;
         String pbeAlgorithm = "PBEWithSHAAnd3-KeyTripleDES-CBC";
-        pbeAlgorithm = "PBEWithSHAAnd3KeyTripleDES";
-        pbeAlgorithm = "PBEWITHMD5andDES";
+//        pbeAlgorithm = "PBEWithSHAAnd3KeyTripleDES";
+//        pbeAlgorithm = "PBEWITHMD5andDES";
+
         PBEKeySpec pbeKeySpec = new PBEKeySpec(password, salt, iCount);
-        SecretKeyFactory secretKeyFact = SecretKeyFactory.getInstance(pbeAlgorithm, "BC");
+
+        SecretKeyFactory secretKeyFact =
+                SecretKeyFactory.getInstance(pbeAlgorithm, "BC");
         Cipher cipher = Cipher.getInstance(pbeAlgorithm, "BC");
 
-        cipher.init(Cipher.WRAP_MODE, secretKeyFact.generateSecret(pbeKeySpec));
+        cipher.init(
+                Cipher.WRAP_MODE,
+                secretKeyFact.generateSecret(pbeKeySpec));
 
         byte[] wrappedKey = cipher.wrap(pair.getPrivate());
 
         AlgorithmParameters ap = cipher.getParameters();
         System.out.println("is algorithm parameters is null ? " + (ap == null));
-
-        if(true) return;
-
+        if (true) return;
         byte[] encodedAp = ap.getEncoded("ASN.1");
         System.out.println(ASN1Dump.dumpAsString(new ASN1InputStream(encodedAp).readObject()));
 
         // create carrier
-        EncryptedPrivateKeyInfo pInfo = new EncryptedPrivateKeyInfo(cipher.getParameters(), wrappedKey);
+        EncryptedPrivateKeyInfo pInfo = new EncryptedPrivateKeyInfo(
+//                ap,
+                wrappedKey);
 
         // unwrapping step - note we only use the password
         pbeKeySpec = new PBEKeySpec(password);

@@ -338,7 +338,11 @@ This also indicates that you are looking at an IMPLICIT tag.
   
 ## Using ASN.1 in Java: Some Real Examples
 - Encoding an IV with ASN.1
-- 
+- Encoding PSS Signature Parameters
+- Encoding Public and Private Keys
+- Using the X509EncodedKeySpec
+- Using EncryptedPrivateKeyInfo and PBE
+
 ## References
 
 - []()

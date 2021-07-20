@@ -1,12 +1,20 @@
 package com.javatmp.demo.crypto.symmetric.example;
 
 import com.javatmp.demo.crypto.symmetric.Utils;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import java.security.Key;
+import java.security.Security;
 
 public class SimpleWrapExample {
+    static {
+        // https://stackoverflow.com/questions/40975510/spring-boot-and-jca-providers
+        if (Security.getProvider(BouncyCastleProvider.PROVIDER_NAME) == null) {
+            Security.addProvider(new BouncyCastleProvider());
+        }
+    }
     public static void main(String[] args) throws Exception {
 
         // create a key to wrap

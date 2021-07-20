@@ -1,6 +1,8 @@
 package com.javatmp.demo.crypto.symmetric.example;
 
 import com.javatmp.demo.crypto.symmetric.Utils;
+import lombok.extern.slf4j.Slf4j;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKeyFactory;
@@ -8,12 +10,21 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import java.security.AlgorithmParameters;
 import java.security.Key;
+import java.security.Security;
 
 /**
  * Example of using PBE with a PBEParameterSpec
  */
+@Slf4j
 public class PBEWithParamsExample {
+    static {
+        // https://stackoverflow.com/questions/40975510/spring-boot-and-jca-providers
+        if (Security.getProvider(BouncyCastleProvider.PROVIDER_NAME) == null) {
+            Security.addProvider(new BouncyCastleProvider());
+        }
+    }
     public static void main(String[] args) throws Exception {
         byte[] input = new byte[]{
                 0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07,
@@ -35,7 +46,8 @@ public class PBEWithParamsExample {
         cEnc.init(Cipher.ENCRYPT_MODE,
                 new SecretKeySpec(keyBytes, "DESede"),
                 new IvParameterSpec(ivBytes));
-
+        AlgorithmParameters algorithmParameters = cEnc.getParameters();
+        log.info("algorithm parameters are : {}", algorithmParameters);
         byte[] out = cEnc.doFinal(input);
 
         // decrypt the data using PBE

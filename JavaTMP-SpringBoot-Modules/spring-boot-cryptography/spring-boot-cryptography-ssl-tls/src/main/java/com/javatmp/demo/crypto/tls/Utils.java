@@ -16,9 +16,9 @@ public class Utils extends com.javatmp.demo.crypto.cms.Utils {
     /**
      * Host name for our examples to use.
      */
-    static final String HOST = "localhost";
+    public static final String HOST = "localhost";
     /**
      * Port number for our examples to use.
      */
-    static final int PORT_NO = 9020;
+    public static final int PORT_NO = 9020;
 }

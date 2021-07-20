@@ -4,17 +4,21 @@ import com.javatmp.demo.crypto.asn1.Utils;
 import org.bouncycastle.asn1.ASN1InputStream;
 import org.bouncycastle.asn1.util.ASN1Dump;
 import org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
-import java.security.KeyFactory;
-import java.security.KeyPair;
-import java.security.KeyPairGenerator;
-import java.security.PublicKey;
+import java.security.*;
 import java.security.spec.X509EncodedKeySpec;
 
 /**
  * Simple example showing use of X509EncodedKeySpec
  */
 public class X509EncodedKeySpecExample {
+    static {
+        // https://stackoverflow.com/questions/40975510/spring-boot-and-jca-providers
+        if(Security.getProvider(BouncyCastleProvider.PROVIDER_NAME) == null) {
+            Security.addProvider(new BouncyCastleProvider());
+        }
+    }
     public static void main(String[] args) throws Exception {
         // create the keys
         KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA", "BC");
