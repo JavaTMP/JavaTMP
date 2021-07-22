@@ -38,12 +38,16 @@ public class CrlDemoApplication {
             CRLCertStoreExample.main(null);
 
             log.info("OCSP Request Generation");
-//            OCSPClientExample.main(null);
+            OCSPClientExample.main(null);
 
             log.info("Generating an OCSP Response");
-//            OCSPResponderExample.main(null);
+            OCSPResponderExample.main(null);
+
             log.info("Validating a Certificate Path");
             CertPathValidatorExample.main(null);
+
+            log.info("Using a PKIXCertPathChecker. Basic example of certificate path validation using a PKIXCertPathChecker");
+            CertPathValidatorWithCheckerExample.main(null);
 
             log.info("Building a Certificate Path Using CertPathBuilder");
             CertPathBuilderExample.main(null);

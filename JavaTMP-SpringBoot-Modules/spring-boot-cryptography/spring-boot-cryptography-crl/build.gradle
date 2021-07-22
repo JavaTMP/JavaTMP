@@ -1,5 +1,11 @@
-
-dependencies {
-    api project(":spring-boot-cryptography:spring-boot-cryptography-certificate")
-
+buildscript {
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+        }
+    }
 }
+    dependencies {
+        api project(":spring-boot-cryptography:spring-boot-cryptography-certificate")
+
+    }

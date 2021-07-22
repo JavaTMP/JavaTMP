@@ -2,6 +2,7 @@ package com.javatmp.demo.crypto.crl.example;
 
 import com.javatmp.demo.crypto.crl.Utils;
 import org.bouncycastle.asn1.ASN1Enumerated;
+import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x509.CRLNumber;
 import org.bouncycastle.asn1.x509.CRLReason;
 import org.bouncycastle.asn1.x509.Extension;
@@ -38,11 +39,12 @@ public class X509CRLExample {
                                     BigInteger revokedSerialNumber)
             throws Exception {
         Date now = new Date();
-//        X509v2CRLBuilder crlGen = new X509v2CRLBuilder(
-//                new X500Name(caCert.getSubjectX500Principal().getName()),
-//                now
-//        );
-        X509v2CRLBuilder crlGen = new JcaX509v2CRLBuilder(
+        X509v2CRLBuilder crlGen = new X509v2CRLBuilder(
+                new X500Name(caCert.getSubjectX500Principal().getName()),
+                now
+        );
+
+        crlGen = new JcaX509v2CRLBuilder(
                 caCert.getSubjectX500Principal(),
                 now
         );
