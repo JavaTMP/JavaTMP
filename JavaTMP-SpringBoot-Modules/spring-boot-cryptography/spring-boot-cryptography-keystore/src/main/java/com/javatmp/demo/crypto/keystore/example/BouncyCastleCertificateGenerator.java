@@ -1,4 +1,4 @@
-package com.javatmp.demo.crypto.crl.example;
+package com.javatmp.demo.crypto.keystore.example;
 
 import org.bouncycastle.asn1.ASN1Encodable;
 import org.bouncycastle.asn1.DERSequence;

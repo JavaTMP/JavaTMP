@@ -1,4 +1,4 @@
-package com.javatmp.demo.crypto.crl.example;
+package com.javatmp.demo.crypto.certificate.example;
 
 import org.bouncycastle.asn1.ASN1ObjectIdentifier;
 import org.bouncycastle.asn1.x500.X500Name;
