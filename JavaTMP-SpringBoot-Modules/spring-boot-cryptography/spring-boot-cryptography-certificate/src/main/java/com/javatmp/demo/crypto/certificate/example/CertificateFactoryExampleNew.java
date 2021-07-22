@@ -14,7 +14,7 @@ import java.security.cert.X509Certificate;
 /**
  * Basic example of using a CertificateFactory.
  */
-public class CertificateFactoryExample {
+public class CertificateFactoryExampleNew {
     static {
         // https://stackoverflow.com/questions/40975510/spring-boot-and-jca-providers
         if (Security.getProvider(BouncyCastleProvider.PROVIDER_NAME) == null) {
@@ -36,7 +36,23 @@ public class CertificateFactoryExample {
         X509Certificate x509CertificateSrc = null;
 
         x509CertificateSrc =
-                X509V1CreateExample.generateV1Certificate(pair);
+                X509V1CreateExampleNew.generateCertificate("CN=Test Certificate",
+                        pair, 100, "SHA256WithRSAEncryption");
+        bOut = new ByteArrayOutputStream();
+        bOut.write(x509CertificateSrc.getEncoded());
+        bOut.close();
+        in = new ByteArrayInputStream(bOut.toByteArray());
+        // read the certificate
+        x509Cert = (X509Certificate) fact.generateCertificate(in);
+
+        System.out.println("issuer: " + x509Cert.getIssuerX500Principal());
+
+        x509CertificateSrc =
+                X509V1CreateExampleNew.generateV1Certificate(pair,
+                        "CN=Test Certificate",
+                        "CN=Test Certificate",
+                        100,
+                        "SHA256WithRSAEncryption");
         bOut = new ByteArrayOutputStream();
         bOut.write(x509CertificateSrc.getEncoded());
         bOut.close();

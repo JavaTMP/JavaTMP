@@ -67,10 +67,14 @@ public class X509V1CreateExampleNew {
         Date to = new Date(from.getTime() + validityDays * 86400000L);
         BigInteger sn = new BigInteger(64, new SecureRandom());
 
-        final X509v1CertificateBuilder certBuilder = new JcaX509v1CertificateBuilder(
-                new X500Name(issuer), sn, from, to,
-                new X500Name(subject), keyPair.getPublic());
-        final ContentSigner signer = new JcaContentSignerBuilder(signatureAlgorithm).setProvider("BC").build(keyPair.getPrivate());
+        final X509v1CertificateBuilder certBuilder =
+                new JcaX509v1CertificateBuilder(
+                        new X500Name(issuer), sn, from, to,
+                        new X500Name(subject), keyPair.getPublic());
+        final ContentSigner signer =
+                new JcaContentSignerBuilder(signatureAlgorithm)
+                        .setProvider(BouncyCastleProvider.PROVIDER_NAME)
+                        .build(keyPair.getPrivate());
         final X509CertificateHolder certHolder = certBuilder.build(signer);
         return new JcaX509CertificateConverter()
                 .setProvider(BouncyCastleProvider.PROVIDER_NAME)

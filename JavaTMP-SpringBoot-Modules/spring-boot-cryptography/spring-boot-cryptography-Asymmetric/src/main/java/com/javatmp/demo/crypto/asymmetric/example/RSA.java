@@ -11,6 +11,7 @@ import java.security.spec.RSAPublicKeySpec;
 
 class RSA {
 
+    // https://stackoverflow.com/questions/18757114/java-security-rsa-public-key-private-key-code-issue
     public static void main(String[] args) throws Exception {
         generateKeys();
         rsaEncrypt("plaintext.txt", "encrypted.txt");

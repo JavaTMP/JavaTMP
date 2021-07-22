@@ -345,4 +345,4 @@ This also indicates that you are looking at an IMPLICIT tag.
 
 ## References
 
-- []()
+- [https://letsencrypt.org/docs/a-warm-welcome-to-asn1-and-der/](https://letsencrypt.org/docs/a-warm-welcome-to-asn1-and-der/)

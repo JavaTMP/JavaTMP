@@ -10,7 +10,8 @@ import org.bouncycastle.asn1.x509.GeneralNames;
 import org.bouncycastle.asn1.x509.X509Extension;
 import org.bouncycastle.asn1.x509.X509Extensions;
 import org.bouncycastle.jce.PKCS10CertificationRequest;
-import org.bouncycastle.openssl.PEMWriter;
+import org.bouncycastle.util.io.pem.PemObject;
+import org.bouncycastle.util.io.pem.PemWriter;
 
 import javax.security.auth.x500.X500Principal;
 import java.io.OutputStreamWriter;
@@ -21,28 +22,25 @@ import java.util.Vector;
 /**
  * Generation of a basic PKCS #10 request with an extension.
  */
-public class PKCS10ExtensionExample
-{
-    public static PKCS10CertificationRequest generateRequest(
-        KeyPair pair)
-        throws Exception
-    {
+public class PKCS10ExtensionExample {
+    public static PKCS10CertificationRequest generateRequest(KeyPair pair)
+            throws Exception {
         // create a SubjectAlternativeName extension value
-        GeneralNames  subjectAltNames = new GeneralNames(
-                 new GeneralName(GeneralName.rfc822Name, "test@test.test"));
+        GeneralNames subjectAltNames = new GeneralNames(
+                new GeneralName(GeneralName.rfc822Name, "test@test.test"));
 
         // create the extensions object and add it as an attribute
-        Vector  oids = new Vector();
-        Vector	values = new Vector();
+        Vector oids = new Vector();
+        Vector values = new Vector();
 
         oids.add(X509Extensions.SubjectAlternativeName);
         values.add(new X509Extension(false, new DEROctetString(subjectAltNames)));
 
-        X509Extensions	extensions = new X509Extensions(oids, values);
+        X509Extensions extensions = new X509Extensions(oids, values);
 
-        Attribute  attribute = new Attribute(
-                                 PKCSObjectIdentifiers.pkcs_9_at_extensionRequest,
-                                 new DERSet(extensions));
+        Attribute attribute = new Attribute(
+                PKCSObjectIdentifiers.pkcs_9_at_extensionRequest,
+                new DERSet(extensions));
 
         return new PKCS10CertificationRequest(
                 "SHA256withRSA",
@@ -53,23 +51,22 @@ public class PKCS10ExtensionExample
     }
 
     public static void main(
-        String[]    args)
-        throws Exception
-    {
+            String[] args)
+            throws Exception {
         // create the keys
         KeyPairGenerator kpGen = KeyPairGenerator.getInstance("RSA", "BC");
 
         kpGen.initialize(1024, Utils.createFixedRandom());
 
-        KeyPair          pair = kpGen.generateKeyPair();
+        KeyPair pair = kpGen.generateKeyPair();
 
-        PKCS10CertificationRequest  request = generateRequest(pair);
+        PKCS10CertificationRequest request = generateRequest(pair);
 
-        PEMWriter        pemWrt = new PEMWriter(new OutputStreamWriter(System.out));
+        PemWriter pemWrt = new PemWriter(new OutputStreamWriter(System.out));
 
-        if(true) return;
-//        pemWrt.writeObject(request);
-
-//        pemWrt.close();
+        pemWrt.writeObject(
+                new PemObject("CERTIFICATE REQUEST",
+                        request.getEncoded()));
+        pemWrt.close();
     }
 }

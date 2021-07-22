@@ -44,22 +44,31 @@ public class CertificateDemoApplication {
             log.info("Basic example of using a CertificateFactory");
             CertificateFactoryExample.main(null);
 
+            log.info("Basic example of using a CertificateFactory New");
+            CertificateFactoryExampleNew.main(null);
+
             log.info("Reading Multiple Certificates");
             MultipleCertificateExample.main(null);
 
             log.info("Creating a Certification Request");
             PKCS10CertRequestExample.main(null);
 
-            log.info(" Adding Extensions to a Certification Request");
+            log.info("Creating a Certification Request New");
+            PKCS10CertRequestExampleNew.main(null);
+
+            log.info("Adding Extensions to a Certification Request");
             PKCS10ExtensionExample.main(null);
 
+            log.info("Adding Extensions to a Certification Request New");
+            PKCS10ExtensionExampleNew.main(null);
+
             log.info("Creating a Certificate from a Certification Request");
-//            PKCS10CertCreateExample.main(null);
+            PKCS10CertCreateExample.main(null);
 
             log.info("Writing a CertPath");
-//            CertPathExample.main(null);
+            CertPathExample.main(null);
             log.info("Using a CertStore and a X509CertSelector");
-//            CertStoreExample.main(null);
+            CertStoreExample.main(null);
 
         };
     }
