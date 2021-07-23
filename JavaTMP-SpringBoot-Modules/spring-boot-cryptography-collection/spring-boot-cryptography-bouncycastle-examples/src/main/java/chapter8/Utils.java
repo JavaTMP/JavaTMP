@@ -1,26 +1,31 @@
 package chapter8;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.bouncycastle.openssl.PEMWriter;
 import org.bouncycastle.openssl.jcajce.JcaPEMWriter;
 
+import javax.security.auth.x500.X500PrivateCredential;
 import java.io.PrintWriter;
 import java.security.KeyPair;
 import java.security.PrivateKey;
 import java.security.Security;
 import java.security.cert.X509Certificate;
 
-import javax.security.auth.x500.X500PrivateCredential;
-
 /**
  * Chapter 8 Utils
  */
 public class Utils extends chapter7.Utils
 {
+    static {
+        // https://stackoverflow.com/questions/40975510/spring-boot-and-jca-providers
+        if (Security.getProvider(BouncyCastleProvider.PROVIDER_NAME) == null) {
+            Security.addProvider(new BouncyCastleProvider());
+        }
+    }
+
     public static String ROOT_ALIAS = "root";
     public static String INTERMEDIATE_ALIAS = "intermediate";
     public static String END_ENTITY_ALIAS = "end";
-    
+
     /**
      * Generate a X500PrivateCredential for the root entity.
      */
@@ -29,7 +34,7 @@ public class Utils extends chapter7.Utils
     {
         KeyPair         rootPair = generateRSAKeyPair();
         X509Certificate rootCert = generateRootCert(rootPair);
-        
+
         return new X500PrivateCredential(rootCert, rootPair.getPrivate(), ROOT_ALIAS);
     }
 
@@ -54,7 +59,7 @@ public class Utils extends chapter7.Utils
         writer.writeObject(endEntityCredential.getCertificate());
         writer.close();
     }
-    
+
     /**
      * Generate a X500PrivateCredential for the intermediate entity.
      */
@@ -65,10 +70,10 @@ public class Utils extends chapter7.Utils
     {
         KeyPair         interPair = generateRSAKeyPair();
         X509Certificate interCert = generateIntermediateCert(interPair.getPublic(), caKey, caCert);
-        
+
         return new X500PrivateCredential(interCert, interPair.getPrivate(), INTERMEDIATE_ALIAS);
     }
-    
+
     /**
      * Generate a X500PrivateCredential for the end entity.
      */
@@ -79,7 +84,7 @@ public class Utils extends chapter7.Utils
     {
         KeyPair         endPair = generateRSAKeyPair();
         X509Certificate endCert = generateEndEntityCert(endPair.getPublic(), caKey, caCert);
-        
+
         return new X500PrivateCredential(endCert, endPair.getPrivate(), END_ENTITY_ALIAS);
     }
 }

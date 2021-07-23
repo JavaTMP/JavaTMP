@@ -1,13 +1,8 @@
-bootJar {
-    enabled = false
-    mainClass = ''
-}
-
-springBoot {
-}
 
 dependencies {
-    implementation group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.69'
+    implementation group: 'org.bouncycastle', name: 'bc-fips', version: '1.0.2.1'
+
+//    implementation group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.69'
     implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.69'
     implementation group: 'org.bouncycastle', name: 'bcprov-ext-jdk15on', version: '1.69'
     implementation group: 'org.bouncycastle', name: 'bcpg-jdk15on', version: '1.69'
@@ -15,6 +10,4 @@ dependencies {
     implementation group: 'org.bouncycastle', name: 'bctsp-jdk15on', version: '1.46'
     implementation group: 'org.bouncycastle', name: 'bcmail-jdk15on', version: '1.69'
     implementation group: 'javax.mail', name: 'mail', version: '1.4.7'
-    implementation group: 'com.maxmind.geoip2', name: 'geoip2', version: '2.8.0'
-
 }

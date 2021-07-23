@@ -1,19 +1,26 @@
 package com.javatmp.demo.crypto.keystore.example;
 
 import com.javatmp.demo.crypto.keystore.Utils;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import javax.security.auth.x500.X500PrivateCredential;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.security.KeyStore;
+import java.security.Security;
 import java.security.cert.Certificate;
 import java.util.Enumeration;
 
 /**
  * Example of basic use of a KeyStore.
  */
-public class JKSStoreExample
-{
+public class JKSStoreExample {
+    static {
+        // https://stackoverflow.com/questions/40975510/spring-boot-and-jca-providers
+        if (Security.getProvider(BouncyCastleProvider.PROVIDER_NAME) == null) {
+            Security.addProvider(new BouncyCastleProvider());
+        }
+    }
     public static char[] keyPassword = "keyPassword".toCharArray();
 
     public static KeyStore createKeyStore()

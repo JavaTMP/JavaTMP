@@ -1,18 +1,23 @@
 package com.javatmp.demo.crypto.keystore.example;
 
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+
 import java.io.FileOutputStream;
 import java.security.KeyStore;
+import java.security.Security;
 
 /**
  * Create some keystore files in the current directory.
  */
-public class KeyStoreFileUtility
-{
-    public static void main(
-        String[]    args)
-        throws Exception
-    {
-        char[]   password = "storePassword".toCharArray();
+public class KeyStoreFileUtility {
+    static {
+        // https://stackoverflow.com/questions/40975510/spring-boot-and-jca-providers
+        if (Security.getProvider(BouncyCastleProvider.PROVIDER_NAME) == null) {
+            Security.addProvider(new BouncyCastleProvider());
+        }
+    }
+    public static void main(String[] args) throws Exception {
+        char[] password = "storePassword".toCharArray();
 
         // create and save a JKS store
         KeyStore store = JKSStoreExample.createKeyStore();
