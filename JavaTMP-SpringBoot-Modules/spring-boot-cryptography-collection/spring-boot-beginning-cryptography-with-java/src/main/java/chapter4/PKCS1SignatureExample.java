@@ -15,9 +15,9 @@ public class PKCS1SignatureExample
         throws Exception
     {
         KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA", "BC");
-        
+
         keyGen.initialize(512, new SecureRandom());
-        
+
         KeyPair             keyPair = keyGen.generateKeyPair();
         Signature           signature = Signature.getInstance("SHA1withRSA", "BC");
 
@@ -29,7 +29,7 @@ public class PKCS1SignatureExample
         signature.update(message);
 
         byte[]  sigBytes = signature.sign();
-        
+
         // verify a signature
         signature.initVerify(keyPair.getPublic());
 

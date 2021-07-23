@@ -16,11 +16,11 @@ public class SSLServerWithClientAuthExample
     {
         SSLServerSocketFactory fact = (SSLServerSocketFactory)SSLServerSocketFactory.getDefault();
         SSLServerSocket        sSock = (SSLServerSocket)fact.createServerSocket(Utils.PORT_NO);
-    
+
         sSock.setNeedClientAuth(true);
-        
+
         SSLSocket sslSock = (SSLSocket)sSock.accept();
-        
+
         doProtocol(sslSock);
     }
 }

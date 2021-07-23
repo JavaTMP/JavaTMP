@@ -14,9 +14,9 @@ public class BasicPSSExample
         throws Exception
     {
         KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA", "BC");
-        
+
         keyGen.initialize(512, new SecureRandom());
-        
+
         KeyPair             keyPair = keyGen.generateKeyPair();
         Signature           signature = Signature.getInstance("SHA1withRSAandMGF1", "BC");
 
@@ -28,10 +28,10 @@ public class BasicPSSExample
         signature.update(message);
 
         byte[]  sigBytes = signature.sign();
-        
+
         // verify a signature
         signature.initVerify(keyPair.getPublic());
-        
+
         // set the parameters
         signature.setParameter(new PSSParameterSpec("SHA-1", "MGF1", MGF1ParameterSpec.SHA1, 20, 1));
 

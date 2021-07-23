@@ -34,7 +34,7 @@ public class ThreeWayDHExample
         KeyPair      bPair = keyGen.generateKeyPair();
         KeyAgreement cKeyAgree = KeyAgreement.getInstance("DH", "BC");
         KeyPair      cPair = keyGen.generateKeyPair();
-        
+
         // two party agreement
         aKeyAgree.init(aPair.getPrivate());
         bKeyAgree.init(bPair.getPrivate());
@@ -53,7 +53,7 @@ public class ThreeWayDHExample
         byte[] aShared = hash.digest(aKeyAgree.generateSecret());
         byte[] bShared = hash.digest(bKeyAgree.generateSecret());
         byte[] cShared = hash.digest(cKeyAgree.generateSecret());
-        
+
         System.out.println(Utils.toHex(aShared));
         System.out.println(Utils.toHex(bShared));
         System.out.println(Utils.toHex(cShared));

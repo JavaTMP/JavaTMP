@@ -1,5 +1,0 @@
-
-dependencies {
-    api project(":spring-boot-cryptography:spring-boot-cryptography-asn1")
-    api group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.69'
-}

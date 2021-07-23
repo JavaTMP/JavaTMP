@@ -1,11 +1,10 @@
 package chapter4;
 
+import javax.crypto.KeyAgreement;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.MessageDigest;
 import java.security.spec.ECGenParameterSpec;
-
-import javax.crypto.KeyAgreement;
 
 public class NamedCurveExample
 {
@@ -15,7 +14,7 @@ public class NamedCurveExample
     {
         KeyPairGenerator   keyGen = KeyPairGenerator.getInstance("ECDH", "BC");
         ECGenParameterSpec ecSpec = new ECGenParameterSpec("prime192v1");
-        
+
         keyGen.initialize(ecSpec, Utils.createFixedRandom());
 
         // set up
@@ -23,7 +22,7 @@ public class NamedCurveExample
         KeyPair      aPair = keyGen.generateKeyPair();
         KeyAgreement bKeyAgree = KeyAgreement.getInstance("ECDH", "BC");
         KeyPair      bPair = keyGen.generateKeyPair();
-        
+
         // two party agreement
         aKeyAgree.init(aPair.getPrivate());
         bKeyAgree.init(bPair.getPrivate());
@@ -35,7 +34,7 @@ public class NamedCurveExample
         MessageDigest	hash = MessageDigest.getInstance("SHA1", "BC");
         byte[] aShared = hash.digest(aKeyAgree.generateSecret());
         byte[] bShared = hash.digest(bKeyAgree.generateSecret());
-        
+
         System.out.println(Utils.toHex(aShared));
         System.out.println(Utils.toHex(bShared));
     }

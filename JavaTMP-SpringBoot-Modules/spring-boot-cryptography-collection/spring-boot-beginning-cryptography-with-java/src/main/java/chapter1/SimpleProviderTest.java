@@ -1,24 +1,24 @@
 package chapter1;
 
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+
+import java.security.Provider;
 import java.security.Security;
 
 /**
- * Basic class to confirm the Bouncy Castle provider is 
+ * Basic class to confirm the Bouncy Castle provider is
  * installed.
  */
-public class SimpleProviderTest
-{
-    public static void main(String[] args)
-    {
-        String providerName = "BC";
-        
-        if (Security.getProvider(providerName) == null)
-        {
+public class SimpleProviderTest {
+    public static void main(String[] args) {
+        Security.addProvider(new BouncyCastleProvider());
+        String providerName = BouncyCastleProvider.PROVIDER_NAME;
+        Provider bcProvider = Security.getProvider(providerName);
+        if (bcProvider == null) {
             System.out.println(providerName + " provider not installed");
-        }
-        else
-        {
+        } else {
             System.out.println(providerName + " is installed.");
+            System.out.println("get name is = " + bcProvider.getName());
         }
     }
 }

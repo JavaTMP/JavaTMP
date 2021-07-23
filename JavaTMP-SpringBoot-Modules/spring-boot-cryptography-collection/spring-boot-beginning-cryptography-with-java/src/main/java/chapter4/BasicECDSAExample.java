@@ -17,14 +17,14 @@ public class BasicECDSAExample
     {
         KeyPairGenerator keyGen = KeyPairGenerator.getInstance("ECDSA", "BC");
         ECGenParameterSpec ecSpec = new ECGenParameterSpec("prime192v1");
-        
+
         keyGen.initialize(ecSpec, new SecureRandom());
-        
+
         KeyPair             keyPair = keyGen.generateKeyPair();
         Signature           signature = Signature.getInstance("ECDSA", "BC");
 
         // generate a signature
-        
+
         signature.initSign(keyPair.getPrivate(), Utils.createFixedRandom());
 
         byte[] message = new byte[] { (byte)'a', (byte)'b', (byte)'c' };
@@ -32,9 +32,9 @@ public class BasicECDSAExample
         signature.update(message);
 
         byte[]  sigBytes = signature.sign();
-        
+
         // verify a signature
-        
+
         signature.initVerify(keyPair.getPublic());
 
         signature.update(message);

@@ -1,9 +1,12 @@
 package chapter9;
 
-import java.io.*;
-
 import org.bouncycastle.cms.CMSException;
 import org.bouncycastle.cms.CMSProcessable;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
  * CMSProcessable that handles File objects.
@@ -13,10 +16,10 @@ public class CMSProcessableFile
 {
     private File file;
     private static final int BUF_SIZE = 4096;
-    
+
     /**
      * Base constructor.
-     * 
+     *
      * @param file a File object representing the file we want processed.
      */
     public CMSProcessableFile(
@@ -24,10 +27,10 @@ public class CMSProcessableFile
     {
         this.file = file;
     }
-    
+
     /**
      * Write the contents of the file to the passed in OutputStream
-     * 
+     *
      * @param out the OutputStream passed in by the CMS API.
      */
     public void write(
@@ -36,13 +39,13 @@ public class CMSProcessableFile
     {
         FileInputStream fIn = new FileInputStream(file);
         byte[]          buf = new byte[BUF_SIZE];
-        
+
         int count = 0;
         while ((count = fIn.read(buf)) > 0)
         {
             out.write(buf, 0, count);
         }
-        
+
         fIn.close();
     }
 

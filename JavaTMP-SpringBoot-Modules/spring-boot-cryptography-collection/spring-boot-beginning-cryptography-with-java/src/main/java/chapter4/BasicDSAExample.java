@@ -12,9 +12,9 @@ public class BasicDSAExample
         throws Exception
     {
         KeyPairGenerator keyGen = KeyPairGenerator.getInstance("DSA", "BC");
-        
+
         keyGen.initialize(512, new SecureRandom());
-        
+
         KeyPair             keyPair = keyGen.generateKeyPair();
         Signature           signature = Signature.getInstance("DSA", "BC");
 
@@ -26,7 +26,7 @@ public class BasicDSAExample
         signature.update(message);
 
         byte[]  sigBytes = signature.sign();
-        
+
         // verify a signature
         signature.initVerify(keyPair.getPublic());
 

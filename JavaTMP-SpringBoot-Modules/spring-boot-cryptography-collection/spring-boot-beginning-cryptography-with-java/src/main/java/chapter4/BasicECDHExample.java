@@ -41,7 +41,7 @@ public class BasicECDHExample
         KeyPair      aPair = keyGen.generateKeyPair();
         KeyAgreement bKeyAgree = KeyAgreement.getInstance("ECDH", "BC");
         KeyPair      bPair = keyGen.generateKeyPair();
-        
+
         // two party agreement
         aKeyAgree.init(aPair.getPrivate());
         bKeyAgree.init(bPair.getPrivate());
@@ -53,7 +53,7 @@ public class BasicECDHExample
         MessageDigest	hash = MessageDigest.getInstance("SHA1", "BC");
         byte[] aShared = hash.digest(aKeyAgree.generateSecret());
         byte[] bShared = hash.digest(bKeyAgree.generateSecret());
-        
+
         System.out.println(Utils.toHex(aShared));
         System.out.println(Utils.toHex(bShared));
     }

@@ -6,61 +6,48 @@ import java.security.cert.CertPathValidatorException;
 import java.security.cert.Certificate;
 import java.security.cert.PKIXCertPathChecker;
 import java.security.cert.X509Certificate;
-import java.util.*;
+import java.util.Collection;
+import java.util.Set;
 
-class PathChecker
-    extends PKIXCertPathChecker
-{
-    private KeyPair         responderPair;
-    private X509Certificate caCert;
-    private BigInteger      revokedSerialNumber;
-    
+class PathChecker extends PKIXCertPathChecker {
+    private final KeyPair responderPair;
+    private final X509Certificate caCert;
+    private final BigInteger revokedSerialNumber;
+
     public PathChecker(
-        KeyPair         responderPair,
-        X509Certificate caCert,
-        BigInteger      revokedSerialNumber)
-    {
+            KeyPair responderPair,
+            X509Certificate caCert,
+            BigInteger revokedSerialNumber) {
         this.responderPair = responderPair;
         this.caCert = caCert;
         this.revokedSerialNumber = revokedSerialNumber;
     }
-    
-    public void init(boolean forwardChecking)
-        throws CertPathValidatorException
-    {
+
+    public void init(boolean forwardChecking) throws CertPathValidatorException {
         // ignore
     }
 
-    public boolean isForwardCheckingSupported()
-    {
+    public boolean isForwardCheckingSupported() {
         return true;
     }
 
-    public Set getSupportedExtensions()
-    {
+    public Set<String> getSupportedExtensions() {
         return null;
     }
 
     public void check(Certificate cert, Collection extensions)
-        throws CertPathValidatorException
-    {
-        X509Certificate x509Cert = (X509Certificate)cert;
-        
-        try
-        {
+            throws CertPathValidatorException {
+        X509Certificate x509Cert = (X509Certificate) cert;
+
+        try {
             String message = OCSPResponderExample.getStatusMessage(responderPair, caCert, revokedSerialNumber, x509Cert);
-            
-            if (message.endsWith("good"))
-            {
+
+            if (message.endsWith("good")) {
                 System.out.println(message);
-            }
-            else
-            {
+            } else {
                 throw new CertPathValidatorException(message);
             }
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             throw new CertPathValidatorException("exception verifying certificate: " + e, e);
         }
     }

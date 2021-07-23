@@ -12,13 +12,11 @@ public class Utils extends chapter5.Utils
     /**
      * Create a random 1024 bit RSA key pair
      */
-    public static KeyPair generateRSAKeyPair()
-        throws Exception
-	{
+    public static KeyPair generateRSAKeyPair() throws Exception {
         KeyPairGenerator  kpGen = KeyPairGenerator.getInstance("RSA", "BC");
-    
+
         kpGen.initialize(1024, new SecureRandom());
-    
+
         return kpGen.generateKeyPair();
 	}
 }
