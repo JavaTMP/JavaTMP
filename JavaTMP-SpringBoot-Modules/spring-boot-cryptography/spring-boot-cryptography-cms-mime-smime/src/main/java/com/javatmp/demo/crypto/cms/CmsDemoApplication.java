@@ -29,8 +29,8 @@ public class CmsDemoApplication {
         return args -> {
             log.info("*** Start Spring Boot Project ***");
 
-            log.info("Example of generating a detached signature");
-//            SignedDataExample.main(null);
+            log.info("Creating and Validating a Detached Signature ");
+            SignedDataExample.main(null);
             log.info("Creating and Decoding CMS Enveloped-Data");
 //            KeyTransEnvelopedDataExample.main(null);
             log.info("Using Key-Encrypted Keys with Enveloped-Data");
