@@ -21,6 +21,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class BouncyCastleSelfSign {
+
     public static Certificate selfSign(KeyPair keyPair, String subjectDN) throws OperatorCreationException, CertificateException, IOException, CertificateException {
         Provider bcProvider = new BouncyCastleProvider();
         Security.addProvider(bcProvider);
@@ -41,7 +42,8 @@ public class BouncyCastleSelfSign {
 
         ContentSigner contentSigner = new JcaContentSignerBuilder(signatureAlgorithm).build(keyPair.getPrivate());
 
-        JcaX509v3CertificateBuilder certBuilder = new JcaX509v3CertificateBuilder(dnName, certSerialNumber, startDate, endDate, dnName, keyPair.getPublic());
+        JcaX509v3CertificateBuilder certBuilder = new JcaX509v3CertificateBuilder(
+                dnName, certSerialNumber, startDate, endDate, dnName, keyPair.getPublic());
 
         // Extensions --------------------------
 
