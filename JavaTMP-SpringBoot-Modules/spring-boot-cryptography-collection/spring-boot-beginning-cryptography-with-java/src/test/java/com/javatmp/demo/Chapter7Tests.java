@@ -8,7 +8,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.security.Security;
 
-@SpringBootTest
 @Slf4j
 public class Chapter7Tests {
     static {

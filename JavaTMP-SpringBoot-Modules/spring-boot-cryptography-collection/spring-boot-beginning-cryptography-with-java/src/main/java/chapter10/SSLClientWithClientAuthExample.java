@@ -35,9 +35,7 @@ public class SSLClientWithClientAuthExample
         return sslContext;
     }
 
-    public static void main(
-        String[] args)
-        throws Exception
+    public static void main(String[] args) throws Exception
     {
 		SSLContext       sslContext = createSSLContext();
 		SSLSocketFactory fact = sslContext.getSocketFactory();
