@@ -44,16 +44,12 @@ public class PKCS10CertCreateExample {
         // create the certification request
         KeyPair pair = Utils.generateRSAKeyPair();
 
-        PKCS10CertificationRequest request = PKCS10ExtensionExampleNew.generateRequest(pair);
+        PKCS10CertificationRequest request = PKCS10ExtensionExample.generateRequestV2(pair);
 
         // create a root certificate
         KeyPair rootPair = Utils.generateRSAKeyPair();
-        X509Certificate rootCert = X509V1CreateExampleNew.generateV1Certificate(
-                rootPair,
-                "CN=Test Certificate",
-                "CN=Test Certificate",
-                100,
-                "SHA256WithRSAEncryption"
+        X509Certificate rootCert = X509V1CreateExample.generateV1CertificateV3(
+                rootPair
         );
 
         ContentVerifierProvider contentVerifierProvider =

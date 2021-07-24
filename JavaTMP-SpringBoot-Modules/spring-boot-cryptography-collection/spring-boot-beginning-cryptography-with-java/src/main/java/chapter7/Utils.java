@@ -1,5 +1,6 @@
 package chapter7;
 
+import chapter6.X509V1CreateExample;
 import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x509.*;
 import org.bouncycastle.cert.X509CertificateHolder;
@@ -38,9 +39,8 @@ public class Utils extends chapter6.Utils {
      */
     public static X509Certificate generateRootCertOld(KeyPair pair)
             throws Exception {
-        return X509V1CreateExampleNew
-                .generateV1Certificate(pair,"CN=Test CA Certificate", "CN=Test CA Certificate",
-                VALIDITY_PERIOD / 24 * 60 * 60 * 1000, "SHA1WithRSAEncryption");
+        return X509V1CreateExample
+                .generateV1CertificateV3(pair);
     }
 
     /**

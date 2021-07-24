@@ -31,7 +31,7 @@ public class CertPathExample {
 
         byte[] encoded = certPath.getEncoded("PEM");
 
-        System.out.println(toString(encoded));
+        System.out.println(Utils.toString(encoded));
 
         // re-read the CertPath
         CertPath newCertPath = fact.generateCertPath(

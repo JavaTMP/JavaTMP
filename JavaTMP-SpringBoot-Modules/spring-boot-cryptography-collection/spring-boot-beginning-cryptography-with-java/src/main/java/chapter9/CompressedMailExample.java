@@ -26,13 +26,16 @@ public class CompressedMailExample {
         MimeBodyPart comPart = gen.generate(dataPart, new ZlibCompressor());
 
         // create the mail message
-        MimeMessage mail = Utils.createMimeMessage("example compressed message", comPart.getContent(), comPart.getContentType());
+        MimeMessage mail = Utils
+                .createMimeMessage("example compressed message", comPart.getContent(),
+                        comPart.getContentType());
 
         // create the enveloped object from the mail message
         SMIMECompressed compressed = new SMIMECompressed(mail);
 
         // uncompression step
-        MimeBodyPart recoveredPart = SMIMEUtil.toMimeBodyPart(compressed.getContent(new ZlibExpanderProvider()));
+        MimeBodyPart recoveredPart = SMIMEUtil
+                .toMimeBodyPart(compressed.getContent(new ZlibExpanderProvider()));
 
         // content display step
         System.out.print("Content: ");

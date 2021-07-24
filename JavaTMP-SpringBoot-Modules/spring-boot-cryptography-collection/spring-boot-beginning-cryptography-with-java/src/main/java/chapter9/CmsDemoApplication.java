@@ -16,7 +16,6 @@ import java.security.Security;
 @SpringBootApplication
 @Slf4j
 public class CmsDemoApplication {
-
     public static void main(String[] args) {
         // https://stackoverflow.com/questions/40975510/spring-boot-and-jca-providers
         Security.addProvider(new BouncyCastleProvider());

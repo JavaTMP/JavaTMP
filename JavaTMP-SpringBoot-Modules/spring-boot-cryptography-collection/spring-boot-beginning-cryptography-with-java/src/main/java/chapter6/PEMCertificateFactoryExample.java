@@ -36,7 +36,7 @@ public class PEMCertificateFactoryExample
 
         bOut.close();
 
-        System.out.println(toString(bOut.toByteArray()));
+        System.out.println(Utils.toString(bOut.toByteArray()));
 
         InputStream in = new ByteArrayInputStream(bOut.toByteArray());
 

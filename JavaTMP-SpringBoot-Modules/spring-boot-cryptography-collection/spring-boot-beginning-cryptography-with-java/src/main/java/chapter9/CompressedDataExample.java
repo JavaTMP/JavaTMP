@@ -11,17 +11,14 @@ import java.util.Arrays;
 /**
  * Basic use of CMS compressed-data.
  */
-public class CompressedDataExample
-{
-    public static void main(String args[])
-        throws Exception
-    {
+public class CompressedDataExample {
+    public static void main(String[] args) throws Exception {
         // set up the generator
         CMSCompressedDataGenerator gen = new CMSCompressedDataGenerator();
 
         //compress the data
-        CMSProcessableByteArray  data = new CMSProcessableByteArray(
-                                                    "Hello world!".getBytes());
+        CMSProcessableByteArray data = new CMSProcessableByteArray(
+                "Hello world!".getBytes());
 
         CMSCompressedData compressed = gen.generate(data,
                 new ZlibCompressor());
@@ -32,12 +29,9 @@ public class CompressedDataExample
         byte[] recData = compressed.getContent(new ZlibExpanderProvider());
 
         // compare uncompressed data to the original data
-        if (Arrays.equals((byte[])data.getContent(), recData))
-        {
+        if (Arrays.equals((byte[]) data.getContent(), recData)) {
             System.out.println("data recovery succeeded");
-        }
-        else
-        {
+        } else {
             System.out.println("data recovery failed");
         }
     }

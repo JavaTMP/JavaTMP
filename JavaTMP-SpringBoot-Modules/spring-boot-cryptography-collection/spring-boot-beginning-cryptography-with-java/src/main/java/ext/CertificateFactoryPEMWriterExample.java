@@ -1,6 +1,7 @@
 package ext;
 
 import chapter6.Utils;
+import chapter6.X509V1CreateExample;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.util.io.pem.PemObject;
 import org.bouncycastle.util.io.pem.PemWriter;
@@ -40,8 +41,7 @@ public class CertificateFactoryPEMWriterExample {
         X509Certificate x509CertificateSrc = null;
 
         x509CertificateSrc =
-                X509V1CreateExampleNew.generateCertificate("CN=Test Certificate",
-                        pair, 100, "SHA256WithRSAEncryption");
+                X509V1CreateExample.generateV1CertificateV3(pair);
         bOut = new ByteArrayOutputStream();
         pemWrt = new PemWriter(new OutputStreamWriter(bOut));
         // https://www.programcreek.com/java-api-examples/?api=org.bouncycastle.util.io.pem.PemWriter
@@ -55,11 +55,7 @@ public class CertificateFactoryPEMWriterExample {
         System.out.println("issuer: " + x509Cert.getIssuerX500Principal());
 
         x509CertificateSrc =
-                X509V1CreateExampleNew.generateV1Certificate(pair,
-                        "CN=Test Certificate",
-                        "CN=Test Certificate",
-                        100,
-                        "SHA256WithRSAEncryption");
+                X509V1CreateExample.generateV1CertificateV3(pair);
         bOut = new ByteArrayOutputStream();
         pemWrt = new PemWriter(new OutputStreamWriter(bOut));
         // https://www.programcreek.com/java-api-examples/?api=org.bouncycastle.util.io.pem.PemWriter

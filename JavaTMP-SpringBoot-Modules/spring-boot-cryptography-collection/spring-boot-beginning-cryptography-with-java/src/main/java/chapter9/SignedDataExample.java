@@ -1,9 +1,16 @@
 package chapter9;
 
-import org.bouncycastle.cms.CMSProcessable;
+import org.bouncycastle.cert.jcajce.JcaCertStore;
 import org.bouncycastle.cms.CMSProcessableByteArray;
 import org.bouncycastle.cms.CMSSignedData;
 import org.bouncycastle.cms.CMSSignedDataGenerator;
+import org.bouncycastle.cms.CMSTypedData;
+import org.bouncycastle.cms.jcajce.JcaSignerInfoGeneratorBuilder;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.bouncycastle.operator.ContentSigner;
+import org.bouncycastle.operator.jcajce.JcaContentSignerBuilder;
+import org.bouncycastle.operator.jcajce.JcaDigestCalculatorProviderBuilder;
+import org.bouncycastle.util.Store;
 
 import java.security.KeyStore;
 import java.security.PrivateKey;
@@ -22,22 +29,34 @@ public class SignedDataExample extends SignedDataProcessor {
 
         PrivateKey key = (PrivateKey) credentials.getKey(Utils.END_ENTITY_ALIAS, Utils.KEY_PASSWD);
         Certificate[] chain = credentials.getCertificateChain(Utils.END_ENTITY_ALIAS);
+        CollectionCertStoreParameters collectionCertStoreParameters = new CollectionCertStoreParameters(
+                Arrays.asList(chain));
         CertStore certsAndCRLs = CertStore.getInstance("Collection",
-                new CollectionCertStoreParameters(Arrays.asList(chain)), "BC");
-
+                collectionCertStoreParameters, BouncyCastleProvider.PROVIDER_NAME);
+        Store certs = new JcaCertStore(collectionCertStoreParameters.getCollection());
         X509Certificate cert = (X509Certificate) chain[0];
 
         // set up the generator
         CMSSignedDataGenerator gen = new CMSSignedDataGenerator();
+        ContentSigner sha1Signer = new JcaContentSignerBuilder(
+                "SHA1WithRSAEncryption")
+                .setProvider(BouncyCastleProvider.PROVIDER_NAME)
+                .build(key);
 
-        gen.addSigner(key, cert, CMSSignedDataGenerator.DIGEST_SHA224);
+        gen.addSignerInfoGenerator(new JcaSignerInfoGeneratorBuilder(
+                new JcaDigestCalculatorProviderBuilder()
+                        .setProvider(BouncyCastleProvider.PROVIDER_NAME).build())
+                .build(sha1Signer, cert));
 
-        gen.addCertificatesAndCRLs(certsAndCRLs);
+        gen.addCertificates(certs);
+//        gen.addCertificatesAndCRLs(certsAndCRLs);
 
         // create the signed-data object
-        CMSProcessable data = new CMSProcessableByteArray("Hello World!".getBytes());
+//        CMSProcessable data =
+        CMSTypedData data =
+                new CMSProcessableByteArray("Hello World!".getBytes());
 
-        CMSSignedData signed = gen.generate(data, "BC");
+        CMSSignedData signed = gen.generate(data, false);
 
         // recreate
         signed = new CMSSignedData(data, signed.getEncoded());
@@ -50,5 +69,6 @@ public class SignedDataExample extends SignedDataProcessor {
         } else {
             System.out.println("verification failed");
         }
+
     }
 }
