@@ -8,11 +8,8 @@ import java.net.URL;
 /**
  * SSL Client with client side authentication.
  */
-public class HTTPSClientExample
-        extends SSLClientWithClientAuthTrustExample {
-    public static void main(
-            String[] args)
-            throws Exception {
+public class HTTPSClientExample extends SSLClientWithClientAuthTrustExample {
+    public static void main(String[] args) throws Exception {
         SSLContext sslContext = createSSLContext();
         SSLSocketFactory fact = sslContext.getSocketFactory();
 

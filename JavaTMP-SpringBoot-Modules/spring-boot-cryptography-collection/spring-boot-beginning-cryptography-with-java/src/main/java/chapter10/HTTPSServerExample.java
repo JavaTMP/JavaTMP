@@ -7,22 +7,16 @@ import java.security.Principal;
 /**
  * Basic SSL Server with optional client authentication.
  */
-public class HTTPSServerExample
-    extends SSLServerWithClientAuthIdExample
-{
+public class HTTPSServerExample extends SSLServerWithClientAuthIdExample {
     /**
      * Read a HTTP request
      */
-    private static void readRequest(
-        InputStream in)
-        throws IOException
-    {
+    private static void readRequest(InputStream in) throws IOException {
         System.out.print("Request: ");
         int ch = 0;
         int lastCh = 0;
-        while ((ch = in.read()) >= 0 && (ch != '\n' && lastCh != '\n'))
-        {
-            System.out.print((char)ch);
+        while ((ch = in.read()) >= 0 && (ch != '\n' && lastCh != '\n')) {
+            System.out.print((char) ch);
             if (ch != '\r')
                 lastCh = ch;
         }
@@ -33,9 +27,7 @@ public class HTTPSServerExample
     /**
      * Send a response
      */
-    private static void sendResponse(
-        OutputStream out)
-    {
+    private static void sendResponse(OutputStream out) {
         PrintWriter pWrt = new PrintWriter(new OutputStreamWriter(out));
         pWrt.print("HTTP/1.1 200 OK\r\n");
         pWrt.print("Content-Type: text/html\r\n");
@@ -49,26 +41,21 @@ public class HTTPSServerExample
     }
 
     public static void main(
-        String[] args)
-        throws Exception
-    {
-		SSLContext             sslContext = createSSLContext();
+            String[] args)
+            throws Exception {
+        SSLContext sslContext = createSSLContext();
         SSLServerSocketFactory fact = sslContext.getServerSocketFactory();
-        SSLServerSocket        sSock = (SSLServerSocket)fact.createServerSocket(Utils.PORT_NO);
+        SSLServerSocket sSock = (SSLServerSocket) fact.createServerSocket(Utils.PORT_NO);
 
         // client authenticate where possible
         sSock.setWantClientAuth(true);
 
-        for (;;)
-        {
-            SSLSocket sslSock = (SSLSocket)sSock.accept();
+        for (; ; ) {
+            SSLSocket sslSock = (SSLSocket) sSock.accept();
 
-            try
-            {
+            try {
                 sslSock.startHandshake();
-            }
-            catch (IOException e)
-            {
+            } catch (IOException e) {
                 continue;
             }
 
@@ -76,14 +63,11 @@ public class HTTPSServerExample
 
             SSLSession session = sslSock.getSession();
 
-            try
-            {
+            try {
                 Principal clientID = session.getPeerPrincipal();
 
                 System.out.println("client identified as: " + clientID);
-            }
-            catch (SSLPeerUnverifiedException e)
-            {
+            } catch (SSLPeerUnverifiedException e) {
                 System.out.println("client not authenticated");
             }
 

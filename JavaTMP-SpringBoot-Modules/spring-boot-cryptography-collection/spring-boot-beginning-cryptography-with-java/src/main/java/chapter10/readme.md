@@ -123,8 +123,33 @@
 
 ## Managing SSL Session Information
 
+- In addition to connections having a context associated with them, the JSSE also makes it possible to get access to and
+  manage session information that is related to the connection taking place. This is done via objects that implement the
+  SSLSession interface.
+
+### Using SSLSession
+
+- This example uses the information about a client’s principal in an SSLSession object to restrict connections that can
+  be made to the server to only those where the principal the client is using is the one belonging to the example end
+  entity certificate.
+- you can start the server with just
+  `java chapter10.SSLServerWithClientAuthIdExample`
+- and run the last client you used with
+  `java chapter10.SSLClientWithClientAuthTrustExample`
+- As with the client, creating your own SSLContext in the server frees you from having to use command-line property
+  setting to provide local identity information and a trust store.
+
 ## Dealing with HTTPS
 
+- HTTPS stands for Hypertext Transport Protocol (Secure) and is simply HTTP done over an SSL connection.
+- Just as Java provides the HttpURLConnection class in java.net for dealing with regular HTTP connections, the JSSE
+  provides a class for dealing with HTTPS connections — HttpsURLConnection.
+
+### Using HttpsURLConnection and HostnameVerifier
+- Starting the server is a simple matter of running: `java chapter10.HTTPSServerExample`
+- Once the server is running, you can try running the client program as follows: `java chapter10.HTTPSClientExample`
+- Next, try using your favorite browser, pointing it at the URL https://localhost:9020. If the browser supports SSL, it will prompt you to see whether you accept the certificate being offered by the server program.
+ 
 ## References
 
 - [Transport Layer Security](https://en.wikipedia.org/wiki/Transport_Layer_Security#Protocol_details)

@@ -7,46 +7,39 @@ import java.security.KeyStore;
 /**
  * SSL Client with client-side authentication.
  */
-public class SSLClientWithClientAuthTrustExample
-    extends SSLClientExample
-{
+public class SSLClientWithClientAuthTrustExample extends SSLClientExample {
     /**
      * Create an SSL context with both identity and trust store
      */
-    static SSLContext createSSLContext()
-        throws Exception
-    {
+    static SSLContext createSSLContext() throws Exception {
         // set up a key manager for our local credentials
-		KeyManagerFactory mgrFact = KeyManagerFactory.getInstance("SunX509");
-		KeyStore clientStore = KeyStore.getInstance("PKCS12");
+        KeyManagerFactory mgrFact = KeyManagerFactory.getInstance("SunX509");
+        KeyStore clientStore = KeyStore.getInstance("PKCS12");
 
-		clientStore.load(new FileInputStream("client.p12"), Utils.CLIENT_PASSWORD);
+        clientStore.load(new FileInputStream("client.p12"), Utils.CLIENT_PASSWORD);
 
-		mgrFact.init(clientStore, Utils.CLIENT_PASSWORD);
+        mgrFact.init(clientStore, Utils.CLIENT_PASSWORD);
 
-		// set up a trust manager so we can recognize the server
-		TrustManagerFactory trustFact = TrustManagerFactory.getInstance("SunX509");
-		KeyStore            trustStore = KeyStore.getInstance("JKS");
+        // set up a trust manager so we can recognize the server
+        TrustManagerFactory trustFact = TrustManagerFactory.getInstance("SunX509");
+        KeyStore trustStore = KeyStore.getInstance("JKS");
 
-		trustStore.load(new FileInputStream("trustStore.jks"), Utils.TRUST_STORE_PASSWORD);
+        trustStore.load(new FileInputStream("trustStore.jks"), Utils.TRUST_STORE_PASSWORD);
 
-		trustFact.init(trustStore);
+        trustFact.init(trustStore);
 
-		// create a context and set up a socket factory
-		SSLContext sslContext = SSLContext.getInstance("TLS");
+        // create a context and set up a socket factory
+        SSLContext sslContext = SSLContext.getInstance("TLS");
 
-		sslContext.init(mgrFact.getKeyManagers(), trustFact.getTrustManagers(), null);
+        sslContext.init(mgrFact.getKeyManagers(), trustFact.getTrustManagers(), null);
 
-		return sslContext;
+        return sslContext;
     }
 
-    public static void main(
-        String[] args)
-        throws Exception
-    {
-        SSLContext       sslContext = createSSLContext();
-		SSLSocketFactory fact = sslContext.getSocketFactory();
-        SSLSocket        cSock = (SSLSocket)fact.createSocket(Utils.HOST, Utils.PORT_NO);
+    public static void main(String[] args) throws Exception {
+        SSLContext sslContext = createSSLContext();
+        SSLSocketFactory fact = sslContext.getSocketFactory();
+        SSLSocket cSock = (SSLSocket) fact.createSocket(Utils.HOST, Utils.PORT_NO);
 
         doProtocol(cSock);
     }
