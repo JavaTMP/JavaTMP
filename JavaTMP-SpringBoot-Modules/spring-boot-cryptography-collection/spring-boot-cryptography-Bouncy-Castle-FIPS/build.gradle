@@ -1,13 +1,21 @@
 
 dependencies {
-    implementation group: 'org.bouncycastle', name: 'bc-fips', version: '1.0.2.1'
+    implementation group: 'org.bouncycastle', name: 'bc-fips', version: '1.0.1'
+    implementation ('org.bouncycastle:bcpkix-fips:1.0.1') {
+        exclude group: 'org.bouncycastle', module: 'bc-fips'
+    }
+    compileOnly group: 'org.bouncycastle', name: 'bctls-fips', version: '1.0.1'
+    implementation group: 'org.bouncycastle', name: 'bcmail-fips', version: '1.0.1'
+    implementation group: 'org.bouncycastle', name: 'bcpg-fips', version: '1.0.1'
+
+    implementation group: 'javax.mail', name: 'mail', version: '1.4.7'
 
 //    implementation group: 'org.bouncycastle', name: 'bcprov-jdk15on', version: '1.69'
-    implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.69'
-    implementation group: 'org.bouncycastle', name: 'bcprov-ext-jdk15on', version: '1.69'
-    implementation group: 'org.bouncycastle', name: 'bcpg-jdk15on', version: '1.69'
-    implementation group: 'org.bouncycastle', name: 'bctls-jdk15on', version: '1.69'
-    implementation group: 'org.bouncycastle', name: 'bctsp-jdk15on', version: '1.46'
-    implementation group: 'org.bouncycastle', name: 'bcmail-jdk15on', version: '1.69'
-    implementation group: 'javax.mail', name: 'mail', version: '1.4.7'
+//    implementation group: 'org.bouncycastle', name: 'bcpkix-jdk15on', version: '1.69'
+//    implementation group: 'org.bouncycastle', name: 'bcprov-ext-jdk15on', version: '1.69'
+//    implementation group: 'org.bouncycastle', name: 'bcpg-jdk15on', version: '1.69'
+//    implementation group: 'org.bouncycastle', name: 'bctls-jdk15on', version: '1.69'
+//    implementation group: 'org.bouncycastle', name: 'bctsp-jdk15on', version: '1.46'
+//    implementation group: 'org.bouncycastle', name: 'bcmail-jdk15on', version: '1.69'
+
 }

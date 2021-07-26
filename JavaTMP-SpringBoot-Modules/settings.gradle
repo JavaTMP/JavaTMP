@@ -107,6 +107,7 @@ include 'spring-boot-cryptography-collection:spring-boot-cryptography-handon-exa
 include 'spring-boot-cryptography-collection:spring-boot-cryptography-workshop-bouncycastle'
 include 'spring-boot-cryptography-collection:spring-boot-cryptography-bouncycastle-examples'
 include 'spring-boot-cryptography-collection:spring-boot-cryptography-Bouncy-Castle-FIPS'
+include 'spring-boot-cryptography-collection:spring-boot-cryptography-bc-fips'
 include 'spring-boot-cryptography-collection:spring-boot-beginning-cryptography-with-java'
 include 'spring-boot-cryptography-collection:spring-boot-cryptography-cms'
 
