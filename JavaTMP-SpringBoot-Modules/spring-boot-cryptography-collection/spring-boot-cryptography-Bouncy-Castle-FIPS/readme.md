@@ -263,1151 +263,527 @@ this is done is to indicate we have allocated 12 bytes to the nonce (which in
 real life should be random) and 4 bytes to the counter. A set up like this would
 allow us to encrypt a message of length 2 ^ blocks. The last example in this
 section shows how to use Ciphertext Stealing (CTS). NIST provides three
-
 definitions of cipher text stealing in an addendum to NIST SP 800-38A,
-“Recommendation for Block
+“Recommendation for Block Cipher Modes of Operation: Three Variants of
+Ciphertext Stealing for CBC Mode”. CTS is used in conjunction with CBC mode and
+can be used where there are at least 2 blocks of data and has the advantage that
+it requires no padding, as the “stealing” process allows it to produce a cipher
+text which is the same length as the plain text. The most popular one is CS3,
+which is the same as the CTS mode described in RFC 2040, and is the one shown in
+example 10.
 
-Cipher Modes of Operation: Three Variants of Ciphertext Stealing for CBC Mode”.
-CTS is used in
+#### Example 10 – CBC Mode With Ciphertext Stealing
 
-conjunction with CBC mode and can be used where there are at least 2 blocks of
-data and has the
+- Run `bcfipsin100.base.Aes.ctsEncrypt().ctsDecrypt()`
 
-advantage that it requires no padding, as the “stealing” process allows it to
-produce a cipher text which
-
-is the same length as the plain text. The most popular one is CS3, which is the
-same as the CTS mode
-
-described in RFC 2040, and is the one shown in example 10.
-
-#### Example 10 – CBC Mode With Ciphertext Stealing......................................................................
-
-**public static byte** [][] ctsEncrypt(SecretKey key, **byte** [] data)
-**throws** GeneralSecurityException { Cipher cipher = Cipher. _
-getInstance_ ( **"
-AES/CBC/CS3Padding"** , **"BCFIPS"** ); cipher.init(Cipher. **_ENCRYPT_MODE_** ,
-key);
-**return new byte** [][] { cipher.getIV(), cipher.doFinal(data) }; }
-
-**public static byte** [] ctsDecrypt(SecretKey key, **byte** [] iv, **byte** []
-cipherText)
-**throws** GeneralSecurityException { Cipher cipher = Cipher. _
-getInstance_ ( **"
-AES/CBC/CS3Padding"** , **"BCFIPS"** ); cipher.init(Cipher. **_DECRYPT_MODE_** ,
-key, **new**
-IvParameterSpec(iv));
-**return** cipher.doFinal(cipherText); }
-
-### Authenticated Modes...........................................................................................................................
+### Authenticated Modes
 
 One of the issues with the basic modes is there is no mechanism in place to pick
-up actual errors or
-
-tampering attempts on decryption, other than perhaps getting back garbage.
-Authenticated modes such
-
-as GCM and CCM also incorporate a tag that provides a cryptographic checksum
-that can be used to
-
-help validate a decryption. These modes are also known as Authenticated
-Encryption with Associated
-
-Data (AEAD) modes as they also provide for mixing some additional clear text, or
-associated data, into
-
-the tag used for validation. The BC FIPS Java API also includes EAX, but the
-mode is not available in
-
-the approved mode of operation.
+up actual errors or tampering attempts on decryption, other than perhaps getting
+back garbage. Authenticated modes such as GCM and CCM also incorporate a tag
+that provides a cryptographic checksum that can be used to help validate a
+decryption. These modes are also known as Authenticated Encryption with
+Associated Data (AEAD) modes as they also provide for mixing some additional
+clear text, or associated data, into the tag used for validation. The BC FIPS
+Java API also includes EAX, but the mode is not available in the approved mode
+of operation.
 
 The first of the modes we will look at is GCM, which is described in NIST SP
-800-38D,
+800-38D, “Galois/Counter Mode (GCM)”. This is based on CTR mode as well as
+having its own hashing function incorporated into it. In this case, as the mode
+also incorporates the tag, the set up for the mode is a bit more complicated and
+uses a GCMParameterSpec.
 
-“Galois/Counter Mode (GCM)”. This is based on CTR mode as well as having its own
-hashing
+#### Example 11 – GCM Mode Encryption
 
-function incorporated into it. In this case, as the mode also incorporates the
-tag, the set up for the mode
-
-is a bit more complicated and uses a GCMParameterSpec.
-
-#### Example 11 – GCM Mode Encryption...........................................................................................
-
-**public static** Object[] gcmEncrypt(SecretKey key, **byte** [] data)
-**throws** GeneralSecurityException { Cipher cipher = Cipher. _
-getInstance_ ( **"
-AES/GCM/NoPadding"** , **"BCFIPS"** ); cipher.init(Cipher. **_ENCRYPT_MODE_** ,
-key, // taglength, nonce
-**new** GCMParameterSpec( 128 , Hex. _decode_ ( **"
-000102030405060708090a0b"** )));
-**return new** Object[] { cipher.getParameters(), cipher.doFinal(data), }; }
-
-**public static byte** [] gcmDecrypt(SecretKey key, AlgorithmParameters
-gcmParameters, **byte** []
-cipherText)
-**throws** GeneralSecurityException { Cipher cipher = Cipher. _
-getInstance_ ( **"
-AES/GCM/NoPadding"** , **"BCFIPS"** ); cipher.init(Cipher. **_DECRYPT_MODE_** ,
-key, gcmParameters);
-**return** cipher.doFinal(cipherText); }
+- Run `bcfipsin100.base.Aes.gcmEncrypt().gcmDecrypt()`
 
 In this case the example has specified a tag length of 128 bits (the maximum)
-and 12 byte nonce, giving
-
-a counter size of 4 bytes. We have also made use of the getParameters() method
-to retrieve the
-
-parameters used to initialize the cipher so we have something to give to the
-decrypt method. Note as
-
-the mode is based on a block streaming mode there's no padding. If you are
-planning to use GCM it is
-
-worth having a look at NIST SP 800-38D for guidance, poor choice of IVs can
-cause huge problems
-
-with this mode and it is not recommended to use a lower tag size unless you
-really know what you are
-
-doing.
+and 12 byte nonce, giving a counter size of 4 bytes. We have also made use of
+the getParameters() method to retrieve the parameters used to initialize the
+cipher so we have something to give to the decrypt method. Note as the mode is
+based on a block streaming mode there's no padding. If you are planning to use
+GCM it is worth having a look at NIST SP 800-38D for guidance, poor choice of
+IVs can cause huge problems with this mode and it is not recommended to use a
+lower tag size unless you really know what you are doing.
 
 The other AEAD mode available is CCM which is defined in NIST SP 800-38C. In
-terms of set up it is
+terms of set up it is very similar to GCM and, as Java does not provide a
+parameter spec for it, the BC FIPS API allows the use of the GCMParameterSpec
+class with CCM. CCM, as defined by NIST, is also built on CTR mode, but in this
+case makes use of a CBC-MAC for the checksum.
 
-very similar to GCM and, as Java does not provide a parameter spec for it, the
-BC FIPS API allows the
+#### Example 12 – CCM Mode Encryption
 
-use of the GCMParameterSpec class with CCM. CCM, as defined by NIST, is also
-built on CTR mode,
-
-but in this case makes use of a CBC-MAC for the checksum.
-
-#### Example 12 – CCM Mode Encryption...........................................................................................
-
-**public static** Object[] ccmEncrypt(SecretKey key, **byte** [] data)
-**throws** GeneralSecurityException { Cipher cipher = Cipher. _
-getInstance_ ( **"
-AES/CCM/NoPadding"** , **"BCFIPS"** ); cipher.init(Cipher. **_ENCRYPT_MODE_** ,
-key,
-**new** GCMParameterSpec( 128 , Hex. _decode_ ( **"
-000102030405060708090a0b"** )));
-**return new** Object[] { cipher.getParameters(), cipher.doFinal(data) }; }
-
-**public static byte** [] ccmDecrypt(SecretKey key, AlgorithmParameters
-ccmParameters, **byte** []
-cipherText)
-**throws** GeneralSecurityException { Cipher cipher = Cipher. _
-getInstance_ ( **"
-AES/CCM/NoPadding"** , **"BCFIPS"** ); cipher.init(Cipher. **_DECRYPT_MODE_** ,
-key, ccmParameters);
-**return** cipher.doFinal(cipherText); }
+- Run `bcfipsin100.base.Aes.ccmEncrypt().ccmDecrypt()`
 
 The use of GCM and CCM is also discussed in RFC 5084. As mentioned at the start
-of the section, one
-
-of the things which distinguishes GCM and CCM from the other modes is the
-ability to also
-
-incorporate associated data into the checksum calculation. This can be used for
-a variety of things such
-
-as validating non-encrypted payload, and also, where otherwise kept secret
-between the two
-
+of the section, one of the things which distinguishes GCM and CCM from the other
+modes is the ability to also incorporate associated data into the checksum
+calculation. This can be used for a variety of things such as validating
+non-encrypted payload, and also, where otherwise kept secret between the two
 communicating parties, help test for the provenance of a message being
 decrypted.
 
 Adding associated data into the calculation was not supported natively in the
-JCE until the arrival of
+JCE until the arrival of Java 1.7 when the updateAAD methods were added to the
+Cipher class. The following example shows their use.
 
-Java 1.7 when the updateAAD methods were added to the Cipher class. The
-following example shows
+#### Example 13 – CCM With Associated Data Encryption
 
-their use.
-
-#### Example 13 – CCM With Associated Data Encryption..................................................................
-
-**public static** Object[] aeadEncrypt(SecretKey key, **byte** [] data, **
-byte** [] associatedData)
-**throws** GeneralSecurityException { Cipher cipher = Cipher. _
-getInstance_ ( **"
-AES/CCM/NoPadding"** , **"BCFIPS"** ); cipher.init(Cipher. **_ENCRYPT_MODE_** ,
-key,
-**new** GCMParameterSpec( 128 , Hex. _decode_ ( **"
-000102030405060708090a0b"** ))); cipher.updateAAD(associatedData);
-**return new** Object[] { cipher.getParameters(), cipher.doFinal(data) }; }
-
-**public static byte** [] aeadDecrypt(SecretKey key, AlgorithmParameters
-ccmParameters,
-**byte** [] cipherText, **byte** [] associatedData)
-**throws** GeneralSecurityException { Cipher cipher = Cipher. _
-getInstance_ ( **"
-AES/CCM/NoPadding"** , **"BCFIPS"** ); cipher.init(Cipher. **_DECRYPT_MODE_** ,
-key, ccmParameters); cipher.updateAAD(associatedData);
-**return** cipher.doFinal(cipherText); }
+- Run `bcfipsin100.base.Aes.aeadEncrypt().aeadDecrypt()`
 
 The BC FIPS API provides the AEADParameterSpec for dealing with associated data
-in Java 1.5 and
+in Java 1.5 and Java 1.6 as well.
 
-Java 1.6 as well.
-
-## Message Digest, MACs, and HMACs.....................................................................................................
+## Message Digest, MACs, and HMACs
 
 Prior to the introduction of authenticated modes with ciphers the only way to
-tell if decrypted data was
+tell if decrypted data was correct was to have a separate message digest or MAC
+associated with it. Message digests also provide a valuable tool for
+constructing signatures. MACs and HMACs are still relevant as there are still
+plenty of cases where messages need to be tamper resistant, even when the
+content in them might be publicly readable.
 
-correct was to have a separate message digest or MAC associated with it. Message
-digests also provide
-
-a valuable tool for constructing signatures. MACs and HMACs are still relevant
-as there are still plenty
-
-of cases where messages need to be tamper resistant, even when the content in
-them might be publicly
-
-readable.
-
-### Message Digests..................................................................................................................................
+### Message Digests
 
 Message digest, or hash, functions differ from a regular checksum, such as
-CRC32, in that changing
-
-any bit in an input stream to a digest calculator has an unpredictable affect on
-the resulting output. This
-
-is one of the things we look for in a cryptographic checksum as opposed to a
-regular one. The
-
-associated feature of this, which is that it is overwhelmingly difficult to
-predict the value of a digest
-
-and produce two documents which produce a “collision” in digest values, is
-fundamental to the idea
-
-that if two documents verify to the same digital signature, they are basically
-the same document.
+CRC32, in that changing any bit in an input stream to a digest calculator has an
+unpredictable affect on the resulting output. This is one of the things we look
+for in a cryptographic checksum as opposed to a regular one. The associated
+feature of this, which is that it is overwhelmingly difficult to predict the
+value of a digest and produce two documents which produce a “collision” in
+digest values, is fundamental to the idea that if two documents verify to the
+same digital signature, they are basically the same document.
 
 As with symmetric ciphers, there have been a few goes at producing digests now,
-some such as SHA-1
-
-and MD5 are no longer really in use and are getting phased out where they are (
-FIPS only allows SHA-
-
-1 for compliance with existing protocols). The current recommended digests come
-from the SHA-2
-
-(described in FIPS PUB 180-4) and the SHA-3 (described in FIPS PUB 202) family.
+some such as SHA-1 and MD5 are no longer really in use and are getting phased
+out where they are (
+FIPS only allows SHA-1 for compliance with existing protocols). The current
+recommended digests come from the SHA-2 (described in FIPS PUB 180-4) and the
+SHA-3 (described in FIPS PUB 202) family.
 
 The SHA-2 family digests are still regarded as safe, although there is now a
-trend towards the use of
-
-SHA-384 and SHA-512 and its two smaller variants instead of SHA-224 and SHA-256.
-This is
-
-happening largely due to the size of the internal buffer in SHA-224/SHA-256 that
-is used to store data
-
-for the digest calculation and concerns about whether that may be a problem
-if/when quantum
-
+trend towards the use of SHA-384 and SHA-512 and its two smaller variants
+instead of SHA-224 and SHA-256. This is happening largely due to the size of the
+internal buffer in SHA-224/SHA-256 that is used to store data for the digest
+calculation and concerns about whether that may be a problem if/when quantum
 computers start making themselves felt. The SHA-3 family is based on a different
-approach to the
-
-SHA-2 family to doing the digest construction and also includes two expandable
-functions (XOFs),
-
-SHAKE-128 and SHAKE-256.
+approach to the SHA-2 family to doing the digest construction and also includes
+two expandable functions (XOFs), SHAKE-128 and SHAKE-256.
 
 While the SHA-3 family is different internally, the digests contained in it
-produce digests of the same
+produce digests of the same size as the SHA-2 family and they can be used as
+drop in replacements for each other. The first example shows how to create a
+simple digest using the SHA-2 and SHA-3 variants that produce 512 bits of output
+from the input data.
 
-size as the SHA-2 family and they can be used as drop in replacements for each
-other. The first
+#### Example 14 – Two Digest Examples
 
-example shows how to create a simple digest using the SHA-2 and SHA-3 variants
-that produce 512
+- Run `bcfipsin100.base.Shs.calculateDigest().calculateSha3Digest()`
 
-bits of output from the input data.
-
-#### Example 14 – Two Digest Examples..............................................................................................
-
-**public static byte** [] calculateDigest( **byte** [] data)
-**throws** GeneralSecurityException { MessageDigest hash = MessageDigest. _
-getInstance_ ( **"
-SHA512"** , **"BCFIPS"** );
-**return** hash.digest(data); }
-
-**public static byte** [] calculateSha3Digest( **byte** [] data)
-**throws** GeneralSecurityException { MessageDigest hash = MessageDigest. _
-getInstance_ ( **"
-SHA3-512"** , **"
-BCFIPS"** );
-
-**return** hash.digest(data); }
-
-### Expandable Output Functions.............................................................................................................
+### Expandable Output Functions
 
 Expandable output functions are completely new on the scene – the first ones
-standardized were
-
-announced in the SHA-3 standard. Primarily, we can probably expect them to
-replace things like KDFs
-
-and mask functions as they have the feature producing “almost indefinite length”
-output while still
-
-offering a specific level of security. Being so new on the scene there isn't
-really any precedent for these
-
-functions in the JCA/JCE and so there is no API support for them directly at the
-moment.
+standardized were announced in the SHA-3 standard. Primarily, we can probably
+expect them to replace things like KDFs and mask functions as they have the
+feature producing “almost indefinite length” output while still offering a
+specific level of security. Being so new on the scene there isn't really any
+precedent for these functions in the JCA/JCE and so there is no API support for
+them directly at the moment.
 
 At the moment, if you wish to make use of SHAKE-128 and SHAKE-256, you need to
-use the BC low-
+use the BC low-level API that comes with the BC FIPS module. The first example
+here shows the use of SHAKE-256 in producing 32 bytes of output.
 
-level API that comes with the BC FIPS module. The first example here shows the
-use of SHAKE-256
+#### Example 15 – Basic Use of an XOF
 
-in producing 32 bytes of output.
-
-#### Example 15 – Basic Use of an XOF...............................................................................................
-
-**public static byte** [] calculateShakeOutput( **byte** [] data)
-**throws** IOException { FipsXOFOperatorFactory<FipsSHS.Parameters> factory =
-**new** FipsSHS.XOFOperatorFactory<FipsSHS.Parameters>(); OutputXOFCalculator<
-FipsSHS.Parameters>
-calculator = factory.createOutputXOFCalculator(FipsSHS. **_SHAKE256_** );
-
-OutputStream digestStream = calculator.getFunctionStream(); digestStream.write(
-data); digestStream.close();
-
-**return** calculator.getFunctionOutput( 32 ); }
+- Run `bcfipsin100.base.Shs.calculateShakeOutput()`
 
 The BC API also allows for the continuous “squeezing” of the function to produce
 more output.
 
 Example 15 also produces 32 bytes of output but does it by requesting output
-from the XOF object
+from the XOF object twice.
 
-twice.
+#### Example 16 – Multiple Returns from an XOF
 
-#### Example 16 – Multiple Returns from an XOF...............................................................................
-
-**public static byte** [] calculateShakeOutputContinuous( **byte** [] data)
-**throws** IOException { FipsXOFOperatorFactory<FipsSHS.Parameters> factory =
-**new** FipsSHS.XOFOperatorFactory<FipsSHS.Parameters>(); OutputXOFCalculator<
-FipsSHS.Parameters>
-calculator = factory.createOutputXOFCalculator(FipsSHS. **_SHAKE256_** );
-
-OutputStream digestStream = calculator.getFunctionStream(); digestStream.write(
-data); digestStream.close();
-
-// note in this case we are calling getFunctionOutput twice.
-**return** Arrays. _concatenate_ (calculator.getFunctionOutput( 16 ),
-calculator.getFunctionOutput(
-16 )); }
+- Run `bcfipsin100.base.Shs.calculateShakeOutputContinuous()`
 
 If you run the two examples for the same input and examine the return value, you
-will find they
+will find they produce the same byte stream.
 
-produce the same byte stream.
-
-### Message Digest Based MACs.............................................................................................................
+### Message Digest Based MACs
 
 Macs based on keyed digests can be used to authenticate data. The most popular
-method for doing this
-
-at the moment is the HMAC, defined in FIPS PUB 198-1 and RFC 2104.
-
-HMAC support at the moment is not provided for the SHA-3 family. HMAC
-constructions have
-
-recently being added to the NIST standards, so watch out for these in a future
-release of BCFIPS. It is
-
-also likely that some new digest based MACs other than HMAC will be defined for
-the SHA-3 family
-
-as it is not vulnerable to the length extension issue of the digests that the
-original HMAC construction
-
-was designed to deal with.
+method for doing this at the moment is the HMAC, defined in FIPS PUB 198-1 and
+RFC 2104. HMAC support at the moment is not provided for the SHA-3 family. HMAC
+constructions have recently being added to the NIST standards, so watch out for
+these in a future release of BCFIPS. It is also likely that some new digest
+based MACs other than HMAC will be defined for the SHA-3 family as it is not
+vulnerable to the length extension issue of the digests that the original HMAC
+construction was designed to deal with.
 
 As with a symmetric cipher, the first thing required to use a HMAC is key, this
-can be created using a
+can be created using a SecretKeySpec as we saw with AES or by using a
+KeyGenerator specific to the algorithm as in the following example.
 
-SecretKeySpec as we saw with AES or by using a KeyGenerator specific to the
-algorithm as in the
+#### Example 17 – HMAC Key Generation
 
-following example.
-
-#### Example 17 – HMAC Key Generation...........................................................................................
-
-**public static** SecretKey generateKey()
-**throws** GeneralSecurityException { KeyGenerator keyGenerator =
-KeyGenerator. _getInstance_ ( **"
-HmacSHA512"** , **"
-BCFIPS"** ); keyGenerator.init( 256 );
-**return** keyGenerator.generateKey(); }
+- Run `bcfipsin100.base.Shs.generateKey()`
 
 HMAC calculation is done using the Mac class in the JCE. As you might imagine
-the main difference
-
-between the Mac class and the MessageDigest class is the need to call Mac.init()
-to initialize the MAC
-
-with the key and any other parameters that are required.
+the main difference between the Mac class and the MessageDigest class is the
+need to call Mac.init()
+to initialize the MAC with the key and any other parameters that are required.
 
 In the case of a HMAC only a key is required as we can see in the following
 example.
 
-#### Example 18 – HMAC Calculation..................................................................................................
+#### Example 18 – HMAC Calculation
 
-**public static byte** [] calculateHmac(SecretKey key, **byte** [] data)
-**throws** GeneralSecurityException { Mac hmac = Mac. _getInstance_ ( **"
-HMacSHA512"** , **"
-BCFIPS"** ); hmac.init(key);
-**return** hmac.doFinal(data); }
+- Run `bcfipsin100.base.Shs.calculateHmac()`
 
 Note: the doFinal() method in the example fulfills the role of the equivalent
-digest() method in the
+digest() method in the MessageDigest class. As the Mac class is often used with
+cipher based algorithms, the naming conventions in it follow the Cipher class.
 
-MessageDigest class. As the Mac class is often used with cipher based
-algorithms, the naming
-
-conventions in it follow the Cipher class.
-
-### Symmetric Cipher Based MACs.........................................................................................................
+### Symmetric Cipher Based MACs
 
 There are a number of different approaches to calculating MACs based around
-symmetric ciphers. The
-
-most common in the FIPS world now are CMAC and GMAC. CCM also gets used in a MAC
-mode as
-
-well occasionally – as with everything else what you end up using may depend on
-the restrictions of the
-
-environments you are dealing with.
+symmetric ciphers. The most common in the FIPS world now are CMAC and GMAC. CCM
+also gets used in a MAC mode as well occasionally – as with everything else what
+you end up using may depend on the restrictions of the environments you are
+dealing with.
 
 The first one we will look at is CMAC, defined in NIST SP 800-38B. CMAC can be
-used with both
+used with both 128 bit and 64 bit block ciphers, so it can be used with
+Triple-DES as well as AES. In terms of initialization its the same as with a
+HMAC – only a key is required.
 
-128 bit and 64 bit block ciphers, so it can be used with Triple-DES as well as
-AES. In terms of
+#### Example 19 – MAC Calculation using CMAC
 
-initialization its the same as with a HMAC – only a key is required.
-
-#### Example 19 – MAC Calculation using CMAC..............................................................................
-
-**public static byte** [] generateMacCMAC(SecretKey key, **byte** [] data)
-**throws** GeneralSecurityException { Mac mac = Mac. _getInstance_ ( **"
-AESCMAC"** , **"BCFIPS"** ); mac.init(key);
-**return** mac.doFinal(data); }
+- Run `bcfipsin100.base.Shs.generateMacCMAC()`
 
 GMAC is a little different. It is defined in SP 800-38D, the same document that
-defines GCM. In this
+defines GCM. In this case the MAC also requires an IV and it should be noted
+that as it is really a specialisation of GCM without encrypted data, all
+constraints on GCM, such as the need for uniqueness of IVs, also apply to GMAC.
 
-case the MAC also requires an IV and it should be noted that as it is really a
-specialisation of GCM
+#### Example 20 – MAC Calculation using GMAC
 
-without encrypted data, all constraints on GCM, such as the need for uniqueness
-of IVs, also apply to
-
-GMAC.
-
-#### Example 20 – MAC Calculation using GMAC..............................................................................
-
-**public static byte** [] generateMacGMAC(SecretKey key, **byte** [] data)
-**throws** GeneralSecurityException { Mac mac = Mac. _getInstance_ ( **"
-AESGMAC"** , **"BCFIPS"** ); mac.init(key, **
-new** IvParameterSpec(Hex. _decode_ ( **"000102030405060708090a0b"** )));
-**return** mac.doFinal(data); }
+- Run `bcfipsin100.base.Shs.generateMacGMAC()`
 
 Just as GMAC is a specialisation of GCM, it is also possible to use CCM purely
 for MAC calculation.
 
-#### Example 21 – MAC Calculation using CCM.................................................................................
+#### Example 21 – MAC Calculation using CCM
 
-**public static byte** [] generateMacCCM(SecretKey key, **byte** [] data)
-**throws** GeneralSecurityException { Mac mac = Mac. _getInstance_ ( **"
-AESCCMMAC"** , **"
-BCFIPS"** ); mac.init(key, **
-new** IvParameterSpec(Hex. _decode_ ( **"000102030405060708090a0b"** )));
-**return** mac.doFinal(data); }
+- Run `bcfipsin100.base.Shs.generateMacCCM()`
 
 Finally, it should also be noted that for both GMAC and CCMMAC, the
-GCMParameterSpec class can
+GCMParameterSpec class can also be used to define the IV and to modify the size
+of the MAC tag being produced on a call to Mac.doFinal().
 
-also be used to define the IV and to modify the size of the MAC tag being
-produced on a call to
-
-Mac.doFinal().
-
-## Signatures.................................................................................................................................................
+## Signatures
 
 It's interesting to note that even with a lot of the arguments that go on about
-encryption and what sort of
-
-access people should have to encryption technology, no-one has ever argued the
-case that people do not
-
-need to be able to produce digital signatures. You could almost say that digital
-signing keeps the world
-
+encryption and what sort of access people should have to encryption technology,
+no-one has ever argued the case that people do not need to be able to produce
+digital signatures. You could almost say that digital signing keeps the world
 turning.
 
 The main document in the FIPS world concerning digital signing appears under the
-FIPS PUB 186
-
-banner and is now at FIPS PUB 186-4. In practice, due to the long life of some
-signatures you may also
-
-find yourself verifying signatures produced under FIPS PUB 186-2 and FIPS PUB
-186-3.
+FIPS PUB 186 banner and is now at FIPS PUB 186-4. In practice, due to the long
+life of some signatures you may also find yourself verifying signatures produced
+under FIPS PUB 186-2 and FIPS PUB 186-3.
 
 FIPS PUB 186-4 discusses approaches to digital signing based around three
-algorithms: DSA, RSA,
+algorithms: DSA, RSA, and the Elliptic Curve DSA equivalent, ECDSA. There are
+also some variations on how signatures can be done in RSA. The BC FIPS APIs
+offer support for all the algorithms detailed. We will look at DSA first.
 
-and the Elliptic Curve DSA equivalent, ECDSA. There are also some variations on
-how signatures can
-
-be done in RSA. The BC FIPS APIs offer support for all the algorithms detailed.
-We will look at DSA
-
-first.
-
-### The DSA Algorithm.............................................................................................................................
+### The DSA Algorithm
 
 Signature algorithms require key pairs. In the case of DSA, the two sizes that
-can be used for the
+can be used for the generation of signatures is 2048 and 3072. The following
+example will generate a DSA key pair with a key size of 3072 bits.
 
-generation of signatures is 2048 and 3072. The following example will generate a
-DSA key pair with a
+#### Example 22 – Key Pair Generation
 
-key size of 3072 bits.
-
-#### Example 22 – Key Pair Generation................................................................................................
-
-**public static** KeyPair generateKeyPair()
-**throws** GeneralSecurityException { KeyPairGenerator keyPair =
-KeyPairGenerator. _
-getInstance_ ( **"DSA"** , **"
-BCFIPS"** ); keyPair.initialize( 3072 );
-**return** keyPair.generateKeyPair(); }
+- Run `bcfipsin100.base.Dsa.generateKeyPair()`
 
 Note: the example will take a while to run. The reason for this is that in
-addition to generating the key
-
-pair the key pair generator will also generate DSA parameters suitable for 3072
-bit keys. In the case of
-
-2048 bit keys there are actually default parameters, but in the case of 3072
-with specific parameters, or
-
-where you might need to specify parameters in general, example 25 is the one to
-look at for generating
-
-key pairs.
+addition to generating the key pair the key pair generator will also generate
+DSA parameters suitable for 3072 bit keys. In the case of 2048 bit keys there
+are actually default parameters, but in the case of 3072 with specific
+parameters, or where you might need to specify parameters in general, example 25
+is the one to look at for generating key pairs.
 
 For signing and verifying we use the Signature class. Like most of the provider
-based classes Signature
-
-objects are instanced using a getInstance() method rather than constructor. For
-signatures the common
-
-format in the JCA is to define the algorithm as <digest>
+based classes Signature objects are instanced using a getInstance() method
+rather than constructor. For signatures the common format in the JCA is to
+define the algorithm as <digest>
 with<public key algorithm>, in this case DSA.
 
 In the example we are generating and verifying signatures which are based on the
-SHA-384 digest and
+SHA-384 digest and the DSA public key algorithm.
 
-the DSA public key algorithm.
+#### Example 23 – Signing and Verifying
 
-#### Example 23 – Signing and Verifying..............................................................................................
-
-**public static byte** [] generateSignature(PrivateKey dsaPrivate, **byte** []
-input)
-**throws** GeneralSecurityException { Signature signature = Signature. _
-getInstance_ ( **"
-SHA384withDSA"** , **"
-BCFIPS"** ); signature.initSign(dsaPrivate); signature.update(input);
-**return** signature.sign(); }
-
-**public static boolean** verifySignature(PublicKey dsaPublic, **byte** []
-input, **byte** []
-encSignature)
-**throws** GeneralSecurityException { Signature signature = Signature. _
-getInstance_ ( **"
-SHA384withDSA"** , **"
-BCFIPS"** ); signature.initVerify(dsaPublic); signature.update(input);
-**return** signature.verify(encSignature); }
+- Run `bcfipsin100.base.Dsa.generateSignature().verifySignature()`
 
 We can also change the digest to any other SHA-2 family digest so for example,
-SHA-512 would be
-
-“SHA512withDSA”, likewise SHA-256 would be “SHA256withDSA”, and so on. Further
-details on
-
-the algorithms supported with DSA can be found in the BC FIPS Java User Guide.
+SHA-512 would be “SHA512withDSA”, likewise SHA-256 would be “SHA256withDSA”, and
+so on. Further details on the algorithms supported with DSA can be found in the
+BC FIPS Java User Guide.
 
 The numbers representing the public and private components of a DSA key are only
-meaningful for a
-
-given set of domain parameters. NIST define algorithms for generating and
-validating domain
-
-parameters. The BC FIPS API supports both situations, but only the parameter
-generation is exposed at
-
-the JCA level as there isn't really full API support for validation in the JCA.
-As we saw in example 22
-
-generating parameters every time we create a key pair is expensive, so if you're
-not given parameters it
-
-is worth generating the parameters separately and then explicitly passing them
-in for key pair
-
-generation.
+meaningful for a given set of domain parameters. NIST define algorithms for
+generating and validating domain parameters. The BC FIPS API supports both
+situations, but only the parameter generation is exposed at the JCA level as
+there isn't really full API support for validation in the JCA. As we saw in
+example 22 generating parameters every time we create a key pair is expensive,
+so if you're not given parameters it is worth generating the parameters
+separately and then explicitly passing them in for key pair generation.
 
 The following example shows how to generate a set of DSA parameters in the BC
 FIPS APIs.
 
-#### Example 24 – Parameter Generation..............................................................................................
+#### Example 24 – Parameter Generation
 
-**public static** DSAParameterSpec generateParameters()
-**throws** GeneralSecurityException { AlgorithmParameterGenerator algGen =
-AlgorithmParameterGenerator. _
-getInstance_ ( **"DSA"** , **"BCFIPS"** ); algGen.init( **new**
-DSADomainParametersGenerationParameterSpec( 3072 , 256 , 112 ));
-AlgorithmParameters dsaParams = algGen.generateParameters();
-**return** dsaParams.getParameterSpec(DSAParameterSpec. **class** ); }
+- Run `bcfipsin100.base.Dsa.generateParameters()`
 
 Note the DSADomainParametersGenerationSpec is a BC specific class as there is
-not current a ready
-
-equivalent in the JCA for doing this.
+not current a ready equivalent in the JCA for doing this.
 
 Once we have generated our parameters it is easy to start to generate key pairs
 from them.
 
-#### Example 25 – Generating Key Pairs using Parameters..................................................................
+#### Example 25 – Generating Key Pairs using Parameters
 
-**public static** KeyPair generateKeyPairUsingParameters(DSAParameterSpec
-dsaParameterSpec)
-**throws** GeneralSecurityException { KeyPairGenerator keyPair =
-KeyPairGenerator. _
-getInstance_ ( **"DSA"** , **"
-BCFIPS"** ); keyPair.initialize(dsaParameterSpec);
-
-**return** keyPair.generateKeyPair(); }
+- Run `bcfipsin100.base.Dsa.generateKeyPairUsingParameters()`
 
 Try running example 25 and comparing it to the speed of example 22. There is
-quite a difference in the
+quite a difference in the time taken.
 
-time taken.
-
-### The RSA Algorithm.............................................................................................................................
+### The RSA Algorithm
 
 The RSA algorithm takes a different approach to DSA when generating signatures.
-The main reason
-
-for this is that RSA can also be used to encrypt a block of data – so a digital
-signature generated with
-
-RSA is really an encryption of a data block with private key that anyone with
-the public key can then
-
-decrypt and verify. Keep this in mind as it will help explain why, other than
-for the purpose of
-
-generating a certification request, an RSA key used for encryption should never
-be used for signing and
-
-visa-versa.
+The main reason for this is that RSA can also be used to encrypt a block of data
+– so a digital signature generated with RSA is really an encryption of a data
+block with private key that anyone with the public key can then decrypt and
+verify. Keep this in mind as it will help explain why, other than for the
+purpose of generating a certification request, an RSA key used for encryption
+should never be used for signing and visa-versa.
 
 Generation of RSA signatures also requires key pairs of the sizes 2048 and 3072
-bits. Another
-
-difference with RSA is the ability to specify a public exponent for the public
-key component. A good
-
-choice of public exponent can help as we tend to verify signatures more often
-than we create them, so
-
-by choosing an appropriate public exponent we can make the verification process
-reasonably efficient.
+bits. Another difference with RSA is the ability to specify a public exponent
+for the public key component. A good choice of public exponent can help as we
+tend to verify signatures more often than we create them, so by choosing an
+appropriate public exponent we can make the verification process reasonably
+efficient.
 
 A few standard public exponents are provided by the RSAKeyGenParameterSpec class
-which is part of
+which is part of the JCA. In the example below we've used the smallest
+acceptable value for FIPS purposes. The number is labeled as F4, as it also
+happens to be the 4th Fermat prime, and has a value of 0x10001.
 
-the JCA. In the example below we've used the smallest acceptable value for FIPS
-purposes. The
+#### Example 26 – Key Pair Generation
 
-number is labeled as F4, as it also happens to be the 4th Fermat prime, and has
-a value of 0x10001.
-
-#### Example 26 – Key Pair Generation................................................................................................
-
-**public static** KeyPair generateKeyPair()
-**throws** GeneralSecurityException { KeyPairGenerator keyPair =
-KeyPairGenerator. _
-getInstance_ ( **"RSA"** , **"
-BCFIPS"** ); keyPair.initialize( **new** RSAKeyGenParameterSpec( 3072 ,
-RSAKeyGenParameterSpec. **_
-F4_** ));
-**return** keyPair.generateKeyPair(); }
+- Run `bcfipsin100.base.Rsa.generateKeyPair()`
 
 You will probably also note that RSA key pair generation is also fairly slow. It
-will also grind through a
-
-lot of entropy as a large number of bits will get consumed trying to generate
-random primes.
+will also grind through a lot of entropy as a large number of bits will get
+consumed trying to generate random primes.
 
 Having generated a key pair we can now look at generating signatures. FIPS PUB
-186-4 draws on 2
-
-different other standards for generating RSA signatures: X9.31 and PKCS#1 v2.1 (
-the PKCS#1.5
-
-format and the PSS format).
+186-4 draws on 2 different other standards for generating RSA signatures: X9.31
+and PKCS#1 v2.1 (
+the PKCS#1.5 format and the PSS format).
 
 The first of the algorithms which we will look is the original PKCS#1.5 format.
 
-#### Example 27 – The PKCS#1.5 Signature Format............................................................................
+#### Example 27 – The PKCS#1.5 Signature Format
 
-**public static byte** [] generatePkcs1Signature(PrivateKey rsaPrivate, **
-byte** [] input)
-**throws** GeneralSecurityException { Signature signature = Signature. _
-getInstance_ ( **"
-SHA384withRSA"** , **"
-BCFIPS"** ); signature.initSign(rsaPrivate); signature.update(input);
-**return** signature.sign(); }
-
-**public static boolean** verifyPkcs1Signature(PublicKey rsaPublic, **byte** []
-input, **byte** []
-encSignature)
-**throws** GeneralSecurityException { Signature signature = Signature. _
-getInstance_ ( **"
-SHA384withRSA"** , **"
-BCFIPS"** ); signature.initVerify(rsaPublic); signature.update(input);
-**return** signature.verify(encSignature); }
+- Run `bcfipsin100.base.Rsa.generatePkcs1Signature().verifyPkcs1Signature()`
 
 As you can see it looks just like DSA. Likewise you can see that the same naming
-convention for the
-
-algorithm applies, in this case <digest>withRSA, and all the SHA-2 variants are
-supported for it.
+convention for the algorithm applies, in this case <digest>withRSA, and all the
+SHA-2 variants are supported for it.
 
 The X9.31 signature format has been with us for at least as long as the PKCS#1.5
-format and dates
+format and dates back to the late 90s. We had a little bit of trouble working
+out how to name this as the JCA documentation on standard naming mainly concerns
+itself with the PKCS algorithms when it is discussing RSA. That said, we settled
+on “RSA/X9.31” as the naming since the use of a “/” to establish that something
+is a subset under a particular algorithm seems to follow the broader naming
+conventions used in Java, and that is used in the following example.
 
-back to the late 90s. We had a little bit of trouble working out how to name
-this as the JCA
+#### Example 28 – The X9.31 Signature Format
 
-documentation on standard naming mainly concerns itself with the PKCS algorithms
-when it is
-
-discussing RSA. That said, we settled on “RSA/X9.31” as the naming since the use
-of a “/” to establish
-
-that something is a subset under a particular algorithm seems to follow the
-broader naming conventions
-
-used in Java, and that is used in the following example.
-
-#### Example 28 – The X9.31 Signature Format...................................................................................
-
-**public static byte** [] generateX931Signature(PrivateKey rsaPrivate, **
-byte** [] input)
-**throws** GeneralSecurityException { Signature signature = Signature. _
-getInstance_ ( **"
-SHA384withRSA/X9.31"** , **"
-BCFIPS"** ); signature.initSign(rsaPrivate); signature.update(input);
-**return** signature.sign(); }
-
-**public static boolean** verifyX931Signature(PublicKey rsaPublic, **byte** []
-input, **byte** []
-encSignature)
-**throws** GeneralSecurityException { Signature signature = Signature. _
-getInstance_ ( **"
-SHA384withRSA/X9.31"** , **"
-BCFIPS"** ); signature.initVerify(rsaPublic); signature.update(input);
-**return** signature.verify(encSignature); }
+- Run `bcfipsin100.base.Rsa.generateX931Signature().verifyX931Signature()`
 
 Once again the full range of SHA-2 digests, and others (if not in FIPS approved
-mode) is supported by
-
-the BC FIPS API for X9.31.
+mode) is supported by the BC FIPS API for X9.31.
 
 In 2002 RSA announced a new signature format based on the Probabilistic
-Signature Scheme (PSS). It
-
-should be used in preference to the PKCS#1.5 format as PSS is regarded as
-provably secure, in the
-
-sense that trying to forge a signature in PSS can be shown to reduce to the
-problem of breaking RSA.
+Signature Scheme (PSS). It should be used in preference to the PKCS#1.5 format
+as PSS is regarded as provably secure, in the sense that trying to forge a
+signature in PSS can be shown to reduce to the problem of breaking RSA.
 
 While there have not been any successful attacks on properly formatted PKCS#1.5
-signatures done
-
-carefully, the assurances offered by PSS are very nice to have.
+signatures done carefully, the assurances offered by PSS are very nice to have.
 
 The following example shows the use of RSA PSS.
 
-#### Example 29 – The PSS Signature Format......................................................................................
+#### Example 29 – The PSS Signature Format
 
-**public static byte** [] generatePssSignature(PrivateKey rsaPrivate, **
-byte** [] input)
-**throws** GeneralSecurityException { Signature signature = Signature. _
-getInstance_ ( **"
-SHA384withRSAandMGF1"** , **"
-BCFIPS"** ); signature.initSign(rsaPrivate);
-
-signature.update(input);
-**return** signature.sign(); }
-
-**public static boolean** verifyPssSignature(PublicKey rsaPublic, **byte** []
-input, **byte** []
-encSignature)
-**throws** GeneralSecurityException { Signature signature = Signature. _
-getInstance_ ( **"
-SHA384withRSAandMGF1"** , **"
-BCFIPS"** ); signature.initVerify(rsaPublic); signature.update(input);
-**return** signature.verify(encSignature); }
+- Run `bcfipsin100.base.Rsa.generatePssSignature().verifyPssSignature()`
 
 Note the change in the naming convention. It is still <digest>withRSAandMGF1 (so
-the full range of
-
-SHA-2 digests can be used), but the curious might want to know what is going on
-with the MGF1. The
-
-“andMGF1” is added as PSS uses a mask function as part of its signature
-construction and allows for
-
-different mask functions to be used. At the moment the mask function is an
-algorithm called MGF1, but
-
-sometime in the future, for example, this might become SHAKE256, as in
-“andSHAKE256”. We shall
-
-see.
+the full range of SHA-2 digests can be used), but the curious might want to know
+what is going on with the MGF1. The “andMGF1” is added as PSS uses a mask
+function as part of its signature construction and allows for different mask
+functions to be used. At the moment the mask function is an algorithm called
+MGF1, but sometime in the future, for example, this might become SHAKE256, as in
+“andSHAKE256”. We shall see.
 
 The PSS scheme also allows for the use of different digests with MGF1 and for
-the use of zero length
-
-seeds, or fixed ones. This can be useful where you always want a signature for
-the same document to
-
-appear to be the same signature, or where you always want a signature generated
-for the same
-
-document by the same organisation to appear to be the same signature. The JCA
-allows for different
-
+the use of zero length seeds, or fixed ones. This can be useful where you always
+want a signature for the same document to appear to be the same signature, or
+where you always want a signature generated for the same document by the same
+organisation to appear to be the same signature. The JCA allows for different
 length salts and other digests by using the PSSParameterSpec and the
-MGF1ParameterSpec as we can
+MGF1ParameterSpec as we can see in the following example.
 
-see in the following example.
+#### Example 30 – PSS Signatures with Parameters
 
-#### Example 30 – PSS Signatures with Parameters..............................................................................
+-
 
-**public static byte** [][] generatePssSignatureWithParameters(PrivateKey
-rsaPrivate, **byte** []
-input)
-**throws** GeneralSecurityException, IOException { Signature signature =
-Signature. _
-getInstance_ ( **"
-SHA384withRSAandMGF1"** , **"BCFIPS"** );
-
-signature.setParameter( **new** PSSParameterSpec( **"SHA-384"** , **"MGF1"** ,
-**new** MGF1ParameterSpec( **"SHA-384"** ), 0 , PSSParameterSpec. **_DEFAULT_**
-.getTrailerField()))
-;
-
-signature.initSign(rsaPrivate); signature.update(input);
-
-AlgorithmParameters pssParameters = signature.getParameters();
-
-**return new byte** [][] { signature.sign(), pssParameters.getEncoded() }; }
-
-**public static boolean** verifyPssSignatureWithParameters(PublicKey
-rsaPublic, **byte** [] input,
-**byte** [] encSignature, **byte** [] encParameters)
-**throws** GeneralSecurityException, IOException { AlgorithmParameters
-pssParameters = AlgorithmParameters. _
-getInstance_ ( **"PSS"** , **"BCFIPS"** ); pssParameters.init(encParameters);
-
-PSSParameterSpec pssParameterSpec = pssParameters.getParameterSpec(
-PSSParameterSpec. **class** );
-
-Signature signature = Signature. _getInstance_ ( **"SHA384withRSAandMGF1"**
-, **"BCFIPS"** );
-
-signature.setParameter(pssParameterSpec); signature.initVerify(rsaPublic);
-signature.update(input);
-
-**return** signature.verify(encSignature);
-
-##### }
+Run `bcfipsin100.base.Rsa.generatePssSignatureWithParameters().verifyPssSignatureWithParameters()`
 
 Note, in this case, the digest used with the signature, the PSS generation, and
-the mask function are all
+the mask function are all the same. This is an established convention that
+should be followed as it means that all components of the system will be
+operating at an equivalent level of security. While there is not a well known
+attack for this case either, you will probably feel very depressed if it turns
+out that setting the MGF1ParameterSpec to SHA-1 actually opened the possibility
+of an attack on your SHA-384 PSS signatures - better to avoid that.
 
-the same. This is an established convention that should be followed as it means
-that all components of
-
-the system will be operating at an equivalent level of security. While there is
-not a well known attack
-
-for this case either, you will probably feel very depressed if it turns out that
-setting the
-
-MGF1ParameterSpec to SHA-1 actually opened the possibility of an attack on your
-SHA-384 PSS
-
-signatures - better to avoid that.
-
-### Using Elliptic Curve – ECDSA...........................................................................................................
+### Using Elliptic Curve – ECDSA
 
 The final signature type looked at in FIPS PUB 186-4 is ECDSA, which is a DSA
-style signature based
-
-on Elliptic Curves.
+style signature based on Elliptic Curves.
 
 In a similar way to DSA there are two ways of generating EC keys for use with
-ECDSA. In one case
-
-you can specify the key size required and a default curve will be used if
-available, otherwise you can
-
-specify the actual curve you want to use and a key pair suitable for that curve
-will be generated.
+ECDSA. In one case you can specify the key size required and a default curve
+will be used if available, otherwise you can specify the actual curve you want
+to use and a key pair suitable for that curve will be generated.
 
 In the first example we have just specified the key size required.
 
-#### Example 31 – Key Pair Generation................................................................................................
+#### Example 31 – Key Pair Generation
 
-**public static** KeyPair generateKeyPair()
-**throws** GeneralSecurityException { KeyPairGenerator keyPair =
-KeyPairGenerator. _
-getInstance_ ( **"EC"** , **"
-BCFIPS"** ); keyPair.initialize( 384 );
-**return** keyPair.generateKeyPair(); }
+- Run `bcfipsin100.base.EC.generateKeyPair()`
 
 The example will result in a key pair on the curve P-384. Other default curves
-available include P-224,
-
-P-256, and P-521.
+available include P-224, P-256, and P-521.
 
 When specifying an actual curve to key pair generation we use the JCA class
-ECGenParameterSpec,
+ECGenParameterSpec, which just takes the name of the curve to be used as a
+parameter.
 
-which just takes the name of the curve to be used as a parameter.
+#### Example 32 – Key Pair for a Named Curve
 
-#### Example 32 – Key Pair for a Named Curve...................................................................................
-
-**public static** KeyPair generateKeyPairUsingCurveName(String curveName)
-**throws** GeneralSecurityException { KeyPairGenerator keyPair =
-KeyPairGenerator. _
-getInstance_ ( **"EC"** , **"
-BCFIPS"** ); keyPair.initialize( **new** ECGenParameterSpec(curveName));
-**return** keyPair.generateKeyPair(); }
+- Run `bcfipsin100.base.EC.generateKeyPairUsingCurveName()`
 
 You can find a full list of the available curve names in the BC FIPS Java API
-User Guide. As an
-
-example if you wished to generate a key pair for the same curve that example 31
-would use you would
-
-specify curveName to have the value “P-384”.
+User Guide. As an example if you wished to generate a key pair for the same
+curve that example 31 would use you would specify curveName to have the value
+“P-384”.
 
 Once you have generated key pair, signing and verifying follow exactly the same
-procedure as they do
+procedure as they do with DSA.
 
-with DSA.
+#### Example 33 – ECDSA Signing and Verifying
 
-#### Example 33 – ECDSA Signing and Verifying................................................................................
+- Run `bcfipsin100.base.EC.generateSignature().verifySignature()`
 
-**public static byte** [] generateSignature(PrivateKey ecPrivate, **byte** []
-input)
-**throws** GeneralSecurityException { Signature signature = Signature. _
-getInstance_ ( **"
-SHA384withECDSA"** , **"
-BCFIPS"** ); signature.initSign(ecPrivate); signature.update(input);
-**return** signature.sign(); }
-
-**public static boolean** verifySignature(PublicKey ecPublic, **byte** []
-input, **byte** []
-encSignature)
-**throws** GeneralSecurityException { Signature signature = Signature. _
-getInstance_ ( **"
-SHA384withECDSA"** , **"
-BCFIPS"** ); signature.initVerify(ecPublic); signature.update(input);
-**return** signature.verify(encSignature); }
-
-### Finally..................................................................................................................................................
+### Finally
 
 It is worth having a look at the BC FIPS Java API User Guide about signatures as
-well. In addition to
+well. In addition to other varieties not mentioned here, there are even
+constructions for DSA and ECDSA which produce deterministic signatures, which
+while not FIPS approved at the moment, are starting to appear in some standards
+outside of the original one - RFC 6979. These can be useful to know about.
 
-other varieties not mentioned here, there are even constructions for DSA and
-ECDSA which produce
-
-deterministic signatures, which while not FIPS approved at the moment, are
-starting to appear in some
-
-standards outside of the original one - RFC 6979. These can be useful to know
-about.
-
-## Key Wrapping..........................................................................................................................................
+## Key Wrapping
 
 Key wrapping is what we are doing when we encrypt one key using another. As this
-is a common
-
-occurrence it is not surprising there are some standard ways of doing it. NIST
-provide standards for use
-
-with symmetric key algorithms such as AES and the RSA algorithm – although in
-the case of RSA, the
-
-NIST terminology used describes the wrapping function in connection with key
-transport.
+is a common occurrence it is not surprising there are some standard ways of
+doing it. NIST provide standards for use with symmetric key algorithms such as
+AES and the RSA algorithm – although in the case of RSA, the NIST terminology
+used describes the wrapping function in connection with key transport.
 
 The main thing to keep in mind with key wrapping is that it is madness to wrap a
-key which is expected
+key which is expected to have a particular security strength with one that does
+not at least have the equivalent security strength (a higher one is clearly
+better, but sometimes we have to do what we can).
 
-to have a particular security strength with one that does not at least have the
-equivalent security
-
-strength (a higher one is clearly better, but sometimes we have to do what we
-can).
-
-### Using Symmetric Keys for Wrapping.................................................................................................
+### Using Symmetric Keys for Wrapping
 
 The simplest techniques for key wrapping are based around the use of symmetric
-keys. They are
-
-documented in NIST SP 800-38F. The approach is superior to simply encrypting a
-key as it also
-
-includes some checksum information, the idea being there is a reasonable chance
-that an error will be
-
-detected if an attempt is made to unwrap a previously wrapped key with the wrong
-key, or an attempt is
-
+keys. They are documented in NIST SP 800-38F. The approach is superior to simply
+encrypting a key as it also includes some checksum information, the idea being
+there is a reasonable chance that an error will be detected if an attempt is
+made to unwrap a previously wrapped key with the wrong key, or an attempt is
 made to feed garbage into the key unwrapping algorithm instead.
 
 Like regular encryption the key wrapping algorithms have to contend with the
-fact that block ciphers
-
-work with block aligned data. For that reason SP 800-38F offers two
-alternatives, one without padding
-
-which requires block aligned keys (where a block is half the block size of the
-cipher), and one with
-
-padding for non-block aligned keys.
+fact that block ciphers work with block aligned data. For that reason SP 800-38F
+offers two alternatives, one without padding which requires block aligned keys (
+where a block is half the block size of the cipher), and one with padding for
+non-block aligned keys.
 
 This example shows the use of AES key wrapping, as defined in SP 800-38F.
 
-#### Example 34 – Wrapping without Padding......................................................................................
+#### Example 34 – Wrapping without Padding
 
-**public static byte** [] wrapKey(SecretKey key, SecretKey keyToWrap)
-**throws** GeneralSecurityException { Cipher cipher = Cipher. _
-getInstance_ ( **"AESKW"** , **"
-BCFIPS"** ); cipher.init(
-Cipher. **_WRAP_MODE_** , key);
-**return** cipher.wrap(keyToWrap); }
-
-**public static** Key unwrapKey(SecretKey key, **byte** [] wrappedKey)
-**throws** GeneralSecurityException { Cipher cipher = Cipher. _
-getInstance_ ( **"AESKW"** , **"
-BCFIPS"** ); cipher.init(
-Cipher. **_UNWRAP_MODE_** , key);
-**return** cipher.unwrap(wrappedKey, **"AES"** , Cipher. **_SECRET_KEY_** ); }
+- Run `bcfipsin100.base.Aes.wrapKey().unwrapKey()`
 
 This example shows the use of AES key wrapping with padding, also as defined in
 SP 800-38F.
 
-#### Example 35 – Wrapping with Padding...........................................................................................
+#### Example 35 – Wrapping with Padding
 
-**public static byte** [] wrapKeyWithPadding(SecretKey key, SecretKey keyToWrap)
-**throws** GeneralSecurityException { Cipher cipher = Cipher. _
-getInstance_ ( **"AESKWP"** , **"
-BCFIPS"** ); cipher.init(Cipher. **_WRAP_MODE_** , key);
-
-**return** cipher.wrap(keyToWrap); }
-
-**public static** Key unwrapKeyWithPadding(SecretKey key, **byte** []
-wrappedKey)
-**throws** GeneralSecurityException { Cipher cipher = Cipher. _
-getInstance_ ( **"AESKWP"** , **"
-BCFIPS"** ); cipher.init(Cipher. **_UNWRAP_MODE_** , key);
-**return** cipher.unwrap(wrappedKey, **"AES"** , Cipher. **_SECRET_KEY_** ); }
+- Run `bcfipsin100.base.Aes.wrapKeyWithPadding().unwrapKeyWithPadding()`
 
 Note that in both cases we are using Cipher.WRAP_MODE and Cipher.UNWRAP_MODE
-rather than
+rather than `Cipher.ENCRYPT` and `Cipher.DECRYPT`. This allows us to pass an
+actual key on wrapping and to return a key from the cipher doing the unwrapping,
+rather than just a block of bytes which we would then need to convert into a
+key.
 
-Cipher.ENCRYPT and Cipher.DECRYPT. This allows us to pass an actual key on
-wrapping and to
-
-return a key from the cipher doing the unwrapping, rather than just a block of
-bytes which we would
-
-then need to convert into a key.
-
-### Using RSA OAEP for Wrapping.........................................................................................................
+### Using RSA OAEP for Wrapping
 
 The RSA Optimal Asymmetric Encryption Padding (OAEP) algorithm was originally
-introduced in
-
-PKCS#1 Version 2 at the same time as PSS and is described in NIST SP 800-56B,
-“Recommendations
-
-for Pair-Wise Key Establishment Schemes Using Integer Factorization
-Cryptography”. I think the
-
-reason for this is that the assumption is that this technique would only be used
-to send a symmetric key
-
-to another party. In our case we are referring to it as key wrapping as that is
-how we talk about it in the
-
-JCE. The technique is not as general as AESKWP either, a key being transported,
-or wrapped, must fit
-
-in a single RSA block, along with any padding involved.
+introduced in PKCS#1 Version 2 at the same time as PSS and is described in NIST
+SP 800-56B, “Recommendations for Pair-Wise Key Establishment Schemes Using
+Integer Factorization Cryptography”. I think the reason for this is that the
+assumption is that this technique would only be used to send a symmetric key to
+another party. In our case we are referring to it as key wrapping as that is how
+we talk about it in the JCE. The technique is not as general as AESKWP either, a
+key being transported, or wrapped, must fit in a single RSA block, along with
+any padding involved.
 
 Basic OAEP wrapping allows you to wrap a symmetric key using an RSA public key,
-and then the
+and then the other party can use the corresponding private key to recover it. In
+the same way as we did with AESKW we use WRAP_MODE and UNWRAP_MODE on the cipher
+class as shown in the following example.
 
-other party can use the corresponding private key to recover it. In the same way
-as we did with
-
-AESKW we use WRAP_MODE and UNWRAP_MODE on the cipher class as shown in the
-following
-
-example.
-
-#### Example 36 – OAEP Wrapping......................................................................................................
-
-**public static byte** [] oaepKeyWrap(PublicKey rsaPublic, SecretKey secretKey)
-**throws** GeneralSecurityException { Cipher c = Cipher. _getInstance_ ( **"
-RSA/NONE/OAEPPadding"**
-, **"BCFIPS"** ); c.init(Cipher. **_WRAP_MODE_** , rsaPublic);
-**return** c.wrap(secretKey); }
-
-**public static** Key oaepKeyUnwrap(PrivateKey rsaPrivate, **byte** []
-wrappedKey)
-**throws** GeneralSecurityException { Cipher c = Cipher. _getInstance_ ( **"
-RSA/NONE/OAEPPadding"**
-, **"BCFIPS"** ); c.init(Cipher. **_UNWRAP_MODE_** , rsaPrivate);
-**return** c.unwrap(wrappedKey, **"AES"** , Cipher. **_SECRET_KEY_** ); }
+#### Example 36 – OAEP Wrapping
+- Run `bcfipsin100.base.Rsa.oaepKeyWrap().oaepKeyUnwrap()`
 
 Unlike AESKWP, but like PSS, OAEP can also be used in conjunction with
 parameters that allow you
