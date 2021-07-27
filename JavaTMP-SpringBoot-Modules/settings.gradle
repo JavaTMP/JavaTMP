@@ -83,6 +83,8 @@ include 'spring-boot-security:spring-boot-security-web-filter-CORS'
 include 'spring-boot-security:spring-boot-security-web-authentication-server-demo:authentication-server'
 include 'spring-boot-security:spring-boot-security-web-authentication-server-demo:business-logic-server'
 
+include 'spring-boot-security:spring-boot-security-web-oauth2:spring-boot-security-web-oauth2-client'
+
 include 'spring-boot-cloud:cloud-services:spring-boot-cloud-service-empty'
 include 'spring-boot-cloud:cloud-services:cloud-service-common'
 include 'spring-boot-cloud:cloud-services:product-composite-service'
