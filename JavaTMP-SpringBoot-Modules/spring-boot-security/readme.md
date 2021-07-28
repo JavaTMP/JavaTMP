@@ -803,3 +803,65 @@ response from the resource server provides the user details along with the URL
 for the main page.
 
 ## 13 OAuth 2: Implementing the authorization server
+
+The role of the authorization server is to authenticate the user and provide a
+token to the client. The client uses this token to access resources exposed by
+the resource server on behalf of the user.
+
+The authorization server is one of the OAuth 2 actors. It identifies the
+resource owner and provides an access token to the client. The client needs the
+access token to access resources on behalf of the user.
+
+Implementing a custom authorization server helps you better understand how this
+component works. Of course, it’s also the only way at present to implement an
+authorization server.
+
+### 13.1 Writing your own authorization server implementation
+
+define a configuration class, which I call AuthServerConfig. Besides the classic
+@Configuration annotation, we also need to annotate this class with
+@EnableAuthorizationServer. This way, we instruct Spring Boot to enable the
+configuration specific to the OAuth 2 authorization server. We can customize
+this configuration by extending the AuthorizationServerConfigurerAdapter class
+and overriding specific methods
+
+### 13.2 Defining user management
+
+The authentication process. A filter intercepts the user request and delegates
+the authentication responsibility to an authentication manager. Further, the
+authentication manager uses an authentication provider that implements the
+authentication logic. To find the user, the authentication provider uses a
+UserDetailsService, and to verify the password, the authentication provider uses
+a PasswordEncoder.
+
+### 13.3 Registering clients with the authorization server
+
+The contract that defines the client for the authorization server is
+ClientDetails. The contract defining the object to retrieve `ClientDetails` by
+their IDs is `ClientDetailsService`.
+
+### 13.4 Using the password grant type
+
+The password grant type. The authorization server receives the user credentials
+and authenticates the user. If the credentials are correct, the authorization
+server issues an access token that the client can use to call resources that
+belong to the authenticated user.
+
+### 13.5 Using the authorization code grant type
+
+In the authorization code grant type, the client redirects the user to the
+authorization server for authentication. The user directly interacts with the
+authorization server and, once authenticated, the authorization server returns
+to the client a redirect URI. When it calls back to the client, it also provides
+an authorization code. The client uses the authorization code to obtain an
+access token.
+
+### 13.6 Using the client credentials grant type
+
+The client credentials grant type doesn’t involve the user. Generally, we use
+this grant type for authentication between two backend solutions. The client
+needs only its credentials to authenticate and obtain an access token.
+
+### 13.7 Using the refresh token grant type
+When the user authenticates, the client also receives a refresh token besides the access token. The client uses the refresh token to get a new access token.
+
