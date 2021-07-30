@@ -927,3 +927,93 @@ exists, the resource server finds the details related to it in the database,
 including the username and its authorities. With these details, the resource
 server can then authorize the request.
 
+The authorization server uses a token store to generate tokens at the end of the
+authentication process. The client uses these tokens to access resources managed
+by the resource server.
+
+The resource server uses the token store to validate the token and retrieve
+details needed for authorization. These details are then stored in the security
+context.
+
+## 15 OAuth 2: Using JWT and cryptographic signatures
+
+Using cryptographic signatures to validate tokens has the advantage of allowing
+the resource server to validate them without needing to call the authorization
+server directly and without needing a shared database.
+
+### 15.1 Using tokens signed with symmetric keys with JWT
+
+The most straightforward approach to signing tokens is using symmetric keys.
+With this approach, using the same key, you can both sign a token and validate
+its signature.
+
+#### 15.1.1 Using JWTs
+
+A token consists of three parts: the header, the body, and the signature.
+
+A JWT is composed of three parts: the header, the body, and the signature. The
+header and the body contain details represented with JSON. These parts are
+Base64 encoded and then signed. The token is a string formed of these three
+parts separated by dots.
+
+When a JWT is signed, we also call it a JWS (JSON Web Token Signed).
+
+A hacker intercepts a token and changes its content. The resource server rejects
+the call because the signature of the token no longer matches the content.
+
+If a token is encrypted, we also call it a JWE (JSON Web Token Encrypted). You
+can’t see the contents of an encrypted token without a valid key.
+
+#### 15.1.2 Implementing an authorization server to issue JWTs
+
+Using symmetric keys. Both the authorization server and the resource server
+share the same key. The authorization server uses the key to sign the tokens,
+and the resource server uses the key to validate the signature.
+
+#### 15.1.3 Implementing a resource server that uses JWT
+
+A key used for symmetric encryption or signing is just a random string of bytes.
+You generate it using an algorithm for randomness.
+
+The resource server needs the key to validate a token’s signature. The next
+listing defines the resource server configuration class.
+
+We can now start our resource server and call the /hello endpoint using a valid
+JWT that you obtained earlier from the authorization server. You have to add the
+token to the Authorization HTTP header on the request prefixed with the word
+'Bearer'
+
+### 15.2 Using tokens signed with asymmetric keys with JWT
+
+To sign the token, someone needs to use the private key. The public key of the
+key pair can then be used by anyone to verify the identity of the signer.
+
+#### 15.2.1 Generating the key pair
+
+This is an asymmetric key pair (which means it has a private part used by the
+authorization server to sign a token and a public part used by the resource
+server to validate the signature).
+
+To generate the key pair, I use keytool and OpenSSL
+
+Generating a private key To generate a private key, run the keytool command in
+the next code snippet. It generates a private key in a file named ssia.jks. I
+also use the password “ssia123” to protect the private key and the alias “ssia”
+to give the key a name. In the following command, you can see the algorithm used
+to generate the key, RSA:
+`keytool -genkeypair -alias ssia -keyalg RSA -keypass ssia123 -keystore ssia.jks -storepass ssia123`
+
+Obtaining the public key To get the public key for the previously generated
+private key, you can run the keytool command:
+`keytool -list -rfc --keystore ssia.jks | openssl x509 -inform pem -pubkey`
+
+#### 15.2.2 Implementing an authorization server that uses private keys
+
+we configure the authorization server to use a private key for signing JWTs.
+
+#### 15.2.3 Implementing a resource server that uses public keys
+
+we implement a resource server that uses the public key to verify the token’s
+signature.
+
+#### 15.2.4 Using an endpoint to expose the public key
