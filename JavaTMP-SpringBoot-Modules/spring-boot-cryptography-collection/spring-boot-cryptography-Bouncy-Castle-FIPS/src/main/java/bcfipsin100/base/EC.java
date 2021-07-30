@@ -19,20 +19,15 @@ public class EC {
     public static KeyPair generateKeyPair()
             throws GeneralSecurityException {
         KeyPairGenerator keyPair = KeyPairGenerator.getInstance("RSA");
-
         keyPair.initialize(1024);
-
         return keyPair.generateKeyPair();
     }
 
     public static byte[] generateSignature(PrivateKey ecPrivate, byte[] input)
             throws GeneralSecurityException {
         Signature signature = Signature.getInstance("SHA256withRSA");
-
         signature.initSign(ecPrivate);
-
         signature.update(input);
-
         return signature.sign();
     }
 
@@ -49,9 +44,7 @@ public class EC {
     public static KeyPair generateKeyPairUsingCurveName(String curveName)
             throws GeneralSecurityException {
         KeyPairGenerator keyPair = KeyPairGenerator.getInstance("EC", "BCFIPS");
-
         keyPair.initialize(new ECGenParameterSpec(curveName));
-
         return keyPair.generateKeyPair();
     }
 
@@ -59,13 +52,9 @@ public class EC {
                                                  PublicKey recipientPublic)
             throws GeneralSecurityException {
         KeyAgreement agreement = KeyAgreement.getInstance("ECCDH", "BCFIPS");
-
         agreement.init(initiatorPrivate);
-
         agreement.doPhase(recipientPublic, true);
-
         SecretKey agreedKey = agreement.generateSecret("AES[256]");
-
         return agreedKey.getEncoded();
     }
 
@@ -73,13 +62,9 @@ public class EC {
                                                  PublicKey initiatorPublic)
             throws GeneralSecurityException {
         KeyAgreement agreement = KeyAgreement.getInstance("ECCDH", "BCFIPS");
-
         agreement.init(recipientPrivate);
-
         agreement.doPhase(initiatorPublic, true);
-
         SecretKey agreedKey = agreement.generateSecret("AES[256]");
-
         return agreedKey.getEncoded();
     }
 
@@ -89,14 +74,10 @@ public class EC {
             throws GeneralSecurityException {
         KeyAgreement agreement = KeyAgreement
                 .getInstance("ECCDHwithSHA384CKDF", "BCFIPS");
-
         agreement.init(initiatorPrivate,
                 new UserKeyingMaterialSpec(userKeyingMaterial));
-
         agreement.doPhase(recipientPublic, true);
-
         SecretKey agreedKey = agreement.generateSecret("AES[256]");
-
         return agreedKey.getEncoded();
     }
 
@@ -106,14 +87,10 @@ public class EC {
             throws GeneralSecurityException {
         KeyAgreement agreement = KeyAgreement
                 .getInstance("ECCDHwithSHA384CKDF", "BCFIPS");
-
         agreement.init(recipientPrivate,
                 new UserKeyingMaterialSpec(userKeyingMaterial));
-
         agreement.doPhase(initiatorPublic, true);
-
         SecretKey agreedKey = agreement.generateSecret("AES[256]");
-
         return agreedKey.getEncoded();
     }
 
@@ -126,21 +103,16 @@ public class EC {
 
         agreement.init(initiatorPrivate,
                 new UserKeyingMaterialSpec(userKeyingMaterial));
-
         agreement.doPhase(recipientPublic, true);
-
         AgreedKeyWithMacKey agreedKey = (AgreedKeyWithMacKey) agreement
                 .generateSecret("CMAC[128]" + "/" + "AES[256]");
 
         Mac mac = Mac.getInstance("CMAC", "BCFIPS");
-
         mac.init(agreedKey.getMacKey());
-
         DERMacData macData = new DERMacData.Builder(DERMacData.Type.UNILATERALU,
                 ExValues.Initiator, ExValues.Recipient, null, null).build();
 
         byte[] encMac = mac.doFinal(macData.getMacData());
-
         agreedKey.getMacKey().zeroize();
 
         return new byte[][]{agreedKey.getEncoded(), encMac};

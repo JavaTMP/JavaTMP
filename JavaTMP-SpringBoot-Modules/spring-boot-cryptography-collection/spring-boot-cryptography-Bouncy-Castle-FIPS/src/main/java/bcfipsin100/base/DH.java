@@ -15,11 +15,9 @@ import java.io.IOException;
 import java.security.*;
 
 
-public class DH
-{
+public class DH {
     public static KeyPair generateKeyPair(DHParameterSpec dhParameterSpec)
-        throws GeneralSecurityException
-    {
+            throws GeneralSecurityException {
         KeyPairGenerator keyPair = KeyPairGenerator.getInstance("DH", "BCFIPS");
 
         // there are precomputed parameters for 2048 bit keys
@@ -29,9 +27,9 @@ public class DH
     }
 
     public static DHParameterSpec generateParameters()
-        throws GeneralSecurityException
-    {
-        AlgorithmParameterGenerator algGen = AlgorithmParameterGenerator.getInstance("DH", "BCFIPS");
+            throws GeneralSecurityException {
+        AlgorithmParameterGenerator algGen = AlgorithmParameterGenerator
+                .getInstance("DH", "BCFIPS");
 
         algGen.init(3072);
 
@@ -40,69 +38,69 @@ public class DH
         return dsaParams.getParameterSpec(DHParameterSpec.class);
     }
 
-    public static byte[] initiatorAgreementBasic(PrivateKey initiatorPrivate, PublicKey recipientPublic)
-        throws GeneralSecurityException
-    {
-        KeyAgreement agreement = KeyAgreement.getInstance("DH", "BCFIPS");
+    public static byte[] initiatorAgreementBasic(PrivateKey initiatorPrivate,
+                                                 PublicKey recipientPublic)
+            throws GeneralSecurityException {
 
+        KeyAgreement agreement = KeyAgreement.getInstance("DH", "BCFIPS");
         agreement.init(initiatorPrivate);
-
         agreement.doPhase(recipientPublic, true);
-
         SecretKey agreedKey = agreement.generateSecret("AES[256]");
-
         return agreedKey.getEncoded();
+
     }
 
-    public static byte[] recipientAgreementBasic(PrivateKey recipientPrivate, PublicKey initiatorPublic)
-        throws GeneralSecurityException
-    {
+    public static byte[] recipientAgreementBasic(PrivateKey recipientPrivate,
+                                                 PublicKey initiatorPublic)
+            throws GeneralSecurityException {
+
         KeyAgreement agreement = KeyAgreement.getInstance("DH", "BCFIPS");
-
         agreement.init(recipientPrivate);
-
         agreement.doPhase(initiatorPublic, true);
-
         SecretKey agreedKey = agreement.generateSecret("AES[256]");
-
         return agreedKey.getEncoded();
+
     }
 
-    public static byte[] initiatorAgreementWithKdf(PrivateKey initiatorPrivate, PublicKey recipientPublic, byte[] userKeyingMaterial)
-        throws GeneralSecurityException
-    {
-        KeyAgreement agreement = KeyAgreement.getInstance("DHwithSHA384CKDF", "BCFIPS");
+    public static byte[] initiatorAgreementWithKdf(PrivateKey initiatorPrivate,
+                                                   PublicKey recipientPublic,
+                                                   byte[] userKeyingMaterial)
+            throws GeneralSecurityException {
 
-        agreement.init(initiatorPrivate, new UserKeyingMaterialSpec(userKeyingMaterial));
-
+        KeyAgreement agreement = KeyAgreement
+                .getInstance("DHwithSHA384CKDF", "BCFIPS");
+        agreement.init(initiatorPrivate,
+                new UserKeyingMaterialSpec(userKeyingMaterial));
         agreement.doPhase(recipientPublic, true);
-
         SecretKey agreedKey = agreement.generateSecret("AES[256]");
-
         return agreedKey.getEncoded();
+
     }
 
-    public static byte[] recipientAgreementWithKdf(PrivateKey recipientPrivate, PublicKey initiatorPublic, byte[] userKeyingMaterial)
-        throws GeneralSecurityException
-    {
-        KeyAgreement agreement = KeyAgreement.getInstance("DHwithSHA384CKDF", "BCFIPS");
+    public static byte[] recipientAgreementWithKdf(PrivateKey recipientPrivate,
+                                                   PublicKey initiatorPublic,
+                                                   byte[] userKeyingMaterial)
+            throws GeneralSecurityException {
 
-        agreement.init(recipientPrivate, new UserKeyingMaterialSpec(userKeyingMaterial));
-
+        KeyAgreement agreement = KeyAgreement
+                .getInstance("DHwithSHA384CKDF", "BCFIPS");
+        agreement.init(recipientPrivate,
+                new UserKeyingMaterialSpec(userKeyingMaterial));
         agreement.doPhase(initiatorPublic, true);
-
         SecretKey agreedKey = agreement.generateSecret("AES[256]");
-
         return agreedKey.getEncoded();
+
     }
 
-    public static byte[][] initiatorAgreeKeyEstablishWithKeyConfirmation(PrivateKey initiatorPrivate, PublicKey recipientPublic, byte[] userKeyingMaterial)
-        throws GeneralSecurityException
-    {
-        KeyAgreement agreement = KeyAgreement.getInstance("DHwithSHA384CKDF", "BCFIPS");
+    public static byte[][] initiatorAgreeKeyEstablishWithKeyConfirmation(
+            PrivateKey initiatorPrivate, PublicKey recipientPublic,
+            byte[] userKeyingMaterial)
+            throws GeneralSecurityException {
+        KeyAgreement agreement = KeyAgreement
+                .getInstance("DHwithSHA384CKDF", "BCFIPS");
 
-        agreement.init(initiatorPrivate, new UserKeyingMaterialSpec(userKeyingMaterial));
-
+        agreement.init(initiatorPrivate,
+                new UserKeyingMaterialSpec(userKeyingMaterial));
         agreement.doPhase(recipientPublic, true);
 
         /*AgreedKeyWithMacKey agreedKey = (AgreedKeyWithMacKey)agreement.generateSecret("CMAC[128]" + "/" + "AES[256]");
@@ -120,36 +118,40 @@ public class DH
 
         return new byte[][] { agreedKey.getEncoded(), encMac };*/
         return null;
+
     }
 
-    public static byte[][] recipientAgreeKeyEstablishWithKeyConfirmation(PrivateKey recipientPrivate, PublicKey initiatorPublic, byte[] userKeyingMaterial)
-        throws GeneralSecurityException
-    {
-        KeyAgreement agreement = KeyAgreement.getInstance("DHwithSHA384CKDF", "BCFIPS");
+    public static byte[][] recipientAgreeKeyEstablishWithKeyConfirmation(
+            PrivateKey recipientPrivate, PublicKey initiatorPublic,
+            byte[] userKeyingMaterial)
+            throws GeneralSecurityException {
+        KeyAgreement agreement = KeyAgreement
+                .getInstance("DHwithSHA384CKDF", "BCFIPS");
 
-        agreement.init(recipientPrivate, new UserKeyingMaterialSpec(userKeyingMaterial));
+        agreement.init(recipientPrivate,
+                new UserKeyingMaterialSpec(userKeyingMaterial));
 
         agreement.doPhase(initiatorPublic, true);
 
-        AgreedKeyWithMacKey agreedKey = (AgreedKeyWithMacKey)agreement.generateSecret("CMAC[128]" + "/" + "AES[256]");
+        AgreedKeyWithMacKey agreedKey = (AgreedKeyWithMacKey) agreement
+                .generateSecret("CMAC[128]" + "/" + "AES[256]");
 
         Mac mac = Mac.getInstance("CMAC", "BCFIPS");
 
         mac.init(agreedKey.getMacKey());
 
         DERMacData macData = new DERMacData.Builder(DERMacData.Type.UNILATERALU,
-            ExValues.Initiator, ExValues.Recipient, null, null).build();
+                ExValues.Initiator, ExValues.Recipient, null, null).build();
 
         byte[] encMac = mac.doFinal(macData.getMacData());
 
         agreedKey.getMacKey().zeroize();
 
-        return new byte[][] { agreedKey.getEncoded(), encMac };
+        return new byte[][]{agreedKey.getEncoded(), encMac};
     }
 
     public static void main(String[] args)
-        throws GeneralSecurityException, IOException
-    {
+            throws GeneralSecurityException, IOException {
         Setup.installProvider();
 
         DHParameterSpec dhParams = generateParameters();
@@ -160,22 +162,41 @@ public class DH
         KeyPair initiatorPair = generateKeyPair(dhParams);
         KeyPair recipientPair = generateKeyPair(dhParams);
 
-        byte[] agreeInitKey = initiatorAgreementBasic(initiatorPair.getPrivate(), recipientPair.getPublic());
+        byte[] agreeInitKey = initiatorAgreementBasic(
+                initiatorPair.getPrivate(), recipientPair.getPublic());
 
-        byte[] agreeRecipKey = recipientAgreementBasic(recipientPair.getPrivate(), initiatorPair.getPublic());
+        byte[] agreeRecipKey = recipientAgreementBasic(
+                recipientPair.getPrivate(), initiatorPair.getPublic());
 
-        System.err.println("Agreement (basic) key: " + Arrays.areEqual(agreeInitKey, agreeRecipKey) + ", " + Hex.toHexString(agreeInitKey));
+        System.err.println("Agreement (basic) key: " + Arrays
+                .areEqual(agreeInitKey, agreeRecipKey) + ", " + Hex
+                .toHexString(agreeInitKey));
 
-        byte[] agreeInitWithKdfKey = initiatorAgreementWithKdf(initiatorPair.getPrivate(), recipientPair.getPublic(), ExValues.UKM);
+        byte[] agreeInitWithKdfKey = initiatorAgreementWithKdf(
+                initiatorPair.getPrivate(), recipientPair.getPublic(),
+                ExValues.UKM);
 
-        byte[] agreeRecipWithKdfKey = recipientAgreementWithKdf(recipientPair.getPrivate(), initiatorPair.getPublic(), ExValues.UKM);
+        byte[] agreeRecipWithKdfKey = recipientAgreementWithKdf(
+                recipientPair.getPrivate(), initiatorPair.getPublic(),
+                ExValues.UKM);
 
-        System.err.println("Agreement (with KDF) key: " + Arrays.areEqual(agreeInitWithKdfKey, agreeRecipWithKdfKey) + ", " + Hex.toHexString(agreeInitWithKdfKey));
+        System.err.println("Agreement (with KDF) key: " + Arrays
+                .areEqual(agreeInitWithKdfKey,
+                        agreeRecipWithKdfKey) + ", " + Hex
+                .toHexString(agreeInitWithKdfKey));
 
-        byte[][] agreeInitKeyMac = initiatorAgreeKeyEstablishWithKeyConfirmation(initiatorPair.getPrivate(), recipientPair.getPublic(), ExValues.UKM);
+        byte[][] agreeInitKeyMac = initiatorAgreeKeyEstablishWithKeyConfirmation(
+                initiatorPair.getPrivate(), recipientPair.getPublic(),
+                ExValues.UKM);
 
-        byte[][] agreeRecipKeyMac = recipientAgreeKeyEstablishWithKeyConfirmation(recipientPair.getPrivate(), initiatorPair.getPublic(), ExValues.UKM);
+        byte[][] agreeRecipKeyMac = recipientAgreeKeyEstablishWithKeyConfirmation(
+                recipientPair.getPrivate(), initiatorPair.getPublic(),
+                ExValues.UKM);
 
-        System.err.println("Agreement (with key confirmation) key: " + Arrays.areEqual(agreeInitKeyMac[0], agreeRecipKeyMac[0]) + ", " + Arrays.areEqual(agreeInitKeyMac[1], agreeRecipKeyMac[1]) + ", "+ Hex.toHexString(agreeInitKeyMac[0]));
+        System.err.println("Agreement (with key confirmation) key: " + Arrays
+                .areEqual(agreeInitKeyMac[0],
+                        agreeRecipKeyMac[0]) + ", " + Arrays
+                .areEqual(agreeInitKeyMac[1], agreeRecipKeyMac[1]) + ", " + Hex
+                .toHexString(agreeInitKeyMac[0]));
     }
 }

@@ -783,885 +783,292 @@ the same way as we did with AESKW we use WRAP_MODE and UNWRAP_MODE on the cipher
 class as shown in the following example.
 
 #### Example 36 – OAEP Wrapping
+
 - Run `bcfipsin100.base.Rsa.oaepKeyWrap().oaepKeyUnwrap()`
 
 Unlike AESKWP, but like PSS, OAEP can also be used in conjunction with
-parameters that allow you
-
-to use a higher level cipher than the default (currently SHA-1).
+parameters that allow you to use a higher level cipher than the default (
+currently SHA-1).
 
 #### Example 37 – OAEP Wrapping with Parameters...........................................................................
 
-**public static byte** [][] oaepKeyWrapWithParameters(PublicKey rsaPublic,
-SecretKey secretKey)
-**throws** GeneralSecurityException, IOException { Cipher c = Cipher. _
-getInstance_ ( **"
-RSA/NONE/OAEPPadding"** , **"
-BCFIPS"** ); c.init(Cipher. **_WRAP_MODE_** , rsaPublic,
-**new** OAEPParameterSpec( **"SHA-384"** , **"MGF1"** , **new**
-MGF1ParameterSpec( **"SHA-384"** ), PSource.PSpecified. **_DEFAULT_** ));
-
-**return new byte** [][] { c.wrap(secretKey), c.getParameters().getEncoded() };
-}
-
-**public static** Key oaepKeyUnwrapWithParameters(PrivateKey rsaPrivate, **
-byte** [] wrappedKey,
-**byte** [] encParameters)
-**throws** GeneralSecurityException, IOException { Cipher c = Cipher. _
-getInstance_ ( **"
-RSA/NONE/OAEPPadding"** , **"
-BCFIPS"** );
-
-AlgorithmParameters algorithmParameters = AlgorithmParameters. _
-getInstance_ ( **"OAEP"** , **"
-BCFIPS"** ); algorithmParameters.init(encParameters);
-
-c.init(Cipher. **_UNWRAP_MODE_** , rsaPrivate, algorithmParameters);
-
-**return** c.unwrap(wrappedKey, **"AES"** , Cipher. **_SECRET_KEY_** ); }
+Run `bcfipsin100.base.Rsa.oaepKeyWrapWithParameters().oaepKeyUnwrapWithParameters()`
 
 As we can see there are small differences, there's no salt value, and instead we
-have PSource, which
+have PSource, which provides a way of passing some additional parameters which
+can be used to provide a value for the label L used in the construction of the
+OAEP padding – see RFC 3447 for details.
 
-provides a way of passing some additional parameters which can be used to
-provide a value for the
-
-label L used in the construction of the OAEP padding – see RFC 3447 for details.
-
-### Using RSA KEM for Wrapping...........................................................................................................
+### Using RSA KEM for Wrapping
 
 The second RSA based technique given in SP 800-56B is the one based on Key
-Encapsulation
-
-Mechanism (KEM). The difference between the RSA KEM and the RSA OAEP is that is
-the case of
-
-RSA KEM it is key material which is transmitted to the recipient by the
-initiator, not an actual key, or
-
-keys. When RSA KEM is used, both sides use the generated key material to them
-make the keys that
-
-they use. As the RSA key involved is encrypting a block of random data RSA KEM
-actually has a
-
-tighter security proof than RSA OAEP.
+Encapsulation Mechanism (KEM). The difference between the RSA KEM and the RSA
+OAEP is that is the case of RSA KEM it is key material which is transmitted to
+the recipient by the initiator, not an actual key, or keys. When RSA KEM is
+used, both sides use the generated key material to them make the keys that they
+use. As the RSA key involved is encrypting a block of random data RSA KEM
+actually has a tighter security proof than RSA OAEP.
 
 RSA KEM key transport also uses the cipher API, but in this case a wrapping key
-is generated from the
+is generated from the key material and used to wrap the actual key that is sent.
+The example below shows the use of AES-256 KW with RSA KEM.
 
-key material and used to wrap the actual key that is sent. The example below
-shows the use of AES-256
+#### Example 38 – RSA KEM Based Key Wrapping
 
-KW with RSA KEM.
-
-#### Example 38 – RSA KEM Based Key Wrapping............................................................................
-
-**public static byte** [] kemKeyWrap(PublicKey rsaPublic, SecretKey secretKey)
-**throws** GeneralSecurityException { Cipher c = Cipher. _getInstance_ ( **"
-RSA-KTS-KEM-KWS"** , **"
-BCFIPS"** );
-
-c.init(Cipher. **_WRAP_MODE_** , rsaPublic,
-**new** KTSParameterSpec.Builder(
-NISTObjectIdentifiers. **_id_aes256_wrap_** .getId(), 256 ).build());
-
-**return** c.wrap(secretKey); }
-
-**public static** Key kemKeyUnwrap(PrivateKey rsaPrivate, **byte** []
-wrappedKey)
-**throws** GeneralSecurityException { Cipher c = Cipher. _getInstance_ ( **"
-RSA-KTS-KEM-KWS"** , **"
-BCFIPS"** );
-
-c.init(Cipher. **_UNWRAP_MODE_** , rsaPrivate,
-**new** KTSParameterSpec.Builder(
-NISTObjectIdentifiers. **_id_aes256_wrap_** .getId(), 256 ).build());
-
-**return** c.unwrap(wrappedKey, **"AES"** , Cipher. **_SECRET_KEY_** ); }
+Run `bcfipsin100.base.Rsa.kemKeyWrap().kemKeyUnwrap()`
 
 In this case, the secret key passed in will be wrapped using an AES key
-generated as a result of the
+generated as a result of the RSA KEM process. This is also the technique
+documented in RFC 5990 and is available in the BC CMS API found in the bcpkix
+jar.
 
-RSA KEM process. This is also the technique documented in RFC 5990 and is
-available in the BC
+## Key Establishment and Agreement
 
-CMS API found in the bcpkix jar.
-
-## Key Establishment and Agreement..........................................................................................................
-
-### Key Establishment Using RSA...........................................................................................................
+### Key Establishment Using RSA
 
 There are two additional options for RSA OAEP and RSA KEM detailed SP 800-56B
-which do not
-
-actually mesh very well with the Cipher API in Java. These are both related to
-the version of the
-
-algorithms using key confirmation. Both these approaches require the use of BC
-FIPS specific classes
-
-as the overlap between the approach and the JCE API is a little bit tenuous.
+which do not actually mesh very well with the Cipher API in Java. These are both
+related to the version of the algorithms using key confirmation. Both these
+approaches require the use of BC FIPS specific classes as the overlap between
+the approach and the JCE API is a little bit tenuous.
 
 We will look at the RSA OAEP. In this case, from the BC FIPS Java world view,
-RSA OAEP crosses
-
-the line between key wrapping and key establishment when key confirmation is
-added. Key
-
-confirmation also involves transferring a MAC key with the key being
-transported. In the case of key
-
-confirmation the MAC key is then used by the recipient to send a MAC back to the
-send of the
-
-wrapped key to allow the sender of the key to confirm that the recipient (and
-possibly only the
-
+RSA OAEP crosses the line between key wrapping and key establishment when key
+confirmation is added. Key confirmation also involves transferring a MAC key
+with the key being transported. In the case of key confirmation the MAC key is
+then used by the recipient to send a MAC back to the send of the wrapped key to
+allow the sender of the key to confirm that the recipient (and possibly only the
 recipient) correctly received the key.
 
 The following example shows OAEP with key confirmation. Note in this case the
-API used is based
-
-around the SecretKeyFactory as we generate both the key to be established and
-the MAC key as part of
-
-the OAEP key transport operation. Also note the call to the macKey.zeroize()
-method – this is the only
-
-place in the BC FIPS Java API where a key object is mutable. This is required by
-SP 800-56B as
-
-ideally the MAC key is forcibly erased as soon as it has been recovered and
+API used is based around the SecretKeyFactory as we generate both the key to be
+established and the MAC key as part of the OAEP key transport operation. Also
+note the call to the `macKey.zeroize()` method – this is the only place in the
+BC FIPS Java API where a key object is mutable. This is required by SP 800-56B
+as ideally the MAC key is forcibly erased as soon as it has been recovered and
 used.
 
-#### Example 39 – OAEP Key Establishment with Key Confirmation.................................................
+#### Example 39 – OAEP Key Establishment with Key Confirmation
 
-**public static byte** [][] initiatorOaepKeyEstablishWithKeyConfirmation(
-PublicKey rsaPublic)
-**throws** GeneralSecurityException { SecretKeyFactory kemFact =
-SecretKeyFactory. _
-getInstance_ ( **"RSA-KTS-OAEP"**
-, **"BCFIPS"** ); KTSGenerateKeySpec kemParams = **new**
-KTSGenerateKeySpec.Builder(
-rsaPublic, **"AES"** , 256 ).withMac( **"HmacSHA384"** , 384 ).build();
-
-KTSKeyWithEncapsulation encapsKey = (KTSKeyWithEncapsulation)
-kemFact.generateSecret(kemParams);
-
-ZeroizableSecretKey macKey = encapsKey.getMacKey();
-
-Mac mac = Mac. _getInstance_ (macKey.getAlgorithm(), **"BCFIPS"** ); mac.init(
-macKey);
-
-DERMacData macData = **new** DERMacData.Builder(DERMacData.Type. **_
-UNILATERALU_** , ExValues. **_
-Initiator_** , ExValues. **_Recipient_** , **null** ,
-encapsKey.getEncapsulation()).build();
-
-**byte** [] encMac = mac.doFinal(macData.getMacData());
-
-macKey.zeroize(); // FIPS requirement
-
-**return new byte** [][] { encapsKey.getEncoded(), encapsKey.getEncapsulation(),
-encMac }; }
-
-**public static byte** [][] recipientOaepKeyEstablishWithKeyConfirmation(
-PrivateKey rsaPrivate,
-**byte** [] encapsulation)
-**throws** GeneralSecurityException { SecretKeyFactory kemFact =
-SecretKeyFactory. _
-getInstance_ ( **"RSA-KTS-OAEP"**
-, **"BCFIPS"** ); KTSExtractKeySpec kemParams = **new**
-KTSExtractKeySpec.Builder(
-rsaPrivate, encapsulation,
-**"AES"** , 256 ).withMac( **"HmacSHA384"** , 384 ).build();
-
-KTSKeyWithEncapsulation encapsKey = (KTSKeyWithEncapsulation)
-kemFact.generateSecret(kemParams);
-
-ZeroizableSecretKey macKey = encapsKey.getMacKey();
-
-Mac mac = Mac. _getInstance_ (macKey.getAlgorithm(), **"BCFIPS"** ); mac.init(
-macKey);
-
-DERMacData macData = **new** DERMacData.Builder(DERMacData.Type. **_
-UNILATERALU_** , ExValues. **_
-Initiator_** , ExValues. **_Recipient_** , **null** ,
-encapsKey.getEncapsulation()).build();
-
-**byte** [] encMac = mac.doFinal(macData.getMacData());
-
-macKey.zeroize(); // FIPS requirement
-
-**return new byte** [][] { encapsKey.getEncoded(), encapsKey.getEncapsulation(),
-encMac }; }
+Run `bcfipsin100.base.Rsa.initiatorOaepKeyEstablishWithKeyConfirmation().recipientOaepKeyEstablishWithKeyConfirmation()`
 
 You can see that the process divides into 3 steps. On the initiator side there
-is the use of the
-
-KTSGenerateKeySpec and the SecretKeyfactory to produce a secret key and a MAC
-key as well as the
-
-data to send to the receiver. On the recipient side the encapsulation and the
-recipient private key is used
-
-to create a KTSExtractKeySpec and the SecretKeyFactory is then used to recover
-the secret key and the
-
-MAC key. As this is for an example, both the initiator and the recipient then go
-ahead and calculate
-
-MAC which are returned by the function.
+is the use of the KTSGenerateKeySpec and the SecretKeyfactory to produce a
+secret key and a MAC key as well as the data to send to the receiver. On the
+recipient side the encapsulation and the recipient private key is used to create
+a KTSExtractKeySpec and the SecretKeyFactory is then used to recover the secret
+key and the MAC key. As this is for an example, both the initiator and the
+recipient then go ahead and calculate MAC which are returned by the function.
 
 If you try this example and check the return values you should find the MAC
-calculations produced the
+calculations produced the same tag. In real use the recipient would send the MAC
+back to the initiator in order to show that the key has now being successfully
+established. There are additional guidelines, which are worth reading, for
+constructing the MAC data that are given in SP 800-56B. The BC DERMacData class
+is provided to make the construction of the MAC data easier to perform.
 
-same tag. In real use the recipient would send the MAC back to the initiator in
-order to show that the
-
-key has now being successfully established. There are additional guidelines,
-which are worth reading,
-
-for constructing the MAC data that are given in SP 800-56B. The BC DERMacData
-class is provided to
-
-make the construction of the MAC data easier to perform.
-
-### Diffie-Hellman Key Agreement..........................................................................................................
+### Diffie-Hellman Key Agreement
 
 The second approach available to us for establishing keys between multiple
-parties is Diffie-Hellman
-
-(or more completely Diffie-Hellman-Merkle) key agreement (DH). While we will not
-look at it here,
-
-one interesting aspect of the traditional DH scheme is it can be used between
-more than two parties to
-
-allow all participants to arrive at a shared secret. Details about the
-Diffie-Hellman scheme implemented
-
-in the BC FIPS Java API are given in NIST SP 800-56A, now at revision 2.
+parties is Diffie-Hellman (or more completely Diffie-Hellman-Merkle) key
+agreement (DH). While we will not look at it here, one interesting aspect of the
+traditional DH scheme is it can be used between more than two parties to allow
+all participants to arrive at a shared secret. Details about the Diffie-Hellman
+scheme implemented in the BC FIPS Java API are given in NIST SP 800-56A, now at
+revision 2.
 
 In our case we will just concentrate on two parties, but as with DSA, the DH
-algorithm requires domain
-
-parameters and also key pairs for all participants.
-
+algorithm requires domain parameters and also key pairs for all participants.
 Domain parameters for DH are just as expensive to generate as DSA ones and as it
-is a multi-party
-
-algorithm it is very important that everyone agrees on the same domain parameter
-set first. Domain
-
-parameters can be generated in a pure JCE fashion as follows.
+is a multi-party algorithm it is very important that everyone agrees on the same
+domain parameter set first. Domain parameters can be generated in a pure JCE
+fashion as follows.
 
 #### Example 40 – DH Domain Parameter Generation.........................................................................
 
-**public static** DHParameterSpec generateParameters()
-**throws** GeneralSecurityException { AlgorithmParameterGenerator algGen =
-AlgorithmParameterGenerator. _
-getInstance_ ( **"DH"** , **"BCFIPS"** ); algGen.init( 3072 );
-
-AlgorithmParameters dsaParams = algGen.generateParameters();
-
-**return** dsaParams.getParameterSpec(DHParameterSpec. **class** ); }
+Run `bcfipsin100.base.DH.generateParameters()`
 
 There are also techniques for validating DH parameters – if you need access to
-the validation
-
-parameters you need to make use of the BC specific class DHDomainParameterSpec
-instead of the
-
-DHParameterSpec.
+the validation parameters you need to make use of the BC specific class
+DHDomainParameterSpec instead of the DHParameterSpec.
 
 Having agreed on a set of parameters the next step is to generate a key pair
-using them. This is also
+using them. This is also very similar to what is done for DSA.
 
-very similar to what is done for DSA.
+#### Example 41 – DH Key Pair Generation
 
-#### Example 41 – DH Key Pair Generation.........................................................................................
-
-**public static** KeyPair generateKeyPair(DHParameterSpec dhParameterSpec)
-**throws** GeneralSecurityException { KeyPairGenerator keyPair =
-KeyPairGenerator. _
-getInstance_ ( **"DH"** , **"
-BCFIPS"** ); keyPair.initialize(dhParameterSpec);
-**return** keyPair.generateKeyPair(); }
+Run `bcfipsin100.base.DH.generateKeyPair()`
 
 Now that we have our key pair, and hopefully others have generated theirs, we
-can now try to generate
-
-a shared secret key.
+can now try to generate a shared secret key.
 
 #### Example 42 – Basic DH Key Agreement.......................................................................................
 
-**public static byte** [] initiatorAgreementBasic(PrivateKey initiatorPrivate,
-PublicKey recipientPublic)
-**throws** GeneralSecurityException { KeyAgreement agreement = KeyAgreement. _
-getInstance_ ( **"
-DH"** , **"BCFIPS"** );
-
-agreement.init(initiatorPrivate); agreement.doPhase(recipientPublic, **true** );
-
-SecretKey agreedKey = agreement.generateSecret( **"AES[256]"** );
-
-**return** agreedKey.getEncoded(); }
-
-**public static byte** [] recipientAgreementBasic(PrivateKey recipientPrivate,
-PublicKey initiatorPublic)
-**throws** GeneralSecurityException { KeyAgreement agreement = KeyAgreement. _
-getInstance_ ( **"
-DH"** , **"BCFIPS"** );
-
-agreement.init(recipientPrivate); agreement.doPhase(initiatorPublic, **true** );
-
-SecretKey agreedKey = agreement.generateSecret( **"AES[256]"** );
-
-**return** agreedKey.getEncoded(); }
+Run `bcfipsin100.base.DH.initiatorAgreementBasic().recipientAgreementBasic()`
 
 Note that the private key involved is passed to the init() method and the public
-key of the other party is
-
-passed to the doPhase() method with the second parameter to doPhase(), the value
-true, indicating the
-
-end of the protocol (as in that all public keys are now provided).
-
-While this works and produces a 256 bit AES key, it really only works “properly”
-if at least one of the
-
-keys is an ephemeral key. The symmetric key is derived directly from the public
-private key calculation
-
-between the two parties so the derivation will always produce the same value if
-the same key pairs are
-
-involved. Another issue with this approach is the key size is restricted to the
-size of the shared secret
-
-calculated in the protocol. A fact which can also limit the usefulness of the
-result.
+key of the other party is passed to the doPhase() method with the second
+parameter to doPhase(), the value true, indicating the end of the protocol (as
+in that all public keys are now provided). While this works and produces a 256
+bit AES key, it really only works “properly” if at least one of the keys is an
+ephemeral key. The symmetric key is derived directly from the public private key
+calculation between the two parties so the derivation will always produce the
+same value if the same key pairs are involved. Another issue with this approach
+is the key size is restricted to the size of the shared secret calculated in the
+protocol. A fact which can also limit the usefulness of the result.
 
 The answer in this case is to make use of what is called user keying material
-and a KDF. SP 800-56B
+and a KDF. SP 800-56B specifies a KDF construction called the Concatenation KDF,
+or in our case “CKDF” for short. The user keying material and the use of the KDF
+both help mask the secret, randomise the result and allow for as much data as is
+required to be generated (for sensible values of required).
 
-specifies a KDF construction called the Concatenation KDF, or in our case “CKDF”
-for short. The user
+#### Example 43 – DH Key Agreement with a KDF
 
-keying material and the use of the KDF both help mask the secret, randomise the
-result and allow for as
-
-much data as is required to be generated (for sensible values of required).
-
-#### Example 43 – DH Key Agreement with a KDF.............................................................................
-
-**public static byte** [] initiatorAgreementWithKdf(
-PrivateKey initiatorPrivate, PublicKey recipientPublic, byte[]
-userKeyingMaterial)
-**throws** GeneralSecurityException { KeyAgreement agreement = KeyAgreement. _
-getInstance_ ( **"
-DHwithSHA384CKDF"**
-, **"BCFIPS"** );
-
-agreement.init(initiatorPrivate, **new** UserKeyingMaterialSpec(
-userKeyingMaterial)); agreement.doPhase(
-recipientPublic, **true** );
-
-SecretKey agreedKey = agreement.generateSecret( **"AES[256]"** );
-
-**return** agreedKey.getEncoded(); }
-
-**public static byte** [] recipientAgreementWithKdf(
-PrivateKey recipientPrivate, PublicKey initiatorPublic, byte[]
-userKeyingMaterial)
-**throws** GeneralSecurityException { KeyAgreement agreement = KeyAgreement. _
-getInstance_ ( **"
-DHwithSHA384CKDF"**
-, **"BCFIPS"** );
-
-agreement.init(recipientPrivate, **new** UserKeyingMaterialSpec(
-userKeyingMaterial)); agreement.doPhase(
-initiatorPublic, **true** );
-
-SecretKey agreedKey = agreement.generateSecret( **"AES[256]"** );
-
-**return** agreedKey.getEncoded(); }
+Run `bcfipsin100.base.DH.initiatorAgreementWithKdf().recipientAgreementWithKdf()`
 
 Note in practice you would want at least some of the user keying material to be
-random, or at least
-
-unique to the exchange, otherwise you will wind up back where you started.
-
-Another common KDF is the one from X9.63. In the case of the BC FIPS Java API
-this is simply
-
-referred to as KDF, so rather than saying “DHwithSHA384CKDF” you would drop the
-C and say
-
-“DHwithSHA384KDF” if you wanted to use the KDF from X9.63.
+random, or at least unique to the exchange, otherwise you will wind up back
+where you started. Another common KDF is the one from X9.63. In the case of the
+BC FIPS Java API this is simply referred to as KDF, so rather than saying
+`DHwithSHA384CKDF` you would drop the C and say `DHwithSHA384KDF` if you wanted
+to use the KDF from X9.63.
 
 Diffie-Hellman, like the other key establishment schemes, can also be used with
-key confirmation, but
+key confirmation, but in this case the variant with key confirmation actually
+fits reasonably well with the KeyAgreement API provided with the JCE (the odd
+use of a type cast aside) although the way it is done is again very BC centric.
+For a hint have a look at generateSecret().
 
-in this case the variant with key confirmation actually fits reasonably well
-with the KeyAgreement API
+#### Example 44 – DH Key Agreement with Key Confirmation
 
-provided with the JCE (the odd use of a type cast aside) although the way it is
-done is again very BC
-
-centric. For a hint have a look at generateSecret().
-
-#### Example 44 – DH Key Agreement with Key Confirmation...........................................................
-
-**public static byte** [][] initiatorAgreeKeyEstablishWithKeyConfirmation(
-PrivateKey initiatorPrivate, PublicKey recipientPublic, byte[]
-userKeyingMaterial)
-**throws** GeneralSecurityException { KeyAgreement agreement = KeyAgreement. _
-getInstance_ ( **"
-DHwithSHA384CKDF"**
-, **"BCFIPS"** );
-
-agreement.init(initiatorPrivate, **new** UserKeyingMaterialSpec(
-userKeyingMaterial)); agreement.doPhase(
-recipientPublic, **true** );
-
-AgreedKeyWithMacKey agreedKey = (AgreedKeyWithMacKey)agreement
-.generateSecret( **"CMAC[128]
-/AES[256]"** );
-
-Mac mac = Mac. _getInstance_ ( **"CMAC"** , **"BCFIPS"** ); mac.init(
-agreedKey.getMacKey());
-
-DERMacData macData = **new** DERMacData.Builder(DERMacData.Type. **_
-UNILATERALU_** , ExValues. **_
-Initiator_** , ExValues. **_Recipient_** , **null** , **null** ).build();
-
-**byte** [] encMac = mac.doFinal(macData.getMacData());
-
-agreedKey.getMacKey().zeroize(); // FIPS requirement – zero out MAC key
-immediately after use.
-
-**return new byte** [][] { agreedKey.getEncoded(), encMac }; }
-
-**public static byte** [][] recipientAgreeKeyEstablishWithKeyConfirmation(
-PrivateKey recipientPrivate, PublicKey initiatorPublic, byte[]
-userKeyingMaterial)
-**throws** GeneralSecurityException { KeyAgreement agreement = KeyAgreement. _
-getInstance_ ( **"
-DHwithSHA384CKDF"**
-, **"BCFIPS"** );
-
-agreement.init(recipientPrivate, **new** UserKeyingMaterialSpec(
-userKeyingMaterial)); agreement.doPhase(
-initiatorPublic, **true** );
-
-AgreedKeyWithMacKey agreedKey = (AgreedKeyWithMacKey)agreement
-.generateSecret( **"CMAC[128]
-/AES[256]"** );
-
-Mac mac = Mac. _getInstance_ ( **"CMAC"** , **"BCFIPS"** ); mac.init(
-agreedKey.getMacKey());
-
-DERMacData macData = **new** DERMacData.Builder(DERMacData.Type. **_
-UNILATERALU_** , ExValues. **_
-Initiator_** , ExValues. **_Recipient_** , **null** , **null** ).build();
-
-**byte** [] encMac = mac.doFinal(macData.getMacData());
-
-agreedKey.getMacKey().zeroize(); // FIPS requirement – zero out MAC key
-immediately after use.
-
-**return new byte** [][] { agreedKey.getEncoded(), encMac }; }
+Run `bcfipsin100.base.DH.initiatorAgreeKeyEstablishWithKeyConfirmation().recipientAgreeKeyEstablishWithKeyConfirmation()`
 
 As you have probably guessed, the above example is using the Diffie-Hellman key
-agreement to
+agreement to generate a 128 bit CMAC key for use with the key confirmation MAC
+step and a 256 bit AES key as the shared encryption key.
 
-generate a 128 bit CMAC key for use with the key confirmation MAC step and a 256
-bit AES key as
-
-the shared encryption key.
-
-### Elliptic Curve Diffie-Hellman.............................................................................................................
+### Elliptic Curve Diffie-Hellman
 
 The Diffie-Hellman protocol can also be used with Elliptic Curve. Strictly
-speaking Elliptic Curve
-
-Diffie-Hellman, or ECDH, is really only correct for curves with a co-factor of
-
-1. Another formulation
-
-based on incorporating the curve's co-factor is actually the one described by
-NIST SP 800-56A which
-
-also details the use of Elliptic Curves with Diffie-Hellman as well as the older
-finite field method. The
-
-variant incorporating the curve's co-factor is known as Elliptic Curve Co-factor
-Diffie-Hellman or
-
-ECCDH for short.
-
-Generation of key pairs for Elliptic Curve Cryptography was covered by examples
-31 and 32 in the
-
+speaking Elliptic Curve Diffie-Hellman, or ECDH, is really only correct for
+curves with a co-factor of 1. Another formulation based on incorporating the
+curve's co-factor is actually the one described by NIST SP 800-56A which also
+details the use of Elliptic Curves with Diffie-Hellman as well as the older
+finite field method. The variant incorporating the curve's co-factor is known as
+Elliptic Curve Co-factor Diffie-Hellman or ECCDH for short. Generation of key
+pairs for Elliptic Curve Cryptography was covered by examples 31 and 32 in the
 chapter on digital signatures.
 
 Once you have a key pair the most basic expression of the ECCDH looks like the
 following.
 
-#### Example 45 – Basic ECCDH Key Agreement...............................................................................
+#### Example 45 – Basic ECCDH Key Agreement
 
-**public static byte** [] initiatorAgreementBasic(PrivateKey initiatorPrivate,
-PublicKey recipientPublic)
-**throws** GeneralSecurityException { KeyAgreement agreement = KeyAgreement. _
-getInstance_ ( **"
-ECCDH"** , **"
-BCFIPS"** );
-
-agreement.init(initiatorPrivate); agreement.doPhase(recipientPublic, **true** );
-
-SecretKey agreedKey = agreement.generateSecret( **"AES[256]"** );
-
-**return** agreedKey.getEncoded(); }
-
-**public static byte** [] recipientAgreementBasic(PrivateKey recipientPrivate,
-PublicKey initiatorPublic)
-**throws** GeneralSecurityException { KeyAgreement agreement = KeyAgreement. _
-getInstance_ ( **"
-ECCDH"** , **"
-BCFIPS"** );
-
-agreement.init(recipientPrivate); agreement.doPhase(initiatorPublic, **true** );
-
-SecretKey agreedKey = agreement.generateSecret( **"AES[256]"** );
-
-**return** agreedKey.getEncoded(); }
+Run `bcfipsin100.base.DH.initiatorAgreementBasic().recipientAgreementBasic()`
 
 Not surprisingly it is the same as for Finite Field Diffie-Hellman. We will
-again get a 256 bit AES key
-
-(assuming a large enough curve) and we again have a problem on our hands if both
-the keys involved
-
-are for long term use.
+again get a 256 bit AES key (assuming a large enough curve) and we again have a
+problem on our hands if both the keys involved are for long term use.
 
 Fortunately the answer to these problems is the same as before, use some
-additional user keying
+additional user keying material (with at least some unique properties) and a
+KDF, in the case below an SP 800-56A Concatenation KDF, rather than the X9.63
+one which would just be specified by using “KDF” rather than “CKDF”.
 
-material (with at least some unique properties) and a KDF, in the case below an
-SP 800-56A
+#### Example 46 – Basic ECCDH Key Agreement with a KDF
 
-Concatenation KDF, rather than the X9.63 one which would just be specified by
-using “KDF” rather
-
-than “CKDF”.
-
-#### Example 46 – Basic ECCDH Key Agreement with a KDF............................................................
-
-**public static byte** [] initiatorAgreementWithKdf(
-PrivateKey initiatorPrivate, PublicKey recipientPublic, byte[]
-userKeyingMaterial)
-**throws** GeneralSecurityException { KeyAgreement agreement = KeyAgreement. _
-getInstance_ ( **"
-ECCDHwithSHA384CKDF"**
-, **"BCFIPS"** );
-
-agreement.init(initiatorPrivate, **new** UserKeyingMaterialSpec(
-userKeyingMaterial)); agreement.doPhase(
-recipientPublic, **true** );
-
-SecretKey agreedKey = agreement.generateSecret( **"AES[256]"** );
-
-**return** agreedKey.getEncoded(); }
-
-**public static byte** [] recipientAgreementWithKdf(
-PrivateKey recipientPrivate, PublicKey initiatorPublic, byte[]
-userKeyingMaterial)
-**throws** GeneralSecurityException { KeyAgreement agreement = KeyAgreement. _
-getInstance_ ( **"
-ECCDHwithSHA384CKDF"**
-, **"BCFIPS"** );
-
-agreement.init(recipientPrivate, **new** UserKeyingMaterialSpec(
-userKeyingMaterial)); agreement.doPhase(
-initiatorPublic, **true** );
-
-SecretKey agreedKey = agreement.generateSecret( **"AES[256]"** );
-
-**return** agreedKey.getEncoded(); }
+Run `bcfipsin100.base.DH.initiatorAgreementWithKdf().recipientAgreementWithKdf()`
 
 Finally, to bring this chapter to an end, we can also use key confirmation with
-ECCDH as the following
+ECCDH as the following example shows.
 
-example shows.
+#### Example 47 – ECCDH Key Agreement with Key Confirmation
 
-#### Example 47 – ECCDH Key Agreement with Key Confirmation...................................................
+Run `bcfipsin100.base.DH.initiatorAgreeKeyEstablishWithKeyConfirmation().recipientAgreeKeyEstablishWithKeyConfirmation()`
 
-**public static byte** [][] initiatorAgreeKeyEstablishWithKeyConfirmation(
-PrivateKey initiatorPrivate, PublicKey recipientPublic, byte[]
-userKeyingMaterial)
-**throws** GeneralSecurityException { KeyAgreement agreement = KeyAgreement. _
-getInstance_ ( **"
-ECCDHwithSHA384CKDF"**
-, **"BCFIPS"** );
-
-agreement.init(initiatorPrivate, **new** UserKeyingMaterialSpec(
-userKeyingMaterial)); agreement.doPhase(
-recipientPublic, **true** );
-
-AgreedKeyWithMacKey agreedKey = (AgreedKeyWithMacKey)agreement
-.generateSecret( **"CMAC[128]
-/AES[256]"** );
-
-Mac mac = Mac. _getInstance_ ( **"CMAC"** , **"BCFIPS"** ); mac.init(
-agreedKey.getMacKey());
-
-DERMacData macData = **new** DERMacData.Builder(
-DERMacData.Type. **_UNILATERALU_** , ExValues. **_Initiator_** , ExValues. **_
-Recipient_** , **
-null** , **null** )
-.build();
-
-**byte** [] encMac = mac.doFinal(macData.getMacData());
-
-agreedKey.getMacKey().zeroize(); // FIPS requirement
-
-**return new byte** [][] { agreedKey.getEncoded(), encMac }; }
-
-**public static byte** [][] recipientAgreeKeyEstablishWithKeyConfirmation(
-PrivateKey recipientPrivate, PublicKey initiatorPublic, byte[]
-userKeyingMaterial)
-**throws** GeneralSecurityException { KeyAgreement agreement = KeyAgreement. _
-getInstance_ ( **"
-ECCDHwithSHA384CKDF"**
-, **"BCFIPS"** );
-
-agreement.init(recipientPrivate, **new** UserKeyingMaterialSpec(
-userKeyingMaterial)); agreement.doPhase(
-initiatorPublic, **true** );
-
-AgreedKeyWithMacKey agreedKey = (AgreedKeyWithMacKey)agreement
-.generateSecret( **"CMAC[128]
-/AES[256]"** );
-
-Mac mac = Mac. _getInstance_ ( **"CMAC"** , **"BCFIPS"** ); mac.init(
-agreedKey.getMacKey());
-
-DERMacData macData = **new** DERMacData.Builder(
-DERMacData.Type. **_UNILATERALU_** , ExValues. **_Initiator_** , ExValues. **_
-Recipient_** , **
-null** , **null** )
-.build();
-
-**byte** [] encMac = mac.doFinal(macData.getMacData());
-
-agreedKey.getMacKey().zeroize(); // FIPS requirement
-
-**return new byte** [][] { agreedKey.getEncoded(), encMac }; }
-
-## Certification Requests, Certificates, and Revocation...............................................................................
+## Certification Requests, Certificates, and Revocation
 
 One of the issues with public key cryptography is while having a public key is
-all very well, how do
-
-you make sure someone actually knows it belongs to you?
+all very well, how do you make sure someone actually knows it belongs to you?
 
 Part of the answer to this, at least for some people, is the use of
-certificates. More particularly X.509
-
-certificates. Cryptographic Message Syntax (CMS), S/MIME which is built on top
-of CMS, Time-
-
-Stamp Protocol (TSP) and a host of others all rely on the use of X.509
-certificates which represent a
-
+certificates. More particularly X.509 certificates. Cryptographic Message
+Syntax (CMS), S/MIME which is built on top of CMS, Time-Stamp Protocol (TSP) and
+a host of others all rely on the use of X.509 certificates which represent a
 common method of tying some identity information as well as some assurance of
-validity to a public
-
-key.
+validity to a public key.
 
 The BC FIPS Java API does not provide direct support in the FIPS module for the
-support of
+support of certification requests, certificates, and revocations, however it
+does work with the BC extensions APIs that provide support for these things.
 
-certification requests, certificates, and revocations, however it does work with
-the BC extensions APIs
-
-that provide support for these things.
-
-### Certification Requests.........................................................................................................................
+### Certification Requests
 
 Not surprisingly the first step in getting a certificate for a public key is to
-request one. Apart from any
-
-paperwork involved this also normally involves some way of sending your public
-key to the certificate
-
-authority (CA) that will issue you with a certificate. Two popular ways of doing
-this rely on a standard
-
-called PKCS#10 described in RFC 2986 and also on another standard called
-Certificate Request
-
-Message Format (CRMF) described in RFC 4211. Another standard called KMIP is
-also starting to gain
-
-a bit of ground, but the support in BC is still at a very primitive stage.
+request one. Apart from any paperwork involved this also normally involves some
+way of sending your public key to the certificate authority (CA) that will issue
+you with a certificate. Two popular ways of doing this rely on a standard called
+PKCS#10 described in RFC 2986 and also on another standard called Certificate
+Request Message Format (CRMF) described in RFC 4211. Another standard called
+KMIP is also starting to gain a bit of ground, but the support in BC is still at
+a very primitive stage.
 
 The first one we will look at is PKCS#10. Generating a basic PKCS#10
-certification request is very
-
-simple, just specify the public key and how you want to be known, and then sign
-the result and send it
-
-off. The resulting message should then be verifiable by anyone who is capable of
-decoding the public
-
-key the certification request contains.
+certification request is very simple, just specify the public key and how you
+want to be known, and then sign the result and send it off. The resulting
+message should then be verifiable by anyone who is capable of decoding the
+public key the certification request contains.
 
 A minimal PKCS#10 request is described in the following example.
 
-#### Example 48 – A Basic PKCS#10 Request......................................................................................
+#### Example 48 – A Basic PKCS#10 Request
 
-**public static** PKCS10CertificationRequest createPkcs10Request()
-**throws** GeneralSecurityException, OperatorCreationException { KeyPair
-ecKeyPair = EC. _
-generateKeyPair_ (); ContentSigner signer = **new** JcaContentSignerBuilder( **"
-SHA384withECDSA"** )
-.setProvider( **"BCFIPS"** ).build(ecKeyPair.getPrivate());
-
-**return new** JcaPKCS10CertificationRequestBuilder(
-**new** X500Name( **"CN=PKCS10 Example"** ), ecKeyPair.getPublic()).build(
-signer); }
-
-**public static boolean** verifyPkcs10Request(PKCS10CertificationRequest
-pkcs10Request)
-**throws** GeneralSecurityException, OperatorCreationException, PKCSException {
-ContentVerifierProvider verifierProvider = **new**
-JcaContentVerifierProviderBuilder()
-.setProvider( **"BCFIPS"** ).build(pkcs10Request.getSubjectPublicKeyInfo());
-
-**return** pkcs10Request.isSignatureValid(verifierProvider); }
+Run `bcfipsin100.cert.Pkcs10.createPkcs10Request().verifyPkcs10Request()`
 
 In this case we can see the certification request is for an Elliptic Curve
-public key and it is signed using
-
-a SHA-384 digest and the ECDSA algorithm. The subject name requested for the
-certificate a CA
-
-might produce is the X.500 name “CN=PKCS10 Example”.
+public key and it is signed using a SHA-384 digest and the ECDSA algorithm. The
+subject name requested for the certificate a CA might produce is the X.500 name
+“CN=PKCS10 Example”.
 
 Often it is also necessary for a client to communicate to a CA some values for
-extensions that should
-
-appear in the issued certificate. The most common of these is the
-subjectAltName (subject alternative
-
-name) extension. The next example shows the steps required to add a subject
-alternative name to a
-
+extensions that should appear in the issued certificate. The most common of
+these is the subjectAltName (subject alternative name) extension. The next
+example shows the steps required to add a subject alternative name to a
 certification request.
 
-#### Example 49 – A PKCS#10 Request with Extensions.....................................................................
+#### Example 49 – A PKCS#10 Request with Extensions
 
-**public static** PKCS10CertificationRequest
-createPkcs10RequestWithSubjectAltName()
-**throws** GeneralSecurityException, OperatorCreationException, IOException {
-KeyPair ecKeyPair = EC. _
-generateKeyPair_ (); ContentSigner signer = **new** JcaContentSignerBuilder( **"
-SHA384withECDSA"** )
-.setProvider( **"BCFIPS"** )
-.build(ecKeyPair.getPrivate());
-
-Extension subjectAltName = **new** Extension(Extension. **_
-subjectAlternativeName_** , **false** ,
-**new** DEROctetString( **new** GeneralNames( **new** GeneralName( **new**
-X500Name( **"CN=Alt Name"** )))));
-
-**return new** JcaPKCS10CertificationRequestBuilder(
-**new** X500Name( **"CN=PKCS10 Example"** ), ecKeyPair.getPublic())
-.addAttribute(
-PKCSObjectIdentifiers. **_pkcs_9_at_extensionRequest_** ,
-**new** Extensions(subjectAltName)).build(signer); }
+Run `bcfipsin100.cert.Pkcs10.createPkcs10RequestWithSubjectAltName()`
 
 In general, the reason PKCS#10 uses a signature based on the private key of the
-public key being
-
-requested is to provide what is called “proof of possession” – that is by
-presenting a signature that can
-
-be verified by the public key in the certification the CA can be sure that the
-party that generated the
-
-certification request was in possession of the private key associated with the
-public key in the request.
-
-This is also the one exception to the rule concerning never using an encryption
-key for signing that
-
-FIPS allows.
+public key being requested is to provide what is called “proof of possession” –
+that is by presenting a signature that can be verified by the public key in the
+certification the CA can be sure that the party that generated the certification
+request was in possession of the private key associated with the public key in
+the request. This is also the one exception to the rule concerning never using
+an encryption key for signing that FIPS allows.
 
 Not all algorithms can be used for signing as well as encryption though,
-managing keys for ElGamal
-
-(or more correctly Elgamal) and DH key agreement really deserves something
-better and this is where
-
-CRMF steps in.
+managing keys for ElGamal (or more correctly Elgamal) and DH key agreement
+really deserves something better and this is where CRMF steps in.
 
 The first example of CRMF given here is basically the equivalent to what is
-happening in PKCS#10 –
+happening in PKCS#10 – the proof of possession is given using a signature
+generated with the private key associated with the public key contained in the
+request.
 
-the proof of possession is given using a signature generated with the private
-key associated with the
+#### Example 50 – A Basic CRMF Request
 
-public key contained in the request.
-
-#### Example 50 – A Basic CRMF Request...........................................................................................
-
-**public static byte** [] createCertificateRequestMessage(KeyPair keyPair)
-**throws** IOException, OperatorCreationException, CRMFException { // the ONE
-here is the certificate request ID. JcaCertificateRequestMessageBuilder
-certReqBuild =
-**new** JcaCertificateRequestMessageBuilder(BigInteger. **_ONE_** );
-
-certReqBuild.setPublicKey(keyPair.getPublic())
-
-.setAuthInfoSender( **new** X500Principal( **"CN=CRMF Example"** ))
-.setProofOfPossessionSigningKeySigner( **new** JcaContentSignerBuilder( **"
-SHA384withECDSA"** )
-.setProvider( **"BCFIPS"** ).build(keyPair.getPrivate()));
-
-**return** certReqBuild.build().getEncoded(); }
-
-**public static boolean** isValidCertificateRequestMessage( **byte** []
-msgEncoding, PublicKey publicKey)
-**throws** OperatorCreationException, CRMFException {
-JcaCertificateRequestMessage certReqMsg = **
-new**
-JcaCertificateRequestMessage(msgEncoding)
-.setProvider( **"BCFIPS"** );
-
-**return** certReqMsg.isValidSigningKeyPOP( **new**
-JcaContentVerifierProviderBuilder()
-.setProvider( **"BCFIPS"** ).build(publicKey)); }
+Run `bcfipsin100.cert.Pkcs10.createCertificateRequestMessage(). isValidCertificateRequestMessage()`
 
 As you can see from the second method in the example, the validation of the
-request follows a similar
-
-process to that of PKCS#10 as well.
+request follows a similar process to that of PKCS#10 as well.
 
 Where things become different is where a key might not be usable for signing,
-such as DH, ElGamal,
-
-or even RSA where you absolutely do not want to even do signing once. In this
-case we formulate the
-
-request differently, by specifying we want proof of possession to be dealt with
-in a subsequent
-
-message.
+such as DH, ElGamal, or even RSA where you absolutely do not want to even do
+signing once. In this case we formulate the request differently, by specifying
+we want proof of possession to be dealt with in a subsequent message.
 
 #### Example 51 – A CRMF Request for Encryption Only Keys..........................................................
 

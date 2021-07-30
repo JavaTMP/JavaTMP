@@ -67,9 +67,7 @@ public class Rsa {
                 .getInstance("SHA384withRSA/X9.31", "BCFIPS");
 
         signature.initSign(rsaPrivate);
-
         signature.update(input);
-
         return signature.sign();
     }
 
@@ -80,9 +78,7 @@ public class Rsa {
                 .getInstance("SHA384withRSA/X9.31", "BCFIPS");
 
         signature.initVerify(rsaPublic);
-
         signature.update(input);
-
         return signature.verify(encSignature);
     }
 
@@ -93,9 +89,7 @@ public class Rsa {
                 .getInstance("SHA384withRSAandMGF1", "BCFIPS");
 
         signature.initSign(rsaPrivate);
-
         signature.update(input);
-
         return signature.sign();
     }
 
