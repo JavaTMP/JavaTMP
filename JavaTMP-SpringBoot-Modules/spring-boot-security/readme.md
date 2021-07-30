@@ -863,5 +863,67 @@ this grant type for authentication between two backend solutions. The client
 needs only its credentials to authenticate and obtain an access token.
 
 ### 13.7 Using the refresh token grant type
-When the user authenticates, the client also receives a refresh token besides the access token. The client uses the refresh token to get a new access token.
+
+When the user authenticates, the client also receives a refresh token besides
+the access token. The client uses the refresh token to get a new access token.
+
+## 14 OAuth 2: Implementing the resource server
+
+A client obtains an access token from the authorization server and uses it to
+call for resources on the resource server by adding the token to the HTTP
+request headers.
+
+The resource server is one of the components acting in the OAuth 2 architecture.
+The resource server manages user data. To call an endpoint on the resource
+server, a client needs to prove with a valid access token that the user approves
+it to work with their data.
+
+To validate the token, the resource server calls the authorization server
+directly. The authorization server knows whether it issued a specific token or
+not.
+
+The second option uses a common database where the authorization server stores
+tokens, and then the resource server can access and validate the tokens. This
+approach is also called blackboarding.
+
+Blackboarding. Both the authorization server and the resource server access a
+shared database. The authorization server stores the tokens in this database
+after it issues them. The resource server can then access them to validate the
+tokens it receives.
+
+Finally, the third option uses cryptographic signatures. The authorization
+server signs the token when issuing it, and the resource server validates the
+signature. Here’s where we generally use JSON Web Tokens (JWTs).
+
+When issuing an access token, the authorization server uses a private key to
+sign it. To verify a token, the resource server only needs to check if the
+signature is valid.
+
+### 14.1 Implementing a resource server
+
+We use the default implementation provided by Spring Boot, which allows the
+resource server to directly call the authorization server to find out if a token
+is valid
+
+### 14.2 Checking the token remotely
+
+To validate a token and obtain details about it, the resource server calls the
+endpoint /oauth/check_token of the authorization server. The resource server
+uses the details retrieved about the token to authorize the call.
+
+The network is not 100% reliable. If the connection between the resource server
+and the authorization server is down, tokens cannot be validated. This implies
+that the resource server refuses the client access to the user’s resources even
+if it has a valid token.
+
+### 14.3 Implementing blackboarding with a JdbcTokenStore
+
+When the authorization server issues a token, it also stores the token in a
+shared database. This way, the resource server can get the token and validate it
+later.
+
+The resource server searches for the token in the shared database. If the token
+exists, the resource server finds the details related to it in the database,
+including the username and its authorities. With these details, the resource
+server can then authorize the request.
 
