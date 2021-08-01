@@ -1017,3 +1017,117 @@ we implement a resource server that uses the public key to verify the token’s
 signature.
 
 #### 15.2.4 Using an endpoint to expose the public key
+
+If the keys are changed periodically, the system is less vulnerable to key
+theft. But if the keys are configured in both applications, it’s more difficult
+to rotate them.
+
+Both keys are configured at the authorization server. To get the public key, the
+resource server calls an endpoint from the authorization server. This approach
+allows us to rotate keys easier, as we only have to configure them in one place.
+
+For the authorization server, We need to override the endpoint’s configuration
+and allow anyone with client credentials to access it.
+
+You can start the authorization server and call the /oauth/token_key endpoint to
+make sure you correctly implement the configuration.
+
+For the resource server to use this endpoint and obtain the public key, you only
+need to configure the endpoint and the credentials in its properties file.
+
+### 15.3 Adding custom details to the JWT
+
+#### 15.3.1 Configuring the authorization server to add custom details to tokens
+
+To add additional details to your token, you need to create an object of type
+TokenEnhancer.
+
+#### 15.3.2 Configuring the resource server to read the custom details of a JWT
+
+Once you change your authorization server to add custom details to a JWT, you’d
+like the resource server to be able to read these details.
+
+`AccessTokenConverter` is the object that converts the token to an
+Authentication. This is the object we need to change so that it also takes into
+consideration the custom details in the token.
+
+## 16 Global method security: Pre- and postauthorizations
+
+Global method security enables you to apply authorization rules at any layer of
+your application. This approach allows you to be more granular and to apply
+authorization rules at a specifically chosen level.
+
+global method security offers the opportunity to implement authorization rules
+even if we don’t have endpoints.
+
+### 16.1 Enabling global method security
+
+This approach provides you with greater flexibility in applying authorization.
+It’s an essential skill that allows you to solve situations in which
+authorization simply cannot be configured just at the endpoint level.
+
+you can do two main things with global method security:
+
+- Call authorization: Decides whether someone can call a method according to
+  some implemented privilege rules (preauthorization) or if someone can access
+  what the method returns after the method executes (postauthorization).
+- Filtering: Decides what a method can receive through its parameters (
+  prefiltering) and what the caller can receive back from the method after the
+  method executes (postfiltering).
+
+#### 16.1.1 Understanding call authorization
+
+When we enable global method security, an aspect intercepts the call to the
+protected method. If the given authorization rules aren't respected, the aspect
+doesn't delegate the call to the protected method.
+
+With preauthorization, the authorization rules are verified before delegating
+the method call further. The framework won’t delegate the call if the
+authorization rules aren’t respected, and instead, throws an exception to the
+method caller.
+
+With postauthorization, the aspect delegates the call to the protected method.
+After the protected method finishes execution, the aspect checks the
+authorization rules. If the rules aren’t respected, instead of returning the
+result to the caller, the aspect throws an exception.
+
+Even with the `@Transactional` annotation, a change isn’t rolled back if
+postauthorization fails. The exception thrown by the postauthorization
+functionality happens after the transaction manager commits the transaction.
+
+#### 16.1.2 Enabling global method security in your project
+
+You can use global method security with any authentication approach, from HTTP
+Basic authentication to OAuth 2.
+
+### 16.2 Applying preauthorization for authorities and roles
+
+To call the getName() method of NameService, the authenticated user needs to
+have write authority. If the user doesn't have this authority, the framework
+won't allow the call and throws an exception.
+
+When implementing preauthorization, we can use the values of the method
+parameters in the authorization rules. In our example, only the authenticated
+user can retrieve information about their secret names.
+
+### 16.3 Applying postauthorization
+
+With postauthorization, we don't protect the method from being called, but we
+protect the returned value from being exposed if the defined authorization rules
+aren't respected.
+
+You can use both @PreAuthorize and @PostAuthorize on the same method if your
+requirements need to have both preauthorization and postauthorization.
+
+### 16.4 Implementing permissions for methods
+
+When you need to implement complex authorization rules, instead of writing long
+SpEL expressions, take the logic out in a separate class. Spring Security
+provides the concept of permission, which makes it easy to write the
+authorization rules in a separate class so that your application is easier to
+read and understand.
+
+It’s our duty to implement the permission logic. And we do this by writing an object that implements the PermissionEvaluator contract.
+
+Using the @Secured and @RolesAllowed annotations
+

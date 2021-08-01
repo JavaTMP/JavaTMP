@@ -86,6 +86,9 @@ include 'spring-boot-security:spring-boot-security-web-authentication-server-dem
 include 'spring-boot-security:spring-boot-security-web-oauth2:spring-boot-security-web-oauth2-client'
 include 'spring-boot-security:spring-boot-security-web-oauth2:spring-boot-security-web-oauth2-authorization-server'
 
+include 'spring-boot-security:spring-boot-security-web-authorization-global-method'
+include 'spring-boot-security:spring-boot-security-web-authorization-global-method-permission'
+
 include 'spring-boot-cloud:cloud-services:spring-boot-cloud-service-empty'
 include 'spring-boot-cloud:cloud-services:cloud-service-common'
 include 'spring-boot-cloud:cloud-services:product-composite-service'

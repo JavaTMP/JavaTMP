@@ -1,4 +1,4 @@
-package com.javatmp.demo.web;
+package com.javatmp.demo.core.order;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -17,6 +17,10 @@ class DemoApplicationTests {
     @Test
     void contextLoads2() {
         log.debug("*** SpringBoot Test Context Load 2 ***");
+    }
+
+    @SpringBootApplication
+    static class TestConfiguration {
     }
 
 }

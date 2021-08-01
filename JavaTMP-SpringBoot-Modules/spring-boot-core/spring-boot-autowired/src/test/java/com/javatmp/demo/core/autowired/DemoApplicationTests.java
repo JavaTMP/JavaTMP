@@ -1,11 +1,11 @@
-package com.javatmp.demo.web;
+package com.javatmp.demo.core.autowired;
 
+import com.javatmp.demo.core.autowired.DemoApplication;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
+@SpringBootTest(classes = DemoApplication.class)
 @Slf4j
 class DemoApplicationTests {
 
