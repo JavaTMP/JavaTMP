@@ -88,6 +88,7 @@ include 'spring-boot-security:spring-boot-security-web-oauth2:spring-boot-securi
 
 include 'spring-boot-security:spring-boot-security-web-authorization-global-method'
 include 'spring-boot-security:spring-boot-security-web-authorization-global-method-permission'
+include 'spring-boot-security:spring-boot-security-web-authorization-global-method-jsr250'
 
 include 'spring-boot-cloud:cloud-services:spring-boot-cloud-service-empty'
 include 'spring-boot-cloud:cloud-services:cloud-service-common'

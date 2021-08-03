@@ -1127,7 +1127,13 @@ provides the concept of permission, which makes it easy to write the
 authorization rules in a separate class so that your application is easier to
 read and understand.
 
-It’s our duty to implement the permission logic. And we do this by writing an object that implements the PermissionEvaluator contract.
+It’s our duty to implement the permission logic. And we do this by writing an
+object that implements the PermissionEvaluator contract.
 
-Using the @Secured and @RolesAllowed annotations
+**Using the @Secured and @RolesAllowed annotations**
+
+The @EnableGlobalMethodSecurity annotation offers two other similar attributes
+that you can use to enable different annotations. You use the jsr250Enabled
+attribute to enable the @RolesAllowed annotation and the securedEnabled
+attribute to enable the @Secured annotation. 
 
