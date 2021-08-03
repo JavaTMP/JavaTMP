@@ -1135,5 +1135,22 @@ object that implements the PermissionEvaluator contract.
 The @EnableGlobalMethodSecurity annotation offers two other similar attributes
 that you can use to enable different annotations. You use the jsr250Enabled
 attribute to enable the @RolesAllowed annotation and the securedEnabled
-attribute to enable the @Secured annotation. 
+attribute to enable the @Secured annotation.
+
+## 17 Global method security: Pre- and postfiltering
+
+Suppose you don’t want to forbid the call to a method, but you want to make sure
+that the parameters sent to it follow some rules. Or, in another scenario, you
+want to make sure that after someone calls the method, the method’s caller only
+receives an authorized part of the returned value. We name such a functionality
+filtering, and we classify it in two categories:
+
+- Prefiltering. The framework filters the values of the parameters before
+  calling the method.
+- Postfiltering. The framework filters the returned value after the method call.
+
+The client calls the endpoint providing a value that doesn’t follow the
+authorization rule. With preauthorization, the method isn’t called at all and
+the caller receives an exception. With prefiltering, the aspect calls the method
+but only provides the values that follow the given rules.
 
