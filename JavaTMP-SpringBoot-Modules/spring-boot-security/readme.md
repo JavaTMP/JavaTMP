@@ -1154,3 +1154,24 @@ authorization rule. With preauthorization, the method isn’t called at all and
 the caller receives an exception. With prefiltering, the aspect calls the method
 but only provides the values that follow the given rules.
 
+### 17.1 Applying prefiltering for method authorization
+
+With prefiltering, an aspect intercepts the call to the protected method. The
+aspect filters the values that the caller provides as the parameter and sends to
+the method only values that follow the rules you define.
+
+With prefiltering, we decouple the authorization responsibility from the
+business implementation. The aspect provided by Spring Security only takes care
+of the authorization rules, and the service method only takes care of the
+business logic of the use case it implements.
+
+When using prefiltering by filterObject, we refer to the objects inside the list
+that the caller provides as a parameter. The authentication object is the one
+stored after the authentication process in the security context.
+
+The aspect intercepts and changes the collection given as the parameter. You
+need to provide a mutable instance of a collection so the aspect can change it.
+
+### 17.2 Applying postfiltering for method authorization
+
+
