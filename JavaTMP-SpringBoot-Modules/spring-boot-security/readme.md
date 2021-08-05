@@ -1174,4 +1174,23 @@ need to provide a mutable instance of a collection so the aspect can change it.
 
 ### 17.2 Applying postfiltering for method authorization
 
+Postfiltering scenario. A client calls an endpoint to retrieve data it needs to
+display in the frontend. A postfiltering implementation makes sure that the
+client only gets data owned by the currently authenticated user.
 
+In Postfiltering. An aspect intercepts the collection returned by the protected
+method and filters the values that don’t follow the rules you provide. Unlike
+postauthorization, postfiltering doesn’t throw an exception to the caller when
+the returned value doesn’t follow the authorization rules.
+
+In the SpEL expression used for authorization, we use filterObject to refer to
+the objects in the returned collection, and we use authentication to refer to
+the Authentication instance from the security context.
+
+### 17.3 Using filtering in Spring Data repositories
+
+We have two options:
+- Using @PreFilter and @PostFilter annotations
+- Directly applying filtering within queries
+
+The anatomy of a bad design. When you need to apply filtering at the repository level, it’s better to first make sure you only retrieve the data you need. Otherwise, your application can face heavy memory and performance issues.
