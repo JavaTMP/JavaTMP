@@ -7,7 +7,9 @@ import java.security.Security;
 
 public class Setup {
     public static void installProvider() {
-        Security.addProvider(new BouncyCastleFipsProvider());
+        if(Security.getProvider(BouncyCastleFipsProvider.PROVIDER_NAME) == null) {
+            Security.addProvider(new BouncyCastleFipsProvider());
+        }
     }
 
     public static void main(String[] args) {

@@ -884,7 +884,7 @@ is a multi-party algorithm it is very important that everyone agrees on the same
 domain parameter set first. Domain parameters can be generated in a pure JCE
 fashion as follows.
 
-#### Example 40 – DH Domain Parameter Generation.........................................................................
+#### Example 40 – DH Domain Parameter Generation
 
 Run `bcfipsin100.base.DH.generateParameters()`
 
@@ -902,7 +902,7 @@ Run `bcfipsin100.base.DH.generateKeyPair()`
 Now that we have our key pair, and hopefully others have generated theirs, we
 can now try to generate a shared secret key.
 
-#### Example 42 – Basic DH Key Agreement.......................................................................................
+#### Example 42 – Basic DH Key Agreement
 
 Run `bcfipsin100.base.DH.initiatorAgreementBasic().recipientAgreementBasic()`
 
@@ -1060,7 +1060,7 @@ request.
 
 #### Example 50 – A Basic CRMF Request
 
-Run `bcfipsin100.cert.Pkcs10.createCertificateRequestMessage(). isValidCertificateRequestMessage()`
+Run `bcfipsin100.cert.Pkcs10.createCertificateRequestMessage().isValidCertificateRequestMessage()`
 
 As you can see from the second method in the example, the validation of the
 request follows a similar process to that of PKCS#10 as well.
@@ -1070,781 +1070,314 @@ such as DH, ElGamal, or even RSA where you absolutely do not want to even do
 signing once. In this case we formulate the request differently, by specifying
 we want proof of possession to be dealt with in a subsequent message.
 
-#### Example 51 – A CRMF Request for Encryption Only Keys..........................................................
+#### Example 51 – A CRMF Request for Encryption Only Keys
 
-**public static byte** [] createEncCertificateRequestMessage(KeyPair keyPair)
-**throws** IOException, OperatorCreationException, CRMFException {
-JcaCertificateRequestMessageBuilder certReqBuild =
-**new** JcaCertificateRequestMessageBuilder(BigInteger. **_ONE_** );
-
-certReqBuild.setPublicKey(keyPair.getPublic())
-.setAuthInfoSender( **new** X500Principal( **"CN=CRMF Example"** ))
-.setProofOfPossessionSubsequentMessage(SubsequentMessage. **_encrCert_** );
-
-**return** certReqBuild.build().getEncoded(); }
+Run `bcfipsin100.cert.Crmf.createEncCertificateRequestMessage()`
 
 The subsequent message type given in the example tells the CA that it should
-assume we have the
-
-private key so we are able to decrypt a message sent to us using the public one.
-In this case a CA would
-
-still send you back your certificate, but it would be in a message encrypted
-using your private key –
-
+assume we have the private key so we are able to decrypt a message sent to us
+using the public one. In this case a CA would still send you back your
+certificate, but it would be in a message encrypted using your private key –
 normally derived from CMS, which we will look at later. Getting access to the
-certificate would then
+certificate would then involve decrypting the message from the CA, only possible
+if you have the private key.
 
-involve decrypting the message from the CA, only possible if you have the
-private key.
-
-### Certificate Construction......................................................................................................................
+### Certificate Construction
 
 X.509 certificates generally come in 2 styles. Version 1 certificates, which are
-normally self signed and
-
-used as trust anchors, and version 3 certificates which also incorporate
-certificate extensions.
+normally self signed and used as trust anchors, and version 3 certificates which
+also incorporate certificate extensions.
 
 In itself the version 1 certificate provides a basic way of associating identity
-and validity time to a
+and validity time to a public key. The example following creates a basic self
+signed certificate.
 
-public key. The example following creates a basic self signed certificate.
+#### Example 52 – Building a Version 1 X.509 Certificate
 
-#### Example 52 – Building a Version 1 X.509 Certificate...................................................................
-
-**public static** X509Certificate makeV1Certificate(PrivateKey caSignerKey,
-PublicKey caPublicKey)
-**throws** GeneralSecurityException, IOException, OperatorCreationException {
-X509v1CertificateBuilder v1CertBldr = **
-new** JcaX509v1CertificateBuilder(
-**new** X500Name( **"CN=Issuer CA"** ), BigInteger. _valueOf_ (System. _
-currentTimeMillis_ ()),
-**new** Date(System. _currentTimeMillis_ () - 1000L * 5 ),
-**new** Date(System. _currentTimeMillis_ () + ExValues. **_THIRTY_DAYS_** ),
-**new** X500Name( **"CN=Issuer CA"** ), caPublicKey);
-
-JcaContentSignerBuilder signerBuilder = **new** JcaContentSignerBuilder( **"
-SHA384withECDSA"** )
-.setProvider( **"BCFIPS"** );
-
-**return new** JcaX509CertificateConverter().setProvider( **"BCFIPS"** )
-.getCertificate(v1CertBldr.build(signerBuilder.build(caSignerKey))); }
+Run `bcfipsin100.cert.Cert.makeV1Certificate()`
 
 Reading the example we can see that the two X.500 names are provided to the
-builder. In this case they
-
-are both the same as the certificate is self issued. The reason for there being
-two is that the first name is
-
-associated with the certificate's issuer, and the second name is associated with
-the certificate's subject –
-
-that is the X.500 name the certificate is for and the public key in the
-certificate should be associated
-
-with. We are also using the current time in milliseconds as the certificate
-serial number – any unique
-
-number will do here. As the serial number is also used in connection with
-revocation as well as being
-
+builder. In this case they are both the same as the certificate is self issued.
+The reason for there being two is that the first name is associated with the
+certificate's issuer, and the second name is associated with the certificate's
+subject – that is the X.500 name the certificate is for and the public key in
+the certificate should be associated with. We are also using the current time in
+milliseconds as the certificate serial number – any unique number will do here.
+As the serial number is also used in connection with revocation as well as being
 part of the certificate identity information in protocols such as CMS it is very
-important you make sure
-
-two certificates cannot get handed out with the same serial number (so for any
-real multi-threaded
-
-application a counter would be a much better choice than the current time).
+important you make sure two certificates cannot get handed out with the same
+serial number (so for any real multi-threaded application a counter would be a
+much better choice than the current time).
 
 The second thing you will notice in the example is the use of the
-JcaX509CertificateConverter class,
-
-the converter object is used to convert a certificate object from the BC local
-one
-
-(X509CertificateHolder) to the JCA one (X509Certificate).
+JcaX509CertificateConverter class, the converter object is used to convert a
+certificate object from the BC local one (X509CertificateHolder) to the JCA
+one (X509Certificate).
 
 In the case of a certificate issued under another one, the issuer in the second
-certificate should be the
-
-same as the subject for the certificate that issued it. The next example shows
-the construction of version
-
-3 certificate with same basic extensions and issued under a CA certificate (the
-caCertificate in the
-
+certificate should be the same as the subject for the certificate that issued
+it. The next example shows the construction of version 3 certificate with same
+basic extensions and issued under a CA certificate (the caCertificate in the
 example).
 
-#### Example 53 – Building a Version 3 X.509 Certificate...................................................................
+#### Example 53 – Building a Version 3 X.509 Certificate
 
-**public static** X509Certificate makeV3Certificate(
-X509Certificate caCertificate, PrivateKey caPrivateKey, PublicKey eePublicKey)
-**throws** GeneralSecurityException, CertIOException, OperatorCreationException
-{ X509v3CertificateBuilder v3CertBldr = **new** JcaX509v3CertificateBuilder(
-caCertificate.getSubjectX500Principal(), // issuer BigInteger. _valueOf_ (
-System. _
-currentTimeMillis_ ()) // serial number .multiply(BigInteger. _valueOf_ ( 10 )),
-**new** Date(System. _currentTimeMillis_ () - 1000L * 5 ), // start time
-**new** Date(System. _currentTimeMillis_ () + ExValues. **_THIRTY_DAYS_** ), //
-expiry time
-**new** X500Principal( **"CN=Cert V 3 Example"** ), // subject eePublicKey); //
-subject public key
-
-_// // extensions //_
-
-JcaX509ExtensionUtils extUtils = **new** JcaX509ExtensionUtils();
-v3CertBldr.addExtension(
-Extension. **_subjectKeyIdentifier_** ,
-**false** , extUtils.createSubjectKeyIdentifier(eePublicKey));
-v3CertBldr.addExtension(
-Extension. **_authorityKeyIdentifier_** ,
-**false** , extUtils.createAuthorityKeyIdentifier(caCertificate));
-v3CertBldr.addExtension(
-Extension. **_basicConstraints_** ,
-**true** ,
-**new** BasicConstraints( **false** ));
-
-JcaContentSignerBuilder signerBuilder = **new** JcaContentSignerBuilder( **"
-SHA384withECDSA"** )
-.setProvider( **"BCFIPS"** );
-
-**return new** JcaX509CertificateConverter().setProvider( **"BCFIPS"** )
-.getCertificate(v3CertBldr.build(signerBuilder.build(caPrivateKey))); }
+Run `bcfipsin100.cert.Cert.makeV3Certificate()`
 
 We can see three extensions in the example, the subject key identifier which
-provides a hashed value
+provides a hashed value that should uniquely identify the public key, an
+authority key identifier which provides similar information for looking up the
+certificate issuer, and the “basicConstraints” extension, which in this case
+identifies this certificate as being one that cannot have other certificates
+issued under it. Other extensions can also be added, such as those related to
+key usage, and where to look for revocation information. You can find a full
+list of the possibilities in RFC 5280 and its updates. Interpreting some of
+these can be a bit of a black art though, so if you are building certificate
+paths, it is worth keeping the extension set required as simple as possible.
 
-that should uniquely identify the public key, an authority key identifier which
-provides similar
-
-information for looking up the certificate issuer, and the “basicConstraints”
-extension, which in this
-
-case identifies this certificate as being one that cannot have other
-certificates issued under it. Other
-
-extensions can also be added, such as those related to key usage, and where to
-look for revocation
-
-information. You can find a full list of the possibilities in RFC 5280 and its
-updates. Interpreting some
-
-of these can be a bit of a black art though, so if you are building certificate
-paths, it is worth keeping
-
-the extension set required as simple as possible.
-
-### Certificate Revocation.........................................................................................................................
+### Certificate Revocation
 
 At this stage we have worked out how to associated a public key with an identity
-and start handing it
-
-out. The question then gets raised as to what you do if it turns out the key on
-the certificate being
-
-handed out somehow becomes invalid before its time, either through compromise of
-the public key,
-
-accidental destruction of the private key, or just simply that the public key
-owner would prefer to be
-
-known by a different X.500 name. If you are going to start deploying
-certificates this is a question
-
-worth asking at the start – leaving concerns about revocation until an event
-like key compromise occurs
-
-is likely to result in widespread depression.
+and start handing it out. The question then gets raised as to what you do if it
+turns out the key on the certificate being handed out somehow becomes invalid
+before its time, either through compromise of the public key, accidental
+destruction of the private key, or just simply that the public key owner would
+prefer to be known by a different X.500 name. If you are going to start
+deploying certificates this is a question worth asking at the start – leaving
+concerns about revocation until an event like key compromise occurs is likely to
+result in widespread depression.
 
 The basic answer to this question is the use of certificate revocation lists, or
-CRLs, to revoke
-
-certificates. A slightly more sophisticated answer is the use of protocols like
-Online Certificate Status
-
-Protocol (OCSP).
+CRLs, to revoke certificates. A slightly more sophisticated answer is the use of
+protocols like Online Certificate Status Protocol (OCSP).
 
 In the following example we are constructing a basic CRL.
 
-#### Example 54 – Creating a CRL........................................................................................................
+#### Example 54 – Creating a CRL
 
-**public static** X509CRL makeV2Crl(
-X509Certificate caCert, PrivateKey caPrivateKey, X509Certificate
-revokedCertificate)
-**throws** GeneralSecurityException, CertIOException, OperatorCreationException
-{ Date now = **new**
-Date();
-
-X509v2CRLBuilder crlGen = **new** JcaX509v2CRLBuilder(
-caCert.getSubjectX500Principal(), now);
-
-crlGen.setNextUpdate( **new** Date(System. _currentTimeMillis_ () +
-ExValues. **_THIRTY_DAYS_** ));
-
-_// this is the actual certificate we are revoking_
-crlGen.addCRLEntry(revokedCertificate.getSerialNumber(), now, CRLReason. **_
-privilegeWithdrawn_** );
-
-JcaX509ExtensionUtils extUtils = **new** JcaX509ExtensionUtils();
-crlGen.addExtension(
-Extension. **_authorityKeyIdentifier_** ,
-**false** , extUtils.createAuthorityKeyIdentifier(caCert.getPublicKey()));
-
-X509CRLHolder crl = crlGen.build( **new** JcaContentSignerBuilder( **"
-SHA384withECDSA"** )
-.setProvider( **"BCFIPS"** ).build(caPrivateKey));
-
-**return new** JcaX509CRLConverter().setProvider( **"BCFIPS"** ).getCRL(crl); }
+Run `bcfipsin100.cert.Cert.makeV2Crl()`
 
 The basic elements of a CRL are similar to those of a certificate – who issued
-it (passed to the builder
-
-constructor), how long is the CRL up to date for (specified with
-setNextUpdate()), and extensions, in
-
-this case also providing additional information about the issuer. The difference
-is that rather than being
-
-for a particular subject the CRL identifies which certificates for a particular
-issuer have been revoked,
-
-when they were revoked, and why they were revoked. It is important to note that
-both a CRL and
-
-protocols like OCSP use the serial number of the certificate being revoked as
-the key to identify it. This
-
+it (passed to the builder constructor), how long is the CRL up to date for (
+specified with setNextUpdate()), and extensions, in this case also providing
+additional information about the issuer. The difference is that rather than
+being for a particular subject the CRL identifies which certificates for a
+particular issuer have been revoked, when they were revoked, and why they were
+revoked. It is important to note that both a CRL and protocols like OCSP use the
+serial number of the certificate being revoked as the key to identify it. This
 is another reason to make sure you cannot hand out the same serial number twice
-when creating
-
-certificates.
+when creating certificates.
 
 OCSP, now described in RFC 6960, was originally designed as an on-line protocol
-built on top of
-
-CRLs, these days you can find all sorts of things in the backend, but it still
-has a CRL centered view of
-
-the world in terms of how it communicates. OCSP provides revocation support
-through the use of
-
-responders, servers which respond to OCSP requests. OCSP requests are simply
-status requests for
-
-given certificates under a particular issuer.
+built on top of CRLs, these days you can find all sorts of things in the
+backend, but it still has a CRL centered view of the world in terms of how it
+communicates. OCSP provides revocation support through the use of responders,
+servers which respond to OCSP requests. OCSP requests are simply status requests
+for given certificates under a particular issuer.
 
 We will have a look at a simple OCSP request first.
 
-#### Example 55 – Creating an OCSP Request......................................................................................
+#### Example 55 – Creating an OCSP Request
 
-**public static** OCSPReq makeOcspRequest(X509Certificate caCert,
-X509Certificate certToCheck)
-**throws** OCSPException, OperatorCreationException,
-CertificateEncodingException { DigestCalculatorProvider digCalcProv = **new**
-JcaDigestCalculatorProviderBuilder()
-.setProvider( **"BCFIPS"** ).build();
-
-_// general id value for our test issuer cert and a serial number._
-CertificateID certId = **new** JcaCertificateID(
-digCalcProv.get(CertificateID. **_HASH_SHA1_** ), caCert,
-certToCheck.getSerialNumber());
-
-_// basic request generation_
-OCSPReqBuilder gen = **new** OCSPReqBuilder(); gen.addRequest(certId);
-
-**return** gen.build(); }
+Run `bcfipsin100.cert.Cert.makeOcspRequest()`
 
 As you can see a basic request requires some information about the CA and also
-the serial number of
-
-the certificate under investigation. Some of the information is hashed for easy
-processing before being
-
-sent to the responder. In this case the request is going to use SHA-1 for the
-hashing, what gets used
-
-may vary from server to server though.
+the serial number of the certificate under investigation. Some of the
+information is hashed for easy processing before being sent to the responder. In
+this case the request is going to use SHA-1 for the hashing, what gets used may
+vary from server to server though.
 
 Once the responder gets the request, it will create a status message giving what
-it knows about the
+it knows about the certificate and send the status message back to the client
+that made the request.
 
-certificate and send the status message back to the client that made the
-request.
+#### Example 56 – Creating an OCSP Response
 
-#### Example 56 – Creating an OCSP Response...................................................................................
-
-**public static** OCSPResp makeOcspResponse(
-X509Certificate caCert, PrivateKey caPrivateKey, OCSPReq ocspReq)
-**throws** OCSPException, OperatorCreationException,
-CertificateEncodingException { DigestCalculatorProvider digCalcProv = **new**
-JcaDigestCalculatorProviderBuilder()
-.setProvider( **"BCFIPS"** ).build(); BasicOCSPRespBuilder respGen = **new**
-JcaBasicOCSPRespBuilder(
-caCert.getPublicKey(), digCalcProv.get(RespID. **_HASH_SHA1_** )); CertificateID
-certID = ocspReq.getRequestList()[ 0 ]
-.getCertID();
-
-_// magic happens..._
-
-respGen.addResponse(certID, CertificateStatus. **_GOOD_** );
-
-BasicOCSPResp resp = respGen.build(
-**new** JcaContentSignerBuilder( **"SHA384withECDSA"** ).setProvider( **"
-BCFIPS"** ).build(
-caPrivateKey),
-**new** X509CertificateHolder[]{ **new** JcaX509CertificateHolder(caCert)},
-**new** Date());
-
-OCSPRespBuilder rGen = **new** OCSPRespBuilder();
-
-**return** rGen.build(OCSPRespBuilder. **_SUCCESSFUL_** , resp); }
+Run `bcfipsin100.cert.Cert.makeOcspResponse()`
 
 In this case it is not really possible to provide a full example, but if you
-imagine that the place where
-
-the “magic happens” comment appears is the place where the revocation status of
-the certificate
-
-represented by certID is checked, and it turns out that the certificate is still
-in good standing, what
-
-follows after “magic happens” is what would probably happen.
+imagine that the place where the “magic happens” comment appears is the place
+where the revocation status of the certificate represented by certID is checked,
+and it turns out that the certificate is still in good standing, what follows
+after “magic happens” is what would probably happen.
 
 The final link in the exchange is the client interpreting the message sent back
-by the responder for the
+by the responder for the original certificate status request.
 
-original certificate status request.
+#### Example 57 – Checking an OCSP Response
 
-#### Example 57 – Checking an OCSP Response..................................................................................
-
-**public static boolean** isGoodCertificate(
-OCSPResp ocspResp, X509Certificate caCert, X509Certificate eeCert)
-**throws** OperatorCreationException, OCSPException,
-CertificateEncodingException { DigestCalculatorProvider digCalcProv = **new**
-JcaDigestCalculatorProviderBuilder()
-.setProvider( **"BCFIPS"** ).build();
-
-// SUCCESSFUL here means the OCSP request worked, it doesn't mean the
-certificate is valid.
-**if** (ocspResp.getStatus() == OCSPRespBuilder. **_SUCCESSFUL_** )
-{ BasicOCSPResp resp = (BasicOCSPResp)ocspResp.getResponseObject();
-
-// make sure response is signed by the appropriate CA
-**if** (resp.isSignatureValid( **new** JcaContentVerifierProviderBuilder()
-.setProvider( **"BCFIPS"** ).build(caCert.getPublicKey())))
-{ // return the actual status of the certificate – null means valid.
-**return** resp.getResponses()[ 0 ].getCertID().matchesIssuer(
-**new** JcaX509CertificateHolder(caCert), digCalcProv)
-&& resp.getResponses()[ 0 ].getCertID().getSerialNumber()
-
-.equals(eeCert.getSerialNumber())
-&& resp.getResponses()[ 0 ].getCertStatus() == **null** ; } }
-**throw new** IllegalStateException( **"OCSP Request Failed"** ); }
+Run `bcfipsin100.cert.Cert.isGoodCertificate()`
 
 For the purposes of demonstration we have reduced the example to a method which
-just indicates
+just indicates whether or not a certificate is valid and assumes a single
+response (BasicOCSPResp). That said, if you were doing this in an application
+environment you would probably expect to make use of the status value returned
+in the request should the status value turn out to not be null – indicating that
+there was an issue with the certificate.
 
-whether or not a certificate is valid and assumes a single response (
-BasicOCSPResp). That said, if you
-
-were doing this in an application environment you would probably expect to make
-use of the status
-
-value returned in the request should the status value turn out to not be null –
-indicating that there was
-
-an issue with the certificate.
-
-### CertPath Validation..............................................................................................................................
+### CertPath Validation
 
 Now that we have looked at checking individual certificates, the next problem to
-solve is how to
-
-validate a chain of them, as generally you will be presented with a minimum of a
-CA certificate and a
-
-client, or end entity certificate (EE), as well as a trust anchor. Trust
-anchors, as we have already
-
-mentioned are generally self-signed, so you have to accept them at face value.
-If you are going to do
-
-that it is obviously worth making sure a CA certificate that purports to be
-issued by a particular trust
-
-anchor really is, and having done that you want to make sure that any client
-issued under the CA really
-
-is as well.
-
-The next example shows how to validate a certificate path in the typical style
-using the PKIX validator
-
-in the BC FIPS Java Provider. The PKIX validator is so called as it is based on
-the certificate path
-
-validation algorithm described in RFC 5280.
-
-#### Example 58 – Basic CertPath Validation........................................................................................
-
-**public static** PKIXCertPathValidatorResult validateCertPath(
-X509Certificate taCert, X509Certificate caCert, X509Certificate eeCert)
-**throws** GeneralSecurityException { List<X509Certificate> certchain = **new**
-ArrayList<X509Certificate>();
-
-certchain.add(eeCert); certchain.add(caCert);
-
-CertPath certPath = CertificateFactory. _getInstance_ ( **"X.509"** , **"
-BCFIPS"** )
-.generateCertPath(certchain);
-
-Set<TrustAnchor> trust = **new** HashSet<TrustAnchor>(); trust.add( **new**
-TrustAnchor(taCert, **
-null** ));
-
-CertPathValidator certPathValidator = CertPathValidator. _getInstance_ ( **"
-PKIX"** , **"BCFIPS"** )
-;
-
-PKIXParameters param = **new** PKIXParameters(trust);
-param.setRevocationEnabled( **false** ); param.setDate( **new**
-Date());
-
-**return** (PKIXCertPathValidatorResult)certPathValidator.validate(certPath,
-param); }
-
-Note that the trust anchor is passed as a separate parameter to the CA and EE
-certificate. Note also that
-
-in this case as CRLs are not being referenced as
-PKIXParameters.setRevocationEnabled() is called
-
-with the value false.
-
-Had we wanted to process CRLs as well we would have also needed to pass the CRLs
-to the
-
-PKIXParameters object using a CertStore which can be used to contain
-certificates and CRLs. You can
-
-see in the following example that a CertStore is introduced and then used to
-make the CRLs available
-
-for validating certificates issued under the trust anchor and the CA
-certificate.
-
-#### Example 59 – Basic CertPath Validation with CRLs.....................................................................
-
-**public static** PKIXCertPathValidatorResult validateCertPathWithCrl(
-X509Certificate taCert, X509CRL taCrl, X509Certificate caCert, X509CRL caCrl,
-X509Certificate eeCert)
-**throws** GeneralSecurityException { List<X509Certificate> certchain = **new**
-ArrayList<X509Certificate>();
-
-certchain.add(eeCert); certchain.add(caCert);
-
-CertPath certPath = CertificateFactory. _getInstance_ ( **"X.509"** , **"
-BCFIPS"** )
-.generateCertPath(certchain);
-
-Set<TrustAnchor> trust = **new** HashSet<TrustAnchor>(); trust.add( **new**
-TrustAnchor(taCert, **
-null** ));
-
-Set crls = **new** HashSet(); crls.add(caCrl); crls.add(taCrl);
-
-CertStore crlsStore = CertStore. _getInstance_ ( **"Collection"** ,
-**new** CollectionCertStoreParameters(crls), **"BCFIPS"** );
-
-CertPathValidator certPathValidator = CertPathValidator. _getInstance_ ( **"
-PKIX"** , **"BCFIPS"** )
-;
-
-PKIXParameters param = **new** PKIXParameters(trust); param.addCertStore(
-crlsStore); param.setDate( **new** Date());
-
-**return** (PKIXCertPathValidatorResult)certPathValidator.validate(certPath,
-param); }
-
-Supporting OCSP is a little more complicated, we will not going into it here,
-but you can do it using a
-
-PKIXCertPathChecker. Be careful with this one – putting a network access into a
-path validation can
-
-also be a great way to put yourself under a denial of service attack (possibly
-self-induced). It is
-
-important to only use URLs you trust, and to make sure you have an appropriate
-fall back position
-
-when an OCSP responder is down.
-
-## Password Based Encryption and Key Storage.........................................................................................
-
-The BC FIPS Java module is software only, unlike a system based on a hardware
-adapter, key storage
-
-becomes a developer's problem. Fortunately there are a couple of different
-storage formats supported
-
-by the provider including one which is fully FIPS compliant (at the time of
-writing) for protecting
-
-private keys, and there is already a commonly used format based on PEM for
-saving certificates and
-
-even unprotected public/private keys where there is simply a need to write them
-to disk. In our case key
-
-stores are always protected by passwords, which brings up the topic of password
-based encryption as
-
+solve is how to validate a chain of them, as generally you will be presented
+with a minimum of a CA certificate and a client, or end entity certificate (EE),
+as well as a trust anchor. Trust anchors, as we have already mentioned are
+generally self-signed, so you have to accept them at face value. If you are
+going to do that it is obviously worth making sure a CA certificate that
+purports to be issued by a particular trust anchor really is, and having done
+that you want to make sure that any client issued under the CA really is as
 well.
 
-### Password Based Encryption................................................................................................................
+The next example shows how to validate a certificate path in the typical style
+using the PKIX validator in the BC FIPS Java Provider. The PKIX validator is so
+called as it is based on the certificate path validation algorithm described in
+RFC 5280.
+
+#### Example 58 – Basic CertPath Validation
+
+Run `bcfipsin100.cert.Cert.validateCertPath()`
+
+Note that the trust anchor is passed as a separate parameter to the CA and EE
+certificate. Note also that in this case as CRLs are not being referenced as
+`PKIXParameters.setRevocationEnabled()` is called with the value false.
+
+Had we wanted to process CRLs as well we would have also needed to pass the CRLs
+to the PKIXParameters object using a CertStore which can be used to contain
+certificates and CRLs. You can see in the following example that a CertStore is
+introduced and then used to make the CRLs available for validating certificates
+issued under the trust anchor and the CA certificate.
+
+#### Example 59 – Basic CertPath Validation with CRLs
+
+Run `bcfipsin100.cert.Cert.validateCertPathWithCrl()`
+
+Supporting OCSP is a little more complicated, we will not going into it here,
+but you can do it using a PKIXCertPathChecker. Be careful with this one –
+putting a network access into a path validation can also be a great way to put
+yourself under a denial of service attack (possibly self-induced). It is
+important to only use URLs you trust, and to make sure you have an appropriate
+fall back position when an OCSP responder is down.
+
+## Password Based Encryption and Key Storage
+
+The BC FIPS Java module is software only, unlike a system based on a hardware
+adapter, key storage becomes a developer's problem. Fortunately there are a
+couple of different storage formats supported by the provider including one
+which is fully FIPS compliant (at the time of writing) for protecting private
+keys, and there is already a commonly used format based on PEM for saving
+certificates and even unprotected public/private keys where there is simply a
+need to write them to disk. In our case key stores are always protected by
+passwords, which brings up the topic of password based encryption as well.
+
+### Password Based Encryption
 
 There are a number of mechanisms available for converting passwords into secret
-keys, they appear in
-
-association with applications like OpenSSL, as well as standards such as PKCS#5
-and PKCS#12. The
-
-BC FIPS Java module offers just NIST standards in approved mode, as well as a
-few of the others in
-
-non-approved mode. The NIST standard for converting passwords to keys,
-specifically for key storage
-
+keys, they appear in association with applications like OpenSSL, as well as
+standards such as PKCS#5 and PKCS#12. The BC FIPS Java module offers just NIST
+standards in approved mode, as well as a few of the others in non-approved mode.
+The NIST standard for converting passwords to keys, specifically for key storage
 is described in NIST SP 800-132, part 1. It is the same algorithm as described
-in PKCS#5 Scheme 2
-
-(RFC 2898).
+in PKCS#5 Scheme 2 (RFC 2898).
 
 The NIST password based key derivation function (PBKDF) is based around the use
-of HMACs with
+of HMACs with both SHA-1 and the SHA-2 family digests regarded as acceptable.
+The best way to generate one of these keys in the JCE is via a SecretKeyFactory.
 
-both SHA-1 and the SHA-2 family digests regarded as acceptable. The best way to
-generate one of
+#### Example 60 – Password Based Key Generation
 
-these keys in the JCE is via a SecretKeyFactory.
-
-#### Example 60 – Password Based Key Generation.............................................................................
-
-**public static** SecretKey makePbeKey( **char** [] password)
-**throws** GeneralSecurityException { SecretKeyFactory keyFact =
-SecretKeyFactory. _
-getInstance_ ( **"HmacSHA384"**
-, **"BCFIPS"** );
-
-SecretKey hmacKey = keyFact.generateSecret(
-**new** PBEKeySpec(password, Hex. _decode_ ( **"
-0102030405060708090a0b0c0d0e0f10"** ), 1024 , 256 ))
-;
-
-**return new** SecretKeySpec(hmacKey.getEncoded(), **"AES"** ); }
+Run `bcfipsin100.pbeks.Pbe.makePbeKey()`
 
 In this example we are using a HMAC based on SHA-384 to generate a 256 bit AES
-key, which we
-
-create via a SecretKeySpec. The example shows a fixed salt and iteration count
-as well. While you
-
-might have a fixed iteration count it would be unusual to have a fixed salt as
-you would run the risk of
-
-having the two things encrypted with the same password producing the same
-encryption key,
-
+key, which we create via a SecretKeySpec. The example shows a fixed salt and
+iteration count as well. While you might have a fixed iteration count it would
+be unusual to have a fixed salt as you would run the risk of having the two
+things encrypted with the same password producing the same encryption key,
 something which may well result in a pattern that would stand out to a
 third-party observer.
 
-### Encoding Public and Private Keys......................................................................................................
+### Encoding Public and Private Keys
 
 The most basic thing to do with a public or private key is to convert it into a
-byte array and then back
-
-again.
+byte array and then back again.
 
 In Java public keys are normally expected to be encodable to the same format
-used in an X.509
+used in an X.509 certificate. You can create this encoding using PublicKey.
+getEncoded(). Going the other way is a little more involved as you need a
+KeyFactory appropriate for the algorithm the key represents. The following
+example will work with RSA public keys.
 
-certificate. You can create this encoding using PublicKey.getEncoded(). Going
-the other way is a little
+#### Example 61 – Public Key Encoding
 
-more involved as you need a KeyFactory appropriate for the algorithm the key
-represents. The
-
-following example will work with RSA public keys.
-
-#### Example 61 – Public Key Encoding...............................................................................................
-
-**public static byte** [] encodePublic(PublicKey publicKey)
-{
-**return** publicKey.getEncoded(); }
-
-**public static** PublicKey producePublicKey( **byte** [] encoding)
-**throws** GeneralSecurityException { KeyFactory keyFact = KeyFactory. _
-getInstance_ ( **"RSA"**
-, **"BCFIPS"** );
-
-**return** keyFact.generatePublic( **new** X509EncodedKeySpec(encoding)); }
+Run `bcfipsin100.pbeks.Key.encodePublic()`
 
 Note that we are using an X509EncodedKeySpec to tell the KeyFactory what format
-the byte array is
-
-encoded in.
+the byte array is encoded in.
 
 Private keys are similar, except in this case PrivateKey.getEncoded() will
-normally return a PKCS#8
+normally return a PKCS#8 format encoding of the private key.
 
-format encoding of the private key.
+#### Example 62 – Private Key Encoding
 
-#### Example 62 – Private Key Encoding..............................................................................................
+Run `bcfipsin100.pbeks.Key.encodePrivate().producePrivateKey()`
 
-**public static byte** [] encodePrivate(PrivateKey privateKey)
-{
-**return** privateKey.getEncoded(); }
-
-**public static** PrivateKey producePrivateKey( **byte** [] encoding)
-**throws** GeneralSecurityException { KeyFactory keyFact = KeyFactory. _
-getInstance_ ( **"RSA"**
-, **"BCFIPS"** );
-
-**return** keyFact.generatePrivate( **new** PKCS8EncodedKeySpec(encoding)); }
-
-As with the public key, KeyFactory.generatePrivate() is passed a
-PKCS8EncodedKeySpec to tell it
-
-what format the byte array representing the encoding is in.
+As with the public key, `KeyFactory.generatePrivate()` is passed a
+PKCS8EncodedKeySpec to tell it what format the byte array representing the
+encoding is in.
 
 Note that if you are not using a software based Java cryptography provider, but
-using a hardware based
+using a hardware based one instead, it is quite likely any attempt to recover a
+private key except via wrapping will result in an exception.
 
-one instead, it is quite likely any attempt to recover a private key except via
-wrapping will result in an
-
-exception.
-
-### PEM Format........................................................................................................................................
+### PEM Format
 
 PEM format is used to store binary objects encoded as Base64. It originated with
-Privacy Enhanced
-
-Mail (RFC 1421) and was more recently formalized in RFC 7468 “Textual Encodings
-of PKIX, PKCS,
-
-and CMS Structures”. The headers are ASCII and it is even possible to include
-additional attributes in
-
-the header information to allow for descriptive information concerning
-encryption and the like.
+Privacy Enhanced Mail (RFC 1421) and was more recently formalized in RFC 7468
+“Textual Encodings of PKIX, PKCS, and CMS Structures”. The headers are ASCII and
+it is even possible to include additional attributes in the header information
+to allow for descriptive information concerning encryption and the like.
 
 The simplest thing to store in a PEM formatted file is a certificate. You will
-see PEM certificates a lot
+see PEM certificates a lot in the TLS configuration for servers and just about
+anywhere else a certificate is required. The PEM writer and parser for BC lives
+in the org.bouncycastle.openssl package in the bcpkix jar. The following example
+shows method for writing a PEM certificate to a String and then reading it back.
 
-in the TLS configuration for servers and just about anywhere else a certificate
-is required. The PEM
+#### Example 63 – Writing a Certificate in PEM Format
 
-writer and parser for BC lives in the org.bouncycastle.openssl package in the
-bcpkix jar. The following
-
-example shows method for writing a PEM certificate to a String and then reading
-it back.
-
-#### Example 63 – Writing a Certificate in PEM Format......................................................................
-
-**public static** String writeCertificate(X509Certificate certificate)
-**throws** IOException { StringWriter sWrt = **new** StringWriter();
-JcaPEMWriter pemWriter = **
-new** JcaPEMWriter(sWrt)
-;
-
-pemWriter.writeObject(certificate); pemWriter.close();
-
-**return** sWrt.toString(); }
-
-**public static** X509Certificate readCertificate(String pemEncoding)
-**throws** IOException, CertificateException { PEMParser parser = **new**
-PEMParser( **new**
-StringReader(pemEncoding));
-
-X509CertificateHolder certHolder = (X509CertificateHolder)parser.readObject();
-
-**return new** JcaX509CertificateConverter().getCertificate(certHolder); }
+Run `bcfipsin100.pbeks.Pem.writeCertificate().readCertificate()`
 
 Note that while it is possible to write an X509Certificate with the
-JcaPEMWriter, parsing the file
-
-produces the local BC equivalent which can then be converted.
+JcaPEMWriter, parsing the file produces the local BC equivalent which can then
+be converted.
 
 Private keys can also be written in PEM format and the JcaPEMWriter has the
-ability to handle them
+ability to handle them explicitly. As you will see in the example a different
+object is returned here as well – a PEMKeyPair.
 
-explicitly. As you will see in the example a different object is returned here
-as well – a PEMKeyPair.
+#### Example 64 – Writing a Private Key in PEM Format
 
-#### Example 64 – Writing a Private Key in PEM Format....................................................................
-
-**public static** String writePrivateKey(PrivateKey privateKey)
-**throws** IOException { StringWriter sWrt = **new** StringWriter();
-JcaPEMWriter pemWriter = **
-new** JcaPEMWriter(sWrt)
-;
-
-pemWriter.writeObject(privateKey); pemWriter.close();
-
-**return** sWrt.toString(); }
-
-**public static** PrivateKey readPrivateKey(String pemEncoding)
-**throws** IOException, CertificateException { PEMParser parser = **new**
-PEMParser( **new**
-StringReader(pemEncoding)); PEMKeyPair pemKeyPair = (PEMKeyPair)
-parser.readObject();
-
-**return new** JcaPEMKeyConverter().getPrivateKey(
-pemKeyPair.getPrivateKeyInfo()); }
+Run `bcfipsin100.pbeks.Pem.writePrivateKey().readPrivateKey()`
 
 The PEMKeyPair is returned where the private key is specifically noted in the
-PEM file, in the case
-
-where the PEM header is “-----BEGIN EC PRIVATE KEY-----” or “-----BEGIN RSA
-PRIATE
-
-KEY-----”. The reasons for this are largely historic and relate to how OpenSSL
-originally used PEM
-
-files. In the situation where the key type is unknown the header will be
-“-----BEGIN PRIVATE
-
-KEY-----” and the return value will be a PKCS#8 PrivateKeyInfo object (an ASN.1
-defined structure).
+PEM file, in the case where the PEM header is `-----BEGIN EC PRIVATE KEY-----`
+or `-----BEGIN RSA PRIATE KEY-----`. The reasons for this are largely historic
+and relate to how OpenSSL originally used PEM files. In the situation where the
+key type is unknown the header will be
+`-----BEGIN PRIVATE KEY-----` and the return value will be a PKCS#8
+PrivateKeyInfo object (an ASN.1 defined structure).
 
 The PEM format also offers two ways of storing a private key that has been
-encrypted. The most recent
-
-one uses the encoding of PKCS#8 EncryptedPrivateKeyInfo structure, the original
-one uses a format
-
-that also originated with OpenSSL. Both formats are still fairly common, but it
-is better to use the most
-
-recent one where possible.
+encrypted. The most recent one uses the encoding of PKCS#8
+EncryptedPrivateKeyInfo structure, the original one uses a format that also
+originated with OpenSSL. Both formats are still fairly common, but it is better
+to use the most recent one where possible.
 
 The following example shows how to write and read an encrypted private key using
-the FIPS preferred
+the FIPS preferred PBKDF and the AES-256 cipher in CBC mode. Note that in this
+case it is a two stage process, an EncryptedPrivateKeyInfo structure is created
+and then it is written out. Likewise on reading an EncryptedPrivateKeyInfo
+structure is read back, and then properly decrypted and converted into a key.
 
-PBKDF and the AES-256 cipher in CBC mode. Note that in this case it is a two
-stage process, an
-
-EncryptedPrivateKeyInfo structure is created and then it is written out.
-Likewise on reading an
-
-EncryptedPrivateKeyInfo structure is read back, and then properly decrypted and
-converted into a key.
-
-#### Example 65 – Writing an Encrypted Private Key in PEM Format.................................................
+#### Example 65 – Writing an Encrypted Private Key in PEM Format
 
 **public static** String writeEncryptedKey( **char** [] passwd, PrivateKey
 privateKey)

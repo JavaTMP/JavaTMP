@@ -11,6 +11,7 @@ import org.bouncycastle.asn1.x509.Extension;
 import org.bouncycastle.asn1.x509.Extensions;
 import org.bouncycastle.asn1.x509.GeneralName;
 import org.bouncycastle.asn1.x509.GeneralNames;
+import org.bouncycastle.jcajce.provider.BouncyCastleFipsProvider;
 import org.bouncycastle.operator.ContentSigner;
 import org.bouncycastle.operator.ContentVerifierProvider;
 import org.bouncycastle.operator.OperatorCreationException;
@@ -30,7 +31,8 @@ public class Pkcs10 {
         KeyPair ecKeyPair = EC.generateKeyPair();
 
         ContentSigner signer = new JcaContentSignerBuilder("SHA384withECDSA")
-                .setProvider("BCFIPS").build(ecKeyPair.getPrivate());
+                .setProvider(BouncyCastleFipsProvider.PROVIDER_NAME)
+                .build(ecKeyPair.getPrivate());
 
         return new JcaPKCS10CertificationRequestBuilder(
                 new X500Name("CN=PKCS10 Example"), ecKeyPair.getPublic())

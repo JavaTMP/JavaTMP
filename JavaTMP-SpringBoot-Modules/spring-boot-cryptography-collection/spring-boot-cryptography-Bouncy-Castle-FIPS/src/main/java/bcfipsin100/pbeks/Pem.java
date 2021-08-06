@@ -32,11 +32,9 @@ import java.security.PrivateKey;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 
-public class Pem
-{
+public class Pem {
     public static String writeCertificate(X509Certificate certificate)
-        throws IOException
-    {
+            throws IOException {
         StringWriter sWrt = new StringWriter();
         JcaPEMWriter pemWriter = new JcaPEMWriter(sWrt);
 
@@ -48,18 +46,17 @@ public class Pem
     }
 
     public static X509Certificate readCertificate(String pemEncoding)
-        throws IOException, CertificateException
-    {
+            throws IOException, CertificateException {
         PEMParser parser = new PEMParser(new StringReader(pemEncoding));
 
-        X509CertificateHolder certHolder = (X509CertificateHolder)parser.readObject();
+        X509CertificateHolder certHolder = (X509CertificateHolder) parser
+                .readObject();
 
         return new JcaX509CertificateConverter().getCertificate(certHolder);
     }
 
     public static String writePrivateKey(PrivateKey privateKey)
-        throws IOException
-    {
+            throws IOException {
         StringWriter sWrt = new StringWriter();
         JcaPEMWriter pemWriter = new JcaPEMWriter(sWrt);
 
@@ -71,79 +68,93 @@ public class Pem
     }
 
     public static PrivateKey readPrivateKey(String pemEncoding)
-        throws IOException, CertificateException
-    {
+            throws IOException, CertificateException {
         PEMParser parser = new PEMParser(new StringReader(pemEncoding));
 
-        PEMKeyPair pemKeyPair = (PEMKeyPair)parser.readObject();
+        PEMKeyPair pemKeyPair = (PEMKeyPair) parser.readObject();
 
-        return new JcaPEMKeyConverter().getPrivateKey(pemKeyPair.getPrivateKeyInfo());
+        return new JcaPEMKeyConverter()
+                .getPrivateKey(pemKeyPair.getPrivateKeyInfo());
     }
 
     public static String writeEncryptedKey(char[] passwd, PrivateKey privateKey)
-        throws IOException, OperatorCreationException
-    {
+            throws IOException, OperatorCreationException {
         StringWriter sWrt = new StringWriter();
         JcaPEMWriter pemWriter = new JcaPEMWriter(sWrt);
 
-        PKCS8EncryptedPrivateKeyInfoBuilder pkcs8Builder = new JcaPKCS8EncryptedPrivateKeyInfoBuilder(privateKey);
+        PKCS8EncryptedPrivateKeyInfoBuilder pkcs8Builder = new JcaPKCS8EncryptedPrivateKeyInfoBuilder(
+                privateKey);
 
-        pemWriter.writeObject(pkcs8Builder.build(new JcePKCSPBEOutputEncryptorBuilder(NISTObjectIdentifiers.id_aes256_CBC).setProvider("BCFIPS").build(passwd)));
+        pemWriter.writeObject(pkcs8Builder
+                .build(new JcePKCSPBEOutputEncryptorBuilder(
+                        NISTObjectIdentifiers.id_aes256_CBC)
+                        .setProvider("BCFIPS").build(passwd)));
 
         pemWriter.close();
 
         return sWrt.toString();
     }
 
-    public static PrivateKey readEncryptedKey(char[] password, String pemEncoding)
-        throws IOException, OperatorCreationException, PKCSException
-    {
+    public static PrivateKey readEncryptedKey(char[] password,
+                                              String pemEncoding)
+            throws IOException, OperatorCreationException, PKCSException {
         PEMParser parser = new PEMParser(new StringReader(pemEncoding));
 
-        PKCS8EncryptedPrivateKeyInfo encPrivKeyInfo = (PKCS8EncryptedPrivateKeyInfo)parser.readObject();
+        PKCS8EncryptedPrivateKeyInfo encPrivKeyInfo = (PKCS8EncryptedPrivateKeyInfo) parser
+                .readObject();
 
-        InputDecryptorProvider pkcs8Prov = new JcePKCSPBEInputDecryptorProviderBuilder().setProvider("BCFIPS").build(password);
+        InputDecryptorProvider pkcs8Prov = new JcePKCSPBEInputDecryptorProviderBuilder()
+                .setProvider("BCFIPS").build(password);
 
-        JcaPEMKeyConverter   converter = new JcaPEMKeyConverter().setProvider("BCFIPS");
+        JcaPEMKeyConverter converter = new JcaPEMKeyConverter()
+                .setProvider("BCFIPS");
 
-        return converter.getPrivateKey(encPrivKeyInfo.decryptPrivateKeyInfo(pkcs8Prov));
+        return converter
+                .getPrivateKey(encPrivKeyInfo.decryptPrivateKeyInfo(pkcs8Prov));
     }
 
-    public static String writeEncryptedKeyOpenSsl(char[] passwd, PrivateKey privateKey)
-        throws IOException, OperatorCreationException
-    {
+    public static String writeEncryptedKeyOpenSsl(char[] passwd,
+                                                  PrivateKey privateKey)
+            throws IOException, OperatorCreationException {
         StringWriter sWrt = new StringWriter();
         JcaPEMWriter pemWriter = new JcaPEMWriter(sWrt);
 
-        pemWriter.writeObject(privateKey, new JcePEMEncryptorBuilder("AES-256-CBC").setProvider("BCFIPS").build(passwd));
+        pemWriter.writeObject(privateKey,
+                new JcePEMEncryptorBuilder("AES-256-CBC").setProvider("BCFIPS")
+                        .build(passwd));
 
         pemWriter.close();
 
         return sWrt.toString();
     }
 
-    public static PrivateKey readEncryptedKeyOpenSsl(char[] passwd, String pemEncoding)
-        throws IOException, OperatorCreationException
-    {
+    public static PrivateKey readEncryptedKeyOpenSsl(char[] passwd,
+                                                     String pemEncoding)
+            throws IOException, OperatorCreationException {
         PEMParser parser = new PEMParser(new StringReader(pemEncoding));
 
-        PEMEncryptedKeyPair pemEncryptedKeyPair = (PEMEncryptedKeyPair)parser.readObject();
+        PEMEncryptedKeyPair pemEncryptedKeyPair = (PEMEncryptedKeyPair) parser
+                .readObject();
 
-        PEMDecryptorProvider pkcs8Prov = new JcePEMDecryptorProviderBuilder().setProvider("BCFIPS").build(passwd);
+        PEMDecryptorProvider pkcs8Prov = new JcePEMDecryptorProviderBuilder()
+                .setProvider("BCFIPS").build(passwd);
 
-        JcaPEMKeyConverter   converter = new JcaPEMKeyConverter().setProvider("BCFIPS");
+        JcaPEMKeyConverter converter = new JcaPEMKeyConverter()
+                .setProvider("BCFIPS");
 
-        return converter.getPrivateKey(pemEncryptedKeyPair.decryptKeyPair(pkcs8Prov).getPrivateKeyInfo());
+        return converter.getPrivateKey(
+                pemEncryptedKeyPair.decryptKeyPair(pkcs8Prov)
+                        .getPrivateKeyInfo());
     }
 
     public static void main(String[] args)
-        throws GeneralSecurityException, IOException, OperatorCreationException, PKCSException
-    {
+            throws GeneralSecurityException, IOException, OperatorCreationException, PKCSException {
         Setup.installProvider();
 
         KeyPair keyPair = EC.generateKeyPair();
 
-        X509Certificate certificate = Cert.makeV1Certificate(keyPair.getPrivate(), keyPair.getPublic());
+        X509Certificate certificate = Cert
+                .makeV1Certificate(keyPair.getPrivate(), keyPair.getPublic());
 
         char[] keyPass = "keyPassword".toCharArray();
 
@@ -153,16 +164,20 @@ public class Pem
 
         String pemPrivateKey = writePrivateKey(keyPair.getPrivate());
         System.err.println(pemPrivateKey);
-        System.err.println(keyPair.getPrivate().equals(readPrivateKey(pemPrivateKey)));
+        System.err.println(
+                keyPair.getPrivate().equals(readPrivateKey(pemPrivateKey)));
 
         String encPrivKey = writeEncryptedKey(keyPass, keyPair.getPrivate());
 
         System.err.println(encPrivKey);
-        System.err.println(keyPair.getPrivate().equals(readEncryptedKey(keyPass, encPrivKey)));
+        System.err.println(keyPair.getPrivate()
+                .equals(readEncryptedKey(keyPass, encPrivKey)));
 
-        String openSslEncPrivKey = writeEncryptedKeyOpenSsl(keyPass, keyPair.getPrivate());
+        String openSslEncPrivKey = writeEncryptedKeyOpenSsl(keyPass,
+                keyPair.getPrivate());
 
         System.err.println(openSslEncPrivKey);
-        System.err.println(keyPair.getPrivate().equals(readEncryptedKeyOpenSsl(keyPass, openSslEncPrivKey)));
+        System.err.println(keyPair.getPrivate()
+                .equals(readEncryptedKeyOpenSsl(keyPass, openSslEncPrivKey)));
     }
 }

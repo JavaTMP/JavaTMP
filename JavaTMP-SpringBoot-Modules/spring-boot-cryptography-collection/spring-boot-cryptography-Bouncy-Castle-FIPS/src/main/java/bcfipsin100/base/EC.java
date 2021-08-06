@@ -3,6 +3,7 @@ package bcfipsin100.base;
 import bcfipsin100.util.ExValues;
 import org.bouncycastle.crypto.util.DERMacData;
 import org.bouncycastle.jcajce.AgreedKeyWithMacKey;
+import org.bouncycastle.jcajce.provider.BouncyCastleFipsProvider;
 import org.bouncycastle.jcajce.spec.UserKeyingMaterialSpec;
 import org.bouncycastle.util.Arrays;
 import org.bouncycastle.util.encoders.Hex;
@@ -18,7 +19,9 @@ import java.security.spec.ECGenParameterSpec;
 public class EC {
     public static KeyPair generateKeyPair()
             throws GeneralSecurityException {
-        KeyPairGenerator keyPair = KeyPairGenerator.getInstance("RSA");
+        KeyPairGenerator keyPair =
+                KeyPairGenerator.getInstance("RSA",
+                        BouncyCastleFipsProvider.PROVIDER_NAME);
         keyPair.initialize(1024);
         return keyPair.generateKeyPair();
     }
@@ -35,7 +38,7 @@ public class EC {
                                           byte[] encSignature)
             throws GeneralSecurityException {
         Signature signature = Signature
-                .getInstance("SHA384withECDSA", "BCFIPS");
+                .getInstance("SHA384withECDSA", BouncyCastleFipsProvider.PROVIDER_NAME);
         signature.initVerify(ecPublic);
         signature.update(input);
         return signature.verify(encSignature);

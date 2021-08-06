@@ -17,50 +17,57 @@ import java.math.BigInteger;
 import java.security.KeyPair;
 import java.security.PublicKey;
 
-public class Crmf
-{
+public class Crmf {
     public static byte[] createCertificateRequestMessage(KeyPair keyPair)
-        throws IOException, OperatorCreationException, CRMFException
-    {
-        JcaCertificateRequestMessageBuilder certReqBuild = new JcaCertificateRequestMessageBuilder(BigInteger.ONE);
+            throws IOException, OperatorCreationException, CRMFException {
+        JcaCertificateRequestMessageBuilder certReqBuild = new JcaCertificateRequestMessageBuilder(
+                BigInteger.ONE);
 
         certReqBuild.setPublicKey(keyPair.getPublic())
-            .setAuthInfoSender(new X500Principal("CN=CRMF Example"))
-            .setProofOfPossessionSigningKeySigner(new JcaContentSignerBuilder("SHA384withECDSA").setProvider("BCFIPS").build(keyPair.getPrivate()));
+                .setAuthInfoSender(new X500Principal("CN=CRMF Example"))
+                .setProofOfPossessionSigningKeySigner(
+                        new JcaContentSignerBuilder("SHA384withECDSA")
+                                .setProvider("BCFIPS")
+                                .build(keyPair.getPrivate()));
 
         return certReqBuild.build().getEncoded();
     }
 
-    public static boolean isValidCertificateRequestMessage(byte[] msgEncoding, PublicKey publicKey)
-        throws OperatorCreationException, CRMFException
-    {
-        JcaCertificateRequestMessage certReqMsg = new JcaCertificateRequestMessage(msgEncoding).setProvider("BCFIPS");
+    public static boolean isValidCertificateRequestMessage(byte[] msgEncoding,
+                                                           PublicKey publicKey)
+            throws OperatorCreationException, CRMFException {
+        JcaCertificateRequestMessage certReqMsg = new JcaCertificateRequestMessage(
+                msgEncoding).setProvider("BCFIPS");
 
-        return certReqMsg.isValidSigningKeyPOP(new JcaContentVerifierProviderBuilder().setProvider("BCFIPS").build(publicKey));
+        return certReqMsg.isValidSigningKeyPOP(
+                new JcaContentVerifierProviderBuilder().setProvider("BCFIPS")
+                        .build(publicKey));
     }
 
     public static byte[] createEncCertificateRequestMessage(KeyPair keyPair)
-        throws IOException, OperatorCreationException, CRMFException
-    {
-        JcaCertificateRequestMessageBuilder certReqBuild = new JcaCertificateRequestMessageBuilder(BigInteger.ONE);
+            throws IOException, OperatorCreationException, CRMFException {
+        JcaCertificateRequestMessageBuilder certReqBuild = new JcaCertificateRequestMessageBuilder(
+                BigInteger.ONE);
 
         certReqBuild.setPublicKey(keyPair.getPublic())
-            .setAuthInfoSender(new X500Principal("CN=CRMF Example"))
-            .setProofOfPossessionSubsequentMessage(SubsequentMessage.encrCert);
+                .setAuthInfoSender(new X500Principal("CN=CRMF Example"))
+                .setProofOfPossessionSubsequentMessage(
+                        SubsequentMessage.encrCert);
 
         return certReqBuild.build().getEncoded();
     }
 
-    public static void main(String[] args)
-        throws Exception
-    {
+    public static void main(String[] args) throws Exception {
         Setup.installProvider();
 
         KeyPair ecKeyPair = EC.generateKeyPair();
 
         byte[] encCrmfMessage = createCertificateRequestMessage(ecKeyPair);
 
-        System.err.println(isValidCertificateRequestMessage(encCrmfMessage, ecKeyPair.getPublic()));
-        System.err.println(new CertificateRequestMessage(createEncCertificateRequestMessage(ecKeyPair)).getProofOfPossessionType() == CertificateRequestMessage.popKeyEncipherment);
+        System.err.println(isValidCertificateRequestMessage(encCrmfMessage,
+                ecKeyPair.getPublic()));
+        System.err.println(new CertificateRequestMessage(
+                createEncCertificateRequestMessage(ecKeyPair))
+                .getProofOfPossessionType() == CertificateRequestMessage.popKeyEncipherment);
     }
 }
