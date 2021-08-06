@@ -43,11 +43,11 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
-public class Cms
-{
-    public static byte[] createSignedObject(PrivateKey signingKey, X509Certificate signingCert, byte[] data)
-        throws GeneralSecurityException, OperatorCreationException, CMSException, IOException
-    {
+public class Cms {
+    public static byte[] createSignedObject(PrivateKey signingKey,
+                                            X509Certificate signingCert,
+                                            byte[] data)
+            throws GeneralSecurityException, OperatorCreationException, CMSException, IOException {
         List<X509Certificate> certList = new ArrayList<X509Certificate>();
         CMSTypedData msg = new CMSProcessableByteArray(data);
 
@@ -55,14 +55,18 @@ public class Cms
 
         Store certs = new JcaCertStore(certList);
 
-        DigestCalculatorProvider digProvider = new JcaDigestCalculatorProviderBuilder().setProvider("BCFIPS").build();
-        JcaSignerInfoGeneratorBuilder signerInfoGeneratorBuilder = new JcaSignerInfoGeneratorBuilder(digProvider);
+        DigestCalculatorProvider digProvider = new JcaDigestCalculatorProviderBuilder()
+                .setProvider("BCFIPS").build();
+        JcaSignerInfoGeneratorBuilder signerInfoGeneratorBuilder = new JcaSignerInfoGeneratorBuilder(
+                digProvider);
 
-        ContentSigner signer = new JcaContentSignerBuilder("SHA384withECDSA").setProvider("BCFIPS").build(signingKey);
+        ContentSigner signer = new JcaContentSignerBuilder("SHA384withECDSA")
+                .setProvider("BCFIPS").build(signingKey);
 
         CMSSignedDataGenerator gen = new CMSSignedDataGenerator();
 
-        gen.addSignerInfoGenerator(signerInfoGeneratorBuilder.build(signer, signingCert));
+        gen.addSignerInfoGenerator(
+                signerInfoGeneratorBuilder.build(signer, signingCert));
 
         gen.addCertificates(certs);
 
@@ -70,25 +74,23 @@ public class Cms
     }
 
     public static boolean verifySignedObject(byte[] cmsSignedData)
-        throws GeneralSecurityException, OperatorCreationException, CMSException
-    {
-        CMSSignedData          signedData = new CMSSignedData(cmsSignedData);
-        Store                  certStore = signedData.getCertificates();
+            throws GeneralSecurityException, OperatorCreationException, CMSException {
+        CMSSignedData signedData = new CMSSignedData(cmsSignedData);
+        Store certStore = signedData.getCertificates();
         SignerInformationStore signers = signedData.getSignerInfos();
 
         Collection c = signers.getSigners();
         Iterator it = c.iterator();
 
-        while (it.hasNext())
-        {
-            SignerInformation signer = (SignerInformation)it.next();
-            Collection          certCollection = certStore.getMatches(signer.getSID());
+        while (it.hasNext()) {
+            SignerInformation signer = (SignerInformation) it.next();
+            Collection certCollection = certStore.getMatches(signer.getSID());
 
-            Iterator        certIt = certCollection.iterator();
-            X509CertificateHolder cert = (X509CertificateHolder)certIt.next();
+            Iterator certIt = certCollection.iterator();
+            X509CertificateHolder cert = (X509CertificateHolder) certIt.next();
 
-            if (!signer.verify(new JcaSimpleSignerInfoVerifierBuilder().setProvider("BCFIPS").build(cert)))
-            {
+            if (!signer.verify(new JcaSimpleSignerInfoVerifierBuilder()
+                    .setProvider("BCFIPS").build(cert))) {
                 return false;
             }
         }
@@ -96,9 +98,10 @@ public class Cms
         return true;
     }
 
-    public static byte[] createDetachedSignature(PrivateKey signingKey, X509Certificate signingCert, byte[] data)
-        throws GeneralSecurityException, OperatorCreationException, CMSException, IOException
-    {
+    public static byte[] createDetachedSignature(PrivateKey signingKey,
+                                                 X509Certificate signingCert,
+                                                 byte[] data)
+            throws GeneralSecurityException, OperatorCreationException, CMSException, IOException {
         List<X509Certificate> certList = new ArrayList<X509Certificate>();
         CMSTypedData msg = new CMSProcessableByteArray(data);
 
@@ -106,14 +109,18 @@ public class Cms
 
         Store certs = new JcaCertStore(certList);
 
-        DigestCalculatorProvider digProvider = new JcaDigestCalculatorProviderBuilder().setProvider("BCFIPS").build();
-        JcaSignerInfoGeneratorBuilder signerInfoGeneratorBuilder = new JcaSignerInfoGeneratorBuilder(digProvider);
+        DigestCalculatorProvider digProvider = new JcaDigestCalculatorProviderBuilder()
+                .setProvider("BCFIPS").build();
+        JcaSignerInfoGeneratorBuilder signerInfoGeneratorBuilder = new JcaSignerInfoGeneratorBuilder(
+                digProvider);
 
-        ContentSigner signer = new JcaContentSignerBuilder("SHA384withECDSA").setProvider("BCFIPS").build(signingKey);
+        ContentSigner signer = new JcaContentSignerBuilder("SHA384withECDSA")
+                .setProvider("BCFIPS").build(signingKey);
 
         CMSSignedDataGenerator gen = new CMSSignedDataGenerator();
 
-        gen.addSignerInfoGenerator(signerInfoGeneratorBuilder.build(signer, signingCert));
+        gen.addSignerInfoGenerator(
+                signerInfoGeneratorBuilder.build(signer, signingCert));
 
         gen.addCertificates(certs);
 
@@ -121,25 +128,24 @@ public class Cms
     }
 
     public static boolean verifyDetachedData(byte[] cmsSignedData, byte[] data)
-        throws GeneralSecurityException, OperatorCreationException, CMSException
-    {
-        CMSSignedData          signedData = new CMSSignedData(new CMSProcessableByteArray(data), cmsSignedData);
-        Store                  certStore = signedData.getCertificates();
+            throws GeneralSecurityException, OperatorCreationException, CMSException {
+        CMSSignedData signedData = new CMSSignedData(
+                new CMSProcessableByteArray(data), cmsSignedData);
+        Store certStore = signedData.getCertificates();
         SignerInformationStore signers = signedData.getSignerInfos();
 
         Collection c = signers.getSigners();
         Iterator it = c.iterator();
 
-        while (it.hasNext())
-        {
-            SignerInformation signer = (SignerInformation)it.next();
-            Collection          certCollection = certStore.getMatches(signer.getSID());
+        while (it.hasNext()) {
+            SignerInformation signer = (SignerInformation) it.next();
+            Collection certCollection = certStore.getMatches(signer.getSID());
 
-            Iterator        certIt = certCollection.iterator();
-            X509CertificateHolder cert = (X509CertificateHolder)certIt.next();
+            Iterator certIt = certCollection.iterator();
+            X509CertificateHolder cert = (X509CertificateHolder) certIt.next();
 
-            if (!signer.verify(new JcaSimpleSignerInfoVerifierBuilder().setProvider("BCFIPS").build(cert)))
-            {
+            if (!signer.verify(new JcaSimpleSignerInfoVerifierBuilder()
+                    .setProvider("BCFIPS").build(cert))) {
                 return false;
             }
         }
@@ -147,246 +153,320 @@ public class Cms
         return true;
     }
 
-    public static byte[] createCounterSignedData(PrivateKey signingKey, X509Certificate signingCert, byte[] data, PrivateKey counterSignerKey, X509Certificate counterSignerCert)
-        throws OperatorCreationException, GeneralSecurityException, CMSException, IOException
-    {
-        CMSSignedData signedData = new CMSSignedData(createSignedObject(signingKey, signingCert, data));
+    public static byte[] createCounterSignedData(PrivateKey signingKey,
+                                                 X509Certificate signingCert,
+                                                 byte[] data,
+                                                 PrivateKey counterSignerKey,
+                                                 X509Certificate counterSignerCert)
+            throws OperatorCreationException, GeneralSecurityException, CMSException, IOException {
+        CMSSignedData signedData = new CMSSignedData(
+                createSignedObject(signingKey, signingCert, data));
 
-        SignerInformation signer = signedData.getSignerInfos().iterator().next();
+        SignerInformation signer = signedData.getSignerInfos().iterator()
+                .next();
 
         CMSSignedDataGenerator counterSignerGen = new CMSSignedDataGenerator();
 
-        DigestCalculatorProvider digProvider = new JcaDigestCalculatorProviderBuilder().setProvider("BCFIPS").build();
-        JcaSignerInfoGeneratorBuilder signerInfoGeneratorBuilder = new JcaSignerInfoGeneratorBuilder(digProvider);
+        DigestCalculatorProvider digProvider = new JcaDigestCalculatorProviderBuilder()
+                .setProvider("BCFIPS").build();
+        JcaSignerInfoGeneratorBuilder signerInfoGeneratorBuilder = new JcaSignerInfoGeneratorBuilder(
+                digProvider);
 
-        counterSignerGen.addSignerInfoGenerator(signerInfoGeneratorBuilder.build(new JcaContentSignerBuilder("SHA384withRSA").setProvider("BCFIPS").build(counterSignerKey), counterSignerCert));
+        counterSignerGen.addSignerInfoGenerator(signerInfoGeneratorBuilder
+                .build(new JcaContentSignerBuilder("SHA384withRSA")
+                                .setProvider("BCFIPS").build(counterSignerKey),
+                        counterSignerCert));
 
-        SignerInformationStore counterSigners = counterSignerGen.generateCounterSigners(signer);
+        SignerInformationStore counterSigners = counterSignerGen
+                .generateCounterSigners(signer);
 
         signer = SignerInformation.addCounterSigners(signer, counterSigners);
 
         CMSSignedDataGenerator signerGen = new CMSSignedDataGenerator();
 
         signerGen.addCertificate(new JcaX509CertificateHolder(signingCert));
-        signerGen.addCertificate(new JcaX509CertificateHolder(counterSignerCert));
+        signerGen.addCertificate(
+                new JcaX509CertificateHolder(counterSignerCert));
 
         signerGen.addSigners(new SignerInformationStore(signer));
 
-        return signerGen.generate(new CMSProcessableByteArray(data), true).getEncoded();
+        return signerGen.generate(new CMSProcessableByteArray(data), true)
+                .getEncoded();
     }
 
     public static boolean verifyCounterSignature(byte[] cmsSignedData)
-        throws OperatorCreationException, GeneralSecurityException, CMSException, IOException
-    {
-        CMSSignedData         signedData = new CMSSignedData(cmsSignedData);
-        SignerInformation     signer = signedData.getSignerInfos().iterator().next();
-        SignerInformation     counterSigner = signer.getCounterSignatures().iterator().next();
-        Collection            certCollection = signedData.getCertificates().getMatches(counterSigner.getSID());
-        Iterator              certIt = certCollection.iterator();
-        X509CertificateHolder cert = (X509CertificateHolder)certIt.next();
+            throws OperatorCreationException, GeneralSecurityException, CMSException, IOException {
+        CMSSignedData signedData = new CMSSignedData(cmsSignedData);
+        SignerInformation signer = signedData.getSignerInfos().iterator()
+                .next();
+        SignerInformation counterSigner = signer.getCounterSignatures()
+                .iterator().next();
+        Collection certCollection = signedData.getCertificates()
+                .getMatches(counterSigner.getSID());
+        Iterator certIt = certCollection.iterator();
+        X509CertificateHolder cert = (X509CertificateHolder) certIt.next();
 
-        return counterSigner.verify(new JcaSimpleSignerInfoVerifierBuilder().setProvider("BCFIPS").build(cert));
+        return counterSigner.verify(new JcaSimpleSignerInfoVerifierBuilder()
+                .setProvider("BCFIPS").build(cert));
     }
 
-    public static Attribute createTspAttribute(PrivateKey tspSigningKey, X509Certificate tspSignerCert, byte[] data)
-        throws GeneralSecurityException, OperatorCreationException, TSPException, IOException
-    {
+    public static Attribute createTspAttribute(PrivateKey tspSigningKey,
+                                               X509Certificate tspSignerCert,
+                                               byte[] data)
+            throws GeneralSecurityException, OperatorCreationException, TSPException, IOException {
         MessageDigest digest = MessageDigest.getInstance("SHA-384", "BCFIPS");
-        TimeStampResponse response = new TimeStampResponse(Tsp.createTspResponse(tspSigningKey, tspSignerCert, Tsp.createTspRequest(digest.digest(data))));
+        TimeStampResponse response = new TimeStampResponse(
+                Tsp.createTspResponse(tspSigningKey, tspSignerCert,
+                        Tsp.createTspRequest(digest.digest(data))));
         TimeStampToken timestampToken = response.getTimeStampToken();
 
-        return new Attribute(PKCSObjectIdentifiers.id_aa_signatureTimeStampToken, new DERSet(timestampToken.toCMSSignedData().toASN1Structure()));
+        return new Attribute(
+                PKCSObjectIdentifiers.id_aa_signatureTimeStampToken,
+                new DERSet(timestampToken.toCMSSignedData().toASN1Structure()));
     }
 
-    public static byte[] createTimeStampedSigner(PrivateKey signingKey, X509Certificate signingCert, byte[] data, PrivateKey tspSigningKey, X509Certificate tspSignerCert)
-        throws OperatorCreationException, GeneralSecurityException, CMSException, TSPException, IOException
-    {
-        CMSSignedData signedData = new CMSSignedData(createSignedObject(signingKey, signingCert, data));
+    public static byte[] createTimeStampedSigner(PrivateKey signingKey,
+                                                 X509Certificate signingCert,
+                                                 byte[] data,
+                                                 PrivateKey tspSigningKey,
+                                                 X509Certificate tspSignerCert)
+            throws OperatorCreationException, GeneralSecurityException, CMSException, TSPException, IOException {
+        CMSSignedData signedData = new CMSSignedData(
+                createSignedObject(signingKey, signingCert, data));
 
-        SignerInformation signer = signedData.getSignerInfos().iterator().next();
+        SignerInformation signer = signedData.getSignerInfos().iterator()
+                .next();
 
         ASN1EncodableVector timestampVector = new ASN1EncodableVector();
-        timestampVector.add(createTspAttribute(tspSigningKey, tspSignerCert, signer.getSignature()));
+        timestampVector.add(createTspAttribute(tspSigningKey, tspSignerCert,
+                signer.getSignature()));
         AttributeTable at = new AttributeTable(timestampVector);
 
         signer = SignerInformation.replaceUnsignedAttributes(signer, at);
 
-        SignerInformationStore newSignerStore = new SignerInformationStore(signer);
+        SignerInformationStore newSignerStore = new SignerInformationStore(
+                signer);
 
-        return CMSSignedData.replaceSigners(signedData, newSignerStore).getEncoded();
+        return CMSSignedData.replaceSigners(signedData, newSignerStore)
+                .getEncoded();
     }
 
     public static boolean verifyTimeStampedSigner(byte[] cmsSignedData)
-        throws OperatorCreationException, GeneralSecurityException, CMSException, IOException, TSPException
-    {
-        CMSSignedData         signedData = new CMSSignedData(cmsSignedData);
-        SignerInformation     signer = signedData.getSignerInfos().iterator().next();
-        TimeStampToken        tspToken = new TimeStampToken(ContentInfo.getInstance(signer.getUnsignedAttributes().get(PKCSObjectIdentifiers.id_aa_signatureTimeStampToken).getAttributeValues()[0]));
-        Collection            certCollection = tspToken.getCertificates().getMatches(tspToken.getSID());
-        Iterator              certIt = certCollection.iterator();
-        X509CertificateHolder cert = (X509CertificateHolder)certIt.next();
+            throws OperatorCreationException, GeneralSecurityException, CMSException, IOException, TSPException {
+        CMSSignedData signedData = new CMSSignedData(cmsSignedData);
+        SignerInformation signer = signedData.getSignerInfos().iterator()
+                .next();
+        TimeStampToken tspToken = new TimeStampToken(ContentInfo.getInstance(
+                signer.getUnsignedAttributes()
+                        .get(PKCSObjectIdentifiers.id_aa_signatureTimeStampToken)
+                        .getAttributeValues()[0]));
+        Collection certCollection = tspToken.getCertificates()
+                .getMatches(tspToken.getSID());
+        Iterator certIt = certCollection.iterator();
+        X509CertificateHolder cert = (X509CertificateHolder) certIt.next();
 
-        tspToken.validate(new JcaSimpleSignerInfoVerifierBuilder().setProvider("BCFIPS").build(cert));
+        tspToken.validate(
+                new JcaSimpleSignerInfoVerifierBuilder().setProvider("BCFIPS")
+                        .build(cert));
 
         return true;
     }
 
-    public static byte[] createKeyTransEnvelopedObject(X509Certificate encryptionCert, byte[] data)
-        throws GeneralSecurityException, CMSException, IOException
-    {
+    public static byte[] createKeyTransEnvelopedObject(
+            X509Certificate encryptionCert, byte[] data)
+            throws GeneralSecurityException, CMSException, IOException {
         CMSEnvelopedDataGenerator envelopedGen = new CMSEnvelopedDataGenerator();
         JcaAlgorithmParametersConverter paramsConverter = new JcaAlgorithmParametersConverter();
 
-        envelopedGen.addRecipientInfoGenerator(new JceKeyTransRecipientInfoGenerator(encryptionCert, paramsConverter.getAlgorithmIdentifier(PKCSObjectIdentifiers.id_RSAES_OAEP, OAEPParameterSpec.DEFAULT)).setProvider("BCFIPS"));
+        envelopedGen.addRecipientInfoGenerator(
+                new JceKeyTransRecipientInfoGenerator(encryptionCert,
+                        paramsConverter.getAlgorithmIdentifier(
+                                PKCSObjectIdentifiers.id_RSAES_OAEP,
+                                OAEPParameterSpec.DEFAULT))
+                        .setProvider("BCFIPS"));
 
         return envelopedGen.generate(
-            new CMSProcessableByteArray(data),
-            new JceCMSContentEncryptorBuilder(CMSAlgorithm.AES256_CBC).setProvider("BCFIPS").build()).getEncoded();
+                new CMSProcessableByteArray(data),
+                new JceCMSContentEncryptorBuilder(CMSAlgorithm.AES256_CBC)
+                        .setProvider("BCFIPS").build()).getEncoded();
     }
 
-    public static byte[] extractKeyTransEnvelopedData(PrivateKey privateKey, X509Certificate encryptionCert, byte[] encEnvelopedData)
-        throws CMSException
-    {
+    public static byte[] extractKeyTransEnvelopedData(PrivateKey privateKey,
+                                                      X509Certificate encryptionCert,
+                                                      byte[] encEnvelopedData)
+            throws CMSException {
         CMSEnvelopedData envelopedData = new CMSEnvelopedData(encEnvelopedData);
-        RecipientInformationStore recipients = envelopedData.getRecipientInfos();
+        RecipientInformationStore recipients = envelopedData
+                .getRecipientInfos();
 
-        Collection c = recipients.getRecipients(new JceKeyTransRecipientId(encryptionCert));
+        Collection c = recipients
+                .getRecipients(new JceKeyTransRecipientId(encryptionCert));
 
         Iterator it = c.iterator();
 
-        if (it.hasNext())
-        {
-            RecipientInformation recipient = (RecipientInformation)it.next();
+        if (it.hasNext()) {
+            RecipientInformation recipient = (RecipientInformation) it.next();
 
-            return recipient.getContent(new JceKeyTransEnvelopedRecipient(privateKey).setProvider("BCFIPS"));
+            return recipient.getContent(
+                    new JceKeyTransEnvelopedRecipient(privateKey)
+                            .setProvider("BCFIPS"));
         }
 
-        throw new IllegalArgumentException("recipient for certificate not found");
+        throw new IllegalArgumentException(
+                "recipient for certificate not found");
     }
 
-    public static byte[] createKeyAgreeEnvelopedObject(PrivateKey initiatorKey, X509Certificate initiatorCert, X509Certificate recipientCert, byte[] data)
-        throws GeneralSecurityException, CMSException, IOException
-    {
+    public static byte[] createKeyAgreeEnvelopedObject(PrivateKey initiatorKey,
+                                                       X509Certificate initiatorCert,
+                                                       X509Certificate recipientCert,
+                                                       byte[] data)
+            throws GeneralSecurityException, CMSException, IOException {
         CMSEnvelopedDataGenerator envelopedGen = new CMSEnvelopedDataGenerator();
 
-        envelopedGen.addRecipientInfoGenerator(new JceKeyAgreeRecipientInfoGenerator(CMSAlgorithm.ECCDH_SHA384KDF,
-            initiatorKey, initiatorCert.getPublicKey(),
-            CMSAlgorithm.AES256_WRAP).addRecipient(recipientCert).setProvider("BCFIPS"));
+        envelopedGen.addRecipientInfoGenerator(
+                new JceKeyAgreeRecipientInfoGenerator(
+                        CMSAlgorithm.ECCDH_SHA384KDF,
+                        initiatorKey, initiatorCert.getPublicKey(),
+                        CMSAlgorithm.AES256_WRAP).addRecipient(recipientCert)
+                        .setProvider("BCFIPS"));
 
         return envelopedGen.generate(
-            new CMSProcessableByteArray(data),
-            new JceCMSContentEncryptorBuilder(CMSAlgorithm.AES256_CBC).setProvider("BCFIPS").build()).getEncoded();
+                new CMSProcessableByteArray(data),
+                new JceCMSContentEncryptorBuilder(CMSAlgorithm.AES256_CBC)
+                        .setProvider("BCFIPS").build()).getEncoded();
 
     }
 
-    public static byte[] extractKeyAgreeEnvelopedData(PrivateKey recipientKey, X509Certificate recipientCert, byte[] encEnvelopedData)
-        throws GeneralSecurityException, CMSException
-    {
+    public static byte[] extractKeyAgreeEnvelopedData(PrivateKey recipientKey,
+                                                      X509Certificate recipientCert,
+                                                      byte[] encEnvelopedData)
+            throws GeneralSecurityException, CMSException {
         CMSEnvelopedData envelopedData = new CMSEnvelopedData(encEnvelopedData);
-        RecipientInformationStore recipients = envelopedData.getRecipientInfos();
+        RecipientInformationStore recipients = envelopedData
+                .getRecipientInfos();
         RecipientId rid = new JceKeyAgreeRecipientId(recipientCert);
 
         RecipientInformation recipient = recipients.get(rid);
 
-        return recipient.getContent(new JceKeyAgreeEnvelopedRecipient(recipientKey).setProvider("BCFIPS"));
+        return recipient.getContent(
+                new JceKeyAgreeEnvelopedRecipient(recipientKey)
+                        .setProvider("BCFIPS"));
     }
 
-    public static byte[] createKekEnvelopedObject(byte[] keyID, SecretKey keyEncryptionKey, byte[] data)
-        throws GeneralSecurityException, CMSException, IOException
-    {
+    public static byte[] createKekEnvelopedObject(byte[] keyID,
+                                                  SecretKey keyEncryptionKey,
+                                                  byte[] data)
+            throws GeneralSecurityException, CMSException, IOException {
         CMSEnvelopedDataGenerator envelopedGen = new CMSEnvelopedDataGenerator();
 
         envelopedGen.addRecipientInfoGenerator(
-            new JceKEKRecipientInfoGenerator(keyID, keyEncryptionKey));
+                new JceKEKRecipientInfoGenerator(keyID, keyEncryptionKey));
 
         return envelopedGen.generate(
-            new CMSProcessableByteArray(data),
-            new JceCMSContentEncryptorBuilder(CMSAlgorithm.AES256_CBC).setProvider("BCFIPS").build()).getEncoded();
+                new CMSProcessableByteArray(data),
+                new JceCMSContentEncryptorBuilder(CMSAlgorithm.AES256_CBC)
+                        .setProvider("BCFIPS").build()).getEncoded();
     }
 
-    public static byte[] extractKekEnvelopedData(byte[] keyID, SecretKey keyEncryptionKey, byte[] encEnvelopedData)
-        throws GeneralSecurityException, CMSException
-    {
+    public static byte[] extractKekEnvelopedData(byte[] keyID,
+                                                 SecretKey keyEncryptionKey,
+                                                 byte[] encEnvelopedData)
+            throws GeneralSecurityException, CMSException {
         CMSEnvelopedData envelopedData = new CMSEnvelopedData(encEnvelopedData);
-        RecipientInformationStore recipients = envelopedData.getRecipientInfos();
+        RecipientInformationStore recipients = envelopedData
+                .getRecipientInfos();
         RecipientId rid = new KEKRecipientId(keyID);
 
         RecipientInformation recipient = recipients.get(rid);
 
         return recipient.getContent(
-            new JceKEKEnvelopedRecipient(keyEncryptionKey)
-            .setProvider("BCFIPS"));
+                new JceKEKEnvelopedRecipient(keyEncryptionKey)
+                        .setProvider("BCFIPS"));
     }
 
-    public static byte[] createPasswordEnvelopedObject(char[] passwd, byte[] salt, int iterationCount, byte[] data)
-        throws GeneralSecurityException, CMSException, IOException
-    {
+    public static byte[] createPasswordEnvelopedObject(char[] passwd,
+                                                       byte[] salt,
+                                                       int iterationCount,
+                                                       byte[] data)
+            throws GeneralSecurityException, CMSException, IOException {
         CMSEnvelopedDataGenerator envelopedGen = new CMSEnvelopedDataGenerator();
 
         envelopedGen.addRecipientInfoGenerator(
-            new JcePasswordRecipientInfoGenerator(CMSAlgorithm.AES256_CBC, passwd)
-            .setProvider("BCFIPS")
-            .setPasswordConversionScheme(PasswordRecipient.PKCS5_SCHEME2_UTF8)
-            .setPRF(PasswordRecipient.PRF.HMacSHA384)
-            .setSaltAndIterationCount(salt, iterationCount));
+                new JcePasswordRecipientInfoGenerator(CMSAlgorithm.AES256_CBC,
+                        passwd)
+                        .setProvider("BCFIPS")
+                        .setPasswordConversionScheme(
+                                PasswordRecipient.PKCS5_SCHEME2_UTF8)
+                        .setPRF(PasswordRecipient.PRF.HMacSHA384)
+                        .setSaltAndIterationCount(salt, iterationCount));
 
         return envelopedGen.generate(
-            new CMSProcessableByteArray(data),
-            new JceCMSContentEncryptorBuilder(CMSAlgorithm.AES256_CBC).setProvider("BCFIPS").build()).getEncoded();
+                new CMSProcessableByteArray(data),
+                new JceCMSContentEncryptorBuilder(CMSAlgorithm.AES256_CBC)
+                        .setProvider("BCFIPS").build()).getEncoded();
     }
 
-    public static byte[] extractPasswordEnvelopedData(char[] passwd, byte[] encEnvelopedData)
-        throws GeneralSecurityException, CMSException
-    {
+    public static byte[] extractPasswordEnvelopedData(char[] passwd,
+                                                      byte[] encEnvelopedData)
+            throws GeneralSecurityException, CMSException {
         CMSEnvelopedData envelopedData = new CMSEnvelopedData(encEnvelopedData);
-        RecipientInformationStore recipients = envelopedData.getRecipientInfos();
+        RecipientInformationStore recipients = envelopedData
+                .getRecipientInfos();
         RecipientId rid = new PasswordRecipientId();
 
         RecipientInformation recipient = recipients.get(rid);
 
         return recipient.getContent(
-            new JcePasswordEnvelopedRecipient(passwd)
-            .setProvider("BCFIPS")
-            .setPasswordConversionScheme(PasswordRecipient.PKCS5_SCHEME2_UTF8));
+                new JcePasswordEnvelopedRecipient(passwd)
+                        .setProvider("BCFIPS")
+                        .setPasswordConversionScheme(
+                                PasswordRecipient.PKCS5_SCHEME2_UTF8));
     }
 
-    public static byte[] createAuthenticatedData(X509Certificate originatorCertificate, X509Certificate recipientCertificate, byte[] data)
-        throws GeneralSecurityException, CMSException, IOException
-    {
+    public static byte[] createAuthenticatedData(
+            X509Certificate originatorCertificate,
+            X509Certificate recipientCertificate, byte[] data)
+            throws GeneralSecurityException, CMSException, IOException {
         ASN1ObjectIdentifier macAlg = CMSAlgorithm.DES_EDE3_CBC;
 
         CMSAuthenticatedDataGenerator authDataGenerator = new CMSAuthenticatedDataGenerator();
 
-        X509CertificateHolder origCert = new JcaX509CertificateHolder(originatorCertificate);
+        X509CertificateHolder origCert = new JcaX509CertificateHolder(
+                originatorCertificate);
 
-        authDataGenerator.setOriginatorInfo(new OriginatorInfoGenerator(origCert).generate());
+        authDataGenerator.setOriginatorInfo(
+                new OriginatorInfoGenerator(origCert).generate());
 
-        authDataGenerator.addRecipientInfoGenerator(new JceKeyTransRecipientInfoGenerator(recipientCertificate).setProvider("BCFIPS"));
+        authDataGenerator.addRecipientInfoGenerator(
+                new JceKeyTransRecipientInfoGenerator(recipientCertificate)
+                        .setProvider("BCFIPS"));
 
         return authDataGenerator.generate(
-                                new CMSProcessableByteArray(data),
-                                new JceCMSMacCalculatorBuilder(macAlg).setProvider("BCFIPS").build()).getEncoded();
+                new CMSProcessableByteArray(data),
+                new JceCMSMacCalculatorBuilder(macAlg).setProvider("BCFIPS")
+                        .build()).getEncoded();
     }
 
-    public static byte[] extractAuthenticatedData(PrivateKey recipientPrivateKey, X509Certificate recipientCert, byte[] encAuthData)
-        throws GeneralSecurityException, CMSException
-    {
+    public static byte[] extractAuthenticatedData(
+            PrivateKey recipientPrivateKey, X509Certificate recipientCert,
+            byte[] encAuthData)
+            throws GeneralSecurityException, CMSException {
         CMSAuthenticatedData authData = new CMSAuthenticatedData(encAuthData);
 
         RecipientInformationStore recipients = authData.getRecipientInfos();
 
-        RecipientInformation recipient = recipients.get(new JceKeyTransRecipientId(recipientCert));
+        RecipientInformation recipient = recipients
+                .get(new JceKeyTransRecipientId(recipientCert));
 
-        if (recipient != null)
-        {
-            byte[] recData = recipient.getContent(new JceKeyTransAuthenticatedRecipient(recipientPrivateKey).setProvider("BCFIPS"));
+        if (recipient != null) {
+            byte[] recData = recipient.getContent(
+                    new JceKeyTransAuthenticatedRecipient(recipientPrivateKey)
+                            .setProvider("BCFIPS"));
 
-            if (Arrays.constantTimeAreEqual(authData.getMac(), recipient.getMac()))
-            {
+            if (Arrays.constantTimeAreEqual(authData.getMac(),
+                    recipient.getMac())) {
                 return recData;
-            }
-            else
-            {
+            } else {
                 throw new IllegalStateException("MAC check failed");
             }
         }
@@ -395,8 +475,7 @@ public class Cms
     }
 
     public static void main(String[] args)
-        throws GeneralSecurityException, OperatorCreationException, CMSException, IOException, TSPException
-    {
+            throws GeneralSecurityException, OperatorCreationException, CMSException, IOException, TSPException {
         Setup.installProvider();
 
         KeyPair ecSigningKeyPair = EC.generateKeyPair();
@@ -405,20 +484,64 @@ public class Cms
         KeyPair rsaSigningKeyPair = Rsa.generateKeyPair();
         KeyPair rsaEncryptionKeyPair = Rsa.generateKeyPair();
 
-        X509Certificate ecSigningCert = Cert.makeV1Certificate(ecSigningKeyPair.getPrivate(), ecSigningKeyPair.getPublic());
-        X509Certificate ecEncryptionCert1 = Cert.makeV1Certificate(ecSigningKeyPair.getPrivate(), ecEncryptionKeyPair1.getPublic());
-        X509Certificate ecEncryptionCert2 = Cert.makeV1Certificate(ecSigningKeyPair.getPrivate(), ecEncryptionKeyPair2.getPublic());
-        X509Certificate rsaSigningCert = Cert.makeV1RsaCertificate(rsaSigningKeyPair.getPrivate(), rsaSigningKeyPair.getPublic());
-        X509Certificate rsaEncryptionCert = Cert.makeV1RsaCertificate(rsaSigningKeyPair.getPrivate(), rsaEncryptionKeyPair.getPublic());
+        X509Certificate ecSigningCert = Cert
+                .makeV1Certificate(ecSigningKeyPair.getPrivate(),
+                        ecSigningKeyPair.getPublic());
+        X509Certificate ecEncryptionCert1 = Cert
+                .makeV1Certificate(ecSigningKeyPair.getPrivate(),
+                        ecEncryptionKeyPair1.getPublic());
+        X509Certificate ecEncryptionCert2 = Cert
+                .makeV1Certificate(ecSigningKeyPair.getPrivate(),
+                        ecEncryptionKeyPair2.getPublic());
+        X509Certificate rsaSigningCert = Cert
+                .makeV1RsaCertificate(rsaSigningKeyPair.getPrivate(),
+                        rsaSigningKeyPair.getPublic());
+        X509Certificate rsaEncryptionCert = Cert
+                .makeV1RsaCertificate(rsaSigningKeyPair.getPrivate(),
+                        rsaEncryptionKeyPair.getPublic());
 
-        System.err.println(verifySignedObject(createSignedObject(ecSigningKeyPair.getPrivate(), ecSigningCert, ExValues.SampleInput)));
-        System.err.println(verifyDetachedData(createDetachedSignature(ecSigningKeyPair.getPrivate(), ecSigningCert, ExValues.SampleInput), ExValues.SampleInput));
-        System.err.println(verifyCounterSignature(createCounterSignedData(ecSigningKeyPair.getPrivate(), ecSigningCert, ExValues.SampleInput, rsaSigningKeyPair.getPrivate(), rsaSigningCert)));
-        System.err.println(Arrays.areEqual(ExValues.SampleInput, extractKeyTransEnvelopedData(rsaEncryptionKeyPair.getPrivate(), rsaEncryptionCert, createKeyTransEnvelopedObject(rsaEncryptionCert, ExValues.SampleInput))));
-        System.err.println(Arrays.areEqual(ExValues.SampleInput, extractKeyAgreeEnvelopedData(ecEncryptionKeyPair2.getPrivate(), ecEncryptionCert2, createKeyAgreeEnvelopedObject(ecEncryptionKeyPair1.getPrivate(), ecEncryptionCert1, ecEncryptionCert2, ExValues.SampleInput))));
-        System.err.println(Arrays.areEqual(ExValues.SampleInput, extractPasswordEnvelopedData("password".toCharArray(), createPasswordEnvelopedObject("password".toCharArray(), Hex.decode("000102030405060708090a0b0c0d0e0f"), 1024, ExValues.SampleInput))));
-        System.err.println(Arrays.areEqual(ExValues.SampleInput, extractKekEnvelopedData(new byte[4], ExValues.SampleAesKey, createKekEnvelopedObject(new byte[4], ExValues.SampleAesKey, ExValues.SampleInput))));
-        System.err.println(Arrays.areEqual(ExValues.SampleInput, extractAuthenticatedData(rsaEncryptionKeyPair.getPrivate(), rsaEncryptionCert, createAuthenticatedData(rsaSigningCert, rsaEncryptionCert, ExValues.SampleInput))));
-        System.err.println(verifyTimeStampedSigner(createTimeStampedSigner(ecSigningKeyPair.getPrivate(), ecSigningCert, ExValues.SampleInput, rsaSigningKeyPair.getPrivate(), Cert.makeRsaTspCertificate(rsaSigningCert, rsaSigningKeyPair.getPrivate(), rsaSigningKeyPair.getPublic()))));
+        System.err.println(verifySignedObject(
+                createSignedObject(ecSigningKeyPair.getPrivate(), ecSigningCert,
+                        ExValues.SampleInput)));
+        System.err.println(verifyDetachedData(
+                createDetachedSignature(ecSigningKeyPair.getPrivate(),
+                        ecSigningCert, ExValues.SampleInput),
+                ExValues.SampleInput));
+        System.err.println(verifyCounterSignature(
+                createCounterSignedData(ecSigningKeyPair.getPrivate(),
+                        ecSigningCert, ExValues.SampleInput,
+                        rsaSigningKeyPair.getPrivate(), rsaSigningCert)));
+        System.err.println(Arrays.areEqual(ExValues.SampleInput,
+                extractKeyTransEnvelopedData(rsaEncryptionKeyPair.getPrivate(),
+                        rsaEncryptionCert,
+                        createKeyTransEnvelopedObject(rsaEncryptionCert,
+                                ExValues.SampleInput))));
+        System.err.println(Arrays.areEqual(ExValues.SampleInput,
+                extractKeyAgreeEnvelopedData(ecEncryptionKeyPair2.getPrivate(),
+                        ecEncryptionCert2, createKeyAgreeEnvelopedObject(
+                                ecEncryptionKeyPair1.getPrivate(),
+                                ecEncryptionCert1, ecEncryptionCert2,
+                                ExValues.SampleInput))));
+        System.err.println(Arrays.areEqual(ExValues.SampleInput,
+                extractPasswordEnvelopedData("password".toCharArray(),
+                        createPasswordEnvelopedObject("password".toCharArray(),
+                                Hex.decode("000102030405060708090a0b0c0d0e0f"),
+                                1024, ExValues.SampleInput))));
+        System.err.println(Arrays.areEqual(ExValues.SampleInput,
+                extractKekEnvelopedData(new byte[4], ExValues.SampleAesKey,
+                        createKekEnvelopedObject(new byte[4],
+                                ExValues.SampleAesKey, ExValues.SampleInput))));
+        System.err.println(Arrays.areEqual(ExValues.SampleInput,
+                extractAuthenticatedData(rsaEncryptionKeyPair.getPrivate(),
+                        rsaEncryptionCert,
+                        createAuthenticatedData(rsaSigningCert,
+                                rsaEncryptionCert, ExValues.SampleInput))));
+        System.err.println(verifyTimeStampedSigner(
+                createTimeStampedSigner(ecSigningKeyPair.getPrivate(),
+                        ecSigningCert, ExValues.SampleInput,
+                        rsaSigningKeyPair.getPrivate(),
+                        Cert.makeRsaTspCertificate(rsaSigningCert,
+                                rsaSigningKeyPair.getPrivate(),
+                                rsaSigningKeyPair.getPublic()))));
     }
 }

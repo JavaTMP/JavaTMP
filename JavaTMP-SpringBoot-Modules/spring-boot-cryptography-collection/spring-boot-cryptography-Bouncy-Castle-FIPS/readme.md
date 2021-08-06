@@ -1379,112 +1379,34 @@ structure is read back, and then properly decrypted and converted into a key.
 
 #### Example 65 – Writing an Encrypted Private Key in PEM Format
 
-**public static** String writeEncryptedKey( **char** [] passwd, PrivateKey
-privateKey)
-**throws** IOException, OperatorCreationException { StringWriter sWrt = **new**
-StringWriter(); JcaPEMWriter pemWriter = **new** JcaPEMWriter(sWrt);
-
-PKCS8EncryptedPrivateKeyInfoBuilder pkcs8Builder =
-**new** JcaPKCS8EncryptedPrivateKeyInfoBuilder(privateKey);
-pemWriter.writeObject(
-pkcs8Builder.build( **new**
-JcePKCSPBEOutputEncryptorBuilder(
-NISTObjectIdentifiers. **_id_aes256_CBC_** ).setProvider( **"BCFIPS"** ).build(
-passwd))); pemWriter.close();
-
-**return** sWrt.toString(); }
-
-**public static** PrivateKey readEncryptedKey( **char** [] password, String
-pemEncoding)
-**throws** IOException, OperatorCreationException, PKCSException { PEMParser
-parser = **new**
-PEMParser( **new**
-StringReader(pemEncoding)); PKCS8EncryptedPrivateKeyInfo encPrivKeyInfo = (
-PKCS8EncryptedPrivateKeyInfo)
-parser.readObject();
-
-InputDecryptorProvider pkcs8Prov = **new**
-JcePKCSPBEInputDecryptorProviderBuilder()
-.setProvider( **"BCFIPS"** ).build(password);
-
-JcaPEMKeyConverter converter = **new** JcaPEMKeyConverter().setProvider( **"
-BCFIPS"** );
-
-**return** converter.getPrivateKey(encPrivKeyInfo.decryptPrivateKeyInfo(
-pkcs8Prov)); }
+Run `bcfipsin100.pbeks.Pem.writeEncryptedKey().readEncryptedKey()`
 
 The older OpenSSL style uses a character string rather than an ASN.1 object
-identifier to identify the
-
-encryption algorithm used. As it is using the OpenSSL PBKDF, the encryption is
-not FIPS approved.
+identifier to identify the encryption algorithm used. As it is using the OpenSSL
+PBKDF, the encryption is not FIPS approved.
 
 The character string defining the algorithm is of the format “<algorithm>
--<keysize>-<mode>”, so in
+-<keysize>-<mode>”, so in the example that follows we are using AES in CBC mode
+with a 256 bit key. The cipher will be configured to use PKCS#5/PKCS#7 padding
+where padding is required.
 
-the example that follows we are using AES in CBC mode with a 256 bit key. The
-cipher will be
+#### Example 66 – Writing an Encrypted Private Key (OpenSSL Style)
 
-configured to use PKCS#5/PKCS#7 padding where padding is required.
-
-#### Example 66 – Writing an Encrypted Private Key (OpenSSL Style)..............................................
-
-**public static** String writeEncryptedKeyOpenSsl( **char** [] passwd,
-PrivateKey privateKey)
-**throws** IOException, OperatorCreationException { StringWriter sWrt = **new**
-StringWriter(); JcaPEMWriter pemWriter = **new** JcaPEMWriter(sWrt);
-
-pemWriter.writeObject(privateKey,
-**new** JcePEMEncryptorBuilder( **"AES-256-CBC"** ).setProvider( **"BCFIPS"** )
-.build(passwd));
-
-pemWriter.close();
-
-**return** sWrt.toString(); }
-
-**public static** PrivateKey readEncryptedKeyOpenSsl( **char** [] passwd, String
-pemEncoding)
-**throws** IOException, OperatorCreationException { PEMParser parser = **new**
-PEMParser( **new**
-StringReader(
-pemEncoding)); PEMEncryptedKeyPair pemEncryptedKeyPair = (PEMEncryptedKeyPair)
-parser.readObject();
-
-PEMDecryptorProvider pkcs8Prov = **new** JcePEMDecryptorProviderBuilder()
-.setProvider( **"BCFIPS"** ).build(passwd); JcaPEMKeyConverter converter = **
-new**
-JcaPEMKeyConverter().setProvider( **"
-BCFIPS"** );
-
-**return** converter.getPrivateKey(pemEncryptedKeyPair.decryptKeyPair(pkcs8Prov)
-.getPrivateKeyInfo()); }
+Run `bcfipsin100.pbeks.Pem.writeEncryptedKeyOpenSsl().readEncryptedKeyOpenSsl()`
 
 The OpenSSL cipher set also includes Triple-DES (“DES-EDE”), Blowfish (“BF”),
-DES (“DES”) and
+DES (“DES”) and RC2 (“RC2”). The modes CFB (“CFB”), ECB (“ECB”), and OFB (“OFB”)
+are also supported. If you have a look at the output file for a PEM encoded
+private key you will see how the additional information to recognize the
+encryption is encoded as PEM attributes just after the header.
 
-RC2 (“RC2”). The modes CFB (“CFB”), ECB (“ECB”), and OFB (“OFB”) are also
-supported. If you
-
-have a look at the output file for a PEM encoded private key you will see how
-the additional
-
-information to recognize the encryption is encoded as PEM attributes just after
-the header.
-
-### KeyStores............................................................................................................................................
+### KeyStores
 
 Java KeyStores are a problem area with FIPS as, strictly speaking, most of them
-are not FIPS
-
-compliant when it comes to storing private keys. The BC FIPS Java Provider
-supports two types of
-
-KeyStore locally, the BCFKS type, which has an ASN.1 based format specifically
-designed with the
-
-current FIPS standards in mind, and the PKCS12 type, which is described
-originally in the RSA Labs
-
+are not FIPS compliant when it comes to storing private keys. The BC FIPS Java
+Provider supports two types of KeyStore locally, the BCFKS type, which has an
+ASN.1 based format specifically designed with the current FIPS standards in
+mind, and the PKCS12 type, which is described originally in the RSA Labs
 standard PKCS#12 and is also listed in RFC 7292.
 
 We will have a look at the BCFKS type first.
@@ -1493,362 +1415,132 @@ Unlike PKCS12, the BCFKS format can store certificates, private keys, and some
 types of secret key.
 
 The key store is built around AES-256, SHA-512, and the NIST PBKDF, with PKCS#8
-
 EncryptedPrivateKeyInfo structures being used to carry private keys and octet
-strings containing
-
-wrapped secret keys where required. Further details on the store format can be
-found in an Appendix in
-
-the BC FIPS Java User Guide.
+strings containing wrapped secret keys where required. Further details on the
+store format can be found in an Appendix in the BC FIPS Java User Guide.
 
 The following example shows how to store a certificate in a BCFKS KeyStore.
 
-#### Example 67 – Storing a Certificate in a BCFKS KeyStore............................................................
+#### Example 67 – Storing a Certificate in a BCFKS KeyStore
 
-**public static byte** [] storeCertificate( **char** [] storePassword,
-X509Certificate trustedCert)
-**throws** GeneralSecurityException, IOException { KeyStore keyStore =
-KeyStore. _getInstance_ ( **"
-BCFKS"** , **"
-BCFIPS"** ); keyStore.load( **null** , **null** );
-
-keyStore.setCertificateEntry( **"trustedca"** , trustedCert);
-
-ByteArrayOutputStream bOut = **new** ByteArrayOutputStream(); keyStore.store(
-bOut, storePassword);
-
-**return** bOut.toByteArray(); }
+Run `bcfipsin100.pbeks.KeyStr.storeCertificate()`
 
 This next example shows how to store a PrivateKey and its associated certificate
-chain in a BCFKS
+chain in a BCFKS KeyStore.
 
-KeyStore.
+#### Example 68 – Storing a PrivateKey in a BCFKS KeyStore
 
-#### Example 68 – Storing a PrivateKey in a BCFKS KeyStore...........................................................
-
-**public static byte** [] storePrivateKey( **char** [] storePassword, **
-char** [] keyPass, PrivateKey eeKey, X509Certificate[] eeCertChain)
-**throws** GeneralSecurityException, IOException { KeyStore keyStore =
-KeyStore. _getInstance_ ( **"
-BCFKS"** , **"
-BCFIPS"** ); keyStore.load( **null** , **null** );
-
-keyStore.setKeyEntry( **"key"** , eeKey, keyPass, eeCertChain);
-
-ByteArrayOutputStream bOut = **new** ByteArrayOutputStream(); keyStore.store(
-bOut, storePassword);
-
-**return** bOut.toByteArray(); }
+Run `bcfipsin100.pbeks.KeyStr.storePrivateKey()`
 
 Finally, this last example is one way of storing a secret key in a BCFKS
 KeyStore.
 
-#### Example 69 – Storing a Secret Key in a BCFKS KeyStore...........................................................
+#### Example 69 – Storing a Secret Key in a BCFKS KeyStore
 
-**public static byte** [] storeSecretKey( **char** [] storePassword, **char** []
-keyPass, SecretKey secretKey)
-**throws** GeneralSecurityException, IOException { KeyStore keyStore =
-KeyStore. _getInstance_ ( **"
-BCFKS"** , **"
-BCFIPS"** ); keyStore.load( **null** , **null** );
-
-keyStore.setKeyEntry( **"secretkey"** , secretKey, keyPass, **null** );
-
-ByteArrayOutputStream bOut = **new** ByteArrayOutputStream(); keyStore.store(
-bOut, storePassword);
-
-**return** bOut.toByteArray(); }
+Run `bcfipsin100.pbeks.KeyStr.storeSecretKey()`
 
 Note that in the case of a secret key the certificate chain parameter of the
 setKey() method is set to null.
 
 PKCS12 is most commonly used to store a single set of public private
-credentials, in the Java world
-
-this is extended a bit and its not uncommon to find KeyStore implementations
-that can store multiple
-
-private keys and stand alone certificates as well. The one thing you need to be
-aware is that only the
-
+credentials, in the Java world this is extended a bit and its not uncommon to
+find KeyStore implementations that can store multiple private keys and stand
+alone certificates as well. The one thing you need to be aware is that only the
 KeyStore password is significant with PKCS12. While there are some
-implementations which will
-
-allow individual key passwords as well, the vast majority do not, and if you
-wish to produce PKCS12
-
-files that are compatible across different platforms it is best to avoid having
-passwords associated with
-
+implementations which will allow individual key passwords as well, the vast
+majority do not, and if you wish to produce PKCS12 files that are compatible
+across different platforms it is best to avoid having passwords associated with
 keys in PKCS12.
 
 The following example shows how to store a stand alone certificate in a PKCS12
-KeyStore with the
+KeyStore with the BC FIPS Java Provider. Keep in mind it may not work with all
+other providers.
 
-BC FIPS Java Provider. Keep in mind it may not work with all other providers.
+#### Example 70 – Storing a Certificate in a PKCS#12 KeyStore
 
-#### Example 70 – Storing a Certificate in a PKCS#12 KeyStore.........................................................
-
-**public static byte** [] storeCertificatePkcs12( **char** [] storePassword,
-X509Certificate trustedCert)
-**throws** GeneralSecurityException, IOException { KeyStore keyStore =
-KeyStore. _getInstance_ ( **"
-PKCS12"** , **"
-BCFIPS"** ); keyStore.load( **null** , **null** );
-
-keyStore.setCertificateEntry( **"trustedca"** , trustedCert);
-
-ByteArrayOutputStream bOut = **new** ByteArrayOutputStream(); keyStore.store(
-bOut, storePassword);
-
-**return** bOut.toByteArray(); }
+Run `bcfipsin100.pbeks.KeyStr.storeCertificatePkcs12()`
 
 This example shows how to store a private key and its certificate chain in a
-PKCS12 KeyStore using
+PKCS12 KeyStore using the BC FIPS Java Provider.
 
-the BC FIPS Java Provider.
+#### Example 71 – Storing a Private Key in a PKCS#12 KeyStore
 
-#### Example 71 – Storing a Private Key in a PKCS#12 KeyStore.......................................................
-
-**public static byte** [] storePrivateKeyPkcs12( **char** [] storePassword,
-PrivateKey eeKey, X509Certificate[]
-eeCertChain)
-**throws** GeneralSecurityException, IOException { KeyStore keyStore =
-KeyStore. _getInstance_ ( **"
-PKCS12"** , **"
-BCFIPS"** ); keyStore.load( **null** , **null** );
-
-keyStore.setKeyEntry( **"key"** , eeKey, **null** , eeCertChain);
-
-ByteArrayOutputStream bOut = **new** ByteArrayOutputStream(); keyStore.store(
-bOut, storePassword);
-
-**return** bOut.toByteArray(); }
+Run `bcfipsin100.pbeks.KeyStr.storePrivateKeyPkcs12()`
 
 In this case you can see a difference from the BCFKS example (Example 69) – the
-password parameter
-
-to the setKey() method is set to null. The PKCS#12 implementation that underlies
-the BC FIPS Java
-
-provider ignores the password parameter for keys.
+password parameter to the setKey() method is set to null. The PKCS#12
+implementation that underlies the BC FIPS Java provider ignores the password
+parameter for keys.
 
 Finally, as you have probably noticed, there is a bit of variation in what can
-be done, or what is
-
-expected to be done with files following the PKCS#12 standard. Originally we at
-BC thought we would
-
-be able to capture all the variations under the KeyStore API however this has
-proved to be impossible.
+be done, or what is expected to be done with files following the PKCS#12
+standard. Originally we at BC thought we would be able to capture all the
+variations under the KeyStore API however this has proved to be impossible.
 
 This last example shows the use of the BC PKCS API (found in the bcpkix jar) to
-create a file using the
-
-format defined in PKCS#12. The method is called createPfxPdu() as that is the
-actual name given in the
-
-PKCS#12 standard to the ASN.1 structure that contains the certificate and key
-data in the resulting
-
+create a file using the format defined in PKCS#12. The method is called
+createPfxPdu() as that is the actual name given in the PKCS#12 standard to the
+ASN.1 structure that contains the certificate and key data in the resulting
 KeyStore.
 
-#### Example 72 – Using the BC API to create a PKCS#12 KeyStore..................................................
+#### Example 72 – Using the BC API to create a PKCS#12 KeyStore
 
-**public static byte** [] createPfxPdu( **char** [] passwd, PrivateKey privKey,
-X509Certificate[]
-certs)
-**throws** GeneralSecurityException, OperatorCreationException, PKCSException,
-IOException { JcaX509ExtensionUtils extUtils = **new** JcaX509ExtensionUtils();
-PKCS12SafeBagBuilder caCertBagBuilder = **new** JcaPKCS12SafeBagBuilder(
-certs[ 1 ]);
-
-caCertBagBuilder.addBagAttribute(
-PKCSObjectIdentifiers. **_pkcs_9_at_friendlyName_** , **new** DERBMPString( **"
-CA Certificate"** ));
-
-// store the key certificate PKCS12SafeBagBuilder eeCertBagBuilder = **new**
-JcaPKCS12SafeBagBuilder(certs[ 0 ]);
-
-eeCertBagBuilder.addBagAttribute(
-PKCSObjectIdentifiers. **_pkcs_9_at_friendlyName_** , **new** DERBMPString( **"
-End Entity Key"** )); eeCertBagBuilder.addBagAttribute(
-PKCSObjectIdentifiers. **_pkcs_9_at_localKeyId_** ,
-extUtils.createSubjectKeyIdentifier(certs[ 0 ]
-.getPublicKey()));
-
-// store the private key PKCS12SafeBagBuilder keyBagBuilder = **new**
-JcaPKCS12SafeBagBuilder(
-privKey,
-**new** JcePKCSPBEOutputEncryptorBuilder(
-PKCSObjectIdentifiers. **_pbeWithSHAAnd3_KeyTripleDES_CBC_** )
-.setProvider( **"BCFIPS"** ).build(passwd));
-
-keyBagBuilder.addBagAttribute(
-PKCSObjectIdentifiers. **_pkcs_9_at_friendlyName_** , **new** DERBMPString( **"
-End Entity Key"** )); keyBagBuilder.addBagAttribute(
-PKCSObjectIdentifiers. **_pkcs_9_at_localKeyId_** ,
-extUtils.createSubjectKeyIdentifier(certs[ 0 ]
-.getPublicKey()));
-
-// create the actual PKCS#12 blob. PKCS12PfxPduBuilder pfxPduBuilder = **new**
-PKCS12PfxPduBuilder()
-; PKCS12SafeBag[]
-safeBags = **new** PKCS12SafeBag[ 2 ]; safeBags[ 0 ] = eeCertBagBuilder.build();
-safeBags[ 1 ] = caCertBagBuilder.build(); pfxPduBuilder.addEncryptedData( **
-new** JcePKCSPBEOutputEncryptorBuilder(
-PKCSObjectIdentifiers. **_pbeWithSHAAnd3_KeyTripleDES_CBC_** )
-.setProvider( **"BCFIPS"** ).build(passwd), safeBags); pfxPduBuilder.addData(
-keyBagBuilder.build());
-
-**return** pfxPduBuilder.build( **new** JcePKCS12MacCalculatorBuilder()
-.setProvider( **"BCFIPS"** ), passwd).getEncoded(); }
+Run `bcfipsin100.pbeks.KeyStr.createPfxPdu()`
 
 The example is basically performing the same task as Example 72. While it looks
-more complicated
+more complicated than the original one using the KeyStore API, once you have
+read it a few times you will realize it is not actually more complicated, it is
+just more verbose. That said, it does also allow for much finer grained control
+over how the PKCS#12 file is constructed and what is placed in it. Additional
+classes are also available in the PKCS package to read PKCS#12 formatted files
+as well, and it is worth taking a little time to become familiar with them as
+they can help you work through any issues you might have with PKCS#12 formatted
+files that the KeyStore API seems unable to handle.
 
-than the original one using the KeyStore API, once you have read it a few times
-you will realize it is
-
-not actually more complicated, it is just more verbose. That said, it does also
-allow for much finer
-
-grained control over how the PKCS#12 file is constructed and what is placed in
-it. Additional classes
-
-are also available in the PKCS package to read PKCS#12 formatted files as well,
-and it is worth taking
-
-a little time to become familiar with them as they can help you work through any
-issues you might have
-
-with PKCS#12 formatted files that the KeyStore API seems unable to handle.
-
-## CMS, S/MIME, and TSP.........................................................................................................................
+## CMS, S/MIME, and TSP
 
 There are two common formats for encrypted messaging: Cryptographic Message
-Syntax (CMS) and
-
-OpenPGP. Both formats are useful to know about, most of the time they will save
-you from having to
-
-invent your own format, and even where you do end up having to come up with
-something of your
-
-own, they provide useful case studies of how these things can be done.
+Syntax (CMS) and OpenPGP. Both formats are useful to know about, most of the
+time they will save you from having to invent your own format, and even where
+you do end up having to come up with something of your own, they provide useful
+case studies of how these things can be done.
 
 This chapter will look at messaging based on CMS. We will look at the CMS
-protocol first as, in
-
-addition to forming the basis of Secure MIME (S/MIME), and Time-Stamp Protocol (
-TSP), it also
-
-makes an appearance in protocols like CRMF which we looked at in the chapter
-covering certification
-
-requests. CMS provides fundamental structures and approaches for doing signing,
-encryption, and the
-
-sending and interpreting of authenticated data.
+protocol first as, in addition to forming the basis of Secure MIME (S/MIME), and
+Time-Stamp Protocol (
+TSP), it also makes an appearance in protocols like CRMF which we looked at in
+the chapter covering certification requests. CMS provides fundamental structures
+and approaches for doing signing, encryption, and the sending and interpreting
+of authenticated data.
 
 The Bouncy Castle APIs support both an in-memory model for CMS objects as well
-as a streaming
-
-model to make large data object processing possible. We will look at the use of
-the in-memory model.
+as a streaming model to make large data object processing possible. We will look
+at the use of the in-memory model.
 
 The streaming model is similar in use in most respects and details on that can
-be found in the
+be found in the documentation for the CMS APIs. You will need to use the
+streaming model if you are handling very large files.
 
-documentation for the CMS APIs. You will need to use the streaming model if you
-are handling very
-
-large files.
-
-### CMS Signatures and Counter Signatures............................................................................................
+### CMS Signatures and Counter Signatures
 
 CMS signatures appear in CMS signed data structures. There are two types, one
-which contains the
-
-data that has been signed – the encapsulated type – and one which does not
-contain the data that was
-
-signed but expects that the data will be sent separately and made available if a
-verification of the CMS
-
-signature is required – the detached type. Detached signatures have a variety of
-uses, the most obvious
-
-being S/MIME as they make it possible to keep the data that was signed “human
-readable”, rather than
-
-converting it into an ASN.1 BER encoded blob. CMS signatures can support
-multiple signers, and there
-
-is also provision for third parties to act as a counter signer for particular
-signers as well.
+which contains the data that has been signed – the encapsulated type – and one
+which does not contain the data that was signed but expects that the data will
+be sent separately and made available if a verification of the CMS signature is
+required – the detached type. Detached signatures have a variety of uses, the
+most obvious being S/MIME as they make it possible to keep the data that was
+signed “human readable”, rather than converting it into an ASN.1 BER encoded
+blob. CMS signatures can support multiple signers, and there is also provision
+for third parties to act as a counter signer for particular signers as well.
 
 This first example shows how to generate an encapsulated signed object and then
 how to verify one.
 
 The algorithm used for signing is ECDSA using the SHA-384 digest and there is a
-single signer
+single signer involved.
 
-involved.
-
-#### Example 73 – Generating a CMS Encapsulated Signature............................................................
-
-**public static byte** [] createSignedObject(
-PrivateKey signingKey, X509Certificate signingCert, **byte** [] data)
-**throws** GeneralSecurityException, OperatorCreationException, CMSException,
-IOException { List<X509Certificate>
-certList = **new** ArrayList<X509Certificate>();
-
-CMSTypedData msg = **new** CMSProcessableByteArray(data); certList.add(
-signingCert);
-
-Store certs = **new** JcaCertStore(certList);
-
-DigestCalculatorProvider digProvider =
-**new** JcaDigestCalculatorProviderBuilder().setProvider( **"BCFIPS"** ).build()
-; JcaSignerInfoGeneratorBuilder signerInfoGeneratorBuilder =
-**new** JcaSignerInfoGeneratorBuilder(digProvider);
-
-ContentSigner signer = **new** JcaContentSignerBuilder( **"SHA384withECDSA"** )
-.setProvider( **"BCFIPS"** ).build(signingKey);
-
-CMSSignedDataGenerator gen = **new** CMSSignedDataGenerator();
-
-gen.addSignerInfoGenerator(signerInfoGeneratorBuilder.build(signer,
-signingCert)); gen.addCertificates(certs);
-
-// true indicates the data used to create the signature is to be included as
-well
-**return** gen.generate(msg, **true** ).getEncoded(); }
-
-**public static boolean** verifySignedObject( **byte** [] cmsSignedData)
-**throws** GeneralSecurityException, OperatorCreationException, CMSException {
-CMSSignedData signedData = **new**
-CMSSignedData(cmsSignedData); Store certStore = signedData.getCertificates();
-SignerInformationStore signers = signedData.getSignerInfos();
-
-Collection c = signers.getSigners(); Iterator it = c.iterator();
-
-**while** (it.hasNext())
-{ SignerInformation signer = (SignerInformation)it.next(); Collection
-certCollection = certStore.getMatches(
-signer.getSID()); Iterator certIt = certCollection.iterator();
-X509CertificateHolder cert = (
-X509CertificateHolder)
-certIt.next();
-
-**if** (!signer.verify( **new** JcaSimpleSignerInfoVerifierBuilder()
-.setProvider( **"BCFIPS"** )
-.build(cert)))
-{
-**return false** ; } }
-**return true** ; }
+#### Example 73 – Generating a CMS Encapsulated Signature
+Run `bcfipsin100.cmstsp.Cms.createSignedObject().verifySignedObject()`
 
 The passing of the parameter value true to the gen.generate() method in the
 createSignedObject()
