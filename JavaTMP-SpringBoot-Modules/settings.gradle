@@ -90,6 +90,7 @@ include 'spring-boot-security:global-method:spring-boot-security-web-authorizati
 include 'spring-boot-security:global-method:spring-boot-security-web-authorization-global-method-permission'
 include 'spring-boot-security:global-method:spring-boot-security-web-authorization-global-method-jsr250'
 include 'spring-boot-security:global-method:spring-boot-security-web-authorization-global-method-filtering'
+include 'spring-boot-security:global-method:spring-boot-security-web-authorization-global-method-filtering-jpa'
 
 include 'spring-boot-cloud:cloud-services:spring-boot-cloud-service-empty'
 include 'spring-boot-cloud:cloud-services:cloud-service-common'
