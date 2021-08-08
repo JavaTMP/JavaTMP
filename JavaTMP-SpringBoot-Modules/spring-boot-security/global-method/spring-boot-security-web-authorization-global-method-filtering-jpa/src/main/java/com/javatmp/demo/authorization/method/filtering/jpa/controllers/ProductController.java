@@ -20,4 +20,9 @@ public class ProductController {
     public List<Product> findProductsContaining(@PathVariable String text) {
         return productRepository.findProductByNameContains(text);
     }
+
+    @GetMapping("/products1/{text}")
+    public List<Product> findProductsContaining1(@PathVariable String text) {
+        return productRepository.findProductByNameContains1(text);
+    }
 }

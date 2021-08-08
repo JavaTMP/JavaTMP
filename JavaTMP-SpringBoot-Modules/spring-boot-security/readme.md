@@ -1194,3 +1194,5 @@ We have two options:
 - Directly applying filtering within queries
 
 The anatomy of a bad design. When you need to apply filtering at the repository level, it’s better to first make sure you only retrieve the data you need. Otherwise, your application can face heavy memory and performance issues.
+
+## 18 Hands-on: An OAuth 2 application
