@@ -23,21 +23,22 @@ import java.security.cert.X509Certificate;
 import java.util.Collections;
 import java.util.Date;
 
-public class Tsp
-{
+public class Tsp {
     public static byte[] createTspRequest(byte[] sha384Data)
-        throws IOException
-    {
+            throws IOException {
         TimeStampRequestGenerator reqGen = new TimeStampRequestGenerator();
-                  reqGen.setCertReq(true);
+        reqGen.setCertReq(true);
         return reqGen.generate(TSPAlgorithms.SHA384, sha384Data).getEncoded();
     }
 
-    public static byte[] createTspResponse(PrivateKey tspSigningKey, X509Certificate tspSigningCert, byte[] encRequest)
-        throws TSPException, OperatorCreationException, GeneralSecurityException, IOException
-    {
-        AlgorithmIdentifier digestAlgorithm = new AlgorithmIdentifier(NISTObjectIdentifiers.id_sha384);
-        DigestCalculatorProvider digProvider = new JcaDigestCalculatorProviderBuilder().setProvider("BCFIPS").build();
+    public static byte[] createTspResponse(PrivateKey tspSigningKey,
+                                           X509Certificate tspSigningCert,
+                                           byte[] encRequest)
+            throws TSPException, OperatorCreationException, GeneralSecurityException, IOException {
+        AlgorithmIdentifier digestAlgorithm = new AlgorithmIdentifier(
+                NISTObjectIdentifiers.id_sha384);
+        DigestCalculatorProvider digProvider = new JcaDigestCalculatorProviderBuilder()
+                .setProvider("BCFIPS").build();
         TimeStampTokenGenerator tsTokenGen = new TimeStampTokenGenerator(
                 new JcaSimpleSignerInfoGeneratorBuilder()
                         .build("SHA384withRSA",
@@ -47,36 +48,46 @@ public class Tsp
                 new ASN1ObjectIdentifier("1.2")
         );
 
-        tsTokenGen.addCertificates(new JcaCertStore(Collections.singleton(tspSigningCert)));
+        tsTokenGen.addCertificates(
+                new JcaCertStore(Collections.singleton(tspSigningCert)));
 
-        TimeStampResponseGenerator tsRespGen = new TimeStampResponseGenerator(tsTokenGen, TSPAlgorithms.ALLOWED);
+        TimeStampResponseGenerator tsRespGen = new TimeStampResponseGenerator(
+                tsTokenGen, TSPAlgorithms.ALLOWED);
 
-        return tsRespGen.generate(new TimeStampRequest(encRequest), new BigInteger("23"), new Date()).getEncoded();
+        return tsRespGen.generate(new TimeStampRequest(encRequest),
+                new BigInteger("23"), new Date()).getEncoded();
     }
 
-    public static boolean verifyTspResponse(X509Certificate tspCertificate, byte[] encResponse)
-        throws IOException, TSPException, OperatorCreationException
-    {
+    public static boolean verifyTspResponse(X509Certificate tspCertificate,
+                                            byte[] encResponse)
+            throws IOException, TSPException, OperatorCreationException {
         TimeStampResponse tsResp = new TimeStampResponse(encResponse);
 
         TimeStampToken tsToken = tsResp.getTimeStampToken();
 
-        tsToken.validate(new JcaSimpleSignerInfoVerifierBuilder().setProvider("BCFIPS").build(tspCertificate));
+        tsToken.validate(
+                new JcaSimpleSignerInfoVerifierBuilder().setProvider("BCFIPS")
+                        .build(tspCertificate));
 
         return true;
     }
 
     public static void main(String[] args)
-        throws GeneralSecurityException, OperatorCreationException, TSPException, IOException
-    {
+            throws GeneralSecurityException, OperatorCreationException, TSPException, IOException {
         Setup.installProvider();
 
         KeyPair rsaTspCaSigningKeyPair = Rsa.generateKeyPair();
         KeyPair rsaTspSigningKeyPair = Rsa.generateKeyPair();
 
-        X509Certificate rsaCaCert = Cert.makeV1RsaCertificate(rsaTspCaSigningKeyPair.getPrivate(), rsaTspCaSigningKeyPair.getPublic());
-        X509Certificate rsaSigningCert = Cert.makeRsaTspCertificate(rsaCaCert, rsaTspCaSigningKeyPair.getPrivate(), rsaTspSigningKeyPair.getPublic());
+        X509Certificate rsaCaCert = Cert
+                .makeV1RsaCertificate(rsaTspCaSigningKeyPair.getPrivate(),
+                        rsaTspCaSigningKeyPair.getPublic());
+        X509Certificate rsaSigningCert = Cert.makeRsaTspCertificate(rsaCaCert,
+                rsaTspCaSigningKeyPair.getPrivate(),
+                rsaTspSigningKeyPair.getPublic());
 
-        System.err.println(verifyTspResponse(rsaSigningCert, createTspResponse(rsaTspSigningKeyPair.getPrivate(), rsaSigningCert, createTspRequest(new byte[48]))));
+        System.err.println(verifyTspResponse(rsaSigningCert,
+                createTspResponse(rsaTspSigningKeyPair.getPrivate(),
+                        rsaSigningCert, createTspRequest(new byte[48]))));
     }
 }

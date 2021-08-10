@@ -32,10 +32,8 @@ import java.security.PrivateKey;
 import java.security.cert.X509Certificate;
 import java.util.*;
 
-public class Smime
-{
-    private static ASN1EncodableVector generateSignedAttributes()
-    {
+public class Smime {
+    private static ASN1EncodableVector generateSignedAttributes() {
         ASN1EncodableVector signedAttrs = new ASN1EncodableVector();
         SMIMECapabilityVector caps = new SMIMECapabilityVector();
 
@@ -48,9 +46,10 @@ public class Smime
         return signedAttrs;
     }
 
-    public static MimeMultipart createSignedMultipart(PrivateKey signingKey, X509Certificate signingCert, MimeBodyPart message)
-        throws GeneralSecurityException, OperatorCreationException, SMIMEException, IOException
-    {
+    public static MimeMultipart createSignedMultipart(PrivateKey signingKey,
+                                                      X509Certificate signingCert,
+                                                      MimeBodyPart message)
+            throws GeneralSecurityException, OperatorCreationException, SMIMEException, IOException {
         List<X509Certificate> certList = new ArrayList<X509Certificate>();
 
         certList.add(signingCert);
@@ -59,39 +58,38 @@ public class Smime
 
         ASN1EncodableVector signedAttrs = generateSignedAttributes();
 
-        signedAttrs.add(new Attribute(CMSAttributes.signingTime, new DERSet(new Time(new Date()))));
+        signedAttrs.add(new Attribute(CMSAttributes.signingTime,
+                new DERSet(new Time(new Date()))));
 
         SMIMESignedGenerator gen = new SMIMESignedGenerator();
 
         gen.addSignerInfoGenerator(new JcaSimpleSignerInfoGeneratorBuilder()
-                                            .setProvider("BCFIPS")
-                                            .setSignedAttributeGenerator(new AttributeTable(signedAttrs))
-                                            .build("SHA384withRSAandMGF1", signingKey, signingCert));
+                .setProvider("BCFIPS")
+                .setSignedAttributeGenerator(new AttributeTable(signedAttrs))
+                .build("SHA384withRSAandMGF1", signingKey, signingCert));
         gen.addCertificates(certs);
 
         return gen.generate(message);
     }
 
     public static boolean verifySignedMultipart(MimeMultipart signedMessage)
-        throws GeneralSecurityException, OperatorCreationException, CMSException, SMIMEException, MessagingException
-    {
-        SMIMESigned            signedData = new SMIMESigned(signedMessage);
-        Store                  certStore = signedData.getCertificates();
+            throws GeneralSecurityException, OperatorCreationException, CMSException, SMIMEException, MessagingException {
+        SMIMESigned signedData = new SMIMESigned(signedMessage);
+        Store certStore = signedData.getCertificates();
         SignerInformationStore signers = signedData.getSignerInfos();
 
         Collection c = signers.getSigners();
         Iterator it = c.iterator();
 
-        while (it.hasNext())
-        {
-            SignerInformation signer = (SignerInformation)it.next();
-            Collection          certCollection = certStore.getMatches(signer.getSID());
+        while (it.hasNext()) {
+            SignerInformation signer = (SignerInformation) it.next();
+            Collection certCollection = certStore.getMatches(signer.getSID());
 
-            Iterator        certIt = certCollection.iterator();
-            X509CertificateHolder cert = (X509CertificateHolder)certIt.next();
+            Iterator certIt = certCollection.iterator();
+            X509CertificateHolder cert = (X509CertificateHolder) certIt.next();
 
-            if (!signer.verify(new JcaSimpleSignerInfoVerifierBuilder().setProvider("BCFIPS").build(cert)))
-            {
+            if (!signer.verify(new JcaSimpleSignerInfoVerifierBuilder()
+                    .setProvider("BCFIPS").build(cert))) {
                 return false;
             }
         }
@@ -99,75 +97,95 @@ public class Smime
         return true;
     }
 
-    public static MimeBodyPart createEnvelopedBodyPart(X509Certificate encryptionCert, MimeBodyPart message)
-        throws GeneralSecurityException, SMIMEException, CMSException, IOException
-    {
+    public static MimeBodyPart createEnvelopedBodyPart(
+            X509Certificate encryptionCert, MimeBodyPart message)
+            throws GeneralSecurityException, SMIMEException, CMSException, IOException {
         SMIMEEnvelopedGenerator gen = new SMIMEEnvelopedGenerator();
 
-        gen.addRecipientInfoGenerator(new JceKeyTransRecipientInfoGenerator(encryptionCert).setProvider("BCFIPS"));
+        gen.addRecipientInfoGenerator(
+                new JceKeyTransRecipientInfoGenerator(encryptionCert)
+                        .setProvider("BCFIPS"));
 
-        return gen.generate(message, new JceCMSContentEncryptorBuilder(CMSAlgorithm.AES256_CBC).setProvider("BCFIPS").build());
+        return gen.generate(message,
+                new JceCMSContentEncryptorBuilder(CMSAlgorithm.AES256_CBC)
+                        .setProvider("BCFIPS").build());
     }
 
-    public static MimeBodyPart extractEnvelopedBodyPart(PrivateKey privateKey, X509Certificate encryptionCert, MimeBodyPart envelopedBodyPart)
-        throws SMIMEException, CMSException, MessagingException
-    {
+    public static MimeBodyPart extractEnvelopedBodyPart(PrivateKey privateKey,
+                                                        X509Certificate encryptionCert,
+                                                        MimeBodyPart envelopedBodyPart)
+            throws SMIMEException, CMSException, MessagingException {
         SMIMEEnveloped envelopedData = new SMIMEEnveloped(envelopedBodyPart);
-        RecipientInformationStore recipients = envelopedData.getRecipientInfos();
+        RecipientInformationStore recipients = envelopedData
+                .getRecipientInfos();
 
-        Collection c = recipients.getRecipients(new JceKeyTransRecipientId(encryptionCert));
+        Collection c = recipients
+                .getRecipients(new JceKeyTransRecipientId(encryptionCert));
 
         Iterator it = c.iterator();
 
-        if (it.hasNext())
-        {
-            RecipientInformation recipient = (RecipientInformation)it.next();
+        if (it.hasNext()) {
+            RecipientInformation recipient = (RecipientInformation) it.next();
 
-            return SMIMEUtil.toMimeBodyPart(recipient.getContent(new JceKeyTransEnvelopedRecipient(privateKey).setProvider("BCFIPS")));
+            return SMIMEUtil.toMimeBodyPart(recipient.getContent(
+                    new JceKeyTransEnvelopedRecipient(privateKey)
+                            .setProvider("BCFIPS")));
         }
 
-        throw new IllegalArgumentException("recipient for certificate not found");
+        throw new IllegalArgumentException(
+                "recipient for certificate not found");
     }
 
-    public static MimeBodyPart createSignedEncryptedBodyPart(PrivateKey signingKey, X509Certificate signingCert, X509Certificate encryptionCert, MimeBodyPart message)
-        throws GeneralSecurityException, SMIMEException, CMSException, IOException, OperatorCreationException, MessagingException
-    {
+    public static MimeBodyPart createSignedEncryptedBodyPart(
+            PrivateKey signingKey, X509Certificate signingCert,
+            X509Certificate encryptionCert, MimeBodyPart message)
+            throws GeneralSecurityException, SMIMEException, CMSException, IOException, OperatorCreationException, MessagingException {
         SMIMEEnvelopedGenerator gen = new SMIMEEnvelopedGenerator();
 
-        gen.addRecipientInfoGenerator(new JceKeyTransRecipientInfoGenerator(encryptionCert).setProvider("BCFIPS"));
+        gen.addRecipientInfoGenerator(
+                new JceKeyTransRecipientInfoGenerator(encryptionCert)
+                        .setProvider("BCFIPS"));
 
         MimeBodyPart bodyPart = new MimeBodyPart();
 
-        bodyPart.setContent(createSignedMultipart(signingKey, signingCert, message));
+        bodyPart.setContent(
+                createSignedMultipart(signingKey, signingCert, message));
 
-        return gen.generate(bodyPart, new JceCMSContentEncryptorBuilder(CMSAlgorithm.AES256_CBC).setProvider("BCFIPS").build());
+        return gen.generate(bodyPart,
+                new JceCMSContentEncryptorBuilder(CMSAlgorithm.AES256_CBC)
+                        .setProvider("BCFIPS").build());
     }
 
-    public static boolean verifySignedEncryptedBodyPart(PrivateKey privateKey, X509Certificate encryptionCert, MimeBodyPart envelopedBodyPart)
-        throws SMIMEException, CMSException, GeneralSecurityException, OperatorCreationException, MessagingException, IOException
-    {
+    public static boolean verifySignedEncryptedBodyPart(PrivateKey privateKey,
+                                                        X509Certificate encryptionCert,
+                                                        MimeBodyPart envelopedBodyPart)
+            throws SMIMEException, CMSException, GeneralSecurityException, OperatorCreationException, MessagingException, IOException {
         SMIMEEnveloped envelopedData = new SMIMEEnveloped(envelopedBodyPart);
-        RecipientInformationStore recipients = envelopedData.getRecipientInfos();
+        RecipientInformationStore recipients = envelopedData
+                .getRecipientInfos();
 
-        Collection c = recipients.getRecipients(new JceKeyTransRecipientId(encryptionCert));
+        Collection c = recipients
+                .getRecipients(new JceKeyTransRecipientId(encryptionCert));
 
         Iterator it = c.iterator();
 
-        if (it.hasNext())
-        {
-            RecipientInformation recipient = (RecipientInformation)it.next();
+        if (it.hasNext()) {
+            RecipientInformation recipient = (RecipientInformation) it.next();
 
-            MimeBodyPart signedPart = SMIMEUtil.toMimeBodyPart(recipient.getContent(new JceKeyTransEnvelopedRecipient(privateKey).setProvider("BCFIPS")));
+            MimeBodyPart signedPart = SMIMEUtil.toMimeBodyPart(recipient
+                    .getContent(new JceKeyTransEnvelopedRecipient(privateKey)
+                            .setProvider("BCFIPS")));
 
-            return verifySignedMultipart((MimeMultipart)signedPart.getContent());
+            return verifySignedMultipart(
+                    (MimeMultipart) signedPart.getContent());
         }
 
-        throw new IllegalArgumentException("recipient for certificate not found");
+        throw new IllegalArgumentException(
+                "recipient for certificate not found");
     }
 
     private static byte[] toByteArray(MimeBodyPart bodyPart)
-        throws IOException, MessagingException
-    {
+            throws IOException, MessagingException {
         ByteArrayOutputStream bOut = new ByteArrayOutputStream();
         bodyPart.writeTo(bOut);
         bOut.close();
@@ -175,22 +193,35 @@ public class Smime
     }
 
     public static void main(String[] args)
-        throws Exception
-    {
+            throws Exception {
         Setup.installProvider();
 
         KeyPair rsaSigningKeyPair = Rsa.generateKeyPair();
         KeyPair rsaEncryptionKeyPair = Rsa.generateKeyPair();
 
-        X509Certificate rsaSigningCert = Cert.makeV1RsaCertificate(rsaSigningKeyPair.getPrivate(), rsaSigningKeyPair.getPublic());
-        X509Certificate rsaEncryptionCert = Cert.makeV1RsaCertificate(rsaSigningKeyPair.getPrivate(), rsaEncryptionKeyPair.getPublic());
+        X509Certificate rsaSigningCert = Cert
+                .makeV1RsaCertificate(rsaSigningKeyPair.getPrivate(),
+                        rsaSigningKeyPair.getPublic());
+        X509Certificate rsaEncryptionCert = Cert
+                .makeV1RsaCertificate(rsaSigningKeyPair.getPrivate(),
+                        rsaEncryptionKeyPair.getPublic());
 
         MimeBodyPart mimeBodyPart = new MimeBodyPart();
 
         mimeBodyPart.setText("Hello World!");
 
-        System.err.println(verifySignedMultipart(createSignedMultipart(rsaSigningKeyPair.getPrivate(), rsaSigningCert, mimeBodyPart)));
-        System.err.println(Arrays.areEqual(toByteArray(mimeBodyPart), toByteArray(extractEnvelopedBodyPart(rsaEncryptionKeyPair.getPrivate(), rsaEncryptionCert, createEnvelopedBodyPart(rsaEncryptionCert, mimeBodyPart)))));
-        System.err.println(verifySignedEncryptedBodyPart(rsaEncryptionKeyPair.getPrivate(), rsaEncryptionCert, createSignedEncryptedBodyPart(rsaSigningKeyPair.getPrivate(), rsaSigningCert, rsaEncryptionCert, mimeBodyPart)));
+        System.err.println(verifySignedMultipart(
+                createSignedMultipart(rsaSigningKeyPair.getPrivate(),
+                        rsaSigningCert, mimeBodyPart)));
+        System.err.println(Arrays.areEqual(toByteArray(mimeBodyPart),
+                toByteArray(extractEnvelopedBodyPart(
+                        rsaEncryptionKeyPair.getPrivate(), rsaEncryptionCert,
+                        createEnvelopedBodyPart(rsaEncryptionCert,
+                                mimeBodyPart)))));
+        System.err.println(
+                verifySignedEncryptedBodyPart(rsaEncryptionKeyPair.getPrivate(),
+                        rsaEncryptionCert, createSignedEncryptedBodyPart(
+                                rsaSigningKeyPair.getPrivate(), rsaSigningCert,
+                                rsaEncryptionCert, mimeBodyPart)));
     }
 }

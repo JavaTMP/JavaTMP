@@ -1540,1764 +1540,545 @@ The algorithm used for signing is ECDSA using the SHA-384 digest and there is a
 single signer involved.
 
 #### Example 73 – Generating a CMS Encapsulated Signature
+
 Run `bcfipsin100.cmstsp.Cms.createSignedObject().verifySignedObject()`
 
 The passing of the parameter value true to the gen.generate() method in the
-createSignedObject()
-
-method is what determines that the data is encapsulated in the signature. You
-can also see in
-
-createSignedObject() that the signer is added by creating a
-JcaSignerInfoGeneratorBuilder and using
-
-the private key and its associated certificate to provide the arguments to the
-build() method on the
-
+createSignedObject() method is what determines that the data is encapsulated in
+the signature. You can also see in createSignedObject() that the signer is added
+by creating a JcaSignerInfoGeneratorBuilder and using the private key and its
+associated certificate to provide the arguments to the build() method on the
 builder. In the case of createSignedObject() we also add the signer's
 certificate to the generator so that
 
 it will be included in the CMS signed data. This will result in CMS signed data
-object that is self
-
-contained, at least to the point where the signer's signature can be verified.
-Note you would still want to
-
-check the provenance of the certificate.
+object that is self contained, at least to the point where the signer's
+signature can be verified. Note you would still want to check the provenance of
+the certificate.
 
 The verifySignedObject() method in the example shows one approach for verifying
-at least one
-
-signature in a CMS signed data object. CMSSignedData.getCertificates() returns
-the certificates that
-
-were stored as part of the signature generation process. Note that that there
-are no guarantees that
-
-certificates appropriate to verifying the signer signatures will be in a CMS
-signed data object unless
-
-you have a prior agreement with the party that created the original signed data
-object. In this case we
-
-do have the certificate and we can use the Signer Identifier (SID) attached to
-the SignerInformation
-
+at least one signature in a CMS signed data object.
+CMSSignedData.getCertificates() returns the certificates that were stored as
+part of the signature generation process. Note that that there are no guarantees
+that certificates appropriate to verifying the signer signatures will be in a
+CMS signed data object unless you have a prior agreement with the party that
+created the original signed data object. In this case we do have the certificate
+and we can use the Signer Identifier (SID) attached to the SignerInformation
 object to retrieve the correct certificate for verifying the signature. Once we
-have done that we can use
-
-an appropriately configured SignerInfoVerifierBuilder (in this case the
-
-JcaSimpleSignerInfoVerifierBuilder) to verify the signature (or not).
+have done that we can use an appropriately configured
+SignerInfoVerifierBuilder (in this case the JcaSimpleSignerInfoVerifierBuilder)
+to verify the signature (or not).
 
 Creating a detached signature follows the same steps as creating an encapsulated
-one. You can see the
-
-difference at the end of the createDetachedSignature() method – we do not pass
-true to generate().
+one. You can see the difference at the end of the createDetachedSignature()
+method – we do not pass true to generate().
 
 Likewise there is a small difference in the verifyDetachedData() method from
-what we saw earlier. The
+what we saw earlier. The data that was signed has to be passed in to the
+constructor of the CMSSignedData object.
 
-data that was signed has to be passed in to the constructor of the CMSSignedData
-object.
+#### Example 74 – Generating and Verifying a CMS Detached Signature
 
-#### Example 74 – Generating and Verifying a CMS Detached Signature............................................
-
-**public static byte** [] createDetachedSignature(
-PrivateKey signingKey, X509Certificate signingCert, **byte** [] data)
-**throws** GeneralSecurityException, OperatorCreationException, CMSException,
-IOException { List<X509Certificate>
-certList = **new** ArrayList<X509Certificate>();
-
-CMSTypedData msg = **new** CMSProcessableByteArray(data); certList.add(
-signingCert);
-
-Store certs = **new** JcaCertStore(certList);
-
-DigestCalculatorProvider digProvider = **new**
-JcaDigestCalculatorProviderBuilder()
-.setProvider( **"BCFIPS"** ).build(); JcaSignerInfoGeneratorBuilder
-signerInfoGeneratorBuilder =
-**new** JcaSignerInfoGeneratorBuilder(digProvider); ContentSigner signer = **
-new**
-JcaContentSignerBuilder( **"
-SHA384withECDSA"** )
-.setProvider( **"BCFIPS"** ).build(signingKey);
-
-CMSSignedDataGenerator gen = **new** CMSSignedDataGenerator();
-
-gen.addSignerInfoGenerator(signerInfoGeneratorBuilder.build(signer,
-signingCert)); gen.addCertificates(certs);
-
-**return** gen.generate(msg).getEncoded(); }
-
-**public static boolean** verifyDetachedData( **byte** [] cmsSignedData, **
-byte** [] data)
-**throws** GeneralSecurityException, OperatorCreationException, CMSException {
-CMSSignedData signedData = **new**
-CMSSignedData(
-**new** CMSProcessableByteArray(data), cmsSignedData); Store certStore =
-signedData.getCertificates(); SignerInformationStore signers =
-signedData.getSignerInfos();
-
-Collection c = signers.getSigners(); Iterator it = c.iterator();
-
-**while** (it.hasNext())
-{ SignerInformation signer = (SignerInformation)it.next(); Collection
-certCollection = certStore.getMatches(
-signer.getSID()); Iterator certIt = certCollection.iterator();
-X509CertificateHolder cert = (
-X509CertificateHolder)
-certIt.next();
-
-**if** (!signer.verify( **new** JcaSimpleSignerInfoVerifierBuilder()
-.setProvider( **"BCFIPS"** )
-.build(cert)))
-{
-**return false** ; } }
-
-**return true** ; }
+Run `bcfipsin100.cmstsp.Cms.createDetachedSignature().verifyDetachedData()`
 
 We will meet the SignerInfoGeneratorBuilder and SignerInfoVerifierBuilder
-objects again when we
-
-look at S/MIME later in this chapter.
+objects again when we look at S/MIME later in this chapter.
 
 Counter signatures are different from regular ones as the process of creating
-one involves the signature
+one involves the signature of another signer, rather than the data that was
+signed in the first place. We can see this reflected in the first line of the
+example – a CMSSignedData object is created first, and then the
+SignerInformation object, representing the original signer, is extracted. After
+that a generator is constructed but given the original signer as input instead
+of data, and then the signer resulting from that is retrieved and added to the
+original signer. Finally a new generator is created to bundle the modified
+signer and the data together and the resulting CMSSignedData object is encoded
+and returned.
 
-of another signer, rather than the data that was signed in the first place. We
-can see this reflected in the
+#### Example 75 – Generating a CMS Counter Signature
 
-first line of the example – a CMSSignedData object is created first, and then
-the SignerInformation
-
-object, representing the original signer, is extracted. After that a generator
-is constructed but given the
-
-original signer as input instead of data, and then the signer resulting from
-that is retrieved and added to
-
-the original signer. Finally a new generator is created to bundle the modified
-signer and the data
-
-together and the resulting CMSSignedData object is encoded and returned.
-
-#### Example 75 – Generating a CMS Counter Signature.....................................................................
-
-**public static byte** [] createCounterSignedData(
-PrivateKey signingKey, X509Certificate signingCert,
-**byte** [] data, PrivateKey counterSignerKey, X509Certificate
-counterSignerCert)
-**throws** OperatorCreationException, GeneralSecurityException, CMSException,
-IOException { CMSSignedData signedData = **new** CMSSignedData( _
-createSignedObject_ (signingKey, signingCert, data));
-
-SignerInformation signer = signedData.getSignerInfos().iterator().next();
-CMSSignedDataGenerator counterSignerGen = **
-new** CMSSignedDataGenerator(); DigestCalculatorProvider digProvider = **new**
-JcaDigestCalculatorProviderBuilder()
-.setProvider( **"BCFIPS"** ).build(); JcaSignerInfoGeneratorBuilder
-signerInfoGeneratorBuilder =
-**new** JcaSignerInfoGeneratorBuilder(digProvider);
-
-counterSignerGen.addSignerInfoGenerator(signerInfoGeneratorBuilder.build(
-**new** JcaContentSignerBuilder( **"SHA384withRSA"** )
-.setProvider( **"BCFIPS"** ).build(counterSignerKey), counterSignerCert));
-
-SignerInformationStore counterSigners = counterSignerGen.generateCounterSigners(
-signer);
-
-signer = SignerInformation. _addCounterSigners_ (signer, counterSigners);
-
-CMSSignedDataGenerator signerGen = **new** CMSSignedDataGenerator();
-
-signerGen.addCertificate( **new** JcaX509CertificateHolder(signingCert));
-signerGen.addCertificate( **new**
-JcaX509CertificateHolder(counterSignerCert)); signerGen.addSigners( **new**
-SignerInformationStore(
-signer));
-
-**return** signerGen.generate( **new** CMSProcessableByteArray(data), **true** )
-.getEncoded(); }
-
-**public static boolean** verifyCounterSignature( **byte** [] cmsSignedData)
-**throws** OperatorCreationException, GeneralSecurityException, CMSException,
-IOException { CMSSignedData signedData = **new** CMSSignedData(cmsSignedData);
-SignerInformation signer = signedData.getSignerInfos().iterator().next();
-SignerInformation counterSigner = signer.getCounterSignatures().iterator()
-.next(); Collection certCollection = signedData.getCertificates()
-.getMatches(counterSigner.getSID()); Iterator certIt = certCollection.iterator()
-; X509CertificateHolder cert = (
-X509CertificateHolder)certIt.next();
-
-**return** counterSigner.verify( **new** JcaSimpleSignerInfoVerifierBuilder()
-.setProvider( **"BCFIPS"** ).build(cert)); }
+Run `bcfipsin100.cmstsp.Cms.createCounterSignedData().verifyCounterSignature()`
 
 You can see verifying a counter signature is a two step process as well,
-starting with the CMS signed
+starting with the CMS signed data, you find the signer of interest, and then get
+the counter signatures present on it. After that it is like verifying any other
+CMS signer.
 
-data, you find the signer of interest, and then get the counter signatures
-present on it. After that it is like
-
-verifying any other CMS signer.
-
-### CMS Encrypted Data...........................................................................................................................
+### CMS Encrypted Data
 
 Encrypted data in CMS is always encapsulated and is stored in what are called
-CMS enveloped data
-
-structures. With enveloped data we talk about recipients, rather than signers,
-and we use generators to
-
-create recipient information objects as well. When decrypting we need to create
-a recipient that is
-
-targeted to the encryption used and there are a range of recipient objects to
-accommodate this. Like
-
-signed data can support multiple signers, enveloped data can support multiple
-recipients.
+CMS enveloped data structures. With enveloped data we talk about recipients,
+rather than signers, and we use generators to create recipient information
+objects as well. When decrypting we need to create a recipient that is targeted
+to the encryption used and there are a range of recipient objects to accommodate
+this. Like signed data can support multiple signers, enveloped data can support
+multiple recipients.
 
 The first example we are going to look at is for a recipient using a key
-transport algorithm, such as
-
-RSA OAEP. The example below shows the encryption and decryption of data where
-the data itself is
-
-encrypted using an AES 256 bit session key and AES in CBC mode. This process is
-carried out in the
-
+transport algorithm, such as RSA OAEP. The example below shows the encryption
+and decryption of data where the data itself is encrypted using an AES 256 bit
+session key and AES in CBC mode. This process is carried out in the
 createKeyTransEnvelopedObject() method. While it is not immediately obvious,
-what is also done
-
-under the covers is that the AES session key is encrypted using RSA OAEP so the
-owner of the private
-
-key associated with the recipient certificate can then recover the original data
-as seen in the
-
+what is also done under the covers is that the AES session key is encrypted
+using RSA OAEP so the owner of the private key associated with the recipient
+certificate can then recover the original data as seen in the
 extractKeyTransEnvelopedData() method.
 
-#### Example 76 – CMS Encryption using RSA...................................................................................
+#### Example 76 – CMS Encryption using RSA
 
-**public static byte** [] createKeyTransEnvelopedObject(X509Certificate
-encryptionCert, **byte** []
-data)
-**throws** GeneralSecurityException, CMSException, IOException {
-CMSEnvelopedDataGenerator envelopedGen = **new**
-CMSEnvelopedDataGenerator(); JcaAlgorithmParametersConverter paramsConverter
-= **new**
-JcaAlgorithmParametersConverter()
-;
-
-envelopedGen.addRecipientInfoGenerator(
-**new** JceKeyTransRecipientInfoGenerator(
-encryptionCert, paramsConverter.getAlgorithmIdentifier(
-PKCSObjectIdentifiers. **_id_RSAES_OAEP_** , OAEPParameterSpec. **_DEFAULT_** ))
-.setProvider( **"BCFIPS"** ));
-
-**return** envelopedGen.generate(
-**new** CMSProcessableByteArray(data),
-**new** JceCMSContentEncryptorBuilder(CMSAlgorithm. **_AES256_CBC_** )
-.setProvider( **"BCFIPS"** ).build()).getEncoded(); }
-
-// encryption certificate is used to identify the recipient associated with the
-private key
-**public static byte** [] extractKeyTransEnvelopedData(
-PrivateKey privateKey, X509Certificate encryptionCert, **byte** []
-encEnvelopedData)
-**throws** CMSException { CMSEnvelopedData envelopedData = **new**
-CMSEnvelopedData(
-encEnvelopedData); RecipientInformationStore recipients =
-envelopedData.getRecipientInfos(); Collection c = recipients.getRecipients( **
-new** JceKeyTransRecipientId(encryptionCert)); Iterator it = c.iterator();
-**if** (it.hasNext())
-{ RecipientInformation recipient = (RecipientInformation)it.next();
-**return** recipient.getContent( **new** JceKeyTransEnvelopedRecipient(
-privateKey)
-.setProvider( **"BCFIPS"** )); }
-**throw new** IllegalArgumentException( **"recipient for certificate not
-found"** ); }
+Run `bcfipsin100.cmstsp.Cms.createKeyTransEnvelopedObject().extractKeyTransEnvelopedData()`
 
 You can see in the example, that CMS also carries the idea of a Recipient
-Identifier (RID) similar to the
-
-Signer Identifier (SID). In this case we construct a RID from a certificate
-using the
-
-JceKeyTransRecipientId constructor, and then use that to find the recipient
-matching the private key we
-
-have.
+Identifier (RID) similar to the Signer Identifier (SID). In this case we
+construct a RID from a certificate using the JceKeyTransRecipientId constructor,
+and then use that to find the recipient matching the private key we have.
 
 CMS also allows for the generation of recipients using key agreement. In this
-example we see the use
+example we see the use of a recipient based on the key agreement algorithm EC
+CDH using the X9.63 KDF. In this case the under-the-covers operation using the
+agreed key that will be generated by the recipient to create an AES-256 bit
+wrapping key, and the wrapping key is then used to recover the AES session key
+that was used to encrypt the data.
 
-of a recipient based on the key agreement algorithm EC CDH using the X9.63 KDF.
-In this case the
+#### Example 77 – CMS Encryption using Key Agreement
 
-under-the-covers operation using the agreed key that will be generated by the
-recipient to create an
-
-AES-256 bit wrapping key, and the wrapping key is then used to recover the AES
-session key that was
-
-used to encrypt the data.
-
-#### Example 77 – CMS Encryption using Key Agreement..................................................................
-
-**public static byte** [] createKeyAgreeEnvelopedObject(
-PrivateKey initiatorKey, X509Certificate initiatorCert, X509Certificate
-recipientCert, **byte** []
-data)
-**throws** GeneralSecurityException, CMSException, IOException {
-CMSEnvelopedDataGenerator envelopedGen = **new**
-CMSEnvelopedDataGenerator();
-
-envelopedGen.addRecipientInfoGenerator( **new**
-JceKeyAgreeRecipientInfoGenerator(
-CMSAlgorithm. **_ECCDH_SHA384KDF_** , initiatorKey, initiatorCert.getPublicKey()
-, CMSAlgorithm. **_
-AES256_WRAP_** )
-.addRecipient(recipientCert).setProvider( **"BCFIPS"** ));
-
-**return** envelopedGen.generate(
-**new** CMSProcessableByteArray(data),
-**new** JceCMSContentEncryptorBuilder(CMSAlgorithm. **_AES256_CBC_** )
-.setProvider( **"BCFIPS"** ).build()).getEncoded(); }
-
-**public static byte** [] extractKeyAgreeEnvelopedData(
-PrivateKey recipientKey, X509Certificate recipientCert, **byte** []
-encEnvelopedData)
-**throws** GeneralSecurityException, CMSException { CMSEnvelopedData
-envelopedData = **new**
-CMSEnvelopedData(
-encEnvelopedData);
-
-RecipientInformationStore recipients = envelopedData.getRecipientInfos();
-RecipientId rid = **new**
-JceKeyAgreeRecipientId(recipientCert); RecipientInformation recipient =
-recipients.get(rid);
-
-**return** recipient.getContent( **new** JceKeyAgreeEnvelopedRecipient(
-recipientKey)
-.setProvider( **"BCFIPS"** )); }
+Run `bcfipsin100.cmstsp.Cms.createKeyAgreeEnvelopedObject().extractKeyAgreeEnvelopedData()`
 
 Other than the use of a different recipient information generator, and a
-different style RID to recover
-
-the recipient object for decryption, you can see the process for encrypting and
-decrypting data using
-
-key agreement is basically the same as for key transport.
+different style RID to recover the recipient object for decryption, you can see
+the process for encrypting and decrypting data using key agreement is basically
+the same as for key transport.
 
 In the next example we look at the use of a password to create a CMS enveloped
-structure. The
-
-recipient information generator is a bit more complicated than what we have seen
-previously, largely
-
-because there are so many more optional and variable parameters.
+structure. The recipient information generator is a bit more complicated than
+what we have seen previously, largely because there are so many more optional
+and variable parameters.
 
 In the example given here the parameter set has been chosen specifically with
-FIPS approved
+FIPS approved algorithms in mind, and a UTF-8 character encoding has been
+selected for converting the password into a byte array to allow the broadest
+range of character sets to be used and taken advantage of.
 
-algorithms in mind, and a UTF-8 character encoding has been selected for
-converting the password into
+#### Example 78 – CMS Encryption using a Password
 
-a byte array to allow the broadest range of character sets to be used and taken
-advantage of.
-
-#### Example 78 – CMS Encryption using a Password.........................................................................
-
-**public static byte** [] createPasswordEnvelopedObject( **char** [] passwd, **
-byte** [] salt,
-**int** iterationCount, **byte** [] data)
-**throws** GeneralSecurityException, CMSException, IOException {
-CMSEnvelopedDataGenerator envelopedGen = **new**
-CMSEnvelopedDataGenerator();
-
-envelopedGen.addRecipientInfoGenerator(
-**new** JcePasswordRecipientInfoGenerator(CMSAlgorithm. **_AES256_CBC_** ,
-passwd)
-
-.setProvider( **"BCFIPS"** )
-.setPasswordConversionScheme(PasswordRecipient. **_PKCS5_SCHEME2_UTF8_** )
-.setPRF(PasswordRecipient.PRF. **_HMacSHA384_** )
-.setSaltAndIterationCount(salt, iterationCount));
-
-**return** envelopedGen.generate(
-**new** CMSProcessableByteArray(data),
-**new** JceCMSContentEncryptorBuilder(CMSAlgorithm. **_AES256_CBC_** )
-.setProvider( **"BCFIPS"** ).build()).getEncoded(); }
-
-**public static byte** [] extractPasswordEnvelopedData( **char** [] passwd, **
-byte** []
-encEnvelopedData)
-**throws** GeneralSecurityException, CMSException { CMSEnvelopedData
-envelopedData = **new**
-CMSEnvelopedData(
-encEnvelopedData); RecipientInformationStore recipients =
-envelopedData.getRecipientInfos(); RecipientId rid = **new**
-PasswordRecipientId(); RecipientInformation recipient = recipients.get(rid);
-
-**return** recipient.getContent(
-**new** JcePasswordEnvelopedRecipient(passwd)
-.setProvider( **"BCFIPS"** )
-.setPasswordConversionScheme(PasswordRecipient. **_PKCS5_SCHEME2_UTF8_** )); }
+Run `bcfipsin100.cmstsp.Cms.createPasswordEnvelopedObject().extractPasswordEnvelopedData()`
 
 The RID associated with passwords, while it exists, is not really as useful as
-the other RIDs we have
-
-seen. The issue being that there is nothing to really hang onto as an
-identifier. Other than that, once you
-
-identify the use of the recipient generator and the RID, example 79 follows the
-same process as
-
-examples 77 and 78 do.
+the other RIDs we have seen. The issue being that there is nothing to really
+hang onto as an identifier. Other than that, once you identify the use of the
+recipient generator and the RID, example 79 follows the same process as examples
+77 and 78 do.
 
 In this last example we will look at the use of a symmetric key, known as a key
-encryption key, to
+encryption key, to encrypt the session key. This is straight forward, but
+requires the use of an agreed key id between the sender of the enveloped data
+and the recipient that is meant to process it as well as the sharing of the key
+itself.
 
-encrypt the session key. This is straight forward, but requires the use of an
-agreed key id between the
+#### Example 79 – CMS Encryption using a Key Encryption Key
 
-sender of the enveloped data and the recipient that is meant to process it as
-well as the sharing of the
-
-key itself.
-
-#### Example 79 – CMS Encryption using a Key Encryption Key.......................................................
-
-**public static byte** [] createKekEnvelopedObject( **byte** [] keyID, SecretKey
-keyEncryptionKey, **byte** [] data)
-**throws** GeneralSecurityException, CMSException, IOException {
-CMSEnvelopedDataGenerator envelopedGen = **new**
-CMSEnvelopedDataGenerator();
-
-envelopedGen.addRecipientInfoGenerator(
-**new** JceKEKRecipientInfoGenerator(keyID, keyEncryptionKey));
-
-**return** envelopedGen.generate(
-**new** CMSProcessableByteArray(data),
-**new** JceCMSContentEncryptorBuilder(CMSAlgorithm. **_AES256_CBC_** )
-.setProvider( **"BCFIPS"** ).build()).getEncoded(); }
-
-**public static byte** [] extractKekEnvelopedData(
-**byte** [] keyID, SecretKey keyEncryptionKey, **byte** [] encEnvelopedData)
-**throws** GeneralSecurityException, CMSException { CMSEnvelopedData
-envelopedData = **new**
-CMSEnvelopedData(
-encEnvelopedData);
-
-RecipientInformationStore recipients = envelopedData.getRecipientInfos();
-RecipientId rid = **new**
-KEKRecipientId(
-keyID); RecipientInformation recipient = recipients.get(rid);
-
-**return** recipient.getContent(
-**new** JceKEKEnvelopedRecipient(keyEncryptionKey).setProvider( **"BCFIPS"** ));
-
-##### }
+Run `bcfipsin100.cmstsp.Cms.createKekEnvelopedObject().extractKekEnvelopedData()`
 
 In this case the RID has some meaning as there is a keyID to use. Otherwise it
-follows the same
-
-procedure as the other recipient types.
+follows the same procedure as the other recipient types.
 
 Multiple recipients, including different recipient types, can be included in the
-same enveloped data. Just
+same enveloped data. Just bare in mind if you are using passwords that there's
+no way to distinguish which recipient is using which password, if you have more
+than one password recipient you will need some other way of determining which
+recipient to use for a particular user.
 
-bare in mind if you are using passwords that there's no way to distinguish which
-recipient is using
-
-which password, if you have more than one password recipient you will need some
-other way of
-
-determining which recipient to use for a particular user.
-
-### CMS Authenticated Data.....................................................................................................................
+### CMS Authenticated Data
 
 Authenticated data is different from signed data in the sense that there is just
-a MAC associated with
-
-the data, but it is similar to enveloped data in the sense that we use
-recipients again.
+a MAC associated with the data, but it is similar to enveloped data in the sense
+that we use recipients again.
 
 The following only provides an example of authenticated data using a key
-transport (KeyTrans)
+transport (KeyTrans) recipient. That said, any recipient that can be used with
+enveloped data can be used with authenticated data.
+The `CMSAuthenticatedDataGenerator.generate()` method is unique to the type
+though as in this case the data is transmitted in the clear, but the a MAC needs
+to be calculated on it using a session key.
 
-recipient. That said, any recipient that can be used with enveloped data can be
-used with authenticated
+#### Example 80 – Creating and Verifying CMS Authenticated Data
 
-data. The CMSAuthenticatedDataGenerator.generate() method is unique to the type
-though as in this
-
-case the data is transmitted in the clear, but the a MAC needs to be calculated
-on it using a session key.
-
-#### Example 80 – Creating and Verifying CMS Authenticated Data...................................................
-
-**public static byte** [] createAuthenticatedData(
-X509Certificate originatorCertificate, X509Certificate recipientCertificate, **
-byte** [] data)
-**throws** GeneralSecurityException, CMSException, IOException {
-ASN1ObjectIdentifier macAlg = CMSAlgorithm. **_
-DES_EDE3_CBC_** ; CMSAuthenticatedDataGenerator authDataGenerator = **new**
-CMSAuthenticatedDataGenerator(); X509CertificateHolder origCert = **new**
-JcaX509CertificateHolder(
-originatorCertificate);
-
-authDataGenerator.setOriginatorInfo( **new** OriginatorInfoGenerator(origCert)
-.generate()); authDataGenerator.addRecipientInfoGenerator(
-**new** JceKeyTransRecipientInfoGenerator(recipientCertificate)
-.setProvider( **"BCFIPS"** ));
-
-**return** authDataGenerator.generate(
-**new** CMSProcessableByteArray(data),
-**new** JceCMSMacCalculatorBuilder(macAlg)
-.setProvider( **"BCFIPS"** ).build()).getEncoded(); }
-
-**public static byte** [] extractAuthenticatedData(
-PrivateKey recipientPrivateKey, X509Certificate recipientCert, **byte** []
-encAuthData)
-**throws** GeneralSecurityException, CMSException { CMSAuthenticatedData
-authData = **new**
-CMSAuthenticatedData(
-encAuthData);
-
-RecipientInformationStore recipients = authData.getRecipientInfos();
-RecipientInformation recipient = recipients.get( **
-new** JceKeyTransRecipientId(recipientCert));
-
-**if** (recipient != **null** )
-{
-**byte** [] recData = recipient.getContent(
-**new** JceKeyTransAuthenticatedRecipient(recipientPrivateKey).setProvider( **"
-BCFIPS"** ));
-
-**if** (Arrays. _constantTimeAreEqual_ (authData.getMac(), recipient.getMac()))
-{
-**return** recData; }
-
-**else**
-{
-**throw new** IllegalStateException( **"MAC check failed"** ); } }
-**throw new** IllegalStateException( **"no recipient found"** ); }
+Run `bcfipsin100.cmstsp.Cms.createAuthenticatedData().extractAuthenticatedData()`
 
 In the example the MAC is based around the Triple-DES CBC MAC. You will also
-note that a constant
+note that a constant time comparison is done when it is checked. These days it
+is regarded as best to make you cryptography code as boring and as constant-time
+as possible, rejecting MACs at the earliest time possible can be provide a hint
+to an outside observer about what a valid MAC might look like, so be careful
+where you choose to optimize.
 
-time comparison is done when it is checked. These days it is regarded as best to
-make you
-
-cryptography code as boring and as constant-time as possible, rejecting MACs at
-the earliest time
-
-possible can be provide a hint to an outside observer about what a valid MAC
-might look like, so be
-
-careful where you choose to optimize.
-
-### S/MIME Signed Data..........................................................................................................................
+### S/MIME Signed Data
 
 S/MIME is built directly on top of CMS. Signed S/MIME objects can be either
-encapsulated or
-
-detached in which case a MIME multipart object is used and the content being
-signed is in one part,
-
-with the signature following in the next part. The advantage of the multipart
-format is that a reader of
-
-the message does not have to be able to decode the actual signed message, so a
-reader without the
-
+encapsulated or detached in which case a MIME multipart object is used and the
+content being signed is in one part, with the signature following in the next
+part. The advantage of the multipart format is that a reader of the message does
+not have to be able to decode the actual signed message, so a reader without the
 ability to process the signature can still read the signed data.
 
 Detached signatures have a MIME type of “application/pkcs7-signature” and
-encapsulated signatures
-
-have a MIME type of “application/pkcs7-mime”.
+encapsulated signatures have a MIME type of “application/pkcs7-mime”.
 
 The following example shows how to create a S/MIME signed object with a detached
-signature, so a
+signature, so a multipart message. As part of this process the
+createSignedMultipart() method also includes an SMIMECapabilitiesAttribute. The
+capabilities attribute is used to tell the recipient of the S/MIME message some
+details about what the capabilities of the originator of the message are. This
+information is useful where the receiver wishes to send a reply. The
+capabilities attribute is created in the generateSignedAttributes() method.
 
-multipart message. As part of this process the createSignedMultipart() method
-also includes an
+#### Example 81 – Creating and Verifying an S/MIME Signed Multipart
 
-SMIMECapabilitiesAttribute. The capabilities attribute is used to tell the
-recipient of the S/MIME
-
-message some details about what the capabilities of the originator of the
-message are. This information
-
-is useful where the receiver wishes to send a reply. The capabilities attribute
-is created in the
-
-generateSignedAttributes() method.
-
-#### Example 81 – Creating and Verifying an S/MIME Signed Multipart............................................
-
-**private static** ASN1EncodableVector generateSignedAttributes()
-{ ASN1EncodableVector signedAttrs = **new** ASN1EncodableVector();
-
-SMIMECapabilityVector caps = **new** SMIMECapabilityVector();
-caps.addCapability(
-SMIMECapability. **_aES128_CBC_** ); caps.addCapability(SMIMECapability. **_
-aES192_CBC_** ); caps.addCapability(SMIMECapability. **_aES256_CBC_** );
-
-signedAttrs.add( **new** SMIMECapabilitiesAttribute(caps));
-
-**return** signedAttrs; }
-
-**public static** MimeMultipart createSignedMultipart(
-PrivateKey signingKey, X509Certificate signingCert, MimeBodyPart message)
-**throws** GeneralSecurityException, OperatorCreationException, SMIMEException,
-IOException { List<X509Certificate>
-certList = **new** ArrayList<X509Certificate>(); certList.add(signingCert);
-
-Store certs = **new** JcaCertStore(certList);
-
-ASN1EncodableVector signedAttrs = _generateSignedAttributes_ ();
-
-signedAttrs.add( **new** Attribute(CMSAttributes. **_signingTime_** , **new**
-DERSet( **new**
-Time( **new** Date()))));
-
-SMIMESignedGenerator gen = **new** SMIMESignedGenerator();
-
-gen.addSignerInfoGenerator( **new** JcaSimpleSignerInfoGeneratorBuilder()
-.setProvider( **"BCFIPS"** )
-.setSignedAttributeGenerator( **new** AttributeTable(signedAttrs))
-.build( **"SHA384withRSAandMGF1"** , signingKey, signingCert));
-gen.addCertificates(certs);
-
-**return** gen.generate(message); }
-
-**public static boolean** verifySignedMultipart(MimeMultipart signedMessage)
-**throws** GeneralSecurityException, OperatorCreationException, CMSException,
-SMIMEException, MessagingException { SMIMESigned signedData = **new**
-SMIMESigned(signedMessage); Store certStore = signedData.getCertificates();
-SignerInformationStore signers = signedData.getSignerInfos();
-
-Collection c = signers.getSigners(); Iterator it = c.iterator();
-
-**while** (it.hasNext())
-{ SignerInformation signer = (SignerInformation)it.next(); Collection
-certCollection = certStore.getMatches(
-signer.getSID()); Iterator certIt = certCollection.iterator();
-X509CertificateHolder cert = (
-X509CertificateHolder)
-certIt.next();
-
-**if** (!signer.verify( **new** JcaSimpleSignerInfoVerifierBuilder()
-.setProvider( **"BCFIPS"** )
-.build(cert)))
-{
-**return false** ; } }
-**return true** ; }
+Run `bcfipsin100.cmstsp.Smime.generateSignedAttributes(). createSignedMultipart().verifySignedMultipart()`
 
 Not surprisingly, once you take into account the use of the JavaMail library,
-the create and verify
+the create and verify method look just like the equivalents for the CMS signed
+data case. It is just the case that the underlying carrier for the data has
+changed as the data is now one part of a two part message.
 
-method look just like the equivalents for the CMS signed data case. It is just
-the case that the
-
-underlying carrier for the data has changed as the data is now one part of a two
-part message.
-
-### S/MIME Encrypted Data.....................................................................................................................
+### S/MIME Encrypted Data
 
 Creating encrypted, or enveloped, data using S/MIME also follows the same
 procedure as with CMS.
 
 Encrypted, or enveloped, data has the MIME type “application/pkcs7-mime”. You
-will probably notice
-
-this is the same as for encapsulated signed data. In this case the two are
-distinguished using an
-
-additional attribute “smime-type”. For this situation smime-type will be set
-equal to “enveloped-data”,
-
-whereas in the case of encapsulated signed data the smime-type attribute will be
-equal to “signed-data”.
+will probably notice this is the same as for encapsulated signed data. In this
+case the two are distinguished using an additional attribute “smime-type”. For
+this situation smime-type will be set equal to “enveloped-data”, whereas in the
+case of encapsulated signed data the smime-type attribute will be equal to
+“signed-data”.
 
 In this example we are using a key transport recipient but any valid CMS
-recipient, or recipients, can be
+recipient, or recipients, can be used instead if the receivers of the S/MIME
+message are capable of processing them.
 
-used instead if the receivers of the S/MIME message are capable of processing
-them.
+#### Example 82 – Creating and Processing S/MIME Encrypted Messages
 
-#### Example 82 – Creating and Processing S/MIME Encrypted Messages.........................................
-
-**public static** MimeBodyPart createEnvelopedBodyPart(
-X509Certificate encryptionCert, MimeBodyPart message)
-**throws** GeneralSecurityException, SMIMEException, CMSException, IOException {
-SMIMEEnvelopedGenerator gen = **new**
-SMIMEEnvelopedGenerator(); gen.addRecipientInfoGenerator( **new**
-JceKeyTransRecipientInfoGenerator(encryptionCert).setProvider( **"BCFIPS"** ));
-**return** gen.generate(message, **new** JceCMSContentEncryptorBuilder(
-CMSAlgorithm. **_
-AES256_CBC_** )
-.setProvider( **"BCFIPS"** ).build()); }
-
-// as this is based on CMS we again use encryptionCert to identify the recipient
-for the private key
-**public static** MimeBodyPart extractEnvelopedBodyPart(
-PrivateKey privateKey, X509Certificate encryptionCert, MimeBodyPart
-envelopedBodyPart)
-**throws** SMIMEException, CMSException, MessagingException { SMIMEEnveloped
-envelopedData = **new**
-SMIMEEnveloped(
-envelopedBodyPart); RecipientInformationStore recipients =
-envelopedData.getRecipientInfos();
-
-Collection c = recipients.getRecipients( **new** JceKeyTransRecipientId(
-encryptionCert));
-
-Iterator it = c.iterator();
-**if** (it.hasNext())
-{ RecipientInformation recipient = (RecipientInformation)it.next();
-
-**return** SMIMEUtil. _toMimeBodyPart_ (
-recipient.getContent( **new** JceKeyTransEnvelopedRecipient(privateKey)
-.setProvider( **"BCFIPS"** ))); }
-
-**throw new** IllegalArgumentException( **"recipient for certificate not
-found"** ); }
+Run `bcfipsin100.cmstsp.Smime.createEnvelopedBodyPart().extractEnvelopedBodyPart()`
 
 It is worth also noting that often with S/MIME enveloped messages there will
-normally be at least two
-
-recipients – usually the originator of the message will add themselves as a
-recipient as well as it will
-
-make it possible for them to decrypt the message they sent at a later date.
-While it is not done in the
-
+normally be at least two recipients – usually the originator of the message will
+add themselves as a recipient as well as it will make it possible for them to
+decrypt the message they sent at a later date. While it is not done in the
 example, for the key transport originator, it is just a matter of adding another
-
 JceKeyTransRecipientInfoGenerator built around the originator's certificate.
 
 Occasionally you will also want to sign a message, encrypt the result, and then
-send that. In this case
+send that. In this case you need to create the signed multipart first, and then
+encrypt it - following the principal of “sign what you mean, encrypt what you
+mean to protect”. The main thing to deal with here is how JavaMail needs to
+present the signed multipart for encryption – it needs to be placed into another
+MimeBodyPart object and then that is passed for encryption. If you look at the
+create method in the example you will see how that is done.
 
-you need to create the signed multipart first, and then encrypt it - following
-the principal of “sign what
+#### Example 83 – Using Signing and Encryption together with S/MIME
 
-you mean, encrypt what you mean to protect”. The main thing to deal with here is
-how JavaMail needs
-
-to present the signed multipart for encryption – it needs to be placed into
-another MimeBodyPart object
-
-and then that is passed for encryption. If you look at the create method in the
-example you will see how
-
-that is done.
-
-#### Example 83 – Using Signing and Encryption together with S/MIME...........................................
-
-**public static** MimeBodyPart createSignedEncryptedBodyPart(
-PrivateKey signingKey, X509Certificate signingCert, X509Certificate
-encryptionCert, MimeBodyPart message)
-**throws** GeneralSecurityException, SMIMEException, CMSException, IOException,
-OperatorCreationException, MessagingException { SMIMEEnvelopedGenerator gen = **
-new**
-SMIMEEnvelopedGenerator(); gen.addRecipientInfoGenerator( **
-new** JceKeyTransRecipientInfoGenerator(encryptionCert)
-.setProvider( **"BCFIPS"** ));
-
-MimeBodyPart bodyPart = **new** MimeBodyPart();
-
-bodyPart.setContent( _createSignedMultipart_ (signingKey, signingCert, message))
-;
-
-**return** gen.generate(bodyPart, **new** JceCMSContentEncryptorBuilder(
-CMSAlgorithm. **_
-AES256_CBC_** )
-.setProvider( **"BCFIPS"** ).build()); }
-
-**public static boolean** verifySignedEncryptedBodyPart(
-PrivateKey privateKey, X509Certificate encryptionCert, MimeBodyPart
-envelopedBodyPart)
-**throws** SMIMEException, CMSException, GeneralSecurityException,
-OperatorCreationException, MessagingException, IOException { SMIMEEnveloped
-envelopedData = **new** SMIMEEnveloped(
-envelopedBodyPart); RecipientInformationStore recipients =
-envelopedData.getRecipientInfos();
-
-Collection c = recipients.getRecipients( **new** JceKeyTransRecipientId(
-encryptionCert)); Iterator it = c.iterator();
-**if** (it.hasNext())
-{ RecipientInformation recipient = (RecipientInformation)it.next(); MimeBodyPart
-signedPart = SMIMEUtil. _
-toMimeBodyPart_ (
-recipient.getContent( **new** JceKeyTransEnvelopedRecipient(privateKey)
-.setProvider( **"
-BCFIPS"** )));
-
-**return** _verifySignedMultipart_ ((MimeMultipart)signedPart.getContent()); }
-**throw new** IllegalArgumentException( **"recipient for certificate not
-found"** ); }
+Run `bcfipsin100.cmstsp.Smime.createSignedEncryptedBodyPart().verifySignedEncryptedBodyPart()`
 
 On decryption you then need to be able to recover the multipart so you can
-verify the signature. The
+verify the signature. The BC S/MIME API includes a utility class SMIMEUtil with
+a toMimeBodyPart() method to enable this to be done. As you can see in the
+verify method of the example, once the content of the enveloped data has been
+converted back into a MIME body part, the multipart representing the signature
+is just the content of it, as it was when we originally created the message.
 
-BC S/MIME API includes a utility class SMIMEUtil with a toMimeBodyPart() method
-to enable this
-
-to be done. As you can see in the verify method of the example, once the content
-of the enveloped data
-
-has been converted back into a MIME body part, the multipart representing the
-signature is just the
-
-content of it, as it was when we originally created the message.
-
-### Time-Stamp Protocol...........................................................................................................................
+### Time-Stamp Protocol
 
 Time-Stamp Protocol (TSP) is defined in RFC 3161 and has become increasing
-important over the last
-
-few years as all us have to grapple with the “horror” of valid certificates
-expiring. The idea behind it is
-
-fairly simple, you just get a trusted third-party to issue a longer term
-signature testifying that you sent it
-
+important over the last few years as all us have to grapple with the “horror” of
+valid certificates expiring. The idea behind it is fairly simple, you just get a
+trusted third-party to issue a longer term signature testifying that you sent it
 a particular hash at a particular time. Assuming the hash represents a
-particular blob or document, and
-
-assuming the hash function is otherwise secure, you can then testify that the
-blob or document really
-
-was that value on the particular time.
+particular blob or document, and assuming the hash function is otherwise secure,
+you can then testify that the blob or document really was that value on the
+particular time.
 
 The feature of TSP is you do not have to send the data that the hash the
-time-stamp server signs is
-
-based on. It keeps the protocol small and makes it easier to both request and
-provide time-stamps. It is
-
-easy to time-stamp previously time-stamped data as well.
+time-stamp server signs is based on. It keeps the protocol small and makes it
+easier to both request and provide time-stamps. It is easy to time-stamp
+previously time-stamped data as well.
 
 Our first example shows how to create a basic TSP request.
 
-#### Example 84 – Creating a TSP Request...........................................................................................
+#### Example 84 – Creating a TSP Request
 
-**public static byte** [] createTspRequest(byte[] sha384Hash)
-**throws** IOException { TimeStampRequestGenerator reqGen = **new**
-TimeStampRequestGenerator();
-**return** reqGen.generate(TSPAlgorithms. **_SHA384_** , sha384Hash)
-.getEncoded(); }
+Run `bcfipsin100.cmstsp.Tsp.createTspRequest()`
 
 As you can see it is quite straight forward. What hash you might use depends on
-what you have
+what you have available and may also depend on what the server is willing to
+process, but in this case we are using SHA-384. Sometimes you want the server to
+include its TSP verification certificate in the response as well. To do this you
+should also add:
 
-available and may also depend on what the server is willing to process, but in
-this case we are using
-
-SHA-384. Sometimes you want the server to include its TSP verification
-certificate in the response as
-
-well. To do this you should also add:
-
-reqGen.setCertReq( **true** );
+```java
+reqGen.setCertReq(**true**);
+```
 
 to the request generation. TSP responses are based on CMS signed data and some
-applications are not
-
-capable of verifying a CMS signed data object where the signer has not included
-its signing certificates.
-
-If you are having an issue with a TSP response and a third party application,
-the first thing worth
-
+applications are not capable of verifying a CMS signed data object where the
+signer has not included its signing certificates. If you are having an issue
+with a TSP response and a third party application, the first thing worth
 checking is the presence of the TSP server's time-stamp verification
 certificate.
 
 After some initial set up creating a TSP response involves creating a
-TimeStampTokenGenerator and
+TimeStampTokenGenerator and then using that to create the TSP response with a
+TimeStampResponseGenerator.
 
-then using that to create the TSP response with a TimeStampResponseGenerator.
+#### Example 85 – Creating a TSP Response
 
-#### Example 85 – Creating a TSP Response.........................................................................................
-
-**public static byte** [] createTspResponse(
-PrivateKey tspSigningKey, X509Certificate tspSigningCert, **byte** []
-encRequest)
-**throws** TSPException, OperatorCreationException, GeneralSecurityException,
-IOException { AlgorithmIdentifier digestAlgorithm = **new** AlgorithmIdentifier(
-NISTObjectIdentifiers. **_
-id_sha384_** ); DigestCalculatorProvider digProvider = **new**
-JcaDigestCalculatorProviderBuilder()
-.setProvider( **"BCFIPS"** ).build();
-
-TimeStampTokenGenerator tsTokenGen = **new** TimeStampTokenGenerator(
-**new** JcaSimpleSignerInfoGeneratorBuilder()
-.build( **"SHA384withRSA"** , tspSigningKey, tspSigningCert), digProvider.get(
-digestAlgorithm),
-**new** ASN1ObjectIdentifier( **"1.2"** )); tsTokenGen.addCertificates( **new**
-JcaCertStore(
-Collections. _singleton_ (
-tspSigningCert)));
-
-TimeStampResponseGenerator tsRespGen = **new** TimeStampResponseGenerator(
-tsTokenGen, TSPAlgorithms. **_ALLOWED_** );
-**return** tsRespGen.generate( **new** TimeStampRequest(encRequest),
-**new** BigInteger( **"23"** ), **new** Date()).getEncoded(); }
+Run `bcfipsin100.cmstsp.Tsp.createTspResponse()`
 
 In our example we have added our TSP server's certificate to the response, so
-this example would be
-
-suitable for a client requesting the server to include it's certificate. The
-only piece of real weirdness is
-
-the example is the OBJECT IDENTIFIER with the value 1.2 that is passed to the
-token generator's
-
+this example would be suitable for a client requesting the server to include
+it's certificate. The only piece of real weirdness is the example is the OBJECT
+IDENTIFIER with the value 1.2 that is passed to the token generator's
 constructor.
 
 As part of creating a TSP token a TSP server is also meant to specify what
-policy it created the TSP
+policy it created the TSP token under. This is usually server specific and
+defined using an OBJECT IDENTIFIER issued under an OID branch controlled by the
+server's owners. The policy oid will normally be associated with an actual
+document that details how the TSP server will deal with a particular time-stamp
+request. RFC 3628 provides requirements for a baseline time-stamp policy for a
+TSP server. Verifying a TSP response is also very simple code wise. The validate
+method will also check the criteria given in RFC 3161 to ensure that the
+time-stamp response is properly created.
 
-token under. This is usually server specific and defined using an OBJECT
-IDENTIFIER issued under
+#### Example 86 – Verifying a TSP Response
 
-an OID branch controlled by the server's owners. The policy oid will normally be
-associated with an
-
-actual document that details how the TSP server will deal with a particular
-time-stamp request. RFC
-
-3628 provides requirements for a baseline time-stamp policy for a TSP server.
-
-Verifying a TSP response is also very simple code wise. The validate method will
-also check the
-
-criteria given in RFC 3161 to ensure that the time-stamp response is properly
-created.
-
-#### Example 86 – Verifying a TSP Response.......................................................................................
-
-**public static boolean** verifyTspResponse(X509Certificate tspCertificate, **
-byte** [] encResponse)
-**throws** IOException, TSPException, OperatorCreationException {
-TimeStampResponse tsResp = **new**
-TimeStampResponse(
-encResponse); TimeStampToken tsToken = tsResp.getTimeStampToken();
-
-tsToken.validate( **new** JcaSimpleSignerInfoVerifierBuilder()
-.setProvider( **"BCFIPS"** ).build(tspCertificate));
-**return true** ; }
+Run `bcfipsin100.cmstsp.Tsp.verifyTspResponse()`
 
 The last thing to look at with TSP is how to add a TSP response to a CMS
-signature as they can be used
-
-to provide an additional warranty for the validity of one or more of the signers
-on the signature. In the
-
-case of time-stamping a signer, adding a time-stamp involves the addition of an
-unsigned attribute with
-
+signature as they can be used to provide an additional warranty for the validity
+of one or more of the signers on the signature. In the case of time-stamping a
+signer, adding a time-stamp involves the addition of an unsigned attribute with
 the OID label of id-aa-signatureTimeStampToken.
 
 The following example shows how to create the attribute, add it to a signer, and
-then verify the time-
+then verify the time-stamp on the signer at a later stage.
 
-stamp on the signer at a later stage.
+#### Example 87 – Adding a TSP Response to a CMS Signature
 
-#### Example 87 – Adding a TSP Response to a CMS Signature..........................................................
+Run `bcfipsin100.cmstsp.Tsp.createTspAttribute().createTimeStampedSigner(). verifyTimeStampedSigner()`
 
-**public static** Attribute createTspAttribute(
-PrivateKey tspSigningKey, X509Certificate tspSignerCert, **byte** [] data)
-**throws** GeneralSecurityException, OperatorCreationException, TSPException,
-IOException { MessageDigest digest = MessageDigest. _getInstance_ ( **"
-SHA-384"** , **"BCFIPS"** ); TimeStampResponse response = **new**
-TimeStampResponse(
-Tsp. _createTspResponse_ (tspSigningKey, tspSignerCert, Tsp. _
-createTspRequest_ (digest.digest(
-data))));
-
-TimeStampToken timestampToken = response.getTimeStampToken();
-
-**return new** Attribute(
-PKCSObjectIdentifiers. **_id_aa_signatureTimeStampToken_** ,
-**new** DERSet(timestampToken.toCMSSignedData().toASN1Structure())); }
-
-**public static byte** [] createTimeStampedSigner(
-PrivateKey signingKey, X509Certificate signingCert, **byte** [] data, PrivateKey
-tspSigningKey, X509Certificate tspSignerCert)
-**throws** OperatorCreationException, GeneralSecurityException, CMSException,
-TSPException, IOException { CMSSignedData signedData = **new** CMSSignedData( _
-createSignedObject_ (signingKey, signingCert, data));
-
-SignerInformation signer = signedData.getSignerInfos().iterator().next();
-ASN1EncodableVector timestampVector = **new**
-ASN1EncodableVector(); timestampVector.add( _createTspAttribute_ (tspSigningKey,
-tspSignerCert, signer.getSignature()));
-
-AttributeTable at = **new** AttributeTable(timestampVector);
-
-// create replacement signer signer = SignerInformation. _
-replaceUnsignedAttributes_ (signer, at);
-
-// create replacement SignerStore SignerInformationStore newSignerStore = **
-new**
-SignerInformationStore(signer);
-
-// replace the signers in the signed data object
-**return** CMSSignedData. _replaceSigners_ (signedData, newSignerStore)
-.getEncoded(); }
-
-**public static boolean** verifyTimeStampedSigner( **byte** [] cmsSignedData)
-**throws** OperatorCreationException, GeneralSecurityException, CMSException,
-IOException, TSPException { CMSSignedData signedData = **new** CMSSignedData(
-cmsSignedData); SignerInformation signer = signedData.getSignerInfos()
-.iterator()
-.next(); TimeStampToken tspToken = **new** TimeStampToken(
-ContentInfo. _getInstance_ (signer.getUnsignedAttributes()
-.get(PKCSObjectIdentifiers. **_id_aa_signatureTimeStampToken_** )
-.getAttributeValues()[ 0 ])); Collection certCollection =
-tspToken.getCertificates().getMatches(tspToken.getSID()); Iterator certIt =
-certCollection.iterator(); X509CertificateHolder cert = (X509CertificateHolder)
-certIt.next();
-
-// this method throws an exception if validation fails. tspToken.validate( **
-new**
-JcaSimpleSignerInfoVerifierBuilder()
-.setProvider( **"BCFIPS"** ).build(cert));
-
-**return true** ; }
-
-## OpenPGP..................................................................................................................................................
+## OpenPGP
 
 OpenPGP is currently defined in RFC 4880, with several updates, adding ciphers
-like Camellia (RFC
-
-5581) and Elliptic Curve Cryptography (RFC 6637). The protocol is now over 20
-      years old and like
-
-CMS is widely used.
+like Camellia (RFC5581) and Elliptic Curve Cryptography (RFC 6637). The protocol
+is now over 20 years old and like CMS is widely used.
 
 Dealing with OpenPGP and FIPS can be a little difficult though. The key ring
-format defined in
-
-OpenPGP is not FIPS compliant, and some of the encryption techniques used are
-not either. It is
-
-possible though to construct some OpenPGP messages using FIPS techniques, so a
-FIPS compliant
-
-application of OpenPGP would not make use of PGP keyrings but it might make use
-of some PGP
-
-messaging. In the non-FIPS world you will almost certainly find yourself having
-to use OpenPGP.
+format defined in OpenPGP is not FIPS compliant, and some of the encryption
+techniques used are not either. It is possible though to construct some OpenPGP
+messages using FIPS techniques, so a FIPS compliant application of OpenPGP would
+not make use of PGP keyrings but it might make use of some PGP messaging. In the
+non-FIPS world you will almost certainly find yourself having to use OpenPGP.
 
 The other thing to keep in mind reading this chapter is that the BC OpenPGP API
-is a streaming API,
+is a streaming API, unlike the BC CMS API it does not provide an in-memory model
+as well.
 
-unlike the BC CMS API it does not provide an in-memory model as well.
-
-### Key Rings............................................................................................................................................
+### Key Rings
 
 The OpenPGP protocol defines its own key storage format, broadly referred to as
-a key ring. A basic
-
-key ring is a single master key with a collection of sub-keys, in the BC OpenPGP
-API these are
-
-supported by PGPKeyRing and its sub-classes, PGPPublicKeyRing (for public keys)
-and
-
-PGPSecretKeyRing (for private keys). It is also possible to have more than one
-key ring in a file, in the
-
-BC OpenPGP API support for these is provided using the
-PGPPublicKeyRingCollection and the
-
-PGPSecretKeyRingCollection classes.
+a key ring. A basic key ring is a single master key with a collection of
+sub-keys, in the BC OpenPGP API these are supported by PGPKeyRing and its
+sub-classes, PGPPublicKeyRing (for public keys)
+and PGPSecretKeyRing (for private keys). It is also possible to have more than
+one key ring in a file, in the BC OpenPGP API support for these is provided
+using the PGPPublicKeyRingCollection and the PGPSecretKeyRingCollection classes.
 
 The OpenPGP protocol requires the master key to be a signing key and a basic set
-for a usable key ring
+for a usable key ring requires a master key used for signing key and one sub-key
+used for encryption.
 
-requires a master key used for signing key and one sub-key used for encryption.
+#### Example 88 – Generating a Basic Key Ring
 
-#### Example 88 – Generating a Basic Key Ring..................................................................................
-
-**public static byte** [][] generateKeyRing(String identity, **char** []
-passphrase)
-**throws** GeneralSecurityException, PGPException, IOException { KeyPair dsaKp =
-Dsa. _
-generateKeyPair_ (); KeyPair rsaKp = Rsa. _generateKeyPair_ (); PGPKeyPair
-dsaKeyPair = **new**
-JcaPGPKeyPair(PGPPublicKey. **_DSA_** , dsaKp, **
-new** Date()); PGPKeyPair rsaKeyPair = **new** JcaPGPKeyPair(PGPPublicKey. **_
-RSA_ENCRYPT_** , rsaKp, **new** Date()); PGPDigestCalculator sha1Calc = **new**
-JcaPGPDigestCalculatorProviderBuilder()
-.build().get(HashAlgorithmTags. **_SHA1_** ); PGPKeyRingGenerator keyRingGen
-= **new**
-PGPKeyRingGenerator(
-PGPSignature. **_POSITIVE_CERTIFICATION_** , dsaKeyPair, identity, sha1Calc, **
-null** , **null** ,
-**new** JcaPGPContentSignerBuilder(
-dsaKeyPair.getPublicKey().getAlgorithm(), HashAlgorithmTags. **_SHA384_** ),
-**new** JcePBESecretKeyEncryptorBuilder(PGPEncryptedData. **_AES_256_** ,
-sha1Calc)
-.setProvider( **"BCFIPS"** ).build(passphrase));
-
-keyRingGen.addSubKey(rsaKeyPair);
-
-// create an encoding of the secret key ring ByteArrayOutputStream secretOut
-= **new**
-ByteArrayOutputStream(); keyRingGen.generateSecretKeyRing().encode(secretOut);
-secretOut.close();
-
-// create an encoding of the public key ring ByteArrayOutputStream publicOut
-= **new**
-ByteArrayOutputStream(); keyRingGen.generatePublicKeyRing().encode(publicOut);
-publicOut.close();
-
-**return new byte** [][] { secretOut.toByteArray(), publicOut.toByteArray() }; }
+Run `bcfipsin100.cmstsp.KeyRing.generateKeyRing()`
 
 Note that a JcaPGPKeyPair is used to convert the JCA/JCE key pairs into
-something more OpenPGP
-
-friendly. The extra class is required as OpenPGP has its own way of flagging the
-key type, it stores a
-
-data with the object as well, and OpenPGP also associates an 8 byte keyID with a
-public key. The
-
-JcaPGPKeyPair is also very useful where you have to directly convert JCA/JCE
-keys into OpenPGP,
-
+something more OpenPGP friendly. The extra class is required as OpenPGP has its
+own way of flagging the key type, it stores a data with the object as well, and
+OpenPGP also associates an 8 byte keyID with a public key. The JcaPGPKeyPair is
+also very useful where you have to directly convert JCA/JCE keys into OpenPGP,
 such as where you might be generate FIPS compliant PGP signatures, but not be
-able to use the PGP
+able to use the PGP key ring format for storing the keys.
 
-key ring format for storing the keys.
-
-### OpenPGP Signed Data........................................................................................................................
+### OpenPGP Signed Data
 
 The OpenPGP protocol has a number of packet types which are involved in the
-creation of signed data.
-
-The data itself is stored in a literal-data packet, which can also include a
-file name, or the string
-
-“_CONSOLE” indicating no file name is provided. Literal-data might also be in a
-compressed data
-
-packet. For an equivalent to a CMS encapsulated signature the OpenPGP signed
-data consists of one or
-
-more one-pass-signature packets (which contain header information) before the
-literal-data followed by
-
-one or more signature packets. In the case of a detached signature, the
-signature block will just be one
-
-or more signature packets.
+creation of signed data. The data itself is stored in a literal-data packet,
+which can also include a file name, or the string “_CONSOLE” indicating no file
+name is provided. Literal-data might also be in a compressed data packet. For an
+equivalent to a CMS encapsulated signature the OpenPGP signed data consists of
+one or more one-pass-signature packets (which contain header information) before
+the literal-data followed by one or more signature packets. In the case of a
+detached signature, the signature block will just be one or more signature
+packets.
 
 In the first example we will look at the encapsulated style. After creating an
-appropriate output stream
+appropriate output stream for OpenPGP formatted objects, a signature generator
+is initialized, the one-pass-signature packet is written out to it and then a
+stream from a PGPLiteralDataGenerator is opened on top of the output stream and
+the real data is written out, updating the signature along the way. At the end
+the literal data stream is closed off and the resulting signature is written out
+as an encoding onto the output stream.
 
-for OpenPGP formatted objects, a signature generator is initialized, the
-one-pass-signature packet is
+#### Example 89 – Generating and Verifying a Signed Object
 
-written out to it and then a stream from a PGPLiteralDataGenerator is opened on
-top of the output
-
-stream and the real data is written out, updating the signature along the way.
-At the end the literal data
-
-stream is closed off and the resulting signature is written out as an encoding
-onto the output stream.
-
-#### Example 89 – Generating and Verifying a Signed Object..............................................................
-
-**public static byte** [] createSignedObject(int signingAlg, PGPPrivateKey
-signingKey, **byte** []
-data)
-**throws** PGPException, IOException { ByteArrayOutputStream bOut = **new**
-ByteArrayOutputStream(); BCPGOutputStream bcOut = **new** BCPGOutputStream(bOut)
-;
-
-PGPSignatureGenerator sGen = **new** PGPSignatureGenerator(
-**new** JcaPGPContentSignerBuilder(signingAlg, PGPUtil. **_SHA384_** )
-.setProvider( **"BCFIPS"** ));
-
-sGen.init(PGPSignature. **_BINARY_DOCUMENT_** , signingKey);
-
-sGen.generateOnePassVersion( **false** ).encode(bcOut);
-
-PGPLiteralDataGenerator lGen = **new** PGPLiteralDataGenerator();
-
-OutputStream lOut = lGen.open(
-bcOut, PGPLiteralData. **_BINARY_** ,
-**"_CONSOLE"** , data. **length** ,
-**new** Date());
-
-**for** ( **int** i = 0 ; i != data. **length** ; i++)
-{ lOut.write(data[i]); sGen.update(data[i]); }
-
-lGen.close();
-
-sGen.generate().encode(bcOut);
-
-**return** bOut.toByteArray(); }
-
-**public static boolean** verifySignedObject(PGPPublicKey verifyingKey, **
-byte** [] pgpSignedData)
-**throws** PGPException, IOException { JcaPGPObjectFactory pgpFact = **new**
-JcaPGPObjectFactory(
-pgpSignedData);
-
-PGPOnePassSignatureList onePassList = (PGPOnePassSignatureList)
-pgpFact.nextObject(); PGPOnePassSignature ops = onePassList.get( 0 );
-
-PGPLiteralData literalData = (PGPLiteralData)pgpFact.nextObject(); InputStream
-dIn = literalData.getInputStream();
-
-ops.init( **new** JcaPGPContentVerifierBuilderProvider().setProvider( **"
-BCFIPS"** ), verifyingKey);
-
-**int** ch;
-**while** ((ch = dIn.read()) >= 0 )
-{ ops.update(( **byte** )ch); }
-
-PGPSignatureList sigList = (PGPSignatureList)pgpFact.nextObject(); PGPSignature
-sig = sigList.get(
-0 );
-
-**return** ops.verify(sig); }
+Run `bcfipsin100.cmstsp.Sign.createSignedObject().verifySignedObject()`
 
 Verifying is a similar process, the main difference being that a
-PGPObjectFactory is used to parse the
-
-signed data stream and that list objects are returned when parsing the stream
-where the one-pass-
-
-signature packet and the signature packet are found. At the end the PGPSignature
-object is then passed
-
-to the PGPOnePassSignature for verification. In some ways you can think of the
-PGPSignature object
-
-as being the equivalent to the SignerInformation object in CMS. Note that as the
-verification step is
-
-being carried out using a streaming API the literal-data must be fully read
-before trying to call
-
+PGPObjectFactory is used to parse the signed data stream and that list objects
+are returned when parsing the stream where the one-pass-signature packet and the
+signature packet are found. At the end the PGPSignature object is then passed to
+the PGPOnePassSignature for verification. In some ways you can think of the
+PGPSignature object as being the equivalent to the SignerInformation object in
+CMS. Note that as the verification step is being carried out using a streaming
+API the literal-data must be fully read before trying to call
 pgpFact.nextObject() to return the PGPSignatureList. If the literal-data is not
-fully read the parser will
-
-start reading somewhere in the literal-data packet rather than at the next
-packet boundary. Nothing good
-
-will come of that!
+fully read the parser will start reading somewhere in the literal-data packet
+rather than at the next packet boundary. Nothing good will come of that!
 
 Detached signatures just consist of one or more PGPSignature objects, with the
-data that was signed
+data that was signed assumed to have come from somewhere else. In this case no
+one-pass-signature object is encoded to the stream and the verification step is
+carried out directly on the PGPSignature object.
 
-assumed to have come from somewhere else. In this case no one-pass-signature
-object is encoded to the
+#### Example 90 – Generating and Verifying Detached Signatures
 
-stream and the verification step is carried out directly on the PGPSignature
-object.
+Run `bcfipsin100.cmstsp.Sign.createDetachedSignature().verifyDetachedSignature()`
 
-#### Example 90 – Generating and Verifying Detached Signatures......................................................
-
-**public static byte** [] createDetachedSignature(int signingAlg, PGPPrivateKey
-signingKey, **
-byte** [] data)
-**throws** PGPException, IOException { ByteArrayOutputStream bOut = **new**
-ByteArrayOutputStream();
-
-PGPSignatureGenerator sGen = **new** PGPSignatureGenerator(
-**new** JcaPGPContentSignerBuilder(signingAlg, PGPUtil. **_SHA384_** )
-.setProvider( **"BCFIPS"** )); sGen.init(
-PGPSignature. **_BINARY_DOCUMENT_** , signingKey);
-
-**for** ( **int** i = 0 ; i != data. **length** ; i++)
-{ sGen.update(data[i]); }
-
-sGen.generate().encode(bOut);
-
-**return** bOut.toByteArray(); }
-
-**public static boolean** verifyDetachedSignature(
-PGPPublicKey verifyingKey, **byte** [] pgpSignature, **byte** [] data)
-**throws** PGPException, IOException { JcaPGPObjectFactory pgpFact = **new**
-JcaPGPObjectFactory(
-pgpSignature); PGPSignatureList sigList = (PGPSignatureList)pgpFact.nextObject()
-; PGPSignature sig = sigList.get( 0 );
-
-sig.init( **new** JcaPGPContentVerifierBuilderProvider().setProvider( **"
-BCFIPS"** ), verifyingKey);
-
-sig.update(data);
-
-**return** sig.verify(); }
-
-### OpenPGP Encrypted Data...................................................................................................................
+### OpenPGP Encrypted Data
 
 OpenPGP offers two key encryption methods to add recipients to its encrypted
-data object – recipients
-
-can be either password based or public key based. In terms of public key based
-OpenPGP allows for
-
-key transport style encryption, or the use of key agreement.
+data object – recipients can be either password based or public key based. In
+terms of public key based OpenPGP allows for key transport style encryption, or
+the use of key agreement.
 
 In the first example we will look at one way of constructing an encrypted
-message in OpenPGP using
+message in OpenPGP using RSA. In this case, as well as the two examples after we
+need to know the length of the literal data prior to encryption. There is also a
+variation of the `PGPEncryptedDataGenerator.open()`
+which takes a byte buffer as its argument and allows creation of an encrypted
+data object in a streaming fashion.
 
-RSA. In this case, as well as the two examples after we need to know the length
-of the literal data prior
+#### Example 91 – OpenPGP Encryption using RSA
 
-to encryption. There is also a variation of the PGPEncryptedDataGenerator.open()
-which takes a byte
-
-buffer as its argument and allows creation of an encrypted data object in a
-streaming fashion.
-
-#### Example 91 – OpenPGP Encryption using RSA............................................................................
-
-**public static byte** [] createRsaEncryptedObject(PGPPublicKey
-encryptionKey, **byte** [] data)
-**throws** PGPException, IOException { ByteArrayOutputStream bOut = **new**
-ByteArrayOutputStream(); PGPLiteralDataGenerator lData = **new**
-PGPLiteralDataGenerator();
-
-OutputStream pOut = lData.open(bOut, PGPLiteralData. **_BINARY_** ,
-PGPLiteralData. **_CONSOLE_** , data. **length** ,
-**new** Date()); pOut.write(data);
-
-pOut.close();
-
-**byte** [] plainText = bOut.toByteArray();
-
-ByteArrayOutputStream encOut = **new** ByteArrayOutputStream();
-PGPEncryptedDataGenerator encGen = **new**
-PGPEncryptedDataGenerator(
-**new** JcePGPDataEncryptorBuilder(
-SymmetricKeyAlgorithmTags. **_AES_256_** )
-.setWithIntegrityPacket( **true** )
-.setSecureRandom( **new** SecureRandom())
-.setProvider( **"BCFIPS"** ));
-
-encGen.addMethod( **new** JcePublicKeyKeyEncryptionMethodGenerator(
-encryptionKey)
-.setProvider( **"BCFIPS"** ));
-
-OutputStream cOut = encGen.open(encOut, plainText. **length** ); cOut.write(
-plainText); cOut.close()
-;
-
-**return** encOut.toByteArray(); }
-
-**public static byte** [] extractRsaEncryptedObject(PGPPrivateKey privateKey, **
-byte** []
-pgpEncryptedData)
-**throws** PGPException, IOException { PGPObjectFactory pgpFact = **new**
-JcaPGPObjectFactory(
-pgpEncryptedData); PGPEncryptedDataList encList = (PGPEncryptedDataList)
-pgpFact.nextObject();
-
-// note: we can only do this because we know we match the first encrypted data
-object PGPPublicKeyEncryptedData encData = (PGPPublicKeyEncryptedData)
-encList.get( 0 );
-
-PublicKeyDataDecryptorFactory dataDecryptorFactory = **new**
-JcePublicKeyDataDecryptorFactoryBuilder()
-.setProvider( **"BCFIPS"** ).build(privateKey);
-
-InputStream clear = encData.getDataStream(dataDecryptorFactory);
-**byte** [] literalData = Streams. _readAll_ (clear);
-**if** (encData.verify())
-{ PGPObjectFactory litFact = **new** JcaPGPObjectFactory(literalData);
-PGPLiteralData litData = (
-PGPLiteralData)
-litFact.nextObject();
-**byte** [] data = Streams. _readAll_ (litData.getInputStream());
-**return** data; }
-
-**throw new** IllegalStateException( **"modification check failed"** ); }
+Run `bcfipsin100.cmstsp.Enc.createRsaEncryptedObject().extractRsaEncryptedObject()`
 
 You can apply the same code to use ElGamal as the recipient's encryption key as
 well.
 
 As with signed data, there can be multiple recipients so in the extract method
-you will notice that the
-
-parser returns list objects for the encrypted data. In the case of the example,
-as we know there is just
-
-one recipient, we just grab the first PGPPublicKeyEncryptedData object and use
-that with our
-
-PublicKeyDataDecryptorFactory. PGPPublicKeyEncrytedData objects also store the
-keyID of the
-
-recipient's encryption key – it is accessible via the getKeyID() method. You can
-make use of the keyID
-
-in the situation where there is more than one recipient and you are trying to
-identify which one is
-
-associated with the PGPPrivateKey you have.
+you will notice that the parser returns list objects for the encrypted data. In
+the case of the example, as we know there is just one recipient, we just grab
+the first PGPPublicKeyEncryptedData object and use that with
+our `PublicKeyDataDecryptorFactory.PGPPublicKeyEncrytedData` objects also store
+the keyID of the recipient's encryption key – it is accessible via the
+getKeyID() method. You can make use of the keyID in the situation where there is
+more than one recipient and you are trying to identify which one is associated
+with the PGPPrivateKey you have.
 
 Note also that the example includes a call to setWithIntegrityPacket() with the
-value true. The has two
-
-affects on the encryption. The first is it will include a SHA-1 hash at the end
-of the encrypted data
-
-stream, the second is that it will use regular CFB mode (the same as the FIPS
-one) instead of
-
-OpenPGP's variation on it. The SHA-1 hash is what is checked by the call to
-encData.verify() in the
-
+value true. The has two affects on the encryption. The first is it will include
+a SHA-1 hash at the end of the encrypted data stream, the second is that it will
+use regular CFB mode (the same as the FIPS one) instead of OpenPGP's variation
+on it. The SHA-1 hash is what is checked by the call to encData.verify() in the
 extractRsaEncryptedObject() method.
 
 As of RFC 6637, OpenPGP also offers public key encryption with key agreement
-using Elliptic Curves.
+using Elliptic Curves. You can see these examples are the same as those that are
+presented for RSA keys.
 
-You can see these examples are the same as those that are presented for RSA
-keys.
+#### Example 92 – OpenPGP Encryption using Elliptic Curve
 
-#### Example 92 – OpenPGP Encryption using Elliptic Curve.............................................................
-
-**public static byte** [] createKeyAgreeEncryptedObject(PGPPublicKey
-recipientKey, **byte** [] data)
-**throws** PGPException, IOException { // we save the data to be encrypted in
-PGP format here ByteArrayOutputStream bOut = **new** ByteArrayOutputStream();
-PGPLiteralDataGenerator lData = **
-new** PGPLiteralDataGenerator();
-
-OutputStream pOut = lData.open(bOut, PGPLiteralData. **_BINARY_** ,
-PGPLiteralData. **_CONSOLE_** , data. **length** ,
-**new** Date()); pOut.write(data); pOut.close();
-
-**byte** [] plainText = bOut.toByteArray();
-
-// now we encrypt it ByteArrayOutputStream encOut = **new**
-ByteArrayOutputStream(); PGPEncryptedDataGenerator encGen = **new**
-PGPEncryptedDataGenerator(
-**new** JcePGPDataEncryptorBuilder(
-SymmetricKeyAlgorithmTags. **_AES_256_** )
-.setWithIntegrityPacket( **true** )
-.setSecureRandom( **new** SecureRandom())
-.setProvider( **"BCFIPS"** ));
-
-encGen.addMethod( **new** JcePublicKeyKeyEncryptionMethodGenerator(recipientKey)
-.setProvider( **"
-BCFIPS"** ));
-
-OutputStream cOut = encGen.open(encOut, plainText. **length** ); cOut.write(
-plainText); cOut.close()
-;
-
-**return** encOut.toByteArray(); }
-
-**public static byte** [] extractKeyAgreeEncryptedObject(
-PGPPrivateKey recipientPrivateKey, **byte** [] pgpEncryptedData)
-**throws** PGPException, IOException { PGPObjectFactory pgpFact = **new**
-JcaPGPObjectFactory(
-pgpEncryptedData); PGPEncryptedDataList encList = (PGPEncryptedDataList)
-pgpFact.nextObject();
-
-PGPPublicKeyEncryptedData encData = (PGPPublicKeyEncryptedData)encList.get( 0 );
-
-PublicKeyDataDecryptorFactory dataDecryptorFactory =
-**new** JcePublicKeyDataDecryptorFactoryBuilder()
-.setProvider( **"BCFIPS"** ).build(recipientPrivateKey);
-
-InputStream clear = encData.getDataStream(dataDecryptorFactory);
-**byte** [] literalData = Streams. _readAll_ (clear);
-**if** (encData.verify())
-{ PGPObjectFactory litFact = **new** JcaPGPObjectFactory(literalData);
-PGPLiteralData litData = (
-PGPLiteralData)
-litFact.nextObject();
-**byte** [] data = Streams. _readAll_ (litData.getInputStream());
-**return** data; }
-
-**throw new** IllegalStateException( **"modification check failed"** ); }
+Run `bcfipsin100.cmstsp.Enc.createKeyAgreeEncryptedObject().extractKeyAgreeEncryptedObject()`
 
 Finally OpenPGP also provides the capability for using a password to encrypt
-data. There is nothing
-
-FIPS compliant about the password-to-key scheme here, but you will run into
-password encrypted
-
-OpenPGP data every now and then. Using a password is very similar to a public
-key in other respects,
-
-the only difference is the use of a different key encryption method object – in
-this case the
-
+data. There is nothing FIPS compliant about the password-to-key scheme here, but
+you will run into password encrypted OpenPGP data every now and then. Using a
+password is very similar to a public key in other respects, the only difference
+is the use of a different key encryption method object – in this case the
 JcePBEKeyEncryptionMethodGenerator.
 
-#### Example 93 – OpenPGP Encryption using a Password..................................................................
+#### Example 93 – OpenPGP Encryption using a Password
 
-**public static byte** [] createPbeEncryptedObject( **char** [] passwd, **
-byte** [] data)
-**throws** PGPException, IOException { ByteArrayOutputStream bOut = **new**
-ByteArrayOutputStream(); PGPLiteralDataGenerator lData = **new**
-PGPLiteralDataGenerator();
-
-OutputStream pOut = lData.open(bOut, PGPLiteralData. **_BINARY_** ,
-PGPLiteralData. **_CONSOLE_** , data. **length** ,
-**new** Date()); pOut.write(data); pOut.close();
-
-**byte** [] plainText = bOut.toByteArray();
-
-ByteArrayOutputStream encOut = **new** ByteArrayOutputStream();
-PGPEncryptedDataGenerator encGen = **new**
-PGPEncryptedDataGenerator(
-**new** JcePGPDataEncryptorBuilder(
-SymmetricKeyAlgorithmTags. **_AES_256_** )
-.setWithIntegrityPacket( **true** )
-.setSecureRandom( **new** SecureRandom())
-.setProvider( **"BCFIPS"** ));
-
-encGen.addMethod( **new** JcePBEKeyEncryptionMethodGenerator(passwd)
-.setProvider( **"BCFIPS"** ));
-
-OutputStream cOut = encGen.open(encOut, plainText. **length** ); cOut.write(
-plainText); cOut.close()
-;
-
-**return** encOut.toByteArray(); }
-
-**public static byte** [] extractPbeEncryptedObject( **char** [] passwd, **
-byte** []
-pgpEncryptedData)
-**throws** PGPException, IOException { PGPObjectFactory pgpFact = **new**
-JcaPGPObjectFactory(
-pgpEncryptedData); PGPEncryptedDataList encList = (PGPEncryptedDataList)
-pgpFact.nextObject(); PGPPBEEncryptedData encData = (
-PGPPBEEncryptedData)encList.get( 0 );
-
-PBEDataDecryptorFactory dataDecryptorFactory = **new**
-JcePBEDataDecryptorFactoryBuilder(
-**new** JcaPGPDigestCalculatorProviderBuilder()
-.setProvider( **"BCFIPS"** ).build())
-.setProvider( **"BCFIPS"** ).build(passwd);
-
-InputStream clear = encData.getDataStream(dataDecryptorFactory);
-**byte** [] literalData = Streams. _readAll_ (clear);
-**if** (encData.verify())
-{ PGPObjectFactory litFact = **new** JcaPGPObjectFactory(literalData);
-PGPLiteralData litData = (
-PGPLiteralData)
-litFact.nextObject();
-**byte** [] data = Streams. _readAll_ (litData.getInputStream());
-**return** data; }
-
-**throw new** IllegalStateException( **"modification check failed"** ); }
+Run `bcfipsin100.cmstsp.Enc.createPbeEncryptedObject().extractPbeEncryptedObject()`
 
 The OpenPGP format is very flexible in terms of how it allows messages to be put
-together so they are
-
-easy to nest. In the case of trying to sign and then encrypt data all that is
-required is to nest a signed
-
-data message inside an encrypted one. In this final example we create a signed
-message which is then
-
+together so they are easy to nest. In the case of trying to sign and then
+encrypt data all that is required is to nest a signed data message inside an
+encrypted one. In this final example we create a signed message which is then
 encrypted.
 
-#### Example 94 – Using Signing and Encryption together with OpenPGP.........................................
+#### Example 94 – Using Signing and Encryption together with OpenPGP
 
-**public static byte** [] createSignedEncryptedObject(
-PGPPublicKey encryptionKey, PGPPrivateKey signingKey, **byte** [] data)
-**throws** PGPException, IOException {
-**byte** [] plainText = Sign. _createSignedObject_ (PublicKeyAlgorithmTags. **_
-ECDSA_** , signingKey, data);
-
-ByteArrayOutputStream encOut = **new** ByteArrayOutputStream();
-
-PGPEncryptedDataGenerator encGen = **new** PGPEncryptedDataGenerator(
-**new** JcePGPDataEncryptorBuilder(SymmetricKeyAlgorithmTags. **_AES_256_** )
-.setWithIntegrityPacket( **true** )
-.setSecureRandom( **new** SecureRandom())
-.setProvider( **"BCFIPS"** ));
-
-encGen.addMethod( **new** JcePublicKeyKeyEncryptionMethodGenerator(
-encryptionKey)
-.setProvider( **"BCFIPS"** )); OutputStream cOut = encGen.open(encOut,
-plainText. **length** ); cOut.write(plainText); cOut.close();
-
-**return** encOut.toByteArray(); }
-
-**public static boolean** verifySignedEncryptedObject(
-PGPPrivateKey decryptionKey, PGPPublicKey verificationKey, **byte** []
-pgpEncryptedData)
-**throws** PGPException, IOException { PGPObjectFactory pgpFact = **new**
-JcaPGPObjectFactory(
-pgpEncryptedData); PGPEncryptedDataList encList = (PGPEncryptedDataList)
-pgpFact.nextObject(); PGPPublicKeyEncryptedData encData = (
-PGPPublicKeyEncryptedData)encList.get( 0 ); PublicKeyDataDecryptorFactory
-dataDecryptorFactory =
-**new** JcePublicKeyDataDecryptorFactoryBuilder().setProvider( **"BCFIPS"** )
-.build(decryptionKey);
-
-InputStream clear = encData.getDataStream(dataDecryptorFactory);
-**byte** [] signedData = Streams. _readAll_ (clear);
-**if** (encData.verify())
-{
-**return** Sign. _verifySignedObject_ (verificationKey, signedData); }
-
-**throw new** IllegalStateException( **"modification check failed"** ); }
+Run `bcfipsin100.cmstsp.Enc.createSignedEncryptedObject().verifySignedEncryptedObject()`
 
 Note that often you will find the signed message is actually nested inside a
-compressed one as well, and
+compressed one as well, and sometimes, if you are accepting messages from
+multiple parties, it might be sometimes compressed, sometimes not.
 
-sometimes, if you are accepting messages from multiple parties, it might be
-sometimes compressed,
-
-sometimes not.
-
-## TLS...........................................................................................................................................................
+## TLS
 
 The main high level API for TLS in Java is the JSSE which follows a similar
-pattern to the JCA/JCE in
-
-the respect that it is also provider based. The standard JSSE provider also has
-a FIPS mode in which
-
-case it will guarantee to only get its cryptographic service classes from a
-specified provider, regardless
-
+pattern to the JCA/JCE in the respect that it is also provider based. The
+standard JSSE provider also has a FIPS mode in which case it will guarantee to
+only get its cryptographic service classes from a specified provider, regardless
 of what might be configured in terms of available providers or provider
 priority.
 
 To use the JSSE in FIPS mode, you can either configure a provider for the JSSE
-in the java.security file
-
-or pass the name of the provider, or an actual provider, as a constructor
-argument to the JSSE provider
-
-when you are setting it up at execution time. In the case of the java.security
-file for the JVM, the BC
-
+in the java.security file or pass the name of the provider, or an actual
+provider, as a constructor argument to the JSSE provider when you are setting it
+up at execution time. In the case of the java.security file for the JVM, the BC
 FIPS Java provider can be configured by including the line:
 
-security.provider.X=com.sun.net.ssl.internal.ssl.Provider BCFIPS
+`security.provider.X=com.sun.net.ssl.internal.ssl.Provider BCFIPS`
 
 Where X is the priority of the JSSE provider.
 
 Otherwise you can add the JSSE provider explicitly at execution time by
 including something like:
 
-Security. _addProvider_ ( **new** com.sun.net.ssl.internal.ssl.Provider( **"
-BCFIPS"** ));
+`Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider("BCFIPS"));`
 
 inside your code.
 
-### Utility Methods for the Examples.......................................................................................................
+### Utility Methods for the Examples
 
 There is a bit of plumbing required to get a TLS client or server up and
-running, so in this case we have
+running, so in this case we have defined a utility class that contains a few
+things to make our examples simpler.
 
-defined a utility class that contains a few things to make our examples simpler.
-
-**public class** Util {
-**public interface** BlockingCallable
-**extends** Callable {
-**void** await() **throws** InterruptedException; }
-
-**public static class** Task
-**implements** Runnable {
-**private final** Callable **callable** ;
-**public** Task(Callable callable)
-{
-**this**. **callable** = callable; }
-**public void** run()
-{
-**try**
-{
-**callable** .call(); }
-**catch** (Exception e)
-{ e.printStackTrace(System. **_err_** );
-**if** (e.getCause() != **null** )
-{ e.getCause().printStackTrace(System. **_err_** ); } } }
-
-##### }
-
-**public static void** runClientAndServer(BlockingCallable server,
-BlockingCallable client)
-**throws** InterruptedException {
-**new** Thread( **new** Util.Task(server)).start(); server.await();
-**new** Thread( **new** Util.Task(client)).start(); client.await(); }
-
-**public static void** doClientProtocol(
-Socket sock, String text)
-**throws** IOException { OutputStream out = sock.getOutputStream(); InputStream
-in = sock.getInputStream(); out.write(
-Strings. _toByteArray_ (text)); out.write( **'!'** );
-**int** ch = 0 ;
-**while** ((ch = in.read()) != **'!'** )
-{ System. **_out_** .print(( **char** )ch); } System. **_out_** .println(( **
-char** )ch); }
-
-**public static void** doServerProtocol(
-Socket sock, String text)
-**throws** IOException { OutputStream out = sock.getOutputStream(); InputStream
-in = sock.getInputStream();
-**int** ch = 0 ;
-**while** ((ch = in.read()) != **'!'** )
-{ System. **_out_** .print(( **char** )ch); } out.write(Strings. _toByteArray_ (
-text)); out.write( **'!'** ); System. **_out_** .println(( **char** )ch); } }
+Run `bcfipsin100.tls.Util`
 
 You will note the utility class makes use of a CountDownLatch – this is not
-necessarily required by
-
-using TLS, in our case it is there so that it is possible to synchronize the
-client and server examples in
-
-the same JVM so they can be run using the Util.runClientAndServer() method.
-You'll see that the latch
-
+necessarily required by using TLS, in our case it is there so that it is
+possible to synchronize the client and server examples in the same JVM so they
+can be run using the Util.runClientAndServer() method. You'll see that the latch
 is triggered by either the client or the server when it is safe for anyone that
-may be waiting on them to
+may be waiting on them to proceed.
 
-proceed.
-
-### The Basics...........................................................................................................................................
+### The Basics
 
 The first bridge to cross with TLS is just to get a client running that will
-recognize a server and a server
-
-that can identify itself.
+recognize a server and a server that can identify itself.
 
 The JSSE uses the KeyManager and TrustManager classes for dealing with these two
-issues.
-
-Essentially a KeyManager provides a connection with any credentials it might
-need to identify itself
-
-with, and a TrustManager provides a connection with a mechanism for validating
-the credentials
-
-presented the by the other end of the connection.
+issues. Essentially a KeyManager provides a connection with any credentials it might
+need to identify itself with, and a TrustManager provides a connection with a mechanism for validating
+the credentials presented the by the other end of the connection.
 
 Both KeyManager and TrustManager classes can be produced by factories which are
-provided in the
-
-same manner as other JCE/JCA objects, by the use of getInstance() methods,
+provided in the same manner as other JCE/JCA objects, by the use of getInstance() methods,
 rather than constructors.
 
 The simplest way to initialize them is with KeyStore objects. The standard
