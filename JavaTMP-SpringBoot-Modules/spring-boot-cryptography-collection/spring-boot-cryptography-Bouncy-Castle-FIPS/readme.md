@@ -2073,925 +2073,259 @@ The first bridge to cross with TLS is just to get a client running that will
 recognize a server and a server that can identify itself.
 
 The JSSE uses the KeyManager and TrustManager classes for dealing with these two
-issues. Essentially a KeyManager provides a connection with any credentials it might
-need to identify itself with, and a TrustManager provides a connection with a mechanism for validating
-the credentials presented the by the other end of the connection.
+issues. Essentially a KeyManager provides a connection with any credentials it
+might need to identify itself with, and a TrustManager provides a connection
+with a mechanism for validating the credentials presented the by the other end
+of the connection.
 
 Both KeyManager and TrustManager classes can be produced by factories which are
-provided in the same manner as other JCE/JCA objects, by the use of getInstance() methods,
-rather than constructors.
-
-The simplest way to initialize them is with KeyStore objects. The standard
-TrustManager is based on
-
-the use of the PKIX certificate path API as well, so it is also possible to
-initialize the JSSE PKIX
-
-TrustManager using PKIXBuilderParameters via the init() method taking
+provided in the same manner as other JCE/JCA objects, by the use of
+getInstance() methods, rather than constructors. The simplest way to initialize
+them is with KeyStore objects. The standard TrustManager is based on the use of
+the PKIX certificate path API as well, so it is also possible to initialize the
+JSSE PKIX TrustManager using PKIXBuilderParameters via the init() method taking
 ManagerFactoryParameters.
 
 In our first two examples we look at the basic client which needs to identify a
-server, and a basic server
-
-which needs to be able to identify itself to the client.
+server, and a basic server which needs to be able to identify itself to the
+client.
 
 For the client case, we need a TrustManager to be associated with the connection
-so we can identify the
+so we can identify the server. In this case we initialize a TrustManagerFactory
+object using a KeyStore which contains the server certificate and then
+initialize an SSLContext object with the TrustManagers produced by the factory,
+and a SecureRandom (in this case the FIPS provider default one).
 
-server. In this case we initialize a TrustManagerFactory object using a KeyStore
-which contains the
+#### Example 95 – A Basic TLS Client
 
-server certificate and then initialize an SSLContext object with the
-TrustManagers produced by the
-
-factory, and a SecureRandom (in this case the FIPS provider default one).
-
-#### Example 95 – A Basic TLS Client..................................................................................................
-
-**public class** SimpleClient
-**implements** Util.BlockingCallable {
-**private final** KeyStore **trustStore** ;
-**private final** CountDownLatch **latch** ;
-
-**public** SimpleClient(KeyStore trustStore)
-{
-**this**. **trustStore** = trustStore;
-**this**. **latch** = **new** CountDownLatch( 1 ); }
-
-**public** Object call()
-**throws** Exception { TrustManagerFactory trustMgrFact = TrustManagerFactory. _
-getInstance_ ( **"
-SunX509"** ); trustMgrFact.init( **trustStore** );
-
-SSLContext clientContext = SSLContext. _getInstance_ ( **"TLS"** );
-clientContext.init( **null** , trustMgrFact.getTrustManagers(), SecureRandom. _
-getInstance_ ( **"DEFAULT"** , **"BCFIPS"** ));
-
-SSLSocketFactory fact = clientContext.getSocketFactory(); SSLSocket cSock = (
-SSLSocket)
-fact.createSocket( **_HOST_**
-, **_PORT_NO_** ); Util. _doClientProtocol_ (cSock, **"Hello"** );
-
-// signal we are finished
-**latch** .countDown();
-**return null** ; }
-
-**public void** await()
-**throws** InterruptedException {
-**latch** .await(); } }
+Run `bcfipsin100.tls.Simple.SimpleClient`
 
 For the server case, the server needs to be able to identify itself, so we need
-a KeyManager to be
-
-associated with the connection so we can prove we are what we say we are to a
-client. So in this case
-
-we initialize a KeyManagerFactory with a KeyStore and the password needed to
-recover the private
-
-key and then we use the KeyManager produced by the factory to initialize an
-SSLContext object.
+a KeyManager to be associated with the connection so we can prove we are what we
+say we are to a client. So in this case we initialize a KeyManagerFactory with a
+KeyStore and the password needed to recover the private key and then we use the
+KeyManager produced by the factory to initialize an SSLContext object.
 
 #### Example 96 – A Basic TLS Server.................................................................................................
 
-**public class** SimpleServer
-**implements** Util.BlockingCallable {
-**private final** KeyStore **serverStore** ;
-**private final char** [] **keyPass** ;
-**private final** CountDownLatch **latch** ;
-
-**public** SimpleServer(KeyStore serverStore, **char** [] keyPass)
-{
-**this**. **serverStore** = serverStore;
-**this**. **keyPass** = keyPass;
-**this**. **latch** = **new** CountDownLatch( 1 ); }
-
-**public** Object call()
-**throws** Exception { KeyManagerFactory keyMgrFact = KeyManagerFactory. _
-getInstance_ ( **"
-SunX509"** ); keyMgrFact.init( **serverStore** , **keyPass** );
-
-SSLContext serverContext = SSLContext. _getInstance_ ( **"TLS"** );
-serverContext.init(
-keyMgrFact.getKeyManagers(), **null** , SecureRandom. _getInstance_ ( **"
-DEFAULT"** , **"
-BCFIPS"** ));
-
-SSLServerSocketFactory fact = serverContext.getServerSocketFactory();
-SSLServerSocket sSock = (
-SSLServerSocket)
-fact.createServerSocket( **_PORT_NO_** );
-
-// signal we are up and running
-**latch** .countDown();
-
-SSLSocket sslSock = (SSLSocket)sSock.accept(); Util. _doServerProtocol_ (
-sslSock, **"World"** );
-
-**return null** ; }
-
-**public void** await()
-**throws** InterruptedException {
-**latch** .await(); } }
+Run `bcfipsin100.tls.Simple.SimpleServer`
 
 You can run these two in the same JVM using the Util.runClientAndServer()
-method. The use of the
+method. The use of the CountDownLatches will keep everything in sync. If all
+goes well you will be greeted with the strings “Hello!” and “World!” and then
+the process will exit.
 
-CountDownLatches will keep everything in sync. If all goes well you will be
-greeted with the strings
-
-“Hello!” and “World!” and then the process will exit.
-
-### Client Authentication...........................................................................................................................
+### Client Authentication
 
 So can we follow the same principals to implement client authentication as well?
 The answer is yes.
 
 The first thing we need to do is provide the client with a means of identifying
-itself. As we have already
-
-seen in the JSSE that involves the use of a KeyManager, so the first difference
-you will notice between
-
-this example and the previous client example is that there is a client KeyStore
-and a client key
-
+itself. As we have already seen in the JSSE that involves the use of a
+KeyManager, so the first difference you will notice between this example and the
+previous client example is that there is a client KeyStore and a client key
 password handed to the constructor. The second difference you will notice is
-that a
-
-KeyManagerFactory is created using these and the resulting KeyManager is passed
-to the SSLContext
-
-object.
+that a KeyManagerFactory is created using these and the resulting KeyManager is
+passed to the SSLContext object.
 
 The result of this is a context which can be used to create an SSLSocketFactory
-which is capable of
+which is capable of both identifying itself to the other end point, as well as
+having some means of identifying the other end point.
 
-both identifying itself to the other end point, as well as having some means of
-identifying the other end
+#### Example 97 – A TLS Client with Client Authentication
 
-point.
-
-#### Example 97 – A TLS Client with Client Authentication................................................................
-
-**public class** ClientAuthClient
-**implements** Util.BlockingCallable {
-**private final** KeyStore **trustStore** ;
-**private final** KeyStore **clientStore** ;
-**private final char** [] **clientKeyPass** ;
-**private final** CountDownLatch **latch** ;
-
-**public** ClientAuthClient(KeyStore trustStore, KeyStore clientStore, **
-char** [] clientKeyPass)
-{
-**this**. **trustStore** = trustStore;
-**this**. **clientStore** = clientStore;
-**this**. **clientKeyPass** = clientKeyPass;
-**this**. **latch** = **new** CountDownLatch( 1 ); }
-
-**public** Object call()
-**throws** Exception { TrustManagerFactory trustMgrFact = TrustManagerFactory. _
-getInstance_ ( **"
-SunX509"** ); trustMgrFact.init( **trustStore** );
-
-KeyManagerFactory keyMgrFact = KeyManagerFactory. _getInstance_ ( **"
-SunX509"** ); keyMgrFact.init( **clientStore** , **
-clientKeyPass** );
-
-SSLContext clientContext = SSLContext. _getInstance_ ( **"TLS"** );
-clientContext.init(
-keyMgrFact.getKeyManagers(), trustMgrFact.getTrustManagers(), SecureRandom. _
-getInstance_ ( **"
-DEFAULT"** , **"BCFIPS"** ));
-
-SSLSocketFactory fact = clientContext.getSocketFactory(); SSLSocket cSock = (
-SSLSocket)
-fact.createSocket( **_HOST_**
-, **_PORT_NO_** ); Util. _doClientProtocol_ (cSock, **"Hello"** );
-
-// signal we are finished
-**latch** .countDown();
-
-**return null** ; }
-
-**public void** await()
-**throws** InterruptedException {
-**latch** .await(); } }
+Run `bcfipsin100.tls.ClientAuth.ClientAuthClient`
 
 The server was already identifying itself, but was not previously trying to
-identify a client, so as you
-
-would expect by now, we need to add the use of a TrustManager to the server
-side, and we also need to
-
-tell the server that we expect the client to authenticate itself.
+identify a client, so as you would expect by now, we need to add the use of a
+TrustManager to the server side, and we also need to tell the server that we
+expect the client to authenticate itself.
 
 As the client did originally, we now pass the server a KeyStore that serves as a
-trust store for the
-
-credentials presented by the other end point (in this case the client), and we
-add the use of a
-
-TrustManagerFactory which is used to produce TrustManagers for the SSLContext
-associated with the
-
-connections the server is creating.
+trust store for the credentials presented by the other end point (in this case
+the client), and we add the use of a TrustManagerFactory which is used to
+produce TrustManagers for the SSLContext associated with the connections the
+server is creating.
 
 Finally, we tell the server to expect the client credentials and we do this by
-calling
+calling SSLServerSocket.setNeedClientAuth() with the parameter value true.
 
-SSLServerSocket.setNeedClientAuth() with the parameter value true.
+#### Example 98 – A TLS Server with Client Authentication
 
-#### Example 98 – A TLS Server with Client Authentication................................................................
-
-**public class** ClientAuthServer
-**implements** Util.BlockingCallable {
-**private final** KeyStore **serverStore** ;
-**private final char** [] **keyPass** ;
-**private final** KeyStore **trustStore** ;
-**private final** CountDownLatch **latch** ;
-
-**public** ClientAuthServer(KeyStore serverStore, **char** [] keyPass, KeyStore
-trustStore)
-{
-**this**. **serverStore** = serverStore;
-**this**. **keyPass** = keyPass;
-**this**. **trustStore** = trustStore;
-**this**. **latch** = **new** CountDownLatch( 1 ); }
-
-**public** Object call()
-**throws** Exception { KeyManagerFactory keyMgrFact = KeyManagerFactory. _
-getInstance_ ( **"
-SunX509"** ); keyMgrFact.init( **serverStore** , **keyPass** );
-
-TrustManagerFactory trustMgrFact = TrustManagerFactory. _getInstance_ ( **"
-SunX509"** ); trustMgrFact.init( **
-trustStore** );
-
-SSLContext serverContext = SSLContext. _getInstance_ ( **"TLS"** );
-serverContext.init(
-keyMgrFact.getKeyManagers(), trustMgrFact.getTrustManagers(), SecureRandom. _
-getInstance_ ( **"
-DEFAULT"** , **"BCFIPS"** )); SSLServerSocketFactory fact =
-serverContext.getServerSocketFactory();
-
-SSLServerSocket sSock = (SSLServerSocket)fact.createServerSocket( **_
-PORT_NO_** ); sSock.setNeedClientAuth( **true** );
-
-// signal we are up and running
-**latch** .countDown();
-
-SSLSocket sslSock = (SSLSocket)sSock.accept(); Util. _doServerProtocol_ (
-sslSock, **"World"** ); sslSock.close();
-
-**return null** ; }
-
-**public void** await()
-**throws** InterruptedException {
-**latch** .await(); } }
+Run `bcfipsin100.tls.ClientAuth.ClientAuthServer`
 
 It is worth noting the setNeedClientAuth() method has the effect of making
-client authentication
-
-compulsory. Sometimes this is not desirable and you may have some services which
-are available to all
-
-clients, even anonymous ones, and some which are restricted according to who the
-client is. In that case
-
-you can use SSLServerSocker.setWantClientAuth() to tell the server socket that
-it should make use of
-
-client authentication where it is available, but require all clients to provide
-it.
+client authentication compulsory. Sometimes this is not desirable and you may
+have some services which are available to all clients, even anonymous ones, and
+some which are restricted according to who the client is. In that case you can
+use SSLServerSocker.setWantClientAuth() to tell the server socket that it should
+make use of client authentication where it is available, but require all clients
+to provide it.
 
 A common way to use TLS from a Java client is via the URL class in java.net
-using
+using URL.openConnection(). If we want to make use of one of these we also need
+a way of telling the underlying connection to make use of our TLS settings.
+Doing this normally requires two things:configuring a specific socket factory to
+use and providing a mechanism for verifying the hostname presented to the
+client. We have already seen how to create an SSLSocketFactory from an
+SSLContext configured for client authentication and happily there is a method on
+HttpsURLConnection (the object type returned by URL.openConnection() when the
+HTTPS protocol is specified which allows us to set the SSLSocketFactory to use –
+setSSLSocketFactory(). Hostname verification is a little bit different and
+requires us to provide our own implementation of the HostnameVerifier interface.
+A simple one is provided in a private class at the bottom of the example.
 
-URL.openConnection(). If we want to make use of one of these we also need a way
-of telling the
+#### Example 99 – TLS Authenticated Client Using HttpsURLConnection
 
-underlying connection to make use of our TLS settings. Doing this normally
-requires two things:
-
-configuring a specific socket factory to use and providing a mechanism for
-verifying the hostname
-
-presented to the client. We have already seen how to create an SSLSocketFactory
-from an SSLContext
-
-configured for client authentication and happily there is a method on
-HttpsURLConnection (the object
-
-type returned by URL.openConnection() when the HTTPS protocol is specified which
-allows us to set
-
-the SSLSocketFactory to use – setSSLSocketFactory(). Hostname verification is a
-little bit different
-
-and requires us to provide our own implementation of the HostnameVerifier
-interface. A simple one is
-
-provided in a private class at the bottom of the example.
-
-#### Example 99 – TLS Authenticated Client Using HttpsURLConnection.........................................
-
-**public class** HttpsAuthClient
-**implements** Util.BlockingCallable {
-**private final** KeyStore **trustStore** ;
-**private final** KeyStore **clientStore** ;
-**private final char** [] **clientKeyPass** ;
-**private final** CountDownLatch **latch** ;
-
-**public** HttpsAuthClient(KeyStore trustStore, KeyStore clientStore, **
-char** [] clientKeyPass)
-{
-**this**. **trustStore** = trustStore;
-**this**. **clientStore** = clientStore;
-**this**. **clientKeyPass** = clientKeyPass;
-**this**. **latch** = **new** CountDownLatch( 1 ); }
-
-**public** Object call()
-**throws** Exception { TrustManagerFactory trustMgrFact = TrustManagerFactory. _
-getInstance_ ( **"
-SunX509"** ); trustMgrFact.init( **trustStore** );
-
-KeyManagerFactory keyMgrFact = KeyManagerFactory. _getInstance_ ( **"
-SunX509"** ); keyMgrFact.init( **clientStore** , **
-clientKeyPass** );
-
-SSLContext clientContext = SSLContext. _getInstance_ ( **"TLS"** );
-clientContext.init(
-keyMgrFact.getKeyManagers(), trustMgrFact.getTrustManagers(), SecureRandom. _
-getInstance_ ( **"
-DEFAULT"** , **"BCFIPS"** )); SSLSocketFactory fact =
-clientContext.getSocketFactory();
-
-URL url = **new** URL( **"https://"** + **_HOST_** + **":"** + **_PORT_NO_** );
-HttpsURLConnection httpsConnection = (
-HttpsURLConnection)url.openConnection(); httpsConnection.setSSLSocketFactory(
-fact); httpsConnection.setHostnameVerifier( **new** LocalHostVerifier());
-httpsConnection.connect();
-
-InputStream in = httpsConnection.getInputStream();
-**int** ch;
-**while** ((ch = in.read()) >= 0 )
-{ System. **_out_** .print(( **char** )ch); }
-
-// signal we are finished
-**latch** .countDown();
-
-**return null** ; }
-
-**public void** await()
-**throws** InterruptedException {
-**latch** .await(); }
-
-**private class** LocalHostVerifier
-**implements** HostnameVerifier {
-**public boolean** verify(String hostName, SSLSession session)
-{
-**try**
-{ X500Principal hostID = (X500Principal)session.getPeerPrincipal();
-**return** hostName.equals( **"localhost"** ) && hostID.getName().equals( **"
-CN=Issuer CA"** ); }
-**catch** (Exception e)
-{
-**return false** ; } } } }
+Run `bcfipsin100.tls.HttpsWithClientAuth.HttpsAuthClient`
 
 As you can see things only start looking different when we get to the process of
-open the URL and then
-
-configuring the HttpsURLConnection. As we are now using the URL handler we are
-no longer dealing
-
-with the socket directly, but getting back an InputStream.
+open the URL and then configuring the HttpsURLConnection. As we are now using
+the URL handler we are no longer dealing with the socket directly, but getting
+back an InputStream.
 
 Also as we are talking HTTP things are not quite the same as before for the
-server either – there is no
+server either – there is no change to the TLS related code but we need some code
+that will send back a HTTP response.
 
-change to the TLS related code but we need some code that will send back a HTTP
-response.
+#### Example 100 – TLS Server for Client Using HttpsURLConnection
 
-#### Example 100 – TLS Server for Client Using HttpsURLConnection.............................................
-
-**public static class** HttpsAuthServer
-**implements** Util.BlockingCallable {
-**private final** KeyStore **serverStore** ;
-**private final char** [] **keyPass** ;
-**private final** KeyStore **trustStore** ;
-**private final** CountDownLatch **latch** ;
-
-HttpsAuthServer(KeyStore serverStore, **char** [] keyPass, KeyStore trustStore)
-{
-**this**. **serverStore** = serverStore;
-**this**. **keyPass** = keyPass;
-**this**. **trustStore** = trustStore;
-**this**. **latch** = **new** CountDownLatch( 1 ); }
-
-**public** Object call()
-**throws** Exception { KeyManagerFactory keyMgrFact = KeyManagerFactory. _
-getInstance_ ( **"
-SunX509"** ); keyMgrFact.init( **serverStore** , **keyPass** );
-
-TrustManagerFactory trustMgrFact = TrustManagerFactory. _getInstance_ ( **"
-SunX509"** ); trustMgrFact.init( **
-trustStore** );
-
-SSLContext serverContext = SSLContext. _getInstance_ ( **"TLS"** );
-serverContext.init(
-keyMgrFact.getKeyManagers(), trustMgrFact.getTrustManagers(), SecureRandom. _
-getInstance_ ( **"
-DEFAULT"** , **"BCFIPS"** ));
-
-SSLServerSocketFactory fact = serverContext.getServerSocketFactory();
-SSLServerSocket sSock = (
-SSLServerSocket)
-fact.createServerSocket( **_PORT_NO_** ); sSock.setNeedClientAuth( **true** );
-
-// signal we are up and running
-**latch** .countDown();
-
-SSLSocket sslSock = (SSLSocket)sSock.accept();
-
-_readRequest_ (sslSock.getInputStream());
-_sendResponse_ (sslSock.getOutputStream());
-
-sslSock.close();
-
-**return null** ; }
-
-**public void** await()
-**throws** InterruptedException {
-**latch** .await(); }
-
-**private static** String readLine(InputStream in)
-**throws** IOException { StringBuilder bld = **new** StringBuilder();
-**int** ch;
-**while** ((ch = in.read()) >= 0 && (ch != **'\n'** ))
-{
-**if** (ch != **'\r'** )
-bld.append(( **char** )ch); }
-**return** bld.toString(); }
-
-**private static void** readRequest(
-InputStream in)
-**throws** IOException { String line = _readLine_ (in);
-**while** (line.length() != 0 )
-{ System. **_out_** .println( **"Request: "** + line); line = _readLine_ (in); }
-}
-
-**private static void** sendResponse(
-OutputStream out)
-{ PrintWriter pWrt = **new** PrintWriter( **new** OutputStreamWriter(out));
-pWrt.print( **"HTTP/1.1 200 OK\r\n"** ); pWrt.print( **"Content-Type:
-text/plain\r\n"** ); pWrt.print( **"\r\n"** ); pWrt.print( **"Hello World!
-\r\n"** ); pWrt.flush(); } }
+Run `bcfipsin100.tls.HttpsWithClientAuth.HttpsAuthServer`
 
 You can see how there has been a slight change in the way the input/output is
-done on the SSLSocket
-
-created in the server. While this is not a cryptography related change, a
-failure to take it into account
-
-will result in exceptions and a reminder that even if the cryptography is
-correct, the application of it
-
-might not be.
+done on the SSLSocket created in the server. While this is not a cryptography
+related change, a failure to take it into account will result in exceptions and
+a reminder that even if the cryptography is correct, the application of it might
+not be.
 
 I hope all this has been some help!
 
-## Appendix A – An Introduction to the BC ASN.1 API..............................................................................
+## Appendix A – An Introduction to the BC ASN.1 API
 
 The Bouncy Castle APIs have had their own ASN.1 library since there original
-inception. The core
-
-classes are in the org.bouncycastle.asn1 package and these are common between
-both the BC FIPS Java
-
-API and the regular BC Java API. Originally the ASN.1 package was just for
-processing small objects
-
-like signature and digital certificates and relied mainly on the use of fixed
-length encoding, primarily
-
-DER. With the introduction of the streaming API for CMS about 7 years ago, it
-was necessary to
-
-properly follow BER.
+inception. The core classes are in the org.bouncycastle.asn1 package and these
+are common between both the BC FIPS Java API and the regular BC Java API.
+Originally the ASN.1 package was just for processing small objects like
+signature and digital certificates and relied mainly on the use of fixed length
+encoding, primarily DER. With the introduction of the streaming API for CMS
+about 7 years ago, it was necessary to properly follow BER.
 
 The idea of this appendix is to give a quick insight into ASN.1 and how it
-relates to what we normally
-
-do in the Bouncy Castle APIs. The appendix is not really about ASN.1 per se, and
-we recommend
-
-looking at “A Layman's Guide to a Subset of ASN.1, BER, and DER” by Burton S.
-Kaliski Jr. if you
-
-wish to brush up, but the appendix will give you an idea how the parser and
-encoders provided in
-
+relates to what we normally do in the Bouncy Castle APIs. The appendix is not
+really about ASN.1 per se, and we recommend looking at “A Layman's Guide to a
+Subset of ASN.1, BER, and DER” by Burton S. Kaliski Jr. if you wish to brush up,
+but the appendix will give you an idea how the parser and encoders provided in
 Bouncy Castle see the world and why.
 
-### ASN.1 Encoding..................................................................................................................................
+### ASN.1 Encoding
 
 The BC APIs provide direct support for encoding using DER (Distinguished
-Encoding Rules) and BER
-
-(Basic Encoding Rules). DER encoding is a subset of BER.
+Encoding Rules) and BER (Basic Encoding Rules). DER encoding is a subset of BER.
 
 BER also allows for both indefinite-length and definite-length encodings.
 Indefinite-length encodings
 
 are those where the length of the final output is not known before hand. With a
-definite-length encoding
-
-you will know to the byte how much output there will be. Indefinite-length
-encodings are useful for
-
-large objects – the streaming CMS API relies on these – as you they also let you
-process more data than
-
-you can hold in memory. An example of an indefinite length object is the
-BEROctetString, which will
-
-encode as a constructed OCTET STRING – basically a stream of definite-length
-octet strings
-
-representing parts of the actual data followed by the end marker of two zero
-value bytes.
+definite-length encoding you will know to the byte how much output there will
+be. Indefinite-length encodings are useful for large objects – the streaming CMS
+API relies on these – as you they also let you process more data than you can
+hold in memory. An example of an indefinite length object is the BEROctetString,
+which will encode as a constructed OCTET STRING – basically a stream of
+definite-length octet strings representing parts of the actual data followed by
+the end marker of two zero value bytes.
 
 DER on the other hand is always definite-length and, more importantly, has very
-specific guidelines to
-
-ensure that any two DER encodings of the same thing will be equal. One of the
-interesting features of
-
-this is that ASN.1 SET structures are sorted in DER (remember SETs are
-unordered, do not ever rely on
-
-the order of things in a SET as one day it will lead to disappointment). Another
-interesting feature is
-
-that where the DEFAULT value is used in an ASN.1 definition, if a field in the
-definition has the
-
-default value it is left out. Finally constructed primitive types, such as a
-constructed OCTET STRING,
-
-are written out as their definite-length equivalents. These things need to be
-kept in mind and
-
+specific guidelines to ensure that any two DER encodings of the same thing will
+be equal. One of the interesting features of this is that ASN.1 SET structures
+are sorted in DER (remember SETs are unordered, do not ever rely on the order of
+things in a SET as one day it will lead to disappointment). Another interesting
+feature is that where the DEFAULT value is used in an ASN.1 definition, if a
+field in the definition has the default value it is left out. Finally
+constructed primitive types, such as a constructed OCTET STRING, are written out
+as their definite-length equivalents. These things need to be kept in mind and
 understood as one of the uses of DER is to create input for signature, hash, and
-MAC algorithms – the
-
-idea being that as only one encoding can be produced anyone should be able to
-reproduce the signature,
-
-hash, or MAC value by following the DER rules.
+MAC algorithms – the idea being that as only one encoding can be produced anyone
+should be able to reproduce the signature, hash, or MAC value by following the
+DER rules.
 
 The Bouncy Castle API manages this distinction partly by respecting DER encoding
-for definite-length
-
-objects in the objects encoding method, and, where an alternative encoding might
-exist, making use of
-
-the type of the OutputStream the object is being written to. If a
-DEROutputStream is used whenever
-
-there is an option of encoding something as DER or simply definite-length (part
-of BER), the extra
-
-work will be done to encode the object as DER. A DLOutputStream will always try
-to produce definite-
-
-length objects and a BEROutputStream or an ASN1OutputStream will produce both
-DER, definite-
-
-length, and BER depending on what object it is writing out.
+for definite-length objects in the objects encoding method, and, where an
+alternative encoding might exist, making use of the type of the OutputStream the
+object is being written to. If a DEROutputStream is used whenever there is an
+option of encoding something as DER or simply definite-length (part of BER), the
+extra work will be done to encode the object as DER. A DLOutputStream will
+always try to produce definite- length objects and a BEROutputStream or an
+ASN1OutputStream will produce both DER, definite-length, and BER depending on
+what object it is writing out.
 
 It is worth giving some consideration to what's going to be done with the data
-when you are
+when you are considering whether or not to accept BER data as well, some
+standards such as PKCS#12 allow BER encoding, even though the files involved
+will normally be small. If you are relying on data being small and you are
+dealing with ASN.1 objects from third parties, it can be a good idea to either
+enforce direct-length encodings on input (at least for the outermost object) or
+enforce a maximum size for a blob if it is indefinite-length encoded. Remember
+indefinite-length really does mean indefinite-length, if you have an application
+that really does require loading an indefinite-length object into memory, a well
+crafted or badly broken object will be capable of running your application out
+of memory if no defenses are in place.
 
-considering whether or not to accept BER data as well, some standards such as
-PKCS#12 allow BER
-
-encoding, even though the files involved will normally be small. If you are
-relying on data being small
-
-and you are dealing with ASN.1 objects from third parties, it can be a good idea
-to either enforce
-
-direct-length encodings on input (at least for the outermost object) or enforce
-a maximum size for a
-
-blob if it is indefinite-length encoded. Remember indefinite-length really does
-mean indefinite-length,
-
-if you have an application that really does require loading an indefinite-length
-object into memory, a
-
-well crafted or badly broken object will be capable of running your application
-out of memory if no
-
-defenses are in place.
-
-### Compatibility Issues............................................................................................................................
+### Compatibility Issues
 
 The most common compatibility issue you are likely to run into between the BC
-ASN.1 package and
-
-others is that a lot of people do not actually implement BER and can only handle
-definite-length data.
-
-In a case like this you can re-encode things using the DLOutputStream – just
-keep in mind that on
-
-occasion encodings are nested inside OCTET STRINGs that are inside other ASN.1
-objects. Depending
-
+ASN.1 package and others is that a lot of people do not actually implement BER
+and can only handle definite-length data. In a case like this you can re-encode
+things using the DLOutputStream – just keep in mind that on occasion encodings
+are nested inside OCTET STRINGs that are inside other ASN.1 objects. Depending
 on what the other party is capable of dealing with you may need to re-encode
-some nested objects as
-
-part of the definite-length conversion process.
+some nested objects as part of the definite-length conversion process.
 
 Another compatibility issue can arise with DER itself – there's a bit to
-remember and occasionally
+remember and occasionally people forget things. This leads us to the happy place
+where using DER correctly means a signature fails to validate. As an example it
+is possible to extend the SignerInformation class in the CMS API to use
+definite-length rather than DER encoding for encoding signed attributes. If you
+are getting “mysterious” failures it is worth checking to see whether or not
+something like this is happening. How you get to deal with it will depend on the
+circumstances, if it is a well meaning but otherwise incorrect government agency
+you will probably need to use the work around, alternately you may be able to
+get the other party to fix the issue.
 
-people forget things. This leads us to the happy place where using DER correctly
-means a signature
-
-fails to validate. As an example it is possible to extend the SignerInformation
-class in the CMS API to
-
-use definite-length rather than DER encoding for encoding signed attributes. If
-you are getting
-
-“mysterious” failures it is worth checking to see whether or not something like
-this is happening. How
-
-you get to deal with it will depend on the circumstances, if it is a well
-meaning but otherwise incorrect
-
-government agency you will probably need to use the work around, alternately you
-may be able to get
-
-the other party to fix the issue.
-
-### Using the Streaming API.....................................................................................................................
+### Using the Streaming API
 
 Classes like DERSequence, DERSet, DLSequence, DLSet, BERSequence, and BERSet all
-use an in-
-
-memory model to hold and encode objects. You will also notice classes with names
-like
-
-BERSequenceGenerator, BEROctetStringGenerator, BERSequenceParser, and
-BEROctetStringParser.
-
-The second group of classes use a streaming model to process the data they are
-either writing (the
-
-Generator classes), or the reading (the Parser classes).
+use an in-memory model to hold and encode objects. You will also notice classes
+with names like BERSequenceGenerator, BEROctetStringGenerator,
+BERSequenceParser, and BEROctetStringParser. The second group of classes use a
+streaming model to process the data they are either writing (the Generator
+classes), or the reading (the Parser classes).
 
 There's really only one thing to remember here. Streaming means you cannot go
-back so suddenly the
+back so suddenly the order in which things are either accessed or written
+becomes very important. This is not often a cause of error when creating objects
+for writing, but it is a tripping point for reading particularly where a piece
+of previously memory bound code is using ASN1Sequence.getObjectAt() and it gets
+missed that one of the getObjectAt() calls was with an index that was out of
+order, or is fetching the same index twice.
 
-order in which things are either accessed or written becomes very important.
-This is not often a cause
-
-of error when creating objects for writing, but it is a tripping point for
-reading particularly where a
-
-piece of previously memory bound code is using ASN1Sequence.getObjectAt() and it
-gets missed that
-
-one of the getObjectAt() calls was with an index that was out of order, or is
-fetching the same index
-
-twice.
-
-### A Handy Hint.......................................................................................................................................
+### A Handy Hint
 
 Finally, a look at the API will show there are a lot of classes with
-getInstance() methods. It is better to
-
-make use of these rather than using casts when going from something like an
-ASN1Encodable or an
-
-ASN1Primitive to an actual ASN.1 type, or high level ASN.1 type named after one
-of the structures in
-
-an ASN.1 based standard such as PKIX. In the early days a persistent issue, even
-within the BC project,
-
-was that an object that was expecting something like an ASN1Sequence would be
-presented with a
-
-higher level object that would encode to an ASN1Sequence, but whose Java type
-was not
-
-ASN1Sequence. The issue was always related to the situation where sometimes the
-code would be
-
-dealing with objects produced in the same JVM (so they would often have a higher
-level type) or the
-
+getInstance() methods. It is better to make use of these rather than using casts
+when going from something like an ASN1Encodable or an ASN1Primitive to an actual
+ASN.1 type, or high level ASN.1 type named after one of the structures in an
+ASN.1 based standard such as PKIX. In the early days a persistent issue, even
+within the BC project, was that an object that was expecting something like an
+ASN1Sequence would be presented with a higher level object that would encode to
+an ASN1Sequence, but whose Java type was not ASN1Sequence. The issue was always
+related to the situation where sometimes the code would be dealing with objects
+produced in the same JVM (so they would often have a higher level type) or the
 code would be dealing with objects which had been recently deserialized, in
-which case they would
-
-have a primitive type like ASN1Sequence. Unfortunately it turns out that trying
-to deal with this
-
-correctly just by anticipating and casting and hoping for the best is a path to
-disaster, occasionally a
-
-disaster that might suddenly show up in a production environment which had
-previously appeared to be
-
-fine. So use getInstance().
-
-## Bibliography.............................................................................................................................................
-
-BC-FJA (Bouncy Castle FIPS Java API) “User Guide”, Legion of the Bouncy Castle
-Inc., August 2016.
-
-BC-FJA (Bouncy Castle FIPS Java API) “Non-Proprietary FIPS 140-2 Cryptographic
-Module Security
-
-Policy”, Legion of the Bouncy Castle Inc., August 2016.
-
-FIPS PUB 180-4 “Secure Hash Standard (SHS)”, NIST, August 2015.
-
-FIPS PUB 186-4 “Digital Signature Standard (DSS)”, NIST, July 2013.
-
-FIPS PUB 197 “Advanced Encryption Standard (AES)”, NIST, November 2001.
-
-FIPS PUB 198-1 “The Keyed-Hash Message Authentication Code (HMAC)”, NIST, July
-
-2008.
-
-FIPS PUB 202 “SHA-3 Standard: Permutation-Bases Hash and Extendable-Output
-Functions”, NIST,
-
-August 2015.
-
-NIST SP 800-38A “Recommendations for Block Cipher Modes of Operation”, by M.
-Dworkin, NIST,
-
-December 2001.
-
-NIST SP 800-38A Addendum “Recommendations for Block Cipher Modes of Operation:
-Three
-
-Variants of Ciphertext Stealing for CBC Mode”, by M. Dworkin, NIST, December
-
-2010.
-
-NIST SP 800-38B “Recommendation for Block Cipher Modes of Operation: The CMAC
-Mode for
-
-Authentication”, by M. Dworkin, NIST, May 2005.
-
-NIST SP 800-38C “Recommendation for Block Cipher Modes of Operation: The CCM
-Mode for
-
-Authentication and Confidentiality”, by M. Dworkin, NIST, May 2004.
-
-NIST SP 800-38D “Recommendation for Block Cipher Modes of Operation:
-Galois/Counter Mode
-
-(GCM and GMAC)”, by M. Dworkin, NIST, May 2007.
-
-NIST SP 800-38F “Recommendation for Block Cipher Modes of Operation: Methods for
-Key
-
-Wrapping”, by M. Dworkin, NIST, December 2012.
-
-NIST SP 800-52 Revision 1 “Guidelines for the Selection Configuration, and Use
-of Transport Layer
-
-Security (TLS) Implementations”, by T. Polk, K. McKay and S. Chokhani, NIST,
-April 2014.
-
-NIST SP 800-56A Revision 2 “Recommendation for Pair-Wise Key Establishment
-Schemes Using
-
-Discrete Logarithm Cryptography”, by E. Barker, L. Chen, et al., NIST, May 2013.
-
-NIST SP 800-56B “Recommendation for Pair-Wise Key Establishment Schemes Using
-Integer
-
-Factorization Cryptography” by E. Barker, L. Chen, et al., NIST, August 2009
-
-NIST SP 800-67 Revision 1 “Recommendation for the Triple Data Encryption
-Algorithm (TDEA)
-
-Block Cipher”, by W. Barker and E. Barker, NIST, January 2012.
-
-NIST SP 800-90A Revision 1 “Recommendation for Random Number Generation Using
-Deterministic
-
-Random Bit Generators”, by E. Barker and J. Kelsey, NIST, June 2015.
-
-NIST SP 800-132 “Recommendation for Password-Based Key Derivation – Part 1:
-Storage
-
-Applications”, by M. Turan, E. Barker, et al., NIST, December 2012.
-
-RFC 1421 “Privacy Enhancement for Internet Electronic Mail: Part I: Message
-Encryption and
-
-Authentication Procedures”, by J. Linn, IETF, February 1993.
-
-RFC 2040 “The RC5, RC5-CBC, RC5-CBC-Pad, and RC5-CTS Algorithms”, by R. Baldwin
-and R.
-
-Rivest. IETF, October 1996.
-
-RFC 2898 “PKCS #5: Password-Based Cryptography Specification Version 2.0”, by B
-Kaliski, RSA
-
-Laboratories, September 2000.
-
-RFC 2986 “PKCS #10: Certification Request Syntax Specification Version 1.7”, by
-M. Nystrom and B.
-
-Kaliski, RSA Security, November 2000.
-
-RFC 3161 “Internet X.509 Public Key Infrastructure Time-Stamp Protocol (TSP)”,
-by C. Adams, P.
-
-Cain, et al., IETF, August 2001.
-
-RFC 3447 “Public-Key Cryptography Standards (PKCS) #1: RSA Cryptography
-Specifications Version
-
-2.1”, by J. Jonsson and B Kaliski, RSA Laboratories, February 2003.
-
-RFC 3628 “Policy Requirements for Time-Stamping Authorities (TSAs)”, by D.
-Pinkas, N. Pope, and
-
-J. Ross, IETF, November 2003.
-
-RFC 4211 “Internet X.509 Public Key Infrastructure Certificate Request Message
-Format (CRMF)”, by
-
-J. Schaad, IETF, September 2005.
-
-RFC 4880 “Open PGP Message Format”, by J. Callas, L. Donnerhacke, et al., IETF,
-November 2007.
-
-RFC 5246 “The Transport Layer Security (TLS) Protocol Version 1.2”, by T. Dierks
-and E. Rescorla,
-
-IETF, August 2008.
-
-RFC 5280 “Internet X.509 Public Key Infrastructure Certificate and Certificate
-Revocation List (CRL)
-
-Profile”, by D. Cooper, S. Santesson, et al., IETF, May 2008.
-
-RFC 5581 “The Camellia Cipher in OpenPGP”, by D. Shaw, IETF, June 2009.
-
-RFC 5652 “Cryptographic Message Syntax (CMS)”, by R. Housley, IETF, September
-
-2009.
-
-RFC 5751 “Secure/Multipurpose Internet Mail Extensions (S/MIME) Version 3.2
-Message
-
-Specification”, by B. Ramsdell and S. Turner, IETF, January 2010.
-
-RFC 5990 “Use of the RSA-KEM Key Transport Algorithm in the Cryptographic
-Message Syntax
-
-(CMS)”, by J. Randall, B. Kaliski, et al., IETF, September 2010.
-
-RFC 6637 “Elliptic Curve Cryptography (ECC) in OpenPGP, by A. Jivsov, IETF, June
-
-2012.
-
-RFC 6960 “X.509 Internet Public Key Infrastructure Online Certificate Status
-Protocol – OCSP”, by S.
-
-Santesson, M. Myers, et al., IETF, June 2013.
-
-RFC 6979 “Deterministic Usage of the Digital Signature Algorithm (DSA) and
-Elliptic Curve Digital
-
-Signature Algorithm (ECDSA)”, by T. Pornin, IETF, August 2013.
-
-RFC 7292 “PKCS #12: Personal Information Exchange Syntax v1.1”, by K. Moriarty,
-M. Nystrom, et
-
-al., IETF, July 2014.
-
-RFC 7468 “Textual Encodings of PKIX, PKCS, and CMS Structures”, by S. Josefsson
-and S. Leonard,
-
-IETF, April 2015.
+which case they would have a primitive type like ASN1Sequence. Unfortunately it
+turns out that trying to deal with this correctly just by anticipating and
+casting and hoping for the best is a path to disaster, occasionally a disaster
+that might suddenly show up in a production environment which had previously
+appeared to be fine. So use getInstance().
 
 ## References
 
