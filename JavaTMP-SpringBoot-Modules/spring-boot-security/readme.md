@@ -1365,3 +1365,28 @@ signature.
 
 ## 19 Spring Security for reactive apps
 
+Non-reactive vs. reactive. In a non-reactive approach, the milk factory gets all
+the milk to be packaged in the morning and delivers all the boxes in the
+evening. In a reactive approach, as the milk is brought to the factory, it’s
+packaged and then delivered. For this scenario, a reactive approach is better as
+it allows milk to be collected throughout the day and delivered sooner to the
+clients.
+
+In a reactive stream, a publisher produces values, and a subscriber consumes
+those values. Contracts defined by the Reactive Streams specification describe
+publishers and subscribers. Project Reactor implements the Reactive Streams
+specification and implements the Publisher and Subscriber contracts. In the
+figure, the components we use in the examples in this chapter are shaded.
+
+An `AuthenticationWebFilter` intercepts the request and delegates the
+authentication responsibility to a `ReactiveAuthenticationManager`. If the
+authentication logic involves users and passwords, the
+`ReactiveAuthenticationManager` uses a `ReactiveUserDetailsService` to find the
+user details and a PasswordEncoder to verify the password.
+
+Once the ReactiveAuthenticationManager successfully authenticates the request,
+it returns the Authentication object to the filter. The filter stores the
+Authentication instance in the SecurityContext.
+
+### 19.3 Configuring authorization rules in reactive apps
+
