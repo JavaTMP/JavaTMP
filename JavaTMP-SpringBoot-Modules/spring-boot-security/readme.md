@@ -1356,4 +1356,12 @@ token.
 
 ### 18.3 Implementing the resource server
 
+The authorization server uses a private key to sign the token. When it signs the
+token, the authorization server also adds an ID of the key pair in the token
+header. To validate the token, the resource server calls an endpoint of the
+authorization server and gets the public key for the ID found in the token
+header. The resource server uses this public key to validate the token
+signature.
+
+## 19 Spring Security for reactive apps
 
