@@ -1199,3 +1199,161 @@ level, it’s better to first make sure you only retrieve the data you need.
 Otherwise, your application can face heavy memory and performance issues.
 
 ## 18 Hands-on: An OAuth 2 application
+
+### 18.1 The application scenario
+
+The two roles are the standard user, fitnessuser, and the admin, fitnessadmin. A
+fitnessuser can add a workout for themselves and can see their own workout
+history. A fitnessadmin can only delete workout records for any user.
+
+Whether it’s a workout history or a bank account, an application needs to
+implement proper authorization rules to protect user data from theft or unwanted
+changes.
+
+We need an authorization server as well. For this example, we use a tool named
+Keycloak to configure the authorization server for the system. Keycloak offers
+all possibilities to set our users either locally or by integrating with other
+user management services.
+
+The actors in the system are the user, the client, the authorization server, and
+the resource server. We use Keycloak to configure the authorization server, and
+we implement the resource server using Spring Security.
+
+### 18.2 Configuring Keycloak as an authorization server
+
+Keycloak is an excellent open source tool designed for identity and access
+management.
+
+As part of the hands-on application we implement in this chapter, we follow
+three major steps. In this section, we configure Keycloak as the authorization
+server for the system as the first step.
+
+To manage Keycloak, you first need to set up your admin credentials. You do this
+by accessing Keycloak the first time you start it.
+
+Once you set up your admin account, you can log in to Keycloak’s Administration
+Console using the credentials you just set up.
+
+You find the endpoints related to the authorization server by clicking the
+OpenID Endpoint Configuration link. You need these endpoints to obtain the
+access token and to configure the resource server.
+
+To test the application, we manually generate access tokens, which we use to
+call the endpoints. If you define a short lifespan for the tokens, you need to
+generate them more often, and you might get annoyed when a token expires before
+you can use it.
+
+a list of the configuration steps:
+
+1. Register a client for the system. An OAuth 2 system needs at least one client
+   recognized by the authorization server. The client makes authentication
+   requests for users.
+2. Define a client scope. The client scope identifies the purpose of the client
+   in the system. We use the client scope definition to customize the access
+   tokens issued by the authorization server.
+3. Add users for our application. To call the endpoints on the resource server,
+   we need users for our application.
+4. Define user roles and custom access tokens. After adding users, you can issue
+   access tokens for them.
+
+#### 18.2.1 Registering a client for our system
+
+Like in any other OAuth 2 system, we need to register the client applications at
+the authorization server level.
+
+To add a new client, you navigate to the clients list using the Clients tab on
+the left-hand menu. Here you can add a new client registration by clicking the
+Create button in the upper-right corner of the Clients table.
+
+When adding a client, you only need to assign it a unique client ID (fitnessapp)
+and then click Save.
+
+#### 18.2.2 Specifying client scopes
+
+The client scope identifies the purpose of the client. We’ll also use client
+scope to customize the access token issued by Keycloak.
+
+For a list of all client scopes, navigate to the Client Scopes tab. Here, you
+add a new client scope by clicking the Create button on the upper-right corner
+of the Client Scopes table.
+
+When adding a new client scope, give it a unique name and make sure you define
+it for the desired protocol. In our case, the protocol we want is
+`openid-connect`.
+
+Once you have a client scope, you assign it to a client. In this figure, I
+already moved the scopes I need into the right-hand box named Assigned Default
+Client Scopes. This way, you can now use the defined scope with a specific
+client.
+
+#### 18.2.3 Adding users and obtaining access tokens
+
+By navigating to the Users tab from the menu on the left, you’ll find a list of
+all the users for your apps. Here you can also add a new user by clicking Add
+User in the upper-right corner of the Users table.
+
+When adding a new user, give the user a unique username and make sure the user
+has no Required User Actions and he is verified.
+
+The newly created users appear now in the Users list. You can choose a user from
+here to edit or delete.
+
+You can select a user from the list to change or configure its credentials.
+Before saving changes, remember to make sure you set the Temporary check box to
+OFF. If the credentials are temporary, you won’t be able to authenticate with
+the user up front.
+
+To obtain the access token, call the /token endpoint of the authorization
+server:
+
+```
+curl -XPOST "http://localhost:8080/auth/realms/master/protocol/openid-connect/token" \
+-H "Content-Type: application/x-www-form-urlencoded" \
+--data-urlencode "grant_type=password" \
+--data-urlencode "username=rachel" \
+--data-urlencode "password=12345" \
+--data-urlencode "scope=fitnessapp" \
+--data-urlencode "client_id=fitnessapp"
+```
+
+When using the password grant type, the user shares their credentials with the
+client. The client uses the credentials to obtain an access token from the
+authorization server. With the token, the client can then access the user’s
+resources exposed by the resource server.
+
+#### 18.2.4 Defining the user roles
+
+By accessing the Roles tab in the left-hand menu, you find all the defined
+roles, and you can create new ones. You then assign them to users.
+
+From the Role Mappings section of the selected user, you assign roles. These
+role mappings appear as the user’s authorities in the access token, and you use
+these to implement authorization configurations.
+
+We need to add three more details to our tokens:
+
+- Roles--Used to apply a part of the authorization rules at the endpoint layer
+  according to the scenario
+- Username--Filters the data when we apply the authorization rules
+- Audience claim (aud)--Used by the resource server to acknowledge the requests,
+
+We create mappers for a specific client scope to customize the access token.
+This way, we provide all the details the resource server needs to authorize
+requests.
+
+To add roles in the access token, we define a mapper. When adding a mapper, we
+need to provide a name for it. We also specify the details to add to the token
+and the name of the claim identifying the assigned details.
+
+We create a mapper to add the username to the access token. When adding the
+username to the access token, we choose the name of the claim, user_name, which
+is how the resource server expects to find it in the token.
+
+The aud claim representing the mapper type, Audience, defines the recipient of
+the access token, which, in our case, is the resource server. We configure the
+same value on the resource server side for the resource server to accept the
+token.
+
+### 18.3 Implementing the resource server
+
+
