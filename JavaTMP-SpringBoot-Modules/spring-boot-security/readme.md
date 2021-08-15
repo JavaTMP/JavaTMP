@@ -1390,3 +1390,38 @@ Authentication instance in the SecurityContext.
 
 ### 19.3 Configuring authorization rules in reactive apps
 
+After the authentication process successfully ends, another filter, named
+`AuthorizationWebFilter`, intercepts the request. This filter delegates the
+authorization responsibility to a `ReactiveAuthorizationManager`.
+
+The AuthorizationFilter uses the SecurityWebFilterChain bean (shaded) that we
+added to the context to know which ReactiveAuthorizationManager to use.
+
+When using method security, an aspect intercepts the call to a protected method.
+If the call doesn’t fulfill the preauthorization rules, the aspect doesn’t
+delegate the call to the method.
+
+### 19.4 Reactive apps and OAuth 2
+
+## 20 Spring Security testing
+
+Testing is part of the development process. Anytime a developer uploads code,
+the tests run. If any test fails, a continuous integration tool notifies the
+developer.
+
+The functionality of an application relies on many dependencies. When you
+upgrade or change a dependency, you might affect existing functionality. Having
+integration tests with dependencies helps you to discover quickly if a change in
+a dependency affects the existing functionality of your application.
+
+The difference between using annotations and the RequestPostProcessor to create
+the test security environment. When using annotations, the framework sets up the
+test security environment first. When using a RequestPostProcessor, the test
+request is created and then changed to define other constraints like the test
+security environment. In the figure, I shaded the points where the framework
+applies the test security environment.
+
+When testing authentication, the test acts as a client and goes through the full
+Spring Security flow discussed throughout the book. This way, you can also test,
+for example, your custom AuthenticationProvider objects.
+

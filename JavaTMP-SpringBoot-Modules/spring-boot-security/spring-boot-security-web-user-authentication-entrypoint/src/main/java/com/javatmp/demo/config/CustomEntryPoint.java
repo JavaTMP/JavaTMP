@@ -1,4 +1,4 @@
-package com.javatmp.demo.config;
+package com.javatmp.demo.lifecycle.config;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

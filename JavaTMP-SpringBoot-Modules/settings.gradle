@@ -94,6 +94,8 @@ include 'spring-boot-security:global-method:spring-boot-security-web-authorizati
 include 'spring-boot-security:global-method:spring-boot-security-web-authorization-global-method-filtering-jpa'
 
 include 'spring-boot-security:reactive-apps:spring-boot-security-webflux-default'
+include 'spring-boot-security:reactive-apps:spring-boot-security-webflux-authorization'
+include 'spring-boot-security:reactive-apps:spring-boot-security-webflux-method'
 
 include 'spring-boot-cloud:cloud-services:spring-boot-cloud-service-empty'
 include 'spring-boot-cloud:cloud-services:cloud-service-common'
