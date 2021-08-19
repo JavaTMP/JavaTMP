@@ -11,3 +11,30 @@ spring:
   cloud:
     config:
       uri: http://localhost:8071
+    stream:
+      bindings:
+        gradesChannel-in-0:
+          destination: GradesExchange
+          group: grades-updates
+          consumer:
+            concurrency: 10
+            max-attempts: 3
+      rabbit:
+        bindings:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+spring.cloud.stream.bindings.output.destination: orgChangeTopic
+spring.cloud.stream.bindings.output.content-type: application/json
+
