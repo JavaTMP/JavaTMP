@@ -1,0 +1,29 @@
+application:
+  message: "Welcome To local property from config server"
+
+spring:
+  application:
+    name: cloud-service-stream-kafka
+  config:
+    import: optional:configserver:${spring.cloud.config.uri}
+  profiles:
+    active: default
+  cloud:
+    config:
+      uri: http://localhost:8071
+
+management:
+  security:
+    enabled: false
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+#Some properties removed for conciseness
+
+spring.cloud.stream.bindings.input.destination: orgChangeTopic
+spring.cloud.stream.bindings.input.content-type: application/json
+spring.cloud.stream.bindings.input.group: licensingGroup
+spring.cloud.stream.kafka.binder.zkNodes: localhost
+spring.cloud.stream.kafka.binder.brokers: localhost
