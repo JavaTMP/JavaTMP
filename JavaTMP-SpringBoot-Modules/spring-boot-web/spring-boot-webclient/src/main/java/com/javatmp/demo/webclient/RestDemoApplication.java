@@ -30,6 +30,8 @@ public class RestDemoApplication {
         return args -> {
             log.info("*** Start Spring Boot Project ***");
             // https://www.baeldung.com/spring-5-webclient
+            // https://www.baeldung.com/spring-webclient-json-list
+            // https://reflectoring.io/spring-webclient/
             // https://stackoverflow.com/questions/48598233/deserialize-a-json-array-to-objects-using-jackson-and-webclient
             WebClient webClient = WebClient.builder()
                     .baseUrl("http://localhost:8080/rest")

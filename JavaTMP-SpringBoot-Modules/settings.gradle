@@ -118,6 +118,7 @@ include 'spring-boot-cloud:cloud-services:spring-boot-cloud-service-eureka-clien
 include 'spring-boot-cloud:spring-cloud-gateway:spring-boot-cloud-service-gateway-default'
 
 include 'spring-boot-cloud:spring-cloud-security:spring-boot-cloud-service-eureka-client-keycloak'
+include 'spring-boot-cloud:spring-cloud-security:spring-boot-cloud-service-security-rs'
 
 include 'spring-boot-cloud:spring-cloud-stream:spring-boot-cloud-stream-rabbitmq-producer'
 
