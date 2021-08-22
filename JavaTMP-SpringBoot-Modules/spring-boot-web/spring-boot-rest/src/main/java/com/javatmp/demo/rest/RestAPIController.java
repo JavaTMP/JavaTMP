@@ -28,11 +28,11 @@ public class RestAPIController {
 
     @GetMapping("/get/{id}")
     RestDto get(@PathVariable Long id) {
-
+    log.info("try getting id :{}", id);
         return restDtoRepository.stream().filter(restDto -> restDto.getId().equals(id))
                 .findAny()
                 .orElseThrow(() ->
-                        new IllegalArgumentException(String.format("id not found : {}", id)));
+                        new IllegalArgumentException(String.format("id not found : %d .", id)));
     }
 
     @PutMapping("/put/{id}")
