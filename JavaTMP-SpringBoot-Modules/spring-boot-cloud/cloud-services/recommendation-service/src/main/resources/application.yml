@@ -1,6 +1,0 @@
-server.port: 7002
-
-logging:
-  level:
-    root: INFO
-    se.magnus: DEBUG

@@ -25,6 +25,7 @@ include 'spring-boot-web:spring-boot-web-simple'
 include 'spring-boot-web:spring-boot-web-session'
 include 'spring-boot-web:spring-boot-rest-template'
 include 'spring-boot-web:spring-boot-rest'
+include 'spring-boot-web:spring-boot-rest-exception'
 include 'spring-boot-web:spring-boot-webclient'
 include 'spring-boot-web:spring-boot-web-i18n'
 
@@ -100,20 +101,14 @@ include 'spring-boot-security:reactive-apps:spring-boot-security-webflux-authori
 include 'spring-boot-security:reactive-apps:spring-boot-security-webflux-method'
 
 include 'spring-boot-cloud:cloud-services:spring-boot-cloud-service-empty'
-include 'spring-boot-cloud:cloud-services:cloud-service-common'
-include 'spring-boot-cloud:cloud-services:product-composite-service'
-include 'spring-boot-cloud:cloud-services:product-service'
-include 'spring-boot-cloud:cloud-services:recommendation-service'
-include 'spring-boot-cloud:cloud-services:review-service'
-
-include 'spring-boot-cloud:spring-cloud-config-server:spring-cloud-config-server-filesystem'
-include 'spring-boot-cloud:spring-cloud-config-server:spring-cloud-config-server-git'
-include 'spring-boot-cloud:spring-cloud-service-discovery:spring-boot-cloud-service-discovery-eureka'
-
 include 'spring-boot-cloud:cloud-services:spring-boot-cloud-service-config-client'
 include 'spring-boot-cloud:cloud-services:spring-boot-cloud-service-eureka-client'
 include 'spring-boot-cloud:cloud-services:spring-boot-cloud-service-eureka-client-resilience4j'
 include 'spring-boot-cloud:cloud-services:spring-boot-cloud-service-eureka-client-filters'
+
+include 'spring-boot-cloud:spring-cloud-config-server:spring-cloud-config-server-filesystem'
+include 'spring-boot-cloud:spring-cloud-config-server:spring-cloud-config-server-git'
+include 'spring-boot-cloud:spring-cloud-service-discovery:spring-boot-cloud-service-discovery-eureka'
 
 include 'spring-boot-cloud:spring-cloud-gateway:spring-boot-cloud-service-gateway-default'
 
