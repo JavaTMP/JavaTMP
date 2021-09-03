@@ -2,7 +2,7 @@
 Spring Boot Modules help you quickly and easily create 
 a Spring Boot based applications
 
-## Technologies Guide
+### Technologies Guide
 - Spring Boot 
 - JUnit
 - Log4j2
@@ -36,3 +36,11 @@ These additional references should also help you:
 * [Spring Boot - Error creating a bean with name](https://javarevisited.blogspot.com/2019/04/spring-boot-error-error-creating-bean.html)
 * [How do I revert all local changes in Git managed project to previous state?](https://stackoverflow.com/questions/1146973/how-do-i-revert-all-local-changes-in-git-managed-project-to-previous-state)
 * [12 Factor Apps with Spring Boot](https://reflectoring.io/spring-boot-12-factor-app/)
+
+### Pending Modules Not Covered yet
+[Producing a SOAP web service](https://spring.io/guides/gs/producing-web-service/)
+[Consuming a SOAP web service](https://spring.io/guides/gs/consuming-web-service/)
+[Implement CXF webservice](https://github.com/briansjavablog/boot-cxf-soap-demo)
+[Implement CXF webservice](https://dzone.com/articles/soap-web-services-with-apache-cxf-and-spring-boot)
+[Implement webservice client]()
+[]()
