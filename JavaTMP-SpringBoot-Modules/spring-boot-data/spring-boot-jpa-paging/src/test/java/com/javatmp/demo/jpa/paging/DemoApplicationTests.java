@@ -1,6 +1,5 @@
 package com.javatmp.demo.jpa.paging;
 
-import com.javatmp.demo.jpa.paging.DemoApplication;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

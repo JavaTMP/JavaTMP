@@ -38,9 +38,23 @@ These additional references should also help you:
 * [12 Factor Apps with Spring Boot](https://reflectoring.io/spring-boot-12-factor-app/)
 
 ### Pending Modules Not Covered yet
+[Distributed tracing with Zipkin]()
+[Configuring Kibana]()
+[A Spring Cloud Sleuth/ELK Stack implementation in action]()
+[Spring Cloud Sleuth and the correlation ID]()
+[Call OAuth2 microservice]()
 [Producing a SOAP web service](https://spring.io/guides/gs/producing-web-service/)
 [Consuming a SOAP web service](https://spring.io/guides/gs/consuming-web-service/)
 [Implement CXF webservice](https://github.com/briansjavablog/boot-cxf-soap-demo)
 [Implement CXF webservice](https://dzone.com/articles/soap-web-services-with-apache-cxf-and-spring-boot)
 [Implement webservice client]()
+[Appendix A. Microservices architecture best practices](https://livebook.manning.com/book/spring-microservices-in-action-second-edition/appendix-a/)
+[11 Distributed tracing with Spring Cloud Sleuth and Zipkin](https://livebook.manning.com/book/spring-microservices-in-action-second-edition/chapter-11/)
+[10 Event-driven architecture with Spring Cloud Stream](https://livebook.manning.com/book/spring-microservices-in-action-second-edition/chapter-10/)
+[Appendix C. Monitoring your microservices](https://livebook.manning.com/book/spring-microservices-in-action-second-edition/appendix-c/)
+*******************************
+[Spring Security 5 Replacement for OAuth2RestTemplate](https://newbedev.com/spring-security-5-replacement-for-oauth2resttemplate)
+[OAuth2RestTemplate](https://docs.spring.io/spring-security-oauth2-boot/docs/2.2.x-SNAPSHOT/reference/html/boot-features-security-custom-user-info-client.html)
+[How to use OAuth2RestTemplate?](https://stackoverflow.com/questions/27864295/how-to-use-oauth2resttemplate)
+[Authenticating with Reddit OAuth2 and Spring Security](https://www.baeldung.com/spring-security-oauth2-authentication-with-reddit)
 []()
