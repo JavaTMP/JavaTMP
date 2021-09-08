@@ -38,6 +38,13 @@ These additional references should also help you:
 * [12 Factor Apps with Spring Boot](https://reflectoring.io/spring-boot-12-factor-app/)
 
 ### Pending Modules Not Covered yet
+[]()
+[]()
+[]()
+[Spring Cloud Stream using Publisher/Subscriber/Destination/Binder]()
+[Adding an API Description Using OpenAPI]()
+[Srping boot cloud - Circuit breaker]()
+************************************************************
 [Distributed tracing with Zipkin]()
 [Configuring Kibana]()
 [A Spring Cloud Sleuth/ELK Stack implementation in action]()
@@ -57,4 +64,7 @@ These additional references should also help you:
 [OAuth2RestTemplate](https://docs.spring.io/spring-security-oauth2-boot/docs/2.2.x-SNAPSHOT/reference/html/boot-features-security-custom-user-info-client.html)
 [How to use OAuth2RestTemplate?](https://stackoverflow.com/questions/27864295/how-to-use-oauth2resttemplate)
 [Authenticating with Reddit OAuth2 and Spring Security](https://www.baeldung.com/spring-security-oauth2-authentication-with-reddit)
+[Accessing Secure REST API using Spring OAuth2RestTemplate](https://medium.com/@bcarunmail/accessing-secure-rest-api-using-spring-oauth2resttemplate-ef18377e2)
+[How to Use Client Credentials Flow with Spring Security](https://developer.okta.com/blog/2021/05/05/client-credentials-spring-security)
 []()
+
