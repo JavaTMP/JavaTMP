@@ -39,7 +39,7 @@ These additional references should also help you:
 
 ### Pending Modules Not Covered yet
 [Java bean mapping tool, MapStruct]()
-[]()
+[Testcontainers automated integration tests]()
 []()
 []()
 []()
