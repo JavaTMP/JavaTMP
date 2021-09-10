@@ -1,7 +1,10 @@
 package com.javatmp.demo.jpa;
 
 import com.javatmp.demo.jpa.entity.Customer;
+import com.javatmp.demo.jpa.entity.User;
+import com.javatmp.demo.jpa.repository.AuthorityRepository;
 import com.javatmp.demo.jpa.repository.CustomerRepository;
+import com.javatmp.demo.jpa.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -18,6 +21,12 @@ public class JpaDemoApplication implements CommandLineRunner {
 
 	@Autowired
 	CustomerRepository repository;
+
+	@Autowired
+	UserRepository userRepository;
+
+	@Autowired
+	AuthorityRepository authorityRepository;
 
 	@Override
 	public void run(String... strings) throws Exception {
@@ -54,5 +63,16 @@ public class JpaDemoApplication implements CommandLineRunner {
 		//  log.info(bauer.toString());
 		// }
 		log.info("");
+
+		log.info("cound of users is :{}", userRepository.count());
+
+		userRepository.save(new User(null,"Michelle", "mmmm", 1, null));
+
+		// fetch customers by last name
+		log.info("Get all users:");
+		log.info("--------------------------------------------");
+		userRepository.findAll().forEach(user ->
+				log.info("user is : {}", user));
+
 	}
 }

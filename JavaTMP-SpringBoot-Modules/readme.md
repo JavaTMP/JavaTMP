@@ -38,9 +38,13 @@ These additional references should also help you:
 * [12 Factor Apps with Spring Boot](https://reflectoring.io/spring-boot-12-factor-app/)
 
 ### Pending Modules Not Covered yet
+[Java bean mapping tool, MapStruct]()
 []()
 []()
 []()
+[]()
+[]()
+[Spring Data for MongoDB]()
 [Spring Cloud Stream using Publisher/Subscriber/Destination/Binder]()
 [Adding an API Description Using OpenAPI]()
 [Srping boot cloud - Circuit breaker]()
