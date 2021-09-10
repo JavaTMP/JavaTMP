@@ -1,6 +1,5 @@
 package com.javatmp.demo.jpa;
 
-import com.github.javafaker.Faker;
 import com.javatmp.demo.jpa.entity.Customer;
 import com.javatmp.demo.jpa.repository.CustomerRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -13,11 +12,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.Future;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 @Slf4j
@@ -34,16 +30,6 @@ public class JpaDemoApplication implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... strings) throws Exception {
-
-        Faker faker = new Faker();
-
-        // save a few customers
-        List<Customer> customerList = new LinkedList<>();
-        IntStream.range(0, 10).forEach(i -> {
-            customerList.add(new Customer(null, faker.name().firstName(), faker.name().lastName(), 0));
-        });
-        repository.saveAll(customerList);
-
 
         // fetch an individual customer by ID
         Optional<Customer> customer1 = repository.findById(1L);

@@ -1,3 +1,3 @@
-INSERT INTO `spring`.`Customer` VALUES (NULL, 'john2', '12345');
+INSERT INTO `spring`.`Customer` VALUES (NULL, 'John', 'Mike');
 
 commit;
