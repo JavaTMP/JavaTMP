@@ -40,9 +40,9 @@ These additional references should also help you:
 ### Pending Modules Not Covered yet
 [Java bean mapping tool, MapStruct]()
 [Testcontainers automated integration tests]()
-[]()
-[]()
-[]()
+[develop reactive microservices]()
+[develop non-blocking synchronous REST APIs]()
+[asynchronous event-driven services]()
 []()
 [Spring Data for MongoDB]()
 [Spring Cloud Stream using Publisher/Subscriber/Destination/Binder]()
