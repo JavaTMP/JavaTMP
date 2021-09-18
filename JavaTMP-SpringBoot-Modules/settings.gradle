@@ -48,12 +48,14 @@ include 'spring-boot-miscellaneous:spring-boot-validation'
 include 'spring-boot-miscellaneous:spring-boot-itext'
 include 'spring-boot-miscellaneous:spring-boot-JasperReports'
 include 'spring-boot-miscellaneous:spring-boot-testing'
+include 'spring-boot-miscellaneous:spring-boot-admin-server'
+include 'spring-boot-miscellaneous:spring-boot-admin-client'
 
 include 'spring-boot-cache:spring-boot-cache-simple'
 include 'spring-boot-cache:spring-boot-cache-redis'
 
-//include 'spring-boot-webservices:spring-boot-soap-producer'
-//include 'spring-boot-webservices:spring-boot-soap-consumer'
+include 'spring-boot-webservices:spring-boot-soap-producer'
+include 'spring-boot-webservices:spring-boot-soap-consumer'
 //include 'spring-boot-webservices:spring-boot-web-services'
 //include 'spring-boot-webservices:spring-boot-web-services-client'
 

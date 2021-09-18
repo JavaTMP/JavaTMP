@@ -54,8 +54,6 @@ These additional references should also help you:
 [A Spring Cloud Sleuth/ELK Stack implementation in action]()
 [Spring Cloud Sleuth and the correlation ID]()
 [Call OAuth2 microservice]()
-[Producing a SOAP web service](https://spring.io/guides/gs/producing-web-service/)
-[Consuming a SOAP web service](https://spring.io/guides/gs/consuming-web-service/)
 [Implement CXF webservice](https://github.com/briansjavablog/boot-cxf-soap-demo)
 [Implement CXF webservice](https://dzone.com/articles/soap-web-services-with-apache-cxf-and-spring-boot)
 [Implement webservice client]()

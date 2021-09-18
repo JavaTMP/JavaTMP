@@ -1,11 +1,16 @@
-bootJar {
-	enabled = true
-}
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
 // tag::configurations[]
 configurations {
 	jaxb
 }
 // end::configurations[]
+
+repositories {
+	mavenCentral()
+}
 
 // tag::wsdl[]
 task genJaxb {
@@ -22,23 +27,23 @@ task genJaxb {
 			mkdir(dir: sourcesDir)
 			mkdir(dir: classesDir)
 
-				xjc(destdir: sourcesDir, schema: schema,
-						package: "com.example.consumingwebservice.wsdl") {
-						arg(value: "-wsdl")
-					produces(dir: sourcesDir, includes: "**/*.java")
-				}
+			xjc(destdir: sourcesDir, schema: schema,
+					package: "com.example.consumingwebservice.wsdl") {
+				arg(value: "-wsdl")
+				produces(dir: sourcesDir, includes: "**/*.java")
+			}
 
-				javac(destdir: classesDir, source: 1.8, target: 1.8, debug: true,
-						debugLevel: "lines,vars,source",
-						classpath: configurations.jaxb.asPath) {
-					src(path: sourcesDir)
-					include(name: "**/*.java")
-					include(name: "*.java")
-					}
+			javac(destdir: classesDir, source: 1.8, target: 1.8, debug: true,
+					debugLevel: "lines,vars,source",
+					classpath: configurations.jaxb.asPath) {
+				src(path: sourcesDir)
+				include(name: "**/*.java")
+				include(name: "*.java")
+			}
 
-				copy(todir: classesDir) {
-						fileset(dir: sourcesDir, erroronmissingdir: false) {
-						exclude(name: "**/*.java")
+			copy(todir: classesDir) {
+				fileset(dir: sourcesDir, erroronmissingdir: false) {
+					exclude(name: "**/*.java")
 				}
 			}
 		}
@@ -54,8 +59,15 @@ dependencies {
 	implementation 'org.springframework.ws:spring-ws-core'
 	// For Java 11:
 	implementation 'org.glassfish.jaxb:jaxb-runtime'
-	compile(files(genJaxb.classesDir).builtBy(genJaxb))
+	implementation(files(genJaxb.classesDir).builtBy(genJaxb))
 
 	jaxb "com.sun.xml.bind:jaxb-xjc:2.1.7"
 // end::dependency[]
 }
+
+// tag::bootjar[]
+bootJar {
+	baseName = 'gs-consuming-web-service'
+	version =  '0.0.1'
+}
+// end::bootjar[]

@@ -1,12 +1,11 @@
 
-package com.example.consumingwebservice;
+package com.javatmp.demo.soap.consumer;
 
+import com.example.consumingwebservice.wsdl.GetCountryResponse;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import com.example.consumingwebservice.wsdl.GetCountryResponse;
 
 @SpringBootApplication
 public class ConsumingWebServiceApplication {
