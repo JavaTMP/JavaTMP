@@ -57,7 +57,9 @@ include 'spring-boot-cache:spring-boot-cache-redis'
 include 'spring-boot-webservices:spring-boot-soap-producer'
 include 'spring-boot-webservices:spring-boot-soap-consumer'
 include 'spring-boot-webservices:spring-boot-web-services'
+include 'spring-boot-webservices:spring-boot-web-service-cxf'
 include 'spring-boot-webservices:spring-boot-web-services-client'
+
 
 include 'spring-boot-integration:spring-boot-rabbitmq'
 include 'spring-boot-integration:spring-boot-rabbitmq-config'

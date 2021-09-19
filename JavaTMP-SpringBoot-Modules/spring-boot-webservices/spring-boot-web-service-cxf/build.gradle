@@ -1,0 +1,109 @@
+
+ext {
+    set("cxfVersion", "3.4.4")
+}
+
+configurations {
+    jaxws
+}
+dependencies {
+    jaxws('com.sun.xml.ws:jaxws-tools:2.1.4')
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.apache.cxf:cxf-spring-boot-starter-jaxws:${cxfVersion}"
+    testImplementation "org.apache.cxf:cxf-rt-transports-http-jetty:${cxfVersion}"
+    implementation "org.apache.cxf:cxf-rt-features-logging:${cxfVersion}"
+}
+
+
+def xjcSourceDir = "${projectDir}/src/main/resources/META-INF/wsdl"
+def jaxwsTargetSrcDir = "${projectDir}/src/generated/jaxws"
+def jaxwsTargetClassesDir = "${buildDir}/classes/jaxws"
+
+// tag::wsdl[]
+task genJaxws {
+    ext.sourcesDir = "${jaxwsTargetSrcDir}"
+    ext.classesDir = "${jaxwsTargetClassesDir}"
+    ext.schema_path = "${projectDir}/src/main/resources/META-INF/wsdl"
+//    ext.schema_path = "${projectDir}/src/main/resources/wsdl"
+
+    // Create a file tree with a base directory
+    FileTree wsdlTree = fileTree(dir: schema_path, include: '**/*.wsdl')
+
+    outputs.dir classesDir
+
+    doLast() {
+        // Iterate over the contents of a tree
+        wsdlTree.each {File file ->
+            println "absolutie path is : " + file.absolutePath
+            println "path is : " + file.path
+            println "name is : " + file.name
+        }
+        wsdlTree.each {File file ->
+            def wsdlAbsoultePath = file.absolutePath
+            println "wsdl file location is : " + wsdlAbsoultePath
+            def wsdlRelativeFilePath = wsdlAbsoultePath.substring(wsdlAbsoultePath.indexOf('META-INF\\wsdl\\'))
+            println "wsdl file wsdlRelativeFilePath is : " + wsdlRelativeFilePath
+            project.ant {
+                echo(message: "path is ${wsdlAbsoultePath} and Relative Path is classpath:${wsdlRelativeFilePath}")
+                taskdef name: "wsimport", classname: "com.sun.tools.ws.ant.WsImport",
+                        classpath: configurations.jaxws.asPath
+                mkdir(dir: sourcesDir)
+                mkdir(dir: classesDir)
+
+                wsimport(keep: true,
+                        destdir: classesDir,
+                        sourcedestdir: sourcesDir,
+                        extension: "true",
+                        verbose: "false",
+                        quiet: "false",
+                        xnocompile: "true",
+                        wsdl: "${wsdlAbsoultePath}"
+//                        ,
+//                        wsdlLocation: "classpath:${wsdlRelativeFilePath}"
+                        ,
+                        wsdlLocation: "classpath:${wsdlRelativeFilePath}"
+
+                ) {
+                    xjcarg(value: "-XautoNameResolution")
+                }
+
+                javac(destdir: classesDir, source: 1.8, target: 1.8, debug: true,
+                        debugLevel: "lines,vars,source",
+                        includeantruntime: false,
+                        classpath: configurations.jaxws.asPath) {
+                    src(path: sourcesDir)
+                    include(name: "**/*.java")
+                    include(name: "*.java")
+                }
+
+                copy(todir: classesDir) {
+                    fileset(dir: sourcesDir, erroronmissingdir: false) {
+                        exclude(name: "**/*.java")
+                    }
+                }
+            }
+        }
+    }
+}
+// end::wsdl[]
+
+task cleanGeneratedSource {
+    doLast {
+        delete "${jaxwsTargetSrcDir}"
+    }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs += "${jaxwsTargetSrcDir}"
+        }
+    }
+}
+
+clean { dependsOn cleanGeneratedSource }
+compileJava { dependsOn genJaxws }
+//build { dependsOn clean}
+bootJar {
+    enabled = true
+}
