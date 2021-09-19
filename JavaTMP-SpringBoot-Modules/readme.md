@@ -43,7 +43,6 @@ These additional references should also help you:
 [develop reactive microservices]()
 [develop non-blocking synchronous REST APIs]()
 [asynchronous event-driven services]()
-[]()
 [Spring Data for MongoDB]()
 [Spring Cloud Stream using Publisher/Subscriber/Destination/Binder]()
 [Adding an API Description Using OpenAPI]()

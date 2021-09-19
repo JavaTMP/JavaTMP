@@ -1,5 +1,5 @@
-<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://serviceCall.demo.blog.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns3="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://www.briansdevblog.com/Accounts/" name="AccountServiceEndpointService" targetNamespace="http://serviceCall.demo.blog.com/">
-  <wsdl:import location="http://localhost:8090/soap-api/serviceCall/accounts?wsdl=AccountService.wsdl" namespace="http://www.briansdevblog.com/Accounts/">
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://service.demo.blog.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns3="http://schemas.xmlsoap.org/soap/http" xmlns:ns1="http://www.briansdevblog.com/Accounts/" name="AccountServiceEndpointService" targetNamespace="http://service.demo.blog.com/">
+  <wsdl:import location="http://localhost:8090/soap-api/service/accounts?wsdl=AccountService.wsdl" namespace="http://www.briansdevblog.com/Accounts/">
     </wsdl:import>
   <wsdl:binding name="AccountServiceEndpointServiceSoapBinding" type="ns1:AccountService">
     <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
@@ -13,9 +13,9 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:serviceCall name="AccountServiceEndpointService">
+  <wsdl:service name="AccountServiceEndpointService">
     <wsdl:port binding="tns:AccountServiceEndpointServiceSoapBinding" name="AccountServiceEndpointPort">
-      <soap:address location="http://localhost:8090/soap-api/serviceCall/accounts"/>
+      <soap:address location="http://localhost:8090/soap-api/service/accounts"/>
     </wsdl:port>
-  </wsdl:serviceCall>
+  </wsdl:service>
 </wsdl:definitions>

@@ -30,19 +30,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link AccountDetailsResponse }
-     * 
-     */
-    public AccountDetailsResponse createAccountDetailsResponse() {
-        return new AccountDetailsResponse();
-    }
-
-    /**
      * Create an instance of {@link AccountDetailsRequest }
      * 
      */
     public AccountDetailsRequest createAccountDetailsRequest() {
         return new AccountDetailsRequest();
+    }
+
+    /**
+     * Create an instance of {@link AccountDetailsResponse }
+     * 
+     */
+    public AccountDetailsResponse createAccountDetailsResponse() {
+        return new AccountDetailsResponse();
     }
 
     /**
