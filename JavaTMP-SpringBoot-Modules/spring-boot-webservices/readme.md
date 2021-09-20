@@ -11,6 +11,7 @@
 * [https://github.com/roytuts/soap](https://github.com/roytuts/soap)
 * [https://dzone.com/articles/creating-a-soap-web-serviceCall-with-spring-boot-start](https://dzone.com/articles/creating-a-soap-web-serviceCall-with-spring-boot-start)
 * [https://github.com/nilsmagnus/wsdl2java](https://github.com/nilsmagnus/wsdl2java)
+* [Java SOAP Web Service and WS-Security](https://medium.com/digital-software-architecture/java-soap-web-service-e-ws-security-a62481bb27bd)
 
 
 
