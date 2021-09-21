@@ -1,5 +1,6 @@
-# Spring Boot Module
+# Spring Boot MapStruct Module
 
-## References
+## References 
 - [https://mapstruct.org/](https://mapstruct.org/)
 - [https://github.com/mapstruct/mapstruct-examples](https://github.com/mapstruct/mapstruct-examples)
+- [https://mapstruct.org/documentation/stable/reference/html/](https://mapstruct.org/documentation/stable/reference/html/)
