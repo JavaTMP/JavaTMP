@@ -1,5 +1,8 @@
 package com.javatmp.demo.ms;
 
+import com.javatmp.demo.ms.simple.Source;
+import com.javatmp.demo.ms.simple.SourceTargetMapper;
+import com.javatmp.demo.ms.simple.Target;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 

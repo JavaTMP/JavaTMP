@@ -1,4 +1,4 @@
-package com.javatmp.demo.ms;
+package com.javatmp.demo.ms.simple;
 
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;

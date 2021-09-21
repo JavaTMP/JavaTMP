@@ -1,4 +1,4 @@
-package com.javatmp.demo.ms;
+package com.javatmp.demo.ms.simple;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
