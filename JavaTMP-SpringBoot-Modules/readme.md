@@ -38,8 +38,6 @@ These additional references should also help you:
 * [12 Factor Apps with Spring Boot](https://reflectoring.io/spring-boot-12-factor-app/)
 
 ### Pending Modules Not Covered yet
-[Java bean mapping tool, MapStruct]()
-[Testcontainers automated integration tests]()
 [develop reactive microservices]()
 [develop non-blocking synchronous REST APIs]()
 [asynchronous event-driven services]()
@@ -68,3 +66,5 @@ These additional references should also help you:
 [How to Use Client Credentials Flow with Spring Security](https://developer.okta.com/blog/2021/05/05/client-credentials-spring-security)
 []()
 
+*********************************************
+[Testcontainers automated integration tests]()
