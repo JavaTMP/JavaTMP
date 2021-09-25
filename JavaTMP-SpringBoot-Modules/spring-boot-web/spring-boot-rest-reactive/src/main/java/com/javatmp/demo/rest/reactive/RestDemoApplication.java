@@ -1,10 +1,13 @@
-package com.javatmp.demo.rest;
+package com.javatmp.demo.rest.reactive;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import reactor.core.scheduler.Scheduler;
+import reactor.core.scheduler.Schedulers;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -20,6 +23,23 @@ import java.util.stream.IntStream;
 @SpringBootApplication
 @Slf4j
 public class RestDemoApplication {
+
+    private final Integer threadPoolSize;
+    private final Integer taskQueueSize;
+
+    public RestDemoApplication(
+            @Value("${app.threadPoolSize:10}") Integer threadPoolSize,
+            @Value("${app.taskQueueSize:100}") Integer taskQueueSize) {
+        this.threadPoolSize = threadPoolSize;
+        this.taskQueueSize = taskQueueSize;
+    }
+
+    @Bean
+    public Scheduler reactiveScheduler() {
+        log.info("Creates a jdbcScheduler with thread pool size = {}", threadPoolSize);
+        return Schedulers.newBoundedElastic(
+                threadPoolSize, taskQueueSize, "reactiveScheduler-pool");
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(RestDemoApplication.class, args);
@@ -42,7 +62,8 @@ public class RestDemoApplication {
 
     @Bean
     public Set<RestDto> getRestDtoRepository() {
-        final Set<RestDto> data = Collections.synchronizedSet(new LinkedHashSet<>());
+        final Set<RestDto> data = Collections
+                .synchronizedSet(new LinkedHashSet<>());
         IntStream.range(1, 100).forEach(i -> {
             RestDto restDto = this.getRandomDto(i);
             data.add(restDto);
