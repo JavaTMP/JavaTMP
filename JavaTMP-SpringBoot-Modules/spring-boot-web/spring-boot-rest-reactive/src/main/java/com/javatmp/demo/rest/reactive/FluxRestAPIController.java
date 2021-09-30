@@ -23,21 +23,25 @@ public class FluxRestAPIController {
     @GetMapping("/get")
     Flux<RestDto> all() {
         log.debug("requested get request");
-        return Flux.fromStream(()-> this.restDtoRepository.stream())
+        return Flux.fromStream(() -> this.restDtoRepository.stream())
                 .subscribeOn(reactiveScheduler);
     }
 
+    private RestDto getItem(Long id) {
+        return restDtoRepository.stream()
+                .filter(restDto -> restDto.getId().equals(id))
+                .findAny()
+                .orElseThrow(() ->
+                        new IllegalArgumentException(
+                                String.format("id not found : %d .", id)));
+    }
+
     @GetMapping("/get/{id}")
-    Mono<RestDto> get(@PathVariable Long id) {
+    Flux<RestDto> get(@PathVariable Long id) {
         log.info("try getting id :{}", id);
-        return Mono.fromCallable(() -> {
-            return restDtoRepository.stream()
-                    .filter(restDto -> restDto.getId().equals(id))
-                    .findAny()
-                    .orElseThrow(() ->
-                            new IllegalArgumentException(
-                                    String.format("id not found : %d .", id)));
-        }).subscribeOn(reactiveScheduler);
+        RestDto dto = this.getItem(id);
+        Flux<RestDto> tFlux = Flux.just(dto).subscribeOn(reactiveScheduler);
+        return tFlux;
     }
 
     @PostMapping("/post")
