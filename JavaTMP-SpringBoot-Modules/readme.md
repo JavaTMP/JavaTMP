@@ -44,7 +44,7 @@ These additional references should also help you:
 [Spring Data for MongoDB]()
 [Spring Cloud Stream using Publisher/Subscriber/Destination/Binder]
 (https://medium.com/walmartglobaltech/streaming-with-spring-cloud-24a001ad307a https://github.com/bertsanders/spring-cloud-stream-demo/blob/master/src/main/resources/application.yml)
-
+[Event-Driven Application Using Spring Cloud Stream](https://faun.pub/event-driven-application-using-spring-cloud-stream-c1a97eb81427)
 [Adding an API Description Using OpenAPI]()
 [Srping boot cloud - Circuit breaker]()
 ************************************************************

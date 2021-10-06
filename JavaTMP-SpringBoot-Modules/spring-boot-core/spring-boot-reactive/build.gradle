@@ -1,0 +1,9 @@
+
+bootJar {
+    enabled = true
+}
+
+dependencies {
+    implementation 'io.projectreactor:reactor-core'
+    testImplementation 'io.projectreactor:reactor-test'
+}

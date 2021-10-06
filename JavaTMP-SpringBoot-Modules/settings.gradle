@@ -6,6 +6,7 @@ include 'spring-boot-core:spring-boot-order'
 include 'spring-boot-core:spring-boot-autowired'
 include 'spring-boot-core:spring-boot-bean-lifecycle'
 include 'spring-boot-core:spring-boot-resource-bundles'
+include 'spring-boot-core:spring-boot-reactive'
 
 include 'spring-boot-data:spring-boot-jdbc'
 include 'spring-boot-data:spring-boot-jdbc-converter'
