@@ -32,6 +32,7 @@ include 'spring-boot-web:spring-boot-webclient'
 include 'spring-boot-web:spring-boot-web-i18n'
 include 'spring-boot-web:spring-boot-rest-reactive'
 include 'spring-boot-web:spring-boot-rest-reactive-simple'
+include 'spring-boot-web:spring-boot-rest-nonblocking'
 
 include 'spring-boot-threading:spring-boot-thread'
 include 'spring-boot-threading:spring-boot-thread-executor'

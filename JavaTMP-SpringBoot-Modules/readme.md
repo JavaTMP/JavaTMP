@@ -38,10 +38,8 @@ These additional references should also help you:
 * [12 Factor Apps with Spring Boot](https://reflectoring.io/spring-boot-12-factor-app/)
 
 ### Pending Modules Not Covered yet
-[develop reactive microservices]()
 [develop non-blocking synchronous REST APIs]()
 [asynchronous event-driven services]()
-[Spring Data for MongoDB]()
 [Spring Cloud Stream using Publisher/Subscriber/Destination/Binder]
 (https://medium.com/walmartglobaltech/streaming-with-spring-cloud-24a001ad307a https://github.com/bertsanders/spring-cloud-stream-demo/blob/master/src/main/resources/application.yml)
 [Event-Driven Application Using Spring Cloud Stream](https://faun.pub/event-driven-application-using-spring-cloud-stream-c1a97eb81427)
@@ -68,3 +66,4 @@ These additional references should also help you:
 
 *********************************************
 [Testcontainers automated integration tests]()
+[Spring Data for MongoDB]()
