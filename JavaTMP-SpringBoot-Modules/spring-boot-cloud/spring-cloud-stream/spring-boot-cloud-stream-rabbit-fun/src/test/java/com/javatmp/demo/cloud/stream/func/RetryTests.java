@@ -1,5 +1,6 @@
 package com.javatmp.demo.cloud.stream.func;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -41,7 +42,7 @@ public class RetryTests {
     inputDestination.send(message);
 
     Message<byte[]> output = outputDestination.receive();
-    assertThat(output).as("Validating empty output, which indicates no message").isNull();
+    Assertions.assertThat(output).as("Validating empty output, which indicates no message").isNull();
 
     verify(primeNumberService, times(retryAttempts)).nthPrime(anyInt());
   }
@@ -54,7 +55,7 @@ public class RetryTests {
     inputDestination.send(message);
 
     Message<byte[]> output = outputDestination.receive();
-    assertThat(output).as("Validating empty output, which indicates no message").isNull();
+    Assertions.assertThat(output).as("Validating empty output, which indicates no message").isNull();
 
     verify(primeNumberService, times(1)).nthPrime(anyInt());
   }
