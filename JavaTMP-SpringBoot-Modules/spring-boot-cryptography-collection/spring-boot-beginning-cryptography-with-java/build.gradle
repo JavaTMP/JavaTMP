@@ -1,3 +1,7 @@
+bootJar {
+    enabled = false
+    mainClass = ''
+}
 buildscript {
     gradle.projectsEvaluated {
         tasks.withType(JavaCompile) {

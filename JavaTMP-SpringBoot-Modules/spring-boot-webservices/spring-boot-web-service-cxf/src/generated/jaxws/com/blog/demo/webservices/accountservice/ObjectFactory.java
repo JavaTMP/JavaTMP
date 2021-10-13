@@ -30,14 +30,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Account }
-     * 
-     */
-    public Account createAccount() {
-        return new Account();
-    }
-
-    /**
      * Create an instance of {@link AccountDetailsResponse }
      * 
      */
@@ -51,6 +43,14 @@ public class ObjectFactory {
      */
     public AccountDetailsRequest createAccountDetailsRequest() {
         return new AccountDetailsRequest();
+    }
+
+    /**
+     * Create an instance of {@link Account }
+     * 
+     */
+    public Account createAccount() {
+        return new Account();
     }
 
 }

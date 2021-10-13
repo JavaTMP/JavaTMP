@@ -1,0 +1,44 @@
+management.endpoints.web.exposure.include: "*"
+management.endpoints.enabled-by-default: true
+
+application:
+  message: "Welcome To local property from config server"
+server:
+  port: 8081 # 8080
+
+spring:
+  application:
+    name: spring-boot-cloud-stream-rabbit-fun
+  config:
+    import: optional:configserver:${spring.cloud.config.uri}
+  profiles:
+    active: default
+  cloud:
+    config:
+      uri: http://localhost:8071
+    function:
+      definition: calculateNthPrime
+    stream:
+      bindings:
+        calculateNthPrime-in-0:
+          consumer:
+            max-attempts: 3
+            back-off-initial-interval: 100
+            retryable-exceptions:
+              javax:
+                validation:
+                  ValidationException: false
+          destination: input-topic
+          group: consumer-group
+          concurrency: 2
+        calculateNthPrime-out-0:
+          destination: output-topic
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: "http://localhost:8070/eureka/"

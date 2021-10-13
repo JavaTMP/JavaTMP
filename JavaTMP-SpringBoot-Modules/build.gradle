@@ -96,7 +96,12 @@ subprojects {
 
     bootJar {
         enabled = false
+        mainClass = ''
     }
+
+    // Skips tests if you do not provide prod project property from command line
+    test.onlyIf { project.hasProperty('prod') }
+
 }
 
 test {
@@ -107,6 +112,3 @@ test {
 }
 
 test.onlyIf { false == true }
-
-// Skips tests if you do not provide prod project property from command line
-test.onlyIf { project.hasProperty('prod') }

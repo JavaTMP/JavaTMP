@@ -1,3 +1,7 @@
+bootJar {
+    enabled = false
+    mainClass = ''
+}
 
 dependencies {
 

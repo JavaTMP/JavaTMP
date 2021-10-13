@@ -1,6 +1,6 @@
 package com.javatmp.demo.security.context;
 
-import com.javatmp.demo.services.HelloService;
+import com.javatmp.demo.security.context.services.HelloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.security.concurrent.DelegatingSecurityContextCallable;
