@@ -21,9 +21,5 @@ dependencies {
         exclude group: 'com.netflix.ribbon', module: 'ribbon-eureka'
     }
 
-    implementation 'org.springframework.cloud:spring-cloud-starter-loadbalancer'
-    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
-
-
 }
 
