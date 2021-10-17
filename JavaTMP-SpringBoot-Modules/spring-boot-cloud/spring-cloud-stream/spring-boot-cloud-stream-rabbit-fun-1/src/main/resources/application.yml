@@ -1,0 +1,54 @@
+management.endpoints.web.exposure.include: "*"
+management.endpoints.enabled-by-default: true
+
+server:
+  port: 8081 # 8080
+
+spring:
+  application:
+    name: spring-boot-cloud-stream-rabbit-fun-1
+  config:
+    import: optional:configserver:${spring.cloud.config.uri}
+  profiles:
+    active: default
+  cloud:
+    config:
+      uri: http://localhost:8071
+
+eureka:
+  instance:
+    preferIpAddress: true
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: "http://localhost:8070/eureka/"
+
+
+spring.cloud.function.definition: messageProcessor
+#  ;messageSupplier
+
+spring.cloud.stream:
+  defaultBinder: rabbit
+  bindings.messageProcessor-in-0:
+    destination: products
+    group: productsGroup
+#  bindings.messageSupplier-out-0:
+#    destination: products
+
+
+spring.cloud.stream.bindings.messageProcessor-in-0.consumer:
+  maxAttempts: 3
+  backOffInitialInterval: 500
+  backOffMaxInterval: 1000
+  backOffMultiplier: 2.0
+
+spring.cloud.stream.rabbit.bindings.messageProcessor-in-0.consumer:
+  autoBindDlq: true
+  republishToDlq: true
+
+spring.rabbitmq:
+  host: 127.0.0.1
+  port: 5672
+  username: guest
+  password: guest

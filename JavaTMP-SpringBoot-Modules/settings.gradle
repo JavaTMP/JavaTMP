@@ -127,6 +127,7 @@ include 'spring-boot-cloud:spring-cloud-security:spring-boot-cloud-service-secur
 
 include 'spring-boot-cloud:spring-cloud-stream:spring-boot-cloud-stream-rabbitmq-producer'
 include 'spring-boot-cloud:spring-cloud-stream:spring-boot-cloud-stream-rabbit-fun'
+include 'spring-boot-cloud:spring-cloud-stream:spring-boot-cloud-stream-rabbit-fun-1'
 
 include 'spring-boot-cloud:spring-cloud-stream:spring-boot-cloud-stream-kafka'
 include 'spring-boot-cloud:spring-cloud-stream:spring-boot-cloud-stream-kafka-consumer'

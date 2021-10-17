@@ -30,6 +30,7 @@ public class DemoApplication {
 
     @Bean
     Function<Integer, BigInteger> calculateNthPrime(PrimeNumberService primeNumberService) {
+        log.debug("calculate prime function created");
         return primeNumberService::nthPrime;
     }
 

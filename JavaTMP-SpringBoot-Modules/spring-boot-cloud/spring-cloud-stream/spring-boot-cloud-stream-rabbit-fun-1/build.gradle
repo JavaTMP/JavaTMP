@@ -10,8 +10,9 @@ bootJar {
 }
 
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+//    implementation 'org.springframework.boot:spring-boot-starter-web'
+//    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+
     implementation 'org.springframework.cloud:spring-cloud-starter-config'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
@@ -20,19 +21,8 @@ dependencies {
         exclude group: 'com.netflix.ribbon', module: 'ribbon-eureka'
     }
 
-//    implementation 'org.springframework.cloud:spring-cloud-stream'
     implementation 'org.springframework.cloud:spring-cloud-starter-stream-rabbit'
-//    implementation 'org.springframework.cloud:spring-cloud-stream-binder-rabbit'
     testImplementation 'org.springframework.cloud:spring-cloud-stream::test-binder'
-
-//    testImplementation("org.springframework.cloud:spring-cloud-stream") {
-//        artifact {
-//            name = "spring-cloud-stream"
-//            extension = "jar"
-//            type ="test-jar"
-//            classifier = "test-binder"
-//        }
-//    }
-
+    testImplementation('org.springframework.cloud:spring-cloud-stream-test-support')
 }
 
