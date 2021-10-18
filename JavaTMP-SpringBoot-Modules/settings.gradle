@@ -55,6 +55,7 @@ include 'spring-boot-miscellaneous:spring-boot-testing'
 include 'spring-boot-miscellaneous:spring-boot-admin-server'
 include 'spring-boot-miscellaneous:spring-boot-admin-client'
 include 'spring-boot-miscellaneous:spring-boot-MapStruct'
+include 'spring-boot-miscellaneous:spring-boot-OpenAPI'
 
 include 'spring-boot-cache:spring-boot-cache-simple'
 include 'spring-boot-cache:spring-boot-cache-redis'
