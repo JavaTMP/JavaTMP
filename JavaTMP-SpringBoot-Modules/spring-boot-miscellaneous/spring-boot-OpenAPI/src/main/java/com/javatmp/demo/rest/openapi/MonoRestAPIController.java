@@ -1,5 +1,4 @@
-package com.javatmp.demo.rest;
-
+package com.javatmp.demo.rest.openapi;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +17,23 @@ public class MonoRestAPIController {
 
     @Autowired
     private Scheduler reactiveScheduler;
+    public static Long getAnyInteger(long base) throws Exception {
+        if(base % 2 == 0){
+            throw new RuntimeException("An error as occured for no reason.");
+        } else {
+            return base;
+        }
+    }
+
+    public static void monoCreateExample() {
+        Mono<Long> nativeMono = Mono.create(callback -> {
+            try {
+                callback.success(getAnyInteger(System.currentTimeMillis()));
+            } catch (Exception e) {
+                callback.error(e);
+            }
+        });
+    }
 
     @GetMapping("/get")
     Mono<Set<RestDto>> all() {

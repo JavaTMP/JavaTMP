@@ -1,5 +1,9 @@
-package com.javatmp.demo.rest;
+package com.javatmp.demo.rest.openapi;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +16,8 @@ import java.util.Set;
 @RestController
 @RequestMapping("/rest/flux")
 @Slf4j
+@Tag(name = "Flux Rest API Controller",
+        description = "Flux REST API for General Repository")
 public class FluxRestAPIController {
 
     @Autowired
@@ -20,11 +26,32 @@ public class FluxRestAPIController {
     @Autowired
     private Scheduler reactiveScheduler;
 
+    @Operation(
+            summary = "${api.product-composite.get-composite-product.description}",
+            description = "${api.product-composite.get-composite-product.notes}")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "${api.responseCodes.ok.description}"),
+            @ApiResponse(responseCode = "400", description = "${api.responseCodes.badRequest.description}"),
+            @ApiResponse(responseCode = "404", description = "${api.responseCodes.notFound.description}"),
+            @ApiResponse(responseCode = "422", description = "${api.responseCodes.unprocessableEntity.description}")
+    })
     @GetMapping("/get")
     Flux<RestDto> all() {
         log.debug("requested get request");
         return Flux.fromStream(() -> this.restDtoRepository.stream())
                 .subscribeOn(reactiveScheduler);
+    }
+
+    @GetMapping("/get1")
+    Flux<RestDto> get1() {
+        log.debug("requested get request");
+        Flux<RestDto> retFlux = Flux.create(emitter -> {
+            this.restDtoRepository.stream().forEach(d -> {
+                emitter.next(d);
+            });
+            emitter.complete();
+        }).subscribeOn(reactiveScheduler).cast(RestDto.class);
+        return retFlux;
     }
 
     private RestDto getItem(Long id) {

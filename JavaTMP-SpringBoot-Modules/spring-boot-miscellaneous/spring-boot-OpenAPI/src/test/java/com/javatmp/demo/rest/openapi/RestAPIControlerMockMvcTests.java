@@ -1,4 +1,4 @@
-package com.javatmp.demo.rest;
+package com.javatmp.demo.rest.openapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

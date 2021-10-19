@@ -38,7 +38,6 @@ These additional references should also help you:
 * [12 Factor Apps with Spring Boot](https://reflectoring.io/spring-boot-12-factor-app/)
 
 ### Pending Modules Not Covered yet
-[Adding an API Description Using OpenAPI]()
 [Srping boot cloud - Circuit breaker]()
 ************************************************************
 [Distributed tracing with Zipkin]()

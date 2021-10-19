@@ -1,4 +1,4 @@
-package com.javatmp.demo.rest;
+package com.javatmp.demo.rest.openapi;
 
 import lombok.*;
 
