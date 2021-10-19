@@ -22,12 +22,12 @@ import java.util.stream.IntStream;
  */
 @SpringBootApplication
 @Slf4j
-public class RestDemoApplication {
+public class ReactiveRestDemoApplication {
 
     private final Integer threadPoolSize;
     private final Integer taskQueueSize;
 
-    public RestDemoApplication(
+    public ReactiveRestDemoApplication(
             @Value("${app.threadPoolSize:10}") Integer threadPoolSize,
             @Value("${app.taskQueueSize:100}") Integer taskQueueSize) {
         this.threadPoolSize = threadPoolSize;
@@ -42,7 +42,7 @@ public class RestDemoApplication {
     }
 
     public static void main(String[] args) {
-        SpringApplication.run(RestDemoApplication.class, args);
+        SpringApplication.run(ReactiveRestDemoApplication.class, args);
     }
 
     private RestDto getRandomDto(long index) {
