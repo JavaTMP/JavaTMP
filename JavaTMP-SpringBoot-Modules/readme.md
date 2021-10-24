@@ -47,7 +47,6 @@ These additional references should also help you:
 [Call OAuth2 microservice]()
 [Appendix A. Microservices architecture best practices](https://livebook.manning.com/book/spring-microservices-in-action-second-edition/appendix-a/)
 [11 Distributed tracing with Spring Cloud Sleuth and Zipkin](https://livebook.manning.com/book/spring-microservices-in-action-second-edition/chapter-11/)
-[10 Event-driven architecture with Spring Cloud Stream](https://livebook.manning.com/book/spring-microservices-in-action-second-edition/chapter-10/)
 [Appendix C. Monitoring your microservices](https://livebook.manning.com/book/spring-microservices-in-action-second-edition/appendix-c/)
 *******************************
 [Spring Security 5 Replacement for OAuth2RestTemplate](https://newbedev.com/spring-security-5-replacement-for-oauth2resttemplate)
