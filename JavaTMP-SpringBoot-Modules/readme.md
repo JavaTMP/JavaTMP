@@ -39,12 +39,10 @@ These additional references should also help you:
 
 ### Pending Modules Not Covered yet
 [Srping boot cloud - Circuit breaker]()
-************************************************************
 [Distributed tracing with Zipkin]()
 [Configuring Kibana]()
 [A Spring Cloud Sleuth/ELK Stack implementation in action]()
 [Spring Cloud Sleuth and the correlation ID]()
-[Call OAuth2 microservice]()
 [Appendix A. Microservices architecture best practices](https://livebook.manning.com/book/spring-microservices-in-action-second-edition/appendix-a/)
 [11 Distributed tracing with Spring Cloud Sleuth and Zipkin](https://livebook.manning.com/book/spring-microservices-in-action-second-edition/chapter-11/)
 [Appendix C. Monitoring your microservices](https://livebook.manning.com/book/spring-microservices-in-action-second-edition/appendix-c/)
