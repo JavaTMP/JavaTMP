@@ -30,11 +30,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link AccountDetailsResponse }
+     * Create an instance of {@link Account }
      * 
      */
-    public AccountDetailsResponse createAccountDetailsResponse() {
-        return new AccountDetailsResponse();
+    public Account createAccount() {
+        return new Account();
     }
 
     /**
@@ -46,11 +46,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Account }
+     * Create an instance of {@link AccountDetailsResponse }
      * 
      */
-    public Account createAccount() {
-        return new Account();
+    public AccountDetailsResponse createAccountDetailsResponse() {
+        return new AccountDetailsResponse();
     }
 
 }

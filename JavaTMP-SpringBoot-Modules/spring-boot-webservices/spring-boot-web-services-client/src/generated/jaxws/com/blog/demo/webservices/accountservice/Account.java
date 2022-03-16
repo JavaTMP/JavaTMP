@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="AccountNumber" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="AccountName" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="AccountBalance" type="{http://www.w3.org/2001/XMLSchema}double"/>
- *         &lt;element name="AccountStatus" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="AccountStatus" type="{http://com/blog/demo/webservices/accountservice}EnumAccountStatus"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -45,7 +45,7 @@ public class Account {
     @XmlElement(name = "AccountBalance")
     protected double accountBalance;
     @XmlElement(name = "AccountStatus", required = true)
-    protected String accountStatus;
+    protected EnumAccountStatus accountStatus;
 
     /**
      * Gets the value of the accountNumber property.
@@ -116,10 +116,10 @@ public class Account {
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link EnumAccountStatus }
      *     
      */
-    public String getAccountStatus() {
+    public EnumAccountStatus getAccountStatus() {
         return accountStatus;
     }
 
@@ -128,10 +128,10 @@ public class Account {
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link EnumAccountStatus }
      *     
      */
-    public void setAccountStatus(String value) {
+    public void setAccountStatus(EnumAccountStatus value) {
         this.accountStatus = value;
     }
 
