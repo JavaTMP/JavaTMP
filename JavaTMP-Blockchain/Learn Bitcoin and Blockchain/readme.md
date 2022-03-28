@@ -22,7 +22,6 @@
 #### Platforms for blockchain
 
 ## Fundamentals of Decentralization
-
 ### Decentralized, centralized, and distributed systems
 #### How decentralized systems work
 #### Decentralized applications
@@ -57,10 +56,9 @@
 ### Smart contracts and decentralized applications
 #### Understanding smart contracts
 
-
-
 ## Bitcoin and Blockchain Security
+### Securing Bitcoin and blockchain
+
 
 ## References
-[Blockchain Quick Reference](https://subscription.packtpub.com/book/data/9781788995788/)
-[Github source code](https://github.com/PacktPublishing/Blockchain-Quick-Reference)
+[Learn Bitcoin and Blockchain](https://subscription.packtpub.com/book/big-data-and-business-intelligence/9781789536133)
