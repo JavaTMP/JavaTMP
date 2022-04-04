@@ -98,8 +98,87 @@ the HTTP or IPC connection. `Web3.js` works by exposing methods that have been e
 `Web3` can be installed via `npm` using the following command:
 `npm install web3`
 
+#### Truffle framework
+
+Truffle is a development framework that makes it simple to test and deploy Ethereum smart contracts. Truffle can be
+installed via npm using the following command:
+`npm install -g truffle`
+
+Truffle helps in contract compilation and linking along with automated testing framework using `Mocha` and `Chai`. With
+Truffle, we can easily deploy contracts to any `estNet`, `MainNet`, or private Network ID. Truffle does everything in a
+DApp, such as the compiling of contracts, injecting them into the user interface and testing to check for
+vulnerabilities.
+
+#### Ganache
+
+`Ganache` is a tool introduced by the Truffle Foundation to run tests on the Ethereum blockchain created. It has a
+command-line interface, but a graphical interface is also available when required.
+
+### Working on a smart contract
+
+Creating a smart contract, along with the process of testing the smart contract on `TestNet`:
+
+- When you open Remix in the browser, by default, it opens the ballot.sol file; you can create a new file and start
+  editing your first smart contract.
+- Now let's create a constructor that will initialize the variables we have defined.
+- Now, let's add the standard ERC20 methods to a separate contract; these are required to be present in an Ethereum
+  smart contract.
+- Our contract has to have address of the owner; this will help with transferring the coins when the contract is
+  deployed.
+- The minimum required functions for a Solidity file to be a valid ERC20 standard token.
+- you can run it by pressing the Start to compile button on the right-hand-side panel in Remix.
 
 ## Ethereum Accounts and Ether Token
+
+### Introducing Ethereum accounts
+
+The state in Ethereum is made up of objects, each known as an account. Each account in Ethereum contains a 20-byte
+address. Each state transition is a direct transaction of value and information between various accounts. Each operation
+performed between or on the accounts is known as a state transition. The state transition in Ethereum is done using the
+Ethereum state transition function. The state change in Ethereum blockchain starts from the genesis block of the
+blockchain.
+
+Each block contains a series of transactions, and each block is chained to its previous block. To transition from one
+state to the next, the transaction has to be valid. The transaction is further validated using consensus techniques.
+
+There are two types of accounts in Ethereum blockchain. Namely, Contract Accounts (CA) and Externally Owned Accounts
+(EOAs). The contract accounts are the ones that have code associated with them along with a private key. EOA has an
+ether balance; it is able to send transactions and has no associated code, whereas CA has an ether balance and
+associated code. The contract account and the externally owned accounts have features of their own, and a new token can
+only be initiated by the contract account.
+
+#### Ethereum state transition function
+
+In the state transition function, the following is the process that every transaction in Ethereum adheres to:
+
+- Confirming of the transaction's validity and structure,
+- The transaction fee calculation is done using the price of gas
+- Certain gas is taken to cover the cost of the transaction.
+- In this step, the actual transfer of value occurs.
+- If the transaction failed due to insufficient balance or gas, all the state changes are reverted, apart from the
+  payment of fees, which is transferred to the miners.
+- If there is reminder fee available, then it is sent back to the sender, as change after paying the miners as required.
+  Function returns the resulting state at this point.
+
+The function is implemented independently in each of the Ethereum clients.
+
+#### Genesis block
+
+This is the first block of the Ethereum blockchain, just like the genesis block of the Bitcoin blockchain. The height of
+the genesis block is 0.
+
+#### Transaction receipts
+Receipts are used to store the state, after a transaction has been executed.
+
+#### Elements
+Elements is composed of four primary elements:
+- Post-transaction state
+- Gas used
+- Set of logs
+- The bloom filter
+
+#### Structure
+Look at the the structure of a transaction receipt looks like.
 
 ## Decentralized Applications
 
