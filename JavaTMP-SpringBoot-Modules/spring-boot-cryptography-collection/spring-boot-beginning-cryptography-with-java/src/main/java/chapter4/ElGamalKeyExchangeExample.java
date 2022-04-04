@@ -41,10 +41,7 @@ public class ElGamalKeyExchangeExample
         };
     }
 
-    public static void main(
-        String[]    args)
-        throws Exception
-    {
+    public static void main(String[] args) throws Exception {
         byte[]           input = new byte[] { 0x00, (byte)0xbe, (byte)0xef };
         SecureRandom     random = new SecureRandom();
 

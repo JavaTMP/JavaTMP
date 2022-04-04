@@ -11,10 +11,7 @@ import java.security.spec.ECGenParameterSpec;
  */
 public class BasicECDSAExample
 {
-    public static void main(
-        String[]    args)
-    	throws Exception
-    {
+    public static void main(String[] args) throws Exception {
         KeyPairGenerator keyGen = KeyPairGenerator.getInstance("ECDSA", "BC");
         ECGenParameterSpec ecSpec = new ECGenParameterSpec("prime192v1");
 

@@ -7,8 +7,7 @@ import java.security.SecureRandom;
 /**
  * Utility class for chapter 4 examples
  */
-public class Utils
-        extends chapter3.Utils {
+public class Utils extends chapter3.Utils {
     /**
      * Return a SecureRandom which produces the same value.
      * <b>This is for testing only!</b>

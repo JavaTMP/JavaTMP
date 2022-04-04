@@ -14,10 +14,7 @@ import javax.crypto.Cipher;
  */
 public class BaseRSAExample
 {
-    public static void main(
-        String[]    args)
-        throws Exception
-    {
+    public static void main(String[] args) throws Exception {
         byte[]           input = new byte[] { (byte)0xbe, (byte)0xef };
         Cipher	         cipher = Cipher.getInstance("RSA/None/NoPadding", "BC");
         KeyFactory       keyFactory = KeyFactory.getInstance("RSA", "BC");

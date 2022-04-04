@@ -9,20 +9,16 @@ import java.security.SecureRandom;
 /**
  * Wrapping an RSA Key using AES
  */
-public class AESWrapRSAExample
-{
-    public static void main(
-        String[]    args)
-		throws Exception
-    {
-        Cipher       cipher = Cipher.getInstance("AES/ECB/PKCS7Padding", "BC");
+public class AESWrapRSAExample {
+    public static void main(String[] args) throws Exception {
+        Cipher cipher = Cipher.getInstance("AES/ECB/PKCS7Padding", "BC");
         SecureRandom random = new SecureRandom();
 
         KeyPairGenerator fact = KeyPairGenerator.getInstance("RSA", "BC");
-        fact.initialize(1024, new SecureRandom());
+        fact.initialize(1024, random);
 
-        KeyPair     keyPair = fact.generateKeyPair();
-        Key         wrapKey = Utils.createKeyForAES(256, random);
+        KeyPair keyPair = fact.generateKeyPair();
+        Key wrapKey = Utils.createKeyForAES(256, random);
 
         // wrap the RSA private key
         cipher.init(Cipher.WRAP_MODE, wrapKey);
@@ -34,13 +30,10 @@ public class AESWrapRSAExample
 
         Key key = cipher.unwrap(wrappedKey, "RSA", Cipher.PRIVATE_KEY);
 
-        if (keyPair.getPrivate().equals(key))
-        {
+        if (keyPair.getPrivate().equals(key)) {
             System.out.println("Key recovered.");
+        } else {
+            System.out.println("Key recovery failed.");
         }
-		else
-		{
-		    System.out.println("Key recovery failed.");
-		}
     }
 }

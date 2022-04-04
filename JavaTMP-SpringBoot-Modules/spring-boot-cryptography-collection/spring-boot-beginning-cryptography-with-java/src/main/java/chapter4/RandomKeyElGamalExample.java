@@ -1,34 +1,29 @@
 package chapter4;
 
+import javax.crypto.Cipher;
 import java.security.Key;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.SecureRandom;
 
-import javax.crypto.Cipher;
-
 /**
  * El Gamal example with random key generation.
  */
-public class RandomKeyElGamalExample
-{
-    public static void main(
-        String[]    args)
-        throws Exception
-    {
-        byte[]           input = new byte[] { (byte)0xbe, (byte)0xef };
-        Cipher	         cipher = Cipher.getInstance("ElGamal/None/NoPadding", "BC");
+public class RandomKeyElGamalExample {
+    public static void main(String[] args) throws Exception {
+        byte[] input = new byte[]{(byte) 0xbe, (byte) 0xef};
+        Cipher cipher = Cipher.getInstance("ElGamal/None/NoPadding", "BC");
 
-        SecureRandom     random = Utils.createFixedRandom();
+        SecureRandom random = Utils.createFixedRandom();
 
         // create the keys
         KeyPairGenerator generator = KeyPairGenerator.getInstance("ElGamal", "BC");
 
         generator.initialize(256, random);
 
-        KeyPair          pair = generator.generateKeyPair();
-        Key              pubKey = pair.getPublic();
-        Key              privKey = pair.getPrivate();
+        KeyPair pair = generator.generateKeyPair();
+        Key pubKey = pair.getPublic();
+        Key privKey = pair.getPrivate();
 
         System.out.println("input : " + Utils.toHex(input));
 

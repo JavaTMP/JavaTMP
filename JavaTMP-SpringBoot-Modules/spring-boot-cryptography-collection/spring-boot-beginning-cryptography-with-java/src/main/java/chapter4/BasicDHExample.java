@@ -22,10 +22,7 @@ public class BasicDHExample
           + "44d488cf8e31db8bcb7d33b41abb9e5a33cca9144b1cef332c94b"
           + "f0573bf047a3aca98cdf3b", 16);
 
-    public static void main(
-        String[]    args)
-        throws Exception
-    {
+    public static void main(String[] args) throws Exception {
         DHParameterSpec             dhParams = new DHParameterSpec(p512, g512);
 
         KeyPairGenerator keyGen = KeyPairGenerator.getInstance("DH", "BC");

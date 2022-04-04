@@ -8,10 +8,7 @@ import java.security.spec.ECGenParameterSpec;
 
 public class NamedCurveExample
 {
-    public static void main(
-        String[]    args)
-        throws Exception
-    {
+    public static void main(String[] args) throws Exception {
         KeyPairGenerator   keyGen = KeyPairGenerator.getInstance("ECDH", "BC");
         ECGenParameterSpec ecSpec = new ECGenParameterSpec("prime192v1");
 

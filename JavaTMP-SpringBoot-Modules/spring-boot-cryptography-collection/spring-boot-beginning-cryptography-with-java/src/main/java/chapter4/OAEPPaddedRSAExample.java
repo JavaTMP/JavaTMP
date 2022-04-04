@@ -12,10 +12,7 @@ import javax.crypto.Cipher;
  */
 public class OAEPPaddedRSAExample
 {
-    public static void main(
-        String[]    args)
-        throws Exception
-    {
+    public static void main(String[] args) throws Exception {
         byte[]           input = new byte[] { 0x00, (byte)0xbe, (byte)0xef };
         Cipher	         cipher = Cipher.getInstance("RSA/NONE/OAEPWithSHA1AndMGF1Padding", "BC");
         SecureRandom     random = Utils.createFixedRandom();

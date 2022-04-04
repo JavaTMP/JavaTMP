@@ -7,10 +7,7 @@ import java.security.Signature;
 
 public class BasicDSAExample
 {
-    public static void main(
-        String[]    args)
-        throws Exception
-    {
+    public static void main(String[] args) throws Exception {
         KeyPairGenerator keyGen = KeyPairGenerator.getInstance("DSA", "BC");
 
         keyGen.initialize(512, new SecureRandom());

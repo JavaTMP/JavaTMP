@@ -1,33 +1,28 @@
 package chapter4;
 
+import javax.crypto.Cipher;
 import java.security.Key;
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.SecureRandom;
 
-import javax.crypto.Cipher;
-
 /**
  * RSA example with random key generation.
  */
-public class RandomKeyRSAExample
-{
-    public static void main(
-        String[]    args)
-        throws Exception
-    {
-        byte[]           input = new byte[] { (byte)0xbe, (byte)0xef };
-        Cipher	         cipher = Cipher.getInstance("RSA/NONE/NoPadding", "BC");
-        SecureRandom     random = Utils.createFixedRandom();
+public class RandomKeyRSAExample {
+    public static void main(String[] args) throws Exception {
+        byte[] input = new byte[]{(byte) 0xbe, (byte) 0xef};
+        Cipher cipher = Cipher.getInstance("RSA/NONE/NoPadding", "BC");
+        SecureRandom random = Utils.createFixedRandom();
 
         // create the keys
         KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA", "BC");
 
         generator.initialize(256, random);
 
-        KeyPair          pair = generator.generateKeyPair();
-        Key              pubKey = pair.getPublic();
-        Key              privKey = pair.getPrivate();
+        KeyPair pair = generator.generateKeyPair();
+        Key pubKey = pair.getPublic();
+        Key privKey = pair.getPrivate();
 
         System.out.println("input : " + Utils.toHex(input));
 

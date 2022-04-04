@@ -9,10 +9,7 @@ import java.security.spec.PSSParameterSpec;
 
 public class BasicPSSExample
 {
-    public static void main(
-        String[]    args)
-        throws Exception
-    {
+    public static void main(String[] args) throws Exception {
         KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA", "BC");
 
         keyGen.initialize(512, new SecureRandom());
