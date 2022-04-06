@@ -168,19 +168,49 @@ This is the first block of the Ethereum blockchain, just like the genesis block 
 the genesis block is 0.
 
 #### Transaction receipts
+
 Receipts are used to store the state, after a transaction has been executed.
 
 #### Elements
+
 Elements is composed of four primary elements:
+
 - Post-transaction state
 - Gas used
 - Set of logs
 - The bloom filter
 
 #### Structure
-Look at the the structure of a transaction receipt looks like.
+
+Look at the structure of a transaction receipt looks like.
+
+#### Transaction sub state
+
+Suicide set, Log series, Refund balance
+
+#### Messages
+
+Messages are transactions where data is passed between two accounts. It is a data packet passed between two accounts. A
+message can be sent via the Contract Account (CA). They can also be an Externally Owned Account (EOA) in the form of a
+transaction that has been digitally signed by the sender.
+
+Messages are never stored and are similar to transactions.
+
+### Ethereum block validation
+
+After being mined by the miners, an Ethereum block goes through several checks before it is considered valid.
+
+### Disadvantages of Ethereum-based tokens
 
 ## Decentralized Applications
+
+Decentralized Applications (DApps) are applications that run across a decentralized network and are not owned or
+controlled by a centralized authority.
+
+A decentralized application runs on what is typically a peer-to-peer network and is designed in such a way that no one
+person or organization can control the functioning of the application. A decentralized application does not require a
+blockchain. There were multiple decentralized applications before blockchain: BitTorrent, Tor, and Mastodon are all
+decentralized applications that exist without the use of a blockchain.
 
 ## Mining
 
