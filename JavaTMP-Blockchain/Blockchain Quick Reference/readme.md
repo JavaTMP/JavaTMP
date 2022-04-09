@@ -214,6 +214,10 @@ decentralized applications that exist without the use of a blockchain.
 
 ## Mining
 
+When a miner connects with the network, there are various tasks that the miner performs to keep up with the network.
+Each coin has a different specification for miners
+
+
 ## ICO 101
 
 ## Creating Your Own Currency
