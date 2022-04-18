@@ -68,3 +68,4 @@ close look at the costs you'll have to pay to make and sell your NFT to make sur
 
 * [How to Make an NFT](https://www.fool.com/investing/stock-market/market-sectors/financials/non-fungible-tokens/how-to-make-an-nft/)
 * [What Are Non-Fungible Tokens (NFTs)?](https://www.fool.com/investing/stock-market/market-sectors/financials/non-fungible-tokens/)
+* [Best NFT Marketplaces](https://www.fool.com/the-ascent/cryptocurrency/nft-marketplaces/)
