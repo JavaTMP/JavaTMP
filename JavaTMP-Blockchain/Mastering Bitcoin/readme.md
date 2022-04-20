@@ -490,17 +490,18 @@ $ bitcoin-cli getinfo
 
 The API to retrieve and examine that transaction by passing the transaction ID as a
 parameter:
+
 ```shell
-$ bitcoin-cli getrawtransaction 0627052b6f28912f2703066a912ea577f2ce4da4caa5a↵
-5fbd8a57286c345c2f2
+$ bitcoin-cli getrawtransaction 0627052b6f28912f2703066a912ea577f2ce4da4caa5a5fbd8a57286c345c2f2
 ```
 
-The command getrawtransaction returns a serialized transaction in hexadecimal
-notation. To decode that, we use the decoderawtransaction command, passing the
-hex data as a parameter.
+The command getrawtransaction returns a serialized transaction in hexadecimal notation. To
+decode that, we use the decoderawtransaction command, passing the hex data as a parameter.
+
 ```shell
 $ bitcoin-cli decoderawtransaction 0100000001186f.......
 ```
+
 #### Exploring Blocks
 
 #### Using Bitcoin Core’s Programmatic Interface
