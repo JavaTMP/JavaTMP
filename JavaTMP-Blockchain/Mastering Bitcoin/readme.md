@@ -329,26 +329,178 @@ The Bitcoin Core architecture consists of the following main components:
 
 ### Bitcoin Development Environment
 
+you will want to set up a development environment with all the tools, libraries, and
+support software for writing bitcoin applications.
+
 ### Compiling Bitcoin Core from the Source Code
+
+Bitcoin Core’s source code can be downloaded as a ZIP archive or by cloning the
+authoritative source repository from
+the [GitHub bitcoin page](https://github.com/bitcoin/bitcoin).
+
+the git command to create a local copy (“clone”) of the source code:
+
+```shell
+$ git clone https://github.com/bitcoin/bitcoin.git
+```
 
 #### Selecting a Bitcoin Core Release
 
+Before compiling the code, select a specific version by checking out a release tag. to
+find the available tags, we use the `git tag` command. To synchronize the local code with
+specific tag, use the `git checkout` command:
+
+```shell
+$ git checkout v0.11.2
+```
+
+You can confirm you have the desired version “checked out” by issuing the command
+`git status`.
+
 #### Configuring the Bitcoin Core Build
+
+The source code includes documentation, which can be found in a number of files. Review
+the main documentation located in README.md in the bitcoin directory. Carefully review the
+build prerequisites. Review the instructions for compiling the bitcoind commandline client
+on your platform.
 
 #### Building the Bitcoin Core Executables
 
+Next, you will compile the source code, a process that can take up to an hour to complete,
+depending on the speed of your CPU and available memory. Type `make` to start compiling
+the executable application.
+
+If all goes well, Bitcoin Core is now compiled. The final step is to install the various
+executables on your system using the sudo make install command.
+
 ### Running a Bitcoin Core Node
+
+Bitcoin’s peer-to-peer network is composed of network “nodes,” run mostly by volunteers
+and some of the businesses that build bitcoin applications. by running a bitcoin node you
+contribute to the bitcoin network by making it more robust.
+
+Running a node, however, requires a permanently connected system with enough resources to
+process all bitcoin transactions. Bitcoin nodes also transmit and receive bitcoin
+transactions and blocks, consuming internet bandwidth.
+
+Bitcoin Core keeps a full copy of the blockchain by default, with every transaction that
+has ever occurred on the bitcoin network since its inception in 2009. Bitcoin Core will
+not be able to process transactions or update account balances until the full blockchain
+dataset is downloaded.
+
+You would run a Bitcoin node for the following reasons:
+
+* If you are developing bitcoin software and need to rely on a bitcoin node for
+  programmable
+  (API) access to the network and blockchain.
+* If you are building applications that must validate transactions according to bitcoin’s
+  consensus rules.
+* If you want to support bitcoin. Running a node makes the network more robust and able to
+  serve more wallets, more users, and more transactions.
+* If you do not want to rely on any third party to process or validate your transactions.
 
 #### Running Bitcoin Core for the First Time
 
+When you first run `bitcoind`, it will remind you to create a configuration file with a
+strong password for the JSON-RPC interface. Run bitcoind by typing `bitcoind` into the
+terminal.
+
 #### Configuring the Bitcoin Core Node
+
+Edit the configuration file in your preferred editor and set the parameters, replacing the
+password with a strong password as recommended by bitcoind. Typical path to configuration
+file:
+Windows %APPDATA%\Bitcoin\ C:\Users\username\AppData\Roaming\Bitcoin\bitcoin.conf Linux
+$HOME/.bitcoin/ /home/username/.bitcoin/bitcoin.conf Mac OSX $HOME/Library/Application
+Support/Bitcoin/ /Users/username/Library/Application Support/Bitcoin/bitcoin.conf
+
+```properties
+rpcuser=bitcoinrpc
+rpcpassword=CHANGE_THIS
+```
+
+Bitcoin Core offers more than 100 configuration options that modify the behavior of the
+network node, the storage of the blockchain, and many other aspects of its operation. To
+see a listing of these options, run `bitcoind --help`.
+
+By default, Bitcoin Core builds a database containing only the transactions related to the
+user’s wallet.
+
+Set `txindex=1` in the Bitcoin Core configuration file. If you don’t set this option at
+first and later set it to full indexing, you need to restart bitcoind with the -reindex
+option and wait for it to rebuild the index.
+
+Sample coniguration of a resource-constrained system:
+
+```properties
+alertnotify=myemailscript.sh "Alert: %s"
+maxconnections=15
+prune=5000
+minrelaytxfee=0.0001
+maxmempool=200
+maxreceivebuffer=2500
+maxsendbuffer=500
+rpcuser=bitcoinrpc
+rpcpassword=CHANGE_THIS
+```
+
+Once you’ve edited the configuration file and set the options that best represent your
+needs, you can test bitcoind with this configuration. Run Bitcoin Core with the option
+printtoconsole to run in the foreground with output to the console:
+
+```shell
+$ bitcoind -printtoconsole
+```
+
+To run Bitcoin Core in the background as a process, start it with the daemon option,
+as `bitcoind -daemon`.
+
+To monitor the progress and runtime status of your bitcoin node, use the command
+`bitcoin-cli getinfo`.
+
+Once you are happy with the configuration options you have selected, you should add
+bitcoin to the startup scripts in your operating system.
 
 ### Bitcoin Core Application Programming Interface (API)
 
+The Bitcoin Core client implements a JSON-RPC interface that can also be accessed using
+the command-line helper bitcoin-cli. Invoke the help command to see a list of the
+available bitcoin RPC commands:
+
+```shell
+$ bitcoin-cli help
+```
+
+to see help on the getblockhash RPC command:
+
+```shell
+$ bitcoin-cli help getblockhash
+```
+
 #### Getting Information on the Bitcoin Core Client Status
+
+Bitcoin’s getinfo RPC command displays basic information about the status of the bitcoin
+network node, the wallet, and the blockchain database. Use bitcoin-cli to run it:
+
+```shell
+$ bitcoin-cli getinfo
+```
 
 #### Exploring and Decoding Transactions
 
+The API to retrieve and examine that transaction by passing the transaction ID as a
+parameter:
+```shell
+$ bitcoin-cli getrawtransaction 0627052b6f28912f2703066a912ea577f2ce4da4caa5a↵
+5fbd8a57286c345c2f2
+```
+
+The command getrawtransaction returns a serialized transaction in hexadecimal
+notation. To decode that, we use the decoderawtransaction command, passing the
+hex data as a parameter.
+```shell
+$ bitcoin-cli decoderawtransaction 0100000001186f.......
+```
 #### Exploring Blocks
 
 #### Using Bitcoin Core’s Programmatic Interface
