@@ -504,13 +504,171 @@ $ bitcoin-cli decoderawtransaction 0100000001186f.......
 
 #### Exploring Blocks
 
+Commands: getblock, getblockhash
+
+Exploring blocks is similar to exploring transactions. However, blocks can be referenced
+either by the block height or by the block hash.
+
 #### Using Bitcoin Core’s Programmatic Interface
+
+The bitcoin-cli helper is very useful for exploring the Bitcoin Core API and testing
+functions. Bitcoin Core’s API is a JSON-RPC interface.
+
+RPC stands for Remote Procedure Call, which means that we are calling procedures (
+functions) that are remote (on the Bitcoin Core node) via a network protocol.
+
+There are libraries in most every programming language that “wrap” the Bitcoin Core API in
+a way that makes this a lot simpler. Remember, this requires you to have a running Bitcoin
+Core instance, which will be used to make JSON-RPC calls.
 
 ### Alternative Clients, Libraries, and Toolkits
 
+There are many alternative clients, libraries, toolkits, and even full-node
+implementations in the bitcoin ecosystem.
+
 #### JavaScript
 
+* [bcoin](https://bcoin.io/)
+* [Bitcore](https://bitcore.io/)
+* [BitcoinJS](https://github.com/bitcoinjs/bitcoinjs-lib)
+
 ### Java
+
+* [bitcoinj](https://bitcoinj.org/)
+
+## CHAPTER 4: Keys, Addresses
+
+### Introduction
+
+Ownership of bitcoin is established through digital keys, bitcoin addresses, and digital
+signatures. The digital keys are created and stored by users in a file, or simple
+database, called a **wallet**.
+
+The digital keys in a user’s wallet are completely independent of the bitcoin protocol and
+can be generated and managed by the user’s wallet software without reference to the
+blockchain or access to the internet.
+
+Most bitcoin transactions requires a valid digital signature to be included in the
+blockchain, which can only be generated with a secret key. The digital signature used to
+spend funds is also referred to as a witness, The witness data in a bitcoin transaction
+testifies to the true ownership of the funds being spent.
+
+The payment portion of a bitcoin transaction, the recipient’s public key is represented by
+its digital fingerprint, called a bitcoin address. Bitcoin addresses represent public keys
+or scripts.
+
+#### Public Key Cryptography and Cryptocurrency
+
+cryptography enables the creation of digital secrets and unforgeable digital signatures.
+Bitcoin uses elliptic curve multiplication as the basis for its cryptography.
+
+In bitcoin, we use public key cryptography to create a key pair that controls access to
+bitcoin. The public key is used to receive funds, and the private key is used to sign
+transactions to spend the funds.
+
+When spending bitcoin, the current bitcoin owner presents her public key and a signature
+created from the same private key in a transaction to spend those bitcoin.
+
+the private and public keys are stored together as a key pair for convenience. However,
+the public key can be calculated from the private key, so storing only the private key is
+also possible.
+
+#### Private and Public Keys
+
+A bitcoin wallet contains a collection of key pairs, each consisting of a private key and
+a public key.
+
+Private Key (random) -> elliptic curve multiplication -> Public Key -> one-way
+cryptographic hash -> Bitcoin Address.
+
+The useful property of asymmetric cryptography is the ability to generate digital
+signatures. anyone with access to the public key and the transaction fingerprint can use
+them to verify the signature.
+
+#### Private Keys
+
+The bitcoin private key is just a number on 256 bits. The private key is used to create
+signatures that are required to spend bitcoin by proving ownership of funds used in a
+transaction.
+
+##### Generating a private key from a random number
+
+The following is a randomly generated private key (k) shown in hexadecimal format
+(256 bits shown as 64 hexadecimal digits, each 4 bits):
+1E99423A4ED27608A15A2616A2B0E9E52CED330AC530EDCC32C8FFC6A526AEDD
+
+To generate a new key with the Bitcoin Core client, use the `getnewaddress` command. For
+security reasons it displays the public key only, not the private key. To ask bitcoind to
+expose the private key, use the `dumpprivkey` command. The `dumpprivkey` command shows the
+private key in a Base58 checksum-encoded format called the Wallet Import Format (WIF).
+
+```shell
+$ bitcoin-cli getnewaddress
+1J7mdg5rbQyUHENYdx39WVWK7fsLpEoXZy
+$ bitcoin-cli dumpprivkey 1J7mdg5rbQyUHENYdx39WVWK7fsLpEoXZy
+KxFC1jmwwCoACiCAWZ3eXa96mBM6tb3TYzGmf6YwgdGWZgawvrtJ
+```
+
+The `dumpprivkey` command opens the wallet and extracts the private key that was generated
+by the `getnewaddress` command.
+
+#### Public Keys
+
+The public key is calculated from the private key using elliptic curve multiplication,
+which is irreversible: K = P * G, where P is the private key, G is a constant point called
+the generator point, and K is the resulting public key.
+
+#### Elliptic Curve Cryptography Explained
+
+Elliptic curve cryptography is a type of asymmetric or public key cryptography based on
+the discrete logarithm problem as expressed by addition and multiplication on the points
+of an elliptic curve.
+
+#### Generating a Public Key
+
+Because the generator point is always the same for all bitcoin users, a private key P
+multiplied with G will always result in the same public key K.
+
+### Bitcoin Addresses
+
+A bitcoin address is a string of digits and characters that can be shared with anyone who
+wants to send you money. The bitcoin address is what appears most commonly in a
+transaction as the “recipient” of the funds.
+
+A bitcoin address can represent the owner of a private/public key pair, or it can
+represent something else, such as a payment script.
+
+The algorithms used to make a bitcoin address from a public key are the Secure Hash
+Algorithm (SHA) and the RACE Integrity Primitives Evaluation Message Digest (RIPEMD),
+specifically SHA256 and RIPEMD160.
+
+#### Base58 and Base58Check Encoding
+
+Base58 is a textbased binary-encoding format developed for use in bitcoin and used in many
+other cryptocurrencies. Base58 is Base64 without the 0 (number zero), O (capital o), l (
+lower L), I (capital i), and the symbols “+” and “/”. Or, more simply, it is a set of
+lowercase and capital letters and numbers without the four (0, O, l, I) just mentioned
+
+To add extra security against typos or transcription errors, Base58Check is a Base58
+encoding format, frequently used in bitcoin, which has a built-in error-checking code.
+
+Base58Check encoding: a Base58, versioned, and checksummed format for unambiguously
+encoding bitcoin data:
+![img_1.png](img_1.png)
+
+#### Key Formats
+
+### Implementing Keys and Addresses in Python
+
+### Advanced Keys and Addresses
+
+#### Encrypted Private Keys (BIP-38)
+
+#### Pay-to-Script Hash (P2SH) and Multisig Addresses
+
+#### Vanity Addresses
+
+#### Paper Wallets
 
 ## References
 
