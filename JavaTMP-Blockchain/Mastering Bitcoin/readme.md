@@ -644,13 +644,8 @@ specifically SHA256 and RIPEMD160.
 
 #### Base58 and Base58Check Encoding
 
-Base58 is a textbased binary-encoding format developed for use in bitcoin and used in many
-other cryptocurrencies. Base58 is Base64 without the 0 (number zero), O (capital o), l (
-lower L), I (capital i), and the symbols “+” and “/”. Or, more simply, it is a set of
-lowercase and capital letters and numbers without the four (0, O, l, I) just mentioned
-
-To add extra security against typos or transcription errors, Base58Check is a Base58
-encoding format, frequently used in bitcoin, which has a built-in error-checking code.
+Base58 is a set of lowercase and capital letters and numbers without the four (0, O, l, I)
+. Base58Check is a Base58 encoding format, which has a built-in error-checking code.
 
 Base58Check encoding: a Base58, versioned, and checksummed format for unambiguously
 encoding bitcoin data:
@@ -658,7 +653,52 @@ encoding bitcoin data:
 
 #### Key Formats
 
+These formats are primarily used to make it easy for people to read and transcribe keys
+without introducing errors.
+
+##### Private key formats
+
+The private key can be represented in a number of different formats, all of which
+correspond to the same 256-bit number.
+
+##### Decode from Base58Check
+
+You can use Bitcoin Explorer to decode the Base58Check format on the command line.
+
+##### Encode from hex to Base58Check
+
+To encode into Base58Check (the opposite of the previous command), we use the
+base58check-encode command from Bitcoin Explorer and provide the hex private key, followed
+by the WIF version prefix 128
+
+##### Encode from hex (compressed key) to Base58Check
+
+To encode into Base58Check as a “compressed” private key, we append the suffix 01 to the
+hex key and then encode.
+
+##### Public key formats
+
+Public keys are also presented in different ways, usually as either compressed or
+uncompressed public keys.
+
+##### Compressed public keys
+
+Compressed public keys were introduced to bitcoin to reduce the size of transactions and
+conserve disk space on nodes that store the bitcoin blockchain database.
+
+##### Compressed private keys
+
+Private keys are not themselves compressed and cannot be compressed. The term “compressed
+private key” really means “private key from which only compressed public keys should be
+derived,” whereas “uncompressed private key” really means “private key from which only
+uncompressed public keys should be derived.”
+
+In a newer wallet that implements compressed public keys, the private keys will only ever
+be exported as WIF-compressed (with a K or L prefix).
+
 ### Implementing Keys and Addresses in Python
+
+The most comprehensive bitcoin library in Python is pybitcointools by Vitalik Buterin.
 
 ### Advanced Keys and Addresses
 
