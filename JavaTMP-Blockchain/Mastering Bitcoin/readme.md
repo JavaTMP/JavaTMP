@@ -704,11 +704,275 @@ The most comprehensive bitcoin library in Python is pybitcointools by Vitalik Bu
 
 #### Encrypted Private Keys (BIP-38)
 
+BIP-38 proposes a common standard for encrypting private keys with a passphrase and
+encoding them with Base58Check. BIP-38 proposes a common standard for encrypting private
+keys with a passphrase and encoding them with Base58Check.
+
+A BIP-38 encryption scheme takes as input a bitcoin private key, usually encoded in the
+WIF, as a Base58Check string with the prefix of “5.” Additionally, the BIP-38 encryption
+scheme takes a passphrase—a long password—usually composed of several words or a complex
+string of alphanumeric characters. The result of the BIP-38 encryption scheme is a
+Base58Check-encoded encrypted private key that begins with the prefix 6P. If you see a key
+that starts with 6P, it is encrypted and requires a passphrase in order to convert
+(decrypt) it back into a WIF-formatted private key (prefix 5) that can be used in any
+wallet.
+
+The most common use case for BIP-38 encrypted keys is for paper wallets that can be used
+to back up private keys on a piece of paper.
+
 #### Pay-to-Script Hash (P2SH) and Multisig Addresses
+
+Although anyone can send bitcoin to a “1” address, that bitcoin can only be spent by
+presenting the corresponding private key signature and public key hash. Bitcoin addresses
+that begin with the number “3” are pay-to-script hash (P2SH) addresses, sometimes
+erroneously called multisignature or multisig addresses. They designate the beneficiary of
+a bitcoin transaction as the hash of a script, instead of the owner of a public key.
+
+Encoding a P2SH address involves using the same double-hash function as used during
+creation of a bitcoin address, only applied on the script instead of the public key:
+
+```shell
+script hash = RIPEMD160(SHA256(script))
+```
+
+##### Multisignature addresses and P2SH
+
+the most common implementation of the P2SH function is the multisignature address script.
+As the name implies, the underlying script requires more than one signature to prove
+ownership and therefore spend funds.
 
 #### Vanity Addresses
 
+Vanity addresses are valid bitcoin addresses that contain human-readable messages. Vanity
+addresses require generating and testing billions of candidate private keys, until a
+bitcoin address with the desired pattern is found.
+
 #### Paper Wallets
+
+Paper wallets are bitcoin private keys printed on paper. Often the paper wallet also
+includes the corresponding bitcoin address for convenience, but this is not necessary
+because it can be derived from the private key.
+
+Paper wallets can be generated easily using a tool such as the client-side JavaScript
+generator at bitaddress.org.
+
+A more sophisticated paper wallet storage system uses BIP-38 encrypted private keys. The
+keys printed on the paper wallet are protected by a passphrase that the owner has
+memorized.
+
+## CHAPTER 5: Wallets
+
+The wallet is an application that serves as the primary user interface. The wallet
+controls access to a user’s money, managing keys and addresses, tracking the balance, and
+creating and signing transactions. It refers to the data structure used to store and
+manage a user’s keys.
+
+### Wallet Technology Overview
+
+The wallet contains only keys. The “coins” are recorded in the blockchain on the bitcoin
+network. Users control the coins on the network by signing transactions with the keys in
+their wallets. In a sense, a bitcoin wallet is a keychain.
+
+Users sign transactions with the keys, thereby proving they own the transaction outputs (
+their coins). The coins are stored on the blockchain in the form of transaction outputs (
+often noted as vout or txout).
+
+There are two primary types of wallets, distinguished by whether the keys they contain are
+related to each other or not. The nondeterministic or deterministic wallet.
+
+#### Nondeterministic (Random) Wallets
+
+The use of nondeterministic wallets is discouraged for anything other than simple tests.
+They are simply too cumbersome to back up and use. Instead, use an industry-standard–based
+HD wallet with a mnemonic seed for backup.
+
+#### Deterministic (Seeded) Wallets
+
+In a deterministic wallet, the seed is sufficient to recover all the derived keys, and
+therefore a single backup at creation time is sufficient.
+
+#### HD Wallets (BIP-32/BIP-44)
+
+HD wallets contain keys derived in a tree structure, such that a parent key can derive a
+sequence of children keys, each of which can derive a sequence of grandchildren keys, and
+so on, to an infinite depth.
+
+#### Seeds and Mnemonic Codes (BIP-39)
+
+HD wallets are a very powerful mechanism for managing many keys and addresses. They are
+even more useful if they are combined with a standardized way of creating seeds from a
+sequence of English words that are easy to transcribe, export, and import across wallets.
+
+#### Wallet Best Practices
+
+As bitcoin wallet technology has matured, certain common industry standards have emerged
+that make bitcoin wallets broadly interoperable, easy to use, secure, and flexible.
+
+#### Using a Bitcoin Wallet
+
+The Trezor is a simple USB device with two buttons that stores keys (in the form of an HD
+wallet) and signs transactions.
+
+### Wallet Technology Details
+
+important industry standards that are used by many bitcoin wallets
+
+#### Mnemonic Code Words (BIP-39)
+
+Mnemonic code words are word sequences that represent (encode) a random number used as a
+seed to derive a deterministic wallet.
+
+#### Creating an HD Wallet from the Seed
+
+HD wallets are created from a single root seed, which is a 128-, 256-, or 512-bit random
+number.
+
+The root seed is input into the HMAC-SHA512 algorithm and the resulting hash is used to
+create a master private key (m) and a master chain code (c). The master private key (m)
+then generates a corresponding master public key (M)
+using the normal elliptic curve multiplication process m * G. The chain code (c) is used
+to introduce entropy in the function that creates child keys from parent keys.
+
+HD wallets use a child key derivation (CKD) function to derive child keys from parent
+keys.
+
+Extending a parent private key to create a child private key:
+
+![img_2.png](img_2.png)
+
+Changing the index allows us to extend the parent and create the other children in the
+sequence.
+
+Child private keys are indistinguishable from nondeterministic (random) keys. Because the
+derivation function is a one-way function, the child key cannot be used to find the parent
+key.
+
+Without the child chain code, the child key cannot be used to derive any grandchildren
+either. You need both the child private key and the child chain code to start a new branch
+and derive grandchildren.
+
+The two essential ingredients are the key and chain code, and combined these are called an
+extended key.
+
+Extended keys are stored and represented simply as the concatenation of the 256-bit key
+and 256-bit chain code into a 512-bit sequence. There are two types of extended keys.
+
+Extended keys are encoded using Base58Check, to easily export and import between different
+BIP-32–compatible wallets.
+
+Extending a parent public key to create a child public key:
+
+![img_3.png](img_3.png)
+
+#### Using an Extended Public Key on a Web Store
+
+HD wallet offers the ability to derive public child keys without knowing the private keys.
+[https://gear.mycelium.com/](https://gear.mycelium.com/) is an open source web-store
+plugin for a variety of web hosting and content platforms. Mycelium Gear uses the xpub to
+generate a unique address for every purchase.
+
+The ability to derive a branch of public keys from an xpub is very useful, but it comes
+with a potential risk. Access to an xpub does not give access to child private keys.
+However, because the xpub contains the chain code, if a child private key is known, or
+somehow leaked, it can be used with the chain code to derive all the other child private
+keys. A single leaked child private key, together with a parent chain code, reveals all
+the private keys of all the children. Worse, the child private key together with a parent
+chain code can be used to deduce the parent private key.
+
+HD wallets use an alternative derivation function called hardened derivation, which
+“breaks” the relationship between parent public key and child chain code. The hardened
+derivation function uses the parent private key to derive the child chain code, instead of
+the parent public key.
+
+The hardened derivation function looks almost identical to the normal child private key
+derivation, except that the parent private key is used as input to the hash function,
+instead of the parent public key:
+
+![img_4.png](img_4.png)
+
+When the hardened private derivation function is used, the resulting child private key and
+chain code are completely different from what would result from the normal derivation
+function. The resulting “branch” of keys can be used to produce extended public keys that
+are not vulnerable, because the chain code they contain cannot be exploited to reveal any
+private keys.
+
+In simple terms, if you want to use the convenience of an xpub to derive branches of
+public keys, without exposing yourself to the risk of a leaked chain code, you should
+derive it from a hardened parent, rather than a normal parent. As a best practice, the
+level-1 children of the master keys are always derived through the hardened derivation, to
+prevent compromise of the master keys.
+
+The index number used in the derivation function is a 32-bit integer. To easily
+distinguish between keys derived through the normal derivation function versus keys
+derived through hardened derivation, this index number is split into two ranges.
+Therefore, if the index number is less than 231, the child is normal, whereas if the index
+number is equal or above 231, the child is hardened.
+
+Keys in an HD wallet are identified using a “path” naming convention, with each level of
+the tree separated by a slash (/) character.
+
+The HD wallet tree structure offers tremendous flexibility. Each parent extended key can
+have 4 billion children: 2 billion normal children and 2 billion hardened children.
+
+BIP-44 specifies the structure as consisting of five predefined tree levels:
+
+```
+m / purpose' / coin_type' / account' / change / address_index
+```
+
+## CHAPTER 6: Transactions
+
+### Introduction
+
+Transactions are data structures that encode the transfer of value between participants in
+the bitcoin system. Each transaction is a public entry in bitcoin’s blockchain, the global
+double-entry bookkeeping ledger.
+
+### Transactions in Detail
+
+Behind the scenes, an actual transaction looks very different from a transaction provided
+by a typical block explorer. We can use Bitcoin Core’s command-line interface
+(`getrawtransaction` and `decoderawtransaction`) to retrieve “raw” transaction, decode it,
+and see what it contains.
+
+```shell
+bitcoin-cli getrawtransaction 025b42bf2c357bb869ca720befbeb4ee6c591b775f760bd70eb73407ee093aee
+bitcoin-cli decoderawtransaction 02000000000101490daa58bd187b115d689ab174fc0abce24fc76c1411d367a6ea6a304d5e50c70000000000fdffffff010ae60000000000001600144646cb2bf122b5605e8d0019d5f28e9be38f01ea0247304402203ab114d5c4ba7efe654d457c6800c27b4b68b15b073114461c92f05cbe164de7022054d072eba30bb9d3455de9e7591196139c0eaaba0c3cd7fdecc20b70e5aa9fe70121035f457146cdb73c96f92684f4109ef727257f7407717744fcf894e1e2dbc69fb645300b00
+```
+
+### Transaction Outputs and Inputs
+
+#### Transaction Outputs
+
+#### Transaction Inputs
+
+#### Transaction Fees
+
+#### Adding Fees to Transactions
+
+### Transaction Scripts and Script Language
+
+#### Turing Incompleteness
+
+#### Stateless Verification
+
+#### Script Construction (Lock + Unlock)
+
+#### Pay-to-Public-Key-Hash (P2PKH)
+
+### Digital Signatures (ECDSA)
+
+#### How Digital Signatures Work
+
+#### Verifying the Signature
+
+#### Signature Hash Types (SIGHASH)
+
+#### ECDSA Math
+
+#### The Importance of Randomness in Signatures
+
+### Bitcoin Addresses, Balances, and Other Abstractions
 
 ## References
 
