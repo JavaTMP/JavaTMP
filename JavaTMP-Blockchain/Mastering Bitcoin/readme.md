@@ -1091,6 +1091,27 @@ that locks the output to a public key hash, more commonly known as a bitcoin add
 output locked by a P2PKH script can be unlocked (spent) by presenting a public key and a
 digital signature created by the corresponding private key.
 
+That transaction output would have a locking script of the form:
+
+```
+OP_DUP OP_HASH160 <Cafe Public Key Hash> OP_EQUALVERIFY OP_CHECKSIG
+```
+
+The preceding locking script can be satisfied with an unlocking script of the form:
+
+```
+<Cafe Signature> <Cafe Public Key>
+```
+
+The two scripts together would form the following combined validation script:
+
+```
+<Cafe Signature> <Cafe Public Key> OP_DUP OP_HASH160 <Cafe Public Key Hash> OP_EQUALVERIFY OP_CHECKSIG
+```
+
+When executed, this combined script will evaluate to TRUE if, and only if, the unlocking
+script matches the conditions set by the locking script.
+
 ### Digital Signatures (ECDSA)
 
 #### How Digital Signatures Work
