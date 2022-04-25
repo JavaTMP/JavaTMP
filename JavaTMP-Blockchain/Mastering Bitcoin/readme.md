@@ -942,23 +942,154 @@ bitcoin-cli decoderawtransaction 02000000000101490daa58bd187b115d689ab174fc0abce
 
 ### Transaction Outputs and Inputs
 
+Bitcoin full nodes track all available and spendable outputs, known as unspent transaction
+outputs, or UTXO. Every transaction represents a change (state transition) in the UTXO
+set.
+
+When we say that a user’s wallet has “received” bitcoin, what we mean is that the wallet
+has detected a UTXO that can be spent with one of the keys controlled by that wallet.
+Thus, a user’s bitcoin “balance” is the sum of all UTXO that user’s wallet can spend and
+which may be scattered among hundreds of transactions and hundreds of blocks. bitcoin can
+be divided down to eight decimal places as satoshis. outputs are discrete and indivisible
+units of value, denominated in integer satoshis. An unspent output can only be consumed in
+its entirety by a transaction.
+
+As with real life, the bitcoin application can use several strategies to satisfy the
+purchase amount.
+
+A transaction consumes previously recorded unspent transaction outputs and creates new
+transaction outputs that can be consumed by a future transaction. This way, chunks of
+bitcoin value move forward from owner to owner in a chain of transactions consuming and
+creating UTXO.
+
+The exception to the output and input chain is a special type of transaction called the
+coinbase transaction, which is the first transaction in each block. This transaction is
+placed there by the “winning” miner and creates brand-new bitcoin payable to that miner as
+a reward for mining. This special coinbase transaction does not consume UTXO; instead, it
+has a special type of input called the “coinbase.” This is how bitcoin’s money supply is
+created during the mining process.
+
+Outputs come first because coinbase transactions, which generate new bitcoin, have no
+inputs and create outputs from nothing.
+
 #### Transaction Outputs
+
+Every bitcoin transaction creates outputs, which are recorded on the bitcoin ledger.
+Almost all of these outputs, create spendable chunks of bitcoin called UTXO, which are
+then recognized by the whole network and available for the owner to spend in a future
+transaction.
+
+Transaction outputs consist of two parts:
+
+* An amount of bitcoin, denominated in satoshis, the smallest bitcoin unit
+* A cryptographic puzzle that determines the conditions required to spend the output
+
+The cryptographic puzzle is also known as a locking script, a witness script, or a
+scriptPubKey.
 
 #### Transaction Inputs
 
+Transaction inputs identify (by reference) which UTXO will be consumed and provide proof
+of ownership through an unlocking script. For each UTXO that will be consumed to make this
+payment, the wallet creates one input pointing to the UTXO and unlocks it with an
+unlocking script.
+
+The second part is an unlocking script, which the wallet constructs in order to satisfy
+the spending conditions set in the UTXO. Most often, the unlocking script is a digital
+signature and public key proving ownership of the bitcoin.
+
+When transactions are serialized for transmission on the network, their inputs are encoded
+into a byte stream.
+
 #### Transaction Fees
+
+Most transactions include transaction fees, which compensate the bitcoin miners for
+securing the network.
+
+Static fees are no longer viable on the bitcoin network. Wallets that set static fees will
+produce a poor user experience as transactions will often get “stuck” and remain
+unconfirmed.
 
 #### Adding Fees to Transactions
 
+Fees are implied as the difference between the sum of inputs and the sum of outputs.
+
+if you consume a 20-bitcoin UTXO to make a 1-bitcoin payment, you must include a
+19-bitcoin change output back to your wallet. Otherwise, the 19- bitcoin “leftover” will
+be counted as a transaction fee and will be collected by the miner who mines your
+transaction in a block.
+
+If you forget to add a change output in a manually constructed transaction, you will be
+paying the change as a transaction fee.
+
 ### Transaction Scripts and Script Language
+
+Both the locking script placed on a UTXO and the unlocking script are written in this
+scripting language. When a transaction is validated, the unlocking script in each input is
+executed alongside the corresponding locking script to see if it satisfies the spending
+condition.
 
 #### Turing Incompleteness
 
+every transaction is validated by every full node on the bitcoin network.
+
 #### Stateless Verification
+
+The bitcoin transaction script language is stateless, in that there is no state prior to
+execution of the script, or state saved after execution of the script.
+
+A script will predictably execute the same way on any system. If your system verifies a
+script, you can be sure that every other system in the bitcoin network will also verify
+the script, meaning that a valid transaction is valid for everyone and everyone knows
+this. This predictability of outcomes is an essential benefit of the bitcoin system.
 
 #### Script Construction (Lock + Unlock)
 
+Bitcoin’s transaction validation engine relies on two types of scripts to validate
+transactions: a locking script and an unlocking script. A locking script is a spending
+condition placed on an output: it specifies the conditions that must be met to spend the
+output in the future. Historically, the locking script was called a scriptPubKey, because
+it usually contained a public key or bitcoin address (public key hash).
+
+An unlocking script is a script that “solves,” or satisfies, the conditions placed on an
+output by a locking script and allows the output to be spent.
+
+Unlocking scripts are part of every transaction input. Most of the time they contain a
+digital signature produced by the user’s wallet from his or her private key. Historically,
+the unlocking script was called scriptSig, because it usually contained a digital
+signature. In most bitcoin applications, the source code refers to the unlocking script as
+scriptSig. You will also see the unlocking script referred to as a witness.
+
+Every bitcoin validating node will validate transactions by executing the locking and
+unlocking scripts together. Each input contains an unlocking script and refers to a
+previously existing UTXO. The validation software will copy the unlocking script, retrieve
+the UTXO referenced by the input, and copy the locking script from that UTXO. The
+unlocking and locking script are then executed in sequence. The input is valid if the
+unlocking script satisfies the locking script conditions
+
+an example of the unlocking and locking scripts for the most common type of bitcoin
+transaction (a payment to a public key hash), showing the combined script resulting from
+the concatenation of the unlocking and locking scripts prior to script validation:
+
+![img_5.png](img_5.png)
+
+The scripting language executes the script by processing each item from left to right.
+
+Bitcoin transaction scripts usually contain a conditional operator, so that they can
+produce the TRUE result that signifies a valid transaction.
+
+If the result of executing the locking script with the stack data copied from the
+unlocking script is “TRUE,” the unlocking script has succeeded in resolving the conditions
+imposed by the locking script and, therefore, the input is a valid authorization to spend
+the UTXO.
+
 #### Pay-to-Public-Key-Hash (P2PKH)
+
+The vast majority of transactions processed on the bitcoin network spend outputs locked
+with a Pay-to-Public-Key-Hash or “P2PKH” script. These outputs contain a locking script
+that locks the output to a public key hash, more commonly known as a bitcoin address. An
+output locked by a P2PKH script can be unlocked (spent) by presenting a public key and a
+digital signature created by the corresponding private key.
 
 ### Digital Signatures (ECDSA)
 
@@ -979,3 +1110,5 @@ bitcoin-cli decoderawtransaction 02000000000101490daa58bd187b115d689ab174fc0abce
 Mastering Bitcoin by Andreas M. Antonopoulos (O’Reilly). Copyright 2017 Andreas M.
 Antonopoulos, 978-1-491-95438-6.
 [Github source code](https://github.com/bitcoinbook/bitcoinbook)
+[online address generator](https://kimbatt.github.io/btc-address-generator/)
+[Bitcoin Explorer - bx](https://github.com/libbitcoin/libbitcoin-explorer)
