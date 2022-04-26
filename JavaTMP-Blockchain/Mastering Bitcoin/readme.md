@@ -1358,13 +1358,50 @@ like bitcoin addresses are Base58Check encodings of the 20- byte hash of a publi
 
 #### Benefits of P2SH
 
+The P2SH feature offers the following benefits compared to the direct use of complex
+scripts in locking outputs:
+
+* Complex scripts are replaced by shorter fingerprints in the transaction output, making
+  the transaction smaller
+* P2SH shifts the transaction fee cost of a long script from the sender to the recipient,
+  who has to include the long redeem script to spend it.
+
 #### Redeem Script and Validation
+
+P2SH locking scripts contain the hash of a redeem script, which gives no clues as to the
+content of the redeem script itself. The P2SH transaction will be considered valid and
+accepted even if the redeem script is invalid. You might accidentally lock bitcoin in such
+a way that it cannot later be spent.
 
 ### Data Recording Output (RETURN)
 
+to record a digital fingerprint of a file in such a way that anyone could establish
+proof-of-existence of that file on a specific date by reference to that transaction.
+
+create UTXO that cannot be spent, using the destination bitcoin address as a freeform
+20-byte field. Because the address is used for data, it doesn’t correspond to a private
+key and the resulting UTXO can never be spent.
+
+`RETURN` outputs are recorded on the blockchain, so they consume disk space and contribute
+to the increase in the blockchain’s size, but they are not stored in the UTXO set and
+therefore do not bloat the UTXO memory pool and burden full nodes with the cost of more
+expensive RAM.
+
 ### Timelocks
 
+Timelocks are restrictions on transactions or outputs that only allow spending after a
+point in time.
+
 #### Transaction Locktime (nLocktime)
+
+Transactions with nLocktime specifying a future block or time must be held by the
+originating system and transmitted to the bitcoin network only after they become valid. If
+a transaction is transmitted to the network before the specified nLocktime, the
+transaction will be rejected by the first node as invalid and will not be relayed to other
+nodes. The use of nLocktime is equivalent to postdating a paper check.
+
+But it can create another transaction, double-spending the same inputs without a locktime.
+Thus, Alice can spend the same UTXO before the 3 months have elapsed.
 
 #### Check Lock Time Verify (CLTV)
 
