@@ -1114,17 +1114,277 @@ script matches the conditions set by the locking script.
 
 ### Digital Signatures (ECDSA)
 
+digital signatures can present proof of ownership of a private key without revealing that
+private key.
+
+The digital signature algorithm used in bitcoin is the Elliptic Curve Digital Signature
+Algorithm, or ECDSA. ECDSA is the algorithm used for digital signatures based on elliptic
+curve private/public key pairs, ECDSA is used by the script functions OP_CHECKSIG,
+OP_CHECKSIGVERIFY, OP_CHECKMULTISIG, and OP_CHECKMULTISIGVERIFY.
+
+A digital signature serves three purposes in bitcoin:
+
+* the signature proves that the owner of the private key, who is by implication the owner
+  of the funds, has authorized the spending of those funds.
+* the proof of authorization is undeniable (nonrepudiation).
+* the signature proves that the transaction (or specific parts of the transaction) have
+  not and cannot be modiied by anyone after it has been signed.
+
+Each transaction input and any signature it may contain is completely independent of any
+other input or signature.
+
+A digital signature is a mathematical scheme for demonstrating the authenticity of a
+digital message or documents. A valid digital signature gives a recipient reason to
+believe that the message was created by a known sender (authentication), that the sender
+cannot deny having sent the message (nonrepudiation), and that the message was not altered
+in transit (integrity).
+
 #### How Digital Signatures Work
+
+A digital signature is a mathematical scheme that consists of two parts. The first part is
+an algorithm for creating a signature, using a private key (the signing key), from a
+message (the transaction). The second part is an algorithm that allows anyone to verify
+the signature, given also the message and a public key.
+
+In bitcoin’s implementation of the ECDSA algorithm, the “message” being signed is the
+transaction, or more accurately a hash of a specific subset of the data in the
+transaction. The signing key is the user’s private key.
+
+The function produces a signature is composed of two values, commonly referred to as R and
+S. they are serialized into a bytestream using an international standard encoding scheme
+called the Distinguished Encoding Rules, or DER.
+
+In the transaction input there is an unlocking script that contains the following
+DER-encoded signature from wallet:
+
+```
+3045022100884d142d86652a3f47ba4746ec719bbfbd040a570b1deccbb6498c75c4ae24cb02204b9f039ff08df09cbe9f6addac960298cad530a863ea8f53982c09db8f6e381301
+```
+
+That signature is a serialized byte-stream of the R and S values produced by wallet to
+prove she owns the private key authorized to spend that output:
+0x30—indicating the start of a DER sequence
+
+* 0x45—the length of the sequence (69 bytes)
+* 0x02—an integer value follows
+* 0x21—the length of the integer (33 bytes)
+* R— 00884d142d86652a3f47ba4746ec719bbfbd040a570b1deccbb6498c75c4ae24cb
+* 0x02—another integer follows
+* 0x20—the length of the integer (32 bytes)
+* S—4b9f039ff08df09cbe9f6addac960298cad530a863ea8f53982c09db8f6e3813
+* A suffix (0x01) indicating the type of hash used (SIGHASH_ALL)
 
 #### Verifying the Signature
 
+To verify the signature, one must have the signature (R and S), the serialized
+transaction, and the public key (that corresponds to the private key used to create the
+signature). Essentially, verification of a signature means “Only the owner of the private
+key that generated this public key could have produced this signature on this
+transaction.”
+
+The signature verification algorithm takes the message (a hash of the transaction or parts
+of it), the signer’s public key and the signature (R and S values), and returns TRUE if
+the signature is valid for this message and public key.
+
 #### Signature Hash Types (SIGHASH)
+
+Bitcoin signatures have a way of indicating which part of a transaction’s data is included
+in the hash signed by the private key using a SIGHASH flag.
+
+Remember, each input may contain a signature in its unlocking script. As a result, a
+transaction that contains several inputs may have signatures with different SIGHASH flags
+that commit different parts of the transaction in each of the inputs.
+
+There are three SIGHASH flags: ALL, NONE, and SINGLE. there is a modifier flag
+SIGHASH_ANYONECANPAY, which can be combined with each of the preceding flags.
+
+The way SIGHASH flags are applied during signing and verification is that a copy of the
+transaction is made and serialized. The SIGHASH flag is added to the end of the serialized
+transaction and the result is hashed. The hash itself is the “message” that is signed. By
+including the SIGHASH as the last step before hashing, the signature commits the SIGHASH
+type as well, so it can’t be changed.
+
+All SIGHASH types sign the transaction nLocktime field. In addition, the SIGH ASH type
+itself is appended to the transaction before it is signed, so that it can’t be modified
+once signed.
+
+Let’s look at some of the other SIGHASH types and how they can be used in practice:
+
+* ALL|ANYONECANPAY - This construction can be used to make a “crowdfunding”-style
+  transaction.
+* NONE - This construction can be used to create a “bearer check” or “blank check” of a
+  specific amount.
+* NONE|ANYONECANPAY - This construction can be used to build a “dust collector.”
 
 #### ECDSA Math
 
+The math of ECDSA is complex and difficult to understand. There are a number of great
+guides online that might help. Search for “ECDSA explained” or try this
+one: http://bit.ly/2r0HhGB.
+
 #### The Importance of Randomness in Signatures
 
+the signature generation algorithm uses a random key k, as the basis for an ephemeral
+private/public key pair. The value of k is not important, as long as it is random. If the
+same value k is used to produce two signatures on different messages (transactions), then
+the signing private key can be calculated by anyone. Reuse of the same value for k in a
+signature algorithm leads to exposure of the private key!.
+
+If the same value k is used in the signing algorithm on two different transactions, the
+private key can be calculated and exposed to the world!.
+
+To avoid this vulnerability, the industry best practice is to not generate k with a
+random-number generator seeded with entropy, but instead to use a deterministicrandom
+process seeded with the transaction data itself.
+
 ### Bitcoin Addresses, Balances, and Other Abstractions
+
+Now that we have explored what is actually included in a bitcoin transaction, we can
+examine how the higher-level abstractions are derived from the seemingly primitive
+components of the transaction.
+
+## CHAPTER 7: Advanced Transactions and Scripting
+
+### Introduction
+
+In this chapter we will look at more advanced scripting and how we can use it to build
+transactions with complex conditions.
+
+### Multisignature
+
+Multisignature scripts set a condition where N public keys are recorded in the script and
+at least M of those must provide signatures to unlock the funds.
+
+This is also known as an M-of-N scheme, where N is the total number of keys and M is the
+threshold of signatures required for validation.
+
+For example, a 2-of-3 multisignature is one where three public keys are listed as
+potential signers and at least two of those must be used to create signatures for a valid
+transaction to spend the funds.
+
+The general form of a locking script setting an M-of-N multisignature condition is:
+
+```
+M <Public Key 1> <Public Key 2> ... <Public Key N> N CHECKMULTISIG
+```
+
+where N is the total number of listed public keys and M is the threshold of required
+signatures to spend the output. A locking script setting a 2-of-3 multisignature condition
+looks like this:
+
+```
+2 <Public Key A> <Public Key B> <Public Key C> 3 CHECKMULTISIG
+```
+
+The preceding locking script can be satisfied with an unlocking script containing pairs of
+signatures and public keys:
+
+```
+<Signature B> <Signature C>
+```
+
+There is a bug in CHECKMULTISIG’s execution that requires a slight workaround. When
+CHECKMULTISIG executes, it should consume M+N+2 items on the stack as parameters. However,
+due to the bug, CHECKMULTISIG will pop an extra value or one value more than expected.
+
+Because this bug became part of the consensus rules, it must now be replicated forever.
+Therefore the correct script validation would look like this:
+
+```
+0 <Signature B> <Signature C> 2 <Public Key A> <Public Key B> <Public Key C> 3 CHECKMULTISIG
+```
+
+### Pay-to-Script-Hash (P2SH)
+
+Multisignature scripts are one of the most common uses of bitcoin’s advanced scripting
+capabilities and are a very powerful feature.
+
+A multisignature scheme like that offers corporate governance controls and protects
+against theft, embezzlement, or loss. The resulting script is quite long and looks like
+this:
+
+```
+2 <Mohammed's Public Key> <Partner1 Public Key> <Partner2 Public Key> <Partner3 Public Key> <Attorney Public Key> 5 CHECKMULTISIG
+```
+
+P2SH was developed to resolve these practical difficulties and to make the use of complex
+scripts as easy as a payment to a bitcoin address. With P2SH payments, the complex locking
+script is replaced with its digital fingerprint, a cryptographic hash.
+
+When a transaction attempting to spend the UTXO is presented later, it must contain the
+script that matches the hash, in addition to the unlocking script. In simple terms, P2SH
+means “pay to a script matching this hash, a script that will be presented later when this
+output is spent.”
+
+Complex script without P2SH Locking
+Script `2 PubKey1 PubKey2 PubKey3 PubKey4 PubKey5 5 CHECKMULTISIG`
+Unlocking Script `Sig1 Sig2`
+Complex script as P2SH Redeem
+Script `2 PubKey1 PubKey2 PubKey3 PubKey4 PubKey5 5 CHECKMULTISIG`
+Locking Script `HASH160 <20-byte hash of redeem script> EQUAL`
+Unlocking Script `Sig1 Sig2 <redeem script>`
+
+applying the SHA256 hashing algorithm and then applying the RIPEMD160 algorithm on the
+result.
+
+A P2SH transaction locks the output to this hash instead of the longer script, using the
+locking script: `HASH160 54c557e07dde5bb6cb791c7a540e0a4796f5e97e EQUAL`
+
+When Mohammed and his partners want to spend this UTXO, they must present the original
+redeem script (the one whose hash locked the UTXO) and the signatures necessary to unlock
+it, like this: `<Sig1> <Sig2> <2 PK1 PK2 PK3 PK4 PK5 5 CHECKMULTISIG>`
+
+the redeem script is checked against the locking script to make sure the hash matches:
+
+```
+<2 PK1 PK2 PK3 PK4 PK5 5 CHECKMULTISIG> HASH160 <redeem scriptHash> EQUAL
+```
+
+If the redeem script hash matches, the unlocking script is executed on its own, to unlock
+the redeem script:
+
+```
+<Sig1> <Sig2> 2 PK1 PK2 PK3 PK4 PK5 5 CHECKMULTISIG
+```
+
+Almost all the scripts described in this chapter can only be implemented as P2SH scripts.
+They cannot be used directly in the locking script of a UTXO.
+
+#### P2SH Addresses
+
+Another important part of the P2SH feature is the ability to encode a script hash as an
+address. P2SH addresses are Base58Check encodings of the 20- byte hash of a script, just
+like bitcoin addresses are Base58Check encodings of the 20- byte hash of a public key.
+
+#### Benefits of P2SH
+
+#### Redeem Script and Validation
+
+### Data Recording Output (RETURN)
+
+### Timelocks
+
+#### Transaction Locktime (nLocktime)
+
+#### Check Lock Time Verify (CLTV)
+
+#### Relative Timelocks
+
+#### Relative Timelocks with nSequence
+
+#### Relative Timelocks with CSV
+
+#### Median-Time-Past
+
+#### Timelock Defense Against Fee Sniping
+
+### Scripts with Flow Control (Conditional Clauses)
+
+#### Conditional Clauses with VERIFY Opcodes
+
+#### Using Flow Control in Scripts
+
+### Complex Script Example
 
 ## References
 
