@@ -1405,9 +1405,41 @@ Thus, Alice can spend the same UTXO before the 3 months have elapsed.
 
 #### Check Lock Time Verify (CLTV)
 
+Based on a specifications in BIP-65, a new script operator called `CHECKLOCKTIMEVERIFY`
+(CLTV) was added to the scripting language. by adding the CLTV opcode in the redeem script
+of an output it restricts the output, so that it can only be spent after the specified
+time has elapsed. While nLocktime is a transaction-level timelock, CLTV is an outputbased
+timelock.
+
+The CLTV opcode takes one parameter as input, expressed as a number in the same format as
+nLocktime (either a block height or Unix epoch time).
+
+To lock it to a time, say 3 months from now, the transaction would be a P2SH transaction
+with a redeem script like this:
+
+```
+<now + 3 months> CHECKLOCKTIMEVERIFY DROP DUP HASH160 <Bob's Public Key Hash> EQUALVERIFY CHECKSIG
+```
+
+After execution, if CLTV is satisfied, the time parameter that preceded it remains as the
+top item on the stack and may need to be dropped, with DROP, for correct execution of
+subsequent script opcodes.
+
 #### Relative Timelocks
 
+Relative timelocks, like absolute timelocks, are implemented with both a transactionlevel
+feature and a script-level opcode.
+
 #### Relative Timelocks with nSequence
+
+Relative timelocks can be set on each input of a transaction, by setting the nSequence
+field in each input.
+
+a transaction containing inputs with nSequence value below 232 (0xFFFFFFFF) indicated a
+transaction that was not yet “finalized.” Such a transaction would be held in the mempool
+until it was replaced by another transaction spending the same inputs with a higher
+nSequence value. Once a transaction was received whose inputs had an nSequence value of
+232 it would be considered “finalized” and mined.
 
 #### Relative Timelocks with CSV
 
