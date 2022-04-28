@@ -1443,8 +1443,21 @@ nSequence value. Once a transaction was received whose inputs had an nSequence v
 
 #### Relative Timelocks with CSV
 
+Just like CLTV and nLocktime, there is a script opcode for relative timelocks that
+leverages the nSequence value in scripts. That opcode is CHECKSEQUENCEVERIFY, commonly
+referred to as CSV for short.
+
+The CSV opcode when evaluated in a UTXO’s redeem script allows spending only in a
+transaction whose input nSequence value is greater than or equal to the CSV parameter.
+
 #### Median-Time-Past
 
+The timestamps set in block headers are set by the miners. There is a certain degree of
+latitude allowed by the consensus rules to account for differences in clock accuracy
+between decentralized nodes.
+
+Median-Time-Past is calculated by taking the timestamps of the last 11 blocks and
+finding the median.
 #### Timelock Defense Against Fee Sniping
 
 ### Scripts with Flow Control (Conditional Clauses)
