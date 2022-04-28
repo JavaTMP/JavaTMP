@@ -1456,9 +1456,13 @@ The timestamps set in block headers are set by the miners. There is a certain de
 latitude allowed by the consensus rules to account for differences in clock accuracy
 between decentralized nodes.
 
-Median-Time-Past is calculated by taking the timestamps of the last 11 blocks and
-finding the median.
+Median-Time-Past is calculated by taking the timestamps of the last 11 blocks and finding
+the median.
+
 #### Timelock Defense Against Fee Sniping
+
+Fee-sniping is a theoretical attack scenario, where miners attempting to rewrite past
+blocks “snipe” higher-fee transactions from future blocks to maximize their profitability.
 
 ### Scripts with Flow Control (Conditional Clauses)
 
