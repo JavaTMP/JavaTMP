@@ -1466,11 +1466,102 @@ blocks “snipe” higher-fee transactions from future blocks to maximize their 
 
 ### Scripts with Flow Control (Conditional Clauses)
 
+Bitcoin Script flow control can be used to construct very complex scripts with hundreds or
+even thousands of possible execution paths. There is no limit to nesting, but consensus
+rules impose a limit on the maximum size, in bytes, of a script.
+
+Bitcoin implements flow control using the IF, ELSE, ENDIF, and NOTIF opcodes.
+Additionally, conditional expressions can contain boolean operators such as BOOLAND,
+BOOLOR, and NOT.
+
+In a stack-based language like Bitcoin Script, the logical condition comes before the IF.
+
 #### Conditional Clauses with VERIFY Opcodes
+
+The VERIFY suffix means that if the condition evaluated is not TRUE, execution of the
+script terminates immediately and the transaction is deemed invalid.
 
 #### Using Flow Control in Scripts
 
-### Complex Script Example
+A very common use for flow control in Bitcoin Script is to construct a redeem script that
+offers multiple execution paths, each a different way of redeeming the UTXO.
+
+a simple example, where we have two signers, Alice and Bob, and either one is able to
+redeem:
+
+```
+IF
+  <Alice's Pubkey> CHECKSIG
+ELSE
+  <Bob's Pubkey> CHECKSIG
+ENDIF
+```
+
+The condition is not part of the redeem script. Instead, the condition will be offered in
+the unlocking script, allowing Alice and Bob to “choose” which execution path they want.
+
+Alice redeems this with the unlocking script: `<Alice's Sig> 1`
+For Bob to redeem this, he would have to choose the second execution path by giving a
+FALSE value to the IF clause: `<Bob's Sig> 0`
+
+## CHAPTER 8: The Bitcoin Network
+
+### Peer-to-Peer Network Architecture
+
+Bitcoin is structured as a peer-to-peer network architecture on top of the internet. All
+nodes share the burden of providing network services. The network nodes interconnect in a
+mesh network with a “flat” topology.
+
+the largest and most successful application of P2P technologies is file sharing, with
+Napster as the pioneer and BitTorrent as the most recent evolution of the architecture.
+
+Bitcoin is a P2P digital cash system by design, and the network architecture is both a
+reflection and a foundation of that core characteristic. Decentralization of control is a
+core design principle that can only be achieved and maintained by a flat, decentralized
+P2P consensus network.
+
+The term “bitcoin network” refers to the collection of nodes running the bitcoin P2P
+protocol. In addition to the bitcoin P2P protocol, there are other protocols such as
+Stratum that are used for mining and lightweight or mobile wallets. These additional
+protocols are provided by gateway routing servers that access the bitcoin network using
+the bitcoin P2P protocol and then extend that network to nodes running other protocols.
+
+For example, Stratum servers connect Stratum mining nodes via the Stratum protocol to the
+main bitcoin network and bridge the Stratum protocol to the bitcoin P2P protocol.
+
+### Node Types and Roles
+
+A full bitcoin node is a collection of functions: routing, the blockchain database,
+mining, and wallet services. All nodes validate and propagate transactions and blocks, and
+discover and maintain connections to peers.
+
+### The Extended Bitcoin Network
+
+### Bitcoin Relay Networks
+
+### Network Discovery
+
+### Full Nodes
+
+### Exchanging “Inventory”
+
+### Simplified Payment Verification (SPV) Nodes
+
+### Bloom Filters
+
+#### How Bloom Filters Work
+
+### How SPV Nodes Use Bloom Filters
+
+### SPV Nodes and Privacy
+
+### Encrypted and Authenticated Connections
+
+#### Tor Transport
+
+#### Peer-to-Peer Authentication and Encryption
+
+### Transaction Pools
 
 ## References
 
