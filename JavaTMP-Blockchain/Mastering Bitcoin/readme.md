@@ -1532,10 +1532,58 @@ main bitcoin network and bridge the Stratum protocol to the bitcoin P2P protocol
 ### Node Types and Roles
 
 A full bitcoin node is a collection of functions: routing, the blockchain database,
-mining, and wallet services. All nodes validate and propagate transactions and blocks, and
-discover and maintain connections to peers.
+mining, and wallet services. All nodes include the routing function to participate in the
+network, All nodes validate and propagate transactions and blocks, and discover and
+maintain connections to peers.
+
+Some nodes, called full nodes, also maintain a complete and up-to-date copy of the
+blockchain. Full nodes can autonomously and authoritatively verify any transaction without
+external reference.
+
+Some nodes maintain only a subset of the blockchain and verify transactions using a method
+called simpliied payment veriication, or SPV. These nodes are known as SPV nodes or
+lightweight nodes.
+
+Mining nodes compete to create new blocks by running specialized hardware to solve the
+Proof-of-Work algorithm. Some mining nodes are also full nodes, maintaining a full copy of
+the blockchain, while others are lightweight nodes participating in pool mining and
+depending on a pool server to maintain a full node.
+
+User wallets might be part of a full node, as is usually the case with desktop bitcoin
+clients. Increasingly, many user wallets, especially those running on resource constrained
+devices such as smartphones, are SPV nodes.
+
+In addition to the main node types on the bitcoin P2P protocol, there are servers and
+nodes running other protocols, such as specialized mining pool protocols and lightweight
+client-access protocols.
 
 ### The Extended Bitcoin Network
+
+The main bitcoin network, running the bitcoin P2P protocol, consists of between 7,000 and
+10,000 listening nodes running various versions of the bitcoin reference client (Bitcoin
+Core) and a few hundred nodes running various other implementations of the bitcoin P2P
+protocol, such as BitcoinJ, Libbitcoin, and btcd.
+
+Various large companies interface with the bitcoin network by running full-node clients
+based on the Bitcoin Core client, with full copies of the blockchain and a network node,
+but without mining or wallet functions. These nodes act as network edge routers, allowing
+various other services (exchanges, wallets, block explorers, merchant payment processing)
+to be built on top.
+
+Attached to the main bitcoin P2P network are a number of pool servers and protocol
+gateways that connect nodes running other protocols. These other protocol nodes are mostly
+pool mining nodes and lightweight wallet clients, which do not carry a full copy of the
+blockchain.
+
+the following figure shows the extended bitcoin network with the various types of nodes,
+gateway servers, edge routers, and wallet clients and the various protocols they use to
+connect to each other.
+
+![img_6.png](img_6.png)
+
+he extended bitcoin network showing various node types, gateways, and protocols:
+
+![img_7.png](img_7.png)
 
 ### Bitcoin Relay Networks
 
