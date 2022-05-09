@@ -1587,29 +1587,719 @@ he extended bitcoin network showing various node types, gateways, and protocols:
 
 ### Bitcoin Relay Networks
 
+A Bitcoin Relay Network is a network that attempts to minimize the latency in the
+transmission of blocks between miners. Relay networks are not replacements for bitcoin’s
+P2P network. Instead they are overlay networks that provide additional connectivity
+between nodes with specialized needs.
+
 ### Network Discovery
+
+When a new node boots up, it must discover other bitcoin nodes on the network in order to
+participate. Although there are no special nodes in bitcoin, there are some long-running
+stable nodes that are listed in the client as seed nodes. Although a new node does not
+have to connect with the seed nodes, it can use them to quickly discover other nodes in
+the network.
+
+To connect to a known peer, nodes establish a TCP connection, usually to port 8333. Upon
+establishing a connection, the node will start a “handshake” by transmitting a version
+message, which contains basic identifying information. After the initial seed node is used
+to form introductions, the client will disconnect from it and use the newly discovered
+peers.
+
+In the Bitcoin Core client, the option to use the seed nodes is controlled by the option
+switch -dnsseed, which is set to 1, to use the seed nodes, by default.
+
+The command-line argument -seednode can be used to connect to one node just for
+introductions, using it as a DNS seed.
+
+Once one or more connections are established, the new node will send an addr message
+containing its own IP address to its neighbors. The neighbors will, in turn, forward the
+addr message to their neighbors, ensuring that the newly connected node becomes well known
+and better connected. Additionally, the newly connected node can send getaddr to the
+neighbors, asking them to return a list of IP addresses of other peers. That way, a node
+can find peers to connect to and advertise its existence on the network for other nodes to
+find it.
+
+A node must connect to a few different peers in order to establish diverse paths into the
+bitcoin network. Paths are not reliable. On a node running the Bitcoin Core client, you
+can list the peer connections with the command getpeerinfo: `$ bitcoin-cli getpeerinfo`
+
+To override the automatic management of peers and to specify a list of IP addresses, users
+can provide the option -connect=<IPAddress> and specify one or more IP addresses.
+
+If there is no traffic on a connection, nodes will periodically send a message to maintain
+the connection.
 
 ### Full Nodes
 
+Full nodes are nodes that maintain a full blockchain with all transactions. Full
+blockchain nodes maintain a complete and up-to-date copy of the bitcoin blockchain with
+all the transactions, which they independently build and verify, starting with the very
+first block (genesis block) and building up to the latest known block in the network.
+
+Running a full blockchain node gives you the pure bitcoin experience: independent
+verification of all transactions without the need to rely on, or trust, any other systems.
+it requires 20+ gigabytes of persistent storage (disk space) to store the full blockchain.
+If you need a lot of disk and it takes two to three days to sync to the network, you are
+running a full node. That is the price of complete independence and freedom from central
+authority.
+
+There are a few alternative implementations of full blockchain bitcoin clients, built
+using different programming languages and software architectures. However, the most common
+implementation is the reference client Bitcoin Core, also known as the Satoshi client.
+More than 90% of the nodes on the bitcoin network run various versions of Bitcoin Core.
+
 ### Exchanging “Inventory”
+
+The first thing a full node will do once it connects to peers is try to construct a
+complete blockchain.
 
 ### Simplified Payment Verification (SPV) Nodes
 
+Not all nodes have the ability to store the full blockchain. Many bitcoin clients are
+designed to run on space- and power-constrained devices, such as smartphones, tablets, or
+embedded systems. For such devices, a simplified payment verification (SPV) method is used
+to allow them to operate without storing the full blockchain. These types of clients are
+called SPV clients or lightweight clients.
+
+SPV nodes download only the block headers and do not download the transactions included in
+each block. SPV nodes cannot construct a full picture of all the UTXOs that are available
+for spending because they do not know about all the transactions on the network.
+
+Simplified payment verification verifies transactions by reference to their depth in the
+blockchain instead of their height.
+
+A full blockchain node verifies a transaction by checking the entire chain of thousands of
+blocks below it in order to guarantee that the UTXO is not spent, whereas an SPV node
+checks how deep the block is buried by a handful of blocks above it.
+
+To get the block headers, SPV nodes use a getheaders message instead of getblocks. The
+responding peer will send up to 2,000 block headers using a single headers message.
+
+Bloom filters allow SPV nodes to receive a subset of the transactions without revealing
+precisely which addresses they are interested in, through a filtering mechanism that uses
+probabilities rather than fixed patterns.
+
 ### Bloom Filters
 
-#### How Bloom Filters Work
+A bloom filter is a probabilistic search filter, a way to describe a desired pattern
+without specifying it exactly. Bloom filters offer an efficient way to express a search
+pattern while protecting privacy. They are used by SPV nodes to ask their peers for
+transactions matching a specific pattern, without revealing exactly which addresses they
+are searching for.
 
-### How SPV Nodes Use Bloom Filters
+Bloom filters serve this function by allowing an SPV node to specify a search pattern for
+transactions that can be tuned toward precision or privacy. A more specific bloom filter
+will produce accurate results, but at the expense of revealing what addresses are used in
+the user’s wallet. A less specific bloom filter will produce more data about more
+transactions, many irrelevant to the node, but will allow the node to maintain better
+privacy.
 
-### SPV Nodes and Privacy
+#### Bloom Filters and Inventory Updates
 
-### Encrypted and Authenticated Connections
-
-#### Tor Transport
-
-#### Peer-to-Peer Authentication and Encryption
+Bloom filters are used to filter the transactions (and blocks containing them) that an SPV
+node receives from its peers. SPV nodes will create a filter that matches only the
+addresses held in the SPV node’s wallet.
 
 ### Transaction Pools
+
+Almost every node on the bitcoin network maintains a temporary list of unconfirmed
+transactions called the memory pool, or transaction pool.
+
+a node that holds a user’s wallet will use the transaction pool to track incoming payments
+to the user’s wallet that have been received on the network but are not yet confirmed.
+
+Some node implementations also maintain a separate pool of orphaned transactions. If a
+transaction’s inputs refer to a transaction that is not yet known, such as a missing
+parent, the orphan transaction will be stored temporarily in the orphan pool until the
+parent transaction arrives.
+
+Both the transaction pool and orphan pool (where implemented) are stored in local memory
+and are not saved on persistent storage; rather, they are dynamically populated from
+incoming network messages. When a node starts, both pools are empty and are gradually
+populated with new transactions received on the network.
+
+Some implementations of the bitcoin client also maintain a UTXO database or UTXO pool,
+which is the set of all unspent outputs on the blockchain.
+
+The transaction and orphan pools only contain unconfirmed transactions, while the UTXO
+pool only contains confirmed outputs.
+
+## CHAPTER 9: The Blockchain
+
+### Introduction
+
+The blockchain data structure is an ordered, back-linked list of blocks of transactions.
+The blockchain can be stored as a flat file, or in a simple database. The Bitcoin Core
+client stores the blockchain metadata using Google’s LevelDB database. Blocks are linked
+“back,” each referring to the previous block in the chain.
+
+Each block within the blockchain is identified by a hash, generated using the SHA256
+cryptographic hash algorithm on the header of the block. Each block also references a
+previous block, known as the parent block, through the “previous block hash” field in the
+block header.
+
+Although a block has just one parent, it can temporarily have multiple children.
+Eventually, only one child block becomes part of the blockchain and the “fork” is
+resolved.
+
+The “previous block hash” field is inside the block header and thereby affects the current
+block’s hash. The child’s own identity changes if the parent’s identity changes. When the
+parent is modified in any way, the parent’s hash changes. This cascade effect ensures that
+once a block has many generations following it, it cannot be changed without forcing a
+recalculation of all subsequent blocks. Because such a recalculation would require
+enormous computation, the existence of a long chain of blocks makes the blockchain’s deep
+history immutable, which is a key feature of bitcoin’s security.
+
+In the blockchain, the most recent few blocks might be revised if there is a chain
+recalculation due to a fork. But once you go more deeply into the blockchain, beyond six
+blocks, blocks are less and less likely to change.
+
+### Structure of a Block
+
+A block is a container data structure that aggregates transactions for inclusion in the
+public ledger, the blockchain. The structure of a block:
+
+```
+Block Size (4 Bytes) + Block Header (80 bytes) + Transaction Counter (1-9 bytes) + Transactions
+```
+
+### Block Header
+
+The structure of the block header:
+
+```
+Version (4) + Previous Block Hash (32) + Merkle Root (32) + Timestamp (4) + Difficulty  
+Target (4) + Nonce (4)
+```
+
+### Block Identifiers: Block Header Hash and Block Height
+
+The primary identifier of a block is its cryptographic hash, a digital fingerprint, made
+by hashing the block header twice through the SHA256 algorithm. The resulting 32-byte hash
+is called the block hash or the block header hash, because only the block header is used
+to compute it. The block hash identifies a block uniquely and unambiguously and can be
+independently derived by any node by simply hashing the block header.
+
+Note that the block hash is not actually included inside the block’s data structure,
+neither when the block is transmitted on the network, nor when it is stored on a node’s
+persistence storage as part of the blockchain.
+
+A second way to identify a block is by its position in the blockchain, called the block
+height. The first block ever created is at block height 0 (zero). Two or more blocks might
+have the same block height, competing for the same position in the blockchain.
+
+### The Genesis Block
+
+Every node always “knows” the genesis block’s hash and structure, the fixed time it was
+created, and even the single transaction within. Thus, every node has the starting point
+for the blockchain, a secure “root” from which to build a trusted blockchain.
+
+### Linking Blocks in the Blockchain
+
+Bitcoin full nodes maintain a local copy of the blockchain, starting at the genesis block.
+The local copy of the blockchain is constantly updated as new blocks are found and used to
+extend the chain. To establish a link, a node will examine the incoming block header and
+look for the “previous block hash.”
+
+### Merkle Trees
+
+Each block in the bitcoin blockchain contains a summary of all the transactions in the
+block, using a merkle tree. A merkle tree, also known as a binary hash tree, is a data
+structure used for efficiently summarizing and verifying the integrity of large sets of
+data.
+
+With merkle trees, a node can download just the block headers (80 bytes per block) and
+still be able to identify a transaction’s inclusion in a block by retrieving a small
+merkle path from a full node, without storing or transmitting the vast majority of the
+blockchain, which might be several gigabytes in size. Nodes that do not maintain a full
+blockchain, called simplified payment verification (SPV nodes), use merkle paths to verify
+transactions without downloading full blocks.
+
+### Merkle Trees and Simplified Payment Verification (SPV)
+
+Merkle trees are used extensively by SPV nodes. SPV nodes don’t have all transactions and
+do not download full blocks, just block headers. In order to verify that a transaction is
+included in a block, without having to download all the transactions in the block, they
+use an authentication path, or merkle path.
+
+Consider, for example, an SPV node that is interested in incoming payments to an address
+contained in its wallet. The SPV node will establish a bloom filter on its connections to
+peers to limit the transactions received to only those containing addresses of interest.
+When a peer sees a transaction that matches the bloom filter, it will send that block
+using a `merkleblock` message. The `merkleblock` message contains the block header as well
+as a merkle path that links the transaction of interest to the merkle root in the block.
+The SPV node can use this merkle path to connect the transaction to the block and verify
+that the transaction is included in the block. The SPV node also uses the block header to
+link the block to the rest of the blockchain. The combination of these two links, between
+the transaction and block, and between the block and blockchain, proves that the
+transaction is recorded in the blockchain.
+
+### Bitcoin’s Test Blockchains
+
+there is more than one bitcoin blockchain. The “main” bitcoin blockchain, which is
+called `mainnet`. There are other bitcoin blockchains that are used for testing purposes:
+`testnet`, `segnet`, and `regtest`.
+
+#### Testnet—Bitcoin’s Testing Playground
+
+Testnet is the name of the test blockchain, network, and currency that is used for testing
+purposes. The testnet is a fully featured live P2P network, with wallets, test bitcoins
+(testnet coins), mining, and all the other features of mainnet.
+
+To start Bitcoin Core on testnet instead of mainnet you use the testnet switch:
+`$ bitcoind -testnet`
+
+To connect to bitcoind, you use the bitcoin-cli command-line tool, but you must also
+switch it to testnet mode:
+`$ bitcoin-cli -testnet getinfo`
+`$ bitcoin-cli -testnet getblockchaininfo`
+
+#### Segnet—The Segregated Witness Testnet
+
+In 2016, a special-purpose testnet was launched to aid in development and testing of
+Segregated Witness. Since segwit was added to testnet3, it is no longer necessary to use
+segnet for testing of segwit features.
+
+#### Regtest—The Local Blockchain
+
+Regtest, which stands for “Regression Testing,” is a Bitcoin Core feature that allows you
+to create a local blockchain for testing purposes. Unlike testnet3, which is a public and
+shared test blockchain, the regtest blockchains are intended to be run as closed systems
+for local testing.
+
+To start Bitcoin Core in regtest mode, you use the regtest flag:
+`$ bitcoind -regtest`
+`$ bitcoin-cli -regtest getblockchaininfo`
+
+there are no blocks yet. So to mine some (500 blocks) and earn the reward:
+`$ bitcoin-cli -regtest generate 500`
+
+If you check your wallet balance, you will see that you earned reward for the first 400
+blocks (coinbase rewards must be 100 blocks deep before you can spend them):
+`$ bitcoin-cli -regtest getbalance`
+
+### Using Test Blockchains for Development
+
+Bitcoin’s various blockchains (regtest, segnet, testnet3, mainnet) offer a range of
+testing environments for bitcoin development. As you make changes, improvements, bug
+fixes, etc., start the pipeline again, deploying each change first on regtest, then on
+testnet, and finally into production.
+
+## CHAPTER 10: Mining and Consensus
+
+### Introduction
+
+Mining is the process by which new bitcoin is added to the money supply. Miners validate
+new transactions and record them on the global ledger. Transactions that become part of a
+block and added to the blockchain are considered “confirmed,” which allows the new owners
+of bitcoin to spend the bitcoin they received in those transactions.
+
+Miners receive two types of rewards for mining: new coins created with each new block, and
+transaction fees from all the transactions included in the block. To earn this reward, the
+miners compete to solve a difficult mathematical problem based on a cryptographic hash
+algorithm. The solution to the problem, called the proof of work, is included in the new
+block and acts as proof that the miner expended significant computing effort. The
+competition to solve the proof-of-work algorithm to earn reward and the right to record
+transactions on the blockchain is the basis for bitcoin’s security model.
+
+The process of new coin generation is called mining. Bitcoin’s money supply is created
+through mining.
+
+Bitcoin miners also earn fees from transactions. Every transaction may include a
+transaction fee, in the form of a surplus of bitcoin between the transaction’s inputs and
+outputs.
+
+Mining is the main process of the decentralized clearinghouse, by which transactions are
+validated and cleared. Mining secures the bitcoin system and enables the emergence of
+network-wide consensus without a central authority.
+
+#### Bitcoin Economics and Currency Creation
+
+Bitcoins are “minted” during the creation of each block at a fixed and diminishing rate.
+Each block, generated on average every 10 minutes, contains entirely new bitcoins, created
+from nothing.
+
+### Decentralized Consensus
+
+The blockchain, the global public ledger (list) of all transactions, which everyone in the
+bitcoin network accepts as the authoritative record of ownership. But how can everyone in
+the network agree on a single universal “truth” about who owns what, without having to
+trust anyone?
+
+Bitcoin has no central authority, yet somehow every full node has a complete copy of a
+public ledger that it can trust as the authoritative record.
+
+We will examine the process by which the bitcoin network achieves global consensus without
+central authority.
+
+Bitcoin main invention is the decentralized mechanism for emergent consensus. Emergent,
+because consensus is not achieved explicitly—there is no election or fixed moment when
+consensus occurs.
+
+Bitcoin’s decentralized consensus emerges from the interplay of four processes that occur
+independently on nodes across the network:
+
+* Independent verification of each transaction
+* Independent aggregation of those transactions into new blocks by mining nodes
+* Independent verification of the new blocks by every node and assembly into a chain
+* Independent selection, by every node, of the chain with the most cumulative computation
+  demonstrated through Proof-of-Work
+
+we will examine these processes and how they interact to create the emergent property of
+network-wide consensus that allows any bitcoin node to assemble its own copy of the
+authoritative, trusted, public, global ledger.
+
+### Independent Verification of Transactions
+
+wallet software creates transactions by collecting UTXO, providing the appropriate
+unlocking scripts, and then constructing new outputs assigned to a new owner. The
+resulting transaction is then sent to the neighboring nodes in the bitcoin network so that
+it can be propagated across the entire bitcoin network.
+
+However, before forwarding transactions to its neighbors, every bitcoin node that receives
+a transaction will first verify the transaction. Each node verifies every transaction
+against a long checklist of criteria.
+
+These conditions can be seen in detail in the functions `AcceptToMemoryPool`
+, `CheckTransaction`, and `CheckInputs` in Bitcoin Core.
+
+By independently verifying each transaction as it is received and before propagating it,
+every node builds a pool of valid (but unconfirmed) transactions known as the transaction
+pool, memory pool, or mempool.
+
+### Mining Nodes
+
+Some of the nodes on the bitcoin network are specialized nodes called miners. Like every
+other full node, miner’s node receives and propagates unconfirmed transactions on the
+bitcoin network. Jing’s node, however, also aggregates these transactions into new blocks.
+
+miner’s node is listening for new blocks, propagated on the bitcoin network, as do all
+nodes. However, the arrival of a new block has special significance for a mining node. To
+miners, receiving a valid new block means someone else won the competition and they lost.
+
+### Aggregating Transactions into Blocks
+
+After validating transactions, a bitcoin node will add them to the memory pool, or
+transaction pool, where transactions await until they can be included (mined) into a
+block. miner’s node collects, validates, and relays new transactions just like any other
+node. Unlike other nodes, however, miner’s node will then aggregate these transactions
+into a candidate block.
+
+Mining node maintains a local copy of the blockchain. miner’s node is listening for
+transactions, trying to mine a new block and also listening for blocks discovered by other
+nodes.
+
+while miner’s node was searching for a solution to candidate block, it was also collecting
+transactions in preparation for the next block. By now it has collected a few hundred
+transactions in the memory pool. Upon receiving new block and validating it, miner’s node
+will also compare it against all the transactions in the memory pool and remove any that
+were included in the new block. Whatever transactions remain in the memory pool are
+unconfirmed and are waiting to be recorded in a next block.
+
+miner’s node immediately constructs a new empty block. This block is called a candidate
+block because it is not yet a valid block, as it does not contain a valid Proof-of-Work.
+The block becomes valid only if the miner succeeds in finding a solution to the
+Proof-of-Work algorithm.
+
+Using the command line to retrieve block 277,316:
+
+```shell
+$ bitcoin-cli getblockhash 277316
+$ bitcoin-cli getblock 0000000000000001b6b9a13b095e96db41c4a928b97ef2d944a9b31b2cc7bdc4
+```
+
+#### The Coinbase Transaction
+
+The first transaction in any block is a special transaction, called a coinbase
+transaction. This transaction is constructed by miner’s node and contains his reward for
+the mining effort.
+
+miner’s node creates the coinbase transaction as a payment to his own wallet: “Pay miner’s
+address 25.09094928 bitcoin.” The total amount of reward that miner collects for mining a
+block is the sum of the coinbase reward (25 new bitcoin) and the transaction fees (
+0.09094928) from all the transactions included in the block.
+
+To get coinbase transaction:
+
+```shell
+$ bitcoin-cli getrawtransaction d5ada064c6417ca25c4308bd158c34b77e1c0eca2a73cda16c737e7424afba2f 1
+```
+
+Unlike regular transactions, the coinbase transaction does not consume (spend)
+UTXO as inputs. Instead, it has only one input, called the coinbase, which creates bitcoin
+from nothing.
+
+#### Coinbase Reward and Fees
+
+To construct the coinbase transaction, miner’s node first calculates the total amount of
+transaction fees by adding all the inputs and outputs of the transactions that were added
+to the candidate block. The fees are calculated as:
+
+```
+Total Fees = Sum(Inputs) - Sum(Outputs)`
+```
+
+Next, miner’s node calculates the correct reward for the new block. The reward is
+calculated based on the block height, starting at 50 bitcoin per block and reduced by half
+every 210,000 blocks. Because this block is at height 277,316, the correct reward is 25
+bitcoin. The calculation can be seen in function `GetBlockSubsidy` in the Bitcoin Core
+client.
+
+An incorrect reward would result in the block being deemed invalid by everyone else,
+wasting miner’s electricity used for Proof-of- Work. Miner only gets to spend the reward
+if the block is accepted by everyone.
+
+#### Structure of the Coinbase Transaction
+
+The structure of a “normal” transaction input:
+
+| Size      | Field | Description |
+| ----------- | ----------- |----------- |
+| 32 bytes | Transaction Hash | Pointer to the transaction containing the UTXO to be spent | 
+|4 bytes | Output Index The | index number of the UTXO to be spent, irst one is 0 |
+|1–9 bytes (VarInt) | Unlocking-Script | Size Unlocking-Script length in bytes, to follow |
+|Variable | Unlocking-Script | A script that fulills the conditions of the UTXO locking script |
+| 4 bytes | Sequence Number | Currently disabled Tx-replacement feature, set to 0xFFFFFFFF |
+
+The structure of a coinbase transaction input:
+
+| Size      | Field | Description |
+| ----------- | ----------- |----------- |
+|32 bytes |Transaction Hash| All bits are zero: Not a transaction hash reference
+|4 bytes| Output Index |All bits are ones: 0xFFFFFFFF|
+|1–9 bytes (VarInt)| Coinbase Data Size| Length of the coinbase data, from 2 to 100 bytes|
+|Variable |Coinbase Data |Arbitrary data used for extra nonce and mining tags. In v2 blocks; must begin with block height|
+|4 bytes |Sequence Number |Set to 0xFFFFFFFF|
+
+In a coinbase transaction, the first two fields are set to values that do not represent a
+UTXO reference. Instead of a “transaction hash,” the first field is filled with 32 bytes
+all set to zero. The “output index” is filled with 4 bytes all set to 0xFF (255 decimal).
+The “Unlocking Script” (scriptSig) is replaced by coinbase data, a data field used by the
+miners, as we will see next.
+
+#### Coinbase Data
+
+Coinbase transactions do not have an unlocking script (aka, scriptSig) field. Instead,
+this field is replaced by coinbase data, which must be between 2 and 100 bytes. Except for
+the first few bytes, the rest of the coinbase data can be used by miners in any way they
+want; it is arbitrary data. Currently, miners use the coinbase data to include extra nonce
+values and strings identifying the mining pool.
+
+### Constructing the Block Header
+
+To construct the block header, the mining node needs to fill in six fields:
+
+* 4 bytes Version A version number to track software/protocol upgrades
+* 32 bytes Previous Block Hash A reference to the hash of the previous (parent) block in
+  the chain
+* 32 bytes Merkle Root A hash of the root of the merkle tree of this block’s transactions
+* 4 bytes Timestamp The approximate creation time of this block (seconds from Unix Epoch)
+* 4 bytes Target The Proof-of-Work algorithm target for this block
+* 4 bytes Nonce A counter used for the Proof-of-Work algorithm
+
+The mining node needs to add the “Previous Block Hash” (also known as pre vhash). That is
+the hash of the block header of the previous block received from the network, which
+miner’s node has accepted and selected as the parent of the candidate block.
+
+By selecting the specific parent block, indicated by the Previous Block Hash field in the
+candidate block header, Jing is committing his mining power to extending the chain that
+ends in that specific block. In essence, this is how miner “votes” with his mining power
+for the longest-difficulty valid chain.
+
+With all the other fields filled, the block header is now complete and the process of
+mining can begin. The goal is now to find a value for the nonce that results in a block
+header hash that is less than the target. The mining node will need to test billions or
+trillions of nonce values before a nonce is found that satisfies the requirement.
+
+### Mining the Block
+
+Now that a candidate block has been constructed by miner’s node, it is time for miner’s
+hardware mining rig to “mine” the block, to find a solution to the Proof-of-Work algorithm
+that makes the block valid. The hash function SHA256 is the function used in bitcoin’s
+mining process.
+
+Mining is the process of hashing the block header repeatedly, changing one parameter,
+until the resulting hash matches a specific target.
+
+#### Proof-of-Work Algorithm
+
+The Proof-of-Work must produce a hash that is less than the target. A higher target means
+it is less difficult to find a hash that is below the target. A lower target means it is
+more difficult to find a hash below the target. The target and difficulty are inversely
+related.
+
+If we had a lower target (higher difficulty) it would take many more hash computations to
+find a suitable nonce, but only one hash computation for anyone to verify.
+
+The miner constructs a candidate block filled with transactions. Next, the miner
+calculates the hash of this block’s header and sees if it is smaller than the current
+target. If the hash is not less than the target, the miner will modify the nonce (usually
+just incrementing it by one) and try again.
+
+#### Target Representation
+
+the block contains the target, in a notation called “target bits” or just “bits,” which in
+block 277,316 has the value of 0x1903a30c. This notation expresses the Proof-of-Work
+target as a coefficient/exponent format.
+
+The formula to calculate the difficulty target from this representation is:
+`target = coefficient * 2^(8 * (exponent – 3))`
+Using that formula, and the difficulty bits value 0x1903a30c, we get:
+`target = 0x03a30c * 2^(0x08 * (0x19 - 0x03))^`
+
+In binary that number must have more than 60 leading bits set to zero. With this level of
+difficulty, a single miner processing 1 trillion hashes per second (1 terahash per second
+or 1 TH/sec) would only find a solution once every 8,496 blocks or once every 59 days, on
+average.
+
+#### Retargeting to Adjust Difficulty
+
+To keep the block generation time at 10 minutes, the difficulty of mining must be adjusted
+to account for these changes.
+
+Retargeting occurs automatically and on every node independently. Every 2,016 blocks, all
+nodes retarget the Proof-of-Work. The equation for retargeting measures the time it took
+to find the last 2,016 blocks and compares that to the expected time of 20,160 minutes. If
+the network is finding blocks faster than every 10 minutes, the difficulty increases (
+target decreases). If block discovery is slower than expected, the difficulty decreases (
+target increases).
+
+The equation can be summarized as:
+`New Target = Old Target * (Actual Time of Last 2016 Blocks / 20160 minutes)`
+
+Retargeting the Proof-of-Work `CalculateNextWorkRequired()` in the Bitcoin Core client C++
+file: pow.cpp.
+
+Note that the target is independent of the number of transactions or the value of
+transactions. This means that the amount of hashing power and therefore electricity
+expended to secure bitcoin is also entirely independent of the number of transactions.
+
+### Successfully Mining the Block
+
+miner’s node has constructed a candidate block and prepared it for mining. miner has
+several hardware mining rigs with application-specific integrated circuits, the mining
+node running on miner’s desktop transmits the block header to his mining hardware, which
+starts testing trillions of nonces per second.
+
+Almost 11 minutes after starting to mine block 277,316, one of the hardware mining
+machines finds a solution and sends it back to the mining node. When inserted into the
+block header, the nonce 924,591,752 produces a block hash of:
+
+```
+0000000000000001b6b9a13b095e96db41c4a928b97ef2d944a9b31b2cc7bdc4
+```
+
+which is less than the target:
+
+```
+0000000000000003A30C00000000000000000000000000000000000000000000
+```
+
+Immediately, miner’s mining node transmits the block to all its peers. They receive,
+validate, and then propagate the new block.
+
+### Validating a New Block
+
+When a node receives a new block, it will validate the block by checking it against a long
+list of criteria that must all be met; otherwise, the block is rejected. These criteria
+can be seen in the Bitcoin Core client in the functions `CheckBlock` and
+`CheckBlockHeader`.
+
+The independent validation of each new block by every node on the network ensures that the
+miners cannot cheat.
+
+### Assembling and Selecting Chains of Blocks
+
+The final step in bitcoin’s decentralized consensus mechanism is the assembly of blocks
+into chains and the selection of the chain with the most Proof-of-Work. Once a node has
+validated a new block, it will then attempt to assemble a chain by connecting the block to
+the existing blockchain.
+
+Nodes maintain three sets of blocks: those connected to the main blockchain, those that
+form branches off the main blockchain (secondary chains), and finally, blocks that do not
+have a known parent in the known chains (orphans). Invalid blocks are rejected as soon as
+any one of the validation criteria fails and are therefore not included in any chain.
+
+The “main chain” at any time is whichever valid chain of blocks has the most cumulative
+Proof-of-Work associated with it. Under most circumstances this is also the chain with the
+most blocks in it, unless there are two equal-length chains and one has more
+Proof-of-Work. The main chain will also have branches with blocks that are “siblings” to
+the blocks on the main chain. These blocks are valid but not part of the main chain. They
+are kept for future reference, in case one of those chains is extended to exceed the main
+chain in work.
+
+When a new block is received, a node will try to slot it into the existing blockchain. The
+node will look at the block’s “previous block hash” field, which is the reference to the
+block’s parent. Then, the node will attempt to find that parent in the existing
+blockchain. Most of the time, the parent will be the “tip” of the main chain, meaning this
+new block extends the main chain.
+
+If the secondary chain has more cumulative work than the main chain, the node will
+reconverge on the secondary chain, meaning it will select the secondary chain as its new
+main chain, making the old main chain a secondary chain. If the node is a miner, it will
+now construct a block extending this new, longer, chain.
+
+If a valid block is received and no parent is found in the existing chains, that block is
+considered an “orphan.” Orphan blocks are saved in the orphan block pool where they will
+stay until their parent is received.
+
+Orphan blocks usually occur when two blocks that were mined within a short time of each
+other are received in reverse order
+(child before parent).
+
+By selecting the greatest-cumulative-work valid chain, all nodes eventually achieve
+network-wide consensus. Mining nodes “vote” with their mining power by choosing which
+chain to extend by mining the next block. When they mine a new block and extend the chain,
+the new block itself represents their vote.
+
+#### Blockchain Forks
+
+Because the blockchain is a decentralized data structure, different copies of it are not
+always consistent.
+
+As long as all nodes select the greatest-cumulative-work chain, the global bitcoin network
+eventually converges to a consistent state. Forks occur as temporary inconsistencies
+between versions of the blockchain, which are resolved by eventual reconvergence as more
+blocks are added to one of the forks.
+
+A “fork” occurs whenever there are two candidate blocks competing to form the longest
+blockchain.
+
+Bitcoin’s block interval of 10 minutes is a design compromise between fast confirmation
+times (settlement of transactions) and the probability of a fork. A faster block time
+would make transactions clear faster but lead to more frequent blockchain forks, whereas a
+slower block time would decrease the number of forks but make settlement slower.
+
+### Mining and the Hashing Race
+
+#### The Extra Nonce Solution
+
+#### Mining Pools
+
+### Consensus Attacks
+
+### Changing the Consensus Rules
+
+#### Hard Forks
+
+#### Hard Forks: Software, Network, Mining, and Chain
+
+#### Diverging Miners and Difficulty
+
+#### Contentious Hard Forks
+
+#### Soft Forks
+
+#### Criticisms of Soft Forks
+
+### Soft Fork Signaling with Block Version
+
+#### BIP-34 Signaling and Activation
+
+#### BIP-9 Signaling and Activation
+
+### Consensus Software Development
 
 ## References
 
