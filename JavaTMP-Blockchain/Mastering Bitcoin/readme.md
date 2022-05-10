@@ -2273,13 +2273,105 @@ slower block time would decrease the number of forks but make settlement slower.
 
 ### Mining and the Hashing Race
 
+As the amount of hashing power applied to mining bitcoin has exploded, the difficulty has
+risen to match it.
+
 #### The Extra Nonce Solution
+
+updating the block timestamp to account for the elapsed time. Because the timestamp is
+part of the header, the change would allow miners to iterate through the values of the
+nonce again with different results.
+
+use the coinbase transaction as a source of extra nonce values. Because the coinbase
+script can store between 2 and 100 bytes of data, miners started using that space as extra
+nonce space, allowing them to explore a much larger range of block header values to find
+valid blocks. The coinbase transaction is included in the merkle tree, which means that
+any change in the coinbase script causes the merkle root to change.
 
 #### Mining Pools
 
+In this highly competitive environment, individual miners working alone (also known as
+solo miners) don’t stand a chance.
+
+Miners now collaborate to form mining pools, pooling their hashing power and sharing the
+reward among thousands of participants.
+
+Mining pools coordinate many hundreds or thousands of miners, over specialized pool-mining
+protocols. The individual miners configure their mining equipment to connect to a pool
+server, after creating an account with the pool.
+
+Most mining pools are “managed,” meaning that there is a company or individual running a
+pool server. The owner of the pool server is called the pool operator, and he charges pool
+miners a percentage fee of the earnings.
+
+The pool server runs specialized software and a pool-mining protocol that coordinate the
+activities of the pool miners. The pool server is also connected to one or more full
+bitcoin nodes and has direct access to a full copy of the blockchain database.
+
+For many miners, the ability to mine without running a full node is another big benefit of
+joining a managed pool.
+
+Pool miners connect to the pool server using a mining protocol such as Stratum
+(STM) or GetBlockTemplate (GBT). Both the STM and GBT protocols create block templates
+that contain a template of a candidate block header.
+
+#### Peer-to-peer mining pool (P2Pool)
+
+Managed pools create the possibility of cheating by the pool operator, who might direct
+the pool effort to double-spend transactions or invalidate blocks. Furthermore,
+centralized pool servers represent a singlepoint- of-failure. If the pool server is down
+or is slowed by a denial-of-service attack, the pool miners cannot mine. In 2011, to
+resolve these issues of centralization, a new pool mining method was proposed and
+implemented: P2Pool, a peer-to-peer mining pool without a central operator.
+
+P2Pool works by decentralizing the functions of the pool server, implementing a parallel
+blockchain-like system called a share chain. A share chain is a blockchain running at a
+lower difficulty than the bitcoin blockchain.
+
+P2Pool mining is more complex than pool mining because it requires that the pool miners
+run a dedicated computer with enough disk space, memory, and internet bandwidth to support
+a full bitcoin node and the P2Pool node software.
+
+P2Pool is a hybrid approach that has the advantage of much more granular payouts than solo
+mining, but without giving too much control to a pool operator like managed pools.
+
 ### Consensus Attacks
 
+Bitcoin’s consensus mechanism is, at least theoretically, vulnerable to attack by miners
+(or pools) that attempt to use their hashing power to dishonest or destructive ends.
+
+It is important to note that consensus attacks can only affect future consensus, or at
+best, the most recent past (tens of blocks).
+
+One attack scenario against the consensus mechanism is called the “51% attack.” A
+fork/double-spend attack is where the attacker causes previously confirmed blocks to be
+invalidated by forking below them and re-converging on an alternate chain.
+
+Note that a double-spend can only be done on the attacker’s own transactions, for which
+the attacker can produce a valid signature. Doublespending one’s own transactions is
+profitable if by invalidating a transaction the attacker can get an irreversible exchange
+payment or product without paying for it.
+
+A double-spend attack can happen in two ways: either before a transaction is confirmed, or
+if the attacker takes advantage of a blockchain fork to undo several blocks. A 51% attack
+allows attackers to double-spend their own transactions in the new chain, thus undoing the
+corresponding transaction in the old chain.
+
+To protect against this kind of attack, a merchant selling large-value items must wait at
+least six confirmations before giving the product to the buyer.
+
+The pool operator in a managed pool controls the construction of candidate blocks and also
+controls which transactions are included. This gives the pool operator the power to
+exclude transactions or introduce double-spend transactions. If such abuse of power is
+done in a limited and subtle way, a pool operator could conceivably profit from a
+consensus attack without being noticed.
+
 ### Changing the Consensus Rules
+
+The rules of consensus determine the validity of transactions and blocks. These rules are
+the basis for collaboration between all bitcoin nodes and are responsible for the
+convergence of all local perspectives into a single consistent blockchain across the
+entire network.
 
 #### Hard Forks
 
