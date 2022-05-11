@@ -2375,17 +2375,54 @@ entire network.
 
 #### Hard Forks
 
+the bitcoin network may briefly diverge, with two parts of the network following two
+different branches of the blockchain for a short time. There is another scenario in which
+the network may diverge into following two chains: a change in the consensus rules. This
+type of fork is called a hard fork, because after the fork the network does not reconverge
+onto a single chain.
+
 #### Hard Forks: Software, Network, Mining, and Chain
+
+We’ve already discussed two circumstances that will lead to a hard fork: a bug in the
+consensus rules and a deliberate modification of the consensus rules.
+
+Examples of software forks that have attempted to change consensus rules include Bitcoin
+XT, Bitcoin Classic, and most recently Bitcoin Unlimited.
 
 #### Diverging Miners and Difficulty
 
+As miners diverge into mining two different chains, the hashing power is split between the
+chains. The mining power can be split in any proportion between the two chains. The new
+rules may only be followed by a minority, or by the vast majority of the mining power.
+
 #### Contentious Hard Forks
+
+Hard forks are seen as risky because they force a minority to either upgrade or remain on
+a minority chain. The risk of splitting the entire system into two competing systems is
+seen by many as an unacceptable risk.
 
 #### Soft Forks
 
+Not all consensus rule changes cause a hard fork. Only consensus changes that are
+forward-incompatible cause a fork.
+
+soft fork upgrades can only be used to constrain the consensus rules, not to expand them.
+The new rules can only limit what is valid; otherwise, they will trigger a hard fork when
+rejected under the old rules.
+
 #### Criticisms of Soft Forks
 
+many developers are concerned that other methods of soft fork upgrades make unacceptable
+tradeoffs. like Technical debt, Validation relaxation , and Irreversible upgrades.
+
 ### Soft Fork Signaling with Block Version
+
+Since soft forks allow unmodified clients to continue to operate within consensus, the
+mechanism for “activating” a soft fork is through miners signaling readiness: a majority
+of miners must agree that they are ready and willing to enforce the new consensus rules.
+To coordinate their actions, there is a signaling mechanism that allows them to show their
+support for a consensus rule change. This mechanism was introduced with the activation of
+BIP-34 in March 2013 and replaced by the activation of BIP-9 in July 2016.
 
 #### BIP-34 Signaling and Activation
 
