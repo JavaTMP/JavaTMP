@@ -2426,9 +2426,27 @@ BIP-34 in March 2013 and replaced by the activation of BIP-9 in July 2016.
 
 #### BIP-34 Signaling and Activation
 
+The first implementation, in BIP-34, used the block version field to allow miners to
+signal readiness for a specific consensus rule change. BIP-34 defined a consensus rule
+change that required the coinbase field (input) of the coinbase transaction to contain the
+block height.
+
 #### BIP-9 Signaling and Activation
 
+BIP-9 interprets the block version as a bit field instead of an integer. Because the block
+version was originally used as an integer, versions 1 through 4, only 29 bits remain
+available to be used as a bit field. This leaves 29 bits that can be used to independently
+and simultaneously signal readiness on 29 different proposals.
+
 ### Consensus Software Development
+
+Consensus software development continues to evolve and there is much discussion on the
+various mechanisms for changing the consensus rules.
+
+It is important to recognize that there is no perfect solution for consensus development.
+Both hard forks and soft forks involve tradeoffs.
+
+## CHAPTER 11: Bitcoin Security
 
 ## References
 
