@@ -1,0 +1,49 @@
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**
+!**/src/test/**
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+.gradle
+
+
+### IntelliJ IDEA ###
+###.idea
+###*.iws
+###*.iml
+###*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+
+### VS Code ###
+.vscode/
+
+## .idea ##
+/.idea/libraries/
+.idea/
+
+# ---< IDEA artifacts and output dirs >---
+*.iml
+*.ipr
+*.iws
+.idea
+out
+
+/lib
+/lib_test
+/lib_runtime
+/offlineRelease

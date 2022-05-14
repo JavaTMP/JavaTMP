@@ -1,0 +1,142 @@
+plugins {
+    id 'java'
+}
+
+group 'com.javatmp.demo'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+// https://stackoverflow.com/questions/30860669/what-is-gradle-missing-to-map-hibernate
+// https://discuss.gradle.org/t/jpa-entity-classes-are-not-discovered-automatically-with-gradle/11339
+sourceSets.main.output.resourcesDir = sourceSets.main.java.outputDir
+sourceSets.test.output.resourcesDir = sourceSets.test.java.outputDir
+
+ext {
+    springframeworkVersion = "5.3.2"
+
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
+}
+
+dependencies {
+    implementation "org.springframework:spring-context:${springframeworkVersion}"
+    implementation "org.springframework:spring-web:${springframeworkVersion}"
+
+    // https://mvnrepository.com/artifact/org.springframework.amqp/spring-rabbit
+//    implementation group: 'org.springframework.amqp', name: 'spring-rabbit', version: '2.3.0'
+
+    // https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils
+//    implementation group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.3'
+
+
+    // https://mvnrepository.com/artifact/org.springframework.security/spring-security-oauth2-client
+//    implementation group: 'org.springframework.security', name: 'spring-security-oauth2-client', version: '5.4.0'
+
+//    compileOnly "org.projectlombok:lombok:1.18.16"
+//    annotationProcessor 'org.projectlombok:lombok:1.18.16'
+//    testCompileOnly 'org.projectlombok:lombok:1.18.16'
+//    testAnnotationProcessor 'org.projectlombok:lombok:1.18.16'
+//    implementation "org.slf4j:slf4j-api:1.7.30"
+//    implementation "org.apache.logging.log4j:log4j-slf4j-impl:2.14.0"
+//    implementation "org.hibernate:hibernate-core:5.4.26.Final"
+//    compileOnly "org.hibernate:hibernate-jpamodelgen:5.4.26.Final"
+//    annotationProcessor "org.hibernate:hibernate-jpamodelgen:5.4.26.Final"
+//    testAnnotationProcessor "org.hibernate:hibernate-jpamodelgen:5.4.26.Final"
+//    implementation "org.hibernate:hibernate-c3p0:5.4.26.Final"
+//    runtime "mysql:mysql-connector-java:8.0.22"
+//    implementation "org.springframework.data:spring-data-jpa:2.4.2"
+//    testImplementation "org.springframework:spring-test:${springframeworkVersion}"
+//    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+//    testImplementation 'org.junit.jupiter:junit-jupiter-engine'
+//    testImplementation 'org.hamcrest:hamcrest-library:1.3'
+//    testImplementation 'com.jayway.jsonpath:json-path:2.2.0'
+//    testImplementation 'org.junit.platform:junit-platform-launcher:1.6.0'
+    // https://mvnrepository.com/artifact/com.google.code.gson/gson
+//    implementation group: 'com.google.code.gson', name: 'gson', version: '2.8.6'
+    // https://mvnrepository.com/artifact/joda-time/joda-time
+//    implementation group: 'joda-time', name: 'joda-time', version: '2.10.6'
+
+    // https://mvnrepository.com/artifact/org.springframework.amqp/spring-rabbit
+//    implementation group: 'org.springframework.amqp', name: 'spring-rabbit', version: '2.3.0'
+
+    // https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl
+//    implementation group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version: '1.9.13'
+
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.3'
+//    implementation "org.codehaus.jackson:jackson-mapper-asl:1.9.4"
+    // https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310
+    implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.12.3'
+
+
+
+
+
+
+}
+
+test {
+    useJUnitPlatform()
+}
+
+task getRuntimeDeps(type: Copy) {
+    from sourceSets.main.runtimeClasspath - sourceSets.main.compileClasspath
+    include "*.jar"
+    into 'offlineRelease/lib_runtime/'
+}
+
+task getCompileDeps(type: Copy) {
+    from sourceSets.main.compileClasspath
+    into 'offlineRelease/lib/'
+}
+
+task getDepsTest(type: Copy) {
+    from sourceSets.test.compileClasspath - sourceSets.main.compileClasspath
+    include "*.jar"
+    into 'offlineRelease/lib_test/'
+}
+
+task printSourceSetInformation() {
+    doLast {
+        sourceSets.each { srcSet ->
+            println "[" + srcSet.name + "]"
+            print "-->Source directories: " + srcSet.allJava.srcDirs + "\n"
+            print "-->Output directories: " + srcSet.output.classesDirs.files + "\n"
+            print "-->Compile classpath:\n"
+            srcSet.compileClasspath.files.each {
+                println "[" + srcSet.name + "]"
+                print "  " + it.path + "\n"
+            }
+            println ""
+        }
+
+        sourceSets.test.compileClasspath.files.each {
+            print "Test[" + it.path + "]\n"
+        }
+    }
+}
+
+task copyDependencies() {
+    print "Dependencies copied successfully"
+}
+task deleteOfflineRelease() {
+    delete 'offlineRelease'
+}
+copyDependencies {
+    dependsOn deleteOfflineRelease, getCompileDeps, getRuntimeDeps, getDepsTest
+}
+
+task offlineRelease(type: Copy, dependsOn: copyDependencies) {
+    // https://stackoverflow.com/questions/39109923/copy-entire-directory-in-gradle/39110073
+    from 'src'
+    into 'offlineRelease/src'
+}
