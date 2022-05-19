@@ -2656,6 +2656,18 @@ mining on the blockchain: the funding and settlement transactions.
 
 ## APPENDIX D: Segregated Witness
 
+Segregated Witness (segwit) is an upgrade to the bitcoin consensus rules and network
+protocol, proposed and implemented as a BIP-9 soft-fork.
+
+In cryptography, the term “witness” is used to describe a solution to a cryptographic
+puzzle. In bitcoin terms, the witness satisfies a cryptographic condition placed on a
+unspent transaction output (UTXO).
+
+In the context of bitcoin, a digital signature is one type of witness, but a witness is
+more broadly any solution that can satisfy the conditions imposed on an UTXO and unlock
+that UTXO for spending. The term “witness” is a more general term for an “unlocking
+script” or “scriptSig.”
+
 ## References
 
 Mastering Bitcoin by Andreas M. Antonopoulos (O’Reilly). Copyright 2017 Andreas M.
