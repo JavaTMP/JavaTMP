@@ -2668,6 +2668,78 @@ more broadly any solution that can satisfy the conditions imposed on an UTXO and
 that UTXO for spending. The term “witness” is a more general term for an “unlocking
 script” or “scriptSig.”
 
+The term segregated witness, or segwit for short, simply means separating the signature or
+unlocking script of a specific output. Think “separate scriptSig,” or “separate signature”
+in the simplest form.
+
+In this section we will look at some of the benefits of Segregated Witness, describe the
+mechanism used to deploy and implement this architecture change, and demonstrate the use
+of Segregated Witness in transactions and addresses.
+
+### Why Segregated Witness?
+
+Segregated Witness is an architectural change that has several effects on the scalability,
+security, economic incentives, and performance of bitcoin:
+
+* Transaction Malleability. By moving the witness outside the transaction, the transaction
+  hash used as an identifier no longer includes the witness data.
+* Script Versioning. allows the scripting language to be upgraded in a backward-compatible
+  way (i.e., using soft fork upgrades) to introduce new script operands, syntax, or
+  semantics.
+* Network and Storage Scaling. By moving the witness data outside the transaction,
+  Segregated Witness improves bitcoin’s scalability.
+* Signature Veriication Optimization. Segregated Witness upgrades the signature
+  functions (CHECKSIG, CHECKMULTISIG, etc.) to reduce the algorithm’s computational
+  complexity.
+* Offline Signing Improvement. Segregated Witness signatures incorporate the value (
+  amount) referenced by each input in the hash that is signed.
+
+### How Segregated Witness Works
+
+Segregated Witness is a change to how individual UTXO are spent and therefore is a
+peroutput feature. A transaction can spend Segregated Witness outputs or traditional (
+inline-witness)
+outputs or both.
+
+When a transaction spends an UTXO, it must provide a witness. In a traditional UTXO, the
+locking script requires that witness data be provided inline in the input part of the
+transaction that spends the UTXO. A Segregated Witness UTXO, however, specifies a locking
+script that can be satisfied with witness data outside of the input
+(segregated).
+
+### Soft Fork (Backward Compatibility)
+
+Segregated Witness is a significant change to the way outputs and transactions are
+architected. Such a change would normally require a simultaneous change in every bitcoin
+node and wallet to change the consensus rules—what is known as a hard fork.
+
+Instead, segregated witness is introduced with a much less disruptive change, which is
+backward compatible, known as a soft fork. This type of upgrade allows nonupgraded
+software to ignore the changes and continue to operate without any disruption.
+
+Segregated Witness outputs are constructed so that older systems that are not segwitaware
+can still validate them. To an old wallet or node, a Segregated Witness output looks like
+an output that anyone can spend.
+
+### Segregated Witness Output and Transaction Examples
+
+how a Pay-to-Public-Key-Hash (P2PKH) payment is transformed with the Segregated Witness
+program. Then, we’ll look at the Segregated Witness equivalent for Pay-to-Script-Hash (
+P2SH) scripts. and how both of the preceding Segregated Witness programs can be embedded
+inside a P2SH script.
+
+#### Pay-to-Witness-Public-Key-Hash (P2WPKH)
+
+A Segregated Witness output’s locking script is much simpler than a traditional output. It
+consists of two values that are pushed on to the script evaluation stack. the first
+number (0) is interpreted as a version number (the witness version) and the second part (
+20 bytes) is the equivalent of a locking script known as a witness program. The 20-byte
+witness program is simply the hash of the public key, as in a P2PKH script.
+
+to spend the Segregated Witness output, the transaction has no signature on that input.
+Instead, receiver’s transaction has an empty scriptSig and includes a Segregated Witness,
+outside the transaction itself.
+
 ## References
 
 Mastering Bitcoin by Andreas M. Antonopoulos (O’Reilly). Copyright 2017 Andreas M.
