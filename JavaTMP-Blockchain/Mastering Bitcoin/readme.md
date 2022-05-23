@@ -2737,8 +2737,35 @@ number (0) is interpreted as a version number (the witness version) and the seco
 witness program is simply the hash of the public key, as in a P2PKH script.
 
 to spend the Segregated Witness output, the transaction has no signature on that input.
-Instead, receiver’s transaction has an empty scriptSig and includes a Segregated Witness,
-outside the transaction itself.
+Instead, receiver’s transaction has an empty `scriptSig` and includes a Segregated
+Witness, outside the transaction itself.
+
+#### Wallet construction of P2WPKH
+
+The P2WPKH should only be created by the payee
+(recipient) and not converted by the sender from a known public key, P2PKH script, or
+address. The sender has no way of knowing if the recipient’s wallet has the ability to
+construct segwit transactions and spend P2WPKH outputs. Additionally, P2WPKH outputs must
+be constructed from the hash of a compressed public key.
+
+P2WPKH should be constructed by the payee (recipient) by converting a compressed public
+key to a P2WPKH hash. You should never transform a P2PKH script, bitcoin address, or
+uncompressed public key to a P2WPKH witness script.
+
+#### Pay-to-Witness-Script-Hash (P2WSH)
+
+the Segregated Witness program consists of two values pushed to the stack: a witness
+version (0) and the 32-byte SHA256 hash of the redeem script.
+
+While P2SH uses the 20-byte RIPEMD160(SHA256(script)) hash, the P2WSH witness program uses
+a 32-byte SHA256(script) hash.
+
+can spend outputs the P2WSH output by presenting the correct redeem script and sufficient
+signatures to satisfy it. Both the redeem script and the signatures would be segregated
+outside the spending transaction as part of the witness data.
+
+#### Diferentiating between P2WPKH and P2WSH
+
 
 ## References
 
