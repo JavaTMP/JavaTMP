@@ -2766,6 +2766,19 @@ outside the spending transaction as part of the witness data.
 
 #### Diferentiating between P2WPKH and P2WSH
 
+Both types of witness programs consist of a single byte version number followed by a
+longer hash. They look very similar, but are interpreted very differently: one is
+interpreted as a public key hash, which is satisfied by a signature and the other as a
+script hash, which is satisfied by a redeem script.
+
+The critical difference between them is the length of the hash:
+
+* The public key hash in P2WPKH is 20 bytes.
+* The script hash in P2WSH is 32 bytes.
+
+This is the one difference that allows a wallet to differentiate between the two types of
+witness programs. By looking at the length of the hash, a wallet can determine what type
+of witness program it is, P2WPKH or P2WSH.
 
 ## References
 
