@@ -2780,6 +2780,32 @@ This is the one difference that allows a wallet to differentiate between the two
 witness programs. By looking at the length of the hash, a wallet can determine what type
 of witness program it is, P2WPKH or P2WSH.
 
+### Upgrading to Segregated Witness
+
+For P2WPKH and P2WSH payment types, both the sender and the recipient wallets need to be
+upgraded to be able to use segwit. Furthermore, the sender’s wallet needs to know that the
+recipient’s wallet is segwit-aware.
+
+#### Embedding Segregated Witness inside P2SH
+
+Both forms of witness scripts, P2WPKH and P2WSH, can be embedded in a P2SH address. The
+first is noted as P2SH(P2WPKH) and the second is noted as P2SH(P2WSH).
+
+#### Pay-to-Witness-Public-Key-Hash inside Pay-to-Script-Hash
+
+P2SH(P2WPKH) is a Pay-to-Witness-Public-Key-Hash witness program, embedded inside a
+Pay-to-Script-Hash script, so that it can be used by a wallet that is not aware of segwit.
+
+Sender’s wallet constructs a P2WPKH witness program with Receiver’s public key. This
+witness program is then hashed and the resulting hash is encoded as a P2SH script. The
+P2SH script is converted to a bitcoin address, one that starts with a “3,”
+
+#### Pay-to-Witness-Script-Hash inside Pay-to-Script-Hash
+a P2WSH witness program for a multisig script or other complicated script
+can be embedded inside a P2SH script and address, making it possible for any wallet
+to make payments that are segwit compatible.
+
+
 ## References
 
 Mastering Bitcoin by Andreas M. Antonopoulos (O’Reilly). Copyright 2017 Andreas M.
