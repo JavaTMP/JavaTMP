@@ -2805,6 +2805,8 @@ a P2WSH witness program for a multisig script or other complicated script
 can be embedded inside a P2SH script and address, making it possible for any wallet
 to make payments that are segwit compatible.
 
+#### Segregated Witness addresses
+
 
 ## References
 
