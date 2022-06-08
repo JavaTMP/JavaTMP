@@ -28,8 +28,6 @@ repositories {
 }
 
 dependencies {
-    implementation "org.springframework:spring-context:${springframeworkVersion}"
-    implementation "org.springframework:spring-web:${springframeworkVersion}"
 
     // https://mvnrepository.com/artifact/org.springframework.amqp/spring-rabbit
 //    implementation group: 'org.springframework.amqp', name: 'spring-rabbit', version: '2.3.0'
@@ -70,18 +68,13 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.codehaus.jackson/jackson-mapper-asl
 //    implementation group: 'org.codehaus.jackson', name: 'jackson-mapper-asl', version: '1.9.13'
-
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
-    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.3'
+//    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.12.3'
 //    implementation "org.codehaus.jackson:jackson-mapper-asl:1.9.4"
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310
-    implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.12.3'
+//    implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.12.3'
 
-
-
-
-
-
+    implementation "com.jcraft:jsch:0.1.55"
 }
 
 test {
