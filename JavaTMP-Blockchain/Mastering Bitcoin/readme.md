@@ -2801,11 +2801,28 @@ witness program is then hashed and the resulting hash is encoded as a P2SH scrip
 P2SH script is converted to a bitcoin address, one that starts with a “3,”
 
 #### Pay-to-Witness-Script-Hash inside Pay-to-Script-Hash
-a P2WSH witness program for a multisig script or other complicated script
-can be embedded inside a P2SH script and address, making it possible for any wallet
-to make payments that are segwit compatible.
+
+a P2WSH witness program for a multisig script or other complicated script can be embedded
+inside a P2SH script and address, making it possible for any wallet to make payments that
+are segwit compatible.
 
 #### Segregated Witness addresses
+
+#### Transaction identiiers
+
+One of the greatest benefits of Segregated Witness is that it eliminates third-party
+transaction malleability.
+
+Segregated Witness transactions have two IDs: txid and wtxid. The txid is the hash of the
+transaction without the witness data and the wtxid is the hash inclusive of witness data.
+The txid of a transaction where all inputs are segwit inputs is not susceptible to
+third-party transaction malleability.
+
+### Segregated Witness’ New Signing Algorithm
+
+Segregated Witness modifies the semantics of the four signature verification functions
+(CHECKSIG, CHECKSIGVERIFY, CHECKMULTISIG, and CHECKMULTISIGVERIFY), changing the way a
+transaction commitment hash is calculated.
 
 
 ## References
