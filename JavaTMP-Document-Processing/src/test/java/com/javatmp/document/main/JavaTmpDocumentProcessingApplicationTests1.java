@@ -15,30 +15,37 @@ class JavaTmpDocumentProcessingApplicationTests1 {
 
     Set<String> cache = new HashSet<>();
 
-    void printWords(String str) {
+    void printWords(String str, int start, int end) {
 
         int space = str.indexOf(' ');
         int lastSpace = str.lastIndexOf(' ');
-
+        String keyStr = str + "-" + start + "-" + end;
+        if(this.cache.contains(keyStr)) {
+            return;
+        }
+        this.cache.add(keyStr);
         this.lines.add(str);
 
         System.out.println("process = [" + str + "], first [" + space + "], last[" + lastSpace + "]");
         if (space != -1) {
             System.out.println("fw = [" + str.substring(0, space) + "]");
-            printWords(str.substring(space + 1));
+            String fp = str.substring(space + 1);
+            printWords(fp, start + space + 1, space + 1 + fp.length());
         }
 
         if(lastSpace != -1) {
             System.out.println("lw = [" + str.substring(lastSpace + 1) + "]");
-            printWords(str.substring(0, lastSpace));
+            String lp = str.substring(0, lastSpace);
+            printWords(lp, start, start + lp.length());
         }
 
-        System.out.println("Finish Processing str [" + str + "]");
+        System.out.println("Finish Processing str [" + start + "][" + end + "][" + str + "]");
     }
 
     @Test
     void contextLoads() {
-        this.printWords("mohamed darim wasif sulibi bomb");
+        String str = "In case the service was defined as variable all fields are required amount and quantity if one of them not passed it won’t be valid";
+        this.printWords(str, 0, str.length());
         System.out.println("**** print all ***");
         this.lines.forEach(l -> {
             System.out.println("[" + l + "]");
