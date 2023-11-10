@@ -73,7 +73,7 @@
         "file-saver": "^2.0.5",
         "numeral": "2.0.6",
         "@fortawesome/fontawesome-free": "^5.15.3",
-        "moment-timezone": "^0.5.33",
+        "moment-timezone": "^0.5.35",
         "material-design-icons": "^3.0.1",
         "form-serializer": "^2.5.0",
         "handlebars": "^4.7.7",
