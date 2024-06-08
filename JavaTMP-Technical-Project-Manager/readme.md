@@ -56,7 +56,7 @@ The Java Spring Boot Technical Project Manager is responsible for managing the d
 - Proficient in using project management tools (JIRA, Trello, Asana) and version control systems (Git).
 
 ### Soft Skills
-- Excellent leadership and team management skills.
+- [Excellent leadership and team management skills](Excellent-leadership-and-team-management-skills.md).
 - [Strong problem-solving and analytical abilities](strong-problem-solving-and-analytical-abilities.md).
 - Effective communication and interpersonal skills.
 - Ability to manage multiple priorities and work under pressure.
