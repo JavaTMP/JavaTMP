@@ -81,6 +81,7 @@ requirements.
 
 - [Strong proficiency in Java and the Spring Boot framework](Strongly-proficient-in-Java-and-Spring-Boot-framework.md)
   .
+- Experience with [Spring Boot Best Practices](Spring-Boot-Best-Practices.md). 
 - Experience with RESTful API design and development.
 - Knowledge of database technologies (SQL, NoSQL) and ORM frameworks (Hibernate).
 - Familiarity with front-end technologies (HTML, CSS, JavaScript, Angular, React) is a
