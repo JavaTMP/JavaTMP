@@ -48,7 +48,7 @@ The Java Spring Boot Technical Project Manager is responsible for managing the d
 - Proven track record of successfully managing and delivering complex software projects.
 
 ### Technical Skills
-- Strong proficiency in Java and the Spring Boot framework.
+- [Strong proficiency in Java and the Spring Boot framework](Strongly-proficient-in-Java-and-Spring-Boot-framework.md).
 - Experience with RESTful API design and development.
 - Knowledge of database technologies (SQL, NoSQL) and ORM frameworks (Hibernate).
 - Familiarity with front-end technologies (HTML, CSS, JavaScript, Angular, React) is a plus.
