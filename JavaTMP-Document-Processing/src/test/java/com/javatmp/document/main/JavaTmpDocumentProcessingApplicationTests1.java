@@ -44,7 +44,7 @@ class JavaTmpDocumentProcessingApplicationTests1 {
 
     @Test
     void contextLoads() {
-        String str = "In case the service was defined as variable all fields are required amount and quantity if one of them not passed it won’t be valid";
+        String str = "Crypto mining data center company Compute North is the latest casualty in the ongoing harsh crypto winter that has of late forced some of the biggest crypto companies to close shop";
         this.printWords(str, 0, str.length());
         System.out.println("**** print all ***");
         this.lines.forEach(l -> {
