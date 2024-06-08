@@ -3,8 +3,8 @@
 ## Overview
 
 The Java Spring Boot Technical Project Manager is responsible for managing the
-development, deployment, and maintenance of applications using the [Spring Boot]
-(Spring-Boot-framework.md) or [Spring](Spring-framework.md) frameworks.
+development, deployment, and maintenance of applications using
+the [Spring Boot](Spring-Boot-framework.md) or [Spring](Spring-framework.md) frameworks.
 This role involves coordinating with cross-functional teams, overseeing project timelines,
 and ensuring the delivery of high-quality software solutions that meet business
 requirements.
@@ -26,8 +26,8 @@ requirements.
   Spring Boot applications.
 - Ensure the adoption of best practices for coding, testing, and deployment to maintain
   high-quality software standards.
-- Stay current with industry trends and advancements in Java and [Spring Boot 
-  technologies](Spring-Boot-technologies.md)
+- Stay current with industry trends and advancements in Java
+  and [Spring Boot technologies](Spring-Boot-technologies.md)
   and [tools](best-Spring-Boot-tools.md) to drive innovation and continuous improvement.
 
 ### Team Collaboration
@@ -82,7 +82,7 @@ requirements.
 
 - [Strong proficiency in Java and the Spring Boot framework](Strongly-proficient-in-Java-and-Spring-Boot-framework.md)
   .
-- Experience with [Spring Boot Best Practices](Spring-Boot-Best-Practices.md). 
+- Experience with [Spring Boot Best Practices](Spring-Boot-Best-Practices.md).
 - Experience with RESTful API design and development.
 - Knowledge of database technologies (SQL, NoSQL) and ORM frameworks (Hibernate).
 - Familiarity with front-end technologies (HTML, CSS, JavaScript, Angular, React) is a
