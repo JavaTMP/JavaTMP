@@ -13,9 +13,11 @@ requirements.
 
 ### Project Management
 
-- Lead and manage multiple Spring Boot projects from inception to completion, ensuring
+- [Lead and manage multiple Spring Boot projects](Leading-and-Managing-Spring-Boot-projects.md) from inception to completion, 
+  ensuring
   they are delivered on time, within scope, and within budget.
-- Develop detailed project plans, including timelines, resource allocation, and risk
+- [Develop detailed project plans](Step-by-Step-Guide-to-Developing-Detailed-Project-Plans.md), including timelines, resource allocation, and 
+  risk
   management strategies.
 - Monitor project progress, identify potential issues, and implement corrective actions to
   ensure successful project delivery.
