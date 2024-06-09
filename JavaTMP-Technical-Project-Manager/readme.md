@@ -70,11 +70,6 @@ requirements.
 
 ## Qualifications
 
-### Education
-
-- Bachelor’s degree in Computer Science, Information Technology, or a related field.
-- Master’s degree preferred.
-
 ### Experience
 
 - 5+ years of experience in software development, with a focus on Java and Spring Boot.
@@ -86,6 +81,7 @@ requirements.
 - [Strong proficiency in Java and the Spring Boot framework](Strongly-proficient-in-Java-and-Spring-Boot-framework.md)
   .
 - Experience with [Spring Boot Best Practices](Spring-Boot-Best-Practices.md).
+- Experience with [Monitoring Spring Boot projects progress](Monitor-spring-boot-project-progress.md).  
 - Experience with RESTful API design and development.
 - Knowledge of database technologies (SQL, NoSQL) and ORM frameworks (Hibernate).
 - Familiarity with front-end technologies (HTML, CSS, JavaScript, Angular, React) is a
@@ -105,19 +101,6 @@ requirements.
 - Ability to manage multiple priorities and work under pressure.
 - [Strong organizational and project management skills](organizational-and-project-management-skills.md)
   .
-
-## Benefits
-
-- Competitive salary and performance-based bonuses.
-- Comprehensive health, dental, and vision insurance.
-- Retirement savings plan with employer match.
-- Opportunities for professional development and career growth.
-- Flexible work schedule and remote work options.
-
-## How to Apply
-
-Interested candidates should submit their resume and a cover letter detailing their
-relevant experience and why they are a good fit for this position to [email@example.com].
 
 ---
 
