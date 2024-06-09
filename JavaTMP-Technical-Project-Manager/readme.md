@@ -19,7 +19,8 @@ requirements.
 - [Develop detailed project plans](Step-by-Step-Guide-to-Developing-Detailed-Project-Plans.md), including timelines, resource allocation, and 
   risk
   management strategies.
-- Monitor project progress, identify potential issues, and implement corrective actions to
+- [Monitor project progress](Monitor-project-progress.md), identify potential issues, and implement corrective 
+  actions to
   ensure successful project delivery.
 
 ### Technical Leadership
