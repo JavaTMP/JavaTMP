@@ -72,16 +72,16 @@ requirements.
 
 ### Experience
 
-- 5+ years of experience in software development, with a focus on Java and Spring Boot.
-- 3+ years of experience in a project management or technical leadership role.
+- Experience in software development, with a focus on Java and Spring Boot.
+- Experience in a project management or technical leadership role.
 - Proven track record of successfully managing and delivering complex software projects.
 
 ### Technical skills
 
 - [Strong proficiency in Java and the Spring Boot framework](Strongly-proficient-in-Java-and-Spring-Boot-framework.md)
   .
-- Experience with [Spring Boot Best Practices](Spring-Boot-Best-Practices.md).
-- Experience with [Monitoring Spring Boot projects progress](Monitor-spring-boot-project-progress.md).  
+- Experience in [Spring Boot Best Practices](Spring-Boot-Best-Practices.md).
+- Experience in [Monitoring Spring Boot projects progress](Monitor-spring-boot-project-progress.md).  
 - Experience with RESTful API design and development.
 - Knowledge of database technologies (SQL, NoSQL) and ORM frameworks (Hibernate).
 - Familiarity with front-end technologies (HTML, CSS, JavaScript, Angular, React) is a
