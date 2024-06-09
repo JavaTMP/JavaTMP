@@ -78,6 +78,7 @@ requirements.
 
 ### Technical skills
 
+- Experience in [preparing Spring boot development environment](preparing-Spring-boot-development-environment.md).
 - [Strong proficiency in Java and the Spring Boot framework](Strongly-proficient-in-Java-and-Spring-Boot-framework.md)
   .
 - Experience in [Spring Boot Best Practices](Spring-Boot-Best-Practices.md).
