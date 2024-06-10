@@ -81,6 +81,7 @@ requirements.
 - Experience in [preparing Spring boot development environment](preparing-Spring-boot-development-environment.md).
 - [Strong proficiency in Java and the Spring Boot framework](Strongly-proficient-in-Java-and-Spring-Boot-framework.md).
 - Experience in [Spring Boot Best Practices](Spring-Boot-Best-Practices.md).
+- Experience in [Spring Cloud Best Practices](spring-cloud-best-practices.md).
 - Experience in [Monitoring Spring Boot projects progress](Monitor-spring-boot-project-progress.md).  
 - Experience with RESTful API design and development.
 - Knowledge of database technologies (SQL, NoSQL) and ORM frameworks (Hibernate).
