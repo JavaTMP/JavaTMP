@@ -79,8 +79,7 @@ requirements.
 ### Technical skills
 
 - Experience in [preparing Spring boot development environment](preparing-Spring-boot-development-environment.md).
-- [Strong proficiency in Java and the Spring Boot framework](Strongly-proficient-in-Java-and-Spring-Boot-framework.md)
-  .
+- [Strong proficiency in Java and the Spring Boot framework](Strongly-proficient-in-Java-and-Spring-Boot-framework.md).
 - Experience in [Spring Boot Best Practices](Spring-Boot-Best-Practices.md).
 - Experience in [Monitoring Spring Boot projects progress](Monitor-spring-boot-project-progress.md).  
 - Experience with RESTful API design and development.
@@ -94,14 +93,11 @@ requirements.
 
 ### Soft Skills
 
-- [Excellent leadership and team management skills](Excellent-leadership-and-team-management-skills.md)
-  .
-- [Strong problem-solving and analytical abilities](strong-problem-solving-and-analytical-abilities.md)
-  .
+- [Excellent leadership and team management skills](Excellent-leadership-and-team-management-skills.md).
+- [Strong problem-solving and analytical abilities](strong-problem-solving-and-analytical-abilities.md).
 - Effective communication and interpersonal skills.
 - Ability to manage multiple priorities and work under pressure.
-- [Strong organizational and project management skills](organizational-and-project-management-skills.md)
-  .
+- [Strong organizational and project management skills](organizational-and-project-management-skills.md).
 
 ---
 
